@@ -134,7 +134,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		authorColorSwitcher,
 		authorColor,
 		authorHoverColor,
-		
+
 		/** Meta  */
 		commentMetaGlobalTypoSwitcher,
 		commentMetaGlobalTypographyData,
@@ -173,13 +173,76 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		messageLineHeight,
 		messageLineHeightUnits,
 
-		messageColorSwitcher,
 		messageColor,
-		messageHoverColor,
-
 		/** ============ End Comment Item */
+
+		/** ============ Start Reply Button */
+		/** title     */
+		replyButtonGlobalTypoSwitcher,
+		replyButtonGlobalTypographyData,
+		replyButtonGlobalTypoType,
+		replyButtonGlobalTypoOption,
+		replyButtonFontFamily,
+		replyButtonFontSize,
+		replyButtonFontSizeUnits,
+		replyButtonFontWeight,
+		replyButtonFontStyle,
+		replyButtonTextTransform,
+		replyButtonTextDecoration,
+		replyButtonLetterSpacing,
+		replyButtonLetterSpacingUnits,
+		replyButtonLineHeight,
+		replyButtonLineHeightUnits,
+
+		replyButtonColorSwitcher,
+		replyButtonColor,
+		replyButtonHoverColor,
+
+		/** Background */
+		replyButtonBgColorSwitcher,
+		replyButtonNormalBackgroundType,
+		replyButtonNormalClassicColor,
+		replyButtonNormalGradientColor,
+		replyButtonNormalCustomGradientSwitcher,
+		replyButtonNormalCustomGradientInputValue,
+		replyButtonHoverBackgroundType,
+		replyButtonHoverClassicColor,
+		replyButtonHoverGradientColor,
+		replyButtonHoverCustomGradientSwitcher,
+		replyButtonHoverCustomGradientInputValue,
+
+		replyButtonPaddingUnits,
+		replyButtonPaddingDesktop,
+		replyButtonPaddingTablet,
+		replyButtonPaddingMobile,
+		replyButtonPaddingLink,
+
+		replyButtonBorder,
+		replyButtonBorderColorSwitcher,
+		replyButtonBorderColor,
+		replyButtonBorderHoverColor,
+		replyButtonBorderUnits,
+		replyButtonBorderDesktop,
+		replyButtonBorderTablet,
+		replyButtonBorderMobile,
+		replyButtonBorderLink,
+
+		replyButtonBorderRadiusUnits,
+		replyButtonBorderRadiusDesktop,
+		replyButtonBorderRadiusTablet,
+		replyButtonBorderRadiusMobile,
+		replyButtonBorderRadiusLink,
+
+		replyButtonBoxShadowSwitcher,
+		replyButtonBoxShadowValues,
+		replyButtonBoxShadowCssValue,
+		replyButtonBoxShadowHoverValues,
+		replyButtonBoxShadowHoverCssValue,
+
+		/** ============ End Reply Button */
+
 		/** ============ End Style Attributes ================= */
-		
+
 		/** ============ Start Advanced Attributes ================= */
 		wrapperId,
 		wrapperClass,
@@ -264,27 +327,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-
 	/* ===============Helper Function================== */
 
-	// nested comment item 
+	// nested comment item
 	function scalePaddingWithoutLeft(paddingString, scale = 1) {
-  const parts = paddingString.split(" "); // e.g. ["20px", "20px", "20px", "20px"]
+		const parts = paddingString.split(" "); // e.g. ["20px", "20px", "20px", "20px"]
 
-  // Ensure 4 values (top, right, bottom, left)
-  const [top = "0", right = "0", bottom = "0", left = "0"] = parts;
+		// Ensure 4 values (top, right, bottom, left)
+		const [top = "0", right = "0", bottom = "0", left = "0"] = parts;
 
-  // Scale top, right, bottom — but skip left
-  const scaleValue = v => {
-    const num = parseFloat(v);
-    const unit = v.replace(num, "");
-    return `${num * scale}${unit}`;
-  };
+		// Scale top, right, bottom — but skip left
+		const scaleValue = (v) => {
+			const num = parseFloat(v);
+			const unit = v.replace(num, "");
+			return `${num * scale}${unit}`;
+		};
 
-  return `${scaleValue(top)} ${scaleValue(right)} ${scaleValue(bottom)} 0`;
-}
-
-
+		return `${scaleValue(top)} ${scaleValue(right)} ${scaleValue(bottom)} 0`;
+	}
 
 	/* ======================================= */
 	/** Start Post Comment Item Padding */
@@ -373,13 +433,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const postCommentPaddingTabletWidth = `${postCommentPaddingTablet.top}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.right}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.bottom}${postCommentPaddingUnits.Tablet} ${postCommentPaddingTablet.left}${postCommentPaddingUnits.Tablet}`;
 	const postCommentPaddingMobileWidth = `${postCommentPaddingMobile.top}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.right}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.bottom}${postCommentPaddingUnits.Mobile} ${postCommentPaddingMobile.left}${postCommentPaddingUnits.Mobile}`;
 
-	// Nested Item Dynamic Padding value base of parent Commnet Item 
-	const childCommentPaddingDesktopWidth = scalePaddingWithoutLeft(postCommentPaddingDesktopWidth, 0.75);
-	const childCommentPaddingTabletWidth = scalePaddingWithoutLeft(postCommentPaddingTabletWidth, 0.75);
-	const childCommentPaddingMobileWidth = scalePaddingWithoutLeft(postCommentPaddingMobileWidth, 0.75);
+	// Nested Item Dynamic Padding value base of parent Commnet Item
+	const childCommentPaddingDesktopWidth = scalePaddingWithoutLeft(
+		postCommentPaddingDesktopWidth,
+		0.75,
+	);
+	const childCommentPaddingTabletWidth = scalePaddingWithoutLeft(
+		postCommentPaddingTabletWidth,
+		0.75,
+	);
+	const childCommentPaddingMobileWidth = scalePaddingWithoutLeft(
+		postCommentPaddingMobileWidth,
+		0.75,
+	);
 	/** End Post Comment Item Padding */
-
-	/** Post Count */
 
 	/** start Avatar padding */
 	const handleAvatarPaddingUnitChange = (event, position) => {
@@ -646,6 +713,276 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Avatar Border Radius */
 
 	/** Avatar */
+
+	/** Reply Button */
+
+	/** start post count padding */
+	const handleReplyButtonPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (replyButtonPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonPaddingDesktop: {
+							...replyButtonPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonPaddingTablet: {
+							...replyButtonPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonPaddingMobile: {
+							...replyButtonPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleReplyButtonPaddingCombineBtn = () => {
+		setAttributes({ replyButtonPaddingLink: !replyButtonPaddingLink });
+	};
+
+	const handleReplyButtonPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			replyButtonPaddingUnits: {
+				...replyButtonPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const replyButtonPaddingDesktopWidth = `${replyButtonPaddingDesktop.top}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.right}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.bottom}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.left}${replyButtonPaddingUnits.Desktop}`;
+	const replyButtonPaddingTabletWidth = `${replyButtonPaddingTablet.top}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.right}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.bottom}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.left}${replyButtonPaddingUnits.Tablet}`;
+	const replyButtonPaddingMobileWidth = `${replyButtonPaddingMobile.top}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.right}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.bottom}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.left}${replyButtonPaddingUnits.Mobile}`;
+	/** End post count padding */
+
+	/** Start Post Count Border */
+	const handleReplyButtonBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (replyButtonBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonBorderDesktop: {
+							...replyButtonBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonBorderTablet: {
+							...replyButtonBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonBorderMobile: {
+							...replyButtonBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleReplyButtonBorderCombineBtn = () => {
+		setAttributes({ replyButtonBorderLink: !replyButtonBorderLink });
+	};
+
+	const handleReplyButtonBorderUnitsHandler = (unit) => {
+		setAttributes({
+			replyButtonBorderUnits: {
+				...replyButtonBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const replyButtonBorderDesktopWidth = `${replyButtonBorderDesktop.top}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.right}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.bottom}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.left}${replyButtonBorderUnits.Desktop}`;
+	const replyButtonBorderTabletWidth = `${replyButtonBorderTablet.top}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.right}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.bottom}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.left}${replyButtonBorderUnits.Tablet}`;
+	const replyButtonBorderMobileWidth = `${replyButtonBorderMobile.top}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.right}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.bottom}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.left}${replyButtonBorderUnits.Mobile}`;
+	/** End Post Count Border */
+
+	/** Start Post Count Border Radius */
+	const handleReplyButtonBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (replyButtonBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						replyButtonBorderRadiusDesktop: {
+							...replyButtonBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						replyButtonBorderRadiusTablet: {
+							...replyButtonBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						replyButtonBorderRadiusMobile: {
+							...replyButtonBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleReplyButtonBorderRadiusCombineBtn = () => {
+		setAttributes({
+			replyButtonBorderRadiusLink: !replyButtonBorderRadiusLink,
+		});
+	};
+
+	const handleReplyButtonBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			replyButtonBorderRadiusUnits: {
+				...replyButtonBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const replyButtonBorderRadiusDesktopWidth = `${replyButtonBorderRadiusDesktop.top}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.right}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.bottom}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.left}${replyButtonBorderRadiusUnits.Desktop}`;
+	const replyButtonBorderRadiusTabletWidth = `${replyButtonBorderRadiusTablet.top}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.right}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.bottom}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.left}${replyButtonBorderRadiusUnits.Tablet}`;
+	const replyButtonBorderRadiusMobileWidth = `${replyButtonBorderRadiusMobile.top}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.right}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.bottom}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.left}${replyButtonBorderRadiusUnits.Mobile}`;
+	/** End Post Count Border Radius */
+
+	/** End Reply Button */
 
 	/* ==================================================== */
 	/* Start Global Padding */
@@ -1085,6 +1422,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-comment-reply {
+								display: inline;
                 color: #2271b1;
                 text-decoration: none;
                 font-size: 13px;
@@ -1373,36 +1711,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				 .${blockId} .fb-comments-list {
-						${commentListBottomSpacing.Desktop 
-							? `padding-bottom: ${commentListBottomSpacing.Desktop}${commentListBottomSpacingUnits.Desktop};`
-							: ""
+						${
+							commentListBottomSpacing.Desktop
+								? `padding-bottom: ${commentListBottomSpacing.Desktop}${commentListBottomSpacingUnits.Desktop};`
+								: ""
 						}
 				 }
 
 				.${blockId} .fb-comments-list .fb-comment.fb-comment-parent{
-						${postCommentPaddingDesktopWidth && postCommentPaddingDesktop.top
-							? `padding: ${postCommentPaddingDesktopWidth};` 
-							: ""
+						${
+							postCommentPaddingDesktopWidth && postCommentPaddingDesktop.top
+								? `padding: ${postCommentPaddingDesktopWidth};`
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
-						${childCommentPaddingDesktopWidth && 
-							postCommentPaddingDesktop.top
-							? `padding: ${childCommentPaddingDesktopWidth};`
-							: ""
-						 }
+						${
+							childCommentPaddingDesktopWidth && postCommentPaddingDesktop.top
+								? `padding: ${childCommentPaddingDesktopWidth};`
+								: ""
+						}
 
-						 ${nestedIndentation.Desktop
-							? `padding-left: ${nestedIndentation.Desktop}${nestedIndentationUnits.Desktop};` 
-							: ""
-						 }
+						 ${
+								nestedIndentation.Desktop
+									? `padding-left: ${nestedIndentation.Desktop}${nestedIndentationUnits.Desktop};`
+									: ""
+							}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment .fb-comment-avatar{
-						${avatarPaddingDesktopWidth && avatarPaddingDesktop.top 
-							? `padding: ${avatarPaddingDesktopWidth};`
-							: ""
+						${
+							avatarPaddingDesktopWidth && avatarPaddingDesktop.top
+								? `padding: ${avatarPaddingDesktopWidth};`
+								: ""
 						}
 
 						${avatarBorder ? `border: ${avatarBorder};` : ""}
@@ -1412,8 +1754,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									: ""
 							}
 							${
-								avatarBorderRadiusDesktopWidth &&
-								avatarBorderRadiusDesktop.top
+								avatarBorderRadiusDesktopWidth && avatarBorderRadiusDesktop.top
 									? `border-radius: ${avatarBorderRadiusDesktopWidth};`
 									: ""
 							}
@@ -1427,21 +1768,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
-						${avatarSize.Desktop 
-							? `width: ${avatarSize.Desktop}${avatarSizeUnits.Desktop};
+						${
+							avatarSize.Desktop
+								? `width: ${avatarSize.Desktop}${avatarSizeUnits.Desktop};
 							height: ${avatarSize.Desktop}${avatarSizeUnits.Desktop};
 							`
-							: ""
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
-						${avatarSize.Desktop
-							? `
+						${
+							avatarSize.Desktop
+								? `
 								width: calc(${avatarSize.Desktop}${avatarSizeUnits.Desktop} * 0.8);
 								height: calc(${avatarSize.Desktop}${avatarSizeUnits.Desktop} * 0.8);
 							`
-							: ""
+								: ""
 						}
 				}
 
@@ -1500,8 +1843,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 
 						${
-							authorGlobalTypoSwitcher.fontFamily === false &&
-							authorFontFamily
+							authorGlobalTypoSwitcher.fontFamily === false && authorFontFamily
 								? `font-family: ${authorFontFamily};`
 								: ""
 						}
@@ -1512,14 +1854,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								: ""
 						}
 						${
-							authorGlobalTypoSwitcher.fontWeight === false &&
-							authorFontWeight
+							authorGlobalTypoSwitcher.fontWeight === false && authorFontWeight
 								? `font-weight: ${authorFontWeight};`
 								: ""
 						}
 						${
-							authorGlobalTypoSwitcher.fontStyle === false &&
-							authorFontStyle
+							authorGlobalTypoSwitcher.fontStyle === false && authorFontStyle
 								? `font-style: ${authorFontStyle};`
 								: ""
 						}
@@ -1738,8 +2078,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								: ""
 						}
 						${
-							messageGlobalTypoSwitcher.fontStyle === false &&
-							messageFontStyle
+							messageGlobalTypoSwitcher.fontStyle === false && messageFontStyle
 								? `font-style: ${messageFontStyle};`
 								: ""
 						}
@@ -1768,6 +2107,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								: ""
 						}
 			}
+
+			
+			.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply	{
+
+			
+            ${replyButtonColor ? `color: ${replyButtonColor};` : ""}
+
+
+            ${
+							replyButtonGlobalTypoSwitcher.fontFamily === true &&
+							replyButtonGlobalTypographyData.fontFamily
+								? `font-family: ${replyButtonGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.fontSize === true &&
+							replyButtonGlobalTypographyData.fontSize
+								? `font-size: ${replyButtonGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.fontWeight === true &&
+							replyButtonGlobalTypographyData.fontWeight
+								? `font-weight: ${replyButtonGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.fontStyle === true &&
+							replyButtonGlobalTypographyData.fontStyle
+								? `font-style: ${replyButtonGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.textTransform === true &&
+							replyButtonGlobalTypographyData.textTransform
+								? `text-transform: ${replyButtonGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.textDecoration === true &&
+							replyButtonGlobalTypographyData.textDecoration
+								? `text-decoration: ${replyButtonGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.letterSpacing === true &&
+							replyButtonGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${replyButtonGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							replyButtonGlobalTypoSwitcher.lineHeight === true &&
+							replyButtonGlobalTypographyData.lineHeight
+								? `line-height: ${replyButtonGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							replyButtonGlobalTypoSwitcher.fontFamily === false &&
+							replyButtonFontFamily
+								? `font-family: ${replyButtonFontFamily};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.fontSize === false &&
+							replyButtonFontSize.Desktop
+								? `font-size: ${replyButtonFontSize.Desktop}${replyButtonFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.fontWeight === false &&
+							replyButtonFontWeight
+								? `font-weight: ${replyButtonFontWeight};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.fontStyle === false &&
+							replyButtonFontStyle
+								? `font-style: ${replyButtonFontStyle};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.textTransform === false &&
+							replyButtonTextTransform
+								? `text-transform: ${replyButtonTextTransform};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.textDecoration === false &&
+							replyButtonTextDecoration
+								? `text-decoration: ${replyButtonTextDecoration};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.letterSpacing === false &&
+							replyButtonLetterSpacing.Desktop
+								? `letter-spacing: ${replyButtonLetterSpacing.Desktop}${replyButtonLetterSpacingUnits.Desktop};`
+								: ""
+						}
+
+						${
+							replyButtonGlobalTypoSwitcher.lineHeight === false &&
+							replyButtonLineHeight.Desktop
+								? `line-height: ${replyButtonLineHeight.Desktop}${replyButtonLineHeightUnits.Desktop};`
+								: ""
+						}
+
+										${
+											replyButtonNormalBackgroundType === "gradient"
+												? `
+									${
+										replyButtonNormalCustomGradientSwitcher &&
+										replyButtonNormalCustomGradientInputValue
+											? `background: ${replyButtonNormalCustomGradientInputValue};`
+											: `background: ${replyButtonNormalGradientColor};`
+									}
+								`
+												: `
+									${
+										replyButtonNormalClassicColor
+											? `background: ${replyButtonNormalClassicColor};`
+											: ""
+									}
+							`
+										}
+
+								
+											${
+												replyButtonPaddingDesktopWidth &&
+												replyButtonPaddingDesktop.top
+													? `padding: ${replyButtonPaddingDesktopWidth};`
+													: ""
+											}
+
+							${replyButtonBorder ? `border: ${replyButtonBorder};` : ""}
+							${
+								replyButtonBorderDesktopWidth && replyButtonBorderDesktop.top
+									? `border-width: ${replyButtonBorderDesktopWidth};`
+									: ""
+							}
+							${
+								replyButtonBorderRadiusDesktopWidth &&
+								replyButtonBorderRadiusDesktop.top
+									? `border-radius: ${replyButtonBorderRadiusDesktopWidth};`
+									: ""
+							}
+							${replyButtonBorderColor ? `border-color: ${replyButtonBorderColor};` : ""}
+            	${
+								replyButtonBoxShadowCssValue
+									? `box-shadow: ${replyButtonBoxShadowCssValue};`
+									: ""
+							}
+
+			}
+			
+
+				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply:hover {
+								${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
+							${
+								replyButtonHoverBackgroundType === "gradient"
+									? `  
+							${
+								replyButtonHoverCustomGradientSwitcher &&
+								replyButtonHoverCustomGradientInputValue
+									? `background: ${replyButtonHoverCustomGradientInputValue};`
+									: `background: ${replyButtonHoverGradientColor};`
+							}
+							`
+									: `
+									${
+										replyButtonHoverClassicColor
+											? `background: ${replyButtonHoverClassicColor};`
+											: ""
+									}
+							`
+							}
+							${
+								replyButtonBorderHoverColor
+									? `border-color: ${replyButtonBorderHoverColor};`
+									: ""
+							}
+            	${
+								replyButtonBoxShadowHoverCssValue
+									? `box-shadow: ${replyButtonBoxShadowHoverCssValue};`
+									: ""
+							}
+				}
+
+
 
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
@@ -1973,53 +2501,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 
 										 .${blockId} .fb-comments-list {
-						${commentListBottomSpacing.Tablet 
-							? `padding-bottom: ${commentListBottomSpacing.Tablet}${commentListBottomSpacingUnits.Tablet};`
-							: ""
+						${
+							commentListBottomSpacing.Tablet
+								? `padding-bottom: ${commentListBottomSpacing.Tablet}${commentListBottomSpacingUnits.Tablet};`
+								: ""
 						}
 				 }
 
 						.${blockId} .fb-comments-list .fb-comment{
-								${postCommentPaddingTabletWidth && postCommentPaddingTabletWidth.top ?
-									`padding : ${postCommentPaddingTabletWidth};`
-									: ""
+								${
+									postCommentPaddingTabletWidth &&
+									postCommentPaddingTabletWidth.top
+										? `padding : ${postCommentPaddingTabletWidth};`
+										: ""
 								}
 						}
 
 						.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
-								${childCommentPaddingTabletWidth && 
-									postCommentPaddingTabletWidth.top ?
-									`padding : ${childCommentPaddingTabletWidth};`
-									: ""
+								${
+									childCommentPaddingTabletWidth &&
+									postCommentPaddingTabletWidth.top
+										? `padding : ${childCommentPaddingTabletWidth};`
+										: ""
 								}
 
-														 ${nestedIndentation.Tablet
-							? `padding-left: ${nestedIndentation.Tablet}${nestedIndentationUnits.Tablet}` 
-							: ""
-						 }
+														 ${
+																nestedIndentation.Tablet
+																	? `padding-left: ${nestedIndentation.Tablet}${nestedIndentationUnits.Tablet}`
+																	: ""
+															}
 						}	
 
 										.${blockId} .fb-comments-list .fb-comment .fb-comment-avatar{
-						${avatarPaddingTabletWidth && avatarPaddingTablet.top 
-							? `padding: ${avatarPaddingTabletWidth};`
-							: ""
+						${
+							avatarPaddingTabletWidth && avatarPaddingTablet.top
+								? `padding: ${avatarPaddingTabletWidth};`
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment .fb-comment-avatar{
 							${
-									avatarPaddingTabletWidth && avatarPaddingTablet.top
-										? `padding: ${avatarPaddingTabletWidth};`
-										: ""
-								}
+								avatarPaddingTabletWidth && avatarPaddingTablet.top
+									? `padding: ${avatarPaddingTabletWidth};`
+									: ""
+							}
 								 ${
 										avatarBorderTabletWidth && avatarBorderTablet.top
 											? `border-width: ${avatarBorderTabletWidth};`
 											: ""
 									}
                 ${
-									avatarBorderRadiusTabletWidth &&
-									avatarBorderRadiusTablet.top
+									avatarBorderRadiusTabletWidth && avatarBorderRadiusTablet.top
 										? `border-radius: ${avatarBorderRadiusTabletWidth};`
 										: ""
 								}
@@ -2027,21 +2560,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				
 				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
-						${avatarSize.Tablet 
-							? `width: ${avatarSize.Tablet}${avatarSizeUnits.Tablet};
+						${
+							avatarSize.Tablet
+								? `width: ${avatarSize.Tablet}${avatarSizeUnits.Tablet};
 							height: ${avatarSize.Tablet}${avatarSizeUnits.Tablet};
 							`
-							: ""
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
-						${avatarSize.Tablet
-							? `
+						${
+							avatarSize.Tablet
+								? `
 								width: calc(${avatarSize.Tablet}${avatarSizeUnits.Tablet} * 0.8);
 								height: calc(${avatarSize.Tablet}${avatarSizeUnits.Tablet} * 0.8);
 							`
-							: ""
+								: ""
 						}
 				}
 
@@ -2068,11 +2603,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						${blockId} .fb-comments-list .fb-comment-body .fb-comment-meta {
 						  ${
-									commentMetaGlobalTypoSwitcher.fontSize === false &&
-									commentMetaFontSize.Tablet
-										? `font-size: ${commentMetaFontSize.Tablet}${commentMetaFontSizeUnits.Tablet};`
-										: ""
-								}
+								commentMetaGlobalTypoSwitcher.fontSize === false &&
+								commentMetaFontSize.Tablet
+									? `font-size: ${commentMetaFontSize.Tablet}${commentMetaFontSizeUnits.Tablet};`
+									: ""
+							}
                 ${
 									commentMetaGlobalTypoSwitcher.letterSpacing === false &&
 									commentMetaLetterSpacing.Tablet
@@ -2107,6 +2642,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										: ""
 								}
 						}
+
+							.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply {
+							  ${
+									replyButtonGlobalTypoSwitcher.fontSize === false &&
+									replyButtonFontSize.Tablet
+										? `font-size: ${replyButtonFontSize.Tablet}${replyButtonFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									replyButtonGlobalTypoSwitcher.letterSpacing === false &&
+									replyButtonLetterSpacing.Tablet
+										? `letter-spacing: ${replyButtonLetterSpacing.Tablet}${replyButtonLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									replyButtonGlobalTypoSwitcher.lineHeight === false &&
+									replyButtonLineHeight.Tablet
+										? `line-height: ${replyButtonLineHeight.Tablet}${replyButtonLineHeightUnits.Tablet};`
+										: ""
+								}
+
+									${
+										replyButtonPaddingTabletWidth &&
+										replyButtonPaddingTablet.top
+											? `padding: ${replyButtonPaddingTabletWidth};`
+											: ""
+									}
+								 ${
+										replyButtonBorderTabletWidth && replyButtonBorderTablet.top
+											? `border-width: ${replyButtonBorderTabletWidth};`
+											: ""
+									}
+                ${
+									replyButtonBorderRadiusTabletWidth &&
+									replyButtonBorderRadiusTablet.top
+										? `border-radius: ${replyButtonBorderRadiusTabletWidth};`
+										: ""
+								}
+
+						}
+
+
 
 							/* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-comment-form-block {
@@ -2178,8 +2755,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 												}
                 }
 
-
-            }
 				}
 				
 				/*===========================  Mobile Styles ===========================  */
@@ -2214,55 +2789,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 
 									 .${blockId} .fb-comments-list {
-						${commentListBottomSpacing.Mobile 
-							? `padding-bottom: ${commentListBottomSpacing.Mobile}${commentListBottomSpacingUnits.Mobile};`
-							: ""
+						${
+							commentListBottomSpacing.Mobile
+								? `padding-bottom: ${commentListBottomSpacing.Mobile}${commentListBottomSpacingUnits.Mobile};`
+								: ""
 						}
 				 }
 
 					.${blockId} .fb-comments-list .fb-comment{
-							${postCommentPaddingMobileWidth && postCommentPaddingMobile.top 
-								? `padding: ${postCommentPaddingMobileWidth};`
-								: ""
+							${
+								postCommentPaddingMobileWidth && postCommentPaddingMobile.top
+									? `padding: ${postCommentPaddingMobileWidth};`
+									: ""
 							}
 					}	
 
 					.${blockId} .fb-comments-list .fb-comment.fb-comment-child{
 							
-							${childCommentPaddingMobileWidth && 
-								postCommentPaddingMobile.top 
-								? `padding: ${childCommentPaddingMobileWidth}`	
-								: ""
+							${
+								childCommentPaddingMobileWidth && postCommentPaddingMobile.top
+									? `padding: ${childCommentPaddingMobileWidth}`
+									: ""
 							}
 
-													 ${nestedIndentation.Mobile
-							? `padding-left: ${nestedIndentation.Mobile}${nestedIndentationUnits.Mobile}` 
-							: ""
-						 }
+													 ${
+															nestedIndentation.Mobile
+																? `padding-left: ${nestedIndentation.Mobile}${nestedIndentationUnits.Mobile}`
+																: ""
+														}
 
 					}
 
 									.${blockId} .fb-comments-list .fb-comment .fb-comment-avatar{
-						${avatarPaddingMobileWidth && avatarPaddingMobile.top 
-							? `padding: ${avatarPaddingMobileWidth};`
-							: ""
+						${
+							avatarPaddingMobileWidth && avatarPaddingMobile.top
+								? `padding: ${avatarPaddingMobileWidth};`
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment .fb-comment-avatar{
 					${
-								avatarPaddingMobileWidth && avatarPaddingMobile.top
-									? `padding: ${avatarPaddingMobileWidth};`
-									: ""
-							}
+						avatarPaddingMobileWidth && avatarPaddingMobile.top
+							? `padding: ${avatarPaddingMobileWidth};`
+							: ""
+					}
 							 ${
 									avatarBorderMobileWidth && avatarBorderMobile.top
 										? `border-width: ${avatarBorderMobileWidth};`
 										: ""
 								}
                 ${
-									avatarBorderRadiusMobileWidth &&
-									avatarBorderRadiusMobile.top
+									avatarBorderRadiusMobileWidth && avatarBorderRadiusMobile.top
 										? `border-radius: ${avatarBorderRadiusMobileWidth};`
 										: ""
 								}
@@ -2270,21 +2848,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				
 				.${blockId} .fb-comments-list .fb-comment-parent .fb-comment-avatar{
-						${avatarSize.Mobile 
-							? `width: ${avatarSize.Mobile}${avatarSizeUnits.Mobile};
+						${
+							avatarSize.Mobile
+								? `width: ${avatarSize.Mobile}${avatarSizeUnits.Mobile};
 							height: ${avatarSize.Mobile}${avatarSizeUnits.Mobile};
 							`
-							: ""
+								: ""
 						}
 				}
 
 				.${blockId} .fb-comments-list .fb-comment-child .fb-comment-avatar{
-						${avatarSize.Mobile
-							? `
+						${
+							avatarSize.Mobile
+								? `
 								width: calc(${avatarSize.Mobile}${avatarSizeUnits.Mobile} * 0.8);
 								height: calc(${avatarSize.Mobile}${avatarSizeUnits.Mobile} * 0.8);
 							`
-							: ""
+								: ""
 						}
 				}
 
@@ -2349,6 +2929,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								? `line-height: ${messageLineHeight.Mobile}${messageLineHeightUnits.Mobile};`
 								: ""
 						}
+					}
+
+										.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply {
+
+					  ${
+							replyButtonGlobalTypoSwitcher.fontSize === false &&
+							replyButtonFontSize.Mobile
+								? `font-size: ${replyButtonFontSize.Mobile}${replyButtonFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.letterSpacing === false &&
+							replyButtonLetterSpacing.Mobile
+								? `letter-spacing: ${replyButtonLetterSpacing.Mobile}${replyButtonLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							replyButtonGlobalTypoSwitcher.lineHeight === false &&
+							replyButtonLineHeight.Mobile
+								? `line-height: ${replyButtonLineHeight.Mobile}${replyButtonLineHeightUnits.Mobile};`
+								: ""
+						}
+
+										${
+											replyButtonPaddingMobileWidth &&
+											replyButtonPaddingMobile.top
+												? `padding: ${replyButtonPaddingMobileWidth};`
+												: ""
+										}
+							 ${
+									replyButtonBorderMobileWidth && replyButtonBorderMobile.top
+										? `border-width: ${replyButtonBorderMobileWidth};`
+										: ""
+								}
+                ${
+									replyButtonBorderRadiusMobileWidth &&
+									replyButtonBorderRadiusMobile.top
+										? `border-radius: ${replyButtonBorderRadiusMobileWidth};`
+										: ""
+								}
+
 					}
 												
 							 /* Advance Control Global Style - Mobile */
@@ -2431,9 +3052,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             }
 				
-				}
-
-
+		}
+		
         `,
 		[attributes, blockId],
 	);
@@ -2535,761 +3155,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const styleControls = (
 		<>
-
-			<PanelBody
-				title={__("Comment Item", "frontis-blocks")}
-				initialOpen={true}
-			>
-				<BaseControl
-					label={__("Spacing", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-
-					<p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Precisely manage the spatial rhythm of your comment layout — control padding, gaps, and nested indentation with intelligent scaling that adapts automatically to threaded replies.", "frontis-blocks")}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-					<FB_Spacing
-						label={__("Padding", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handlePostCommentPaddingUnitsHandler}
-						spacingUnits={postCommentPaddingUnits}
-						spacingDesktop={postCommentPaddingDesktop}
-						spacingTablet={postCommentPaddingTablet}
-						spacingMobile={postCommentPaddingMobile}
-						handleSpacingUnitHandler={handlePostCommentPaddingUnitChange}
-						spacingCombineBtn={postCommentPaddingLink}
-						spacingCombineBtnHandler={handlePostCommentPaddingCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<FB_Range
-						min={0}
-						max={100}
-						label={__("Nested Indent", "frontis-blocks")}
-						rangeValue={nestedIndentation}
-						onChangeHandler={(value) =>
-							setAttributes({ nestedIndentation: value })
-						}
-						rangeUnitHandler={(value) =>
-							setAttributes({ nestedIndentationUnits: value })
-						}
-						deviceType={deviceType}
-						units={nestedIndentationUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-					/>
-
-					<FB_Range
-						min={0}
-						max={100}
-						label={__("Bottom Spacing", "frontis-blocks")}
-						rangeValue={commentListBottomSpacing}
-						onChangeHandler={(value) =>
-							setAttributes({ commentListBottomSpacing: value })
-						}
-						rangeUnitHandler={(value) =>
-							setAttributes({ commentListBottomSpacingUnits: value })
-						}
-						deviceType={deviceType}
-						units={commentListBottomSpacingUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-						help={__("Add space below the comment list to separate it from the comment form or other content.", "frontis-blocks")}
-					/> 
-
-					{/* <p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Add space below the comment list to separate it from the comment form or other content.", "frontis-blocks")}
-					</p> */}
-
-					<div className="fb-control-divider"></div>
-				</BaseControl>
-
-				<BaseControl
-					label={__("Avatar", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-
-						<p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.", "frontis-blocks")}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-					<FB_Range
-						min={0}
-						max={100}
-						label={__("Size", "frontis-blocks")}
-						rangeValue={avatarSize}
-						onChangeHandler={(value) =>
-							setAttributes({ avatarSize: value })
-						}
-						rangeUnitHandler={(value) =>
-							setAttributes({ avatarSizeUnits: value })
-						}
-						deviceType={deviceType}
-						units={avatarSizeUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-					/>
-
-
-						<FB_Spacing
-						label={__("Padding", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
-						spacingUnits={avatarPaddingUnits}
-						spacingDesktop={avatarPaddingDesktop}
-						spacingTablet={avatarPaddingTablet}
-						spacingMobile={avatarPaddingMobile}
-						handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
-						spacingCombineBtn={avatarPaddingLink}
-						spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={avatarBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ avatarBorder: value })}
-					/>
-
-
-						{avatarBorder !== "none" && (
-							<>
-													{/* <FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={avatarBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBorderColorSwitcher: value })
-						}
-					/> */}
-
-					{/* {avatarBorderColorSwitcher === "normal" && ( */}
-						<FB_ColorControl
-							label={__("Border Color", "frontis-blocks")}
-							globalColor={avatarBorderColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									avatarBorderColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					{/* )} */}
-
-					{/* {avatarBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={avatarBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									avatarBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)} */}
-
-					<FB_Spacing
-						label={__("Border", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarBorderUnitsHandler}
-						spacingUnits={avatarBorderUnits}
-						spacingDesktop={avatarBorderDesktop}
-						spacingTablet={avatarBorderTablet}
-						spacingMobile={avatarBorderMobile}
-						handleSpacingUnitHandler={handleAvatarBorderUnitChange}
-						spacingCombineBtn={avatarBorderLink}
-						spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-							</>
-						)}
-
-
-					<FB_Spacing
-						label={__("Border Radius", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
-						spacingUnits={avatarBorderRadiusUnits}
-						spacingDesktop={avatarBorderRadiusDesktop}
-						spacingTablet={avatarBorderRadiusTablet}
-						spacingMobile={avatarBorderRadiusMobile}
-						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
-						spacingCombineBtn={avatarBorderRadiusLink}
-						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					{/* <FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={avatarBoxShadowSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBoxShadowSwitcher: value })
-						}
-					/> */}
-
-					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
-						<FB_BoxShadowControl
-							label={__("Box Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ avatarBoxShadowValues: value })
-							}
-							initialShadowValue={avatarBoxShadowValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ avatarBoxShadowCssValue: value })
-							}
-						/>
-					{/* )} */}
-
-					{/* {avatarBoxShadowSwitcher === "hover" && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverValues: value })
-							}
-							initialShadowValue={avatarBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverCssValue: value })
-							}
-						/>
-					)} */}
-
-
-				</BaseControl>
-
-				<div className="fb-control-divider"></div>
-
-				<BaseControl
-					label={__("Author", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Define the visual identity of the comment author with refined color and typography controls for a distinctive, readable name style.", "frontis-blocks")}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={authorGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ authorGlobalTypographyData: value })
-					}
-					globalTypoType={authorGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({
-							authorGlobalTypoType: value,
-							authorGlobalTypoSwitcher:
-								value === "default"
-									? {
-											...authorGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
-									  }
-									: {
-											...authorGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
-									  },
-						});
-					}}
-					globalTypoOption={authorGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ authorGlobalTypoOption: value })
-					}
-					fontFamily={authorFontFamily}
-					onChangeFontFamily={(value) =>
-						setAttributes({
-							authorFontFamily: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								fontFamily: value && false,
-							},
-						})
-					}
-					fontSize={authorFontSize}
-					onChangeFontSize={(value) =>
-						setAttributes({
-							authorFontSize: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								fontSize: value && false,
-							},
-						})
-					}
-					fontSizeUnits={authorFontSizeUnits}
-					onChangeFontSizeUnit={(value) =>
-						setAttributes({ authorFontSizeUnits: value })
-					}
-					fontWeight={authorFontWeight}
-					onChangeFontWeight={(value) =>
-						setAttributes({
-							authorFontWeight: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								fontWeight: value && false,
-							},
-						})
-					}
-					fontStyle={authorFontStyle}
-					onChangeFontStyle={(value) =>
-						setAttributes({
-							authorFontStyle: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								fontStyle: value && false,
-							},
-						})
-					}
-					textTransform={authorTextTransform}
-					onChangeTextTransform={(value) =>
-						setAttributes({
-							authorTextTransform: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								textTransform: value && false,
-							},
-						})
-					}
-					textDecoration={authorTextDecoration}
-					onChangeTextDecoration={(value) =>
-						setAttributes({
-							authorTextDecoration: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								textDecoration: value && false,
-							},
-						})
-					}
-					letterSpacing={authorLetterSpacing}
-					onChangeLetterSpacing={(value) =>
-						setAttributes({
-							authorLetterSpacing: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								letterSpacing: value && false,
-							},
-						})
-					}
-					letterSpacingUnits={authorLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ authorLetterSpacingUnits: value })
-					}
-					lineHeight={authorLineHeight}
-					onChangeLineHeight={(value) =>
-						setAttributes({
-							authorLineHeight: value,
-							authorGlobalTypoSwitcher: {
-								...authorGlobalTypoSwitcher,
-								lineHeight: value && false,
-							},
-						})
-					}
-					lineHeightUnits={authorLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ authorLineHeightUnits: value })
-					}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={authorColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ authorColorSwitcher: value })
-					}
-				/>
-
-				{authorColorSwitcher === "normal" && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={authorColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								authorColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)}
-
-				{authorColorSwitcher === "hover" && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={authorHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								authorHoverColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)}
-
-
-				</BaseControl>
-
-				<div className="fb-control-divider"></div>
-				
-				<BaseControl
-					label={__("Meta", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Style the comment metadata—such as date and time—with harmonious color and typography for subtle emphasis and readability.", "frontis-blocks")}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-						<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={commentMetaGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ commentMetaGlobalTypographyData: value })
-					}
-					globalTypoType={commentMetaGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({
-							commentMetaGlobalTypoType: value,
-							commentMetaGlobalTypoSwitcher:
-								value === "default"
-									? {
-											...commentMetaGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
-									  }
-									: {
-											...commentMetaGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
-									  },
-						});
-					}}
-					globalTypoOption={commentMetaGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ commentMetaGlobalTypoOption: value })
-					}
-					fontFamily={commentMetaFontFamily}
-					onChangeFontFamily={(value) =>
-						setAttributes({
-							commentMetaFontFamily: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								fontFamily: value && false,
-							},
-						})
-					}
-					fontSize={commentMetaFontSize}
-					onChangeFontSize={(value) =>
-						setAttributes({
-							commentMetaFontSize: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								fontSize: value && false,
-							},
-						})
-					}
-					fontSizeUnits={commentMetaFontSizeUnits}
-					onChangeFontSizeUnit={(value) =>
-						setAttributes({ commentMetaFontSizeUnits: value })
-					}
-					fontWeight={commentMetaFontWeight}
-					onChangeFontWeight={(value) =>
-						setAttributes({
-							commentMetaFontWeight: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								fontWeight: value && false,
-							},
-						})
-					}
-					fontStyle={commentMetaFontStyle}
-					onChangeFontStyle={(value) =>
-						setAttributes({
-							commentMetaFontStyle: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								fontStyle: value && false,
-							},
-						})
-					}
-					textTransform={commentMetaTextTransform}
-					onChangeTextTransform={(value) =>
-						setAttributes({
-							commentMetaTextTransform: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								textTransform: value && false,
-							},
-						})
-					}
-					textDecoration={commentMetaTextDecoration}
-					onChangeTextDecoration={(value) =>
-						setAttributes({
-							commentMetaTextDecoration: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								textDecoration: value && false,
-							},
-						})
-					}
-					letterSpacing={commentMetaLetterSpacing}
-					onChangeLetterSpacing={(value) =>
-						setAttributes({
-							commentMetaLetterSpacing: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								letterSpacing: value && false,
-							},
-						})
-					}
-					letterSpacingUnits={commentMetaLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ commentMetaLetterSpacingUnits: value })
-					}
-					lineHeight={commentMetaLineHeight}
-					onChangeLineHeight={(value) =>
-						setAttributes({
-							commentMetaLineHeight: value,
-							commentMetaGlobalTypoSwitcher: {
-								...commentMetaGlobalTypoSwitcher,
-								lineHeight: value && false,
-							},
-						})
-					}
-					lineHeightUnits={commentMetaLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ commentMetaLineHeightUnits: value })
-					}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-				<FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={commentMetaColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ commentMetaColorSwitcher: value })
-					}
-				/>
-
-				{commentMetaColorSwitcher === "normal" && (
-					<FB_ColorControl
-						label={__("Normal Color", "frontis-blocks")}
-						globalColor={commentMetaColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								commentMetaColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)}
-
-				{commentMetaColorSwitcher === "hover" && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={commentMetaHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								commentMetaHoverColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)}
-				</BaseControl>
-
-								<div className="fb-control-divider"></div>
-				
-				<BaseControl
-					label={__("Message", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Control the visual tone of comment content with precise color and typography adjustments for a clear, polished reading experience.", "frontis-blocks")}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-				<FB_TypographyControl
-					globalTypoControlActive={true}
-					globalTypoSwitcher={messageGlobalTypoSwitcher}
-					storeGlobalTypographyData={(value) =>
-						setAttributes({ messageGlobalTypographyData: value })
-					}
-					globalTypoType={messageGlobalTypoType}
-					onChangeGlobalTypoType={(value) => {
-						setAttributes({
-							messageGlobalTypoType: value,
-							messageGlobalTypoSwitcher:
-								value === "default"
-									? {
-											...messageGlobalTypoSwitcher,
-											fontFamily: false,
-											fontSize: false,
-											fontWeight: false,
-											fontStyle: false,
-											textTransform: false,
-											textDecoration: false,
-											letterSpacing: false,
-											lineHeight: false,
-									  }
-									: {
-											...messageGlobalTypoSwitcher,
-											fontFamily: true,
-											fontSize: true,
-											fontWeight: true,
-											fontStyle: true,
-											textTransform: true,
-											textDecoration: true,
-											letterSpacing: true,
-											lineHeight: true,
-									  },
-						});
-					}}
-					globalTypoOption={messageGlobalTypoOption}
-					onChangeGlobalTypoOption={(value) =>
-						setAttributes({ messageGlobalTypoOption: value })
-					}
-					fontFamily={messageFontFamily}
-					onChangeFontFamily={(value) =>
-						setAttributes({
-							messageFontFamily: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								fontFamily: value && false,
-							},
-						})
-					}
-					fontSize={messageFontSize}
-					onChangeFontSize={(value) =>
-						setAttributes({
-							messageFontSize: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								fontSize: value && false,
-							},
-						})
-					}
-					fontSizeUnits={messageFontSizeUnits}
-					onChangeFontSizeUnit={(value) =>
-						setAttributes({ messageFontSizeUnits: value })
-					}
-					fontWeight={messageFontWeight}
-					onChangeFontWeight={(value) =>
-						setAttributes({
-							messageFontWeight: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								fontWeight: value && false,
-							},
-						})
-					}
-					fontStyle={messageFontStyle}
-					onChangeFontStyle={(value) =>
-						setAttributes({
-							messageFontStyle: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								fontStyle: value && false,
-							},
-						})
-					}
-					textTransform={messageTextTransform}
-					onChangeTextTransform={(value) =>
-						setAttributes({
-							messageTextTransform: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								textTransform: value && false,
-							},
-						})
-					}
-					textDecoration={messageTextDecoration}
-					onChangeTextDecoration={(value) =>
-						setAttributes({
-							messageTextDecoration: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								textDecoration: value && false,
-							},
-						})
-					}
-					letterSpacing={messageLetterSpacing}
-					onChangeLetterSpacing={(value) =>
-						setAttributes({
-							messageLetterSpacing: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								letterSpacing: value && false,
-							},
-						})
-					}
-					letterSpacingUnits={messageLetterSpacingUnits}
-					onChangeLetterSpacingUnit={(value) =>
-						setAttributes({ messageLetterSpacingUnits: value })
-					}
-					lineHeight={messageLineHeight}
-					onChangeLineHeight={(value) =>
-						setAttributes({
-							messageLineHeight: value,
-							messageGlobalTypoSwitcher: {
-								...messageGlobalTypoSwitcher,
-								lineHeight: value && false,
-							},
-						})
-					}
-					lineHeightUnits={messageLineHeightUnits}
-					onChangeLineHeightUnit={(value) =>
-						setAttributes({ messageLineHeightUnits: value })
-					}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
-
-					<FB_ColorControl
-						label={__("Color", "frontis-blocks")}
-						globalColor={messageColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								messageColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-
-				</BaseControl>
-
-			</PanelBody>
-
 			<PanelBody
 				title={__("Comments Title", "frontis-blocks")}
 				initialOpen={false}
@@ -3481,6 +3346,1115 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Comment Item", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<BaseControl
+					label={__("Spacing", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Precisely manage the spatial rhythm of your comment layout — control padding, gaps, and nested indentation with intelligent scaling that adapts automatically to threaded replies.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handlePostCommentPaddingUnitsHandler}
+						spacingUnits={postCommentPaddingUnits}
+						spacingDesktop={postCommentPaddingDesktop}
+						spacingTablet={postCommentPaddingTablet}
+						spacingMobile={postCommentPaddingMobile}
+						handleSpacingUnitHandler={handlePostCommentPaddingUnitChange}
+						spacingCombineBtn={postCommentPaddingLink}
+						spacingCombineBtnHandler={handlePostCommentPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_Range
+						min={0}
+						max={100}
+						label={__("Nested Indent", "frontis-blocks")}
+						rangeValue={nestedIndentation}
+						onChangeHandler={(value) =>
+							setAttributes({ nestedIndentation: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ nestedIndentationUnits: value })
+						}
+						deviceType={deviceType}
+						units={nestedIndentationUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+
+					<FB_Range
+						min={0}
+						max={100}
+						label={__("Bottom Spacing", "frontis-blocks")}
+						rangeValue={commentListBottomSpacing}
+						onChangeHandler={(value) =>
+							setAttributes({ commentListBottomSpacing: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ commentListBottomSpacingUnits: value })
+						}
+						deviceType={deviceType}
+						units={commentListBottomSpacingUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+						help={__(
+							"Add space below the comment list to separate it from the comment form or other content.",
+							"frontis-blocks",
+						)}
+					/>
+
+					{/* <p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Add space below the comment list to separate it from the comment form or other content.", "frontis-blocks")}
+					</p> */}
+
+					<div className="fb-control-divider"></div>
+				</BaseControl>
+
+				<BaseControl
+					label={__("Avatar", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_Range
+						min={0}
+						max={100}
+						label={__("Size", "frontis-blocks")}
+						rangeValue={avatarSize}
+						onChangeHandler={(value) => setAttributes({ avatarSize: value })}
+						rangeUnitHandler={(value) =>
+							setAttributes({ avatarSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={avatarSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+
+					<FB_Spacing
+						label={__("Padding", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
+						spacingUnits={avatarPaddingUnits}
+						spacingDesktop={avatarPaddingDesktop}
+						spacingTablet={avatarPaddingTablet}
+						spacingMobile={avatarPaddingMobile}
+						handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
+						spacingCombineBtn={avatarPaddingLink}
+						spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<SelectControl
+						label={__("Border Style", "frontis-blocks")}
+						value={avatarBorder}
+						options={BORDER_STYLES}
+						onChange={(value) => setAttributes({ avatarBorder: value })}
+					/>
+
+					{avatarBorder !== "none" && (
+						<>
+							{/* <FB_SwitcherControl
+						label={__("Border", "frontis-blocks")}
+						globalSwitcher={avatarBorderColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ avatarBorderColorSwitcher: value })
+						}
+					/> */}
+
+							{/* {avatarBorderColorSwitcher === "normal" && ( */}
+							<FB_ColorControl
+								label={__("Border Color", "frontis-blocks")}
+								globalColor={avatarBorderColor}
+								setGlobalColor={(value) =>
+									setAttributes({
+										avatarBorderColor: value === undefined ? "" : value,
+									})
+								}
+							/>
+							{/* )} */}
+
+							{/* {avatarBorderColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={avatarBorderHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									avatarBorderHoverColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)} */}
+
+							<FB_Spacing
+								label={__("Border", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={handleAvatarBorderUnitsHandler}
+								spacingUnits={avatarBorderUnits}
+								spacingDesktop={avatarBorderDesktop}
+								spacingTablet={avatarBorderTablet}
+								spacingMobile={avatarBorderMobile}
+								handleSpacingUnitHandler={handleAvatarBorderUnitChange}
+								spacingCombineBtn={avatarBorderLink}
+								spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
+								setAttributes={setAttributes}
+							/>
+						</>
+					)}
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
+						spacingUnits={avatarBorderRadiusUnits}
+						spacingDesktop={avatarBorderRadiusDesktop}
+						spacingTablet={avatarBorderRadiusTablet}
+						spacingMobile={avatarBorderRadiusMobile}
+						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
+						spacingCombineBtn={avatarBorderRadiusLink}
+						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					{/* <FB_SwitcherControl
+						label={__("Box Shadow", "frontis-blocks")}
+						globalSwitcher={avatarBoxShadowSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ avatarBoxShadowSwitcher: value })
+						}
+					/> */}
+
+					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
+					<FB_BoxShadowControl
+						label={__("Box Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ avatarBoxShadowValues: value })
+						}
+						initialShadowValue={avatarBoxShadowValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ avatarBoxShadowCssValue: value })
+						}
+					/>
+					{/* )} */}
+
+					{/* {avatarBoxShadowSwitcher === "hover" && (
+						<FB_BoxShadowControl
+							label={__("Hover Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ avatarBoxShadowHoverValues: value })
+							}
+							initialShadowValue={avatarBoxShadowHoverValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ avatarBoxShadowHoverCssValue: value })
+							}
+						/>
+					)} */}
+				</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<BaseControl
+					label={__("Author", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Define the visual identity of the comment author with refined color and typography controls for a distinctive, readable name style.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={authorGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({ authorGlobalTypographyData: value })
+						}
+						globalTypoType={authorGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								authorGlobalTypoType: value,
+								authorGlobalTypoSwitcher:
+									value === "default"
+										? {
+												...authorGlobalTypoSwitcher,
+												fontFamily: false,
+												fontSize: false,
+												fontWeight: false,
+												fontStyle: false,
+												textTransform: false,
+												textDecoration: false,
+												letterSpacing: false,
+												lineHeight: false,
+										  }
+										: {
+												...authorGlobalTypoSwitcher,
+												fontFamily: true,
+												fontSize: true,
+												fontWeight: true,
+												fontStyle: true,
+												textTransform: true,
+												textDecoration: true,
+												letterSpacing: true,
+												lineHeight: true,
+										  },
+							});
+						}}
+						globalTypoOption={authorGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({ authorGlobalTypoOption: value })
+						}
+						fontFamily={authorFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								authorFontFamily: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									fontFamily: value && false,
+								},
+							})
+						}
+						fontSize={authorFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								authorFontSize: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									fontSize: value && false,
+								},
+							})
+						}
+						fontSizeUnits={authorFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({ authorFontSizeUnits: value })
+						}
+						fontWeight={authorFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								authorFontWeight: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									fontWeight: value && false,
+								},
+							})
+						}
+						fontStyle={authorFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								authorFontStyle: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									fontStyle: value && false,
+								},
+							})
+						}
+						textTransform={authorTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								authorTextTransform: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									textTransform: value && false,
+								},
+							})
+						}
+						textDecoration={authorTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								authorTextDecoration: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									textDecoration: value && false,
+								},
+							})
+						}
+						letterSpacing={authorLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								authorLetterSpacing: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									letterSpacing: value && false,
+								},
+							})
+						}
+						letterSpacingUnits={authorLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({ authorLetterSpacingUnits: value })
+						}
+						lineHeight={authorLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								authorLineHeight: value,
+								authorGlobalTypoSwitcher: {
+									...authorGlobalTypoSwitcher,
+									lineHeight: value && false,
+								},
+							})
+						}
+						lineHeightUnits={authorLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({ authorLineHeightUnits: value })
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Color", "frontis-blocks")}
+						globalSwitcher={authorColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ authorColorSwitcher: value })
+						}
+					/>
+
+					{authorColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={authorColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									authorColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{authorColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={authorHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									authorHoverColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+				</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<BaseControl
+					label={__("Meta", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Style the comment metadata—such as date and time—with harmonious color and typography for subtle emphasis and readability.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={commentMetaGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({ commentMetaGlobalTypographyData: value })
+						}
+						globalTypoType={commentMetaGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								commentMetaGlobalTypoType: value,
+								commentMetaGlobalTypoSwitcher:
+									value === "default"
+										? {
+												...commentMetaGlobalTypoSwitcher,
+												fontFamily: false,
+												fontSize: false,
+												fontWeight: false,
+												fontStyle: false,
+												textTransform: false,
+												textDecoration: false,
+												letterSpacing: false,
+												lineHeight: false,
+										  }
+										: {
+												...commentMetaGlobalTypoSwitcher,
+												fontFamily: true,
+												fontSize: true,
+												fontWeight: true,
+												fontStyle: true,
+												textTransform: true,
+												textDecoration: true,
+												letterSpacing: true,
+												lineHeight: true,
+										  },
+							});
+						}}
+						globalTypoOption={commentMetaGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({ commentMetaGlobalTypoOption: value })
+						}
+						fontFamily={commentMetaFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								commentMetaFontFamily: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									fontFamily: value && false,
+								},
+							})
+						}
+						fontSize={commentMetaFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								commentMetaFontSize: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									fontSize: value && false,
+								},
+							})
+						}
+						fontSizeUnits={commentMetaFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({ commentMetaFontSizeUnits: value })
+						}
+						fontWeight={commentMetaFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								commentMetaFontWeight: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									fontWeight: value && false,
+								},
+							})
+						}
+						fontStyle={commentMetaFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								commentMetaFontStyle: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									fontStyle: value && false,
+								},
+							})
+						}
+						textTransform={commentMetaTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								commentMetaTextTransform: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									textTransform: value && false,
+								},
+							})
+						}
+						textDecoration={commentMetaTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								commentMetaTextDecoration: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									textDecoration: value && false,
+								},
+							})
+						}
+						letterSpacing={commentMetaLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								commentMetaLetterSpacing: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									letterSpacing: value && false,
+								},
+							})
+						}
+						letterSpacingUnits={commentMetaLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({ commentMetaLetterSpacingUnits: value })
+						}
+						lineHeight={commentMetaLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								commentMetaLineHeight: value,
+								commentMetaGlobalTypoSwitcher: {
+									...commentMetaGlobalTypoSwitcher,
+									lineHeight: value && false,
+								},
+							})
+						}
+						lineHeightUnits={commentMetaLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({ commentMetaLineHeightUnits: value })
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_SwitcherControl
+						label={__("Color", "frontis-blocks")}
+						globalSwitcher={commentMetaColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ commentMetaColorSwitcher: value })
+						}
+					/>
+
+					{commentMetaColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Normal Color", "frontis-blocks")}
+							globalColor={commentMetaColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									commentMetaColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{commentMetaColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={commentMetaHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									commentMetaHoverColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+				</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<BaseControl
+					label={__("Message", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Control the visual tone of comment content with precise color and typography adjustments for a clear, polished reading experience.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_TypographyControl
+						globalTypoControlActive={true}
+						globalTypoSwitcher={messageGlobalTypoSwitcher}
+						storeGlobalTypographyData={(value) =>
+							setAttributes({ messageGlobalTypographyData: value })
+						}
+						globalTypoType={messageGlobalTypoType}
+						onChangeGlobalTypoType={(value) => {
+							setAttributes({
+								messageGlobalTypoType: value,
+								messageGlobalTypoSwitcher:
+									value === "default"
+										? {
+												...messageGlobalTypoSwitcher,
+												fontFamily: false,
+												fontSize: false,
+												fontWeight: false,
+												fontStyle: false,
+												textTransform: false,
+												textDecoration: false,
+												letterSpacing: false,
+												lineHeight: false,
+										  }
+										: {
+												...messageGlobalTypoSwitcher,
+												fontFamily: true,
+												fontSize: true,
+												fontWeight: true,
+												fontStyle: true,
+												textTransform: true,
+												textDecoration: true,
+												letterSpacing: true,
+												lineHeight: true,
+										  },
+							});
+						}}
+						globalTypoOption={messageGlobalTypoOption}
+						onChangeGlobalTypoOption={(value) =>
+							setAttributes({ messageGlobalTypoOption: value })
+						}
+						fontFamily={messageFontFamily}
+						onChangeFontFamily={(value) =>
+							setAttributes({
+								messageFontFamily: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									fontFamily: value && false,
+								},
+							})
+						}
+						fontSize={messageFontSize}
+						onChangeFontSize={(value) =>
+							setAttributes({
+								messageFontSize: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									fontSize: value && false,
+								},
+							})
+						}
+						fontSizeUnits={messageFontSizeUnits}
+						onChangeFontSizeUnit={(value) =>
+							setAttributes({ messageFontSizeUnits: value })
+						}
+						fontWeight={messageFontWeight}
+						onChangeFontWeight={(value) =>
+							setAttributes({
+								messageFontWeight: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									fontWeight: value && false,
+								},
+							})
+						}
+						fontStyle={messageFontStyle}
+						onChangeFontStyle={(value) =>
+							setAttributes({
+								messageFontStyle: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									fontStyle: value && false,
+								},
+							})
+						}
+						textTransform={messageTextTransform}
+						onChangeTextTransform={(value) =>
+							setAttributes({
+								messageTextTransform: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									textTransform: value && false,
+								},
+							})
+						}
+						textDecoration={messageTextDecoration}
+						onChangeTextDecoration={(value) =>
+							setAttributes({
+								messageTextDecoration: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									textDecoration: value && false,
+								},
+							})
+						}
+						letterSpacing={messageLetterSpacing}
+						onChangeLetterSpacing={(value) =>
+							setAttributes({
+								messageLetterSpacing: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									letterSpacing: value && false,
+								},
+							})
+						}
+						letterSpacingUnits={messageLetterSpacingUnits}
+						onChangeLetterSpacingUnit={(value) =>
+							setAttributes({ messageLetterSpacingUnits: value })
+						}
+						lineHeight={messageLineHeight}
+						onChangeLineHeight={(value) =>
+							setAttributes({
+								messageLineHeight: value,
+								messageGlobalTypoSwitcher: {
+									...messageGlobalTypoSwitcher,
+									lineHeight: value && false,
+								},
+							})
+						}
+						lineHeightUnits={messageLineHeightUnits}
+						onChangeLineHeightUnit={(value) =>
+							setAttributes({ messageLineHeightUnits: value })
+						}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={messageColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								messageColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				</BaseControl>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Reply Button", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={replyButtonGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ replyButtonGlobalTypographyData: value })
+					}
+					globalTypoType={replyButtonGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							replyButtonGlobalTypoType: value,
+							replyButtonGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...replyButtonGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...replyButtonGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={replyButtonGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ replyButtonGlobalTypoOption: value })
+					}
+					fontFamily={replyButtonFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							replyButtonFontFamily: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={replyButtonFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							replyButtonFontSize: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={replyButtonFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ replyButtonFontSizeUnits: value })
+					}
+					fontWeight={replyButtonFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							replyButtonFontWeight: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={replyButtonFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							replyButtonFontStyle: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={replyButtonTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							replyButtonTextTransform: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={replyButtonTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							replyButtonTextDecoration: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={replyButtonLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							replyButtonLetterSpacing: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={replyButtonLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ replyButtonLetterSpacingUnits: value })
+					}
+					lineHeight={replyButtonLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							replyButtonLineHeight: value,
+							replyButtonGlobalTypoSwitcher: {
+								...replyButtonGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={replyButtonLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ replyButtonLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={replyButtonColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ replyButtonColorSwitcher: value })
+					}
+				/>
+
+				{replyButtonColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={replyButtonColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								replyButtonColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{replyButtonColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={replyButtonHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								replyButtonHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				<div className="fb-control-divider"></div>
+
+				<FB_BackgroundColorControl
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={replyButtonBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ replyButtonBgColorSwitcher: value })
+					}
+					normalBackgroundType={replyButtonNormalBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ replyButtonNormalBackgroundType: value })
+					}
+					normalClassicColor={replyButtonNormalClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							replyButtonNormalClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={replyButtonNormalGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							replyButtonNormalGradientColor: value === undefined ? "" : value,
+						})
+					}
+					normalCustomGradientSwitcher={replyButtonNormalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ replyButtonNormalCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={
+						replyButtonNormalCustomGradientInputValue
+					}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ replyButtonNormalCustomGradientInputValue: value })
+					}
+					hoverBackgroundType={replyButtonHoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ replyButtonHoverBackgroundType: value })
+					}
+					hoverClassicColor={replyButtonHoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							replyButtonHoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={replyButtonHoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							replyButtonHoverGradientColor: value === undefined ? "" : value,
+						})
+					}
+					hoverCustomGradientSwitcher={replyButtonHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ replyButtonHoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={
+						replyButtonHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ replyButtonHoverCustomGradientInputValue: value })
+					}
+					isBackgroundImage={false}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleReplyButtonPaddingUnitsHandler}
+					spacingUnits={replyButtonPaddingUnits}
+					spacingDesktop={replyButtonPaddingDesktop}
+					spacingTablet={replyButtonPaddingTablet}
+					spacingMobile={replyButtonPaddingMobile}
+					handleSpacingUnitHandler={handleReplyButtonPaddingUnitChange}
+					spacingCombineBtn={replyButtonPaddingLink}
+					spacingCombineBtnHandler={handleReplyButtonPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={replyButtonBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ replyButtonBorder: value })}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Border", "frontis-blocks")}
+					globalSwitcher={replyButtonBorderColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ replyButtonBorderColorSwitcher: value })
+					}
+				/>
+
+				{replyButtonBorderColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={replyButtonBorderColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								replyButtonBorderColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{replyButtonBorderColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={replyButtonBorderHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								replyButtonBorderHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleReplyButtonBorderUnitsHandler}
+					spacingUnits={replyButtonBorderUnits}
+					spacingDesktop={replyButtonBorderDesktop}
+					spacingTablet={replyButtonBorderTablet}
+					spacingMobile={replyButtonBorderMobile}
+					handleSpacingUnitHandler={handleReplyButtonBorderUnitChange}
+					spacingCombineBtn={replyButtonBorderLink}
+					spacingCombineBtnHandler={handleReplyButtonBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleReplyButtonBorderRadiusUnitsHandler}
+					spacingUnits={replyButtonBorderRadiusUnits}
+					spacingDesktop={replyButtonBorderRadiusDesktop}
+					spacingTablet={replyButtonBorderRadiusTablet}
+					spacingMobile={replyButtonBorderRadiusMobile}
+					handleSpacingUnitHandler={handleReplyButtonBorderRadiusUnitChange}
+					spacingCombineBtn={replyButtonBorderRadiusLink}
+					spacingCombineBtnHandler={handleReplyButtonBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Box Shadow", "frontis-blocks")}
+					globalSwitcher={replyButtonBoxShadowSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ replyButtonBoxShadowSwitcher: value })
+					}
+				/>
+
+				{replyButtonBoxShadowSwitcher === "normal" && (
+					<FB_BoxShadowControl
+						label={__("Normal Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ replyButtonBoxShadowValues: value })
+						}
+						initialShadowValue={replyButtonBoxShadowValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ replyButtonBoxShadowCssValue: value })
+						}
+					/>
+				)}
+
+				{replyButtonBoxShadowSwitcher === "hover" && (
+					<FB_BoxShadowControl
+						label={__("Hover Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ replyButtonBoxShadowHoverValues: value })
+						}
+						initialShadowValue={replyButtonBoxShadowHoverValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ replyButtonBoxShadowHoverCssValue: value })
+						}
+					/>
+				)}
 			</PanelBody>
 		</>
 	);

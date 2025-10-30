@@ -181,7 +181,7 @@ const attributes = {
 			Desktop: "",
 			Tablet: "",
 			Mobile: "",
-		}
+		},
 	},
 
 	commentCountTitleSpacingUnits: {
@@ -190,13 +190,13 @@ const attributes = {
 			Desktop: "px",
 			Tablet: "px",
 			Mobile: "px",
-		}
+		},
 	},
 
 	/** End Comments Count Title **/
 
-	/** Start Comment Item **/ 
-		postCommentPaddingUnits: {
+	/** Start Comment Item **/
+	postCommentPaddingUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
@@ -238,53 +238,52 @@ const attributes = {
 
 	/** Nested Item Indentation **/
 	nestedIndentation: {
-		type: 'object',
-		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: ""
-		}
-	},
-
-	nestedIndentationUnits: {
-		type: 'object',
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		}
-	},
-	/** Nested Item Indentation **/
-
-	
-	/** Comment List Bottom Spacing **/
-	commentListBottomSpacing: {
-		type: 'object',
+		type: "object",
 		default: {
 			Desktop: "",
 			Tablet: "",
 			Mobile: "",
-		}
+		},
 	},
-	commentListBottomSpacingUnits: {
-		type: 'object',
+
+	nestedIndentationUnits: {
+		type: "object",
 		default: {
 			Desktop: "px",
 			Tablet: "px",
 			Mobile: "px",
-		}
+		},
+	},
+	/** Nested Item Indentation **/
+
+	/** Comment List Bottom Spacing **/
+	commentListBottomSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	commentListBottomSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	/** Comment List Bottom Spacing **/
 
 	/** Avatar */
-		/** Avatar Size */
+	/** Avatar Size */
 	avatarSize: {
 		type: "object",
 		default: {
 			Desktop: "",
 			Tablet: "",
-			Mobile: ""
-		}
+			Mobile: "",
+		},
 	},
 	avatarSizeUnits: {
 		type: "object",
@@ -292,7 +291,7 @@ const attributes = {
 			Desktop: "px",
 			Tablet: "px",
 			Mobile: "px",
-		}
+		},
 	},
 	/** Start Padding */
 	avatarPaddingUnits: {
@@ -771,16 +770,7 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-
-	messageColorSwitcher: {
-		type: "string",
-		default: "normal",
-	},
 	messageColor: {
-		type: "string",
-		default: "",
-	},
-	messageHoverColor: {
 		type: "string",
 		default: "",
 	},
@@ -788,10 +778,328 @@ const attributes = {
 
 	/** End Comment Item **/
 
+	/** === Reply Button Attributes ========= */
+	replyButtonGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	replyButtonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	replyButtonGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	replyButtonGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	replyButtonFontFamily: {
+		type: "string",
+		default: "",
+	},
+	replyButtonFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	replyButtonFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	replyButtonFontWeight: {
+		type: "string",
+		default: "",
+	},
+	replyButtonFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	replyButtonTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	replyButtonTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	replyButtonLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	replyButtonLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	replyButtonLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	replyButtonLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
 
+	replyButtonColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	replyButtonColor: {
+		type: "string",
+		default: "",
+	},
+	replyButtonHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	/** Start Background */
+	replyButtonBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	replyButtonNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	replyButtonNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	replyButtonNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	replyButtonNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	replyButtonNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	replyButtonHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	replyButtonHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	replyButtonHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	replyButtonHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	replyButtonHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
 
 	
-	
+	/** Start Padding */
+	replyButtonPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	replyButtonPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Padding */
+
+	/** Start Border */
+	replyButtonBorder: {
+		type: "string",
+		default: "none",
+	},
+	replyButtonBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	replyButtonBorderColor: {
+		type: "string",
+		default: "",
+	},
+	replyButtonBorderHoverColor: {
+		type: "string",
+	},
+	replyButtonBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	replyButtonBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	replyButtonBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	replyButtonBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	replyButtonBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	replyButtonBoxShadowSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	replyButtonBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	replyButtonBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
+	replyButtonBoxShadowHoverValues: {
+		type: "array",
+		default: "",
+	},
+	replyButtonBoxShadowHoverCssValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Box Shadow */
+
+	/** === End Reply Button Attributes ========= */
 
 	/** ============== Advanced Attributes ============== */
 	wrapperId: {
