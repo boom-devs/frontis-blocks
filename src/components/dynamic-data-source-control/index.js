@@ -143,7 +143,7 @@ export default function DynamicDataSourceControl({
         const recs =
           select(coreStore).getEntityRecords("postType", t, {
             status: "publish",
-            per_page: 20,
+            per_page: -1,
             orderby: "date",
             order: "desc",
             _fields: ["id", "title", "type"],
