@@ -276,7 +276,27 @@ const attributes = {
 	/** Comment List Bottom Spacing **/
 
 	/** Avatar */
-	/** Avatar Size */
+
+	/** Gap */
+	avatarGap: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+
+	avatarGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	/** Size */
 	avatarSize: {
 		type: "object",
 		default: {
@@ -539,7 +559,7 @@ const attributes = {
 	authorLineHeight: {
 		type: "object",
 		default: {
-			Desktop: "30",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -648,7 +668,7 @@ const attributes = {
 	commentMetaLineHeight: {
 		type: "object",
 		default: {
-			Desktop: "30",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -859,7 +879,7 @@ const attributes = {
 	replyButtonLineHeight: {
 		type: "object",
 		default: {
-			Desktop: "30",
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -1100,6 +1120,241 @@ const attributes = {
 	/** End Box Shadow */
 
 	/** === End Reply Button Attributes ========= */
+
+	/** === Start Form Header Attributes ========= */
+	/** ======= Form Title */
+	formTitleGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	formTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+
+	formTitleGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	formTitleGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	formTitleFontFamily: {
+		type: "string",
+		default: "",
+	},
+	formTitleFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formTitleFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formTitleFontWeight: {
+		type: "string",
+		default: "600",
+	},
+	formTitleFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	formTitleTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	formTitleTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	formTitleLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formTitleLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formTitleLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formTitleLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	formTitleColor: {
+		type: "string",
+		default: "",
+	},
+
+	formTitleSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+
+	formTitleSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	/** === End Form Title */
+
+	/** === Cancel Reply Link */
+	cancelReplyGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	cancelReplyGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	cancelReplyGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	cancelReplyGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	cancelReplyFontFamily: {
+		type: "string",
+		default: "",
+	},
+	cancelReplyFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	cancelReplyFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	cancelReplyFontWeight: {
+		type: "string",
+		default: "",
+	},
+	cancelReplyFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	cancelReplyTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	cancelReplyTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	cancelReplyLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	cancelReplyLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	cancelReplyLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	cancelReplyLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	cancelReplyColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	cancelReplyColor: {
+		type: "string",
+		default: "",
+	},
+	cancelReplyHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	/** === End Form Header Attributes ========= */
+
+
+
 
 	/** ============== Advanced Attributes ============== */
 	wrapperId: {
