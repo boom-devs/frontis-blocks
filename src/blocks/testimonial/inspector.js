@@ -52,6 +52,11 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 import './editor.scss';
 
@@ -78,6 +83,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
+        FrontendTestimonialRatingicon,
         TestimonialRatingImageUrl,
         TestimonialRatingImageAlt,
         TestimonialRatingImageID,
@@ -310,6 +316,106 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRTopOffsetUnits,
         testimonialVRBottomOffset,
         testimonialVRBottomOffsetUnits,
+
+        /** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+        /** Start Dynamic Author Name Text */
+		dynamicAuthorNameEnabled,
+		dynamicAuthorNameSource,
+		dynamicAuthorNamePostId,
+		dynamicAuthorNamePostType,
+		dynamicAuthorNamePostLabel,
+		dynamicAuthorNameField,
+		dynamicAuthorNameFeaturedImageField,
+
+		dynamicAuthorNameDateType,
+		dynamicAuthorNameDateFormat,
+
+		dynamicAuthorNameTimeType,
+		dynamicAuthorNameTimeFormat,
+
+		dynamicAuthorNameCommentsZeroText,
+		dynamicAuthorNameCommentsOneText,
+		dynamicAuthorNameCommentsManyText,
+
+		dynamicAuthorNameTermsTaxonomy,
+		dynamicAuthorNameTermsSeparator,
+		dynamicAuthorNameEnableLink,
+		dynamicAuthorNameLinkSource,
+		/** End Dynamic Author Name Text */
+
+        /** Start Dynamic Author Designation Text */
+		dynamicAuthorDesignationEnabled,
+		dynamicAuthorDesignationSource,
+		dynamicAuthorDesignationPostId,
+		dynamicAuthorDesignationPostType,
+		dynamicAuthorDesignationPostLabel,
+		dynamicAuthorDesignationField,
+		dynamicAuthorDesignationFeaturedImageField,
+
+		dynamicAuthorDesignationDateType,
+		dynamicAuthorDesignationDateFormat,
+
+		dynamicAuthorDesignationTimeType,
+		dynamicAuthorDesignationTimeFormat,
+
+		dynamicAuthorDesignationCommentsZeroText,
+		dynamicAuthorDesignationCommentsOneText,
+		dynamicAuthorDesignationCommentsManyText,
+
+		dynamicAuthorDesignationTermsTaxonomy,
+		dynamicAuthorDesignationTermsSeparator,
+		dynamicAuthorDesignationEnableLink,
+		dynamicAuthorDesignationLinkSource,
+		/** End Dynamic Author Designation Text */
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -1710,7 +1816,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockID} .fb-testimonial-quote-icon:hover svg {
             fill: ${TestimonialQuoteIconHoverColor};
         }
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title a {
             ${TestimonialTitleGlobalTypoSwitcher?.fontFamily === true && TestimonialTitleGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialTitleGlobalTypographyData?.fontFamily};` : ''}
             ${TestimonialTitleGlobalTypoSwitcher?.fontSize === true && TestimonialTitleGlobalTypographyData?.fontSize ? `font-size: ${TestimonialTitleGlobalTypographyData?.fontSize};` : ''}
             ${TestimonialTitleGlobalTypoSwitcher?.fontWeight === true && TestimonialTitleGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialTitleGlobalTypographyData?.fontWeight};` : ''}
@@ -1732,10 +1839,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${testimonialTitleDesktopMargin && TestimonialTitleMarginDesktop?.top ? `margin: ${testimonialTitleDesktopMargin};` : ''}
             
         }
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover,
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title a:hover {
             ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
         }
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
             ${TestimonialDescGlobalTypoSwitcher?.fontFamily === true && TestimonialDescGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialDescGlobalTypographyData?.fontFamily};` : ''}
             ${TestimonialDescGlobalTypoSwitcher?.fontSize === true && TestimonialDescGlobalTypographyData?.fontSize ? `font-size: ${TestimonialDescGlobalTypographyData?.fontSize};` : ''}
             ${TestimonialDescGlobalTypoSwitcher?.fontWeight === true && TestimonialDescGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialDescGlobalTypographyData?.fontWeight};` : ''}
@@ -1756,11 +1865,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
             ${testimonialDescDesktopMargin && TestimonialDescMarginDesktop?.top ? `margin: ${testimonialDescDesktopMargin};` : ''}
         }
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover,
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a:hover {
             ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
         }
 
-        .${blockID} .fb-testimonial-userinfo-container .fb-user {
+        .${blockID} .fb-testimonial-userinfo-container .fb-user,
+        .${blockID} .fb-testimonial-userinfo-container .fb-user a {
             ${TestimonialAuthorGlobalTypoSwitcher?.fontFamily === true && TestimonialAuthorGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialAuthorGlobalTypographyData?.fontFamily};` : ''}
             ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === true && TestimonialAuthorGlobalTypographyData?.fontSize ? `font-size: ${TestimonialAuthorGlobalTypographyData?.fontSize};` : ''}
             ${TestimonialAuthorGlobalTypoSwitcher?.fontWeight === true && TestimonialAuthorGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialAuthorGlobalTypographyData?.fontWeight};` : ''}
@@ -1782,11 +1893,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialAuthorColor ? `color: ${TestimonialAuthorColor};` : ''}
             ${testimonialAuthorDesktopMargin && TestimonialAuthorMarginDesktop?.top ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
         }
-        .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
+        .${blockID} .fb-testimonial-userinfo-container .fb-user:hover,
+        .${blockID} .fb-testimonial-userinfo-container .fb-user a:hover {
             ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
         }
 
-        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation,
+        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
             ${TestimonialDesignationGlobalTypoSwitcher?.fontFamily === true && TestimonialDesignationGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialDesignationGlobalTypographyData?.fontFamily};` : ''}
             ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === true && TestimonialDesignationGlobalTypographyData?.fontSize ? `font-size: ${TestimonialDesignationGlobalTypographyData?.fontSize};` : ''}
             ${TestimonialDesignationGlobalTypoSwitcher?.fontWeight === true && TestimonialDesignationGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialDesignationGlobalTypographyData?.fontWeight};` : ''}
@@ -1899,26 +2012,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition?.Tablet && TestimonialImageTopPositionUnits?.Tablet ? `${TestimonialImageTopPosition?.Tablet}${TestimonialImageTopPositionUnits?.Tablet}` : '0'};` : ''}
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition?.Tablet && TestimonialImageLeftPositionUnits?.Tablet ? `${TestimonialImageLeftPosition?.Tablet}${TestimonialImageLeftPositionUnits?.Tablet}` : '0'};` : ''}
             }
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title a{
                 ${TestimonialTitleGlobalTypoSwitcher?.fontSize === false && TestimonialTitleFontSize?.Tablet && TestimonialTitleFontSizeUnits?.Tablet ? `font-size: ${TestimonialTitleFontSize?.Tablet}${TestimonialTitleFontSizeUnits?.Tablet};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === false && TestimonialTitleLetterSpacing?.Tablet && TestimonialTitleLetterSpacingUnits?.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing?.Tablet}${TestimonialTitleLetterSpacingUnits?.Tablet};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === false && TestimonialTitleLineHeight?.Tablet && TestimonialTitleLineHeightUnits?.Tablet ? `line-height: ${TestimonialTitleLineHeight?.Tablet}${TestimonialTitleLineHeightUnits?.Tablet};` : ''}
                 ${testimonialTitleTabletMargin && TestimonialTitleMarginTablet.top ? `margin: ${testimonialTitleTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
                 ${TestimonialDescGlobalTypoSwitcher?.fontSize === false && TestimonialDescFontSize?.Tablet && TestimonialDescFontSizeUnits?.Tablet ? `font-size: ${TestimonialDescFontSize?.Tablet}${TestimonialDescFontSizeUnits?.Tablet};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === false && TestimonialDescLetterSpacing?.Tablet && TestimonialDescLetterSpacingUnits?.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing?.Tablet}${TestimonialDescLetterSpacingUnits?.Tablet};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher?.lineHeight === false && TestimonialDescLineHeight?.Tablet && TestimonialDescLineHeightUnits?.Tablet ? `line-height: ${TestimonialDescLineHeight?.Tablet}${TestimonialDescLineHeightUnits?.Tablet};` : ''}
                 ${testimonialDescTabletMargin && TestimonialDescMarginTablet?.top ? `margin: ${testimonialDescTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user {
+            .${blockID} .fb-testimonial-userinfo-container .fb-user,
+            .${blockID} .fb-testimonial-userinfo-container .fb-user a {
                 ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === false && TestimonialAuthorFontSize?.Tablet ? `font-size: ${TestimonialAuthorFontSize?.Tablet}${TestimonialAuthorFontSizeUnits?.Tablet};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === false && TestimonialAuthorLetterSpacing?.Tablet ? `letter-spacing: ${TestimonialAuthorLetterSpacing?.Tablet}${TestimonialAuthorLetterSpacingUnits?.Tablet};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === false && TestimonialAuthorLineHeight?.Tablet ? `line-height: ${TestimonialAuthorLineHeight?.Tablet}${TestimonialAuthorLineHeightUnits?.Tablet};` : ''}
                 
                 ${testimonialAuthorTabletMargin && TestimonialAuthorMarginTablet.top ? `margin: ${testimonialAuthorTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
                 ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === false && TestimonialDesignationFontSize?.Tablet ? `font-size: ${TestimonialDesignationFontSize?.Tablet}${TestimonialDesignationFontSizeUnits?.Tablet};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === false && TestimonialDesignationLetterSpacing?.Tablet ? `letter-spacing: ${TestimonialDesignationLetterSpacing?.Tablet}${TestimonialDesignationLetterSpacingUnits?.Tablet};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === false && TestimonialDesignationLineHeight?.Tablet ? `line-height: ${TestimonialDesignationLineHeight?.Tablet}${TestimonialDesignationLineHeightUnits?.Tablet};` : ''}
@@ -1976,27 +2093,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition?.Mobile && TestimonialImageTopPositionUnits?.Mobile ? `${TestimonialImageTopPosition?.Mobile}${TestimonialImageTopPositionUnits?.Mobile}` : '0'};` : ''}
                 ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition?.Mobile && TestimonialImageLeftPositionUnits?.Mobile ? `${TestimonialImageLeftPosition?.Mobile}${TestimonialImageLeftPositionUnits?.Mobile}` : '0'};` : ''}
             }
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title a {
                 ${TestimonialTitleGlobalTypoSwitcher?.fontSize === false && TestimonialTitleFontSize?.Mobile && TestimonialTitleFontSizeUnits?.Mobile ? `font-size: ${TestimonialTitleFontSize?.Mobile}${TestimonialTitleFontSizeUnits?.Mobile};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === false && TestimonialTitleLetterSpacing?.Mobile && TestimonialTitleLetterSpacingUnits?.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing?.Mobile}${TestimonialTitleLetterSpacingUnits?.Mobile};` : ''}
                 ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === false && TestimonialTitleLineHeight?.Mobile && TestimonialTitleLineHeightUnits?.Mobile ? `line-height: ${TestimonialTitleLineHeight?.Mobile}${TestimonialTitleLineHeightUnits?.Mobile};` : ''}
                 ${testimonialTitleMobileMargin && TestimonialTitleMarginMobile?.top ? `margin: ${testimonialTitleMobileMargin};` : ''}
 
             }
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
                 ${TestimonialDescGlobalTypoSwitcher?.fontSize === false && TestimonialDescFontSize?.Mobile && TestimonialDescFontSizeUnits?.Mobile ? `font-size: ${TestimonialDescFontSize?.Mobile}${TestimonialDescFontSizeUnits?.Mobile};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === false && TestimonialDescLetterSpacing?.Mobile && TestimonialDescLetterSpacingUnits?.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing?.Mobile}${TestimonialDescLetterSpacingUnits?.Mobile};` : ''}
                 ${TestimonialDescGlobalTypoSwitcher?.lineHeight === false && TestimonialDescLineHeight?.Mobile && TestimonialDescLineHeightUnits?.Mobile ? `line-height: ${TestimonialDescLineHeight?.Mobile}${TestimonialDescLineHeightUnits?.Mobile};` : ''}
                 ${testimonialDescMobileMargin && TestimonialDescMarginMobile?.top ? `margin: ${testimonialDescMobileMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user {
+            .${blockID} .fb-testimonial-userinfo-container .fb-user
+            .${blockID} .fb-testimonial-userinfo-container .fb-user a {
                 ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === false && TestimonialAuthorFontSize?.Mobile ? `font-size: ${TestimonialAuthorFontSize?.Mobile}${TestimonialAuthorFontSizeUnits?.Mobile};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === false && TestimonialAuthorLetterSpacing?.Mobile ? `letter-spacing: ${TestimonialAuthorLetterSpacing?.Mobile}${TestimonialAuthorLetterSpacingUnits?.Mobile};` : ''}
                 ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === false && TestimonialAuthorLineHeight?.Mobile ? `line-height: ${TestimonialAuthorLineHeight?.Mobile}${TestimonialAuthorLineHeightUnits?.Mobile};` : ''}
                 
                 ${testimonialAuthorMobileMargin && TestimonialAuthorMarginMobile?.top ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation,
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
                 ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === false && TestimonialDesignationFontSize?.Mobile ? `font-size: ${TestimonialDesignationFontSize?.Mobile}${TestimonialDesignationFontSizeUnits?.Mobile};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === false && TestimonialDesignationLetterSpacing?.Mobile ? `letter-spacing: ${TestimonialDesignationLetterSpacing?.Mobile}${TestimonialDesignationLetterSpacingUnits?.Mobile};` : ''}
                 ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === false && TestimonialDesignationLineHeight?.Mobile ? `line-height: ${TestimonialDesignationLineHeight?.Mobile}${TestimonialDesignationLineHeightUnits?.Mobile};` : ''}
@@ -2300,6 +2421,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+
+    /**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			FrontendTestimonialRatingicon: generateSvgIcon(TestimonialRatingicon), 
+			FrontendTestimonialQuoteIcon: generateSvgIcon(TestimonialQuoteIcon), 
+		})
+	}, [TestimonialRatingicon, TestimonialQuoteIcon]);
+
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicTitleEnabled: false,
+				dynamicTitleEnableLink: false,
+				dynamicDescriptionEnabled: false,
+				dynamicDescriptionEnableLink: false,
+                dynamicAuthorNameEnabled: false,
+                dynamicAuthorNameEnableLink: false,
+                dynamicAuthorDesignationEnabled: false,
+                dynamicAuthorDesignationEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	/**
+	 * Toggle Controls for Dynamic Content
+	 */
+	const dynamicTitleContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-testimonial-dynamic-title-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTitleEnabled',
+		label: __('Dynamic Title', 'frontis-blocks'),
+		keyPrefix: 'testimonial-dynamic-title-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-testimonial-dynamic-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicDescriptionEnabled',
+		label: __('Dynamic Description', 'frontis-blocks'),
+		keyPrefix: 'testimonial-dynamic-description-content',
+		isProActive : getProActiveState
+	});
+
+    const dynamicAuthorNameContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-testimonial-dynamic-author-name-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicAuthorNameEnabled',
+		label: __('Dynamic Author Name', 'frontis-blocks'),
+		keyPrefix: 'testimonial-dynamic-author-name-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicAuthorDesignationContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-testimonial-dynamic-author-designation-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicAuthorDesignationEnabled',
+		label: __('Dynamic Author Designation', 'frontis-blocks'),
+		keyPrefix: 'testimonial-dynamic-author-designation-content',
+		isProActive : getProActiveState
+	});
+
     /**
 	 * Inspector General Controls
 	 */
@@ -2376,21 +2569,124 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         </ButtonGroup>
                     </BaseControl>
 
-                    {TitleSwitcher && (
-                    <TextareaControl
-                        label={__("Title", "frontis-blocks")}
-                        value={TestimonialTitle}
-                        onChange={(value) => setAttributes({ TestimonialTitle: value })}
-                        className="fb-testimonial-title-control"
-                    />
+					{dynamicTitleContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+	
+					<DynamicDataSourceControl
+						enabled={dynamicTitleEnabled}
+						
+						source={dynamicTitleSource}
+						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+						postId={dynamicTitlePostId}
+						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+						postType={dynamicTitlePostType}
+						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+						postLabel={dynamicTitlePostLabel}
+						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
+
+						field={dynamicTitleField}
+						setField={(value) => setAttributes({ dynamicTitleField: value })}
+						featuredImageField={dynamicTitleFeaturedImageField}
+						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+						dateType={dynamicTitleDateType}
+						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+						dateFormat={dynamicTitleDateFormat}
+						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+						timeType={dynamicTitleTimeType}
+						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+						timeFormat={dynamicTitleTimeFormat}
+						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+						commentsZeroText={dynamicTitleCommentsZeroText}
+						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+						commentsOneText={dynamicTitleCommentsOneText}
+						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+						commentsManyText={dynamicTitleCommentsManyText}
+						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+
+						termsTaxonomy={dynamicTitleTermsTaxonomy}
+						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+						termsSeparator={dynamicTitleTermsSeparator}
+						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
+					/>
+					{dynamicTitleEnabled && (
+						<DynamicDataLinkControl
+							enableLink={dynamicTitleEnableLink}
+							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+							linkSource={dynamicTitleLinkSource}
+							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+						/>
+					)}
+                    {!dynamicTitleEnabled && TitleSwitcher && (
+                        <TextareaControl
+                            label={__("Title", "frontis-blocks")}
+                            value={TestimonialTitle}
+                            onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                            className="fb-testimonial-title-control"
+                        />
                     )}
-                    {DescSwitcher && (
-                    <TextareaControl
-                        label={__("Description", "frontis-blocks")}
-                        value={TestimonialDesc}
-                        onChange={(value) => setAttributes({ TestimonialDesc: value })}
-                        className="fb-testimonial-desc-control"
+
+
+                    {dynamicDescriptionContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+    
+                    <DynamicDataSourceControl
+                        enabled={dynamicDescriptionEnabled}
+                        
+                        source={dynamicDescriptionSource}
+                        setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+                        postId={dynamicDescriptionPostId}
+                        setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+                        postType={dynamicDescriptionPostType}
+                        setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+                        postLabel={dynamicDescriptionPostLabel}
+                        setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+                        field={dynamicDescriptionField}
+                        setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+                        featuredImageField={dynamicDescriptionFeaturedImageField}
+                        setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+                        dateType={dynamicDescriptionDateType}
+                        setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+                        dateFormat={dynamicDescriptionDateFormat}
+                        setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+                        timeType={dynamicDescriptionTimeType}
+                        setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+                        timeFormat={dynamicDescriptionTimeFormat}
+                        setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+                        commentsZeroText={dynamicDescriptionCommentsZeroText}
+                        setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+                        commentsOneText={dynamicDescriptionCommentsOneText}
+                        setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+                        commentsManyText={dynamicDescriptionCommentsManyText}
+                        setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+                        termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+                        setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+                        termsSeparator={dynamicDescriptionTermsSeparator}
+                        setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
                     />
+
+                    {dynamicDescriptionEnabled && ( 
+                        <DynamicDataLinkControl
+                            enableLink={dynamicDescriptionEnableLink}
+                            setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+                            linkSource={dynamicDescriptionLinkSource}
+                            setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+                        />
+                    )}
+                    {!dynamicDescriptionEnabled && DescSwitcher && (
+                        <TextareaControl
+                            label={__("Description", "frontis-blocks")}
+                            value={TestimonialDesc}
+                            onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                            className="fb-testimonial-desc-control"
+                        />
                     )}
             </PanelBody>
 
@@ -2481,21 +2777,125 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         )}
                         </BaseControl>
                     )}
-                    {AuthorSwitcher && (
-                    <TextareaControl
-                        label={__("Author", "frontis-blocks")}
-                        value={TestimonialAuthor}
-                        onChange={(value) => setAttributes({ TestimonialAuthor: value })}
-                        className="fb-testimonial-author-control"
+
+                    {dynamicAuthorNameContentToggleControls.map((control, index) => (
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+    
+                    <DynamicDataSourceControl
+                        enabled={dynamicAuthorNameEnabled}  
+                        
+                        source={dynamicAuthorNameSource} 
+                        setSource={(value) => setAttributes({ dynamicAuthorNameSource: value })}   
+                        postId={dynamicAuthorNamePostId}
+                        setPostId={(value) => setAttributes({ dynamicAuthorNamePostId: value })}
+                        postType={dynamicAuthorNamePostType}
+                        setPostType={(value) => setAttributes({ dynamicAuthorNamePostType: value })}
+                        postLabel={dynamicAuthorNamePostLabel}
+                        setPostLabel={(value) => setAttributes({ dynamicAuthorNamePostLabel: value })}
+
+                        field={dynamicAuthorNameField}
+                        setField={(value) => setAttributes({ dynamicAuthorNameField: value })}
+                        featuredImageField={dynamicAuthorNameFeaturedImageField}
+                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorNameFeaturedImageField: value })}
+
+                        dateType={dynamicAuthorNameDateType}
+                        setDateType={(value) => setAttributes({ dynamicAuthorNameDateType: value })}
+                        dateFormat={dynamicAuthorNameDateFormat}
+                        setDateFormat={(value) => setAttributes({ dynamicAuthorNameDateFormat: value })}
+                        timeType={dynamicAuthorNameTimeType}
+                        setTimeType={(value) => setAttributes({ dynamicAuthorNameTimeType: value })}
+                        timeFormat={dynamicAuthorNameTimeFormat}
+                        setTimeFormat={(value) => setAttributes({ dynamicAuthorNameTimeFormat: value })}
+
+                        commentsZeroText={dynamicAuthorNameCommentsZeroText}
+                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorNameCommentsZeroText: value })}
+                        commentsOneText={dynamicAuthorNameCommentsOneText}
+                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorNameCommentsOneText: value })}
+                        commentsManyText={dynamicAuthorNameCommentsManyText}
+                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorNameCommentsManyText: value })}
+
+                        termsTaxonomy={dynamicAuthorNameTermsTaxonomy}
+                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorNameTermsTaxonomy: value })}
+                        termsSeparator={dynamicAuthorNameTermsSeparator}
+                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorNameTermsSeparator: value })}
                     />
+
+                    {dynamicAuthorNameEnabled && ( 
+                        <DynamicDataLinkControl
+                            enableLink={dynamicAuthorNameEnableLink}
+                            setEnableLink={(value) => setAttributes({ dynamicAuthorNameEnableLink: value })}
+                            linkSource={dynamicAuthorNameLinkSource}
+                            setLinkSource={(value) => setAttributes({ dynamicAuthorNameLinkSource: value })}
+                        />
                     )}
-                    {DesignationSwitcher && (
-                    <TextareaControl
-                        label={__("Designation", "frontis-blocks")}
-                        value={TestimonialDesignation}
-                        onChange={(value) => setAttributes({ TestimonialDesignation: value })}
-                        className="fb-testimonial-designation-control"
+                    {!dynamicAuthorNameEnabled && AuthorSwitcher && (
+                        <TextareaControl
+                            label={__("Author", "frontis-blocks")}
+                            value={TestimonialAuthor}
+                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                            className="fb-testimonial-author-control"
+                        />
+                    )}
+
+                    {dynamicAuthorDesignationContentToggleControls.map((control, index) => ( 
+                        <div key={control.key || index}>{control.comp}</div>
+                    ))}
+    
+                    <DynamicDataSourceControl
+                        enabled={dynamicAuthorDesignationEnabled}  
+                        
+                        source={dynamicAuthorDesignationSource} 
+                        setSource={(value) => setAttributes({ dynamicAuthorDesignationSource: value })}   
+                        postId={dynamicAuthorDesignationPostId}
+                        setPostId={(value) => setAttributes({ dynamicAuthorDesignationPostId: value })}
+                        postType={dynamicAuthorDesignationPostType}
+                        setPostType={(value) => setAttributes({ dynamicAuthorDesignationPostType: value })}
+                        postLabel={dynamicAuthorDesignationPostLabel}
+                        setPostLabel={(value) => setAttributes({ dynamicAuthorDesignationPostLabel: value })}
+
+                        field={dynamicAuthorDesignationField}
+                        setField={(value) => setAttributes({ dynamicAuthorDesignationField: value })}
+                        featuredImageField={dynamicAuthorDesignationFeaturedImageField}
+                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorDesignationFeaturedImageField: value })}
+
+                        dateType={dynamicAuthorDesignationDateType} 
+                        setDateType={(value) => setAttributes({ dynamicAuthorDesignationDateType: value })}
+                        dateFormat={dynamicAuthorDesignationDateFormat}
+                        setDateFormat={(value) => setAttributes({ dynamicAuthorDesignationDateFormat: value })}
+                        timeType={dynamicAuthorDesignationTimeType}   
+                        setTimeType={(value) => setAttributes({ dynamicAuthorDesignationTimeType: value })}
+                        timeFormat={dynamicAuthorDesignationTimeFormat}
+                        setTimeFormat={(value) => setAttributes({ dynamicAuthorDesignationTimeFormat: value })}
+
+                        commentsZeroText={dynamicAuthorDesignationCommentsZeroText}
+                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorDesignationCommentsZeroText: value })}
+                        commentsOneText={dynamicAuthorDesignationCommentsOneText}
+                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsOneText: value })}
+                        commentsManyText={dynamicAuthorDesignationCommentsManyText}
+                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsManyText: value })}
+
+                        termsTaxonomy={dynamicAuthorDesignationTermsTaxonomy}
+                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorDesignationTermsTaxonomy: value })}
+                        termsSeparator={dynamicAuthorDesignationTermsSeparator}
+                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorDesignationTermsSeparator: value })}
                     />
+
+                    {dynamicAuthorDesignationEnabled && ( 
+                        <DynamicDataLinkControl
+                            enableLink={dynamicAuthorDesignationEnableLink}
+                            setEnableLink={(value) => setAttributes({ dynamicAuthorDesignationEnableLink: value })}
+                            linkSource={dynamicAuthorDesignationLinkSource}
+                            setLinkSource={(value) => setAttributes({ dynamicAuthorDesignationLinkSource: value })}
+                        />
+                    )}
+                    {!dynamicAuthorDesignationEnabled && DesignationSwitcher && ( 
+                        <TextareaControl
+                            label={__("Designation", "frontis-blocks")}
+                            value={TestimonialDesignation}
+                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                            className="fb-testimonial-designation-control"
+                        />
                     )}
             </PanelBody>
 
