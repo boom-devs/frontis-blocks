@@ -243,6 +243,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		replyButtonBoxShadowHoverCssValue,
 		/** ============ End Reply Button */
 
+		/** ============ Comment Form ==================== */
+		commentFormBgColorSwitcher,
+		commentFormNormalBackgroundType,
+		commentFormNormalClassicColor,
+		commentFormNormalGradientColor,
+		commentFormNormalCustomGradientSwitcher,
+		commentFormNormalCustomGradientInputValue,
+		commentFormHoverBackgroundType,
+		commentFormHoverClassicColor,
+		commentFormHoverGradientColor,
+		commentFormHoverCustomGradientSwitcher,
+		commentFormHoverCustomGradientInputValue,
+
+		commentFormPaddingUnits,
+		commentFormPaddingDesktop,
+		commentFormPaddingTablet,
+		commentFormPaddingMobile,
+		commentFormPaddingLink,
+
+		commentFormBorder,
+		commentFormBorderColor,
+		commentFormBorderUnits,
+		commentFormBorderDesktop,
+		commentFormBorderTablet,
+		commentFormBorderMobile,
+		commentFormBorderLink,
+
+		commentFormBorderRadiusUnits,
+		commentFormBorderRadiusDesktop,
+		commentFormBorderRadiusTablet,
+		commentFormBorderRadiusMobile,
+		commentFormBorderRadiusLink,
+
+		commentFormBoxShadowValues,
+		commentFormBoxShadowCssValue,
+		/** ============ End Comment Form ==================== */
+
 		/** ============ Form Header ==================== */
 
 		/** Title */
@@ -801,12 +838,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const avatarBorderRadiusTabletWidth = `${avatarBorderRadiusTablet.top}${avatarBorderRadiusUnits.Tablet} ${avatarBorderRadiusTablet.right}${avatarBorderRadiusUnits.Tablet} ${avatarBorderRadiusTablet.bottom}${avatarBorderRadiusUnits.Tablet} ${avatarBorderRadiusTablet.left}${avatarBorderRadiusUnits.Tablet}`;
 	const avatarBorderRadiusMobileWidth = `${avatarBorderRadiusMobile.top}${avatarBorderRadiusUnits.Mobile} ${avatarBorderRadiusMobile.right}${avatarBorderRadiusUnits.Mobile} ${avatarBorderRadiusMobile.bottom}${avatarBorderRadiusUnits.Mobile} ${avatarBorderRadiusMobile.left}${avatarBorderRadiusUnits.Mobile}`;
 	/** End Avatar Border Radius */
-
 	/** Avatar */
 
 	/** Reply Button */
-
-	/** start post count padding */
+	/** padding */
 	const handleReplyButtonPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (replyButtonPaddingLink) {
@@ -892,9 +927,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const replyButtonPaddingDesktopWidth = `${replyButtonPaddingDesktop.top}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.right}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.bottom}${replyButtonPaddingUnits.Desktop} ${replyButtonPaddingDesktop.left}${replyButtonPaddingUnits.Desktop}`;
 	const replyButtonPaddingTabletWidth = `${replyButtonPaddingTablet.top}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.right}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.bottom}${replyButtonPaddingUnits.Tablet} ${replyButtonPaddingTablet.left}${replyButtonPaddingUnits.Tablet}`;
 	const replyButtonPaddingMobileWidth = `${replyButtonPaddingMobile.top}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.right}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.bottom}${replyButtonPaddingUnits.Mobile} ${replyButtonPaddingMobile.left}${replyButtonPaddingUnits.Mobile}`;
-	/** End post count padding */
+	/** End padding */
 
-	/** Start Post Count Border */
+	/** Start Border */
 	const handleReplyButtonBorderUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (replyButtonBorderLink) {
@@ -980,9 +1015,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const replyButtonBorderDesktopWidth = `${replyButtonBorderDesktop.top}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.right}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.bottom}${replyButtonBorderUnits.Desktop} ${replyButtonBorderDesktop.left}${replyButtonBorderUnits.Desktop}`;
 	const replyButtonBorderTabletWidth = `${replyButtonBorderTablet.top}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.right}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.bottom}${replyButtonBorderUnits.Tablet} ${replyButtonBorderTablet.left}${replyButtonBorderUnits.Tablet}`;
 	const replyButtonBorderMobileWidth = `${replyButtonBorderMobile.top}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.right}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.bottom}${replyButtonBorderUnits.Mobile} ${replyButtonBorderMobile.left}${replyButtonBorderUnits.Mobile}`;
-	/** End Post Count Border */
+	/** End Border */
 
-	/** Start Post Count Border Radius */
+	/** Border Radius */
 	const handleReplyButtonBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (replyButtonBorderRadiusLink) {
@@ -1070,9 +1105,277 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const replyButtonBorderRadiusDesktopWidth = `${replyButtonBorderRadiusDesktop.top}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.right}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.bottom}${replyButtonBorderRadiusUnits.Desktop} ${replyButtonBorderRadiusDesktop.left}${replyButtonBorderRadiusUnits.Desktop}`;
 	const replyButtonBorderRadiusTabletWidth = `${replyButtonBorderRadiusTablet.top}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.right}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.bottom}${replyButtonBorderRadiusUnits.Tablet} ${replyButtonBorderRadiusTablet.left}${replyButtonBorderRadiusUnits.Tablet}`;
 	const replyButtonBorderRadiusMobileWidth = `${replyButtonBorderRadiusMobile.top}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.right}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.bottom}${replyButtonBorderRadiusUnits.Mobile} ${replyButtonBorderRadiusMobile.left}${replyButtonBorderRadiusUnits.Mobile}`;
-	/** End Post Count Border Radius */
+	/** End Border Radius */
+	/**  ============== End Reply Button ================== */
 
-	/** End Reply Button */
+	/** Comment Form */
+	/** padding */
+	const handleCommentFormPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (commentFormPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormPaddingDesktop: {
+							...commentFormPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormPaddingTablet: {
+							...commentFormPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormPaddingMobile: {
+							...commentFormPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleCommentFormPaddingCombineBtn = () => {
+		setAttributes({ commentFormPaddingLink: !commentFormPaddingLink });
+	};
+
+	const handleCommentFormPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			commentFormPaddingUnits: {
+				...commentFormPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const commentFormPaddingDesktopWidth = `${commentFormPaddingDesktop.top}${commentFormPaddingUnits.Desktop} ${commentFormPaddingDesktop.right}${commentFormPaddingUnits.Desktop} ${commentFormPaddingDesktop.bottom}${commentFormPaddingUnits.Desktop} ${commentFormPaddingDesktop.left}${commentFormPaddingUnits.Desktop}`;
+	const commentFormPaddingTabletWidth = `${commentFormPaddingTablet.top}${commentFormPaddingUnits.Tablet} ${commentFormPaddingTablet.right}${commentFormPaddingUnits.Tablet} ${commentFormPaddingTablet.bottom}${commentFormPaddingUnits.Tablet} ${commentFormPaddingTablet.left}${commentFormPaddingUnits.Tablet}`;
+	const commentFormPaddingMobileWidth = `${commentFormPaddingMobile.top}${commentFormPaddingUnits.Mobile} ${commentFormPaddingMobile.right}${commentFormPaddingUnits.Mobile} ${commentFormPaddingMobile.bottom}${commentFormPaddingUnits.Mobile} ${commentFormPaddingMobile.left}${commentFormPaddingUnits.Mobile}`;
+	/** End padding */
+
+	/** Start Border */
+	const handleCommentFormBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (commentFormBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormBorderDesktop: {
+							...commentFormBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormBorderTablet: {
+							...commentFormBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormBorderMobile: {
+							...commentFormBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleCommentFormBorderCombineBtn = () => {
+		setAttributes({ commentFormBorderLink: !commentFormBorderLink });
+	};
+
+	const handleCommentFormBorderUnitsHandler = (unit) => {
+		setAttributes({
+			commentFormBorderUnits: {
+				...commentFormBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const commentFormBorderDesktopWidth = `${commentFormBorderDesktop.top}${commentFormBorderUnits.Desktop} ${commentFormBorderDesktop.right}${commentFormBorderUnits.Desktop} ${commentFormBorderDesktop.bottom}${commentFormBorderUnits.Desktop} ${commentFormBorderDesktop.left}${commentFormBorderUnits.Desktop}`;
+	const commentFormBorderTabletWidth = `${commentFormBorderTablet.top}${commentFormBorderUnits.Tablet} ${commentFormBorderTablet.right}${commentFormBorderUnits.Tablet} ${commentFormBorderTablet.bottom}${commentFormBorderUnits.Tablet} ${commentFormBorderTablet.left}${commentFormBorderUnits.Tablet}`;
+	const commentFormBorderMobileWidth = `${commentFormBorderMobile.top}${commentFormBorderUnits.Mobile} ${commentFormBorderMobile.right}${commentFormBorderUnits.Mobile} ${commentFormBorderMobile.bottom}${commentFormBorderUnits.Mobile} ${commentFormBorderMobile.left}${commentFormBorderUnits.Mobile}`;
+	/** End Border */
+
+	/** Border Radius */
+	const handleCommentFormBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (commentFormBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						commentFormBorderRadiusDesktop: {
+							...commentFormBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						commentFormBorderRadiusTablet: {
+							...commentFormBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						commentFormBorderRadiusMobile: {
+							...commentFormBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleCommentFormBorderRadiusCombineBtn = () => {
+		setAttributes({
+			commentFormBorderRadiusLink: !commentFormBorderRadiusLink,
+		});
+	};
+
+	const handleCommentFormBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			commentFormBorderRadiusUnits: {
+				...commentFormBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const commentFormBorderRadiusDesktopWidth = `${commentFormBorderRadiusDesktop.top}${commentFormBorderRadiusUnits.Desktop} ${commentFormBorderRadiusDesktop.right}${commentFormBorderRadiusUnits.Desktop} ${commentFormBorderRadiusDesktop.bottom}${commentFormBorderRadiusUnits.Desktop} ${commentFormBorderRadiusDesktop.left}${commentFormBorderRadiusUnits.Desktop}`;
+	const commentFormBorderRadiusTabletWidth = `${commentFormBorderRadiusTablet.top}${commentFormBorderRadiusUnits.Tablet} ${commentFormBorderRadiusTablet.right}${commentFormBorderRadiusUnits.Tablet} ${commentFormBorderRadiusTablet.bottom}${commentFormBorderRadiusUnits.Tablet} ${commentFormBorderRadiusTablet.left}${commentFormBorderRadiusUnits.Tablet}`;
+	const commentFormBorderRadiusMobileWidth = `${commentFormBorderRadiusMobile.top}${commentFormBorderRadiusUnits.Mobile} ${commentFormBorderRadiusMobile.right}${commentFormBorderRadiusUnits.Mobile} ${commentFormBorderRadiusMobile.bottom}${commentFormBorderRadiusUnits.Mobile} ${commentFormBorderRadiusMobile.left}${commentFormBorderRadiusUnits.Mobile}`;
+	/** End Border Radius */
+	/**  ============== End Comment Form ================== */
+
 
 	/* ==================================================== */
 	/* Start Global Padding */
@@ -2408,6 +2711,80 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/** comment form */ 
 								${showCommentForm
 					? `
+
+					.${blockId} .fb-comment-form	{
+
+										${
+											commentFormNormalBackgroundType === "gradient"
+												? `
+									${
+										commentFormNormalCustomGradientSwitcher &&
+										commentFormNormalCustomGradientInputValue
+											? `background: ${commentFormNormalCustomGradientInputValue};`
+											: `background: ${commentFormNormalGradientColor};`
+									}
+								`
+												: `
+									${
+										commentFormNormalClassicColor
+											? `background: ${commentFormNormalClassicColor};`
+											: ""
+									}
+							`
+										}
+
+								
+											${
+												commentFormPaddingDesktopWidth &&
+												commentFormPaddingDesktop.top
+													? `padding: ${commentFormPaddingDesktopWidth};`
+													: ""
+											}
+
+							${commentFormBorder ? `border: ${commentFormBorder};` : ""}
+							${
+								commentFormBorderDesktopWidth && commentFormBorderDesktop.top
+									? `border-width: ${commentFormBorderDesktopWidth};`
+									: ""
+							}
+							${
+								commentFormBorderRadiusDesktopWidth &&
+								commentFormBorderRadiusDesktop.top
+									? `border-radius: ${commentFormBorderRadiusDesktopWidth};`
+									: ""
+							}
+							${commentFormBorderColor ? `border-color: ${commentFormBorderColor};` : ""}
+            	${
+								commentFormBoxShadowCssValue
+									? `box-shadow: ${commentFormBoxShadowCssValue};`
+									: ""
+							}
+
+			}
+			
+
+				.${blockId} .fb-comment-form:hover {
+							${
+								commentFormHoverBackgroundType === "gradient"
+									? `  
+							${
+								commentFormHoverCustomGradientSwitcher &&
+								commentFormHoverCustomGradientInputValue
+									? `background: ${commentFormHoverCustomGradientInputValue};`
+									: `background: ${commentFormHoverGradientColor};`
+							}
+							`
+									: `
+									${
+										commentFormHoverClassicColor
+											? `background: ${commentFormHoverClassicColor};`
+											: ""
+									}
+							`
+							}
+						
+				}
+
 					
 					.${blockId} .fb-comment-form .fb-comment-form-header {
 										${
@@ -3034,6 +3411,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${showCommentForm 
 							? `
 							
+								.${blockId} .fb-comment-form {
+									${
+										commentFormPaddingTabletWidth &&
+										commentFormPaddingTablet.top
+											? `padding: ${commentFormPaddingTabletWidth};`
+											: ""
+									}
+								 ${
+										commentFormBorderTabletWidth && commentFormBorderTablet.top
+											? `border-width: ${commentFormBorderTabletWidth};`
+											: ""
+									}
+                ${
+									commentFormBorderRadiusTabletWidth &&
+									commentFormBorderRadiusTablet.top
+										? `border-radius: ${commentFormBorderRadiusTabletWidth};`
+										: ""
+								}
+
+						}
 
 							.${blockId} .fb-comment-form .fb-comment-form-header {
 							
@@ -3397,6 +3794,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${showCommentForm 
 						? `
 
+
+							.${blockId} .fb-comment-form {
+
+				
+
+										${
+											commentFormPaddingMobileWidth &&
+											commentFormPaddingMobile.top
+												? `padding: ${commentFormPaddingMobileWidth};`
+												: ""
+										}
+							 ${
+									commentFormBorderMobileWidth && commentFormBorderMobile.top
+										? `border-width: ${commentFormBorderMobileWidth};`
+										: ""
+								}
+                ${
+									commentFormBorderRadiusMobileWidth &&
+									commentFormBorderRadiusMobile.top
+										? `border-radius: ${commentFormBorderRadiusMobileWidth};`
+										: ""
+								}
+
+					}
 
 						.${blockId} .fb-comment-form .fb-comment-form-header {
 						
@@ -4963,6 +5384,154 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
 
 			{showCommentForm &&
+
+				<>
+				
+							<PanelBody
+				title={__("Comment Form", "frontis-blocks")}
+				initialOpen={false}
+			>
+
+				<FB_BackgroundColorControl
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={commentFormBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ commentFormBgColorSwitcher: value })
+					}
+					normalBackgroundType={commentFormNormalBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ commentFormNormalBackgroundType: value })
+					}
+					normalClassicColor={commentFormNormalClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							commentFormNormalClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={commentFormNormalGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							commentFormNormalGradientColor: value === undefined ? "" : value,
+						})
+					}
+					normalCustomGradientSwitcher={commentFormNormalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ commentFormNormalCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={
+						commentFormNormalCustomGradientInputValue
+					}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ commentFormNormalCustomGradientInputValue: value })
+					}
+					hoverBackgroundType={commentFormHoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ commentFormHoverBackgroundType: value })
+					}
+					hoverClassicColor={commentFormHoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							commentFormHoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={commentFormHoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							commentFormHoverGradientColor: value === undefined ? "" : value,
+						})
+					}
+					hoverCustomGradientSwitcher={commentFormHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ commentFormHoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={
+						commentFormHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ commentFormHoverCustomGradientInputValue: value })
+					}
+					isBackgroundImage={false}
+				/>
+	
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleCommentFormPaddingUnitsHandler}
+					spacingUnits={commentFormPaddingUnits}
+					spacingDesktop={commentFormPaddingDesktop}
+					spacingTablet={commentFormPaddingTablet}
+					spacingMobile={commentFormPaddingMobile}
+					handleSpacingUnitHandler={handleCommentFormPaddingUnitChange}
+					spacingCombineBtn={commentFormPaddingLink}
+					spacingCombineBtnHandler={handleCommentFormPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={commentFormBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ commentFormBorder: value })}
+				/>
+
+				{commentFormBorder !== "none" && (
+					<>
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={commentFormBorderColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								commentFormBorderColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+
+					<FB_Spacing
+						label={__("Border", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleCommentFormBorderUnitsHandler}
+						spacingUnits={commentFormBorderUnits}
+						spacingDesktop={commentFormBorderDesktop}
+						spacingTablet={commentFormBorderTablet}
+						spacingMobile={commentFormBorderMobile}
+						handleSpacingUnitHandler={handleCommentFormBorderUnitChange}
+						spacingCombineBtn={commentFormBorderLink}
+						spacingCombineBtnHandler={handleCommentFormBorderCombineBtn}
+						setAttributes={setAttributes}
+					/>
+					</>
+				)}
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleCommentFormBorderRadiusUnitsHandler}
+					spacingUnits={commentFormBorderRadiusUnits}
+					spacingDesktop={commentFormBorderRadiusDesktop}
+					spacingTablet={commentFormBorderRadiusTablet}
+					spacingMobile={commentFormBorderRadiusMobile}
+					handleSpacingUnitHandler={handleCommentFormBorderRadiusUnitChange}
+					spacingCombineBtn={commentFormBorderRadiusLink}
+					spacingCombineBtnHandler={handleCommentFormBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+
+					<FB_BoxShadowControl
+						label={__("Box Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ commentFormBoxShadowValues: value })
+						}
+						initialShadowValue={commentFormBoxShadowValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ commentFormBoxShadowCssValue: value })
+						}
+					/>
+
+			</PanelBody>
+				
+
+
 						<PanelBody
 				title={__("Form Header", "frontis-blocks")}
 				initialOpen={true}
@@ -5345,6 +5914,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					
 
 			</PanelBody>
+						</>
+
 				}
 
 
