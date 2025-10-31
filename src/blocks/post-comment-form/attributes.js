@@ -1121,6 +1121,206 @@ const attributes = {
 
 	/** === End Reply Button Attributes ========= */
 
+	/** === Start Comment Form Attributes ========= */
+	/** Start Background */
+	commentFormBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	commentFormNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	commentFormNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	commentFormNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	commentFormNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	commentFormNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	commentFormHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	commentFormHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	commentFormHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	commentFormHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	commentFormHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+
+	
+	/** Start Padding */
+	commentFormPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentFormPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Padding */
+
+	/** Start Border */
+	commentFormBorder: {
+		type: "string",
+		default: "none",
+	},
+
+	commentFormBorderColor: {
+		type: "string",
+		default: "",
+	},
+
+	commentFormBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentFormBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	commentFormBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	commentFormBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	commentFormBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	commentFormBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	commentFormBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Box Shadow */
+
+	/** === End Comment Form Attributes ========= */
+
+
 	/** === Start Form Header Attributes ========= */
 	/** ======= Form Title */
 	formTitleGlobalTypographyData: {
