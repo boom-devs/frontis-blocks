@@ -12,6 +12,7 @@ import {
 	BORDER_STYLES,
 	IMAGE_AUTO_FIT,
 } from "@Constants/fbConstants";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
@@ -88,6 +89,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		commentListBottomSpacingUnits,
 
 		/** Avatar */
+		avatarGap,
+		avatarGapUnits,
+
 		avatarSize,
 		avatarSizeUnits,
 
@@ -177,7 +181,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		/** ============ End Comment Item */
 
 		/** ============ Start Reply Button */
-		/** title     */
 		replyButtonGlobalTypoSwitcher,
 		replyButtonGlobalTypographyData,
 		replyButtonGlobalTypoType,
@@ -238,8 +241,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		replyButtonBoxShadowCssValue,
 		replyButtonBoxShadowHoverValues,
 		replyButtonBoxShadowHoverCssValue,
-
 		/** ============ End Reply Button */
+
+		/** ============ Form Header ==================== */
+
+		/** Title */
+		formTitleGlobalTypoSwitcher,
+		formTitleGlobalTypographyData,
+		formTitleGlobalTypoType,
+		formTitleGlobalTypoOption,
+		formTitleFontFamily,
+		formTitleFontSize,
+		formTitleFontSizeUnits,
+		formTitleFontWeight,
+		formTitleFontStyle,
+		formTitleTextTransform,
+		formTitleTextDecoration,
+		formTitleLetterSpacing,
+		formTitleLetterSpacingUnits,
+		formTitleLineHeight,
+		formTitleLineHeightUnits,
+
+		formTitleColor,
+
+		formTitleSpacing,
+		formTitleSpacingUnits,
+
+		/** Cancel Reply Link */
+		cancelReplyGlobalTypoSwitcher,
+		cancelReplyGlobalTypographyData,
+		cancelReplyGlobalTypoType,
+		cancelReplyGlobalTypoOption,
+		cancelReplyFontFamily,
+		cancelReplyFontSize,
+		cancelReplyFontSizeUnits,
+		cancelReplyFontWeight,
+		cancelReplyFontStyle,
+		cancelReplyTextTransform,
+		cancelReplyTextDecoration,
+		cancelReplyLetterSpacing,
+		cancelReplyLetterSpacingUnits,
+		cancelReplyLineHeight,
+		cancelReplyLineHeightUnits,
+
+		cancelReplyColorSwitcher,
+		cancelReplyColor,
+		cancelReplyHoverColor,
 
 		/** ============ End Style Attributes ================= */
 
@@ -345,6 +392,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		return `${scaleValue(top)} ${scaleValue(right)} ${scaleValue(bottom)} 0`;
 	}
+
+	/** Start Load Google Font */
+	useEffect(() => {
+
+		if(commentCountTitleFontFamily !== "Default") {
+			loadGoogleFont(commentCountTitleFontFamily);
+		}
+
+		if(authorFontFamily !== "Default") {
+			loadGoogleFont(authorFontFamily);
+		}
+
+		if(commentMetaFontFamily !== "Default") {
+			loadGoogleFont(commentMetaFontFamily);
+		}
+
+		if(messageFontFamily !== "Default") {
+			loadGoogleFont(messageFontFamily);
+		} 
+
+		if(replyButtonFontFamily !== "Default") {
+			loadGoogleFont(replyButtonFontFamily);
+		}
+
+		if(formTitleFontFamily !== "Default") {
+			loadGoogleFont(formTitleFontFamily);
+		}
+
+
+		if (cancelReplyFontFamily !== "Default") {
+			loadGoogleFont(cancelReplyFontFamily);
+		}
+		
+	}, [
+		commentCountTitleFontFamily,
+		authorFontFamily,
+		messageFontFamily,
+		commentMetaFontFamily,
+		replyButtonFontFamily,
+		formTitleFontFamily,
+		cancelReplyFontFamily,
+	]);
+	/** End Load Google Font */
 
 	/* ======================================= */
 	/** Start Post Comment Item Padding */
@@ -1355,9 +1445,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             /* Comments List */
-            .${blockId} .fb-comments-list {
+						${showCommentForm ? `
+							.${blockId} .fb-comments-list {
                 padding-bottom: 40px;
-            }
+							}
+							`
+							: ""
+						}
 
             /* Comment Items */
             .${blockId} .fb-comment {
@@ -1478,12 +1572,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 margin-bottom: 20px;
                 padding-bottom: 15px;
                 border-bottom: 1px solid #e1e1e1;
-            }
-
-            .${blockId} .fb-reply-title {
+								}
+								
+						.${blockId} .fb-reply-title {
+									color: #1e1e1e;
                 font-size: 18px;
                 font-weight: 600;
-                color: #1e1e1e;
                 margin: 0;
             }
 
@@ -1595,6 +1689,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					width: 100%;
 				}
 
+				${
+					showCommentTitle 
+					? `
 				.${blockId} .fb-comment-count-title {
             ${commentCountTitleColor ? `color: ${commentCountTitleColor};` : ""}
 
@@ -1710,11 +1807,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${commentCountTitleHoverColor ? `color: ${commentCountTitleHoverColor};` : ""}
 				}
 
+				`
+					: ""
+				}
+
+
 				 .${blockId} .fb-comments-list {
 						${
 							commentListBottomSpacing.Desktop
 								? `padding-bottom: ${commentListBottomSpacing.Desktop}${commentListBottomSpacingUnits.Desktop};`
 								: ""
+						}
+				 }
+
+				 .${blockId} .fb-comments-list .fb-comment {
+						${
+							avatarGap.Desktop 
+							? `gap: ${avatarGap.Desktop}${avatarGapUnits.Desktop};`
+							: ""
 						}
 				 }
 
@@ -2295,7 +2405,234 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 				}
 
+				/** comment form */ 
+								${showCommentForm
+					? `
+					
+					.${blockId} .fb-comment-form .fb-comment-form-header {
+										${
+							formTitleSpacing.Desktop
+								? `margin-bottom: ${formTitleSpacing.Desktop}${formTitleSpacingUnits.Desktop};`
+								: ""
+						}
+					}
 
+										.${blockId} .fb-comment-form .fb-comment-form-header .fb-reply-title {
+            ${formTitleColor ? `color: ${formTitleColor};` : ""}
+
+
+            ${
+							formTitleGlobalTypoSwitcher.fontFamily === true &&
+							formTitleGlobalTypographyData.fontFamily
+								? `font-family: ${formTitleGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.fontSize === true &&
+							formTitleGlobalTypographyData.fontSize
+								? `font-size: ${formTitleGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.fontWeight === true &&
+							formTitleGlobalTypographyData.fontWeight
+								? `font-weight: ${formTitleGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.fontStyle === true &&
+							formTitleGlobalTypographyData.fontStyle
+								? `font-style: ${formTitleGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.textTransform === true &&
+							formTitleGlobalTypographyData.textTransform
+								? `text-transform: ${formTitleGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.textDecoration === true &&
+							formTitleGlobalTypographyData.textDecoration
+								? `text-decoration: ${formTitleGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.letterSpacing === true &&
+							formTitleGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${formTitleGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							formTitleGlobalTypoSwitcher.lineHeight === true &&
+							formTitleGlobalTypographyData.lineHeight
+								? `line-height: ${formTitleGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							formTitleGlobalTypoSwitcher.fontFamily === false &&
+							formTitleFontFamily
+								? `font-family: ${formTitleFontFamily};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.fontSize === false &&
+							formTitleFontSize.Desktop
+								? `font-size: ${formTitleFontSize.Desktop}${formTitleFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.fontWeight === false &&
+							formTitleFontWeight
+								? `font-weight: ${formTitleFontWeight};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.fontStyle === false &&
+							formTitleFontStyle
+								? `font-style: ${formTitleFontStyle};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.textTransform === false &&
+							formTitleTextTransform
+								? `text-transform: ${formTitleTextTransform};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.textDecoration === false &&
+							formTitleTextDecoration
+								? `text-decoration: ${formTitleTextDecoration};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.letterSpacing === false &&
+							formTitleLetterSpacing.Desktop
+								? `letter-spacing: ${formTitleLetterSpacing.Desktop}${formTitleLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							formTitleGlobalTypoSwitcher.lineHeight === false &&
+							formTitleLineHeight.Desktop
+								? `line-height: ${formTitleLineHeight.Desktop}${formTitleLineHeightUnits.Desktop};`
+								: ""
+						}
+
+			}
+
+							.${blockId} .fb-comment-form .fb-comment-form-header .fb-cancel-reply {
+            ${cancelReplyColor ? `color: ${cancelReplyColor};` : ""}
+
+
+            ${
+							cancelReplyGlobalTypoSwitcher.fontFamily === true &&
+							cancelReplyGlobalTypographyData.fontFamily
+								? `font-family: ${cancelReplyGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.fontSize === true &&
+							cancelReplyGlobalTypographyData.fontSize
+								? `font-size: ${cancelReplyGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.fontWeight === true &&
+							cancelReplyGlobalTypographyData.fontWeight
+								? `font-weight: ${cancelReplyGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.fontStyle === true &&
+							cancelReplyGlobalTypographyData.fontStyle
+								? `font-style: ${cancelReplyGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.textTransform === true &&
+							cancelReplyGlobalTypographyData.textTransform
+								? `text-transform: ${cancelReplyGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.textDecoration === true &&
+							cancelReplyGlobalTypographyData.textDecoration
+								? `text-decoration: ${cancelReplyGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.letterSpacing === true &&
+							cancelReplyGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${cancelReplyGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							cancelReplyGlobalTypoSwitcher.lineHeight === true &&
+							cancelReplyGlobalTypographyData.lineHeight
+								? `line-height: ${cancelReplyGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							cancelReplyGlobalTypoSwitcher.fontFamily === false &&
+							cancelReplyFontFamily
+								? `font-family: ${cancelReplyFontFamily};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.fontSize === false &&
+							cancelReplyFontSize.Desktop
+								? `font-size: ${cancelReplyFontSize.Desktop}${cancelReplyFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.fontWeight === false &&
+							cancelReplyFontWeight
+								? `font-weight: ${cancelReplyFontWeight};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.fontStyle === false &&
+							cancelReplyFontStyle
+								? `font-style: ${cancelReplyFontStyle};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.textTransform === false &&
+							cancelReplyTextTransform
+								? `text-transform: ${cancelReplyTextTransform};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.textDecoration === false &&
+							cancelReplyTextDecoration
+								? `text-decoration: ${cancelReplyTextDecoration};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.letterSpacing === false &&
+							cancelReplyLetterSpacing.Desktop
+								? `letter-spacing: ${cancelReplyLetterSpacing.Desktop}${cancelReplyLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							cancelReplyGlobalTypoSwitcher.lineHeight === false &&
+							cancelReplyLineHeight.Desktop
+								? `line-height: ${cancelReplyLineHeight.Desktop}${cancelReplyLineHeightUnits.Desktop};`
+								: ""
+						}
+
+			}
+
+				.${blockId} .fb-comment-form .fb-comment-form-header .fb-cancel-reply:hover{
+							${cancelReplyHoverColor ? `color: ${cancelReplyHoverColor};` : ""}
+				}
+
+					
+					`
+					: ""
+				}
 
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
@@ -2471,7 +2808,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/*=======================  Tablet Styles =====================  */
 				@media only screen and (max-width: 1024px ) {
 
-
+					${
+					showCommentTitle 
+					? `
 							.${blockId} .fb-comment-count-title  {
 							  ${
 									commentCountTitleGlobalTypoSwitcher.fontSize === false &&
@@ -2499,6 +2838,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									}
 
 						}
+									`
+					: ""
+				}
 
 										 .${blockId} .fb-comments-list {
 						${
@@ -2514,6 +2856,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									postCommentPaddingTabletWidth.top
 										? `padding : ${postCommentPaddingTabletWidth};`
 										: ""
+								}
+
+								${avatarGap.Tablet
+									? `gap: ${avatarGap.Tablet}${avatarGapUnits.Tablet};`
+									: ""
 								}
 						}
 
@@ -2684,6 +3031,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 
 
+						${showCommentForm 
+							? `
+							
+
+							.${blockId} .fb-comment-form .fb-comment-form-header {
+							
+																${
+										formTitleSpacing.Tablet
+											? `margin-bottom: ${formTitleSpacing.Tablet}${formTitleSpacingUnits.Tablet};`
+											: ""
+									}
+
+							}
+
+								.${blockId} .fb-comment-form .fb-comment-form-header .fb-reply-title {
+							  ${
+									formTitleGlobalTypoSwitcher.fontSize === false &&
+									formTitleFontSize.Tablet
+										? `font-size: ${formTitleFontSize.Tablet}${formTitleFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									formTitleGlobalTypoSwitcher.letterSpacing === false &&
+									formTitleLetterSpacing.Tablet
+										? `letter-spacing: ${formTitleLetterSpacing.Tablet}${formTitleLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									formTitleGlobalTypoSwitcher.lineHeight === false &&
+									formTitleLineHeight.Tablet
+										? `line-height: ${formTitleLineHeight.Tablet}${formTitleLineHeightUnits.Tablet};`
+										: ""
+								}
+
+						}
+								.${blockId} .fb-comment-form .fb-comment-form-header .fb-cancel-reply {
+							  ${
+									cancelReplyGlobalTypoSwitcher.fontSize === false &&
+									cancelReplyFontSize.Tablet
+										? `font-size: ${cancelReplyFontSize.Tablet}${cancelReplyFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									cancelReplyGlobalTypoSwitcher.letterSpacing === false &&
+									cancelReplyLetterSpacing.Tablet
+										? `letter-spacing: ${cancelReplyLetterSpacing.Tablet}${cancelReplyLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									cancelReplyGlobalTypoSwitcher.lineHeight === false &&
+									cancelReplyLineHeight.Tablet
+										? `line-height: ${cancelReplyLineHeight.Tablet}${cancelReplyLineHeightUnits.Tablet};`
+										: ""
+								}
+
+						}
+
+							`
+							: ""
+						}
+
+
 
 							/* Advanced Control Global Style - Tablet */
                 .${blockId}.fb-post-comment-form-block {
@@ -2758,8 +3167,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				
 				/*===========================  Mobile Styles ===========================  */
-				@media screen and (max-width: 767px) {
+				@media only screen and (max-width: 767px) {
 
+				${
+					showCommentTitle 
+					? `
 					.${blockId} .fb-comment-count-title  {
 					  ${
 							commentCountTitleGlobalTypoSwitcher.fontSize === false &&
@@ -2788,6 +3200,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					}
 
+							`
+					: ""
+				}
+
 									 .${blockId} .fb-comments-list {
 						${
 							commentListBottomSpacing.Mobile
@@ -2801,6 +3217,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								postCommentPaddingMobileWidth && postCommentPaddingMobile.top
 									? `padding: ${postCommentPaddingMobileWidth};`
 									: ""
+							}
+
+							${avatarGap.Mobile
+								? `gap: ${avatarGap.Mobile}${avatarGapUnits.Mobile};`
+								: ""
 							}
 					}	
 
@@ -2971,6 +3392,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								}
 
 					}
+
+
+					${showCommentForm 
+						? `
+
+
+						.${blockId} .fb-comment-form .fb-comment-form-header {
+						
+															${
+										formTitleSpacing.Mobile
+											? `margin-bottom: ${formTitleSpacing.Mobile}${formTitleSpacingUnits.Mobile};`
+											: ""
+									}
+
+						}
+
+							.${blockId} .fb-comment-form .fb-comment-form-header .fb-reply-title {
+								${
+									formTitleGlobalTypoSwitcher.fontSize === false &&
+									formTitleFontSize.Mobile
+										? `font-size: ${formTitleFontSize.Mobile}${formTitleFontSizeUnits.Mobile};`
+										: ""
+								}
+								${
+									formTitleGlobalTypoSwitcher.letterSpacing === false &&
+									formTitleLetterSpacing.Mobile
+										? `letter-spacing: ${formTitleLetterSpacing.Mobile}${formTitleLetterSpacingUnits.Mobile};`
+										: ""
+								}
+								${
+									formTitleGlobalTypoSwitcher.lineHeight === false &&
+									formTitleLineHeight.Mobile
+										? `line-height: ${formTitleLineHeight.Mobile}${formTitleLineHeightUnits.Mobile};`
+										: ""
+								}
+
+							}
+
+							.${blockId} .fb-comment-form .fb-comment-form-header .fb-cancel-reply {
+								${
+									cancelReplyGlobalTypoSwitcher.fontSize === false &&
+									cancelReplyFontSize.Mobile
+										? `font-size: ${cancelReplyFontSize.Mobile}${cancelReplyFontSizeUnits.Mobile};`
+										: ""
+								}
+								${
+									cancelReplyGlobalTypoSwitcher.letterSpacing === false &&
+									cancelReplyLetterSpacing.Mobile
+										? `letter-spacing: ${cancelReplyLetterSpacing.Mobile}${cancelReplyLetterSpacingUnits.Mobile};`
+										: ""
+								}
+								${
+									cancelReplyGlobalTypoSwitcher.lineHeight === false &&
+									cancelReplyLineHeight.Mobile
+										? `line-height: ${cancelReplyLineHeight.Mobile}${cancelReplyLineHeightUnits.Mobile};`
+										: ""
+								}
+
+							}
+
+						`
+						: ""
+					}
+
 												
 							 /* Advance Control Global Style - Mobile */
                 .${blockId}.fb-post-comment-form-block {
@@ -3155,8 +3640,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const styleControls = (
 		<>
+
+		{showCommentTitle && 
 			<PanelBody
-				title={__("Comments Title", "frontis-blocks")}
+				title={__("Comments Header", "frontis-blocks")}
 				initialOpen={false}
 			>
 				<FB_TypographyControl
@@ -3348,6 +3835,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 			</PanelBody>
 
+			}
+
 			<PanelBody
 				title={__("Comment Item", "frontis-blocks")}
 				initialOpen={false}
@@ -3379,6 +3868,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setAttributes={setAttributes}
 					/>
 
+										<FB_Range
+						min={0}
+						max={100}
+						label={__("Avatar Gap", "frontis-blocks")}
+						rangeValue={avatarGap}
+						onChangeHandler={(value) =>
+							setAttributes({ avatarGap: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ avatarGapUnits: value })
+						}
+						deviceType={deviceType}
+						units={avatarGapUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/> 
+
 					<FB_Range
 						min={0}
 						max={100}
@@ -3397,6 +3904,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						resetFallbackValue={""}
 					/>
 
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__("Define indentation level for nested replies.", "frontis-blocks")}
+					</p>
+
 					<FB_Range
 						min={0}
 						max={100}
@@ -3413,15 +3924,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={""}
-						help={__(
+						helpText={__(
 							"Add space below the comment list to separate it from the comment form or other content.",
 							"frontis-blocks",
 						)}
 					/>
-
-					{/* <p style={{ fontSize: "12px", color: "#888" }}>
-						{__("Add space below the comment list to separate it from the comment form or other content.", "frontis-blocks")}
-					</p> */}
 
 					<div className="fb-control-divider"></div>
 				</BaseControl>
@@ -4278,8 +4785,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 
-				<div className="fb-control-divider"></div>
-
 				<FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
 					bgColorSwitcher={replyButtonBgColorSwitcher}
@@ -4456,6 +4961,393 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 			</PanelBody>
+
+			{showCommentForm &&
+						<PanelBody
+				title={__("Form Header", "frontis-blocks")}
+				initialOpen={true}
+			>
+
+								<BaseControl
+					label={__("Header Title", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Style the form’s header title with elegant color and typography controls for a clear and welcoming visual tone.",
+							"frontis-blocks",
+						)}
+					</p>
+
+				<div className="fb-control-divider"></div>
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={formTitleGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ formTitleGlobalTypographyData: value })
+					}
+					globalTypoType={formTitleGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							formTitleGlobalTypoType: value,
+							formTitleGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...formTitleGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...formTitleGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={formTitleGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ formTitleGlobalTypoOption: value })
+					}
+					fontFamily={formTitleFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							formTitleFontFamily: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={formTitleFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							formTitleFontSize: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={formTitleFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ formTitleFontSizeUnits: value })
+					}
+					fontWeight={formTitleFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							formTitleFontWeight: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={formTitleFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							formTitleFontStyle: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={formTitleTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							formTitleTextTransform: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={formTitleTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							formTitleTextDecoration: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={formTitleLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							formTitleLetterSpacing: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={formTitleLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ formTitleLetterSpacingUnits: value })
+					}
+					lineHeight={formTitleLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							formTitleLineHeight: value,
+							formTitleGlobalTypoSwitcher: {
+								...formTitleGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={formTitleLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ formTitleLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={formTitleColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formTitleColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+
+					</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+						<BaseControl
+					label={__("Cancel Reply Action", "frontis-blocks")}
+					className="fb-setting-form-texts"
+				>
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Customize the cancel reply link with refined color and typography to ensure smooth, intuitive interaction feedback.",
+							"frontis-blocks",
+						)}
+					</p>
+					<div className="fb-control-divider"></div>
+
+								<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={cancelReplyGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ cancelReplyGlobalTypographyData: value })
+					}
+					globalTypoType={cancelReplyGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							cancelReplyGlobalTypoType: value,
+							cancelReplyGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...cancelReplyGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...cancelReplyGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={cancelReplyGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ cancelReplyGlobalTypoOption: value })
+					}
+					fontFamily={cancelReplyFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							cancelReplyFontFamily: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={cancelReplyFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							cancelReplyFontSize: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={cancelReplyFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ cancelReplyFontSizeUnits: value })
+					}
+					fontWeight={cancelReplyFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							cancelReplyFontWeight: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={cancelReplyFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							cancelReplyFontStyle: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={cancelReplyTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							cancelReplyTextTransform: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={cancelReplyTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							cancelReplyTextDecoration: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={cancelReplyLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							cancelReplyLetterSpacing: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={cancelReplyLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ cancelReplyLetterSpacingUnits: value })
+					}
+					lineHeight={cancelReplyLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							cancelReplyLineHeight: value,
+							cancelReplyGlobalTypoSwitcher: {
+								...cancelReplyGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={cancelReplyLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ cancelReplyLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={cancelReplyColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ cancelReplyColorSwitcher: value })
+					}
+				/>
+
+				{cancelReplyColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={cancelReplyColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								cancelReplyColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{cancelReplyColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={cancelReplyHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								cancelReplyHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+					
+
+					</BaseControl>
+
+
+
+				<div className="fb-control-divider"></div>
+
+				<FB_Range
+					// min={}
+					max={100}
+					label={__("Header Offset", "frontis-blocks")}
+					rangeValue={formTitleSpacing}
+					onChangeHandler={(value) =>
+						setAttributes({ formTitleSpacing: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ formTitleSpacingUnits: value })
+					}
+					deviceType={deviceType}
+					units={formTitleSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Adjust bottom spacing to maintain balanced separation between the form header and its content area.",
+							"frontis-blocks",
+						)}
+					</p>
+					
+
+			</PanelBody>
+				}
+
+
 		</>
 	);
 
