@@ -1,13 +1,11 @@
 import { __ } from "@wordpress/i18n";
-import {
-    EditorOptions,
-    AssetsGeneration,
-    VersionControl,
-    EditorEnhancements,
-    Performance,
-    SiteVisibility
-} from "./SettingsComponents";
-import { EditorOptionIcon, AssetGenerationIcon, VersionControlIcon, EditorEnhancementIcon, PerformanceIcon, SiteVisibilityIcon, ThemeFontIcon } from "../icons";
+import EditorOptions from './EditorOptions';
+import AssetsGeneration from './AssetsGeneration';
+import VersionControl from './VersionControl';
+import EditorEnhancements from './EditorEnhancements';
+import Performance from './Performance';
+import SiteVisibility from './SiteVisibility';
+import { EditorOptionIcon, AssetGenerationIcon, VersionControlIcon, EditorEnhancementIcon, PerformanceIcon, SiteVisibilityIcon, ThemeFontIcon } from "../../icons";
 
 
 const SettingsTabs = [

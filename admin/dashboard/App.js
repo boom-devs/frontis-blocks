@@ -2,9 +2,9 @@ import { useState, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TabPanel } from './components';
+import TabPanel from './TabPanel';
 import TabMenus from './TabMenu';
-import { Crown, Logo } from './icons';
+import { Crown, Logo } from '../icons';
 
 const App = () => {
     const getTabFromUrl = () => {
