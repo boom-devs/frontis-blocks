@@ -386,6 +386,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		formInfoBorderRadiusLink,
 		/** =============== End Form Info =================== */
 
+
+		/** =============== Start Form Fields =================== */
+		
+		/** ============ Start Reply Button */
+		formFieldGlobalTypoSwitcher,
+		formFieldGlobalTypographyData,
+		formFieldGlobalTypoType,
+		formFieldGlobalTypoOption,
+		formFieldFontFamily,
+		formFieldFontSize,
+		formFieldFontSizeUnits,
+		formFieldFontWeight,
+		formFieldFontStyle,
+		formFieldTextTransform,
+		formFieldTextDecoration,
+		formFieldLetterSpacing,
+		formFieldLetterSpacingUnits,
+		formFieldLineHeight,
+		formFieldLineHeightUnits,
+
+		formFieldColorSwitcher,
+		formFieldColor,
+		formFieldHoverColor,
+
+		formFieldPlaceholderColor,
+
+		/** Background */
+		formFieldBgColorSwitcher,
+		formFieldNormalBackgroundType,
+		formFieldNormalClassicColor,
+		formFieldNormalGradientColor,
+		formFieldNormalCustomGradientSwitcher,
+		formFieldNormalCustomGradientInputValue,
+		formFieldHoverBackgroundType,
+		formFieldHoverClassicColor,
+		formFieldHoverGradientColor,
+		formFieldHoverCustomGradientSwitcher,
+		formFieldHoverCustomGradientInputValue,
+
+		formFieldPaddingUnits,
+		formFieldPaddingDesktop,
+		formFieldPaddingTablet,
+		formFieldPaddingMobile,
+		formFieldPaddingLink,
+
+		formFieldBorder,
+		formFieldBorderColorSwitcher,
+		formFieldBorderColor,
+		formFieldBorderHoverColor,
+		formFieldBorderUnits,
+		formFieldBorderDesktop,
+		formFieldBorderTablet,
+		formFieldBorderMobile,
+		formFieldBorderLink,
+
+		formFieldBorderRadiusUnits,
+		formFieldBorderRadiusDesktop,
+		formFieldBorderRadiusTablet,
+		formFieldBorderRadiusMobile,
+		formFieldBorderRadiusLink,
+
+		formFieldBoxShadowSwitcher,
+		formFieldBoxShadowValues,
+		formFieldBoxShadowCssValue,
+		formFieldBoxShadowHoverValues,
+		formFieldBoxShadowHoverCssValue,
+		/** =============== End Form Fields =================== */
+
 		/** ============ End Style Attributes ================= */
 
 		/** ============ Start Advanced Attributes ================= */
@@ -1706,6 +1774,274 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Border Radius */
 
 	/**  ============== End Form Info ================== */
+
+		/** Form Fields */
+	/** padding */
+	const handleFormFieldPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (formFieldPaddingLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldPaddingDesktop: {
+							...formFieldPaddingDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldPaddingTablet: {
+							...formFieldPaddingTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldPaddingMobile: {
+							...formFieldPaddingMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleFormFieldPaddingCombineBtn = () => {
+		setAttributes({ formFieldPaddingLink: !formFieldPaddingLink });
+	};
+
+	const handleFormFieldPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			formFieldPaddingUnits: {
+				...formFieldPaddingUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const formFieldPaddingDesktopWidth = `${formFieldPaddingDesktop.top}${formFieldPaddingUnits.Desktop} ${formFieldPaddingDesktop.right}${formFieldPaddingUnits.Desktop} ${formFieldPaddingDesktop.bottom}${formFieldPaddingUnits.Desktop} ${formFieldPaddingDesktop.left}${formFieldPaddingUnits.Desktop}`;
+	const formFieldPaddingTabletWidth = `${formFieldPaddingTablet.top}${formFieldPaddingUnits.Tablet} ${formFieldPaddingTablet.right}${formFieldPaddingUnits.Tablet} ${formFieldPaddingTablet.bottom}${formFieldPaddingUnits.Tablet} ${formFieldPaddingTablet.left}${formFieldPaddingUnits.Tablet}`;
+	const formFieldPaddingMobileWidth = `${formFieldPaddingMobile.top}${formFieldPaddingUnits.Mobile} ${formFieldPaddingMobile.right}${formFieldPaddingUnits.Mobile} ${formFieldPaddingMobile.bottom}${formFieldPaddingUnits.Mobile} ${formFieldPaddingMobile.left}${formFieldPaddingUnits.Mobile}`;
+	/** End padding */
+
+	/** Start Border */
+	const handleFormFieldBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (formFieldBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldBorderDesktop: {
+							...formFieldBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldBorderTablet: {
+							...formFieldBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldBorderMobile: {
+							...formFieldBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleFormFieldBorderCombineBtn = () => {
+		setAttributes({ formFieldBorderLink: !formFieldBorderLink });
+	};
+
+	const handleFormFieldBorderUnitsHandler = (unit) => {
+		setAttributes({
+			formFieldBorderUnits: {
+				...formFieldBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const formFieldBorderDesktopWidth = `${formFieldBorderDesktop.top}${formFieldBorderUnits.Desktop} ${formFieldBorderDesktop.right}${formFieldBorderUnits.Desktop} ${formFieldBorderDesktop.bottom}${formFieldBorderUnits.Desktop} ${formFieldBorderDesktop.left}${formFieldBorderUnits.Desktop}`;
+	const formFieldBorderTabletWidth = `${formFieldBorderTablet.top}${formFieldBorderUnits.Tablet} ${formFieldBorderTablet.right}${formFieldBorderUnits.Tablet} ${formFieldBorderTablet.bottom}${formFieldBorderUnits.Tablet} ${formFieldBorderTablet.left}${formFieldBorderUnits.Tablet}`;
+	const formFieldBorderMobileWidth = `${formFieldBorderMobile.top}${formFieldBorderUnits.Mobile} ${formFieldBorderMobile.right}${formFieldBorderUnits.Mobile} ${formFieldBorderMobile.bottom}${formFieldBorderUnits.Mobile} ${formFieldBorderMobile.left}${formFieldBorderUnits.Mobile}`;
+	/** End Border */
+
+	/** Border Radius */
+	const handleFormFieldBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (formFieldBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formFieldBorderRadiusDesktop: {
+							...formFieldBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formFieldBorderRadiusTablet: {
+							...formFieldBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formFieldBorderRadiusMobile: {
+							...formFieldBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleFormFieldBorderRadiusCombineBtn = () => {
+		setAttributes({
+			formFieldBorderRadiusLink: !formFieldBorderRadiusLink,
+		});
+	};
+
+	const handleFormFieldBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			formFieldBorderRadiusUnits: {
+				...formFieldBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const formFieldBorderRadiusDesktopWidth = `${formFieldBorderRadiusDesktop.top}${formFieldBorderRadiusUnits.Desktop} ${formFieldBorderRadiusDesktop.right}${formFieldBorderRadiusUnits.Desktop} ${formFieldBorderRadiusDesktop.bottom}${formFieldBorderRadiusUnits.Desktop} ${formFieldBorderRadiusDesktop.left}${formFieldBorderRadiusUnits.Desktop}`;
+	const formFieldBorderRadiusTabletWidth = `${formFieldBorderRadiusTablet.top}${formFieldBorderRadiusUnits.Tablet} ${formFieldBorderRadiusTablet.right}${formFieldBorderRadiusUnits.Tablet} ${formFieldBorderRadiusTablet.bottom}${formFieldBorderRadiusUnits.Tablet} ${formFieldBorderRadiusTablet.left}${formFieldBorderRadiusUnits.Tablet}`;
+	const formFieldBorderRadiusMobileWidth = `${formFieldBorderRadiusMobile.top}${formFieldBorderRadiusUnits.Mobile} ${formFieldBorderRadiusMobile.right}${formFieldBorderRadiusUnits.Mobile} ${formFieldBorderRadiusMobile.bottom}${formFieldBorderRadiusUnits.Mobile} ${formFieldBorderRadiusMobile.left}${formFieldBorderRadiusUnits.Mobile}`;
+	/** End Border Radius */
+	/**  ============== End Form Fields ================== */
 
 	/* ==================================================== */
 	/* Start Global Padding */
@@ -3532,6 +3868,195 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 				
+				.${blockId} .fb-comment-form .fb-comment-form-element div>input::placeholder , 
+				.${blockId} .fb-comment-form .fb-comment-form-element .fb-comment-textarea::placeholder{
+				            ${formFieldPlaceholderColor ? `color: ${formFieldPlaceholderColor};` : ""}
+				}
+
+				.${blockId} .fb-comment-form .fb-comment-form-element div>input , 
+				.${blockId} .fb-comment-form .fb-comment-form-element .fb-comment-textarea {
+				
+
+
+            ${formFieldColor ? `color: ${formFieldColor};` : ""}
+
+
+            ${
+							formFieldGlobalTypoSwitcher.fontFamily === true &&
+							formFieldGlobalTypographyData.fontFamily
+								? `font-family: ${formFieldGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.fontSize === true &&
+							formFieldGlobalTypographyData.fontSize
+								? `font-size: ${formFieldGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.fontWeight === true &&
+							formFieldGlobalTypographyData.fontWeight
+								? `font-weight: ${formFieldGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.fontStyle === true &&
+							formFieldGlobalTypographyData.fontStyle
+								? `font-style: ${formFieldGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.textTransform === true &&
+							formFieldGlobalTypographyData.textTransform
+								? `text-transform: ${formFieldGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.textDecoration === true &&
+							formFieldGlobalTypographyData.textDecoration
+								? `text-decoration: ${formFieldGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.letterSpacing === true &&
+							formFieldGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${formFieldGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							formFieldGlobalTypoSwitcher.lineHeight === true &&
+							formFieldGlobalTypographyData.lineHeight
+								? `line-height: ${formFieldGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							formFieldGlobalTypoSwitcher.fontFamily === false &&
+							formFieldFontFamily
+								? `font-family: ${formFieldFontFamily};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.fontSize === false &&
+							formFieldFontSize.Desktop
+								? `font-size: ${formFieldFontSize.Desktop}${formFieldFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.fontWeight === false &&
+							formFieldFontWeight
+								? `font-weight: ${formFieldFontWeight};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.fontStyle === false &&
+							formFieldFontStyle
+								? `font-style: ${formFieldFontStyle};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.textTransform === false &&
+							formFieldTextTransform
+								? `text-transform: ${formFieldTextTransform};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.textDecoration === false &&
+							formFieldTextDecoration
+								? `text-decoration: ${formFieldTextDecoration};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.letterSpacing === false &&
+							formFieldLetterSpacing.Desktop
+								? `letter-spacing: ${formFieldLetterSpacing.Desktop}${formFieldLetterSpacingUnits.Desktop};`
+								: ""
+						}
+
+						${
+							formFieldGlobalTypoSwitcher.lineHeight === false &&
+							formFieldLineHeight.Desktop
+								? `line-height: ${formFieldLineHeight.Desktop}${formFieldLineHeightUnits.Desktop};`
+								: ""
+						}
+
+										${
+											formFieldNormalBackgroundType === "gradient"
+												? `
+									${
+										formFieldNormalCustomGradientSwitcher &&
+										formFieldNormalCustomGradientInputValue
+											? `background: ${formFieldNormalCustomGradientInputValue};`
+											: `background: ${formFieldNormalGradientColor};`
+									}
+								`
+												: `
+									${
+										formFieldNormalClassicColor
+											? `background: ${formFieldNormalClassicColor};`
+											: ""
+									}
+							`
+										}
+
+								
+											${
+												formFieldPaddingDesktopWidth &&
+												formFieldPaddingDesktop.top
+													? `padding: ${formFieldPaddingDesktopWidth};`
+													: ""
+											}
+
+							${formFieldBorder ? `border: ${formFieldBorder};` : ""}
+							${
+								formFieldBorderDesktopWidth && formFieldBorderDesktop.top
+									? `border-width: ${formFieldBorderDesktopWidth};`
+									: ""
+							}
+							${
+								formFieldBorderRadiusDesktopWidth &&
+								formFieldBorderRadiusDesktop.top
+									? `border-radius: ${formFieldBorderRadiusDesktopWidth};`
+									: ""
+							}
+							${formFieldBorderColor ? `border-color: ${formFieldBorderColor};` : ""}
+
+
+				}
+
+
+												.${blockId} .fb-comment-form .fb-comment-form-element div>input:focus , 
+				.${blockId} .fb-comment-form .fb-comment-form-element .fb-comment-textarea:focus {
+								${formFieldHoverColor ? `color: ${formFieldHoverColor};` : ""}
+							${
+								formFieldHoverBackgroundType === "gradient"
+									? `  
+							${
+								formFieldHoverCustomGradientSwitcher &&
+								formFieldHoverCustomGradientInputValue
+									? `background: ${formFieldHoverCustomGradientInputValue};`
+									: `background: ${formFieldHoverGradientColor};`
+							}
+							`
+									: `
+									${
+										formFieldHoverClassicColor
+											? `background: ${formFieldHoverClassicColor};`
+											: ""
+									}
+							`
+							}
+							${
+								formFieldBorderHoverColor
+									? `border-color: ${formFieldBorderHoverColor};`
+									: ""
+							}
+
+				}
+
+
+
+				
 				`
 										: ""
 								}
@@ -4057,6 +4582,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						}
 
+
+									.${blockId} .fb-comment-form .fb-comment-form-element div>input , 
+				.${blockId} .fb-comment-form .fb-comment-form-element .fb-comment-textarea {
+							  ${
+									formFieldGlobalTypoSwitcher.fontSize === false &&
+									formFieldFontSize.Tablet
+										? `font-size: ${formFieldFontSize.Tablet}${formFieldFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									formFieldGlobalTypoSwitcher.letterSpacing === false &&
+									formFieldLetterSpacing.Tablet
+										? `letter-spacing: ${formFieldLetterSpacing.Tablet}${formFieldLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									formFieldGlobalTypoSwitcher.lineHeight === false &&
+									formFieldLineHeight.Tablet
+										? `line-height: ${formFieldLineHeight.Tablet}${formFieldLineHeightUnits.Tablet};`
+										: ""
+								}
+
+									${
+										formFieldPaddingTabletWidth &&
+										formFieldPaddingTablet.top
+											? `padding: ${formFieldPaddingTabletWidth};`
+											: ""
+									}
+								 ${
+										formFieldBorderTabletWidth && formFieldBorderTablet.top
+											? `border-width: ${formFieldBorderTabletWidth};`
+											: ""
+									}
+                ${
+									formFieldBorderRadiusTabletWidth &&
+									formFieldBorderRadiusTablet.top
+										? `border-radius: ${formFieldBorderRadiusTabletWidth};`
+										: ""
+								}
+
+						}
+
+
 							`
 								: ""
 						}
@@ -4491,6 +5059,49 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											? `margin-bottom: ${formInfoSpacing.Mobile}${formInfoSpacingUnits.Mobile};`
 											: ""
 									}
+
+					}
+
+
+									.${blockId} .fb-comment-form .fb-comment-form-element div>input , 
+				.${blockId} .fb-comment-form .fb-comment-form-element .fb-comment-textarea {
+
+					  ${
+							formFieldGlobalTypoSwitcher.fontSize === false &&
+							formFieldFontSize.Mobile
+								? `font-size: ${formFieldFontSize.Mobile}${formFieldFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.letterSpacing === false &&
+							formFieldLetterSpacing.Mobile
+								? `letter-spacing: ${formFieldLetterSpacing.Mobile}${formFieldLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							formFieldGlobalTypoSwitcher.lineHeight === false &&
+							formFieldLineHeight.Mobile
+								? `line-height: ${formFieldLineHeight.Mobile}${formFieldLineHeightUnits.Mobile};`
+								: ""
+						}
+
+										${
+											formFieldPaddingMobileWidth &&
+											formFieldPaddingMobile.top
+												? `padding: ${formFieldPaddingMobileWidth};`
+												: ""
+										}
+							 ${
+									formFieldBorderMobileWidth && formFieldBorderMobile.top
+										? `border-width: ${formFieldBorderMobileWidth};`
+										: ""
+								}
+                ${
+									formFieldBorderRadiusMobileWidth &&
+									formFieldBorderRadiusMobile.top
+										? `border-radius: ${formFieldBorderRadiusMobileWidth};`
+										: ""
+								}
 
 					}
 
@@ -6909,6 +7520,341 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							resetFallbackValue={""}
 						/>
 					</PanelBody>
+
+
+			<PanelBody
+				title={__("Input Fields", "frontis-blocks")}
+				initialOpen={true}
+			>
+
+					<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={formFieldGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ formFieldGlobalTypographyData: value })
+					}
+					globalTypoType={formFieldGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							formFieldGlobalTypoType: value,
+							formFieldGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...formFieldGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...formFieldGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={formFieldGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ formFieldGlobalTypoOption: value })
+					}
+					fontFamily={formFieldFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							formFieldFontFamily: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={formFieldFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							formFieldFontSize: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={formFieldFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ formFieldFontSizeUnits: value })
+					}
+					fontWeight={formFieldFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							formFieldFontWeight: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={formFieldFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							formFieldFontStyle: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={formFieldTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							formFieldTextTransform: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={formFieldTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							formFieldTextDecoration: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={formFieldLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							formFieldLetterSpacing: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={formFieldLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ formFieldLetterSpacingUnits: value })
+					}
+					lineHeight={formFieldLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							formFieldLineHeight: value,
+							formFieldGlobalTypoSwitcher: {
+								...formFieldGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={formFieldLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ formFieldLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+	<FB_ColorControl
+						label={__("Placeholder Color", "frontis-blocks")}
+						globalColor={formFieldPlaceholderColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formFieldPlaceholderColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+
+<div className="fb-control-divider"></div>
+				{/* <FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={formFieldColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ formFieldColorSwitcher: value })
+					}
+				/> */}
+
+
+				{/* {FB_SwitcherControl === "normal" && ( */}
+					<FB_ColorControl
+						label={__("Color", "frontis-blocks")}
+						globalColor={formFieldColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formFieldColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				{/* )} */}
+
+				{/* {FB_SwitcherControl === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={formFieldHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formFieldHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)} */}
+
+				<FB_BackgroundColorControl
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={formFieldBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ formFieldBgColorSwitcher: value })
+					}
+					normalBackgroundType={formFieldNormalBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ formFieldNormalBackgroundType: value })
+					}
+					normalClassicColor={formFieldNormalClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							formFieldNormalClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={formFieldNormalGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							formFieldNormalGradientColor: value === undefined ? "" : value,
+						})
+					}
+					normalCustomGradientSwitcher={formFieldNormalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ formFieldNormalCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={
+						formFieldNormalCustomGradientInputValue
+					}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ formFieldNormalCustomGradientInputValue: value })
+					}
+					hoverBackgroundType={formFieldHoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ formFieldHoverBackgroundType: value })
+					}
+					hoverClassicColor={formFieldHoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							formFieldHoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={formFieldHoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							formFieldHoverGradientColor: value === undefined ? "" : value,
+						})
+					}
+					hoverCustomGradientSwitcher={formFieldHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ formFieldHoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={
+						formFieldHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ formFieldHoverCustomGradientInputValue: value })
+					}
+					isBackgroundImage={false}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleFormFieldPaddingUnitsHandler}
+					spacingUnits={formFieldPaddingUnits}
+					spacingDesktop={formFieldPaddingDesktop}
+					spacingTablet={formFieldPaddingTablet}
+					spacingMobile={formFieldPaddingMobile}
+					handleSpacingUnitHandler={handleFormFieldPaddingUnitChange}
+					spacingCombineBtn={formFieldPaddingLink}
+					spacingCombineBtnHandler={handleFormFieldPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={formFieldBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ formFieldBorder: value })}
+				/>
+
+				{/* <FB_SwitcherControl
+					label={__("Border", "frontis-blocks")}
+					globalSwitcher={formFieldBorderColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ formFieldBorderColorSwitcher: value })
+					}
+					showFocus={true}
+	hideHover={true}
+				/> */}
+
+				{/* {formFieldBorderColorSwitcher === "normal" && ( */}
+					<FB_ColorControl
+						label={__("Border Color", "frontis-blocks")}
+						globalColor={formFieldBorderColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formFieldBorderColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				{/* )} */}
+
+				{/* {formFieldBorderColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={formFieldBorderHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								formFieldBorderHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)} */}
+
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleFormFieldBorderUnitsHandler}
+					spacingUnits={formFieldBorderUnits}
+					spacingDesktop={formFieldBorderDesktop}
+					spacingTablet={formFieldBorderTablet}
+					spacingMobile={formFieldBorderMobile}
+					handleSpacingUnitHandler={handleFormFieldBorderUnitChange}
+					spacingCombineBtn={formFieldBorderLink}
+					spacingCombineBtnHandler={handleFormFieldBorderCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleFormFieldBorderRadiusUnitsHandler}
+					spacingUnits={formFieldBorderRadiusUnits}
+					spacingDesktop={formFieldBorderRadiusDesktop}
+					spacingTablet={formFieldBorderRadiusTablet}
+					spacingMobile={formFieldBorderRadiusMobile}
+					handleSpacingUnitHandler={handleFormFieldBorderRadiusUnitChange}
+					spacingCombineBtn={formFieldBorderRadiusLink}
+					spacingCombineBtnHandler={handleFormFieldBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+
+			
+			</PanelBody>
+
 				</>
 			)}
 		</>
