@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { useState, useEffect, useCallback } from '@wordpress/element';
-import ConfirmationModal from '../common/ConfirmationModal';
+import ConfirmationModal from '../../components/common/Button';
 import { toast } from 'react-toastify';
 
 const AssetsGeneration = () => {

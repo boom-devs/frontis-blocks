@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { Play, Plus } from '../../icons';
-import Button from '../common/Button';
+import Button from '../../components/common/Button';
 
 const VideoBanner = () => {
 

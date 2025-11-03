@@ -1,6 +1,6 @@
 import React from 'react';
 import { __ } from '@wordpress/i18n';
-import Button from '../common/Button';
+import Button from '../../components/common/Button';
 import { Sparkles } from '../../icons';
 
 const ProUpgradeCard = () => {
