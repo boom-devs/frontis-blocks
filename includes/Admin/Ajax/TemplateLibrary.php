@@ -742,138 +742,120 @@ class TemplateLibrary extends AjaxBase {
     }
 
     /**
+     * Create a custom block-template and assign it to the "page" post-type.
+     *
+     * Put this in your theme’s functions.php or in a small MU-plugin.
+     */
+    public function create_single_page_template($slug, $content, $title) {
+
+        $existing = get_page_by_path(
+            $slug,
+            OBJECT,
+            'wp_template'
+        );
+
+        if ( $existing ) {
+            return; // already created
+        }
+
+        $template_id = wp_insert_post( [
+            'post_title'   => $slug,                 // Human readable title
+            'post_name'    => $slug, // slug
+            'post_content' => $content,
+            'post_status'  => 'publish',
+            'post_type'    => 'wp_template',
+        ] );
+
+        if ( is_wp_error( $template_id ) ) {
+            return false;
+        }
+
+        wp_set_object_terms( $template_id, get_stylesheet(), 'wp_theme' );
+        update_option( 'fb_template_single_page_created', true );
+    }
+
+    /**
      * AJAX: Push a single template to wp_template
      */
     public function push_template() {
         $this->check_permission();
     
-        $slug       = sanitize_title($_POST['slug'] ?? '');
-        $title      = sanitize_text_field($_POST['title'] ?? '');
-        $content    = wp_kses_post($_POST['content'] ?? '');
+        $slug       = $_POST['slug'];
+        $title      = $_POST['title'];
+        $content    = $_POST['content'];
         $post_types = array_map('sanitize_text_field', (array)($_POST['post_types'] ?? []));
     
         if (empty($slug) || empty($title) || empty($content)) {
             wp_send_json_error(['message' => 'Required fields missing']);
         }
     
-        $current_theme = get_stylesheet();
-        $template_id = $current_theme . '//' . $slug;
-    
-        if (get_block_template($template_id)) {
-            wp_send_json_success([
-                'message'     => 'Template already exists',
-                'template_id' => $template_id,
-                'skipped'     => true
-            ]);
+        $this->create_single_page_template($slug, $content, $title);
+
+        wp_send_json_success(['message' => 'Template created']);
+    }
+
+    function create_template_part($content, $slug, $title, $area) {
+        // Check if template parts are supported
+        if ( ! function_exists( 'wp_is_block_theme' ) || ! wp_is_block_theme() ) {
+            return;
         }
     
-        $post_id = wp_insert_post([
+        // Check if the template part already exists
+        $existing_template_part = get_posts( array(
+            'post_type'      => 'wp_template_part',
+            'post_status'    => 'publish',
+            'name'           => $slug,
+            'posts_per_page' => 1,
+            'fields'         => 'ids',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'wp_theme',
+                    'field'    => 'slug',
+                    'terms'    => get_stylesheet(), // Current theme
+                ),
+            ),
+        ) );
+    
+        $post_data = array(
+            'post_content' => $header_content,
             'post_title'   => $title,
             'post_name'    => $slug,
-            'post_content' => $content,
+            'post_type'    => 'wp_template_part',
             'post_status'  => 'publish',
-            'post_type'    => 'wp_template',
-        ], true);
+            'tax_input'    => array(
+                'wp_theme' => get_stylesheet(),
+            ),
+        );
     
-        if (is_wp_error($post_id)) {
-            wp_send_json_error(['message' => $post_id->get_error_message()]);
+        if ( ! empty( $existing_template_part ) ) {
+            // Update existing
+            $post_data['ID'] = $existing_template_part[0];
+            wp_update_post( $post_data );
+        } else {
+            // Insert new
+            $post_id = wp_insert_post( $post_data );
+    
+            // Assign to theme taxonomy
+            if ( $post_id ) {
+                wp_set_object_terms( $post_id, get_stylesheet(), 'wp_theme' );
+            }
         }
     
-        if (!empty($post_types)) {
-            update_post_meta($post_id, '_wp_post_types', $post_types);
-        }
-    
-        // CRITICAL: Clear ALL FSE caches
-        if (function_exists('wp_clean_block_template_cache')) {
-            wp_clean_block_template_cache();
-        }
-    
-        // Extra: Force clear transients
-        delete_transient('wp_template_partials');
-        delete_transient('_wp_template_partials');
-        delete_transient('block_template_partials');
-    
-        // Clear object cache
-        wp_cache_flush();
-    
-        wp_send_json_success([
-            'message'     => 'Template created',
-            'template_id' => $template_id,
-            'post_id'     => $post_id
-        ]);
+        wp_set_object_terms( $post_id ?? $existing_template_part[0], $$area, 'wp_template_part_area' );
     }
 
     public function push_template_parts() {
         $this->check_permission();
-    
-        // Fix: parts[0][title], parts[0][slug] → এভাবে আসবে
+
         $parts_data = [];
         if (isset($_POST['parts']) && is_array($_POST['parts'])) {
             foreach ($_POST['parts'] as $part) {
-                $parts_data[] = [
-                    'title'   => sanitize_text_field($part['title'] ?? ''),
-                    'slug'    => sanitize_title($part['slug'] ?? ''),
-                    'content' => wp_kses_post($part['content'] ?? ''),
-                    'area'    => sanitize_text_field($part['area'] ?? 'uncategorized'),
-                ];
+                $this->create_template_part($part['content'], $part['slug'], $part['title'], $part['area']);
             }
         }
-    
-        if (empty($parts_data)) {
-            wp_send_json_error(['message' => 'No template parts data provided']);
-        }
-    
-        $current_theme = get_stylesheet();
-        $created = 0;
-        $skipped = 0;
-        $errors = [];
-    
-        foreach ($parts_data as $part) {
-            $slug    = $part['slug'];
-            $title   = $part['title'];
-            $content = $part['content'];
-            $area    = $part['area'];
-    
-            if (empty($slug) || empty($title) || $content === '') {
-                $errors[] = "$slug: Missing required fields";
-                continue;
-            }
-    
-            $part_id = $current_theme . '//' . $slug;
-    
-            if (get_block_template($part_id, 'wp_template_part')) {
-                $skipped++;
-                continue;
-            }
-    
-            $post_id = wp_insert_post([
-                'post_title'   => $title,
-                'post_name'    => $slug,
-                'post_content' => $content,
-                'post_status'  => 'publish',
-                'post_type'    => 'wp_template_part',
-            ], true);
-    
-            if (is_wp_error($post_id)) {
-                $errors[] = "$slug: " . $post_id->get_error_message();
-                continue;
-            }
-    
-            update_post_meta($post_id, 'wp_template_part_area', $area);
-            $created++;
-        }
-    
-        if (function_exists('wp_clean_block_template_cache')) {
-            wp_clean_block_template_cache();
-        }
-        delete_transient('wp_template_partials');
-        wp_cache_flush();
     
         wp_send_json_success([
-            'message'  => 'Template parts pushed',
-            'created'  => $created,
-            'skipped'  => $skipped,
-            'errors'   => $errors
+            'message'  => 'Template parts created',
         ]);
     }
 
