@@ -75,6 +75,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		commentCountTitleSpacingUnits,
 		/** =============== End Comments Title */
 
+		/** =============== Start Form info =================== */
+		loggedInTextGlobalTypoSwitcher,
+		loggedInTextGlobalTypographyData, 
+		loggedInTextGlobalTypoType,
+		loggedInTextGlobalTypoOption,
+		loggedInTextFontFamily,
+		loggedInTextFontSize,
+		loggedInTextFontSizeUnits,
+		loggedInTextFontWeight,
+		loggedInTextFontStyle,
+		loggedInTextTextTransform,
+		loggedInTextTextDecoration,
+		loggedInTextLetterSpacing,
+		loggedInTextLetterSpacingUnits,
+		loggedInTextLineHeight,
+		loggedInTextLineHeightUnits,
+		
+		loggedInTextColorSwitcher,
+		loggedInTextColor,
+		loggedInTextHoverColor,
+
+		loggedInLinkColorSwitcher,
+		loggedInLinkColor,
+		loggedInLinkHoverColor, 
+
+		formInfoSpacing,
+		formInfoSpacingUnits,  
+		/** =============== End Form Info =================== */
+
 		/** ================ Start Comment Item */
 		postCommentPaddingUnits,
 		postCommentPaddingDesktop,
@@ -3011,6 +3040,131 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					: ""
 				}
 
+								${
+					showCommentForm
+					? `
+				.${blockId} .fb-comment-form .fb-logged-in-as {
+            ${loggedInTextColor ? `color: ${loggedInTextColor};` : ""}
+
+            ${
+							loggedInTextGlobalTypoSwitcher.fontFamily === true &&
+							loggedInTextGlobalTypographyData.fontFamily
+								? `font-family: ${loggedInTextGlobalTypographyData.fontFamily};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.fontSize === true &&
+							loggedInTextGlobalTypographyData.fontSize
+								? `font-size: ${loggedInTextGlobalTypographyData.fontSize};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.fontWeight === true &&
+							loggedInTextGlobalTypographyData.fontWeight
+								? `font-weight: ${loggedInTextGlobalTypographyData.fontWeight};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.fontStyle === true &&
+							loggedInTextGlobalTypographyData.fontStyle
+								? `font-style: ${loggedInTextGlobalTypographyData.fontStyle};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.textTransform === true &&
+							loggedInTextGlobalTypographyData.textTransform
+								? `text-transform: ${loggedInTextGlobalTypographyData.textTransform};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.textDecoration === true &&
+							loggedInTextGlobalTypographyData.textDecoration
+								? `text-decoration: ${loggedInTextGlobalTypographyData.textDecoration};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.letterSpacing === true &&
+							loggedInTextGlobalTypographyData.letterSpacing
+								? `letter-spacing: ${loggedInTextGlobalTypographyData.letterSpacing};`
+								: ""
+						}
+            ${
+							loggedInTextGlobalTypoSwitcher.lineHeight === true &&
+							loggedInTextGlobalTypographyData.lineHeight
+								? `line-height: ${loggedInTextGlobalTypographyData.lineHeight};`
+								: ""
+						}
+
+						${
+							loggedInTextGlobalTypoSwitcher.fontFamily === false &&
+							loggedInTextFontFamily
+								? `font-family: ${loggedInTextFontFamily};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.fontSize === false &&
+							loggedInTextFontSize.Desktop
+								? `font-size: ${loggedInTextFontSize.Desktop}${loggedInTextFontSizeUnits.Desktop};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.fontWeight === false &&
+							loggedInTextFontWeight
+								? `font-weight: ${loggedInTextFontWeight};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.fontStyle === false &&
+							loggedInTextFontStyle
+								? `font-style: ${loggedInTextFontStyle};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.textTransform === false &&
+							loggedInTextTextDecoration
+								? `text-transform: ${loggedInTextTextTransform};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.textDecoration === false &&
+							loggedInTextTextDecoration
+								? `text-decoration: ${loggedInTextTextDecoration};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.letterSpacing === false &&
+							loggedInTextLetterSpacing.Desktop
+								? `letter-spacing: ${loggedInTextLetterSpacing.Desktop}${loggedInTextLetterSpacingUnits.Desktop};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.lineHeight === false &&
+							loggedInTextLineHeight.Desktop
+								? `line-height: ${loggedInTextLineHeight.Desktop}${loggedInTextLineHeightUnits.Desktop};`
+								: ""
+						}
+
+						${
+							formInfoSpacing.Desktop
+								? `margin-bottom: ${formInfoSpacing.Desktop}${formInfoSpacingUnits.Desktop};`
+								: ""
+						}
+
+			}
+
+			
+
+				.${blockId} .fb-comment-form  .fb-logged-in-as:hover {
+					${loggedInTextHoverColor ? `color: ${loggedInTextHoverColor};` : ""}
+				}
+
+				.${blockId} .fb-comment-form .fb-logged-is-as a:hover {
+						${loggedInLinkHoverColor ? `color : ${loggedInLinkHoverColor};` : ""}
+				}
+				`
+					: ""
+				}
+
 				/* Advance Control Global Style */
 				.${blockId}.fb-post-comment-form-block{
 			   ${postGlobalPositionType === "default" ? `position: relative;` : ""}
@@ -3485,6 +3639,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						}
 
+						.${blockId} .fb-comment-form .fb-logged-in-as  {
+							  ${
+									loggedInTextGlobalTypoSwitcher.fontSize === false &&
+									loggedInTextFontSize.Tablet
+										? `font-size: ${loggedInTextFontSize.Tablet}${loggedInTextFontSizeUnits.Tablet};`
+										: ""
+								}
+                ${
+									loggedInTextGlobalTypoSwitcher.letterSpacing === false &&
+									loggedInTextLetterSpacing.Tablet
+										? `letter-spacing: ${loggedInTextLetterSpacing.Tablet}${loggedInTextLetterSpacingUnits.Tablet};`
+										: ""
+								}
+                ${
+									loggedInTextGlobalTypoSwitcher.lineHeight === false &&
+									loggedInTextLineHeight.Tablet
+										? `line-height: ${loggedInTextLineHeight.Tablet}${loggedInTextLineHeightUnits.Tablet};`
+										: ""
+								}
+
+									${
+										formInfoSpacing.Tablet
+											? `margin-bottom: ${formInfoSpacing.Tablet}${formInfoSpacingUnits.Tablet};`
+											: ""
+									}
+
+						}
+
 							`
 							: ""
 						}
@@ -3872,6 +4054,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								}
 
 							}
+
+
+							
+
+
+
+
+.${blockId} .fb-comment-form .fb-logged-in-as{
+					  ${
+							loggedInTextGlobalTypoSwitcher.fontSize === false &&
+							loggedInTextFontSize.Mobile
+								? `font-size: ${loggedInTextFontSize.Mobile}${loggedInTextFontSizeUnits.Mobile};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.letterSpacing === false &&
+							loggedInTextLetterSpacing.Mobile
+								? `letter-spacing: ${loggedInTextLetterSpacing.Mobile}${loggedInTextLetterSpacingUnits.Mobile};`
+								: ""
+						}
+						${
+							loggedInTextGlobalTypoSwitcher.lineHeight === false &&
+							loggedInTextLineHeight.Mobile
+								? `line-height: ${loggedInTextLineHeight.Mobile}${loggedInTextLineHeightUnits.Mobile};`
+								: ""
+						}
+
+									${
+										formInfoSpacing.Mobile
+											? `margin-bottom: ${formInfoSpacing.Mobile}${formInfoSpacingUnits.Mobile};`
+											: ""
+									}
+
+					}
+
+
+
+
+
+
+
+
+
+					
 
 						`
 						: ""
@@ -5529,12 +5755,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 			</PanelBody>
-				
-
 
 						<PanelBody
 				title={__("Form Header", "frontis-blocks")}
-				initialOpen={true}
+				initialOpen={false}
 			>
 
 								<BaseControl
@@ -5912,6 +6136,258 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						)}
 					</p>
 					
+
+			</PanelBody>
+
+			<PanelBody
+				title={__("Form Info", "frontis-blocks")}
+				initialOpen={true}
+			>
+
+					<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Style the login information text — “Logged in as” and “Log out?” — with refined color, typography, and spacing controls for a polished, integrated look.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={loggedInTextGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ loggedInTextGlobalTypographyData: value })
+					}
+					globalTypoType={loggedInTextGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							loggedInTextGlobalTypoType: value,
+							loggedInTextGlobalTypoSwitcher:
+								value === "default"
+									? {
+											...loggedInTextGlobalTypoSwitcher,
+											fontFamily: false,
+											fontSize: false,
+											fontWeight: false,
+											fontStyle: false,
+											textTransform: false,
+											textDecoration: false,
+											letterSpacing: false,
+											lineHeight: false,
+									  }
+									: {
+											...loggedInTextGlobalTypoSwitcher,
+											fontFamily: true,
+											fontSize: true,
+											fontWeight: true,
+											fontStyle: true,
+											textTransform: true,
+											textDecoration: true,
+											letterSpacing: true,
+											lineHeight: true,
+									  },
+						});
+					}}
+					globalTypoOption={loggedInTextGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ loggedInTextGlobalTypoOption: value })
+					}
+					fontFamily={loggedInTextFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							loggedInTextFontFamily: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={loggedInTextFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							loggedInTextFontSize: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={loggedInTextFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ loggedInTextFontSizeUnits: value })
+					}
+					fontWeight={loggedInTextFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							loggedInTextFontWeight: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={loggedInTextFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							loggedInTextFontStyle: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={loggedInTextTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							loggedInTextTextTransform: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={loggedInTextTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							loggedInTextTextDecoration: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={loggedInTextLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							loggedInTextLetterSpacing: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={loggedInTextLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ loggedInTextLetterSpacingUnits: value })
+					}
+					lineHeight={loggedInTextLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							loggedInTextLineHeight: value,
+							loggedInTextGlobalTypoSwitcher: {
+								...loggedInTextGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={loggedInTextLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ loggedInTextLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+					<div className="fb-divider-control"></div>
+				
+					<BaseControl
+						label={__("Text", "frontis-blocks")}
+						className="fb-setting-form-texts"
+					>
+
+							<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Adjust the informational text color to maintain visual harmony and readability within the form header.sss",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={loggedInTextColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								loggedInTextColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+					</BaseControl>
+
+
+					<div className="fb-control-divider"></div>
+
+					<BaseControl
+						label={__("Link", "frontis-blocks")}
+						className="fb-setting-form-texts"
+					>
+
+							<p style={{ fontSize: "12px", color: "#888" }}>
+						{__(
+							"Define the link’s normal and hover colors to create a subtle yet engaging interactive experience.",
+							"frontis-blocks",
+						)}
+					</p>
+
+					<div className="fb-control-divider"></div>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={loggedInLinkColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ loggedInLinkColorSwitcher: value })
+					}
+				/>
+
+				{loggedInLinkColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={loggedInLinkColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								loggedInLinkColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+				{loggedInLinkColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={loggedInLinkHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								loggedInLinkHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)}
+
+					</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<FB_Range
+					// min={}
+					max={100}
+					label={__("Spacing", "frontis-blocks")}
+					rangeValue={formInfoSpacing}
+					onChangeHandler={(value) =>
+						setAttributes({ formInfoSpacing: value })
+					}
+					rangeUnitHandler={(value) =>
+						setAttributes({ formInfoSpacingUnits: value })
+					}
+					deviceType={deviceType}
+					units={formInfoSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
 
 			</PanelBody>
 						</>
