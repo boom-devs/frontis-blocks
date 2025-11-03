@@ -1689,9 +1689,102 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-
 	/** End LoggedIn Text **/
+
+		/** Start Background */
+	formInfoBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	formInfoNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	formInfoNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	formInfoNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	formInfoNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	formInfoNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	formInfoHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	formInfoHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	formInfoHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	formInfoHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	formInfoHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+
+	
+	/** Start Padding */
+	formInfoPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formInfoPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Padding */
+
 	/** === End Form Info Attributes ========= */
+
+
 
 
 	/** ============== Advanced Attributes ============== */

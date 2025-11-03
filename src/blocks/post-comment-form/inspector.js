@@ -75,35 +75,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		commentCountTitleSpacingUnits,
 		/** =============== End Comments Title */
 
-		/** =============== Start Form info =================== */
-		loggedInTextGlobalTypoSwitcher,
-		loggedInTextGlobalTypographyData, 
-		loggedInTextGlobalTypoType,
-		loggedInTextGlobalTypoOption,
-		loggedInTextFontFamily,
-		loggedInTextFontSize,
-		loggedInTextFontSizeUnits,
-		loggedInTextFontWeight,
-		loggedInTextFontStyle,
-		loggedInTextTextTransform,
-		loggedInTextTextDecoration,
-		loggedInTextLetterSpacing,
-		loggedInTextLetterSpacingUnits,
-		loggedInTextLineHeight,
-		loggedInTextLineHeightUnits,
-		
-		loggedInTextColorSwitcher,
-		loggedInTextColor,
-		loggedInTextHoverColor,
-
-		loggedInLinkColorSwitcher,
-		loggedInLinkColor,
-		loggedInLinkHoverColor, 
-
-		formInfoSpacing,
-		formInfoSpacingUnits,  
-		/** =============== End Form Info =================== */
-
 		/** ================ Start Comment Item */
 		postCommentPaddingUnits,
 		postCommentPaddingDesktop,
@@ -353,6 +324,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		cancelReplyColorSwitcher,
 		cancelReplyColor,
 		cancelReplyHoverColor,
+
+				/** =============== Start Form info =================== */
+		loggedInTextGlobalTypoSwitcher,
+		loggedInTextGlobalTypographyData, 
+		loggedInTextGlobalTypoType,
+		loggedInTextGlobalTypoOption,
+		loggedInTextFontFamily,
+		loggedInTextFontSize,
+		loggedInTextFontSizeUnits,
+		loggedInTextFontWeight,
+		loggedInTextFontStyle,
+		loggedInTextTextTransform,
+		loggedInTextTextDecoration,
+		loggedInTextLetterSpacing,
+		loggedInTextLetterSpacingUnits,
+		loggedInTextLineHeight,
+		loggedInTextLineHeightUnits,
+		
+		loggedInTextColor,
+		loggedInTextHoverColor,
+
+		loggedInLinkColorSwitcher,
+		loggedInLinkColor,
+		loggedInLinkHoverColor, 
+
+		formInfoSpacing,
+		formInfoSpacingUnits,  
+
+		formInfoBgColorSwitcher,
+		formInfoNormalBackgroundType,
+		formInfoNormalClassicColor,
+		formInfoNormalGradientColor,
+		formInfoNormalCustomGradientSwitcher,
+		formInfoNormalCustomGradientInputValue,
+		formInfoHoverBackgroundType,
+		formInfoHoverClassicColor,
+		formInfoHoverGradientColor,
+		formInfoHoverCustomGradientSwitcher,
+		formInfoHoverCustomGradientInputValue,
+
+		formInfoPaddingUnits,
+		formInfoPaddingDesktop,
+		formInfoPaddingTablet,
+		formInfoPaddingMobile,
+		formInfoPaddingLink,
+		/** =============== End Form Info =================== */
 
 		/** ============ End Style Attributes ================= */
 
@@ -3150,12 +3167,55 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								: ""
 						}
 
+
+																${
+											formInfoNormalBackgroundType === "gradient"
+												? `
+									${
+										formInfoNormalCustomGradientSwitcher &&
+										formInfoNormalCustomGradientInputValue
+											? `background: ${formInfoNormalCustomGradientInputValue};`
+											: `background: ${formInfoNormalGradientColor};`
+									}
+								`
+												: `
+									${
+										formInfoNormalClassicColor
+											? `background: ${formInfoNormalClassicColor};`
+											: ""
+									}
+							`
+										}
+
+								
+
+						
+
 			}
 
 			
 
 				.${blockId} .fb-comment-form  .fb-logged-in-as:hover {
 					${loggedInTextHoverColor ? `color: ${loggedInTextHoverColor};` : ""}
+
+												${
+								formInfoHoverBackgroundType === "gradient"
+									? `  
+							${
+								formInfoHoverCustomGradientSwitcher &&
+								formInfoHoverCustomGradientInputValue
+									? `background: ${formInfoHoverCustomGradientInputValue};`
+									: `background: ${formInfoHoverGradientColor};`
+							}
+							`
+									: `
+									${
+										formInfoHoverClassicColor
+											? `background: ${formInfoHoverClassicColor};`
+											: ""
+									}
+							`
+							}
 				}
 
 				.${blockId} .fb-comment-form .fb-logged-is-as a:hover {
@@ -6144,14 +6204,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				initialOpen={true}
 			>
 
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					{/* <p style={{ fontSize: "12px", color: "#888" }}>
 						{__(
 							"Style the login information text — “Logged in as” and “Log out?” — with refined color, typography, and spacing controls for a polished, integrated look.",
 							"frontis-blocks",
 						)}
-					</p>
+					</p> */}
 
-					<div className="fb-control-divider"></div>
+					{/* <div className="fb-control-divider"></div> */}
 
 
 				<FB_TypographyControl
@@ -6367,6 +6427,85 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				)}
 
 					</BaseControl>
+
+				<div className="fb-control-divider"></div>
+
+				<FB_BackgroundColorControl
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={formInfoBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ formInfoBgColorSwitcher: value })
+					}
+					normalBackgroundType={formInfoNormalBackgroundType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ formInfoNormalBackgroundType: value })
+					}
+					normalClassicColor={formInfoNormalClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({
+							formInfoNormalClassicColor: value === undefined ? "" : value,
+						})
+					}
+					normalGradientColor={formInfoNormalGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({
+							formInfoNormalGradientColor: value === undefined ? "" : value,
+						})
+					}
+					normalCustomGradientSwitcher={formInfoNormalCustomGradientSwitcher}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({ formInfoNormalCustomGradientSwitcher: value })
+					}
+					normalCustomGradientInputValue={
+						formInfoNormalCustomGradientInputValue
+					}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({ formInfoNormalCustomGradientInputValue: value })
+					}
+					hoverBackgroundType={formInfoHoverBackgroundType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ formInfoHoverBackgroundType: value })
+					}
+					hoverClassicColor={formInfoHoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({
+							formInfoHoverClassicColor: value === undefined ? "" : value,
+						})
+					}
+					hoverGradientColor={formInfoHoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({
+							formInfoHoverGradientColor: value === undefined ? "" : value,
+						})
+					}
+					hoverCustomGradientSwitcher={formInfoHoverCustomGradientSwitcher}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({ formInfoHoverCustomGradientSwitcher: value })
+					}
+					hoverCustomGradientInputValue={
+						formInfoHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({ formInfoHoverCustomGradientInputValue: value })
+					}
+					isBackgroundImage={false}
+				/>
+
+{/* 	
+				<FB_Spacingssss
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleCommentFormPaddingUnitsHandler}
+					spacingUnits={commentFormPaddingUnits}
+					spacingDesktop={commentFormPaddingDesktop}
+					spacingTablet={commentFormPaddingTablet}
+					spacingMobile={commentFormPaddingMobile}
+					handleSpacingUnitHandler={handleCommentFormPaddingUnitChange}
+					spacingCombineBtn={commentFormPaddingLink}
+					spacingCombineBtnHandler={handleCommentFormPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/> */}
+
 
 				<div className="fb-control-divider"></div>
 
