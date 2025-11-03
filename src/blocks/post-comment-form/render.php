@@ -293,7 +293,7 @@ function frontis_display_comments_manual($comments, $post_id, $parent_id = 0, $d
                     </p>
                 <?php endif; ?>
 
-                <form action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post" class="fb-comment-form-element" id="commentform">
+                <form action="<?php echo esc_url(site_url('/wp-comments-post.php')); ?>" method="post" class="fb-comment-form-element" id="fb_commentform">
                     
                     <?php if (!$current_user->exists()) : ?>
                         <!-- Name Field -->

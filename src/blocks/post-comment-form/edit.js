@@ -178,14 +178,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 <a href="#">{logoutText || __('Log out?', 'frontis-blocks')}</a>
                             </p>
 
-                            <form className="fb-comment-form-element" id="commentform">
+                            <form className="fb-comment-form-element" id="fb_commentform">
                                 {/* <div className="fb-comment-form-author">
                                     <input 
                                         type="text" 
                                         id="author" 
                                         name="author" 
                                         placeholder="Name *" 
-                                        disabled 
+                                         
                                     />
                                 </div>
                                 <div className="fb-comment-form-email">
@@ -213,7 +213,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         name="comment" 
                                         placeholder="Comment *" 
                                         rows="8"
-                                        disabled
                                     ></textarea>
                                 </div>
                                 <input type="hidden" id="comment_parent" name="comment_parent" value="0" />

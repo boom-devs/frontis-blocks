@@ -1882,6 +1882,309 @@ const attributes = {
 	/** === End Form Info Attributes ========= */
 
 
+	/** === Start Form Field Attributes ========= */
+	formFieldGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	formFieldGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	formFieldGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	formFieldGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	formFieldFontFamily: {
+		type: "string",
+		default: "",
+	},
+	formFieldFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formFieldFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formFieldFontWeight: {
+		type: "string",
+		default: "",
+	},
+	formFieldFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	formFieldTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	formFieldTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	formFieldLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formFieldLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formFieldLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	formFieldLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	formFieldColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	formFieldColor: {
+		type: "string",
+		default: "",
+	},
+	formFieldHoverColor: {
+		type: "string",
+		default: "",
+	},
+
+	formFieldPlaceholderColor: {
+		type: "string",
+		default: "",
+	},
+
+	/** Start Background */
+	formFieldBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	formFieldNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	formFieldNormalClassicColor: {
+		type: "string",
+		default: "",
+	},
+	formFieldNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	formFieldNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	formFieldNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	formFieldHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	formFieldHoverClassicColor: {
+		type: "string",
+		default: "",
+	},
+	formFieldHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	formFieldHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	formFieldHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	/** End Background */
+
+	
+	/** Start Padding */
+	formFieldPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formFieldPaddingDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldPaddingTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldPaddingMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Padding */
+
+	/** Start Border */
+	formFieldBorder: {
+		type: "string",
+		default: "none",
+	},
+	formFieldBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	formFieldBorderColor: {
+		type: "string",
+		default: "",
+	},
+	formFieldBorderHoverColor: {
+		type: "string",
+	},
+	formFieldBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formFieldBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	formFieldBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formFieldBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formFieldBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+	/** === End Form Field Attributes ========= */
 
 
 	/** ============== Advanced Attributes ============== */
