@@ -1,0 +1,102 @@
+.accordion {
+    margin-top: 38px;
+
+    .accordionItem {
+        background: $neutral-color-400;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: 0px 1px 1px 0px #0000000F, 0px 1px 2px 0px #0000001A;
+        
+        transition: all 0.3s ease;
+    
+        &.active {
+            background: $accordion-active;
+        }
+    }
+    
+    .accordionHeader {
+        width: 100%;
+        padding: 24px;
+        background: transparent;
+        border: none;
+        text-align: left;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: $heading-color;
+        transition: background-color 0.2s ease;
+    
+        &:focus {
+            outline: none;
+        }
+    }
+    
+    .question {
+        flex: 1;
+        font-family: $heading-font-family;
+        font-size: 20px;
+        line-height: 1.4;
+    }
+    
+    .icon {
+        font-size: 24px;
+        font-weight: 300;
+        color: #666;
+        transition: transform 0.3s ease;
+    }
+    
+    .accordionContent {
+        padding: 0 24px 24px;
+        color: $paragraph-color;
+        animation: fadeIn 0.3s ease-out;
+    
+        p {
+            font-family: $body-font-family;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 1.4;
+            margin: 0;
+        }
+    }
+    
+    @keyframes fadeIn {
+        from {
+        opacity: 0;
+        transform: translateY(-8px);
+        }
+        to {
+        opacity: 1;
+        transform: translateY(0);
+        }
+    }
+    
+    // Responsive
+    @media (max-width: 640px) {
+        .accordion {
+        padding: 16px;
+        }
+    
+        .accordionHeader {
+            padding: 24px;
+
+            span {
+                font-family: $heading-font-family;
+                font-size: 20px;
+                line-height: 1.4;
+            }
+        }
+    
+        .icon {
+            font-size: 20px;
+        }
+    
+        .accordionContent {
+            padding: 0 20px 20px;
+            font-size: 15px;
+        }
+    }
+}

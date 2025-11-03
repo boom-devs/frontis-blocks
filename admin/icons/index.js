@@ -55,6 +55,18 @@ export const FrontisIcon = () => (
       <path d="M15.8327 10.8327H10.8327V15.8327H9.16602V10.8327H4.16602V9.16602H9.16602V4.16602H10.8327V9.16602H15.8327V10.8327Z" fill="white"/>
     </svg>
   );
+
+  export const AccordionPlus = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" fill="#6A758E"/>
+    </svg>
+  );
+
+  export const AccordionClose = () => (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41Z" fill="#313744"/>
+    </svg>
+  );
   
   export const StarIcons = () => (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,14 +181,8 @@ export const PricingIcon = () => (
 );
 
 export const CheckIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none">
-    <path
-      stroke="#4CAF50"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.6}
-      d="m4 10.858 3.429 3.428L16 5.715"
-    />
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M8 2C4.688 2 2 4.688 2 8C2 11.312 4.688 14 8 14C11.312 14 14 11.312 14 8C14 4.688 11.312 2 8 2ZM6.8 11L3.8 8L4.646 7.154L6.8 9.302L11.354 4.748L12.2 5.6L6.8 11Z" fill="#2ED573"/>
   </svg>
 );
 
@@ -338,6 +344,14 @@ export const PerformanceIcon = () => (
       strokeWidth={2}
       d="m6.194 11.896 5.998-8.084c.47-.632 1.348-.239 1.348.603v6.258c0 .505.345.913.77.913h2.918c.663 0 1.016.927.578 1.518l-5.998 8.084c-.47.632-1.348.239-1.348-.603v-6.258c0-.505-.345-.913-.77-.913H6.771c-.663 0-1.016-.927-.578-1.518Z"
     />
+  </svg>
+);
+
+export const Sparkles = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.7278 7.54545L16.7505 5.29545L19.0005 4.27273L16.7505 3.25L15.7278 1L14.7051 3.25L12.4551 4.27273L14.7051 5.29545L15.7278 7.54545Z" fill="white"/>
+    <path d="M15.7278 12.4551L14.7051 14.7051L12.4551 15.7278L14.7051 16.7505L15.7278 19.0005L16.7505 16.7505L19.0005 15.7278L16.7505 14.7051L15.7278 12.4551Z" fill="white"/>
+    <path d="M9.59091 7.95508L7.54545 3.45508L5.5 7.95508L1 10.0005L5.5 12.046L7.54545 16.546L9.59091 12.046L14.0909 10.0005L9.59091 7.95508ZM8.35545 10.8105L7.54545 12.5942L6.73546 10.8105L4.95182 10.0005L6.73546 9.19053L7.54545 7.4069L8.35545 9.19053L10.1391 10.0005L8.35545 10.8105Z" fill="white"/>
   </svg>
 );
 

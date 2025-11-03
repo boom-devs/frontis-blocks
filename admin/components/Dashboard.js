@@ -1,6 +1,8 @@
 import { __ } from '@wordpress/i18n';
 import { ProBanner, SystemRequirements, VideoBanner, IconCard, CallToAction } from './DashboardComponents';
 import { ArrowRightIcon, CommunityIcon, DocumentationIcon, RateIcon, SupportIcon } from '../icons';
+import ProUpgradeCard from './DashboardComponents/ProUpgradeCard';
+import FAQAccordion from './DashboardComponents/FAQAccordion';
 
 const Dashboard = () => {
   return (
@@ -27,12 +29,13 @@ const Dashboard = () => {
               <h2 className='heading-2'>{__('Frequently Asked Questions', 'frontis-blocks')}</h2>
               <p className='p1'>{__('Find answers to common queries. Our FAQ section covers everything from installation to troubleshooting, ensuring you have the information you need to make the most of our plugin.', 'frontis-blocks')}</p>
             </div>
+            <FAQAccordion />
           </div>
         </div>
         <div className="fb-blocks-dashboard-right">
           <SystemRequirements />
           <div className="fb-blocks-dashboard-right-bottom">
-            <IconCard title="Missing Any Feature?" desc="We’re continually working to enhance Frontis Blocks for your benefit. If you have any suggestions for features that could improve your experience or ideas for new blocks, we’d love to hear from you!" btnText="Request Feature" btnLink="https://wordpress.org/plugins/frontis-blocks/" />
+              <ProUpgradeCard />
           </div>
         </div>
       </div>
