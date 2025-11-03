@@ -1781,6 +1781,50 @@ const attributes = {
 		default: true,
 	},
 	/** End Padding */
+	
+	
+	/** Start Border Radius */
+	formInfoBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formInfoBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+
 
 	/** === End Form Info Attributes ========= */
 
