@@ -270,6 +270,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		commentFormBorderMobile,
 		commentFormBorderLink,
 
+
 		commentFormBorderRadiusUnits,
 		commentFormBorderRadiusDesktop,
 		commentFormBorderRadiusTablet,
@@ -369,6 +370,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		formInfoPaddingTablet,
 		formInfoPaddingMobile,
 		formInfoPaddingLink,
+
+		formInfoBorder,
+		formInfoBorderColor,
+		formInfoBorderUnits,
+		formInfoBorderDesktop,
+		formInfoBorderTablet,
+		formInfoBorderMobile,
+		formInfoBorderLink,
 
 		formInfoBorderRadiusUnits,
 		formInfoBorderRadiusDesktop,
@@ -1517,6 +1526,95 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End padding */
 
 	
+	/** Start Border */
+	const handleFormInfoBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (formInfoBorderLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formInfoBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formInfoBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formInfoBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formInfoBorderDesktop: {
+							...formInfoBorderDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formInfoBorderTablet: {
+							...formInfoBorderTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formInfoBorderMobile: {
+							...formInfoBorderMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleFormInfoBorderCombineBtn = () => {
+		setAttributes({ formInfoBorderLink: !formInfoBorderLink });
+	};
+
+	const handleFormInfoBorderUnitsHandler = (unit) => {
+		setAttributes({
+			formInfoBorderUnits: {
+				...formInfoBorderUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const formInfoBorderDesktopWidth = `${formInfoBorderDesktop.top}${formInfoBorderUnits.Desktop} ${formInfoBorderDesktop.right}${formInfoBorderUnits.Desktop} ${formInfoBorderDesktop.bottom}${formInfoBorderUnits.Desktop} ${formInfoBorderDesktop.left}${formInfoBorderUnits.Desktop}`;
+	const formInfoBorderTabletWidth = `${formInfoBorderTablet.top}${formInfoBorderUnits.Tablet} ${formInfoBorderTablet.right}${formInfoBorderUnits.Tablet} ${formInfoBorderTablet.bottom}${formInfoBorderUnits.Tablet} ${formInfoBorderTablet.left}${formInfoBorderUnits.Tablet}`;
+	const formInfoBorderMobileWidth = `${formInfoBorderMobile.top}${formInfoBorderUnits.Mobile} ${formInfoBorderMobile.right}${formInfoBorderUnits.Mobile} ${formInfoBorderMobile.bottom}${formInfoBorderUnits.Mobile} ${formInfoBorderMobile.left}${formInfoBorderUnits.Mobile}`;
+	/** End Border */
+
+
 	/** Border Radius */
 	const handleFormInfoBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2977,6 +3075,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											}
 
 							${commentFormBorder ? `border: ${commentFormBorder};` : ""}
+							${commentFormBorderColor ? `border-color: ${commentFormBorderColor};` : ""}
 							${
 								commentFormBorderDesktopWidth && commentFormBorderDesktop.top
 									? `border-width: ${commentFormBorderDesktopWidth};`
@@ -2988,7 +3087,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									? `border-radius: ${commentFormBorderRadiusDesktopWidth};`
 									: ""
 							}
-							${commentFormBorderColor ? `border-color: ${commentFormBorderColor};` : ""}
             	${
 								commentFormBoxShadowCssValue
 									? `box-shadow: ${commentFormBoxShadowCssValue};`
@@ -3356,6 +3454,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													? `padding: ${formInfoPaddingDesktopWidth};`
 													: ""
 											}
+
+
+																		${formInfoBorder ? `border: ${formInfoBorder};` : ""}
+							${formInfoBorderColor ? `border-color: ${formInfoBorderColor};` : ""}
+							${
+								formInfoBorderDesktopWidth && formInfoBorderDesktop.top
+									? `border-width: ${formInfoBorderDesktopWidth};`
+									: ""
+							}
+
+
 
 												${
 								formInfoBorderRadiusDesktopWidth &&
@@ -3919,6 +4028,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										: ""
 								}
 
+											 ${
+										formInfoBorderTabletWidth && formInfoBorderTablet.top
+											? `border-width: ${formInfoBorderTabletWidth};`
+											: ""
+									}
+
 								
 												${
 								formInfoBorderRadiusTabletWidth &&
@@ -4329,11 +4444,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 
 
-							
-
-
-
-
+					
 .${blockId} .fb-comment-form .fb-logged-in-as{
 					  ${
 							loggedInTextGlobalTypoSwitcher.fontSize === false &&
@@ -4358,6 +4469,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										formInfoPaddingMobileWidth &&
 										formInfoPaddingMobile.top
 											? `padding: ${formInfoPaddingTabletWidth};`
+											: ""
+									}
+
+												 ${
+										formInfoBorderMobileWidth && formInfoBorderMobile.top
+											? `border-width: ${formInfoBorderMobileWidth};`
 											: ""
 									}
 
@@ -6721,9 +6838,44 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						<div className="fb-control-divider"></div>
 
+								<SelectControl
+							label={__("Border Style", "frontis-blocks")}
+							value={formInfoBorder}
+							options={BORDER_STYLES}
+							onChange={(value) => setAttributes({ formInfoBorder: value })}
+						/>
+
+						{formInfoBorder !== "none" && (
+							<>
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={formInfoBorderColor}
+									setGlobalColor={(value) =>
+										setAttributes({
+											formInfoBorderColor: value === undefined ? "" : value,
+										})
+									}
+								/>
+
+								<FB_Spacing
+									label={__("Border", "frontis-blocks")}
+									deviceType={deviceType}
+									spacingUnitsHandler={handleFormInfoBorderUnitsHandler}
+									spacingUnits={formInfoBorderUnits}
+									spacingDesktop={formInfoBorderDesktop}
+									spacingTablet={formInfoBorderTablet}
+									spacingMobile={formInfoBorderMobile}
+									handleSpacingUnitHandler={handleFormInfoBorderUnitChange}
+									spacingCombineBtn={formInfoBorderLink}
+									spacingCombineBtnHandler={handleFormInfoBorderCombineBtn}
+									setAttributes={setAttributes}
+								/>
+							</>
+						)}
+
 
 						<FB_Spacing
-							label={__("Rounded Corners", "frontis-blocks")}
+							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleFormInfoBorderRadiusUnitsHandler}
 							spacingUnits={formInfoBorderRadiusUnits}
@@ -6736,6 +6888,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setAttributes={setAttributes}
 						/>
 
+
+						<div className="fb-control-divider"></div>
 
 						<FB_Range
 							// min={}
