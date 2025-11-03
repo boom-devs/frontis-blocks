@@ -48,7 +48,11 @@ import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -102,6 +106,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		ButtonPaddingLink,
 		ButtonIconAlign,
 		ButtonIcon,
+		frontendButtonIcon,
+		frontendButtonTwoIcon,
 		ButtonZIndex,
 		ButtonTwoText,
 		ButtonTwoUrl,
@@ -298,6 +304,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dualBtnVRTopOffsetUnits,
 		dualBtnVRBottomOffset,
 		dualBtnVRBottomOffsetUnits,
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnOneEnabled,
+		dynamicBtnOneSource,
+		dynamicBtnOnePostId,
+		dynamicBtnOnePostType,
+		dynamicBtnOnePostLabel,
+		dynamicBtnOneField,
+		dynamicBtnOneFeaturedImageField,
+
+		dynamicBtnOneDateType,
+		dynamicBtnOneDateFormat,
+
+		dynamicBtnOneTimeType,
+		dynamicBtnOneTimeFormat,
+
+		dynamicBtnOneCommentsZeroText,
+		dynamicBtnOneCommentsOneText,
+		dynamicBtnOneCommentsManyText,
+
+		dynamicBtnOneTermsTaxonomy,
+		dynamicBtnOneTermsSeparator,
+		dynamicBtnOneEnableLink,	
+		dynamicBtnOneLinkSource,
+		/** End Dynamic Btn One Text */
+
+		/** Start Dynamic Btn Two Text */
+		dynamicBtnTwoEnabled,
+		dynamicBtnTwoSource,
+		dynamicBtnTwoPostId,
+		dynamicBtnTwoPostType,
+		dynamicBtnTwoPostLabel,
+		dynamicBtnTwoField,
+		dynamicBtnTwoFeaturedImageField,
+
+		dynamicBtnTwoDateType,
+		dynamicBtnTwoDateFormat,
+
+		dynamicBtnTwoTimeType,
+		dynamicBtnTwoTimeFormat,
+
+		dynamicBtnTwoCommentsZeroText,
+		dynamicBtnTwoCommentsOneText,
+		dynamicBtnTwoCommentsManyText,
+
+		dynamicBtnTwoTermsTaxonomy,
+		dynamicBtnTwoTermsSeparator,
+		dynamicBtnTwoEnableLink,
+		dynamicBtnTwoLinkSource,
+		/** End Dynamic Btn Two Text */
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -2460,6 +2516,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${dualButtonStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		setAttributes({
+			frontendButtonIcon: generateSvgIcon(ButtonIcon), 
+			frontendButtonTwoIcon: generateSvgIcon(ButtonTwoIcon), 
+		})
+	}, [ButtonIcon, ButtonTwoIcon]);
+
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicBtnOneEnabled: false,
+				dynamicBtnOneEnableLink: false,
+				dynamicBtnTwoEnabled: false,
+				dynamicBtnTwoEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	const dynamicBtnOneContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-dual-button-one-toggle-controls', 
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnOneEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'dual-button-dynamic-btn-one-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicBtnTwoContentToggleControls = getProToggleControls({ 
+		hook: 'frontisblocks-dual-button-two-toggle-controls', 
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicBtnTwoEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'dual-button-dynamic-btn-two-content',
+		isProActive : getProActiveState
+	});
+	
+
 	/**
 	 * Inspector General Controls
 	 */
@@ -2485,68 +2586,123 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Button One", "frontis-blocks")}
 						initialOpen={true}
 					>
-						<TextControl
-							label={__("Text", "frontis-blocks")}
-							value={ButtonText}
-							onChange={(value) =>
-								setAttributes({ ButtonText: value })
-							}
-							className="fb-advanced-button-text"
+
+						{dynamicBtnOneContentToggleControls.map((control, index) => (
+							<div key={control.key || index}>{control.comp}</div>
+						))}
+		
+						<DynamicDataSourceControl
+							enabled={dynamicBtnOneEnabled}
+							
+							source={dynamicBtnOneSource}
+							setSource={(value) => setAttributes({ dynamicBtnOneSource: value })}
+							postId={dynamicBtnOnePostId}
+							setPostId={(value) => setAttributes({ dynamicBtnOnePostId: value })}
+							postType={dynamicBtnOnePostType}
+							setPostType={(value) => setAttributes({ dynamicBtnOnePostType: value })}
+							postLabel={dynamicBtnOnePostLabel}
+							setPostLabel={(value) => setAttributes({ dynamicBtnOnePostLabel: value })}
+
+							field={dynamicBtnOneField}
+							setField={(value) => setAttributes({ dynamicBtnOneField: value })}
+							featuredImageField={dynamicBtnOneFeaturedImageField}
+							setFeaturedImageField={(value) => setAttributes({ dynamicBtnOneFeaturedImageField: value })}
+
+							dateType={dynamicBtnOneDateType}
+							setDateType={(value) => setAttributes({ dynamicBtnOneDateType: value })}
+							dateFormat={dynamicBtnOneDateFormat}
+							setDateFormat={(value) => setAttributes({ dynamicBtnOneDateFormat: value })}
+							timeType={dynamicBtnOneTimeType}
+							setTimeType={(value) => setAttributes({ dynamicBtnOneTimeType: value })}
+							timeFormat={dynamicBtnOneTimeFormat}
+							setTimeFormat={(value) => setAttributes({ dynamicBtnOneTimeFormat: value })}
+
+							commentsZeroText={dynamicBtnOneCommentsZeroText}
+							setCommentsZeroText={(value) => setAttributes({ dynamicBtnOneCommentsZeroText: value })}
+							commentsOneText={dynamicBtnOneCommentsOneText}
+							setCommentsOneText={(value) =>setAttributes({ dynamicBtnOneCommentsOneText: value })}
+							commentsManyText={dynamicBtnOneCommentsManyText}
+							setCommentsManyText={(value) =>setAttributes({ dynamicBtnOneCommentsManyText: value })}
+
+							termsTaxonomy={dynamicBtnOneTermsTaxonomy}
+							setTermsTaxonomy={(value) => setAttributes({ dynamicBtnOneTermsTaxonomy: value })}
+							termsSeparator={dynamicBtnOneTermsSeparator}
+							setTermsSeparator={(value) => setAttributes({ dynamicBtnOneTermsSeparator: value })}
 						/>
-						<div className="fb-link-control-wrapper">
-							<BaseControl label={__("URL", "frontis-blocks")}>
-								<div className="fb-link-control-inner-wrapper">
-									<TextControl
-										value={ButtonUrl}
-										onChange={(value) =>
-											setAttributes({ ButtonUrl: value })
-										}
-										className="fb-advanced-button-url"
-										placeholder={__("https://", "frontis-blocks")}
-									/>
-									<Dropdown
-										className="fb-advanced-button-icon-dropdown"
-										contentClassName="fb-advanced-button-icon-dropdown-content"
-										popoverProps={{ placement: "bottom-start" }}
-										renderToggle={({ isOpen, onToggle }) => (
-											<Button
-												variant="primary"
-												onClick={onToggle}
-												aria-expanded={isOpen}
-												aria-label={__(
-													"Toggle Typography Settings",
-													"frontis-blocks",
-												)}
-												className="fb-advanced-button-icon-btn"
-											>
-												<Dashicon
-													icon="color-picker"
-													className="fb-advanced-button-icon"
-												/>
-											</Button>
-										)}
-										renderContent={() => (
-											<div className="fb-advanced-button-icon-popup">
-												<BaseControl className="fb-advanced-button-icon-popup-inner">
-													<ToggleControl
-														label={__(
-															"Open in new tab",
-															"frontis-blocks",
-														)}
-														checked={ButtonTargetUrl}
-														onChange={(value) =>
-															setAttributes({
-																ButtonTargetUrl: value,
-															})
-														}
+						{!dynamicBtnOneEnabled && (
+							<TextControl
+								label={__("Text", "frontis-blocks")}
+								value={ButtonText}
+								onChange={(value) =>
+									setAttributes({ ButtonText: value })
+								}
+								className="fb-advanced-button-text"
+							/>
+						)}
+						{dynamicBtnOneEnabled && ( 
+							<DynamicDataLinkControl
+								enableLink={dynamicBtnOneEnableLink}
+								setEnableLink={(value) => setAttributes({ dynamicBtnOneEnableLink: value })}
+								linkSource={dynamicBtnOneLinkSource}
+								setLinkSource={(value) => setAttributes({ dynamicBtnOneLinkSource: value })}
+							/>
+						)}
+						{!dynamicBtnOneEnableLink && (
+							<div className="fb-link-control-wrapper">
+								<BaseControl label={__("URL", "frontis-blocks")}>
+									<div className="fb-link-control-inner-wrapper">
+										<TextControl
+											value={ButtonUrl}
+											onChange={(value) =>
+												setAttributes({ ButtonUrl: value })
+											}
+											className="fb-advanced-button-url"
+											placeholder={__("https://", "frontis-blocks")}
+										/>
+										<Dropdown
+											className="fb-advanced-button-icon-dropdown"
+											contentClassName="fb-advanced-button-icon-dropdown-content"
+											popoverProps={{ placement: "bottom-start" }}
+											renderToggle={({ isOpen, onToggle }) => (
+												<Button
+													variant="primary"
+													onClick={onToggle}
+													aria-expanded={isOpen}
+													aria-label={__(
+														"Toggle Typography Settings",
+														"frontis-blocks",
+													)}
+													className="fb-advanced-button-icon-btn"
+												>
+													<Dashicon
+														icon="color-picker"
+														className="fb-advanced-button-icon"
 													/>
-												</BaseControl>
-											</div>
-										)}
-									/>
-								</div>
-							</BaseControl>
-						</div>
+												</Button>
+											)}
+											renderContent={() => (
+												<div className="fb-advanced-button-icon-popup">
+													<BaseControl className="fb-advanced-button-icon-popup-inner">
+														<ToggleControl
+															label={__(
+																"Open in new tab",
+																"frontis-blocks",
+															)}
+															checked={ButtonTargetUrl}
+															onChange={(value) =>
+																setAttributes({
+																	ButtonTargetUrl: value,
+																})
+															}
+														/>
+													</BaseControl>
+												</div>
+											)}
+										/>
+									</div>
+								</BaseControl>
+							</div>
+						)}
 
 						<div className="fb-advanced-btn-icon-wrapper">
 							<BaseControl
@@ -2625,68 +2781,123 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Button Two", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<TextControl
-							label={__("Text", "frontis-blocks")}
-							value={ButtonTwoText}
-							onChange={(value) =>
-								setAttributes({ ButtonTwoText: value })
-							}
-							className="fb-advanced-button-text"
+
+						{dynamicBtnTwoContentToggleControls.map((control, index) => (
+							<div key={control.key || index}>{control.comp}</div>
+						))}
+		
+						<DynamicDataSourceControl
+							enabled={dynamicBtnTwoEnabled}
+							
+							source={dynamicBtnTwoSource}
+							setSource={(value) => setAttributes({ dynamicBtnTwoSource: value })}
+							postId={dynamicBtnTwoPostId}
+							setPostId={(value) => setAttributes({ dynamicBtnTwoPostId: value })}
+							postType={dynamicBtnTwoPostType}
+							setPostType={(value) => setAttributes({ dynamicBtnTwoPostType: value })}
+							postLabel={dynamicBtnTwoPostLabel}
+							setPostLabel={(value) => setAttributes({ dynamicBtnTwoPostLabel: value })}
+
+							field={dynamicBtnTwoField}
+							setField={(value) => setAttributes({ dynamicBtnTwoField: value })}
+							featuredImageField={dynamicBtnTwoFeaturedImageField}
+							setFeaturedImageField={(value) => setAttributes({ dynamicBtnTwoFeaturedImageField: value })}
+
+							dateType={dynamicBtnTwoDateType}
+							setDateType={(value) => setAttributes({ dynamicBtnTwoDateType: value })}
+							dateFormat={dynamicBtnTwoDateFormat}
+							setDateFormat={(value) => setAttributes({ dynamicBtnTwoDateFormat: value })}
+							timeType={dynamicBtnTwoTimeType}
+							setTimeType={(value) => setAttributes({ dynamicBtnTwoTimeType: value })}
+							timeFormat={dynamicBtnTwoTimeFormat}
+							setTimeFormat={(value) => setAttributes({ dynamicBtnTwoTimeFormat: value })}
+
+							commentsZeroText={dynamicBtnTwoCommentsZeroText}
+							setCommentsZeroText={(value) => setAttributes({ dynamicBtnTwoCommentsZeroText: value })}
+							commentsOneText={dynamicBtnTwoCommentsOneText}
+							setCommentsOneText={(value) =>setAttributes({ dynamicBtnTwoCommentsOneText: value })}
+							commentsManyText={dynamicBtnTwoCommentsManyText}
+							setCommentsManyText={(value) =>setAttributes({ dynamicBtnTwoCommentsManyText: value })}
+
+							termsTaxonomy={dynamicBtnTwoTermsTaxonomy}
+							setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTwoTermsTaxonomy: value })}
+							termsSeparator={dynamicBtnTwoTermsSeparator}
+							setTermsSeparator={(value) => setAttributes({ dynamicBtnTwoTermsSeparator: value })}
 						/>
-						<div className="fb-link-control-wrapper">
-							<BaseControl label={__("URL", "frontis-blocks")}>
-								<div className="fb-link-control-inner-wrapper">
-									<TextControl
-										value={ButtonTwoUrl}
-										onChange={(value) =>
-											setAttributes({ ButtonTwoUrl: value })
-										}
-										className="fb-advanced-button-url"
-										placeholder={__("https://", "frontis-blocks")}
-									/>
-									<Dropdown
-										className="fb-advanced-button-icon-dropdown"
-										contentClassName="fb-advanced-button-icon-dropdown-content"
-										popoverProps={{ placement: "bottom-start" }}
-										renderToggle={({ isOpen, onToggle }) => (
-											<Button
-												variant="primary"
-												onClick={onToggle}
-												aria-expanded={isOpen}
-												aria-label={__(
-													"Toggle Typography Settings",
-													"frontis-blocks",
-												)}
-												className="fb-advanced-button-icon-btn"
-											>
-												<Dashicon
-													icon="color-picker"
-													className="fb-advanced-button-icon"
-												/>
-											</Button>
-										)}
-										renderContent={() => (
-											<div className="fb-advanced-button-icon-popup">
-												<BaseControl className="fb-advanced-button-icon-popup-inner">
-													<ToggleControl
-														label={__(
-															"Open in new tab",
-															"frontis-blocks",
-														)}
-														checked={ButtonTwoTargetUrl}
-														onChange={(value) =>
-															setAttributes({
-																ButtonTwoTargetUrl: value,
-															})
-														}
+						{!dynamicBtnTwoEnabled && (
+							<TextControl
+								label={__("Text", "frontis-blocks")}
+								value={ButtonTwoText}
+								onChange={(value) =>
+									setAttributes({ ButtonTwoText: value })
+								}
+								className="fb-advanced-button-text"
+							/>
+						)}
+						{dynamicBtnTwoEnabled && ( 
+							<DynamicDataLinkControl
+								enableLink={dynamicBtnTwoEnableLink}
+								setEnableLink={(value) => setAttributes({ dynamicBtnTwoEnableLink: value })}
+								linkSource={dynamicBtnTwoLinkSource}
+								setLinkSource={(value) => setAttributes({ dynamicBtnTwoLinkSource: value })}
+							/>
+						)}
+						{!dynamicBtnTwoEnableLink && (
+							<div className="fb-link-control-wrapper">
+								<BaseControl label={__("URL", "frontis-blocks")}>
+									<div className="fb-link-control-inner-wrapper">
+										<TextControl
+											value={ButtonTwoUrl}
+											onChange={(value) =>
+												setAttributes({ ButtonTwoUrl: value })
+											}
+											className="fb-advanced-button-url"
+											placeholder={__("https://", "frontis-blocks")}
+										/>
+										<Dropdown
+											className="fb-advanced-button-icon-dropdown"
+											contentClassName="fb-advanced-button-icon-dropdown-content"
+											popoverProps={{ placement: "bottom-start" }}
+											renderToggle={({ isOpen, onToggle }) => (
+												<Button
+													variant="primary"
+													onClick={onToggle}
+													aria-expanded={isOpen}
+													aria-label={__(
+														"Toggle Typography Settings",
+														"frontis-blocks",
+													)}
+													className="fb-advanced-button-icon-btn"
+												>
+													<Dashicon
+														icon="color-picker"
+														className="fb-advanced-button-icon"
 													/>
-												</BaseControl>
-											</div>
-										)}
-									/>
-								</div>
-							</BaseControl>
-						</div>
+												</Button>
+											)}
+											renderContent={() => (
+												<div className="fb-advanced-button-icon-popup">
+													<BaseControl className="fb-advanced-button-icon-popup-inner">
+														<ToggleControl
+															label={__(
+																"Open in new tab",
+																"frontis-blocks",
+															)}
+															checked={ButtonTwoTargetUrl}
+															onChange={(value) =>
+																setAttributes({
+																	ButtonTwoTargetUrl: value,
+																})
+															}
+														/>
+													</BaseControl>
+												</div>
+											)}
+										/>
+									</div>
+								</BaseControl>
+							</div>
+						)}
 
 						<div className="fb-advanced-btn-icon-wrapper">
 							<BaseControl
