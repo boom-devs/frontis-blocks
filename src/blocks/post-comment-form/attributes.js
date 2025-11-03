@@ -1554,6 +1554,144 @@ const attributes = {
 	/** === End Form Header Attributes ========= */
 
 
+	/** === Start Form Info Attributes ========= */
+/** Start Logged In Text */
+	loggedInTextGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	loggedInTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	loggedInTextGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	loggedInTextGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	loggedInTextFontFamily: {
+		type: "string",
+		default: "",
+	},
+	loggedInTextFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	loggedInTextFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	loggedInTextFontWeight: {
+		type: "string",
+		default: "",
+	},
+	loggedInTextFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	loggedInTextTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	loggedInTextTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	loggedInTextLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	loggedInTextLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	loggedInTextLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	loggedInTextLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	// loggedInTextColorSwitcher: {
+	// 	type: "string",
+	// 	default: "normal",
+	// },
+	loggedInTextColor: {
+		type: "string",
+		default: "",
+	},
+
+	loggedInLinkColorSwitcher: {
+		type: "string",
+		default: "normal", 
+	}, 
+	loggedInLinkColor: {
+		type: "string", 
+		default: "",
+	}, 
+	loggedInLinkHoverColor: {
+		type: "string", 
+		default: "", 
+	},
+
+	formInfoSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+
+	formInfoSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	/** End LoggedIn Text **/
+	/** === End Form Info Attributes ========= */
 
 
 	/** ============== Advanced Attributes ============== */
