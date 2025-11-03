@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import Switch from 'rc-switch';
-import { Doc, Link } from '../icons';
+import { Doc, Link } from '../../icons';
 
 const BlockCard = ({ block, onChange }) => {
     const [ isChecked, setIsChecked ] = useState(block.status === '1');

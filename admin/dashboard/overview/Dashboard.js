@@ -1,8 +1,10 @@
 import { __ } from '@wordpress/i18n';
-import { ProBanner, SystemRequirements, VideoBanner, IconCard, CallToAction } from './DashboardComponents';
-import { ArrowRightIcon, CommunityIcon, DocumentationIcon, RateIcon, SupportIcon } from '../icons';
-import ProUpgradeCard from './DashboardComponents/ProUpgradeCard';
-import FAQAccordion from './DashboardComponents/FAQAccordion';
+import { ArrowRightIcon, CommunityIcon, DocumentationIcon, RateIcon, SupportIcon } from '../../icons';
+import ProUpgradeCard from './ProUpgradeCard';
+import FAQAccordion from './FAQAccordion';
+import SystemRequirements from './SystemRequirements';
+import VideoBanner from './VideoBanner';
+import IconCard from './IconCard';
 
 const Dashboard = () => {
   return (

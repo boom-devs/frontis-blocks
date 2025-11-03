@@ -1,6 +1,6 @@
 import { useState } from '@wordpress/element';
-import { Logo, VersionIcon, StarIcons, Notifications } from '../icons';
-import Button from './common/Button';
+import { Logo, StarIcons, Notifications } from '../icons';
+import Button from '../components/common/Button';
 
 const TabPanel = ({ className, activeClass, onSelect, initialTabName, tabs, children }) => {
 
