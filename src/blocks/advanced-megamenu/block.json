@@ -12,7 +12,6 @@
         "align": ["wide", "full"]
     },
     "editorScript": "file:./index.js",
-    "editorStyle": "file:./editor.scss",
-    "style": "file:./style.scss",
-    "viewScript": "file:./view.js"
+    "editorStyle": "file:./index.css",
+    "render": "file:./render.php"
 }
