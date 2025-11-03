@@ -1781,6 +1781,59 @@ const attributes = {
 		default: true,
 	},
 	/** End Padding */
+
+	
+	/** Start Border */
+	formInfoBorder: {
+		type: "string",
+		default: "none",
+	},
+
+	formInfoBorderColor: {
+		type: "string",
+		default: "",
+	},
+
+	formInfoBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	formInfoBorderDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	formInfoBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border */
 	
 	
 	/** Start Border Radius */
