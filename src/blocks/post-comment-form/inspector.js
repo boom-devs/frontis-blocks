@@ -369,6 +369,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		formInfoPaddingTablet,
 		formInfoPaddingMobile,
 		formInfoPaddingLink,
+
+		formInfoBorderRadiusUnits,
+		formInfoBorderRadiusDesktop,
+		formInfoBorderRadiusTablet,
+		formInfoBorderRadiusMobile,
+		formInfoBorderRadiusLink,
 		/** =============== End Form Info =================== */
 
 		/** ============ End Style Attributes ================= */
@@ -1509,6 +1515,97 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const formInfoPaddingTabletWidth = `${formInfoPaddingTablet.top}${formInfoPaddingUnits.Tablet} ${formInfoPaddingTablet.right}${formInfoPaddingUnits.Tablet} ${formInfoPaddingTablet.bottom}${formInfoPaddingUnits.Tablet} ${formInfoPaddingTablet.left}${formInfoPaddingUnits.Tablet}`;
 	const formInfoPaddingMobileWidth = `${formInfoPaddingMobile.top}${formInfoPaddingUnits.Mobile} ${formInfoPaddingMobile.right}${formInfoPaddingUnits.Mobile} ${formInfoPaddingMobile.bottom}${formInfoPaddingUnits.Mobile} ${formInfoPaddingMobile.left}${formInfoPaddingUnits.Mobile}`;
 	/** End padding */
+
+	
+	/** Border Radius */
+	const handleFormInfoBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (formInfoBorderRadiusLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formInfoBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formInfoBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formInfoBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						formInfoBorderRadiusDesktop: {
+							...formInfoBorderRadiusDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						formInfoBorderRadiusTablet: {
+							...formInfoBorderRadiusTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						formInfoBorderRadiusMobile: {
+							...formInfoBorderRadiusMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handleFormInfoBorderRadiusCombineBtn = () => {
+		setAttributes({
+			formInfoBorderRadiusLink: !formInfoBorderRadiusLink,
+		});
+	};
+
+	const handleFormInfoBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			formInfoBorderRadiusUnits: {
+				...formInfoBorderRadiusUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const formInfoBorderRadiusDesktopWidth = `${formInfoBorderRadiusDesktop.top}${formInfoBorderRadiusUnits.Desktop} ${formInfoBorderRadiusDesktop.right}${formInfoBorderRadiusUnits.Desktop} ${formInfoBorderRadiusDesktop.bottom}${formInfoBorderRadiusUnits.Desktop} ${formInfoBorderRadiusDesktop.left}${formInfoBorderRadiusUnits.Desktop}`;
+	const formInfoBorderRadiusTabletWidth = `${formInfoBorderRadiusTablet.top}${formInfoBorderRadiusUnits.Tablet} ${formInfoBorderRadiusTablet.right}${formInfoBorderRadiusUnits.Tablet} ${formInfoBorderRadiusTablet.bottom}${formInfoBorderRadiusUnits.Tablet} ${formInfoBorderRadiusTablet.left}${formInfoBorderRadiusUnits.Tablet}`;
+	const formInfoBorderRadiusMobileWidth = `${formInfoBorderRadiusMobile.top}${formInfoBorderRadiusUnits.Mobile} ${formInfoBorderRadiusMobile.right}${formInfoBorderRadiusUnits.Mobile} ${formInfoBorderRadiusMobile.bottom}${formInfoBorderRadiusUnits.Mobile} ${formInfoBorderRadiusMobile.left}${formInfoBorderRadiusUnits.Mobile}`;
+	/** End Border Radius */
 
 	/**  ============== End Form Info ================== */
 
@@ -3260,6 +3357,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													: ""
 											}
 
+												${
+								formInfoBorderRadiusDesktopWidth &&
+								formInfoBorderRadiusDesktop.top
+									? `border-radius: ${formInfoBorderRadiusDesktopWidth};`
+									: ""
+							}
+
 						${
 							formInfoSpacing.Desktop
 								? `margin-bottom: ${formInfoSpacing.Desktop}${formInfoSpacingUnits.Desktop};`
@@ -3814,6 +3918,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										? `line-height: ${loggedInTextLineHeight.Tablet}${loggedInTextLineHeightUnits.Tablet};`
 										: ""
 								}
+
+								
+												${
+								formInfoBorderRadiusTabletWidth &&
+								formInfoBorderRadiusTablet.top
+									? `border-radius: ${formInfoBorderRadiusTabletWidth};`
+									: ""
+							}
+
 										${
 										formInfoPaddingTabletWidth &&
 										formInfoPaddingTablet.top
@@ -4247,6 +4360,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 											? `padding: ${formInfoPaddingTabletWidth};`
 											: ""
 									}
+
+									
+												${
+								formInfoBorderRadiusMobileWidth &&
+								formInfoBorderRadiusMobile.top
+									? `border-radius: ${formInfoBorderRadiusMobileWidth};`
+									: ""
+							}
 
 									${
 										formInfoSpacing.Mobile
@@ -6599,6 +6720,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 
 						<div className="fb-control-divider"></div>
+
+
+						<FB_Spacing
+							label={__("Rounded Corners", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleFormInfoBorderRadiusUnitsHandler}
+							spacingUnits={formInfoBorderRadiusUnits}
+							spacingDesktop={formInfoBorderRadiusDesktop}
+							spacingTablet={formInfoBorderRadiusTablet}
+							spacingMobile={formInfoBorderRadiusMobile}
+							handleSpacingUnitHandler={handleFormInfoBorderRadiusUnitChange}
+							spacingCombineBtn={formInfoBorderRadiusLink}
+							spacingCombineBtnHandler={handleFormInfoBorderRadiusCombineBtn}
+							setAttributes={setAttributes}
+						/>
+
 
 						<FB_Range
 							// min={}
