@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Onest:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Onest:wght@100..900&family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap');
 
 body {
   -webkit-font-smoothing: antialiased;
@@ -10,6 +10,9 @@ body {
 @import "button";
 @import "topbar";
 @import "tabs";
+@import "system-status";
+@import "pro-card";
+@import "accordion";
 
 // Pages
 @import "dashboard";
