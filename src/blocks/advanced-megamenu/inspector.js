@@ -1,12 +1,16 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useMemo } from '@wordpress/element';
-import { 
-    PanelBody, 
-    SelectControl, 
+import { useEffect, useMemo, useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
+import {
+    PanelBody,
+    SelectControl,
     RangeControl,
     ToggleControl,
+    RadioControl,
+    TextControl,
+    Button
 } from '@wordpress/components';
-
+import { MEGA_MENU_TRIGGERS } from '@Constants/fbConstants';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ColorControl from '@Components/color-control';
 import FB_TypographyControl from '@Components/typography-control';
@@ -15,6 +19,9 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_VisibilityControl from '@Components/visibility-control';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove } from '@dnd-kit/sortable';
+import SortableItem from './sortableItem';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -36,7 +43,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         submenuBackgroundColor,
         megaMenuWidth,
         megaMenuBackgroundColor,
-        megaMenuInteraction
+        megaMenuInteraction,
+        menuItems,
+        triggerType
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -48,6 +57,103 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+    const [MenuItemList, setMenuItemList] = useState(menuItems);
+    const [patterns, setPatterns] = useState([]);
+
+    const patternData = useSelect((select) => {
+        const allPatterns = select('core').getBlockPatterns() || [];
+
+        let userPatterns = [];
+        const blocks = select('core')?.getEntityRecords('postType', 'wp_block', { per_page: -1 });
+        if (blocks) {
+            userPatterns = blocks.filter((block) => block.wp_pattern_category);
+        }
+
+        return { allPatterns, userPatterns };
+    }, []);
+
+    useEffect(() => {
+        const patternOptions = [{ value: '', label: __('Select a pattern', 'frontis-blocks') }];
+
+        if (patternData.allPatterns?.length) {
+            patternOptions.push(
+                { value: 'core-separator', label: '--- Theme Patterns ---', disabled: true },
+                ...patternData.allPatterns.map((pattern) => ({
+                    value: pattern.name,
+                    label: pattern.title || pattern.name,
+                }))
+            );
+        }
+
+        if (patternData.userPatterns?.length) {
+            patternOptions.push(
+                { value: 'user-separator', label: '--- User Patterns ---', disabled: true },
+                ...patternData.userPatterns.map((pattern) => ({
+                    value: 'user-' + pattern.id,
+                    label: pattern.title?.raw || `Pattern ${pattern.id}`,
+                }))
+            );
+        }
+
+        setPatterns(patternOptions);
+    }, [patternData]);
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+        if (active && over && active.id !== over.id) {
+            const oldIndex = MenuItemList.findIndex((item) => item.id === active.id);
+            const newIndex = MenuItemList.findIndex((item) => item.id === over.id);
+            const updated = arrayMove(MenuItemList, oldIndex, newIndex);
+            setMenuItemList(updated);
+            setAttributes({ menuItems: updated });
+        }
+    };
+
+    const handleAddItem = () => {
+        const newItem = {
+            id: `item-${MenuItemList.length + 1}`,
+            label: `Menu Item ${MenuItemList.length + 1}`,
+            url: '',
+            patternSlug: '',
+        };
+        const updated = [...MenuItemList, newItem];
+        setMenuItemList(updated);
+        setAttributes({ menuItems: updated });
+    };
+
+    const handleChangeItem = (id, key, value) => {
+        const updated = MenuItemList.map((item) =>
+            item.id === id ? { ...item, [key]: value } : item
+        );
+        setMenuItemList(updated);
+        setAttributes({ menuItems: updated });
+    };
+
+    const handleDeleteItem = (id) => {
+        const updated = MenuItemList.filter((item) => item.id !== id);
+        setMenuItemList(updated);
+        setAttributes({ menuItems: updated });
+    };
+
+    const handleDuplicateItem = (id) => {
+        const itemToDuplicate = MenuItemList.find((item) => item.id === id);
+        if (itemToDuplicate) {
+            const newItem = {
+                ...itemToDuplicate,
+                id: `item-${MenuItemList.length + 1}`,
+                label: itemToDuplicate.label + ' (Copy)',
+            };
+            const updated = [...MenuItemList, newItem];
+            setMenuItemList(updated);
+            setAttributes({ menuItems: updated });
+        }
+    };
+
+    /** Sync back when MenuItemList changes */
+    useEffect(() => {
+        setAttributes({ menuItems: MenuItemList });
+    }, [MenuItemList]);
 
     const allBlockStyle = useMemo(() => `
         .${blockId} {
@@ -68,68 +174,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const generalControls = (
         <>
-            <PanelBody title={__("Menu Settings", "frontis-blocks")} initialOpen={true}>
+            <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={true}>
                 <SelectControl
-                    label={__("Menu Layout", "frontis-blocks")}
-                    value={menuLayout}
-                    options={[
-                        { label: __('Horizontal', 'frontis-blocks'), value: 'horizontal' },
-                        { label: __('Vertical', 'frontis-blocks'), value: 'vertical' },
-                    ]}
-                    onChange={(value) => setAttributes({ menuLayout: value })}
-                />
-
-                <SelectControl
-                    label={__("Menu Alignment", "frontis-blocks")}
-                    value={menuAlignment}
-                    options={[
-                        { label: __('Left', 'frontis-blocks'), value: 'left' },
-                        { label: __('Center', 'frontis-blocks'), value: 'center' },
-                        { label: __('Right', 'frontis-blocks'), value: 'right' },
-                        { label: __('Space Between', 'frontis-blocks'), value: 'space-between' },
-                    ]}
-                    onChange={(value) => setAttributes({ menuAlignment: value })}
-                />
-
-                <RangeControl
-                    label={__("Menu Item Spacing", "frontis-blocks")}
-                    value={menuSpacing || 15}
-                    onChange={(value) => setAttributes({ menuSpacing: value })}
-                    min={0}
-                    max={100}
+                    label={__('Trigger Type', 'frontis-blocks')}
+                    value={triggerType}
+                    options={MEGA_MENU_TRIGGERS}
+                    onChange={(value) => setAttributes({ triggerType: value })}
                 />
             </PanelBody>
 
-            <PanelBody title={__("Submenu Settings", "frontis-blocks")} initialOpen={false}>
-                <RangeControl
-                    label={__("Submenu Width (px)", "frontis-blocks")}
-                    value={submenuWidth}
-                    onChange={(value) => setAttributes({ submenuWidth: value })}
-                    min={150}
-                    max={400}
-                />
-            </PanelBody>
+            <PanelBody title={__('Menu Items', 'frontis-blocks')} initialOpen={true}>
+                <div>
+                    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                        <SortableContext items={menuItems.map(item => item.id)}>
+                            <ul className="dnd-items-wrapper">
+                                {menuItems.map((item, index) => (
+                                    <SortableItem
+                                        key={item.id}
+                                        id={item.id}
+                                        item={item}
+                                        handleChangeItem={handleChangeItem}
+                                        handleDeleteItem={handleDeleteItem}
+                                        handleDuplicateItem={handleDuplicateItem}
+                                        patterns={patterns} 
+                                        index={index}
+                                    />
+                                ))}
+                            </ul>
+                        </SortableContext>
 
-            <PanelBody title={__("Mega Menu Settings", "frontis-blocks")} initialOpen={false}>
-                <SelectControl
-                    label={__("Mega Menu Width", "frontis-blocks")}
-                    value={megaMenuWidth}
-                    options={[
-                        { label: __('Container Width', 'frontis-blocks'), value: 'container' },
-                        { label: __('Full Width', 'frontis-blocks'), value: 'full' },
-                        { label: __('Custom', 'frontis-blocks'), value: 'custom' },
-                    ]}
-                    onChange={(value) => setAttributes({ megaMenuWidth: value })}
-                />
-                <SelectControl
-                    label={__("Mega Menu Interaction", "frontis-blocks")}
-                    value={megaMenuInteraction}
-                    options={[
-                        { label: __('Hover', 'frontis-blocks'), value: 'hover' },
-                        { label: __('Click', 'frontis-blocks'), value: 'click' },
-                    ]}
-                    onChange={(value) => setAttributes({ megaMenuInteraction: value })}
-                />
+                        <Button isPrimary onClick={handleAddItem}>
+                            {__('Add Menu Item', 'frontis-blocks')}
+                        </Button>
+                    </DndContext>
+
+                </div>
             </PanelBody>
         </>
     );

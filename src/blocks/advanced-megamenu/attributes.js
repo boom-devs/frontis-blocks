@@ -5,21 +5,30 @@ export default {
     blockStyle: {
         type: "string",
     },
-    navigationGlobalCustomCSS: {
+    megaMenuGlobalCustomCSS: {
         type: "string",
         default: "",
     },
-    navigationDesktopSwitcher: {
+    megaMenuDesktopSwitcher: {
         type: "boolean",
         default: false,
     },
-    navigationTabletSwitcher: {
+    megaMenuTabletSwitcher: {
         type: "boolean",
         default: false,
     },
-    navigationMobileSwitcher: {
+    megaMenuMobileSwitcher: {
         type: "boolean",
         default: false,
+    },
+    megaMenuGlobalWraperID : {
+        type: 'string',
+        default: ''
+    },
+
+    megaMenuGlobalWraperClass : {
+        type: 'string',
+        default: ''
     },
     menuLayout: {
         type: "string",
@@ -75,6 +84,14 @@ export default {
         default: "#ffffff",
     },
     megaMenuInteraction: {
+        type: "string",
+        default: "hover"
+    },
+    menuItems: {
+        type: "array",
+        default: []
+    },
+    triggerType: {
         type: "string",
         default: "hover"
     }

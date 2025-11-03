@@ -522,3 +522,7 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
 ];
+export const MEGA_MENU_TRIGGERS = [
+	{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
+	{ label: __('Click', 'frontis-blocks'), value: 'click' },
+];
