@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SwitchCheckIcon, XIcon } from '../../icons';
 import './switch.scss';
 
-export default function FBSwitch({ onChange, checked = true }) {
+export default function FBSwitch({ onChange, checked = true, disabled = false }) {
     
     return (
         <div className="fb-switch-wrapper">
@@ -12,6 +12,7 @@ export default function FBSwitch({ onChange, checked = true }) {
                     checked={checked}
                     onChange={onChange}
                     className="toggle-switch__input"
+                    disabled={disabled}
                 />
                 <span className="toggle-switch__slider">
                     <span className="toggle-switch__icon toggle-switch__icon--off">

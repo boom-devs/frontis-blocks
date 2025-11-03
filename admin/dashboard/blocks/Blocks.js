@@ -5,17 +5,22 @@ import { toast } from 'react-toastify';
 
 import '../../../assets/css/backend/switch.css';
 import BlockHeader from './BlockHeader';
+import FBSwitch from '../../components/common/Switch';
 
 // Add this mapping object after the imports
 
 const Blocks = () => {
 	const [blocks, setBlocks] = useState([]);
+	const [disableAllBlocks, setDisableAllBlocks] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [searchTerm, setSearchTerm] = useState('');
 	const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
 
-	console.log(allBlocks);
+
+    const handleChange = () => {
+        setDisableAllBlocks(!disableAllBlocks);
+    };
 
 	useEffect(() => {
 		getBlocks();
@@ -104,8 +109,6 @@ const Blocks = () => {
 		return { all: { count: totalCount, blocks: filteredBlocks }, ...info };
 	}, [blocks, searchTerm]);
 
-	console.log(blocksCategory);
-
 	const filteredCategories = selectedCategory === 'all'
 		? Object.entries(blocksCategory).filter(([category]) => category !== 'all')
 		: [[selectedCategory, blocksCategory[selectedCategory]]];
@@ -134,16 +137,25 @@ const Blocks = () => {
 		saveBlocks(updatedBlocks);
 	};
 
-	//   if (isLoading) {
-	//     return <div>{__('Loading blocks...', 'frontis-blocks')}</div>;
-	//   }
+	const [openIndices, setOpenIndices] = useState([]);
+
+	const toggleAccordion = (e) => {
+		e.stopPropagation();
+		const index = Number(e.currentTarget.dataset.index);
+		setOpenIndices((prev) =>
+			prev.includes(index)
+			? prev.filter((i) => i !== index)
+			: [...prev, index]
+		);
+	};
+
 
 	return (
 		<div className="fb-blocks-container">
 			<div className="fb-blocks-header">
 				<div className="fb-blocks-header-left">
 					<div className="fb-video-banner-header">
-						<h1 className='heading-1'>{__('Global Control', 'frontis-blocks')}</h1>
+						<h1 className='heading-2'>{__('Global Control', 'frontis-blocks')}</h1>
 						<p className='p1'>{__('Global control allows users to easily enable or disable all available blocks together, simplifying block management.', 'frontis-blocks')}</p>
 					</div>
 					<div className='fb-blocks-tab-header'>
@@ -152,22 +164,69 @@ const Blocks = () => {
 				</div>
 			</div>
 			{filteredCategories.length > 0 ? (
-				filteredCategories.map(([category, { blocks: categoryBlocks }]) => (
-					<div key={category} className={`fb-blocks-category-group fb-blocks-category-group--${category}`}>
-						<h3 className="fb-blocks-category-title">{category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-						<div className="fb-blocks-category-content">
+				filteredCategories.map(([category, { blocks: categoryBlocks }], index) => (
+					<div
+					key={category}
+					className={`fb-blocks-category-group fb-blocks-category-group--${category} ${
+						openIndices.includes(index) ? 'active' : ''
+					}`}
+					onClick={(e) => e.stopPropagation()}
+					>
+					<div className="fb-blocks-category-group-header">
+						<h3 className="fb-blocks-category-title">
+						{category.charAt(0).toUpperCase() + category.slice(1)}
+						</h3>
+
+						<div
+						className="fb-blocks-category-group-toggle"
+						onClick={(e) => e.stopPropagation()}
+						>
+						<span className="fb-blocks-category-group-toggle-label">
+							Disable All
+						</span>
+
+						<div onClick={(e) => e.stopPropagation()}>
+							<FBSwitch onChange={handleChange} checked={disableAllBlocks} />
+						</div>
+
+						<span
+							className="fb-blocks-category-group-header-icon"
+							data-index={index}
+							onClick={toggleAccordion}
+							aria-expanded={openIndices.includes(index)}
+						>
+							<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							>
+							<path
+								d="M7.41 8.58984L12 13.1698L16.59 8.58984L18 9.99984L12 15.9998L6 9.99984L7.41 8.58984Z"
+								fill="#404655"
+							/>
+							</svg>
+						</span>
+						</div>
+					</div>
+						{openIndices.includes(index) && (
+							<div className={`fb-blocks-category-content`}>
 							{categoryBlocks.map((block) => (
 								<BlockCard
-									key={block.slug}
-									block={block}
-									onChange={handleBlockChange}
+								key={block.slug}
+								block={block}
+								onChange={handleBlockChange}
 								/>
 							))}
-						</div>
+							</div>
+						)}
 					</div>
 				))
 			) : (
-				<p className="fb-blocks-no-results">{__('No blocks found.', 'frontis-blocks')}</p>
+				<p className="fb-blocks-no-results">
+					{__('No blocks found.', 'frontis-blocks')}
+				</p>
 			)}
 		</div>
 	);

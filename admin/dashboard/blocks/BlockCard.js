@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import Switch from 'rc-switch';
 import { Doc, Link } from '../../icons';
+import FBSwitch from '../../components/common/Switch';
 
 const BlockCard = ({ block, onChange }) => {
     const [ isChecked, setIsChecked ] = useState(block.status === '1');
@@ -28,19 +29,16 @@ const BlockCard = ({ block, onChange }) => {
                 <img src={block.icon} alt={`${block.title} icon`} />
             </div>
             <div className="fb-block-card-content">
-                <div>
-                    <h3 className="fb-block-card-title">
-                        {block.title}
-                        {block.badge !== 'free' && <span className={`fb-block-card-badge ${block.badge}`}>{block.badge}</span>}
-                    </h3>
-                </div>
+                <h3 className="fb-block-card-title">
+                    {block.title}
+                    {block.badge !== 'free' && <span className={`fb-block-card-badge ${block.badge}`}>{block.badge}</span>}
+                </h3>
                 <div className="fb-block-card-links">
                     <a href={block.doc ? block.doc : 'https://frontis.com'} target="_blank" rel="noopener noreferrer" className="fb-block-card-link fb-block-card-doc">
-                        <Doc />
                         {__('Documentation', 'frontis-blocks')}
                     </a>
+                    <span className="fb-block-card-link-separator">|</span>
                     <a href={block.demo ? block.demo : 'https://frontis.com'} target="_blank" rel="noopener noreferrer" className="fb-block-card-link fb-block-card-demo">
-                        <Link />
                         {__('Demo', 'frontis-blocks')}
                     </a>
                 </div>
@@ -48,15 +46,23 @@ const BlockCard = ({ block, onChange }) => {
             <div className="fb-block-card-switch">
                 <label htmlFor={`switch-${block.slug}`} className="fb-block-card-switch-label">
                     {block.complete === 'true' ? 
-                        <Switch
-                            checked={isChecked}
-                            onChange={handleChange}
-                            className="fb-block-card-switch-input"
-                            id={`switch-${block.slug}`}
+                        // <Switch
+                        //     checked={isChecked}
+                        //     onChange={handleChange}
+                        //     className="fb-block-card-switch-input"
+                        //     id={`switch-${block.slug}`}
+                        //     disabled={
+                        //         isProActive === 'false' && block.package === 'pro' ? true : false
+                        //     }
+                        // />
+                        <FBSwitch
+                            onChange={handleChange} 
+                            checked={isChecked} 
                             disabled={
                                 isProActive === 'false' && block.package === 'pro' ? true : false
                             }
                         />
+
                     : 
                     <span className={`fb-block-card-upcoming`}>Upcoming</span>}
                 </label>
