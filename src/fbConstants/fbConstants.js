@@ -526,4 +526,36 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+]
+
+/** POST CATEGORY BLOCK */
+export const POST_CATEGORY_PREMADE_STYLE  = [
+  { label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+  { label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+  { label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
+  { label: __('Style 4', 'frontis-blocks'), value: 'style-4' },
+];
+
+
+export const SELECTION_TYPE_OPTIONS = [
+	{ value: 'none', label: __('Show All', 'frontis-blocks') },
+	{ value: 'include', label: __('Include Specific', 'frontis-blocks') },
+	{ value: 'exclude', label: __('Exclude Specific', 'frontis-blocks') }
+];
+
+export const ORDER_BY_OPTIONS = [
+	{ value: 'name', label: __('Name', 'frontis-blocks') },
+	{ value: 'count', label: __('Count', 'frontis-blocks') },
+	{ value: 'slug', label: __('Slug', 'frontis-blocks') }
+];
+
+export const SORT_ORDER_OPTIONS = [
+	{ value: 'asc', label: __('Ascending', 'frontis-blocks') },
+	{ value: 'desc', label: __('Descending', 'frontis-blocks') }
+];
+
+export const LIST_STYLE_OPTIONS = [
+	{ value: 'none', label: __('None', 'frontis-blocks') },
+	{ value: 'bullet', label: __('Bullet', 'frontis-blocks') },
+	{ value: 'number', label: __('Number', 'frontis-blocks') }
 ];
