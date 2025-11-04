@@ -3,14 +3,14 @@
 
     // This block is primarily server-rendered
     function initPostTitleBlocks() {
-        // Add any client-side interactions here if needed
+        // client-side interactions here
         const blocks = document.querySelectorAll(".fb-post-title-block");
-        
+
         blocks.forEach((block) => {
             if (block.hasAttribute("data-initialized")) return;
             block.setAttribute("data-initialized", "true");
-            
-            // Add any client-side functionality here
+
+            // client-side functionality 
         });
     }
 

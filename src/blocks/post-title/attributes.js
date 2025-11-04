@@ -1,48 +1,48 @@
 const attributes = {
-    blockId: {
-        type: 'string',
-        default: ''
-    },
-    blockStyle: {
-        type: 'string',
-        default: ''
-    },
+	blockId: {
+		type: "string",
+		default: "",
+	},
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
 
-    postTitleTag: {
-        type: 'string',
-        default: 'h2'
-    },
-    titleExcerptLength: {
-        type: 'number'
-    },
-    titleAlignment: {
-        type: 'object',
-        default: {
-            Desktop: 'left',
-            Tablet: 'left',
-            Mobile: 'left',
-        },
-    },
-    isLink: {
-        type: 'boolean',
-        default: false
-    },
-    rel: {
-        type: 'string',
-        default: ''
-    },
-    linkTarget: {
-        type: 'string',
-        default: '_self'
-    },
-    
+	postTitleTag: {
+		type: "string",
+		default: "h2",
+	},
+	titleExcerptLength: {
+		type: "number",
+	},
+	titleAlignment: {
+		type: "object",
+		default: {
+			Desktop: "left",
+			Tablet: "left",
+			Mobile: "left",
+		},
+	},
+	isLink: {
+		type: "boolean",
+		default: false,
+	},
+	rel: {
+		type: "string",
+		default: "",
+	},
+	linkTarget: {
+		type: "string",
+		default: "_self",
+	},
+
 	/** Start Title */
 	postTitleGlobalTypographyData: {
-		type: 'object',
-		default: {}
+		type: "object",
+		default: {},
 	},
 	postTitleGlobalTypoSwitcher: {
-		type: 'object',
+		type: "object",
 		default: {
 			fontFamily: false,
 			fontSize: false,
@@ -55,96 +55,96 @@ const attributes = {
 		},
 	},
 	postTitleGlobalTypoType: {
-		type: 'string',
-		default: 'default',
+		type: "string",
+		default: "default",
 	},
 	postTitleGlobalTypoOption: {
-		type: 'object',
-		default: {label: 'Default', value: 'default'},
+		type: "object",
+		default: { label: "Default", value: "default" },
 	},
 	postTitleFontFamily: {
-		type: 'string',
-		default: 'inherit',
+		type: "string",
+		default: "inherit",
 	},
 	postTitleFontSize: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
-	postTitleFontSizeUnits: { 
-		type: 'object',
+	postTitleFontSizeUnits: {
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	postTitleFontWeight: {
-		type: 'string',
-		default: '600'
+		type: "string",
+		default: "600",
 	},
 	postTitleFontStyle: {
-		type: 'string',
-		default: 'normal'
+		type: "string",
+		default: "normal",
 	},
-	postTitleTextTransform: { 
-		type: 'string',
-		default: 'none'
+	postTitleTextTransform: {
+		type: "string",
+		default: "none",
 	},
 	postTitleTextDecoration: {
-		type: 'string',
-		default: 'none'
+		type: "string",
+		default: "none",
 	},
 	postTitleLetterSpacing: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	postTitleLetterSpacingUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 	postTitleLineHeight: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
 	},
 	postTitleLineHeightUnits: {
-		type: 'object',
+		type: "object",
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
 	},
 
-	postTitleColorSwitcher : {
-		type: 'string',
-		default: 'normal'
+	postTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
 	},
-	postTitleColor : {
-		type: 'string',
-		default: ''
+	postTitleColor: {
+		type: "string",
+		default: "",
 	},
 	postTitleHoverColor: {
-		type: 'string',
-		default: ''
+		type: "string",
+		default: "",
 	},
 
-    titleTextShadowValues: {
+	titleTextShadowValues: {
 		type: "array",
 		default: [],
 	},
@@ -172,55 +172,54 @@ const attributes = {
 		type: "string",
 		default: "#399CFF",
 	},
+	/** End Title */
 
-    /** End Title */
+	/** Start Global Setting */
+	wrapperId: {
+		type: "string",
+		default: "",
+	},
+	wrapperClass: {
+		type: "string",
+		default: "",
+	},
+	postTitleGlobalCustomCSS: {
+		type: "string",
+		default: "",
+	},
+	postTitleGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	postTitleOverflow: {
+		type: "string",
+		default: "default",
+	},
 
-    /** Start Global Setting */
-    wrapperId: {
-        type: 'string',
-        default: ''
-    },
-    wrapperClass: {
-        type: 'string',
-        default: ''
-    },
-    postTitleGlobalCustomCSS: {
-        type: 'string',
-        default: ''
-    },
-    postTitleGlobalZIndex: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    postTitleOverflow: {
-        type: "string",
-        default: "default",
-    },
+	/** Responsive Control */
+	postTitleDesktopSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postTitleTabletSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	postTitleMobileSwitcher: {
+		type: "boolean",
+		default: false,
+	},
 
-    /** Responsive Control */
-    postTitleDesktopSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    postTitleTabletSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-    postTitleMobileSwitcher: {
-        type: "boolean",
-        default: false,
-    },
-
-    /** Start Position */
-    postTitlePositionType: {
-        type: "string",
-        default: "default",
-    },
-    postTitleHZOrientationType: {
+	/** Start Position */
+	postTitlePositionType: {
+		type: "string",
+		default: "default",
+	},
+	postTitleHZOrientationType: {
 		type: "string",
 		default: "left",
 	},
@@ -292,8 +291,8 @@ const attributes = {
 			Mobile: "px",
 		},
 	},
-    /** End Position */
-    
+	/** End Position */
+
 	/** Start Padding */
 	postGlobalPaddingUnits: {
 		type: "object",
@@ -546,7 +545,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-
 };
 
 export default attributes;
