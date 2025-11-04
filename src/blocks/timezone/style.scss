@@ -1,7 +1,26 @@
 .fb-timezone-container {
     display: inline-block;
 }
-
+.fb-timezone-container .fb-timezone-time {
+    width: auto;
+    background: #252B37;
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 24px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 22px;
+    font-weight: 550;
+    font-family: 'Inter';
+    width: 260px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    gap: 2px;
+}
+.fb-timezone-container .fb-timezone-time .fb-timezone-timezone {
+    color: #717680;
+}
 .fb-timezone-container .fb-timezone-header {
     display: flex;
     width: fit-content;

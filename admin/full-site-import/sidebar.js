@@ -1,6 +1,5 @@
 import { __ } from "@wordpress/i18n";
 import { PluginSidebar, PluginSidebarMoreMenuItem } from "@wordpress/editor";
-import domReady from '@wordpress/dom-ready';
 import { useDispatch } from '@wordpress/data';
 import {
 	Button,
@@ -725,7 +724,7 @@ function FrontisBlocksSidebarFullSite(props) {
 							} else {
 								setFontfamilies(res.data);
 								getAllFontFamilies(res.data)
-								localStorage.setItem('fb_fontfamilies', JSON.stringify(res.data));
+								localStorage.setItem('fb_fontFamilies', JSON.stringify(res.data));
 							}
 						} else {
 							getAllFontFamilies(localStorageData)
@@ -759,9 +758,7 @@ function FrontisBlocksSidebarFullSite(props) {
 			}
 		}
 
-		domReady(() => {
-			handleUpdateState();
-		});
+		handleUpdateState();
 
 	}, []);
 

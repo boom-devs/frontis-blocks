@@ -38,7 +38,7 @@ $display_caption               = !empty( $attributes['displayCaption'] );
 $image_style                   = fb_norm_str( $attributes['imageStyle'] ?? '' );
 $image_size                    = fb_norm_str( $attributes['imageSize'] ?? '' );
 $image_hover                   = fb_norm_str( $attributes['imageHover'] ?? '' );
-$image_fit                     = fb_norm_str( $attributes['imageFit'] ?? 'cover' );
+$image_fit                     = fb_norm_str( $attributes['imageFit'] ?? '' );
 $auto_fit_switch               = !empty( $attributes['autoFitSwitch'] );
 
 $title_text                    = fb_norm_str( $attributes['titleText'] ?? 'Fly in the sky' );
@@ -71,8 +71,8 @@ $dynamic_image_fallback_url    = fb_norm_str( $attributes['dynamicImageFallbackU
 $dynamic_image_fallback_alt    = fb_norm_str( $attributes['dynamicImageFallbackAlt'] ?? __( 'Image', 'frontis-blocks' ) );
 $dynamic_image_fallback_id     = fb_norm_str( $attributes['dynamicImageFallbackId'] ?? '' );
 
-$dynamic_enable_link           = !empty( $attributes['dynamicImageEnableLink'] );
-$dynamic_link_source           = fb_norm_str( $attributes['dynamicImageLinkSource'] ?? 'post_permalink' );
+$dynamic_enable_link           = !empty( $attributes['dynamicEnableLink'] );
+$dynamic_link_source           = fb_norm_str( $attributes['dynamicLinkSource'] ?? 'post_permalink' );
 
 $loop_post_id   = isset( $block->context['postId'] ) ? (int) $block->context['postId'] : 0;
 $loop_post_type = isset( $block->context['postType'] ) ? (string) $block->context['postType'] : '';

@@ -7,7 +7,6 @@ use WP_REST_Request;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\RestApi\Blocks\PostGrid;
-use FrontisBlocks\RestApi\Blocks\PostCategory;
 
 
 class RestApi {
@@ -25,6 +24,5 @@ class RestApi {
      */
     public function fb_init_rest_api_blocks() {
         PostGrid::get_instance();
-        PostCategory::get_instance();
     }
 }

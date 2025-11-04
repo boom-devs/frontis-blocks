@@ -50,12 +50,6 @@ export const MULTI_ICON_POSITION = [
 	{ label: __("Left", "frontis-blocks"), value: "left" },
 ];
 
-export const ICON_TEXT_ALIGN = [
-	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
-	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
-	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
-];
-
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
@@ -99,13 +93,6 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-];
-
-export const TEXT_ALIGN_JUSTIFY = [
-	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
-	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
-	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	{ label: __(<Dashicon icon={"menu"} />), value: "justify" }
 ];
 
 export const HEADING = [
@@ -254,6 +241,9 @@ export const ADVANCED_HEADING_PRESETS = [
 	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+	{ label: __("Preset 7", "frontis-blocks"), value: "preset-7" },
+	{ label: __("Preset 8", "frontis-blocks"), value: "preset-8" },
+	{ label: __("Preset 9", "frontis-blocks"), value: "preset-9" },
 ];
 
 export const POST_SWITCHER = [
@@ -369,7 +359,7 @@ export const WP_IMAGE_SIZE_OPTIONS = [
 	{ label: __('Large', 'frontis-blocks'), value: 'large' },
 ];
   
-export const getdynamicTextDateFormatOptions = (sampleDate = new Date()) => {
+export const getDynamicDateFormatOptions = (sampleDate = new Date()) => {
 
 	const fmt = (phpFmt) => dateI18n(phpFmt, sampleDate);
   
@@ -384,7 +374,7 @@ export const getdynamicTextDateFormatOptions = (sampleDate = new Date()) => {
 	];
 };
 
-export const getdynamicTextTimeFormatOptions = (sampleDate = new Date()) => {
+export const getDynamicTimeFormatOptions = (sampleDate = new Date()) => {
 
 	const d = sampleDate instanceof Date ? sampleDate : new Date(sampleDate);
   
@@ -442,104 +432,4 @@ export const NAVIGATION_POSITION = [
 export const LABEL_POSITION = [
 	{ label: __("Right", "frontis-blocks"), value: "right" },
 	{ label: __("Left", "frontis-blocks"), value: "left" },
-];
-
-export const TITLE_POSITION = [
-    { label: __("Center", "frontis-block"), value: "center" },
-    { label: __("Center Left", "frontis-block"), value: "center-left" },
-    { label: __("Center Right", "frontis-block"), value: "center-right" },
-    { label: __("Top Left", "frontis-block"), value: "top-left" },
-    { label: __("Top Center", "frontis-block"), value: "top-center" },
-    { label: __("Top Right", "frontis-block"), value: "top-right" },
-    { label: __("Bottom Left", "frontis-block"), value: "bottom-left" },
-    { label: __("Bottom Center", "frontis-block"), value: "bottom-center" },
-    { label: __("Bottom Right", "frontis-block"), value: "bottom-right" },
-    { label: __("Vertically Center", "frontis-block"), value: "vertical-center" },
-];
-
-export const IMAGE_STYLES = [
-    { label: __("Square", "frontis-block"), value: "square" },
-    { label: __("Octagon", "frontis-block"), value: "octagon" },
-    { label: __("Triangle", "frontis-block"), value: "triangle" },
-    { label: __("Rhombus", "frontis-block"), value: "rhombus" },
-    { label: __("Hexagon", "frontis-block"), value: "hexagon" },
-    { label: __("Bevel", "frontis-block"), value: "bevel" },
-    { label: __("Collage", "frontis-block"), value: "collage" },
-    { label: __("Abstract", "frontis-block"), value: "abstract" },
-    { label: __("Irregular Blob", "frontis-block"), value: "irregular" },
-    { label: __("Flower", "frontis-block"), value: "flower" },
-    { label: __("Organic Blob", "frontis-block"), value: "organic-blob" },
-    { label: __("Teardrop", "frontis-block"), value: "teardrop" },
-    { label: __("Triangle Blob", "frontis-block"), value: "triangle-blob" },
-    { label: __("Wavy Stripes", "frontis-block"), value: "wavy-stripes" },
-    { label: __("Token", "frontis-block"), value: "token" },
-];
-
-export const IMAGE_HOVER_EFFECTS = [
-    { label: __("No Effect", "frontis-blocks"), value: "no-effect", },
-    { label: __("Zoom In", "frontis-blocks"), value: "zoom-in", },
-    { label: __("Zoom Out", "frontis-blocks"), value: "zoom-out", },
-    { label: __("Slide", "frontis-blocks"), value: "slide", },
-    { label: __("Blur", "frontis-blocks"), value: "blur", },
-    { label: __("Overlay", "frontis-blocks"), value: "overlay", },
-    { label: __("Tilt", "frontis-blocks"), value: "tilt", },
-    { label: __("Skew", "frontis-blocks"), value: "skew", },
-];
-
-export const IMAGE_AUTO_FIT = [
-    { label: __("Cover", "frontis-blocks"), value: "cover", },
-    { label: __("Fill", "frontis-blocks"), value: "fill", },
-    { label: __("Contain", "frontis-blocks"), value: "contain", },
-];
-
-export const IMAGE_MASK_SIZE = [
-    { label: __("Cover", "frontis-blocks"), value: "cover" },
-    { label: __("Contain", "frontis-blocks"), value: "contain" },
-    { label: __("Auto", "frontis-blocks"), value: "auto" },
-];
-export const IMAGE_MASK_POSITION = [ 
-    { label: __("Center", "frontis-blocks"), value: "center" },
-    { label: __("Top", "frontis-blocks"), value: "top" },
-    { label: __("Left", "frontis-blocks"), value: "left" },
-    { label: __("Right", "frontis-blocks"), value: "right" },
-];
-export const IMAGE_MASK_REPEAT = [
-    { label: __("No Repeat", "frontis-blocks"), value: "no-repeat" },
-    { label: __("Repeat", "frontis-blocks"), value: "repeat" },
-];
-
-export const IMAGE_MASK_IMAEGS = {
-    'collage': FrontisBlocksData.pluginUrl + '/assets/images/photo-collage.svg',
-    'abstract': FrontisBlocksData.pluginUrl + '/assets/images/abstract.svg',
-    'irregular': FrontisBlocksData.pluginUrl + '/assets/images/irregular-blob.svg',
-    'flower': FrontisBlocksData.pluginUrl + '/assets/images/Flower.svg',
-    'organic-blob': FrontisBlocksData.pluginUrl + '/assets/images/organic-blob.svg',
-    'teardrop': FrontisBlocksData.pluginUrl + '/assets/images/teardrop.svg',
-    'triangle-blob': FrontisBlocksData.pluginUrl + '/assets/images/triangle-blob.svg',
-    'wavy-stripes': FrontisBlocksData.pluginUrl + '/assets/images/wavy-stripes.svg',
-    'token': FrontisBlocksData.pluginUrl + '/assets/images/token.svg',
-}
-export const ADVANCED_BUTTON_PRESETS = [
-	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
-	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
-	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
-	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
-	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
-	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
-];
-
-
-// You can add any constants needed for the comment form here
-export const DEFAULT_TEXTS = {
-    formTitle: "Leave a Reply",
-    cancelReply: "Cancel reply",
-    loginText: "Logged in as",
-    logoutText: "Log out?",
-    buttonText: "Post Comment",
-};
-
-export const FORM_LAYOUTS = [
-    { label: "Default", value: "default" },
-    { label: "Compact", value: "compact" },
-    { label: "Modern", value: "modern" },
 ];

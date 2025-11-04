@@ -1,6 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import React from 'react';
 import {__} from '@wordpress/i18n';
+import {
+	Button,
+	ButtonGroup
+} from '@wordpress/components';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
 
@@ -23,7 +27,7 @@ export default function FB_Spacing( {
 	}
 
 	const handleMarginLinkToggle = () => {
-		spacingCombineBtnHandler();
+		spacingCombineBtnHandler()
 	};
 
 	const UNIT_TYPES = [
@@ -101,7 +105,6 @@ export default function FB_Spacing( {
 						<input
 							type="number"
 							name="top"
-							// placeholder={topPlaceholder}
 							value={getSpacingValue( 'top' ) || ''}
 							onChange={( e ) => handleSpacingUnit( e, 'top' )}
 						/>

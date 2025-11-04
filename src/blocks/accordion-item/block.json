@@ -23,11 +23,9 @@
       "fb/accordionInheritedTabIconSwitcher",
       "fb/accordionInheritedTabIcon",
       "fb/accordionInheritedTabImageUrl",
-      "fb/accordionInheritedTabImageAlt",
       "fb/accordionInheritedExpandedIconSwitcher",
       "fb/accordionInheritedExpandedIcon",
       "fb/accordionInheritedExpandedImageUrl",
-      "fb/accordionInheritedExpandedImageAlt",
       "fb/accordionInheritedTagName",
       "fb/accordionFaqSchema"
     ]

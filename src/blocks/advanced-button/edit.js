@@ -4,9 +4,10 @@ import {
     RichText, 
     BlockControls,
     AlignmentToolbar,
+    MediaUpload,
+    MediaUploadCheck,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
-
 import { useRef } from '@wordpress/element';
 
 /**
@@ -14,11 +15,10 @@ import { useRef } from '@wordpress/element';
  */
 import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
-import DynamicTextValue from '@Components/dynamic-text-value';
+import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings'; 
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
         buttonAlignment,
@@ -26,12 +26,20 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         buttonText,
         buttonUrl,
         buttonTargetUrl,
+        buttonWidth,
         buttonIcon,
+        buttonZIndex,
         buttonIconAlign,
         buttonIconPosition,
 
         buttonIconImageUrl,
 		buttonIconImageAlt,
+		buttonIconImageID,
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		buttonIconImagedisplay,
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
@@ -39,29 +47,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         advancedBtnDesktopSwitcher,
         advancedBtnTabletSwitcher,
         advancedBtnMobileSwitcher,
-
-        dynamicTextEnabled,
-		dynamicTextSource,
-		dynamicTextPostId,
-		dynamicTextPostType,
-		dynamicTextPostLabel,
-		dynamicTextField,
-		dynamicFeaturedImageField,
-
-		dynamicTextDateType,
-		dynamicTextDateFormat,
-
-		dynamicTextTimeType,
-		dynamicTextTimeFormat,
-
-		dynamicTextCommentsZeroText,
-		dynamicTextCommentsOneText,
-		dynamicTextCommentsManyText,
-
-		dynamicTextTermsTaxonomy,
-		dynamicTextTermsSeparator,
-		dynamicTextEnableLink,
-		dynamicTextLinkSource,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -82,37 +67,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         event.preventDefault();
     };
 
-	/**
-	 * Dynamic Text Value for Title
-	 */
-	const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({ 
-		textEnabled:            dynamicTextEnabled,
-		textSource:             dynamicTextSource, 
-		textField:              dynamicTextField,
-
-		textPostId:             dynamicTextPostId,
-		textPostType:           dynamicTextPostType,
-		textPostLabel:          dynamicTextPostLabel,
-
-		textFeaturedImageField: dynamicFeaturedImageField, 
-
-		textDateType:           dynamicTextDateType,
-		textDateFormat:         dynamicTextDateFormat,
-		textTimeType:           dynamicTextTimeType,
-		textTimeFormat:         dynamicTextTimeFormat,
-
-		textCommentsZeroText:   dynamicTextCommentsZeroText,
-		textCommentsOneText:    dynamicTextCommentsOneText,
-		textCommentsManyText:   dynamicTextCommentsManyText,
-
-		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
-		textTermsSeparator:     dynamicTextTermsSeparator,
-
-		textLinkEnabled:        dynamicTextEnableLink,
-		textLinkSource:         dynamicTextLinkSource,
-
-		context,
-	});
 
     return (
         <>
@@ -169,12 +123,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                         {buttonTextSwitcher && (
                             <RichText
                                 tagName="span"
-                                value={dynamicTextEnabled ? dynamicDisplayValue : buttonText}
-                                onChange={(value) => {
-                                    if (!dynamicTextEnabled) setAttributes({ buttonText: value });
-                                }}
+                                value={buttonText}
+                                onChange={(value) => setAttributes({ buttonText: value })}
                                 placeholder={__('Enter button text...', 'frontis-blocks')}
-                                className="fb-advanced-button-text"
+                                className={`fb-advanced-button-text`}
                             />
                         )}
 

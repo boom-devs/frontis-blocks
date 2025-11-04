@@ -30,7 +30,6 @@ export const FLIP_ANIMATION = [
 ];
 
 export const mediaType = [
-	{ label: __("None", "frontis-block"), value: "none" },
 	{ label: __("Icon", "frontis-block"), value: "icon" },
 	{ label: __("Image", "frontis-block"), value: "image" },
 ];

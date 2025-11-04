@@ -5,16 +5,15 @@ namespace FrontisBlocks;
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;
+use FrontisBlocks\Utils\Enqueue;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Admin\Ajax\GlobalSettings;
-use FrontisBlocks\Admin\Ajax\TemplateLibrary;
+use FrontisBlocks\Core\FontLoader;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\Enqueues;
 use FrontisBlocks\RestApi\RestApi;
-use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
-use FrontisBlocks\Assets\AssetsGenerationStatus;
 
 final class Plugin {
 	/**
@@ -22,7 +21,7 @@ final class Plugin {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.0';
+	const VERSION = '1.0.9';
 
 	/**
 	 * Plugin slug
@@ -132,12 +131,16 @@ final class Plugin {
 	 * Initialize classes
 	 */
 	private function init_classes() {
+		$this->asset = Enqueue::get_instance(FB_PLUGIN_URL, FB_PLUGIN_PATH, self::VERSION);
 
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
 
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
+
+		// Load google font
+		FontLoader::get_instance();
 	}
 
 	/**
@@ -158,10 +161,7 @@ final class Plugin {
 		InitialActivatedBlocks::blocks();
 		GlobalSettings::get_instance()->register_global_settings_events();
 		BlocksAjax::get_instance()->register_blocks_ajax_events();
-		TemplateLibrary::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
 		RestApi::get_instance();
-		AssetsGenerationStatus::get_instance();
-		AssetsGenerationProcess::get_instance();
 	}
 }

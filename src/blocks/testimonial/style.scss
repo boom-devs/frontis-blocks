@@ -13,13 +13,6 @@
         text-align: right;
     }
 
-    a {
-        &:focus {
-            outline: none !important;
-            box-shadow: none !important;
-        }
-    }
-
     .fb-testimonial-wrapper {
         width: 100%;
     }

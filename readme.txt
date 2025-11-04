@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.0.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,13 +197,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
-
-= 1.1.0 – 16 October 2025 =
-- **`critical-css` block** to inline critical styles per page/template.
-- **Template Patterns** for **Pages** and **Site** to speed up layout creation from the inserter.
-- Enhancements across existing blocks (refined controls, better defaults, stability).
-- Multiple bug fixes across existing blocks.
-- Works with the **latest Gutenberg and WordPress**
 
 = 1.0.9 – 04 September 2025 =
 New Blocks:

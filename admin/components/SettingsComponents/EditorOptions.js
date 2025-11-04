@@ -81,7 +81,7 @@ const EditorOptions = () => {
       Tablet: '10',
       Mobile: '10',
     },
-    automatic_block_recovery: true,
+    automatic_block_recovery: false,
     custom_css: false,
     copy_paste_style: false,
   });

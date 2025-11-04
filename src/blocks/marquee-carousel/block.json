@@ -4,6 +4,7 @@
 	"name": "frontis-blocks/marquee-carousel",
 	"version": "1.0.0",
 	"title": "Marquee Carousel",
+	"icon": "slides",
 	"category": "frontis-blocks",
 	"description": "Create an engaging marquee carousel with smooth transitions and customizable settings.",
 	"example": {},

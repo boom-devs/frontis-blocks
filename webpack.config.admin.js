@@ -21,14 +21,13 @@ module.exports = {
 	},
 	entry: {
 		index: path.resolve(process.cwd(), 'admin', 'index.js'),
-		// dynamicContent: path.resolve(process.cwd(), 'admin', 'dynamic-content', 'index.js'),
+		dynamicContent: path.resolve(process.cwd(), 'admin', 'dynamic-content', 'index.js'),
 		sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
 		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js'),
 		quickAccess:path.resolve(process.cwd(), 'admin', 'quick-sidebar', 'index.js'),
 		blockRecovery: path.resolve(process.cwd(), 'admin', 'block-recovery', 'index.js'),
 		copyPasteStyle: path.resolve(process.cwd(), 'admin', 'copy-paste', 'index.js'),
 		highlightColor: path.resolve(process.cwd(), 'admin', 'highlight-color', 'index.js'),
-		headerFooterInstall: path.resolve(process.cwd(), 'admin', 'header-footer', 'index.js'),
 
 	},
 	output: {

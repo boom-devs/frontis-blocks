@@ -52,11 +52,6 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
-import getProToggleControls from '@Utils/getProToggleControls';
-import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
-import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 
 import './editor.scss';
 
@@ -83,7 +78,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         RatingSwitcher,
         TestimonialRatingNumber,
         TestimonialRatingicon,
-        FrontendTestimonialRatingicon,
         TestimonialRatingImageUrl,
         TestimonialRatingImageAlt,
         TestimonialRatingImageID,
@@ -316,106 +310,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRTopOffsetUnits,
         testimonialVRBottomOffset,
         testimonialVRBottomOffsetUnits,
-
-        /** Start Dynamic Title Text */
-		dynamicTitleEnabled,
-		dynamicTitleSource,
-		dynamicTitlePostId,
-		dynamicTitlePostType,
-		dynamicTitlePostLabel,
-		dynamicTitleField,
-		dynamicTitleFeaturedImageField,
-
-		dynamicTitleDateType,
-		dynamicTitleDateFormat,
-
-		dynamicTitleTimeType,
-		dynamicTitleTimeFormat,
-
-		dynamicTitleCommentsZeroText,
-		dynamicTitleCommentsOneText,
-		dynamicTitleCommentsManyText,
-
-		dynamicTitleTermsTaxonomy,
-		dynamicTitleTermsSeparator,
-		dynamicTitleEnableLink,
-		dynamicTitleLinkSource,
-		/** End Dynamic Title Text */
-
-		/** Start Dynamic Description Text */
-		dynamicDescriptionEnabled,
-		dynamicDescriptionSource,
-		dynamicDescriptionPostId,
-		dynamicDescriptionPostType,
-		dynamicDescriptionPostLabel,
-		dynamicDescriptionField,
-		dynamicDescriptionFeaturedImageField,
-
-		dynamicDescriptionDateType,
-		dynamicDescriptionDateFormat,
-
-		dynamicDescriptionTimeType,
-		dynamicDescriptionTimeFormat,
-
-		dynamicDescriptionCommentsZeroText,
-		dynamicDescriptionCommentsOneText,
-		dynamicDescriptionCommentsManyText,
-
-		dynamicDescriptionTermsTaxonomy,
-		dynamicDescriptionTermsSeparator,
-		dynamicDescriptionEnableLink,
-		dynamicDescriptionLinkSource,
-		/** End Dynamic Description Text */
-
-        /** Start Dynamic Author Name Text */
-		dynamicAuthorNameEnabled,
-		dynamicAuthorNameSource,
-		dynamicAuthorNamePostId,
-		dynamicAuthorNamePostType,
-		dynamicAuthorNamePostLabel,
-		dynamicAuthorNameField,
-		dynamicAuthorNameFeaturedImageField,
-
-		dynamicAuthorNameDateType,
-		dynamicAuthorNameDateFormat,
-
-		dynamicAuthorNameTimeType,
-		dynamicAuthorNameTimeFormat,
-
-		dynamicAuthorNameCommentsZeroText,
-		dynamicAuthorNameCommentsOneText,
-		dynamicAuthorNameCommentsManyText,
-
-		dynamicAuthorNameTermsTaxonomy,
-		dynamicAuthorNameTermsSeparator,
-		dynamicAuthorNameEnableLink,
-		dynamicAuthorNameLinkSource,
-		/** End Dynamic Author Name Text */
-
-        /** Start Dynamic Author Designation Text */
-		dynamicAuthorDesignationEnabled,
-		dynamicAuthorDesignationSource,
-		dynamicAuthorDesignationPostId,
-		dynamicAuthorDesignationPostType,
-		dynamicAuthorDesignationPostLabel,
-		dynamicAuthorDesignationField,
-		dynamicAuthorDesignationFeaturedImageField,
-
-		dynamicAuthorDesignationDateType,
-		dynamicAuthorDesignationDateFormat,
-
-		dynamicAuthorDesignationTimeType,
-		dynamicAuthorDesignationTimeFormat,
-
-		dynamicAuthorDesignationCommentsZeroText,
-		dynamicAuthorDesignationCommentsOneText,
-		dynamicAuthorDesignationCommentsManyText,
-
-		dynamicAuthorDesignationTermsTaxonomy,
-		dynamicAuthorDesignationTermsSeparator,
-		dynamicAuthorDesignationEnableLink,
-		dynamicAuthorDesignationLinkSource,
-		/** End Dynamic Author Designation Text */
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -902,9 +796,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default margin for Testimonial Rating Icon */
-    const testimonialRatingIconDesktopMargin = `${TestimonialRatingIconMarginDesktop?.top}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.right}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.bottom}${TestimonialRatingIconMarginUnits?.Desktop} ${TestimonialRatingIconMarginDesktop?.left}${TestimonialRatingIconMarginUnits?.Desktop}`;
-    const testimonialRatingIconTabletMargin = `${TestimonialRatingIconMarginTablet?.top}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.right}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.bottom}${TestimonialRatingIconMarginUnits?.Tablet} ${TestimonialRatingIconMarginTablet?.left}${TestimonialRatingIconMarginUnits?.Tablet}`;
-    const testimonialRatingIconMobileMargin = `${TestimonialRatingIconMarginMobile?.top}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.right}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.bottom}${TestimonialRatingIconMarginUnits?.Mobile} ${TestimonialRatingIconMarginMobile?.left}${TestimonialRatingIconMarginUnits?.Mobile}`;
+    const testimonialRatingIconDesktopMargin = `${TestimonialRatingIconMarginDesktop.top}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.right}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.bottom}${TestimonialRatingIconMarginUnits.Desktop} ${TestimonialRatingIconMarginDesktop.left}${TestimonialRatingIconMarginUnits.Desktop}`;
+    const testimonialRatingIconTabletMargin = `${TestimonialRatingIconMarginTablet.top}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.right}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.bottom}${TestimonialRatingIconMarginUnits.Tablet} ${TestimonialRatingIconMarginTablet.left}${TestimonialRatingIconMarginUnits.Tablet}`;
+    const testimonialRatingIconMobileMargin = `${TestimonialRatingIconMarginMobile.top}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.right}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.bottom}${TestimonialRatingIconMarginUnits.Mobile} ${TestimonialRatingIconMarginMobile.left}${TestimonialRatingIconMarginUnits.Mobile}`;
     /** End Testimonial Rating Icon Margin */
 
 
@@ -978,9 +872,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialTitleDesktopMargin = `${TestimonialTitleMarginDesktop?.top}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.right}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.bottom}${TestimonialTitleMarginUnits?.Desktop} ${TestimonialTitleMarginDesktop?.left}${TestimonialTitleMarginUnits?.Desktop}`;
-    const testimonialTitleTabletMargin = `${TestimonialTitleMarginTablet?.top}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.right}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.bottom}${TestimonialTitleMarginUnits?.Tablet} ${TestimonialTitleMarginTablet?.left}${TestimonialTitleMarginUnits?.Tablet}`;
-    const testimonialTitleMobileMargin = `${TestimonialTitleMarginMobile?.top}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.right}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.bottom}${TestimonialTitleMarginUnits?.Mobile} ${TestimonialTitleMarginMobile?.left}${TestimonialTitleMarginUnits?.Mobile}`;
+    const testimonialTitleDesktopMargin = `${TestimonialTitleMarginDesktop.top}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.right}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.bottom}${TestimonialTitleMarginUnits.Desktop} ${TestimonialTitleMarginDesktop.left}${TestimonialTitleMarginUnits.Desktop}`;
+    const testimonialTitleTabletMargin = `${TestimonialTitleMarginTablet.top}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.right}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.bottom}${TestimonialTitleMarginUnits.Tablet} ${TestimonialTitleMarginTablet.left}${TestimonialTitleMarginUnits.Tablet}`;
+    const testimonialTitleMobileMargin = `${TestimonialTitleMarginMobile.top}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.right}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.bottom}${TestimonialTitleMarginUnits.Mobile} ${TestimonialTitleMarginMobile.left}${TestimonialTitleMarginUnits.Mobile}`;
     /** End Testimonial Title Margin */
 
 
@@ -1054,9 +948,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialDescDesktopMargin = `${TestimonialDescMarginDesktop?.top}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.right}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.bottom}${TestimonialDescMarginUnits?.Desktop} ${TestimonialDescMarginDesktop?.left}${TestimonialDescMarginUnits?.Desktop}`;
-    const testimonialDescTabletMargin = `${TestimonialDescMarginTablet?.top}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.right}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.bottom}${TestimonialDescMarginUnits?.Tablet} ${TestimonialDescMarginTablet?.left}${TestimonialDescMarginUnits?.Tablet}`;
-    const testimonialDescMobileMargin = `${TestimonialDescMarginMobile?.top}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.right}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.bottom}${TestimonialDescMarginUnits?.Mobile} ${TestimonialDescMarginMobile?.left}${TestimonialDescMarginUnits?.Mobile}`;
+    const testimonialDescDesktopMargin = `${TestimonialDescMarginDesktop.top}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.right}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.bottom}${TestimonialDescMarginUnits.Desktop} ${TestimonialDescMarginDesktop.left}${TestimonialDescMarginUnits.Desktop}`;
+    const testimonialDescTabletMargin = `${TestimonialDescMarginTablet.top}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.right}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.bottom}${TestimonialDescMarginUnits.Tablet} ${TestimonialDescMarginTablet.left}${TestimonialDescMarginUnits.Tablet}`;
+    const testimonialDescMobileMargin = `${TestimonialDescMarginMobile.top}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.right}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.bottom}${TestimonialDescMarginUnits.Mobile} ${TestimonialDescMarginMobile.left}${TestimonialDescMarginUnits.Mobile}`;
     /** End Testimonial Desc Margin */
 
 
@@ -1130,9 +1024,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialImageDesktopMargin = `${TestimonialImageMarginDesktop?.top}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.right}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.bottom}${TestimonialImageMarginUnits?.Desktop} ${TestimonialImageMarginDesktop?.left}${TestimonialImageMarginUnits?.Desktop}`;
-    const testimonialImageTabletMargin = `${TestimonialImageMarginTablet?.top}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.right}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.bottom}${TestimonialImageMarginUnits?.Tablet} ${TestimonialImageMarginTablet?.left}${TestimonialImageMarginUnits?.Tablet}`;
-    const testimonialImageMobileMargin = `${TestimonialImageMarginMobile?.top}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.right}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.bottom}${TestimonialImageMarginUnits?.Mobile} ${TestimonialImageMarginMobile?.left}${TestimonialImageMarginUnits?.Mobile}`;
+    const testimonialImageDesktopMargin = `${TestimonialImageMarginDesktop.top}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.right}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.bottom}${TestimonialImageMarginUnits.Desktop} ${TestimonialImageMarginDesktop.left}${TestimonialImageMarginUnits.Desktop}`;
+    const testimonialImageTabletMargin = `${TestimonialImageMarginTablet.top}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.right}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.bottom}${TestimonialImageMarginUnits.Tablet} ${TestimonialImageMarginTablet.left}${TestimonialImageMarginUnits.Tablet}`;
+    const testimonialImageMobileMargin = `${TestimonialImageMarginMobile.top}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.right}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.bottom}${TestimonialImageMarginUnits.Mobile} ${TestimonialImageMarginMobile.left}${TestimonialImageMarginUnits.Mobile}`;
     /** End Testimonial Image Margin */
 
 
@@ -1206,9 +1100,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialAuthorDesktopMargin = `${TestimonialAuthorMarginDesktop?.top}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.right}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.bottom}${TestimonialAuthorMarginUnits?.Desktop} ${TestimonialAuthorMarginDesktop?.left}${TestimonialAuthorMarginUnits?.Desktop}`;
-    const testimonialAuthorTabletMargin = `${TestimonialAuthorMarginTablet?.top}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.right}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.bottom}${TestimonialAuthorMarginUnits?.Tablet} ${TestimonialAuthorMarginTablet?.left}${TestimonialAuthorMarginUnits?.Tablet}`;
-    const testimonialAuthorMobileMargin = `${TestimonialAuthorMarginMobile?.top}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.right}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.bottom}${TestimonialAuthorMarginUnits?.Mobile} ${TestimonialAuthorMarginMobile?.left}${TestimonialAuthorMarginUnits?.Mobile}`;
+    const testimonialAuthorDesktopMargin = `${TestimonialAuthorMarginDesktop.top}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.right}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.bottom}${TestimonialAuthorMarginUnits.Desktop} ${TestimonialAuthorMarginDesktop.left}${TestimonialAuthorMarginUnits.Desktop}`;
+    const testimonialAuthorTabletMargin = `${TestimonialAuthorMarginTablet.top}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.right}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.bottom}${TestimonialAuthorMarginUnits.Tablet} ${TestimonialAuthorMarginTablet.left}${TestimonialAuthorMarginUnits.Tablet}`;
+    const testimonialAuthorMobileMargin = `${TestimonialAuthorMarginMobile.top}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.right}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.bottom}${TestimonialAuthorMarginUnits.Mobile} ${TestimonialAuthorMarginMobile.left}${TestimonialAuthorMarginUnits.Mobile}`;
     /** End Testimonial Author Margin */
 
 
@@ -1282,9 +1176,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialDesignationDesktopMargin = `${TestimonialDesignationMarginDesktop?.top}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.right}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.bottom}${TestimonialDesignationMarginUnits?.Desktop} ${TestimonialDesignationMarginDesktop?.left}${TestimonialDesignationMarginUnits?.Desktop}`;
-    const testimonialDesignationTabletMargin = `${TestimonialDesignationMarginTablet?.top}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.right}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.bottom}${TestimonialDesignationMarginUnits?.Tablet} ${TestimonialDesignationMarginTablet?.left}${TestimonialDesignationMarginUnits?.Tablet}`;
-    const testimonialDesignationMobileMargin = `${TestimonialDesignationMarginMobile?.top}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.right}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.bottom}${TestimonialDesignationMarginUnits?.Mobile} ${TestimonialDesignationMarginMobile?.left}${TestimonialDesignationMarginUnits?.Mobile}`;
+    const testimonialDesignationDesktopMargin = `${TestimonialDesignationMarginDesktop.top}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.right}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.bottom}${TestimonialDesignationMarginUnits.Desktop} ${TestimonialDesignationMarginDesktop.left}${TestimonialDesignationMarginUnits.Desktop}`;
+    const testimonialDesignationTabletMargin = `${TestimonialDesignationMarginTablet.top}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.right}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.bottom}${TestimonialDesignationMarginUnits.Tablet} ${TestimonialDesignationMarginTablet.left}${TestimonialDesignationMarginUnits.Tablet}`;
+    const testimonialDesignationMobileMargin = `${TestimonialDesignationMarginMobile.top}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.right}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.bottom}${TestimonialDesignationMarginUnits.Mobile} ${TestimonialDesignationMarginMobile.left}${TestimonialDesignationMarginUnits.Mobile}`;
     /** End Testimonial Designation Margin */
 
 
@@ -1358,9 +1252,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     };
 
-    const testimonialQuoteIconDesktopMargin = `${TestimonialQuoteIconMarginDesktop?.top}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.right}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.bottom}${TestimonialQuoteIconMarginUnits?.Desktop} ${TestimonialQuoteIconMarginDesktop?.left}${TestimonialQuoteIconMarginUnits?.Desktop}`;
-    const testimonialQuoteIconTabletMargin = `${TestimonialQuoteIconMarginTablet?.top}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.right}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.bottom}${TestimonialQuoteIconMarginUnits?.Tablet} ${TestimonialQuoteIconMarginTablet?.left}${TestimonialQuoteIconMarginUnits?.Tablet}`;
-    const testimonialQuoteIconMobileMargin = `${TestimonialQuoteIconMarginMobile?.top}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.right}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.bottom}${TestimonialQuoteIconMarginUnits?.Mobile} ${TestimonialQuoteIconMarginMobile?.left}${TestimonialQuoteIconMarginUnits?.Mobile}`;
+    const testimonialQuoteIconDesktopMargin = `${TestimonialQuoteIconMarginDesktop.top}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.right}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.bottom}${TestimonialQuoteIconMarginUnits.Desktop} ${TestimonialQuoteIconMarginDesktop.left}${TestimonialQuoteIconMarginUnits.Desktop}`;
+    const testimonialQuoteIconTabletMargin = `${TestimonialQuoteIconMarginTablet.top}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.right}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.bottom}${TestimonialQuoteIconMarginUnits.Tablet} ${TestimonialQuoteIconMarginTablet.left}${TestimonialQuoteIconMarginUnits.Tablet}`;
+    const testimonialQuoteIconMobileMargin = `${TestimonialQuoteIconMarginMobile.top}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.right}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.bottom}${TestimonialQuoteIconMarginUnits.Mobile} ${TestimonialQuoteIconMarginMobile.left}${TestimonialQuoteIconMarginUnits.Mobile}`;
     /** End Testimonial Quote Icon Margin */
 
 
@@ -1435,9 +1329,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border radius for Testimonial Image */
-    const testimonialImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth?.top}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.right}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Desktop} ${TestimonialImageDesktopRadiusWidth?.left}${TestimonialImageRadiusUnits?.Desktop}`;
-    const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth?.top}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.right}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Tablet} ${TestimonialImageTabRadiusWidth?.left}${TestimonialImageRadiusUnits?.Tablet}`;
-    const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth?.top}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.right}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.bottom}${TestimonialImageRadiusUnits?.Mobile} ${TestimonialImageMobileRadiusWidth?.left}${TestimonialImageRadiusUnits?.Mobile}`;
+    const testimonialImageDesktopBorderRadiusWidth = `${TestimonialImageDesktopRadiusWidth.top}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.right}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.bottom}${TestimonialImageRadiusUnits.Desktop} ${TestimonialImageDesktopRadiusWidth.left}${TestimonialImageRadiusUnits.Desktop}`;
+    const testimonialImageTabletBorderRadiusWidth = `${TestimonialImageTabRadiusWidth.top}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.right}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.bottom}${TestimonialImageRadiusUnits.Tablet} ${TestimonialImageTabRadiusWidth.left}${TestimonialImageRadiusUnits.Tablet}`;
+    const testimonialImageMobileBorderRadiusWidth = `${TestimonialImageMobileRadiusWidth.top}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.right}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.bottom}${TestimonialImageRadiusUnits.Mobile} ${TestimonialImageMobileRadiusWidth.left}${TestimonialImageRadiusUnits.Mobile}`;
     /** End Testimonial Image Border Radius */
 
 
@@ -1509,9 +1403,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop?.top}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.right}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.bottom}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.left}${TestimonialGlobalPaddingUnits?.Desktop}`;
-	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet?.top}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.right}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.bottom}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.left}${TestimonialGlobalPaddingUnits?.Tablet}`;
-	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile?.top}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.right}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.bottom}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.left}${TestimonialGlobalPaddingUnits?.Mobile}`;
+	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop.top}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.right}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.bottom}${TestimonialGlobalPaddingUnits.Desktop} ${TestimonialGlobalPaddingDesktop.left}${TestimonialGlobalPaddingUnits.Desktop}`;
+	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet.top}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.right}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.bottom}${TestimonialGlobalPaddingUnits.Tablet} ${TestimonialGlobalPaddingTablet.left}${TestimonialGlobalPaddingUnits.Tablet}`;
+	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile.top}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.right}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.bottom}${TestimonialGlobalPaddingUnits.Mobile} ${TestimonialGlobalPaddingMobile.left}${TestimonialGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
 	
 	/** Start Global Margin */
@@ -1583,9 +1477,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 
-	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop?.top}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.right}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.bottom}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.left}${TestimonialGlobalMarginUnits?.Desktop}`;
-	const globalTabletMargin = `${TestimonialGlobalMarginTablet?.top}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.right}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.bottom}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.left}${TestimonialGlobalMarginUnits?.Tablet}`;
-	const globalMobileMargin = `${TestimonialGlobalMarginMobile?.top}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.right}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.bottom}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.left}${TestimonialGlobalMarginUnits?.Mobile}`;
+	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop.top}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.right}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.bottom}${TestimonialGlobalMarginUnits.Desktop} ${TestimonialGlobalMarginDesktop.left}${TestimonialGlobalMarginUnits.Desktop}`;
+	const globalTabletMargin = `${TestimonialGlobalMarginTablet.top}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.right}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.bottom}${TestimonialGlobalMarginUnits.Tablet} ${TestimonialGlobalMarginTablet.left}${TestimonialGlobalMarginUnits.Tablet}`;
+	const globalMobileMargin = `${TestimonialGlobalMarginMobile.top}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.right}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.bottom}${TestimonialGlobalMarginUnits.Mobile} ${TestimonialGlobalMarginMobile.left}${TestimonialGlobalMarginUnits.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
@@ -1656,9 +1550,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop?.top}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.right}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.bottom}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.left}${TestimonialGlobalBorderUnits?.Desktop}`;
-	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet?.top}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.right}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.bottom}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.left}${TestimonialGlobalBorderUnits?.Tablet}`;
-	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile?.top}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.right}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.bottom}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.left}${TestimonialGlobalBorderUnits?.Mobile}`;
+	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop.top}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.right}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.bottom}${TestimonialGlobalBorderUnits.Desktop} ${TestimonialGlobalBorderDesktop.left}${TestimonialGlobalBorderUnits.Desktop}`;
+	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet.top}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.right}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.bottom}${TestimonialGlobalBorderUnits.Tablet} ${TestimonialGlobalBorderTablet.left}${TestimonialGlobalBorderUnits.Tablet}`;
+	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile.top}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.right}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.bottom}${TestimonialGlobalBorderUnits.Mobile} ${TestimonialGlobalBorderMobile.left}${TestimonialGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
 
@@ -1733,9 +1627,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Global border */
 
 	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop?.top}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.right}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.bottom}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.left}${TestimonialGlobalBorderRadiusUnits?.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet?.top}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.right}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.bottom}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.left}${TestimonialGlobalBorderRadiusUnits?.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile?.top}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.right}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.bottom}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.left}${TestimonialGlobalBorderRadiusUnits?.Mobile}`;
+	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop.top}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.right}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.bottom}${TestimonialGlobalBorderRadiusUnits.Desktop} ${TestimonialGlobalBorderRadiusDesktop.left}${TestimonialGlobalBorderRadiusUnits.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet.top}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.right}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.bottom}${TestimonialGlobalBorderRadiusUnits.Tablet} ${TestimonialGlobalBorderRadiusTablet.left}${TestimonialGlobalBorderRadiusUnits.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile.top}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.right}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.bottom}${TestimonialGlobalBorderRadiusUnits.Mobile} ${TestimonialGlobalBorderRadiusMobile.left}${TestimonialGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
 
@@ -1747,19 +1641,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${testimonialPositionType === 'default' ? `position: relative;` : ''}
             ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' ? `width: 100%;` : ''}
             ${testimonialPositionType !== 'default' ? `position: ${testimonialPositionType};` : ''}
-            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset?.Desktop !== undefined ? `left: ${testimonialHZLeftOffset?.Desktop}${testimonialHZLeftOffsetUnits?.Desktop};` : ''}
-            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset?.Desktop !== undefined ? `right: ${testimonialHZRightOffset?.Desktop}${testimonialHZRightOffsetUnits?.Desktop};` : ''}
-            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset?.Desktop !== undefined ? `top: ${testimonialVRTopOffset?.Desktop}${testimonialVRTopOffsetUnits?.Desktop};` : ''}
-            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset?.Desktop !== undefined ? `bottom: ${testimonialVRBottomOffset?.Desktop}${testimonialVRBottomOffsetUnits?.Desktop};` : ''}
-            ${TestimonialGlobalZIndex?.Desktop ? `z-index: ${TestimonialGlobalZIndex?.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Desktop !== undefined ? `left: ${testimonialHZLeftOffset.Desktop}${testimonialHZLeftOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Desktop !== undefined ? `right: ${testimonialHZRightOffset.Desktop}${testimonialHZRightOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Desktop !== undefined ? `top: ${testimonialVRTopOffset.Desktop}${testimonialVRTopOffsetUnits.Desktop};` : ''}
+            ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Desktop !== undefined ? `bottom: ${testimonialVRBottomOffset.Desktop}${testimonialVRBottomOffsetUnits.Desktop};` : ''}
+            ${TestimonialGlobalZIndex.Desktop ? `z-index: ${TestimonialGlobalZIndex.Desktop};` : ''}
             ${TestimonialOverflow !== 'default' ? `overflow: ${TestimonialOverflow};` : ''}
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section {
-            ${globalDesktopPadding && TestimonialGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
-            ${globalDesktopMargin && TestimonialGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
+            ${globalDesktopPadding && TestimonialGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ''}
+            ${globalDesktopMargin && TestimonialGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ''} 
             ${TestimonialGlobalBorder ? `border: ${TestimonialGlobalBorder};` : ''} 
-            ${globalDesktopBorderWidth && TestimonialGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
-            ${globalDesktopBorderRadiusWidth && TestimonialGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${globalDesktopBorderWidth && TestimonialGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth && TestimonialGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
             ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
             ${TestimonialGlobalBgNormalBackgroundType === 'gradient' ? `  
@@ -1789,137 +1683,130 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID} .fb-testimonial-image img {
-            ${TestimonialImageWidth?.Desktop && TestimonialImageWidthUnits?.Desktop ? `width: ${TestimonialImageWidth?.Desktop}${TestimonialImageWidthUnits?.Desktop};` : ''}
-            ${TestimonialImageWidth?.Desktop && TestimonialImageWidthUnits?.Desktop ? `height: ${TestimonialImageWidth?.Desktop}${TestimonialImageWidthUnits?.Desktop};` : ''}
+            ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `width: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
+            ${TestimonialImageWidth.Desktop && TestimonialImageWidthUnits.Desktop ? `height: ${TestimonialImageWidth.Desktop}${TestimonialImageWidthUnits.Desktop};` : ''}
             ${TestimonialImageObjectFit !== 'default' ? `object-fit: ${TestimonialImageObjectFit};` : ''}
-            ${testimonialImageDesktopBorderRadiusWidth && TestimonialImageDesktopRadiusWidth?.top ? `border-radius: ${testimonialImageDesktopBorderRadiusWidth};` : ''}
-            ${testimonialImageDesktopMargin && TestimonialImageMarginDesktop?.top ? `margin: ${testimonialImageDesktopMargin};` : ''}
+            ${testimonialImageDesktopBorderRadiusWidth && TestimonialImageDesktopRadiusWidth.top ? `border-radius: ${testimonialImageDesktopBorderRadiusWidth};` : ''}
+            ${testimonialImageDesktopMargin && TestimonialImageMarginDesktop.top ? `margin: ${testimonialImageDesktopMargin};` : ''}
             ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
-            ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition?.Desktop && TestimonialImageTopPositionUnits?.Desktop ? `${TestimonialImageTopPosition?.Desktop}${TestimonialImageTopPositionUnits?.Desktop}` : '0'};` : ''}
-            ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition?.Desktop && TestimonialImageLeftPositionUnits?.Desktop ? `${TestimonialImageLeftPosition?.Desktop}${TestimonialImageLeftPositionUnits?.Desktop}` : '0'};` : ''}
+            ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Desktop && TestimonialImageTopPositionUnits.Desktop ? `${TestimonialImageTopPosition.Desktop}${TestimonialImageTopPositionUnits.Desktop}` : '0'};` : ''}
+            ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Desktop && TestimonialImageLeftPositionUnits.Desktop ? `${TestimonialImageLeftPosition.Desktop}${TestimonialImageLeftPositionUnits.Desktop}` : '0'};` : ''}
         }
         .${blockID} .fb-testimonial-quote-icon {
             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
-            ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition?.Desktop && TestimonialQuoteIconTopPositionUnits?.Desktop ? `${TestimonialQuoteIconTopPosition?.Desktop}${TestimonialQuoteIconTopPositionUnits?.Desktop}` : '0'};` : ''}
-            ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition?.Desktop && TestimonialQuoteIconLeftPositionUnits?.Desktop ? `${TestimonialQuoteIconLeftPosition?.Desktop}${TestimonialQuoteIconLeftPositionUnits?.Desktop}` : '0'};` : ''}
-            ${testimonialQuoteIconDesktopMargin && TestimonialQuoteIconMarginDesktop?.top? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
+            ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Desktop && TestimonialQuoteIconTopPositionUnits.Desktop ? `${TestimonialQuoteIconTopPosition.Desktop}${TestimonialQuoteIconTopPositionUnits.Desktop}` : '0'};` : ''}
+            ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Desktop && TestimonialQuoteIconLeftPositionUnits.Desktop ? `${TestimonialQuoteIconLeftPosition.Desktop}${TestimonialQuoteIconLeftPositionUnits.Desktop}` : '0'};` : ''}
+            ${testimonialQuoteIconDesktopMargin && TestimonialQuoteIconMarginDesktop.top? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-quote-icon svg {
-            ${TestimonialQuoteIconSize?.Desktop && TestimonialQuoteIconSizeUnits?.Desktop ? `width: ${TestimonialQuoteIconSize?.Desktop}${TestimonialQuoteIconSizeUnits?.Desktop};` : ''}
-            ${TestimonialQuoteIconSize?.Desktop && TestimonialQuoteIconSizeUnits?.Desktop ? `height: ${TestimonialQuoteIconSize?.Desktop}${TestimonialQuoteIconSizeUnits?.Desktop};` : ''}
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
             fill: ${TestimonialQuoteIconColor};
         }
         .${blockID} .fb-testimonial-quote-icon img {
-            ${TestimonialQuoteIconSize?.Desktop && TestimonialQuoteIconSizeUnits?.Desktop ? `width: ${TestimonialQuoteIconSize?.Desktop}${TestimonialQuoteIconSizeUnits?.Desktop};` : ''}
-            ${TestimonialQuoteIconSize?.Desktop && TestimonialQuoteIconSizeUnits?.Desktop ? `height: ${TestimonialQuoteIconSize?.Desktop}${TestimonialQuoteIconSizeUnits?.Desktop};` : ''}
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `width: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
+            ${TestimonialQuoteIconSize.Desktop && TestimonialQuoteIconSizeUnits.Desktop ? `height: ${TestimonialQuoteIconSize.Desktop}${TestimonialQuoteIconSizeUnits.Desktop};` : ''}
         }
         .${blockID} .fb-testimonial-quote-icon:hover svg {
             fill: ${TestimonialQuoteIconHoverColor};
         }
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title a {
-            ${TestimonialTitleGlobalTypoSwitcher?.fontFamily === true && TestimonialTitleGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialTitleGlobalTypographyData?.fontFamily};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontSize === true && TestimonialTitleGlobalTypographyData?.fontSize ? `font-size: ${TestimonialTitleGlobalTypographyData?.fontSize};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontWeight === true && TestimonialTitleGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialTitleGlobalTypographyData?.fontWeight};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontStyle === true && TestimonialTitleGlobalTypographyData?.fontStyle ? `font-style: ${TestimonialTitleGlobalTypographyData?.fontStyle};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.textTransform === true && TestimonialTitleGlobalTypographyData?.textTransform ? `text-transform: ${TestimonialTitleGlobalTypographyData?.textTransform};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.textDecoration === true && TestimonialTitleGlobalTypographyData?.textDecoration ? `text-decoration: ${TestimonialTitleGlobalTypographyData?.textDecoration};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === true && TestimonialTitleGlobalTypographyData?.letterSpacing ? `letter-spacing: ${TestimonialTitleGlobalTypographyData?.letterSpacing};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === true && TestimonialTitleGlobalTypographyData?.lineHeight ? `line-height: ${TestimonialTitleGlobalTypographyData?.lineHeight};` : ''}
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+            ${TestimonialTitleGlobalTypoSwitcher.fontFamily === true && TestimonialTitleGlobalTypographyData.fontFamily ? `font-family: ${TestimonialTitleGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontSize === true && TestimonialTitleGlobalTypographyData.fontSize ? `font-size: ${TestimonialTitleGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontWeight === true && TestimonialTitleGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialTitleGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontStyle === true && TestimonialTitleGlobalTypographyData.fontStyle ? `font-style: ${TestimonialTitleGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textTransform === true && TestimonialTitleGlobalTypographyData.textTransform ? `text-transform: ${TestimonialTitleGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textDecoration === true && TestimonialTitleGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialTitleGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === true && TestimonialTitleGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialTitleGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.lineHeight === true && TestimonialTitleGlobalTypographyData.lineHeight ? `line-height: ${TestimonialTitleGlobalTypographyData.lineHeight};` : ''}
             
-            ${TestimonialTitleGlobalTypoSwitcher?.fontFamily === false && TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontSize === false && TestimonialTitleFontSize?.Desktop && TestimonialTitleFontSizeUnits?.Desktop ? `font-size: ${TestimonialTitleFontSize?.Desktop}${TestimonialTitleFontSizeUnits?.Desktop};` : '24px'}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontWeight === false && TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.fontStyle === false && TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.textTransform === false && TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.textDecoration === false && TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === false && TestimonialTitleLetterSpacing?.Desktop && TestimonialTitleLetterSpacingUnits?.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing?.Desktop}${TestimonialTitleLetterSpacingUnits?.Desktop};` : ''}
-            ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === false && TestimonialTitleLineHeight?.Desktop && TestimonialTitleLineHeightUnits?.Desktop ? `line-height: ${TestimonialTitleLineHeight?.Desktop}${TestimonialTitleLineHeightUnits?.Desktop};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontFamily === false && TestimonialTitleFontFamily ? `font-family: ${TestimonialTitleFontFamily};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Desktop && TestimonialTitleFontSizeUnits.Desktop ? `font-size: ${TestimonialTitleFontSize.Desktop}${TestimonialTitleFontSizeUnits.Desktop};` : '24px'}
+            ${TestimonialTitleGlobalTypoSwitcher.fontWeight === false && TestimonialTitleFontWeight ? `font-weight: ${TestimonialTitleFontWeight};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.fontStyle === false && TestimonialTitleFontStyle ? `font-style: ${TestimonialTitleFontStyle};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textTransform === false && TestimonialTitleTextTransform ? `text-transform: ${TestimonialTitleTextTransform};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.textDecoration === false && TestimonialTitleTextDecoration ? `text-decoration: ${TestimonialTitleTextDecoration};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Desktop && TestimonialTitleLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialTitleLetterSpacing.Desktop}${TestimonialTitleLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Desktop && TestimonialTitleLineHeightUnits.Desktop ? `line-height: ${TestimonialTitleLineHeight.Desktop}${TestimonialTitleLineHeightUnits.Desktop};` : ''}
             ${TestimonialTitleColor ? `color: ${TestimonialTitleColor};` : ''}
-            ${testimonialTitleDesktopMargin && TestimonialTitleMarginDesktop?.top ? `margin: ${testimonialTitleDesktopMargin};` : ''}
+            ${testimonialTitleDesktopMargin && TestimonialTitleMarginDesktop.top ? `margin: ${testimonialTitleDesktopMargin};` : ''}
             
         }
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover,
-        .${blockID} .fb-testimonial-title-container .fb-testimonial-title a:hover {
+        .${blockID} .fb-testimonial-title-container .fb-testimonial-title:hover {
             ${TestimonialTitleHoverColor ? `color: ${TestimonialTitleHoverColor};` : ''}
         }
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
-            ${TestimonialDescGlobalTypoSwitcher?.fontFamily === true && TestimonialDescGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialDescGlobalTypographyData?.fontFamily};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontSize === true && TestimonialDescGlobalTypographyData?.fontSize ? `font-size: ${TestimonialDescGlobalTypographyData?.fontSize};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontWeight === true && TestimonialDescGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialDescGlobalTypographyData?.fontWeight};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontStyle === true && TestimonialDescGlobalTypographyData?.fontStyle ? `font-style: ${TestimonialDescGlobalTypographyData?.fontStyle};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.textTransform === true && TestimonialDescGlobalTypographyData?.textTransform ? `text-transform: ${TestimonialDescGlobalTypographyData?.textTransform};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.textDecoration === true && TestimonialDescGlobalTypographyData?.textDecoration ? `text-decoration: ${TestimonialDescGlobalTypographyData?.textDecoration};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === true && TestimonialDescGlobalTypographyData?.letterSpacing ? `letter-spacing: ${TestimonialDescGlobalTypographyData?.letterSpacing};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.lineHeight === true && TestimonialDescGlobalTypographyData?.lineHeight ? `line-height: ${TestimonialDescGlobalTypographyData?.lineHeight};` : ''}
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+            ${TestimonialDescGlobalTypoSwitcher.fontFamily === true && TestimonialDescGlobalTypographyData.fontFamily ? `font-family: ${TestimonialDescGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontSize === true && TestimonialDescGlobalTypographyData.fontSize ? `font-size: ${TestimonialDescGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontWeight === true && TestimonialDescGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialDescGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontStyle === true && TestimonialDescGlobalTypographyData.fontStyle ? `font-style: ${TestimonialDescGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textTransform === true && TestimonialDescGlobalTypographyData.textTransform ? `text-transform: ${TestimonialDescGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textDecoration === true && TestimonialDescGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialDescGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.letterSpacing === true && TestimonialDescGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialDescGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.lineHeight === true && TestimonialDescGlobalTypographyData.lineHeight ? `line-height: ${TestimonialDescGlobalTypographyData.lineHeight};` : ''}
             
-            ${TestimonialDescGlobalTypoSwitcher?.fontFamily === false && TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontSize === false && TestimonialDescFontSize?.Desktop && TestimonialDescFontSizeUnits?.Desktop ? `font-size: ${TestimonialDescFontSize?.Desktop}${TestimonialDescFontSizeUnits?.Desktop};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontWeight === false && TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.fontStyle === false && TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.textTransform === false && TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.textDecoration === false && TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === false && TestimonialDescLetterSpacing?.Desktop && TestimonialDescLetterSpacingUnits?.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing?.Desktop}${TestimonialDescLetterSpacingUnits?.Desktop};` : ''}
-            ${TestimonialDescGlobalTypoSwitcher?.lineHeight === false && TestimonialDescLineHeight?.Desktop && TestimonialDescLineHeightUnits?.Desktop ? `line-height: ${TestimonialDescLineHeight?.Desktop}${TestimonialDescLineHeightUnits?.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontFamily === false && TestimonialDescFontFamily ? `font-family: ${TestimonialDescFontFamily};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Desktop && TestimonialDescFontSizeUnits.Desktop ? `font-size: ${TestimonialDescFontSize.Desktop}${TestimonialDescFontSizeUnits.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontWeight === false && TestimonialDescFontWeight ? `font-weight: ${TestimonialDescFontWeight};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.fontStyle === false && TestimonialDescFontStyle ? `font-style: ${TestimonialDescFontStyle};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textTransform === false && TestimonialDescTextTransform ? `text-transform: ${TestimonialDescTextTransform};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.textDecoration === false && TestimonialDescTextDecoration ? `text-decoration: ${TestimonialDescTextDecoration};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Desktop && TestimonialDescLetterSpacingUnits.Desktop ? `letter-spacing: ${TestimonialDescLetterSpacing.Desktop}${TestimonialDescLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Desktop && TestimonialDescLineHeightUnits.Desktop ? `line-height: ${TestimonialDescLineHeight.Desktop}${TestimonialDescLineHeightUnits.Desktop};` : ''}
             ${TestimonialDescColor ? `color: ${TestimonialDescColor};` : ''}
-            ${testimonialDescDesktopMargin && TestimonialDescMarginDesktop?.top ? `margin: ${testimonialDescDesktopMargin};` : ''}
+            ${testimonialDescDesktopMargin && TestimonialDescMarginDesktop.top ? `margin: ${testimonialDescDesktopMargin};` : ''}
         }
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover,
-        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a:hover {
+        .${blockID} .fb-testimonial-userdesc-container .fb-user-desc:hover {
             ${TestimonialDescHoverColor ? `color: ${TestimonialDescHoverColor};` : ''}
         }
 
-        .${blockID} .fb-testimonial-userinfo-container .fb-user,
-        .${blockID} .fb-testimonial-userinfo-container .fb-user a {
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontFamily === true && TestimonialAuthorGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialAuthorGlobalTypographyData?.fontFamily};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === true && TestimonialAuthorGlobalTypographyData?.fontSize ? `font-size: ${TestimonialAuthorGlobalTypographyData?.fontSize};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontWeight === true && TestimonialAuthorGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialAuthorGlobalTypographyData?.fontWeight};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontStyle === true && TestimonialAuthorGlobalTypographyData?.fontStyle ? `font-style: ${TestimonialAuthorGlobalTypographyData?.fontStyle};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.textTransform === true && TestimonialAuthorGlobalTypographyData?.textTransform ? `text-transform: ${TestimonialAuthorGlobalTypographyData?.textTransform};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.textDecoration === true && TestimonialAuthorGlobalTypographyData?.textDecoration ? `text-decoration: ${TestimonialAuthorGlobalTypographyData?.textDecoration};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === true && TestimonialAuthorGlobalTypographyData?.letterSpacing ? `letter-spacing: ${TestimonialAuthorGlobalTypographyData?.letterSpacing};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === true && TestimonialAuthorGlobalTypographyData?.lineHeight ? `line-height: ${TestimonialAuthorGlobalTypographyData?.lineHeight};` : ''}
+        .${blockID} .fb-testimonial-userinfo-container .fb-user {
+            ${TestimonialAuthorGlobalTypoSwitcher.fontFamily === true && TestimonialAuthorGlobalTypographyData.fontFamily ? `font-family: ${TestimonialAuthorGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontSize === true && TestimonialAuthorGlobalTypographyData.fontSize ? `font-size: ${TestimonialAuthorGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontWeight === true && TestimonialAuthorGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialAuthorGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontStyle === true && TestimonialAuthorGlobalTypographyData.fontStyle ? `font-style: ${TestimonialAuthorGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textTransform === true && TestimonialAuthorGlobalTypographyData.textTransform ? `text-transform: ${TestimonialAuthorGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textDecoration === true && TestimonialAuthorGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialAuthorGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === true && TestimonialAuthorGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialAuthorGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === true && TestimonialAuthorGlobalTypographyData.lineHeight ? `line-height: ${TestimonialAuthorGlobalTypographyData.lineHeight};` : ''}
             
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontFamily === false && TestimonialAuthorFontFamily ? `font-family: ${TestimonialAuthorFontFamily};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === false && TestimonialAuthorFontSize?.Desktop ? `font-size: ${TestimonialAuthorFontSize?.Desktop}${TestimonialAuthorFontSizeUnits?.Desktop};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontWeight === false && TestimonialAuthorFontWeight ? `font-weight: ${TestimonialAuthorFontWeight};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.fontStyle === false && TestimonialAuthorFontStyle ? `font-style: ${TestimonialAuthorFontStyle};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.textTransform === false && TestimonialAuthorTextTransform ? `text-transform: ${TestimonialAuthorTextTransform};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.textDecoration === false && TestimonialAuthorTextDecoration ? `text-decoration: ${TestimonialAuthorTextDecoration};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === false && TestimonialAuthorLetterSpacing?.Desktop ? `letter-spacing: ${TestimonialAuthorLetterSpacing?.Desktop}${TestimonialAuthorLetterSpacingUnits?.Desktop};` : ''}
-            ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === false && TestimonialAuthorLineHeight?.Desktop ? `line-height: ${TestimonialAuthorLineHeight?.Desktop}${TestimonialAuthorLineHeightUnits?.Desktop};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontFamily === false && TestimonialAuthorFontFamily ? `font-family: ${TestimonialAuthorFontFamily};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Desktop ? `font-size: ${TestimonialAuthorFontSize.Desktop}${TestimonialAuthorFontSizeUnits.Desktop};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontWeight === false && TestimonialAuthorFontWeight ? `font-weight: ${TestimonialAuthorFontWeight};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.fontStyle === false && TestimonialAuthorFontStyle ? `font-style: ${TestimonialAuthorFontStyle};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textTransform === false && TestimonialAuthorTextTransform ? `text-transform: ${TestimonialAuthorTextTransform};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.textDecoration === false && TestimonialAuthorTextDecoration ? `text-decoration: ${TestimonialAuthorTextDecoration};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Desktop ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Desktop}${TestimonialAuthorLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Desktop ? `line-height: ${TestimonialAuthorLineHeight.Desktop}${TestimonialAuthorLineHeightUnits.Desktop};` : ''}
             
             ${TestimonialAuthorColor ? `color: ${TestimonialAuthorColor};` : ''}
-            ${testimonialAuthorDesktopMargin && TestimonialAuthorMarginDesktop?.top ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
+            ${testimonialAuthorDesktopMargin && TestimonialAuthorMarginDesktop.top ? `margin: ${testimonialAuthorDesktopMargin};` : ''}
         }
-        .${blockID} .fb-testimonial-userinfo-container .fb-user:hover,
-        .${blockID} .fb-testimonial-userinfo-container .fb-user a:hover {
+        .${blockID} .fb-testimonial-userinfo-container .fb-user:hover {
             ${TestimonialAuthorHoverColor ? `color: ${TestimonialAuthorHoverColor};` : ''}
         }
 
-        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation,
-        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontFamily === true && TestimonialDesignationGlobalTypographyData?.fontFamily ? `font-family: ${TestimonialDesignationGlobalTypographyData?.fontFamily};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === true && TestimonialDesignationGlobalTypographyData?.fontSize ? `font-size: ${TestimonialDesignationGlobalTypographyData?.fontSize};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontWeight === true && TestimonialDesignationGlobalTypographyData?.fontWeight ? `font-weight: ${TestimonialDesignationGlobalTypographyData?.fontWeight};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontStyle === true && TestimonialDesignationGlobalTypographyData?.fontStyle ? `font-style: ${TestimonialDesignationGlobalTypographyData?.fontStyle};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.textTransform === true && TestimonialDesignationGlobalTypographyData?.textTransform ? `text-transform: ${TestimonialDesignationGlobalTypographyData?.textTransform};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.textDecoration === true && TestimonialDesignationGlobalTypographyData?.textDecoration ? `text-decoration: ${TestimonialDesignationGlobalTypographyData?.textDecoration};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === true && TestimonialDesignationGlobalTypographyData?.letterSpacing ? `letter-spacing: ${TestimonialDesignationGlobalTypographyData?.letterSpacing};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === true && TestimonialDesignationGlobalTypographyData?.lineHeight ? `line-height: ${TestimonialDesignationGlobalTypographyData?.lineHeight};` : ''}
+        .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+            ${TestimonialDesignationGlobalTypoSwitcher.fontFamily === true && TestimonialDesignationGlobalTypographyData.fontFamily ? `font-family: ${TestimonialDesignationGlobalTypographyData.fontFamily};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontSize === true && TestimonialDesignationGlobalTypographyData.fontSize ? `font-size: ${TestimonialDesignationGlobalTypographyData.fontSize};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontWeight === true && TestimonialDesignationGlobalTypographyData.fontWeight ? `font-weight: ${TestimonialDesignationGlobalTypographyData.fontWeight};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontStyle === true && TestimonialDesignationGlobalTypographyData.fontStyle ? `font-style: ${TestimonialDesignationGlobalTypographyData.fontStyle};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textTransform === true && TestimonialDesignationGlobalTypographyData.textTransform ? `text-transform: ${TestimonialDesignationGlobalTypographyData.textTransform};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textDecoration === true && TestimonialDesignationGlobalTypographyData.textDecoration ? `text-decoration: ${TestimonialDesignationGlobalTypographyData.textDecoration};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === true && TestimonialDesignationGlobalTypographyData.letterSpacing ? `letter-spacing: ${TestimonialDesignationGlobalTypographyData.letterSpacing};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === true && TestimonialDesignationGlobalTypographyData.lineHeight ? `line-height: ${TestimonialDesignationGlobalTypographyData.lineHeight};` : ''}
             
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontFamily === false && TestimonialDesignationFontFamily ? `font-family: ${TestimonialDesignationFontFamily};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === false && TestimonialDesignationFontSize?.Desktop ? `font-size: ${TestimonialDesignationFontSize?.Desktop}${TestimonialDesignationFontSizeUnits?.Desktop};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontWeight === false && TestimonialDesignationFontWeight ? `font-weight: ${TestimonialDesignationFontWeight};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.fontStyle === false && TestimonialDesignationFontStyle ? `font-style: ${TestimonialDesignationFontStyle};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.textTransform === false && TestimonialDesignationTextTransform ? `text-transform: ${TestimonialDesignationTextTransform};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.textDecoration === false && TestimonialDesignationTextDecoration ? `text-decoration: ${TestimonialDesignationTextDecoration};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === false && TestimonialDesignationLetterSpacing?.Desktop ? `letter-spacing: ${TestimonialDesignationLetterSpacing?.Desktop}${TestimonialDesignationLetterSpacingUnits?.Desktop};` : ''}
-            ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === false && TestimonialDesignationLineHeight?.Desktop ? `line-height: ${TestimonialDesignationLineHeight?.Desktop}${TestimonialDesignationLineHeightUnits?.Desktop};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontFamily === false && TestimonialDesignationFontFamily ? `font-family: ${TestimonialDesignationFontFamily};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Desktop ? `font-size: ${TestimonialDesignationFontSize.Desktop}${TestimonialDesignationFontSizeUnits.Desktop};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontWeight === false && TestimonialDesignationFontWeight ? `font-weight: ${TestimonialDesignationFontWeight};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.fontStyle === false && TestimonialDesignationFontStyle ? `font-style: ${TestimonialDesignationFontStyle};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textTransform === false && TestimonialDesignationTextTransform ? `text-transform: ${TestimonialDesignationTextTransform};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.textDecoration === false && TestimonialDesignationTextDecoration ? `text-decoration: ${TestimonialDesignationTextDecoration};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Desktop ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Desktop}${TestimonialDesignationLetterSpacingUnits.Desktop};` : ''}
+            ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Desktop ? `line-height: ${TestimonialDesignationLineHeight.Desktop}${TestimonialDesignationLineHeightUnits.Desktop};` : ''}
             
             ${TestimonialDesignationColor ? `color: ${TestimonialDesignationColor};` : ''}
-            ${testimonialDesignationDesktopMargin && TestimonialDesignationMarginDesktop?.top ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
+            ${testimonialDesignationDesktopMargin && TestimonialDesignationMarginDesktop.top ? `margin: ${testimonialDesignationDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-userinfo-container .fb-user-designation:hover {
             ${TestimonialDesignationHoverColor ? `color: ${TestimonialDesignationHoverColor};` : ''}
@@ -1929,18 +1816,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             display: flex;
             align-items: center;
             justify-content: ${TestimonialRatingIconAlign};
-            gap: ${TestimonialRatingIconGap?.Desktop}${TestimonialRatingIconGapUnits?.Desktop};
-            ${testimonialRatingIconDesktopMargin && TestimonialRatingIconMarginDesktop?.top ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
+            gap: ${TestimonialRatingIconGap.Desktop}${TestimonialRatingIconGapUnits.Desktop};
+            ${testimonialRatingIconDesktopMargin && TestimonialRatingIconMarginDesktop.top ? `margin: ${testimonialRatingIconDesktopMargin};` : ''}
         }
 
         .${blockID} .fb-testimonial-rating-icon svg {
-            width: ${TestimonialRatingIconSize?.Desktop}${TestimonialRatingIconSizeUnits?.Desktop};
-            height: ${TestimonialRatingIconSize?.Desktop}${TestimonialRatingIconSizeUnits?.Desktop};
+            width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+            height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
             fill: ${TestimonialRatingIconColor};
         }
         .${blockID} .fb-testimonial-rating-icon img {
-            width: ${TestimonialRatingIconSize?.Desktop}${TestimonialRatingIconSizeUnits?.Desktop};
-            height: ${TestimonialRatingIconSize?.Desktop}${TestimonialRatingIconSizeUnits?.Desktop};
+            width: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
+            height: ${TestimonialRatingIconSize.Desktop}${TestimonialRatingIconSizeUnits.Desktop};
         }
         .${blockID} .fb-testimonial-rating-icon:hover svg {
             fill: ${TestimonialRatingIconHoverColor};
@@ -1964,165 +1851,157 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
             .${blockID}.fb-testimonial-main-wrapper {
-                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset?.Tablet !== undefined ? `left: ${testimonialHZLeftOffset?.Tablet}${testimonialHZLeftOffsetUnits?.Tablet};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset?.Tablet !== undefined ? `right: ${testimonialHZRightOffset?.Tablet}${testimonialHZRightOffsetUnits?.Tablet};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset?.Tablet !== undefined ? `top: ${testimonialVRTopOffset?.Tablet}${testimonialVRTopOffsetUnits?.Tablet};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset?.Tablet !== undefined ? `bottom: ${testimonialVRBottomOffset?.Tablet}${testimonialVRBottomOffsetUnits?.Tablet};` : ''}
-                ${TestimonialGlobalZIndex?.Tablet ? `z-index: ${TestimonialGlobalZIndex?.Tablet};` : ''}
+                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Tablet !== undefined ? `left: ${testimonialHZLeftOffset.Tablet}${testimonialHZLeftOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Tablet !== undefined ? `right: ${testimonialHZRightOffset.Tablet}${testimonialHZRightOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Tablet !== undefined ? `top: ${testimonialVRTopOffset.Tablet}${testimonialVRTopOffsetUnits.Tablet};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Tablet !== undefined ? `bottom: ${testimonialVRBottomOffset.Tablet}${testimonialVRBottomOffsetUnits.Tablet};` : ''}
+                ${TestimonialGlobalZIndex.Tablet ? `z-index: ${TestimonialGlobalZIndex.Tablet};` : ''}
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                ${globalTabletPadding && TestimonialGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
-                ${globalTabletMargin && TestimonialGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
-                ${globalTabletBorderWidth && TestimonialGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
-                ${globalTabletBorderRadiusWidth && TestimonialGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                ${globalTabletPadding && TestimonialGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ''}
+                ${globalTabletMargin && TestimonialGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ''}
+                ${globalTabletBorderWidth && TestimonialGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                ${globalTabletBorderRadiusWidth && TestimonialGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon {
                 ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
-                ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition?.Tablet && TestimonialQuoteIconTopPositionUnits?.Tablet ? `${TestimonialQuoteIconTopPosition?.Tablet}${TestimonialQuoteIconTopPositionUnits?.Tablet}` : '0'};` : ''}
-                ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition?.Tablet && TestimonialQuoteIconLeftPositionUnits?.Tablet ? `${TestimonialQuoteIconLeftPosition?.Tablet}${TestimonialQuoteIconLeftPositionUnits?.Tablet}` : '0'};` : ''}
-                ${testimonialQuoteIconTabletMargin && TestimonialQuoteIconMarginTablet?.top ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
+                ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Tablet && TestimonialQuoteIconTopPositionUnits.Tablet ? `${TestimonialQuoteIconTopPosition.Tablet}${TestimonialQuoteIconTopPositionUnits.Tablet}` : '0'};` : ''}
+                ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Tablet && TestimonialQuoteIconLeftPositionUnits.Tablet ? `${TestimonialQuoteIconLeftPosition.Tablet}${TestimonialQuoteIconLeftPositionUnits.Tablet}` : '0'};` : ''}
+                ${testimonialQuoteIconTabletMargin && TestimonialQuoteIconMarginTablet.top ? `margin: ${testimonialQuoteIconTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon svg {
-                ${TestimonialQuoteIconSize?.Tablet && TestimonialQuoteIconSizeUnits?.Tablet ? `width: ${TestimonialQuoteIconSize?.Tablet}${TestimonialQuoteIconSizeUnits?.Tablet};` : ''}
-                ${TestimonialQuoteIconSize?.Tablet && TestimonialQuoteIconSizeUnits?.Tablet ? `height: ${TestimonialQuoteIconSize?.Tablet}${TestimonialQuoteIconSizeUnits?.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `width: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `height: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon img {
-                ${TestimonialQuoteIconSize?.Tablet && TestimonialQuoteIconSizeUnits?.Tablet ? `width: ${TestimonialQuoteIconSize?.Tablet}${TestimonialQuoteIconSizeUnits?.Tablet};` : ''}
-                ${TestimonialQuoteIconSize?.Tablet && TestimonialQuoteIconSizeUnits?.Tablet ? `height: ${TestimonialQuoteIconSize?.Tablet}${TestimonialQuoteIconSizeUnits?.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `width: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
+                ${TestimonialQuoteIconSize.Tablet && TestimonialQuoteIconSizeUnits.Tablet ? `height: ${TestimonialQuoteIconSize.Tablet}${TestimonialQuoteIconSizeUnits.Tablet};` : ''}
             }
 
             .${blockID} .fb-testimonial-rating {
-                gap: ${TestimonialRatingIconGap?.Tablet}${TestimonialRatingIconGapUnits?.Tablet};
-                ${testimonialRatingIconTabletMargin && TestimonialRatingIconMarginTablet?.top ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
+                gap: ${TestimonialRatingIconGap.Tablet}${TestimonialRatingIconGapUnits.Tablet};
+                ${testimonialRatingIconTabletMargin && TestimonialRatingIconMarginTablet.top ? `margin: ${testimonialRatingIconTabletMargin};` : ''}
             }
             .${blockID} .fb-testimonial-rating-icon svg {
-                width: ${TestimonialRatingIconSize?.Tablet}${TestimonialRatingIconSizeUnits?.Tablet};
-                height: ${TestimonialRatingIconSize?.Tablet}${TestimonialRatingIconSizeUnits?.Tablet};
+                width: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
+                height: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
             }
             .${blockID} .fb-testimonial-rating-icon img {
-                width: ${TestimonialRatingIconSize?.Tablet}${TestimonialRatingIconSizeUnits?.Tablet};
-                height: ${TestimonialRatingIconSize?.Tablet}${TestimonialRatingIconSizeUnits?.Tablet};
+                width: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
+                height: ${TestimonialRatingIconSize.Tablet}${TestimonialRatingIconSizeUnits.Tablet};
             }
             .${blockID} .fb-testimonial-image img {
-                ${TestimonialImageWidth?.Tablet && TestimonialImageWidthUnits?.Tablet ? `width: ${TestimonialImageWidth?.Tablet}${TestimonialImageWidthUnits?.Tablet};` : ''}
-                ${TestimonialImageWidth?.Tablet && TestimonialImageWidthUnits?.Tablet ? `height: ${TestimonialImageWidth?.Tablet}${TestimonialImageWidthUnits?.Tablet};` : ''}
-                ${testimonialImageTabletBorderRadiusWidth && TestimonialImageTabRadiusWidth?.top ? `border-radius: ${testimonialImageTabletBorderRadiusWidth};` : ''}
-                ${testimonialImageTabletMargin && TestimonialImageMarginTablet?.top ? `margin: ${testimonialImageTabletMargin};` : ''}
+                ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `width: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+                ${TestimonialImageWidth.Tablet && TestimonialImageWidthUnits.Tablet ? `height: ${TestimonialImageWidth.Tablet}${TestimonialImageWidthUnits.Tablet};` : ''}
+                ${testimonialImageTabletBorderRadiusWidth && TestimonialImageTabRadiusWidth.top ? `border-radius: ${testimonialImageTabletBorderRadiusWidth};` : ''}
+                ${testimonialImageTabletMargin && TestimonialImageMarginTablet.top ? `margin: ${testimonialImageTabletMargin};` : ''}
                 ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
-                ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition?.Tablet && TestimonialImageTopPositionUnits?.Tablet ? `${TestimonialImageTopPosition?.Tablet}${TestimonialImageTopPositionUnits?.Tablet}` : '0'};` : ''}
-                ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition?.Tablet && TestimonialImageLeftPositionUnits?.Tablet ? `${TestimonialImageLeftPosition?.Tablet}${TestimonialImageLeftPositionUnits?.Tablet}` : '0'};` : ''}
+                ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Tablet && TestimonialImageTopPositionUnits.Tablet ? `${TestimonialImageTopPosition.Tablet}${TestimonialImageTopPositionUnits.Tablet}` : '0'};` : ''}
+                ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Tablet && TestimonialImageLeftPositionUnits.Tablet ? `${TestimonialImageLeftPosition.Tablet}${TestimonialImageLeftPositionUnits.Tablet}` : '0'};` : ''}
             }
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title a{
-                ${TestimonialTitleGlobalTypoSwitcher?.fontSize === false && TestimonialTitleFontSize?.Tablet && TestimonialTitleFontSizeUnits?.Tablet ? `font-size: ${TestimonialTitleFontSize?.Tablet}${TestimonialTitleFontSizeUnits?.Tablet};` : ''}
-                ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === false && TestimonialTitleLetterSpacing?.Tablet && TestimonialTitleLetterSpacingUnits?.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing?.Tablet}${TestimonialTitleLetterSpacingUnits?.Tablet};` : ''}
-                ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === false && TestimonialTitleLineHeight?.Tablet && TestimonialTitleLineHeightUnits?.Tablet ? `line-height: ${TestimonialTitleLineHeight?.Tablet}${TestimonialTitleLineHeightUnits?.Tablet};` : ''}
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+                ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Tablet && TestimonialTitleFontSizeUnits.Tablet ? `font-size: ${TestimonialTitleFontSize.Tablet}${TestimonialTitleFontSizeUnits.Tablet};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Tablet && TestimonialTitleLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialTitleLetterSpacing.Tablet}${TestimonialTitleLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Tablet && TestimonialTitleLineHeightUnits.Tablet ? `line-height: ${TestimonialTitleLineHeight.Tablet}${TestimonialTitleLineHeightUnits.Tablet};` : ''}
                 ${testimonialTitleTabletMargin && TestimonialTitleMarginTablet.top ? `margin: ${testimonialTitleTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
-                ${TestimonialDescGlobalTypoSwitcher?.fontSize === false && TestimonialDescFontSize?.Tablet && TestimonialDescFontSizeUnits?.Tablet ? `font-size: ${TestimonialDescFontSize?.Tablet}${TestimonialDescFontSizeUnits?.Tablet};` : ''}
-                ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === false && TestimonialDescLetterSpacing?.Tablet && TestimonialDescLetterSpacingUnits?.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing?.Tablet}${TestimonialDescLetterSpacingUnits?.Tablet};` : ''}
-                ${TestimonialDescGlobalTypoSwitcher?.lineHeight === false && TestimonialDescLineHeight?.Tablet && TestimonialDescLineHeightUnits?.Tablet ? `line-height: ${TestimonialDescLineHeight?.Tablet}${TestimonialDescLineHeightUnits?.Tablet};` : ''}
-                ${testimonialDescTabletMargin && TestimonialDescMarginTablet?.top ? `margin: ${testimonialDescTabletMargin};` : ''}
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+                ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Tablet && TestimonialDescFontSizeUnits.Tablet ? `font-size: ${TestimonialDescFontSize.Tablet}${TestimonialDescFontSizeUnits.Tablet};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Tablet && TestimonialDescLetterSpacingUnits.Tablet ? `letter-spacing: ${TestimonialDescLetterSpacing.Tablet}${TestimonialDescLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Tablet && TestimonialDescLineHeightUnits.Tablet ? `line-height: ${TestimonialDescLineHeight.Tablet}${TestimonialDescLineHeightUnits.Tablet};` : ''}
+                ${testimonialDescTabletMargin && TestimonialDescMarginTablet.top ? `margin: ${testimonialDescTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user,
-            .${blockID} .fb-testimonial-userinfo-container .fb-user a {
-                ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === false && TestimonialAuthorFontSize?.Tablet ? `font-size: ${TestimonialAuthorFontSize?.Tablet}${TestimonialAuthorFontSizeUnits?.Tablet};` : ''}
-                ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === false && TestimonialAuthorLetterSpacing?.Tablet ? `letter-spacing: ${TestimonialAuthorLetterSpacing?.Tablet}${TestimonialAuthorLetterSpacingUnits?.Tablet};` : ''}
-                ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === false && TestimonialAuthorLineHeight?.Tablet ? `line-height: ${TestimonialAuthorLineHeight?.Tablet}${TestimonialAuthorLineHeightUnits?.Tablet};` : ''}
+            .${blockID} .fb-testimonial-userinfo-container .fb-user {
+                ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Tablet ? `font-size: ${TestimonialAuthorFontSize.Tablet}${TestimonialAuthorFontSizeUnits.Tablet};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Tablet ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Tablet}${TestimonialAuthorLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Tablet ? `line-height: ${TestimonialAuthorLineHeight.Tablet}${TestimonialAuthorLineHeightUnits.Tablet};` : ''}
                 
                 ${testimonialAuthorTabletMargin && TestimonialAuthorMarginTablet.top ? `margin: ${testimonialAuthorTabletMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
-                ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === false && TestimonialDesignationFontSize?.Tablet ? `font-size: ${TestimonialDesignationFontSize?.Tablet}${TestimonialDesignationFontSizeUnits?.Tablet};` : ''}
-                ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === false && TestimonialDesignationLetterSpacing?.Tablet ? `letter-spacing: ${TestimonialDesignationLetterSpacing?.Tablet}${TestimonialDesignationLetterSpacingUnits?.Tablet};` : ''}
-                ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === false && TestimonialDesignationLineHeight?.Tablet ? `line-height: ${TestimonialDesignationLineHeight?.Tablet}${TestimonialDesignationLineHeightUnits?.Tablet};` : ''}
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+                ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Tablet ? `font-size: ${TestimonialDesignationFontSize.Tablet}${TestimonialDesignationFontSizeUnits.Tablet};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Tablet ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Tablet}${TestimonialDesignationLetterSpacingUnits.Tablet};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Tablet ? `line-height: ${TestimonialDesignationLineHeight.Tablet}${TestimonialDesignationLineHeightUnits.Tablet};` : ''}
                 
-                ${testimonialDesignationTabletMargin && TestimonialDesignationMarginTablet?.top ? `margin: ${testimonialDesignationTabletMargin};` : ''}
+                ${testimonialDesignationTabletMargin && TestimonialDesignationMarginTablet.top ? `margin: ${testimonialDesignationTabletMargin};` : ''}
             }
         }
         @media only screen and (max-width: 767px) {
             .${blockID}.fb-testimonial-main-wrapper {
-                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset?.Mobile !== undefined ? `left: ${testimonialHZLeftOffset?.Mobile}${testimonialHZLeftOffsetUnits?.Mobile};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset?.Mobile !== undefined ? `right: ${testimonialHZRightOffset?.Mobile}${testimonialHZRightOffsetUnits?.Mobile};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset?.Mobile !== undefined ? `top: ${testimonialVRTopOffset?.Mobile}${testimonialVRTopOffsetUnits?.Mobile};` : ''}
-				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset?.Mobile !== undefined ? `bottom: ${testimonialVRBottomOffset?.Mobile}${testimonialVRBottomOffsetUnits?.Mobile};` : ''} 
-                ${TestimonialGlobalZIndex?.Mobile ? `z-index: ${TestimonialGlobalZIndex?.Mobile};` : ''} 
+                ${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'left' && testimonialHZLeftOffset.Mobile !== undefined ? `left: ${testimonialHZLeftOffset.Mobile}${testimonialHZLeftOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialHZOrientationType === 'right' && testimonialHZRightOffset.Mobile !== undefined ? `right: ${testimonialHZRightOffset.Mobile}${testimonialHZRightOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'top' && testimonialVRTopOffset.Mobile !== undefined ? `top: ${testimonialVRTopOffset.Mobile}${testimonialVRTopOffsetUnits.Mobile};` : ''}
+				${testimonialPositionType !== 'default' && testimonialPositionType !== 'relative' && testimonialVROrientationType === 'bottom' && testimonialVRBottomOffset.Mobile !== undefined ? `bottom: ${testimonialVRBottomOffset.Mobile}${testimonialVRBottomOffsetUnits.Mobile};` : ''} 
+                ${TestimonialGlobalZIndex.Mobile ? `z-index: ${TestimonialGlobalZIndex.Mobile};` : ''}
             }
             .fb-testimonial-main-wrapper.${blockID} .fb-testimonial-section {
-                ${globalMobilePadding && TestimonialGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
-                ${globalMobileMargin && TestimonialGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
-                ${globalMobileBorderWidth && TestimonialGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
-                ${globalMobileBorderRadiusWidth && TestimonialGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                ${globalMobilePadding && TestimonialGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ''}
+                ${globalMobileMargin && TestimonialGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ''}
+                ${globalMobileBorderWidth && TestimonialGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && TestimonialGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
             .${blockID} .fb-testimonial-rating {
-                gap: ${TestimonialRatingIconGap?.Mobile}${TestimonialRatingIconGapUnits?.Mobile};
-                ${testimonialRatingIconMobileMargin && TestimonialRatingIconMarginMobile?.top ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
+                gap: ${TestimonialRatingIconGap.Mobile}${TestimonialRatingIconGapUnits.Mobile};
+                ${testimonialRatingIconMobileMargin && TestimonialRatingIconMarginMobile.top ? `margin: ${testimonialRatingIconMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-rating-icon svg {
-                width: ${TestimonialRatingIconSize?.Mobile}${TestimonialRatingIconSizeUnits?.Mobile};
-                height: ${TestimonialRatingIconSize?.Mobile}${TestimonialRatingIconSizeUnits?.Mobile};
+                width: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+                height: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
             }
             .${blockID} .fb-testimonial-rating-icon img {
-                width: ${TestimonialRatingIconSize?.Mobile}${TestimonialRatingIconSizeUnits?.Mobile};
-                height: ${TestimonialRatingIconSize?.Mobile}${TestimonialRatingIconSizeUnits?.Mobile};
+                width: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
+                height: ${TestimonialRatingIconSize.Mobile}${TestimonialRatingIconSizeUnits.Mobile};
             }
             .${blockID} .fb-testimonial-quote-icon {
                 ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
-                ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition?.Mobile && TestimonialQuoteIconTopPositionUnits?.Mobile ? `${TestimonialQuoteIconTopPosition?.Mobile}${TestimonialQuoteIconTopPositionUnits?.Mobile}` : '0'};` : ''}
-                ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition?.Mobile && TestimonialQuoteIconLeftPositionUnits?.Mobile ? `${TestimonialQuoteIconLeftPosition?.Mobile}${TestimonialQuoteIconLeftPositionUnits?.Mobile}` : '0'};` : ''}
-                ${testimonialQuoteIconMobileMargin && TestimonialQuoteIconMarginMobile?.top ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
+                ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition.Mobile && TestimonialQuoteIconTopPositionUnits.Mobile ? `${TestimonialQuoteIconTopPosition.Mobile}${TestimonialQuoteIconTopPositionUnits.Mobile}` : '0'};` : ''}
+                ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition.Mobile && TestimonialQuoteIconLeftPositionUnits.Mobile ? `${TestimonialQuoteIconLeftPosition.Mobile}${TestimonialQuoteIconLeftPositionUnits.Mobile}` : '0'};` : ''}
+                ${testimonialQuoteIconMobileMargin && TestimonialQuoteIconMarginMobile.top ? `margin: ${testimonialQuoteIconMobileMargin};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon svg {
-                ${TestimonialQuoteIconSize?.Mobile && TestimonialQuoteIconSizeUnits?.Mobile ? `width: ${TestimonialQuoteIconSize?.Mobile}${TestimonialQuoteIconSizeUnits?.Mobile};` : ''}
-                ${TestimonialQuoteIconSize?.Mobile && TestimonialQuoteIconSizeUnits?.Mobile ? `height: ${TestimonialQuoteIconSize?.Mobile}${TestimonialQuoteIconSizeUnits?.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `width: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `height: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
             }
             .${blockID} .fb-testimonial-quote-icon img {
-                ${TestimonialQuoteIconSize?.Mobile && TestimonialQuoteIconSizeUnits?.Mobile ? `width: ${TestimonialQuoteIconSize?.Mobile}${TestimonialQuoteIconSizeUnits?.Mobile};` : ''}
-                ${TestimonialQuoteIconSize?.Mobile && TestimonialQuoteIconSizeUnits?.Mobile ? `height: ${TestimonialQuoteIconSize?.Mobile}${TestimonialQuoteIconSizeUnits?.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `width: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
+                ${TestimonialQuoteIconSize.Mobile && TestimonialQuoteIconSizeUnits.Mobile ? `height: ${TestimonialQuoteIconSize.Mobile}${TestimonialQuoteIconSizeUnits.Mobile};` : ''}
             }
 
             .${blockID} .fb-testimonial-image img {
-                ${TestimonialImageWidth?.Mobile && TestimonialImageWidthUnits?.Mobile ? `width: ${TestimonialImageWidth?.Mobile}${TestimonialImageWidthUnits?.Mobile};` : ''}
-                ${TestimonialImageWidth?.Mobile && TestimonialImageWidthUnits?.Mobile ? `height: ${TestimonialImageWidth?.Mobile}${TestimonialImageWidthUnits?.Mobile};` : ''}
-                ${testimonialImageMobileBorderRadiusWidth && TestimonialImageMobileRadiusWidth?.top ? `border-radius: ${testimonialImageMobileBorderRadiusWidth};` : ''}
-                ${testimonialImageMobileMargin && TestimonialImageMarginMobile?.top ? `margin: ${testimonialImageMobileMargin};` : ''}
+                ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `width: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+                ${TestimonialImageWidth.Mobile && TestimonialImageWidthUnits.Mobile ? `height: ${TestimonialImageWidth.Mobile}${TestimonialImageWidthUnits.Mobile};` : ''}
+                ${testimonialImageMobileBorderRadiusWidth && TestimonialImageMobileRadiusWidth.top ? `border-radius: ${testimonialImageMobileBorderRadiusWidth};` : ''}
+                ${testimonialImageMobileMargin && TestimonialImageMarginMobile.top ? `margin: ${testimonialImageMobileMargin};` : ''}
                 ${TestimonialImagePositionSwitcher ? 'position: absolute;' : ''}
-                ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition?.Mobile && TestimonialImageTopPositionUnits?.Mobile ? `${TestimonialImageTopPosition?.Mobile}${TestimonialImageTopPositionUnits?.Mobile}` : '0'};` : ''}
-                ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition?.Mobile && TestimonialImageLeftPositionUnits?.Mobile ? `${TestimonialImageLeftPosition?.Mobile}${TestimonialImageLeftPositionUnits?.Mobile}` : '0'};` : ''}
+                ${TestimonialImagePositionSwitcher ? `top: ${TestimonialImageTopPosition.Mobile && TestimonialImageTopPositionUnits.Mobile ? `${TestimonialImageTopPosition.Mobile}${TestimonialImageTopPositionUnits.Mobile}` : '0'};` : ''}
+                ${TestimonialImagePositionSwitcher ? `left: ${TestimonialImageLeftPosition.Mobile && TestimonialImageLeftPositionUnits.Mobile ? `${TestimonialImageLeftPosition.Mobile}${TestimonialImageLeftPositionUnits.Mobile}` : '0'};` : ''}
             }
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title,
-            .${blockID} .fb-testimonial-title-container .fb-testimonial-title a {
-                ${TestimonialTitleGlobalTypoSwitcher?.fontSize === false && TestimonialTitleFontSize?.Mobile && TestimonialTitleFontSizeUnits?.Mobile ? `font-size: ${TestimonialTitleFontSize?.Mobile}${TestimonialTitleFontSizeUnits?.Mobile};` : ''}
-                ${TestimonialTitleGlobalTypoSwitcher?.letterSpacing === false && TestimonialTitleLetterSpacing?.Mobile && TestimonialTitleLetterSpacingUnits?.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing?.Mobile}${TestimonialTitleLetterSpacingUnits?.Mobile};` : ''}
-                ${TestimonialTitleGlobalTypoSwitcher?.lineHeight === false && TestimonialTitleLineHeight?.Mobile && TestimonialTitleLineHeightUnits?.Mobile ? `line-height: ${TestimonialTitleLineHeight?.Mobile}${TestimonialTitleLineHeightUnits?.Mobile};` : ''}
-                ${testimonialTitleMobileMargin && TestimonialTitleMarginMobile?.top ? `margin: ${testimonialTitleMobileMargin};` : ''}
+            .${blockID} .fb-testimonial-title-container .fb-testimonial-title {
+                ${TestimonialTitleGlobalTypoSwitcher.fontSize === false && TestimonialTitleFontSize.Mobile && TestimonialTitleFontSizeUnits.Mobile ? `font-size: ${TestimonialTitleFontSize.Mobile}${TestimonialTitleFontSizeUnits.Mobile};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.letterSpacing === false && TestimonialTitleLetterSpacing.Mobile && TestimonialTitleLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialTitleLetterSpacing.Mobile}${TestimonialTitleLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialTitleGlobalTypoSwitcher.lineHeight === false && TestimonialTitleLineHeight.Mobile && TestimonialTitleLineHeightUnits.Mobile ? `line-height: ${TestimonialTitleLineHeight.Mobile}${TestimonialTitleLineHeightUnits.Mobile};` : ''}
+                ${testimonialTitleMobileMargin && TestimonialTitleMarginMobile.top ? `margin: ${testimonialTitleMobileMargin};` : ''}
 
             }
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc,
-            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc a {
-                ${TestimonialDescGlobalTypoSwitcher?.fontSize === false && TestimonialDescFontSize?.Mobile && TestimonialDescFontSizeUnits?.Mobile ? `font-size: ${TestimonialDescFontSize?.Mobile}${TestimonialDescFontSizeUnits?.Mobile};` : ''}
-                ${TestimonialDescGlobalTypoSwitcher?.letterSpacing === false && TestimonialDescLetterSpacing?.Mobile && TestimonialDescLetterSpacingUnits?.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing?.Mobile}${TestimonialDescLetterSpacingUnits?.Mobile};` : ''}
-                ${TestimonialDescGlobalTypoSwitcher?.lineHeight === false && TestimonialDescLineHeight?.Mobile && TestimonialDescLineHeightUnits?.Mobile ? `line-height: ${TestimonialDescLineHeight?.Mobile}${TestimonialDescLineHeightUnits?.Mobile};` : ''}
-                ${testimonialDescMobileMargin && TestimonialDescMarginMobile?.top ? `margin: ${testimonialDescMobileMargin};` : ''}
+            .${blockID} .fb-testimonial-userdesc-container .fb-user-desc {
+                ${TestimonialDescGlobalTypoSwitcher.fontSize === false && TestimonialDescFontSize.Mobile && TestimonialDescFontSizeUnits.Mobile ? `font-size: ${TestimonialDescFontSize.Mobile}${TestimonialDescFontSizeUnits.Mobile};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.letterSpacing === false && TestimonialDescLetterSpacing.Mobile && TestimonialDescLetterSpacingUnits.Mobile ? `letter-spacing: ${TestimonialDescLetterSpacing.Mobile}${TestimonialDescLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialDescGlobalTypoSwitcher.lineHeight === false && TestimonialDescLineHeight.Mobile && TestimonialDescLineHeightUnits.Mobile ? `line-height: ${TestimonialDescLineHeight.Mobile}${TestimonialDescLineHeightUnits.Mobile};` : ''}
+                ${testimonialDescMobileMargin && TestimonialDescMarginMobile.top ? `margin: ${testimonialDescMobileMargin};` : ''}
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user
-            .${blockID} .fb-testimonial-userinfo-container .fb-user a {
-                ${TestimonialAuthorGlobalTypoSwitcher?.fontSize === false && TestimonialAuthorFontSize?.Mobile ? `font-size: ${TestimonialAuthorFontSize?.Mobile}${TestimonialAuthorFontSizeUnits?.Mobile};` : ''}
-                ${TestimonialAuthorGlobalTypoSwitcher?.letterSpacing === false && TestimonialAuthorLetterSpacing?.Mobile ? `letter-spacing: ${TestimonialAuthorLetterSpacing?.Mobile}${TestimonialAuthorLetterSpacingUnits?.Mobile};` : ''}
-                ${TestimonialAuthorGlobalTypoSwitcher?.lineHeight === false && TestimonialAuthorLineHeight?.Mobile ? `line-height: ${TestimonialAuthorLineHeight?.Mobile}${TestimonialAuthorLineHeightUnits?.Mobile};` : ''}
+            .${blockID} .fb-testimonial-userinfo-container .fb-user {
+                ${TestimonialAuthorGlobalTypoSwitcher.fontSize === false && TestimonialAuthorFontSize.Mobile ? `font-size: ${TestimonialAuthorFontSize.Mobile}${TestimonialAuthorFontSizeUnits.Mobile};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.letterSpacing === false && TestimonialAuthorLetterSpacing.Mobile ? `letter-spacing: ${TestimonialAuthorLetterSpacing.Mobile}${TestimonialAuthorLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialAuthorGlobalTypoSwitcher.lineHeight === false && TestimonialAuthorLineHeight.Mobile ? `line-height: ${TestimonialAuthorLineHeight.Mobile}${TestimonialAuthorLineHeightUnits.Mobile};` : ''}
                 
-                ${testimonialAuthorMobileMargin && TestimonialAuthorMarginMobile?.top ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
+                ${testimonialAuthorMobileMargin && TestimonialAuthorMarginMobile.top ? `margin: ${testimonialAuthorMobileMargin};` : ''} 
             }
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation,
-            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation a {
-                ${TestimonialDesignationGlobalTypoSwitcher?.fontSize === false && TestimonialDesignationFontSize?.Mobile ? `font-size: ${TestimonialDesignationFontSize?.Mobile}${TestimonialDesignationFontSizeUnits?.Mobile};` : ''}
-                ${TestimonialDesignationGlobalTypoSwitcher?.letterSpacing === false && TestimonialDesignationLetterSpacing?.Mobile ? `letter-spacing: ${TestimonialDesignationLetterSpacing?.Mobile}${TestimonialDesignationLetterSpacingUnits?.Mobile};` : ''}
-                ${TestimonialDesignationGlobalTypoSwitcher?.lineHeight === false && TestimonialDesignationLineHeight?.Mobile ? `line-height: ${TestimonialDesignationLineHeight?.Mobile}${TestimonialDesignationLineHeightUnits?.Mobile};` : ''}
+            .${blockID} .fb-testimonial-userinfo-container .fb-user-designation {
+                ${TestimonialDesignationGlobalTypoSwitcher.fontSize === false && TestimonialDesignationFontSize.Mobile ? `font-size: ${TestimonialDesignationFontSize.Mobile}${TestimonialDesignationFontSizeUnits.Mobile};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.letterSpacing === false && TestimonialDesignationLetterSpacing.Mobile ? `letter-spacing: ${TestimonialDesignationLetterSpacing.Mobile}${TestimonialDesignationLetterSpacingUnits.Mobile};` : ''}
+                ${TestimonialDesignationGlobalTypoSwitcher.lineHeight === false && TestimonialDesignationLineHeight.Mobile ? `line-height: ${TestimonialDesignationLineHeight.Mobile}${TestimonialDesignationLineHeightUnits.Mobile};` : ''}
                 
-                ${testimonialDesignationMobileMargin && TestimonialDesignationMarginMobile?.top ? `margin: ${testimonialDesignationMobileMargin};` : ''}
+                ${testimonialDesignationMobileMargin && TestimonialDesignationMarginMobile.top ? `margin: ${testimonialDesignationMobileMargin};` : ''}
             }  
         }
 
@@ -2422,76 +2301,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
-     * Generate SVG Icons for Icon
-     */
-	useEffect(() => {
-		setAttributes({
-			FrontendTestimonialRatingicon: generateSvgIcon(TestimonialRatingicon), 
-			FrontendTestimonialQuoteIcon: generateSvgIcon(TestimonialQuoteIcon), 
-		})
-	}, [TestimonialRatingicon, TestimonialQuoteIcon]);
-
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) { 
-			setAttributes({
-				dynamicTitleEnabled: false,
-				dynamicTitleEnableLink: false,
-				dynamicDescriptionEnabled: false,
-				dynamicDescriptionEnableLink: false,
-                dynamicAuthorNameEnabled: false,
-                dynamicAuthorNameEnableLink: false,
-                dynamicAuthorDesignationEnabled: false,
-                dynamicAuthorDesignationEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
-
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTitleEnabled',
-		label: __('Dynamic Title', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Description', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-description-content',
-		isProActive : getProActiveState
-	});
-
-    const dynamicAuthorNameContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-author-name-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicAuthorNameEnabled',
-		label: __('Dynamic Author Name', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-author-name-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicAuthorDesignationContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-author-designation-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicAuthorDesignationEnabled',
-		label: __('Dynamic Author Designation', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-author-designation-content',
-		isProActive : getProActiveState
-	});
-
-    /**
 	 * Inspector General Controls
 	 */
 	const generalControls = (
@@ -2567,123 +2376,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         </ButtonGroup>
                     </BaseControl>
 
-					{dynamicTitleContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-	
-					<DynamicDataSourceControl
-						enabled={dynamicTitleEnabled}
-						
-						source={dynamicTitleSource}
-						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
-						postId={dynamicTitlePostId}
-						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
-						postType={dynamicTitlePostType}
-						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
-						postLabel={dynamicTitlePostLabel}
-						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
-
-						field={dynamicTitleField}
-						setField={(value) => setAttributes({ dynamicTitleField: value })}
-						featuredImageField={dynamicTitleFeaturedImageField}
-						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
-
-						dateType={dynamicTitleDateType}
-						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
-						dateFormat={dynamicTitleDateFormat}
-						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
-						timeType={dynamicTitleTimeType}
-						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
-						timeFormat={dynamicTitleTimeFormat}
-						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
-
-						commentsZeroText={dynamicTitleCommentsZeroText}
-						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
-						commentsOneText={dynamicTitleCommentsOneText}
-						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
-						commentsManyText={dynamicTitleCommentsManyText}
-						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
-
-						termsTaxonomy={dynamicTitleTermsTaxonomy}
-						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
-						termsSeparator={dynamicTitleTermsSeparator}
-						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
-					/>
-					{dynamicTitleEnabled && (
-						<DynamicDataLinkControl
-							enableLink={dynamicTitleEnableLink}
-							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
-							linkSource={dynamicTitleLinkSource}
-							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
-						/>
-					)}
-                    {!dynamicTitleEnabled && TitleSwitcher && (
-                        <TextareaControl
-                            label={__("Title", "frontis-blocks")}
-                            value={TestimonialTitle}
-                            onChange={(value) => setAttributes({ TestimonialTitle: value })}
-                            className="fb-testimonial-title-control"
-                        />
-                    )}
-
-                    {dynamicDescriptionContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicDescriptionEnabled}
-                        
-                        source={dynamicDescriptionSource}
-                        setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
-                        postId={dynamicDescriptionPostId}
-                        setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
-                        postType={dynamicDescriptionPostType}
-                        setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
-                        postLabel={dynamicDescriptionPostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
-
-                        field={dynamicDescriptionField}
-                        setField={(value) => setAttributes({ dynamicDescriptionField: value })}
-                        featuredImageField={dynamicDescriptionFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
-
-                        dateType={dynamicDescriptionDateType}
-                        setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
-                        dateFormat={dynamicDescriptionDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
-                        timeType={dynamicDescriptionTimeType}
-                        setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
-                        timeFormat={dynamicDescriptionTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
-
-                        commentsZeroText={dynamicDescriptionCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
-                        commentsOneText={dynamicDescriptionCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
-                        commentsManyText={dynamicDescriptionCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
-
-                        termsTaxonomy={dynamicDescriptionTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
-                        termsSeparator={dynamicDescriptionTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
+                    {TitleSwitcher && (
+                    <TextareaControl
+                        label={__("Title", "frontis-blocks")}
+                        value={TestimonialTitle}
+                        onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                        className="fb-testimonial-title-control"
                     />
-
-                    {dynamicDescriptionEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicDescriptionEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
-                            linkSource={dynamicDescriptionLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
-                        />
                     )}
-                    {!dynamicDescriptionEnabled && DescSwitcher && (
-                        <TextareaControl
-                            label={__("Description", "frontis-blocks")}
-                            value={TestimonialDesc}
-                            onChange={(value) => setAttributes({ TestimonialDesc: value })}
-                            className="fb-testimonial-desc-control"
-                        />
+                    {DescSwitcher && (
+                    <TextareaControl
+                        label={__("Description", "frontis-blocks")}
+                        value={TestimonialDesc}
+                        onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                        className="fb-testimonial-desc-control"
+                    />
                     )}
             </PanelBody>
 
@@ -2774,125 +2481,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         )}
                         </BaseControl>
                     )}
-
-                    {dynamicAuthorNameContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicAuthorNameEnabled}  
-                        
-                        source={dynamicAuthorNameSource} 
-                        setSource={(value) => setAttributes({ dynamicAuthorNameSource: value })}   
-                        postId={dynamicAuthorNamePostId}
-                        setPostId={(value) => setAttributes({ dynamicAuthorNamePostId: value })}
-                        postType={dynamicAuthorNamePostType}
-                        setPostType={(value) => setAttributes({ dynamicAuthorNamePostType: value })}
-                        postLabel={dynamicAuthorNamePostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicAuthorNamePostLabel: value })}
-
-                        field={dynamicAuthorNameField}
-                        setField={(value) => setAttributes({ dynamicAuthorNameField: value })}
-                        featuredImageField={dynamicAuthorNameFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorNameFeaturedImageField: value })}
-
-                        dateType={dynamicAuthorNameDateType}
-                        setDateType={(value) => setAttributes({ dynamicAuthorNameDateType: value })}
-                        dateFormat={dynamicAuthorNameDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicAuthorNameDateFormat: value })}
-                        timeType={dynamicAuthorNameTimeType}
-                        setTimeType={(value) => setAttributes({ dynamicAuthorNameTimeType: value })}
-                        timeFormat={dynamicAuthorNameTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicAuthorNameTimeFormat: value })}
-
-                        commentsZeroText={dynamicAuthorNameCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorNameCommentsZeroText: value })}
-                        commentsOneText={dynamicAuthorNameCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorNameCommentsOneText: value })}
-                        commentsManyText={dynamicAuthorNameCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorNameCommentsManyText: value })}
-
-                        termsTaxonomy={dynamicAuthorNameTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorNameTermsTaxonomy: value })}
-                        termsSeparator={dynamicAuthorNameTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorNameTermsSeparator: value })}
+                    {AuthorSwitcher && (
+                    <TextareaControl
+                        label={__("Author", "frontis-blocks")}
+                        value={TestimonialAuthor}
+                        onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                        className="fb-testimonial-author-control"
                     />
-
-                    {dynamicAuthorNameEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicAuthorNameEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicAuthorNameEnableLink: value })}
-                            linkSource={dynamicAuthorNameLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicAuthorNameLinkSource: value })}
-                        />
                     )}
-                    {!dynamicAuthorNameEnabled && AuthorSwitcher && (
-                        <TextareaControl
-                            label={__("Author", "frontis-blocks")}
-                            value={TestimonialAuthor}
-                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
-                            className="fb-testimonial-author-control"
-                        />
-                    )}
-
-                    {dynamicAuthorDesignationContentToggleControls.map((control, index) => ( 
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicAuthorDesignationEnabled}  
-                        
-                        source={dynamicAuthorDesignationSource} 
-                        setSource={(value) => setAttributes({ dynamicAuthorDesignationSource: value })}   
-                        postId={dynamicAuthorDesignationPostId}
-                        setPostId={(value) => setAttributes({ dynamicAuthorDesignationPostId: value })}
-                        postType={dynamicAuthorDesignationPostType}
-                        setPostType={(value) => setAttributes({ dynamicAuthorDesignationPostType: value })}
-                        postLabel={dynamicAuthorDesignationPostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicAuthorDesignationPostLabel: value })}
-
-                        field={dynamicAuthorDesignationField}
-                        setField={(value) => setAttributes({ dynamicAuthorDesignationField: value })}
-                        featuredImageField={dynamicAuthorDesignationFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorDesignationFeaturedImageField: value })}
-
-                        dateType={dynamicAuthorDesignationDateType} 
-                        setDateType={(value) => setAttributes({ dynamicAuthorDesignationDateType: value })}
-                        dateFormat={dynamicAuthorDesignationDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicAuthorDesignationDateFormat: value })}
-                        timeType={dynamicAuthorDesignationTimeType}   
-                        setTimeType={(value) => setAttributes({ dynamicAuthorDesignationTimeType: value })}
-                        timeFormat={dynamicAuthorDesignationTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicAuthorDesignationTimeFormat: value })}
-
-                        commentsZeroText={dynamicAuthorDesignationCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorDesignationCommentsZeroText: value })}
-                        commentsOneText={dynamicAuthorDesignationCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsOneText: value })}
-                        commentsManyText={dynamicAuthorDesignationCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsManyText: value })}
-
-                        termsTaxonomy={dynamicAuthorDesignationTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorDesignationTermsTaxonomy: value })}
-                        termsSeparator={dynamicAuthorDesignationTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorDesignationTermsSeparator: value })}
+                    {DesignationSwitcher && (
+                    <TextareaControl
+                        label={__("Designation", "frontis-blocks")}
+                        value={TestimonialDesignation}
+                        onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                        className="fb-testimonial-designation-control"
                     />
-
-                    {dynamicAuthorDesignationEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicAuthorDesignationEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicAuthorDesignationEnableLink: value })}
-                            linkSource={dynamicAuthorDesignationLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicAuthorDesignationLinkSource: value })}
-                        />
-                    )}
-                    {!dynamicAuthorDesignationEnabled && DesignationSwitcher && ( 
-                        <TextareaControl
-                            label={__("Designation", "frontis-blocks")}
-                            value={TestimonialDesignation}
-                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
-                            className="fb-testimonial-designation-control"
-                        />
                     )}
             </PanelBody>
 

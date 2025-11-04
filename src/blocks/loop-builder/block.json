@@ -12,13 +12,6 @@
 		"align": ["wide", "full"],
         "customClassName": false
     },
-	"attributes": {
-		"align": {
-		  "type": "string",
-		  "enum": ["wide","full"],
-		  "default": "wide"
-		}
-	},
 	"usesContext": [ "templateSlug" ],
 	"providesContext": {
 		"queryId": "queryId",

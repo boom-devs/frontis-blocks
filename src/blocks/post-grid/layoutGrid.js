@@ -83,7 +83,7 @@ export default function LayoutGrid({
                                     )}
                                     <div className="fb_post_grid_author_name">
                                         {authorLinkSwitcher && (
-                                            <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
+                                            <a className="fb_post_grid_author_name_url" href={author.archive_url}>{author.name}</a>
                                         )}
                                         {!authorLinkSwitcher && (
                                             author.name

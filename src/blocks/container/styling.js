@@ -688,7 +688,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let desktopContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		desktopContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Desktop, containerPaddingUnits['Desktop']),
+			'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
 		}
 	} else {
 		desktopContainerPadding = {
@@ -709,7 +709,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let tabletContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		tabletContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Tablet, containerPaddingUnits['Tablet']),
+			'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
 		}
 	} else {
 		tabletContainerPadding = {
@@ -730,7 +730,7 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	let mobileContainerPadding = {};
 	if (isAllPaddingEmpty()) {
 		mobileContainerPadding = {
-			'padding': generateCSSUnit(containerGlobalPadding.Mobile, containerPaddingUnits['Mobile']),
+			'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
 		}
 	} else {
 		mobileContainerPadding = {
@@ -746,6 +746,69 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
 	}
+
+	// // Handle Desktop Padding
+	// let desktopContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	desktopContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Desktop, 'px'),
+	// 	}
+	// } else {
+	// 	desktopContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+	// 		'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+	// 		'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+	// 		'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	// 	}
+	// }
+	// let desktopChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerDesktopPadding.top, containerPaddingUnits['Desktop']),
+	// 	'padding-bottom': generateCSSUnit(containerDesktopPadding.bottom, containerPaddingUnits['Desktop']),
+	// 	'padding-left': generateCSSUnit(containerDesktopPadding.left, containerPaddingUnits['Desktop']),
+	// 	'padding-right': generateCSSUnit(containerDesktopPadding.right, containerPaddingUnits['Desktop']),
+	// }
+
+	// // Handle Tablet Padding
+	// let tabletContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	tabletContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Tablet, 'px'),
+	// 	}
+	// } else {
+	// 	tabletContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+	// 		'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+	// 		'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+	// 		'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	// 	}
+	// }
+	// let tabletChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerTabletPadding.top, containerPaddingUnits['Tablet']),
+	// 	'padding-bottom': generateCSSUnit(containerTabletPadding.bottom, containerPaddingUnits['Tablet']),
+	// 	'padding-left': generateCSSUnit(containerTabletPadding.left, containerPaddingUnits['Tablet']),
+	// 	'padding-right': generateCSSUnit(containerTabletPadding.right, containerPaddingUnits['Tablet']),
+	// }
+
+	// // Handle Mobile Padding
+	// let mobileContainerPadding = {};
+	// if (containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '') {
+	// 	mobileContainerPadding = {
+	// 		'padding': generateCSSUnit(containerGlobalPadding.Mobile, 'px'),
+	// 	}
+	// } else {
+	// 	mobileContainerPadding = {
+	// 		'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+	// 		'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+	// 		'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+	// 		'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	// 	}
+	// }
+	// let mobileChildContainerPadding = {
+	// 	'padding-top': generateCSSUnit(containerMobilePadding.top, containerPaddingUnits['Mobile']),
+	// 	'padding-bottom': generateCSSUnit(containerMobilePadding.bottom, containerPaddingUnits['Mobile']),
+	// 	'padding-left': generateCSSUnit(containerMobilePadding.left, containerPaddingUnits['Mobile']),
+	// 	'padding-right': generateCSSUnit(containerMobilePadding.right, containerPaddingUnits['Mobile']),
+	// }
 	
 
 	/**start margin */
@@ -1334,7 +1397,53 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 
 
 	if ( 'video' === backgroundType ) {
-
+		// selectors[ ' .frontis-blocks-container__video-wrap' ] = {
+		// 	...videoBackgroundCSS,
+		// 	...borderCSS,
+		// };
+		// tablet_selectors[ ' .frontis-blocks-container__video-wrap' ] = {
+		// 	...borderCSSTablet,
+		// };
+		// mobile_selectors[ ' .frontis-blocks-container__video-wrap' ] = {
+		// 	...borderCSSMobile,
+		// };
+		// selectors[ '.wp-block-frontis-blocks-container' ] = {
+		// 	...desktopContainerPadding,
+		// 	'margin-top': generateCSSUnit( containerDesktopMargin.top, containerMarginUnits['Desktop'], true ),
+		// 	'margin-bottom': generateCSSUnit( containerDesktopMargin.bottom, containerMarginUnits['Desktop'], true ),
+		// 	'margin-left': generateCSSUnit( containerDesktopMargin.left, containerMarginUnits['Desktop'], true ),
+		// 	'margin-right': generateCSSUnit( containerDesktopMargin.right, containerMarginUnits['Desktop'], true ),
+		// 	'box-shadow':
+		// 		generateCSSUnit( boxShadowHOffset, 'px' ) +
+		// 		' ' +
+		// 		generateCSSUnit( boxShadowVOffset, 'px' ) +
+		// 		' ' +
+		// 		generateCSSUnit( boxShadowBlur, 'px' ) +
+		// 		' ' +
+		// 		generateCSSUnit( boxShadowSpread, 'px' ) +
+		// 		' ' +
+		// 		boxShadowColor +
+		// 		' ' +
+		// 		boxShadowPositionCSS,
+		// 	'min-height': generateCSSUnit(  minHeight['Desktop'], minHeightUnits['Desktop']  ),
+		// 	'overflow': overflow,
+		// };
+		// tablet_selectors[ '.wp-block-frontis-blocks-container' ] = {
+		// 	...tabletContainerPadding,
+		// 	'margin-top': generateCSSUnit( containerTabletMargin.top, containerMarginUnits['Tablet'], true ),
+		// 	'margin-bottom': generateCSSUnit( containerTabletMargin.bottom, containerMarginUnits['Tablet'], true ),
+		// 	'min-height': generateCSSUnit( minHeight['Tablet'], minHeightUnits['Tablet'] ),
+		// };
+		// mobile_selectors[ '.wp-block-frontis-blocks-container' ] = {
+		// 	...mobileContainerPadding,
+		// 	'margin-top': generateCSSUnit( containerMobileMargin.top, containerMarginUnits['Mobile'], true ),
+		// 	'margin-bottom': generateCSSUnit( containerMobileMargin.bottom, containerMarginUnits['Mobile'], true ),
+		// 	'min-height': generateCSSUnit( minHeight['Mobile'], minHeightUnits['Mobile'] ),
+		// };
+		// selectors[ '.wp-block-frontis-blocks-container:hover .frontis-blocks-container__video-wrap' ] = {
+		// 	'border-color': containerBorderHColor,
+		// 	'box-shadow': '',
+		// };
 	} else {
 		if(isBlockRootParent) {
 			selectors[ '.wp-block-frontis-blocks-container' ] = getContainerStylesDesktop;

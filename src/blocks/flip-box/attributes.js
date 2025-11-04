@@ -233,17 +233,9 @@ const attributes = {
         type: 'string',
         default: 'swatchbook',
     },
-    frontendIconBack: {
-        type: 'string',
-        default: '',
-    },
     btnIcon: {
         type: 'string',
         default: 'arrow-right',
-    },
-    frontendBtnIcon:{
-        type: 'string',
-        default: '',
     },
     boxBgColor: {
         type: 'string',
@@ -347,7 +339,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '16'
+            Mobile: '0'
         }
     },
     headingFontSizeUnits: {
@@ -722,10 +714,6 @@ const attributes = {
     descSwitcher: {
         type: "boolean",
         default: false,
-    },
-    titleSwitcher: {
-        type: "boolean",
-        default: true,
     },
     Sub_Heading_Position: {
         type: "string",
@@ -2571,17 +2559,9 @@ const attributes = {
         type: 'string',
         default: 'bolt',
     },
-    frontendIcon: {
-        type: 'string',
-        default: '',
-    },
     btnIconBack: {
         type: 'string',
         default: 'arrow-up',
-    },
-    frontendBtnIconBack: {
-        type: 'string',
-        default: '',
     },
     boxBgColor: {
         type: 'string',
@@ -2673,7 +2653,7 @@ const attributes = {
         default: {
             Desktop: '24',
             Tablet: '18',
-            Mobile: '16'
+            Mobile: '0'
         }
     },
     headingBackFontSizeUnits: {
@@ -3041,10 +3021,6 @@ const attributes = {
         type: "boolean",
         default: true,
     },
-    titleSwitcherBack: {
-        type: "boolean",
-        default: true,
-    },
     subHeadingBack_Position: {
         type: "string",
         default: "bottom",
@@ -3078,8 +3054,8 @@ const attributes = {
     subHeadingBackMobilePadding: {
         type: "object",
         default: {
-            top: '24',
-            bottom: '24',
+            top: '0',
+            bottom: '0',
             left: '0',
             right: '0',
         },
@@ -3838,7 +3814,7 @@ const attributes = {
     mediaMarginDesktop: {
         type: "object",
         default: {
-            top: '0',
+            top: '80',
             bottom: '24',
             left: '0',
             right: '0',
@@ -3847,7 +3823,7 @@ const attributes = {
     mediaMarginTablet: {
         type: "object",
         default: {
-            top: '0',
+            top: '60',
             bottom: '20',
             left: '0',
             right: '0',
@@ -3856,7 +3832,7 @@ const attributes = {
     mediaMarginMobile: {
         type: "object",
         default: {
-            top: '0',
+            top: '40',
             bottom: '16',
             left: '0',
             right: '0',
@@ -4565,457 +4541,6 @@ const attributes = {
             Mobile: 'px',
         }
     },
-
-    /** Start Dynamic Title Text */
-	dynamicTitleEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicTitleSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicTitlePostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicTitlePostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicTitlePostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicTitleField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicTitleFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicTitleDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicTitleDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicTitleTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicTitleTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicTitleCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicTitleCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicTitleCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicTitleTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicTitleTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicTitleEnableLink: {
-		type: 'boolean',
-		default: false
-	},
-	dynamicTitleLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic Title Text */
-
-	/** Start Dynamic Description Text */
-	dynamicDescriptionEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicDescriptionSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicDescriptionPostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicDescriptionPostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicDescriptionPostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicDescriptionField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicDescriptionFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicDescriptionDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicDescriptionDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicDescriptionTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicDescriptionTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicDescriptionCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicDescriptionCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicDescriptionCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicDescriptionTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicDescriptionTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicDescriptionEnableLink: {
-		type: 'boolean',
-		default: false
-	},
-	dynamicDescriptionLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic Description Text */
-
-	/** Start Dynamic btn Text */
-	dynamicBtnEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBtnSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicBtnPostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicBtnPostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBtnPostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBtnField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicBtnFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicBtnDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBtnDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBtnTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBtnTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBtnCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicBtnCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicBtnCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicBtnTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicBtnTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicBtnEnableLink: { 
-		type: 'boolean',
-		default: false
-	},
-	dynamicBtnLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic btn Text */
-
-
-    /** Start Dynamic Back Title Text */
-	dynamicBackTitleEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackTitleSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicBackTitlePostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicBackTitlePostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackTitlePostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackTitleField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicBackTitleFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicBackTitleDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackTitleDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackTitleTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackTitleTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackTitleCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicBackTitleCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicBackTitleCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicBackTitleTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicBackTitleTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicBackTitleEnableLink: {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackTitleLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic Back Title Text */
-
-	/** Start Dynamic Back Description Text */
-	dynamicBackDescriptionEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackDescriptionSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicBackDescriptionPostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicBackDescriptionPostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackDescriptionPostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackDescriptionField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicBackDescriptionFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicBackDescriptionDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackDescriptionDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackDescriptionTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackDescriptionTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackDescriptionCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicBackDescriptionCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicBackDescriptionCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicBackDescriptionTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicBackDescriptionTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicBackDescriptionEnableLink: {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackDescriptionLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic Back Description Text */
-
-	/** Start Dynamic Back btn Text */
-	dynamicBackBtnEnabled : {
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackBtnSource: {
-		type: 'string',
-		default: 'current_post'
-	},
-	dynamicBackBtnPostId: {
-		type: 'number',
-		default: 0
-	},
-	dynamicBackBtnPostType: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackBtnPostLabel: {
-		type: 'string',
-		default: ''
-	},
-	dynamicBackBtnField: {
-		type: 'string',
-		default: 'post_title'
-	},
-	dynamicBackBtnFeaturedImageField:{
-		type: 'string',
-		default: 'title'
-	},
-	dynamicBackBtnDateType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackBtnDateFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackBtnTimeType: {
-		type: 'string',
-		default: 'published'
-	},
-	dynamicBackBtnTimeFormat: {
-		type: 'string',
-		default: 'default'
-	},
-	dynamicBackBtnCommentsZeroText: {
-		type: 'string',
-		default: 'No Response',
-	},
-	dynamicBackBtnCommentsOneText: {
-		type: 'string',
-		default: 'One Response',
-	},
-	dynamicBackBtnCommentsManyText: {
-		type: 'string',
-		default: '{num} Response',
-	},   
-	dynamicBackBtnTermsTaxonomy: {
-		type: 'string',
-		default: 'category',
-	},
-	dynamicBackBtnTermsSeparator: {
-		type: 'string',
-		default: ', ',
-	},
-	dynamicBackBtnEnableLink: { 
-		type: 'boolean',
-		default: false
-	},
-	dynamicBackBtnLinkSource: {
-		type: 'string',
-		default: 'post_permalink',
-	},
-	/** End Dynamic Back btn Text */
 }
 //
 export default attributes;

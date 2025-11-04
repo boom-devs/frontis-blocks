@@ -11,6 +11,10 @@ class FluentForms
 {
 	use Singleton;
 
+	public function __construct() {
+
+	}
+
 	/**
 	 * Get form meta using FluentForm Helpers.
 	 *
@@ -68,5 +72,6 @@ class FluentForms
 		}
 	
 		return $options;
-	}
+	}	
+	
 }

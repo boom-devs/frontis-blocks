@@ -18,23 +18,21 @@ import FB_SidebarTypography from "./SidebarTypography";
 import { loadGoogleFont, useAfterSave } from "../helper";
 import { updateGlobalStyle } from "../fetch";
 import FrontPreview from "./FontPreview";
+import generateCSSVariables from "./GenerateRootCss";
 
-const TypographySettings = ({
-	typography,
-	setTypography,
-	customTypography,
-	setCustomTypography,
-	fontFamilies,
-	setFontFamilies,
-	globalTypography,
-	setGlobalTypography,
-}) => {
-
+const TypographySettings = (props) => {
+	const [typography, setTypography] = useState(props.typography);
+	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
+	const [isSaving, setIsSaving] = useState(false);
+	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
+	const [fontFamilies, setFontFamilies] = useState([]);
+	const [globalTypography, setGlobalTypography] = useState(typography);
 	const [selectCustomTypo, setSelectCustomTypo] = useState(false);
 	const deviceType = useDeviceType();
 
+	const isFSE = wp.data.select('core').getCurrentTheme()?.is_block_theme || false;
 
 	// Typography elements
 	const typographyElements = {
@@ -119,7 +117,7 @@ const TypographySettings = ({
 				...prevTypography[item],
 				fontSize: {
 					...typography[item]?.fontSize,
-					[deviceType]: value[deviceType],
+					[deviceType]: parseInt(value[deviceType]),
 				},
 			},
 		}));
@@ -972,6 +970,73 @@ const TypographySettings = ({
 		});
 		setIsMount(true);
 	}
+
+	const isAfterSave = useAfterSave();
+
+	useEffect(() => {
+		const handleUpdateSettings = async () => {
+			if (isAfterSave && isMount) {
+				if (typography) {
+					const response = await updateGlobalStyle(typography, 'fb_update_typography');
+					if (response.success) {
+						setTypography(response.data.data);
+						localStorage.setItem('fb_typography', JSON.stringify(response.data.data));
+					}
+				}
+
+				if (customTypography) {
+					const response = await updateGlobalStyle(customTypography, 'fb_update_custom_typography');
+					if (response.success) {
+						setCustomTypography(response.data.data || {});
+						localStorage.setItem('fb_custom_typography', JSON.stringify(response.data.data));
+					}
+				}
+
+				if (globalTypography) {
+					const response = await updateGlobalStyle(globalTypography, 'fb_update_globaltypo');
+					if (response.success) {
+						setGlobalTypography(response.data.data);
+						localStorage.setItem('fb_globaltypo', JSON.stringify(response.data.data));
+					}
+				}
+
+				if (fontFamilies) {
+					const response = await updateGlobalStyle(fontFamilies, 'fb_update_fontfamilies');
+					if (response.success) {
+						setFontFamilies(response.data.data);
+						localStorage.setItem('fb_fontFamilies', JSON.stringify(response.data.data));
+					}
+				}
+				setIsMount(false);
+			}
+		}
+
+		handleUpdateSettings();
+	}, [isAfterSave])
+
+	useEffect(() => {
+		if (isMount) {
+			wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
+		}
+	}, [isMount]);
+
+	useEffect(() => {
+		if (globalTypography) {
+			generateCSSVariables(globalTypography, deviceType);
+		}
+
+	}, [globalTypography, deviceType]);
+
+	// Load saved data and generate root css
+	useEffect(() => {
+		setTimeout(() => {
+			let globalTypoData = localStorage.getItem("fb_globaltypo");
+			if (globalTypoData !== 'null') {
+				globalTypoData = JSON.parse(globalTypoData);
+				setGlobalTypography(globalTypoData)
+			}
+		}, 1000);
+	}, [deviceType]);
 
 
 	return (

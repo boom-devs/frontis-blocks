@@ -63,11 +63,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-import getProToggleControls from '@Utils/getProToggleControls';
-import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
-import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
+
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -78,7 +74,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		Heading_Background_Color,
 		Alignment,
 		descSwitcher,
-		titleSwitcher,
 		Sub_Heading_Text,
 		headingGlobalTypoSwitcher,
 		headingGlobalTypographyData,
@@ -220,9 +215,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipButtonLink,
 		flipbtnTargetUrl,
 		icon,
-		frontendIcon,
 		btnIcon,
-		frontendBtnIcon,
 		width,
 		mediaSwitcher,
 		flipModeSwitcher,
@@ -513,11 +506,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBackContent,
 		flipBackContentTag,
 		descSwitcherBack,
-		titleSwitcherBack,
 		descAlignmentBack,
 		mediaSwitcherBack,
 		iconBack,
-		frontendIconBack,
 		flipAnimationType,
 		titleAlignmentBack,
 		headingBackColorSwitcher,
@@ -768,7 +759,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		flipBoxBackHoverBackgroundImageSize,
 		flipBoxBackHoverBackgroundImageRepeat,
 		btnIconBack,
-		frontendBtnIconBack,
 		// Padding
 		flipBoxFrontPaddingUnits,
 		flipBoxFrontPaddingDesktop,
@@ -848,157 +838,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		btnIconGapUnits,
 		btnBackIconGap,
 		btnBackIconGapUnits,
-		flipBoxAlignment,
-
-		/** Start Dynamic Title Text */
-		dynamicTitleEnabled,
-		dynamicTitleSource,
-		dynamicTitlePostId,
-		dynamicTitlePostType,
-		dynamicTitlePostLabel,
-		dynamicTitleField,
-		dynamicTitleFeaturedImageField,
-
-		dynamicTitleDateType,
-		dynamicTitleDateFormat,
-
-		dynamicTitleTimeType,
-		dynamicTitleTimeFormat,
-
-		dynamicTitleCommentsZeroText,
-		dynamicTitleCommentsOneText,
-		dynamicTitleCommentsManyText,
-
-		dynamicTitleTermsTaxonomy,
-		dynamicTitleTermsSeparator,
-		dynamicTitleEnableLink,
-		dynamicTitleLinkSource,
-		/** End Dynamic Title Text */
-
-		/** Start Dynamic Description Text */
-		dynamicDescriptionEnabled,
-		dynamicDescriptionSource,
-		dynamicDescriptionPostId,
-		dynamicDescriptionPostType,
-		dynamicDescriptionPostLabel,
-		dynamicDescriptionField,
-		dynamicDescriptionFeaturedImageField,
-
-		dynamicDescriptionDateType,
-		dynamicDescriptionDateFormat,
-
-		dynamicDescriptionTimeType,
-		dynamicDescriptionTimeFormat,
-
-		dynamicDescriptionCommentsZeroText,
-		dynamicDescriptionCommentsOneText,
-		dynamicDescriptionCommentsManyText,
-
-		dynamicDescriptionTermsTaxonomy,
-		dynamicDescriptionTermsSeparator,
-		dynamicDescriptionEnableLink,
-		dynamicDescriptionLinkSource,
-		/** End Dynamic Description Text */
-
-		/** Start Dynamic Btn One Text */
-		dynamicBtnEnabled,
-		dynamicBtnSource,
-		dynamicBtnPostId,
-		dynamicBtnPostType,
-		dynamicBtnPostLabel,
-		dynamicBtnField,
-		dynamicBtnFeaturedImageField,
-
-		dynamicBtnDateType,
-		dynamicBtnDateFormat,
-
-		dynamicBtnTimeType,
-		dynamicBtnTimeFormat,
-
-		dynamicBtnCommentsZeroText,
-		dynamicBtnCommentsOneText,
-		dynamicBtnCommentsManyText,
-
-		dynamicBtnTermsTaxonomy,
-		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
-		dynamicBtnLinkSource,
-		/** End Dynamic Btn Text */
-
-		/** Start Dynamic Back Title Text */
-		dynamicBackTitleEnabled,
-		dynamicBackTitleSource,
-		dynamicBackTitlePostId,
-		dynamicBackTitlePostType,
-		dynamicBackTitlePostLabel,
-		dynamicBackTitleField,
-		dynamicBackTitleFeaturedImageField,
-
-		dynamicBackTitleDateType,
-		dynamicBackTitleDateFormat,
-
-		dynamicBackTitleTimeType,
-		dynamicBackTitleTimeFormat,
-
-		dynamicBackTitleCommentsZeroText,
-		dynamicBackTitleCommentsOneText,
-		dynamicBackTitleCommentsManyText,
-
-		dynamicBackTitleTermsTaxonomy,
-		dynamicBackTitleTermsSeparator,
-		dynamicBackTitleEnableLink,
-		dynamicBackTitleLinkSource,
-		/** End Dynamic Back Title Text */
-
-		/** Start Dynamic Back Description Text */
-		dynamicBackDescriptionEnabled,
-		dynamicBackDescriptionSource,
-		dynamicBackDescriptionPostId,
-		dynamicBackDescriptionPostType,
-		dynamicBackDescriptionPostLabel,
-		dynamicBackDescriptionField,
-		dynamicBackDescriptionFeaturedImageField,
-
-		dynamicBackDescriptionDateType,
-		dynamicBackDescriptionDateFormat,
-
-		dynamicBackDescriptionTimeType,
-		dynamicBackDescriptionTimeFormat,
-
-		dynamicBackDescriptionCommentsZeroText,
-		dynamicBackDescriptionCommentsOneText,
-		dynamicBackDescriptionCommentsManyText,
-
-		dynamicBackDescriptionTermsTaxonomy,
-		dynamicBackDescriptionTermsSeparator,
-		dynamicBackDescriptionEnableLink,
-		dynamicBackDescriptionLinkSource,
-		/** End Dynamic Back Description Text */
-
-		/** Start Dynamic Back btn Text */
-		dynamicBackBtnEnabled,
-		dynamicBackBtnSource,
-		dynamicBackBtnPostId,
-		dynamicBackBtnPostType,
-		dynamicBackBtnPostLabel,
-		dynamicBackBtnField,
-		dynamicBackBtnFeaturedImageField,
-
-		dynamicBackBtnDateType,
-		dynamicBackBtnDateFormat,
-
-		dynamicBackBtnTimeType,
-		dynamicBackBtnTimeFormat,
-
-		dynamicBackBtnCommentsZeroText,
-		dynamicBackBtnCommentsOneText,
-		dynamicBackBtnCommentsManyText,
-
-		dynamicBackBtnTermsTaxonomy,
-		dynamicBackBtnTermsSeparator,
-		dynamicBackBtnEnableLink,	
-		dynamicBackBtnLinkSource,
-		/** End Dynamic Back btn Text */
+		flipBoxAlignment
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -1292,9 +1132,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const headingPaddingDesktopWidthValue = `${Heading_Desktop_padding?.top}${Heading_padding_units?.Desktop} ${Heading_Desktop_padding?.right}${Heading_padding_units?.Desktop} ${Heading_Desktop_padding?.bottom}${Heading_padding_units?.Desktop} ${Heading_Desktop_padding?.left}${Heading_padding_units?.Desktop}`;
-	const headingPaddingTabWidthValue = `${Heading_Tab_padding?.top}${Heading_padding_units?.Tablet} ${Heading_Tab_padding?.right}${Heading_padding_units?.Tablet} ${Heading_Tab_padding?.bottom}${Heading_padding_units?.Tablet} ${Heading_Tab_padding?.left}${Heading_padding_units?.Tablet}`;
-	const headingPaddingMobileWidthValue = `${Heading_Mobile_padding?.top}${Heading_padding_units?.Mobile} ${Heading_Mobile_padding?.right}${Heading_padding_units?.Mobile} ${Heading_Mobile_padding?.bottom}${Heading_padding_units?.Mobile} ${Heading_Mobile_padding?.left}${Heading_padding_units?.Mobile}`;
+	const headingPaddingDesktopWidthValue = `${Heading_Desktop_padding.top}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.right}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.bottom}${Heading_padding_units.Desktop} ${Heading_Desktop_padding.left}${Heading_padding_units.Desktop}`;
+	const headingPaddingTabWidthValue = `${Heading_Tab_padding.top}${Heading_padding_units.Tablet} ${Heading_Tab_padding.right}${Heading_padding_units.Tablet} ${Heading_Tab_padding.bottom}${Heading_padding_units.Tablet} ${Heading_Tab_padding.left}${Heading_padding_units.Tablet}`;
+	const headingPaddingMobileWidthValue = `${Heading_Mobile_padding.top}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.right}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.bottom}${Heading_padding_units.Mobile} ${Heading_Mobile_padding.left}${Heading_padding_units.Mobile}`;
 	/** Heading Margin */
 	const handleHeadingMarginUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -1377,9 +1217,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingMarginDesktopWidthValue = `${Heading_Desktop_Margin?.top}${Heading_Margin_Units?.Desktop} ${Heading_Desktop_Margin?.right}${Heading_Margin_Units?.Desktop} ${Heading_Desktop_Margin?.bottom}${Heading_Margin_Units?.Desktop} ${Heading_Desktop_Margin?.left}${Heading_Margin_Units?.Desktop}`;
-	const headingMarginTabWidthValue = `${Heading_Tab_Margin?.top}${Heading_Margin_Units?.Tablet} ${Heading_Tab_Margin?.right}${Heading_Margin_Units?.Tablet} ${Heading_Tab_Margin?.bottom}${Heading_Margin_Units?.Tablet} ${Heading_Tab_Margin?.left}${Heading_Margin_Units?.Tablet}`;
-	const headingMarginMobileWidthValue = `${Heading_Mobile_Margin?.top}${Heading_Margin_Units?.Mobile} ${Heading_Mobile_Margin?.right}${Heading_Margin_Units?.Mobile} ${Heading_Mobile_Margin?.bottom}${Heading_Margin_Units?.Mobile} ${Heading_Mobile_Margin?.left}${Heading_Margin_Units?.Mobile}`;
+	const headingMarginDesktopWidthValue = `${Heading_Desktop_Margin.top}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.right}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.bottom}${Heading_Margin_Units.Desktop} ${Heading_Desktop_Margin.left}${Heading_Margin_Units.Desktop}`;
+	const headingMarginTabWidthValue = `${Heading_Tab_Margin.top}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.right}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.bottom}${Heading_Margin_Units.Tablet} ${Heading_Tab_Margin.left}${Heading_Margin_Units.Tablet}`;
+	const headingMarginMobileWidthValue = `${Heading_Mobile_Margin.top}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.right}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.bottom}${Heading_Margin_Units.Mobile} ${Heading_Mobile_Margin.left}${Heading_Margin_Units.Mobile}`;
 	/** Heading Border */
 	const handleHeadingBorderUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -1463,9 +1303,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingBorderDesktopWidthValue = `${Heading_Desktop_Border_Width?.top}${Heading_Border_units?.Desktop} ${Heading_Desktop_Border_Width?.right}${Heading_Border_units?.Desktop} ${Heading_Desktop_Border_Width?.bottom}${Heading_Border_units?.Desktop} ${Heading_Desktop_Border_Width?.left}${Heading_Border_units?.Desktop}`;
-	const headingBorderTabWidthValue = `${Heading_Tab_Border_Width?.top}${Heading_Border_units?.Tablet} ${Heading_Tab_Border_Width?.right}${Heading_Border_units?.Tablet} ${Heading_Tab_Border_Width?.bottom}${Heading_Border_units?.Tablet} ${Heading_Tab_Border_Width?.left}${Heading_Border_units?.Tablet}`;
-	const headingBorderMobileWidthValue = `${Heading_Mobile_Border_Width?.top}${Heading_Border_units?.Mobile} ${Heading_Mobile_Border_Width?.right}${Heading_Border_units?.Mobile} ${Heading_Mobile_Border_Width?.bottom}${Heading_Border_units?.Mobile} ${Heading_Mobile_Border_Width?.left}${Heading_Border_units?.Mobile}`;
+	const headingBorderDesktopWidthValue = `${Heading_Desktop_Border_Width.top}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.right}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.bottom}${Heading_Border_units.Desktop} ${Heading_Desktop_Border_Width.left}${Heading_Border_units.Desktop}`;
+	const headingBorderTabWidthValue = `${Heading_Tab_Border_Width.top}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.right}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.bottom}${Heading_Border_units.Tablet} ${Heading_Tab_Border_Width.left}${Heading_Border_units.Tablet}`;
+	const headingBorderMobileWidthValue = `${Heading_Mobile_Border_Width.top}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.right}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.bottom}${Heading_Border_units.Mobile} ${Heading_Mobile_Border_Width.left}${Heading_Border_units.Mobile}`;
 
 	/** Heading Border Radius */
 	const handleHeadingBorderRadiusUnitChange = (event, position) => {
@@ -1550,9 +1390,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingBorderRadiusDesktopWidthValue = `${Heading_Desktop_Border_radius_Width?.top}${Heading_Border_radius_units?.Desktop} ${Heading_Desktop_Border_radius_Width?.right}${Heading_Border_radius_units?.Desktop} ${Heading_Desktop_Border_radius_Width?.bottom}${Heading_Border_radius_units?.Desktop} ${Heading_Desktop_Border_radius_Width?.left}${Heading_Border_radius_units?.Desktop}`;
-	const headingBorderRadiusTabWidthValue = `${Heading_Tab_Border_radius_Width?.top}${Heading_Border_radius_units?.Tablet} ${Heading_Tab_Border_radius_Width?.right}${Heading_Border_radius_units?.Tablet} ${Heading_Tab_Border_radius_Width?.bottom}${Heading_Border_radius_units?.Tablet} ${Heading_Tab_Border_radius_Width?.left}${Heading_Border_radius_units?.Tablet}`;
-	const headingBorderRadiusMobileWidthValue = `${Heading_Mobile_Border_radius_Width?.top}${Heading_Border_radius_units?.Mobile} ${Heading_Mobile_Border_radius_Width?.right}${Heading_Border_radius_units?.Mobile} ${Heading_Mobile_Border_radius_Width?.bottom}${Heading_Border_radius_units?.Mobile} ${Heading_Mobile_Border_radius_Width?.left}${Heading_Border_radius_units?.Mobile}`;
+	const headingBorderRadiusDesktopWidthValue = `${Heading_Desktop_Border_radius_Width.top}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.right}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.bottom}${Heading_Border_radius_units.Desktop} ${Heading_Desktop_Border_radius_Width.left}${Heading_Border_radius_units.Desktop}`;
+	const headingBorderRadiusTabWidthValue = `${Heading_Tab_Border_radius_Width.top}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.right}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.bottom}${Heading_Border_radius_units.Tablet} ${Heading_Tab_Border_radius_Width.left}${Heading_Border_radius_units.Tablet}`;
+	const headingBorderRadiusMobileWidthValue = `${Heading_Mobile_Border_radius_Width.top}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.right}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.bottom}${Heading_Border_radius_units.Mobile} ${Heading_Mobile_Border_radius_Width.left}${Heading_Border_radius_units.Mobile}`;
 
 	/** Heading Back Padding */
 	const handleheadingBackPaddingUnitChange = (event, position) => {
@@ -1633,9 +1473,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const headingBackPaddingDesktopWidthValue = `${headingBack_Desktop_padding?.top}${headingBack_padding_units?.Desktop} ${headingBack_Desktop_padding?.right}${headingBack_padding_units?.Desktop} ${headingBack_Desktop_padding?.bottom}${headingBack_padding_units?.Desktop} ${headingBack_Desktop_padding?.left}${headingBack_padding_units?.Desktop}`;
-	const headingBackPaddingTabWidthValue = `${headingBack_Tab_padding?.top}${headingBack_padding_units?.Tablet} ${headingBack_Tab_padding?.right}${headingBack_padding_units?.Tablet} ${headingBack_Tab_padding?.bottom}${headingBack_padding_units?.Tablet} ${headingBack_Tab_padding?.left}${headingBack_padding_units?.Tablet}`;
-	const headingBackPaddingMobileWidthValue = `${headingBack_Mobile_padding?.top}${headingBack_padding_units?.Mobile} ${headingBack_Mobile_padding?.right}${headingBack_padding_units?.Mobile} ${headingBack_Mobile_padding?.bottom}${headingBack_padding_units?.Mobile} ${headingBack_Mobile_padding?.left}${headingBack_padding_units?.Mobile}`;
+	const headingBackPaddingDesktopWidthValue = `${headingBack_Desktop_padding.top}${headingBack_padding_units.Desktop} ${headingBack_Desktop_padding.right}${headingBack_padding_units.Desktop} ${headingBack_Desktop_padding.bottom}${headingBack_padding_units.Desktop} ${headingBack_Desktop_padding.left}${headingBack_padding_units.Desktop}`;
+	const headingBackPaddingTabWidthValue = `${headingBack_Tab_padding.top}${headingBack_padding_units.Tablet} ${headingBack_Tab_padding.right}${headingBack_padding_units.Tablet} ${headingBack_Tab_padding.bottom}${headingBack_padding_units.Tablet} ${headingBack_Tab_padding.left}${headingBack_padding_units.Tablet}`;
+	const headingBackPaddingMobileWidthValue = `${headingBack_Mobile_padding.top}${headingBack_padding_units.Mobile} ${headingBack_Mobile_padding.right}${headingBack_padding_units.Mobile} ${headingBack_Mobile_padding.bottom}${headingBack_padding_units.Mobile} ${headingBack_Mobile_padding.left}${headingBack_padding_units.Mobile}`;
 	/** Heading Back Margin */
 	const handleheadingBackMarginUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -1718,9 +1558,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingBackMarginDesktopWidthValue = `${headingBack_Desktop_Margin?.top}${headingBack_Margin_Units?.Desktop} ${headingBack_Desktop_Margin?.right}${headingBack_Margin_Units?.Desktop} ${headingBack_Desktop_Margin?.bottom}${headingBack_Margin_Units?.Desktop} ${headingBack_Desktop_Margin?.left}${headingBack_Margin_Units?.Desktop}`;
-	const headingBackMarginTabWidthValue = `${headingBack_Tab_Margin?.top}${headingBack_Margin_Units?.Tablet} ${headingBack_Tab_Margin?.right}${headingBack_Margin_Units?.Tablet} ${headingBack_Tab_Margin?.bottom}${headingBack_Margin_Units?.Tablet} ${headingBack_Tab_Margin?.left}${headingBack_Margin_Units?.Tablet}`;
-	const headingBackMarginMobileWidthValue = `${headingBack_Mobile_Margin?.top}${headingBack_Margin_Units?.Mobile} ${headingBack_Mobile_Margin?.right}${headingBack_Margin_Units?.Mobile} ${headingBack_Mobile_Margin?.bottom}${headingBack_Margin_Units?.Mobile} ${headingBack_Mobile_Margin?.left}${headingBack_Margin_Units?.Mobile}`;
+	const headingBackMarginDesktopWidthValue = `${headingBack_Desktop_Margin.top}${headingBack_Margin_Units.Desktop} ${headingBack_Desktop_Margin.right}${headingBack_Margin_Units.Desktop} ${headingBack_Desktop_Margin.bottom}${headingBack_Margin_Units.Desktop} ${headingBack_Desktop_Margin.left}${headingBack_Margin_Units.Desktop}`;
+	const headingBackMarginTabWidthValue = `${headingBack_Tab_Margin.top}${headingBack_Margin_Units.Tablet} ${headingBack_Tab_Margin.right}${headingBack_Margin_Units.Tablet} ${headingBack_Tab_Margin.bottom}${headingBack_Margin_Units.Tablet} ${headingBack_Tab_Margin.left}${headingBack_Margin_Units.Tablet}`;
+	const headingBackMarginMobileWidthValue = `${headingBack_Mobile_Margin.top}${headingBack_Margin_Units.Mobile} ${headingBack_Mobile_Margin.right}${headingBack_Margin_Units.Mobile} ${headingBack_Mobile_Margin.bottom}${headingBack_Margin_Units.Mobile} ${headingBack_Mobile_Margin.left}${headingBack_Margin_Units.Mobile}`;
 	/** headingBack Border */
 	const handleheadingBackBorderUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -1804,9 +1644,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingBackBorderDesktopWidthValue = `${headingBack_Desktop_Border_Width?.top}${headingBack_Border_units?.Desktop} ${headingBack_Desktop_Border_Width?.right}${headingBack_Border_units?.Desktop} ${headingBack_Desktop_Border_Width?.bottom}${headingBack_Border_units?.Desktop} ${headingBack_Desktop_Border_Width?.left}${headingBack_Border_units?.Desktop}`;
-	const headingBackBorderTabWidthValue = `${headingBack_Tab_Border_Width?.top}${headingBack_Border_units?.Tablet} ${headingBack_Tab_Border_Width?.right}${headingBack_Border_units?.Tablet} ${headingBack_Tab_Border_Width?.bottom}${headingBack_Border_units?.Tablet} ${headingBack_Tab_Border_Width?.left}${headingBack_Border_units?.Tablet}`;
-	const headingBackBorderMobileWidthValue = `${headingBack_Mobile_Border_Width?.top}${headingBack_Border_units?.Mobile} ${headingBack_Mobile_Border_Width?.right}${headingBack_Border_units?.Mobile} ${headingBack_Mobile_Border_Width?.bottom}${headingBack_Border_units?.Mobile} ${headingBack_Mobile_Border_Width?.left}${headingBack_Border_units?.Mobile}`;
+	const headingBackBorderDesktopWidthValue = `${headingBack_Desktop_Border_Width.top}${headingBack_Border_units.Desktop} ${headingBack_Desktop_Border_Width.right}${headingBack_Border_units.Desktop} ${headingBack_Desktop_Border_Width.bottom}${headingBack_Border_units.Desktop} ${headingBack_Desktop_Border_Width.left}${headingBack_Border_units.Desktop}`;
+	const headingBackBorderTabWidthValue = `${headingBack_Tab_Border_Width.top}${headingBack_Border_units.Tablet} ${headingBack_Tab_Border_Width.right}${headingBack_Border_units.Tablet} ${headingBack_Tab_Border_Width.bottom}${headingBack_Border_units.Tablet} ${headingBack_Tab_Border_Width.left}${headingBack_Border_units.Tablet}`;
+	const headingBackBorderMobileWidthValue = `${headingBack_Mobile_Border_Width.top}${headingBack_Border_units.Mobile} ${headingBack_Mobile_Border_Width.right}${headingBack_Border_units.Mobile} ${headingBack_Mobile_Border_Width.bottom}${headingBack_Border_units.Mobile} ${headingBack_Mobile_Border_Width.left}${headingBack_Border_units.Mobile}`;
 
 	/** Heading Back Border Radius */
 	const handleheadingBackBorderRadiusUnitChange = (event, position) => {
@@ -1891,9 +1731,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const headingBackBorderRadiusDesktopWidthValue = `${headingBack_Desktop_Border_radius_Width?.top}${headingBack_Border_radius_units?.Desktop} ${headingBack_Desktop_Border_radius_Width?.right}${headingBack_Border_radius_units?.Desktop} ${headingBack_Desktop_Border_radius_Width?.bottom}${headingBack_Border_radius_units?.Desktop} ${headingBack_Desktop_Border_radius_Width?.left}${headingBack_Border_radius_units?.Desktop}`;
-	const headingBackBorderRadiusTabWidthValue = `${headingBack_Tab_Border_radius_Width?.top}${headingBack_Border_radius_units?.Tablet} ${headingBack_Tab_Border_radius_Width?.right}${headingBack_Border_radius_units?.Tablet} ${headingBack_Tab_Border_radius_Width?.bottom}${headingBack_Border_radius_units?.Tablet} ${headingBack_Tab_Border_radius_Width?.left}${headingBack_Border_radius_units?.Tablet}`;
-	const headingBackBorderRadiusMobileWidthValue = `${headingBack_Mobile_Border_radius_Width?.top}${headingBack_Border_radius_units?.Mobile} ${headingBack_Mobile_Border_radius_Width?.right}${headingBack_Border_radius_units?.Mobile} ${headingBack_Mobile_Border_radius_Width?.bottom}${headingBack_Border_radius_units?.Mobile} ${headingBack_Mobile_Border_radius_Width?.left}${headingBack_Border_radius_units?.Mobile}`;
+	const headingBackBorderRadiusDesktopWidthValue = `${headingBack_Desktop_Border_radius_Width.top}${headingBack_Border_radius_units.Desktop} ${headingBack_Desktop_Border_radius_Width.right}${headingBack_Border_radius_units.Desktop} ${headingBack_Desktop_Border_radius_Width.bottom}${headingBack_Border_radius_units.Desktop} ${headingBack_Desktop_Border_radius_Width.left}${headingBack_Border_radius_units.Desktop}`;
+	const headingBackBorderRadiusTabWidthValue = `${headingBack_Tab_Border_radius_Width.top}${headingBack_Border_radius_units.Tablet} ${headingBack_Tab_Border_radius_Width.right}${headingBack_Border_radius_units.Tablet} ${headingBack_Tab_Border_radius_Width.bottom}${headingBack_Border_radius_units.Tablet} ${headingBack_Tab_Border_radius_Width.left}${headingBack_Border_radius_units.Tablet}`;
+	const headingBackBorderRadiusMobileWidthValue = `${headingBack_Mobile_Border_radius_Width.top}${headingBack_Border_radius_units.Mobile} ${headingBack_Mobile_Border_radius_Width.right}${headingBack_Border_radius_units.Mobile} ${headingBack_Mobile_Border_radius_Width.bottom}${headingBack_Border_radius_units.Mobile} ${headingBack_Mobile_Border_radius_Width.left}${headingBack_Border_radius_units.Mobile}`;
 
 	/** Desc Padding */
 	const handleDescPaddingUnitChange = (event, position) => {
@@ -1978,9 +1818,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const subHeadingDesktopPaddingValue = `${SubHeadingDesktopPadding?.top}${SubHeadingPaddingUnits?.Desktop} ${SubHeadingDesktopPadding?.right}${SubHeadingPaddingUnits?.Desktop} ${SubHeadingDesktopPadding?.bottom}${SubHeadingPaddingUnits?.Desktop} ${SubHeadingDesktopPadding?.left}${SubHeadingPaddingUnits?.Desktop}`;
-	const subHeadingTabPaddingValue = `${SubHeadingTabPadding?.top}${SubHeadingPaddingUnits?.Tablet} ${SubHeadingTabPadding?.right}${SubHeadingPaddingUnits?.Tablet} ${SubHeadingTabPadding?.bottom}${SubHeadingPaddingUnits?.Tablet} ${SubHeadingTabPadding?.left}${SubHeadingPaddingUnits?.Tablet}`;
-	const subHeadingMobilePaddingValue = `${SubHeadingMobilePadding?.top}${SubHeadingPaddingUnits?.Mobile} ${SubHeadingMobilePadding?.right}${SubHeadingPaddingUnits?.Mobile} ${SubHeadingMobilePadding?.bottom}${SubHeadingPaddingUnits?.Mobile} ${SubHeadingMobilePadding?.left}${SubHeadingPaddingUnits?.Mobile}`;
+	const subHeadingDesktopPaddingValue = `${SubHeadingDesktopPadding.top}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.right}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.bottom}${SubHeadingPaddingUnits.Desktop} ${SubHeadingDesktopPadding.left}${SubHeadingPaddingUnits.Desktop}`;
+	const subHeadingTabPaddingValue = `${SubHeadingTabPadding.top}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.right}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.bottom}${SubHeadingPaddingUnits.Tablet} ${SubHeadingTabPadding.left}${SubHeadingPaddingUnits.Tablet}`;
+	const subHeadingMobilePaddingValue = `${SubHeadingMobilePadding.top}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.right}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.bottom}${SubHeadingPaddingUnits.Mobile} ${SubHeadingMobilePadding.left}${SubHeadingPaddingUnits.Mobile}`;
 
 	/** Start Margin */
 	const handleDescMarginUnitChange = (event, position) => {
@@ -2065,9 +1905,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const descDesktopMarginValue = `${descDesktopMargin?.top}${descMarginUnits?.Desktop} ${descDesktopMargin?.right}${descMarginUnits?.Desktop} ${descDesktopMargin?.bottom}${descMarginUnits?.Desktop} ${descDesktopMargin?.left}${descMarginUnits?.Desktop}`;
-	const descTabMarginValue = `${descTabMargin?.top}${descMarginUnits?.Tablet} ${descTabMargin?.right}${descMarginUnits?.Tablet} ${descTabMargin?.bottom}${descMarginUnits?.Tablet} ${descTabMargin?.left}${descMarginUnits?.Tablet}`;
-	const descMobileMarginValue = `${descMobileMargin?.top}${descMarginUnits?.Mobile} ${descMobileMargin?.right}${descMarginUnits?.Mobile} ${descMobileMargin?.bottom}${descMarginUnits?.Mobile} ${descMobileMargin?.left}${descMarginUnits?.Mobile}`;
+	const descDesktopMarginValue = `${descDesktopMargin.top}${descMarginUnits.Desktop} ${descDesktopMargin.right}${descMarginUnits.Desktop} ${descDesktopMargin.bottom}${descMarginUnits.Desktop} ${descDesktopMargin.left}${descMarginUnits.Desktop}`;
+	const descTabMarginValue = `${descTabMargin.top}${descMarginUnits.Tablet} ${descTabMargin.right}${descMarginUnits.Tablet} ${descTabMargin.bottom}${descMarginUnits.Tablet} ${descTabMargin.left}${descMarginUnits.Tablet}`;
+	const descMobileMarginValue = `${descMobileMargin.top}${descMarginUnits.Mobile} ${descMobileMargin.right}${descMarginUnits.Mobile} ${descMobileMargin.bottom}${descMarginUnits.Mobile} ${descMobileMargin.left}${descMarginUnits.Mobile}`;
 
 	/* Flip Back Spacing */
 	const handleDescBackPaddingUnitChange = (event, position) => {
@@ -2152,9 +1992,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const subHeadingBackDesktopPaddingValue = `${subHeadingBackDesktopPadding?.top}${subHeadingBackPaddingUnits?.Desktop} ${subHeadingBackDesktopPadding?.right}${subHeadingBackPaddingUnits?.Desktop} ${subHeadingBackDesktopPadding?.bottom}${subHeadingBackPaddingUnits?.Desktop} ${subHeadingBackDesktopPadding?.left}${subHeadingBackPaddingUnits?.Desktop}`;
-	const subHeadingBackTabPaddingValue = `${subHeadingBackTabPadding?.top}${subHeadingBackPaddingUnits?.Tablet} ${subHeadingBackTabPadding?.right}${subHeadingBackPaddingUnits?.Tablet} ${subHeadingBackTabPadding?.bottom}${subHeadingBackPaddingUnits?.Tablet} ${subHeadingBackTabPadding?.left}${subHeadingBackPaddingUnits?.Tablet}`;
-	const subHeadingBackMobilePaddingValue = `${subHeadingBackMobilePadding?.top}${subHeadingBackPaddingUnits?.Mobile} ${subHeadingBackMobilePadding?.right}${subHeadingBackPaddingUnits?.Mobile} ${subHeadingBackMobilePadding?.bottom}${subHeadingBackPaddingUnits?.Mobile} ${subHeadingBackMobilePadding?.left}${subHeadingBackPaddingUnits?.Mobile}`;
+	const subHeadingBackDesktopPaddingValue = `${subHeadingBackDesktopPadding.top}${subHeadingBackPaddingUnits.Desktop} ${subHeadingBackDesktopPadding.right}${subHeadingBackPaddingUnits.Desktop} ${subHeadingBackDesktopPadding.bottom}${subHeadingBackPaddingUnits.Desktop} ${subHeadingBackDesktopPadding.left}${subHeadingBackPaddingUnits.Desktop}`;
+	const subHeadingBackTabPaddingValue = `${subHeadingBackTabPadding.top}${subHeadingBackPaddingUnits.Tablet} ${subHeadingBackTabPadding.right}${subHeadingBackPaddingUnits.Tablet} ${subHeadingBackTabPadding.bottom}${subHeadingBackPaddingUnits.Tablet} ${subHeadingBackTabPadding.left}${subHeadingBackPaddingUnits.Tablet}`;
+	const subHeadingBackMobilePaddingValue = `${subHeadingBackMobilePadding.top}${subHeadingBackPaddingUnits.Mobile} ${subHeadingBackMobilePadding.right}${subHeadingBackPaddingUnits.Mobile} ${subHeadingBackMobilePadding.bottom}${subHeadingBackPaddingUnits.Mobile} ${subHeadingBackMobilePadding.left}${subHeadingBackPaddingUnits.Mobile}`;
 
 	/** Start Margin */
 	const handleDescBackMarginUnitChange = (event, position) => {
@@ -2239,9 +2079,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const descBackDesktopMarginValue = `${descBackDesktopMargin?.top}${descBackMarginUnits?.Desktop} ${descBackDesktopMargin?.right}${descBackMarginUnits?.Desktop} ${descBackDesktopMargin?.bottom}${descBackMarginUnits?.Desktop} ${descBackDesktopMargin?.left}${descBackMarginUnits?.Desktop}`;
-	const descBackTabMarginValue = `${descBackTabMargin?.top}${descBackMarginUnits?.Tablet} ${descBackTabMargin?.right}${descBackMarginUnits?.Tablet} ${descBackTabMargin?.bottom}${descBackMarginUnits?.Tablet} ${descBackTabMargin?.left}${descBackMarginUnits?.Tablet}`;
-	const descBackMobileMarginValue = `${descBackMobileMargin?.top}${descBackMarginUnits?.Mobile} ${descBackMobileMargin?.right}${descBackMarginUnits?.Mobile} ${descBackMobileMargin?.bottom}${descBackMarginUnits?.Mobile} ${descBackMobileMargin?.left}${descBackMarginUnits?.Mobile}`;
+	const descBackDesktopMarginValue = `${descBackDesktopMargin.top}${descBackMarginUnits.Desktop} ${descBackDesktopMargin.right}${descBackMarginUnits.Desktop} ${descBackDesktopMargin.bottom}${descBackMarginUnits.Desktop} ${descBackDesktopMargin.left}${descBackMarginUnits.Desktop}`;
+	const descBackTabMarginValue = `${descBackTabMargin.top}${descBackMarginUnits.Tablet} ${descBackTabMargin.right}${descBackMarginUnits.Tablet} ${descBackTabMargin.bottom}${descBackMarginUnits.Tablet} ${descBackTabMargin.left}${descBackMarginUnits.Tablet}`;
+	const descBackMobileMarginValue = `${descBackMobileMargin.top}${descBackMarginUnits.Mobile} ${descBackMobileMargin.right}${descBackMarginUnits.Mobile} ${descBackMobileMargin.bottom}${descBackMarginUnits.Mobile} ${descBackMobileMargin.left}${descBackMarginUnits.Mobile}`;
 
 	/* Button Padding */
 	const handleButtonPaddingUnitChange = (event, position) => {
@@ -2326,9 +2166,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonDesktopPaddingValue = `${flipButtonDesktopPadding?.top}${flipButtonPaddingUnits?.Desktop} ${flipButtonDesktopPadding?.right}${flipButtonPaddingUnits?.Desktop} ${flipButtonDesktopPadding?.bottom}${flipButtonPaddingUnits?.Desktop} ${flipButtonDesktopPadding?.left}${flipButtonPaddingUnits?.Desktop}`;
-	const buttonTabPaddingValue = `${flipButtonTabPadding?.top}${flipButtonPaddingUnits?.Tablet} ${flipButtonTabPadding?.right}${flipButtonPaddingUnits?.Tablet} ${flipButtonTabPadding?.bottom}${flipButtonPaddingUnits?.Tablet} ${flipButtonTabPadding?.left}${flipButtonPaddingUnits?.Tablet}`;
-	const buttonMobilePaddingValue = `${flipButtonMobilePadding?.top}${flipButtonPaddingUnits?.Mobile} ${flipButtonMobilePadding?.right}${flipButtonPaddingUnits?.Mobile} ${flipButtonMobilePadding?.bottom}${flipButtonPaddingUnits?.Mobile} ${flipButtonMobilePadding?.left}${flipButtonPaddingUnits?.Mobile}`;
+	const buttonDesktopPaddingValue = `${flipButtonDesktopPadding.top}${flipButtonPaddingUnits.Desktop} ${flipButtonDesktopPadding.right}${flipButtonPaddingUnits.Desktop} ${flipButtonDesktopPadding.bottom}${flipButtonPaddingUnits.Desktop} ${flipButtonDesktopPadding.left}${flipButtonPaddingUnits.Desktop}`;
+	const buttonTabPaddingValue = `${flipButtonTabPadding.top}${flipButtonPaddingUnits.Tablet} ${flipButtonTabPadding.right}${flipButtonPaddingUnits.Tablet} ${flipButtonTabPadding.bottom}${flipButtonPaddingUnits.Tablet} ${flipButtonTabPadding.left}${flipButtonPaddingUnits.Tablet}`;
+	const buttonMobilePaddingValue = `${flipButtonMobilePadding.top}${flipButtonPaddingUnits.Mobile} ${flipButtonMobilePadding.right}${flipButtonPaddingUnits.Mobile} ${flipButtonMobilePadding.bottom}${flipButtonPaddingUnits.Mobile} ${flipButtonMobilePadding.left}${flipButtonPaddingUnits.Mobile}`;
 
 	/* Button Margin */
 	const handleButtonMarginUnitChange = (event, position) => {
@@ -2413,9 +2253,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonDesktopMarginValue = `${flipButtonDesktopMargin?.top}${flipButtonMarginUnits?.Desktop} ${flipButtonDesktopMargin?.right}${flipButtonMarginUnits?.Desktop} ${flipButtonDesktopMargin?.bottom}${flipButtonMarginUnits?.Desktop} ${flipButtonDesktopMargin?.left}${flipButtonMarginUnits?.Desktop}`;
-	const buttonTabMarginValue = `${flipButtonTabMargin?.top}${flipButtonMarginUnits?.Tablet} ${flipButtonTabMargin?.right}${flipButtonMarginUnits?.Tablet} ${flipButtonTabMargin?.bottom}${flipButtonMarginUnits?.Tablet} ${flipButtonTabMargin?.left}${flipButtonMarginUnits?.Tablet}`;
-	const buttonMobileMarginValue = `${flipButtonMobileMargin?.top}${flipButtonMarginUnits?.Mobile} ${flipButtonMobileMargin?.right}${flipButtonMarginUnits?.Mobile} ${flipButtonMobileMargin?.bottom}${flipButtonMarginUnits?.Mobile} ${flipButtonMobileMargin?.left}${flipButtonMarginUnits?.Mobile}`;
+	const buttonDesktopMarginValue = `${flipButtonDesktopMargin.top}${flipButtonMarginUnits.Desktop} ${flipButtonDesktopMargin.right}${flipButtonMarginUnits.Desktop} ${flipButtonDesktopMargin.bottom}${flipButtonMarginUnits.Desktop} ${flipButtonDesktopMargin.left}${flipButtonMarginUnits.Desktop}`;
+	const buttonTabMarginValue = `${flipButtonTabMargin.top}${flipButtonMarginUnits.Tablet} ${flipButtonTabMargin.right}${flipButtonMarginUnits.Tablet} ${flipButtonTabMargin.bottom}${flipButtonMarginUnits.Tablet} ${flipButtonTabMargin.left}${flipButtonMarginUnits.Tablet}`;
+	const buttonMobileMarginValue = `${flipButtonMobileMargin.top}${flipButtonMarginUnits.Mobile} ${flipButtonMobileMargin.right}${flipButtonMarginUnits.Mobile} ${flipButtonMobileMargin.bottom}${flipButtonMarginUnits.Mobile} ${flipButtonMobileMargin.left}${flipButtonMarginUnits.Mobile}`;
 
 
 	/** Start Button Border */
@@ -2501,9 +2341,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonDesktopBorderValue = `${flipButtonDesktopBorderWidth?.top}${flipButtonBorderUnits?.Desktop} ${flipButtonDesktopBorderWidth?.right}${flipButtonBorderUnits?.Desktop} ${flipButtonDesktopBorderWidth?.bottom}${flipButtonBorderUnits?.Desktop} ${flipButtonDesktopBorderWidth?.left}${flipButtonBorderUnits?.Desktop}`;
-	const buttonTabBorderValue = `${flipButtonTabBorderWidth?.top}${flipButtonBorderUnits?.Tablet} ${flipButtonTabBorderWidth?.right}${flipButtonBorderUnits?.Tablet} ${flipButtonTabBorderWidth?.bottom}${flipButtonBorderUnits?.Tablet} ${flipButtonTabBorderWidth?.left}${flipButtonBorderUnits?.Tablet}`;
-	const buttonMobileBorderValue = `${flipButtonMobileBorderWidth?.top}${flipButtonBorderUnits?.Mobile} ${flipButtonMobileBorderWidth?.right}${flipButtonBorderUnits?.Mobile} ${flipButtonMobileBorderWidth?.bottom}${flipButtonBorderUnits?.Mobile} ${flipButtonMobileBorderWidth?.left}${flipButtonBorderUnits?.Mobile}`;
+	const buttonDesktopBorderValue = `${flipButtonDesktopBorderWidth.top}${flipButtonBorderUnits.Desktop} ${flipButtonDesktopBorderWidth.right}${flipButtonBorderUnits.Desktop} ${flipButtonDesktopBorderWidth.bottom}${flipButtonBorderUnits.Desktop} ${flipButtonDesktopBorderWidth.left}${flipButtonBorderUnits.Desktop}`;
+	const buttonTabBorderValue = `${flipButtonTabBorderWidth.top}${flipButtonBorderUnits.Tablet} ${flipButtonTabBorderWidth.right}${flipButtonBorderUnits.Tablet} ${flipButtonTabBorderWidth.bottom}${flipButtonBorderUnits.Tablet} ${flipButtonTabBorderWidth.left}${flipButtonBorderUnits.Tablet}`;
+	const buttonMobileBorderValue = `${flipButtonMobileBorderWidth.top}${flipButtonBorderUnits.Mobile} ${flipButtonMobileBorderWidth.right}${flipButtonBorderUnits.Mobile} ${flipButtonMobileBorderWidth.bottom}${flipButtonBorderUnits.Mobile} ${flipButtonMobileBorderWidth.left}${flipButtonBorderUnits.Mobile}`;
 
 	/** Start Border Radius */
 	const handleButtonBorderRadiusUnitChange = (event, position) => {
@@ -2588,9 +2428,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonDesktopBorderRadiusValue = `${flipBtnDesktopBorderradiusWidth?.top}${flipBtnBorderradiusUnits?.Desktop} ${flipBtnDesktopBorderradiusWidth?.right}${flipBtnBorderradiusUnits?.Desktop} ${flipBtnDesktopBorderradiusWidth?.bottom}${flipBtnBorderradiusUnits?.Desktop} ${flipBtnDesktopBorderradiusWidth?.left}${flipBtnBorderradiusUnits?.Desktop}`;
-	const buttonTabBorderRadiusValue = `${flipBtnTabBorderradiusWidth?.top}${flipBtnBorderradiusUnits?.Tablet} ${flipBtnTabBorderradiusWidth?.right}${flipBtnBorderradiusUnits?.Tablet} ${flipBtnTabBorderradiusWidth?.bottom}${flipBtnBorderradiusUnits?.Tablet} ${flipBtnTabBorderradiusWidth?.left}${flipBtnBorderradiusUnits?.Tablet}`;
-	const buttonMobileBorderRadiusValue = `${flipBtnMobileBorderradiusWidth?.top}${flipBtnBorderradiusUnits?.Mobile} ${flipBtnMobileBorderradiusWidth?.right}${flipBtnBorderradiusUnits?.Mobile} ${flipBtnMobileBorderradiusWidth?.bottom}${flipBtnBorderradiusUnits?.Mobile} ${flipBtnMobileBorderradiusWidth?.left}${flipBtnBorderradiusUnits?.Mobile}`;
+	const buttonDesktopBorderRadiusValue = `${flipBtnDesktopBorderradiusWidth.top}${flipBtnBorderradiusUnits.Desktop} ${flipBtnDesktopBorderradiusWidth.right}${flipBtnBorderradiusUnits.Desktop} ${flipBtnDesktopBorderradiusWidth.bottom}${flipBtnBorderradiusUnits.Desktop} ${flipBtnDesktopBorderradiusWidth.left}${flipBtnBorderradiusUnits.Desktop}`;
+	const buttonTabBorderRadiusValue = `${flipBtnTabBorderradiusWidth.top}${flipBtnBorderradiusUnits.Tablet} ${flipBtnTabBorderradiusWidth.right}${flipBtnBorderradiusUnits.Tablet} ${flipBtnTabBorderradiusWidth.bottom}${flipBtnBorderradiusUnits.Tablet} ${flipBtnTabBorderradiusWidth.left}${flipBtnBorderradiusUnits.Tablet}`;
+	const buttonMobileBorderRadiusValue = `${flipBtnMobileBorderradiusWidth.top}${flipBtnBorderradiusUnits.Mobile} ${flipBtnMobileBorderradiusWidth.right}${flipBtnBorderradiusUnits.Mobile} ${flipBtnMobileBorderradiusWidth.bottom}${flipBtnBorderradiusUnits.Mobile} ${flipBtnMobileBorderradiusWidth.left}${flipBtnBorderradiusUnits.Mobile}`;
 
 	/* Button Back */
 	const handleButtonBackPaddingUnitChange = (event, position) => {
@@ -2675,9 +2515,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonBackDesktopPaddingValue = `${flipButtonBackDesktopPadding?.top}${flipButtonBackPaddingUnits?.Desktop} ${flipButtonBackDesktopPadding?.right}${flipButtonBackPaddingUnits?.Desktop} ${flipButtonBackDesktopPadding?.bottom}${flipButtonBackPaddingUnits?.Desktop} ${flipButtonBackDesktopPadding?.left}${flipButtonBackPaddingUnits?.Desktop}`;
-	const buttonBackTabPaddingValue = `${flipButtonBackTabPadding?.top}${flipButtonBackPaddingUnits?.Tablet} ${flipButtonBackTabPadding?.right}${flipButtonBackPaddingUnits?.Tablet} ${flipButtonBackTabPadding?.bottom}${flipButtonBackPaddingUnits?.Tablet} ${flipButtonBackTabPadding?.left}${flipButtonBackPaddingUnits?.Tablet}`;
-	const buttonBackMobilePaddingValue = `${flipButtonBackMobilePadding?.top}${flipButtonBackPaddingUnits?.Mobile} ${flipButtonBackMobilePadding?.right}${flipButtonBackPaddingUnits?.Mobile} ${flipButtonBackMobilePadding?.bottom}${flipButtonBackPaddingUnits?.Mobile} ${flipButtonBackMobilePadding?.left}${flipButtonBackPaddingUnits?.Mobile}`;
+	const buttonBackDesktopPaddingValue = `${flipButtonBackDesktopPadding.top}${flipButtonBackPaddingUnits.Desktop} ${flipButtonBackDesktopPadding.right}${flipButtonBackPaddingUnits.Desktop} ${flipButtonBackDesktopPadding.bottom}${flipButtonBackPaddingUnits.Desktop} ${flipButtonBackDesktopPadding.left}${flipButtonBackPaddingUnits.Desktop}`;
+	const buttonBackTabPaddingValue = `${flipButtonBackTabPadding.top}${flipButtonBackPaddingUnits.Tablet} ${flipButtonBackTabPadding.right}${flipButtonBackPaddingUnits.Tablet} ${flipButtonBackTabPadding.bottom}${flipButtonBackPaddingUnits.Tablet} ${flipButtonBackTabPadding.left}${flipButtonBackPaddingUnits.Tablet}`;
+	const buttonBackMobilePaddingValue = `${flipButtonBackMobilePadding.top}${flipButtonBackPaddingUnits.Mobile} ${flipButtonBackMobilePadding.right}${flipButtonBackPaddingUnits.Mobile} ${flipButtonBackMobilePadding.bottom}${flipButtonBackPaddingUnits.Mobile} ${flipButtonBackMobilePadding.left}${flipButtonBackPaddingUnits.Mobile}`;
 
 	/* buttonBack Margin */
 	const handleButtonBackMarginUnitChange = (event, position) => {
@@ -2762,9 +2602,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonBackDesktopMarginValue = `${flipButtonBackDesktopMargin?.top}${flipButtonBackMarginUnits?.Desktop} ${flipButtonBackDesktopMargin?.right}${flipButtonBackMarginUnits?.Desktop} ${flipButtonBackDesktopMargin?.bottom}${flipButtonBackMarginUnits?.Desktop} ${flipButtonBackDesktopMargin?.left}${flipButtonBackMarginUnits?.Desktop}`;
-	const buttonBackTabMarginValue = `${flipButtonBackTabMargin?.top}${flipButtonBackMarginUnits?.Tablet} ${flipButtonBackTabMargin?.right}${flipButtonBackMarginUnits?.Tablet} ${flipButtonBackTabMargin?.bottom}${flipButtonBackMarginUnits?.Tablet} ${flipButtonBackTabMargin?.left}${flipButtonBackMarginUnits?.Tablet}`;
-	const buttonBackMobileMarginValue = `${flipButtonBackMobileMargin?.top}${flipButtonBackMarginUnits?.Mobile} ${flipButtonBackMobileMargin?.right}${flipButtonBackMarginUnits?.Mobile} ${flipButtonBackMobileMargin?.bottom}${flipButtonBackMarginUnits?.Mobile} ${flipButtonBackMobileMargin?.left}${flipButtonBackMarginUnits?.Mobile}`;
+	const buttonBackDesktopMarginValue = `${flipButtonBackDesktopMargin.top}${flipButtonBackMarginUnits.Desktop} ${flipButtonBackDesktopMargin.right}${flipButtonBackMarginUnits.Desktop} ${flipButtonBackDesktopMargin.bottom}${flipButtonBackMarginUnits.Desktop} ${flipButtonBackDesktopMargin.left}${flipButtonBackMarginUnits.Desktop}`;
+	const buttonBackTabMarginValue = `${flipButtonBackTabMargin.top}${flipButtonBackMarginUnits.Tablet} ${flipButtonBackTabMargin.right}${flipButtonBackMarginUnits.Tablet} ${flipButtonBackTabMargin.bottom}${flipButtonBackMarginUnits.Tablet} ${flipButtonBackTabMargin.left}${flipButtonBackMarginUnits.Tablet}`;
+	const buttonBackMobileMarginValue = `${flipButtonBackMobileMargin.top}${flipButtonBackMarginUnits.Mobile} ${flipButtonBackMobileMargin.right}${flipButtonBackMarginUnits.Mobile} ${flipButtonBackMobileMargin.bottom}${flipButtonBackMarginUnits.Mobile} ${flipButtonBackMobileMargin.left}${flipButtonBackMarginUnits.Mobile}`;
 
 
 	/** Start buttonBack Border */
@@ -2850,9 +2690,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonBackDesktopBorderValue = `${flipButtonBackDesktopBorderWidth?.top}${flipButtonBackBorderUnits?.Desktop} ${flipButtonBackDesktopBorderWidth?.right}${flipButtonBackBorderUnits?.Desktop} ${flipButtonBackDesktopBorderWidth?.bottom}${flipButtonBackBorderUnits?.Desktop} ${flipButtonBackDesktopBorderWidth?.left}${flipButtonBackBorderUnits?.Desktop}`;
-	const buttonBackTabBorderValue = `${flipButtonBackTabBorderWidth?.top}${flipButtonBackBorderUnits?.Tablet} ${flipButtonBackTabBorderWidth?.right}${flipButtonBackBorderUnits?.Tablet} ${flipButtonBackTabBorderWidth?.bottom}${flipButtonBackBorderUnits?.Tablet} ${flipButtonBackTabBorderWidth?.left}${flipButtonBackBorderUnits?.Tablet}`;
-	const buttonBackMobileBorderValue = `${flipButtonBackMobileBorderWidth?.top}${flipButtonBackBorderUnits?.Mobile} ${flipButtonBackMobileBorderWidth?.right}${flipButtonBackBorderUnits?.Mobile} ${flipButtonBackMobileBorderWidth?.bottom}${flipButtonBackBorderUnits?.Mobile} ${flipButtonBackMobileBorderWidth?.left}${flipButtonBackBorderUnits?.Mobile}`;
+	const buttonBackDesktopBorderValue = `${flipButtonBackDesktopBorderWidth.top}${flipButtonBackBorderUnits.Desktop} ${flipButtonBackDesktopBorderWidth.right}${flipButtonBackBorderUnits.Desktop} ${flipButtonBackDesktopBorderWidth.bottom}${flipButtonBackBorderUnits.Desktop} ${flipButtonBackDesktopBorderWidth.left}${flipButtonBackBorderUnits.Desktop}`;
+	const buttonBackTabBorderValue = `${flipButtonBackTabBorderWidth.top}${flipButtonBackBorderUnits.Tablet} ${flipButtonBackTabBorderWidth.right}${flipButtonBackBorderUnits.Tablet} ${flipButtonBackTabBorderWidth.bottom}${flipButtonBackBorderUnits.Tablet} ${flipButtonBackTabBorderWidth.left}${flipButtonBackBorderUnits.Tablet}`;
+	const buttonBackMobileBorderValue = `${flipButtonBackMobileBorderWidth.top}${flipButtonBackBorderUnits.Mobile} ${flipButtonBackMobileBorderWidth.right}${flipButtonBackBorderUnits.Mobile} ${flipButtonBackMobileBorderWidth.bottom}${flipButtonBackBorderUnits.Mobile} ${flipButtonBackMobileBorderWidth.left}${flipButtonBackBorderUnits.Mobile}`;
 
 	/** Start Border Radius */
 	const handleButtonBackBorderRadiusUnitChange = (event, position) => {
@@ -2937,9 +2777,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const buttonBackDesktopBorderRadiusValue = `${flipBtnBackDesktopBorderradiusWidth?.top}${flipBtnBackBorderradiusUnits?.Desktop} ${flipBtnBackDesktopBorderradiusWidth?.right}${flipBtnBackBorderradiusUnits?.Desktop} ${flipBtnBackDesktopBorderradiusWidth?.bottom}${flipBtnBackBorderradiusUnits?.Desktop} ${flipBtnBackDesktopBorderradiusWidth?.left}${flipBtnBackBorderradiusUnits?.Desktop}`;
-	const buttonBackTabBorderRadiusValue = `${flipBtnBackTabBorderradiusWidth?.top}${flipBtnBackBorderradiusUnits?.Tablet} ${flipBtnBackTabBorderradiusWidth?.right}${flipBtnBackBorderradiusUnits?.Tablet} ${flipBtnBackTabBorderradiusWidth?.bottom}${flipBtnBackBorderradiusUnits?.Tablet} ${flipBtnBackTabBorderradiusWidth?.left}${flipBtnBackBorderradiusUnits?.Tablet}`;
-	const buttonBackMobileBorderRadiusValue = `${flipBtnBackMobileBorderradiusWidth?.top}${flipBtnBackBorderradiusUnits?.Mobile} ${flipBtnBackMobileBorderradiusWidth?.right}${flipBtnBackBorderradiusUnits?.Mobile} ${flipBtnBackMobileBorderradiusWidth?.bottom}${flipBtnBackBorderradiusUnits?.Mobile} ${flipBtnBackMobileBorderradiusWidth?.left}${flipBtnBackBorderradiusUnits?.Mobile}`;
+	const buttonBackDesktopBorderRadiusValue = `${flipBtnBackDesktopBorderradiusWidth.top}${flipBtnBackBorderradiusUnits.Desktop} ${flipBtnBackDesktopBorderradiusWidth.right}${flipBtnBackBorderradiusUnits.Desktop} ${flipBtnBackDesktopBorderradiusWidth.bottom}${flipBtnBackBorderradiusUnits.Desktop} ${flipBtnBackDesktopBorderradiusWidth.left}${flipBtnBackBorderradiusUnits.Desktop}`;
+	const buttonBackTabBorderRadiusValue = `${flipBtnBackTabBorderradiusWidth.top}${flipBtnBackBorderradiusUnits.Tablet} ${flipBtnBackTabBorderradiusWidth.right}${flipBtnBackBorderradiusUnits.Tablet} ${flipBtnBackTabBorderradiusWidth.bottom}${flipBtnBackBorderradiusUnits.Tablet} ${flipBtnBackTabBorderradiusWidth.left}${flipBtnBackBorderradiusUnits.Tablet}`;
+	const buttonBackMobileBorderRadiusValue = `${flipBtnBackMobileBorderradiusWidth.top}${flipBtnBackBorderradiusUnits.Mobile} ${flipBtnBackMobileBorderradiusWidth.right}${flipBtnBackBorderradiusUnits.Mobile} ${flipBtnBackMobileBorderradiusWidth.bottom}${flipBtnBackBorderradiusUnits.Mobile} ${flipBtnBackMobileBorderradiusWidth.left}${flipBtnBackBorderradiusUnits.Mobile}`;
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -3018,9 +2858,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const DesktopPadding = `${globalPaddingDesktop?.top}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.right}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.bottom}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.left}${globalPaddingUnits?.Desktop}`;
-	const TabletPadding = `${globalPaddingTablet?.top}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.right}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.bottom}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.left}${globalPaddingUnits?.Tablet}`;
-	const MobilePadding = `${globalPaddingMobile?.top}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.right}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.bottom}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.left}${globalPaddingUnits?.Mobile}`;
+	const DesktopPadding = `${globalPaddingDesktop.top}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.right}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.bottom}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.left}${globalPaddingUnits.Desktop}`;
+	const TabletPadding = `${globalPaddingTablet.top}${globalPaddingUnits.Tablet} ${globalPaddingTablet.right}${globalPaddingUnits.Tablet} ${globalPaddingTablet.bottom}${globalPaddingUnits.Tablet} ${globalPaddingTablet.left}${globalPaddingUnits.Tablet}`;
+	const MobilePadding = `${globalPaddingMobile.top}${globalPaddingUnits.Mobile} ${globalPaddingMobile.right}${globalPaddingUnits.Mobile} ${globalPaddingMobile.bottom}${globalPaddingUnits.Mobile} ${globalPaddingMobile.left}${globalPaddingUnits.Mobile}`;
 
 	/** Start Global margin */
 	const handleGlobalMarginUnitChange = (event, position) => {
@@ -3096,9 +2936,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const DesktopMargin = `${globalMarginDesktop?.top}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.right}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.bottom}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.left}${globalMarginUnits?.Desktop}`;
-	const TabletMargin = `${globalMarginTablet?.top}${globalMarginUnits?.Tablet} ${globalMarginTablet?.right}${globalMarginUnits?.Tablet} ${globalMarginTablet?.bottom}${globalMarginUnits?.Tablet} ${globalMarginTablet?.left}${globalMarginUnits?.Tablet}`;
-	const MobileMargin = `${globalMarginMobile?.top}${globalMarginUnits?.Mobile} ${globalMarginMobile?.right}${globalMarginUnits?.Mobile} ${globalMarginMobile?.bottom}${globalMarginUnits?.Mobile} ${globalMarginMobile?.left}${globalMarginUnits?.Mobile}`;
+	const DesktopMargin = `${globalMarginDesktop.top}${globalMarginUnits.Desktop} ${globalMarginDesktop.right}${globalMarginUnits.Desktop} ${globalMarginDesktop.bottom}${globalMarginUnits.Desktop} ${globalMarginDesktop.left}${globalMarginUnits.Desktop}`;
+	const TabletMargin = `${globalMarginTablet.top}${globalMarginUnits.Tablet} ${globalMarginTablet.right}${globalMarginUnits.Tablet} ${globalMarginTablet.bottom}${globalMarginUnits.Tablet} ${globalMarginTablet.left}${globalMarginUnits.Tablet}`;
+	const MobileMargin = `${globalMarginMobile.top}${globalMarginUnits.Mobile} ${globalMarginMobile.right}${globalMarginUnits.Mobile} ${globalMarginMobile.bottom}${globalMarginUnits.Mobile} ${globalMarginMobile.left}${globalMarginUnits.Mobile}`;
 
 	/** Start Global border */
 	const handleGlobalBorderUnitChange = (event, position) => {
@@ -3174,9 +3014,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 	/** End Global border */
-	const BorderDesktopWidth = `${globalBorderDesktop?.top}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.right}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.bottom}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.left}${globalBorderUnits?.Desktop}`;
-	const BorderTabletWidth = `${globalBorderTablet?.top}${globalBorderUnits?.Tablet} ${globalBorderTablet?.right}${globalBorderUnits?.Tablet} ${globalBorderTablet?.bottom}${globalBorderUnits?.Tablet} ${globalBorderTablet?.left}${globalBorderUnits?.Tablet}`;
-	const BorderMobileWidth = `${globalBorderMobile?.top}${globalBorderUnits?.Mobile} ${globalBorderMobile?.right}${globalBorderUnits?.Mobile} ${globalBorderMobile?.bottom}${globalBorderUnits?.Mobile} ${globalBorderMobile?.left}${globalBorderUnits?.Mobile}`;
+	const BorderDesktopWidth = `${globalBorderDesktop.top}${globalBorderUnits.Desktop} ${globalBorderDesktop.right}${globalBorderUnits.Desktop} ${globalBorderDesktop.bottom}${globalBorderUnits.Desktop} ${globalBorderDesktop.left}${globalBorderUnits.Desktop}`;
+	const BorderTabletWidth = `${globalBorderTablet.top}${globalBorderUnits.Tablet} ${globalBorderTablet.right}${globalBorderUnits.Tablet} ${globalBorderTablet.bottom}${globalBorderUnits.Tablet} ${globalBorderTablet.left}${globalBorderUnits.Tablet}`;
+	const BorderMobileWidth = `${globalBorderMobile.top}${globalBorderUnits.Mobile} ${globalBorderMobile.right}${globalBorderUnits.Mobile} ${globalBorderMobile.bottom}${globalBorderUnits.Mobile} ${globalBorderMobile.left}${globalBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
@@ -3262,9 +3102,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const BorderRadiusDesktopWidth = `${globalBorderRadiusDesktop?.top}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.right}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.bottom}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.left}${globalBorderRadiusUnits?.Desktop}`;
-	const BorderRadiusTabletWidth = `${globalBorderRadiusTablet?.top}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.right}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.bottom}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.left}${globalBorderRadiusUnits?.Tablet}`;
-	const BorderRadiusMobileWidth = `${globalBorderRadiusMobile?.top}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.right}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.bottom}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.left}${globalBorderRadiusUnits?.Mobile}`;
+	const BorderRadiusDesktopWidth = `${globalBorderRadiusDesktop.top}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.right}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.bottom}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.left}${globalBorderRadiusUnits.Desktop}`;
+	const BorderRadiusTabletWidth = `${globalBorderRadiusTablet.top}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.right}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.bottom}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.left}${globalBorderRadiusUnits.Tablet}`;
+	const BorderRadiusMobileWidth = `${globalBorderRadiusMobile.top}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.right}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.bottom}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.left}${globalBorderRadiusUnits.Mobile}`;
 
 	/** End Border Radius */
 
@@ -3342,9 +3182,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaDesktopPadding = `${mediaPaddingDesktop?.top}${mediaPaddingUnits?.Desktop} ${mediaPaddingDesktop?.right}${mediaPaddingUnits?.Desktop} ${mediaPaddingDesktop?.bottom}${mediaPaddingUnits?.Desktop} ${mediaPaddingDesktop?.left}${mediaPaddingUnits?.Desktop}`;
-	const mediaTabletPadding = `${mediaPaddingTablet?.top}${mediaPaddingUnits?.Tablet} ${mediaPaddingTablet?.right}${mediaPaddingUnits?.Tablet} ${mediaPaddingTablet?.bottom}${mediaPaddingUnits?.Tablet} ${mediaPaddingTablet?.left}${mediaPaddingUnits?.Tablet}`;
-	const mediaMobilePadding = `${mediaPaddingMobile?.top}${mediaPaddingUnits?.Mobile} ${mediaPaddingMobile?.right}${mediaPaddingUnits?.Mobile} ${mediaPaddingMobile?.bottom}${mediaPaddingUnits?.Mobile} ${mediaPaddingMobile?.left}${mediaPaddingUnits?.Mobile}`;
+	const mediaDesktopPadding = `${mediaPaddingDesktop.top}${mediaPaddingUnits.Desktop} ${mediaPaddingDesktop.right}${mediaPaddingUnits.Desktop} ${mediaPaddingDesktop.bottom}${mediaPaddingUnits.Desktop} ${mediaPaddingDesktop.left}${mediaPaddingUnits.Desktop}`;
+	const mediaTabletPadding = `${mediaPaddingTablet.top}${mediaPaddingUnits.Tablet} ${mediaPaddingTablet.right}${mediaPaddingUnits.Tablet} ${mediaPaddingTablet.bottom}${mediaPaddingUnits.Tablet} ${mediaPaddingTablet.left}${mediaPaddingUnits.Tablet}`;
+	const mediaMobilePadding = `${mediaPaddingMobile.top}${mediaPaddingUnits.Mobile} ${mediaPaddingMobile.right}${mediaPaddingUnits.Mobile} ${mediaPaddingMobile.bottom}${mediaPaddingUnits.Mobile} ${mediaPaddingMobile.left}${mediaPaddingUnits.Mobile}`;
 	/** End Padding */
 
 	/** Start Media Margin */
@@ -3421,9 +3261,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaDesktopMargin = `${mediaMarginDesktop?.top}${mediaMarginUnits?.Desktop} ${mediaMarginDesktop?.right}${mediaMarginUnits?.Desktop} ${mediaMarginDesktop?.bottom}${mediaMarginUnits?.Desktop} ${mediaMarginDesktop?.left}${mediaMarginUnits?.Desktop}`;
-	const mediaTabletMargin = `${mediaMarginTablet?.top}${mediaMarginUnits?.Tablet} ${mediaMarginTablet?.right}${mediaMarginUnits?.Tablet} ${mediaMarginTablet?.bottom}${mediaMarginUnits?.Tablet} ${mediaMarginTablet?.left}${mediaMarginUnits?.Tablet}`;
-	const mediaMobileMargin = `${mediaMarginMobile?.top}${mediaMarginUnits?.Mobile} ${mediaMarginMobile?.right}${mediaMarginUnits?.Mobile} ${mediaMarginMobile?.bottom}${mediaMarginUnits?.Mobile} ${mediaMarginMobile?.left}${mediaMarginUnits?.Mobile}`;
+	const mediaDesktopMargin = `${mediaMarginDesktop.top}${mediaMarginUnits.Desktop} ${mediaMarginDesktop.right}${mediaMarginUnits.Desktop} ${mediaMarginDesktop.bottom}${mediaMarginUnits.Desktop} ${mediaMarginDesktop.left}${mediaMarginUnits.Desktop}`;
+	const mediaTabletMargin = `${mediaMarginTablet.top}${mediaMarginUnits.Tablet} ${mediaMarginTablet.right}${mediaMarginUnits.Tablet} ${mediaMarginTablet.bottom}${mediaMarginUnits.Tablet} ${mediaMarginTablet.left}${mediaMarginUnits.Tablet}`;
+	const mediaMobileMargin = `${mediaMarginMobile.top}${mediaMarginUnits.Mobile} ${mediaMarginMobile.right}${mediaMarginUnits.Mobile} ${mediaMarginMobile.bottom}${mediaMarginUnits.Mobile} ${mediaMarginMobile.left}${mediaMarginUnits.Mobile}`;
 	/** End Margin */
 
 	/** Start Media Border */
@@ -3500,9 +3340,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBorderDesktopWidth = `${mediaBorderDesktop?.top}${mediaBorderUnits?.Desktop} ${mediaBorderDesktop?.right}${mediaBorderUnits?.Desktop} ${mediaBorderDesktop?.bottom}${mediaBorderUnits?.Desktop} ${mediaBorderDesktop?.left}${mediaBorderUnits?.Desktop}`;
-	const mediaBorderTabletWidth = `${mediaBorderTablet?.top}${mediaBorderUnits?.Tablet} ${mediaBorderTablet?.right}${mediaBorderUnits?.Tablet} ${mediaBorderTablet?.bottom}${mediaBorderUnits?.Tablet} ${mediaBorderTablet?.left}${mediaBorderUnits?.Tablet}`;
-	const mediaBorderMobileWidth = `${mediaBorderMobile?.top}${mediaBorderUnits?.Mobile} ${mediaBorderMobile?.right}${mediaBorderUnits?.Mobile} ${mediaBorderMobile?.bottom}${mediaBorderUnits?.Mobile} ${mediaBorderMobile?.left}${mediaBorderUnits?.Mobile}`;
+	const mediaBorderDesktopWidth = `${mediaBorderDesktop.top}${mediaBorderUnits.Desktop} ${mediaBorderDesktop.right}${mediaBorderUnits.Desktop} ${mediaBorderDesktop.bottom}${mediaBorderUnits.Desktop} ${mediaBorderDesktop.left}${mediaBorderUnits.Desktop}`;
+	const mediaBorderTabletWidth = `${mediaBorderTablet.top}${mediaBorderUnits.Tablet} ${mediaBorderTablet.right}${mediaBorderUnits.Tablet} ${mediaBorderTablet.bottom}${mediaBorderUnits.Tablet} ${mediaBorderTablet.left}${mediaBorderUnits.Tablet}`;
+	const mediaBorderMobileWidth = `${mediaBorderMobile.top}${mediaBorderUnits.Mobile} ${mediaBorderMobile.right}${mediaBorderUnits.Mobile} ${mediaBorderMobile.bottom}${mediaBorderUnits.Mobile} ${mediaBorderMobile.left}${mediaBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Media border radius*/
@@ -3588,9 +3428,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBorderRadiusDesktopWidth = `${mediaBorderRadiusDesktop?.top}${mediaBorderRadiusUnits?.Desktop} ${mediaBorderRadiusDesktop?.right}${mediaBorderRadiusUnits?.Desktop} ${mediaBorderRadiusDesktop?.bottom}${mediaBorderRadiusUnits?.Desktop} ${mediaBorderRadiusDesktop?.left}${mediaBorderRadiusUnits?.Desktop}`;
-	const mediaBorderRadiusTabletWidth = `${mediaBorderRadiusTablet?.top}${mediaBorderRadiusUnits?.Tablet} ${mediaBorderRadiusTablet?.right}${mediaBorderRadiusUnits?.Tablet} ${mediaBorderRadiusTablet?.bottom}${mediaBorderRadiusUnits?.Tablet} ${mediaBorderRadiusTablet?.left}${mediaBorderRadiusUnits?.Tablet}`;
-	const mediaBorderRadiusMobileWidth = `${mediaBorderRadiusMobile?.top}${mediaBorderRadiusUnits?.Mobile} ${mediaBorderRadiusMobile?.right}${mediaBorderRadiusUnits?.Mobile} ${mediaBorderRadiusMobile?.bottom}${mediaBorderRadiusUnits?.Mobile} ${mediaBorderRadiusMobile?.left}${mediaBorderRadiusUnits?.Mobile}`;
+	const mediaBorderRadiusDesktopWidth = `${mediaBorderRadiusDesktop.top}${mediaBorderRadiusUnits.Desktop} ${mediaBorderRadiusDesktop.right}${mediaBorderRadiusUnits.Desktop} ${mediaBorderRadiusDesktop.bottom}${mediaBorderRadiusUnits.Desktop} ${mediaBorderRadiusDesktop.left}${mediaBorderRadiusUnits.Desktop}`;
+	const mediaBorderRadiusTabletWidth = `${mediaBorderRadiusTablet.top}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.right}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.bottom}${mediaBorderRadiusUnits.Tablet} ${mediaBorderRadiusTablet.left}${mediaBorderRadiusUnits.Tablet}`;
+	const mediaBorderRadiusMobileWidth = `${mediaBorderRadiusMobile.top}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.right}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.bottom}${mediaBorderRadiusUnits.Mobile} ${mediaBorderRadiusMobile.left}${mediaBorderRadiusUnits.Mobile}`;
 	/** End Media Radius */
 
 	/* Back Media Styling */
@@ -3667,9 +3507,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBackDesktopPadding = `${mediaBackPaddingDesktop?.top}${mediaBackPaddingUnits?.Desktop} ${mediaBackPaddingDesktop?.right}${mediaBackPaddingUnits?.Desktop} ${mediaBackPaddingDesktop?.bottom}${mediaBackPaddingUnits?.Desktop} ${mediaBackPaddingDesktop?.left}${mediaBackPaddingUnits?.Desktop}`;
-	const mediaBackTabletPadding = `${mediaBackPaddingTablet?.top}${mediaBackPaddingUnits?.Tablet} ${mediaBackPaddingTablet?.right}${mediaBackPaddingUnits?.Tablet} ${mediaBackPaddingTablet?.bottom}${mediaBackPaddingUnits?.Tablet} ${mediaBackPaddingTablet?.left}${mediaBackPaddingUnits?.Tablet}`;
-	const mediaBackMobilePadding = `${mediaBackPaddingMobile?.top}${mediaBackPaddingUnits?.Mobile} ${mediaBackPaddingMobile?.right}${mediaBackPaddingUnits?.Mobile} ${mediaBackPaddingMobile?.bottom}${mediaBackPaddingUnits?.Mobile} ${mediaBackPaddingMobile?.left}${mediaBackPaddingUnits?.Mobile}`;
+	const mediaBackDesktopPadding = `${mediaBackPaddingDesktop.top}${mediaBackPaddingUnits.Desktop} ${mediaBackPaddingDesktop.right}${mediaBackPaddingUnits.Desktop} ${mediaBackPaddingDesktop.bottom}${mediaBackPaddingUnits.Desktop} ${mediaBackPaddingDesktop.left}${mediaBackPaddingUnits.Desktop}`;
+	const mediaBackTabletPadding = `${mediaBackPaddingTablet.top}${mediaBackPaddingUnits.Tablet} ${mediaBackPaddingTablet.right}${mediaBackPaddingUnits.Tablet} ${mediaBackPaddingTablet.bottom}${mediaBackPaddingUnits.Tablet} ${mediaBackPaddingTablet.left}${mediaBackPaddingUnits.Tablet}`;
+	const mediaBackMobilePadding = `${mediaBackPaddingMobile.top}${mediaBackPaddingUnits.Mobile} ${mediaBackPaddingMobile.right}${mediaBackPaddingUnits.Mobile} ${mediaBackPaddingMobile.bottom}${mediaBackPaddingUnits.Mobile} ${mediaBackPaddingMobile.left}${mediaBackPaddingUnits.Mobile}`;
 	/** End Padding */
 
 	/** Start mediaBack Margin */
@@ -3746,9 +3586,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBackDesktopMargin = `${mediaBackMarginDesktop?.top}${mediaBackMarginUnits?.Desktop} ${mediaBackMarginDesktop?.right}${mediaBackMarginUnits?.Desktop} ${mediaBackMarginDesktop?.bottom}${mediaBackMarginUnits?.Desktop} ${mediaBackMarginDesktop?.left}${mediaBackMarginUnits?.Desktop}`;
-	const mediaBackTabletMargin = `${mediaBackMarginTablet?.top}${mediaBackMarginUnits?.Tablet} ${mediaBackMarginTablet?.right}${mediaBackMarginUnits?.Tablet} ${mediaBackMarginTablet?.bottom}${mediaBackMarginUnits?.Tablet} ${mediaBackMarginTablet?.left}${mediaBackMarginUnits?.Tablet}`;
-	const mediaBackMobileMargin = `${mediaBackMarginMobile?.top}${mediaBackMarginUnits?.Mobile} ${mediaBackMarginMobile?.right}${mediaBackMarginUnits?.Mobile} ${mediaBackMarginMobile?.bottom}${mediaBackMarginUnits?.Mobile} ${mediaBackMarginMobile?.left}${mediaBackMarginUnits?.Mobile}`;
+	const mediaBackDesktopMargin = `${mediaBackMarginDesktop.top}${mediaBackMarginUnits.Desktop} ${mediaBackMarginDesktop.right}${mediaBackMarginUnits.Desktop} ${mediaBackMarginDesktop.bottom}${mediaBackMarginUnits.Desktop} ${mediaBackMarginDesktop.left}${mediaBackMarginUnits.Desktop}`;
+	const mediaBackTabletMargin = `${mediaBackMarginTablet.top}${mediaBackMarginUnits.Tablet} ${mediaBackMarginTablet.right}${mediaBackMarginUnits.Tablet} ${mediaBackMarginTablet.bottom}${mediaBackMarginUnits.Tablet} ${mediaBackMarginTablet.left}${mediaBackMarginUnits.Tablet}`;
+	const mediaBackMobileMargin = `${mediaBackMarginMobile.top}${mediaBackMarginUnits.Mobile} ${mediaBackMarginMobile.right}${mediaBackMarginUnits.Mobile} ${mediaBackMarginMobile.bottom}${mediaBackMarginUnits.Mobile} ${mediaBackMarginMobile.left}${mediaBackMarginUnits.Mobile}`;
 	/** End Margin */
 
 	/** Start mediaBack Border */
@@ -3825,9 +3665,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBackBorderDesktopWidth = `${mediaBackBorderDesktop?.top}${mediaBackBorderUnits?.Desktop} ${mediaBackBorderDesktop?.right}${mediaBackBorderUnits?.Desktop} ${mediaBackBorderDesktop?.bottom}${mediaBackBorderUnits?.Desktop} ${mediaBackBorderDesktop?.left}${mediaBackBorderUnits?.Desktop}`;
-	const mediaBackBorderTabletWidth = `${mediaBackBorderTablet?.top}${mediaBackBorderUnits?.Tablet} ${mediaBackBorderTablet?.right}${mediaBackBorderUnits?.Tablet} ${mediaBackBorderTablet?.bottom}${mediaBackBorderUnits?.Tablet} ${mediaBackBorderTablet?.left}${mediaBackBorderUnits?.Tablet}`;
-	const mediaBackBorderMobileWidth = `${mediaBackBorderMobile?.top}${mediaBackBorderUnits?.Mobile} ${mediaBackBorderMobile?.right}${mediaBackBorderUnits?.Mobile} ${mediaBackBorderMobile?.bottom}${mediaBackBorderUnits?.Mobile} ${mediaBackBorderMobile?.left}${mediaBackBorderUnits?.Mobile}`;
+	const mediaBackBorderDesktopWidth = `${mediaBackBorderDesktop.top}${mediaBackBorderUnits.Desktop} ${mediaBackBorderDesktop.right}${mediaBackBorderUnits.Desktop} ${mediaBackBorderDesktop.bottom}${mediaBackBorderUnits.Desktop} ${mediaBackBorderDesktop.left}${mediaBackBorderUnits.Desktop}`;
+	const mediaBackBorderTabletWidth = `${mediaBackBorderTablet.top}${mediaBackBorderUnits.Tablet} ${mediaBackBorderTablet.right}${mediaBackBorderUnits.Tablet} ${mediaBackBorderTablet.bottom}${mediaBackBorderUnits.Tablet} ${mediaBackBorderTablet.left}${mediaBackBorderUnits.Tablet}`;
+	const mediaBackBorderMobileWidth = `${mediaBackBorderMobile.top}${mediaBackBorderUnits.Mobile} ${mediaBackBorderMobile.right}${mediaBackBorderUnits.Mobile} ${mediaBackBorderMobile.bottom}${mediaBackBorderUnits.Mobile} ${mediaBackBorderMobile.left}${mediaBackBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start mediaBack border radius*/
@@ -3913,9 +3753,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const mediaBackBorderRadiusDesktopWidth = `${mediaBackBorderRadiusDesktop?.top}${mediaBackBorderRadiusUnits?.Desktop} ${mediaBackBorderRadiusDesktop?.right}${mediaBackBorderRadiusUnits?.Desktop} ${mediaBackBorderRadiusDesktop?.bottom}${mediaBackBorderRadiusUnits?.Desktop} ${mediaBackBorderRadiusDesktop?.left}${mediaBackBorderRadiusUnits?.Desktop}`;
-	const mediaBackBorderRadiusTabletWidth = `${mediaBackBorderRadiusTablet?.top}${mediaBackBorderRadiusUnits?.Tablet} ${mediaBackBorderRadiusTablet?.right}${mediaBackBorderRadiusUnits?.Tablet} ${mediaBackBorderRadiusTablet?.bottom}${mediaBackBorderRadiusUnits?.Tablet} ${mediaBackBorderRadiusTablet?.left}${mediaBackBorderRadiusUnits?.Tablet}`;
-	const mediaBackBorderRadiusMobileWidth = `${mediaBackBorderRadiusMobile?.top}${mediaBackBorderRadiusUnits?.Mobile} ${mediaBackBorderRadiusMobile?.right}${mediaBackBorderRadiusUnits?.Mobile} ${mediaBackBorderRadiusMobile?.bottom}${mediaBackBorderRadiusUnits?.Mobile} ${mediaBackBorderRadiusMobile?.left}${mediaBackBorderRadiusUnits?.Mobile}`;
+	const mediaBackBorderRadiusDesktopWidth = `${mediaBackBorderRadiusDesktop.top}${mediaBackBorderRadiusUnits.Desktop} ${mediaBackBorderRadiusDesktop.right}${mediaBackBorderRadiusUnits.Desktop} ${mediaBackBorderRadiusDesktop.bottom}${mediaBackBorderRadiusUnits.Desktop} ${mediaBackBorderRadiusDesktop.left}${mediaBackBorderRadiusUnits.Desktop}`;
+	const mediaBackBorderRadiusTabletWidth = `${mediaBackBorderRadiusTablet.top}${mediaBackBorderRadiusUnits.Tablet} ${mediaBackBorderRadiusTablet.right}${mediaBackBorderRadiusUnits.Tablet} ${mediaBackBorderRadiusTablet.bottom}${mediaBackBorderRadiusUnits.Tablet} ${mediaBackBorderRadiusTablet.left}${mediaBackBorderRadiusUnits.Tablet}`;
+	const mediaBackBorderRadiusMobileWidth = `${mediaBackBorderRadiusMobile.top}${mediaBackBorderRadiusUnits.Mobile} ${mediaBackBorderRadiusMobile.right}${mediaBackBorderRadiusUnits.Mobile} ${mediaBackBorderRadiusMobile.bottom}${mediaBackBorderRadiusUnits.Mobile} ${mediaBackBorderRadiusMobile.left}${mediaBackBorderRadiusUnits.Mobile}`;
 
 	/* Flip box front */
 	const handleFlipBoxFrontPaddingUnitChange = (event, position) => {
@@ -3991,9 +3831,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxFrontDesktopPadding = `${flipBoxFrontPaddingDesktop?.top}${flipBoxFrontPaddingUnits?.Desktop} ${flipBoxFrontPaddingDesktop?.right}${flipBoxFrontPaddingUnits?.Desktop} ${flipBoxFrontPaddingDesktop?.bottom}${flipBoxFrontPaddingUnits?.Desktop} ${flipBoxFrontPaddingDesktop?.left}${flipBoxFrontPaddingUnits?.Desktop}`;
-	const flipBoxFrontTabletPadding = `${flipBoxFrontPaddingTablet?.top}${flipBoxFrontPaddingUnits?.Tablet} ${flipBoxFrontPaddingTablet?.right}${flipBoxFrontPaddingUnits?.Tablet} ${flipBoxFrontPaddingTablet?.bottom}${flipBoxFrontPaddingUnits?.Tablet} ${flipBoxFrontPaddingTablet?.left}${flipBoxFrontPaddingUnits?.Tablet}`;
-	const flipBoxFrontMobilePadding = `${flipBoxFrontPaddingMobile?.top}${flipBoxFrontPaddingUnits?.Mobile} ${flipBoxFrontPaddingMobile?.right}${flipBoxFrontPaddingUnits?.Mobile} ${flipBoxFrontPaddingMobile?.bottom}${flipBoxFrontPaddingUnits?.Mobile} ${flipBoxFrontPaddingMobile?.left}${flipBoxFrontPaddingUnits?.Mobile}`;
+	const flipBoxFrontDesktopPadding = `${flipBoxFrontPaddingDesktop.top}${flipBoxFrontPaddingUnits.Desktop} ${flipBoxFrontPaddingDesktop.right}${flipBoxFrontPaddingUnits.Desktop} ${flipBoxFrontPaddingDesktop.bottom}${flipBoxFrontPaddingUnits.Desktop} ${flipBoxFrontPaddingDesktop.left}${flipBoxFrontPaddingUnits.Desktop}`;
+	const flipBoxFrontTabletPadding = `${flipBoxFrontPaddingTablet.top}${flipBoxFrontPaddingUnits.Tablet} ${flipBoxFrontPaddingTablet.right}${flipBoxFrontPaddingUnits.Tablet} ${flipBoxFrontPaddingTablet.bottom}${flipBoxFrontPaddingUnits.Tablet} ${flipBoxFrontPaddingTablet.left}${flipBoxFrontPaddingUnits.Tablet}`;
+	const flipBoxFrontMobilePadding = `${flipBoxFrontPaddingMobile.top}${flipBoxFrontPaddingUnits.Mobile} ${flipBoxFrontPaddingMobile.right}${flipBoxFrontPaddingUnits.Mobile} ${flipBoxFrontPaddingMobile.bottom}${flipBoxFrontPaddingUnits.Mobile} ${flipBoxFrontPaddingMobile.left}${flipBoxFrontPaddingUnits.Mobile}`;
 	/** End Padding */
 
 	/** Start flipBoxFront Margin */
@@ -4070,9 +3910,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxFrontDesktopMargin = `${flipBoxFrontMarginDesktop?.top}${flipBoxFrontMarginUnits?.Desktop} ${flipBoxFrontMarginDesktop?.right}${flipBoxFrontMarginUnits?.Desktop} ${flipBoxFrontMarginDesktop?.bottom}${flipBoxFrontMarginUnits?.Desktop} ${flipBoxFrontMarginDesktop?.left}${flipBoxFrontMarginUnits?.Desktop}`;
-	const flipBoxFrontTabletMargin = `${flipBoxFrontMarginTablet?.top}${flipBoxFrontMarginUnits?.Tablet} ${flipBoxFrontMarginTablet?.right}${flipBoxFrontMarginUnits?.Tablet} ${flipBoxFrontMarginTablet?.bottom}${flipBoxFrontMarginUnits?.Tablet} ${flipBoxFrontMarginTablet?.left}${flipBoxFrontMarginUnits?.Tablet}`;
-	const flipBoxFrontMobileMargin = `${flipBoxFrontMarginMobile?.top}${flipBoxFrontMarginUnits?.Mobile} ${flipBoxFrontMarginMobile?.right}${flipBoxFrontMarginUnits?.Mobile} ${flipBoxFrontMarginMobile?.bottom}${flipBoxFrontMarginUnits?.Mobile} ${flipBoxFrontMarginMobile?.left}${flipBoxFrontMarginUnits?.Mobile}`;
+	const flipBoxFrontDesktopMargin = `${flipBoxFrontMarginDesktop.top}${flipBoxFrontMarginUnits.Desktop} ${flipBoxFrontMarginDesktop.right}${flipBoxFrontMarginUnits.Desktop} ${flipBoxFrontMarginDesktop.bottom}${flipBoxFrontMarginUnits.Desktop} ${flipBoxFrontMarginDesktop.left}${flipBoxFrontMarginUnits.Desktop}`;
+	const flipBoxFrontTabletMargin = `${flipBoxFrontMarginTablet.top}${flipBoxFrontMarginUnits.Tablet} ${flipBoxFrontMarginTablet.right}${flipBoxFrontMarginUnits.Tablet} ${flipBoxFrontMarginTablet.bottom}${flipBoxFrontMarginUnits.Tablet} ${flipBoxFrontMarginTablet.left}${flipBoxFrontMarginUnits.Tablet}`;
+	const flipBoxFrontMobileMargin = `${flipBoxFrontMarginMobile.top}${flipBoxFrontMarginUnits.Mobile} ${flipBoxFrontMarginMobile.right}${flipBoxFrontMarginUnits.Mobile} ${flipBoxFrontMarginMobile.bottom}${flipBoxFrontMarginUnits.Mobile} ${flipBoxFrontMarginMobile.left}${flipBoxFrontMarginUnits.Mobile}`;
 	/** End Margin */
 
 	/** Start flipBoxFront Border */
@@ -4149,9 +3989,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxFrontBorderDesktopWidth = `${flipBoxFrontBorderDesktop?.top}${flipBoxFrontBorderUnits?.Desktop} ${flipBoxFrontBorderDesktop?.right}${flipBoxFrontBorderUnits?.Desktop} ${flipBoxFrontBorderDesktop?.bottom}${flipBoxFrontBorderUnits?.Desktop} ${flipBoxFrontBorderDesktop?.left}${flipBoxFrontBorderUnits?.Desktop}`;
-	const flipBoxFrontBorderTabletWidth = `${flipBoxFrontBorderTablet?.top}${flipBoxFrontBorderUnits?.Tablet} ${flipBoxFrontBorderTablet?.right}${flipBoxFrontBorderUnits?.Tablet} ${flipBoxFrontBorderTablet?.bottom}${flipBoxFrontBorderUnits?.Tablet} ${flipBoxFrontBorderTablet?.left}${flipBoxFrontBorderUnits?.Tablet}`;
-	const flipBoxFrontBorderMobileWidth = `${flipBoxFrontBorderMobile?.top}${flipBoxFrontBorderUnits?.Mobile} ${flipBoxFrontBorderMobile?.right}${flipBoxFrontBorderUnits?.Mobile} ${flipBoxFrontBorderMobile?.bottom}${flipBoxFrontBorderUnits?.Mobile} ${flipBoxFrontBorderMobile?.left}${flipBoxFrontBorderUnits?.Mobile}`;
+	const flipBoxFrontBorderDesktopWidth = `${flipBoxFrontBorderDesktop.top}${flipBoxFrontBorderUnits.Desktop} ${flipBoxFrontBorderDesktop.right}${flipBoxFrontBorderUnits.Desktop} ${flipBoxFrontBorderDesktop.bottom}${flipBoxFrontBorderUnits.Desktop} ${flipBoxFrontBorderDesktop.left}${flipBoxFrontBorderUnits.Desktop}`;
+	const flipBoxFrontBorderTabletWidth = `${flipBoxFrontBorderTablet.top}${flipBoxFrontBorderUnits.Tablet} ${flipBoxFrontBorderTablet.right}${flipBoxFrontBorderUnits.Tablet} ${flipBoxFrontBorderTablet.bottom}${flipBoxFrontBorderUnits.Tablet} ${flipBoxFrontBorderTablet.left}${flipBoxFrontBorderUnits.Tablet}`;
+	const flipBoxFrontBorderMobileWidth = `${flipBoxFrontBorderMobile.top}${flipBoxFrontBorderUnits.Mobile} ${flipBoxFrontBorderMobile.right}${flipBoxFrontBorderUnits.Mobile} ${flipBoxFrontBorderMobile.bottom}${flipBoxFrontBorderUnits.Mobile} ${flipBoxFrontBorderMobile.left}${flipBoxFrontBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start flipBoxFront border radius*/
@@ -4237,9 +4077,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxFrontBorderRadiusDesktopWidth = `${flipBoxFrontBorderRadiusDesktop?.top}${flipBoxFrontBorderRadiusUnits?.Desktop} ${flipBoxFrontBorderRadiusDesktop?.right}${flipBoxFrontBorderRadiusUnits?.Desktop} ${flipBoxFrontBorderRadiusDesktop?.bottom}${flipBoxFrontBorderRadiusUnits?.Desktop} ${flipBoxFrontBorderRadiusDesktop?.left}${flipBoxFrontBorderRadiusUnits?.Desktop}`;
-	const flipBoxFrontBorderRadiusTabletWidth = `${flipBoxFrontBorderRadiusTablet?.top}${flipBoxFrontBorderRadiusUnits?.Tablet} ${flipBoxFrontBorderRadiusTablet?.right}${flipBoxFrontBorderRadiusUnits?.Tablet} ${flipBoxFrontBorderRadiusTablet?.bottom}${flipBoxFrontBorderRadiusUnits?.Tablet} ${flipBoxFrontBorderRadiusTablet?.left}${flipBoxFrontBorderRadiusUnits?.Tablet}`;
-	const flipBoxFrontBorderRadiusMobileWidth = `${flipBoxFrontBorderRadiusMobile?.top}${flipBoxFrontBorderRadiusUnits?.Mobile} ${flipBoxFrontBorderRadiusMobile?.right}${flipBoxFrontBorderRadiusUnits?.Mobile} ${flipBoxFrontBorderRadiusMobile?.bottom}${flipBoxFrontBorderRadiusUnits?.Mobile} ${flipBoxFrontBorderRadiusMobile?.left}${flipBoxFrontBorderRadiusUnits?.Mobile}`;
+	const flipBoxFrontBorderRadiusDesktopWidth = `${flipBoxFrontBorderRadiusDesktop.top}${flipBoxFrontBorderRadiusUnits.Desktop} ${flipBoxFrontBorderRadiusDesktop.right}${flipBoxFrontBorderRadiusUnits.Desktop} ${flipBoxFrontBorderRadiusDesktop.bottom}${flipBoxFrontBorderRadiusUnits.Desktop} ${flipBoxFrontBorderRadiusDesktop.left}${flipBoxFrontBorderRadiusUnits.Desktop}`;
+	const flipBoxFrontBorderRadiusTabletWidth = `${flipBoxFrontBorderRadiusTablet.top}${flipBoxFrontBorderRadiusUnits.Tablet} ${flipBoxFrontBorderRadiusTablet.right}${flipBoxFrontBorderRadiusUnits.Tablet} ${flipBoxFrontBorderRadiusTablet.bottom}${flipBoxFrontBorderRadiusUnits.Tablet} ${flipBoxFrontBorderRadiusTablet.left}${flipBoxFrontBorderRadiusUnits.Tablet}`;
+	const flipBoxFrontBorderRadiusMobileWidth = `${flipBoxFrontBorderRadiusMobile.top}${flipBoxFrontBorderRadiusUnits.Mobile} ${flipBoxFrontBorderRadiusMobile.right}${flipBoxFrontBorderRadiusUnits.Mobile} ${flipBoxFrontBorderRadiusMobile.bottom}${flipBoxFrontBorderRadiusUnits.Mobile} ${flipBoxFrontBorderRadiusMobile.left}${flipBoxFrontBorderRadiusUnits.Mobile}`;
 
 	/* Flip box back */
 	const handleFlipBoxBackPaddingUnitChange = (event, position) => {
@@ -4315,9 +4155,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxBackDesktopPadding = `${flipBoxBackPaddingDesktop?.top}${flipBoxBackPaddingUnits?.Desktop} ${flipBoxBackPaddingDesktop?.right}${flipBoxBackPaddingUnits?.Desktop} ${flipBoxBackPaddingDesktop?.bottom}${flipBoxBackPaddingUnits?.Desktop} ${flipBoxBackPaddingDesktop?.left}${flipBoxBackPaddingUnits?.Desktop}`;
-	const flipBoxBackTabletPadding = `${flipBoxBackPaddingTablet?.top}${flipBoxBackPaddingUnits?.Tablet} ${flipBoxBackPaddingTablet?.right}${flipBoxBackPaddingUnits?.Tablet} ${flipBoxBackPaddingTablet?.bottom}${flipBoxBackPaddingUnits?.Tablet} ${flipBoxBackPaddingTablet?.left}${flipBoxBackPaddingUnits?.Tablet}`;
-	const flipBoxBackMobilePadding = `${flipBoxBackPaddingMobile?.top}${flipBoxBackPaddingUnits?.Mobile} ${flipBoxBackPaddingMobile?.right}${flipBoxBackPaddingUnits?.Mobile} ${flipBoxBackPaddingMobile?.bottom}${flipBoxBackPaddingUnits?.Mobile} ${flipBoxBackPaddingMobile?.left}${flipBoxBackPaddingUnits?.Mobile}`;
+	const flipBoxBackDesktopPadding = `${flipBoxBackPaddingDesktop.top}${flipBoxBackPaddingUnits.Desktop} ${flipBoxBackPaddingDesktop.right}${flipBoxBackPaddingUnits.Desktop} ${flipBoxBackPaddingDesktop.bottom}${flipBoxBackPaddingUnits.Desktop} ${flipBoxBackPaddingDesktop.left}${flipBoxBackPaddingUnits.Desktop}`;
+	const flipBoxBackTabletPadding = `${flipBoxBackPaddingTablet.top}${flipBoxBackPaddingUnits.Tablet} ${flipBoxBackPaddingTablet.right}${flipBoxBackPaddingUnits.Tablet} ${flipBoxBackPaddingTablet.bottom}${flipBoxBackPaddingUnits.Tablet} ${flipBoxBackPaddingTablet.left}${flipBoxBackPaddingUnits.Tablet}`;
+	const flipBoxBackMobilePadding = `${flipBoxBackPaddingMobile.top}${flipBoxBackPaddingUnits.Mobile} ${flipBoxBackPaddingMobile.right}${flipBoxBackPaddingUnits.Mobile} ${flipBoxBackPaddingMobile.bottom}${flipBoxBackPaddingUnits.Mobile} ${flipBoxBackPaddingMobile.left}${flipBoxBackPaddingUnits.Mobile}`;
 	/** End Padding */
 
 	/** Start flipBoxBack Margin */
@@ -4394,9 +4234,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxBackDesktopMargin = `${flipBoxBackMarginDesktop?.top}${flipBoxBackMarginUnits?.Desktop} ${flipBoxBackMarginDesktop?.right}${flipBoxBackMarginUnits?.Desktop} ${flipBoxBackMarginDesktop?.bottom}${flipBoxBackMarginUnits?.Desktop} ${flipBoxBackMarginDesktop?.left}${flipBoxBackMarginUnits?.Desktop}`;
-	const flipBoxBackTabletMargin = `${flipBoxBackMarginTablet?.top}${flipBoxBackMarginUnits?.Tablet} ${flipBoxBackMarginTablet?.right}${flipBoxBackMarginUnits?.Tablet} ${flipBoxBackMarginTablet?.bottom}${flipBoxBackMarginUnits?.Tablet} ${flipBoxBackMarginTablet?.left}${flipBoxBackMarginUnits?.Tablet}`;
-	const flipBoxBackMobileMargin = `${flipBoxBackMarginMobile?.top}${flipBoxBackMarginUnits?.Mobile} ${flipBoxBackMarginMobile?.right}${flipBoxBackMarginUnits?.Mobile} ${flipBoxBackMarginMobile?.bottom}${flipBoxBackMarginUnits?.Mobile} ${flipBoxBackMarginMobile?.left}${flipBoxBackMarginUnits?.Mobile}`;
+	const flipBoxBackDesktopMargin = `${flipBoxBackMarginDesktop.top}${flipBoxBackMarginUnits.Desktop} ${flipBoxBackMarginDesktop.right}${flipBoxBackMarginUnits.Desktop} ${flipBoxBackMarginDesktop.bottom}${flipBoxBackMarginUnits.Desktop} ${flipBoxBackMarginDesktop.left}${flipBoxBackMarginUnits.Desktop}`;
+	const flipBoxBackTabletMargin = `${flipBoxBackMarginTablet.top}${flipBoxBackMarginUnits.Tablet} ${flipBoxBackMarginTablet.right}${flipBoxBackMarginUnits.Tablet} ${flipBoxBackMarginTablet.bottom}${flipBoxBackMarginUnits.Tablet} ${flipBoxBackMarginTablet.left}${flipBoxBackMarginUnits.Tablet}`;
+	const flipBoxBackMobileMargin = `${flipBoxBackMarginMobile.top}${flipBoxBackMarginUnits.Mobile} ${flipBoxBackMarginMobile.right}${flipBoxBackMarginUnits.Mobile} ${flipBoxBackMarginMobile.bottom}${flipBoxBackMarginUnits.Mobile} ${flipBoxBackMarginMobile.left}${flipBoxBackMarginUnits.Mobile}`;
 	/** End Margin */
 
 	/** Start flipBoxBack Border */
@@ -4473,9 +4313,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxBackBorderDesktopWidth = `${flipBoxBackBorderDesktop?.top}${flipBoxBackBorderUnits?.Desktop} ${flipBoxBackBorderDesktop?.right}${flipBoxBackBorderUnits?.Desktop} ${flipBoxBackBorderDesktop?.bottom}${flipBoxBackBorderUnits?.Desktop} ${flipBoxBackBorderDesktop?.left}${flipBoxBackBorderUnits?.Desktop}`;
-	const flipBoxBackBorderTabletWidth = `${flipBoxBackBorderTablet?.top}${flipBoxBackBorderUnits?.Tablet} ${flipBoxBackBorderTablet?.right}${flipBoxBackBorderUnits?.Tablet} ${flipBoxBackBorderTablet?.bottom}${flipBoxBackBorderUnits?.Tablet} ${flipBoxBackBorderTablet?.left}${flipBoxBackBorderUnits?.Tablet}`;
-	const flipBoxBackBorderMobileWidth = `${flipBoxBackBorderMobile?.top}${flipBoxBackBorderUnits?.Mobile} ${flipBoxBackBorderMobile?.right}${flipBoxBackBorderUnits?.Mobile} ${flipBoxBackBorderMobile?.bottom}${flipBoxBackBorderUnits?.Mobile} ${flipBoxBackBorderMobile?.left}${flipBoxBackBorderUnits?.Mobile}`;
+	const flipBoxBackBorderDesktopWidth = `${flipBoxBackBorderDesktop.top}${flipBoxBackBorderUnits.Desktop} ${flipBoxBackBorderDesktop.right}${flipBoxBackBorderUnits.Desktop} ${flipBoxBackBorderDesktop.bottom}${flipBoxBackBorderUnits.Desktop} ${flipBoxBackBorderDesktop.left}${flipBoxBackBorderUnits.Desktop}`;
+	const flipBoxBackBorderTabletWidth = `${flipBoxBackBorderTablet.top}${flipBoxBackBorderUnits.Tablet} ${flipBoxBackBorderTablet.right}${flipBoxBackBorderUnits.Tablet} ${flipBoxBackBorderTablet.bottom}${flipBoxBackBorderUnits.Tablet} ${flipBoxBackBorderTablet.left}${flipBoxBackBorderUnits.Tablet}`;
+	const flipBoxBackBorderMobileWidth = `${flipBoxBackBorderMobile.top}${flipBoxBackBorderUnits.Mobile} ${flipBoxBackBorderMobile.right}${flipBoxBackBorderUnits.Mobile} ${flipBoxBackBorderMobile.bottom}${flipBoxBackBorderUnits.Mobile} ${flipBoxBackBorderMobile.left}${flipBoxBackBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start flipBoxBack border radius*/
@@ -4561,9 +4401,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const flipBoxBackBorderRadiusDesktopWidth = `${flipBoxBackBorderRadiusDesktop?.top}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.right}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.bottom}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.left}${flipBoxBackBorderRadiusUnits?.Desktop}`;
-	const flipBoxBackBorderRadiusTabletWidth = `${flipBoxBackBorderRadiusTablet?.top}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.right}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.bottom}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.left}${flipBoxBackBorderRadiusUnits?.Tablet}`;
-	const flipBoxBackBorderRadiusMobileWidth = `${flipBoxBackBorderRadiusMobile?.top}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.right}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.bottom}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.left}${flipBoxBackBorderRadiusUnits?.Mobile}`;
+	const flipBoxBackBorderRadiusDesktopWidth = `${flipBoxBackBorderRadiusDesktop.top}${flipBoxBackBorderRadiusUnits.Desktop} ${flipBoxBackBorderRadiusDesktop.right}${flipBoxBackBorderRadiusUnits.Desktop} ${flipBoxBackBorderRadiusDesktop.bottom}${flipBoxBackBorderRadiusUnits.Desktop} ${flipBoxBackBorderRadiusDesktop.left}${flipBoxBackBorderRadiusUnits.Desktop}`;
+	const flipBoxBackBorderRadiusTabletWidth = `${flipBoxBackBorderRadiusTablet.top}${flipBoxBackBorderRadiusUnits.Tablet} ${flipBoxBackBorderRadiusTablet.right}${flipBoxBackBorderRadiusUnits.Tablet} ${flipBoxBackBorderRadiusTablet.bottom}${flipBoxBackBorderRadiusUnits.Tablet} ${flipBoxBackBorderRadiusTablet.left}${flipBoxBackBorderRadiusUnits.Tablet}`;
+	const flipBoxBackBorderRadiusMobileWidth = `${flipBoxBackBorderRadiusMobile.top}${flipBoxBackBorderRadiusUnits.Mobile} ${flipBoxBackBorderRadiusMobile.right}${flipBoxBackBorderRadiusUnits.Mobile} ${flipBoxBackBorderRadiusMobile.bottom}${flipBoxBackBorderRadiusUnits.Mobile} ${flipBoxBackBorderRadiusMobile.left}${flipBoxBackBorderRadiusUnits.Mobile}`;
 
 	useEffect(() => {
 		loadGoogleFont(headingFontFamily);
@@ -4574,31 +4414,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbflipBoxStyle = useMemo(
 		() => `
-			.fb-flip-box-main-wrapper.${blockID} {
-				width: 100%;
-			}
-
 			.fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
 				${flipBoxPositionType === 'default' ? `position: relative;` : ''}
 				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' ? `width: 100%;` : ''}
 				${flipBoxPositionType !== 'default' ? `position: ${flipBoxPositionType};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset?.Desktop ? `left: ${flipBoxHZLeftOffset?.Desktop}${flipBoxHZLeftOffsetUnits?.Desktop};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset?.Desktop ? `right: ${flipBoxHZRightOffset?.Desktop}${flipBoxHZRightOffsetUnits?.Desktop};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset?.Desktop ? `top: ${flipBoxVRTopOffset?.Desktop}${flipBoxVRTopOffsetUnits?.Desktop};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset?.Desktop ? `bottom: ${flipBoxVRBottomOffset?.Desktop}${flipBoxVRBottomOffsetUnits?.Desktop};` : ''}
-				${globalZIndex?.Desktop ? `z-index: ${globalZIndex?.Desktop};` : ""}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Desktop ? `left: ${flipBoxHZLeftOffset.Desktop}${flipBoxHZLeftOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Desktop ? `right: ${flipBoxHZRightOffset.Desktop}${flipBoxHZRightOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Desktop ? `top: ${flipBoxVRTopOffset.Desktop}${flipBoxVRTopOffsetUnits.Desktop};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Desktop ? `bottom: ${flipBoxVRBottomOffset.Desktop}${flipBoxVRBottomOffsetUnits.Desktop};` : ''}
+				${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ""}
 				${flipBoxOverflow !== 'default' ? `overflow: ${flipBoxOverflow};` : ''}
 				${globalBgColor ? `background-color: ${globalBgColor};` : ""}
-				${DesktopPadding && globalPaddingDesktop?.top ? `padding: ${DesktopPadding};` : ""}
-				${DesktopMargin && globalMarginDesktop?.top ? `margin: ${DesktopMargin};` : ""}
+				${DesktopPadding && globalPaddingDesktop.top ? `padding: ${DesktopPadding};` : ""}
+				${DesktopMargin && globalMarginDesktop.top ? `margin: ${DesktopMargin};` : ""}
 				${globalBorder ? `border: ${globalBorder};` : ""}
-				${BorderDesktopWidth && globalBorderDesktop?.top ? `border-width: ${BorderDesktopWidth};` : ""}
-				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop?.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
+				${BorderDesktopWidth && globalBorderDesktop.top ? `border-width: ${BorderDesktopWidth};` : ""}
+				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop.top ? `border-radius: ${BorderRadiusDesktopWidth};` : ""}
 				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
 				${boxGlobalBoxShadowCssValue ? `box-shadow: ${boxGlobalBoxShadowCssValue};` : ""}
 				display: flex;
 				align-items: center;
-				${flipBoxAlignment?.Desktop ? `justify-content: ${flipBoxAlignment?.Desktop};` : ''}
+				${flipBoxAlignment.Desktop ? `justify-content: ${flipBoxAlignment.Desktop};` : ''}
 			}
 	  
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-wrapper {
@@ -4610,50 +4446,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	  
 		  @media only screen and (max-width: 1024px) {
 			  .fb-flip-box-main-wrapper.${blockID} .fb-flip-box-wrapper{
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset?.Tablet ? `left: ${flipBoxHZLeftOffset?.Tablet}${flipBoxHZLeftOffsetUnits?.Tablet};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset?.Tablet ? `right: ${flipBoxHZRightOffset?.Tablet}${flipBoxHZRightOffsetUnits?.Tablet};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset?.Tablet ? `top: ${flipBoxVRTopOffset?.Tablet}${flipBoxVRTopOffsetUnits?.Tablet};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset?.Tablet ? `bottom: ${flipBoxVRBottomOffset?.Tablet}${flipBoxVRBottomOffsetUnits?.Tablet};` : ''}
-				${globalZIndex?.Tablet ? `z-index: ${globalZIndex?.Tablet};` : ""}
-				${flipBoxAlignment?.Tablet ? `justify-content: ${flipBoxAlignment?.Tablet};` : ''}
-				${TabletPadding && globalPaddingTablet?.top ? `padding: ${TabletPadding};` : ""}
-				${TabletMargin && globalMarginTablet?.top ? `margin: ${TabletMargin};` : ""}
-				${BorderTabletWidth && globalBorderTablet?.top ? `border-width: ${BorderTabletWidth};` : ""}
-				${BorderRadiusTabletWidth && globalBorderRadiusTablet?.top ? `border-radius: ${BorderRadiusTabletWidth};` : ""}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Tablet ? `left: ${flipBoxHZLeftOffset.Tablet}${flipBoxHZLeftOffsetUnits.Tablet};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Tablet ? `right: ${flipBoxHZRightOffset.Tablet}${flipBoxHZRightOffsetUnits.Tablet};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Tablet ? `top: ${flipBoxVRTopOffset.Tablet}${flipBoxVRTopOffsetUnits.Tablet};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Tablet ? `bottom: ${flipBoxVRBottomOffset.Tablet}${flipBoxVRBottomOffsetUnits.Tablet};` : ''}
+				${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ""}
+				${flipBoxAlignment.Tablet ? `justify-content: ${flipBoxAlignment.Tablet};` : ''}
+				${TabletPadding && globalPaddingTablet.top ? `padding: ${TabletPadding};` : ""}
+				${TabletMargin && globalMarginTablet.top ? `margin: ${TabletMargin};` : ""}
+				${BorderTabletWidth && globalBorderTablet.top ? `border-width: ${BorderTabletWidth};` : ""}
+				${BorderRadiusTabletWidth && globalBorderRadiusTablet.top ? `border-radius: ${BorderRadiusTabletWidth};` : ""}
 			  }
 			  
 		  }
 	  
 		  @media only screen and (max-width: 767px) {
 			  .fb-flip-box-main-wrapper.${blockID} {
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset?.Mobile ? `left: ${flipBoxHZLeftOffset?.Mobile}${flipBoxHZLeftOffsetUnits?.Mobile};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset?.Mobile ? `right: ${flipBoxHZRightOffset?.Mobile}${flipBoxHZRightOffsetUnits?.Mobile};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset?.Mobile ? `top: ${flipBoxVRTopOffset?.Mobile}${flipBoxVRTopOffsetUnits?.Mobile};` : ''}
-				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset?.Mobile ? `bottom: ${flipBoxVRBottomOffset?.Mobile}${flipBoxVRBottomOffsetUnits?.Mobile};` : ''} 
-				${globalZIndex?.Mobile ? `z-index: ${globalZIndex?.Mobile};` : ""}
-				${MobilePadding && globalPaddingMobile?.top ? `padding: ${MobilePadding};` : ""}
-				${MobileMargin && globalMarginMobile?.top ? `margin: ${MobileMargin};` : ""}
-				${BorderMobileWidth && globalBorderMobile?.top ? `border-width: ${BorderMobileWidth};` : ""}
-				${BorderRadiusMobileWidth && globalBorderRadiusMobile?.top ? `border-radius: ${BorderRadiusMobileWidth};` : ""}
-				${flipBoxAlignment?.Mobile ? `justify-content: ${flipBoxAlignment?.Mobile};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'left' && flipBoxHZLeftOffset.Mobile ? `left: ${flipBoxHZLeftOffset.Mobile}${flipBoxHZLeftOffsetUnits.Mobile};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxHZOrientationType === 'right' && flipBoxHZRightOffset.Mobile ? `right: ${flipBoxHZRightOffset.Mobile}${flipBoxHZRightOffsetUnits.Mobile};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'top' && flipBoxVRTopOffset.Mobile ? `top: ${flipBoxVRTopOffset.Mobile}${flipBoxVRTopOffsetUnits.Mobile};` : ''}
+				${flipBoxPositionType !== 'default' && flipBoxPositionType !== 'relative' && flipBoxVROrientationType === 'bottom' && flipBoxVRBottomOffset.Mobile ? `bottom: ${flipBoxVRBottomOffset.Mobile}${flipBoxVRBottomOffsetUnits.Mobile};` : ''} 
+				${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ""}
+				${MobilePadding && globalPaddingMobile.top ? `padding: ${MobilePadding};` : ""}
+				${MobileMargin && globalMarginMobile.top ? `margin: ${MobileMargin};` : ""}
+				${BorderMobileWidth && globalBorderMobile.top ? `border-width: ${BorderMobileWidth};` : ""}
+				${BorderRadiusMobileWidth && globalBorderRadiusMobile.top ? `border-radius: ${BorderRadiusMobileWidth};` : ""}
+				${flipBoxAlignment.Mobile ? `justify-content: ${flipBoxAlignment.Mobile};` : ''}
 			  }
 			  
 		  }
 
-		  	.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-				${flipBoxFrontWidth?.Desktop ? `width: ${flipBoxFrontWidth?.Desktop}${flipBoxFrontWidthUnits?.Desktop};` : ''}
-				${flipBoxFrontHeight?.Desktop ? `min-height: ${flipBoxFrontHeight?.Desktop}${flipBoxFrontHeightUnits?.Desktop};` : ''}
+		  .fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
+				${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				height: fit-content;
-		  	}
+		  }
 			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper.fb-show-back {
 				transform:
 					${isHover || flipSelectedSide === "back" ? getFlipTransform(flipAnimationType) : "none"};
 			}
-		  	.fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-				display: flex;
-				align-items: center;
-				${flipBoxFrontWidth?.Desktop ? `min-width: ${flipBoxFrontWidth?.Desktop}${flipBoxFrontWidthUnits?.Desktop};` : ''}
-				${flipBoxFrontHeight?.Desktop ? `min-height: ${flipBoxFrontHeight?.Desktop}${flipBoxFrontHeightUnits?.Desktop};` : ''}
+		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+				${flipBoxFrontWidth.Desktop ? `min-width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+				${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 				height: auto;
 				${flipBoxFrontBackgroundType === "gradient" ? `
 				background: ${flipBoxFrontCustomGradientSwitcher && flipBoxFrontCustomGradientInputValue ? flipBoxFrontCustomGradientInputValue : flipBoxFrontGradientColor};
@@ -4665,12 +4499,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontBackgroundImageRepeat ? `background-repeat: ${flipBoxFrontBackgroundImageRepeat};` : ""}
 				${flipBoxFrontBackgroundImageSize ? `background-size: ${flipBoxFrontBackgroundImageSize};` : ""}`
 					: flipBoxFrontClassicColor ? `background: ${flipBoxFrontClassicColor}; ` : ""}
-				${flipBoxFrontDesktopPadding && flipBoxFrontPaddingDesktop?.top ? `padding: ${flipBoxFrontDesktopPadding};` : ''}
-				${flipBoxFrontDesktopMargin && flipBoxFrontMarginDesktop?.top ? `margin: ${flipBoxFrontDesktopMargin};` : ''}
+				${flipBoxFrontDesktopPadding && flipBoxFrontPaddingDesktop.top ? `padding: ${flipBoxFrontDesktopPadding};` : ''}
+				${flipBoxFrontDesktopMargin && flipBoxFrontMarginDesktop.top ? `margin: ${flipBoxFrontDesktopMargin};` : ''}
 				${flipBoxFrontBorder ? `border-style: ${flipBoxFrontBorder};` : ''}
-				${flipBoxFrontBorderDesktopWidth && flipBoxFrontBorderDesktop?.top ? `border-width: ${flipBoxFrontBorderDesktopWidth};` : ''}
+				${flipBoxFrontBorderDesktopWidth && flipBoxFrontBorderDesktop.top ? `border-width: ${flipBoxFrontBorderDesktopWidth};` : ''}
 				${flipBoxFrontBorderColor ? `border-color: ${flipBoxFrontBorderColor};` : ''}
-				${flipBoxFrontBorderRadiusDesktop && flipBoxFrontBorderRadiusDesktop?.top ? `border-radius: ${flipBoxFrontBorderRadiusDesktopWidth};` : ''}
+				${flipBoxFrontBorderRadiusDesktop && flipBoxFrontBorderRadiusDesktop.top ? `border-radius: ${flipBoxFrontBorderRadiusDesktopWidth};` : ''}
 				background-repeat: none;
 				background-size: cover;
 				transition: all .3s ease-in-out; 
@@ -4690,10 +4524,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${flipBoxFrontBorderHoverColor ? `border-color: ${flipBoxFrontBorderHoverColor};` : ''}
 		  }
 		  .fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
-			display: flex;
-			align-items: center;
-			${flipBoxFrontWidth?.Desktop ? `width: ${flipBoxFrontWidth?.Desktop}${flipBoxFrontWidthUnits?.Desktop};` : ''}
-			${flipBoxFrontHeight?.Desktop ? `min-height: ${flipBoxFrontHeight?.Desktop}${flipBoxFrontHeightUnits?.Desktop};` : ''}
+			${flipBoxFrontWidth.Desktop ? `width: ${flipBoxFrontWidth.Desktop}${flipBoxFrontWidthUnits.Desktop};` : ''}
+			${flipBoxFrontHeight.Desktop ? `min-height: ${flipBoxFrontHeight.Desktop}${flipBoxFrontHeightUnits.Desktop};` : ''}
 			height: auto;
 			${flipBoxBackBackgroundType === "gradient" ? `
 			background: ${flipBoxBackCustomGradientSwitcher && flipBoxBackCustomGradientInputValue ? flipBoxBackCustomGradientInputValue : flipBoxBackGradientColor};
@@ -4705,12 +4537,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${flipBoxBackBackgroundImageRepeat ? `background-repeat: ${flipBoxBackBackgroundImageRepeat};` : ""}
 			${flipBoxBackBackgroundImageSize ? `background-size: ${flipBoxBackBackgroundImageSize};` : ""}`
 					: flipBoxBackClassicColor ? `background: ${flipBoxBackClassicColor}; ` : ""}
-			${flipBoxBackDesktopPadding && flipBoxBackPaddingDesktop?.top ? `padding: ${flipBoxBackDesktopPadding};` : ''}
-			${flipBoxBackDesktopMargin && flipBoxBackMarginDesktop?.top ? `margin: ${flipBoxBackDesktopMargin};` : ''}
+			${flipBoxBackDesktopPadding && flipBoxBackPaddingDesktop.top ? `padding: ${flipBoxBackDesktopPadding};` : ''}
+			${flipBoxBackDesktopMargin && flipBoxBackMarginDesktop.top ? `margin: ${flipBoxBackDesktopMargin};` : ''}
 			${flipBoxBackBorder ? `border-style: ${flipBoxBackBorder};` : ''}
-			${flipBoxBackBorderDesktopWidth && flipBoxBackBorderDesktop?.top ? `border-width: ${flipBoxBackBorderDesktopWidth};` : ''}
+			${flipBoxBackBorderDesktopWidth && flipBoxBackBorderDesktop.top ? `border-width: ${flipBoxBackBorderDesktopWidth};` : ''}
 			${flipBoxBackBorderColor ? `border-color: ${flipBoxBackBorderColor};` : ''}
-			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop?.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
+			${flipBoxBackBorderRadiusDesktop && flipBoxBackBorderRadiusDesktop.top ? `border-radius: ${flipBoxBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
 			transform:  ${(flipAnimationType === "flip-up" && "rotateX(-180deg)") ||
@@ -4761,191 +4593,171 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			  ${Heading_Color ? `color: ${Heading_Color};` : ""}
 			  ${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : ""}
 
-			  ${headingGlobalTypoSwitcher?.fontFamily === true && headingGlobalTypographyData?.fontFamily ? `font-family: ${headingGlobalTypographyData?.fontFamily};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontSize === true && headingGlobalTypographyData?.fontSize ? `font-size: ${headingGlobalTypographyData?.fontSize};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontWeight === true && headingGlobalTypographyData?.fontWeight ? `font-weight: ${headingGlobalTypographyData?.fontWeight};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontStyle === true && headingGlobalTypographyData?.fontStyle ? `font-style: ${headingGlobalTypographyData?.fontStyle};` : ''}
-			  ${headingGlobalTypoSwitcher?.textTransform === true && headingGlobalTypographyData?.textTransform ? `text-transform: ${headingGlobalTypographyData?.textTransform};` : ''}
-			  ${headingGlobalTypoSwitcher?.textDecoration === true && headingGlobalTypographyData?.textDecoration ? `text-decoration: ${headingGlobalTypographyData?.textDecoration};` : ''}
-			  ${headingGlobalTypoSwitcher?.letterSpacing === true && headingGlobalTypographyData?.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData?.letterSpacing};` : ''}
-			  ${headingGlobalTypoSwitcher?.lineHeight === true && headingGlobalTypographyData?.lineHeight ? `line-height: ${headingGlobalTypographyData?.lineHeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontFamily === true && headingGlobalTypographyData.fontFamily ? `font-family: ${headingGlobalTypographyData.fontFamily};` : ''}
+			  ${headingGlobalTypoSwitcher.fontSize === true && headingGlobalTypographyData.fontSize ? `font-size: ${headingGlobalTypographyData.fontSize};` : ''}
+			  ${headingGlobalTypoSwitcher.fontWeight === true && headingGlobalTypographyData.fontWeight ? `font-weight: ${headingGlobalTypographyData.fontWeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontStyle === true && headingGlobalTypographyData.fontStyle ? `font-style: ${headingGlobalTypographyData.fontStyle};` : ''}
+			  ${headingGlobalTypoSwitcher.textTransform === true && headingGlobalTypographyData.textTransform ? `text-transform: ${headingGlobalTypographyData.textTransform};` : ''}
+			  ${headingGlobalTypoSwitcher.textDecoration === true && headingGlobalTypographyData.textDecoration ? `text-decoration: ${headingGlobalTypographyData.textDecoration};` : ''}
+			  ${headingGlobalTypoSwitcher.letterSpacing === true && headingGlobalTypographyData.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData.letterSpacing};` : ''}
+			  ${headingGlobalTypoSwitcher.lineHeight === true && headingGlobalTypographyData.lineHeight ? `line-height: ${headingGlobalTypographyData.lineHeight};` : ''}
 
-			  ${headingGlobalTypoSwitcher?.fontFamily === false && headingFontFamily && headingFontFamily !== "Default" ? `font-family: ${headingFontFamily};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Desktop && headingFontSizeUnits?.Desktop ? `font-size: ${headingFontSize?.Desktop}${headingFontSizeUnits?.Desktop};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
-			  ${headingGlobalTypoSwitcher?.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
-			  ${headingGlobalTypoSwitcher?.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
-			  ${headingGlobalTypoSwitcher?.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
-			  ${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Desktop && headingLetterSpacingUnits?.Desktop ? `letter-spacing: ${headingLetterSpacing?.Desktop}${headingLetterSpacingUnits?.Desktop};` : ''}
-			  ${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Desktop && headingLineHeightUnits?.Desktop ? `line-height: ${headingLineHeight?.Desktop}${headingLineHeightUnits?.Desktop};` : ''}
-			  ${headingPaddingDesktopWidthValue && Heading_Desktop_padding?.top ? `padding: ${headingPaddingDesktopWidthValue};` : ''}
-			  ${headingMarginDesktopWidthValue && Heading_Desktop_Margin?.top ? `margin: ${headingMarginDesktopWidthValue};` : ''}
+			  ${headingGlobalTypoSwitcher.fontFamily === false && headingFontFamily && headingFontFamily !== "Default" ? `font-family: ${headingFontFamily};` : ''}
+			  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			  ${headingGlobalTypoSwitcher.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
+			  ${headingGlobalTypoSwitcher.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
+			  ${headingGlobalTypoSwitcher.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
+			  ${headingGlobalTypoSwitcher.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
+			  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
+			  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
+			  ${headingPaddingDesktopWidthValue && Heading_Desktop_padding.top ? `padding: ${headingPaddingDesktopWidthValue};` : ''}
+			  ${headingMarginDesktopWidthValue && Heading_Desktop_Margin.top ? `margin: ${headingMarginDesktopWidthValue};` : ''}
 			  ${Heading_Border ? `border-style: ${Heading_Border};` : ''}
-			  ${headingBorderDesktopWidthValue && Heading_Desktop_Border_Width?.top ? `border-width: ${headingBorderDesktopWidthValue};` : ''}
+			  ${headingBorderDesktopWidthValue && Heading_Desktop_Border_Width.top ? `border-width: ${headingBorderDesktopWidthValue};` : ''}
 			  ${Heading_Border_Color ? `border-color: ${Heading_Border_Color};` : ''}
-			  ${headingBorderRadiusDesktopWidthValue && Heading_Desktop_Border_radius_Width?.top ? `border-radius: ${headingBorderRadiusDesktopWidthValue};` : ''}
+			  ${headingBorderRadiusDesktopWidthValue && Heading_Desktop_Border_radius_Width.top ? `border-radius: ${headingBorderRadiusDesktopWidthValue};` : ''}
 			  ${Alignment ? `text-align: ${Alignment};` : ''}
 			  transition: all .3s ease-in-out;
 			}
 	  
-		  	.fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-content-wrapper .fb-heading {
+		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-box-content-wrapper .fb-heading {
 			  ${Heading_Hover_Color ? `color: ${Heading_Hover_Color};` : ""}
 			  ${Heading_Border_Hover_Color ? `border-color: ${Heading_Border_Hover_Color};` : ""}
 			  transition: all .3s ease-in-out;
-		  	}
+		  }
 	  
 		  .fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-heading {
 			${titleAlignmentBack ? `text-align: ${titleAlignmentBack};` : ''}
 			${headingBackColor ? `color: ${headingBackColor};` : ""}
 
-			${headingBackGlobalTypoSwitcher?.fontFamily === true && headingBackGlobalTypographyData?.fontFamily ? `font-family: ${headingBackGlobalTypographyData?.fontFamily};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontSize === true && headingBackGlobalTypographyData?.fontSize ? `font-size: ${headingBackGlobalTypographyData?.fontSize};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontWeight === true && headingBackGlobalTypographyData?.fontWeight ? `font-weight: ${headingBackGlobalTypographyData?.fontWeight};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontStyle === true && headingBackGlobalTypographyData?.fontStyle ? `font-style: ${headingBackGlobalTypographyData?.fontStyle};` : ''}
-			${headingBackGlobalTypoSwitcher?.textTransform === true && headingBackGlobalTypographyData?.textTransform ? `text-transform: ${headingBackGlobalTypographyData?.textTransform};` : ''}
-			${headingBackGlobalTypoSwitcher?.textDecoration === true && headingBackGlobalTypographyData?.textDecoration ? `text-decoration: ${headingBackGlobalTypographyData?.textDecoration};` : ''}
-			${headingBackGlobalTypoSwitcher?.letterSpacing === true && headingBackGlobalTypographyData?.letterSpacing ? `letter-spacing: ${headingBackGlobalTypographyData?.letterSpacing};` : ''}
-			${headingBackGlobalTypoSwitcher?.lineHeight === true && headingBackGlobalTypographyData?.lineHeight ? `line-height: ${headingBackGlobalTypographyData?.lineHeight};` : ''}
+			${headingBackGlobalTypoSwitcher.fontFamily === true && headingBackGlobalTypographyData.fontFamily ? `font-family: ${headingBackGlobalTypographyData.fontFamily};` : ''}
+			${headingBackGlobalTypoSwitcher.fontSize === true && headingBackGlobalTypographyData.fontSize ? `font-size: ${headingBackGlobalTypographyData.fontSize};` : ''}
+			${headingBackGlobalTypoSwitcher.fontWeight === true && headingBackGlobalTypographyData.fontWeight ? `font-weight: ${headingBackGlobalTypographyData.fontWeight};` : ''}
+			${headingBackGlobalTypoSwitcher.fontStyle === true && headingBackGlobalTypographyData.fontStyle ? `font-style: ${headingBackGlobalTypographyData.fontStyle};` : ''}
+			${headingBackGlobalTypoSwitcher.textTransform === true && headingBackGlobalTypographyData.textTransform ? `text-transform: ${headingBackGlobalTypographyData.textTransform};` : ''}
+			${headingBackGlobalTypoSwitcher.textDecoration === true && headingBackGlobalTypographyData.textDecoration ? `text-decoration: ${headingBackGlobalTypographyData.textDecoration};` : ''}
+			${headingBackGlobalTypoSwitcher.letterSpacing === true && headingBackGlobalTypographyData.letterSpacing ? `letter-spacing: ${headingBackGlobalTypographyData.letterSpacing};` : ''}
+			${headingBackGlobalTypoSwitcher.lineHeight === true && headingBackGlobalTypographyData.lineHeight ? `line-height: ${headingBackGlobalTypographyData.lineHeight};` : ''}
 
-			${headingBackGlobalTypoSwitcher?.fontFamily === false && headingBackFontFamily && headingBackFontFamily !== "Default" ? `font-family: ${headingBackFontFamily};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontSize === false && headingBackFontSize?.Desktop && headingBackFontSizeUnits?.Desktop ? `font-size: ${headingBackFontSize?.Desktop}${headingBackFontSizeUnits?.Desktop};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontWeight === false && headingBackFontWeight ? `font-weight: ${headingBackFontWeight};` : ''}
-			${headingBackGlobalTypoSwitcher?.fontStyle === false && headingBackFontStyle ? `font-style: ${headingBackFontStyle};` : ''}
-			${headingBackGlobalTypoSwitcher?.textTransform === false && headingBackTextTransform ? `text-transform: ${headingBackTextTransform};` : ''}
-			${headingBackGlobalTypoSwitcher?.textDecoration === false && headingBackTextDecoration ? `text-decoration: ${headingBackTextDecoration};` : ''}
-			${headingBackGlobalTypoSwitcher?.letterSpacing === false && headingBackLetterSpacing?.Desktop && headingBackLetterSpacingUnits?.Desktop ? `letter-spacing: ${headingBackLetterSpacing?.Desktop}${headingBackLetterSpacingUnits?.Desktop};` : ''}
-			${headingBackGlobalTypoSwitcher?.lineHeight === false && headingBackLineHeight?.Desktop && headingBackLineHeightUnits?.Desktop ? `line-height: ${headingBackLineHeight?.Desktop}${headingBackLineHeightUnits?.Desktop};` : ''}
+			${headingBackGlobalTypoSwitcher.fontFamily === false && headingBackFontFamily && headingBackFontFamily !== "Default" ? `font-family: ${headingBackFontFamily};` : ''}
+			${headingBackGlobalTypoSwitcher.fontSize === false && headingBackFontSize.Desktop && headingBackFontSizeUnits.Desktop ? `font-size: ${headingBackFontSize.Desktop}${headingBackFontSizeUnits.Desktop};` : ''}
+			${headingBackGlobalTypoSwitcher.fontWeight === false && headingBackFontWeight ? `font-weight: ${headingBackFontWeight};` : ''}
+			${headingBackGlobalTypoSwitcher.fontStyle === false && headingBackFontStyle ? `font-style: ${headingBackFontStyle};` : ''}
+			${headingBackGlobalTypoSwitcher.textTransform === false && headingBackTextTransform ? `text-transform: ${headingBackTextTransform};` : ''}
+			${headingBackGlobalTypoSwitcher.textDecoration === false && headingBackTextDecoration ? `text-decoration: ${headingBackTextDecoration};` : ''}
+			${headingBackGlobalTypoSwitcher.letterSpacing === false && headingBackLetterSpacing.Desktop && headingBackLetterSpacingUnits.Desktop ? `letter-spacing: ${headingBackLetterSpacing.Desktop}${headingBackLetterSpacingUnits.Desktop};` : ''}
+			${headingBackGlobalTypoSwitcher.lineHeight === false && headingBackLineHeight.Desktop && headingBackLineHeightUnits.Desktop ? `line-height: ${headingBackLineHeight.Desktop}${headingBackLineHeightUnits.Desktop};` : ''}
 
-			${headingBackPaddingDesktopWidthValue && headingBack_Desktop_padding?.top ? `padding: ${headingBackPaddingDesktopWidthValue};` : ''}
-			${headingBackMarginDesktopWidthValue && headingBack_Desktop_Margin?.top ? `margin: ${headingBackMarginDesktopWidthValue};` : ''}
+			${headingBackPaddingDesktopWidthValue && headingBack_Desktop_padding.top ? `padding: ${headingBackPaddingDesktopWidthValue};` : ''}
+			${headingBackMarginDesktopWidthValue && headingBack_Desktop_Margin.top ? `margin: ${headingBackMarginDesktopWidthValue};` : ''}
 			${headingBack_Border ? `border-style: ${headingBack_Border};` : ''}
-			${headingBackBorderDesktopWidthValue && headingBack_Desktop_Border_Width?.top ? `border-width: ${headingBackBorderDesktopWidthValue};` : ''}
+			${headingBackBorderDesktopWidthValue && headingBack_Desktop_Border_Width.top ? `border-width: ${headingBackBorderDesktopWidthValue};` : ''}
 			${headingBack_Border_Color ? `border-color: ${headingBack_Border_Color};` : ''}
-			${headingBackBorderRadiusDesktopWidthValue && headingBack_Desktop_Border_radius_Width?.top ? `border-radius: ${headingBackBorderRadiusDesktopWidthValue};` : ''}
+			${headingBackBorderRadiusDesktopWidthValue && headingBack_Desktop_Border_radius_Width.top ? `border-radius: ${headingBackBorderRadiusDesktopWidthValue};` : ''}
 		  }
 
 		  .fb-flip-box-wrapper.${blockID}:hover .fb-flip-back-box-content-wrapper .fb-heading{
 			${headingBackHoverColor ? `color: ${headingBackHoverColor};` : ""}
 			${headingBack_Border_Hover_Color ? `border-color: ${headingBack_Border_Hover_Color};` : ''}
 		  }
-		@media only screen and (max-width: 1024px) {
-			.fb-flip-box-wrapper.${blockID} .fb-flip-box-content-wrapper .fb-heading {
-				${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Tablet && headingFontSizeUnits?.Tablet ? `font-size: ${headingFontSize?.Tablet}${headingFontSizeUnits?.Tablet};` : ''}
-				${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Tablet && headingLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingLetterSpacing?.Tablet}${headingLetterSpacingUnits?.Tablet};` : ''}
-				${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Tablet && headingLineHeightUnits?.Tablet ? `line-height: ${headingLineHeight?.Tablet}${headingLineHeightUnits?.Tablet};` : ''}
-				${headingPaddingTabWidthValue && Heading_Tab_padding?.top ? `padding: ${headingPaddingTabWidthValue};` : ''}
-				${headingMarginTabWidthValue && Heading_Tab_Margin?.top ? `margin: ${headingMarginTabWidthValue};` : ''}
-				${headingBorderTabWidthValue && Heading_Tab_Border_Width?.top ? `border-width: ${headingBorderTabWidthValue};` : ''}
-				${headingBorderRadiusTabWidthValue && Heading_Tab_Border_radius_Width?.top ? `border-radius: ${headingBorderRadiusTabWidthValue};` : ''}
-			}
-			.fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-heading{
-				${headingBackGlobalTypoSwitcher?.fontSize === false && headingBackFontSize?.Tablet && headingBackFontSizeUnits?.Tablet ? `font-size: ${headingBackFontSize?.Tablet}${headingBackFontSizeUnits?.Tablet};` : ''}
-				${headingBackGlobalTypoSwitcher?.letterSpacing === false && headingBackLetterSpacing?.Tablet && headingBackLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingBackLetterSpacing?.Tablet}${headingBackLetterSpacingUnits?.Tablet};` : ''}
-				${headingBackGlobalTypoSwitcher?.lineHeight === false && headingBackLineHeight?.Tablet && headingBackLineHeightUnits?.Tablet ? `line-height: ${headingBackLineHeight?.Tablet}${headingBackLineHeightUnits?.Tablet};` : ''}
-				${headingBackPaddingTabWidthValue && headingBack_Tab_padding?.top ? `padding: ${headingBackPaddingTabWidthValue};` : ''}
-				${headingBackMarginTabWidthValue && headingBack_Tab_Margin?.top ? `margin: ${headingBackMarginTabWidthValue};` : ''}
-				${headingBackBorderTabWidthValue && headingBack_Tab_Border_Width?.top ? `border-width: ${headingBackBorderTabWidthValue};` : ''}
-				${headingBackBorderRadiusTabWidthValue && headingBack_Tab_Border_radius_Width?.top ? `border-radius: ${headingBackBorderRadiusTabWidthValue};` : ''}
-			}
+		  @media only screen and (max-width: 1024px) {
+			  .fb-flip-box-wrapper.${blockID} .fb-heading {
+				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+                  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+                  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
+				  ${headingPaddingTabWidthValue && Heading_Tab_padding.top ? `padding: ${headingPaddingTabWidthValue};` : ''}
+				  ${headingMarginTabWidthValue && Heading_Tab_Margin.top ? `margin: ${headingMarginTabWidthValue};` : ''}
+				  ${headingBorderTabWidthValue && Heading_Tab_Border_Width.top ? `border-width: ${headingBorderTabWidthValue};` : ''}
+			  	  ${headingBorderRadiusTabWidthValue && Heading_Tab_Border_radius_Width.top ? `border-radius: ${headingBorderRadiusTabWidthValue};` : ''}
+			  }
+			  .fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-heading{
+			    ${headingBackGlobalTypoSwitcher.fontSize === false && headingBackFontSize.Tablet && headingBackFontSizeUnits.Tablet ? `font-size: ${headingBackFontSize.Tablet}${headingBackFontSizeUnits.Tablet};` : ''}
+				${headingBackGlobalTypoSwitcher.letterSpacing === false && headingBackLetterSpacing.Tablet && headingBackLetterSpacingUnits.Tablet ? `letter-spacing: ${headingBackLetterSpacing.Tablet}${headingBackLetterSpacingUnits.Tablet};` : ''}
+				${headingBackGlobalTypoSwitcher.lineHeight === false && headingBackLineHeight.Tablet && headingBackLineHeightUnits.Tablet ? `line-height: ${headingBackLineHeight.Tablet}${headingBackLineHeightUnits.Tablet};` : ''}
+				${headingBackPaddingTabWidthValue && headingBack_Tab_padding.top ? `padding: ${headingBackPaddingTabWidthValue};` : ''}
+			    ${headingBackMarginTabWidthValue && headingBack_Tab_Margin.top ? `margin: ${headingBackMarginTabWidthValue};` : ''}
+				${headingBackBorderTabWidthValue && headingBack_Tab_Border_Width.top ? `border-width: ${headingBackBorderTabWidthValue};` : ''}
+			    ${headingBackBorderRadiusTabWidthValue && headingBack_Tab_Border_radius_Width.top ? `border-radius: ${headingBackBorderRadiusTabWidthValue};` : ''}
+			  }
 
-			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-				${flipBoxFrontWidth?.Tablet ? `width: ${flipBoxFrontWidth?.Tablet}${flipBoxFrontWidthUnits?.Tablet};` : ''}
-				${flipBoxFrontHeight?.Tablet ? `min-height: ${flipBoxFrontHeight?.Tablet}${flipBoxFrontHeightUnits?.Tablet};` : ''}
-				height: fit-content;
-			}
-
-			.fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-				display: flex;
-				align-items: center;
-				${flipBoxFrontWidth?.Tablet ? `width: ${flipBoxFrontWidth?.Tablet}${flipBoxFrontWidthUnits?.Tablet};` : ''}
-				${flipBoxFrontHeight?.Tablet ? `min-height: ${flipBoxFrontHeight?.Tablet}${flipBoxFrontHeightUnits?.Tablet};` : ''}
-				${flipBoxFrontTabletPadding && flipBoxFrontPaddingTablet?.top ? `padding: ${flipBoxFrontTabletPadding};` : ''}
-				${flipBoxFrontTabletMargin && flipBoxFrontMarginTablet?.top ? `margin: ${flipBoxFrontTabletMargin};` : ''}
-				${flipBoxFrontBorderTabletWidth && flipBoxFrontBorderTablet?.top ? `border-width: ${flipBoxFrontBorderTabletWidth};` : ''}
-				${flipBoxFrontBorderRadiusTablet && flipBoxFrontBorderRadiusTablet?.top ? `border-radius: ${flipBoxFrontBorderRadiusTabletWidth};` : ''}
-			}
+			  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+				${flipBoxFrontWidth.Tablet ? `width: ${flipBoxFrontWidth.Tablet}${flipBoxFrontWidthUnits.Tablet};` : ''}
+				${flipBoxFrontHeight.Tablet ? `min-height: ${flipBoxFrontHeight.Tablet}${flipBoxFrontHeightUnits.Tablet};` : ''}
+				${flipBoxFrontTabletPadding && flipBoxFrontPaddingTablet.top ? `padding: ${flipBoxFrontTabletPadding};` : ''}
+				${flipBoxFrontTabletMargin && flipBoxFrontMarginTablet.top ? `margin: ${flipBoxFrontTabletMargin};` : ''}
+				${flipBoxFrontBorderTabletWidth && flipBoxFrontBorderTablet.top ? `border-width: ${flipBoxFrontBorderTabletWidth};` : ''}
+				${flipBoxFrontBorderRadiusTablet && flipBoxFrontBorderRadiusTablet.top ? `border-radius: ${flipBoxFrontBorderRadiusTabletWidth};` : ''}
+			  }
 
 			.fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
-				display: flex;
-				align-items: center;
-				${flipBoxFrontWidth?.Tablet ? `width: ${flipBoxFrontWidth?.Tablet}${flipBoxFrontWidthUnits?.Tablet};` : ''}
-				${flipBoxFrontHeight?.Tablet ? `min-height: ${flipBoxFrontHeight?.Tablet}${flipBoxFrontHeightUnits?.Tablet};` : ''}
-				${flipBoxBackTabletPadding && flipBoxBackPaddingTablet?.top ? `padding: ${flipBoxBackTabletPadding};` : ''}
-				${flipBoxBackTabletMargin && flipBoxBackMarginTablet?.top ? `margin: ${flipBoxBackTabletMargin};` : ''}
-				${flipBoxBackBorderTabletWidth && flipBoxBackBorderTablet?.top ? `border-width: ${flipBoxBackBorderTabletWidth};` : ''}
-				${flipBoxBackBorderRadiusTablet && flipBoxBackBorderRadiusTablet?.top ? `border-radius: ${flipBoxBackBorderRadiusTabletWidth};` : ''}		
+				${flipBoxFrontWidth.Tablet ? `width: ${flipBoxFrontWidth.Tablet}${flipBoxFrontWidthUnits.Tablet};` : ''}
+				${flipBoxFrontHeight.Tablet ? `min-height: ${flipBoxFrontHeight.Tablet}${flipBoxFrontHeightUnits.Tablet};` : ''}
+				${flipBoxBackTabletPadding && flipBoxBackPaddingTablet.top ? `padding: ${flipBoxBackTabletPadding};` : ''}
+				${flipBoxBackTabletMargin && flipBoxBackMarginTablet.top ? `margin: ${flipBoxBackTabletMargin};` : ''}
+				${flipBoxBackBorderTabletWidth && flipBoxBackBorderTablet.top ? `border-width: ${flipBoxBackBorderTabletWidth};` : ''}
+				${flipBoxBackBorderRadiusTablet && flipBoxBackBorderRadiusTablet.top ? `border-radius: ${flipBoxBackBorderRadiusTabletWidth};` : ''}		
 			}
-		}
-		@media only screen and (max-width: 724px) {
-			.fb-flip-box-wrapper.${blockID} .fb-flip-box-content-wrapper .fb-heading {
-				${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Mobile && headingFontSizeUnits?.Mobile ? `font-size: ${headingFontSize?.Mobile}${headingFontSizeUnits?.Mobile};` : ''}
-				${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Mobile && headingLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingLetterSpacing?.Mobile}${headingLetterSpacingUnits?.Mobile};` : ''}
-				${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Mobile && headingLineHeightUnits?.Mobile ? `line-height: ${headingLineHeight?.Mobile}${headingLineHeightUnits?.Mobile};` : ''}
-				${headingPaddingMobileWidthValue && Heading_Mobile_padding?.top ? `padding: ${headingPaddingMobileWidthValue};` : ''}
-				${headingMarginMobileWidthValue && Heading_Mobile_Margin?.top ? `margin: ${headingMarginMobileWidthValue};` : ''}
-				${headingBorderMobileWidthValue && Heading_Mobile_Border_Width?.top ? `border-width: ${headingBorderMobileWidthValue};` : ''}
-				${headingBorderRadiusMobileWidthValue && Heading_Mobile_Border_radius_Width?.top ? `border-radius: ${headingBorderRadiusMobileWidthValue};` : ''}
-			}
+		  }
+		  @media only screen and (max-width: 724px) {
+			  .fb-flip-box-wrapper.${blockID} .fb-heading {
+				  ${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+                  ${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+                  ${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
+				  ${headingPaddingMobileWidthValue && Heading_Mobile_padding.top ? `padding: ${headingPaddingMobileWidthValue};` : ''}
+				  ${headingMarginMobileWidthValue && Heading_Mobile_Margin.top ? `margin: ${headingMarginMobileWidthValue};` : ''}
+				  ${headingBorderMobileWidthValue && Heading_Mobile_Border_Width.top ? `border-width: ${headingBorderMobileWidthValue};` : ''}
+			  	  ${headingBorderRadiusMobileWidthValue && Heading_Mobile_Border_radius_Width.top ? `border-radius: ${headingBorderRadiusMobileWidthValue};` : ''}
+			  }
 			
-			.fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-heading{
-				${headingBackGlobalTypoSwitcher?.fontSize === false && headingBackFontSize?.Mobile && headingBackFontSizeUnits?.Mobile ? `font-size: ${headingBackFontSize?.Mobile}${headingBackFontSizeUnits?.Mobile};` : ''}
-				${headingBackGlobalTypoSwitcher?.letterSpacing === false && headingBackLetterSpacing?.Mobile && headingBackLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingBackLetterSpacing?.Mobile}${headingBackLetterSpacingUnits?.Mobile};` : ''}
-				${headingBackGlobalTypoSwitcher?.lineHeight === false && headingBackLineHeight?.Mobile && headingBackLineHeightUnits?.Mobile ? `line-height: ${headingBackLineHeight?.Mobile}${headingBackLineHeightUnits?.Mobile};` : ''}
-				${headingBackPaddingMobileWidthValue && headingBack_Mobile_padding?.top ? `padding: ${headingBackPaddingMobileWidthValue};` : ''}
-			    ${headingBackMarginMobileWidthValue && headingBack_Mobile_Margin?.top ? `margin: ${headingBackMarginMobileWidthValue};` : ''}
-				${headingBackBorderMobileWidthValue && headingBack_Mobile_Border_Width?.top ? `border-width: ${headingBackBorderMobileWidthValue};` : ''}
-			    ${headingBackBorderRadiusMobileWidthValue && headingBack_Mobile_Border_radius_Width?.top ? `border-radius: ${headingBackBorderRadiusMobileWidthValue};` : ''}
-			}
+			  .fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-heading{
+				${headingBackGlobalTypoSwitcher.fontSize === false && headingBackFontSize.Mobile && headingBackFontSizeUnits.Mobile ? `font-size: ${headingBackFontSize.Mobile}${headingBackFontSizeUnits.Mobile};` : ''}
+				${headingBackGlobalTypoSwitcher.letterSpacing === false && headingBackLetterSpacing.Mobile && headingBackLetterSpacingUnits.Mobile ? `letter-spacing: ${headingBackLetterSpacing.Mobile}${headingBackLetterSpacingUnits.Mobile};` : ''}
+				${headingBackGlobalTypoSwitcher.lineHeight === false && headingBackLineHeight.Mobile && headingBackLineHeightUnits.Mobile ? `line-height: ${headingBackLineHeight.Mobile}${headingBackLineHeightUnits.Mobile};` : ''}
+				${headingBackPaddingMobileWidthValue && headingBack_Mobile_padding.top ? `padding: ${headingBackPaddingMobileWidthValue};` : ''}
+			    ${headingBackMarginMobileWidthValue && headingBack_Mobile_Margin.top ? `margin: ${headingBackMarginMobileWidthValue};` : ''}
+				${headingBackBorderMobileWidthValue && headingBack_Mobile_Border_Width.top ? `border-width: ${headingBackBorderMobileWidthValue};` : ''}
+			    ${headingBackBorderRadiusMobileWidthValue && headingBack_Mobile_Border_radius_Width.top ? `border-radius: ${headingBackBorderRadiusMobileWidthValue};` : ''}
+			  }
 
-			.fb-flip-box-main-wrapper.${blockID} .fb-flipper-wrapper{
-				${flipBoxFrontWidth?.Mobile ? `width: ${flipBoxFrontWidth?.Mobile}${flipBoxFrontWidthUnits?.Mobile};` : ''}
-				${flipBoxFrontHeight?.Mobile ? `min-height: ${flipBoxFrontHeight?.Mobile}${flipBoxFrontHeightUnits?.Mobile};` : ''}
-				height: fit-content;
-			}
-
-			.fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
-				display: flex;
-				align-items: center;
-				${flipBoxFrontWidth?.Mobile ? `width: ${flipBoxFrontWidth?.Mobile}${flipBoxFrontWidthUnits?.Mobile};` : ''}
-				${flipBoxFrontHeight?.Mobile ? `min-height: ${flipBoxFrontHeight?.Mobile}${flipBoxFrontHeightUnits?.Mobile};` : ''}
-				${flipBoxFrontMobilePadding && flipBoxFrontPaddingMobile?.top ? `padding: ${flipBoxFrontMobilePadding};` : ''}
-				${flipBoxFrontMobileMargin && flipBoxFrontMarginMobile?.top ? `margin: ${flipBoxFrontMobileMargin};` : ''}
-				${flipBoxFrontBorderMobileWidth && flipBoxFrontBorderMobile?.top ? `border-width: ${flipBoxFrontBorderMobileWidth};` : ''}
-				${flipBoxFrontBorderRadiusMobile && flipBoxFrontBorderRadiusMobile?.top ? `border-radius: ${flipBoxFrontBorderRadiusMobileWidth};` : ''}
-			}
+			  .fb-flip-box-wrapper.${blockID} .fb-flipbox-front {
+				${flipBoxFrontWidth.Mobile ? `width: ${flipBoxFrontWidth.Mobile}${flipBoxFrontWidthUnits.Mobile};` : ''}
+				${flipBoxFrontHeight.Mobile ? `min-height: ${flipBoxFrontHeight.Mobile}${flipBoxFrontHeightUnits.Mobile};` : ''}
+				${flipBoxFrontMobilePadding && flipBoxFrontPaddingMobile.top ? `padding: ${flipBoxFrontMobilePadding};` : ''}
+				${flipBoxFrontMobileMargin && flipBoxFrontMarginMobile.top ? `margin: ${flipBoxFrontMobileMargin};` : ''}
+				${flipBoxFrontBorderMobileWidth && flipBoxFrontBorderMobile.top ? `border-width: ${flipBoxFrontBorderMobileWidth};` : ''}
+				${flipBoxFrontBorderRadiusMobile && flipBoxFrontBorderRadiusMobile.top ? `border-radius: ${flipBoxFrontBorderRadiusMobileWidth};` : ''}
+			  }
 
 			.fb-flip-box-wrapper.${blockID} .fb-flipbox-back {
-				display: flex;
-				align-items: center;
-				${flipBoxFrontWidth?.Mobile ? `width: ${flipBoxFrontWidth?.Mobile}${flipBoxFrontWidthUnits?.Mobile};` : ''}
-				${flipBoxFrontHeight?.Mobile ? `min-height: ${flipBoxFrontHeight?.Mobile}${flipBoxFrontHeightUnits?.Mobile};` : ''}
-				${flipBoxBackMobilePadding && flipBoxBackPaddingMobile?.top ? `padding: ${flipBoxBackMobilePadding};` : ''}
-				${flipBoxBackMobileMargin && flipBoxBackMarginMobile?.top ? `margin: ${flipBoxBackMobileMargin};` : ''}
-				${flipBoxBackBorderMobileWidth && flipBoxBackBorderMobile?.top ? `border-width: ${flipBoxBackBorderMobileWidth};` : ''}
-				${flipBoxBackBorderRadiusMobile && flipBoxBackBorderRadiusMobile?.top ? `border-radius: ${flipBoxBackBorderRadiusMobileWidth};` : ''}		
+				${flipBoxFrontWidth.Mobile ? `width: ${flipBoxFrontWidth.Mobile}${flipBoxFrontWidthUnits.Mobile};` : ''}
+				${flipBoxFrontHeight.Mobile ? `min-height: ${flipBoxFrontHeight.Mobile}${flipBoxFrontHeightUnits.Mobile};` : ''}
+				${flipBoxBackMobilePadding && flipBoxBackPaddingMobile.top ? `padding: ${flipBoxBackMobilePadding};` : ''}
+				${flipBoxBackMobileMargin && flipBoxBackMarginMobile.top ? `margin: ${flipBoxBackMobileMargin};` : ''}
+				${flipBoxBackBorderMobileWidth && flipBoxBackBorderMobile.top ? `border-width: ${flipBoxBackBorderMobileWidth};` : ''}
+				${flipBoxBackBorderRadiusMobile && flipBoxBackBorderRadiusMobile.top ? `border-radius: ${flipBoxBackBorderRadiusMobileWidth};` : ''}		
 			}
-		}
+		  }
 		
 		.fb-flip-box-wrapper.${blockID} .fb-description {
 			${SubHeadingColor ? `color: ${SubHeadingColor};` : ""}
-			${subHeadingGlobalTypoSwitcher?.fontFamily === true && subHeadingGlobalTypographyData?.fontFamily ? `font-family: ${subHeadingGlobalTypographyData?.fontFamily};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontSize === true && subHeadingGlobalTypographyData?.fontSize ? `font-size: ${subHeadingGlobalTypographyData?.fontSize};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontWeight === true && subHeadingGlobalTypographyData?.fontWeight ? `font-weight: ${subHeadingGlobalTypographyData?.fontWeight};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontStyle === true && subHeadingGlobalTypographyData?.fontStyle ? `font-style: ${subHeadingGlobalTypographyData?.fontStyle};` : ''}
-			${subHeadingGlobalTypoSwitcher?.textTransform === true && subHeadingGlobalTypographyData?.textTransform ? `text-transform: ${subHeadingGlobalTypographyData?.textTransform};` : ''}
-			${subHeadingGlobalTypoSwitcher?.textDecoration === true && subHeadingGlobalTypographyData?.textDecoration ? `text-decoration: ${subHeadingGlobalTypographyData?.textDecoration};` : ''}
-			${subHeadingGlobalTypoSwitcher?.letterSpacing === true && subHeadingGlobalTypographyData?.letterSpacing ? `letter-spacing: ${subHeadingGlobalTypographyData?.letterSpacing};` : ''}
-			${subHeadingGlobalTypoSwitcher?.lineHeight === true && subHeadingGlobalTypographyData?.lineHeight ? `line-height: ${subHeadingGlobalTypographyData?.lineHeight};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontFamily === false && subHeadingFontFamily && subHeadingFontFamily !== "Default" ? `font-family: ${subHeadingFontFamily};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Desktop && subHeadingFontSizeUnits?.Desktop ? `font-size: ${subHeadingFontSize?.Desktop}${subHeadingFontSizeUnits?.Desktop};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontWeight === false && subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
-			${subHeadingGlobalTypoSwitcher?.fontStyle === false && subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
-			${subHeadingGlobalTypoSwitcher?.textTransform === false && subHeadingTextTransform ? `text-transform: ${subHeadingTextTransform};` : ''}
-			${subHeadingGlobalTypoSwitcher?.textDecoration === false && subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
-			${subHeadingGlobalTypoSwitcher?.letterSpacing === false && subHeadingLetterSpacing?.Desktop && subHeadingLetterSpacingUnits?.Desktop ? `letter-spacing: ${subHeadingLetterSpacing?.Desktop}${subHeadingLetterSpacingUnits?.Desktop};` : ''}
-			${subHeadingGlobalTypoSwitcher?.lineHeight === false && subHeadingLineHeight?.Desktop && subHeadingLineHeightUnits?.Desktop ? `line-height: ${subHeadingLineHeight?.Desktop}${subHeadingLineHeightUnits?.Desktop};` : ''}
-			${subHeadingDesktopPaddingValue && SubHeadingDesktopPadding?.top ? `padding: ${subHeadingDesktopPaddingValue};` : ""}
-			${descDesktopMarginValue && descDesktopMargin?.top ? `margin: ${descDesktopMarginValue};` : ""}
+			${subHeadingGlobalTypoSwitcher.fontFamily === true && subHeadingGlobalTypographyData.fontFamily ? `font-family: ${subHeadingGlobalTypographyData.fontFamily};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontSize === true && subHeadingGlobalTypographyData.fontSize ? `font-size: ${subHeadingGlobalTypographyData.fontSize};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontWeight === true && subHeadingGlobalTypographyData.fontWeight ? `font-weight: ${subHeadingGlobalTypographyData.fontWeight};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontStyle === true && subHeadingGlobalTypographyData.fontStyle ? `font-style: ${subHeadingGlobalTypographyData.fontStyle};` : ''}
+			${subHeadingGlobalTypoSwitcher.textTransform === true && subHeadingGlobalTypographyData.textTransform ? `text-transform: ${subHeadingGlobalTypographyData.textTransform};` : ''}
+			${subHeadingGlobalTypoSwitcher.textDecoration === true && subHeadingGlobalTypographyData.textDecoration ? `text-decoration: ${subHeadingGlobalTypographyData.textDecoration};` : ''}
+			${subHeadingGlobalTypoSwitcher.letterSpacing === true && subHeadingGlobalTypographyData.letterSpacing ? `letter-spacing: ${subHeadingGlobalTypographyData.letterSpacing};` : ''}
+			${subHeadingGlobalTypoSwitcher.lineHeight === true && subHeadingGlobalTypographyData.lineHeight ? `line-height: ${subHeadingGlobalTypographyData.lineHeight};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontFamily === false && subHeadingFontFamily && subHeadingFontFamily !== "Default" ? `font-family: ${subHeadingFontFamily};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontSize === false && subHeadingFontSize.Desktop && subHeadingFontSizeUnits.Desktop ? `font-size: ${subHeadingFontSize.Desktop}${subHeadingFontSizeUnits.Desktop};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontWeight === false && subHeadingFontWeight ? `font-weight: ${subHeadingFontWeight};` : ''}
+			${subHeadingGlobalTypoSwitcher.fontStyle === false && subHeadingFontStyle ? `font-style: ${subHeadingFontStyle};` : ''}
+			${subHeadingGlobalTypoSwitcher.textTransform === false && subHeadingTextTransform ? `text-transform: ${subHeadingTextTransform};` : ''}
+			${subHeadingGlobalTypoSwitcher.textDecoration === false && subHeadingTextDecoration ? `text-decoration: ${subHeadingTextDecoration};` : ''}
+			${subHeadingGlobalTypoSwitcher.letterSpacing === false && subHeadingLetterSpacing.Desktop && subHeadingLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingLetterSpacing.Desktop}${subHeadingLetterSpacingUnits.Desktop};` : ''}
+			${subHeadingGlobalTypoSwitcher.lineHeight === false && subHeadingLineHeight.Desktop && subHeadingLineHeightUnits.Desktop ? `line-height: ${subHeadingLineHeight.Desktop}${subHeadingLineHeightUnits.Desktop};` : ''}
+			${subHeadingDesktopPaddingValue && SubHeadingDesktopPadding.top ? `padding: ${subHeadingDesktopPaddingValue};` : ""}
+			${descDesktopMarginValue && descDesktopMargin.top ? `margin: ${descDesktopMarginValue};` : ""}
 			${descAlignment ? `text-align: ${descAlignment};` : ''}
 			transition: all .3s ease-in-out;
 		}
@@ -4956,24 +4768,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-description {
 			${subHeadingBackColor ? `color: ${subHeadingBackColor};` : ""}
-			${subHeadingBackGlobalTypoSwitcher?.fontFamily === true && subHeadingBackGlobalTypographyData?.fontFamily ? `font-family: ${subHeadingBackGlobalTypographyData?.fontFamily};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontSize === true && subHeadingBackGlobalTypographyData?.fontSize ? `font-size: ${subHeadingBackGlobalTypographyData?.fontSize};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontWeight === true && subHeadingBackGlobalTypographyData?.fontWeight ? `font-weight: ${subHeadingBackGlobalTypographyData?.fontWeight};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontStyle === true && subHeadingBackGlobalTypographyData?.fontStyle ? `font-style: ${subHeadingBackGlobalTypographyData?.fontStyle};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.textTransform === true && subHeadingBackGlobalTypographyData?.textTransform ? `text-transform: ${subHeadingBackGlobalTypographyData?.textTransform};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.textDecoration === true && subHeadingBackGlobalTypographyData?.textDecoration ? `text-decoration: ${subHeadingBackGlobalTypographyData?.textDecoration};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.letterSpacing === true && subHeadingBackGlobalTypographyData?.letterSpacing ? `letter-spacing: ${subHeadingBackGlobalTypographyData?.letterSpacing};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.lineHeight === true && subHeadingBackGlobalTypographyData?.lineHeight ? `line-height: ${subHeadingBackGlobalTypographyData?.lineHeight};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontFamily === false && subHeadingBackFontFamily && subHeadingBackFontFamily !== "Default" ? `font-family: ${subHeadingBackFontFamily};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontSize === false && subHeadingBackFontSize?.Desktop && subHeadingBackFontSizeUnits?.Desktop ? `font-size: ${subHeadingBackFontSize?.Desktop}${subHeadingBackFontSizeUnits?.Desktop};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontWeight === false && subHeadingBackFontWeight ? `font-weight: ${subHeadingBackFontWeight};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.fontStyle === false && subHeadingBackFontStyle ? `font-style: ${subHeadingBackFontStyle};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.textTransform === false && subHeadingBackTextTransform ? `text-transform: ${subHeadingBackTextTransform};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.textDecoration === false && subHeadingBackTextDecoration ? `text-decoration: ${subHeadingBackTextDecoration};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.letterSpacing === false && subHeadingBackLetterSpacing?.Desktop && subHeadingBackLetterSpacingUnits?.Desktop ? `letter-spacing: ${subHeadingBackLetterSpacing?.Desktop}${subHeadingBackLetterSpacingUnits?.Desktop};` : ''}
-			${subHeadingBackGlobalTypoSwitcher?.lineHeight === false && subHeadingBackLineHeight?.Desktop && subHeadingBackLineHeightUnits?.Desktop ? `line-height: ${subHeadingBackLineHeight?.Desktop}${subHeadingBackLineHeightUnits?.Desktop};` : ''}
-			${subHeadingBackDesktopPaddingValue && subHeadingBackDesktopPadding?.top ? `padding: ${subHeadingBackDesktopPaddingValue};` : ""}
-			${descBackDesktopMarginValue && descBackDesktopMargin?.top ? `margin: ${descBackDesktopMarginValue};` : ""}
+			${subHeadingBackGlobalTypoSwitcher.fontFamily === true && subHeadingBackGlobalTypographyData.fontFamily ? `font-family: ${subHeadingBackGlobalTypographyData.fontFamily};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontSize === true && subHeadingBackGlobalTypographyData.fontSize ? `font-size: ${subHeadingBackGlobalTypographyData.fontSize};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontWeight === true && subHeadingBackGlobalTypographyData.fontWeight ? `font-weight: ${subHeadingBackGlobalTypographyData.fontWeight};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontStyle === true && subHeadingBackGlobalTypographyData.fontStyle ? `font-style: ${subHeadingBackGlobalTypographyData.fontStyle};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.textTransform === true && subHeadingBackGlobalTypographyData.textTransform ? `text-transform: ${subHeadingBackGlobalTypographyData.textTransform};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.textDecoration === true && subHeadingBackGlobalTypographyData.textDecoration ? `text-decoration: ${subHeadingBackGlobalTypographyData.textDecoration};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.letterSpacing === true && subHeadingBackGlobalTypographyData.letterSpacing ? `letter-spacing: ${subHeadingBackGlobalTypographyData.letterSpacing};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.lineHeight === true && subHeadingBackGlobalTypographyData.lineHeight ? `line-height: ${subHeadingBackGlobalTypographyData.lineHeight};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontFamily === false && subHeadingBackFontFamily && subHeadingBackFontFamily !== "Default" ? `font-family: ${subHeadingBackFontFamily};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontSize === false && subHeadingBackFontSize.Desktop && subHeadingBackFontSizeUnits.Desktop ? `font-size: ${subHeadingBackFontSize.Desktop}${subHeadingBackFontSizeUnits.Desktop};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontWeight === false && subHeadingBackFontWeight ? `font-weight: ${subHeadingBackFontWeight};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.fontStyle === false && subHeadingBackFontStyle ? `font-style: ${subHeadingBackFontStyle};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.textTransform === false && subHeadingBackTextTransform ? `text-transform: ${subHeadingBackTextTransform};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.textDecoration === false && subHeadingBackTextDecoration ? `text-decoration: ${subHeadingBackTextDecoration};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.letterSpacing === false && subHeadingBackLetterSpacing.Desktop && subHeadingBackLetterSpacingUnits.Desktop ? `letter-spacing: ${subHeadingBackLetterSpacing.Desktop}${subHeadingBackLetterSpacingUnits.Desktop};` : ''}
+			${subHeadingBackGlobalTypoSwitcher.lineHeight === false && subHeadingBackLineHeight.Desktop && subHeadingBackLineHeightUnits.Desktop ? `line-height: ${subHeadingBackLineHeight.Desktop}${subHeadingBackLineHeightUnits.Desktop};` : ''}
+			${subHeadingBackDesktopPaddingValue && subHeadingBackDesktopPadding.top ? `padding: ${subHeadingBackDesktopPaddingValue};` : ""}
+			${descBackDesktopMarginValue && descBackDesktopMargin.top ? `margin: ${descBackDesktopMarginValue};` : ""}
 			${descAlignmentBack ? `text-align: ${descAlignmentBack};` : ''}
 		}
 
@@ -4982,37 +4794,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-description {
-				${subHeadingTabPaddingValue && SubHeadingTabPadding?.top ? `padding: ${subHeadingTabPaddingValue};` : ""}
-				${descTabMarginValue && descTabMargin?.top ? `margin: ${descTabMarginValue};` : ""}
-				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Tablet && subHeadingFontSizeUnits?.Tablet ? `font-size: ${subHeadingFontSize?.Tablet}${subHeadingFontSizeUnits?.Tablet};` : ''}
-				${subHeadingGlobalTypoSwitcher?.letterSpacing === false && subHeadingLetterSpacing?.Tablet && subHeadingLetterSpacingUnits?.Tablet ? `letter-spacing: ${subHeadingLetterSpacing?.Tablet}${subHeadingLetterSpacingUnits?.Tablet};` : ''}
-				${subHeadingGlobalTypoSwitcher?.lineHeight === false && subHeadingLineHeight?.Tablet && subHeadingLineHeightUnits?.Tablet ? `line-height: ${subHeadingLineHeight?.Tablet}${subHeadingLineHeightUnits?.Tablet};` : ''}
+				${subHeadingTabPaddingValue && SubHeadingTabPadding.top ? `padding: ${subHeadingTabPaddingValue};` : ""}
+				${descTabMarginValue && descTabMargin.top ? `margin: ${descTabMarginValue};` : ""}
+				${subHeadingGlobalTypoSwitcher.fontSize === false && subHeadingFontSize.Tablet && subHeadingFontSizeUnits.Tablet ? `font-size: ${subHeadingFontSize.Tablet}${subHeadingFontSizeUnits.Tablet};` : ''}
+				${subHeadingGlobalTypoSwitcher.letterSpacing === false && subHeadingLetterSpacing.Tablet && subHeadingLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingLetterSpacing.Tablet}${subHeadingLetterSpacingUnits.Tablet};` : ''}
+				${subHeadingGlobalTypoSwitcher.lineHeight === false && subHeadingLineHeight.Tablet && subHeadingLineHeightUnits.Tablet ? `line-height: ${subHeadingLineHeight.Tablet}${subHeadingLineHeightUnits.Tablet};` : ''}
 			}
 
 			.fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-description {
-				${subHeadingBackGlobalTypoSwitcher?.fontSize === false && subHeadingBackFontSize?.Tablet && subHeadingBackFontSizeUnits?.Tablet ? `font-size: ${subHeadingBackFontSize?.Tablet}${subHeadingBackFontSizeUnits?.Tablet};` : ''}
-				${subHeadingBackGlobalTypoSwitcher?.letterSpacing === false && subHeadingBackLetterSpacing?.Tablet && subHeadingBackLetterSpacingUnits?.Tablet ? `letter-spacing: ${subHeadingBackLetterSpacing?.Tablet}${subHeadingBackLetterSpacingUnits?.Tablet};` : ''}
-				${subHeadingBackGlobalTypoSwitcher?.lineHeight === false && subHeadingBackLineHeight?.Tablet && subHeadingBackLineHeightUnits?.Tablet ? `line-height: ${subHeadingBackLineHeight?.Tablet}${subHeadingBackLineHeightUnits?.Tablet};` : ''}
-				${subHeadingBackTabPaddingValue && subHeadingBackTabPadding?.top ? `padding: ${subHeadingBackTabPaddingValue};` : ""}
-				${descBackTabMarginValue && descBackTabMargin?.top ? `margin: ${descBackTabMarginValue};` : ""}
+				${subHeadingBackGlobalTypoSwitcher.fontSize === false && subHeadingBackFontSize.Tablet && subHeadingBackFontSizeUnits.Tablet ? `font-size: ${subHeadingBackFontSize.Tablet}${subHeadingBackFontSizeUnits.Tablet};` : ''}
+				${subHeadingBackGlobalTypoSwitcher.letterSpacing === false && subHeadingBackLetterSpacing.Tablet && subHeadingBackLetterSpacingUnits.Tablet ? `letter-spacing: ${subHeadingBackLetterSpacing.Tablet}${subHeadingBackLetterSpacingUnits.Tablet};` : ''}
+				${subHeadingBackGlobalTypoSwitcher.lineHeight === false && subHeadingBackLineHeight.Tablet && subHeadingBackLineHeightUnits.Tablet ? `line-height: ${subHeadingBackLineHeight.Tablet}${subHeadingBackLineHeightUnits.Tablet};` : ''}
+				${subHeadingBackTabPaddingValue && subHeadingBackTabPadding.top ? `padding: ${subHeadingBackTabPaddingValue};` : ""}
+				${descBackTabMarginValue && descBackTabMargin.top ? `margin: ${descBackTabMarginValue};` : ""}
 			}
 		}
 
 		@media only screen and (max-width: 757px) {
 			.fb-flip-box-wrapper.${blockID} .fb-description {
-				${subHeadingMobilePaddingValue && SubHeadingMobilePadding?.top ? `padding: ${subHeadingMobilePaddingValue};` : ""}
-				${descMobileMarginValue && descMobileMargin?.top ? `margin: ${descMobileMarginValue};` : ""}
-				${subHeadingGlobalTypoSwitcher?.fontSize === false && subHeadingFontSize?.Mobile && subHeadingFontSizeUnits?.Mobile ? `font-size: ${subHeadingFontSize?.Mobile}${subHeadingFontSizeUnits?.Mobile};` : ''}
-				${subHeadingGlobalTypoSwitcher?.letterSpacing === false && subHeadingLetterSpacing?.Mobile && subHeadingLetterSpacingUnits?.Mobile ? `letter-spacing: ${subHeadingLetterSpacing?.Mobile}${subHeadingLetterSpacingUnits?.Mobile};` : ''}
-				${subHeadingGlobalTypoSwitcher?.lineHeight === false && subHeadingLineHeight?.Mobile && subHeadingLineHeightUnits?.Mobile ? `line-height: ${subHeadingLineHeight?.Mobile}${subHeadingLineHeightUnits?.Mobile};` : ''}
+				${subHeadingMobilePaddingValue && SubHeadingMobilePadding.top ? `padding: ${subHeadingMobilePaddingValue};` : ""}
+				${descMobileMarginValue && descMobileMargin.top ? `margin: ${descMobileMarginValue};` : ""}
+				${subHeadingGlobalTypoSwitcher.fontSize === false && subHeadingFontSize.Mobile && subHeadingFontSizeUnits.Mobile ? `font-size: ${subHeadingFontSize.Mobile}${subHeadingFontSizeUnits.Mobile};` : ''}
+				${subHeadingGlobalTypoSwitcher.letterSpacing === false && subHeadingLetterSpacing.Mobile && subHeadingLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingLetterSpacing.Mobile}${subHeadingLetterSpacingUnits.Mobile};` : ''}
+				${subHeadingGlobalTypoSwitcher.lineHeight === false && subHeadingLineHeight.Mobile && subHeadingLineHeightUnits.Mobile ? `line-height: ${subHeadingLineHeight.Mobile}${subHeadingLineHeightUnits.Mobile};` : ''}
 			}
 
 			.fb-flip-box-wrapper.${blockID} .fb-flip-back-box-content-wrapper .fb-description {
-				${subHeadingBackGlobalTypoSwitcher?.fontSize === false && subHeadingBackFontSize?.Mobile && subHeadingBackFontSizeUnits?.Mobile ? `font-size: ${subHeadingBackFontSize?.Mobile}${subHeadingBackFontSizeUnits?.Mobile};` : ''}
-				${subHeadingBackGlobalTypoSwitcher?.letterSpacing === false && subHeadingBackLetterSpacing?.Mobile && subHeadingBackLetterSpacingUnits?.Mobile ? `letter-spacing: ${subHeadingBackLetterSpacing?.Mobile}${subHeadingBackLetterSpacingUnits?.Mobile};` : ''}
-				${subHeadingBackGlobalTypoSwitcher?.lineHeight === false && subHeadingBackLineHeight?.Mobile && subHeadingBackLineHeightUnits?.Mobile ? `line-height: ${subHeadingBackLineHeight?.Mobile}${subHeadingBackLineHeightUnits?.Mobile};` : ''}
-				${subHeadingBackMobilePaddingValue && subHeadingBackMobilePadding?.top ? `padding: ${subHeadingBackMobilePaddingValue};` : ""}
-				${descBackMobileMarginValue && descBackMobileMargin?.top ? `margin: ${descBackMobileMarginValue};` : ""}
+				${subHeadingBackGlobalTypoSwitcher.fontSize === false && subHeadingBackFontSize.Mobile && subHeadingBackFontSizeUnits.Mobile ? `font-size: ${subHeadingBackFontSize.Mobile}${subHeadingBackFontSizeUnits.Mobile};` : ''}
+				${subHeadingBackGlobalTypoSwitcher.letterSpacing === false && subHeadingBackLetterSpacing.Mobile && subHeadingBackLetterSpacingUnits.Mobile ? `letter-spacing: ${subHeadingBackLetterSpacing.Mobile}${subHeadingBackLetterSpacingUnits.Mobile};` : ''}
+				${subHeadingBackGlobalTypoSwitcher.lineHeight === false && subHeadingBackLineHeight.Mobile && subHeadingBackLineHeightUnits.Mobile ? `line-height: ${subHeadingBackLineHeight.Mobile}${subHeadingBackLineHeightUnits.Mobile};` : ''}
+				${subHeadingBackMobilePaddingValue && subHeadingBackMobilePadding.top ? `padding: ${subHeadingBackMobilePaddingValue};` : ""}
+				${descBackMobileMarginValue && descBackMobileMargin.top ? `margin: ${descBackMobileMarginValue};` : ""}
 			}
 		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-btn-container {
@@ -5026,31 +4838,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${buttonTextColor ? `color: ${buttonTextColor};` : ""}
 			${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
 
-			${buttonGlobalTypoSwitcher?.fontFamily === true && buttonGlobalTypographyData?.fontFamily ? `font-family: ${buttonGlobalTypographyData?.fontFamily};` : ''}
-			${buttonGlobalTypoSwitcher?.fontSize === true && buttonGlobalTypographyData?.fontSize ? `font-size: ${buttonGlobalTypographyData?.fontSize};` : ''}
-			${buttonGlobalTypoSwitcher?.fontWeight === true && buttonGlobalTypographyData?.fontWeight ? `font-weight: ${buttonGlobalTypographyData?.fontWeight};` : ''}
-			${buttonGlobalTypoSwitcher?.fontStyle === true && buttonGlobalTypographyData?.fontStyle ? `font-style: ${buttonGlobalTypographyData?.fontStyle};` : ''}
-			${buttonGlobalTypoSwitcher?.textTransform === true && buttonGlobalTypographyData?.textTransform ? `text-transform: ${buttonGlobalTypographyData?.textTransform};` : ''}
-			${buttonGlobalTypoSwitcher?.textDecoration === true && buttonGlobalTypographyData?.textDecoration ? `text-decoration: ${buttonGlobalTypographyData?.textDecoration};` : ''}
-			${buttonGlobalTypoSwitcher?.letterSpacing === true && buttonGlobalTypographyData?.letterSpacing ? `letter-spacing: ${buttonGlobalTypographyData?.letterSpacing};` : ''}
-			${buttonGlobalTypoSwitcher?.lineHeight === true && buttonGlobalTypographyData?.lineHeight ? `line-height: ${buttonGlobalTypographyData?.lineHeight};` : ''}
+			${buttonGlobalTypoSwitcher.fontFamily === true && buttonGlobalTypographyData.fontFamily ? `font-family: ${buttonGlobalTypographyData.fontFamily};` : ''}
+			${buttonGlobalTypoSwitcher.fontSize === true && buttonGlobalTypographyData.fontSize ? `font-size: ${buttonGlobalTypographyData.fontSize};` : ''}
+			${buttonGlobalTypoSwitcher.fontWeight === true && buttonGlobalTypographyData.fontWeight ? `font-weight: ${buttonGlobalTypographyData.fontWeight};` : ''}
+			${buttonGlobalTypoSwitcher.fontStyle === true && buttonGlobalTypographyData.fontStyle ? `font-style: ${buttonGlobalTypographyData.fontStyle};` : ''}
+			${buttonGlobalTypoSwitcher.textTransform === true && buttonGlobalTypographyData.textTransform ? `text-transform: ${buttonGlobalTypographyData.textTransform};` : ''}
+			${buttonGlobalTypoSwitcher.textDecoration === true && buttonGlobalTypographyData.textDecoration ? `text-decoration: ${buttonGlobalTypographyData.textDecoration};` : ''}
+			${buttonGlobalTypoSwitcher.letterSpacing === true && buttonGlobalTypographyData.letterSpacing ? `letter-spacing: ${buttonGlobalTypographyData.letterSpacing};` : ''}
+			${buttonGlobalTypoSwitcher.lineHeight === true && buttonGlobalTypographyData.lineHeight ? `line-height: ${buttonGlobalTypographyData.lineHeight};` : ''}
 
-			${buttonGlobalTypoSwitcher?.fontFamily === false && buttonFontFamily && buttonFontFamily !== "Default" ? `font-family: ${buttonFontFamily}` : ""};
-			${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Desktop ? `font-size: ${buttonFontSize?.Desktop}${buttonFontSizeUnits?.Desktop};` : ''}
-			${buttonGlobalTypoSwitcher?.fontWeight === false && buttonFontWeight ? `font-weight: ${buttonFontWeight}` : ""};
-			${buttonGlobalTypoSwitcher?.fontStyle === false && buttonFontStyle ? `font-style: ${buttonFontStyle}` : ""};
-			${buttonGlobalTypoSwitcher?.textTransform === false && buttonTextTransform ? `text-transform: ${buttonTextTransform}` : ""};
-			${buttonGlobalTypoSwitcher?.textDecoration === false && buttonTextDecoration ? `text-decoration: ${buttonTextDecoration}` : ""};
-			${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Desktop ? `letter-spacing: ${buttonLetterSpacing?.Desktop}${buttonLetterSpacingUnits?.Desktop};` : ''}
-			${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Desktop ? `line-height: ${buttonLineHeight?.Desktop}${buttonLineHeightUnits?.Desktop};` : ''}
+			${buttonGlobalTypoSwitcher.fontFamily === false && buttonFontFamily && buttonFontFamily !== "Default" ? `font-family: ${buttonFontFamily}` : ""};
+			${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Desktop ? `font-size: ${buttonFontSize.Desktop}${buttonFontSizeUnits.Desktop};` : ''}
+			${buttonGlobalTypoSwitcher.fontWeight === false && buttonFontWeight ? `font-weight: ${buttonFontWeight}` : ""};
+			${buttonGlobalTypoSwitcher.fontStyle === false && buttonFontStyle ? `font-style: ${buttonFontStyle}` : ""};
+			${buttonGlobalTypoSwitcher.textTransform === false && buttonTextTransform ? `text-transform: ${buttonTextTransform}` : ""};
+			${buttonGlobalTypoSwitcher.textDecoration === false && buttonTextDecoration ? `text-decoration: ${buttonTextDecoration}` : ""};
+			${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Desktop ? `letter-spacing: ${buttonLetterSpacing.Desktop}${buttonLetterSpacingUnits.Desktop};` : ''}
+			${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Desktop ? `line-height: ${buttonLineHeight.Desktop}${buttonLineHeightUnits.Desktop};` : ''}
 			
-			${buttonDesktopPaddingValue && flipButtonDesktopPadding?.top ? `padding: ${buttonDesktopPaddingValue};` : ''}	
-			${buttonDesktopMarginValue && flipButtonDesktopMargin?.top ? `margin: ${buttonDesktopMarginValue};` : ''}
+			${buttonDesktopPaddingValue && flipButtonDesktopPadding.top ? `padding: ${buttonDesktopPaddingValue};` : ''}	
+			${buttonDesktopMarginValue && flipButtonDesktopMargin.top ? `margin: ${buttonDesktopMarginValue};` : ''}
 			${flipButtonBorder ? `border-style: ${flipButtonBorder};` : ''}
-			${buttonDesktopBorderValue && flipButtonDesktopBorderWidth?.top ? `border-width: ${buttonDesktopBorderValue};` : ''}
+			${buttonDesktopBorderValue && flipButtonDesktopBorderWidth.top ? `border-width: ${buttonDesktopBorderValue};` : ''}
 			${flipButtonBorderColor ? `border-color: ${flipButtonBorderColor};` : ''}
-			${buttonDesktopBorderRadiusValue && flipBtnDesktopBorderradiusWidth?.top ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
-			${btnIconGap?.Desktop && btnIconGapUnits?.Desktop ? `gap: ${btnIconGap?.Desktop}${btnIconGapUnits?.Desktop};` : ''}
+			${buttonDesktopBorderRadiusValue && flipBtnDesktopBorderradiusWidth.top ? `border-radius: ${buttonDesktopBorderRadiusValue};` : ''}
+			${btnIconGap.Desktop && btnIconGapUnits.Desktop ? `gap: ${btnIconGap.Desktop}${btnIconGapUnits.Desktop};` : ''}
 			transition: all .3s ease-in-out;
 		}
 
@@ -5065,31 +4877,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${buttonBackTextColor ? `color: ${buttonBackTextColor};` : ""}
 			${buttonBackBgColor ? `background-color: ${buttonBackBgColor};` : ""}
 
-			${buttonBackGlobalTypoSwitcher?.fontFamily === true && buttonBackGlobalTypographyData?.fontFamily ? `font-family: ${buttonBackGlobalTypographyData?.fontFamily};` : ''}
-			${buttonBackGlobalTypoSwitcher?.fontSize === true && buttonBackGlobalTypographyData?.fontSize ? `font-size: ${buttonBackGlobalTypographyData?.fontSize};` : ''}
-			${buttonBackGlobalTypoSwitcher?.fontWeight === true && buttonBackGlobalTypographyData?.fontWeight ? `font-weight: ${buttonBackGlobalTypographyData?.fontWeight};` : ''}
-			${buttonBackGlobalTypoSwitcher?.fontStyle === true && buttonBackGlobalTypographyData?.fontStyle ? `font-style: ${buttonBackGlobalTypographyData?.fontStyle};` : ''}
-			${buttonBackGlobalTypoSwitcher?.textTransform === true && buttonBackGlobalTypographyData?.textTransform ? `text-transform: ${buttonBackGlobalTypographyData?.textTransform};` : ''}
-			${buttonBackGlobalTypoSwitcher?.textDecoration === true && buttonBackGlobalTypographyData?.textDecoration ? `text-decoration: ${buttonBackGlobalTypographyData?.textDecoration};` : ''}
-			${buttonBackGlobalTypoSwitcher?.letterSpacing === true && buttonBackGlobalTypographyData?.letterSpacing ? `letter-spacing: ${buttonBackGlobalTypographyData?.letterSpacing};` : ''}
-			${buttonBackGlobalTypoSwitcher?.lineHeight === true && buttonBackGlobalTypographyData?.lineHeight ? `line-height: ${buttonBackGlobalTypographyData?.lineHeight};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontFamily === true && buttonBackGlobalTypographyData.fontFamily ? `font-family: ${buttonBackGlobalTypographyData.fontFamily};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontSize === true && buttonBackGlobalTypographyData.fontSize ? `font-size: ${buttonBackGlobalTypographyData.fontSize};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontWeight === true && buttonBackGlobalTypographyData.fontWeight ? `font-weight: ${buttonBackGlobalTypographyData.fontWeight};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontStyle === true && buttonBackGlobalTypographyData.fontStyle ? `font-style: ${buttonBackGlobalTypographyData.fontStyle};` : ''}
+			${buttonBackGlobalTypoSwitcher.textTransform === true && buttonBackGlobalTypographyData.textTransform ? `text-transform: ${buttonBackGlobalTypographyData.textTransform};` : ''}
+			${buttonBackGlobalTypoSwitcher.textDecoration === true && buttonBackGlobalTypographyData.textDecoration ? `text-decoration: ${buttonBackGlobalTypographyData.textDecoration};` : ''}
+			${buttonBackGlobalTypoSwitcher.letterSpacing === true && buttonBackGlobalTypographyData.letterSpacing ? `letter-spacing: ${buttonBackGlobalTypographyData.letterSpacing};` : ''}
+			${buttonBackGlobalTypoSwitcher.lineHeight === true && buttonBackGlobalTypographyData.lineHeight ? `line-height: ${buttonBackGlobalTypographyData.lineHeight};` : ''}
 
-			${buttonBackGlobalTypoSwitcher?.fontFamily === false && buttonBackFontFamily && buttonBackFontFamily !== "Default" ? `font-family: ${buttonBackFontFamily}` : ""};
-			${buttonBackGlobalTypoSwitcher?.fontSize === false && buttonBackFontSize?.Desktop ? `font-size: ${buttonBackFontSize?.Desktop}${buttonBackFontSizeUnits?.Desktop};` : ''}
-			${buttonBackGlobalTypoSwitcher?.fontWeight === false && buttonBackFontWeight ? `font-weight: ${buttonBackFontWeight}` : ""};
-			${buttonBackGlobalTypoSwitcher?.fontStyle === false && buttonBackFontStyle ? `font-style: ${buttonBackFontStyle}` : ""};
-			${buttonBackGlobalTypoSwitcher?.textTransform === false && buttonBackTextTransform ? `text-transform: ${buttonBackTextTransform}` : ""};
-			${buttonBackGlobalTypoSwitcher?.textDecoration === false && buttonBackTextDecoration ? `text-decoration: ${buttonBackTextDecoration}` : ""};
-			${buttonBackGlobalTypoSwitcher?.letterSpacing === false && buttonBackLetterSpacing?.Desktop ? `letter-spacing: ${buttonBackLetterSpacing?.Desktop}${buttonBackLetterSpacingUnits?.Desktop};` : ''}
-			${buttonBackGlobalTypoSwitcher?.lineHeight === false && buttonBackLineHeight?.Desktop ? `line-height: ${buttonBackLineHeight?.Desktop}${buttonBackLineHeightUnits?.Desktop};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontFamily === false && buttonBackFontFamily && buttonBackFontFamily !== "Default" ? `font-family: ${buttonBackFontFamily}` : ""};
+			${buttonBackGlobalTypoSwitcher.fontSize === false && buttonBackFontSize.Desktop ? `font-size: ${buttonBackFontSize.Desktop}${buttonBackFontSizeUnits.Desktop};` : ''}
+			${buttonBackGlobalTypoSwitcher.fontWeight === false && buttonBackFontWeight ? `font-weight: ${buttonBackFontWeight}` : ""};
+			${buttonBackGlobalTypoSwitcher.fontStyle === false && buttonBackFontStyle ? `font-style: ${buttonBackFontStyle}` : ""};
+			${buttonBackGlobalTypoSwitcher.textTransform === false && buttonBackTextTransform ? `text-transform: ${buttonBackTextTransform}` : ""};
+			${buttonBackGlobalTypoSwitcher.textDecoration === false && buttonBackTextDecoration ? `text-decoration: ${buttonBackTextDecoration}` : ""};
+			${buttonBackGlobalTypoSwitcher.letterSpacing === false && buttonBackLetterSpacing.Desktop ? `letter-spacing: ${buttonBackLetterSpacing.Desktop}${buttonBackLetterSpacingUnits.Desktop};` : ''}
+			${buttonBackGlobalTypoSwitcher.lineHeight === false && buttonBackLineHeight.Desktop ? `line-height: ${buttonBackLineHeight.Desktop}${buttonBackLineHeightUnits.Desktop};` : ''}
 			
-			${buttonBackDesktopPaddingValue && flipButtonBackDesktopPadding?.top ? `padding: ${buttonBackDesktopPaddingValue};` : ''}	
-			${buttonBackDesktopMarginValue && flipButtonBackDesktopMargin?.top ? `margin: ${buttonBackDesktopMarginValue};` : ''}
+			${buttonBackDesktopPaddingValue && flipButtonBackDesktopPadding.top ? `padding: ${buttonBackDesktopPaddingValue};` : ''}	
+			${buttonBackDesktopMarginValue && flipButtonBackDesktopMargin.top ? `margin: ${buttonBackDesktopMarginValue};` : ''}
 			${flipButtonBackBorder ? `border-style: ${flipButtonBackBorder};` : ''}
-			${buttonBackDesktopBorderValue && flipButtonBackDesktopBorderWidth?.top ? `border-width: ${buttonBackDesktopBorderValue};` : ''}
+			${buttonBackDesktopBorderValue && flipButtonBackDesktopBorderWidth.top ? `border-width: ${buttonBackDesktopBorderValue};` : ''}
 			${flipButtonBackBorderColor ? `border-color: ${flipButtonBackBorderColor};` : ''}
-			${buttonBackDesktopBorderRadiusValue && flipBtnBackDesktopBorderradiusWidth?.top ? `border-radius: ${buttonBackDesktopBorderRadiusValue};` : ''}
-			${btnBackIconGap?.Desktop && btnBackIconGapUnits?.Desktop ? `gap: ${btnBackIconGap?.Desktop}${btnBackIconGapUnits?.Desktop};` : ''}
+			${buttonBackDesktopBorderRadiusValue && flipBtnBackDesktopBorderradiusWidth.top ? `border-radius: ${buttonBackDesktopBorderRadiusValue};` : ''}
+			${btnBackIconGap.Desktop && btnBackIconGapUnits.Desktop ? `gap: ${btnBackIconGap.Desktop}${btnBackIconGapUnits.Desktop};` : ''}
 			transition: all .3s ease-in-out;
 		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-btn-wrapper:hover{
@@ -5099,25 +4911,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-btn-wrapper {
-				${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Tablet ? `font-size: ${buttonFontSize?.Tablet}${buttonFontSizeUnits?.Tablet};` : ''}
-				${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Tablet ? `letter-spacing: ${buttonLetterSpacing?.Tablet}${buttonLetterSpacingUnits?.Tablet};` : ''}
-				${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Tablet ? `line-height: ${buttonLineHeight?.Tablet}${buttonLineHeightUnits?.Tablet};` : ''}
-				${buttonTabPaddingValue && flipButtonTabPadding?.top ? `padding: ${buttonTabPaddingValue};` : ''}
-				${buttonTabMarginValue && flipButtonTabMargin?.top ? `margin: ${buttonTabMarginValue};` : ''}
-				${buttonTabBorderValue && flipButtonTabBorderWidth?.top ? `border-width: ${buttonTabBorderValue};` : ''}
-				${buttonTabBorderRadiusValue && flipBtnTabBorderradiusWidth?.top ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
+				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Tablet ? `font-size: ${buttonFontSize.Tablet}${buttonFontSizeUnits.Tablet};` : ''}
+				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Tablet ? `letter-spacing: ${buttonLetterSpacing.Tablet}${buttonLetterSpacingUnits.Tablet};` : ''}
+				${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Tablet ? `line-height: ${buttonLineHeight.Tablet}${buttonLineHeightUnits.Tablet};` : ''}
+				${buttonTabPaddingValue && flipButtonTabPadding.top ? `padding: ${buttonTabPaddingValue};` : ''}
+				${buttonTabMarginValue && flipButtonTabMargin.top ? `margin: ${buttonTabMarginValue};` : ''}
+				${buttonTabBorderValue && flipButtonTabBorderWidth.top ? `border-width: ${buttonTabBorderValue};` : ''}
+				${buttonTabBorderRadiusValue && flipBtnTabBorderradiusWidth.top ? `border-radius: ${buttonTabBorderRadiusValue};` : ''}
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-btn-wrapper {
-				${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Mobile ? `font-size: ${buttonFontSize?.Mobile}${buttonFontSizeUnits?.Mobile};` : ''}
-				${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Mobile ? `letter-spacing: ${buttonLetterSpacing?.Mobile}${buttonLetterSpacingUnits?.Mobile};` : ''}
-				${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Mobile ? `line-height: ${buttonLineHeight?.Mobile}${buttonLineHeightUnits?.Mobile};` : ''}
-				${buttonMobilePaddingValue && flipButtonMobilePadding?.top ? `padding: ${buttonMobilePaddingValue};` : ''}
-				${buttonMobileMarginValue && flipButtonMobileMargin?.top ? `margin: ${buttonMobileMarginValue};` : ''}
-				${buttonMobileBorderValue && flipButtonMobileBorderWidth?.top ? `border-width: ${buttonMobileBorderValue};` : ''}
-				${buttonMobileBorderRadiusValue && flipBtnMobileBorderradiusWidth?.top ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
+				${buttonGlobalTypoSwitcher.fontSize === false && buttonFontSize.Mobile ? `font-size: ${buttonFontSize.Mobile}${buttonFontSizeUnits.Mobile};` : ''}
+				${buttonGlobalTypoSwitcher.letterSpacing === false && buttonLetterSpacing.Mobile ? `letter-spacing: ${buttonLetterSpacing.Mobile}${buttonLetterSpacingUnits.Mobile};` : ''}
+				${buttonGlobalTypoSwitcher.lineHeight === false && buttonLineHeight.Mobile ? `line-height: ${buttonLineHeight.Mobile}${buttonLineHeightUnits.Mobile};` : ''}
+				${buttonMobilePaddingValue && flipButtonMobilePadding.top ? `padding: ${buttonMobilePaddingValue};` : ''}
+				${buttonMobileMarginValue && flipButtonMobileMargin.top ? `margin: ${buttonMobileMarginValue};` : ''}
+				${buttonMobileBorderValue && flipButtonMobileBorderWidth.top ? `border-width: ${buttonMobileBorderValue};` : ''}
+				${buttonMobileBorderRadiusValue && flipBtnMobileBorderradiusWidth.top ? `border-radius: ${buttonMobileBorderRadiusValue};` : ''}
 			}
 		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper {
@@ -5132,14 +4944,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBackgroundImageSize ? `background-size: ${mediaBackgroundImageSize};` : ""}`
 					: mediaClassicColor ? `background: ${mediaClassicColor}; ` : ""
 			}
-			${mediaBgWidth?.Desktop ? `width: ${mediaBgWidth?.Desktop}${mediaBgWidthUnits?.Desktop};` : ''}
-			${mediaBgHeight?.Desktop ? `height: ${mediaBgHeight?.Desktop}${mediaBgHeightUnits?.Desktop};` : ''}
-			${mediaDesktopPadding && mediaPaddingDesktop?.top ? `padding: ${mediaDesktopPadding};` : ''}
-			${mediaDesktopMargin && mediaMarginDesktop?.top ? `margin: ${mediaDesktopMargin};` : ''}
+			${mediaBgWidth.Desktop ? `width: ${mediaBgWidth.Desktop}${mediaBgWidthUnits.Desktop};` : ''}
+			${mediaBgHeight.Desktop ? `height: ${mediaBgHeight.Desktop}${mediaBgHeightUnits.Desktop};` : ''}
+			${mediaDesktopPadding && mediaPaddingDesktop.top ? `padding: ${mediaDesktopPadding};` : ''}
+			${mediaDesktopMargin && mediaMarginDesktop.top ? `margin: ${mediaDesktopMargin};` : ''}
 			${mediaBorder ? `border-style: ${mediaBorder};` : ''}
-			${mediaBorderDesktopWidth && mediaBorderDesktop?.top ? `border-width: ${mediaBorderDesktopWidth};` : ''}
+			${mediaBorderDesktopWidth && mediaBorderDesktop.top ? `border-width: ${mediaBorderDesktopWidth};` : ''}
 			${mediaBorderColor ? `border-color: ${mediaBorderColor};` : ''}
-			${mediaBorderRadiusDesktop && mediaBorderRadiusDesktop?.top ? `border-radius: ${mediaBorderRadiusDesktopWidth};` : ''}
+			${mediaBorderRadiusDesktop && mediaBorderRadiusDesktop.top ? `border-radius: ${mediaBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
 			${mediaClassicColor ? `justify-content: center; ` : ''}
@@ -5172,14 +4984,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${mediaBackBackgroundImageSize ? `background-size: ${mediaBackBackgroundImageSize};` : ""}`
 					: mediaBackClassicColor ? `background: ${mediaBackClassicColor}; ` : ""
 			}
-			${mediaBackBgWidth?.Desktop ? `width: ${mediaBackBgWidth?.Desktop}${mediaBackBgWidthUnits?.Desktop};` : ''}
-			${mediaBackBgHeight?.Desktop ? `height: ${mediaBackBgHeight?.Desktop}${mediaBackBgHeightUnits?.Desktop};` : ''}
-			${mediaBackDesktopPadding && mediaBackPaddingDesktop?.top ? `padding: ${mediaBackDesktopPadding};` : ''}
-			${mediaBackDesktopMargin && mediaBackMarginDesktop?.top ? `margin: ${mediaBackDesktopMargin};` : ''}
+			${mediaBackBgWidth.Desktop ? `width: ${mediaBackBgWidth.Desktop}${mediaBackBgWidthUnits.Desktop};` : ''}
+			${mediaBackBgHeight.Desktop ? `height: ${mediaBackBgHeight.Desktop}${mediaBackBgHeightUnits.Desktop};` : ''}
+			${mediaBackDesktopPadding && mediaBackPaddingDesktop.top ? `padding: ${mediaBackDesktopPadding};` : ''}
+			${mediaBackDesktopMargin && mediaBackMarginDesktop.top ? `margin: ${mediaBackDesktopMargin};` : ''}
 			${mediaBackBorder ? `border-style: ${mediaBackBorder};` : ''}
-			${mediaBackBorderDesktopWidth && mediaBackBorderDesktop?.top ? `border-width: ${mediaBackBorderDesktopWidth};` : ''}
+			${mediaBackBorderDesktopWidth && mediaBackBorderDesktop.top ? `border-width: ${mediaBackBorderDesktopWidth};` : ''}
 			${mediaBackBorderColor ? `border-color: ${mediaBackBorderColor};` : ''}
-			${mediaBackBorderRadiusDesktop && mediaBackBorderRadiusDesktop?.top ? `border-radius: ${mediaBackBorderRadiusDesktopWidth};` : ''}
+			${mediaBackBorderRadiusDesktop && mediaBackBorderRadiusDesktop.top ? `border-radius: ${mediaBackBorderRadiusDesktopWidth};` : ''}
 			background-repeat: none;
 			background-size: cover;
 			${mediaBackClassicColor ? `justify-content: center; ` : ''}
@@ -5201,122 +5013,110 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper {
-				${mediaTabletPadding && mediaPaddingTablet?.top ? `padding: ${mediaTabletPadding};` : ''}
-				${mediaTabletMargin && mediaMarginTablet?.top ? `margin: ${mediaTabletMargin};` : ''}
-				${mediaBorderTabletWidth && mediaBorderTablet?.top ? `border-width: ${mediaBorderTabletWidth};` : ''}
-				${mediaBorderRadiusTabletWidth && mediaBorderRadiusTablet?.top ? `border-radius: ${mediaBorderRadiusTabletWidth};` : ''}
-				${mediaBgWidth?.Tablet ? `width: ${mediaBgWidth?.Tablet}${mediaBgWidthUnits?.Tablet};` : ''}
-				${mediaBgHeight?.Tablet ? `height: ${mediaBgHeight?.Tablet}${mediaBgHeightUnits?.Tablet};` : ''}
+				${mediaTabletPadding && mediaPaddingTablet.top ? `padding: ${mediaTabletPadding};` : ''}
+				${mediaTabletMargin && mediaMarginTablet.top ? `margin: ${mediaTabletMargin};` : ''}
+				${mediaBorderTabletWidth && mediaBorderTablet.top ? `border-width: ${mediaBorderTabletWidth};` : ''}
+				${mediaBorderRadiusTabletWidth && mediaBorderRadiusTablet.top ? `border-radius: ${mediaBorderRadiusTabletWidth};` : ''}
+				${mediaBgWidth.Tablet ? `width: ${mediaBgWidth.Tablet}${mediaBgWidthUnits.Tablet};` : ''}
+				${mediaBgHeight.Tablet ? `height: ${mediaBgHeight.Tablet}${mediaBgHeightUnits.Tablet};` : ''}
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper {
-				${mediaMobilePadding && mediaPaddingMobile?.top ? `padding: ${mediaMobilePadding};` : ''}
-				${mediaMobileMargin && mediaMarginMobile?.top ? `margin: ${mediaMobileMargin};` : ''}
-				${mediaBorderMobileWidth && mediaBorderMobile?.top ? `border-width: ${mediaBorderMobileWidth};` : ''}
-				${mediaBorderRadiusMobileWidth && mediaBorderRadiusMobile?.top ? `border-radius: ${mediaBorderRadiusMobileWidth};` : ''}
-				${mediaBgWidth?.Mobile ? `width: ${mediaBgWidth?.Mobile}${mediaBgWidthUnits?.Mobile};` : ''}
-				${mediaBgHeight?.Mobile ? `height: ${mediaBgHeight?.Mobile}${mediaBgHeightUnits?.Mobile};` : ''}
+				${mediaMobilePadding && mediaPaddingMobile.top ? `padding: ${mediaMobilePadding};` : ''}
+				${mediaMobileMargin && mediaMarginMobile.top ? `margin: ${mediaMobileMargin};` : ''}
+				${mediaBorderMobileWidth && mediaBorderMobile.top ? `border-width: ${mediaBorderMobileWidth};` : ''}
+				${mediaBorderRadiusMobileWidth && mediaBorderRadiusMobile.top ? `border-radius: ${mediaBorderRadiusMobileWidth};` : ''}
+				${mediaBgWidth.Mobile ? `width: ${mediaBgWidth.Mobile}${mediaBgWidthUnits.Mobile};` : ''}
+				${mediaBgHeight.Mobile ? `height: ${mediaBgHeight.Mobile}${mediaBgHeightUnits.Mobile};` : ''}
 			}
 		}
 
-		.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper .fb-icon-wrapper svg,
+		.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
 		.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
-			${mediaSize?.Desktop ? `width: ${mediaSize?.Desktop}${mediaSizeUnits?.Desktop};` : ''}
-			${mediaSize?.Desktop ? `height: ${mediaSize?.Desktop}${mediaSizeUnits?.Desktop};` : ''}
+			${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
+			${mediaSize.Desktop ? `height: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
 			${mediaIconColor ? `fill: ${mediaIconColor};` : ""}
 		}
 
-		.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper .fb-icon-wrapper:hover svg {
+		.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper:hover svg {
 			${mediaIconHoverColor ? `fill: ${mediaIconHoverColor};` : "#ffffff"}
 			transition: all .3s ease-in-out;
 		}
 
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper img {
-			${mediaBackSize?.Desktop ? `width: ${mediaBackSize?.Desktop}${mediaBackSizeUnits?.Desktop};` : ''}
-			${mediaBackSize?.Desktop ? `height: ${mediaBackSize?.Desktop}${mediaBackSizeUnits?.Desktop};` : ''}
+			${mediaBackSize.Desktop ? `width: ${mediaBackSize.Desktop}${mediaBackSizeUnits.Desktop};` : ''}
+			${mediaBackSize.Desktop ? `height: ${mediaBackSize.Desktop}${mediaBackSizeUnits.Desktop};` : ''}
 			${mediaBackIconColor ? `fill: ${mediaBackIconColor};` : ""}
 		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper:hover svg{
 			${mediaBackIconHoverColor ? `fill: ${mediaBackIconHoverColor};` : ""}
 		}
 		@media only screen and (max-width: 1024px) {
-			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper .fb-icon-wrapper svg,
+			.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
-				${mediaSize?.Tablet ? `width: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
-				${mediaSize?.Tablet ? `height: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
-			}
-
-			.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
-			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
-				${mediaSize?.Tablet ? `width: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
-				${mediaSize?.Tablet ? `height: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
+				${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
+				${mediaSize.Tablet ? `height: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
-			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper .fb-icon-wrapper svg,
+			.fb-flip-box-wrapper.${blockID} .fb-icon-wrapper svg,
 			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
-				${mediaSize?.Mobile ? `width: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
-				${mediaSize?.Mobile ? `height: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
-			}
-
-			.fb-flip-box-wrapper.${blockID} .fb-flip-back-media-wrapper .fb-icon-wrapper svg,
-			.fb-flip-box-wrapper.${blockID} .fb-flip-media-wrapper img {
-				${mediaSize?.Mobile ? `width: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
-				${mediaSize?.Mobile ? `height: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
+				${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
+				${mediaSize.Mobile ? `height: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
 			}
 		}
 
 		.fb-flip-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-			${btnIconSize?.Desktop ? `width: ${btnIconSize?.Desktop}${btnIconSizeUnits?.Desktop};` : ''}
+			${btnIconSize.Desktop ? `width: ${btnIconSize.Desktop}${btnIconSizeUnits.Desktop};` : ''}
 			${btnIconColor ? `fill: ${btnIconColor};` : "#ffffff"}
-			transform: rotate(${buttonIconRotate?.Desktop}deg);
+			transform: rotate(${buttonIconRotate.Desktop}deg);
 			transition: all .3s ease-in-out;
 		}
 
 		.fb-flip-box-wrapper.${blockID}:hover .fb-btn-icon-wrapper svg {
 			${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : "#ffffff"}
-			transform: rotate(${buttonIconRotateHover?.Desktop}deg);
+			transform: rotate(${buttonIconRotateHover.Desktop}deg);
 		}
 
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-				${btnIconSize?.Tablet ? `width: ${btnIconSize?.Tablet}${btnIconSizeUnits?.Tablet};` : ''}
-				transform: rotate(${buttonIconRotate?.Tablet}deg);
+				${btnIconSize.Tablet ? `width: ${btnIconSize.Tablet}${btnIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonIconRotate.Tablet}deg);
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
 			.fb-flip-box-wrapper.${blockID} .fb-btn-icon-wrapper svg {
-				${btnIconSize?.Mobile ? `width: ${btnIconSize?.Mobile}${btnIconSizeUnits?.Mobile};` : ''}
-				transform: rotate(${buttonIconRotate?.Mobile}deg);
+				${btnIconSize.Mobile ? `width: ${btnIconSize.Mobile}${btnIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonIconRotate.Mobile}deg);
 			}
 		}
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-btn-wrapper .fb-btn-icon-wrapper svg{
-			${btnBackIconSize?.Desktop ? `width: ${btnBackIconSize?.Desktop}${btnBackIconSizeUnits?.Desktop};` : ''}
+			${btnBackIconSize.Desktop ? `width: ${btnBackIconSize.Desktop}${btnBackIconSizeUnits.Desktop};` : ''}
 			${btnBackIconColor ? `fill: ${btnBackIconColor};` : "#ffffff"}
 			transition: all .3s ease-in-out;
-			transform: rotate(${buttonBackIconRotate?.Desktop}deg);
+			transform: rotate(${buttonBackIconRotate.Desktop}deg);
 		}
 
 		.fb-flip-box-wrapper.${blockID} .fb-flip-back-btn-wrapper:hover .fb-btn-icon-wrapper svg{
 			${btnBackIconHoverColor ? `fill: ${btnBackIconHoverColor};` : "#ffffff"}
-			transform: rotate(${buttonBackIconRotateHover?.Desktop}deg);
+			transform: rotate(${buttonBackIconRotateHover.Desktop}deg);
 		}
 		@media only screen and (max-width: 1024px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-back-btn-wrapper .fb-btn-icon-wrapper svg{
-				${btnBackIconSize?.Tablet ? `width: ${btnBackIconSize?.Tablet}${btnBackIconSizeUnits?.Tablet};` : ''}
-				transform: rotate(${buttonBackIconRotate?.Tablet}deg);
+				${btnBackIconSize.Tablet ? `width: ${btnBackIconSize.Tablet}${btnBackIconSizeUnits.Tablet};` : ''}
+				transform: rotate(${buttonBackIconRotate.Tablet}deg);
 			}
 		}
 
 		@media only screen and (max-width: 767px) {
 			.fb-flip-box-wrapper.${blockID} .fb-flip-back-btn-wrapper .fb-btn-icon-wrapper svg{
-				${btnBackIconSize?.Mobile ? `width: ${btnBackIconSize?.Mobile}${btnBackIconSizeUnits?.Mobile};` : ''}
-				transform: rotate(${buttonBackIconRotate?.Mobile}deg);
+				${btnBackIconSize.Mobile ? `width: ${btnBackIconSize.Mobile}${btnBackIconSizeUnits.Mobile};` : ''}
+				transform: rotate(${buttonBackIconRotate.Mobile}deg);
 			}
 		}
 		`,
@@ -5817,101 +5617,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [fbflipBoxStyle, customCss]);
 
 	const editorStyle = `${fbflipBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
-		/**
-     * Generate SVG Icons for Icon
-     */
-		useEffect(() => {
-			setAttributes({
-				frontendIcon: generateSvgIcon(icon), 
-				frontendBtnIcon: generateSvgIcon(btnIcon), 
-				frontendIconBack: generateSvgIcon(iconBack),
-				frontendBtnIconBack: generateSvgIcon(btnIconBack),
-			})
-		}, [icon, btnIcon, iconBack, btnIconBack]);
-	
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) { 
-			setAttributes({
-				dynamicTitleEnabled: false,
-				dynamicDescriptionEnabled: false,
-				dynamicBtnEnabled: false,
-
-				dynamicBackTitleEnabled: false,
-				dynamicBackTitleEnableLink: false,
-				dynamicBackDescriptionEnabled: false,
-				dynamicBackDescriptionEnableLink: false,
-				dynamicBackBtnEnabled: false,
-				dynamicBackBtnEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
-
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTitleEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-description-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBtnContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-flip-box-dynamic-btn-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBtnEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-btn-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-back-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackTitleEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-flip-box-dynamic-back-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackDescriptionEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-description-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicBackBtnContentToggleControls = getProToggleControls({ 
-		hook: 'frontisblocks-flip-box-dynamic-back-btn-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicBackBtnEnabled',
-		label: __('Dynamic Content', 'frontis-blocks'),
-		keyPrefix: 'flip-box-dynamic-back-btn-content',
-		isProActive : getProActiveState
-	});
-
 	return (
 		<>
 			<style>
@@ -6026,6 +5731,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																}
 															/>
 														</BaseControl>
+
+														{/* <BaseControl className="fb-media-position">
+															<SelectControl
+																label={__("Media Position", "frontis-block")}
+																value={flipIconPosition}
+																options={FLIP_ICON_POSITION}
+																onChange={(value) =>
+																	setAttributes({ flipIconPosition: value })
+																}
+															/>
+														</BaseControl> */}
 
 														{(flipIconPosition === 'left' || flipIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
@@ -6207,83 +5923,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														title={__("Title", "frontis-block")}
 														initialOpen={false}
 													>
-														<ToggleControl
-															label={__("Show Title", "frontis-block")}
-															checked={titleSwitcher}
-															onChange={(value) =>
-																setAttributes({ titleSwitcher: value })
-															}
+														<FB_AlignmentControl
+															label={__("Heading Alignment", "frontis-blocks")}
+															globalAlignment={Alignment}
+															setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
 														/>
-														{titleSwitcher && (
 
-															<>	
-																<FB_AlignmentControl
-																	label={__("Heading Alignment", "frontis-blocks")}
-																	globalAlignment={Alignment}
-																	setGlobalAlignment={(value) => setAttributes({ Alignment: value })}
-																/>
+														<FB_HtmlTagControl
+															label={__("Heading Tag", "frontis-blocks")}
+															globalHtmlTag={headingTag}
+															setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
+														/>
 
-																<FB_HtmlTagControl
-																	label={__("Heading Tag", "frontis-blocks")}
-																	globalHtmlTag={headingTag}
-																	setGlobalHtmlTag={(value) => setAttributes({ headingTag: value })}
-																/>
-
-																{dynamicTitleContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-												
-																<DynamicDataSourceControl
-																	enabled={dynamicTitleEnabled}
-																	
-																	source={dynamicTitleSource}
-																	setSource={(value) => setAttributes({ dynamicTitleSource: value })}
-																	postId={dynamicTitlePostId}
-																	setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
-																	postType={dynamicTitlePostType}
-																	setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
-																	postLabel={dynamicTitlePostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
-
-																	field={dynamicTitleField}
-																	setField={(value) => setAttributes({ dynamicTitleField: value })}
-																	featuredImageField={dynamicTitleFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
-
-																	dateType={dynamicTitleDateType}
-																	setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
-																	dateFormat={dynamicTitleDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
-																	timeType={dynamicTitleTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
-																	timeFormat={dynamicTitleTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
-
-																	commentsZeroText={dynamicTitleCommentsZeroText}
-																	setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
-																	commentsOneText={dynamicTitleCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
-																	commentsManyText={dynamicTitleCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicTitleTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
-																	termsSeparator={dynamicTitleTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
-																/>
-																{!dynamicTitleEnabled && (
-																	<TextareaControl
-																		label={__("Heading Text", "frontis-block")}
-																		value={Heading_Text}
-																		onChange={(value) =>
-																			setAttributes({ Heading_Text: value })
-																		}
-																		className="fb-setting-text"
-																	/>
-																)}
-															</>
-														)}
-														
+														<TextareaControl
+															label={__("Heading Text", "frontis-block")}
+															value={Heading_Text}
+															onChange={(value) =>
+																setAttributes({ Heading_Text: value })
+															}
+															className="fb-setting-text"
+														/>
 													</PanelBody>
 												</div>
 												<div className="fb-advanced-wrapper">
@@ -6307,58 +5966,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignment: value })}
 																/>
 
-																{dynamicDescriptionContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-
-																<DynamicDataSourceControl
-																	enabled={dynamicDescriptionEnabled}
-																	
-																	source={dynamicDescriptionSource}
-																	setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
-																	postId={dynamicDescriptionPostId}
-																	setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
-																	postType={dynamicDescriptionPostType}
-																	setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
-																	postLabel={dynamicDescriptionPostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
-
-																	field={dynamicDescriptionField}
-																	setField={(value) => setAttributes({ dynamicDescriptionField: value })}
-																	featuredImageField={dynamicDescriptionFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
-
-																	dateType={dynamicDescriptionDateType}
-																	setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
-																	dateFormat={dynamicDescriptionDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
-																	timeType={dynamicDescriptionTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
-																	timeFormat={dynamicDescriptionTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
-
-																	commentsZeroText={dynamicDescriptionCommentsZeroText}
-																	setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
-																	commentsOneText={dynamicDescriptionCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
-																	commentsManyText={dynamicDescriptionCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicDescriptionTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
-																	termsSeparator={dynamicDescriptionTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
+																<TextareaControl
+																	label={__("Description Text", "frontis-block")}
+																	value={Sub_Heading_Text}
+																	onChange={(value) =>
+																		setAttributes({ Sub_Heading_Text: value })
+																	}
+																	className="fb-sub-heading-text"
 																/>
-																{!dynamicDescriptionEnabled && (
-																	<TextareaControl
-																		label={__("Description Text", "frontis-block")}
-																		value={Sub_Heading_Text}
-																		onChange={(value) =>
-																			setAttributes({ Sub_Heading_Text: value })
-																		}
-																		className="fb-sub-heading-text"
-																	/>
-																)}
 															</>
 														)}
 													</PanelBody>
@@ -6386,58 +6001,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	globalAlignment={buttonAlignment}
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignment: value })}
 																/>
-																{dynamicBtnContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-												
-																<DynamicDataSourceControl
-																	enabled={dynamicBtnEnabled}
-																	
-																	source={dynamicBtnSource}
-																	setSource={(value) => setAttributes({ dynamicBtnSource: value })}
-																	postId={dynamicBtnPostId}
-																	setPostId={(value) => setAttributes({ dynamicBtnPostId: value })}
-																	postType={dynamicBtnPostType}
-																	setPostType={(value) => setAttributes({ dynamicBtnPostType: value })}
-																	postLabel={dynamicBtnPostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicBtnPostLabel: value })}
-
-																	field={dynamicBtnField}
-																	setField={(value) => setAttributes({ dynamicBtnField: value })}
-																	featuredImageField={dynamicBtnFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicBtnFeaturedImageField: value })}
-
-																	dateType={dynamicBtnDateType}
-																	setDateType={(value) => setAttributes({ dynamicBtnDateType: value })}
-																	dateFormat={dynamicBtnDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicBtnDateFormat: value })}
-																	timeType={dynamicBtnTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicBtnTimeType: value })}
-																	timeFormat={dynamicBtnTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicBtnTimeFormat: value })}
-
-																	commentsZeroText={dynamicBtnCommentsZeroText}
-																	setCommentsZeroText={(value) => setAttributes({ dynamicBtnCommentsZeroText: value })}
-																	commentsOneText={dynamicBtnCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicBtnCommentsOneText: value })} 
-																	commentsManyText={dynamicBtnCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicBtnCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicBtnTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTermsTaxonomy: value })}
-																	termsSeparator={dynamicBtnTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicBtnTermsSeparator: value })}
+																<TextareaControl
+																	label={__("Button Text", "frontis-block")}
+																	value={flip_Button_Text}
+																	onChange={(value) =>
+																		setAttributes({ flip_Button_Text: value })
+																	}
+																	className="fb-flip-button-text"
 																/>
-																{!dynamicBtnEnabled && (
-																	<TextareaControl
-																		label={__("Button Text", "frontis-block")}
-																		value={flip_Button_Text}
-																		onChange={(value) =>
-																			setAttributes({ flip_Button_Text: value })
-																		}
-																		className="fb-flip-button-text"
-																	/>
-																)}
 																<ToggleControl
 																	label={__("Show Icon", "frontis-block")}
 																	checked={buttonIconSwitcher}
@@ -6463,6 +6034,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		/>
 																	</>
 																)}
+
 																<BaseControl>
 																	<FB_UrlControl
 																		url={flipButtonLink}
@@ -6505,6 +6077,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																}
 															/>
 														</BaseControl>
+
+														{/* <BaseControl className="fb-media-position">
+															<SelectControl
+																label={__("Media Position", "frontis-block")}
+																value={flipBackIconPosition}
+																options={FLIP_ICON_POSITION}
+																onChange={(value) =>
+																	setAttributes({ flipBackIconPosition: value })
+																}
+															/>
+														</BaseControl> */}
 
 														{(flipBackIconPosition === 'left' || flipBackIconPosition === 'right') && (
 															<BaseControl className="fb-media-vertical-position">
@@ -6686,90 +6269,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 														title={__("Title", "frontis-block")}
 														initialOpen={false}
 													>
-														<ToggleControl
-															label={__("Show Title", "frontis-block")}
-															checked={titleSwitcherBack}
-															onChange={(value) =>
-																setAttributes({ titleSwitcherBack: value })
-															}
+														<FB_AlignmentControl
+															label={__("Heading Alignment", "frontis-blocks")}
+															globalAlignment={titleAlignmentBack}
+															setGlobalAlignment={(value) => setAttributes({ titleAlignmentBack: value })}
 														/>
-														{titleSwitcherBack && (
-															<>	
-																<FB_AlignmentControl
-																	label={__("Heading Alignment", "frontis-blocks")}
-																	globalAlignment={titleAlignmentBack}
-																	setGlobalAlignment={(value) => setAttributes({ titleAlignmentBack: value })}
-																/>
 
-																<FB_HtmlTagControl
-																	label={__("Heading Tag", "frontis-blocks")}
-																	globalHtmlTag={headingTagBack}
-																	setGlobalHtmlTag={(value) => setAttributes({ headingTagBack: value })}
-																/>
+														<FB_HtmlTagControl
+															label={__("Heading Tag", "frontis-blocks")}
+															globalHtmlTag={headingTagBack}
+															setGlobalHtmlTag={(value) => setAttributes({ headingTagBack: value })}
+														/>
 
-																{dynamicBackTitleContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-												
-																<DynamicDataSourceControl
-																	enabled={dynamicBackTitleEnabled}
-																	
-																	source={dynamicBackTitleSource}
-																	setSource={(value) => setAttributes({ dynamicBackTitleSource: value })}
-																	postId={dynamicBackTitlePostId}
-																	setPostId={(value) => setAttributes({ dynamicBackTitlePostId: value })}
-																	postType={dynamicBackTitlePostType}
-																	setPostType={(value) => setAttributes({ dynamicBackTitlePostType: value })}
-																	postLabel={dynamicBackTitlePostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicBackTitlePostLabel: value })}
-
-																	field={dynamicBackTitleField}
-																	setField={(value) => setAttributes({ dynamicBackTitleField: value })}
-																	featuredImageField={dynamicBackTitleFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicBackTitleFeaturedImageField: value })}
-
-																	dateType={dynamicBackTitleDateType}
-																	setDateType={(value) => setAttributes({ dynamicBackTitleDateType: value })}
-																	dateFormat={dynamicBackTitleDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicBackTitleDateFormat: value })}
-																	timeType={dynamicBackTitleTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicBackTitleTimeType: value })}
-																	timeFormat={dynamicBackTitleTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicBackTitleTimeFormat: value })}
-
-																	commentsZeroText={dynamicBackTitleCommentsZeroText}
-																	setCommentsZeroText={(value) => setAttributes({ dynamicBackTitleCommentsZeroText: value })}
-																	commentsOneText={dynamicBackTitleCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicBackTitleCommentsOneText: value })}
-																	commentsManyText={dynamicBackTitleCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicBackTitleCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicBackTitleTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackTitleTermsTaxonomy: value })}
-																	termsSeparator={dynamicBackTitleTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicBackTitleTermsSeparator: value })}
-																/>
-																{dynamicBackTitleEnabled && (
-																	<DynamicDataLinkControl
-																		enableLink={dynamicBackTitleEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicBackTitleEnableLink: value })}
-																		linkSource={dynamicBackTitleLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicBackTitleLinkSource: value })}
-																	/>
-																)}
-																{!dynamicBackTitleEnabled && (
-																	<TextareaControl
-																		label={__("Heading Text", "frontis-block")}
-																		value={headingTextBack}
-																		onChange={(value) =>
-																			setAttributes({ headingTextBack: value })
-																		}
-																		className="fb-setting-text"
-																	/>
-																)}
-															</>
-														)}
-														
+														<TextareaControl
+															label={__("Heading Text", "frontis-block")}
+															value={headingTextBack}
+															onChange={(value) =>
+																setAttributes({ headingTextBack: value })
+															}
+															className="fb-setting-text"
+														/>
 													</PanelBody>
 												</div>
 												<div className="fb-advanced-wrapper">
@@ -6794,67 +6313,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	setGlobalAlignment={(value) => setAttributes({ descAlignmentBack: value })}
 																/>
 
-																{dynamicBackDescriptionContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-
-																<DynamicDataSourceControl
-																	enabled={dynamicBackDescriptionEnabled}
-																	
-																	source={dynamicBackDescriptionSource}
-																	setSource={(value) => setAttributes({ dynamicBackDescriptionSource: value })}
-																	postId={dynamicBackDescriptionPostId}
-																	setPostId={(value) => setAttributes({ dynamicBackDescriptionPostId: value })}
-																	postType={dynamicBackDescriptionPostType}
-																	setPostType={(value) => setAttributes({ dynamicBackDescriptionPostType: value })}
-																	postLabel={dynamicBackDescriptionPostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicBackDescriptionPostLabel: value })}
-
-																	field={dynamicBackDescriptionField}
-																	setField={(value) => setAttributes({ dynamicBackDescriptionField: value })}
-																	featuredImageField={dynamicBackDescriptionFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicBackDescriptionFeaturedImageField: value })}
-
-																	dateType={dynamicBackDescriptionDateType}
-																	setDateType={(value) => setAttributes({ dynamicBackDescriptionDateType: value })}
-																	dateFormat={dynamicBackDescriptionDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicBackDescriptionDateFormat: value })}
-																	timeType={dynamicBackDescriptionTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicBackDescriptionTimeType: value })}
-																	timeFormat={dynamicBackDescriptionTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicBackDescriptionTimeFormat: value })}
-
-																	commentsZeroText={dynamicBackDescriptionCommentsZeroText}	
-																	setCommentsZeroText={(value) => setAttributes({ dynamicBackDescriptionCommentsZeroText: value })}
-																	commentsOneText={dynamicBackDescriptionCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicBackDescriptionCommentsOneText: value })}
-																	commentsManyText={dynamicBackDescriptionCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicBackDescriptionCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicBackDescriptionTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackDescriptionTermsTaxonomy: value })}
-																	termsSeparator={dynamicBackDescriptionTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicBackDescriptionTermsSeparator: value })}
+																<TextareaControl
+																	label={__("Description Text", "frontis-block")}
+																	value={flipBackContent}
+																	onChange={(value) =>
+																		setAttributes({ flipBackContent: value })
+																	}
+																	className="fb-sub-heading-text"
 																/>
-
-																{dynamicBackDescriptionEnabled && ( 
-																	<DynamicDataLinkControl
-																		enableLink={dynamicBackDescriptionEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicBackDescriptionEnableLink: value })}
-																		linkSource={dynamicBackDescriptionLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicBackDescriptionLinkSource: value })}
-																	/>
-																)}
-																{!dynamicBackDescriptionEnabled && (
-																	<TextareaControl
-																		label={__("Description Text", "frontis-block")}
-																		value={flipBackContent}
-																		onChange={(value) =>
-																			setAttributes({ flipBackContent: value })
-																		}
-																		className="fb-sub-heading-text"
-																	/>
-																)}
 															</>
 														)}
 													</PanelBody>
@@ -6882,59 +6348,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																	globalAlignment={buttonAlignmentBack}
 																	setGlobalAlignment={(value) => setAttributes({ buttonAlignmentBack: value })}
 																/>
-
-																{dynamicBackBtnContentToggleControls.map((control, index) => (
-																	<div key={control.key || index}>{control.comp}</div>
-																))}
-												
-																<DynamicDataSourceControl
-																	enabled={dynamicBackBtnEnabled}
-																	
-																	source={dynamicBackBtnSource}
-																	setSource={(value) => setAttributes({ dynamicBackBtnSource: value })}
-																	postId={dynamicBackBtnPostId}
-																	setPostId={(value) => setAttributes({ dynamicBackBtnPostId: value })}
-																	postType={dynamicBackBtnPostType}
-																	setPostType={(value) => setAttributes({ dynamicBackBtnPostType: value })}
-																	postLabel={dynamicBackBtnPostLabel}
-																	setPostLabel={(value) => setAttributes({ dynamicBackBtnPostLabel: value })}
-
-																	field={dynamicBackBtnField}
-																	setField={(value) => setAttributes({ dynamicBackBtnField: value })}
-																	featuredImageField={dynamicBackBtnFeaturedImageField}
-																	setFeaturedImageField={(value) => setAttributes({ dynamicBackBtnFeaturedImageField: value })}
-
-																	dateType={dynamicBackBtnDateType}
-																	setDateType={(value) => setAttributes({ dynamicBackBtnDateType: value })}
-																	dateFormat={dynamicBackBtnDateFormat}
-																	setDateFormat={(value) => setAttributes({ dynamicBackBtnDateFormat: value })}
-																	timeType={dynamicBackBtnTimeType}
-																	setTimeType={(value) => setAttributes({ dynamicBackBtnTimeType: value })}
-																	timeFormat={dynamicBackBtnTimeFormat}
-																	setTimeFormat={(value) => setAttributes({ dynamicBackBtnTimeFormat: value })}
-
-																	commentsZeroText={dynamicBackBtnCommentsZeroText}
-																	setCommentsZeroText={(value) => setAttributes({ dynamicBackBtnCommentsZeroText: value })}
-																	commentsOneText={dynamicBackBtnCommentsOneText}
-																	setCommentsOneText={(value) =>setAttributes({ dynamicBackBtnCommentsOneText: value })} 
-																	commentsManyText={dynamicBackBtnCommentsManyText}
-																	setCommentsManyText={(value) =>setAttributes({ dynamicBackBtnCommentsManyText: value })}
-
-																	termsTaxonomy={dynamicBackBtnTermsTaxonomy}
-																	setTermsTaxonomy={(value) => setAttributes({ dynamicBackBtnTermsTaxonomy: value })}
-																	termsSeparator={dynamicBackBtnTermsSeparator}
-																	setTermsSeparator={(value) => setAttributes({ dynamicBackBtnTermsSeparator: value })}
+																<TextareaControl
+																	label={__("Button Text", "frontis-block")}
+																	value={flipBack_Button_Text}
+																	onChange={(value) =>
+																		setAttributes({ flipBack_Button_Text: value })
+																	}
+																	className="fb-flipBack-button-text"
 																/>
-																{!dynamicBackBtnEnabled && (
-																	<TextareaControl
-																		label={__("Button Text", "frontis-block")}
-																		value={flipBack_Button_Text}
-																		onChange={(value) =>
-																			setAttributes({ flipBack_Button_Text: value })
-																		}
-																		className="fb-flipBack-button-text"
-																	/>
-																)}
 																<ToggleControl
 																	label={__("Show Icon", "frontis-block")}
 																	checked={buttonIconSwitcherBack}
@@ -6960,28 +6381,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 																		/>
 																	</>
 																)}
-																{dynamicBackBtnEnabled && ( 
-																	<DynamicDataLinkControl
-																		enableLink={dynamicBackBtnEnableLink}
-																		setEnableLink={(value) => setAttributes({ dynamicBackBtnEnableLink: value })}
-																		linkSource={dynamicBackBtnLinkSource}
-																		setLinkSource={(value) => setAttributes({ dynamicBackBtnLinkSource: value })}
+
+																<BaseControl>
+																	<FB_UrlControl
+																		url={flipBackButtonLink}
+																		onChangeUrl={(value) =>
+																			setAttributes({ flipBackButtonLink: value })
+																		}
+																		openInNewTab={flipBackbtnTargetUrl}
+																		onChangeOpenInNewTab={(value) =>
+																			setAttributes({ flipBackbtnTargetUrl: value })
+																		}
 																	/>
-																)}
-																{!dynamicBackBtnEnableLink && (
-																	<BaseControl>
-																		<FB_UrlControl
-																			url={flipBackButtonLink}
-																			onChangeUrl={(value) =>
-																				setAttributes({ flipBackButtonLink: value })
-																			}
-																			openInNewTab={flipBackbtnTargetUrl}
-																			onChangeOpenInNewTab={(value) =>
-																				setAttributes({ flipBackbtnTargetUrl: value })
-																			}
-																		/>
-																	</BaseControl>
-																)}
+																</BaseControl>
 															</>
 														)}
 													</PanelBody>
@@ -7183,416 +6595,410 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 												{/*Image/Icon Style*/}
-												{mediaSwitcher !== "none"  && (
-													<PanelBody
-														title={__("Image/Icon", "frontis-block")}
-														initialOpen={false}
-													>
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Size", "frontis-blocks")}
-															rangeValue={mediaSize}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaSize: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaSizeUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaSizeUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
-														/>
+												<PanelBody
+													title={__("Image/Icon", "frontis-block")}
+													initialOpen={false}
+												>
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Size", "frontis-blocks")}
+														rangeValue={mediaSize}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaSize: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaSizeUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaSizeUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
 
-														{/*Icon Color */}
-														{mediaSwitcher === "icon" && (
-															<>
-																<FB_SwitcherControl
-																	label={__("Icon Color", "frontis-blocks")}
-																	globalSwitcher={mediaIconColorSwitcher}
-																	setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
+													{/*Icon Color */}
+													{mediaSwitcherBack === "icon" && (
+														<>
+															<FB_SwitcherControl
+																label={__("Icon Color", "frontis-blocks")}
+																globalSwitcher={mediaIconColorSwitcher}
+																setGlobalSwitcher={(value) => setAttributes({ mediaIconColorSwitcher: value })}
+															/>
+
+															{mediaIconColorSwitcher === 'normal' && (
+																<FB_ColorControl
+																	label={__("Normal Color", "frontis-blocks")}
+																	globalColor={mediaIconColor}
+																	setGlobalColor={(value) => setAttributes({ mediaIconColor: value === undefined ? '' : value })}
 																/>
+															)}
 
-																{mediaIconColorSwitcher === 'normal' && (
-																	<FB_ColorControl
-																		label={__("Normal Color", "frontis-blocks")}
-																		globalColor={mediaIconColor}
-																		setGlobalColor={(value) => setAttributes({ mediaIconColor: value === undefined ? '' : value })}
-																	/>
-																)}
+															{mediaIconColorSwitcher === 'hover' && (
+																<FB_ColorControl
+																	label={__("Hover Color", "frontis-blocks")}
+																	globalColor={mediaIconHoverColor}
+																	setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value === undefined ? '' : value })}
+																/>
+															)}
+														</>
+													)}
+													<FB_BackgroundColorControl
+														bgColorSwitcher={mediaBackColorSwitcher}
+														setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
+														normalBackgroundType={mediaBackgroundType}
+														setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
+														normalClassicColor={mediaClassicColor}
+														setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
+														normalGradientColor={mediaGradientColor}
+														setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? null : value })}
+														normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
+														normalCustomGradientInputValue={mediaCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value })}
+														normalBackgroundImageUrl={mediaBackgroundImageUrl}
+														setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
+														normalBackgroundImageAlt={mediaBackgroundImageAlt}
+														setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
+														normalBackgroundImageID={mediaBackgroundImageID}
+														setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
+														normalBackgroundImagePosition={mediaBackgroundImagePosition}
+														setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value })}
+														normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
+														setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value })}
+														normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
+														setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value })}
+														normalBackgroundImageSize={mediaBackgroundImageSize}
+														setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value })}
+														hoverBackgroundType={mediaHoverBackgroundType}
+														setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
+														hoverClassicColor={mediaHoverClassicColor}
+														setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
+														hoverGradientColor={mediaHoverGradientColor}
+														setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? null : value })}
+														hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
+														hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value })}
+														hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
+														setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
+														hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
+														setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
+														hoverBackgroundImageID={mediaHoverBackgroundImageID}
+														setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
+														hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
+														setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value })}
+														hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
+														setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value })}
+														hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
+														setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value })}
+														hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
+														setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value })}
+													/>
 
-																{mediaIconColorSwitcher === 'hover' && (
-																	<FB_ColorControl
-																		label={__("Hover Color", "frontis-blocks")}
-																		globalColor={mediaIconHoverColor}
-																		setGlobalColor={(value) => setAttributes({ mediaIconHoverColor: value === undefined ? '' : value })}
-																	/>
-																)}
-															</>
-														)}
-														<FB_BackgroundColorControl
-															bgColorSwitcher={mediaBackColorSwitcher}
-															setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
-															normalBackgroundType={mediaBackgroundType}
-															setNormalBackgroundType={(value) => setAttributes({ mediaBackgroundType: value })}
-															normalClassicColor={mediaClassicColor}
-															setNormalClassicColor={(value) => setAttributes({ mediaClassicColor: value === undefined ? '' : value })}
-															normalGradientColor={mediaGradientColor}
-															setNormalGradientColor={(value) => setAttributes({ mediaGradientColor: value === undefined ? null : value })}
-															normalCustomGradientSwitcher={mediaCustomGradientSwitcher}
-															setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaCustomGradientSwitcher: value })}
-															normalCustomGradientInputValue={mediaCustomGradientInputValue}
-															setNormalCustomGradientInputValue={(value) => setAttributes({ mediaCustomGradientInputValue: value })}
-															normalBackgroundImageUrl={mediaBackgroundImageUrl}
-															setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackgroundImageUrl: value })}
-															normalBackgroundImageAlt={mediaBackgroundImageAlt}
-															setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackgroundImageAlt: value })}
-															normalBackgroundImageID={mediaBackgroundImageID}
-															setNormalBackgroundImageID={(value) => setAttributes({ mediaBackgroundImageID: value })}
-															normalBackgroundImagePosition={mediaBackgroundImagePosition}
-															setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackgroundImagePosition: value })}
-															normalBackgroundImageAttachment={mediaBackgroundImageAttachment}
-															setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackgroundImageAttachment: value })}
-															normalBackgroundImageRepeat={mediaBackgroundImageRepeat}
-															setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackgroundImageRepeat: value })}
-															normalBackgroundImageSize={mediaBackgroundImageSize}
-															setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackgroundImageSize: value })}
-															hoverBackgroundType={mediaHoverBackgroundType}
-															setHoverBackgroundType={(value) => setAttributes({ mediaHoverBackgroundType: value })}
-															hoverClassicColor={mediaHoverClassicColor}
-															setHoverClassicColor={(value) => setAttributes({ mediaHoverClassicColor: value === undefined ? '' : value })}
-															hoverGradientColor={mediaHoverGradientColor}
-															setHoverGradientColor={(value) => setAttributes({ mediaHoverGradientColor: value === undefined ? null : value })}
-															hoverCustomGradientSwitcher={mediaHoverCustomGradientSwitcher}
-															setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaHoverCustomGradientSwitcher: value })}
-															hoverCustomGradientInputValue={mediaHoverCustomGradientInputValue}
-															setHoverCustomGradientInputValue={(value) => setAttributes({ mediaHoverCustomGradientInputValue: value })}
-															hoverBackgroundImageUrl={mediaHoverBackgroundImageUrl}
-															setHoverBackgroundImageUrl={(value) => setAttributes({ mediaHoverBackgroundImageUrl: value })}
-															hoverBackgroundImageAlt={mediaHoverBackgroundImageAlt}
-															setHoverBackgroundImageAlt={(value) => setAttributes({ mediaHoverBackgroundImageAlt: value })}
-															hoverBackgroundImageID={mediaHoverBackgroundImageID}
-															setHoverBackgroundImageID={(value) => setAttributes({ mediaHoverBackgroundImageID: value })}
-															hoverBackgroundImagePosition={mediaHoverBackgroundImagePosition}
-															setHoverBackgroundImagePosition={(value) => setAttributes({ mediaHoverBackgroundImagePosition: value })}
-															hoverBackgroundImageAttachment={mediaHoverBackgroundImageAttachment}
-															setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaHoverBackgroundImageAttachment: value })}
-															hoverBackgroundImageRepeat={mediaHoverBackgroundImageRepeat}
-															setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaHoverBackgroundImageRepeat: value })}
-															hoverBackgroundImageSize={mediaHoverBackgroundImageSize}
-															setHoverBackgroundImageSize={(value) => setAttributes({ mediaHoverBackgroundImageSize: value })}
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Background Width", "frontis-blocks")}
+														rangeValue={mediaBgWidth}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaBgWidth: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaBgWidthUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaBgWidthUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
+
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Background Height", "frontis-blocks")}
+														rangeValue={mediaBgHeight}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaBgHeight: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaBgHeightUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaBgHeightUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
+
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaPaddingUnitsHandler}
+														spacingUnits={mediaPaddingUnits}
+														spacingDesktop={mediaPaddingDesktop}
+														spacingTablet={mediaPaddingTablet}
+														spacingMobile={mediaPaddingMobile}
+														handleSpacingUnitHandler={handleMediaPaddingUnitChange}
+														spacingCombineBtn={mediaPaddingLink}
+														spacingCombineBtnHandler={handleMediaPaddingCombineBtn}
+														setAttributes={setAttributes}
+													/>
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaMarginUnitsHandler}
+														spacingUnits={mediaMarginUnits}
+														spacingDesktop={mediaMarginDesktop}
+														spacingTablet={mediaMarginTablet}
+														spacingMobile={mediaMarginMobile}
+														handleSpacingUnitHandler={handleMediaMarginUnitChange}
+														spacingCombineBtn={mediaMarginLink}
+														spacingCombineBtnHandler={handleMediaMarginCombineBtn}
+														setAttributes={setAttributes}
+													/>
+
+													<SelectControl
+														label={__("Border Style", "frontis-block")}
+														value={mediaBorder}
+														options={BORDER_STYLES}
+														onChange={(value) =>
+															setAttributes({ mediaBorder: value })
+														}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Border Color", "frontis-blocks")}
+														globalSwitcher={mediaBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
+													/>
+
+													{mediaBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={mediaBorderColor}
+															setGlobalColor={(value) => setAttributes({ mediaBorderColor: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Background Width", "frontis-blocks")}
-															rangeValue={mediaBgWidth}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaBgWidth: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaBgWidthUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaBgWidthUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
+													{mediaBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={mediaBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Background Height", "frontis-blocks")}
-															rangeValue={mediaBgHeight}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaBgHeight: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaBgHeightUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaBgHeightUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
-														/>
+													<FB_Spacing
+														label={__("Border", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaBorderUnitsHandler}
+														spacingUnits={mediaBorderUnits}
+														spacingDesktop={mediaBorderDesktop}
+														spacingTablet={mediaBorderTablet}
+														spacingMobile={mediaBorderMobile}
+														handleSpacingUnitHandler={handleMediaBorderUnitChange}
+														spacingCombineBtn={mediaBorderLink}
+														spacingCombineBtnHandler={handleMediaBorderCombineBtn}
+														setAttributes={setAttributes}
+													/>
 
-														<FB_Spacing
-															label={__("Padding", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaPaddingUnitsHandler}
-															spacingUnits={mediaPaddingUnits}
-															spacingDesktop={mediaPaddingDesktop}
-															spacingTablet={mediaPaddingTablet}
-															spacingMobile={mediaPaddingMobile}
-															handleSpacingUnitHandler={handleMediaPaddingUnitChange}
-															spacingCombineBtn={mediaPaddingLink}
-															spacingCombineBtnHandler={handleMediaPaddingCombineBtn}
-															setAttributes={setAttributes}
-														/>
-														<FB_Spacing
-															label={__("Margin", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaMarginUnitsHandler}
-															spacingUnits={mediaMarginUnits}
-															spacingDesktop={mediaMarginDesktop}
-															spacingTablet={mediaMarginTablet}
-															spacingMobile={mediaMarginMobile}
-															handleSpacingUnitHandler={handleMediaMarginUnitChange}
-															spacingCombineBtn={mediaMarginLink}
-															spacingCombineBtnHandler={handleMediaMarginCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<SelectControl
-															label={__("Border Style", "frontis-block")}
-															value={mediaBorder}
-															options={BORDER_STYLES}
-															onChange={(value) =>
-																setAttributes({ mediaBorder: value })
-															}
-														/>
-
-														<FB_SwitcherControl
-															label={__("Border Color", "frontis-blocks")}
-															globalSwitcher={mediaBorderColorSwitcher}
-															setGlobalSwitcher={(value) => setAttributes({ mediaBorderColorSwitcher: value })}
-														/>
-
-														{mediaBorderColorSwitcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={mediaBorderColor}
-																setGlobalColor={(value) => setAttributes({ mediaBorderColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														{mediaBorderColorSwitcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={mediaBorderHoverColor}
-																setGlobalColor={(value) => setAttributes({ mediaBorderHoverColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														<FB_Spacing
-															label={__("Border", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaBorderUnitsHandler}
-															spacingUnits={mediaBorderUnits}
-															spacingDesktop={mediaBorderDesktop}
-															spacingTablet={mediaBorderTablet}
-															spacingMobile={mediaBorderMobile}
-															handleSpacingUnitHandler={handleMediaBorderUnitChange}
-															spacingCombineBtn={mediaBorderLink}
-															spacingCombineBtnHandler={handleMediaBorderCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_Spacing
-															label={__("Border Radius", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={
-																handleMediaBorderRadiusUnitsHandler
-															}
-															spacingUnits={mediaBorderRadiusUnits}
-															spacingDesktop={mediaBorderRadiusDesktop}
-															spacingTablet={mediaBorderRadiusTablet}
-															spacingMobile={mediaBorderRadiusMobile}
-															handleSpacingUnitHandler={
-																handleMediaBorderRadiusUnitChange
-															}
-															spacingCombineBtn={mediaBorderRadiusLink}
-															spacingCombineBtnHandler={
-																handleMediaBorderRadiusCombineBtn
-															}
-															setAttributes={setAttributes}
-														/>
-													</PanelBody>
-												)}
-												
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleMediaBorderRadiusUnitsHandler
+														}
+														spacingUnits={mediaBorderRadiusUnits}
+														spacingDesktop={mediaBorderRadiusDesktop}
+														spacingTablet={mediaBorderRadiusTablet}
+														spacingMobile={mediaBorderRadiusMobile}
+														handleSpacingUnitHandler={
+															handleMediaBorderRadiusUnitChange
+														}
+														spacingCombineBtn={mediaBorderRadiusLink}
+														spacingCombineBtnHandler={
+															handleMediaBorderRadiusCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
 												{/*Heading Style*/}
-												{titleSwitcher && (
-													<PanelBody
-														title={__("Title", "frontis-block")}
-														initialOpen={false}
-													>
-														<FB_TypographyControl
-															globalTypoControlActive={true}
-															globalTypoSwitcher={headingGlobalTypoSwitcher}
-															storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
+												<PanelBody
+													title={__("Title", "frontis-block")}
+													initialOpen={false}
+												>
+													<FB_TypographyControl
+														globalTypoControlActive={true}
+														globalTypoSwitcher={headingGlobalTypoSwitcher}
+														storeGlobalTypographyData={(value) => setAttributes({ headingGlobalTypographyData: value })}
 
-															globalTypoType={headingGlobalTypoType}
-															onChangeGlobalTypoType={(value) => {
-																setAttributes({
-																	headingGlobalTypoType: value,
-																	headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
-																})
-															}}
+														globalTypoType={headingGlobalTypoType}
+														onChangeGlobalTypoType={(value) => {
+															setAttributes({
+																headingGlobalTypoType: value,
+																headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+															})
+														}}
 
-															globalTypoOption={headingGlobalTypoOption}
-															onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
+														globalTypoOption={headingGlobalTypoOption}
+														onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
-															fontFamily={headingFontFamily}
-															onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
+														fontFamily={headingFontFamily}
+														onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
 
-															fontSize={headingFontSize}
-															onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
+														fontSize={headingFontSize}
+														onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
 
-															fontSizeUnits={headingFontSizeUnits}
-															onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
+														fontSizeUnits={headingFontSizeUnits}
+														onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
-															fontWeight={headingFontWeight}
-															onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
+														fontWeight={headingFontWeight}
+														onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
 
-															fontStyle={headingFontStyle}
-															onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
+														fontStyle={headingFontStyle}
+														onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
 
-															textTransform={headingTextTransform}
-															onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
+														textTransform={headingTextTransform}
+														onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
 
-															textDecoration={headingTextDecoration}
-															onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
+														textDecoration={headingTextDecoration}
+														onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
 
-															letterSpacing={headingLetterSpacing}
-															onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
+														letterSpacing={headingLetterSpacing}
+														onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-															letterSpacingUnits={headingLetterSpacingUnits}
-															onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
+														letterSpacingUnits={headingLetterSpacingUnits}
+														onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
-															lineHeight={headingLineHeight}
-															onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
+														lineHeight={headingLineHeight}
+														onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
 
-															lineHeightUnits={headingLineHeightUnits}
-															onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
+														lineHeightUnits={headingLineHeightUnits}
+														onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
 
-															deviceType={deviceType}
-															setAttributes={setAttributes}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Text Color", "frontis-blocks")}
+														globalSwitcher={Heading_Color_Switcher}
+														setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
+													/>
+
+													{Heading_Color_Switcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={Heading_Color}
+															setGlobalColor={(value) => setAttributes({ Heading_Color: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_SwitcherControl
-															label={__("Text Color", "frontis-blocks")}
-															globalSwitcher={Heading_Color_Switcher}
-															setGlobalSwitcher={(value) => setAttributes({ Heading_Color_Switcher: value })}
+													{Heading_Color_Switcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={Heading_Hover_Color}
+															setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value === undefined ? '' : value })}
 														/>
+													)}
 
-														{Heading_Color_Switcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={Heading_Color}
-																setGlobalColor={(value) => setAttributes({ Heading_Color: value === undefined ? '' : value })}
-															/>
-														)}
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
+														spacingUnits={Heading_padding_units}
+														spacingDesktop={Heading_Desktop_padding}
+														spacingTablet={Heading_Tab_padding}
+														spacingMobile={Heading_Mobile_padding}
+														handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
+														spacingCombineBtn={paddingLink}
+														spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
+														setAttributes={setAttributes}
+													/>
 
-														{Heading_Color_Switcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={Heading_Hover_Color}
-																setGlobalColor={(value) => setAttributes({ Heading_Hover_Color: value === undefined ? '' : value })}
-															/>
-														)}
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleHeadingMarginUnitsHandler}
+														spacingUnits={Heading_Margin_Units}
+														spacingDesktop={Heading_Desktop_Margin}
+														spacingTablet={Heading_Tab_Margin}
+														spacingMobile={Heading_Mobile_Margin}
+														handleSpacingUnitHandler={handleHeadingMarginUnitChange}
+														spacingCombineBtn={Heading_Margin_Link}
+														spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
+														setAttributes={setAttributes}
+													/>
 
-														<FB_Spacing
-															label={__("Padding", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleHeadingPaddingUnitsHandler}
-															spacingUnits={Heading_padding_units}
-															spacingDesktop={Heading_Desktop_padding}
-															spacingTablet={Heading_Tab_padding}
-															spacingMobile={Heading_Mobile_padding}
-															handleSpacingUnitHandler={handleHeadingPaddingUnitChange}
-															spacingCombineBtn={paddingLink}
-															spacingCombineBtnHandler={handleHeadingPaddingCombineBtn}
-															setAttributes={setAttributes}
+													{/*Border*/}
+													<Heading>Border</Heading>
+													<SelectControl
+														label={__("Border Style", "frontis-block")}
+														value={Heading_Border}
+														options={BORDER_STYLES}
+														onChange={(value) =>
+															setAttributes({ Heading_Border: value })
+														}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Border Color", "frontis-blocks")}
+														globalSwitcher={Heading_Border_Color_Switcher}
+														setGlobalSwitcher={(value) => setAttributes({ Heading_Border_Color_Switcher: value })}
+													/>
+
+													{Heading_Border_Color_Switcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={Heading_Border_Color}
+															setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_Spacing
-															label={__("Margin", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleHeadingMarginUnitsHandler}
-															spacingUnits={Heading_Margin_Units}
-															spacingDesktop={Heading_Desktop_Margin}
-															spacingTablet={Heading_Tab_Margin}
-															spacingMobile={Heading_Mobile_Margin}
-															handleSpacingUnitHandler={handleHeadingMarginUnitChange}
-															spacingCombineBtn={Heading_Margin_Link}
-															spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
-															setAttributes={setAttributes}
+													{Heading_Border_Color_Switcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={Heading_Border_Hover_Color}
+															setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value === undefined ? '' : value })}
 														/>
+													)}
 
-														{/*Border*/}
-														<Heading>Border</Heading>
-														<SelectControl
-															label={__("Border Style", "frontis-block")}
-															value={Heading_Border}
-															options={BORDER_STYLES}
-															onChange={(value) =>
-																setAttributes({ Heading_Border: value })
-															}
-														/>
+													<FB_Spacing
+														label={__("Border Width", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleHeadingBorderUnitsHandler}
+														spacingUnits={Heading_Border_units}
+														spacingDesktop={Heading_Desktop_Border_Width}
+														spacingTablet={Heading_Tab_Border_Width}
+														spacingMobile={Heading_Mobile_Border_Width}
+														handleSpacingUnitHandler={handleHeadingBorderUnitChange}
+														spacingCombineBtn={borderLink}
+														spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
+														setAttributes={setAttributes}
+													/>
 
-														<FB_SwitcherControl
-															label={__("Border Color", "frontis-blocks")}
-															globalSwitcher={Heading_Border_Color_Switcher}
-															setGlobalSwitcher={(value) => setAttributes({ Heading_Border_Color_Switcher: value })}
-														/>
-
-														{Heading_Border_Color_Switcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={Heading_Border_Color}
-																setGlobalColor={(value) => setAttributes({ Heading_Border_Color: value === undefined ? '' : value })}
-															/>
-														)}
-
-														{Heading_Border_Color_Switcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={Heading_Border_Hover_Color}
-																setGlobalColor={(value) => setAttributes({ Heading_Border_Hover_Color: value === undefined ? '' : value })}
-															/>
-														)}
-
-														<FB_Spacing
-															label={__("Border Width", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleHeadingBorderUnitsHandler}
-															spacingUnits={Heading_Border_units}
-															spacingDesktop={Heading_Desktop_Border_Width}
-															spacingTablet={Heading_Tab_Border_Width}
-															spacingMobile={Heading_Mobile_Border_Width}
-															handleSpacingUnitHandler={handleHeadingBorderUnitChange}
-															spacingCombineBtn={borderLink}
-															spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_Spacing
-															label={__("Border Radius", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={
-																handleHeadingBorderRadiusUnitsHandler
-															}
-															spacingUnits={Heading_Border_radius_units}
-															spacingDesktop={Heading_Desktop_Border_radius_Width}
-															spacingTablet={Heading_Tab_Border_radius_Width}
-															spacingMobile={Heading_Mobile_Border_radius_Width}
-															handleSpacingUnitHandler={
-																handleHeadingBorderRadiusUnitChange
-															}
-															spacingCombineBtn={borderRadiusLink}
-															spacingCombineBtnHandler={
-																handleHeadingBorderRadiusCombineBtn
-															}
-															setAttributes={setAttributes}
-														/>
-													</PanelBody>
-												)}
-												
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleHeadingBorderRadiusUnitsHandler
+														}
+														spacingUnits={Heading_Border_radius_units}
+														spacingDesktop={Heading_Desktop_Border_radius_Width}
+														spacingTablet={Heading_Tab_Border_radius_Width}
+														spacingMobile={Heading_Mobile_Border_radius_Width}
+														handleSpacingUnitHandler={
+															handleHeadingBorderRadiusUnitChange
+														}
+														spacingCombineBtn={borderRadiusLink}
+														spacingCombineBtnHandler={
+															handleHeadingBorderRadiusCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
 												{/*Description Style*/}
 												{descSwitcher && (
 													<PanelBody
@@ -8186,453 +7592,447 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 													/>
 												</PanelBody>
 												{/*Image/Icon Style*/}
-												{mediaSwitcherBack !== "none" && (
-													<PanelBody
-														title={__("Image/Icon", "frontis-block")}
-														initialOpen={false}
-													>
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Size", "frontis-blocks")}
-															rangeValue={mediaBackSize}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaBackSize: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaBackSizeUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaBackSizeUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
-														/>
+												<PanelBody
+													title={__("Image/Icon", "frontis-block")}
+													initialOpen={false}
+												>
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Size", "frontis-blocks")}
+														rangeValue={mediaBackSize}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaBackSize: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaBackSizeUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaBackSizeUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
 
-														{/*Icon Color */}
-														{mediaSwitcherBack === "icon" && (
-															<>
-																<FB_SwitcherControl
-																	label={__("Icon Color", "frontis-blocks")}
-																	globalSwitcher={mediaBackIconColorSwitcher}
-																	setGlobalSwitcher={(value) => setAttributes({ mediaBackIconColorSwitcher: value })}
+													{/*Icon Color */}
+													{mediaSwitcherBack === "icon" && (
+														<>
+															<FB_SwitcherControl
+																label={__("Icon Color", "frontis-blocks")}
+																globalSwitcher={mediaBackIconColorSwitcher}
+																setGlobalSwitcher={(value) => setAttributes({ mediaBackIconColorSwitcher: value })}
+															/>
+
+															{mediaBackIconColorSwitcher === 'normal' && (
+																<FB_ColorControl
+																	label={__("Normal Color", "frontis-blocks")}
+																	globalColor={mediaBackIconColor}
+																	setGlobalColor={(value) => setAttributes({ mediaBackIconColor: value === undefined ? '' : value })}
 																/>
+															)}
 
-																{mediaBackIconColorSwitcher === 'normal' && (
-																	<FB_ColorControl
-																		label={__("Normal Color", "frontis-blocks")}
-																		globalColor={mediaBackIconColor}
-																		setGlobalColor={(value) => setAttributes({ mediaBackIconColor: value === undefined ? '' : value })}
-																	/>
-																)}
+															{mediaBackIconColorSwitcher === 'hover' && (
+																<FB_ColorControl
+																	label={__("Hover Color", "frontis-blocks")}
+																	globalColor={mediaBackIconHoverColor}
+																	setGlobalColor={(value) => setAttributes({ mediaBackIconHoverColor: value === undefined ? '' : value })}
+																/>
+															)}
+														</>
+													)}
+													<FB_BackgroundColorControl
+														bgColorSwitcher={mediaBackColorSwitcher}
+														setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
+														normalBackgroundType={mediaBackBackgroundType}
+														setNormalBackgroundType={(value) => setAttributes({ mediaBackBackgroundType: value })}
+														normalClassicColor={mediaBackClassicColor}
+														setNormalClassicColor={(value) => setAttributes({ mediaBackClassicColor: value === undefined ? '' : value })}
+														normalGradientColor={mediaBackGradientColor}
+														setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value === undefined ? null : value })}
+														normalCustomGradientSwitcher={mediaBackCustomGradientSwitcher}
+														setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaBackCustomGradientSwitcher: value })}
+														normalCustomGradientInputValue={mediaBackCustomGradientInputValue}
+														setNormalCustomGradientInputValue={(value) => setAttributes({ mediaBackCustomGradientInputValue: value })}
+														normalBackgroundImageUrl={mediaBackBackgroundImageUrl}
+														setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackBackgroundImageUrl: value })}
+														normalBackgroundImageAlt={mediaBackBackgroundImageAlt}
+														setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackBackgroundImageAlt: value })}
+														normalBackgroundImageID={mediaBackBackgroundImageID}
+														setNormalBackgroundImageID={(value) => setAttributes({ mediaBackBackgroundImageID: value })}
+														normalBackgroundImagePosition={mediaBackBackgroundImagePosition}
+														setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackBackgroundImagePosition: value })}
+														normalBackgroundImageAttachment={mediaBackBackgroundImageAttachment}
+														setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackBackgroundImageAttachment: value })}
+														normalBackgroundImageRepeat={mediaBackBackgroundImageRepeat}
+														setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackBackgroundImageRepeat: value })}
+														normalBackgroundImageSize={mediaBackBackgroundImageSize}
+														setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackBackgroundImageSize: value })}
+														hoverBackgroundType={mediaBackHoverBackgroundType}
+														setHoverBackgroundType={(value) => setAttributes({ mediaBackHoverBackgroundType: value })}
+														hoverClassicColor={mediaBackHoverClassicColor}
+														setHoverClassicColor={(value) => setAttributes({ mediaBackHoverClassicColor: value === undefined ? '' : value })}
+														hoverGradientColor={mediaBackHoverGradientColor}
+														setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value === undefined ? null : value })}
+														hoverCustomGradientSwitcher={mediaBackHoverCustomGradientSwitcher}
+														setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaBackHoverCustomGradientSwitcher: value })}
+														hoverCustomGradientInputValue={mediaBackHoverCustomGradientInputValue}
+														setHoverCustomGradientInputValue={(value) => setAttributes({ mediaBackHoverCustomGradientInputValue: value })}
+														hoverBackgroundImageUrl={mediaBackHoverBackgroundImageUrl}
+														setHoverBackgroundImageUrl={(value) => setAttributes({ mediaBackHoverBackgroundImageUrl: value })}
+														hoverBackgroundImageAlt={mediaBackHoverBackgroundImageAlt}
+														setHoverBackgroundImageAlt={(value) => setAttributes({ mediaBackHoverBackgroundImageAlt: value })}
+														hoverBackgroundImageID={mediaBackHoverBackgroundImageID}
+														setHoverBackgroundImageID={(value) => setAttributes({ mediaBackHoverBackgroundImageID: value })}
+														hoverBackgroundImagePosition={mediaBackHoverBackgroundImagePosition}
+														setHoverBackgroundImagePosition={(value) => setAttributes({ mediaBackHoverBackgroundImagePosition: value })}
+														hoverBackgroundImageAttachment={mediaBackHoverBackgroundImageAttachment}
+														setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaBackHoverBackgroundImageAttachment: value })}
+														hoverBackgroundImageRepeat={mediaBackHoverBackgroundImageRepeat}
+														setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaBackHoverBackgroundImageRepeat: value })}
+														hoverBackgroundImageSize={mediaBackHoverBackgroundImageSize}
+														setHoverBackgroundImageSize={(value) => setAttributes({ mediaBackHoverBackgroundImageSize: value })}
+													/>
 
-																{mediaBackIconColorSwitcher === 'hover' && (
-																	<FB_ColorControl
-																		label={__("Hover Color", "frontis-blocks")}
-																		globalColor={mediaBackIconHoverColor}
-																		setGlobalColor={(value) => setAttributes({ mediaBackIconHoverColor: value === undefined ? '' : value })}
-																	/>
-																)}
-															</>
-														)}
-														<FB_BackgroundColorControl
-															bgColorSwitcher={mediaBackColorSwitcher}
-															setBgColorSwitcher={(value) => setAttributes({ mediaBackColorSwitcher: value })}
-															normalBackgroundType={mediaBackBackgroundType}
-															setNormalBackgroundType={(value) => setAttributes({ mediaBackBackgroundType: value })}
-															normalClassicColor={mediaBackClassicColor}
-															setNormalClassicColor={(value) => setAttributes({ mediaBackClassicColor: value === undefined ? '' : value })}
-															normalGradientColor={mediaBackGradientColor}
-															setNormalGradientColor={(value) => setAttributes({ mediaBackGradientColor: value === undefined ? null : value })}
-															normalCustomGradientSwitcher={mediaBackCustomGradientSwitcher}
-															setNormalCustomGradientSwitcher={(value) => setAttributes({ mediaBackCustomGradientSwitcher: value })}
-															normalCustomGradientInputValue={mediaBackCustomGradientInputValue}
-															setNormalCustomGradientInputValue={(value) => setAttributes({ mediaBackCustomGradientInputValue: value })}
-															normalBackgroundImageUrl={mediaBackBackgroundImageUrl}
-															setNormalBackgroundImageUrl={(value) => setAttributes({ mediaBackBackgroundImageUrl: value })}
-															normalBackgroundImageAlt={mediaBackBackgroundImageAlt}
-															setNormalBackgroundImageAlt={(value) => setAttributes({ mediaBackBackgroundImageAlt: value })}
-															normalBackgroundImageID={mediaBackBackgroundImageID}
-															setNormalBackgroundImageID={(value) => setAttributes({ mediaBackBackgroundImageID: value })}
-															normalBackgroundImagePosition={mediaBackBackgroundImagePosition}
-															setNormalBackgroundImagePosition={(value) => setAttributes({ mediaBackBackgroundImagePosition: value })}
-															normalBackgroundImageAttachment={mediaBackBackgroundImageAttachment}
-															setNormalBackgroundImageAttachment={(value) => setAttributes({ mediaBackBackgroundImageAttachment: value })}
-															normalBackgroundImageRepeat={mediaBackBackgroundImageRepeat}
-															setNormalBackgroundImageRepeat={(value) => setAttributes({ mediaBackBackgroundImageRepeat: value })}
-															normalBackgroundImageSize={mediaBackBackgroundImageSize}
-															setNormalBackgroundImageSize={(value) => setAttributes({ mediaBackBackgroundImageSize: value })}
-															hoverBackgroundType={mediaBackHoverBackgroundType}
-															setHoverBackgroundType={(value) => setAttributes({ mediaBackHoverBackgroundType: value })}
-															hoverClassicColor={mediaBackHoverClassicColor}
-															setHoverClassicColor={(value) => setAttributes({ mediaBackHoverClassicColor: value === undefined ? '' : value })}
-															hoverGradientColor={mediaBackHoverGradientColor}
-															setHoverGradientColor={(value) => setAttributes({ mediaBackHoverGradientColor: value === undefined ? null : value })}
-															hoverCustomGradientSwitcher={mediaBackHoverCustomGradientSwitcher}
-															setHoverCustomGradientSwitcher={(value) => setAttributes({ mediaBackHoverCustomGradientSwitcher: value })}
-															hoverCustomGradientInputValue={mediaBackHoverCustomGradientInputValue}
-															setHoverCustomGradientInputValue={(value) => setAttributes({ mediaBackHoverCustomGradientInputValue: value })}
-															hoverBackgroundImageUrl={mediaBackHoverBackgroundImageUrl}
-															setHoverBackgroundImageUrl={(value) => setAttributes({ mediaBackHoverBackgroundImageUrl: value })}
-															hoverBackgroundImageAlt={mediaBackHoverBackgroundImageAlt}
-															setHoverBackgroundImageAlt={(value) => setAttributes({ mediaBackHoverBackgroundImageAlt: value })}
-															hoverBackgroundImageID={mediaBackHoverBackgroundImageID}
-															setHoverBackgroundImageID={(value) => setAttributes({ mediaBackHoverBackgroundImageID: value })}
-															hoverBackgroundImagePosition={mediaBackHoverBackgroundImagePosition}
-															setHoverBackgroundImagePosition={(value) => setAttributes({ mediaBackHoverBackgroundImagePosition: value })}
-															hoverBackgroundImageAttachment={mediaBackHoverBackgroundImageAttachment}
-															setHoverBackgroundImageAttachment={(value) => setAttributes({ mediaBackHoverBackgroundImageAttachment: value })}
-															hoverBackgroundImageRepeat={mediaBackHoverBackgroundImageRepeat}
-															setHoverBackgroundImageRepeat={(value) => setAttributes({ mediaBackHoverBackgroundImageRepeat: value })}
-															hoverBackgroundImageSize={mediaBackHoverBackgroundImageSize}
-															setHoverBackgroundImageSize={(value) => setAttributes({ mediaBackHoverBackgroundImageSize: value })}
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Background Width", "frontis-blocks")}
+														rangeValue={mediaBackBgWidth}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaBackBgWidth: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaBackBgWidthUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaBackBgWidthUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
+
+													<FB_Range
+														min={0}
+														max={500}
+														label={__("Background Height", "frontis-blocks")}
+														rangeValue={mediaBackBgHeight}
+														onChangeHandler={(value) =>
+															setAttributes({ mediaBackBgHeight: value })
+														}
+														rangeUnitHandler={(value) =>
+															setAttributes({ mediaBackBgHeightUnits: value })
+														}
+														deviceType={deviceType}
+														units={mediaBackBgHeightUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+													/>
+
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaBackPaddingUnitsHandler}
+														spacingUnits={mediaBackPaddingUnits}
+														spacingDesktop={mediaBackPaddingDesktop}
+														spacingTablet={mediaBackPaddingTablet}
+														spacingMobile={mediaBackPaddingMobile}
+														handleSpacingUnitHandler={handleMediaBackPaddingUnitChange}
+														spacingCombineBtn={mediaBackPaddingLink}
+														spacingCombineBtnHandler={handleMediaBackPaddingCombineBtn}
+														setAttributes={setAttributes}
+													/>
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaBackMarginUnitsHandler}
+														spacingUnits={mediaBackMarginUnits}
+														spacingDesktop={mediaBackMarginDesktop}
+														spacingTablet={mediaBackMarginTablet}
+														spacingMobile={mediaBackMarginMobile}
+														handleSpacingUnitHandler={handleMediaBackMarginUnitChange}
+														spacingCombineBtn={mediaBackMarginLink}
+														spacingCombineBtnHandler={handleMediaBackMarginCombineBtn}
+														setAttributes={setAttributes}
+													/>
+
+													<SelectControl
+														label={__("Border Style", "frontis-block")}
+														value={mediaBackBorder}
+														options={BORDER_STYLES}
+														onChange={(value) =>
+															setAttributes({ mediaBackBorder: value })
+														}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Border Color", "frontis-blocks")}
+														globalSwitcher={mediaBackBorderColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ mediaBackBorderColorSwitcher: value })}
+													/>
+
+													{mediaBackBorderColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={mediaBackBorderColor}
+															setGlobalColor={(value) => setAttributes({ mediaBackBorderColor: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Background Width", "frontis-blocks")}
-															rangeValue={mediaBackBgWidth}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaBackBgWidth: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaBackBgWidthUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaBackBgWidthUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
+													{mediaBackBorderColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={mediaBackBorderHoverColor}
+															setGlobalColor={(value) => setAttributes({ mediaBackBorderHoverColor: value === undefined ? '' : value })}
 														/>
+													)}
 
-														<FB_Range
-															min={0}
-															max={500}
-															label={__("Background Height", "frontis-blocks")}
-															rangeValue={mediaBackBgHeight}
-															onChangeHandler={(value) =>
-																setAttributes({ mediaBackBgHeight: value })
-															}
-															rangeUnitHandler={(value) =>
-																setAttributes({ mediaBackBgHeightUnits: value })
-															}
-															deviceType={deviceType}
-															units={mediaBackBgHeightUnits}
-															setAttributes={setAttributes}
-															rangeStep={1}
-															resetFallbackValue={""}
-														/>
+													<FB_Spacing
+														label={__("Border", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleMediaBackBorderUnitsHandler}
+														spacingUnits={mediaBackBorderUnits}
+														spacingDesktop={mediaBackBorderDesktop}
+														spacingTablet={mediaBackBorderTablet}
+														spacingMobile={mediaBackBorderMobile}
+														handleSpacingUnitHandler={handleMediaBackBorderUnitChange}
+														spacingCombineBtn={mediaBackBorderLink}
+														spacingCombineBtnHandler={handleMediaBackBorderCombineBtn}
+														setAttributes={setAttributes}
+													/>
 
-														<FB_Spacing
-															label={__("Padding", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaBackPaddingUnitsHandler}
-															spacingUnits={mediaBackPaddingUnits}
-															spacingDesktop={mediaBackPaddingDesktop}
-															spacingTablet={mediaBackPaddingTablet}
-															spacingMobile={mediaBackPaddingMobile}
-															handleSpacingUnitHandler={handleMediaBackPaddingUnitChange}
-															spacingCombineBtn={mediaBackPaddingLink}
-															spacingCombineBtnHandler={handleMediaBackPaddingCombineBtn}
-															setAttributes={setAttributes}
-														/>
-														<FB_Spacing
-															label={__("Margin", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaBackMarginUnitsHandler}
-															spacingUnits={mediaBackMarginUnits}
-															spacingDesktop={mediaBackMarginDesktop}
-															spacingTablet={mediaBackMarginTablet}
-															spacingMobile={mediaBackMarginMobile}
-															handleSpacingUnitHandler={handleMediaBackMarginUnitChange}
-															spacingCombineBtn={mediaBackMarginLink}
-															spacingCombineBtnHandler={handleMediaBackMarginCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<SelectControl
-															label={__("Border Style", "frontis-block")}
-															value={mediaBackBorder}
-															options={BORDER_STYLES}
-															onChange={(value) =>
-																setAttributes({ mediaBackBorder: value })
-															}
-														/>
-
-														<FB_SwitcherControl
-															label={__("Border Color", "frontis-blocks")}
-															globalSwitcher={mediaBackBorderColorSwitcher}
-															setGlobalSwitcher={(value) => setAttributes({ mediaBackBorderColorSwitcher: value })}
-														/>
-
-														{mediaBackBorderColorSwitcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={mediaBackBorderColor}
-																setGlobalColor={(value) => setAttributes({ mediaBackBorderColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														{mediaBackBorderColorSwitcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={mediaBackBorderHoverColor}
-																setGlobalColor={(value) => setAttributes({ mediaBackBorderHoverColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														<FB_Spacing
-															label={__("Border", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleMediaBackBorderUnitsHandler}
-															spacingUnits={mediaBackBorderUnits}
-															spacingDesktop={mediaBackBorderDesktop}
-															spacingTablet={mediaBackBorderTablet}
-															spacingMobile={mediaBackBorderMobile}
-															handleSpacingUnitHandler={handleMediaBackBorderUnitChange}
-															spacingCombineBtn={mediaBackBorderLink}
-															spacingCombineBtnHandler={handleMediaBackBorderCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_Spacing
-															label={__("Border Radius", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={
-																handleMediaBackBorderRadiusUnitsHandler
-															}
-															spacingUnits={mediaBackBorderRadiusUnits}
-															spacingDesktop={mediaBackBorderRadiusDesktop}
-															spacingTablet={mediaBackBorderRadiusTablet}
-															spacingMobile={mediaBackBorderRadiusMobile}
-															handleSpacingUnitHandler={
-																handleMediaBackBorderRadiusUnitChange
-															}
-															spacingCombineBtn={mediaBackBorderRadiusLink}
-															spacingCombineBtnHandler={
-																handleMediaBackBorderRadiusCombineBtn
-															}
-															setAttributes={setAttributes}
-														/>
-													</PanelBody>
-												)}
-												
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleMediaBackBorderRadiusUnitsHandler
+														}
+														spacingUnits={mediaBackBorderRadiusUnits}
+														spacingDesktop={mediaBackBorderRadiusDesktop}
+														spacingTablet={mediaBackBorderRadiusTablet}
+														spacingMobile={mediaBackBorderRadiusMobile}
+														handleSpacingUnitHandler={
+															handleMediaBackBorderRadiusUnitChange
+														}
+														spacingCombineBtn={mediaBackBorderRadiusLink}
+														spacingCombineBtnHandler={
+															handleMediaBackBorderRadiusCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
 												{/*Heading Style*/}
-												{titleSwitcherBack && (
-													<PanelBody
-														title={__("Title", "frontis-block")}
-														initialOpen={false}
-													>
-														<FB_TypographyControl globalTypoControlActive={true} globalTypoSwitcher={headingBackGlobalTypoSwitcher}
-															storeGlobalTypographyData={(value) => setAttributes({ headingBackGlobalTypographyData: value })}
+												<PanelBody
+													title={__("Title", "frontis-block")}
+													initialOpen={false}
+												>
+													<FB_TypographyControl globalTypoControlActive={true} globalTypoSwitcher={headingBackGlobalTypoSwitcher}
+														storeGlobalTypographyData={(value) => setAttributes({ headingBackGlobalTypographyData: value })}
 
-															globalTypoType={headingBackGlobalTypoType}
-															onChangeGlobalTypoType={(value) => {
-																setAttributes({
-																	headingBackGlobalTypoType: value,
-																	headingBackGlobalTypoSwitcher: value === 'default' ? {
-																		...headingBackGlobalTypoSwitcher, fontFamily: false, fontSize: false,
-																		fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight:
-																			false,
-																	} : {
-																		...headingBackGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true,
-																		textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,
-																	}
-																})
-															}}
-
-															globalTypoOption={headingBackGlobalTypoOption}
-															onChangeGlobalTypoOption={(value) => setAttributes({ headingBackGlobalTypoOption: value })}
-
-															fontFamily={headingBackFontFamily}
-															onChangeFontFamily={(value) => setAttributes({
-																headingBackFontFamily: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, fontFamily: value && false
+														globalTypoType={headingBackGlobalTypoType}
+														onChangeGlobalTypoType={(value) => {
+															setAttributes({
+																headingBackGlobalTypoType: value,
+																headingBackGlobalTypoSwitcher: value === 'default' ? {
+																	...headingBackGlobalTypoSwitcher, fontFamily: false, fontSize: false,
+																	fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight:
+																		false,
+																} : {
+																	...headingBackGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true,
+																	textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,
 																}
-															})}
+															})
+														}}
 
-															fontSize={headingBackFontSize}
-															onChangeFontSize={(value) => setAttributes({
-																headingBackFontSize: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, fontSize: value && false
-																}
-															})}
+														globalTypoOption={headingBackGlobalTypoOption}
+														onChangeGlobalTypoOption={(value) => setAttributes({ headingBackGlobalTypoOption: value })}
 
-															fontSizeUnits={headingBackFontSizeUnits}
-															onChangeFontSizeUnit={(value) => setAttributes({ headingBackFontSizeUnits: value })}
-
-															fontWeight={headingBackFontWeight}
-															onChangeFontWeight={(value) => setAttributes({
-																headingBackFontWeight: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, fontWeight: value && false
-																}
-															})}
-
-															fontStyle={headingBackFontStyle}
-															onChangeFontStyle={(value) => setAttributes({
-																headingBackFontStyle: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, fontStyle: value && false
-																}
-															})}
-
-															textTransform={headingBackTextTransform}
-															onChangeTextTransform={(value) => setAttributes({
-																headingBackTextTransform: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, textTransform: value && false
-																}
-															})}
-
-															textDecoration={headingBackTextDecoration}
-															onChangeTextDecoration={(value) => setAttributes({
-																headingBackTextDecoration: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, textDecoration: value && false
-																}
-															})}
-
-															letterSpacing={headingBackLetterSpacing}
-															onChangeLetterSpacing={(value) => setAttributes({
-																headingBackLetterSpacing: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, letterSpacing: value && false
-																}
-															})}
-
-															letterSpacingUnits={headingBackLetterSpacingUnits}
-															onChangeLetterSpacingUnit={(value) => setAttributes({ headingBackLetterSpacingUnits: value })}
-
-															lineHeight={headingBackLineHeight}
-															onChangeLineHeight={(value) => setAttributes({
-																headingBackLineHeight: value, headingBackGlobalTypoSwitcher: {
-																	...headingBackGlobalTypoSwitcher, lineHeight: value && false
-																}
-															})}
-
-															lineHeightUnits={headingBackLineHeightUnits}
-															onChangeLineHeightUnit={(value) => setAttributes({ headingBackLineHeightUnits: value })}
-
-															deviceType={deviceType}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_SwitcherControl
-															label={__("Text Color", "frontis-blocks")}
-															globalSwitcher={headingBackColorSwitcher}
-															setGlobalSwitcher={(value) => setAttributes({ headingBackColorSwitcher: value })}
-														/>
-
-														{headingBackColorSwitcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={headingBackColor}
-																setGlobalColor={(value) => setAttributes({ headingBackColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														{headingBackColorSwitcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={headingBackHoverColor}
-																setGlobalColor={(value) => setAttributes({ headingBackHoverColor: value === undefined ? '' : value })}
-															/>
-														)}
-
-														<FB_Spacing
-															label={__("Padding", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleheadingBackPaddingUnitsHandler}
-															spacingUnits={headingBack_padding_units}
-															spacingDesktop={headingBack_Desktop_padding}
-															spacingTablet={headingBack_Tab_padding}
-															spacingMobile={headingBack_Mobile_padding}
-															handleSpacingUnitHandler={handleheadingBackPaddingUnitChange}
-															spacingCombineBtn={paddingLink}
-															spacingCombineBtnHandler={handleheadingBackPaddingCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_Spacing
-															label={__("Margin", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleheadingBackMarginUnitsHandler}
-															spacingUnits={headingBack_Margin_Units}
-															spacingDesktop={headingBack_Desktop_Margin}
-															spacingTablet={headingBack_Tab_Margin}
-															spacingMobile={headingBack_Mobile_Margin}
-															handleSpacingUnitHandler={handleheadingBackMarginUnitChange}
-															spacingCombineBtn={headingBack_Margin_Link}
-															spacingCombineBtnHandler={handleheadingBackMarginCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														{/*Border*/}
-														<Heading>Border</Heading>
-														<SelectControl
-															label={__("Border Style", "frontis-block")}
-															value={headingBack_Border}
-															options={BORDER_STYLES}
-															onChange={(value) =>
-																setAttributes({ headingBack_Border: value })
+														fontFamily={headingBackFontFamily}
+														onChangeFontFamily={(value) => setAttributes({
+															headingBackFontFamily: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, fontFamily: value && false
 															}
-														/>
+														})}
 
-														<FB_SwitcherControl
-															label={__("Border Color", "frontis-blocks")}
-															globalSwitcher={headingBack_Border_Color_Switcher}
-															setGlobalSwitcher={(value) => setAttributes({ headingBack_Border_Color_Switcher: value })}
-														/>
-
-														{headingBack_Border_Color_Switcher === 'normal' && (
-															<FB_ColorControl
-																label={__("Normal Color", "frontis-blocks")}
-																globalColor={headingBack_Border_Color}
-																setGlobalColor={(value) => setAttributes({ headingBack_Border_Color: value === undefined ? '' : value })}
-															/>
-														)}
-
-														{headingBack_Border_Color_Switcher === 'hover' && (
-															<FB_ColorControl
-																label={__("Hover Color", "frontis-blocks")}
-																globalColor={headingBack_Border_Hover_Color}
-																setGlobalColor={(value) => setAttributes({ headingBack_Border_Hover_Color: value === undefined ? '' : value })}
-															/>
-														)}
-
-														<FB_Spacing
-															label={__("Border Width", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={handleheadingBackBorderUnitsHandler}
-															spacingUnits={headingBack_Border_units}
-															spacingDesktop={headingBack_Desktop_Border_Width}
-															spacingTablet={headingBack_Tab_Border_Width}
-															spacingMobile={headingBack_Mobile_Border_Width}
-															handleSpacingUnitHandler={handleheadingBackBorderUnitChange}
-															spacingCombineBtn={borderLink}
-															spacingCombineBtnHandler={handleheadingBackBorderCombineBtn}
-															setAttributes={setAttributes}
-														/>
-
-														<FB_Spacing
-															label={__("Border Radius", "frontis-blocks")}
-															deviceType={deviceType}
-															spacingUnitsHandler={
-																handleheadingBackBorderRadiusUnitsHandler
+														fontSize={headingBackFontSize}
+														onChangeFontSize={(value) => setAttributes({
+															headingBackFontSize: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, fontSize: value && false
 															}
-															spacingUnits={headingBack_Border_radius_units}
-															spacingDesktop={headingBack_Desktop_Border_radius_Width}
-															spacingTablet={headingBack_Tab_Border_radius_Width}
-															spacingMobile={headingBack_Mobile_Border_radius_Width}
-															handleSpacingUnitHandler={
-																handleheadingBackBorderRadiusUnitChange
+														})}
+
+														fontSizeUnits={headingBackFontSizeUnits}
+														onChangeFontSizeUnit={(value) => setAttributes({ headingBackFontSizeUnits: value })}
+
+														fontWeight={headingBackFontWeight}
+														onChangeFontWeight={(value) => setAttributes({
+															headingBackFontWeight: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, fontWeight: value && false
 															}
-															spacingCombineBtn={borderRadiusLink}
-															spacingCombineBtnHandler={
-																handleheadingBackBorderRadiusCombineBtn
+														})}
+
+														fontStyle={headingBackFontStyle}
+														onChangeFontStyle={(value) => setAttributes({
+															headingBackFontStyle: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, fontStyle: value && false
 															}
-															setAttributes={setAttributes}
+														})}
+
+														textTransform={headingBackTextTransform}
+														onChangeTextTransform={(value) => setAttributes({
+															headingBackTextTransform: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, textTransform: value && false
+															}
+														})}
+
+														textDecoration={headingBackTextDecoration}
+														onChangeTextDecoration={(value) => setAttributes({
+															headingBackTextDecoration: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, textDecoration: value && false
+															}
+														})}
+
+														letterSpacing={headingBackLetterSpacing}
+														onChangeLetterSpacing={(value) => setAttributes({
+															headingBackLetterSpacing: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, letterSpacing: value && false
+															}
+														})}
+
+														letterSpacingUnits={headingBackLetterSpacingUnits}
+														onChangeLetterSpacingUnit={(value) => setAttributes({ headingBackLetterSpacingUnits: value })}
+
+														lineHeight={headingBackLineHeight}
+														onChangeLineHeight={(value) => setAttributes({
+															headingBackLineHeight: value, headingBackGlobalTypoSwitcher: {
+																...headingBackGlobalTypoSwitcher, lineHeight: value && false
+															}
+														})}
+
+														lineHeightUnits={headingBackLineHeightUnits}
+														onChangeLineHeightUnit={(value) => setAttributes({ headingBackLineHeightUnits: value })}
+
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Text Color", "frontis-blocks")}
+														globalSwitcher={headingBackColorSwitcher}
+														setGlobalSwitcher={(value) => setAttributes({ headingBackColorSwitcher: value })}
+													/>
+
+													{headingBackColorSwitcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={headingBackColor}
+															setGlobalColor={(value) => setAttributes({ headingBackColor: value === undefined ? '' : value })}
 														/>
-													</PanelBody>
-												)}
-												
+													)}
+
+													{headingBackColorSwitcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={headingBackHoverColor}
+															setGlobalColor={(value) => setAttributes({ headingBackHoverColor: value === undefined ? '' : value })}
+														/>
+													)}
+
+													<FB_Spacing
+														label={__("Padding", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleheadingBackPaddingUnitsHandler}
+														spacingUnits={headingBack_padding_units}
+														spacingDesktop={headingBack_Desktop_padding}
+														spacingTablet={headingBack_Tab_padding}
+														spacingMobile={headingBack_Mobile_padding}
+														handleSpacingUnitHandler={handleheadingBackPaddingUnitChange}
+														spacingCombineBtn={paddingLink}
+														spacingCombineBtnHandler={handleheadingBackPaddingCombineBtn}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_Spacing
+														label={__("Margin", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleheadingBackMarginUnitsHandler}
+														spacingUnits={headingBack_Margin_Units}
+														spacingDesktop={headingBack_Desktop_Margin}
+														spacingTablet={headingBack_Tab_Margin}
+														spacingMobile={headingBack_Mobile_Margin}
+														handleSpacingUnitHandler={handleheadingBackMarginUnitChange}
+														spacingCombineBtn={headingBack_Margin_Link}
+														spacingCombineBtnHandler={handleheadingBackMarginCombineBtn}
+														setAttributes={setAttributes}
+													/>
+
+													{/*Border*/}
+													<Heading>Border</Heading>
+													<SelectControl
+														label={__("Border Style", "frontis-block")}
+														value={headingBack_Border}
+														options={BORDER_STYLES}
+														onChange={(value) =>
+															setAttributes({ headingBack_Border: value })
+														}
+													/>
+
+													<FB_SwitcherControl
+														label={__("Border Color", "frontis-blocks")}
+														globalSwitcher={headingBack_Border_Color_Switcher}
+														setGlobalSwitcher={(value) => setAttributes({ headingBack_Border_Color_Switcher: value })}
+													/>
+
+													{headingBack_Border_Color_Switcher === 'normal' && (
+														<FB_ColorControl
+															label={__("Normal Color", "frontis-blocks")}
+															globalColor={headingBack_Border_Color}
+															setGlobalColor={(value) => setAttributes({ headingBack_Border_Color: value === undefined ? '' : value })}
+														/>
+													)}
+
+													{headingBack_Border_Color_Switcher === 'hover' && (
+														<FB_ColorControl
+															label={__("Hover Color", "frontis-blocks")}
+															globalColor={headingBack_Border_Hover_Color}
+															setGlobalColor={(value) => setAttributes({ headingBack_Border_Hover_Color: value === undefined ? '' : value })}
+														/>
+													)}
+
+													<FB_Spacing
+														label={__("Border Width", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={handleheadingBackBorderUnitsHandler}
+														spacingUnits={headingBack_Border_units}
+														spacingDesktop={headingBack_Desktop_Border_Width}
+														spacingTablet={headingBack_Tab_Border_Width}
+														spacingMobile={headingBack_Mobile_Border_Width}
+														handleSpacingUnitHandler={handleheadingBackBorderUnitChange}
+														spacingCombineBtn={borderLink}
+														spacingCombineBtnHandler={handleheadingBackBorderCombineBtn}
+														setAttributes={setAttributes}
+													/>
+
+													<FB_Spacing
+														label={__("Border Radius", "frontis-blocks")}
+														deviceType={deviceType}
+														spacingUnitsHandler={
+															handleheadingBackBorderRadiusUnitsHandler
+														}
+														spacingUnits={headingBack_Border_radius_units}
+														spacingDesktop={headingBack_Desktop_Border_radius_Width}
+														spacingTablet={headingBack_Tab_Border_radius_Width}
+														spacingMobile={headingBack_Mobile_Border_radius_Width}
+														handleSpacingUnitHandler={
+															handleheadingBackBorderRadiusUnitChange
+														}
+														spacingCombineBtn={borderRadiusLink}
+														spacingCombineBtnHandler={
+															handleheadingBackBorderRadiusCombineBtn
+														}
+														setAttributes={setAttributes}
+													/>
+												</PanelBody>
 												{/*Description Style*/}
 												{descSwitcherBack && (
 													<PanelBody
