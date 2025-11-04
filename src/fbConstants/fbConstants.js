@@ -559,3 +559,12 @@ export const LIST_STYLE_OPTIONS = [
 	{ value: 'bullet', label: __('Bullet', 'frontis-blocks') },
 	{ value: 'number', label: __('Number', 'frontis-blocks') }
 ];
+
+/** Post Featured Image */
+export const IMAGE_SIZES = [
+    { label: "Thumbnail", value: "thumbnail" },
+    { label: "Medium", value: "medium" },
+    { label: "Large", value: "large" },
+    { label: "Full", value: "full" },
+];
+
