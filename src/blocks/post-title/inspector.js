@@ -9,7 +9,7 @@ import {
     ToggleControl,
     TextControl,
 } from "@wordpress/components";
-import { OVERFLOW_OP, BORDER_STYLES } from "./constants/constants";
+import { OVERFLOW_OP, BORDER_STYLES } from '@Constants/fbConstants';
 import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
