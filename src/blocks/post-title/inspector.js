@@ -1,5 +1,4 @@
 import { __ } from "@wordpress/i18n";
-import { InspectorControls } from "@wordpress/block-editor";
 import { useMemo, useEffect } from "@wordpress/element";
 import {
     PanelBody,
@@ -7,9 +6,8 @@ import {
     RangeControl,
     SelectControl,
     ToggleControl,
-    TextControl,
 } from "@wordpress/components";
-import { OVERFLOW_OP, BORDER_STYLES } from '@Constants/fbConstants';
+import { OVERFLOW_OP, BORDER_STYLES } from "@Constants/fbConstants";
 import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
@@ -34,14 +32,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         isLink,
         rel,
         linkTarget,
-        blockStyle,
 
-        /** Start Title */
         /** General */
         postTitleTag,
         titleAlignment,
         titleExcerptLength,
-        /** Style */
+
+        /** Style Attributes */
         postTitleGlobalTypoSwitcher,
         postTitleGlobalTypographyData,
         postTitleGlobalTypoType,
@@ -68,7 +65,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         titleTextStrokeColorSwitcher,
         titleTextStrokeColor,
         titleTextStrokeHoverColor,
-        /** End Title */
 
         /** Start Global Setting */
         postTitleGlobalZIndex,
@@ -532,6 +528,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease !important;
             }
 
+            .${blockId}.fb-post-title .fb-post-title-link:hover{
+                color: currentColor;
+            }
             
             .${blockId} .fb-post-title {
                 ${titleAlignment.Desktop
@@ -669,9 +668,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
 
-
-
-
             /** Advance Control Global Style - Desktop */
 
             .${blockId}.fb-post-title-block{
@@ -728,22 +724,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : ""
             }
 
-
                 transition: all 0.3s ease;
             }
 
             .${blockId} .fb-post-title{
-                	${postGlobalDesktopPaddingWidth &&
+                ${postGlobalDesktopPaddingWidth &&
                 postGlobalPaddingDesktop.top
                 ? `padding: ${postGlobalDesktopPaddingWidth};`
                 : ""
             }
-						${postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
+				${postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
                 ? `margin: ${postGlobalDesktopMarginWidth};`
                 : ""
             }
 
-						${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
+                ${postGlobalBorder ? `border: ${postGlobalBorder};` : ""} 
             ${postGlobalDesktopBorderWidth && postGlobalBorderDesktop.top
                 ? `border-width: ${postGlobalDesktopBorderWidth};`
                 : ""
@@ -807,7 +802,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 
-            /* ====================================== Responsive styles for tablet ====================================== */
             /* ====================================== Responsive styles for tablet ====================================== */
             @media only screen and (max-width: 1024px) {
                 .${blockId} .fb-post-title {
@@ -924,15 +918,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             }
 
-
-
             }
 
             /* ====================================== Responsive styles for mobile ====================================== */
-            /* ====================================== Responsive styles for mobile ====================================== */
             @media (max-width: 767px) {
-
-
                 .${blockId} .fb-post-title {
                     ${titleAlignment.Mobile
                 ? `text-align: ${titleAlignment.Mobile};`
@@ -943,7 +932,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+			${postTitleGlobalTypoSwitcher.letterSpacing === false &&
                 postTitleLetterSpacing.Mobile
                 ? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};`
                 : ""
@@ -1050,108 +1039,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             }
         `,
-        [
-            blockId,
-            isLink,
-
-            postTitleTag,
-            titleAlignment,
-            titleExcerptLength,
-
-            postTitleGlobalTypoSwitcher,
-            postTitleGlobalTypographyData,
-            postTitleGlobalTypoType,
-            postTitleGlobalTypoOption,
-            postTitleFontFamily,
-            postTitleFontSize,
-            postTitleFontSizeUnits,
-            postTitleFontWeight,
-            postTitleFontStyle,
-            postTitleTextTransform,
-            postTitleTextDecoration,
-            postTitleLetterSpacing,
-            postTitleLetterSpacingUnits,
-            postTitleLineHeight,
-            postTitleLineHeightUnits,
-
-            postTitleColorSwitcher,
-            postTitleColor,
-            postTitleHoverColor,
-
-            titleTextShadowCssValue,
-            titleTextStroke,
-            titleTextStrokeColor,
-            titleTextStrokeHoverColor,
-            titleTextShadowValues,
-            titleTextStrokeColorSwitcher,
-
-            /** Start Global Setting */
-            postTitleGlobalZIndex,
-            postTitleOverflow,
-
-            postTitlePositionType,
-            postTitleHZOrientationType,
-            postTitleVROrientationType,
-            postTitleHZLeftOffset,
-            postTitleHZLeftOffsetUnits,
-            postTitleHZRightOffset,
-            postTitleHZRightOffsetUnits,
-            postTitleVRTopOffset,
-            postTitleVRTopOffsetUnits,
-            postTitleVRBottomOffset,
-            postTitleVRBottomOffsetUnits,
-
-            postGlobalPaddingUnits,
-            postGlobalPaddingDesktop,
-            postGlobalPaddingTablet,
-            postGlobalPaddingMobile,
-            postGlobalPaddingLink,
-
-            postGlobalMarginUnits,
-            postGlobalMarginDesktop,
-            postGlobalMarginTablet,
-            postGlobalMarginMobile,
-            postGlobalMarginLink,
-
-            postGlobalBgColorSwitcher,
-            postGlobalNormalBackgroundType,
-            postGlobalNormalClassicColor,
-            postGlobalNormalGradientColor,
-            postGlobalNormalCustomGradientSwitcher,
-            postGlobalNormalCustomGradientInputValue,
-
-            postGlobalHoverBackgroundType,
-            postGlobalHoverClassicColor,
-            postGlobalHoverGradientColor,
-            postGlobalHoverCustomGradientSwitcher,
-            postGlobalHoverCustomGradientInputValue,
-
-            postGlobalBorder,
-            postGlobalBorderColorSwitcher,
-            postGlobalBorderColor,
-            postGlobalBorderHoverColor,
-
-            postGlobalBorderUnits,
-            postGlobalBorderDesktop,
-            postGlobalBorderTablet,
-            postGlobalBorderMobile,
-            postGlobalBorderLink,
-
-            postGlobalBorderRadiusUnits,
-            postGlobalBorderRadiusDesktop,
-            postGlobalBorderRadiusTablet,
-            postGlobalBorderRadiusMobile,
-            postGlobalBorderRadiusLink,
-
-            postGlobalBoxShadowSwitcher,
-            postGlobalBoxShadowValues,
-            postGlobalBoxShadowCssValue,
-            postGlobalBoxShadowHoverValues,
-            postGlobalBoxShadowHoverCssValue,
-
-            wrapperId,
-            wrapperClass,
-        ],
+        [attributes],
     );
 
     const customCss = getCustomCss(postTitleGlobalCustomCSS, `.${blockId}`);
