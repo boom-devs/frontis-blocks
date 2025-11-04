@@ -569,8 +569,6 @@ export const IMAGE_SIZES = [
 ];
 
 
-];
-
 /** Post Comment Form */
 export const DEFAULT_TEXTS = {
     formTitle: "Leave a Reply",
