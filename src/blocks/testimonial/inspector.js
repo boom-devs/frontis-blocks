@@ -2421,8 +2421,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-
-
     /**
      * Generate SVG Icons for Icon
      */
@@ -2627,7 +2625,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             className="fb-testimonial-title-control"
                         />
                     )}
-
 
                     {dynamicDescriptionContentToggleControls.map((control, index) => (
                         <div key={control.key || index}>{control.comp}</div>

@@ -9,9 +9,9 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import Inspector from './inspector';
 import { useRef } from '@wordpress/element';
 import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import DynamicTextValue from '@Components/dynamic-text-value';
 
-
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 
@@ -51,6 +51,82 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		teamMemberBadgeSwitcher,
 		teamMemberBadge,
 		teamMemberBadgePosition,
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+	/** Start Dynamic Team Member Name Text */
+		dynamicTeamMemberNameEnabled,
+		dynamicTeamMemberNameSource,
+		dynamicTeamMemberNamePostId,
+		dynamicTeamMemberNamePostType,
+		dynamicTeamMemberNamePostLabel,
+		dynamicTeamMemberNameField,
+		dynamicTeamMemberNameFeaturedImageField,
+
+		dynamicTeamMemberNameDateType,
+		dynamicTeamMemberNameDateFormat,
+
+		dynamicTeamMemberNameTimeType,
+		dynamicTeamMemberNameTimeFormat,
+
+		dynamicTeamMemberNameCommentsZeroText,
+		dynamicTeamMemberNameCommentsOneText,
+		dynamicTeamMemberNameCommentsManyText,
+
+		dynamicTeamMemberNameTermsTaxonomy,
+		dynamicTeamMemberNameTermsSeparator,
+		dynamicTeamMemberNameEnableLink,
+		dynamicTeamMemberNameLinkSource,
+		/** End Dynamic Team Member Name Text */
+
+		/** Start Dynamic Team Member Designation Text */
+		dynamicTeamMemberDesignationEnabled,
+		dynamicTeamMemberDesignationSource,
+		dynamicTeamMemberDesignationPostId,
+		dynamicTeamMemberDesignationPostType,
+		dynamicTeamMemberDesignationPostLabel,
+		dynamicTeamMemberDesignationField,
+		dynamicTeamMemberDesignationFeaturedImageField,
+
+		dynamicTeamMemberDesignationDateType,
+		dynamicTeamMemberDesignationDateFormat,
+
+		dynamicTeamMemberDesignationTimeType,
+		dynamicTeamMemberDesignationTimeFormat,
+
+		dynamicTeamMemberDesignationCommentsZeroText,
+		dynamicTeamMemberDesignationCommentsOneText,
+		dynamicTeamMemberDesignationCommentsManyText,
+
+		dynamicTeamMemberDesignationTermsTaxonomy,
+		dynamicTeamMemberDesignationTermsSeparator,
+		dynamicTeamMemberDesignationEnableLink,
+		dynamicTeamMemberDesignationLinkSource,
+		/** End Dynamic Team Member Designation Text */
+
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -62,6 +138,102 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
+
+	/**
+	 * Dynamic Text Value for Description
+	 */
+	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
+		textEnabled:            dynamicDescriptionEnabled,
+		textSource:             dynamicDescriptionSource,
+		textField:              dynamicDescriptionField,
+
+		textPostId:             dynamicDescriptionPostId,
+		textPostType:           dynamicDescriptionPostType,
+		textPostLabel:          dynamicDescriptionPostLabel,
+
+		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
+
+		textDateType:           dynamicDescriptionDateType,
+		textDateFormat:         dynamicDescriptionDateFormat,
+		textTimeType:           dynamicDescriptionTimeType, 
+		textTimeFormat:         dynamicDescriptionTimeFormat,
+
+		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
+		textCommentsOneText:    dynamicDescriptionCommentsOneText,
+		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+
+		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+
+		textLinkEnabled:        dynamicDescriptionEnableLink,
+		textLinkSource:         dynamicDescriptionLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Team Member Name
+	 */
+	const { dynamicDisplayValue: dynamicTeamMemberNameValue, dynamicDisplayLink: dynamicTeamMemberNameLink } = DynamicTextValue({ 
+		textEnabled:            dynamicTeamMemberNameEnabled,
+		textSource:             dynamicTeamMemberNameSource,
+		textField:              dynamicTeamMemberNameField,
+
+		textPostId:             dynamicTeamMemberNamePostId,
+		textPostType:           dynamicTeamMemberNamePostType,
+		textPostLabel:          dynamicTeamMemberNamePostLabel,
+
+		textFeaturedImageField: dynamicTeamMemberNameFeaturedImageField,
+
+		textDateType:           dynamicTeamMemberNameDateType,
+		textDateFormat:         dynamicTeamMemberNameDateFormat,
+		textTimeType:           dynamicTeamMemberNameTimeType, 
+		textTimeFormat:         dynamicTeamMemberNameTimeFormat,
+
+		textCommentsZeroText:   dynamicTeamMemberNameCommentsZeroText,
+		textCommentsOneText:    dynamicTeamMemberNameCommentsOneText,
+		textCommentsManyText:   dynamicTeamMemberNameCommentsManyText,
+
+		textTermsTaxonomy:      dynamicTeamMemberNameTermsTaxonomy,
+		textTermsSeparator:     dynamicTeamMemberNameTermsSeparator,
+
+		textLinkEnabled:        dynamicTeamMemberNameEnableLink,
+		textLinkSource:         dynamicTeamMemberNameLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Team Member Designation
+	 */
+	const { dynamicDisplayValue: dynamicTeamMemberDesignationValue, dynamicDisplayLink: dynamicTeamMemberDesignationLink } = DynamicTextValue({
+		textEnabled:            dynamicTeamMemberDesignationEnabled,
+		textSource:             dynamicTeamMemberDesignationSource,
+		textField:              dynamicTeamMemberDesignationField,
+
+		textPostId:             dynamicTeamMemberDesignationPostId,
+		textPostType:           dynamicTeamMemberDesignationPostType,
+		textPostLabel:          dynamicTeamMemberDesignationPostLabel,
+
+		textFeaturedImageField: dynamicTeamMemberDesignationFeaturedImageField,
+
+		textDateType:           dynamicTeamMemberDesignationDateType,
+		textDateFormat:         dynamicTeamMemberDesignationDateFormat,
+		textTimeType:           dynamicTeamMemberDesignationTimeType, 
+		textTimeFormat:         dynamicTeamMemberDesignationTimeFormat,
+
+		textCommentsZeroText:   dynamicTeamMemberDesignationCommentsZeroText,
+		textCommentsOneText:    dynamicTeamMemberDesignationCommentsOneText,
+		textCommentsManyText:   dynamicTeamMemberDesignationCommentsManyText,
+
+		textTermsTaxonomy:      dynamicTeamMemberDesignationTermsTaxonomy,
+		textTermsSeparator:     dynamicTeamMemberDesignationTermsSeparator,
+
+		textLinkEnabled:        dynamicTeamMemberDesignationEnableLink,
+		textLinkSource:         dynamicTeamMemberDesignationLinkSource,
+
+		context,
+	});
 
 	return (
 		<>
@@ -129,23 +301,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className={`fb-team-member-content`}>
 								<RichText
 									tagName={teamMemberNameHeadingTag}
-									value={teamMemberName}
-									onChange={(value) => setAttributes({teamMemberName: value})}
+									value={dynamicTeamMemberNameEnabled ? dynamicTeamMemberNameValue : teamMemberName}
+									onChange={(value) => {
+										if (!dynamicTeamMemberNameEnabled) setAttributes({ teamMemberName: value });
+									}}
 									placeholder={__('Enter Team Member Name', 'frontis-block')}
 									className="fb-team-member-name"
 								/>
 
 								<RichText
 									tagName={'span'}
-									value={teamMemberDesignation}
-									onChange={(value) => setAttributes({teamMemberDesignation: value})}
+									value={dynamicTeamMemberDesignationEnabled ? dynamicTeamMemberDesignationValue : teamMemberDesignation}
+									onChange={(value) => {
+										if (!dynamicTeamMemberDesignationEnabled) setAttributes({ teamMemberDesignation: value });
+									}}
 									className="fb-team-member-designation"
 								/>
 
 								{ teamMemberDescSwitcher === true && <RichText
 									tagName={'p'}
-									value={teamMemberDesc}
-									onChange={(value) => setAttributes({teamMemberDesc: value})}
+									value={dynamicDescriptionEnabled ? dynamicDescriptionValue : teamMemberDesc}
+									onChange={(value) => {
+										if (!dynamicDescriptionEnabled) setAttributes({ teamMemberDesc: value });
+									}}
 									className="fb-team-member-desc"
 								/> }
 
