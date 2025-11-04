@@ -734,7 +734,7 @@ const attributes = {
 
     teamMemberDesignation: {
 		type: 'string',
-		default: 'Junior Developer'
+		default: 'Senior Developer'
 	},
 	teamMemberDesignationColorSwitcher: {
 		type: 'string',
@@ -808,7 +808,7 @@ const attributes = {
     },
     teamMemberDesignationTextDecoration: {
         type: 'string',
-        default: '',
+        default: 'none',
     },
     teamMemberDesignationLetterSpacing: {
         type: 'object',
@@ -1253,7 +1253,7 @@ const attributes = {
 	},
 	teamMemberBadgeTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},	
 	teamMemberBadgeLetterSpacing: {
 		type: 'object',
@@ -1534,7 +1534,7 @@ const attributes = {
     },
     teamMemberNameTextDecoration: {
         type: 'string',
-        default: '',
+        default: 'none',
     },
     teamMemberNameLetterSpacing: {
         type: 'object',
@@ -1747,6 +1747,11 @@ const attributes = {
 				teamMemberSocialIcon: 'linkedin',
 			},
 		]
+	},
+
+	frontendTeamMemberSocialItems: {
+		"type": "array",
+		"default": []
 	},
 
 	teamMemberIconsAlignment: {
@@ -2085,6 +2090,10 @@ const attributes = {
 	socialIconBtnIcon: {
 		type: 'string',
 		default: 'plus',
+	},
+	frontendSocialIconBtnIcon:{
+		type: 'string',
+		default: '',
 	},
 	socialIconBtnIconSize: {
 		type: 'object',
@@ -2548,7 +2557,7 @@ const attributes = {
 	},
 	teamMemberEmailTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},
 	teamMemberEmailLetterSpacing: {
 		type: 'object',
@@ -2748,7 +2757,7 @@ const attributes = {
 	},
 	teamMemberDescTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},
 	teamMemberDescLetterSpacing: {
 		type: 'object',
@@ -3101,6 +3110,231 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+	/** Start Dynamic Description Text */
+	dynamicDescriptionEnabled : {
+		type: 'boolean',
+		default: false
+	},
+	dynamicDescriptionSource: {
+		type: 'string',
+		default: 'current_post'
+	},
+	dynamicDescriptionPostId: {
+		type: 'number',
+		default: 0
+	},
+	dynamicDescriptionPostType: {
+		type: 'string',
+		default: ''
+	},
+	dynamicDescriptionPostLabel: {
+		type: 'string',
+		default: ''
+	},
+	dynamicDescriptionField: {
+		type: 'string',
+		default: 'post_title'
+	},
+	dynamicDescriptionFeaturedImageField:{
+		type: 'string',
+		default: 'title'
+	},
+	dynamicDescriptionDateType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicDescriptionDateFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicDescriptionTimeType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicDescriptionTimeFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicDescriptionCommentsZeroText: {
+		type: 'string',
+		default: 'No Response',
+	},
+	dynamicDescriptionCommentsOneText: {
+		type: 'string',
+		default: 'One Response',
+	},
+	dynamicDescriptionCommentsManyText: {
+		type: 'string',
+		default: '{num} Response',
+	},   
+	dynamicDescriptionTermsTaxonomy: {
+		type: 'string',
+		default: 'category',
+	},
+	dynamicDescriptionTermsSeparator: {
+		type: 'string',
+		default: ', ',
+	},
+	dynamicDescriptionEnableLink: {
+		type: 'boolean',
+		default: false
+	},
+	dynamicDescriptionLinkSource: {
+		type: 'string',
+		default: 'post_permalink',
+	},
+	/** End Dynamic Description Text */
+
+	/** Start Dynamic Team Member Name Text */
+	dynamicTeamMemberNameEnabled : {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTeamMemberNameSource: {
+		type: 'string',
+		default: 'current_post'
+	},
+	dynamicTeamMemberNamePostId: {
+		type: 'number',
+		default: 0
+	},
+	dynamicTeamMemberNamePostType: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTeamMemberNamePostLabel: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTeamMemberNameField: {
+		type: 'string',
+		default: 'post_title'
+	},
+	dynamicTeamMemberNameFeaturedImageField:{
+		type: 'string',
+		default: 'title'
+	},
+	dynamicTeamMemberNameDateType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTeamMemberNameDateFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTeamMemberNameTimeType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTeamMemberNameTimeFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTeamMemberNameCommentsZeroText: {
+		type: 'string',
+		default: 'No Response',
+	},
+	dynamicTeamMemberNameCommentsOneText: {
+		type: 'string',
+		default: 'One Response',
+	},
+	dynamicTeamMemberNameCommentsManyText: {
+		type: 'string',
+		default: '{num} Response',
+	},   
+	dynamicTeamMemberNameTermsTaxonomy: {
+		type: 'string',
+		default: 'category',
+	},
+	dynamicTeamMemberNameTermsSeparator: {
+		type: 'string',
+		default: ', ',
+	},
+	dynamicTeamMemberNameEnableLink: {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTeamMemberNameLinkSource: {
+		type: 'string',
+		default: 'post_permalink',
+	},
+	/** End Dynamic Team Member Name Text */
+
+	/** Start Dynamic Team Member Designation Text */
+	dynamicTeamMemberDesignationEnabled : {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTeamMemberDesignationSource: {
+		type: 'string',
+		default: 'current_post'
+	},
+	dynamicTeamMemberDesignationPostId: {
+		type: 'number',
+		default: 0
+	},
+	dynamicTeamMemberDesignationPostType: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTeamMemberDesignationPostLabel: {
+		type: 'string',
+		default: ''
+	},
+	dynamicTeamMemberDesignationField: {
+		type: 'string',
+		default: 'post_title'
+	},
+	dynamicTeamMemberDesignationFeaturedImageField:{
+		type: 'string',
+		default: 'title'
+	},
+	dynamicTeamMemberDesignationDateType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTeamMemberDesignationDateFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTeamMemberDesignationTimeType: {
+		type: 'string',
+		default: 'published'
+	},
+	dynamicTeamMemberDesignationTimeFormat: {
+		type: 'string',
+		default: 'default'
+	},
+	dynamicTeamMemberDesignationCommentsZeroText: {
+		type: 'string',
+		default: 'No Response',
+	},
+	dynamicTeamMemberDesignationCommentsOneText: {
+		type: 'string',
+		default: 'One Response',
+	},
+	dynamicTeamMemberDesignationCommentsManyText: {
+		type: 'string',
+		default: '{num} Response',
+	},   
+	dynamicTeamMemberDesignationTermsTaxonomy: {
+		type: 'string',
+		default: 'category',
+	},
+	dynamicTeamMemberDesignationTermsSeparator: {
+		type: 'string',
+		default: ', ',
+	},
+	dynamicTeamMemberDesignationEnableLink: {
+		type: 'boolean',
+		default: false
+	},
+	dynamicTeamMemberDesignationLinkSource: {
+		type: 'string',
+		default: 'post_permalink',
+	},
+	/** End Dynamic Team Member Designation Text */
 };
 
 export default attributes;
