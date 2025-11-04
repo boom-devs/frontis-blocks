@@ -30,12 +30,14 @@ const getProToggleControls = ({
     ? isProActive
     : getProActive();
 
-  const checked = !!attributes?.[dynamicAttr];
+  const checked = !!(attributes && attributes[dynamicAttr]);
 
   // If Pro is active, return external controls (PRO hook)
   if (pro) {
     const external = applyFilters(hook, [], { attributes, setAttributes, isProActive: pro });
-    if (Array.isArray(external) && external.length) return external;
+    if (Array.isArray(external) && external.length > 0) {
+      return external;
+    }
   }
 
   const ProBadgeDropdown = () => (
@@ -74,14 +76,8 @@ const getProToggleControls = ({
 
   return [
     {
-      key: `${keyPrefix}-${pro ? 'default' : 'locked'}`,
-      comp: pro ? (
-        <ToggleControl
-          label={label}
-          checked={checked}
-          onChange={(value) => setAttributes({ [dynamicAttr]: value })}
-        />
-      ) : (
+      key: `${keyPrefix}-${dynamicAttr}-locked`,
+      comp: (
         <div className="fb-pro-lock switcher-control">
           <ToggleControl
             label={label}

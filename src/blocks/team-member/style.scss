@@ -1,6 +1,13 @@
 .fb-team-member-main-wrapper {
 	position: relative;
 	overflow: hidden;
+
+	a {
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
 }
 
 .fb-team-member-wrapper {

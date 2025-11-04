@@ -43,6 +43,11 @@ import FBIconPicker from '../../components/icon-picker/index.js';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
 
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -374,6 +379,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Social Profile
 		teamMemberSocialItems,
+		frontendTeamMemberSocialItems,
 		teamMemberSocialType,
 		teamMemberSocialPosition,
 		teamMemberSocialAlignment,
@@ -382,6 +388,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Social Icon Wrapper Btn
 		socialIconBtnIcon,
+		frontendSocialIconBtnIcon,
 		socialIconBtnIconSize,
 		socialIconBtnIconSizeUnits,
 		socialIconBtnColorSwitcher,
@@ -503,6 +510,82 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		teamMemberCustomCSS,
 		teamMemberGlobalWraperID,
 		teamMemberGlobalWraperClass,
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+	/** Start Dynamic Team Member Name Text */
+		dynamicTeamMemberNameEnabled,
+		dynamicTeamMemberNameSource,
+		dynamicTeamMemberNamePostId,
+		dynamicTeamMemberNamePostType,
+		dynamicTeamMemberNamePostLabel,
+		dynamicTeamMemberNameField,
+		dynamicTeamMemberNameFeaturedImageField,
+
+		dynamicTeamMemberNameDateType,
+		dynamicTeamMemberNameDateFormat,
+
+		dynamicTeamMemberNameTimeType,
+		dynamicTeamMemberNameTimeFormat,
+
+		dynamicTeamMemberNameCommentsZeroText,
+		dynamicTeamMemberNameCommentsOneText,
+		dynamicTeamMemberNameCommentsManyText,
+
+		dynamicTeamMemberNameTermsTaxonomy,
+		dynamicTeamMemberNameTermsSeparator,
+		dynamicTeamMemberNameEnableLink,
+		dynamicTeamMemberNameLinkSource,
+		/** End Dynamic Team Member Name Text */
+
+		/** Start Dynamic Team Member Designation Text */
+		dynamicTeamMemberDesignationEnabled,
+		dynamicTeamMemberDesignationSource,
+		dynamicTeamMemberDesignationPostId,
+		dynamicTeamMemberDesignationPostType,
+		dynamicTeamMemberDesignationPostLabel,
+		dynamicTeamMemberDesignationField,
+		dynamicTeamMemberDesignationFeaturedImageField,
+
+		dynamicTeamMemberDesignationDateType,
+		dynamicTeamMemberDesignationDateFormat,
+
+		dynamicTeamMemberDesignationTimeType,
+		dynamicTeamMemberDesignationTimeFormat,
+
+		dynamicTeamMemberDesignationCommentsZeroText,
+		dynamicTeamMemberDesignationCommentsOneText,
+		dynamicTeamMemberDesignationCommentsManyText,
+
+		dynamicTeamMemberDesignationTermsTaxonomy,
+		dynamicTeamMemberDesignationTermsSeparator,
+		dynamicTeamMemberDesignationEnableLink,
+		dynamicTeamMemberDesignationLinkSource,
+		/** End Dynamic Team Member Designation Text */
+
 	} = attributes;
 
 	const deviceType= useDeviceType();
@@ -2864,7 +2947,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all 0.3s ease-in-out;
 			}
 
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name,
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name a {
 				${teamMemberNameGlobalTypoSwitcher?.fontFamily === true && teamMemberNameGlobalTypographyData?.fontFamily ? `font-family: ${teamMemberNameGlobalTypographyData?.fontFamily};` : ''}
 				${teamMemberNameGlobalTypoSwitcher?.fontSize === true && teamMemberNameGlobalTypographyData?.fontSize ? `font-size: ${teamMemberNameGlobalTypographyData?.fontSize};` : ''}
 				${teamMemberNameGlobalTypoSwitcher?.fontWeight === true && teamMemberNameGlobalTypographyData?.fontWeight ? `font-weight: ${teamMemberNameGlobalTypographyData?.fontWeight};` : ''}
@@ -2886,11 +2970,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberNameMarginGetDesktop && teamMemberNameMarginDesktop?.top ? `margin: ${teamMemberNameMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name:hover {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name:hover,
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name a:hover {
 				${teamMemberNameHoverColor ? `color: ${teamMemberNameHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation,
+			 .fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation a {
 				${teamMemberDesignationGlobalTypoSwitcher?.fontFamily === true && teamMemberDesignationGlobalTypographyData?.fontFamily ? `font-family: ${teamMemberDesignationGlobalTypographyData?.fontFamily};` : ''}
 				${teamMemberDesignationGlobalTypoSwitcher?.fontSize === true && teamMemberDesignationGlobalTypographyData?.fontSize ? `font-size: ${teamMemberDesignationGlobalTypographyData?.fontSize};` : ''}
 				${teamMemberDesignationGlobalTypoSwitcher?.fontWeight === true && teamMemberDesignationGlobalTypographyData?.fontWeight ? `font-weight: ${teamMemberDesignationGlobalTypographyData?.fontWeight};` : ''}
@@ -2912,12 +2998,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberDesignationMarginGetDesktop && teamMemberDesignationMarginDesktop?.top ? `margin: ${teamMemberDesignationMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation:hover {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation:hover,
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation a:hover {
 				${teamMemberDesignationHoverColor ? `color: ${teamMemberDesignationHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc,
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc a {
 				${teamMemberDescGlobalTypoSwitcher?.fontFamily === true && teamMemberDescGlobalTypographyData?.fontFamily ? `font-family: ${teamMemberDescGlobalTypographyData?.fontFamily};` : ''}
 				${teamMemberDescGlobalTypoSwitcher?.fontSize === true && teamMemberDescGlobalTypographyData?.fontSize ? `font-size: ${teamMemberDescGlobalTypographyData?.fontSize};` : ''}
 				${teamMemberDescGlobalTypoSwitcher?.fontWeight === true && teamMemberDescGlobalTypographyData?.fontWeight ? `font-weight: ${teamMemberDescGlobalTypographyData?.fontWeight};` : ''}
@@ -2939,7 +3027,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${teamMemberDescMarginGetDesktop && teamMemberDescMarginDesktop?.top ? `margin: ${teamMemberDescMarginGetDesktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
-			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc:hover {
+			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc:hover,
+			 .fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc a:hover {
 				${teamMemberDescHoverColor ? `color: ${teamMemberDescHoverColor};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
@@ -3258,19 +3347,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${teamMemberContentMarginGetTab && teamMemberContentMarginTab?.top ? `margin: ${teamMemberContentMarginGetTab};` : ''}
 					${teamMemberContentPaddingGetTab && teamMemberContentPaddingTab?.top ? `padding: ${teamMemberContentPaddingGetTab};` : ''}
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name {
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name,
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name a {
 					${teamMemberNameGlobalTypoSwitcher?.fontSize === false && teamMemberNameFontSize?.Tablet ? `font-size: ${teamMemberNameFontSize?.Tablet}${teamMemberNameFontSizeUnits?.Tablet};` : ''}
 					${teamMemberNameGlobalTypoSwitcher?.letterSpacing === false && teamMemberNameLetterSpacing?.Tablet ? `letter-spacing: ${teamMemberNameLetterSpacing?.Tablet}${teamMemberNameLetterSpacingUnits?.Tablet};` : ''}
 					${teamMemberNameGlobalTypoSwitcher?.lineHeight === false && teamMemberNameLineHeight?.Tablet ? `line-height: ${teamMemberNameLineHeight?.Tablet}${teamMemberNameLineHeightUnits?.Tablet};` : ''}
 					${teamMemberNameMarginGetTab && teamMemberNameMarginTab?.top ? `margin: ${teamMemberNameMarginGetTab};` : ''}
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation {
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation,
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation a {
 					${teamMemberDesignationGlobalTypoSwitcher?.fontSize === false && teamMemberDesignationFontSize?.Tablet ? `font-size: ${teamMemberDesignationFontSize?.Tablet}${teamMemberDesignationFontSizeUnits?.Tablet};` : ''}
 					${teamMemberDesignationGlobalTypoSwitcher?.letterSpacing === false && teamMemberDesignationLetterSpacing?.Tablet ? `letter-spacing: ${teamMemberDesignationLetterSpacing?.Tablet}${teamMemberDesignationLetterSpacingUnits?.Tablet};` : ''}
 					${teamMemberDesignationGlobalTypoSwitcher?.lineHeight === false && teamMemberDesignationLineHeight?.Tablet ? `line-height: ${teamMemberDesignationLineHeight?.Tablet}${teamMemberDesignationLineHeightUnits?.Tablet};` : ''}
 					${teamMemberDesignationMarginGetTab && teamMemberDesignationMarginTab?.top ? `margin: ${teamMemberDesignationMarginGetTab};` : ''}
 				}
-				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc {
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc,
+				.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc a {
 					${teamMemberDescGlobalTypoSwitcher?.fontSize === false && teamMemberDescFontSize?.Tablet ? `font-size: ${teamMemberDescFontSize?.Tablet}${teamMemberDescFontSizeUnits?.Tablet};` : ''}
 					${teamMemberDescGlobalTypoSwitcher?.letterSpacing === false && teamMemberDescLetterSpacing?.Tablet ? `letter-spacing: ${teamMemberDescLetterSpacing?.Tablet}${teamMemberDescLetterSpacingUnits?.Tablet};` : ''}
 					${teamMemberDescGlobalTypoSwitcher?.lineHeight === false && teamMemberDescLineHeight?.Tablet ? `line-height: ${teamMemberDescLineHeight?.Tablet}${teamMemberDescLineHeightUnits?.Tablet};` : ''}
@@ -3354,19 +3446,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						${teamMemberContentMarginGetMobile && teamMemberContentMarginMobile?.top ? `margin: ${teamMemberContentMarginGetMobile};` : ''}
 						${teamMemberContentPaddingGetMobile && teamMemberContentPaddingMobile?.top ? `padding: ${teamMemberContentPaddingGetMobile};` : ''}
 					}
-					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name,
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-name a {
 						${teamMemberNameGlobalTypoSwitcher?.fontSize === false && teamMemberNameFontSize?.Mobile ? `font-size: ${teamMemberNameFontSize?.Mobile}${teamMemberNameFontSizeUnits?.Mobile};` : ''}
 						${teamMemberNameGlobalTypoSwitcher?.letterSpacing === false && teamMemberNameLetterSpacing?.Mobile ? `letter-spacing: ${teamMemberNameLetterSpacing?.Mobile}${teamMemberNameLetterSpacingUnits?.Mobile};` : ''}
 						${teamMemberNameGlobalTypoSwitcher?.lineHeight === false && teamMemberNameLineHeight?.Mobile ? `line-height: ${teamMemberNameLineHeight?.Mobile}${teamMemberNameLineHeightUnits?.Mobile};` : ''}
 						${teamMemberNameMarginGetMobile && teamMemberNameMarginMobile?.top ? `margin: ${teamMemberNameMarginGetMobile};` : ''}
 					}
-					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation,
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-designation a {
 						${teamMemberDesignationGlobalTypoSwitcher?.fontSize === false && teamMemberDesignationFontSize?.Mobile ? `font-size: ${teamMemberDesignationFontSize?.Mobile}${teamMemberDesignationFontSizeUnits?.Mobile};` : ''}
 						${teamMemberDesignationGlobalTypoSwitcher?.letterSpacing === false && teamMemberDesignationLetterSpacing?.Mobile ? `letter-spacing: ${teamMemberDesignationLetterSpacing?.Mobile}${teamMemberDesignationLetterSpacingUnits?.Mobile};` : ''}
 						${teamMemberDesignationGlobalTypoSwitcher?.lineHeight === false && teamMemberDesignationLineHeight?.Mobile ? `line-height: ${teamMemberDesignationLineHeight?.Mobile}${teamMemberDesignationLineHeightUnits?.Mobile};` : ''}
 						${teamMemberDesignationMarginGetMobile && teamMemberDesignationMarginMobile?.top ? `margin: ${teamMemberDesignationMarginGetMobile};` : ''}
 					}
-					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc {
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc,
+					.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-desc a {
 						${teamMemberDescGlobalTypoSwitcher?.fontSize === false && teamMemberDescFontSize?.Mobile ? `font-size: ${teamMemberDescFontSize?.Mobile}${teamMemberDescFontSizeUnits?.Mobile};` : ''}
 						${teamMemberDescGlobalTypoSwitcher?.letterSpacing === false && teamMemberDescLetterSpacing?.Mobile ? `letter-spacing: ${teamMemberDescLetterSpacing?.Mobile}${teamMemberDescLetterSpacingUnits?.Mobile};` : ''}
 						${teamMemberDescGlobalTypoSwitcher?.lineHeight === false && teamMemberDescLineHeight?.Mobile ? `line-height: ${teamMemberDescLineHeight?.Mobile}${teamMemberDescLineHeightUnits?.Mobile};` : ''}
@@ -3790,6 +3885,90 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 
+
+
+	/**
+     * Generate SVG Icons for Icon
+     */
+	useEffect(() => {
+		if ( !Array.isArray(teamMemberSocialItems) ) {
+		  if (frontendTeamMemberSocialItems.length) {
+			setAttributes({ frontendTeamMemberSocialItems: [] });
+		  }
+		  return;
+		}
+	
+		// Map items -> add svg from slug
+		const next = teamMemberSocialItems.map(item => ({
+		  ...item,
+		  svg: generateSvgIcon(item?.teamMemberSocialIcon || ''),
+		}));
+	
+		// Prevent infinite loop: only set if changed
+		const same =
+		  JSON.stringify(next) === JSON.stringify(frontendTeamMemberSocialItems || []);
+	
+		if (!same) {
+		  setAttributes({ frontendTeamMemberSocialItems: next });
+		}
+	}, [teamMemberSocialItems, generateSvgIcon]); // if generateSvgIcon is not memoized, add to deps
+
+	useEffect(() => {
+		setAttributes({
+			frontendSocialIconBtnIcon: generateSvgIcon(socialIconBtnIcon), 
+		})
+	}, [socialIconBtnIcon]);
+
+	console.log(frontendSocialIconBtnIcon);
+
+	// Check if Pro is active
+	const getProActiveState = getProActive();
+	useEffect(() => {
+		if (!getProActiveState) { 
+			setAttributes({
+				dynamicDescriptionEnabled: false,
+				dynamicDescriptionEnableLink: false,
+				dynamicTeamMemberNameEnabled: false,
+				dynamicTeamMemberNameEnableLink: false,
+				dynamicTeamMemberDesignationEnabled: false,
+				dynamicTeamMemberDesignationEnableLink: false,
+			});
+		}
+	}, [getProActiveState]);
+
+	/**
+	 * Toggle Controls for Dynamic Content
+	 */
+	const dynamicDescriptionContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-team-member-dynamic-description-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicDescriptionEnabled',
+		label: __('Dynamic Content', 'frontis-blocks'),
+		keyPrefix: 'team-member-dynamic-description-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicTeamMemberNameContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-team-member-dynamic-team-member-name-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTeamMemberNameEnabled',
+		label: __('Dynamic Team Member Name', 'frontis-blocks'),
+		keyPrefix: 'team-member-dynamic-team-member-name-content',
+		isProActive : getProActiveState
+	});
+
+	const dynamicTeamMemberDesignationContentToggleControls = getProToggleControls({
+		hook: 'frontisblocks-team-member-dynamic-team-member-designation-toggle-controls',
+		attributes,
+		setAttributes,
+		dynamicAttr: 'dynamicTeamMemberDesignationEnabled',
+		label: __('Dynamic Team Member Designation', 'frontis-blocks'),
+		keyPrefix: 'team-member-dynamic-team-member-designation-content',
+		isProActive : getProActiveState
+	});
+
 	/**
 	 * Inspector General Controls
 	 */
@@ -3866,13 +4045,68 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
 
 			<PanelBody title={__("Name & Designation", "frontis-blocks")} initialOpen={false}>
-				<TextControl
-					tagName={teamMemberNameHeadingTag}
-					label={__('Name', 'frontis-blocks')}
-					value={teamMemberName}
-					onChange={(value) => setAttributes({ teamMemberName: value })}
-					placeholder={__('Wade Warren', 'frontis-block')}
+
+				{dynamicTeamMemberNameContentToggleControls.map((control, index) => (
+					<div key={control.key || index}>{control.comp}</div>
+				))}
+
+				<DynamicDataSourceControl
+					enabled={dynamicTeamMemberNameEnabled}  
+					
+					source={dynamicTeamMemberNameSource} 
+					setSource={(value) => setAttributes({ dynamicTeamMemberNameSource: value })}   
+					postId={dynamicTeamMemberNamePostId}
+					setPostId={(value) => setAttributes({ dynamicTeamMemberNamePostId: value })}
+					postType={dynamicTeamMemberNamePostType}
+					setPostType={(value) => setAttributes({ dynamicTeamMemberNamePostType: value })}
+					postLabel={dynamicTeamMemberNamePostLabel}
+					setPostLabel={(value) => setAttributes({ dynamicTeamMemberNamePostLabel: value })}
+
+					field={dynamicTeamMemberNameField}
+					setField={(value) => setAttributes({ dynamicTeamMemberNameField: value })}
+					featuredImageField={dynamicTeamMemberNameFeaturedImageField}
+					setFeaturedImageField={(value) => setAttributes({ dynamicTeamMemberNameFeaturedImageField: value })}
+
+					dateType={dynamicTeamMemberNameDateType}
+					setDateType={(value) => setAttributes({ dynamicTeamMemberNameDateType: value })}
+					dateFormat={dynamicTeamMemberNameDateFormat}
+					setDateFormat={(value) => setAttributes({ dynamicTeamMemberNameDateFormat: value })}
+					timeType={dynamicTeamMemberNameTimeType}
+					setTimeType={(value) => setAttributes({ dynamicTeamMemberNameTimeType: value })}
+					timeFormat={dynamicTeamMemberNameTimeFormat}
+					setTimeFormat={(value) => setAttributes({ dynamicTeamMemberNameTimeFormat: value })}
+
+					commentsZeroText={dynamicTeamMemberNameCommentsZeroText}
+					setCommentsZeroText={(value) => setAttributes({ dynamicTeamMemberNameCommentsZeroText: value })}
+					commentsOneText={dynamicTeamMemberNameCommentsOneText}
+					setCommentsOneText={(value) =>setAttributes({ dynamicTeamMemberNameCommentsOneText: value })}
+					commentsManyText={dynamicTeamMemberNameCommentsManyText}
+					setCommentsManyText={(value) =>setAttributes({ dynamicTeamMemberNameCommentsManyText: value })}
+
+					termsTaxonomy={dynamicTeamMemberNameTermsTaxonomy}
+					setTermsTaxonomy={(value) => setAttributes({ dynamicTeamMemberNameTermsTaxonomy: value })}
+					termsSeparator={dynamicTeamMemberNameTermsSeparator}
+					setTermsSeparator={(value) => setAttributes({ dynamicTeamMemberNameTermsSeparator: value })}
 				/>
+
+				{dynamicTeamMemberNameEnabled && ( 
+					<DynamicDataLinkControl
+						enableLink={dynamicTeamMemberNameEnableLink}
+						setEnableLink={(value) => setAttributes({ dynamicTeamMemberNameEnableLink: value })}
+						linkSource={dynamicTeamMemberNameLinkSource}
+						setLinkSource={(value) => setAttributes({ dynamicTeamMemberNameLinkSource: value })}
+					/>
+				)}
+
+				{!dynamicTeamMemberNameEnabled && (
+					<TextControl
+						tagName={teamMemberNameHeadingTag}
+						label={__('Name', 'frontis-blocks')}
+						value={teamMemberName}
+						onChange={(value) => setAttributes({ teamMemberName: value })}
+						placeholder={__('Wade Warren', 'frontis-block')}
+					/>
+				)}
 
 				<FB_HtmlTagControl
 					label={__("Name Tag", "frontis-block")}
@@ -3880,11 +4114,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setGlobalHtmlTag={(value) => setAttributes({ teamMemberNameHeadingTag: value })}
 				/>
 
-				<TextControl
-					label={__('Designation', 'frontis-blocks')}
-					value={teamMemberDesignation}
-					onChange={(value) => setAttributes({ teamMemberDesignation: value })}
+				{dynamicTeamMemberDesignationContentToggleControls.map((control, index) => (
+					<div key={control.key || index}>{control.comp}</div>
+				))}
+
+				<DynamicDataSourceControl
+					enabled={dynamicTeamMemberDesignationEnabled}  
+					
+					source={dynamicTeamMemberDesignationSource} 
+					setSource={(value) => setAttributes({ dynamicTeamMemberDesignationSource: value })}   
+					postId={dynamicTeamMemberDesignationPostId}
+					setPostId={(value) => setAttributes({ dynamicTeamMemberDesignationPostId: value })}
+					postType={dynamicTeamMemberDesignationPostType}
+					setPostType={(value) => setAttributes({ dynamicTeamMemberDesignationPostType: value })}
+					postLabel={dynamicTeamMemberDesignationPostLabel}
+					setPostLabel={(value) => setAttributes({ dynamicTeamMemberDesignationPostLabel: value })}
+
+					field={dynamicTeamMemberDesignationField}
+					setField={(value) => setAttributes({ dynamicTeamMemberDesignationField: value })}
+					featuredImageField={dynamicTeamMemberDesignationFeaturedImageField}
+					setFeaturedImageField={(value) => setAttributes({ dynamicTeamMemberDesignationFeaturedImageField: value })}
+
+					dateType={dynamicTeamMemberDesignationDateType}
+					setDateType={(value) => setAttributes({ dynamicTeamMemberDesignationDateType: value })}
+					dateFormat={dynamicTeamMemberDesignationDateFormat}
+					setDateFormat={(value) => setAttributes({ dynamicTeamMemberDesignationDateFormat: value })}
+					timeType={dynamicTeamMemberDesignationTimeType}
+					setTimeType={(value) => setAttributes({ dynamicTeamMemberDesignationTimeType: value })}
+					timeFormat={dynamicTeamMemberDesignationTimeFormat}
+					setTimeFormat={(value) => setAttributes({ dynamicTeamMemberDesignationTimeFormat: value })}
+
+					commentsZeroText={dynamicTeamMemberDesignationCommentsZeroText}
+					setCommentsZeroText={(value) => setAttributes({ dynamicTeamMemberDesignationCommentsZeroText: value })}
+					commentsOneText={dynamicTeamMemberDesignationCommentsOneText}
+					setCommentsOneText={(value) =>setAttributes({ dynamicTeamMemberDesignationCommentsOneText: value })}
+					commentsManyText={dynamicTeamMemberDesignationCommentsManyText}
+					setCommentsManyText={(value) =>setAttributes({ dynamicTeamMemberDesignationCommentsManyText: value })}
+
+					termsTaxonomy={dynamicTeamMemberDesignationTermsTaxonomy}
+					setTermsTaxonomy={(value) => setAttributes({ dynamicTeamMemberDesignationTermsTaxonomy: value })}
+					termsSeparator={dynamicTeamMemberDesignationTermsSeparator}
+					setTermsSeparator={(value) => setAttributes({ dynamicTeamMemberDesignationTermsSeparator: value })}
 				/>
+
+				{dynamicTeamMemberDesignationEnabled && ( 
+					<DynamicDataLinkControl
+						enableLink={dynamicTeamMemberDesignationEnableLink}
+						setEnableLink={(value) => setAttributes({ dynamicTeamMemberDesignationEnableLink: value })}
+						linkSource={dynamicTeamMemberDesignationLinkSource}
+						setLinkSource={(value) => setAttributes({ dynamicTeamMemberDesignationLinkSource: value })}
+					/>
+				)}
+				{!dynamicTeamMemberDesignationEnabled && (
+					<TextControl
+						label={__('Designation', 'frontis-blocks')}
+						value={teamMemberDesignation}
+						onChange={(value) => setAttributes({ teamMemberDesignation: value })}
+					/>
+				)}
 			</PanelBody>
 
 			<PanelBody title={__("Description", "frontis-blocks")} initialOpen={false}>
@@ -3895,11 +4182,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChange={(value) => setAttributes({ teamMemberDescSwitcher: value })}
 				/>
 
-				{ teamMemberDescSwitcher === true && <TextareaControl
-					label={__('Description', 'frontis-blocks')}
-					value={teamMemberDesc}
-					onChange={(value) => setAttributes({ teamMemberDesc: value })}
-				/>}
+				{dynamicDescriptionContentToggleControls.map((control, index) => (
+					<div key={control.key || index}>{control.comp}</div>
+				))}
+
+				<DynamicDataSourceControl
+					enabled={dynamicDescriptionEnabled}
+					
+					source={dynamicDescriptionSource}
+					setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+					postId={dynamicDescriptionPostId}
+					setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+					postType={dynamicDescriptionPostType}
+					setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+					postLabel={dynamicDescriptionPostLabel}
+					setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+					field={dynamicDescriptionField}
+					setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+					featuredImageField={dynamicDescriptionFeaturedImageField}
+					setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+					dateType={dynamicDescriptionDateType}
+					setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+					dateFormat={dynamicDescriptionDateFormat}
+					setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+					timeType={dynamicDescriptionTimeType}
+					setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+					timeFormat={dynamicDescriptionTimeFormat}
+					setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+					commentsZeroText={dynamicDescriptionCommentsZeroText}
+					setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+					commentsOneText={dynamicDescriptionCommentsOneText}
+					setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+					commentsManyText={dynamicDescriptionCommentsManyText}
+					setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+					termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+					setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+					termsSeparator={dynamicDescriptionTermsSeparator}
+					setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
+				/>
+
+				{dynamicDescriptionEnabled && ( 
+					<DynamicDataLinkControl
+						enableLink={dynamicDescriptionEnableLink}
+						setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+						linkSource={dynamicDescriptionLinkSource}
+						setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+					/>
+				)}
+
+				{ !dynamicDescriptionEnabled && teamMemberDescSwitcher === true && (
+					<TextareaControl
+						label={__('Description', 'frontis-blocks')}
+						value={teamMemberDesc}
+						onChange={(value) => setAttributes({ teamMemberDesc: value })}
+					/>
+				)}
+
 			</PanelBody>
 
 			<PanelBody title={__("Social Profiles", "frontis-blocks")} initialOpen={false}>
