@@ -568,3 +568,21 @@ export const IMAGE_SIZES = [
     { label: "Full", value: "full" },
 ];
 
+
+];
+
+/** Post Comment Form */
+export const DEFAULT_TEXTS = {
+    formTitle: "Leave a Reply",
+    cancelReply: "Cancel reply",
+    loginText: "Logged in as",
+    logoutText: "Log out?",
+    buttonText: "Post Comment",
+};
+
+export const FORM_LAYOUTS = [
+    { label: "Default", value: "default" },
+    { label: "Compact", value: "compact" },
+    { label: "Modern", value: "modern" },
+];
+
