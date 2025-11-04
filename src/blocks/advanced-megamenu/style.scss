@@ -1,4 +1,3 @@
-/* fb-advanced Mega Menu - Frontend Styles */
 .fb-advanced-mega-menu {
     position: relative;
     width: 100%;
@@ -68,18 +67,12 @@
     display: flex;
     align-items: center;
     gap: 5px;
-    padding: 1rem 1.5rem;
     text-decoration: none;
     color: #374151;
     font-weight: 500;
     font-size: 16px;
     transition: all 0.2s ease;
     cursor: pointer;
-
-    &:hover {
-        color: #2563eb;
-        background: #f3f4f6;
-    }
 }
 
 .fb-advanced-mega-menu-indicator {
@@ -132,11 +125,6 @@
     transform: rotate(180deg);
 }
 
-.fb-advanced-mega-menu[data-trigger="click"] .fb-advanced-mega-menu-item.active .fb-advanced-mega-menu-link {
-    color: #2563eb;
-    background: #f3f4f6;
-}
-
 .fb-advanced-mega-menu-empty {
     padding: 2rem;
     text-align: center;
@@ -148,15 +136,11 @@
 
 @media only screen and (min-width: 1024px) {
     .fb-advanced-mega-menu-panel {
-        margin-top: 23px !important;
+        margin-top: 23px;
     }
 
     .fb-advanced-mega-menu-list {
         gap: 20px;
-    }
-
-    .fb-advanced-mega-menu-link {
-        padding: 0 !important;
     }
 }
 
@@ -199,10 +183,6 @@
 
     .fb-advanced-mega-menu-content {
         padding: 1rem 2%;
-    }
-
-    .fb-advanced-mega-menu-link {
-        padding: 0.75rem 1rem;
     }
 
     .fb-advanced-mega-menu-item {
