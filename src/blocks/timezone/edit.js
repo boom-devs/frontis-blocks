@@ -7,7 +7,7 @@ import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { blockID, location, officeHours, startTime, title, officeStatus } = attributes;
+	const { blockID, location, timezone, timezones, officeHours, startTime, title, officeStatus } = attributes;
 	const [currentTime, setCurrentTime] = useState(new Date());
 
 	const blockProps = useBlockProps({
