@@ -14,9 +14,8 @@ import Inspector from "./inspector";
 import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
-import DynamicTextValue from '@Components/dynamic-text-value';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         DeviceType,
@@ -45,56 +44,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dualBtnDesktopSwitcher,
 		dualBtnTabletSwitcher,
 		dualBtnMobileSwitcher,
-
-		/** Start Dynamic Btn One Text */
-		dynamicBtnOneEnabled,
-		dynamicBtnOneSource,
-		dynamicBtnOnePostId,
-		dynamicBtnOnePostType,
-		dynamicBtnOnePostLabel,
-		dynamicBtnOneField,
-		dynamicBtnOneFeaturedImageField,
-
-		dynamicBtnOneDateType,
-		dynamicBtnOneDateFormat,
-
-		dynamicBtnOneTimeType,
-		dynamicBtnOneTimeFormat,
-
-		dynamicBtnOneCommentsZeroText,
-		dynamicBtnOneCommentsOneText,
-		dynamicBtnOneCommentsManyText,
-
-		dynamicBtnOneTermsTaxonomy,
-		dynamicBtnOneTermsSeparator,
-		dynamicBtnOneEnableLink,	
-		dynamicBtnOneLinkSource,
-		/** End Dynamic Btn One Text */
-
-		/** Start Dynamic Btn Two Text */
-		dynamicBtnTwoEnabled,
-		dynamicBtnTwoSource,
-		dynamicBtnTwoPostId,
-		dynamicBtnTwoPostType,
-		dynamicBtnTwoPostLabel,
-		dynamicBtnTwoField,
-		dynamicBtnTwoFeaturedImageField,
-
-		dynamicBtnTwoDateType,
-		dynamicBtnTwoDateFormat,
-
-		dynamicBtnTwoTimeType,
-		dynamicBtnTwoTimeFormat,
-
-		dynamicBtnTwoCommentsZeroText,
-		dynamicBtnTwoCommentsOneText,
-		dynamicBtnTwoCommentsManyText,
-
-		dynamicBtnTwoTermsTaxonomy,
-		dynamicBtnTwoTermsSeparator,
-		dynamicBtnTwoEnableLink,
-		dynamicBtnTwoLinkSource,
-		/** End Dynamic Btn Two Text */
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -111,70 +60,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     const handleButtonClick = (event) => {
         event.preventDefault();
     };
-
-	/**
-	 * Dynamic Text Value for Button One Text
-	 */
-	const { dynamicDisplayValue: dynamicBtnOneValue, dynamicDisplayLink: dynamicBtnOneLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnOneEnabled,
-		textSource:             dynamicBtnOneSource,
-		textField:              dynamicBtnOneField,
-
-		textPostId:             dynamicBtnOnePostId,
-		textPostType:           dynamicBtnOnePostType,
-		textPostLabel:          dynamicBtnOnePostLabel,
-
-		textFeaturedImageField: dynamicBtnOneFeaturedImageField,
-
-		textDateType:           dynamicBtnOneDateType,
-		textDateFormat:         dynamicBtnOneDateFormat,
-		textTimeType:           dynamicBtnOneTimeType,
-		textTimeFormat:         dynamicBtnOneTimeFormat,
-
-		textCommentsZeroText:   dynamicBtnOneCommentsZeroText,
-		textCommentsOneText:    dynamicBtnOneCommentsOneText,
-		textCommentsManyText:   dynamicBtnOneCommentsManyText,
-
-		textTermsTaxonomy:      dynamicBtnOneTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnOneTermsSeparator,
-
-		textLinkEnabled:        dynamicBtnOneEnableLink,
-		textLinkSource:         dynamicBtnOneLinkSource,
-
-		context,
-	});
-
-	/**
-	 * Dynamic Text Value for Button Two Text
-	 */
-	const { dynamicDisplayValue: dynamicBtnTwoValue, dynamicDisplayLink: dynamicBtnTwoLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnTwoEnabled,
-		textSource:             dynamicBtnTwoSource,
-		textField:              dynamicBtnTwoField,
-
-		textPostId:             dynamicBtnTwoPostId,
-		textPostType:           dynamicBtnTwoPostType,
-		textPostLabel:          dynamicBtnTwoPostLabel,
-
-		textFeaturedImageField: dynamicBtnTwoFeaturedImageField,
-
-		textDateType:           dynamicBtnTwoDateType,
-		textDateFormat:         dynamicBtnTwoDateFormat,
-		textTimeType:           dynamicBtnTwoTimeType,
-		textTimeFormat:         dynamicBtnTwoTimeFormat,
-
-		textCommentsZeroText:   dynamicBtnTwoCommentsZeroText,
-		textCommentsOneText:    dynamicBtnTwoCommentsOneText,
-		textCommentsManyText:   dynamicBtnTwoCommentsManyText,
-
-		textTermsTaxonomy:      dynamicBtnTwoTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTwoTermsSeparator,
-
-		textLinkEnabled:        dynamicBtnTwoEnableLink,
-		textLinkSource:         dynamicBtnTwoLinkSource,
-
-		context,
-	});
 
     return (
         <>
@@ -222,10 +107,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							{buttonIconAlign !== 'icon-only' && (
 								<RichText
 									tagName="span"
-									value={dynamicBtnOneEnabled ? dynamicBtnOneValue : ButtonText} 
-									onChange={(value) => {
-										if (!dynamicBtnOneEnabled) setAttributes({ ButtonText: value });
-									}}
+									value={ButtonText}
+									onChange={(value) => setAttributes({ButtonText: value})}
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>
@@ -273,10 +156,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 								{buttonTwoIconAlign !== 'icon-only' && (
 								<RichText
 									tagName="span"
-									value={dynamicBtnTwoEnabled ? dynamicBtnTwoValue : ButtonTwoText} 
-									onChange={(value) => {
-										if (!dynamicBtnTwoEnabled) setAttributes({ ButtonTwoText: value });
-									}}
+									value={ButtonTwoText}
+									onChange={(value) => setAttributes({ButtonTwoText: value})}
 									placeholder={__('Enter button text...', 'frontis-blocks')}
 									className="fb-advanced-button-text"
 								/>

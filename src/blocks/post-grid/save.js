@@ -84,8 +84,6 @@ export default function save({ attributes }) {
 		authorLinkSwitcher,
 		titleLinkSwitcher,
 
-		postWrapperLinkSwitcher,
-
 	} = attributes;
 
 
@@ -171,7 +169,6 @@ export default function save({ attributes }) {
 				data-author-link-switcher={authorLinkSwitcher}
 				data-title-link-switcher={titleLinkSwitcher}
 
-				data-post-wrapper-link-switcher={postWrapperLinkSwitcher}
 			>
 
 				{/* Category Filter Render */}

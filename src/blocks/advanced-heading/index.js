@@ -15,14 +15,14 @@ registerBlockType(metadata.name, {
 
   __experimentalLabel( attributes ) {
     const {
-      dynamicTextEnabled,
-      dynamicTextSource,
-      dynamicTextField,
+      dynamicEnabled,
+      dynamicSource,
+      dynamicField,
       headingText,
     } = attributes;
 
-    if (dynamicTextEnabled) {
-      switch (dynamicTextField) {
+    if (dynamicEnabled) {
+      switch (dynamicField) {
         case 'post_title':        return __('Post Title', 'frontis-blocks');
         case 'post_excerpt':      return __('Post Excerpt', 'frontis-blocks');
         case 'post_thumbnail':    return __('Featured Image', 'frontis-blocks');
@@ -40,11 +40,11 @@ registerBlockType(metadata.name, {
         case 'author_url':        return __('Author URL', 'frontis-blocks');
         case 'author_avatar':     return __('Author Avatar', 'frontis-blocks');
         default:
-          if (dynamicTextSource === 'site_title')   return __('Site Title', 'frontis-blocks');
-          if (dynamicTextSource === 'site_tagline') return __('Site Tagline', 'frontis-blocks');
-          if (dynamicTextSource === 'archive_title')       return __('Archive Title', 'frontis-blocks');
-          if (dynamicTextSource === 'archive_description') return __('Archive Description', 'frontis-blocks');
-          return sprintf(__('Dynamic (%s)', 'frontis-blocks'), dynamicTextField || dynamicTextSource || '—');
+          if (dynamicSource === 'site_title')   return __('Site Title', 'frontis-blocks');
+          if (dynamicSource === 'site_tagline') return __('Site Tagline', 'frontis-blocks');
+          if (dynamicSource === 'archive_title')       return __('Archive Title', 'frontis-blocks');
+          if (dynamicSource === 'archive_description') return __('Archive Description', 'frontis-blocks');
+          return sprintf(__('Dynamic (%s)', 'frontis-blocks'), dynamicField || dynamicSource || '—');
       }
     }
 

@@ -65,8 +65,6 @@
 			tagLinkSwitcher: attrs.tagLinkSwitcher,
 			authorLinkSwitcher: attrs.authorLinkSwitcher,
 			titleLinkSwitcher: attrs.titleLinkSwitcher,
-
-			postWrapperLinkSwitcher: attrs.postWrapperLinkSwitcher,
 		};
 	}
 
@@ -146,8 +144,6 @@
 			tagLinkSwitcher,
 			authorLinkSwitcher,
 			titleLinkSwitcher,
-
-			postWrapperLinkSwitcher,
 		} = options;
 
 		let currentPage = currentPages[blockId] || 1;
@@ -221,8 +217,6 @@
 			tagLinkSwitcher: tagLinkSwitcher || true,
 			authorLinkSwitcher: authorLinkSwitcher || true,
 			titleLinkSwitcher: titleLinkSwitcher || true,
-
-			postWrapperLinkSwitcher: postWrapperLinkSwitcher || false,
 
 		};
 
@@ -601,8 +595,6 @@
 			tagLinkSwitcher: grid.getAttribute('data-tag-link-switcher') || true,
 			authorLinkSwitcher: grid.getAttribute('data-author-link-switcher') || true,
 			titleLinkSwitcher: grid.getAttribute('data-title-link-switcher') || true,
-
-			postWrapperLinkSwitcher: grid.getAttribute('data-post-wrapper-link-switcher') || false,
 		};
 	};
 

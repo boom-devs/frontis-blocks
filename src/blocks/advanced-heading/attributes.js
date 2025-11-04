@@ -41,155 +41,107 @@ const attributes = {
         default: '',
     },
 
-    /** Start Dynamic Text */
-    dynamicTextEnabled : {
+
+    dynamicEnabled : {
         type: 'boolean',
         default: false
     },
-    dynamicTextSource: {
+    dynamicSource: {
         type: 'string',
         default: 'current_post'
     },
-    dynamicTextPostId: {
+    dynamicPostId: {
         type: 'number',
         default: 0
     },
-    dynamicTextPostType: {
+    dynamicPostType: {
         type: 'string',
         default: ''
     },
-    dynamicTextPostLabel: {
+    dynamicPostLabel: {
         type: 'string',
         default: ''
     },
-    dynamicTextField: {
+    dynamicField: {
         type: 'string',
         default: 'post_title'
+    },
+    metaKey: {
+        type: 'string',
+        default: ''
+    },
+    authorMetaKey : {
+        type: 'string',
+        default: ''
+    },
+    termsTaxonomy: {
+        type: 'string',
+        default: ''
+    },
+    termsFormat: {
+        type: 'string',
+        default: 'names'
+    },
+    requestParamKey: {
+        type: 'string',
+        default: ''
+    },
+    shortcode: {
+        type: 'string',
+        default: ''
+    },
+    userScope: {
+        type: 'string',
+        default: 'current'
+    },
+    dynamicEnableLink: {
+        type: 'boolean',
+        default: false
     },
     dynamicFeaturedImageField:{
         type: 'string',
         default: 'title'
     },
-    dynamicTextDateType: {
+    dynamicDateType: {
         type: 'string',
         default: 'published'
     },
-    dynamicTextDateFormat: {
+    dynamicDateFormat: {
         type: 'string',
         default: 'default'
     },
-    dynamicTextTimeType: {
+    dynamicTimeType: {
         type: 'string',
         default: 'published'
     },
-    dynamicTextTimeFormat: {
+    dynamicTimeFormat: {
         type: 'string',
         default: 'default'
     },
-    dynamicTextCommentsZeroText: {
+    dynamicCommentsZeroText: {
         type: 'string',
         default: 'No Response',
     },
-    dynamicTextCommentsOneText: {
+    dynamicCommentsOneText: {
         type: 'string',
         default: 'One Response',
     },
-    dynamicTextCommentsManyText: {
+    dynamicCommentsManyText: {
         type: 'string',
         default: '{num} Response',
     },   
-    dynamicTextTermsTaxonomy: {
+    dynamicTermsTaxonomy: {
         type: 'string',
         default: 'category',
     },
-    dynamicTextTermsSeparator: {
+    dynamicTermsSeparator: {
         type: 'string',
         default: ', ',
     },
-    dynamicTextEnableLink: {
-        type: 'boolean',
-        default: false
-    },
-    dynamicTextLinkSource: {
+    dynamicLinkSource: {
         type: 'string',
         default: 'post_permalink',
     },
-    /** End Dynamic Text */
-
-    /** Start Dynamic Sub Heading Text */
-    dynamicSubHeadingTextEnabled : {
-        type: 'boolean',
-        default: false
-    },
-    dynamicSubHeadingTextSource: {
-        type: 'string',
-        default: 'current_post'
-    },
-    dynamicSubHeadingTextPostId: {
-        type: 'number',
-        default: 0
-    },
-    dynamicSubHeadingTextPostType: {
-        type: 'string',
-        default: ''
-    },
-    dynamicSubHeadingTextPostLabel: {
-        type: 'string',
-        default: ''
-    },
-    dynamicSubHeadingTextField: {
-        type: 'string',
-        default: 'post_title'
-    },
-    dynamicSubHeadingFeaturedImageField:{
-        type: 'string',
-        default: 'title'
-    },
-    dynamicSubHeadingTextDateType: {
-        type: 'string',
-        default: 'published'
-    },
-    dynamicSubHeadingTextDateFormat: {
-        type: 'string',
-        default: 'default'
-    },
-    dynamicSubHeadingTextTimeType: {
-        type: 'string',
-        default: 'published'
-    },
-    dynamicSubHeadingTextTimeFormat: {
-        type: 'string',
-        default: 'default'
-    },
-    dynamicSubHeadingTextCommentsZeroText: {
-        type: 'string',
-        default: 'No Response',
-    },
-    dynamicSubHeadingTextCommentsOneText: {
-        type: 'string',
-        default: 'One Response',
-    },
-    dynamicSubHeadingTextCommentsManyText: {
-        type: 'string',
-        default: '{num} Response',
-    },   
-    dynamicSubHeadingTextTermsTaxonomy: {
-        type: 'string',
-        default: 'category',
-    },
-    dynamicSubHeadingTextTermsSeparator: {
-        type: 'string',
-        default: ', ',
-    },
-    dynamicSubHeadingTextEnableLink: {
-        type: 'boolean',
-        default: false
-    },
-    dynamicSubHeadingTextLinkSource: {
-        type: 'string',
-        default: 'post_permalink',
-    },
-    /** End Dynamic Sub Heading Text */
 
 
     /** Start Heading Style */
@@ -681,7 +633,7 @@ const attributes = {
     },
     subHeadingTextDecoration: {
         type: 'string',
-        default: 'none'
+        default: ''
     },
     subHeadingLetterSpacing: {
         type: 'object',

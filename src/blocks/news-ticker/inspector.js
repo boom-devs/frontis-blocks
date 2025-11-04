@@ -377,6 +377,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showAutoplayButton
 	} = attributes;
 
+	console.log(attributes);
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
@@ -673,9 +674,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const globalDesktopPadding = `${newsTickerGlobalPaddingDesktop?.top}${newsTickerGlobalPaddingUnits?.Desktop} ${newsTickerGlobalPaddingDesktop?.right}${newsTickerGlobalPaddingUnits?.Desktop} ${newsTickerGlobalPaddingDesktop?.bottom}${newsTickerGlobalPaddingUnits?.Desktop} ${newsTickerGlobalPaddingDesktop?.left}${newsTickerGlobalPaddingUnits?.Desktop}`;
-	const globalTabletPadding = `${newsTickerGlobalPaddingTablet?.top}${newsTickerGlobalPaddingUnits?.Tablet} ${newsTickerGlobalPaddingTablet?.right}${newsTickerGlobalPaddingUnits?.Tablet} ${newsTickerGlobalPaddingTablet?.bottom}${newsTickerGlobalPaddingUnits?.Tablet} ${newsTickerGlobalPaddingTablet?.left}${newsTickerGlobalPaddingUnits?.Tablet}`;
-	const globalMobilePadding = `${newsTickerGlobalPaddingMobile?.top}${newsTickerGlobalPaddingUnits?.Mobile} ${newsTickerGlobalPaddingMobile?.right}${newsTickerGlobalPaddingUnits?.Mobile} ${newsTickerGlobalPaddingMobile?.bottom}${newsTickerGlobalPaddingUnits?.Mobile} ${newsTickerGlobalPaddingMobile?.left}${newsTickerGlobalPaddingUnits?.Mobile}`;
+	const globalDesktopPadding = `${newsTickerGlobalPaddingDesktop.top}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.right}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.bottom}${newsTickerGlobalPaddingUnits.Desktop} ${newsTickerGlobalPaddingDesktop.left}${newsTickerGlobalPaddingUnits.Desktop}`;
+	const globalTabletPadding = `${newsTickerGlobalPaddingTablet.top}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.right}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.bottom}${newsTickerGlobalPaddingUnits.Tablet} ${newsTickerGlobalPaddingTablet.left}${newsTickerGlobalPaddingUnits.Tablet}`;
+	const globalMobilePadding = `${newsTickerGlobalPaddingMobile.top}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.right}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.bottom}${newsTickerGlobalPaddingUnits.Mobile} ${newsTickerGlobalPaddingMobile.left}${newsTickerGlobalPaddingUnits.Mobile}`;
 	/** End Global Padding */
 
 	/** Start Global Margin */
@@ -761,9 +762,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const globalDesktopMargin = `${newsTickerGlobalMarginDesktop?.top}${newsTickerGlobalMarginUnits?.Desktop} ${newsTickerGlobalMarginDesktop?.right}${newsTickerGlobalMarginUnits?.Desktop} ${newsTickerGlobalMarginDesktop?.bottom}${newsTickerGlobalMarginUnits?.Desktop} ${newsTickerGlobalMarginDesktop?.left}${newsTickerGlobalMarginUnits?.Desktop}`;
-	const globalTabletMargin = `${newsTickerGlobalMarginTablet?.top}${newsTickerGlobalMarginUnits?.Tablet} ${newsTickerGlobalMarginTablet?.right}${newsTickerGlobalMarginUnits?.Tablet} ${newsTickerGlobalMarginTablet?.bottom}${newsTickerGlobalMarginUnits?.Tablet} ${newsTickerGlobalMarginTablet?.left}${newsTickerGlobalMarginUnits?.Tablet}`;
-	const globalMobileMargin = `${newsTickerGlobalMarginMobile?.top}${newsTickerGlobalMarginUnits?.Mobile} ${newsTickerGlobalMarginMobile?.right}${newsTickerGlobalMarginUnits?.Mobile} ${newsTickerGlobalMarginMobile?.bottom}${newsTickerGlobalMarginUnits?.Mobile} ${newsTickerGlobalMarginMobile?.left}${newsTickerGlobalMarginUnits?.Mobile}`;
+	const globalDesktopMargin = `${newsTickerGlobalMarginDesktop.top}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.right}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.bottom}${newsTickerGlobalMarginUnits.Desktop} ${newsTickerGlobalMarginDesktop.left}${newsTickerGlobalMarginUnits.Desktop}`;
+	const globalTabletMargin = `${newsTickerGlobalMarginTablet.top}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.right}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.bottom}${newsTickerGlobalMarginUnits.Tablet} ${newsTickerGlobalMarginTablet.left}${newsTickerGlobalMarginUnits.Tablet}`;
+	const globalMobileMargin = `${newsTickerGlobalMarginMobile.top}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.right}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.bottom}${newsTickerGlobalMarginUnits.Mobile} ${newsTickerGlobalMarginMobile.left}${newsTickerGlobalMarginUnits.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
@@ -848,9 +849,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const globalDesktopBorderWidth = `${newsTickerGlobalBorderDesktop?.top}${newsTickerGlobalBorderUnits?.Desktop} ${newsTickerGlobalBorderDesktop?.right}${newsTickerGlobalBorderUnits?.Desktop} ${newsTickerGlobalBorderDesktop?.bottom}${newsTickerGlobalBorderUnits?.Desktop} ${newsTickerGlobalBorderDesktop?.left}${newsTickerGlobalBorderUnits?.Desktop}`;
-	const globalTabletBorderWidth = `${newsTickerGlobalBorderTablet?.top}${newsTickerGlobalBorderUnits?.Tablet} ${newsTickerGlobalBorderTablet?.right}${newsTickerGlobalBorderUnits?.Tablet} ${newsTickerGlobalBorderTablet?.bottom}${newsTickerGlobalBorderUnits?.Tablet} ${newsTickerGlobalBorderTablet?.left}${newsTickerGlobalBorderUnits?.Tablet}`;
-	const globalMobileBorderWidth = `${newsTickerGlobalBorderMobile?.top}${newsTickerGlobalBorderUnits?.Mobile} ${newsTickerGlobalBorderMobile?.right}${newsTickerGlobalBorderUnits?.Mobile} ${newsTickerGlobalBorderMobile?.bottom}${newsTickerGlobalBorderUnits?.Mobile} ${newsTickerGlobalBorderMobile?.left}${newsTickerGlobalBorderUnits?.Mobile}`;
+	const globalDesktopBorderWidth = `${newsTickerGlobalBorderDesktop.top}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.right}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.bottom}${newsTickerGlobalBorderUnits.Desktop} ${newsTickerGlobalBorderDesktop.left}${newsTickerGlobalBorderUnits.Desktop}`;
+	const globalTabletBorderWidth = `${newsTickerGlobalBorderTablet.top}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.right}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.bottom}${newsTickerGlobalBorderUnits.Tablet} ${newsTickerGlobalBorderTablet.left}${newsTickerGlobalBorderUnits.Tablet}`;
+	const globalMobileBorderWidth = `${newsTickerGlobalBorderMobile.top}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.right}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.bottom}${newsTickerGlobalBorderUnits.Mobile} ${newsTickerGlobalBorderMobile.left}${newsTickerGlobalBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
@@ -940,9 +941,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Global border */
 
 	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${newsTickerGlobalBorderRadiusDesktop?.top}${newsTickerGlobalBorderRadiusUnits?.Desktop} ${newsTickerGlobalBorderRadiusDesktop?.right}${newsTickerGlobalBorderRadiusUnits?.Desktop} ${newsTickerGlobalBorderRadiusDesktop?.bottom}${newsTickerGlobalBorderRadiusUnits?.Desktop} ${newsTickerGlobalBorderRadiusDesktop?.left}${newsTickerGlobalBorderRadiusUnits?.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${newsTickerGlobalBorderRadiusTablet?.top}${newsTickerGlobalBorderRadiusUnits?.Tablet} ${newsTickerGlobalBorderRadiusTablet?.right}${newsTickerGlobalBorderRadiusUnits?.Tablet} ${newsTickerGlobalBorderRadiusTablet?.bottom}${newsTickerGlobalBorderRadiusUnits?.Tablet} ${newsTickerGlobalBorderRadiusTablet?.left}${newsTickerGlobalBorderRadiusUnits?.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${newsTickerGlobalBorderRadiusMobile?.top}${newsTickerGlobalBorderRadiusUnits?.Mobile} ${newsTickerGlobalBorderRadiusMobile?.right}${newsTickerGlobalBorderRadiusUnits?.Mobile} ${newsTickerGlobalBorderRadiusMobile?.bottom}${newsTickerGlobalBorderRadiusUnits?.Mobile} ${newsTickerGlobalBorderRadiusMobile?.left}${newsTickerGlobalBorderRadiusUnits?.Mobile}`;
+	const globalDesktopBorderRadiusWidth = `${newsTickerGlobalBorderRadiusDesktop.top}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.right}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.bottom}${newsTickerGlobalBorderRadiusUnits.Desktop} ${newsTickerGlobalBorderRadiusDesktop.left}${newsTickerGlobalBorderRadiusUnits.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${newsTickerGlobalBorderRadiusTablet.top}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.right}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.bottom}${newsTickerGlobalBorderRadiusUnits.Tablet} ${newsTickerGlobalBorderRadiusTablet.left}${newsTickerGlobalBorderRadiusUnits.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${newsTickerGlobalBorderRadiusMobile.top}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.right}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.bottom}${newsTickerGlobalBorderRadiusUnits.Mobile} ${newsTickerGlobalBorderRadiusMobile.left}${newsTickerGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
 
 	/** Start Label Container Padding */
@@ -1027,9 +1028,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const labelContainerDesktopPadding = `${labelContainerPaddingDesktop?.top}${labelContainerPaddingUnits?.Desktop} ${labelContainerPaddingDesktop?.right}${labelContainerPaddingUnits?.Desktop} ${labelContainerPaddingDesktop?.bottom}${labelContainerPaddingUnits?.Desktop} ${labelContainerPaddingDesktop?.left}${labelContainerPaddingUnits?.Desktop}`;
-	const labelContainerTabletPadding = `${labelContainerPaddingTablet?.top}${labelContainerPaddingUnits?.Tablet} ${labelContainerPaddingTablet?.right}${labelContainerPaddingUnits?.Tablet} ${labelContainerPaddingTablet?.bottom}${labelContainerPaddingUnits?.Tablet} ${labelContainerPaddingTablet?.left}${labelContainerPaddingUnits?.Tablet}`;
-	const labelContainerMobilePadding = `${labelContainerPaddingMobile?.top}${labelContainerPaddingUnits?.Mobile} ${labelContainerPaddingMobile?.right}${labelContainerPaddingUnits?.Mobile} ${labelContainerPaddingMobile?.bottom}${labelContainerPaddingUnits?.Mobile} ${labelContainerPaddingMobile?.left}${labelContainerPaddingUnits?.Mobile}`;
+	const labelContainerDesktopPadding = `${labelContainerPaddingDesktop.top}${labelContainerPaddingUnits.Desktop} ${labelContainerPaddingDesktop.right}${labelContainerPaddingUnits.Desktop} ${labelContainerPaddingDesktop.bottom}${labelContainerPaddingUnits.Desktop} ${labelContainerPaddingDesktop.left}${labelContainerPaddingUnits.Desktop}`;
+	const labelContainerTabletPadding = `${labelContainerPaddingTablet.top}${labelContainerPaddingUnits.Tablet} ${labelContainerPaddingTablet.right}${labelContainerPaddingUnits.Tablet} ${labelContainerPaddingTablet.bottom}${labelContainerPaddingUnits.Tablet} ${labelContainerPaddingTablet.left}${labelContainerPaddingUnits.Tablet}`;
+	const labelContainerMobilePadding = `${labelContainerPaddingMobile.top}${labelContainerPaddingUnits.Mobile} ${labelContainerPaddingMobile.right}${labelContainerPaddingUnits.Mobile} ${labelContainerPaddingMobile.bottom}${labelContainerPaddingUnits.Mobile} ${labelContainerPaddingMobile.left}${labelContainerPaddingUnits.Mobile}`;
 	/** End Label Container Padding */
 
 	/** Start Label Container Margin */
@@ -1115,9 +1116,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const labelContainerDesktopMargin = `${labelContainerMarginDesktop?.top}${labelContainerMarginUnits?.Desktop} ${labelContainerMarginDesktop?.right}${labelContainerMarginUnits?.Desktop} ${labelContainerMarginDesktop?.bottom}${labelContainerMarginUnits?.Desktop} ${labelContainerMarginDesktop?.left}${labelContainerMarginUnits?.Desktop}`;
-	const labelContainerTabletMargin = `${labelContainerMarginTablet?.top}${labelContainerMarginUnits?.Tablet} ${labelContainerMarginTablet?.right}${labelContainerMarginUnits?.Tablet} ${labelContainerMarginTablet?.bottom}${labelContainerMarginUnits?.Tablet} ${labelContainerMarginTablet?.left}${labelContainerMarginUnits?.Tablet}`;
-	const labelContainerMobileMargin = `${labelContainerMarginMobile?.top}${labelContainerMarginUnits?.Mobile} ${labelContainerMarginMobile?.right}${labelContainerMarginUnits?.Mobile} ${labelContainerMarginMobile?.bottom}${labelContainerMarginUnits?.Mobile} ${labelContainerMarginMobile?.left}${labelContainerMarginUnits?.Mobile}`;
+	const labelContainerDesktopMargin = `${labelContainerMarginDesktop.top}${labelContainerMarginUnits.Desktop} ${labelContainerMarginDesktop.right}${labelContainerMarginUnits.Desktop} ${labelContainerMarginDesktop.bottom}${labelContainerMarginUnits.Desktop} ${labelContainerMarginDesktop.left}${labelContainerMarginUnits.Desktop}`;
+	const labelContainerTabletMargin = `${labelContainerMarginTablet.top}${labelContainerMarginUnits.Tablet} ${labelContainerMarginTablet.right}${labelContainerMarginUnits.Tablet} ${labelContainerMarginTablet.bottom}${labelContainerMarginUnits.Tablet} ${labelContainerMarginTablet.left}${labelContainerMarginUnits.Tablet}`;
+	const labelContainerMobileMargin = `${labelContainerMarginMobile.top}${labelContainerMarginUnits.Mobile} ${labelContainerMarginMobile.right}${labelContainerMarginUnits.Mobile} ${labelContainerMarginMobile.bottom}${labelContainerMarginUnits.Mobile} ${labelContainerMarginMobile.left}${labelContainerMarginUnits.Mobile}`;
 	/** End Label Container Margin */
 
 	/** Start Label Container border */
@@ -1202,9 +1203,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const labelContainerDesktopBorderWidth = `${labelContainerBorderDesktop?.top}${labelContainerBorderUnits?.Desktop} ${labelContainerBorderDesktop?.right}${labelContainerBorderUnits?.Desktop} ${labelContainerBorderDesktop?.bottom}${labelContainerBorderUnits?.Desktop} ${labelContainerBorderDesktop?.left}${labelContainerBorderUnits?.Desktop}`;
-	const labelContainerTabletBorderWidth = `${labelContainerBorderTablet?.top}${labelContainerBorderUnits?.Tablet} ${labelContainerBorderTablet?.right}${labelContainerBorderUnits?.Tablet} ${labelContainerBorderTablet?.bottom}${labelContainerBorderUnits?.Tablet} ${labelContainerBorderTablet?.left}${labelContainerBorderUnits?.Tablet}`;
-	const labelContainerMobileBorderWidth = `${labelContainerBorderMobile?.top}${labelContainerBorderUnits?.Mobile} ${labelContainerBorderMobile?.right}${labelContainerBorderUnits?.Mobile} ${labelContainerBorderMobile?.bottom}${labelContainerBorderUnits?.Mobile} ${labelContainerBorderMobile?.left}${labelContainerBorderUnits?.Mobile}`;
+	const labelContainerDesktopBorderWidth = `${labelContainerBorderDesktop.top}${labelContainerBorderUnits.Desktop} ${labelContainerBorderDesktop.right}${labelContainerBorderUnits.Desktop} ${labelContainerBorderDesktop.bottom}${labelContainerBorderUnits.Desktop} ${labelContainerBorderDesktop.left}${labelContainerBorderUnits.Desktop}`;
+	const labelContainerTabletBorderWidth = `${labelContainerBorderTablet.top}${labelContainerBorderUnits.Tablet} ${labelContainerBorderTablet.right}${labelContainerBorderUnits.Tablet} ${labelContainerBorderTablet.bottom}${labelContainerBorderUnits.Tablet} ${labelContainerBorderTablet.left}${labelContainerBorderUnits.Tablet}`;
+	const labelContainerMobileBorderWidth = `${labelContainerBorderMobile.top}${labelContainerBorderUnits.Mobile} ${labelContainerBorderMobile.right}${labelContainerBorderUnits.Mobile} ${labelContainerBorderMobile.bottom}${labelContainerBorderUnits.Mobile} ${labelContainerBorderMobile.left}${labelContainerBorderUnits.Mobile}`;
 	/** End Label Container Border */
 
 	/** Start Label Container border radius*/
@@ -1294,9 +1295,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Label Container border */
 
 	/** End Label Container Border Radius */
-	const labelContainerDesktopBorderRadiusWidth = `${labelContainerBorderRadiusDesktop?.top}${labelContainerBorderRadiusUnits?.Desktop} ${labelContainerBorderRadiusDesktop?.right}${labelContainerBorderRadiusUnits?.Desktop} ${labelContainerBorderRadiusDesktop?.bottom}${labelContainerBorderRadiusUnits?.Desktop} ${labelContainerBorderRadiusDesktop?.left}${labelContainerBorderRadiusUnits?.Desktop}`;
-	const labelContainerTabletBorderRadiusWidth = `${labelContainerBorderRadiusTablet?.top}${labelContainerBorderRadiusUnits?.Tablet} ${labelContainerBorderRadiusTablet?.right}${labelContainerBorderRadiusUnits?.Tablet} ${labelContainerBorderRadiusTablet?.bottom}${labelContainerBorderRadiusUnits?.Tablet} ${labelContainerBorderRadiusTablet?.left}${labelContainerBorderRadiusUnits?.Tablet}`;
-	const labelContainerMobileBorderRadiusWidth = `${labelContainerBorderRadiusMobile?.top}${labelContainerBorderRadiusUnits?.Mobile} ${labelContainerBorderRadiusMobile?.right}${labelContainerBorderRadiusUnits?.Mobile} ${labelContainerBorderRadiusMobile?.bottom}${labelContainerBorderRadiusUnits?.Mobile} ${labelContainerBorderRadiusMobile?.left}${labelContainerBorderRadiusUnits?.Mobile}`;
+	const labelContainerDesktopBorderRadiusWidth = `${labelContainerBorderRadiusDesktop.top}${labelContainerBorderRadiusUnits.Desktop} ${labelContainerBorderRadiusDesktop.right}${labelContainerBorderRadiusUnits.Desktop} ${labelContainerBorderRadiusDesktop.bottom}${labelContainerBorderRadiusUnits.Desktop} ${labelContainerBorderRadiusDesktop.left}${labelContainerBorderRadiusUnits.Desktop}`;
+	const labelContainerTabletBorderRadiusWidth = `${labelContainerBorderRadiusTablet.top}${labelContainerBorderRadiusUnits.Tablet} ${labelContainerBorderRadiusTablet.right}${labelContainerBorderRadiusUnits.Tablet} ${labelContainerBorderRadiusTablet.bottom}${labelContainerBorderRadiusUnits.Tablet} ${labelContainerBorderRadiusTablet.left}${labelContainerBorderRadiusUnits.Tablet}`;
+	const labelContainerMobileBorderRadiusWidth = `${labelContainerBorderRadiusMobile.top}${labelContainerBorderRadiusUnits.Mobile} ${labelContainerBorderRadiusMobile.right}${labelContainerBorderRadiusUnits.Mobile} ${labelContainerBorderRadiusMobile.bottom}${labelContainerBorderRadiusUnits.Mobile} ${labelContainerBorderRadiusMobile.left}${labelContainerBorderRadiusUnits.Mobile}`;
 	/** End Label Container Border Radius */
 
     /** Start Label Container Padding */
@@ -1381,9 +1382,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const labelIconDesktopPadding = `${labelIconPaddingDesktop?.top}${labelIconPaddingUnits?.Desktop} ${labelIconPaddingDesktop?.right}${labelIconPaddingUnits?.Desktop} ${labelIconPaddingDesktop?.bottom}${labelIconPaddingUnits?.Desktop} ${labelIconPaddingDesktop?.left}${labelIconPaddingUnits?.Desktop}`;
-	const labelIconTabletPadding = `${labelIconPaddingTablet?.top}${labelIconPaddingUnits?.Tablet} ${labelIconPaddingTablet?.right}${labelIconPaddingUnits?.Tablet} ${labelIconPaddingTablet?.bottom}${labelIconPaddingUnits?.Tablet} ${labelIconPaddingTablet?.left}${labelIconPaddingUnits?.Tablet}`;
-	const labelIconMobilePadding = `${labelIconPaddingMobile?.top}${labelIconPaddingUnits?.Mobile} ${labelIconPaddingMobile?.right}${labelIconPaddingUnits?.Mobile} ${labelIconPaddingMobile?.bottom}${labelIconPaddingUnits?.Mobile} ${labelIconPaddingMobile?.left}${labelIconPaddingUnits?.Mobile}`;
+	const labelIconDesktopPadding = `${labelIconPaddingDesktop.top}${labelIconPaddingUnits.Desktop} ${labelIconPaddingDesktop.right}${labelIconPaddingUnits.Desktop} ${labelIconPaddingDesktop.bottom}${labelIconPaddingUnits.Desktop} ${labelIconPaddingDesktop.left}${labelIconPaddingUnits.Desktop}`;
+	const labelIconTabletPadding = `${labelIconPaddingTablet.top}${labelIconPaddingUnits.Tablet} ${labelIconPaddingTablet.right}${labelIconPaddingUnits.Tablet} ${labelIconPaddingTablet.bottom}${labelIconPaddingUnits.Tablet} ${labelIconPaddingTablet.left}${labelIconPaddingUnits.Tablet}`;
+	const labelIconMobilePadding = `${labelIconPaddingMobile.top}${labelIconPaddingUnits.Mobile} ${labelIconPaddingMobile.right}${labelIconPaddingUnits.Mobile} ${labelIconPaddingMobile.bottom}${labelIconPaddingUnits.Mobile} ${labelIconPaddingMobile.left}${labelIconPaddingUnits.Mobile}`;
 	/** End Label Container Padding */
 
 	/** Start Label Container Margin */
@@ -1469,9 +1470,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const labelIconDesktopMargin = `${labelIconMarginDesktop?.top}${labelIconMarginUnits?.Desktop} ${labelIconMarginDesktop?.right}${labelIconMarginUnits?.Desktop} ${labelIconMarginDesktop?.bottom}${labelIconMarginUnits?.Desktop} ${labelIconMarginDesktop?.left}${labelIconMarginUnits?.Desktop}`;
-	const labelIconTabletMargin = `${labelIconMarginTablet?.top}${labelIconMarginUnits?.Tablet} ${labelIconMarginTablet?.right}${labelIconMarginUnits?.Tablet} ${labelIconMarginTablet?.bottom}${labelIconMarginUnits?.Tablet} ${labelIconMarginTablet?.left}${labelIconMarginUnits?.Tablet}`;
-	const labelIconMobileMargin = `${labelIconMarginMobile?.top}${labelIconMarginUnits?.Mobile} ${labelIconMarginMobile?.right}${labelIconMarginUnits?.Mobile} ${labelIconMarginMobile?.bottom}${labelIconMarginUnits?.Mobile} ${labelIconMarginMobile?.left}${labelIconMarginUnits?.Mobile}`;
+	const labelIconDesktopMargin = `${labelIconMarginDesktop.top}${labelIconMarginUnits.Desktop} ${labelIconMarginDesktop.right}${labelIconMarginUnits.Desktop} ${labelIconMarginDesktop.bottom}${labelIconMarginUnits.Desktop} ${labelIconMarginDesktop.left}${labelIconMarginUnits.Desktop}`;
+	const labelIconTabletMargin = `${labelIconMarginTablet.top}${labelIconMarginUnits.Tablet} ${labelIconMarginTablet.right}${labelIconMarginUnits.Tablet} ${labelIconMarginTablet.bottom}${labelIconMarginUnits.Tablet} ${labelIconMarginTablet.left}${labelIconMarginUnits.Tablet}`;
+	const labelIconMobileMargin = `${labelIconMarginMobile.top}${labelIconMarginUnits.Mobile} ${labelIconMarginMobile.right}${labelIconMarginUnits.Mobile} ${labelIconMarginMobile.bottom}${labelIconMarginUnits.Mobile} ${labelIconMarginMobile.left}${labelIconMarginUnits.Mobile}`;
 	/** End Label Container Margin */
 
 	/** Start Label Container border */
@@ -1556,9 +1557,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const labelIconDesktopBorderWidth = `${labelIconBorderDesktop?.top}${labelIconBorderUnits?.Desktop} ${labelIconBorderDesktop?.right}${labelIconBorderUnits?.Desktop} ${labelIconBorderDesktop?.bottom}${labelIconBorderUnits?.Desktop} ${labelIconBorderDesktop?.left}${labelIconBorderUnits?.Desktop}`;
-	const labelIconTabletBorderWidth = `${labelIconBorderTablet?.top}${labelIconBorderUnits?.Tablet} ${labelIconBorderTablet?.right}${labelIconBorderUnits?.Tablet} ${labelIconBorderTablet?.bottom}${labelIconBorderUnits?.Tablet} ${labelIconBorderTablet?.left}${labelIconBorderUnits?.Tablet}`;
-	const labelIconMobileBorderWidth = `${labelIconBorderMobile?.top}${labelIconBorderUnits?.Mobile} ${labelIconBorderMobile?.right}${labelIconBorderUnits?.Mobile} ${labelIconBorderMobile?.bottom}${labelIconBorderUnits?.Mobile} ${labelIconBorderMobile?.left}${labelIconBorderUnits?.Mobile}`;
+	const labelIconDesktopBorderWidth = `${labelIconBorderDesktop.top}${labelIconBorderUnits.Desktop} ${labelIconBorderDesktop.right}${labelIconBorderUnits.Desktop} ${labelIconBorderDesktop.bottom}${labelIconBorderUnits.Desktop} ${labelIconBorderDesktop.left}${labelIconBorderUnits.Desktop}`;
+	const labelIconTabletBorderWidth = `${labelIconBorderTablet.top}${labelIconBorderUnits.Tablet} ${labelIconBorderTablet.right}${labelIconBorderUnits.Tablet} ${labelIconBorderTablet.bottom}${labelIconBorderUnits.Tablet} ${labelIconBorderTablet.left}${labelIconBorderUnits.Tablet}`;
+	const labelIconMobileBorderWidth = `${labelIconBorderMobile.top}${labelIconBorderUnits.Mobile} ${labelIconBorderMobile.right}${labelIconBorderUnits.Mobile} ${labelIconBorderMobile.bottom}${labelIconBorderUnits.Mobile} ${labelIconBorderMobile.left}${labelIconBorderUnits.Mobile}`;
 	/** End Label Container Border */
 
 	/** Start Label Container border radius*/
@@ -1648,9 +1649,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** end Label Container border */
 
 	/** End Label Container Border Radius */
-	const labelIconDesktopBorderRadiusWidth = `${labelIconBorderRadiusDesktop?.top}${labelIconBorderRadiusUnits?.Desktop} ${labelIconBorderRadiusDesktop?.right}${labelIconBorderRadiusUnits?.Desktop} ${labelIconBorderRadiusDesktop?.bottom}${labelIconBorderRadiusUnits?.Desktop} ${labelIconBorderRadiusDesktop?.left}${labelIconBorderRadiusUnits?.Desktop}`;
-	const labelIconTabletBorderRadiusWidth = `${labelIconBorderRadiusTablet?.top}${labelIconBorderRadiusUnits?.Tablet} ${labelIconBorderRadiusTablet?.right}${labelIconBorderRadiusUnits?.Tablet} ${labelIconBorderRadiusTablet?.bottom}${labelIconBorderRadiusUnits?.Tablet} ${labelIconBorderRadiusTablet?.left}${labelIconBorderRadiusUnits?.Tablet}`;
-	const labelIconMobileBorderRadiusWidth = `${labelIconBorderRadiusMobile?.top}${labelIconBorderRadiusUnits?.Mobile} ${labelIconBorderRadiusMobile?.right}${labelIconBorderRadiusUnits?.Mobile} ${labelIconBorderRadiusMobile?.bottom}${labelIconBorderRadiusUnits?.Mobile} ${labelIconBorderRadiusMobile?.left}${labelIconBorderRadiusUnits?.Mobile}`;
+	const labelIconDesktopBorderRadiusWidth = `${labelIconBorderRadiusDesktop.top}${labelIconBorderRadiusUnits.Desktop} ${labelIconBorderRadiusDesktop.right}${labelIconBorderRadiusUnits.Desktop} ${labelIconBorderRadiusDesktop.bottom}${labelIconBorderRadiusUnits.Desktop} ${labelIconBorderRadiusDesktop.left}${labelIconBorderRadiusUnits.Desktop}`;
+	const labelIconTabletBorderRadiusWidth = `${labelIconBorderRadiusTablet.top}${labelIconBorderRadiusUnits.Tablet} ${labelIconBorderRadiusTablet.right}${labelIconBorderRadiusUnits.Tablet} ${labelIconBorderRadiusTablet.bottom}${labelIconBorderRadiusUnits.Tablet} ${labelIconBorderRadiusTablet.left}${labelIconBorderRadiusUnits.Tablet}`;
+	const labelIconMobileBorderRadiusWidth = `${labelIconBorderRadiusMobile.top}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.right}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.bottom}${labelIconBorderRadiusUnits.Mobile} ${labelIconBorderRadiusMobile.left}${labelIconBorderRadiusUnits.Mobile}`;
 	/** End Label Container Border Radius */
 
 	/** Start Ticker Timer Padding */
@@ -1735,9 +1736,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const tickerTimerDesktopPadding = `${tickerTimerPaddingDesktop?.top}${tickerTimerPaddingUnits?.Desktop} ${tickerTimerPaddingDesktop?.right}${tickerTimerPaddingUnits?.Desktop} ${tickerTimerPaddingDesktop?.bottom}${tickerTimerPaddingUnits?.Desktop} ${tickerTimerPaddingDesktop?.left}${tickerTimerPaddingUnits?.Desktop}`;
-	const tickerTimerTabletPadding = `${tickerTimerPaddingTablet?.top}${tickerTimerPaddingUnits?.Tablet} ${tickerTimerPaddingTablet?.right}${tickerTimerPaddingUnits?.Tablet} ${tickerTimerPaddingTablet?.bottom}${tickerTimerPaddingUnits?.Tablet} ${tickerTimerPaddingTablet?.left}${tickerTimerPaddingUnits?.Tablet}`;
-	const tickerTimerMobilePadding = `${tickerTimerPaddingMobile?.top}${tickerTimerPaddingUnits?.Mobile} ${tickerTimerPaddingMobile?.right}${tickerTimerPaddingUnits?.Mobile} ${tickerTimerPaddingMobile?.bottom}${tickerTimerPaddingUnits?.Mobile} ${tickerTimerPaddingMobile?.left}${tickerTimerPaddingUnits?.Mobile}`;
+	const tickerTimerDesktopPadding = `${tickerTimerPaddingDesktop.top}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.right}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.bottom}${tickerTimerPaddingUnits.Desktop} ${tickerTimerPaddingDesktop.left}${tickerTimerPaddingUnits.Desktop}`;
+	const tickerTimerTabletPadding = `${tickerTimerPaddingTablet.top}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.right}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.bottom}${tickerTimerPaddingUnits.Tablet} ${tickerTimerPaddingTablet.left}${tickerTimerPaddingUnits.Tablet}`;
+	const tickerTimerMobilePadding = `${tickerTimerPaddingMobile.top}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.right}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.bottom}${tickerTimerPaddingUnits.Mobile} ${tickerTimerPaddingMobile.left}${tickerTimerPaddingUnits.Mobile}`;
 	/** End Ticker Timer Padding */
 
 	/** Start Ticker Timer Margin */
@@ -1823,9 +1824,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	};
 
-	const tickerTimerDesktopMargin = `${tickerTimerMarginDesktop?.top}${tickerTimerMarginUnits?.Desktop} ${tickerTimerMarginDesktop?.right}${tickerTimerMarginUnits?.Desktop} ${tickerTimerMarginDesktop?.bottom}${tickerTimerMarginUnits?.Desktop} ${tickerTimerMarginDesktop?.left}${tickerTimerMarginUnits?.Desktop}`;
-	const tickerTimerTabletMargin = `${tickerTimerMarginTablet?.top}${tickerTimerMarginUnits?.Tablet} ${tickerTimerMarginTablet?.right}${tickerTimerMarginUnits?.Tablet} ${tickerTimerMarginTablet?.bottom}${tickerTimerMarginUnits?.Tablet} ${tickerTimerMarginTablet?.left}${tickerTimerMarginUnits?.Tablet}`;
-	const tickerTimerMobileMargin = `${tickerTimerMarginMobile?.top}${tickerTimerMarginUnits?.Mobile} ${tickerTimerMarginMobile?.right}${tickerTimerMarginUnits?.Mobile} ${tickerTimerMarginMobile?.bottom}${tickerTimerMarginUnits?.Mobile} ${tickerTimerMarginMobile?.left}${tickerTimerMarginUnits?.Mobile}`;
+	const tickerTimerDesktopMargin = `${tickerTimerMarginDesktop.top}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.right}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.bottom}${tickerTimerMarginUnits.Desktop} ${tickerTimerMarginDesktop.left}${tickerTimerMarginUnits.Desktop}`;
+	const tickerTimerTabletMargin = `${tickerTimerMarginTablet.top}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.right}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.bottom}${tickerTimerMarginUnits.Tablet} ${tickerTimerMarginTablet.left}${tickerTimerMarginUnits.Tablet}`;
+	const tickerTimerMobileMargin = `${tickerTimerMarginMobile.top}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.right}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.bottom}${tickerTimerMarginUnits.Mobile} ${tickerTimerMarginMobile.left}${tickerTimerMarginUnits.Mobile}`;
 	/** End Ticker Timer Margin */
 
 	/** Start Ticker Timer border */
@@ -1910,9 +1911,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			},
 		});
 	};
-	const tickerTimerDesktopBorderWidth = `${tickerTimerBorderDesktop?.top}${tickerTimerBorderUnits?.Desktop} ${tickerTimerBorderDesktop?.right}${tickerTimerBorderUnits?.Desktop} ${tickerTimerBorderDesktop?.bottom}${tickerTimerBorderUnits?.Desktop} ${tickerTimerBorderDesktop?.left}${tickerTimerBorderUnits?.Desktop}`;
-	const tickerTimerTabletBorderWidth = `${tickerTimerBorderTablet?.top}${tickerTimerBorderUnits?.Tablet} ${tickerTimerBorderTablet?.right}${tickerTimerBorderUnits?.Tablet} ${tickerTimerBorderTablet?.bottom}${tickerTimerBorderUnits?.Tablet} ${tickerTimerBorderTablet?.left}${tickerTimerBorderUnits?.Tablet}`;
-	const tickerTimerMobileBorderWidth = `${tickerTimerBorderMobile?.top}${tickerTimerBorderUnits?.Mobile} ${tickerTimerBorderMobile?.right}${tickerTimerBorderUnits?.Mobile} ${tickerTimerBorderMobile?.bottom}${tickerTimerBorderUnits?.Mobile} ${tickerTimerBorderMobile?.left}${tickerTimerBorderUnits?.Mobile}`;
+	const tickerTimerDesktopBorderWidth = `${tickerTimerBorderDesktop.top}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.right}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.bottom}${tickerTimerBorderUnits.Desktop} ${tickerTimerBorderDesktop.left}${tickerTimerBorderUnits.Desktop}`;
+	const tickerTimerTabletBorderWidth = `${tickerTimerBorderTablet.top}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.right}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.bottom}${tickerTimerBorderUnits.Tablet} ${tickerTimerBorderTablet.left}${tickerTimerBorderUnits.Tablet}`;
+	const tickerTimerMobileBorderWidth = `${tickerTimerBorderMobile.top}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.right}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.bottom}${tickerTimerBorderUnits.Mobile} ${tickerTimerBorderMobile.left}${tickerTimerBorderUnits.Mobile}`;
 	/** End Ticker Timer Border */
 
 	/** Start Ticker Timer border radius*/
@@ -2002,9 +2003,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Ticker Timer border */
 
 	/** End Ticker Timer Border Radius */
-	const tickerTimerDesktopBorderRadiusWidth = `${tickerTimerBorderRadiusDesktop?.top}${tickerTimerBorderRadiusUnits?.Desktop} ${tickerTimerBorderRadiusDesktop?.right}${tickerTimerBorderRadiusUnits?.Desktop} ${tickerTimerBorderRadiusDesktop?.bottom}${tickerTimerBorderRadiusUnits?.Desktop} ${tickerTimerBorderRadiusDesktop?.left}${tickerTimerBorderRadiusUnits?.Desktop}`;
-	const tickerTimerTabletBorderRadiusWidth = `${tickerTimerBorderRadiusTablet?.top}${tickerTimerBorderRadiusUnits?.Tablet} ${tickerTimerBorderRadiusTablet?.right}${tickerTimerBorderRadiusUnits?.Tablet} ${tickerTimerBorderRadiusTablet?.bottom}${tickerTimerBorderRadiusUnits?.Tablet} ${tickerTimerBorderRadiusTablet?.left}${tickerTimerBorderRadiusUnits?.Tablet}`;
-	const tickerTimerMobileBorderRadiusWidth = `${tickerTimerBorderRadiusMobile?.top}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.right}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.bottom}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.left}${tickerTimerBorderRadiusUnits?.Mobile}`;
+	const tickerTimerDesktopBorderRadiusWidth = `${tickerTimerBorderRadiusDesktop.top}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.right}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.bottom}${tickerTimerBorderRadiusUnits.Desktop} ${tickerTimerBorderRadiusDesktop.left}${tickerTimerBorderRadiusUnits.Desktop}`;
+	const tickerTimerTabletBorderRadiusWidth = `${tickerTimerBorderRadiusTablet.top}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.right}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.bottom}${tickerTimerBorderRadiusUnits.Tablet} ${tickerTimerBorderRadiusTablet.left}${tickerTimerBorderRadiusUnits.Tablet}`;
+	const tickerTimerMobileBorderRadiusWidth = `${tickerTimerBorderRadiusMobile.top}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.right}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.bottom}${tickerTimerBorderRadiusUnits.Mobile} ${tickerTimerBorderRadiusMobile.left}${tickerTimerBorderRadiusUnits.Mobile}`;
 	/** End Ticker Timer Border Radius */
 
 	/* Start Load Google Fonts */
@@ -2033,21 +2034,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     `
                     : `${newsTickerGlobalNormalClassicColor ? `background: ${newsTickerGlobalNormalClassicColor};` : ""}`
                 }
-                ${globalDesktopPadding && newsTickerGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ""}
-                ${globalDesktopMargin && newsTickerGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ""}
+                ${globalDesktopPadding && newsTickerGlobalPaddingDesktop.top ? `padding: ${globalDesktopPadding};` : ""}
+                ${globalDesktopMargin && newsTickerGlobalMarginDesktop.top ? `margin: ${globalDesktopMargin};` : ""}
                 ${newsTickerGlobalBorder ? `border: ${newsTickerGlobalBorder};` : ""}
-                ${globalDesktopBorderWidth && newsTickerGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
-                ${globalDesktopBorderRadiusWidth && newsTickerGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
+                ${globalDesktopBorderWidth && newsTickerGlobalBorderDesktop.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
+                ${globalDesktopBorderRadiusWidth && newsTickerGlobalBorderRadiusDesktop.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
                 ${newsTickerGlobalBorderColor ? `border-color: ${newsTickerGlobalBorderColor};` : ""}
                 ${newsTickerGlobalBoxShadowCssValue ? `box-shadow: ${newsTickerGlobalBoxShadowCssValue};` : ""}
                 ${newsTickerPositionType === "default" ? `position: relative;` : ""}
                 ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" ? `width: 100%;` : ""}
                 ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
-                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset?.Desktop !== undefined ? `left: ${newsTickerHZLeftOffset?.Desktop}${newsTickerHZLeftOffsetUnits?.Desktop};` : ""}
-                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset?.Desktop !== undefined ? `right: ${newsTickerHZRightOffset?.Desktop}${newsTickerHZRightOffsetUnits?.Desktop};` : ""}
-                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset?.Desktop !== undefined ? `top: ${newsTickerVRTopOffset?.Desktop}${newsTickerVRTopOffsetUnits?.Desktop};` : ""}
-                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset?.Desktop !== undefined ? `bottom: ${newsTickerVRBottomOffset?.Desktop}${newsTickerVRBottomOffsetUnits?.Desktop};` : ""}
-                ${newsTickerGlobalZIndex?.Desktop ? `z-index: ${newsTickerGlobalZIndex?.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Desktop !== undefined ? `left: ${newsTickerHZLeftOffset.Desktop}${newsTickerHZLeftOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Desktop !== undefined ? `right: ${newsTickerHZRightOffset.Desktop}${newsTickerHZRightOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Desktop !== undefined ? `top: ${newsTickerVRTopOffset.Desktop}${newsTickerVRTopOffsetUnits.Desktop};` : ""}
+                ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Desktop !== undefined ? `bottom: ${newsTickerVRBottomOffset.Desktop}${newsTickerVRBottomOffsetUnits.Desktop};` : ""}
+                ${newsTickerGlobalZIndex.Desktop ? `z-index: ${newsTickerGlobalZIndex.Desktop};` : ""}
                 ${newsTickerOverflow !== "default" ? `overflow: ${newsTickerOverflow};` : ""}
 				${labelPosition === "right" ? "flex-direction: row-reverse;" : "flex-direction: row;"}
                 transition: all .3s ease-in-out;
@@ -2091,11 +2092,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     `
                     : `${labelContainerNormalClassicColor ? `background: ${labelContainerNormalClassicColor};` : ""}`
                 }
-                ${labelContainerDesktopPadding && labelContainerPaddingDesktop?.top ? `padding: ${labelContainerDesktopPadding};` : ""}
-                ${labelContainerDesktopMargin && labelContainerMarginDesktop?.top ? `margin: ${labelContainerDesktopMargin};` : ""}
+                ${labelContainerDesktopPadding && labelContainerPaddingDesktop.top ? `padding: ${labelContainerDesktopPadding};` : ""}
+                ${labelContainerDesktopMargin && labelContainerMarginDesktop.top ? `margin: ${labelContainerDesktopMargin};` : ""}
                 ${labelContainerBorder ? `border: ${labelContainerBorder};` : ""}
-                ${labelContainerDesktopBorderWidth && labelContainerBorderDesktop?.top ? `border-width: ${labelContainerDesktopBorderWidth};` : ""}
-                ${labelContainerDesktopBorderRadiusWidth && labelContainerBorderRadiusDesktop?.top ? `border-radius: ${labelContainerDesktopBorderRadiusWidth};` : ""}
+                ${labelContainerDesktopBorderWidth && labelContainerBorderDesktop.top ? `border-width: ${labelContainerDesktopBorderWidth};` : ""}
+                ${labelContainerDesktopBorderRadiusWidth && labelContainerBorderRadiusDesktop.top ? `border-radius: ${labelContainerDesktopBorderRadiusWidth};` : ""}
                 ${labelContainerBorderColor ? `border-color: ${labelContainerBorderColor};` : ""}
                 transition: all .3s ease-in-out;
             }
@@ -2139,12 +2140,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 `
                 : `${labelIconNormalClassicColor ? `background: ${labelIconNormalClassicColor};` : ""}`
                 }
-                ${labelIconDesktopPadding && labelIconPaddingDesktop?.top ? `padding: ${labelIconDesktopPadding};` : ""}
-                ${labelIconDesktopMargin && labelIconMarginDesktop?.top ? `margin: ${labelIconDesktopMargin};` : ""}
+                ${labelIconDesktopPadding && labelIconPaddingDesktop.top ? `padding: ${labelIconDesktopPadding};` : ""}
+                ${labelIconDesktopMargin && labelIconMarginDesktop.top ? `margin: ${labelIconDesktopMargin};` : ""}
                 ${labelIconBorder ? `border: ${labelIconBorder};` : ""}
-                ${labelIconDesktopBorderWidth && labelIconBorderDesktop?.top ? `border-width:
+                ${labelIconDesktopBorderWidth && labelIconBorderDesktop.top ? `border-width:
                 ${labelIconDesktopBorderWidth};` : ""}
-                ${labelIconDesktopBorderRadiusWidth && labelIconBorderRadiusDesktop?.top ? `border-radius:
+                ${labelIconDesktopBorderRadiusWidth && labelIconBorderRadiusDesktop.top ? `border-radius:
                 ${labelIconDesktopBorderRadiusWidth};` : ""}
                 ${labelIconBorderColor ? `border-color: ${labelIconBorderColor};` : ""}
                 transition: all .3s ease-in-out;
@@ -2171,23 +2172,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label span{
-                ${tickerLabelTypoSwitcher?.fontFamily === true && tickerLabelTypographyData?.fontFamily ? `font-family: ${tickerLabelTypographyData?.fontFamily};` : ''}
-				${tickerLabelTypoSwitcher?.fontSize === true && tickerLabelTypographyData?.fontSize ? `font-size: ${tickerLabelTypographyData?.fontSize};` : ''}
-				${tickerLabelTypoSwitcher?.fontWeight === true && tickerLabelTypographyData?.fontWeight ? `font-weight: ${tickerLabelTypographyData?.fontWeight};` : ''}
-				${tickerLabelTypoSwitcher?.fontStyle === true && tickerLabelTypographyData?.fontStyle ? `font-style: ${tickerLabelTypographyData?.fontStyle};` : ''}
-				${tickerLabelTypoSwitcher?.textTransform === true && tickerLabelTypographyData?.textTransform ? `text-transform: ${tickerLabelTypographyData?.textTransform};` : ''}
-				${tickerLabelTypoSwitcher?.textDecoration === true && tickerLabelTypographyData?.textDecoration ? `text-decoration: ${tickerLabelTypographyData?.textDecoration};` : ''}
-				${tickerLabelTypoSwitcher?.letterSpacing === true && tickerLabelTypographyData?.letterSpacing ? `letter-spacing: ${tickerLabelTypographyData?.letterSpacing};` : ''}
-				${tickerLabelTypoSwitcher?.lineHeight === true && tickerLabelTypographyData?.lineHeight ? `line-height: ${tickerLabelTypographyData?.lineHeight};` : ''}
+                ${tickerLabelTypoSwitcher.fontFamily === true && tickerLabelTypographyData.fontFamily ? `font-family: ${tickerLabelTypographyData.fontFamily};` : ''}
+				${tickerLabelTypoSwitcher.fontSize === true && tickerLabelTypographyData.fontSize ? `font-size: ${tickerLabelTypographyData.fontSize};` : ''}
+				${tickerLabelTypoSwitcher.fontWeight === true && tickerLabelTypographyData.fontWeight ? `font-weight: ${tickerLabelTypographyData.fontWeight};` : ''}
+				${tickerLabelTypoSwitcher.fontStyle === true && tickerLabelTypographyData.fontStyle ? `font-style: ${tickerLabelTypographyData.fontStyle};` : ''}
+				${tickerLabelTypoSwitcher.textTransform === true && tickerLabelTypographyData.textTransform ? `text-transform: ${tickerLabelTypographyData.textTransform};` : ''}
+				${tickerLabelTypoSwitcher.textDecoration === true && tickerLabelTypographyData.textDecoration ? `text-decoration: ${tickerLabelTypographyData.textDecoration};` : ''}
+				${tickerLabelTypoSwitcher.letterSpacing === true && tickerLabelTypographyData.letterSpacing ? `letter-spacing: ${tickerLabelTypographyData.letterSpacing};` : ''}
+				${tickerLabelTypoSwitcher.lineHeight === true && tickerLabelTypographyData.lineHeight ? `line-height: ${tickerLabelTypographyData.lineHeight};` : ''}
 
-                ${tickerLabelTypoSwitcher?.fontFamily === false && tickerLabelFontFamily && tickerLabelFontFamily !== "Default" ? `font-family: ${tickerLabelFontFamily};` : ''}
-                ${tickerLabelTypoSwitcher?.fontSize === false && tickerLabelFontSize?.Desktop && tickerLabelFontSizeUnits?.Desktop ? `font-size: ${tickerLabelFontSize?.Desktop}${tickerLabelFontSizeUnits?.Desktop};` : ''}
-                ${tickerLabelTypoSwitcher?.fontWeight === false && tickerLabelFontWeight ? `font-weight: ${tickerLabelFontWeight};` : ''}
-                ${tickerLabelTypoSwitcher?.fontStyle === false && tickerLabelFontStyle ? `font-style: ${tickerLabelFontStyle};` : ''}
-                ${tickerLabelTypoSwitcher?.textTransform === false && tickerLabelTextTransform ? `text-transform: ${tickerLabelTextTransform};` : ''}
-                ${tickerLabelTypoSwitcher?.textDecoration === false && tickerLabelTextDecoration ? `text-decoration: ${tickerLabelTextDecoration};` : ''}
-                ${tickerLabelTypoSwitcher?.letterSpacing === false && tickerLabelLetterSpacing?.Desktop && tickerLabelLetterSpacingUnits?.Desktop ? `letter-spacing: ${tickerLabelLetterSpacing?.Desktop}${tickerLabelLetterSpacingUnits?.Desktop};` : ''}
-                ${tickerLabelTypoSwitcher?.lineHeight === false && tickerLabelLineHeight?.Desktop && tickerLabelLineHeightUnits?.Desktop ? `line-height: ${tickerLabelLineHeight?.Desktop}${tickerLabelLineHeightUnits?.Desktop};` : ''}
+                ${tickerLabelTypoSwitcher.fontFamily === false && tickerLabelFontFamily && tickerLabelFontFamily !== "Default" ? `font-family: ${tickerLabelFontFamily};` : ''}
+                ${tickerLabelTypoSwitcher.fontSize === false && tickerLabelFontSize.Desktop && tickerLabelFontSizeUnits.Desktop ? `font-size: ${tickerLabelFontSize.Desktop}${tickerLabelFontSizeUnits.Desktop};` : ''}
+                ${tickerLabelTypoSwitcher.fontWeight === false && tickerLabelFontWeight ? `font-weight: ${tickerLabelFontWeight};` : ''}
+                ${tickerLabelTypoSwitcher.fontStyle === false && tickerLabelFontStyle ? `font-style: ${tickerLabelFontStyle};` : ''}
+                ${tickerLabelTypoSwitcher.textTransform === false && tickerLabelTextTransform ? `text-transform: ${tickerLabelTextTransform};` : ''}
+                ${tickerLabelTypoSwitcher.textDecoration === false && tickerLabelTextDecoration ? `text-decoration: ${tickerLabelTextDecoration};` : ''}
+                ${tickerLabelTypoSwitcher.letterSpacing === false && tickerLabelLetterSpacing.Desktop && tickerLabelLetterSpacingUnits.Desktop ? `letter-spacing: ${tickerLabelLetterSpacing.Desktop}${tickerLabelLetterSpacingUnits.Desktop};` : ''}
+                ${tickerLabelTypoSwitcher.lineHeight === false && tickerLabelLineHeight.Desktop && tickerLabelLineHeightUnits.Desktop ? `line-height: ${tickerLabelLineHeight.Desktop}${tickerLabelLineHeightUnits.Desktop};` : ''}
 				${labelTextColor ? `color: ${labelTextColor};` : ""}
             }
 			
@@ -2195,8 +2196,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${labelTextHoverColor ? `color: ${labelTextHoverColor};` : ""}
 			}
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper svg {
-                ${iconSize?.Desktop ? `width: ${iconSize?.Desktop}${iconSizeUnits?.Desktop};` : ""}
-                ${iconSize?.Desktop ? `height: ${iconSize?.Desktop}${iconSizeUnits?.Desktop};` : ""}
+                ${iconSize.Desktop ? `width: ${iconSize.Desktop}${iconSizeUnits.Desktop};` : ""}
+                ${iconSize.Desktop ? `height: ${iconSize.Desktop}${iconSizeUnits.Desktop};` : ""}
                 ${labelIconColor ? `fill: ${labelIconColor};` : ""}
             }
     
@@ -2220,11 +2221,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     `
                     : `${tickerTimerNormalClassicColor ? `background: ${tickerTimerNormalClassicColor};` : ""}`
                 }
-                ${tickerTimerDesktopPadding && tickerTimerPaddingDesktop?.top ? `padding: ${tickerTimerDesktopPadding};` : ""}
-                ${tickerTimerDesktopMargin && tickerTimerMarginDesktop?.top ? `margin: ${tickerTimerDesktopMargin};` : ""}
+                ${tickerTimerDesktopPadding && tickerTimerPaddingDesktop.top ? `padding: ${tickerTimerDesktopPadding};` : ""}
+                ${tickerTimerDesktopMargin && tickerTimerMarginDesktop.top ? `margin: ${tickerTimerDesktopMargin};` : ""}
                 ${tickerTimerBorder ? `border: ${tickerTimerBorder};` : ""}
-                ${tickerTimerDesktopBorderWidth && tickerTimerBorderDesktop?.top ? `border-width: ${tickerTimerDesktopBorderWidth};` : ""}
-                ${tickerTimerDesktopBorderRadiusWidth && tickerTimerBorderRadiusDesktop?.top ? `border-radius: ${tickerTimerDesktopBorderRadiusWidth};` : ""}
+                ${tickerTimerDesktopBorderWidth && tickerTimerBorderDesktop.top ? `border-width: ${tickerTimerDesktopBorderWidth};` : ""}
+                ${tickerTimerDesktopBorderRadiusWidth && tickerTimerBorderRadiusDesktop.top ? `border-radius: ${tickerTimerDesktopBorderRadiusWidth};` : ""}
                 ${tickerTimerBorderColor ? `border-color: ${tickerTimerBorderColor};` : ""}
                 transition: all .3s ease-in-out;
 			}
@@ -2248,23 +2249,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${tickerTimerBorderHoverColor ? `border-color: ${tickerTimerBorderHoverColor};` : ""}
 			}
 			.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time span{
-				${tickerTimerTypoSwitcher?.fontFamily === true && tickerTimerTypographyData?.fontFamily ? `font-family: ${tickerTimerTypographyData?.fontFamily};` : ''}
-				${tickerTimerTypoSwitcher?.fontSize === true && tickerTimerTypographyData?.fontSize ? `font-size: ${tickerTimerTypographyData?.fontSize};` : ''}
-				${tickerTimerTypoSwitcher?.fontWeight === true && tickerTimerTypographyData?.fontWeight ? `font-weight: ${tickerTimerTypographyData?.fontWeight};` : ''}
-				${tickerTimerTypoSwitcher?.fontStyle === true && tickerTimerTypographyData?.fontStyle ? `font-style: ${tickerTimerTypographyData?.fontStyle};` : ''}
-				${tickerTimerTypoSwitcher?.textTransform === true && tickerTimerTypographyData?.textTransform ? `text-transform: ${tickerTimerTypographyData?.textTransform};` : ''}
-				${tickerTimerTypoSwitcher?.textDecoration === true && tickerTimerTypographyData?.textDecoration ? `text-decoration: ${tickerTimerTypographyData?.textDecoration};` : ''}
-				${tickerTimerTypoSwitcher?.letterSpacing === true && tickerTimerTypographyData?.letterSpacing ? `letter-spacing: ${tickerTimerTypographyData?.letterSpacing};` : ''}
-				${tickerTimerTypoSwitcher?.lineHeight === true && tickerTimerTypographyData?.lineHeight ? `line-height: ${tickerTimerTypographyData?.lineHeight};` : ''}
+				${tickerTimerTypoSwitcher.fontFamily === true && tickerTimerTypographyData.fontFamily ? `font-family: ${tickerTimerTypographyData.fontFamily};` : ''}
+				${tickerTimerTypoSwitcher.fontSize === true && tickerTimerTypographyData.fontSize ? `font-size: ${tickerTimerTypographyData.fontSize};` : ''}
+				${tickerTimerTypoSwitcher.fontWeight === true && tickerTimerTypographyData.fontWeight ? `font-weight: ${tickerTimerTypographyData.fontWeight};` : ''}
+				${tickerTimerTypoSwitcher.fontStyle === true && tickerTimerTypographyData.fontStyle ? `font-style: ${tickerTimerTypographyData.fontStyle};` : ''}
+				${tickerTimerTypoSwitcher.textTransform === true && tickerTimerTypographyData.textTransform ? `text-transform: ${tickerTimerTypographyData.textTransform};` : ''}
+				${tickerTimerTypoSwitcher.textDecoration === true && tickerTimerTypographyData.textDecoration ? `text-decoration: ${tickerTimerTypographyData.textDecoration};` : ''}
+				${tickerTimerTypoSwitcher.letterSpacing === true && tickerTimerTypographyData.letterSpacing ? `letter-spacing: ${tickerTimerTypographyData.letterSpacing};` : ''}
+				${tickerTimerTypoSwitcher.lineHeight === true && tickerTimerTypographyData.lineHeight ? `line-height: ${tickerTimerTypographyData.lineHeight};` : ''}
 
-                ${tickerTimerTypoSwitcher?.fontFamily === false && tickerTimerFontFamily && tickerTimerFontFamily !== "Default" ? `font-family: ${tickerTimerFontFamily};` : ''}
-                ${tickerTimerTypoSwitcher?.fontSize === false && tickerTimerFontSize?.Desktop && tickerTimerFontSizeUnits?.Desktop ? `font-size: ${tickerTimerFontSize?.Desktop}${tickerTimerFontSizeUnits?.Desktop};` : ''}
-                ${tickerTimerTypoSwitcher?.fontWeight === false && tickerTimerFontWeight ? `font-weight: ${tickerTimerFontWeight};` : ''}
-                ${tickerTimerTypoSwitcher?.fontStyle === false && tickerTimerFontStyle ? `font-style: ${tickerTimerFontStyle};` : ''}
-                ${tickerTimerTypoSwitcher?.textTransform === false && tickerTimerTextTransform ? `text-transform: ${tickerTimerTextTransform};` : ''}
-                ${tickerTimerTypoSwitcher?.textDecoration === false && tickerTimerTextDecoration ? `text-decoration: ${tickerTimerTextDecoration};` : ''}
-                ${tickerTimerTypoSwitcher?.letterSpacing === false && tickerTimerLetterSpacing?.Desktop && tickerTimerLetterSpacingUnits?.Desktop ? `letter-spacing: ${tickerTimerLetterSpacing?.Desktop}${tickerTimerLetterSpacingUnits?.Desktop};` : ''}
-                ${tickerTimerTypoSwitcher?.lineHeight === false && tickerTimerLineHeight?.Desktop && tickerTimerLineHeightUnits?.Desktop ? `line-height: ${tickerTimerLineHeight?.Desktop}${tickerTimerLineHeightUnits?.Desktop};` : ''}
+                ${tickerTimerTypoSwitcher.fontFamily === false && tickerTimerFontFamily && tickerTimerFontFamily !== "Default" ? `font-family: ${tickerTimerFontFamily};` : ''}
+                ${tickerTimerTypoSwitcher.fontSize === false && tickerTimerFontSize.Desktop && tickerTimerFontSizeUnits.Desktop ? `font-size: ${tickerTimerFontSize.Desktop}${tickerTimerFontSizeUnits.Desktop};` : ''}
+                ${tickerTimerTypoSwitcher.fontWeight === false && tickerTimerFontWeight ? `font-weight: ${tickerTimerFontWeight};` : ''}
+                ${tickerTimerTypoSwitcher.fontStyle === false && tickerTimerFontStyle ? `font-style: ${tickerTimerFontStyle};` : ''}
+                ${tickerTimerTypoSwitcher.textTransform === false && tickerTimerTextTransform ? `text-transform: ${tickerTimerTextTransform};` : ''}
+                ${tickerTimerTypoSwitcher.textDecoration === false && tickerTimerTextDecoration ? `text-decoration: ${tickerTimerTextDecoration};` : ''}
+                ${tickerTimerTypoSwitcher.letterSpacing === false && tickerTimerLetterSpacing.Desktop && tickerTimerLetterSpacingUnits.Desktop ? `letter-spacing: ${tickerTimerLetterSpacing.Desktop}${tickerTimerLetterSpacingUnits.Desktop};` : ''}
+                ${tickerTimerTypoSwitcher.lineHeight === false && tickerTimerLineHeight.Desktop && tickerTimerLineHeightUnits.Desktop ? `line-height: ${tickerTimerLineHeight.Desktop}${tickerTimerLineHeightUnits.Desktop};` : ''}
 				${tickerTimerColor ? `color: ${tickerTimerColor};` : ""}
 			}
 			
@@ -2287,78 +2288,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             @media only screen and (max-width: 1024px) {
                 .fb-news-ticker-wrapper.${blockID} {
                     ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset?.Tablet !== undefined ? `left: ${newsTickerHZLeftOffset?.Tablet}${newsTickerHZLeftOffsetUnits?.Tablet};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset?.Tablet !== undefined ? `right: ${newsTickerHZRightOffset?.Tablet}${newsTickerHZRightOffsetUnits?.Tablet};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset?.Tablet !== undefined ? `top: ${newsTickerVRTopOffset?.Tablet}${newsTickerVRTopOffsetUnits?.Tablet};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset?.Tablet !== undefined ? `bottom: ${newsTickerVRBottomOffset?.Tablet}${newsTickerVRBottomOffsetUnits?.Tablet};` : ""}
-                    ${newsTickerGlobalZIndex?.Tablet ? `z-index: ${newsTickerGlobalZIndex?.Tablet};` : ""}
-                    ${globalTabletPadding && newsTickerGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ""}
-                    ${globalTabletMargin && newsTickerGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ""}
-                    ${globalTabletBorderWidth && newsTickerGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ""}
-                    ${globalTabletBorderRadiusWidth && newsTickerGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Tablet !== undefined ? `left: ${newsTickerHZLeftOffset.Tablet}${newsTickerHZLeftOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Tablet !== undefined ? `right: ${newsTickerHZRightOffset.Tablet}${newsTickerHZRightOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Tablet !== undefined ? `top: ${newsTickerVRTopOffset.Tablet}${newsTickerVRTopOffsetUnits.Tablet};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Tablet !== undefined ? `bottom: ${newsTickerVRBottomOffset.Tablet}${newsTickerVRBottomOffsetUnits.Tablet};` : ""}
+                    ${newsTickerGlobalZIndex.Tablet ? `z-index: ${newsTickerGlobalZIndex.Tablet};` : ""}
+                    ${globalTabletPadding && newsTickerGlobalPaddingTablet.top ? `padding: ${globalTabletPadding};` : ""}
+                    ${globalTabletMargin && newsTickerGlobalMarginTablet.top ? `margin: ${globalTabletMargin};` : ""}
+                    ${globalTabletBorderWidth && newsTickerGlobalBorderTablet.top ? `border-width: ${globalTabletBorderWidth};` : ""}
+                    ${globalTabletBorderRadiusWidth && newsTickerGlobalBorderRadiusTablet.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper{
-                    ${labelIconTabletPadding && labelIconPaddingTablet?.top ? `padding: ${labelIconTabletPadding};` : ""}
-                    ${labelIconTabletMargin && labelIconMarginTablet?.top ? `margin: ${labelIconTabletMargin};` : ""}
-                    ${labelIconTabletBorderWidth && labelIconBorderTablet?.top ? `border-width:
+                    ${labelIconTabletPadding && labelIconPaddingTablet.top ? `padding: ${labelIconTabletPadding};` : ""}
+                    ${labelIconTabletMargin && labelIconMarginTablet.top ? `margin: ${labelIconTabletMargin};` : ""}
+                    ${labelIconTabletBorderWidth && labelIconBorderTablet.top ? `border-width:
                     ${labelIconTabletBorderWidth};` : ""}
-                    ${labelIconTabletBorderRadiusWidth && labelIconBorderRadiusTablet?.top ? `border-radius:
+                    ${labelIconTabletBorderRadiusWidth && labelIconBorderRadiusTablet.top ? `border-radius:
                     ${labelIconTabletBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container {
-                    ${labelContainerTabletPadding && labelContainerPaddingTablet?.top ? `padding: ${labelContainerTabletPadding};` : ""}
-                    ${labelContainerTabletMargin && labelContainerMarginTablet?.top ? `margin: ${labelContainerTabletMargin};` : ""}
-                    ${labelContainerTabletBorderWidth && labelContainerBorderTablet?.top ? `border-width: ${labelContainerTabletBorderWidth};` : ""}
-                    ${labelContainerTabletBorderRadiusWidth && labelContainerBorderRadiusTablet?.top ? `border-radius: ${labelContainerTabletBorderRadiusWidth};` : ""}
+                    ${labelContainerTabletPadding && labelContainerPaddingTablet.top ? `padding: ${labelContainerTabletPadding};` : ""}
+                    ${labelContainerTabletMargin && labelContainerMarginTablet.top ? `margin: ${labelContainerTabletMargin};` : ""}
+                    ${labelContainerTabletBorderWidth && labelContainerBorderTablet.top ? `border-width: ${labelContainerTabletBorderWidth};` : ""}
+                    ${labelContainerTabletBorderRadiusWidth && labelContainerBorderRadiusTablet.top ? `border-radius: ${labelContainerTabletBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper svg {
-                    ${iconSize?.Tablet ? `width: ${iconSize?.Tablet}${iconSizeUnits?.Tablet};` : ""}
-                    ${iconSize?.Tablet ? `height: ${iconSize?.Tablet}${iconSizeUnits?.Tablet};` : ""}
+                    ${iconSize.Tablet ? `width: ${iconSize.Tablet}${iconSizeUnits.Tablet};` : ""}
+                    ${iconSize.Tablet ? `height: ${iconSize.Tablet}${iconSizeUnits.Tablet};` : ""}
                 }
 				.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time{
-					${tickerTimerTabletPadding && tickerTimerPaddingTablet?.top ? `padding: ${tickerTimerTabletPadding};` : ""}
-					${tickerTimerTabletMargin && tickerTimerMarginTablet?.top ? `margin: ${tickerTimerTabletMargin};` : ""}
-					${tickerTimerTabletBorderWidth && tickerTimerBorderTablet?.top ? `border-width: ${tickerTimerTabletBorderWidth};` : ""}
-					${tickerTimerTabletBorderRadiusWidth && tickerTimerBorderRadiusTablet?.top ? `border-radius: ${tickerTimerTabletBorderRadiusWidth};` : ""}
+					${tickerTimerTabletPadding && tickerTimerPaddingTablet.top ? `padding: ${tickerTimerTabletPadding};` : ""}
+					${tickerTimerTabletMargin && tickerTimerMarginTablet.top ? `margin: ${tickerTimerTabletMargin};` : ""}
+					${tickerTimerTabletBorderWidth && tickerTimerBorderTablet.top ? `border-width: ${tickerTimerTabletBorderWidth};` : ""}
+					${tickerTimerTabletBorderRadiusWidth && tickerTimerBorderRadiusTablet.top ? `border-radius: ${tickerTimerTabletBorderRadiusWidth};` : ""}
 				}
             }
     
             @media only screen and (max-width: 767px) {
                 .fb-news-ticker-wrapper.${blockID} {
                     ${newsTickerPositionType !== "default" ? `position: ${newsTickerPositionType};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset?.Mobile !== undefined ? `left: ${newsTickerHZLeftOffset?.Mobile}${newsTickerHZLeftOffsetUnits?.Mobile};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset?.Mobile !== undefined ? `right: ${newsTickerHZRightOffset?.Mobile}${newsTickerHZRightOffsetUnits?.Mobile};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset?.Mobile !== undefined ? `top: ${newsTickerVRTopOffset?.Mobile}${newsTickerVRTopOffsetUnits?.Mobile};` : ""}
-                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset?.Mobile !== undefined ? `bottom: ${newsTickerVRBottomOffset?.Mobile}${newsTickerVRBottomOffsetUnits?.Mobile};` : ""}
-                    ${newsTickerGlobalZIndex?.Mobile ? `z-index: ${newsTickerGlobalZIndex?.Mobile};` : ""}
-                    ${globalMobilePadding && newsTickerGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ""}
-                    ${globalMobileMargin && newsTickerGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ""}
-                    ${globalMobileBorderWidth && newsTickerGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ""}
-                    ${globalMobileBorderRadiusWidth && newsTickerGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "left" && newsTickerHZLeftOffset.Mobile !== undefined ? `left: ${newsTickerHZLeftOffset.Mobile}${newsTickerHZLeftOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerHZOrientationType === "right" && newsTickerHZRightOffset.Mobile !== undefined ? `right: ${newsTickerHZRightOffset.Mobile}${newsTickerHZRightOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "top" && newsTickerVRTopOffset.Mobile !== undefined ? `top: ${newsTickerVRTopOffset.Mobile}${newsTickerVRTopOffsetUnits.Mobile};` : ""}
+                    ${newsTickerPositionType !== "default" && newsTickerPositionType !== "relative" && newsTickerVROrientationType === "bottom" && newsTickerVRBottomOffset.Mobile !== undefined ? `bottom: ${newsTickerVRBottomOffset.Mobile}${newsTickerVRBottomOffsetUnits.Mobile};` : ""}
+                    ${newsTickerGlobalZIndex.Mobile ? `z-index: ${newsTickerGlobalZIndex.Mobile};` : ""}
+                    ${globalMobilePadding && newsTickerGlobalPaddingMobile.top ? `padding: ${globalMobilePadding};` : ""}
+                    ${globalMobileMargin && newsTickerGlobalMarginMobile.top ? `margin: ${globalMobileMargin};` : ""}
+                    ${globalMobileBorderWidth && newsTickerGlobalBorderMobile.top ? `border-width: ${globalMobileBorderWidth};` : ""}
+                    ${globalMobileBorderRadiusWidth && newsTickerGlobalBorderRadiusMobile.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container {
-                    ${labelContainerMobilePadding && labelContainerPaddingMobile?.top ? `padding: ${labelContainerMobilePadding};` : ""}
-                    ${labelContainerMobileMargin && labelContainerMarginMobile?.top ? `margin: ${labelContainerMobileMargin};` : ""}
-                    ${labelContainerMobileBorderWidth && labelContainerBorderMobile?.top ? `border-width: ${labelContainerMobileBorderWidth};` : ""}
-                    ${labelContainerMobileBorderRadiusWidth && labelContainerBorderRadiusMobile?.top ? `border-radius: ${labelContainerMobileBorderRadiusWidth};` : ""}
+                    ${labelContainerMobilePadding && labelContainerPaddingMobile.top ? `padding: ${labelContainerMobilePadding};` : ""}
+                    ${labelContainerMobileMargin && labelContainerMarginMobile.top ? `margin: ${labelContainerMobileMargin};` : ""}
+                    ${labelContainerMobileBorderWidth && labelContainerBorderMobile.top ? `border-width: ${labelContainerMobileBorderWidth};` : ""}
+                    ${labelContainerMobileBorderRadiusWidth && labelContainerBorderRadiusMobile.top ? `border-radius: ${labelContainerMobileBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper{
-                    ${labelIconMobilePadding && labelIconPaddingMobile?.top ? `padding: ${labelIconMobilePadding};` : ""}
-                    ${labelIconMobileMargin && labelIconMarginMobile?.top ? `margin: ${labelIconMobileMargin};` : ""}
-                    ${labelIconMobileBorderWidth && labelIconBorderMobile?.top ? `border-width:
+                    ${labelIconMobilePadding && labelIconPaddingMobile.top ? `padding: ${labelIconMobilePadding};` : ""}
+                    ${labelIconMobileMargin && labelIconMarginMobile.top ? `margin: ${labelIconMobileMargin};` : ""}
+                    ${labelIconMobileBorderWidth && labelIconBorderMobile.top ? `border-width:
                     ${labelIconMobileBorderWidth};` : ""}
-                    ${labelIconMobileBorderRadiusWidth && labelIconBorderRadiusMobile?.top ? `border-radius:
+                    ${labelIconMobileBorderRadiusWidth && labelIconBorderRadiusMobile.top ? `border-radius:
                     ${labelIconMobileBorderRadiusWidth};` : ""}
                 }
                 .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-label-container .fb-news-ticker-label-icon .fb-icon-wrapper svg {
-                    ${iconSize?.Mobile ? `width: ${iconSize?.Mobile}${iconSizeUnits?.Mobile};` : ""}
-                    ${iconSize?.Mobile ? `height: ${iconSize?.Mobile}${iconSizeUnits?.Mobile};` : ""}
+                    ${iconSize.Mobile ? `width: ${iconSize.Mobile}${iconSizeUnits.Mobile};` : ""}
+                    ${iconSize.Mobile ? `height: ${iconSize.Mobile}${iconSizeUnits.Mobile};` : ""}
                 }
 				.fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner .fb-news-ticker-time{
-					${tickerTimerMobilePadding && tickerTimerPaddingMobile?.top ? `padding: ${tickerTimerMobilePadding};` : ""} 
-					${tickerTimerMobileMargin && tickerTimerMarginMobile?.top ? `margin: ${tickerTimerMobileMargin};` : ""}
-					${tickerTimerMobileBorderWidth && tickerTimerBorderMobile?.top ? `border-width: ${tickerTimerMobileBorderWidth};` : ""}
-					${tickerTimerMobileBorderRadiusWidth && tickerTimerBorderRadiusMobile?.top ? `border-radius: ${tickerTimerMobileBorderRadiusWidth};` : ""}
+					${tickerTimerTabletPadding && tickerTimerPaddingTablet.top ? `padding: ${tickerTimerTabletPadding};` : ""}
+					${tickerTimerTabletMargin && tickerTimerMarginTablet.top ? `margin: ${tickerTimerTabletMargin};` : ""}
+					${tickerTimerTabletBorderWidth && tickerTimerBorderTablet.top ? `border-width: ${tickerTimerTabletBorderWidth};` : ""}
+					${tickerTimerTabletBorderRadiusWidth && tickerTimerBorderRadiusTablet.top ? `border-radius: ${tickerTimerTabletBorderRadiusWidth};` : ""}
 				}
 
             }

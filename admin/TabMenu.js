@@ -17,7 +17,7 @@ import {
     PricingIcon
 } from './icons'
 
-const TabMenus = applyFilters('frontisblocks-admin-tabs', [
+const TabMenus = applyFilters('frontisblocks/admin/tabs', [
     {
         id: 'general',
         icon: <HomeIcon />,
@@ -41,12 +41,6 @@ const TabMenus = applyFilters('frontisblocks-admin-tabs', [
         icon: <IntegrationsIcon />,
         label: __("Integrations", "frontis-blocks"),
         comp: <Integration />
-    },
-    {
-      id: 'pricing',
-      icon: <PricingIcon />,
-      label: __("Pricing", "frontis-blocks"),
-      comp: <Pricing />
     },
 ]);
 // Add pricing tab if not pro

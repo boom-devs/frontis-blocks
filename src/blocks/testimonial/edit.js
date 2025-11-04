@@ -18,9 +18,8 @@ import Inspector from "./inspector";
 import { useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
-import DynamicTextValue from '@Components/dynamic-text-value';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         TestimonialPresetStyle,
@@ -56,107 +55,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         testimonialDesktopSwitcher,
 		testimonialTabletSwitcher,
 		testimonialMobileSwitcher,
-
-        /** Start Dynamic Title Text */
-		dynamicTitleEnabled,
-		dynamicTitleSource,
-		dynamicTitlePostId,
-		dynamicTitlePostType,
-		dynamicTitlePostLabel,
-		dynamicTitleField,
-		dynamicTitleFeaturedImageField,
-
-		dynamicTitleDateType,
-		dynamicTitleDateFormat,
-
-		dynamicTitleTimeType,
-		dynamicTitleTimeFormat,
-
-		dynamicTitleCommentsZeroText,
-		dynamicTitleCommentsOneText,
-		dynamicTitleCommentsManyText,
-
-		dynamicTitleTermsTaxonomy,
-		dynamicTitleTermsSeparator,
-		dynamicTitleEnableLink,
-		dynamicTitleLinkSource,
-		/** End Dynamic Title Text */
-
-		/** Start Dynamic Description Text */
-		dynamicDescriptionEnabled,
-		dynamicDescriptionSource,
-		dynamicDescriptionPostId,
-		dynamicDescriptionPostType,
-		dynamicDescriptionPostLabel,
-		dynamicDescriptionField,
-		dynamicDescriptionFeaturedImageField,
-
-		dynamicDescriptionDateType,
-		dynamicDescriptionDateFormat,
-
-		dynamicDescriptionTimeType,
-		dynamicDescriptionTimeFormat,
-
-		dynamicDescriptionCommentsZeroText,
-		dynamicDescriptionCommentsOneText,
-		dynamicDescriptionCommentsManyText,
-
-		dynamicDescriptionTermsTaxonomy,
-		dynamicDescriptionTermsSeparator,
-		dynamicDescriptionEnableLink,
-		dynamicDescriptionLinkSource,
-		/** End Dynamic Description Text */
-
-        /** Start Dynamic Author Name Text */
-		dynamicAuthorNameEnabled,
-		dynamicAuthorNameSource,
-		dynamicAuthorNamePostId,
-		dynamicAuthorNamePostType,
-		dynamicAuthorNamePostLabel,
-		dynamicAuthorNameField,
-		dynamicAuthorNameFeaturedImageField,
-
-		dynamicAuthorNameDateType,
-		dynamicAuthorNameDateFormat,
-
-		dynamicAuthorNameTimeType,
-		dynamicAuthorNameTimeFormat,
-
-		dynamicAuthorNameCommentsZeroText,
-		dynamicAuthorNameCommentsOneText,
-		dynamicAuthorNameCommentsManyText,
-
-		dynamicAuthorNameTermsTaxonomy,
-		dynamicAuthorNameTermsSeparator,
-		dynamicAuthorNameEnableLink,
-		dynamicAuthorNameLinkSource,
-		/** End Dynamic Author Name Text */
-
-        /** Start Dynamic Author Designation Text */
-		dynamicAuthorDesignationEnabled,
-		dynamicAuthorDesignationSource,
-		dynamicAuthorDesignationPostId,
-		dynamicAuthorDesignationPostType,
-		dynamicAuthorDesignationPostLabel,
-		dynamicAuthorDesignationField,
-		dynamicAuthorDesignationFeaturedImageField,
-
-		dynamicAuthorDesignationDateType,
-		dynamicAuthorDesignationDateFormat,
-
-		dynamicAuthorDesignationTimeType,
-		dynamicAuthorDesignationTimeFormat,
-
-		dynamicAuthorDesignationCommentsZeroText,
-		dynamicAuthorDesignationCommentsOneText,
-		dynamicAuthorDesignationCommentsManyText,
-
-		dynamicAuthorDesignationTermsTaxonomy,
-		dynamicAuthorDesignationTermsSeparator,
-		dynamicAuthorDesignationEnableLink,
-		dynamicAuthorDesignationLinkSource,
-		/** End Dynamic Author Designation Text */
-
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -182,134 +80,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-
-    	/**
-	 * Dynamic Text Value for Title
-	 */
-	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
-
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
-
-		textFeaturedImageField: dynamicTitleFeaturedImageField,
-
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
-
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
-
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
-
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
-
-		context,
-	});
-
-	/**
-	 * Dynamic Text Value for Description
-	 */
-	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
-
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
-
-		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
-
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
-
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
-
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
-
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
-
-		context,
-	});
-
-    /**
-	 * Dynamic Text Value for Author Name
-	 */
-	const { dynamicDisplayValue: dynamicAuthorNameValue, dynamicDisplayLink: dynamicAuthorNameLink } = DynamicTextValue({
-		textEnabled:            dynamicAuthorNameEnabled,
-		textSource:             dynamicAuthorNameSource,
-		textField:              dynamicAuthorNameField,
-
-		textPostId:             dynamicAuthorNamePostId,
-		textPostType:           dynamicAuthorNamePostType,
-		textPostLabel:          dynamicAuthorNamePostLabel,
-
-		textFeaturedImageField: dynamicAuthorNameFeaturedImageField,
-
-		textDateType:           dynamicAuthorNameDateType,
-		textDateFormat:         dynamicAuthorNameDateFormat,
-		textTimeType:           dynamicAuthorNameTimeType, 
-		textTimeFormat:         dynamicAuthorNameTimeFormat,
-
-		textCommentsZeroText:   dynamicAuthorNameCommentsZeroText,
-		textCommentsOneText:    dynamicAuthorNameCommentsOneText,
-		textCommentsManyText:   dynamicAuthorNameCommentsManyText,
-
-		textTermsTaxonomy:      dynamicAuthorNameTermsTaxonomy,
-		textTermsSeparator:     dynamicAuthorNameTermsSeparator,
-
-		textLinkEnabled:        dynamicAuthorNameEnableLink,
-		textLinkSource:         dynamicAuthorNameLinkSource,
-
-		context,
-	});
-
-    /**
-	 * Dynamic Text Value for Author Designation
-	 */
-	const { dynamicDisplayValue: dynamicAuthorDesignationValue, dynamicDisplayLink: dynamicAuthorDesignationLink } = DynamicTextValue({
-		textEnabled:            dynamicAuthorDesignationEnabled,
-		textSource:             dynamicAuthorDesignationSource,
-		textField:              dynamicAuthorDesignationField,
-
-		textPostId:             dynamicAuthorDesignationPostId,
-		textPostType:           dynamicAuthorDesignationPostType,
-		textPostLabel:          dynamicAuthorDesignationPostLabel,
-
-		textFeaturedImageField: dynamicAuthorDesignationFeaturedImageField,
-
-		textDateType:           dynamicAuthorDesignationDateType,
-		textDateFormat:         dynamicAuthorDesignationDateFormat,
-		textTimeType:           dynamicAuthorDesignationTimeType, 
-		textTimeFormat:         dynamicAuthorDesignationTimeFormat,
-
-		textCommentsZeroText:   dynamicAuthorDesignationCommentsZeroText,
-		textCommentsOneText:    dynamicAuthorDesignationCommentsOneText,
-		textCommentsManyText:   dynamicAuthorDesignationCommentsManyText,
-
-		textTermsTaxonomy:      dynamicAuthorDesignationTermsTaxonomy,
-		textTermsSeparator:     dynamicAuthorDesignationTermsSeparator,
-
-		textLinkEnabled:        dynamicAuthorDesignationEnableLink,
-		textLinkSource:         dynamicAuthorDesignationLinkSource,
-
-		context,
-	});
 
     return (
         <>
@@ -385,10 +155,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
-                                                            }}
+                                                            value={TestimonialAuthor}
+                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -396,10 +164,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
-                                                            }}
+                                                            value={TestimonialDesignation}
+                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />
@@ -416,10 +182,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
-                                                    onChange={(value) => {
-                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
-                                                    }}
+                                                    value={TestimonialTitle}
+                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -430,10 +194,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
-                                                    onChange={(value) => {
-                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
-                                                    }}
+                                                    value={TestimonialDesc}
+                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
@@ -456,10 +218,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
-                                                    onChange={(value) => {
-                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
-                                                    }}
+                                                    value={TestimonialTitle}
+                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -470,10 +230,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
-                                                    onChange={(value) => {
-                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
-                                                    }}
+                                                    value={TestimonialDesc}
+                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
@@ -506,10 +264,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
-                                                            }}
+                                                            value={TestimonialAuthor}
+                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -517,10 +273,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
-                                                            }}
+                                                            value={TestimonialDesignation}
+                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />
@@ -556,10 +310,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
-                                                    onChange={(value) => {
-                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
-                                                    }}
+                                                    value={TestimonialTitle}
+                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -570,10 +322,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
-                                                    onChange={(value) => {
-                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
-                                                    }}
+                                                    value={TestimonialDesc}
+                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
@@ -606,10 +356,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
-                                                            }}
+                                                            value={TestimonialAuthor}
+                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -617,10 +365,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
-                                                            onChange={(value) => {
-                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
-                                                            }}
+                                                            value={TestimonialDesignation}
+                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />

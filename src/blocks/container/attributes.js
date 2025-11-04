@@ -84,14 +84,6 @@ const attributes = {
 			Mobile: '%',
 		}
 	},
-	isContainerGlobalPaddingOverride: {
-		type: 'object',
-		default: {
-			Desktop: false,
-			Tablet: false,
-			Mobile: false
-		}
-	},
 	customWidthUnits: {
 		type: 'object',
 		default: {
@@ -789,7 +781,10 @@ const attributes = {
         type : 'boolean',
         default: true
     },
-	
+	containerPaddingHasEdited: {
+		type: 'boolean',
+		default: false,
+	},
 	/** Start Margin */
 	containerMarginUnits: {
 		type: 'object',

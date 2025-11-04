@@ -1,11 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import attributesReducer from "./attributesSlice";
-import { api } from '../services/laravelapi';
+import { configureStore } from '@reduxjs/toolkit';
+import { api } from '../services/api';
 
 export const store = configureStore({
   reducer: {
-    attributes: attributesReducer,   // attributes slice
-    [api.reducerPath]: api.reducer,  // RTK Query api slice
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),

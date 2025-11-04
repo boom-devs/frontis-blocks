@@ -5,7 +5,6 @@ export default function save({ attributes }) {
 	const {
 		blockID,
 		Heading_Text,
-		headingTag,
 		Alignment,
 		Sub_Heading_Text,
 		descriptionSwitcher,
@@ -46,7 +45,7 @@ export default function save({ attributes }) {
 					<div className={`fb-cta-content-wrapper-inner ${blockID}`}>
 						<div className="fb-cta-content-wrapper">
 							<RichText.Content
-								tagName={headingTag}
+								tagName="h2"
 								value={Heading_Text}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"

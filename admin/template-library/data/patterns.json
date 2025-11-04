@@ -1,5 +1,6 @@
 {
   "categories": [
+    { "name": "All", "slug": "all", "icon": "categories/all.svg", "count": 7 },
     { "name": "Content Blocks", "slug": "content-blocks", "icon": "categories/content-blocks.svg", "count": 1 },
     { "name": "Creative", "slug": "creative", "icon": "categories/creative.svg", "count": 5 },
     { "name": "Dynamic", "slug": "dynamic", "icon": "categories/dynamic.svg", "count": 30 },
@@ -16,7 +17,7 @@
       "is_premium": false,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
       "tags": ["Blog", "Magazine", "Construction"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -30,7 +31,7 @@
       "is_premium": true,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-1.png",
       "tags": ["Landing", "AI", "Gutenberg"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -44,7 +45,7 @@
       "is_premium": false,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-1.png",
       "tags": ["Landing", "Creative"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -58,7 +59,7 @@
       "is_premium": false,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-2.png",
       "tags": ["Landing", "Business"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -72,7 +73,7 @@
       "is_premium": true,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-3.png",
       "tags": ["Landing", "Portfolio"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -86,7 +87,7 @@
       "is_premium": false,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-4.png",
       "tags": ["Landing", "Agency"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -100,7 +101,7 @@
       "is_premium": false,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/free-5.png",
       "tags": ["Landing", "Startup"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }
@@ -114,7 +115,7 @@
       "is_premium": true,
       "image": "https://frontiswp.com/wp-content/uploads/2025/04/pro-2.png",
       "tags": ["Content", "Block"],
-      "categories": ["Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
+      "categories": ["All", "Content Blocks", "Creative", "Dynamic", "Layout", "Form", "Social"],
       "dependencies": [
         { "name": "Frontis Blocks", "version": "1.0.0" },
         { "name": "Frontis Theme", "version": "1.0.0" }

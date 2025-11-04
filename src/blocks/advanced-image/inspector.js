@@ -11,20 +11,24 @@ import {
 } from "@wordpress/components";
 
 import { 
+    ADVANCED_HEADING_PRESETS,
     DYNAMIC_IMAGE_SOURCE_OPTIONS,
+    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
+    DYNAMIC_FEATURED_IMAGE_OPTIONS,
+    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+    DYNAMIC_TAXONOMY_OPTIONS,
+    getDynamicDateFormatOptions,
+    getDynamicTimeFormatOptions,
     DYNAMIC_LINK_SOURCE_OPTIONS,
+    SEPARATOR_POSITION,
+    SUBHEADING_POSITION,
     BORDER_STYLES,
+    BACKGROUND_TYPES,
     OVERFLOW_OP,
+    ICON_ALIGN,
+    SEPARATOR_STYLE_OPTIONS,
 	DYNAMIC_IMAGE_FIELD_OPTIONS,
 	WP_IMAGE_SIZE_OPTIONS,
-	IMAGE_STYLES,
-	TITLE_POSITION,
-	IMAGE_HOVER_EFFECTS,
-	IMAGE_AUTO_FIT,
-	IMAGE_MASK_SIZE,
-	IMAGE_MASK_POSITION,
-	IMAGE_MASK_REPEAT,
-	IMAGE_MASK_IMAEGS,
 
 } from '@Constants/fbConstants';
 
@@ -53,9 +57,18 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-import getProDynamicButton from '@Utils/getProDynamicButton';
+
+import {
+	STYLES,
+	TITLE_POSITION,
+	HOVER_EFFECTS,
+	AUTO_FIT,
+	MASK_IMAEGS,
+	MASK_SIZE,
+	MASK_POSITION,
+	MASK_REPEAT
+} from "./constants/constants";
 import "./editor.scss";
-import DynamicImageSourceControl from '@Components/dynamic-image-source-control';
 
 export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
 	const {
@@ -245,8 +258,8 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		dynamicImageFallbackAlt,
 		dynamicImageFallbackId,
 
-		dynamicImageEnableLink,
-		dynamicImageLinkSource,
+		dynamicEnableLink,
+		dynamicLinkSource,
 
 	} = attributes;
 
@@ -341,9 +354,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const headingDesktopPaddingValue = `${HeadingDesktopPadding?.top}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.right}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.bottom}${HeadingPaddingUnits?.Desktop} ${HeadingDesktopPadding?.left}${HeadingPaddingUnits?.Desktop}`;
-	const headingTabletPaddingValue = `${HeadingTabPadding?.top}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.right}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.bottom}${HeadingPaddingUnits?.Tablet} ${HeadingTabPadding?.left}${HeadingPaddingUnits?.Tablet}`;
-	const headingMobilePaddingValue = `${HeadingMobilePadding?.top}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.right}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.bottom}${HeadingPaddingUnits?.Mobile} ${HeadingMobilePadding?.left}${HeadingPaddingUnits?.Mobile}`;
+	const headingDesktopPaddingValue = `${HeadingDesktopPadding.top}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.right}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.bottom}${HeadingPaddingUnits.Desktop} ${HeadingDesktopPadding.left}${HeadingPaddingUnits.Desktop}`;
+	const headingTabletPaddingValue = `${HeadingTabPadding.top}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.right}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.bottom}${HeadingPaddingUnits.Tablet} ${HeadingTabPadding.left}${HeadingPaddingUnits.Tablet}`;
+	const headingMobilePaddingValue = `${HeadingMobilePadding.top}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.right}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.bottom}${HeadingPaddingUnits.Mobile} ${HeadingMobilePadding.left}${HeadingPaddingUnits.Mobile}`;
 
 	// Heading Margin
 	const handleHeadingMarginUnitChange = (event, position) => {
@@ -420,9 +433,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const headingDesktopMarginValue = `${HeadingDesktopMargin?.top}${HeadingMarginUnits?.Desktop} ${HeadingDesktopMargin?.right}${HeadingMarginUnits?.Desktop} ${HeadingDesktopMargin?.bottom}${HeadingMarginUnits?.Desktop} ${HeadingDesktopMargin?.left}${HeadingMarginUnits?.Desktop}`;
-	const headingTabletMarginValue = `${HeadingTabMargin?.top}${HeadingMarginUnits?.Tablet} ${HeadingTabMargin?.right}${HeadingMarginUnits?.Tablet} ${HeadingTabMargin?.bottom}${HeadingMarginUnits?.Tablet} ${HeadingTabMargin?.left}${HeadingMarginUnits?.Tablet}`;
-	const headingMobileMarginValue = `${HeadingMobileMargin?.top}${HeadingMarginUnits?.Mobile} ${HeadingMobileMargin?.right}${HeadingMarginUnits?.Mobile} ${HeadingMobileMargin?.bottom}${HeadingMarginUnits?.Mobile} ${HeadingMobileMargin?.left}${HeadingMarginUnits?.Mobile}`;
+	const headingDesktopMarginValue = `${HeadingDesktopMargin.top}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.right}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.bottom}${HeadingMarginUnits.Desktop} ${HeadingDesktopMargin.left}${HeadingMarginUnits.Desktop}`;
+	const headingTabletMarginValue = `${HeadingTabMargin.top}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.right}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.bottom}${HeadingMarginUnits.Tablet} ${HeadingTabMargin.left}${HeadingMarginUnits.Tablet}`;
+	const headingMobileMarginValue = `${HeadingMobileMargin.top}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.right}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.bottom}${HeadingMarginUnits.Mobile} ${HeadingMobileMargin.left}${HeadingMarginUnits.Mobile}`;
 
 	/** Start Image Border */
 	const handleImageBorderUnitChange = (event, position) => {
@@ -499,9 +512,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	};
 
 	/** Default padding for desktop (using desktop_padding) */
-	const imageDesktopBorder = `${imageBorderDesktop?.top}${imageBorderUnits?.Desktop} ${imageBorderDesktop?.right}${imageBorderUnits?.Desktop} ${imageBorderDesktop?.bottom}${imageBorderUnits?.Desktop} ${imageBorderDesktop?.left}${imageBorderUnits?.Desktop}`;
-	const imageTabletBorder = `${imageBorderTablet?.top}${imageBorderUnits?.Tablet} ${imageBorderTablet?.right}${imageBorderUnits?.Tablet} ${imageBorderTablet?.bottom}${imageBorderUnits?.Tablet} ${imageBorderTablet?.left}${imageBorderUnits?.Tablet}`;
-	const imageMobileBorder = `${imageBorderMobile?.top}${imageBorderUnits?.Mobile} ${imageBorderMobile?.right}${imageBorderUnits?.Mobile} ${imageBorderMobile?.bottom}${imageBorderUnits?.Mobile} ${imageBorderMobile?.left}${imageBorderUnits?.Mobile}`;
+	const imageDesktopBorder = `${imageBorderDesktop.top}${imageBorderUnits.Desktop} ${imageBorderDesktop.right}${imageBorderUnits.Desktop} ${imageBorderDesktop.bottom}${imageBorderUnits.Desktop} ${imageBorderDesktop.left}${imageBorderUnits.Desktop}`;
+	const imageTabletBorder = `${imageBorderTablet.top}${imageBorderUnits.Tablet} ${imageBorderTablet.right}${imageBorderUnits.Tablet} ${imageBorderTablet.bottom}${imageBorderUnits.Tablet} ${imageBorderTablet.left}${imageBorderUnits.Tablet}`;
+	const imageMobileBorder = `${imageBorderMobile.top}${imageBorderUnits.Mobile} ${imageBorderMobile.right}${imageBorderUnits.Mobile} ${imageBorderMobile.bottom}${imageBorderUnits.Mobile} ${imageBorderMobile.left}${imageBorderUnits.Mobile}`;
 
 	/** Start Image Border Radius */
 	const handleImageBorderRadiusUnitChange = (event, position) => {
@@ -578,9 +591,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	};
 
 	/** Default border radius for desktop (using desktop_border_radius) */
-	const imageDesktopBorderRadius = `${imageBorderRadiusDesktop?.top}${imageBorderRadiusUnits?.Desktop} ${imageBorderRadiusDesktop?.right}${imageBorderRadiusUnits?.Desktop} ${imageBorderRadiusDesktop?.bottom}${imageBorderRadiusUnits?.Desktop} ${imageBorderRadiusDesktop?.left}${imageBorderRadiusUnits?.Desktop}`;
-	const imageTabletBorderRadius = `${imageBorderRadiusTablet?.top}${imageBorderRadiusUnits?.Tablet} ${imageBorderRadiusTablet?.right}${imageBorderRadiusUnits?.Tablet} ${imageBorderRadiusTablet?.bottom}${imageBorderRadiusUnits?.Tablet} ${imageBorderRadiusTablet?.left}${imageBorderRadiusUnits?.Tablet}`;
-	const imageMobileBorderRadius = `${imageBorderRadiusMobile?.top}${imageBorderRadiusUnits?.Mobile} ${imageBorderRadiusMobile?.right}${imageBorderRadiusUnits?.Mobile} ${imageBorderRadiusMobile?.bottom}${imageBorderRadiusUnits?.Mobile} ${imageBorderRadiusMobile?.left}${imageBorderRadiusUnits?.Mobile}`;
+	const imageDesktopBorderRadius = `${imageBorderRadiusDesktop.top}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.right}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.bottom}${imageBorderRadiusUnits.Desktop} ${imageBorderRadiusDesktop.left}${imageBorderRadiusUnits.Desktop}`;
+	const imageTabletBorderRadius = `${imageBorderRadiusTablet.top}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.right}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.bottom}${imageBorderRadiusUnits.Tablet} ${imageBorderRadiusTablet.left}${imageBorderRadiusUnits.Tablet}`;
+	const imageMobileBorderRadius = `${imageBorderRadiusMobile.top}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.right}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.bottom}${imageBorderRadiusUnits.Mobile} ${imageBorderRadiusMobile.left}${imageBorderRadiusUnits.Mobile}`;
 
 
 	/** Start Global padding */
@@ -660,9 +673,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		});
 	};
 
-	const globalDeskPadding = `${globalPaddingDesktop?.top}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.right}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.bottom}${globalPaddingUnits?.Desktop} ${globalPaddingDesktop?.left}${globalPaddingUnits?.Desktop}`;
-	const globalTabPadding = `${globalPaddingTablet?.top}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.right}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.bottom}${globalPaddingUnits?.Tablet} ${globalPaddingTablet?.left}${globalPaddingUnits?.Tablet}`;
-	const globalMobPadding = `${globalPaddingMobile?.top}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.right}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.bottom}${globalPaddingUnits?.Mobile} ${globalPaddingMobile?.left}${globalPaddingUnits?.Mobile}`;
+	const globalDeskPadding = `${globalPaddingDesktop.top}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.right}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.bottom}${globalPaddingUnits.Desktop} ${globalPaddingDesktop.left}${globalPaddingUnits.Desktop}`;
+	const globalTabPadding = `${globalPaddingTablet.top}${globalPaddingUnits.Tablet} ${globalPaddingTablet.right}${globalPaddingUnits.Tablet} ${globalPaddingTablet.bottom}${globalPaddingUnits.Tablet} ${globalPaddingTablet.left}${globalPaddingUnits.Tablet}`;
+	const globalMobPadding = `${globalPaddingMobile.top}${globalPaddingUnits.Mobile} ${globalPaddingMobile.right}${globalPaddingUnits.Mobile} ${globalPaddingMobile.bottom}${globalPaddingUnits.Mobile} ${globalPaddingMobile.left}${globalPaddingUnits.Mobile}`;
 
 
 	/** Start Global margin */
@@ -739,9 +752,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		});
 	};
 
-	const globalDeskMargin = `${globalMarginDesktop?.top}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.right}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.bottom}${globalMarginUnits?.Desktop} ${globalMarginDesktop?.left}${globalMarginUnits?.Desktop}`;
-	const globalTabMargin = `${globalMarginTablet?.top}${globalMarginUnits?.Tablet} ${globalMarginTablet?.right}${globalMarginUnits?.Tablet} ${globalMarginTablet?.bottom}${globalMarginUnits?.Tablet} ${globalMarginTablet?.left}${globalMarginUnits?.Tablet}`;
-	const globalMobMargin = `${globalMarginMobile?.top}${globalMarginUnits?.Mobile} ${globalMarginMobile?.right}${globalMarginUnits?.Mobile} ${globalMarginMobile?.bottom}${globalMarginUnits?.Mobile} ${globalMarginMobile?.left}${globalMarginUnits?.Mobile}`;
+	const globalDeskMargin = `${globalMarginDesktop.top}${globalMarginUnits.Desktop} ${globalMarginDesktop.right}${globalMarginUnits.Desktop} ${globalMarginDesktop.bottom}${globalMarginUnits.Desktop} ${globalMarginDesktop.left}${globalMarginUnits.Desktop}`;
+	const globalTabMargin = `${globalMarginTablet.top}${globalMarginUnits.Tablet} ${globalMarginTablet.right}${globalMarginUnits.Tablet} ${globalMarginTablet.bottom}${globalMarginUnits.Tablet} ${globalMarginTablet.left}${globalMarginUnits.Tablet}`;
+	const globalMobMargin = `${globalMarginMobile.top}${globalMarginUnits.Mobile} ${globalMarginMobile.right}${globalMarginUnits.Mobile} ${globalMarginMobile.bottom}${globalMarginUnits.Mobile} ${globalMarginMobile.left}${globalMarginUnits.Mobile}`;
 
 	/** Start Global border */
 	const handleGlobalBorderUnitChange = (event, position) => {
@@ -817,9 +830,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		});
 	};
 	/** End Global border */
-	const globalDeskBorder = `${globalBorderDesktop?.top}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.right}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.bottom}${globalBorderUnits?.Desktop} ${globalBorderDesktop?.left}${globalBorderUnits?.Desktop}`;
-	const globalTabBorder = `${globalBorderTablet?.top}${globalBorderUnits?.Tablet} ${globalBorderTablet?.right}${globalBorderUnits?.Tablet} ${globalBorderTablet?.bottom}${globalBorderUnits?.Tablet} ${globalBorderTablet?.left}${globalBorderUnits?.Tablet}`;
-	const globalMobBorder = `${globalBorderMobile?.top}${globalBorderUnits?.Mobile} ${globalBorderMobile?.right}${globalBorderUnits?.Mobile} ${globalBorderMobile?.bottom}${globalBorderUnits?.Mobile} ${globalBorderMobile?.left}${globalBorderUnits?.Mobile}`;
+	const globalDeskBorder = `${globalBorderDesktop.top}${globalBorderUnits.Desktop} ${globalBorderDesktop.right}${globalBorderUnits.Desktop} ${globalBorderDesktop.bottom}${globalBorderUnits.Desktop} ${globalBorderDesktop.left}${globalBorderUnits.Desktop}`;
+	const globalTabBorder = `${globalBorderTablet.top}${globalBorderUnits.Tablet} ${globalBorderTablet.right}${globalBorderUnits.Tablet} ${globalBorderTablet.bottom}${globalBorderUnits.Tablet} ${globalBorderTablet.left}${globalBorderUnits.Tablet}`;
+	const globalMobBorder = `${globalBorderMobile.top}${globalBorderUnits.Mobile} ${globalBorderMobile.right}${globalBorderUnits.Mobile} ${globalBorderMobile.bottom}${globalBorderUnits.Mobile} ${globalBorderMobile.left}${globalBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
@@ -907,9 +920,9 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	/** end Global border */
 
 	/** End Global Border Radius */
-	const globalDeskBorderRadius = `${globalBorderRadiusDesktop?.top}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.right}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.bottom}${globalBorderRadiusUnits?.Desktop} ${globalBorderRadiusDesktop?.left}${globalBorderRadiusUnits?.Desktop}`;
-	const globalTabBorderRadius = `${globalBorderRadiusTablet?.top}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.right}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.bottom}${globalBorderRadiusUnits?.Tablet} ${globalBorderRadiusTablet?.left}${globalBorderRadiusUnits?.Tablet}`;
-	const globalMobBorderRadius = `${globalBorderRadiusMobile?.top}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.right}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.bottom}${globalBorderRadiusUnits?.Mobile} ${globalBorderRadiusMobile?.left}${globalBorderRadiusUnits?.Mobile}`;
+	const globalDeskBorderRadius = `${globalBorderRadiusDesktop.top}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.right}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.bottom}${globalBorderRadiusUnits.Desktop} ${globalBorderRadiusDesktop.left}${globalBorderRadiusUnits.Desktop}`;
+	const globalTabBorderRadius = `${globalBorderRadiusTablet.top}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.right}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.bottom}${globalBorderRadiusUnits.Tablet} ${globalBorderRadiusTablet.left}${globalBorderRadiusUnits.Tablet}`;
+	const globalMobBorderRadius = `${globalBorderRadiusMobile.top}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.right}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.bottom}${globalBorderRadiusUnits.Mobile} ${globalBorderRadiusMobile.left}${globalBorderRadiusUnits.Mobile}`;
 
 	/** Start Global Border Color */
 	const handleGlobalBorderColorSwitcherChange = (value) => {
@@ -928,11 +941,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${advancedImagePositionType === 'default' ? `position: relative !important;` : ''}
 			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' ? `width: 100%;` : ''}
 			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType} !important;` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset?.Desktop ? `left: ${advancedImageHZLeftOffset?.Desktop}${advancedImageHZLeftOffsetUnits?.Desktop};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset?.Desktop ? `right: ${advancedImageHZRightOffset?.Desktop}${advancedImageHZRightOffsetUnits?.Desktop};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset?.Desktop ? `top: ${advancedImageVRTopOffset?.Desktop}${advancedImageVRTopOffsetUnits?.Desktop};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset?.Desktop ? `bottom: ${advancedImageVRBottomOffset?.Desktop}${advancedImageVRBottomOffsetUnits?.Desktop};` : ''}
-			${globalZIndex?.Desktop ? `z-index: ${globalZIndex?.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Desktop ? `left: ${advancedImageHZLeftOffset.Desktop}${advancedImageHZLeftOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Desktop ? `right: ${advancedImageHZRightOffset.Desktop}${advancedImageHZRightOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Desktop ? `top: ${advancedImageVRTopOffset.Desktop}${advancedImageVRTopOffsetUnits.Desktop};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Desktop ? `bottom: ${advancedImageVRBottomOffset.Desktop}${advancedImageVRBottomOffsetUnits.Desktop};` : ''}
+			${globalZIndex.Desktop ? `z-index: ${globalZIndex.Desktop};` : ''}
 			${advancedImageOverflow !== 'default' ? `overflow: ${advancedImageOverflow};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper{
@@ -970,11 +983,11 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			}
 		}
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner{
-			${mediaSize?.Desktop ? `width: ${mediaSize?.Desktop}${mediaSizeUnits?.Desktop};` : ''}
-			${!autoHeightSwitch && mediaHeight?.Desktop ? `height: ${mediaHeight?.Desktop}${mediaHeightUnits?.Desktop};` : `height: auto;`}
+			${mediaSize.Desktop ? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};` : ''}
+			${!autoHeightSwitch && mediaHeight.Desktop ? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};` : `height: auto;`}
 			${imageBorder ? `border: ${imageBorder};` : ''}
-			${imageDesktopBorder && imageBorderDesktop?.top ? `border-width: ${imageDesktopBorder};` : ''}
-            ${imageDesktopBorderRadius && imageBorderRadiusDesktop?.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
+			${imageDesktopBorder && imageBorderDesktop.top ? `border-width: ${imageDesktopBorder};` : ''}
+            ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top ? `border-radius: ${imageDesktopBorderRadius};` : ''}
             ${imageBorderColor ? `border-color: ${imageBorderColor};` : ''}
 			${imageBoxShadowCssValue ? `box-shadow: ${imageBoxShadowCssValue};` : ''}
 			${maskImageUrl && !['square', 'octagon', 'triangle', 'rhombus', 'hexagon', 'bevel'].includes(imageStyle) && `
@@ -988,7 +1001,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		.${blockID} .fb-advanced-image .fb-advanced-image-inner:hover{
 			${imageBorderHoverColor ? `border-color: ${imageBorderHoverColor};` : ''}
 		}
-		.${blockID} .fb-advanced-image.overlay-simple .fb-advanced-image-inner:before{
+		.${blockID} .fb-advanced-image .fb-advanced-image-inner:before{
 			${overlayBackgroundType === "gradient" ? ` background: ${overlayCustomGradientSwitcher && overlayCustomGradientInputValue ? overlayCustomGradientInputValue : overlayGradientColor};
 			`
 				: overlayBackgroundImageUrl && overlayBackgroundImageUrl !== "null"
@@ -1020,26 +1033,26 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 			${HeadingColor ? `color: ${HeadingColor};` : ''}
 			${HeadingBackgroundColor ? `background-color: ${HeadingBackgroundColor};` : ''}
 
-			${headingGlobalTypoSwitcher?.fontFamily === true && headingGlobalTypographyData?.fontFamily ? `font-family: ${headingGlobalTypographyData.fontFamily};` : ''}
-			${headingGlobalTypoSwitcher?.fontSize === true && headingGlobalTypographyData?.fontSize ? `font-size: ${headingGlobalTypographyData.fontSize};` : ''}
-			${headingGlobalTypoSwitcher?.fontWeight === true && headingGlobalTypographyData?.fontWeight ? `font-weight: ${headingGlobalTypographyData.fontWeight};` : ''}
-			${headingGlobalTypoSwitcher?.fontStyle === true && headingGlobalTypographyData?.fontStyle ? `font-style: ${headingGlobalTypographyData.fontStyle};` : ''}
-			${headingGlobalTypoSwitcher?.textTransform === true && headingGlobalTypographyData?.textTransform ? `text-transform: ${headingGlobalTypographyData.textTransform};` : ''}
-			${headingGlobalTypoSwitcher?.textDecoration === true && headingGlobalTypographyData?.textDecoration ? `text-decoration: ${headingGlobalTypographyData.textDecoration};` : ''}
-			${headingGlobalTypoSwitcher?.letterSpacing === true && headingGlobalTypographyData?.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData.letterSpacing};` : ''}
-			${headingGlobalTypoSwitcher?.lineHeight === true && headingGlobalTypographyData?.lineHeight ? `line-height: ${headingGlobalTypographyData.lineHeight};` : ''}
+			${headingGlobalTypoSwitcher.fontFamily === true && headingGlobalTypographyData.fontFamily ? `font-family: ${headingGlobalTypographyData.fontFamily};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === true && headingGlobalTypographyData.fontSize ? `font-size: ${headingGlobalTypographyData.fontSize};` : ''}
+			${headingGlobalTypoSwitcher.fontWeight === true && headingGlobalTypographyData.fontWeight ? `font-weight: ${headingGlobalTypographyData.fontWeight};` : ''}
+			${headingGlobalTypoSwitcher.fontStyle === true && headingGlobalTypographyData.fontStyle ? `font-style: ${headingGlobalTypographyData.fontStyle};` : ''}
+			${headingGlobalTypoSwitcher.textTransform === true && headingGlobalTypographyData.textTransform ? `text-transform: ${headingGlobalTypographyData.textTransform};` : ''}
+			${headingGlobalTypoSwitcher.textDecoration === true && headingGlobalTypographyData.textDecoration ? `text-decoration: ${headingGlobalTypographyData.textDecoration};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === true && headingGlobalTypographyData.letterSpacing ? `letter-spacing: ${headingGlobalTypographyData.letterSpacing};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === true && headingGlobalTypographyData.lineHeight ? `line-height: ${headingGlobalTypographyData.lineHeight};` : ''}
 
-			${headingGlobalTypoSwitcher?.fontFamily === false && headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
-			${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Desktop && headingFontSizeUnits?.Desktop ? `font-size: ${headingFontSize?.Desktop}${headingFontSizeUnits?.Desktop};` : ''}
-			${headingGlobalTypoSwitcher?.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
-			${headingGlobalTypoSwitcher?.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
-			${headingGlobalTypoSwitcher?.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
-			${headingGlobalTypoSwitcher?.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
-			${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Desktop && headingLetterSpacingUnits?.Desktop ? `letter-spacing: ${headingLetterSpacing?.Desktop}${headingLetterSpacingUnits?.Desktop};` : ''}
-			${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Desktop && headingLineHeightUnits?.Desktop ? `line-height: ${headingLineHeight?.Desktop}${headingLineHeightUnits?.Desktop};` : ''}
+			${headingGlobalTypoSwitcher.fontFamily === false && headingFontFamily && headingFontFamily !== 'Default' ? `font-family: ${headingFontFamily};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Desktop && headingFontSizeUnits.Desktop ? `font-size: ${headingFontSize.Desktop}${headingFontSizeUnits.Desktop};` : ''}
+			${headingGlobalTypoSwitcher.fontWeight === false && headingFontWeight ? `font-weight: ${headingFontWeight};` : ''}
+			${headingGlobalTypoSwitcher.fontStyle === false && headingFontStyle ? `font-style: ${headingFontStyle};` : ''}
+			${headingGlobalTypoSwitcher.textTransform === false && headingTextTransform ? `text-transform: ${headingTextTransform};` : ''}
+			${headingGlobalTypoSwitcher.textDecoration === false && headingTextDecoration ? `text-decoration: ${headingTextDecoration};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Desktop && headingLetterSpacingUnits.Desktop ? `letter-spacing: ${headingLetterSpacing.Desktop}${headingLetterSpacingUnits.Desktop};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Desktop && headingLineHeightUnits.Desktop ? `line-height: ${headingLineHeight.Desktop}${headingLineHeightUnits.Desktop};` : ''}
 			
-			${headingDesktopPaddingValue && HeadingDesktopPadding?.top ? `padding: ${headingDesktopPaddingValue};` : ""}
-			${headingDesktopMarginValue && HeadingDesktopMargin?.top ? `margin: ${headingDesktopMarginValue};` : ''}
+			${headingDesktopPaddingValue && HeadingDesktopPadding.top ? `padding: ${headingDesktopPaddingValue};` : ""}
+			${headingDesktopMarginValue && HeadingDesktopMargin.top ? `margin: ${headingDesktopMarginValue};` : ''}
 			border: ${HeadingBorder};
 			${HeadingBorderColor ? `border-color: ${HeadingBorderColor};` : ''}
 			transition: all .3s ease-in-out;
@@ -1052,65 +1065,65 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		@media all and (max-width: 1024px) {	
 		.fb-advanced-image-main-wrapper.${blockID} {
 			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset?.Tablet ? `left: ${advancedImageHZLeftOffset?.Tablet}${advancedImageHZLeftOffsetUnits?.Tablet};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset?.Tablet ? `right: ${advancedImageHZRightOffset.Tablet}${advancedImageHZRightOffsetUnits.Tablet};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset?.Tablet ? `top: ${advancedImageVRTopOffset?.Tablet}${advancedImageVRTopOffsetUnits?.Tablet};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset?.Tablet ? `bottom: ${advancedImageVRBottomOffset?.Tablet}${advancedImageVRBottomOffsetUnits?.Tablet};` : ''}
-			${globalZIndex?.Tablet ? `z-index: ${globalZIndex?.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Tablet ? `left: ${advancedImageHZLeftOffset.Tablet}${advancedImageHZLeftOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Tablet ? `right: ${advancedImageHZRightOffset.Tablet}${advancedImageHZRightOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Tablet ? `top: ${advancedImageVRTopOffset.Tablet}${advancedImageVRTopOffsetUnits.Tablet};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Tablet ? `bottom: ${advancedImageVRBottomOffset.Tablet}${advancedImageVRBottomOffsetUnits.Tablet};` : ''}
+			${globalZIndex.Tablet ? `z-index: ${globalZIndex.Tablet};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper {
-			${globalTabPadding && globalPaddingTablet?.top ? `padding: ${globalTabPadding};` : ''}
-			${globalTabMargin && globalMarginTablet?.top ? `margin: ${globalTabMargin};` : ''}
-			${globalTabBorder && globalBorderTablet?.top ? `border-width: ${globalTabBorder};` : ''}
-			${globalTabBorderRadius && globalBorderRadiusTablet?.top ? `border-radius: ${globalTabBorderRadius} !important;` : ''}
+			${globalTabPadding && globalPaddingTablet.top ? `padding: ${globalTabPadding};` : ''}
+			${globalTabMargin && globalMarginTablet.top ? `margin: ${globalTabMargin};` : ''}
+			${globalTabBorder && globalBorderTablet.top ? `border-width: ${globalTabBorder};` : ''}
+			${globalTabBorderRadius && globalBorderRadiusTablet.top ? `border-radius: ${globalTabBorderRadius} !important;` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
 			${imageTabletBorder ? `border-width: ${imageTabletBorder};` : ''}
             ${imageTabletBorderRadius ? `border-radius: ${imageTabletBorderRadius};` : ''}
-			${mediaSize?.Tablet ? `width: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
-			${!autoHeightSwitch && mediaHeight?.Tablet ? `height: ${mediaHeight?.Tablet}${mediaHeightUnits?.Tablet};` : `height: auto;`}
+			${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
+			${!autoHeightSwitch && mediaHeight.Tablet ? `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet};` : `height: auto;`}
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
-			${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Tablet && headingFontSizeUnits?.Tablet ? `font-size: ${headingFontSize?.Tablet}${headingFontSizeUnits?.Tablet};` : ''}
-			${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Tablet && headingLetterSpacingUnits?.Tablet ? `letter-spacing: ${headingLetterSpacing?.Tablet}${headingLetterSpacingUnits?.Tablet};` : ''}
-			${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Tablet && headingLineHeightUnits?.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
-			${mediaSize?.Tablet ? `width: ${mediaSize?.Tablet}${mediaSizeUnits?.Tablet};` : ''}
-			${!autoHeightSwitch && mediaHeight?.Tablet ? `height: ${mediaHeight?.Tablet}${mediaHeightUnits?.Tablet};` : `height: auto;`}
-			${headingTabletPaddingValue && HeadingTabPadding?.top ? `padding: ${headingTabletPaddingValue};` : ''}
-			${headingTabletMarginValue && HeadingTabMargin?.top ? `margin: ${headingTabletMarginValue};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Tablet && headingFontSizeUnits.Tablet ? `font-size: ${headingFontSize.Tablet}${headingFontSizeUnits.Tablet};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Tablet && headingLetterSpacingUnits.Tablet ? `letter-spacing: ${headingLetterSpacing.Tablet}${headingLetterSpacingUnits.Tablet};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Tablet && headingLineHeightUnits.Tablet ? `line-height: ${headingLineHeight.Tablet}${headingLineHeightUnits.Tablet};` : ''}
+			${mediaSize.Tablet ? `width: ${mediaSize.Tablet}${mediaSizeUnits.Tablet};` : ''}
+			${!autoHeightSwitch && mediaHeight.Tablet ? `height: ${mediaHeight.Tablet}${mediaHeightUnits.Tablet};` : `height: auto;`}
+			${headingTabletPaddingValue && HeadingTabPadding.top ? `padding: ${headingTabletPaddingValue};` : ''}
+			${headingTabletMarginValue && HeadingTabMargin.top ? `margin: ${headingTabletMarginValue};` : ''}
 		}
 		}
 		@media all and (max-width: 767px) {
 		.fb-advanced-image-main-wrapper.${blockID} {
 			${advancedImagePositionType !== 'default' ? `position: ${advancedImagePositionType};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset?.Mobile ? `left: ${advancedImageHZLeftOffset?.Mobile}${advancedImageHZLeftOffsetUnits?.Mobile};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset?.Mobile ? `right: ${advancedImageHZRightOffset?.Mobile}${advancedImageHZRightOffsetUnits?.Mobile};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset?.Mobile ? `top: ${advancedImageVRTopOffset?.Mobile}${advancedImageVRTopOffsetUnits?.Mobile};` : ''}
-			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset?.Mobile ? `bottom: ${advancedImageVRBottomOffset?.Mobile}${advancedImageVRBottomOffsetUnits?.Mobile};` : ''}
-			${globalZIndex?.Mobile ? `z-index: ${globalZIndex?.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'left' && advancedImageHZLeftOffset.Mobile ? `left: ${advancedImageHZLeftOffset.Mobile}${advancedImageHZLeftOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageHZOrientationType === 'right' && advancedImageHZRightOffset.Mobile ? `right: ${advancedImageHZRightOffset.Mobile}${advancedImageHZRightOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'top' && advancedImageVRTopOffset.Mobile ? `top: ${advancedImageVRTopOffset.Mobile}${advancedImageVRTopOffsetUnits.Mobile};` : ''}
+			${advancedImagePositionType !== 'default' && advancedImagePositionType !== 'relative' && advancedImageVROrientationType === 'bottom' && advancedImageVRBottomOffset.Mobile ? `bottom: ${advancedImageVRBottomOffset.Mobile}${advancedImageVRBottomOffsetUnits.Mobile};` : ''}
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper {
-			${globalZIndex?.Mobile ? `z-index: ${globalZIndex?.Mobile};` : ''}
-			${globalMobPadding && globalPaddingMobile?.top ? `padding: ${globalMobPadding};` : ''}
-			${globalMobMargin && globalMarginMobile?.top ? `margin: ${globalMobMargin};` : ''}
-			${globalMobBorder && globalBorderMobile?.top ? `border-width: ${globalMobBorder};` : ''}
-			${globalMobBorderRadius && globalBorderRadiusMobile?.top ? `border-radius: ${globalMobBorderRadius} !important;` : ''}
+			${globalZIndex.Mobile ? `z-index: ${globalZIndex.Mobile};` : ''}
+			${globalMobPadding && globalPaddingMobile.top ? `padding: ${globalMobPadding};` : ''}
+			${globalMobMargin && globalMarginMobile.top ? `margin: ${globalMobMargin};` : ''}
+			${globalMobBorder && globalBorderMobile.top ? `border-width: ${globalMobBorder};` : ''}
+			${globalMobBorderRadius && globalBorderRadiusMobile.top ? `border-radius: ${globalMobBorderRadius} !important;` : ''}
 		}
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner {
-			${imageMobileBorder && imageBorderMobile?.top ? `border-width: ${imageMobileBorder};` : ''}
-            ${imageMobileBorderRadius && imageBorderRadiusMobile?.top ? `border-radius: ${imageMobileBorderRadius};` : ''}
-			${mediaSize?.Mobile ? `width: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
-			${!autoHeightSwitch && mediaHeight?.Mobile ? `height: ${mediaHeight?.Mobile}${mediaHeightUnits?.Mobile};` : `height: auto;`}
+			${imageMobileBorder && imageBorderMobile.top ? `border-width: ${imageMobileBorder};` : ''}
+            ${imageMobileBorderRadius && imageBorderRadiusMobile.top ? `border-radius: ${imageMobileBorderRadius};` : ''}
+			${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
+			${!autoHeightSwitch && mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : `height: auto;`}
 		}
 		
 		.${blockID} .fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title .fb-advanced-title {
-			${headingGlobalTypoSwitcher?.fontSize === false && headingFontSize?.Mobile && headingFontSizeUnits?.Mobile ? `font-size: ${headingFontSize?.Mobile}${headingFontSizeUnits?.Mobile};` : ''}
-			${headingGlobalTypoSwitcher?.letterSpacing === false && headingLetterSpacing?.Mobile && headingLetterSpacingUnits?.Mobile ? `letter-spacing: ${headingLetterSpacing?.Mobile}${headingLetterSpacingUnits?.Mobile};` : ''}
-			${headingGlobalTypoSwitcher?.lineHeight === false && headingLineHeight?.Mobile && headingLineHeightUnits?.Mobile ? `line-height: ${headingLineHeight?.Mobile}${headingLineHeightUnits?.Mobile};` : ''}
-			${mediaSize?.Mobile ? `width: ${mediaSize?.Mobile}${mediaSizeUnits?.Mobile};` : ''}
-			${!autoHeightSwitch && mediaHeight?.Mobile ? `height: ${mediaHeight?.Mobile}${mediaHeightUnits?.Mobile};` : `height: auto;`}
-			${headingMobilePaddingValue && HeadingMobilePadding?.top ? `padding: ${headingMobilePaddingValue};` : ''}
-			${headingMobileMarginValue && HeadingMobileMargin?.top ? `margin: ${headingMobileMarginValue};` : ''}
+			${headingGlobalTypoSwitcher.fontSize === false && headingFontSize.Mobile && headingFontSizeUnits.Mobile ? `font-size: ${headingFontSize.Mobile}${headingFontSizeUnits.Mobile};` : ''}
+			${headingGlobalTypoSwitcher.letterSpacing === false && headingLetterSpacing.Mobile && headingLetterSpacingUnits.Mobile ? `letter-spacing: ${headingLetterSpacing.Mobile}${headingLetterSpacingUnits.Mobile};` : ''}
+			${headingGlobalTypoSwitcher.lineHeight === false && headingLineHeight.Mobile && headingLineHeightUnits.Mobile ? `line-height: ${headingLineHeight.Mobile}${headingLineHeightUnits.Mobile};` : ''}
+			${mediaSize.Mobile ? `width: ${mediaSize.Mobile}${mediaSizeUnits.Mobile};` : ''}
+			${!autoHeightSwitch && mediaHeight.Mobile ? `height: ${mediaHeight.Mobile}${mediaHeightUnits.Mobile};` : `height: auto;`}
+			${headingMobilePaddingValue && HeadingMobilePadding.top ? `padding: ${headingMobilePaddingValue};` : ''}
+			${headingMobileMarginValue && HeadingMobileMargin.top ? `margin: ${headingMobileMarginValue};` : ''}
 		}
 		}
 	`,
@@ -1128,21 +1141,167 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 
 	useEffect(() => {
-		if (IMAGE_MASK_IMAEGS[imageStyle]) {
-			setAttributes({ maskImageUrl: IMAGE_MASK_IMAEGS[imageStyle] });
+		if (MASK_IMAEGS[imageStyle]) {
+			setAttributes({ maskImageUrl: MASK_IMAEGS[imageStyle] });
 		}
 	}, [imageStyle]);
 
 	/**
-	 * Dynamic Image Button Controls
+	 * Exclude Post Types
 	 */
-	const dynamicImageBtnControls = getProDynamicButton({
-		hook: 'frontisblocks-advanced-image-dynamic-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicImageEnabled',
-		keyPrefix: 'pro-dynamic-advanced-image',
-	});
+	const EXCLUDE_POST_TYPES = [
+		'attachment','revision','nav_menu_item','custom_css','customize_changeset',
+		'oembed_cache','user_request','wp_block','wp_navigation',
+		'wp_template','wp_template_part','wp_global_styles',
+		'wp_font_family','wp_font_face','wp_font_collection'
+	];
+
+	/**
+	 * Post Types
+	 */
+	const postTypes = useSelect((select) => {
+		const all = select(coreStore).getPostTypes({ per_page: -1 }) || [];
+		return all.filter(
+		(pt) => pt.viewable && pt.supports?.title && !EXCLUDE_POST_TYPES.includes(pt.slug)
+		);
+	}, []);
+	
+	/**
+	 * Post Options
+	 */
+	const postOptions = useSelect((select) => {
+		const types = (postTypes || []).map((t) => t.slug);
+		if (!types.length) return [];
+		
+		const items = [];
+		types.forEach((t) => {
+			const recs = select(coreStore).getEntityRecords('postType', t, {
+			status: 'publish',
+			per_page: 20,
+			orderby: 'date',
+			order: 'desc',
+			_fields: ['id', 'title', 'type'],
+			}) || [];
+			recs.forEach((r) => items.push(r));
+		});
+		
+		return items.map((r) => ({
+			value: r.id,
+			label: r.title?.rendered
+			? r.title.rendered.replace(/<[^>]+>/g, '')
+			: '(no title)',
+			meta: r.type,
+		}));
+	}, [postTypes]);
+
+	const isPostBasedSource = dynamicImageEnabled && (dynamicImageSource === 'current_post' || dynamicImageSource === 'post_type'); 
+
+	/**
+	 * Dynamic Image Source
+	 */
+	const [imageSource, setImageSource] = useState(dynamicImageSource || "current_post");
+
+	useEffect(() => {
+		setImageSource(dynamicImageSource || "current_post");
+	}, [dynamicImageSource]);
+
+	const selectedImageSource = useMemo(() => {
+		const v = imageSource || "current_post";
+		return (
+			DYNAMIC_IMAGE_SOURCE_OPTIONS.find(o => o.value === v) ||
+			DYNAMIC_IMAGE_SOURCE_OPTIONS[0]
+		);
+	}, [imageSource]);
+
+	const handleImageSourceChange = (opt) => {
+		const val = (opt && typeof opt.value === "string") ? opt.value : "current_post";
+		setImageSource(val);
+		setAttributes({ dynamicImageSource: val });
+	};
+
+
+	/**
+	 * Dynamic Image Field
+	 */
+	const [imageField, setImageField] = useState(dynamicImageField || "featured_image");
+
+	useEffect(() => {
+		setImageField(dynamicImageField || "featured_image");
+	}, [dynamicImageField]);
+
+	const selectedImageField = useMemo(() => {
+		const v = imageField || "featured_image";
+		return (
+			DYNAMIC_IMAGE_FIELD_OPTIONS.find((o) => o.value === v) ||
+			null
+		);
+	}, [imageField]);
+
+	const handleImageFieldChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "featured_image";
+		setImageField(val);
+		setAttributes({ dynamicImageField: val });
+	};
+
+	/**
+	 * Dynamic Image Size
+	 */
+	const [imageSize, setImageSize] = useState(dynamicImageSize || "full");
+
+	useEffect(() => {
+		setImageSize(dynamicImageSize || "full"); 
+	}, [dynamicImageSize]);
+
+	const selectedImageSize = useMemo(() => {
+	const v = imageSize || "full";
+	return (
+		WP_IMAGE_SIZE_OPTIONS.find((o) => o.value === v) ||
+		null
+	);
+	}, [imageSize]);
+
+	const handleImageSizeChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "full";
+		setImageSize(val);
+		setAttributes({ dynamicImageSize: val });
+	};
+
+
+	/**
+     * dynamic link source
+     */
+	const [linkSource, setLinkSource] = useState(dynamicLinkSource || "post_permalink");
+
+	useEffect(() => {
+		setLinkSource(dynamicLinkSource || "post_permalink");
+	}, [dynamicLinkSource]);
+
+	const selectedLinkSource = useMemo(() => {
+		const v = linkSource || "post_permalink";
+		return (
+		DYNAMIC_LINK_SOURCE_OPTIONS.find((o) => o.value === v) ||
+		DYNAMIC_LINK_SOURCE_OPTIONS[0]
+		);
+	}, [linkSource]);
+
+	const handleLinkSourceChange = (opt) => {
+		const val = opt && typeof opt.value === "string" ? opt.value : "post_permalink";
+		setLinkSource(val);
+		setAttributes({ dynamicLinkSource: val });
+	};
+
+
+	let defaultFallbackImageUrl = '';
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultFallbackImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
+
+    // Set default value for dynamicImageFallbackUrl
+    useEffect(() => {
+        if (!dynamicImageFallbackUrl) {
+            setAttributes({ dynamicImageFallbackUrl: defaultFallbackImageUrl });
+        }
+    }, []);
 
 	/**
 	 * Inspector General Controls
@@ -1155,40 +1314,175 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					initialOpen={true}
 				>
 					<BaseControl label={__("Image", "frontis-blocks")} className="fb-advanced-image-upload-control">
+						{/* ===== Dynamic Image View ===== */}
 						{dynamicImageEnabled ? (
 							<div className="fb-dynamic-image-panel">
-								<DynamicImageSourceControl
-									enabled = {dynamicImageEnabled}
-									onChangeEnabled={(value) => setAttributes({ dynamicImageEnabled: value })}
-								
-									source = {dynamicImageSource}
-									onChangeSource={(value) => setAttributes({ dynamicImageSource: value })}
-								
-									postId = {dynamicImagePostId}
-									setPostId={(value) => setAttributes({ dynamicImagePostId: value })}
-									postType = {dynamicImagePostType}
-									setPostType={(value) => setAttributes({ dynamicImagePostType: value })}
-									postLabel = {dynamicImagePostLabel}
-									setPostLabel={(value) => setAttributes({ dynamicImagePostLabel: value })}
-								
-									field = {dynamicImageField}
-									onChangeField={(value) => setAttributes({ dynamicImageField: value })}
-								
-									size = {dynamicImageSize}
-									onChangeSize={(value) => setAttributes({ dynamicImageSize: value })}
-								
-									fallbackUrl = {dynamicImageFallbackUrl}
-									setFallbackUrl={(value) => setAttributes({ dynamicImageFallbackUrl: value })}
-									fallbackAlt = {dynamicImageFallbackAlt}
-									setFallbackAlt={(value) => setAttributes({ dynamicImageFallbackAlt: value })}
-									fallbackId = {dynamicImageFallbackId}
-									setFallbackId={(value) => setAttributes({ dynamicImageFallbackId: value })}
-								
-									enableLink = {dynamicImageEnableLink}
-									onChangeEnableLink={(value) => setAttributes({ dynamicImageEnableLink: value })}
-									linkSource = {dynamicImageLinkSource}
-									onChangeLinkSource={(value) => setAttributes({ dynamicImageLinkSource: value })}
+								<ToggleControl
+									label={__("Dynamic Image", "frontis-blocks")}
+									checked={dynamicImageEnabled}
+									onChange={(value) => {
+										setAttributes({
+											dynamicImageEnabled: value,
+											...(value ? {
+												dynamicImageSource: dynamicImageSource || "current_post",
+												dynamicImageField:  dynamicImageField  || "featured_image",
+												dynamicImageSize:   dynamicImageSize   || "full",
+											} : {})
+										});
+									}}
 								/>
+
+								{/* small safety: when enabled but attrs missing, set once */}
+								{dynamicImageEnabled && (!dynamicImageSource || !dynamicImageField || !dynamicImageSize) && (
+									(() => {
+										setAttributes({
+											dynamicImageSource: dynamicImageSource || "current_post",
+											dynamicImageField:  dynamicImageField  || "featured_image",
+											dynamicImageSize:   dynamicImageSize   || "full",
+										});
+										return null;
+									})()
+								)}
+
+								<BaseControl label={__("Data Source", "frontis-blocks")}>
+									<Select2
+										options={DYNAMIC_IMAGE_SOURCE_OPTIONS}
+										value={selectedImageSource}
+										onChange={handleImageSourceChange}
+										className="fb-select2-control"
+									/>
+								</BaseControl>
+
+								{dynamicImageSource === 'post_type' && (
+									<BaseControl label={__("Search Posts","frontis-blocks")}>
+										<Select2
+										options={postOptions}
+										value={postOptions.find(o => o.value === dynamicImagePostId) || null}
+										onChange={(opt)=> setAttributes({
+											dynamicImagePostId:   opt?.value ?? 0,
+											dynamicImagePostType: opt?.meta  ?? '',
+											dynamicImagePostLabel:opt?.label ?? ''
+										})}
+										className="fb-select2-control"
+										/>
+									</BaseControl>
+								)}
+								{isPostBasedSource && (
+									<>
+										<BaseControl label={__("Source Field", "frontis-blocks")}>
+											<Select2
+												options={DYNAMIC_IMAGE_FIELD_OPTIONS}
+												value={selectedImageField}
+												onChange={handleImageFieldChange}
+												className="fb-select2-control"
+											/>
+										</BaseControl>
+									</>
+								)}
+
+								<BaseControl label={__("Image Size", "frontis-blocks")}>
+								<Select2
+									options={WP_IMAGE_SIZE_OPTIONS}
+									value={selectedImageSize}
+									onChange={handleImageSizeChange}
+									className="fb-select2-control"
+								/>
+								</BaseControl>
+
+								<BaseControl label={__("Fallback Image", "frontis-blocks")} className="fb-advanced-heading-bg-image">
+									{dynamicImageFallbackUrl ? (
+										<>
+											<div className="fb-image-avatar-control" style={{backgroundImage: `url(${dynamicImageFallbackUrl})`}}> 
+												<button
+													className='fb-image-avatar-delete'
+													onClick={() => {
+														setAttributes({
+															dynamicImageFallbackUrl: null,
+															dynamicImageFallbackAlt: null,
+															dynamicImageFallbackId: null,
+														});
+													}}
+												>
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" strokeWidth="1.5"/>
+														<path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" strokeWidth="1.5" strokeLinecap="round"/>
+													</svg>
+
+												</button>
+												<button
+													className='fb-image-replace-btn'
+													onClick={() => {
+														const mediaUploader = wp.media({
+															title: __('Select or Upload Background Image', 'frontis-blocks'),
+															button: {
+																text: __('Use this image', 'frontis-blocks'),
+															},
+															multiple: false
+														});
+
+														mediaUploader.on('select', function() {
+															const attachment = mediaUploader.state().get('selection').first().toJSON();
+															setAttributes({
+																dynamicImageFallbackUrl: attachment.url,
+																dynamicImageFallbackAlt: attachment.alt,
+																dynamicImageFallbackId: attachment.id,
+															});
+														});
+
+														mediaUploader.open();
+													}}
+												>
+													<svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+														<path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"/>
+														<path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"/>
+													</svg>
+													Replace
+												</button>
+											</div>
+										</>
+									) : (
+										<button
+											className='fb-image-upload-btn'
+											onClick={() => {
+												const mediaUploader = wp.media({
+												title: __('Select or Upload Image', 'frontis-blocks'),
+												button: { text: __('Use this image', 'frontis-blocks') },
+												multiple: false
+												});
+												mediaUploader.on('select', () => {
+												const a = mediaUploader.state().get('selection').first().toJSON();
+												setAttributes({
+													dynamicImageFallbackUrl: a?.url ?? null,
+													dynamicImageFallbackAlt: a?.alt ?? null,
+													dynamicImageFallbackId:  String(a?.id ?? null)
+												});
+												});
+												mediaUploader.open();
+											}}
+										>
+											{__('Choose Image','frontis-blocks')}
+										</button>
+									)}
+								</BaseControl>
+
+								<ToggleControl
+									label={__("Enable Dynamic Link", "frontis-blocks")}
+									checked={dynamicEnableLink}
+									onChange={(value) => setAttributes({ dynamicEnableLink: value })}
+								/>
+
+								{dynamicEnableLink && (
+									<BaseControl
+										label={__("Link Source", "frontis-blocks")}
+									>
+										<Select2 
+											options={DYNAMIC_LINK_SOURCE_OPTIONS}
+											value={selectedLinkSource}
+											onChange={handleLinkSourceChange}
+											className="fb-select2-control"
+										/>
+									</BaseControl>
+								)}
 							</div>
 						) : (
 						<>
@@ -1236,9 +1530,16 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 											</svg>
 											Replace
 										</button>
-										{dynamicImageBtnControls.map((control, index) => (
-											<div key={control.key || index}>{control.comp}</div>
-										))}
+										<button
+											type="button"
+											className="fb-components-button"
+											onClick={() => setAttributes({ dynamicImageEnabled: true })}
+											title={__('Switch to Dynamic', 'frontis-blocks')}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+												<path d="M3 12V16.5C3 18.9853 7.02944 21 12 21C16.9706 21 21 18.9853 21 16.5V12M3 12C3 14.4853 7.02944 16.5 12 16.5C16.9706 16.5 21 14.4853 21 12M3 12V7.5M21 12V7.5M21 7.5C21 9.98528 16.9706 12 12 12C7.02944 12 3 9.98528 3 7.5M21 7.5C21 5.01472 16.9706 3 12 3C7.02944 3 3 5.01472 3 7.5" stroke="#0B0C0E" stroke-width="1.4"/>
+											</svg>
+										</button>
 									</div>
 								</div>
 							) : (
@@ -1267,7 +1568,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Styles", "frontis-blocks")}
 						value={imageStyle || "square"}
-						options={IMAGE_STYLES}
+						options={STYLES}
 						onChange={(value) => {
 							setAttributes({ imageStyle: value });
 						}}
@@ -1331,7 +1632,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 								value={titlePosition || "center"}
 								options={TITLE_POSITION}
 								onChange={(value) =>
-									setAttributes({ titlePosition:value })
+									setAttributes({ titlePosition: value })
 								}
 								__nextHasNoMarginBottom
 							/>
@@ -1364,7 +1665,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Hover Effect", "frontis-blocks")}
 						value={imageHover}
-						options={IMAGE_HOVER_EFFECTS}
+						options={HOVER_EFFECTS}
 						onChange={(value) =>
 							setAttributes({ imageHover: value })
 						}
@@ -1575,7 +1876,7 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 					<SelectControl
 						label={__("Image Fit Options", "frontis-blocks")}
 						value={imageFit || "cover"}
-						options={IMAGE_AUTO_FIT}
+						options={AUTO_FIT}
 						onChange={(size) =>
 							setAttributes({ imageFit: size })
 						}
@@ -1690,19 +1991,19 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 				<SelectControl
 					label={__("Size", "frontis-blocks")}
 					value={maskImageSize}
-					options={IMAGE_MASK_SIZE}
+					options={MASK_SIZE}
 					onChange={(value) => setAttributes({ maskImageSize: value })}
 				/>
 				<SelectControl
 					label={__("Position", "frontis-blocks")}
 					value={maskImagePosition}
-					options={IMAGE_MASK_POSITION}
+					options={MASK_POSITION}
 					onChange={(value) => setAttributes({ maskImagePosition: value })}
 				/>
 				<SelectControl
 					label={__("Repeat", "frontis-blocks")}
 					value={maskImageRepeat}
-					options={IMAGE_MASK_REPEAT}
+					options={MASK_REPEAT}
 					onChange={(value) => setAttributes({ maskImageRepeat: value })}
 				/>
 			</PanelBody>

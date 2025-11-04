@@ -12,6 +12,12 @@ import {
 import { isInvalid } from './is-invalid';
 import { __ } from '@wordpress/i18n';
 
+// This plugin is based on the code at the following URL.
+// https://github.com/WordPress/gutenberg/issues/16425#issuecomment-652910137
+// https://github.com/brainstormforce/ultimate-addons-for-gutenberg/blob/d1dfc15b348c5a59a1394bb2d7f3bcecddb7a2f1/blocks-config/uagb-controls/autoBlockRecovery.js
+// https://github.com/gambitph/Stackable/blob/47258bd06ee797b58e2a5e1ec3d2357ad9d98a14/src/deprecated/v2/plugins/auto-block-recovery/attempt-recovery.js
+// https://wpstackable.com/blog/how-to-recover-all-broken-blocks-in-one-command-in-wordpress/
+
 // Runs an auto-attempt recovery on all the blocks.
 export const autoAttemptRecovery = () => {
 	setTimeout( () => {
@@ -50,6 +56,7 @@ export const autoAttemptRecovery = () => {
 	}, 0 );
 };
 
+// 再帰的にリカバリーを行う
 const recursivelyRecoverInvalidBlockList = ( blocks ) => {
 	const currentBlocks = [ ...blocks ];
 	let isRecovered = false;

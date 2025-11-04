@@ -4,12 +4,18 @@
 import { useCallback } from "@wordpress/element";
 
 
-const PluginUpgradeModal = ({ isPluginUpgradeModalOpen, setIsPluginUpgradeModalOpen }) => {
+const PluginUpgradeModal = ({ onClose }) => {
 
+	const handleOverlayClick = useCallback((e) => {
+		if (e.target === e.currentTarget) {
+			onClose();
+		}
+	}, [onClose]);
+	
 
 	return (
-		<div className="fb-auth-modal" onClick={() => isPluginUpgradeModalOpen && setIsPluginUpgradeModalOpen(false)}>
-				<div className="fb-plugin-upgrade-wrapper" onClick={(e) => e.stopPropagation()}>
+		<div className="fb-auth-modal" onClick={handleOverlayClick}>
+				<div className="fb-plugin-upgrade-wrapper">
 					<div className="fb-template-info">
 						<div className="fb-template-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" width="62" height="63" viewBox="0 0 62 63" fill="none">

@@ -20,15 +20,10 @@ import renderFrontisHighlightColor from './render';
 //     return settings;
 // }
 
-
-
 addFilter(
     'blocks.registerBlockType',
     'frontis-blocks/highlight-color-attributes',
     // addHighlightAttributes,
-    () => {
-        console.log("Call back function")
-    }
 );
 
 addFilter(

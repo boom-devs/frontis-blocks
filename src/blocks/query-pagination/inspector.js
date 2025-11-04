@@ -313,9 +313,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationWrapperDesktopPaddingWidth = `${paginationWrapperDesktopPadding?.top}${paginationWrapperPaddingUnits?.Desktop} ${paginationWrapperDesktopPadding?.right}${paginationWrapperPaddingUnits?.Desktop} ${paginationWrapperDesktopPadding?.bottom}${paginationWrapperPaddingUnits?.Desktop} ${paginationWrapperDesktopPadding?.left}${paginationWrapperPaddingUnits?.Desktop}`;
-	const paginationWrapperTabletPaddingWidth = `${paginationWrapperTabletPadding?.top}${paginationWrapperPaddingUnits?.Tablet} ${paginationWrapperTabletPadding?.right}${paginationWrapperPaddingUnits?.Tablet} ${paginationWrapperTabletPadding?.bottom}${paginationWrapperPaddingUnits?.Tablet} ${paginationWrapperTabletPadding?.left}${paginationWrapperPaddingUnits?.Tablet}`;
-	const paginationWrapperMobilePaddingWidth = `${paginationWrapperMobilePadding?.top}${paginationWrapperPaddingUnits?.Mobile} ${paginationWrapperMobilePadding?.right}${paginationWrapperPaddingUnits?.Mobile} ${paginationWrapperMobilePadding?.bottom}${paginationWrapperPaddingUnits?.Mobile} ${paginationWrapperMobilePadding?.left}${paginationWrapperPaddingUnits?.Mobile}`;
+	const paginationWrapperDesktopPaddingWidth = `${paginationWrapperDesktopPadding.top}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.right}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.bottom}${paginationWrapperPaddingUnits.Desktop} ${paginationWrapperDesktopPadding.left}${paginationWrapperPaddingUnits.Desktop}`;
+	const paginationWrapperTabletPaddingWidth = `${paginationWrapperTabletPadding.top}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.right}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.bottom}${paginationWrapperPaddingUnits.Tablet} ${paginationWrapperTabletPadding.left}${paginationWrapperPaddingUnits.Tablet}`;
+	const paginationWrapperMobilePaddingWidth = `${paginationWrapperMobilePadding.top}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.right}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.bottom}${paginationWrapperPaddingUnits.Mobile} ${paginationWrapperMobilePadding.left}${paginationWrapperPaddingUnits.Mobile}`;
 	/** End Pagination Wrapper Padding */
 
 
@@ -387,9 +387,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationWrapperDesktopMarginWidth = `${paginationWrapperDesktopMargin?.top}${paginationWrapperMarginUnits?.Desktop} ${paginationWrapperDesktopMargin?.right}${paginationWrapperMarginUnits?.Desktop} ${paginationWrapperDesktopMargin?.bottom}${paginationWrapperMarginUnits?.Desktop} ${paginationWrapperDesktopMargin?.left}${paginationWrapperMarginUnits?.Desktop}`;
-	const paginationWrapperTabletMarginWidth = `${paginationWrapperTabletMargin?.top}${paginationWrapperMarginUnits?.Tablet} ${paginationWrapperTabletMargin?.right}${paginationWrapperMarginUnits?.Tablet} ${paginationWrapperTabletMargin?.bottom}${paginationWrapperMarginUnits?.Tablet} ${paginationWrapperTabletMargin?.left}${paginationWrapperMarginUnits?.Tablet}`;
-	const paginationWrapperMobileMarginWidth = `${paginationWrapperMobileMargin?.top}${paginationWrapperMarginUnits?.Mobile} ${paginationWrapperMobileMargin?.right}${paginationWrapperMarginUnits?.Mobile} ${paginationWrapperMobileMargin?.bottom}${paginationWrapperMarginUnits?.Mobile} ${paginationWrapperMobileMargin?.left}${paginationWrapperMarginUnits?.Mobile}`;
+	const paginationWrapperDesktopMarginWidth = `${paginationWrapperDesktopMargin.top}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.right}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.bottom}${paginationWrapperMarginUnits.Desktop} ${paginationWrapperDesktopMargin.left}${paginationWrapperMarginUnits.Desktop}`;
+	const paginationWrapperTabletMarginWidth = `${paginationWrapperTabletMargin.top}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.right}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.bottom}${paginationWrapperMarginUnits.Tablet} ${paginationWrapperTabletMargin.left}${paginationWrapperMarginUnits.Tablet}`;
+	const paginationWrapperMobileMarginWidth = `${paginationWrapperMobileMargin.top}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.right}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.bottom}${paginationWrapperMarginUnits.Mobile} ${paginationWrapperMobileMargin.left}${paginationWrapperMarginUnits.Mobile}`;
 	/** End Pagination Wrapper Margin */
 
     /** Start Pagination Arrow Border */
@@ -460,9 +460,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationArrowDesktopBorderWidth = `${paginationArrowDesktopBorder?.top}${paginationArrowBorderUnits?.Desktop} ${paginationArrowDesktopBorder?.right}${paginationArrowBorderUnits?.Desktop} ${paginationArrowDesktopBorder?.bottom}${paginationArrowBorderUnits?.Desktop} ${paginationArrowDesktopBorder?.left}${paginationArrowBorderUnits?.Desktop}`;
-	const paginationArrowTabletBorderWidth = `${paginationArrowTabletBorder?.top}${paginationArrowBorderUnits?.Tablet} ${paginationArrowTabletBorder?.right}${paginationArrowBorderUnits?.Tablet} ${paginationArrowTabletBorder?.bottom}${paginationArrowBorderUnits?.Tablet} ${paginationArrowTabletBorder?.left}${paginationArrowBorderUnits?.Tablet}`;
-	const paginationArrowMobileBorderWidth = `${paginationArrowMobileBorder?.top}${paginationArrowBorderUnits?.Mobile} ${paginationArrowMobileBorder?.right}${paginationArrowBorderUnits?.Mobile} ${paginationArrowMobileBorder?.bottom}${paginationArrowBorderUnits?.Mobile} ${paginationArrowMobileBorder?.left}${paginationArrowBorderUnits?.Mobile}`;
+	const paginationArrowDesktopBorderWidth = `${paginationArrowDesktopBorder.top}${paginationArrowBorderUnits.Desktop} ${paginationArrowDesktopBorder.right}${paginationArrowBorderUnits.Desktop} ${paginationArrowDesktopBorder.bottom}${paginationArrowBorderUnits.Desktop} ${paginationArrowDesktopBorder.left}${paginationArrowBorderUnits.Desktop}`;
+	const paginationArrowTabletBorderWidth = `${paginationArrowTabletBorder.top}${paginationArrowBorderUnits.Tablet} ${paginationArrowTabletBorder.right}${paginationArrowBorderUnits.Tablet} ${paginationArrowTabletBorder.bottom}${paginationArrowBorderUnits.Tablet} ${paginationArrowTabletBorder.left}${paginationArrowBorderUnits.Tablet}`;
+	const paginationArrowMobileBorderWidth = `${paginationArrowMobileBorder.top}${paginationArrowBorderUnits.Mobile} ${paginationArrowMobileBorder.right}${paginationArrowBorderUnits.Mobile} ${paginationArrowMobileBorder.bottom}${paginationArrowBorderUnits.Mobile} ${paginationArrowMobileBorder.left}${paginationArrowBorderUnits.Mobile}`;
 	/** End Pagination Arrow Border */
 
     /** Start Pagination Arrow Border */
@@ -533,9 +533,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationArrowDesktopBorderRadiusWidth = `${paginationArrowDesktopBorderRadius?.top}${paginationArrowBorderRadiusUnits?.Desktop} ${paginationArrowDesktopBorderRadius?.right}${paginationArrowBorderRadiusUnits?.Desktop} ${paginationArrowDesktopBorderRadius?.bottom}${paginationArrowBorderRadiusUnits?.Desktop} ${paginationArrowDesktopBorderRadius?.left}${paginationArrowBorderRadiusUnits?.Desktop}`;
-	const paginationArrowTabletBorderRadiusWidth = `${paginationArrowTabletBorderRadius?.top}${paginationArrowBorderRadiusUnits?.Tablet} ${paginationArrowTabletBorderRadius?.right}${paginationArrowBorderRadiusUnits?.Tablet} ${paginationArrowTabletBorderRadius?.bottom}${paginationArrowBorderRadiusUnits?.Tablet} ${paginationArrowTabletBorderRadius?.left}${paginationArrowBorderRadiusUnits?.Tablet}`;
-	const paginationArrowMobileBorderRadiusWidth = `${paginationArrowMobileBorderRadius?.top}${paginationArrowBorderRadiusUnits?.Mobile} ${paginationArrowMobileBorderRadius?.right}${paginationArrowBorderRadiusUnits?.Mobile} ${paginationArrowMobileBorderRadius?.bottom}${paginationArrowBorderRadiusUnits?.Mobile} ${paginationArrowMobileBorderRadius?.left}${paginationArrowBorderRadiusUnits?.Mobile}`;
+	const paginationArrowDesktopBorderRadiusWidth = `${paginationArrowDesktopBorderRadius.top}${paginationArrowBorderRadiusUnits.Desktop} ${paginationArrowDesktopBorderRadius.right}${paginationArrowBorderRadiusUnits.Desktop} ${paginationArrowDesktopBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Desktop} ${paginationArrowDesktopBorderRadius.left}${paginationArrowBorderRadiusUnits.Desktop}`;
+	const paginationArrowTabletBorderRadiusWidth = `${paginationArrowTabletBorderRadius.top}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.right}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Tablet} ${paginationArrowTabletBorderRadius.left}${paginationArrowBorderRadiusUnits.Tablet}`;
+	const paginationArrowMobileBorderRadiusWidth = `${paginationArrowMobileBorderRadius.top}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.right}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.bottom}${paginationArrowBorderRadiusUnits.Mobile} ${paginationArrowMobileBorderRadius.left}${paginationArrowBorderRadiusUnits.Mobile}`;
 	/** End Pagination Arrow Border */
 
     /** Start Pagination Button Border */
@@ -606,9 +606,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationBtnDesktopBorderWidth = `${paginationBtnDesktopBorder?.top}${paginationBtnBorderUnits?.Desktop} ${paginationBtnDesktopBorder?.right}${paginationBtnBorderUnits?.Desktop} ${paginationBtnDesktopBorder?.bottom}${paginationBtnBorderUnits?.Desktop} ${paginationBtnDesktopBorder?.left}${paginationBtnBorderUnits?.Desktop}`;
-	const paginationBtnTabletBorderWidth = `${paginationBtnTabletBorder?.top}${paginationBtnBorderUnits?.Tablet} ${paginationBtnTabletBorder?.right}${paginationBtnBorderUnits?.Tablet} ${paginationBtnTabletBorder?.bottom}${paginationBtnBorderUnits?.Tablet} ${paginationBtnTabletBorder?.left}${paginationBtnBorderUnits?.Tablet}`;
-	const paginationBtnMobileBorderWidth = `${paginationBtnMobileBorder?.top}${paginationBtnBorderUnits?.Mobile} ${paginationBtnMobileBorder?.right}${paginationBtnBorderUnits?.Mobile} ${paginationBtnMobileBorder?.bottom}${paginationBtnBorderUnits?.Mobile} ${paginationBtnMobileBorder?.left}${paginationBtnBorderUnits?.Mobile}`;
+	const paginationBtnDesktopBorderWidth = `${paginationBtnDesktopBorder.top}${paginationBtnBorderUnits.Desktop} ${paginationBtnDesktopBorder.right}${paginationBtnBorderUnits.Desktop} ${paginationBtnDesktopBorder.bottom}${paginationBtnBorderUnits.Desktop} ${paginationBtnDesktopBorder.left}${paginationBtnBorderUnits.Desktop}`;
+	const paginationBtnTabletBorderWidth = `${paginationBtnTabletBorder.top}${paginationBtnBorderUnits.Tablet} ${paginationBtnTabletBorder.right}${paginationBtnBorderUnits.Tablet} ${paginationBtnTabletBorder.bottom}${paginationBtnBorderUnits.Tablet} ${paginationBtnTabletBorder.left}${paginationBtnBorderUnits.Tablet}`;
+	const paginationBtnMobileBorderWidth = `${paginationBtnMobileBorder.top}${paginationBtnBorderUnits.Mobile} ${paginationBtnMobileBorder.right}${paginationBtnBorderUnits.Mobile} ${paginationBtnMobileBorder.bottom}${paginationBtnBorderUnits.Mobile} ${paginationBtnMobileBorder.left}${paginationBtnBorderUnits.Mobile}`;
 	/** End Pagination Button Border */
 
     /** Start Pagination Button Border Radius */
@@ -679,9 +679,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const paginationBtnDesktopBorderRadiusWidth = `${paginationBtnDesktopBorderRadius?.top}${paginationBtnBorderRadiusUnits?.Desktop} ${paginationBtnDesktopBorderRadius?.right}${paginationBtnBorderRadiusUnits?.Desktop} ${paginationBtnDesktopBorderRadius?.bottom}${paginationBtnBorderRadiusUnits?.Desktop} ${paginationBtnDesktopBorderRadius?.left}${paginationBtnBorderRadiusUnits?.Desktop}`;
-	const paginationBtnTabletBorderRadiusWidth = `${paginationBtnTabletBorderRadius?.top}${paginationBtnBorderRadiusUnits?.Tablet} ${paginationBtnTabletBorderRadius?.right}${paginationBtnBorderRadiusUnits?.Tablet} ${paginationBtnTabletBorderRadius?.bottom}${paginationBtnBorderRadiusUnits?.Tablet} ${paginationBtnTabletBorderRadius?.left}${paginationBtnBorderRadiusUnits?.Tablet}`;
-	const paginationBtnMobileBorderRadiusWidth = `${paginationBtnMobileBorderRadius?.top}${paginationBtnBorderRadiusUnits?.Mobile} ${paginationBtnMobileBorderRadius?.right}${paginationBtnBorderRadiusUnits?.Mobile} ${paginationBtnMobileBorderRadius?.bottom}${paginationBtnBorderRadiusUnits?.Mobile} ${paginationBtnMobileBorderRadius?.left}${paginationBtnBorderRadiusUnits?.Mobile}`;
+	const paginationBtnDesktopBorderRadiusWidth = `${paginationBtnDesktopBorderRadius.top}${paginationBtnBorderRadiusUnits.Desktop} ${paginationBtnDesktopBorderRadius.right}${paginationBtnBorderRadiusUnits.Desktop} ${paginationBtnDesktopBorderRadius.bottom}${paginationBtnBorderRadiusUnits.Desktop} ${paginationBtnDesktopBorderRadius.left}${paginationBtnBorderRadiusUnits.Desktop}`;
+	const paginationBtnTabletBorderRadiusWidth = `${paginationBtnTabletBorderRadius.top}${paginationBtnBorderRadiusUnits.Tablet} ${paginationBtnTabletBorderRadius.right}${paginationBtnBorderRadiusUnits.Tablet} ${paginationBtnTabletBorderRadius.bottom}${paginationBtnBorderRadiusUnits.Tablet} ${paginationBtnTabletBorderRadius.left}${paginationBtnBorderRadiusUnits.Tablet}`;
+	const paginationBtnMobileBorderRadiusWidth = `${paginationBtnMobileBorderRadius.top}${paginationBtnBorderRadiusUnits.Mobile} ${paginationBtnMobileBorderRadius.right}${paginationBtnBorderRadiusUnits.Mobile} ${paginationBtnMobileBorderRadius.bottom}${paginationBtnBorderRadiusUnits.Mobile} ${paginationBtnMobileBorderRadius.left}${paginationBtnBorderRadiusUnits.Mobile}`;
 	/** End Pagination Button Border */
 
     const allBlockStyle = useMemo(() => `
@@ -698,13 +698,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-query-pagination .fb-page-prev,
         .${blockId} .fb-query-pagination .fb-page-next{
-            ${paginationPrevNextWidth?.Desktop ? `width: ${paginationPrevNextWidth?.Desktop}${paginationPrevNextWidthUnits?.Desktop};` : ''}
-            ${paginationPrevNextWidth?.Desktop ? `height: ${paginationPrevNextWidth?.Desktop}${paginationPrevNextWidthUnits?.Desktop};` : ''}
+            ${paginationPrevNextWidth.Desktop ? `width: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
+            ${paginationPrevNextWidth.Desktop ? `height: ${paginationPrevNextWidth.Desktop}${paginationPrevNextWidthUnits.Desktop};` : ''}
 
             ${paginationArrowBorder ? `border: ${paginationArrowBorder};` : ''} 
             ${paginationArrowBorderColor ? `border-color: ${paginationArrowBorderColor};` : ''}
-            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder?.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
-            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius?.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
+            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
+            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
 
             ${paginationArrowNormalBackgroundType === 'gradient' ? `   
                 ${paginationArrowNormalCustomGradientSwitcher && paginationArrowNormalCustomGradientInputValue ? `background: ${paginationArrowNormalCustomGradientInputValue};` : `background: ${paginationArrowNormalGradientColor};`}
@@ -727,23 +727,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-text,
         .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-text{
-            ${paginationArrowTextGlobalTypoSwitcher?.fontFamily === true && paginationArrowTextGlobalTypographyData?.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData?.fontFamily};` : ''}  
-            ${paginationArrowTextGlobalTypoSwitcher?.fontSize === true && paginationArrowTextGlobalTypographyData?.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData?.fontSize};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.fontWeight === true && paginationArrowTextGlobalTypographyData?.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData?.fontWeight};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.fontStyle === true && paginationArrowTextGlobalTypographyData?.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData?.fontStyle};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.textTransform === true && paginationArrowTextGlobalTypographyData?.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData?.textTransform};` : ''} 
-            ${paginationArrowTextGlobalTypoSwitcher?.textDecoration === true && paginationArrowTextGlobalTypographyData?.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData?.textDecoration};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === true && paginationArrowTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === true && paginationArrowTextGlobalTypographyData?.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData?.lineHeight};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontFamily === true && paginationArrowTextGlobalTypographyData.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationArrowTextGlobalTypoSwitcher.fontSize === true && paginationArrowTextGlobalTypographyData.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontWeight === true && paginationArrowTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.fontStyle === true && paginationArrowTextGlobalTypographyData.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.textTransform === true && paginationArrowTextGlobalTypographyData.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationArrowTextGlobalTypoSwitcher.textDecoration === true && paginationArrowTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.letterSpacing === true && paginationArrowTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationArrowTextGlobalTypoSwitcher.lineHeight === true && paginationArrowTextGlobalTypographyData.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData.lineHeight};` : ''}
             
-        	${paginationArrowTextGlobalTypoSwitcher?.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Desktop ? `font-size: ${paginationArrowTextFontSize?.Desktop}${paginationArrowTextFontSizeUnits?.Desktop};` : ''} 
-			${paginationArrowTextGlobalTypoSwitcher?.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
-			${paginationArrowTextGlobalTypoSwitcher?.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
-			${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing?.Desktop}${paginationArrowTextLetterSpacingUnits?.Desktop};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Desktop ? `line-height: ${paginationArrowTextLineHeight?.Desktop}${paginationArrowTextLineHeightUnits?.Desktop};` : ''}
+        	${paginationArrowTextGlobalTypoSwitcher.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontSize === false && paginationArrowTextFontSize.Desktop ? `font-size: ${paginationArrowTextFontSize.Desktop}${paginationArrowTextFontSizeUnits.Desktop};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
+			${paginationArrowTextGlobalTypoSwitcher.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
+			${paginationArrowTextGlobalTypoSwitcher.letterSpacing === false && paginationArrowTextLetterSpacing.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing.Desktop}${paginationArrowTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationArrowTextGlobalTypoSwitcher.lineHeight === false && paginationArrowTextLineHeight.Desktop ? `line-height: ${paginationArrowTextLineHeight.Desktop}${paginationArrowTextLineHeightUnits.Desktop};` : ''}
 
             ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
         }
@@ -757,38 +757,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             display: flex;
             align-items: center;
             justify-content: center;
-            ${paginationBtnGap?.Desktop ? `gap: ${paginationBtnGap?.Desktop}${paginationBtnGapUnits?.Desktop};` : ''}
+            ${paginationBtnGap.Desktop ? `gap: ${paginationBtnGap.Desktop}${paginationBtnGapUnits.Desktop};` : ''}
         }
 
 
         .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers {
-            ${paginationBtnSize?.Desktop ? `width: ${paginationBtnSize?.Desktop}${paginationBtnSizeUnits?.Desktop};` : ''}  
-            ${paginationBtnSize?.Desktop ? `height: ${paginationBtnSize?.Desktop}${paginationBtnSizeUnits?.Desktop};` : ''}
+            ${paginationBtnSize.Desktop ? `width: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}  
+            ${paginationBtnSize.Desktop ? `height: ${paginationBtnSize.Desktop}${paginationBtnSizeUnits.Desktop};` : ''}
 
-            ${paginationBtnTextGlobalTypoSwitcher?.fontFamily === true && paginationBtnTextGlobalTypographyData?.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData?.fontFamily};` : ''}  
-            ${paginationBtnTextGlobalTypoSwitcher?.fontSize === true && paginationBtnTextGlobalTypographyData?.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData?.fontSize};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.fontWeight === true && paginationBtnTextGlobalTypographyData?.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData?.fontWeight};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.fontStyle === true && paginationBtnTextGlobalTypographyData?.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData?.fontStyle};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.textTransform === true && paginationBtnTextGlobalTypographyData?.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData?.textTransform};` : ''} 
-            ${paginationBtnTextGlobalTypoSwitcher?.textDecoration === true && paginationBtnTextGlobalTypographyData?.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData?.textDecoration};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === true && paginationBtnTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === true && paginationBtnTextGlobalTypographyData?.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData?.lineHeight};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontFamily === true && paginationBtnTextGlobalTypographyData.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData.fontFamily};` : ''}  
+            ${paginationBtnTextGlobalTypoSwitcher.fontSize === true && paginationBtnTextGlobalTypographyData.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData.fontSize};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontWeight === true && paginationBtnTextGlobalTypographyData.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData.fontWeight};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.fontStyle === true && paginationBtnTextGlobalTypographyData.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData.fontStyle};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.textTransform === true && paginationBtnTextGlobalTypographyData.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData.textTransform};` : ''} 
+            ${paginationBtnTextGlobalTypoSwitcher.textDecoration === true && paginationBtnTextGlobalTypographyData.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData.textDecoration};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.letterSpacing === true && paginationBtnTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData.letterSpacing};` : ''}
+            ${paginationBtnTextGlobalTypoSwitcher.lineHeight === true && paginationBtnTextGlobalTypographyData.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData.lineHeight};` : ''}
             
-        	${paginationBtnTextGlobalTypoSwitcher?.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Desktop ? `font-size: ${paginationBtnTextFontSize?.Desktop}${paginationBtnTextFontSizeUnits?.Desktop};` : ''} 
-			${paginationBtnTextGlobalTypoSwitcher?.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
-			${paginationBtnTextGlobalTypoSwitcher?.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
-			${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing.Desktop}${paginationBtnTextLetterSpacingUnits.Desktop};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight.Desktop ? `line-height: ${paginationBtnTextLineHeight.Desktop}${paginationBtnTextLineHeightUnits.Desktop};` : ''}
+        	${paginationBtnTextGlobalTypoSwitcher.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontSize === false && paginationBtnTextFontSize.Desktop ? `font-size: ${paginationBtnTextFontSize.Desktop}${paginationBtnTextFontSizeUnits.Desktop};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
+			${paginationBtnTextGlobalTypoSwitcher.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
+			${paginationBtnTextGlobalTypoSwitcher.letterSpacing === false && paginationBtnTextLetterSpacing.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing.Desktop}${paginationBtnTextLetterSpacingUnits.Desktop};` : ''}
+			${paginationBtnTextGlobalTypoSwitcher.lineHeight === false && paginationBtnTextLineHeight.Desktop ? `line-height: ${paginationBtnTextLineHeight.Desktop}${paginationBtnTextLineHeightUnits.Desktop};` : ''}
 
             ${paginationBtnTextColor ? `color: ${paginationBtnTextColor};` : ''}
 
             ${paginationBtnBorder ? `border: ${paginationBtnBorder};` : ''} 
             ${paginationBtnBorderColor ? `border-color: ${paginationBtnBorderColor};` : ''}
-            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder?.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
-            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius?.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
+            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
+            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
 
             ${paginationBtnNormalBackgroundType === 'gradient' ? `   
                 ${paginationBtnNormalCustomGradientSwitcher && paginationBtnNormalCustomGradientInputValue ? `background: ${paginationBtnNormalCustomGradientInputValue};` : `background: ${paginationBtnNormalGradientColor};`}
@@ -825,8 +825,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon,
         .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-icon{
-            ${paginationArrowSize?.Desktop ? `width: ${paginationArrowSize?.Desktop}${paginationArrowSizeUnits?.Desktop};` : ''}
-            ${paginationArrowSize?.Desktop ? `height: ${paginationArrowSize?.Desktop}${paginationArrowSizeUnits?.Desktop};` : ''}
+            ${paginationArrowSize.Desktop ? `width: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
+            ${paginationArrowSize.Desktop ? `height: ${paginationArrowSize.Desktop}${paginationArrowSizeUnits.Desktop};` : ''}
         }
 
         .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon svg,
@@ -841,99 +841,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
 
         @media only screen and (max-width: 1024px) {
-            .${blockId}.fb-query-pagination-wrapper .fb-query-pagination {
-                ${paginationAlignment?.Tablet ? `justify-content: ${paginationAlignment.Tablet};` : ''}
-                ${paginationItemGap?.Tablet ? `gap: ${paginationItemGap.Tablet}${paginationItemGapUnits?.Tablet};` : ''}
 
-                ${paginationWrapperTabletPaddingWidth && paginationWrapperTabletPadding?.top ? `padding: ${paginationWrapperTabletPaddingWidth};` : ''}
-                ${paginationWrapperTabletMarginWidth && paginationWrapperTabletMargin?.top ? `margin: ${paginationWrapperTabletMarginWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev,
-            .${blockId} .fb-query-pagination .fb-page-next {
-                ${paginationPrevNextWidth?.Tablet ? `width: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits?.Tablet};` : ''}
-                ${paginationPrevNextWidth?.Tablet ? `height: ${paginationPrevNextWidth.Tablet}${paginationPrevNextWidthUnits?.Tablet};` : ''}
-
-                ${paginationArrowTabletBorderWidth && paginationArrowTabletBorder?.top ? `border-width: ${paginationArrowTabletBorderWidth};` : ''}
-                ${paginationArrowTabletBorderRadiusWidth && paginationArrowTabletBorderRadius?.top ? `border-radius: ${paginationArrowTabletBorderRadiusWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-text,
-            .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-text {
-                ${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Tablet ? `font-size: ${paginationArrowTextFontSize.Tablet}${paginationArrowTextFontSizeUnits?.Tablet};` : ''} 
-                ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Tablet ? `letter-spacing: ${paginationArrowTextLetterSpacing.Tablet}${paginationArrowTextLetterSpacingUnits?.Tablet};` : ''}
-                ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Tablet ? `line-height: ${paginationArrowTextLineHeight.Tablet}${paginationArrowTextLineHeightUnits?.Tablet};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-numbers{
-                ${paginationBtnGap?.Tablet ? `gap: ${paginationBtnGap.Tablet}${paginationBtnGapUnits?.Tablet};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers {
-                ${paginationBtnSize?.Tablet ? `width: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits?.Tablet};` : ''}  
-                ${paginationBtnSize?.Tablet ? `height: ${paginationBtnSize.Tablet}${paginationBtnSizeUnits?.Tablet};` : ''}
-
-                ${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Tablet ? `font-size: ${paginationBtnTextFontSize.Tablet}${paginationBtnTextFontSizeUnits?.Tablet};` : ''} 
-                ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing?.Tablet ? `letter-spacing: ${paginationBtnTextLetterSpacing.Tablet}${paginationBtnTextLetterSpacingUnits?.Tablet};` : ''}
-                ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight?.Tablet ? `line-height: ${paginationBtnTextLineHeight.Tablet}${paginationBtnTextLineHeightUnits?.Tablet};` : ''}
-
-                ${paginationBtnTabletBorderWidth && paginationBtnTabletBorder?.top ? `border-width: ${paginationBtnTabletBorderWidth};` : ''}
-                ${paginationBtnTabletBorderRadiusWidth && paginationBtnTabletBorderRadius?.top ? `border-radius: ${paginationBtnTabletBorderRadiusWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon,
-            .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-icon{
-                ${paginationArrowSize?.Tablet ? `width: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits?.Tablet};` : ''}
-                ${paginationArrowSize?.Tablet ? `height: ${paginationArrowSize.Tablet}${paginationArrowSizeUnits?.Tablet};` : ''}
-            }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId}.fb-query-pagination-wrapper .fb-query-pagination {
-                ${paginationAlignment?.Mobile ? `justify-content: ${paginationAlignment.Mobile};` : ''}
-                ${paginationItemGap?.Mobile ? `gap: ${paginationItemGap.Mobile}${paginationItemGapUnits?.Mobile};` : ''}
 
-                ${paginationWrapperMobilePaddingWidth && paginationWrapperMobilePadding?.top ? `padding: ${paginationWrapperMobilePaddingWidth};` : ''}
-                ${paginationWrapperMobileMarginWidth && paginationWrapperMobileMargin?.top ? `margin: ${paginationWrapperMobileMarginWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev,
-            .${blockId} .fb-query-pagination .fb-page-next {
-                ${paginationPrevNextWidth?.Mobile ? `width: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits?.Mobile};` : ''}
-                ${paginationPrevNextWidth?.Mobile ? `height: ${paginationPrevNextWidth.Mobile}${paginationPrevNextWidthUnits?.Mobile};` : ''}
-
-                ${paginationArrowMobileBorderWidth && paginationArrowMobileBorder?.top ? `border-width: ${paginationArrowMobileBorderWidth};` : ''}
-                ${paginationArrowMobileBorderRadiusWidth && paginationArrowMobileBorderRadius?.top ? `border-radius: ${paginationArrowMobileBorderRadiusWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-text,
-            .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-text {
-                ${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Mobile ? `font-size: ${paginationArrowTextFontSize.Mobile}${paginationArrowTextFontSizeUnits?.Mobile};` : ''} 
-                ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Mobile ? `letter-spacing: ${paginationArrowTextLetterSpacing.Mobile}${paginationArrowTextLetterSpacingUnits?.Mobile};` : ''}
-                ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Mobile ? `line-height: ${paginationArrowTextLineHeight.Mobile}${paginationArrowTextLineHeightUnits?.Mobile};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-numbers{
-                ${paginationBtnGap?.Mobile ? `gap: ${paginationBtnGap.Mobile}${paginationBtnGapUnits?.Mobile};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-numbers .page-numbers {
-                ${paginationBtnSize?.Mobile ? `width: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits?.Mobile};` : ''}  
-                ${paginationBtnSize?.Mobile ? `height: ${paginationBtnSize.Mobile}${paginationBtnSizeUnits?.Mobile};` : ''}
-
-                ${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Mobile ? `font-size: ${paginationBtnTextFontSize.Mobile}${paginationBtnTextFontSizeUnits?.Mobile};` : ''} 
-                ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing?.Mobile ? `letter-spacing: ${paginationBtnTextLetterSpacing.Mobile}${paginationBtnTextLetterSpacingUnits?.Mobile};` : ''}
-                ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight?.Mobile ? `line-height: ${paginationBtnTextLineHeight.Mobile}${paginationBtnTextLineHeightUnits?.Mobile};` : ''}
-
-                ${paginationBtnMobileBorderWidth && paginationBtnMobileBorder?.top ? `border-width: ${paginationBtnMobileBorderWidth};` : ''}
-                ${paginationBtnMobileBorderRadiusWidth && paginationBtnMobileBorderRadius?.top ? `border-radius: ${paginationBtnMobileBorderRadiusWidth};` : ''}
-            }
-
-            .${blockId} .fb-query-pagination .fb-page-prev .fb-pagination-icon,
-            .${blockId} .fb-query-pagination .fb-page-next .fb-pagination-icon{
-                ${paginationArrowSize?.Mobile ? `width: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits?.Mobile};` : ''}
-                ${paginationArrowSize?.Mobile ? `height: ${paginationArrowSize.Mobile}${paginationArrowSizeUnits?.Mobile};` : ''}
-            }
         }
     `, [
     blockId,
