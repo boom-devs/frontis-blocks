@@ -2714,7 +2714,7 @@ transition: all .3s ease-in-out;
 										{/* Paragraphy Styling  */}
 										<PanelBody
 											title={__("Paragraph Styling", "frontis-blocks")}
-											initialOpen={false}
+											initialOpen={true}
 										>
 											<FB_TypographyControl
 												globalTypoControlActive={true}
