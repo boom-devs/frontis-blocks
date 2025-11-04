@@ -734,7 +734,7 @@ const attributes = {
 
     teamMemberDesignation: {
 		type: 'string',
-		default: 'Junior Developer'
+		default: 'Senior Developer'
 	},
 	teamMemberDesignationColorSwitcher: {
 		type: 'string',
@@ -808,7 +808,7 @@ const attributes = {
     },
     teamMemberDesignationTextDecoration: {
         type: 'string',
-        default: '',
+        default: 'none',
     },
     teamMemberDesignationLetterSpacing: {
         type: 'object',
@@ -1253,7 +1253,7 @@ const attributes = {
 	},
 	teamMemberBadgeTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},	
 	teamMemberBadgeLetterSpacing: {
 		type: 'object',
@@ -1534,7 +1534,7 @@ const attributes = {
     },
     teamMemberNameTextDecoration: {
         type: 'string',
-        default: '',
+        default: 'none',
     },
     teamMemberNameLetterSpacing: {
         type: 'object',
@@ -1747,6 +1747,11 @@ const attributes = {
 				teamMemberSocialIcon: 'linkedin',
 			},
 		]
+	},
+
+	frontendTeamMemberSocialItems: {
+		"type": "array",
+		"default": []
 	},
 
 	teamMemberIconsAlignment: {
@@ -2085,6 +2090,10 @@ const attributes = {
 	socialIconBtnIcon: {
 		type: 'string',
 		default: 'plus',
+	},
+	frontendSocialIconBtnIcon:{
+		type: 'string',
+		default: '',
 	},
 	socialIconBtnIconSize: {
 		type: 'object',
@@ -2548,7 +2557,7 @@ const attributes = {
 	},
 	teamMemberEmailTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},
 	teamMemberEmailLetterSpacing: {
 		type: 'object',
@@ -2748,7 +2757,7 @@ const attributes = {
 	},
 	teamMemberDescTextDecoration: {
 		type: 'string',
-		default: '',
+		default: 'none',
 	},
 	teamMemberDescLetterSpacing: {
 		type: 'object',
