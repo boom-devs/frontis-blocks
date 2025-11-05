@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { TextControl, SelectControl, Button, BaseControl } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
-
+import generateSvgIcon from '@Utils/generateSvgIcon';
 export default function SortableItem({
     id,
     item,
@@ -22,6 +22,14 @@ export default function SortableItem({
         transition,
     };
 
+    useEffect(() => {
+        if (item.megaMenuIcon) {
+            const svgString = generateSvgIcon(item.megaMenuIcon);
+            handleChangeItem(item.id, 'megaMenuIconFrontend', svgString);
+        }
+    }, [item.megaMenuIcon]);
+
+    console.log('item in sortable', item.megaMenuIconFrontend);
     const toggleOpen = () => setIsOpen(!isOpen);
 
     const iconHandler = (IconName) => {
@@ -51,6 +59,7 @@ export default function SortableItem({
             />
         </svg>
     );
+
 
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
@@ -108,7 +117,7 @@ export default function SortableItem({
                         onChange={(value) => handleChangeItem(item.id, 'patternSlug', value)}
                         help={__("Select a pattern to display as mega menu content.", "frontis-blocks")}
                     />
-                    
+
                     {(item.patternSlug) && (
                         <BaseControl label={__("Icon", "frontis-blocks")}>
                             <FBIconPicker value={item.megaMenuIcon || 'angle-down'} setIconHandler={iconHandler} />
