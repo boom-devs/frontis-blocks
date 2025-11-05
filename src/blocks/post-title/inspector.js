@@ -523,7 +523,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             margin-block-start: 0;
             margin-block-end: 0;
         }
-            
+
+        ${isLink ? 
+            `.${blockId} .fb-post-title .fb-post-title-link:focus{
+                color: inherit;
+                box-shadow: none;
+                outline: inherit;
+            }`
+            : ""
+        }
+
         .${blockId} .fb-post-title,
         .${blockId} .fb-post-title .fb-post-title-link{
             ${postTitleColor ? `color: ${postTitleColor};` : ""}
