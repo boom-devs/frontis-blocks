@@ -1,50 +1,67 @@
+// SettingsTabs.js
 import { __ } from "@wordpress/i18n";
-import EditorOptions from './EditorOptions';
-import AssetsGeneration from './AssetsGeneration';
-import VersionControl from './VersionControl';
-import EditorEnhancements from './EditorEnhancements';
-import Performance from './Performance';
-import SiteVisibility from './SiteVisibility';
-import { EditorOptionIcon, AssetGenerationIcon, VersionControlIcon, EditorEnhancementIcon, PerformanceIcon, SiteVisibilityIcon, ThemeFontIcon } from "../../icons";
+import {
+  EditorOptionIcon,
+  AssetGenerationIcon,
+  VersionControlIcon,
+  EditorEnhancementIcon,
+  PerformanceIcon,
+  SiteVisibilityIcon,
+} from "../../icons";
 
+import EditorOptions from "./EditorOptions";
+import AssetsGeneration from "./AssetsGeneration";
+import VersionControl from "./VersionControl";
+import EditorEnhancements from "./EditorEnhancements";
+import Performance from "./Performance";
+import SiteVisibility from "./SiteVisibility";
 
 const SettingsTabs = [
-	{
-		id: "editor",
-		label: __("Editor Options", "frontis-blocks"),
-		icon: <EditorOptionIcon />,
-		component: EditorOptions,
-	},
-	{
-		id: "assets",
-		label: __("Assets Generation", "frontis-blocks"),
-		icon: <AssetGenerationIcon />,
-		component: AssetsGeneration,
-	},
-	{
-		id: "version",
-		label: __("Version Control", "frontis-blocks"),
-		icon: <VersionControlIcon />,
-		component: VersionControl,
-	},
-	{
-		id: "editor-enhancements",
-		label: __("Editor Enhancements", "frontis-blocks"),
-		icon: <EditorEnhancementIcon />,
-		component: EditorEnhancements,
-	},
-	{
-		id: "performance",
-		label: __("Performance", "frontis-blocks"),
-		icon: <PerformanceIcon />,
-		component: Performance,
-    },
-    {
-        id: "site-visibility",
-        label: __("Site Visibility", "frontis-blocks"),
-        icon: <SiteVisibilityIcon />,
-        component: SiteVisibility,
-    }
+  // General Group
+  {
+    group: "General",
+    id: "assets",
+    label: __("Asset Generation", "frontis-blocks"),
+    icon: <AssetGenerationIcon />,
+    component: AssetsGeneration,
+  },
+  {
+    group: "General",
+    id: "performance",
+    label: __("Performance", "frontis-blocks"),
+    icon: <PerformanceIcon />,
+    component: Performance,
+  },
+  {
+    group: "General",
+    id: "version",
+    label: __("Version Control", "frontis-blocks"),
+    icon: <VersionControlIcon />,
+    component: VersionControl,
+  },
+
+  // Appearance Group
+  {
+    group: "Appearance",
+    id: "editor",
+    label: __("Editor Options", "frontis-blocks"),
+    icon: <EditorOptionIcon />,
+    component: EditorOptions,
+  },
+  {
+    group: "Appearance",
+    id: "editor-enhancements",
+    label: __("Editor Enhancements", "frontis-blocks"),
+    icon: <EditorEnhancementIcon />,
+    component: EditorEnhancements,
+  },
+  {
+    group: "Appearance",
+    id: "site-visibility",
+    label: __("Site Visibility", "frontis-blocks"),
+    icon: <SiteVisibilityIcon />,
+    component: SiteVisibility,
+  },
 ];
 
 export default SettingsTabs;
