@@ -40,6 +40,8 @@ import FB_PositionControl from '@Components/position-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
@@ -49,19 +51,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuDesktopSwitcher,
         megaMenuTabletSwitcher,
         megaMenuMobileSwitcher,
-        menuLayout,
-        menuAlignment,
-        menuSpacing,
-        menuItemColor,
-        menuItemHoverColor,
-        menuItemBackgroundColor,
-        menuItemHoverBackgroundColor,
-        menuItemPadding,
-        submenuWidth,
-        submenuBackgroundColor,
-        megaMenuWidth,
-        megaMenuBackgroundColor,
-        megaMenuInteraction,
+        megaMenuAlignment,
         menuItems,
         triggerType,
         megaMenuBorder,
@@ -221,7 +211,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuGlobalBoxShadowValues,
         megaMenuGlobalBoxShadowCssValue,
         megaMenuGlobalBoxShadowHoverValues,
-        megaMenuGlobalBoxShadowHoverCssValue
+        megaMenuGlobalBoxShadowHoverCssValue,
+        megaMenuIconColorSwitcher,
+        megaMenuIconColor,
+        megaMenuIconHoverColor,
+        megaMenuIconSize,
+        megaMenuIconGap,
+        megaMenuIconRotateSwitcher,
+        megaMenuIconRotation,
+        megaMenuIconRotateHover
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -258,6 +256,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ...patternData.allPatterns.map((pattern) => ({
                     value: pattern.name,
                     label: pattern.title || pattern.name,
+                    content: pattern.content
                 }))
             );
         }
@@ -268,6 +267,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ...patternData.userPatterns.map((pattern) => ({
                     value: 'user-' + pattern.id,
                     label: pattern.title?.raw || `Pattern ${pattern.id}`,
+                    content: pattern.content?.raw || pattern.content || ''
                 }))
             );
         }
@@ -1059,8 +1059,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${megaMenuGlobalBorderHoverColor ? `border-color: ${megaMenuGlobalBorderHoverColor};` : ''}
             ${megaMenuGlobalBoxShadowHoverCssValue ? `box-shadow: ${megaMenuGlobalBoxShadowHoverCssValue};` : ''}
         }
-        .${blockId} .fb-advanced-mega-menu-wrapper ul li,
-        .${blockId} .fb-advanced-mega-menu-link {
+        .${blockId} .fb-advanced-mega-menu-wrapper ul{
+            ${megaMenuAlignment?.Desktop ? `justify-content: ${megaMenuAlignment?.Desktop};` : ''}
+        }
+        .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-link {
                 ${megaMenuGlobalTypoSwitcher?.fontFamily === true && megaMenuGlobalTypographyData?.fontFamily ? `font-family: ${megaMenuGlobalTypographyData?.fontFamily};` : ''}
                 ${megaMenuGlobalTypoSwitcher?.fontSize === true && megaMenuGlobalTypographyData?.fontSize ? `font-size: ${megaMenuGlobalTypographyData?.fontSize};` : ''}
                 ${megaMenuGlobalTypoSwitcher?.fontWeight === true && megaMenuGlobalTypographyData?.fontWeight ? `font-weight: ${megaMenuGlobalTypographyData?.fontWeight};` : ''}
@@ -1086,34 +1088,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${megaMenuDesktopBorderRadiusWidth && megaMenuDesktopBorderRadius?.top ? `border-radius: ${megaMenuDesktopBorderRadiusWidth};` : ''}
                 ${megaMenuBorderColor ? `border-color: ${megaMenuBorderColor};` : ''}
                 ${megaMenuColor ? `color: ${megaMenuColor};` : ''}
-                ${megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''}
+                ${megaMenuTextColorType === 'gradient' ? `
+                background: ${megaMenuTextCustomGradientColorSwitcher && megaMenuTextCustomGradientColor ? megaMenuTextCustomGradientColor : megaMenuTextGradientColor};
+                ${megaMenuTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${megaMenuTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : ''}
+                ${megaMenuTextBgColorType === "gradient"
+            ? `background: ${megaMenuTextBackgroundCustomGradientColorSwitcher && megaMenuTextBackgroundCustomGradientColor
+                ? megaMenuTextBackgroundCustomGradientColor
+                : megaMenuTextBackgroundGradientColor
+            };`
+            : megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''
+        }
                 ${megaMenuBoxShadowCssValue ? `box-shadow: ${megaMenuBoxShadowCssValue};` : ''}
                 transition: all .3s ease-in-out;
             }
         }
 
-        .${blockId} .fb-advanced-mega-menu-wrapper ul li:hover {
-            ${megaMenuBorderHoverColor ? `border-color: ${megaMenuBorderHoverColor};` : ''}
-            ${megaMenuHoverColor ? `color: ${megaMenuHoverColor};` : ''}
-            ${megaMenuTextBackgroundHoverColor ? `background: ${megaMenuTextBackgroundHoverColor};` : ''}
-        }
         .${blockId} .fb-advanced-mega-menu-link:hover {
             ${megaMenuBorderHoverColor ? `border-color: ${megaMenuBorderHoverColor};` : ''}
             ${megaMenuHoverColor ? `color: ${megaMenuHoverColor};` : ''}
-            ${megaMenuTextBackgroundHoverColor ? `background: ${megaMenuTextBackgroundHoverColor};` : ''}
+            ${megaMenuTextHoverColorType === 'gradient' ? `
+                background: ${megaMenuTextHoverCustomGradientColorSwitcher && megaMenuTextHoverCustomGradientColor ? megaMenuTextHoverCustomGradientColor : megaMenuTextHoverGradientColor};
+                ${megaMenuTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${megaMenuTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : ''}
+            ${megaMenuTextBgHoverColorType === "gradient"
+            ? `background: ${megaMenuTextBackgroundHoverCustomGradientColorSwitcher && megaMenuTextBackgroundHoverCustomGradientColor
+                ? megaMenuTextBackgroundHoverCustomGradientColor
+                : megaMenuTextBackgroundHoverGradientColor
+            };`
+            : megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''
+        }
         }
         @media only screen and (max-width: 1024px) {
-            .${blockId} .fb-advanced-mega-menu-wrapper ul li,
+            .${blockId} .fb-advanced-mega-menu-wrapper{
+                ${tabletBackgroundNormalStyles}
+                ${globalTabletPadding && megaMenuGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
+                ${globalTabletMargin && megaMenuGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
+                ${globalTabletBorderWidth && megaMenuGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                ${globalTabletBorderRadiusWidth && megaMenuGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+            }
+            .${blockId} .fb-advanced-mega-menu-wrapper:hover{
+                ${tabletBackgroundHoverStyles}
+                ${globalMobilePadding && megaMenuGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
+                ${globalMobileMargin && megaMenuGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
+                ${globalMobileBorderWidth && megaMenuGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && megaMenuGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+            }
             .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-link {
+                ${megaMenuGlobalTypoSwitcher?.fontSize === false && megaMenuFontSize?.Tablet && megaMenuFontSizeUnits?.Tablet ? `font-size: ${megaMenuFontSize?.Tablet}${megaMenuFontSizeUnits?.Tablet};` : ''}
+                ${megaMenuGlobalTypoSwitcher?.letterSpacing === false && megaMenuLetterSpacing?.Tablet && megaMenuLetterSpacingUnits?.Tablet ? `letter-spacing: ${megaMenuLetterSpacing?.Tablet}${megaMenuLetterSpacingUnits?.Tablet};` : ''}
+                ${megaMenuGlobalTypoSwitcher?.lineHeight === false && megaMenuLineHeight?.Tablet && megaMenuLineHeightUnits?.Tablet ? `line-height: ${megaMenuLineHeight?.Tablet}${megaMenuLineHeightUnits?.Tablet};` : ''}
                 ${megaMenuTabletPaddingWidth && megaMenuTabletPadding?.top ? `padding: ${megaMenuTabletPaddingWidth};` : ''}
                 ${megaMenuTabletMarginWidth && megaMenuTabletMargin?.top ? `margin: ${megaMenuTabletMarginWidth};` : ''}
                 ${megaMenuTabletBorderWidth && megaMenuTabletBorder?.top ? `border-width: ${megaMenuTabletBorderWidth};` : ''}
                 ${megaMenuTabletBorderRadiusWidth && megaMenuTabletBorderRadius?.top ? `border-radius: ${megaMenuTabletBorderRadiusWidth};` : ''}
             }
         }
-        @media only screen and (max-width: 767px) {
-            .${blockId} .fb-advanced-mega-menu-wrapper ul li,   
+        @media only screen and (max-width: 767px) {   
+            .${blockId} .fb-advanced-mega-menu-wrapper{
+                ${mobileBackgroundNormalStyles}
+            }
+            .${blockId} .fb-advanced-mega-menu-wrapper:hover{
+                ${mobileBackgroundHoverStyles}
+            }
             .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-link {
+                ${megaMenuGlobalTypoSwitcher?.fontSize === false && megaMenuFontSize?.Mobile && megaMenuFontSizeUnits?.Mobile ? `font-size: ${megaMenuFontSize?.Mobile}${megaMenuFontSizeUnits?.Mobile};` : ''}
+                ${megaMenuGlobalTypoSwitcher?.letterSpacing === false && megaMenuLetterSpacing?.Mobile && megaMenuLetterSpacingUnits?.Mobile ? `letter-spacing: ${megaMenuLetterSpacing?.Mobile}${megaMenuLetterSpacingUnits?.Mobile};` : ''}
+                ${megaMenuGlobalTypoSwitcher?.lineHeight === false && megaMenuLineHeight?.Mobile && megaMenuLineHeightUnits?.Mobile ? `line-height: ${megaMenuLineHeight?.Mobile}${megaMenuLineHeightUnits?.Mobile};` : ''}
                 ${megaMenuMobilePaddingWidth && megaMenuMobilePadding?.top ? `padding: ${megaMenuMobilePaddingWidth};` : ''}
                 ${megaMenuMobileMarginWidth && megaMenuMobileMargin?.top ? `margin: ${megaMenuMobileMarginWidth};` : ''}
                 ${megaMenuMobileBorderWidth && megaMenuMobileBorder?.top ? `border-width: ${megaMenuMobileBorderWidth};` : ''}
@@ -1143,6 +1186,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     value={triggerType}
                     options={MEGA_MENU_TRIGGERS}
                     onChange={(value) => setAttributes({ triggerType: value })}
+                />
+                <FB_ResponsiveAlignmentControl
+                    label={__("Alignment", "frontis-blocks")}
+                    globalAlignment={megaMenuAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ megaMenuAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
                 />
             </PanelBody>
 
@@ -1446,6 +1496,106 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingCombineBtnHandler={megaMenuMarginLinkBtn}
                     setAttributes={setAttributes}
                 />
+            </PanelBody>
+            <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+                {/* Icon color */}
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={megaMenuIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuIconColorSwitcher: value })}
+                />
+
+                {megaMenuIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={megaMenuIconColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuIconColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {megaMenuIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={megaMenuIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuIconHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+                {/* Icon Size */}
+                <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("Icon Size", "frontis-blocks")}
+                    rangeValue={megaMenuIconSize}
+                    onChangeHandler={(value) => setAttributes({ megaMenuIconSize: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+
+                />
+                {/* Icon Gap */}
+                <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("Icon Gap", "frontis-blocks")}
+                    rangeValue={megaMenuIconGap}
+                    onChangeHandler={(value) => setAttributes({ megaMenuIconGap: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+                {/* Icon Rotation */}
+                <FB_Range
+                    min={0}
+                    max={10}
+                    label={__("Icon Rotation", "frontis-blocks")}
+                    rangeValue={megaMenuIconRotation}
+                    onChangeHandler={(value) => setAttributes({ megaMenuIconRotation: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+                <FB_SwitcherControl
+                    label={__("Icon Rotation", "frontis-blocks")}
+                    globalSwitcher={megaMenuIconRotateSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuIconRotateSwitcher: value })}
+                />
+
+                {megaMenuIconRotateSwitcher === 'normal' && (
+                    <FB_Range
+                        min={-360}
+                        max={360}
+                        label={__("Icon Rotation", "frontis-blocks")}
+                        rangeValue={megaMenuIconRotation}
+                        onChangeHandler={(value) => setAttributes({ megaMenuIconRotation: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+
+                    />
+                )}
+
+                {megaMenuIconRotateSwitcher === 'hover' && (
+                    <FB_Range
+                        min={-360}
+                        max={360}
+                        label={__("Icon Rotation", "frontis-blocks")}
+                        rangeValue={megaMenuIconRotateHover}
+                        onChangeHandler={(value) => setAttributes({ megaMenuIconRotateHover: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
+                )}
             </PanelBody>
         </>
     );

@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, SelectControl, Button } from '@wordpress/components';
+import { TextControl, SelectControl, Button, BaseControl } from '@wordpress/components';
+import FBIconPicker from "../../components/icon-picker";
 
 export default function SortableItem({
     id,
@@ -22,6 +23,10 @@ export default function SortableItem({
     };
 
     const toggleOpen = () => setIsOpen(!isOpen);
+
+    const iconHandler = (IconName) => {
+        handleChangeItem(item.id, 'megaMenuIcon', IconName || 'angle-down');
+    };
 
     const TrashIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
@@ -103,6 +108,13 @@ export default function SortableItem({
                         onChange={(value) => handleChangeItem(item.id, 'patternSlug', value)}
                         help={__("Select a pattern to display as mega menu content.", "frontis-blocks")}
                     />
+                    
+                    {(item.patternSlug) && (
+                        <BaseControl label={__("Icon", "frontis-blocks")}>
+                            <FBIconPicker value={item.megaMenuIcon || 'angle-down'} setIconHandler={iconHandler} />
+                        </BaseControl>
+                    )}
+
                 </div>
             )}
         </li>

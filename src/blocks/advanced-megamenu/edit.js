@@ -5,6 +5,7 @@ import {
 import { useDeviceType } from '@Config/displayType';
 import { useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import './editor.scss';
 
@@ -16,10 +17,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		megaMenuTabletSwitcher,
 		megaMenuMobileSwitcher,
 		megaMenuGlobalWraperClass,
-		megaMenuGlobalWraperID
-	}
-		= attributes;
+		megaMenuGlobalWraperID,
+		megaMenuIcon
+	} = attributes;
 
+	
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-mega-menu-main-wrapper ${blockId} ${megaMenuDesktopSwitcher && 'fb-desktop-responsive'} ${megaMenuTabletSwitcher && 'fb-tablet-responsive'} ${megaMenuMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
@@ -42,13 +44,34 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>
 					<div className="fb-mega-menu-editor">
 						{menuItems.length > 0 ? (
-							<div style={{ marginTop: '15px' }}>
-								<ul style={{ listStyle: 'none', padding: 0, display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-									{menuItems.map((item, index) => (
-										<li key={index}>{item.label || __('(No label)', 'frontis-blocks')}</li>
-									))}
-								</ul>
-							</div>
+							<ul className={`fb-advanced-mega-menu-list fb-device-${deviceType}`}>
+								{menuItems.map((item, index) => (
+									<li
+										key={index}
+										className={`fb-advanced-mega-menu-item ${item.patternSlug ? 'has-mega-menu' : ''}`}
+									>
+										{item.url ? (
+											<a href={item.url} className="fb-advanced-mega-menu-link">
+												{item.label || __('Menu one', 'frontis-blocks')}
+												{item.patternSlug && (
+													<span className="fb-advanced-mega-menu-indicator">
+														{item.megaMenuIcon ? renderSVG(item.megaMenuIcon) : ''}
+													</span>
+												)}
+											</a>
+										) : (
+											<span className="fb-advanced-mega-menu-link">
+												{item.label || __('Menu one', 'frontis-blocks')}
+												{item.patternSlug && (
+													<span className="fb-advanced-mega-menu-indicator">
+														{item.megaMenuIcon ? renderSVG(item.megaMenuIcon) : ''}
+													</span>
+												)}
+											</span>
+										)}
+									</li>
+								))}
+							</ul>
 						) : (
 							<p>{__('Use the sidebar to add menu items →', 'frontis-blocks')}</p>
 						)}
