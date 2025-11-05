@@ -12,7 +12,7 @@ import FBSwitch from '../../components/common/Switch';
 const Blocks = () => {
 	const [blocks, setBlocks] = useState([]);
 	const [disableAllBlocks, setDisableAllBlocks] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [searchTerm, setSearchTerm] = useState('');
 	const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
@@ -27,6 +27,7 @@ const Blocks = () => {
 	}, []);
 
 	const getBlocks = () => {
+		setIsLoading(true);
 		jQuery.ajax({
 			url: ajaxUrl,
 			type: 'POST',
@@ -163,7 +164,36 @@ const Blocks = () => {
  					</div>
 				</div>
 			</div>
-			{filteredCategories.length > 0 ? (
+			{isLoading ? (
+				<>
+				{/* Show 2-3 skeleton groups for realism */}
+				{[1, 2, 3].map((i) => (
+				  <div key={i} className="fb-blocks-skeleton">
+					<div className="fb-blocks-skeleton-header">
+					  <div className="fb-blocks-skeleton-title"></div>
+					  <div className="fb-blocks-skeleton-toggle">
+						<div className="fb-blocks-skeleton-toggle-label"></div>
+						<div className="fb-blocks-skeleton-switch"></div>
+						<div className="fb-blocks-skeleton-icon"></div>
+					  </div>
+					</div>
+					<div className="fb-blocks-skeleton-content">
+					  {[1, 2, 3].map((j) => (
+						<div key={j} className="fb-blocks-skeleton-card">
+						  <div className="fb-blocks-skeleton-card-icon"></div>
+						  <div className="fb-blocks-skeleton-card-body">
+							<div className="fb-blocks-skeleton-card-title"></div>
+							<div className="fb-blocks-skeleton-card-subtitle"></div>
+						  </div>
+						  <div className="fb-blocks-skeleton-card-switch"></div>
+						</div>
+					  ))}
+					</div>
+				  </div>
+				))}
+			  </>
+			) : (
+			filteredCategories.length > 0 ? (
 				filteredCategories.map(([category, { blocks: categoryBlocks }], index) => (
 					<div
 					key={category}
@@ -227,6 +257,7 @@ const Blocks = () => {
 				<p className="fb-blocks-no-results">
 					{__('No blocks found.', 'frontis-blocks')}
 				</p>
+			)
 			)}
 		</div>
 	);
