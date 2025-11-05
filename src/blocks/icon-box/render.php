@@ -523,8 +523,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<div class="fb-icon-box-wrapper-inner <?php echo esc_attr( $block_id ); ?>">
 				<div class="fb-icon-media-container">
 					<div class="fb-icon-media-wrapper">
-						<?php if ( $media_switcher === 'image' && $icon_box_media_Url !== '' ) : ?>
-							<img src="<?php echo esc_url( $icon_box_media_Url ); ?>" alt="<?php echo esc_attr( $icon_box_media_Alt ); ?>" />
+						<?php if ( $media_switcher === 'image' && $icon_box_media_url !== '' ) : ?>
+							<img src="<?php echo esc_url( $icon_box_media_url ); ?>" alt="<?php echo esc_attr( $icon_box_media_alt ); ?>" />
 						<?php elseif ( $media_switcher === 'icon' && $frontend_icon ) : ?>
 							<div class="fb-icon-wrapper"><?php echo $frontend_icon; ?></div>
 						<?php endif; ?>
