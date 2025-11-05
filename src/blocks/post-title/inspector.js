@@ -1447,7 +1447,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <FB_InputControl
                     label={__("CSS ID", "frontis-blocks")}
                     value={wrapperId}
-                    onChangeValue={(value) => setAttributes({ wrapperID: value })}
+                    onChangeValue={(value) => setAttributes({ wrapperId: value })}
                     helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
                 />
 
@@ -1459,7 +1459,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody
+            <PanelBody 
                 title={__("Padding and Margin", "frontis-blocks")}
                 initialOpen={false}
             >
