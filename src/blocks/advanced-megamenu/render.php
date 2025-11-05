@@ -53,38 +53,26 @@ if (empty($items)) {
                 <span></span>
             </button>
             <ul class="fb-advanced-mega-menu-list">
-                <?php foreach ($items as $item): ?>
+                <?php foreach ($items as $item):
+                    $item_icon = isset($item['megaMenuIconFrontend']) ? $item['megaMenuIconFrontend'] : '';
+                    ?>
                     <li
                         class="fb-advanced-mega-menu-item <?php echo !empty($item['patternSlug']) ? 'has-mega-menu' : ''; ?>">
                         <?php if (!empty($item['url'])): ?>
                             <a href="<?php echo esc_url($item['url']); ?>" class="fb-advanced-mega-menu-link">
                                 <?php echo esc_html($item['label']); ?>
-                                <?php if (!empty($item['patternSlug'])): ?>
+                                <?php if (!empty($item['patternSlug']) && !empty($item_icon)): ?>
                                     <span class="fb-advanced-mega-menu-indicator">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            fill="#000000" version="1.1" id="Capa_1" width="14px" height="14px"
-                                            viewBox="0 0 30.727 30.727" xml:space="preserve">
-                                            <g>
-                                                <path
-                                                    d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0   l11.095,11.093L26.461,6.647c0.977-0.976,2.559-0.976,3.535,0C30.971,7.624,30.971,9.206,29.994,10.183z" />
-                                            </g>
-                                        </svg>
+                                        <?php echo $item_icon; ?>
                                     </span>
                                 <?php endif; ?>
                             </a>
                         <?php else: ?>
                             <span class="fb-advanced-mega-menu-link">
                                 <?php echo esc_html($item['label']); ?>
-                                <?php if (!empty($item['patternSlug'])): ?>
+                                <?php if (!empty($item['patternSlug']) && !empty($item_icon)): ?>
                                     <span class="fb-advanced-mega-menu-indicator">
-                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            fill="#000000" version="1.1" id="Capa_1" width="14px" height="14px"
-                                            viewBox="0 0 30.727 30.727" xml:space="preserve">
-                                            <g>
-                                                <path
-                                                    d="M29.994,10.183L15.363,24.812L0.733,10.184c-0.977-0.978-0.977-2.561,0-3.536c0.977-0.977,2.559-0.976,3.536,0   l11.095,11.093L26.461,6.647c0.977-0.976,2.559-0.976,3.535,0C30.971,7.624,30.971,9.206,29.994,10.183z" />
-                                            </g>
-                                        </svg>
+                                        <?php echo $item_icon; ?>
                                     </span>
                                 <?php endif; ?>
                             </span>

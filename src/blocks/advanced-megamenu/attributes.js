@@ -180,12 +180,28 @@ export default {
             Mobile: ''
         }
     },
+    megaMenuIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
     megaMenuIconGap: {
         type: 'object',
         default: {
             Desktop: '',
             Tablet: '',
             Mobile: ''
+        }
+    },
+    megaMenuIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
         }
     },
     megaMenuIconRotateSwitcher: {
@@ -427,6 +443,9 @@ export default {
                 }
             }
         }
+    },
+    megaMenuIconFrontend:{
+        type: 'string',
     },
     triggerType: {
         type: "string",
