@@ -524,12 +524,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             /* Target the link inside the HTML tag */
             .${blockId}.fb-post-title .fb-post-title-link {
                 color: inherit;
-                text-decoration: inherit;
                 transition: all .3s ease !important;
-            }
-
-            .${blockId}.fb-post-title .fb-post-title-link:hover{
-                color: currentColor;
             }
             
             .${blockId} .fb-post-title {
@@ -663,8 +658,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             }
 
+            .${blockId} .fb-post-title .fb-post-title-link{
+                ${postTitleGlobalTypoSwitcher.textDecoration === true &&
+                postTitleGlobalTypographyData.textDecoration
+                ? `text-decoration: ${postTitleGlobalTypographyData.textDecoration};`
+                : ""
+            }
+			
+                ${postTitleGlobalTypoSwitcher.textDecoration === false &&
+                postTitleTextDecoration
+                ? `text-decoration: ${postTitleTextDecoration};`
+                : ""
+            }
+            }
+
             .${blockId} .fb-post-title .fb-post-title-link:hover {
-                ${postTitleHoverColor ? `color: ${postTitleHoverColor};` : ""}
+                ${postTitleHoverColor
+                ? `color: ${postTitleHoverColor};`
+                : "color: inherit;"
+            }
             }
 
 
@@ -728,8 +740,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-post-title{
-                ${postGlobalDesktopPaddingWidth &&
-                postGlobalPaddingDesktop.top
+                ${postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
                 ? `padding: ${postGlobalDesktopPaddingWidth};`
                 : ""
             }
@@ -883,7 +894,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `top: ${postTitleVRTopOffset.Tablet}${postTitleVRTopOffsetUnits.Tablet};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleVROrientationType === "bottom" &&
                 postTitleVRBottomOffset.Tablet !== undefined
@@ -1059,7 +1070,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 className="fb-setting-show-hide-elements"
             >
                 <ToggleControl
-                    label={__("Make title a link", "frontis-blocks")}
+                    label={__("Enable Link", "frontis-blocks")}
                     checked={isLink}
                     onChange={(value) => setAttributes({ isLink: value })}
                 />
@@ -1459,7 +1470,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
             </PanelBody>
 
-            <PanelBody 
+            <PanelBody
                 title={__("Padding and Margin", "frontis-blocks")}
                 initialOpen={false}
             >
