@@ -1,19 +1,12 @@
-import { useState, useEffect } from "@wordpress/element";
 import { TemplateCategoryLoader } from "./template-loader";
 
 const TemplateSidebar = ({ activeTab,
     activeCategory,
-    setActiveCategory,
     data,
     onChangeTemplates,
     isProTemplate,
-    setIsProTemplate,
-    setActiveTagTab,
     setActiveCategoryTab,
-    resetCat,
-    setResetCat,
     loading,
-    setLoading,
     isImporting,
 }) => {
     const schema = data;
@@ -23,7 +16,6 @@ const TemplateSidebar = ({ activeTab,
         { name: 'Free', value: 'free' },
         { name: 'Pro', value: 'pro' },
     ];
-
 
     return (
         <div className="fb-template-library-store-sidebar" style={activeTab === 'templatelibrary' && !loading ? { paddingTop: 0 } : {}}>

@@ -1,16 +1,10 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect, useCallback } from "@wordpress/element";
-import { select, dispatch } from "@wordpress/data";
-import { parse } from "@wordpress/blocks";
+import { useState, useCallback } from "@wordpress/element";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ClipLoader } from "react-spinners";
 import { usePostDataMutation } from "./services/laravelapi";
-import TemplateImport from "./template-import";
-import LoginSignupModal from "./login-signup";
-import PluginUpgradeModal from "./plugin-upgrade";
 import { importBlocksFromApi } from "./components/importBlocks";
 
 const TemplateList = ({ 
@@ -18,19 +12,10 @@ const TemplateList = ({
     activeTab, 
     data, 
     setIsVisible, 
-    handleRemoveLibraryItem, 
-    setActiveCategory,
+    handleRemoveLibraryItem,
     isImporting,
     setIsImporting,
-
-    libraryData,
-    setLibraryData,
-    isLibrary,
-    setIsLoginModalOpen,
-    isLoginModalOpen,
 }) => {
-
-    const userData = JSON.parse(localStorage.getItem("userData"));
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
@@ -39,24 +24,6 @@ const TemplateList = ({
     const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
     const currentDateAndTime = { day: currentDay, month: currentMonth, year: currentYear, time: currentTime };
 
-    const [templateData, setTemplateData] = useState({
-        activeTab,
-        type: item.item_type,
-        id: item.id,
-        title: item.title,
-        image: item.image,
-        is_premium: item.is_premium || false,
-        categories: item.categories || [],
-        preview_url: item.preview_url || '',
-        colors: item.colors || [],
-        customColors: item.custom_colors || [],
-        gradientColors: item.color_gradients || [],
-        customGradientColors: item.custom_gradientColors || [],
-        typographies: item.typographies || [],
-        customTypographies: item.custom_typographies || [],
-        dependencies: item.dependencies || [],
-        dateAndTime: currentDateAndTime,
-    });
 
 
     const handleFullSiteImport = useCallback(async () => {
@@ -212,7 +179,7 @@ const TemplateList = ({
                     </button>
                 </td>
             </tr>
-            {isModalOpen && (
+            {/* {isModalOpen && (
                 <TemplateImport
                     template={templateData}
                     onClose={handleCloseModal}
@@ -221,7 +188,7 @@ const TemplateList = ({
                     setIsLoginModalOpen={setIsLoginModalOpen}
                     isLoginModalOpen={isLoginModalOpen}
                 />
-            )}
+            )} */}
         </>
     );
 };

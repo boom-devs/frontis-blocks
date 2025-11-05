@@ -5,10 +5,6 @@ import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ClipLoader } from "react-spinners";
-import TemplateImport from "./template-import";
-import LoginSignupModal from "./login-signup";
-import PluginUpgradeModal from "./plugin-upgrade";
 import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";
@@ -32,8 +28,6 @@ const LibraryContent = ({
     currentPage,
     onPageChange,
     onSearchTemplates,
-    onChangeSavedTemplateType,
-    savedTemplateType,
     setIsLoginModalOpen,
     isLoginModalOpen,
 }) => {
@@ -186,23 +180,6 @@ const LibraryContent = ({
         <>
         <div className="fb-template-library-store-content">
             <div className="fb-template-library-content-header">
-                <div className="fb-template-library-content-header-left">
-                    {/* {activeCategory.templatelibrary === 'my-cloud' && <h2>My Cloud</h2>} */}
-                    {/* {activeCategory.templatelibrary === 'my-favourites' && ( */}
-                    <div className="fb-template-library-tags-wrapper">
-                        {FavoriteTabsOptions.map(tab => (
-                            <button
-                                key={tab.value}
-                                className={`fb-template-library-tag-btn ${savedTemplateType === tab.value ? 'active' : ''}`}
-                                onClick={() => onChangeSavedTemplateType(tab.value)}
-                                disabled={savedTemplateType === tab.value}
-                            >
-                                {tab.name}
-                            </button>
-                        ))}
-                    </div>
-                    {/* )} */}
-                </div>
                 <div className="fb-template-library-content-header-right">
                     <div className="fb-template-library-search-wrapper">
                         <div className="fb-search-input-wrapper">

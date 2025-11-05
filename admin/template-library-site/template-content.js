@@ -2,49 +2,28 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import LoginSignupModal from "./login-signup";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
 import {ToastContainer, toast } from "react-toastify";
-import { TemplateContentLoader, TemplateLoader } from "./template-loader";
-import { usePostDataMutation } from "./services/wpapi";
+import { TemplateContentLoader } from "./template-loader";
 import { ClipLoader } from "react-spinners";
-import PluginUpgradeModal from "./plugin-upgrade";
-import { useDispatch, useSelector } from "react-redux";
-import { setAttribute } from "./store/attributesSlice";
 
 
 const TemplateContent = ({
     activeTab,
     activeCategory,
     data,
-    libraryData,
-    setLibraryData,
-    isProTemplate,
     TagTabsOptions,
     activeTagTab,
     setActiveTagTab,
     searchText,
     searchTemplates,
-    setIsVisible,
-    isLogedIn,
-    savedItems,
-    setSavedItems,
-    alreadySaved,
     loading,
     tagLoading,
     setIsLogedIn,
     setActiveCategory,
-    onSaveLibrary,
-    setIsLoginModalOpen,
-    isLoginModalOpen,
-    isProPlugin,
-    isPluginUpgradeModalOpen,
-    setIsPluginUpgradeModalOpen,
     currentPage,
     onPageChange,
-    isImporting,
-    setIsImporting
 }) => {
 
     const schema = data || {};
@@ -77,7 +56,7 @@ const TemplateContent = ({
             }
         }
 
-    }, [activeTab, activeCategory, isProTemplate, activeTagTab, TagTabsOptions, schema]);
+    }, [activeTab, activeCategory, activeTagTab, TagTabsOptions, schema]);
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
@@ -137,12 +116,7 @@ const TemplateContent = ({
             'access_token': response?.access_token,
             'refresh_token': response?.refresh_token,
         })
-        setIsLoginModalOpen(false);
         setIsLogedIn(true);
-    }, []);
-
-    const handleCloseLoginModal = useCallback(() => {
-        setIsLoginModalOpen(false);
     }, []);
 
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
@@ -158,7 +132,6 @@ const TemplateContent = ({
 
         // Get user data from localstorage and set setIsLoginModalOpen is false
         if (userData) {
-            setIsLoginModalOpen(false);
         }
         
     }, []);
@@ -186,7 +159,7 @@ const TemplateContent = ({
     return (
         <>
             <div className="fb-template-library-store-content-wrapper">
-            <div className="fb-template-library-store-content" style={isImporting ? { overflow: 'hidden' } : {}}>
+            <div className="fb-template-library-store-content" >
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
                         <h2>All {capitalize(activeTab)}</h2>
@@ -247,7 +220,6 @@ const TemplateContent = ({
                     <TemplateContentLoader />
                 ) : (
                     <>
-                        <ToastContainer />
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
@@ -256,7 +228,6 @@ const TemplateContent = ({
                                         id={template.id}
                                         title={template.title}
                                         imageUrl={template.image}
-                                        is_premium={template.is_premium || false}
                                         tags={template.tags || []}
                                         categories={template.categories || []}
                                         templateType={activeTab}
@@ -273,24 +244,8 @@ const TemplateContent = ({
                                         pages={template.pages || []}
                                         dependencies={template.dependencies || []}
                                         activeTab={activeTab}
-                                        setLibraryData={setLibraryData}
-                                        isLogedIn={isLogedIn}
-                                        data={data}
-                                        setIsVisible={setIsVisible}
-                                        savedItems={savedItems}
-                                        setSavedItems={setSavedItems}
-                                        alreadySaved={alreadySaved}
                                         setActiveCategory={setActiveCategory}
-                                        onSaveLibrary={onSaveLibrary}
-                                        saved={template.saved}
-                                        saveLoading={template.saveLoading}
-                                        setIsLoginModalOpen={setIsLoginModalOpen}
-                                        isLoginModalOpen={isLoginModalOpen}
-                                        isProPlugin={isProPlugin}
-                                        isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                                        setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
-                                        isImporting={isImporting}
-                                        setIsImporting={setIsImporting}
+                                        data={data}
                                     />
                                 ))
                             ) : (
@@ -401,24 +356,7 @@ const TemplateContent = ({
                     </>
                 )}
                 </div>
-                {isImporting && (
-                    <TemplateLoader />
-                )}
             </div>
-            {isLoginModalOpen && (
-                <LoginSignupModal
-                    onLoginSuccess={handleLoginSuccess}
-                    onRequestClose={handleCloseLoginModal}
-                    isLoginModalOpen={isLoginModalOpen}
-                    setIsLoginModalOpen={setIsLoginModalOpen}
-                />
-            )}
-            {isPluginUpgradeModalOpen && (
-                <PluginUpgradeModal
-                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
-                />
-            )}
         </>
     );
 };
