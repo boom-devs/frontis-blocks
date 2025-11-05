@@ -1065,7 +1065,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     })
                 }
                 min={0}
-                max={50}
+                max={100}
                 step={1}
                 resetFallbackValue={""}
             />
