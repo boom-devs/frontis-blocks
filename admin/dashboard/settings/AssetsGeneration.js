@@ -122,8 +122,8 @@ const AssetsGeneration = () => {
 
 		<div className="fb-option">
 			<div className="fb-option-label">
-				<h3>{__('File Generation', 'frontis-blocks')}</h3>
-				<p>{__('Enable automatic file generation', 'frontis-blocks')}</p>
+				<h4 className="p1">{__('File Generation', 'frontis-blocks')}</h4>
+				<p className="p2">{__('Enable automatic file generation', 'frontis-blocks')}</p>
 			</div>
 			<div className="fb-option-input">
 				<p className="fb-button-upcoming">
@@ -134,8 +134,8 @@ const AssetsGeneration = () => {
 
 		<div className="fb-option">
 			<div className="fb-option-label">
-				<h3>{__('Asset Generation', 'frontis-blocks')}</h3>
-				<p>{__('Generate assets for your blocks', 'frontis-blocks')}</p>
+				<h4 className="p1">{__('Asset Generation', 'frontis-blocks')}</h4>
+				<p className="p2">{__('Generate assets for your blocks', 'frontis-blocks')}</p>
 			</div>
 			<div className={`fb-option-input ${isLoading ? 'fb-assets-generation-button-wrapper' : ''}`}>
 				<Button

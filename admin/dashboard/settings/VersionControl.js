@@ -130,8 +130,8 @@ const VersionControl = () => {
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Rollback To Previous Version', 'frontis-blocks')}</h3>
-          <p>{__('Select a version to rollback to', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Rollback To Previous Version', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Select a version to rollback to', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input fb-option-input-rollback">
           <SelectControl
@@ -155,8 +155,8 @@ const VersionControl = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Beta', 'frontis-blocks')}</h3>
-          <p>{__('Enable beta features', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Beta', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Enable beta features', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch
@@ -171,8 +171,8 @@ const VersionControl = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Legacy Block', 'frontis-blocks')}</h3>
-          <p>{__('Enable support for legacy blocks', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Legacy Block', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Enable support for legacy blocks', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch

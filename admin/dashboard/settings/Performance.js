@@ -115,8 +115,8 @@ const Performance = () => {
 
 			<div className="fb-option">
 				<div className="fb-option-label">
-					<h3>{__("Load Google Fonts Locally", "frontis-blocks")}</h3>
-					<p>
+					<h4 className="p1">{__("Load Google Fonts Locally", "frontis-blocks")}</h4>
+					<p className="p2">
 						{__(
 							"Load Google Fonts Locally for performance improvement",
 							"frontis-blocks",
@@ -137,8 +137,8 @@ const Performance = () => {
 
 			<div className="fb-option">
 				<div className="fb-option-label">
-					<h3>{__("Preload Local Fonts", "frontis-blocks")}</h3>
-					<p>
+					<h4 className="p1">{__("Preload Local Fonts", "frontis-blocks")}</h4>
+					<p className="p2">
 						{__(
 							"Preload Local Fonts for performance improvement",
 							"frontis-blocks",
@@ -155,8 +155,6 @@ const Performance = () => {
 					{__('Coming Soon', 'frontis-blocks')}
 				</p>
 			</div>
-
-            {/* Allow Only Selected Fonts for later, its need to use select2 library */}
 		</div>
 	);
 };

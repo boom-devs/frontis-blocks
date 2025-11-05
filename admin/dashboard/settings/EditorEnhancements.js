@@ -135,8 +135,8 @@ const EditorEnhancements = () => {
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Quick Action Bar', 'frontis-blocks')}</h3>
-          <p>{__('The Frontis Blocks Quick Action Bar lets you have all your frequently used Frontis Blocks right at your fingertips.', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Quick Action Bar', 'frontis-blocks')}</h4>
+          <p className="p2">{__('The Frontis Blocks Quick Action Bar lets you have all your frequently used Frontis Blocks right at your fingertips.', 'frontis-blocks')}</p>
         </div>
 
           <div className="fb-block-card-switch">
@@ -152,8 +152,8 @@ const EditorEnhancements = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Collapse Panel', 'frontis-blocks')}</h3>
-          <p>{__('Allows collapsing of the editor panel', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Collapse Panel', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Allows collapsing of the editor panel', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch
@@ -168,8 +168,8 @@ const EditorEnhancements = () => {
       
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Templates Button', 'frontis-blocks')}</h3>
-          <p>{__('Adds a templates button to the editor', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Templates Button', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Adds a templates button to the editor', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch
