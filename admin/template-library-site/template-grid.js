@@ -4,15 +4,8 @@
 import { __ } from "@wordpress/i18n";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { ClipLoader } from "react-spinners";
-import TemplateImport from "./template-import";
-import PluginUpgradeModal from "./plugin-upgrade";
 import { usePostDataMutation } from "./services/laravelapi";
-import { select, dispatch } from '@wordpress/data';
-import { createBlock, parse, rawHandler } from '@wordpress/blocks';
 import { useState, useEffect, useCallback } from "@wordpress/element";
-import { useSelector, useDispatch } from "react-redux";
-import { setAttribute } from "./store/attributesSlice";
 import { importBlocksFromApi } from "./components/importBlocks";
 
 const TemplateGrid = ({
@@ -34,39 +27,17 @@ const TemplateGrid = ({
     customTypographies,
     globalTypographies,
     fontFamilies,
-    pages,
     categories,
     activeTab,
-    setLibraryData,
     isLogedIn,
-    data,
     setIsVisible,
-    isLibrary = false,
-    handleRemoveLibraryItem,
-    onSaveLibrary,
     savedItems = [],
-    setSavedItems = [],
     alreadySaved = () => { },
-    setActiveCategory,
-    saved,
-    saveLoading,
     setIsLoginModalOpen,
-    isLoginModalOpen,
     isProPlugin,
-    isPluginUpgradeModalOpen,
     setIsPluginUpgradeModalOpen,
-    isImporting,
     setIsImporting,
-    // setIsPladmin
 }) => {
-
-    // const { siteTitle, primaryColor, enableFeatureX } = useSelector(
-    //     (state) => state.attributes
-    //   );
-    // const dispatch = useDispatch();
-
-    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     
     const [freeTemplate, setFreeTemplate] = useState(false);
@@ -419,71 +390,7 @@ const TemplateGrid = ({
                         <h3 className="fb-template-title">{title}</h3>
                     </div>
                 </div>
-                <div className="fb-template-actions">
-                    <button
-                        className={`fb-import-btn ${isImporting ? "loading" : ""}`}
-                        onClick={() => {
-                            if (activeTab === 'patterns') {
-                                importPattern(id);
-                            } else if (activeTab === 'pages') {
-                                importPage(id);
-                            } else if (activeTab === 'sites') {
-                                handleFullSiteImport(id)
-                            } else if (activeTab === 'templatelibrary') {
-                                // console.log(templateData);
-                                if (templateData.type === 'patterns') {
-                                    importPattern(id);
-                                    // console.log('patterns');
-
-                                } else if (templateData.type === 'pages') {
-                                    // console.log('pages');
-                                    importPage(id);
-                                } else if (templateData.type === 'sites') {
-                                    // console.log('sites');
-                                    handleFullSiteImport()
-                                }
-                            }
-                        }}
-
-                        disabled={isImporting}
-                    >
-                        <span>Import</span>
-                    </button>
-                    <button
-                        className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
-                        onClick={() => {
-                            if(isProPlugin && saveLoading) return;
-                            isLibrary ? handleRemoveLibraryItem(id, templateType) : onSaveLibrary(templateData, isAlreadySaved);
-                        }}
-                        disabled={saveLoading || saved}
-                    >
-                        {isProPlugin && saveLoading ? (
-                            <>
-                                <span>Saving...</span>
-                                <ClipLoader color="fff" size={16} />
-                            </>
-                        ) : saved ? (
-                            <span>Saved</span>
-                        ) : isLibrary ? (
-                            <span>Remove</span>
-                        ) : (
-                            <span>Save Library</span>
-                        )}
-                    </button>
-
-                </div>
             </div>
-
-            {isModalOpen && userData?.email && (
-                <TemplateImport
-                    template={templateData}
-                    onClose={handleCloseModal}
-                    data={data}
-                    setActiveCategory={setActiveCategory}
-                    setIsLoginModalOpen={setIsLoginModalOpen}
-                    isLoginModalOpen={isLoginModalOpen}
-                />
-            )}
         </>
     );
 };
