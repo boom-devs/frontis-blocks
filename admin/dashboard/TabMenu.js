@@ -2,7 +2,6 @@ import { applyFilters } from "@wordpress/hooks";
 import { __ } from "@wordpress/i18n";
 import Dashboard from './overview/Dashboard';
 import Blocks from './blocks/Blocks';
-import Settings from './settings/Settings';
 import Integration from './integrations/Integration';
 
 import {
@@ -12,6 +11,7 @@ import {
     IntegrationsIcon,
     PricingIcon
 } from '../icons'
+import Settings from "./settings/Settings";
 
 const TabMenus = applyFilters('frontisblocks-admin-tabs', [
     {
