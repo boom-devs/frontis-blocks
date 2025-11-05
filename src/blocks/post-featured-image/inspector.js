@@ -1198,7 +1198,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				className="fb-setting-show-hide-elements"
 			>
 				<ToggleControl
-					label={__("Make image linkable", "frontis-blocks")}
+					label={__("Enable Link", "frontis-blocks")}
 					checked={isLink}
 					onChange={(value) => setAttributes({ isLink: value })}
 				/>
@@ -1218,7 +1218,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<FB_InputControl
 							label={__("Link Rel", "frontis-blocks")}
 							value={rel}
-							onChange={(value) => setAttributes({ rel: value })}
+							onChangeValue={(value) => setAttributes({ rel: value })}
 						/>
 
 						<p style={{ fontSize: "12px", color: "#888" }}>
