@@ -6,6 +6,14 @@ export default {
         type: "string",
     },
 
+    megaMenuAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'start',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
     //Start Mega Menu Style
     megaMenuGlobalTypographyData: {
         type: 'object',
@@ -153,6 +161,54 @@ export default {
         type: 'string',
     },
 
+    // Icon color
+    megaMenuIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    megaMenuIconColor: {
+        type: 'string'
+    },
+    megaMenuIconHoverColor: {
+        type: 'string',
+    },
+    megaMenuIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    megaMenuIconRotation: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    //Menu Item Color
     megaMenuColorSwitcher: {
         type: 'string',
         default: 'normal'
@@ -352,7 +408,25 @@ export default {
     },
     menuItems: {
         type: "array",
-        default: []
+        default: [
+            {
+                id: 'item-1',
+                megaMenuIcon: 'angle-down',
+            },
+        ],
+        items: {
+            type: 'object',
+            properties: {
+                id: {
+                    type: 'string',
+                    default: ''
+                },
+                megaMenuIcon: {
+                    type: 'string',
+                    default: 'angle-down'
+                }
+            }
+        }
     },
     triggerType: {
         type: "string",
@@ -727,32 +801,32 @@ export default {
         default: true
     },
     /** Start Background Normal for fb megaMenu */
-	megaMenuGlobalBgColorSwitcher: {
-		type: 'string',
-		default: 'normal',
-	},
-	megaMenuGlobalBgNormalBackgroundType: {
-		type: 'string',
-		default: 'classic',
-	},
-	megaMenuGlobalBgNormalClassicColor: {
-		type: 'string',
-		default: '',
-	},
-	megaMenuGlobalBgNormalGradientColor: {
-		type: 'string',
-		default: null,
-	},
-	megaMenuGlobalBgNormalCustomGradientSwitcher: {
-		type: 'boolean',
-		default: false,
-	},
-	megaMenuGlobalBgNormalCustomGradientInputValue: {
-		type: 'string',
-		default: '',
-	},
-	/** Bg Normal Image for fb container */
-	megaMenuGlobalBgNormalBackgroundImageUrl: {
+    megaMenuGlobalBgColorSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    megaMenuGlobalBgNormalBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    megaMenuGlobalBgNormalClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    megaMenuGlobalBgNormalGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    megaMenuGlobalBgNormalCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    megaMenuGlobalBgNormalCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+    /** Bg Normal Image for fb container */
+    megaMenuGlobalBgNormalBackgroundImageUrl: {
         type: 'object',
         default: {
             Desktop: '',
@@ -794,175 +868,175 @@ export default {
     },
 
 
-	/**Bg Hover for fb megaMenu */
-	megaMenuGlobalBgHoverBackgroundType: {
-		type: 'string',
-		default: 'classic',
-	},
-	megaMenuGlobalBgHoverClassicColor: {
-		type: 'string',
-		default: '',
-	},
-	megaMenuGlobalBgHoverGradientColor: {
-		type: 'string',
-		default: null,
-	},
-	megaMenuGlobalBgHoverCustomGradientSwitcher: {
-		type: 'boolean',
-		default: false,
-	},
-	megaMenuGlobalBgHoverCustomGradientInputValue: {
-		type: 'string',
-		default: '',
-	},
-	/** Hover Image for fb megaMenu */
-	megaMenuGlobalBgHoverBackgroundImageUrl: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	megaMenuGlobalBgHoverBackgroundImagePosition: {
-		type: 'object',
-		default: {
-			Desktop: { x: '0.5', y: '0.5' },
-			Tablet: { x: '', y: '' },
-			Mobile: { x: '', y: '' }
-		}
-	},
-	megaMenuGlobalBgHoverBackgroundImageAttachment: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	megaMenuGlobalBgHoverBackgroundImageRepeat: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	megaMenuGlobalBgHoverBackgroundImageSize: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	/** End Background for fb megaMenu */
+    /**Bg Hover for fb megaMenu */
+    megaMenuGlobalBgHoverBackgroundType: {
+        type: 'string',
+        default: 'classic',
+    },
+    megaMenuGlobalBgHoverClassicColor: {
+        type: 'string',
+        default: '',
+    },
+    megaMenuGlobalBgHoverGradientColor: {
+        type: 'string',
+        default: null,
+    },
+    megaMenuGlobalBgHoverCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    megaMenuGlobalBgHoverCustomGradientInputValue: {
+        type: 'string',
+        default: '',
+    },
+    /** Hover Image for fb megaMenu */
+    megaMenuGlobalBgHoverBackgroundImageUrl: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuGlobalBgHoverBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: '0.5', y: '0.5' },
+            Tablet: { x: '', y: '' },
+            Mobile: { x: '', y: '' }
+        }
+    },
+    megaMenuGlobalBgHoverBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuGlobalBgHoverBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuGlobalBgHoverBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    /** End Background for fb megaMenu */
 
-	/** Start Border */
-	megaMenuGlobalBorder: {
-		type: 'string',
-		default: 'none',
-	},
-	megaMenuGlobalBorderColorSwitcher : {
-		type: 'string',
-		default: 'normal'
-	},
-	megaMenuGlobalBorderColor: {
-		type: 'string',
-		default: ''
-	},
-	megaMenuGlobalBorderHoverColor: {
-		type: 'string',
-	},
-	megaMenuGlobalBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	megaMenuGlobalBorderDesktop: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderTablet: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderMobile: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderLink : {
-		type : 'boolean',
-		default: true
-	},
-	/** End Border */
+    /** Start Border */
+    megaMenuGlobalBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    megaMenuGlobalBorderColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    megaMenuGlobalBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    megaMenuGlobalBorderHoverColor: {
+        type: 'string',
+    },
+    megaMenuGlobalBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuGlobalBorderDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End Border */
 
-	/** Start Border Radius */
-	megaMenuGlobalBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	megaMenuGlobalBorderRadiusDesktop: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderRadiusTablet: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderRadiusMobile: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	megaMenuGlobalBorderRadiusLink : {
-		type : 'boolean',
-		default: true
-	},
-	/** End Border Radius */
+    /** Start Border Radius */
+    megaMenuGlobalBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuGlobalBorderRadiusDesktop: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderRadiusTablet: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderRadiusMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    megaMenuGlobalBorderRadiusLink: {
+        type: 'boolean',
+        default: true
+    },
+    /** End Border Radius */
 
-	/** Start Box Shadow */
+    /** Start Box Shadow */
     megaMenuGlobalBoxShadowSwitcher: {
         type: 'string',
         default: 'normal',
     },
-	megaMenuGlobalBoxShadowValues: {
+    megaMenuGlobalBoxShadowValues: {
         type: 'array',
         default: [],
     },
