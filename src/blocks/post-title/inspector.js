@@ -1038,7 +1038,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         <FB_InputControl
                             label={__("Link Rel", "frontis-blocks")}
                             value={rel}
-                            onChange={(value) => setAttributes({ rel: value })}
+                            onChangeValue={(value) => setAttributes({ rel: value })}
                         />
 
                         <p style={{ fontSize: "12px", color: "#888" }}>
