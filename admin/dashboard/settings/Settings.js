@@ -19,6 +19,8 @@ const Settings = () => {
     return acc;
   }, {});
 
+  const tabTitle = SettingsTabs.find(tab => tab.id === activeTab)?.label;
+
   const ActiveComponent = SettingsTabs.find(tab => tab.id === activeTab)?.component;
 
   return (
@@ -33,12 +35,12 @@ const Settings = () => {
       <div className="fb-blocks-settings-container">
         <div className="fb-blocks-settings-tabs">
           {Object.entries(groupedTabs).map(([groupName, tabs]) => (
-            <div key={groupName} className="fb-settings-group">
+            <div key={groupName} className="fb-settings-tabs-group">
               {/* Group Label */}
-              <h3 className="fb-settings-group-title">{groupName}</h3>
+              <h3 className="fb-settings-tabs-group-title heading-4">{groupName}</h3>
 
               {/* Tabs in Group */}
-              <div className="fb-settings-group-items">
+              <div className="fb-settings-tabs-group-items">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
@@ -55,6 +57,9 @@ const Settings = () => {
         </div>
 
         <div className="fb-blocks-settings-content">
+          <div className="fb-blocks-settings-content-header">
+            <h3 className="fb-blocks-settings-content-title heading-3">{tabTitle}</h3>
+          </div>
           {ActiveComponent ? <ActiveComponent /> : <p>Loading...</p>}
         </div>
       </div>

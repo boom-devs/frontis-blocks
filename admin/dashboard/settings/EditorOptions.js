@@ -3,6 +3,7 @@ import { TextControl } from '@wordpress/components';
 import Switch from 'rc-switch';
 import { useState, useEffect } from '@wordpress/element';
 import { toast } from 'react-toastify';
+import FBSwitch from '../../components/common/Switch';
 
 /**
  * NumberInputWithPx component
@@ -291,8 +292,8 @@ const EditorOptions = () => {
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Default Container Width', 'frontis-blocks')}</h3>
-          <p>{__('Set the default width for content in pixels', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Default Container Width', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Set the default width for content in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
           value={options.default_content_width}
@@ -307,8 +308,8 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Container Column Gap', 'frontis-blocks')}</h3>
-          <p>{__('Set the default gap between container columns in pixels', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Container Column Gap', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Set the default gap between container columns in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
           value={options.container_column_gap} 
@@ -323,8 +324,8 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Container Row Gap', 'frontis-blocks')}</h3>
-          <p>{__('Set the default gap between container rows in pixels', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Container Row Gap', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Set the default gap between container rows in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
           value={options.container_row_gap} 
@@ -339,8 +340,8 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Container Padding', 'frontis-blocks')}</h3>
-          <p>{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Container Padding', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Set the default padding for containers in pixels', 'frontis-blocks')}</p>
         </div>
         <NumberInputWithPx
           value={options.container_padding}
@@ -355,9 +356,9 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Automatic Block Recovery', 'frontis-blocks')}</h3>
-          <p>{__('Enable this to automatically recover any erroneous blocks that may occur on your web pages.', 'frontis-blocks')}</p>
-          <p>{__('This will save you time spent on clicking all those "Attempt Block Recovery" Buttons.', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Automatic Block Recovery', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Enable this to automatically recover any erroneous blocks that may occur on your web pages.', 'frontis-blocks')}</p>
+          <p className="p2">{__('This will save you time spent on clicking all those "Attempt Block Recovery" Buttons.', 'frontis-blocks')}</p>
         </div>
 
           <div className="fb-block-card-switch">
@@ -373,8 +374,8 @@ const EditorOptions = () => {
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Copy Paste Styles', 'frontis-blocks')}</h3>
-          <p>{__('Enable the "Copy Paste Styles" option to have the ability to copy & paste Spectra & Core Gutenberg Blocks Styles.', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Copy Paste Styles', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Enable the "Copy Paste Styles" option to have the ability to copy & paste Spectra & Core Gutenberg Blocks Styles.', 'frontis-blocks')}</p>
         </div>
 
           <div className="fb-block-card-switch">
@@ -385,13 +386,17 @@ const EditorOptions = () => {
                     className="fb-block-card-switch-input"
                 />
               </label>
+              <FBSwitch
+                checked={isCopyPasteStyleChecked}
+                onChange={() => handleCopyPasteStyle()}
+              />
           </div>
       </div>
 
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Custom CSS', 'frontis-blocks')}</h3>
-          <p>{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Custom CSS', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Enable custom CSS for blocks', 'frontis-blocks')}</p>
         </div>
         <p className="fb-button-upcoming">
           {__('Coming Soon', 'frontis-blocks')}

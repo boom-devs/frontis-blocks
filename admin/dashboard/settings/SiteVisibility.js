@@ -150,8 +150,8 @@ const SiteVisibility = () => {
     <div className="fb-blocks-settings-options">
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Coming Soon Mode', 'frontis-blocks')}</h3>
-          <p>{__('Activate coming soon page for visitors', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Coming Soon Mode', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Activate coming soon page for visitors', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch
@@ -166,7 +166,7 @@ const SiteVisibility = () => {
       {options.coming_soon_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
-            <h3>{__('Select Coming Soon Page', 'frontis-blocks')}</h3>
+            <h4 className="p1">{__('Select Coming Soon Page', 'frontis-blocks')}</h4>
           </div>
           {/* <div className="fb-option-input">
             <SelectControl
@@ -182,8 +182,8 @@ const SiteVisibility = () => {
       )}
       <div className="fb-option">
         <div className="fb-option-label">
-          <h3>{__('Enable Maintenance Mode', 'frontis-blocks')}</h3>
-          <p>{__('Activate maintenance mode for visitors', 'frontis-blocks')}</p>
+          <h4 className="p1">{__('Enable Maintenance Mode', 'frontis-blocks')}</h4>
+          <p className="p2">{__('Activate maintenance mode for visitors', 'frontis-blocks')}</p>
         </div>
         {/* <div className="fb-option-input">
           <Switch
@@ -198,7 +198,7 @@ const SiteVisibility = () => {
       {options.maintenance_mode && (
         <div className="fb-option">
           <div className="fb-option-label">
-            <h3>{__('Select Maintenance Page', 'frontis-blocks')}</h3>
+            <h4 className="p1">{__('Select Maintenance Page', 'frontis-blocks')}</h4>
           </div>
           {/* <div className="fb-option-input">
             <SelectControl
