@@ -15,13 +15,9 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
-	timezoneMode: {
-		type: 'string',
-		default: 'auto'
-	},
 	location: {
 		type: 'string',
-		default: 'Dhaka, Bangladesh' 
+		default: 'Main Location' 
 	},
 	timezone: {
 		type: 'string',
@@ -31,9 +27,9 @@ const attributes = {
 		type: 'array',
 		default: []
 	},
-	officeHours: {
-		type: 'number',
-		default: '10:00 AM - 6:00 PM'
+	timezoneMode: {
+		type: 'string',
+		default: 'auto'
 	},
 	startTime: {
 		type: 'string',
@@ -43,9 +39,9 @@ const attributes = {
 		type: 'string',
 		default: '6:00 PM'
 	},
-	title: {
+	officeHours: {
 		type: 'string',
-		default: 'Office Status'
+		default: '10:00 AM - 6:00 PM'
 	},
 	officeStatus: {
 		type: 'string',
@@ -53,7 +49,7 @@ const attributes = {
 	},
 	weekendDays: {
 		type: 'array',
-		default: [0, 6]
+		default: []
 	},
 	holidays: {
 		type: 'array',
@@ -66,7 +62,19 @@ const attributes = {
 	monthlySchedules: {
 		type: 'array',
 		default: []
-	}
+	},
+	countdownMessage: {
+		type: 'string',
+		default: 'Will be finished in {time}'
+	},
+	entityType: {
+		type: 'string',
+		default: 'office'
+	},
+	title: {
+		type: 'string',
+		default: 'Office Status'
+	},
 	
 	
 };
