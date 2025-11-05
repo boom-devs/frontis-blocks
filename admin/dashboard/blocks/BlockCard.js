@@ -5,22 +5,21 @@ import { Doc, Link } from '../../icons';
 import FBSwitch from '../../components/common/Switch';
 
 const BlockCard = ({ block, onChange }) => {
-    const [ isChecked, setIsChecked ] = useState(block.status === '1');
+    const [ isChecked, setIsChecked ] = useState(block.status === '1' ? true : false);
     
     const { isProActive } = window.frontisBlocksAdmin;
 
     useEffect(() => {
-        setIsChecked(block.status === '1');
+        setIsChecked(block.status === '1' ? true : false);
     }, [block.status]);
 
     const handleChange = (checked) => {
         onChange(block.slug, checked);
-        setIsChecked(checked);
     };
 
 
     if (block.child === 'true') {
-        return null; // You can return null if you don't want to render anything for child blocks
+        return null;
     }
 
     return (

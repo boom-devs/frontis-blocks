@@ -52,7 +52,8 @@ class Settings extends AjaxBase {
 			'upload_custom_icons',
 			'get_custom_icons_category',
 			'update_allowed_blocks',
-			'get_allowed_blocks'
+			'get_allowed_blocks',
+			'get_plugin_changelog',
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -716,5 +717,74 @@ class Settings extends AjaxBase {
 			update_option('fb_custom_icons', $custom_icons, true);
 			update_option('fb_custom_icons_name', $custom_icons_name, true);
 		}
+	}
+
+	// In your Settings class (already there)
+	public function get_plugin_changelog() {
+		// $this->check_permission();
+
+		$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_text_field($_POST['plugin_slug']) : 'frontis-blocks';
+
+		if (empty($plugin_slug)) {
+			wp_send_json_error(['message' => 'Plugin slug is required']);
+		}
+
+		$cache_key = 'fb_changelog_' . $plugin_slug;
+		$cached    = get_transient($cache_key);
+
+		if ($cached !== false) {
+			wp_send_json_success([
+				'changelog'     => $cached,
+				'source'        => 'cache',
+				'version'       => get_option('fb_plugin_version', 'N/A'),
+				'last_updated'  => get_option('fb_last_updated', 'N/A'),
+			]);
+		}
+
+		$response = wp_remote_get("https://api.wordpress.org/plugins/info/1.0/{$plugin_slug}.json", [
+			'timeout' => 15,
+		]);
+
+		if (is_wp_error($response)) {
+			wp_send_json_error(['message' => 'Failed to fetch: ' . $response->get_error_message()]);
+		}
+
+		$body = wp_remote_retrieve_body($response);
+		$data = json_decode($body, true);
+
+		if (!$data || empty($data['sections']['changelog'])) {
+			wp_send_json_error(['message' => 'Changelog not found.']);
+		}
+
+		$changelog = $this->format_changelog($data['sections']['changelog']);
+
+		// Save extra info
+		update_option('fb_plugin_version', $data['version'] ?? 'N/A');
+		update_option('fb_last_updated', $data['last_updated'] ?? 'N/A');
+
+		// Cache for 12 hours
+		set_transient($cache_key, $changelog, 12 * HOUR_IN_SECONDS);
+
+		wp_send_json_success([
+			'changelog'     => $changelog,
+			'source'        => 'api',
+			'version'       => $data['version'] ?? 'N/A',
+			'last_updated'  => $data['last_updated'] ?? 'N/A',
+		]);
+	}
+
+	private function format_changelog($changelog) {
+		$changelog = preg_replace_callback(
+			'/<h[3-4][^>]*>([^<]+)<\/h[3-4]>/i',
+			function ($m) {
+				return '<div class="changelog-version"><strong>' . trim(strip_tags($m[1])) . '</strong></div>';
+			},
+			$changelog
+		);
+
+		$changelog = preg_replace('/<ul>/', '<ul class="changelog-list">', $changelog);
+		$changelog = preg_replace('/<p[^>]*>\s*<\/p>|<br\s*\/?>/i', '', $changelog);
+
+		return '<div class="plugin-changelog">' . trim($changelog) . '</div>';
 	}
 }

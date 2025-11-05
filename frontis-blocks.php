@@ -37,3 +37,32 @@ function frontis_blocks(){
 
 frontis_blocks();
 
+// function get_wordpress_plugin_changelog( $plugin_slug ) {
+//     // Construct the API URL for the plugin
+//     $api_url = 'https://api.wordpress.org/plugins/info/1.0/' . $plugin_slug . '.json';
+
+//     // Make an HTTP request to the API
+//     $response = wp_remote_get( $api_url );
+
+//     // Check for request errors
+//     if ( is_wp_error( $response ) ) {
+//         return 'Error fetching plugin data: ' . $response->get_error_message();
+//     }
+
+//     // Decode the JSON response
+//     $plugin_data = json_decode( wp_remote_retrieve_body( $response ) );
+
+//     // Check if the changelog exists in the response
+//     if ( isset( $plugin_data->sections->changelog ) ) {
+//         return $plugin_data->sections->changelog;
+//     } else {
+//         return 'Changelog not found for this plugin.';
+//     }
+// }
+
+// // Example usage:
+// $plugin_slug = 'frontis-blocks'; // Replace with the actual plugin slug
+// $changelog = get_wordpress_plugin_changelog( $plugin_slug );
+
+// echo "<h2>Changelog for {$plugin_slug}:</h2>";
+// echo $changelog;

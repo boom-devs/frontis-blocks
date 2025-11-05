@@ -362,13 +362,10 @@ const EditorOptions = () => {
         </div>
 
           <div className="fb-block-card-switch">
-              <label className="fb-block-card-switch-label">
-                <Switch
-                    checked={isAutomaticBlockRecoveryChecked} 
-                    onChange={handleAutomaticBlockRecovery}
-                    className="fb-block-card-switch-input"
-                />
-              </label>
+              <FBSwitch
+                checked={isAutomaticBlockRecoveryChecked}
+                onChange={handleAutomaticBlockRecovery}
+              />
           </div>
       </div>
 
@@ -379,16 +376,9 @@ const EditorOptions = () => {
         </div>
 
           <div className="fb-block-card-switch">
-              <label className="fb-block-card-switch-label">
-                <Switch
-                    checked={isCopyPasteStyleChecked}
-                    onChange={handleCopyPasteStyle}
-                    className="fb-block-card-switch-input"
-                />
-              </label>
               <FBSwitch
                 checked={isCopyPasteStyleChecked}
-                onChange={() => handleCopyPasteStyle()}
+                onChange={handleCopyPasteStyle}
               />
           </div>
       </div>

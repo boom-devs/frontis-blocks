@@ -2,6 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import Switch from 'rc-switch';
 import { toast } from 'react-toastify';
+import FBSwitch from '../../components/common/Switch';
 
 const EditorEnhancements = () => {
   const [options, setOptions] = useState({
@@ -140,13 +141,10 @@ const EditorEnhancements = () => {
         </div>
 
           <div className="fb-block-card-switch">
-              <label className="fb-block-card-switch-label">
-                <Switch
-                    checked={isQuickActionBarChecked} 
-                    onChange={handleQuickActionBar}
-                    className="fb-block-card-switch-input"
-                />
-              </label>
+              <FBSwitch
+                checked={isQuickActionBarChecked}
+                onChange={handleQuickActionBar}
+              />
           </div>
       </div>
       
