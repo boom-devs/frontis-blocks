@@ -158,8 +158,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }, [postTitleFontFamily]);
     /** End Load Google Font */
 
-    /* =============================================================================================== */
-
     /* Start Global Padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
         const value = event.target.value;
@@ -511,30 +509,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const postGlobalMobileBorderRadiusWidth = `${postGlobalBorderRadiusMobile.top}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.right}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.bottom}${postGlobalBorderRadiusUnits.Mobile} ${postGlobalBorderRadiusMobile.left}${postGlobalBorderRadiusUnits.Mobile}`;
     /** End Global Border Radius */
 
-    // Generate ALL block styles with blockId targeting the HTML tag
     const allBlockStyle = useMemo(
-        () => `
-            /* Target the HTML tag with blockId */
-            .${blockId} .fb-post-title {
-                margin-block-start: 0;
-                margin-block-end: 0;
-                transition: all .3s ease;
-            }
-
-            /* Target the link inside the HTML tag */
-            .${blockId}.fb-post-title .fb-post-title-link {
-                color: inherit;
-                transition: all .3s ease !important;
-            }
-            
-            .${blockId} .fb-post-title {
-                ${titleAlignment.Desktop
-                ? `text-align: ${titleAlignment.Desktop};`
+    () => `
+        .${blockId}.fb-post-title-block{
+            display: flex;
+            ${titleAlignment.Desktop
+                ? `justify-content: ${titleAlignment.Desktop};`
                 : ""
             }
+        }
 
-                ${postTitleColor ? `color: ${postTitleColor};` : ""}
-                   ${postTitleGlobalTypoSwitcher.fontFamily === true &&
+        .${blockId} .fb-post-title {
+            margin-block-start: 0;
+            margin-block-end: 0;
+        }
+            
+        .${blockId} .fb-post-title,
+        .${blockId} .fb-post-title .fb-post-title-link{
+            ${postTitleColor ? `color: ${postTitleColor};` : ""}
+            ${postTitleGlobalTypoSwitcher.fontFamily === true &&
                 postTitleGlobalTypographyData.fontFamily
                 ? `font-family: ${postTitleGlobalTypographyData.fontFamily};`
                 : ""
@@ -575,52 +568,50 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : ""
             }
 
-						${postTitleGlobalTypoSwitcher.fontFamily === false &&
+            ${postTitleGlobalTypoSwitcher.fontFamily === false &&
                 postTitleFontFamily
                 ? `font-family: ${postTitleFontFamily};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.fontSize === false &&
+            ${postTitleGlobalTypoSwitcher.fontSize === false &&
                 postTitleFontSize.Desktop
                 ? `font-size: ${postTitleFontSize.Desktop}${postTitleFontSizeUnits.Desktop};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.fontWeight === false &&
+            ${postTitleGlobalTypoSwitcher.fontWeight === false &&
                 postTitleFontWeight
                 ? `font-weight: ${postTitleFontWeight};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.fontStyle === false &&
+            ${postTitleGlobalTypoSwitcher.fontStyle === false &&
                 postTitleFontStyle
                 ? `font-style: ${postTitleFontStyle};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.textTransform === false &&
+            ${postTitleGlobalTypoSwitcher.textTransform === false &&
                 postTitleTextTransform
                 ? `text-transform: ${postTitleTextTransform};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.textDecoration === false &&
+            ${postTitleGlobalTypoSwitcher.textDecoration === false &&
                 postTitleTextDecoration
                 ? `text-decoration: ${postTitleTextDecoration};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+            ${postTitleGlobalTypoSwitcher.letterSpacing === false &&
                 postTitleLetterSpacing.Desktop
                 ? `letter-spacing: ${postTitleLetterSpacing.Desktop}${postTitleLetterSpacingUnits.Desktop};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.lineHeight === false &&
+            ${postTitleGlobalTypoSwitcher.lineHeight === false &&
                 postTitleLineHeight.Desktop
                 ? `line-height: ${postTitleLineHeight.Desktop}${postTitleLineHeightUnits.Desktop};`
                 : ""
             }
-
-                         ${titleTextShadowCssValue
+            ${titleTextShadowCssValue
                 ? `text-shadow: ${titleTextShadowCssValue};`
                 : ""
             }
-
             ${titleTextStroke
                 ? `
                 ${titleTextStroke.Desktop
@@ -628,22 +619,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     : ""
                 }
                 ${titleTextStroke.Desktop
-                    ? `text-stroke: ${titleTextStroke.Desktop}px ${titleTextStrokeColor};`
-                    : ""
-                }
-            `
-                : ""
+                    ? `text-stroke: ${titleTextStroke.Desktop}px ${titleTextStrokeColor};` : ""
+                } 
+                ` : ""
             }
+            transition: all .3s ease;
+        }
 
-            }
-
-            .${blockId} .fb-post-title:hover{
-                ${postTitleHoverColor && !isLink
+        .${blockId} .fb-post-title:hover,
+        .${blockId} .fb-post-title .fb-post-title-link:hover{
+            ${postTitleHoverColor
                 ? `color: ${postTitleHoverColor};`
-                : ""
+                : "color: inherit;"
             }
 
-                  ${titleTextStrokeHoverColor
+            ${titleTextStrokeHoverColor
                 ? `
                 ${titleTextStroke.Desktop
                     ? `-webkit-text-stroke: ${titleTextStroke.Desktop}px ${titleTextStrokeHoverColor};`
@@ -653,48 +643,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ? `text-stroke: ${titleTextStroke.Desktop}px ${titleTextStrokeHoverColor};`
                     : ""
                 }
-            `
-                : ""
+                ` : ""
             }
-            }
+        }
 
-            .${blockId} .fb-post-title .fb-post-title-link{
-                ${postTitleGlobalTypoSwitcher.textDecoration === true &&
-                postTitleGlobalTypographyData.textDecoration
-                ? `text-decoration: ${postTitleGlobalTypographyData.textDecoration};`
-                : ""
-            }
-			
-                ${postTitleGlobalTypoSwitcher.textDecoration === false &&
-                postTitleTextDecoration
-                ? `text-decoration: ${postTitleTextDecoration};`
-                : ""
-            }
-            }
+        /** Advance Control Global Style - Desktop */
+        .${blockId}.fb-post-title-block{
+            margin-block-start: 0;
 
-            .${blockId} .fb-post-title .fb-post-title-link:hover {
-                ${postTitleHoverColor
-                ? `color: ${postTitleHoverColor};`
-                : "color: inherit;"
-            }
-            }
-
-
-            /** Advance Control Global Style - Desktop */
-
-            .${blockId}.fb-post-title-block{
-                margin-block-start: 0;
-
-                ${postTitlePositionType === "default"
+            ${postTitlePositionType === "default"
                 ? `position: relative;`
                 : ""
             }
-                ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative"
                 ? `width: 100%;`
                 : ""
             }
-                ${postTitlePositionType !== "default"
+            ${postTitlePositionType !== "default"
                 ? `position: ${postTitlePositionType};`
                 : ""
             }
@@ -726,25 +692,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `bottom: ${postTitleVRBottomOffset.Desktop}${postTitleVRBottomOffsetUnits.Desktop};`
                 : ""
             }
-
-                ${postTitleGlobalZIndex.Desktop
+            ${postTitleGlobalZIndex.Desktop
                 ? `z-index: ${postTitleGlobalZIndex.Desktop};`
                 : ""
             }
-                ${postTitleOverflow !== "default"
+            ${postTitleOverflow !== "default"
                 ? `overflow: ${postTitleOverflow};`
                 : ""
             }
+            transition: all 0.3s ease;
+        }
 
-                transition: all 0.3s ease;
-            }
-
-            .${blockId} .fb-post-title{
-                ${postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
+        .${blockId} .fb-post-title{
+            ${postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
                 ? `padding: ${postGlobalDesktopPaddingWidth};`
                 : ""
             }
-				${postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
+            ${postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top
                 ? `margin: ${postGlobalDesktopMarginWidth};`
                 : ""
             }
@@ -767,127 +731,117 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `box-shadow: ${postGlobalBoxShadowCssValue} !important;`
                 : ""
             }
-						${postGlobalNormalBackgroundType === "gradient"
-                ? `  
-                ${postGlobalNormalCustomGradientSwitcher &&
-                    postGlobalNormalCustomGradientInputValue
-                    ? `background: ${postGlobalNormalCustomGradientInputValue};`
-                    : `background: ${postGlobalNormalGradientColor};`
-                }
-            `
-                : `
-                ${postGlobalNormalClassicColor
+            ${postGlobalNormalBackgroundType === "gradient"
+                ? 
+                `${postGlobalNormalCustomGradientSwitcher &&
+                        postGlobalNormalCustomGradientInputValue
+                        ? `background: ${postGlobalNormalCustomGradientInputValue};`
+                        : `background: ${postGlobalNormalGradientColor};`
+                }`
+                : 
+                `${postGlobalNormalClassicColor
                     ? `background: ${postGlobalNormalClassicColor};`
                     : ""
-                }
-            `
+                }`
             }
-            }
+        }
 
-
-            .${blockId} .fb-post-title:hover {
-              ${postGlobalHoverBackgroundType === "gradient"
-                ? `  
-                ${postGlobalHoverCustomGradientSwitcher &&
+        .${blockId} .fb-post-title:hover {
+            ${postGlobalHoverBackgroundType === "gradient"
+                ? 
+                `${postGlobalHoverCustomGradientSwitcher &&
                     postGlobalHoverCustomGradientInputValue
                     ? `background: ${postGlobalHoverCustomGradientInputValue};`
                     : `background: ${postGlobalHoverGradientColor};`
-                }
-            `
-                : `
-                ${postGlobalHoverClassicColor
+                }`
+                : 
+                `${postGlobalHoverClassicColor
                     ? `background: ${postGlobalHoverClassicColor};`
                     : ""
                 }
-								  ${postGlobalBorderHoverColor
+                ${postGlobalBorderHoverColor
                     ? `border-color: ${postGlobalBorderHoverColor};`
                     : ""
                 }
                 ${postGlobalBoxShadowHoverCssValue
                     ? `box-shadow: ${postGlobalBoxShadowHoverCssValue}!important;`
                     : ""
-                }
-            `
+                }`
             }
-            }
+        }
 
-
-
-            /* ====================================== Responsive styles for tablet ====================================== */
-            @media only screen and (max-width: 1024px) {
-                .${blockId} .fb-post-title {
-                    ${titleAlignment.Tablet
-                ? `text-align: ${titleAlignment.Tablet};`
+    /* Responsive styles for tablet ====================================== */
+    @media only screen and (max-width: 1024px) {
+        .${blockId}.fb-post-title-block {
+            ${titleAlignment.Tablet
+                ? `justify-content: ${titleAlignment.Tablet};`
                 : ""
             }
-                }
+        }
 
-                .${blockId} .fb-post-title {
-                                                    ${postTitleGlobalTypoSwitcher.fontSize ===
+        .${blockId} .fb-post-title {
+            ${postTitleGlobalTypoSwitcher.fontSize ===
                 false &&
                 postTitleFontSize.Tablet
                 ? `font-size: ${postTitleFontSize.Tablet}${postTitleFontSizeUnits.Tablet};`
                 : ""
             }
-                ${postTitleGlobalTypoSwitcher.letterSpacing === false &&
+            ${postTitleGlobalTypoSwitcher.letterSpacing === false &&
                 postTitleLetterSpacing.Tablet
                 ? `letter-spacing: ${postTitleLetterSpacing.Tablet}${postTitleLetterSpacingUnits.Tablet};`
                 : ""
             }
-                ${postTitleGlobalTypoSwitcher.lineHeight === false &&
+            ${postTitleGlobalTypoSwitcher.lineHeight === false &&
                 postTitleLineHeight.Tablet
                 ? `line-height: ${postTitleLineHeight.Tablet}${postTitleLineHeightUnits.Tablet};`
                 : ""
             }
-
-               ${titleTextStroke
-                ? `
-                    ${titleTextStroke.Tablet
+            ${titleTextStroke
+                ? 
+                `${titleTextStroke.Tablet
                     ? `-webkit-text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeColor};`
                     : ""
                 }
-                    ${titleTextStroke.Tablet
+                ${titleTextStroke.Tablet
                     ? `text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeColor};`
                     : ""
-                }
-                `
+                }`
                 : ""
             }
-                }
+        }
 
-                .${blockId} .fb-post-title:hover{
-                ${titleTextStrokeHoverColor
-                ? `
-                    ${titleTextStroke.Tablet
+        .${blockId} .fb-post-title:hover{
+            ${titleTextStrokeHoverColor
+                ? 
+                `${titleTextStroke.Tablet
                     ? `-webkit-text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeHoverColor};`
                     : ""
                 }
-                    ${titleTextStroke.Tablet
+                ${titleTextStroke.Tablet
                     ? `text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeHoverColor};`
                     : ""
-                }
-                `
+                }`
                 : ""
             }
-                }
+        }
 
-                /** Advance Control Global Style - Tablet */
-                .${blockId}.fb-post-title-block{
-                   ${postTitlePositionType !== "default" &&
+        /** Advance Control Global Style - Tablet */
+        .${blockId}.fb-post-title-block{
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleHZOrientationType === "left" &&
                 postTitleHZLeftOffset.Tablet !== undefined
                 ? `left: ${postTitleHZLeftOffset.Tablet}${postTitleHZLeftOffsetUnits.Tablet};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleHZOrientationType === "right" &&
                 postTitleHZRightOffset.Tablet !== undefined
                 ? `right: ${postTitleHZRightOffset.Tablet}${postTitleHZRightOffsetUnits.Tablet};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleVROrientationType === "top" &&
                 postTitleVRTopOffset.Tablet !== undefined
@@ -901,44 +855,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `bottom: ${postTitleVRBottomOffset.Tablet}${postTitleVRBottomOffsetUnits.Tablet};`
                 : ""
             }
-                    ${postTitleGlobalZIndex.Tablet
+            ${postTitleGlobalZIndex.Tablet
                 ? `z-index: ${postTitleGlobalZIndex.Tablet};`
                 : ""
             }
 
-            }
+        }
 
-            .${blockId} .fb-post-title {
-              	${postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top
+        .${blockId} .fb-post-title {
+            ${postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top
                 ? `padding: ${postGlobalTabletPaddingWidth};`
                 : ""
             }
-								${postGlobalTabletMarginWidth && postGlobalMarginTablet.top
+            ${postGlobalTabletMarginWidth && postGlobalMarginTablet.top
                 ? `margin: ${postGlobalTabletMarginWidth};`
                 : ""
             }
-
-                ${postGlobalTabletBorderWidth && postGlobalBorderTablet.top
+            ${postGlobalTabletBorderWidth && postGlobalBorderTablet.top
                 ? `border-width: ${postGlobalTabletBorderWidth};`
                 : ""
             }
-                ${postGlobalTabletBorderRadiusWidth &&
+            ${postGlobalTabletBorderRadiusWidth &&
                 postGlobalBorderRadiusTablet.top
                 ? `border-radius: ${postGlobalTabletBorderRadiusWidth}!important;`
                 : ""
             }
-            }
+        }
 
-            }
+    } /* End Responsive Style For Tablet */
 
-            /* ====================================== Responsive styles for mobile ====================================== */
-            @media (max-width: 767px) {
-                .${blockId} .fb-post-title {
-                    ${titleAlignment.Mobile
-                ? `text-align: ${titleAlignment.Mobile};`
+    /* Responsive styles for mobile ====================================== */
+    @media (max-width: 767px) {
+        .${blockId}.fb-post-title-block{
+            ${titleAlignment.Mobile
+                ? `justify-content: ${titleAlignment.Mobile};`
                 : ""
-            }
-                    					  ${postTitleGlobalTypoSwitcher.fontSize ===
+            }            
+        }
+
+        .${blockId} .fb-post-title,
+        .${blockId} .fb-post-title .fb-post-title-link {
+            ${postTitleGlobalTypoSwitcher.fontSize ===
                 false && postTitleFontSize.Mobile
                 ? `font-size: ${postTitleFontSize.Mobile}${postTitleFontSizeUnits.Mobile};`
                 : ""
@@ -948,109 +905,100 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `letter-spacing: ${postTitleLetterSpacing.Mobile}${postTitleLetterSpacingUnits.Mobile};`
                 : ""
             }
-						${postTitleGlobalTypoSwitcher.lineHeight === false &&
+            ${postTitleGlobalTypoSwitcher.lineHeight === false &&
                 postTitleLineHeight.Mobile
                 ? `line-height: ${postTitleLineHeight.Mobile}${postTitleLineHeightUnits.Mobile};`
                 : ""
             }
-
-              ${titleTextStroke
-                ? `
-                    ${titleTextStroke.Mobile
+            ${titleTextStroke
+                ? 
+                `${titleTextStroke.Mobile
                     ? `-webkit-text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeColor};`
                     : ""
                 }
-                    ${titleTextStroke.Mobile
+                ${titleTextStroke.Mobile
                     ? `text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeColor};`
                     : ""
-                }
-                `
+                }`
                 : ""
             }
-                }
+        }
 
-                .${blockId} .fb-post-title:hover{
-                 ${titleTextStrokeHoverColor
-                ? `
-                    ${titleTextStroke.Mobile
+        .${blockId} .fb-post-title:hover,
+        .${blockId} .fb-post-title .fb-post-title-link:hover{
+            ${titleTextStrokeHoverColor
+                ? 
+                `${titleTextStroke.Mobile
                     ? `-webkit-text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeHoverColor};`
                     : ""
                 }
-                    ${titleTextStroke.Mobile
+                ${titleTextStroke.Mobile
                     ? `text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeHoverColor};`
                     : ""
-                }
-                `
+                }`
                 : ""
             }
-                }
+        }
 
-                /** Advance Control Global Style - Mobile */
-                .${blockId}.fb-post-title-block{
-                    ${postTitlePositionType !== "default" &&
+        /** Advance Control Global Style - Mobile */
+        .${blockId}.fb-post-title-block{
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleHZOrientationType === "left" &&
                 postTitleHZLeftOffset.Mobile !== undefined
                 ? `left: ${postTitleHZLeftOffset.Mobile}${postTitleHZLeftOffsetUnits.Mobile};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleHZOrientationType === "right" &&
                 postTitleHZRightOffset.Mobile !== undefined
                 ? `right: ${postTitleHZRightOffset.Mobile}${postTitleHZRightOffsetUnits.Mobile};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleVROrientationType === "top" &&
                 postTitleVRTopOffset.Mobile !== undefined
                 ? `top: ${postTitleVRTopOffset.Mobile}${postTitleVRTopOffsetUnits.Mobile};`
                 : ""
             }
-                    ${postTitlePositionType !== "default" &&
+            ${postTitlePositionType !== "default" &&
                 postTitlePositionType !== "relative" &&
                 postTitleVROrientationType === "bottom" &&
                 postTitleVRBottomOffset.Mobile !== undefined
                 ? `bottom: ${postTitleVRBottomOffset.Mobile}${postTitleVRBottomOffsetUnits.Mobile};`
                 : ""
             } 
-                    ${postTitleGlobalZIndex.Mobile
+            ${postTitleGlobalZIndex.Mobile
                 ? `z-index: ${postTitleGlobalZIndex.Mobile};`
                 : ""
             }
 
-                }
+        }
 
-            .${blockId} .fb-post-title {
-            
-            	${postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top
+        .${blockId} .fb-post-title {    
+            ${postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top
                 ? `padding: ${postGlobalMobilePaddingWidth}`
                 : ""
             }
-							${postGlobalMobileMarginWidth && postGlobalMarginMobile.top
+            ${postGlobalMobileMarginWidth && postGlobalMarginMobile.top
                 ? `margin: ${postGlobalMobileMarginWidth}`
                 : ""
             }
-
-              ${postGlobalMobileBorderWidth && postGlobalBorderMobile.top
+            ${postGlobalMobileBorderWidth && postGlobalBorderMobile.top
                 ? `border-width: ${postGlobalMobileBorderWidth};`
                 : ""
             }
-              ${postGlobalMobileBorderRadiusWidth &&
+            ${postGlobalMobileBorderRadiusWidth &&
                 postGlobalBorderRadiusMobile.top
                 ? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;`
                 : ""
             }
-
-            }
-
-
-
-
-            }
-        `,
-        [attributes],
+        }
+    } /* End Responsive Style For Mobile */
+`,
+    [attributes],
     );
 
     const customCss = getCustomCss(postTitleGlobalCustomCSS, `.${blockId}`);
@@ -1103,13 +1051,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </BaseControl>
 
             <FB_HtmlTagControl
-                label={__("Title Tag", "frontis-blocks")}
+                label={__("Tag", "frontis-blocks")}
                 globalHtmlTag={postTitleTag}
                 setGlobalHtmlTag={(value) => setAttributes({ postTitleTag: value })}
             />
 
             <RangeControl
-                label={__("Title Word Limit", "frontis-blocks")}
+                label={__("Word Limit", "frontis-blocks")}
                 value={titleExcerptLength}
                 onChange={(value) =>
                     setAttributes({

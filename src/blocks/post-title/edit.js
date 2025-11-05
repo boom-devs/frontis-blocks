@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect } from "@wordpress/element";
-import { useBlockProps, InspectorControls } from "@wordpress/block-editor";
+import { useEffect } from "@wordpress/element";
+import { useBlockProps } from "@wordpress/block-editor";
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
