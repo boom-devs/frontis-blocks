@@ -120,7 +120,7 @@ export default function SortableItem({
 
                     {(item.patternSlug) && (
                         <BaseControl label={__("Icon", "frontis-blocks")}>
-                            <FBIconPicker value={item.megaMenuIcon || 'angle-down'} setIconHandler={iconHandler} />
+                            <FBIconPicker value={item.megaMenuIcon || 'angle-down'} />
                         </BaseControl>
                     )}
 
