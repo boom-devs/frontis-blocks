@@ -17,7 +17,7 @@ const attributes = {
 	},
 	location: {
 		type: 'string',
-		default: 'Main Location' 
+		default: 'Set Location Manually' 
 	},
 	timezone: {
 		type: 'string',
