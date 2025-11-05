@@ -139,10 +139,13 @@ const AssetsGeneration = () => {
 			</div>
 			<div className={`fb-option-input ${isLoading ? 'fb-assets-generation-button-wrapper' : ''}`}>
 				<Button
-					className={`fb-button-primary ${isLoading ? 'fb-assets-generation-button' : ''}`}
+					className={`fb-button-error ${isLoading ? 'fb-assets-generation-button' : ''}`}
 					onClick={handleAssetGeneration}
 					disabled={isLoading}
 				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+						<path d="M8.0013 2.66602V0.666016L5.33464 3.33268L8.0013 5.99935V3.99935C10.208 3.99935 12.0013 5.79268 12.0013 7.99935C12.0013 8.67268 11.8346 9.31268 11.5346 9.86602L12.508 10.8393C13.028 10.0193 13.3346 9.04602 13.3346 7.99935C13.3346 5.05268 10.948 2.66602 8.0013 2.66602ZM8.0013 11.9993C5.79464 11.9993 4.0013 10.206 4.0013 7.99935C4.0013 7.32602 4.16797 6.68602 4.46797 6.13268L3.49464 5.15935C2.97464 5.97935 2.66797 6.95268 2.66797 7.99935C2.66797 10.946 5.05464 13.3327 8.0013 13.3327V15.3327L10.668 12.666L8.0013 9.99935V11.9993Z" fill="white"/>
+					</svg>
 					{__('Regenerate Asset', 'frontis-blocks')}
 				</Button>
 				{isLoading && (
