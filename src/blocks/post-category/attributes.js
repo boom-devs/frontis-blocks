@@ -117,7 +117,7 @@ const attributes = {
 
 	readMoreSwitcher: {
 		type: "boolean",
-		default: true,
+		default: false,
 	},
 	readMoreText: {
 		type: "string",
