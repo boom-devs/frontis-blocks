@@ -79,8 +79,8 @@ const Blocks = () => {
 			},
 			success: function (response) {
 				if (response.success) {
-					toast.success(__('Blocks saved successfully', 'frontis-blocks'));
 					setBlocks(updatedBlocks); // Update the local state with the saved blocks
+					toast.success(__('Blocks saved successfully', 'frontis-blocks'));
 				} else {
 					toast.error(__('Failed to save blocks', 'frontis-blocks'));
 				}
