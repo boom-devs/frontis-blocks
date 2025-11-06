@@ -156,7 +156,7 @@ const Blocks = () => {
 			<div className="fb-blocks-header">
 				<div className="fb-blocks-header-left">
 					<div className="fb-video-banner-header">
-						<h1 className='heading-2'>{__('Global Control', 'frontis-blocks')}</h1>
+						<h1 className='heading-1'>{__('Global Control', 'frontis-blocks')}</h1>
 						<p className='p1'>{__('Global control allows users to easily enable or disable all available blocks together, simplifying block management.', 'frontis-blocks')}</p>
 					</div>
 					<div className='fb-blocks-tab-header'>

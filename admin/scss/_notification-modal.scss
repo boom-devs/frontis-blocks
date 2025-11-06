@@ -5,7 +5,7 @@
     top: 32px;
     left: 0;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 32px);
     background: #0B0C0E66;
     display: flex;
     align-items: flex-start;
@@ -76,6 +76,13 @@
         border-radius: 3px;
     }
 
+    .changelog-current-version {
+        font-family: $body-font-family;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: $neutral-color-950;
+    }
     .changelog-version {
         font-family: $heading-font-family;
         font-size: 20px;
@@ -105,74 +112,6 @@
         color: $neutral-color-700;
     }
 
-}
-
-/* Changelog Styling */
-.plugin-changelog {
-    font-family: $heading-font-family;
-}
-
-.changelog-entry {
-    margin-bottom: 32px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid #eee;
-
-    &:last-child {
-        border-bottom: none;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-}
-
-.changelog-entry-date {
-    font-size: 13px;
-    color: #666;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.changelog-entry-title {
-    margin: 0;
-    font-size: 18px;
-    font-weight: 600;
-    color: #1a1a1a;
-    line-height: 1.3;
-}
-
-.changelog-entry-content {
-    color: #333;
-
-    .section-title {
-        display: block;
-        margin: 16px 0 8px;
-        font-size: 15px;
-        font-weight: 600;
-        color: #1a1a1a;
-    }
-
-    .changelog-list {
-        margin: 12px 0;
-        padding-left: 0;
-        list-style: none;
-
-        li {
-            margin-bottom: 6px;
-            display: flex;
-            align-items: flex-start;
-            line-height: 1.5;
-
-            .bullet {
-                color: #2271b1;
-                font-weight: bold;
-                margin-right: 8px;
-                flex-shrink: 0;
-            }
-        }
-    }
-
-    .changelog-paragraph {
-        margin: 12px 0;
-    }
 }
 
 /* Loading & Error */

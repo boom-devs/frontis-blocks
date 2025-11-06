@@ -120,11 +120,16 @@ const Integration = () => {
 
   return (
     <div className="fb-blocks-integration">
+      <div className="fb-video-banner-header">
+        <h1 className='heading-1'>{__('Integration', 'frontis-blocks')}</h1>
+        <p className='p1'>{__("Here, you can customize and manage your plugin's configurations to enhance your plugin's functionality.", 'frontis-blocks')}</p>
+      </div>
+      
       <div className="integration-section">
         <div className="section-content">
           <div className="section-left">
-            <h2>{__('Google reCAPTCHA', 'frontis-blocks')}</h2>
-            <p className="description">
+            <h2 className="heading-3">{__('Google reCAPTCHA', 'frontis-blocks')}</h2>
+            <p className="description p1">
               {__('Google reCAPTCHA is a free service that protects your website from spam and abuse.', 'frontis-blocks')}
             </p>
           </div>
@@ -180,8 +185,8 @@ const Integration = () => {
       <div className="integration-section">
         <div className="section-content">
           <div className="section-left">
-            <h2>{__('Google Maps', 'frontis-blocks')}</h2>
-            <p className="description">
+            <h2 className="heading-3">{__('Google Maps', 'frontis-blocks')}</h2>
+            <p className="description p1">
               {__('Integrate Google Maps into your website to display interactive maps and location-based information.', 'frontis-blocks')}
             </p>
           </div>
@@ -206,8 +211,8 @@ const Integration = () => {
       <div className="integration-section">
         <div className="section-content">
           <div className="section-left">
-            <h2>{__('Instagram Feed', 'frontis-blocks')}</h2>
-            <p className="description">
+            <h2 className="heading-3">{__('Instagram Feed', 'frontis-blocks')}</h2>
+            <p className="description p1">
               {__('Display your latest Instagram posts on your website with this integration.', 'frontis-blocks')}
             </p>
           </div>
