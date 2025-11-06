@@ -64,9 +64,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							className="fb-post-title-link"
 							href="#"
 							rel={rel}
-							target={linkTarget}
+							target={''}
 						>
-							{/* {postTitle} */}
 							{trimWords(postTitle, titleExcerptLength || 0)}
 						</a>
 					) : (

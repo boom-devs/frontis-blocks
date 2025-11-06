@@ -76,8 +76,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	let imageAlt = "";
 
 	if (featuredImage) {
-		// Use the selected image size for the preview (e.g., large, medium)
-		const size = imageSize || "large"; // Default to 'large' if no size selected
+		const size = imageSize || "large";
 		imageUrl =
 			featuredImage.media_details.sizes[size]?.source_url ||
 			featuredImage.source_url;
@@ -110,7 +109,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									className="fb-post-featured-image-link"
 									href="#"
 									rel={rel}
-									target={linkTarget}
+									target={''}
 								>
 									<img
 										src={imageUrl}
