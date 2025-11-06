@@ -712,7 +712,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all 0.3s ease;
         }
 
-        .${blockId} .fb-post-title{
+        .${blockId}.fb-post-title-block{
             ${postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top
                 ? `padding: ${postGlobalDesktopPaddingWidth};`
                 : ""
@@ -755,7 +755,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         }
 
-        .${blockId} .fb-post-title:hover {
+        .${blockId}.fb-post-title-block:hover {
             ${postGlobalHoverBackgroundType === "gradient"
                 ? 
                 `${postGlobalHoverCustomGradientSwitcher &&
@@ -871,7 +871,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         }
 
-        .${blockId} .fb-post-title {
+        .${blockId}.fb-post-title-block {
             ${postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top
                 ? `padding: ${postGlobalTabletPaddingWidth};`
                 : ""
@@ -986,7 +986,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         }
 
-        .${blockId} .fb-post-title {    
+        .${blockId}.fb-post-title-block {    
             ${postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top
                 ? `padding: ${postGlobalMobilePaddingWidth}`
                 : ""
