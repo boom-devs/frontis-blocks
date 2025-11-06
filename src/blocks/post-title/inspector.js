@@ -510,7 +510,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Global Border Radius */
 
     const allBlockStyle = useMemo(
-    () => `
+        () => `
         .${blockId}.fb-post-title-block{
             display: flex;
             ${titleAlignment.Desktop
@@ -524,14 +524,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             margin-block-end: 0;
         }
 
-        ${isLink ? 
-            `.${blockId} .fb-post-title .fb-post-title-link:focus{
+        ${isLink ?
+                `.${blockId} .fb-post-title .fb-post-title-link:focus{
                 color: inherit;
                 box-shadow: none;
                 outline: inherit;
             }`
-            : ""
-        }
+                : ""
+            }
 
         .${blockId} .fb-post-title,
         .${blockId} .fb-post-title .fb-post-title-link{
@@ -741,13 +741,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : ""
             }
             ${postGlobalNormalBackgroundType === "gradient"
-                ? 
+                ?
                 `${postGlobalNormalCustomGradientSwitcher &&
-                        postGlobalNormalCustomGradientInputValue
-                        ? `background: ${postGlobalNormalCustomGradientInputValue};`
-                        : `background: ${postGlobalNormalGradientColor};`
+                    postGlobalNormalCustomGradientInputValue
+                    ? `background: ${postGlobalNormalCustomGradientInputValue};`
+                    : `background: ${postGlobalNormalGradientColor};`
                 }`
-                : 
+                :
                 `${postGlobalNormalClassicColor
                     ? `background: ${postGlobalNormalClassicColor};`
                     : ""
@@ -757,13 +757,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb-post-title-block:hover {
             ${postGlobalHoverBackgroundType === "gradient"
-                ? 
+                ?
                 `${postGlobalHoverCustomGradientSwitcher &&
                     postGlobalHoverCustomGradientInputValue
                     ? `background: ${postGlobalHoverCustomGradientInputValue};`
                     : `background: ${postGlobalHoverGradientColor};`
                 }`
-                : 
+                :
                 `${postGlobalHoverClassicColor
                     ? `background: ${postGlobalHoverClassicColor};`
                     : ""
@@ -806,7 +806,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : ""
             }
             ${titleTextStroke
-                ? 
+                ?
                 `${titleTextStroke.Tablet
                     ? `-webkit-text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeColor};`
                     : ""
@@ -821,7 +821,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId} .fb-post-title:hover{
             ${titleTextStrokeHoverColor
-                ? 
+                ?
                 `${titleTextStroke.Tablet
                     ? `-webkit-text-stroke: ${titleTextStroke.Tablet}px ${titleTextStrokeHoverColor};`
                     : ""
@@ -920,7 +920,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : ""
             }
             ${titleTextStroke
-                ? 
+                ?
                 `${titleTextStroke.Mobile
                     ? `-webkit-text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeColor};`
                     : ""
@@ -936,7 +936,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         .${blockId} .fb-post-title:hover,
         .${blockId} .fb-post-title .fb-post-title-link:hover{
             ${titleTextStrokeHoverColor
-                ? 
+                ?
                 `${titleTextStroke.Mobile
                     ? `-webkit-text-stroke: ${titleTextStroke.Mobile}px ${titleTextStrokeHoverColor};`
                     : ""
@@ -1007,7 +1007,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     } /* End Responsive Style For Mobile */
 `,
-    [attributes],
+        [attributes],
     );
 
     const customCss = getCustomCss(postTitleGlobalCustomCSS, `.${blockId}`);
