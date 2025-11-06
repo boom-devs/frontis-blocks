@@ -75,6 +75,14 @@ const attributes = {
 		type: 'string',
 		default: 'Office Status'
 	},
+	useMultipleLocations: {
+        type: 'boolean',
+        default: false
+    },
+    officeLocations: {
+        type: 'array',
+        default: []
+    }
 	
 	
 };
