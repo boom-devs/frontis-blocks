@@ -29,7 +29,6 @@ export default function SortableItem({
         }
     }, [item.megaMenuIcon]);
 
-    console.log('item in sortable', item.megaMenuIconFrontend);
     const toggleOpen = () => setIsOpen(!isOpen);
 
     const iconHandler = (IconName) => {
@@ -120,10 +119,9 @@ export default function SortableItem({
 
                     {(item.patternSlug) && (
                         <BaseControl label={__("Icon", "frontis-blocks")}>
-                            <FBIconPicker value={item.megaMenuIcon || 'angle-down'} />
+                            <FBIconPicker value={item.megaMenuIcon || 'angle-down'} setIconHandler={iconHandler} />
                         </BaseControl>
                     )}
-
                 </div>
             )}
         </li>

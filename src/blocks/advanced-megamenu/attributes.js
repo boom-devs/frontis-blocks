@@ -428,6 +428,7 @@ export default {
             {
                 id: 'item-1',
                 megaMenuIcon: 'angle-down',
+                label: 'Item 1',
             },
         ],
         items: {
@@ -440,6 +441,10 @@ export default {
                 megaMenuIcon: {
                     type: 'string',
                     default: 'angle-down'
+                },
+                label: {
+                    type: 'string',
+                    default: 'Item 1'
                 }
             }
         }
