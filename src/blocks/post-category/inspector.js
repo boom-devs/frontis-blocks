@@ -2826,6 +2826,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						display: flex;
 						flex-direction: column;
 						justify-content: space-between;
+						word-break: break-all;
         }
 
 				.${blockId} .fb_post_category_container .fb-taxonomy-item{
