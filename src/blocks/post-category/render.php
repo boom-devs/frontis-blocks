@@ -164,7 +164,7 @@ if (!function_exists('fb_sort_taxonomy_terms_hierarchically')) {
 
 // Improved hierarchical list builder
 if (!function_exists('fb_build_taxonomy_hierarchy')) {
-    function fb_build_taxonomy_hierarchy($terms, $parent_id = 0, $level = 0, $args)
+    function fb_build_taxonomy_hierarchy($terms, $parent_id = 0, $level = 0, $args = array())
     {
         $children = array_filter($terms, function ($term) use ($parent_id) {
             return $term->parent == $parent_id;
