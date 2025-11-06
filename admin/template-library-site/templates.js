@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { __ } from "@wordpress/i18n";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
-import LibraryContent from "./library-content";
 
 import { usePostDataMutation } from './services/laravelapi';
 
@@ -35,8 +34,7 @@ const PatternLibraryButton = () => {
         sites: '',
         templatelibrary: ''
     });
-    const [libraryData, setLibraryData] = useState([]);
-    const [savedItems, setSavedItems] = useState([]);
+
     const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const [currentPage, setCurrentPage] = useState({
         patterns: 1,
@@ -52,13 +50,11 @@ const PatternLibraryButton = () => {
         patterns: { name: "Patterns", items: [], categories: [], pagination: {}, tags: [] },
         pages: { name: "Pages", items: [], categories: [], pagination: {}, tags: [] },
         sites: { name: "Sites", items: [], categories: [], pagination: {}, tags: [] },
-        templatelibrary: { name: "Template Library", items: [], categories: [], pagination: {} },
     });
     const [noneFilterData, setNoneFilterData] = useState({
         patterns: [],
         pages: [],
-        sites: [],
-        templatelibrary: []
+        sites: []
     });
     
 
@@ -91,41 +87,6 @@ const PatternLibraryButton = () => {
                 });
             }
         }
-    };
-
-    const getSavedTemplatesData = async (value, email, license_key, page, tag, search, category, isPro, savedTemplate) => {
-        try {
-            const response = await patternsData({
-                endpoint: value,
-                body: {
-                    email: email,
-                    license_key: '',
-                    page: page,
-                    search: search,
-                    type: savedTemplate
-                },
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            }).unwrap();
-
-            return response;
-        } catch (err) {
-            if(err?.data?.status === 'error') {
-                toast.error(err.data.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                });
-            }
-        }
-    };
-
-    const alreadySaved = (savedItems, id, activeTab) => {
-        if (activeTab !== 'templatelibrary') {
-            return savedItems.some(item => item?.id === id && item?.activeTab === 'templatelibrary');
-        }
-
-        return savedItems.some(item => item?.id === id && item?.activeTab === activeTab);
     };
 
     const handlePageChange = (tab, page) => {
@@ -167,12 +128,6 @@ const PatternLibraryButton = () => {
         setActiveCategory(newState);
 
         fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value);
-    }
-
-    const hangleChangeSavedTemplateType = (value) => {
-        setSavedTemplateType(value);
-
-        fetchData(activeTab, 1, value, searchText, activeCategory[activeTab]);
     }
 
     const handleTemplates = (value) => {
