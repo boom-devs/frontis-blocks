@@ -2558,7 +2558,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				premadeStyle === "style-1"
 					? `
 				.${blockId} .fb-taxonomy-grid {
-					grid-template-columns: repeat(4, 1fr);
+					grid-template-columns: repeat(3, 1fr);
 				}
 
 				.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
@@ -2643,9 +2643,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					premadeStyle === "style-3"
 						? `
 
-
 					.${blockId} .fb-taxonomy-grid {
-						grid-template-columns: repeat(4, 1fr);
+						grid-template-columns: repeat(3, 1fr);
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
@@ -5670,7 +5669,7 @@ ${
 			{layoutType === "grid" && (
 				<PanelBody title={__("Items", "frontis-blocks")} initialOpen={false}>
 					<FB_Range
-						min={100}
+						min={0}
 						max={500}
 						label={__("Minimum Height", "frontis-blocks")}
 						rangeValue={taxonomyHeight}
