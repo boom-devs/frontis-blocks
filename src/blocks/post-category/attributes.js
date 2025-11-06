@@ -54,7 +54,7 @@ const attributes = {
 	},
 	perPage: {
 		type: "number",
-		default: 12,
+		default: 6,
 	},
 
 	// Layout settings with responsive values
@@ -81,16 +81,16 @@ const attributes = {
 	gridRowGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 20,
+			Desktop: 20,
+			Tablet: 15,
 			Mobile: 10,
 		},
 	},
 	gridColumnGap: {
 		type: "object",
 		default: {
-			Desktop: 30,
-			Tablet: 20,
+			Desktop: 20,
+			Tablet: 15,
 			Mobile: 10,
 		},
 	},

@@ -38,7 +38,7 @@ $include_taxonomies = isset($attributes['includeTaxonomies']) ? (array) $attribu
 $exclude_taxonomies = isset($attributes['excludeTaxonomies']) ? (array) $attributes['excludeTaxonomies'] : [];
 $order_by = fb_norm_str(isset($attributes['orderBy']) ? $attributes['orderBy'] : 'name');
 $sort_order = fb_norm_str(isset($attributes['sortOrder']) ? $attributes['sortOrder'] : 'asc');
-$per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 12;
+$per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -88,9 +88,6 @@ $wrapper_classes_arr = array_filter(array_map(function ($c) {
 $wrapper_attributes = get_block_wrapper_attributes([
     'class' => implode(' ', $wrapper_classes_arr),
 ]);
-
-
-
 
 
 // Get taxonomy terms
