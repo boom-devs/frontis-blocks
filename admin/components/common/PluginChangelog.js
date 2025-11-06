@@ -1,11 +1,35 @@
 // src/admin/components/common/PluginChangelog.js
 import { useState, useEffect } from '@wordpress/element';
-import { Modal, Spinner } from '@wordpress/components';
+import { Spinner } from '@wordpress/components';
 
 const PluginChangelog = ({ isOpen, onClose }) => {
     const [content, setContent] = useState('');
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+
+    // Body scroll lock when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            // Add class to body
+            document.body.classList.add('fb-changelog-modal-open');
+
+            // Optional: Save current scroll position
+            const scrollY = window.scrollY;
+            document.body.style.top = `-${scrollY}px`;
+        } else {
+            // Remove class and restore scroll
+            document.body.classList.remove('fb-changelog-modal-open');
+            const scrollY = document.body.style.top;
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+
+        // Cleanup on unmount
+        return () => {
+            document.body.classList.remove('fb-changelog-modal-open');
+            document.body.style.top = '';
+        };
+    }, [isOpen]);
 
     useEffect(() => {
         if (!isOpen) return;
@@ -59,44 +83,36 @@ const PluginChangelog = ({ isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
-        <Modal
-            title="Frontis Blocks – Changelog"
-            onRequestClose={onClose}
-            className="fb-changelog-modal"
-            shouldCloseOnClickOutside={true}
-            style={{ maxWidth: '800px' }}
-        >
-            <div className="fb-changelog-content">
-                {loading && (
-                    <div className="fb-changelog-loading" style={{ textAlign: 'center', padding: '40px' }}>
-                        <Spinner />
-                        <p>Loading changelog...</p>
-                    </div>
-                )}
+        <div className="fb-changelog-modal">
+            <div className="fb-changelog-wrapper">
+                <div className="fb-changelog-header">
+                    <h2 className="fb-changelog-title">System Status</h2>
+                    <button className="fb-changelog-close-btn" onClick={onClose}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M18 6L6.00081 17.9992M17.9992 18L6 6.00085" stroke="#141B34" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+                <div className="fb-changelog-content">
+                    {loading && (
+                        <div className="fb-changelog-loading">
+                            <Spinner />
+                            <p>Loading changelog...</p>
+                        </div>
+                    )}
 
-                {error && (
-                    <div className="fb-changelog-error" style={{ color: 'red', padding: '20px' }}>
-                        {error}
-                    </div>
-                )}
+                    {error && (
+                        <div className="fb-changelog-error">
+                            {error}
+                        </div>
+                    )}
 
-                {content && !loading && (
-                    <div
-                        className="fb-changelog-html"
-                        dangerouslySetInnerHTML={{ __html: content }}
-                    />
-                )}
+                    {content && !loading && (
+                        <div className="fb-changelog-html" dangerouslySetInnerHTML={{ __html: content }} />
+                    )}
+                </div>
             </div>
-
-            <div className="fb-changelog-footer" style={{
-                textAlign: 'right',
-                padding: '15px 20px',
-                borderTop: '1px solid #ddd',
-                background: '#f9f9f9'
-            }}>
-                <button className="button" onClick={onClose}>Close</button>
-            </div>
-        </Modal>
+        </div>
     );
 };
 

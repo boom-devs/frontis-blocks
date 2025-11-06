@@ -89,13 +89,13 @@ const TabPanel = ({
                 <div className="fb-blocks-tab-content">
                     {children(tabs.find((tab) => tab.name === activeTab) || {})}
                 </div>
-            </div>
 
-            {/* Changelog Modal */}
-            <PluginChangelog
-                isOpen={isChangelogOpen}
-                onClose={() => setIsChangelogOpen(false)}
-            />
+                {/* Changelog Modal */}
+                <PluginChangelog
+                    isOpen={isChangelogOpen}
+                    onClose={() => setIsChangelogOpen(false)}
+                />
+            </div>
         </>
     );
 };
