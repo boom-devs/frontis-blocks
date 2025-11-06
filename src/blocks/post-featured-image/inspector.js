@@ -676,10 +676,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		() => `
 
             
-            .${blockId} {
-                width: 100%;
-            }
-
             /* Target the image wrapper */
             .${blockId} .fb-post-featured-image {
                 display: flex !important;

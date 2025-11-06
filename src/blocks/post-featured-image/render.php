@@ -4,6 +4,16 @@
  * Server-side rendering for the Post Featured Image block
  */
 
+if ( ! function_exists( 'fb_norm_str' ) ) {
+    function fb_norm_str( $val, $default = '' ) {
+        if ( is_array( $val ) ) {
+            $val = implode( ' ', array_filter( array_map( 'strval', $val ) ) );
+        }
+        if ( $val === null ) return $default;
+        return (string) $val;
+    }
+}
+
 $is_link = isset($attributes['isLink']) ? (bool) $attributes['isLink'] : false;
 $rel = isset($attributes['rel']) ? esc_attr($attributes['rel']) : '';
 $link_target = isset($attributes['linkTarget']) ? esc_attr($attributes['linkTarget']) : '_self';
@@ -76,21 +86,37 @@ if (!empty($featured_image_url)) {
     $display_image_alt = __('Placeholder Image', 'frontis-blocks');
 }
 
-// build main tag classes - including blockid
-$parent_classes = 'fb-post-featured-image-block ' . $block_id . ' ' . implode(' ', $responsive_classes);
+
+// Build wrapper classes for the featured image block (array merge + sanitize)
+$parent_classes_arr = array_merge(
+    ['fb-post-featured-image-block', $block_id],
+    $responsive_classes
+);
+
 
 // Build image wrapper classes
-$image_wrapper_classes = [
-    'fb-post-featured-image',
-    $wrapper_class, // Custom CSS classes from advanced tab
-];
+$image_wrapper_classes_arr = array_filter(array_map(
+    function($c) {return sanitize_html_class(fb_norm_str($c));},
+    $parent_classes_arr
+));
 
-// Prepare image wrapper ID attribute
-$image_wrapper_id_attr = $wrapper_id ? ' id="' . esc_attr($wrapper_id) . '"' : '';
+// Prepare wrapper attributes for the featured image block
+$image_wrapper_attributes = get_block_wrapper_attributes([
+    'class' => implode(' ', $image_wrapper_classes_arr),
+]);
+
+// Build HTML tag classes for the image wrapper
+$image_html_tag_classes = array_filter([
+    'fb-post-featured-image', 
+    $wrapper_class, // Custom CSS classes from the advanced tab
+]);
+
+// Prepare HTML tag ID attribute for the image wrapper
+$image_html_tag_id_attr = !empty($wrapper_id) ? ' id="' . esc_attr($wrapper_id) . '"' : '';
 
 ?>
-<div class="<?php echo esc_attr($parent_classes); ?>">
-    <div class="<?php echo esc_attr(implode(' ', array_filter($image_wrapper_classes))); ?>" <?php echo $image_wrapper_id_attr; ?>>
+<div <?php echo $image_wrapper_attributes; ?>>
+    <div class="<?php echo esc_attr(implode(' ', $image_html_tag_classes)); ?>" <?php echo $image_html_tag_id_attr; ?>>
         <?php if (! empty($display_image_url)) : ?>
             <?php if ($is_link) : ?>
                 <div class="fb-post-featured-image-inner">
