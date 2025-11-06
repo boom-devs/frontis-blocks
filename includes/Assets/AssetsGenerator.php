@@ -234,7 +234,6 @@ class AssetsGenerator
 			}
 		}
 		
-		// Duplicate remove করা
 		$unique_results = [];
 		foreach ($results as $page) {
 			$unique_results[$page->ID] = $page;

@@ -57,12 +57,8 @@ const PluginChangelog = ({ isOpen, onClose }) => {
                     if (data.data.version) {
                         html += `
                             <div class="changelog-current-version">
-                                <strong>Current Version:</strong> ${data.data.version}
-                                ${data.data.last_updated ? `
-                                    <span style="margin-left:10px;color:#666;font-size:12px;">
-                                        Updated: ${new Date(data.data.last_updated).toLocaleDateString()}
-                                    </span>
-                                ` : ''}
+                                <span>Current Version:</span> 
+                                <strong>${data.data.version}</strong>
                             </div>`;
                     }
                     html += data.data.changelog;

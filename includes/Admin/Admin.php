@@ -257,7 +257,7 @@ class Admin {
 
 		if('post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
 			$tl_script_asset_path = FB_PLUGIN_PATH . 'assets/admin/index.asset.php';
-			$tl_script_asset = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( FB_VERSION ) );
+			$tl_script_asset = file_exists( $tl_script_asset_path ) ? require( $tl_script_asset_path ) : array( 'dependencies' => array(), 'version' => FB_VERSION );
 			$tl_script_asset['dependencies'][] = 'jquery';
 
             $activation_key = get_option('frontisblockspro_license_options');
