@@ -293,7 +293,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleAddItem = () => {
         const newItem = {
             id: `item-${MenuItemList.length + 1}`,
-            label: `Menu Item ${MenuItemList.length + 1}`,
+            label: `Item ${MenuItemList.length + 1}`,
             url: '',
             patternSlug: '',
         };

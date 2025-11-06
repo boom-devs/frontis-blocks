@@ -52,7 +52,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									>
 										{item.url ? (
 											<a href={item.url} className="fb-advanced-mega-menu-link">
-												{item.label || __('Menu one', 'frontis-blocks')}
+												{item.label || __('Item 1', 'frontis-blocks')}
 												{item.patternSlug && (
 													<span className="fb-advanced-mega-menu-indicator">
 														{item.megaMenuIcon ? renderSVG(item.megaMenuIcon) : ''}
@@ -61,7 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</a>
 										) : (
 											<span className="fb-advanced-mega-menu-link">
-												{item.label || __('Menu one', 'frontis-blocks')}
+												{item.label || __('Item 1', 'frontis-blocks')}
 												{item.patternSlug && (
 													<span className="fb-advanced-mega-menu-indicator">
 														{item.megaMenuIcon ? renderSVG(item.megaMenuIcon) : ''}
