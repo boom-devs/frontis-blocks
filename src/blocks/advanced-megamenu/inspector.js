@@ -223,7 +223,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuIconGapUnits,
         megaMenuIconRotateSwitcher,
         megaMenuIconRotation,
-        megaMenuIconRotateHover
+        megaMenuIconRotateHover,
+        megaMenuWidthSwitcher,
+        megaMenuContentWidthValue,
+        megaMenuContentWidthValueUnits
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -279,6 +282,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setPatterns(patternOptions);
     }, [patternData]);
 
+    const pages = useSelect((select) => {
+        const query = { per_page: -1 };
+        const records = select('core').getEntityRecords('postType', 'page', query);
+
+        if (!records) return [];
+
+        return records.map((page) => ({
+            label: page.title?.rendered || '(no title)',
+            value: String(page.id),
+            link: page.link
+        }));
+    }, []);
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
@@ -296,6 +312,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             label: `Item ${MenuItemList.length + 1}`,
             url: '',
             patternSlug: '',
+            megaMenuIcon: 'angle-down',
+            pageId: '',
         };
         const updated = [...MenuItemList, newItem];
         setMenuItemList(updated);
@@ -305,6 +323,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const handleChangeItem = (id, key, value) => {
         const updated = MenuItemList.map((item) =>
             item.id === id ? { ...item, [key]: value } : item
+        );
+        setMenuItemList(updated);
+        setAttributes({ menuItems: updated });
+    };
+
+    const handleChangeMultipleFields = (id, fieldsToUpdate) => {
+        const updated = MenuItemList.map((item) =>
+            item.id === id ? { ...item, ...fieldsToUpdate } : item
         );
         setMenuItemList(updated);
         setAttributes({ menuItems: updated });
@@ -330,17 +356,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
 
-    const iconHandler = (IconName) => {
-		setAttributes({megaMenuIcon: IconName})
-
-	}
-
     /** Sync back when MenuItemList changes */
     useEffect(() => {
         setAttributes({ menuItems: MenuItemList });
     }, [MenuItemList]);
 
-    
+
     /** Start MegaMenu Padding */
     const megaMenuPaddingUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -1135,7 +1156,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             : megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''
         }
         }
-        
+        .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-panel{
+            ${megaMenuWidthSwitcher === "content"
+            ? `
+            position: absolute;
+                ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Desktop}${megaMenuContentWidthValueUnits?.Desktop};` : ''}
+            `
+                    : megaMenuWidthSwitcher === "full"
+                        ? `
+                    position: fixed;
+                    width: 100%;
+                `
+                        : ''
+            }
+        }
         .${blockId} .fb-advanced-mega-menu-link .fb-advanced-mega-menu-indicator svg{
             ${megaMenuIconColor ? `fill: ${megaMenuIconColor};` : ''}
             transform: rotate(${megaMenuIconRotation?.Desktop}deg);
@@ -1248,9 +1282,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         key={item.id}
                                         id={item.id}
                                         item={item}
+                                        pages={pages}
                                         handleChangeItem={handleChangeItem}
                                         handleDeleteItem={handleDeleteItem}
                                         handleDuplicateItem={handleDuplicateItem}
+                                        handleChangeMultipleFields={handleChangeMultipleFields}
                                         patterns={patterns}
                                         index={index}
                                     />
@@ -1269,7 +1305,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const styleControls = (
         <>
-            <PanelBody title={__("Menu Item", "frontis-blocks")} initialOpen={true}>
+            <PanelBody title={__("Mega Menu", "frontis-blocks")} initialOpen={false}>
+                <FB_SwitcherControl
+                    label={__("Width", "frontis-blocks")}
+                    options={[
+                        { label: __('Full', 'frontis-blocks'), value: 'full' },
+                        { label: __('Content', 'frontis-blocks'), value: 'content' },
+                    ]
+                    }
+                    globalSwitcher={megaMenuWidthSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuWidthSwitcher: value })}
+                />
+
+                {megaMenuWidthSwitcher === 'full' && (
+                    <></>
+                )}
+
+                {megaMenuWidthSwitcher === 'content' && (
+                    <>
+                        <FB_Range
+                            min={0}
+                            max={megaMenuContentWidthValueUnits === '%' ? 100 : 2000}
+                            label={__("Content Width", "frontis-blocks")}
+                            rangeValue={megaMenuContentWidthValue}
+                            onChangeHandler={(value) => setAttributes({ megaMenuContentWidthValue: value })}
+                            rangeUnitHandler={(value) => setAttributes({ megaMenuContentWidthValueUnits: value })}
+                            deviceType={deviceType}
+                            units={megaMenuContentWidthValueUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={''}
+                        />
+                    </>
+
+                )}
+
+            </PanelBody>
+            <PanelBody title={__("Menu Item", "frontis-blocks")} initialOpen={false}>
                 <FB_TypographyControl
                     globalTypoControlActive={true}
                     globalTypoSwitcher={megaMenuGlobalTypoSwitcher}
@@ -1609,7 +1681,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         rangeStep={1}
                         resetFallbackValue={""}
                         isRangeUnit={false}
-
                     />
                 )}
 

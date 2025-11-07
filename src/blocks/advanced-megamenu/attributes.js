@@ -14,6 +14,23 @@ export default {
             Mobile: '',
         },
     },
+    //Mega menu width
+    megaMenuWidthSwitcher: {
+        type: 'string',
+        default: 'full',
+    },
+    megaMenuContentWidthValue: {
+        type: 'string',
+        default: '1200'
+    },
+    megaMenuContentWidthValueUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     //Start Mega Menu Style
     megaMenuGlobalTypographyData: {
         type: 'object',
@@ -230,7 +247,8 @@ export default {
         default: 'normal'
     },
     megaMenuColor: {
-        type: 'string'
+        type: 'string',
+        default: '#000000'
     },
     megaMenuHoverColor: {
         type: 'string',
@@ -445,11 +463,15 @@ export default {
                 label: {
                     type: 'string',
                     default: 'Item 1'
-                }
+                },
+                pageId: {
+                    type: 'string',
+                    default: '',
+                },
             }
         }
     },
-    megaMenuIconFrontend:{
+    megaMenuIconFrontend: {
         type: 'string',
     },
     triggerType: {
