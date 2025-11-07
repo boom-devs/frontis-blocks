@@ -31,17 +31,7 @@ if (has_post_thumbnail()) {
 }
 
 // Get post metrics
-// $post_views = get_post_meta($post_id, 'post_views_count', true) ?: 0;
-// $post_likes = get_post_meta($post_id, 'post_likes_count', true) ?: 0;
 $post_comments = get_comments_number($post_id);
-
-// Check if current user has liked this post
-// $user_has_liked = false;
-// if (is_user_logged_in()) {
-//     $user_id = get_current_user_id();
-//     $user_likes = get_user_meta($user_id, 'liked_posts', true) ?: array();
-//     $user_has_liked = in_array($post_id, $user_likes);
-// }
 
 // Block attributes with defaults
 $category_switcher = isset($attributes['categorySwitcher']) ? $attributes['categorySwitcher'] : true;
@@ -113,8 +103,6 @@ function format_metric_count($count)
                     <!-- Post Metrics Section -->
                     <div class='fb-post-overview-meta'>
                         <div class='fb-post-metrics'>
-
-
                             <!-- Comments Metric -->
                             <div class='fb-post-metric-item fb-comments-btn' data-post-id="<?php echo $post_id; ?>">
                                 <svg class='fb-post-metric-icon' xmlns="http://www.w3.org/2000/svg" width="16" height="16"
