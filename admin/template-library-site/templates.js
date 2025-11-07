@@ -344,7 +344,7 @@ const PatternLibraryButton = () => {
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = noneFilterData[activeTab].tags || [];
-        const uniqueTags = [...new Set(currentItems)].slice(0, 5);
+        const uniqueTags = [...new Set(currentItems)];
         return uniqueTags.map(tag => ({
             name: tag.name,
             value: tag.name,
@@ -382,6 +382,7 @@ const PatternLibraryButton = () => {
                         {activeTab !== 'templatelibrary' && (
                             <TemplateContent
                                 activeTab={activeTab}
+                                setActiveTab={setActiveTab}
                                 activeCategory={activeCategory}
                                 data={data}
                                 activeTagTab={activeTagTab[activeTab]}

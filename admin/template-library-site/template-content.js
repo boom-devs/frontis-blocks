@@ -7,10 +7,18 @@ import TemplateGrid from "./template-grid";
 import {ToastContainer, toast } from "react-toastify";
 import { TemplateContentLoader } from "./template-loader";
 import { ClipLoader } from "react-spinners";
+import { useRef } from "@wordpress/element";
+
+const TabsOptions = [
+    { name: 'Patterns', value: 'patterns' },
+    { name: 'Pages', value: 'pages' },
+    { name: 'Sites', value: 'sites' },
+];
 
 
 const TemplateContent = ({
     activeTab,
+    setActiveTab ,
     activeCategory,
     data,
     TagTabsOptions,
@@ -27,7 +35,21 @@ const TemplateContent = ({
 }) => {
 
     const schema = data || {};
-    const [filteredTemplates, setFilteredTemplates] = useState([]);    
+    const [filteredTemplates, setFilteredTemplates] = useState([]);   
+    const scrollContainer = useRef(null);
+
+    // Scroll ফাংশন — useCallback দিয়ে
+    const scroll = useCallback((direction) => {
+        if (!scrollContainer.current) return;
+        const scrollAmount = 120;
+        const container = scrollContainer.current;
+
+        if (direction === 'left') {
+            container.scrollLeft -= scrollAmount;
+        } else {
+            container.scrollLeft += scrollAmount;
+        }
+    }, []);
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -136,25 +158,8 @@ const TemplateContent = ({
         
     }, []);
 
-    // const { importSuccess } = useSelector((state) => state.attributes);
-    // const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     if (importSuccess === true) {
-    //         toast.success("Site imported successfully!", {
-    //             position: "top-right",
-    //             autoClose: 3000,
-    //             theme: "light",
-    //         });
-    //     } else if (importSuccess === false) {
-    //         toast.warn("Failed to import site", {
-    //             position: "top-right",
-    //             autoClose: 3000,
-    //         });
-    //     }
-    // }, [importSuccess]);
     
-    // console.log(importSuccess);
 
     return (
         <>
@@ -162,7 +167,18 @@ const TemplateContent = ({
             <div className="fb-template-library-store-content" >
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
-                        <h2>All {capitalize(activeTab)}</h2>
+                        <div className="fb-template-library-tabs">
+                            {TabsOptions.map(tab => (
+                                <button
+                                    key={tab.value}
+                                    className={`fb-template-library-tab ${activeTab === tab.value ? 'active' : ''}`}
+                                    onClick={() => setActiveTab(tab.value)}
+                                    disabled={activeTab === tab.value}
+                                >
+                                    {tab.name}
+                                </button>
+                            ))}
+                        </div>
                     </div>
                     <div className="fb-template-library-content-header-right">
                         <div className="fb-template-library-search-wrapper">
@@ -193,25 +209,71 @@ const TemplateContent = ({
                                 <ClipLoader color="fff" size={24} />
                             </>
                         ) : (
+                            // <div className="fb-template-library-tags-wrapper">
+                            //     <button
+                            //         className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
+                            //         onClick={() => setActiveTagTab('')}
+                            //         disabled={activeTagTab === ''}
+                            //     >
+                            //         All
+                            //     </button>
+                            //     {TagTabsOptions.map(tab => (
+                            //         <button
+                            //             key={tab.value}
+                            //             className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+                            //             onClick={() => setActiveTagTab(tab.value)}
+                            //             disabled={activeTagTab === tab.value}
+                            //         >
+                            //             {tab.name}
+                            //         </button>
+                            //     ))}
+                            // </div>
                             <div className="fb-template-library-tags-wrapper">
-                                <button
-                                    className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
-                                    onClick={() => setActiveTagTab('')}
-                                    disabled={activeTagTab === ''}
-                                >
-                                    All
-                                </button>
-                                {TagTabsOptions.map(tab => (
+                                    {/* Left Arrow */}
                                     <button
-                                        key={tab.value}
-                                        className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
-                                        onClick={() => setActiveTagTab(tab.value)}
-                                        disabled={activeTagTab === tab.value}
+                                        className="fb-tag-slider-btn fb-tag-slider-left"
+                                        onClick={() => scroll('left')}
+                                        aria-label="Scroll left"
                                     >
-                                        {tab.name}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M15 18l-6-6 6-6" />
+                                        </svg>
                                     </button>
-                                ))}
-                            </div>
+
+                                    {/* Scrollable Tags */}
+                                    <div className="fb-tag-scroll-container" ref={scrollContainer}>
+                                        <div className="fb-tag-scroll-inner">
+                                            <button
+                                                className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
+                                                onClick={() => setActiveTagTab('')}
+                                                disabled={activeTagTab === ''}
+                                            >
+                                                All
+                                            </button>
+                                            {TagTabsOptions.map(tab => (
+                                                <button
+                                                    key={tab.value}
+                                                    className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+                                                    onClick={() => setActiveTagTab(tab.value)}
+                                                    disabled={activeTagTab === tab.value}
+                                                >
+                                                    {tab.name}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Right Arrow */}
+                                    <button
+                                        className="fb-tag-slider-btn fb-tag-slider-right"
+                                        onClick={() => scroll('right')}
+                                        aria-label="Scroll right"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M9 18l6-6-6-6" />
+                                        </svg>
+                                    </button>
+                                </div>
                         )}
                     </div>
                 </div>
