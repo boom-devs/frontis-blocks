@@ -914,6 +914,28 @@ const FB_Block_Icons = {
 			  M10.5 10C9.67157 10 9 9.32843 9 8.5C9 7.67157 9.67157 7 10.5 7C11.3284 7 12 7.67157 12 8.5C12 9.32843 11.3284 10 10.5 10Z`,
 		})
 	),
+	news_ticker: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'newsTickerIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '20',
+		  height: '16',
+		  viewBox: '0 0 20 16',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M4 11H11
+			  M14 11H16
+			  M8 2.5C8 3.32843 7.32843 4 6.5 4H2.5C1.67157 4 1 3.32843 1 2.5C1 1.67157 1.67157 1 2.5 1H6.5C7.32843 1 8 1.67157 8 2.5Z
+			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
+		})
+	),
 
 };
 
