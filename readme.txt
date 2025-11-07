@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,6 +197,20 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.1 – 07 November 2025 =
+- **Added**
+- `Post Title` block.
+- Post Featured Image support for **Pages** and **Site** to speed up layout creation from the inserter.
+
+- **Improved**
+- Enhancements across existing blocks: refined controls, better defaults, and increased stability.
+
+- **Fixed**
+- Multiple bug fixes across existing blocks.
+
+- **Compatibility**
+- Works with the latest **Gutenberg** and **WordPress**.
 
 = 1.1.0 – 16 October 2025 =
 - **`critical-css` block** to inline critical styles per page/template.
