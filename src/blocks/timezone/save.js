@@ -5,10 +5,11 @@ export default function Save({ attributes }) {
 	const {
 		location,
 		timezone,
-		officeHours,
 		officeStatus,
 		closedMessage,
 		completionMessage,
+		weekendMessage,
+		holidayMessage,
 		timezoneMode,
 		useUTCTimezoneFormat,
 		startTime,
@@ -16,18 +17,23 @@ export default function Save({ attributes }) {
 		useMonthlySchedule,
 		monthlySchedules,
 		weekendDays,
-		holidays
+		holidays,
+		separator,
+		openStatusText,
+		closedStatusText,
+		beforeTimeText,
+		afterTimeText
 	} = attributes;
 
-	// Helper function to format timezone display
+	// Helper function to format timezone display (with timezone name)
 	const getFormattedTimezone = (timezone) => {
-		if (!timezone) return '(UTC+6) Dhaka';
+		if (!timezone) return 'Local Time (GMT+6)';
 		
 		try {
 			const now = new Date();
 			
 			if (useUTCTimezoneFormat) {
-				// UTC format
+				// UTC format - show timezone name with offset
 				const formatter = new Intl.DateTimeFormat('en-US', {
 					timeZone: timezone,
 					timeZoneName: 'longOffset'
@@ -37,21 +43,21 @@ export default function Save({ attributes }) {
 				
 				if (offsetPart && offsetPart.value.startsWith('GMT')) {
 					const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
-					const cityName = timezone.split('/').pop().replace(/_/g, ' ');
-					return `UTC${offset} ${cityName}`;
+					const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
+					return `${timezoneName} (UTC${offset})`;
 				}
 			} else {
-				// GMT format (default)
+				// GMT format (default) - show timezone name with offset
 				const offset = now.toLocaleString('en-US', { 
 					timeZone: timezone, 
 					timeZoneName: 'shortOffset' 
 				}).split(' ').pop();
-				
-				const cityName = timezone.split('/').pop().replace(/_/g, ' ');
-				return `(${offset}) ${cityName}`;
+				const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
+				return `${timezoneName} (${offset})`;
 			}
 		} catch (error) {
-			return useUTCTimezoneFormat ? 'UTC+06:00 Dhaka' : '(UTC+6) Dhaka';
+			const timezoneName = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
+			return useUTCTimezoneFormat ? `${timezoneName} (UTC+06:00)` : `${timezoneName} (GMT+6)`;
 		}
 	};
 
@@ -67,66 +73,6 @@ export default function Save({ attributes }) {
 		return { startTime, endTime };
 	};
 
-	// Calculate if office is currently open
-	const getCurrentOfficeStatus = () => {
-		const effectiveTimezone = timezoneMode === 'auto' ? 
-			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-		
-		if (!effectiveTimezone) return 'Closed';
-
-		const effectiveHours = getEffectiveOfficeHours();
-		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-		
-		// Validate time format
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
-
-		if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-			return 'Closed';
-		}
-
-		try {
-			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
-
-			// Check weekend
-			const weekendDaysArray = weekendDays || [];
-			if (weekendDaysArray.includes(dayOfWeek.toString())) return 'Weekend';
-
-			// Check holidays
-			if (holidays && holidays.includes(todayDate)) return 'Holiday';
-
-			// Check time
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
-				hour12: false
-			});
-
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [startHours, startMinutes] = effectiveStartTime.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
-
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let startTotal = startHours * 60 + startMinutes;
-			let endTotal = endHours * 60 + endMinutes;
-
-			if (endTotal < startTotal) {
-				endTotal += 24 * 60;
-				if (currentTotal < startTotal) currentTotal += 24 * 60;
-			}
-
-			return currentTotal >= startTotal && currentTotal <= endTotal ? 'Open' : 'Closed';
-		} catch (error) {
-			return 'Closed';
-		}
-	};
-
 	// Calculate remaining time when open
 	const getRemainingTime = () => {
 		const effectiveTimezone = timezoneMode === 'auto' ? 
@@ -135,7 +81,6 @@ export default function Save({ attributes }) {
 		const effectiveHours = getEffectiveOfficeHours();
 		const { endTime: effectiveEndTime } = effectiveHours;
 
-		// Validate time format
 		const isValidTime = (time) => {
 			if (!time) return false;
 			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -159,7 +104,6 @@ export default function Save({ attributes }) {
 			let currentTotal = currentHours * 60 + currentMinutes;
 			let endTotal = endHours * 60 + endMinutes;
 
-			// Handle overnight hours
 			if (endTotal < currentTotal) {
 				endTotal += 24 * 60;
 			}
@@ -183,40 +127,71 @@ export default function Save({ attributes }) {
 		}
 	};
 
-	// Format time for display
-	const formatTimeForDisplay = (time) => {
-		if (!time) return '';
-		const [hours, minutes] = time.split(':').map(Number);
-		if (isNaN(hours) || isNaN(minutes)) return '';
-		const period = hours >= 12 ? 'PM' : 'AM';
-		const displayHours = hours % 12 || 12;
-		return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
-	};
-
-	// Format messages with dynamic values
-	const formatClosedMessage = () => {
-		if (!closedMessage) return 'Office is closed. Opens at {startTime}';
+	// Get next weekday name
+	const getNextWeekdayName = () => {
+		const now = new Date();
+		let nextDay = new Date(now);
+		nextDay.setDate(now.getDate() + 1);
 		
-		const effectiveHours = getEffectiveOfficeHours();
-		const startTimeDisplay = formatTimeForDisplay(effectiveHours.startTime);
-		
-		if (!startTimeDisplay) {
-			return closedMessage.replace('{startTime}', '--:-- --');
+		// Skip weekends
+		const weekendDaysArray = weekendDays || [];
+		while (weekendDaysArray.includes(nextDay.getDay().toString())) {
+			nextDay.setDate(nextDay.getDate() + 1);
 		}
 		
-		return closedMessage.replace('{startTime}', startTimeDisplay);
+		return nextDay.toLocaleDateString('en-US', { weekday: 'long' });
 	};
 
-	const formatCompletionMessage = () => {
-		if (!completionMessage) return 'Office will be finished at {totalTime}';
+	// Get next date after holiday
+	const getNextDateAfterHoliday = () => {
+		const now = new Date();
+		let nextDay = new Date(now);
+		nextDay.setDate(now.getDate() + 1);
 		
-		const effectiveHours = getEffectiveOfficeHours();
-		const endTimeDisplay = formatTimeForDisplay(effectiveHours.endTime);
-		const remainingTime = getRemainingTime();
+		// Skip weekends and holidays
+		const weekendDaysArray = weekendDays || [];
+		while (weekendDaysArray.includes(nextDay.getDay().toString()) || 
+			   holidays?.includes(nextDay.toISOString().split('T')[0])) {
+			nextDay.setDate(nextDay.getDate() + 1);
+		}
 		
-		// Calculate total duration
-		const calculateDuration = () => {
-			const { startTime: effectiveStartTime, endTime: effectiveEndTime } = getEffectiveOfficeHours();
+		return nextDay.toLocaleDateString('en-US', { 
+			weekday: 'long',
+			month: 'long',
+			day: 'numeric'
+		});
+	};
+
+	// Get display message with dynamic time and date
+	const getDisplayMessage = () => {
+		const effectiveTimezone = timezoneMode === 'auto' ? 
+			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
+		
+		if (!effectiveTimezone) return closedMessage || 'Office is closed';
+
+		try {
+			const now = new Date();
+			const dayOfWeek = now.getDay();
+			const todayDate = now.toISOString().split('T')[0];
+
+			// Check weekend
+			const weekendDaysArray = weekendDays || [];
+			if (weekendDaysArray.includes(dayOfWeek.toString())) {
+				const nextWeekday = getNextWeekdayName();
+				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
+				return `${weekendMessage || 'Closed for weekend'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextWeekday}`;
+			}
+
+			// Check holidays
+			if (holidays && holidays.includes(todayDate)) {
+				const nextDate = getNextDateAfterHoliday();
+				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
+				return `${holidayMessage || 'Closed for holiday'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextDate}`;
+			}
+
+			// Check time
+			const effectiveHours = getEffectiveOfficeHours();
+			const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
 			
 			const isValidTime = (time) => {
 				if (!time) return false;
@@ -225,36 +200,59 @@ export default function Save({ attributes }) {
 			};
 
 			if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-				return '0 hours';
+				return closedMessage || 'Office is closed';
 			}
 
+			const currentTimeStr = now.toLocaleTimeString('en-US', {
+				timeZone: effectiveTimezone, 
+				hour: '2-digit', 
+				minute: '2-digit', 
+				hour12: false
+			});
+
+			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
 			const [startHours, startMinutes] = effectiveStartTime.split(':').map(Number);
 			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
 
+			let currentTotal = currentHours * 60 + currentMinutes;
 			let startTotal = startHours * 60 + startMinutes;
 			let endTotal = endHours * 60 + endMinutes;
 
-			if (endTotal < startTotal) endTotal += 24 * 60;
-			const durationMinutes = endTotal - startTotal;
-			
-			const hours = Math.floor(durationMinutes / 60);
-			const minutes = durationMinutes % 60;
-			
-			if (minutes === 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''}`;
-			} else {
-				return `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+			if (endTotal < startTotal) {
+				endTotal += 24 * 60;
+				if (currentTotal < startTotal) currentTotal += 24 * 60;
 			}
-		};
 
-		const displayDuration = calculateDuration();
-		const displayEndTime = endTimeDisplay || '--:-- --';
-		const displayRemainingTime = remainingTime || '--';
-		
-		return completionMessage
-			.replace('{totalTime}', displayDuration)
-			.replace('{endTime}', displayEndTime)
-			.replace('{remainingTime}', displayRemainingTime);
+			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
+			const remainingTime = getRemainingTime();
+			const startTimeDisplay = formatTimeForDisplay(effectiveStartTime);
+			const endTimeDisplay = formatTimeForDisplay(effectiveEndTime);
+			
+			if (isOpen) {
+				return `${completionMessage || 'Office is open'}. ${afterTimeText || 'Office will close at'} ${endTimeDisplay}, Remaining time: ${remainingTime}`;
+			} else {
+				const nextDay = new Date(now);
+				nextDay.setDate(now.getDate() + 1);
+				const nextDate = nextDay.toLocaleDateString('en-US', { 
+					weekday: 'long',
+					month: 'long',
+					day: 'numeric'
+				});
+				return `${closedMessage || 'Office is closed'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextDate}, Remaining time: ${remainingTime}`;
+			}
+		} catch (error) {
+			return closedMessage || 'Office is closed';
+		}
+	};
+
+	// Format time for display
+	const formatTimeForDisplay = (time) => {
+		if (!time) return '';
+		const [hours, minutes] = time.split(':').map(Number);
+		if (isNaN(hours) || isNaN(minutes)) return '';
+		const period = hours >= 12 ? 'PM' : 'AM';
+		const displayHours = hours % 12 || 12;
+		return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
 	};
 
 	// Get current time in timezone for frontend display
@@ -274,46 +272,102 @@ export default function Save({ attributes }) {
 		}
 	};
 
+	// Calculate if office is currently open
+	const getCurrentOfficeStatus = () => {
+		const effectiveTimezone = timezoneMode === 'auto' ? 
+			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
+		
+		if (!effectiveTimezone) return { text: 'Closed', type: 'closed' };
+
+		const effectiveHours = getEffectiveOfficeHours();
+		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
+		
+		const isValidTime = (time) => {
+			if (!time) return false;
+			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
+			return timeRegex.test(time);
+		};
+
+		if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
+			return { text: 'Closed', type: 'closed' };
+		}
+
+		try {
+			const now = new Date();
+			const dayOfWeek = now.getDay();
+			const todayDate = now.toISOString().split('T')[0];
+
+			// Check weekend
+			const weekendDaysArray = weekendDays || [];
+			if (weekendDaysArray.includes(dayOfWeek.toString())) {
+				return { text: 'Weekend', type: 'closed' };
+			}
+
+			// Check holidays
+			if (holidays && holidays.includes(todayDate)) {
+				return { text: 'Holiday', type: 'closed' };
+			}
+
+			// Check time
+			const currentTimeStr = now.toLocaleTimeString('en-US', {
+				timeZone: effectiveTimezone, 
+				hour: '2-digit', 
+				minute: '2-digit', 
+				hour12: false
+			});
+
+			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
+			const [startHours, startMinutes] = effectiveStartTime.split(':').map(Number);
+			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
+
+			let currentTotal = currentHours * 60 + currentMinutes;
+			let startTotal = startHours * 60 + startMinutes;
+			let endTotal = endHours * 60 + endMinutes;
+
+			if (endTotal < startTotal) {
+				endTotal += 24 * 60;
+				if (currentTotal < startTotal) currentTotal += 24 * 60;
+			}
+
+			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
+			return { 
+				text: isOpen ? (openStatusText || 'Open') : (closedStatusText || 'Closed'), 
+				type: isOpen ? 'open' : 'closed' 
+			};
+		} catch (error) {
+			return { text: 'Closed', type: 'closed' };
+		}
+	};
+
 	// Get display values
-	const displayLocation = location || 'Dhaka, Bangladesh';
+	const displayLocation = location || 'Set Location Manually';
 	const displayTimezone = timezoneMode === 'auto' ? 
 		getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
 		getFormattedTimezone(timezone);
 	const currentTime = getCurrentTimeInTimezone();
 	const currentStatus = getCurrentOfficeStatus();
-	const isOpen = currentStatus === 'Open';
-	const closedMessageDisplay = formatClosedMessage();
-	const completionMessageDisplay = formatCompletionMessage();
+	const displayMessage = getDisplayMessage();
+	const displaySeparator = separator || ' | ';
 
 	return (
 		<div {...useBlockProps.save()}>
 			<div className='fb-timezone-container'>
 				<div className='fb-timezone-wrapper'>
 					<div className='fb-timezone-current-time'>
-						<span>{displayLocation} | </span>
+						<span>{displayLocation}</span>
+						<span>{displaySeparator}</span>
 						<span>{currentTime} </span>
 						<span>{displayTimezone}</span>
 					</div>
 				</div>
 				<div className='fb-timezone-status'>
 					<div className='fb-timezone-status-wrapper'>
-						{isOpen ? (
-							<div className="fb-time-pulse-open">
-								<span>Open</span>
-							</div>
-						) : (
-							<div className="fb-time-pulse-close">
-								<span>Closed</span>
-							</div>
-						)}
+						<div className={currentStatus.type === 'open' ? "fb-time-pulse-open" : "fb-time-pulse-close"}>
+							<span>{currentStatus.text}</span>
+						</div>
 						
 						<div className='fb-timezone-status-text'>
-							{!isOpen && (
-								<span>{closedMessageDisplay}</span>
-							)}
-							{isOpen && (
-								<span>{completionMessageDisplay}</span>
-							)}
+							<span>{displayMessage}</span>
 						</div>
 					</div>
 				</div>
