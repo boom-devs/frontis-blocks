@@ -13,6 +13,6 @@ import deprecated from "./deprecated";
 registerBlockType(metadata.name, {
 	attributes,
 	edit: Edit,
-	icon: FB_Block_Icons.post_grid,
+	icon: FB_Block_Icons.post_category,
 	deprecated,
 });
