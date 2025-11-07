@@ -51,7 +51,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										className={`fb-advanced-mega-menu-item ${item.patternSlug ? 'has-mega-menu' : ''}`}
 									>
 										{item.url ? (
-											<a href={item.url} className="fb-advanced-mega-menu-link">
+											<a href='#' className="fb-advanced-mega-menu-link">
 												{item.label || __('Item 1', 'frontis-blocks')}
 												{item.patternSlug && (
 													<span className="fb-advanced-mega-menu-indicator">

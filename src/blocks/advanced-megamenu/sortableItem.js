@@ -5,14 +5,17 @@ import { CSS } from '@dnd-kit/utilities';
 import { TextControl, SelectControl, Button, BaseControl } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 import generateSvgIcon from '@Utils/generateSvgIcon';
+
 export default function SortableItem({
     id,
     item,
     handleChangeItem,
     handleDeleteItem,
     handleDuplicateItem,
+    handleChangeMultipleFields, 
     index,
     patterns,
+    pages,
 }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
@@ -59,7 +62,6 @@ export default function SortableItem({
         </svg>
     );
 
-
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
             {/* Header */}
@@ -94,20 +96,51 @@ export default function SortableItem({
             {/* Expanded content */}
             {isOpen && (
                 <div className="sortable-item-content">
-                    <TextControl
-                        label={__("Label", "frontis-blocks")}
-                        value={item.label}
-                        onChange={(value) => handleChangeItem(item.id, 'label', value)}
-                        help={__("This is the text displayed for the menu item.", "frontis-blocks")}
+                    <SelectControl
+                        label={__("Page", "frontis-blocks")}
+                        value={item.pageId || ""}
+                        options={[
+                            { label: __("Select a page", "frontis-blocks"), value: "" },
+                            ...pages
+                        ]}
+                        onChange={(value) => {
+                            const selectedPage = pages.find((p) => p.value === value);
+                            
+                            if (selectedPage) {
+                                handleChangeMultipleFields(item.id, {
+                                    pageId: value,
+                                    label: selectedPage.label,
+                                    url: selectedPage.link
+                                });
+                            } else {
+                                handleChangeMultipleFields(item.id, {
+                                    pageId: '',
+                                    label: '',
+                                    url: ''
+                                });
+                            }
+                        }}
+                        help={__("Selecting a page will automatically update label & URL.", "frontis-blocks")}
                     />
 
-                    <TextControl
-                        label={__("URL (optional)", "frontis-blocks")}
-                        value={item.url}
-                        onChange={(value) => handleChangeItem(item.id, 'url', value)}
-                        placeholder="https://example.com"
-                        help={__("Enter a link or leave empty if this is a parent item.", "frontis-blocks")}
-                    />
+                    {!item.pageId && (
+                        <>
+                            <TextControl
+                                label={__("Label", "frontis-blocks")}
+                                value={item.label}
+                                onChange={(value) => handleChangeItem(item.id, 'label', value)}
+                                help={__("This is the text displayed for the menu item.", "frontis-blocks")}
+                            />
+
+                            <TextControl
+                                label={__("URL (optional)", "frontis-blocks")}
+                                value={item.url}
+                                onChange={(value) => handleChangeItem(item.id, 'url', value)}
+                                placeholder="https://example.com"
+                                help={__("Enter a custom link or leave empty.", "frontis-blocks")}
+                            />
+                        </>
+                    )}
 
                     <SelectControl
                         label={__("Pattern (for Mega Menu)", "frontis-blocks")}
