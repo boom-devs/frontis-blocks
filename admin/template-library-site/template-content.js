@@ -35,21 +35,29 @@ const TemplateContent = ({
 }) => {
 
     const schema = data || {};
-    const [filteredTemplates, setFilteredTemplates] = useState([]);   
+    const [filteredTemplates, setFilteredTemplates] = useState([]);
+
     const scrollContainer = useRef(null);
 
-    // Scroll ফাংশন — useCallback দিয়ে
     const scroll = useCallback((direction) => {
         if (!scrollContainer.current) return;
-        const scrollAmount = 120;
-        const container = scrollContainer.current;
-
-        if (direction === 'left') {
-            container.scrollLeft -= scrollAmount;
-        } else {
-            container.scrollLeft += scrollAmount;
-        }
+        const container = scrollContainer.current.querySelector('.fb-tag-scroll-inner');
+        if (!container) return;
+    
+        const scrollAmount = 150; // adjust for smoother or faster scroll
+    
+        const newScrollPosition =
+            direction === 'left'
+                ? container.scrollLeft - scrollAmount
+                : container.scrollLeft + scrollAmount;
+    
+        container.scrollTo({
+            left: newScrollPosition,
+            behavior: 'smooth',
+        });
     }, []);
+    
+
 
     useEffect(() => {
         if (activeTab && schema[activeTab]) {
@@ -228,52 +236,103 @@ const TemplateContent = ({
                             //         </button>
                             //     ))}
                             // </div>
+                            // <div className="fb-template-library-tags-wrapper">
+                            //         {/* Left Arrow */}
+                            //         <button
+                            //             className="fb-tag-slider-btn fb-tag-slider-left"
+                            //             onClick={() => scroll('left')}
+                            //             aria-label="Scroll left"
+                            //         >
+                            //             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            //                 <path d="M15 18l-6-6 6-6" />
+                            //             </svg>
+                            //         </button>
+
+                            //         {/* Scrollable Tags */}
+                            //         <div className="fb-tag-scroll-container" ref={scrollContainer}>
+                            //             <div className="fb-tag-scroll-inner">
+                            //                 <button
+                            //                     className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
+                            //                     onClick={() => setActiveTagTab('')}
+                            //                     disabled={activeTagTab === ''}
+                            //                 >
+                            //                     All
+                            //                 </button>
+                            //                 {TagTabsOptions.map(tab => (
+                            //                     <button
+                            //                         key={tab.value}
+                            //                         className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+                            //                         onClick={() => setActiveTagTab(tab.value)}
+                            //                         disabled={activeTagTab === tab.value}
+                            //                     >
+                            //                         {tab.name}
+                            //                     </button>
+                            //                 ))}
+                            //             </div>
+                            //         </div>
+
+                            //         {/* Right Arrow */}
+                            //         <button
+                            //             className="fb-tag-slider-btn fb-tag-slider-right"
+                            //             onClick={() => scroll('right')}
+                            //             aria-label="Scroll right"
+                            //         >
+                            //             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            //                 <path d="M9 18l6-6-6-6" />
+                            //             </svg>
+                            //         </button>
+                            //     </div>
                             <div className="fb-template-library-tags-wrapper">
-                                    {/* Left Arrow */}
-                                    <button
-                                        className="fb-tag-slider-btn fb-tag-slider-left"
-                                        onClick={() => scroll('left')}
-                                        aria-label="Scroll left"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M15 18l-6-6 6-6" />
-                                        </svg>
-                                    </button>
+    {/* Left Arrow */}
+    <button
+        className="fb-tag-slider-btn fb-tag-slider-left"
+        onClick={() => scroll('left')}
+        aria-label="Scroll left"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" strokeWidth="2"
+             strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+        </svg>
+    </button>
 
-                                    {/* Scrollable Tags */}
-                                    <div className="fb-tag-scroll-container" ref={scrollContainer}>
-                                        <div className="fb-tag-scroll-inner">
-                                            <button
-                                                className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
-                                                onClick={() => setActiveTagTab('')}
-                                                disabled={activeTagTab === ''}
-                                            >
-                                                All
-                                            </button>
-                                            {TagTabsOptions.map(tab => (
-                                                <button
-                                                    key={tab.value}
-                                                    className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
-                                                    onClick={() => setActiveTagTab(tab.value)}
-                                                    disabled={activeTagTab === tab.value}
-                                                >
-                                                    {tab.name}
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
+    {/* Scrollable Tags */}
+    <div className="fb-tag-scroll-container" ref={scrollContainer}>
+        <div className="fb-tag-scroll-inner">
+            <button
+                className={`fb-template-library-tag-btn ${activeTagTab === '' ? 'active' : ''}`}
+                onClick={() => setActiveTagTab('')}
+                disabled={activeTagTab === ''}
+            >
+                All
+            </button>
+            {TagTabsOptions.map(tab => (
+                <button
+                    key={tab.value}
+                    className={`fb-template-library-tag-btn ${activeTagTab === tab.value ? 'active' : ''}`}
+                    onClick={() => setActiveTagTab(tab.value)}
+                    disabled={activeTagTab === tab.value}
+                >
+                    {tab.name}
+                </button>
+            ))}
+        </div>
+    </div>
 
-                                    {/* Right Arrow */}
-                                    <button
-                                        className="fb-tag-slider-btn fb-tag-slider-right"
-                                        onClick={() => scroll('right')}
-                                        aria-label="Scroll right"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                            <path d="M9 18l6-6-6-6" />
-                                        </svg>
-                                    </button>
-                                </div>
+    {/* Right Arrow */}
+    <button
+        className="fb-tag-slider-btn fb-tag-slider-right"
+        onClick={() => scroll('right')}
+        aria-label="Scroll right"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+             fill="none" stroke="currentColor" strokeWidth="2"
+             strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+        </svg>
+    </button>
+</div>
+
                         )}
                     </div>
                 </div>
