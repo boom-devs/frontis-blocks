@@ -7385,7 +7385,7 @@ ${
 				readMoreSwitcher &&
 				readMoreIconAlign === "image" && (
 					<PanelBody
-						title={__("Read More Button Image", "frontis-blocks")}
+						title={__("View All Button Image", "frontis-blocks")}
 						initialOpen={false}
 					>
 						<FB_Range
