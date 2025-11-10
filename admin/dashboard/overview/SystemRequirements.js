@@ -62,7 +62,7 @@ const SystemRequirements = () => {
 
     return (
         <div className="system-status-card">
-            <h2 className="heading-3">System Status</h2>
+            <h2 className="heading-3">Latest updates</h2>
             
             <div className="status-list">
                 {/* PHP Version - Good */}
