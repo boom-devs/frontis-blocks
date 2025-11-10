@@ -16,7 +16,7 @@ import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import { useDeviceType } from "@Config/displayType";
 import "./editor.scss";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 		paragraphText,
@@ -28,10 +28,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		advancedParagraphDesktopSwitcher,
 		advancedParagraphTabletSwitcher,
 		advancedParagraphMobileSwitcher,
-
-		dynamicContent,
 	} = attributes;
-
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockId} ${
@@ -49,75 +46,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	const dynamicValue = useSelect(	
-		(select) => {
-			if (!dynamicContent) return "";
-
-			// Check if we're inside a Query Loop block
-			const { getBlockParentsByBlockName } = select("core/block-editor");
-			const queryBlockIds = getBlockParentsByBlockName(clientId, "core/query");
-			const isInsideQueryLoop = queryBlockIds && queryBlockIds.length > 0;
-
-			if (isInsideQueryLoop) {
-				// In the first snippet, they use context from props directly
-				// You could add context to your function parameters: Edit({ attributes, setAttributes, clientId, context })
-				// Where context would include: { postType, postId, queryId }
-
-				// Then use this postId instead of trying to get it from selectedBlock
-				const contextPostId = context?.postId;
-
-				if (contextPostId) {
-					const contextPostType = context?.postType || "post";
-					const post = select("core").getEntityRecord(
-						"postType",
-						contextPostType,
-						contextPostId,
-					);
-
-					if (post) {
-						switch (dynamicContent) {
-							case "post_title":
-								// return post.title.rendered;
-								return post?.title?.rendered || ""; // no crash
-							case "post_date":
-								return new Date(post.date).toLocaleDateString();
-							default:
-								return "";
-						}
-					}
-				}
-				return "";
-			} else {
-				// This part is good as is
-				const postType = select("core/editor").getCurrentPostType();
-				const postId = select("core/editor").getCurrentPostId();
-				const post = select("core").getEditedEntityRecord(
-					"postType",
-					postType,
-					postId,
-				);
-
-				switch (dynamicContent) {
-					case "post_title":
-						return post.title;
-					case "post_date":
-						return new Date(post.date).toLocaleDateString();
-					default:
-						return "";
-				}
-			}
-		},
-		[dynamicContent, clientId, context?.postId, context?.postType],
-	);
-
-
 	return (
 		<>
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
 				clientId={clientId}
-				dynamicValue={dynamicValue}
 			/>
 
 			<BlockControls>
@@ -125,7 +59,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					value={paragraphAlignment[deviceType]}
 					onChange={(value) =>
 						setAttributes({
-							paragraphAlignment: { ...paragraphAlignment, [deviceType]: value },
+							paragraphAlignment: {
+								...paragraphAlignment,
+								[deviceType]: value,
+							},
 						})
 					}
 					controls={["left", "center", "right"]}
@@ -141,13 +78,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					<div className="fb-advanced-paragraph-wrapper">
 						<RichText
 							tagName="p"
-							value={dynamicContent ? dynamicValue : paragraphText}
+							value={paragraphText}
 							onChange={(value) => {
-								if (!dynamicContent) {
-									setAttributes({ paragraphText: value });
-								}
+								setAttributes({ paragraphText: value });
 							}}
-							placeholder={ __("Write your advanced paragraph...", "frontis-blocks") }
+							placeholder={__(
+								"Write your advanced paragraph...",
+								"frontis-blocks",
+							)}
 							className={`fb-advanced-paragraph`}
 						/>
 					</div>
