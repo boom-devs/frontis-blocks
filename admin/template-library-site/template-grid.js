@@ -76,65 +76,6 @@ const TemplateGrid = ({
     });
 
 
-    const handleFullSiteImport = useCallback(async (id) => {
-        if (!userData?.email) {
-            setIsLoginModalOpen(true);
-            return;
-        }
-        if (is_premium === true && !isProPlugin) {
-            setIsPluginUpgradeModalOpen(true);
-            return;
-        }
-
-        setIsImporting(true);
-
-        if (isProPlugin && is_premium) {
-            const verified = await verifySubscription();
-            console.log(id);
-            
-
-            if(verified.status) {
-                console.log('Now import the pro pattern.');
-                setIsImporting(false);
-                setIsVisible(false);
-            } else {
-                toast(verified.message, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    newestOnTop: false,
-                    closeOnClick: true,
-                    rtl: false,
-                    pauseOnFocusLoss: true,
-                    draggable: true,
-                    pauseOnHover: true,
-                    theme: "light"
-                });
-
-                setIsModalOpen(true);
-                setIsImporting(false);
-            }
-        } else {
-            setIsModalOpen(true);
-            setIsImporting(false);
-        }
-    }, [is_premium, isLogedIn]);
-
-    const handelPatterns = useCallback(() => {
-        setFreeTemplate(true);
-    })
-
-    const handleCloseModal = useCallback(() => {
-        setIsModalOpen(false);
-    }, []);
-
-    useEffect(() => {
-        if(!userData?.email) {
-            handleCloseModal();
-        }
-    }, [userData?.email]);
-
-
     const handleDemo = useCallback(() => {
         if (preview_url && preview_url.trim() !== '') {
             window.open(preview_url, '_blank');
