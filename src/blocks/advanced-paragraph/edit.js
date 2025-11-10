@@ -30,7 +30,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		advancedParagraphMobileSwitcher,
 	} = attributes;
 
-
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockId} ${
 			advancedParagraphDesktopSwitcher && "fb-desktop-responsive"
@@ -47,9 +46,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-
-
-
 	return (
 		<>
 			<Inspector
@@ -63,7 +59,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					value={paragraphAlignment[deviceType]}
 					onChange={(value) =>
 						setAttributes({
-							paragraphAlignment: { ...paragraphAlignment, [deviceType]: value },
+							paragraphAlignment: {
+								...paragraphAlignment,
+								[deviceType]: value,
+							},
 						})
 					}
 					controls={["left", "center", "right"]}
@@ -81,9 +80,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							tagName="p"
 							value={paragraphText}
 							onChange={(value) => {
-									setAttributes({ paragraphText: value });	
+								setAttributes({ paragraphText: value });
 							}}
-							placeholder={ __("Write your advanced paragraph...", "frontis-blocks") }
+							placeholder={__(
+								"Write your advanced paragraph...",
+								"frontis-blocks",
+							)}
 							className={`fb-advanced-paragraph`}
 						/>
 					</div>
