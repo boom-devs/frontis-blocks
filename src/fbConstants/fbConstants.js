@@ -23,6 +23,11 @@ export const OVERFLOW_OP = [
 	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
+export const LINK_TARGET_OPTIONS = [
+    { label: __("Same tab", "frontis-blocks"), value: "_self" },
+    { label: __("New tab", "frontis-blocks"), value: "_blank" },
+];
+
 export const NAVIGATION_LAYOUT = [
 	{ label: __('Horizontal', 'frontis-blocks'), value: 'is-horizontal' },
 	{ label: __('Vertical', 'frontis-blocks'), value: 'is-vertical' },
@@ -521,4 +526,66 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
 	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+
+];
+
+export const MEGA_MENU_TRIGGERS = [
+	{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
+	{ label: __('Click', 'frontis-blocks'), value: 'click' },
+];
+
+/** POST CATEGORY BLOCK */
+export const POST_CATEGORY_PREMADE_STYLE  = [
+  { label: __('Style 1', 'frontis-blocks'), value: 'style-1' },
+  { label: __('Style 2', 'frontis-blocks'), value: 'style-2' },
+  { label: __('Style 3', 'frontis-blocks'), value: 'style-3' },
+  { label: __('Style 4', 'frontis-blocks'), value: 'style-4' },
+];
+
+
+export const SELECTION_TYPE_OPTIONS = [
+	{ value: 'none', label: __('Show All', 'frontis-blocks') },
+	{ value: 'include', label: __('Include Specific', 'frontis-blocks') },
+	{ value: 'exclude', label: __('Exclude Specific', 'frontis-blocks') }
+];
+
+export const ORDER_BY_OPTIONS = [
+	{ value: 'name', label: __('Name', 'frontis-blocks') },
+	{ value: 'count', label: __('Count', 'frontis-blocks') },
+	{ value: 'slug', label: __('Slug', 'frontis-blocks') }
+];
+
+export const SORT_ORDER_OPTIONS = [
+	{ value: 'asc', label: __('Ascending', 'frontis-blocks') },
+	{ value: 'desc', label: __('Descending', 'frontis-blocks') }
+];
+
+export const LIST_STYLE_OPTIONS = [
+	{ value: 'none', label: __('None', 'frontis-blocks') },
+	{ value: 'bullet', label: __('Bullet', 'frontis-blocks') },
+	{ value: 'number', label: __('Number', 'frontis-blocks') }
+];
+
+/** Post Featured Image */
+export const IMAGE_SIZES = [
+    { label: "Thumbnail", value: "thumbnail" },
+    { label: "Medium", value: "medium" },
+    { label: "Large", value: "large" },
+    { label: "Full", value: "full" },
+];
+
+
+/** Post Comment Form */
+export const DEFAULT_TEXTS = {
+    formTitle: "Leave a Reply",
+    cancelReply: "Cancel reply",
+    loginText: "Logged in as",
+    logoutText: "Log out?",
+    buttonText: "Post Comment",
+};
+
+export const FORM_LAYOUTS = [
+    { label: "Default", value: "default" },
+    { label: "Compact", value: "compact" },
+    { label: "Modern", value: "modern" },
 ];

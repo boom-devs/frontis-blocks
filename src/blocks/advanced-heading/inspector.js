@@ -515,7 +515,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         })
     }, [headingIcon]);
 
-
     /** Start Preset Style */
     const changeAdvancedHeadingPreset = (selectedPreset) => {
         const presetConfigurations = {

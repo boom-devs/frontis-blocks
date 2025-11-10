@@ -5,6 +5,7 @@ import FB_ResponsiveControl from '@Components/responsive-control';
 import FB_RangeUnitsType from '@Components/unit-control';
 
 const FB_Range = ({
+	disabled,
 	min,
 	max,
 	label,
@@ -109,8 +110,16 @@ const FB_Range = ({
 		}
 	});
 	
+// Inline styles for disabled state
+	const disabledStyles = disabled
+		? {
+			opacity: 0.5,
+			pointerEvents: 'none',
+		}
+		: {};
+
 	return (
-		<div className="fb-setting-spacing-container">
+		<div className={`fb-setting-spacing-container`} style={disabledStyles}>
 			<div className="fb-setting-spacing-inner-container">
 				<div className="fb-setting-spacing-label-container">
 					<FB_ResponsiveControl
@@ -180,6 +189,7 @@ const FB_Range = ({
 					</div>
 
 				</div>
+				
 				<RangeControl
 					// value={rangeValue[deviceType] !== "" ? parseInt(rangeValue[deviceType]) : undefined}
 					value={rangeValue[deviceType] !== "" ? Number(rangeValue[deviceType]) : undefined}
