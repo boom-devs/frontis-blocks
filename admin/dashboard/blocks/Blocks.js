@@ -17,7 +17,6 @@ const Blocks = () => {
 	const [searchTerm, setSearchTerm] = useState('');
 	const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
 
-
     const handleChange = () => {
         setDisableAllBlocks(!disableAllBlocks);
     };
@@ -79,7 +78,7 @@ const Blocks = () => {
 			},
 			success: function (response) {
 				if (response.success) {
-					setBlocks(updatedBlocks); // Update the local state with the saved blocks
+					setBlocks(updatedBlocks);
 					toast.success(__('Blocks saved successfully', 'frontis-blocks'));
 				} else {
 					toast.error(__('Failed to save blocks', 'frontis-blocks'));
@@ -150,6 +149,11 @@ const Blocks = () => {
 		);
 	};
 
+	const disableAllBlocksHandler = () => {
+		const updatedBlocks = blocks.map(block => ({ ...block, status: '0' }));
+		setBlocks(updatedBlocks);
+		saveBlocks(updatedBlocks);
+	}
 
 	return (
 		<div className="fb-blocks-container">
@@ -160,7 +164,7 @@ const Blocks = () => {
 						<p className='p1'>{__('Global control allows users to easily enable or disable all available blocks together, simplifying block management.', 'frontis-blocks')}</p>
 					</div>
 					<div className='fb-blocks-tab-header'>
-						<BlockHeader onChange={setSearchTerm} value={searchTerm} categories={blocksCategory} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory}/>
+						<BlockHeader onChange={setSearchTerm} value={searchTerm} categories={blocksCategory} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} disableAllBlocksHandler={disableAllBlocksHandler}/>
  					</div>
 				</div>
 			</div>
