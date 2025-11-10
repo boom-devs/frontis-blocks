@@ -394,6 +394,7 @@ $dynamicSubHeadingTextTermsSeparator 	= fb_norm_str(isset($attributes['dynamicSu
 $dynamicSubHeadingTextEnableLink 		= !empty($attributes['dynamicSubHeadingTextEnableLink']);
 $dynamicSubHeadingTextLinkSource 		= fb_norm_str(isset($attributes['dynamicSubHeadingTextLinkSource']) ? $attributes['dynamicSubHeadingTextLinkSource'] : 'post_permalink');
 
+
 /**
  * Disable dynamic if not pro active
  */

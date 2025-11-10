@@ -789,7 +789,153 @@ const FB_Block_Icons = {
 			  M7 12H14
 			  M7 16H17`,
 		})
-	),  
+	),
+	post_title: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postTitleIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 19L5 13
+			  M13 19L11 13
+			  M11 13L8.93633 7.49688C8.61189 6.63171 7.38811 6.63171 7.06367 7.49688L5 13
+			  M11 13H5
+			  M21 13V17.2857C21 18.2325 20.2325 19 19.2857 19H18C16.3431 19 15 17.6569 15 16C15 14.3431 16.3431 13 18 13H21
+			  M21 13V12C21 10.8954 20.1046 10 19 10H16`,
+		})
+	),
+	advanced_paragraph: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'advancedParagraphIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M12 6H21
+			  M12 9H21
+			  M3 13H21
+			  M3 16H21
+			  M3 19H21
+			  M3 7.5H9
+			  M9 7.5L7 5
+			  M9 7.5L7 10`,
+		})
+	),
+	post_category: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postCategoryIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 15V13C6 12.4477 6.44772 12 7 12H12
+			  M18 15V13C18 12.4477 17.5523 12 17 12H12
+			  M12 12V9
+			  M11 9H13C14.1046 9 15 8.10457 15 7V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V7C9 8.10457 9.89543 9 11 9Z
+			  M17 21H19C20.1046 21 21 20.1046 21 19V17C21 15.8954 20.1046 15 19 15H17C15.8954 15 15 15.8954 15 17V19C15 20.1046 15.8954 21 17 21Z
+			  M5 21H7C8.10457 21 9 20.1046 9 19V17C9 15.8954 8.10457 15 7 15H5C3.89543 15 3 15.8954 3 17V19C3 20.1046 3.89543 21 5 21Z`,
+		})
+	),
+	post_comment_form: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postCommentFormIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M18 12V16C18 17.1046 17.1046 18 16 18H13.9367C13.3432 18 12.7803 18.2636 12.4003 18.7196L10.5 21L8.59969 18.7196C8.2197 18.2636 7.65681 18 7.06325 18H5C3.89543 18 3 17.1046 3 16V8C3 6.89543 3.89543 6 5 6H12
+			  M15 6H21
+			  M18 9V3
+			  M6 14H15
+			  M6 11H12`,
+		})
+	),
+	post_featured_image: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postFeaturedImageIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinejoin: 'round',
+		  d: `M21 17V18C21 19.1046 20.1046 20 19 20H14
+			  M21 17V7V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V7V16
+			  M21 17L16.5801 12.5801C15.7372 11.7372 14.3488 11.8141 13.6041 12.7449L11 16
+			  M3 16V18C3 19.1046 3.89543 20 5 20H14
+			  M3 16L6.3887 13.289C7.27034 12.5837 8.56066 12.7475 9.23809 13.6508L11 16
+			  M14 20L11 16
+			  M10.5 10C9.67157 10 9 9.32843 9 8.5C9 7.67157 9.67157 7 10.5 7C11.3284 7 12 7.67157 12 8.5C12 9.32843 11.3284 10 10.5 10Z`,
+		})
+	),
+	news_ticker: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'newsTickerIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '20',
+		  height: '16',
+		  viewBox: '0 0 20 16',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M4 11H11
+			  M14 11H16
+			  M8 2.5C8 3.32843 7.32843 4 6.5 4H2.5C1.67157 4 1 3.32843 1 2.5C1 1.67157 1.67157 1 2.5 1H6.5C7.32843 1 8 1.67157 8 2.5Z
+			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
+		})
+	),
 
 };
 
