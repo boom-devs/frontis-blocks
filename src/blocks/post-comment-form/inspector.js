@@ -37,11 +37,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showCommentTitle,
 		showCommentsCount,
 		showCommentForm,
-
-		// commentFormWidth,
-		// commentGap,
-		// avatarSize,
-
 		formTitle,
 		cancelReplyText,
 		loginText,
