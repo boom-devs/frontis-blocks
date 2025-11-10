@@ -2348,7 +2348,7 @@ transition: all .3s ease-in-out;
 					<div className="advanced-paragraph-block">
 						<div className="paragraph-input-wrapper">
 							<TextareaControl
-								label={__("Paragraph Text", "frontis-blocks")}
+								label={__("Text", "frontis-blocks")}
 								value={paragraphText}
 								onChange={(value) => {
 										setAttributes({ paragraphText: value });
@@ -2370,7 +2370,7 @@ transition: all .3s ease-in-out;
 		<>
 			{/* Paragraphy Styling  */}
 			<PanelBody
-				title={__("Paragraph Styling", "frontis-blocks")}
+				title={__("Text", "frontis-blocks")}
 				initialOpen={true}
 			>
 				<FB_TypographyControl
@@ -2638,7 +2638,7 @@ transition: all .3s ease-in-out;
 
 			{hasLinkInParagraph && (
 				<PanelBody
-					title={__("Link Appearance", "frontis-blocks")}
+					title={__("Link", "frontis-blocks")}
 					initialOpen={false}
 				>
 					{/* start link typography  */}
