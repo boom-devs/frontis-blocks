@@ -40,5 +40,5 @@ $output .= '</div>';
 $output .= '</div>';
 $output .= '</div>';
 
-// Echo the final output
+
 echo $output;
