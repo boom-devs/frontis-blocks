@@ -2496,6 +2496,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .fb-comment-reply a {
                 text-decoration: none;
+                color: #2271b1;
             }
 
             .${blockId} .fb-comment-reply:hover {
