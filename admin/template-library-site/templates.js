@@ -10,14 +10,11 @@ import TemplateContent from "./template-content";
 import { usePostDataMutation } from './services/laravelapi';
 
 const PatternLibraryButton = () => {
-    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [noneFilterLoading, setNoneFilterLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
-    const [cardListType, setCardListType] = useState('list');
     const [activeTab, setActiveTab] = useState('patterns');
-    const [debouncedValue, setDebouncedValue] = useState('');
     const [debounceTimer, setDebounceTimer] = useState(null);
     const [activeCategory, setActiveCategory] = useState({
         patterns: '',
@@ -27,7 +24,6 @@ const PatternLibraryButton = () => {
     });
     const [isProTemplate, setIsProTemplate] = useState('');
     const [searchText, setSearchText] = useState('');
-    const [savedTemplateType, setSavedTemplateType] = useState('');
     const [activeTagTab, setActiveTagTab] = useState({
         patterns: '',
         pages: '',
@@ -110,7 +106,6 @@ const PatternLibraryButton = () => {
 
         // Step 3: set new timer
         const timer = setTimeout(() => {
-            setDebouncedValue(value);
             fetchData(activeTab, 1, activeTagTab[activeTab], value, activeCategory[activeTab]);
         }, 1000);
 
@@ -250,95 +245,9 @@ const PatternLibraryButton = () => {
         setActiveTagTab({ [activeTab]: '' });
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
-        setSavedTemplateType('');
         fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
         fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
     }, [activeTab, userData?.email]);
-
-
-    const handleSaveLibrary = async (templateData, isAlreadySaved) => {
-        if (!userData) {
-            setIsLoginModalOpen(true);
-            return;
-        }
-
-        if (isAlreadySaved) return;
-
-        if (loading) return;
-
-        setData((prev) => {
-            const updatedItems = prev[activeTab].items.map((item) =>
-                item.id === templateData.id ? { ...item, saveLoading: true } : item
-            );
-            return {
-                ...prev,
-                [activeTab]: {
-                    ...prev[activeTab],
-                    items: updatedItems,
-                },
-            };
-        });
-
-        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
-        const body = {
-            email: userData.email,
-            item_id: templateData.id,
-            item_type: templateData.type,
-            license_key: '',
-            website: window.location.origin,
-        };
-
-        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        });
-
-        const responseData = await response.json();
-
-        if(responseData.status === 'success') {
-            toast.success(responseData.message, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-            });
-
-            setData((prev) => {
-                const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saved: true, saveLoading: false } : item
-                );
-                return {
-                    ...prev,
-                    [activeTab]: {
-                        ...prev[activeTab],
-                        items: updatedItems,
-                    },
-                };
-            });
-        } else {
-            toast.error('Failed to save template', {
-                position: "top-right",
-                autoClose: 3000,
-            });
-
-            setData((prev) => {
-                const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saveLoading: false } : item
-                );
-                return {
-                    ...prev,
-                    [activeTab]: {
-                        ...prev[activeTab],
-                        items: updatedItems,
-                    },
-                };
-            });
-        }
-    }
 
 
     const TagTabsOptions = (() => {
@@ -378,28 +287,25 @@ const PatternLibraryButton = () => {
                             loading={noneFilterLoading}
                             isImporting={isImporting}
                         />
-
-                        {activeTab !== 'templatelibrary' && (
-                            <TemplateContent
-                                activeTab={activeTab}
-                                setActiveTab={setActiveTab}
-                                activeCategory={activeCategory}
-                                data={data}
-                                activeTagTab={activeTagTab[activeTab]}
-                                searchText={searchText}
-                                searchTemplates={handleSearchTemplates}
-                                setActiveTagTab={handleActiveTag}
-                                TagTabsOptions={TagTabsOptions}
-                                isLogedIn={isLogedIn}
-                                setIsLogedIn={setIsLogedIn}
-                                loading={isLoading}
-                                setLoading={loading}
-                                tagLoading={noneFilterLoading}
-                                currentPage={currentPage[activeTab]}
-                                onPageChange={handlePageChange}
-                                isImporting={isImporting}
-                            />
-                        )}
+                        <TemplateContent
+                            activeTab={activeTab}
+                            setActiveTab={setActiveTab}
+                            activeCategory={activeCategory}
+                            data={data}
+                            activeTagTab={activeTagTab[activeTab]}
+                            searchText={searchText}
+                            searchTemplates={handleSearchTemplates}
+                            setActiveTagTab={handleActiveTag}
+                            TagTabsOptions={TagTabsOptions}
+                            isLogedIn={isLogedIn}
+                            setIsLogedIn={setIsLogedIn}
+                            loading={isLoading}
+                            setLoading={loading}
+                            tagLoading={noneFilterLoading}
+                            currentPage={currentPage[activeTab]}
+                            onPageChange={handlePageChange}
+                            isImporting={isImporting}
+                        />
                     </div>
                 </div>
             </div>
