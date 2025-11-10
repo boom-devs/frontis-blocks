@@ -907,7 +907,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const linkDesktopBorderRadiusWidth = `${linkDesktopBorderRadius.top}${linkBorderRadiusUnits.Desktop} ${linkDesktopBorderRadius.right}${linkBorderRadiusUnits.Desktop} ${linkDesktopBorderRadius.bottom}${linkBorderRadiusUnits.Desktop} ${linkDesktopBorderRadius.left}${linkBorderRadiusUnits.Desktop}`;
 	const linkTabletBorderRadiusWidth = `${linkTabBorderRadius.top}${linkBorderRadiusUnits.Tablet} ${linkTabBorderRadius.right}${linkBorderRadiusUnits.Tablet} ${linkTabBorderRadius.bottom}${linkBorderRadiusUnits.Tablet} ${linkTabBorderRadius.left}${linkBorderRadiusUnits.Tablet}`;
 	const linkMobileBorderRadiusWidth = `${linkMobileBorderRadius.top}${linkBorderRadiusUnits.Mobile} ${linkMobileBorderRadius.right}${linkBorderRadiusUnits.Mobile} ${linkMobileBorderRadius.bottom}${linkBorderRadiusUnits.Mobile} ${linkMobileBorderRadius.left}${linkBorderRadiusUnits.Mobile}`;
-
 	// end link border radius
 
 	/** Start Global padding */
