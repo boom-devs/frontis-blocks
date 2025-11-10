@@ -342,7 +342,7 @@ const attributes = {
 
 	linkBorderRadiusLink: {
 		type: "boolean",
-		defautl: true,
+		default: true,
 	},
 
 	// Box Shadow
