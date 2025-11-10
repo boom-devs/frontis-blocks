@@ -2590,7 +2590,7 @@ transition: all .3s ease-in-out;
 							},
 							{
 								name: "advanced",
-								title: "Advanced",
+								title: "Extra",
 								className: "fb-tab advanced",
 							},
 						]}
