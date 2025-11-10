@@ -17,10 +17,6 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	dynamicContent: {
-		type: "string",
-		default: "",
-	},
 	paragraphTag: {
 		type: "string",
 		default: "p",
@@ -57,9 +53,9 @@ const attributes = {
 		},
 	},
 
-	// Start Link Appearance
+	/** Link Appearance **/
 
-	// start typography panel body
+	// Typography
 	linkGlobalTypoSwitcher: {
 		type: "object",
 		default: {
@@ -171,7 +167,7 @@ const attributes = {
 		},
 	},
 
-	// color
+	// Color
 	linkColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -182,7 +178,7 @@ const attributes = {
 	linkHoverColor: {
 		type: "string",
 	},
-	// background color
+	// BackgroundColor
 	linkBgColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -196,8 +192,7 @@ const attributes = {
 		type: "string",
 	},
 
-	// padding
-
+	// Padding
 	linkPaddingUnits: {
 		type: "object",
 		default: {
@@ -360,7 +355,7 @@ const attributes = {
 		default: "",
 	},
 
-	// start dropcap typo style
+	// DropCap Typography
 	dropCapGlobalTypoSwitcher: {
 		type: "object",
 		default: {
@@ -650,9 +645,8 @@ const attributes = {
 	paragraphBgColorHover: {
 		type: "string",
 	},
-	/** End paragraph Style */
 
-	// start dropcap style
+	// DropCap
 	dropCapColorSwitcher: {
 		type: "string",
 		default: "normal",
@@ -852,9 +846,8 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
-	// end dropcap style
 
-	/** Start Global Setting */
+	/** Global Setting */
 	paragraphGlobalZIndex: {
 		type: "object",
 		default: {
@@ -877,7 +870,7 @@ const attributes = {
 		default: "",
 	},
 
-	/** Start Padding */
+	/** Padding */
 	paragraphGlobalPaddingUnits: {
 		type: "object",
 		default: {
