@@ -60,6 +60,7 @@ $profile_url = $current_user->exists() ? get_edit_profile_url( $current_user->ID
 /**
  * Improved detection for user's own pending comment
  */
+if (!function_exists('frontis_is_user_comment')) {
 function frontis_is_user_comment($comment) {
     $current_user = wp_get_current_user();
     $current_user_email = $current_user->exists() ? $current_user->user_email : '';
@@ -82,6 +83,7 @@ function frontis_is_user_comment($comment) {
     }
 
     return false;
+}
 }
 
 /**
