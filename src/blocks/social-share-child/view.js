@@ -14,7 +14,6 @@
                 button.setAttribute('title', `Share on ${networkLabel}`);
             }
 
-            console.log(SocialShareData);
             button.addEventListener('click', function(e) {
                 e.preventDefault();
                 const socialType = this.classList[1];
