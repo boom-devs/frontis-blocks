@@ -685,13 +685,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .${blockId} .fb-post-featured-image .fb-post-featured-image-inner {
-                width: 100%;
+                // width: 100%;
+								width: auto;
             }
 
             /* Target the image */
             .${blockId}.fb-post-featured-image-block .fb-post-featured-image  img.fb-post-featured-image-img{
-                max-width: 100%;
+                // max-width: 100%;
                 width: 100%;
+								// width: auto;
                 height: 100%;
                 transition: all .3s ease;
             }
@@ -721,38 +723,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             /*===========================  Desktop Styles ===========================  */
             .${blockId} .fb-post-featured-image {
                 ${imageAlignment.Desktop
-				? `justify-content: ${imageAlignment.Desktop};`
-				: ""
-			}
+									? `justify-content: ${imageAlignment.Desktop};`
+									: ""
+								}
             }
 
             .${blockId}.fb-post-featured-image-block .fb-post-featured-image  .fb-post-featured-image-inner{
                 ${mediaSize.Desktop
-				? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};`
-				: ""
-			}
-                ${!autoHeightSwitch && mediaHeight.Desktop
-				? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};`
-				: `height: auto;`
-			}
-
-                ${imageBorder ? `border: ${imageBorder};` : ""}
-                ${imageDesktopBorder && imageBorderDesktop.top
-				? `border-width: ${imageDesktopBorder};`
-				: ""
-			}
-                ${imageDesktopBorderRadius && imageBorderRadiusDesktop.top
-				? `border-radius: ${imageDesktopBorderRadius};`
-				: ""
-			}
-                ${imageBorderColor ? `border-color: ${imageBorderColor};` : ""}
-                ${imageBoxShadowCssValue
-				? `box-shadow: ${imageBoxShadowCssValue};`
-				: ""
-			}
+									? `width: ${mediaSize.Desktop}${mediaSizeUnits.Desktop};`
+									: ""
+								}
+													${!autoHeightSwitch && mediaHeight.Desktop
+									? `height: ${mediaHeight.Desktop}${mediaHeightUnits.Desktop};`
+									: `height: auto;`
+								}
+									${imageBorder ? `border: ${imageBorder};` : ""}
+													${imageDesktopBorder && imageBorderDesktop.top
+									? `border-width: ${imageDesktopBorder};`
+									: ""
+								}
+													${imageDesktopBorderRadius && imageBorderRadiusDesktop.top
+									? `border-radius: ${imageDesktopBorderRadius};`
+									: ""
+								}
+													${imageBorderColor ? `border-color: ${imageBorderColor};` : ""}
+													${imageBoxShadowCssValue
+									? `box-shadow: ${imageBoxShadowCssValue};`
+									: ""
+								}
                 overflow: hidden;
                 transition: all 0.3s ease-in-out;
-
             }
 
             .${blockId}.fb-post-featured-image-block .fb-post-featured-image .fb-post-featured-image-inner  img.fb-post-featured-image-img{
@@ -1196,7 +1196,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					options={IMAGE_SIZES}
 					onChange={(value) => setAttributes({ imageSize: value })}
 				/>
+
+				
 			}
+							<p
+					style={{
+						fontSize: "12px",
+						color: "#888",
+						marginTop: "8px",
+						marginBottom: "20px",
+					}}
+				>
+					{__(
+						"Only effective if a featured image is assigned to the post.",
+						"frontis-blocks",
+					)}
+				</p>
+
 
 			<FB_ResponsiveAlignmentControl
 				label={__("Image Alignment", "frontis-blocks")}
