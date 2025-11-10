@@ -7,18 +7,17 @@ import '../../../assets/css/backend/switch.css';
 import BlockHeader from './BlockHeader';
 import FBSwitch from '../../components/common/Switch';
 
-// Add this mapping object after the imports
-
 const Blocks = () => {
-	const [blocks, setBlocks] = useState([]);
+	
 	const [disableAllBlocks, setDisableAllBlocks] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [searchTerm, setSearchTerm] = useState('');
 	const { ajaxUrl, nonce, blocks: allBlocks } = window.frontisBlocksAdmin;
+	const [blocks, setBlocks] = useState([]);
 
     const handleChange = () => {
-        setDisableAllBlocks(!disableAllBlocks);
+        // setDisableAllBlocks(!disableAllBlocks);
     };
 
 	useEffect(() => {
@@ -150,6 +149,7 @@ const Blocks = () => {
 	};
 
 	const disableAllBlocksHandler = () => {
+		setDisableAllBlocks(!disableAllBlocks);
 		const updatedBlocks = blocks.map(block => ({ ...block, status: '0' }));
 		setBlocks(updatedBlocks);
 		saveBlocks(updatedBlocks);
@@ -164,7 +164,7 @@ const Blocks = () => {
 						<p className='p1'>{__('Global control allows users to easily enable or disable all available blocks together, simplifying block management.', 'frontis-blocks')}</p>
 					</div>
 					<div className='fb-blocks-tab-header'>
-						<BlockHeader onChange={setSearchTerm} value={searchTerm} categories={blocksCategory} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} disableAllBlocksHandler={disableAllBlocksHandler}/>
+						<BlockHeader onChange={setSearchTerm} value={searchTerm} categories={blocksCategory} setSelectedCategory={setSelectedCategory} selectedCategory={selectedCategory} disableAllBlocksHandler={disableAllBlocksHandler} disableAllBlocks={disableAllBlocks}/>
  					</div>
 				</div>
 			</div>

@@ -38,11 +38,11 @@ class BlockList
                 'package' => 'free',
                 'category' => 'layout',
                 'badge' => 'free',
-                'status' => 'true',
+                'status' => 'false',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/container.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'true',
+                'complete' => 'false',
                 'child' => 'false',
             ],
             'accordion' => [
@@ -602,7 +602,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
 
             'tabs' => [
@@ -629,7 +629,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'critical-css' => [
                 'slug' => 'critical-css',

@@ -4,8 +4,8 @@ import styles from './BlockHeader.module.scss';
 import FBSwitch from '../../components/common/Switch';
 import { All, Content, Creative, Form, Layout, Dynamic, Social, Media, Navigation, PostTabIcon } from '../../icons';
 
-const BlockHeader = ({onChange, value, categories, setSelectedCategory, selectedCategory, disableAllBlocksHandler}) => {
-    const [disableAllBlocks, setDisableAllBlocks] = useState(false);
+const BlockHeader = ({onChange, value, categories, setSelectedCategory, selectedCategory, disableAllBlocksHandler, disableAllBlocks}) => {
+    // const [disableAllBlocks, setDisableAllBlocks] = useState(false);
 
     const categoryIcons = {
         all: All,
