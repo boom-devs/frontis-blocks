@@ -4,8 +4,6 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
-import {ToastContainer, toast } from "react-toastify";
-import { TemplateContentLoader } from "./template-loader";
 import { ClipLoader } from "react-spinners";
 import { useRef } from "@wordpress/element";
 import TemplateLibraryCardsSkeleton from "./components/TemplateLibraryCardsSkeleton";
@@ -89,86 +87,9 @@ const TemplateContent = ({
 
     }, [activeTab, activeCategory, activeTagTab, TagTabsOptions, schema]);
 
-    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-
-    // Update user data inside database
-    const updateUserDataToDb = (optionName, data) => {
-        window.jQuery.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: {
-                action: 'fb_update_option',
-                'option_name': optionName,
-                'value': data,
-                security: nonce
-            },
-            success: function(response) {
-                console.log(response)
-            },
-            error: function(xhr, status, error) {
-                console.log("Somthing went wrong.")
-            }
-        });
-    }
-
-    const getUserDataFromDb = () => {
-        window.jQuery.ajax({
-            data: {
-                action: 'fb_get_option',
-                'option_name': 'frontis_tl_user_data',
-                security: nonce,
-            },
-            success: function(response) {
-                localStorage.setItem('userData', JSON.stringify(response.data));
-            },
-            error: function(xhr, status, error) {
-                console.log("Somthing went wrong.")
-            }
-        });
-    }
-
-    const handleLoginSuccess = useCallback((response, activeTab) => {
-        toast( activeTab === "signup" ? "Your account has been created!" : "Logged in successfully!", {
-            position:"top-right",
-            autoClose:3000,
-            hideProgressBar:false,
-            newestOnTop:false,
-            closeOnClick:true,
-            rtl:false,
-            pauseOnFocusLoss:true,
-            draggable:true,
-            pauseOnHover:true,
-            theme:"light"
-        } );
-
-        updateUserDataToDb('frontis_tl_user_data', {
-            'name': response?.user?.name,
-            'email': response?.user?.email,
-            'access_token': response?.access_token,
-            'refresh_token': response?.refresh_token,
-        })
-        setIsLogedIn(true);
-    }, []);
 
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-    // Get user data from local storage
-    useEffect(() => {
-        // Get userData from local storage
-        
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        if (userData === 'undefined' || userData === 'null' || userData === '') {
-            getUserDataFromDb();
-        }
-
-        // Get user data from localstorage and set setIsLoginModalOpen is false
-        if (userData) {
-        }
-        
-    }, []);
-
-
-    
 
     return (
         <>
