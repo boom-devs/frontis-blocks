@@ -2,7 +2,6 @@ import { __ } from "@wordpress/i18n";
 import {
 	SelectControl,
 	PanelBody,
-	TabPanel,
 	BaseControl,
 	ToggleControl,
 	__experimentalInputControl as InputControl,
@@ -36,8 +35,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 		paragraphText,
-		dynamicContent,
-		dynamicValue,
 		paragraphAlignment,
 		dropCap,
 		paragraphColumnCount,
@@ -1277,7 +1274,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	// detect <a> tags inside the RichText
 	const hasLinkInParagraph = useMemo(() => {
-		const htmlContent = dynamicContent ? dynamicValue : paragraphText;
+		const htmlContent = paragraphText;
 
 		if (!htmlContent) return false;
 
@@ -1286,7 +1283,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const aTags = doc.querySelectorAll("a");
 
 		return aTags.length > 0;
-	}, [paragraphText, dynamicContent, dynamicValue]);
+	}, [paragraphText]);
 
 	const allBlockStyle = useMemo(
 		() => `
@@ -2352,17 +2349,10 @@ transition: all .3s ease-in-out;
 						<div className="paragraph-input-wrapper">
 							<TextareaControl
 								label={__("Paragraph Text", "frontis-blocks")}
-								value={
-									dynamicContent
-										? `[Dynamic: ${dynamicContent}]`
-										: paragraphText
-								}
+								value={paragraphText}
 								onChange={(value) => {
-									if (!dynamicContent) {
 										setAttributes({ paragraphText: value });
-									}
 								}}
-								disabled={!!dynamicContent}
 								className="fb-advanced-text"
 								__nextHasNoMarginBottom={true}
 							/>

@@ -2496,6 +2496,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
             .${blockId} .fb-comment-reply a {
                 text-decoration: none;
+                color: #2271b1;
             }
 
             .${blockId} .fb-comment-reply:hover {
@@ -5213,21 +5214,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			>
 
 				<ToggleControl
-					label={__("Show Comment Title", "frontis-blocks")}
+					label={__("Show Title", "frontis-blocks")}
 					checked={showCommentTitle}
 					onChange={(value) => setAttributes({ showCommentTitle: value })}
 				/>
 
 				{showCommentTitle && (
 					<ToggleControl
-						label={__("Show Comment Count", "frontis-blocks")}
+						label={__("Show Count", "frontis-blocks")}
 						checked={showCommentsCount}
 						onChange={(value) => setAttributes({ showCommentsCount: value })}
 					/>
 				)}
 
 				<ToggleControl
-					label={__("Show Comment Form", "frontis-blocks")}
+					label={__("Show Form", "frontis-blocks")}
 					checked={showCommentForm}
 					onChange={(value) => setAttributes({ showCommentForm: value })}
 				/>
@@ -5250,7 +5251,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<div className="fb-control-divider"></div>
 
 					<FB_InputControl
-						label={__("Comment Invitation", "frontis-blocks")}
+						label={__("Invitation", "frontis-blocks")}
 						value={formTitle}
 						onChangeValue={(value) => setAttributes({ formTitle: value })}
 						placeholder={__("Leave a Reply", "frontis-blocks")}
@@ -5278,7 +5279,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 					<FB_InputControl
-						label={__("Submit Comment Action", "frontis-blocks")}
+						label={__("Submit Action", "frontis-blocks")}
 						value={buttonText}
 						onChangeValue={(value) => setAttributes({ buttonText: value })}
 						placeholder={__("Post Comment", "frontis-blocks")}
