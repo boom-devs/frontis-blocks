@@ -5422,6 +5422,22 @@ ${
 							min={1}
 							max={50}
 						/>
+
+						{ showDescription &&
+						 <RangeControl
+							label={__("Description Length", "frontis-blocks")}
+							value={postDescriptionExcerptLength}
+							onChange={(value) =>
+								setAttributes({
+									postDescriptionExcerptLength: value === 0 ? undefined : value,
+								})
+							}
+							min={1}
+							max={200}
+							step={1}
+							resetFallbackValue={10}
+						/>}
+
 					</BaseControl>
 				</PanelBody>
 
@@ -6767,20 +6783,6 @@ ${
 						setAttributes={setAttributes}
 						rangeStep={1}
 						resetFallbackValue={""}
-					/>
-
-					<RangeControl
-						label={__("Description Length", "frontis-blocks")}
-						value={postDescriptionExcerptLength}
-						onChange={(value) =>
-							setAttributes({
-								postDescriptionExcerptLength: value === 0 ? undefined : value,
-							})
-						}
-						min={1}
-						max={200}
-						step={1}
-						resetFallbackValue={10}
 					/>
 				</PanelBody>
 			)}
