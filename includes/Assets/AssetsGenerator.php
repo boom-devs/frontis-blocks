@@ -96,9 +96,6 @@ class AssetsGenerator
 			
 			try {
 				$post_ids = Helper::get_all_post_ids();
-
-				// var_dump($post_ids);
-				// die();
 				
 				if (!empty($post_ids)) {
 					foreach ($post_ids as $single_post_id) {
