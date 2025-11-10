@@ -5211,23 +5211,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				label={__("Element Visibility", "frontis-blocks")}
 				className="fb-setting-show-hide-elements"
 			>
-				{showCommentTitle && (
-					<ToggleControl
-						label={__("Show Comment Count", "frontis-blocks")}
-						checked={showCommentsCount}
-						onChange={(value) => setAttributes({ showCommentsCount: value })}
-						help={__(
-							"Comments count is only shown when comment title is visible",
-							"frontis-blocks",
-						)}
-					/>
-				)}
 
 				<ToggleControl
 					label={__("Show Comment Title", "frontis-blocks")}
 					checked={showCommentTitle}
 					onChange={(value) => setAttributes({ showCommentTitle: value })}
 				/>
+
+				{showCommentTitle && (
+					<ToggleControl
+						label={__("Show Comment Count", "frontis-blocks")}
+						checked={showCommentsCount}
+						onChange={(value) => setAttributes({ showCommentsCount: value })}
+					/>
+				)}
 
 				<ToggleControl
 					label={__("Show Comment Form", "frontis-blocks")}
