@@ -31,6 +31,7 @@ const TemplateContent = ({
     setActiveCategory,
     currentPage,
     onPageChange,
+    handleSidebarToggle,
 }) => {
 
     const schema = data || {};
@@ -98,6 +99,14 @@ const TemplateContent = ({
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
                         <div className="fb-template-library-tabs">
+                            <button
+                                className={`fb-template-library-tab nav-icon`}
+                                onClick={handleSidebarToggle}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 5H21M3 12H21M3 19H15" stroke="#0B0C0E" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </button>
                             {TabsOptions.map(tab => (
                                 <button
                                     key={tab.value}
