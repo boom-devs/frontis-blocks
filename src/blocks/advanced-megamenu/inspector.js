@@ -272,7 +272,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             patternOptions.push(
                 { value: 'user-separator', label: '--- User Patterns ---', disabled: true },
                 ...patternData.userPatterns.map((pattern) => ({
-                    value: 'user-' + pattern.id,
+                    value: pattern.id,
                     label: pattern.title?.raw || `Pattern ${pattern.id}`,
                     content: pattern.content?.raw || pattern.content || ''
                 }))
