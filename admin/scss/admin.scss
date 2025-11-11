@@ -300,3 +300,17 @@
 .highlight-tabs .components-tab-panel__tabs-item.active-tab {
   border-bottom: 2px solid #399CFF;
 }
+
+.fb-control-divider {
+  border-bottom: 1px solid #ddd;
+  margin: 16px 0;
+}
+.fb-control-help{
+  font-size: 12px;
+	color: #888;
+	line-height: 1.4;
+}
+.is-disabled {
+  opacity: 0.5;
+  pointer-events: none; 
+}
