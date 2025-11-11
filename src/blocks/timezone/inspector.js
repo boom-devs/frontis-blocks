@@ -16,8 +16,12 @@ import './editor.scss';
 import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
 import { TIMEZONE, WEEKENDDAY } from '@Constants/fbConstants';
 
+import FB_InspectorControls from '@Components/InspectorControls';
+
+
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
+		blockID,
 		location,        
 		timezone,        
 		timezones,       
@@ -41,6 +45,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		beforeTimeText,
 		afterTimeText
 	} = attributes;
+
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-timezone-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
 	// State variables
 	const [selectedDate, setSelectedDate] = useState('');
@@ -496,340 +508,335 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		{ label: 'October', value: '9' }, { label: 'November', value: '10' }, { label: 'December', value: '11' }
 	], []);
 
-	return (
+	 /**
+	 * Inspector General Controls
+	 */
+    const generalControls = (
 		<>
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{ name: "general", title: "General", className: "fb-tab general" },
-							{ name: "styles", title: "Style", className: "fb-tab styles" },
-							{ name: "advanced", title: "Advanced", className: "fb-tab advance" },
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls " + tab.name}>
-								{tab.name === 'general' && (
-									<>
-										{/* Location & Basic Settings */}
-										<PanelBody title="Location & Basic Settings" initialOpen={true}>
-											<TextControl
-												label="Location Name"
-												value={location || ''}
-												onChange={(value) => setAttributes({ location: value })}
-												placeholder="e.g., Dhaka, Bangladesh"
-											/>
+			{/* Location & Basic Settings */}
+			<PanelBody title="Location & Basic Settings" initialOpen={true}>
+				<BaseControl>
+					<ToggleControl
+						label="Use UTC Timezone Format"
+						checked={!!useUTCTimezoneFormat}
+						onChange={(value) => setAttributes({ useUTCTimezoneFormat: value })}
+					/>
+				</BaseControl>
+				<TextControl
+					label="Location Name"
+					value={location || ''}
+					onChange={(value) => setAttributes({ location: value })}
+					placeholder="e.g., Dhaka, Bangladesh"
+				/>
 
-											<TextControl
-												label="Separator"
-												value={separator || ''}
-												onChange={(value) => setAttributes({ separator: value })}
-												placeholder="e.g., | , - , • , etc."
-											/>
+				<TextControl
+					label="Separator"
+					value={separator || ''}
+					onChange={(value) => setAttributes({ separator: value })}
+					placeholder="e.g., | , - , • , etc."
+				/>
 
-											<BaseControl label="Timezone Setting">
-												<SelectControl
-													options={TIMEZONE}
-													value={timezoneMode}
-													onChange={(value) => setAttributes({ timezoneMode: value })}
-												/>
-											</BaseControl>
-											
-											{timezoneMode === 'auto' ? (
-												<TextControl 
-													label="Current Timezone" 
-													value={displayTimezone || 'Detecting...'} 
-													readOnly 
-												/>
-											) : (
-												<BaseControl label="Select Timezone">
-													<Select2
-														options={timezones || []}
-														value={getSelectedOption(timezones, timezone)}
-														onChange={(opt) => setAttributes({ timezone: opt?.value })}
-														isClearable={false}
-														className="fb-select2-control"
-													/>
-												</BaseControl>
-											)}
-											
-											{effectiveTimezone && (
-												<TextControl
-													label="Current Time"
-													value={currentTime || 'Loading...'}
-													readOnly
-												/>
-											)}
+				<BaseControl label="Timezone Setting">
+					<SelectControl
+						options={TIMEZONE}
+						value={timezoneMode}
+						onChange={(value) => setAttributes({ timezoneMode: value })}
+					/>
+				</BaseControl>
+				
+				{timezoneMode === 'auto' ? (
+					<TextControl 
+						label="Current Timezone" 
+						value={displayTimezone || 'Detecting...'} 
+						readOnly 
+					/>
+				) : (
+					<BaseControl label="Select Timezone">
+						<Select2
+							options={timezones || []}
+							value={getSelectedOption(timezones, timezone)}
+							onChange={(opt) => setAttributes({ timezone: opt?.value })}
+							isClearable={false}
+							className="fb-select2-control"
+						/>
+					</BaseControl>
+				)}
+				
+				{effectiveTimezone && (
+					<TextControl
+						label="Current Time"
+						value={currentTime || 'Loading...'}
+						readOnly
+					/>
+				)}
 
-											<TextControl
-												label="Current Status"
-												value={currentStatus}
-												readOnly
-											/>
-										</PanelBody>
+				<TextControl
+					label="Current Status"
+					value={currentStatus}
+					readOnly
+				/>
+			</PanelBody>
 
-										{/* Status Text Settings */}
-										<PanelBody title="Status Text Settings" initialOpen={true}>
-											<TextControl
-												label="Open Status Text"
-												value={openStatusText || ''}
-												onChange={(value) => setAttributes({ openStatusText: value })}
-												placeholder="e.g., Open, Available, etc."
-											/>
-											
-											<TextControl
-												label="Closed Status Text"
-												value={closedStatusText || ''}
-												onChange={(value) => setAttributes({ closedStatusText: value })}
-												placeholder="e.g., Closed, Unavailable, etc."
-											/>
-										</PanelBody>
+			{/* Status Text Settings */}
+			<PanelBody title="Status Text Settings" initialOpen={true}>
+				<TextControl
+					label="Open Status Text"
+					value={openStatusText || ''}
+					onChange={(value) => setAttributes({ openStatusText: value })}
+					placeholder="e.g., Open, Available, etc."
+				/>
+				
+				<TextControl
+					label="Closed Status Text"
+					value={closedStatusText || ''}
+					onChange={(value) => setAttributes({ closedStatusText: value })}
+					placeholder="e.g., Closed, Unavailable, etc."
+				/>
+			</PanelBody>
 
-										{/* Time Text Settings */}
-										<PanelBody title="Time Display Text" initialOpen={true}>
-											<TextControl
-												label="Before Time Text"
-												value={beforeTimeText || ''}
-												onChange={(value) => setAttributes({ beforeTimeText: value })}
-												placeholder="e.g., Office will start at, Opens at, etc."
-											/>
-											
-											<TextControl
-												label="After Time Text"
-												value={afterTimeText || ''}
-												onChange={(value) => setAttributes({ afterTimeText: value })}
-												placeholder="e.g., Office will close at, Closes at, etc."
-											/>
-										</PanelBody>
+			{/* Time Text Settings */}
+			<PanelBody title="Time Display Text" initialOpen={true}>
+				<TextControl
+					label="Before Time Text"
+					value={beforeTimeText || ''}
+					onChange={(value) => setAttributes({ beforeTimeText: value })}
+					placeholder="e.g., Office will start at, Opens at, etc."
+				/>
+				
+				<TextControl
+					label="After Time Text"
+					value={afterTimeText || ''}
+					onChange={(value) => setAttributes({ afterTimeText: value })}
+					placeholder="e.g., Office will close at, Closes at, etc."
+				/>
+			</PanelBody>
 
-										{/* Office Hours Schedule */}
-										<PanelBody title="Office Hours Schedule" initialOpen={true}>
-											<BaseControl>
-												<ToggleControl
-													label="Use Monthly Schedule"
-													checked={!!useMonthlySchedule}
-													onChange={(value) => setAttributes({ useMonthlySchedule: value })}
-												/>
-											</BaseControl>
+			{/* Office Hours Schedule */}
+			<PanelBody title="Office Hours Schedule" initialOpen={true}>
+				<BaseControl>
+					<ToggleControl
+						label="Use Monthly Schedule"
+						checked={!!useMonthlySchedule}
+						onChange={(value) => setAttributes({ useMonthlySchedule: value })}
+					/>
+				</BaseControl>
 
-											{!useMonthlySchedule && (
-												<>
-													<TimePickerField
-														label="Start Time"
-														value={startTime}
-														onChange={(value) => setAttributes({ startTime: value })}
-													/>
-													<TimePickerField
-														label="End Time"
-														value={endTime}
-														onChange={(value) => setAttributes({ endTime: value })}
-													/>
-												</>
-											)}
-										</PanelBody>
+				{!useMonthlySchedule && (
+					<>
+						<TimePickerField
+							label="Start Time"
+							value={startTime}
+							onChange={(value) => setAttributes({ startTime: value })}
+						/>
+						<TimePickerField
+							label="End Time"
+							value={endTime}
+							onChange={(value) => setAttributes({ endTime: value })}
+						/>
+					</>
+				)}
+			</PanelBody>
 
-										{/* Monthly Schedule */}
-										{useMonthlySchedule && (
-											<PanelBody title="Monthly Schedule" initialOpen={true}>
-												<div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
-													<BaseControl label="Add Month Schedule">
-														<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-															<div style={{ flex: 1 }}>
-																<Select2
-																	options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
-																	value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
-																	onChange={(opt) => setSelectedMonth(opt?.value || '')}
-																	isClearable={false}
-																	className="fb-select2-control"
-																/>
-															</div>
-															<Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
-																Add Schedule
-															</Button>
-														</div>
-													</BaseControl>
-												</div>
-												{monthlySchedules && monthlySchedules.length > 0 ? (
-													<div>
-														<strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
-														<div style={{ marginTop: '10px', borderRadius: '4px' }}>
-															{monthlySchedules.map(schedule => (
-																<div key={schedule.month} style={{ padding: '4px', margin: '5px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
-																	<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-																		<strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
-																			{monthOptions.find(m => m.value === schedule.month)?.label}
-																		</strong>
-																		<Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
-																			Remove
-																		</Button>
-																	</div>
-																	<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-																		<BaseControl label="Start Time">
-																			<TimePickerField
-																				value={schedule.startTime}
-																				onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
-																			/>
-																		</BaseControl>
-																		<BaseControl label="End Time">
-																			<TimePickerField
-																				value={schedule.endTime}
-																				onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
-																			/>
-																		</BaseControl>
-																	</div>
-																</div>
-															))}
-														</div>
-													</div>
-												) : (
-													<div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
-														<p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
-														<p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
-													</div>
-												)}
-											</PanelBody>
-										)}
-
-										{/* Weekend Settings */}
-										<PanelBody title="Weekend Days" initialOpen={false}>
-											<BaseControl label="Select Weekend Days">
-												<Select2
-													options={WEEKENDDAY}
-													value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
-													onChange={(selectedOptions) => {
-														const daysArray = Array.isArray(selectedOptions) ? selectedOptions.map(opt => opt.value) : [];
-														setAttributes({ weekendDays: daysArray });
-													}}
-													isMulti={true}
-													isClearable={true}
-													className="fb-select2-control"
-												/>
-											</BaseControl>
-										</PanelBody>
-
-										{/* Holiday Settings */}
-										<PanelBody title="Holidays" initialOpen={false}>
-											<BaseControl label="Add Holiday Date">
-												<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-													<DatePicker 
-														currentDate={selectedDate} 
-														onChange={setSelectedDate}
-														__nextRemoveHelpButton
-														__nextRemoveResetButton
-													/>
-													<Button onClick={() => addHoliday(selectedDate)} disabled={!selectedDate}>
-														Add Holiday
-													</Button>
-												</div>
-											</BaseControl>
-
-											{holidays && holidays.length > 0 && (
-												<div style={{ marginTop: '15px' }}>
-													<strong>Holidays ({holidays.length}):</strong>
-													<div style={{ maxHeight: '150px', overflowY: 'auto', marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px' }}>
-														{holidays.map(holiday => (
-															<div key={holiday} style={{ 
-																display: 'flex', 
-																justifyContent: 'space-between', 
-																alignItems: 'center', 
-																padding: '8px',
-																borderBottom: '1px solid #f0f0f0',
-																backgroundColor: '#fff'
-															}}>
-																<div>
-																	<span style={{ fontWeight: '600', display: 'block' }}>
-																		{new Date(holiday).toLocaleDateString('en-US', { 
-																			weekday: 'long', 
-																			year: 'numeric', 
-																			month: 'long', 
-																			day: 'numeric' 
-																		})}
-																	</span>
-																	<span style={{ fontSize: '0.8em', color: '#666' }}>
-																		{new Date(holiday).toLocaleDateString()}
-																	</span>
-																</div>
-																<Button 
-																	isDestructive 
-																	isSmall
-																	onClick={() => removeHoliday(holiday)}
-																>
-																	Remove
-																</Button>
-															</div>
-														))}
-													</div>
-												</div>
-											)}
-										</PanelBody>
-
-										{/* Custom Messages */}
-										<PanelBody title="Custom Messages" initialOpen={false}>
-											<TextareaControl
-												label="Closed Message"
-												value={closedMessage || ''}
-												onChange={(value) => setAttributes({ closedMessage: value })}
-												placeholder="Office is closed"
-												help="This message shows when office is closed during working hours"
-											/>
-											
-											<TextareaControl
-												label="Open Message"
-												value={completionMessage || ''}
-												onChange={(value) => setAttributes({ completionMessage: value })}
-												placeholder="Office is open"
-												help="This message shows when office is open"
-											/>
-											
-											<TextareaControl
-												label="Weekend Message"
-												value={weekendMessage || ''}
-												onChange={(value) => setAttributes({ weekendMessage: value })}
-												placeholder="Closed for weekend"
-												help="This message shows when office is closed for weekend"
-											/>
-											
-											<TextareaControl
-												label="Holiday Message"
-												value={holidayMessage || ''}
-												onChange={(value) => setAttributes({ holidayMessage: value })}
-												placeholder="Closed for holiday"
-												help="This message shows when office is closed for holiday"
-											/>
-										</PanelBody>
-									</>
-								)}
-
-								{tab.name === 'styles' && (
-									<>
-										{/* Style settings will go here */}
-										<PanelBody title="Style Settings" initialOpen={true}>
-											<p>Style settings will be implemented here.</p>
-										</PanelBody>
-									</>
-								)}
-
-								{tab.name === 'advanced' && (
-									<>
-										{/* Advanced Settings */}
-										<PanelBody title="Advanced Settings" initialOpen={true}>
-											<BaseControl>
-												<ToggleControl
-													label="Use UTC Timezone Format"
-													checked={!!useUTCTimezoneFormat}
-													onChange={(value) => setAttributes({ useUTCTimezoneFormat: value })}
-												/>
-											</BaseControl>
-										</PanelBody>
-									</>
-								)}
+			{/* Monthly Schedule */}
+			{useMonthlySchedule && (
+				<PanelBody title="Monthly Schedule" initialOpen={true}>
+					<div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
+						<BaseControl label="Add Month Schedule">
+							<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+								<div style={{ flex: 1 }}>
+									<Select2
+										options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
+										value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
+										onChange={(opt) => setSelectedMonth(opt?.value || '')}
+										isClearable={false}
+										className="fb-select2-control"
+									/>
+								</div>
+								<Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
+									Add Schedule
+								</Button>
 							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+						</BaseControl>
+					</div>
+					{monthlySchedules && monthlySchedules.length > 0 ? (
+						<div>
+							<strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
+							<div style={{ marginTop: '10px', borderRadius: '4px' }}>
+								{monthlySchedules.map(schedule => (
+									<div key={schedule.month} style={{ padding: '4px', margin: '5px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
+										<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+											<strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
+												{monthOptions.find(m => m.value === schedule.month)?.label}
+											</strong>
+											<Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
+												Remove
+											</Button>
+										</div>
+										<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+											<BaseControl label="Start Time">
+												<TimePickerField
+													value={schedule.startTime}
+													onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
+												/>
+											</BaseControl>
+											<BaseControl label="End Time">
+												<TimePickerField
+													value={schedule.endTime}
+													onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
+												/>
+											</BaseControl>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
+					) : (
+						<div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
+							<p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
+							<p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
+						</div>
+					)}
+				</PanelBody>
+			)}
+
+			{/* Weekend Settings */}
+			<PanelBody title="Weekend Days" initialOpen={false}>
+				<BaseControl label="Select Weekend Days">
+					<Select2
+						options={WEEKENDDAY}
+						value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
+						onChange={(selectedOptions) => {
+							const daysArray = Array.isArray(selectedOptions) ? selectedOptions.map(opt => opt.value) : [];
+							setAttributes({ weekendDays: daysArray });
+						}}
+						isMulti={true}
+						isClearable={true}
+						className="fb-select2-control"
+					/>
+				</BaseControl>
+			</PanelBody>
+
+			{/* Holiday Settings */}
+			<PanelBody title="Holidays" initialOpen={false}>
+				<BaseControl label="Add Holiday Date">
+					<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+						<DatePicker 
+							currentDate={selectedDate} 
+							onChange={setSelectedDate}
+							__nextRemoveHelpButton
+							__nextRemoveResetButton
+						/>
+						<Button onClick={() => addHoliday(selectedDate)} disabled={!selectedDate}>
+							Add Holiday
+						</Button>
+					</div>
+				</BaseControl>
+
+				{holidays && holidays.length > 0 && (
+					<div style={{ marginTop: '15px' }}>
+						<strong>Holidays ({holidays.length}):</strong>
+						<div style={{ maxHeight: '150px', overflowY: 'auto', marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px' }}>
+							{holidays.map(holiday => (
+								<div key={holiday} style={{ 
+									display: 'flex', 
+									justifyContent: 'space-between', 
+									alignItems: 'center', 
+									padding: '8px',
+									borderBottom: '1px solid #f0f0f0',
+									backgroundColor: '#fff'
+								}}>
+									<div>
+										<span style={{ fontWeight: '600', display: 'block' }}>
+											{new Date(holiday).toLocaleDateString('en-US', { 
+												weekday: 'long', 
+												year: 'numeric', 
+												month: 'long', 
+												day: 'numeric' 
+											})}
+										</span>
+										<span style={{ fontSize: '0.8em', color: '#666' }}>
+											{new Date(holiday).toLocaleDateString()}
+										</span>
+									</div>
+									<Button 
+										isDestructive 
+										isSmall
+										onClick={() => removeHoliday(holiday)}
+									>
+										Remove
+									</Button>
+								</div>
+							))}
+						</div>
+					</div>
+				)}
+			</PanelBody>
+
+			{/* Custom Messages */}
+			<PanelBody title="Custom Messages" initialOpen={false}>
+				<TextareaControl
+					label="Closed Message"
+					value={closedMessage || ''}
+					onChange={(value) => setAttributes({ closedMessage: value })}
+					placeholder="Office is closed"
+					help="This message shows when office is closed during working hours"
+				/>
+				
+				<TextareaControl
+					label="Open Message"
+					value={completionMessage || ''}
+					onChange={(value) => setAttributes({ completionMessage: value })}
+					placeholder="Office is open"
+					help="This message shows when office is open"
+				/>
+				
+				<TextareaControl
+					label="Weekend Message"
+					value={weekendMessage || ''}
+					onChange={(value) => setAttributes({ weekendMessage: value })}
+					placeholder="Closed for weekend"
+					help="This message shows when office is closed for weekend"
+				/>
+				
+				<TextareaControl
+					label="Holiday Message"
+					value={holidayMessage || ''}
+					onChange={(value) => setAttributes({ holidayMessage: value })}
+					placeholder="Closed for holiday"
+					help="This message shows when office is closed for holiday"
+				/>
+			</PanelBody>
 		</>
+    );
+
+	 /**
+	 * Inspector Style Controls
+	 */
+    const styleControls = (
+        <>
+			{/* Style settings will go here */}
+			<PanelBody title="Style Settings" initialOpen={true}>
+
+			</PanelBody>
+        </>
+    );
+
+	/**
+	 * Inspector Advanced Controls
+	 */
+    const advancedControls = (
+        <>
+
+        </>
+    );
+
+	return (
+        <>
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
+        </>
 	);
 }

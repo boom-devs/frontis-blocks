@@ -1,15 +1,18 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "frontis-blocks/timezone",
+	"version": "1.0.0",
 	"title": "Timezone",
 	"category": "frontis-blocks",
-	"icon": "clock",
 	"description": "Add a timezone selector",
-	"textdomain": "frontis-blocks",
+	"example": {},
 	"supports": {
 		"html": false,
-		"anchor": true
+		"align": ["wide", "full"],
+		"customClassName": false
 	},
+	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }
