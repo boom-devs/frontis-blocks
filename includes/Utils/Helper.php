@@ -900,7 +900,6 @@ class Helper
 		
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
-
         return $template_contents;
     }
 
