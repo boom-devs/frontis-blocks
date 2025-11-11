@@ -5,6 +5,7 @@ import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
+		blockID,
 		location,
 		timezone,
 		officeStatus,
@@ -26,6 +27,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		beforeTimeText,
 		afterTimeText
 	} = attributes;
+
+	const blockProps = useBlockProps({
+        className: `frontis-block fb-timezone-main-wrapper ${blockID}`,
+    });
 
 	// Helper function to format timezone display (with timezone name)
 	const getFormattedTimezone = (timezone) => {
@@ -299,7 +304,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				setAttributes={setAttributes} 
 				clientId={clientId} 
 			/>
-			<div {...useBlockProps()}>
+			<div {...blockProps}>
 				<div className='fb-timezone-container'>
 					<div className='fb-timezone-wrapper'>
 						<div className='fb-timezone-current-time'>

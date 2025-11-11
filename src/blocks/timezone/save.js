@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 
 export default function Save({ attributes }) {
 	const {
+		blockID,
 		location,
 		timezone,
 		officeStatus,
@@ -24,6 +25,10 @@ export default function Save({ attributes }) {
 		beforeTimeText,
 		afterTimeText
 	} = attributes;
+
+	const blockProps = useBlockProps.save({
+        className: `frontis-block fb-timezone-main-wrapper ${blockID}`,
+    });
 
 	// Helper function to format timezone display (with timezone name)
 	const getFormattedTimezone = (timezone) => {
@@ -350,7 +355,7 @@ export default function Save({ attributes }) {
 	const displaySeparator = separator || ' | ';
 
 	return (
-		<div {...useBlockProps.save()}>
+		<div {...blockProps}>
 			<div className='fb-timezone-container'>
 				<div className='fb-timezone-wrapper'>
 					<div className='fb-timezone-current-time'>
