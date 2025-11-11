@@ -40,32 +40,6 @@ const attributes = {
 		default: "",
 	},
 
-	// Style Attributes
-	// commentFormWidth: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "",
-	// 		Tablet: "",
-	// 		Mobile: "",
-	// 	},
-	// },
-	// commentGap: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "20px",
-	// 		Tablet: "",
-	// 		Mobile: "",
-	// 	},
-	// },
-	// avatarSize: {
-	// 	type: "object",
-	// 	default: {
-	// 		Desktop: "64px",
-	// 		Tablet: "",
-	// 		Mobile: "",
-	// 	},
-	// },
-
 	/** ============== Style Attributes ============== */
 	/** Comments Count Title */
 	commentCountTitleGlobalTypographyData: {
@@ -2185,6 +2159,333 @@ const attributes = {
 	},
 	/** End Border Radius */
 	/** === End Form Field Attributes ========= */
+
+
+	/** === Start Submit Button Attributes ========= */
+	buttonWidth: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	buttonWidthUnits: {
+		type: "object",
+		default: {
+			Desktop: "%",
+			Tablet: "%",
+			Mobile: "%",
+		},
+	},
+
+	buttonGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	buttonGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	buttonGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	buttonGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	buttonFontFamily: {
+		type: "string",
+		default: "",
+	},
+	buttonFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	buttonFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonFontWeight: {
+		type: "string",
+		default: "500",
+	},
+	buttonFontStyle: {
+		type: "string",
+		default: "",
+	},
+	buttonTextTransform: {
+		type: "string",
+		default: "",
+	},
+	buttonTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	buttonLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	buttonLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	buttonLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	buttonColor: {
+		type: "string",
+		default: "",
+	},
+	buttonHoverColor: {
+		type: "string",
+	},
+	buttonBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	buttonBgColor: {
+		type: "string",
+		default: "",
+	},
+	buttonBgHoverColor: {
+		type: "string",
+	},
+	buttonBorder: {
+		type: "string",
+		default: "",
+	},
+	buttonBorderColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	buttonBorderColor: {
+		type: "string",
+		default: "",
+	},
+	buttonBorderHoverColor: {
+		type: "string",
+	},
+	buttonBorderUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonDesktopBorderWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonTabBorderWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMobileBorderWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonBorderLink: {
+		type: "boolean",
+		default: true,
+	},
+	buttonBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonDesktopBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonTabBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMobileBorderRadiusWidth: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	buttonBoxShadowSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	buttonBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	buttonBoxShadowCssValue: {
+		type: "string",
+		default: "",
+	},
+	buttonBoxShadowHoverValues: {
+		type: "array",
+		default: [],
+	},
+	buttonBoxShadowHoverCssValue: {
+		type: "string",
+		default: "",
+	},
+	buttonPaddingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonDesktopPadding: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonTabPadding: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMobilePadding: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	buttonMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	buttonDesktopMargin: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonTabMargin: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMobileMargin: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	buttonMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** === End Submit Button Attributes ========= */
 
 
 	/** ============== Advanced Attributes ============== */
