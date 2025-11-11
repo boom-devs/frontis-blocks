@@ -3,6 +3,10 @@
     position: relative;
     height: calc(100vh - 95px);
     max-width: 100%;
+
+    @media only screen and (max-width: 768px) {
+        height: 100%;
+    }
 }
 
 .fb-template-library-store-content {
@@ -13,7 +17,7 @@
     position: relative;
 
     @media only screen and (max-width: 768px) {
-        padding: 24px 0 100px;
+        padding: 24px 0;
     }
 
     .fb-template-library-content-header {
@@ -93,7 +97,7 @@
                 gap: 16px;
             }
             @media only screen and (max-width: 767px) {
-                align-items: start;
+                display: none;
             }
 
             .fb-template-library-search-wrapper {
@@ -378,9 +382,8 @@
 
                 .fb-template-overlay-content {
                     display: flex;
-                    flex-direction: column;
                     align-items: center;
-                    gap: 16px;
+                    gap: 12px;
 
                     .fb-demo-btn {
                         display: flex;
@@ -394,6 +397,7 @@
                         font-size: $base-font-size;
                         line-height: $body-line-height;
                         cursor: pointer;
+                        outline: none;
                         transition: all 0.3s ease;
 
                         &:hover {
@@ -435,12 +439,6 @@
                             font-size: $small-font-size;
                             line-height: $body-line-height;
                             text-transform: capitalize;
-                            cursor: pointer;
-
-                            &:hover {
-                                color: $primary-color;
-                                text-decoration: underline;
-                            }
                         }
                     }
 
@@ -453,7 +451,6 @@
                             font-size: $small-font-size;
                             line-height: $body-line-height;
                             text-transform: capitalize;
-                            cursor: pointer;
                         }
                     }
                 }
@@ -471,10 +468,16 @@
             }
         }
 
-        h3 {
-            font-family: $heading-font-family;
+        > h3 {
+            font-family: "Onest", sans-serif;
             font-size: 24px;
             font-weight: 500;
+            line-height: 1.4;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
         }
     }
 
@@ -484,6 +487,10 @@
         justify-content: center;
         gap: 14px;
         margin-top: 62px;
+
+        @media only screen and (max-width: 768px) {
+            flex-wrap: wrap;
+        }
       
         .fb-page-numbers {
             display: flex;
