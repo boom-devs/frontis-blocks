@@ -67,6 +67,7 @@ import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
+import FB_Presets from '@Components/presets';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -755,57 +756,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					right: "",
 				},
 			},
-			// "preset-6": {
-			// 	info_Button_Switcher: true,
-			// 	info_Button_Text: '',
-			// 	mediaClassicColor: '',
-			// 	mediaHoverClassicColor: '',
-			// 	globalBgColor: '#EBF5FF',
-			// 	globalBgHoverColor: '#EBF5FF',
-			// 	mediaIconColor: '#399CFF',
-			// 	mediaIconHoverColor: '#399CFF',
-			// 	Heading_Color: '#15171C',
-			// 	Heading_Hover_Color: '#15171C',
-			// 	SubHeadingColor: '#555E72',
-			// 	SubHeadingHoverColor: '#555E72',
-			// 	buttonTextColor: '#399CFF',
-			// 	buttonTextHoverColor: '#399CFF',
-			// 	buttonBgColor: '#EBF5FF',
-			// 	buttonBgHoverColor: '#EBF5FF',
-			// 	btnIcon: 'arrow-left',
-			// 	btnIconColor: '#399CFF',
-			// 	btnIconHoverColor: '#399CFF',
-			// 	buttonIconRotate: {
-			// 		Desktop: "145",
-			// 		Tablet: "145",
-			// 		Mobile: "145",
-			// 	},
-			// 	btnIconPosition: 'left',
-			// 	infoButtonDesktopMargin: {
-			// 		top: "0",
-			// 		bottom: "0",
-			// 		left: "0",
-			// 		right: "0",
-			// 	},
-			// 	infoButtonDesktopPadding: {
-			// 		top: "19",
-			// 		bottom: "19",
-			// 		left: "19",
-			// 		right: "19",
-			// 	},
-			// 	infoBtnDesktopBorderradiusWidth: {
-			// 		top: "18",
-			// 		bottom: "18",
-			// 		left: "8",
-			// 		right: "18",
-			// 	},
-			// 	globalBorderRadiusDesktop: {
-			// 		top: "18",
-			// 		bottom: "18",
-			// 		left: "18",
-			// 		right: "18",
-			// 	},
-			// },
 		};
 
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
@@ -3027,6 +2977,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${fbInfoBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
+
+
+
+
+
+
+	const PRESET_CONFIGS = {
+		'preset-1': {
+		  info_Button_Switcher: true,
+		  info_Button_Text: 'Learn more',
+		  mediaClassicColor: '#399CFF',
+		  mediaHoverClassicColor: '#ffffff',
+		  globalBgColor: '#EBF5FF',
+		  globalBgHoverColor: '#399CFF',
+		  mediaIconColor: '#ffffff',
+		  mediaIconHoverColor: '#399CFF',
+		  Heading_Color: '#15171C',
+		  Heading_Hover_Color: '#ffffff',
+		  SubHeadingColor: '#555E72',
+		  SubHeadingHoverColor: '#ffffff',
+		  buttonTextColor: '#399CFF',
+		  btnIconColor: '#399CFF',
+		  buttonBgColor: '',
+		  buttonBgHoverColor: '',
+		  btnIcon: 'arrow-left',
+		  buttonIconRotate: { Desktop: '145', Tablet: '145', Mobile: '145' },
+		  btnIconPosition: 'right',
+		  infoButtonDesktopMargin: { top: '0', bottom: '0', left: '16', right: '16' },
+		  infoButtonDesktopPadding: { top: '0', bottom: '0', left: '0', right: '0' },
+		  infoBtnDesktopBorderradiusWidth: { top: '0', bottom: '0', left: '0', right: '0' },
+		  mediaBorderRadiusDesktop: { top: '50', bottom: '50', left: '50', right: '50' },
+		},
+	  
+		'preset-2': {
+		  info_Button_Switcher: false,
+		  info_Button_Text: 'Learn more',
+		  mediaClassicColor: '',
+		  mediaHoverClassicColor: '',
+		  globalBgColor: '#399CFF',
+		  globalBgHoverColor: '',
+		  mediaIconColor: '#ffffff',
+		  mediaIconHoverColor: '#ffffff',
+		  Heading_Color: '#ffffff',
+		  Heading_Hover_Color: '#ffffff',
+		  SubHeadingColor: '#ffffff',
+		  SubHeadingHoverColor: '#ffffff',
+		  globalBorderRadiusDesktop: { top: '24', bottom: '24', left: '24', right: '24' },
+		  mediaBorderRadiusDesktop: { top: '', bottom: '', left: '', right: '' },
+		},
+	  };
+	  
+	  const infoBoxPresets = [
+		{
+		  value: 'preset-1',
+		  label: __('Preset 1', 'frontis-blocks'),
+		  attributes: Object.entries(PRESET_CONFIGS['preset-1']).map(([label, value]) => ({ label, value })),
+		  icon:
+			'<svg xmlns="http://www.w3.org/2000/svg" width="325" height="245" viewBox="0 0 325 245" fill="none"> <path d="M27 31.7987C27 29.1485 29.1527 27 31.8081 27H294.192C296.847 27 299 29.1485 299 31.7987V245H27V31.7987Z" fill="white"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M58 153C58 151.343 59.138 150 60.5418 150H266.259C267.663 150 268.801 151.343 268.801 153C268.801 154.657 267.663 156 266.259 156H60.5418C59.138 156 58 154.657 58 153Z" fill="#D2D2D2"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M84.0166 172.009C84.0166 170.352 85.1483 169.009 86.5442 169.009H240.257C241.653 169.009 242.784 170.352 242.784 172.009C242.784 173.666 241.653 175.009 240.257 175.009H86.5442C85.1483 175.009 84.0166 173.666 84.0166 172.009Z" fill="#D2D2D2"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M86.0176 129.003C86.0176 126.792 87.6854 125 89.7428 125H237.057C239.115 125 240.783 126.792 240.783 129.003C240.783 131.213 239.115 133.005 237.057 133.005H89.7428C87.6854 133.005 86.0176 131.213 86.0176 129.003Z" fill="#B6B6B6"/> <path d="M127.377 193.749C127.377 192.231 128.588 191 130.083 191H196.717C198.211 191 199.423 192.231 199.423 193.749V210.932C199.423 212.45 198.211 213.681 196.717 213.681H130.083C128.588 213.681 127.377 212.45 127.377 210.932V193.749Z" fill="#B6B6B6"/> <path d="M187 83C187 96.8071 175.807 108 162 108C148.193 108 137 96.8071 137 83C137 69.1929 148.193 58 162 58C175.807 58 187 69.1929 187 83Z" fill="#B6B6B6"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M173.753 72.1759C174.632 73.0646 174.625 74.4979 173.736 75.3773L156.326 92.6048L147.35 82.3526C146.526 81.412 146.621 79.9818 147.562 79.1582C148.503 78.3346 149.933 78.4295 150.756 79.3702L156.563 86.0015L170.552 72.1591C171.44 71.2797 172.874 71.2872 173.753 72.1759Z" fill="white"/> </svg>',
+		},
+		{
+		  value: 'preset-2',
+		  label: __('Preset 2', 'frontis-blocks'),
+		  attributes: Object.entries(PRESET_CONFIGS['preset-2']).map(([label, value]) => ({ label, value })),
+		  icon:
+			'<svg xmlns="http://www.w3.org/2000/svg" width="325" height="245" viewBox="0 0 325 245" fill="none"> <path d="M27 31.7987C27 29.1485 29.1527 27 31.8081 27H294.192C296.847 27 299 29.1485 299 31.7987V245H27V31.7987Z" fill="white"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M58 153C58 151.343 59.138 150 60.5418 150H266.259C267.663 150 268.801 151.343 268.801 153C268.801 154.657 267.663 156 266.259 156H60.5418C59.138 156 58 154.657 58 153Z" fill="#D2D2D2"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M58 172.009C58 170.352 59.1317 169.009 60.5276 169.009H214.24C215.636 169.009 216.768 170.352 216.768 172.009C216.768 173.666 215.636 175.009 214.24 175.009H60.5276C59.1317 175.009 58 173.666 58 172.009Z" fill="#D2D2D2"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M58 129.003C58 126.792 59.6678 125 61.7252 125H209.04C211.097 125 212.765 126.792 212.765 129.003C212.765 131.213 211.097 133.005 209.04 133.005H61.7252C59.6678 133.005 58 131.213 58 129.003Z" fill="#BFBFBF"/> <path d="M58 193.749C58 192.231 59.2115 191 60.7059 191H127.34C128.834 191 130.046 192.231 130.046 193.749V210.932C130.046 212.45 128.834 213.681 127.34 213.681H60.7059C59.2115 213.681 58 212.45 58 210.932V193.749Z" fill="#BFBFBF"/> <path d="M108 83C108 96.8071 96.8071 108 83 108C69.1929 108 58 96.8071 58 83C58 69.1929 69.1929 58 83 58C96.8071 58 108 69.1929 108 83Z" fill="#BFBFBF"/> <path fill-rule="evenodd" clip-rule="evenodd" d="M94.7529 72.1759C95.6323 73.0646 95.6248 74.4979 94.7361 75.3773L77.3263 92.6048L68.35 82.3526C67.5265 81.412 67.6214 79.9818 68.562 79.1582C69.5027 78.3346 70.9329 78.4295 71.7565 79.3702L77.5625 86.0015L91.5515 72.1591C92.4402 71.2797 93.8735 71.2872 94.7529 72.1759Z" fill="white"/> </svg>',
+		},
+	  ];
+
 	/**
 	* Inspector General Controls
 	*/
@@ -3043,6 +3061,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						options={PRESETS}
 						onChange={(selected) => changeInfoBoxPreset(selected)}
 					/>
+
+					<FB_Presets
+						className="fb-info-box-presets"
+						label={__('Preset Style', 'frontis-blocks')}
+						presets={infoBoxPresets}
+						setAttributes={setAttributes}
+					/>
+
 				</PanelBody>
 			</div>
 			<div className="fb-advanced-wrapper">
