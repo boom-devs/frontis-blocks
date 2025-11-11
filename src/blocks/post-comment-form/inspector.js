@@ -6221,157 +6221,8 @@ buttonWidth,
 						)}
 					/>
 
-					<div className="fb-control-divider"></div>
 				</BaseControl>
 
-				<BaseControl
-					label={__("Avatar", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-					<p className="fb-control-help">
-						{__(
-							"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
-							"frontis-blocks",
-						)}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-					<FB_Range
-						min={0}
-						max={100}
-						label={__("Size", "frontis-blocks")}
-						rangeValue={avatarSize}
-						onChangeHandler={(value) => setAttributes({ avatarSize: value })}
-						rangeUnitHandler={(value) =>
-							setAttributes({ avatarSizeUnits: value })
-						}
-						deviceType={deviceType}
-						units={avatarSizeUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-					/>
-
-					<FB_Spacing
-						label={__("Padding", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
-						spacingUnits={avatarPaddingUnits}
-						spacingDesktop={avatarPaddingDesktop}
-						spacingTablet={avatarPaddingTablet}
-						spacingMobile={avatarPaddingMobile}
-						handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
-						spacingCombineBtn={avatarPaddingLink}
-						spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={avatarBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ avatarBorder: value })}
-					/>
-
-					{avatarBorder !== "none" && (
-						<>
-							{/* <FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={avatarBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBorderColorSwitcher: value })
-						}
-					/> */}
-
-							{/* {avatarBorderColorSwitcher === "normal" && ( */}
-							<FB_ColorControl
-								label={__("Border Color", "frontis-blocks")}
-								globalColor={avatarBorderColor}
-								setGlobalColor={(value) =>
-									setAttributes({
-										avatarBorderColor: value === undefined ? "" : value,
-									})
-								}
-							/>
-							{/* )} */}
-
-							{/* {avatarBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={avatarBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									avatarBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)} */}
-
-							<FB_Spacing
-								label={__("Border", "frontis-blocks")}
-								deviceType={deviceType}
-								spacingUnitsHandler={handleAvatarBorderUnitsHandler}
-								spacingUnits={avatarBorderUnits}
-								spacingDesktop={avatarBorderDesktop}
-								spacingTablet={avatarBorderTablet}
-								spacingMobile={avatarBorderMobile}
-								handleSpacingUnitHandler={handleAvatarBorderUnitChange}
-								spacingCombineBtn={avatarBorderLink}
-								spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
-								setAttributes={setAttributes}
-							/>
-						</>
-					)}
-
-					<FB_Spacing
-						label={__("Border Radius", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
-						spacingUnits={avatarBorderRadiusUnits}
-						spacingDesktop={avatarBorderRadiusDesktop}
-						spacingTablet={avatarBorderRadiusTablet}
-						spacingMobile={avatarBorderRadiusMobile}
-						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
-						spacingCombineBtn={avatarBorderRadiusLink}
-						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					{/* <FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={avatarBoxShadowSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBoxShadowSwitcher: value })
-						}
-					/> */}
-
-					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
-					<FB_BoxShadowControl
-						label={__("Box Shadow", "frontis-blocks")}
-						onBoxShadowChange={(value) =>
-							setAttributes({ avatarBoxShadowValues: value })
-						}
-						initialShadowValue={avatarBoxShadowValues}
-						onBoxShadowStyleChange={(value) =>
-							setAttributes({ avatarBoxShadowCssValue: value })
-						}
-					/>
-					{/* )} */}
-
-					{/* {avatarBoxShadowSwitcher === "hover" && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverValues: value })
-							}
-							initialShadowValue={avatarBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverCssValue: value })
-							}
-						/>
-					)} */}
-				</BaseControl>
 
 				<div className="fb-control-divider"></div>
 
@@ -6902,6 +6753,156 @@ buttonWidth,
 						}
 					/>
 				</BaseControl>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Avatar", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<p className="fb-control-help">
+					{__(
+						"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
+						"frontis-blocks",
+					)}
+				</p>
+
+				<div className="fb-control-divider"></div>
+
+				<FB_Range
+					min={0}
+					max={100}
+					label={__("Size", "frontis-blocks")}
+					rangeValue={avatarSize}
+					onChangeHandler={(value) => setAttributes({ avatarSize: value })}
+					rangeUnitHandler={(value) =>
+						setAttributes({ avatarSizeUnits: value })
+					}
+					deviceType={deviceType}
+					units={avatarSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
+					spacingUnits={avatarPaddingUnits}
+					spacingDesktop={avatarPaddingDesktop}
+					spacingTablet={avatarPaddingTablet}
+					spacingMobile={avatarPaddingMobile}
+					handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
+					spacingCombineBtn={avatarPaddingLink}
+					spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={avatarBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ avatarBorder: value })}
+				/>
+
+				{avatarBorder !== "none" && (
+					<>
+						{/* <FB_SwitcherControl
+					label={__("Border", "frontis-blocks")}
+					globalSwitcher={avatarBorderColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ avatarBorderColorSwitcher: value })
+					}
+				/> */}
+
+						{/* {avatarBorderColorSwitcher === "normal" && ( */}
+						<FB_ColorControl
+							label={__("Border Color", "frontis-blocks")}
+							globalColor={avatarBorderColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									avatarBorderColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+						{/* )} */}
+
+						{/* {avatarBorderColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={avatarBorderHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								avatarBorderHoverColor: value === undefined ? "" : value,
+							})
+						}
+					/>
+				)} */}
+
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleAvatarBorderUnitsHandler}
+							spacingUnits={avatarBorderUnits}
+							spacingDesktop={avatarBorderDesktop}
+							spacingTablet={avatarBorderTablet}
+							spacingMobile={avatarBorderMobile}
+							handleSpacingUnitHandler={handleAvatarBorderUnitChange}
+							spacingCombineBtn={avatarBorderLink}
+							spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+					</>
+				)}
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
+						spacingUnits={avatarBorderRadiusUnits}
+						spacingDesktop={avatarBorderRadiusDesktop}
+						spacingTablet={avatarBorderRadiusTablet}
+						spacingMobile={avatarBorderRadiusMobile}
+						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
+						spacingCombineBtn={avatarBorderRadiusLink}
+						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					{/* <FB_SwitcherControl
+						label={__("Box Shadow", "frontis-blocks")}
+						globalSwitcher={avatarBoxShadowSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ avatarBoxShadowSwitcher: value })
+						}
+					/> */}
+
+					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
+					<FB_BoxShadowControl
+						label={__("Box Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ avatarBoxShadowValues: value })
+						}
+						initialShadowValue={avatarBoxShadowValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ avatarBoxShadowCssValue: value })
+						}
+					/>
+					{/* )} */}
+
+					{/* {avatarBoxShadowSwitcher === "hover" && (
+						<FB_BoxShadowControl
+							label={__("Hover Shadow", "frontis-blocks")}
+							onBoxShadowChange={(value) =>
+								setAttributes({ avatarBoxShadowHoverValues: value })
+							}
+							initialShadowValue={avatarBoxShadowHoverValues}
+							onBoxShadowStyleChange={(value) =>
+								setAttributes({ avatarBoxShadowHoverCssValue: value })
+							}
+						/>
+					)} */}
+
 			</PanelBody>
 
 			<PanelBody
