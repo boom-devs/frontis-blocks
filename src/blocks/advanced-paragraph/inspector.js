@@ -2458,7 +2458,7 @@ transition: all .3s ease-in-out;
 						__next40pxDefaultSize={true}
 					/>
 
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p 	className="fb-control-help">
 						{__(
 							"Split your paragraph into multiple columns for a modern, magazine-style look.",
 							"frontis-blocks",
@@ -2486,9 +2486,8 @@ transition: all .3s ease-in-out;
 							/>
 
 							<p
+								className="fb-control-help"
 								style={{
-									fontSize: "12px",
-									color: "#888",
 									marginBottom: "2em",
 									marginTop: "-14px",
 								}}
@@ -2513,9 +2512,8 @@ transition: all .3s ease-in-out;
 
 					{dropCap && (
 						<p
+							className="fb-control-help"
 							style={{
-								fontSize: "12px",
-								color: "#888",
 								marginTop: "-14px",
 								marginBottom: "20px",
 							}}
