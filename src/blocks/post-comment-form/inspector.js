@@ -6807,15 +6807,6 @@ buttonWidth,
 
 				{avatarBorder !== "none" && (
 					<>
-						{/* <FB_SwitcherControl
-					label={__("Border", "frontis-blocks")}
-					globalSwitcher={avatarBorderColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ avatarBorderColorSwitcher: value })
-					}
-				/> */}
-
-						{/* {avatarBorderColorSwitcher === "normal" && ( */}
 						<FB_ColorControl
 							label={__("Border Color", "frontis-blocks")}
 							globalColor={avatarBorderColor}
@@ -6825,19 +6816,6 @@ buttonWidth,
 								})
 							}
 						/>
-						{/* )} */}
-
-						{/* {avatarBorderColorSwitcher === "hover" && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={avatarBorderHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								avatarBorderHoverColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)} */}
 
 						<FB_Spacing
 							label={__("Border", "frontis-blocks")}
@@ -6869,15 +6847,6 @@ buttonWidth,
 						setAttributes={setAttributes}
 					/>
 
-					{/* <FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={avatarBoxShadowSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBoxShadowSwitcher: value })
-						}
-					/> */}
-
-					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
 					<FB_BoxShadowControl
 						label={__("Box Shadow", "frontis-blocks")}
 						onBoxShadowChange={(value) =>
@@ -6888,21 +6857,6 @@ buttonWidth,
 							setAttributes({ avatarBoxShadowCssValue: value })
 						}
 					/>
-					{/* )} */}
-
-					{/* {avatarBoxShadowSwitcher === "hover" && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverValues: value })
-							}
-							initialShadowValue={avatarBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverCssValue: value })
-							}
-						/>
-					)} */}
-
 			</PanelBody>
 
 			<PanelBody
@@ -8313,16 +8267,6 @@ buttonWidth,
 					/>
 
 <div className="fb-control-divider"></div>
-				{/* <FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={formFieldColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ formFieldColorSwitcher: value })
-					}
-				/> */}
-
-
-				{/* {FB_SwitcherControl === "normal" && ( */}
 					<FB_ColorControl
 						label={__("Color", "frontis-blocks")}
 						globalColor={formFieldColor}
@@ -8332,19 +8276,6 @@ buttonWidth,
 							})
 						}
 					/>
-				{/* )} */}
-
-				{/* {FB_SwitcherControl === "hover" && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={formFieldHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								formFieldHoverColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)} */}
 
 				<FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
@@ -8430,17 +8361,6 @@ buttonWidth,
 
 				{formFieldBorder !== "none" && (
 					<>					
-						{/* <FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={formFieldBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ formFieldBorderColorSwitcher: value })
-						}
-						showFocus={true}
-		hideHover={true}
-					/> */}
-
-					{/* {formFieldBorderColorSwitcher === "normal" && ( */}
 						<FB_ColorControl
 							label={__("Border Color", "frontis-blocks")}
 							globalColor={formFieldBorderColor}
@@ -8450,19 +8370,6 @@ buttonWidth,
 								})
 							}
 						/>
-					{/* )} */}
-
-					{/* {formFieldBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={formFieldBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									formFieldBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)} */}
 
 					<FB_Spacing
 						label={__("Border", "frontis-blocks")}
