@@ -21,6 +21,32 @@ class TemplateProcessor {
             return '';
         }
 
+        // Check megamenu block exist inside post content then get patterns and add the patterns content inside the megamenu block
+        $megamenu_block_exists = preg_match_all('/<!--\s*wp:frontis-blocks\/advanced-megamenu\s*{(.*?)}\s*\/-->/', $template_content, $megamenu_matches);
+                
+        if ($megamenu_block_exists) {
+            foreach ($megamenu_matches[1] as $index => $attributes) {
+                if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
+                    $pattern_slug = $pattern_slug_match[1];
+                    $pattern_post = get_post((int) $pattern_slug);
+                    
+                    if ($pattern_post && $pattern_post->post_type === 'wp_block') {
+                        // Convert self-closing block to opening/closing format with pattern content inside
+                        $megamenu_opening = str_replace('/-->', '-->', $megamenu_matches[0][$index]);
+                        $megamenu_block_with_content = $megamenu_opening . "\n" 
+                            . (string) $pattern_post->post_content . "\n"
+                            . '<!-- /wp:frontis-blocks/advanced-megamenu -->';
+                        
+                        $template_content = str_replace(
+                            $megamenu_matches[0][$index],
+                            $megamenu_block_with_content,
+                            $template_content
+                        );
+                    }
+                }
+            }
+        }
+
         // Step 1: Detect and replace wp:block with ref content
         preg_match_all('/<!--\s*wp:block\s*{"ref"\s*:\s*(\d+)\}\s*\/-->/', $template_content, $block_matches);
         $pattern_ids = $block_matches[1] ?? [];
