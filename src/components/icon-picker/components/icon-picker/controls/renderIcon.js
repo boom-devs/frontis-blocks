@@ -159,7 +159,6 @@ function renderSVG(svg, setAttributes = false, extraProps = {}) {
 
     // If no data and no ongoing fetch, start a new fetch
     if (!fetchPromise) {
-        console.log('Starting fetchFromApi');
         fetchPromise = fetchFromApi().then(fetchedData => {
             console.log('Fetched Data:', fetchedData);
             if (fetchedData) {
