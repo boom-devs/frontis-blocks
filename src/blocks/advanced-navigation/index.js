@@ -1,5 +1,6 @@
 
 import { registerBlockType } from '@wordpress/blocks';
+import { addFilter } from '@wordpress/hooks';
 import './style.scss';
 
 /**
