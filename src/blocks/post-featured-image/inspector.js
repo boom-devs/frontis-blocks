@@ -1158,7 +1158,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							onChangeValue={(value) => setAttributes({ rel: value })}
 						/>
 
-						<p style={{ fontSize: "12px", color: "#888" }}>
+						<p className="fb-control-help">
 							{__("For example: nofollow, noreferrer, etc.", "frontis-blocks")}
 						</p>
 
@@ -1173,9 +1173,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 
 				<p
+					className="fb-control-help"
 					style={{
-						fontSize: "12px",
-						color: "#888",
 						marginTop: "8px",
 						marginBottom: "20px",
 					}}
@@ -1199,10 +1198,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 				
 			}
-							<p
+				<p className="fb-control-help"
 					style={{
-						fontSize: "12px",
-						color: "#888",
 						marginTop: "8px",
 						marginBottom: "20px",
 					}}
@@ -1255,10 +1252,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			/>
 
 			{autoHeightSwitch && (
-				<p
+				<p className="fb-control-help"
 					style={{
-						fontSize: "12px",
-						color: "#888",
 						marginTop: "-14px",
 						marginBottom: "20px",
 					}}
