@@ -12,6 +12,10 @@
 @import "./../global-settings/scss/global-settings.scss";
 
 .fb-template-library-button-wrapper {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+
 	button {
 		background: $primary-color-base;
 		color: $white-color;

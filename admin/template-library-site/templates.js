@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast } from "react-toastify";
 import { __ } from "@wordpress/i18n";
 import TemplateSidebar from "./template-sidebar";
@@ -56,7 +56,7 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-    const getTemplatesData = async (value, email, license_key, page, tag, search, category) => {
+    const getTemplatesData = async (value, email, license_key, page, tag, search, category, isPro) => {
         try {
             const response = await patternsData({
                 endpoint: value,
@@ -67,7 +67,7 @@ const PatternLibraryButton = () => {
                     tag: tag,
                     search: search,
                     category: category,
-                    is_pro_template: ''
+                    is_pro_template: isPro
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const PatternLibraryButton = () => {
         const newState = { [activeTab]: value };
         setActiveTagTab(newState);
 
-        fetchData(activeTab, 1, value, searchText, activeCategory[activeTab]);
+        fetchData(activeTab, 1, value, searchText, activeCategory[activeTab], isProTemplate);
     }
 
     const handleSearchTemplates = (value) => {
@@ -106,7 +106,7 @@ const PatternLibraryButton = () => {
 
         // Step 3: set new timer
         const timer = setTimeout(() => {
-            fetchData(activeTab, 1, activeTagTab[activeTab], value, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], value, activeCategory[activeTab], isProTemplate);
         }, 1000);
 
         setDebounceTimer(timer);
@@ -122,26 +122,26 @@ const PatternLibraryButton = () => {
         const newState = { [activeTab]: value };
         setActiveCategory(newState);
 
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value);
+        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
     }
 
     const handleTemplates = (value) => {
         if (value !== isProTemplate) {
             setIsProTemplate(value);
-            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], value);
         } else {
             setIsProTemplate('');
-            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], '');
         }
     } 
 
-    const fetchData = async (tab = activeTab, page, tag, search, category) => {
+    const fetchData = async (tab = activeTab, page, tag, search, category, isPro) => {
         setLoading(true);
 
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", '', '', page, tag, search, category);
+                response = await getTemplatesData("patterns", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -155,7 +155,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", '', '', page, tag, search, category);
+                response = await getTemplatesData("pages", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -169,7 +169,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", '', '', page, tag, search, category);
+                response = await getTemplatesData("sites", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -245,8 +245,8 @@ const PatternLibraryButton = () => {
         setActiveTagTab({ [activeTab]: '' });
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
-        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
-        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
+        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], isProTemplate);
+        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], isProTemplate);
     }, [activeTab, userData?.email]);
 
 
@@ -267,6 +267,12 @@ const PatternLibraryButton = () => {
         }
     }, [userData?.email]);
 
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+
+    const handleSidebarToggle = useCallback(() => {
+        setIsSidebarCollapsed(prev => !prev);
+    }, []);
+
 
     return (
         <>
@@ -286,6 +292,8 @@ const PatternLibraryButton = () => {
                             setResetCat={setResetCat}
                             loading={noneFilterLoading}
                             isImporting={isImporting}
+                            isSidebarCollapsed={isSidebarCollapsed}
+                            handleSidebarToggle={handleSidebarToggle}
                         />
                         <TemplateContent
                             activeTab={activeTab}
@@ -305,6 +313,7 @@ const PatternLibraryButton = () => {
                             currentPage={currentPage[activeTab]}
                             onPageChange={handlePageChange}
                             isImporting={isImporting}
+                            handleSidebarToggle={handleSidebarToggle}
                         />
                     </div>
                 </div>
