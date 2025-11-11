@@ -14,7 +14,7 @@ const ProUpgradeCard = () => {
   ];
 
   const upgradeToPro = () => {
-    console.log("Upgrade to pro")
+    window.open(window.frontisBlocksAdmin.pro_url, '_blank');
   }
 
   return (
