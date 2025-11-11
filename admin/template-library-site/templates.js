@@ -267,11 +267,12 @@ const PatternLibraryButton = () => {
         }
     }, [userData?.email]);
 
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(true);
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
     const handleSidebarToggle = useCallback(() => {
         setIsSidebarCollapsed(prev => !prev);
     }, []);
+
 
 
     return (
@@ -313,6 +314,7 @@ const PatternLibraryButton = () => {
                             currentPage={currentPage[activeTab]}
                             onPageChange={handlePageChange}
                             isImporting={isImporting}
+                            isSidebarCollapsed={isSidebarCollapsed}
                             handleSidebarToggle={handleSidebarToggle}
                         />
                     </div>

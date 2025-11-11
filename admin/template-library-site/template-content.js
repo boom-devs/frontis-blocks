@@ -31,13 +31,18 @@ const TemplateContent = ({
     setActiveCategory,
     currentPage,
     onPageChange,
+    isSidebarCollapsed,
     handleSidebarToggle,
 }) => {
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-
     const scrollContainer = useRef(null);
+
+    const handleLocalToggle = () => {
+        setIsSidebarCollapsed(false);
+    };
+
 
     const scroll = useCallback((direction) => {
         if (!scrollContainer.current) return;
@@ -92,9 +97,10 @@ const TemplateContent = ({
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
 
+
     return (
         <>
-            <div className="fb-template-library-store-content-wrapper">
+            <div className="fb-template-library-store-content-wrapper" onClick={isSidebarCollapsed ? handleSidebarToggle : null}>
             <div className="fb-template-library-store-content" >
                 <div className="fb-template-library-content-header">
                     <div className="fb-template-library-content-header-left">
