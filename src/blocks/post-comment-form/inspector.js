@@ -3580,11 +3580,6 @@ buttonWidth,
 
 			
 			.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply	{
-
-			
-            ${replyButtonColor ? `color: ${replyButtonColor};` : ""}
-
-
             ${
 							replyButtonGlobalTypoSwitcher.fontFamily === true &&
 							replyButtonGlobalTypographyData.fontFamily
@@ -3731,10 +3726,14 @@ buttonWidth,
 							}
 
 			}
+
+			.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply a{
+						${replyButtonColor ? `color: ${replyButtonColor};` : ""}
+			}
 			
 
 				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply:hover {
-								${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
+							${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
 							${
 								replyButtonHoverBackgroundType === "gradient"
 									? `  
@@ -3763,6 +3762,10 @@ buttonWidth,
 									? `box-shadow: ${replyButtonBoxShadowHoverCssValue};`
 									: ""
 							}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply a:hover{
+							${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
 				}
 
 				/** comment form */ 
@@ -5879,7 +5882,7 @@ buttonWidth,
 					label={__("Form Text Customization", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Craft a warm and inviting title to welcome users to share their thoughts, e.g., 'Join the Discussion'.",
 							"frontis-blocks",
@@ -6132,7 +6135,7 @@ buttonWidth,
 					label={__("Spacing", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Precisely manage the spatial rhythm of your comment layout — control padding, gaps, and nested indentation with intelligent scaling that adapts automatically to threaded replies.",
 							"frontis-blocks",
@@ -6189,7 +6192,7 @@ buttonWidth,
 						resetFallbackValue={""}
 					/>
 
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Define indentation level for nested replies.",
 							"frontis-blocks",
@@ -6225,7 +6228,7 @@ buttonWidth,
 					label={__("Avatar", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
 							"frontis-blocks",
@@ -6376,7 +6379,7 @@ buttonWidth,
 					label={__("Author", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Define the visual identity of the comment author with refined color and typography controls for a distinctive, readable name style.",
 							"frontis-blocks",
@@ -6560,7 +6563,7 @@ buttonWidth,
 					label={__("Meta", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Style the comment metadata—such as date and time—with harmonious color and typography for subtle emphasis and readability.",
 							"frontis-blocks",
@@ -6744,7 +6747,7 @@ buttonWidth,
 					label={__("Message", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Control the visual tone of comment content with precise color and typography adjustments for a clear, polished reading experience.",
 							"frontis-blocks",
@@ -7421,7 +7424,7 @@ buttonWidth,
 							label={__("Header Title", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Style the form’s header title with elegant color and typography controls for a clear and welcoming visual tone.",
 									"frontis-blocks",
@@ -7583,7 +7586,7 @@ buttonWidth,
 							label={__("Cancel Reply Action", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Customize the cancel reply link with refined color and typography to ensure smooth, intuitive interaction feedback.",
 									"frontis-blocks",
@@ -7780,7 +7783,7 @@ buttonWidth,
 							resetFallbackValue={""}
 						/>
 
-						<p style={{ fontSize: "12px", color: "#888" }}>
+						<p className="fb-control-help">
 							{__(
 								"Adjust bottom spacing to maintain balanced separation between the form header and its content area.",
 								"frontis-blocks",
@@ -7935,7 +7938,7 @@ buttonWidth,
 							label={__("Text", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Adjust the informational text color to maintain visual harmony and readability within the form header.sss",
 									"frontis-blocks",
@@ -7961,7 +7964,7 @@ buttonWidth,
 							label={__("Link", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Define the link’s normal and hover colors to create a subtle yet engaging interactive experience.",
 									"frontis-blocks",
