@@ -1,4 +1,4 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
 export default function Save({ attributes }) {
@@ -20,6 +20,7 @@ export default function Save({ attributes }) {
 		weekendDays,
 		holidays,
 		separator,
+		showSeparatorSwitcher,
 		openStatusText,
 		closedStatusText,
 		beforeTimeText,
@@ -68,14 +69,18 @@ export default function Save({ attributes }) {
 
 	// Get effective office hours based on monthly schedule
 	const getEffectiveOfficeHours = () => {
-		if (useMonthlySchedule && monthlySchedules && monthlySchedules.length > 0) {
+		// Add proper undefined check for monthlySchedules
+		if (useMonthlySchedule && monthlySchedules && Array.isArray(monthlySchedules) && monthlySchedules.length > 0) {
 			const currentMonth = new Date().getMonth().toString();
-			const currentSchedule = monthlySchedules.find(schedule => schedule.month === currentMonth);
+			const currentSchedule = monthlySchedules.find(schedule => schedule && schedule.month === currentMonth);
 			if (currentSchedule) {
-				return { startTime: currentSchedule.startTime, endTime: currentSchedule.endTime };
+				return { 
+					startTime: currentSchedule.startTime || startTime, 
+					endTime: currentSchedule.endTime || endTime 
+				};
 			}
 		}
-		return { startTime, endTime };
+		return { startTime: startTime || '', endTime: endTime || '' };
 	};
 
 	// Calculate remaining time when open
@@ -138,8 +143,8 @@ export default function Save({ attributes }) {
 		let nextDay = new Date(now);
 		nextDay.setDate(now.getDate() + 1);
 		
-		// Skip weekends
-		const weekendDaysArray = weekendDays || [];
+		// Skip weekends - ensure weekendDays is an array
+		const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
 		while (weekendDaysArray.includes(nextDay.getDay().toString())) {
 			nextDay.setDate(nextDay.getDate() + 1);
 		}
@@ -153,10 +158,12 @@ export default function Save({ attributes }) {
 		let nextDay = new Date(now);
 		nextDay.setDate(now.getDate() + 1);
 		
-		// Skip weekends and holidays
-		const weekendDaysArray = weekendDays || [];
+		// Skip weekends and holidays - ensure both are arrays
+		const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
+		const holidaysArray = Array.isArray(holidays) ? holidays : [];
+		
 		while (weekendDaysArray.includes(nextDay.getDay().toString()) || 
-			   holidays?.includes(nextDay.toISOString().split('T')[0])) {
+			   holidaysArray.includes(nextDay.toISOString().split('T')[0])) {
 			nextDay.setDate(nextDay.getDate() + 1);
 		}
 		
@@ -179,16 +186,17 @@ export default function Save({ attributes }) {
 			const dayOfWeek = now.getDay();
 			const todayDate = now.toISOString().split('T')[0];
 
-			// Check weekend
-			const weekendDaysArray = weekendDays || [];
+			// Check weekend - ensure weekendDays is an array
+			const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
 			if (weekendDaysArray.includes(dayOfWeek.toString())) {
 				const nextWeekday = getNextWeekdayName();
 				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
 				return `${weekendMessage || 'Closed for weekend'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextWeekday}`;
 			}
 
-			// Check holidays
-			if (holidays && holidays.includes(todayDate)) {
+			// Check holidays - ensure holidays is an array
+			const holidaysArray = Array.isArray(holidays) ? holidays : [];
+			if (holidaysArray.includes(todayDate)) {
 				const nextDate = getNextDateAfterHoliday();
 				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
 				return `${holidayMessage || 'Closed for holiday'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextDate}`;
@@ -302,14 +310,15 @@ export default function Save({ attributes }) {
 			const dayOfWeek = now.getDay();
 			const todayDate = now.toISOString().split('T')[0];
 
-			// Check weekend
-			const weekendDaysArray = weekendDays || [];
+			// Check weekend - ensure weekendDays is an array
+			const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
 			if (weekendDaysArray.includes(dayOfWeek.toString())) {
 				return { text: 'Weekend', type: 'closed' };
 			}
 
-			// Check holidays
-			if (holidays && holidays.includes(todayDate)) {
+			// Check holidays - ensure holidays is an array
+			const holidaysArray = Array.isArray(holidays) ? holidays : [];
+			if (holidaysArray.includes(todayDate)) {
 				return { text: 'Holiday', type: 'closed' };
 			}
 
@@ -346,9 +355,7 @@ export default function Save({ attributes }) {
 
 	// Get display values
 	const displayLocation = location || 'Set Location Manually';
-	const displayTimezone = timezoneMode === 'auto' ? 
-		getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
-		getFormattedTimezone(timezone);
+	const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : getFormattedTimezone(timezone);
 	const currentTime = getCurrentTimeInTimezone();
 	const currentStatus = getCurrentOfficeStatus();
 	const displayMessage = getDisplayMessage();
@@ -358,11 +365,19 @@ export default function Save({ attributes }) {
 		<div {...blockProps}>
 			<div className='fb-timezone-container'>
 				<div className='fb-timezone-wrapper'>
-					<div className='fb-timezone-current-time'>
-						<span>{displayLocation}</span>
-						<span>{displaySeparator}</span>
-						<span>{currentTime} </span>
-						<span>{displayTimezone}</span>
+					<div className='fb-location-timezone'>
+						<RichText.Content
+							tagName="span"
+							value={displayLocation}
+							className="fb-location-name"
+						/>
+
+						{showSeparatorSwitcher && 
+							<span className='fb-timezone-separator'>{displaySeparator}</span>
+						}
+
+						<span className='fb-current-time'>{currentTime} </span>
+						<span className='fb-current-timezone'>{displayTimezone}</span>
 					</div>
 				</div>
 				<div className='fb-timezone-status'>

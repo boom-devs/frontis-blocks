@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import './editor.scss';
 
@@ -22,6 +22,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		weekendDays,
 		holidays,
 		separator,
+		showSeparatorSwitcher,
 		openStatusText,
 		closedStatusText,
 		beforeTimeText,
@@ -307,11 +308,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<div className='fb-timezone-container'>
 					<div className='fb-timezone-wrapper'>
-						<div className='fb-timezone-current-time'>
-							<span>{displayLocation}</span>
-							<span>{displaySeparator}</span>
-							<span>{currentTime} </span>
-							<span>{displayTimezone}</span>
+						<div className='fb-location-timezone'>
+							{/* <span className='fb-custom-location'>{displayLocation}</span> */}
+							<RichText
+								tagName="span"
+								value={displayLocation}
+								onChange={(value) => setAttributes({ location: value })}
+								placeholder="Set Location Manually"
+								allowedFormats={[]}
+								className="fb-location-name"
+							/>
+
+							{showSeparatorSwitcher && 
+								<span className='fb-timezone-separator'>{displaySeparator}</span>
+							}
+							
+							<span className='fb-current-time'>{currentTime} </span>
+							<span className='fb-current-timezone'>{displayTimezone}</span>
 						</div>
 					</div>
 					<div className='fb-timezone-status'>
