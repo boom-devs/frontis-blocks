@@ -84,7 +84,7 @@ if (empty($items)) {
                                     <?php
                                     $pattern_content = '';
 
-                                    if (strpos($item['patternSlug'], 'user-') === 0) {
+                                    if ($item['patternSlug']) {
                                         $pattern_id = intval(str_replace('user-', '', $item['patternSlug']));
                                         $user_pattern = get_post($pattern_id);
                                         if ($user_pattern && $user_pattern->post_type === 'wp_block') {

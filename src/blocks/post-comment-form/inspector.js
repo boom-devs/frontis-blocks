@@ -3580,11 +3580,6 @@ buttonWidth,
 
 			
 			.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply	{
-
-			
-            ${replyButtonColor ? `color: ${replyButtonColor};` : ""}
-
-
             ${
 							replyButtonGlobalTypoSwitcher.fontFamily === true &&
 							replyButtonGlobalTypographyData.fontFamily
@@ -3731,10 +3726,14 @@ buttonWidth,
 							}
 
 			}
+
+			.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply a{
+						${replyButtonColor ? `color: ${replyButtonColor};` : ""}
+			}
 			
 
 				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply:hover {
-								${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
+							${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
 							${
 								replyButtonHoverBackgroundType === "gradient"
 									? `  
@@ -3763,6 +3762,10 @@ buttonWidth,
 									? `box-shadow: ${replyButtonBoxShadowHoverCssValue};`
 									: ""
 							}
+				}
+
+				.${blockId} .fb-comments-list .fb-comment-body .fb-comment-reply a:hover{
+							${replyButtonHoverColor ? `color: ${replyButtonHoverColor};` : ""}
 				}
 
 				/** comment form */ 
@@ -5879,7 +5882,7 @@ buttonWidth,
 					label={__("Form Text Customization", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Craft a warm and inviting title to welcome users to share their thoughts, e.g., 'Join the Discussion'.",
 							"frontis-blocks",
@@ -6132,7 +6135,7 @@ buttonWidth,
 					label={__("Spacing", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Precisely manage the spatial rhythm of your comment layout — control padding, gaps, and nested indentation with intelligent scaling that adapts automatically to threaded replies.",
 							"frontis-blocks",
@@ -6189,7 +6192,7 @@ buttonWidth,
 						resetFallbackValue={""}
 					/>
 
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Define indentation level for nested replies.",
 							"frontis-blocks",
@@ -6218,157 +6221,8 @@ buttonWidth,
 						)}
 					/>
 
-					<div className="fb-control-divider"></div>
 				</BaseControl>
 
-				<BaseControl
-					label={__("Avatar", "frontis-blocks")}
-					className="fb-setting-form-texts"
-				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
-						{__(
-							"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
-							"frontis-blocks",
-						)}
-					</p>
-
-					<div className="fb-control-divider"></div>
-
-					<FB_Range
-						min={0}
-						max={100}
-						label={__("Size", "frontis-blocks")}
-						rangeValue={avatarSize}
-						onChangeHandler={(value) => setAttributes({ avatarSize: value })}
-						rangeUnitHandler={(value) =>
-							setAttributes({ avatarSizeUnits: value })
-						}
-						deviceType={deviceType}
-						units={avatarSizeUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-					/>
-
-					<FB_Spacing
-						label={__("Padding", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
-						spacingUnits={avatarPaddingUnits}
-						spacingDesktop={avatarPaddingDesktop}
-						spacingTablet={avatarPaddingTablet}
-						spacingMobile={avatarPaddingMobile}
-						handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
-						spacingCombineBtn={avatarPaddingLink}
-						spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={avatarBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ avatarBorder: value })}
-					/>
-
-					{avatarBorder !== "none" && (
-						<>
-							{/* <FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={avatarBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBorderColorSwitcher: value })
-						}
-					/> */}
-
-							{/* {avatarBorderColorSwitcher === "normal" && ( */}
-							<FB_ColorControl
-								label={__("Border Color", "frontis-blocks")}
-								globalColor={avatarBorderColor}
-								setGlobalColor={(value) =>
-									setAttributes({
-										avatarBorderColor: value === undefined ? "" : value,
-									})
-								}
-							/>
-							{/* )} */}
-
-							{/* {avatarBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={avatarBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									avatarBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)} */}
-
-							<FB_Spacing
-								label={__("Border", "frontis-blocks")}
-								deviceType={deviceType}
-								spacingUnitsHandler={handleAvatarBorderUnitsHandler}
-								spacingUnits={avatarBorderUnits}
-								spacingDesktop={avatarBorderDesktop}
-								spacingTablet={avatarBorderTablet}
-								spacingMobile={avatarBorderMobile}
-								handleSpacingUnitHandler={handleAvatarBorderUnitChange}
-								spacingCombineBtn={avatarBorderLink}
-								spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
-								setAttributes={setAttributes}
-							/>
-						</>
-					)}
-
-					<FB_Spacing
-						label={__("Border Radius", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
-						spacingUnits={avatarBorderRadiusUnits}
-						spacingDesktop={avatarBorderRadiusDesktop}
-						spacingTablet={avatarBorderRadiusTablet}
-						spacingMobile={avatarBorderRadiusMobile}
-						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
-						spacingCombineBtn={avatarBorderRadiusLink}
-						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
-						setAttributes={setAttributes}
-					/>
-
-					{/* <FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={avatarBoxShadowSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ avatarBoxShadowSwitcher: value })
-						}
-					/> */}
-
-					{/* {avatarBoxShadowSwitcher === "normal" && ( */}
-					<FB_BoxShadowControl
-						label={__("Box Shadow", "frontis-blocks")}
-						onBoxShadowChange={(value) =>
-							setAttributes({ avatarBoxShadowValues: value })
-						}
-						initialShadowValue={avatarBoxShadowValues}
-						onBoxShadowStyleChange={(value) =>
-							setAttributes({ avatarBoxShadowCssValue: value })
-						}
-					/>
-					{/* )} */}
-
-					{/* {avatarBoxShadowSwitcher === "hover" && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverValues: value })
-							}
-							initialShadowValue={avatarBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) =>
-								setAttributes({ avatarBoxShadowHoverCssValue: value })
-							}
-						/>
-					)} */}
-				</BaseControl>
 
 				<div className="fb-control-divider"></div>
 
@@ -6376,7 +6230,7 @@ buttonWidth,
 					label={__("Author", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Define the visual identity of the comment author with refined color and typography controls for a distinctive, readable name style.",
 							"frontis-blocks",
@@ -6560,7 +6414,7 @@ buttonWidth,
 					label={__("Meta", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Style the comment metadata—such as date and time—with harmonious color and typography for subtle emphasis and readability.",
 							"frontis-blocks",
@@ -6744,7 +6598,7 @@ buttonWidth,
 					label={__("Message", "frontis-blocks")}
 					className="fb-setting-form-texts"
 				>
-					<p style={{ fontSize: "12px", color: "#888" }}>
+					<p className="fb-control-help">
 						{__(
 							"Control the visual tone of comment content with precise color and typography adjustments for a clear, polished reading experience.",
 							"frontis-blocks",
@@ -6899,6 +6753,110 @@ buttonWidth,
 						}
 					/>
 				</BaseControl>
+			</PanelBody>
+
+			<PanelBody
+				title={__("Avatar", "frontis-blocks")}
+				initialOpen={false}
+			>
+				<p className="fb-control-help">
+					{__(
+						"Refine the visual style of user avatars with adjustable size, padding, borders, radius, and soft shadow effects for a polished, consistent appearance.",
+						"frontis-blocks",
+					)}
+				</p>
+
+				<div className="fb-control-divider"></div>
+
+				<FB_Range
+					min={0}
+					max={100}
+					label={__("Size", "frontis-blocks")}
+					rangeValue={avatarSize}
+					onChangeHandler={(value) => setAttributes({ avatarSize: value })}
+					rangeUnitHandler={(value) =>
+						setAttributes({ avatarSizeUnits: value })
+					}
+					deviceType={deviceType}
+					units={avatarSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+
+				<FB_Spacing
+					label={__("Padding", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleAvatarPaddingUnitsHandler}
+					spacingUnits={avatarPaddingUnits}
+					spacingDesktop={avatarPaddingDesktop}
+					spacingTablet={avatarPaddingTablet}
+					spacingMobile={avatarPaddingMobile}
+					handleSpacingUnitHandler={handleAvatarPaddingUnitChange}
+					spacingCombineBtn={avatarPaddingLink}
+					spacingCombineBtnHandler={handleAvatarPaddingCombineBtn}
+					setAttributes={setAttributes}
+				/>
+
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={avatarBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ avatarBorder: value })}
+				/>
+
+				{avatarBorder !== "none" && (
+					<>
+						<FB_ColorControl
+							label={__("Border Color", "frontis-blocks")}
+							globalColor={avatarBorderColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									avatarBorderColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+
+						<FB_Spacing
+							label={__("Border", "frontis-blocks")}
+							deviceType={deviceType}
+							spacingUnitsHandler={handleAvatarBorderUnitsHandler}
+							spacingUnits={avatarBorderUnits}
+							spacingDesktop={avatarBorderDesktop}
+							spacingTablet={avatarBorderTablet}
+							spacingMobile={avatarBorderMobile}
+							handleSpacingUnitHandler={handleAvatarBorderUnitChange}
+							spacingCombineBtn={avatarBorderLink}
+							spacingCombineBtnHandler={handleAvatarBorderCombineBtn}
+							setAttributes={setAttributes}
+						/>
+					</>
+				)}
+
+					<FB_Spacing
+						label={__("Border Radius", "frontis-blocks")}
+						deviceType={deviceType}
+						spacingUnitsHandler={handleAvatarBorderRadiusUnitsHandler}
+						spacingUnits={avatarBorderRadiusUnits}
+						spacingDesktop={avatarBorderRadiusDesktop}
+						spacingTablet={avatarBorderRadiusTablet}
+						spacingMobile={avatarBorderRadiusMobile}
+						handleSpacingUnitHandler={handleAvatarBorderRadiusUnitChange}
+						spacingCombineBtn={avatarBorderRadiusLink}
+						spacingCombineBtnHandler={handleAvatarBorderRadiusCombineBtn}
+						setAttributes={setAttributes}
+					/>
+
+					<FB_BoxShadowControl
+						label={__("Box Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) =>
+							setAttributes({ avatarBoxShadowValues: value })
+						}
+						initialShadowValue={avatarBoxShadowValues}
+						onBoxShadowStyleChange={(value) =>
+							setAttributes({ avatarBoxShadowCssValue: value })
+						}
+					/>
 			</PanelBody>
 
 			<PanelBody
@@ -7421,7 +7379,7 @@ buttonWidth,
 							label={__("Header Title", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Style the form’s header title with elegant color and typography controls for a clear and welcoming visual tone.",
 									"frontis-blocks",
@@ -7583,7 +7541,7 @@ buttonWidth,
 							label={__("Cancel Reply Action", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Customize the cancel reply link with refined color and typography to ensure smooth, intuitive interaction feedback.",
 									"frontis-blocks",
@@ -7780,7 +7738,7 @@ buttonWidth,
 							resetFallbackValue={""}
 						/>
 
-						<p style={{ fontSize: "12px", color: "#888" }}>
+						<p className="fb-control-help">
 							{__(
 								"Adjust bottom spacing to maintain balanced separation between the form header and its content area.",
 								"frontis-blocks",
@@ -7935,7 +7893,7 @@ buttonWidth,
 							label={__("Text", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Adjust the informational text color to maintain visual harmony and readability within the form header.sss",
 									"frontis-blocks",
@@ -7961,7 +7919,7 @@ buttonWidth,
 							label={__("Link", "frontis-blocks")}
 							className="fb-setting-form-texts"
 						>
-							<p style={{ fontSize: "12px", color: "#888" }}>
+							<p className="fb-control-help">
 								{__(
 									"Define the link’s normal and hover colors to create a subtle yet engaging interactive experience.",
 									"frontis-blocks",
@@ -8309,16 +8267,6 @@ buttonWidth,
 					/>
 
 <div className="fb-control-divider"></div>
-				{/* <FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
-					globalSwitcher={formFieldColorSwitcher}
-					setGlobalSwitcher={(value) =>
-						setAttributes({ formFieldColorSwitcher: value })
-					}
-				/> */}
-
-
-				{/* {FB_SwitcherControl === "normal" && ( */}
 					<FB_ColorControl
 						label={__("Color", "frontis-blocks")}
 						globalColor={formFieldColor}
@@ -8328,19 +8276,6 @@ buttonWidth,
 							})
 						}
 					/>
-				{/* )} */}
-
-				{/* {FB_SwitcherControl === "hover" && (
-					<FB_ColorControl
-						label={__("Hover Color", "frontis-blocks")}
-						globalColor={formFieldHoverColor}
-						setGlobalColor={(value) =>
-							setAttributes({
-								formFieldHoverColor: value === undefined ? "" : value,
-							})
-						}
-					/>
-				)} */}
 
 				<FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
@@ -8426,17 +8361,6 @@ buttonWidth,
 
 				{formFieldBorder !== "none" && (
 					<>					
-						{/* <FB_SwitcherControl
-						label={__("Border", "frontis-blocks")}
-						globalSwitcher={formFieldBorderColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ formFieldBorderColorSwitcher: value })
-						}
-						showFocus={true}
-		hideHover={true}
-					/> */}
-
-					{/* {formFieldBorderColorSwitcher === "normal" && ( */}
 						<FB_ColorControl
 							label={__("Border Color", "frontis-blocks")}
 							globalColor={formFieldBorderColor}
@@ -8446,19 +8370,6 @@ buttonWidth,
 								})
 							}
 						/>
-					{/* )} */}
-
-					{/* {formFieldBorderColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={formFieldBorderHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									formFieldBorderHoverColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)} */}
 
 					<FB_Spacing
 						label={__("Border", "frontis-blocks")}
