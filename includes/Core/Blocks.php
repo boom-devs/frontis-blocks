@@ -75,13 +75,6 @@ class Blocks
 				// Enqueue block editor script and pass localized data
 				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
 				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
-
-
-				// $activation_key = get_option('frontisblockspro_license_options');
-				// if(is_array($activation_key) && $activation_key && count($activation_key) > 0 && isset($activation_key['sc_license_key']) && $activation_key['sc_license_key'] !== '') {
-				// 	$activation_key = $activation_key['sc_license_key'];
-				// }
-
 				$license_options = get_option('frontisblockspro_license_options');
 				$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
 				$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';

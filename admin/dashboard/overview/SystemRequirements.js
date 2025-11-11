@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
-import apiFetch from '@wordpress/api-fetch';
 
 // Loading Skeleton Component
 const LoadingSkeleton = () => (
@@ -41,113 +40,87 @@ const LoadingSkeleton = () => (
 );
 
 const SystemRequirements = () => {
-    const [healthInfo, setHealthInfo] = useState(null);
+    const [systemRequirements, setSystemRequirements] = useState(null);
+    const { system_requirements, blocksInfo } = window.frontisBlocksAdmin;
 
     useEffect(() => {
-        fetchHealthInfo();
-    }, []);
+        // Simulate the 500 ms loading delay you already had
+        const timer = setTimeout(() => {
+            setSystemRequirements(system_requirements);
+        }, 500);
+        return () => clearTimeout(timer);
+    }, [system_requirements]);
 
-    const fetchHealthInfo = async () => {
-        try {
-            const response = await apiFetch({ path: '/wp/v2/frontis-blocks/system-health' });
-            setHealthInfo(response);
-        } catch (error) {
-            console.error('Error fetching system health info:', error);
-        }
-    };
-
-    if (!healthInfo) {
+    if (!systemRequirements) {
         return <LoadingSkeleton />;
     }
 
+    // Helper: map status → CSS class + icon
+    const getStatusInfo = (status) => {
+        switch (status) {
+            case 'good':
+                return { class: 'status-good',   icon: <CheckIcon />,   valueClass: 'status-value-good' };
+            case 'warning':
+                return { class: 'status-warning', icon: <WarningIcon />, valueClass: 'status-value-warning' };
+            case 'error':
+            default:
+                return { class: 'status-critical', icon: <ErrorIcon />,   valueClass: 'status-value-error' };
+        }
+    };
+
+    console.log(blocksInfo);
+
+    const totalBlocks = Object.keys(blocksInfo).length;
+    const activeBlocks = Object.values(blocksInfo).filter(status => status === true).length;
+    const inactiveBlocks = totalBlocks - activeBlocks;
+
     return (
         <div className="system-status-card">
-            <h2 className="heading-3">Latest updates</h2>
-            
+            <h2 className="heading-3">{ __( 'Latest updates', 'frontis-blocks' ) }</h2>
+
             <div className="status-list">
-                {/* PHP Version - Good */}
-                <div className="status-item status-good">
-                    <div className="status-info">
-                        <div className="status-label">PHP Version <div className="status-value status-value-good">8.0.12</div></div>
-                        <div className="status-message">No known issue detected</div>
-                    </div>
-                    <div className="status-icon">
-                        <CheckIcon />
-                    </div>
-                </div>
+                {systemRequirements.map((req, idx) => {
+                    const { class: statusClass, icon, valueClass } = getStatusInfo(req.status);
+                    const message = req.status === 'good'
+                        ? __( 'No known issue detected', 'frontis-blocks' )
+                        : req.status === 'warning'
+                            ? __( 'An informal issue has been identified', 'frontis-blocks' )
+                            : __( 'A critical issue has been identified', 'frontis-blocks' );
 
-                {/* WordPress Version - Good */}
-                {/* PHP Version - Good */}
-                <div className="status-item status-good">
-                    <div className="status-info">
-                        <div className="status-label">PHP Version <div className="status-value status-value-good">8.0.12</div></div>
-                        <div className="status-message">No known issue detected</div>
-                    </div>
-                    <div className="status-icon">
-                        <CheckIcon />
-                    </div>
-                </div>
-
-
-                {/* Server SSL - Critical */}
-                <div className="status-item status-critical">
-                    <div className="status-info">
-                        <div className="status-label">Server SSL <div className="status-value status-value-error">Not Installed</div></div>
-                        <div className="status-message">A critical issue has been identified</div>
-                    </div>
-                    <div className="status-icon">
-                        <ErrorIcon />
-                    </div>
-                </div>
-
-                {/* WP Debug - Warning */}
-                <div className="status-item status-warning">
-                    <div className="status-info">
-                        <div className="status-label">WP Debug <div className="status-value status-value-warning">Enabled</div></div>
-                        <div className="status-message">An informal issue has been identified</div>
-                    </div>
-                    <div className="status-icon">
-                        <WarningIcon />
-                    </div>
-                </div>
-
-                {/* Memory Limit - Good */}
-                <div className="status-item status-good">
-                    <div className="status-info">
-                        <div className="status-label">Memory Limit <div className="status-value status-value-good">40M</div></div>
-                        <div className="status-message">No known issue found</div>
-                    </div>
-                    <div className="status-icon">
-                        <CheckIcon />
-                    </div>
-                </div>
+                    return (
+                        <div key={idx} className={`status-item ${statusClass}`}>
+                            <div className="status-info">
+                                <div className="status-label">
+                                    {req.label}
+                                    <div className={`status-value ${valueClass}`}>{req.value}</div>
+                                </div>
+                                <div className="status-message">{message}</div>
+                            </div>
+                            <div className="status-icon">{icon}</div>
+                        </div>
+                    );
+                })}
             </div>
 
-            {/* Bottom Stats Section */}
+            {/* Bottom Stats – keep your static numbers or make them dynamic later */}
             <div className="bottom-stats">
                 <div className="stat-box total-elements-box">
-                    <div className="stat-number">100</div>
-                    <div className="stat-label">Total Elements</div>
-                    <div className="stat-icon">
-                        <GridIcon />
-                    </div>
+                    <div className="stat-number">{totalBlocks}</div>
+                    <div className="stat-label">{ __( 'Total Elements', 'frontis-blocks' ) }</div>
+                    <div className="stat-icon"><GridIcon /></div>
                 </div>
 
                 <div className="stat-row">
                     <div className="stat-box active-box">
-                        <div className="stat-number">82</div>
-                        <div className="stat-label">Active</div>
-                        <div className="stat-icon">
-                            <CheckCircleIcon />
-                        </div>
+                        <div className="stat-number">{activeBlocks}</div>
+                        <div className="stat-label">{ __( 'Active', 'frontis-blocks' ) }</div>
+                        <div className="stat-icon"><CheckCircleIcon /></div>
                     </div>
 
                     <div className="stat-box inactive-box">
-                        <div className="stat-number">18</div>
-                        <div className="stat-label">Inactive</div>
-                        <div className="stat-icon">
-                            <CircleIcon />
-                        </div>
+                        <div className="stat-number">{inactiveBlocks}</div>
+                        <div className="stat-label">{ __( 'Inactive', 'frontis-blocks' ) }</div>
+                        <div className="stat-icon"><CircleIcon /></div>
                     </div>
                 </div>
             </div>
