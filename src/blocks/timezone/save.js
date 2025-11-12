@@ -28,237 +28,52 @@ export default function Save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `frontis-block fb-timezone-main-wrapper ${blockID}`,
-    });
+		className: `frontis-block fb-timezone-main-wrapper ${blockID}`,
+	});
 
-	// Helper function to format timezone display (with timezone name)
+	// Helper: format timezone for display
 	const getFormattedTimezone = (timezone) => {
-		if (!timezone) return 'Local Time (GMT+6)';
-		
 		try {
 			const now = new Date();
-			
 			if (useUTCTimezoneFormat) {
-				// UTC format - show timezone name with offset
 				const formatter = new Intl.DateTimeFormat('en-US', {
 					timeZone: timezone,
 					timeZoneName: 'longOffset'
 				});
 				const parts = formatter.formatToParts(now);
 				const offsetPart = parts.find(part => part.type === 'timeZoneName');
-				
 				if (offsetPart && offsetPart.value.startsWith('GMT')) {
 					const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
 					const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
 					return `${timezoneName} (UTC${offset})`;
 				}
 			} else {
-				// GMT format (default) - show timezone name with offset
-				const offset = now.toLocaleString('en-US', { 
-					timeZone: timezone, 
-					timeZoneName: 'shortOffset' 
+				const offset = now.toLocaleString('en-US', {
+					timeZone: timezone,
+					timeZoneName: 'shortOffset'
 				}).split(' ').pop();
 				const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
 				return `${timezoneName} (${offset})`;
 			}
-		} catch (error) {
+		} catch {
 			const timezoneName = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
 			return useUTCTimezoneFormat ? `${timezoneName} (UTC+06:00)` : `${timezoneName} (GMT+6)`;
 		}
 	};
 
-	// Get effective office hours based on monthly schedule
+	// Helper: get effective monthly schedule
 	const getEffectiveOfficeHours = () => {
-		// Add proper undefined check for monthlySchedules
-		if (useMonthlySchedule && monthlySchedules && Array.isArray(monthlySchedules) && monthlySchedules.length > 0) {
+		if (useMonthlySchedule && monthlySchedules?.length > 0) {
 			const currentMonth = new Date().getMonth().toString();
-			const currentSchedule = monthlySchedules.find(schedule => schedule && schedule.month === currentMonth);
+			const currentSchedule = monthlySchedules.find(schedule => schedule.month === currentMonth);
 			if (currentSchedule) {
-				return { 
-					startTime: currentSchedule.startTime || startTime, 
-					endTime: currentSchedule.endTime || endTime 
-				};
+				return { startTime: currentSchedule.startTime, endTime: currentSchedule.endTime };
 			}
 		}
-		return { startTime: startTime || '', endTime: endTime || '' };
+		return { startTime, endTime };
 	};
 
-	// Calculate remaining time when open
-	const getRemainingTime = () => {
-		const effectiveTimezone = timezoneMode === 'auto' ? 
-			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-		
-		const effectiveHours = getEffectiveOfficeHours();
-		const { endTime: effectiveEndTime } = effectiveHours;
-
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
-
-		if (!effectiveTimezone || !isValidTime(effectiveEndTime)) {
-			return '';
-		}
-
-		try {
-			const now = new Date();
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', hour12: false
-			});
-
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
-
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let endTotal = endHours * 60 + endMinutes;
-
-			if (endTotal < currentTotal) {
-				endTotal += 24 * 60;
-			}
-
-			const remainingMinutes = endTotal - currentTotal;
-			
-			if (remainingMinutes <= 0) return '';
-
-			const hours = Math.floor(remainingMinutes / 60);
-			const minutes = remainingMinutes % 60;
-
-			if (hours > 0 && minutes > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			} else if (hours > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''}`;
-			} else {
-				return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			}
-		} catch (error) {
-			return '';
-		}
-	};
-
-	// Get next weekday name
-	const getNextWeekdayName = () => {
-		const now = new Date();
-		let nextDay = new Date(now);
-		nextDay.setDate(now.getDate() + 1);
-		
-		// Skip weekends - ensure weekendDays is an array
-		const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
-		while (weekendDaysArray.includes(nextDay.getDay().toString())) {
-			nextDay.setDate(nextDay.getDate() + 1);
-		}
-		
-		return nextDay.toLocaleDateString('en-US', { weekday: 'long' });
-	};
-
-	// Get next date after holiday
-	const getNextDateAfterHoliday = () => {
-		const now = new Date();
-		let nextDay = new Date(now);
-		nextDay.setDate(now.getDate() + 1);
-		
-		// Skip weekends and holidays - ensure both are arrays
-		const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
-		const holidaysArray = Array.isArray(holidays) ? holidays : [];
-		
-		while (weekendDaysArray.includes(nextDay.getDay().toString()) || 
-			   holidaysArray.includes(nextDay.toISOString().split('T')[0])) {
-			nextDay.setDate(nextDay.getDate() + 1);
-		}
-		
-		return nextDay.toLocaleDateString('en-US', { 
-			weekday: 'long',
-			month: 'long',
-			day: 'numeric'
-		});
-	};
-
-	// Get display message with dynamic time and date
-	const getDisplayMessage = () => {
-		const effectiveTimezone = timezoneMode === 'auto' ? 
-			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-		
-		if (!effectiveTimezone) return closedMessage || 'Office is closed';
-
-		try {
-			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
-
-			// Check weekend - ensure weekendDays is an array
-			const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
-			if (weekendDaysArray.includes(dayOfWeek.toString())) {
-				const nextWeekday = getNextWeekdayName();
-				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
-				return `${weekendMessage || 'Closed for weekend'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextWeekday}`;
-			}
-
-			// Check holidays - ensure holidays is an array
-			const holidaysArray = Array.isArray(holidays) ? holidays : [];
-			if (holidaysArray.includes(todayDate)) {
-				const nextDate = getNextDateAfterHoliday();
-				const startTimeDisplay = formatTimeForDisplay(getEffectiveOfficeHours().startTime);
-				return `${holidayMessage || 'Closed for holiday'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextDate}`;
-			}
-
-			// Check time
-			const effectiveHours = getEffectiveOfficeHours();
-			const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-			
-			const isValidTime = (time) => {
-				if (!time) return false;
-				const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-				return timeRegex.test(time);
-			};
-
-			if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-				return closedMessage || 'Office is closed';
-			}
-
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
-				hour12: false
-			});
-
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [startHours, startMinutes] = effectiveStartTime.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
-
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let startTotal = startHours * 60 + startMinutes;
-			let endTotal = endHours * 60 + endMinutes;
-
-			if (endTotal < startTotal) {
-				endTotal += 24 * 60;
-				if (currentTotal < startTotal) currentTotal += 24 * 60;
-			}
-
-			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
-			const remainingTime = getRemainingTime();
-			const startTimeDisplay = formatTimeForDisplay(effectiveStartTime);
-			const endTimeDisplay = formatTimeForDisplay(effectiveEndTime);
-			
-			if (isOpen) {
-				return `${completionMessage || 'Office is open'}. ${afterTimeText || 'Office will close at'} ${endTimeDisplay}, Remaining time: ${remainingTime}`;
-			} else {
-				const nextDay = new Date(now);
-				nextDay.setDate(now.getDate() + 1);
-				const nextDate = nextDay.toLocaleDateString('en-US', { 
-					weekday: 'long',
-					month: 'long',
-					day: 'numeric'
-				});
-				return `${closedMessage || 'Office is closed'}. ${beforeTimeText || 'Office will start at'} ${startTimeDisplay}, ${nextDate}, Remaining time: ${remainingTime}`;
-			}
-		} catch (error) {
-			return closedMessage || 'Office is closed';
-		}
-	};
-
-	// Format time for display
+	// Helper: format time to readable format
 	const formatTimeForDisplay = (time) => {
 		if (!time) return '';
 		const [hours, minutes] = time.split(':').map(Number);
@@ -268,98 +83,132 @@ export default function Save({ attributes }) {
 		return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
 	};
 
-	// Get current time in timezone for frontend display
-	const getCurrentTimeInTimezone = () => {
-		const effectiveTimezone = timezoneMode === 'auto' ? 
-			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-		
-		if (!effectiveTimezone) return 'Loading...';
-		
-		try {
-			return new Date().toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', hour12: true
-			});
-		} catch (error) {
-			return 'Time Unavailable';
-		}
-	};
-
-	// Calculate if office is currently open
-	const getCurrentOfficeStatus = () => {
-		const effectiveTimezone = timezoneMode === 'auto' ? 
-			Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-		
-		if (!effectiveTimezone) return { text: 'Closed', type: 'closed' };
-
-		const effectiveHours = getEffectiveOfficeHours();
-		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-		
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
-
-		if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-			return { text: 'Closed', type: 'closed' };
-		}
-
+	// Helper: remaining time
+	const getRemainingTime = () => {
+		const effectiveTimezone = timezoneMode === 'auto'
+			? Intl.DateTimeFormat().resolvedOptions().timeZone
+			: timezone;
+		const { endTime: effectiveEndTime } = getEffectiveOfficeHours();
+		if (!effectiveTimezone || !effectiveEndTime) return '';
 		try {
 			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
-
-			// Check weekend - ensure weekendDays is an array
-			const weekendDaysArray = Array.isArray(weekendDays) ? weekendDays : [];
-			if (weekendDaysArray.includes(dayOfWeek.toString())) {
-				return { text: 'Weekend', type: 'closed' };
-			}
-
-			// Check holidays - ensure holidays is an array
-			const holidaysArray = Array.isArray(holidays) ? holidays : [];
-			if (holidaysArray.includes(todayDate)) {
-				return { text: 'Holiday', type: 'closed' };
-			}
-
-			// Check time
 			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
+				timeZone: effectiveTimezone,
+				hour: '2-digit',
+				minute: '2-digit',
 				hour12: false
 			});
-
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [startHours, startMinutes] = effectiveStartTime.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
-
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let startTotal = startHours * 60 + startMinutes;
-			let endTotal = endHours * 60 + endMinutes;
-
-			if (endTotal < startTotal) {
-				endTotal += 24 * 60;
-				if (currentTotal < startTotal) currentTotal += 24 * 60;
-			}
-
-			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
-			return { 
-				text: isOpen ? (openStatusText || 'Open') : (closedStatusText || 'Closed'), 
-				type: isOpen ? 'open' : 'closed' 
-			};
-		} catch (error) {
-			return { text: 'Closed', type: 'closed' };
+			const [ch, cm] = currentTimeStr.split(':').map(Number);
+			const [eh, em] = effectiveEndTime.split(':').map(Number);
+			let currentTotal = ch * 60 + cm;
+			let endTotal = eh * 60 + em;
+			if (endTotal < currentTotal) endTotal += 24 * 60;
+			const remaining = endTotal - currentTotal;
+			if (remaining <= 0) return '';
+			const h = Math.floor(remaining / 60);
+			const m = remaining % 60;
+			return h > 0 ? `${h} hr ${m > 0 ? `${m} min` : ''}` : `${m} min`;
+		} catch {
+			return '';
 		}
 	};
 
-	// Get display values
+	// Helper: next working day after weekend
+	const getNextWeekdayName = () => {
+		const now = new Date();
+		let next = new Date(now);
+		const weekends = weekendDays || [];
+		do {
+			next.setDate(next.getDate() + 1);
+		} while (weekends.includes(next.getDay().toString()));
+		return next.toLocaleDateString('en-US', { weekday: 'long' });
+	};
+
+	// Helper: next working date after holiday
+	const getNextDateAfterHoliday = () => {
+		const now = new Date();
+		let next = new Date(now);
+		const weekends = weekendDays || [];
+		const holidaysArr = holidays || [];
+		do {
+			next.setDate(next.getDate() + 1);
+		} while (
+			weekends.includes(next.getDay().toString()) ||
+			holidaysArr.includes(next.toISOString().split('T')[0])
+		);
+		return next.toLocaleDateString('en-US', {
+			weekday: 'long',
+			month: 'long',
+			day: 'numeric'
+		});
+	};
+
+	// Helper: main display message
+	const getDisplayMessage = () => {
+		try {
+			const effectiveTimezone =
+				timezoneMode === 'auto'
+					? Intl.DateTimeFormat().resolvedOptions().timeZone
+					: timezone;
+			const now = new Date();
+			const day = now.getDay();
+			const today = now.toISOString().split('T')[0];
+			const weekends = weekendDays || [];
+			const holidaysArr = holidays || [];
+
+			if (weekends.includes(day.toString())) {
+				const nextWeekday = getNextWeekdayName();
+				return `${weekendMessage || 'Closed for weekend'}. ${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(getEffectiveOfficeHours().startTime)}, ${nextWeekday}`;
+			}
+
+			if (holidaysArr.includes(today)) {
+				const nextDate = getNextDateAfterHoliday();
+				return `${holidayMessage || 'Closed for holiday'}. ${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(getEffectiveOfficeHours().startTime)}, ${nextDate}`;
+			}
+
+			const { startTime, endTime } = getEffectiveOfficeHours();
+			const nowTime = now.toLocaleTimeString('en-US', {
+				timeZone: effectiveTimezone,
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
+			});
+			const [ch, cm] = nowTime.split(':').map(Number);
+			const [sh, sm] = startTime.split(':').map(Number);
+			const [eh, em] = endTime.split(':').map(Number);
+			let currentTotal = ch * 60 + cm;
+			let startTotal = sh * 60 + sm;
+			let endTotal = eh * 60 + em;
+			if (endTotal < startTotal) endTotal += 24 * 60;
+			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
+			const remaining = getRemainingTime();
+			if (isOpen) {
+				return `${completionMessage || 'Office is open'}. ${afterTimeText || 'Office will close at'} ${formatTimeForDisplay(endTime)}, Remaining time: ${remaining}`;
+			}
+			return `${closedMessage || 'Office is closed'}. ${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(startTime)}, Remaining time: ${remaining}`;
+		} catch {
+			return closedMessage || 'Office is closed';
+		}
+	};
+
+	// Static output
 	const displayLocation = location || 'Set Location Manually';
-	const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : getFormattedTimezone(timezone);
-	const currentTime = getCurrentTimeInTimezone();
-	const currentStatus = getCurrentOfficeStatus();
-	const displayMessage = getDisplayMessage();
+	const displayTimezone =
+		timezoneMode === 'auto'
+			? getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
+			: getFormattedTimezone(timezone);
+	const currentTime = new Date().toLocaleTimeString('en-US', {
+		hour: '2-digit',
+		minute: '2-digit',
+		hour12: true
+	});
 	const displaySeparator = separator || ' | ';
+	const statusType = officeStatus === 'Open' ? 'open' : 'closed';
+	const statusText =
+		officeStatus === 'Open'
+			? openStatusText || 'Open'
+			: closedStatusText || 'Closed';
+	const displayMessage = getDisplayMessage();
 
 	return (
 		<div {...blockProps}>
@@ -371,23 +220,28 @@ export default function Save({ attributes }) {
 							value={displayLocation}
 							className="fb-location-name"
 						/>
-
-						{showSeparatorSwitcher && 
+						{showSeparatorSwitcher && (
 							<span className='fb-timezone-separator'>{displaySeparator}</span>
-						}
-
-						<span className='fb-current-time'>{currentTime} </span>
+						)}
+						<span className='fb-current-time'>{currentTime}</span>
 						<span className='fb-current-timezone'>{displayTimezone}</span>
 					</div>
 				</div>
-				<div className='fb-timezone-status'>
-					<div className='fb-timezone-status-wrapper'>
-						<div className={currentStatus.type === 'open' ? "fb-time-pulse-open" : "fb-time-pulse-close"}>
-							<span>{currentStatus.text}</span>
+				<div className='fb-timezone-status-wrapper'>
+					<div className='fb-timezone-status-info-box'>
+						<div
+							className={
+								statusType === 'open'
+									? 'fb-time-pulse-open'
+									: 'fb-time-pulse-close'
+							}
+						>
+							<span className='fb-timezone-status'>{statusText}</span>
 						</div>
-						
-						<div className='fb-timezone-status-text'>
-							<span>{displayMessage}</span>
+						<div className='fb-timezone-status-info'>
+							<span className='fb-timezone-info-noted'>
+								{displayMessage}
+							</span>
 						</div>
 					</div>
 				</div>
