@@ -15,7 +15,7 @@ import {
 } from '@wordpress/components';
 
 import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
-import { TIMEZONE, WEEKENDDAY } from '@Constants/fbConstants';
+import { TIMEZONE, WEEKENDDAY, BORDER_STYLES } from '@Constants/fbConstants';
 import Select2 from "react-select";
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Spacing from '@Components/spacing';
@@ -99,6 +99,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		timezoneTimeTextLetterSpacingUnits,
 		timezoneTimeTextLineHeight,
 		timezoneTimeTextLineHeightUnits,
+		
+		timezoneTextGlobalTypoSwitcher,
+		timezoneTextGlobalTypographyData,
+		timezoneTextGlobalTypoType,
+		timezoneTextGlobalTypoOption,
+		timezoneTextFontFamily,
+		timezoneTextFontSize,
+		timezoneTextFontSizeUnits,
+		timezoneTextFontWeight,
+		timezoneTextFontStyle,
+		timezoneTextTransform,
+		timezoneTextDecoration,
+		timezoneTextLetterSpacing,
+		timezoneTextLetterSpacingUnits,
+		timezoneTextLineHeight,
+		timezoneTextLineHeightUnits,
 
 		locationNameTextColorTypeSwitcher,
         locationNameTextColorType,
@@ -111,11 +127,77 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         locationNameTextCustomGradientColor,
         locationNameTextHoverCustomGradientColorSwitcher,
         locationNameTextHoverCustomGradientColor,
+		
+		timezoneTimeTextColorTypeSwitcher,
+        timezoneTimeTextColorType,
+        timezoneTimeTextHoverColorType,
+        timezoneTimeTextColor,
+        timezoneTimeTextHoverColor,
+        timezoneTimeTextGradientColor,
+        timezoneTimeTextHoverGradientColor,
+        timezoneTimeTextCustomGradientColorSwitcher,
+        timezoneTimeTextCustomGradientColor,
+        timezoneTimeTextHoverCustomGradientColorSwitcher,
+        timezoneTimeTextHoverCustomGradientColor,
+
+		timezoneTextColorTypeSwitcher,
+        timezoneTextColorType,
+        timezoneTextHoverColorType,
+        timezoneTextColor,
+        timezoneTextHoverColor,
+        timezoneTextGradientColor,
+        timezoneTextHoverGradientColor,
+        timezoneTextCustomGradientColorSwitcher,
+        timezoneTextCustomGradientColor,
+        timezoneTextHoverCustomGradientColorSwitcher,
+        timezoneTextHoverCustomGradientColor,
 
 		timezoneTextAlignment,
 		timezoneLocationTextSpacing,
 		timezoneLocationTextSpacingUnits,
 
+		locationTimezoneBgColorTypeSwitcher,
+        locationTimezoneBgColorType,
+        locationTimezoneBgHoverColorType,
+        locationTimezoneBgColor,
+        locationTimezoneBgHoverColor,
+        locationTimezoneBgGradientColor,
+        locationTimezoneBgHoverGradientColor,
+        locationTimezoneBgCustomGradientColorSwitcher,
+        locationTimezoneBgCustomGradientColor,
+        locationTimezoneBgHoverCustomGradientColorSwitcher,
+        locationTimezoneBgHoverCustomGradientColor,
+
+		locationTimezoneBorder,
+        locationTimezoneBorderColor,
+        locationTimezoneBorderHoverColor,
+        locationTimezoneBorderColorSwitcher,
+
+        locationTimezoneBorderUnits,
+        locationTimezoneDesktopBorder,
+        locationTimezoneTabletBorder,
+        locationTimezoneMobileBorder,
+        locationTimezoneBorderLink,
+
+        locationTimezoneBorderRadiusUnits,
+        locationTimezoneDesktopBorderRadius,
+        locationTimezoneTabBorderRadius,
+        locationTimezoneMobileBorderRadius,
+        locationTimezoneBorderRadiusLink,
+        locationTimezoneBoxShadowValues,
+        locationTimezoneBoxShadowCssValue,
+
+		locationTimezonePaddingUnits,
+        locationTimezoneDesktopPadding,
+        locationTimezoneTabPadding,
+        locationTimezoneMobilePadding,
+        locationTimezonePaddingLink,
+        locationTimezoneMarginUnits,
+        locationTimezoneDesktopMargin,
+        locationTimezoneTabMargin,
+        locationTimezoneMobileMargin,
+        locationTimezoneMarginLink,
+	
 
 	} = attributes;
 
@@ -128,6 +210,302 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             });
         }
     }, [clientId]);
+
+	// locatoin timezone margin and padding style start
+	//padding
+	const locationTimezonePaddingUnitsHandler = (unit) => {
+        setAttributes({
+            locationTimezonePaddingUnits: {
+                ...locationTimezonePaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const locationTimezonePaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (locationTimezonePaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        locationTimezoneDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        locationTimezoneTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        locationTimezoneMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ locationTimezoneDesktopPadding: { ...locationTimezoneDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ locationTimezoneTabPadding: { ...locationTimezoneTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ locationTimezoneMobilePadding: { ...locationTimezoneMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const locationTimezonePaddingLinkBtn = () => {
+        setAttributes({
+            locationTimezonePaddingLink: !locationTimezonePaddingLink
+        });
+    };
+	const locationTimezoneDesktopPaddingWidth = `${locationTimezoneDesktopPadding?.top}${locationTimezonePaddingUnits?.Desktop} ${locationTimezoneDesktopPadding?.right}${locationTimezonePaddingUnits?.Desktop} ${locationTimezoneDesktopPadding?.bottom}${locationTimezonePaddingUnits?.Desktop} ${locationTimezoneDesktopPadding?.left}${locationTimezonePaddingUnits?.Desktop}`;
+    const locationTimezoneTabletPaddingWidth = `${locationTimezoneTabPadding?.top}${locationTimezonePaddingUnits?.Tablet} ${locationTimezoneTabPadding?.right}${locationTimezonePaddingUnits?.Tablet} ${locationTimezoneTabPadding?.bottom}${locationTimezonePaddingUnits?.Tablet} ${locationTimezoneTabPadding?.left}${locationTimezonePaddingUnits?.Tablet}`;
+    const locationTimezoneMobilePaddingWidth = `${locationTimezoneMobilePadding?.top}${locationTimezonePaddingUnits?.Mobile} ${locationTimezoneMobilePadding?.right}${locationTimezonePaddingUnits?.Mobile} ${locationTimezoneMobilePadding?.bottom}${locationTimezonePaddingUnits?.Mobile} ${locationTimezoneMobilePadding?.left}${locationTimezonePaddingUnits?.Mobile}`;
+	
+	//margin
+	const locationTimezoneMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (locationTimezoneMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        locationTimezoneDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        locationTimezoneTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        locationTimezoneMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ locationTimezoneDesktopMargin: { ...locationTimezoneDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ locationTimezoneTabMargin: { ...locationTimezoneTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ locationTimezoneMobileMargin: { ...locationTimezoneMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+	const locationTimezoneMarginLinkBtn = () => {
+        setAttributes({
+            locationTimezoneMarginLink: !locationTimezoneMarginLink
+        });
+    };
+	const locationTimezoneMarginUnitsHandler = (unit) => {
+        setAttributes({
+            locationTimezoneMarginUnits: {
+                ...locationTimezoneMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+	const locationTimezoneDesktopMarginWidth = `${locationTimezoneDesktopMargin?.top}${locationTimezoneMarginUnits?.Desktop} ${locationTimezoneDesktopMargin?.right}${locationTimezoneMarginUnits?.Desktop} ${locationTimezoneDesktopMargin?.bottom}${locationTimezoneMarginUnits?.Desktop} ${locationTimezoneDesktopMargin?.left}${locationTimezoneMarginUnits?.Desktop}`;
+    const locationTimezoneTabletMarginWidth = `${locationTimezoneTabMargin?.top}${locationTimezoneMarginUnits?.Tablet} ${locationTimezoneTabMargin?.right}${locationTimezoneMarginUnits?.Tablet} ${locationTimezoneTabMargin?.bottom}${locationTimezoneMarginUnits?.Tablet} ${locationTimezoneTabMargin?.left}${locationTimezoneMarginUnits?.Tablet}`;
+    const locationTimezoneMobileMarginWidth = `${locationTimezoneMobileMargin?.top}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.right}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.bottom}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.left}${locationTimezoneMarginUnits?.Mobile}`;
+	// locatoin timezone margin and padding style end
+
+	// Start locatoin timezone Border, radius, box-shadow style
+	const locationTimezoneBorderUnitsHandler = (unit) => {
+        setAttributes({
+            locationTimezoneBorderUnits: {
+                ...locationTimezoneBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const locationTimezoneBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            locationTimezoneBorderRadiusUnits: {
+                ...locationTimezoneBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const locationTimezoneDesktopBorderRadiusWidth = `${locationTimezoneDesktopBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Desktop}`;
+    const locationTimezoneTabletBorderRadiusWidth = `${locationTimezoneTabBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Tablet}`;
+    const locationTimezoneMobileBorderRadiusWidth = `${locationTimezoneMobileBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Mobile}`;
+
+	const locationTimezoneBorderLinkBtn = () => {
+        setAttributes({
+            locationTimezoneBorderLink: !locationTimezoneBorderLink
+        });
+    };
+
+	const locationTimezoneDesktopBorderWidth = `${locationTimezoneDesktopBorder?.top}${locationTimezoneBorderUnits?.Desktop} ${locationTimezoneDesktopBorder?.right}${locationTimezoneBorderUnits?.Desktop} ${locationTimezoneDesktopBorder?.bottom}${locationTimezoneBorderUnits?.Desktop} ${locationTimezoneDesktopBorder?.left}${locationTimezoneBorderUnits?.Desktop}`;
+    
+	const locationTimezoneTabletBorderWidth = `${locationTimezoneTabletBorder?.top}${locationTimezoneBorderUnits?.Tablet} ${locationTimezoneTabletBorder?.right}${locationTimezoneBorderUnits?.Tablet} ${locationTimezoneTabletBorder?.bottom}${locationTimezoneBorderUnits?.Tablet} ${locationTimezoneTabletBorder?.left}${locationTimezoneBorderUnits?.Tablet}`;
+    
+	const locationTimezoneMobileBorderWidth = `${locationTimezoneMobileBorder?.top}${locationTimezoneBorderUnits?.Mobile} ${locationTimezoneMobileBorder?.right}${locationTimezoneBorderUnits?.Mobile} ${locationTimezoneMobileBorder?.bottom}${locationTimezoneBorderUnits?.Mobile} ${locationTimezoneMobileBorder?.left}${locationTimezoneBorderUnits?.Mobile}`;
+
+	const locationTimezoneBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (locationTimezoneBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        locationTimezoneDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        locationTimezoneTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        locationTimezoneMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ locationTimezoneDesktopBorder: { ...locationTimezoneDesktopBorder, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ locationTimezoneTabletBorder: { ...locationTimezoneTabletBorder, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ locationTimezoneMobileBorder: { ...locationTimezoneMobileBorder, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const locationTimezoneBorderRadiusLinkBtn = () => {
+        setAttributes({
+            locationTimezoneBorderRadiusLink: !locationTimezoneBorderRadiusLink
+        });
+    };
+
+	const locationTimezoneBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (locationTimezoneBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        locationTimezoneDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        locationTimezoneTabBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        locationTimezoneMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ locationTimezoneDesktopBorderRadius: { ...locationTimezoneDesktopBorderRadius, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ locationTimezoneTabBorderRadius: { ...locationTimezoneTabBorderRadius, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ locationTimezoneMobileBorderRadius: { ...locationTimezoneMobileBorderRadius, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+	// End locatoin timezone Border, radius, box-shadow style
 
 	// State variables
 	const [selectedDate, setSelectedDate] = useState('');
@@ -584,6 +962,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	], []);
 
 	const allBlockStyle = useMemo(() => `
+
+		.${blockID} .fb-timezone-container .fb-location-timezone{
+			position: relative;
+			width: max-content;
+			display: flex;
+			${timezoneTextAlignment?.Desktop ? `justify-content: ${timezoneTextAlignment?.Desktop};` : ''}
+			align-items: center;
+			gap: ${timezoneLocationTextSpacing?.Desktop}${timezoneLocationTextSpacingUnits?.Desktop};
+			
+			${ locationTimezoneBgColorType === "gradient" ? `background: ${ locationTimezoneBgCustomGradientColorSwitcher && locationTimezoneBgCustomGradientColor ? locationTimezoneBgCustomGradientColor : locationTimezoneBgGradientColor };` : locationTimezoneBgColor ?`background: ${locationTimezoneBgColor};` : '' }
+			
+			${locationTimezoneBorder ? `border: ${locationTimezoneBorder};` : ''}
+            ${locationTimezoneDesktopBorderWidth && locationTimezoneDesktopBorder?.top ? `border-width: ${locationTimezoneDesktopBorderWidth};` : ''}
+            ${locationTimezoneDesktopBorderRadiusWidth && locationTimezoneDesktopBorderRadius?.top ? `border-radius: ${locationTimezoneDesktopBorderRadiusWidth};` : ''}
+            ${locationTimezoneBorderColor ? `border-color: ${locationTimezoneBorderColor};` : ''}
+			${locationTimezoneBoxShadowCssValue ? `box-shadow: ${locationTimezoneBoxShadowCssValue};` : ''}
+
+			${locationTimezoneDesktopPaddingWidth && locationTimezoneDesktopPadding?.top ? `padding: ${locationTimezoneDesktopPaddingWidth};` : ''}
+            ${locationTimezoneDesktopMarginWidth && locationTimezoneDesktopMargin?.top ? `margin: ${locationTimezoneDesktopMarginWidth};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+		.${blockID} .fb-timezone-container .fb-location-timezone:hover{
+			${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
+
+			transition: all .3s ease-in-out;
+		}
+
 		.${blockID} .fb-timezone-container .fb-location-timezone .fb-location-name{
 			${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
             ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
@@ -614,9 +1020,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.${blockID} .fb-timezone-container .fb-location-timezone .fb-location-name:hover{
-			${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-location-name{
 
+			${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
 			${locationNameTextHoverColorType === 'gradient' ? `
 				background: ${locationNameTextHoverCustomGradientColorSwitcher && locationNameTextHoverCustomGradientColor ? locationNameTextHoverCustomGradientColor : locationNameTextHoverGradientColor};
 				${locationNameTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
@@ -625,20 +1031,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			
 			transition: all .3s ease-in-out;
 		}
-
-		.${blockID} .fb-timezone-container .fb-location-timezone{
-			position: relative;
-			display: flex;
-			${timezoneTextAlignment?.Desktop ? `justify-content: ${timezoneTextAlignment?.Desktop};` : ''}
-			align-items: center;
-			gap: ${timezoneLocationTextSpacing?.Desktop}${timezoneLocationTextSpacingUnits?.Desktop};
-			transition: all .3s ease-in-out;
-		}
 		
 		.${blockID} .fb-timezone-container .fb-timezone-separator {
 			font-size: ${separatorSize?.Desktop}${separatorFontUnits?.Desktop};
 			line-height: 100%;
 			${separatorColor ? `color: ${separatorColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-separator {
+			${separatorHoverColor ? `color: ${separatorHoverColor};` : ''}
+			transition: all .3s ease-in-out;
 		}
 
 		.${blockID} .fb-timezone-container .fb-location-timezone .fb-current-time{
@@ -660,6 +1063,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTimeTextLetterSpacing?.Desktop && timezoneTimeTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTimeTextLetterSpacing?.Desktop}${timezoneTimeTextLetterSpacingUnits?.Desktop};` : ''}
             ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === false && timezoneTimeTextLineHeight?.Desktop && timezoneTimeTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTimeTextLineHeight?.Desktop}${timezoneTimeTextLineHeightUnits?.Desktop};` : ''}
 
+			${timezoneTimeTextColor ? `color: ${timezoneTimeTextColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-time{
+			${timezoneTimeTextHoverColor ? `color: ${timezoneTimeTextHoverColor};` : ''}
+
+			${timezoneTimeTextHoverColorType === 'gradient' ? `
+				background: ${timezoneTimeTextHoverCustomGradientColorSwitcher && timezoneTimeTextHoverCustomGradientColor ? timezoneTimeTextHoverCustomGradientColor : timezoneTimeTextHoverGradientColor};
+				${timezoneTimeTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${timezoneTimeTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+			` : ''}
+			
+			transition: all .3s ease-in-out;
+		}
+		
+		.${blockID} .fb-timezone-container .fb-location-timezone .fb-current-timezone{
+			${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontStyle === true && timezoneTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTextGlobalTypographyData?.fontStyle};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textTransform === true && timezoneTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTextGlobalTypographyData?.textTransform};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textDecoration === true && timezoneTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTextGlobalTypographyData?.textDecoration};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.lineHeight === true && timezoneTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${timezoneTextGlobalTypoSwitcher?.fontFamily === false && timezoneTextFontFamily && timezoneTextFontFamily !== 'Default' ? `font-family: ${timezoneTextFontFamily};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontSize === false && timezoneTextFontSize?.Desktop && timezoneTextFontSizeUnits?.Desktop ? `font-size: ${timezoneTextFontSize?.Desktop}${timezoneTextFontSizeUnits?.Desktop};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontWeight === false && timezoneTextFontWeight ? `font-weight: ${timezoneTextFontWeight};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontStyle === false && timezoneTextFontStyle ? `font-style: ${timezoneTextFontStyle};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textTransform === false && timezoneTextTransform ? `text-transform: ${timezoneTextTransform};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textDecoration === false && timezoneTextDecoration ? `text-decoration: ${timezoneTextDecoration};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTextLetterSpacing?.Desktop && timezoneTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTextLetterSpacing?.Desktop}${timezoneTextLetterSpacingUnits?.Desktop};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.lineHeight === false && timezoneTextLineHeight?.Desktop && timezoneTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTextLineHeight?.Desktop}${timezoneTextLineHeightUnits?.Desktop};` : ''}
+
+			${timezoneTextColor ? `color: ${timezoneTextColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+		
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-timezone{
+			${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
+
+			${timezoneTextHoverColorType === 'gradient' ? `
+				background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
+				${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+			` : ''}
+			
 			transition: all .3s ease-in-out;
 		}
 	
@@ -727,6 +1180,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		timezoneTimeTextLineHeight,
 		timezoneTimeTextLineHeightUnits,
 
+		timezoneTextGlobalTypoSwitcher,
+		timezoneTextGlobalTypographyData,
+		timezoneTextGlobalTypoType,
+		timezoneTextGlobalTypoOption,
+		timezoneTextFontFamily,
+		timezoneTextFontSize,
+		timezoneTextFontSizeUnits,
+		timezoneTextFontWeight,
+		timezoneTextFontStyle,
+		timezoneTextTransform,
+		timezoneTextDecoration,
+		timezoneTextLetterSpacing,
+		timezoneTextLetterSpacingUnits,
+		timezoneTextLineHeight,
+		timezoneTextLineHeightUnits,
+
 		locationNameTextColorTypeSwitcher,
         locationNameTextColorType,
         locationNameTextHoverColorType,
@@ -739,9 +1208,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         locationNameTextHoverCustomGradientColorSwitcher,
         locationNameTextHoverCustomGradientColor,
 
+		timezoneTimeTextColorTypeSwitcher,
+        timezoneTimeTextColorType,
+        timezoneTimeTextHoverColorType,
+        timezoneTimeTextColor,
+        timezoneTimeTextHoverColor,
+        timezoneTimeTextGradientColor,
+        timezoneTimeTextHoverGradientColor,
+        timezoneTimeTextCustomGradientColorSwitcher,
+        timezoneTimeTextCustomGradientColor,
+        timezoneTimeTextHoverCustomGradientColorSwitcher,
+        timezoneTimeTextHoverCustomGradientColor,
+
+		timezoneTextColorTypeSwitcher,
+        timezoneTextColorType,
+        timezoneTextHoverColorType,
+        timezoneTextColor,
+        timezoneTextHoverColor,
+        timezoneTextGradientColor,
+        timezoneTextHoverGradientColor,
+        timezoneTextCustomGradientColorSwitcher,
+        timezoneTextCustomGradientColor,
+        timezoneTextHoverCustomGradientColorSwitcher,
+        timezoneTextHoverCustomGradientColor,
+
 		timezoneTextAlignment,
 		timezoneLocationTextSpacing,
 		timezoneLocationTextSpacingUnits,
+
+		locationTimezoneBgColorTypeSwitcher,
+        locationTimezoneBgColorType,
+        locationTimezoneBgHoverColorType,
+        locationTimezoneBgColor,
+        locationTimezoneBgHoverColor,
+        locationTimezoneBgGradientColor,
+        locationTimezoneBgHoverGradientColor,
+        locationTimezoneBgCustomGradientColorSwitcher,
+        locationTimezoneBgCustomGradientColor,
+        locationTimezoneBgHoverCustomGradientColorSwitcher,
+        locationTimezoneBgHoverCustomGradientColor,
+
+		locationTimezoneBorder,
+        locationTimezoneBorderColor,
+        locationTimezoneBorderHoverColor,
+        locationTimezoneBorderColorSwitcher,
+
+        locationTimezoneBorderUnits,
+        locationTimezoneDesktopBorder,
+        locationTimezoneTabletBorder,
+        locationTimezoneMobileBorder,
+        locationTimezoneBorderLink,
+
+        locationTimezoneBorderRadiusUnits,
+        locationTimezoneDesktopBorderRadius,
+        locationTimezoneTabBorderRadius,
+        locationTimezoneMobileBorderRadius,
+        locationTimezoneBorderRadiusLink,
+        locationTimezoneBoxShadowValues,
+        locationTimezoneBoxShadowCssValue,
+
+		locationTimezonePaddingUnits,
+        locationTimezoneDesktopPadding,
+        locationTimezoneTabPadding,
+        locationTimezoneMobilePadding,
+        locationTimezonePaddingLink,
+        locationTimezoneMarginUnits,
+        locationTimezoneDesktopMargin,
+        locationTimezoneTabMargin,
+        locationTimezoneMobileMargin,
+        locationTimezoneMarginLink,
 
 	]);
 
@@ -1098,6 +1633,127 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={''}
 				/>
+
+				<FB_BackgroundColorControl
+					label={__("Background", "frontis-blocks")}
+					bgColorSwitcher={locationTimezoneBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ locationTimezoneBgColorTypeSwitcher: value })}
+
+					normalBackgroundType={locationTimezoneBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ locationTimezoneBgColorType: value })}
+					normalClassicColor={locationTimezoneBgColor}
+					setNormalClassicColor={(value) => setAttributes({ locationTimezoneBgColor: value === undefined ? '' : value })}
+					normalGradientColor={locationTimezoneBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ locationTimezoneBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={locationTimezoneBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={locationTimezoneBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={locationTimezoneBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ locationTimezoneBgHoverColorType: value })}
+					hoverClassicColor={locationTimezoneBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ locationTimezoneBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={locationTimezoneBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ locationTimezoneBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={locationTimezoneBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={locationTimezoneBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
+				/>
+
+				<FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezonePaddingUnitsHandler}
+                    spacingUnits={locationTimezonePaddingUnits}
+                    spacingDesktop={locationTimezoneDesktopPadding}
+                    spacingTablet={locationTimezoneTabPadding}
+                    spacingMobile={locationTimezoneMobilePadding}
+                    handleSpacingUnitHandler={locationTimezonePaddingUnitsChange}
+                    spacingCombineBtn={locationTimezonePaddingLink}
+                    spacingCombineBtnHandler={locationTimezonePaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneMarginUnitsHandler}
+                    spacingUnits={locationTimezoneMarginUnits}
+                    spacingDesktop={locationTimezoneDesktopMargin}
+                    spacingTablet={locationTimezoneTabMargin}
+                    spacingMobile={locationTimezoneMobileMargin}
+                    handleSpacingUnitHandler={locationTimezoneMarginUnitsChange}
+                    spacingCombineBtn={locationTimezoneMarginLink}
+                    spacingCombineBtnHandler={locationTimezoneMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+				<SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={locationTimezoneBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ locationTimezoneBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={locationTimezoneBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ locationTimezoneBorderColorSwitcher: value })}
+                />
+
+                {locationTimezoneBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={locationTimezoneBorderColor}
+                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {locationTimezoneBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={locationTimezoneBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneBorderUnitsHandler}
+                    spacingUnits={locationTimezoneBorderUnits}
+                    spacingDesktop={locationTimezoneDesktopBorder}
+                    spacingTablet={locationTimezoneTabletBorder}
+                    spacingMobile={locationTimezoneMobileBorder}
+                    handleSpacingUnitHandler={locationTimezoneBorderUnitsChange}
+                    spacingCombineBtn={locationTimezoneBorderLink}
+                    spacingCombineBtnHandler={locationTimezoneBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneBorderRadiusUnitsHandler}
+                    spacingUnits={locationTimezoneBorderRadiusUnits}
+                    spacingDesktop={locationTimezoneDesktopBorderRadius}
+                    spacingTablet={locationTimezoneTabBorderRadius}
+                    spacingMobile={locationTimezoneMobileBorderRadius}
+                    handleSpacingUnitHandler={locationTimezoneBorderRadiusUnitsChange}
+                    spacingCombineBtn={locationTimezoneBorderRadiusLink}
+                    spacingCombineBtnHandler={locationTimezoneBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BoxShadowControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ locationTimezoneBoxShadowValues: value })}
+                    initialShadowValue={locationTimezoneBoxShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ locationTimezoneBoxShadowCssValue: value })}
+                />
 			</PanelBody>
 
 			<PanelBody 
@@ -1232,7 +1888,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			)}
 
 			<PanelBody 
-				title={__("Timezone Time", "frontis-blocks")} 
+				title={__("Time", "frontis-blocks")} 
 				initialOpen={false}
 			>
 				<FB_TypographyControl
@@ -1288,39 +1944,128 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                 />
 
-				{/* <FB_BackgroundColorControl
+				<FB_BackgroundColorControl
 					label={__("Color", "frontis-blocks")}
-					bgColorSwitcher={locationNameTextColorTypeSwitcher}
-					setBgColorSwitcher={(value) => setAttributes({ locationNameTextColorTypeSwitcher: value })}
+					bgColorSwitcher={timezoneTimeTextColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ timezoneTimeTextColorTypeSwitcher: value })}
 
                     normalLabel={__("Color Type", "frontis-blocks")}
-					normalBackgroundType={locationNameTextColorType}
-					setNormalBackgroundType={(value) => setAttributes({ locationNameTextColorType: value })}
-					normalClassicColor={locationNameTextColor}
-					setNormalClassicColor={(value) => setAttributes({ locationNameTextColor: value === undefined ? '' : value })}
-					normalGradientColor={locationNameTextGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ locationNameTextGradientColor: value === undefined ? null : value })}
-					normalCustomGradientSwitcher={locationNameTextCustomGradientColorSwitcher}
-					setNormalCustomGradientSwitcher={(value) => setAttributes({ locationNameTextCustomGradientColorSwitcher: value })}
-					normalCustomGradientInputValue={locationNameTextCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ locationNameTextCustomGradientColor: value === undefined ? null : value })}
+					normalBackgroundType={timezoneTimeTextColorType}
+					setNormalBackgroundType={(value) => setAttributes({ timezoneTimeTextColorType: value })}
+					normalClassicColor={timezoneTimeTextColor}
+					setNormalClassicColor={(value) => setAttributes({ timezoneTimeTextColor: value === undefined ? '' : value })}
+					normalGradientColor={timezoneTimeTextGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ timezoneTimeTextGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={timezoneTimeTextCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ timezoneTimeTextCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={timezoneTimeTextCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ timezoneTimeTextCustomGradientColor: value === undefined ? null : value })}
 
                     hoverLabel={__("Color Type", "frontis-blocks")}
-					hoverBackgroundType={locationNameTextHoverColorType}
-					setHoverBackgroundType={(value) => setAttributes({ locationNameTextHoverColorType: value })}
-					hoverClassicColor={locationNameTextHoverColor}
-					setHoverClassicColor={(value) => setAttributes({ locationNameTextHoverColor: value === undefined ? '' : value })}
-					hoverGradientColor={locationNameTextHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ locationNameTextHoverGradientColor: value === undefined ? null : value })}
-					hoverCustomGradientSwitcher={locationNameTextHoverCustomGradientColorSwitcher}
-					setHoverCustomGradientSwitcher={(value) => setAttributes({ locationNameTextHoverCustomGradientColorSwitcher: value })}
-					hoverCustomGradientInputValue={locationNameTextHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ locationNameTextHoverCustomGradientColor: value === undefined ? null : value })}
+					hoverBackgroundType={timezoneTimeTextHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ timezoneTimeTextHoverColorType: value })}
+					hoverClassicColor={timezoneTimeTextHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ timezoneTimeTextHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={timezoneTimeTextHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ timezoneTimeTextHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={timezoneTimeTextHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ timezoneTimeTextHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={timezoneTimeTextHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ timezoneTimeTextHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
+				/> 
+			</PanelBody>
+
+			<PanelBody 
+				title={__("Timezone", "frontis-blocks")} 
+				initialOpen={false}
+			>
+				<FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={timezoneTextGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ timezoneTextGlobalTypographyData: value })}
+
+                    globalTypoType={timezoneTextGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            timezoneTextGlobalTypoType: value,
+                            timezoneTimeTextGlobalTypoSwitcher: value === 'default' ? {...timezoneTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...timezoneTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={timezoneTextGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ timezoneTextGlobalTypoOption: value })}
+
+                    fontFamily={timezoneTextFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ timezoneTextFontFamily: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={timezoneTextFontSize}
+                    onChangeFontSize={(value) => setAttributes({ timezoneTextFontSize: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={timezoneTextFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ timezoneTextFontSizeUnits: value })}
+
+                    fontWeight={timezoneTextFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ timezoneTextFontWeight: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={timezoneTimeTextFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ timezoneTextFontStyle: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={timezoneTimeTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ timezoneTextTransform: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={timezoneTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ timezoneTextDecoration: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={timezoneTextLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ timezoneTextLetterSpacing: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={timezoneTextLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ timezoneTextLetterSpacingUnits: value })}
+
+                    lineHeight={timezoneTextLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ timezoneTextLineHeight: value, timezoneTextGlobalTypoSwitcher: {...timezoneTextGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={timezoneTextLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ timezoneTextLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+				<FB_BackgroundColorControl
+					label={__("Color", "frontis-blocks")}
+					bgColorSwitcher={timezoneTextColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ timezoneTextColorTypeSwitcher: value })}
+
+                    normalLabel={__("Color Type", "frontis-blocks")}
+					normalBackgroundType={timezoneTextColorType}
+					setNormalBackgroundType={(value) => setAttributes({ timezoneTextColorType: value })}
+					normalClassicColor={timezoneTextColor}
+					setNormalClassicColor={(value) => setAttributes({ timezoneTextColor: value === undefined ? '' : value })}
+					normalGradientColor={timezoneTextGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ timezoneTextGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={timezoneTextCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ timezoneTextCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={timezoneTextCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ timezoneTextCustomGradientColor: value === undefined ? null : value })}
+
+                    hoverLabel={__("Color Type", "frontis-blocks")}
+					hoverBackgroundType={timezoneTextHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ timezoneTextHoverColorType: value })}
+					hoverClassicColor={timezoneTextHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ timezoneTextHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={timezoneTextHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ timezoneTextHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={timezoneTextHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ timezoneTextHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={timezoneTextHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ timezoneTextHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
 
-				/> */}
-
+				/> 
 			</PanelBody>
 			
         </>
