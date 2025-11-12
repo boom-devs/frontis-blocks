@@ -197,7 +197,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         locationTimezoneTabMargin,
         locationTimezoneMobileMargin,
         locationTimezoneMarginLink,
-	
+
+		infoBoxBgColorTypeSwitcher,
+        infoBoxBgColorType,
+        infoBoxBgHoverColorType,
+        infoBoxBgColor,
+        infoBoxBgHoverColor,
+        infoBoxBgGradientColor,
+        infoBoxBgHoverGradientColor,
+        infoBoxBgCustomGradientColorSwitcher,
+        infoBoxBgCustomGradientColor,
+        infoBoxBgHoverCustomGradientColorSwitcher,
+        infoBoxBgHoverCustomGradientColor,
+
+		infoBoxBorder,
+        infoBoxBorderColor,
+        infoBoxBorderHoverColor,
+        infoBoxBorderColorSwitcher,
+
+        infoBoxBorderUnits,
+        infoBoxDesktopBorder,
+        infoBoxTabletBorder,
+        infoBoxMobileBorder,
+        infoBoxBorderLink,
+
+        infoBoxBorderRadiusUnits,
+        infoBoxDesktopBorderRadius,
+        infoBoxTabBorderRadius,
+        infoBoxMobileBorderRadius,
+        infoBoxBorderRadiusLink,
+        infoBoxBoxShadowValues,
+        infoBoxBoxShadowCssValue,
+
+		infoBoxPaddingUnits,
+        infoBoxDesktopPadding,
+        infoBoxTabPadding,
+        infoBoxMobilePadding,
+        infoBoxPaddingLink,
+        infoBoxMarginUnits,
+        infoBoxDesktopMargin,
+        infoBoxTabMargin,
+        infoBoxMobileMargin,
+        infoBoxMarginLink,
+
+		statusTextGlobalTypoSwitcher,
+		statusTextGlobalTypographyData,
+		statusTextGlobalTypoType,
+		statusTextGlobalTypoOption,
+		statusTextFontFamily,
+		statusTextFontSize,
+		statusTextFontSizeUnits,
+		statusTextFontWeight,
+		statusTextFontStyle,
+		statusTextTransform,
+		statusTextDecoration,
+		statusTextLetterSpacing,
+		statusTextLetterSpacingUnits,
+		statusTextLineHeight,
+		statusTextLineHeightUnits,
 
 	} = attributes;
 
@@ -357,6 +414,154 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const locationTimezoneMobileMarginWidth = `${locationTimezoneMobileMargin?.top}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.right}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.bottom}${locationTimezoneMarginUnits?.Mobile} ${locationTimezoneMobileMargin?.left}${locationTimezoneMarginUnits?.Mobile}`;
 	// locatoin timezone margin and padding style end
 
+	// info box margin and padding style start
+	//padding
+	const infoBoxPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            infoBoxPaddingUnits: {
+                ...infoBoxPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const infoBoxPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (infoBoxPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        infoBoxDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        infoBoxTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        infoBoxMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ infoBoxDesktopPadding: { ...infoBoxDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ infoBoxTabPadding: { ...infoBoxTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ infoBoxMobilePadding: { ...infoBoxMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const infoBoxPaddingLinkBtn = () => {
+        setAttributes({
+            infoBoxPaddingLink: !infoBoxPaddingLink
+        });
+    };
+	const infoBoxDesktopPaddingWidth = `${infoBoxDesktopPadding?.top}${infoBoxPaddingUnits?.Desktop} ${infoBoxDesktopPadding?.right}${infoBoxPaddingUnits?.Desktop} ${infoBoxDesktopPadding?.bottom}${infoBoxPaddingUnits?.Desktop} ${infoBoxDesktopPadding?.left}${infoBoxPaddingUnits?.Desktop}`;
+    const infoBoxTabletPaddingWidth = `${infoBoxTabPadding?.top}${infoBoxPaddingUnits?.Tablet} ${infoBoxTabPadding?.right}${infoBoxPaddingUnits?.Tablet} ${infoBoxTabPadding?.bottom}${infoBoxPaddingUnits?.Tablet} ${infoBoxTabPadding?.left}${infoBoxPaddingUnits?.Tablet}`;
+    const infoBoxMobilePaddingWidth = `${infoBoxMobilePadding?.top}${infoBoxPaddingUnits?.Mobile} ${infoBoxMobilePadding?.right}${infoBoxPaddingUnits?.Mobile} ${infoBoxMobilePadding?.bottom}${infoBoxPaddingUnits?.Mobile} ${infoBoxMobilePadding?.left}${infoBoxPaddingUnits?.Mobile}`;
+	
+	//margin
+	const infoBoxMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (infoBoxMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        infoBoxDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        infoBoxTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        infoBoxMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ infoBoxDesktopMargin: { ...infoBoxDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ infoBoxTabMargin: { ...infoBoxTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ infoBoxMobileMargin: { ...infoBoxMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+	const infoBoxMarginLinkBtn = () => {
+        setAttributes({
+            infoBoxMarginLink: !infoBoxMarginLink
+        });
+    };
+	const infoBoxMarginUnitsHandler = (unit) => {
+        setAttributes({
+            infoBoxMarginUnits: {
+                ...infoBoxMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+	const infoBoxDesktopMarginWidth = `${infoBoxDesktopMargin?.top}${infoBoxMarginUnits?.Desktop} ${infoBoxDesktopMargin?.right}${infoBoxMarginUnits?.Desktop} ${infoBoxDesktopMargin?.bottom}${infoBoxMarginUnits?.Desktop} ${infoBoxDesktopMargin?.left}${infoBoxMarginUnits?.Desktop}`;
+
+    const infoBoxTabletMarginWidth = `${infoBoxTabMargin?.top}${infoBoxMarginUnits?.Tablet} ${infoBoxTabMargin?.right}${infoBoxMarginUnits?.Tablet} ${infoBoxTabMargin?.bottom}${infoBoxMarginUnits?.Tablet} ${infoBoxTabMargin?.left}${infoBoxMarginUnits?.Tablet}`;
+
+    const infoBoxMobileMarginWidth = `${infoBoxMobileMargin?.top}${infoBoxMarginUnits?.Mobile} ${infoBoxMobileMargin?.right}${infoBoxMarginUnits?.Mobile} ${infoBoxMobileMargin?.bottom}${infoBoxMarginUnits?.Mobile} ${infoBoxMobileMargin?.left}${infoBoxMarginUnits?.Mobile}`;
+	// info box margin and padding style end
+
 	// Start locatoin timezone Border, radius, box-shadow style
 	const locationTimezoneBorderUnitsHandler = (unit) => {
         setAttributes({
@@ -377,7 +582,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
 	const locationTimezoneDesktopBorderRadiusWidth = `${locationTimezoneDesktopBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Desktop} ${locationTimezoneDesktopBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Desktop}`;
+
     const locationTimezoneTabletBorderRadiusWidth = `${locationTimezoneTabBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Tablet} ${locationTimezoneTabBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Tablet}`;
+	
     const locationTimezoneMobileBorderRadiusWidth = `${locationTimezoneMobileBorderRadius?.top}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.right}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.bottom}${locationTimezoneBorderRadiusUnits?.Mobile} ${locationTimezoneMobileBorderRadius?.left}${locationTimezoneBorderRadiusUnits?.Mobile}`;
 
 	const locationTimezoneBorderLinkBtn = () => {
@@ -506,6 +713,158 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     };
 	// End locatoin timezone Border, radius, box-shadow style
+
+	// Start office info Box Border, radius, box-shadow style
+	const infoBoxBorderUnitsHandler = (unit) => {
+        setAttributes({
+            infoBoxBorderUnits: {
+                ...infoBoxBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const infoBoxBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            infoBoxBorderRadiusUnits: {
+                ...infoBoxBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const infoBoxDesktopBorderRadiusWidth = `${infoBoxDesktopBorderRadius?.top}${infoBoxBorderRadiusUnits?.Desktop} ${infoBoxDesktopBorderRadius?.right}${infoBoxBorderRadiusUnits?.Desktop} ${infoBoxDesktopBorderRadius?.bottom}${infoBoxBorderRadiusUnits?.Desktop} ${infoBoxDesktopBorderRadius?.left}${infoBoxBorderRadiusUnits?.Desktop}`;
+
+    const infoBoxTabletBorderRadiusWidth = `${infoBoxTabBorderRadius?.top}${infoBoxBorderRadiusUnits?.Tablet} ${infoBoxTabBorderRadius?.right}${infoBoxBorderRadiusUnits?.Tablet} ${infoBoxTabBorderRadius?.bottom}${infoBoxBorderRadiusUnits?.Tablet} ${infoBoxTabBorderRadius?.left}${infoBoxBorderRadiusUnits?.Tablet}`;
+
+    const infoBoxMobileBorderRadiusWidth = `${infoBoxMobileBorderRadius?.top}${infoBoxBorderRadiusUnits?.Mobile} ${infoBoxMobileBorderRadius?.right}${infoBoxBorderRadiusUnits?.Mobile} ${infoBoxMobileBorderRadius?.bottom}${infoBoxBorderRadiusUnits?.Mobile} ${infoBoxMobileBorderRadius?.left}${infoBoxBorderRadiusUnits?.Mobile}`;
+
+	const infoBoxBorderLinkBtn = () => {
+        setAttributes({
+            infoBoxBorderLink: !infoBoxBorderLink
+        });
+    };
+
+	const infoBoxDesktopBorderWidth = `${infoBoxDesktopBorder?.top}${infoBoxBorderUnits?.Desktop} ${infoBoxDesktopBorder?.right}${infoBoxBorderUnits?.Desktop} ${infoBoxDesktopBorder?.bottom}${infoBoxBorderUnits?.Desktop} ${infoBoxDesktopBorder?.left}${infoBoxBorderUnits?.Desktop}`;
+    
+	const infoBoxTabletBorderWidth = `${infoBoxTabletBorder?.top}${infoBoxBorderUnits?.Tablet} ${infoBoxTabletBorder?.right}${infoBoxBorderUnits?.Tablet} ${infoBoxTabletBorder?.bottom}${infoBoxBorderUnits?.Tablet} ${infoBoxTabletBorder?.left}${infoBoxBorderUnits?.Tablet}`;
+    
+	const infoBoxMobileBorderWidth = `${infoBoxMobileBorder?.top}${infoBoxBorderUnits?.Mobile} ${infoBoxMobileBorder?.right}${infoBoxBorderUnits?.Mobile} ${infoBoxMobileBorder?.bottom}${infoBoxBorderUnits?.Mobile} ${infoBoxMobileBorder?.left}${infoBoxBorderUnits?.Mobile}`;
+
+	const infoBoxBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (infoBoxBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        infoBoxDesktopBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        infoBoxTabletBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        infoBoxMobileBorder: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ infoBoxDesktopBorder: { ...infoBoxDesktopBorder, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ infoBoxTabletBorder: { ...infoBoxTabletBorder, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ infoBoxMobileBorder: { ...infoBoxMobileBorder, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const infoBoxBorderRadiusLinkBtn = () => {
+        setAttributes({
+            infoBoxBorderRadiusLink: !infoBoxBorderRadiusLink
+        });
+    };
+
+	const infoBoxBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (infoBoxBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        infoBoxDesktopBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        infoBoxTabBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        infoBoxMobileBorderRadius: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ infoBoxDesktopBorderRadius: { ...infoBoxDesktopBorderRadius, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ infoBoxTabBorderRadius: { ...infoBoxTabBorderRadius, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ infoBoxMobileBorderRadius: { ...infoBoxMobileBorderRadius, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+	// End locatoin office info box Border, radius, box-shadow style
 
 	// State variables
 	const [selectedDate, setSelectedDate] = useState('');
@@ -987,6 +1346,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.${blockID} .fb-timezone-container .fb-location-timezone:hover{
 			${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
 
+			${locationTimezoneBorderHoverColor ? `border-color: ${locationTimezoneBorderHoverColor};` : ''}
+
 			transition: all .3s ease-in-out;
 		}
 
@@ -1114,6 +1475,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			` : ''}
 			
 			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box{
+			${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
+
+			${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
+            ${infoBoxDesktopBorderWidth && infoBoxDesktopBorder?.top ? `border-width: ${infoBoxDesktopBorderWidth};` : ''}
+            ${infoBoxDesktopBorderRadiusWidth && infoBoxDesktopBorderRadius?.top ? `border-radius: ${infoBoxDesktopBorderRadiusWidth};` : ''}
+            ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
+			${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
+
+			${infoBoxDesktopPaddingWidth && infoBoxDesktopPadding?.top ? `padding: ${infoBoxDesktopPaddingWidth};` : ''}
+            ${infoBoxDesktopMarginWidth && infoBoxDesktopMargin?.top ? `margin: ${infoBoxDesktopMarginWidth};` : ''}
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box:hover{
+			${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
+
+			${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-time-pulse-open .fb-timezone-status, 
+		.${blockID} .fb-timezone-container .fb-time-pulse-close .fb-timezone-status {
+			${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Desktop && timezoneLocationTextFontSizeUnits?.Desktop ? `font-size: ${timezoneLocationTextFontSize?.Desktop}${timezoneLocationTextFontSizeUnits?.Desktop};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Desktop && timezoneLocationTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Desktop}${timezoneLocationTextLetterSpacingUnits?.Desktop};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Desktop && timezoneLocationTextLineHeightUnits?.Desktop ? `line-height: ${timezoneLocationTextLineHeight?.Desktop}${timezoneLocationTextLineHeightUnits?.Desktop};` : ''}
 		}
 	
 	`, [
@@ -1277,6 +1680,64 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         locationTimezoneTabMargin,
         locationTimezoneMobileMargin,
         locationTimezoneMarginLink,
+
+		infoBoxBgColorTypeSwitcher,
+        infoBoxBgColorType,
+        infoBoxBgHoverColorType,
+        infoBoxBgColor,
+        infoBoxBgHoverColor,
+        infoBoxBgGradientColor,
+        infoBoxBgHoverGradientColor,
+        infoBoxBgCustomGradientColorSwitcher,
+        infoBoxBgCustomGradientColor,
+        infoBoxBgHoverCustomGradientColorSwitcher,
+        infoBoxBgHoverCustomGradientColor,
+
+		infoBoxBorder,
+        infoBoxBorderColor,
+        infoBoxBorderHoverColor,
+        infoBoxBorderColorSwitcher,
+
+        infoBoxBorderUnits,
+        infoBoxDesktopBorder,
+        infoBoxTabletBorder,
+        infoBoxMobileBorder,
+        infoBoxBorderLink,
+
+        infoBoxBorderRadiusUnits,
+        infoBoxDesktopBorderRadius,
+        infoBoxTabBorderRadius,
+        infoBoxMobileBorderRadius,
+        infoBoxBorderRadiusLink,
+        infoBoxBoxShadowValues,
+        infoBoxBoxShadowCssValue,
+
+		infoBoxPaddingUnits,
+        infoBoxDesktopPadding,
+        infoBoxTabPadding,
+        infoBoxMobilePadding,
+        infoBoxPaddingLink,
+        infoBoxMarginUnits,
+        infoBoxDesktopMargin,
+        infoBoxTabMargin,
+        infoBoxMobileMargin,
+        infoBoxMarginLink,
+
+		statusTextGlobalTypoSwitcher,
+		statusTextGlobalTypographyData,
+		statusTextGlobalTypoType,
+		statusTextGlobalTypoOption,
+		statusTextFontFamily,
+		statusTextFontSize,
+		statusTextFontSizeUnits,
+		statusTextFontWeight,
+		statusTextFontStyle,
+		statusTextTransform,
+		statusTextDecoration,
+		statusTextLetterSpacing,
+		statusTextLetterSpacingUnits,
+		statusTextLineHeight,
+		statusTextLineHeightUnits,
 
 	]);
 
@@ -1496,9 +1957,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				</PanelBody>
 			)}
 
-			{/* Weekend Settings */}
-			<PanelBody title="Weekend Days" initialOpen={false}>
-				<BaseControl label="Select Weekend Days">
+			{/* Off Day Settings */}
+			<PanelBody title="Off Day Settings" initialOpen={false}>
+				<BaseControl label="Add Weekend Day">
 					<Select2
 						options={WEEKENDDAY}
 						value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
@@ -1511,10 +1972,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						className="fb-select2-control"
 					/>
 				</BaseControl>
-			</PanelBody>
-
-			{/* Holiday Settings */}
-			<PanelBody title="Holidays" initialOpen={false}>
 				<BaseControl label="Add Holiday Date">
 					<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
 						<DatePicker 
@@ -1556,8 +2013,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 										</span>
 									</div>
 									<Button 
-										isDestructive 
-										isSmall
+										isDestructive
 										onClick={() => removeHoliday(holiday)}
 									>
 										Remove
@@ -1569,38 +2025,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				)}
 			</PanelBody>
 
-			{/* Custom Messages */}
-			<PanelBody title="Custom Messages" initialOpen={false}>
+			{/* Timezone info */}
+			<PanelBody title="Office Info" initialOpen={false}>
 				<TextareaControl
-					label="Closed Message"
+					label="Set Closed Info"
 					value={closedMessage || ''}
 					onChange={(value) => setAttributes({ closedMessage: value })}
 					placeholder="Office is closed"
-					help="This message shows when office is closed during working hours"
 				/>
 				
 				<TextareaControl
-					label="Open Message"
+					label="Set Open Info"
 					value={completionMessage || ''}
 					onChange={(value) => setAttributes({ completionMessage: value })}
 					placeholder="Office is open"
-					help="This message shows when office is open"
 				/>
 				
 				<TextareaControl
-					label="Weekend Message"
+					label="Set Weekend Info"
 					value={weekendMessage || ''}
 					onChange={(value) => setAttributes({ weekendMessage: value })}
 					placeholder="Closed for weekend"
-					help="This message shows when office is closed for weekend"
 				/>
 				
 				<TextareaControl
-					label="Holiday Message"
+					label="Set Holiday Info"
 					value={holidayMessage || ''}
 					onChange={(value) => setAttributes({ holidayMessage: value })}
 					placeholder="Closed for holiday"
-					help="This message shows when office is closed for holiday"
 				/>
 			</PanelBody>
 		</>
@@ -1633,127 +2085,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={''}
 				/>
-
-				<FB_BackgroundColorControl
-					label={__("Background", "frontis-blocks")}
-					bgColorSwitcher={locationTimezoneBgColorTypeSwitcher}
-					setBgColorSwitcher={(value) => setAttributes({ locationTimezoneBgColorTypeSwitcher: value })}
-
-					normalBackgroundType={locationTimezoneBgColorType}
-					setNormalBackgroundType={(value) => setAttributes({ locationTimezoneBgColorType: value })}
-					normalClassicColor={locationTimezoneBgColor}
-					setNormalClassicColor={(value) => setAttributes({ locationTimezoneBgColor: value === undefined ? '' : value })}
-					normalGradientColor={locationTimezoneBgGradientColor}
-					setNormalGradientColor={(value) => setAttributes({ locationTimezoneBgGradientColor: value === undefined ? null : value })}
-					normalCustomGradientSwitcher={locationTimezoneBgCustomGradientColorSwitcher}
-					setNormalCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgCustomGradientColorSwitcher: value })}
-					normalCustomGradientInputValue={locationTimezoneBgCustomGradientColor}
-					setNormalCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgCustomGradientColor: value === undefined ? null : value })}
-
-					hoverBackgroundType={locationTimezoneBgHoverColorType}
-					setHoverBackgroundType={(value) => setAttributes({ locationTimezoneBgHoverColorType: value })}
-					hoverClassicColor={locationTimezoneBgHoverColor}
-					setHoverClassicColor={(value) => setAttributes({ locationTimezoneBgHoverColor: value === undefined ? '' : value })}
-					hoverGradientColor={locationTimezoneBgHoverGradientColor}
-					setHoverGradientColor={(value) => setAttributes({ locationTimezoneBgHoverGradientColor: value === undefined ? null : value })}
-					hoverCustomGradientSwitcher={locationTimezoneBgHoverCustomGradientColorSwitcher}
-					setHoverCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColorSwitcher: value })}
-					hoverCustomGradientInputValue={locationTimezoneBgHoverCustomGradientColor}
-					setHoverCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColor: value === undefined ? null : value })}
-
-					isBackgroundImage={false}
-				/>
-
-				<FB_Spacing
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={locationTimezonePaddingUnitsHandler}
-                    spacingUnits={locationTimezonePaddingUnits}
-                    spacingDesktop={locationTimezoneDesktopPadding}
-                    spacingTablet={locationTimezoneTabPadding}
-                    spacingMobile={locationTimezoneMobilePadding}
-                    handleSpacingUnitHandler={locationTimezonePaddingUnitsChange}
-                    spacingCombineBtn={locationTimezonePaddingLink}
-                    spacingCombineBtnHandler={locationTimezonePaddingLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={locationTimezoneMarginUnitsHandler}
-                    spacingUnits={locationTimezoneMarginUnits}
-                    spacingDesktop={locationTimezoneDesktopMargin}
-                    spacingTablet={locationTimezoneTabMargin}
-                    spacingMobile={locationTimezoneMobileMargin}
-                    handleSpacingUnitHandler={locationTimezoneMarginUnitsChange}
-                    spacingCombineBtn={locationTimezoneMarginLink}
-                    spacingCombineBtnHandler={locationTimezoneMarginLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-				<SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={locationTimezoneBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ locationTimezoneBorder: value })}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={locationTimezoneBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ locationTimezoneBorderColorSwitcher: value })}
-                />
-
-                {locationTimezoneBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={locationTimezoneBorderColor}
-                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {locationTimezoneBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={locationTimezoneBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={locationTimezoneBorderUnitsHandler}
-                    spacingUnits={locationTimezoneBorderUnits}
-                    spacingDesktop={locationTimezoneDesktopBorder}
-                    spacingTablet={locationTimezoneTabletBorder}
-                    spacingMobile={locationTimezoneMobileBorder}
-                    handleSpacingUnitHandler={locationTimezoneBorderUnitsChange}
-                    spacingCombineBtn={locationTimezoneBorderLink}
-                    spacingCombineBtnHandler={locationTimezoneBorderLinkBtn}
-                    setAttributes={setAttributes}
-                />
-                <FB_Spacing
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={locationTimezoneBorderRadiusUnitsHandler}
-                    spacingUnits={locationTimezoneBorderRadiusUnits}
-                    spacingDesktop={locationTimezoneDesktopBorderRadius}
-                    spacingTablet={locationTimezoneTabBorderRadius}
-                    spacingMobile={locationTimezoneMobileBorderRadius}
-                    handleSpacingUnitHandler={locationTimezoneBorderRadiusUnitsChange}
-                    spacingCombineBtn={locationTimezoneBorderRadiusLink}
-                    spacingCombineBtnHandler={locationTimezoneBorderRadiusLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_BoxShadowControl
-                    label={__("Box Shadow", "frontis-blocks")}
-                    onBoxShadowChange={(value) => setAttributes({ locationTimezoneBoxShadowValues: value })}
-                    initialShadowValue={locationTimezoneBoxShadowValues}
-                    onBoxShadowStyleChange={(value) => setAttributes({ locationTimezoneBoxShadowCssValue: value })}
-                />
 			</PanelBody>
 
 			<PanelBody 
@@ -2066,6 +2397,307 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					isBackgroundImage={false}
 
 				/> 
+			</PanelBody>
+
+			<PanelBody title={__("Time Card", "frontis-blocks")} initialOpen={false}>
+				<FB_BackgroundColorControl
+					label={__("Background", "frontis-blocks")}
+					bgColorSwitcher={locationTimezoneBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ locationTimezoneBgColorTypeSwitcher: value })}
+
+					normalBackgroundType={locationTimezoneBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ locationTimezoneBgColorType: value })}
+					normalClassicColor={locationTimezoneBgColor}
+					setNormalClassicColor={(value) => setAttributes({ locationTimezoneBgColor: value === undefined ? '' : value })}
+					normalGradientColor={locationTimezoneBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ locationTimezoneBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={locationTimezoneBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={locationTimezoneBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={locationTimezoneBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ locationTimezoneBgHoverColorType: value })}
+					hoverClassicColor={locationTimezoneBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ locationTimezoneBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={locationTimezoneBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ locationTimezoneBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={locationTimezoneBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={locationTimezoneBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ locationTimezoneBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
+				/>
+
+				<FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezonePaddingUnitsHandler}
+                    spacingUnits={locationTimezonePaddingUnits}
+                    spacingDesktop={locationTimezoneDesktopPadding}
+                    spacingTablet={locationTimezoneTabPadding}
+                    spacingMobile={locationTimezoneMobilePadding}
+                    handleSpacingUnitHandler={locationTimezonePaddingUnitsChange}
+                    spacingCombineBtn={locationTimezonePaddingLink}
+                    spacingCombineBtnHandler={locationTimezonePaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneMarginUnitsHandler}
+                    spacingUnits={locationTimezoneMarginUnits}
+                    spacingDesktop={locationTimezoneDesktopMargin}
+                    spacingTablet={locationTimezoneTabMargin}
+                    spacingMobile={locationTimezoneMobileMargin}
+                    handleSpacingUnitHandler={locationTimezoneMarginUnitsChange}
+                    spacingCombineBtn={locationTimezoneMarginLink}
+                    spacingCombineBtnHandler={locationTimezoneMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+				<SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={locationTimezoneBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ locationTimezoneBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={locationTimezoneBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ locationTimezoneBorderColorSwitcher: value })}
+                />
+
+                {locationTimezoneBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={locationTimezoneBorderColor}
+                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {locationTimezoneBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={locationTimezoneBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ locationTimezoneBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneBorderUnitsHandler}
+                    spacingUnits={locationTimezoneBorderUnits}
+                    spacingDesktop={locationTimezoneDesktopBorder}
+                    spacingTablet={locationTimezoneTabletBorder}
+                    spacingMobile={locationTimezoneMobileBorder}
+                    handleSpacingUnitHandler={locationTimezoneBorderUnitsChange}
+                    spacingCombineBtn={locationTimezoneBorderLink}
+                    spacingCombineBtnHandler={locationTimezoneBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={locationTimezoneBorderRadiusUnitsHandler}
+                    spacingUnits={locationTimezoneBorderRadiusUnits}
+                    spacingDesktop={locationTimezoneDesktopBorderRadius}
+                    spacingTablet={locationTimezoneTabBorderRadius}
+                    spacingMobile={locationTimezoneMobileBorderRadius}
+                    handleSpacingUnitHandler={locationTimezoneBorderRadiusUnitsChange}
+                    spacingCombineBtn={locationTimezoneBorderRadiusLink}
+                    spacingCombineBtnHandler={locationTimezoneBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BoxShadowControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ locationTimezoneBoxShadowValues: value })}
+                    initialShadowValue={locationTimezoneBoxShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ locationTimezoneBoxShadowCssValue: value })}
+                />
+			</PanelBody>
+
+			<PanelBody title={__("Status Open/Close", "frontis-blocks")} initialOpen={false}>
+				<FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={statusTextGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ statusTextGlobalTypographyData: value })}
+
+                    globalTypoType={statusTextGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            statusTextGlobalTypoType: value,
+                            statusTextGlobalTypoSwitcher: value === 'default' ? {...statusTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...statusTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={statusTextGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ statusTextGlobalTypoOption: value })}
+
+                    fontFamily={statusTextFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ statusTextFontFamily: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={timezoneLocationTextFontSize}
+                    onChangeFontSize={(value) => setAttributes({ statusTextFontSize: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={statusTextFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ statusTextFontSizeUnits: value })}
+
+                    fontWeight={statusTextFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ statusTextFontWeight: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={statusTextFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ statusTextFontStyle: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={statusTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ statusTextTransform: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={statusTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ statusTextDecoration: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={statusTextLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ statusTextLetterSpacing: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={statusTextLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ statusTextLetterSpacingUnits: value })}
+
+                    lineHeight={statusTextLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ statusTextLineHeight: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={statusTextLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ statusTextLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+			</PanelBody>
+			
+			<PanelBody title={__("Office Info", "frontis-blocks")} initialOpen={false}>
+				<FB_BackgroundColorControl
+					label={__("Background", "frontis-blocks")}
+					bgColorSwitcher={infoBoxBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ infoBoxBgColorTypeSwitcher: value })}
+
+					normalBackgroundType={infoBoxBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ infoBoxBgColorType: value })}
+					normalClassicColor={infoBoxBgColor}
+					setNormalClassicColor={(value) => setAttributes({ infoBoxBgColor: value === undefined ? '' : value })}
+					normalGradientColor={infoBoxBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ infoBoxBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={infoBoxBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ infoBoxBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={infoBoxBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ infoBoxBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={infoBoxBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ infoBoxBgHoverColorType: value })}
+					hoverClassicColor={infoBoxBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ infoBoxBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={infoBoxBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ infoBoxBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={infoBoxBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ infoBoxBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={infoBoxBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ infoBoxBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
+				/>
+
+				<FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxPaddingUnitsHandler}
+                    spacingUnits={infoBoxPaddingUnits}
+                    spacingDesktop={infoBoxDesktopPadding}
+                    spacingTablet={infoBoxTabPadding}
+                    spacingMobile={infoBoxMobilePadding}
+                    handleSpacingUnitHandler={infoBoxPaddingUnitsChange}
+                    spacingCombineBtn={infoBoxPaddingLink}
+                    spacingCombineBtnHandler={infoBoxPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxMarginUnitsHandler}
+                    spacingUnits={infoBoxMarginUnits}
+                    spacingDesktop={infoBoxDesktopMargin}
+                    spacingTablet={infoBoxTabMargin}
+                    spacingMobile={infoBoxMobileMargin}
+                    handleSpacingUnitHandler={infoBoxMarginUnitsChange}
+                    spacingCombineBtn={infoBoxMarginLink}
+                    spacingCombineBtnHandler={infoBoxMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+				<SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={infoBoxBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ infoBoxBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={infoBoxBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ infoBoxBorderColorSwitcher: value })}
+                />
+
+                {infoBoxBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={infoBoxBorderColor}
+                        setGlobalColor={(value) => setAttributes({ infoBoxBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {infoBoxBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={infoBoxBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ infoBoxBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxBorderUnitsHandler}
+                    spacingUnits={infoBoxBorderUnits}
+                    spacingDesktop={infoBoxDesktopBorder}
+                    spacingTablet={infoBoxTabletBorder}
+                    spacingMobile={infoBoxMobileBorder}
+                    handleSpacingUnitHandler={infoBoxBorderUnitsChange}
+                    spacingCombineBtn={infoBoxBorderLink}
+                    spacingCombineBtnHandler={infoBoxBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxBorderRadiusUnitsHandler}
+                    spacingUnits={infoBoxBorderRadiusUnits}
+                    spacingDesktop={infoBoxDesktopBorderRadius}
+                    spacingTablet={infoBoxTabBorderRadius}
+                    spacingMobile={infoBoxMobileBorderRadius}
+                    handleSpacingUnitHandler={infoBoxBorderRadiusUnitsChange}
+                    spacingCombineBtn={infoBoxBorderRadiusLink}
+                    spacingCombineBtnHandler={infoBoxBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BoxShadowControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ infoBoxBoxShadowValues: value })}
+                    initialShadowValue={infoBoxBoxShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ infoBoxBoxShadowCssValue: value })}
+                />
 			</PanelBody>
 			
         </>

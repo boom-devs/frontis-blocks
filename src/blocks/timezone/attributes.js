@@ -689,6 +689,7 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
 	//location timezone margin & padding
 	locationTimezonePaddingUnits: {
 		type: 'object',
@@ -785,7 +786,328 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px',
 		}
-    }
+    },
+
+	//Location info box BG Color
+	infoBoxBgColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    infoBoxBgColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    infoBoxBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    infoBoxBgColor: {
+        type: 'string',
+    },
+    infoBoxBgHoverColor: {
+        type: 'string',
+    },
+    infoBoxBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    infoBoxBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    infoBoxBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    infoBoxBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    infoBoxBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    infoBoxBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
+	//location info box margin & padding
+	infoBoxPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    infoBoxDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxTabPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+    infoBoxMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    infoBoxDesktopMargin: {
+        type: 'object',
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    infoBoxTabMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxMobileMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxMarginLink : {
+        type : 'boolean',
+        default: true
+    },
+
+	//location info box border & box shadow
+	infoBoxBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    infoBoxBorderColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    infoBoxBorderColor: {
+        type: 'string',
+    },
+    infoBoxBorderHoverColor: {
+        type: 'string',
+    },
+    infoBoxBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    infoBoxDesktopBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxTabletBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxMobileBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxBorderLink : {
+        type : 'boolean',
+        default: true
+    },
+    infoBoxBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    infoBoxDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxTabBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    infoBoxBorderRadiusLink : {
+        type : 'boolean',
+        default: true
+    },
+	infoBoxBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    infoBoxBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
+    //Typography Location
+	statusTextGlobalTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+	statusTextGlobalTypographyData: {
+        type: 'object',
+        default: {}
+    },
+	statusTextGlobalTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+	statusTextGlobalTypoOption: {
+        type: 'object',
+        default: {label: 'Default', value: 'default'},
+    },
+	statusTextFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+	statusTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	statusTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	statusTextFontWeight : {
+        type: 'string',
+        default: ''
+    },
+	statusTextFontStyle : {
+        type: 'string',
+        default: ''
+    },
+	statusTextTransform : {
+        type: 'string',
+        default: ''
+    },
+	statusTextDecoration : {
+        type: 'string',
+        default: 'none'
+    },
+	statusTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	statusTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	statusTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	statusTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 };
 
 export default attributes;
