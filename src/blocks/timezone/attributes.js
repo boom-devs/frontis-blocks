@@ -523,6 +523,10 @@ const attributes = {
         type: 'string',
         default: '#399CFF',
     },
+    separatorHoverColor: {
+        type: 'string',
+        default: '',
+    },
 	separator: { 
         type: 'string', 
         default: ' | ' 
@@ -1108,6 +1112,19 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
+    statusColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	statusColor: {
+        type: 'string',
+        default: '#399CFF',
+    },
+    statusHoverColor: {
+        type: 'string',
+        default: '',
+    },
 };
 
 export default attributes;

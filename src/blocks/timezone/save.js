@@ -230,11 +230,7 @@ export default function Save({ attributes }) {
 				<div className='fb-timezone-status-wrapper'>
 					<div className='fb-timezone-status-info-box'>
 						<div
-							className={
-								statusType === 'open'
-									? 'fb-time-pulse-open'
-									: 'fb-time-pulse-close'
-							}
+							className={ statusType === 'open' ? 'fb-time-pulse-open' : 'fb-time-pulse-close'}
 						>
 							<span className='fb-timezone-status'>{statusText}</span>
 						</div>
