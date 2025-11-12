@@ -27,7 +27,6 @@ const FB_GBSelectControl = ({
 
 
 	const globalTypo = FrontisBlocksData.global_typography;
-	console.log('globalTypo', globalTypo);
 	const GB_TYPO = [{ label: 'None', value: 'none' }];
 
 	const storedData = localStorage.getItem("fb_custom_typography");
