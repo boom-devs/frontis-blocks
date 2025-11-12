@@ -3,6 +3,7 @@
     position: relative;
     height: calc(100vh - 95px);
     max-width: 100%;
+    
 
     @media only screen and (max-width: 768px) {
         height: 100%;
@@ -11,9 +12,8 @@
 
 .fb-template-library-store-content {
     flex: 6;
-    padding: 24px 24px 100px;
-    height: calc(100vh - 95px);
-    overflow-y: scroll;
+    padding: 0;
+    height: 100%;
     position: relative;
 
     @media only screen and (max-width: 768px) {
@@ -25,6 +25,9 @@
         align-items: center;
         justify-content: space-between;
         margin-bottom: 32px;
+        padding: 17px 24px;
+        background-color: #3991FF;
+        border-radius: 12px;
 
         @media only screen and (max-width: 1500px) {
             align-items: start;
@@ -110,25 +113,26 @@
                     .fb-search-input-icon {
                         display: flex;
                         box-sizing: border-box;
-                        height: 44px;
+                        height: 38px;
                         position: absolute;
-                        right: 0;
-                        background: $primary-color;
-                        padding: 10px 14px;
-                        border: 1px solid transparent;
-                        border-radius: 0 4px 4px 0;
+                        right: 4px;
+                        background: #fff;
+                        padding: 10px;
+                        border-radius: 50%;
                         cursor: pointer;
                     }
 
                     input {
-                        font-weight: $font-weight-100;
-                        font-size: $large-font-size;
-                        line-height: $line-height-22;
-                        color: $neutral-color;
+                        font-weight: 100;
+                        font-size: 16px;
+                        line-height: 22px;
+                        background-color: transparent;
+                        color: #fff;
                         padding: 10px 14px;
-                        border-radius: 4px;
-                        border: 1px solid $neutral-color-100;
+                        border-radius: 50px;
+                        border: 1px solid #61A7FF;
                         min-width: 360px;
+                        outline: none;
 
                         @media only screen and (max-width: 575px) {
                             min-width: 260px;
@@ -143,7 +147,7 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        gap: 32px;
+        gap: 16px;
         flex-wrap: wrap;
 
         @media only screen and (max-width: 1200px) {
@@ -151,23 +155,24 @@
         }
 
         .fb-template-library-tab {
-            font-family: $body-font-family;
-            font-weight: $font-weight-500;
-            font-size: $large-font-size;
-            line-height: $line-height-22;
-            color: $neutral-color-700;
+            font-family: "Manrope", sans-serif;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
+            color: $white-color;
             background: none;
-            padding: 10px 0;
+            padding: 10px 20px;
             border: none;
-            border-bottom: 2px solid transparent;
+            border-radius: 50px;
             text-transform: capitalize;
             cursor: pointer;
             outline: none;
             box-shadow: none;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out;
 
             &.active {
-                border-bottom: 2px solid $primary-color-base;
+                background-color: $white-color;
+                color: $neutral-color-950;
                 transition: all 0.3s ease;
             }
 
@@ -272,12 +277,10 @@
 
     div.fb-template-library-cards {
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         gap: 24px;
+        padding: 0 24px;
 
-        @media only screen and (max-width: 1500px) {
-            grid-template-columns: repeat(3, 1fr);
-        }
         @media only screen and (max-width: 1024px) {
             grid-template-columns: repeat(2, 1fr);
         }

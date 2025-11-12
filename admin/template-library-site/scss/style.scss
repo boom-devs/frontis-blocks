@@ -13,8 +13,11 @@
 
 .fb-template-library-button-wrapper {
 	position: relative;
-	width: 100%;
-	overflow: hidden;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #F3F3F3;
+    border-radius: 24px;
 
 	button {
 		background: $primary-color-base;
