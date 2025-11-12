@@ -51,12 +51,6 @@ const FB_SidebarTypography = ({
 	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
-	useEffect(() => {
-		if (fontFamily !== 'Default') {
-			loadGoogleFont(fontFamily);
-		}
-	}, [fontFamily]);
-
 	const handleFontFamilyChange = (selectedOption) => {
 		setSelectedFontFamilyOption(selectedOption);
 		const newFontFamily = selectedOption?.value || 'Default';
@@ -75,10 +69,6 @@ const FB_SidebarTypography = ({
 			})
 
 			setAvailableFontWeights(weights);
-		}
-
-		if (newFontFamily !== 'Default') {
-			loadGoogleFont(newFontFamily);
 		}
 	};
 
