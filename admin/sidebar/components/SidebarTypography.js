@@ -17,7 +17,7 @@ import {
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
-import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 const FB_SidebarTypography = ({
 	label = __("Typography", "frontis-blocks"),
