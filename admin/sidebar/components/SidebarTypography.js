@@ -17,7 +17,7 @@ import {
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
-import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 const FB_SidebarTypography = ({
 	label = __("Typography", "frontis-blocks"),
@@ -51,11 +51,6 @@ const FB_SidebarTypography = ({
 	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
-	useEffect(() => {
-		if (fontFamily !== 'Default') {
-			loadGoogleFont(fontFamily);
-		}
-	}, [fontFamily]);
 
 	const handleFontFamilyChange = (selectedOption) => {
 		setSelectedFontFamilyOption(selectedOption);
@@ -75,10 +70,6 @@ const FB_SidebarTypography = ({
 			})
 
 			setAvailableFontWeights(weights);
-		}
-
-		if (newFontFamily !== 'Default') {
-			loadGoogleFont(newFontFamily);
 		}
 	};
 
