@@ -56,6 +56,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		weekendMessage,
 		holidayMessage,
 		useUTCTimezoneFormat,
+
 		separator,
 		showSeparatorSwitcher,
 		separatorColorSwitcher,
@@ -255,6 +256,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		statusTextLetterSpacingUnits,
 		statusTextLineHeight,
 		statusTextLineHeightUnits,
+
+		statusColorSwitcher,
+		statusColor,
+		statusHoverColor,
 
 	} = attributes;
 
@@ -1500,24 +1505,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockID} .fb-timezone-container .fb-time-pulse-open .fb-timezone-status, 
 		.${blockID} .fb-timezone-container .fb-time-pulse-close .fb-timezone-status {
-			${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
+			${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontStyle === true && statusTextGlobalTypographyData?.fontStyle ? `font-style: ${statusTextGlobalTypographyData?.fontStyle};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textTransform === true && statusTextGlobalTypographyData?.textTransform ? `text-transform: ${statusTextGlobalTypographyData?.textTransform};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textDecoration === true && statusTextGlobalTypographyData?.textDecoration ? `text-decoration: ${statusTextGlobalTypographyData?.textDecoration};` : ''}
+            ${statusTextGlobalTypoSwitcher?.letterSpacing === true && statusTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${statusTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${statusTextGlobalTypoSwitcher?.lineHeight === true && statusTextGlobalTypographyData?.lineHeight ? `line-height: ${statusTextGlobalTypographyData?.lineHeight};` : ''}
 
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Desktop && timezoneLocationTextFontSizeUnits?.Desktop ? `font-size: ${timezoneLocationTextFontSize?.Desktop}${timezoneLocationTextFontSizeUnits?.Desktop};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Desktop && timezoneLocationTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Desktop}${timezoneLocationTextLetterSpacingUnits?.Desktop};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Desktop && timezoneLocationTextLineHeightUnits?.Desktop ? `line-height: ${timezoneLocationTextLineHeight?.Desktop}${timezoneLocationTextLineHeightUnits?.Desktop};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontFamily === false && statusTextFontFamily && statusTextFontFamily !== 'Default' ? `font-family: ${statusTextFontFamily};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontSize === false && statusTextFontSize?.Desktop && statusTextFontSizeUnits?.Desktop ? `font-size: ${statusTextFontSize?.Desktop}${statusTextFontSizeUnits?.Desktop};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontWeight === false && statusTextFontWeight ? `font-weight: ${statusTextFontWeight};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontStyle === false && statusTextFontStyle ? `font-style: ${statusTextFontStyle};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textTransform === false && statusTextTransform ? `text-transform: ${statusTextTransform};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textDecoration === false && statusTextDecoration ? `text-decoration: ${statusTextDecoration};` : ''}
+            ${statusTextGlobalTypoSwitcher?.letterSpacing === false && statusTextLetterSpacing?.Desktop && statusTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${statusTextLetterSpacing?.Desktop}${statusTextLetterSpacingUnits?.Desktop};` : ''}
+            ${statusTextGlobalTypoSwitcher?.lineHeight === false && statusTextLineHeight?.Desktop && statusTextLineHeightUnits?.Desktop ? `line-height: ${timezoneLocationTextLineHeight?.Desktop}${statusTextLineHeightUnits?.Desktop};` : ''}
+		
+			${statusColor ? `color: ${statusColor};` : ''}
+
+			transition: all .3s ease-in-out;
 		}
+
+		.${blockID} .fb-timezone-container .fb-time-pulse-open .fb-timezone-status:hover, 
+		.${blockID} .fb-timezone-container .fb-time-pulse-close .fb-timezone-status:hover {
+
+			${statusHoverColor ? `color: ${statusHoverColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+		
 	
 	`, [
 
@@ -1738,6 +1756,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		statusTextLetterSpacingUnits,
 		statusTextLineHeight,
 		statusTextLineHeightUnits,
+
+		statusColorSwitcher,
+		statusColor,
+		statusHoverColor,
 
 	]);
 
@@ -2026,7 +2048,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
 
 			{/* Timezone info */}
-			<PanelBody title="Office Info" initialOpen={false}>
+			<PanelBody title="Office Notice" initialOpen={false}>
 				<TextareaControl
 					label="Set Closed Info"
 					value={closedMessage || ''}
@@ -2575,6 +2597,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                 />
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={statusColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ statusColorSwitcher: value })}
+				/>
+				{statusColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={statusColor}
+						setGlobalColor={(value) => setAttributes({ statusColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				{statusColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={statusHoverColor}
+						setGlobalColor={(value) => setAttributes({ statusHoverColor: value === undefined ? '' : value })}
+					/>
+				)}
+
 			</PanelBody>
 			
 			<PanelBody title={__("Office Info", "frontis-blocks")} initialOpen={false}>
