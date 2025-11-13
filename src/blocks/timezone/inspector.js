@@ -363,17 +363,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		// Initialize default messages
-		if (!closedMessage) {
-			updates.closedMessage = 'Office is closed';
-		}
-		if (!completionMessage) {
-			updates.completionMessage = 'Office is open';
-		}
+		// if (!closedMessage) {
+		// 	updates.closedMessage = 'Office is closed';
+		// }
+		// if (!completionMessage) {
+		// 	updates.completionMessage = 'Office is open';
+		// }
 		if (!weekendMessage) {
-			updates.weekendMessage = 'Closed for weekend';
+			updates.weekendMessage = 'Weekend';
 		}
 		if (!holidayMessage) {
-			updates.holidayMessage = 'Closed for holiday';
+			updates.holidayMessage = 'Holiday';
 		}
 
 		// Initialize separator
@@ -391,10 +391,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		// Initialize time texts
 		if (!beforeTimeText) {
-			updates.beforeTimeText = 'Office will start at';
+			updates.beforeTimeText = 'Wll start at';
 		}
 		if (!afterTimeText) {
-			updates.afterTimeText = 'Office will close at';
+			updates.afterTimeText = 'Will close at';
 		}
 
 		if (Object.keys(updates).length > 0) {
@@ -894,14 +894,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label="Before Time Text"
 					value={beforeTimeText || ''}
 					onChange={(value) => setAttributes({ beforeTimeText: value })}
-					placeholder="e.g., Office will start at, Opens at, etc."
+					placeholder="e.g., Start at, Opens at, etc."
 				/>
 				
 				<TextControl
 					label="After Time Text"
 					value={afterTimeText || ''}
 					onChange={(value) => setAttributes({ afterTimeText: value })}
-					placeholder="e.g., Office will close at, Closes at, etc."
+					placeholder="e.g., Will close at, Closes at, etc."
 				/>
 			</PanelBody>
 
@@ -1063,32 +1063,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			{/* Timezone info */}
 			<PanelBody title="Office Notice" initialOpen={false}>
-				<TextareaControl
+				{/* <TextareaControl
 					label="Set Closed Info"
 					value={closedMessage || ''}
 					onChange={(value) => setAttributes({ closedMessage: value })}
 					placeholder="Office is closed"
-				/>
+				/> */}
 				
-				<TextareaControl
+				{/* <TextareaControl
 					label="Set Open Info"
 					value={completionMessage || ''}
 					onChange={(value) => setAttributes({ completionMessage: value })}
 					placeholder="Office is open"
-				/>
+				/> */}
 				
 				<TextareaControl
 					label="Set Weekend Info"
 					value={weekendMessage || ''}
 					onChange={(value) => setAttributes({ weekendMessage: value })}
-					placeholder="Closed for weekend"
+					placeholder="Weekend"
 				/>
 				
 				<TextareaControl
 					label="Set Holiday Info"
 					value={holidayMessage || ''}
 					onChange={(value) => setAttributes({ holidayMessage: value })}
-					placeholder="Closed for holiday"
+					placeholder="Holiday"
 				/>
 			</PanelBody>
 		</>

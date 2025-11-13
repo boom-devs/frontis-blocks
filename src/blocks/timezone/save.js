@@ -183,11 +183,11 @@ export default function Save({ attributes }) {
 			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
 			const remaining = getRemainingTime();
 			if (isOpen) {
-				return `${completionMessage || 'Office is open'}. ${afterTimeText || 'Office will close at'} ${formatTimeForDisplay(endTime)}, Remaining time: ${remaining}`;
+				return `${afterTimeText || 'Office will close at'} ${formatTimeForDisplay(endTime)}, Left: ${remaining}`;
 			}
-			return `${closedMessage || 'Office is closed'}. ${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(startTime)}, Remaining time: ${remaining}`;
+			return `${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(startTime)}, Left: ${remaining}`;
 		} catch {
-			return closedMessage || 'Office is closed';
+			return 'Not Found';
 		}
 	};
 
