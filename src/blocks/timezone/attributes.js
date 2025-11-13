@@ -83,6 +83,30 @@ const attributes = {
         type: 'array',
         default: []
     },
+    spacing: { 
+        type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '',
+			Mobile: ''
+		}
+    },
+    spacingUnits: { 
+       	type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+    },
+    alignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
 
 	//Typography Location
 	timezoneLocationTextGlobalTypoSwitcher: {
@@ -595,7 +619,7 @@ const attributes = {
 	//location timezone border & box shadow
 	locationTimezoneBorder: {
         type: 'string',
-        default: 'none',
+        default: '',
     },
     locationTimezoneBorderColorSwitcher : {
         type: 'string',
@@ -603,9 +627,11 @@ const attributes = {
     },
     locationTimezoneBorderColor: {
         type: 'string',
+        default: ''
     },
     locationTimezoneBorderHoverColor: {
         type: 'string',
+        default: ''
     },
     locationTimezoneBorderUnits: {
 		type: 'object',
@@ -919,7 +945,7 @@ const attributes = {
 	//location info box border & box shadow
 	infoBoxBorder: {
         type: 'string',
-        default: 'none',
+        default: '',
     },
     infoBoxBorderColorSwitcher : {
         type: 'string',
@@ -927,9 +953,11 @@ const attributes = {
     },
     infoBoxBorderColor: {
         type: 'string',
+        default: '',
     },
     infoBoxBorderHoverColor: {
         type: 'string',
+        default: '',
     },
     infoBoxBorderUnits: {
 		type: 'object',
@@ -1113,17 +1141,281 @@ const attributes = {
 		}
 	},
 
-    statusColorSwitcher: {
+    //status close and open color and bg
+    statusOpenColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-	statusColor: {
+	statusOpenColor: {
         type: 'string',
-        default: '#399CFF',
+        default: '#FFFFFF',
     },
-    statusHoverColor: {
+    statusOpenHoverColor: {
         type: 'string',
         default: '',
+    },
+    statusOpenBgColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	statusOpenBgColor: {
+        type: 'string',
+        default: '#008000',
+    },
+    statusOpenHoverBgColor: {
+        type: 'string',
+        default: '',
+    },
+    statusCloseColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	statusCloseColor: {
+        type: 'string',
+        default: '#FFFFFF',
+    },
+    statusCloseHoverColor: {
+        type: 'string',
+        default: '',
+    },
+    statusCloseBgColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	statusCloseBgColor: {
+        type: 'string',
+        default: '#FF0000',
+    },
+    statusCloseHoverBgColor: {
+        type: 'string',
+        default: '',
+    },
+    statusPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    statusDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusTabPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+    statusOpenBorder: {
+        type: 'string',
+        default: '',
+    },
+    statusOpenBorderColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    statusOpenBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    statusOpenBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    statusOpenBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    statusOpenDesktopBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenTabletBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenMobileBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenBorderLink : {
+        type : 'boolean',
+        default: true
+    },
+    statusOpenBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    statusOpenDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenTabBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusOpenBorderRadiusLink : {
+        type : 'boolean',
+        default: true
+    },
+    statusCloseBorder: {
+        type: 'string',
+        default: '',
+    },
+    statusCloseBorderColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    statusCloseBorderColor: {
+        type: 'string',
+        default: ''
+    },
+    statusCloseBorderHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    statusCloseBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    statusCloseDesktopBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseTabletBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseMobileBorder: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseBorderLink : {
+        type : 'boolean',
+        default: true
+    },
+    statusCloseBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    statusCloseDesktopBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseTabBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseMobileBorderRadius: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    statusCloseBorderRadiusLink : {
+        type : 'boolean',
+        default: true
     },
 };
 
