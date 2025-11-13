@@ -65,6 +65,7 @@
     cursor: pointer;
     &:hover {
       background-color: darken($primary-color, 10%);
+      color: $white-color !important;
     }
 }
 
@@ -88,6 +89,7 @@
 
     &:hover {
       background-color: darken($error-color, 10%);
+      color: $white-color !important;
     }
 
     svg {
