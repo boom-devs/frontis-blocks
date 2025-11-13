@@ -545,7 +545,7 @@ const attributes = {
     },
 	separatorColor: {
         type: 'string',
-        default: '#399CFF',
+        default: '',
     },
     separatorHoverColor: {
         type: 'string',
@@ -558,7 +558,7 @@ const attributes = {
     separatorSize: { 
         type: 'object',
 		default: {
-			Desktop: '30',
+			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -804,7 +804,7 @@ const attributes = {
     timezoneLocationTextSpacing: { 
         type: 'object',
 		default: {
-			Desktop: '20',
+			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}

@@ -168,16 +168,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			const isOpen = currentTotal >= startTotal && currentTotal <= endTotal;
 			const remaining = getRemainingTime();
 			if (isOpen) {
-				return `${completionMessage || 'Office is open'}. ${afterTimeText || 'Office will close at'} ${formatTimeForDisplay(endTime)}, Remaining time: ${remaining}`;
+				return `${afterTimeText || 'Office will close at'} ${formatTimeForDisplay(endTime)}, Left: ${remaining}`;
 			}
-			return `${closedMessage || 'Office is closed'}. ${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(startTime)}, Remaining time: ${remaining}`;
+			return `${beforeTimeText || 'Office will start at'} ${formatTimeForDisplay(startTime)}, Left: ${remaining}`;
 		} catch {
-			return closedMessage || 'Office is closed';
+			return 'Not Found';
 		}
 	};
 
 	const displayLocation = location || 'Set Location Manually';
 	const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : getFormattedTimezone(timezone);
+	
 	const currentTime = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 	const displaySeparator = separator || ' | ';
 	const statusType = officeStatus === 'Open' ? 'open' : 'closed';
