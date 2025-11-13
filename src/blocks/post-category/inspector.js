@@ -7426,20 +7426,6 @@ ${
 							resetFallbackValue={20}
 						/>
 
-						{/* <FB_Range
-									min={0}
-									max={100}
-									label={__("Image Gap", "frontis-blocks")}
-									rangeValue={buttonIconGapSize}
-									onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
-									rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
-									deviceType={deviceType}
-									units={buttonIconGapUnits}
-									setAttributes={setAttributes}
-									rangeStep={1}
-									resetFallbackValue={''}
-							/> */}
-
 						<FB_SwitcherControl
 							label={__("Image Rotation", "frontis-blocks")}
 							globalSwitcher={buttonImageRotateSwitcher}
