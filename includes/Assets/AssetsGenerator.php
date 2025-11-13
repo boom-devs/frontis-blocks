@@ -87,11 +87,6 @@ class AssetsGenerator
 			$this->combine_and_save_css_file($page_name);
 			$this->get_font_families();
 
-
-			// echo "<pre>";
-			// var_dump($this->used_blocks);
-			// echo "</pre>";
-
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
@@ -185,6 +180,7 @@ class AssetsGenerator
 		}
 
 		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
+
 		if($template_contents) {
 			$pattern = '/<!--\s*wp:post-content\s*/i';
 			if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
@@ -200,11 +196,11 @@ class AssetsGenerator
 			}
 			
 			$megamenu_block_exists = preg_match_all(
-				'#<!--\s*wp:frontis-blocks/advanced-megamenu\s*\{.*?\}\s*-->#s',
+				'#<!--\s*wp:frontis-blocks/advanced-megamenu\s+(\{.+?\})\s*/-->#s',
 				$template_contents,
 				$megamenu_matches
 			);
-         
+			
 			if ($megamenu_block_exists) {
 				foreach ($megamenu_matches[1] as $index => $attributes) {
 					if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
@@ -215,7 +211,7 @@ class AssetsGenerator
 							// Convert self-closing block to opening/closing format with pattern content inside
 							$megamenu_opening = str_replace('/-->', '-->', $megamenu_matches[0][$index]);
 							$megamenu_block_with_content = $megamenu_opening . "\n" 
-								. (string) $pattern_post->post_content . "\n"
+								. $pattern_post->post_content . "\n"
 								. '<!-- /wp:frontis-blocks/advanced-megamenu -->';
 							
 							$template_contents = str_replace(
@@ -228,6 +224,7 @@ class AssetsGenerator
 				}
 			}
 
+			// die();
 			return $template_contents;
 		}
 
