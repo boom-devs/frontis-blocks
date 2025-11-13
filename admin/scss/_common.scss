@@ -6,6 +6,11 @@
   color: $heading-color;
 }
 
+body .components-button:disabled, body .components-button[aria-disabled=true] {
+  color: $white-color;
+  opacity: 0.7;
+}
+
 .heading-2 {
     @extend .heading-1;
     font-size: 32px;
