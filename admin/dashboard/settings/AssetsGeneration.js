@@ -106,35 +106,35 @@ const AssetsGeneration = () => {
         },
         success: function (response) {
           if (response.success) {
-            const totalProcessed = response.data.processed;
-            const totalPosts = response.data.total;
-            const progressPercent = Math.round((totalProcessed / totalPosts) * 100);
+            // const totalProcessed = response.data.processed;
+            // const totalPosts = response.data.total;
+            // const progressPercent = Math.round((totalProcessed / totalPosts) * 100);
 
-            // Update progress bar
-            setProgress(progressPercent);
+            // // Update progress bar
+            // setProgress(progressPercent);
 
-            // Show or update toast only once
-            if (batch === 0) {
-              toastId = toast.info(__(`Processing: ${totalProcessed}/${totalPosts} posts`), {
-                autoClose: false,
-                closeButton: false,
-              });
-            } else {
-              toast.update(toastId, {
-                render: __(`Processing: ${totalProcessed}/${totalPosts} posts`),
-              });
-            }
+            // // Show or update toast only once
+            // if (batch === 0) {
+            //   toastId = toast.info(__(`Processing: ${totalProcessed}/${totalPosts} posts`), {
+            //     autoClose: false,
+            //     closeButton: false,
+            //   });
+            // } else {
+            //   toast.update(toastId, {
+            //     render: __(`Processing: ${totalProcessed}/${totalPosts} posts`),
+            //   });
+            // }
 
-            if (response.data.completed) {
-              setIsLoading(false);
-              setProgress(100);
-              toast.dismiss(toastId);
-              toast.success(__(response.data.message));
-            } else {
-              // Process next batch
-              batch++;
-              processBatch();
-            }
+            // if (response.data.completed) {
+            //   setIsLoading(false);
+            //   setProgress(100);
+            //   toast.dismiss(toastId);
+            //   toast.success(__(response.data.message));
+            // } else {
+            //   // Process next batch
+            //   batch++;
+            //   processBatch();
+            // }
           } else {
             setIsLoading(false);
             setProgress(0);

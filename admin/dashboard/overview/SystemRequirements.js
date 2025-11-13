@@ -44,7 +44,6 @@ const SystemRequirements = () => {
     const { system_requirements, blocksInfo } = window.frontisBlocksAdmin;
 
     useEffect(() => {
-        // Simulate the 500 ms loading delay you already had
         const timer = setTimeout(() => {
             setSystemRequirements(system_requirements);
         }, 500);

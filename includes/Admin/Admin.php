@@ -230,6 +230,7 @@ class Admin {
 		$localizeArray = array(
 			'blocks' => $blocks,
 			'defaultBlocks' => BlockList::get_instance()->get_default_blocks(),
+            'completedBlocks' => Helper::get_completed_blocks(),
 			'blocksInfo' => Helper::get_blocks_info(),
 			'nonce' => wp_create_nonce('fb_settings_nonce'),
 			'adminUrl' => admin_url(),

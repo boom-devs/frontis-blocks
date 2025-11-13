@@ -818,6 +818,49 @@ class Helper
         return false;
     }
 
+    public static function get_completed_blocks() {
+        // $allBlocks = BlockList::get_instance()->get_blocks();
+        // $activeBlocks = get_option('fb_active_blocks', []);
+		// $completeBlocks = array_merge(
+		// 	array_fill_keys(array_keys($allBlocks), false),
+		// 	$activeBlocks
+		// );
+
+        // return $completeBlocks;
+
+        // 1. Get the master list of all blocks (slug => data)
+        $allBlocks    = BlockList::get_instance()->get_blocks();
+
+        // 2. Get the saved active blocks (array of slugs that are enabled)
+        $activeBlocks = get_option( 'fb_active_blocks', [] );
+
+        // 3. Build the final array in the required shape
+        $output = [];
+
+        foreach ( $allBlocks as $slug => $blockData ) {
+
+            // Default fields that are always present
+            $item = [
+                'slug'      => $slug,
+                'title'     => $blockData['title'] ?? ucwords( str_replace( '-', ' ', $slug ) ),
+                'package'   => $blockData['package'] ?? 'free',
+                'category'  => $blockData['category'] ?? 'content',
+                'badge'     => $blockData['badge'] ?? 'free',
+                'status'    => $activeBlocks[$slug] ? '1' : '0',
+                'icon'      => $blockData['icon'] ?? "http://licenseschoole.test/wp-content/plugins/frontis-blocks/assets/icons/{$slug}.svg",
+                'doc'       => $blockData['doc'] ?? 'https://wpmessiah.com/',
+                'demo'      => $blockData['demo'] ?? 'https://wpmessiah.com/',
+                'complete'  => $blockData['complete'] ?? 'true',
+                'child'     => $blockData['child'] ?? 'false',
+            ];
+
+            // Optional: you can add extra safety checks here if some keys are missing
+            $output[] = $item;
+        }
+
+        return $output;
+    }
+
     public static function system_requirements() {
         return [
             [
