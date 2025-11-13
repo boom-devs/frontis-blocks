@@ -179,9 +179,12 @@ class AssetsGenerator
 
 	public function get_page_content_with_template_parts() {
 		$template_contents = Helper::get_template_content($this->post->ID);
-		
-		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
 
+		if(empty($template_contents)) {
+			$template_contents = $this->post;
+		}
+
+		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
 		if($template_contents) {
 			$pattern = '/<!--\s*wp:post-content\s*/i';
 			if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
@@ -195,8 +198,12 @@ class AssetsGenerator
 					}
 				}
 			}
-
-			$megamenu_block_exists = preg_match_all('/<!--\s*wp:frontis-blocks\/advanced-megamenu\s*{(.*?)}\s*\/-->/', $template_contents, $megamenu_matches);
+			
+			$megamenu_block_exists = preg_match_all(
+				'#<!--\s*wp:frontis-blocks/advanced-megamenu\s*\{.*?\}\s*-->#s',
+				$template_contents,
+				$megamenu_matches
+			);
          
 			if ($megamenu_block_exists) {
 				foreach ($megamenu_matches[1] as $index => $attributes) {
