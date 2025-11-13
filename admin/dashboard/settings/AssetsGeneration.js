@@ -106,14 +106,14 @@ const AssetsGeneration = () => {
         },
         success: function (response) {
           if (response.success) {
-            // const totalProcessed = response.data.processed;
-            // const totalPosts = response.data.total;
-            // const progressPercent = Math.round((totalProcessed / totalPosts) * 100);
+            const totalProcessed = response.data.processed;
+            const totalPosts = response.data.total;
+            const progressPercent = Math.round((totalProcessed / totalPosts) * 100);
 
-            // // Update progress bar
-            // setProgress(progressPercent);
+            // Update progress bar
+            setProgress(progressPercent);
 
-            // // Show or update toast only once
+            // Show or update toast only once
             // if (batch === 0) {
             //   toastId = toast.info(__(`Processing: ${totalProcessed}/${totalPosts} posts`), {
             //     autoClose: false,
@@ -125,16 +125,16 @@ const AssetsGeneration = () => {
             //   });
             // }
 
-            // if (response.data.completed) {
-            //   setIsLoading(false);
-            //   setProgress(100);
-            //   toast.dismiss(toastId);
-            //   toast.success(__(response.data.message));
-            // } else {
-            //   // Process next batch
-            //   batch++;
-            //   processBatch();
-            // }
+            if (response.data.completed) {
+              setIsLoading(false);
+              setProgress(100);
+              toast.dismiss(toastId);
+              toast.success(__(response.data.message));
+            } else {
+              // Process next batch
+              batch++;
+              processBatch();
+            }
           } else {
             setIsLoading(false);
             setProgress(0);
@@ -199,7 +199,7 @@ const AssetsGeneration = () => {
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="progress-text">{progress}% Complete</p>
+            <p className="progress-text">{progress}%</p>
           </div>
         )}
 			</div>
@@ -210,7 +210,7 @@ const AssetsGeneration = () => {
 			onClose={closeModal}
 			onConfirm={confirmAssetGeneration}
 			title={__('Confirm Asset Generation', 'frontis-blocks')}
-			message={__('Are you sure you want to generate assets? This process may take a few moments.', 'frontis-blocks')}
+			message={__('Are you sure you want to generate assets? This process may take a few moments and the page will keep reloading until asset generation is fully completed.', 'frontis-blocks')}
 		/>
 	</div>
   );

@@ -78,6 +78,7 @@ class TemplateProcessor {
             $template_content,
             $megamenu_matches
         );
+        
         if ($megamenu_block_exists) {
             foreach ($megamenu_matches[1] as $index => $attributes) {
                 if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
