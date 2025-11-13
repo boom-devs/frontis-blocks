@@ -82,6 +82,7 @@ const attributes = {
             Mobile: "left",
         },
     },
+    
 };
 
 export default attributes;

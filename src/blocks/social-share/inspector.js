@@ -50,6 +50,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${iconFontSize.Desktop ? `width: ${iconFontSize.Desktop}${iconFontSizeUnits.Desktop};` : ''}
             ${iconFontSize.Desktop ? `height: ${iconFontSize.Desktop}${iconFontSizeUnits.Desktop};` : ''}
         }
+        .${blockID} .social-share-parent-container .social-share-child-container .social-share-label{
+
+        }
         @media all and (max-width: 1024px){
             .${blockID} .social-share-parent-container{
                 ${iconAlignment.Tablet ? `justify-content: ${iconAlignment.Tablet};` : ''}
