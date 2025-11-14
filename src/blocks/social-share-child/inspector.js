@@ -606,6 +606,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID} .social-share-child-container:hover{
             ${desktopBackgroundHoverStyles}
+            ${socialShareChildGlobalBorderHoverColor ? `border-color: ${socialShareChildGlobalBorderHoverColor};` : ''}
+            ${socialShareChildGlobalBoxShadowHoverCssValue ? `box-shadow: ${socialShareChildGlobalBoxShadowHoverCssValue};` : ''}
         }
         .${blockID} .social-share-child-container .social-share-icon .custom-icon {
             ${socialItemBgColor ? `background-color: ${socialItemBgColor};` : ''}
