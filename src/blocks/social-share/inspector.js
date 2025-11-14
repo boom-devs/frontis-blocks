@@ -562,9 +562,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             transition: all .3s ease-in-out;
             position: relative;
             display: flex;
-            flex-direction: column;
+            ${layoutType === 'vertical' ? 'flex-direction: row;' : ''}
+            ${layoutType === 'horizontal' ? 'flex-direction: column;' : ''}
             ${iconAlignment.Desktop ? `justify-content: ${iconAlignment.Desktop};` : ''}
             ${iconSpacing.Desktop ? `gap: ${iconSpacing.Desktop}${iconSpacingUnits.Desktop};` : ''}
+        }
+        .${blockID} .social-share-parent-container .block-editor-inner-blocks .block-editor-block-list__layout{
+            ${layoutType === 'vertical' ? 'flex-direction: row;' : ''}
+            ${layoutType === 'horizontal' ? 'flex-direction: column;' : ''}
         }
         .${blockID} .social-share-parent-container:hover{
             ${desktopBackgroundHoverStyles}
@@ -671,8 +676,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 label={__("Layout Type")}
                                                 value={layoutType}
                                                 options={[
-                                                    { label: 'Horizontal', value: 'horizontal' },
                                                     { label: 'Vertical', value: 'vertical' },
+                                                    { label: 'Horizontal', value: 'horizontal' },
                                                 ]}
                                                 onChange={(value) => setAttributes({ layoutType: value })}
                                             />

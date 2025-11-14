@@ -361,21 +361,486 @@ const attributes = {
 		type: 'string',
 	},
 	socialShareLabelSpacing: {
-        type: 'object',
-        default: {
-            Desktop: '12',
-            Tablet: '10',
-            Mobile: '10'
-        }
-    },
-    socialShareLabelSpacingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
+		type: 'object',
+		default: {
+			Desktop: '12',
+			Tablet: '10',
+			Mobile: '10'
+		}
+	},
+	socialShareLabelSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	/** Start Global Setting */
+	socialShareChildCustomCSS: {
+		type: 'string',
+		default: '',
+	},
+	socialShareChildDesktopSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	socialShareChildTabletSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	socialShareChildMobileSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	socialShareChildGlobalZIndex: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildOverflow: {
+		type: 'string',
+		default: 'default',
+	},
+	socialShareChildGlobalWraperID: {
+		type: 'string',
+		default: ''
+	},
+
+	socialShareChildGlobalWraperClass: {
+		type: 'string',
+		default: ''
+	},
+
+	/** Start Padding */
+	socialShareChildGlobalPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialShareChildGlobalPaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalPaddingTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalPaddingMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	socialShareChildGlobalMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialShareChildGlobalMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Margin */
+
+	socialShareChildGlobalBgColor: {
+		type: 'string',
+	},
+	socialShareChildGlobalBgHoverColor: {
+		type: 'string',
+	},
+
+	/** Start Background Normal for fb socialShareChild */
+	socialShareChildGlobalBgColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	socialShareChildGlobalBgNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	socialShareChildGlobalBgNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	socialShareChildGlobalBgNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	socialShareChildGlobalBgNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	socialShareChildGlobalBgNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** Bg Normal Image for fb container */
+	socialShareChildGlobalBgNormalBackgroundImageUrl: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgNormalBackgroundImagePosition: {
+		type: 'object',
+		default: {
+			Desktop: { x: '0.5', y: '0.5' },
+			Tablet: { x: '', y: '' },
+			Mobile: { x: '', y: '' }
+		}
+	},
+	socialShareChildGlobalBgNormalBackgroundImageAttachment: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgNormalBackgroundImageRepeat: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgNormalBackgroundImageSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+
+
+	/**Bg Hover for fb socialShareChild */
+	socialShareChildGlobalBgHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	socialShareChildGlobalBgHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	socialShareChildGlobalBgHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	socialShareChildGlobalBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	socialShareChildGlobalBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** Hover Image for fb socialShareChild */
+	socialShareChildGlobalBgHoverBackgroundImageUrl: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgHoverBackgroundImagePosition: {
+		type: 'object',
+		default: {
+			Desktop: { x: '0.5', y: '0.5' },
+			Tablet: { x: '', y: '' },
+			Mobile: { x: '', y: '' }
+		}
+	},
+	socialShareChildGlobalBgHoverBackgroundImageAttachment: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgHoverBackgroundImageRepeat: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildGlobalBgHoverBackgroundImageSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	/** End Background for fb socialShareChild */
+
+
+
+
+
+	/** End Background */
+
+	/** Start Border */
+	socialShareChildGlobalBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	socialShareChildGlobalBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	socialShareChildGlobalBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	socialShareChildGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	socialShareChildGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialShareChildGlobalBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	socialShareChildGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	socialShareChildGlobalBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	socialShareChildGlobalBorderRadiusLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+	socialShareChildGlobalBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	socialShareChildGlobalBoxShadowValues: {
+		type: 'array',
+		default: [],
+	},
+	socialShareChildGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	socialShareChildGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	socialShareChildGlobalBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	socialShareChildPositionType: {
+		type: 'string',
+		default: 'default'
+	},
+	socialShareChildHZOrientationType: {
+		type: 'string',
+		default: 'left'
+	},
+	socialShareChildVROrientationType: {
+		type: 'string',
+		default: 'top'
+	},
+	socialShareChildHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	socialShareChildHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	socialShareChildVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	socialShareChildVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	socialShareChildVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Global Style */
 };
 
 export default attributes;

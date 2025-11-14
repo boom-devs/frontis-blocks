@@ -7,11 +7,16 @@ import {
     PanelBody,
     TabPanel,
     SelectControl,
-    RangeControl
+    BaseControl,
+    Button,
+    ButtonGroup,
+    Dropdown,
 } from '@wordpress/components';
 import {
-    BORDER_STYLES
-} from "./constants/constants";
+    BORDER_STYLES,
+    BACKGROUND_TYPES,
+    OVERFLOW_OP
+} from '@Constants/fbConstants';
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
 import FB_SwitcherControl from '@Components/switcher-control';
@@ -20,6 +25,13 @@ import FB_Spacing from '@Components/spacing';
 import FBIconPicker from "../../components/icon-picker";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
+import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
+import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import FB_GradientColorControl from '@Components/gradient-color-control';
 
 import './editor.scss';
 
@@ -35,33 +47,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialItemBgColorSwitcher,
         socialItemBgColor,
         socialItemBgColorHover,
-        socialIconPaddingUnits,
-        socialIconPaddingDesktop,
-        socialIconPaddingTablet,
-        socialIconPaddingMobile,
-        socialIconPaddingLink,
-
-        socialIconMarginUnits,
-        socialIconMarginDesktop,
-        socialIconMarginTablet,
-        socialIconMarginMobile,
-        socialIconMarginLink,
-
-        socialIconBorder,
-        socialIconBorderColorSwitcher,
-        socialIconBorderColor,
-        socialIconBorderHoverColor,
-        socialIconBorderUnits,
-        socialIconBorderDesktop,
-        socialIconBorderTablet,
-        socialIconBorderMobile,
-        socialIconBorderLink,
-
-        socialIconBorderRadiusUnits,
-        socialIconBorderRadiusDesktop,
-        socialIconBorderRadiusTablet,
-        socialIconBorderRadiusMobile,
-        socialIconBorderRadiusLink,
         socialShareGlobalTypographyData,
         socialShareGlobalTypoSwitcher,
         socialShareGlobalTypoType,
@@ -84,7 +69,93 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialShareLabelBgColor,
         socialShareLabelHoverBgColor,
         socialShareLabelSpacing,
-        socialShareLabelSpacingUnits
+        socialShareLabelSpacingUnits,
+
+        socialShareChildCustomCSS,
+        socialShareChildDesktopSwitcher,
+        socialShareChildTabletSwitcher,
+        socialShareChildMobileSwitcher,
+        socialShareChildGlobalZIndex,
+        socialShareChildOverflow,
+        socialShareChildGlobalWraperID,
+        socialShareChildGlobalWraperClass,
+
+        /** Padding */
+        socialShareChildGlobalPaddingUnits,
+        socialShareChildGlobalPaddingDesktop,
+        socialShareChildGlobalPaddingTablet,
+        socialShareChildGlobalPaddingMobile,
+        socialShareChildGlobalPaddingLink,
+
+        /** Margin */
+        socialShareChildGlobalMarginUnits,
+        socialShareChildGlobalMarginDesktop,
+        socialShareChildGlobalMarginTablet,
+        socialShareChildGlobalMarginMobile,
+        socialShareChildGlobalMarginLink,
+
+        /** Background Normal */
+        socialShareChildGlobalBgColor,
+        socialShareChildGlobalBgHoverColor,
+        socialShareChildGlobalBgColorSwitcher,
+        socialShareChildGlobalBgNormalBackgroundType,
+        socialShareChildGlobalBgNormalClassicColor,
+        socialShareChildGlobalBgNormalGradientColor,
+        socialShareChildGlobalBgNormalCustomGradientSwitcher,
+        socialShareChildGlobalBgNormalCustomGradientInputValue,
+        socialShareChildGlobalBgNormalBackgroundImageUrl,
+        socialShareChildGlobalBgNormalBackgroundImagePosition,
+        socialShareChildGlobalBgNormalBackgroundImageAttachment,
+        socialShareChildGlobalBgNormalBackgroundImageRepeat,
+        socialShareChildGlobalBgNormalBackgroundImageSize,
+
+        /** Background Hover */
+        socialShareChildGlobalBgHoverBackgroundType,
+        socialShareChildGlobalBgHoverClassicColor,
+        socialShareChildGlobalBgHoverGradientColor,
+        socialShareChildGlobalBgHoverCustomGradientSwitcher,
+        socialShareChildGlobalBgHoverCustomGradientInputValue,
+        socialShareChildGlobalBgHoverBackgroundImageUrl,
+        socialShareChildGlobalBgHoverBackgroundImagePosition,
+        socialShareChildGlobalBgHoverBackgroundImageAttachment,
+        socialShareChildGlobalBgHoverBackgroundImageRepeat,
+        socialShareChildGlobalBgHoverBackgroundImageSize,
+
+        /** Border */
+        socialShareChildGlobalBorder,
+        socialShareChildGlobalBorderColorSwitcher,
+        socialShareChildGlobalBorderColor,
+        socialShareChildGlobalBorderHoverColor,
+        socialShareChildGlobalBorderUnits,
+        socialShareChildGlobalBorderDesktop,
+        socialShareChildGlobalBorderTablet,
+        socialShareChildGlobalBorderMobile,
+        socialShareChildGlobalBorderLink,
+
+        /** Border Radius */
+        socialShareChildGlobalBorderRadiusUnits,
+        socialShareChildGlobalBorderRadiusDesktop,
+        socialShareChildGlobalBorderRadiusTablet,
+        socialShareChildGlobalBorderRadiusMobile,
+        socialShareChildGlobalBorderRadiusLink,
+
+        /** Box Shadow */
+        socialShareChildGlobalBoxShadowSwitcher,
+        socialShareChildGlobalBoxShadowValues,
+        socialShareChildGlobalBoxShadowCssValue,
+        socialShareChildGlobalBoxShadowHoverValues,
+        socialShareChildGlobalBoxShadowHoverCssValue,
+        socialShareChildPositionType,
+        socialShareChildHZOrientationType,
+        socialShareChildVROrientationType,
+        socialShareChildHZLeftOffset,
+        socialShareChildHZLeftOffsetUnits,
+        socialShareChildHZRightOffset,
+        socialShareChildHZRightOffsetUnits,
+        socialShareChildVRTopOffset,
+        socialShareChildVRTopOffsetUnits,
+        socialShareChildVRBottomOffset,
+        socialShareChildVRBottomOffsetUnits,
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -108,14 +179,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         { value: 'whatsapp', label: 'WhatsApp' }
     ];
 
-    /** Start Social Icon Padding */
-    const socialIconPaddingUnitsChange = (event, position) => {
+    /** Start Global padding */
+    const handleGlobalPaddingUnitChange = (event, position) => {
         const value = event.target.value;
-        if (socialIconPaddingLink) {
+        if (socialShareChildGlobalPaddingLink) {
             switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
-                        socialIconPaddingDesktop: {
+                        socialShareChildGlobalPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -125,7 +196,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes({
-                        socialIconPaddingTablet: {
+                        socialShareChildGlobalPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -135,7 +206,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes({
-                        socialIconPaddingMobile: {
+                        socialShareChildGlobalPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -149,49 +220,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch (deviceType) {
                 case 'Desktop':
-                    setAttributes({ socialIconPaddingDesktop: { ...socialIconPaddingDesktop, [position]: value } });
+                    setAttributes({ socialShareChildGlobalPaddingDesktop: { ...socialShareChildGlobalPaddingDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes({ socialIconPaddingTablet: { ...socialIconPaddingTablet, [position]: value } });
+                    setAttributes({ socialShareChildGlobalPaddingTablet: { ...socialShareChildGlobalPaddingTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes({ socialIconPaddingMobile: { ...socialIconPaddingMobile, [position]: value } });
+                    setAttributes({ socialShareChildGlobalPaddingMobile: { ...socialShareChildGlobalPaddingMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
-    };
 
-    const socialIconPaddingLinkBtn = () => {
-        setAttributes({
-            socialIconPaddingLink: !socialIconPaddingLink
-        });
-    };
+    }
 
-    const socialIconPaddingUnitsHandler = (unit) => {
+    const handleGlobalPaddingCombineBtn = () => {
+        setAttributes({ socialShareChildGlobalPaddingLink: !socialShareChildGlobalPaddingLink });
+    }
+
+    const handleGlobalPaddingUnitsHandler = (unit) => {
         setAttributes({
-            socialIconPaddingUnits: {
-                ...socialIconPaddingUnits,
+            socialShareChildGlobalPaddingUnits: {
+                ...socialShareChildGlobalPaddingUnits,
                 [deviceType]: unit
             }
-        });
-    };
+        })
+    }
+    const globalDesktopPadding = `${socialShareChildGlobalPaddingDesktop?.top}${socialShareChildGlobalPaddingUnits?.Desktop} ${socialShareChildGlobalPaddingDesktop?.right}${socialShareChildGlobalPaddingUnits?.Desktop} ${socialShareChildGlobalPaddingDesktop?.bottom}${socialShareChildGlobalPaddingUnits?.Desktop} ${socialShareChildGlobalPaddingDesktop?.left}${socialShareChildGlobalPaddingUnits?.Desktop}`;
+    const globalTabletPadding = `${socialShareChildGlobalPaddingTablet?.top}${socialShareChildGlobalPaddingUnits?.Tablet} ${socialShareChildGlobalPaddingTablet?.right}${socialShareChildGlobalPaddingUnits?.Tablet} ${socialShareChildGlobalPaddingTablet?.bottom}${socialShareChildGlobalPaddingUnits?.Tablet} ${socialShareChildGlobalPaddingTablet?.left}${socialShareChildGlobalPaddingUnits?.Tablet}`;
+    const globalMobilePadding = `${socialShareChildGlobalPaddingMobile?.top}${socialShareChildGlobalPaddingUnits?.Mobile} ${socialShareChildGlobalPaddingMobile?.right}${socialShareChildGlobalPaddingUnits?.Mobile} ${socialShareChildGlobalPaddingMobile?.bottom}${socialShareChildGlobalPaddingUnits?.Mobile} ${socialShareChildGlobalPaddingMobile?.left}${socialShareChildGlobalPaddingUnits?.Mobile}`;
+    /** End Global Padding */
 
-    /** Default padding for Social Icon */
-    const socialIconPaddingDesktopWidth = `${socialIconPaddingDesktop.top}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.right}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.bottom}${socialIconPaddingUnits.Desktop} ${socialIconPaddingDesktop.left}${socialIconPaddingUnits.Desktop}`;
-    const socialIconTabletPaddingWidth = `${socialIconPaddingTablet.top}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.right}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.bottom}${socialIconPaddingUnits.Tablet} ${socialIconPaddingTablet.left}${socialIconPaddingUnits.Tablet}`;
-    const socialIconPaddingMobileWidth = `${socialIconPaddingMobile.top}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.right}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.bottom}${socialIconPaddingUnits.Mobile} ${socialIconPaddingMobile.left}${socialIconPaddingUnits.Mobile}`;
-    /** End Social Icon Padding */
-
-    /** Start Social Icon Margin */
-    const socialIconMarginUnitsChange = (event, position) => {
+    /** Start Global Margin */
+    const handleGlobalMarginUnitChange = (event, position) => {
         const value = event.target.value;
-        if (socialIconMarginLink) {
+        if (socialShareChildGlobalMarginLink) {
             switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
-                        socialIconMarginDesktop: {
+                        socialShareChildGlobalMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -201,7 +269,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes({
-                        socialIconMarginTablet: {
+                        socialShareChildGlobalMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -211,7 +279,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes({
-                        socialIconMarginMobile: {
+                        socialShareChildGlobalMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -225,49 +293,47 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch (deviceType) {
                 case 'Desktop':
-                    setAttributes({ socialIconMarginDesktop: { ...socialIconMarginDesktop, [position]: value } });
+                    setAttributes({ socialShareChildGlobalMarginDesktop: { ...socialShareChildGlobalMarginDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes({ socialIconMarginTablet: { ...socialIconMarginTablet, [position]: value } });
+                    setAttributes({ socialShareChildGlobalMarginTablet: { ...socialShareChildGlobalMarginTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes({ socialIconMarginMobile: { ...socialIconMarginMobile, [position]: value } });
+                    setAttributes({ socialShareChildGlobalMarginMobile: { ...socialShareChildGlobalMarginMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
-    };
 
-    const socialIconMarginLinkBtn = () => {
-        setAttributes({
-            socialIconMarginLink: !socialIconMarginLink
-        });
-    };
+    }
 
-    const socialIconMarginUnitsHandler = (unit) => {
+    const handleGlobalMarginCombineBtn = () => {
+        setAttributes({ socialShareChildGlobalMarginLink: !socialShareChildGlobalMarginLink });
+    }
+
+    const handleGlobalMarginUnitsHandler = (unit) => {
         setAttributes({
-            socialIconMarginUnits: {
-                ...socialIconMarginUnits,
+            socialShareChildGlobalMarginUnits: {
+                ...socialShareChildGlobalMarginUnits,
                 [deviceType]: unit
             }
-        });
-    };
+        })
+    }
 
-    /** Default margin for Social Icon */
-    const socialIconMarginDesktopWidth = `${socialIconMarginDesktop.top}${socialIconMarginUnits.Desktop} ${socialIconMarginDesktop.right}${socialIconMarginUnits.Desktop} ${socialIconMarginDesktop.bottom}${socialIconMarginUnits.Desktop} ${socialIconMarginDesktop.left}${socialIconMarginUnits.Desktop}`;
-    const socialIconTabletMarginWidth = `${socialIconMarginTablet.top}${socialIconMarginUnits.Tablet} ${socialIconMarginTablet.right}${socialIconMarginUnits.Tablet} ${socialIconMarginTablet.bottom}${socialIconMarginUnits.Tablet} ${socialIconMarginTablet.left}${socialIconMarginUnits.Tablet}`;
-    const socialIconMarginMobileWidth = `${socialIconMarginMobile.top}${socialIconMarginUnits.Mobile} ${socialIconMarginMobile.right}${socialIconMarginUnits.Mobile} ${socialIconMarginMobile.bottom}${socialIconMarginUnits.Mobile} ${socialIconMarginMobile.left}${socialIconMarginUnits.Mobile}`;
-    /** End Social Icon Margin */
+    const globalDesktopMargin = `${socialShareChildGlobalMarginDesktop?.top}${socialShareChildGlobalMarginUnits?.Desktop} ${socialShareChildGlobalMarginDesktop?.right}${socialShareChildGlobalMarginUnits?.Desktop} ${socialShareChildGlobalMarginDesktop?.bottom}${socialShareChildGlobalMarginUnits?.Desktop} ${socialShareChildGlobalMarginDesktop?.left}${socialShareChildGlobalMarginUnits?.Desktop}`;
+    const globalTabletMargin = `${socialShareChildGlobalMarginTablet?.top}${socialShareChildGlobalMarginUnits?.Tablet} ${socialShareChildGlobalMarginTablet?.right}${socialShareChildGlobalMarginUnits?.Tablet} ${socialShareChildGlobalMarginTablet?.bottom}${socialShareChildGlobalMarginUnits?.Tablet} ${socialShareChildGlobalMarginTablet?.left}${socialShareChildGlobalMarginUnits?.Tablet}`;
+    const globalMobileMargin = `${socialShareChildGlobalMarginMobile?.top}${socialShareChildGlobalMarginUnits?.Mobile} ${socialShareChildGlobalMarginMobile?.right}${socialShareChildGlobalMarginUnits?.Mobile} ${socialShareChildGlobalMarginMobile?.bottom}${socialShareChildGlobalMarginUnits?.Mobile} ${socialShareChildGlobalMarginMobile?.left}${socialShareChildGlobalMarginUnits?.Mobile}`;
+    /** End Global Margin */
 
-    /** Start Social Icon Border */
-    const socialIconBorderUnitsChange = (event, position) => {
+    /** Start Global border */
+    const handleGlobalBorderUnitChange = (event, position) => {
         const value = event.target.value;
-        if (socialIconBorderLink) {
+        if (socialShareChildGlobalBorderLink) {
             switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
-                        socialIconBorderDesktop: {
+                        socialShareChildGlobalBorderDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -277,7 +343,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes({
-                        socialIconBorderTablet: {
+                        socialShareChildGlobalBorderTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -287,7 +353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes({
-                        socialIconBorderMobile: {
+                        socialShareChildGlobalBorderMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -301,49 +367,46 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch (deviceType) {
                 case 'Desktop':
-                    setAttributes({ socialIconBorderDesktop: { ...socialIconBorderDesktop, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderDesktop: { ...socialShareChildGlobalBorderDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes({ socialIconBorderTablet: { ...socialIconBorderTablet, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderTablet: { ...socialShareChildGlobalBorderTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes({ socialIconBorderMobile: { ...socialIconBorderMobile, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderMobile: { ...socialShareChildGlobalBorderMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
-    };
 
-    const socialIconBorderLinkBtn = () => {
-        setAttributes({
-            socialIconBorderLink: !socialIconBorderLink
-        });
-    };
+    }
 
-    const socialIconBorderUnitsHandler = (unit) => {
+    const handleGlobalBorderCombineBtn = () => {
+        setAttributes({ socialShareChildGlobalBorderLink: !socialShareChildGlobalBorderLink });
+    }
+
+    const handleGlobalBorderUnitsHandler = (unit) => {
         setAttributes({
-            socialIconBorderUnits: {
-                ...socialIconBorderUnits,
+            socialShareChildGlobalBorderUnits: {
+                ...socialShareChildGlobalBorderUnits,
                 [deviceType]: unit
             }
-        });
-    };
+        })
+    }
+    const globalDesktopBorderWidth = `${socialShareChildGlobalBorderDesktop?.top}${socialShareChildGlobalBorderUnits?.Desktop} ${socialShareChildGlobalBorderDesktop?.right}${socialShareChildGlobalBorderUnits?.Desktop} ${socialShareChildGlobalBorderDesktop?.bottom}${socialShareChildGlobalBorderUnits?.Desktop} ${socialShareChildGlobalBorderDesktop?.left}${socialShareChildGlobalBorderUnits?.Desktop}`;
+    const globalTabletBorderWidth = `${socialShareChildGlobalBorderTablet?.top}${socialShareChildGlobalBorderUnits?.Tablet} ${socialShareChildGlobalBorderTablet?.right}${socialShareChildGlobalBorderUnits?.Tablet} ${socialShareChildGlobalBorderTablet?.bottom}${socialShareChildGlobalBorderUnits?.Tablet} ${socialShareChildGlobalBorderTablet?.left}${socialShareChildGlobalBorderUnits?.Tablet}`;
+    const globalMobileBorderWidth = `${socialShareChildGlobalBorderMobile?.top}${socialShareChildGlobalBorderUnits?.Mobile} ${socialShareChildGlobalBorderMobile?.right}${socialShareChildGlobalBorderUnits?.Mobile} ${socialShareChildGlobalBorderMobile?.bottom}${socialShareChildGlobalBorderUnits?.Mobile} ${socialShareChildGlobalBorderMobile?.left}${socialShareChildGlobalBorderUnits?.Mobile}`;
+    /** End Border */
 
-    /** Default border for Social Icon */
-    const socialIconBorderDesktopWidth = `${socialIconBorderDesktop.top}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.right}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.bottom}${socialIconBorderUnits.Desktop} ${socialIconBorderDesktop.left}${socialIconBorderUnits.Desktop}`;
-    const socialIconTabletBorderWidth = `${socialIconBorderTablet.top}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.right}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.bottom}${socialIconBorderUnits.Tablet} ${socialIconBorderTablet.left}${socialIconBorderUnits.Tablet}`;
-    const socialIconBorderMobileWidth = `${socialIconBorderMobile.top}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.right}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.bottom}${socialIconBorderUnits.Mobile} ${socialIconBorderMobile.left}${socialIconBorderUnits.Mobile}`;
-    /** End Social Icon Border */
-
-    /** Start Social Icon Border Radius */
-    const socialIconBorderRadiusUnitsChange = (event, position) => {
+    /** Start Global border radius*/
+    const handleGlobalBorderRadiusUnitChange = (event, position) => {
         const value = event.target.value;
-        if (socialIconBorderRadiusLink) {
+        if (socialShareChildGlobalBorderRadiusLink) {
             switch (deviceType) {
                 case 'Desktop':
                     setAttributes({
-                        socialIconBorderRadiusDesktop: {
+                        socialShareChildGlobalBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -353,7 +416,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes({
-                        socialIconBorderRadiusTablet: {
+                        socialShareChildGlobalBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -363,7 +426,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes({
-                        socialIconBorderRadiusMobile: {
+                        socialShareChildGlobalBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -377,41 +440,137 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch (deviceType) {
                 case 'Desktop':
-                    setAttributes({ socialIconBorderRadiusDesktop: { ...socialIconBorderRadiusDesktop, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderRadiusDesktop: { ...socialShareChildGlobalBorderRadiusDesktop, [position]: value } });
                     break;
                 case 'Tablet':
-                    setAttributes({ socialIconBorderRadiusTablet: { ...socialIconBorderRadiusTablet, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderRadiusTablet: { ...socialShareChildGlobalBorderRadiusTablet, [position]: value } });
                     break;
                 case 'Mobile':
-                    setAttributes({ socialIconBorderRadiusMobile: { ...socialIconBorderRadiusMobile, [position]: value } });
+                    setAttributes({ socialShareChildGlobalBorderRadiusMobile: { ...socialShareChildGlobalBorderRadiusMobile, [position]: value } });
                     break;
                 default:
                     break;
             }
         }
-    };
 
-    const socialIconBorderRadiusLinkBtn = () => {
-        setAttributes({
-            socialIconBorderRadiusLink: !socialIconBorderRadiusLink
-        });
-    };
+    }
 
-    const socialIconBorderRadiusUnitsHandler = (unit) => {
+    const handleGlobalBorderRadiusCombineBtn = () => {
+        setAttributes({ socialShareChildGlobalBorderRadiusLink: !socialShareChildGlobalBorderRadiusLink });
+    }
+
+    const handleGlobalBorderRadiusUnitsHandler = (unit) => {
         setAttributes({
-            socialIconBorderRadiusUnits: {
-                ...socialIconBorderRadiusUnits,
+            socialShareChildGlobalBorderRadiusUnits: {
+                ...socialShareChildGlobalBorderRadiusUnits,
                 [deviceType]: unit
             }
-        });
+        })
+    }
+    /** end Global border */
+
+    /** End Global Border Radius */
+    const globalDesktopBorderRadiusWidth = `${socialShareChildGlobalBorderRadiusDesktop?.top}${socialShareChildGlobalBorderRadiusUnits?.Desktop} ${socialShareChildGlobalBorderRadiusDesktop?.right}${socialShareChildGlobalBorderRadiusUnits?.Desktop} ${socialShareChildGlobalBorderRadiusDesktop?.bottom}${socialShareChildGlobalBorderRadiusUnits?.Desktop} ${socialShareChildGlobalBorderRadiusDesktop?.left}${socialShareChildGlobalBorderRadiusUnits?.Desktop}`;
+    const globalTabletBorderRadiusWidth = `${socialShareChildGlobalBorderRadiusTablet?.top}${socialShareChildGlobalBorderRadiusUnits?.Tablet} ${socialShareChildGlobalBorderRadiusTablet?.right}${socialShareChildGlobalBorderRadiusUnits?.Tablet} ${socialShareChildGlobalBorderRadiusTablet?.bottom}${socialShareChildGlobalBorderRadiusUnits?.Tablet} ${socialShareChildGlobalBorderRadiusTablet?.left}${socialShareChildGlobalBorderRadiusUnits?.Tablet}`;
+    const globalMobileBorderRadiusWidth = `${socialShareChildGlobalBorderRadiusMobile?.top}${socialShareChildGlobalBorderRadiusUnits?.Mobile} ${socialShareChildGlobalBorderRadiusMobile?.right}${socialShareChildGlobalBorderRadiusUnits?.Mobile} ${socialShareChildGlobalBorderRadiusMobile?.bottom}${socialShareChildGlobalBorderRadiusUnits?.Mobile} ${socialShareChildGlobalBorderRadiusMobile?.left}${socialShareChildGlobalBorderRadiusUnits?.Mobile}`;
+    /** End Border Radius */
+
+    /**
+     * Get background normal styles
+     */
+    const getBackgroundNormalStyles = (device) => {
+        const bgType = socialShareChildGlobalBgNormalBackgroundType;
+        const bgColor = socialShareChildGlobalBgNormalClassicColor;
+        const bgGradient = socialShareChildGlobalBgNormalGradientColor;
+        const customGradient = socialShareChildGlobalBgNormalCustomGradientInputValue;
+        const customGradientEnabled = socialShareChildGlobalBgNormalCustomGradientSwitcher;
+
+        const bgImageUrl = socialShareChildGlobalBgNormalBackgroundImageUrl?.[device];
+        const bgImagePosition = socialShareChildGlobalBgNormalBackgroundImagePosition?.[device];
+        const bgAttachment = socialShareChildGlobalBgNormalBackgroundImageAttachment?.[device];
+        const bgRepeat = socialShareChildGlobalBgNormalBackgroundImageRepeat?.[device];
+        const bgSize = socialShareChildGlobalBgNormalBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            return {
+                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+            };
+        }
+
+        let styles = { background: bgColor };
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
     };
 
-    /** Default border radius for Social Icon */
-    const socialIconBorderRadiusDesktopWidth = `${socialIconBorderRadiusDesktop.top}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.right}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.bottom}${socialIconBorderRadiusUnits.Desktop} ${socialIconBorderRadiusDesktop.left}${socialIconBorderRadiusUnits.Desktop}`;
-    const socialIconTabletBorderRadiusWidth = `${socialIconBorderRadiusTablet.top}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.right}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.bottom}${socialIconBorderRadiusUnits.Tablet} ${socialIconBorderRadiusTablet.left}${socialIconBorderRadiusUnits.Tablet}`;
-    const socialIconBorderRadiusMobileWidth = `${socialIconBorderRadiusMobile.top}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.right}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.bottom}${socialIconBorderRadiusUnits.Mobile} ${socialIconBorderRadiusMobile.left}${socialIconBorderRadiusUnits.Mobile}`;
-    /** End Social Icon Border Radius */
+    /**
+     * Get background hover styles
+     */
+    const getBackgroundHoverStyles = (device) => {
+        const bgType = socialShareChildGlobalBgHoverBackgroundType;
+        const bgColor = socialShareChildGlobalBgHoverClassicColor;
+        const bgGradient = socialShareChildGlobalBgHoverGradientColor;
+        const customGradient = socialShareChildGlobalBgHoverCustomGradientInputValue;
+        const customGradientEnabled = socialShareChildGlobalBgHoverCustomGradientSwitcher;
 
+        const bgImageUrl = socialShareChildGlobalBgHoverBackgroundImageUrl?.[device];
+        const bgImagePosition = socialShareChildGlobalBgHoverBackgroundImagePosition?.[device];
+        const bgAttachment = socialShareChildGlobalBgHoverBackgroundImageAttachment?.[device];
+        const bgRepeat = socialShareChildGlobalBgHoverBackgroundImageRepeat?.[device];
+        const bgSize = socialShareChildGlobalBgHoverBackgroundImageSize?.[device];
+
+        if (bgType === 'gradient') {
+            return {
+                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+            };
+        }
+
+        let styles = { background: bgColor };
+
+        if (bgType !== 'gradient' && bgImageUrl) {
+            styles = {
+                ...styles,
+                'background-image': `url(${bgImageUrl})`,
+                'background-position': bgImagePosition
+                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+                    : "50% 50%",
+                'background-attachment': bgAttachment || undefined,
+                'background-repeat': bgRepeat || undefined,
+                'background-size': bgSize || undefined,
+            };
+        }
+
+        return styles;
+    };
+
+
+    /**
+     * Convert object to string
+     */
+    const backgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+            .map(([key, value]) => `${key}: ${value};`)
+            .join(' ');
+
+
+    const desktopBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Desktop'));
+    const desktopBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Desktop'));
+    const tabletBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Tablet'));
+    const tabletBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Tablet'));
+    const mobileBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Mobile'));
+    const mobileBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Mobile'));
     // Handle displayStyle change
     const handleDisplayStyleChange = (value) => {
         setAttributes({ displayStyle: value });
@@ -423,14 +582,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const fbSocialShareStyle = useMemo(
         () => `
+        .${blockID}.fb-social-share-child {
+            ${socialShareChildPositionType === 'default' ? `position: relative !important;` : ''}
+            ${socialShareChildPositionType !== 'default' && socialShareChildPositionType !== 'relative' ? `width: 100%;` : ''}
+            ${socialShareChildPositionType !== 'default' ? `position: ${socialShareChildPositionType} !important;` : ''}
+            ${socialShareChildPositionType !== 'default' && socialShareChildPositionType !== 'relative' && socialShareChildHZOrientationType === 'left' && socialShareChildHZLeftOffset?.Desktop ? `left: ${socialShareChildHZLeftOffset?.Desktop}${socialShareChildHZLeftOffsetUnits?.Desktop};` : ''} 
+            ${socialShareChildPositionType !== 'default' && socialShareChildPositionType !== 'relative' && socialShareChildHZOrientationType === 'right' && socialShareChildHZRightOffset?.Desktop ? `right: ${socialShareChildHZRightOffset?.Desktop}${socialShareChildHZRightOffsetUnits?.Desktop};` : ''}
+            ${socialShareChildPositionType !== 'default' && socialShareChildPositionType !== 'relative' && socialShareChildVROrientationType === 'top' && socialShareChildVRTopOffset?.Desktop ? `top: ${socialShareChildVRTopOffset?.Desktop}${socialShareChildVRTopOffsetUnits?.Desktop};` : ''}
+            ${socialShareChildPositionType !== 'default' && socialShareChildPositionType !== 'relative' && socialShareChildVROrientationType === 'bottom' && socialShareChildVRBottomOffset?.Desktop ? `bottom: ${socialShareChildVRBottomOffset?.Desktop}${socialShareChildVRBottomOffsetUnits?.Desktop};` : ''}
+            ${socialShareChildGlobalZIndex?.Desktop ? `z-index: ${socialShareChildGlobalZIndex?.Desktop};` : ''}
+            ${socialShareChildOverflow !== 'default' ? `overflow: ${socialShareChildOverflow};` : ''}
+        }
+        .${blockID} .social-share-child-container {
+            ${desktopBackgroundNormalStyles}
+            ${globalDesktopPadding && socialShareChildGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
+            ${globalDesktopMargin && socialShareChildGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''}
+            ${socialShareChildGlobalBorder ? `border: ${socialShareChildGlobalBorder};` : ''}
+            ${globalDesktopBorderWidth && socialShareChildGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth && socialShareChildGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${socialShareChildGlobalBorderColor ? `border-color: ${socialShareChildGlobalBorderColor};` : ''}
+            ${socialShareChildGlobalBoxShadowCssValue ? `box-shadow: ${socialShareChildGlobalBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
+        }
+        .${blockID} .social-share-child-container:hover{
+            ${desktopBackgroundHoverStyles}
+        }
         .${blockID} .social-share-child-container .social-share-icon .custom-icon {
             ${socialItemBgColor ? `background-color: ${socialItemBgColor};` : ''}
-            ${socialIconPaddingDesktopWidth && socialIconPaddingDesktop?.top ? `padding: ${socialIconPaddingDesktopWidth};` : ''}
-            ${socialIconMarginDesktopWidth && socialIconMarginDesktop?.top ? `margin: ${socialIconMarginDesktopWidth};` : ''}
-            ${socialIconBorder ? `border: ${socialIconBorder};` : ''}
-            ${socialIconBorderColor ? `border-color: ${socialIconBorderColor};` : ''}
-            ${socialIconBorderDesktopWidth && socialIconBorderDesktop?.top ? `border-width: ${socialIconBorderDesktopWidth};` : ''}
-            ${socialIconBorderRadiusDesktopWidth && socialIconBorderRadiusDesktop?.top ? `border-radius: ${socialIconBorderRadiusDesktopWidth};` : ''}
         }
         .${blockID} .social-share-child-container .social-share-icon .custom-icon:hover {
             ${socialItemBgColorHover ? `background-color: ${socialItemBgColorHover};` : ''}
@@ -472,12 +650,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${socialShareLabelHoverBgColor ? `background: ${socialShareLabelHoverBgColor};` : ''}
         }
         @media all and (max-width: 1024px){
-            .${blockID} .social-share-child-container .social-share-icon .custom-icon{
-                ${socialIconTabletPaddingWidth && socialIconPaddingTablet?.top ? `padding: ${socialIconTabletPaddingWidth};` : ''}
-                ${socialIconTabletMarginWidth && socialIconMarginTablet?.top ? `margin: ${socialIconTabletMarginWidth};` : ''}
-                ${socialIconTabletBorderWidth && socialIconBorderTablet?.top ? `border-width: ${socialIconTabletBorderWidth};` : ''}
-                ${socialIconTabletBorderRadiusWidth && socialIconBorderRadiusTablet?.top ? `border-radius: ${socialIconTabletBorderRadiusWidth};` : ''}
-            }
             .${blockID} .social-share-child-container .social-share-label{
                 ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Tablet && socialShareFontSizeUnits?.Tablet ? `font-size: ${socialShareFontSize?.Tablet}${socialShareFontSizeUnits?.Tablet};` : ''}
                 ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Tablet && socialShareLetterSpacingUnits?.Tablet ? `letter-spacing: ${socialShareLetterSpacing?.Tablet}${socialShareLetterSpacingUnits?.Tablet};` : ''}
@@ -488,13 +660,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         }
         @media all and (max-width: 767px){
-            .${blockID} .social-share-child-container .social-share-icon .custom-icon{
-                ${socialIconPaddingMobileWidth && socialIconPaddingMobile?.top ? `padding: ${socialIconPaddingMobileWidth};` : ''}
-                ${socialIconMarginMobileWidth && socialIconMarginMobile?.top ? `margin: ${socialIconMarginMobileWidth};` : ''}
-                ${socialIconBorderMobileWidth && socialIconBorderMobile?.top ? `border-width: ${socialIconBorderMobileWidth};` : ''}
-                ${socialIconBorderRadiusMobileWidth && socialIconBorderRadiusMobile?.top ? `border-radius: ${socialIconBorderRadiusMobileWidth};` : ''}
-            }
-            
             .${blockID} .social-share-child-container .social-share-label{
                 ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Mobile && socialShareFontSizeUnits?.Mobile ? `font-size: ${socialShareFontSize?.Mobile}${socialShareFontSizeUnits?.Mobile};` : ''}
                 ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Mobile && socialShareLetterSpacingUnits?.Mobile ? `letter-spacing: ${socialShareLetterSpacing?.Mobile}${socialShareLetterSpacingUnits?.Mobile};` : ''}
@@ -506,18 +671,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         `,
         [
-            socialIconPaddingDesktopWidth,
-            socialIconMarginDesktopWidth,
-            socialIconBorderDesktopWidth,
-            socialIconBorderRadiusDesktopWidth,
-            socialIconTabletPaddingWidth,
-            socialIconTabletMarginWidth,
-            socialIconTabletBorderWidth,
-            socialIconTabletBorderRadiusWidth,
-            socialIconPaddingMobileWidth,
-            socialIconMarginMobileWidth,
-            socialIconBorderMobileWidth,
-            socialIconBorderRadiusMobileWidth,
             attributes
         ],
     );
@@ -593,7 +746,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 )}
                                 {tab.name === "styles" && (
                                     <>
-                                        <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
                                             <FB_SwitcherControl
                                                 label={__("Icon Color", "frontis-blocks")}
                                                 globalSwitcher={socialItemColorSwitcher}
@@ -638,7 +791,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}
                                         </PanelBody>
-                                        <PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
+                                        <PanelBody title={__("Label", "frontis-blocks")} initialOpen={false}>
                                             <FB_TypographyControl
                                                 globalTypoControlActive={true}
                                                 globalTypoSwitcher={socialShareGlobalTypoSwitcher}
@@ -750,97 +903,411 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 resetFallbackValue={""}
                                             />
                                         </PanelBody>
-                                        <PanelBody title={__("Spacing", "frontis-blocks")} initialOpen={false}>
-                                            <FB_Spacing
-                                                label={__("Padding", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={socialIconPaddingUnitsHandler}
-                                                spacingUnits={socialIconPaddingUnits}
-                                                spacingDesktop={socialIconPaddingDesktop}
-                                                spacingTablet={socialIconPaddingTablet}
-                                                spacingMobile={socialIconPaddingMobile}
-                                                handleSpacingUnitHandler={socialIconPaddingUnitsChange}
-                                                spacingCombineBtn={socialIconPaddingLink}
-                                                spacingCombineBtnHandler={socialIconPaddingLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <FB_Spacing
-                                                label={__("Margin", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={socialIconMarginUnitsHandler}
-                                                spacingUnits={socialIconMarginUnits}
-                                                spacingDesktop={socialIconMarginDesktop}
-                                                spacingTablet={socialIconMarginTablet}
-                                                spacingMobile={socialIconMarginMobile}
-                                                handleSpacingUnitHandler={socialIconMarginUnitsChange}
-                                                spacingCombineBtn={socialIconMarginLink}
-                                                spacingCombineBtnHandler={socialIconMarginLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                            <SelectControl
-                                                label={__("Border Style", "frontis-blocks")}
-                                                value={socialIconBorder}
-                                                options={BORDER_STYLES}
-                                                onChange={(value) => setAttributes({ socialIconBorder: value })}
-                                            />
-
-                                            <FB_SwitcherControl
-                                                label={__("Border Color", "frontis-blocks")}
-                                                globalSwitcher={socialIconBorderColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ socialIconBorderColorSwitcher: value })}
-                                            />
-
-                                            {socialIconBorderColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={socialIconBorderColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderColor: value === undefined ? '' : value })}
-                                                />
-                                            )}
-
-                                            {socialIconBorderColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={socialIconBorderHoverColor}
-                                                    setGlobalColor={(value) => setAttributes({ socialIconBorderHoverColor: value === undefined ? '' : value })}
-                                                />
-                                            )}
-
-                                            <FB_Spacing
-                                                label={__("Border", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={socialIconBorderUnitsHandler}
-                                                spacingUnits={socialIconBorderUnits}
-                                                spacingDesktop={socialIconBorderDesktop}
-                                                spacingTablet={socialIconBorderTablet}
-                                                spacingMobile={socialIconBorderMobile}
-                                                handleSpacingUnitHandler={socialIconBorderUnitsChange}
-                                                spacingCombineBtn={socialIconBorderLink}
-                                                spacingCombineBtnHandler={socialIconBorderLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-
-                                            <FB_Spacing
-                                                label={__("Border Radius", "frontis-blocks")}
-                                                deviceType={deviceType}
-                                                spacingUnitsHandler={socialIconBorderRadiusUnitsHandler}
-                                                spacingUnits={socialIconBorderRadiusUnits}
-                                                spacingDesktop={socialIconBorderRadiusDesktop}
-                                                spacingTablet={socialIconBorderRadiusTablet}
-                                                spacingMobile={socialIconBorderRadiusMobile}
-                                                handleSpacingUnitHandler={socialIconBorderRadiusUnitsChange}
-                                                spacingCombineBtn={socialIconBorderRadiusLink}
-                                                spacingCombineBtnHandler={socialIconBorderRadiusLinkBtn}
-                                                setAttributes={setAttributes}
-                                            />
-                                        </PanelBody>
                                     </>
                                 )}
                                 {tab.name === "advanced" && (
                                     <>
-                                        <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+                                        <div className="fb-setting-advanced-tab-wrapper">
+                                            <div className="fb-setting-inner-wrapper">
+                                                <PanelBody
+                                                    title={__("Layout", "frontis-blocks")}
+                                                    initialOpen={true}
+                                                    className='fb-setting-layout-header'
+                                                >
+                                                    <FB_Range
+                                                        min={0}
+                                                        max={10000000}
+                                                        label={__("Z Index", "frontis-blocks")}
+                                                        rangeValue={socialShareChildGlobalZIndex}
+                                                        onChangeHandler={(value) => setAttributes({ socialShareChildGlobalZIndex: value === 0 ? undefined : value })}
+                                                        deviceType={deviceType}
+                                                        setAttributes={setAttributes}
+                                                        rangeStep={1}
+                                                        resetFallbackValue={""}
+                                                        isRangeUnit={false}
 
-                                        </PanelBody>
+                                                    />
+
+                                                    <SelectControl
+                                                        label={__("Overflow", "frontis-blocks")}
+                                                        value={socialShareChildOverflow}
+                                                        options={OVERFLOW_OP}
+                                                        onChange={(value) => setAttributes({ socialShareChildOverflow: value })}
+                                                    />
+
+                                                    <FB_PositionControl
+                                                        deviceType={deviceType}
+                                                        positionType={socialShareChildPositionType}
+                                                        setPositionType={(value) => setAttributes({ socialShareChildPositionType: value })}
+
+                                                        HZOrientationType={socialShareChildHZOrientationType}
+                                                        setHZOrientationType={(value) =>
+                                                            setAttributes({ socialShareChildHZOrientationType: value })
+                                                        }
+                                                        VROrientationType={socialShareChildVROrientationType}
+                                                        setVROrientationType={(value) =>
+                                                            setAttributes({ socialShareChildVROrientationType: value })
+                                                        }
+
+                                                        HZLeftOffset={socialShareChildHZLeftOffset}
+                                                        setHZLeftOffset={(value) => setAttributes({ socialShareChildHZLeftOffset: value })}
+                                                        HZLeftOffsetUnits={socialShareChildHZLeftOffsetUnits}
+                                                        setHZLeftOffsetUnits={(value) => setAttributes({ socialShareChildHZLeftOffsetUnits: value })}
+                                                        HZRightOffset={socialShareChildHZRightOffset}
+                                                        setHZRightOffset={(value) => setAttributes({ socialShareChildHZRightOffset: value })}
+                                                        HZRightOffsetUnits={socialShareChildHZRightOffsetUnits}
+                                                        setHZRightOffsetUnits={(value) => setAttributes({ socialShareChildHZRightOffsetUnits: value })}
+
+                                                        VRTopOffset={socialShareChildVRTopOffset}
+                                                        setVRTopOffset={(value) => setAttributes({ socialShareChildVRTopOffset: value })}
+                                                        VRTopOffsetUnits={socialShareChildVRTopOffsetUnits}
+                                                        setVRTopOffsetUnits={(value) => setAttributes({ socialShareChildVRTopOffsetUnits: value })}
+                                                        VRBottomOffset={socialShareChildVRBottomOffset}
+                                                        setVRBottomOffset={(value) => setAttributes({ socialShareChildVRBottomOffset: value })}
+                                                        VRBottomOffsetUnits={socialShareChildVRBottomOffsetUnits}
+                                                        setVRBottomOffsetUnits={(value) => setAttributes({ socialShareChildVRBottomOffsetUnits: value })}
+
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS ID", "frontis-blocks")}
+                                                        value={socialShareChildGlobalWraperID}
+                                                        onChangeValue={(value) => setAttributes({ socialShareChildGlobalWraperID: value })}
+                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                                                    />
+
+                                                    <FB_InputControl
+                                                        label={__("CSS Class", "frontis-blocks")}
+                                                        value={socialShareChildGlobalWraperClass}
+                                                        onChangeValue={(value) => setAttributes({ socialShareChildGlobalWraperClass: value })}
+                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
+                                                    />
+
+                                                </PanelBody>
+
+                                                <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                                                    <FB_Spacing
+                                                        label={__("Padding", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                                                        spacingUnits={socialShareChildGlobalPaddingUnits}
+                                                        spacingDesktop={socialShareChildGlobalPaddingDesktop}
+                                                        spacingTablet={socialShareChildGlobalPaddingTablet}
+                                                        spacingMobile={socialShareChildGlobalPaddingMobile}
+                                                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                                                        spacingCombineBtn={socialShareChildGlobalPaddingLink}
+                                                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                    <FB_Spacing
+                                                        label={__("Margin", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                                                        spacingUnits={socialShareChildGlobalMarginUnits}
+                                                        spacingDesktop={socialShareChildGlobalMarginDesktop}
+                                                        spacingTablet={socialShareChildGlobalMarginTablet}
+                                                        spacingMobile={socialShareChildGlobalMarginMobile}
+                                                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                                                        spacingCombineBtn={socialShareChildGlobalMarginLink}
+                                                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+                                                </PanelBody>
+
+                                                <PanelBody
+                                                    title={__("Background", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_SwitcherControl
+                                                        label={__("Background Type", "frontis-blocks")}
+                                                        globalSwitcher={socialShareChildGlobalBgColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ socialShareChildGlobalBgColorSwitcher: value })}
+                                                    />
+
+                                                    {socialShareChildGlobalBgColorSwitcher === 'normal' && (
+                                                        <BaseControl
+                                                            className="fb-setting-background-color-setting-wrapper"
+                                                            label={__("Normal Background Type", "frontis-blocks")}
+                                                        >
+                                                            <Dropdown
+                                                                className="fb-setting-background-color-setting-icon-dropdown"
+                                                                contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+                                                                popoverProps={{ placement: 'bottom-start' }}
+                                                                renderToggle={({ isOpen, onToggle }) => (
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        onClick={onToggle}
+                                                                        aria-expanded={isOpen}
+                                                                        className="fb-setting-background-color-setting-icon-btn"
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                            <path d="M2.66699 14.666H13.3337" stroke="#1C274C" />
+                                                                            <path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C" />
+                                                                        </svg>
+                                                                    </Button>
+                                                                )}
+                                                                renderContent={() => (
+                                                                    <div className="fb-setting-background-color-popup-wrapper">
+                                                                        <BaseControl
+                                                                            className="fb-setting-background-color-popup-inner-wrapper"
+                                                                        >
+                                                                            <ButtonGroup className="fb-setting-background-color-panel-btn">
+                                                                                {BACKGROUND_TYPES.map((item) => (
+                                                                                    <Button
+                                                                                        key={item.value}
+                                                                                        onClick={() => setAttributes({ socialShareChildGlobalBgNormalBackgroundType: item.value })}
+                                                                                        className={`fb-setting-background-color-panel-btn-switcher ${socialShareChildGlobalBgNormalBackgroundType === item.value ? 'active' : ''}`}
+                                                                                    >
+                                                                                        {item.label}
+                                                                                    </Button>
+                                                                                ))}
+                                                                            </ButtonGroup>
+                                                                        </BaseControl>
+
+                                                                        {socialShareChildGlobalBgNormalBackgroundType === 'classic' && (
+
+                                                                            <>
+                                                                                <FB_ColorControl
+                                                                                    label={__("Color", "frontis-blocks")}
+                                                                                    globalColor={socialShareChildGlobalBgNormalClassicColor}
+                                                                                    setGlobalColor={(value) => setAttributes({ socialShareChildGlobalBgNormalClassicColor: value === undefined ? '' : value })}
+                                                                                />
+
+                                                                                <FB_ResponsiveBackgroundImageControl
+                                                                                    deviceType={deviceType}
+                                                                                    globalBackgroundImageUrl={socialShareChildGlobalBgNormalBackgroundImageUrl}
+                                                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ socialShareChildGlobalBgNormalBackgroundImageUrl: value })}
+                                                                                    globalBackgroundImagePosition={socialShareChildGlobalBgNormalBackgroundImagePosition}
+                                                                                    setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ socialShareChildGlobalBgNormalBackgroundImagePosition: newPosition })}
+                                                                                    globalBackgroundImageAttachment={socialShareChildGlobalBgNormalBackgroundImageAttachment}
+                                                                                    setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ socialShareChildGlobalBgNormalBackgroundImageAttachment: newAttachment })}
+                                                                                    globalBackgroundImageRepeat={socialShareChildGlobalBgNormalBackgroundImageRepeat}
+                                                                                    setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ socialShareChildGlobalBgNormalBackgroundImageRepeat: newRepeat })}
+                                                                                    globalBackgroundImageSize={socialShareChildGlobalBgNormalBackgroundImageSize}
+                                                                                    setGlobalBackgroundImageSize={(newSize) => setAttributes({ socialShareChildGlobalBgNormalBackgroundImageSize: newSize })}
+                                                                                    setAttributes={setAttributes}
+                                                                                />
+
+                                                                            </>
+                                                                        )}
+
+                                                                        {socialShareChildGlobalBgNormalBackgroundType === 'gradient' && (
+                                                                            <FB_GradientColorControl
+                                                                                globalCustomGradientSwitcher={socialShareChildGlobalBgNormalCustomGradientSwitcher}
+                                                                                setGlobalCustomGradientSwitcher={(value) => setAttributes({ socialShareChildGlobalBgNormalCustomGradientSwitcher: value })}
+                                                                                globalCustomGradientInputValue={socialShareChildGlobalBgNormalCustomGradientInputValue}
+                                                                                setGlobalCustomGradientInputValue={(value) => setAttributes({ socialShareChildGlobalBgNormalCustomGradientInputValue: value })}
+                                                                                globalGradientColor={socialShareChildGlobalBgNormalGradientColor}
+                                                                                setGlobalGradientColor={(value) => setAttributes({ socialShareChildGlobalBgNormalGradientColor: value === undefined ? null : value })}
+                                                                            />
+                                                                        )}
+                                                                    </div>
+                                                                )}
+                                                            />
+                                                        </BaseControl>
+
+                                                    )}
+
+                                                    {socialShareChildGlobalBgColorSwitcher === 'hover' && (
+                                                        <BaseControl
+                                                            className="fb-setting-background-color-setting-wrapper"
+                                                            label={__("Hover Background Type", "frontis-blocks")}
+                                                        >
+                                                            <Dropdown
+                                                                className="fb-setting-background-color-setting-icon-dropdown"
+                                                                contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+                                                                popoverProps={{ placement: 'bottom-start' }}
+                                                                renderToggle={({ isOpen, onToggle }) => (
+                                                                    <Button
+                                                                        variant="primary"
+                                                                        onClick={onToggle}
+                                                                        aria-expanded={isOpen}
+                                                                        className="fb-setting-background-color-setting-icon-btn"
+                                                                    >
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                                            <path d="M2.66699 14.666H13.3337" stroke="#1C274C" />
+                                                                            <path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C" />
+                                                                        </svg>
+                                                                    </Button>
+                                                                )}
+                                                                renderContent={() => (
+                                                                    <div className="fb-setting-background-color-popup-wrapper">
+                                                                        <BaseControl
+                                                                            className="fb-setting-background-color-popup-inner-wrapper"
+                                                                        >
+                                                                            <ButtonGroup className="fb-setting-background-color-panel-btn">
+                                                                                {BACKGROUND_TYPES.map((item) => (
+                                                                                    <Button
+                                                                                        key={item.value}
+                                                                                        onClick={() => setAttributes({ socialShareChildGlobalBgHoverBackgroundType: item.value })}
+                                                                                        className={`fb-setting-background-color-panel-btn-switcher ${socialShareChildGlobalBgHoverBackgroundType === item.value ? 'active' : ''}`}
+                                                                                    >
+                                                                                        {item.label}
+                                                                                    </Button>
+                                                                                ))}
+                                                                            </ButtonGroup>
+                                                                        </BaseControl>
+
+                                                                        {socialShareChildGlobalBgHoverBackgroundType === 'classic' && (
+
+                                                                            <>
+                                                                                <FB_ColorControl
+                                                                                    label={__("Color", "frontis-blocks")}
+                                                                                    globalColor={socialShareChildGlobalBgHoverClassicColor}
+                                                                                    setGlobalColor={(value) => setAttributes({ socialShareChildGlobalBgHoverClassicColor: value === undefined ? '' : value })}
+                                                                                />
+
+                                                                                <FB_ResponsiveBackgroundImageControl
+                                                                                    deviceType={deviceType}
+                                                                                    globalBackgroundImageUrl={socialShareChildGlobalBgHoverBackgroundImageUrl}
+                                                                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ socialShareChildGlobalBgHoverBackgroundImageUrl: value })}
+                                                                                    globalBackgroundImagePosition={socialShareChildGlobalBgHoverBackgroundImagePosition}
+                                                                                    setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ socialShareChildGlobalBgHoverBackgroundImagePosition: newPosition })}
+                                                                                    globalBackgroundImageAttachment={socialShareChildGlobalBgHoverBackgroundImageAttachment}
+                                                                                    setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ socialShareChildGlobalBgHoverBackgroundImageAttachment: newAttachment })}
+                                                                                    globalBackgroundImageRepeat={socialShareChildGlobalBgHoverBackgroundImageRepeat}
+                                                                                    setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ socialShareChildGlobalBgHoverBackgroundImageRepeat: newRepeat })}
+                                                                                    globalBackgroundImageSize={socialShareChildGlobalBgHoverBackgroundImageSize}
+                                                                                    setGlobalBackgroundImageSize={(newSize) => setAttributes({ socialShareChildGlobalBgHoverBackgroundImageSize: newSize })}
+                                                                                    setAttributes={setAttributes}
+                                                                                />
+
+                                                                            </>
+                                                                        )}
+
+                                                                        {socialShareChildGlobalBgHoverBackgroundType === 'gradient' && (
+                                                                            <FB_GradientColorControl
+                                                                                globalCustomGradientSwitcher={socialShareChildGlobalBgHoverCustomGradientSwitcher}
+                                                                                setGlobalCustomGradientSwitcher={(value) => setAttributes({ socialShareChildGlobalBgHoverCustomGradientSwitcher: value })}
+                                                                                globalCustomGradientInputValue={socialShareChildGlobalBgHoverCustomGradientInputValue}
+                                                                                setGlobalCustomGradientInputValue={(value) => setAttributes({ socialShareChildGlobalBgHoverCustomGradientInputValue: value })}
+                                                                                globalGradientColor={socialShareChildGlobalBgHoverGradientColor}
+                                                                                setGlobalGradientColor={(value) => setAttributes({ socialShareChildGlobalBgHoverGradientColor: value === undefined ? null : value })}
+                                                                            />
+                                                                        )}
+                                                                    </div>
+                                                                )}
+                                                            />
+                                                        </BaseControl>
+                                                    )}
+                                                </PanelBody>
+
+                                                <PanelBody
+                                                    title={__("Border and Shadow", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+
+                                                    <SelectControl
+                                                        label={__("Border Style", "frontis-blocks")}
+                                                        value={socialShareChildGlobalBorder}
+                                                        options={BORDER_STYLES}
+                                                        onChange={(value) => setAttributes({ socialShareChildGlobalBorder: value })}
+                                                    />
+
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Border Color", "frontis-blocks")}
+                                                        globalSwitcher={socialShareChildGlobalBorderColorSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ socialShareChildGlobalBorderColorSwitcher: value })}
+                                                    />
+
+                                                    {socialShareChildGlobalBorderColorSwitcher === 'normal' && (
+                                                        <FB_ColorControl
+                                                            label={__("Normal Color", "frontis-blocks")}
+                                                            globalColor={socialShareChildGlobalBorderColor}
+                                                            setGlobalColor={(value) => setAttributes({ socialShareChildGlobalBorderColor: value === undefined ? '' : value })}
+                                                        />
+                                                    )}
+
+                                                    {socialShareChildGlobalBorderColorSwitcher === 'hover' && (
+                                                        <FB_ColorControl
+                                                            label={__("Hover Color", "frontis-blocks")}
+                                                            globalColor={socialShareChildGlobalBorderHoverColor}
+                                                            setGlobalColor={(value) => setAttributes({ socialShareChildGlobalBorderHoverColor: value === undefined ? '' : value })}
+                                                        />
+                                                    )}
+
+                                                    <FB_Spacing
+                                                        label={__("Border", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                                                        spacingUnits={socialShareChildGlobalBorderUnits}
+                                                        spacingDesktop={socialShareChildGlobalBorderDesktop}
+                                                        spacingTablet={socialShareChildGlobalBorderTablet}
+                                                        spacingMobile={socialShareChildGlobalBorderMobile}
+                                                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                                                        spacingCombineBtn={socialShareChildGlobalBorderLink}
+                                                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_Spacing
+                                                        label={__("Border Radius", "frontis-blocks")}
+                                                        deviceType={deviceType}
+                                                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                                                        spacingUnits={socialShareChildGlobalBorderRadiusUnits}
+                                                        spacingDesktop={socialShareChildGlobalBorderRadiusDesktop}
+                                                        spacingTablet={socialShareChildGlobalBorderRadiusTablet}
+                                                        spacingMobile={socialShareChildGlobalBorderRadiusMobile}
+                                                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                                                        spacingCombineBtn={socialShareChildGlobalBorderRadiusLink}
+                                                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                    <FB_SwitcherControl
+                                                        label={__("Box Shadow", "frontis-blocks")}
+                                                        globalSwitcher={socialShareChildGlobalBoxShadowSwitcher}
+                                                        setGlobalSwitcher={(value) => setAttributes({ socialShareChildGlobalBoxShadowSwitcher: value })}
+                                                    />
+
+                                                    {socialShareChildGlobalBoxShadowSwitcher === 'normal' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Normal Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ socialShareChildGlobalBoxShadowValues: value })}
+                                                            initialShadowValue={socialShareChildGlobalBoxShadowValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ socialShareChildGlobalBoxShadowCssValue: value })}
+                                                        />
+                                                    )}
+
+                                                    {socialShareChildGlobalBoxShadowSwitcher === 'hover' && (
+                                                        <FB_BoxShadowControl
+                                                            label={__("Hover Shadow", "frontis-blocks")}
+                                                            onBoxShadowChange={(value) => setAttributes({ socialShareChildGlobalBoxShadowHoverValues: value })}
+                                                            initialShadowValue={socialShareChildGlobalBoxShadowHoverValues}
+                                                            onBoxShadowStyleChange={(value) => setAttributes({ socialShareChildGlobalBoxShadowHoverCssValue: value })}
+                                                        />
+                                                    )}
+                                                </PanelBody>
+
+                                                <PanelBody
+                                                    title={__("Responsive Control", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                    className="fb-setting-responsive-control-wrapper"
+                                                >
+                                                    <FB_VisibilityControl
+                                                        desktopValue={socialShareChildDesktopSwitcher}
+                                                        setDesktopValue={(value) => setAttributes({ socialShareChildDesktopSwitcher: value })}
+
+                                                        tabletValue={socialShareChildTabletSwitcher}
+                                                        setTabletValue={(value) => setAttributes({ socialShareChildTabletSwitcher: value })}
+
+                                                        mobileValue={socialShareChildMobileSwitcher}
+                                                        setMobileValue={(value) => setAttributes({ socialShareChildMobileSwitcher: value })}
+                                                    />
+                                                </PanelBody>
+                                                <PanelBody
+                                                    title={__("Custom CSS", "frontis-blocks")}
+                                                    initialOpen={false}
+                                                >
+                                                    <FB_CustomCSSEditor
+                                                        value={socialShareChildCustomCSS}
+                                                        onChangeValue={(value) => setAttributes({ socialShareChildCustomCSS: value })}
+                                                    />
+                                                </PanelBody>
+                                            </div>
+                                        </div>
                                     </>
                                 )}
                             </div>

@@ -7,6 +7,10 @@ const attributes = {
         type: "string",
         default: "",
     },
+    layoutType: {
+        type: "string",
+        default: "vertical",
+    },
     highlightColor: {
         type: 'string',
         default: '',
