@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,6 +197,20 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.2 – 14 November 2025 =
+- **Added**
+- `Advanced Paragraph` block.
+- `Post category` block.
+- `Post comment` block.
+- `Timezone` block.
+- `Social Share` block.
+
+- **Improved**
+- Redesigned the dashboard with a cleaner layout, improved navigation, and better overall usability.
+
+- **Compatibility**
+- Works with the latest **Gutenberg** and **WordPress**.
 
 = 1.1.1 – 07 November 2025 =
 - **Added**
