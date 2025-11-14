@@ -1,0 +1,50 @@
+{
+  "categories": [
+    {
+      "name": "Landing",
+      "slug": "landing",
+      "icon": "categories/01K3K2CK5VP4BNKEP40BD1NR40.svg",
+      "count": 1
+    },
+    {
+      "name": "Marketing",
+      "slug": "marketing",
+      "icon": "categories/01K3K2D2AWBPMB5W4M83BJJKEP.svg",
+      "count": 1
+    },
+    {
+      "name": "Beauty",
+      "slug": "beauty",
+      "icon": "categories/01K3K2DFHJ67073V5RPAZ4P11D.svg",
+      "count": 2
+    },
+    {
+      "name": "Ecommerce",
+      "slug": "ecommerce",
+      "icon": "categories/01K3K2DZZPRA9RJWCHW0NS6YS4.svg",
+      "count": 1
+    }
+  ],
+  "items": [
+    {
+      "id": 1,
+      "title": "Patterns 1",
+      "slug": "patterns-1",
+      "description": "asfd",
+      "is_premium": true,
+      "image": "patterns/01K3K2GGYWYVKKJADBR2QDRJ2B.jpg",
+      "tags": ["alpinejs", "laravel"],
+      "categories": ["Landing", "Beauty", "Ecommerce"]
+    },
+    {
+      "id": 2,
+      "title": "Pattern 2",
+      "slug": "pattern-2",
+      "description": "adsf asdf",
+      "is_premium": true,
+      "image": "patterns/01K3K2HF5P29YRYBSB85KPSXQC.jpg",
+      "tags": ["laravel", "tailwindcss", "livewire"],
+      "categories": ["Marketing", "Beauty"]
+    }
+  ]
+}
