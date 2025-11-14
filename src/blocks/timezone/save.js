@@ -24,7 +24,10 @@ export default function Save({ attributes }) {
 		openStatusText,
 		closedStatusText,
 		beforeTimeText,
-		afterTimeText
+		afterTimeText,
+		timezoneGlobalWraperID,
+		timezoneGlobalWraperClass
+
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -212,7 +215,7 @@ export default function Save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			<div className='fb-timezone-container'>
+			<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>
 				<div className='fb-timezone-wrapper'>
 					<div className='fb-location-timezone'>
 						<RichText.Content

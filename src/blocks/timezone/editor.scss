@@ -5,7 +5,7 @@
         align-items: center;
         justify-content: center;
         gap: 16px;
-        
+
         .fb-timezone-wrapper {
             width: max-content;
 
@@ -24,29 +24,37 @@
                 transition: all .3s ease-in-out;
 
                 .fb-location-name {
+                    font-family: 'Roboto', sans-serif;
                     font-size: 20px;
                     font-weight: 700;
+                    line-height: 100%;
                     text-decoration: none;
                     color: #fff;
                     transition: all .3s ease-in-out;
                 }
                 .fb-timezone-separator {
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
                     font-size: 24px;
-                    line-height: 100%;
+                    line-height: normal;
                     color: #fff;
                     transition: all .3s ease-in-out;
                 }
                 .fb-current-time {
+                    font-family: 'Roboto', sans-serif;
                     font-size: 18px;
                     font-weight: 500;
+                    line-height: 100%;
                     text-decoration: none;
                     color: #fff;
                     transition: all .3s ease-in-out;
                 }
 
                 .fb-current-timezone {
+                    font-family: 'Roboto', sans-serif;
                     font-size: 16px;
                     font-weight: 500;
+                    line-height: 100%;
                     text-decoration: none;
                     color: #a4a7ae;
                     transition: all .3s ease-in-out;
@@ -71,15 +79,14 @@
                 margin: 0px 0px 0px 0px;
 
                 .fb-timezone-status{
-                    font-family: Roboto;
+                    font-family: 'Roboto', sans-serif;
                     font-size: 16px;
                     font-weight: 500;
                     text-transform: capitalize;
                     text-decoration: none;
-                    line-height: 28px;
+                    line-height: 100%;
                     padding: 10px 20px 10px 20px;
                 }
-
                 .fb-time-pulse-open, fb-time-pulse-close{
                     display: flex;
                     justify-content: center;
@@ -87,6 +94,10 @@
                 }
 
                 .fb-time-pulse-open .fb-timezone-status{
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
+                    line-height: 100%;
                     color: #ffffff;
                     background-color: #008000;
                     border: none;
@@ -95,13 +106,27 @@
                 }
                 
                 .fb-time-pulse-close .fb-timezone-status{
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
+                    line-height: 100%;
                     color: #ffffff;
                     background-color: #FF0000;
                     border: none;
                     border-radius: 999px 999px 999px 999px;
                     transition: all .3s ease-in-out;
                 }
-                
+                .fb-timezone-status-info{
+                    display: flex;
+                    align-items: center;
+
+                    .fb-timezone-info-noted{
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 100%;
+                    }
+                }
             }
         }
     }
