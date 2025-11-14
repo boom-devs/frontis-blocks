@@ -203,7 +203,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - `Advanced Paragraph` block.
 - `Post category` block.
 - `Post comment` block.
-- `Timezone` block.
 - `Social Share` block.
 
 - **Improved**
