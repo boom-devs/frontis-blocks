@@ -535,6 +535,7 @@
             font-size: 18px;
             font-weight: $font-weight-500;
             line-height: $body-line-height;
+            outline: none;
             transition: all 0.3s ease-in-out;
       
           &:disabled {
@@ -545,8 +546,8 @@
           &.active {
             width: 44px;
             height: 44px;
-            background: $primary-color;
-            color: $white-color;
+            background: $neutral-color-100;
+            color: $neutral-color-950;
             transition: all 0.3s ease-in-out;
           }
         }
@@ -555,7 +556,7 @@
         .fb-btn-next {
             width: unset;
             height: 44px;
-            padding: 9px 16px;
+            padding: 9px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -565,15 +566,21 @@
             cursor: pointer;
             background: transparent;
             color: $neutral-color-700;
+            outline: none;
             transition: all 0.3s ease-in-out;
 
-            svg path {
-                stroke: $neutral-color-700;
-                transition: all 0.3s ease-in-out;
+            svg {
+                width: 24px;
+                height: 24px;
+
+                path {
+                    stroke: $neutral-color-700;
+                    transition: all 0.3s ease-in-out;
+                }
             }
 
             &:hover {
-                background: $neutral-color-950;
+                background: $primary-color;
                 color: $white-color;
                 border-color: transparent;
                 transition: all 0.3s ease-in-out;
