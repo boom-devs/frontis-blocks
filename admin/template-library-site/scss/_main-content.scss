@@ -1,7 +1,7 @@
 .fb-template-library-store-content-wrapper {
     flex: 6;
     position: relative;
-    height: calc(100vh - 95px);
+    height: 100%;
     max-width: 100%;
     
 
@@ -11,31 +11,14 @@
 }
 
 .fb-template-library-store-content {
-    flex: 6;
     padding: 0;
+    min-height: calc(100vh - 87px);
     height: 100%;
     position: relative;
 
-    @media only screen and (max-width: 768px) {
-        padding: 24px 0;
-    }
-
     .fb-template-library-content-header {
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-        padding: 17px 24px;
-        background-color: #3991FF;
-        border-radius: 12px;
-
-        @media only screen and (max-width: 1500px) {
-            align-items: start;
-        }
-        @media only screen and (max-width: 1024px) {
-            flex-wrap: wrap;
-            gap: 16px;
-        }
+        flex-direction: column;
 
         h2 {
             font-family: $heading-font-family;
@@ -87,56 +70,75 @@
             }
         }
 
-        .fb-template-library-content-header-right {
+        .fb-template-library-content-header-top {
             display: flex;
             align-items: center;
-            gap: 24px;
+            justify-content: space-between;
+            gap: 32px;
+            padding: 17px 24px;
+            background-color: $primary-color;
+            border-radius: 12px;
 
-            @media only screen and (max-width: 1500px) {
-                align-items: end;
+            @media only screen and (max-width: 767px) {
                 flex-direction: column;
-            }
-            @media only screen and (max-width: 1200px) {
+                align-items: start;
                 gap: 16px;
+                padding: 16px;
+                margin-bottom: 24px;
+            }
+        }
+        .fb-template-library-content-header-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 32px 0;
+
+            @media only screen and (max-width: 1024px) {
+                padding: 24px 0;
             }
             @media only screen and (max-width: 767px) {
                 display: none;
             }
 
-            .fb-template-library-search-wrapper {
-                .fb-search-input-wrapper {
-                    display: flex;
-                    align-items: center;
-                    position: relative;
-                    height: 46px;
+        }
+        .fb-template-library-search-wrapper {
+            .fb-search-input-wrapper {
+                display: flex;
+                align-items: center;
+                position: relative;
+                height: 46px;
 
-                    .fb-search-input-icon {
-                        display: flex;
-                        box-sizing: border-box;
-                        height: 38px;
-                        position: absolute;
-                        right: 4px;
-                        background: #fff;
-                        padding: 10px;
-                        border-radius: 50%;
-                        cursor: pointer;
+                .fb-search-input-icon {
+                    display: flex;
+                    box-sizing: border-box;
+                    height: 38px;
+                    position: absolute;
+                    right: 4px;
+                    background: $white-color;
+                    padding: 10px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+
+                input {
+                    font-weight: 100;
+                    font-size: 16px;
+                    line-height: 22px;
+                    background-color: transparent;
+                    color: $white-color;
+                    padding: 10px 14px;
+                    border-radius: 50px;
+                    border: 1px solid $primary-color-400;
+                    min-width: 360px;
+                    outline: none;
+
+                    @media only screen and (max-width: 575px) {
+                        min-width: 260px;
                     }
 
-                    input {
-                        font-weight: 100;
-                        font-size: 16px;
-                        line-height: 22px;
-                        background-color: transparent;
-                        color: #fff;
-                        padding: 10px 14px;
-                        border-radius: 50px;
-                        border: 1px solid #61A7FF;
-                        min-width: 360px;
-                        outline: none;
-
-                        @media only screen and (max-width: 575px) {
-                            min-width: 260px;
-                        }
+                    &::placeholder {
+                        color: $white-color;
                     }
                 }
             }
@@ -146,12 +148,11 @@
     .fb-template-library-tabs {
         display: flex;
         align-items: center;
-        justify-content: end;
         gap: 16px;
         flex-wrap: wrap;
 
-        @media only screen and (max-width: 1200px) {
-            gap: 24px;
+        @media only screen and (max-width: 767px) {
+            gap: 8px;
         }
 
         .fb-template-library-tab {
@@ -170,6 +171,12 @@
             box-shadow: none;
             transition: all 0.3s ease-in-out;
 
+            @media only screen and (max-width: 767px) {
+                font-size: 14px;
+                line-height: 20px;
+                padding: 7px 14px;
+            }
+
             &.active {
                 background-color: $white-color;
                 color: $neutral-color-950;
@@ -178,12 +185,17 @@
 
             &.nav-icon {
                 display: none;
-                padding: 0;
+                padding: 10px;
+                background: $white-color;
+                border-radius: 8px;
 
-                @media only screen and (max-width: 768px) {
+                @media only screen and (max-width: 1024px) {
                     display: flex;
                 }
-                
+
+                @media only screen and (max-width: 767px) {
+                    padding: 7px;
+                }
                 svg {
                     width: 20px;
                     height: 20px;
@@ -198,25 +210,22 @@
         justify-content: end;
         overflow: hidden;
         gap: 14px;
-        width: 360px;
-        padding: 0 32px;
+        width: 450px;
+        padding: 10px 40px;
 
-        @media only screen and (max-width: 1200px) {
-            width: 296px;
-        }
-        @media only screen and (max-width:768px) {
+        @media only screen and (max-width:767px) {
             width: 240px;
         }
 
         .fb-tag-scroll-container {
             flex: 1;
             overflow: hidden;
-            mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 4%, black 90%, transparent 100%);
         }
         
         .fb-tag-scroll-inner {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             overflow-x: auto;
             scroll-behavior: smooth;
             scrollbar-width: none;
@@ -229,7 +238,7 @@
             transform: translateY(-50%);
             width: 28px;
             height: 28px;
-            background: transparent !important;
+            background: $white-color !important;
             border: 1px solid $neutral-color-100;
             border-radius: 50%;
             display: flex;
@@ -238,7 +247,7 @@
             cursor: pointer;
             z-index: 10;
             outline: none;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease-in-out;
         
             svg {
                 width: 14px;
@@ -252,24 +261,25 @@
 
         .fb-template-library-tag-btn {
             font-family: $body-font-family;
-            font-weight: $font-weight-500;
-            font-size: $large-font-size;
-            line-height: $line-height-22;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 22px;
             color: $neutral-color-700;
-            background: $white-color;
-            padding: 10px 14px;
-            height: 44px;
             min-width: fit-content;
             border-radius: 4px;
-            border: 1px solid $neutral-color-100;
             text-transform: capitalize;
+            text-decoration: underline transparent;
+            padding: 0;
+            background: none;
+            border: none;
+            outline: none;
             cursor: pointer;
             transition: all 0.3s ease;
 
             &.active {
-                background: $primary-color-base;
-                color: $white-color;
-                border: 1px solid $primary-color-base;
+                color: $primary-color-400;
+                border: none;
+                text-decoration-color: $primary-color-400;
                 transition: all 0.3s ease;
             }
         }
@@ -279,13 +289,13 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
-        padding: 0 24px;
 
         @media only screen and (max-width: 1024px) {
             grid-template-columns: repeat(2, 1fr);
         }
         @media only screen and (max-width: 575px) {
             grid-template-columns: repeat(1, 1fr);
+            gap: 16px;
         }
 
         .fb-template-library-card {
@@ -294,8 +304,8 @@
             justify-content: start;
             width: 100%;
             background: $white-color;
-            border-radius: 14px;
             position: relative;
+            border: 1px solid $neutral-color-50;
             border-radius: 8px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -352,6 +362,8 @@
             }
 
             &:hover {
+                box-shadow: 0px 20px 40px 0px #13183514;
+
                 .fb-template-library-card-img {
                     &.scroll-img {
                         img {
@@ -420,7 +432,7 @@
             }
 
             .fb-template-library-card-content {
-                padding: 24px;
+                padding: 20px;
                 display: flex;
                 flex-direction: column;
 
@@ -489,10 +501,15 @@
         align-items: center;
         justify-content: center;
         gap: 14px;
-        margin-top: 62px;
+        margin-top: 64px;
+        margin-bottom: 90px;
 
+        @media only screen and (max-width: 1024px) {
+            margin-top: 60px;
+        }
         @media only screen and (max-width: 768px) {
             flex-wrap: wrap;
+            margin-bottom: 32px;
         }
       
         .fb-page-numbers {
