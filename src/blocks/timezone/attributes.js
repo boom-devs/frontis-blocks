@@ -534,6 +534,10 @@ const attributes = {
         default: ''
     },
 
+    showStatusSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
 	//separtor
 	showSeparatorSwitcher: {
         type: 'boolean',
@@ -1625,6 +1629,361 @@ const attributes = {
         type: 'string',
         default: ''
     },
+
+    //padding
+    timezonePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    timezoneDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    timezoneTabPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    timezoneMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    timezonePaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+
+    //margin
+	timezoneMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    timezoneDesktopMargin: {
+        type: 'object',
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    timezoneTabMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    timezoneMobileMargin: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    timezoneMarginLink : {
+        type : 'boolean',
+        default: true
+    },
+
+    /** Start Background Normal for timezone */
+	timezoneGlobalBgColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	timezoneGlobalBgNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	timezoneGlobalBgNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	timezoneGlobalBgNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	timezoneGlobalBgNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	timezoneGlobalBgNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** Bg Normal Image for fb container */
+	timezoneGlobalBgNormalBackgroundImageUrl: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneGlobalBgNormalBackgroundImagePosition: {
+        type: 'object',
+        default: {
+            Desktop: { x: '0.5', y: '0.5' },
+            Tablet: { x: '', y: '' },
+            Mobile: { x: '', y: '' }
+        }
+    },
+    timezoneGlobalBgNormalBackgroundImageAttachment: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneGlobalBgNormalBackgroundImageRepeat: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneGlobalBgNormalBackgroundImageSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
+
+	/**Bg Hover for fb timezone */
+	timezoneGlobalBgHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	timezoneGlobalBgHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	timezoneGlobalBgHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	timezoneGlobalBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	timezoneGlobalBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** Hover Image for fb timezone */
+	timezoneGlobalBgHoverBackgroundImageUrl: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	timezoneGlobalBgHoverBackgroundImagePosition: {
+		type: 'object',
+		default: {
+			Desktop: { x: '0.5', y: '0.5' },
+			Tablet: { x: '', y: '' },
+			Mobile: { x: '', y: '' }
+		}
+	},
+	timezoneGlobalBgHoverBackgroundImageAttachment: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	timezoneGlobalBgHoverBackgroundImageRepeat: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	timezoneGlobalBgHoverBackgroundImageSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	/** End Background for fb timezone */
+    /** Start Border */
+	timezoneGlobalBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	timezoneGlobalBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	timezoneGlobalBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	timezoneGlobalBorderHoverColor: {
+		type: 'string',
+	},
+	timezoneGlobalBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	timezoneGlobalBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	timezoneGlobalBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	timezoneGlobalBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	timezoneGlobalBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border Radius */
+
+	/** Start Box Shadow */
+    timezoneGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+	timezoneGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    timezoneGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    timezoneGlobalBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    timezoneGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
+    timezoneDesktopSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    timezoneTabletSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    timezoneMobileSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    timezoneCustomCSS : {
+        type: 'string',
+        default: '',
+    },
+    blockStyle: {
+        type: 'string',
+        default: '',
+    },
+    /** End Global Style */
 };
 
 export default attributes;

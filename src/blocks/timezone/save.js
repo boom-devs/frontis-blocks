@@ -26,12 +26,16 @@ export default function Save({ attributes }) {
 		beforeTimeText,
 		afterTimeText,
 		timezoneGlobalWraperID,
-		timezoneGlobalWraperClass
+		timezoneGlobalWraperClass,
+		timezoneDesktopSwitcher,
+		timezoneTabletSwitcher,
+		timezoneMobileSwitcher,
+		showStatusSwitcher
 
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `frontis-block fb-timezone-main-wrapper ${blockID}`,
+		className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneDesktopSwitcher && 'fb-desktop-responsive'} ${timezoneTabletSwitcher && 'fb-tablet-responsive'} ${timezoneMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	// Helper: format timezone for display
@@ -230,20 +234,22 @@ export default function Save({ attributes }) {
 						<span className='fb-current-timezone'>{displayTimezone}</span>
 					</div>
 				</div>
-				<div className='fb-timezone-status-wrapper'>
-					<div className='fb-timezone-status-info-box'>
-						<div
-							className={ statusType === 'open' ? 'fb-time-pulse-open' : 'fb-time-pulse-close'}
-						>
-							<span className='fb-timezone-status'>{statusText}</span>
-						</div>
-						<div className='fb-timezone-status-info'>
-							<span className='fb-timezone-info-noted'>
-								{displayMessage}
-							</span>
+				{showStatusSwitcher && (
+					<div className='fb-timezone-status-wrapper'>
+						<div className='fb-timezone-status-info-box'>
+							<div
+								className={ statusType === 'open' ? 'fb-time-pulse-open' : 'fb-time-pulse-close'}
+							>
+								<span className='fb-timezone-status'>{statusText}</span>
+							</div>
+							<div className='fb-timezone-status-info'>
+								<span className='fb-timezone-info-noted'>
+									{displayMessage}
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
+				)}
 			</div>
 		</div>
 	);
