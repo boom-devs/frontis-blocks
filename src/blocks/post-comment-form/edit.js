@@ -15,10 +15,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         loginText,
         logoutText,
         buttonText,
-
-        // commentFormWidth,
-        // commentGap,
-        // avatarSize,
         
         commentFormDesktopSwitcher,
         commentFormTabletSwitcher,
@@ -179,33 +175,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             </p>
 
                             <form className="fb-comment-form-element" id="fb_commentform">
-                                {/* <div className="fb-comment-form-author">
-                                    <input 
-                                        type="text" 
-                                        id="author" 
-                                        name="author" 
-                                        placeholder="Name *" 
-                                         
-                                    />
-                                </div>
-                                <div className="fb-comment-form-email">
-                                    <input 
-                                        type="email" 
-                                        id="email" 
-                                        name="email" 
-                                        placeholder="Email *" 
-                                        disabled 
-                                    />
-                                </div>
-                                <div className="fb-comment-form-url">
-                                    <input 
-                                        type="url" 
-                                        id="url" 
-                                        name="url" 
-                                        placeholder="Website" 
-                                        disabled 
-                                    />
-                                </div> */}
                                 <div className="fb-comment-form-comment">
                                     <textarea 
                                         id="comment" 
