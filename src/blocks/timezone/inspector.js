@@ -11,11 +11,14 @@ import {
 	DatePicker,
 	Button,
 	BaseControl,
-	TextareaControl
+	TextareaControl,
+    Dropdown,
+    ButtonGroup,
 } from '@wordpress/components';
 
 import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
-import { TIMEZONE, WEEKENDDAY, BORDER_STYLES, OVERFLOW_OP } from '@Constants/fbConstants';
+import { TIMEZONE, WEEKENDDAY, BORDER_STYLES, OVERFLOW_OP, BACKGROUND_TYPES } from '@Constants/fbConstants';
+import FB_VisibilityControl from '@Components/visibility-control';
 import Select2 from "react-select";
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Spacing from '@Components/spacing';
@@ -32,6 +35,8 @@ import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-cont
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
+import FB_GradientColorControl from '@Components/gradient-color-control';
+import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 
 import './editor.scss';
 
@@ -55,6 +60,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		weekendMessage,
 		holidayMessage,
 		useUTCTimezoneFormat,
+
+        showStatusSwitcher,
 
 		separator,
 		showSeparatorSwitcher,
@@ -364,8 +371,62 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         timezoneMobileMargin,
         timezoneMarginLink,
 
+        /** Start Background */
+        timezoneGlobalBgColorSwitcher,
+        timezoneGlobalBgNormalBackgroundType,
+        timezoneGlobalBgNormalClassicColor,
+        timezoneGlobalBgNormalGradientColor,
+        timezoneGlobalBgNormalCustomGradientSwitcher,
+        timezoneGlobalBgNormalCustomGradientInputValue,
+        timezoneGlobalBgNormalBackgroundImageUrl,
+        timezoneGlobalBgNormalBackgroundImagePosition,
+        timezoneGlobalBgNormalBackgroundImageAttachment,
+        timezoneGlobalBgNormalBackgroundImageRepeat,
+        timezoneGlobalBgNormalBackgroundImageSize,
+
+        timezoneGlobalBgHoverBackgroundType,
+        timezoneGlobalBgHoverClassicColor,
+        timezoneGlobalBgHoverGradientColor,
+        timezoneGlobalBgHoverCustomGradientSwitcher,
+        timezoneGlobalBgHoverCustomGradientInputValue,
+        timezoneGlobalBgHoverBackgroundImageUrl,
+        timezoneGlobalBgHoverBackgroundImagePosition,
+        timezoneGlobalBgHoverBackgroundImageAttachment,
+        timezoneGlobalBgHoverBackgroundImageRepeat,
+        timezoneGlobalBgHoverBackgroundImageSize,
+
+        timezoneGlobalBorder,
+        timezoneGlobalBorderColorSwitcher,
+        timezoneGlobalBorderColor,
+        timezoneGlobalBorderHoverColor,
+        timezoneGlobalBorderUnits,
+        timezoneGlobalBorderDesktop,
+        timezoneGlobalBorderTablet,
+        timezoneGlobalBorderMobile,
+        timezoneGlobalBorderLink,
+
+        timezoneGlobalBorderRadiusUnits,
+        timezoneGlobalBorderRadiusDesktop,
+        timezoneGlobalBorderRadiusTablet,
+        timezoneGlobalBorderRadiusMobile,
+        timezoneGlobalBorderRadiusLink,
+
+        timezoneGlobalBoxShadowSwitcher,
+        timezoneGlobalBoxShadowValues,
+        timezoneGlobalBoxShadowCssValue,
+        timezoneGlobalBoxShadowHoverValues,
+        timezoneGlobalBoxShadowHoverCssValue,
+
+        timezoneDesktopSwitcher,
+		timezoneTabletSwitcher,
+		timezoneMobileSwitcher,
+
+        timezoneCustomCSS,
+        blockStyle
+        /** End Global Style */
+
 	} = attributes;
-console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
+
 	const deviceType= useDeviceType();
 
 	useEffect(() => {
@@ -375,6 +436,30 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
             });
         }
     }, [clientId]);
+
+    useEffect(() => {
+        if (timezoneLocationTextFontFamily !== 'Default') {
+            loadGoogleFont(timezoneLocationTextFontFamily);
+        }
+        if (timezoneTimeTextFontFamily !== 'Default') {
+            loadGoogleFont(timezoneTimeTextFontFamily);
+        }
+        if (timezoneTextFontFamily !== 'Default') {
+            loadGoogleFont(timezoneTextFontFamily);
+        }
+        if (statusTextFontFamily !== 'Default') {
+            loadGoogleFont(statusTextFontFamily);
+        }
+        if (noticeTextFontFamily !== 'Default') {
+            loadGoogleFont(noticeTextFontFamily);
+        }
+    }, [
+        timezoneLocationTextFontFamily, 
+        timezoneTimeTextFontFamily, 
+        timezoneTextFontFamily, 
+        statusTextFontFamily, 
+        noticeTextFontFamily
+    ]);
 
 	// State variables
 	const [selectedDate, setSelectedDate] = useState('');
@@ -411,13 +496,6 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 			updates.useUTCTimezoneFormat = false;
 		}
 
-		// Initialize default messages
-		// if (!closedMessage) {
-		// 	updates.closedMessage = 'Office is closed';
-		// }
-		// if (!completionMessage) {
-		// 	updates.completionMessage = 'Office is open';
-		// }
 		if (!weekendMessage) {
 			updates.weekendMessage = 'Weekend';
 		}
@@ -440,7 +518,7 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 
 		// Initialize time texts
 		if (!beforeTimeText) {
-			updates.beforeTimeText = 'Wll start at';
+			updates.beforeTimeText = 'Will start at';
 		}
 		if (!afterTimeText) {
 			updates.afterTimeText = 'Will close at';
@@ -449,7 +527,10 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 		if (Object.keys(updates).length > 0) {
 			setAttributes(updates);
 		}
-	}, []);
+        if (beforeTimeText === 'Wll start at') {
+            setAttributes({ beforeTimeText: 'Will start at' });
+        }
+	}, [beforeTimeText]);
 
 	// Helper functions
 	const getWeekdayName = useCallback((dayNumber) => {
@@ -921,225 +1002,217 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 			</PanelBody>
 
 			{/* Status Text Settings */}
-			<PanelBody title="Status Text Settings" initialOpen={true}>
-				<TextControl
-					label="Open Status Text"
-					value={openStatusText || ''}
-					onChange={(value) => setAttributes({ openStatusText: value })}
-					placeholder="e.g., Open, Available, etc."
-				/>
-				
-				<TextControl
-					label="Closed Status Text"
-					value={closedStatusText || ''}
-					onChange={(value) => setAttributes({ closedStatusText: value })}
-					placeholder="e.g., Closed, Unavailable, etc."
-				/>
-			</PanelBody>
+            <ToggleControl
+                label={__("Show Status", "frontis-blocks")}
+                checked={showStatusSwitcher}
+                onChange={(value) => setAttributes({ showStatusSwitcher: value })}
+            />
+            
+            { showStatusSwitcher && (
+                <>
+                    <PanelBody title="Status Text Settings" initialOpen={true}>
+                        <TextControl
+                            label="Open Status Text"
+                            value={openStatusText || ''}
+                            onChange={(value) => setAttributes({ openStatusText: value })}
+                            placeholder="e.g., Open, Available, etc."
+                        />
+                        
+                        <TextControl
+                            label="Closed Status Text"
+                            value={closedStatusText || ''}
+                            onChange={(value) => setAttributes({ closedStatusText: value })}
+                            placeholder="e.g., Closed, Unavailable, etc."
+                        />
+                    </PanelBody>
 
-			{/* Time Text Settings */}
-			<PanelBody title="Time Display Text" initialOpen={true}>
-				<TextControl
-					label="Before Time Text"
-					value={beforeTimeText || ''}
-					onChange={(value) => setAttributes({ beforeTimeText: value })}
-					placeholder="e.g., Start at, Opens at, etc."
-				/>
-				
-				<TextControl
-					label="After Time Text"
-					value={afterTimeText || ''}
-					onChange={(value) => setAttributes({ afterTimeText: value })}
-					placeholder="e.g., Will close at, Closes at, etc."
-				/>
-			</PanelBody>
+                    <PanelBody title="Time Display Text" initialOpen={true}>
+                        <TextControl
+                            label="Before Time Text"
+                            value={beforeTimeText || ''}
+                            onChange={(value) => setAttributes({ beforeTimeText: value })}
+                            placeholder="e.g., Start at, Opens at, etc."
+                        />
+                        
+                        <TextControl
+                            label="After Time Text"
+                            value={afterTimeText || ''}
+                            onChange={(value) => setAttributes({ afterTimeText: value })}
+                            placeholder="e.g., Will close at, Closes at, etc."
+                        />
+                    </PanelBody>
 
-			{/* Office Hours Schedule */}
-			<PanelBody title="Office Hours Schedule" initialOpen={true}>
-				<BaseControl>
-					<ToggleControl
-						label="Use Monthly Schedule"
-						checked={!!useMonthlySchedule}
-						onChange={(value) => setAttributes({ useMonthlySchedule: value })}
-					/>
-				</BaseControl>
+                    <PanelBody title="Office Hours Schedule" initialOpen={true}>
+                        <BaseControl>
+                            <ToggleControl
+                                label="Use Monthly Schedule"
+                                checked={!!useMonthlySchedule}
+                                onChange={(value) => setAttributes({ useMonthlySchedule: value })}
+                            />
+                        </BaseControl>
 
-				{!useMonthlySchedule && (
-					<>
-						<TimePickerField
-							label="Start Time"
-							value={startTime}
-							onChange={(value) => setAttributes({ startTime: value })}
-						/>
-						<TimePickerField
-							label="End Time"
-							value={endTime}
-							onChange={(value) => setAttributes({ endTime: value })}
-						/>
-					</>
-				)}
-			</PanelBody>
+                        {!useMonthlySchedule && (
+                            <>
+                                <TimePickerField
+                                    label="Start Time"
+                                    value={startTime}
+                                    onChange={(value) => setAttributes({ startTime: value })}
+                                />
+                                <TimePickerField
+                                    label="End Time"
+                                    value={endTime}
+                                    onChange={(value) => setAttributes({ endTime: value })}
+                                />
+                            </>
+                        )}
+                    </PanelBody>
 
-			{/* Monthly Schedule */}
-			{useMonthlySchedule && (
-				<PanelBody title="Monthly Schedule" initialOpen={true}>
-					<div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
-						<BaseControl label="Add Month Schedule">
-							<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-								<div style={{ flex: 1 }}>
-									<Select2
-										options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
-										value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
-										onChange={(opt) => setSelectedMonth(opt?.value || '')}
-										isClearable={false}
-										className="fb-select2-control"
-									/>
-								</div>
-								<Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
-									Add Schedule
-								</Button>
-							</div>
-						</BaseControl>
-					</div>
-					{monthlySchedules && monthlySchedules.length > 0 ? (
-						<div>
-							<strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
-							<div style={{ marginTop: '10px', borderRadius: '4px' }}>
-								{monthlySchedules.map(schedule => (
-									<div key={schedule.month} style={{ padding: '4px', margin: '5px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
-										<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-											<strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
-												{monthOptions.find(m => m.value === schedule.month)?.label}
-											</strong>
-											<Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
-												Remove
-											</Button>
-										</div>
-										<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-											<BaseControl label="Start Time">
-												<TimePickerField
-													value={schedule.startTime}
-													onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
-												/>
-											</BaseControl>
-											<BaseControl label="End Time">
-												<TimePickerField
-													value={schedule.endTime}
-													onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
-												/>
-											</BaseControl>
-										</div>
-									</div>
-								))}
-							</div>
-						</div>
-					) : (
-						<div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
-							<p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
-							<p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
-						</div>
-					)}
-				</PanelBody>
-			)}
+                    {useMonthlySchedule && (
+                        <PanelBody title="Monthly Schedule" initialOpen={true}>
+                            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
+                                <BaseControl label="Add Month Schedule">
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                                        <div style={{ flex: 1 }}>
+                                            <Select2
+                                                options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
+                                                value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
+                                                onChange={(opt) => setSelectedMonth(opt?.value || '')}
+                                                isClearable={false}
+                                                className="fb-select2-control"
+                                            />
+                                        </div>
+                                        <Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
+                                            Add Schedule
+                                        </Button>
+                                    </div>
+                                </BaseControl>
+                            </div>
+                            {monthlySchedules && monthlySchedules.length > 0 ? (
+                                <div>
+                                    <strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
+                                    <div style={{ marginTop: '10px', borderRadius: '4px' }}>
+                                        {monthlySchedules.map(schedule => (
+                                            <div key={schedule.month} style={{ padding: '4px', margin: '5px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                                    <strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
+                                                        {monthOptions.find(m => m.value === schedule.month)?.label}
+                                                    </strong>
+                                                    <Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
+                                                        Remove
+                                                    </Button>
+                                                </div>
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                                                    <BaseControl label="Start Time">
+                                                        <TimePickerField
+                                                            value={schedule.startTime}
+                                                            onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
+                                                        />
+                                                    </BaseControl>
+                                                    <BaseControl label="End Time">
+                                                        <TimePickerField
+                                                            value={schedule.endTime}
+                                                            onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
+                                                        />
+                                                    </BaseControl>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
+                                    <p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
+                                    <p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
+                                </div>
+                            )}
+                        </PanelBody>
+                    )}
 
-			{/* Off Day Settings */}
-			<PanelBody title="Off Day Settings" initialOpen={false}>
-				<BaseControl label="Add Weekend Day">
-					<Select2
-						options={WEEKENDDAY}
-						value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
-						onChange={(selectedOptions) => {
-							const daysArray = Array.isArray(selectedOptions) ? selectedOptions.map(opt => opt.value) : [];
-							setAttributes({ weekendDays: daysArray });
-						}}
-						isMulti={true}
-						isClearable={true}
-						className="fb-select2-control"
-					/>
-				</BaseControl>
-				<BaseControl label="Add Holiday Date">
-					<div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-						<DatePicker 
-							currentDate={selectedDate} 
-							onChange={setSelectedDate}
-							__nextRemoveHelpButton
-							__nextRemoveResetButton
-						/>
-						<Button onClick={() => addHoliday(selectedDate)} disabled={!selectedDate}>
-							Add Holiday
-						</Button>
-					</div>
-				</BaseControl>
+                    {/* Off Day Settings */}
+                    <PanelBody title="Off Day Settings" initialOpen={false}>
+                        <BaseControl label="Add Weekend Day">
+                            <Select2
+                                options={WEEKENDDAY}
+                                value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
+                                onChange={(selectedOptions) => {
+                                    const daysArray = Array.isArray(selectedOptions) ? selectedOptions.map(opt => opt.value) : [];
+                                    setAttributes({ weekendDays: daysArray });
+                                }}
+                                isMulti={true}
+                                isClearable={true}
+                                className="fb-select2-control"
+                            />
+                        </BaseControl>
+                        <BaseControl label="Add Holiday Date">
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                                <DatePicker 
+                                    currentDate={selectedDate} 
+                                    onChange={setSelectedDate}
+                                    __nextRemoveHelpButton
+                                    __nextRemoveResetButton
+                                />
+                                <Button onClick={() => addHoliday(selectedDate)} disabled={!selectedDate}>
+                                    Add Holiday
+                                </Button>
+                            </div>
+                        </BaseControl>
 
-				{holidays && holidays.length > 0 && (
-					<div style={{ marginTop: '15px' }}>
-						<strong>Holidays ({holidays.length}):</strong>
-						<div style={{ maxHeight: '150px', overflowY: 'auto', marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px' }}>
-							{holidays.map(holiday => (
-								<div key={holiday} style={{ 
-									display: 'flex', 
-									justifyContent: 'space-between', 
-									alignItems: 'center', 
-									padding: '8px',
-									borderBottom: '1px solid #f0f0f0',
-									backgroundColor: '#fff'
-								}}>
-									<div>
-										<span style={{ fontWeight: '600', display: 'block' }}>
-											{new Date(holiday).toLocaleDateString('en-US', { 
-												weekday: 'long', 
-												year: 'numeric', 
-												month: 'long', 
-												day: 'numeric' 
-											})}
-										</span>
-										<span style={{ fontSize: '0.8em', color: '#666' }}>
-											{new Date(holiday).toLocaleDateString()}
-										</span>
-									</div>
-									<Button 
-										isDestructive
-										onClick={() => removeHoliday(holiday)}
-									>
-										Remove
-									</Button>
-								</div>
-							))}
-						</div>
-					</div>
-				)}
-			</PanelBody>
+                        {holidays && holidays.length > 0 && (
+                            <div style={{ marginTop: '15px' }}>
+                                <strong>Holidays ({holidays.length}):</strong>
+                                <div style={{ maxHeight: '150px', overflowY: 'auto', marginTop: '10px', border: '1px solid #ddd', padding: '10px', borderRadius: '4px' }}>
+                                    {holidays.map(holiday => (
+                                        <div key={holiday} style={{ 
+                                            display: 'flex', 
+                                            justifyContent: 'space-between', 
+                                            alignItems: 'center', 
+                                            padding: '8px',
+                                            borderBottom: '1px solid #f0f0f0',
+                                            backgroundColor: '#fff'
+                                        }}>
+                                            <div>
+                                                <span style={{ fontWeight: '600', display: 'block' }}>
+                                                    {new Date(holiday).toLocaleDateString('en-US', { 
+                                                        weekday: 'long', 
+                                                        year: 'numeric', 
+                                                        month: 'long', 
+                                                        day: 'numeric' 
+                                                    })}
+                                                </span>
+                                                <span style={{ fontSize: '0.8em', color: '#666' }}>
+                                                    {new Date(holiday).toLocaleDateString()}
+                                                </span>
+                                            </div>
+                                            <Button 
+                                                isDestructive
+                                                onClick={() => removeHoliday(holiday)}
+                                            >
+                                                Remove
+                                            </Button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+                    </PanelBody>
 
-			{/* Timezone info */}
-			<PanelBody title="Office Notice" initialOpen={false}>
-				{/* <TextareaControl
-					label="Set Closed Info"
-					value={closedMessage || ''}
-					onChange={(value) => setAttributes({ closedMessage: value })}
-					placeholder="Office is closed"
-				/> */}
-				
-				{/* <TextareaControl
-					label="Set Open Info"
-					value={completionMessage || ''}
-					onChange={(value) => setAttributes({ completionMessage: value })}
-					placeholder="Office is open"
-				/> */}
-				
-				<TextareaControl
-					label="Set Weekend Info"
-					value={weekendMessage || ''}
-					onChange={(value) => setAttributes({ weekendMessage: value })}
-					placeholder="Weekend"
-				/>
-				
-				<TextareaControl
-					label="Set Holiday Info"
-					value={holidayMessage || ''}
-					onChange={(value) => setAttributes({ holidayMessage: value })}
-					placeholder="Holiday"
-				/>
-			</PanelBody>
+                    <PanelBody title="Office Notice" initialOpen={false}>
+                        <TextareaControl
+                            label="Set Weekend Info"
+                            value={weekendMessage || ''}
+                            onChange={(value) => setAttributes({ weekendMessage: value })}
+                            placeholder="Weekend"
+                        />
+                        <TextareaControl
+                            label="Set Holiday Info"
+                            value={holidayMessage || ''}
+                            onChange={(value) => setAttributes({ holidayMessage: value })}
+                            placeholder="Holiday"
+                        />
+                    </PanelBody>
+                </>
+            )}
+			
 		</>
     );
 	// Inspector General Control End
@@ -2126,6 +2199,405 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
     };
 	// End Status ON Border, radius, box-shadow style
 
+    // Timezone padding & margin style start
+    //padding
+	const handleTimezoneGlobalPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            timezonePaddingUnits: {
+                ...timezonePaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const handleTimezoneGlobalPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (timezonePaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        timezoneDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        timezoneTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        timezoneMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ timezoneDesktopPadding: { ...timezoneDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ timezoneTabPadding: { ...timezoneTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ timezoneMobilePadding: { ...timezoneMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const handleTimezoneGlobalPaddingCombineBtn = () => {
+        setAttributes({
+            timezonePaddingLink: !timezonePaddingLink
+        });
+    };
+	const timezoneDesktopPaddingWidth = `${timezoneDesktopPadding?.top}${timezonePaddingUnits?.Desktop} ${timezoneDesktopPadding?.right}${timezonePaddingUnits?.Desktop} ${timezoneDesktopPadding?.bottom}${timezonePaddingUnits?.Desktop} ${timezoneDesktopPadding?.left}${timezonePaddingUnits?.Desktop}`;
+    const timezoneTabletPaddingWidth = `${timezoneTabPadding?.top}${timezonePaddingUnits?.Tablet} ${timezoneTabPadding?.right}${timezonePaddingUnits?.Tablet} ${timezoneTabPadding?.bottom}${timezonePaddingUnits?.Tablet} ${timezoneTabPadding?.left}${timezonePaddingUnits?.Tablet}`;
+    const timezoneMobilePaddingWidth = `${timezoneMobilePadding?.top}${timezonePaddingUnits?.Mobile} ${timezoneMobilePadding?.right}${timezonePaddingUnits?.Mobile} ${timezoneMobilePadding?.bottom}${timezonePaddingUnits?.Mobile} ${timezoneMobilePadding?.left}${timezonePaddingUnits?.Mobile}`;
+
+    //margin
+    const handleTimezoneMarginUnits = (unit) => {
+        setAttributes({
+            timezoneMarginUnits: {
+                ...timezoneMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+
+	const handleTimezoneMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (timezoneMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        timezoneDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        timezoneTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        timezoneMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ timezoneDesktopMargin: { ...timezoneDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ timezoneTabMargin: { ...timezoneTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ timezoneMobileMargin: { ...timezoneMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+	const handleTimezoneMarginLinkBtn = () => {
+        setAttributes({
+            timezoneMarginLink: !timezoneMarginLink
+        });
+    };
+
+	const timezoneDesktopMarginWidth = `${timezoneDesktopMargin?.top}${timezoneMarginUnits?.Desktop} ${timezoneDesktopMargin?.right}${timezoneMarginUnits?.Desktop} ${timezoneDesktopMargin?.bottom}${timezoneMarginUnits?.Desktop} ${timezoneDesktopMargin?.left}${timezoneMarginUnits?.Desktop}`;
+
+    const timezoneTabletMarginWidth = `${timezoneTabMargin?.top}${timezoneMarginUnits?.Tablet} ${timezoneTabMargin?.right}${timezoneMarginUnits?.Tablet} ${timezoneTabMargin?.bottom}${timezoneMarginUnits?.Tablet} ${timezoneTabMargin?.left}${timezoneMarginUnits?.Tablet}`;
+
+    const timezoneMobileMarginWidth = `${timezoneMobileMargin?.top}${timezoneMarginUnits?.Mobile} ${timezoneMobileMargin?.right}${timezoneMarginUnits?.Mobile} ${timezoneMobileMargin?.bottom}${timezoneMarginUnits?.Mobile} ${timezoneMobileMargin?.left}${timezoneMarginUnits?.Mobile}`;
+
+    // Timezone padding & margin style end
+
+    /** Start Global border */
+	const handleGlobalBorderUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( timezoneGlobalBorderLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						timezoneGlobalBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						timezoneGlobalBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						timezoneGlobalBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {timezoneGlobalBorderDesktop: {...timezoneGlobalBorderDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {timezoneGlobalBorderTablet: {...timezoneGlobalBorderTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {timezoneGlobalBorderMobile: {...timezoneGlobalBorderMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleGlobalBorderCombineBtn = () => {
+		setAttributes( {timezoneGlobalBorderLink: !timezoneGlobalBorderLink} );
+	}
+
+	const handleGlobalBorderUnitsHandler = (unit) => {
+		setAttributes( {
+			timezoneGlobalBorderUnits: {
+				...timezoneGlobalBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	const globalDesktopBorderWidth = `${timezoneGlobalBorderDesktop?.top}${timezoneGlobalBorderUnits?.Desktop} ${timezoneGlobalBorderDesktop?.right}${timezoneGlobalBorderUnits?.Desktop} ${timezoneGlobalBorderDesktop?.bottom}${timezoneGlobalBorderUnits?.Desktop} ${timezoneGlobalBorderDesktop?.left}${timezoneGlobalBorderUnits?.Desktop}`;
+	const globalTabletBorderWidth = `${timezoneGlobalBorderTablet?.top}${timezoneGlobalBorderUnits?.Tablet} ${timezoneGlobalBorderTablet?.right}${timezoneGlobalBorderUnits?.Tablet} ${timezoneGlobalBorderTablet?.bottom}${timezoneGlobalBorderUnits?.Tablet} ${timezoneGlobalBorderTablet?.left}${timezoneGlobalBorderUnits?.Tablet}`;
+	const globalMobileBorderWidth = `${timezoneGlobalBorderMobile?.top}${timezoneGlobalBorderUnits?.Mobile} ${timezoneGlobalBorderMobile?.right}${timezoneGlobalBorderUnits?.Mobile} ${timezoneGlobalBorderMobile?.bottom}${timezoneGlobalBorderUnits?.Mobile} ${timezoneGlobalBorderMobile?.left}${timezoneGlobalBorderUnits?.Mobile}`;
+	/** End Border */
+
+	/** Start Global border radius*/
+	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
+		const value = event.target.value;
+		if ( timezoneGlobalBorderRadiusLink ) {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {
+						timezoneGlobalBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Tablet':
+					setAttributes( {
+						timezoneGlobalBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				case 'Mobile':
+					setAttributes( {
+						timezoneGlobalBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					} );
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch ( deviceType ) {
+				case 'Desktop':
+					setAttributes( {timezoneGlobalBorderRadiusDesktop: {...timezoneGlobalBorderRadiusDesktop, [position]: value}} );
+					break;
+				case 'Tablet':
+					setAttributes( {timezoneGlobalBorderRadiusTablet: {...timezoneGlobalBorderRadiusTablet, [position]: value}} );
+					break;
+				case 'Mobile':
+					setAttributes( {timezoneGlobalBorderRadiusMobile: {...timezoneGlobalBorderRadiusMobile, [position]: value}} );
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleGlobalBorderRadiusCombineBtn = () => {
+		setAttributes( {timezoneGlobalBorderRadiusLink: !timezoneGlobalBorderRadiusLink} );
+	}
+
+	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
+		setAttributes( {
+			timezoneGlobalBorderRadiusUnits: {
+				...timezoneGlobalBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Global border */
+
+	/** End Global Border Radius */
+	const globalDesktopBorderRadiusWidth = `${timezoneGlobalBorderRadiusDesktop?.top}${timezoneGlobalBorderRadiusUnits?.Desktop} ${timezoneGlobalBorderRadiusDesktop?.right}${timezoneGlobalBorderRadiusUnits?.Desktop} ${timezoneGlobalBorderRadiusDesktop?.bottom}${timezoneGlobalBorderRadiusUnits?.Desktop} ${timezoneGlobalBorderRadiusDesktop?.left}${timezoneGlobalBorderRadiusUnits?.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${timezoneGlobalBorderRadiusTablet?.top}${timezoneGlobalBorderRadiusUnits?.Tablet} ${timezoneGlobalBorderRadiusTablet?.right}${timezoneGlobalBorderRadiusUnits?.Tablet} ${timezoneGlobalBorderRadiusTablet?.bottom}${timezoneGlobalBorderRadiusUnits?.Tablet} ${timezoneGlobalBorderRadiusTablet?.left}${timezoneGlobalBorderRadiusUnits?.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${timezoneGlobalBorderRadiusMobile?.top}${timezoneGlobalBorderRadiusUnits?.Mobile} ${timezoneGlobalBorderRadiusMobile?.right}${timezoneGlobalBorderRadiusUnits?.Mobile} ${timezoneGlobalBorderRadiusMobile?.bottom}${timezoneGlobalBorderRadiusUnits?.Mobile} ${timezoneGlobalBorderRadiusMobile?.left}${timezoneGlobalBorderRadiusUnits?.Mobile}`;
+	/** End Border Radius */
+
+
+     /**
+     * Get background normal styles
+     */
+	const getBackgroundNormalStyles = (device) => {
+		const bgType = timezoneGlobalBgNormalBackgroundType;
+		const bgColor = timezoneGlobalBgNormalClassicColor;
+		const bgGradient = timezoneGlobalBgNormalGradientColor;
+		const customGradient =timezoneGlobalBgNormalCustomGradientInputValue;
+		const customGradientEnabled = timezoneGlobalBgNormalCustomGradientSwitcher;
+
+		const bgImageUrl = timezoneGlobalBgNormalBackgroundImageUrl?.[device];
+		const bgImagePosition = timezoneGlobalBgNormalBackgroundImagePosition?.[device];
+		const bgAttachment = timezoneGlobalBgNormalBackgroundImageAttachment?.[device];
+		const bgRepeat = timezoneGlobalBgNormalBackgroundImageRepeat?.[device];
+		const bgSize = timezoneGlobalBgNormalBackgroundImageSize?.[device];  
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+	/**
+	 * Get background hover styles
+	 */
+	const getBackgroundHoverStyles = (device) => {
+		const bgType = timezoneGlobalBgHoverBackgroundType;
+		const bgColor = timezoneGlobalBgHoverClassicColor;
+		const bgGradient = timezoneGlobalBgHoverGradientColor;
+		const customGradient = timezoneGlobalBgHoverCustomGradientInputValue;
+		const customGradientEnabled = timezoneGlobalBgHoverCustomGradientSwitcher;
+
+		const bgImageUrl = timezoneGlobalBgHoverBackgroundImageUrl?.[device];
+		const bgImagePosition = timezoneGlobalBgHoverBackgroundImagePosition?.[device];
+		const bgAttachment = timezoneGlobalBgHoverBackgroundImageAttachment?.[device];
+		const bgRepeat = timezoneGlobalBgHoverBackgroundImageRepeat?.[device];
+		const bgSize = timezoneGlobalBgHoverBackgroundImageSize?.[device];
+
+		if (bgType === 'gradient') {
+			return {
+				background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
+			};
+		}
+
+		let styles = { background: bgColor };
+
+		if (bgType !== 'gradient' && bgImageUrl) {
+			styles = {
+				...styles,
+				'background-image': `url(${bgImageUrl})`,
+				'background-position': bgImagePosition
+					? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
+					: "50% 50%",
+				'background-attachment': bgAttachment || undefined,
+				'background-repeat': bgRepeat || undefined,
+				'background-size': bgSize || undefined,
+			};
+		}
+
+		return styles;
+	};
+
+
+    /**
+     * Convert object to string
+     */
+    const backgroundStyleObjectToString = (styleObj) =>
+        Object.entries(styleObj)
+          .map(([key, value]) => `${key}: ${value};`)
+          .join(' ');
+
+
+      const desktopBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Desktop'));
+      const desktopBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Desktop'));
+      const tabletBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Tablet'));
+      const tabletBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Tablet'));
+      const mobileBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Mobile'));
+      const mobileBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Mobile'));
+
     /**
      * Convert object to string
     */
@@ -2141,6 +2613,25 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 
             ${timezoneGlobalZIndex?.Desktop ? `z-index: ${timezoneGlobalZIndex?.Desktop};` : ''}
             ${timezoneOverflow !== 'default' ? `overflow: ${timezoneOverflow};` : ''}
+        }
+        
+        .${blockID}.fb-timezone-main-wrapper .fb-timezone-container {
+            ${desktopBackgroundNormalStyles}
+            ${timezoneDesktopPaddingWidth && timezoneDesktopPadding?.top ? `padding: ${timezoneDesktopPaddingWidth};` : ''}
+            ${timezoneDesktopMarginWidth && timezoneDesktopMargin?.top ? `margin: ${timezoneDesktopMarginWidth};` : ''}
+            ${timezoneGlobalBorder ? `border: ${timezoneGlobalBorder};` : ''}
+            ${globalDesktopBorderWidth && timezoneGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
+            ${globalDesktopBorderRadiusWidth && timezoneGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
+            ${timezoneGlobalBorderColor ? `border-color: ${timezoneGlobalBorderColor};` : ''}
+            ${timezoneGlobalBoxShadowCssValue ? `box-shadow: ${timezoneGlobalBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
+        .${blockID}.fb-timezone-main-wrapper .fb-timezone-container:hover {
+            ${desktopBackgroundHoverStyles}
+            ${timezoneGlobalBorderHoverColor ? `border-color: ${timezoneGlobalBorderHoverColor};` : ''}
+            ${timezoneGlobalBoxShadowHoverCssValue ? `box-shadow: ${timezoneGlobalBoxShadowHoverCssValue};` : ''}
+            transition: all .3s ease-in-out;
         }
 
 		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
@@ -2729,13 +3220,68 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
         timezoneMobileMargin,
         timezoneMarginLink,
 
+        /** Start Background */
+        timezoneGlobalBgColorSwitcher,
+        timezoneGlobalBgNormalBackgroundType,
+        timezoneGlobalBgNormalClassicColor,
+        timezoneGlobalBgNormalGradientColor,
+        timezoneGlobalBgNormalCustomGradientSwitcher,
+        timezoneGlobalBgNormalCustomGradientInputValue,
+        timezoneGlobalBgNormalBackgroundImageUrl,
+        timezoneGlobalBgNormalBackgroundImagePosition,
+        timezoneGlobalBgNormalBackgroundImageAttachment,
+        timezoneGlobalBgNormalBackgroundImageRepeat,
+        timezoneGlobalBgNormalBackgroundImageSize,
+
+        timezoneGlobalBgHoverBackgroundType,
+        timezoneGlobalBgHoverClassicColor,
+        timezoneGlobalBgHoverGradientColor,
+        timezoneGlobalBgHoverCustomGradientSwitcher,
+        timezoneGlobalBgHoverCustomGradientInputValue,
+        timezoneGlobalBgHoverBackgroundImageUrl,
+        timezoneGlobalBgHoverBackgroundImagePosition,
+        timezoneGlobalBgHoverBackgroundImageAttachment,
+        timezoneGlobalBgHoverBackgroundImageRepeat,
+        timezoneGlobalBgHoverBackgroundImageSize,
+
+        timezoneGlobalBorder,
+        timezoneGlobalBorderColorSwitcher,
+        timezoneGlobalBorderColor,
+        timezoneGlobalBorderHoverColor,
+        timezoneGlobalBorderUnits,
+        timezoneGlobalBorderDesktop,
+        timezoneGlobalBorderTablet,
+        timezoneGlobalBorderMobile,
+        timezoneGlobalBorderLink,
+
+        timezoneGlobalBorderRadiusUnits,
+        timezoneGlobalBorderRadiusDesktop,
+        timezoneGlobalBorderRadiusTablet,
+        timezoneGlobalBorderRadiusMobile,
+        timezoneGlobalBorderRadiusLink,
+
+        timezoneGlobalBoxShadowSwitcher,
+        timezoneGlobalBoxShadowValues,
+        timezoneGlobalBoxShadowCssValue,
+        timezoneGlobalBoxShadowHoverValues,
+        timezoneGlobalBoxShadowHoverCssValue,
+
+        timezoneDesktopSwitcher,
+		timezoneTabletSwitcher,
+		timezoneMobileSwitcher,
+
+        timezoneCustomCSS,
+        blockStyle
+        /** End Global Style */
 	]);
 
-	useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle] );
+    const customCss = getCustomCss(timezoneCustomCSS, `.${blockID}`);
 
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+	useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle, customCss] );
+
+    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
 	
 	/**
@@ -3059,7 +3605,7 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 				/> 
 			</PanelBody>
 
-			<PanelBody title={__("Time Card", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Time Info", "frontis-blocks")} initialOpen={false}>
 				<FB_ResponsiveAlignmentControl
 					label={__("Alignment", "frontis-blocks")}
 					globalAlignment={timezoneTextAlignment}
@@ -3759,41 +4305,41 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                             label={__("Padding", "frontis-blocks")}
                             deviceType={deviceType}
                             spacingUnitsHandler={handleTimezoneGlobalPaddingUnitsHandler}
-                            spacingUnits={timezoneGlobalPaddingUnits}
-                            spacingDesktop={timezoneGlobalPaddingDesktop}
-                            spacingTablet={timezoneGlobalPaddingTablet}
-                            spacingMobile={timezoneGlobalPaddingMobile}
+                            spacingUnits={timezonePaddingUnits}
+                            spacingDesktop={timezoneDesktopPadding}
+                            spacingTablet={timezoneTabPadding}
+                            spacingMobile={timezoneMobilePadding}
                             handleSpacingUnitHandler={handleTimezoneGlobalPaddingUnitChange}
-                            spacingCombineBtn={timezoneGlobalPaddingLink}
+                            spacingCombineBtn={timezonePaddingLink}
                             spacingCombineBtnHandler={handleTimezoneGlobalPaddingCombineBtn}
                             setAttributes={setAttributes}
                         />
-                        {/* <FB_Spacing
+                        <FB_Spacing
                             label={__("Margin", "frontis-blocks")}
                             deviceType={deviceType}
-                            spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-                            spacingUnits={headingGlobalMarginUnits}
-                            spacingDesktop={headingGlobalMarginDesktop}
-                            spacingTablet={headingGlobalMarginTablet}
-                            spacingMobile={headingGlobalMarginMobile}
-                            handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-                            spacingCombineBtn={headingGlobalMarginLink}
-                            spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                            spacingUnitsHandler={handleTimezoneMarginUnits}
+                            spacingUnits={timezoneMarginUnits}
+                            spacingDesktop={timezoneDesktopMargin}
+                            spacingTablet={timezoneTabMargin}
+                            spacingMobile={timezoneMobileMargin}
+                            handleSpacingUnitHandler={handleTimezoneMarginUnitsChange}
+                            spacingCombineBtn={timezoneMarginLink}
+                            spacingCombineBtnHandler={handleTimezoneMarginLinkBtn}
                             setAttributes={setAttributes}
-                        /> */}
+                        />
                     </PanelBody>
 
-                    {/* <PanelBody
+                    <PanelBody
                         title={__("Background", "frontis-blocks")}
                         initialOpen={false}
                     >
                         <FB_SwitcherControl
                             label={__("Background Type", "frontis-blocks")}
-                            globalSwitcher={headingGlobalBgColorSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
+                            globalSwitcher={timezoneGlobalBgColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ timezoneGlobalBgColorSwitcher: value })}
                         />
 
-                        {headingGlobalBgColorSwitcher === 'normal' && (
+                        {timezoneGlobalBgColorSwitcher === 'normal' && (
                             <BaseControl
                                 className="fb-setting-background-color-setting-wrapper"
                                 label={__("Normal Background Type", "frontis-blocks")}
@@ -3824,8 +4370,8 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                                                     {BACKGROUND_TYPES.map((item) => (
                                                         <Button
                                                             key={item.value}
-                                                            onClick={() => setAttributes({ headingGlobalBgNormalBackgroundType: item.value })}
-                                                            className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgNormalBackgroundType === item.value ? 'active' : ''}`}
+                                                            onClick={() => setAttributes({ timezoneGlobalBgNormalBackgroundType: item.value })}
+                                                            className={`fb-setting-background-color-panel-btn-switcher ${timezoneGlobalBgNormalBackgroundType === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -3833,41 +4379,41 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                                                 </ButtonGroup>
                                             </BaseControl>
 
-                                            {headingGlobalBgNormalBackgroundType === 'classic' && (
+                                            {timezoneGlobalBgNormalBackgroundType === 'classic' && (
 
                                                 <>
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
-                                                        globalColor={headingGlobalBgNormalClassicColor}
-                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgNormalClassicColor: value === undefined ? '' : value })}
+                                                        globalColor={timezoneGlobalBgNormalClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ timezoneGlobalBgNormalClassicColor: value === undefined ? '' : value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
                                                         deviceType={deviceType}
-                                                        globalBackgroundImageUrl={headingGlobalBgNormalBackgroundImageUrl}
-                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgNormalBackgroundImageUrl: value })}
-                                                        globalBackgroundImagePosition={headingGlobalBgNormalBackgroundImagePosition}
-                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgNormalBackgroundImagePosition: newPosition })}
-                                                        globalBackgroundImageAttachment={headingGlobalBgNormalBackgroundImageAttachment}
-                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgNormalBackgroundImageAttachment: newAttachment })}
-                                                        globalBackgroundImageRepeat={headingGlobalBgNormalBackgroundImageRepeat}
-                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgNormalBackgroundImageRepeat: newRepeat })}
-                                                        globalBackgroundImageSize={headingGlobalBgNormalBackgroundImageSize}
-                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgNormalBackgroundImageSize: newSize })}
+                                                        globalBackgroundImageUrl={timezoneGlobalBgNormalBackgroundImageUrl}
+                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ timezoneGlobalBgNormalBackgroundImageUrl: value })}
+                                                        globalBackgroundImagePosition={timezoneGlobalBgNormalBackgroundImagePosition}
+                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ timezoneGlobalBgNormalBackgroundImagePosition: newPosition })}
+                                                        globalBackgroundImageAttachment={timezoneGlobalBgNormalBackgroundImageAttachment}
+                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ timezoneGlobalBgNormalBackgroundImageAttachment: newAttachment })}
+                                                        globalBackgroundImageRepeat={timezoneGlobalBgNormalBackgroundImageRepeat}
+                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ timezoneGlobalBgNormalBackgroundImageRepeat: newRepeat })}
+                                                        globalBackgroundImageSize={timezoneGlobalBgNormalBackgroundImageSize}
+                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ timezoneGlobalBgNormalBackgroundImageSize: newSize })}
                                                         setAttributes={setAttributes}
                                                     />
 
                                                 </>
                                             )}
 
-                                            {headingGlobalBgNormalBackgroundType === 'gradient' && (
+                                            {timezoneGlobalBgNormalBackgroundType === 'gradient' && (
                                                 <FB_GradientColorControl
-                                                    globalCustomGradientSwitcher={headingGlobalBgNormalCustomGradientSwitcher}
-                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgNormalCustomGradientSwitcher: value })}
-                                                    globalCustomGradientInputValue={headingGlobalBgNormalCustomGradientInputValue}
-                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgNormalCustomGradientInputValue: value })}
-                                                    globalGradientColor={headingGlobalBgNormalGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgNormalGradientColor: value === undefined ? null : value })}
+                                                    globalCustomGradientSwitcher={timezoneGlobalBgNormalCustomGradientSwitcher}
+                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ timezoneGlobalBgNormalCustomGradientSwitcher: value })}
+                                                    globalCustomGradientInputValue={timezoneGlobalBgNormalCustomGradientInputValue}
+                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ timezoneGlobalBgNormalCustomGradientInputValue: value })}
+                                                    globalGradientColor={timezoneGlobalBgNormalGradientColor}
+                                                    setGlobalGradientColor={(value) => setAttributes({ timezoneGlobalBgNormalGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>
@@ -3877,7 +4423,7 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 
                         )}
 
-                        {headingGlobalBgColorSwitcher === 'hover' && (
+                        {timezoneGlobalBgColorSwitcher === 'hover' && (
                             <BaseControl
                                 className="fb-setting-background-color-setting-wrapper"
                                 label={__("Hover Background Type", "frontis-blocks")}
@@ -3908,8 +4454,8 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                                                     {BACKGROUND_TYPES.map((item) => (
                                                         <Button
                                                             key={item.value}
-                                                            onClick={() => setAttributes({ headingGlobalBgHoverBackgroundType: item.value })}
-                                                            className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgHoverBackgroundType === item.value ? 'active' : ''}`}
+                                                            onClick={() => setAttributes({ timezoneGlobalBgHoverBackgroundType: item.value })}
+                                                            className={`fb-setting-background-color-panel-btn-switcher ${timezoneGlobalBgHoverBackgroundType === item.value ? 'active' : ''}`}
                                                         >
                                                             {item.label}
                                                         </Button>
@@ -3917,41 +4463,41 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                                                 </ButtonGroup>
                                             </BaseControl>
 
-                                            {headingGlobalBgHoverBackgroundType === 'classic' && (
+                                            {timezoneGlobalBgHoverBackgroundType === 'classic' && (
 
                                                 <>
                                                     <FB_ColorControl
                                                         label={__("Color", "frontis-blocks")}
-                                                        globalColor={headingGlobalBgHoverClassicColor}
-                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverClassicColor: value === undefined ? '' : value })}
+                                                        globalColor={timezoneGlobalBgHoverClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ timezoneGlobalBgHoverClassicColor: value === undefined ? '' : value })}
                                                     />
 
                                                     <FB_ResponsiveBackgroundImageControl
                                                         deviceType={deviceType}
-                                                        globalBackgroundImageUrl={headingGlobalBgHoverBackgroundImageUrl}
-                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgHoverBackgroundImageUrl: value })}
-                                                        globalBackgroundImagePosition={headingGlobalBgHoverBackgroundImagePosition}
-                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgHoverBackgroundImagePosition: newPosition })}
-                                                        globalBackgroundImageAttachment={headingGlobalBgHoverBackgroundImageAttachment}
-                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgHoverBackgroundImageAttachment: newAttachment })}
-                                                        globalBackgroundImageRepeat={headingGlobalBgHoverBackgroundImageRepeat}
-                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgHoverBackgroundImageRepeat: newRepeat })}
-                                                        globalBackgroundImageSize={headingGlobalBgHoverBackgroundImageSize}
-                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgHoverBackgroundImageSize: newSize })}
+                                                        globalBackgroundImageUrl={timezoneGlobalBgHoverBackgroundImageUrl}
+                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ timezoneGlobalBgHoverBackgroundImageUrl: value })}
+                                                        globalBackgroundImagePosition={timezoneGlobalBgHoverBackgroundImagePosition}
+                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ timezoneGlobalBgHoverBackgroundImagePosition: newPosition })}
+                                                        globalBackgroundImageAttachment={timezoneGlobalBgHoverBackgroundImageAttachment}
+                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ timezoneGlobalBgHoverBackgroundImageAttachment: newAttachment })}
+                                                        globalBackgroundImageRepeat={timezoneGlobalBgHoverBackgroundImageRepeat}
+                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ timezoneGlobalBgHoverBackgroundImageRepeat: newRepeat })}
+                                                        globalBackgroundImageSize={timezoneGlobalBgHoverBackgroundImageSize}
+                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ timezoneGlobalBgHoverBackgroundImageSize: newSize })}
                                                         setAttributes={setAttributes}
                                                     />
 
                                                 </>
                                             )}
 
-                                            {headingGlobalBgHoverBackgroundType === 'gradient' && (
+                                            {timezoneGlobalBgHoverBackgroundType === 'gradient' && (
                                                 <FB_GradientColorControl
-                                                    globalCustomGradientSwitcher={headingGlobalBgHoverCustomGradientSwitcher}
-                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgHoverCustomGradientSwitcher: value })}
-                                                    globalCustomGradientInputValue={headingGlobalBgHoverCustomGradientInputValue}
-                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgHoverCustomGradientInputValue: value })}
-                                                    globalGradientColor={headingGlobalBgHoverGradientColor}
-                                                    setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgHoverGradientColor: value === undefined ? null : value })}
+                                                    globalCustomGradientSwitcher={timezoneGlobalBgHoverCustomGradientSwitcher}
+                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ timezoneGlobalBgHoverCustomGradientSwitcher: value })}
+                                                    globalCustomGradientInputValue={timezoneGlobalBgHoverCustomGradientInputValue}
+                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ timezoneGlobalBgHoverCustomGradientInputValue: value })}
+                                                    globalGradientColor={timezoneGlobalBgHoverGradientColor}
+                                                    setGlobalGradientColor={(value) => setAttributes({ timezoneGlobalBgHoverGradientColor: value === undefined ? null : value })}
                                                 />
                                             )}
                                         </div>
@@ -3968,31 +4514,31 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 
                         <SelectControl
                                 label={__("Border Style", "frontis-blocks")}
-                                value={headingGlobalBorder}
+                                value={timezoneGlobalBorder}
                                 options={BORDER_STYLES}
-                                onChange={(value) => setAttributes({ headingGlobalBorder: value })}
+                                onChange={(value) => setAttributes({ timezoneGlobalBorder: value })}
                         />
 
 
                         <FB_SwitcherControl
                             label={__("Border Color", "frontis-blocks")}
-                            globalSwitcher={headingGlobalBorderColorSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBorderColorSwitcher: value })}
+                            globalSwitcher={timezoneGlobalBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ timezoneGlobalBorderColorSwitcher: value })}
                         />
 
-                        {headingGlobalBorderColorSwitcher === 'normal' && (
+                        {timezoneGlobalBorderColorSwitcher === 'normal' && (
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
-                                globalColor={headingGlobalBorderColor}
-                                setGlobalColor={(value) => setAttributes({ headingGlobalBorderColor: value === undefined ? '' : value })}
+                                globalColor={timezoneGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ timezoneGlobalBorderColor: value === undefined ? '' : value })}
                             />
                         )}
 
-                        {headingGlobalBorderColorSwitcher === 'hover' && (
+                        {timezoneGlobalBorderColorSwitcher === 'hover' && (
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
-                                globalColor={headingGlobalBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ headingGlobalBorderHoverColor: value === undefined ? '' : value })}
+                                globalColor={timezoneGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ timezoneGlobalBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
@@ -4000,12 +4546,12 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                             label={__("Border", "frontis-blocks")}
                             deviceType={deviceType}
                             spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-                            spacingUnits={headingGlobalBorderUnits}
-                            spacingDesktop={headingGlobalBorderDesktop}
-                            spacingTablet={headingGlobalBorderTablet}
-                            spacingMobile={headingGlobalBorderMobile}
+                            spacingUnits={timezoneGlobalBorderUnits}
+                            spacingDesktop={timezoneGlobalBorderDesktop}
+                            spacingTablet={timezoneGlobalBorderTablet}
+                            spacingMobile={timezoneGlobalBorderMobile}
                             handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-                            spacingCombineBtn={headingGlobalBorderLink}
+                            spacingCombineBtn={timezoneGlobalBorderLink}
                             spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
                             setAttributes={setAttributes}
                         />
@@ -4014,37 +4560,37 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                             label={__("Border Radius", "frontis-blocks")}
                             deviceType={deviceType}
                             spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-                            spacingUnits={headingGlobalBorderRadiusUnits}
-                            spacingDesktop={headingGlobalBorderRadiusDesktop}
-                            spacingTablet={headingGlobalBorderRadiusTablet}
-                            spacingMobile={headingGlobalBorderRadiusMobile}
+                            spacingUnits={timezoneGlobalBorderRadiusUnits}
+                            spacingDesktop={timezoneGlobalBorderRadiusDesktop}
+                            spacingTablet={timezoneGlobalBorderRadiusTablet}
+                            spacingMobile={timezoneGlobalBorderRadiusMobile}
                             handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-                            spacingCombineBtn={headingGlobalBorderRadiusLink}
+                            spacingCombineBtn={timezoneGlobalBorderRadiusLink}
                             spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
                             setAttributes={setAttributes}
                         />
 
                         <FB_SwitcherControl
                             label={__("Box Shadow", "frontis-blocks")}
-                            globalSwitcher={headingGlobalBoxShadowSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBoxShadowSwitcher: value })}
+                            globalSwitcher={timezoneGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ timezoneGlobalBoxShadowSwitcher: value })}
                         />
 
-                        {headingGlobalBoxShadowSwitcher === 'normal' && (
+                        {timezoneGlobalBoxShadowSwitcher === 'normal' && (
                             <FB_BoxShadowControl
                                 label={__("Normal Shadow", "frontis-blocks")}
-                                onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
-                                initialShadowValue={headingGlobalBoxShadowValues}
-                                onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
+                                onBoxShadowChange={(value) => setAttributes({ timezoneGlobalBoxShadowValues: value })}
+                                initialShadowValue={timezoneGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ timezoneGlobalBoxShadowCssValue: value })}
                             />
                         )}
 
-                        {headingGlobalBoxShadowSwitcher === 'hover' && (
+                        {timezoneGlobalBoxShadowSwitcher === 'hover' && (
                             <FB_BoxShadowControl
                                 label={__("Hover Shadow", "frontis-blocks")}
-                                onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowHoverValues: value })}
-                                initialShadowValue={headingGlobalBoxShadowHoverValues}
-                                onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowHoverCssValue: value })}
+                                onBoxShadowChange={(value) => setAttributes({ timezoneGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={timezoneGlobalBoxShadowHoverValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ timezoneGlobalBoxShadowHoverCssValue: value })}
                             />
                         )}
                     </PanelBody>
@@ -4074,7 +4620,7 @@ console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
                             value={timezoneCustomCSS}
                             onChangeValue={(value) => setAttributes({ timezoneCustomCSS: value })}
                         />
-                    </PanelBody> */}
+                    </PanelBody>
                 </div>
             </div>
         </>
