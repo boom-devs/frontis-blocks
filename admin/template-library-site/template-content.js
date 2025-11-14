@@ -103,7 +103,7 @@ const TemplateContent = ({
             <div className="fb-template-library-store-content-wrapper" onClick={isSidebarCollapsed ? handleSidebarToggle : null}>
             <div className="fb-template-library-store-content" >
                 <div className="fb-template-library-content-header">
-                    <div className="fb-template-library-content-header-left">
+                    <div className="fb-template-library-content-header-top">
                         <div className="fb-template-library-tabs">
                             <button
                                 className={`fb-template-library-tab nav-icon`}
@@ -124,8 +124,6 @@ const TemplateContent = ({
                                 </button>
                             ))}
                         </div>
-                    </div>
-                    <div className="fb-template-library-content-header-right">
                         <div className="fb-template-library-search-wrapper">
                             <div className="fb-search-input-wrapper">
                                 <div className="fb-search-input-icon">
@@ -149,6 +147,9 @@ const TemplateContent = ({
                                 />
                             </div>
                         </div>
+                    </div>
+                    <div className="fb-template-library-content-header-bottom">
+                        <div className="fb-template-library-sort-wrapper"></div>
                         { tagLoading ? (
                             <>
                                 <ClipLoader color="fff" size={24} />
