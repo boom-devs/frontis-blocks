@@ -68,6 +68,7 @@
                 font-weight: 500;
                 line-height: 16px;
                 padding: 0;
+                height: unset;
             }
 
             .fb-tab-wrapper {
@@ -445,10 +446,11 @@
 
                 .components-range-control__number {
                     .components-input-control__container {
-                        border: 1px solid $primary-color-base;
-                        border-radius: 6px;
-                        margin-left: 16px;
-                        margin-right: -8px;
+                        border: 1px solid $neutral-color-200;
+                        border-radius: 4px;
+                        margin-left: 24px;
+                        margin-right: 0;
+                        max-width: 65px;
                     }
                 }
 
@@ -462,8 +464,8 @@
                     font-weight: 500;
                     line-height: 16px;
                     text-transform: capitalize;
-                    margin-bottom: 4px;
-                    margin-top: 10px;
+                    margin: 0;
+                    padding: 0 !important;
                 }
                 .fb_global_typo_wrap{
                     .fb-letter-case-control{
@@ -545,12 +547,24 @@
             border-radius: 2px;
             display: flex;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 24px;
             min-height: 100px;
             max-width: 230px;
             overflow: hidden;
         }
     }
+}
+.fb-typo-spacing .components-base-control__field {
+    margin-bottom: 24px;
+}
+.fb_global_typo_wrap .components-base-control__field {
+    margin-bottom: 24px;
+}
+.fb_global_typo_wrap .components-range-control .components-base-control__field {
+    margin-bottom: 0;
+}
+.fb_global_typo_wrap .fb-letter-case-control {
+    margin-bottom: 24px;
 }
 .fb-color-panel.fb-gradient-color-panel {
     margin-bottom: 24px;
