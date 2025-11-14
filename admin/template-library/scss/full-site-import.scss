@@ -61,6 +61,12 @@
                     display: none;
                 }
 
+                .fb-template-category-loader-wrapper {
+                    .fb-template-category-loader {
+                        max-width: 100%;
+                    }
+                }
+
                 .fb-form-section {
                     margin-bottom: 32px;
 
@@ -223,6 +229,7 @@
             }
 
             .fb-import-preview-panel {
+                position: relative;
                 flex: 5;
                 padding: 24px;
                 background: #F9FAFB;

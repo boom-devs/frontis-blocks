@@ -1,8 +1,6 @@
-// store/attributesSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import attributes from "./attributes";
 
-// attributes.js theke default value niye initialState banaisi
 const initialState = Object.fromEntries(
   Object.entries(attributes).map(([key, conf]) => [key, conf.default])
 );
@@ -12,10 +10,11 @@ const attributesSlice = createSlice({
   initialState,
   reducers: {
     setAttribute: (state, action) => {
-      const { key, value } = action.payload;
-      state[key] = value;
-    }
-  }
+      Object.entries(action.payload).forEach(([key, value]) => {
+        state[key] = value;
+      });
+    },
+  },
 });
 
 export const { setAttribute } = attributesSlice.actions;
