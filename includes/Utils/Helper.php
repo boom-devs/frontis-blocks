@@ -1,6 +1,7 @@
 <?php
 
 namespace FrontisBlocks\Utils;
+use FrontisBlocks\Config\BlockList;
 
 class Helper
 {
@@ -223,10 +224,7 @@ class Helper
 					// Get all block templates.
 					$template_types = get_block_templates();
 					// Extract the 'slug' column from the block templates array.
-					$template_type_slug = array_column( $template_types, 'slug' );
-
-                    // var_dump($object instanceof WP_Post && in_array( 'single-product-' . $object->post_name, $template_type_slug ));
-					// Check specific single product template exist or not. If not then use default single product template. 
+					$template_type_slug = array_column( $template_types, 'slug' ); 
 					return ( in_array( 'single-product-' . $object->post_name, $template_type_slug ) ) ? 'single-product-' . $object->post_name : 'single-product';
 
 				// Check if the current page is an archive page.
@@ -314,36 +312,31 @@ class Helper
 			'is_home'       => 'home',
 			'is_search'     => 'search',
 			'is_paged'      => 'paged',
-		); // Conditional tags to post type.
+		);
 
-		$what_post_type     = '404'; // Default to '404' if no condition matches.
+		$what_post_type     = '404';
 		$object             = get_queried_object();
 		$template_types     = get_block_templates();
 		$template_type_slug = array_column( $template_types, 'slug' );
-
-        // var_dump(is_singular());
-
-		// Determines whether the query is for an existing single page.
 		$is_regular_page        = is_page() && ! is_front_page();
 		$is_front_page_template = is_front_page() && get_front_page_template();
 		$is_static_front_page   = 'page' === get_option( 'show_on_front' ) && get_option( 'page_on_front' ) && is_front_page() && ! is_home() && ! $is_front_page_template;
 
-		if ( $is_regular_page || $is_static_front_page ) { // Run only for page and any page selected as home page from settings > reading > static page.
-			return ( $object instanceof WP_Post && in_array( 'page-' . $object->post_name, $template_type_slug ) ) ? 'page-' . $object->post_name : 'page';
-		} elseif ( $is_front_page_template ) { // Run only when is_home and is_front_page() and get_front_page_template() is true. i.e front-page template.
+		if ( $is_regular_page || $is_static_front_page ) {
+			return ( is_a($object, 'WP_Post') && in_array( 'page-' . $object->post_name, $template_type_slug ) ) ? 'page-' . $object->post_name : 'page';
+		} elseif ( $is_front_page_template ) {
 			return 'front-page';
-		} elseif ( is_archive() ) { // Applies to archive pages.
-			// If none of the above condition matches, return archive template.
-			return ( $object instanceof WP_Post || $object instanceof WP_Post_Type || $object instanceof WP_Term || $object instanceof WP_User ) ? self::get_archive_page_template( $object, $template_type_slug ) : 'archive';
+		} elseif ( is_archive() ) {
+			return ( is_a( $object, 'WP_Post' ) || is_a( $object, 'WP_Post_Type' ) || is_a( $object, 'WP_Term' ) || is_a( $object, 'WP_User' ) ) ? self::get_archive_page_template( $object, $template_type_slug ) : 'archive';
 		} else {
 			if (! empty( $object->post_type ) ) {
-				if ( is_singular() ) { // Applies to single post of any post type ( attachment, page, custom post types).
+				if ( is_singular() ) {
 					$name_decoded = urldecode( $object->post_name );
 					if ( in_array( 'single-' . $object->post_type . '-' . $name_decoded, $template_type_slug ) ) {
 						return 'single-' . $object->post_type . '-' . $name_decoded;
 					} elseif ( in_array( 'single-' . $object->post_type, $template_type_slug ) ) {
 						return 'single-' . $object->post_type;
-					} else { // If none of the above condition matches, return single template.
+					} else {
 						return 'single';
 					}
 				}
@@ -360,24 +353,24 @@ class Helper
 		return $what_post_type;
 	}
 
-	public function get_archive_page_template( $archive_object, $template_type_slug ) {
-		if ( is_author() && $archive_object instanceof WP_User ) { // For author archive or more specific author template.
+	public static function get_archive_page_template( $archive_object, $template_type_slug ) {
+		if ( is_author() && is_a( $archive_object, 'WP_User' ) ) {
 			$author_slug = 'author-' . $archive_object->user_nicename;
 			return in_array( $author_slug, $template_type_slug ) ? $author_slug : ( in_array( 'author', $template_type_slug ) ? 'author' : 'archive' );
-		} elseif ( $archive_object instanceof WP_Term ) {
-			if ( is_category() ) { // For category archive or more specific category template.
+		} elseif ( is_a( $archive_object, 'WP_Term' ) ) {
+			if ( is_category() ) {
 				$category_slug = 'category-' . $archive_object->slug;
 				return in_array( $category_slug, $template_type_slug ) ? $category_slug : ( in_array( 'category', $template_type_slug ) ? 'category' : 'archive' );
-			} elseif ( is_tag() ) { // For tag archive or more specific tag template.
+			} elseif ( is_tag() ) {
 				$tag_slug = 'tag-' . $archive_object->slug;
 				return in_array( $tag_slug, $template_type_slug ) ? $tag_slug : ( in_array( 'tag', $template_type_slug ) ? 'tag' : 'archive' );
 			} elseif ( is_tax() ) {
 				$tax_slug          = 'taxonomy-' . $archive_object->taxonomy;
 				return in_array( $tax_slug, $template_type_slug ) ? $tax_slug : 'archive';
 			}
-		} elseif ( is_date() && in_array( 'date', $template_type_slug ) ) { // For date archive template.
+		} elseif ( is_date() && in_array( 'date', $template_type_slug ) ) {
 			return 'date';
-		} elseif ( $archive_object instanceof WP_Post_Type && is_post_type_archive() ) { // For custom post type archive or more specific custom post type archive template.
+		} elseif ( is_a( $archive_object, 'WP_Post_Type' ) && is_post_type_archive() ) {
 			$post_type_archive_slug = 'archive-' . $archive_object->name;
 			return in_array( $post_type_archive_slug, $template_type_slug ) ? $post_type_archive_slug : ( in_array( 'archive', $template_type_slug ) ? 'archive' : 'archive-' . $archive_object->name );
 		}
@@ -825,6 +818,113 @@ class Helper
         return false;
     }
 
+    public static function get_completed_blocks() {
+        // $allBlocks = BlockList::get_instance()->get_blocks();
+        // $activeBlocks = get_option('fb_active_blocks', []);
+		// $completeBlocks = array_merge(
+		// 	array_fill_keys(array_keys($allBlocks), false),
+		// 	$activeBlocks
+		// );
+
+        // return $completeBlocks;
+
+        // 1. Get the master list of all blocks (slug => data)
+        $allBlocks    = BlockList::get_instance()->get_blocks();
+
+        // 2. Get the saved active blocks (array of slugs that are enabled)
+        $activeBlocks = get_option( 'fb_active_blocks', [] );
+
+        // 3. Build the final array in the required shape
+        $output = [];
+
+        foreach ( $allBlocks as $slug => $blockData ) {
+
+            // Default fields that are always present
+            $item = [
+                'slug'      => $slug,
+                'title'     => $blockData['title'] ?? ucwords( str_replace( '-', ' ', $slug ) ),
+                'package'   => $blockData['package'] ?? 'free',
+                'category'  => $blockData['category'] ?? 'content',
+                'badge'     => $blockData['badge'] ?? 'free',
+                'status'    => $activeBlocks[$slug] ? '1' : '0',
+                'icon'      => $blockData['icon'] ?? "http://licenseschoole.test/wp-content/plugins/frontis-blocks/assets/icons/{$slug}.svg",
+                'doc'       => $blockData['doc'] ?? 'https://wpmessiah.com/',
+                'demo'      => $blockData['demo'] ?? 'https://wpmessiah.com/',
+                'complete'  => $blockData['complete'] ?? 'true',
+                'child'     => $blockData['child'] ?? 'false',
+            ];
+
+            // Optional: you can add extra safety checks here if some keys are missing
+            $output[] = $item;
+        }
+
+        return $output;
+    }
+
+    public static function system_requirements() {
+        return [
+            [
+                'label' => __('PHP Version', 'frontis-blocks'),
+                'value' => phpversion(),
+                'status' => version_compare(phpversion(), '7.4', '>=') ? 'good' : 'error',
+            ],
+            [
+                'label' => __('WordPress Version', 'frontis-blocks'),
+                'value' => get_bloginfo('version'),
+                'status' => version_compare(get_bloginfo('version'), '5.8', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Memory Limit', 'frontis-blocks'),
+                'value' => ini_get('memory_limit'),
+                'status' => (intval(ini_get('memory_limit')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max Execution Time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Frontis Blocks Version', 'frontis-blocks'),
+                'value' => FB_VERSION,
+                'status' => version_compare(FB_VERSION, '1.0.0', '>=') ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Upload max filesize', 'frontis-blocks'),
+                'value' => ini_get('upload_max_filesize'),
+                'status' => (intval(ini_get('upload_max_filesize')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Post max size', 'frontis-blocks'),
+                'value' => ini_get('post_max_size'),
+                'status' => (intval(ini_get('post_max_size')) >= 256) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max input vars', 'frontis-blocks'),
+                'value' => ini_get('max_input_vars'),
+                'status' => (intval(ini_get('max_input_vars')) >= 1000) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('Max execution time', 'frontis-blocks'),
+                'value' => ini_get('max_execution_time') . 's',
+                'status' => (ini_get('max_execution_time') >= 30) ? 'good' : 'warning',
+            ],
+            [
+                'label' => __('SSL Active', 'frontis-blocks'),
+                'value' => is_ssl() ? __('Yes', 'frontis-blocks') : __('No', 'frontis-blocks'),
+                'status' => is_ssl() ? 'good' : 'error',
+            ],
+            [
+                'label' => __('WP Debug', 'frontis-blocks'),
+                'value' => (defined('WP_DEBUG') && WP_DEBUG ? __('Enabled', 'frontis-blocks') : __('Disabled', 'frontis-blocks')),
+                'status' => (defined('WP_DEBUG') && WP_DEBUG) ? 'warning' : 'good',
+            ],
+        ];
+    }
+
+    public static function get_blocks_info() {
+        return get_option('fb_active_blocks');
+    }
+
     public static function post_content_has_blocks_critical($post, $post_id) {
         $pattern = "/frontis-blocks/i";
 
@@ -908,7 +1008,6 @@ class Helper
 		
 		// Execute the query
 		$template_contents = $wpdb->get_results($query);
-
         return $template_contents;
     }
 

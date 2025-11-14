@@ -11,6 +11,7 @@ const AssetsGeneration = () => {
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
 
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
@@ -89,27 +90,69 @@ const AssetsGeneration = () => {
   const confirmAssetGeneration = useCallback(() => {
     setIsLoading(true);
     setIsModalOpen(false);
+    setProgress(0); // Add this state
 
-    window.jQuery.ajax({
-      url: ajaxUrl,
-      type: 'POST',
-      data: {
-        action: 'fb_generate_assets',
-        security: nonce,
-      },
-      success: function (response) {
-        setIsLoading(false);
-        if (response.success) {
-          toast.success(__(response.data.message));
-        } else {
-          toast.error(__(`Failed: ${response.data?.message || 'Unknown error'}`));
-        }
-      },
-      error: function (xhr, status, error) {
-        setIsLoading(false);
-        toast.error(__(`Failed: ${status} - ${error}`));
-      },
-    });
+    let batch = 0;
+    let toastId = null; // To update the same toast
+
+    const processBatch = () => {
+      window.jQuery.ajax({
+        url: ajaxUrl,
+        type: 'POST',
+        data: {
+          action: 'fb_generate_assets',
+          security: nonce,
+          batch: batch,
+        },
+        success: function (response) {
+          if (response.success) {
+            const totalProcessed = response.data.processed;
+            const totalPosts = response.data.total;
+            const progressPercent = Math.round((totalProcessed / totalPosts) * 100);
+
+            // Update progress bar
+            setProgress(progressPercent);
+
+            // Show or update toast only once
+            // if (batch === 0) {
+            //   toastId = toast.info(__(`Processing: ${totalProcessed}/${totalPosts} posts`), {
+            //     autoClose: false,
+            //     closeButton: false,
+            //   });
+            // } else {
+            //   toast.update(toastId, {
+            //     render: __(`Processing: ${totalProcessed}/${totalPosts} posts`),
+            //   });
+            // }
+
+            if (response.data.completed) {
+              setIsLoading(false);
+              setProgress(100);
+              toast.dismiss(toastId);
+              toast.success(__(response.data.message));
+            } else {
+              // Process next batch
+              batch++;
+              processBatch();
+            }
+          } else {
+            setIsLoading(false);
+            setProgress(0);
+            if (toastId) toast.dismiss(toastId);
+            toast.error(__(`Failed: ${response.data?.message || 'Unknown error'}`));
+          }
+        },
+        error: function (xhr, status, error) {
+          setIsLoading(false);
+          setProgress(0);
+          if (toastId) toast.dismiss(toastId);
+          toast.error(__(`Failed: ${status} - ${error}`));
+        },
+      });
+    };
+
+    // Start processing
+    processBatch();
   }, [ajaxUrl, nonce]);
 
   const closeModal = useCallback(() => {
@@ -149,8 +192,16 @@ const AssetsGeneration = () => {
 					{__('Regenerate Asset', 'frontis-blocks')}
 				</Button>
 				{isLoading && (
-					<span className="fb-loading-spinner"></span>
-				)}
+          <div className="asset-generation-progress">
+            <div className="progress-bar-container">
+              <div 
+                className="progress-bar-fill" 
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <p className="progress-text">{progress}%</p>
+          </div>
+        )}
 			</div>
 		</div>
 
@@ -159,7 +210,7 @@ const AssetsGeneration = () => {
 			onClose={closeModal}
 			onConfirm={confirmAssetGeneration}
 			title={__('Confirm Asset Generation', 'frontis-blocks')}
-			message={__('Are you sure you want to generate assets? This process may take a few moments.', 'frontis-blocks')}
+			message={__('Are you sure you want to generate assets? This process may take a few moments and the page will keep reloading until asset generation is fully completed.', 'frontis-blocks')}
 		/>
 	</div>
   );

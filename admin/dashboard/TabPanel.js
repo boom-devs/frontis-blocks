@@ -27,6 +27,10 @@ const TabPanel = ({
         onSelect?.(tabName);
     };
 
+    const upgradeToPro = () => {
+        window.open(window.frontisBlocksAdmin.pro_url, '_blank');
+    }
+
     return (
         <>
             <div className={`fb-blocks-tab-panel ${className}`.trim()}>
@@ -63,7 +67,7 @@ const TabPanel = ({
                     <div className="frontis-blocks-tab-panel-header-right">
                         {/* Upgrade Pro */}
                         <div className="frontis-blocks-upgrade-pro">
-                            <Button text="Upgrade to Pro" icon={<StarIcons />} />
+                            <Button text="Upgrade to Pro" onClick={upgradeToPro} icon={<StarIcons />} />
                         </div>
 
                         {/* Version */}

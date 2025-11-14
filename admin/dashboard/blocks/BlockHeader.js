@@ -4,11 +4,8 @@ import styles from './BlockHeader.module.scss';
 import FBSwitch from '../../components/common/Switch';
 import { All, Content, Creative, Form, Layout, Dynamic, Social, Media, Navigation, PostTabIcon } from '../../icons';
 
-const BlockHeader = ({onChange, value, categories, setSelectedCategory, selectedCategory}) => {
-    const [disableAllBlocks, setDisableAllBlocks] = useState(false);
-    const handleChange = () => {
-        setDisableAllBlocks(!disableAllBlocks);
-    };
+const BlockHeader = ({onChange, value, categories, setSelectedCategory, selectedCategory, disableAllBlocksHandler, disableAllBlocks}) => {
+    // const [disableAllBlocks, setDisableAllBlocks] = useState(false);
 
     const categoryIcons = {
         all: All,
@@ -57,7 +54,7 @@ const BlockHeader = ({onChange, value, categories, setSelectedCategory, selected
                 </div>
                 <div className={styles.blockTabToggleContainer}>
                     <span className={styles.blockTabToggleLabel}>Disable All Elements</span>
-                    <FBSwitch onChange={handleChange} checked={disableAllBlocks} />
+                    <FBSwitch onChange={disableAllBlocksHandler} checked={disableAllBlocks} />
                 </div>
             </div>
             <div className={styles.fbBlocksCategoryFilter}>

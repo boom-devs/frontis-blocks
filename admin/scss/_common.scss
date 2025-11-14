@@ -6,6 +6,11 @@
   color: $heading-color;
 }
 
+body .components-button:disabled, body .components-button[aria-disabled=true] {
+  color: $white-color;
+  opacity: 0.7;
+}
+
 .heading-2 {
     @extend .heading-1;
     font-size: 32px;
@@ -65,6 +70,7 @@
     cursor: pointer;
     &:hover {
       background-color: darken($primary-color, 10%);
+      color: $white-color !important;
     }
 }
 
@@ -88,6 +94,7 @@
 
     &:hover {
       background-color: darken($error-color, 10%);
+      color: $white-color !important;
     }
 
     svg {

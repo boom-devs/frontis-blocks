@@ -9,7 +9,7 @@ const VideoBanner = () => {
     }
 
     const gotoYoutube = () => {
-        window.open('/wp-admin/post-new.php?post_type=page', '_blank');
+        window.open( 'https://www.youtube.com/watch?v=8U0K_wMcUPg', '_blank', 'noopener,noreferrer' );
     }
 
     return (
