@@ -579,7 +579,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				SubHeadingColor: '#555E72',
 				SubHeadingHoverColor: '#ffffff',
 				buttonTextColor: '#399CFF',
+				buttonTextHoverColor: '#ffffff',
 				btnIconColor: '#399CFF',
+				btnIconHoverColor: '#ffffff',
 				buttonBgColor: '',
 				buttonBgHoverColor: '',
 				btnIcon: 'arrow-left',
@@ -680,9 +682,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				SubHeadingColor: '#555E72',
 				SubHeadingHoverColor: '#ffffff',
 				buttonTextColor: '#F89B2E',
-				buttonTextHoverColor: '#F89B2E',
+				buttonTextHoverColor: '#ffffff',
 				btnIconColor: '#F89B2E',
-				btnIconHoverColor: '#F89B2E',
+				btnIconHoverColor: '#ffffff',
 				buttonBgColor: '',
 				buttonBgHoverColor: '',
 				btnIcon: 'arrow-left',
@@ -789,7 +791,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			SubHeadingColor: '#555E72',
 			SubHeadingHoverColor: '#ffffff',
 			buttonTextColor: '#399CFF',
+			buttonTextHoverColor: '#ffffff',
 			btnIconColor: '#399CFF',
+			btnIconHoverColor: '#ffffff',
 			buttonBgColor: '',
 			buttonBgHoverColor: '',
 			btnIcon: 'arrow-left',
@@ -891,9 +895,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			SubHeadingColor: '#555E72',
 			SubHeadingHoverColor: '#ffffff',
 			buttonTextColor: '#F89B2E',
-			buttonTextHoverColor: '#F89B2E',
+			buttonTextHoverColor: '#ffffff',
 			btnIconColor: '#F89B2E',
-			btnIconHoverColor: '#F89B2E',
+			btnIconHoverColor: '#ffffff',
 			buttonBgColor: '',
 			buttonBgHoverColor: '',
 			btnIcon: 'arrow-left',
@@ -3218,14 +3222,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					title={__("Presets", "frontis-block")}
 					initialOpen={true}
 				>
-					{/* <SelectControl
+					<SelectControl
 						label={__("Preset Style", "frontis-blocks")}
 						value={infoBoxPresetStyle}
 						options={PRESETS}
 						onChange={(selected) => changeInfoBoxPreset(selected)}
-					/> */}
+					/>
 
-					<FB_Presets
+					{/* <FB_Presets
 						className="fb-info-box-presets"
 						label={__('Select Preset', 'frontis-blocks')}
 						presets={infoBoxPresets}
@@ -3233,7 +3237,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeValue = 'infoBoxPresetStyle'
 						defaultPresetValue="preset-1"
 						setAttributes={setAttributes}
-					/>
+					/> */}
 
 				</PanelBody>
 			</div>
