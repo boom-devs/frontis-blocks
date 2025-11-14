@@ -11,6 +11,7 @@
 @import "./full-site-import-modal.scss";
 @import "./../global-settings/scss/global-settings.scss";
 
+#frontis-dl {
 .fb-template-library-button-wrapper {
 	position: relative;
     width: 100%;
@@ -40,6 +41,7 @@
 			}
 		}
 	}
+}
 }
 
 body {
