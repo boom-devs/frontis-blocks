@@ -254,10 +254,16 @@ const TemplateContent = ({
                                     disabled={currentPage === 1}
                                     onClick={() => onPageChange(activeTab, currentPage - 1)}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g clip-path="url(#clip0_16781_5554)">
+                                        <path d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997" stroke="#050607" stroke-width="1.5"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_16781_5554">
+                                        <rect width="24" height="24" fill="white" transform="matrix(-1 0 0 1 24 0)"/>
+                                        </clipPath>
+                                        </defs>
                                     </svg>
-                                    Previous
                                 </button>
                             
                                 {/* Page Numbers */}
@@ -341,9 +347,15 @@ const TemplateContent = ({
                                     disabled={currentPage === schema[activeTab].pagination.last_page}
                                     onClick={() => onPageChange(activeTab, currentPage + 1)}
                                 >
-                                    Next
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g clip-path="url(#clip0_16781_5554)">
+                                        <path d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997" stroke="#050607" stroke-width="1.5"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_16781_5554">
+                                        <rect width="24" height="24" fill="white" transform="matrix(-1 0 0 1 24 0)"/>
+                                        </clipPath>
+                                        </defs>
                                     </svg>
                                 </button>
                             </div>
