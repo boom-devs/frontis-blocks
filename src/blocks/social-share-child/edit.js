@@ -15,7 +15,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         alignment,
         icon,
         iconSize,
-        iconSpacing
+        iconSpacing,
+        socialShareChildDesktopSwitcher,
+        socialShareChildTabletSwitcher,
+        socialShareChildMobileSwitcher,
+        socialShareChildGlobalWraperClass,
+        socialShareChildGlobalWraperID
     } = attributes;
 
     // Function to get SVG string for different networks
@@ -86,7 +91,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [clientId, blockID, socialMediaType, displayStyle, alignment, iconSize, iconSpacing, setAttributes]);
 
     const blockProps = useBlockProps({
-        className: `fb-social-share-child ${blockID}`,
+        className: `fb-social-share-child ${blockID} ${socialShareChildDesktopSwitcher && 'fb-desktop-responsive'} ${socialShareChildTabletSwitcher && 'fb-tablet-responsive'} ${socialShareChildMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (
@@ -97,7 +102,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 clientId={clientId}
             />
             
-            <div className="social-share-child-container" style={{ textAlign: alignment }}>
+            <div className={`social-share-child-container ${socialShareChildGlobalWraperClass}`} id={socialShareChildGlobalWraperID} style={{ textAlign: alignment }}>
                 {socialMediaType && (
                     <a 
                         className={`social-share-button ${socialMediaType}`}
