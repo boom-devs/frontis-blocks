@@ -138,10 +138,19 @@
 
             }
 
-            .components-button.fb-setting-background-color-setting-icon-btn,
-            .components-button.fb-setting-color-setting-icon-btn {
-                height: auto;
+            .components-button.fb-setting-background-color-setting-icon-btn {
                 padding: 6px;
+                border-radius: 4px;
+                background: $neutral-color-50;
+                border: none;
+                height: 28px;
+            }
+            .components-button.fb-setting-color-setting-icon-btn {
+                padding: 6px;
+                border-radius: 4px;
+                background: transparent;
+                border: 1px solid $neutral-color-100;
+                height: 28px;
             }
         }
 
@@ -212,7 +221,7 @@
 
         .components-button.fb-box-shadow-icon-btn {
             height: unset !important;
-            padding: 5px;
+            padding: 6px;
         }
 
         
@@ -223,9 +232,11 @@
 
                 .components-range-control__number {
                     margin-right: 0;
+                    margin-bottom: 0 !important;
 
                     .components-input-control__container {
                         width: 100%;
+                        max-width: 65px;
                     }
                 }
             }
@@ -256,4 +267,8 @@
         }
 
     }
+}
+
+.fb-inspector-control .components-panel__body .fb-setting-color-setting-wrapper .components-base-control__label {
+    margin-bottom: 0;
 }
