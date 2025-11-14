@@ -3,6 +3,8 @@
  */
 import { __ } from "@wordpress/i18n";
 import { useEffect, useRef, useState } from "@wordpress/element";
+import { setAttribute } from "./store/attributesSlice";
+import { useDispatch } from "react-redux";
 
 const TemplateLogo = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="102" height="40" viewBox="0 0 102 40" fill="none">
@@ -47,8 +49,10 @@ const TemplateHeader = ({
     setIsPluginUpgradeModalOpen,
     disableMenu = false,
     isProPlugin = false,
+    isImporting
 }) => {
-    
+
+    const dispatch = useDispatch();
     const schema = data;
     const tabs = Object.keys(schema).map((key) => ({
         id: key,
@@ -133,8 +137,8 @@ const TemplateHeader = ({
                             key={tab.id}
                             className={`single-tab ${activeTab === tab.id ? 'active' : ''}`}
                             onClick={() => handleTabClick(tab)}
-                            style={{ cursor: disableMenu ? 'not-allowed' : 'pointer' }}
-                            disabled={disableMenu}
+                            style={isImporting || disableMenu ? { cursor: 'not-allowed' } : { cursor: 'pointer' }}
+                            disabled={isImporting || disableMenu}
                         >
                             <span>{tab.label}</span>
                         </button>
@@ -183,6 +187,7 @@ const TemplateHeader = ({
                             onClick={() => {
                                 if (typeof onClose === 'function') {
                                     onClose();
+                                    disableMenu && dispatch(setAttribute({ sitePreviewLoading: true }));
                                     console.log("close");
                                 }
                             }}

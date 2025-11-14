@@ -2,6 +2,7 @@
 import { useState, useEffect } from '@wordpress/element';
 import FB_ImageControl from '@Components/image-control';
 import { useDispatch, useSelector } from 'react-redux';
+import { TemplateCategoryLoader } from '../template-loader';
 
 const FullSiteImportSetting = ({
     template,
@@ -16,6 +17,11 @@ const FullSiteImportSetting = ({
     const [logoUrl, setLogoUrl] = useState(formData.siteLogo.url);
     const [logoAlt, setLogoAlt] = useState(formData.siteLogo.alt);
     const [logoId, setLogoId] = useState(formData.siteLogo.id);
+
+    const { 
+		sitePreviewLoading 
+	} = useSelector((state) => state.attributes);
+
 
     useEffect(() => {
         if (window.frontisBlocksAdmin?.siteLogo) {
@@ -47,6 +53,9 @@ const FullSiteImportSetting = ({
 
     return (
         <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
+            {sitePreviewLoading ? (
+                <TemplateCategoryLoader count={15} />
+            ) : (<>
             <div className="fb-form-section">
                 <span className="fb-template-label">Template Name:</span>
                 <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
@@ -112,6 +121,7 @@ const FullSiteImportSetting = ({
                     </button>
                 </div>
             </div>
+            </>)}
         </div>
     )
 }

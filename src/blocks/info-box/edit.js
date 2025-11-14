@@ -6,6 +6,7 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
+
 /**
  * Internal depencencies
  */
