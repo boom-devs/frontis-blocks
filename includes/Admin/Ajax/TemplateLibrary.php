@@ -37,6 +37,11 @@ class TemplateLibrary extends AjaxBase {
             'install_active_plugins',
             'active_theme',
             'update_database',
+            'get_templates',
+            'get_template_parts',
+            'push_template',
+            'get_all_template_parts',
+            'push_template_parts',
 		];
 
 		$this->init_ajax_events($ajax_events);
@@ -82,334 +87,438 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    function install_active_plugins() {
-        
-    }
-
     function upload_files() {
-        $tempZipFile = null;
-        $uploads_dir = null;
-        $zip_url = 'https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip';
-        
+        $this->check_permission();
+    
+        $zip_url = isset($_POST['uploads']) ? esc_url_raw($_POST['uploads']) : '';
+
+        if (!$zip_url) {
+            wp_send_json_error(['message' => 'No uploads URL provided'], 400);
+        }
+    
+        $uploads_dir = wp_upload_dir();
+        $destination = trailingslashit($uploads_dir['basedir']);
+    
+        if (!is_dir($destination)) {
+            wp_mkdir_p($destination);
+        }
+    
+        $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
+    
         try {
-            
-            // Get the WordPress uploads directory
-            $uploads_dir = wp_upload_dir();
-            $destination = trailingslashit($uploads_dir['basedir']); // This is the uploads folder
-            
-            // Ensure the uploads directory exists
-            if (!is_dir($destination)) {
-                wp_mkdir_p($destination);
-            }
-            
-            // Create temporary file
-            $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
-            
-            if (!$tempZipFile) {
-                throw new Exception('Failed to create temporary file');
-            }
-            
-            // Download the zip file using cURL
+            // Download ZIP
             $ch = curl_init($zip_url);
-            
-            if (!$ch) {
-                throw new Exception('Failed to initialize cURL');
-            }
-            
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
             curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-            curl_setopt($ch, CURLOPT_USERAGENT, 'WordPress/' . get_bloginfo('version'));
-            
             $data = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            
-            if (curl_errno($ch)) {
-                $error = curl_error($ch);
-                curl_close($ch);
-                throw new Exception('cURL Error: ' . $error);
-            }
-            
+    
+            if (curl_errno($ch)) throw new Exception('cURL Error: ' . curl_error($ch));
             curl_close($ch);
-            
-            if ($data === false || empty($data)) {
-                throw new Exception('Failed to download file from URL');
-            }
-            
-            if ($httpCode !== 200) {
-                throw new Exception('HTTP Error: ' . $httpCode);
-            }
-            
-            if (file_put_contents($tempZipFile, $data) === false) {
-                throw new Exception('Failed to save downloaded data to temporary file');
-            }
-            
-            if (!file_exists($tempZipFile) || filesize($tempZipFile) == 0) {
-                throw new Exception('Temporary zip file is empty or missing');
-            }
-            
-            // Extract using proper PclZip parameters
+    
+            if ($httpCode !== 200 || !$data) throw new Exception('Failed to download zip file');
+    
+            file_put_contents($tempZipFile, $data);
+    
+            // Extract ZIP
             $zip = new PclZip($tempZipFile);
-            
-            // First, get the zip content to analyze structure
             $content = $zip->listContent();
-            if ($content == 0) {
-                throw new Exception('Failed to read zip content: ' . $zip->errorInfo(true));
-            }
-            
+            if ($content == 0) throw new Exception('Failed to read zip content');
+    
             $extracted_files = [];
-            $extracted_count = 0;
-            
-            // Extract each file individually to flatten structure
+    
             foreach ($content as $file_info) {
-                // Skip directories
-                if (isset($file_info['folder']) && $file_info['folder']) {
+                $filePath = $destination . $file_info['filename'];
+    
+                // Create folder structure too
+                if (!empty($file_info['folder'])) {
+                    if (!is_dir($filePath)) wp_mkdir_p($filePath);
                     continue;
                 }
-                
-                $original_filename = $file_info['filename'];
-                
-                // Get just the filename (remove directory structure)
-                $filename = basename($original_filename);
-                
-                // Skip if filename is empty or contains directory separators
-                if (empty($filename) || strpos($filename, '/') !== false || strpos($filename, '\\') !== false) {
-                    continue;
-                }
-                
-                // Create full target path in uploads directory
-                $target_path = $destination . $filename;
-                
-                // Check if file already exists (optional: you can skip or overwrite)
-                if (file_exists($target_path)) {
-                    // Option 1: Skip existing files
-                    // continue;
-                    
-                    // Option 2: Overwrite existing files
-                    unlink($target_path);
-                }
-                
-                // Extract single file using its index
+    
+                // Extract file
                 $result = $zip->extractByIndex(
                     $file_info['index'],
-                    PCLZIP_OPT_PATH, $destination,
+                    PCLZIP_OPT_PATH,
+                    $destination,
                     PCLZIP_OPT_REPLACE_NEWER
                 );
-                
-                if ($result == 0) {
-                    error_log('Failed to extract ' . $original_filename . ': ' . $zip->errorInfo(true));
-                } else {
-                    // Verify the file was actually extracted with correct name
-                    if (file_exists($target_path)) {
-                        $extracted_files[] = $filename;
-                        $extracted_count++;
-                    }
+    
+                if ($result != 0 && file_exists($filePath)) {
+                    $extracted_files[] = $file_info['filename'];
                 }
             }
-            
-            // Clean up temp file
-            if (file_exists($tempZipFile)) {
-                unlink($tempZipFile);
-            }
-            
-            // Set success headers
-            header("Content-type: application/json; charset=utf-8");
-            http_response_code(200);
-            
-            return [
-                'success' => true,
-                'message' => 'Files extracted successfully to uploads folder',
-                'path' => $destination,
-                'extracted_files' => $extracted_count,
-                'files' => $extracted_files
-            ];
-            
+    
+            unlink($tempZipFile);
+    
+            wp_send_json_success([
+                'message' => 'Files extracted successfully',
+                'path'    => $destination,
+                'files'   => $extracted_files,
+                'count'   => count($extracted_files),
+            ]);
+    
         } catch (Exception $e) {
-            if ($tempZipFile && file_exists($tempZipFile)) {
-                unlink($tempZipFile);
-            }
-            
-            header("Content-type: application/json; charset=utf-8");
-            http_response_code(500);
-            
-            return false;
+            if (file_exists($tempZipFile)) unlink($tempZipFile);
+            wp_send_json_error(['message' => $e->getMessage()], 500);
         }
     }
     
+    /**
+     * Activate Theme (install if missing)
+     * AJAX action: fb_active_theme
+     */
     public function active_theme() {
-        $theme_slug = 'frontis';
-        $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.1/?action=query_themes&request[theme]={$theme_slug}");
-        $theme_information_response = json_decode($theme_information['body'], true);       
-        $themes = wp_get_themes();
-        $theme_exist = false;
-
-        if($themes) {
-            foreach($themes as $key => $theme) {
-                if($key === $theme_slug) {
-                    $theme_exist = true;
-                }
-                
-                continue;
+        $this->check_permission();
+    
+        $theme_slug = !empty($_POST['theme_slug']) ? sanitize_text_field($_POST['theme_slug']) : 'frontis';
+    
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/misc.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        require_once ABSPATH . 'wp-admin/includes/theme.php';
+        require_once ABSPATH . 'wp-admin/includes/template.php';
+    
+        $wp_theme = wp_get_theme($theme_slug);
+    
+        // If theme is not installed - download & install
+        if (!$wp_theme->exists()) {
+    
+            // Correct API endpoint
+            $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.2/?action=theme_information&request[slug]={$theme_slug}");
+    
+            if (is_wp_error($theme_information)) {
+                wp_send_json_error(['message' => 'Theme info request failed: ' . $theme_information->get_error_message()]);
+            }
+    
+            $theme_data = json_decode(wp_remote_retrieve_body($theme_information), true);
+            $download_url = $theme_data['download_link'] ?? null;
+    
+            if (!$download_url) {
+                wp_send_json_error(['message' => 'Theme download link not found from wordpress.org']);
+            }
+    
+            $upgrader = new \Theme_Upgrader(new \Automatic_Upgrader_Skin());
+            $install_result = $upgrader->install($download_url);
+    
+            if (!$install_result) {
+                wp_send_json_error(['message' => 'Theme installation failed']);
             }
         }
-        
-        $theme_version = $theme_information_response['themes'][0]['version'];
-        if(!$theme_exist) {
-            $download_url = "https://downloads.wordpress.org/theme/{$theme_slug}.{$theme_version}.zip";
-            $upload = wp_upload_bits('temp-' . $theme_slug . '.zip', null, '');
-            
-            if ($upload['error']) {
-                wp_die('Upload error: ' . $upload['error']);
+    
+        // Activate this theme
+        switch_theme($theme_slug);
+    
+        wp_send_json_success(['theme' => $theme_slug, 'activated' => true]);
+    }    
+    
+
+    /**
+     * Install & Activate Plugins
+     * AJAX action: fb_install_active_plugins
+     * Expected $_POST['plugins'] = json_encode([ {slug: 'plugin-slug', version: '1.2.3'}, ... ])
+     */
+    public function install_active_plugins() {
+        $this->check_permission();
+
+        $plugins = json_decode(stripslashes($_POST['plugins'] ?? '[]'), true);
+        if (!is_array($plugins) || empty($plugins)) {
+            wp_send_json_error(['message' => 'No plugins provided']);
+        }
+
+        // include required WP files
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/misc.php';
+        require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+        require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+        require_once ABSPATH . 'wp-admin/includes/update.php';
+
+        $results = [];
+
+        // get all plugins list for detection
+        $all_plugins = get_plugins();
+
+        foreach ($plugins as $plugin) {
+            $slug = sanitize_text_field($plugin['slug']);
+            $version = sanitize_text_field($plugin['version'] ?? '');
+            $plugin_main_file = $slug . '/' . $slug . '.php';
+
+            // detect installed plugin by slug (more robust: search get_plugins by folder)
+            $is_installed = false;
+            $installed_version = null;
+            foreach ($all_plugins as $path => $meta) {
+                // path is like 'plugin-folder/plugin-main.php'
+                if (strpos($path, $slug . '/') === 0) {
+                    $is_installed = true;
+                    $installed_version = $meta['Version'] ?? null;
+                    $plugin_main_file = $path; // actual relative path for activate_plugin
+                    break;
+                }
             }
-            
-            $temp_zip_path = $upload['file'];
-            
-            // Download using wp_remote_get with stream to file
-            $download_result = wp_remote_get($download_url, array(
-                'timeout' => 300,
-                'stream' => true,
-                'filename' => $temp_zip_path
-            ));
-            
-            if (is_wp_error($download_result)) {
-                wp_die('Download failed: ' . $download_result->get_error_message());
-            }
-            
-            // Verify download
-            if (!file_exists($temp_zip_path) || filesize($temp_zip_path) == 0) {
-                wp_die('Downloaded file is empty or missing');
-            }
-            
-            $themes_dir = WP_CONTENT_DIR . '/themes';
-            $extract_path = $themes_dir . '/' . $theme_slug;
-            
-            // Create themes directory if it doesn't exist
-            if (!file_exists($themes_dir)) {
-                wp_mkdir_p($themes_dir);
-            }
-            
-            // Remove existing directory if it exists (backup first)
-            if (file_exists($extract_path)) {
-                $backup_dir = $extract_path . '_backup_' . time();
-                rename($extract_path, $backup_dir);
-            }
-            
-            // Initialize PclZip
-            $archive = new PclZip($temp_zip_path);
-            
-            // Extract to themes directory
-            $extract_result = $archive->extract(PCLZIP_OPT_PATH, $themes_dir);
-            
-            if ($extract_result == 0) {
-                wp_die('PclZip extraction failed: ' . $archive->errorInfo(true));
-            }
-            
-            // Clean up temp zip file
-            unlink($temp_zip_path);
-            
-            // Verify extraction by checking for style.css
-            $style_css_path = $extract_path . '/style.css';
-            if (!file_exists($style_css_path)) {
-                wp_die('Theme extraction failed - style.css not found at: ' . $style_css_path);
-            }
-            
-            // Remove any parent directories created by extraction (zip often has extra folder)
-            $extracted_dirs = glob($themes_dir . '/' . $theme_slug . '*');
-            if (count($extracted_dirs) > 1 || (count($extracted_dirs) == 1 && basename($extracted_dirs[0]) != $theme_slug)) {
-                // Move contents from subfolder to correct location
-                foreach ($extracted_dirs as $dir) {
-                    if (is_dir($dir) && basename($dir) != $theme_slug) {
-                        $iterator = new RecursiveIteratorIterator(
-                            new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
-                            RecursiveIteratorIterator::SELF_FIRST
-                        );
-                        
-                        foreach ($iterator as $item) {
-                            $dest = str_replace($dir, $extract_path, $item->getPathname());
-                            if ($item->isDir()) {
-                                wp_mkdir_p($dest);
-                            } else {
-                                copy($item->getPathname(), $dest);
-                            }
-                        }
-                        // Remove the extra directory
-                        $this->rmdir_recursive($dir);
+
+            $need_install = !$is_installed || ($version && $installed_version && version_compare($installed_version, $version, '<'));
+
+            if ($need_install) {
+                $download_url = $version ? "https://downloads.wordpress.org/plugin/{$slug}.{$version}.zip" : "https://downloads.wordpress.org/plugin/{$slug}.zip";
+
+                $upgrader = new \Plugin_Upgrader( new \Automatic_Upgrader_Skin() );
+                $install_result = $upgrader->install($download_url);
+
+                if (!$install_result) {
+                    $results[$slug] = 'install_failed';
+                    // refresh plugin list (maybe installed under different path)
+                    $all_plugins = get_plugins();
+                    continue;
+                }
+
+                // refresh plugin list and attempt to find plugin file path
+                $all_plugins = get_plugins();
+                $found = false;
+                foreach ($all_plugins as $path => $meta) {
+                    if (strpos($path, $slug . '/') === 0) {
+                        $plugin_main_file = $path;
+                        $found = true;
+                        break;
                     }
                 }
+                if (!$found) {
+                    $results[$slug] = 'installed_but_entry_not_found';
+                    continue;
+                }
+            }
+
+            // Activate plugin if not active
+            if (!is_plugin_active($plugin_main_file)) {
+                $activate_result = activate_plugin($plugin_main_file);
+
+                if (is_wp_error($activate_result)) {
+                    $results[$slug] = 'activation_failed: ' . $activate_result->get_error_message();
+                } else {
+                    $results[$slug] = 'installed_and_activated';
+                }
+            } else {
+                $results[$slug] = $need_install ? 'installed_and_already_active' : 'already_active';
             }
         }
-        
-        // Activate the theme
-        $activate_result = switch_theme($theme_slug);
-        
-        if (is_wp_error($activate_result)) {
-            return false;
-        }
 
-        return true;
+        wp_send_json_success(['plugins' => $results]);
     }
+    
 
+    // public function full_site_import() {
+    //     $this->check_permission();
+    
+    //     $title            = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+    //     $content          = isset($_POST['content']) ? $_POST['content'] : '';
+    //     $site_url         = isset($_POST['site_url']) ? sanitize_text_field($_POST['site_url']) : '';
+    //     $uploads_updated  = isset($_POST['uploads_updated']) ? sanitize_text_field($_POST['uploads_updated']) : false;
+    
+    //     if (empty($title)) {
+    //         wp_send_json_error(['message' => 'Title is required']);
+    //     }
+    
+    //     if ($uploads_updated) {
+    //         $my_domain = trailingslashit($site_url);
+    //         preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
+    
+    //         if (!empty($matches[0])) {
+    //             $image_urls = array_unique($matches[0]);
+    
+    //             foreach ($image_urls as $url) {
+    
+    //                 if (preg_match('/\/2025\//', $url)) {
+    //                     $new_url = preg_replace(
+    //                         '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
+    //                         $my_domain . 'wp-content/uploads/',
+    //                         $url
+    //                     );
+    //                 } else {
+    //                     $new_url = preg_replace(
+    //                         '/^https?:\/\/[^\/]+\//',
+    //                         $my_domain,
+    //                         $url
+    //                     );
+    //                 }
+    
+    //                 $content = str_replace($url, $new_url, $content);
+    //             }
+    //         }
+    //     }
+    
+    //     // Ensure unique title
+    //     $original_title = $title;
+    //     $suffix = 1;
+    //     while (post_exists($title)) {
+    //         $title = $original_title . ' ' . $suffix;
+    //         $suffix++;
+    //     }
+    
+    //     $page_id = wp_insert_post([
+    //         'post_title'   => $title,
+    //         'post_content' => $content,
+    //         'post_status'  => 'publish',
+    //         'post_type'    => 'page',
+    //     ]);
+    
+    //     if ($page_id) {
+    
+    //         // Make front page if imported title contains "home"
+    //         if (stripos($title, 'home') !== false) {
+    //             update_option('page_on_front', $page_id);
+    //             update_option('show_on_front', 'page');
+    //         }
+    
+    //         Helper::insert_job($page_id, $title . $page_id);
+    
+    //         wp_send_json_success([
+    //             'message' => 'Page created successfully',
+    //             'page_id' => $page_id,
+    //             'title'   => $title
+    //         ]);
+    //     } else {
+    //         wp_send_json_error(['message' => 'Failed to create page']);
+    //     }
+    // }
 
     public function full_site_import() {
         $this->check_permission();
-
-        $this->upload_files();
-        $this->install_active_plugins();
-        $this->active_theme();
     
-        $title   = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        // Input data
+        $title           = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+        $content          = isset($_POST['content']) ? $_POST['content'] : '';
+        $slug            = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
+        $template        = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
+        $badge           = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
+        $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
+        $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
     
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
         }
-
-        if($uploads_updated) {
-            $my_domain = 'http://boomdevsco.test/';
-            preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
     
-            if (!empty($matches[0])) {
-                $image_urls = array_unique($matches[0]);
-    
-                foreach ($image_urls as $url) {
-    
-                    // If URL contains "2025"
-                    if (preg_match('/\/2025\//', $url)) {
-                        // Replace everything before 2025 with your given URL
-                        $new_url = preg_replace('/^https?:\/\/[^\/]+\/.*?(?=2025\/)/', $my_domain . 'wp-content/uploads/', $url);
-                    } else {
-                        // Replace only the domain name
-                        $new_url = preg_replace('/^https?:\/\/[^\/]+\//', $my_domain, $url);
-                    }
-    
-                    // Replace inside content
-                    $content = str_replace($url, $new_url, $content);
-                }
-            }
+        // Step 1: Update image URLs (if uploads_updated)
+        if ($uploads_updated && !empty($site_url)) {
+            $content = $this->replace_image_urls($content, $my_domain = trailingslashit($site_url));
         }
-
+    
+        // Step 2: Generate unique slug if not provided or duplicate
+        if (empty($slug)) {
+            $slug = sanitize_title($title);
+        }
+    
+        $original_slug = $slug;
+        $suffix = 1;
+        while (get_page_by_path($slug)) {
+            $slug = $original_slug . '-' . $suffix;
+            $suffix++;
+        }
+    
+        // Step 3: Check if page with same title exists → unique title
+        $original_title = $title;
+        $title_suffix = 1;
+        while ($this->post_exists_by_title($title, 'page')) {
+            $title = $original_title . ' ' . $title_suffix;
+            $title_suffix++;
+        }
+    
+        // Step 4: Create page
         $page_id = wp_insert_post([
             'post_title'   => $title,
-            'post_content' => $content, // Save raw JSON directly
+            'post_name'    => $slug,
+            'post_content' => $content,
             'post_status'  => 'publish',
             'post_type'    => 'page',
-        ]);
+        ], true);
     
-        if ($page_id) {
-            // Insert job using your existing Helper method
-            Helper::insert_job($page_id, $title . $page_id);
-            
-            wp_send_json_success([
-                'message' => 'Page created successfully',
-                'page_id' => $page_id,
-                'title'   => $title
-            ]);
-        } else {
-            wp_send_json_error(['message' => 'Failed to create page']);
+        if (is_wp_error($page_id)) {
+            wp_send_json_error(['message' => 'Failed to create page: ' . $page_id->get_error_message()]);
         }
+    
+        // Step 5: Assign template
+        if (!empty($template)) {
+            update_post_meta($page_id, '_wp_page_template', $template);
+        }
+    
+        // Step 6: Handle badge
+        if ($badge === 'front-page' || stripos($title, 'home') !== false || $slug === 'home') {
+            update_option('page_on_front', $page_id);
+            update_option('show_on_front', 'page');
+        }
+        // Future: Add logic for 'blog', 'privacy', etc.
+        // Example: if ($badge === 'blog') { update_option('page_for_posts', $page_id); }
+    
+        // Step 7: Save badge as meta (optional, for future use)
+        if (!empty($badge)) {
+            update_post_meta($page_id, '_fb_page_badge', $badge);
+        }
+    
+        // Step 8: Insert job (your helper)
+        if (class_exists('FrontisBlocks\Utils\Helper')) {
+            Helper::insert_job($page_id, $title . '-' . $page_id);
+        }
+    
+        wp_send_json_success([
+            'message'     => 'Page created successfully',
+            'page_id'     => $page_id,
+            'title'       => $title,
+            'slug'        => $slug,
+            'template'    => $template,
+            'badge'       => $badge
+        ]);
     }
 
+    /**
+     * Replace image URLs from external to local uploads
+     */
+    private function replace_image_urls($content, $my_domain) {
+        preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg|avif)/i', $content, $matches);
+
+        if (empty($matches[0])) return $content;
+
+        $image_urls = array_unique($matches[0]);
+
+        foreach ($image_urls as $url) {
+            $parsed = parse_url($url);
+            $path = isset($parsed['path']) ? $parsed['path'] : '';
+
+            if (preg_match('/\/2025\//', $path)) {
+                $new_url = preg_replace(
+                    '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
+                    $my_domain . 'wp-content/uploads/',
+                    $url
+                );
+            } elseif (preg_match('/wp-content\/uploads/', $path)) {
+                $new_url = preg_replace(
+                    '/^https?:\/\/[^\/]+\//',
+                    $my_domain,
+                    $url
+                );
+            } else {
+                $new_url = $my_domain . ltrim($path, '/');
+            }
+
+            $content = str_replace($url, $new_url, $content);
+        }
+
+        return $content;
+    }
+
+    /**
+     * Check if post exists by title and post type
+     */
+    private function post_exists_by_title($title, $post_type = 'page') {
+        global $wpdb;
+        $exists = $wpdb->get_var($wpdb->prepare(
+            "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s AND post_status IN ('publish', 'draft', 'private') LIMIT 1",
+            $title, $post_type
+        ));
+        return !empty($exists);
+    }
+    
+    
     public function demo_import() {
         if (!isset($_POST['json_data'])) {
             wp_send_json_error('No JSON data found');
@@ -431,6 +540,8 @@ class TemplateLibrary extends AjaxBase {
         ];
 
         $all_img_srcs = [];
+
+
 
         foreach ($patterns as $type => $pattern) {
             preg_match_all($pattern, $content, $matches);
@@ -518,4 +629,333 @@ class TemplateLibrary extends AjaxBase {
             ]
         ]);
     }
+
+    
+    /**
+     * Get templates by post type and name.
+     *
+     * @param string $post_type Post type to filter templates.
+     * @return WP_Block_Template[] Array of matching templates.
+     */
+    public function get_templates() {
+        $this->check_permission();
+    
+        $post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : 'page';
+    
+        // Step 1: Get templates ONLY from CURRENT active theme
+        $current_theme = get_stylesheet(); // e.g., 'frontisblocks'
+        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+    
+        // Step 2: Filter: slug contains 'fb-template' + post_type match
+        $matching_templates = array_filter($all_templates, function ($template) use ($post_type) {
+            // 1. Must have 'fb-template' in slug
+            if (strpos($template->slug, 'fb-template') === false) {
+                return false;
+            }
+    
+            // 2. Get assigned post_types from meta
+            $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+            $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    
+            // If no post_types assigned → include as fallback
+            if (empty($assigned_post_types)) {
+                return true;
+            }
+    
+            // Match requested post_type
+            return in_array($post_type, $assigned_post_types, true);
+        });
+    
+        if (!empty($matching_templates)) {
+            $output = [];
+            foreach ($matching_templates as $template) {
+                $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+                $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    
+                $output[] = [
+                    'title'        => $template->title,
+                    'slug'         => $template->slug,
+                    'content'      => $template->content,
+                    'post_types'   => $assigned_post_types,
+                ];
+            }
+    
+            wp_send_json_success(['templates' => $output]);
+        } else {
+            wp_send_json_error(['message' => 'No fb-template found in current theme']);
+        }
+    }
+
+    public function get_all_template_parts() {
+        $this->check_permission();
+    
+        $current_theme = get_stylesheet();
+    
+        // Step 1: Get ALL fb-template from current theme
+        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+        $fb_templates = array_filter($all_templates, function ($t) {
+            return strpos($t->slug, 'fb-template') !== false;
+        });
+    
+        if (empty($fb_templates)) {
+            wp_send_json_success(['template_parts' => []]);
+        }
+    
+        $all_parts = [];
+    
+        foreach ($fb_templates as $template) {
+            $parsed = parse_blocks($template->content);
+            $slugs = [];
+            $this->extract_template_part_slugs($parsed, $slugs);
+    
+            foreach ($slugs as $slug) {
+                $part_id = $current_theme . '//' . $slug;
+                $part = get_block_template($part_id, 'wp_template_part');
+    
+                if ($part) {
+                    $key = $part->slug; // unique by slug
+                    if (!isset($all_parts[$key])) {
+                        $all_parts[$key] = [
+                            'title'   => $part->title,
+                            'slug'    => $part->slug,
+                            'content' => $part->content,
+                            'area'    => get_post_meta($part->wp_id, 'wp_template_part_area', true),
+                            'used_in' => []
+                        ];
+                    }
+                    $all_parts[$key]['used_in'][] = $template->slug;
+                }
+            }
+        }
+    
+        wp_send_json_success(['template_parts' => array_values($all_parts)]);
+    }
+    private function extract_template_part_slugs($blocks, &$slugs) {
+        foreach ($blocks as $block) {
+            if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
+                $slugs[] = $block['attrs']['slug'];
+            }
+            if (!empty($block['innerBlocks'])) {
+                $this->extract_template_part_slugs($block['innerBlocks'], $slugs);
+            }
+        }
+    }
+
+    /**
+     * Create a custom block-template and assign it to the "page" post-type.
+     *
+     * Put this in your theme’s functions.php or in a small MU-plugin.
+     */
+    public function create_single_page_template($slug, $content, $title) {
+
+        $existing = get_page_by_path(
+            $slug,
+            OBJECT,
+            'wp_template'
+        );
+
+        if ( $existing ) {
+            return; // already created
+        }
+
+        $template_id = wp_insert_post( [
+            'post_title'   => $slug,                 // Human readable title
+            'post_name'    => $slug, // slug
+            'post_content' => $content,
+            'post_status'  => 'publish',
+            'post_type'    => 'wp_template',
+        ] );
+
+        if ( is_wp_error( $template_id ) ) {
+            return false;
+        }
+
+        wp_set_object_terms( $template_id, get_stylesheet(), 'wp_theme' );
+        update_option( 'fb_template_single_page_created', true );
+    }
+
+    /**
+     * AJAX: Push a single template to wp_template
+     */
+    public function push_template() {
+        $this->check_permission();
+    
+        $slug       = $_POST['slug'];
+        $title      = $_POST['title'];
+        $content    = $_POST['content'];
+        $post_types = array_map('sanitize_text_field', (array)($_POST['post_types'] ?? []));
+    
+        if (empty($slug) || empty($title) || empty($content)) {
+            wp_send_json_error(['message' => 'Required fields missing']);
+        }
+    
+        $this->create_single_page_template($slug, $content, $title);
+
+        wp_send_json_success(['message' => 'Template created']);
+    }
+
+    function process_template_parts($template_parts) {
+        $id_mapping = [];
+        $navigations = $template_parts['navigations'] ?? [];
+        $template_content = $template_parts['template_content'] ?? '';
+        
+        // Step 1: Create navigation posts and store ID mapping
+        foreach ($navigations as $nav_key => $nav_data) {
+            $old_id = $nav_data['id'];
+            
+            // Create the navigation post
+            $new_post_id = wp_insert_post([
+                'post_title'   => $nav_data['slug'],
+                'post_content' => $nav_data['content'],
+                'post_status'  => 'publish',
+                'post_type'    => 'wp_navigation',
+                'post_name'    => $nav_data['slug']
+            ]);
+            
+            if (!is_wp_error($new_post_id)) {
+                // Store the mapping of old ID to new ID
+                $id_mapping[$old_id] = $new_post_id;
+                
+                echo "Created navigation: {$nav_data['slug']} (Old ID: {$old_id} → New ID: {$new_post_id})\n";
+            } else {
+                echo "Error creating navigation: {$nav_data['slug']}\n";
+            }
+        }
+        
+        // Step 2: Replace IDs in template content
+        $updated_content = $this->replace_navigation_ids($template_content, $id_mapping);
+        
+        return [
+            'id_mapping' => $id_mapping,
+            'updated_content' => $updated_content
+        ];
+    }
+
+    function replace_navigation_ids($content, $id_mapping) {
+        foreach ($id_mapping as $old_id => $new_id) {
+            // Pattern 1: Replace in wp:navigation blocks with "ref" attribute
+            // Example: <!-- wp:navigation {"ref":1047,...} /-->
+            $content = preg_replace(
+                '/("ref":)' . $old_id . '\b/',
+                '${1}' . $new_id,
+                $content
+            );
+        }
+        
+        return $content;
+    }
+
+    public function create_navigation_with_assign($content, $navigations) {
+        $template_parts = array(
+            'navigations' => array(
+                'main_nav' => array(
+                    'content' => '<!-- wp:navigation-link {"label":"Privacy Policy","url":"/privacy-policy","kind":"custom"} /-->
+
+<!-- wp:navigation-link {"label":"Terms of Service","url":"/terms-of-service","kind":"custom"} /-->
+
+<!-- wp:navigation-link {"label":"Cookie Policy","url":"/cookie-policy","kind":"custom"} /-->',
+'slug' => 'navigation-14',
+'id' => 1047
+                ),
+                'secondary_nav' => array(
+                    'content' => '<!-- wp:navigation-link {"label":"Privacy Policy","url":"/privacy-policy","kind":"custom"} /-->
+
+<!-- wp:navigation-link {"label":"Terms of Service","url":"/terms-of-service","kind":"custom"} /-->
+
+<!-- wp:navigation-link {"label":"Cookie Policy","url":"/cookie-policy","kind":"custom"} /-->',
+'slug' => 'navigation-15',
+'id' => 1047
+                )
+            ),
+            'template_content' => '<!-- wp:frontis-blocks/container {"p_block_id":"block-bd6aebd6-2b35-4d68-99a4-623326f20e54","blockStyle":"#block-bd6aebd6-2b35-4d68-99a4-623326f20e54 \u003e .frontis-blocks-container__shape-top svg{width: calc( 100% + 1.3px );} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54 \u003e .frontis-blocks-container__shape-top .frontis-blocks-container__shape-fill{fill: #333;} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54 \u003e .frontis-blocks-container__shape-bottom svg{width: calc( 100% + 1.3px );} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54 \u003e .frontis-blocks-container__shape-bottom .frontis-blocks-container__shape-fill{fill: #333;} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54 .frontis-blocks-container__video-wrap video{opacity: 1;} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{display: flex;flex-direction: row;align-items: center;justify-content: center;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container){margin-left: 0px;margin-right: 0px;} .wp-block-frontis-blocks-container.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{max-width: 100%;width: 100%;padding: 10px;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;position: relative;border-width: 0px 0px 0px 0px;border-radius: ;} .wp-block-frontis-blocks-container.child.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{display: flex;flex-direction: row;align-items: center;justify-content: center;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1200px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}@media only screen and (max-width: 1024px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{order: initial;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54 {max-width: 100%;width: 100%;padding: 10px;border-width: ;border-radius: ;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1024px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}@media only screen and (max-width: 767px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container .block-editor-inner-blocks .block-editor-block-list__layout .wp-block[data-type=\u0022core/quote\u0022]{margin-inline-start: 0px;margin-inline-end: 0px;}}@media only screen and (max-width: 767px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{order: initial;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54 {max-width: 100%;width: 100%;padding: 10px;border-width: ;border-radius: ;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { #block-bd6aebd6-2b35-4d68-99a4-623326f20e54.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,767px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}","globalRowGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalColumnGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalFullWidthContentBoxedWidth":{"Desktop":"1200","Tablet":"1024","Mobile":"767"},"directionDesktop":"row","containerGlobalPadding":{"Desktop":"10","Tablet":"10","Mobile":"10"},"variationSelected":true,"isBlockRootParent":true} -->
+<div class="wp-block-frontis-blocks-container frontis-blocks-block-bd6aebd6-2b35-4d68-99a4-623326f20e54 alignfull frontis-blocks-is-root-container" id="block-bd6aebd6-2b35-4d68-99a4-623326f20e54"><div class="frontis-blocks-container-inner-blocks-wrap " id=""><!-- wp:frontis-blocks/container {"p_block_id":"block-ac44a291-0126-4c4e-9a52-d0dc11119e60","blockStyle":"#block-ac44a291-0126-4c4e-9a52-d0dc11119e60 \u003e .frontis-blocks-container__shape-top svg{width: calc( 100% + 1.3px );} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60 \u003e .frontis-blocks-container__shape-top .frontis-blocks-container__shape-fill{fill: #333;} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60 \u003e .frontis-blocks-container__shape-bottom svg{width: calc( 100% + 1.3px );} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60 \u003e .frontis-blocks-container__shape-bottom .frontis-blocks-container__shape-fill{fill: #333;} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60 .frontis-blocks-container__video-wrap video{opacity: 1;} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{display: flex;flex-direction: row;align-items: center;justify-content: flex-start;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container){margin-left: 0px;margin-right: 0px;} .wp-block-frontis-blocks-container.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{max-width: 25%;width: 100%;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;position: relative;border-width: 0px 0px 0px 0px;border-radius: ;} .wp-block-frontis-blocks-container.child.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{display: flex;flex-direction: row;align-items: center;justify-content: flex-start;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1200px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}@media only screen and (max-width: 1024px) { #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{order: initial;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60 {max-width: 25%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1024px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}@media only screen and (max-width: 767px) { #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.wp-block-frontis-blocks-container .block-editor-inner-blocks .block-editor-block-list__layout .wp-block[data-type=\u0022core/quote\u0022]{margin-inline-start: 0px;margin-inline-end: 0px;}}@media only screen and (max-width: 767px) { #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { #block-ac44a291-0126-4c4e-9a52-d0dc11119e60.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{order: initial;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60 {max-width: 100%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,767px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}","customWidth":{"Desktop":25,"Tablet":25,"Mobile":100},"globalRowGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalColumnGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalFullWidthContentBoxedWidth":{"Desktop":"1200","Tablet":"1024","Mobile":"767"},"containerJustify":{"Desktop":"flex-start","Tablet":"","Mobile":""},"containerGlobalPadding":{"Desktop":"10","Tablet":"10","Mobile":"10"},"widthSetByUser":true} -->
+<div class="wp-block-frontis-blocks-container frontis-blocks-block-ac44a291-0126-4c4e-9a52-d0dc11119e60 child " id="block-ac44a291-0126-4c4e-9a52-d0dc11119e60"><!-- wp:site-logo /--></div>
+<!-- /wp:frontis-blocks/container -->
+
+<!-- wp:frontis-blocks/container {"p_block_id":"block-13613bfd-5231-4669-b7dd-c697f27d5e11","blockStyle":"#block-13613bfd-5231-4669-b7dd-c697f27d5e11 \u003e .frontis-blocks-container__shape-top svg{width: calc( 100% + 1.3px );} #block-13613bfd-5231-4669-b7dd-c697f27d5e11 \u003e .frontis-blocks-container__shape-top .frontis-blocks-container__shape-fill{fill: #333;} #block-13613bfd-5231-4669-b7dd-c697f27d5e11 \u003e .frontis-blocks-container__shape-bottom svg{width: calc( 100% + 1.3px );} #block-13613bfd-5231-4669-b7dd-c697f27d5e11 \u003e .frontis-blocks-container__shape-bottom .frontis-blocks-container__shape-fill{fill: #333;} #block-13613bfd-5231-4669-b7dd-c697f27d5e11 .frontis-blocks-container__video-wrap video{opacity: 1;} #block-13613bfd-5231-4669-b7dd-c697f27d5e11.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{display: flex;flex-direction: row;align-items: center;justify-content: center;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} #block-13613bfd-5231-4669-b7dd-c697f27d5e11.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container){margin-left: 0px;margin-right: 0px;} .wp-block-frontis-blocks-container.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{max-width: 50%;width: 100%;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;position: relative;border-width: 0px 0px 0px 0px;border-radius: ;} .wp-block-frontis-blocks-container.child.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{display: flex;flex-direction: row;align-items: center;justify-content: center;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1200px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}@media only screen and (max-width: 1024px) { #block-13613bfd-5231-4669-b7dd-c697f27d5e11.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { #block-13613bfd-5231-4669-b7dd-c697f27d5e11.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{order: initial;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11 {max-width: 50%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1024px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}@media only screen and (max-width: 767px) { #block-13613bfd-5231-4669-b7dd-c697f27d5e11.wp-block-frontis-blocks-container .block-editor-inner-blocks .block-editor-block-list__layout .wp-block[data-type=\u0022core/quote\u0022]{margin-inline-start: 0px;margin-inline-end: 0px;}}@media only screen and (max-width: 767px) { #block-13613bfd-5231-4669-b7dd-c697f27d5e11.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { #block-13613bfd-5231-4669-b7dd-c697f27d5e11.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{order: initial;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11 {max-width: 100%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,767px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}","customWidth":{"Desktop":50,"Tablet":50,"Mobile":100},"globalRowGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalColumnGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalFullWidthContentBoxedWidth":{"Desktop":"1200","Tablet":"1024","Mobile":"767"},"containerGlobalPadding":{"Desktop":"10","Tablet":"10","Mobile":"10"},"widthSetByUser":true} -->
+<div class="wp-block-frontis-blocks-container frontis-blocks-block-13613bfd-5231-4669-b7dd-c697f27d5e11 child " id="block-13613bfd-5231-4669-b7dd-c697f27d5e11"><!-- wp:navigation {"ref":1047,"metadata":{"ignoredHookedBlocks":["woocommerce/customer-account","woocommerce/mini-cart"]}} /-->
+
+<!-- wp:navigation {"ref":1047,"metadata":{"ignoredHookedBlocks":["woocommerce/customer-account"]}} /--></div>
+<!-- /wp:frontis-blocks/container -->
+
+<!-- wp:frontis-blocks/container {"p_block_id":"block-de53b0da-1f6b-4924-9f6e-a537b357d233","blockStyle":"#block-de53b0da-1f6b-4924-9f6e-a537b357d233 \u003e .frontis-blocks-container__shape-top svg{width: calc( 100% + 1.3px );} #block-de53b0da-1f6b-4924-9f6e-a537b357d233 \u003e .frontis-blocks-container__shape-top .frontis-blocks-container__shape-fill{fill: #333;} #block-de53b0da-1f6b-4924-9f6e-a537b357d233 \u003e .frontis-blocks-container__shape-bottom svg{width: calc( 100% + 1.3px );} #block-de53b0da-1f6b-4924-9f6e-a537b357d233 \u003e .frontis-blocks-container__shape-bottom .frontis-blocks-container__shape-fill{fill: #333;} #block-de53b0da-1f6b-4924-9f6e-a537b357d233 .frontis-blocks-container__video-wrap video{opacity: 1;} #block-de53b0da-1f6b-4924-9f6e-a537b357d233.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} #block-de53b0da-1f6b-4924-9f6e-a537b357d233.wp-block-frontis-blocks-container:not(.frontis-blocks-is-root-container){margin-left: 0px;margin-right: 0px;} .wp-block-frontis-blocks-container.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{max-width: 25%;width: 100%;margin-top: 0px;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;position: relative;border-width: 0px 0px 0px 0px;border-radius: ;} .wp-block-frontis-blocks-container.child.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{display: flex;flex-direction: row;align-items: center;justify-content: flex-end;flex-wrap: wrap;row-gap: 0px;column-gap: 0px;} false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1200px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}@media only screen and (max-width: 1024px) { #block-de53b0da-1f6b-4924-9f6e-a537b357d233.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { #block-de53b0da-1f6b-4924-9f6e-a537b357d233.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{order: initial;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233 {max-width: 25%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 1024px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 1024px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,1024px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}@media only screen and (max-width: 767px) { #block-de53b0da-1f6b-4924-9f6e-a537b357d233.wp-block-frontis-blocks-container .block-editor-inner-blocks .block-editor-block-list__layout .wp-block[data-type=\u0022core/quote\u0022]{margin-inline-start: 0px;margin-inline-end: 0px;}}@media only screen and (max-width: 767px) { #block-de53b0da-1f6b-4924-9f6e-a537b357d233.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { #block-de53b0da-1f6b-4924-9f6e-a537b357d233.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{order: initial;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233 {max-width: 100%;width: 100%;border-width: ;border-radius: ;}}@media only screen and (max-width: 767px) { .wp-block-frontis-blocks-container.child.frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233{flex-wrap: wrap;row-gap: 0px;column-gap: 0px;}}@media only screen and (max-width: 767px) { false.wp-block-frontis-blocks-container \u003e .frontis-blocks-container-inner-blocks-wrap{\u002d\u002dinner-content-custom-width: min(100vw,767px);max-width: var(\u002d\u002dinner-content-custom-width);width: 100%;margin-left: auto;margin-right: auto;}}","customWidth":{"Desktop":25,"Tablet":25,"Mobile":100},"globalRowGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalColumnGap":{"Desktop":"0","Tablet":"0","Mobile":"0"},"globalFullWidthContentBoxedWidth":{"Desktop":"1200","Tablet":"1024","Mobile":"767"},"containerJustify":{"Desktop":"flex-end","Tablet":"","Mobile":""},"containerGlobalPadding":{"Desktop":"10","Tablet":"10","Mobile":"10"},"widthSetByUser":true} -->
+<div class="wp-block-frontis-blocks-container frontis-blocks-block-de53b0da-1f6b-4924-9f6e-a537b357d233 child " id="block-de53b0da-1f6b-4924-9f6e-a537b357d233"><!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button">Contact us</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons --></div>
+<!-- /wp:frontis-blocks/container --></div></div>
+<!-- /wp:frontis-blocks/container -->'
+        );
+
+        $this->process_template_parts($template_parts);
+    }
+
+    function create_template_part($content, $slug, $title, $area, $navigations) {
+        // Check if template parts are supported
+        if ( ! function_exists( 'wp_is_block_theme' ) || ! wp_is_block_theme() ) {
+            return;
+        }
+        
+        $content = $this->create_navigation_with_assign($content, $navigations);
+
+        // Check if the template part already exists
+        $existing_template_part = get_posts( array(
+            'post_type'      => 'wp_template_part',
+            'post_status'    => 'publish',
+            'name'           => $slug,
+            'posts_per_page' => 1,
+            'fields'         => 'ids',
+            'tax_query'      => array(
+                array(
+                    'taxonomy' => 'wp_theme',
+                    'field'    => 'slug',
+                    'terms'    => get_stylesheet(), // Current theme
+                ),
+            ),
+        ) );
+    
+        $post_data = array(
+            'post_content' => $content,
+            'post_title'   => $title,
+            'post_name'    => $slug,
+            'post_type'    => 'wp_template_part',
+            'post_status'  => 'publish',
+            'tax_input'    => array(
+                'wp_theme' => get_stylesheet(),
+            ),
+        );
+    
+        if ( ! empty( $existing_template_part ) ) {
+            // Update existing
+            $post_data['ID'] = $existing_template_part[0];
+            wp_update_post( $post_data );
+        } else {
+            // Insert new
+            $post_id = wp_insert_post( $post_data );
+    
+            // Assign to theme taxonomy
+            if ( $post_id ) {
+                wp_set_object_terms( $post_id, get_stylesheet(), 'wp_theme' );
+            }
+        }
+    
+        wp_set_object_terms( $post_id ?? $existing_template_part[0], $$area, 'wp_template_part_area' );
+    }
+
+    public function push_template_parts() {
+        $this->check_permission();
+
+        $parts_data = [];
+        if (isset($_POST['parts']) && is_array($_POST['parts'])) {
+            foreach ($_POST['parts'] as $part) {
+                $this->create_template_part($part['content'], $part['slug'], $part['title'], $part['area'], $part['navigations']);
+            }
+        }
+    
+        wp_send_json_success([
+            'message'  => 'Template parts created',
+        ]);
+    }
+
 }

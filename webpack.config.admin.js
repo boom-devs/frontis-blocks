@@ -20,10 +20,11 @@ module.exports = {
 		},
 	},
 	entry: {
-		index: path.resolve(process.cwd(), 'admin', 'index.js'),
+		dashboard: path.resolve(process.cwd(), 'admin', 'dashboard', 'index.js'),
 		// dynamicContent: path.resolve(process.cwd(), 'admin', 'dynamic-content', 'index.js'),
 		sidebar: path.resolve(process.cwd(), 'admin', 'sidebar', 'index.js'),
 		tlibrary:path.resolve(process.cwd(), 'admin', 'template-library', 'index.js'),
+		tlsite:path.resolve(process.cwd(), 'admin', 'template-library-site', 'index.js'),
 		quickAccess:path.resolve(process.cwd(), 'admin', 'quick-sidebar', 'index.js'),
 		blockRecovery: path.resolve(process.cwd(), 'admin', 'block-recovery', 'index.js'),
 		copyPasteStyle: path.resolve(process.cwd(), 'admin', 'copy-paste', 'index.js'),
