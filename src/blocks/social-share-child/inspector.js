@@ -650,6 +650,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${socialShareLabelHoverBgColor ? `background: ${socialShareLabelHoverBgColor};` : ''}
         }
         @media all and (max-width: 1024px){
+            .${blockID} .social-share-child-container{
+                ${tabletBackgroundNormalStyles}
+                ${globalTabletPadding && socialShareChildGlobalPaddingDesktop?.top ? `padding: ${globalTabletPadding};` : ''}
+                ${globalTabletMargin && socialShareChildGlobalMarginDesktop?.top ? `margin: ${globalTabletMargin};` : ''}
+                ${globalTabletBorderWidth && socialShareChildGlobalBorderDesktop?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                ${globalTabletBorderRadiusWidth && socialShareChildGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+            }
+            .${blockID} .social-share-child-container:hover{
+                ${tabletBackgroundHoverStyles}
+            }
             .${blockID} .social-share-child-container .social-share-label{
                 ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Tablet && socialShareFontSizeUnits?.Tablet ? `font-size: ${socialShareFontSize?.Tablet}${socialShareFontSizeUnits?.Tablet};` : ''}
                 ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Tablet && socialShareLetterSpacingUnits?.Tablet ? `letter-spacing: ${socialShareLetterSpacing?.Tablet}${socialShareLetterSpacingUnits?.Tablet};` : ''}
@@ -660,6 +670,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         }
         @media all and (max-width: 767px){
+            .${blockID} .social-share-child-container{
+                ${mobileBackgroundNormalStyles}
+                ${globalMobilePadding && socialShareChildGlobalPaddingDesktop?.top ? `padding: ${globalMobilePadding};` : ''}
+                ${globalMobileMargin && socialShareChildGlobalMarginDesktop?.top ? `margin: ${globalMobileMargin};` : ''}
+                ${globalMobileBorderWidth && socialShareChildGlobalBorderDesktop?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && socialShareChildGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+            }
+            .${blockID} .social-share-child-container:hover{
+                ${mobileBackgroundHoverStyles}
+            }
             .${blockID} .social-share-child-container .social-share-label{
                 ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Mobile && socialShareFontSizeUnits?.Mobile ? `font-size: ${socialShareFontSize?.Mobile}${socialShareFontSizeUnits?.Mobile};` : ''}
                 ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Mobile && socialShareLetterSpacingUnits?.Mobile ? `letter-spacing: ${socialShareLetterSpacing?.Mobile}${socialShareLetterSpacingUnits?.Mobile};` : ''}
