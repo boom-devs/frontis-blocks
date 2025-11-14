@@ -185,7 +185,7 @@ const PatternLibraryButton = () => {
 
     const handlePageChange = (tab, page) => {
         setCurrentPage((prev) => ({ ...prev, [tab]: page }));
-        fetchData(tab, page, activeTagTab[activeTab]);
+        fetchData(tab, page, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
     };
 
     const handleActiveTag = (value) => {

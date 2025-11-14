@@ -124,7 +124,7 @@ const PatternLibraryButton = () => {
         setCurrentPage({ [activeTab]: 1 });
 
         fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
-        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
+        // fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
     }
 
     const handleTemplates = (value) => {
