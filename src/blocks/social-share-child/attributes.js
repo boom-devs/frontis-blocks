@@ -427,28 +427,28 @@ const attributes = {
 	socialShareChildGlobalPaddingDesktop: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	socialShareChildGlobalPaddingTablet: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	socialShareChildGlobalPaddingMobile: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '10',
+			bottom: '10',
+			left: '10',
+			right: '10',
 		},
 	},
 	socialShareChildGlobalPaddingLink: {
