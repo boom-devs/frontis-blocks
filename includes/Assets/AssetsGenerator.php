@@ -86,6 +86,7 @@ class AssetsGenerator
 			$page_name = $this->post->post_name;
 			$this->combine_and_save_css_file($page_name);
 			$this->get_font_families();
+
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
@@ -111,7 +112,9 @@ class AssetsGenerator
 						}
 						
 						// Insert job using your existing Helper method
-						Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
+						if ( ! empty( $this->post ) && ! empty( $this->post->post_name ) ) {
+							Helper::insert_job( $single_post_id, $this->post->post_name . $single_post_id );
+						}
 					}
 				}
 				} catch (Exception $e) {
@@ -173,7 +176,13 @@ class AssetsGenerator
 
 	public function get_page_content_with_template_parts() {
 		$template_contents = Helper::get_template_content($this->post->ID);
+
+		if(empty($template_contents)) {
+			$template_contents = $this->post;
+		}
+
 		$template_contents = TemplateProcessor::get_instance()->process_template($template_contents);
+
 		if($template_contents) {
 			$pattern = '/<!--\s*wp:post-content\s*/i';
 			if (preg_match_all($pattern, $template_contents, $wp_post_content_matchs) > 0) {
@@ -187,7 +196,37 @@ class AssetsGenerator
 					}
 				}
 			}
+			
+			$megamenu_block_exists = preg_match_all(
+				'#<!--\s*wp:frontis-blocks/advanced-megamenu\s+(\{.+?\})\s*/-->#s',
+				$template_contents,
+				$megamenu_matches
+			);
+			
+			if ($megamenu_block_exists) {
+				foreach ($megamenu_matches[1] as $index => $attributes) {
+					if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
+						$pattern_slug = $pattern_slug_match[1];
+						$pattern_post = get_post((int) $pattern_slug);
+						
+						if ($pattern_post && $pattern_post->post_type === 'wp_block') {
+							// Convert self-closing block to opening/closing format with pattern content inside
+							$megamenu_opening = str_replace('/-->', '-->', $megamenu_matches[0][$index]);
+							$megamenu_block_with_content = $megamenu_opening . "\n" 
+								. $pattern_post->post_content . "\n"
+								. '<!-- /wp:frontis-blocks/advanced-megamenu -->';
+							
+							$template_contents = str_replace(
+								$megamenu_matches[0][$index],
+								$megamenu_block_with_content,
+								$template_contents
+							);
+						}
+					}
+				}
+			}
 
+			// die();
 			return $template_contents;
 		}
 
@@ -231,7 +270,6 @@ class AssetsGenerator
 			}
 		}
 		
-		// Duplicate remove করা
 		$unique_results = [];
 		foreach ($results as $page) {
 			$unique_results[$page->ID] = $page;

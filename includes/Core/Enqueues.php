@@ -36,14 +36,11 @@ class Enqueues
     public function get_page_template_name()
     {
         $template_name = Helper::determine_template_post_type(get_the_ID());
-        // var_dump($template_name);
         $template_id = Helper::get_post_id_by_slug($template_name, 'wp_template');
         $frontis_critical_css_generation_template = get_post_meta($template_id, 'generate_critical_css', true);
         $frontis_critical_css_generation_page = get_post_meta(get_the_ID(), 'generate_critical_css', true);
         $this->critical_css_page = $frontis_critical_css_generation_page;
         $this->critical_css_template = $frontis_critical_css_generation_template;
-
-        // var_dump($template_name);
 
         return $template_name;
     }
@@ -104,6 +101,7 @@ class Enqueues
 
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
+
         $page_name = $frontis_used ? get_post(get_the_ID())->post_name : $page_name;
         $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
         $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';

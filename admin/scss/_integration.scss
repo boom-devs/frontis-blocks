@@ -1,9 +1,11 @@
 .fb-blocks-integration {
   
   .integration-section {
-    background-color: $white-color;
-    margin-bottom: 42px;
-    border-radius: 14px;
+    background-color: #FFFFFF99;
+    margin-top: 24px;
+    border-radius: 12px;
+    box-shadow: 0px 1px 2px 0px #0000001A;
+
 
     &:last-child {
       margin-bottom: 0;
@@ -14,15 +16,16 @@
     }
 
     .section-left {
-      max-width: 450px;
+      max-width: 545px;
       flex-shrink: 0;
-      padding: 42px;
+      padding: 24px;
+      box-sizing: border-box;
     }
 
     .section-right {
       position: relative;
       width: 100%;
-      padding: 42px;
+      padding: 24px;
       
       .section-right-overlay {
         position: absolute;
@@ -34,7 +37,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $neutral-color-50;
+        background-color: #FFFFFFCC;
         opacity: 0.6;
       }
       .fb-button-upcoming {
@@ -45,34 +48,26 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-family: $body-font-family;
-        font-size: 18px;
-        font-weight: 600;
-        line-height: 25px;
-        background-color: $error-color-400;
-        border-radius: $border-radius * 2;
-        padding: 12px 24px;
-        color: $white-color;
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 20px;
+        background-color: $warning-color-100;
+        border-radius: 6px;
+        padding: 8px 12px;
+        color: $neutral-color-950;
         margin: 0;
       }
     }
 
     h2 {
-      font-family: $heading-font-family;
-      font-size: 24px;
-      font-weight: 600;
-      line-height: 31px;
       margin-top: 0;
       margin-bottom: 14px;
-      color: $neutral-color-900;
+      color: $neutral-color-950;
     }
 
     .description {
-      font-family: $body-font-family;
-      font-size: 18px;
-      line-height: 25px;
-      font-weight: 400;
-      color: $neutral-color-600;
-      margin-bottom: $spacing-unit * 2.5;
+      color: $neutral-color-700;
+      margin-bottom: 24px;
     }
 
     .recaptcha-version {
@@ -89,13 +84,13 @@
         font-weight: 500;
         margin-bottom: 12px;
         margin-top: 0;
-        color: $neutral-color-900;
+        color: $neutral-color-950;
       }
     }
   }
 
   .components-base-control {
-    margin-bottom: $spacing-unit * 2;
+    margin-bottom: 24px;
 
     .components-base-control__label {
       font-family: $body-font-family;
@@ -103,8 +98,8 @@
       line-height: 19px;
       font-weight: 500;
       margin-bottom: 10px;
-      display: $neutral-color-900;
-      color: $text-color;
+      display: $neutral-color-950;
+      color: $neutral-color;
     }
 
     .components-text-control__input {
@@ -146,7 +141,7 @@
 @media (max-width: 782px) {
   .fb-blocks-integration {
     .integration-section {
-      padding: $spacing-unit * 2;
+      padding: 24px;
 
       .section-content {
         flex-direction: column;
@@ -159,18 +154,18 @@
       }
 
       .section-left {
-        margin-bottom: $spacing-unit * 2;
+        margin-bottom: 24px;
       }
 
       h2 {
-        font-size: $base-font-size + 6px;
+        font-size: 20px;
       }
 
       .recaptcha-version {
-        margin-bottom: $spacing-unit * 2.5;
+        margin-bottom: 30px;
 
         h3 {
-          font-size: $base-font-size;
+          font-size: 16px;
         }
       }
     }
