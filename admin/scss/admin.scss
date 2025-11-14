@@ -19,7 +19,6 @@ body {
 @import "dashboard";
 @import "blocks";
 @import "settings";
-// @import "common";
 @import "integration";
 // @import "pricing";
 // @import "dashboard";
@@ -306,7 +305,6 @@ body {
 //         background-color: #E1E3E8 !important;
 //         cursor: pointer !important;
 //       }
-
 //       &[aria-checked="true"] {  
 //         background-color: #E1E3E8 !important;
 //         color: #050607 !important;
@@ -314,7 +312,6 @@ body {
 //     }
 //   }
 // }
-
 .highlight-tabs .components-tab-panel__tabs-item.active-tab {
   border-bottom: 2px solid #399CFF;
 }

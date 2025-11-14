@@ -4,14 +4,12 @@ import { SwitchCheckIcon, XIcon } from '../../icons';
 import './switch.scss';
 
 export default function FBSwitch({ 
-  checked, 
-  onChange, 
+  onChange,
+  checked,
   disabled = false 
 }) {
   const handleClick = () => {
-    if (!disabled && onChange) {
-      onChange(!checked);
-    }
+    onChange(!checked);
   };
 
   return (

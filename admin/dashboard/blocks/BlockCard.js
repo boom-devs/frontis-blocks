@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
-import Switch from 'rc-switch';
 import { Doc, Link } from '../../icons';
 import FBSwitch from '../../components/common/Switch';
 
@@ -56,7 +55,7 @@ const BlockCard = ({ block, onChange }) => {
                         // />
                         <FBSwitch
                             onChange={handleChange} 
-                            checked={isChecked} 
+                            checked={isChecked}
                             disabled={
                                 isProActive === 'false' && block.package === 'pro' ? true : false
                             }

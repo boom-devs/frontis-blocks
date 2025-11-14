@@ -120,10 +120,10 @@ class Settings extends AjaxBase {
 	}
 
 	/**
-	 * generate_assets
-	 *
-	 * @return void
-	 */
+	* generate_assets
+	*
+	* @return void
+	*/
 	public function generate_assets() {
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -133,40 +133,71 @@ class Settings extends AjaxBase {
 			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
 		}
 
-		// Upload directory path
-		$response = $this->generate_assets_for_post();
+		// Get batch parameters
+		$batch = isset($_POST['batch']) ? intval($_POST['batch']) : 0;
+		$batch_size = 10; // Process 10 posts at a time
 
-		if($response) {
-			wp_send_json_success(['message' => 'CSS generated successfully']);
+		$response = $this->generate_assets_for_post($batch, $batch_size);
+
+		if($response['success']) {
+			wp_send_json_success([
+				'message' => $response['message'],
+				'completed' => $response['completed'],
+				'total' => $response['total'],
+				'processed' => $response['processed']
+			]);
 		}
 
-		wp_send_json_error(['message' => 'Failed to generate css.'], 500);
+		wp_send_json_error(['message' => $response['message']], 500);
 	}
 
-
-	// Get all pages, posts, custom post, etc post ids and get post content
-	public function generate_assets_for_post()
+	/**
+	 * Generate assets for posts in batches
+	 *
+	 * @param int $batch Current batch number
+	 * @param int $batch_size Number of posts to process per batch
+	 * @return array
+	 */
+	public function generate_assets_for_post($batch = 0, $batch_size = 10)
 	{
 		global $wpdb;
 		$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
 
 		if (!is_dir($upload_directory)) {
 			if (!mkdir($upload_directory, 0755, true)) {
-				wp_send_json_error(['message' => 'Failed to create upload directory']);
-				return;
+				return [
+					'success' => false,
+					'message' => 'Failed to create upload directory'
+				];
 			}
 		}
 
-		// Generate global assets
-		AssetsGenerator::generate_global_assets();
+		// Generate global assets only on first batch
+		if ($batch === 0) {
+			AssetsGenerator::generate_global_assets();
+		}
 
-		// Query to get all post IDs
+		// Calculate offset
+		$offset = $batch * $batch_size;
+
+		// Query to get total count
+		$count_query = "SELECT COUNT(ID) as total
+			FROM {$wpdb->posts}
+			WHERE post_status = 'publish'
+			AND post_name != 'wp-global-styles-frontis-theme'
+			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')";
+		
+		$total_posts = $wpdb->get_var($count_query);
+
+		// Query to get batch of post IDs
 		$query = "SELECT ID, post_content, post_name
-          FROM {$wpdb->posts}
-          WHERE post_status = 'publish'
-          AND post_name != 'wp-global-styles-frontis-theme'
-          AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
-          ORDER BY post_date DESC";
+			FROM {$wpdb->posts}
+			WHERE post_status = 'publish'
+			AND post_name != 'wp-global-styles-frontis-theme'
+			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
+			ORDER BY post_date DESC
+			LIMIT {$batch_size} OFFSET {$offset}";
+		
 		$results = $wpdb->get_results($query);
 
 		$generatedPages = [];
@@ -181,23 +212,21 @@ class Settings extends AjaxBase {
 				if((preg_match_all($pattern, $post->post_content) === 0 && get_post_type($post->ID) !== 'wp_template')) {
 					continue;
 				}
-	
+
 				// Get synced pattern contents
 				$pattern_contents = Helper::check_patterns_used($post->post_content);
-	
+
 				// Append pattern contents to post_content
 				if (!empty($pattern_contents)) {
 					foreach ($pattern_contents as $pattern_content) {
-						$post_content .= "\n" . $pattern_content; // Append each pattern content
+						$post_content .= "\n" . $pattern_content;
 					}
-	
-					// Pass modified post object to generate_page_assets
-					$modified_post->post_content = $post_content; // Update post object
+					$modified_post->post_content = $post_content;
 				}
-	
+
 				update_post_meta($post->ID, 'frontis_blocks_used', false);
 				update_post_meta($post->ID, 'generate_critical_css', false);
-	
+
 				if(preg_match_all($pattern, $post->post_content) > 0) {
 					update_post_meta($post->ID, 'frontis_blocks_used', true);
 				}
@@ -207,28 +236,22 @@ class Settings extends AjaxBase {
 				if($critical_css_used) {
 					update_post_meta($post->ID, 'generate_critical_css', $critical_css_used);
 				}
-	
+
 				AssetsGenerator::get_instance()->generate_page_assets($post->ID, $modified_post, $critical_css_used);
 				$generatedPages[] = $post->post_name;
 			}
 		}
-		
-		$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
-		$files = glob($upload_directory . "/*");
 
-		if ($files){
-			foreach ($files as $file) {
-				if (is_dir($file)) { // Check if it's a directory
-					if(in_array(basename($file), $generatedPages)){
-						return true;
-					}
-				}
-			}
-		} else {
-			return false;
-		}
+		$processed = $offset + count($results);
+		$completed = $processed >= $total_posts;
 
-		return false;
+		return [
+			'success' => true,
+			'message' => $completed ? 'CSS generated successfully' : 'Processing batch...',
+			'completed' => $completed,
+			'total' => intval($total_posts),
+			'processed' => $processed
+		];
 	}
 
 	/**
