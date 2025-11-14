@@ -3919,8 +3919,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}, [socialIconBtnIcon]);
 
-	console.log(frontendSocialIconBtnIcon);
-
 	// Check if Pro is active
 	const getProActiveState = getProActive();
 	useEffect(() => {
