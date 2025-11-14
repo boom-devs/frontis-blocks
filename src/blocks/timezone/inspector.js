@@ -15,7 +15,7 @@ import {
 } from '@wordpress/components';
 
 import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
-import { TIMEZONE, WEEKENDDAY, BORDER_STYLES } from '@Constants/fbConstants';
+import { TIMEZONE, WEEKENDDAY, BORDER_STYLES, OVERFLOW_OP } from '@Constants/fbConstants';
 import Select2 from "react-select";
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Spacing from '@Components/spacing';
@@ -30,11 +30,10 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_SwitcherControl from '@Components/switcher-control';
-
+import FB_PositionControl from '@Components/position-control';
+import FB_InputControl from '@Components/input-control';
 
 import './editor.scss';
-
-
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -315,8 +314,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         statusCloseMobileBorderRadius,
         statusCloseBorderRadiusLink,
 
-	} = attributes;
+		noticeTextGlobalTypoSwitcher,
+		noticeTextGlobalTypographyData,
+		noticeTextGlobalTypoType,
+		noticeTextGlobalTypoOption,
+		noticeTextFontFamily,
+		noticeTextFontSize,
+		noticeTextFontSizeUnits,
+		noticeTextFontWeight,
+		noticeTextFontStyle,
+		noticeTextTransform,
+		noticeTextDecoration,
+		noticeTextLetterSpacing,
+		noticeTextLetterSpacingUnits,
+		noticeTextLineHeight,
+		noticeTextLineHeightUnits,
+        
+        noticeTextColorSwitcher,
+		noticeTextColor,
+		noticeTextHoverColor,
 
+        timezoneGlobalZIndex,
+        timezoneOverflow,
+
+        // Position
+        timezonePositionType,
+        timezoneHZOrientationType,
+        timezoneVROrientationType,
+        timezoneHZLeftOffset,
+        timezoneHZLeftOffsetUnits,
+        timezoneHZRightOffset,
+        timezoneHZRightOffsetUnits,
+        timezoneVRTopOffset,
+        timezoneVRTopOffsetUnits,
+        timezoneVRBottomOffset,
+        timezoneVRBottomOffsetUnits,
+
+        timezoneGlobalWraperClass,
+        timezoneGlobalWraperID,
+
+        timezonePaddingUnits,
+        timezoneDesktopPadding,
+        timezoneTabPadding,
+        timezoneMobilePadding,
+        timezonePaddingLink,
+        timezoneMarginUnits,
+        timezoneDesktopMargin,
+        timezoneTabMargin,
+        timezoneMobileMargin,
+        timezoneMarginLink,
+
+	} = attributes;
+console.log(timezoneGlobalWraperID, timezoneGlobalWraperClass);
 	const deviceType= useDeviceType();
 
 	useEffect(() => {
@@ -2077,6 +2126,617 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 	// End Status ON Border, radius, box-shadow style
 
+    /**
+     * Convert object to string
+    */
+    const allBlockStyle = useMemo(() => `
+        .${blockID}.fb-timezone-main-wrapper {
+            ${timezonePositionType === 'default' ? `position: relative !important;` : ''}
+            ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' ? `width: 100%;` : ''}
+            ${timezonePositionType !== 'default' ? `position: ${timezonePositionType} !important;` : ''}
+            ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'left' && timezoneHZLeftOffset?.Desktop ? `left: ${timezoneHZLeftOffset?.Desktop}${timezoneHZLeftOffsetUnits?.Desktop};` : ''} 
+            ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'right' && timezoneHZRightOffset?.Desktop ? `right: ${timezoneHZRightOffset?.Desktop}${timezoneHZRightOffsetUnits?.Desktop};` : ''}
+            ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'top' && timezoneVRTopOffset?.Desktop ? `top: ${timezoneVRTopOffset?.Desktop}${timezoneVRTopOffsetUnits?.Desktop};` : ''}
+            ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'bottom' && timezoneVRBottomOffset?.Desktop ? `bottom: ${timezoneVRBottomOffset?.Desktop}${timezoneVRBottomOffsetUnits?.Desktop};` : ''}
+
+            ${timezoneGlobalZIndex?.Desktop ? `z-index: ${timezoneGlobalZIndex?.Desktop};` : ''}
+            ${timezoneOverflow !== 'default' ? `overflow: ${timezoneOverflow};` : ''}
+        }
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
+			position: relative;
+			width: max-content;
+			display: flex;
+			${timezoneTextAlignment?.Desktop ? `justify-content: ${timezoneTextAlignment?.Desktop};` : ''}
+			align-items: center;
+			gap: ${timezoneLocationTextSpacing?.Desktop}${timezoneLocationTextSpacingUnits?.Desktop};
+			
+			${ locationTimezoneBgColorType === "gradient" ? `background: ${ locationTimezoneBgCustomGradientColorSwitcher && locationTimezoneBgCustomGradientColor ? locationTimezoneBgCustomGradientColor : locationTimezoneBgGradientColor };` : locationTimezoneBgColor ?`background: ${locationTimezoneBgColor};` : '' }
+			
+			${locationTimezoneBorder ? `border: ${locationTimezoneBorder};` : ''}
+            ${locationTimezoneDesktopBorderWidth && locationTimezoneDesktopBorder?.top ? `border-width: ${locationTimezoneDesktopBorderWidth};` : ''}
+            ${locationTimezoneDesktopBorderRadiusWidth && locationTimezoneDesktopBorderRadius?.top ? `border-radius: ${locationTimezoneDesktopBorderRadiusWidth};` : ''}
+            ${locationTimezoneBorderColor ? `border-color: ${locationTimezoneBorderColor};` : ''}
+			${locationTimezoneBoxShadowCssValue ? `box-shadow: ${locationTimezoneBoxShadowCssValue};` : ''}
+
+			${locationTimezoneDesktopPaddingWidth && locationTimezoneDesktopPadding?.top ? `padding: ${locationTimezoneDesktopPaddingWidth};` : ''}
+            ${locationTimezoneDesktopMarginWidth && locationTimezoneDesktopMargin?.top ? `margin: ${locationTimezoneDesktopMarginWidth};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover{
+			${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
+
+			${locationTimezoneBorderHoverColor ? `border-color: ${locationTimezoneBorderHoverColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-location-name{
+			${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Desktop && timezoneLocationTextFontSizeUnits?.Desktop ? `font-size: ${timezoneLocationTextFontSize?.Desktop}${timezoneLocationTextFontSizeUnits?.Desktop};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Desktop && timezoneLocationTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Desktop}${timezoneLocationTextLetterSpacingUnits?.Desktop};` : ''}
+            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Desktop && timezoneLocationTextLineHeightUnits?.Desktop ? `line-height: ${timezoneLocationTextLineHeight?.Desktop}${timezoneLocationTextLineHeightUnits?.Desktop};` : ''}
+
+			${locationNameTextColor ? `color: ${locationNameTextColor};` : ''}
+
+            ${locationNameTextColorType === 'gradient' ? `
+                background: ${locationNameTextCustomGradientColorSwitcher && locationNameTextCustomGradientColor ? locationNameTextCustomGradientColor : locationNameTextGradientColor};
+                ${locationNameTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ${locationNameTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+            ` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-location-name{
+
+			${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
+			${locationNameTextHoverColorType === 'gradient' ? `
+				background: ${locationNameTextHoverCustomGradientColorSwitcher && locationNameTextHoverCustomGradientColor ? locationNameTextHoverCustomGradientColor : locationNameTextHoverGradientColor};
+				${locationNameTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${locationNameTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+			` : ''}
+			
+			transition: all .3s ease-in-out;
+		}
+		
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-separator {
+			font-size: ${separatorSize?.Desktop}${separatorFontUnits?.Desktop};
+			line-height: 100%;
+			${separatorColor ? `color: ${separatorColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-separator {
+			${separatorHoverColor ? `color: ${separatorHoverColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-time {
+			${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === true && timezoneTimeTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTimeTextGlobalTypographyData?.fontFamily};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === true && timezoneTimeTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTimeTextGlobalTypographyData?.fontSize};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === true && timezoneTimeTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTimeTextGlobalTypographyData?.fontWeight};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === true && timezoneTimeTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTimeTextGlobalTypographyData?.fontStyle};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === true && timezoneTimeTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTimeTextGlobalTypographyData?.textTransform};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === true && timezoneTimeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTimeTextGlobalTypographyData?.textDecoration};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTimeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTimeTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === true && timezoneTimeTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTimeTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === false && timezoneTimeTextFontFamily && timezoneTimeTextFontFamily !== 'Default' ? `font-family: ${timezoneTimeTextFontFamily};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === false && timezoneTimeTextFontSize?.Desktop && timezoneTimeTextFontSizeUnits?.Desktop ? `font-size: ${timezoneTimeTextFontSize?.Desktop}${timezoneTimeTextFontSizeUnits?.Desktop};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === false && timezoneTimeTextFontWeight ? `font-weight: ${timezoneTimeTextFontWeight};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === false && timezoneTimeTextFontStyle ? `font-style: ${timezoneTimeTextFontStyle};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === false && timezoneTimeTextTransform ? `text-transform: ${timezoneTimeTextTransform};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === false && timezoneTimeTextDecoration ? `text-decoration: ${timezoneTimeTextDecoration};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTimeTextLetterSpacing?.Desktop && timezoneTimeTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTimeTextLetterSpacing?.Desktop}${timezoneTimeTextLetterSpacingUnits?.Desktop};` : ''}
+            ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === false && timezoneTimeTextLineHeight?.Desktop && timezoneTimeTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTimeTextLineHeight?.Desktop}${timezoneTimeTextLineHeightUnits?.Desktop};` : ''}
+
+			${timezoneTimeTextColor ? `color: ${timezoneTimeTextColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-time{
+			${timezoneTimeTextHoverColor ? `color: ${timezoneTimeTextHoverColor};` : ''}
+
+			${timezoneTimeTextHoverColorType === 'gradient' ? `
+				background: ${timezoneTimeTextHoverCustomGradientColorSwitcher && timezoneTimeTextHoverCustomGradientColor ? timezoneTimeTextHoverCustomGradientColor : timezoneTimeTextHoverGradientColor};
+				${timezoneTimeTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${timezoneTimeTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+			` : ''}
+			
+			transition: all .3s ease-in-out;
+		}
+		
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-timezone {
+			${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontStyle === true && timezoneTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTextGlobalTypographyData?.fontStyle};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textTransform === true && timezoneTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTextGlobalTypographyData?.textTransform};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textDecoration === true && timezoneTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTextGlobalTypographyData?.textDecoration};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.lineHeight === true && timezoneTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${timezoneTextGlobalTypoSwitcher?.fontFamily === false && timezoneTextFontFamily && timezoneTextFontFamily !== 'Default' ? `font-family: ${timezoneTextFontFamily};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontSize === false && timezoneTextFontSize?.Desktop && timezoneTextFontSizeUnits?.Desktop ? `font-size: ${timezoneTextFontSize?.Desktop}${timezoneTextFontSizeUnits?.Desktop};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontWeight === false && timezoneTextFontWeight ? `font-weight: ${timezoneTextFontWeight};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.fontStyle === false && timezoneTextFontStyle ? `font-style: ${timezoneTextFontStyle};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textTransform === false && timezoneTextTransform ? `text-transform: ${timezoneTextTransform};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.textDecoration === false && timezoneTextDecoration ? `text-decoration: ${timezoneTextDecoration};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTextLetterSpacing?.Desktop && timezoneTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTextLetterSpacing?.Desktop}${timezoneTextLetterSpacingUnits?.Desktop};` : ''}
+            ${timezoneTextGlobalTypoSwitcher?.lineHeight === false && timezoneTextLineHeight?.Desktop && timezoneTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTextLineHeight?.Desktop}${timezoneTextLineHeightUnits?.Desktop};` : ''}
+
+			${timezoneTextColor ? `color: ${timezoneTextColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+		
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-timezone{
+			${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
+
+			${timezoneTextHoverColorType === 'gradient' ? `
+				background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
+				${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+				${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+			` : ''}
+			
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box {
+			${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
+
+			${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
+            ${infoBoxDesktopBorderWidth && infoBoxDesktopBorder?.top ? `border-width: ${infoBoxDesktopBorderWidth};` : ''}
+            ${infoBoxDesktopBorderRadiusWidth && infoBoxDesktopBorderRadius?.top ? `border-radius: ${infoBoxDesktopBorderRadiusWidth};` : ''}
+            ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
+			${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
+
+			${infoBoxDesktopPaddingWidth && infoBoxDesktopPadding?.top ? `padding: ${infoBoxDesktopPaddingWidth};` : ''}
+            ${infoBoxDesktopMarginWidth && infoBoxDesktopMargin?.top ? `margin: ${infoBoxDesktopMarginWidth};` : ''}
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box:hover{
+			${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
+
+			${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status {
+			${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontStyle === true && statusTextGlobalTypographyData?.fontStyle ? `font-style: ${statusTextGlobalTypographyData?.fontStyle};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textTransform === true && statusTextGlobalTypographyData?.textTransform ? `text-transform: ${statusTextGlobalTypographyData?.textTransform};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textDecoration === true && statusTextGlobalTypographyData?.textDecoration ? `text-decoration: ${statusTextGlobalTypographyData?.textDecoration};` : ''}
+            ${statusTextGlobalTypoSwitcher?.letterSpacing === true && statusTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${statusTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${statusTextGlobalTypoSwitcher?.lineHeight === true && statusTextGlobalTypographyData?.lineHeight ? `line-height: ${statusTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${statusTextGlobalTypoSwitcher?.fontFamily === false && statusTextFontFamily && statusTextFontFamily !== 'Default' ? `font-family: ${statusTextFontFamily};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontSize === false && statusTextFontSize?.Desktop && statusTextFontSizeUnits?.Desktop ? `font-size: ${statusTextFontSize?.Desktop}${statusTextFontSizeUnits?.Desktop};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontWeight === false && statusTextFontWeight ? `font-weight: ${statusTextFontWeight};` : ''}
+            ${statusTextGlobalTypoSwitcher?.fontStyle === false && statusTextFontStyle ? `font-style: ${statusTextFontStyle};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textTransform === false && statusTextTransform ? `text-transform: ${statusTextTransform};` : ''}
+            ${statusTextGlobalTypoSwitcher?.textDecoration === false && statusTextDecoration ? `text-decoration: ${statusTextDecoration};` : ''}
+            ${statusTextGlobalTypoSwitcher?.letterSpacing === false && statusTextLetterSpacing?.Desktop && statusTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${statusTextLetterSpacing?.Desktop}${statusTextLetterSpacingUnits?.Desktop};` : ''}
+            ${statusTextGlobalTypoSwitcher?.lineHeight === false && statusTextLineHeight?.Desktop && statusTextLineHeightUnits?.Desktop ? `line-height: ${statusTextLineHeight?.Desktop}${statusTextLineHeightUnits?.Desktop};` : ''}
+
+			${statusDesktopPaddingWidth && statusDesktopPadding?.top ? `padding: ${statusDesktopPaddingWidth};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status{
+			${statusOpenColor ? `color: ${statusOpenColor};` : ''}
+			${statusOpenBgColor ? `background-color: ${statusOpenBgColor};` : ''}
+			${statusOpenBorder ? `border: ${statusOpenBorder};` : ''}
+            ${statusOpenDesktopBorderWidth && statusOpenDesktopBorder?.top ? `border-width: ${statusOpenDesktopBorderWidth};` : ''}
+            ${statusOpenDesktopBorderRadiusWidth && statusOpenDesktopBorderRadius?.top ? `border-radius: ${statusOpenDesktopBorderRadiusWidth};` : ''}
+            ${statusOpenBorderColor ? `border-color: ${statusOpenBorderColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status:hover{
+			${statusOpenHoverColor ? `color: ${statusOpenHoverColor};` : ''}
+			${statusOpenHoverBgColor ? `background-color: ${statusOpenHoverBgColor};` : ''}
+			${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status{
+			${statusCloseColor ? `color: ${statusCloseColor};` : ''}
+			${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
+			${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
+            ${statusCloseDesktopBorderWidth && statusCloseDesktopBorder?.top ? `border-width: ${statusCloseDesktopBorderWidth};` : ''}
+            ${statusCloseDesktopBorderRadiusWidth && statusCloseDesktopBorderRadius?.top ? `border-radius: ${statusCloseDesktopBorderRadiusWidth};` : ''}
+            ${statusCloseBorderColor ? `border-color: ${statusCloseBorderColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status:hover{
+			${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
+			${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
+			${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
+			transition: all .3s ease-in-out;
+		}
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info .fb-timezone-info-noted{
+			${noticeTextGlobalTypoSwitcher?.fontFamily === true && noticeTextGlobalTypographyData?.fontFamily ? `font-family: ${noticeTextGlobalTypographyData?.fontFamily};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontSize === true && noticeTextGlobalTypographyData?.fontSize ? `font-size: ${noticeTextGlobalTypographyData?.fontSize};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontWeight === true && noticeTextGlobalTypographyData?.fontWeight ? `font-weight: ${noticeTextGlobalTypographyData?.fontWeight};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontStyle === true && noticeTextGlobalTypographyData?.fontStyle ? `font-style: ${noticeTextGlobalTypographyData?.fontStyle};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.textTransform === true && noticeTextGlobalTypographyData?.textTransform ? `text-transform: ${noticeTextGlobalTypographyData?.textTransform};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.textDecoration === true && noticeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${noticeTextGlobalTypographyData?.textDecoration};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.letterSpacing === true && noticeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${noticeTextGlobalTypographyData?.letterSpacing};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.lineHeight === true && noticeTextGlobalTypographyData?.lineHeight ? `line-height: ${noticeTextGlobalTypographyData?.lineHeight};` : ''}
+
+            ${noticeTextGlobalTypoSwitcher?.fontFamily === false && noticeTextFontFamily && noticeTextFontFamily !== 'Default' ? `font-family: ${noticeTextFontFamily};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontSize === false && noticeTextFontSize?.Desktop && noticeTextFontSizeUnits?.Desktop ? `font-size: ${noticeTextFontSize?.Desktop}${noticeTextFontSizeUnits?.Desktop};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontWeight === false && noticeTextFontWeight ? `font-weight: ${noticeTextFontWeight};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.fontStyle === false && noticeTextFontStyle ? `font-style: ${noticeTextFontStyle};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.textTransform === false && noticeTextTransform ? `text-transform: ${noticeTextTransform};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.textDecoration === false && noticeTextDecoration ? `text-decoration: ${noticeTextDecoration};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.letterSpacing === false && noticeTextLetterSpacing?.Desktop && noticeTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${noticeTextLetterSpacing?.Desktop}${noticeTextLetterSpacingUnits?.Desktop};` : ''}
+            ${noticeTextGlobalTypoSwitcher?.lineHeight === false && noticeTextLineHeight?.Desktop && noticeTextLineHeightUnits?.Desktop ? `line-height: ${noticeTextLineHeight?.Desktop}${noticeTextLineHeightUnits?.Desktop};` : ''}
+            
+            ${noticeTextColor ? `color: ${noticeTextColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info .fb-timezone-info-noted:hover{
+            ${noticeTextHoverColor ? `color: ${noticeTextHoverColor};` : ''}
+            transition: all .3s ease-in-out;
+        }
+	
+	`, [
+
+		blockID,
+		location,        
+		timezone,        
+		timezones,       
+		startTime,
+		endTime,
+		officeHours,
+		officeStatus,
+		weekendDays,
+		holidays,
+		useMonthlySchedule,
+		monthlySchedules,
+		timezoneMode,
+		closedMessage,
+		completionMessage,
+		weekendMessage,
+		holidayMessage,
+		useUTCTimezoneFormat,
+		separator,
+		showSeparatorSwitcher,
+		separatorColorSwitcher,
+		separatorColor,
+		separatorHoverColor,
+		separatorSize,
+		separatorFontUnits,
+		openStatusText,
+		closedStatusText,
+		beforeTimeText,
+		afterTimeText,
+
+		timezoneLocationTextGlobalTypoSwitcher,
+		timezoneLocationTextGlobalTypographyData,
+		timezoneLocationTextGlobalTypoType,
+		timezoneLocationTextGlobalTypoOption,
+		timezoneLocationTextFontFamily,
+		timezoneLocationTextFontSize,
+		timezoneLocationTextFontSizeUnits,
+		timezoneLocationTextFontWeight,
+		timezoneLocationTextFontStyle,
+		timezoneLocationTextTransform,
+		timezoneLocationTextDecoration,
+		timezoneLocationTextLetterSpacing,
+		timezoneLocationTextLetterSpacingUnits,
+		timezoneLocationTextLineHeight,
+		timezoneLocationTextLineHeightUnits,
+
+		timezoneTimeTextGlobalTypoSwitcher,
+		timezoneTimeTextGlobalTypographyData,
+		timezoneTimeTextGlobalTypoType,
+		timezoneTimeTextGlobalTypoOption,
+		timezoneTimeTextFontFamily,
+		timezoneTimeTextFontSize,
+		timezoneTimeTextFontSizeUnits,
+		timezoneTimeTextFontWeight,
+		timezoneTimeTextFontStyle,
+		timezoneTimeTextTransform,
+		timezoneTimeTextDecoration,
+		timezoneTimeTextLetterSpacing,
+		timezoneTimeTextLetterSpacingUnits,
+		timezoneTimeTextLineHeight,
+		timezoneTimeTextLineHeightUnits,
+
+		timezoneTextGlobalTypoSwitcher,
+		timezoneTextGlobalTypographyData,
+		timezoneTextGlobalTypoType,
+		timezoneTextGlobalTypoOption,
+		timezoneTextFontFamily,
+		timezoneTextFontSize,
+		timezoneTextFontSizeUnits,
+		timezoneTextFontWeight,
+		timezoneTextFontStyle,
+		timezoneTextTransform,
+		timezoneTextDecoration,
+		timezoneTextLetterSpacing,
+		timezoneTextLetterSpacingUnits,
+		timezoneTextLineHeight,
+		timezoneTextLineHeightUnits,
+
+		locationNameTextColorTypeSwitcher,
+        locationNameTextColorType,
+        locationNameTextHoverColorType,
+        locationNameTextColor,
+        locationNameTextHoverColor,
+        locationNameTextGradientColor,
+        locationNameTextHoverGradientColor,
+        locationNameTextCustomGradientColorSwitcher,
+        locationNameTextCustomGradientColor,
+        locationNameTextHoverCustomGradientColorSwitcher,
+        locationNameTextHoverCustomGradientColor,
+
+		timezoneTimeTextColorTypeSwitcher,
+        timezoneTimeTextColorType,
+        timezoneTimeTextHoverColorType,
+        timezoneTimeTextColor,
+        timezoneTimeTextHoverColor,
+        timezoneTimeTextGradientColor,
+        timezoneTimeTextHoverGradientColor,
+        timezoneTimeTextCustomGradientColorSwitcher,
+        timezoneTimeTextCustomGradientColor,
+        timezoneTimeTextHoverCustomGradientColorSwitcher,
+        timezoneTimeTextHoverCustomGradientColor,
+
+		timezoneTextColorTypeSwitcher,
+        timezoneTextColorType,
+        timezoneTextHoverColorType,
+        timezoneTextColor,
+        timezoneTextHoverColor,
+        timezoneTextGradientColor,
+        timezoneTextHoverGradientColor,
+        timezoneTextCustomGradientColorSwitcher,
+        timezoneTextCustomGradientColor,
+        timezoneTextHoverCustomGradientColorSwitcher,
+        timezoneTextHoverCustomGradientColor,
+
+		timezoneTextAlignment,
+		timezoneLocationTextSpacing,
+		timezoneLocationTextSpacingUnits,
+
+		locationTimezoneBgColorTypeSwitcher,
+        locationTimezoneBgColorType,
+        locationTimezoneBgHoverColorType,
+        locationTimezoneBgColor,
+        locationTimezoneBgHoverColor,
+        locationTimezoneBgGradientColor,
+        locationTimezoneBgHoverGradientColor,
+        locationTimezoneBgCustomGradientColorSwitcher,
+        locationTimezoneBgCustomGradientColor,
+        locationTimezoneBgHoverCustomGradientColorSwitcher,
+        locationTimezoneBgHoverCustomGradientColor,
+
+		locationTimezoneBorder,
+        locationTimezoneBorderColor,
+        locationTimezoneBorderHoverColor,
+        locationTimezoneBorderColorSwitcher,
+
+        locationTimezoneBorderUnits,
+        locationTimezoneDesktopBorder,
+        locationTimezoneTabletBorder,
+        locationTimezoneMobileBorder,
+        locationTimezoneBorderLink,
+
+        locationTimezoneBorderRadiusUnits,
+        locationTimezoneDesktopBorderRadius,
+        locationTimezoneTabBorderRadius,
+        locationTimezoneMobileBorderRadius,
+        locationTimezoneBorderRadiusLink,
+        locationTimezoneBoxShadowValues,
+        locationTimezoneBoxShadowCssValue,
+
+		locationTimezonePaddingUnits,
+        locationTimezoneDesktopPadding,
+        locationTimezoneTabPadding,
+        locationTimezoneMobilePadding,
+        locationTimezonePaddingLink,
+        locationTimezoneMarginUnits,
+        locationTimezoneDesktopMargin,
+        locationTimezoneTabMargin,
+        locationTimezoneMobileMargin,
+        locationTimezoneMarginLink,
+
+		infoBoxBgColorTypeSwitcher,
+        infoBoxBgColorType,
+        infoBoxBgHoverColorType,
+        infoBoxBgColor,
+        infoBoxBgHoverColor,
+        infoBoxBgGradientColor,
+        infoBoxBgHoverGradientColor,
+        infoBoxBgCustomGradientColorSwitcher,
+        infoBoxBgCustomGradientColor,
+        infoBoxBgHoverCustomGradientColorSwitcher,
+        infoBoxBgHoverCustomGradientColor,
+
+		infoBoxBorder,
+        infoBoxBorderColor,
+        infoBoxBorderHoverColor,
+        infoBoxBorderColorSwitcher,
+
+        infoBoxBorderUnits,
+        infoBoxDesktopBorder,
+        infoBoxTabletBorder,
+        infoBoxMobileBorder,
+        infoBoxBorderLink,
+
+        infoBoxBorderRadiusUnits,
+        infoBoxDesktopBorderRadius,
+        infoBoxTabBorderRadius,
+        infoBoxMobileBorderRadius,
+        infoBoxBorderRadiusLink,
+        infoBoxBoxShadowValues,
+        infoBoxBoxShadowCssValue,
+
+		infoBoxPaddingUnits,
+        infoBoxDesktopPadding,
+        infoBoxTabPadding,
+        infoBoxMobilePadding,
+        infoBoxPaddingLink,
+        infoBoxMarginUnits,
+        infoBoxDesktopMargin,
+        infoBoxTabMargin,
+        infoBoxMobileMargin,
+        infoBoxMarginLink,
+
+		statusTextGlobalTypoSwitcher,
+		statusTextGlobalTypographyData,
+		statusTextGlobalTypoType,
+		statusTextGlobalTypoOption,
+		statusTextFontFamily,
+		statusTextFontSize,
+		statusTextFontSizeUnits,
+		statusTextFontWeight,
+		statusTextFontStyle,
+		statusTextTransform,
+		statusTextDecoration,
+		statusTextLetterSpacing,
+		statusTextLetterSpacingUnits,
+		statusTextLineHeight,
+		statusTextLineHeightUnits,
+
+		statusPaddingUnits,
+        statusDesktopPadding,
+        statusTabPadding,
+        statusMobilePadding,
+        statusPaddingLink,
+
+		statusOpenColorSwitcher,
+		statusOpenColor,
+		statusOpenHoverColor,
+		statusCloseColorSwitcher,
+		statusCloseColor,
+		statusCloseHoverColor,
+
+		statusOpenBgColorSwitcher,
+		statusOpenBgColor,
+		statusOpenHoverBgColor,
+		statusCloseBgColorSwitcher,
+		statusCloseBgColor,
+		statusCloseHoverBgColor,
+
+		statusOpenBorder,
+        statusOpenBorderColor,
+        statusOpenBorderHoverColor,
+        statusOpenBorderColorSwitcher,
+
+        statusOpenBorderUnits,
+        statusOpenDesktopBorder,
+        statusOpenTabletBorder,
+        statusOpenMobileBorder,
+        statusOpenBorderLink,
+
+        statusOpenBorderRadiusUnits,
+        statusOpenDesktopBorderRadius,
+        statusOpenTabBorderRadius,
+        statusOpenMobileBorderRadius,
+        statusOpenBorderRadiusLink,
+
+		statusCloseBorder,
+        statusCloseBorderColor,
+        statusCloseBorderHoverColor,
+        statusCloseBorderColorSwitcher,
+
+        statusCloseBorderUnits,
+        statusCloseDesktopBorder,
+        statusCloseTabletBorder,
+        statusCloseMobileBorder,
+        statusCloseBorderLink,
+
+        statusCloseBorderRadiusUnits,
+        statusCloseDesktopBorderRadius,
+        statusCloseTabBorderRadius,
+        statusCloseMobileBorderRadius,
+        statusCloseBorderRadiusLink,
+
+		noticeTextGlobalTypoSwitcher,
+		noticeTextGlobalTypographyData,
+		noticeTextGlobalTypoType,
+		noticeTextGlobalTypoOption,
+		noticeTextFontFamily,
+		noticeTextFontSize,
+		noticeTextFontSizeUnits,
+		noticeTextFontWeight,
+		noticeTextFontStyle,
+		noticeTextTransform,
+		noticeTextDecoration,
+		noticeTextLetterSpacing,
+		noticeTextLetterSpacingUnits,
+		noticeTextLineHeight,
+		noticeTextLineHeightUnits,
+
+        noticeTextColorSwitcher,
+		noticeTextColor,
+		noticeTextHoverColor,
+
+        timezoneGlobalZIndex,
+        timezoneOverflow,
+        
+        // Position
+        timezonePositionType,
+        timezoneHZOrientationType,
+        timezoneVROrientationType,
+        timezoneHZLeftOffset,
+        timezoneHZLeftOffsetUnits,
+        timezoneHZRightOffset,
+        timezoneHZRightOffsetUnits,
+        timezoneVRTopOffset,
+        timezoneVRTopOffsetUnits,
+        timezoneVRBottomOffset,
+        timezoneVRBottomOffsetUnits,
+
+        timezoneGlobalWraperClass,
+        timezoneGlobalWraperID,
+
+        timezonePaddingUnits,
+        timezoneDesktopPadding,
+        timezoneTabPadding,
+        timezoneMobilePadding,
+        timezonePaddingLink,
+        timezoneMarginUnits,
+        timezoneDesktopMargin,
+        timezoneTabMargin,
+        timezoneMobileMargin,
+        timezoneMarginLink,
+
+	]);
+
+	useEffect(() => {
+        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
+    }, [allBlockStyle] );
+
+    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
+
 	
 	/**
 	* Inspector Style Controls
@@ -2562,7 +3222,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     fontFamily={statusTextFontFamily}
                     onChangeFontFamily={(value) => setAttributes({ statusTextFontFamily: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                    fontSize={timezoneLocationTextFontSize}
+                    fontSize={statusTextFontSize}
                     onChangeFontSize={(value) => setAttributes({ statusTextFontSize: value, statusTextGlobalTypoSwitcher: {...statusTextGlobalTypoSwitcher, fontSize: value && false} })}
 
                     fontSizeUnits={statusTextFontSizeUnits}
@@ -2931,536 +3591,492 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onBoxShadowStyleChange={(value) => setAttributes({ infoBoxBoxShadowCssValue: value })}
                 />
 			</PanelBody>
+
+			<PanelBody title={__("Office Notice", "frontis-blocks")} initialOpen={false}>
+				<FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={noticeTextGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ noticeTextGlobalTypographyData: value })}
+
+                    globalTypoType={noticeTextGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            noticeTextGlobalTypoType: value,
+                            noticeTextGlobalTypoSwitcher: value === 'default' ? {...noticeTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...noticeTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                        })
+                    }}
+
+                    globalTypoOption={noticeTextGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ noticeTextGlobalTypoOption: value })}
+
+                    fontFamily={noticeTextFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ noticeTextFontFamily: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                    fontSize={noticeTextFontSize}
+                    onChangeFontSize={(value) => setAttributes({ noticeTextFontSize: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, fontSize: value && false} })}
+
+                    fontSizeUnits={noticeTextFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ noticeTextFontSizeUnits: value })}
+
+                    fontWeight={noticeTextFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ noticeTextFontWeight: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                    fontStyle={noticeTextFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ noticeTextFontStyle: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                    textTransform={noticeTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ noticeTextTransform: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, textTransform: value && false} })}
+
+                    textDecoration={noticeTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ noticeTextDecoration: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                    letterSpacing={noticeTextLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ noticeTextLetterSpacing: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                    letterSpacingUnits={noticeTextLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ noticeTextLetterSpacingUnits: value })}
+
+                    lineHeight={noticeTextLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ noticeTextLineHeight: value, noticeTextGlobalTypoSwitcher: {...noticeTextGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                    lineHeightUnits={noticeTextLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ noticeTextLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+                <FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={noticeTextColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ noticeTextColorSwitcher: value })}
+				/>
+				{noticeTextColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={noticeTextColor}
+						setGlobalColor={(value) => setAttributes({ noticeTextColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				{noticeTextColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={noticeTextHoverColor}
+						setGlobalColor={(value) => setAttributes({ noticeTextHoverColor: value === undefined ? '' : value })}
+					/>
+				)}
+			</PanelBody>
 			
         </>
     );
 
-	const allBlockStyle = useMemo(() => `
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
-			position: relative;
-			width: max-content;
-			display: flex;
-			${timezoneTextAlignment?.Desktop ? `justify-content: ${timezoneTextAlignment?.Desktop};` : ''}
-			align-items: center;
-			gap: ${timezoneLocationTextSpacing?.Desktop}${timezoneLocationTextSpacingUnits?.Desktop};
-			
-			${ locationTimezoneBgColorType === "gradient" ? `background: ${ locationTimezoneBgCustomGradientColorSwitcher && locationTimezoneBgCustomGradientColor ? locationTimezoneBgCustomGradientColor : locationTimezoneBgGradientColor };` : locationTimezoneBgColor ?`background: ${locationTimezoneBgColor};` : '' }
-			
-			${locationTimezoneBorder ? `border: ${locationTimezoneBorder};` : ''}
-            ${locationTimezoneDesktopBorderWidth && locationTimezoneDesktopBorder?.top ? `border-width: ${locationTimezoneDesktopBorderWidth};` : ''}
-            ${locationTimezoneDesktopBorderRadiusWidth && locationTimezoneDesktopBorderRadius?.top ? `border-radius: ${locationTimezoneDesktopBorderRadiusWidth};` : ''}
-            ${locationTimezoneBorderColor ? `border-color: ${locationTimezoneBorderColor};` : ''}
-			${locationTimezoneBoxShadowCssValue ? `box-shadow: ${locationTimezoneBoxShadowCssValue};` : ''}
-
-			${locationTimezoneDesktopPaddingWidth && locationTimezoneDesktopPadding?.top ? `padding: ${locationTimezoneDesktopPaddingWidth};` : ''}
-            ${locationTimezoneDesktopMarginWidth && locationTimezoneDesktopMargin?.top ? `margin: ${locationTimezoneDesktopMarginWidth};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover{
-			${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
-
-			${locationTimezoneBorderHoverColor ? `border-color: ${locationTimezoneBorderHoverColor};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-location-name{
-			${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
-
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Desktop && timezoneLocationTextFontSizeUnits?.Desktop ? `font-size: ${timezoneLocationTextFontSize?.Desktop}${timezoneLocationTextFontSizeUnits?.Desktop};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Desktop && timezoneLocationTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Desktop}${timezoneLocationTextLetterSpacingUnits?.Desktop};` : ''}
-            ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Desktop && timezoneLocationTextLineHeightUnits?.Desktop ? `line-height: ${timezoneLocationTextLineHeight?.Desktop}${timezoneLocationTextLineHeightUnits?.Desktop};` : ''}
-
-			${locationNameTextColor ? `color: ${locationNameTextColor};` : ''}
-
-            ${locationNameTextColorType === 'gradient' ? `
-                background: ${locationNameTextCustomGradientColorSwitcher && locationNameTextCustomGradientColor ? locationNameTextCustomGradientColor : locationNameTextGradientColor};
-                ${locationNameTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-                ${locationNameTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-            ` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-location-name{
-
-			${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
-			${locationNameTextHoverColorType === 'gradient' ? `
-				background: ${locationNameTextHoverCustomGradientColorSwitcher && locationNameTextHoverCustomGradientColor ? locationNameTextHoverCustomGradientColor : locationNameTextHoverGradientColor};
-				${locationNameTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-				${locationNameTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-			` : ''}
-			
-			transition: all .3s ease-in-out;
-		}
-		
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-separator {
-			font-size: ${separatorSize?.Desktop}${separatorFontUnits?.Desktop};
-			line-height: 100%;
-			${separatorColor ? `color: ${separatorColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-separator {
-			${separatorHoverColor ? `color: ${separatorHoverColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-time {
-			${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === true && timezoneTimeTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTimeTextGlobalTypographyData?.fontFamily};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === true && timezoneTimeTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTimeTextGlobalTypographyData?.fontSize};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === true && timezoneTimeTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTimeTextGlobalTypographyData?.fontWeight};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === true && timezoneTimeTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTimeTextGlobalTypographyData?.fontStyle};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === true && timezoneTimeTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTimeTextGlobalTypographyData?.textTransform};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === true && timezoneTimeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTimeTextGlobalTypographyData?.textDecoration};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTimeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTimeTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === true && timezoneTimeTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTimeTextGlobalTypographyData?.lineHeight};` : ''}
-
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === false && timezoneTimeTextFontFamily && timezoneTimeTextFontFamily !== 'Default' ? `font-family: ${timezoneTimeTextFontFamily};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === false && timezoneTimeTextFontSize?.Desktop && timezoneTimeTextFontSizeUnits?.Desktop ? `font-size: ${timezoneTimeTextFontSize?.Desktop}${timezoneTimeTextFontSizeUnits?.Desktop};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === false && timezoneTimeTextFontWeight ? `font-weight: ${timezoneTimeTextFontWeight};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === false && timezoneTimeTextFontStyle ? `font-style: ${timezoneTimeTextFontStyle};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === false && timezoneTimeTextTransform ? `text-transform: ${timezoneTimeTextTransform};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === false && timezoneTimeTextDecoration ? `text-decoration: ${timezoneTimeTextDecoration};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTimeTextLetterSpacing?.Desktop && timezoneTimeTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTimeTextLetterSpacing?.Desktop}${timezoneTimeTextLetterSpacingUnits?.Desktop};` : ''}
-            ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === false && timezoneTimeTextLineHeight?.Desktop && timezoneTimeTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTimeTextLineHeight?.Desktop}${timezoneTimeTextLineHeightUnits?.Desktop};` : ''}
-
-			${timezoneTimeTextColor ? `color: ${timezoneTimeTextColor};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-time{
-			${timezoneTimeTextHoverColor ? `color: ${timezoneTimeTextHoverColor};` : ''}
-
-			${timezoneTimeTextHoverColorType === 'gradient' ? `
-				background: ${timezoneTimeTextHoverCustomGradientColorSwitcher && timezoneTimeTextHoverCustomGradientColor ? timezoneTimeTextHoverCustomGradientColor : timezoneTimeTextHoverGradientColor};
-				${timezoneTimeTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-				${timezoneTimeTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-			` : ''}
-			
-			transition: all .3s ease-in-out;
-		}
-		
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-timezone {
-			${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontStyle === true && timezoneTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTextGlobalTypographyData?.fontStyle};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.textTransform === true && timezoneTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTextGlobalTypographyData?.textTransform};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.textDecoration === true && timezoneTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTextGlobalTypographyData?.textDecoration};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.lineHeight === true && timezoneTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTextGlobalTypographyData?.lineHeight};` : ''}
-
-            ${timezoneTextGlobalTypoSwitcher?.fontFamily === false && timezoneTextFontFamily && timezoneTextFontFamily !== 'Default' ? `font-family: ${timezoneTextFontFamily};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontSize === false && timezoneTextFontSize?.Desktop && timezoneTextFontSizeUnits?.Desktop ? `font-size: ${timezoneTextFontSize?.Desktop}${timezoneTextFontSizeUnits?.Desktop};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontWeight === false && timezoneTextFontWeight ? `font-weight: ${timezoneTextFontWeight};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.fontStyle === false && timezoneTextFontStyle ? `font-style: ${timezoneTextFontStyle};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.textTransform === false && timezoneTextTransform ? `text-transform: ${timezoneTextTransform};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.textDecoration === false && timezoneTextDecoration ? `text-decoration: ${timezoneTextDecoration};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTextLetterSpacing?.Desktop && timezoneTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${timezoneTextLetterSpacing?.Desktop}${timezoneTextLetterSpacingUnits?.Desktop};` : ''}
-            ${timezoneTextGlobalTypoSwitcher?.lineHeight === false && timezoneTextLineHeight?.Desktop && timezoneTextLineHeightUnits?.Desktop ? `line-height: ${timezoneTextLineHeight?.Desktop}${timezoneTextLineHeightUnits?.Desktop};` : ''}
-
-			${timezoneTextColor ? `color: ${timezoneTextColor};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-		
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-timezone{
-			${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
-
-			${timezoneTextHoverColorType === 'gradient' ? `
-				background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
-				${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-				${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-			` : ''}
-			
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box {
-			${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
-
-			${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
-            ${infoBoxDesktopBorderWidth && infoBoxDesktopBorder?.top ? `border-width: ${infoBoxDesktopBorderWidth};` : ''}
-            ${infoBoxDesktopBorderRadiusWidth && infoBoxDesktopBorderRadius?.top ? `border-radius: ${infoBoxDesktopBorderRadiusWidth};` : ''}
-            ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
-			${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
-
-			${infoBoxDesktopPaddingWidth && infoBoxDesktopPadding?.top ? `padding: ${infoBoxDesktopPaddingWidth};` : ''}
-            ${infoBoxDesktopMarginWidth && infoBoxDesktopMargin?.top ? `margin: ${infoBoxDesktopMarginWidth};` : ''}
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box:hover{
-			${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
-
-			${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status {
-			${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontStyle === true && statusTextGlobalTypographyData?.fontStyle ? `font-style: ${statusTextGlobalTypographyData?.fontStyle};` : ''}
-            ${statusTextGlobalTypoSwitcher?.textTransform === true && statusTextGlobalTypographyData?.textTransform ? `text-transform: ${statusTextGlobalTypographyData?.textTransform};` : ''}
-            ${statusTextGlobalTypoSwitcher?.textDecoration === true && statusTextGlobalTypographyData?.textDecoration ? `text-decoration: ${statusTextGlobalTypographyData?.textDecoration};` : ''}
-            ${statusTextGlobalTypoSwitcher?.letterSpacing === true && statusTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${statusTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${statusTextGlobalTypoSwitcher?.lineHeight === true && statusTextGlobalTypographyData?.lineHeight ? `line-height: ${statusTextGlobalTypographyData?.lineHeight};` : ''}
-
-            ${statusTextGlobalTypoSwitcher?.fontFamily === false && statusTextFontFamily && statusTextFontFamily !== 'Default' ? `font-family: ${statusTextFontFamily};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontSize === false && statusTextFontSize?.Desktop && statusTextFontSizeUnits?.Desktop ? `font-size: ${statusTextFontSize?.Desktop}${statusTextFontSizeUnits?.Desktop};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontWeight === false && statusTextFontWeight ? `font-weight: ${statusTextFontWeight};` : ''}
-            ${statusTextGlobalTypoSwitcher?.fontStyle === false && statusTextFontStyle ? `font-style: ${statusTextFontStyle};` : ''}
-            ${statusTextGlobalTypoSwitcher?.textTransform === false && statusTextTransform ? `text-transform: ${statusTextTransform};` : ''}
-            ${statusTextGlobalTypoSwitcher?.textDecoration === false && statusTextDecoration ? `text-decoration: ${statusTextDecoration};` : ''}
-            ${statusTextGlobalTypoSwitcher?.letterSpacing === false && statusTextLetterSpacing?.Desktop && statusTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${statusTextLetterSpacing?.Desktop}${statusTextLetterSpacingUnits?.Desktop};` : ''}
-            ${statusTextGlobalTypoSwitcher?.lineHeight === false && statusTextLineHeight?.Desktop && statusTextLineHeightUnits?.Desktop ? `line-height: ${statusTextLineHeight?.Desktop}${statusTextLineHeightUnits?.Desktop};` : ''}
-
-			${statusDesktopPaddingWidth && statusDesktopPadding?.top ? `padding: ${statusDesktopPaddingWidth};` : ''}
-
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status{
-			${statusOpenColor ? `color: ${statusOpenColor};` : ''}
-			${statusOpenBgColor ? `background-color: ${statusOpenBgColor};` : ''}
-			${statusOpenBorder ? `border: ${statusOpenBorder};` : ''}
-            ${statusOpenDesktopBorderWidth && statusOpenDesktopBorder?.top ? `border-width: ${statusOpenDesktopBorderWidth};` : ''}
-            ${statusOpenDesktopBorderRadiusWidth && statusOpenDesktopBorderRadius?.top ? `border-radius: ${statusOpenDesktopBorderRadiusWidth};` : ''}
-            ${statusOpenBorderColor ? `border-color: ${statusOpenBorderColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status:hover{
-			${statusOpenHoverColor ? `color: ${statusOpenHoverColor};` : ''}
-			${statusOpenHoverBgColor ? `background-color: ${statusOpenHoverBgColor};` : ''}
-			${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status{
-			${statusCloseColor ? `color: ${statusCloseColor};` : ''}
-			${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
-			${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
-            ${statusCloseDesktopBorderWidth && statusCloseDesktopBorder?.top ? `border-width: ${statusCloseDesktopBorderWidth};` : ''}
-            ${statusCloseDesktopBorderRadiusWidth && statusCloseDesktopBorderRadius?.top ? `border-radius: ${statusCloseDesktopBorderRadiusWidth};` : ''}
-            ${statusCloseBorderColor ? `border-color: ${statusCloseBorderColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status:hover{
-			${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
-			${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
-			${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
-			transition: all .3s ease-in-out;
-		}
-		
-	
-	`, [
-
-		blockID,
-		location,        
-		timezone,        
-		timezones,       
-		startTime,
-		endTime,
-		officeHours,
-		officeStatus,
-		weekendDays,
-		holidays,
-		useMonthlySchedule,
-		monthlySchedules,
-		timezoneMode,
-		closedMessage,
-		completionMessage,
-		weekendMessage,
-		holidayMessage,
-		useUTCTimezoneFormat,
-		separator,
-		showSeparatorSwitcher,
-		separatorColorSwitcher,
-		separatorColor,
-		separatorHoverColor,
-		separatorSize,
-		separatorFontUnits,
-		openStatusText,
-		closedStatusText,
-		beforeTimeText,
-		afterTimeText,
-
-		timezoneLocationTextGlobalTypoSwitcher,
-		timezoneLocationTextGlobalTypographyData,
-		timezoneLocationTextGlobalTypoType,
-		timezoneLocationTextGlobalTypoOption,
-		timezoneLocationTextFontFamily,
-		timezoneLocationTextFontSize,
-		timezoneLocationTextFontSizeUnits,
-		timezoneLocationTextFontWeight,
-		timezoneLocationTextFontStyle,
-		timezoneLocationTextTransform,
-		timezoneLocationTextDecoration,
-		timezoneLocationTextLetterSpacing,
-		timezoneLocationTextLetterSpacingUnits,
-		timezoneLocationTextLineHeight,
-		timezoneLocationTextLineHeightUnits,
-
-		timezoneTimeTextGlobalTypoSwitcher,
-		timezoneTimeTextGlobalTypographyData,
-		timezoneTimeTextGlobalTypoType,
-		timezoneTimeTextGlobalTypoOption,
-		timezoneTimeTextFontFamily,
-		timezoneTimeTextFontSize,
-		timezoneTimeTextFontSizeUnits,
-		timezoneTimeTextFontWeight,
-		timezoneTimeTextFontStyle,
-		timezoneTimeTextTransform,
-		timezoneTimeTextDecoration,
-		timezoneTimeTextLetterSpacing,
-		timezoneTimeTextLetterSpacingUnits,
-		timezoneTimeTextLineHeight,
-		timezoneTimeTextLineHeightUnits,
-
-		timezoneTextGlobalTypoSwitcher,
-		timezoneTextGlobalTypographyData,
-		timezoneTextGlobalTypoType,
-		timezoneTextGlobalTypoOption,
-		timezoneTextFontFamily,
-		timezoneTextFontSize,
-		timezoneTextFontSizeUnits,
-		timezoneTextFontWeight,
-		timezoneTextFontStyle,
-		timezoneTextTransform,
-		timezoneTextDecoration,
-		timezoneTextLetterSpacing,
-		timezoneTextLetterSpacingUnits,
-		timezoneTextLineHeight,
-		timezoneTextLineHeightUnits,
-
-		locationNameTextColorTypeSwitcher,
-        locationNameTextColorType,
-        locationNameTextHoverColorType,
-        locationNameTextColor,
-        locationNameTextHoverColor,
-        locationNameTextGradientColor,
-        locationNameTextHoverGradientColor,
-        locationNameTextCustomGradientColorSwitcher,
-        locationNameTextCustomGradientColor,
-        locationNameTextHoverCustomGradientColorSwitcher,
-        locationNameTextHoverCustomGradientColor,
-
-		timezoneTimeTextColorTypeSwitcher,
-        timezoneTimeTextColorType,
-        timezoneTimeTextHoverColorType,
-        timezoneTimeTextColor,
-        timezoneTimeTextHoverColor,
-        timezoneTimeTextGradientColor,
-        timezoneTimeTextHoverGradientColor,
-        timezoneTimeTextCustomGradientColorSwitcher,
-        timezoneTimeTextCustomGradientColor,
-        timezoneTimeTextHoverCustomGradientColorSwitcher,
-        timezoneTimeTextHoverCustomGradientColor,
-
-		timezoneTextColorTypeSwitcher,
-        timezoneTextColorType,
-        timezoneTextHoverColorType,
-        timezoneTextColor,
-        timezoneTextHoverColor,
-        timezoneTextGradientColor,
-        timezoneTextHoverGradientColor,
-        timezoneTextCustomGradientColorSwitcher,
-        timezoneTextCustomGradientColor,
-        timezoneTextHoverCustomGradientColorSwitcher,
-        timezoneTextHoverCustomGradientColor,
-
-		timezoneTextAlignment,
-		timezoneLocationTextSpacing,
-		timezoneLocationTextSpacingUnits,
-
-		locationTimezoneBgColorTypeSwitcher,
-        locationTimezoneBgColorType,
-        locationTimezoneBgHoverColorType,
-        locationTimezoneBgColor,
-        locationTimezoneBgHoverColor,
-        locationTimezoneBgGradientColor,
-        locationTimezoneBgHoverGradientColor,
-        locationTimezoneBgCustomGradientColorSwitcher,
-        locationTimezoneBgCustomGradientColor,
-        locationTimezoneBgHoverCustomGradientColorSwitcher,
-        locationTimezoneBgHoverCustomGradientColor,
-
-		locationTimezoneBorder,
-        locationTimezoneBorderColor,
-        locationTimezoneBorderHoverColor,
-        locationTimezoneBorderColorSwitcher,
-
-        locationTimezoneBorderUnits,
-        locationTimezoneDesktopBorder,
-        locationTimezoneTabletBorder,
-        locationTimezoneMobileBorder,
-        locationTimezoneBorderLink,
-
-        locationTimezoneBorderRadiusUnits,
-        locationTimezoneDesktopBorderRadius,
-        locationTimezoneTabBorderRadius,
-        locationTimezoneMobileBorderRadius,
-        locationTimezoneBorderRadiusLink,
-        locationTimezoneBoxShadowValues,
-        locationTimezoneBoxShadowCssValue,
-
-		locationTimezonePaddingUnits,
-        locationTimezoneDesktopPadding,
-        locationTimezoneTabPadding,
-        locationTimezoneMobilePadding,
-        locationTimezonePaddingLink,
-        locationTimezoneMarginUnits,
-        locationTimezoneDesktopMargin,
-        locationTimezoneTabMargin,
-        locationTimezoneMobileMargin,
-        locationTimezoneMarginLink,
-
-		infoBoxBgColorTypeSwitcher,
-        infoBoxBgColorType,
-        infoBoxBgHoverColorType,
-        infoBoxBgColor,
-        infoBoxBgHoverColor,
-        infoBoxBgGradientColor,
-        infoBoxBgHoverGradientColor,
-        infoBoxBgCustomGradientColorSwitcher,
-        infoBoxBgCustomGradientColor,
-        infoBoxBgHoverCustomGradientColorSwitcher,
-        infoBoxBgHoverCustomGradientColor,
-
-		infoBoxBorder,
-        infoBoxBorderColor,
-        infoBoxBorderHoverColor,
-        infoBoxBorderColorSwitcher,
-
-        infoBoxBorderUnits,
-        infoBoxDesktopBorder,
-        infoBoxTabletBorder,
-        infoBoxMobileBorder,
-        infoBoxBorderLink,
-
-        infoBoxBorderRadiusUnits,
-        infoBoxDesktopBorderRadius,
-        infoBoxTabBorderRadius,
-        infoBoxMobileBorderRadius,
-        infoBoxBorderRadiusLink,
-        infoBoxBoxShadowValues,
-        infoBoxBoxShadowCssValue,
-
-		infoBoxPaddingUnits,
-        infoBoxDesktopPadding,
-        infoBoxTabPadding,
-        infoBoxMobilePadding,
-        infoBoxPaddingLink,
-        infoBoxMarginUnits,
-        infoBoxDesktopMargin,
-        infoBoxTabMargin,
-        infoBoxMobileMargin,
-        infoBoxMarginLink,
-
-		statusTextGlobalTypoSwitcher,
-		statusTextGlobalTypographyData,
-		statusTextGlobalTypoType,
-		statusTextGlobalTypoOption,
-		statusTextFontFamily,
-		statusTextFontSize,
-		statusTextFontSizeUnits,
-		statusTextFontWeight,
-		statusTextFontStyle,
-		statusTextTransform,
-		statusTextDecoration,
-		statusTextLetterSpacing,
-		statusTextLetterSpacingUnits,
-		statusTextLineHeight,
-		statusTextLineHeightUnits,
-
-		statusPaddingUnits,
-        statusDesktopPadding,
-        statusTabPadding,
-        statusMobilePadding,
-        statusPaddingLink,
-
-		statusOpenColorSwitcher,
-		statusOpenColor,
-		statusOpenHoverColor,
-		statusCloseColorSwitcher,
-		statusCloseColor,
-		statusCloseHoverColor,
-
-		statusOpenBgColorSwitcher,
-		statusOpenBgColor,
-		statusOpenHoverBgColor,
-		statusCloseBgColorSwitcher,
-		statusCloseBgColor,
-		statusCloseHoverBgColor,
-
-		statusOpenBorder,
-        statusOpenBorderColor,
-        statusOpenBorderHoverColor,
-        statusOpenBorderColorSwitcher,
-
-        statusOpenBorderUnits,
-        statusOpenDesktopBorder,
-        statusOpenTabletBorder,
-        statusOpenMobileBorder,
-        statusOpenBorderLink,
-
-        statusOpenBorderRadiusUnits,
-        statusOpenDesktopBorderRadius,
-        statusOpenTabBorderRadius,
-        statusOpenMobileBorderRadius,
-        statusOpenBorderRadiusLink,
-
-		statusCloseBorder,
-        statusCloseBorderColor,
-        statusCloseBorderHoverColor,
-        statusCloseBorderColorSwitcher,
-
-        statusCloseBorderUnits,
-        statusCloseDesktopBorder,
-        statusCloseTabletBorder,
-        statusCloseMobileBorder,
-        statusCloseBorderLink,
-
-        statusCloseBorderRadiusUnits,
-        statusCloseDesktopBorderRadius,
-        statusCloseTabBorderRadius,
-        statusCloseMobileBorderRadius,
-        statusCloseBorderRadiusLink,
-
-	]);
-
-	useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle] );
-
-    const editorStyle = `${allBlockStyle}`.replace(/\s+/g, ' ').trim();
-
-
-
-	/**
-	 * Inspector Advanced Controls
-	 */
+    /**
+     * Inspector Advanced Controls
+    */
     const advancedControls = (
         <>
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
+                    <PanelBody
+                        title={__("Layout", "frontis-blocks")}
+                        initialOpen={true}
+                        className='fb-setting-layout-header'
+                    >
+                        <FB_Range
+                            min={0}
+                            max={10000000}
+                            label={__("Z Index", "frontis-blocks")}
+                            rangeValue={timezoneGlobalZIndex}
+                            onChangeHandler={(value) => setAttributes({ timezoneGlobalZIndex: value === 0 ? undefined : value })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
 
+                        />
+
+                        <SelectControl
+                            label={__("Overflow", "frontis-blocks")}
+                            value={timezoneOverflow}
+                            options={OVERFLOW_OP}
+                            onChange={(value) => setAttributes({ timezoneOverflow: value })}
+                        />
+
+                        <FB_PositionControl
+                            deviceType={deviceType}
+                            positionType={timezonePositionType}
+                            setPositionType={(value) => setAttributes({ timezonePositionType: value })}
+
+                            HZOrientationType={timezoneHZOrientationType}
+                            setHZOrientationType={(value) =>
+                                setAttributes({ timezoneHZOrientationType: value })
+                            }
+                            VROrientationType={timezoneVROrientationType}
+                            setVROrientationType={(value) =>
+                                setAttributes({ timezoneVROrientationType: value })
+                            }
+
+                            HZLeftOffset={timezoneHZLeftOffset}
+                            setHZLeftOffset={(value) => setAttributes({ timezoneHZLeftOffset: value })}
+                            HZLeftOffsetUnits={timezoneHZLeftOffsetUnits}
+                            setHZLeftOffsetUnits={(value) => setAttributes({ timezoneHZLeftOffsetUnits: value })}
+                            HZRightOffset={timezoneHZRightOffset}
+                            setHZRightOffset={(value) => setAttributes({ timezoneHZRightOffset: value })}
+                            HZRightOffsetUnits={timezoneHZRightOffsetUnits}
+                            setHZRightOffsetUnits={(value) => setAttributes({ timezoneHZRightOffsetUnits: value })}
+
+                            VRTopOffset={timezoneVRTopOffset}
+                            setVRTopOffset={(value) => setAttributes({ timezoneVRTopOffset: value })}
+                            VRTopOffsetUnits={timezoneVRTopOffsetUnits}
+                            setVRTopOffsetUnits={(value) => setAttributes({ timezoneVRTopOffsetUnits: value })}
+                            VRBottomOffset={timezoneVRBottomOffset}
+                            setVRBottomOffset={(value) => setAttributes({ timezoneVRBottomOffset: value })}
+                            VRBottomOffsetUnits={timezoneVRBottomOffsetUnits}
+                            setVRBottomOffsetUnits={(value) => setAttributes({ timezoneVRBottomOffsetUnits: value })}
+
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={timezoneGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ timezoneGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
+
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={timezoneGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ timezoneGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
+
+                    </PanelBody>
+
+                    <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                        <FB_Spacing
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleTimezoneGlobalPaddingUnitsHandler}
+                            spacingUnits={timezoneGlobalPaddingUnits}
+                            spacingDesktop={timezoneGlobalPaddingDesktop}
+                            spacingTablet={timezoneGlobalPaddingTablet}
+                            spacingMobile={timezoneGlobalPaddingMobile}
+                            handleSpacingUnitHandler={handleTimezoneGlobalPaddingUnitChange}
+                            spacingCombineBtn={timezoneGlobalPaddingLink}
+                            spacingCombineBtnHandler={handleTimezoneGlobalPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                        {/* <FB_Spacing
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                            spacingUnits={headingGlobalMarginUnits}
+                            spacingDesktop={headingGlobalMarginDesktop}
+                            spacingTablet={headingGlobalMarginTablet}
+                            spacingMobile={headingGlobalMarginMobile}
+                            handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                            spacingCombineBtn={headingGlobalMarginLink}
+                            spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        /> */}
+                    </PanelBody>
+
+                    {/* <PanelBody
+                        title={__("Background", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_SwitcherControl
+                            label={__("Background Type", "frontis-blocks")}
+                            globalSwitcher={headingGlobalBgColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBgColorSwitcher: value })}
+                        />
+
+                        {headingGlobalBgColorSwitcher === 'normal' && (
+                            <BaseControl
+                                className="fb-setting-background-color-setting-wrapper"
+                                label={__("Normal Background Type", "frontis-blocks")}
+                            >
+                                <Dropdown
+                                    className="fb-setting-background-color-setting-icon-dropdown"
+                                    contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+                                    popoverProps={{ placement: 'bottom-start' }}
+                                    renderToggle={({ isOpen, onToggle }) => (
+                                        <Button
+                                            variant="primary"
+                                            onClick={onToggle}
+                                            aria-expanded={isOpen}
+                                            className="fb-setting-background-color-setting-icon-btn"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+                                                <path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+                                            </svg>
+                                        </Button>
+                                    )}
+                                    renderContent={() => (
+                                        <div className="fb-setting-background-color-popup-wrapper">
+                                            <BaseControl
+                                                className="fb-setting-background-color-popup-inner-wrapper"
+                                            >
+                                                <ButtonGroup className="fb-setting-background-color-panel-btn">
+                                                    {BACKGROUND_TYPES.map((item) => (
+                                                        <Button
+                                                            key={item.value}
+                                                            onClick={() => setAttributes({ headingGlobalBgNormalBackgroundType: item.value })}
+                                                            className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgNormalBackgroundType === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
+
+                                            {headingGlobalBgNormalBackgroundType === 'classic' && (
+
+                                                <>
+                                                    <FB_ColorControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalColor={headingGlobalBgNormalClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgNormalClassicColor: value === undefined ? '' : value })}
+                                                    />
+
+                                                    <FB_ResponsiveBackgroundImageControl
+                                                        deviceType={deviceType}
+                                                        globalBackgroundImageUrl={headingGlobalBgNormalBackgroundImageUrl}
+                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgNormalBackgroundImageUrl: value })}
+                                                        globalBackgroundImagePosition={headingGlobalBgNormalBackgroundImagePosition}
+                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgNormalBackgroundImagePosition: newPosition })}
+                                                        globalBackgroundImageAttachment={headingGlobalBgNormalBackgroundImageAttachment}
+                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgNormalBackgroundImageAttachment: newAttachment })}
+                                                        globalBackgroundImageRepeat={headingGlobalBgNormalBackgroundImageRepeat}
+                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgNormalBackgroundImageRepeat: newRepeat })}
+                                                        globalBackgroundImageSize={headingGlobalBgNormalBackgroundImageSize}
+                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgNormalBackgroundImageSize: newSize })}
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                </>
+                                            )}
+
+                                            {headingGlobalBgNormalBackgroundType === 'gradient' && (
+                                                <FB_GradientColorControl
+                                                    globalCustomGradientSwitcher={headingGlobalBgNormalCustomGradientSwitcher}
+                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgNormalCustomGradientSwitcher: value })}
+                                                    globalCustomGradientInputValue={headingGlobalBgNormalCustomGradientInputValue}
+                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgNormalCustomGradientInputValue: value })}
+                                                    globalGradientColor={headingGlobalBgNormalGradientColor}
+                                                    setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgNormalGradientColor: value === undefined ? null : value })}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
+                                />
+                            </BaseControl>
+
+                        )}
+
+                        {headingGlobalBgColorSwitcher === 'hover' && (
+                            <BaseControl
+                                className="fb-setting-background-color-setting-wrapper"
+                                label={__("Hover Background Type", "frontis-blocks")}
+                            >
+                                <Dropdown
+                                    className="fb-setting-background-color-setting-icon-dropdown"
+                                    contentClassName="fb-setting-background-color-setting-icon-dropdown-content"
+                                    popoverProps={{ placement: 'bottom-start' }}
+                                    renderToggle={({ isOpen, onToggle }) => (
+                                        <Button
+                                            variant="primary"
+                                            onClick={onToggle}
+                                            aria-expanded={isOpen}
+                                            className="fb-setting-background-color-setting-icon-btn"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                                <path d="M2.66699 14.666H13.3337" stroke="#1C274C"/>
+                                                <path d="M9.25906 2.4426L9.75339 1.94826C10.5724 1.12922 11.9003 1.12922 12.7194 1.94826C13.5384 2.76731 13.5384 4.09524 12.7194 4.91428L12.2251 5.40862M9.25906 2.4426C9.25906 2.4426 9.32079 3.49306 10.2477 4.41994C11.1746 5.34682 12.2251 5.40862 12.2251 5.40862M9.25906 2.4426L4.71437 6.98725C4.40655 7.29505 4.25263 7.44898 4.12027 7.61872C3.96413 7.81885 3.83027 8.03545 3.72104 8.26465C3.62845 8.45892 3.55962 8.66545 3.42196 9.07845L2.83863 10.8285M12.2251 5.40862L7.68039 9.95325C7.37259 10.2611 7.21866 10.415 7.04893 10.5474C6.84879 10.7035 6.63216 10.8374 6.40298 10.9466C6.2087 11.0392 6.00221 11.1081 5.58922 11.2457L3.83922 11.8291M2.83863 10.8285L2.69603 11.2562C2.62829 11.4595 2.68118 11.6835 2.83266 11.835C2.98415 11.9865 3.20821 12.0394 3.41144 11.9716L3.83922 11.8291M2.83863 10.8285L3.83922 11.8291" stroke="#1C274C"/>
+                                            </svg>
+                                        </Button>
+                                    )}
+                                    renderContent={() => (
+                                        <div className="fb-setting-background-color-popup-wrapper">
+                                            <BaseControl
+                                                className="fb-setting-background-color-popup-inner-wrapper"
+                                            >
+                                                <ButtonGroup className="fb-setting-background-color-panel-btn">
+                                                    {BACKGROUND_TYPES.map((item) => (
+                                                        <Button
+                                                            key={item.value}
+                                                            onClick={() => setAttributes({ headingGlobalBgHoverBackgroundType: item.value })}
+                                                            className={`fb-setting-background-color-panel-btn-switcher ${headingGlobalBgHoverBackgroundType === item.value ? 'active' : ''}`}
+                                                        >
+                                                            {item.label}
+                                                        </Button>
+                                                    ))}
+                                                </ButtonGroup>
+                                            </BaseControl>
+
+                                            {headingGlobalBgHoverBackgroundType === 'classic' && (
+
+                                                <>
+                                                    <FB_ColorControl
+                                                        label={__("Color", "frontis-blocks")}
+                                                        globalColor={headingGlobalBgHoverClassicColor}
+                                                        setGlobalColor={(value) => setAttributes({ headingGlobalBgHoverClassicColor: value === undefined ? '' : value })}
+                                                    />
+
+                                                    <FB_ResponsiveBackgroundImageControl
+                                                        deviceType={deviceType}
+                                                        globalBackgroundImageUrl={headingGlobalBgHoverBackgroundImageUrl}
+                                                        setGlobalBackgroundImageUrl={(value) => setAttributes({ headingGlobalBgHoverBackgroundImageUrl: value })}
+                                                        globalBackgroundImagePosition={headingGlobalBgHoverBackgroundImagePosition}
+                                                        setGlobalBackgroundImagePosition={(newPosition) => setAttributes({ headingGlobalBgHoverBackgroundImagePosition: newPosition })}
+                                                        globalBackgroundImageAttachment={headingGlobalBgHoverBackgroundImageAttachment}
+                                                        setGlobalBackgroundImageAttachment={(newAttachment) => setAttributes({ headingGlobalBgHoverBackgroundImageAttachment: newAttachment })}
+                                                        globalBackgroundImageRepeat={headingGlobalBgHoverBackgroundImageRepeat}
+                                                        setGlobalBackgroundImageRepeat={(newRepeat) => setAttributes({ headingGlobalBgHoverBackgroundImageRepeat: newRepeat })}
+                                                        globalBackgroundImageSize={headingGlobalBgHoverBackgroundImageSize}
+                                                        setGlobalBackgroundImageSize={(newSize) => setAttributes({ headingGlobalBgHoverBackgroundImageSize: newSize })}
+                                                        setAttributes={setAttributes}
+                                                    />
+
+                                                </>
+                                            )}
+
+                                            {headingGlobalBgHoverBackgroundType === 'gradient' && (
+                                                <FB_GradientColorControl
+                                                    globalCustomGradientSwitcher={headingGlobalBgHoverCustomGradientSwitcher}
+                                                    setGlobalCustomGradientSwitcher={(value) => setAttributes({ headingGlobalBgHoverCustomGradientSwitcher: value })}
+                                                    globalCustomGradientInputValue={headingGlobalBgHoverCustomGradientInputValue}
+                                                    setGlobalCustomGradientInputValue={(value) => setAttributes({ headingGlobalBgHoverCustomGradientInputValue: value })}
+                                                    globalGradientColor={headingGlobalBgHoverGradientColor}
+                                                    setGlobalGradientColor={(value) => setAttributes({ headingGlobalBgHoverGradientColor: value === undefined ? null : value })}
+                                                />
+                                            )}
+                                        </div>
+                                    )}
+                                />
+                            </BaseControl>
+                        )}
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Border and Shadow", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+
+                        <SelectControl
+                                label={__("Border Style", "frontis-blocks")}
+                                value={headingGlobalBorder}
+                                options={BORDER_STYLES}
+                                onChange={(value) => setAttributes({ headingGlobalBorder: value })}
+                        />
+
+
+                        <FB_SwitcherControl
+                            label={__("Border Color", "frontis-blocks")}
+                            globalSwitcher={headingGlobalBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBorderColorSwitcher: value })}
+                        />
+
+                        {headingGlobalBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={headingGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ headingGlobalBorderColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {headingGlobalBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={headingGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ headingGlobalBorderHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        <FB_Spacing
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                            spacingUnits={headingGlobalBorderUnits}
+                            spacingDesktop={headingGlobalBorderDesktop}
+                            spacingTablet={headingGlobalBorderTablet}
+                            spacingMobile={headingGlobalBorderMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                            spacingCombineBtn={headingGlobalBorderLink}
+                            spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                            spacingUnits={headingGlobalBorderRadiusUnits}
+                            spacingDesktop={headingGlobalBorderRadiusDesktop}
+                            spacingTablet={headingGlobalBorderRadiusTablet}
+                            spacingMobile={headingGlobalBorderRadiusMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                            spacingCombineBtn={headingGlobalBorderRadiusLink}
+                            spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Box Shadow", "frontis-blocks")}
+                            globalSwitcher={headingGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ headingGlobalBoxShadowSwitcher: value })}
+                        />
+
+                        {headingGlobalBoxShadowSwitcher === 'normal' && (
+                            <FB_BoxShadowControl
+                                label={__("Normal Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowValues: value })}
+                                initialShadowValue={headingGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowCssValue: value })}
+                            />
+                        )}
+
+                        {headingGlobalBoxShadowSwitcher === 'hover' && (
+                            <FB_BoxShadowControl
+                                label={__("Hover Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ headingGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={headingGlobalBoxShadowHoverValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ headingGlobalBoxShadowHoverCssValue: value })}
+                            />
+                        )}
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Responsive Control", "frontis-blocks")}
+                        initialOpen={false}
+                        className="fb-setting-responsive-control-wrapper"
+                    >
+                        <FB_VisibilityControl
+                            desktopValue={timezoneDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ timezoneDesktopSwitcher: value })}
+
+                            tabletValue={timezoneTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ timezoneTabletSwitcher: value })}
+
+                            mobileValue={timezoneMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ timezoneMobileSwitcher: value })}
+                        />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Custom CSS", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_CustomCSSEditor
+                            value={timezoneCustomCSS}
+                            onChangeValue={(value) => setAttributes({ timezoneCustomCSS: value })}
+                        />
+                    </PanelBody> */}
+                </div>
+            </div>
         </>
     );
 

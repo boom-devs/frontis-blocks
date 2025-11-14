@@ -26,7 +26,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		openStatusText,
 		closedStatusText,
 		beforeTimeText,
-		afterTimeText
+		afterTimeText,
+		timezoneGlobalWraperID,
+		timezoneGlobalWraperClass
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -189,7 +191,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		<>
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 			<div {...blockProps}>
-				<div className='fb-timezone-container'>
+				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>
 					<div className='fb-timezone-wrapper'>
 						<div className='fb-location-timezone'>
 							<RichText

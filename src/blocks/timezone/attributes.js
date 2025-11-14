@@ -1417,6 +1417,214 @@ const attributes = {
         type : 'boolean',
         default: true
     },
+
+    //Typography Timezone 
+	noticeTextGlobalTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+	noticeTextGlobalTypographyData: {
+        type: 'object',
+        default: {}
+    },
+	noticeTextGlobalTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+	noticeTextGlobalTypoOption: {
+        type: 'object',
+        default: {label: 'Default', value: 'default'},
+    },
+	noticeTextFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+	noticeTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	noticeTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	noticeTextFontWeight : {
+        type: 'string',
+        default: ''
+    },
+	noticeTextFontStyle : {
+        type: 'string',
+        default: ''
+    },
+	noticeTextTransform : {
+        type: 'string',
+        default: ''
+    },
+	noticeTextDecoration : {
+        type: 'string',
+        default: 'none'
+    },
+	noticeTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	noticeTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	noticeTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	noticeTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    //notice text color
+    noticeTextColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	noticeTextColor: {
+        type: 'string',
+        default: '#008000',
+    },
+    noticeTextHoverColor: {
+        type: 'string',
+        default: '',
+    },
+
+    /** Start Global Setting */
+	timezoneGlobalZIndex : {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneOverflow: {
+        type: 'string',
+        default: 'default',
+    },
+
+    timezonePositionType: {
+        type: 'string',
+        default: 'default'
+    },
+    timezoneHZOrientationType: {
+        type: 'string',
+        default: 'left'
+    },
+    timezoneVROrientationType: {
+        type: 'string',
+        default: 'top'
+    },
+    timezoneHZLeftOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneHZLeftOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    timezoneHZRightOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneHZRightOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    timezoneVRTopOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneVRTopOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    timezoneVRBottomOffset: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    timezoneVRBottomOffsetUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+
+    timezoneGlobalWraperID : {
+        type: 'string',
+        default: ''
+    },
+    timezoneGlobalWraperClass : {
+        type: 'string',
+        default: ''
+    },
 };
 
 export default attributes;
