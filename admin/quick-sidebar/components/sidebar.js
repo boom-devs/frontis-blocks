@@ -19,11 +19,9 @@ const Sidebar = () => {
 		'frontis-blocks/advanced-button',
 		'frontis-blocks/advanced-image',
 		'frontis-blocks/features-list',
-
 	]);
 
 	const handleMouseOver = ( button ) => setHovering( button );
-
 	const handleMouseOut = () => setHovering( false );
 
 	useEffect( () => {
