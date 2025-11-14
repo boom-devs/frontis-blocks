@@ -18,6 +18,8 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_Spacing from '@Components/spacing';
 import FBIconPicker from "../../components/icon-picker";
+import FB_TypographyControl from '@Components/typography-control';
+import FB_Range from '@Components/range';
 
 import './editor.scss';
 
@@ -59,11 +61,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         socialIconBorderRadiusDesktop,
         socialIconBorderRadiusTablet,
         socialIconBorderRadiusMobile,
-        socialIconBorderRadiusLink
+        socialIconBorderRadiusLink,
+        socialShareGlobalTypographyData,
+        socialShareGlobalTypoSwitcher,
+        socialShareGlobalTypoType,
+        socialShareGlobalTypoOption,
+        socialShareFontFamily,
+        socialShareFontSize,
+        socialShareFontSizeUnits,
+        socialShareFontWeight,
+        socialShareFontStyle,
+        socialShareTextTransform,
+        socialShareTextDecoration,
+        socialShareLetterSpacing,
+        socialShareLetterSpacingUnits,
+        socialShareLineHeight,
+        socialShareLineHeightUnits,
+        socialShareLabelColorSwitcher,
+        socialShareLabelColor,
+        socialShareLabelHoverColor,
+        socialShareLabelBgColorSwitcher,
+        socialShareLabelBgColor,
+        socialShareLabelHoverBgColor,
+        socialShareLabelSpacing,
+        socialShareLabelSpacingUnits
     } = attributes;
 
     const deviceType = useDeviceType();
-    
+
     // Generate unique block ID
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -393,8 +418,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     const iconHandler = (iconName) => {
-		setAttributes({ icon: iconName });
-	};
+        setAttributes({ icon: iconName });
+    };
+
     const fbSocialShareStyle = useMemo(
         () => `
         .${blockID} .social-share-child-container .social-share-icon .custom-icon {
@@ -416,43 +442,86 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${socialItemHoverColor ? `fill: ${socialItemHoverColor};` : ''}
         }
         
+        .${blockID} .social-share-child-container .social-share-button{
+            ${socialShareLabelSpacing.Desktop ? `gap: ${socialShareLabelSpacing.Desktop}${socialShareLabelSpacingUnits.Desktop};` : ''}
+        }
+        
+        .${blockID} .social-share-child-container .social-share-label{
+            ${socialShareGlobalTypoSwitcher?.fontFamily === true && socialShareGlobalTypographyData?.fontFamily ? `font-family: ${socialShareGlobalTypographyData?.fontFamily};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontSize === true && socialShareGlobalTypographyData?.fontSize ? `font-size: ${socialShareGlobalTypographyData?.fontSize};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontWeight === true && socialShareGlobalTypographyData?.fontWeight ? `font-weight: ${socialShareGlobalTypographyData?.fontWeight};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontStyle === true && socialShareGlobalTypographyData?.fontStyle ? `font-style: ${socialShareGlobalTypographyData?.fontStyle};` : ''}
+            ${socialShareGlobalTypoSwitcher?.textTransform === true && socialShareGlobalTypographyData?.textTransform ? `text-transform: ${socialShareGlobalTypographyData?.textTransform};` : ''}
+            ${socialShareGlobalTypoSwitcher?.textDecoration === true && socialShareGlobalTypographyData?.textDecoration ? `text-decoration: ${socialShareGlobalTypographyData?.textDecoration};` : ''}
+            ${socialShareGlobalTypoSwitcher?.letterSpacing === true && socialShareGlobalTypographyData?.letterSpacing ? `letter-spacing: ${socialShareGlobalTypographyData?.letterSpacing};` : ''}
+            ${socialShareGlobalTypoSwitcher?.lineHeight === true && socialShareGlobalTypographyData?.lineHeight ? `line-height: ${socialShareGlobalTypographyData?.lineHeight};` : ''}
+
+            ${socialShareGlobalTypoSwitcher?.fontFamily === false && socialShareFontFamily && socialShareFontFamily !== 'Default' ? `font-family: ${socialShareFontFamily};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Desktop && socialShareFontSizeUnits?.Desktop ? `font-size: ${socialShareFontSize?.Desktop}${socialShareFontSizeUnits?.Desktop};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontWeight === false && socialShareFontWeight ? `font-weight: ${socialShareFontWeight};` : ''}
+            ${socialShareGlobalTypoSwitcher?.fontStyle === false && socialShareFontStyle ? `font-style: ${socialShareFontStyle};` : ''}
+            ${socialShareGlobalTypoSwitcher?.textTransform === false && socialShareTextTransform ? `text-transform: ${socialShareTextTransform};` : ''}
+            ${socialShareGlobalTypoSwitcher?.textDecoration === false && socialShareTextDecoration ? `text-decoration: ${socialShareTextDecoration};` : ''}
+            ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Desktop && socialShareLetterSpacingUnits?.Desktop ? `letter-spacing: ${socialShareLetterSpacing?.Desktop}${socialShareLetterSpacingUnits?.Desktop};` : ''}
+            ${socialShareGlobalTypoSwitcher?.lineHeight === false && socialShareLineHeight?.Desktop && socialShareLineHeightUnits?.Desktop ? `line-height: ${socialShareLineHeight?.Desktop}${socialShareLineHeightUnits?.Desktop};` : ''}
+            ${socialShareLabelColor ? `color: ${socialShareLabelColor};` : ''}
+            ${socialShareLabelBgColor ? `background: ${socialShareLabelBgColor};` : ''}
+        }
+        .${blockID} .social-share-child-container .social-share-label:hover{
+            ${socialShareLabelHoverColor ? `color: ${socialShareLabelHoverColor};` : ''}
+            ${socialShareLabelHoverBgColor ? `background: ${socialShareLabelHoverBgColor};` : ''}
+        }
         @media all and (max-width: 1024px){
-            ${socialIconTabletPaddingWidth && socialIconPaddingTablet?.top ? `padding: ${socialIconTabletPaddingWidth};` : ''}
-            ${socialIconTabletMarginWidth && socialIconMarginTablet?.top ? `margin: ${socialIconTabletMarginWidth};` : ''}
-            ${socialIconTabletBorderWidth && socialIconBorderTablet?.top ? `border-width: ${socialIconTabletBorderWidth};` : ''}
-            ${socialIconTabletBorderRadiusWidth && socialIconBorderRadiusTablet?.top ? `border-radius: ${socialIconTabletBorderRadiusWidth};` : ''}
+            .${blockID} .social-share-child-container .social-share-icon .custom-icon{
+                ${socialIconTabletPaddingWidth && socialIconPaddingTablet?.top ? `padding: ${socialIconTabletPaddingWidth};` : ''}
+                ${socialIconTabletMarginWidth && socialIconMarginTablet?.top ? `margin: ${socialIconTabletMarginWidth};` : ''}
+                ${socialIconTabletBorderWidth && socialIconBorderTablet?.top ? `border-width: ${socialIconTabletBorderWidth};` : ''}
+                ${socialIconTabletBorderRadiusWidth && socialIconBorderRadiusTablet?.top ? `border-radius: ${socialIconTabletBorderRadiusWidth};` : ''}
+            }
+            .${blockID} .social-share-child-container .social-share-label{
+                ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Tablet && socialShareFontSizeUnits?.Tablet ? `font-size: ${socialShareFontSize?.Tablet}${socialShareFontSizeUnits?.Tablet};` : ''}
+                ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Tablet && socialShareLetterSpacingUnits?.Tablet ? `letter-spacing: ${socialShareLetterSpacing?.Tablet}${socialShareLetterSpacingUnits?.Tablet};` : ''}
+                ${socialShareGlobalTypoSwitcher?.lineHeight === false && socialShareLineHeight?.Tablet && socialShareLineHeightUnits?.Tablet ? `line-height: ${socialShareLineHeight?.Tablet}${socialShareLineHeightUnits?.Tablet};` : ''}
+            }
+            .${blockID} .social-share-child-container .social-share-button{
+                ${socialShareLabelSpacing.Tablet ? `gap: ${socialShareLabelSpacing.Tablet}${socialShareLabelSpacingUnits.Tablet};` : ''}
+            }
         }
         @media all and (max-width: 767px){
-            ${socialIconPaddingMobileWidth && socialIconPaddingMobile?.top ? `padding: ${socialIconPaddingMobileWidth};` : ''}
-            ${socialIconMarginMobileWidth && socialIconMarginMobile?.top ? `margin: ${socialIconMarginMobileWidth};` : ''}
-            ${socialIconBorderMobileWidth && socialIconBorderMobile?.top ? `border-width: ${socialIconBorderMobileWidth};` : ''}
-            ${socialIconBorderRadiusMobileWidth && socialIconBorderRadiusMobile?.top ? `border-radius: ${socialIconBorderRadiusMobileWidth};` : ''}
+            .${blockID} .social-share-child-container .social-share-icon .custom-icon{
+                ${socialIconPaddingMobileWidth && socialIconPaddingMobile?.top ? `padding: ${socialIconPaddingMobileWidth};` : ''}
+                ${socialIconMarginMobileWidth && socialIconMarginMobile?.top ? `margin: ${socialIconMarginMobileWidth};` : ''}
+                ${socialIconBorderMobileWidth && socialIconBorderMobile?.top ? `border-width: ${socialIconBorderMobileWidth};` : ''}
+                ${socialIconBorderRadiusMobileWidth && socialIconBorderRadiusMobile?.top ? `border-radius: ${socialIconBorderRadiusMobileWidth};` : ''}
+            }
+            
+            .${blockID} .social-share-child-container .social-share-label{
+                ${socialShareGlobalTypoSwitcher?.fontSize === false && socialShareFontSize?.Mobile && socialShareFontSizeUnits?.Mobile ? `font-size: ${socialShareFontSize?.Mobile}${socialShareFontSizeUnits?.Mobile};` : ''}
+                ${socialShareGlobalTypoSwitcher?.letterSpacing === false && socialShareLetterSpacing?.Mobile && socialShareLetterSpacingUnits?.Mobile ? `letter-spacing: ${socialShareLetterSpacing?.Mobile}${socialShareLetterSpacingUnits?.Mobile};` : ''}
+                ${socialShareGlobalTypoSwitcher?.lineHeight === false && socialShareLineHeight?.Mobile && socialShareLineHeightUnits?.Mobile ? `line-height: ${socialShareLineHeight?.Mobile}${socialShareLineHeightUnits?.Mobile};` : ''}
+            }
+            .${blockID} .social-share-child-container .social-share-button{
+                ${socialShareLabelSpacing.Mobile ? `gap: ${socialShareLabelSpacing.Mobile}${socialShareLabelSpacingUnits.Mobile};` : ''}
+            }
         }
         `,
         [
-        blockID,
-        socialItemColorSwitcher,
-        socialItemColor,
-        socialItemHoverColor,
-        socialItemBgColorSwitcher,
-        socialItemBgColor,
-        socialItemBgColorHover,
-        socialIconPaddingDesktopWidth,
-        socialIconMarginDesktopWidth,
-        socialIconBorderDesktopWidth,
-        socialIconBorderRadiusDesktopWidth,
-        socialIconBorderColor,
-        socialIconTabletPaddingWidth,
-        socialIconTabletMarginWidth,
-        socialIconTabletBorderWidth,
-        socialIconTabletBorderRadiusWidth,
-        socialIconPaddingMobileWidth,
-        socialIconMarginMobileWidth,
-        socialIconBorderMobileWidth,
-        socialIconBorderRadiusMobileWidth
+            socialIconPaddingDesktopWidth,
+            socialIconMarginDesktopWidth,
+            socialIconBorderDesktopWidth,
+            socialIconBorderRadiusDesktopWidth,
+            socialIconTabletPaddingWidth,
+            socialIconTabletMarginWidth,
+            socialIconTabletBorderWidth,
+            socialIconTabletBorderRadiusWidth,
+            socialIconPaddingMobileWidth,
+            socialIconMarginMobileWidth,
+            socialIconBorderMobileWidth,
+            socialIconBorderRadiusMobileWidth,
+            attributes
         ],
     );
-    
+
     useEffect(() => {
         setAttributes({
             blockStyle: `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim(),
@@ -465,7 +534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         <>
             <style>
                 {editorStyle}
-            </style> 
+            </style>
             <InspectorControls key="controls">
                 <div className="fb-inspector-control">
                     <TabPanel
@@ -569,7 +638,118 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 />
                                             )}
                                         </PanelBody>
+                                        <PanelBody title={__("Label", "frontis-blocks")} initialOpen={true}>
+                                            <FB_TypographyControl
+                                                globalTypoControlActive={true}
+                                                globalTypoSwitcher={socialShareGlobalTypoSwitcher}
+                                                storeGlobalTypographyData={(value) => setAttributes({ socialShareGlobalTypographyData: value })}
 
+                                                globalTypoType={socialShareGlobalTypoType}
+                                                onChangeGlobalTypoType={(value) => {
+                                                    setAttributes({
+                                                        socialShareGlobalTypoType: value,
+                                                        socialShareGlobalTypoSwitcher: value === 'default' ? { ...socialShareGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...socialShareGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                                                    })
+                                                }}
+
+                                                globalTypoOption={socialShareGlobalTypoOption}
+                                                onChangeGlobalTypoOption={(value) => setAttributes({ socialShareGlobalTypoOption: value })}
+
+                                                fontFamily={socialShareFontFamily}
+                                                onChangeFontFamily={(value) => setAttributes({ socialShareFontFamily: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                                                fontSize={socialShareFontSize}
+                                                onChangeFontSize={(value) => setAttributes({ socialShareFontSize: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, fontSize: value && false } })}
+
+                                                fontSizeUnits={socialShareFontSizeUnits}
+                                                onChangeFontSizeUnit={(value) => setAttributes({ socialShareFontSizeUnits: value })}
+
+                                                fontWeight={socialShareFontWeight}
+                                                onChangeFontWeight={(value) => setAttributes({ socialShareFontWeight: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                                                fontStyle={socialShareFontStyle}
+                                                onChangeFontStyle={(value) => setAttributes({ socialShareFontStyle: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                                                textTransform={socialShareTextTransform}
+                                                onChangeTextTransform={(value) => setAttributes({ socialShareTextTransform: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, textTransform: value && false } })}
+
+                                                textDecoration={socialShareTextDecoration}
+                                                onChangeTextDecoration={(value) => setAttributes({ socialShareTextDecoration: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                                                letterSpacing={socialShareLetterSpacing}
+                                                onChangeLetterSpacing={(value) => setAttributes({ socialShareLetterSpacing: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                                                letterSpacingUnits={socialShareLetterSpacingUnits}
+                                                onChangeLetterSpacingUnit={(value) => setAttributes({ socialShareLetterSpacingUnits: value })}
+
+                                                lineHeight={socialShareLineHeight}
+                                                onChangeLineHeight={(value) => setAttributes({ socialShareLineHeight: value, socialShareGlobalTypoSwitcher: { ...socialShareGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                                                lineHeightUnits={socialShareLineHeightUnits}
+                                                onChangeLineHeightUnit={(value) => setAttributes({ socialShareLineHeightUnits: value })}
+
+                                                deviceType={deviceType}
+                                                setAttributes={setAttributes}
+                                            />
+
+                                            <FB_SwitcherControl
+                                                label={__("Color", "frontis-blocks")}
+                                                globalSwitcher={socialShareLabelColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ socialShareLabelColorSwitcher: value })}
+                                            />
+
+                                            {socialShareLabelColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={socialShareLabelColor}
+                                                    setGlobalColor={(value) => setAttributes({ socialShareLabelColor: value === undefined ? '' : value })}
+                                                />
+                                            )}
+
+                                            {socialShareLabelColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={socialShareLabelHoverColor}
+                                                    setGlobalColor={(value) => setAttributes({ socialShareLabelHoverColor: value === undefined ? '' : value })}
+                                                />
+                                            )}
+
+                                            <FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={socialShareLabelBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ socialShareLabelBgColorSwitcher: value })}
+                                            />
+
+                                            {socialShareLabelBgColorSwitcher === 'normal' && (
+                                                <FB_ColorControl
+                                                    label={__("Normal Color", "frontis-blocks")}
+                                                    globalColor={socialShareLabelBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ socialShareLabelBgColor: value === undefined ? '' : value })}
+                                                />
+                                            )}
+
+                                            {socialShareLabelBgColorSwitcher === 'hover' && (
+                                                <FB_ColorControl
+                                                    label={__("Hover Color", "frontis-blocks")}
+                                                    globalColor={socialShareLabelHoverBgColor}
+                                                    setGlobalColor={(value) => setAttributes({ socialShareLabelHoverBgColor: value === undefined ? '' : value })}
+                                                />
+                                            )}
+
+                                            <FB_Range
+                                                min={1}
+                                                max={100}
+                                                label={__("Label Spacing", "frontis-blocks")}
+                                                rangeValue={socialShareLabelSpacing}
+                                                onChangeHandler={(value) => setAttributes({ socialShareLabelSpacing: value })}
+                                                rangeUnitHandler={(value) => setAttributes({ socialShareLabelSpacingUnits: value })}
+                                                deviceType={deviceType}
+                                                units={socialShareLabelSpacingUnits}
+                                                setAttributes={setAttributes}
+                                                rangeStep={1}
+                                                resetFallbackValue={""}
+                                            />
+                                        </PanelBody>
                                         <PanelBody title={__("Spacing", "frontis-blocks")} initialOpen={false}>
                                             <FB_Spacing
                                                 label={__("Padding", "frontis-blocks")}
@@ -598,10 +778,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                                 setAttributes={setAttributes}
                                             />
                                             <SelectControl
-                                                    label={__("Border Style", "frontis-blocks")}
-                                                    value={socialIconBorder}
-                                                    options={BORDER_STYLES}
-                                                    onChange={(value) => setAttributes({ socialIconBorder: value })}
+                                                label={__("Border Style", "frontis-blocks")}
+                                                value={socialIconBorder}
+                                                options={BORDER_STYLES}
+                                                onChange={(value) => setAttributes({ socialIconBorder: value })}
                                             />
 
                                             <FB_SwitcherControl
@@ -659,7 +839,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 {tab.name === "advanced" && (
                                     <>
                                         <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
-                                            
+
                                         </PanelBody>
                                     </>
                                 )}

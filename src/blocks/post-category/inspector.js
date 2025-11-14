@@ -5422,6 +5422,22 @@ ${
 							min={1}
 							max={50}
 						/>
+
+						{ showDescription &&
+						 <RangeControl
+							label={__("Description Length", "frontis-blocks")}
+							value={postDescriptionExcerptLength}
+							onChange={(value) =>
+								setAttributes({
+									postDescriptionExcerptLength: value === 0 ? undefined : value,
+								})
+							}
+							min={1}
+							max={200}
+							step={1}
+							resetFallbackValue={10}
+						/>}
+
 					</BaseControl>
 				</PanelBody>
 
@@ -6768,20 +6784,6 @@ ${
 						rangeStep={1}
 						resetFallbackValue={""}
 					/>
-
-					<RangeControl
-						label={__("Description Length", "frontis-blocks")}
-						value={postDescriptionExcerptLength}
-						onChange={(value) =>
-							setAttributes({
-								postDescriptionExcerptLength: value === 0 ? undefined : value,
-							})
-						}
-						min={1}
-						max={200}
-						step={1}
-						resetFallbackValue={10}
-					/>
 				</PanelBody>
 			)}
 
@@ -7423,20 +7425,6 @@ ${
 							rangeStep={1}
 							resetFallbackValue={20}
 						/>
-
-						{/* <FB_Range
-									min={0}
-									max={100}
-									label={__("Image Gap", "frontis-blocks")}
-									rangeValue={buttonIconGapSize}
-									onChangeHandler={(value) => setAttributes({ buttonIconGapSize: value })}
-									rangeUnitHandler={(value) => setAttributes({ buttonIconGapUnits: value })}
-									deviceType={deviceType}
-									units={buttonIconGapUnits}
-									setAttributes={setAttributes}
-									rangeStep={1}
-									resetFallbackValue={''}
-							/> */}
 
 						<FB_SwitcherControl
 							label={__("Image Rotation", "frontis-blocks")}

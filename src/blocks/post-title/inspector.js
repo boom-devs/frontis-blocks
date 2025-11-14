@@ -1050,7 +1050,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             onChangeValue={(value) => setAttributes({ rel: value })}
                         />
 
-                        <p style={{ fontSize: "12px", color: "#888" }}>
+                        <p className="fb-control-help">
                             {__("For example: nofollow, noreferrer, etc.", "frontis-blocks")}
                         </p>
                     </>
@@ -1079,7 +1079,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 resetFallbackValue={""}
             />
 
-            <p style={{ fontSize: "12px", color: "#888" }}>
+            <p className="fb-control-help">
                 {__(
                     "Polish your title by limiting words. Set 0 to show the full text.",
                     "frontis-blocks",

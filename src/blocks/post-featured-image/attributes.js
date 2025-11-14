@@ -84,7 +84,7 @@ const attributes = {
 
 	autoFitSwitch: {
 		type: "boolean",
-		default: false,
+		default: true,
 	},
 
 	imageFit: {
