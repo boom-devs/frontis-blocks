@@ -7,7 +7,9 @@ export default function save({ attributes }) {
         socialMediaType,
         displayStyle,
         alignment,
-        icon
+        icon,
+        socialShareChildGlobalWraperID,
+        socialShareChildGlobalWraperClass
     } = attributes;
 
     // Function to get SVG string for different networks
@@ -53,7 +55,7 @@ export default function save({ attributes }) {
 
     return (
         <div {...blockProps}>
-            <div className="social-share-child-container" style={{ textAlign: alignment }}>
+            <div className={`social-share-child-container ${socialShareChildGlobalWraperClass}`} id={socialShareChildGlobalWraperID} style={{ textAlign: alignment }}>
                 {socialMediaType && (
                     <a 
                         className={`social-share-button ${socialMediaType}`}

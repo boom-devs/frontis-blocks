@@ -573,6 +573,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID} .social-share-parent-container:hover{
             ${desktopBackgroundHoverStyles}
+            ${socialShareGlobalBorderHoverColor ? `border-color: ${socialShareGlobalBorderHoverColor};` : ''}
+            ${socialShareGlobalBoxShadowHoverCssValue ? `box-shadow: ${socialShareGlobalBoxShadowHoverCssValue};` : ''}
         }
         .${blockID} .social-share-parent-container .block-editor-block-list__layout {
             ${iconSpacing.Desktop ? `gap: ${iconSpacing.Desktop}${iconSpacingUnits.Desktop};` : ''}
