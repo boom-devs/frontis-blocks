@@ -37,12 +37,16 @@ import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import { getAllCountries, getTimezonesForCountry } from 'countries-and-timezones';
 
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+        countries,
+        selectedCountry,
+        useCustomLocation,
 		location,        
 		timezone,        
 		timezones,       
@@ -50,6 +54,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		endTime,
 		officeHours,
 		officeStatus,
+        timeFormat,
 		weekendDays,
 		holidays,
 		useMonthlySchedule,
@@ -462,546 +467,668 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     ]);
 
 	// State variables
-	const [selectedDate, setSelectedDate] = useState('');
-	const [currentTime, setCurrentTime] = useState('');
-	const [selectedMonth, setSelectedMonth] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
+    const [currentTime, setCurrentTime] = useState('');
+    const [selectedMonth, setSelectedMonth] = useState('');
 
-	// Initialize attributes with proper default values
-	useEffect(() => {
-		const updates = {};
-		
-		if (!timezones || timezones.length === 0) {
-			updates.timezones = getAllTimezones();
-			updates.timezone = timezone || 'Asia/Dhaka';
-			updates.timezoneMode = timezoneMode || 'auto';
-		}
+    const timeFormatOptions = [
+        { label: '12-hour (hh:mm AM/PM)', value: 'hh:mm A' },
+        { label: '12-hour (hh:mm:ss AM/PM)', value: 'hh:mm:ss A' },
+        { label: '24-hour (HH:mm)', value: 'HH:mm' },
+        { label: '24-hour (HH:mm:ss)', value: 'HH:mm:ss' }
+    ];
 
-		// Set proper default time values
-		if (!startTime || !startTime.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
-			updates.startTime = '09:00';
-		}
-		if (!endTime || !endTime.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
-			updates.endTime = '17:00';
-		}
-
-		if (!weekendDays) {
-			updates.weekendDays = ['0', '6'];
-		}
-
-		if (useMonthlySchedule === undefined) {
-			updates.useMonthlySchedule = false;
-		}
-		
-		if (useUTCTimezoneFormat === undefined) {
-			updates.useUTCTimezoneFormat = false;
-		}
-
-		if (!weekendMessage) {
-			updates.weekendMessage = 'Weekend';
-		}
-		if (!holidayMessage) {
-			updates.holidayMessage = 'Holiday';
-		}
-
-		// Initialize separator
-		if (!separator) {
-			updates.separator = ' | ';
-		}
-
-		// Initialize status texts
-		if (!openStatusText) {
-			updates.openStatusText = 'Open';
-		}
-		if (!closedStatusText) {
-			updates.closedStatusText = 'Closed';
-		}
-
-		// Initialize time texts
-		if (!beforeTimeText) {
-			updates.beforeTimeText = 'Will start at';
-		}
-		if (!afterTimeText) {
-			updates.afterTimeText = 'Will close at';
-		}
-
-		if (Object.keys(updates).length > 0) {
-			setAttributes(updates);
-		}
-        if (beforeTimeText === 'Wll start at') {
-            setAttributes({ beforeTimeText: 'Will start at' });
+    // Initialize attributes with proper default values
+    useEffect(() => {
+        const updates = {};
+        
+        // Initialize countries using the library
+        if (!countries || countries.length === 0) {
+            try {
+                const countriesData = getAllCountries();
+                const totalCountries = Object.keys(countriesData).length;
+                console.log('Total countries:', totalCountries);
+                const countryOptions = Object.values(countriesData).map(country => ({
+                    label: country.name,
+                    value: country.id
+                })).sort((a, b) => a.label.localeCompare(b.label));
+                
+                updates.countries = countryOptions;
+                updates.selectedCountry = selectedCountry || 'BD';
+            } catch (error) {
+                console.error('Error loading countries:', error);
+                updates.countries = [
+                    { label: 'Bangladesh', value: 'BD' },
+                    { label: 'United States', value: 'US' },
+                    { label: 'United Kingdom', value: 'GB' }
+                ];
+                updates.selectedCountry = 'BD';
+            }
         }
-	}, [beforeTimeText]);
 
-	// Helper functions
-	const getWeekdayName = useCallback((dayNumber) => {
-		const days = { 
-			'0': 'Sunday', 
-			'1': 'Monday', 
-			'2': 'Tuesday', 
-			'3': 'Wednesday', 
-			'4': 'Thursday', 
-			'5': 'Friday', 
-			'6': 'Saturday' 
-		};
-		return days[dayNumber] || '';
-	}, []);
+        // Initialize timezones
+        if (!timezones || timezones.length === 0) {
+            updates.timezones = getAllTimezones();
+            updates.timezone = timezone || 'Asia/Dhaka';
+            updates.timezoneMode = timezoneMode || 'auto';
+        }
 
-	const getAutoTimezone = useCallback(() => {
-		try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } 
-		catch (error) { return 'Asia/Dhaka'; }
-	}, []);
+        // Set default time values
+        const isValidTime = (time) => time && time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/);
+        
+        if (!isValidTime(startTime)) updates.startTime = '09:00';
+        if (!isValidTime(endTime)) updates.endTime = '17:00';
 
-	//Show timezone name when auto mode
-	const getFormattedTimezone = useCallback((timezone) => {
-		try {
-			const now = new Date();
-			
-			if (useUTCTimezoneFormat) {
-				// UTC format - show timezone name with offset
-				const formatter = new Intl.DateTimeFormat('en-US', {
-					timeZone: timezone,
-					timeZoneName: 'longOffset'
-				});
-				const parts = formatter.formatToParts(now);
-				const offsetPart = parts.find(part => part.type === 'timeZoneName');
-				
-				if (offsetPart && offsetPart.value.startsWith('GMT')) {
-					const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
-					const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
-					return `${timezoneName} (UTC${offset})`;
-				}
-			} else {
-				// GMT format (default) - show timezone name with offset
-				const offset = now.toLocaleString('en-US', { 
-					timeZone: timezone, 
-					timeZoneName: 'shortOffset' 
-				}).split(' ').pop();
-				const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
-				return `${timezoneName} (${offset})`;
-			}
-		} catch (error) {
-			const timezoneName = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
-			return useUTCTimezoneFormat ? `${timezoneName} (UTC+06:00)` : `${timezoneName} (GMT+6)`;
-		}
-	}, [useUTCTimezoneFormat]);
+        // Set default values - ADD useCustomLocation here
+        const defaults = {
+            weekendDays: ['0', '6'],
+            useMonthlySchedule: false,
+            useUTCTimezoneFormat: false,
+            weekendMessage: 'Weekend',
+            holidayMessage: 'Holiday',
+            separator: ' | ',
+            openStatusText: 'Open',
+            closedStatusText: 'Closed',
+            beforeTimeText: 'Will start at',
+            afterTimeText: 'Will close at',
+            timeFormat: 'hh:mm A',
+            useCustomLocation: true  // ADD THIS LINE
+        };
 
-	const getAllTimezones = useCallback(() => {
-		try {
-			const timezoneList = Intl.supportedValuesOf('timeZone');
-			const options = timezoneList.map(tz => {
-				try {
-					const now = new Date();
-					
-					if (useUTCTimezoneFormat) {
-						const formatter = new Intl.DateTimeFormat('en-US', {
-							timeZone: tz,
-							timeZoneName: 'longOffset'
-						});
-						const parts = formatter.formatToParts(now);
-						const offsetPart = parts.find(part => part.type === 'timeZoneName');
-						
-						let offsetString = '';
-						if (offsetPart && offsetPart.value.startsWith('GMT')) {
-							offsetString = offsetPart.value.replace('GMT', '').replace('UTC', '');
-						}
-						
-						const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-						return { label: `${timezoneName} (UTC${offsetString})`, value: tz };
-					} else {
-						const offset = now.toLocaleString('en-US', { 
-							timeZone: tz, 
-							timeZoneName: 'shortOffset' 
-						}).split(' ').pop();
-						
-						const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-						return { label: `${timezoneName} (${offset})`, value: tz };
-					}
-				} catch (e) {
-					const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-					return { label: timezoneName, value: tz };
-				}
-			});
-			return options.sort((a, b) => a.label.localeCompare(b.label));
-		} catch (error) {
-			const fallbackTimezones = [
-				{ label: 'Asia - Dhaka (GMT+6)', value: 'Asia/Dhaka' }, 
-				{ label: 'UTC (GMT+0)', value: 'UTC' },
-				{ label: 'America - New York (GMT-5)', value: 'America/New_York' }, 
-				{ label: 'America - Los Angeles (GMT-8)', value: 'America/Los_Angeles' },
-				{ label: 'Europe - London (GMT+0)', value: 'Europe/London' }, 
-				{ label: 'Asia - Kolkata (GMT+5:30)', value: 'Asia/Kolkata' },
-				{ label: 'Asia - Singapore (GMT+8)', value: 'Asia/Singapore' }, 
-				{ label: 'Asia - Tokyo (GMT+9)', value: 'Asia/Tokyo' }
-			];
-			
-			if (useUTCTimezoneFormat) {
-				return fallbackTimezones.map(tz => ({
-					...tz,
-					label: tz.label.replace(/GMT([+-]\d+(?::\d+)?)/g, (match, offset) => {
-						if (offset.includes(':')) return `UTC${offset}`;
-						const hours = parseInt(offset);
-						return `UTC${offset}:00`;
-					})
-				})).sort((a, b) => a.label.localeCompare(b.label));
-			}
-			
-			return fallbackTimezones.sort((a, b) => a.label.localeCompare(b.label));
-		}
-	}, [useUTCTimezoneFormat]);
+        Object.keys(defaults).forEach(key => {
+            if (attributes[key] === undefined || attributes[key] === null) {
+                updates[key] = defaults[key];
+            }
+        });
 
-	// Core business logic
-	const getEffectiveTimezone = useCallback(() => {
-		return timezoneMode === 'auto' ? getAutoTimezone() : timezone;
-	}, [timezoneMode, timezone, getAutoTimezone]);
+        // Fix typo in beforeTimeText
+        if (beforeTimeText === 'Wll start at') {
+            updates.beforeTimeText = 'Will start at';
+        }
 
-	const getCurrentTimeInTimezone = useCallback((timezoneToUse = null) => {
-		const effectiveTimezone = timezoneToUse || getEffectiveTimezone();
-		if (!effectiveTimezone) return '';
-		try {
-			return new Date().toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
-			});
-		} catch (error) {
-			return 'Time Unavailable';
-		}
-	}, [getEffectiveTimezone]);
+        if (Object.keys(updates).length > 0) {
+            setAttributes(updates);
+        }
+    }, [attributes, setAttributes]);
 
-	const getCurrentMonthSchedule = useCallback(() => {
-		if (!useMonthlySchedule || !monthlySchedules || monthlySchedules.length === 0) return null;
-		const currentMonth = new Date().getMonth().toString();
-		return monthlySchedules.find(schedule => schedule.month === currentMonth);
-	}, [useMonthlySchedule, monthlySchedules]);
+    // Country and Timezone functions
+    const getCountryTimezones = useCallback((countryCode) => {
+        try {
+            const timezonesData = getTimezonesForCountry(countryCode);
+            
+            const options = timezonesData.map(tz => {
+                try {
+                    const now = new Date();
+                    const timezoneName = tz.name.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
+                    
+                    if (useUTCTimezoneFormat) {
+                        const formatter = new Intl.DateTimeFormat('en-US', {
+                            timeZone: tz.name,
+                            timeZoneName: 'longOffset'
+                        });
+                        const parts = formatter.formatToParts(now);
+                        const offsetPart = parts.find(part => part.type === 'timeZoneName');
+                        
+                        let offsetString = '';
+                        if (offsetPart && offsetPart.value.startsWith('GMT')) {
+                            offsetString = offsetPart.value.replace('GMT', '').replace('UTC', '');
+                        }
+                        
+                        return { 
+                            label: `${timezoneName} (UTC${offsetString})`, 
+                            value: tz.name 
+                        };
+                    } else {
+                        const offset = now.toLocaleString('en-US', { 
+                            timeZone: tz.name, 
+                            timeZoneName: 'shortOffset' 
+                        }).split(' ').pop();
+                        
+                        return { 
+                            label: `${timezoneName} (${offset})`, 
+                            value: tz.name 
+                        };
+                    }
+                } catch (e) {
+                    const timezoneName = tz.name.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
+                    return { 
+                        label: timezoneName, 
+                        value: tz.name 
+                    };
+                }
+            });
+            
+            return options.sort((a, b) => a.label.localeCompare(b.label));
+        } catch (error) {
+            console.error('Error getting country timezones:', error);
+            return [{ label: 'Asia/Dhaka (GMT+6)', value: 'Asia/Dhaka' }];
+        }
+    }, [useUTCTimezoneFormat]);
 
-	const getEffectiveOfficeHours = useCallback(() => {
-		if (useMonthlySchedule) {
-			const currentSchedule = getCurrentMonthSchedule();
-			if (currentSchedule) return { startTime: currentSchedule.startTime, endTime: currentSchedule.endTime };
-		}
-		return { startTime, endTime };
-	}, [useMonthlySchedule, getCurrentMonthSchedule, startTime, endTime]);
+    // Update timezones when country changes
+    useEffect(() => {
+        if (selectedCountry && !useCustomLocation) {
+            const countryTimezones = getCountryTimezones(selectedCountry);
+            const newTimezone = countryTimezones.length > 0 ? countryTimezones[0].value : 'Asia/Dhaka';
+            
+            setAttributes({ 
+                timezones: countryTimezones,
+                timezone: newTimezone
+            });
+            
+            // Auto-set location name based on country
+            if (!location && countries) {
+                const selectedCountryData = countries.find(c => c.value === selectedCountry);
+                if (selectedCountryData) {
+                    setAttributes({ location: selectedCountryData.label });
+                }
+            }
+        }
+    }, [selectedCountry, useCustomLocation, getCountryTimezones]);
 
-	// Calculate remaining time when open
-	const getRemainingTime = useCallback(() => {
-		const effectiveTimezone = getEffectiveTimezone();
-		const effectiveHours = getEffectiveOfficeHours();
-		const { endTime: effectiveEndTime } = effectiveHours;
+    // Helper functions
+    const getWeekdayName = useCallback((dayNumber) => {
+        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        return days[dayNumber] || '';
+    }, []);
 
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
+    const getAutoTimezone = useCallback(() => {
+        try { 
+            return Intl.DateTimeFormat().resolvedOptions().timeZone; 
+        } catch (error) { 
+            return 'Asia/Dhaka'; 
+        }
+    }, []);
 
-		if (!effectiveTimezone || !isValidTime(effectiveEndTime)) {
-			return '';
-		}
+    // Timezone formatting
+    const getFormattedTimezone = useCallback((timezone) => {
+        try {
+            const now = new Date();
+            const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
+            
+            if (useUTCTimezoneFormat) {
+                const formatter = new Intl.DateTimeFormat('en-US', {
+                    timeZone: timezone,
+                    timeZoneName: 'longOffset'
+                });
+                const parts = formatter.formatToParts(now);
+                const offsetPart = parts.find(part => part.type === 'timeZoneName');
+                
+                if (offsetPart && offsetPart.value.startsWith('GMT')) {
+                    const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
+                    return `${timezoneName} (UTC${offset})`;
+                }
+            } else {
+                const offset = now.toLocaleString('en-US', { 
+                    timeZone: timezone, 
+                    timeZoneName: 'shortOffset' 
+                }).split(' ').pop();
+                
+                return `${timezoneName} (${offset})`;
+            }
+        } catch (error) {
+            const timezoneName = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
+            return useUTCTimezoneFormat ? `${timezoneName} (UTC+06:00)` : `${timezoneName} (GMT+6)`;
+        }
+        
+        return 'Unknown Timezone';
+    }, [useUTCTimezoneFormat]);
 
-		try {
-			const now = new Date();
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', hour12: false
-			});
+    const getAllTimezones = useCallback(() => {
+        try {
+            const timezoneList = Intl.supportedValuesOf('timeZone');
+            const options = timezoneList.map(tz => {
+                try {
+                    const now = new Date();
+                    const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
+                    
+                    if (useUTCTimezoneFormat) {
+                        const formatter = new Intl.DateTimeFormat('en-US', {
+                            timeZone: tz,
+                            timeZoneName: 'longOffset'
+                        });
+                        const parts = formatter.formatToParts(now);
+                        const offsetPart = parts.find(part => part.type === 'timeZoneName');
+                        
+                        let offsetString = '';
+                        if (offsetPart && offsetPart.value.startsWith('GMT')) {
+                            offsetString = offsetPart.value.replace('GMT', '').replace('UTC', '');
+                        }
+                        
+                        return { label: `${timezoneName} (UTC${offsetString})`, value: tz };
+                    } else {
+                        const offset = now.toLocaleString('en-US', { 
+                            timeZone: tz, 
+                            timeZoneName: 'shortOffset' 
+                        }).split(' ').pop();
+                        
+                        return { label: `${timezoneName} (${offset})`, value: tz };
+                    }
+                } catch (e) {
+                    const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
+                    return { label: timezoneName, value: tz };
+                }
+            });
+            
+            return options.sort((a, b) => a.label.localeCompare(b.label));
+        } catch (error) {
+            const fallbackTimezones = [
+                { label: 'Asia - Dhaka (GMT+6)', value: 'Asia/Dhaka' }, 
+                { label: 'UTC (GMT+0)', value: 'UTC' },
+                { label: 'America - New York (GMT-5)', value: 'America/New_York' }
+            ];
+            
+            if (useUTCTimezoneFormat) {
+                return fallbackTimezones.map(tz => ({
+                    ...tz,
+                    label: tz.label.replace(/GMT([+-]\d+(?::\d+)?)/g, (match, offset) => {
+                        return offset.includes(':') ? `UTC${offset}` : `UTC${offset}:00`;
+                    })
+                }));
+            }
+            
+            return fallbackTimezones;
+        }
+    }, [useUTCTimezoneFormat]);
 
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
+    // Core business logic
+    const getEffectiveTimezone = useCallback(() => {
+        return timezoneMode === 'auto' ? getAutoTimezone() : timezone;
+    }, [timezoneMode, timezone, getAutoTimezone]);
 
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let endTotal = endHours * 60 + endMinutes;
+    const getCurrentTimeInTimezone = useCallback(() => {
+        const effectiveTimezone = getEffectiveTimezone();
+        if (!effectiveTimezone) return '';
+        
+        try {
+            const now = new Date();
+            const formatConfig = {
+                'hh:mm:ss A': { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true },
+                'HH:mm:ss': { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false },
+                'HH:mm': { hour: '2-digit', minute: '2-digit', hour12: false },
+                'hh:mm A': { hour: '2-digit', minute: '2-digit', hour12: true }
+            };
+            
+            const config = formatConfig[timeFormat] || formatConfig['hh:mm A'];
+            return now.toLocaleTimeString('en-US', {
+                timeZone: effectiveTimezone,
+                ...config
+            });
+        } catch (error) {
+            return 'Time Unavailable';
+        }
+    }, [getEffectiveTimezone, timeFormat]);
 
-			if (endTotal < currentTotal) {
-				endTotal += 24 * 60;
-			}
+    const getLocationDisplayName = useCallback(() => {
+        if (useCustomLocation && location) {
+            return location;
+        }
+        
+        if (selectedCountry && countries) {
+            const selectedCountryData = countries.find(c => c.value === selectedCountry);
+            return selectedCountryData?.label || 'Unknown Country';
+        }
+        
+        return location || 'Unknown Location';
+    }, [useCustomLocation, location, selectedCountry, countries]);
 
-			const remainingMinutes = endTotal - currentTotal;
-			
-			if (remainingMinutes <= 0) return '';
+    // Office hours and status logic
+    const getCurrentMonthSchedule = useCallback(() => {
+        if (!useMonthlySchedule || !monthlySchedules || monthlySchedules.length === 0) return null;
+        return monthlySchedules.find(schedule => schedule.month === new Date().getMonth().toString());
+    }, [useMonthlySchedule, monthlySchedules]);
 
-			const hours = Math.floor(remainingMinutes / 60);
-			const minutes = remainingMinutes % 60;
+    const getEffectiveOfficeHours = useCallback(() => {
+        if (useMonthlySchedule) {
+            const currentSchedule = getCurrentMonthSchedule();
+            if (currentSchedule) {
+                return { startTime: currentSchedule.startTime, endTime: currentSchedule.endTime };
+            }
+        }
+        return { startTime, endTime };
+    }, [useMonthlySchedule, getCurrentMonthSchedule, startTime, endTime]);
 
-			if (hours > 0 && minutes > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			} else if (hours > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''}`;
-			} else {
-				return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			}
-		} catch (error) {
-			return '';
-		}
-	}, [getEffectiveTimezone, getEffectiveOfficeHours]);
+    const getRemainingTime = useCallback(() => {
+        const effectiveTimezone = getEffectiveTimezone();
+        const { endTime: effectiveEndTime } = getEffectiveOfficeHours();
 
-	// Status calculation functions
-	const isWeekendOrHoliday = useCallback((dayOfWeek, todayDate) => {
-		const weekendDaysArray = weekendDays || [];
-		if (weekendDaysArray.includes(dayOfWeek.toString())) return 'Weekend';
-		if (holidays && holidays.includes(todayDate)) return 'Holiday';
-		return null;
-	}, [weekendDays, holidays]);
+        const isValidTime = (time) => time && time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/);
 
-	const calculateTimeStatus = useCallback((currentTimeStr, startTime, endTime) => {
-		const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-		const [startHours, startMinutes] = startTime.split(':').map(Number);
-		const [endHours, endMinutes] = endTime.split(':').map(Number);
+        if (!effectiveTimezone || !isValidTime(effectiveEndTime)) {
+            return '';
+        }
 
-		let currentTotal = currentHours * 60 + currentMinutes;
-		let startTotal = startHours * 60 + startMinutes;
-		let endTotal = endHours * 60 + endMinutes;
+        try {
+            const now = new Date();
+            const currentTimeStr = now.toLocaleTimeString('en-US', {
+                timeZone: effectiveTimezone,
+                hour: '2-digit', minute: '2-digit', hour12: false
+            });
 
-		if (endTotal < startTotal) {
-			endTotal += 24 * 60;
-			if (currentTotal < startTotal) currentTotal += 24 * 60;
-		}
+            const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
+            const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
 
-		return currentTotal >= startTotal && currentTotal <= endTotal ? 'Open' : 'Closed';
-	}, []);
+            let currentTotal = currentHours * 60 + currentMinutes;
+            let endTotal = endHours * 60 + endMinutes;
 
-	const getCurrentOfficeStatus = useCallback(() => {
-		const effectiveTimezone = getEffectiveTimezone();
-		if (!effectiveTimezone) return 'Closed';
+            if (endTotal < currentTotal) endTotal += 24 * 60;
 
-		const effectiveHours = getEffectiveOfficeHours();
-		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-		
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
+            const remainingMinutes = endTotal - currentTotal;
+            if (remainingMinutes <= 0) return '';
 
-		if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-			return 'Closed';
-		}
+            const hours = Math.floor(remainingMinutes / 60);
+            const minutes = remainingMinutes % 60;
 
-		try {
-			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
+            if (hours > 0 && minutes > 0) {
+                return `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
+            } else if (hours > 0) {
+                return `${hours} hour${hours !== 1 ? 's' : ''}`;
+            } else {
+                return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
+            }
+        } catch (error) {
+            return '';
+        }
+    }, [getEffectiveTimezone, getEffectiveOfficeHours]);
 
-			const closedReason = isWeekendOrHoliday(dayOfWeek, todayDate);
-			if (closedReason) return closedReason;
+    // Status calculation functions
+    const isWeekendOrHoliday = useCallback((dayOfWeek, todayDate) => {
+        const weekendDaysArray = weekendDays || [];
+        if (weekendDaysArray.includes(dayOfWeek.toString())) return 'Weekend';
+        if (holidays && holidays.includes(todayDate)) return 'Holiday';
+        return null;
+    }, [weekendDays, holidays]);
 
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, hour: '2-digit', minute: '2-digit', hour12: false
-			});
+    const calculateTimeStatus = useCallback((currentTimeStr, startTime, endTime) => {
+        const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
+        const [startHours, startMinutes] = startTime.split(':').map(Number);
+        const [endHours, endMinutes] = endTime.split(':').map(Number);
 
-			return calculateTimeStatus(currentTimeStr, effectiveStartTime, effectiveEndTime);
-		} catch (error) {
-			console.error('Error calculating office status:', error);
-			return 'Closed';
-		}
-	}, [getEffectiveTimezone, getEffectiveOfficeHours, isWeekendOrHoliday, calculateTimeStatus]);
+        let currentTotal = currentHours * 60 + currentMinutes;
+        let startTotal = startHours * 60 + startMinutes;
+        let endTotal = endHours * 60 + endMinutes;
 
-	// TimePicker Component
-	const TimePickerField = useCallback(({ label, value, onChange }) => {
-		const formatTimeForInput = (time) => {
-			if (!time) return '09:00';
-			if (time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
-				return time;
-			}
-			return '09:00';
-		};
+        if (endTotal < startTotal) {
+            endTotal += 24 * 60;
+            if (currentTotal < startTotal) currentTotal += 24 * 60;
+        }
 
-		const [timeValue, setTimeValue] = useState(formatTimeForInput(value));
+        return currentTotal >= startTotal && currentTotal <= endTotal ? 'Open' : 'Closed';
+    }, []);
 
-		const handleTimeChange = (newValue) => {
-			setTimeValue(newValue);
-			if (newValue.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
-				onChange(newValue);
-			}
-		};
+    const getCurrentOfficeStatus = useCallback(() => {
+        const effectiveTimezone = getEffectiveTimezone();
+        if (!effectiveTimezone) return 'Closed';
 
-		useEffect(() => {
-			setTimeValue(formatTimeForInput(value));
-		}, [value]);
+        const effectiveHours = getEffectiveOfficeHours();
+        const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
+        
+        const isValidTime = (time) => time && time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/);
 
-		return (
-			<BaseControl label={label}>
-				<div style={{ display: 'grid', gap: '8px' }}>
-					<TextControl
-						type="time"
-						value={timeValue}
-						onChange={handleTimeChange}
-						step="300"
-					/>
-				</div>
-			</BaseControl>
-		);
-	}, []);
+        if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
+            return 'Closed';
+        }
 
-	// Action handlers
-	const addHoliday = useCallback((date) => {
-		if (!date) return;
-		const holidayDate = new Date(date).toISOString().split('T')[0];
-		if (holidays && holidays.includes(holidayDate)) return;
-		const updatedHolidays = [...(holidays || []), holidayDate];
-		setAttributes({ holidays: updatedHolidays });
-		setSelectedDate('');
-	}, [holidays, setAttributes]);
+        try {
+            const now = new Date();
+            const dayOfWeek = now.getDay();
+            const todayDate = now.toISOString().split('T')[0];
 
-	const removeHoliday = useCallback((dateToRemove) => {
-		const updatedHolidays = (holidays || []).filter(date => date !== dateToRemove);
-		setAttributes({ holidays: updatedHolidays });
-	}, [holidays, setAttributes]);
+            const closedReason = isWeekendOrHoliday(dayOfWeek, todayDate);
+            if (closedReason) return closedReason;
 
-	const addMonthlySchedule = useCallback(() => {
-		if (!selectedMonth) return;
-		const existingMonth = (monthlySchedules || []).find(schedule => schedule.month === selectedMonth);
-		if (existingMonth) {
-			alert('This month already has a schedule!');
-			return;
-		}
-		const monthlySchedule = { month: selectedMonth, startTime: startTime || '09:00', endTime: endTime || '17:00' };
-		const updatedSchedules = [...(monthlySchedules || []), monthlySchedule];
-		setAttributes({ monthlySchedules: updatedSchedules });
-		setSelectedMonth('');
-	}, [selectedMonth, monthlySchedules, startTime, endTime, setAttributes]);
+            const currentTimeStr = now.toLocaleTimeString('en-US', {
+                timeZone: effectiveTimezone, 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: false
+            });
 
-	const removeMonthlySchedule = useCallback((monthToRemove) => {
-		const updatedSchedules = (monthlySchedules || []).filter(schedule => schedule.month !== monthToRemove);
-		setAttributes({ monthlySchedules: updatedSchedules });
-	}, [monthlySchedules, setAttributes]);
+            return calculateTimeStatus(currentTimeStr, effectiveStartTime, effectiveEndTime);
+        } catch (error) {
+            console.error('Error calculating office status:', error);
+            return 'Closed';
+        }
+    }, [getEffectiveTimezone, getEffectiveOfficeHours, isWeekendOrHoliday, calculateTimeStatus]);
 
-	const updateMonthlySchedule = useCallback((month, field, value) => {
-		const updatedSchedules = (monthlySchedules || []).map(schedule => 
-			schedule.month === month ? { ...schedule, [field]: value } : schedule
-		);
-		setAttributes({ monthlySchedules: updatedSchedules });
-	}, [monthlySchedules, setAttributes]);
+    // TimePicker Component
+    const TimePickerField = useCallback(({ label, value, onChange }) => {
+        const formatTimeForInput = (time) => {
+            if (!time) return '09:00';
+            if (time.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
+                return time;
+            }
+            return '09:00';
+        };
 
-	// Helper function for Select2
-	const getSelectedOption = useCallback((options, value) => {
-		return options?.find(opt => opt.value === value) || null;
-	}, []);
+        const [timeValue, setTimeValue] = useState(formatTimeForInput(value));
 
-	// Update current time and status
-	useEffect(() => {
-		const updateTimeAndStatus = () => {
-			setCurrentTime(getCurrentTimeInTimezone());
-			const currentStatus = getCurrentOfficeStatus();
-			setAttributes({ officeStatus: currentStatus });
-		};
+        const handleTimeChange = (newValue) => {
+            setTimeValue(newValue);
+            if (newValue.match(/^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/)) {
+                onChange(newValue);
+            }
+        };
 
-		updateTimeAndStatus();
-		const interval = setInterval(updateTimeAndStatus, 1000);
-		return () => clearInterval(interval);
-	}, [getCurrentTimeInTimezone, getCurrentOfficeStatus, setAttributes]);
+        useEffect(() => {
+            setTimeValue(formatTimeForInput(value));
+        }, [value]);
 
-	// Update timezones when UTC format changes
-	useEffect(() => {
-		if (timezones && timezones.length > 0) {
-			const updatedTimezones = getAllTimezones();
-			setAttributes({ timezones: updatedTimezones });
-		}
-	}, [useUTCTimezoneFormat, getAllTimezones, setAttributes]);
+        return (
+            <BaseControl label={label}>
+                <div style={{ display: 'grid', gap: '8px' }}>
+                    <TextControl
+                        type="time"
+                        value={timeValue}
+                        onChange={handleTimeChange}
+                        step="300"
+                    />
+                </div>
+            </BaseControl>
+        );
+    }, []);
 
-	// Calculated values
-	const remainingTime = getRemainingTime();
-	const currentStatus = getCurrentOfficeStatus();
-	const effectiveTimezone = getEffectiveTimezone();
-	const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(getAutoTimezone()) : getFormattedTimezone(timezone);
+    // Action handlers
+    const addHoliday = useCallback((date) => {
+        if (!date) return;
+        const holidayDate = new Date(date).toISOString().split('T')[0];
+        if (holidays && holidays.includes(holidayDate)) return;
+        const updatedHolidays = [...(holidays || []), holidayDate];
+        setAttributes({ holidays: updatedHolidays });
+        setSelectedDate('');
+    }, [holidays, setAttributes]);
 
-	// Month options for React Select
-	const monthOptions = useMemo(() => [
-		{ label: 'January', value: '0' }, { label: 'February', value: '1' }, { label: 'March', value: '2' },
-		{ label: 'April', value: '3' }, { label: 'May', value: '4' }, { label: 'June', value: '5' },
-		{ label: 'July', value: '6' }, { label: 'August', value: '7' }, { label: 'September', value: '8' },
-		{ label: 'October', value: '9' }, { label: 'November', value: '10' }, { label: 'December', value: '11' }
-	], []);
+    const removeHoliday = useCallback((dateToRemove) => {
+        const updatedHolidays = (holidays || []).filter(date => date !== dateToRemove);
+        setAttributes({ holidays: updatedHolidays });
+    }, [holidays, setAttributes]);
 
-	
+    const addMonthlySchedule = useCallback(() => {
+        if (!selectedMonth) return;
+        const existingMonth = (monthlySchedules || []).find(schedule => schedule.month === selectedMonth);
+        if (existingMonth) {
+            alert('This month already has a schedule!');
+            return;
+        }
+        const monthlySchedule = { month: selectedMonth, startTime: startTime || '09:00', endTime: endTime || '17:00' };
+        const updatedSchedules = [...(monthlySchedules || []), monthlySchedule];
+        setAttributes({ monthlySchedules: updatedSchedules });
+        setSelectedMonth('');
+    }, [selectedMonth, monthlySchedules, startTime, endTime, setAttributes]);
 
-	/**
-	 * Inspector General Controls Start
-	*/
+    const removeMonthlySchedule = useCallback((monthToRemove) => {
+        const updatedSchedules = (monthlySchedules || []).filter(schedule => schedule.month !== monthToRemove);
+        setAttributes({ monthlySchedules: updatedSchedules });
+    }, [monthlySchedules, setAttributes]);
+
+    const updateMonthlySchedule = useCallback((month, field, value) => {
+        const updatedSchedules = (monthlySchedules || []).map(schedule => 
+            schedule.month === month ? { ...schedule, [field]: value } : schedule
+        );
+        setAttributes({ monthlySchedules: updatedSchedules });
+    }, [monthlySchedules, setAttributes]);
+
+    // Helper function for Select2
+    const getSelectedOption = useCallback((options, value) => {
+        return options?.find(opt => opt.value === value) || null;
+    }, []);
+
+    // Update current time and status
+    useEffect(() => {
+        const updateTimeAndStatus = () => {
+            setCurrentTime(getCurrentTimeInTimezone());
+            const currentStatus = getCurrentOfficeStatus();
+            setAttributes({ officeStatus: currentStatus });
+        };
+
+        updateTimeAndStatus();
+        const interval = setInterval(updateTimeAndStatus, 1000);
+        return () => clearInterval(interval);
+    }, [getCurrentTimeInTimezone, getCurrentOfficeStatus, setAttributes]);
+
+    // Update timezones when UTC format changes
+    useEffect(() => {
+        if (timezones && timezones.length > 0) {
+            const updatedTimezones = getAllTimezones();
+            setAttributes({ timezones: updatedTimezones });
+        }
+    }, [useUTCTimezoneFormat, getAllTimezones, setAttributes]);
+
+    // Calculated values
+    const remainingTime = getRemainingTime();
+    const currentStatus = getCurrentOfficeStatus();
+    const effectiveTimezone = getEffectiveTimezone();
+    const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(getAutoTimezone()) : getFormattedTimezone(timezone);
+
+    // Month options for React Select
+    const monthOptions = useMemo(() => [
+        { label: 'January', value: '0' }, { label: 'February', value: '1' }, { label: 'March', value: '2' },
+        { label: 'April', value: '3' }, { label: 'May', value: '4' }, { label: 'June', value: '5' },
+        { label: 'July', value: '6' }, { label: 'August', value: '7' }, { label: 'September', value: '8' },
+        { label: 'October', value: '9' }, { label: 'November', value: '10' }, { label: 'December', value: '11' }
+    ], []);
+
+    /**
+     * Inspector General Controls Start
+    */
     const generalControls = (
-		<>
-			{/* Location & Basic Settings */}
-			<PanelBody title="Location & Basic Settings" initialOpen={true}>
-				<BaseControl>
-					<ToggleControl
-						label="Use UTC Timezone Format"
-						checked={!!useUTCTimezoneFormat}
-						onChange={(value) => setAttributes({ useUTCTimezoneFormat: value })}
-					/>
-				</BaseControl>
-				<TextControl
-					label="Location Name"
-					value={location || ''}
-					onChange={(value) => setAttributes({ location: value })}
-					placeholder="e.g., Dhaka, Bangladesh"
-					className="fb-custom-location"
-				/>
+        <>
+            {/* Location & Basic Settings */}
+            <PanelBody title="Timezone Settings" initialOpen={true}>
+                <BaseControl>
+                    <ToggleControl
+                        label="UTC Timezone"
+                        checked={!!useUTCTimezoneFormat}
+                        onChange={(value) => setAttributes({ useUTCTimezoneFormat: value })}
+                    />
+                </BaseControl>
 
-				<ToggleControl
-					label={__("Show Separator", "frontis-blocks")}
-					checked={showSeparatorSwitcher}
-					onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
-				/>
+                <BaseControl label="Timezone Setting">
+                    <SelectControl
+                        options={TIMEZONE}
+                        value={timezoneMode}
+                        onChange={(value) => setAttributes({ timezoneMode: value })}
+                    />
+                </BaseControl>
+                
+                {timezoneMode === 'auto' ? (
+                    <TextControl 
+                        label="Current Timezone" 
+                        value={displayTimezone || 'Detecting...'} 
+                        readOnly 
+                    />
+                ) : (
+                    <BaseControl label="Select Timezone">
+                        <Select2
+                            options={timezones || []}
+                            value={getSelectedOption(timezones, timezone)}
+                            onChange={(opt) => setAttributes({ timezone: opt?.value })}
+                            isClearable={false}
+                            className="fb-select2-control"
+                        />
+                    </BaseControl>
+                )}
+                
+            </PanelBody>
 
-				{showSeparatorSwitcher && (
-					<TextControl
-						label="Separator"
-						value={separator || ''}
-						onChange={(value) => {
-							const hasInvalidChars = /[a-zA-Z0-9]/.test(value);
-							
-							if (hasInvalidChars) {
-								const cleanedValue = value.replace(/[a-zA-Z0-9]/g, '');
-								setAttributes({ separator: cleanedValue });
-							} else {
-								setAttributes({ separator: value });
-							}
-						}}
-						placeholder="e.g., | , - , • , etc."
-						help="Allowed symbols only."
-					/>
-				)}
-				
-				<BaseControl label="Timezone Setting">
-					<SelectControl
-						options={TIMEZONE}
-						value={timezoneMode}
-						onChange={(value) => setAttributes({ timezoneMode: value })}
-					/>
-				</BaseControl>
-				
-				{timezoneMode === 'auto' ? (
-					<TextControl 
-						label="Current Timezone" 
-						value={displayTimezone || 'Detecting...'} 
-						readOnly 
-					/>
-				) : (
-					<BaseControl label="Select Timezone">
-						<Select2
-							options={timezones || []}
-							value={getSelectedOption(timezones, timezone)}
-							onChange={(opt) => setAttributes({ timezone: opt?.value })}
-							isClearable={false}
-							className="fb-select2-control"
-						/>
-					</BaseControl>
-				)}
-				
-				{effectiveTimezone && (
-					<TextControl
-						label="Current Time"
-						value={currentTime || 'Loading...'}
-						readOnly
-					/>
-				)}
+            <PanelBody title="Location" initialOpen={false}>
+                <BaseControl>
+                    <ToggleControl
+                        label="Custom Location"
+                        checked={!!useCustomLocation}
+                        onChange={(value) => setAttributes({ useCustomLocation: value })}
+                    />
+                </BaseControl>
 
-				<TextControl
-					label="Current Status"
-					value={currentStatus}
-					readOnly
-				/>
-			</PanelBody>
+                {useCustomLocation && (
+                    <TextControl
+                        value={location || ''}
+                        onChange={(value) => setAttributes({ location: value })}
+                        placeholder="Dhaka, Bangladesh"
+                        className="fb-custom-location"
+                    />
+                ) }
 
-			{/* Status Text Settings */}
+                <BaseControl label="Country">
+                    <Select2
+                        options={countries || []}
+                        value={getSelectedOption(countries, selectedCountry)}
+                        onChange={(opt) => setAttributes({ selectedCountry: opt?.value })}
+                        isClearable={false}
+                        className="fb-select2-control"
+                    />
+                </BaseControl>
+            </PanelBody>
+
+            <PanelBody title="Time" initialOpen={true}>
+                <BaseControl label="Select Format">
+                    <Select2
+                        options={timeFormatOptions}
+                        value={getSelectedOption(timeFormatOptions, timeFormat || 'hh:mm A')}
+                        onChange={(opt) => setAttributes({ timeFormat: opt?.value || 'hh:mm A' })}
+                        isClearable={false}
+                        className="fb-select2-control"
+                    />
+                </BaseControl>
+                
+                {effectiveTimezone && (
+                    <TextControl
+                        label="Current Time"
+                        value={currentTime || 'Loading...'}
+                        readOnly
+                    />
+                )}
+
+                
+            </PanelBody>
+
+            <PanelBody title="Separator" initialOpen={false}>
+                <ToggleControl
+                    checked={showSeparatorSwitcher}
+                    onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
+                />
+
+                {showSeparatorSwitcher && (
+                    <TextControl
+                        label="Separator"
+                        value={separator || ''}
+                        onChange={(value) => {
+                            const hasInvalidChars = /[a-zA-Z0-9]/.test(value);
+                            
+                            if (hasInvalidChars) {
+                                const cleanedValue = value.replace(/[a-zA-Z0-9]/g, '');
+                                setAttributes({ separator: cleanedValue });
+                            } else {
+                                setAttributes({ separator: value });
+                            }
+                        }}
+                        placeholder="e.g., | , - , • , etc."
+                        help="Allowed symbols only."
+                    />
+                )}
+            </PanelBody>
+
+            {/* Status Text Settings */}
             <ToggleControl
                 label={__("Show Status", "frontis-blocks")}
                 checked={showStatusSwitcher}
@@ -1011,6 +1138,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             { showStatusSwitcher && (
                 <>
                     <PanelBody title="Status Text Settings" initialOpen={true}>
+                        <TextControl
+                            label="Current Status"
+                            value={currentStatus}
+                            readOnly
+                        />
                         <TextControl
                             label="Open Status Text"
                             value={openStatusText || ''}
@@ -1212,11 +1344,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </PanelBody>
                 </>
             )}
-			
-		</>
+            
+        </>
     );
-	// Inspector General Control End
-
+    // Inspector General Control End
 	
 	// locatoin timezone margin and padding style start
 	//padding
@@ -2899,6 +3030,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	`, [
 
 		blockID,
+        countries,
+        selectedCountry,
+        useCustomLocation,
 		location,        
 		timezone,        
 		timezones,       
