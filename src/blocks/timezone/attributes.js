@@ -15,6 +15,18 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+    countries: {
+		type: 'array',
+		default: []
+	},
+	selectedCountry: {
+		type: 'string',
+		default: 'BD'
+	},
+	useCustomLocation: {
+		type: 'boolean',
+		default: true
+	},
 	location: {
 		type: 'string',
 		default: 'Dhaka, Bangladesh' 
@@ -532,6 +544,10 @@ const attributes = {
     timezoneTextHoverCustomGradientColor: {
         type: 'string',
         default: ''
+    },
+    timeFormat: {
+        type: 'string',
+        default: 'hh:mm A',
     },
 
     showStatusSwitcher: {
