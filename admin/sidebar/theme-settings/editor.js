@@ -250,13 +250,16 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
 
     useEffect(() => {
-        console.log('postType           :', postType);
-        console.log('template disableHeader (templateMeta.disableHeader):', templateMeta.disableHeader);
-        console.log('post meta _frontis_meta_header_display            :', meta?._frontis_meta_header_display);
-        console.log('final headerDisabled (UI te ja dekhaccho)        :', headerDisabled);
+        console.log('--- DEBUG HEADER ---');
+        console.log('whichEditor                          :', whichEditor);
+        console.log('postType                             :', postType);
+        console.log('templateMetaPostEdit.disableHeader   :', templateMetaPostEdit.disableHeader);
+        console.log('post meta _frontis_meta_header_display :', meta?._frontis_meta_header_display);
+        console.log('final headerDisabled (UI te)         :', headerDisabled);
     }, [
+        whichEditor,
         postType,
-        templateMeta.disableHeader,
+        templateMetaPostEdit.disableHeader,
         meta?._frontis_meta_header_display,
         headerDisabled,
     ]);
