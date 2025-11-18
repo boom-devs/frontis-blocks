@@ -30,44 +30,6 @@ const FrontisThemeSiteEditor = () => {
         transparentHeaderColor: 'transparent',
     });
 
-    // const updateGlobalSetting = (settingName, value) => {
-    //     const newSettings = {
-    //         ...settings,
-    //         [settingName]: value
-    //     };
-
-    //     setSettings(newSettings);
-    //     setStickyHeaderClass(newSettings);
-
-    //     // Immediately update the setting via API
-    //     apiFetch({
-    //         path: 'frontis/v1/global-settings',
-    //         method: 'POST',
-    //         data: { setting: newSettings }
-    //     }).then((response) => {
-    //         console.log('Settings updated:', response);
-    //         if(response === 'success') {
-    //             console.log('Settings updated:',response);
-    //         }
-    //     }).catch((error) => {
-    //         console.error('Error updating settings:', error);
-    //         // Revert the local state if the API call fails
-    //         setSettings(settings);
-    //     });
-    // };
-
-    // useEffect(() => {
-    //     // Fetch initial settings
-    //     apiFetch({ path: 'frontis/v1/global-settings' }).then((fetchedSettings) => {
-    //         console.log('get global settings',fetchedSettings);
-    //         setSettings(fetchedSettings);
-    //         // setStickyHeaderClass(fetchedSettings);
-    //         setTimeout(() => {
-    //             setStickyHeaderClass(fetchedSettings);
-    //         }, 5000);
-    //     });
-    // }, []);
-
     useEffect(() => {
         const unsubscribe = wp.data.subscribe(() => {
             const isReady = wp.data.select('core/editor').__unstableIsEditorReady 
@@ -100,72 +62,7 @@ const FrontisThemeSiteEditor = () => {
 
 
     const setStickyHeaderClass = (settings) => {
-        //  const iframe = document.querySelector('iframe.edit-site-visual-editor__editor-canvas');
-        //  const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-        //  const headerTag = iframeDoc.querySelector('header');
-        //  const footerTag = iframeDoc.querySelector('footer');
 
-        //  if(settings.disableHeader) {
-        //     headerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-        //     headerTag.style.opacity = '.4';
-        //  } else if(headerTag) {
-        //     headerTag.style.background = '';
-        //     headerTag.style.opacity = '1';
-        //  }
-
-        //  if(settings.disableFooter) {
-        //     footerTag.style.background = 'repeating-linear-gradient(125deg, rgba(0, 0, 0, .05), rgba(0, 0, 0, .05) 1px, transparent 2px, transparent 9px)';
-        //     footerTag.style.opacity = '.4';
-        //  } else if(footerTag) {
-        //     footerTag.style.background = '';
-        //     footerTag.style.opacity = '1';
-        //  }
-         
-        //  if(settings.stickyHeader) {
-        //     if (iframe && iframe.contentDocument) {
-        //         if (headerTag) {
-        //             headerTag.classList.add('fb-sticky-header');
-        //             headerTag.style.paddingTop = `${settings.stickyHeaderOffset}rem`;
-
-        //             iframe.contentWindow.addEventListener('scroll', function () {
-        //                 if (iframe.contentWindow.scrollY > 50) {
-        //                     headerTag.classList.add('scrolled');
-
-        //                     const headerScrolled = iframeDoc.querySelector('.scrolled');
-
-        //                     if(headerScrolled && settings.stickyHeaderColor){
-        //                         headerScrolled.style.setProperty('--wp--preset--sticky--bg', settings.stickyHeaderColor);
-        //                     }
-        //                 } else {
-        //                     headerTag.classList.remove('scrolled');
-        //                 }
-        //             });
-        //         }
-        //     }
-        // } else {
-        //     if (iframe && iframe.contentDocument) {
-
-        //         if (headerTag) {
-        //             headerTag.classList.remove('fb-sticky-header');
-        //             headerTag.style.paddingTop = '';
-        //         }
-        //     }
-        // }
-
-        // if(settings.transparentHeader) {
-        //     if (iframe && iframe.contentDocument) {
-        //         if (headerTag) {
-        //             headerTag.classList.add('fb-transparent-header');
-        //             headerTag.style.setProperty('--wp--preset--transparent--bg', settings.transparentHeaderColor);
-        //         }
-        //     }
-        // } else {
-        //     if (iframe && iframe.contentDocument) {
-        //         if (headerTag) {
-        //             headerTag.classList.remove('fb-transparent-header');
-        //         }
-        //     }
-        // }
     }
 
     // Enable save button on change any thing
@@ -222,10 +119,6 @@ const FrontisThemeSiteEditor = () => {
                                         </Button>
                                     )}
                                     renderContent={() => (
-                                        // <ColorPicker
-                                        //     color={settings.stickyHeaderColor || '#000000'}
-                                        //     onChangeComplete={(color) => updateGlobalSetting('stickyHeaderColor', color.hex)}
-                                        // />
                                         <ColorPalette
                                             colors={themeColors}
                                             value={settings.stickyHeaderColor}
@@ -288,14 +181,14 @@ const FrontisThemeSiteEditor = () => {
             <PanelBody title="Disable Elements">
                 <PanelRow>
                     <ToggleControl
-                        label={settings.disableHeader ? 'Disable Header' : 'Enable Header'}
+                        label={settings.disableHeader ? 'Disable Header' : 'Disable Header'}
                         checked={settings.disableHeader}
                         onChange={(value) => updateGlobalSetting('disableHeader', value)}
                     />
                 </PanelRow>
                 <PanelRow>
                     <ToggleControl
-                        label={settings.disableFooter ? 'Disable Footer' : 'Enable Footer'}
+                        label={settings.disableFooter ? 'Disable Footer' : 'Disable Footer'} 
                         checked={settings.disableFooter}
                         onChange={(value) => updateGlobalSetting('disableFooter', value)}
                     />
