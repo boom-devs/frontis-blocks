@@ -112,7 +112,9 @@ class AssetsGenerator
 						}
 						
 						// Insert job using your existing Helper method
-						Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
+						if ( ! empty( $this->post ) && ! empty( $this->post->post_name ) ) {
+							Helper::insert_job( $single_post_id, $this->post->post_name . $single_post_id );
+						}
 					}
 				}
 				} catch (Exception $e) {
