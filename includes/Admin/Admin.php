@@ -574,62 +574,41 @@ class Admin {
      * @param \WP_REST_Request $request Full details about the request.
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
-    // function frontis_get_global_settings( \WP_REST_Request $request ) {
-    //     $default_settings = array(
-    //         'disableHeader'     => false,
-    //         'disableFooter'     => false,
-    //         'stickyHeader'      => false,
-    //         'stickyHeaderOffset' => 0,
-    //         'transparentHeader' => false,
-    //         'scrollToTop'       => false,
-    //         'smoothScroll'       => false,
-    //         'relatedPosts'       => false,
-    //         'authorBox'       => false,
-    //         'lazyLoading'       => false,
-    //         'stickyHeaderColor'       => null,
-    //         'transparentHeaderColor'       => 'transparent',
-    //     );
-
-    //     $settings = get_option( 'frontis_theme_options' );
-
-    //     return rest_ensure_response( $settings, $default_settings );
-    // }
     function frontis_get_global_settings( \WP_REST_Request $request ) {
-        $post_id     = $request->get_param('post_id');     // যদি single page/post এ থাকি
-        $template_id = $request->get_param('template_id'); // যদি template এ থাকি
+        $post_id     = $request->get_param('post_id');     // single page/post হলে
+        $template_id = $request->get_param('template_id'); // template হলে
     
-        // Default Global Settings
         $default_settings = array(
-            'disableHeader'     => false,
-            'disableFooter'     => false,
-            'stickyHeader'      => false,
-            'stickyHeaderOffset'=> 0,
-            'transparentHeader' => false,
-            'scrollToTop'       => false,
-            'smoothScroll'      => false,
-            'relatedPosts'      => false,
-            'authorBox'         => false,
-            'lazyLoading'       => false,
-            'stickyHeaderColor' => null,
+            'disableHeader'          => false,
+            'disableFooter'          => false,
+            'stickyHeader'           => false,
+            'stickyHeaderOffset'     => 0,
+            'transparentHeader'      => false,
+            'scrollToTop'            => false,
+            'smoothScroll'           => false,
+            'relatedPosts'           => false,
+            'authorBox'              => false,
+            'lazyLoading'            => false,
+            'stickyHeaderColor'      => null,
             'transparentHeaderColor' => 'transparent',
         );
     
-        // 1. Global settings
-        $global_settings = get_option('frontis_theme_options', $default_settings);
+        // 1. Global option table
+        $global_settings = get_option( 'frontis_theme_options', $default_settings );
     
-        // 2. Template settings (যদি থাকে)
-        $template_settings = $template_id ? get_post_meta($template_id, '_frontis_template_settings', true) : [];
-        if ( ! is_array($template_settings) ) {
+        // 2. Template override (optional)
+        $template_settings = $template_id ? get_post_meta( $template_id, '_frontis_template_settings', true ) : [];
+        if ( ! is_array( $template_settings ) ) {
             $template_settings = [];
         }
     
-        // 3. Single Page/Post settings (যদি থাকে)
-        $post_settings = $post_id ? get_post_meta($post_id, '_frontis_page_settings', true) : [];
-        if ( ! is_array($post_settings) ) {
+        // 3. Page/Post override (optional)
+        $post_settings = $post_id ? get_post_meta( $post_id, '_frontis_page_settings', true ) : [];
+        if ( ! is_array( $post_settings ) ) {
             $post_settings = [];
         }
     
-        // Priority Merge: post > template > global > default
+        // Priority: default < global < template < post
         $final_settings = array_merge(
             $default_settings,
             $global_settings,
@@ -637,7 +616,45 @@ class Admin {
             $post_settings
         );
     
-        return rest_ensure_response($final_settings);
+        return rest_ensure_response( $final_settings );
+    }
+
+    /**
+     * Update global settings
+     */
+    function frontis_update_global_settings( \WP_REST_Request $request ) {
+        $scope  = $request->get_param('scope'); // global|template|post
+        $id     = $request->get_param('id');
+        $fields = $request->get_param('setting') ?: [];
+    
+        if ( empty( $scope ) ) {
+            return new \WP_Error( 'missing_scope', 'Scope parameter is required' );
+        }
+    
+        $valid_fields = array(
+            'disableHeader'          => filter_var( $fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'disableFooter'          => filter_var( $fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'stickyHeader'           => filter_var( $fields['stickyHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'stickyHeaderOffset'     => filter_var( $fields['stickyHeaderOffset'] ?? 0, FILTER_VALIDATE_INT ),
+            'transparentHeader'      => filter_var( $fields['transparentHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'scrollToTop'            => filter_var( $fields['scrollToTop'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'smoothScroll'           => filter_var( $fields['smoothScroll'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'relatedPosts'           => filter_var( $fields['relatedPosts'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'authorBox'              => filter_var( $fields['authorBox'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'lazyLoading'            => filter_var( $fields['lazyLoading'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'stickyHeaderColor'      => sanitize_text_field( $fields['stickyHeaderColor'] ?? '' ),
+            'transparentHeaderColor' => sanitize_text_field( $fields['transparentHeaderColor'] ?? '' ),
+        );
+    
+        if ( 'global' === $scope ) {
+            update_option( 'frontis_theme_options', $valid_fields );
+        } elseif ( 'template' === $scope && $id ) {
+            update_post_meta( (int) $id, '_frontis_template_settings', $valid_fields );
+        } elseif ( 'post' === $scope && $id ) {
+            update_post_meta( (int) $id, '_frontis_page_settings', $valid_fields );
+        }
+    
+        return rest_ensure_response( 'success' );
     }
 
     function frontis_get_post_template_data( \WP_REST_Request $request ) {
@@ -659,50 +676,6 @@ class Admin {
         // Return empty array if no settings found, or the settings themselves
         return rest_ensure_response( $settings ? $settings : [] );
     }
-
-    /**
-     * Set options
-     *
-     * @param \WP_REST_Request $request Full details about the request.
-     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
-     * @since 1.0.2
-     */
-    
-    function frontis_update_global_settings(\WP_REST_Request $request) {
-        $scope   = $request->get_param('scope'); // global|template|post
-        $id      = $request->get_param('id');
-        $fields  = $request->get_param('setting') ?: [];
-    
-        if (empty($scope)) {
-            return new \WP_Error('missing_scope', 'Scope parameter is required');
-        }
-    
-        $valid_fields = array(
-            'disableHeader'     => filter_var($fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'disableFooter'     => filter_var($fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeader'      => filter_var($fields['stickyHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeaderOffset'=> filter_var($fields['stickyHeaderOffset'] ?? 0, FILTER_VALIDATE_INT),
-            'transparentHeader' => filter_var($fields['transparentHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'scrollToTop'       => filter_var($fields['scrollToTop'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'smoothScroll'      => filter_var($fields['smoothScroll'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'relatedPosts'      => filter_var($fields['relatedPosts'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'authorBox'         => filter_var($fields['authorBox'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'lazyLoading'       => filter_var($fields['lazyLoading'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeaderColor' => sanitize_text_field($fields['stickyHeaderColor'] ?? ''),
-            'transparentHeaderColor' => sanitize_text_field($fields['transparentHeaderColor'] ?? ''),
-        );
-    
-        if ($scope === 'global') {
-            update_option('frontis_theme_options', $valid_fields);
-        } elseif ($scope === 'template' && $id) {
-            update_post_meta((int)$id, '_frontis_template_settings', $valid_fields);
-        } elseif ($scope === 'post' && $id) {
-            update_post_meta((int)$id, '_frontis_page_settings', $valid_fields);
-        }
-    
-        return rest_ensure_response('success');
-    }
-    
 
     public function get_icons() {
         // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
