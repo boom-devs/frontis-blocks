@@ -243,34 +243,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const [patterns, setPatterns] = useState([]);
 
     const patternData = useSelect((select) => {
-        const allPatterns = select('core').getBlockPatterns() || [];
-
         let userPatterns = [];
         const blocks = select('core')?.getEntityRecords('postType', 'wp_block', { per_page: -1 });
         if (blocks) {
             userPatterns = blocks.filter((block) => block.wp_pattern_category);
         }
 
-        return { allPatterns, userPatterns };
+        return { userPatterns };
     }, []);
 
     useEffect(() => {
         const patternOptions = [{ value: '', label: __('Select a pattern', 'frontis-blocks') }];
 
-        if (patternData.allPatterns?.length) {
-            patternOptions.push(
-                { value: 'core-separator', label: '--- Theme Patterns ---', disabled: true },
-                ...patternData.allPatterns.map((pattern) => ({
-                    value: pattern.name,
-                    label: pattern.title || pattern.name,
-                    content: pattern.content
-                }))
-            );
-        }
-
         if (patternData.userPatterns?.length) {
             patternOptions.push(
-                { value: 'user-separator', label: '--- User Patterns ---', disabled: true },
                 ...patternData.userPatterns.map((pattern) => ({
                     value: pattern.id,
                     label: pattern.title?.raw || `Pattern ${pattern.id}`,
@@ -1162,13 +1148,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             position: absolute;
                 ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Desktop}${megaMenuContentWidthValueUnits?.Desktop};` : ''}
             `
-                    : megaMenuWidthSwitcher === "full"
-                        ? `
+            : megaMenuWidthSwitcher === "full"
+                ? `
                     position: fixed;
                     width: 100%;
                 `
-                        : ''
-            }
+                : ''
+        }
         }
         .${blockId} .fb-advanced-mega-menu-link .fb-advanced-mega-menu-indicator svg{
             ${megaMenuIconColor ? `fill: ${megaMenuIconColor};` : ''}
@@ -1256,7 +1242,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const generalControls = (
         <>
-            <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={true}>
+            <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={false}>
                 <SelectControl
                     label={__('Trigger Type', 'frontis-blocks')}
                     value={triggerType}
@@ -2078,7 +2064,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </PanelBody>
                     <PanelBody
                         title={__("Responsive Control", "frontis-blocks")}
-                        initialOpen={true}
+                        initialOpen={false}
                         className="fb-setting-responsive-control-wrapper"
                     >
                         <FB_VisibilityControl
