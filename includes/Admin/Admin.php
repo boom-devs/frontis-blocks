@@ -490,26 +490,6 @@ class Admin {
             'permission_callback' => '__return_true', // Adjust permissions as needed
         ]);
 
-        // register_rest_route(
-        //     'frontis/v1',
-        //     '/global-settings',
-        //     array(
-        //         array(
-        //             'methods'             => \WP_REST_Server::READABLE,
-        //             'callback'            =>  [$this, 'frontis_get_global_settings'],
-        //             'permission_callback' => function () {
-        //                 return true;
-        //             },
-        //         ),
-        //         array(
-        //             'methods'             => \WP_REST_Server::EDITABLE,
-        //             'callback'            => [$this, 'frontis_update_global_settings'],
-        //             'permission_callback' => function () {
-        //                 return current_user_can( 'manage_options' );
-        //             },
-        //         ),
-        //     )
-        // );
         register_rest_route(
             'frontis/v1',
             '/global-settings',
@@ -563,6 +543,18 @@ class Admin {
                         return current_user_can( 'manage_options' );
                     },
                 )
+            )
+        );
+
+        register_rest_route(
+            'frontis/v1',
+            '/meta-exists',
+            array(
+                'methods'             => \WP_REST_Server::READABLE,
+                'callback'            => [ $this, 'frontis_meta_exists' ],
+                'permission_callback' => function () {
+                    return current_user_can( 'edit_posts' );
+                },
             )
         );
     }
@@ -750,24 +742,20 @@ class Admin {
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
 
-    public function frontis_get_template_settings( \WP_REST_Request $request ) {
-        // Get post_id from query parameters
-        $post_id = $request->get_param('post_id');
-
-        // Validate post_id
-        if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
+     public function frontis_get_template_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
             return new \WP_Error(
                 'invalid_post_id',
                 __( 'Invalid or missing post ID.', 'frontis' ),
                 array( 'status' => 400 )
             );
         }
-
-        // Retrieve post meta for the given post_id
+    
         $settings = get_post_meta( $post_id, 'frontis_template_options', true );
-
-        // Return empty array if no settings found, or the settings themselves
-        return rest_ensure_response( $settings ? $settings : [] );
+    
+        return rest_ensure_response( is_array( $settings ) ? $settings : [] );
     }
 
     /**
@@ -777,9 +765,45 @@ class Admin {
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
     public function frontis_update_template_settings( \WP_REST_Request $request ) {
-        $fields = isset( $request['setting'] ) ? $request['setting'] : array();
-        update_post_meta( $request['post_id'], 'frontis_template_options', $fields );
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $fields = (array) $request->get_param( 'setting' );
+    
+        update_post_meta( $post_id, 'frontis_template_options', $fields );
+    
         return rest_ensure_response( 'success' );
+    }
+
+    /**
+     * Check if meta exists
+     */
+    public function frontis_meta_exists( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+        $key     = $request->get_param( 'key' );
+    
+        if ( ! $post_id || ! $key ) {
+            return new \WP_Error(
+                'invalid_meta_exists_params',
+                __( 'Missing post_id or key.', 'frontis-blocks' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $exists = metadata_exists( 'post', $post_id, $key );
+    
+        return rest_ensure_response(
+            array(
+                'exists' => (bool) $exists,
+            )
+        );
     }
 
     /**

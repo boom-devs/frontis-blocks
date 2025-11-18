@@ -38,6 +38,9 @@ const FrontisMetaBox = ({ whichEditor }) => {
         transparentHeaderColor: 'transparent',
     });
 
+    // template meta DB theke load shesh hoise kina
+    const [isTemplateMetaLoaded, setIsTemplateMetaLoaded] = useState(false);
+
     // Global settings
     const [globalLazyLoading, setGlobalLazyLoading] = useState(false);
     const [globalTransparentHeader, setGlobalTransparentHeader] =
@@ -78,15 +81,20 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     const updateSetting = (settingName, value) => {
         if (postType === 'wp_template') {
-            setTemplateMeta({ ...templateMeta, [settingName]: value });
+            setTemplateMeta((prev) => ({
+                ...prev,
+                [settingName]: value,
+            }));
         } else {
-            setMeta({ ...meta, [settingName]: value });
+            setMeta({
+                ...(meta || {}),
+                [settingName]: value,
+            });
         }
     };
 
     /**
      * Template → Post fallback mapping
-     * এখানে তোমার template API থেকে যা যা key আসে সেটা map করো।
      */
     const getTemplateFallbackValue = (key) => {
         if (
@@ -104,7 +112,6 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 return templateMetaPostEdit.disableFooter ?? false;
 
             case '_frontis_meta_site_title_display':
-                // তোমার API তে যদি অন্য key থাকে (যেমন disablePageTitle) সেটা বসাও
                 return templateMetaPostEdit.disablePageTitle ?? false;
 
             case '_frontis_meta_sticky_header':
@@ -138,74 +145,108 @@ const FrontisMetaBox = ({ whichEditor }) => {
     const getMetaValue = (key, defaultValue = false) => {
         if (!key) return defaultValue;
 
-        // Template editor
+        // ===== TEMPLATE EDITOR =====
         if (postType === 'wp_template') {
             if (!templateMeta || typeof templateMeta !== 'object') {
+                console.log('[getMetaValue][TEMPLATE] key=', key, '→ default', defaultValue);
                 return defaultValue;
             }
-            return templateMeta[key] ?? defaultValue;
+
+            const val = templateMeta[key] ?? defaultValue;
+            console.log('[getMetaValue][TEMPLATE] key=', key, '→', val);
+            return val;
         }
 
-        // Post/Page editor → আগে post meta
-        if (meta && typeof meta === 'object') {
-            if (Object.prototype.hasOwnProperty.call(meta, key)) {
-                return meta[key];
-            }
+        // ===== PAGE / POST EDITOR =====
+        const hasMetaKey =
+            meta &&
+            typeof meta === 'object' &&
+            Object.prototype.hasOwnProperty.call(meta, key);
+
+        const raw = hasMetaKey ? meta[key] : undefined;
+
+        if (hasMetaKey) {
+            console.log('[getMetaValue][POST] key=', key, '→ using POST META', raw);
+            return raw ?? defaultValue;
         }
 
-        // Post editor হলে template থেকে fallback
+        // Ei page e kono explicit meta nai → template fallback use korbo
         if (whichEditor === 'post') {
-            return getTemplateFallbackValue(key);
+            const fallback = getTemplateFallbackValue(key);
+            console.log('[getMetaValue][POST] key=', key, '→ using TEMPLATE FALLBACK', fallback);
+            return fallback ?? defaultValue;
         }
 
+        console.log('[getMetaValue][POST] key=', key, '→ using DEFAULT', defaultValue);
         return defaultValue;
     };
 
-    // Template / Post–এর জন্য data load
+    // Template / Post–er jonno data load
     useEffect(() => {
         if (postType === 'wp_template') {
-            const template = wp
+            const templateEntity = wp
                 .data
                 .select('core')
                 .getEntityRecord('postType', 'wp_template', currentPostId);
 
-            setPostId(template?.wp_id);
+            const dbId = templateEntity?.wp_id || currentPostId;
 
-            // Template settings load
+            console.log('wp_template entity :', templateEntity);
+            console.log('dbId used for template-settings :', dbId);
+
+            if (!dbId) {
+                return;
+            }
+
+            setPostId(dbId);
+            setIsTemplateMetaLoaded(false); // notun template load hocche
+
             wp.apiFetch({
-                path: `frontis/v1/template-settings?post_id=${template?.wp_id}`,
+                path: `frontis/v1/template-settings?post_id=${dbId}`,
                 method: 'GET',
             })
                 .then((response) => {
-                    if (response) {
-                        setTemplateMeta(response);
+                    console.log('template-settings GET :', response);
+
+                    if (response && typeof response === 'object') {
+                        // default er sathe merge korbo
+                        setTemplateMeta((prev) => ({
+                            ...prev,
+                            ...response,
+                        }));
                     }
+                    setIsTemplateMetaLoaded(true);
                 })
                 .catch((error) => {
                     console.error('Error fetching template settings:', error);
+                    setIsTemplateMetaLoaded(true);
                 });
         } else {
             setPostId(currentPostId);
+            setIsTemplateMetaLoaded(false);
+            checkPostPageTemplateMeta();
         }
-
-        checkPostPageTemplateMeta();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [postType, currentPostId]);
 
-    // Template meta change হলে API তে সেভ
+    // Template meta change hole API te save
     useEffect(() => {
-        if (postType === 'wp_template' && postId) {
+        if (postType === 'wp_template' && postId && isTemplateMetaLoaded) {
             apiFetch({
                 path: 'frontis/v1/template-settings',
                 method: 'POST',
                 data: { setting: templateMeta, post_id: postId },
-            }).then(() => {
-                // console.log('Template settings updated:', response);
-            });
+            })
+                .then((res) => {
+                    console.log('template-settings POST :', res);
+                })
+                .catch((err) => {
+                    console.error('Error saving template settings:', err);
+                });
         }
-    }, [templateMeta, postType, postId]);
+    }, [templateMeta, postType, postId, isTemplateMetaLoaded]);
 
-    // Post editor → এই post কোন template use করছে তার settings নাও
+    // Post editor → ei post kon template use korse tar settings nao
     const checkPostPageTemplateMeta = () => {
         if (whichEditor === 'post') {
             wp.apiFetch({
@@ -248,34 +289,37 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     const lazyLoadDisabled = getMetaValue('_frontis_meta_lazy_load');
 
-
+    // debug logs
     useEffect(() => {
-        console.log('--- DEBUG HEADER ---');
-        console.log('whichEditor                          :', whichEditor);
+        console.log('===== PAGE HEADER DEBUG =====');
+        console.log('currentPostId                        :', currentPostId);
         console.log('postType                             :', postType);
-        console.log('templateMetaPostEdit.disableHeader   :', templateMetaPostEdit.disableHeader);
-        console.log('post meta _frontis_meta_header_display :', meta?._frontis_meta_header_display);
-        console.log('final headerDisabled (UI te)         :', headerDisabled);
+        console.log('whichEditor                          :', whichEditor);
+        console.log(
+            'templateMetaPostEdit.disableHeader   :',
+            templateMetaPostEdit.disableHeader
+        );
+        console.log('raw meta object                      :', meta);
+        console.log(
+            'meta._frontis_meta_header_display    :',
+            meta?._frontis_meta_header_display
+        );
+        console.log('FINAL headerDisabled (UI)            :', headerDisabled);
     }, [
-        whichEditor,
+        currentPostId,
         postType,
+        whichEditor,
         templateMetaPostEdit.disableHeader,
-        meta?._frontis_meta_header_display,
+        meta,
         headerDisabled,
     ]);
-    
 
     return (
         <>
             <PanelBody title="Disable Elements">
                 <PanelRow>
                     <ToggleControl
-                        label={
-                            whichEditor === 'post' &&
-                            templateMetaPostEdit.disableHeader
-                                ? 'Enable Header'
-                                : 'Disable Header'
-                        }
+                        label="Disable Header"
                         checked={headerDisabled}
                         onChange={(value) =>
                             isTemplateEditor
@@ -324,7 +368,10 @@ const FrontisMetaBox = ({ whichEditor }) => {
                             label="Disable Sticky Header"
                             checked={stickyHeaderDisabled}
                             onChange={(value) =>
-                                updateSetting('_frontis_meta_sticky_header', value)
+                                updateSetting(
+                                    '_frontis_meta_sticky_header',
+                                    value
+                                )
                             }
                         />
                     </PanelRow>
