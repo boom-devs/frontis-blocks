@@ -545,18 +545,6 @@ class Admin {
                 )
             )
         );
-
-        register_rest_route(
-            'frontis/v1',
-            '/meta-exists',
-            array(
-                'methods'             => \WP_REST_Server::READABLE,
-                'callback'            => [ $this, 'frontis_meta_exists' ],
-                'permission_callback' => function () {
-                    return current_user_can( 'edit_posts' );
-                },
-            )
-        );
     }
 
     function proxy_image($request) {
