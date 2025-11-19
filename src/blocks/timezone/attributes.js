@@ -35,6 +35,22 @@ const attributes = {
 		type: 'string',
 		default: 'Asia/Dhaka'
 	},
+    showTimezoneOffset: {
+        type: 'boolean',
+        default: true,
+    },
+    showRemainingTime: {
+        type: 'boolean',
+        default: true
+    },
+    remainingTimeLabel: {
+        type: 'string',
+        default: 'Remaining:'
+    },
+    remainingTimeFormat: {
+        type: 'string',
+        default: ''
+    },
 	timezones: {
 		type: 'array',
 		default: []
@@ -791,10 +807,10 @@ const attributes = {
     locationTimezoneDesktopMargin: {
         type: 'object',
         default: {
-            top: '0',
-            bottom: '0',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     locationTimezoneTabMargin: {
@@ -824,7 +840,7 @@ const attributes = {
     timezoneLocationTextSpacing: { 
         type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '10',
 			Tablet: '',
 			Mobile: ''
 		}
