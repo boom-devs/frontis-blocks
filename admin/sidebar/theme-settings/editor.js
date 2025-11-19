@@ -123,6 +123,9 @@ const FrontisMetaBox = ({ whichEditor }) => {
             const templateKey = getTemplateKeyForMetaKey(settingName);
             let templateValue = value;
             
+            console.log('[Template Editor Update] Setting:', settingName, 'Value:', value, 'Type:', typeof value);
+            console.log('[Template Editor Update] Template Key:', templateKey);
+            
             // Invert for "disable" meta keys (sticky header, transparent header)
             // Meta "disable" = true means template "enable" = false
             if (
@@ -130,12 +133,25 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 settingName === '_frontis_meta_transparent_header'
             ) {
                 templateValue = !value;
+                console.log('[Template Editor Update] Inverted value:', templateValue);
             }
             
-            setTemplateMeta((prev) => ({
-                ...prev,
-                [templateKey]: templateValue,
-            }));
+            // Ensure boolean values are properly set (not converted to strings)
+            // Important: false is a valid override value, preserve it
+            if (typeof value === 'boolean') {
+                templateValue = value; // Preserve boolean value (true or false)
+            }
+            
+            console.log('[Template Editor Update] Final template value:', templateValue, 'Type:', typeof templateValue);
+            
+            setTemplateMeta((prev) => {
+                const updated = {
+                    ...prev,
+                    [templateKey]: templateValue,
+                };
+                console.log('[Template Editor Update] Updated templateMeta:', updated);
+                return updated;
+            });
         } else {
             // Normal post/page → post meta
             setMeta({
@@ -162,13 +178,23 @@ const FrontisMetaBox = ({ whichEditor }) => {
         switch (key) {
             case '_frontis_meta_header_display':
                 if (Object.prototype.hasOwnProperty.call(tpl, 'disableHeader')) {
-                    return tpl.disableHeader ?? false;
+                    // Convert to boolean: handle empty string, '1', 1, true, etc.
+                    const val = tpl.disableHeader;
+                    if (val === '' || val === null || val === undefined) {
+                        return global.disableHeader ?? false;
+                    }
+                    return val === true || val === '1' || val === 1;
                 }
                 return global.disableHeader ?? false;
 
             case '_frontis_meta_footer_display':
                 if (Object.prototype.hasOwnProperty.call(tpl, 'disableFooter')) {
-                    return tpl.disableFooter ?? false;
+                    // Convert to boolean: handle empty string, '1', 1, true, etc.
+                    const val = tpl.disableFooter;
+                    if (val === '' || val === null || val === undefined) {
+                        return global.disableFooter ?? false;
+                    }
+                    return val === true || val === '1' || val === 1;
                 }
                 return global.disableFooter ?? false;
 
@@ -193,8 +219,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
                         'stickyHeader'
                     )
                 ) {
+                    // Convert to boolean: handle empty string, '1', 1, true, etc.
+                    const val = tpl.stickyHeader;
+                    if (val === '' || val === null || val === undefined) {
+                        // Fallback to global
+                        return !(global.stickyHeader ?? false);
+                    }
                     // Template stickyHeader: true = enabled, so return false (not disabled)
-                    return !(tpl.stickyHeader ?? false);
+                    const boolVal = val === true || val === '1' || val === 1;
+                    return !boolVal;
                 }
                 // Global stickyHeader: true = enabled, so return false (not disabled)
                 return !(global.stickyHeader ?? false);
@@ -209,8 +242,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
                         'transparentHeader'
                     )
                 ) {
+                    // Convert to boolean: handle empty string, '1', 1, true, etc.
+                    const val = tpl.transparentHeader;
+                    if (val === '' || val === null || val === undefined) {
+                        // Fallback to global
+                        return !(global.transparentHeader ?? false);
+                    }
                     // Template transparentHeader: true = enabled, so return false (not disabled)
-                    return !(tpl.transparentHeader ?? false);
+                    const boolVal = val === true || val === '1' || val === 1;
+                    return !boolVal;
                 }
                 // Global transparentHeader: true = enabled, so return false (not disabled)
                 return !(global.transparentHeader ?? false);
@@ -244,7 +284,12 @@ const FrontisMetaBox = ({ whichEditor }) => {
                         'lazyLoading'
                     )
                 ) {
-                    return tpl.lazyLoading ?? false;
+                    // Convert to boolean: handle empty string, '1', 1, true, etc.
+                    const val = tpl.lazyLoading;
+                    if (val === '' || val === null || val === undefined) {
+                        return global.lazyLoading ?? false;
+                    }
+                    return val === true || val === '1' || val === 1;
                 }
                 return global.lazyLoading ?? false;
 
@@ -276,6 +321,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
             if (hasTplKey) {
                 let val = tpl[templateKey];
                 
+                console.log(
+                    '[getMetaValue][TEMPLATE] Found key in templateMeta:',
+                    templateKey,
+                    'value:',
+                    val,
+                    'type:',
+                    typeof val
+                );
+                
                 // Invert for "disable" meta keys (sticky header, transparent header)
                 // Template "enable" = true means meta "disable" = false
                 if (
@@ -286,7 +340,22 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 }
                 
                 // If value is explicitly set (even if false), use it
-                if (val !== null && val !== undefined) {
+                // Important: Check for explicit false values too (override)
+                // false is a valid boolean value, so we need to check explicitly
+                if (val !== null && val !== undefined && val !== '') {
+                    // Special check for boolean false - it's a valid override value
+                    if (val === false || val === true) {
+                        console.log(
+                            '[getMetaValue][TEMPLATE] key=',
+                            key,
+                            '(templateKey:',
+                            templateKey,
+                            ') → TEMPLATE META (OVERRIDE - boolean)',
+                            val
+                        );
+                        return val;
+                    }
+                    // For other types (string, number, etc.)
                     console.log(
                         '[getMetaValue][TEMPLATE] key=',
                         key,
@@ -296,7 +365,23 @@ const FrontisMetaBox = ({ whichEditor }) => {
                         val
                     );
                     return val;
+                } else {
+                    console.log(
+                        '[getMetaValue][TEMPLATE] key=',
+                        key,
+                        '(templateKey:',
+                        templateKey,
+                        ') → Value is null/undefined/empty, skipping override'
+                    );
                 }
+            } else {
+                console.log(
+                    '[getMetaValue][TEMPLATE] key=',
+                    key,
+                    '(templateKey:',
+                    templateKey,
+                    ') → Key not found in templateMeta, will use global fallback'
+                );
             }
 
             // 🔹 fallback to global (sync from global if template e value nai)
@@ -344,11 +429,33 @@ const FrontisMetaBox = ({ whichEditor }) => {
             typeof meta === 'object' &&
             Object.prototype.hasOwnProperty.call(meta, key);
 
-        // If post has explicit meta value, use it (override)
+        // If post has explicit meta value, check if it's a real override
         if (hasMetaKey) {
             const raw = meta[key];
-            // Check if value is explicitly set (not null/undefined)
-            if (raw !== null && raw !== undefined) {
+            // Check if value is explicitly set (not null/undefined/empty string)
+            // Important: false is a valid override value, but we need to check if it's intentional
+            if (raw !== null && raw !== undefined && raw !== '') {
+                // Check if this is a boolean false that might be default vs intentional override
+                // If raw is false, check template/global to see if we should use fallback
+                if (raw === false) {
+                    // Check template/global fallback first
+                    if (whichEditor === 'post') {
+                        const fallback = getTemplateFallbackValue(key);
+                        // If template/global says true but page says false, it's an override
+                        // If template/global says false and page says false, it might be default
+                        // For now, if page has false, treat it as override (user explicitly set it)
+                        console.log(
+                            '[getMetaValue][POST] key=',
+                            key,
+                            '→ using POST META (OVERRIDE: false)',
+                            raw,
+                            '| Template/Global fallback:',
+                            fallback
+                        );
+                        return raw;
+                    }
+                }
+                
                 console.log(
                     '[getMetaValue][POST] key=',
                     key,
@@ -437,13 +544,36 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 method: 'GET',
             })
                 .then((response) => {
-                    console.log('template-settings GET :', response);
+                    console.log('template-settings GET (raw):', response);
+                    console.log('template-settings GET (type):', typeof response);
+                    console.log('template-settings GET (isArray):', Array.isArray(response));
+                    console.log('template-settings GET (keys):', response ? Object.keys(response) : 'N/A');
 
-                    if (response && typeof response === 'object') {
-                        setTemplateMeta(response);
+                    // Handle both array and object responses
+                    let templateSettings = {};
+                    
+                    if (Array.isArray(response) && response.length > 0) {
+                        // If array, use first element
+                        templateSettings = response[0] || {};
+                    } else if (response && typeof response === 'object') {
+                        // If object, check if it has any keys (including false values)
+                        const keys = Object.keys(response);
+                        if (keys.length > 0) {
+                            // Has explicit settings (even if values are false)
+                            templateSettings = response;
+                        } else {
+                            // Empty object - no explicit settings
+                            templateSettings = {};
+                        }
                     } else {
-                        setTemplateMeta({});
+                        // Invalid response - no explicit settings
+                        templateSettings = {};
                     }
+                    
+                    console.log('template-settings GET (processed):', templateSettings);
+                    console.log('template-settings GET (hasSettings):', Object.keys(templateSettings).length > 0);
+                    
+                    setTemplateMeta(templateSettings);
                     setIsTemplateMetaLoaded(true);
                 })
                 .catch((error) => {
@@ -462,16 +592,31 @@ const FrontisMetaBox = ({ whichEditor }) => {
     // Template meta change hole API te save
     useEffect(() => {
         if (postType === 'wp_template' && postId && isTemplateMetaLoaded) {
+            // Don't save on initial load (when templateMeta is empty and just loaded)
+            // Only save when user explicitly changes something
+            const hasChanges = Object.keys(templateMeta).length > 0;
+            
+            if (!hasChanges) {
+                console.log('[Template Editor Save] Skipping save - no explicit overrides');
+                return;
+            }
+            
+            console.log('[Template Editor Save] Saving template settings...');
+            console.log('[Template Editor Save] Post ID:', postId);
+            console.log('[Template Editor Save] Template Meta:', templateMeta);
+            console.log('[Template Editor Save] Has explicit overrides:', hasChanges);
+            
             apiFetch({
                 path: 'frontis/v1/template-settings',
                 method: 'POST',
                 data: { setting: templateMeta, post_id: postId },
             })
                 .then((res) => {
-                    console.log('template-settings POST :', res);
+                    console.log('[Template Editor Save] Save response:', res);
+                    console.log('[Template Editor Save] ✅ Settings saved successfully');
                 })
                 .catch((err) => {
-                    console.error('Error saving template settings:', err);
+                    console.error('[Template Editor Save] ❌ Error saving template settings:', err);
                 });
         }
     }, [templateMeta, postType, postId, isTemplateMetaLoaded]);
@@ -544,6 +689,16 @@ const FrontisMetaBox = ({ whichEditor }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [whichEditor, postType, currentPostId]);
+
+    // 🔹 Global settings change হলে page editor এ template settings re-fetch করবে
+    useEffect(() => {
+        // শুধুমাত্র post editor এ কাজ করবে, template editor এ নয়
+        if (whichEditor === 'post' && postType !== 'wp_template' && currentPostId) {
+            console.log('[Global Sync] Global settings changed, re-fetching template settings...');
+            checkPostPageTemplateMeta();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [globalSettings]);
 
     const isTemplateEditor = postType === 'wp_template';
 
