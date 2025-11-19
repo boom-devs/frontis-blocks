@@ -63,26 +63,78 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     // 🔹 Load GLOBAL settings (FrontisThemeSiteEditor theke save kora option)
     useEffect(() => {
-        apiFetch({ path: 'frontis/v1/global-settings' })
-            .then((settings) => {
-                if (settings && typeof settings === 'object') {
-                    setGlobalSettings((prev) => ({
-                        ...prev,
-                        ...settings,
-                    }));
-                }
-            })
-            .catch((error) => {
-                console.error('Error fetching global settings:', error);
-            });
+        const fetchGlobalSettings = () => {
+            apiFetch({ path: 'frontis/v1/global-settings' })
+                .then((settings) => {
+                    if (settings && typeof settings === 'object') {
+                        setGlobalSettings((prev) => ({
+                            ...prev,
+                            ...settings,
+                        }));
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error fetching global settings:', error);
+                });
+        };
+
+        // Initial load
+        fetchGlobalSettings();
+
+        // Poll for global settings changes every 2 seconds
+        const intervalId = setInterval(fetchGlobalSettings, 2000);
+
+        return () => clearInterval(intervalId);
     }, []);
+
+    /**
+     * Helper: Map post meta keys to global settings keys
+     */
+    const getGlobalKeyForMetaKey = (metaKey) => {
+        const keyMap = {
+            '_frontis_meta_header_display': 'disableHeader',
+            '_frontis_meta_footer_display': 'disableFooter',
+            '_frontis_meta_sticky_header': 'stickyHeader',
+            '_frontis_meta_transparent_header': 'transparentHeader',
+            '_frontis_meta_sticky_bg_color': 'stickyHeaderColor',
+            '_frontis_meta_transparent_bg_color': 'transparentHeaderColor',
+            '_frontis_meta_lazy_load': 'lazyLoading',
+        };
+        return keyMap[metaKey] || null;
+    };
+
+    /**
+     * Helper: Map post meta keys to template meta keys
+     */
+    const getTemplateKeyForMetaKey = (metaKey) => {
+        const keyMap = {
+            '_frontis_meta_sticky_header': 'stickyHeader',
+            '_frontis_meta_transparent_header': 'transparentHeader',
+            '_frontis_meta_sticky_bg_color': 'stickyHeaderColor',
+            '_frontis_meta_transparent_bg_color': 'transparentHeaderColor',
+        };
+        return keyMap[metaKey] || metaKey;
+    };
 
     const updateSetting = (settingName, value) => {
         if (postType === 'wp_template') {
             // Template editor → frontis_template_options
+            // Map post meta keys to template keys and invert if needed
+            const templateKey = getTemplateKeyForMetaKey(settingName);
+            let templateValue = value;
+            
+            // Invert for "disable" meta keys (sticky header, transparent header)
+            // Meta "disable" = true means template "enable" = false
+            if (
+                settingName === '_frontis_meta_sticky_header' ||
+                settingName === '_frontis_meta_transparent_header'
+            ) {
+                templateValue = !value;
+            }
+            
             setTemplateMeta((prev) => ({
                 ...prev,
-                [settingName]: value,
+                [templateKey]: templateValue,
             }));
         } else {
             // Normal post/page → post meta
@@ -128,26 +180,36 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 return false;
 
             case '_frontis_meta_sticky_header':
+                // Note: _frontis_meta_sticky_header = "Disable Sticky Header"
+                // Global stickyHeader = "Enable Sticky Header"
+                // So we need to invert: if global enabled, return false (not disabled)
                 if (
                     Object.prototype.hasOwnProperty.call(
                         tpl,
                         'stickyHeader'
                     )
                 ) {
-                    return tpl.stickyHeader ?? false;
+                    // Template stickyHeader: true = enabled, so return false (not disabled)
+                    return !(tpl.stickyHeader ?? false);
                 }
-                return global.stickyHeader ?? false;
+                // Global stickyHeader: true = enabled, so return false (not disabled)
+                return !(global.stickyHeader ?? false);
 
             case '_frontis_meta_transparent_header':
+                // Note: _frontis_meta_transparent_header = "Disable Transparent Header"
+                // Global transparentHeader = "Enable Transparent Header"
+                // So we need to invert: if global enabled, return false (not disabled)
                 if (
                     Object.prototype.hasOwnProperty.call(
                         tpl,
                         'transparentHeader'
                     )
                 ) {
-                    return tpl.transparentHeader ?? false;
+                    // Template transparentHeader: true = enabled, so return false (not disabled)
+                    return !(tpl.transparentHeader ?? false);
                 }
-                return global.transparentHeader ?? false;
+                // Global transparentHeader: true = enabled, so return false (not disabled)
+                return !(global.transparentHeader ?? false);
 
             case '_frontis_meta_sticky_bg_color':
                 if (
@@ -189,6 +251,7 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     /**
      * Helper: meta value with template + global fallback
+     * Priority: Meta/Template Meta → Global Settings → Default
      */
     const getMetaValue = (key, defaultValue = false) => {
         if (!key) return defaultValue;
@@ -196,36 +259,67 @@ const FrontisMetaBox = ({ whichEditor }) => {
         // ===== TEMPLATE EDITOR =====
         if (postType === 'wp_template') {
             const tpl = templateMeta || {};
+            
+            // Map post meta keys to template keys (e.g., _frontis_meta_sticky_header → stickyHeader)
+            const templateKey = getTemplateKeyForMetaKey(key);
 
+            // Check if template has explicit value (override)
             const hasTplKey =
                 tpl &&
                 typeof tpl === 'object' &&
-                Object.prototype.hasOwnProperty.call(tpl, key);
+                Object.prototype.hasOwnProperty.call(tpl, templateKey);
 
             if (hasTplKey) {
-                const val = tpl[key];
-                console.log(
-                    '[getMetaValue][TEMPLATE] key=',
-                    key,
-                    '→ TEMPLATE META',
-                    val
-                );
-                return val ?? defaultValue;
+                let val = tpl[templateKey];
+                
+                // Invert for "disable" meta keys (sticky header, transparent header)
+                // Template "enable" = true means meta "disable" = false
+                if (
+                    key === '_frontis_meta_sticky_header' ||
+                    key === '_frontis_meta_transparent_header'
+                ) {
+                    val = !val;
+                }
+                
+                // If value is explicitly set (even if false), use it
+                if (val !== null && val !== undefined) {
+                    console.log(
+                        '[getMetaValue][TEMPLATE] key=',
+                        key,
+                        '(templateKey:',
+                        templateKey,
+                        ') → TEMPLATE META (OVERRIDE)',
+                        val
+                    );
+                    return val;
+                }
             }
 
             // 🔹 fallback to global (sync from global if template e value nai)
+            const globalKey = getGlobalKeyForMetaKey(key) || templateKey;
             const global = globalSettings || {};
             const hasGlobalKey =
                 global &&
                 typeof global === 'object' &&
-                Object.prototype.hasOwnProperty.call(global, key);
+                Object.prototype.hasOwnProperty.call(global, globalKey);
 
             if (hasGlobalKey) {
-                const val = global[key];
+                let val = global[globalKey];
+                
+                // Invert for "disable" meta keys (sticky header, transparent header)
+                if (
+                    key === '_frontis_meta_sticky_header' ||
+                    key === '_frontis_meta_transparent_header'
+                ) {
+                    val = !val;
+                }
+                
                 console.log(
                     '[getMetaValue][TEMPLATE] key=',
                     key,
-                    '→ GLOBAL FALLBACK',
+                    '(globalKey:',
+                    globalKey,
+                    ') → GLOBAL FALLBACK',
                     val
                 );
                 return val ?? defaultValue;
@@ -246,16 +340,19 @@ const FrontisMetaBox = ({ whichEditor }) => {
             typeof meta === 'object' &&
             Object.prototype.hasOwnProperty.call(meta, key);
 
-        const raw = hasMetaKey ? meta[key] : undefined;
-
+        // If post has explicit meta value, use it (override)
         if (hasMetaKey) {
-            console.log(
-                '[getMetaValue][POST] key=',
-                key,
-                '→ using POST META',
-                raw
-            );
-            return raw ?? defaultValue;
+            const raw = meta[key];
+            // Check if value is explicitly set (not null/undefined)
+            if (raw !== null && raw !== undefined) {
+                console.log(
+                    '[getMetaValue][POST] key=',
+                    key,
+                    '→ using POST META (OVERRIDE)',
+                    raw
+                );
+                return raw;
+            }
         }
 
         // Ei page e kono explicit meta nai → template + global fallback use korbo
@@ -268,6 +365,38 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 fallback
             );
             return fallback ?? defaultValue;
+        }
+
+        // Direct global fallback for post meta keys
+        const globalKey = getGlobalKeyForMetaKey(key);
+        if (globalKey) {
+            const global = globalSettings || {};
+            if (
+                global &&
+                typeof global === 'object' &&
+                Object.prototype.hasOwnProperty.call(global, globalKey)
+            ) {
+                let val = global[globalKey];
+                
+                // Invert for "disable" meta keys (sticky header, transparent header)
+                // Global "enable" = true means meta "disable" = false
+                if (
+                    key === '_frontis_meta_sticky_header' ||
+                    key === '_frontis_meta_transparent_header'
+                ) {
+                    val = !val;
+                }
+                
+                console.log(
+                    '[getMetaValue][POST] key=',
+                    key,
+                    '→ GLOBAL FALLBACK (',
+                    globalKey,
+                    ')',
+                    val
+                );
+                return val ?? defaultValue;
+            }
         }
 
         console.log(
