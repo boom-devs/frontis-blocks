@@ -1,7 +1,4 @@
 import { __ } from '@wordpress/i18n';
-
-import { InspectorControls } from '@wordpress/block-editor';
-
 import {
 	PanelBody,
 	TabPanel,
@@ -17,7 +14,7 @@ import {
 } from '@wordpress/components';
 
 import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
-import { TIMEZONE, WEEKENDDAY, BORDER_STYLES, OVERFLOW_OP, BACKGROUND_TYPES } from '@Constants/fbConstants';
+import { TIMEZONE, WEEKENDDAY, timeFormatOptions, monthOptions, BORDER_STYLES, OVERFLOW_OP, BACKGROUND_TYPES } from '@Constants/fbConstants';
 import FB_VisibilityControl from '@Components/visibility-control';
 import Select2 from "react-select";
 import FB_InspectorControls from '@Components/InspectorControls';
@@ -37,7 +34,6 @@ import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
-import { getAllCountries, getTimezonesForCountry } from 'countries-and-timezones';
 
 import './editor.scss';
 
@@ -47,7 +43,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         countries,
         selectedCountry,
         useCustomLocation,
-		location,        
+		location,
+        showTimezoneOffset,   
+        showRemainingTime,
+        remainingTimeLabel,
+        remainingTimeFormat,     
 		timezone,        
 		timezones,       
 		startTime,
@@ -471,41 +471,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const [currentTime, setCurrentTime] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
 
-    const timeFormatOptions = [
-        { label: '12-hour (hh:mm AM/PM)', value: 'hh:mm A' },
-        { label: '12-hour (hh:mm:ss AM/PM)', value: 'hh:mm:ss A' },
-        { label: '24-hour (HH:mm)', value: 'HH:mm' },
-        { label: '24-hour (HH:mm:ss)', value: 'HH:mm:ss' }
-    ];
-
     // Initialize attributes with proper default values
     useEffect(() => {
         const updates = {};
         
-        // Initialize countries using the library
-        if (!countries || countries.length === 0) {
-            try {
-                const countriesData = getAllCountries();
-                const totalCountries = Object.keys(countriesData).length;
-                console.log('Total countries:', totalCountries);
-                const countryOptions = Object.values(countriesData).map(country => ({
-                    label: country.name,
-                    value: country.id
-                })).sort((a, b) => a.label.localeCompare(b.label));
-                
-                updates.countries = countryOptions;
-                updates.selectedCountry = selectedCountry || 'BD';
-            } catch (error) {
-                console.error('Error loading countries:', error);
-                updates.countries = [
-                    { label: 'Bangladesh', value: 'BD' },
-                    { label: 'United States', value: 'US' },
-                    { label: 'United Kingdom', value: 'GB' }
-                ];
-                updates.selectedCountry = 'BD';
-            }
-        }
-
         // Initialize timezones
         if (!timezones || timezones.length === 0) {
             updates.timezones = getAllTimezones();
@@ -519,7 +488,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         if (!isValidTime(startTime)) updates.startTime = '09:00';
         if (!isValidTime(endTime)) updates.endTime = '17:00';
 
-        // Set default values - ADD useCustomLocation here
+        // Set default values
         const defaults = {
             weekendDays: ['0', '6'],
             useMonthlySchedule: false,
@@ -532,7 +501,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             beforeTimeText: 'Will start at',
             afterTimeText: 'Will close at',
             timeFormat: 'hh:mm A',
-            useCustomLocation: true  // ADD THIS LINE
+            useCustomLocation: true,
+            showTimezoneOffset: true,
+            showRemainingTime: true,
+            remainingTimeLabel: 'Remaining: ',
+            remainingTimeFormat: 'hours-minutes'
         };
 
         Object.keys(defaults).forEach(key => {
@@ -541,7 +514,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         });
 
-        // Fix typo in beforeTimeText
         if (beforeTimeText === 'Wll start at') {
             updates.beforeTimeText = 'Will start at';
         }
@@ -550,81 +522,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             setAttributes(updates);
         }
     }, [attributes, setAttributes]);
-
-    // Country and Timezone functions
-    const getCountryTimezones = useCallback((countryCode) => {
-        try {
-            const timezonesData = getTimezonesForCountry(countryCode);
-            
-            const options = timezonesData.map(tz => {
-                try {
-                    const now = new Date();
-                    const timezoneName = tz.name.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-                    
-                    if (useUTCTimezoneFormat) {
-                        const formatter = new Intl.DateTimeFormat('en-US', {
-                            timeZone: tz.name,
-                            timeZoneName: 'longOffset'
-                        });
-                        const parts = formatter.formatToParts(now);
-                        const offsetPart = parts.find(part => part.type === 'timeZoneName');
-                        
-                        let offsetString = '';
-                        if (offsetPart && offsetPart.value.startsWith('GMT')) {
-                            offsetString = offsetPart.value.replace('GMT', '').replace('UTC', '');
-                        }
-                        
-                        return { 
-                            label: `${timezoneName} (UTC${offsetString})`, 
-                            value: tz.name 
-                        };
-                    } else {
-                        const offset = now.toLocaleString('en-US', { 
-                            timeZone: tz.name, 
-                            timeZoneName: 'shortOffset' 
-                        }).split(' ').pop();
-                        
-                        return { 
-                            label: `${timezoneName} (${offset})`, 
-                            value: tz.name 
-                        };
-                    }
-                } catch (e) {
-                    const timezoneName = tz.name.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-                    return { 
-                        label: timezoneName, 
-                        value: tz.name 
-                    };
-                }
-            });
-            
-            return options.sort((a, b) => a.label.localeCompare(b.label));
-        } catch (error) {
-            console.error('Error getting country timezones:', error);
-            return [{ label: 'Asia/Dhaka (GMT+6)', value: 'Asia/Dhaka' }];
-        }
-    }, [useUTCTimezoneFormat]);
-
-    // Update timezones when country changes
-    useEffect(() => {
-        if (selectedCountry && !useCustomLocation) {
-            const countryTimezones = getCountryTimezones(selectedCountry);
-            const newTimezone = countryTimezones.length > 0 ? countryTimezones[0].value : 'Asia/Dhaka';
-            
-            setAttributes({ 
-                timezones: countryTimezones,
-                timezone: newTimezone
-            });
-            
-            // Auto-set location name based on country
-            if (!location && countries) {
-                const selectedCountryData = countries.find(c => c.value === selectedCountry);
-                if (selectedCountryData) {
-                    setAttributes({ location: selectedCountryData.label });
-                }
-            }
-        }
-    }, [selectedCountry, useCustomLocation, getCountryTimezones]);
 
     // Helper functions
     const getWeekdayName = useCallback((dayNumber) => {
@@ -644,7 +541,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const getFormattedTimezone = useCallback((timezone) => {
         try {
             const now = new Date();
-            const timezoneName = timezone.split('/').pop().replace(/_/g, ' ');
+            
+            // Get country name from timezone
+            const getCountryFromTimezone = (tz) => {
+                const countryMap = {
+                    'Asia/Dhaka': 'Bangladesh',
+                    'Asia/Kolkata': 'India',
+                    'Asia/Tokyo': 'Japan',
+                    'Asia/Singapore': 'Singapore',
+                    'Asia/Dubai': 'UAE',
+                    'Asia/Riyadh': 'Saudi Arabia',
+                    'America/New_York': 'USA',
+                    'America/Los_Angeles': 'USA',
+                    'America/Chicago': 'USA',
+                    'Europe/London': 'UK',
+                    'Europe/Paris': 'France',
+                    'Europe/Berlin': 'Germany',
+                    'Australia/Sydney': 'Australia',
+                    'Pacific/Auckland': 'New Zealand'
+                };
+                
+                return countryMap[tz] || tz.split('/')[0];
+            };
+
+            const country = getCountryFromTimezone(timezone);
+            const city = timezone.split('/').pop().replace(/_/g, ' ');
             
             if (useUTCTimezoneFormat) {
                 const formatter = new Intl.DateTimeFormat('en-US', {
@@ -656,7 +577,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 
                 if (offsetPart && offsetPart.value.startsWith('GMT')) {
                     const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
-                    return `${timezoneName} (UTC${offset})`;
+                    return `${country} - ${city} (UTC${offset})`;
                 }
             } else {
                 const offset = now.toLocaleString('en-US', { 
@@ -664,11 +585,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     timeZoneName: 'shortOffset' 
                 }).split(' ').pop();
                 
-                return `${timezoneName} (${offset})`;
+                return `${country} - ${city} (${offset})`;
             }
         } catch (error) {
-            const timezoneName = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
-            return useUTCTimezoneFormat ? `${timezoneName} (UTC+06:00)` : `${timezoneName} (GMT+6)`;
+            const city = timezone?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
+            return useUTCTimezoneFormat ? `Bangladesh - ${city} (UTC+06:00)` : `Bangladesh - ${city} (GMT+6)`;
         }
         
         return 'Unknown Timezone';
@@ -680,7 +601,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             const options = timezoneList.map(tz => {
                 try {
                     const now = new Date();
-                    const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
+                    
+                    // Get country name from timezone
+                    const getCountryFromTimezone = (timezone) => {
+                        const countryMap = {
+                            'Asia/Dhaka': 'Bangladesh',
+                            'Asia/Kolkata': 'India',
+                            'Asia/Tokyo': 'Japan',
+                            'Asia/Singapore': 'Singapore',
+                            'Asia/Dubai': 'UAE',
+                            'Asia/Riyadh': 'Saudi Arabia',
+                            'America/New_York': 'USA',
+                            'America/Los_Angeles': 'USA',
+                            'America/Chicago': 'USA',
+                            'America/Toronto': 'Canada',
+                            'Europe/London': 'UK',
+                            'Europe/Paris': 'France',
+                            'Europe/Berlin': 'Germany',
+                            'Europe/Moscow': 'Russia',
+                            'Australia/Sydney': 'Australia',
+                            'Pacific/Auckland': 'New Zealand',
+                            'Africa/Cairo': 'Egypt',
+                            'Africa/Johannesburg': 'South Africa'
+                        };
+                        
+                        return countryMap[timezone] || timezone.split('/')[0];
+                    };
+
+                    const country = getCountryFromTimezone(tz);
+                    const city = tz.split('/').pop().replace(/_/g, ' ');
                     
                     if (useUTCTimezoneFormat) {
                         const formatter = new Intl.DateTimeFormat('en-US', {
@@ -695,27 +644,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             offsetString = offsetPart.value.replace('GMT', '').replace('UTC', '');
                         }
                         
-                        return { label: `${timezoneName} (UTC${offsetString})`, value: tz };
+                        return { label: `${country} - ${city} (UTC${offsetString})`, value: tz };
                     } else {
                         const offset = now.toLocaleString('en-US', { 
                             timeZone: tz, 
                             timeZoneName: 'shortOffset' 
                         }).split(' ').pop();
                         
-                        return { label: `${timezoneName} (${offset})`, value: tz };
+                        return { label: `${country} - ${city} (${offset})`, value: tz };
                     }
                 } catch (e) {
-                    const timezoneName = tz.split('/').map(part => part.replace(/_/g, ' ')).join(' - ');
-                    return { label: timezoneName, value: tz };
+                    const country = tz.split('/')[0];
+                    const city = tz.split('/').pop().replace(/_/g, ' ');
+                    return { label: `${country} - ${city}`, value: tz };
                 }
             });
             
             return options.sort((a, b) => a.label.localeCompare(b.label));
         } catch (error) {
             const fallbackTimezones = [
-                { label: 'Asia - Dhaka (GMT+6)', value: 'Asia/Dhaka' }, 
+                { label: 'Bangladesh - Dhaka (GMT+6)', value: 'Asia/Dhaka' }, 
                 { label: 'UTC (GMT+0)', value: 'UTC' },
-                { label: 'America - New York (GMT-5)', value: 'America/New_York' }
+                { label: 'USA - New York (GMT-5)', value: 'America/New_York' },
+                { label: 'USA - Los Angeles (GMT-8)', value: 'America/Los_Angeles' },
+                { label: 'UK - London (GMT+0)', value: 'Europe/London' },
+                { label: 'India - Kolkata (GMT+5:30)', value: 'Asia/Kolkata' },
+                { label: 'Singapore - Singapore (GMT+8)', value: 'Asia/Singapore' },
+                { label: 'Japan - Tokyo (GMT+9)', value: 'Asia/Tokyo' }
             ];
             
             if (useUTCTimezoneFormat) {
@@ -764,13 +719,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             return location;
         }
         
-        if (selectedCountry && countries) {
-            const selectedCountryData = countries.find(c => c.value === selectedCountry);
-            return selectedCountryData?.label || 'Unknown Country';
-        }
-        
+        // Since removed countries, return location or default
         return location || 'Unknown Location';
-    }, [useCustomLocation, location, selectedCountry, countries]);
+    }, [useCustomLocation, location]);
 
     // Office hours and status logic
     const getCurrentMonthSchedule = useCallback(() => {
@@ -831,7 +782,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [getEffectiveTimezone, getEffectiveOfficeHours]);
 
-    // Status calculation functions
+    // Status calculation
     const isWeekendOrHoliday = useCallback((dayOfWeek, todayDate) => {
         const weekendDaysArray = weekendDays || [];
         if (weekendDaysArray.includes(dayOfWeek.toString())) return 'Weekend';
@@ -1000,20 +951,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const effectiveTimezone = getEffectiveTimezone();
     const displayTimezone = timezoneMode === 'auto' ? getFormattedTimezone(getAutoTimezone()) : getFormattedTimezone(timezone);
 
-    // Month options for React Select
-    const monthOptions = useMemo(() => [
-        { label: 'January', value: '0' }, { label: 'February', value: '1' }, { label: 'March', value: '2' },
-        { label: 'April', value: '3' }, { label: 'May', value: '4' }, { label: 'June', value: '5' },
-        { label: 'July', value: '6' }, { label: 'August', value: '7' }, { label: 'September', value: '8' },
-        { label: 'October', value: '9' }, { label: 'November', value: '10' }, { label: 'December', value: '11' }
-    ], []);
-
     /**
      * Inspector General Controls Start
     */
     const generalControls = (
         <>
-            {/* Location & Basic Settings */}
             <PanelBody title="Timezone Settings" initialOpen={true}>
                 <BaseControl>
                     <ToggleControl
@@ -1023,7 +965,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </BaseControl>
 
-                <BaseControl label="Timezone Setting">
+                <BaseControl label="Timezone Tracking">
                     <SelectControl
                         options={TIMEZONE}
                         value={timezoneMode}
@@ -1033,7 +975,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 
                 {timezoneMode === 'auto' ? (
                     <TextControl 
-                        label="Current Timezone" 
+                        label="Timezone" 
                         value={displayTimezone || 'Detecting...'} 
                         readOnly 
                     />
@@ -1048,7 +990,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     </BaseControl>
                 )}
-                
+
+                <BaseControl>
+                    <ToggleControl
+                        label="Timezone Offset"
+                        checked={!!showTimezoneOffset}
+                        onChange={(value) => setAttributes({ showTimezoneOffset: value })}
+                        help="(e.g., GMT+6, UTC+06:00)"
+                    />
+                </BaseControl>
             </PanelBody>
 
             <PanelBody title="Location" initialOpen={false}>
@@ -1060,28 +1010,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 </BaseControl>
 
-                {useCustomLocation && (
+                {useCustomLocation ? (
                     <TextControl
+                        label="Location Name"
                         value={location || ''}
                         onChange={(value) => setAttributes({ location: value })}
-                        placeholder="Dhaka, Bangladesh"
+                        placeholder="e.g., Dhaka, Bangladesh"
                         className="fb-custom-location"
                     />
-                ) }
-
-                <BaseControl label="Country">
-                    <Select2
-                        options={countries || []}
-                        value={getSelectedOption(countries, selectedCountry)}
-                        onChange={(opt) => setAttributes({ selectedCountry: opt?.value })}
-                        isClearable={false}
-                        className="fb-select2-control"
+                ) : (
+                    <TextControl
+                        label="Default Location"
+                        value={getLocationDisplayName()}
+                        readOnly
+                        help="Auto-detected based on timezone"
                     />
-                </BaseControl>
+                )}
             </PanelBody>
 
-            <PanelBody title="Time" initialOpen={true}>
-                <BaseControl label="Select Format">
+            <PanelBody title="Time" initialOpen={false}>
+                <BaseControl label="Time Format">
                     <Select2
                         options={timeFormatOptions}
                         value={getSelectedOption(timeFormatOptions, timeFormat || 'hh:mm A')}
@@ -1098,8 +1046,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         readOnly
                     />
                 )}
-
-                
             </PanelBody>
 
             <PanelBody title="Separator" initialOpen={false}>
@@ -1128,7 +1074,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 )}
             </PanelBody>
 
-            {/* Status Text Settings */}
             <ToggleControl
                 label={__("Show Status", "frontis-blocks")}
                 checked={showStatusSwitcher}
@@ -1137,7 +1082,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             
             { showStatusSwitcher && (
                 <>
-                    <PanelBody title="Status Text Settings" initialOpen={true}>
+                    <PanelBody title="Status Text Settings" initialOpen={false}>
                         <TextControl
                             label="Current Status"
                             value={currentStatus}
@@ -1158,7 +1103,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     </PanelBody>
 
-                    <PanelBody title="Time Display Text" initialOpen={true}>
+                    <PanelBody title="Time Display Text" initialOpen={false}>
                         <TextControl
                             label="Before Time Text"
                             value={beforeTimeText || ''}
@@ -1174,7 +1119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     </PanelBody>
 
-                    <PanelBody title="Office Hours Schedule" initialOpen={true}>
+                    <PanelBody title="Office Hours Schedule" initialOpen={false}>
                         <BaseControl>
                             <ToggleControl
                                 label="Use Monthly Schedule"
@@ -1197,10 +1142,42 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 />
                             </>
                         )}
+
+                        <BaseControl>
+                            <ToggleControl
+                                label="Show Remaining Time"
+                                checked={!!showRemainingTime}
+                                onChange={(value) => setAttributes({ showRemainingTime: value })}
+                            />
+                        </BaseControl>
+
+                        {showRemainingTime && (
+                            <>
+                                <TextControl
+                                    label="Remaining Time Label"
+                                    value={remainingTimeLabel || ''}
+                                    onChange={(value) => setAttributes({ remainingTimeLabel: value })}
+                                    placeholder="Remaining:"
+                                />
+                                
+                                <BaseControl label="Remaining Time Format">
+                                    <SelectControl
+                                        options={[
+                                            { label: 'hour minutes', value: 'hours-minutes' },
+                                            { label: 'h m', value: 'short' },
+                                            { label: 'minutes', value: 'minutes-only' },
+                                            { label: 'hours', value: 'decimal' }
+                                        ]}
+                                        value={remainingTimeFormat || 'hours-minutes'}
+                                        onChange={(value) => setAttributes({ remainingTimeFormat: value })}
+                                    />
+                                </BaseControl>
+                            </>
+                        )}
                     </PanelBody>
 
                     {useMonthlySchedule && (
-                        <PanelBody title="Monthly Schedule" initialOpen={true}>
+                        <PanelBody title="Monthly Schedule" initialOpen={false}>
                             <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
                                 <BaseControl label="Add Month Schedule">
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
@@ -1260,7 +1237,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         </PanelBody>
                     )}
 
-                    {/* Off Day Settings */}
                     <PanelBody title="Off Day Settings" initialOpen={false}>
                         <BaseControl label="Add Weekend Day">
                             <Select2
@@ -2884,7 +2860,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-timezone {
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-offset {
 			${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
             ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
             ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
@@ -2908,7 +2884,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 		
-		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-timezone{
+		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-offset{
 			${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
 
 			${timezoneTextHoverColorType === 'gradient' ? `
@@ -2942,7 +2918,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status {
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status {
 			${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
             ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
             ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
@@ -2982,7 +2958,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
 			transition: all .3s ease-in-out;
 		}
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status{
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status{
 			${statusCloseColor ? `color: ${statusCloseColor};` : ''}
 			${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
 			${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
@@ -2992,7 +2968,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-close .fb-timezone-status:hover{
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover{
 			${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
 			${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
 			${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
@@ -3033,7 +3009,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         countries,
         selectedCountry,
         useCustomLocation,
-		location,        
+		location,
+        showTimezoneOffset,
+        showRemainingTime,
+		remainingTimeLabel,
+		remainingTimeFormat,        
 		timezone,        
 		timezones,       
 		startTime,

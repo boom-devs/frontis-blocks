@@ -528,34 +528,38 @@ export const ADVANCED_BUTTON_PRESETS = [
 	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
 ];
 export const TIMEZONE = [
-	{ label: __("Auto", "frontis-blocks"), value: "auto" },
-	{ label: __("Manual", "frontis-blocks"), value: "manual" },
-	
+    { label: 'Auto', value: 'auto' },
+    { label: 'Manual', value: 'manual' }
 ];
 export const WEEKENDDAY = [
-	{ label: __("Sunday", "frontis-blocks"), value: "0" },
-	{ label: __("Monday", "frontis-blocks"), value: "1" },
-	{ label: __("Tuesday", "frontis-blocks"), value: "2" },
-	{ label: __("Wednesday", "frontis-blocks"), value: "3" },
-	{ label: __("Thursday", "frontis-blocks"), value: "4" },
-	{ label: __("Friday", "frontis-blocks"), value: "5" },
-	{ label: __("Saturday", "frontis-blocks"), value: "6" },
+    { label: 'Sunday', value: '0' },
+    { label: 'Monday', value: '1' },
+    { label: 'Tuesday', value: '2' },
+    { label: 'Wednesday', value: '3' },
+    { label: 'Thursday', value: '4' },
+    { label: 'Friday', value: '5' },
+    { label: 'Saturday', value: '6' }
 ];
-export const MONTH = [
-	{ label: __("January", "frontis-blocks"), value: "0" },
-	{ label: __("February", "frontis-blocks"), value: "1" },
-	{ label: __("March", "frontis-blocks"), value: "2" },
-	{ label: __("April", "frontis-blocks"), value: "3" },
-	{ label: __("May", "frontis-blocks"), value: "4" },
-	{ label: __("June", "frontis-blocks"), value: "5" },
-	{ label: __("July", "frontis-blocks"), value: "6" },
-	{ label: __("August", "frontis-blocks"), value: "7" },
-	{ label: __("September", "frontis-blocks"), value: "8" },
-	{ label: __("October", "frontis-blocks"), value: "9" },
-	{ label: __("November", "frontis-blocks"), value: "10" },
-	{ label: __("December", "frontis-blocks"), value: "11" },
-]
-
+export const timeFormatOptions = [
+    { label: '12-hour (hh:mm AM/PM)', value: 'hh:mm A' },
+    { label: '12-hour (hh:mm:ss AM/PM)', value: 'hh:mm:ss A' },
+    { label: '24-hour (HH:mm)', value: 'HH:mm' },
+    { label: '24-hour (HH:mm:ss)', value: 'HH:mm:ss' }
+];
+export const monthOptions = [
+    { label: 'January', value: '0' },
+    { label: 'February', value: '1' },
+    { label: 'March', value: '2' },
+    { label: 'April', value: '3' },
+    { label: 'May', value: '4' },
+    { label: 'June', value: '5' },
+    { label: 'July', value: '6' },
+    { label: 'August', value: '7' },
+    { label: 'September', value: '8' },
+    { label: 'October', value: '9' },
+    { label: 'November', value: '10' },
+    { label: 'December', value: '11' }
+];
 export const MEGA_MENU_TRIGGERS = [
 	{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
 	{ label: __('Click', 'frontis-blocks'), value: 'click' },

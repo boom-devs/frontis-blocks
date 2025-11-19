@@ -1,338 +1,176 @@
-import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-
+import { useBlockProps, RichText } from '@wordpress/block-editor';
 export default function Save({ attributes }) {
-	const {
-		blockID,
-		location,
-		timezone,
-		timeFormat,
-		timezoneMode,
-		useUTCTimezoneFormat,
-		startTime,
-		endTime,
-		useMonthlySchedule,
-		monthlySchedules,
-		weekendDays,
-		holidays,
-		separator,
-		showSeparatorSwitcher,
-		openStatusText,
-		closedStatusText,
-		beforeTimeText,
-		afterTimeText,
-		timezoneGlobalWraperID,
-		timezoneGlobalWraperClass,
-		timezoneDesktopSwitcher,
-		timezoneTabletSwitcher,
-		timezoneMobileSwitcher,
-		showStatusSwitcher
-	} = attributes;
+    const {
+        blockID,
+        location,
+        timezone,
+        timezoneMode,
+        useUTCTimezoneFormat,
+        timeFormat,
+        startTime,
+        endTime,
+        useMonthlySchedule,
+        monthlySchedules,
+        weekendDays,
+        holidays,
+        separator,
+        showSeparatorSwitcher,
+        openStatusText,
+        closedStatusText,
+        beforeTimeText,
+        afterTimeText,
+        timezoneGlobalWraperID,
+        timezoneGlobalWraperClass,
+        timezoneDesktopSwitcher,
+        timezoneTabletSwitcher,
+        timezoneMobileSwitcher,
+        showStatusSwitcher,
+        alignment,
+        weekendMessage,
+        holidayMessage,
+        useCustomLocation,
+        showTimezoneOffset,
+        showRemainingTime,
+        remainingTimeLabel,
+        remainingTimeFormat,
+    } = attributes;
 
-	const blockProps = useBlockProps.save({
-		className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneDesktopSwitcher && 'fb-desktop-responsive'} ${timezoneTabletSwitcher && 'fb-tablet-responsive'} ${timezoneMobileSwitcher && 'fb-mobile-responsive'}`,
-	});
+    const blockProps = useBlockProps.save({
+        className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneGlobalWraperClass} ${
+            timezoneDesktopSwitcher ? 'fb-desktop-responsive' : ''
+        } ${timezoneTabletSwitcher ? 'fb-tablet-responsive' : ''} ${
+            timezoneMobileSwitcher ? 'fb-mobile-responsive' : ''
+        } ${alignment ? `align-${alignment}` : ''}`,
+        id: timezoneGlobalWraperID || ''
+    });
 
-	// Helper function to format timezone display (only offset)
-	const getFormattedTimezone = (timezoneToFormat) => {
-		try {
-			const now = new Date();
-			if (useUTCTimezoneFormat) {
-				const formatter = new Intl.DateTimeFormat('en-US', {
-					timeZone: timezoneToFormat,
-					timeZoneName: 'longOffset'
-				});
-				const parts = formatter.formatToParts(now);
-				const offsetPart = parts.find(part => part.type === 'timeZoneName');
-				if (offsetPart && offsetPart.value.startsWith('GMT')) {
-					const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
-					return `(UTC${offset})`;
-				}
-			} else {
-				const offset = now.toLocaleString('en-US', { 
-					timeZone: timezoneToFormat, 
-					timeZoneName: 'shortOffset' 
-				}).split(' ').pop();
-				return `(${offset})`;
-			}
-		} catch (error) {
-			return useUTCTimezoneFormat ? '(UTC+06:00)' : '(GMT+6)';
-		}
-	};
+    // helper functions
+    const getTimezoneLocationName = (timezoneToFormat) => {
+        try {
+            const getCountryFromTimezone = (tz) => {
+                const countryMap = {
+                    'Asia/Dhaka': 'Bangladesh',
+                    'Asia/Kolkata': 'India',
+                    'Asia/Tokyo': 'Japan',
+                    'Asia/Singapore': 'Singapore',
+                    'Asia/Dubai': 'UAE',
+                    'Asia/Riyadh': 'Saudi Arabia',
+                    'America/New_York': 'USA',
+                    'America/Los_Angeles': 'USA',
+                    'America/Chicago': 'USA',
+                    'Europe/London': 'UK',
+                    'Europe/Paris': 'France',
+                    'Europe/Berlin': 'Germany',
+                    'Australia/Sydney': 'Australia',
+                    'Pacific/Auckland': 'New Zealand',
+                    'Australia/Eucla': 'Australia'
+                };
+                return countryMap[tz] || tz.split('/')[0];
+            };
 
-	// Get effective timezone
-	const getEffectiveTimezone = () => {
-		return timezoneMode === 'auto' ? Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
-	};
+            const country = getCountryFromTimezone(timezoneToFormat);
+            const city = timezoneToFormat.split('/').pop().replace(/_/g, ' ');
+            return `${country} - ${city}`;
+        } catch (error) {
+            const city = timezoneToFormat?.split('/').pop()?.replace(/_/g, ' ') || 'Local Time';
+            return `Bangladesh - ${city}`;
+        }
+    };
 
-	// Get current time in timezone
-	const getCurrentTimeInTimezone = () => {
-		const effectiveTimezone = getEffectiveTimezone();
-		if (!effectiveTimezone) return '';
-		try {
-			return new Date().toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', hour12: true
-			});
-		} catch (error) {
-			return 'Time Unavailable';
-		}
-	};
+    const getEffectiveTimezone = () => {
+        try {
+            return timezoneMode === 'auto' ? Intl.DateTimeFormat().resolvedOptions().timeZone : timezone;
+        } catch (error) {
+            return 'Asia/Dhaka';
+        }
+    };
 
-	// Monthly schedule hours
-	const getEffectiveOfficeHours = () => {
-		if (useMonthlySchedule && monthlySchedules?.length > 0) {
-			const currentMonth = new Date().getMonth().toString();
-			const currentSchedule = monthlySchedules.find(schedule => schedule.month === currentMonth);
-			if (currentSchedule) {
-				return { startTime: currentSchedule.startTime, endTime: currentSchedule.endTime };
-			}
-		}
-		return { startTime, endTime };
-	};
+    const getTimezoneOffset = (timezoneToFormat) => {
+        try {
+            //offset
+            if (useUTCTimezoneFormat) {
+                return '(UTC+00:00)';
+            } else {
+                return '(GMT+0)';
+            }
+        } catch (error) {
+            return useUTCTimezoneFormat ? '(UTC+06:00)' : '(GMT+6)';
+        }
+    };
 
-	// Format time for display
-	const formatTimeForDisplay = (time) => {
-		if (!time) return '';
-		const [hours, minutes] = time.split(':').map(Number);
-		if (isNaN(hours) || isNaN(minutes)) return '';
-		const period = hours >= 12 ? 'PM' : 'AM';
-		const displayHours = hours % 12 || 12;
-		return `${displayHours}:${minutes.toString().padStart(2, '0')} ${period}`;
-	};
+    const effectiveTimezone = getEffectiveTimezone();
+    const timezoneLocation = timezoneMode === 'auto' ? 
+        getTimezoneLocationName(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
+        getTimezoneLocationName(timezone);
+    
+    const timezoneOffset = timezoneMode === 'auto' ? 
+        getTimezoneOffset(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
+        getTimezoneOffset(timezone);
 
-	// Remaining time calculation
-	const getRemainingTime = () => {
-		const effectiveTimezone = getEffectiveTimezone();
-		const { endTime: effectiveEndTime } = getEffectiveOfficeHours();
-		
-		if (!effectiveTimezone || !effectiveEndTime) return '';
+    const displayLocation = useCustomLocation && location ? location : timezoneLocation;
+    const displaySeparator = separator || ' | ';
 
-		try {
-			const now = new Date();
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone,
-				hour: '2-digit', minute: '2-digit', hour12: false
-			});
-
-			const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-			const [endHours, endMinutes] = effectiveEndTime.split(':').map(Number);
-
-			let currentTotal = currentHours * 60 + currentMinutes;
-			let endTotal = endHours * 60 + endMinutes;
-
-			if (endTotal < currentTotal) {
-				endTotal += 24 * 60;
-			}
-
-			const remainingMinutes = endTotal - currentTotal;
-			
-			if (remainingMinutes <= 0) return '';
-
-			const hours = Math.floor(remainingMinutes / 60);
-			const minutes = remainingMinutes % 60;
-
-			if (hours > 0 && minutes > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''} ${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			} else if (hours > 0) {
-				return `${hours} hour${hours !== 1 ? 's' : ''}`;
-			} else {
-				return `${minutes} minute${minutes !== 1 ? 's' : ''}`;
-			}
-		} catch (error) {
-			return '';
-		}
-	};
-
-	// Weekend/Holiday check
-	const isWeekendOrHoliday = (dayOfWeek, todayDate) => {
-		const weekendDaysArray = weekendDays || [];
-		if (weekendDaysArray.includes(dayOfWeek.toString())) return 'Weekend';
-		if (holidays && holidays.includes(todayDate)) return 'Holiday';
-		return null;
-	};
-
-	// Time status calculation
-	const calculateTimeStatus = (currentTimeStr, startTime, endTime) => {
-		const [currentHours, currentMinutes] = currentTimeStr.split(':').map(Number);
-		const [startHours, startMinutes] = startTime.split(':').map(Number);
-		const [endHours, endMinutes] = endTime.split(':').map(Number);
-
-		let currentTotal = currentHours * 60 + currentMinutes;
-		let startTotal = startHours * 60 + startMinutes;
-		let endTotal = endHours * 60 + endMinutes;
-
-		if (endTotal < startTotal) {
-			endTotal += 24 * 60;
-			if (currentTotal < startTotal) currentTotal += 24 * 60;
-		}
-
-		return currentTotal >= startTotal && currentTotal <= endTotal ? 'Open' : 'Closed';
-	};
-
-	// Get next weekday after weekend
-	const getNextWeekdayName = () => {
-		const now = new Date();
-		let next = new Date(now);
-		const weekends = weekendDays || [];
-		do {
-			next.setDate(next.getDate() + 1);
-		} while (weekends.includes(next.getDay().toString()));
-		return next.toLocaleDateString('en-US', { weekday: 'long' });
-	};
-
-	// Get next date after holiday
-	const getNextDateAfterHoliday = () => {
-		const now = new Date();
-		let next = new Date(now);
-		const weekends = weekendDays || [];
-		const holidaysArr = holidays || [];
-		do {
-			next.setDate(next.getDate() + 1);
-		} while (
-			weekends.includes(next.getDay().toString()) || 
-			holidaysArr.includes(next.toISOString().split('T')[0])
-		);
-		return next.toLocaleDateString('en-US', { 
-			weekday: 'long', 
-			month: 'long', 
-			day: 'numeric' 
-		});
-	};
-
-	// Get current office status
-	const getCurrentOfficeStatus = () => {
-		const effectiveTimezone = getEffectiveTimezone();
-		if (!effectiveTimezone) return 'Closed';
-
-		const effectiveHours = getEffectiveOfficeHours();
-		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-		
-		const isValidTime = (time) => {
-			if (!time) return false;
-			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
-			return timeRegex.test(time);
-		};
-
-		if (!isValidTime(effectiveStartTime) || !isValidTime(effectiveEndTime)) {
-			return 'Closed';
-		}
-
-		try {
-			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
-
-			const closedReason = isWeekendOrHoliday(dayOfWeek, todayDate);
-			if (closedReason) return closedReason;
-
-			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
-				hour12: false
-			});
-
-			return calculateTimeStatus(currentTimeStr, effectiveStartTime, effectiveEndTime);
-		} catch (error) {
-			return 'Closed';
-		}
-	};
-
-	// Main dynamic message
-	const getDisplayMessage = () => {
-		try {
-			const effectiveTimezone = getEffectiveTimezone();
-			const now = new Date();
-			const dayOfWeek = now.getDay();
-			const todayDate = now.toISOString().split('T')[0];
-			const weekends = weekendDays || [];
-			const holidaysArr = holidays || [];
-
-			// Check for weekend
-			if (weekends.includes(dayOfWeek.toString())) {
-				const nextWeekday = getNextWeekdayName();
-				return `Weekend. ${beforeTimeText || 'Will start at'} ${formatTimeForDisplay(getEffectiveOfficeHours().startTime)}, ${nextWeekday}`;
-			}
-
-			// Check for holiday
-			if (holidaysArr.includes(todayDate)) {
-				const nextDate = getNextDateAfterHoliday();
-				return `Holiday. ${beforeTimeText || 'Will start at'} ${formatTimeForDisplay(getEffectiveOfficeHours().startTime)}, ${nextDate}`;
-			}
-
-			// Regular office hours check
-			const effectiveHours = getEffectiveOfficeHours();
-			const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-			
-			const currentTimeStr = now.toLocaleTimeString('en-US', { 
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
-				hour12: false 
-			});
-			
-			const status = calculateTimeStatus(currentTimeStr, effectiveStartTime, effectiveEndTime);
-			const remaining = getRemainingTime();
-			
-			if (status === 'Open') {
-				return `${afterTimeText || 'Will close at'} ${formatTimeForDisplay(effectiveEndTime)}, Left: ${remaining}`;
-			} else {
-				return `${beforeTimeText || 'Will start at'} ${formatTimeForDisplay(effectiveStartTime)}, Left: ${remaining}`;
-			}
-		} catch (error) {
-			return 'Not Found';
-		}
-	};
-
-	// Calculate current values for static output
-	const displayLocation = location || 'Set Location Manually';
-	const effectiveTimezone = getEffectiveTimezone();
-	const displayTimezone = timezoneMode === 'auto' ? 
-		getFormattedTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
-		getFormattedTimezone(timezone);
-	
-	const currentTime = getCurrentTimeInTimezone();
-	const displaySeparator = separator || ' | ';
-	const currentStatus = getCurrentOfficeStatus();
-	const statusType = currentStatus === 'Open' ? 'open' : 'closed';
-	const statusText = currentStatus === 'Open' ? 
-		(openStatusText || 'Open') : 
-		(closedStatusText || 'Closed');
-	const displayMessage = getDisplayMessage();
-
-	return (
-		<div {...blockProps}>
-			<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>
-				<div className='fb-timezone-wrapper'>
-					<div className='fb-location-timezone'>
-						<RichText.Content
-							tagName="span"
-							value={displayLocation}
-							className="fb-location-name"
-						/>
-						{showSeparatorSwitcher && (
-							<span className='fb-timezone-separator'>{displaySeparator}</span>
-						)}
-						<span className='fb-current-time'>{currentTime}</span>
-						<span className='fb-current-timezone'>{displayTimezone}</span>
-					</div>
-				</div>
-				{showStatusSwitcher && (
+    return (
+        <div {...blockProps} 
+            data-timezone={timezone || 'Asia/Dhaka'}
+            data-timezone-mode={timezoneMode || 'auto'}
+            data-use-utc={useUTCTimezoneFormat || false}
+            data-time-format={timeFormat || 'hh:mm A'}
+            data-start-time={startTime || '09:00'}
+            data-end-time={endTime || '17:00'}
+            data-use-monthly-schedule={useMonthlySchedule || false}
+            data-monthly-schedules={JSON.stringify(monthlySchedules || [])}
+            data-weekend-days={JSON.stringify(weekendDays || [])}
+            data-holidays={JSON.stringify(holidays || [])}
+            data-show-remaining-time={showRemainingTime || false}
+            data-remaining-time-label={remainingTimeLabel || 'Left: '}
+            data-remaining-time-format={remainingTimeFormat || 'hours-minutes'}
+            data-before-time-text={beforeTimeText || 'Will start at'}
+            data-after-time-text={afterTimeText || 'Will close at'}
+            data-weekend-message={weekendMessage || 'Weekend'}
+            data-holiday-message={holidayMessage || 'Holiday'}
+            data-open-status-text={openStatusText || 'Open'}
+            data-closed-status-text={closedStatusText || 'Closed'}
+        >
+            <div className="fb-timezone-container">
+                <div className='fb-timezone-wrapper'>
+                    <div className='fb-location-timezone'>
+                        {useCustomLocation ? (
+                            <RichText.Content
+                                tagName="span"
+                                value={displayLocation}
+                                className="fb-location-name"
+                            />
+                        ) : (
+                            <span className="fb-location-name">{displayLocation}</span>
+                        )}
+                        
+                        {showSeparatorSwitcher && (
+                            <span className='fb-timezone-separator'>{displaySeparator}</span>
+                        )}
+                        
+                        <span className='fb-current-time'>Loading time...</span>
+                        
+                        {showTimezoneOffset && (
+                            <span className='fb-timezone-offset'>{timezoneOffset}</span>
+                        )}
+                    </div>
+                </div>
+                
+                {showStatusSwitcher && (
 					<div className='fb-timezone-status-wrapper'>
-						<div className='fb-timezone-status-info-box'>
-							<div className={statusType === 'open' ? 'fb-time-pulse-open' : 'fb-time-pulse-close'}>
-								<span className='fb-timezone-status'>{statusText}</span>
+						<div className={'fb-timezone-status-info-box'}>
+							<div className="fb-time-pulse">
+								<span className='fb-timezone-status'>Loading...</span>
 							</div>
 							<div className='fb-timezone-status-info'>
-								<span className='fb-timezone-info-noted'>
-									{displayMessage}
-								</span>
+								<span className='fb-timezone-info-noted'>Loading status information...</span>
 							</div>
 						</div>
 					</div>
 				)}
-			</div>
-		</div>
-	);
+            </div>
+        </div>
+    );
 }
