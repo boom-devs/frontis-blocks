@@ -154,6 +154,10 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 ? templateMetaPostEdit
                 : {};
         const global = globalSettings || {};
+        
+        console.log('[Template Fallback] Key:', key);
+        console.log('[Template Fallback] Template Meta:', tpl);
+        console.log('[Template Fallback] Global Settings:', global);
 
         switch (key) {
             case '_frontis_meta_header_display':
@@ -474,20 +478,25 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     // Post editor → ei post kon template use korse tar settings nao
     const checkPostPageTemplateMeta = () => {
-        if (whichEditor === 'post') {
+        if (whichEditor === 'post' && currentPostId) {
             wp.apiFetch({
                 path: `frontis/v1/template?id=${currentPostId}`,
                 method: 'GET',
             })
                 .then((response) => {
+                    console.log('[Template Sync] Template settings fetched:', response);
                     if (response && typeof response === 'object') {
-                        setTemplateMetaPostEdit(response);
+                        // Ensure we have a valid object, even if empty
+                        const templateSettings = response || {};
+                        console.log('[Template Sync] Setting templateMetaPostEdit:', templateSettings);
+                        setTemplateMetaPostEdit(templateSettings);
                     } else {
+                        console.log('[Template Sync] Empty response, setting empty object');
                         setTemplateMetaPostEdit({});
                     }
                 })
                 .catch((error) => {
-                    console.error('Error fetching template settings:', error);
+                    console.error('[Template Sync] Error fetching template settings:', error);
                     setTemplateMetaPostEdit({});
                 });
         }
