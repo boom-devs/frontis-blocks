@@ -37,7 +37,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneGlobalWraperClass} ${
+        className: `frontis-block fb-timezone-main-wrapper ${blockID} ${
             timezoneDesktopSwitcher ? 'fb-desktop-responsive' : ''
         } ${timezoneTabletSwitcher ? 'fb-tablet-responsive' : ''} ${
             timezoneMobileSwitcher ? 'fb-mobile-responsive' : ''
@@ -133,7 +133,7 @@ export default function Save({ attributes }) {
             data-open-status-text={openStatusText || 'Open'}
             data-closed-status-text={closedStatusText || 'Closed'}
         >
-            <div className="fb-timezone-container">
+            <div className={`fb-timezone-container ${timezoneGlobalWraperClass}`}>
                 <div className='fb-timezone-wrapper'>
                     <div className='fb-location-timezone'>
                         {useCustomLocation ? (
