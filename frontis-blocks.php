@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define things
 define( 'FB_PLUGIN_FILE', __FILE__ );
-define( 'PORTAL_API', 'https://template-library.boomdevshub.com' );
+define( 'PORTAL_API', 'https://bacciform-voluminously-ingrid.ngrok-free.dev' );
 define( 'WORDPRESS_SYNC_API', 'https://frontis-sync.boomdevshub.com' );
 
 /**
