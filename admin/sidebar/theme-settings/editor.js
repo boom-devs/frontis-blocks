@@ -23,32 +23,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
 
-    const [templateMeta, setTemplateMeta] = useState({
-        disableHeader: false,
-        disableFooter: false,
-        stickyHeader: false,
-        stickyHeaderOffset: 0,
-        transparentHeader: false,
-        scrollToTop: false,
-        smoothScroll: false,
-        relatedPosts: false,
-        authorBox: false,
-        lazyLoading: false,
-        stickyHeaderColor: null,
-        transparentHeaderColor: 'transparent',
-    });
+    // 🔹 TEMPLATE META
+    // IMPORTANT: default empty object, jate global fallback kaj kore
+    const [templateMeta, setTemplateMeta] = useState({});
 
     // template meta DB theke load shesh hoise kina
     const [isTemplateMetaLoaded, setIsTemplateMetaLoaded] = useState(false);
 
-    // Global settings
-    const [globalLazyLoading, setGlobalLazyLoading] = useState(false);
-    const [globalTransparentHeader, setGlobalTransparentHeader] =
-        useState(false);
-    const [globalStickyHeader, setGlobalStickyHeader] = useState(false);
-
-    // Template settings for the template used by this post/page
-    const [templateMetaPostEdit, setTemplateMetaPostEdit] = useState({
+    // 🔹 GLOBAL SETTINGS (read-only for metabox)
+    const [globalSettings, setGlobalSettings] = useState({
         disableHeader: false,
         disableFooter: false,
         stickyHeader: false,
@@ -62,6 +45,14 @@ const FrontisMetaBox = ({ whichEditor }) => {
         stickyHeaderColor: null,
         transparentHeaderColor: 'transparent',
     });
+
+    // convenience flags
+    const globalLazyLoading = globalSettings.lazyLoading;
+    const globalTransparentHeader = globalSettings.transparentHeader;
+    const globalStickyHeader = globalSettings.stickyHeader;
+
+    // Template settings for the template used by this post/page
+    const [templateMetaPostEdit, setTemplateMetaPostEdit] = useState({});
 
     const [postId, setPostId] = useState();
 
@@ -70,22 +61,31 @@ const FrontisMetaBox = ({ whichEditor }) => {
         []
     );
 
-    // Load global settings
+    // 🔹 Load GLOBAL settings (FrontisThemeSiteEditor theke save kora option)
     useEffect(() => {
-        apiFetch({ path: 'frontis/v1/global-settings' }).then((settings) => {
-            setGlobalLazyLoading(settings.lazyLoading);
-            setGlobalTransparentHeader(settings.transparentHeader);
-            setGlobalStickyHeader(settings.stickyHeader);
-        });
+        apiFetch({ path: 'frontis/v1/global-settings' })
+            .then((settings) => {
+                if (settings && typeof settings === 'object') {
+                    setGlobalSettings((prev) => ({
+                        ...prev,
+                        ...settings,
+                    }));
+                }
+            })
+            .catch((error) => {
+                console.error('Error fetching global settings:', error);
+            });
     }, []);
 
     const updateSetting = (settingName, value) => {
         if (postType === 'wp_template') {
+            // Template editor → frontis_template_options
             setTemplateMeta((prev) => ({
                 ...prev,
                 [settingName]: value,
             }));
         } else {
+            // Normal post/page → post meta
             setMeta({
                 ...(meta || {}),
                 [settingName]: value,
@@ -94,43 +94,93 @@ const FrontisMetaBox = ({ whichEditor }) => {
     };
 
     /**
-     * Template → Post fallback mapping
+     * Template → Post fallback mapping (template + global)
      */
     const getTemplateFallbackValue = (key) => {
-        if (
-            !templateMetaPostEdit ||
-            typeof templateMetaPostEdit !== 'object'
-        ) {
-            return false;
-        }
+        const tpl =
+            templateMetaPostEdit && typeof templateMetaPostEdit === 'object'
+                ? templateMetaPostEdit
+                : {};
+        const global = globalSettings || {};
 
         switch (key) {
             case '_frontis_meta_header_display':
-                return templateMetaPostEdit.disableHeader ?? false;
+                if (Object.prototype.hasOwnProperty.call(tpl, 'disableHeader')) {
+                    return tpl.disableHeader ?? false;
+                }
+                return global.disableHeader ?? false;
 
             case '_frontis_meta_footer_display':
-                return templateMetaPostEdit.disableFooter ?? false;
+                if (Object.prototype.hasOwnProperty.call(tpl, 'disableFooter')) {
+                    return tpl.disableFooter ?? false;
+                }
+                return global.disableFooter ?? false;
 
             case '_frontis_meta_site_title_display':
-                return templateMetaPostEdit.disablePageTitle ?? false;
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'disablePageTitle'
+                    )
+                ) {
+                    return tpl.disablePageTitle ?? false;
+                }
+                return false;
 
             case '_frontis_meta_sticky_header':
-                return templateMetaPostEdit.stickyHeader ?? false;
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'stickyHeader'
+                    )
+                ) {
+                    return tpl.stickyHeader ?? false;
+                }
+                return global.stickyHeader ?? false;
 
             case '_frontis_meta_transparent_header':
-                return templateMetaPostEdit.transparentHeader ?? false;
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'transparentHeader'
+                    )
+                ) {
+                    return tpl.transparentHeader ?? false;
+                }
+                return global.transparentHeader ?? false;
 
             case '_frontis_meta_sticky_bg_color':
-                return templateMetaPostEdit.stickyHeaderColor ?? '';
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'stickyHeaderColor'
+                    )
+                ) {
+                    return tpl.stickyHeaderColor ?? '';
+                }
+                return global.stickyHeaderColor ?? '';
 
             case '_frontis_meta_transparent_bg_color':
-                return (
-                    templateMetaPostEdit.transparentHeaderColor ??
-                    'transparent'
-                );
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'transparentHeaderColor'
+                    )
+                ) {
+                    return tpl.transparentHeaderColor ?? 'transparent';
+                }
+                return global.transparentHeaderColor ?? 'transparent';
 
             case '_frontis_meta_lazy_load':
-                return templateMetaPostEdit.lazyLoading ?? false;
+                if (
+                    Object.prototype.hasOwnProperty.call(
+                        tpl,
+                        'lazyLoading'
+                    )
+                ) {
+                    return tpl.lazyLoading ?? false;
+                }
+                return global.lazyLoading ?? false;
 
             default:
                 return false;
@@ -138,23 +188,56 @@ const FrontisMetaBox = ({ whichEditor }) => {
     };
 
     /**
-     * Helper: meta value with template fallback
-     * Template editor: শুধু templateMeta
-     * Post/Page editor: post meta → না থাকলে template fallback
+     * Helper: meta value with template + global fallback
      */
     const getMetaValue = (key, defaultValue = false) => {
         if (!key) return defaultValue;
 
         // ===== TEMPLATE EDITOR =====
         if (postType === 'wp_template') {
-            if (!templateMeta || typeof templateMeta !== 'object') {
-                console.log('[getMetaValue][TEMPLATE] key=', key, '→ default', defaultValue);
-                return defaultValue;
+            const tpl = templateMeta || {};
+
+            const hasTplKey =
+                tpl &&
+                typeof tpl === 'object' &&
+                Object.prototype.hasOwnProperty.call(tpl, key);
+
+            if (hasTplKey) {
+                const val = tpl[key];
+                console.log(
+                    '[getMetaValue][TEMPLATE] key=',
+                    key,
+                    '→ TEMPLATE META',
+                    val
+                );
+                return val ?? defaultValue;
             }
 
-            const val = templateMeta[key] ?? defaultValue;
-            console.log('[getMetaValue][TEMPLATE] key=', key, '→', val);
-            return val;
+            // 🔹 fallback to global (sync from global if template e value nai)
+            const global = globalSettings || {};
+            const hasGlobalKey =
+                global &&
+                typeof global === 'object' &&
+                Object.prototype.hasOwnProperty.call(global, key);
+
+            if (hasGlobalKey) {
+                const val = global[key];
+                console.log(
+                    '[getMetaValue][TEMPLATE] key=',
+                    key,
+                    '→ GLOBAL FALLBACK',
+                    val
+                );
+                return val ?? defaultValue;
+            }
+
+            console.log(
+                '[getMetaValue][TEMPLATE] key=',
+                key,
+                '→ DEFAULT',
+                defaultValue
+            );
+            return defaultValue;
         }
 
         // ===== PAGE / POST EDITOR =====
@@ -166,18 +249,33 @@ const FrontisMetaBox = ({ whichEditor }) => {
         const raw = hasMetaKey ? meta[key] : undefined;
 
         if (hasMetaKey) {
-            console.log('[getMetaValue][POST] key=', key, '→ using POST META', raw);
+            console.log(
+                '[getMetaValue][POST] key=',
+                key,
+                '→ using POST META',
+                raw
+            );
             return raw ?? defaultValue;
         }
 
-        // Ei page e kono explicit meta nai → template fallback use korbo
+        // Ei page e kono explicit meta nai → template + global fallback use korbo
         if (whichEditor === 'post') {
             const fallback = getTemplateFallbackValue(key);
-            console.log('[getMetaValue][POST] key=', key, '→ using TEMPLATE FALLBACK', fallback);
+            console.log(
+                '[getMetaValue][POST] key=',
+                key,
+                '→ using TEMPLATE/GLOBAL FALLBACK',
+                fallback
+            );
             return fallback ?? defaultValue;
         }
 
-        console.log('[getMetaValue][POST] key=', key, '→ using DEFAULT', defaultValue);
+        console.log(
+            '[getMetaValue][POST] key=',
+            key,
+            '→ using DEFAULT',
+            defaultValue
+        );
         return defaultValue;
     };
 
@@ -199,7 +297,7 @@ const FrontisMetaBox = ({ whichEditor }) => {
             }
 
             setPostId(dbId);
-            setIsTemplateMetaLoaded(false); // notun template load hocche
+            setIsTemplateMetaLoaded(false);
 
             wp.apiFetch({
                 path: `frontis/v1/template-settings?post_id=${dbId}`,
@@ -209,16 +307,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
                     console.log('template-settings GET :', response);
 
                     if (response && typeof response === 'object') {
-                        // default er sathe merge korbo
-                        setTemplateMeta((prev) => ({
-                            ...prev,
-                            ...response,
-                        }));
+                        setTemplateMeta(response);
+                    } else {
+                        setTemplateMeta({});
                     }
                     setIsTemplateMetaLoaded(true);
                 })
                 .catch((error) => {
                     console.error('Error fetching template settings:', error);
+                    setTemplateMeta({});
                     setIsTemplateMetaLoaded(true);
                 });
         } else {
@@ -254,12 +351,15 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 method: 'GET',
             })
                 .then((response) => {
-                    if (response) {
+                    if (response && typeof response === 'object') {
                         setTemplateMetaPostEdit(response);
+                    } else {
+                        setTemplateMetaPostEdit({});
                     }
                 })
                 .catch((error) => {
                     console.error('Error fetching template settings:', error);
+                    setTemplateMetaPostEdit({});
                 });
         }
     };
@@ -305,6 +405,8 @@ const FrontisMetaBox = ({ whichEditor }) => {
             meta?._frontis_meta_header_display
         );
         console.log('FINAL headerDisabled (UI)            :', headerDisabled);
+        console.log('GLOBAL SETTINGS                      :', globalSettings);
+        console.log('TEMPLATE META                        :', templateMeta);
     }, [
         currentPostId,
         postType,
@@ -312,6 +414,8 @@ const FrontisMetaBox = ({ whichEditor }) => {
         templateMetaPostEdit.disableHeader,
         meta,
         headerDisabled,
+        globalSettings,
+        templateMeta,
     ]);
 
     return (
