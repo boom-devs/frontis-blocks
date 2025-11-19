@@ -274,7 +274,6 @@
             }
 
             .fb-advanced-mega-menu-panel {
-                display: none;
                 position: static;
                 width: 100%;
                 max-height: none;
@@ -315,9 +314,12 @@
         padding: 1rem;
         overflow-y: auto;
         gap: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
 
         &.active {
             display: flex;
+            transform: translateX(0);
         }
         
         .fb-advanced-mega-menu-toggle {
@@ -335,7 +337,6 @@
         }
 
         .fb-advanced-mega-menu-panel {
-            display: none;
             position: static;
             width: 100%;
             max-height: none;
@@ -384,15 +385,4 @@
 .fb-advanced-mega-menu-item:focus-within {
     outline: 2px solid #2563eb;
     outline-offset: 2px;
-}
-
-@media only screen and (max-width: 1024px) {
-    .fb-advanced-mega-menu-list {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        
-        &.active {
-            transform: translateX(0);
-        }
-    }
 }
