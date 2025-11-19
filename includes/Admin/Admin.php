@@ -755,8 +755,34 @@ class Admin {
         }
     
         $fields = (array) $request->get_param( 'setting' );
+        
+        // Ensure boolean values are properly saved (not converted to empty strings)
+        // WordPress update_post_meta can have issues with false values
+        foreach ( $fields as $key => $value ) {
+            if ( $value === false || $value === 'false' || $value === 0 || $value === '0' ) {
+                $fields[ $key ] = false; // Explicitly set to false
+            } elseif ( $value === true || $value === 'true' || $value === 1 || $value === '1' ) {
+                $fields[ $key ] = true; // Explicitly set to true
+            }
+        }
+        
+        // Debug logging
+        error_log( '[Frontis Template Save] Saving template settings for post ID: ' . $post_id );
+        error_log( '[Frontis Template Save] Settings to save (raw): ' . print_r( $request->get_param( 'setting' ), true ) );
+        error_log( '[Frontis Template Save] Settings to save (processed): ' . print_r( $fields, true ) );
+        error_log( '[Frontis Template Save] Meta key: frontis_template_options' );
     
-        update_post_meta( $post_id, 'frontis_template_options', $fields );
+        $result = update_post_meta( $post_id, 'frontis_template_options', $fields );
+        
+        // Verify the save
+        $saved_settings = get_post_meta( $post_id, 'frontis_template_options', true );
+        error_log( '[Frontis Template Save] Save result: ' . ( $result ? 'SUCCESS' : 'FAILED' ) );
+        error_log( '[Frontis Template Save] Verified settings: ' . ( $saved_settings ? print_r( $saved_settings, true ) : 'EMPTY' ) );
+        
+        // Double-check: if saved settings are empty but we tried to save, log warning
+        if ( empty( $saved_settings ) && ! empty( $fields ) ) {
+            error_log( '[Frontis Template Save] ⚠️ WARNING: Settings were not saved properly!' );
+        }
     
         return rest_ensure_response( 'success' );
     }
