@@ -243,34 +243,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const [patterns, setPatterns] = useState([]);
 
     const patternData = useSelect((select) => {
-        const allPatterns = select('core').getBlockPatterns() || [];
-
         let userPatterns = [];
         const blocks = select('core')?.getEntityRecords('postType', 'wp_block', { per_page: -1 });
         if (blocks) {
             userPatterns = blocks.filter((block) => block.wp_pattern_category);
         }
 
-        return { allPatterns, userPatterns };
+        return { userPatterns };
     }, []);
 
     useEffect(() => {
         const patternOptions = [{ value: '', label: __('Select a pattern', 'frontis-blocks') }];
 
-        if (patternData.allPatterns?.length) {
-            patternOptions.push(
-                { value: 'core-separator', label: '--- Theme Patterns ---', disabled: true },
-                ...patternData.allPatterns.map((pattern) => ({
-                    value: pattern.name,
-                    label: pattern.title || pattern.name,
-                    content: pattern.content
-                }))
-            );
-        }
-
         if (patternData.userPatterns?.length) {
             patternOptions.push(
-                { value: 'user-separator', label: '--- User Patterns ---', disabled: true },
                 ...patternData.userPatterns.map((pattern) => ({
                     value: pattern.id,
                     label: pattern.title?.raw || `Pattern ${pattern.id}`,
@@ -1094,15 +1080,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${megaMenuAlignment?.Desktop ? `justify-content: ${megaMenuAlignment?.Desktop};` : ''}
         }
         .${blockId} .fb-advanced-mega-menu-wrapper ul .fb-advanced-mega-menu-item {
-            ${megaMenuDesktopPaddingWidth && megaMenuDesktopPadding?.top ? `padding: ${megaMenuDesktopPaddingWidth};` : ''}
-            ${megaMenuDesktopMarginWidth && megaMenuDesktopMargin?.top ? `margin: ${megaMenuDesktopMarginWidth};` : ''}
-            ${megaMenuBorder ? `border: ${megaMenuBorder};` : ''}
-            ${megaMenuDesktopBorderWidth && megaMenuDesktopBorder?.top ? `border-width: ${megaMenuDesktopBorderWidth};` : ''}
-            ${megaMenuDesktopBorderRadiusWidth && megaMenuDesktopBorderRadius?.top ? `border-radius: ${megaMenuDesktopBorderRadiusWidth};` : ''}
-            ${megaMenuBorderColor ? `border-color: ${megaMenuBorderColor};` : ''}
-        }
-        .${blockId} .fb-advanced-mega-menu-wrapper ul .fb-advanced-mega-menu-item:hover {
-            ${megaMenuBorderHoverColor ? `border-color: ${megaMenuBorderHoverColor};` : ''}
+            
         }
         .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-link {
                 ${megaMenuGlobalTypoSwitcher?.fontFamily === true && megaMenuGlobalTypographyData?.fontFamily ? `font-family: ${megaMenuGlobalTypographyData?.fontFamily};` : ''}
@@ -1122,6 +1100,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${megaMenuGlobalTypoSwitcher?.textDecoration === false && megaMenuTextDecoration ? `text-decoration: ${megaMenuTextDecoration};` : ''}
                 ${megaMenuGlobalTypoSwitcher?.letterSpacing === false && megaMenuLetterSpacing?.Desktop && megaMenuLetterSpacingUnits?.Desktop ? `letter-spacing: ${megaMenuLetterSpacing?.Desktop}${megaMenuLetterSpacingUnits?.Desktop};` : ''}
                 ${megaMenuGlobalTypoSwitcher?.lineHeight === false && megaMenuLineHeight?.Desktop && megaMenuLineHeightUnits?.Desktop ? `line-height: ${megaMenuLineHeight?.Desktop}${megaMenuLineHeightUnits?.Desktop};` : ''}
+                ${megaMenuDesktopPaddingWidth && megaMenuDesktopPadding?.top ? `padding: ${megaMenuDesktopPaddingWidth};` : ''}
+                ${megaMenuDesktopMarginWidth && megaMenuDesktopMargin?.top ? `margin: ${megaMenuDesktopMarginWidth};` : ''}
+                ${megaMenuBorder ? `border: ${megaMenuBorder};` : ''}
+                ${megaMenuDesktopBorderWidth && megaMenuDesktopBorder?.top ? `border-width: ${megaMenuDesktopBorderWidth};` : ''}
+                ${megaMenuDesktopBorderRadiusWidth && megaMenuDesktopBorderRadius?.top ? `border-radius: ${megaMenuDesktopBorderRadiusWidth};` : ''}
+                ${megaMenuBorderColor ? `border-color: ${megaMenuBorderColor};` : ''}
                 ${megaMenuColor ? `color: ${megaMenuColor};` : ''}
                 gap: ${megaMenuIconGap?.Desktop}${megaMenuIconGapUnits?.Desktop};
                 ${megaMenuTextColorType === 'gradient' ? `
@@ -1135,14 +1119,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 : megaMenuTextBackgroundGradientColor
             };`
             : megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''
-        }
-                ${megaMenuBoxShadowCssValue ? `box-shadow: ${megaMenuBoxShadowCssValue};` : ''}
-                transition: all .3s ease-in-out;
             }
+            ${megaMenuBoxShadowCssValue ? `box-shadow: ${megaMenuBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
         }
-
-        .${blockId} .fb-advanced-mega-menu-link:hover {
-            ${megaMenuHoverColor ? `color: ${megaMenuHoverColor};` : ''}
+        
+        
+        .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-link:hover{
+            ${megaMenuHoverColor ? `color: ${megaMenuHoverColor} !important;` : ''}
+            ${megaMenuBorderHoverColor ? `border-color: ${megaMenuBorderHoverColor};` : ''}
             ${megaMenuTextHoverColorType === 'gradient' ? `
                 background: ${megaMenuTextHoverCustomGradientColorSwitcher && megaMenuTextHoverCustomGradientColor ? megaMenuTextHoverCustomGradientColor : megaMenuTextHoverGradientColor};
                 ${megaMenuTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
@@ -1153,8 +1138,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? megaMenuTextBackgroundHoverCustomGradientColor
                 : megaMenuTextBackgroundHoverGradientColor
             };`
-            : megaMenuTextBackgroundColor ? `background: ${megaMenuTextBackgroundColor};` : ''
-        }
+            : megaMenuTextBackgroundHoverColor ? `background: ${megaMenuTextBackgroundHoverColor};` : ''
+            }
         }
         .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-panel{
             ${megaMenuWidthSwitcher === "content"
@@ -1162,12 +1147,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             position: absolute;
                 ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Desktop}${megaMenuContentWidthValueUnits?.Desktop};` : ''}
             `
-                    : megaMenuWidthSwitcher === "full"
-                        ? `
+            : megaMenuWidthSwitcher === "full"
+                ? `
                     position: fixed;
                     width: 100%;
                 `
-                        : ''
+                : ''
             }
         }
         .${blockId} .fb-advanced-mega-menu-link .fb-advanced-mega-menu-indicator svg{
@@ -1243,7 +1228,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     `, [
         blockId,
         blockStyle,
-        attributes
+        attributes,
+        megaMenuDesktopPaddingWidth,
+        megaMenuTabletPaddingWidth,
+        megaMenuMobilePaddingWidth,
+        megaMenuDesktopMarginWidth,
+        megaMenuTabletMarginWidth,
+        megaMenuMobileMarginWidth,
+        megaMenuDesktopBorderWidth,
+        megaMenuTabletBorderWidth,
+        megaMenuMobileBorderWidth,
+        megaMenuDesktopBorderRadiusWidth,
+        megaMenuTabletBorderRadiusWidth,
+        megaMenuMobileBorderRadiusWidth,
+        globalDesktopPadding,
+        globalTabletPadding,
+        globalMobilePadding,
+        globalDesktopMargin,
+        globalTabletMargin,
+        globalMobileMargin,
+        globalDesktopBorderWidth,
+        globalTabletBorderWidth,
+        globalMobileBorderWidth,
+        globalDesktopBorderRadiusWidth,
+        globalTabletBorderRadiusWidth,
+        globalMobileBorderRadiusWidth,
     ]);
 
     const customCss = getCustomCss(megaMenuGlobalCustomCSS, `.${blockId}`);
@@ -1256,7 +1265,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const generalControls = (
         <>
-            <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={true}>
+            <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={false}>
                 <SelectControl
                     label={__('Trigger Type', 'frontis-blocks')}
                     value={triggerType}
@@ -2078,7 +2087,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </PanelBody>
                     <PanelBody
                         title={__("Responsive Control", "frontis-blocks")}
-                        initialOpen={true}
+                        initialOpen={false}
                         className="fb-setting-responsive-control-wrapper"
                     >
                         <FB_VisibilityControl
