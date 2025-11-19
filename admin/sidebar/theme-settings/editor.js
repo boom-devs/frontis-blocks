@@ -493,6 +493,25 @@ const FrontisMetaBox = ({ whichEditor }) => {
         }
     };
 
+    // 🔹 Post editor → Template settings real-time sync (template change হলে page editor এ sync হবে)
+    useEffect(() => {
+        // শুধুমাত্র post editor এ কাজ করবে, template editor এ নয়
+        if (whichEditor === 'post' && postType !== 'wp_template' && currentPostId) {
+            const fetchTemplateSettings = () => {
+                checkPostPageTemplateMeta();
+            };
+
+            // Initial load
+            fetchTemplateSettings();
+
+            // Template settings change হলে sync হবে (every 2 seconds)
+            const intervalId = setInterval(fetchTemplateSettings, 2000);
+
+            return () => clearInterval(intervalId);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [whichEditor, postType, currentPostId]);
+
     const isTemplateEditor = postType === 'wp_template';
 
     const headerDisabled = isTemplateEditor
