@@ -169,7 +169,7 @@ const attributes = {
 	timezoneLocationTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -264,7 +264,7 @@ const attributes = {
 	timezoneTimeTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -359,7 +359,7 @@ const attributes = {
 	timezoneTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '14',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -435,7 +435,8 @@ const attributes = {
         default: 'classic',
     },
 	 locationNameTextColor : {
-        type: 'string'
+        type: 'string',
+        default: '#fff'
     },
     locationNameTextHoverColor: {
         type: 'string',
@@ -473,6 +474,14 @@ const attributes = {
             Mobile: '',
         },
     },
+	timezoneCardAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'center',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
 
 	//Timezone Time text Color
 	timezoneTimeTextColorTypeSwitcher: {
@@ -488,7 +497,8 @@ const attributes = {
         default: 'classic',
     },
 	 timezoneTimeTextColor : {
-        type: 'string'
+        type: 'string',
+        default: '#fff'
     },
     timezoneTimeTextHoverColor: {
         type: 'string',
@@ -532,7 +542,8 @@ const attributes = {
         default: 'classic',
     },
 	 timezoneTextColor : {
-        type: 'string'
+        type: 'string',
+        default: '#b1ababff'
     },
     timezoneTextHoverColor: {
         type: 'string',
@@ -581,7 +592,7 @@ const attributes = {
     },
 	separatorColor: {
         type: 'string',
-        default: '',
+        default: '#fff',
     },
     separatorHoverColor: {
         type: 'string',
@@ -594,7 +605,7 @@ const attributes = {
     separatorSize: { 
         type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -623,6 +634,7 @@ const attributes = {
     },
     locationTimezoneBgColor: {
         type: 'string',
+        default: '#000000',
     },
     locationTimezoneBgHoverColor: {
         type: 'string',
@@ -719,10 +731,10 @@ const attributes = {
     locationTimezoneDesktopBorderRadius: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '999',
+            bottom: '999',
+            left: '999',
+            right: '999',
         },
     },
     locationTimezoneTabBorderRadius: {
@@ -768,10 +780,10 @@ const attributes = {
     locationTimezoneDesktopPadding: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '10',
+            bottom: '10',
+            left: '16',
+            right: '16',
         },
     },
     locationTimezoneTabPadding: {
@@ -853,8 +865,24 @@ const attributes = {
 			Mobile: 'px',
 		}
     },
+    timezoneCardSpacing: { 
+        type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '',
+			Mobile: ''
+		}
+    },
+    timezoneCardSpacingUnits: { 
+       	type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+    },
 
-	//Location info box BG Color
+	//Location info box On Status BG Color
 	infoBoxBgColorTypeSwitcher: {
         type: 'string',
         default: 'normal'
@@ -898,6 +926,50 @@ const attributes = {
         default: ''
     },
 
+	//Location info box closed status BG Color
+	infoBoxOffStatusBgColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    infoBoxOffStatusBgColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    infoBoxOffStatusBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    infoBoxOffStatusBgColor: {
+        type: 'string',
+    },
+    infoBoxOffStatusBgHoverColor: {
+        type: 'string',
+    },
+    infoBoxOffStatusBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    infoBoxOffStatusBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    infoBoxOffStatusBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    infoBoxOffStatusBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    infoBoxOffStatusBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    infoBoxOffStatusBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+
 	//location info box margin & padding
 	infoBoxPaddingUnits: {
 		type: 'object',
@@ -910,10 +982,10 @@ const attributes = {
     infoBoxDesktopPadding: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '2',
+            bottom: '2',
+            left: '2',
+            right: '12',
         },
     },
     infoBoxTabPadding: {
@@ -951,7 +1023,7 @@ const attributes = {
         default: {
             top: '0',
             bottom: '0',
-            left: '0',
+            left: '10',
             right: '0',
         },
     },
@@ -981,7 +1053,7 @@ const attributes = {
 	//location info box border & box shadow
 	infoBoxBorder: {
         type: 'string',
-        default: '',
+        default: 'solid',
     },
     infoBoxBorderColorSwitcher : {
         type: 'string',
@@ -989,9 +1061,21 @@ const attributes = {
     },
     infoBoxBorderColor: {
         type: 'string',
-        default: '',
+        default: '#008000',
     },
     infoBoxBorderHoverColor: {
+        type: 'string',
+        default: '',
+    },
+    infoBoxOffStatusBorderColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    infoBoxOffStatusBorderColor: {
+        type: 'string',
+        default: '#FF0000',
+    },
+    infoBoxOffStatusBorderHoverColor: {
         type: 'string',
         default: '',
     },
@@ -1006,10 +1090,10 @@ const attributes = {
     infoBoxDesktopBorder: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     infoBoxTabletBorder: {
@@ -1045,10 +1129,10 @@ const attributes = {
     infoBoxDesktopBorderRadius: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '999',
+            bottom: '999',
+            left: '999',
+            right: '999',
         },
     },
     infoBoxTabBorderRadius: {
@@ -1115,7 +1199,7 @@ const attributes = {
 	statusTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -1130,7 +1214,7 @@ const attributes = {
 	},
 	statusTextFontWeight : {
         type: 'string',
-        default: ''
+        default: '500'
     },
 	statusTextFontStyle : {
         type: 'string',
@@ -1237,10 +1321,10 @@ const attributes = {
     statusDesktopPadding: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '8',
+            bottom: '8',
+            left: '16',
+            right: '16',
         },
     },
     statusTabPadding: {
@@ -1331,10 +1415,10 @@ const attributes = {
     statusOpenDesktopBorderRadius: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '999',
+            bottom: '999',
+            left: '999',
+            right: '999',
         },
     },
     statusOpenTabBorderRadius: {
@@ -1487,7 +1571,7 @@ const attributes = {
 	noticeTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
