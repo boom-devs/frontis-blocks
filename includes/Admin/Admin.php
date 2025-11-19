@@ -659,7 +659,6 @@ class Admin {
 
     function frontis_get_post_template_data( \WP_REST_Request $request ) {
         $post_id = $request->get_param( 'id' );
-        $template_id = Helper::get_template_id($post_id);
         
         // Validate post_id
         if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
@@ -670,8 +669,27 @@ class Admin {
             );
         }
 
-        // Retrieve post meta for the given post_id
+        // Get template ID for this post
+        $template_id = Helper::get_template_id($post_id);
+        
+        // Debug logging (can be removed in production)
+        error_log( '[Frontis Template Sync] Post ID: ' . $post_id );
+        error_log( '[Frontis Template Sync] Template ID: ' . ( $template_id ? $template_id : 'NULL' ) );
+        
+        // If template ID is not found, return empty array
+        if ( empty( $template_id ) ) {
+            error_log( '[Frontis Template Sync] Template ID not found for post ID: ' . $post_id );
+            return rest_ensure_response( [] );
+        }
+
+        // Retrieve post meta for the template
         $settings = get_post_meta( $template_id, 'frontis_template_options', true );
+        
+        // Debug logging
+        error_log( '[Frontis Template Sync] Template settings found: ' . ( $settings ? 'YES' : 'NO' ) );
+        if ( $settings ) {
+            error_log( '[Frontis Template Sync] Settings: ' . print_r( $settings, true ) );
+        }
 
         // Return empty array if no settings found, or the settings themselves
         return rest_ensure_response( $settings ? $settings : [] );

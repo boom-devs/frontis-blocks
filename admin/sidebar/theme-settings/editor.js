@@ -479,24 +479,48 @@ const FrontisMetaBox = ({ whichEditor }) => {
     // Post editor → ei post kon template use korse tar settings nao
     const checkPostPageTemplateMeta = () => {
         if (whichEditor === 'post' && currentPostId) {
+            console.log('[Template Sync] Fetching template settings for post ID:', currentPostId);
+            console.log('[Template Sync] API URL: frontis/v1/template?id=' + currentPostId);
+            
             wp.apiFetch({
                 path: `frontis/v1/template?id=${currentPostId}`,
                 method: 'GET',
             })
                 .then((response) => {
-                    console.log('[Template Sync] Template settings fetched:', response);
-                    if (response && typeof response === 'object') {
-                        // Ensure we have a valid object, even if empty
-                        const templateSettings = response || {};
-                        console.log('[Template Sync] Setting templateMetaPostEdit:', templateSettings);
+                    console.log('[Template Sync] Raw API response:', response);
+                    console.log('[Template Sync] Response type:', typeof response);
+                    console.log('[Template Sync] Is array?', Array.isArray(response));
+                    console.log('[Template Sync] Response length:', Array.isArray(response) ? response.length : 'N/A');
+                    
+                    // Handle both array and object responses
+                    if (Array.isArray(response)) {
+                        // If response is an array, check if it's empty or has data
+                        if (response.length === 0) {
+                            console.warn('[Template Sync] Empty array received - template settings not found');
+                            setTemplateMetaPostEdit({});
+                        } else {
+                            // If array has data, use first element or convert to object
+                            const templateSettings = response[0] || {};
+                            console.log('[Template Sync] Using array data:', templateSettings);
+                            setTemplateMetaPostEdit(templateSettings);
+                        }
+                    } else if (response && typeof response === 'object') {
+                        // If response is an object
+                        const templateSettings = response;
+                        console.log('[Template Sync] Using object data:', templateSettings);
                         setTemplateMetaPostEdit(templateSettings);
                     } else {
-                        console.log('[Template Sync] Empty response, setting empty object');
+                        console.warn('[Template Sync] Invalid response format, setting empty object');
                         setTemplateMetaPostEdit({});
                     }
                 })
                 .catch((error) => {
                     console.error('[Template Sync] Error fetching template settings:', error);
+                    console.error('[Template Sync] Error details:', {
+                        message: error?.message,
+                        code: error?.code,
+                        data: error?.data
+                    });
                     setTemplateMetaPostEdit({});
                 });
         }
