@@ -49,7 +49,7 @@ const attributes = {
     },
     remainingTimeFormat: {
         type: 'string',
-        default: ''
+        default: 'hours-minutes'
     },
 	timezones: {
 		type: 'array',
@@ -91,10 +91,37 @@ const attributes = {
 		type: 'array',
 		default: []
 	},
+    useUTCTimezoneFormat: {
+        type: 'boolean', 
+        default: true
+    },
 	countdownMessage: {
 		type: 'string',
 		default: 'Will be finished in {time}'
 	},
+    openStatusText: {
+        type: 'string', 
+        default: 'Open'
+    },
+    closedStatusText: {
+        type: 'string', default: 'Closed'
+    },
+    beforeTimeText: {
+        type: 'string', 
+        default: 'Will start at'
+    },
+    afterTimeText: {
+        type: 'string', 
+        default: 'Will close at'
+    },
+    weekendMessage: {
+        type: 'string', 
+        default: 'Weekend'
+    },
+    holidayMessage: {
+        type: 'string', 
+        default: 'Holiday'
+    },
 	entityType: {
 		type: 'string',
 		default: 'office'
@@ -1509,10 +1536,10 @@ const attributes = {
     statusCloseDesktopBorderRadius: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '999',
+            bottom: '999',
+            left: '999',
+            right: '999',
         },
     },
     statusCloseTabBorderRadius: {

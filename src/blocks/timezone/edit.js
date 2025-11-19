@@ -38,7 +38,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTimezoneOffset,
 		showRemainingTime,
 		remainingTimeLabel,
-		remainingTimeFormat,
+		remainingTimeFormat
 	} = attributes;
 
 	// State for real-time updates
