@@ -106,6 +106,13 @@ const TemplateGrid = ({
 
 
     const handleFullSiteImport = useCallback(async (id) => {
+        const siteResp = await getTemplatesData("import/site", "site_id", 41);
+        console.log(siteResp);
+        console.log("Hello world");
+        return false;
+
+
+
         if (!userData?.email) {
             setIsLoginModalOpen(true);
             return;
