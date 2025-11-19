@@ -88,6 +88,7 @@
     "change-case": "^5.4.4",
     "classnames": "^2.5.1",
     "clean-webpack-plugin": "^4.0.0",
+    "countries-and-timezones": "^3.8.0",
     "gsap": "^3.12.7",
     "rc-switch": "^4.1.0",
     "react-hook-form": "^7.62.0",
