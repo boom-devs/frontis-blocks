@@ -1,94 +1,135 @@
-.fb-timezone-container {
-    display: inline-block;
-}
+.fb-timezone-main-wrapper{
+    .fb-timezone-container{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
 
-.fb-timezone-container .fb-timezone-header {
-    display: flex;
-    width: fit-content;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-.fb-timezone-status {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 16px;
-    line-height: 22px;
-    font-weight: 550;
-    color: #12B76A;
-    border-radius: 24px;
-    padding-right: 12px;
-    overflow: hidden;
-    font-family: 'Inter';
-}
-.fb-timezone-status .fb-timezone-status-badge {
-    height: 100%;
-    align-items: center;
-    display: flex;
-    padding: 3px 12px;
-    border-radius: 24px;
-    text-transform: uppercase;
-}
+        .fb-timezone-wrapper {
+            width: max-content;
 
-.fb-timezone-status .fb-timezone-status-badge > span {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-.fb-timezone-status.open {
-    border: 1px solid #12B76A;
-}
-.fb-timezone-status.close {
-    border: 1px solid #D92D20;
-}
-.fb-timezone-status.open .fb-timezone-status-badge {
-    background-color: #D1FADF;
-}
-.fb-timezone-status.close .fb-timezone-status-badge {
-    background-color: #FEE4E2;
-}
+            .fb-location-timezone {
+                position: relative;
+                width: max-content;
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                gap: 10px;
+                background: #252b37;
+                border: none;
+                border-radius: 999px 999px 999px 999px;
+                padding: 10px 20px 10px 20px;
+                transition: all .3s ease-in-out;
 
-.fb-timezone-status.close {
-    color: #D92D20;
-}
+                .fb-location-name {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 20px;
+                    font-weight: 500;
+                    line-height: 100%;
+                    text-decoration: none;
+                    color: #fff;
+                    transition: all .3s ease-in-out;
+                }
+                .fb-timezone-separator {
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
+                    font-size: 24px;
+                    line-height: normal;
+                    color: #fff;
+                    transition: all .3s ease-in-out;
+                }
+                .fb-current-time {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 18px;
+                    font-weight: 500;
+                    line-height: 100%;
+                    text-decoration: none;
+                    color: #fff;
+                    transition: all .3s ease-in-out;
+                }
 
-.wp-block-frontis-blocks-timezone {
-    display: inline-block;
-}
+                .fb-timezone-offset {
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 100%;
+                    text-decoration: none;
+                    color: #a4a7ae;
+                    transition: all .3s ease-in-out;
+                }
+            }
+        }
 
-.fb-timezone-container .circle.open {
-    background: #039855;
-}
-.fb-timezone-container .circle.close {
-    background: #D92D20;
-}
-.fb-timezone-container .circle {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  box-shadow: 0px 0px 0px 0px rgba(3, 152, 85, 0.1);
-}
-.fb-timezone-container .pulse.open {
-  animation: pulse-animation 2s infinite;
-}
+        .fb-timezone-status-wrapper{
+            width: max-content;
 
-.fb-timezone-container .pulse.close {
-    animation: pulse-animation-close 2s infinite;
-  }
-@keyframes pulse-animation {
-  0% {
-    box-shadow: 0 0 0 0px rgba(3, 152, 85, 1);
-  }
-  100% {
-    box-shadow: 0 0 0 12px rgba(3, 152, 85, 0);
-  }
-}
+            .fb-timezone-status-info-box{
+                width: max-content;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: transparent;
+                border: solid;
+                border-width: 1px 1px 1px 1px;
+                border-radius: 999px 999px 999px 999px;
+                border-color: #008000;
+                padding: 0px 8px 0px 0px;
+                margin: 0px 0px 0px 0px;
 
-@keyframes pulse-animation-close {
-    0% {
-      box-shadow: 0 0 0 0px rgba(217, 45, 32, 1);
+                .fb-timezone-status{
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 16px;
+                    font-weight: 500;
+                    text-transform: capitalize;
+                    text-decoration: none;
+                    line-height: 100%;
+                    padding: 10px 20px 10px 20px;
+                }
+                .fb-time-pulse{
+                    display: flex;
+                }
+                .fb-time-pulse-open, fb-time-pulse-closed{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .fb-time-pulse-open .fb-timezone-status{
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
+                    line-height: 100%;
+                    color: #ffffff;
+                    background-color: #008000;
+                    border: none;
+                    border-radius: 999px 999px 999px 999px;
+                    transition: all .3s ease-in-out;
+                }
+                
+                .fb-time-pulse-closed .fb-timezone-status{
+                    font-size: 16px;
+                    font-family: 'Roboto', sans-serif;
+                    font-weight: 500;
+                    line-height: 100%;
+                    color: #ffffff;
+                    background-color: #FF0000;
+                    border: none;
+                    border-radius: 999px 999px 999px 999px;
+                    transition: all .3s ease-in-out;
+                }
+                .fb-timezone-status-info{
+                    display: flex;
+                    align-items: center;
+
+                    .fb-timezone-info-noted{
+                        font-family: 'Roboto', sans-serif;
+                        font-weight: 400;
+                        font-size: 16px;
+                        line-height: 100%;
+                    }
+                }
+            }
+        }
     }
-    100% {
-      box-shadow: 0 0 0 12px rgba(3, 152, 85, 0);
-    }
-  }
+}

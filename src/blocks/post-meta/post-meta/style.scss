@@ -1,0 +1,55 @@
+// editor.scss
+
+.fb-social-main-wrapper {
+    .fb-social-wrapper {
+        .fb-social-links-wrapper {
+            ul {
+                margin: 0;
+                padding: 0;
+                &.fb-socials {
+                    list-style: none;
+                    display: flex;
+                    flex-wrap: wrap;
+
+                    .fb-social-list-item {
+                        a{
+                            transition: all 0.3s;
+                            &.fb-social-icon-link {
+                                box-sizing: border-box;
+                                text-decoration: none;
+                                cursor: pointer;
+                                display: flex;
+                                align-items: center;
+                                transition: ease-in-out 0.3s;
+    
+    
+                                .fb-social-icon-wrapper {
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    .fb-social-icon {
+                                        display: flex;
+                                        align-items: center;
+                                        justify-content: center;
+                                        transition: all 0.3s;
+                                        svg {
+                                            transition: fill 0.3s;
+                                        }
+                                    }
+    
+                                    .fb-social-icon-title {
+                                        transition: color 0.3s;
+                                    }
+                                }
+                            }
+                            &:focus {
+                                outline: none;
+                                box-shadow: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
