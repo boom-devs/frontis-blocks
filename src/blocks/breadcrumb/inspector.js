@@ -19,18 +19,6 @@ import {
 	ColorPalette,
 } from "@wordpress/components";
 
-/**
- * Internal depencencies
- */
-import {
-	ICON_ALIGN,
-	BORDER_STYLES,
-	ICON_POSITION,
-	BUTTONS_DIRECTION,
-	PRESETS,
-	OVERFLOW_OP
-} from "./constants/constants";
-
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
@@ -231,6 +219,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+
+		</>
+	);
+
 	return (
 		<>
 			<style>
@@ -239,6 +236,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
+				advancedControls={advancedControls}
 			/>
 		</>
 	);
