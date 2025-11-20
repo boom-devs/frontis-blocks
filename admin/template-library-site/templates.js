@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useState, useEffect } from "@wordpress/element";
+import { useState, useEffect, useCallback } from "@wordpress/element";
 import { toast } from "react-toastify";
 import { __ } from "@wordpress/i18n";
 import TemplateSidebar from "./template-sidebar";
@@ -10,14 +10,11 @@ import TemplateContent from "./template-content";
 import { usePostDataMutation } from './services/laravelapi';
 
 const PatternLibraryButton = () => {
-    const [isVisible, setIsVisible] = useState(false);
     const [loading, setLoading] = useState(false);
     const [noneFilterLoading, setNoneFilterLoading] = useState(false);
     const [resetCat, setResetCat] = useState(true);
     const [isLogedIn, setIsLogedIn] = useState(false);
-    const [cardListType, setCardListType] = useState('list');
     const [activeTab, setActiveTab] = useState('patterns');
-    const [debouncedValue, setDebouncedValue] = useState('');
     const [debounceTimer, setDebounceTimer] = useState(null);
     const [activeCategory, setActiveCategory] = useState({
         patterns: '',
@@ -27,7 +24,6 @@ const PatternLibraryButton = () => {
     });
     const [isProTemplate, setIsProTemplate] = useState('');
     const [searchText, setSearchText] = useState('');
-    const [savedTemplateType, setSavedTemplateType] = useState('');
     const [activeTagTab, setActiveTagTab] = useState({
         patterns: '',
         pages: '',
@@ -60,7 +56,7 @@ const PatternLibraryButton = () => {
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
 
-    const getTemplatesData = async (value, email, license_key, page, tag, search, category) => {
+    const getTemplatesData = async (value, email, license_key, page, tag, search, category, isPro) => {
         try {
             const response = await patternsData({
                 endpoint: value,
@@ -71,7 +67,7 @@ const PatternLibraryButton = () => {
                     tag: tag,
                     search: search,
                     category: category,
-                    is_pro_template: ''
+                    is_pro_template: isPro
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,14 +87,14 @@ const PatternLibraryButton = () => {
 
     const handlePageChange = (tab, page) => {
         setCurrentPage((prev) => ({ ...prev, [tab]: page }));
-        fetchData(tab, page, activeTagTab[activeTab]);
+        fetchData(tab, page, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
     };
 
     const handleActiveTag = (value) => {
         const newState = { [activeTab]: value };
         setActiveTagTab(newState);
 
-        fetchData(activeTab, 1, value, searchText, activeCategory[activeTab]);
+        fetchData(activeTab, 1, value, searchText, activeCategory[activeTab], isProTemplate);
     }
 
     const handleSearchTemplates = (value) => {
@@ -110,8 +106,7 @@ const PatternLibraryButton = () => {
 
         // Step 3: set new timer
         const timer = setTimeout(() => {
-            setDebouncedValue(value);
-            fetchData(activeTab, 1, activeTagTab[activeTab], value, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], value, activeCategory[activeTab], isProTemplate);
         }, 1000);
 
         setDebounceTimer(timer);
@@ -126,27 +121,29 @@ const PatternLibraryButton = () => {
 
         const newState = { [activeTab]: value };
         setActiveCategory(newState);
+        setCurrentPage({ [activeTab]: 1 });
 
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value);
+        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
+        // fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
     }
 
     const handleTemplates = (value) => {
         if (value !== isProTemplate) {
             setIsProTemplate(value);
-            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], value);
         } else {
             setIsProTemplate('');
-            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab]);
+            fetchData(activeTab, 1, activeTagTab[activeTab], searchText, activeCategory[activeTab], '');
         }
     } 
 
-    const fetchData = async (tab = activeTab, page, tag, search, category) => {
+    const fetchData = async (tab = activeTab, page, tag, search, category, isPro) => {
         setLoading(true);
 
         try {
             let response;
             if (tab === 'patterns') {
-                response = await getTemplatesData("patterns", '', '', page, tag, search, category);
+                response = await getTemplatesData("patterns", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -160,7 +157,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'pages') {
-                response = await getTemplatesData("pages", '', '', page, tag, search, category);
+                response = await getTemplatesData("pages", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -174,7 +171,7 @@ const PatternLibraryButton = () => {
                     }));
                 }
             } else if (tab === 'sites') {
-                response = await getTemplatesData("sites", '', '', page, tag, search, category);
+                response = await getTemplatesData("sites", '', '', page, tag, search, category, isPro);
                 if (response) {
                     setData((prev) => ({
                         ...prev,
@@ -250,95 +247,9 @@ const PatternLibraryButton = () => {
         setActiveTagTab({ [activeTab]: '' });
         setActiveCategory({ [activeTab]: '' });
         setIsProTemplate('');
-        setSavedTemplateType('');
-        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
-        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab]);
+        fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], isProTemplate);
+        fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], isProTemplate);
     }, [activeTab, userData?.email]);
-
-
-    const handleSaveLibrary = async (templateData, isAlreadySaved) => {
-        if (!userData) {
-            setIsLoginModalOpen(true);
-            return;
-        }
-
-        if (isAlreadySaved) return;
-
-        if (loading) return;
-
-        setData((prev) => {
-            const updatedItems = prev[activeTab].items.map((item) =>
-                item.id === templateData.id ? { ...item, saveLoading: true } : item
-            );
-            return {
-                ...prev,
-                [activeTab]: {
-                    ...prev[activeTab],
-                    items: updatedItems,
-                },
-            };
-        });
-
-        const apiBase = `${FB_TLibrary.wordpressSyncApi}/wp-json`;
-        const body = {
-            email: userData.email,
-            item_id: templateData.id,
-            item_type: templateData.type,
-            license_key: '',
-            website: window.location.origin,
-        };
-
-        const response = await fetch(`${apiBase}/frontis-sync/v1/saved-item`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(body),
-        });
-
-        const responseData = await response.json();
-
-        if(responseData.status === 'success') {
-            toast.success(responseData.message, {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-            });
-
-            setData((prev) => {
-                const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saved: true, saveLoading: false } : item
-                );
-                return {
-                    ...prev,
-                    [activeTab]: {
-                        ...prev[activeTab],
-                        items: updatedItems,
-                    },
-                };
-            });
-        } else {
-            toast.error('Failed to save template', {
-                position: "top-right",
-                autoClose: 3000,
-            });
-
-            setData((prev) => {
-                const updatedItems = prev[activeTab].items.map((item) =>
-                    item.id === templateData.id ? { ...item, saveLoading: false } : item
-                );
-                return {
-                    ...prev,
-                    [activeTab]: {
-                        ...prev[activeTab],
-                        items: updatedItems,
-                    },
-                };
-            });
-        }
-    }
 
 
     const TagTabsOptions = (() => {
@@ -357,6 +268,13 @@ const PatternLibraryButton = () => {
             setActiveTab('patterns');
         }
     }, [userData?.email]);
+
+    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+
+    const handleSidebarToggle = useCallback(() => {
+        setIsSidebarCollapsed(prev => !prev);
+    }, []);
+
 
 
     return (
@@ -377,29 +295,30 @@ const PatternLibraryButton = () => {
                             setResetCat={setResetCat}
                             loading={noneFilterLoading}
                             isImporting={isImporting}
+                            isSidebarCollapsed={isSidebarCollapsed}
+                            handleSidebarToggle={handleSidebarToggle}
                         />
-
-                        {activeTab !== 'templatelibrary' && (
-                            <TemplateContent
-                                activeTab={activeTab}
-                                setActiveTab={setActiveTab}
-                                activeCategory={activeCategory}
-                                data={data}
-                                activeTagTab={activeTagTab[activeTab]}
-                                searchText={searchText}
-                                searchTemplates={handleSearchTemplates}
-                                setActiveTagTab={handleActiveTag}
-                                TagTabsOptions={TagTabsOptions}
-                                isLogedIn={isLogedIn}
-                                setIsLogedIn={setIsLogedIn}
-                                loading={isLoading}
-                                setLoading={loading}
-                                tagLoading={noneFilterLoading}
-                                currentPage={currentPage[activeTab]}
-                                onPageChange={handlePageChange}
-                                isImporting={isImporting}
-                            />
-                        )}
+                        <TemplateContent
+                            activeTab={activeTab}
+                            setActiveTab={setActiveTab}
+                            activeCategory={activeCategory}
+                            data={data}
+                            activeTagTab={activeTagTab[activeTab]}
+                            searchText={searchText}
+                            searchTemplates={handleSearchTemplates}
+                            setActiveTagTab={handleActiveTag}
+                            TagTabsOptions={TagTabsOptions}
+                            isLogedIn={isLogedIn}
+                            setIsLogedIn={setIsLogedIn}
+                            loading={isLoading}
+                            setLoading={loading}
+                            tagLoading={noneFilterLoading}
+                            currentPage={currentPage[activeTab]}
+                            onPageChange={handlePageChange}
+                            isImporting={isImporting}
+                            isSidebarCollapsed={isSidebarCollapsed}
+                            handleSidebarToggle={handleSidebarToggle}
+                        />
                     </div>
                 </div>
             </div>
