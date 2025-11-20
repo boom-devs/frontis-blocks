@@ -5,7 +5,7 @@
         align-items: center;
 
         .fb-timezone-wrapper {
-            width: max-content;
+            display: flex;
 
             .fb-location-timezone {
                 position: relative;
@@ -18,10 +18,8 @@
         }
 
         .fb-timezone-status-wrapper{
-            width: max-content;
 
             .fb-timezone-status-info-box{
-                width: max-content;
                 display: flex;
                 align-items: center;
 
