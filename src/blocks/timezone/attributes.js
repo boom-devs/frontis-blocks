@@ -104,7 +104,8 @@ const attributes = {
         default: 'Open'
     },
     closedStatusText: {
-        type: 'string', default: 'Closed'
+        type: 'string', 
+        default: 'Closed'
     },
     beforeTimeText: {
         type: 'string', 
@@ -1669,6 +1670,18 @@ const attributes = {
         default: '#008000',
     },
     noticeTextHoverColor: {
+        type: 'string',
+        default: '',
+    },
+    statusOffNoticeTextColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+	statusOffNoticeTextColor: {
+        type: 'string',
+        default: '#FF0000',
+    },
+    statusOffNoticeTextHoverColor: {
         type: 'string',
         default: '',
     },
