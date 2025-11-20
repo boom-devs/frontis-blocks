@@ -846,7 +846,7 @@ class Helper
                 'package'   => $blockData['package'] ?? 'free',
                 'category'  => $blockData['category'] ?? 'content',
                 'badge'     => $blockData['badge'] ?? 'free',
-                'status'    => $activeBlocks[$slug] ? '1' : '0',
+                'status'    => (!empty($activeBlocks[$slug])) ? '1' : '0',
                 'icon'      => $blockData['icon'] ?? "http://licenseschoole.test/wp-content/plugins/frontis-blocks/assets/icons/{$slug}.svg",
                 'doc'       => $blockData['doc'] ?? 'https://wpmessiah.com/',
                 'demo'      => $blockData['demo'] ?? 'https://wpmessiah.com/',
