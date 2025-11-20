@@ -2986,7 +2986,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover,
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status:hover,
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status:hover{
 			${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
