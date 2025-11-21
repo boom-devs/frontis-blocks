@@ -66,7 +66,6 @@
                 });
                 document.body.style.overflow = '';
                 
-                // Move toggle button back to original position when closing
                 if (toggleButton.parentElement === menuList) {
                     menu.insertBefore(toggleButton, menuList);
                 }
@@ -79,7 +78,6 @@
                 toggleButton.classList.toggle('active');
                 overlay.classList.toggle('active');
                 
-                // Move toggle button inside menu when active
                 if (isActive) {
                     if (menuList.firstChild) {
                         menuList.insertBefore(toggleButton, menuList.firstChild);
@@ -87,11 +85,9 @@
                         menuList.appendChild(toggleButton);
                     }
                 } else {
-                    // Move toggle button back to its original position
                     menu.insertBefore(toggleButton, menuList);
                 }
                 
-                // Prevent body scroll when menu is open
                 document.body.style.overflow = isActive ? 'hidden' : '';
             }
 
@@ -116,7 +112,6 @@
                 }
             });
 
-            // Close overlay on click
             overlay.addEventListener('click', closeAllMenus);
 
             // Setup menu items behavior
@@ -127,30 +122,24 @@
                     const link = item.querySelector('.fb-advanced-mega-menu-link');
                     const panel = item.querySelector('.fb-advanced-mega-menu-panel');
 
-                    // Remove old event listeners by cloning
                     const newLink = link.cloneNode(true);
                     link.parentNode.replaceChild(newLink, link);
 
                     if (useMobileBehavior) {
-                        // Click/tap behavior
                         newLink.addEventListener('click', function(e) {
                             if (item.classList.contains('has-mega-menu')) {
                                 e.preventDefault();
                                 
-                                // Close other menus
                                 menuItems.forEach(function(otherItem) {
                                     if (otherItem !== item) {
                                         otherItem.classList.remove('active');
                                     }
                                 });
                                 
-                                // Toggle current menu
                                 item.classList.toggle('active');
                             }
                         });
                     } else {
-                        // Hover behavior for desktop
-                        // Keyboard navigation
                         newLink.addEventListener('focus', function() {
                             menuItems.forEach(function(otherItem) {
                                 if (otherItem !== item) {
@@ -170,7 +159,6 @@
 
                         // Mouse hover
                         item.addEventListener('mouseenter', function() {
-                            // Close other open panels
                             menuItems.forEach(function(otherItem) {
                                 if (otherItem !== item) {
                                     otherItem.classList.remove('hovering');
@@ -196,7 +184,6 @@
                         panel.style.top = (menuRect.bottom) + 'px';
                     });
                 } else {
-                    // Reset positioning for mobile
                     const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
                     panels.forEach(function(panel) {
                         panel.style.top = '';
