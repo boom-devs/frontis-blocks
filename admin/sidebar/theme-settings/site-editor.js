@@ -83,7 +83,7 @@ const FrontisThemeSiteEditor = () => {
                     />
 
                 </PanelRow>
-                {settings.stickyGlobalHeader && (
+                {settings.stickyHeader && (
                     <>
                         <RangeControl
                             label="Header Offset (Rem)"
@@ -138,7 +138,7 @@ const FrontisThemeSiteEditor = () => {
                         onChange={(value) => updateGlobalSetting('transparentHeader', value)}
                     />
                 </PanelRow>
-                {settings.transparentGlobalHeader && (
+                {settings.transparentHeader && (
                     <PanelRow>
                         <div className='sticky-wrapper' style={{
                             display: 'flex',

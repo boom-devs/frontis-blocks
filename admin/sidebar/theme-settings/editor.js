@@ -54,6 +54,10 @@ const FrontisMetaBox = ({ whichEditor }) => {
     // Template settings for the template used by this post/page
     const [templateMetaPostEdit, setTemplateMetaPostEdit] = useState({});
 
+    // 🔹 PAGE/POST SETTINGS (for post/page editor)
+    const [pageSettings, setPageSettings] = useState({});
+    const [isPageSettingsLoaded, setIsPageSettingsLoaded] = useState(false);
+
     const [postId, setPostId] = useState();
 
     const themeColors = useSelect(
@@ -116,6 +120,22 @@ const FrontisMetaBox = ({ whichEditor }) => {
         return keyMap[metaKey] || metaKey;
     };
 
+    /**
+     * Helper: Map post meta keys to page settings keys
+     */
+    const getPageKeyForMetaKey = (metaKey) => {
+        const keyMap = {
+            '_frontis_meta_header_display': 'disableHeader',
+            '_frontis_meta_footer_display': 'disableFooter',
+            '_frontis_meta_sticky_header': 'stickyHeader',
+            '_frontis_meta_transparent_header': 'transparentHeader',
+            '_frontis_meta_sticky_bg_color': 'stickyHeaderColor',
+            '_frontis_meta_transparent_bg_color': 'transparentHeaderColor',
+            '_frontis_meta_lazy_load': 'lazyLoading',
+        };
+        return keyMap[metaKey] || metaKey;
+    };
+
     const updateSetting = (settingName, value) => {
         if (postType === 'wp_template') {
             // Template editor → frontis_template_options
@@ -152,8 +172,32 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 console.log('[Template Editor Update] Updated templateMeta:', updated);
                 return updated;
             });
+        } else if (whichEditor === 'post') {
+            // Post/Page editor → page settings via REST API
+            const pageKey = getPageKeyForMetaKey(settingName);
+            let pageValue = value;
+            
+            // Invert for "disable" meta keys (sticky header, transparent header)
+            // Meta "disable" = true means page "enable" = false
+            if (
+                settingName === '_frontis_meta_sticky_header' ||
+                settingName === '_frontis_meta_transparent_header'
+            ) {
+                pageValue = !value;
+            }
+            
+            console.log('[Page Editor Update] Setting:', settingName, 'Value:', value, 'Page Key:', pageKey, 'Page Value:', pageValue);
+            
+            setPageSettings((prev) => {
+                const updated = {
+                    ...prev,
+                    [pageKey]: pageValue,
+                };
+                console.log('[Page Editor Update] Updated pageSettings:', updated);
+                return updated;
+            });
         } else {
-            // Normal post/page → post meta
+            // Normal post/page → post meta (fallback for other editors)
             setMeta({
                 ...(meta || {}),
                 [settingName]: value,
@@ -162,134 +206,139 @@ const FrontisMetaBox = ({ whichEditor }) => {
     };
 
     /**
-     * Template → Post fallback mapping (template + global)
+     * Get inherited value: Priority = Page → Template → Global → Default
+     * This function calculates the final value based on inheritance chain
      */
-    const getTemplateFallbackValue = (key) => {
-        const tpl =
-            templateMetaPostEdit && typeof templateMetaPostEdit === 'object'
-                ? templateMetaPostEdit
-                : {};
+    const getInheritedValue = (key) => {
+        const page = pageSettings && typeof pageSettings === 'object' ? pageSettings : {};
+        const tpl = templateMetaPostEdit && typeof templateMetaPostEdit === 'object' ? templateMetaPostEdit : {};
         const global = globalSettings || {};
         
-        console.log('[Template Fallback] Key:', key);
-        console.log('[Template Fallback] Template Meta:', tpl);
-        console.log('[Template Fallback] Global Settings:', global);
+        const pageKey = getPageKeyForMetaKey(key);
+        const templateKey = getTemplateKeyForMetaKey(key);
+        const globalKey = getGlobalKeyForMetaKey(key) || templateKey;
+        
+        console.log('[Inherited Value] Key:', key);
+        console.log('[Inherited Value] Page Key:', pageKey, 'Page:', page);
+        console.log('[Inherited Value] Template Key:', templateKey, 'Template:', tpl);
+        console.log('[Inherited Value] Global Key:', globalKey, 'Global:', global);
 
         switch (key) {
             case '_frontis_meta_header_display':
-                if (Object.prototype.hasOwnProperty.call(tpl, 'disableHeader')) {
-                    // Convert to boolean: handle empty string, '1', 1, true, etc.
-                    const val = tpl.disableHeader;
-                    if (val === '' || val === null || val === undefined) {
-                        return global.disableHeader ?? false;
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'disableHeader')) {
+                    const pageVal = page.disableHeader;
+                    if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                        return pageVal === true || pageVal === '1' || pageVal === 1;
                     }
-                    return val === true || val === '1' || val === 1;
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'disableHeader')) {
+                    const tplVal = tpl.disableHeader;
+                    if (tplVal !== null && tplVal !== undefined && tplVal !== '') {
+                        return tplVal === true || tplVal === '1' || tplVal === 1;
+                    }
                 }
                 return global.disableHeader ?? false;
 
             case '_frontis_meta_footer_display':
-                if (Object.prototype.hasOwnProperty.call(tpl, 'disableFooter')) {
-                    // Convert to boolean: handle empty string, '1', 1, true, etc.
-                    const val = tpl.disableFooter;
-                    if (val === '' || val === null || val === undefined) {
-                        return global.disableFooter ?? false;
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'disableFooter')) {
+                    const pageVal = page.disableFooter;
+                    if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                        return pageVal === true || pageVal === '1' || pageVal === 1;
                     }
-                    return val === true || val === '1' || val === 1;
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'disableFooter')) {
+                    const tplVal = tpl.disableFooter;
+                    if (tplVal !== null && tplVal !== undefined && tplVal !== '') {
+                        return tplVal === true || tplVal === '1' || tplVal === 1;
+                    }
                 }
                 return global.disableFooter ?? false;
 
             case '_frontis_meta_site_title_display':
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'disablePageTitle'
-                    )
-                ) {
+                // Priority: Page → Template → Default (false)
+                if (Object.prototype.hasOwnProperty.call(page, 'disablePageTitle')) {
+                    return page.disablePageTitle ?? false;
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'disablePageTitle')) {
                     return tpl.disablePageTitle ?? false;
                 }
                 return false;
 
             case '_frontis_meta_sticky_header':
                 // Note: _frontis_meta_sticky_header = "Disable Sticky Header"
-                // Global stickyHeader = "Enable Sticky Header"
-                // So we need to invert: if global enabled, return false (not disabled)
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'stickyHeader'
-                    )
-                ) {
-                    // Convert to boolean: handle empty string, '1', 1, true, etc.
-                    const val = tpl.stickyHeader;
-                    if (val === '' || val === null || val === undefined) {
-                        // Fallback to global
-                        return !(global.stickyHeader ?? false);
+                // Settings use "Enable Sticky Header", so we need to invert
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'stickyHeader')) {
+                    const pageVal = page.stickyHeader;
+                    if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                        const boolVal = pageVal === true || pageVal === '1' || pageVal === 1;
+                        return !boolVal; // Invert: enabled = not disabled
                     }
-                    // Template stickyHeader: true = enabled, so return false (not disabled)
-                    const boolVal = val === true || val === '1' || val === 1;
-                    return !boolVal;
                 }
-                // Global stickyHeader: true = enabled, so return false (not disabled)
+                if (Object.prototype.hasOwnProperty.call(tpl, 'stickyHeader')) {
+                    const tplVal = tpl.stickyHeader;
+                    if (tplVal !== null && tplVal !== undefined && tplVal !== '') {
+                        const boolVal = tplVal === true || tplVal === '1' || tplVal === 1;
+                        return !boolVal; // Invert: enabled = not disabled
+                    }
+                }
                 return !(global.stickyHeader ?? false);
 
             case '_frontis_meta_transparent_header':
                 // Note: _frontis_meta_transparent_header = "Disable Transparent Header"
-                // Global transparentHeader = "Enable Transparent Header"
-                // So we need to invert: if global enabled, return false (not disabled)
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'transparentHeader'
-                    )
-                ) {
-                    // Convert to boolean: handle empty string, '1', 1, true, etc.
-                    const val = tpl.transparentHeader;
-                    if (val === '' || val === null || val === undefined) {
-                        // Fallback to global
-                        return !(global.transparentHeader ?? false);
+                // Settings use "Enable Transparent Header", so we need to invert
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'transparentHeader')) {
+                    const pageVal = page.transparentHeader;
+                    if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                        const boolVal = pageVal === true || pageVal === '1' || pageVal === 1;
+                        return !boolVal; // Invert: enabled = not disabled
                     }
-                    // Template transparentHeader: true = enabled, so return false (not disabled)
-                    const boolVal = val === true || val === '1' || val === 1;
-                    return !boolVal;
                 }
-                // Global transparentHeader: true = enabled, so return false (not disabled)
+                if (Object.prototype.hasOwnProperty.call(tpl, 'transparentHeader')) {
+                    const tplVal = tpl.transparentHeader;
+                    if (tplVal !== null && tplVal !== undefined && tplVal !== '') {
+                        const boolVal = tplVal === true || tplVal === '1' || tplVal === 1;
+                        return !boolVal; // Invert: enabled = not disabled
+                    }
+                }
                 return !(global.transparentHeader ?? false);
 
             case '_frontis_meta_sticky_bg_color':
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'stickyHeaderColor'
-                    )
-                ) {
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'stickyHeaderColor')) {
+                    return page.stickyHeaderColor ?? '';
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'stickyHeaderColor')) {
                     return tpl.stickyHeaderColor ?? '';
                 }
                 return global.stickyHeaderColor ?? '';
 
             case '_frontis_meta_transparent_bg_color':
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'transparentHeaderColor'
-                    )
-                ) {
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'transparentHeaderColor')) {
+                    return page.transparentHeaderColor ?? 'transparent';
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'transparentHeaderColor')) {
                     return tpl.transparentHeaderColor ?? 'transparent';
                 }
                 return global.transparentHeaderColor ?? 'transparent';
 
             case '_frontis_meta_lazy_load':
-                if (
-                    Object.prototype.hasOwnProperty.call(
-                        tpl,
-                        'lazyLoading'
-                    )
-                ) {
-                    // Convert to boolean: handle empty string, '1', 1, true, etc.
-                    const val = tpl.lazyLoading;
-                    if (val === '' || val === null || val === undefined) {
-                        return global.lazyLoading ?? false;
+                // Priority: Page → Template → Global
+                if (Object.prototype.hasOwnProperty.call(page, 'lazyLoading')) {
+                    const pageVal = page.lazyLoading;
+                    if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                        return pageVal === true || pageVal === '1' || pageVal === 1;
                     }
-                    return val === true || val === '1' || val === 1;
+                }
+                if (Object.prototype.hasOwnProperty.call(tpl, 'lazyLoading')) {
+                    const tplVal = tpl.lazyLoading;
+                    if (tplVal !== null && tplVal !== undefined && tplVal !== '') {
+                        return tplVal === true || tplVal === '1' || tplVal === 1;
+                    }
                 }
                 return global.lazyLoading ?? false;
 
@@ -424,38 +473,59 @@ const FrontisMetaBox = ({ whichEditor }) => {
         }
 
         // ===== PAGE / POST EDITOR =====
+        if (whichEditor === 'post') {
+            // Use page settings (via REST API) with inheritance: Page → Template → Global
+            const pageKey = getPageKeyForMetaKey(key);
+            const page = pageSettings || {};
+            
+            // Check if page has explicit override
+            if (Object.prototype.hasOwnProperty.call(page, pageKey)) {
+                const pageVal = page[pageKey];
+                
+                // If value is explicitly set (even if false), it's an override
+                if (pageVal !== null && pageVal !== undefined && pageVal !== '') {
+                    let finalVal = pageVal;
+                    
+                    // Invert for "disable" meta keys (sticky header, transparent header)
+                    if (
+                        key === '_frontis_meta_sticky_header' ||
+                        key === '_frontis_meta_transparent_header'
+                    ) {
+                        finalVal = !pageVal;
+                    }
+                    
+                    console.log(
+                        '[getMetaValue][POST] key=',
+                        key,
+                        '(pageKey:',
+                        pageKey,
+                        ') → PAGE SETTINGS (OVERRIDE)',
+                        finalVal
+                    );
+                    return finalVal;
+                }
+            }
+            
+            // No page override → use inherited value (Template → Global)
+            const inherited = getInheritedValue(key);
+            console.log(
+                '[getMetaValue][POST] key=',
+                key,
+                '→ INHERITED VALUE (Template/Global)',
+                inherited
+            );
+            return inherited ?? defaultValue;
+        }
+
+        // Fallback for other editors: use direct meta
         const hasMetaKey =
             meta &&
             typeof meta === 'object' &&
             Object.prototype.hasOwnProperty.call(meta, key);
 
-        // If post has explicit meta value, check if it's a real override
         if (hasMetaKey) {
             const raw = meta[key];
-            // Check if value is explicitly set (not null/undefined/empty string)
-            // Important: false is a valid override value, but we need to check if it's intentional
             if (raw !== null && raw !== undefined && raw !== '') {
-                // Check if this is a boolean false that might be default vs intentional override
-                // If raw is false, check template/global to see if we should use fallback
-                if (raw === false) {
-                    // Check template/global fallback first
-                    if (whichEditor === 'post') {
-                        const fallback = getTemplateFallbackValue(key);
-                        // If template/global says true but page says false, it's an override
-                        // If template/global says false and page says false, it might be default
-                        // For now, if page has false, treat it as override (user explicitly set it)
-                        console.log(
-                            '[getMetaValue][POST] key=',
-                            key,
-                            '→ using POST META (OVERRIDE: false)',
-                            raw,
-                            '| Template/Global fallback:',
-                            fallback
-                        );
-                        return raw;
-                    }
-                }
-                
                 console.log(
                     '[getMetaValue][POST] key=',
                     key,
@@ -464,18 +534,6 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 );
                 return raw;
             }
-        }
-
-        // Ei page e kono explicit meta nai → template + global fallback use korbo
-        if (whichEditor === 'post') {
-            const fallback = getTemplateFallbackValue(key);
-            console.log(
-                '[getMetaValue][POST] key=',
-                key,
-                '→ using TEMPLATE/GLOBAL FALLBACK',
-                fallback
-            );
-            return fallback ?? defaultValue;
         }
 
         // Direct global fallback for post meta keys
@@ -490,7 +548,6 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 let val = global[globalKey];
                 
                 // Invert for "disable" meta keys (sticky header, transparent header)
-                // Global "enable" = true means meta "disable" = false
                 if (
                     key === '_frontis_meta_sticky_header' ||
                     key === '_frontis_meta_transparent_header'
@@ -584,7 +641,9 @@ const FrontisMetaBox = ({ whichEditor }) => {
         } else {
             setPostId(currentPostId);
             setIsTemplateMetaLoaded(false);
+            setIsPageSettingsLoaded(false);
             checkPostPageTemplateMeta();
+            checkPostPageSettings();
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [postType, currentPostId]);
@@ -620,6 +679,79 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 });
         }
     }, [templateMeta, postType, postId, isTemplateMetaLoaded]);
+
+    // Page settings load kora
+    const checkPostPageSettings = () => {
+        if (whichEditor === 'post' && currentPostId && postType !== 'wp_template') {
+            console.log('[Page Settings] Fetching page settings for post ID:', currentPostId);
+            
+            apiFetch({
+                path: `frontis/v1/page-settings?post_id=${currentPostId}`,
+                method: 'GET',
+            })
+                .then((response) => {
+                    console.log('[Page Settings] Raw API response:', response);
+                    console.log('[Page Settings] Response type:', typeof response);
+                    
+                    // Handle both array and object responses
+                    let pageSettingsData = {};
+                    
+                    if (Array.isArray(response) && response.length > 0) {
+                        pageSettingsData = response[0] || {};
+                    } else if (response && typeof response === 'object') {
+                        const keys = Object.keys(response);
+                        if (keys.length > 0) {
+                            pageSettingsData = response;
+                        } else {
+                            pageSettingsData = {};
+                        }
+                    } else {
+                        pageSettingsData = {};
+                    }
+                    
+                    console.log('[Page Settings] Processed settings:', pageSettingsData);
+                    setPageSettings(pageSettingsData);
+                    setIsPageSettingsLoaded(true);
+                })
+                .catch((error) => {
+                    console.error('[Page Settings] Error fetching page settings:', error);
+                    setPageSettings({});
+                    setIsPageSettingsLoaded(true);
+                });
+        }
+    };
+
+    // Page settings change hole API te save
+    useEffect(() => {
+        if (whichEditor === 'post' && postType !== 'wp_template' && postId && isPageSettingsLoaded) {
+            // Don't save on initial load (when pageSettings is empty and just loaded)
+            // Only save when user explicitly changes something
+            const hasChanges = Object.keys(pageSettings).length > 0;
+            
+            if (!hasChanges) {
+                console.log('[Page Settings Save] Skipping save - no explicit overrides');
+                return;
+            }
+            
+            console.log('[Page Settings Save] Saving page settings...');
+            console.log('[Page Settings Save] Post ID:', postId);
+            console.log('[Page Settings Save] Page Settings:', pageSettings);
+            console.log('[Page Settings Save] Has explicit overrides:', hasChanges);
+            
+            apiFetch({
+                path: 'frontis/v1/page-settings',
+                method: 'POST',
+                data: { setting: pageSettings, post_id: postId },
+            })
+                .then((res) => {
+                    console.log('[Page Settings Save] Save response:', res);
+                    console.log('[Page Settings Save] ✅ Settings saved successfully');
+                })
+                .catch((err) => {
+                    console.error('[Page Settings Save] ❌ Error saving page settings:', err);
+                });
+        }
+    }, [pageSettings, whichEditor, postType, postId, isPageSettingsLoaded]);
 
     // Post editor → ei post kon template use korse tar settings nao
     const checkPostPageTemplateMeta = () => {
@@ -699,6 +831,16 @@ const FrontisMetaBox = ({ whichEditor }) => {
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [globalSettings]);
+
+    // 🔹 Template settings change হলে page editor এ page settings re-fetch করবে (optional, for consistency)
+    useEffect(() => {
+        if (whichEditor === 'post' && postType !== 'wp_template' && currentPostId) {
+            // Template settings change হলে page editor এ update হবে automatically via getInheritedValue
+            // But we can re-fetch template settings if needed
+            checkPostPageTemplateMeta();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [templateMetaPostEdit]);
 
     const isTemplateEditor = postType === 'wp_template';
 

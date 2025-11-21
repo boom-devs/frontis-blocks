@@ -545,6 +545,27 @@ class Admin {
                 )
             )
         );
+
+        register_rest_route(
+            'frontis/v1',
+            '/page-settings',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'frontis_get_page_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can( 'edit_posts' );
+                    },
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => [$this, 'frontis_update_page_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can( 'edit_posts' );
+                    },
+                ),
+            )
+        );
     }
 
     function proxy_image($request) {
@@ -782,6 +803,78 @@ class Admin {
         // Double-check: if saved settings are empty but we tried to save, log warning
         if ( empty( $saved_settings ) && ! empty( $fields ) ) {
             error_log( '[Frontis Template Save] ⚠️ WARNING: Settings were not saved properly!' );
+        }
+    
+        return rest_ensure_response( 'success' );
+    }
+
+    /**
+     * Get page/post settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function frontis_get_page_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        // Get page/post settings from meta
+        $settings = get_post_meta( $post_id, '_frontis_page_settings', true );
+    
+        return rest_ensure_response( is_array( $settings ) ? $settings : [] );
+    }
+
+    /**
+     * Update page/post settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function frontis_update_page_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $fields = (array) $request->get_param( 'setting' );
+        
+        // Ensure boolean values are properly saved (not converted to empty strings)
+        foreach ( $fields as $key => $value ) {
+            if ( $value === false || $value === 'false' || $value === 0 || $value === '0' ) {
+                $fields[ $key ] = false; // Explicitly set to false
+            } elseif ( $value === true || $value === 'true' || $value === 1 || $value === '1' ) {
+                $fields[ $key ] = true; // Explicitly set to true
+            }
+        }
+        
+        // Debug logging
+        error_log( '[Frontis Page Save] Saving page settings for post ID: ' . $post_id );
+        error_log( '[Frontis Page Save] Settings to save (raw): ' . print_r( $request->get_param( 'setting' ), true ) );
+        error_log( '[Frontis Page Save] Settings to save (processed): ' . print_r( $fields, true ) );
+        error_log( '[Frontis Page Save] Meta key: _frontis_page_settings' );
+    
+        $result = update_post_meta( $post_id, '_frontis_page_settings', $fields );
+        
+        // Verify the save
+        $saved_settings = get_post_meta( $post_id, '_frontis_page_settings', true );
+        error_log( '[Frontis Page Save] Save result: ' . ( $result ? 'SUCCESS' : 'FAILED' ) );
+        error_log( '[Frontis Page Save] Verified settings: ' . ( $saved_settings ? print_r( $saved_settings, true ) : 'EMPTY' ) );
+        
+        // Double-check: if saved settings are empty but we tried to save, log warning
+        if ( empty( $saved_settings ) && ! empty( $fields ) ) {
+            error_log( '[Frontis Page Save] ⚠️ WARNING: Settings were not saved properly!' );
         }
     
         return rest_ensure_response( 'success' );
