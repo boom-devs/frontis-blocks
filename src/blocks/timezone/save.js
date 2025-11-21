@@ -37,7 +37,7 @@ export default function Save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneGlobalWraperClass} ${
+        className: `frontis-block fb-timezone-main-wrapper ${blockID} ${
             timezoneDesktopSwitcher ? 'fb-desktop-responsive' : ''
         } ${timezoneTabletSwitcher ? 'fb-tablet-responsive' : ''} ${
             timezoneMobileSwitcher ? 'fb-mobile-responsive' : ''
@@ -113,27 +113,27 @@ export default function Save({ attributes }) {
 
     return (
         <div {...blockProps} 
-            data-timezone={timezone || 'Asia/Dhaka'}
-            data-timezone-mode={timezoneMode || 'auto'}
-            data-use-utc={useUTCTimezoneFormat || false}
-            data-time-format={timeFormat || 'hh:mm A'}
-            data-start-time={startTime || '09:00'}
-            data-end-time={endTime || '17:00'}
-            data-use-monthly-schedule={useMonthlySchedule || false}
-            data-monthly-schedules={JSON.stringify(monthlySchedules || [])}
-            data-weekend-days={JSON.stringify(weekendDays || [])}
-            data-holidays={JSON.stringify(holidays || [])}
-            data-show-remaining-time={showRemainingTime || false}
-            data-remaining-time-label={remainingTimeLabel || 'Left: '}
-            data-remaining-time-format={remainingTimeFormat || 'hours-minutes'}
-            data-before-time-text={beforeTimeText || 'Will start at'}
-            data-after-time-text={afterTimeText || 'Will close at'}
-            data-weekend-message={weekendMessage || 'Weekend'}
-            data-holiday-message={holidayMessage || 'Holiday'}
-            data-open-status-text={openStatusText || 'Open'}
-            data-closed-status-text={closedStatusText || 'Closed'}
+            data-timezone={timezone}
+            data-timezone-mode={timezoneMode}
+            data-use-utc={useUTCTimezoneFormat}
+            data-time-format={timeFormat}
+            data-start-time={startTime}
+            data-end-time={endTime}
+            data-use-monthly-schedule={useMonthlySchedule}
+            data-monthly-schedules={JSON.stringify(monthlySchedules)}
+            data-weekend-days={JSON.stringify(weekendDays)}
+            data-holidays={JSON.stringify(holidays)}
+            data-show-remaining-time={showRemainingTime}
+            data-remaining-time-label={remainingTimeLabel}
+            data-remaining-time-format={remainingTimeFormat}
+            data-before-time-text={beforeTimeText}
+            data-after-time-text={afterTimeText}
+            data-weekend-message={weekendMessage}
+            data-holiday-message={holidayMessage}
+            data-open-status-text={openStatusText}
+            data-closed-status-text={closedStatusText}
         >
-            <div className="fb-timezone-container">
+            <div className={`fb-timezone-container ${timezoneGlobalWraperClass}`}>
                 <div className='fb-timezone-wrapper'>
                     <div className='fb-location-timezone'>
                         {useCustomLocation ? (
