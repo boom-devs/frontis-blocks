@@ -1,0 +1,85 @@
+import { __ } from '@wordpress/i18n';
+import { useRef } from "@wordpress/element";
+import {
+	useBlockProps,
+	RichText,
+	BlockControls,
+	AlignmentToolbar,
+} from '@wordpress/block-editor';
+
+/**
+ * Internal dependencies
+ */
+import Inspector from "./inspector";
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import './editor.scss';
+
+export default function Edit({ attributes, setAttributes, clientId, context }) {
+	const {
+		blockID,
+		separatorType,
+		separatorText,
+		separatorIcon,
+		showHomeIcon,
+		homeIcon,
+		homeText,
+		showItemIcon,
+		itemIcon,
+	} = attributes;
+
+	const blockProps = useBlockProps({
+		className: `fb-breadcrumb-main-wrapper ${blockID}`,
+	});
+
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
+	const renderSeparator = () => {
+		if (separatorType === 'text') {
+			return <span className="fb-breadcrumb-separator">{separatorText}</span>;
+		}
+		return <i className={`fb-breadcrumb-separator ${separatorIcon}`}></i>;
+	};
+
+	return (
+		<>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
+
+			<div {...blockProps}>
+				<div className={`fb-parent-wrapper fb-breadcrumb-container ${blockID}`} id={blockID} ref={panelRef}>
+					<div className="fb-breadcrumb-list">
+						{/* Home Item */}
+						<div className="fb-breadcrumb-item">
+							{showHomeIcon && <div className={`fb-breadcrumb-icon ${homeIcon}`}>{renderSVG(homeIcon)}</div>}
+							<span className="fb-breadcrumb-link">{homeText}</span>
+						</div>
+
+						{renderSeparator()}
+
+						{/* Parent Page Mock */}
+						<div className="fb-breadcrumb-item">
+							{showItemIcon && <div className={`fb-breadcrumb-icon ${itemIcon}`}>{renderSVG(itemIcon)}</div>}
+							<span className="fb-breadcrumb-link">Parent Page</span>
+						</div>
+
+						{renderSeparator()}
+
+						{/* Current Page Mock */}
+						<div className="fb-breadcrumb-item">
+							{showItemIcon && <div className={`fb-breadcrumb-icon ${itemIcon}`}>{renderSVG(itemIcon)}</div>}
+							<span className="fb-breadcrumb-text">Current Page</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
