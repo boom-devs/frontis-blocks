@@ -1,0 +1,17 @@
+${breadcrumbCurrentItemGlobalTypoSwitcher?.fontFamily === true && breadcrumbCurrentItemGlobalTypographyData?.fontFamily ? `font-family: ${breadcrumbCurrentItemGlobalTypographyData?.fontFamily};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontSize === true && breadcrumbCurrentItemGlobalTypographyData?.fontSize ? `font-size: ${breadcrumbCurrentItemGlobalTypographyData?.fontSize};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontWeight === true && breadcrumbCurrentItemGlobalTypographyData?.fontWeight ? `font-weight: ${breadcrumbCurrentItemGlobalTypographyData?.fontWeight};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontStyle === true && breadcrumbCurrentItemGlobalTypographyData?.fontStyle ? `font-style: ${breadcrumbCurrentItemGlobalTypographyData?.fontStyle};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.textTransform === true && breadcrumbCurrentItemGlobalTypographyData?.textTransform ? `text-transform: ${breadcrumbCurrentItemGlobalTypographyData?.textTransform};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.textDecoration === true && breadcrumbCurrentItemGlobalTypographyData?.textDecoration ? `text-decoration: ${breadcrumbCurrentItemGlobalTypographyData?.textDecoration};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.letterSpacing === true && breadcrumbCurrentItemGlobalTypographyData?.letterSpacing ? `letter-spacing: ${breadcrumbCurrentItemGlobalTypographyData?.letterSpacing};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.lineHeight === true && breadcrumbCurrentItemGlobalTypographyData?.lineHeight ? `line-height: ${breadcrumbCurrentItemGlobalTypographyData?.lineHeight};` : ''}
+				
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontFamily === false && breadcrumbCurrentItemFontFamily && breadcrumbCurrentItemFontFamily !== 'Default' ? `font-family: ${breadcrumbCurrentItemFontFamily};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontSize === false && breadcrumbCurrentItemFontSize?.Desktop && breadcrumbCurrentItemFontSizeUnits?.Desktop ? `font-size: ${breadcrumbCurrentItemFontSize?.Desktop}${breadcrumbCurrentItemFontSizeUnits?.Desktop};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontWeight === false && breadcrumbCurrentItemFontWeight ? `font-weight: ${breadcrumbCurrentItemFontWeight};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontStyle === false && breadcrumbCurrentItemFontStyle ? `font-style: ${breadcrumbCurrentItemFontStyle};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.textTransform === false && breadcrumbCurrentItemTextTransform ? `text-transform: ${breadcrumbCurrentItemTextTransform};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.textDecoration === false && breadcrumbCurrentItemTextDecoration ? `text-decoration: ${breadcrumbCurrentItemTextDecoration};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbCurrentItemLetterSpacing?.Desktop && breadcrumbCurrentItemLetterSpacingUnits?.Desktop ? `letter-spacing: ${breadcrumbCurrentItemLetterSpacing?.Desktop}${breadcrumbCurrentItemLetterSpacingUnits?.Desktop};` : ''}
+				${breadcrumbCurrentItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbCurrentItemLineHeight?.Desktop && breadcrumbCurrentItemLineHeightUnits?.Desktop ? `line-height: ${breadcrumbCurrentItemLineHeight?.Desktop}${breadcrumbCurrentItemLineHeightUnits?.Desktop};` : ''}
