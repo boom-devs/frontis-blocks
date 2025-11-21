@@ -6,6 +6,9 @@ export default function save({ attributes }) {
 		blockID,
 		breadcrumbGlobalWraperID,
 		breadcrumbGlobalWraperClass,
+		breadcrumbDesktopSwitcher,
+		breadcrumbTabletSwitcher,
+		breadcrumbMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
