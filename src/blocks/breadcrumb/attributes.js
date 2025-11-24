@@ -176,6 +176,7 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+
 	//Color
 	breadcrumbItemColorSwitcher: {
         type: 'string',
@@ -197,6 +198,22 @@ const attributes = {
     breadcrumbItemBgHoverColor: {
         type: 'string',
     },
+	breadcrumbItemGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbItemGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	//Current Item
 	breadcrumbCurrentItemGlobalTypographyData: {
         type: "object",
@@ -496,15 +513,32 @@ const attributes = {
         type : 'boolean',
         default: true
     },
+	//Home icon
     breadcrumbIconSize: {
         type: 'object',
         default: {
-            Desktop: '30',
+            Desktop: '16',
             Tablet: '',
             Mobile: ''
         }
     },
     breadcrumbIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	breadcrumbHomeIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbHomeIconGapUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
@@ -552,144 +586,152 @@ const attributes = {
         type: 'string',
         default: ''
     },
-
-    breadcrumbIconBorder: {
-		type: 'string',
-		default: 'none',
-	},
-	breadcrumbIconBorderColorSwitcher : {
-		type: 'string',
-		default: 'normal'
-	},
-	breadcrumbIconBorderColor: {
-		type: 'string',
-	},
-	breadcrumbIconBorderHoverColor: {
-		type: 'string',
-	},
-	breadcrumbIconBorderUnits: {
+	//Seperator Icon
+	breadcrumbSeperatorSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbSeperatorSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'
+			Mobile: 'px',
 		}
 	},
-	breadcrumbIconBorderDesktop: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	breadcrumbIconBorderTablet: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	breadcrumbIconBorderMobile: {
-		type: 'object',
-		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
-	},
-	breadcrumbIconBorderLink : {
-		type : 'boolean',
-		default: true
-	},
-
-    //spacing padding for icon
-    breadcrumbIconPaddingUnits: {
+	breadcrumbSeperatorIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbSeperatorIconGapUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'
+			Mobile: 'px',
 		}
-    },
-    breadcrumbIconDesktopPadding: {
+	},
+    breadcrumbSeperatorBgSize: {
         type: 'object',
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
+            Desktop: '50',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    breadcrumbIconTabletPadding: {
-        type: 'object',
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    breadcrumbIconMobilePadding: {
-        type: 'object',
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    breadcrumbIconPaddingLink : {
-        type : 'boolean',
-        default: true
-    },
-	/** End Border */
-
-	/** Start Border Radius */
-	breadcrumbIconBorderRadiusUnits: {
+    breadcrumbSeperatorBgSizeUnits: {
 		type: 'object',
 		default: {
 			Desktop: 'px',
 			Tablet: 'px',
-			Mobile: 'px'
+			Mobile: 'px',
 		}
 	},
-	breadcrumbIconBorderRadiusDesktop: {
+    breadcrumbSeperatorColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbSeperatorColor : {
+        type: 'string',
+        default: '#399CFF',
+    },
+    breadcrumbSeperatorHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbSeperatorBgColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbSeperatorBgColor : {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbSeperatorBgHoverColor: {
+        type: 'string',
+        default: ''
+    },
+	//Item icon
+	breadcrumbItemIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbItemIconSizeUnits: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	breadcrumbIconBorderRadiusTablet: {
+	breadcrumbItemIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbItemIconGapUnits: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	breadcrumbIconBorderRadiusMobile: {
+    breadcrumbItemIconBgSize: {
+        type: 'object',
+        default: {
+            Desktop: '50',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbItemIconBgSizeUnits: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
-		},
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
-	breadcrumbIconBorderRadiusLink : {
-		type : 'boolean',
-		default: true
-	},
-    /** End Icon */
+    breadcrumbItemIconColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbItemIconColor : {
+        type: 'string',
+        default: '#399CFF',
+    },
+    breadcrumbItemIconHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbItemIconBgColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbItemIconBgColor : {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbItemIconBgHoverColor: {
+        type: 'string',
+        default: ''
+    },
 	// Extra
 	breadcrumbGlobalZIndex : {
         type: 'object',
