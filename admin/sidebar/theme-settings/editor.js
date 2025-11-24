@@ -584,12 +584,17 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 .select('core')
                 .getEntityRecord('postType', 'wp_template', currentPostId);
 
-            const dbId = templateEntity?.wp_id || currentPostId;
+            // Get numeric database ID from template entity
+            // wp_id is the database post ID, not the template ID string
+            const dbId = templateEntity?.wp_id;
 
             console.log('wp_template entity :', templateEntity);
             console.log('dbId used for template-settings :', dbId);
+            console.log('currentPostId (template ID string):', currentPostId);
 
-            if (!dbId) {
+            // Only proceed if we have a valid numeric database ID
+            if (!dbId || !Number.isInteger(dbId)) {
+                console.warn('[Template Editor] No valid database ID found. wp_id:', dbId);
                 return;
             }
 
@@ -660,15 +665,22 @@ const FrontisMetaBox = ({ whichEditor }) => {
                 return;
             }
             
+            // Validate postId is numeric before sending
+            const numericPostId = Number.parseInt(postId, 10);
+            if (!numericPostId || isNaN(numericPostId)) {
+                console.error('[Template Editor Save] ❌ Invalid post ID:', postId, 'Must be numeric');
+                return;
+            }
+
             console.log('[Template Editor Save] Saving template settings...');
-            console.log('[Template Editor Save] Post ID:', postId);
+            console.log('[Template Editor Save] Post ID:', numericPostId);
             console.log('[Template Editor Save] Template Meta:', templateMeta);
             console.log('[Template Editor Save] Has explicit overrides:', hasChanges);
             
             apiFetch({
                 path: 'frontis/v1/template-settings',
                 method: 'POST',
-                data: { setting: templateMeta, post_id: postId },
+                data: { setting: templateMeta, post_id: numericPostId },
             })
                 .then((res) => {
                     console.log('[Template Editor Save] Save response:', res);
