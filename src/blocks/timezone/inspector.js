@@ -34,6 +34,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import FB_AlignmentControl from '@Components/alignment-control';
 
 import './editor.scss';
 
@@ -171,6 +172,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		timezoneTextAlignment,
 		timezoneLocationTextSpacing,
 		timezoneLocationTextSpacingUnits,
+		timezoneCardAlignment,
+		timezoneCardSpacing,
+		timezoneCardSpacingUnits,
 
 		locationTimezoneBgColorTypeSwitcher,
         locationTimezoneBgColorType,
@@ -226,10 +230,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         infoBoxBgHoverCustomGradientColorSwitcher,
         infoBoxBgHoverCustomGradientColor,
 
+		infoBoxOffStatusBgColorTypeSwitcher,
+        infoBoxOffStatusBgColorType,
+        infoBoxOffStatusBgHoverColorType,
+        infoBoxOffStatusBgColor,
+        infoBoxOffStatusBgHoverColor,
+        infoBoxOffStatusBgGradientColor,
+        infoBoxOffStatusBgHoverGradientColor,
+        infoBoxOffStatusBgCustomGradientColorSwitcher,
+        infoBoxOffStatusBgCustomGradientColor,
+        infoBoxOffStatusBgHoverCustomGradientColorSwitcher,
+        infoBoxOffStatusBgHoverCustomGradientColor,
+
 		infoBoxBorder,
         infoBoxBorderColor,
         infoBoxBorderHoverColor,
         infoBoxBorderColorSwitcher,
+        infoBoxOffStatusBorderColor,
+        infoBoxOffStatusBorderHoverColor,
+        infoBoxOffStatusBorderColorSwitcher,
 
         infoBoxBorderUnits,
         infoBoxDesktopBorder,
@@ -244,6 +263,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         infoBoxBorderRadiusLink,
         infoBoxBoxShadowValues,
         infoBoxBoxShadowCssValue,
+        infoBoxOffStatusBoxShadowValues,
+        infoBoxOffStatusBoxShadowCssValue,
 
 		infoBoxPaddingUnits,
         infoBoxDesktopPadding,
@@ -345,6 +366,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         noticeTextColorSwitcher,
 		noticeTextColor,
 		noticeTextHoverColor,
+        statusOffNoticeTextColorSwitcher,
+		statusOffNoticeTextColor,
+		statusOffNoticeTextHoverColor,
 
         timezoneGlobalZIndex,
         timezoneOverflow,
@@ -955,24 +979,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      * Inspector General Controls Start
     */
     const generalControls = (
-        <>
-            <PanelBody title="Timezone Settings" initialOpen={true}>
-                <BaseControl>
+        <>  
+            <PanelBody title={__("Element Visibility", "frontis-blocks")} initialOpen={true}>
+                <BaseControl 
+                    className="fb-setting-show-hide-elements"
+                >
+                    <ToggleControl
+                        label={__("Show Status", "frontis-blocks")}
+                        checked={showStatusSwitcher}
+                        onChange={(value) => setAttributes({ showStatusSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label="Monthly Schedule"
+                        checked={!!useMonthlySchedule}
+                        onChange={(value) => setAttributes({ useMonthlySchedule: value })}
+                    />
+                    <ToggleControl
+                        label="Remaining Time"
+                        checked={!!showRemainingTime}
+                        onChange={(value) => setAttributes({ showRemainingTime: value })}
+                    />
                     <ToggleControl
                         label="UTC Timezone"
                         checked={!!useUTCTimezoneFormat}
                         onChange={(value) => setAttributes({ useUTCTimezoneFormat: value })}
                     />
+                    <ToggleControl
+                        label="Timezone Offset"
+                        checked={!!showTimezoneOffset}
+                        onChange={(value) => setAttributes({ showTimezoneOffset: value })}
+                    />
+                    <ToggleControl
+                        label="Show Separator"
+                        checked={showSeparatorSwitcher}
+                        onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
+                    />
                 </BaseControl>
-
-                <BaseControl label="Timezone Tracking">
+            </PanelBody>
+            
+            <PanelBody title="Time" initialOpen={false}>
+                <BaseControl label="Timezone Track">
                     <SelectControl
                         options={TIMEZONE}
                         value={timezoneMode}
                         onChange={(value) => setAttributes({ timezoneMode: value })}
                     />
                 </BaseControl>
-                
+
                 {timezoneMode === 'auto' ? (
                     <TextControl 
                         label="Timezone" 
@@ -993,18 +1046,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <BaseControl>
                     <ToggleControl
-                        label="Timezone Offset"
-                        checked={!!showTimezoneOffset}
-                        onChange={(value) => setAttributes({ showTimezoneOffset: value })}
-                        help="(e.g., GMT+6, UTC+06:00)"
-                    />
-                </BaseControl>
-            </PanelBody>
-
-            <PanelBody title="Location" initialOpen={false}>
-                <BaseControl>
-                    <ToggleControl
-                        label="Custom Location"
+                        label="Location Customize"
                         checked={!!useCustomLocation}
                         onChange={(value) => setAttributes({ useCustomLocation: value })}
                     />
@@ -1012,7 +1054,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 {useCustomLocation ? (
                     <TextControl
-                        label="Location Name"
                         value={location || ''}
                         onChange={(value) => setAttributes({ location: value })}
                         placeholder="e.g., Dhaka, Bangladesh"
@@ -1020,16 +1061,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     />
                 ) : (
                     <TextControl
-                        label="Default Location"
                         value={getLocationDisplayName()}
                         readOnly
-                        help="Auto-detected based on timezone"
                     />
                 )}
-            </PanelBody>
 
-            <PanelBody title="Time" initialOpen={false}>
-                <BaseControl label="Time Format">
+                <BaseControl label="Select Format">
                     <Select2
                         options={timeFormatOptions}
                         value={getSelectedOption(timeFormatOptions, timeFormat || 'hh:mm A')}
@@ -1038,21 +1075,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         className="fb-select2-control"
                     />
                 </BaseControl>
-                
                 {effectiveTimezone && (
                     <TextControl
-                        label="Current Time"
+                        label="Formated Time"
                         value={currentTime || 'Loading...'}
                         readOnly
                     />
                 )}
-            </PanelBody>
-
-            <PanelBody title="Separator" initialOpen={false}>
-                <ToggleControl
-                    checked={showSeparatorSwitcher}
-                    onChange={(value) => setAttributes({ showSeparatorSwitcher: value })}
-                />
 
                 {showSeparatorSwitcher && (
                     <TextControl
@@ -1072,62 +1101,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         help="Allowed symbols only."
                     />
                 )}
+            
             </PanelBody>
-
-            <ToggleControl
-                label={__("Show Status", "frontis-blocks")}
-                checked={showStatusSwitcher}
-                onChange={(value) => setAttributes({ showStatusSwitcher: value })}
-            />
             
             { showStatusSwitcher && (
                 <>
-                    <PanelBody title="Status Text Settings" initialOpen={false}>
+                    <PanelBody title={`${useMonthlySchedule ? "Monthly" : "Current"} Schedule`} initialOpen={false}>
                         <TextControl
                             label="Current Status"
                             value={currentStatus}
                             readOnly
                         />
-                        <TextControl
-                            label="Open Status Text"
-                            value={openStatusText || ''}
-                            onChange={(value) => setAttributes({ openStatusText: value })}
-                            placeholder="e.g., Open, Available, etc."
-                        />
-                        
-                        <TextControl
-                            label="Closed Status Text"
-                            value={closedStatusText || ''}
-                            onChange={(value) => setAttributes({ closedStatusText: value })}
-                            placeholder="e.g., Closed, Unavailable, etc."
-                        />
-                    </PanelBody>
-
-                    <PanelBody title="Time Display Text" initialOpen={false}>
-                        <TextControl
-                            label="Before Time Text"
-                            value={beforeTimeText || ''}
-                            onChange={(value) => setAttributes({ beforeTimeText: value })}
-                            placeholder="e.g., Start at, Opens at, etc."
-                        />
-                        
-                        <TextControl
-                            label="After Time Text"
-                            value={afterTimeText || ''}
-                            onChange={(value) => setAttributes({ afterTimeText: value })}
-                            placeholder="e.g., Will close at, Closes at, etc."
-                        />
-                    </PanelBody>
-
-                    <PanelBody title="Office Hours Schedule" initialOpen={false}>
-                        <BaseControl>
-                            <ToggleControl
-                                label="Use Monthly Schedule"
-                                checked={!!useMonthlySchedule}
-                                onChange={(value) => setAttributes({ useMonthlySchedule: value })}
-                            />
-                        </BaseControl>
-
                         {!useMonthlySchedule && (
                             <>
                                 <TimePickerField
@@ -1143,24 +1127,77 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             </>
                         )}
 
-                        <BaseControl>
-                            <ToggleControl
-                                label="Show Remaining Time"
-                                checked={!!showRemainingTime}
-                                onChange={(value) => setAttributes({ showRemainingTime: value })}
-                            />
-                        </BaseControl>
+                        {useMonthlySchedule && (
+                            <>
+                                <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
+                                    <BaseControl label="Add Month Schedule">
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
+                                            <div style={{ flex: 1 }}>
+                                                <Select2
+                                                    options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
+                                                    value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
+                                                    onChange={(opt) => setSelectedMonth(opt?.value || '')}
+                                                    isClearable={false}
+                                                    className="fb-select2-control"
+                                                />
+                                            </div>
+                                            <Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
+                                                Add Schedule
+                                            </Button>
+                                        </div>
+                                    </BaseControl>
+                                </div>
+                                {monthlySchedules && monthlySchedules.length > 0 ? (
+                                    <>
+                                        <strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
+                                        <div style={{ marginTop: '10px', borderRadius: '4px' }}>
+                                            {monthlySchedules.map(schedule => (
+                                                <div key={schedule.month} style={{ padding: '4px', margin: '5px 0 10px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
+                                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                                        <strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
+                                                            {monthOptions.find(m => m.value === schedule.month)?.label}
+                                                        </strong>
+                                                        <Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
+                                                            Remove
+                                                        </Button>
+                                                    </div>
+                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                                                        <BaseControl label="Start Time">
+                                                            <TimePickerField
+                                                                value={schedule.startTime}
+                                                                onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
+                                                            />
+                                                        </BaseControl>
+                                                        <BaseControl label="End Time">
+                                                            <TimePickerField
+                                                                value={schedule.endTime}
+                                                                onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
+                                                            />
+                                                        </BaseControl>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </>
+                                ) : (
+                                    <div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
+                                        <p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
+                                        <p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
+                                    </div>
+                                )}
+                            </>
+                        )}
 
                         {showRemainingTime && (
                             <>
                                 <TextControl
-                                    label="Remaining Time Label"
+                                    label="Label"
                                     value={remainingTimeLabel || ''}
                                     onChange={(value) => setAttributes({ remainingTimeLabel: value })}
                                     placeholder="Remaining:"
                                 />
                                 
-                                <BaseControl label="Remaining Time Format">
+                                <BaseControl label="Time Format">
                                     <SelectControl
                                         options={[
                                             { label: 'hour minutes', value: 'hours-minutes' },
@@ -1175,70 +1212,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             </>
                         )}
                     </PanelBody>
-
-                    {useMonthlySchedule && (
-                        <PanelBody title="Monthly Schedule" initialOpen={false}>
-                            <div style={{ marginBottom: '15px', padding: '12px', backgroundColor: '#f8f9fa', borderRadius: '4px' }}>
-                                <BaseControl label="Add Month Schedule">
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
-                                        <div style={{ flex: 1 }}>
-                                            <Select2
-                                                options={[{ label: 'Choose Month', value: '' }, ...monthOptions]}
-                                                value={getSelectedOption([{ label: 'Choose Month', value: '' }, ...monthOptions], selectedMonth)}
-                                                onChange={(opt) => setSelectedMonth(opt?.value || '')}
-                                                isClearable={false}
-                                                className="fb-select2-control"
-                                            />
-                                        </div>
-                                        <Button onClick={addMonthlySchedule} disabled={!selectedMonth}>
-                                            Add Schedule
-                                        </Button>
-                                    </div>
-                                </BaseControl>
-                            </div>
-                            {monthlySchedules && monthlySchedules.length > 0 ? (
-                                <div>
-                                    <strong>Monthly Schedules ({monthlySchedules.length}/12):</strong>
-                                    <div style={{ marginTop: '10px', borderRadius: '4px' }}>
-                                        {monthlySchedules.map(schedule => (
-                                            <div key={schedule.month} style={{ padding: '4px', margin: '5px 0', border: '1px solid #e0e0e0', backgroundColor: '#fff' }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                                    <strong style={{ fontSize: '1em', color: '#1e1e1e' }}>
-                                                        {monthOptions.find(m => m.value === schedule.month)?.label}
-                                                    </strong>
-                                                    <Button isDestructive onClick={() => removeMonthlySchedule(schedule.month)}>
-                                                        Remove
-                                                    </Button>
-                                                </div>
-                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
-                                                    <BaseControl label="Start Time">
-                                                        <TimePickerField
-                                                            value={schedule.startTime}
-                                                            onChange={(value) => updateMonthlySchedule(schedule.month, 'startTime', value)}
-                                                        />
-                                                    </BaseControl>
-                                                    <BaseControl label="End Time">
-                                                        <TimePickerField
-                                                            value={schedule.endTime}
-                                                            onChange={(value) => updateMonthlySchedule(schedule.month, 'endTime', value)}
-                                                        />
-                                                    </BaseControl>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-                            ) : (
-                                <div style={{ padding: '30px 20px', textAlign: 'center', border: '2px dashed #ddd', borderRadius: '4px', backgroundColor: 'rgb(248, 249, 250)' }}>
-                                    <p style={{ marginBottom: '10px' }}>No monthly schedules added yet</p>
-                                    <p style={{ fontSize: '0.9em', color: '#666' }}>Add months above to set custom hours for each month</p>
-                                </div>
-                            )}
-                        </PanelBody>
-                    )}
-
-                    <PanelBody title="Off Day Settings" initialOpen={false}>
-                        <BaseControl label="Add Weekend Day">
+                        
+                    <PanelBody title="Holiday & Weekend" initialOpen={false}>
+                        <BaseControl label="Add Weekend">
                             <Select2
                                 options={WEEKENDDAY}
                                 value={weekendDays ? weekendDays.map(day => ({ label: getWeekdayName(day), value: day })) : []}
@@ -1251,7 +1227,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 className="fb-select2-control"
                             />
                         </BaseControl>
-                        <BaseControl label="Add Holiday Date">
+                        <BaseControl>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', alignItems: 'center' }}>
                                 <DatePicker 
                                     currentDate={selectedDate} 
@@ -1294,6 +1270,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             <Button 
                                                 isDestructive
                                                 onClick={() => removeHoliday(holiday)}
+                                                style={{padding: '6px 8px', height: 'auto'}}
                                             >
                                                 Remove
                                             </Button>
@@ -1303,16 +1280,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             </div>
                         )}
                     </PanelBody>
-
-                    <PanelBody title="Office Notice" initialOpen={false}>
-                        <TextareaControl
-                            label="Set Weekend Info"
+                    <PanelBody title="Text" initialOpen={false}>
+                        <TextControl
+                            label="Status ON"
+                            value={openStatusText || ''}
+                            onChange={(value) => setAttributes({ openStatusText: value })}
+                            placeholder="e.g., Open, Available, etc."
+                        />
+                        <TextControl
+                            label="Status OFF"
+                            value={closedStatusText || ''}
+                            onChange={(value) => setAttributes({ closedStatusText: value })}
+                            placeholder="e.g., Closed, Off, etc."
+                        />
+                        <TextControl
+                            label="ON Notice"
+                            value={beforeTimeText || ''}
+                            onChange={(value) => setAttributes({ beforeTimeText: value })}
+                            placeholder="e.g., Start at, Opens at, etc."
+                        />
+                        <TextControl
+                            label="OFF Notice"
+                            value={afterTimeText || ''}
+                            onChange={(value) => setAttributes({ afterTimeText: value })}
+                            placeholder="e.g., Will close at, Closes at, etc."
+                        />
+                        <TextControl
+                            label="Weekend Info"
                             value={weekendMessage || ''}
                             onChange={(value) => setAttributes({ weekendMessage: value })}
                             placeholder="Weekend"
                         />
-                        <TextareaControl
-                            label="Set Holiday Info"
+                        <TextControl
+                            label="Holiday Info"
                             value={holidayMessage || ''}
                             onChange={(value) => setAttributes({ holidayMessage: value })}
                             placeholder="Holiday"
@@ -2723,6 +2723,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         
         .${blockID}.fb-timezone-main-wrapper .fb-timezone-container {
+            gap: ${timezoneCardSpacing?.Desktop}${timezoneCardSpacingUnits?.Desktop};
+            ${timezoneCardAlignment ? `justify-content: ${timezoneCardAlignment};` : ''}
             ${desktopBackgroundNormalStyles}
             ${timezoneDesktopPaddingWidth && timezoneDesktopPadding?.top ? `padding: ${timezoneDesktopPaddingWidth};` : ''}
             ${timezoneDesktopMarginWidth && timezoneDesktopMargin?.top ? `margin: ${timezoneDesktopMarginWidth};` : ''}
@@ -2743,9 +2745,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
 			position: relative;
-			width: max-content;
 			display: flex;
-			${timezoneTextAlignment?.Desktop ? `justify-content: ${timezoneTextAlignment?.Desktop};` : ''}
 			align-items: center;
 			gap: ${timezoneLocationTextSpacing?.Desktop}${timezoneLocationTextSpacingUnits?.Desktop};
 			
@@ -2886,38 +2886,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		
 		.${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-offset{
 			${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
-
 			${timezoneTextHoverColorType === 'gradient' ? `
 				background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
 				${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
 				${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
 			` : ''}
-			
 			transition: all .3s ease-in-out;
 		}
 
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box {
-			${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
-
-			${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
+            overflow: hidden;
+            ${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
             ${infoBoxDesktopBorderWidth && infoBoxDesktopBorder?.top ? `border-width: ${infoBoxDesktopBorderWidth};` : ''}
             ${infoBoxDesktopBorderRadiusWidth && infoBoxDesktopBorderRadius?.top ? `border-radius: ${infoBoxDesktopBorderRadiusWidth};` : ''}
-            ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
-			${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
-
 			${infoBoxDesktopPaddingWidth && infoBoxDesktopPadding?.top ? `padding: ${infoBoxDesktopPaddingWidth};` : ''}
-            ${infoBoxDesktopMarginWidth && infoBoxDesktopMargin?.top ? `margin: ${infoBoxDesktopMarginWidth};` : ''}
 		}
 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box:hover{
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open {
+            ${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
+            ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
+			${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open:hover{
 			${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
 
 			${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
 
 			transition: all .3s ease-in-out;
 		}
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed {
+            ${ infoBoxOffStatusBgColorType === "gradient" ? `background: ${ infoBoxOffStatusBgCustomGradientColorSwitcher && infoBoxOffStatusBgCustomGradientColor ? infoBoxOffStatusBgCustomGradientColor : infoBoxOffStatusBgGradientColor };` : infoBoxOffStatusBgColor ?`background: ${infoBoxOffStatusBgColor};` : '' }
+            ${infoBoxOffStatusBorderColor ? `border-color: ${infoBoxOffStatusBorderColor};` : ''}
+			${infoBoxOffStatusBoxShadowCssValue ? `box-shadow: ${infoBoxOffStatusBoxShadowCssValue};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed:hover{
+			${ infoBoxOffStatusBgHoverColorType === "gradient" ? `background: ${ infoBoxOffStatusBgHoverCustomGradientColorSwitcher && infoBoxOffStatusBgHoverCustomGradientColor ? infoBoxOffStatusBgHoverCustomGradientColor : infoBoxOffStatusBgHoverGradientColor };` : infoBoxOffStatusBgHoverColor ? `background: ${infoBoxOffStatusBgHoverColor};` : '' }
+
+			${infoBoxOffStatusBorderHoverColor ? `border-color: ${infoBoxOffStatusBorderHoverColor};` : ''}
+
+			transition: all .3s ease-in-out;
+		}
 
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status, 
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status, 
 		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status {
 			${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
             ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
@@ -2958,7 +2974,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
 			transition: all .3s ease-in-out;
 		}
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status{
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status,
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status,
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status{
 			${statusCloseColor ? `color: ${statusCloseColor};` : ''}
 			${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
 			${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
@@ -2968,7 +2986,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			transition: all .3s ease-in-out;
 		}
 
-		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover{
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover,
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status:hover,
+		.${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status:hover{
 			${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
 			${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
 			${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
@@ -2994,13 +3014,694 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${noticeTextGlobalTypoSwitcher?.letterSpacing === false && noticeTextLetterSpacing?.Desktop && noticeTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${noticeTextLetterSpacing?.Desktop}${noticeTextLetterSpacingUnits?.Desktop};` : ''}
             ${noticeTextGlobalTypoSwitcher?.lineHeight === false && noticeTextLineHeight?.Desktop && noticeTextLineHeightUnits?.Desktop ? `line-height: ${noticeTextLineHeight?.Desktop}${noticeTextLineHeightUnits?.Desktop};` : ''}
             
-            ${noticeTextColor ? `color: ${noticeTextColor};` : ''}
+            ${infoBoxDesktopMarginWidth && infoBoxDesktopMargin?.top ? `margin: ${infoBoxDesktopMarginWidth};` : ''}
 
 			transition: all .3s ease-in-out;
 		}
-        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info .fb-timezone-info-noted:hover{
+
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted{
+            ${noticeTextColor ? `color: ${noticeTextColor};` : ''}
+        }
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted:hover{
             ${noticeTextHoverColor ? `color: ${noticeTextHoverColor};` : ''}
             transition: all .3s ease-in-out;
+        }
+
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted,
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted,
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted{
+            ${statusOffNoticeTextColor ? `color: ${statusOffNoticeTextColor};` : ''}
+        }
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted:hover,
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted:hover,
+        .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted:hover{
+            ${statusOffNoticeTextHoverColor ? `color: ${statusOffNoticeTextHoverColor};` : ''}
+            transition: all .3s ease-in-out;
+        }
+
+            @media only screen and (max-width: 1024px) {
+                .${blockID}.fb-timezone-main-wrapper {
+                    ${timezonePositionType === 'default' ? `position: relative !important;` : ''}
+                    ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' ? `width: 100%;` : ''}
+                    ${timezonePositionType !== 'default' ? `position: ${timezonePositionType} !important;` : ''}
+                    ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'left' && timezoneHZLeftOffset?.Tablet ? `left: ${timezoneHZLeftOffset?.Tablet}${timezoneHZLeftOffsetUnits?.Tablet};` : ''} 
+                    ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'right' && timezoneHZRightOffset?.Tablet ? `right: ${timezoneHZRightOffset?.Tablet}${timezoneHZRightOffsetUnits?.Tablet};` : ''}
+                    ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'top' && timezoneVRTopOffset?.Tablet ? `top: ${timezoneVRTopOffset?.Tablet}${timezoneVRTopOffsetUnits?.Tablet};` : ''}
+                    ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'bottom' && timezoneVRBottomOffset?.Tablet ? `bottom: ${timezoneVRBottomOffset?.Tablet}${timezoneVRBottomOffsetUnits?.Tablet};` : ''}
+
+                    ${timezoneGlobalZIndex?.Tablet ? `z-index: ${timezoneGlobalZIndex?.Tablet};` : ''}
+                    ${timezoneOverflow !== 'default' ? `overflow: ${timezoneOverflow};` : ''}
+                }
+                
+                .${blockID}.fb-timezone-main-wrapper .fb-timezone-container {
+                    gap: ${timezoneCardSpacing?.Tablet}${timezoneCardSpacingUnits?.Tablet};
+                    ${timezoneCardAlignment ? `justify-content: ${timezoneCardAlignment};` : ''}
+                    ${tabletBackgroundNormalStyles}
+                    ${timezoneTabletPaddingWidth && timezoneTabPadding?.top ? `padding: ${timezoneTabletPaddingWidth};` : ''}
+                    ${timezoneTabletMarginWidth && timezoneTabMargin?.top ? `margin: ${timezoneTabletMarginWidth};` : ''}
+                    ${timezoneGlobalBorder ? `border: ${timezoneGlobalBorder};` : ''}
+                    ${globalTabletBorderWidth && timezoneGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
+                    ${globalTabletBorderRadiusWidth && timezoneGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+                    ${timezoneGlobalBorderColor ? `border-color: ${timezoneGlobalBorderColor};` : ''}
+                    ${timezoneGlobalBoxShadowCssValue ? `box-shadow: ${timezoneGlobalBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID}.fb-timezone-main-wrapper .fb-timezone-container:hover {
+                    ${tabletBackgroundHoverStyles}
+                    ${timezoneGlobalBorderHoverColor ? `border-color: ${timezoneGlobalBorderHoverColor};` : ''}
+                    ${timezoneGlobalBoxShadowHoverCssValue ? `box-shadow: ${timezoneGlobalBoxShadowHoverCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    gap: ${timezoneLocationTextSpacing?.Tablet}${timezoneLocationTextSpacingUnits?.Tablet};
+                    
+                    ${ locationTimezoneBgColorType === "gradient" ? `background: ${ locationTimezoneBgCustomGradientColorSwitcher && locationTimezoneBgCustomGradientColor ? locationTimezoneBgCustomGradientColor : locationTimezoneBgGradientColor };` : locationTimezoneBgColor ?`background: ${locationTimezoneBgColor};` : '' }
+                    
+                    ${locationTimezoneBorder ? `border: ${locationTimezoneBorder};` : ''}
+                    ${locationTimezoneTabletBorderWidth && locationTimezoneTabletBorder?.top ? `border-width: ${locationTimezoneTabletBorderWidth};` : ''}
+                    ${locationTimezoneTabletBorderRadiusWidth && locationTimezoneTabBorderRadius?.top ? `border-radius: ${locationTimezoneTabletBorderRadiusWidth};` : ''}
+                    ${locationTimezoneBorderColor ? `border-color: ${locationTimezoneBorderColor};` : ''}
+                    ${locationTimezoneBoxShadowCssValue ? `box-shadow: ${locationTimezoneBoxShadowCssValue};` : ''}
+
+                    ${locationTimezoneTabletPaddingWidth && locationTimezoneTabPadding?.top ? `padding: ${locationTimezoneTabletPaddingWidth};` : ''}
+                    ${locationTimezoneTabletMarginWidth && locationTimezoneTabMargin?.top ? `margin: ${locationTimezoneTabletMarginWidth};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover{
+                    ${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
+
+                    ${locationTimezoneBorderHoverColor ? `border-color: ${locationTimezoneBorderHoverColor};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-location-name{
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
+
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Tablet && timezoneLocationTextFontSizeUnits?.Tablet ? `font-size: ${timezoneLocationTextFontSize?.Tablet}${timezoneLocationTextFontSizeUnits?.Tablet};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Tablet && timezoneLocationTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Tablet}${timezoneLocationTextLetterSpacingUnits?.Tablet};` : ''}
+                    ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Tablet && timezoneLocationTextLineHeightUnits?.Tablet ? `line-height: ${timezoneLocationTextLineHeight?.Tablet}${timezoneLocationTextLineHeightUnits?.Tablet};` : ''}
+
+                    ${locationNameTextColor ? `color: ${locationNameTextColor};` : ''}
+
+                    ${locationNameTextColorType === 'gradient' ? `
+                        background: ${locationNameTextCustomGradientColorSwitcher && locationNameTextCustomGradientColor ? locationNameTextCustomGradientColor : locationNameTextGradientColor};
+                        ${locationNameTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                        ${locationNameTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-location-name{
+
+                    ${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
+                    ${locationNameTextHoverColorType === 'gradient' ? `
+                        background: ${locationNameTextHoverCustomGradientColorSwitcher && locationNameTextHoverCustomGradientColor ? locationNameTextHoverCustomGradientColor : locationNameTextHoverGradientColor};
+                        ${locationNameTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                        ${locationNameTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ` : ''}
+                    
+                    transition: all .3s ease-in-out;
+                }
+                
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-separator {
+                    font-size: ${separatorSize?.Tablet}${separatorFontUnits?.Tablet};
+                    line-height: 100%;
+                    ${separatorColor ? `color: ${separatorColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-separator {
+                    ${separatorHoverColor ? `color: ${separatorHoverColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-time {
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === true && timezoneTimeTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTimeTextGlobalTypographyData?.fontFamily};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === true && timezoneTimeTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTimeTextGlobalTypographyData?.fontSize};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === true && timezoneTimeTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTimeTextGlobalTypographyData?.fontWeight};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === true && timezoneTimeTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTimeTextGlobalTypographyData?.fontStyle};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === true && timezoneTimeTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTimeTextGlobalTypographyData?.textTransform};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === true && timezoneTimeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTimeTextGlobalTypographyData?.textDecoration};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTimeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTimeTextGlobalTypographyData?.letterSpacing};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === true && timezoneTimeTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTimeTextGlobalTypographyData?.lineHeight};` : ''}
+
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === false && timezoneTimeTextFontFamily && timezoneTimeTextFontFamily !== 'Default' ? `font-family: ${timezoneTimeTextFontFamily};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === false && timezoneTimeTextFontSize?.Tablet && timezoneTimeTextFontSizeUnits?.Tablet ? `font-size: ${timezoneTimeTextFontSize?.Tablet}${timezoneTimeTextFontSizeUnits?.Tablet};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === false && timezoneTimeTextFontWeight ? `font-weight: ${timezoneTimeTextFontWeight};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === false && timezoneTimeTextFontStyle ? `font-style: ${timezoneTimeTextFontStyle};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === false && timezoneTimeTextTransform ? `text-transform: ${timezoneTimeTextTransform};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === false && timezoneTimeTextDecoration ? `text-decoration: ${timezoneTimeTextDecoration};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTimeTextLetterSpacing?.Tablet && timezoneTimeTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${timezoneTimeTextLetterSpacing?.Tablet}${timezoneTimeTextLetterSpacingUnits?.Tablet};` : ''}
+                    ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === false && timezoneTimeTextLineHeight?.Tablet && timezoneTimeTextLineHeightUnits?.Tablet ? `line-height: ${timezoneTimeTextLineHeight?.Tablet}${timezoneTimeTextLineHeightUnits?.Tablet};` : ''}
+
+                    ${timezoneTimeTextColor ? `color: ${timezoneTimeTextColor};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-time{
+                    ${timezoneTimeTextHoverColor ? `color: ${timezoneTimeTextHoverColor};` : ''}
+
+                    ${timezoneTimeTextHoverColorType === 'gradient' ? `
+                        background: ${timezoneTimeTextHoverCustomGradientColorSwitcher && timezoneTimeTextHoverCustomGradientColor ? timezoneTimeTextHoverCustomGradientColor : timezoneTimeTextHoverGradientColor};
+                        ${timezoneTimeTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                        ${timezoneTimeTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ` : ''}
+                    
+                    transition: all .3s ease-in-out;
+                }
+                
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-offset {
+                    ${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontStyle === true && timezoneTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTextGlobalTypographyData?.fontStyle};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.textTransform === true && timezoneTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTextGlobalTypographyData?.textTransform};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.textDecoration === true && timezoneTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTextGlobalTypographyData?.textDecoration};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTextGlobalTypographyData?.letterSpacing};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.lineHeight === true && timezoneTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTextGlobalTypographyData?.lineHeight};` : ''}
+
+                    ${timezoneTextGlobalTypoSwitcher?.fontFamily === false && timezoneTextFontFamily && timezoneTextFontFamily !== 'Default' ? `font-family: ${timezoneTextFontFamily};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontSize === false && timezoneTextFontSize?.Tablet && timezoneTextFontSizeUnits?.Tablet ? `font-size: ${timezoneTextFontSize?.Tablet}${timezoneTextFontSizeUnits?.Tablet};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontWeight === false && timezoneTextFontWeight ? `font-weight: ${timezoneTextFontWeight};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.fontStyle === false && timezoneTextFontStyle ? `font-style: ${timezoneTextFontStyle};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.textTransform === false && timezoneTextTransform ? `text-transform: ${timezoneTextTransform};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.textDecoration === false && timezoneTextDecoration ? `text-decoration: ${timezoneTextDecoration};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTextLetterSpacing?.Tablet && timezoneTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${timezoneTextLetterSpacing?.Tablet}${timezoneTextLetterSpacingUnits?.Tablet};` : ''}
+                    ${timezoneTextGlobalTypoSwitcher?.lineHeight === false && timezoneTextLineHeight?.Tablet && timezoneTextLineHeightUnits?.Tablet ? `line-height: ${timezoneTextLineHeight?.Tablet}${timezoneTextLineHeightUnits?.Tablet};` : ''}
+
+                    ${timezoneTextColor ? `color: ${timezoneTextColor};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+                
+                .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-offset{
+                    ${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
+                    ${timezoneTextHoverColorType === 'gradient' ? `
+                        background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
+                        ${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                        ${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box {
+                    overflow: hidden;
+                    ${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
+                    ${infoBoxTabletBorderWidth && infoBoxTabletBorder?.top ? `border-width: ${infoBoxTabletBorderWidth};` : ''}
+                    ${infoBoxTabletBorderRadiusWidth && infoBoxTabBorderRadius?.top ? `border-radius: ${infoBoxTabletBorderRadiusWidth};` : ''}
+                    ${infoBoxTabletPaddingWidth && infoBoxTabPadding?.top ? `padding: ${infoBoxTabletPaddingWidth};` : ''}
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open {
+                    ${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
+                    ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
+                    ${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open:hover{
+                    ${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
+
+                    ${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed {
+                    ${ infoBoxOffStatusBgColorType === "gradient" ? `background: ${ infoBoxOffStatusBgCustomGradientColorSwitcher && infoBoxOffStatusBgCustomGradientColor ? infoBoxOffStatusBgCustomGradientColor : infoBoxOffStatusBgGradientColor };` : infoBoxOffStatusBgColor ?`background: ${infoBoxOffStatusBgColor};` : '' }
+                    ${infoBoxOffStatusBorderColor ? `border-color: ${infoBoxOffStatusBorderColor};` : ''}
+                    ${infoBoxOffStatusBoxShadowCssValue ? `box-shadow: ${infoBoxOffStatusBoxShadowCssValue};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed:hover{
+                    ${ infoBoxOffStatusBgHoverColorType === "gradient" ? `background: ${ infoBoxOffStatusBgHoverCustomGradientColorSwitcher && infoBoxOffStatusBgHoverCustomGradientColor ? infoBoxOffStatusBgHoverCustomGradientColor : infoBoxOffStatusBgHoverGradientColor };` : infoBoxOffStatusBgHoverColor ? `background: ${infoBoxOffStatusBgHoverColor};` : '' }
+
+                    ${infoBoxOffStatusBorderHoverColor ? `border-color: ${infoBoxOffStatusBorderHoverColor};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status, 
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status, 
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status {
+                    ${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontStyle === true && statusTextGlobalTypographyData?.fontStyle ? `font-style: ${statusTextGlobalTypographyData?.fontStyle};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.textTransform === true && statusTextGlobalTypographyData?.textTransform ? `text-transform: ${statusTextGlobalTypographyData?.textTransform};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.textDecoration === true && statusTextGlobalTypographyData?.textDecoration ? `text-decoration: ${statusTextGlobalTypographyData?.textDecoration};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.letterSpacing === true && statusTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${statusTextGlobalTypographyData?.letterSpacing};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.lineHeight === true && statusTextGlobalTypographyData?.lineHeight ? `line-height: ${statusTextGlobalTypographyData?.lineHeight};` : ''}
+
+                    ${statusTextGlobalTypoSwitcher?.fontFamily === false && statusTextFontFamily && statusTextFontFamily !== 'Default' ? `font-family: ${statusTextFontFamily};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontSize === false && statusTextFontSize?.Tablet && statusTextFontSizeUnits?.Tablet ? `font-size: ${statusTextFontSize?.Tablet}${statusTextFontSizeUnits?.Tablet};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontWeight === false && statusTextFontWeight ? `font-weight: ${statusTextFontWeight};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.fontStyle === false && statusTextFontStyle ? `font-style: ${statusTextFontStyle};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.textTransform === false && statusTextTransform ? `text-transform: ${statusTextTransform};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.textDecoration === false && statusTextDecoration ? `text-decoration: ${statusTextDecoration};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.letterSpacing === false && statusTextLetterSpacing?.Tablet && statusTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${statusTextLetterSpacing?.Tablet}${statusTextLetterSpacingUnits?.Tablet};` : ''}
+                    ${statusTextGlobalTypoSwitcher?.lineHeight === false && statusTextLineHeight?.Tablet && statusTextLineHeightUnits?.Tablet ? `line-height: ${statusTextLineHeight?.Tablet}${statusTextLineHeightUnits?.Tablet};` : ''}
+
+                    ${statusTabletPaddingWidth && statusTabPadding?.top ? `padding: ${statusTabletPaddingWidth};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status{
+                    ${statusOpenColor ? `color: ${statusOpenColor};` : ''}
+                    ${statusOpenBgColor ? `background-color: ${statusOpenBgColor};` : ''}
+                    ${statusOpenBorder ? `border: ${statusOpenBorder};` : ''}
+                    ${statusOpenTabletBorderWidth && statusOpenTabletBorder?.top ? `border-width: ${statusOpenTabletBorderWidth};` : ''}
+                    ${statusOpenTabletBorderRadiusWidth && statusOpenTabBorderRadius?.top ? `border-radius: ${statusOpenTabletBorderRadiusWidth};` : ''}
+                    ${statusOpenBorderColor ? `border-color: ${statusOpenBorderColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status:hover{
+                    ${statusOpenHoverColor ? `color: ${statusOpenHoverColor};` : ''}
+                    ${statusOpenHoverBgColor ? `background-color: ${statusOpenHoverBgColor};` : ''}
+                    ${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status{
+                    ${statusCloseColor ? `color: ${statusCloseColor};` : ''}
+                    ${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
+                    ${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
+                    ${statusCloseTabletBorderWidth && statusCloseTabletBorder?.top ? `border-width: ${statusCloseTabletBorderWidth};` : ''}
+                    ${statusCloseTabletBorderRadiusWidth && statusCloseTabBorderRadius?.top ? `border-radius: ${statusCloseTabletBorderRadiusWidth};` : ''}
+                    ${statusCloseBorderColor ? `border-color: ${statusCloseBorderColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status:hover,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status:hover{
+                    ${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
+                    ${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
+                    ${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info .fb-timezone-info-noted{
+                    ${noticeTextGlobalTypoSwitcher?.fontFamily === true && noticeTextGlobalTypographyData?.fontFamily ? `font-family: ${noticeTextGlobalTypographyData?.fontFamily};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontSize === true && noticeTextGlobalTypographyData?.fontSize ? `font-size: ${noticeTextGlobalTypographyData?.fontSize};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontWeight === true && noticeTextGlobalTypographyData?.fontWeight ? `font-weight: ${noticeTextGlobalTypographyData?.fontWeight};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontStyle === true && noticeTextGlobalTypographyData?.fontStyle ? `font-style: ${noticeTextGlobalTypographyData?.fontStyle};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.textTransform === true && noticeTextGlobalTypographyData?.textTransform ? `text-transform: ${noticeTextGlobalTypographyData?.textTransform};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.textDecoration === true && noticeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${noticeTextGlobalTypographyData?.textDecoration};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.letterSpacing === true && noticeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${noticeTextGlobalTypographyData?.letterSpacing};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.lineHeight === true && noticeTextGlobalTypographyData?.lineHeight ? `line-height: ${noticeTextGlobalTypographyData?.lineHeight};` : ''}
+
+                    ${noticeTextGlobalTypoSwitcher?.fontFamily === false && noticeTextFontFamily && noticeTextFontFamily !== 'Default' ? `font-family: ${noticeTextFontFamily};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontSize === false && noticeTextFontSize?.Tablet && noticeTextFontSizeUnits?.Tablet ? `font-size: ${noticeTextFontSize?.Tablet}${noticeTextFontSizeUnits?.Tablet};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontWeight === false && noticeTextFontWeight ? `font-weight: ${noticeTextFontWeight};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.fontStyle === false && noticeTextFontStyle ? `font-style: ${noticeTextFontStyle};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.textTransform === false && noticeTextTransform ? `text-transform: ${noticeTextTransform};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.textDecoration === false && noticeTextDecoration ? `text-decoration: ${noticeTextDecoration};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.letterSpacing === false && noticeTextLetterSpacing?.Tablet && noticeTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${noticeTextLetterSpacing?.Tablet}${noticeTextLetterSpacingUnits?.Tablet};` : ''}
+                    ${noticeTextGlobalTypoSwitcher?.lineHeight === false && noticeTextLineHeight?.Tablet && noticeTextLineHeightUnits?.Tablet ? `line-height: ${noticeTextLineHeight?.Tablet}${noticeTextLineHeightUnits?.Tablet};` : ''}
+                    
+                    ${infoBoxTabletMarginWidth && infoBoxTabMargin?.top ? `margin: ${infoBoxTabletMarginWidth};` : ''}
+
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted{
+                    ${noticeTextColor ? `color: ${noticeTextColor};` : ''}
+                }
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted:hover{
+                    ${noticeTextHoverColor ? `color: ${noticeTextHoverColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted{
+                    ${statusOffNoticeTextColor ? `color: ${statusOffNoticeTextColor};` : ''}
+                }
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted:hover,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted:hover,
+                .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted:hover{
+                    ${statusOffNoticeTextHoverColor ? `color: ${statusOffNoticeTextHoverColor};` : ''}
+                    transition: all .3s ease-in-out;
+                }
+        
+        }
+
+        @media only screen and (max-width: 767px) {
+            .${blockID}.fb-timezone-main-wrapper {
+                ${timezonePositionType === 'default' ? `position: relative !important;` : ''}
+                ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' ? `width: 100%;` : ''}
+                ${timezonePositionType !== 'default' ? `position: ${timezonePositionType} !important;` : ''}
+                ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'left' && timezoneHZLeftOffset?.Mobile ? `left: ${timezoneHZLeftOffset?.Mobile}${timezoneHZLeftOffsetUnits?.Mobile};` : ''} 
+                ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneHZOrientationType === 'right' && timezoneHZRightOffset?.Mobile ? `right: ${timezoneHZRightOffset?.Mobile}${timezoneHZRightOffsetUnits?.Mobile};` : ''}
+                ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'top' && timezoneVRTopOffset?.Mobile ? `top: ${timezoneVRTopOffset?.Mobile}${timezoneVRTopOffsetUnits?.Mobile};` : ''}
+                ${timezonePositionType !== 'default' && timezonePositionType !== 'relative' && timezoneVROrientationType === 'bottom' && timezoneVRBottomOffset?.Mobile ? `bottom: ${timezoneVRBottomOffset?.Mobile}${timezoneVRBottomOffsetUnits?.Mobile};` : ''}
+
+                ${timezoneGlobalZIndex?.Mobile ? `z-index: ${timezoneGlobalZIndex?.Mobile};` : ''}
+                ${timezoneOverflow !== 'default' ? `overflow: ${timezoneOverflow};` : ''}
+            }
+            
+            .${blockID}.fb-timezone-main-wrapper .fb-timezone-container {
+                gap: ${timezoneCardSpacing?.Mobile}${timezoneCardSpacingUnits?.Mobile};
+                ${timezoneCardAlignment ? `justify-content: ${timezoneCardAlignment};` : ''}
+                ${mobileBackgroundNormalStyles}
+                ${timezoneMobilePaddingWidth && timezoneMobilePadding?.top ? `padding: ${timezoneMobilePaddingWidth};` : ''}
+                ${timezoneMobileMarginWidth && timezoneMobileMargin?.top ? `margin: ${timezoneMobileMarginWidth};` : ''}
+                ${timezoneGlobalBorder ? `border: ${timezoneGlobalBorder};` : ''}
+                ${globalMobileBorderWidth && timezoneGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
+                ${globalMobileBorderRadiusWidth && timezoneGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+                ${timezoneGlobalBorderColor ? `border-color: ${timezoneGlobalBorderColor};` : ''}
+                ${timezoneGlobalBoxShadowCssValue ? `box-shadow: ${timezoneGlobalBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID}.fb-timezone-main-wrapper .fb-timezone-container:hover {
+                ${mobileBackgroundHoverStyles}
+                ${timezoneGlobalBorderHoverColor ? `border-color: ${timezoneGlobalBorderHoverColor};` : ''}
+                ${timezoneGlobalBoxShadowHoverCssValue ? `box-shadow: ${timezoneGlobalBoxShadowHoverCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{
+                position: relative;
+                display: flex;
+                align-items: center;
+                gap: ${timezoneLocationTextSpacing?.Mobile}${timezoneLocationTextSpacingUnits?.Mobile};
+                
+                ${ locationTimezoneBgColorType === "gradient" ? `background: ${ locationTimezoneBgCustomGradientColorSwitcher && locationTimezoneBgCustomGradientColor ? locationTimezoneBgCustomGradientColor : locationTimezoneBgGradientColor };` : locationTimezoneBgColor ?`background: ${locationTimezoneBgColor};` : '' }
+                
+                ${locationTimezoneBorder ? `border: ${locationTimezoneBorder};` : ''}
+                ${locationTimezoneMobileBorderWidth && locationTimezoneMobileBorder?.top ? `border-width: ${locationTimezoneMobileBorderWidth};` : ''}
+                ${locationTimezoneMobileBorderRadiusWidth && locationTimezoneMobileBorderRadius?.top ? `border-radius: ${locationTimezoneMobileBorderRadiusWidth};` : ''}
+                ${locationTimezoneBorderColor ? `border-color: ${locationTimezoneBorderColor};` : ''}
+                ${locationTimezoneBoxShadowCssValue ? `box-shadow: ${locationTimezoneBoxShadowCssValue};` : ''}
+
+                ${locationTimezoneMobilePaddingWidth && locationTimezoneMobilePadding?.top ? `padding: ${locationTimezoneMobilePaddingWidth};` : ''}
+                ${locationTimezoneMobileMarginWidth && locationTimezoneMobileMargin?.top ? `margin: ${locationTimezoneMobileMarginWidth};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover{
+                ${ locationTimezoneBgHoverColorType === "gradient" ? `background: ${ locationTimezoneBgHoverCustomGradientColorSwitcher && locationTimezoneBgHoverCustomGradientColor ? locationTimezoneBgHoverCustomGradientColor : locationTimezoneBgHoverGradientColor };` : locationTimezoneBgHoverColor ? `background: ${locationTimezoneBgHoverColor};` : '' }
+
+                ${locationTimezoneBorderHoverColor ? `border-color: ${locationTimezoneBorderHoverColor};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-location-name{
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === true && timezoneLocationTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneLocationTextGlobalTypographyData?.fontFamily};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === true && timezoneLocationTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneLocationTextGlobalTypographyData?.fontSize};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === true && timezoneLocationTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneLocationTextGlobalTypographyData?.fontWeight};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === true && timezoneLocationTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneLocationTextGlobalTypographyData?.fontStyle};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === true && timezoneLocationTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneLocationTextGlobalTypographyData?.textTransform};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === true && timezoneLocationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneLocationTextGlobalTypographyData?.textDecoration};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === true && timezoneLocationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneLocationTextGlobalTypographyData?.letterSpacing};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === true && timezoneLocationTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneLocationTextGlobalTypographyData?.lineHeight};` : ''}
+
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontFamily === false && timezoneLocationTextFontFamily && timezoneLocationTextFontFamily !== 'Default' ? `font-family: ${timezoneLocationTextFontFamily};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontSize === false && timezoneLocationTextFontSize?.Mobile && timezoneLocationTextFontSizeUnits?.Mobile ? `font-size: ${timezoneLocationTextFontSize?.Mobile}${timezoneLocationTextFontSizeUnits?.Mobile};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontWeight === false && timezoneLocationTextFontWeight ? `font-weight: ${timezoneLocationTextFontWeight};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.fontStyle === false && timezoneLocationTextFontStyle ? `font-style: ${timezoneLocationTextFontStyle};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.textTransform === false && timezoneLocationTextTransform ? `text-transform: ${timezoneLocationTextTransform};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.textDecoration === false && timezoneLocationTextDecoration ? `text-decoration: ${timezoneLocationTextDecoration};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.letterSpacing === false && timezoneLocationTextLetterSpacing?.Mobile && timezoneLocationTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${timezoneLocationTextLetterSpacing?.Mobile}${timezoneLocationTextLetterSpacingUnits?.Mobile};` : ''}
+                ${timezoneLocationTextGlobalTypoSwitcher?.lineHeight === false && timezoneLocationTextLineHeight?.Mobile && timezoneLocationTextLineHeightUnits?.Mobile ? `line-height: ${timezoneLocationTextLineHeight?.Mobile}${timezoneLocationTextLineHeightUnits?.Mobile};` : ''}
+
+                ${locationNameTextColor ? `color: ${locationNameTextColor};` : ''}
+
+                ${locationNameTextColorType === 'gradient' ? `
+                    background: ${locationNameTextCustomGradientColorSwitcher && locationNameTextCustomGradientColor ? locationNameTextCustomGradientColor : locationNameTextGradientColor};
+                    ${locationNameTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ${locationNameTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-location-name{
+
+                ${locationNameTextHoverColor ? `color: ${locationNameTextHoverColor};` : ''}
+                ${locationNameTextHoverColorType === 'gradient' ? `
+                    background: ${locationNameTextHoverCustomGradientColorSwitcher && locationNameTextHoverCustomGradientColor ? locationNameTextHoverCustomGradientColor : locationNameTextHoverGradientColor};
+                    ${locationNameTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ${locationNameTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ` : ''}
+                
+                transition: all .3s ease-in-out;
+            }
+            
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-separator {
+                font-size: ${separatorSize?.Mobile}${separatorFontUnits?.Mobile};
+                line-height: 100%;
+                ${separatorColor ? `color: ${separatorColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-separator {
+                ${separatorHoverColor ? `color: ${separatorHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-current-time {
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === true && timezoneTimeTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTimeTextGlobalTypographyData?.fontFamily};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === true && timezoneTimeTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTimeTextGlobalTypographyData?.fontSize};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === true && timezoneTimeTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTimeTextGlobalTypographyData?.fontWeight};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === true && timezoneTimeTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTimeTextGlobalTypographyData?.fontStyle};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === true && timezoneTimeTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTimeTextGlobalTypographyData?.textTransform};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === true && timezoneTimeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTimeTextGlobalTypographyData?.textDecoration};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTimeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTimeTextGlobalTypographyData?.letterSpacing};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === true && timezoneTimeTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTimeTextGlobalTypographyData?.lineHeight};` : ''}
+
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontFamily === false && timezoneTimeTextFontFamily && timezoneTimeTextFontFamily !== 'Default' ? `font-family: ${timezoneTimeTextFontFamily};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontSize === false && timezoneTimeTextFontSize?.Mobile && timezoneTimeTextFontSizeUnits?.Mobile ? `font-size: ${timezoneTimeTextFontSize?.Mobile}${timezoneTimeTextFontSizeUnits?.Mobile};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontWeight === false && timezoneTimeTextFontWeight ? `font-weight: ${timezoneTimeTextFontWeight};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.fontStyle === false && timezoneTimeTextFontStyle ? `font-style: ${timezoneTimeTextFontStyle};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.textTransform === false && timezoneTimeTextTransform ? `text-transform: ${timezoneTimeTextTransform};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.textDecoration === false && timezoneTimeTextDecoration ? `text-decoration: ${timezoneTimeTextDecoration};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTimeTextLetterSpacing?.Mobile && timezoneTimeTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${timezoneTimeTextLetterSpacing?.Mobile}${timezoneTimeTextLetterSpacingUnits?.Mobile};` : ''}
+                ${timezoneTimeTextGlobalTypoSwitcher?.lineHeight === false && timezoneTimeTextLineHeight?.Mobile && timezoneTimeTextLineHeightUnits?.Mobile ? `line-height: ${timezoneTimeTextLineHeight?.Mobile}${timezoneTimeTextLineHeightUnits?.Mobile};` : ''}
+
+                ${timezoneTimeTextColor ? `color: ${timezoneTimeTextColor};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-current-time{
+                ${timezoneTimeTextHoverColor ? `color: ${timezoneTimeTextHoverColor};` : ''}
+
+                ${timezoneTimeTextHoverColorType === 'gradient' ? `
+                    background: ${timezoneTimeTextHoverCustomGradientColorSwitcher && timezoneTimeTextHoverCustomGradientColor ? timezoneTimeTextHoverCustomGradientColor : timezoneTimeTextHoverGradientColor};
+                    ${timezoneTimeTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ${timezoneTimeTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ` : ''}
+                
+                transition: all .3s ease-in-out;
+            }
+            
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone .fb-timezone-offset {
+                ${timezoneTextGlobalTypoSwitcher?.fontFamily === true && timezoneTextGlobalTypographyData?.fontFamily ? `font-family: ${timezoneTextGlobalTypographyData?.fontFamily};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontSize === true && timezoneTextGlobalTypographyData?.fontSize ? `font-size: ${timezoneTextGlobalTypographyData?.fontSize};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontWeight === true && timezoneTextGlobalTypographyData?.fontWeight ? `font-weight: ${timezoneTextGlobalTypographyData?.fontWeight};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontStyle === true && timezoneTextGlobalTypographyData?.fontStyle ? `font-style: ${timezoneTextGlobalTypographyData?.fontStyle};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.textTransform === true && timezoneTextGlobalTypographyData?.textTransform ? `text-transform: ${timezoneTextGlobalTypographyData?.textTransform};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.textDecoration === true && timezoneTextGlobalTypographyData?.textDecoration ? `text-decoration: ${timezoneTextGlobalTypographyData?.textDecoration};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.letterSpacing === true && timezoneTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${timezoneTextGlobalTypographyData?.letterSpacing};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.lineHeight === true && timezoneTextGlobalTypographyData?.lineHeight ? `line-height: ${timezoneTextGlobalTypographyData?.lineHeight};` : ''}
+
+                ${timezoneTextGlobalTypoSwitcher?.fontFamily === false && timezoneTextFontFamily && timezoneTextFontFamily !== 'Default' ? `font-family: ${timezoneTextFontFamily};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontSize === false && timezoneTextFontSize?.Mobile && timezoneTextFontSizeUnits?.Mobile ? `font-size: ${timezoneTextFontSize?.Mobile}${timezoneTextFontSizeUnits?.Mobile};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontWeight === false && timezoneTextFontWeight ? `font-weight: ${timezoneTextFontWeight};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.fontStyle === false && timezoneTextFontStyle ? `font-style: ${timezoneTextFontStyle};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.textTransform === false && timezoneTextTransform ? `text-transform: ${timezoneTextTransform};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.textDecoration === false && timezoneTextDecoration ? `text-decoration: ${timezoneTextDecoration};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.letterSpacing === false && timezoneTextLetterSpacing?.Mobile && timezoneTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${timezoneTextLetterSpacing?.Mobile}${timezoneTextLetterSpacingUnits?.Mobile};` : ''}
+                ${timezoneTextGlobalTypoSwitcher?.lineHeight === false && timezoneTextLineHeight?.Mobile && timezoneTextLineHeightUnits?.Mobile ? `line-height: ${timezoneTextLineHeight?.Mobile}${timezoneTextLineHeightUnits?.Mobile};` : ''}
+
+                ${timezoneTextColor ? `color: ${timezoneTextColor};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+            
+            .${blockID} .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone:hover .fb-timezone-offset{
+                ${timezoneTextHoverColor ? `color: ${timezoneTextHoverColor};` : ''}
+                ${timezoneTextHoverColorType === 'gradient' ? `
+                    background: ${timezoneTextHoverCustomGradientColorSwitcher && timezoneTextHoverCustomGradientColor ? timezoneTextHoverCustomGradientColor : timezoneTextHoverGradientColor};
+                    ${timezoneTextHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                    ${timezoneTextHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+                ` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box {
+                overflow: hidden;
+                ${infoBoxBorder ? `border: ${infoBoxBorder};` : ''}
+                ${infoBoxMobileBorderWidth && infoBoxMobileBorder?.top ? `border-width: ${infoBoxMobileBorderWidth};` : ''}
+                ${infoBoxMobileBorderRadiusWidth && infoBoxMobileBorderRadius?.top ? `border-radius: ${infoBoxMobileBorderRadiusWidth};` : ''}
+                ${infoBoxMobilePaddingWidth && infoBoxMobilePadding?.top ? `padding: ${infoBoxMobilePaddingWidth};` : ''}
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open {
+                ${ infoBoxBgColorType === "gradient" ? `background: ${ infoBoxBgCustomGradientColorSwitcher && infoBoxBgCustomGradientColor ? infoBoxBgCustomGradientColor : infoBoxBgGradientColor };` : infoBoxBgColor ?`background: ${infoBoxBgColor};` : '' }
+                ${infoBoxBorderColor ? `border-color: ${infoBoxBorderColor};` : ''}
+                ${infoBoxBoxShadowCssValue ? `box-shadow: ${infoBoxBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open:hover{
+                ${ infoBoxBgHoverColorType === "gradient" ? `background: ${ infoBoxBgHoverCustomGradientColorSwitcher && infoBoxBgHoverCustomGradientColor ? infoBoxBgHoverCustomGradientColor : infoBoxBgHoverGradientColor };` : infoBoxBgHoverColor ? `background: ${infoBoxBgHoverColor};` : '' }
+
+                ${infoBoxBorderHoverColor ? `border-color: ${infoBoxBorderHoverColor};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed {
+                ${ infoBoxOffStatusBgColorType === "gradient" ? `background: ${ infoBoxOffStatusBgCustomGradientColorSwitcher && infoBoxOffStatusBgCustomGradientColor ? infoBoxOffStatusBgCustomGradientColor : infoBoxOffStatusBgGradientColor };` : infoBoxOffStatusBgColor ?`background: ${infoBoxOffStatusBgColor};` : '' }
+                ${infoBoxOffStatusBorderColor ? `border-color: ${infoBoxOffStatusBorderColor};` : ''}
+                ${infoBoxOffStatusBoxShadowCssValue ? `box-shadow: ${infoBoxOffStatusBoxShadowCssValue};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed:hover{
+                ${ infoBoxOffStatusBgHoverColorType === "gradient" ? `background: ${ infoBoxOffStatusBgHoverCustomGradientColorSwitcher && infoBoxOffStatusBgHoverCustomGradientColor ? infoBoxOffStatusBgHoverCustomGradientColor : infoBoxOffStatusBgHoverGradientColor };` : infoBoxOffStatusBgHoverColor ? `background: ${infoBoxOffStatusBgHoverColor};` : '' }
+
+                ${infoBoxOffStatusBorderHoverColor ? `border-color: ${infoBoxOffStatusBorderHoverColor};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status, 
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status, 
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status, 
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status {
+                ${statusTextGlobalTypoSwitcher?.fontFamily === true && statusTextGlobalTypographyData?.fontFamily ? `font-family: ${statusTextGlobalTypographyData?.fontFamily};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontSize === true && statusTextGlobalTypographyData?.fontSize ? `font-size: ${statusTextGlobalTypographyData?.fontSize};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontWeight === true && statusTextGlobalTypographyData?.fontWeight ? `font-weight: ${statusTextGlobalTypographyData?.fontWeight};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontStyle === true && statusTextGlobalTypographyData?.fontStyle ? `font-style: ${statusTextGlobalTypographyData?.fontStyle};` : ''}
+                ${statusTextGlobalTypoSwitcher?.textTransform === true && statusTextGlobalTypographyData?.textTransform ? `text-transform: ${statusTextGlobalTypographyData?.textTransform};` : ''}
+                ${statusTextGlobalTypoSwitcher?.textDecoration === true && statusTextGlobalTypographyData?.textDecoration ? `text-decoration: ${statusTextGlobalTypographyData?.textDecoration};` : ''}
+                ${statusTextGlobalTypoSwitcher?.letterSpacing === true && statusTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${statusTextGlobalTypographyData?.letterSpacing};` : ''}
+                ${statusTextGlobalTypoSwitcher?.lineHeight === true && statusTextGlobalTypographyData?.lineHeight ? `line-height: ${statusTextGlobalTypographyData?.lineHeight};` : ''}
+
+                ${statusTextGlobalTypoSwitcher?.fontFamily === false && statusTextFontFamily && statusTextFontFamily !== 'Default' ? `font-family: ${statusTextFontFamily};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontSize === false && statusTextFontSize?.Mobile && statusTextFontSizeUnits?.Mobile ? `font-size: ${statusTextFontSize?.Mobile}${statusTextFontSizeUnits?.Mobile};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontWeight === false && statusTextFontWeight ? `font-weight: ${statusTextFontWeight};` : ''}
+                ${statusTextGlobalTypoSwitcher?.fontStyle === false && statusTextFontStyle ? `font-style: ${statusTextFontStyle};` : ''}
+                ${statusTextGlobalTypoSwitcher?.textTransform === false && statusTextTransform ? `text-transform: ${statusTextTransform};` : ''}
+                ${statusTextGlobalTypoSwitcher?.textDecoration === false && statusTextDecoration ? `text-decoration: ${statusTextDecoration};` : ''}
+                ${statusTextGlobalTypoSwitcher?.letterSpacing === false && statusTextLetterSpacing?.Mobile && statusTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${statusTextLetterSpacing?.Mobile}${statusTextLetterSpacingUnits?.Mobile};` : ''}
+                ${statusTextGlobalTypoSwitcher?.lineHeight === false && statusTextLineHeight?.Mobile && statusTextLineHeightUnits?.Mobile ? `line-height: ${statusTextLineHeight?.Mobile}${statusTextLineHeightUnits?.Mobile};` : ''}
+
+                ${statusMobilePaddingWidth && statusMobilePadding?.top ? `padding: ${statusMobilePaddingWidth};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status{
+                ${statusOpenColor ? `color: ${statusOpenColor};` : ''}
+                ${statusOpenBgColor ? `background-color: ${statusOpenBgColor};` : ''}
+                ${statusOpenBorder ? `border: ${statusOpenBorder};` : ''}
+                ${statusOpenMobileBorderWidth && statusOpenMobileBorder?.top ? `border-width: ${statusOpenMobileBorderWidth};` : ''}
+                ${statusOpenMobileBorderRadiusWidth && statusOpenMobileBorderRadius?.top ? `border-radius: ${statusOpenMobileBorderRadiusWidth};` : ''}
+                ${statusOpenBorderColor ? `border-color: ${statusOpenBorderColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open .fb-timezone-status:hover{
+                ${statusOpenHoverColor ? `color: ${statusOpenHoverColor};` : ''}
+                ${statusOpenHoverBgColor ? `background-color: ${statusOpenHoverBgColor};` : ''}
+                ${statusOpenBorderHoverColor ? `border-color: ${statusOpenBorderHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status{
+                ${statusCloseColor ? `color: ${statusCloseColor};` : ''}
+                ${statusCloseBgColor ? `background-color: ${statusCloseBgColor};` : ''}
+                ${statusCloseBorder ? `border: ${statusCloseBorder};` : ''}
+                ${statusCloseMobileBorderWidth && statusCloseMobileBorder?.top ? `border-width: ${statusCloseMobileBorderWidth};` : ''}
+                ${statusCloseMobileBorderRadiusWidth && statusCloseMobileBorderRadius?.top ? `border-radius: ${statusCloseMobileBorderRadiusWidth};` : ''}
+                ${statusCloseBorderColor ? `border-color: ${statusCloseBorderColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed .fb-timezone-status:hover
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend .fb-timezone-status:hover,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday .fb-timezone-status:hover{
+                ${statusCloseHoverColor ? `color: ${statusCloseHoverColor};` : ''}
+                ${statusCloseHoverBgColor ? `background-color: ${statusCloseHoverBgColor};` : ''}
+                ${statusCloseBorderHoverColor ? `border-color: ${statusCloseBorderHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info .fb-timezone-info-noted{
+                ${noticeTextGlobalTypoSwitcher?.fontFamily === true && noticeTextGlobalTypographyData?.fontFamily ? `font-family: ${noticeTextGlobalTypographyData?.fontFamily};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontSize === true && noticeTextGlobalTypographyData?.fontSize ? `font-size: ${noticeTextGlobalTypographyData?.fontSize};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontWeight === true && noticeTextGlobalTypographyData?.fontWeight ? `font-weight: ${noticeTextGlobalTypographyData?.fontWeight};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontStyle === true && noticeTextGlobalTypographyData?.fontStyle ? `font-style: ${noticeTextGlobalTypographyData?.fontStyle};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.textTransform === true && noticeTextGlobalTypographyData?.textTransform ? `text-transform: ${noticeTextGlobalTypographyData?.textTransform};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.textDecoration === true && noticeTextGlobalTypographyData?.textDecoration ? `text-decoration: ${noticeTextGlobalTypographyData?.textDecoration};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.letterSpacing === true && noticeTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${noticeTextGlobalTypographyData?.letterSpacing};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.lineHeight === true && noticeTextGlobalTypographyData?.lineHeight ? `line-height: ${noticeTextGlobalTypographyData?.lineHeight};` : ''}
+
+                ${noticeTextGlobalTypoSwitcher?.fontFamily === false && noticeTextFontFamily && noticeTextFontFamily !== 'Default' ? `font-family: ${noticeTextFontFamily};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontSize === false && noticeTextFontSize?.Mobile && noticeTextFontSizeUnits?.Mobile ? `font-size: ${noticeTextFontSize?.Mobile}${noticeTextFontSizeUnits?.Mobile};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontWeight === false && noticeTextFontWeight ? `font-weight: ${noticeTextFontWeight};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.fontStyle === false && noticeTextFontStyle ? `font-style: ${noticeTextFontStyle};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.textTransform === false && noticeTextTransform ? `text-transform: ${noticeTextTransform};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.textDecoration === false && noticeTextDecoration ? `text-decoration: ${noticeTextDecoration};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.letterSpacing === false && noticeTextLetterSpacing?.Mobile && noticeTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${noticeTextLetterSpacing?.Mobile}${noticeTextLetterSpacingUnits?.Mobile};` : ''}
+                ${noticeTextGlobalTypoSwitcher?.lineHeight === false && noticeTextLineHeight?.Mobile && noticeTextLineHeightUnits?.Mobile ? `line-height: ${noticeTextLineHeight?.Mobile}${noticeTextLineHeightUnits?.Mobile};` : ''}
+                
+                ${infoBoxMobileMarginWidth && infoBoxMobileMargin?.top ? `margin: ${infoBoxMobileMarginWidth};` : ''}
+
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted{
+                ${noticeTextColor ? `color: ${noticeTextColor};` : ''}
+            }
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.open .fb-timezone-status-info .fb-timezone-info-noted:hover{
+                ${noticeTextHoverColor ? `color: ${noticeTextHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
+
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted{
+                ${statusOffNoticeTextColor ? `color: ${statusOffNoticeTextColor};` : ''}
+            }
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.closed .fb-timezone-status-info .fb-timezone-info-noted:hover,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.holiday .fb-timezone-status-info .fb-timezone-info-noted:hover,
+            .${blockID} .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box.weekend .fb-timezone-status-info .fb-timezone-info-noted:hover{
+                ${statusOffNoticeTextHoverColor ? `color: ${statusOffNoticeTextHoverColor};` : ''}
+                transition: all .3s ease-in-out;
+            }
         }
 	
 	`, [
@@ -3129,6 +3830,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		timezoneTextAlignment,
 		timezoneLocationTextSpacing,
 		timezoneLocationTextSpacingUnits,
+        timezoneCardAlignment,
+		timezoneCardSpacing,
+		timezoneCardSpacingUnits,
 
 		locationTimezoneBgColorTypeSwitcher,
         locationTimezoneBgColorType,
@@ -3184,10 +3888,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         infoBoxBgHoverCustomGradientColorSwitcher,
         infoBoxBgHoverCustomGradientColor,
 
+        infoBoxOffStatusBgColorTypeSwitcher,
+        infoBoxOffStatusBgColorType,
+        infoBoxOffStatusBgHoverColorType,
+        infoBoxOffStatusBgColor,
+        infoBoxOffStatusBgHoverColor,
+        infoBoxOffStatusBgGradientColor,
+        infoBoxOffStatusBgHoverGradientColor,
+        infoBoxOffStatusBgCustomGradientColorSwitcher,
+        infoBoxOffStatusBgCustomGradientColor,
+        infoBoxOffStatusBgHoverCustomGradientColorSwitcher,
+        infoBoxOffStatusBgHoverCustomGradientColor,
+
 		infoBoxBorder,
         infoBoxBorderColor,
         infoBoxBorderHoverColor,
         infoBoxBorderColorSwitcher,
+        infoBoxOffStatusBorderColor,
+        infoBoxOffStatusBorderHoverColor,
+        infoBoxOffStatusBorderColorSwitcher,
 
         infoBoxBorderUnits,
         infoBoxDesktopBorder,
@@ -3202,6 +3921,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         infoBoxBorderRadiusLink,
         infoBoxBoxShadowValues,
         infoBoxBoxShadowCssValue,
+        infoBoxOffStatusBoxShadowValues,
+        infoBoxOffStatusBoxShadowCssValue,
 
 		infoBoxPaddingUnits,
         infoBoxDesktopPadding,
@@ -3303,6 +4024,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         noticeTextColorSwitcher,
 		noticeTextColor,
 		noticeTextHoverColor,
+        statusOffNoticeTextColorSwitcher,
+		statusOffNoticeTextColor,
+		statusOffNoticeTextHoverColor,
 
         timezoneGlobalZIndex,
         timezoneOverflow,
@@ -3403,13 +4127,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	*/
     const styleControls = (
         <>
-			{/* <PanelBody initialOpen={true}>
-				
-			</PanelBody> */}
+			<PanelBody initialOpen={true}>
+                <FB_AlignmentControl
+                    label={__("Alignment", "frontis-blocks")}
+                    globalAlignment={timezoneCardAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ timezoneCardAlignment: value })}
+                />
+				<FB_Range
+					min={0}
+					max={timezoneCardSpacingUnits === '%' ? 100 : 200}
+					label={__("Gap", "frontis-blocks")}
+					rangeValue={timezoneCardSpacing}
+					onChangeHandler={(value) => setAttributes({ timezoneCardSpacing: value })}
+					rangeUnitHandler={(value) => setAttributes({ timezoneCardSpacingUnits: value })}
+					deviceType={deviceType}
+					units={timezoneCardSpacingUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={''}
+				/>
+			</PanelBody>
 
 			<PanelBody 
 				title={__("Location", "frontis-blocks")} 
-				initialOpen={true}
+				initialOpen={false}
 			>
 				<FB_TypographyControl
                     globalTypoControlActive={true}
@@ -3719,14 +4460,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/> 
 			</PanelBody>
 
-			<PanelBody title={__("Time Info", "frontis-blocks")} initialOpen={false}>
-				<FB_ResponsiveAlignmentControl
-					label={__("Alignment", "frontis-blocks")}
-					globalAlignment={timezoneTextAlignment}
-					setGlobalAlignment={(value) => setAttributes({ timezoneTextAlignment: value })}
-					deviceType={deviceType}
-					setAttributes={setAttributes}
-				/>
+			<PanelBody title={__("Timezone Card", "frontis-blocks")} initialOpen={false}>
+
 				<FB_Range
 					min={0}
 					max={timezoneLocationTextSpacingUnits === '%' ? 100 : 200}
@@ -4129,9 +4864,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 />
 			</PanelBody>
 			
-			<PanelBody title={__("Office Info", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Notice Info Box", "frontis-blocks")} initialOpen={false}>
 				<FB_BackgroundColorControl
-					label={__("Background", "frontis-blocks")}
+					label={__("On Status BG", "frontis-blocks")}
 					bgColorSwitcher={infoBoxBgColorTypeSwitcher}
 					setBgColorSwitcher={(value) => setAttributes({ infoBoxBgColorTypeSwitcher: value })}
 
@@ -4160,33 +4895,35 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					isBackgroundImage={false}
 				/>
 
-				<FB_Spacing
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={infoBoxPaddingUnitsHandler}
-                    spacingUnits={infoBoxPaddingUnits}
-                    spacingDesktop={infoBoxDesktopPadding}
-                    spacingTablet={infoBoxTabPadding}
-                    spacingMobile={infoBoxMobilePadding}
-                    handleSpacingUnitHandler={infoBoxPaddingUnitsChange}
-                    spacingCombineBtn={infoBoxPaddingLink}
-                    spacingCombineBtnHandler={infoBoxPaddingLinkBtn}
-                    setAttributes={setAttributes}
-                />
+				<FB_BackgroundColorControl
+					label={__("Off Status BG", "frontis-blocks")}
+					bgColorSwitcher={infoBoxOffStatusBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ infoBoxOffStatusBgColorTypeSwitcher: value })}
 
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={infoBoxMarginUnitsHandler}
-                    spacingUnits={infoBoxMarginUnits}
-                    spacingDesktop={infoBoxDesktopMargin}
-                    spacingTablet={infoBoxTabMargin}
-                    spacingMobile={infoBoxMobileMargin}
-                    handleSpacingUnitHandler={infoBoxMarginUnitsChange}
-                    spacingCombineBtn={infoBoxMarginLink}
-                    spacingCombineBtnHandler={infoBoxMarginLinkBtn}
-                    setAttributes={setAttributes}
-                />
+					normalBackgroundType={infoBoxOffStatusBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ infoBoxOffStatusBgColorType: value })}
+					normalClassicColor={infoBoxOffStatusBgColor}
+					setNormalClassicColor={(value) => setAttributes({ infoBoxOffStatusBgColor: value === undefined ? '' : value })}
+					normalGradientColor={infoBoxOffStatusBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ infoBoxOffStatusBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={infoBoxOffStatusBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ infoBoxOffStatusBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={infoBoxOffStatusBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ infoBoxOffStatusBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={infoBoxOffStatusBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ infoBoxOffStatusBgHoverColorType: value })}
+					hoverClassicColor={infoBoxOffStatusBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ infoBoxOffStatusBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={infoBoxOffStatusBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ infoBoxOffStatusBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={infoBoxOffStatusBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ infoBoxOffStatusBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={infoBoxOffStatusBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ infoBoxOffStatusBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
+				/>
 
 				<SelectControl
                     label={__("Border Style", "frontis-blocks")}
@@ -4194,13 +4931,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     options={BORDER_STYLES}
                     onChange={(value) => setAttributes({ infoBoxBorder: value })}
                 />
-
                 <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
+                    label={__("On Status Border Color", "frontis-blocks")}
                     globalSwitcher={infoBoxBorderColorSwitcher}
                     setGlobalSwitcher={(value) => setAttributes({ infoBoxBorderColorSwitcher: value })}
                 />
-
                 {infoBoxBorderColorSwitcher === 'normal' && (
                     <FB_ColorControl
                         label={__("Normal Color", "frontis-blocks")}
@@ -4208,7 +4943,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ infoBoxBorderColor: value === undefined ? '' : value })}
                     />
                 )}
-
                 {infoBoxBorderColorSwitcher === 'hover' && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
@@ -4216,9 +4950,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalColor={(value) => setAttributes({ infoBoxBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
-
+                <FB_SwitcherControl
+                    label={__("Off Status Border Color", "frontis-blocks")}
+                    globalSwitcher={infoBoxOffStatusBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ infoBoxOffStatusBorderColorSwitcher: value })}
+                />
+                {infoBoxOffStatusBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={infoBoxOffStatusBorderColor}
+                        setGlobalColor={(value) => setAttributes({ infoBoxOffStatusBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+                {infoBoxOffStatusBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={infoBoxOffStatusBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ infoBoxOffStatusBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
                 <FB_Spacing
-                    label={__("Border", "frontis-blocks")}
+                    label={__("Border Width", "frontis-blocks")}
                     deviceType={deviceType}
                     spacingUnitsHandler={infoBoxBorderUnitsHandler}
                     spacingUnits={infoBoxBorderUnits}
@@ -4243,16 +4995,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     spacingCombineBtnHandler={infoBoxBorderRadiusLinkBtn}
                     setAttributes={setAttributes}
                 />
-
                 <FB_BoxShadowControl
-                    label={__("Box Shadow", "frontis-blocks")}
+                    label={__("On Status Box Shadow", "frontis-blocks")}
                     onBoxShadowChange={(value) => setAttributes({ infoBoxBoxShadowValues: value })}
                     initialShadowValue={infoBoxBoxShadowValues}
                     onBoxShadowStyleChange={(value) => setAttributes({ infoBoxBoxShadowCssValue: value })}
                 />
+                <FB_BoxShadowControl
+                    label={__("Off Status Box Shadow", "frontis-blocks")}
+                    onBoxShadowChange={(value) => setAttributes({ infoBoxOffStatusBoxShadowValues: value })}
+                    initialShadowValue={infoBoxOffStatusBoxShadowValues}
+                    onBoxShadowStyleChange={(value) => setAttributes({ infoBoxOffStatusBoxShadowCssValue: value })}
+                />
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxPaddingUnitsHandler}
+                    spacingUnits={infoBoxPaddingUnits}
+                    spacingDesktop={infoBoxDesktopPadding}
+                    spacingTablet={infoBoxTabPadding}
+                    spacingMobile={infoBoxMobilePadding}
+                    handleSpacingUnitHandler={infoBoxPaddingUnitsChange}
+                    spacingCombineBtn={infoBoxPaddingLink}
+                    spacingCombineBtnHandler={infoBoxPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
 			</PanelBody>
 
-			<PanelBody title={__("Office Notice", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Notice Text", "frontis-blocks")} initialOpen={false}>
 				<FB_TypographyControl
                     globalTypoControlActive={true}
                     globalTypoSwitcher={noticeTextGlobalTypoSwitcher}
@@ -4306,7 +5076,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                 />
                 <FB_SwitcherControl
-					label={__("Color", "frontis-blocks")}
+					label={__("Status ON Color", "frontis-blocks")}
 					globalSwitcher={noticeTextColorSwitcher}
 					setGlobalSwitcher={(value) => setAttributes({ noticeTextColorSwitcher: value })}
 				/>
@@ -4325,6 +5095,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalColor={(value) => setAttributes({ noticeTextHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
+                <FB_SwitcherControl
+					label={__("Status OFF Color", "frontis-blocks")}
+					globalSwitcher={statusOffNoticeTextColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ statusOffNoticeTextColorSwitcher: value })}
+				/>
+				{statusOffNoticeTextColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={statusOffNoticeTextColor}
+						setGlobalColor={(value) => setAttributes({ statusOffNoticeTextColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				{statusOffNoticeTextColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={statusOffNoticeTextHoverColor}
+						setGlobalColor={(value) => setAttributes({ statusOffNoticeTextHoverColor: value === undefined ? '' : value })}
+					/>
+				)}
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={infoBoxMarginUnitsHandler}
+                    spacingUnits={infoBoxMarginUnits}
+                    spacingDesktop={infoBoxDesktopMargin}
+                    spacingTablet={infoBoxTabMargin}
+                    spacingMobile={infoBoxMobileMargin}
+                    handleSpacingUnitHandler={infoBoxMarginUnitsChange}
+                    spacingCombineBtn={infoBoxMarginLink}
+                    spacingCombineBtnHandler={infoBoxMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
 			</PanelBody>
 			
         </>

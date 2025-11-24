@@ -26,10 +26,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		homeText,
 		showItemIcon,
 		itemIcon,
+		breadcrumbGlobalWraperID,
+		breadcrumbGlobalWraperClass,
+		breadcrumbDesktopSwitcher,
+		breadcrumbTabletSwitcher,
+		breadcrumbMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-breadcrumb-main-wrapper ${blockID}`,
+		className: `fb-breadcrumb-main-wrapper ${blockID} ${breadcrumbDesktopSwitcher && 'fb-desktop-responsive'} ${breadcrumbTabletSwitcher && 'fb-tablet-responsive'} ${breadcrumbMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	/**
@@ -54,7 +59,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			/>
 
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-breadcrumb-container ${blockID}`} id={blockID} ref={panelRef}>
+				<div className={`fb-parent-wrapper fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID} ref={panelRef}>
 					<div className="fb-breadcrumb-list">
 						{/* Home Item */}
 						<div className="fb-breadcrumb-item">

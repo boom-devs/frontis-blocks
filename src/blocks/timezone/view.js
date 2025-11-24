@@ -19,15 +19,16 @@
                 endTime: this.block.dataset.endTime || '17:00',
                 useMonthlySchedule: this.block.dataset.useMonthlySchedule === 'true',
                 monthlySchedules: JSON.parse(this.block.dataset.monthlySchedules || '[]'),
-                weekendDays: JSON.parse(this.block.dataset.weekendDays || '["0","6"]'),
+                weekendDays: JSON.parse(this.block.dataset.weekendDays || '[]'),
                 holidays: JSON.parse(this.block.dataset.holidays || '[]'),
                 showRemainingTime: this.block.dataset.showRemainingTime === 'true',
                 remainingTimeLabel: this.block.dataset.remainingTimeLabel || 'Left: ',
                 remainingTimeFormat: this.block.dataset.remainingTimeFormat || 'hours-minutes',
-                beforeTimeText: this.block.dataset.beforeTimeText || 'Will start at',
-                afterTimeText: this.block.dataset.afterTimeText || 'Will close at',
-                weekendMessage: this.block.dataset.weekendMessage || 'Weekend',
-                holidayMessage: this.block.dataset.holidayMessage || 'Holiday',
+
+                beforeTimeText: this.block.dataset.beforeTimeText || 'Start at',
+                afterTimeText: this.block.dataset.afterTimeText || 'Close at',
+                weekendMessage: this.block.dataset.weekendMessage || 'Weekend day',
+                holidayMessage: this.block.dataset.holidayMessage || 'Holiday day',
                 openStatusText: this.block.dataset.openStatusText || 'Open',
                 closedStatusText: this.block.dataset.closedStatusText || 'Closed'
             };
