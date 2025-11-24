@@ -704,7 +704,7 @@ class Admin {
         }
 
         // Retrieve post meta for the template
-        $settings = get_post_meta( $template_id, 'frontis_template_options', true );
+        $settings = get_post_meta( $template_id, '_frontis_template_settings', true );
         
         // Debug logging
         error_log( '[Frontis Template Sync] Template settings found: ' . ( $settings ? 'YES' : 'NO' ) );
@@ -753,7 +753,7 @@ class Admin {
             );
         }
     
-        $settings = get_post_meta( $post_id, 'frontis_template_options', true );
+        $settings = get_post_meta( $post_id, '_frontis_template_settings', true );
     
         return rest_ensure_response( is_array( $settings ) ? $settings : [] );
     }
@@ -791,12 +791,12 @@ class Admin {
         error_log( '[Frontis Template Save] Saving template settings for post ID: ' . $post_id );
         error_log( '[Frontis Template Save] Settings to save (raw): ' . print_r( $request->get_param( 'setting' ), true ) );
         error_log( '[Frontis Template Save] Settings to save (processed): ' . print_r( $fields, true ) );
-        error_log( '[Frontis Template Save] Meta key: frontis_template_options' );
+        error_log( '[Frontis Template Save] Meta key: _frontis_template_settings' );
     
-        $result = update_post_meta( $post_id, 'frontis_template_options', $fields );
+        $result = update_post_meta( $post_id, '_frontis_template_settings', $fields );
         
         // Verify the save
-        $saved_settings = get_post_meta( $post_id, 'frontis_template_options', true );
+        $saved_settings = get_post_meta( $post_id, '_frontis_template_settings', true );
         error_log( '[Frontis Template Save] Save result: ' . ( $result ? 'SUCCESS' : 'FAILED' ) );
         error_log( '[Frontis Template Save] Verified settings: ' . ( $saved_settings ? print_r( $saved_settings, true ) : 'EMPTY' ) );
         
