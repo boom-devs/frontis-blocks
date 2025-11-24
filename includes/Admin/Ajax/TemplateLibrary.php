@@ -637,109 +637,109 @@ class TemplateLibrary extends AjaxBase {
      * @param string $post_type Post type to filter templates.
      * @return WP_Block_Template[] Array of matching templates.
      */
-    public function get_templates() {
-        $this->check_permission();
+    // public function get_templates() {
+    //     $this->check_permission();
     
-        $post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : 'page';
+    //     $post_type = isset($_POST['post_type']) ? sanitize_text_field(wp_unslash($_POST['post_type'])) : 'page';
     
-        // Step 1: Get templates ONLY from CURRENT active theme
-        $current_theme = get_stylesheet(); // e.g., 'frontisblocks'
-        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+    //     // Step 1: Get templates ONLY from CURRENT active theme
+    //     $current_theme = get_stylesheet(); // e.g., 'frontisblocks'
+    //     $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
     
-        // Step 2: Filter: slug contains 'fb-template' + post_type match
-        $matching_templates = array_filter($all_templates, function ($template) use ($post_type) {
-            // 1. Must have 'fb-template' in slug
-            if (strpos($template->slug, 'fb-template') === false) {
-                return false;
-            }
+    //     // Step 2: Filter: slug contains 'fb-template' + post_type match
+    //     $matching_templates = array_filter($all_templates, function ($template) use ($post_type) {
+    //         // 1. Must have 'fb-template' in slug
+    //         if (strpos($template->slug, 'fb-template') === false) {
+    //             return false;
+    //         }
     
-            // 2. Get assigned post_types from meta
-            $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
-            $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    //         // 2. Get assigned post_types from meta
+    //         $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+    //         $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
     
-            // If no post_types assigned → include as fallback
-            if (empty($assigned_post_types)) {
-                return true;
-            }
+    //         // If no post_types assigned → include as fallback
+    //         if (empty($assigned_post_types)) {
+    //             return true;
+    //         }
     
-            // Match requested post_type
-            return in_array($post_type, $assigned_post_types, true);
-        });
+    //         // Match requested post_type
+    //         return in_array($post_type, $assigned_post_types, true);
+    //     });
     
-        if (!empty($matching_templates)) {
-            $output = [];
-            foreach ($matching_templates as $template) {
-                $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
-                $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
+    //     if (!empty($matching_templates)) {
+    //         $output = [];
+    //         foreach ($matching_templates as $template) {
+    //             $assigned_post_types = get_post_meta($template->wp_id, '_wp_post_types', true);
+    //             $assigned_post_types = is_array($assigned_post_types) ? $assigned_post_types : [];
     
-                $output[] = [
-                    'title'        => $template->title,
-                    'slug'         => $template->slug,
-                    'content'      => $template->content,
-                    'post_types'   => $assigned_post_types,
-                ];
-            }
+    //             $output[] = [
+    //                 'title'        => $template->title,
+    //                 'slug'         => $template->slug,
+    //                 'content'      => $template->content,
+    //                 'post_types'   => $assigned_post_types,
+    //             ];
+    //         }
     
-            wp_send_json_success(['templates' => $output]);
-        } else {
-            wp_send_json_error(['message' => 'No fb-template found in current theme']);
-        }
-    }
+    //         wp_send_json_success(['templates' => $output]);
+    //     } else {
+    //         wp_send_json_error(['message' => 'No fb-template found in current theme']);
+    //     }
+    // }
 
-    public function get_all_template_parts() {
-        $this->check_permission();
+    // public function get_all_template_parts() {
+    //     $this->check_permission();
     
-        $current_theme = get_stylesheet();
+    //     $current_theme = get_stylesheet();
     
-        // Step 1: Get ALL fb-template from current theme
-        $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
-        $fb_templates = array_filter($all_templates, function ($t) {
-            return strpos($t->slug, 'fb-template') !== false;
-        });
+    //     // Step 1: Get ALL fb-template from current theme
+    //     $all_templates = get_block_templates(['theme' => $current_theme], 'wp_template');
+    //     $fb_templates = array_filter($all_templates, function ($t) {
+    //         return strpos($t->slug, 'fb-template') !== false;
+    //     });
     
-        if (empty($fb_templates)) {
-            wp_send_json_success(['template_parts' => []]);
-        }
+    //     if (empty($fb_templates)) {
+    //         wp_send_json_success(['template_parts' => []]);
+    //     }
     
-        $all_parts = [];
+    //     $all_parts = [];
     
-        foreach ($fb_templates as $template) {
-            $parsed = parse_blocks($template->content);
-            $slugs = [];
-            $this->extract_template_part_slugs($parsed, $slugs);
+    //     foreach ($fb_templates as $template) {
+    //         $parsed = parse_blocks($template->content);
+    //         $slugs = [];
+    //         $this->extract_template_part_slugs($parsed, $slugs);
     
-            foreach ($slugs as $slug) {
-                $part_id = $current_theme . '//' . $slug;
-                $part = get_block_template($part_id, 'wp_template_part');
+    //         foreach ($slugs as $slug) {
+    //             $part_id = $current_theme . '//' . $slug;
+    //             $part = get_block_template($part_id, 'wp_template_part');
     
-                if ($part) {
-                    $key = $part->slug; // unique by slug
-                    if (!isset($all_parts[$key])) {
-                        $all_parts[$key] = [
-                            'title'   => $part->title,
-                            'slug'    => $part->slug,
-                            'content' => $part->content,
-                            'area'    => get_post_meta($part->wp_id, 'wp_template_part_area', true),
-                            'used_in' => []
-                        ];
-                    }
-                    $all_parts[$key]['used_in'][] = $template->slug;
-                }
-            }
-        }
+    //             if ($part) {
+    //                 $key = $part->slug; // unique by slug
+    //                 if (!isset($all_parts[$key])) {
+    //                     $all_parts[$key] = [
+    //                         'title'   => $part->title,
+    //                         'slug'    => $part->slug,
+    //                         'content' => $part->content,
+    //                         'area'    => get_post_meta($part->wp_id, 'wp_template_part_area', true),
+    //                         'used_in' => []
+    //                     ];
+    //                 }
+    //                 $all_parts[$key]['used_in'][] = $template->slug;
+    //             }
+    //         }
+    //     }
     
-        wp_send_json_success(['template_parts' => array_values($all_parts)]);
-    }
-    private function extract_template_part_slugs($blocks, &$slugs) {
-        foreach ($blocks as $block) {
-            if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
-                $slugs[] = $block['attrs']['slug'];
-            }
-            if (!empty($block['innerBlocks'])) {
-                $this->extract_template_part_slugs($block['innerBlocks'], $slugs);
-            }
-        }
-    }
+    //     wp_send_json_success(['template_parts' => array_values($all_parts)]);
+    // }
+    // private function extract_template_part_slugs($blocks, &$slugs) {
+    //     foreach ($blocks as $block) {
+    //         if ($block['blockName'] === 'core/template-part' && !empty($block['attrs']['slug'])) {
+    //             $slugs[] = $block['attrs']['slug'];
+    //         }
+    //         if (!empty($block['innerBlocks'])) {
+    //             $this->extract_template_part_slugs($block['innerBlocks'], $slugs);
+    //         }
+    //     }
+    // }
 
     /**
      * Create a custom block-template and assign it to the "page" post-type.

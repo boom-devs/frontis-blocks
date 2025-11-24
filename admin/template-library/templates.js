@@ -220,8 +220,9 @@ const PatternLibraryButton = () => {
 
         const newState = { [activeTab]: value };
         setActiveCategory(newState);
+        setCurrentPage({ [activeTab]: 1 });
 
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate, savedTemplateType);
+        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
     }
 
     const hangleChangeSavedTemplateType = (value) => {
