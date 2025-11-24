@@ -179,7 +179,7 @@ class BlockList
                 'slug' => 'breadcrumb',
                 'title' => 'Breadcrumb',
                 'package' => 'free',
-                'category' => 'navigation',
+                'category' => 'content',
                 'badge' => 'freemium',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/breadcrumb.svg',

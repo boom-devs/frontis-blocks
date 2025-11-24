@@ -38,7 +38,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTimezoneOffset,
 		showRemainingTime,
 		remainingTimeLabel,
-		remainingTimeFormat,
+		remainingTimeFormat
 	} = attributes;
 
 	// State for real-time updates
@@ -47,12 +47,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const [currentStatus, setCurrentStatus] = useState('');
 
 	const blockProps = useBlockProps({
-		className: `frontis-block fb-timezone-main-wrapper ${blockID} ${timezoneGlobalWraperClass} ${
+		className: `frontis-block fb-timezone-main-wrapper ${blockID} ${
 			timezoneDesktopSwitcher ? 'fb-desktop-responsive' : ''
 		} ${timezoneTabletSwitcher ? 'fb-tablet-responsive' : ''} ${
 			timezoneMobileSwitcher ? 'fb-mobile-responsive' : ''
 		} ${alignment ? `align-${alignment}` : ''}`,
-		id: timezoneGlobalWraperID
 	});
 
 	// Get timezone offset only
@@ -445,25 +444,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<InspectorControls>
-				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
-			</InspectorControls>
-
-			<BlockControls>
-				<ToolbarGroup>
-					<ToolbarButton
-						icon="admin-settings"
-						label="Timezone Settings"
-						onClick={() => {
-							const sidebar = document.querySelector('.edit-post-sidebar');
-							if (sidebar) sidebar.focus();
-						}}
-					/>
-				</ToolbarGroup>
-			</BlockControls>
+		
+			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
 			<div {...blockProps}>
-				<div className="fb-timezone-container">
+				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>
 					<div className='fb-timezone-wrapper'>
 						<div className='fb-location-timezone'>
 							{useCustomLocation ? (
