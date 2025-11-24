@@ -1309,8 +1309,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label={__("Separator Type", "frontis-blocks")}
 					value={separatorType}
 					options={[
-						{ label: "Text", value: "text" },
 						{ label: "Icon", value: "icon" },
+						{ label: "Text", value: "text" },
 					]}
 					onChange={(value) => setAttributes({ separatorType: value })}
 				/>
