@@ -1,0 +1,134 @@
+.fb-pro-menu {
+  padding: 16px;
+  border-radius: 8px;
+  width: 220px;
+
+  .fb-pro-popup-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    .fb-pro-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #feebd5;
+      width: 52px;
+      height: 52px;
+      border-radius: 100%;
+
+      svg {
+        width: 32px;
+        height: 32px;
+
+        path {
+          fill: #f89b2e;
+        }
+      }
+    }
+  }
+
+  .fb-pro-card-content {
+    position: relative;
+
+    .fb-pro-card-heading {
+      font-family: $heading-font-family;
+      color: #171717;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 140%;
+      letter-spacing: -0.4px;
+      margin: 0;
+      padding: 16px 0 4px 0;
+    }
+
+    .fb-pro-card-text {
+      font-family: $body-font-family;
+      font-weight: 500;
+      font-size: $base-font-size;
+      line-height: 22px;
+      letter-spacing: 0;
+      color: #525252;
+      margin: 0;
+      padding-bottom: 24px;
+    }
+  }
+
+  .fb-pro-upgrade-btn {
+    .fb-pro-upgrade-btn-one {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      background: #3991ff;
+      border: 1px solid transparent;
+      color: #ffffff;
+      padding: 10px 35px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: transparent;
+        border: 1px solid #3991ff;
+        border-radius: 4px;
+
+        a {
+          color: #3991ff;
+        }
+
+        path {
+          fill: #3991ff;
+        }
+      }
+    }
+
+    .fb-pro-upgrade-btn-one {
+      a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: $base-font-size;
+        font-weight: 500;
+        line-height: 18px;
+        cursor: pointer;
+      }
+    }
+
+    .fb-pro-upgrade-btn-two {
+      display: flex;
+      gap: 2px;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 0 16px 0;
+      margin: 0;
+      transition: 0.3s;
+
+      &:hover {
+        a {
+          color: #3991ff;
+        }
+
+        path {
+          stroke: #3991ff;
+        }
+      }
+    }
+
+    .fb-pro-upgrade-btn-two {
+      a {
+        color: #555e72;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+      }
+    }
+  }
+
+  a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}

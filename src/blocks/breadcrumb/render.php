@@ -5,10 +5,10 @@
 
 $attributes = $attributes ?? [];
 $blockID = $attributes['blockID'] ?? '';
-$separatorType = $attributes['separatorType'] ?? 'text';
+$separatorType = $attributes['separatorType'] ?? 'icon';
 $separatorText = $attributes['separatorText'] ?? '/';
 $separatorIcon = $attributes['separatorIconFrontend'] ?? '';
-$showHomeIcon = $attributes['showHomeIcon'] ?? true;
+$showHomeIcon = $attributes['showHomeIcon'] ?? '';
 $homeIcon = $attributes['homeIconFrontend'] ?? '';
 $homeText = $attributes['homeText'] ?? 'Home';
 $showItemIcon = $attributes['showItemIcon'] ?? false;

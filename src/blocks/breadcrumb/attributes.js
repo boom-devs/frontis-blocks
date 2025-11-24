@@ -6,7 +6,7 @@ const attributes = {
 	// Separator Settings
 	separatorType: {
 		type: 'string',
-		default: 'text',
+		default: 'icon',
 	},
 	separatorText: {
 		type: 'string',
@@ -18,10 +18,7 @@ const attributes = {
 	},
 	separatorIconFrontend:{
 		type: 'string',
-	},
-	separatorGap: {
-		type: 'number',
-		default: 10,
+		default: 'angle-right',
 	},
 	// Home Settings
 	showHomeIcon: {
@@ -38,6 +35,7 @@ const attributes = {
 	},
 	homeIconFrontend:{
         type: 'string',
+		default: '',
     },
 	// Item Settings
 	showItemIcon: {
@@ -46,10 +44,11 @@ const attributes = {
 	},
 	itemIcon: {
 		type: 'string',
-		default: 'far fa-file',
+		default: 'file',
 	},
 	itemIconFrontend:{
 		type: 'string',
+		default: 'file',
 	},
 	// Style - Typography
 	breadcrumbTypography: {
