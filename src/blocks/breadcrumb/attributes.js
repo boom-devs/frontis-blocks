@@ -496,7 +496,200 @@ const attributes = {
         type : 'boolean',
         default: true
     },
-    /** End breadcrumbItem Style */
+    breadcrumbIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '30',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    breadcrumbIconBgSize: {
+        type: 'object',
+        default: {
+            Desktop: '50',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    breadcrumbIconBgSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    breadcrumbIconColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbIconColor : {
+        type: 'string',
+        default: '#399CFF',
+    },
+    breadcrumbIconHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbIconBgColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    breadcrumbIconBgColor : {
+        type: 'string',
+        default: ''
+    },
+    breadcrumbIconBgHoverColor: {
+        type: 'string',
+        default: ''
+    },
+
+    breadcrumbIconBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	breadcrumbIconBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	breadcrumbIconBorderColor: {
+		type: 'string',
+	},
+	breadcrumbIconBorderHoverColor: {
+		type: 'string',
+	},
+	breadcrumbIconBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	breadcrumbIconBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+
+    //spacing padding for icon
+    breadcrumbIconPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+    },
+    breadcrumbIconDesktopPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    breadcrumbIconTabletPadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    breadcrumbIconMobilePadding: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    breadcrumbIconPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+	/** End Border */
+
+	/** Start Border Radius */
+	breadcrumbIconBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	breadcrumbIconBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	breadcrumbIconBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+    /** End Icon */
 	// Extra
 	breadcrumbGlobalZIndex : {
         type: 'object',
