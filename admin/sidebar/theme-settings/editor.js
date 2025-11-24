@@ -138,7 +138,7 @@ const FrontisMetaBox = ({ whichEditor }) => {
 
     const updateSetting = (settingName, value) => {
         if (postType === 'wp_template') {
-            // Template editor → frontis_template_options
+            // Template editor → _frontis_template_settings
             // Map post meta keys to template keys and invert if needed
             const templateKey = getTemplateKeyForMetaKey(settingName);
             let templateValue = value;
