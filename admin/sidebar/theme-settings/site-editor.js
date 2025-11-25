@@ -17,7 +17,6 @@ const FrontisThemeSiteEditor = () => {
         disableFooter: false
     });
 
-    // Load Global Settings
     useEffect(() => {
         const unsubscribe = wp.data.subscribe(() => {
             const isReady = wp.data.select('core/editor').__unstableIsEditorReady
@@ -25,18 +24,19 @@ const FrontisThemeSiteEditor = () => {
                 : true;
 
             if (isReady) {
-                apiFetch({ path: 'frontis/v1/global-settings' }).then((fetched) => {
-                    setSettings({
-                        disableHeader: fetched.disableHeader,
-                        disableFooter: fetched.disableFooter
+                apiFetch({ path: 'frontis/v1/global-settings' })
+                    .then((fetched) => {
+                        setSettings({
+                            disableHeader: fetched.disableHeader,
+                            disableFooter: fetched.disableFooter
+                        });
                     });
-                });
+
                 unsubscribe();
             }
         });
     }, []);
 
-    // Update Global Setting
     const updateGlobalSetting = (key, value) => {
         const updated = { ...settings, [key]: value };
         setSettings(updated);
@@ -48,7 +48,6 @@ const FrontisThemeSiteEditor = () => {
         });
     };
 
-    // Enable save button
     useEffect(() => {
         wp.data.dispatch('core/editor').editPost({
             meta: { _dummy: Date.now() }
