@@ -693,24 +693,13 @@ class Admin {
         // Get template ID for this post
         $template_id = Helper::get_template_id($post_id);
         
-        // Debug logging (can be removed in production)
-        error_log( '[Frontis Template Sync] Post ID: ' . $post_id );
-        error_log( '[Frontis Template Sync] Template ID: ' . ( $template_id ? $template_id : 'NULL' ) );
-        
         // If template ID is not found, return empty array
         if ( empty( $template_id ) ) {
-            error_log( '[Frontis Template Sync] Template ID not found for post ID: ' . $post_id );
             return rest_ensure_response( [] );
         }
 
         // Retrieve post meta for the template
         $settings = get_post_meta( $template_id, '_frontis_template_settings', true );
-        
-        // Debug logging
-        error_log( '[Frontis Template Sync] Template settings found: ' . ( $settings ? 'YES' : 'NO' ) );
-        if ( $settings ) {
-            error_log( '[Frontis Template Sync] Settings: ' . print_r( $settings, true ) );
-        }
 
         // Return empty array if no settings found, or the settings themselves
         return rest_ensure_response( $settings ? $settings : [] );
@@ -786,24 +775,11 @@ class Admin {
                 $fields[ $key ] = true; // Explicitly set to true
             }
         }
-        
-        // Debug logging
-        error_log( '[Frontis Template Save] Saving template settings for post ID: ' . $post_id );
-        error_log( '[Frontis Template Save] Settings to save (raw): ' . print_r( $request->get_param( 'setting' ), true ) );
-        error_log( '[Frontis Template Save] Settings to save (processed): ' . print_r( $fields, true ) );
-        error_log( '[Frontis Template Save] Meta key: _frontis_template_settings' );
     
         $result = update_post_meta( $post_id, '_frontis_template_settings', $fields );
         
         // Verify the save
         $saved_settings = get_post_meta( $post_id, '_frontis_template_settings', true );
-        error_log( '[Frontis Template Save] Save result: ' . ( $result ? 'SUCCESS' : 'FAILED' ) );
-        error_log( '[Frontis Template Save] Verified settings: ' . ( $saved_settings ? print_r( $saved_settings, true ) : 'EMPTY' ) );
-        
-        // Double-check: if saved settings are empty but we tried to save, log warning
-        if ( empty( $saved_settings ) && ! empty( $fields ) ) {
-            error_log( '[Frontis Template Save] ⚠️ WARNING: Settings were not saved properly!' );
-        }
     
         return rest_ensure_response( 'success' );
     }
@@ -858,24 +834,11 @@ class Admin {
                 $fields[ $key ] = true; // Explicitly set to true
             }
         }
-        
-        // Debug logging
-        error_log( '[Frontis Page Save] Saving page settings for post ID: ' . $post_id );
-        error_log( '[Frontis Page Save] Settings to save (raw): ' . print_r( $request->get_param( 'setting' ), true ) );
-        error_log( '[Frontis Page Save] Settings to save (processed): ' . print_r( $fields, true ) );
-        error_log( '[Frontis Page Save] Meta key: _frontis_page_settings' );
     
         $result = update_post_meta( $post_id, '_frontis_page_settings', $fields );
         
         // Verify the save
         $saved_settings = get_post_meta( $post_id, '_frontis_page_settings', true );
-        error_log( '[Frontis Page Save] Save result: ' . ( $result ? 'SUCCESS' : 'FAILED' ) );
-        error_log( '[Frontis Page Save] Verified settings: ' . ( $saved_settings ? print_r( $saved_settings, true ) : 'EMPTY' ) );
-        
-        // Double-check: if saved settings are empty but we tried to save, log warning
-        if ( empty( $saved_settings ) && ! empty( $fields ) ) {
-            error_log( '[Frontis Page Save] ⚠️ WARNING: Settings were not saved properly!' );
-        }
     
         return rest_ensure_response( 'success' );
     }
@@ -915,8 +878,6 @@ class Admin {
         if (!wp_verify_nonce($nonce, 'fb_save_settings')) {
             return new \WP_Error('invalid_nonce', 'Invalid nonce', ['status' => 403]);
         }
-
-        //error_log(print_r($request->get_params(), true));
 
         $key = $request->get_param('key');
         $value = $request->get_param('value');
