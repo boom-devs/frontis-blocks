@@ -12,12 +12,19 @@ use FrontisBlocks\Assets\AssetsGenerator;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Core orchestrator for registering blocks and hooking into the render cycle.
+ */
 class Blocks
 {
 	use Singleton;
 
 	private $registered_blocks = [];
 	private $gfonts = [];
+
+	/**
+	 * Wire up all required WordPress hooks when the class instantiates.
+	 */
 	public function __construct()
 	{
 		add_action('init', [$this, 'register_blocks']);
@@ -26,6 +33,9 @@ class Blocks
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
 	}
 
+	/**
+	 * Register each block directory, enqueue assets, and localize runtime data.
+	 */
 	public function register_blocks()
 	{
 		$blocks_list = BlockList::get_instance()->get_blocks();
@@ -62,7 +72,6 @@ class Blocks
 				$plugin_slug = 'frontis-blocks';
 
 				if (!file_exists($blocks_dir)) {
-					error_log($blocks_dir);
 					continue;
 				}
 
@@ -151,6 +160,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Dynamically render a Contact Form 7 shortcode based on block attributes.
+	 */
 	public function render_contact_form_7_shortcode($attributes)
 	{
 		// Extract the ID and title from attributes, setting defaults if not provided
@@ -168,6 +180,9 @@ class Blocks
 		return do_shortcode($shortcode);
 	}
 
+	/**
+	 * Register a built block (from /build) that is not part of the dynamic list.
+	 */
 	private function register_block($slug, $data)
 	{
 		$block_dir = FB_PLUGIN_PATH . 'build/blocks/' . $slug;
@@ -195,6 +210,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Add the "Frontis Blocks" category to the inserter palette.
+	 */
 	public function register_block_categories($categories)
 	{
 		return array_merge(
@@ -206,92 +224,124 @@ class Blocks
 			),
 			$categories
 		);
-	}
+	}	
 
-	public function header_footer_settings($block_content, $block)
-	{
-		$post_id = absint(get_the_ID());
+	/**
+	 * Apply header/footer disable logic when rendering template part blocks.
+	 */
+	public function header_footer_settings( $block_content, $block ) {
 
-		// Retrieve global options from the database.
-		// $global_options = get_option( 'frontis_theme_options', [] );
-
-		// echo "<pre>";
-		// var_dump($global_options);
-		// echo "</pre>";
-
-
-		// $theme_options = is_array( $theme_options ) ? $theme_options : maybe_unserialize( $theme_options );
-
-		// // if($block['blockName'] === 'core/template-part'){
-		// // 	var_dump(get_post_meta( $post_id, '_frontis_meta_header_display', true ));
-		// // }
-
-		// // Check if the header should be disabled (global or per post).
-		// $disable_header = ! empty( $theme_options['disableHeader'] ) || get_post_meta( $post_id, '_frontis_meta_header_display', true );
-		// if ( $disable_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
-		// 	return '';
-		// }
-
-		// // Check if the footer should be disabled (global or per post).
-		// $disable_footer = ! empty( $theme_options['disableFooter'] ) || get_post_meta( $post_id, '_frontis_meta_footer_display', true );
-		// if ( $disable_footer && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'footer' === $block['attrs']['tagName'] ) {
-		// 	return '';
-		// }
-
-		// // Check if the header should have sticky behavior.
-		// $sticky_header = ! empty( $theme_options['stickyHeader'] );
-
-
-		// if ( $sticky_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
-
-		// 	$sticky_header_color_gb = ! empty( $theme_options['stickyHeaderColor'] ) ? $theme_options['stickyHeaderColor'] : '';
-
-		// 	// Get the post-specific sticky header color
-		// 	$post_id = get_the_ID();
-		// 	$sticky_header_color_sg = get_post_meta( $post_id, '_frontis_meta_sticky_bg_color', true );
-
-		// 	$sticky_header_color = ! empty( $sticky_header_color_sg ) ? $sticky_header_color_sg : $sticky_header_color_gb;
-
-		// 	// Output the CSS custom property dynamically
-		// 	$custom_css = sprintf(
-		// 		'<style>:root { --wp--preset--sticky--bg: %s; }</style>',
-		// 		esc_attr( $sticky_header_color )
-		// 	);
-
-		// 	// Add the CSS custom property to the <head>
-		// 	echo $custom_css;
-
-		// 	// Add a custom class to the block
-		// 	$block_content = $this->add_custom_class( $block_content, 'fb-sticky-header' );
-		// }
-
-
-		// // Check if the header should have a transparent style.
-		// $transparent_header = ! empty( $theme_options['transparentHeader'] );
-
-		// if ( $transparent_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
-
-		// 	$transparent_header_color_gb = ! empty( $theme_options['transparentHeaderColor'] ) ? $theme_options['transparentHeaderColor'] : 'transparent';
-
-		// 	// Get the post-specific sticky header color
-		// 	$post_id = get_the_ID();
-		// 	$transparent_header_color_sg = get_post_meta( $post_id, '_frontis_meta_transparent_bg_color', true );
-
-		// 	$transparent_header_color = ! empty( $transparent_header_color_sg ) ? $transparent_header_color_sg : $transparent_header_color_gb;
-
-		// 	// Output the CSS custom property dynamically
-		// 	$custom_css = sprintf(
-		// 		'<style>:root { --wp--preset--transparent--bg: %s; }</style>',
-		// 		esc_attr( $transparent_header_color )
-		// 	);
-
-		// 	// Add the CSS custom property to the <head>
-		// 	echo $custom_css;
-
-		// 	// Add a custom class to the block
-		// 	$block_content = $this->add_custom_class( $block_content, 'fb-transparent-header' );
-		// }
-
+		// Only process template-part blocks
+		if (
+			empty( $block['blockName'] ) ||
+			'core/template-part' !== $block['blockName']
+		) {
+			return $block_content;
+		}
+	
+		// Current context post ID
+		$post_id = get_queried_object_id();
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		$post_id = absint( $post_id );
+	
+		// Priority already handled here: default < global < template < page
+		$settings = Helper::resolve_frontis_settings( $post_id );
+	
+		// Detect template slug
+		$template_slug = get_page_template_slug($post_id);
+		$post          = get_post($post_id);
+		
+		if (!$template_slug) {
+			if ($post && $post->post_type === 'page') {
+				$template_slug = 'page';
+			} elseif ($post && $post->post_type === 'post') {
+				$template_slug = 'single';
+			}
+		}
+	
+		$stylesheet  = get_stylesheet();
+		$template_id = $stylesheet . '//' . $template_slug;
+		$template    = get_block_template($template_id, 'wp_template');
+	
+		// Template parts
+		$template_part_posts = get_posts(
+			array(
+				'post_type'     => 'wp_template_part',
+				'post_status'   => 'publish',
+				'tax_query'     => array(
+					array(
+						'taxonomy' => 'wp_theme',
+						'field'    => 'name',
+						'terms'    => $stylesheet,
+					),
+				),
+				'no_found_rows' => true,
+			)
+		);
+	
+		/**
+		 * Correct Tag Detection
+		 * =====================
+		 * Use a single clean array and strictly match the slug.
+		 */
+		$tag = [];
+	
+		// Add the current block slug
+		if (!empty($block['attrs']['slug'])) {
+			$tag[] = $block['attrs']['slug'];
+		}
+	
+		// Detect whether the template part is a header or footer
+		if ( $template_part_posts ) {
+			foreach ( $template_part_posts as $template_part_post ) {
+	
+				$block_template = _build_block_template_result_from_post( $template_part_post );
+	
+				// Strict slug match
+				if (
+					! empty($block['attrs']['slug']) &&
+					$block_template->slug === $block['attrs']['slug']
+				) {
+					if ( isset( $block_template->area ) ) {
+						if ( $block_template->area === 'header' ) {
+							$tag[] = 'header';
+						}
+						if ( $block_template->area === 'footer' ) {
+							$tag[] = 'footer';
+						}
+					}
+				}
+			}
+		}
+	
+		/**
+		 * HANDLING DISABLE LOGIC
+		 * ======================
+		 * When the tag contains 'header', only the header will be disabled.
+		 * When it contains 'footer', only the footer will be disabled.
+		 */
+	
+		// Disable Header
+		if (
+			isset($settings['disableHeader']) &&
+			$settings['disableHeader'] === true &&
+			in_array('header', $tag)
+		) {
+			return '';
+		}
+	
+		// Disable Footer
+		if (
+			isset($settings['disableFooter']) &&
+			$settings['disableFooter'] === true &&
+			in_array('footer', $tag)
+		) {
+			return '';
+		}
+	
+		// Default return
 		return $block_content;
 	}
 
@@ -308,8 +358,29 @@ class Blocks
 		return preg_replace('/class="([^"]*)"/', 'class="$1 ' . esc_attr($class) . '"', $block_content, 1);
 	}
 
-	public function render_block($block_content, $parsed_block, $block_obj)
-	{
+	/**
+	 * Central render filter to inject Frontis-specific behaviors.
+	 */
+	public function render_block($block_content, $parsed_block, $block_obj){
+
+		// 1) Get current post ID
+		$post_id = get_queried_object_id();
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		$post_id = absint( $post_id );
+	
+		// 2) Get merged settings (global -> template -> page)
+		$settings = Helper::resolve_frontis_settings( $post_id );
+	
+		// 3) Handle Page Title disable for core/post-title block
+		if (
+			! empty( $parsed_block['blockName'] )
+			&& $parsed_block['blockName'] === 'core/post-title'
+			&& ! empty( $settings['disablePageTitle'] )
+		) {
+			return ''; // Completely hide the title block
+		}
 
 		// echo get_the_ID();
 		$block_content = $this->header_footer_settings($block_content, $parsed_block);
@@ -322,6 +393,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Regenerate assets when relevant blocks are detected on save.
+	 */
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
 		// Skip autosaves and revisions
@@ -343,6 +417,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Ensure the rendered block markup has the expected wrapper class.
+	 */
 	private function add_wrapper_class($block_content, $parsed_block)
 	{
 		$block_name = str_replace('frontis-blocks/', '', $parsed_block['blockName']);
@@ -357,6 +434,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Apply the saved blockId attribute as an HTML id for styling/hooks.
+	 */
 	private function add_block_id($block_content, $parsed_block)
 	{
 		if (!isset($parsed_block['attrs']['blockId'])) {
@@ -372,6 +452,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Return the list of block metadata registered during init.
+	 */
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;

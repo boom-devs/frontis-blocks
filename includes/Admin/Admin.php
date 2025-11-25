@@ -13,6 +13,9 @@ class Admin {
 
     use Singleton;
 
+    /**
+     * Bootstrap admin hooks for menus, assets, REST endpoints, and proxies.
+     */
     public function __construct() {
         add_action('admin_menu', array( $this, 'add_menu_page' ) );
         add_action('admin_init', array($this, 'remove_admin_notices'));
@@ -76,63 +79,14 @@ class Admin {
             )
         );
 
-        register_post_meta(
-            '',
-            '_frontis_meta_sticky_header',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-
-        register_post_meta(
-            '',
-            '_frontis_meta_transparent_header',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_lazy_load',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_transparent_bg_color',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'string',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_sticky_bg_color',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'string',
-                'auth_callback' => '__return_true',
-            )
-        );
-
         // Init template proxy
         add_rewrite_rule('^template-proxy/?$', 'index.php?template_proxy=1', 'top');
         flush_rewrite_rules(false);
     }
 
+    /**
+     * Hide default WP admin notices inside the Frontis dashboard to prevent clutter.
+     */
     public function remove_admin_notices() {
         if(isset($_GET['page']) && $_GET['page'] === 'frontis-blocks') {
             remove_all_actions('admin_notices');
@@ -140,6 +94,9 @@ class Admin {
         }
     }
 
+    /**
+     * Register the root Frontis Blocks menu entry inside wp-admin.
+     */
     public function add_menu_page(){
         add_menu_page(
             __('Frontis Blocks', 'frontis-blocks'),
@@ -152,10 +109,16 @@ class Admin {
         );
     }
 
+    /**
+     * Render the React admin container.
+     */
     public function display_page(){
         echo "<div id='frontis-blocks-admin'></div>";
     }
 
+    /**
+     * Load admin styles where needed (dashboard, post editor, site editor).
+     */
     public function enqueue_styles($hook){
 
         if('toplevel_page_frontis-blocks' == $hook || 'post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -165,6 +128,9 @@ class Admin {
         }
     }
 
+    /**
+     * Load admin scripts and localize data depending on the current screen.
+     */
     public function enqueue_scripts($hook){
 
 		// Get the blocks list
@@ -344,6 +310,9 @@ class Admin {
         return $links;
     }
 
+	/**
+	 * Cache the Google Fonts manifest so the editor can quickly offer font choices.
+	 */
 	public function store_google_fonts() {
 		$transient_key = 'google_fonts_data';
 
@@ -490,26 +459,6 @@ class Admin {
             'permission_callback' => '__return_true', // Adjust permissions as needed
         ]);
 
-        // register_rest_route(
-        //     'frontis/v1',
-        //     '/global-settings',
-        //     array(
-        //         array(
-        //             'methods'             => \WP_REST_Server::READABLE,
-        //             'callback'            =>  [$this, 'frontis_get_global_settings'],
-        //             'permission_callback' => function () {
-        //                 return true;
-        //             },
-        //         ),
-        //         array(
-        //             'methods'             => \WP_REST_Server::EDITABLE,
-        //             'callback'            => [$this, 'frontis_update_global_settings'],
-        //             'permission_callback' => function () {
-        //                 return current_user_can( 'manage_options' );
-        //             },
-        //         ),
-        //     )
-        // );
         register_rest_route(
             'frontis/v1',
             '/global-settings',
@@ -565,8 +514,32 @@ class Admin {
                 )
             )
         );
+
+        register_rest_route(
+            'frontis/v1',
+            '/page-settings',
+            array(
+                array(
+                    'methods'             => \WP_REST_Server::READABLE,
+                    'callback'            => [$this, 'frontis_get_page_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can( 'edit_posts' );
+                    },
+                ),
+                array(
+                    'methods'             => \WP_REST_Server::EDITABLE,
+                    'callback'            => [$this, 'frontis_update_page_settings'],
+                    'permission_callback' => function () {
+                        return current_user_can( 'edit_posts' );
+                    },
+                ),
+            )
+        );
     }
 
+    /**
+     * Simple proxy endpoint so remote images can be previewed without CORS issues.
+     */
     function proxy_image($request) {
         $image_url = $request->get_param('url');
         if (!$image_url || !filter_var($image_url, FILTER_VALIDATE_URL)) {
@@ -594,62 +567,33 @@ class Admin {
      * @param \WP_REST_Request $request Full details about the request.
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
-    // function frontis_get_global_settings( \WP_REST_Request $request ) {
-    //     $default_settings = array(
-    //         'disableHeader'     => false,
-    //         'disableFooter'     => false,
-    //         'stickyHeader'      => false,
-    //         'stickyHeaderOffset' => 0,
-    //         'transparentHeader' => false,
-    //         'scrollToTop'       => false,
-    //         'smoothScroll'       => false,
-    //         'relatedPosts'       => false,
-    //         'authorBox'       => false,
-    //         'lazyLoading'       => false,
-    //         'stickyHeaderColor'       => null,
-    //         'transparentHeaderColor'       => 'transparent',
-    //     );
-
-    //     $settings = get_option( 'frontis_theme_options' );
-
-    //     return rest_ensure_response( $settings, $default_settings );
-    // }
     function frontis_get_global_settings( \WP_REST_Request $request ) {
-        $post_id     = $request->get_param('post_id');     // যদি single page/post এ থাকি
-        $template_id = $request->get_param('template_id'); // যদি template এ থাকি
+
+        $post_id     = $request->get_param('post_id');
+        $template_id = $request->get_param('template_id');
     
-        // Default Global Settings
+        // Only header & footer settings
         $default_settings = array(
-            'disableHeader'     => false,
-            'disableFooter'     => false,
-            'stickyHeader'      => false,
-            'stickyHeaderOffset'=> 0,
-            'transparentHeader' => false,
-            'scrollToTop'       => false,
-            'smoothScroll'      => false,
-            'relatedPosts'      => false,
-            'authorBox'         => false,
-            'lazyLoading'       => false,
-            'stickyHeaderColor' => null,
-            'transparentHeaderColor' => 'transparent',
+            'disableHeader' => false,
+            'disableFooter' => false,
         );
     
-        // 1. Global settings
-        $global_settings = get_option('frontis_theme_options', $default_settings);
+        // 1. Global option table
+        $global_settings = get_option( 'frontis_theme_options', $default_settings );
     
-        // 2. Template settings (যদি থাকে)
-        $template_settings = $template_id ? get_post_meta($template_id, '_frontis_template_settings', true) : [];
-        if ( ! is_array($template_settings) ) {
+        // 2. Template override
+        $template_settings = $template_id ? get_post_meta( $template_id, '_frontis_template_settings', true ) : [];
+        if ( ! is_array( $template_settings ) ) {
             $template_settings = [];
         }
     
-        // 3. Single Page/Post settings (যদি থাকে)
-        $post_settings = $post_id ? get_post_meta($post_id, '_frontis_page_settings', true) : [];
-        if ( ! is_array($post_settings) ) {
+        // 3. Page/Post override
+        $post_settings = $post_id ? get_post_meta( $post_id, '_frontis_page_settings', true ) : [];
+        if ( ! is_array( $post_settings ) ) {
             $post_settings = [];
         }
     
-        // Priority Merge: post > template > global > default
+        // Priority: default < global < template < post
         $final_settings = array_merge(
             $default_settings,
             $global_settings,
@@ -657,12 +601,41 @@ class Admin {
             $post_settings
         );
     
-        return rest_ensure_response($final_settings);
+        return rest_ensure_response( $final_settings );
+    }
+
+    /**
+     * Update global settings
+     */
+    function frontis_update_global_settings( \WP_REST_Request $request ) {
+
+        $scope  = $request->get_param('scope'); // global|template|post
+        $id     = $request->get_param('id');
+        $fields = $request->get_param('setting') ?: [];
+    
+        if ( empty( $scope ) ) {
+            return new \WP_Error( 'missing_scope', 'Scope parameter is required' );
+        }
+    
+        // Only valid fields
+        $valid_fields = array(
+            'disableHeader' => filter_var( $fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'disableFooter' => filter_var( $fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+        );
+    
+        if ( 'global' === $scope ) {
+            update_option( 'frontis_theme_options', $valid_fields );
+        } elseif ( 'template' === $scope && $id ) {
+            update_post_meta( (int) $id, '_frontis_template_settings', $valid_fields );
+        } elseif ( 'post' === $scope && $id ) {
+            update_post_meta( (int) $id, '_frontis_page_settings', $valid_fields );
+        }
+    
+        return rest_ensure_response( 'success' );
     }
 
     function frontis_get_post_template_data( \WP_REST_Request $request ) {
         $post_id = $request->get_param( 'id' );
-        $template_id = Helper::get_template_id($post_id);
         
         // Validate post_id
         if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
@@ -673,59 +646,25 @@ class Admin {
             );
         }
 
-        // Retrieve post meta for the given post_id
-        $settings = get_post_meta( $template_id, 'frontis_template_options', true );
+        // Get template ID for this post
+        $template_id = Helper::get_template_id($post_id);
+        
+        // If template ID is not found, return empty array
+        if ( empty( $template_id ) ) {
+            return rest_ensure_response( [] );
+        }
+
+        // Retrieve post meta for the template
+        $settings = get_post_meta( $template_id, '_frontis_template_settings', true );
 
         // Return empty array if no settings found, or the settings themselves
         return rest_ensure_response( $settings ? $settings : [] );
     }
 
     /**
-     * Set options
-     *
-     * @param \WP_REST_Request $request Full details about the request.
-     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
-     * @since 1.0.2
+     * Provide the bundled Font Awesome icons list to the editor UI.
      */
-    
-    function frontis_update_global_settings(\WP_REST_Request $request) {
-        $scope   = $request->get_param('scope'); // global|template|post
-        $id      = $request->get_param('id');
-        $fields  = $request->get_param('setting') ?: [];
-    
-        if (empty($scope)) {
-            return new \WP_Error('missing_scope', 'Scope parameter is required');
-        }
-    
-        $valid_fields = array(
-            'disableHeader'     => filter_var($fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'disableFooter'     => filter_var($fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeader'      => filter_var($fields['stickyHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeaderOffset'=> filter_var($fields['stickyHeaderOffset'] ?? 0, FILTER_VALIDATE_INT),
-            'transparentHeader' => filter_var($fields['transparentHeader'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'scrollToTop'       => filter_var($fields['scrollToTop'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'smoothScroll'      => filter_var($fields['smoothScroll'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'relatedPosts'      => filter_var($fields['relatedPosts'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'authorBox'         => filter_var($fields['authorBox'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'lazyLoading'       => filter_var($fields['lazyLoading'] ?? false, FILTER_VALIDATE_BOOLEAN),
-            'stickyHeaderColor' => sanitize_text_field($fields['stickyHeaderColor'] ?? ''),
-            'transparentHeaderColor' => sanitize_text_field($fields['transparentHeaderColor'] ?? ''),
-        );
-    
-        if ($scope === 'global') {
-            update_option('frontis_theme_options', $valid_fields);
-        } elseif ($scope === 'template' && $id) {
-            update_post_meta((int)$id, '_frontis_template_settings', $valid_fields);
-        } elseif ($scope === 'post' && $id) {
-            update_post_meta((int)$id, '_frontis_page_settings', $valid_fields);
-        }
-    
-        return rest_ensure_response('success');
-    }
-    
-
     public function get_icons() {
-        // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
         $data = include FB_PLUGIN_PATH . 'assets/fontawesome/icons.php';
         return $data;
     }
@@ -750,24 +689,20 @@ class Admin {
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
 
-    public function frontis_get_template_settings( \WP_REST_Request $request ) {
-        // Get post_id from query parameters
-        $post_id = $request->get_param('post_id');
-
-        // Validate post_id
-        if ( empty( $post_id ) || ! is_numeric( $post_id ) ) {
+     public function frontis_get_template_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
             return new \WP_Error(
                 'invalid_post_id',
                 __( 'Invalid or missing post ID.', 'frontis' ),
                 array( 'status' => 400 )
             );
         }
-
-        // Retrieve post meta for the given post_id
-        $settings = get_post_meta( $post_id, 'frontis_template_options', true );
-
-        // Return empty array if no settings found, or the settings themselves
-        return rest_ensure_response( $settings ? $settings : [] );
+    
+        $settings = get_post_meta( $post_id, '_frontis_template_settings', true );
+    
+        return rest_ensure_response( is_array( $settings ) ? $settings : [] );
     }
 
     /**
@@ -777,24 +712,130 @@ class Admin {
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
     public function frontis_update_template_settings( \WP_REST_Request $request ) {
-        $fields = isset( $request['setting'] ) ? $request['setting'] : array();
-        update_post_meta( $request['post_id'], 'frontis_template_options', $fields );
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $fields = (array) $request->get_param( 'setting' );
+        
+        // Ensure boolean values are properly saved (not converted to empty strings)
+        // WordPress update_post_meta can have issues with false values
+        foreach ( $fields as $key => $value ) {
+            if ( $value === false || $value === 'false' || $value === 0 || $value === '0' ) {
+                $fields[ $key ] = false; // Explicitly set to false
+            } elseif ( $value === true || $value === 'true' || $value === 1 || $value === '1' ) {
+                $fields[ $key ] = true; // Explicitly set to true
+            }
+        }
+    
+        $result = update_post_meta( $post_id, '_frontis_template_settings', $fields );
+        
+        // Verify the save
+        $saved_settings = get_post_meta( $post_id, '_frontis_template_settings', true );
+    
         return rest_ensure_response( 'success' );
+    }
+
+    /**
+     * Get page/post settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function frontis_get_page_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        // Get page/post settings from meta
+        $settings = get_post_meta( $post_id, '_frontis_page_settings', true );
+    
+        return rest_ensure_response( is_array( $settings ) ? $settings : [] );
+    }
+
+    /**
+     * Update page/post settings
+     *
+     * @param \WP_REST_Request $request Full details about the request.
+     * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
+     */
+    public function frontis_update_page_settings( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+    
+        if ( ! $post_id ) {
+            return new \WP_Error(
+                'invalid_post_id',
+                __( 'Invalid or missing post ID.', 'frontis' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $fields = (array) $request->get_param( 'setting' );
+        
+        // Ensure boolean values are properly saved (not converted to empty strings)
+        foreach ( $fields as $key => $value ) {
+            if ( $value === false || $value === 'false' || $value === 0 || $value === '0' ) {
+                $fields[ $key ] = false; // Explicitly set to false
+            } elseif ( $value === true || $value === 'true' || $value === 1 || $value === '1' ) {
+                $fields[ $key ] = true; // Explicitly set to true
+            }
+        }
+    
+        $result = update_post_meta( $post_id, '_frontis_page_settings', $fields );
+        
+        // Verify the save
+        $saved_settings = get_post_meta( $post_id, '_frontis_page_settings', true );
+    
+        return rest_ensure_response( 'success' );
+    }
+
+    /**
+     * Check if meta exists
+     */
+    public function frontis_meta_exists( \WP_REST_Request $request ) {
+        $post_id = absint( $request->get_param( 'post_id' ) );
+        $key     = $request->get_param( 'key' );
+    
+        if ( ! $post_id || ! $key ) {
+            return new \WP_Error(
+                'invalid_meta_exists_params',
+                __( 'Missing post_id or key.', 'frontis-blocks' ),
+                array( 'status' => 400 )
+            );
+        }
+    
+        $exists = metadata_exists( 'post', $post_id, $key );
+    
+        return rest_ensure_response(
+            array(
+                'exists' => (bool) $exists,
+            )
+        );
     }
 
     /**
      * Handle the save option REST API endpoint
      *
-     * @param WP_REST_Request $request Full details about the request.
-     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     * @param WP_REST_Request
+     * @return WP_REST_Response|WP_Error
      */
     public function save_option_endpoint($request) {
         $nonce = $request->get_param('nonce');
         if (!wp_verify_nonce($nonce, 'fb_save_settings')) {
             return new \WP_Error('invalid_nonce', 'Invalid nonce', ['status' => 403]);
         }
-
-        //error_log(print_r($request->get_params(), true));
 
         $key = $request->get_param('key');
         $value = $request->get_param('value');
