@@ -13,6 +13,9 @@ class Admin {
 
     use Singleton;
 
+    /**
+     * Bootstrap admin hooks for menus, assets, REST endpoints, and proxies.
+     */
     public function __construct() {
         add_action('admin_menu', array( $this, 'add_menu_page' ) );
         add_action('admin_init', array($this, 'remove_admin_notices'));
@@ -81,6 +84,9 @@ class Admin {
         flush_rewrite_rules(false);
     }
 
+    /**
+     * Hide default WP admin notices inside the Frontis dashboard to prevent clutter.
+     */
     public function remove_admin_notices() {
         if(isset($_GET['page']) && $_GET['page'] === 'frontis-blocks') {
             remove_all_actions('admin_notices');
@@ -88,6 +94,9 @@ class Admin {
         }
     }
 
+    /**
+     * Register the root Frontis Blocks menu entry inside wp-admin.
+     */
     public function add_menu_page(){
         add_menu_page(
             __('Frontis Blocks', 'frontis-blocks'),
@@ -100,10 +109,16 @@ class Admin {
         );
     }
 
+    /**
+     * Render the React admin container.
+     */
     public function display_page(){
         echo "<div id='frontis-blocks-admin'></div>";
     }
 
+    /**
+     * Load admin styles where needed (dashboard, post editor, site editor).
+     */
     public function enqueue_styles($hook){
 
         if('toplevel_page_frontis-blocks' == $hook || 'post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
@@ -113,6 +128,9 @@ class Admin {
         }
     }
 
+    /**
+     * Load admin scripts and localize data depending on the current screen.
+     */
     public function enqueue_scripts($hook){
 
 		// Get the blocks list
@@ -292,6 +310,9 @@ class Admin {
         return $links;
     }
 
+	/**
+	 * Cache the Google Fonts manifest so the editor can quickly offer font choices.
+	 */
 	public function store_google_fonts() {
 		$transient_key = 'google_fonts_data';
 
@@ -516,6 +537,9 @@ class Admin {
         );
     }
 
+    /**
+     * Simple proxy endpoint so remote images can be previewed without CORS issues.
+     */
     function proxy_image($request) {
         $image_url = $request->get_param('url');
         if (!$image_url || !filter_var($image_url, FILTER_VALIDATE_URL)) {
@@ -637,8 +661,10 @@ class Admin {
         return rest_ensure_response( $settings ? $settings : [] );
     }
 
+    /**
+     * Provide the bundled Font Awesome icons list to the editor UI.
+     */
     public function get_icons() {
-        // Assets er vitore fontawesome icon ache icons.php file a oita fetch korbo using rest api
         $data = include FB_PLUGIN_PATH . 'assets/fontawesome/icons.php';
         return $data;
     }
