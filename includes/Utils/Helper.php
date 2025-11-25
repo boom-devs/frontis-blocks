@@ -1110,6 +1110,7 @@ class Helper
         $default_settings = [
             'disableHeader' => false,
             'disableFooter' => false,
+            'disablePageTitle'   => false,
         ];
 
         // Global settings (filtered to only allowed keys)

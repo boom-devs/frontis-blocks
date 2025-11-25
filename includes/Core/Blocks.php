@@ -209,7 +209,7 @@ class Blocks
 
 	public function header_footer_settings( $block_content, $block ) {
 
-		// শুধু template-part ব্লকের উপর কাজ করব
+		// Only process template-part blocks
 		if (
 			empty( $block['blockName'] ) ||
 			'core/template-part' !== $block['blockName']
@@ -217,14 +217,14 @@ class Blocks
 			return $block_content;
 		}
 	
-		// Current context এর post ID
+		// Current context post ID
 		$post_id = get_queried_object_id();
 		if ( ! $post_id ) {
 			$post_id = get_the_ID();
 		}
 		$post_id = absint( $post_id );
 	
-		// এখানে already priority handle হচ্ছে: default < global < template < page
+		// Priority already handled here: default < global < template < page
 		$settings = Helper::resolve_frontis_settings( $post_id );
 	
 		// Detect template slug
@@ -262,16 +262,16 @@ class Blocks
 		/**
 		 * Correct Tag Detection
 		 * =====================
-		 * শুধু ১টা clean array use হবে এবং slug strictly match করব।
+		 * Use a single clean array and strictly match the slug.
 		 */
 		$tag = [];
 	
-		// বর্তমান block এর slug যোগ করো
+		// Add the current block slug
 		if (!empty($block['attrs']['slug'])) {
 			$tag[] = $block['attrs']['slug'];
 		}
 	
-		// Header/Footer detect করা
+		// Detect whether the template part is a header or footer
 		if ( $template_part_posts ) {
 			foreach ( $template_part_posts as $template_part_post ) {
 	
@@ -297,8 +297,8 @@ class Blocks
 		/**
 		 * HANDLING DISABLE LOGIC
 		 * ======================
-		 * এখন tag এ 'header' থাকলে শুধু header disable হবে।
-		 * footer থাকলে শুধু footer disable হবে।
+		 * When the tag contains 'header', only the header will be disabled.
+		 * When it contains 'footer', only the footer will be disabled.
 		 */
 	
 		// Disable Header
@@ -336,8 +336,26 @@ class Blocks
 		return preg_replace('/class="([^"]*)"/', 'class="$1 ' . esc_attr($class) . '"', $block_content, 1);
 	}
 
-	public function render_block($block_content, $parsed_block, $block_obj)
-	{
+	public function render_block($block_content, $parsed_block, $block_obj){
+
+		// 1) Get current post ID
+		$post_id = get_queried_object_id();
+		if ( ! $post_id ) {
+			$post_id = get_the_ID();
+		}
+		$post_id = absint( $post_id );
+	
+		// 2) Get merged settings (global -> template -> page)
+		$settings = Helper::resolve_frontis_settings( $post_id );
+	
+		// 3) Handle Page Title disable for core/post-title block
+		if (
+			! empty( $parsed_block['blockName'] )
+			&& $parsed_block['blockName'] === 'core/post-title'
+			&& ! empty( $settings['disablePageTitle'] )
+		) {
+			return ''; // Completely hide the title block
+		}
 
 		// echo get_the_ID();
 		$block_content = $this->header_footer_settings($block_content, $parsed_block);
