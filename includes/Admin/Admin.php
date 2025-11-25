@@ -76,58 +76,6 @@ class Admin {
             )
         );
 
-        register_post_meta(
-            '',
-            '_frontis_meta_sticky_header',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-
-        register_post_meta(
-            '',
-            '_frontis_meta_transparent_header',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_lazy_load',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'boolean',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_transparent_bg_color',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'string',
-                'auth_callback' => '__return_true',
-            )
-        );
-        register_post_meta(
-            '',
-            '_frontis_meta_sticky_bg_color',
-            array(
-                'show_in_rest'  => true,
-                'single'        => true,
-                'type'          => 'string',
-                'auth_callback' => '__return_true',
-            )
-        );
-
         // Init template proxy
         add_rewrite_rule('^template-proxy/?$', 'index.php?template_proxy=1', 'top');
         flush_rewrite_rules(false);
@@ -596,34 +544,26 @@ class Admin {
      * @return \WP_REST_Response|\WP_Error Response object on success, or WP_Error object on failure.
      */
     function frontis_get_global_settings( \WP_REST_Request $request ) {
-        $post_id     = $request->get_param('post_id');     // single page/post হলে
-        $template_id = $request->get_param('template_id'); // template হলে
+
+        $post_id     = $request->get_param('post_id');
+        $template_id = $request->get_param('template_id');
     
+        // Only header & footer settings
         $default_settings = array(
-            'disableHeader'          => false,
-            'disableFooter'          => false,
-            'stickyHeader'           => false,
-            'stickyHeaderOffset'     => 0,
-            'transparentHeader'      => false,
-            'scrollToTop'            => false,
-            'smoothScroll'           => false,
-            'relatedPosts'           => false,
-            'authorBox'              => false,
-            'lazyLoading'            => false,
-            'stickyHeaderColor'      => null,
-            'transparentHeaderColor' => 'transparent',
+            'disableHeader' => false,
+            'disableFooter' => false,
         );
     
         // 1. Global option table
         $global_settings = get_option( 'frontis_theme_options', $default_settings );
     
-        // 2. Template override (optional)
+        // 2. Template override
         $template_settings = $template_id ? get_post_meta( $template_id, '_frontis_template_settings', true ) : [];
         if ( ! is_array( $template_settings ) ) {
             $template_settings = [];
         }
     
-        // 3. Page/Post override (optional)
+        // 3. Page/Post override
         $post_settings = $post_id ? get_post_meta( $post_id, '_frontis_page_settings', true ) : [];
         if ( ! is_array( $post_settings ) ) {
             $post_settings = [];
@@ -644,6 +584,7 @@ class Admin {
      * Update global settings
      */
     function frontis_update_global_settings( \WP_REST_Request $request ) {
+
         $scope  = $request->get_param('scope'); // global|template|post
         $id     = $request->get_param('id');
         $fields = $request->get_param('setting') ?: [];
@@ -652,19 +593,10 @@ class Admin {
             return new \WP_Error( 'missing_scope', 'Scope parameter is required' );
         }
     
+        // Only valid fields
         $valid_fields = array(
-            'disableHeader'          => filter_var( $fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'disableFooter'          => filter_var( $fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'stickyHeader'           => filter_var( $fields['stickyHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'stickyHeaderOffset'     => filter_var( $fields['stickyHeaderOffset'] ?? 0, FILTER_VALIDATE_INT ),
-            'transparentHeader'      => filter_var( $fields['transparentHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'scrollToTop'            => filter_var( $fields['scrollToTop'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'smoothScroll'           => filter_var( $fields['smoothScroll'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'relatedPosts'           => filter_var( $fields['relatedPosts'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'authorBox'              => filter_var( $fields['authorBox'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'lazyLoading'            => filter_var( $fields['lazyLoading'] ?? false, FILTER_VALIDATE_BOOLEAN ),
-            'stickyHeaderColor'      => sanitize_text_field( $fields['stickyHeaderColor'] ?? '' ),
-            'transparentHeaderColor' => sanitize_text_field( $fields['transparentHeaderColor'] ?? '' ),
+            'disableHeader' => filter_var( $fields['disableHeader'] ?? false, FILTER_VALIDATE_BOOLEAN ),
+            'disableFooter' => filter_var( $fields['disableFooter'] ?? false, FILTER_VALIDATE_BOOLEAN ),
         );
     
         if ( 'global' === $scope ) {
@@ -870,8 +802,8 @@ class Admin {
     /**
      * Handle the save option REST API endpoint
      *
-     * @param WP_REST_Request $request Full details about the request.
-     * @return WP_REST_Response|WP_Error Response object on success, or WP_Error object on failure.
+     * @param WP_REST_Request
+     * @return WP_REST_Response|WP_Error
      */
     public function save_option_endpoint($request) {
         $nonce = $request->get_param('nonce');
