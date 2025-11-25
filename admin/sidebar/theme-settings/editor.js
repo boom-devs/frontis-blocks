@@ -1,67 +1,65 @@
 import { ToggleControl, PanelBody, PanelRow } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { useEntityProp } from '@wordpress/core-data';
 import { useState, useEffect } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 
-const FrontisMetaBox = ({ whichEditor }) => {
+const FrontisMetaBox = () => {
+
+    // FIX: Correct site editor ID → DB ID conversion
+    const getCorrectPostId = () => {
+        // Site Editor
+        const edited = wp.data.select('core/edit-site')?.getEditedPostId();
+        if (edited) {
+            const templateEntity = wp.data
+                .select('core')
+                .getEntityRecord('postType', 'wp_template', edited);
+
+            const dbId = templateEntity?.wp_id;
+            if (dbId && Number.isInteger(dbId)) return dbId;
+        }
+
+        // Page/Post Editor fallback
+        return wp.data.select('core/editor')?.getCurrentPostId();
+    };
+
     const postType = useSelect(
         (select) => select('core/editor').getCurrentPostType(),
         []
     );
 
-    const currentPostId = useSelect((select) =>
-        select('core/editor').getCurrentPostId()
-    );
+    const currentPostId = getCorrectPostId();
 
-    const [meta, setMeta] = useEntityProp('postType', postType, 'meta');
-
+    const [globalSettings, setGlobalSettings] = useState({});
     const [templateMeta, setTemplateMeta] = useState({});
-    const [templateMetaLoaded, setTemplateMetaLoaded] = useState(false);
-
-    const [globalSettings, setGlobalSettings] = useState({
-        disableHeader: false,
-        disableFooter: false,
-        disablePageTitle: false,
-    });
-
     const [pageSettings, setPageSettings] = useState({});
-    const [pageLoaded, setPageLoaded] = useState(false);
 
     const isTemplateEditor = postType === 'wp_template';
 
-    // 🔹 Load Global Settings
+    // Load Global Settings
     useEffect(() => {
-        apiFetch({ path: 'frontis/v1/global-settings' }).then((settings) => {
-            setGlobalSettings(settings);
-        });
+        apiFetch({ path: 'frontis/v1/global-settings' })
+            .then(setGlobalSettings);
     }, []);
 
-    // 🔹 Load Template Meta (Template Editor)
+    // Load Template Settings
     useEffect(() => {
-        if (!isTemplateEditor) return;
+        if (!currentPostId || !isTemplateEditor) return;
 
         apiFetch({
             path: `frontis/v1/template-settings?post_id=${currentPostId}`,
-        }).then((res) => {
-            setTemplateMeta(res || {});
-            setTemplateMetaLoaded(true);
-        });
-    }, [postType, currentPostId]);
+        }).then((res) => setTemplateMeta(res || {}));
+    }, [currentPostId, postType]);
 
-    // 🔹 Load Page Settings (Page/Post Editor)
+    // Load Page/Post Settings
     useEffect(() => {
-        if (isTemplateEditor) return;
+        if (!currentPostId || isTemplateEditor) return;
 
         apiFetch({
             path: `frontis/v1/page-settings?post_id=${currentPostId}`,
-        }).then((res) => {
-            setPageSettings(res || {});
-            setPageLoaded(true);
-        });
-    }, [postType, currentPostId]);
+        }).then((res) => setPageSettings(res || {}));
+    }, [currentPostId, postType]);
 
-    // 🔹 Value With Priority: Page → Template → Global
+    // Inherited value: Page → Template → Global
     const inherit = (key) => {
         if (pageSettings[key] !== undefined) return pageSettings[key];
         if (templateMeta[key] !== undefined) return templateMeta[key];
@@ -69,61 +67,56 @@ const FrontisMetaBox = ({ whichEditor }) => {
         return false;
     };
 
-    const disableHeader = inherit("disableHeader");
-    const disableFooter = inherit("disableFooter");
-    const disablePageTitle = inherit("disablePageTitle");
+    const updateSetting = (key, value) => {
+        if (!currentPostId) return;
 
-    // 🔹 Update Setting
-    const updateSetting = (metaKey, value) => {
         if (isTemplateEditor) {
-            const updated = { ...templateMeta, [metaKey]: value };
+            const updated = { ...templateMeta, [key]: value };
             setTemplateMeta(updated);
 
             apiFetch({
                 path: 'frontis/v1/template-settings',
                 method: 'POST',
-                data: { setting: updated, post_id: currentPostId },
+                data: { post_id: currentPostId, setting: updated },
             });
         } else {
-            const updated = { ...pageSettings, [metaKey]: value };
+            const updated = { ...pageSettings, [key]: value };
             setPageSettings(updated);
 
             apiFetch({
                 path: 'frontis/v1/page-settings',
                 method: 'POST',
-                data: { setting: updated, post_id: currentPostId },
+                data: { post_id: currentPostId, setting: updated },
             });
         }
     };
 
     return (
-        <>
-            <PanelBody title="Disable Elements">
-                <PanelRow>
-                    <ToggleControl
-                        label="Disable Header"
-                        checked={disableHeader}
-                        onChange={(v) => updateSetting("disableHeader", v)}
-                    />
-                </PanelRow>
+        <PanelBody title="Disable Elements">
+            <PanelRow>
+                <ToggleControl
+                    label="Disable Header"
+                    checked={inherit("disableHeader")}
+                    onChange={(v) => updateSetting("disableHeader", v)}
+                />
+            </PanelRow>
 
-                <PanelRow>
-                    <ToggleControl
-                        label="Disable Footer"
-                        checked={disableFooter}
-                        onChange={(v) => updateSetting("disableFooter", v)}
-                    />
-                </PanelRow>
+            <PanelRow>
+                <ToggleControl
+                    label="Disable Footer"
+                    checked={inherit("disableFooter")}
+                    onChange={(v) => updateSetting("disableFooter", v)}
+                />
+            </PanelRow>
 
-                <PanelRow>
-                    <ToggleControl
-                        label="Disable Page Title"
-                        checked={disablePageTitle}
-                        onChange={(v) => updateSetting("disablePageTitle", v)}
-                    />
-                </PanelRow>
-            </PanelBody>
-        </>
+            <PanelRow>
+                <ToggleControl
+                    label="Disable Page Title"
+                    checked={inherit("disablePageTitle")}
+                    onChange={(v) => updateSetting("disablePageTitle", v)}
+                />
+            </PanelRow>
+        </PanelBody>
     );
 };
 
