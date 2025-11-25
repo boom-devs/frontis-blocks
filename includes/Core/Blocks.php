@@ -12,12 +12,19 @@ use FrontisBlocks\Assets\AssetsGenerator;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Core orchestrator for registering blocks and hooking into the render cycle.
+ */
 class Blocks
 {
 	use Singleton;
 
 	private $registered_blocks = [];
 	private $gfonts = [];
+
+	/**
+	 * Wire up all required WordPress hooks when the class instantiates.
+	 */
 	public function __construct()
 	{
 		add_action('init', [$this, 'register_blocks']);
@@ -26,6 +33,9 @@ class Blocks
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
 	}
 
+	/**
+	 * Register each block directory, enqueue assets, and localize runtime data.
+	 */
 	public function register_blocks()
 	{
 		$blocks_list = BlockList::get_instance()->get_blocks();
@@ -150,6 +160,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Dynamically render a Contact Form 7 shortcode based on block attributes.
+	 */
 	public function render_contact_form_7_shortcode($attributes)
 	{
 		// Extract the ID and title from attributes, setting defaults if not provided
@@ -167,6 +180,9 @@ class Blocks
 		return do_shortcode($shortcode);
 	}
 
+	/**
+	 * Register a built block (from /build) that is not part of the dynamic list.
+	 */
 	private function register_block($slug, $data)
 	{
 		$block_dir = FB_PLUGIN_PATH . 'build/blocks/' . $slug;
@@ -194,6 +210,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Add the "Frontis Blocks" category to the inserter palette.
+	 */
 	public function register_block_categories($categories)
 	{
 		return array_merge(
@@ -207,6 +226,9 @@ class Blocks
 		);
 	}	
 
+	/**
+	 * Apply header/footer disable logic when rendering template part blocks.
+	 */
 	public function header_footer_settings( $block_content, $block ) {
 
 		// Only process template-part blocks
@@ -336,6 +358,9 @@ class Blocks
 		return preg_replace('/class="([^"]*)"/', 'class="$1 ' . esc_attr($class) . '"', $block_content, 1);
 	}
 
+	/**
+	 * Central render filter to inject Frontis-specific behaviors.
+	 */
 	public function render_block($block_content, $parsed_block, $block_obj){
 
 		// 1) Get current post ID
@@ -368,6 +393,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Regenerate assets when relevant blocks are detected on save.
+	 */
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
 		// Skip autosaves and revisions
@@ -389,6 +417,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Ensure the rendered block markup has the expected wrapper class.
+	 */
 	private function add_wrapper_class($block_content, $parsed_block)
 	{
 		$block_name = str_replace('frontis-blocks/', '', $parsed_block['blockName']);
@@ -403,6 +434,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Apply the saved blockId attribute as an HTML id for styling/hooks.
+	 */
 	private function add_block_id($block_content, $parsed_block)
 	{
 		if (!isset($parsed_block['attrs']['blockId'])) {
@@ -418,6 +452,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Return the list of block metadata registered during init.
+	 */
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
