@@ -3,6 +3,9 @@
 namespace FrontisBlocks\Utils;
 use FrontisBlocks\Config\BlockList;
 
+/**
+ * Collection of utility helpers shared across the plugin.
+ */
 class Helper
 {
     /**
@@ -63,6 +66,9 @@ class Helper
         return in_array($pagenow, ['post.php', 'post-new.php', 'site-editor.php', 'widgets.php', 'index.php']);
     }
 
+    /**
+     * Resolve a post ID from its slug and post type.
+     */
     public static function get_post_id_by_slug($post_name, $post_type = 'post')
     {
         $post = get_page_by_path($post_name, OBJECT, $post_type);
@@ -168,6 +174,9 @@ class Helper
         return apply_filters('fb_post_loop_taxonomies', $return_array);
     }
 
+    /**
+     * Return authors who have at least one published post.
+     */
     public static function get_all_authors_with_posts()
     {
         $args = array(
@@ -177,6 +186,9 @@ class Helper
         return get_users($args);
     }
 
+    /**
+     * Fetch the slug for a page when Frontis blocks are enabled there.
+     */
     public static function get_page_name($post_id)
     {
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
@@ -357,6 +369,9 @@ class Helper
         return $what_post_type;
     }
 
+    /**
+     * Determine which archive template slug should be loaded.
+     */
     public static function get_archive_page_template($archive_object, $template_type_slug)
     {
         if (is_author() && is_a($archive_object, 'WP_User')) {
@@ -382,6 +397,9 @@ class Helper
         return 'archive';
     }
 
+    /**
+     * Clean previously generated Frontis CSS files except the shared bundle.
+     */
     public static function remove_css_files()
     {
         $upload_dir = wp_upload_dir();
@@ -394,6 +412,9 @@ class Helper
         }
     }
 
+    /**
+     * Return all public post types that expose a REST schema.
+     */
     public static function get_post_types()
     {
         $post_types = get_post_types(
@@ -639,6 +660,9 @@ class Helper
         return wp_get_referer();
     }
 
+    /**
+     * Determine whether the current referer URL points to the Site Editor template UI.
+     */
     public static function check_url_has_fse_template()
     {
         // Parse the URL
@@ -686,6 +710,9 @@ class Helper
         return $jsFiles;
     }
 
+    /**
+     * Quickly check if a wp_template contains a specific block slug.
+     */
     public static function get_blocks_inside_template($block_name)
     {
         global $wpdb;
@@ -701,11 +728,17 @@ class Helper
         return false;
     }
 
+    /**
+     * Helper to concatenate numeric values with CSS units.
+     */
     public static function create_value_with_unit($value, $unit)
     {
         return $value . $unit;
     }
 
+    /**
+     * Detect whether a post ID is using a custom post type.
+     */
     public static function is_custom_post_type($post_id = null)
     {
         // Get the post type of the given post or current post in the loop
@@ -718,6 +751,9 @@ class Helper
         return !in_array($post_type, $default_post_types);
     }
 
+    /**
+     * Extract reusable block contents referenced inside synced patterns.
+     */
     public static function check_patterns_used($post_content)
     {
         $pattern_contents = []; // Store pattern contents
@@ -743,6 +779,9 @@ class Helper
         return $pattern_contents; // Return array of pattern contents
     }
 
+    /**
+     * Gather all published posts grouped by post type for quick selectors.
+     */
     public static function get_all_posts()
     {
         // Get all public post types except the excluded ones
@@ -786,6 +825,9 @@ class Helper
         return $posts_by_type;
     }
 
+    /**
+     * Retrieve a flat list of published post IDs excluding WP internal types.
+     */
     public static function get_all_post_ids()
     {
         global $wpdb;
@@ -807,11 +849,16 @@ class Helper
         return [];
     }
 
-    // Render dynamic content for block
+    /**
+     * Placeholder for dynamic content rendering (extends inside Pro).
+     */
     public static function render_dynamic_content($block_data)
     {
     }
 
+    /**
+     * Query a specific post field directly from the database.
+     */
     public static function get_single_field($post_id, $field)
     {
         global $wpdb;
@@ -823,11 +870,17 @@ class Helper
         return $wpdb->get_var($query) ?: '';
     }
 
+    /**
+     * Convenience wrapper around wp_send_json_success.
+     */
     public static function json_success($data)
     {
         wp_send_json_success($data, 200);
     }
 
+    /**
+     * Pull raw block markup for a template part area (header/footer).
+     */
     public static function get_template_part_content($post, $part)
     {
         $block_template = _build_block_template_result_from_post($post);
@@ -841,15 +894,6 @@ class Helper
 
     public static function get_completed_blocks()
     {
-        // $allBlocks = BlockList::get_instance()->get_blocks();
-        // $activeBlocks = get_option('fb_active_blocks', []);
-        // $completeBlocks = array_merge(
-        // 	array_fill_keys(array_keys($allBlocks), false),
-        // 	$activeBlocks
-        // );
-
-        // return $completeBlocks;
-
         // 1. Get the master list of all blocks (slug => data)
         $allBlocks = BlockList::get_instance()->get_blocks();
 
