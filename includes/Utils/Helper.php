@@ -1102,38 +1102,50 @@ class Helper
      * @param int $template_id
      * @return array
      */
-    public static function resolve_frontis_settings($post_id = 0, $template_id = 0)
-    {
-        $post_id = $post_id ?: get_the_ID();
-        $template_id = $template_id ?: Helper::get_template_id($post_id);
-
-        $default_settings = array(
-            'disableHeader' => false,
-            'disableFooter' => false,
-            'stickyHeader' => false,
-            'stickyHeaderOffset' => 0,
-            'transparentHeader' => false,
-            'scrollToTop' => false,
-            'smoothScroll' => false,
-            'relatedPosts' => false,
-            'authorBox' => false,
-            'lazyLoading' => false,
-            'stickyHeaderColor' => null,
+    public static function resolve_frontis_settings( $post_id = 0, $template_id = 0 ) {
+        $post_id   = $post_id ?: get_the_ID();
+        $post_type = get_post_type( $post_id );
+    
+        $default_settings = [
+            'disableHeader'          => false,
+            'disableFooter'          => false,
+            'stickyHeader'           => false,
+            'stickyHeaderOffset'     => 0,
+            'transparentHeader'      => false,
+            'scrollToTop'            => false,
+            'smoothScroll'           => false,
+            'relatedPosts'           => false,
+            'authorBox'              => false,
+            'lazyLoading'            => false,
+            'stickyHeaderColor'      => null,
             'transparentHeaderColor' => 'transparent',
-        );
-
-        $global_settings = get_option('frontis_theme_options', $default_settings);
-        $template_settings = $template_id ? get_post_meta($template_id, '_frontis_template_settings', true) : [];
-        $template_settings = is_array($template_settings) ? $template_settings : [];
-        $post_settings = $post_id ? get_post_meta($post_id, '_frontis_page_settings', true) : [];
-        $post_settings = is_array($post_settings) ? $post_settings : [];
-
-        // same priority
+        ];
+    
+        $global_settings = get_option( 'frontis_theme_options', $default_settings );
+    
+        $template_settings = [];
+        $page_settings     = [];
+    
+        if ( $post_type === 'wp_template' ) {
+            $template_settings = get_post_meta( $post_id, '_frontis_template_settings', true );
+        } else {
+            $template_id = $template_id ?: Helper::get_template_id( $post_id );
+    
+            if ( $template_id ) {
+                $template_settings = get_post_meta( $template_id, '_frontis_template_settings', true );
+            }
+    
+            $page_settings = get_post_meta( $post_id, '_frontis_page_settings', true );
+        }
+    
+        $template_settings = is_array( $template_settings ) ? $template_settings : [];
+        $page_settings     = is_array( $page_settings ) ? $page_settings : [];
+    
         return array_merge(
             $default_settings,
             $global_settings,
             $template_settings,
-            $post_settings
+            $page_settings
         );
     }
 }

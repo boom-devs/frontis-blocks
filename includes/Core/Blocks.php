@@ -62,7 +62,6 @@ class Blocks
 				$plugin_slug = 'frontis-blocks';
 
 				if (!file_exists($blocks_dir)) {
-					error_log($blocks_dir);
 					continue;
 				}
 
@@ -208,73 +207,201 @@ class Blocks
 		);
 	}
 
-	public function header_footer_settings($block_content, $block)
-	{
-		$post_id = get_queried_object_id();
+	// public function header_footer_settings( $block_content, $block ) {
 
-		if (!$post_id) {
+	// 	// শুধু template-part এর উপর কাজ করব
+	// 	if (
+	// 		empty( $block['blockName'] ) ||
+	// 		'core/template-part' !== $block['blockName']
+	// 	) {
+	// 		return $block_content;
+	// 	}
+	
+	// 	// current context এর post ID বের করা (page, post, template যাই হোক)
+	// 	$post_id = get_queried_object_id();
+	// 	if ( ! $post_id ) {
+	// 		$post_id = get_the_ID();
+	// 	}
+	// 	$post_id = absint( $post_id );
+	
+	// 	// এখানে already priority handle হচ্ছে: default < global < template < page
+	// 	$settings = Helper::resolve_frontis_settings( $post_id );
+
+	// 	$template_slug = get_page_template_slug($post_id);
+
+	// 	$post = get_post($post_id);
+        
+    //     if (!$template_slug) {
+    //         if ('page' === $post->post_type) {
+    //             $template_slug = 'page';
+    //         } elseif ('post' === $post->post_type) {
+    //             $template_slug = 'single';
+    //         }
+    //     }
+
+	// 	$stylesheet = get_stylesheet();
+    //     $template_id = $stylesheet . '//' . $template_slug;
+    //     $template = get_block_template($template_id, 'wp_template');
+
+    //     $template_part_posts = get_posts(
+	// 		array(
+	// 			'post_type'           => 'wp_template_part',
+	// 			'post_status'         => 'publish',
+	// 			'tax_query'           => array(
+	// 				array(
+	// 					'taxonomy' => 'wp_theme',
+	// 					'field'    => 'name',
+	// 					'terms'    => $stylesheet,
+	// 				),
+	// 			),
+	// 			'no_found_rows'       => true,
+	// 		)
+	// 	);
+
+	// 	$tag[] = $block['attrs']['slug'];
+
+
+	// 	if ( $template_part_posts ) {
+	// 		foreach ( $template_part_posts as $template_part_post ) {
+	// 			$block_template = _build_block_template_result_from_post( $template_part_post );
+				
+    //             if (strpos($template->content, $block_template->slug) !== false) {
+    //                 if ( isset( $block_template->area ) ) {
+    //                     if ( $block_template->area === 'header' ) {
+    //                         $tag[] = 'header';
+    //                     } elseif ( $block_template->area === 'footer' ) {
+    //                         $tag[] = 'footer';
+    //                     }
+    //                 }
+    //             }
+	// 		}
+	// 	}
+	
+	// 	if ( $settings['disableHeader'] === true && in_array('header', $tag) ) {
+	// 		return '';
+	// 	}
+	
+	// 	if ( ! empty( $settings['disableFooter'] ) && in_array('footer', $tag) ) {
+	// 		return '';
+	// 	}
+	
+	// 	return $block_content;
+	// }	
+
+
+	public function header_footer_settings( $block_content, $block ) {
+
+		// শুধু template-part ব্লকের উপর কাজ করব
+		if (
+			empty( $block['blockName'] ) ||
+			'core/template-part' !== $block['blockName']
+		) {
+			return $block_content;
+		}
+	
+		// Current context এর post ID
+		$post_id = get_queried_object_id();
+		if ( ! $post_id ) {
 			$post_id = get_the_ID();
 		}
-
-		$post_id = absint($post_id);
-
-		$settings = Helper::resolve_frontis_settings($post_id);
-
-		if (
-			!empty($settings['disableHeader'])
-			&& $block['blockName'] === 'core/template-part'
-			&& isset($block['attrs']['tagName'])
-			&& $block['attrs']['tagName'] === 'header'
-		) {
-			return '';
-		}
-
-		if (
-			!empty($settings['disableFooter'])
-			&& $block['blockName'] === 'core/template-part'
-			&& isset($block['attrs']['tagName'])
-			&& $block['attrs']['tagName'] === 'footer'
-		) {
-			return '';
-		}
-
-		if (
-			!empty($settings['stickyHeader'])
-			&& $block['blockName'] === 'core/template-part'
-			&& isset($block['attrs']['tagName'])
-			&& $block['attrs']['tagName'] === 'header'
-		) {
-			$sticky_color = $settings['stickyHeaderColor'] ?: '';
-			if ($sticky_color) {
-				add_action('wp_head', function () use ($sticky_color) {
-					printf(
-						'<style>:root{--wp--preset--sticky--bg:%s;}</style>',
-						esc_attr($sticky_color)
-					);
-				});
+		$post_id = absint( $post_id );
+	
+		// এখানে already priority handle হচ্ছে: default < global < template < page
+		$settings = Helper::resolve_frontis_settings( $post_id );
+	
+		// Detect template slug
+		$template_slug = get_page_template_slug($post_id);
+		$post          = get_post($post_id);
+		
+		if (!$template_slug) {
+			if ($post && $post->post_type === 'page') {
+				$template_slug = 'page';
+			} elseif ($post && $post->post_type === 'post') {
+				$template_slug = 'single';
 			}
-
-			$block_content = $this->add_custom_class($block_content, 'fb-sticky-header');
 		}
-
+	
+		$stylesheet  = get_stylesheet();
+		$template_id = $stylesheet . '//' . $template_slug;
+		$template    = get_block_template($template_id, 'wp_template');
+	
+		// Template parts
+		$template_part_posts = get_posts(
+			array(
+				'post_type'     => 'wp_template_part',
+				'post_status'   => 'publish',
+				'tax_query'     => array(
+					array(
+						'taxonomy' => 'wp_theme',
+						'field'    => 'name',
+						'terms'    => $stylesheet,
+					),
+				),
+				'no_found_rows' => true,
+			)
+		);
+	
+		/**
+		 * Correct Tag Detection
+		 * =====================
+		 * শুধু ১টা clean array use হবে এবং slug strictly match করব।
+		 */
+		$tag = [];
+	
+		// বর্তমান block এর slug যোগ করো
+		if (!empty($block['attrs']['slug'])) {
+			$tag[] = $block['attrs']['slug'];
+		}
+	
+		// Header/Footer detect করা
+		if ( $template_part_posts ) {
+			foreach ( $template_part_posts as $template_part_post ) {
+	
+				$block_template = _build_block_template_result_from_post( $template_part_post );
+	
+				// Strict slug match
+				if (
+					! empty($block['attrs']['slug']) &&
+					$block_template->slug === $block['attrs']['slug']
+				) {
+					if ( isset( $block_template->area ) ) {
+						if ( $block_template->area === 'header' ) {
+							$tag[] = 'header';
+						}
+						if ( $block_template->area === 'footer' ) {
+							$tag[] = 'footer';
+						}
+					}
+				}
+			}
+		}
+	
+		/**
+		 * HANDLING DISABLE LOGIC
+		 * ======================
+		 * এখন tag এ 'header' থাকলে শুধু header disable হবে।
+		 * footer থাকলে শুধু footer disable হবে।
+		 */
+	
+		// Disable Header
 		if (
-			!empty($settings['transparentHeader'])
-			&& $block['blockName'] === 'core/template-part'
-			&& isset($block['attrs']['tagName'])
-			&& $block['attrs']['tagName'] === 'header'
+			isset($settings['disableHeader']) &&
+			$settings['disableHeader'] === true &&
+			in_array('header', $tag)
 		) {
-			$transparent_color = $settings['transparentHeaderColor'] ?: 'transparent';
-
-			add_action('wp_head', function () use ($transparent_color) {
-				printf(
-					'<style>:root{--wp--preset--transparent--bg:%s;}</style>',
-					esc_attr($transparent_color)
-				);
-			});
-
-			$block_content = $this->add_custom_class($block_content, 'fb-transparent-header');
+			return '';
 		}
-
+	
+		// Disable Footer
+		if (
+			isset($settings['disableFooter']) &&
+			$settings['disableFooter'] === true &&
+			in_array('footer', $tag)
+		) {
+			return '';
+		}
+	
+		// Default return
 		return $block_content;
 	}
 
