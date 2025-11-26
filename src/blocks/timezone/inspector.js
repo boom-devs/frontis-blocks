@@ -994,11 +994,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         checked={!!useMonthlySchedule}
                         onChange={(value) => setAttributes({ useMonthlySchedule: value })}
                     />
-                    <ToggleControl
-                        label="Remaining Time"
-                        checked={!!showRemainingTime}
-                        onChange={(value) => setAttributes({ showRemainingTime: value })}
-                    />
+                    {showStatusSwitcher && (
+                        <ToggleControl
+                            label="Remaining Time"
+                            checked={!!showRemainingTime}
+                            onChange={(value) => setAttributes({ showRemainingTime: value })}
+                        />
+                    )}
                     <ToggleControl
                         label="UTC Timezone"
                         checked={!!useUTCTimezoneFormat}
@@ -4144,7 +4146,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					units={timezoneCardSpacingUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
-					resetFallbackValue={''}
+					resetFallbackValue={'10'}
 				/>
 			</PanelBody>
 

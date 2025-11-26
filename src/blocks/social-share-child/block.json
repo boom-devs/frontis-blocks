@@ -3,7 +3,6 @@
 	"name": "frontis-blocks/social-share-child",
 	"title": "Social Share Child",
 	"category": "frontis-blocks",
-	"icon": "menu-alt",
 	"description": "Add social sharing option for your posts",
 	"textdomain": "frontis-blocks",
 	"supports": {
