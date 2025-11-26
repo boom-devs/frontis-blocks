@@ -56,6 +56,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		separatorText,
 		separatorIcon,
 		separatorGap,
+		separatorGapUnits,
+		showHomePage,
+		homeprefixSwitcher,
+		homeTextPrefix,
 		showHomeIcon,
 		homeIcon,
 		homeText,
@@ -1009,7 +1013,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 
-			.${blockID} .fb-parent-wrapper.fb-breadcrumb-container {
+			.${blockID} .fb-breadcrumb-container {
 				${desktopBackgroundNormalStyles}
 				${globalDesktopPadding && breadcrumbGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin && breadcrumbGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''}
@@ -1021,7 +1025,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 
-			.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-parent-wrapper.fb-breadcrumb-container {
+			.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-breadcrumb-container {
 				${desktopBackgroundHoverStyles}
 				${breadcrumbGlobalBorderHoverColor ? `border-color: ${breadcrumbGlobalBorderHoverColor};` : ''}
             	${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
@@ -1145,7 +1149,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					transition: all .3s ease-in-out;
 				}
 
-				.${blockID} .fb-parent-wrapper.fb-breadcrumb-container {
+				.${blockID} .fb-breadcrumb-container {
 					${tabletBackgroundNormalStyles}
 					${globalTabletPadding && breadcrumbGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && breadcrumbGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
@@ -1156,7 +1160,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${breadcrumbGlobalBoxShadowCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-parent-wrapper.fb-breadcrumb-container {
+				.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-breadcrumb-container {
 					${tabletBackgroundHoverStyles}
 					${breadcrumbGlobalBorderHoverColor ? `border-color: ${breadcrumbGlobalBorderHoverColor};` : ''}
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
@@ -1207,7 +1211,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					transition: all .3s ease-in-out;
 				}
 
-				.${blockID} .fb-parent-wrapper.fb-breadcrumb-container {
+				.${blockID} .fb-breadcrumb-container { 
 					${mobileBackgroundNormalStyles}
 					${globalMobilePadding && breadcrumbGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin && breadcrumbGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
@@ -1218,7 +1222,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${breadcrumbGlobalBoxShadowCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-parent-wrapper.fb-breadcrumb-container {
+				.${blockID}.fb-breadcrumb-main-wrapper:hover .fb-breadcrumb-container {
 					${mobileBackgroundHoverStyles}
 					${breadcrumbGlobalBorderHoverColor ? `border-color: ${breadcrumbGlobalBorderHoverColor};` : ''}
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
@@ -1282,63 +1286,106 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const generalControls = (
 		<>
-			<PanelBody title={__("Home Settings", "frontis-blocks")} initialOpen={true}>
+			<PanelBody title={__("Home", "frontis-blocks")} initialOpen={true}>
 				<ToggleControl
-					label={__("Show Home Icon", "frontis-blocks")}
-					checked={showHomeIcon}
-					onChange={(value) => setAttributes({ showHomeIcon: value })}
+					label={__("Show Home Page", "frontis-blocks")}
+					checked={showHomePage}
+					onChange={(value) => setAttributes({ showHomePage: value })}
 				/>
-				{showHomeIcon && (
-					<div className="fb-control-wrapper">
-						<label>{__("Home Icon", "frontis-blocks")}</label>
-						<FBIconPicker
-							value={homeIcon}
-							setIconHandler={homeIconHandler}
-						/>
-					</div>
-				)}
+
 				<TextControl
 					label={__("Home Text", "frontis-blocks")}
 					value={homeText}
 					onChange={(value) => setAttributes({ homeText: value })}
 				/>
+
+				{showHomePage === true && (
+					<>
+						<FB_SwitcherControl
+							label={__("Show Prefix", "frontis-blocks")}
+							options = {[
+								{ label: "Icon", value: "icon" },
+								{ label: "Text", value: "text" },
+							]}
+							globalSwitcher={homeprefixSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ homeprefixSwitcher: value })}
+						/>
+						{homeprefixSwitcher === "icon" && (
+							<>
+								<ToggleControl
+									label={__("Show Home Icon", "frontis-blocks")}
+									checked={showHomeIcon}
+									onChange={(value) => setAttributes({ showHomeIcon: value })}
+								/>
+								{showHomeIcon && (
+									<FBIconPicker
+										value={homeIcon}
+										setIconHandler={homeIconHandler}
+									/>
+								)}
+							</>
+						)}
+
+						{homeprefixSwitcher === "text" && ( 
+							<>
+								<TextControl
+									label={__("Prefix Text", "frontis-blocks")}
+									value={homeTextPrefix}
+									onChange={(value) => setAttributes({ homeTextPrefix: value })}
+								/>
+							</>
+						)}
+					</>
+				)}
 			</PanelBody>
 
-			<PanelBody title={__("Separator Settings", "frontis-blocks")} initialOpen={false}>
-				<SelectControl
+			<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+				<FB_SwitcherControl
 					label={__("Separator Type", "frontis-blocks")}
-					value={separatorType}
-					options={[
+					options = {[
 						{ label: "Icon", value: "icon" },
 						{ label: "Text", value: "text" },
 					]}
-					onChange={(value) => setAttributes({ separatorType: value })}
+					globalSwitcher={separatorType}
+					setGlobalSwitcher={(value) => setAttributes({ separatorType: value })}
 				/>
-				{separatorType === "text" ? (
-					<TextControl
-						label={__("Separator Text", "frontis-blocks")}
-						value={separatorText}
-						onChange={(value) => setAttributes({ separatorText: value })}
-					/>
-				) : (
-					<div className="fb-control-wrapper">
-						<label>{__("Separator Icon", "frontis-blocks")}</label>
+
+				{separatorType === "icon" && (
+					<BaseControl
+						label={__("Icon", "frontis-blocks")}
+					>
 						<FBIconPicker
 							value={separatorIcon}
 							setIconHandler={separatorIconHandler}
 						/>
-					</div>
+					</BaseControl>
 				)}
-				<RangeControl
+
+				{separatorType === "text" && (
+					<TextControl
+						label={__("Text", "frontis-blocks")}
+						value={separatorText}
+						onChange={(value) => setAttributes({ separatorText: value })}
+					/>
+				)}
+
+				<FB_Range
+					min={1}
+					max={200}
 					label={__("Gap", "frontis-blocks")}
-					value={separatorGap}
-					onChange={(value) => setAttributes({ separatorGap: value })}
-					min={0}
-					max={100}
+					rangeValue={separatorGap}
+					onChangeHandler={(value) => setAttributes({ separatorGap: value })}
+					rangeUnitHandler={(value) => setAttributes({ separatorGapUnits: value })}
+					deviceType={deviceType}
+					units={separatorGapUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
 				/>
+
 			</PanelBody>
 
-			<PanelBody title={__("Item Settings", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Item", "frontis-blocks")} initialOpen={false}>
 				<ToggleControl
 					label={__("Show Item Icon", "frontis-blocks")}
 					checked={showItemIcon}
@@ -1346,13 +1393,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					help={__("Show an icon before every breadcrumb item (except Home).", "frontis-blocks")}
 				/>
 				{showItemIcon && (
-					<div className="fb-control-wrapper">
-						<label>{__("Item Icon", "frontis-blocks")}</label>
-						<FBIconPicker
-							value={itemIcon}
-							setIconHandler={itemIconHandler}
-						/>
-					</div>
+
+				<BaseControl
+					label={__("Item Icon", "frontis-blocks")}
+				>
+					<FBIconPicker
+						value={itemIcon}
+						setIconHandler={itemIconHandler}
+					/>
+				</BaseControl>
 				)}
 			</PanelBody>
 		</>

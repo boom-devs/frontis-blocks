@@ -6,7 +6,7 @@ const attributes = {
 	// Separator Settings
 	separatorType: {
 		type: 'string',
-		default: 'icon',
+		default: 'text',
 	},
 	separatorText: {
 		type: 'string',
@@ -20,7 +20,35 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right',
 	},
+    separatorGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    separatorGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
 	// Home Settings
+    showHomePage:{
+        type: 'boolean',
+		default: true,
+    },
+    homeprefixSwitcher: {
+        type: 'string',
+        default: 'icon',
+    },
+    homeTextPrefix: {
+        type: 'string',
+        default: 'Browsing:',
+    },
 	showHomeIcon: {
 		type: 'boolean',
 		default: false,
@@ -567,7 +595,7 @@ const attributes = {
     },
     breadcrumbIconColor : {
         type: 'string',
-        default: '#399CFF',
+        default: '',
     },
     breadcrumbIconHoverColor: {
         type: 'string',
@@ -640,7 +668,7 @@ const attributes = {
     },
     breadcrumbSeperatorColor : {
         type: 'string',
-        default: '#399CFF',
+        default: '',
     },
     breadcrumbSeperatorHoverColor: {
         type: 'string',
