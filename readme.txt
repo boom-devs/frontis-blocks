@@ -203,6 +203,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - `Breadcrumbs` block for contextual navigation trails.
 - `Timezone` block to display location-aware time information.
 - Global header/footer and page title visibility controls in the settings panel.
+- Update the native setting panel UI
 
 - **Fixed**
 - Advanced Video block rendering glitches when multiple instances exist on the same page.
