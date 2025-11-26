@@ -994,11 +994,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         checked={!!useMonthlySchedule}
                         onChange={(value) => setAttributes({ useMonthlySchedule: value })}
                     />
-                    <ToggleControl
-                        label="Remaining Time"
-                        checked={!!showRemainingTime}
-                        onChange={(value) => setAttributes({ showRemainingTime: value })}
-                    />
+                    {showStatusSwitcher && (
+                        <ToggleControl
+                            label="Remaining Time"
+                            checked={!!showRemainingTime}
+                            onChange={(value) => setAttributes({ showRemainingTime: value })}
+                        />
+                    )}
                     <ToggleControl
                         label="UTC Timezone"
                         checked={!!useUTCTimezoneFormat}
