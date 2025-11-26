@@ -1104,6 +1104,7 @@ const TypographySettings = (props) => {
 																value={heading}
 															/>
 														))}
+														<span className="fb-global-typography-empty-heading"></span>
 													</ToggleGroupControl>
 													{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
 														<div

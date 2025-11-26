@@ -256,63 +256,99 @@ body {
 //   }
 // }
 
-// /**
-//   Global Headings typography buttons
-// */
-// .fb-global-typography-headings-wrap {
-//   display: grid !important;
-//   grid-template-columns: repeat(4, 1fr) !important;
-//   background: #F8F8F8 !important;
-//   border-width: 0 !important;
-//   border-style: none !important;
-//   border-image: initial !important;
-//   min-width: 0px !important;
-//   position: relative !important;
-//   padding: 0 !important;
+/**
+  Global Headings typography buttons
+*/
+.fb-global-typography-headings-wrap {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  min-width: 0px !important;
+  position: relative !important;
+  padding: 0 !important;
 
-//   &:before {
-//     background: transparent !important;
-//   }
-//   &:focus {
-//     outline: none !important;
-//     box-shadow: none !important;
-//   }
-//   &:focus-within {
-//     outline: none !important;
-//     box-shadow: none !important;
-//   }
+  &:before {
+    background: transparent !important;
+  }
+  &:focus {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  &:focus-within {
+    outline: none !important;
+    box-shadow: none !important;
+  }
 
-//   button {
-//     padding: 8px 10px !important;
-//     height: 44px !important;
-//     color: #050607 !important;
-//     background: #F8F8F8 !important;
-//     padding: 12px 16px !important;
-//     height: 44px !important;
-//     font-family: "Manrope", sans-serif;
-//     font-size: 13px !important;
-//     font-weight: 600 !important;
-//     line-height: 16px !important;
-//     border: 1px solid #FFFFFF !important;
+  .css-1abtnze {
+    &:nth-child(1) {
+      button {
+        border-radius: 4px 0 0 0;
+        border-left: 1px solid $neutral-color-100 !important;
+      }
+    }
+    &:nth-child(4) {
+      button {
+        border-radius: 0 4px 0 0;
+      }
+    }
+    &:nth-child(5) {
+      button {
+        border-radius: 0 0 0 4px;
+        border-top: none !important;
+        border-left: 1px solid $neutral-color-100 !important;
+      }
+    }
+    &:nth-child(6) {
+      button {
+        border-top: none !important;
+      }
+    }
+    &:nth-child(7) {
+      button {
+        border-top: none !important;
+      }
+    }
+  }
 
-//     &:focus {
-//       outline: none !important;
-//       box-shadow: none !important;
-//     }
+  button {
+    padding: 8px 10px !important;
+    height: 44px !important;
+    color: $neutral-color-600 !important;
+    background: transparent !important;
+    padding: 11px 16px !important;
+    height: 44px !important;
+    font-family: "Manrope", sans-serif;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+    border: 1px solid $neutral-color-100 !important;
+    border-left: none !important;
 
-//     &.fb-global-typography-element-heading {
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
 
-//       &:hover {
-//         background-color: #E1E3E8 !important;
-//         cursor: pointer !important;
-//       }
-//       &[aria-checked="true"] {  
-//         background-color: #E1E3E8 !important;
-//         color: #050607 !important;
-//       }
-//     }
-//   }
-// }
+    &.fb-global-typography-element-heading {
+
+      &:hover {
+        background-color: #E1E3E8 !important;
+        cursor: pointer !important;
+      }
+      &[aria-checked="true"] {  
+        background-color: $neutral-color-900 !important;
+        color: $white-color !important;
+      }
+    }
+  }
+  .fb-global-typography-empty-heading {
+    border: 1px solid $neutral-color-100;
+    border-left: none;
+    border-top: none;
+    border-radius: 0 0 4px 0;
+  }
+}
 .highlight-tabs .components-tab-panel__tabs-item.active-tab {
   border-bottom: 2px solid #399CFF;
 }
