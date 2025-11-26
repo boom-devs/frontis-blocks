@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -198,12 +198,20 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
+= 1.1.3 – 28 November 2025 =
+- **Added**
+- `Breadcrumbs` block for contextual navigation trails.
+- `Timezone` block to display location-aware time information.
+- Global header/footer and page title visibility controls in the settings panel.
+
+- **Fixed**
+- Advanced Video block rendering glitches when multiple instances exist on the same page.
+
 = 1.1.2 – 14 November 2025 =
 - **Added**
 - `Advanced Paragraph` block.
 - `Post category` block.
 - `Post comment` block.
-- `Timezone` block.
 - `Social Share` block.
 
 - **Improved**
