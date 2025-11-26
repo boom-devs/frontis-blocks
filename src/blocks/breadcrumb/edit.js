@@ -47,7 +47,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		if (separatorType === 'text') {
 			return <span className="fb-breadcrumb-separator">{separatorText}</span>;
 		}
-		return <i className={`fb-breadcrumb-separator ${separatorIcon}`}></i>;
+		return <div className={`fb-breadcrumb-separator`}>{renderSVG(separatorIcon)}</div>;
 	};
 
 	return (
@@ -61,25 +61,19 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID} ref={panelRef}>
 					<div className="fb-breadcrumb-list">
-						{/* Home Item */}
-						<div className="fb-breadcrumb-item">
-							{showHomeIcon && <div className={`fb-breadcrumb-icon ${homeIcon}`}>{renderSVG(homeIcon)}</div>}
+						<div className="fb-breadcrumb-item home">
+							{showHomeIcon && <div className={`fb-breadcrumb-icon home`}>{renderSVG(homeIcon)}</div>}
 							<span className="fb-breadcrumb-link">{homeText}</span>
 						</div>
-
 						{renderSeparator()}
-
-						{/* Parent Page Mock */}
-						<div className="fb-breadcrumb-item">
-							{showItemIcon && <div className={`fb-breadcrumb-icon ${itemIcon}`}>{renderSVG(itemIcon)}</div>}
+						<div className="fb-breadcrumb-item item">
+							{showItemIcon && <div className={`fb-breadcrumb-icon item`}>{renderSVG(itemIcon)}</div>}
 							<span className="fb-breadcrumb-link">Parent Page</span>
+
 						</div>
-
 						{renderSeparator()}
-
-						{/* Current Page Mock */}
-						<div className="fb-breadcrumb-item">
-							{showItemIcon && <div className={`fb-breadcrumb-icon ${itemIcon}`}>{renderSVG(itemIcon)}</div>}
+						<div className="fb-breadcrumb-item item">
+							{showItemIcon && <div className={`fb-breadcrumb-icon item`}>{renderSVG(itemIcon)}</div>}
 							<span className="fb-breadcrumb-text">Current Page</span>
 						</div>
 					</div>
