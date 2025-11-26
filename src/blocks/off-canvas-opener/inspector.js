@@ -31,15 +31,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const [patterns, setPatterns] = useState([]);
 
-	// Try to fetch patterns from different stores and methods
 	const patternData = useSelect(select => {
-		// First try to get all patterns from coreStore
 		const allPatterns = select(coreStore) ? select(coreStore).getBlockPatterns() || [] : [];
 
-		// Try to get user patterns from a different method or store
 		let userPatterns = [];
 		try {
-			// Try from core-data store with different method
 			if (select('core')) {
 				userPatterns = select('core').getEntityRecords('postType', 'wp_block') || [];
 			}
@@ -50,7 +46,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		return { allPatterns, userPatterns };
 	}, []);
 
-	// Transform patterns for SelectControl whenever patternData changes
 	useEffect(() => {
 		const patternOptions = [
 			{ value: '', label: __('Select a pattern', 'frontis-blocks') }
@@ -82,12 +77,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setPatterns(patternOptions);
 	}, [patternData]);
 
-	// Add this function to handle pattern selection
+	// Handle pattern selection
 	const getSelectedPatternContent = (patternId) => {
 		if (!patternId) return '';
 
 		try {
-			// Check if it's a user pattern (starts with 'user-')
+			// Check if it's a user pattern
 			if (patternId.startsWith('user-')) {
 				const id = parseInt(patternId.replace('user-', ''), 10);
 				const userPattern = patternData.userPatterns.find(p => p.id === id);
@@ -97,7 +92,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				return userPattern?.content?.raw || '';
 			} else {
-				// It's a core pattern
+				// Core pattern
 				const corePattern = patternData.allPatterns.find(p => p.name === patternId);
 				if (!corePattern) {
 					console.warn(`Core pattern with name ${patternId} not found`);

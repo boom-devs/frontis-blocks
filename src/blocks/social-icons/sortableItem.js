@@ -88,7 +88,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
 
 
                     <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
+                        label={__("Icon Color & Background Color", "frontis-blocks")}
                         globalSwitcher={item.socialIconColorSwitcher}
                         setGlobalSwitcher={(value) => handleChangeItem(item.id, 'socialIconColorSwitcher', value)}
                     />
