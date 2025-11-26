@@ -18,7 +18,7 @@ export default function save({ attributes }) {
 	return (
 		<>
 			<div {...blockProps}> 
-				<div className={`fb-parent-wrapper fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID}>
+				<div className={`fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID}> 
 
 				</div>
 			</div>

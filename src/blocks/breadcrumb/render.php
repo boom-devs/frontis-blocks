@@ -35,75 +35,77 @@ $render_item_icon = function() use ($showItemIcon, $itemIcon) {
 
 ?>
 <div class="fb-breadcrumb-main-wrapper <?php echo esc_attr($blockID); ?>">
-    <div class="fb-parent-wrapper fb-breadcrumb-container <?php echo esc_attr($blockID); ?>">
-        <div class="fb-breadcrumb-list">
+    <div class="fb-breadcrumb-container <?php echo esc_attr($blockID); ?>">
+        <div className="fb-breadcrumb-inner-wrapper">
+            <div class="fb-breadcrumb-list">
 
-            <!-- Home -->
-            <div class="fb-breadcrumb-item">
-                <a href="<?php echo esc_url(home_url('/')); ?>" class="fb-breadcrumb-link">
-                    <?php if ($showHomeIcon): ?>
-                        <div class="fb-breadcrumb-icon">
-                            <?php echo $homeIcon; ?>
+                <!-- Home -->
+                <div class="fb-breadcrumb-item">
+                    <a href="<?php echo esc_url(home_url('/')); ?>" class="fb-breadcrumb-link">
+                        <?php if ($showHomeIcon): ?>
+                            <div class="fb-breadcrumb-icon">
+                                <?php echo $homeIcon; ?>
+                            </div>
+                        <?php endif; ?>
+                        <?php echo esc_html($homeText); ?>
+                    </a>
+                </div>
+
+                <?php if (!is_front_page()): ?>
+                    <?php echo $render_separator(); ?>
+
+                    <?php if (is_category() || is_single()): ?>
+
+                        <?php if (is_single()):
+                            $category = get_the_category();
+                            if ($category):
+                                $cat = $category[0]; ?>
+                                <div class="fb-breadcrumb-item">
+                                    <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>" class="fb-breadcrumb-link">
+                                        <?php echo $render_item_icon(); ?>
+                                        <?php echo esc_html($cat->name); ?>
+                                    </a>
+                                </div>
+                                <?php echo $render_separator(); ?>
+                            <?php endif; endif; ?>
+
+                        <div class="fb-breadcrumb-item">
+                            <?php echo $render_item_icon(); ?>
+                            <span class="fb-breadcrumb-text"><?php echo get_the_title(); ?></span>
+                        </div>
+
+                    <?php elseif (is_page()): ?>
+
+                        <?php
+                        global $post;
+                        if ($post->post_parent):
+                            $anc = array_reverse(get_post_ancestors($post->ID));
+                            foreach ($anc as $ancestor): ?>
+                                <div class="fb-breadcrumb-item">
+                                    <a href="<?php echo esc_url(get_permalink($ancestor)); ?>" class="fb-breadcrumb-link">
+                                        <?php echo $render_item_icon(); ?>
+                                        <?php echo esc_html(get_the_title($ancestor)); ?>
+                                    </a>
+                                </div>
+                                <?php echo $render_separator(); ?>
+                            <?php endforeach;
+                        endif; ?>
+
+                        <div class="fb-breadcrumb-item">
+                            <?php echo $render_item_icon(); ?>
+                            <span class="fb-breadcrumb-text"><?php echo get_the_title(); ?></span>
+                        </div>
+
+                    <?php elseif (is_search()): ?>
+                        <div class="fb-breadcrumb-item">
+                            <?php echo $render_item_icon(); ?>
+                            <span class="fb-breadcrumb-text">Search Results for: <?php echo get_search_query(); ?></span>
                         </div>
                     <?php endif; ?>
-                    <?php echo esc_html($homeText); ?>
-                </a>
-            </div>
 
-            <?php if (!is_front_page()): ?>
-                <?php echo $render_separator(); ?>
-
-                <?php if (is_category() || is_single()): ?>
-
-                    <?php if (is_single()):
-                        $category = get_the_category();
-                        if ($category):
-                            $cat = $category[0]; ?>
-                            <div class="fb-breadcrumb-item">
-                                <a href="<?php echo esc_url(get_category_link($cat->term_id)); ?>" class="fb-breadcrumb-link">
-                                    <?php echo $render_item_icon(); ?>
-                                    <?php echo esc_html($cat->name); ?>
-                                </a>
-                            </div>
-                            <?php echo $render_separator(); ?>
-                        <?php endif; endif; ?>
-
-                    <div class="fb-breadcrumb-item">
-                        <?php echo $render_item_icon(); ?>
-                        <span class="fb-breadcrumb-text"><?php echo get_the_title(); ?></span>
-                    </div>
-
-                <?php elseif (is_page()): ?>
-
-                    <?php
-                    global $post;
-                    if ($post->post_parent):
-                        $anc = array_reverse(get_post_ancestors($post->ID));
-                        foreach ($anc as $ancestor): ?>
-                            <div class="fb-breadcrumb-item">
-                                <a href="<?php echo esc_url(get_permalink($ancestor)); ?>" class="fb-breadcrumb-link">
-                                    <?php echo $render_item_icon(); ?>
-                                    <?php echo esc_html(get_the_title($ancestor)); ?>
-                                </a>
-                            </div>
-                            <?php echo $render_separator(); ?>
-                        <?php endforeach;
-                    endif; ?>
-
-                    <div class="fb-breadcrumb-item">
-                        <?php echo $render_item_icon(); ?>
-                        <span class="fb-breadcrumb-text"><?php echo get_the_title(); ?></span>
-                    </div>
-
-                <?php elseif (is_search()): ?>
-                    <div class="fb-breadcrumb-item">
-                        <?php echo $render_item_icon(); ?>
-                        <span class="fb-breadcrumb-text">Search Results for: <?php echo get_search_query(); ?></span>
-                    </div>
                 <?php endif; ?>
 
-            <?php endif; ?>
-
+            </div>
         </div>
     </div>
 </div>
