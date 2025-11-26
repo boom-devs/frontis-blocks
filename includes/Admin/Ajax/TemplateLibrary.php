@@ -308,81 +308,6 @@ class TemplateLibrary extends AjaxBase {
     }
     
 
-    // public function full_site_import() {
-    //     $this->check_permission();
-    
-    //     $title            = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-    //     $content          = isset($_POST['content']) ? $_POST['content'] : '';
-    //     $site_url         = isset($_POST['site_url']) ? sanitize_text_field($_POST['site_url']) : '';
-    //     $uploads_updated  = isset($_POST['uploads_updated']) ? sanitize_text_field($_POST['uploads_updated']) : false;
-    
-    //     if (empty($title)) {
-    //         wp_send_json_error(['message' => 'Title is required']);
-    //     }
-    
-    //     if ($uploads_updated) {
-    //         $my_domain = trailingslashit($site_url);
-    //         preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg)/i', $content, $matches);
-    
-    //         if (!empty($matches[0])) {
-    //             $image_urls = array_unique($matches[0]);
-    
-    //             foreach ($image_urls as $url) {
-    
-    //                 if (preg_match('/\/2025\//', $url)) {
-    //                     $new_url = preg_replace(
-    //                         '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
-    //                         $my_domain . 'wp-content/uploads/',
-    //                         $url
-    //                     );
-    //                 } else {
-    //                     $new_url = preg_replace(
-    //                         '/^https?:\/\/[^\/]+\//',
-    //                         $my_domain,
-    //                         $url
-    //                     );
-    //                 }
-    
-    //                 $content = str_replace($url, $new_url, $content);
-    //             }
-    //         }
-    //     }
-    
-    //     // Ensure unique title
-    //     $original_title = $title;
-    //     $suffix = 1;
-    //     while (post_exists($title)) {
-    //         $title = $original_title . ' ' . $suffix;
-    //         $suffix++;
-    //     }
-    
-    //     $page_id = wp_insert_post([
-    //         'post_title'   => $title,
-    //         'post_content' => $content,
-    //         'post_status'  => 'publish',
-    //         'post_type'    => 'page',
-    //     ]);
-    
-    //     if ($page_id) {
-    
-    //         // Make front page if imported title contains "home"
-    //         if (stripos($title, 'home') !== false) {
-    //             update_option('page_on_front', $page_id);
-    //             update_option('show_on_front', 'page');
-    //         }
-    
-    //         Helper::insert_job($page_id, $title . $page_id);
-    
-    //         wp_send_json_success([
-    //             'message' => 'Page created successfully',
-    //             'page_id' => $page_id,
-    //             'title'   => $title
-    //         ]);
-    //     } else {
-    //         wp_send_json_error(['message' => 'Failed to create page']);
-    //     }
-    // }
-
     public function full_site_import() {
         $this->check_permission();
     
@@ -831,7 +756,7 @@ class TemplateLibrary extends AjaxBase {
         ];
     }
 
-    function replace_navigation_ids($content, $id_mapping) {
+    function replace_navigation_ids($content, $id_mapping): mixed {
         foreach ($id_mapping as $old_id => $new_id) {
             // Pattern 1: Replace in wp:navigation blocks with "ref" attribute
             // Example: <!-- wp:navigation {"ref":1047,...} /-->
