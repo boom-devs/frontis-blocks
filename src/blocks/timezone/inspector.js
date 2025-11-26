@@ -4146,7 +4146,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					units={timezoneCardSpacingUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
-					resetFallbackValue={''}
+					resetFallbackValue={'10'}
 				/>
 			</PanelBody>
 
