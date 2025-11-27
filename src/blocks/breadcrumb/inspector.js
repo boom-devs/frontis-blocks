@@ -48,10 +48,12 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		breadcrumbAlignment,
 		separatorType,
 		separatorText,
 		separatorIcon,
@@ -1027,6 +1029,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper {
+				align-items: center;
+				display: flex;
+				flex-direction: row;
+				${breadcrumbAlignment?.Desktop === "left" ? `justify-content: flex-start;` : ""}
+				${breadcrumbAlignment?.Desktop === "center" ? `justify-content: center;` : ""}
+				${breadcrumbAlignment?.Desktop === "right" ? `justify-content: flex-end;` : ""}
+			}
+
 			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{
 				${breadcrumbItemGap?.Desktop ? `gap: ${breadcrumbItemGap?.Desktop}${breadcrumbItemGapUnits?.Desktop};` : ''}
 			}
@@ -1186,6 +1197,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
+
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper {
+					${breadcrumbAlignment?.Tablet === "left" ? `justify-content: flex-start;` : ""}
+					${breadcrumbAlignment?.Tablet === "center" ? `justify-content: center;` : ""}
+					${breadcrumbAlignment?.Tablet === "right" ? `justify-content: flex-end;` : ""}
+				}
+
 				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{
 					${breadcrumbItemGap?.Tablet ? `gap: ${breadcrumbItemGap?.Tablet}${breadcrumbItemGapUnits?.Tablet};` : ''}
 				}
@@ -1251,6 +1269,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper {
+					${breadcrumbAlignment?.Mobile === "left" ? `justify-content: flex-start;` : ""}
+					${breadcrumbAlignment?.Mobile === "center" ? `justify-content: center;` : ""}
+					${breadcrumbAlignment?.Mobile === "right" ? `justify-content: flex-end;` : ""}
+				}
 				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item{
 					${breadcrumbItemMobilePaddingWidth && breadcrumbItemMobilePadding?.top ? `padding: ${breadcrumbItemMobilePaddingWidth};` : ''}
 					${breadcrumbItemMobileMarginWidth && breadcrumbItemMobileMargin?.top ? `margin: ${breadcrumbItemMobileMarginWidth};` : ''}
@@ -1286,6 +1309,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
     `, [
 		blockID,
+		breadcrumbAlignment,
 		separatorType,
 		separatorText,
 		separatorIcon,
@@ -1654,7 +1678,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	 */
 	const styleControls = (
 		<>
-			<PanelBody title={__("Items", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Items", "frontis-blocks")} initialOpen={true}>
+
+				<FB_ResponsiveAlignmentControl
+					label={__("Alignment", "frontis-blocks")}
+					globalAlignment={breadcrumbAlignment} 
+					setGlobalAlignment={(value) => setAttributes({ breadcrumbAlignment: value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
 				<FB_TypographyControl
 					globalTypoControlActive={true}
 					globalTypoSwitcher={breadcrumbItemGlobalTypoSwitcher}
