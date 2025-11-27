@@ -1,84 +1,88 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
+
     const {
         blockID,
         menuPosition,
-        iconStyle,
-        animation
+        menuType,
+        hamburgerIcon,
+        hamburgerText,
+        closeMenuType,
+        closeMenuIcon,
+        closeMenuText
     } = attributes;
-    
-    // Get the appropriate icon based on iconStyle
-    const getIcon = () => {
-        switch (iconStyle) {
-            case 'dots':
-                return (
-                    <div className="fb-menu-icon fb-dots-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-            case 'plus':
-                return (
-                    <div className="fb-menu-icon fb-plus-icon">
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-            case 'hamburger':
-            default:
-                return (
-                    <div className="fb-menu-icon fb-hamburger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </div>
-                );
-        }
-    };
-    
-    // Generate the position-specific class
+
     const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
-    const menuAnimationClass = animation ? `fb-animation-${animation}` : '';
-    
+
+    const getIcon = () => {
+        if (!hamburgerIcon) return null;
+        return (
+            <div className="fb-menu-icon">
+                {renderSVG(hamburgerIcon)}
+            </div>
+        );
+    };
+
+    const getText = () => {
+        if (!hamburgerText) return null;
+        return <span className="fb-menu-text">{hamburgerText}</span>;
+    };
+
     const blockProps = useBlockProps.save({
         className: `fb-off-canvas-menu-block ${blockID}`,
     });
-    
+
     const innerBlocksProps = useInnerBlocksProps.save({
         className: 'fb-off-canvas-content',
     });
-    
+
     return (
         <div {...blockProps}>
+
             {/* Toggle Button */}
-            <div 
+            <div
                 className="fb-menu-toggle-btn"
                 role="button"
                 tabIndex="0"
                 aria-expanded="false"
-                aria-label={__('Toggle menu', 'frontis-blocks')}
+                aria-label={__('Open menu', 'frontis-blocks')}
             >
-                {getIcon()}
+                {(menuType === 'icon' || menuType === 'icon-text') && getIcon()}
+                {(menuType === 'text' || menuType === 'icon-text') && getText()}
             </div>
-            
-            {/* Off-Canvas Menu Container */}
-            <div className={`fb-off-canvas-menu ${menuPositionClass} ${menuAnimationClass}`}>
+
+            {/* Off-Canvas Container */}
+            <div className={`fb-off-canvas-menu ${menuPositionClass}`}>
+
                 {/* Close Button */}
                 <div className="fb-off-canvas-header">
-                    <button
-                        className="fb-close-menu"
-                        aria-label={__('Close menu', 'frontis-blocks')}
-                    >
-                        ×
-                    </button>
+
+                    {(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
+                        <button
+                            className="fb-close-menu"
+                            aria-label={__('Close menu', 'frontis-blocks')}
+                        >
+                            {renderSVG(closeMenuIcon)}
+                        </button>
+                    )}
+
+                    {(closeMenuType === 'text' || closeMenuType === 'icon-text') && (
+                        <button
+                            className="fb-close-menu"
+                            aria-label={__('Close menu', 'frontis-blocks')}
+                        >
+                            {closeMenuText}
+                        </button>
+                    )}
+
                 </div>
-                
+
                 <div {...innerBlocksProps} />
             </div>
-            
+
             {/* Overlay */}
             <div className="fb-menu-overlay"></div>
         </div>

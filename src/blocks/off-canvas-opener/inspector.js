@@ -7,14 +7,21 @@ import {
 	PanelBody,
 	TabPanel,
 	SelectControl,
+	BaseControl,
+	Button,
+	ButtonGroup,
+	ToggleControl,
+	TextControl,
+	TextareaControl,
 } from '@wordpress/components';
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import {
-	ANIMATION
-} from "./constants/constants";
+	ANIMATION,
+	MENU_TYPE
+} from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
@@ -46,10 +53,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		selectedTemplate,
 		menuPosition,
-		iconStyle,
 		offCanvasPanelWidth,
 		offCanvasPanelWidthUnits,
-		offCanvasCustomCSS
+		offCanvasCustomCSS,
+		menuType,
+		hamburgerIcon,
+		hamburgerText,
+		closeMenuType,
+		closeMenuIcon,
+		closeMenuText
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -139,12 +151,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	// Icon style options
-	const iconOptions = [
-		{ value: 'hamburger', label: __('Hamburger', 'frontis-blocks') },
-		{ value: 'dots', label: __('Three Dots', 'frontis-blocks') },
-		{ value: 'plus', label: __('Plus Sign', 'frontis-blocks') },
-	];
+	const hamburgerIconHandler = (IconName) => {
+		setAttributes({ hamburgerIcon: IconName })
+	}
+	const closeMenuIconHandler = (IconName) => {
+		setAttributes({ closeMenuIcon: IconName })
+	}
 
 	const offCanvasStyle = useMemo(
 		() => `
@@ -177,7 +189,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const generalControls = (
 		<>
-			<PanelBody title={__("Menu Content", "frontis-blocks")} initialOpen={true}>
+			<PanelBody title={__("Menu Opener", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Menu Type", "frontis-blocks")}
+					value={menuType}
+					options={MENU_TYPE}
+					onChange={(value) => {
+						setAttributes({
+							menuType: value,
+						});
+					}}
+				/>
+				{(menuType === 'icon' || menuType === 'icon-text') && (
+					<FBIconPicker
+						value={hamburgerIcon}
+						setIconHandler={hamburgerIconHandler}
+					/>
+				)}
+				{(menuType === 'text' || menuType === 'icon-text') && (
+					<TextControl
+						label={__("Text", "frontis-blocks")}
+						value={hamburgerText}
+						onChange={(value) => setAttributes({ hamburgerText: value })}
+					/>
+				)}
 				<SelectControl
 					label={__("Select Pattern", "frontis-blocks")}
 					value={selectedTemplate}
@@ -198,13 +233,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					options={ANIMATION}
 					onChange={(value) => setAttributes({ menuPosition: value })}
 				/>
-
+			</PanelBody>
+			<PanelBody title={__("Closed Menu", "frontis-blocks")} initialOpen={false}>
 				<SelectControl
-					label={__("Icon Style", "frontis-blocks")}
-					value={iconStyle || 'hamburger'}
-					options={iconOptions}
-					onChange={(value) => setAttributes({ iconStyle: value })}
+					label={__("Menu Type", "frontis-blocks")}
+					value={closeMenuType}
+					options={MENU_TYPE}
+					onChange={(value) => {
+						setAttributes({
+							closeMenuType: value,
+						});
+					}}
 				/>
+				{(menuType === 'icon' || menuType === 'icon-text') && (
+					<FBIconPicker
+						value={closeMenuIcon}
+						setIconHandler={closeMenuIconHandler}
+					/>
+				)}
+				{(menuType === 'text' || menuType === 'icon-text') && (
+					<TextControl
+						label={__("Text", "frontis-blocks")}
+						value={closeMenuText}
+						onChange={(value) => setAttributes({ closeMenuText: value })}
+					/>
+				)}
 			</PanelBody>
 		</>
 	);

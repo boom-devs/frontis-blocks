@@ -11,9 +11,33 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	menuType: {
+		type: "string",
+		default: "icon"
+	},
+	closeMenuType: {
+		type: "string",
+		default: "icon"
+	},
 	menuPosition: {
 		type: "string",
 		default: "left"
+	},
+	hamburgerIcon: {
+		type: 'string',
+		default: 'align-justify',
+	},
+	hamburgerText: {
+		type: 'string',
+		default: 'Menu',
+	},
+	closeMenuIcon: {
+		type: 'string',
+		default: 'x',
+	},
+	closeMenuText: {
+		type: 'string',
+		default: 'Close',
 	},
 	iconStyle: {
 		type: "string",
