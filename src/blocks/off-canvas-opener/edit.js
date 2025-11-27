@@ -8,6 +8,7 @@ import { useState, useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { parse } from '@wordpress/blocks';
 import Inspector from './inspector';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -15,23 +16,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		blockID,
 		selectedTemplate,
 		menuPosition,
-		iconStyle,
-		animation
+		hamburgerIcon,
+		hamburgerText,
+		menuType,
+		closeMenuType,
+		closeMenuIcon,
+		closeMenuText
 	} = attributes;
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	
+
 	const patternData = useSelect(select => {
 		if (!selectedTemplate) return null;
-	
+
 		if (selectedTemplate.startsWith('user-')) {
 			const id = parseInt(selectedTemplate.replace('user-', ''), 10);
-			
+
 			if (select('core')) {
 				// Get user patterns from wp_block post type
 				const userPatterns = select('core').getEntityRecords('postType', 'wp_block') || [];
 				const userPattern = userPatterns.find(p => p.id === id);
-				
+
 				if (userPattern && userPattern.content && userPattern.content.raw) {
 					return {
 						content: userPattern.content.raw
@@ -44,7 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				return patterns.find(pattern => pattern.name === selectedTemplate);
 			}
 		}
-		
+
 		return null;
 	}, [selectedTemplate]);
 
@@ -52,11 +57,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		console.log("Selected template:", selectedTemplate);
 		console.log("Pattern data:", patternData);
-		
+
 		if (patternData && patternData.content) {
 			const parsedBlocks = parse(patternData.content);
 			console.log("Parsed blocks:", parsedBlocks);
-			
+
 			if (parsedBlocks && parsedBlocks.length > 0) {
 				const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);
 				replaceInnerBlocks(clientId, parsedBlocks, false);
@@ -68,35 +73,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [patternData, clientId]);
 
-	// Get the appropriate icon based on iconStyle
 	const getIcon = () => {
-		switch (iconStyle) {
-			case 'dots':
-				return (
-					<div className="fb-menu-icon fb-dots-icon">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				);
-			case 'plus':
-				return (
-					<div className="fb-menu-icon fb-plus-icon">
-						<span></span>
-						<span></span>
-					</div>
-				);
-			case 'hamburger':
-			default:
-				return (
-					<div className="fb-menu-icon fb-hamburger-icon">
-						<span></span>
-						<span></span>
-						<span></span>
-					</div>
-				);
+		if (hamburgerIcon) {
+			return (
+				<div className="fb-menu-icon">
+					{renderSVG(hamburgerIcon)}
+				</div>
+			);
 		}
+		return null;
 	};
+
+	const getText = () => {
+		if (!hamburgerText) return null;
+
+		return (
+			<span className="fb-menu-text">
+				{hamburgerText}
+			</span>
+		);
+	};
+
 
 	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
 	const menuOpenClass = isMenuOpen ? 'fb-menu-open' : '';
@@ -106,13 +103,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
-        {
-            className: 'fb-off-canvas-content',
-        },
-        {
-            templateLock: false,
-        }
-    );
+		{
+			className: 'fb-off-canvas-content',
+		},
+		{
+			templateLock: false,
+		}
+	);
 
 	return (
 		<div {...blockProps}>
@@ -122,7 +119,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
-			{/* Toggle Button with animated icon */}
+
 			<div
 				className={`fb-menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
 				onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -136,20 +133,32 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					}
 				}}
 			>
-				{getIcon()}
+				{(menuType === 'icon' || menuType === 'icon-text') && getIcon()}
+				{(menuType === 'text' || menuType === 'icon-text') && getText()}
 			</div>
 
 			{/* Off-Canvas Menu Container */}
 			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
 				{/* Close Button */}
 				<div className="fb-off-canvas-header">
-					<button
-						className="fb-close-menu"
-						onClick={() => setIsMenuOpen(false)}
-						aria-label={__('Close menu', 'frontis-blocks')}
-					>
-						×
-					</button>
+					{(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
+						<button
+							className="fb-close-menu"
+							onClick={() => setIsMenuOpen(false)}
+							aria-label={__('Close menu', 'frontis-blocks')}
+						>
+							{renderSVG(closeMenuIcon)}
+						</button>
+					)}
+					{(closeMenuType === 'text' || closeMenuType === 'icon-text') && (
+						<button
+							className="fb-close-menu"
+							onClick={() => setIsMenuOpen(false)}
+							aria-label={__('Close menu', 'frontis-blocks')}
+						>
+							{closeMenuText}
+						</button>
+					)}
 				</div>
 
 				{selectedTemplate ? (
