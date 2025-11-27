@@ -51,7 +51,6 @@ const FB_SidebarTypography = ({
 	const [selectedFontFamilyOption, setSelectedFontFamilyOption] = useState();
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
-
 	const handleFontFamilyChange = (selectedOption) => {
 		setSelectedFontFamilyOption(selectedOption);
 		const newFontFamily = selectedOption?.value || 'Default';
@@ -159,7 +158,8 @@ const FB_SidebarTypography = ({
 					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>
-
+			</div>
+			<div className='fb_global_typo_wrap'>
 				<SelectControl
 					label={__("Font Style", "frontis-blocks")}
 					options={FONT_STYLE}
@@ -174,6 +174,8 @@ const FB_SidebarTypography = ({
 					value={textDecoration}
 					onChange={handleTextDecorationChange}
 				/>
+			</div>
+			<div className='fb_global_typo_wrap'>
 				<div className="fb-letter-case-control">
 					<label className="fb-control-label">{__("Letter Case", "frontis-blocks")}</label>
 					<div className="fb-case-button-group">
@@ -208,6 +210,8 @@ const FB_SidebarTypography = ({
 						resetFallbackValue={''}
 					/>
 				}
+			</div>
+			<div className='fb_global_typo_wrap'>
 				{lineHeightUnits &&
 					<FB_Range
 						min={-200}
