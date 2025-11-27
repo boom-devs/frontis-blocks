@@ -3,6 +3,10 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+    blockStyle: {
+        type: 'string',
+        default: '',
+    },
 	// Separator Settings
 	separatorType: {
 		type: 'string',
@@ -20,22 +24,6 @@ const attributes = {
 		type: 'string',
 		default: 'angle-right',
 	},
-    separatorGap: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    separatorGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
 	// Home Settings
     showHomePage:{
         type: 'boolean',
@@ -82,27 +70,6 @@ const attributes = {
 	breadcrumbTypography: {
 		type: 'object',
 		default: {},
-	},
-	// Style - Colors
-	textColor: {
-		type: 'string',
-		default: '',
-	},
-	linkColor: {
-		type: 'string',
-		default: '',
-	},
-	linkHoverColor: {
-		type: 'string',
-		default: '',
-	},
-	separatorColor: {
-		type: 'string',
-		default: '',
-	},
-	iconColor: {
-		type: 'string',
-		default: '',
 	},
 	// Alignment
 	align: {
@@ -453,11 +420,25 @@ const attributes = {
     /** End breadcrumbItem Border */
 
     /** Start breadcrumbItem Box Shadow */
+
+
+    breadcrumbItemBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
     breadcrumbItemBoxShadowValues: {
         type: 'array',
         default: [],
     },
     breadcrumbItemBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    breadcrumbItemBoxShadowHoverValues: {
+        type: 'array',
+        default: [],
+    },
+    breadcrumbItemBoxShadowHoverCssValue: {
         type: 'string',
         default: '',
     },
@@ -741,7 +722,7 @@ const attributes = {
     },
     breadcrumbItemIconColor : {
         type: 'string',
-        default: '#399CFF',
+        default: '',
     },
     breadcrumbItemIconHoverColor: {
         type: 'string',
@@ -1225,10 +1206,6 @@ const attributes = {
         default: false,
     },
     breadcrumbCustomCSS : {
-        type: 'string',
-        default: '',
-    },
-	blockStyle: {
         type: 'string',
         default: '',
     },

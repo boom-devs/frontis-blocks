@@ -48,7 +48,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	const renderSeparator = () => {
 		if (separatorType === 'text') {
-			return <span className="fb-breadcrumb-separator">{separatorText}</span>;
+			return <span className="fb-breadcrumb-separator text">{separatorText}</span>;
 		}
 		return <div className={`fb-breadcrumb-separator`}>{renderSVG(separatorIcon)}</div>;
 	};
@@ -80,20 +80,20 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 								<>
 									<div className="fb-breadcrumb-item home">
 										{renderHomePrefix()}
-										<span className="fb-breadcrumb-link">{homeText}</span>
+										<span className="fb-breadcrumb-label fb-breadcrumb-link">{homeText}</span>
 									</div>
 									{renderSeparator()}
 								</>
 							)}
 							<div className="fb-breadcrumb-item item">
 								{showItemIcon && <div className={`fb-breadcrumb-icon item`}>{renderSVG(itemIcon)}</div>}
-								<span className="fb-breadcrumb-link">{__("Dummy Parent", "frontis-blocks")}</span>
+								<span className="fb-breadcrumb-label fb-breadcrumb-link">{__("Dummy Parent", "frontis-blocks")}</span>
 
 							</div>
 							{renderSeparator()}
 							<div className="fb-breadcrumb-item item">
 								{showItemIcon && <div className={`fb-breadcrumb-icon item`}>{renderSVG(itemIcon)}</div>}
-								<span className="fb-breadcrumb-text">{__("Dummy Title", "frontis-blocks")}</span>
+								<span className="fb-breadcrumb-label fb-breadcrumb-text">{__("Dummy Title", "frontis-blocks")}</span>
 							</div>
 						</div>
 					</div>

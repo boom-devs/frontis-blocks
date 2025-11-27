@@ -55,8 +55,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		separatorType,
 		separatorText,
 		separatorIcon,
-		separatorGap,
-		separatorGapUnits,
 		showHomePage,
 		homeprefixSwitcher,
 		homeTextPrefix,
@@ -66,11 +64,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showItemIcon,
 		itemIcon,
 		breadcrumbTypography,
-		textColor,
-		linkColor,
-		linkHoverColor,
-		separatorColor,
-		iconColor,
 		align,
 		//Items style
 		breadcrumbItemGlobalTypographyData,
@@ -136,8 +129,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		breadcrumbItemTabBorderRadius,
 		breadcrumbItemMobileBorderRadius,
 		breadcrumbItemBorderRadiusLink,
+		breadcrumbItemBoxShadowSwitcher,
 		breadcrumbItemBoxShadowValues,
 		breadcrumbItemBoxShadowCssValue,
+		breadcrumbItemBoxShadowHoverValues,
+		breadcrumbItemBoxShadowHoverCssValue,
 		breadcrumbItemPaddingUnits,
 		breadcrumbItemDesktopPadding,
 		breadcrumbItemTabPadding,
@@ -277,10 +273,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
-				blockID: "fb-breadcrumb-" + clientId,
+				blockId: "fb-breadcrumb-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
+
 
 	const homeIconHandler = (IconName) => {
 		setAttributes({ homeIcon: IconName })
@@ -676,9 +673,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 	const globalDesktopPadding = `${breadcrumbGlobalPaddingDesktop?.top}${breadcrumbGlobalPaddingUnits?.Desktop} ${breadcrumbGlobalPaddingDesktop?.right}${breadcrumbGlobalPaddingUnits?.Desktop} ${breadcrumbGlobalPaddingDesktop?.bottom}${breadcrumbGlobalPaddingUnits?.Desktop} ${breadcrumbGlobalPaddingDesktop?.left}${breadcrumbGlobalPaddingUnits?.Desktop}`;
-
 	const globalTabletPadding = `${breadcrumbGlobalPaddingTablet?.top}${breadcrumbGlobalPaddingUnits?.Tablet} ${breadcrumbGlobalPaddingTablet?.right}${breadcrumbGlobalPaddingUnits?.Tablet} ${breadcrumbGlobalPaddingTablet?.bottom}${breadcrumbGlobalPaddingUnits?.Tablet} ${breadcrumbGlobalPaddingTablet?.left}${breadcrumbGlobalPaddingUnits?.Tablet}`;
-
 	const globalMobilePadding = `${breadcrumbGlobalPaddingMobile?.top}${breadcrumbGlobalPaddingUnits?.Mobile} ${breadcrumbGlobalPaddingMobile?.right}${breadcrumbGlobalPaddingUnits?.Mobile} ${breadcrumbGlobalPaddingMobile?.bottom}${breadcrumbGlobalPaddingUnits?.Mobile} ${breadcrumbGlobalPaddingMobile?.left}${breadcrumbGlobalPaddingUnits?.Mobile}`;
 	/** End Global Padding */
 
@@ -1032,18 +1027,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 			}
 
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{
 				${breadcrumbItemGap?.Desktop ? `gap: ${breadcrumbItemGap?.Desktop}${breadcrumbItemGapUnits?.Desktop};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item{
 				${breadcrumbItemDesktopPaddingWidth && breadcrumbItemDesktopPadding?.top ? `padding: ${breadcrumbItemDesktopPaddingWidth};` : ''}
 				${breadcrumbItemDesktopMarginWidth && breadcrumbItemDesktopMargin?.top ? `margin: ${breadcrumbItemDesktopMarginWidth};` : ''}
 				${breadcrumbItemBorder ? `border: ${breadcrumbItemBorder};` : ''}
 				${breadcrumbItemDesktopBorderWidth && breadcrumbItemDesktopBorder?.top ? `border-width: ${breadcrumbItemDesktopBorderWidth};` : ''}
 				${breadcrumbItemDesktopBorderRadiusWidth && breadcrumbItemDesktopBorderRadius?.top ? `border-radius: ${breadcrumbItemDesktopBorderRadiusWidth};` : ''}
 				${breadcrumbItemBorderColor ? `border-color: ${breadcrumbItemBorderColor};` : ''}
+				${breadcrumbItemBoxShadowCssValue ? `box-shadow: ${breadcrumbItemBoxShadowCssValue};` : ''}
+				${breadcrumbItemBgColor ? `background-color: ${breadcrumbItemBgColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-link {
+
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item:hover {
+				${breadcrumbItemBgHoverColor ? `background-color: ${breadcrumbItemBgHoverColor};` : ''}
+				${breadcrumbItemBorderHoverColor ? `border-color: ${breadcrumbItemBorderHoverColor};` : ''}
+				${breadcrumbItemBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbItemBoxShadowHoverCssValue};` : ''}
+			}
+
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-link {
 				${breadcrumbItemGlobalTypoSwitcher?.fontFamily === true && breadcrumbItemGlobalTypographyData?.fontFamily ? `font-family: ${breadcrumbItemGlobalTypographyData?.fontFamily};` : ''}
 				${breadcrumbItemGlobalTypoSwitcher?.fontSize === true && breadcrumbItemGlobalTypographyData?.fontSize ? `font-size: ${breadcrumbItemGlobalTypographyData?.fontSize};` : ''}
 				${breadcrumbItemGlobalTypoSwitcher?.fontWeight === true && breadcrumbItemGlobalTypographyData?.fontWeight ? `font-weight: ${breadcrumbItemGlobalTypographyData?.fontWeight};` : ''}
@@ -1062,13 +1066,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${breadcrumbItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbItemLetterSpacing?.Desktop && breadcrumbItemLetterSpacingUnits?.Desktop ? `letter-spacing: ${breadcrumbItemLetterSpacing?.Desktop}${breadcrumbItemLetterSpacingUnits?.Desktop};` : ''}
 				${breadcrumbItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbItemLineHeight?.Desktop && breadcrumbItemLineHeightUnits?.Desktop ? `line-height: ${breadcrumbItemLineHeight?.Desktop}${breadcrumbItemLineHeightUnits?.Desktop};` : ''}
 				${breadcrumbItemColor ? `color: ${breadcrumbItemColor};` : ''}
-				${breadcrumbItemBgColor ? `background-color: ${breadcrumbItemBgColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-link:hover {
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-link:hover {
 				${breadcrumbItemHoverColor ? `color: ${breadcrumbItemHoverColor};` : ''}
-				${breadcrumbItemBgHoverColor ? `background-color: ${breadcrumbItemBgHoverColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-text{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-text{
 				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontFamily === true && breadcrumbCurrentItemGlobalTypographyData?.fontFamily ? `font-family: ${breadcrumbCurrentItemGlobalTypographyData?.fontFamily};` : ''}
 				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontSize === true && breadcrumbCurrentItemGlobalTypographyData?.fontSize ? `font-size: ${breadcrumbCurrentItemGlobalTypographyData?.fontSize};` : ''}
 				${breadcrumbCurrentItemGlobalTypoSwitcher?.fontWeight === true && breadcrumbCurrentItemGlobalTypographyData?.fontWeight ? `font-weight: ${breadcrumbCurrentItemGlobalTypographyData?.fontWeight};` : ''}
@@ -1089,52 +1091,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${breadcrumbCurrentItemColor ? `color: ${breadcrumbCurrentItemColor};` : ''}
 				${breadcrumbCurrentItemBgColor ? `background-color: ${breadcrumbCurrentItemBgColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-text:hover {
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-text:hover {
 				${breadcrumbCurrentItemHoverColor ? `color: ${breadcrumbCurrentItemHoverColor};` : ''}
 				${breadcrumbCurrentItemBgHoverColor ? `background-color: ${breadcrumbCurrentItemBgHoverColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item.home{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item.home{
 				${breadcrumbHomeIconGap?.Desktop ? `gap: ${breadcrumbHomeIconGap?.Desktop}${breadcrumbHomeIconGapUnits?.Desktop};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home svg{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home svg{
 				${breadcrumbIconSize?.Desktop ? `width: ${breadcrumbIconSize?.Desktop}${breadcrumbIconSizeUnits?.Desktop};` : ''}
 				${breadcrumbIconSize?.Desktop ? `height: ${breadcrumbIconSize?.Desktop}${breadcrumbIconSizeUnits?.Desktop};` : ''}
 				${breadcrumbIconColor ? `fill: ${breadcrumbIconColor};` : ''}
 				${breadcrumbIconBgColor ? `background-color: ${breadcrumbIconBgColor};` : ''}
 				transition: all .3s ease-in-out;
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home:hover svg{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home:hover svg{
 				${breadcrumbIconHoverColor ? `fill: ${breadcrumbIconHoverColor};` : ''}
 				${breadcrumbIconBgHoverColor ? `background-color: ${breadcrumbIconBgHoverColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item.item{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item:not(.home){
 				${breadcrumbItemIconGap?.Desktop ? `gap: ${breadcrumbItemIconGap?.Desktop}${breadcrumbItemIconGapUnits?.Desktop};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item svg{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item svg{
 				${breadcrumbItemIconSize?.Desktop ? `width: ${breadcrumbItemIconSize?.Desktop}${breadcrumbItemIconSizeUnits?.Desktop};` : ''}
 				${breadcrumbItemIconSize?.Desktop ? `height: ${breadcrumbItemIconSize?.Desktop}${breadcrumbItemIconSizeUnits?.Desktop};` : ''}
 				${breadcrumbItemIconColor ? `fill: ${breadcrumbItemIconColor};` : ''}
 				${breadcrumbItemIconBgColor ? `background-color: ${breadcrumbItemIconBgColor};` : ''}
 				transition: all .3s ease-in-out;
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item:hover svg{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item:hover svg{
 				${breadcrumbItemIconHoverColor ? `fill: ${breadcrumbItemIconHoverColor};` : ''}
 				${breadcrumbItemIconBgHoverColor ? `background-color: ${breadcrumbItemIconBgHoverColor};` : ''}
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-separator{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator{
 				${breadcrumbSeperatorIconGap?.Desktop ? `margin-right: ${breadcrumbSeperatorIconGap?.Desktop}${breadcrumbSeperatorIconGapUnits?.Desktop};` : ''}
+				${breadcrumbSeperatorColor ? `color: ${breadcrumbSeperatorColor};` : ''}
+				display: flex;
+				align-items: center;
+				justify-content: center;
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-separator svg{
+
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator.text {
+				${breadcrumbSeperatorSize?.Desktop ? `font-size: ${breadcrumbSeperatorSize?.Desktop}${breadcrumbSeperatorSizeUnits?.Desktop};` : ''}
+				${breadcrumbSeperatorColor ? `color: ${breadcrumbSeperatorColor};` : ''}
+				${breadcrumbSeperatorBgColor ? `background-color: ${breadcrumbSeperatorBgColor};` : ''}
+				transition: all .3s ease-in-out;
+			}
+
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator.text:hover {
+				${breadcrumbSeperatorHoverColor ? `color: ${breadcrumbSeperatorHoverColor};` : ''}
+				${breadcrumbSeperatorBgHoverColor ? `background-color: ${breadcrumbSeperatorBgHoverColor};` : ''}
+			}
+
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator svg{
 				${breadcrumbSeperatorSize?.Desktop ? `width: ${breadcrumbSeperatorSize?.Desktop}${breadcrumbSeperatorSizeUnits?.Desktop};` : ''}
 				${breadcrumbSeperatorSize?.Desktop ? `height: ${breadcrumbSeperatorSize?.Desktop}${breadcrumbSeperatorSizeUnits?.Desktop};` : ''}
 				${breadcrumbSeperatorColor ? `fill: ${breadcrumbSeperatorColor};` : ''}
 				${breadcrumbSeperatorBgColor ? `background-color: ${breadcrumbSeperatorBgColor};` : ''}
 				transition: all .3s ease-in-out;
 			}
-			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-separator:hover svg{
+			.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator:hover svg{
 				${breadcrumbSeperatorHoverColor ? `fill: ${breadcrumbSeperatorHoverColor};` : ''}
 				${breadcrumbSeperatorBgHoverColor ? `background-color: ${breadcrumbSeperatorBgHoverColor};` : ''}
 			}
+
 			@media only screen and (max-width: 1024px) {
 				.${blockID}.fb-breadcrumb-main-wrapper {
 					${breadcrumbPositionType === 'default' ? `position: relative !important;` : ''}
@@ -1166,38 +1186,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{
 					${breadcrumbItemGap?.Tablet ? `gap: ${breadcrumbItemGap?.Tablet}${breadcrumbItemGapUnits?.Tablet};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item{
 					${breadcrumbItemTabletPaddingWidth && breadcrumbItemTabPadding?.top ? `padding: ${breadcrumbItemTabletPaddingWidth};` : ''}
 					${breadcrumbItemTabletMarginWidth && breadcrumbItemTabMargin?.top ? `margin: ${breadcrumbItemTabletMarginWidth};` : ''}
 					${breadcrumbItemTabletBorderWidth && breadcrumbItemTabletBorder?.top ? `border-width: ${breadcrumbItemTabletBorderWidth};` : ''}
 					${breadcrumbItemTabletBorderRadiusWidth && breadcrumbItemTabBorderRadius?.top ? `border-radius: ${breadcrumbItemTabletBorderRadiusWidth};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-link{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-link{
 					${breadcrumbItemGlobalTypoSwitcher?.fontSize === false && breadcrumbItemFontSize?.Tablet && breadcrumbItemFontSizeUnits?.Tablet ? `font-size: ${breadcrumbItemFontSize?.Tablet}${breadcrumbItemFontSizeUnits?.Tablet};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbItemLetterSpacing?.Tablet && breadcrumbItemLetterSpacingUnits?.Tablet ? `letter-spacing: ${breadcrumbItemLetterSpacing?.Tablet}${breadcrumbItemLetterSpacingUnits?.Tablet};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbItemLineHeight?.Tablet && breadcrumbItemLineHeightUnits?.Tablet ? `line-height: ${breadcrumbItemLineHeight?.Tablet}${breadcrumbItemLineHeightUnits?.Tablet};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-text{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-text{
 					${breadcrumbItemGlobalTypoSwitcher?.fontSize === false && breadcrumbItemFontSize?.Tablet && breadcrumbItemFontSizeUnits?.Tablet ? `font-size: ${breadcrumbItemFontSize?.Tablet}${breadcrumbItemFontSizeUnits?.Tablet};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbItemLetterSpacing?.Tablet && breadcrumbItemLetterSpacingUnits?.Tablet ? `letter-spacing: ${breadcrumbItemLetterSpacing?.Tablet}${breadcrumbItemLetterSpacingUnits?.Tablet};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbItemLineHeight?.Tablet && breadcrumbItemLineHeightUnits?.Tablet ? `line-height: ${breadcrumbItemLineHeight?.Tablet}${breadcrumbItemLineHeightUnits?.Tablet};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-icon.home svg{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home svg{
 					${breadcrumbIconSize?.Tablet ? `width: ${breadcrumbIconSize?.Tablet}${breadcrumbIconSizeUnits?.Tablet};` : ''}
 					${breadcrumbIconSize?.Tablet ? `height: ${breadcrumbIconSize?.Tablet}${breadcrumbIconSizeUnits?.Tablet};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-icon.item svg{
-					${breadcrumbSeperatorSize?.Tablet ? `width: ${breadcrumbSeperatorSize?.Tablet}${breadcrumbSeperatorSizeUnits?.Tablet};` : ''}
-					${breadcrumbSeperatorSize?.Tablet ? `height: ${breadcrumbSeperatorSize?.Tablet}${breadcrumbSeperatorSizeUnits?.Tablet};` : ''}
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item svg{
+					${breadcrumbItemIconSize?.Tablet ? `width: ${breadcrumbItemIconSize?.Tablet}${breadcrumbItemIconSizeUnits?.Tablet};` : ''}
+					${breadcrumbItemIconSize?.Tablet ? `height: ${breadcrumbItemIconSize?.Tablet}${breadcrumbItemIconSizeUnits?.Tablet};` : ''}
 					transition: all .3s ease-in-out;
+				}
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator.text{
+					${breadcrumbSeperatorSize?.Tablet ? `font-size: ${breadcrumbSeperatorSize?.Tablet}${breadcrumbSeperatorSizeUnits?.Tablet};` : ''}
 				}
 			}
 
-			@media only screen and (max-width: 768px) {
+			@media only screen and (max-width: 767px) {
 				.${blockID}.fb-breadcrumb-main-wrapper {
 					${breadcrumbPositionType === 'default' ? `position: relative !important;` : ''}
 					${breadcrumbPositionType !== 'default' && breadcrumbPositionType !== 'relative' ? `width: 100%;` : ''}
@@ -1228,46 +1251,280 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             		${breadcrumbGlobalBoxShadowHoverCssValue ? `box-shadow: ${breadcrumbGlobalBoxShadowHoverCssValue};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item{
 					${breadcrumbItemMobilePaddingWidth && breadcrumbItemMobilePadding?.top ? `padding: ${breadcrumbItemMobilePaddingWidth};` : ''}
 					${breadcrumbItemMobileMarginWidth && breadcrumbItemMobileMargin?.top ? `margin: ${breadcrumbItemMobileMarginWidth};` : ''}
 					${breadcrumbItemMobileBorderWidth && breadcrumbItemMobileBorder?.top ? `border-width: ${breadcrumbItemMobileBorderWidth};` : ''}
 					${breadcrumbItemMobileBorderRadiusWidth && breadcrumbItemMobileBorderRadius?.top ? `border-radius: ${breadcrumbItemMobileBorderRadiusWidth};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{
 					${breadcrumbItemGap?.Mobile ? `gap: ${breadcrumbItemGap?.Mobile}${breadcrumbItemGapUnits?.Mobile};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-link{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-link{
 					${breadcrumbItemGlobalTypoSwitcher?.fontSize === false && breadcrumbItemFontSize?.Mobile && breadcrumbItemFontSizeUnits?.Mobile ? `font-size: ${breadcrumbItemFontSize?.Mobile}${breadcrumbItemFontSizeUnits?.Mobile};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbItemLetterSpacing?.Mobile && breadcrumbItemLetterSpacingUnits?.Mobile ? `letter-spacing: ${breadcrumbItemLetterSpacing?.Mobile}${breadcrumbItemLetterSpacingUnits?.Mobile};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbItemLineHeight?.Mobile && breadcrumbItemLineHeightUnits?.Mobile ? `line-height: ${breadcrumbItemLineHeight?.Mobile}${breadcrumbItemLineHeightUnits?.Mobile};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-text{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label.fb-breadcrumb-text{
 					${breadcrumbItemGlobalTypoSwitcher?.fontSize === false && breadcrumbItemFontSize?.Mobile && breadcrumbItemFontSizeUnits?.Mobile ? `font-size: ${breadcrumbItemFontSize?.Mobile}${breadcrumbItemFontSizeUnits?.Mobile};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.letterSpacing === false && breadcrumbItemLetterSpacing?.Mobile && breadcrumbItemLetterSpacingUnits?.Mobile ? `letter-spacing: ${breadcrumbItemLetterSpacing?.Mobile}${breadcrumbItemLetterSpacingUnits?.Mobile};` : ''}
 					${breadcrumbItemGlobalTypoSwitcher?.lineHeight === false && breadcrumbItemLineHeight?.Mobile && breadcrumbItemLineHeightUnits?.Mobile ? `line-height: ${breadcrumbItemLineHeight?.Mobile}${breadcrumbItemLineHeightUnits?.Mobile};` : ''}
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-icon.home svg{
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home svg{
 					${breadcrumbIconSize?.Mobile ? `width: ${breadcrumbIconSize?.Mobile}${breadcrumbIconSizeUnits?.Mobile};` : ''}
 					${breadcrumbIconSize?.Mobile ? `height: ${breadcrumbIconSize?.Mobile}${breadcrumbIconSizeUnits?.Mobile};` : ''}
 					transition: all .3s ease-in-out;
 				}
-				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-list .fb-breadcrumb-icon.item svg{
-					${breadcrumbSeperatorSize?.Mobile ? `width: ${breadcrumbSeperatorSize?.Mobile}${breadcrumbSeperatorSizeUnits?.Mobile};` : ''}
-					${breadcrumbSeperatorSize?.Mobile ? `height: ${breadcrumbSeperatorSize?.Mobile}${breadcrumbSeperatorSizeUnits?.Mobile};` : ''}
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item svg{
+					${breadcrumbItemIconSize?.Mobile ? `width: ${breadcrumbItemIconSize?.Mobile}${breadcrumbItemIconSizeUnits?.Mobile};` : ''}
+					${breadcrumbItemIconSize?.Mobile ? `height: ${breadcrumbItemIconSize?.Mobile}${breadcrumbItemIconSizeUnits?.Mobile};` : ''}
 					transition: all .3s ease-in-out;
+				}
+				.${blockID}.fb-breadcrumb-main-wrapper .fb-breadcrumb-container .fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator.text{
+					${breadcrumbSeperatorSize?.Mobile ? `font-size: ${breadcrumbSeperatorSize?.Mobile}${breadcrumbSeperatorSizeUnits?.Mobile};` : ''}
 				}
 			}
 		`,
 		[
-			blockID,
-			breadcrumbGlobalBorderDesktop,
-			breadcrumbGlobalBorderTablet,
-			breadcrumbGlobalBorderMobile,
-			breadcrumbGlobalBorderRadiusDesktop,
-			breadcrumbGlobalBorderRadiusTablet,
-			breadcrumbGlobalBorderRadiusMobile,
-			attributes
+		blockID,
+		separatorType,
+		separatorText,
+		separatorIcon,
+		showHomePage,
+		homeprefixSwitcher,
+		homeTextPrefix,
+		showHomeIcon,
+		homeIcon,
+		homeText,
+		showItemIcon,
+		itemIcon,
+		breadcrumbTypography,
+		align,
+		//Items style
+		breadcrumbItemGlobalTypographyData,
+		breadcrumbItemGlobalTypoSwitcher,
+		breadcrumbItemGlobalTypoType,
+		breadcrumbItemGlobalTypoOption,
+		breadcrumbItemFontFamily,
+		breadcrumbItemFontSize,
+		breadcrumbItemFontSizeUnits,
+		breadcrumbItemFontWeight,
+		breadcrumbItemFontStyle,
+		breadcrumbItemTextTransform,
+		breadcrumbItemTextDecoration,
+		breadcrumbItemLetterSpacing,
+		breadcrumbItemLetterSpacingUnits,
+		breadcrumbItemLineHeight,
+		breadcrumbItemLineHeightUnits,
+		breadcrumbGlobalZIndex,
+		breadcrumbOverflow,
+		//Current item
+		breadcrumbCurrentItemGlobalTypographyData,
+		breadcrumbCurrentItemGlobalTypoSwitcher,
+		breadcrumbCurrentItemGlobalTypoType,
+		breadcrumbCurrentItemGlobalTypoOption,
+		breadcrumbCurrentItemFontFamily,
+		breadcrumbCurrentItemFontSize,
+		breadcrumbCurrentItemFontSizeUnits,
+		breadcrumbCurrentItemFontWeight,
+		breadcrumbCurrentItemFontStyle,
+		breadcrumbCurrentItemTextTransform,
+		breadcrumbCurrentItemTextDecoration,
+		breadcrumbCurrentItemLetterSpacing,
+		breadcrumbCurrentItemLetterSpacingUnits,
+		breadcrumbCurrentItemLineHeight,
+		breadcrumbCurrentItemLineHeightUnits,
+		breadcrumbCurrentItemColorSwitcher,
+		breadcrumbCurrentItemColor,
+		breadcrumbCurrentItemHoverColor,
+		breadcrumbCurrentItemBgColorSwitcher,
+		breadcrumbCurrentItemBgColor,
+		breadcrumbCurrentItemBgHoverColor,
+		//Item color
+		breadcrumbItemColorSwitcher,
+		breadcrumbItemColor,
+		breadcrumbItemHoverColor,
+		breadcrumbItemBgColorSwitcher,
+		breadcrumbItemBgColor,
+		breadcrumbItemBgHoverColor,
+		breadcrumbItemGap,
+		breadcrumbItemGapUnits,
+		//Item Spacing
+		breadcrumbItemBorder,
+		breadcrumbItemBorderColorSwitcher,
+		breadcrumbItemBorderColor,
+		breadcrumbItemBorderHoverColor,
+		breadcrumbItemBorderUnits,
+		breadcrumbItemDesktopBorder,
+		breadcrumbItemTabletBorder,
+		breadcrumbItemMobileBorder,
+		breadcrumbItemBorderLink,
+		breadcrumbItemDesktopBorderWidth,
+		breadcrumbItemTabletBorderWidth,
+		breadcrumbItemMobileBorderWidth,
+		breadcrumbItemBorderRadiusUnits,
+		breadcrumbItemDesktopBorderRadius,
+		breadcrumbItemTabBorderRadius,
+		breadcrumbItemMobileBorderRadius,
+		breadcrumbItemBorderRadiusLink,
+		breadcrumbItemDesktopBorderRadiusWidth,
+		breadcrumbItemTabletBorderRadiusWidth,
+		breadcrumbItemMobileBorderRadiusWidth,
+		breadcrumbItemBoxShadowSwitcher,
+		breadcrumbItemBoxShadowValues,
+		breadcrumbItemBoxShadowCssValue,
+		breadcrumbItemBoxShadowHoverValues,
+		breadcrumbItemBoxShadowHoverCssValue,
+		breadcrumbItemPaddingUnits,
+		breadcrumbItemDesktopPadding,
+		breadcrumbItemTabPadding,
+		breadcrumbItemMobilePadding,
+		breadcrumbItemPaddingLink,
+		breadcrumbItemDesktopPaddingWidth,
+		breadcrumbItemTabletPaddingWidth,
+		breadcrumbItemMobilePaddingWidth,
+		breadcrumbItemMarginUnits,
+		breadcrumbItemDesktopMargin,
+		breadcrumbItemTabMargin,
+		breadcrumbItemMobileMargin,
+		breadcrumbItemMarginLink,
+		breadcrumbItemDesktopMarginWidth,
+		breadcrumbItemTabletMarginWidth,
+		breadcrumbItemMobileMarginWidth,
+		breadcrumbIconSize,
+		breadcrumbIconSizeUnits,
+		breadcrumbHomeIconGap,
+		breadcrumbHomeIconGapUnits,
+		breadcrumbIconBgSize,
+		breadcrumbIconBgSizeUnits,
+		breadcrumbIconColorSwitcher,
+		breadcrumbIconColor,
+		breadcrumbIconHoverColor,
+		breadcrumbIconBgColorSwitcher,
+		breadcrumbIconBgColor,
+		breadcrumbIconBgHoverColor,
+
+		//seperator 
+		breadcrumbSeperatorSize,
+		breadcrumbSeperatorSizeUnits,
+		breadcrumbSeperatorIconGap,
+		breadcrumbSeperatorIconGapUnits,
+		breadcrumbSeperatorBgSize,
+		breadcrumbSeperatorBgSizeUnits,
+		breadcrumbSeperatorColorSwitcher,
+		breadcrumbSeperatorColor,
+		breadcrumbSeperatorHoverColor,
+		breadcrumbSeperatorBgColorSwitcher,
+		breadcrumbSeperatorBgColor,
+		breadcrumbSeperatorBgHoverColor,
+		//Item Icon
+		breadcrumbItemIconSize,
+		breadcrumbItemIconSizeUnits,
+		breadcrumbItemIconGap,
+		breadcrumbItemIconGapUnits,
+		breadcrumbItemIconBgSize,
+		breadcrumbItemIconBgSizeUnits,
+		breadcrumbItemIconColorSwitcher,
+		breadcrumbItemIconColor,
+		breadcrumbItemIconHoverColor,
+		breadcrumbItemIconBgColorSwitcher,
+		breadcrumbItemIconBgColor,
+		breadcrumbItemIconBgHoverColor,
+		//position
+		breadcrumbPositionType,
+		breadcrumbHZOrientationType,
+		breadcrumbVROrientationType,
+		breadcrumbHZLeftOffset,
+		breadcrumbHZLeftOffsetUnits,
+		breadcrumbHZRightOffset,
+		breadcrumbHZRightOffsetUnits,
+		breadcrumbVRTopOffset,
+		breadcrumbVRTopOffsetUnits,
+		breadcrumbVRBottomOffset,
+		breadcrumbVRBottomOffsetUnits,
+
+		breadcrumbGlobalWraperID,
+		breadcrumbGlobalWraperClass,
+
+		breadcrumbGlobalPaddingUnits,
+		breadcrumbGlobalPaddingDesktop,
+		breadcrumbGlobalPaddingTablet,
+		breadcrumbGlobalPaddingMobile,
+		breadcrumbGlobalPaddingLink,
+		globalDesktopPadding,
+		globalTabletPadding,
+		globalMobilePadding,
+
+		breadcrumbGlobalMarginUnits,
+		breadcrumbGlobalMarginDesktop,
+		breadcrumbGlobalMarginTablet,
+		breadcrumbGlobalMarginMobile,
+		breadcrumbGlobalMarginLink,
+		globalDesktopMargin,
+		globalTabletMargin,
+		globalMobileMargin,
+
+
+		/** Start Background */
+		breadcrumbGlobalBgColorSwitcher,
+		breadcrumbGlobalBgNormalBackgroundType,
+		breadcrumbGlobalBgNormalClassicColor,
+		breadcrumbGlobalBgNormalGradientColor,
+		breadcrumbGlobalBgNormalCustomGradientSwitcher,
+		breadcrumbGlobalBgNormalCustomGradientInputValue,
+		breadcrumbGlobalBgNormalBackgroundImageUrl,
+		breadcrumbGlobalBgNormalBackgroundImageAlt,
+		breadcrumbGlobalBgNormalBackgroundImageID,
+		breadcrumbGlobalBgNormalBackgroundImagePosition,
+		breadcrumbGlobalBgNormalBackgroundImageAttachment,
+		breadcrumbGlobalBgNormalBackgroundImageRepeat,
+		breadcrumbGlobalBgNormalBackgroundImageSize,
+
+		breadcrumbGlobalBgHoverBackgroundType,
+		breadcrumbGlobalBgHoverClassicColor,
+		breadcrumbGlobalBgHoverGradientColor,
+		breadcrumbGlobalBgHoverCustomGradientSwitcher,
+		breadcrumbGlobalBgHoverCustomGradientInputValue,
+		breadcrumbGlobalBgHoverBackgroundImageUrl,
+		breadcrumbGlobalBgHoverBackgroundImagePosition,
+		breadcrumbGlobalBgHoverBackgroundImageAttachment,
+		breadcrumbGlobalBgHoverBackgroundImageRepeat,
+		breadcrumbGlobalBgHoverBackgroundImageSize,
+
+		breadcrumbGlobalBorder,
+		breadcrumbGlobalBorderColorSwitcher,
+		breadcrumbGlobalBorderColor,
+		breadcrumbGlobalBorderHoverColor,
+		breadcrumbGlobalBorderUnits,
+		breadcrumbGlobalBorderDesktop,
+		breadcrumbGlobalBorderTablet,
+		breadcrumbGlobalBorderMobile,
+		breadcrumbGlobalBorderLink,
+		globalDesktopBorderWidth,
+		globalTabletBorderWidth,
+		globalMobileBorderWidth,
+
+		breadcrumbGlobalBorderRadiusUnits,
+		breadcrumbGlobalBorderRadiusDesktop,
+		breadcrumbGlobalBorderRadiusTablet,
+		breadcrumbGlobalBorderRadiusMobile,
+		breadcrumbGlobalBorderRadiusLink,
+		globalDesktopBorderRadiusWidth,
+		globalTabletBorderRadiusWidth,
+		globalMobileBorderRadiusWidth,
+
+		breadcrumbGlobalBoxShadowSwitcher,
+		breadcrumbGlobalBoxShadowValues,
+		breadcrumbGlobalBoxShadowCssValue,
+		breadcrumbGlobalBoxShadowHoverValues,
+		breadcrumbGlobalBoxShadowHoverCssValue,
+
+		breadcrumbDesktopSwitcher,
+		breadcrumbTabletSwitcher,
+		breadcrumbMobileSwitcher,
+
+		breadcrumbCustomCSS,
+		blockStyle
 		],
 	);
 
@@ -1368,20 +1625,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChange={(value) => setAttributes({ separatorText: value })}
 					/>
 				)}
-
-				<FB_Range
-					min={1}
-					max={200}
-					label={__("Gap", "frontis-blocks")}
-					rangeValue={separatorGap}
-					onChangeHandler={(value) => setAttributes({ separatorGap: value })}
-					rangeUnitHandler={(value) => setAttributes({ separatorGapUnits: value })}
-					deviceType={deviceType}
-					units={separatorGapUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
 
 			</PanelBody>
 
@@ -1528,6 +1771,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChange={(value) => setAttributes({ breadcrumbItemBorder: value })}
 				/>
 
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={breadcrumbItemBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ breadcrumbItemBorderColorSwitcher: value })}
+				/>
+
+				{breadcrumbItemBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={breadcrumbItemBorderColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbItemBorderColor: value === undefined ? '' : value })}
+					/>
+				)}
+
+				{breadcrumbItemBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={breadcrumbItemBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbItemBorderHoverColor: value === undefined ? '' : value })}
+					/>
+				)}
+
 				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
@@ -1555,12 +1820,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setAttributes={setAttributes}
 				/>
 
-				<FB_BoxShadowControl
-					label={__("Box Shadow", "frontis-blocks")}
-					onBoxShadowChange={(value) => setAttributes({ breadcrumbItemBoxShadowValues: value })}
-					initialShadowValue={breadcrumbItemBoxShadowValues}
-					onBoxShadowStyleChange={(value) => setAttributes({ breadcrumbItemBoxShadowCssValue: value })}
+
+
+				<FB_SwitcherControl
+					label={__("Box Shadow ", "frontis-blocks")}
+					globalSwitcher={breadcrumbItemBoxShadowSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ breadcrumbItemBoxShadowSwitcher: value })}
 				/>
+
+				{breadcrumbItemBoxShadowSwitcher === 'normal' && (
+					<FB_BoxShadowControl
+						label={__("Normal Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) => setAttributes({ breadcrumbItemBoxShadowValues: value })}
+						initialShadowValue={breadcrumbItemBoxShadowValues}
+						onBoxShadowStyleChange={(value) => setAttributes({ breadcrumbItemBoxShadowCssValue: value })}
+					/>
+				)}
+
+				{breadcrumbItemBoxShadowSwitcher === 'hover' && (
+					<FB_BoxShadowControl
+						label={__("Hover Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) => setAttributes({ breadcrumbItemBoxShadowHoverValues: value })}
+						initialShadowValue={breadcrumbItemBoxShadowHoverValues}
+						onBoxShadowStyleChange={(value) => setAttributes({ breadcrumbItemBoxShadowHoverCssValue: value })}
+					/>
+				)}
+
 
 				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
@@ -1760,80 +2045,78 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				</PanelBody>
 			)}
-			{separatorType === 'icon' && (
-				<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
-					<FB_Range
-						min={1}
-						max={200}
-						label={__("Icon Size", "frontis-blocks")}
-						rangeValue={breadcrumbSeperatorSize}
-						onChangeHandler={(value) => setAttributes({ breadcrumbSeperatorSize: value })}
-						rangeUnitHandler={(value) => setAttributes({ breadcrumbSeperatorSizeUnits: value })}
-						deviceType={deviceType}
-						units={breadcrumbSeperatorSizeUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={"100"}
+			<PanelBody title={__("Separator", "frontis-blocks")} initialOpen={false}>
+				<FB_Range
+					min={1}
+					max={200}
+					label={__("Icon Size", "frontis-blocks")}
+					rangeValue={breadcrumbSeperatorSize}
+					onChangeHandler={(value) => setAttributes({ breadcrumbSeperatorSize: value })}
+					rangeUnitHandler={(value) => setAttributes({ breadcrumbSeperatorSizeUnits: value })}
+					deviceType={deviceType}
+					units={breadcrumbSeperatorSizeUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={"100"}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={breadcrumbSeperatorColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ breadcrumbSeperatorColorSwitcher: value })}
+				/>
+
+				{breadcrumbSeperatorColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={breadcrumbSeperatorColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorColor: value === undefined ? '' : value })}
 					/>
+				)}
 
-					<FB_SwitcherControl
-						label={__("Color", "frontis-blocks")}
-						globalSwitcher={breadcrumbSeperatorColorSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ breadcrumbSeperatorColorSwitcher: value })}
+				{breadcrumbSeperatorColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={breadcrumbSeperatorHoverColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorHoverColor: value === undefined ? '' : value })}
 					/>
+				)}
 
-					{breadcrumbSeperatorColorSwitcher === 'normal' && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={breadcrumbSeperatorColor}
-							setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorColor: value === undefined ? '' : value })}
-						/>
-					)}
+				<FB_SwitcherControl
+					label={__("Background Color", "frontis-blocks")}
+					globalSwitcher={breadcrumbSeperatorBgColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ breadcrumbSeperatorBgColorSwitcher: value })}
+				/>
 
-					{breadcrumbSeperatorColorSwitcher === 'hover' && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={breadcrumbSeperatorHoverColor}
-							setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorHoverColor: value === undefined ? '' : value })}
-						/>
-					)}
-
-					<FB_SwitcherControl
-						label={__("Background Color", "frontis-blocks")}
-						globalSwitcher={breadcrumbSeperatorBgColorSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ breadcrumbSeperatorBgColorSwitcher: value })}
+				{breadcrumbSeperatorBgColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={breadcrumbSeperatorBgColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorBgColor: value === undefined ? '' : value })}
 					/>
+				)}
 
-					{breadcrumbSeperatorBgColorSwitcher === 'normal' && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={breadcrumbSeperatorBgColor}
-							setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorBgColor: value === undefined ? '' : value })}
-						/>
-					)}
-
-					{breadcrumbSeperatorBgColorSwitcher === 'hover' && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={breadcrumbSeperatorBgHoverColor}
-							setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorBgHoverColor: value === undefined ? '' : value })}
-						/>
-					)}
-					<FB_Range
-						min={1}
-						max={200}
-						label={__("Gap", "frontis-blocks")}
-						rangeValue={breadcrumbSeperatorIconGap}
-						onChangeHandler={(value) => setAttributes({ breadcrumbSeperatorIconGap: value })}
-						rangeUnitHandler={(value) => setAttributes({ breadcrumbSeperatorIconGapUnits: value })}
-						deviceType={deviceType}
-						units={breadcrumbSeperatorIconGapUnits}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
+				{breadcrumbSeperatorBgColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={breadcrumbSeperatorBgHoverColor}
+						setGlobalColor={(value) => setAttributes({ breadcrumbSeperatorBgHoverColor: value === undefined ? '' : value })}
 					/>
-				</PanelBody>
-			)}
+				)}
+				<FB_Range
+					min={1}
+					max={200}
+					label={__("Gap", "frontis-blocks")}
+					rangeValue={breadcrumbSeperatorIconGap}
+					onChangeHandler={(value) => setAttributes({ breadcrumbSeperatorIconGap: value })}
+					rangeUnitHandler={(value) => setAttributes({ breadcrumbSeperatorIconGapUnits: value })}
+					deviceType={deviceType}
+					units={breadcrumbSeperatorIconGapUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+			</PanelBody>
 			{showItemIcon && (
 				<PanelBody title={__("Item Icons", "frontis-blocks")} initialOpen={false}>
 					<FB_Range
