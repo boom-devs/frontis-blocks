@@ -7,6 +7,14 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    breadcrumbAlignment:{
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
 	// Separator Settings
 	separatorType: {
 		type: 'string',
