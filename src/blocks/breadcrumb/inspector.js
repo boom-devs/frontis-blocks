@@ -273,7 +273,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
-				blockId: "fb-breadcrumb-" + clientId.slice(0, 8),
+				blockID: "fb-breadcrumb-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
@@ -1284,8 +1284,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${breadcrumbSeperatorSize?.Mobile ? `font-size: ${breadcrumbSeperatorSize?.Mobile}${breadcrumbSeperatorSizeUnits?.Mobile};` : ''}
 				}
 			}
-		`,
-		[
+    `, [
 		blockID,
 		separatorType,
 		separatorText,
