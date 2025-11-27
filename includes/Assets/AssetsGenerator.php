@@ -1052,6 +1052,8 @@ class AssetsGenerator
 		$typography_data = get_option('fb_typography');
 		$custom_fonts = Helper::extract_font_families($custom_typography);
 		$typography_fonts = Helper::extract_font_families($typography_data);
+
+		// var_dump($this->block_fonts);
 		$fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
 		$fonts_families = $this->marged_fonts_array($fonts_families);
 
@@ -1085,6 +1087,7 @@ class AssetsGenerator
 			if (!empty($font_parts)) {
 				$font_url .= implode("|", $font_parts) . "&display=swap";
 				update_option('fb_google_fonts_url', $font_url);
+				update_post_meta($this->post->ID, 'fb_google_fonts_url', $font_url);
 			}
 		}
 	}

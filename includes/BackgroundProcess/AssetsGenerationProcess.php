@@ -47,10 +47,10 @@ class AssetsGenerationProcess {
                     error_log("Row ID {$row->job_id} not found, skipping...");
 
                     // Write php file
-                    $myfile = fopen($row->job_id."skipped.txt", "w") or die("Unable to open file!");
-                    $txt = "Row ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
+                    // $myfile = fopen($row->job_id."skipped.txt", "w") or die("Unable to open file!");
+                    // $txt = "Row ID {$row->job_id} not found, skipping...";
+                    // fwrite($myfile, json_encode($txt));
+                    // fclose($myfile);
                     continue;
                 }
                 
@@ -59,10 +59,10 @@ class AssetsGenerationProcess {
                     error_log("Post ID {$row->job_id} not found, skipping...");
 
                     // Write php file
-                    $myfile = fopen($row->job_id."skipped_post.txt", "w") or die("Unable to open file!");
-                    $txt = "Post ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
+                    // $myfile = fopen($row->job_id."skipped_post.txt", "w") or die("Unable to open file!");
+                    // $txt = "Post ID {$row->job_id} not found, skipping...";
+                    // fwrite($myfile, json_encode($txt));
+                    // fclose($myfile);
                     continue;
                 }
                 
