@@ -11,7 +11,15 @@
 @import "./full-site-import-modal.scss";
 @import "./../global-settings/scss/global-settings.scss";
 
+#frontis-dl {
 .fb-template-library-button-wrapper {
+	position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+    background-color: $white-color;
+    border-radius: 24px;
+
 	button {
 		background: $primary-color-base;
 		color: $white-color;
@@ -33,6 +41,7 @@
 			}
 		}
 	}
+}
 }
 
 body {
