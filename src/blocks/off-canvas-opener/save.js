@@ -53,7 +53,7 @@ export default function save({ attributes }) {
     
     return (
         <div {...blockProps}>
-            {/* Hamburger Icon Button */}
+            {/* Toggle Button */}
             <div 
                 className="fb-menu-toggle-btn"
                 role="button"
@@ -66,6 +66,16 @@ export default function save({ attributes }) {
             
             {/* Off-Canvas Menu Container */}
             <div className={`fb-off-canvas-menu ${menuPositionClass} ${menuAnimationClass}`}>
+                {/* Close Button */}
+                <div className="fb-off-canvas-header">
+                    <button
+                        className="fb-close-menu"
+                        aria-label={__('Close menu', 'frontis-blocks')}
+                    >
+                        ×
+                    </button>
+                </div>
+                
                 <div {...innerBlocksProps} />
             </div>
             
