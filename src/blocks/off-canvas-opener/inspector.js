@@ -8,23 +8,48 @@ import {
 	TabPanel,
 	SelectControl,
 } from '@wordpress/components';
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
 import {
 	ANIMATION
 } from "./constants/constants";
+import FBIconPicker from "../../components/icon-picker";
+import "./editor.scss";
+import FB_Range from "@Components/range";
+import FB_Spacing from "@Components/spacing";
+import FB_BoxShadowControl from "@Components/box-shadow";
+import FB_TypographyControl from '@Components/typography-control';
+import FB_SwitcherControl from '@Components/switcher-control';
+import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import FB_InputControl from '@Components/input-control';
+import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
+import FB_PositionControl from '@Components/position-control';
+import FB_VisibilityControl from '@Components/visibility-control';
+import FB_InspectorControls from '@Components/InspectorControls';
+import getProToggleControls from '@Utils/getProToggleControls';
+import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
+import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
+import generateSvgIcon from '@Utils/generateSvgIcon';
+import getProActive from '@Utils/getProActive';
+import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
+import FB_GradientColorControl from '@Components/gradient-color-control';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		selectedTemplate,
 		menuPosition,
 		iconStyle,
-		animation
+		offCanvasPanelWidth,
+		offCanvasPanelWidthUnits,
+		offCanvasCustomCSS
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -113,16 +138,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
-	
-
-	// Position options for the menu
-	// const positionOptions = [
-	// 	{ value: 'default', label: __('Default', 'frontis-blocks') },
-	// 	{ value: 'left', label: __('Left', 'frontis-blocks') },
-	// 	{ value: 'right', label: __('Right', 'frontis-blocks') },
-	// 	{ value: 'top', label: __('Top', 'frontis-blocks') },
-	// 	{ value: 'bottom', label: __('Bottom', 'frontis-blocks') },
-	// ];
 
 	// Icon style options
 	const iconOptions = [
@@ -131,97 +146,118 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		{ value: 'plus', label: __('Plus Sign', 'frontis-blocks') },
 	];
 
+	const offCanvasStyle = useMemo(
+		() => `
+				.${blockID}.fb-off-canvas-menu-block .fb-off-canvas-menu{
+				
+					${offCanvasPanelWidth?.Desktop ? `width: ${offCanvasPanelWidth?.Desktop}${offCanvasPanelWidthUnits?.Desktop};` : ''}
+				}
+				@media only screen and (max-width: 1024px) {
+					${offCanvasPanelWidth?.Tablet ? `width: ${offCanvasPanelWidth?.Tablet}${offCanvasPanelWidthUnits?.Tablet};` : ''}
+				}
+	
+				@media only screen and (max-width: 768px) {
+					${offCanvasPanelWidth?.Mobile ? `width: ${offCanvasPanelWidth?.Mobile}${offCanvasPanelWidthUnits?.Mobile};` : ''}
+				}
+			`,
+		[
+			attributes
+		],
+	);
+
+	const customCss = getCustomCss(offCanvasCustomCSS, `.${blockID}`);
+
+	useEffect(() => {
+		setAttributes({
+			blockStyle: `${offCanvasStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
+		});
+	}, [offCanvasStyle, customCss]);
+
+	const editorStyle = `${offCanvasStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
+	const generalControls = (
+		<>
+			<PanelBody title={__("Menu Content", "frontis-blocks")} initialOpen={true}>
+				<SelectControl
+					label={__("Select Pattern", "frontis-blocks")}
+					value={selectedTemplate}
+					options={patterns}
+					onChange={(value) => {
+						const content = getSelectedPatternContent(value);
+						setAttributes({
+							selectedTemplate: value,
+							patternContent: content
+						});
+					}}
+					help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
+				/>
+
+				<SelectControl
+					label={__("Animation", "frontis-blocks")}
+					value={menuPosition}
+					options={ANIMATION}
+					onChange={(value) => setAttributes({ menuPosition: value })}
+				/>
+
+				<SelectControl
+					label={__("Icon Style", "frontis-blocks")}
+					value={iconStyle || 'hamburger'}
+					options={iconOptions}
+					onChange={(value) => setAttributes({ iconStyle: value })}
+				/>
+			</PanelBody>
+		</>
+	);
+
+	const styleControls = (
+		<>
+			<PanelBody title={__("Off Canvas", "frontis-blocks")} initialOpen={true}>
+				<FB_Range
+					min={1}
+					max={2000}
+					label={__("Panel Width", "frontis-blocks")}
+					rangeValue={offCanvasPanelWidth}
+					onChangeHandler={(value) => setAttributes({ offCanvasPanelWidth: value })}
+					rangeUnitHandler={(value) => setAttributes({ offCanvasPanelWidthUnits: value })}
+					deviceType={deviceType}
+					units={offCanvasPanelWidthUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+				/>
+			</PanelBody>
+
+			<PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
+				{/* Add styling controls here for the icon */}
+			</PanelBody>
+		</>
+	);
+	const advancedControls = (
+		<>
+			<PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
+				<PanelBody
+					title={__("Custom CSS", "frontis-blocks")}
+					initialOpen={false}
+				>
+					<FB_CustomCSSEditor
+						value={offCanvasCustomCSS}
+						onChangeValue={(value) => setAttributes({ offCanvasCustomCSS: value })}
+					/>
+				</PanelBody>
+			</PanelBody>
+		</>
+	);
+
 	return (
 		<>
 			<style>
+				{editorStyle}
 			</style>
-			<InspectorControls key="controls">
-				<div className="fb-inspector-control">
-					<TabPanel
-						className="fb-parent-tab-panel"
-						activeClass="active-tab"
-						tabs={[
-							{
-								name: "general",
-								title: "General",
-								className: "fb-tab general",
-							},
-							{
-								name: "styles",
-								title: "Style",
-								className: "fb-tab styles",
-							},
-							{
-								name: "advanced",
-								title: "Advanced",
-								className: "fb-tab advance",
-							},
-						]}
-					>
-						{(tab) => (
-							<div className={"fb-tab-controls " + tab.name}>
-								{tab.name === 'general' && (
-									<>
-										<PanelBody title={__("Menu Content", "frontis-blocks")} initialOpen={true}>
-											<SelectControl
-												label={__("Select Pattern", "frontis-blocks")}
-												value={selectedTemplate}
-												options={patterns}
-												onChange={(value) => {
-													const content = getSelectedPatternContent(value);
-													setAttributes({
-														selectedTemplate: value,
-														patternContent: content
-													});
-												}}
-												help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
-											/>
-
-											<SelectControl
-												label={__("Animation", "frontis-blocks")}
-												value={menuPosition}
-												options={ANIMATION}
-												onChange={(value) => setAttributes({ menuPosition: value })}
-											/>
-
-											<SelectControl
-												label={__("Icon Style", "frontis-blocks")}
-												value={iconStyle || 'hamburger'}
-												options={iconOptions}
-												onChange={(value) => setAttributes({ iconStyle: value })}
-											/>
-											{/* <SelectControl
-												label={__("Animation", "frontis-blocks")}
-												value={animation}
-												options={ANIMATION}
-												onChange={(value) => setAttributes({ animation: value })}
-											/> */}
-										</PanelBody>
-									</>
-								)}
-								{tab.name === "styles" && (
-									<>
-										<PanelBody title={__("Menu Styling", "frontis-blocks")} initialOpen={true}>
-											{/* Add styling controls here for the menu */}
-										</PanelBody>
-
-										<PanelBody title={__("Icon Styling", "frontis-blocks")} initialOpen={true}>
-											{/* Add styling controls here for the icon */}
-										</PanelBody>
-									</>
-								)}
-								{tab.name === "advanced" && (
-									<>
-										<PanelBody title={__("Advanced Settings", "frontis-blocks")} initialOpen={true}>
-											{/* Add advanced settings here */}
-										</PanelBody>
-									</>
-								)}
-							</div>
-						)}
-					</TabPanel>
-				</div>
-			</InspectorControls>
+			<FB_InspectorControls
+				generalControls={generalControls}
+				styleControls={styleControls}
+				advancedControls={advancedControls}
+			/>
 		</>
 	);
 }

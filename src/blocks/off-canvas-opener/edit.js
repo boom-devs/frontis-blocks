@@ -24,7 +24,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const patternData = useSelect(select => {
 		if (!selectedTemplate) return null;
 	
-		// Check if it's a user pattern (starts with 'user-')
 		if (selectedTemplate.startsWith('user-')) {
 			const id = parseInt(selectedTemplate.replace('user-', ''), 10);
 			
@@ -33,7 +32,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				const userPatterns = select('core').getEntityRecords('postType', 'wp_block') || [];
 				const userPattern = userPatterns.find(p => p.id === id);
 				
-				// For user patterns, content is in content.raw
 				if (userPattern && userPattern.content && userPattern.content.raw) {
 					return {
 						content: userPattern.content.raw
@@ -41,7 +39,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				}
 			}
 		} else {
-			// It's a core pattern
 			if (select('core')) {
 				const patterns = select('core').getBlockPatterns() || [];
 				return patterns.find(pattern => pattern.name === selectedTemplate);
@@ -103,7 +100,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
 	const menuOpenClass = isMenuOpen ? 'fb-menu-open' : '';
-	const menuAnimationClass = animation ? `fb-animation-${animation}` : '';
 
 	const blockProps = useBlockProps({
 		className: `fb-off-canvas-menu-block ${blockID} ${menuOpenClass}`,
@@ -145,6 +141,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 			{/* Off-Canvas Menu Container */}
 			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
+				{/* Close Button */}
+				<div className="fb-off-canvas-header">
+					<button
+						className="fb-close-menu"
+						onClick={() => setIsMenuOpen(false)}
+						aria-label={__('Close menu', 'frontis-blocks')}
+					>
+						×
+					</button>
+				</div>
+
 				{selectedTemplate ? (
 					<div {...innerBlocksProps} />
 				) : (

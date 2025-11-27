@@ -3,6 +3,10 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	blockStyle: {
+        type: 'string',
+        default: '',
+    },
 	selectedTemplate: {
 		type: "string",
 		default: ""
@@ -27,7 +31,26 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
-	
+	offCanvasPanelWidth: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    offCanvasPanelWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	offCanvasCustomCSS : {
+        type: 'string',
+        default: '',
+    },
 };
 
 export default attributes;

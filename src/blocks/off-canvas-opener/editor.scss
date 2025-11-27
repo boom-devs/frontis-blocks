@@ -6,11 +6,12 @@
         cursor: pointer;
         display: inline-block;
         padding: 10px;
-        // Common styles for all icon types
+
         .fb-menu-icon {
             position: relative;
             transition: transform 0.3s ease-in-out;
         }
+
         .fb-hamburger-icon {
             width: 30px;
             height: 20px;
@@ -50,20 +51,24 @@
                     top: 8px;
                     transform: rotate(45deg);
                 }
+
                 &:nth-child(2) {
                     opacity: 0;
                     width: 0;
                 }
+
                 &:nth-child(3) {
                     top: 8px;
                     transform: rotate(-45deg);
                 }
             }
         }
+
         .fb-dots-icon {
             width: 30px;
             height: 20px;
             position: relative;
+
             span {
                 display: block;
                 position: absolute;
@@ -71,7 +76,7 @@
                 height: 5px;
                 background: #333;
                 border-radius: 50%;
-                left: 12.5px; // Center the dots
+                left: 12.5px;
                 transition: .25s ease-in-out;
 
                 &:nth-child(1) {
@@ -127,6 +132,7 @@
                 background: #333;
                 border-radius: 3px;
                 transition: .25s ease-in-out;
+
                 &:nth-child(1) {
                     width: 100%;
                     height: 3px;
@@ -142,6 +148,7 @@
                 }
             }
         }
+
         // Animation for plus icon to X
         &.active .fb-plus-icon,
         .fb-plus-icon.active {
@@ -150,6 +157,7 @@
                     transform: rotate(45deg);
                     top: 13.5px; // Adjust based on height
                 }
+
                 &:nth-child(2) {
                     transform: rotate(45deg);
                     left: 13.5px; // Adjust based on width
@@ -220,9 +228,10 @@
         background-color: #fff;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
         z-index: 999;
-        width: 80%;
-        height: auto;
-        top: 80px;
+        width: 350px;
+        height: 100vh;
+        overflow-y: auto;
+        top: 0;
         transition: transform 0.3s ease;
         overflow-y: auto;
 
@@ -264,6 +273,7 @@
             z-index: -1;
             left: 0;
             visibility: hidden;
+
             &.open {
                 opacity: 1;
                 transform: translateX(0) translateY(0);
@@ -278,6 +288,7 @@
             transform: scale(0.7);
             transition: opacity 0.3s ease, transform 0.3s ease;
             visibility: hidden;
+
             &.open {
                 opacity: 1;
                 transform: scale(1) translateX(0) translateY(0);
@@ -291,11 +302,13 @@
             transform: perspective(1000px) rotateY(-90deg);
             transition: opacity 0.3s ease, transform 0.3s ease;
             transform-origin: left center;
+
             &.open {
                 opacity: 1;
                 transform: perspective(1000px) rotateY(0deg);
             }
         }
+
         &.open {
             transform: translateX(0) translateY(0);
         }
@@ -305,16 +318,39 @@
     .fb-off-canvas-header {
         display: flex;
         justify-content: flex-end;
-        padding: 10px;
+        align-items: center;
+        padding: 15px 20px;
         border-bottom: 1px solid #eee;
+        position: sticky;
+        top: 0;
+        background-color: #fff;
+        z-index: 10;
 
         .fb-close-menu {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 32px;
             cursor: pointer;
-            padding: 5px;
+            padding: 0;
             line-height: 1;
+            color: #333;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            border-radius: 4px;
+
+            &:hover {
+                background-color: #f5f5f5;
+                color: #000;
+            }
+
+            &:focus {
+                outline: 2px solid #0073aa;
+                outline-offset: 2px;
+            }
         }
     }
 
