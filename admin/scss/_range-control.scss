@@ -5,11 +5,12 @@
     }
     .components-range-control__root {
         position: relative;
+        padding-left: 8px;
 
         .components-range-control__number {
             .components-input-control__container {
                 width: 100%;
-                border-radius: 6px;
+                border-radius: 4px;
             }
         }
 

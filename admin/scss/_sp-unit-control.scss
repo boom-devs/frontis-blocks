@@ -2,16 +2,20 @@
 .fb-unit-wrapper {
 	display: flex;
 	align-items: center;
-    border-radius: 6px;
+    border-radius: 4px;
     background: $neutral-color-50;
 	height: 28px;
+
 	.fb-reset-control-container {
         padding: 6px 10px;
         border-right: 1px solid $white-color;
+		width: 36px;
+
 		.fb-reset-button {
             background-color: unset;
 			align-items: center;
 			border: 0;
+			padding: 0;
 			cursor: pointer !important;
 			display: flex;
 			justify-content: center;
@@ -45,7 +49,10 @@
 .fb-setting-units-type {
 	position: relative;
 	display: inline-block;
-    padding: 6px 10px;
+    padding: 6px;
+	width: 36px;
+	height: 100%;
+
 	.fb-setting-units-current {
         font-family: $heading-font-family;
         font-size: $unit-font-size;
@@ -82,7 +89,7 @@
 			font-weight: 400;
 			&.active {
 				font-weight: 400;
-				color: $primary-color-base;
+				color: $neutral-color-900;
 			}
 			&:hover {
 				background: $neutral-color-100;
