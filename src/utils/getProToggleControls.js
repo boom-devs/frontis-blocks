@@ -104,8 +104,8 @@ const getProToggleControls = ({
               <h3 className="fb-pro-card-heading">Upgrade to PRO</h3>
               <p className="fb-pro-card-text">Get 1 month free and unlock</p>
             </div>
-            <div className="fb-pro-upgrade-btn">
-              <div className="fb-pro-upgrade-btn-one">
+            <div className="fb-pro-upgrade-btn-wrapper">
+              <div className="fb-pro-upgrade-now-btn">
                 <a href="#">Upgrade Now</a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ const getProToggleControls = ({
                   />
                 </svg>
               </div>
-              <div className="fb-pro-upgrade-btn-two">
+              <div className="fb-pro-upgrade-doc-btn">
                 <a href="#">Documentation</a>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

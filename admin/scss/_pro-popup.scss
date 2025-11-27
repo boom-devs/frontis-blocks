@@ -56,8 +56,8 @@
     }
   }
 
-  .fb-pro-upgrade-btn {
-    .fb-pro-upgrade-btn-one {
+  .fb-pro-upgrade-btn-wrapper {
+    .fb-pro-upgrade-now-btn {     
       display: flex;
       justify-content: center;
       align-items: center;
@@ -65,7 +65,7 @@
       background: #3991ff;
       border: 1px solid transparent;
       color: #ffffff;
-      padding: 10px 35px;
+      padding: 10px 32px;
       border-radius: 4px;
       cursor: pointer;
       transition: 0.3s;
@@ -85,7 +85,7 @@
       }
     }
 
-    .fb-pro-upgrade-btn-one {
+    .fb-pro-upgrade-now-btn {
       a {
         color: #ffffff;
         text-decoration: none;
@@ -96,7 +96,7 @@
       }
     }
 
-    .fb-pro-upgrade-btn-two {
+    .fb-pro-upgrade-doc-btn {
       display: flex;
       gap: 2px;
       justify-content: center;
@@ -116,7 +116,7 @@
       }
     }
 
-    .fb-pro-upgrade-btn-two {
+    .fb-pro-upgrade-doc-btn {
       a {
         color: #555e72;
         text-decoration: none;
