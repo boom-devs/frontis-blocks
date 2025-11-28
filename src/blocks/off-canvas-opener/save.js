@@ -79,7 +79,7 @@ export default function save({ attributes }) {
 
                         {(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
                             <div
-                                className="fb-close-menu"
+                                className="fb-close-menu icon"
                                 aria-label={__('Close menu', 'frontis-blocks')}
                             >
                                 {renderSVG(closeMenuIcon)}
