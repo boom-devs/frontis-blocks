@@ -4,11 +4,12 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { useState, useEffect } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { parse } from '@wordpress/blocks';
 import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -21,7 +22,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		menuType,
 		closeMenuType,
 		closeMenuIcon,
-		closeMenuText
+		closeMenuText,
+		offCanvasGlobalWraperClass,
+		offCanvasGlobalWraperID,
+		offCanvasDesktopSwitcher,
+		offCanvasTabletSwitcher,
+		offCanvasMobileSwitcher
 	} = attributes;
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,12 +100,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		);
 	};
 
+	/**
+		* Manages tab button settings and switches to block settings on click
+		*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	const menuPositionClass = `fb-off-canvas-menu-${menuPosition}`;
 	const menuOpenClass = isMenuOpen ? 'fb-menu-open' : '';
 
 	const blockProps = useBlockProps({
-		className: `fb-off-canvas-menu-block ${blockID} ${menuOpenClass}`,
+		className: `fb-off-canvas-menu-block ${blockID} ${offCanvasDesktopSwitcher && 'fb-desktop-responsive'} ${offCanvasTabletSwitcher && 'fb-tablet-responsive'} ${offCanvasMobileSwitcher && 'fb-mobile-responsive'}`
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -119,64 +130,65 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				clientId={clientId}
 			/>
 
+			<div className={`fb-off-canvas-menu-container ${offCanvasGlobalWraperClass}`} id={offCanvasGlobalWraperID} ref={panelRef}>
+				<div
+					className={`fb-menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
+					onClick={() => setIsMenuOpen(!isMenuOpen)}
+					role="button"
+					tabIndex="0"
+					aria-expanded={isMenuOpen}
+					aria-label={isMenuOpen ? __('Close menu', 'frontis-blocks') : __('Open menu', 'frontis-blocks')}
+					onKeyDown={(e) => {
+						if (e.key === 'Enter' || e.key === ' ') {
+							setIsMenuOpen(!isMenuOpen);
+						}
+					}}
+				>
+					{(menuType === 'icon' || menuType === 'icon-text') && getIcon()}
+					{(menuType === 'text' || menuType === 'icon-text') && getText()}
+				</div>
 
-			<div
-				className={`fb-menu-toggle-btn ${isMenuOpen ? 'active' : ''}`}
-				onClick={() => setIsMenuOpen(!isMenuOpen)}
-				role="button"
-				tabIndex="0"
-				aria-expanded={isMenuOpen}
-				aria-label={isMenuOpen ? __('Close menu', 'frontis-blocks') : __('Open menu', 'frontis-blocks')}
-				onKeyDown={(e) => {
-					if (e.key === 'Enter' || e.key === ' ') {
-						setIsMenuOpen(!isMenuOpen);
-					}
-				}}
-			>
-				{(menuType === 'icon' || menuType === 'icon-text') && getIcon()}
-				{(menuType === 'text' || menuType === 'icon-text') && getText()}
-			</div>
+				{/* Off-Canvas Menu Container */}
+				<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
+					{/* Close Button */}
+					<div className="fb-off-canvas-header">
+						{(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
+							<div
+								className="fb-close-menu icon"
+								onClick={() => setIsMenuOpen(false)}
+								aria-label={__('Close menu', 'frontis-blocks')}
+							>
+								{renderSVG(closeMenuIcon)}
+							</div>
+						)}
+						{(closeMenuType === 'text' || closeMenuType === 'icon-text') && (
+							<div
+								className="fb-close-menu text"
+								onClick={() => setIsMenuOpen(false)}
+								aria-label={__('Close menu', 'frontis-blocks')}
+							>
+								{closeMenuText}
+							</div>
+						)}
+					</div>
 
-			{/* Off-Canvas Menu Container */}
-			<div className={`fb-off-canvas-menu ${menuPositionClass} ${isMenuOpen ? 'open' : ''}`}>
-				{/* Close Button */}
-				<div className="fb-off-canvas-header">
-					{(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
-						<button
-							className="fb-close-menu"
-							onClick={() => setIsMenuOpen(false)}
-							aria-label={__('Close menu', 'frontis-blocks')}
-						>
-							{renderSVG(closeMenuIcon)}
-						</button>
-					)}
-					{(closeMenuType === 'text' || closeMenuType === 'icon-text') && (
-						<button
-							className="fb-close-menu"
-							onClick={() => setIsMenuOpen(false)}
-							aria-label={__('Close menu', 'frontis-blocks')}
-						>
-							{closeMenuText}
-						</button>
+					{selectedTemplate ? (
+						<div {...innerBlocksProps} />
+					) : (
+						<div className="fb-pattern-placeholder">
+							<p>{__('Select a pattern from the sidebar to display here', 'frontis-blocks')}</p>
+						</div>
 					)}
 				</div>
 
-				{selectedTemplate ? (
-					<div {...innerBlocksProps} />
-				) : (
-					<div className="fb-pattern-placeholder">
-						<p>{__('Select a pattern from the sidebar to display here', 'frontis-blocks')}</p>
-					</div>
+				{/* Overlay */}
+				{isMenuOpen && (
+					<div
+						className={`fb-menu-overlay ${isMenuOpen ? 'active' : ''}`}
+						onClick={() => setIsMenuOpen(false)}
+					></div>
 				)}
 			</div>
-
-			{/* Overlay */}
-			{isMenuOpen && (
-				<div
-					className={`fb-menu-overlay ${isMenuOpen ? 'active' : ''}`}
-					onClick={() => setIsMenuOpen(false)}
-				></div>
-			)}
 		</div>
 	);
 }

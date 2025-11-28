@@ -12,7 +12,8 @@
         .fb-menu-icon {
             position: relative;
             transition: transform 0.3s ease-in-out;
-            svg{
+
+            svg {
                 width: 20px;
                 height: 20px;
             }
@@ -325,7 +326,6 @@
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        padding: 15px 20px;
         position: sticky;
         top: 0;
         gap: 30px;
@@ -339,17 +339,16 @@
             padding: 0;
             line-height: 1;
             color: #333;
-            width: 20px;
-            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
-        }
-    }
 
-    .fb-off-canvas-content {
-        // padding: 20px;
+            svg {
+                width: 20px;
+                height: 20px;
+            }
+        }
     }
 
     .fb-pattern-placeholder {
