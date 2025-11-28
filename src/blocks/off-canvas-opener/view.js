@@ -4,7 +4,7 @@
 
         menuBlocks.forEach(menuBlock => {
             const toggleBtn = menuBlock.querySelector('.fb-menu-toggle-btn');
-            const closeBtn = menuBlock.querySelector('.wp-block-frontis-blocks-off-canvas-closer button');
+            const closeBtn = menuBlock.querySelector('.fb-close-menu');
             const menu = menuBlock.querySelector('.fb-off-canvas-menu');
 
             let overlay = menuBlock.querySelector('.fb-menu-overlay');
@@ -12,6 +12,16 @@
                 overlay = document.createElement('div');
                 overlay.className = 'fb-menu-overlay';
                 menuBlock.appendChild(overlay);
+            }
+
+            function openMenu() {
+                menu.classList.add('open');
+                overlay.classList.add('active');
+                document.body.classList.add('fb-menu-open');
+                menuBlock.classList.add('fb-menu-open');
+                toggleBtn.classList.add('active');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+                toggleBtn.setAttribute('aria-label', 'Close menu');
             }
 
             function closeMenu() {
@@ -25,30 +35,44 @@
                 document.body.classList.remove('fb-menu-open');
             }
 
+            // Toggle button click
             if (toggleBtn) {
                 toggleBtn.addEventListener('click', function () {
-                    menu.classList.add('open');
-                    overlay.classList.add('active');
-                    document.body.classList.add('fb-menu-open');
-                    menuBlock.classList.add('fb-menu-open');
-                    toggleBtn.classList.add('active');
-                    toggleBtn.setAttribute('aria-expanded', 'true');
-                    toggleBtn.setAttribute('aria-label', 'Close menu');
+                    if (menu.classList.contains('open')) {
+                        closeMenu();
+                    } else {
+                        openMenu();
+                    }
+                });
+
+                // Keyboard support for toggle button
+                toggleBtn.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        if (menu.classList.contains('open')) {
+                            closeMenu();
+                        } else {
+                            openMenu();
+                        }
+                    }
                 });
             }
 
+            // Close button click
             if (closeBtn) {
                 closeBtn.addEventListener('click', function () {
                     closeMenu();
                 });
             }
 
+            // Overlay click
             if (overlay) {
                 overlay.addEventListener('click', function () {
                     closeMenu();
                 });
             }
 
+            // Escape key to close
             document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape' && menu.classList.contains('open')) {
                     closeMenu();

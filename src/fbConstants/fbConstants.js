@@ -620,3 +620,20 @@ export const FORM_LAYOUTS = [
     { label: "Compact", value: "compact" },
     { label: "Modern", value: "modern" },
 ];
+
+/** Off canvas menu **/
+export const ANIMATION = [
+    { value: 'left', label: __('Slide Left', 'frontis-blocks') },
+    { value: 'right', label: __('Slide Right', 'frontis-blocks') },
+    { value: 'top', label: __('Slide Top', 'frontis-blocks') },
+    { value: 'bottom', label: __('Slide Bottom', 'frontis-blocks') },
+    { value: 'zoom', label: __('Zoom', 'frontis-blocks') },
+    { value: 'flip', label: __('Flip', 'frontis-blocks') },
+    { value: 'fade', label: __('Fade', 'frontis-blocks') },
+];
+
+export const MENU_TYPE = [
+    { value: 'icon', label: __('Icon', 'frontis-blocks') },
+    { value: 'text', label: __('Text', 'frontis-blocks') },
+    { value: 'icon-text', label: __('Icon With Text', 'frontis-blocks') },
+];
