@@ -149,7 +149,6 @@ const TemplateContent = ({
                         </div>
                     </div>
                     <div className="fb-template-library-content-header-bottom">
-                        <div className="fb-template-library-sort-wrapper"></div>
                         { tagLoading ? (
                             <>
                                 <ClipLoader color="fff" size={24} />
