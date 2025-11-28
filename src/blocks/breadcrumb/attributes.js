@@ -428,8 +428,6 @@ const attributes = {
     /** End breadcrumbItem Border */
 
     /** Start breadcrumbItem Box Shadow */
-
-
     breadcrumbItemBoxShadowSwitcher: {
         type: 'string',
         default: 'normal',

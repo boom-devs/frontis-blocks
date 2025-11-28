@@ -226,7 +226,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuIconRotateHover,
         megaMenuWidthSwitcher,
         megaMenuContentWidthValue,
-        megaMenuContentWidthValueUnits
+        megaMenuContentWidthValueUnits,
+        
     } = attributes;
 
     const deviceType = useDeviceType();
