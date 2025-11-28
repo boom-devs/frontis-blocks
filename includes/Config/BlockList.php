@@ -139,9 +139,9 @@ class BlockList
             'advanced-navigation' => [
                 'slug' => 'advanced-navigation',
                 'title' => 'Advanced Navigation',
-                'package' => 'pro',
+                'package' => 'free',
                 'category' => 'navigation',
-                'badge' => 'pro',
+                'badge' => 'freemium',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
                 'doc' => 'https://wpmessiah.com/',
