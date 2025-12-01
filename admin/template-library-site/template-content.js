@@ -217,6 +217,7 @@ const TemplateContent = ({
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
+                                    console.log(template),
                                     <TemplateGrid
                                         key={template.id}
                                         id={template.id}
@@ -226,6 +227,7 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         preview_url={template.preview_url || ''}
+                                        read_more_url={template.read_more_url || ''}
                                         uploads={template.uploads || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
