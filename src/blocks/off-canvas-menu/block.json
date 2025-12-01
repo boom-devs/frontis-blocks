@@ -1,10 +1,10 @@
 {
 	"apiVersion": 2,
-	"name": "frontis-blocks/off-canvas-opener",
-	"title": "Off-Canvas Opener",
+	"name": "frontis-blocks/off-canvas-menu",
+	"title": "Off-Canvas Menu",
 	"category": "frontis-blocks",
 	"icon": "menu-alt",
-	"description": "Add an off-canvas opener with a toggleable hamburger icon",
+	"description": "Add an off-canvas menu with a toggleable hamburger icon",
 	"textdomain": "frontis-blocks",
 	"supports": {
 		"html": false,
