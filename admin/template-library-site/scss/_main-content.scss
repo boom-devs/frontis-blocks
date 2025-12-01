@@ -1,11 +1,16 @@
 #frontis-dl {
 .fb-template-library-store-content-wrapper {
-    flex: 6;
+    // flex: 6;
     position: relative;
     height: 100%;
-    max-width: 100%;
+    width: 100%;
+    max-width: calc(100% - 345px);
+    box-sizing: border-box;
     
 
+    @media only screen and (max-width: 1200px) {
+        max-width: 100%;
+    }
     @media only screen and (max-width: 768px) {
         height: 100%;
     }
@@ -79,8 +84,10 @@
             padding: 17px 24px;
             background-color: $primary-color;
             border-radius: 12px;
+            width: 100%;
+            box-sizing: border-box;
 
-            @media only screen and (max-width: 767px) {
+            @media only screen and (max-width: 950px) {
                 flex-direction: column;
                 align-items: start;
                 gap: 16px;
@@ -92,18 +99,23 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 24px;
-            padding: 32px 0;
+            padding: 12px 0 32px;
+            width: 100%;
+            box-sizing: border-box;
 
-            @media only screen and (max-width: 1024px) {
-                padding: 24px 0;
-            }
             @media only screen and (max-width: 767px) {
+                padding: 12px 0 24px;
                 display: none;
             }
 
         }
         .fb-template-library-search-wrapper {
+            width: 100%;
+            max-width: 360px;
+
+            @media only screen and (max-width: 575px) {
+                max-width: 100%;
+            }
             .fb-search-input-wrapper {
                 display: flex;
                 align-items: center;
@@ -131,12 +143,8 @@
                     padding: 10px 14px;
                     border-radius: 50px;
                     border: 1px solid $primary-color-400;
-                    min-width: 360px;
+                    width: 100%;
                     outline: none;
-
-                    @media only screen and (max-width: 575px) {
-                        min-width: 260px;
-                    }
 
                     &::placeholder {
                         color: $white-color;
@@ -190,7 +198,7 @@
                 background: $white-color;
                 border-radius: 8px;
 
-                @media only screen and (max-width: 1024px) {
+                @media only screen and (max-width: 1200px) {
                     display: flex;
                 }
 
@@ -211,12 +219,8 @@
         justify-content: end;
         overflow: hidden;
         gap: 14px;
-        width: 450px;
         padding: 10px 40px;
-
-        @media only screen and (max-width:767px) {
-            width: 240px;
-        }
+        width: 100%;
 
         .fb-tag-scroll-container {
             flex: 1;
@@ -503,14 +507,13 @@
         justify-content: center;
         gap: 14px;
         margin-top: 64px;
-        margin-bottom: 90px;
+        margin-bottom: 0;
 
         @media only screen and (max-width: 1024px) {
-            margin-top: 60px;
+            margin-top: 48px;
         }
         @media only screen and (max-width: 768px) {
             flex-wrap: wrap;
-            margin-bottom: 32px;
         }
       
         .fb-page-numbers {
