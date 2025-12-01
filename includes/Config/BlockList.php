@@ -507,7 +507,7 @@ class BlockList
                 'category' => 'navigation',
                 'badge' => 'pro',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/off-canvas-menu.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',

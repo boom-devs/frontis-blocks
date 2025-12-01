@@ -12,7 +12,7 @@ import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.dual_button,
+	icon: FB_Block_Icons.off_canvas_menu,
 	edit: Edit,
 	save
 } );
