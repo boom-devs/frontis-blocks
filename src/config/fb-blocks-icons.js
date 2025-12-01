@@ -993,7 +993,55 @@ const FB_Block_Icons = {
 			strokeLinejoin: 'round',
 		  })
 		]
-	)
+	),
+	off_canvas_menu: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'offCanvasMenuIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: 2,
+			y: 4,
+			width: 20,
+			height: 16,
+			rx: 2.5,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 9,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 12,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 15,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('path', {
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+			d: `M15 9L12 12L15 15`,
+		})
+	),	
 
 };
 
