@@ -503,9 +503,9 @@ class BlockList
             'off-canvas-menu' => [
                 'slug' => 'off-canvas-menu',
                 'title' => 'Off Canvas Menu',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'navigation',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
                 'doc' => 'https://wpmessiah.com/',
