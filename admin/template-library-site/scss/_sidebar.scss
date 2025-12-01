@@ -14,13 +14,14 @@
         border: 1px solid $neutral-color-50;
         overflow: hidden;
 
-        @media only screen and (max-width: 1024px) {
+        @media only screen and (max-width: 1200px) {
             position: absolute;
             z-index: 20;
             top: 10px;
             left: 10px;
             transform: translateX(-110%);
             transition: transform 0.3s ease-in-out;
+            overflow: visible;
 
             &.collapsed {
                 transform: translateX(0);
@@ -37,6 +38,8 @@
             gap: 8px;
             justify-content: space-between;
             padding: 24px;
+            height: 80px;
+            box-sizing: border-box;
             background-color: $primary-color;
             border-radius: 12px 12px 0 0;
 
@@ -199,7 +202,7 @@
         z-index: 10;
         transition: left 0.1s ease;
 
-        @media only screen and (max-width: 1024px) {
+        @media only screen and (max-width: 1200px) {
             display: flex;
         }
 
