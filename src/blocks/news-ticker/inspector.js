@@ -3166,38 +3166,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				initialOpen={true}
 				className="fb-setting-layout-header"
 				>
-					<FB_SwitcherControl
-						label={__("Border Color", "frontis-blocks")}
-						globalSwitcher={tickerTimerColorSwitcher}
-						setGlobalSwitcher={(value) =>
-							setAttributes({ tickerTimerColorSwitcher: value })
-						}
-					/>
-
-					{tickerTimerColorSwitcher === "normal" && (
-						<FB_ColorControl
-							label={__("Color", "frontis-blocks")}
-							globalColor={tickerTimerColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									tickerTimerColor: value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
-
-					{tickerTimerColorSwitcher === "hover" && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={tickerTimerHoverColor}
-							setGlobalColor={(value) =>
-								setAttributes({
-									tickerTimerHoverColor:
-										value === undefined ? "" : value,
-								})
-							}
-						/>
-					)}
 
 					<FB_TypographyControl
 						globalTypoControlActive={true}
@@ -3251,6 +3219,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						deviceType={deviceType}
 						setAttributes={setAttributes}
 					/>
+
+					<FB_SwitcherControl
+						label={__("Text Color", "frontis-blocks")}
+						globalSwitcher={tickerTimerColorSwitcher}
+						setGlobalSwitcher={(value) =>
+							setAttributes({ tickerTimerColorSwitcher: value })
+						}
+					/>
+
+					{tickerTimerColorSwitcher === "normal" && (
+						<FB_ColorControl
+							label={__("Color", "frontis-blocks")}
+							globalColor={tickerTimerColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerColor: value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+
+					{tickerTimerColorSwitcher === "hover" && (
+						<FB_ColorControl
+							label={__("Hover Color", "frontis-blocks")}
+							globalColor={tickerTimerHoverColor}
+							setGlobalColor={(value) =>
+								setAttributes({
+									tickerTimerHoverColor:
+										value === undefined ? "" : value,
+								})
+							}
+						/>
+					)}
+					
 					<FB_Spacing
 						label={__("Padding", "frontis-blocks")}
 						deviceType={deviceType}
