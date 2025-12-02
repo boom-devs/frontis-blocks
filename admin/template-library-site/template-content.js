@@ -210,14 +210,14 @@ const TemplateContent = ({
                     </div>
                 </div>
 
+                <TemplateLibraryCardsSkeleton count={15} />
                 {loading ? (
-                    <TemplateLibraryCardsSkeleton count={15} />
+                <TemplateLibraryCardsSkeleton count={15} />
                 ) : (
                     <>
                         <div className="fb-template-library-cards">
                             {filteredTemplates && filteredTemplates.length > 0 ? (
                                 filteredTemplates.map(template => (
-                                    console.log(template),
                                     <TemplateGrid
                                         key={template.id}
                                         id={template.id}
