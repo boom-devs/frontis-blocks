@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/post-carousel",
+	"version": "1.0.0",
+	"title": "Post Carousel",
+	"category": "frontis-blocks",
+	"description": "A customizable post carousel block with various styling options.",
+	"example": {},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false,
+		"html": false
+    },
+	"textdomain": "frontis-blocks",
+	"usesContext": ["frontisBlocks:arrowsUniqueId"],
+	"editorScript": ["file:./index.js", "frontis-swiper-script"],
+	"editorStyle": ["file:./index.css", "frontis-swiper-style"],
+	"viewScript": "file:./view.js",
+	"style": "file:./style.css"
+}
