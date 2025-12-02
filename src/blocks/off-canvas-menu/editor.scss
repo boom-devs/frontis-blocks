@@ -13,6 +13,11 @@
         gap: 10px;
         cursor: pointer;
 
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
         .fb-menu-icon {
             position: relative;
             transition: transform 0.3s ease-in-out;
