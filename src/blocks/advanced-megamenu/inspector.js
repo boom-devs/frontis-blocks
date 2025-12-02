@@ -1197,7 +1197,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `
                 position: absolute;
                     ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Tablet}${megaMenuContentWidthValueUnits?.Tablet};` : ''}
-                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Tablet}${megaMenuContentTopPositionUnits?.Tablet};` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Tablet}${megaMenuContentTopPositionUnits?.Tablet}; !important` : ''}
                 `
                 : megaMenuWidthSwitcher === "full"
                     ? `
@@ -1241,7 +1241,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `
                 position: absolute;
                     ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Mobile}${megaMenuContentWidthValueUnits?.Mobile};` : ''}
-                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Mobile}${megaMenuContentTopPositionUnits?.Mobile};` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Mobile}${megaMenuContentTopPositionUnits?.Mobile}; !important` : ''}
                 `
                 : megaMenuWidthSwitcher === "full"
                     ? `
