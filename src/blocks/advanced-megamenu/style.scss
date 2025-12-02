@@ -386,3 +386,56 @@
     outline: 2px solid #2563eb;
     outline-offset: 2px;
 }
+/* Toggle button styling */
+.fb-advanced-mega-menu-toggle {
+    display: none;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.fb-advanced-mega-menu-toggle svg {
+    width: 24px;
+    height: 24px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show hamburger icon by default */
+.fb-advanced-mega-menu-toggle .hamburger-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+/* Hide close icon by default */
+.fb-advanced-mega-menu-toggle .close-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(0deg);
+    opacity: 0;
+}
+
+/* When menu is active, hide hamburger and show close icon */
+.fb-advanced-mega-menu-toggle.active .hamburger-icon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
+.fb-advanced-mega-menu-toggle.active .close-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* Show toggle button on mobile/tablet */
+@media (max-width: 1024px) {
+    .fb-advanced-mega-menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
