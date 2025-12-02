@@ -87,6 +87,17 @@
 			&.bottom-left {
 				bottom: 0;
 				left: 0;
+				width: 218px;
+				max-width: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 6px 0;
+			}
+
+			span {
+				color: #ffffff;
+				text-transform: uppercase;
 			}
 		}
 	}

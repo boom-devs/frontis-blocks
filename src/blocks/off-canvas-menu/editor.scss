@@ -1,6 +1,10 @@
 .fb-off-canvas-menu-block {
     position: relative;
 
+    &::after {
+        outline: none !important;
+    }
+
     // Hamburger icon styling
     .fb-menu-toggle-btn {
         display: flex;
@@ -238,7 +242,7 @@
         width: 350px;
         height: 100vh;
         overflow-y: auto;
-        top: 60px;
+        top: 0;
         transition: transform 0.3s ease;
         overflow-y: auto;
 

@@ -49,6 +49,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_GradientColorControl from '@Components/gradient-color-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
 import './editor.scss';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
@@ -377,7 +378,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		menuCloserTextDesktopMargin,
 		menuCloserTextTabMargin,
 		menuCloserTextMobileMargin,
-		menuCloserTextMarginLink
+		menuCloserTextMarginLink,
+		offCanvasOverlayBackgroundColorSwitcher,
+		offCanvasOverlayBackgroundColor,
+		offCanvasOverlayBackgroundHoverColor,
+		offCanvasOverlayBackgroundGradientColor,
+		offCanvasOverlayBackgroundHoverGradientColor,
+		offCanvasOverlayBackgroundCustomGradientColorSwitcher,
+		offCanvasOverlayBackgroundCustomGradientColor,
+		offCanvasOverlayBackgroundHoverCustomGradientColorSwitcher,
+		offCanvasOverlayBackgroundHoverCustomGradientColor,
+		offCanvasOverlayBgColorType,
+		offCanvasOverlayBgHoverColorType,
+		offCanvasOverlayColorType,
+		offCanvasOverlayHoverColorType,
+		offCanvasOverlayHoverColor,
+		offCanvasOverlayGradientColor,
+		offCanvasOverlayHoverGradientColor,
+		offCanvasOverlayCustomGradientColorSwitcher,
+		offCanvasOverlayCustomGradientColor,
+		offCanvasOverlayHoverCustomGradientColorSwitcher,
+		offCanvasOverlayHoverCustomGradientColor,
+		offCanvasOverlayOpacity,
+		offCanvasOverlayOpacityUnits
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -2726,6 +2749,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${menuCloserTextBorderHoverColor ? `border-color: ${menuCloserTextBorderHoverColor};` : ''}
 					${menuCloserTextBoxShadowHoverCssValue ? `box-shadow: ${menuCloserTextBoxShadowHoverCssValue};` : ''}
 				}	
+				.${blockID}.fb-off-canvas-menu-block .fb-menu-overlay{
+					${offCanvasOverlayColorType === 'gradient' ? `
+						background: ${offCanvasOverlayCustomGradientColorSwitcher && offCanvasOverlayCustomGradientColor ? offCanvasOverlayCustomGradientColor : offCanvasOverlayGradientColor};
+						${offCanvasOverlayCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+						${offCanvasOverlayGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+					` : ''}
+						${offCanvasOverlayBgColorType === "gradient"
+					? `background: ${offCanvasOverlayBackgroundCustomGradientColorSwitcher && offCanvasOverlayBackgroundCustomGradientColor
+						? offCanvasOverlayBackgroundCustomGradientColor
+						: offCanvasOverlayBackgroundGradientColor
+					};`
+					: offCanvasOverlayBackgroundColor ? `background: ${offCanvasOverlayBackgroundColor};` : ''
+					}
+				}
+				.${blockID}.fb-off-canvas-menu-block .fb-menu-overlay.active{
+					${offCanvasOverlayOpacity?.Desktop ? `opacity: ${offCanvasOverlayOpacity?.Desktop}${offCanvasOverlayOpacityUnits?.Desktop};` : ''}
+				}
+				.${blockID}.fb-off-canvas-menu-block .fb-menu-overlay:hover{
+					${offCanvasOverlayHoverColorType === 'gradient' ? `
+						background: ${offCanvasOverlayHoverCustomGradientColorSwitcher && offCanvasOverlayHoverCustomGradientColor ? offCanvasOverlayHoverCustomGradientColor : offCanvasOverlayHoverGradientColor};
+						${offCanvasOverlayHoverCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+						${offCanvasOverlayHoverGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
+					` : ''}
+						${offCanvasOverlayHoverColorType === "gradient"
+					? `background: ${offCanvasOverlayHoverCustomGradientColorSwitcher && offCanvasOverlayHoverCustomGradientColor
+						? offCanvasOverlayHoverCustomGradientColor
+						: offCanvasOverlayHoverGradientColor
+					};`
+					: offCanvasOverlayBackgroundHoverColor ? `background: ${offCanvasOverlayBackgroundHoverColor};` : ''
+					}
+				}
 				@media only screen and (max-width: 1024px) {
 					.${blockID}.fb-off-canvas-menu-block{
 						${offCanvasGlobalZIndex?.Tablet ? `z-index: ${offCanvasGlobalZIndex?.Tablet};` : ''}
@@ -2879,32 +2933,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}}
 				/>
 				{(menuType === 'icon' || menuType === 'icon-text') && (
-					<FBIconPicker
-						value={hamburgerIcon}
-						setIconHandler={hamburgerIconHandler}
-					/>
+					<BaseControl>
+						<FBIconPicker
+							value={hamburgerIcon}
+							setIconHandler={hamburgerIconHandler}
+						/>
+					</BaseControl>
 				)}
 				{(menuType === 'text' || menuType === 'icon-text') && (
-					<TextControl
-						label={__("Text", "frontis-blocks")}
-						value={hamburgerText}
-						onChange={(value) => setAttributes({ hamburgerText: value })}
-					/>
+					<BaseControl>
+						<TextControl
+							label={__("Text", "frontis-blocks")}
+							value={hamburgerText}
+							onChange={(value) => setAttributes({ hamburgerText: value })}
+						/>
+					</BaseControl>
 				)}
-				<SelectControl
-					label={__("Select Pattern", "frontis-blocks")}
-					value={selectedTemplate}
-					options={patterns}
-					onChange={(value) => {
-						const content = getSelectedPatternContent(value);
-						setAttributes({
-							selectedTemplate: value,
-							patternContent: content
-						});
-					}}
-					help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
-				/>
-
+				<BaseControl>
+					<SelectControl
+						label={__("Select Pattern", "frontis-blocks")}
+						value={selectedTemplate}
+						options={patterns}
+						onChange={(value) => {
+							const content = getSelectedPatternContent(value);
+							setAttributes({
+								selectedTemplate: value,
+								patternContent: content
+							});
+						}}
+						help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
+					/>
+				</BaseControl>
 				<SelectControl
 					label={__("Animation", "frontis-blocks")}
 					value={menuPosition}
@@ -3250,764 +3309,815 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				)}
 			</PanelBody>
 
-			<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
-				<FB_SwitcherControl
-					label={__("Icon Type", "frontis-blocks")}
-					globalSwitcher={menuIconTypeSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ menuIconTypeSwitcher: value })}
-					options={[
-						{ label: __('Opener', 'frontis-blocks'), value: 'opener' },
-						{ label: __('Closer', 'frontis-blocks'), value: 'closer' },
-					]
-					}
+			{(menuType === 'icon' || menuType === 'icon-text') && (
+				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+					<FB_SwitcherControl
+						label={__("Icon Type", "frontis-blocks")}
+						globalSwitcher={menuIconTypeSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ menuIconTypeSwitcher: value })}
+						options={[
+							{ label: __('Opener', 'frontis-blocks'), value: 'opener' },
+							{ label: __('Closer', 'frontis-blocks'), value: 'closer' },
+						]
+						}
+					/>
+
+					{menuIconTypeSwitcher === 'opener' && (
+						<>
+							<FB_Range
+								min={1}
+								max={offCanvasHamburgerIconWidthUnits === '%' ? 100 : 500}
+								label={__("Icon Size", "frontis-blocks")}
+								rangeValue={offCanvasHamburgerIconWidth}
+								onChangeHandler={(value) => setAttributes({ offCanvasHamburgerIconWidth: value })}
+								rangeUnitHandler={(value) => setAttributes({ offCanvasHamburgerIconWidthUnits: value })}
+								deviceType={deviceType}
+								units={offCanvasHamburgerIconWidthUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+
+							<FB_Range
+								min={1}
+								max={offCanvasHamburgerIconBgWidthUnits === '%' ? 100 : 500}
+								label={__("Background Size", "frontis-blocks")}
+								rangeValue={offCanvasHamburgerIconBgWidth}
+								onChangeHandler={(value) => setAttributes({ offCanvasHamburgerIconBgWidth: value })}
+								rangeUnitHandler={(value) => setAttributes({ offCanvasHamburgerIconBgWidthUnits: value })}
+								deviceType={deviceType}
+								units={offCanvasHamburgerIconBgWidthUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Icon Color", "frontis-blocks")}
+								globalSwitcher={offCanvashamburgerIconColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconColorSwitcher: value })}
+							/>
+
+							{offCanvashamburgerIconColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvashamburgerIconColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_SwitcherControl
+								label={__("Background Color", "frontis-blocks")}
+								globalSwitcher={offCanvashamburgerIconBgColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconBgColorSwitcher: value })}
+							/>
+
+							{offCanvashamburgerIconBgColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconBgColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBgColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvashamburgerIconBgColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconBgHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBgHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Padding", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={offCanvasHamburgerIconPaddingUnitsHandler}
+								spacingUnits={offCanvasHamburgerIconPaddingUnits}
+								spacingDesktop={offCanvasHamburgerIconDesktopPadding}
+								spacingTablet={offCanvasHamburgerIconTabletPadding}
+								spacingMobile={offCanvasHamburgerIconMobilePadding}
+								handleSpacingUnitHandler={offCanvasHamburgerIconPaddingUnitsChange}
+								spacingCombineBtn={offCanvasHamburgerIconPaddingLink}
+								spacingCombineBtnHandler={offCanvasHamburgerIconPaddingLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Margin", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={offCanvasHamburgerIconMarginUnitsHandler}
+								spacingUnits={offCanvasHamburgerIconMarginUnits}
+								spacingDesktop={offCanvasHamburgerIconDesktopMargin}
+								spacingTablet={offCanvasHamburgerIconTabletMargin}
+								spacingMobile={offCanvasHamburgerIconMobileMargin}
+								handleSpacingUnitHandler={offCanvasHamburgerIconMarginUnitsChange}
+								spacingCombineBtn={offCanvasHamburgerIconMarginLink}
+								spacingCombineBtnHandler={offCanvasHamburgerIconMarginLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<SelectControl
+								label={__("Border Style", "frontis-blocks")}
+								value={offCanvashamburgerIconBorder}
+								options={BORDER_STYLES}
+								onChange={(value) => setAttributes({ offCanvashamburgerIconBorder: value })}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Border Color", "frontis-blocks")}
+								globalSwitcher={offCanvashamburgerIconBorderColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconBorderColorSwitcher: value })}
+							/>
+
+							{offCanvashamburgerIconBorderColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconBorderColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBorderColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvashamburgerIconBorderColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvashamburgerIconBorderHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBorderHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Border", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={handleoffCanvashamburgerIconBorderUnitsChange}
+								spacingUnits={offCanvashamburgerIconBorderUnits}
+								spacingDesktop={offCanvashamburgerIconDesktopBorderWidth}
+								spacingTablet={offCanvashamburgerIconTabBorderWidth}
+								spacingMobile={offCanvashamburgerIconMobileBorderWidth}
+								handleSpacingUnitHandler={handleoffCanvashamburgerIconBorderWidthChange}
+								spacingCombineBtn={offCanvashamburgerIconBorderLink}
+								spacingCombineBtnHandler={handleoffCanvashamburgerIconBorderLinkToggle}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Border Radius", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={handleoffCanvashamburgerIconBorderRadiusUnitsChange}
+								spacingUnits={offCanvashamburgerIconBorderRadiusUnits}
+								spacingDesktop={offCanvashamburgerIconDesktopBorderRadiusWidth}
+								spacingTablet={offCanvashamburgerIconTabBorderRadiusWidth}
+								spacingMobile={offCanvashamburgerIconMobileBorderRadiusWidth}
+								handleSpacingUnitHandler={handleoffCanvashamburgerIconBorderRadiusChange}
+								spacingCombineBtn={offCanvashamburgerIconBorderRadiusLink}
+								spacingCombineBtnHandler={handleoffCanvashamburgerIconBorderRadiusLinkToggle}
+								setAttributes={setAttributes}
+							/>
+						</>
+					)}
+
+					{menuIconTypeSwitcher === 'closer' && (
+						<>
+							<FB_Range
+								min={1}
+								max={offCanvasCloseIconWidthUnits === '%' ? 100 : 500}
+								label={__("Icon Size", "frontis-blocks")}
+								rangeValue={offCanvasCloseIconWidth}
+								onChangeHandler={(value) => setAttributes({ offCanvasCloseIconWidth: value })}
+								rangeUnitHandler={(value) => setAttributes({ offCanvasCloseIconWidthUnits: value })}
+								deviceType={deviceType}
+								units={offCanvasCloseIconWidthUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+
+							<FB_Range
+								min={1}
+								max={offCanvasCloseIconBgWidthUnits === '%' ? 100 : 500}
+								label={__("Background Size", "frontis-blocks")}
+								rangeValue={offCanvasCloseIconBgWidth}
+								onChangeHandler={(value) => setAttributes({ offCanvasCloseIconBgWidth: value })}
+								rangeUnitHandler={(value) => setAttributes({ offCanvasCloseIconBgWidthUnits: value })}
+								deviceType={deviceType}
+								units={offCanvasCloseIconBgWidthUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Icon Color", "frontis-blocks")}
+								globalSwitcher={offCanvasCloseIconColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconColorSwitcher: value })}
+							/>
+
+							{offCanvasCloseIconColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvasCloseIconColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_SwitcherControl
+								label={__("Background Color", "frontis-blocks")}
+								globalSwitcher={offCanvasCloseIconBgColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconBgColorSwitcher: value })}
+							/>
+
+							{offCanvasCloseIconBgColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconBgColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBgColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvasCloseIconBgColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconBgHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBgHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Padding", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={offCanvasCloseIconPaddingUnitsHandler}
+								spacingUnits={offCanvasCloseIconPaddingUnits}
+								spacingDesktop={offCanvasCloseIconDesktopPadding}
+								spacingTablet={offCanvasCloseIconTabletPadding}
+								spacingMobile={offCanvasCloseIconMobilePadding}
+								handleSpacingUnitHandler={offCanvasCloseIconPaddingUnitsChange}
+								spacingCombineBtn={offCanvasCloseIconPaddingLink}
+								spacingCombineBtnHandler={offCanvasCloseIconPaddingLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Margin", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={offCanvasCloseIconMarginUnitsHandler}
+								spacingUnits={offCanvasCloseIconMarginUnits}
+								spacingDesktop={offCanvasCloseIconDesktopMargin}
+								spacingTablet={offCanvasCloseIconTabletMargin}
+								spacingMobile={offCanvasCloseIconMobileMargin}
+								handleSpacingUnitHandler={offCanvasCloseIconMarginUnitsChange}
+								spacingCombineBtn={offCanvasCloseIconMarginLink}
+								spacingCombineBtnHandler={offCanvasCloseIconMarginLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<SelectControl
+								label={__("Border Style", "frontis-blocks")}
+								value={offCanvasCloseIconBorder}
+								options={BORDER_STYLES}
+								onChange={(value) => setAttributes({ offCanvasCloseIconBorder: value })}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Border Color", "frontis-blocks")}
+								globalSwitcher={offCanvasCloseIconBorderColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconBorderColorSwitcher: value })}
+							/>
+
+							{offCanvasCloseIconBorderColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconBorderColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBorderColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{offCanvasCloseIconBorderColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={offCanvasCloseIconBorderHoverColor}
+									setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBorderHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Border", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={handleoffCanvasCloseIconBorderUnitsChange}
+								spacingUnits={offCanvasCloseIconBorderUnits}
+								spacingDesktop={offCanvasCloseIconDesktopBorderWidth}
+								spacingTablet={offCanvasCloseIconTabBorderWidth}
+								spacingMobile={offCanvasCloseIconMobileBorderWidth}
+								handleSpacingUnitHandler={handleoffCanvasCloseIconBorderWidthChange}
+								spacingCombineBtn={offCanvasCloseIconBorderLink}
+								spacingCombineBtnHandler={handleoffCanvasCloseIconBorderLinkToggle}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Border Radius", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={handleoffCanvasCloseIconBorderRadiusUnitsChange}
+								spacingUnits={offCanvasCloseIconBorderRadiusUnits}
+								spacingDesktop={offCanvasCloseIconDesktopBorderRadiusWidth}
+								spacingTablet={offCanvasCloseIconTabBorderRadiusWidth}
+								spacingMobile={offCanvasCloseIconMobileBorderRadiusWidth}
+								handleSpacingUnitHandler={handleoffCanvasCloseIconBorderRadiusChange}
+								spacingCombineBtn={offCanvasCloseIconBorderRadiusLink}
+								spacingCombineBtnHandler={handleoffCanvasCloseIconBorderRadiusLinkToggle}
+								setAttributes={setAttributes}
+							/>
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			{(menuType === 'text' || menuType === 'icon-text') && (
+				<PanelBody title={__("Text", "frontis-blocks")} initialOpen={false}>
+					<FB_SwitcherControl
+						label={__("Text Type", "frontis-blocks")}
+						globalSwitcher={menuTextTypeSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ menuTextTypeSwitcher: value })}
+						options={[
+							{ label: __('Opener', 'frontis-blocks'), value: 'opener' },
+							{ label: __('Closer', 'frontis-blocks'), value: 'closer' },
+						]
+						}
+					/>
+
+					{menuTextTypeSwitcher === 'opener' && (
+						<>
+							<FB_TypographyControl
+								globalTypoControlActive={true}
+								globalTypoSwitcher={menuOpenerTextGlobalTypoSwitcher}
+								storeGlobalTypographyData={(value) => setAttributes({ menuOpenerTextGlobalTypographyData: value })}
+
+								globalTypoType={menuOpenerTextGlobalTypoType}
+								onChangeGlobalTypoType={(value) => {
+									setAttributes({
+										menuOpenerTextGlobalTypoType: value,
+										menuOpenerTextGlobalTypoSwitcher: value === 'default' ? { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+									})
+								}}
+
+								globalTypoOption={menuOpenerTextGlobalTypoOption}
+								onChangeGlobalTypoOption={(value) => setAttributes({ menuOpenerTextGlobalTypoOption: value })}
+
+								fontFamily={menuOpenerTextFontFamily}
+								onChangeFontFamily={(value) => setAttributes({ menuOpenerTextFontFamily: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: value && false } })}
+
+								fontSize={menuOpenerTextFontSize}
+								onChangeFontSize={(value) => setAttributes({ menuOpenerTextFontSize: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontSize: value && false } })}
+
+								fontSizeUnits={menuOpenerTextFontSizeUnits}
+								onChangeFontSizeUnit={(value) => setAttributes({ menuOpenerTextFontSizeUnits: value })}
+
+								fontWeight={menuOpenerTextFontWeight}
+								onChangeFontWeight={(value) => setAttributes({ menuOpenerTextFontWeight: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontWeight: value && false } })}
+
+								fontStyle={menuOpenerTextFontStyle}
+								onChangeFontStyle={(value) => setAttributes({ menuOpenerTextFontStyle: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontStyle: value && false } })}
+
+								textTransform={menuOpenerTextTextTransform}
+								onChangeTextTransform={(value) => setAttributes({ menuOpenerTextTextTransform: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, textTransform: value && false } })}
+
+								textDecoration={menuOpenerTextTextDecoration}
+								onChangeTextDecoration={(value) => setAttributes({ menuOpenerTextTextDecoration: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, textDecoration: value && false } })}
+
+								letterSpacing={menuOpenerTextLetterSpacing}
+								onChangeLetterSpacing={(value) => setAttributes({ menuOpenerTextLetterSpacing: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+								letterSpacingUnits={menuOpenerTextLetterSpacingUnits}
+								onChangeLetterSpacingUnit={(value) => setAttributes({ menuOpenerTextLetterSpacingUnits: value })}
+
+								lineHeight={menuOpenerTextLineHeight}
+								onChangeLineHeight={(value) => setAttributes({ menuOpenerTextLineHeight: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, lineHeight: value && false } })}
+
+								lineHeightUnits={menuOpenerTextLineHeightUnits}
+								onChangeLineHeightUnit={(value) => setAttributes({ menuOpenerTextLineHeightUnits: value })}
+
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Color", "frontis-blocks")}
+								globalSwitcher={menuOpenerTextColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextColorSwitcher: value })}
+							/>
+
+							{menuOpenerTextColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuOpenerTextColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuOpenerTextColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuOpenerTextHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+							<FB_SwitcherControl
+								label={__("Background Color", "frontis-blocks")}
+								globalSwitcher={menuOpenerTextBgColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBgColorSwitcher: value })}
+							/>
+
+							{menuOpenerTextBgColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuOpenerTextBgColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextBgColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuOpenerTextBgColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuOpenerTextBgHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextBgHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<SelectControl
+								label={__("Border Style", "frontis-blocks")}
+								value={menuOpenerTextBorder}
+								options={BORDER_STYLES}
+								onChange={(value) => setAttributes({ menuOpenerTextBorder: value })}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Color", "frontis-blocks")}
+								globalSwitcher={menuOpenerTextBorderColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBorderColorSwitcher: value })}
+							/>
+
+							{menuOpenerTextBorderColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuOpenerTextBorderColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextBorderColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuOpenerTextBorderColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuOpenerTextBorderHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuOpenerTextBorderHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Border", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuOpenerTextBorderUnitsHandler}
+								spacingUnits={menuOpenerTextBorderUnits}
+								spacingDesktop={menuOpenerTextDesktopBorder}
+								spacingTablet={menuOpenerTextTabletBorder}
+								spacingMobile={menuOpenerTextMobileBorder}
+								handleSpacingUnitHandler={menuOpenerTextBorderUnitsChange}
+								spacingCombineBtn={menuOpenerTextBorderLink}
+								spacingCombineBtnHandler={menuOpenerTextBorderLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Border Radius", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuOpenerTextBorderRadiusUnitsHandler}
+								spacingUnits={menuOpenerTextBorderRadiusUnits}
+								spacingDesktop={menuOpenerTextDesktopBorderRadius}
+								spacingTablet={menuOpenerTextTabBorderRadius}
+								spacingMobile={menuOpenerTextMobileBorderRadius}
+								handleSpacingUnitHandler={menuOpenerTextBorderRadiusUnitsChange}
+								spacingCombineBtn={menuOpenerTextBorderRadiusLink}
+								spacingCombineBtnHandler={menuOpenerTextBorderRadiusLinkBtn}
+								setAttributes={setAttributes}
+							/>
+
+
+
+							<FB_SwitcherControl
+								label={__("Box Shadow ", "frontis-blocks")}
+								globalSwitcher={menuOpenerTextBoxShadowSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBoxShadowSwitcher: value })}
+							/>
+
+							{menuOpenerTextBoxShadowSwitcher === 'normal' && (
+								<FB_BoxShadowControl
+									label={__("Normal Shadow", "frontis-blocks")}
+									onBoxShadowChange={(value) => setAttributes({ menuOpenerTextBoxShadowValues: value })}
+									initialShadowValue={menuOpenerTextBoxShadowValues}
+									onBoxShadowStyleChange={(value) => setAttributes({ menuOpenerTextBoxShadowCssValue: value })}
+								/>
+							)}
+
+							{menuOpenerTextBoxShadowSwitcher === 'hover' && (
+								<FB_BoxShadowControl
+									label={__("Hover Shadow", "frontis-blocks")}
+									onBoxShadowChange={(value) => setAttributes({ menuOpenerTextBoxShadowHoverValues: value })}
+									initialShadowValue={menuOpenerTextBoxShadowHoverValues}
+									onBoxShadowStyleChange={(value) => setAttributes({ menuOpenerTextBoxShadowHoverCssValue: value })}
+								/>
+							)}
+
+
+							<FB_Spacing
+								label={__("Padding", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuOpenerTextPaddingUnitsHandler}
+								spacingUnits={menuOpenerTextPaddingUnits}
+								spacingDesktop={menuOpenerTextDesktopPadding}
+								spacingTablet={menuOpenerTextTabPadding}
+								spacingMobile={menuOpenerTextMobilePadding}
+								handleSpacingUnitHandler={menuOpenerTextPaddingUnitsChange}
+								spacingCombineBtn={menuOpenerTextPaddingLink}
+								spacingCombineBtnHandler={menuOpenerTextPaddingLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Margin", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuOpenerTextMarginUnitsHandler}
+								spacingUnits={menuOpenerTextMarginUnits}
+								spacingDesktop={menuOpenerTextDesktopMargin}
+								spacingTablet={menuOpenerTextTabMargin}
+								spacingMobile={menuOpenerTextMobileMargin}
+								handleSpacingUnitHandler={menuOpenerTextMarginUnitsChange}
+								spacingCombineBtn={menuOpenerTextMarginLink}
+								spacingCombineBtnHandler={menuOpenerTextMarginLinkBtn}
+								setAttributes={setAttributes}
+							/>
+						</>
+					)}
+
+					{menuTextTypeSwitcher === 'closer' && (
+						<>
+							<FB_TypographyControl
+								globalTypoControlActive={true}
+								globalTypoSwitcher={menuCloserTextGlobalTypoSwitcher}
+								storeGlobalTypographyData={(value) => setAttributes({ menuCloserTextGlobalTypographyData: value })}
+
+								globalTypoType={menuCloserTextGlobalTypoType}
+								onChangeGlobalTypoType={(value) => {
+									setAttributes({
+										menuCloserTextGlobalTypoType: value,
+										menuCloserTextGlobalTypoSwitcher: value === 'default' ? { ...menuCloserTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...menuCloserTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+									})
+								}}
+
+								globalTypoOption={menuCloserTextGlobalTypoOption}
+								onChangeGlobalTypoOption={(value) => setAttributes({ menuCloserTextGlobalTypoOption: value })}
+
+								fontFamily={menuCloserTextFontFamily}
+								onChangeFontFamily={(value) => setAttributes({ menuCloserTextFontFamily: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontFamily: value && false } })}
+
+								fontSize={menuCloserTextFontSize}
+								onChangeFontSize={(value) => setAttributes({ menuCloserTextFontSize: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontSize: value && false } })}
+
+								fontSizeUnits={menuCloserTextFontSizeUnits}
+								onChangeFontSizeUnit={(value) => setAttributes({ menuCloserTextFontSizeUnits: value })}
+
+								fontWeight={menuCloserTextFontWeight}
+								onChangeFontWeight={(value) => setAttributes({ menuCloserTextFontWeight: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontWeight: value && false } })}
+
+								fontStyle={menuCloserTextFontStyle}
+								onChangeFontStyle={(value) => setAttributes({ menuCloserTextFontStyle: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontStyle: value && false } })}
+
+								textTransform={menuCloserTextTextTransform}
+								onChangeTextTransform={(value) => setAttributes({ menuCloserTextTextTransform: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, textTransform: value && false } })}
+
+								textDecoration={menuCloserTextTextDecoration}
+								onChangeTextDecoration={(value) => setAttributes({ menuCloserTextTextDecoration: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, textDecoration: value && false } })}
+
+								letterSpacing={menuCloserTextLetterSpacing}
+								onChangeLetterSpacing={(value) => setAttributes({ menuCloserTextLetterSpacing: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+								letterSpacingUnits={menuCloserTextLetterSpacingUnits}
+								onChangeLetterSpacingUnit={(value) => setAttributes({ menuCloserTextLetterSpacingUnits: value })}
+
+								lineHeight={menuCloserTextLineHeight}
+								onChangeLineHeight={(value) => setAttributes({ menuCloserTextLineHeight: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, lineHeight: value && false } })}
+
+								lineHeightUnits={menuCloserTextLineHeightUnits}
+								onChangeLineHeightUnit={(value) => setAttributes({ menuCloserTextLineHeightUnits: value })}
+
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Color", "frontis-blocks")}
+								globalSwitcher={menuCloserTextColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuCloserTextColorSwitcher: value })}
+							/>
+
+							{menuCloserTextColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuCloserTextColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuCloserTextColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuCloserTextHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+							<FB_SwitcherControl
+								label={__("Background Color", "frontis-blocks")}
+								globalSwitcher={menuCloserTextBgColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBgColorSwitcher: value })}
+							/>
+
+							{menuCloserTextBgColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuCloserTextBgColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextBgColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuCloserTextBgColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuCloserTextBgHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextBgHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<SelectControl
+								label={__("Border Style", "frontis-blocks")}
+								value={menuCloserTextBorder}
+								options={BORDER_STYLES}
+								onChange={(value) => setAttributes({ menuCloserTextBorder: value })}
+							/>
+
+
+							<FB_SwitcherControl
+								label={__("Color", "frontis-blocks")}
+								globalSwitcher={menuCloserTextBorderColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBorderColorSwitcher: value })}
+							/>
+
+							{menuCloserTextBorderColorSwitcher === 'normal' && (
+								<FB_ColorControl
+									label={__("Normal Color", "frontis-blocks")}
+									globalColor={menuCloserTextBorderColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextBorderColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							{menuCloserTextBorderColorSwitcher === 'hover' && (
+								<FB_ColorControl
+									label={__("Hover Color", "frontis-blocks")}
+									globalColor={menuCloserTextBorderHoverColor}
+									setGlobalColor={(value) => setAttributes({ menuCloserTextBorderHoverColor: value === undefined ? '' : value })}
+								/>
+							)}
+
+							<FB_Spacing
+								label={__("Border", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuCloserTextBorderUnitsHandler}
+								spacingUnits={menuCloserTextBorderUnits}
+								spacingDesktop={menuCloserTextDesktopBorder}
+								spacingTablet={menuCloserTextTabletBorder}
+								spacingMobile={menuCloserTextMobileBorder}
+								handleSpacingUnitHandler={menuCloserTextBorderUnitsChange}
+								spacingCombineBtn={menuCloserTextBorderLink}
+								spacingCombineBtnHandler={menuCloserTextBorderLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Border Radius", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuCloserTextBorderRadiusUnitsHandler}
+								spacingUnits={menuCloserTextBorderRadiusUnits}
+								spacingDesktop={menuCloserTextDesktopBorderRadius}
+								spacingTablet={menuCloserTextTabBorderRadius}
+								spacingMobile={menuCloserTextMobileBorderRadius}
+								handleSpacingUnitHandler={menuCloserTextBorderRadiusUnitsChange}
+								spacingCombineBtn={menuCloserTextBorderRadiusLink}
+								spacingCombineBtnHandler={menuCloserTextBorderRadiusLinkBtn}
+								setAttributes={setAttributes}
+							/>
+
+							<FB_Spacing
+								label={__("Padding", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuCloserTextPaddingUnitsHandler}
+								spacingUnits={menuCloserTextPaddingUnits}
+								spacingDesktop={menuCloserTextDesktopPadding}
+								spacingTablet={menuCloserTextTabPadding}
+								spacingMobile={menuCloserTextMobilePadding}
+								handleSpacingUnitHandler={menuCloserTextPaddingUnitsChange}
+								spacingCombineBtn={menuCloserTextPaddingLink}
+								spacingCombineBtnHandler={menuCloserTextPaddingLinkBtn}
+								setAttributes={setAttributes}
+							/>
+							<FB_Spacing
+								label={__("Margin", "frontis-blocks")}
+								deviceType={deviceType}
+								spacingUnitsHandler={menuCloserTextMarginUnitsHandler}
+								spacingUnits={menuCloserTextMarginUnits}
+								spacingDesktop={menuCloserTextDesktopMargin}
+								spacingTablet={menuCloserTextTabMargin}
+								spacingMobile={menuCloserTextMobileMargin}
+								handleSpacingUnitHandler={menuCloserTextMarginUnitsChange}
+								spacingCombineBtn={menuCloserTextMarginLink}
+								spacingCombineBtnHandler={menuCloserTextMarginLinkBtn}
+								setAttributes={setAttributes}
+							/>
+
+							<FB_SwitcherControl
+								label={__("Box Shadow ", "frontis-blocks")}
+								globalSwitcher={menuCloserTextBoxShadowSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBoxShadowSwitcher: value })}
+							/>
+
+							{menuCloserTextBoxShadowSwitcher === 'normal' && (
+								<FB_BoxShadowControl
+									label={__("Normal Shadow", "frontis-blocks")}
+									onBoxShadowChange={(value) => setAttributes({ menuCloserTextBoxShadowValues: value })}
+									initialShadowValue={menuCloserTextBoxShadowValues}
+									onBoxShadowStyleChange={(value) => setAttributes({ menuCloserTextBoxShadowCssValue: value })}
+								/>
+							)}
+
+							{menuCloserTextBoxShadowSwitcher === 'hover' && (
+								<FB_BoxShadowControl
+									label={__("Hover Shadow", "frontis-blocks")}
+									onBoxShadowChange={(value) => setAttributes({ menuCloserTextBoxShadowHoverValues: value })}
+									initialShadowValue={menuCloserTextBoxShadowHoverValues}
+									onBoxShadowStyleChange={(value) => setAttributes({ menuCloserTextBoxShadowHoverCssValue: value })}
+								/>
+							)}
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
+				<FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={offCanvasOverlayBackgroundColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ offCanvasOverlayBackgroundColorSwitcher: value })}
+
+                    normalLabel={__("Background Color Type", "frontis-blocks")}
+                    normalBackgroundType={offCanvasOverlayBgColorType}
+                    setNormalBackgroundType={(value) => setAttributes({ offCanvasOverlayBgColorType: value })}
+                    normalClassicColor={offCanvasOverlayBackgroundColor}
+                    setNormalClassicColor={(value) => setAttributes({ offCanvasOverlayBackgroundColor: value === undefined ? '' : value })}
+                    normalGradientColor={offCanvasOverlayBackgroundGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ offCanvasOverlayBackgroundGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={offCanvasOverlayBackgroundCustomGradientColorSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ offCanvasOverlayBackgroundCustomGradientColorSwitcher: value })}
+                    normalCustomGradientInputValue={offCanvasOverlayBackgroundCustomGradientColor}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ offCanvasOverlayBackgroundCustomGradientColor: value === undefined ? null : value })}
+
+                    hoverLabel={__("Background Color Type", "frontis-blocks")}
+                    hoverBackgroundType={offCanvasOverlayBgHoverColorType}
+                    setHoverBackgroundType={(value) => setAttributes({ offCanvasOverlayBgHoverColorType: value })}
+                    hoverClassicColor={offCanvasOverlayBackgroundHoverColor}
+                    setHoverClassicColor={(value) => setAttributes({ offCanvasOverlayBackgroundHoverColor: value === undefined ? '' : value })}
+                    hoverGradientColor={offCanvasOverlayBackgroundHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ offCanvasOverlayBackgroundHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={offCanvasOverlayBackgroundHoverCustomGradientColorSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ offCanvasOverlayBackgroundHoverCustomGradientColorSwitcher: value })}
+                    hoverCustomGradientInputValue={offCanvasOverlayBackgroundHoverCustomGradientColor}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ offCanvasOverlayBackgroundHoverCustomGradientColor: value === undefined ? null : value })}
+
+                    isBackgroundImage={false}
+                />
+				<FB_Range
+					min={1}
+					max={offCanvasOverlayOpacityUnits === '%' ? 100 : 100}
+					label={__("Opacity", "frontis-blocks")}
+					rangeValue={offCanvasOverlayOpacity}
+					onChangeHandler={(value) => setAttributes({ offCanvasOverlayOpacity: value })}
+					rangeUnitHandler={(value) => setAttributes({ offCanvasOverlayOpacityUnits: value })}
+					deviceType={deviceType}
+					units={offCanvasOverlayOpacityUnits}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
 				/>
-
-				{menuIconTypeSwitcher === 'opener' && (
-					<>
-						<FB_Range
-							min={1}
-							max={offCanvasHamburgerIconWidthUnits === '%' ? 100 : 500}
-							label={__("Icon Size", "frontis-blocks")}
-							rangeValue={offCanvasHamburgerIconWidth}
-							onChangeHandler={(value) => setAttributes({ offCanvasHamburgerIconWidth: value })}
-							rangeUnitHandler={(value) => setAttributes({ offCanvasHamburgerIconWidthUnits: value })}
-							deviceType={deviceType}
-							units={offCanvasHamburgerIconWidthUnits}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-						/>
-
-						<FB_Range
-							min={1}
-							max={offCanvasHamburgerIconBgWidthUnits === '%' ? 100 : 500}
-							label={__("Background Size", "frontis-blocks")}
-							rangeValue={offCanvasHamburgerIconBgWidth}
-							onChangeHandler={(value) => setAttributes({ offCanvasHamburgerIconBgWidth: value })}
-							rangeUnitHandler={(value) => setAttributes({ offCanvasHamburgerIconBgWidthUnits: value })}
-							deviceType={deviceType}
-							units={offCanvasHamburgerIconBgWidthUnits}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Icon Color", "frontis-blocks")}
-							globalSwitcher={offCanvashamburgerIconColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconColorSwitcher: value })}
-						/>
-
-						{offCanvashamburgerIconColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvashamburgerIconColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_SwitcherControl
-							label={__("Background Color", "frontis-blocks")}
-							globalSwitcher={offCanvashamburgerIconBgColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconBgColorSwitcher: value })}
-						/>
-
-						{offCanvashamburgerIconBgColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconBgColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBgColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvashamburgerIconBgColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBgHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={offCanvasHamburgerIconPaddingUnitsHandler}
-							spacingUnits={offCanvasHamburgerIconPaddingUnits}
-							spacingDesktop={offCanvasHamburgerIconDesktopPadding}
-							spacingTablet={offCanvasHamburgerIconTabletPadding}
-							spacingMobile={offCanvasHamburgerIconMobilePadding}
-							handleSpacingUnitHandler={offCanvasHamburgerIconPaddingUnitsChange}
-							spacingCombineBtn={offCanvasHamburgerIconPaddingLink}
-							spacingCombineBtnHandler={offCanvasHamburgerIconPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Margin", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={offCanvasHamburgerIconMarginUnitsHandler}
-							spacingUnits={offCanvasHamburgerIconMarginUnits}
-							spacingDesktop={offCanvasHamburgerIconDesktopMargin}
-							spacingTablet={offCanvasHamburgerIconTabletMargin}
-							spacingMobile={offCanvasHamburgerIconMobileMargin}
-							handleSpacingUnitHandler={offCanvasHamburgerIconMarginUnitsChange}
-							spacingCombineBtn={offCanvasHamburgerIconMarginLink}
-							spacingCombineBtnHandler={offCanvasHamburgerIconMarginLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<SelectControl
-							label={__("Border Style", "frontis-blocks")}
-							value={offCanvashamburgerIconBorder}
-							options={BORDER_STYLES}
-							onChange={(value) => setAttributes({ offCanvashamburgerIconBorder: value })}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Border Color", "frontis-blocks")}
-							globalSwitcher={offCanvashamburgerIconBorderColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvashamburgerIconBorderColorSwitcher: value })}
-						/>
-
-						{offCanvashamburgerIconBorderColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconBorderColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBorderColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvashamburgerIconBorderColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvashamburgerIconBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvashamburgerIconBorderHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Border", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={handleoffCanvashamburgerIconBorderUnitsChange}
-							spacingUnits={offCanvashamburgerIconBorderUnits}
-							spacingDesktop={offCanvashamburgerIconDesktopBorderWidth}
-							spacingTablet={offCanvashamburgerIconTabBorderWidth}
-							spacingMobile={offCanvashamburgerIconMobileBorderWidth}
-							handleSpacingUnitHandler={handleoffCanvashamburgerIconBorderWidthChange}
-							spacingCombineBtn={offCanvashamburgerIconBorderLink}
-							spacingCombineBtnHandler={handleoffCanvashamburgerIconBorderLinkToggle}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Border Radius", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={handleoffCanvashamburgerIconBorderRadiusUnitsChange}
-							spacingUnits={offCanvashamburgerIconBorderRadiusUnits}
-							spacingDesktop={offCanvashamburgerIconDesktopBorderRadiusWidth}
-							spacingTablet={offCanvashamburgerIconTabBorderRadiusWidth}
-							spacingMobile={offCanvashamburgerIconMobileBorderRadiusWidth}
-							handleSpacingUnitHandler={handleoffCanvashamburgerIconBorderRadiusChange}
-							spacingCombineBtn={offCanvashamburgerIconBorderRadiusLink}
-							spacingCombineBtnHandler={handleoffCanvashamburgerIconBorderRadiusLinkToggle}
-							setAttributes={setAttributes}
-						/>
-					</>
-				)}
-
-				{menuIconTypeSwitcher === 'closer' && (
-					<>
-						<FB_Range
-							min={1}
-							max={offCanvasCloseIconWidthUnits === '%' ? 100 : 500}
-							label={__("Icon Size", "frontis-blocks")}
-							rangeValue={offCanvasCloseIconWidth}
-							onChangeHandler={(value) => setAttributes({ offCanvasCloseIconWidth: value })}
-							rangeUnitHandler={(value) => setAttributes({ offCanvasCloseIconWidthUnits: value })}
-							deviceType={deviceType}
-							units={offCanvasCloseIconWidthUnits}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-						/>
-
-						<FB_Range
-							min={1}
-							max={offCanvasCloseIconBgWidthUnits === '%' ? 100 : 500}
-							label={__("Background Size", "frontis-blocks")}
-							rangeValue={offCanvasCloseIconBgWidth}
-							onChangeHandler={(value) => setAttributes({ offCanvasCloseIconBgWidth: value })}
-							rangeUnitHandler={(value) => setAttributes({ offCanvasCloseIconBgWidthUnits: value })}
-							deviceType={deviceType}
-							units={offCanvasCloseIconBgWidthUnits}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Icon Color", "frontis-blocks")}
-							globalSwitcher={offCanvasCloseIconColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconColorSwitcher: value })}
-						/>
-
-						{offCanvasCloseIconColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvasCloseIconColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_SwitcherControl
-							label={__("Background Color", "frontis-blocks")}
-							globalSwitcher={offCanvasCloseIconBgColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconBgColorSwitcher: value })}
-						/>
-
-						{offCanvasCloseIconBgColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconBgColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBgColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvasCloseIconBgColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBgHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={offCanvasCloseIconPaddingUnitsHandler}
-							spacingUnits={offCanvasCloseIconPaddingUnits}
-							spacingDesktop={offCanvasCloseIconDesktopPadding}
-							spacingTablet={offCanvasCloseIconTabletPadding}
-							spacingMobile={offCanvasCloseIconMobilePadding}
-							handleSpacingUnitHandler={offCanvasCloseIconPaddingUnitsChange}
-							spacingCombineBtn={offCanvasCloseIconPaddingLink}
-							spacingCombineBtnHandler={offCanvasCloseIconPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Margin", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={offCanvasCloseIconMarginUnitsHandler}
-							spacingUnits={offCanvasCloseIconMarginUnits}
-							spacingDesktop={offCanvasCloseIconDesktopMargin}
-							spacingTablet={offCanvasCloseIconTabletMargin}
-							spacingMobile={offCanvasCloseIconMobileMargin}
-							handleSpacingUnitHandler={offCanvasCloseIconMarginUnitsChange}
-							spacingCombineBtn={offCanvasCloseIconMarginLink}
-							spacingCombineBtnHandler={offCanvasCloseIconMarginLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<SelectControl
-							label={__("Border Style", "frontis-blocks")}
-							value={offCanvasCloseIconBorder}
-							options={BORDER_STYLES}
-							onChange={(value) => setAttributes({ offCanvasCloseIconBorder: value })}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Border Color", "frontis-blocks")}
-							globalSwitcher={offCanvasCloseIconBorderColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ offCanvasCloseIconBorderColorSwitcher: value })}
-						/>
-
-						{offCanvasCloseIconBorderColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconBorderColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBorderColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{offCanvasCloseIconBorderColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={offCanvasCloseIconBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ offCanvasCloseIconBorderHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Border", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={handleoffCanvasCloseIconBorderUnitsChange}
-							spacingUnits={offCanvasCloseIconBorderUnits}
-							spacingDesktop={offCanvasCloseIconDesktopBorderWidth}
-							spacingTablet={offCanvasCloseIconTabBorderWidth}
-							spacingMobile={offCanvasCloseIconMobileBorderWidth}
-							handleSpacingUnitHandler={handleoffCanvasCloseIconBorderWidthChange}
-							spacingCombineBtn={offCanvasCloseIconBorderLink}
-							spacingCombineBtnHandler={handleoffCanvasCloseIconBorderLinkToggle}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Border Radius", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={handleoffCanvasCloseIconBorderRadiusUnitsChange}
-							spacingUnits={offCanvasCloseIconBorderRadiusUnits}
-							spacingDesktop={offCanvasCloseIconDesktopBorderRadiusWidth}
-							spacingTablet={offCanvasCloseIconTabBorderRadiusWidth}
-							spacingMobile={offCanvasCloseIconMobileBorderRadiusWidth}
-							handleSpacingUnitHandler={handleoffCanvasCloseIconBorderRadiusChange}
-							spacingCombineBtn={offCanvasCloseIconBorderRadiusLink}
-							spacingCombineBtnHandler={handleoffCanvasCloseIconBorderRadiusLinkToggle}
-							setAttributes={setAttributes}
-						/>
-					</>
-				)}
-			</PanelBody>
-
-			<PanelBody title={__("Text", "frontis-blocks")} initialOpen={false}>
-				<FB_SwitcherControl
-					label={__("Text Type", "frontis-blocks")}
-					globalSwitcher={menuTextTypeSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ menuTextTypeSwitcher: value })}
-					options={[
-						{ label: __('Opener', 'frontis-blocks'), value: 'opener' },
-						{ label: __('Closer', 'frontis-blocks'), value: 'closer' },
-					]
-					}
-				/>
-
-				{menuTextTypeSwitcher === 'opener' && (
-					<>
-						<FB_TypographyControl
-							globalTypoControlActive={true}
-							globalTypoSwitcher={menuOpenerTextGlobalTypoSwitcher}
-							storeGlobalTypographyData={(value) => setAttributes({ menuOpenerTextGlobalTypographyData: value })}
-
-							globalTypoType={menuOpenerTextGlobalTypoType}
-							onChangeGlobalTypoType={(value) => {
-								setAttributes({
-									menuOpenerTextGlobalTypoType: value,
-									menuOpenerTextGlobalTypoSwitcher: value === 'default' ? { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
-								})
-							}}
-
-							globalTypoOption={menuOpenerTextGlobalTypoOption}
-							onChangeGlobalTypoOption={(value) => setAttributes({ menuOpenerTextGlobalTypoOption: value })}
-
-							fontFamily={menuOpenerTextFontFamily}
-							onChangeFontFamily={(value) => setAttributes({ menuOpenerTextFontFamily: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontFamily: value && false } })}
-
-							fontSize={menuOpenerTextFontSize}
-							onChangeFontSize={(value) => setAttributes({ menuOpenerTextFontSize: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontSize: value && false } })}
-
-							fontSizeUnits={menuOpenerTextFontSizeUnits}
-							onChangeFontSizeUnit={(value) => setAttributes({ menuOpenerTextFontSizeUnits: value })}
-
-							fontWeight={menuOpenerTextFontWeight}
-							onChangeFontWeight={(value) => setAttributes({ menuOpenerTextFontWeight: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontWeight: value && false } })}
-
-							fontStyle={menuOpenerTextFontStyle}
-							onChangeFontStyle={(value) => setAttributes({ menuOpenerTextFontStyle: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, fontStyle: value && false } })}
-
-							textTransform={menuOpenerTextTextTransform}
-							onChangeTextTransform={(value) => setAttributes({ menuOpenerTextTextTransform: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, textTransform: value && false } })}
-
-							textDecoration={menuOpenerTextTextDecoration}
-							onChangeTextDecoration={(value) => setAttributes({ menuOpenerTextTextDecoration: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, textDecoration: value && false } })}
-
-							letterSpacing={menuOpenerTextLetterSpacing}
-							onChangeLetterSpacing={(value) => setAttributes({ menuOpenerTextLetterSpacing: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-							letterSpacingUnits={menuOpenerTextLetterSpacingUnits}
-							onChangeLetterSpacingUnit={(value) => setAttributes({ menuOpenerTextLetterSpacingUnits: value })}
-
-							lineHeight={menuOpenerTextLineHeight}
-							onChangeLineHeight={(value) => setAttributes({ menuOpenerTextLineHeight: value, menuOpenerTextGlobalTypoSwitcher: { ...menuOpenerTextGlobalTypoSwitcher, lineHeight: value && false } })}
-
-							lineHeightUnits={menuOpenerTextLineHeightUnits}
-							onChangeLineHeightUnit={(value) => setAttributes({ menuOpenerTextLineHeightUnits: value })}
-
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Color", "frontis-blocks")}
-							globalSwitcher={menuOpenerTextColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextColorSwitcher: value })}
-						/>
-
-						{menuOpenerTextColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuOpenerTextColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuOpenerTextColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuOpenerTextHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-						<FB_SwitcherControl
-							label={__("Background Color", "frontis-blocks")}
-							globalSwitcher={menuOpenerTextBgColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBgColorSwitcher: value })}
-						/>
-
-						{menuOpenerTextBgColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuOpenerTextBgColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextBgColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuOpenerTextBgColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuOpenerTextBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextBgHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<SelectControl
-							label={__("Border Style", "frontis-blocks")}
-							value={menuOpenerTextBorder}
-							options={BORDER_STYLES}
-							onChange={(value) => setAttributes({ menuOpenerTextBorder: value })}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Color", "frontis-blocks")}
-							globalSwitcher={menuOpenerTextBorderColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBorderColorSwitcher: value })}
-						/>
-
-						{menuOpenerTextBorderColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuOpenerTextBorderColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextBorderColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuOpenerTextBorderColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuOpenerTextBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuOpenerTextBorderHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Border", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuOpenerTextBorderUnitsHandler}
-							spacingUnits={menuOpenerTextBorderUnits}
-							spacingDesktop={menuOpenerTextDesktopBorder}
-							spacingTablet={menuOpenerTextTabletBorder}
-							spacingMobile={menuOpenerTextMobileBorder}
-							handleSpacingUnitHandler={menuOpenerTextBorderUnitsChange}
-							spacingCombineBtn={menuOpenerTextBorderLink}
-							spacingCombineBtnHandler={menuOpenerTextBorderLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Border Radius", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuOpenerTextBorderRadiusUnitsHandler}
-							spacingUnits={menuOpenerTextBorderRadiusUnits}
-							spacingDesktop={menuOpenerTextDesktopBorderRadius}
-							spacingTablet={menuOpenerTextTabBorderRadius}
-							spacingMobile={menuOpenerTextMobileBorderRadius}
-							handleSpacingUnitHandler={menuOpenerTextBorderRadiusUnitsChange}
-							spacingCombineBtn={menuOpenerTextBorderRadiusLink}
-							spacingCombineBtnHandler={menuOpenerTextBorderRadiusLinkBtn}
-							setAttributes={setAttributes}
-						/>
-
-
-
-						<FB_SwitcherControl
-							label={__("Box Shadow ", "frontis-blocks")}
-							globalSwitcher={menuOpenerTextBoxShadowSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuOpenerTextBoxShadowSwitcher: value })}
-						/>
-
-						{menuOpenerTextBoxShadowSwitcher === 'normal' && (
-							<FB_BoxShadowControl
-								label={__("Normal Shadow", "frontis-blocks")}
-								onBoxShadowChange={(value) => setAttributes({ menuOpenerTextBoxShadowValues: value })}
-								initialShadowValue={menuOpenerTextBoxShadowValues}
-								onBoxShadowStyleChange={(value) => setAttributes({ menuOpenerTextBoxShadowCssValue: value })}
-							/>
-						)}
-
-						{menuOpenerTextBoxShadowSwitcher === 'hover' && (
-							<FB_BoxShadowControl
-								label={__("Hover Shadow", "frontis-blocks")}
-								onBoxShadowChange={(value) => setAttributes({ menuOpenerTextBoxShadowHoverValues: value })}
-								initialShadowValue={menuOpenerTextBoxShadowHoverValues}
-								onBoxShadowStyleChange={(value) => setAttributes({ menuOpenerTextBoxShadowHoverCssValue: value })}
-							/>
-						)}
-
-
-						<FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuOpenerTextPaddingUnitsHandler}
-							spacingUnits={menuOpenerTextPaddingUnits}
-							spacingDesktop={menuOpenerTextDesktopPadding}
-							spacingTablet={menuOpenerTextTabPadding}
-							spacingMobile={menuOpenerTextMobilePadding}
-							handleSpacingUnitHandler={menuOpenerTextPaddingUnitsChange}
-							spacingCombineBtn={menuOpenerTextPaddingLink}
-							spacingCombineBtnHandler={menuOpenerTextPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Margin", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuOpenerTextMarginUnitsHandler}
-							spacingUnits={menuOpenerTextMarginUnits}
-							spacingDesktop={menuOpenerTextDesktopMargin}
-							spacingTablet={menuOpenerTextTabMargin}
-							spacingMobile={menuOpenerTextMobileMargin}
-							handleSpacingUnitHandler={menuOpenerTextMarginUnitsChange}
-							spacingCombineBtn={menuOpenerTextMarginLink}
-							spacingCombineBtnHandler={menuOpenerTextMarginLinkBtn}
-							setAttributes={setAttributes}
-						/>
-					</>
-				)}
-
-				{menuTextTypeSwitcher === 'closer' && (
-					<>
-						<FB_TypographyControl
-							globalTypoControlActive={true}
-							globalTypoSwitcher={menuCloserTextGlobalTypoSwitcher}
-							storeGlobalTypographyData={(value) => setAttributes({ menuCloserTextGlobalTypographyData: value })}
-
-							globalTypoType={menuCloserTextGlobalTypoType}
-							onChangeGlobalTypoType={(value) => {
-								setAttributes({
-									menuCloserTextGlobalTypoType: value,
-									menuCloserTextGlobalTypoSwitcher: value === 'default' ? { ...menuCloserTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...menuCloserTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
-								})
-							}}
-
-							globalTypoOption={menuCloserTextGlobalTypoOption}
-							onChangeGlobalTypoOption={(value) => setAttributes({ menuCloserTextGlobalTypoOption: value })}
-
-							fontFamily={menuCloserTextFontFamily}
-							onChangeFontFamily={(value) => setAttributes({ menuCloserTextFontFamily: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontFamily: value && false } })}
-
-							fontSize={menuCloserTextFontSize}
-							onChangeFontSize={(value) => setAttributes({ menuCloserTextFontSize: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontSize: value && false } })}
-
-							fontSizeUnits={menuCloserTextFontSizeUnits}
-							onChangeFontSizeUnit={(value) => setAttributes({ menuCloserTextFontSizeUnits: value })}
-
-							fontWeight={menuCloserTextFontWeight}
-							onChangeFontWeight={(value) => setAttributes({ menuCloserTextFontWeight: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontWeight: value && false } })}
-
-							fontStyle={menuCloserTextFontStyle}
-							onChangeFontStyle={(value) => setAttributes({ menuCloserTextFontStyle: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, fontStyle: value && false } })}
-
-							textTransform={menuCloserTextTextTransform}
-							onChangeTextTransform={(value) => setAttributes({ menuCloserTextTextTransform: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, textTransform: value && false } })}
-
-							textDecoration={menuCloserTextTextDecoration}
-							onChangeTextDecoration={(value) => setAttributes({ menuCloserTextTextDecoration: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, textDecoration: value && false } })}
-
-							letterSpacing={menuCloserTextLetterSpacing}
-							onChangeLetterSpacing={(value) => setAttributes({ menuCloserTextLetterSpacing: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-							letterSpacingUnits={menuCloserTextLetterSpacingUnits}
-							onChangeLetterSpacingUnit={(value) => setAttributes({ menuCloserTextLetterSpacingUnits: value })}
-
-							lineHeight={menuCloserTextLineHeight}
-							onChangeLineHeight={(value) => setAttributes({ menuCloserTextLineHeight: value, menuCloserTextGlobalTypoSwitcher: { ...menuCloserTextGlobalTypoSwitcher, lineHeight: value && false } })}
-
-							lineHeightUnits={menuCloserTextLineHeightUnits}
-							onChangeLineHeightUnit={(value) => setAttributes({ menuCloserTextLineHeightUnits: value })}
-
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Color", "frontis-blocks")}
-							globalSwitcher={menuCloserTextColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuCloserTextColorSwitcher: value })}
-						/>
-
-						{menuCloserTextColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuCloserTextColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuCloserTextColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuCloserTextHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-						<FB_SwitcherControl
-							label={__("Background Color", "frontis-blocks")}
-							globalSwitcher={menuCloserTextBgColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBgColorSwitcher: value })}
-						/>
-
-						{menuCloserTextBgColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuCloserTextBgColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextBgColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuCloserTextBgColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuCloserTextBgHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextBgHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<SelectControl
-							label={__("Border Style", "frontis-blocks")}
-							value={menuCloserTextBorder}
-							options={BORDER_STYLES}
-							onChange={(value) => setAttributes({ menuCloserTextBorder: value })}
-						/>
-
-
-						<FB_SwitcherControl
-							label={__("Color", "frontis-blocks")}
-							globalSwitcher={menuCloserTextBorderColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBorderColorSwitcher: value })}
-						/>
-
-						{menuCloserTextBorderColorSwitcher === 'normal' && (
-							<FB_ColorControl
-								label={__("Normal Color", "frontis-blocks")}
-								globalColor={menuCloserTextBorderColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextBorderColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						{menuCloserTextBorderColorSwitcher === 'hover' && (
-							<FB_ColorControl
-								label={__("Hover Color", "frontis-blocks")}
-								globalColor={menuCloserTextBorderHoverColor}
-								setGlobalColor={(value) => setAttributes({ menuCloserTextBorderHoverColor: value === undefined ? '' : value })}
-							/>
-						)}
-
-						<FB_Spacing
-							label={__("Border", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuCloserTextBorderUnitsHandler}
-							spacingUnits={menuCloserTextBorderUnits}
-							spacingDesktop={menuCloserTextDesktopBorder}
-							spacingTablet={menuCloserTextTabletBorder}
-							spacingMobile={menuCloserTextMobileBorder}
-							handleSpacingUnitHandler={menuCloserTextBorderUnitsChange}
-							spacingCombineBtn={menuCloserTextBorderLink}
-							spacingCombineBtnHandler={menuCloserTextBorderLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Border Radius", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuCloserTextBorderRadiusUnitsHandler}
-							spacingUnits={menuCloserTextBorderRadiusUnits}
-							spacingDesktop={menuCloserTextDesktopBorderRadius}
-							spacingTablet={menuCloserTextTabBorderRadius}
-							spacingMobile={menuCloserTextMobileBorderRadius}
-							handleSpacingUnitHandler={menuCloserTextBorderRadiusUnitsChange}
-							spacingCombineBtn={menuCloserTextBorderRadiusLink}
-							spacingCombineBtnHandler={menuCloserTextBorderRadiusLinkBtn}
-							setAttributes={setAttributes}
-						/>
-
-						<FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuCloserTextPaddingUnitsHandler}
-							spacingUnits={menuCloserTextPaddingUnits}
-							spacingDesktop={menuCloserTextDesktopPadding}
-							spacingTablet={menuCloserTextTabPadding}
-							spacingMobile={menuCloserTextMobilePadding}
-							handleSpacingUnitHandler={menuCloserTextPaddingUnitsChange}
-							spacingCombineBtn={menuCloserTextPaddingLink}
-							spacingCombineBtnHandler={menuCloserTextPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/>
-						<FB_Spacing
-							label={__("Margin", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={menuCloserTextMarginUnitsHandler}
-							spacingUnits={menuCloserTextMarginUnits}
-							spacingDesktop={menuCloserTextDesktopMargin}
-							spacingTablet={menuCloserTextTabMargin}
-							spacingMobile={menuCloserTextMobileMargin}
-							handleSpacingUnitHandler={menuCloserTextMarginUnitsChange}
-							spacingCombineBtn={menuCloserTextMarginLink}
-							spacingCombineBtnHandler={menuCloserTextMarginLinkBtn}
-							setAttributes={setAttributes}
-						/>
-
-						<FB_SwitcherControl
-							label={__("Box Shadow ", "frontis-blocks")}
-							globalSwitcher={menuCloserTextBoxShadowSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ menuCloserTextBoxShadowSwitcher: value })}
-						/>
-
-						{menuCloserTextBoxShadowSwitcher === 'normal' && (
-							<FB_BoxShadowControl
-								label={__("Normal Shadow", "frontis-blocks")}
-								onBoxShadowChange={(value) => setAttributes({ menuCloserTextBoxShadowValues: value })}
-								initialShadowValue={menuCloserTextBoxShadowValues}
-								onBoxShadowStyleChange={(value) => setAttributes({ menuCloserTextBoxShadowCssValue: value })}
-							/>
-						)}
-
-						{menuCloserTextBoxShadowSwitcher === 'hover' && (
-							<FB_BoxShadowControl
-								label={__("Hover Shadow", "frontis-blocks")}
-								onBoxShadowChange={(value) => setAttributes({ menuCloserTextBoxShadowHoverValues: value })}
-								initialShadowValue={menuCloserTextBoxShadowHoverValues}
-								onBoxShadowStyleChange={(value) => setAttributes({ menuCloserTextBoxShadowHoverCssValue: value })}
-							/>
-						)}
-					</>
-				)}
 			</PanelBody>
 		</>
 	);
