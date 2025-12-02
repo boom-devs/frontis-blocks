@@ -99,28 +99,28 @@ const attributes = {
     offCanvasPanelDesktopPadding: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '24',
-            right: '24',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     offCanvasPanelTabPadding: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '24',
-            right: '24',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     offCanvasPanelMobilePadding: {
         type: "object", 
         default: {
-            top: '12',
-            bottom: '12',
-            left: '24',
-            right: '24',
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
         },
     },
     offCanvasPanelPaddingLink: {
@@ -1519,6 +1519,102 @@ const attributes = {
         type : 'boolean',
         default: true
     },
+    //Overlay
+    offCanvasOverlayBackgroundColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    offCanvasOverlayBackgroundColor: {
+        type: 'string'
+    },
+    offCanvasOverlayBackgroundHoverColor: {
+        type: 'string',
+    },
+    offCanvasOverlayBackgroundGradientColor: {
+        type: 'string',
+        default: null
+    },
+    offCanvasOverlayBackgroundHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    offCanvasOverlayBackgroundCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    offCanvasOverlayBackgroundCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    offCanvasOverlayBackgroundHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    offCanvasOverlayBackgroundHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+   
+    offCanvasOverlayBgColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    offCanvasOverlayBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    offCanvasOverlayColorTypeSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    offCanvasOverlayColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    offCanvasOverlayHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    offCanvasOverlayGradientColor: {
+        type: 'string',
+        default: null
+    },
+    offCanvasOverlayHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    offCanvasOverlayCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    offCanvasOverlayCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    offCanvasOverlayHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    offCanvasOverlayHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    offCanvasOverlayOpacity: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    offCanvasOverlayOpacityUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	}, 
     // Extra
 	offCanvasGlobalZIndex : {
         type: 'object',
