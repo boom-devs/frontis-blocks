@@ -228,7 +228,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuContentWidthValue,
         megaMenuContentWidthValueUnits,
         megaMenuContentTopPositionValue,
-        megaMenuContentTopPositionUnits
+        megaMenuContentTopPositionUnits,
+        megaMenuContentLeftPositionValue,
+        megaMenuContentLeftPositionUnits
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -1148,7 +1150,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ? `
             position: absolute;
                 ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Desktop}${megaMenuContentWidthValueUnits?.Desktop};` : ''}
-                ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Desktop}${megaMenuContentTopPositionUnits?.Desktop} !important;` : ''}
+                ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Desktop}${megaMenuContentTopPositionUnits?.Desktop};` : ''}
+                ${megaMenuContentLeftPositionValue ? `left: ${megaMenuContentLeftPositionValue?.Desktop}${megaMenuContentLeftPositionUnits?.Desktop};` : ''}
             `
             : megaMenuWidthSwitcher === "full"
                 ? `
@@ -1197,7 +1200,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `
                 position: absolute;
                     ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Tablet}${megaMenuContentWidthValueUnits?.Tablet};` : ''}
-                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Tablet}${megaMenuContentTopPositionUnits?.Tablet}; !important` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Tablet}${megaMenuContentTopPositionUnits?.Tablet};` : ''}
+                    ${megaMenuContentLeftPositionValue ? `left: ${megaMenuContentLeftPositionValue?.Tablet}${megaMenuContentLeftPositionUnits?.Tablet};` : ''}
                 `
                 : megaMenuWidthSwitcher === "full"
                     ? `
@@ -1241,7 +1245,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ? `
                 position: absolute;
                     ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Mobile}${megaMenuContentWidthValueUnits?.Mobile};` : ''}
-                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Mobile}${megaMenuContentTopPositionUnits?.Mobile}; !important` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Mobile}${megaMenuContentTopPositionUnits?.Mobile};` : ''}
+                    ${megaMenuContentLeftPositionValue ? `left: ${megaMenuContentLeftPositionValue?.Mobile}${megaMenuContentLeftPositionUnits?.Mobile};` : ''}
                 `
                 : megaMenuWidthSwitcher === "full"
                     ? `
@@ -1367,7 +1372,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <>
                         <FB_Range
                             min={0}
-                            max={megaMenuContentWidthValueUnits === '%' ? 100 : 2000}
+                            max={4000}
                             label={__("Content Width", "frontis-blocks")}
                             rangeValue={megaMenuContentWidthValue}
                             onChangeHandler={(value) => setAttributes({ megaMenuContentWidthValue: value })}
@@ -1379,14 +1384,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             resetFallbackValue={''}
                         />
                         <FB_Range
-                            min={0}
-                            max={megaMenuContentTopPositionUnits === '%' ? 100 : 1000}
+                            min={-1000}
+                            max={1000}
                             label={__("Position Top", "frontis-blocks")}
                             rangeValue={megaMenuContentTopPositionValue}
                             onChangeHandler={(value) => setAttributes({ megaMenuContentTopPositionValue: value })}
                             rangeUnitHandler={(value) => setAttributes({ megaMenuContentTopPositionUnits: value })}
                             deviceType={deviceType}
                             units={megaMenuContentTopPositionUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={''}
+                        />
+                        <FB_Range
+                            min={-1000}
+                            max={1000}
+                            label={__("Position Left", "frontis-blocks")}
+                            rangeValue={megaMenuContentLeftPositionValue}
+                            onChangeHandler={(value) => setAttributes({ megaMenuContentLeftPositionValue: value })}
+                            rangeUnitHandler={(value) => setAttributes({ megaMenuContentLeftPositionUnits: value })}
+                            deviceType={deviceType}
+                            units={megaMenuContentLeftPositionUnits}
                             setAttributes={setAttributes}
                             rangeStep={1}
                             resetFallbackValue={''}
