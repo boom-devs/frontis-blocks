@@ -1,6 +1,5 @@
 #frontis-dl {
 .fb-template-library-store-content-wrapper {
-    // flex: 6;
     position: relative;
     height: 100%;
     width: 100%;
@@ -18,13 +17,14 @@
 
 .fb-template-library-store-content {
     padding: 0;
+    width: 100%;
     min-height: calc(100vh - 87px);
-    height: 100%;
     position: relative;
 
     .fb-template-library-content-header {
         display: flex;
         flex-direction: column;
+        width: 100%;
 
         h2 {
             font-family: $heading-font-family;
@@ -100,7 +100,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 0 32px;
-            width: 100%;
+            width: calc(100%);
             box-sizing: border-box;
 
             @media only screen and (max-width: 767px) {
@@ -291,6 +291,7 @@
     }
 
     div.fb-template-library-cards {
+        width: 100%;
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 24px;
