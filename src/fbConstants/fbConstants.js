@@ -635,5 +635,5 @@ export const ANIMATION = [
 export const MENU_TYPE = [
     { value: 'icon', label: __('Icon', 'frontis-blocks') },
     { value: 'text', label: __('Text', 'frontis-blocks') },
-    { value: 'icon-text', label: __('Icon With Text', 'frontis-blocks') },
+    { value: 'icon-text', label: __('Both', 'frontis-blocks') },
 ];
