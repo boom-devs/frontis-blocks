@@ -2922,16 +2922,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const generalControls = (
 		<>
 			<PanelBody title={__("Menu Opener", "frontis-blocks")} initialOpen={true}>
-				<SelectControl
+
+				<FB_SwitcherControl
 					label={__("Menu Type", "frontis-blocks")}
-					value={menuType}
 					options={MENU_TYPE}
-					onChange={(value) => {
-						setAttributes({
-							menuType: value,
-						});
-					}}
+					globalSwitcher={menuType}
+					setGlobalSwitcher={(value) => setAttributes({ menuType: value })}
 				/>
+				
 				{(menuType === 'icon' || menuType === 'icon-text') && (
 					<BaseControl>
 						<FBIconPicker
@@ -2972,28 +2970,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 			</PanelBody>
 			<PanelBody title={__("Closed Menu", "frontis-blocks")} initialOpen={false}>
-				<SelectControl
+
+				<FB_SwitcherControl
 					label={__("Menu Type", "frontis-blocks")}
-					value={closeMenuType}
 					options={MENU_TYPE}
-					onChange={(value) => {
-						setAttributes({
-							closeMenuType: value,
-						});
-					}}
+					globalSwitcher={closeMenuType}
+					setGlobalSwitcher={(value) => setAttributes({ closeMenuType: value })}
 				/>
-				{(menuType === 'icon' || menuType === 'icon-text') && (
-					<FBIconPicker
-						value={closeMenuIcon}
-						setIconHandler={closeMenuIconHandler}
-					/>
+
+				{(closeMenuType === 'icon' || closeMenuType === 'icon-text') && (
+
+					<BaseControl>
+						<FBIconPicker
+							value={closeMenuIcon}
+							setIconHandler={closeMenuIconHandler}
+						/>
+					</BaseControl>
+
 				)}
-				{(menuType === 'text' || menuType === 'icon-text') && (
+				{(closeMenuType === 'text' || closeMenuType === 'icon-text') && (
+
+				<BaseControl>
 					<TextControl
 						label={__("Text", "frontis-blocks")}
 						value={closeMenuText}
 						onChange={(value) => setAttributes({ closeMenuText: value })}
 					/>
+				</BaseControl>
 				)}
 			</PanelBody>
 		</>
