@@ -20,8 +20,12 @@ export default {
         default: 'full',
     },
     megaMenuContentWidthValue: {
-        type: 'string',
-        default: '1200'
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     megaMenuContentWidthValueUnits: {
         type: 'object',
@@ -32,10 +36,30 @@ export default {
         }
     },
     megaMenuContentTopPositionValue: {
-        type: 'string',
-        default: '70'
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     megaMenuContentTopPositionUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    megaMenuContentLeftPositionValue: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuContentLeftPositionUnits: {
         type: 'object',
         default: {
             Desktop: 'px',

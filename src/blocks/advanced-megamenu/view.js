@@ -204,13 +204,13 @@
 
             // Initialize
             setupMenuItems();
-            positionPanels();
+            // positionPanels();
 
             // Handle window resize
             const handleResize = debounce(function() {
                 closeAllMenus();
                 setupMenuItems();
-                positionPanels();
+                // positionPanels();
             }, 250);
 
             window.addEventListener('resize', handleResize);
@@ -218,7 +218,7 @@
             // Handle scroll to update panel position on desktop
             const handleScroll = debounce(function() {
                 if (!shouldUseMobileBehavior()) {
-                    positionPanels();
+                    // positionPanels();
                 }
             }, 100);
 
