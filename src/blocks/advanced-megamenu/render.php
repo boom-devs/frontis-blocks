@@ -49,7 +49,7 @@ if (empty($items)) {
         <nav class="fb-advanced-mega-menu" data-trigger="<?php echo esc_attr($trigger_type); ?>">
             <button class="fb-advanced-mega-menu-toggle" aria-label="Toggle menu">
                 <svg class="hamburger-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"
                     stroke-linejoin="round">
                     <line x1="3" y1="6" x2="21" y2="6"></line>
                     <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -62,6 +62,11 @@ if (empty($items)) {
                 </svg>
             </button>
             <ul class="fb-advanced-mega-menu-list">
+                <div class="mobile-logo">
+                    <a href="https://frontiswp.com/frontis-blocks">
+                        <img src="https://frontiswp.com/wp-content/uploads/2025/06/logo-black.svg" alt="">
+                    </a>
+                </div>
                 <?php foreach ($items as $item):
                     $item_icon = isset($item['megaMenuIconFrontend']) ? $item['megaMenuIconFrontend'] : '';
                     ?>
