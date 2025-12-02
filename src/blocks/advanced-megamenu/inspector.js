@@ -230,7 +230,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuContentTopPositionValue,
         megaMenuContentTopPositionUnits,
         megaMenuContentLeftPositionValue,
-        megaMenuContentLeftPositionUnits
+        megaMenuContentLeftPositionUnits,
+        megaMenuCloseIconColorSwitcher,
+        megaMenuCloseIconColor,
+        megaMenuCloseIconHoverColor,
+        megaMenuCloseIconSize,
+        megaMenuCloseIconSizeUnits,
+        megaMenuCloseIconGap,
+        megaMenuCloseIconGapUnits,
+        megaMenuCloseIconRotateSwitcher,
+        megaMenuCloseIconRotation,
+        megaMenuCloseIconRotateHover
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -256,6 +266,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         return { userPatterns };
     }, []);
 
+    useEffect(() => {
+        if (patterns.length > 1) {
+            setAttributes({ patternsData: patterns });
+        }
+    }, [patterns]);
+    
     useEffect(() => {
         const patternOptions = [{ value: '', label: __('Select a pattern', 'frontis-blocks') }];
 
@@ -1684,7 +1700,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     setAttributes={setAttributes}
                 />
             </PanelBody>
-            <PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+            <PanelBody title={__("Item Icon", "frontis-blocks")} initialOpen={false}>
                 {/* Icon color */}
                 <FB_SwitcherControl
                     label={__("Color", "frontis-blocks")}
@@ -1764,6 +1780,94 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         label={__("Icon Rotation", "frontis-blocks")}
                         rangeValue={megaMenuIconRotateHover}
                         onChangeHandler={(value) => setAttributes({ megaMenuIconRotateHover: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
+                )}
+            </PanelBody>
+            <PanelBody title={__("Item Icon", "frontis-blocks")} initialOpen={false}>
+                {/* Icon color */}
+                <FB_SwitcherControl
+                    label={__("Color", "frontis-blocks")}
+                    globalSwitcher={megaMenuCloseIconColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuCloseIconColorSwitcher: value })}
+                />
+
+                {megaMenuCloseIconColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={megaMenuCloseIconColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuCloseIconColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {megaMenuCloseIconColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={megaMenuCloseIconHoverColor}
+                        setGlobalColor={(value) => setAttributes({ megaMenuCloseIconHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+                {/* Icon Size */}
+                <FB_Range
+                    min={0}
+                    max={megaMenuCloseIconSizeUnits === '%' ? 100 : 200}
+                    label={__("Icon Size", "frontis-blocks")}
+                    rangeValue={megaMenuCloseIconSize}
+                    onChangeHandler={(value) => setAttributes({ megaMenuCloseIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuCloseIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuCloseIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                {/* Icon Gap */}
+                <FB_Range
+                    min={0}
+                    max={megaMenuCloseIconGapUnits === '%' ? 100 : 200}
+                    label={__("Icon Gap", "frontis-blocks")}
+                    rangeValue={megaMenuCloseIconGap}
+                    onChangeHandler={(value) => setAttributes({ megaMenuCloseIconGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ megaMenuCloseIconGapUnits: value })}
+                    deviceType={deviceType}
+                    units={megaMenuCloseIconGapUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={''}
+                />
+                {/* Icon Rotation */}
+                <FB_SwitcherControl
+                    label={__("Icon Rotation", "frontis-blocks")}
+                    globalSwitcher={megaMenuCloseIconRotateSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ megaMenuCloseIconRotateSwitcher: value })}
+                />
+
+                {megaMenuCloseIconRotateSwitcher === 'normal' && (
+                    <FB_Range
+                        min={-360}
+                        max={360}
+                        label={__("Icon Rotation", "frontis-blocks")}
+                        rangeValue={megaMenuCloseIconRotation}
+                        onChangeHandler={(value) => setAttributes({ megaMenuCloseIconRotation: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
+                )}
+
+                {megaMenuCloseIconRotateSwitcher === 'hover' && (
+                    <FB_Range
+                        min={-360}
+                        max={360}
+                        label={__("Icon Rotation", "frontis-blocks")}
+                        rangeValue={megaMenuCloseIconRotateHover}
+                        onChangeHandler={(value) => setAttributes({ megaMenuCloseIconRotateHover: value === 0 ? undefined : value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
                         rangeStep={1}
