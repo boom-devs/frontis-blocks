@@ -802,6 +802,85 @@ const FullSiteImportSettingConfig = ({
       }
     }
   };
+
+  // 1. Header + Footer + Auto Navigation Import
+const handleImportHeadersFooters = async (headers = [], footers = []) => {
+    if ((!headers || headers.length === 0) && (!footers || footers.length === 0)) {
+        console.log("No headers or footers to import.");
+        return { success: true, mapping: {}, stats: { nav_created: 0, part_created: 0 } };
+    }
+
+    const form = new FormData();
+    form.append('action', 'fb_import_headers_footers');
+    form.append('security', nonce);
+    form.append('headers', JSON.stringify(headers));
+    form.append('footers', JSON.stringify(footers));
+
+    try {
+        const response = await fetch(ajaxUrl, {
+            method: 'POST',
+            body: form,
+            credentials: 'same-origin',
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            const { stats, mapping } = result.data;
+            const navMsg = stats.nav_created > 0 ? `${stats.nav_created} navigations created, ` : '';
+            toast.success(`Headers & Footers imported! ${navMsg}${stats.part_created} parts created`);
+            
+            return {
+                success: true,
+                mapping,        // ← এটা পরে টেমপ্লেটে লাগবে
+                stats
+            };
+        } else {
+            throw new Error(result.data?.message || 'Header/Footer import failed');
+        }
+    } catch (err) {
+        console.error('Header/Footer import error:', err);
+        toast.error(`Header/Footer import failed: ${err.message}`);
+        return { success: false, error: err.message };
+    }
+};
+
+// 2. Templates Import (navigation mapping দিয়ে)
+const handleImportTemplates = async (templates = [], navigationMapping = {}) => {
+    if (!templates || templates.length === 0) {
+        console.log("No templates to import.");
+        return { success: true, created: 0, skipped: templates.length };
+    }
+
+    const form = new FormData();
+    form.append('action', 'fb_import_templates');
+    form.append('security', nonce);
+    form.append('templates', JSON.stringify(templates));
+    form.append('mapping', JSON.stringify(navigationMapping));
+
+    try {
+        const response = await fetch(ajaxUrl, {
+            method: 'POST',
+            body: form,
+            credentials: 'same-origin',
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            const { created, skipped } = result.data;
+            toast.success(`Templates imported: ${created} created, ${skipped} skipped`);
+            
+            return { success: true, created, skipped };
+        } else {
+            throw new Error(result.data?.message || 'Templates import failed');
+        }
+    } catch (err) {
+        console.error('Templates import error:', err);
+        toast.error(`Templates import failed: ${err.message}`);
+        return { success: false, error: err.message };
+    }
+};
   
 
   const handleImport = useCallback(async () => {
@@ -839,6 +918,7 @@ const FullSiteImportSettingConfig = ({
       const templates = siteData.templates || templatesData.data.templates;
       const headers = siteData.headers || templatesData.data.headers;
       const footers = siteData.footers || templatesData.data.footers;
+      console.log(headers, footers, templates)
       // const allTemplateParts = siteData.templateParts || templatePartsData;
       const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
   
@@ -877,12 +957,50 @@ const FullSiteImportSettingConfig = ({
       // updateStepStatus("template_parts", partsResult.success ? "success" : "warning");
 
       // STEP 5.5: TEMPLATES
+      // setCurrentStep("templates");
+      // updateStepStatus("templates", "running");
+      // setImportProgress(65);
+
+      // const templateResult = await handlePushTemplates(templates || []);
+      // updateStepStatus("templates", templateResult.success ? "success" : "warning");
+
+      // After plugins step...
+      setCurrentStep("headers");
+      updateStepStatus("headers", "running");
+      updateStepStatus("footers", "running");  // একসাথে চালু
+      setImportProgress(58);
+
+      let navigationMapping = {};
+
+      // Step 5: Import Headers + Footers (with auto navigation creation)
+      const hfResult = await handleImportHeadersFooters(headers, footers);
+
+      if (hfResult.success) {
+          navigationMapping = hfResult.mapping || {};
+          updateStepStatus("headers", "success");
+          updateStepStatus("footers", "success");
+      } else {
+          updateStepStatus("headers", "error");
+          updateStepStatus("footers", "error");
+          throw new Error("Header/Footer import failed");
+      }
+
+      setImportProgress(70);
+
+      // Step 6: Import Templates (using navigation mapping)
       setCurrentStep("templates");
       updateStepStatus("templates", "running");
-      setImportProgress(65);
 
-      const templateResult = await handlePushTemplates(templates || []);
-      updateStepStatus("templates", templateResult.success ? "success" : "warning");
+      const templateResult = await handleImportTemplates(templates, navigationMapping);
+
+      if (templateResult.success) {
+          updateStepStatus("templates", "success");
+      } else {
+          updateStepStatus("templates", "error");
+          throw new Error("Templates import failed");
+      }
+
+      setImportProgress(75);
 
       // STEP 6: PAGES
       setCurrentStep("pages");
