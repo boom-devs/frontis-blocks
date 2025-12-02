@@ -15,6 +15,7 @@ import {
 	TextareaControl,
 	Dropdown
 } from '@wordpress/components';
+import Select2 from "react-select";
 import { useEffect, useState, useMemo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
@@ -426,32 +427,51 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		const patternOptions = [
 			{ value: '', label: __('Select a pattern', 'frontis-blocks') }
 		];
-
-		// Add all patterns
+	
 		if (patternData.allPatterns && patternData.allPatterns.length > 0) {
 			patternOptions.push(
-				{ value: 'core-separator', label: __('--- Theme Patterns ---', 'frontis-blocks'), disabled: true },
+				{ value: 'core-separator', label: __('--- Theme Patterns ---', 'frontis-blocks'), isDisabled: true },
 				...patternData.allPatterns.map(pattern => ({
 					value: pattern.name,
 					label: pattern.title
 				}))
 			);
 		}
-
-		// Add user patterns if any were found
+	
 		if (patternData.userPatterns && patternData.userPatterns.length > 0) {
 			patternOptions.push(
-				{ value: 'user-separator', label: __('--- User Patterns ---', 'frontis-blocks'), disabled: true },
+				{ value: 'user-separator', label: __('--- User Patterns ---', 'frontis-blocks'), isDisabled: true },
 				...patternData.userPatterns.map(pattern => ({
 					value: 'user-' + pattern.id,
 					label: pattern.title && pattern.title.raw ? pattern.title.raw : `Pattern ${pattern.id}`
 				}))
 			);
-
+	
 			console.log('User patterns found:', patternData.userPatterns);
 		}
+	
 		setPatterns(patternOptions);
 	}, [patternData]);
+
+	const handlePatternChange = (selectedOption) => {
+		const value = selectedOption?.value || '';
+	
+		// separator / empty select handle
+		if (!value || value === 'core-separator' || value === 'user-separator') {
+			setAttributes({
+				selectedTemplate: '',
+				patternContent: ''
+			});
+			return;
+		}
+	
+		const content = getSelectedPatternContent(value);
+	
+		setAttributes({
+			selectedTemplate: value,
+			patternContent: content
+		});
+	};
 
 	// Handle pattern selection
 	const getSelectedPatternContent = (patternId) => {
@@ -2947,27 +2967,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 					</BaseControl>
 				)}
-				<BaseControl>
-					<SelectControl
-						label={__("Select Pattern", "frontis-blocks")}
-						value={selectedTemplate}
+				<BaseControl
+					label={__("Select Pattern", "frontis-blocks")}
+					help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
+				>
+					<Select2
+						className="fb-select2-control"
 						options={patterns}
-						onChange={(value) => {
-							const content = getSelectedPatternContent(value);
-							setAttributes({
-								selectedTemplate: value,
-								patternContent: content
-							});
+						value={patterns.find(option => option.value === selectedTemplate) || null}
+						onChange={handlePatternChange}
+						isOptionDisabled={(option) => option.isDisabled}
+						placeholder={__("Select a pattern", "frontis-blocks")}
+						styles={{
+							menu: (base) => ({
+								...base,
+								zIndex: 9999,
+							}),
 						}}
-						help={__("Choose a block pattern to use as the content of your off-canvas menu", "frontis-blocks")}
 					/>
 				</BaseControl>
-				<SelectControl
+				<BaseControl
 					label={__("Animation", "frontis-blocks")}
-					value={menuPosition}
-					options={ANIMATION}
-					onChange={(value) => setAttributes({ menuPosition: value })}
-				/>
+				>
+					<Select2
+						className="fb-select2-control"
+						options={ANIMATION}
+						value={ANIMATION.find(opt => opt.value === menuPosition) || null}
+						onChange={(opt) => setAttributes({ menuPosition: opt?.value || '' })}
+						styles={{
+							menu: (base) => ({
+								...base,
+								zIndex: 9999,
+							}),
+						}}
+					/>
+				</BaseControl>
 			</PanelBody>
 			<PanelBody title={__("Closed Menu", "frontis-blocks")} initialOpen={false}>
 
