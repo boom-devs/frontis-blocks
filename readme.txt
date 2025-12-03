@@ -236,7 +236,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - Works with the latest **Gutenberg** and **WordPress**.
 
 = 1.1.0 – 16 October 2025 =
-- **`critical-css` block** to inline critical styles per page/template.
 - **Template Patterns** for **Pages** and **Site** to speed up layout creation from the inserter.
 - Enhancements across existing blocks (refined controls, better defaults, stability).
 - Multiple bug fixes across existing blocks.
