@@ -25,7 +25,8 @@ import {
     EffectCoverflow,
     EffectFlip,
     EffectCreative,
-    EffectCards
+    EffectCards,
+    Keyboard
 } from 'swiper/modules';
 
 import 'swiper/css';
@@ -64,6 +65,7 @@ const Edit = (props) => {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+        enableKeyboardNavigation,
         paginationType,
         sliderType,
         slideEffect,
@@ -186,6 +188,12 @@ const Edit = (props) => {
         
         allowTouchMove: allowTouchMove,
         mousewheel: enableMouseWheel,
+
+        keyboard: enableKeyboardNavigation ? {
+            enabled: true,
+            onlyInViewport: true,
+            pageUpDown: false,
+        } : false,
         
         onBeforeInit(swiperInst) {
             swiperRef.current = swiperInst;
@@ -203,6 +211,7 @@ const Edit = (props) => {
         slideEffect,
         allowTouchMove,
         enableMouseWheel,
+        enableKeyboardNavigation,
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
@@ -233,6 +242,7 @@ const Edit = (props) => {
         reverseDirection,
         allowTouchMove,
         enableMouseWheel,
+        enableKeyboardNavigation,
         paginationType,
         displayDots,
         displayArrows,
@@ -273,6 +283,18 @@ const Edit = (props) => {
             } else {
                 swiperInstance.autoplay.stop();
             }
+
+            // Keyboard toggle
+            if (enableKeyboardNavigation && swiperInstance.keyboard) {
+                swiperInstance.params.keyboard = {
+                    enabled: true,
+                    onlyInViewport: true,
+                    pageUpDown: false,
+                };
+                swiperInstance.keyboard.enable();
+            } else if (swiperInstance.keyboard) {
+                swiperInstance.keyboard.disable();
+            }
     
             // Update the Swiper instance with new parameters
             swiperInstance.update();
@@ -306,6 +328,7 @@ const Edit = (props) => {
         sliderType,
         carouselPerColumn,
         carouselPerColumnGap,
+        enableKeyboardNavigation,
     ]);
 
     // Add this new useEffect for pause on hover
@@ -439,6 +462,7 @@ const Edit = (props) => {
                         Autoplay,
                         Manipulation,
                         Mousewheel,
+                        Keyboard,
                         EffectFade,
                         EffectCube,
                         EffectCoverflow,
