@@ -3635,177 +3635,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop}; 
         }
 
-        .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
-            grid-column: span ${gridColumnsPerSection?.Desktop};
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more {
-            
-            `: `
-            `}
-
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover {
-            `: `
-            `}
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more_loader {
-			border-left: 2px solid transparent;
-			border-radius: 50%;
-			display: inline-block;
-			box-sizing: border-box;
-            transition: all .3s ease-in-out;
-			animation: loader 1s linear infinite;
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper:hover .fb_load_more_loader {
-            transition: all .3s ease-in-out;
-        }
-
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
-            ${paginationPrevNextWidth?.Desktop ? `width: ${paginationPrevNextWidth?.Desktop}${paginationPrevNextWidthUnits?.Desktop};` : ''}
-            ${paginationPrevNextWidth?.Desktop ? `height: ${paginationPrevNextWidth?.Desktop}${paginationPrevNextWidthUnits?.Desktop};` : ''}
-
-            ${paginationArrowBorder ? `border: ${paginationArrowBorder};` : ''} 
-            ${paginationArrowBorderColor ? `border-color: ${paginationArrowBorderColor};` : ''}
-            ${paginationArrowDesktopBorderWidth && paginationArrowDesktopBorder?.top ? `border-width: ${paginationArrowDesktopBorderWidth};` : ''}
-            ${paginationArrowDesktopBorderRadiusWidth && paginationArrowDesktopBorderRadius?.top? `border-radius: ${paginationArrowDesktopBorderRadiusWidth};` : ''}
-
-            ${paginationArrowNormalBackgroundType === 'gradient' ? `   
-                ${paginationArrowNormalCustomGradientSwitcher && paginationArrowNormalCustomGradientInputValue ? `background: ${paginationArrowNormalCustomGradientInputValue};` : `background: ${paginationArrowNormalGradientColor};`}
-            `: `
-                ${paginationArrowNormalClassicColor ? `background: ${paginationArrowNormalClassicColor};` : ''}
-            `}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover{
-            ${paginationArrowBorderHoverColor ? `border-color: ${paginationArrowBorderHoverColor};` : ''}
-
-            ${paginationArrowHoverBackgroundType === 'gradient' ? `    
-                ${paginationArrowHoverCustomGradientSwitcher && paginationArrowHoverCustomGradientInputValue ? `background: ${paginationArrowHoverCustomGradientInputValue};` : `background: ${paginationArrowHoverGradientColor};`}
-            `: `
-                ${paginationArrowHoverClassicColor ? `background: ${paginationArrowHoverClassicColor};` : ''}
-            `}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
-            ${paginationArrowSize?.Desktop ? `width: ${paginationArrowSize?.Desktop}${paginationArrowSizeUnits?.Desktop};` : ''}
-            ${paginationArrowSize?.Desktop ? `height: ${paginationArrowSize?.Desktop}${paginationArrowSizeUnits?.Desktop};` : ''}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
-            ${paginationArrowIconColor ? `fill: ${paginationArrowIconColor};` : ''}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon svg,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon svg{
-            ${paginationArrowIconHoverColor ? `fill: ${paginationArrowIconHoverColor};` : ''}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
-            ${paginationArrowTextGlobalTypoSwitcher?.fontFamily === true && paginationArrowTextGlobalTypographyData?.fontFamily ? `font-family: ${paginationArrowTextGlobalTypographyData?.fontFamily};` : ''}  
-            ${paginationArrowTextGlobalTypoSwitcher?.fontSize === true && paginationArrowTextGlobalTypographyData?.fontSize ? `font-size: ${paginationArrowTextGlobalTypographyData?.fontSize};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.fontWeight === true && paginationArrowTextGlobalTypographyData?.fontWeight ? `font-weight: ${paginationArrowTextGlobalTypographyData?.fontWeight};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.fontStyle === true && paginationArrowTextGlobalTypographyData?.fontStyle ? `font-style: ${paginationArrowTextGlobalTypographyData?.fontStyle};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.textTransform === true && paginationArrowTextGlobalTypographyData?.textTransform ? `text-transform: ${paginationArrowTextGlobalTypographyData?.textTransform};` : ''} 
-            ${paginationArrowTextGlobalTypoSwitcher?.textDecoration === true && paginationArrowTextGlobalTypographyData?.textDecoration ? `text-decoration: ${paginationArrowTextGlobalTypographyData?.textDecoration};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === true && paginationArrowTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${paginationArrowTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === true && paginationArrowTextGlobalTypographyData?.lineHeight ? `line-height: ${paginationArrowTextGlobalTypographyData?.lineHeight};` : ''}
-            
-        	${paginationArrowTextGlobalTypoSwitcher?.fontFamily === false && paginationArrowTextFontFamily && paginationArrowTextFontFamily !== 'Default' ? `font-family: ${paginationArrowTextFontFamily};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Desktop ? `font-size: ${paginationArrowTextFontSize?.Desktop}${paginationArrowTextFontSizeUnits?.Desktop};` : ''} 
-			${paginationArrowTextGlobalTypoSwitcher?.fontWeight === false && paginationArrowTextFontWeight ? `font-weight: ${paginationArrowTextFontWeight};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.fontStyle === false && paginationArrowTextFontStyle ? `font-style: ${paginationArrowTextFontStyle};` : ''}  
-			${paginationArrowTextGlobalTypoSwitcher?.textTransform === false && paginationArrowTextTransform ? `text-transform: ${paginationArrowTextTransform};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.textDecoration === false && paginationArrowTextDecoration ? `text-decoration: ${paginationArrowTextDecoration};` : ''} 
-			${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Desktop ? `letter-spacing: ${paginationArrowTextLetterSpacing?.Desktop}${paginationArrowTextLetterSpacingUnits?.Desktop};` : ''}
-			${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Desktop ? `line-height: ${paginationArrowTextLineHeight?.Desktop}${paginationArrowTextLineHeightUnits?.Desktop};` : ''}
-
-            ${paginationArrowTextColor ? `color: ${paginationArrowTextColor};` : ''}
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous:hover .fb_pagination_previous_text,
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next:hover .fb_pagination_next_text{ 
-            ${paginationArrowTextHoverColor ? `color: ${paginationArrowTextHoverColor};` : ''}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
-            ${paginationBtnGap?.Desktop ? `gap: ${paginationBtnGap?.Desktop}${paginationBtnGapUnits?.Desktop};` : ''}
-        }
-                
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
-            ${paginationBtnSize?.Desktop ? `width: ${paginationBtnSize?.Desktop}${paginationBtnSizeUnits?.Desktop};` : ''}  
-            ${paginationBtnSize?.Desktop ? `height: ${paginationBtnSize?.Desktop}${paginationBtnSizeUnits?.Desktop};` : ''}
-
-            ${paginationBtnTextGlobalTypoSwitcher?.fontFamily === true && paginationBtnTextGlobalTypographyData?.fontFamily ? `font-family: ${paginationBtnTextGlobalTypographyData?.fontFamily};` : ''}  
-            ${paginationBtnTextGlobalTypoSwitcher?.fontSize === true && paginationBtnTextGlobalTypographyData?.fontSize ? `font-size: ${paginationBtnTextGlobalTypographyData?.fontSize};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.fontWeight === true && paginationBtnTextGlobalTypographyData?.fontWeight ? `font-weight: ${paginationBtnTextGlobalTypographyData?.fontWeight};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.fontStyle === true && paginationBtnTextGlobalTypographyData?.fontStyle ? `font-style: ${paginationBtnTextGlobalTypographyData?.fontStyle};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.textTransform === true && paginationBtnTextGlobalTypographyData?.textTransform ? `text-transform: ${paginationBtnTextGlobalTypographyData?.textTransform};` : ''} 
-            ${paginationBtnTextGlobalTypoSwitcher?.textDecoration === true && paginationBtnTextGlobalTypographyData?.textDecoration ? `text-decoration: ${paginationBtnTextGlobalTypographyData?.textDecoration};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === true && paginationBtnTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${paginationBtnTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === true && paginationBtnTextGlobalTypographyData?.lineHeight ? `line-height: ${paginationBtnTextGlobalTypographyData?.lineHeight};` : ''}
-            
-        	${paginationBtnTextGlobalTypoSwitcher?.fontFamily === false && paginationBtnTextFontFamily && paginationBtnTextFontFamily !== 'Default' ? `font-family: ${paginationBtnTextFontFamily};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Desktop ? `font-size: ${paginationBtnTextFontSize?.Desktop}${paginationBtnTextFontSizeUnits?.Desktop};` : ''} 
-			${paginationBtnTextGlobalTypoSwitcher?.fontWeight === false && paginationBtnTextFontWeight ? `font-weight: ${paginationBtnTextFontWeight};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.fontStyle === false && paginationBtnTextFontStyle ? `font-style: ${paginationBtnTextFontStyle};` : ''}  
-			${paginationBtnTextGlobalTypoSwitcher?.textTransform === false && paginationBtnTextTransform ? `text-transform: ${paginationBtnTextTransform};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.textDecoration === false && paginationBtnTextDecoration ? `text-decoration: ${paginationBtnTextDecoration};` : ''} 
-			${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing?.Desktop ? `letter-spacing: ${paginationBtnTextLetterSpacing?.Desktop}${paginationBtnTextLetterSpacingUnits?.Desktop};` : ''}
-			${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight?.Desktop ? `line-height: ${paginationBtnTextLineHeight?.Desktop}${paginationBtnTextLineHeightUnits?.Desktop};` : ''}
-
-            ${paginationBtnTextColor ? `color: ${paginationBtnTextColor};` : ''}
-
-            ${paginationBtnBorder ? `border: ${paginationBtnBorder};` : ''} 
-            ${paginationBtnBorderColor ? `border-color: ${paginationBtnBorderColor};` : ''}
-            ${paginationBtnDesktopBorderWidth && paginationBtnDesktopBorder?.top ? `border-width: ${paginationBtnDesktopBorderWidth};` : ''}
-            ${paginationBtnDesktopBorderRadiusWidth && paginationBtnDesktopBorderRadius?.top? `border-radius: ${paginationBtnDesktopBorderRadiusWidth};` : ''}
-
-            ${paginationBtnNormalBackgroundType === 'gradient' ? `   
-                ${paginationBtnNormalCustomGradientSwitcher && paginationBtnNormalCustomGradientInputValue ? `background: ${paginationBtnNormalCustomGradientInputValue};` : `background: ${paginationBtnNormalGradientColor};`}
-            `: `
-                ${paginationBtnNormalClassicColor ? `background: ${paginationBtnNormalClassicColor};` : ''}
-            `}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item:hover {
-            ${paginationBtnTextHoverColor ? `color: ${paginationBtnTextHoverColor};` : ''}
-            ${paginationBtnHoverBackgroundType === 'gradient' ? `    
-                ${paginationBtnHoverCustomGradientSwitcher && paginationBtnHoverCustomGradientInputValue ? `background: ${paginationBtnHoverCustomGradientInputValue};` : `background: ${paginationBtnHoverGradientColor};`}
-            `: `
-                ${paginationBtnHoverClassicColor ? `background: ${paginationBtnHoverClassicColor};` : ''}
-            `}
-        }
-
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active { 
-            ${paginationActiveBtnTextColor ? `color: ${paginationActiveBtnTextColor};` : ''} 
-            ${paginationActiveBtnNormalBackgroundType === 'gradient' ? `      
-                ${paginationActiveBtnNormalCustomGradientSwitcher && paginationActiveBtnNormalCustomGradientInputValue ? `background: ${paginationActiveBtnNormalCustomGradientInputValue};` : `background: ${paginationActiveBtnNormalGradientColor};`}
-            `: `
-                ${paginationActiveBtnNormalClassicColor ? `background: ${paginationActiveBtnNormalClassicColor};` : ''} 
-            `}
-        }
-        .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item.active:hover { 
-            ${paginationActiveBtnTextHoverColor ? `color: ${paginationActiveBtnTextHoverColor};` : ''} 
-            ${paginationActiveBtnHoverBackgroundType === 'gradient' ? `    
-                ${paginationActiveBtnHoverCustomGradientSwitcher && paginationActiveBtnHoverCustomGradientInputValue ? `background: ${paginationActiveBtnHoverCustomGradientInputValue};` : `background: ${paginationActiveBtnHoverGradientColor};`}
-            `: `
-                ${paginationActiveBtnHoverClassicColor ? `background: ${paginationActiveBtnHoverClassicColor};` : ''} 
-            `}
-        }
-
 
         .${blockId}.fb_post_grid_container.list-layout {
             display: grid;
@@ -4282,10 +4111,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
             }
 
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
-                grid-column: span ${gridColumnsPerSection?.Tablet};
-            }
-
             .${blockId}.fb_post_grid_container.list-layout {
                 display: grid; 
                 row-gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet};
@@ -4463,14 +4288,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postDateGlobalTypoSwitcher?.lineHeight === false && postDateLineHeight?.Tablet ? `line-height: ${postDateLineHeight?.Tablet}${postDateLineHeightUnits?.Tablet};` : ''}
             }
 
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
-            }
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
-            }
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
-            }
 
             .${blockId} .fb_post_grid_read_more_button {
                 ${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Tablet && buttonFontSizeUnits?.Tablet ? `font-size: ${buttonFontSize?.Tablet}${buttonFontSizeUnits?.Tablet};` : ''}
@@ -4506,45 +4323,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockId} .fb_post_grid_read_more_button:hover .fb_post_grid_read_more_icon_wrapper .fb_post_grid_read_more_icon_image {
                 transform: rotate(${buttonImageRotateHover?.Tablet}deg);
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
-                ${paginationPrevNextWidth?.Tablet ? `width: ${paginationPrevNextWidth?.Tablet}${paginationPrevNextWidthUnits?.Tablet};` : ''} 
-                ${paginationPrevNextWidth?.Tablet ? `height: ${paginationPrevNextWidth?.Tablet}${paginationPrevNextWidthUnits?.Tablet};` : ''}
-
-                ${paginationArrowTabletBorderWidth && paginationArrowTabletBorder?.top ? `border-width: ${paginationArrowTabletBorderWidth};` : ''}
-                ${paginationArrowTabletBorderRadiusWidth && paginationArrowTabletBorderRadius?.top? `border-radius: ${paginationArrowTabletBorderRadiusWidth};` : ''}
-
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
-                ${paginationArrowSize?.Tablet ? `width: ${paginationArrowSize?.Tablet}${paginationArrowSizeUnits?.Tablet};` : ''}
-                ${paginationArrowSize?.Tablet ? `height: ${paginationArrowSize?.Tablet}${paginationArrowSizeUnits?.Tablet};` : ''}
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{
-                ${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Tablet ? `font-size: ${paginationArrowTextFontSize?.Tablet}${paginationArrowTextFontSizeUnits?.Tablet};` : ''} 
-                ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Tablet ? `letter-spacing: ${paginationArrowTextLetterSpacing?.Tablet}${paginationArrowTextLetterSpacingUnits?.Tablet};` : ''}
-                ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Tablet ? `line-height: ${paginationArrowTextLineHeight?.Tablet}${paginationArrowTextLineHeightUnits?.Tablet};` : ''}
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
-                ${paginationBtnGap?.Tablet ? `gap: ${paginationBtnGap?.Tablet}${paginationBtnGapUnits?.Tablet};` : ''}
-            }
-                    
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
-                ${paginationBtnSize?.Tablet ? `width: ${paginationBtnSize?.Tablet}${paginationBtnSizeUnits?.Tablet};` : ''}  
-                ${paginationBtnSize?.Tablet ? `height: ${paginationBtnSize?.Tablet}${paginationBtnSizeUnits?.Tablet};` : ''}
-
-                ${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Tablet ? `font-size: ${paginationBtnTextFontSize?.Tablet}${paginationBtnTextFontSizeUnits?.Tablet};` : ''} 
-                ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing?.Tablet ? `letter-spacing: ${paginationBtnTextLetterSpacing?.Tablet}${paginationBtnTextLetterSpacingUnits?.Tablet};` : ''}
-                ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight?.Tablet ? `line-height: ${paginationBtnTextLineHeight?.Tablet}${paginationBtnTextLineHeightUnits?.Tablet};` : ''}
-
-                ${paginationBtnTabletBorderWidth && paginationBtnTabletBorder?.top ? `border-width: ${paginationBtnTabletBorderWidth};` : ''}
-                ${paginationBtnTabletBorderRadiusWidth && paginationBtnTabletBorderRadius?.top? `border-radius: ${paginationBtnTabletBorderRadiusWidth};` : ''}
             }
 
         }
@@ -4589,10 +4367,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, 1fr) !important;
                 row-gap: ${gridRowGap?.Mobile}${gridGapUnits?.Mobile};  
                 column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
-            }
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper {
-                grid-column: span ${gridColumnsPerSection?.Mobile};
             }
 
             .${blockId}.fb_post_grid_container.list-layout .fb_post_grid_wrapper {
@@ -4786,17 +4560,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${postDateGlobalTypoSwitcher?.lineHeight === false && postDateLineHeight?.Mobile ? `line-height: ${postDateLineHeight?.Mobile}${postDateLineHeightUnits?.Mobile};` : ''}
             }
 
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more {
-            }
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more .load_more_button_icon svg {
-            }
-
-            .${blockId}.fb_post_grid_container.grid-layout .fb_load_more_wrapper .fb_load_more:hover .load_more_button_icon svg{
-            }
-
-
             .${blockId} .fb_post_grid_read_more_button {
                 ${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Mobile && buttonFontSizeUnits?.Mobile ? `font-size: ${buttonFontSize?.Mobile}${buttonFontSizeUnits?.Mobile};` : ''}
                 ${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Mobile && buttonLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonLetterSpacing?.Mobile}${buttonLetterSpacingUnits?.Mobile};` : ''}
@@ -4831,45 +4594,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .${blockId} .fb_post_grid_read_more_button:hover .fb_post_grid_read_more_icon_wrapper .fb_post_grid_read_more_icon_image {
                 transform: rotate(${buttonImageRotateHover?.Mobile}deg);
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next{
-                ${paginationPrevNextWidth?.Mobile ? `width: ${paginationPrevNextWidth?.Mobile}${paginationPrevNextWidthUnits?.Mobile};` : ''} 
-                ${paginationPrevNextWidth?.Mobile ? `height: ${paginationPrevNextWidth?.Mobile}${paginationPrevNextWidthUnits?.Mobile};` : ''}
-
-                ${paginationArrowMobileBorderWidth && paginationArrowMobileBorder?.top ? `border-width: ${paginationArrowMobileBorderWidth};` : ''}
-                ${paginationArrowMobileBorderRadiusWidth && paginationArrowMobileBorderRadius?.top? `border-radius: ${paginationArrowMobileBorderRadiusWidth};` : ''}
-
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_icon_Wrapper .fb_pagination_previous_icon,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_icon_Wrapper .fb_pagination_next_icon{
-                ${paginationArrowSize?.Mobile ? `width: ${paginationArrowSize?.Mobile}${paginationArrowSizeUnits?.Mobile};` : ''}
-                ${paginationArrowSize?.Mobile ? `height: ${paginationArrowSize?.Mobile}${paginationArrowSizeUnits?.Mobile};` : ''}
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_previous .fb_pagination_previous_text,
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination_wrapper .fb_pagination_next .fb_pagination_next_text{ 
-                ${paginationArrowTextGlobalTypoSwitcher?.fontSize === false && paginationArrowTextFontSize?.Mobile ? `font-size: ${paginationArrowTextFontSize?.Mobile}${paginationArrowTextFontSizeUnits?.Mobile};` : ''} 
-                ${paginationArrowTextGlobalTypoSwitcher?.letterSpacing === false && paginationArrowTextLetterSpacing?.Mobile ? `letter-spacing: ${paginationArrowTextLetterSpacing?.Mobile}${paginationArrowTextLetterSpacingUnits?.Mobile};` : ''}
-                ${paginationArrowTextGlobalTypoSwitcher?.lineHeight === false && paginationArrowTextLineHeight?.Mobile ? `line-height: ${paginationArrowTextLineHeight?.Mobile}${paginationArrowTextLineHeightUnits?.Mobile};` : ''}
-            }
-
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination {
-                ${paginationBtnGap?.Mobile ? `gap: ${paginationBtnGap?.Mobile}${paginationBtnGapUnits?.Mobile};` : ''}
-            }
-                    
-            .${blockId}.fb_post_grid_container .fb_load_more_wrapper .fb_pagination .fb_pagination_item {
-                ${paginationBtnSize?.Mobile ? `width: ${paginationBtnSize?.Mobile}${paginationBtnSizeUnits?.Mobile};` : ''}  
-                ${paginationBtnSize?.Mobile ? `height: ${paginationBtnSize?.Mobile}${paginationBtnSizeUnits?.Mobile};` : ''}
-
-                ${paginationBtnTextGlobalTypoSwitcher?.fontSize === false && paginationBtnTextFontSize?.Mobile ? `font-size: ${paginationBtnTextFontSize?.Mobile}${paginationBtnTextFontSizeUnits?.Mobile};` : ''} 
-                ${paginationBtnTextGlobalTypoSwitcher?.letterSpacing === false && paginationBtnTextLetterSpacing?.Mobile ? `letter-spacing: ${paginationBtnTextLetterSpacing?.Mobile}${paginationBtnTextLetterSpacingUnits?.Mobile};` : ''}
-                ${paginationBtnTextGlobalTypoSwitcher?.lineHeight === false && paginationBtnTextLineHeight?.Mobile ? `line-height: ${paginationBtnTextLineHeight?.Mobile}${paginationBtnTextLineHeightUnits?.Mobile};` : ''}
-
-                ${paginationBtnMobileBorderWidth && paginationBtnMobileBorder?.top ? `border-width: ${paginationBtnMobileBorderWidth};` : ''}
-                ${paginationBtnMobileBorderRadiusWidth && paginationBtnMobileBorderRadius?.top? `border-radius: ${paginationBtnMobileBorderRadiusWidth};` : ''}
             }
         }
 
@@ -5328,15 +5052,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         postGlobalBoxShadowCssValue,
         postGlobalBoxShadowHoverValues,
         postGlobalBoxShadowHoverCssValue,
-
-
-
-
-
-
-
-
-        
 
         // Position
         postGridPositionType,
@@ -7394,149 +7109,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setGlobalColor={(value) => setAttributes({ postDateHoverColor: value === undefined ? '' : value })}
                         />
                     )}
-                </PanelBody>
-            )}
-
-                <PanelBody title={__("Load More Button", "frontis-blocks")} initialOpen={false}>
-
-                    <FB_TypographyControl
-                        globalTypoControlActive={true}
-
-                        onChangeGlobalTypoType={(value) => {
-                            setAttributes({ 
-                            })
-                        }}
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Text Color", "frontis-blocks")}
-                    />
-
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                        />
-                    )}
-
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                        />
-                    )}
-
-                    <FB_SwitcherControl
-                        label={__("Loader Color", "frontis-blocks")}
-                    />
-
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                        />
-                    )}
-
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                        />
-                    )}
-
-                    <FB_Range
-                        min={1}
-                        max={200}
-                        label={__("Icon Size", "frontis-blocks")}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={"20"}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
-                    />
-
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                        />
-                    )}
-
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                        />
-                    )}
-                    <FB_Spacing
-                        label={__("Icon Margin", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleLoadMoreIconMarginUnitsHandler}
-                        handleSpacingUnitHandler={handleLoadMoreIconMarginUnitChange}
-                        spacingCombineBtnHandler={handleLoadMoreIconMarginCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-                
-                    <FB_BackgroundColorControl
-                        label={__("Background Color", "frontis-blocks")}
-                        
-
-
-                        isBackgroundImage={false}
-
-                    />
-
-                    <FB_Spacing
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleLoadMoreButtonPaddingUnitsHandler}
-                        handleSpacingUnitHandler={handleLoadMoreButtonPaddingUnitChange}
-                        spacingCombineBtnHandler={handleLoadMoreButtonPaddingCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-                    <SelectControl
-                            label={__("Border Style", "frontis-blocks")}
-                            options={BORDER_STYLES}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Border", "frontis-blocks")}
-                    />
-
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                        />
-                    )}
-
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                        />
-                    )}
-
-                    <FB_Spacing
-                        label={__("Border", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleLoadMoreButtonBorderUnitsHandler}
-                        handleSpacingUnitHandler={handleLoadMoreButtonBorderUnitChange}
-                        spacingCombineBtnHandler={handleLoadMoreButtonBorderCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_Spacing
-                        label={__("Border Radius", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleLoadMoreButtonBorderRadiusUnitsHandler}
-                        handleSpacingUnitHandler={handleLoadMoreButtonBorderRadiusUnitChange}
-                        spacingCombineBtnHandler={handleLoadMoreButtonBorderRadiusCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
                 </PanelBody>
             )}
 
