@@ -19,6 +19,7 @@ export default function save( props ) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+		enableKeyboardNavigation,
         paginationType,
 		sliderGlobalWraperClass,
         sliderType,
@@ -74,6 +75,12 @@ export default function save( props ) {
 			speed: transitionSpeed,
 			allowTouchMove: allowTouchMove,
 			mousewheel: enableMouseWheel,
+
+			keyboard: enableKeyboardNavigation ? {
+				enabled: true,
+				onlyInViewport: true,
+				pageUpDown: false,
+			} : false,
 
 			// Add navigation if enabled
 			...(displayArrows && {
