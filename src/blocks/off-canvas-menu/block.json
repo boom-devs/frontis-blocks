@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "frontis-blocks/off-canvas-closer",
+	"name": "frontis-blocks/off-canvas-menu",
 	"version": "1.0.0",
-	"title": "Off-Canvas Closer",
+	"title": "Off-Canvas Menu",
 	"category": "frontis-blocks",
-	"description": "Add an off-canvas closer with a toggleable hamburger icon",
+	"description": "Add an off-canvas menu with a toggleable hamburger icon",
 	"example": {},
     "supports": {
         "anchor": false,
@@ -14,6 +14,5 @@
     },
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
-    "editorStyle": "file:./index.css",
-    "style": "file:./style-index.css"
+    "editorStyle": "file:./index.css"
 }

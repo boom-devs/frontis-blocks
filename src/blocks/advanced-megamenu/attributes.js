@@ -31,6 +31,18 @@ export default {
             Mobile: 'px',
         }
     },
+    megaMenuContentTopPositionValue: {
+        type: 'string',
+        default: '70'
+    },
+    megaMenuContentTopPositionUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
     //Start Mega Menu Style
     megaMenuGlobalTypographyData: {
         type: 'object',

@@ -33,8 +33,8 @@ const FullSiteImportSettingConfig = ({
   } = useSelector((state) => state.attributes);
   const dispatch = useDispatch();
 
-  console.log(templatesData);
-  console.log(templatePartsData);
+  console.log(templatesData.data.templates);
+  // console.log(templatePartsData);
 
 
   const [isImporting, setIsImporting] = useState(false);
@@ -440,79 +440,6 @@ const FullSiteImportSettingConfig = ({
   }, [customColors, customGradientColors, deviceType]);
 
 
-  // Import pages
-  // const handleStorePages = async (pages) => {
-  //   if (pages) {
-  //       try {
-  //           // First update site settings (once only)
-  //           const siteSettings = new FormData();
-  //           siteSettings.append("action", "fb_update_site_settings");
-  //           siteSettings.append("security", nonce);
-  //           siteSettings.append("siteName", formData.siteName || "");
-  //           siteSettings.append("siteTagline", formData.siteTagline || "");
-  //           siteSettings.append("siteLogo", formData.siteLogo.id || "");
-
-  //           await fetch(ajaxUrl, {
-  //               method: "POST",
-  //               body: siteSettings,
-  //               credentials: "same-origin",
-  //           });
-
-  //           // Then import pages one by one
-  //           for (const page of pages) {
-  //               try {
-  //                   let pageObj = page.page;
-  //                   if (typeof page.page === "string") {
-  //                       try {
-  //                           pageObj = JSON.parse(page.page);
-  //                       } catch (err) {
-  //                           console.error("JSON parse failed:", err);
-  //                           pageObj = { content: page.page };
-  //                       }
-  //                   }
-
-  //                   const parsedBlocks = pageObj.content || "";
-
-  //                   const pageData = new FormData();
-  //                   pageData.append("action", "fb_full_site_import");
-  //                   pageData.append("security", nonce);
-  //                   pageData.append("title", page.name);
-  //                   pageData.append("content", parsedBlocks);
-  //                   pageData.append("site_url", window.location.origin || "");
-  //                   pageData.append("uploads_updated", uploadsUpdated);
-
-  //                   const response = await fetch(ajaxUrl, {
-  //                       method: "POST",
-  //                       body: pageData,
-  //                       credentials: "same-origin",
-  //                   });
-
-  //                   const result = await response.json();
-
-  //                   if (result.success) {
-  //                       console.log(`${page.name} created successfully`);
-  //                   } else {
-  //                       console.error(`Failed to create ${page.name}`, result.data);
-  //                   }
-  //               } catch (error) {
-  //                   console.error(`Error creating ${page.name}:`, error);
-  //               }
-  //           }
-
-  //           toast.success("Site imported successfully!", {
-  //               position: "top-right",
-  //               autoClose: 3000,
-  //           });
-  //       } catch (err) {
-  //           console.error("Import error:", err);
-  //           toast.error("Failed to import site", {
-  //               position: "top-right",
-  //               autoClose: 3000,
-  //           });
-  //       }
-  //   }
-  // };
-
   const handleStorePages = async (pages) => {
     if (!pages || pages.length === 0) {
         console.log("No pages to import.");
@@ -545,22 +472,12 @@ const FullSiteImportSettingConfig = ({
 
     for (const page of pages) {
         try {
-            let pageObj = page.page;
-            if (typeof page.page === "string") {
-                try {
-                    pageObj = JSON.parse(page.page);
-                } catch (err) {
-                    console.error("JSON parse failed:", err);
-                    pageObj = { content: page.page };
-                }
-            }
-
-            const parsedBlocks = pageObj.content || "";
+            const parsedBlocks = page.content || "";
 
             const pageData = new FormData();
             pageData.append("action", "fb_full_site_import");
             pageData.append("security", nonce);
-            pageData.append("title", page.name);
+            pageData.append("title", page.title);
             pageData.append("content", parsedBlocks || "");
             pageData.append("slug", page.slug || "");
             pageData.append("template", page.template || "wp-custom-template-fb-template-pages");
@@ -897,7 +814,8 @@ const FullSiteImportSettingConfig = ({
       { key: "upload_files", label: "Uploading and extracting files...", status: "pending" },
       { key: "theme", label: "Installing & activating theme...", status: "pending" },
       { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
-      { key: "template_parts", label: "Creating template parts...", status: "pending" },
+      { key: "headers", label: "Creating headers...", status: "pending" },
+      { key: "footers", label: "Creating footers...", status: "pending" },
       { key: "templates", label: "Creating templates...", status: "pending" },
       { key: "pages", label: "Creating pages...", status: "pending" },
       { key: "global_styles", label: "Updating global styles...", status: "pending" },
@@ -918,8 +836,10 @@ const FullSiteImportSettingConfig = ({
   
       const siteData = siteResp.data;
       const pages = siteData.pages || [];
-      const templates = siteData.templates || templatesData;
-      const allTemplateParts = siteData.templateParts || templatePartsData;
+      const templates = siteData.templates || templatesData.data.templates;
+      const headers = siteData.headers || templatesData.data.headers;
+      const footers = siteData.footers || templatesData.data.footers;
+      // const allTemplateParts = siteData.templateParts || templatePartsData;
       const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
   
       /** STEP 2: UPLOAD FILES **/
@@ -947,14 +867,14 @@ const FullSiteImportSettingConfig = ({
       updateStepStatus("plugins", pluginRes?.skipped ? "skipped" : "success");
 
       // STEP 5: FETCH & PUSH TEMPLATE PARTS
-      setCurrentStep("template_parts");
-      updateStepStatus("template_parts", "running");
-      setImportProgress(60);
+      // setCurrentStep("template_parts");
+      // updateStepStatus("template_parts", "running");
+      // setImportProgress(60);
 
-      console.log("Pushing Template Parts:", allTemplateParts);
+      // console.log("Pushing Template Parts:", allTemplateParts);
 
-      const partsResult = await handlePushTemplateParts(allTemplateParts || []);
-      updateStepStatus("template_parts", partsResult.success ? "success" : "warning");
+      // const partsResult = await handlePushTemplateParts(allTemplateParts || []);
+      // updateStepStatus("template_parts", partsResult.success ? "success" : "warning");
 
       // STEP 5.5: TEMPLATES
       setCurrentStep("templates");

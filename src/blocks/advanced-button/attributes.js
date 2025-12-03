@@ -235,7 +235,6 @@ const attributes = {
 		default: "",
 	},
 	/** End Background */
-
     buttonBorder: {
         type: 'string',
         default: "none",
