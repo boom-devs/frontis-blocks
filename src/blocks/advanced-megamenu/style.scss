@@ -363,6 +363,8 @@
 
         &.active .fb-advanced-mega-menu-panel {
             display: block;
+            visibility: visible;
+            opacity: 1;
         }
 
         &::after {
