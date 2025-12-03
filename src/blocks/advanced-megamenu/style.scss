@@ -219,9 +219,16 @@
         margin-top: 0;
     }
 
+    .fb-advanced-mega-menu-toggle {
+        display: none !important;
+    }
+
     .fb-advanced-mega-menu-list {
         gap: 20px;
+        display: flex;
     }
+
+
 }
 
 @media only screen and (max-width: 1024px) and (min-width: 768px) {
@@ -291,7 +298,11 @@
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 1024px) {
+    .fb-advanced-mega-menu-toggle {
+        display: flex !important;
+    }
+    
     .fb-advanced-mega-menu-toggle {
         display: flex;
     }
@@ -334,9 +345,11 @@
         position: relative;
         margin-bottom: 14px;
         width: 100%;
-        &:first-child{
+
+        &:first-child {
             margin-top: 24px;
         }
+
         &:last-child {
             margin-bottom: 0;
         }
