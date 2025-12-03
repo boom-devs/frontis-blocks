@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     // Debounce function for resize events
@@ -26,13 +26,13 @@
     function initMegaMenu() {
         const menus = document.querySelectorAll('.fb-advanced-mega-menu');
 
-        menus.forEach(function(menu) {
+        menus.forEach(function (menu) {
             const triggerType = menu.getAttribute('data-trigger');
             const menuItems = menu.querySelectorAll('.fb-advanced-mega-menu-item.has-mega-menu');
             const toggleButton = menu.querySelector('.fb-advanced-mega-menu-toggle');
             const menuList = menu.querySelector('.fb-advanced-mega-menu-list');
             const mainWrapper = menu.closest('.fb-advanced-mega-menu-main-wrapper');
-            
+
             // Check responsive settings
             const isTabletResponsive = mainWrapper && mainWrapper.classList.contains('fb-tablet-responsive');
             const isMobileResponsive = mainWrapper && mainWrapper.classList.contains('fb-mobile-responsive');
@@ -49,10 +49,10 @@
             function shouldUseMobileBehavior() {
                 const isMobile = isMobileDevice();
                 const isTablet = isTabletDevice();
-                
+
                 if (isMobile && isMobileResponsive !== false) return true;
                 if (isTablet && isTabletResponsive) return true;
-                
+
                 return false;
             }
 
@@ -61,11 +61,11 @@
                 menuList.classList.remove('active');
                 toggleButton.classList.remove('active');
                 overlay.classList.remove('active');
-                menuItems.forEach(function(item) {
+                menuItems.forEach(function (item) {
                     item.classList.remove('active', 'hovering', 'keyboard-focus');
                 });
                 document.body.style.overflow = '';
-                
+
                 if (toggleButton.parentElement === menuList) {
                     menu.insertBefore(toggleButton, menuList);
                 }
@@ -77,7 +77,7 @@
                 const isActive = menuList.classList.toggle('active');
                 toggleButton.classList.toggle('active');
                 overlay.classList.toggle('active');
-                
+
                 if (isActive) {
                     if (menuList.firstChild) {
                         menuList.insertBefore(toggleButton, menuList.firstChild);
@@ -87,7 +87,7 @@
                 } else {
                     menu.insertBefore(toggleButton, menuList);
                 }
-                
+
                 document.body.style.overflow = isActive ? 'hidden' : '';
             }
 
@@ -97,16 +97,16 @@
             }
 
             // Handle click outside to close mobile menu
-            document.addEventListener('click', function(e) {
-                if (shouldUseMobileBehavior() && 
-                    !menu.contains(e.target) && 
+            document.addEventListener('click', function (e) {
+                if (shouldUseMobileBehavior() &&
+                    !menu.contains(e.target) &&
                     !toggleButton.contains(e.target)) {
                     closeAllMenus();
                 }
             });
 
             // Close mobile menu on Escape key
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     closeAllMenus();
                 }
@@ -116,9 +116,10 @@
 
             // Setup menu items behavior
             function setupMenuItems() {
-                const useMobileBehavior = shouldUseMobileBehavior() || triggerType === 'click';
+                const isMobileOrTablet = isMobileDevice();
+                const useMobileBehavior = isMobileOrTablet || triggerType === 'click';
 
-                menuItems.forEach(function(item) {
+                menuItems.forEach(function (item) {
                     const link = item.querySelector('.fb-advanced-mega-menu-link');
                     const panel = item.querySelector('.fb-advanced-mega-menu-panel');
 
@@ -126,48 +127,43 @@
                     link.parentNode.replaceChild(newLink, link);
 
                     if (useMobileBehavior) {
-                        newLink.addEventListener('click', function(e) {
+                        newLink.addEventListener('click', function (e) {
                             if (item.classList.contains('has-mega-menu')) {
                                 e.preventDefault();
-                                
-                                menuItems.forEach(function(otherItem) {
+
+                                menuItems.forEach(function (otherItem) {
                                     if (otherItem !== item) {
                                         otherItem.classList.remove('active');
                                     }
                                 });
-                                
+
                                 item.classList.toggle('active');
                             }
                         });
                     } else {
-                        newLink.addEventListener('focus', function() {
-                            menuItems.forEach(function(otherItem) {
-                                if (otherItem !== item) {
-                                    otherItem.classList.remove('keyboard-focus');
-                                }
+                        newLink.addEventListener('focus', function () {
+                            menuItems.forEach(function (otherItem) {
+                                if (otherItem !== item) otherItem.classList.remove('keyboard-focus');
                             });
                             item.classList.add('keyboard-focus');
                         });
 
-                        newLink.addEventListener('blur', function() {
-                            setTimeout(function() {
+                        newLink.addEventListener('blur', function () {
+                            setTimeout(() => {
                                 if (!item.contains(document.activeElement)) {
                                     item.classList.remove('keyboard-focus');
                                 }
                             }, 100);
                         });
 
-                        // Mouse hover
-                        item.addEventListener('mouseenter', function() {
-                            menuItems.forEach(function(otherItem) {
-                                if (otherItem !== item) {
-                                    otherItem.classList.remove('hovering');
-                                }
+                        item.addEventListener('mouseenter', function () {
+                            menuItems.forEach(function (otherItem) {
+                                if (otherItem !== item) otherItem.classList.remove('hovering');
                             });
                             item.classList.add('hovering');
                         });
 
-                        item.addEventListener('mouseleave', function() {
+                        item.addEventListener('mouseleave', function () {
                             item.classList.remove('hovering');
                         });
                     }
@@ -179,13 +175,13 @@
                 if (!shouldUseMobileBehavior()) {
                     const menuRect = menu.getBoundingClientRect();
                     const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-                    
-                    panels.forEach(function(panel) {
+
+                    panels.forEach(function (panel) {
                         panel.style.top = (menuRect.bottom) + 'px';
                     });
                 } else {
                     const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-                    panels.forEach(function(panel) {
+                    panels.forEach(function (panel) {
                         panel.style.top = '';
                     });
                 }
@@ -193,10 +189,10 @@
 
             // Close menu when clicking links inside panels
             const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-            panels.forEach(function(panel) {
+            panels.forEach(function (panel) {
                 const links = panel.querySelectorAll('a');
-                links.forEach(function(link) {
-                    link.addEventListener('click', function() {
+                links.forEach(function (link) {
+                    link.addEventListener('click', function () {
                         closeAllMenus();
                     });
                 });
@@ -207,7 +203,7 @@
             // positionPanels();
 
             // Handle window resize
-            const handleResize = debounce(function() {
+            const handleResize = debounce(function () {
                 closeAllMenus();
                 setupMenuItems();
                 // positionPanels();
@@ -216,7 +212,7 @@
             window.addEventListener('resize', handleResize);
 
             // Handle scroll to update panel position on desktop
-            const handleScroll = debounce(function() {
+            const handleScroll = debounce(function () {
                 if (!shouldUseMobileBehavior()) {
                     // positionPanels();
                 }
