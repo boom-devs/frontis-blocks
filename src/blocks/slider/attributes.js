@@ -81,6 +81,10 @@ const attributes = {
         'type': 'boolean',
         'default': false
     },
+	enableKeyboardNavigation: {
+		type: 'boolean',
+		default: false
+	},
     effect: {
         type: 'string',
         default: 'slide'
