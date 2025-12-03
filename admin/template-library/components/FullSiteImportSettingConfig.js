@@ -33,9 +33,6 @@ const FullSiteImportSettingConfig = ({
   } = useSelector((state) => state.attributes);
   const dispatch = useDispatch();
 
-  console.log(templatesData.data.templates);
-  // console.log(templatePartsData);
-
 
   const [isImporting, setIsImporting] = useState(false);
   const [importProgress, setImportProgress] = useState(0);
@@ -475,12 +472,12 @@ const FullSiteImportSettingConfig = ({
             const parsedBlocks = page.content || "";
 
             const pageData = new FormData();
-            pageData.append("action", "fb_full_site_import");
+            pageData.append("action", "fb_pages_import");
             pageData.append("security", nonce);
             pageData.append("title", page.title);
             pageData.append("content", parsedBlocks || "");
             pageData.append("slug", page.slug || "");
-            pageData.append("template", page.template || "wp-custom-template-fb-template-pages");
+            pageData.append("template", page.template || "fb-template-pages");
             pageData.append("badge", page.badge || "");
             pageData.append("site_url", window.location.origin);
             pageData.append("uploads_updated", uploadsUpdated);
@@ -524,132 +521,53 @@ const FullSiteImportSettingConfig = ({
     return { success: failedCount === 0, successCount, failedCount, errors };
   };
 
-  const handlePushTemplates = async (templates) => {
-      if (!templates || templates.length === 0) {
-          return { success: true, created: 0, skipped: 0, failed: 0, errors: [] };
-      }
+  const handleStorePosts = async (posts = []) => {
+    if (!posts || posts.length === 0) {
+        console.log("No posts to import.");
+        return { success: true, count: 0 };
+    }
 
-      let created = 0, skipped = 0, failed = 0;
-      const errors = [];
+    let successCount = 0;
+    let failedCount = 0;
 
-      for (const tmpl of templates) {
-          try {
-              console.log(`Pushing: ${tmpl.slug}`);
-              const result = await pushTemplate(tmpl);
+    for (const post of posts) {
+        try {
+            const formData = new FormData();
+            formData.append("action", "fb_posts_import");
+            formData.append("security", nonce);
+            formData.append("title", post.title || "Untitled");
+            formData.append("content", post.content || "");
+            formData.append("slug", post.slug || "");
+            formData.append("template", post.template || ""); // শুধু এটাই পাঠাবে
 
-              if (result.status === 'success') {
-                  if (result.data.skipped) {
-                      skipped++;
-                  } else {
-                      created++;
+            const res = await fetch(ajaxUrl, {
+                method: "POST",
+                body: formData,
+                credentials: "same-origin"
+            });
 
-                      setTimeout(() => {
-                          if (window.wp?.data?.dispatch) {
-                              window.wp.data.dispatch('core/edit-site')?.invalidateResolution();
-                              console.log("Site Editor cache invalidated");
-                          }
-                      }, 1000);
-                  }
-              } else {
-                  failed++;
-                  errors.push(`${tmpl.slug}: ${result.reason}`);
-              }
-          } catch (err) {
-              failed++;
-              errors.push(`${tmpl.slug}: ${err.message}`);
-          }
-      }
+            const result = await res.json();
 
-      // Even if some fail → continue to pages
-      const success = failed === 0;
-      console.log(`Templates: ${created} created, ${skipped} skipped, ${failed} failed`);
+            if (result.success) {
+                successCount++;
+                console.log(`Post created: ${post.title} → Template: ${post.template || 'default'}`);
+            } else {
+                failedCount++;
+                console.error("Failed:", post.title, result.data);
+            }
+        } catch (err) {
+            failedCount++;
+            console.error("Error importing post:", post.title, err);
+        }
+    }
 
-      return { success, created, skipped, failed, errors };
-  };
+    toast[failedCount === 0 ? 'success' : 'warn'](
+        failedCount === 0 
+            ? `All ${successCount} posts imported!` 
+            : `${successCount} posts imported, ${failedCount} failed`
+    );
 
-  const pushTemplate = async (templateData) => {
-      const form = new FormData();
-      form.append('action', 'fb_push_template');
-      form.append('security', nonce);
-      form.append('title', templateData.title);
-      form.append('slug', templateData.slug);
-      form.append('content', templateData.content);
-
-      // Fix: post_types as array → use same key
-      (templateData.post_types || []).forEach(pt => {
-          form.append('post_types[]', pt);
-      });
-
-      try {
-          const response = await fetch(ajaxUrl, {
-              method: 'POST',
-              body: form,
-              credentials: 'same-origin',
-          });
-
-          const text = await response.text();
-          console.log("Raw Response:", text);
-
-          let json;
-          try {
-              json = JSON.parse(text);
-          } catch (e) {
-              console.error("JSON Parse Error:", e, text);
-              return { status: 'failed', reason: 'Invalid JSON response' };
-          }
-
-          if (json.success) {
-              return { status: 'success', data: json.data };
-          } else {
-              return { status: 'failed', reason: json.data?.message || 'Unknown error' };
-          }
-      } catch (err) {
-          console.error("Fetch Error:", err);
-          return { status: 'failed', reason: err.message };
-      }
-  };
-
-  const handlePushTemplateParts = async (parts) => {
-      if (!parts || parts.length === 0) {
-          console.log("No parts to push");
-          return { success: true, created: 0, skipped: 0, errors: [] };
-      }
-
-      const form = new FormData();
-      form.append('action', 'fb_push_template_parts');
-      form.append('security', nonce);
-
-      parts.forEach((part, index) => {
-          form.append(`parts[${index}][title]`, part.title);
-          form.append(`parts[${index}][slug]`, part.slug);
-          form.append(`parts[${index}][content]`, part.content);
-          form.append(`parts[${index}][area]`, part.area || 'uncategorized');
-      });
-
-      try {
-          const response = await fetch(ajaxUrl, {
-              method: 'POST',
-              body: form,
-          });
-
-          const json = await response.json();
-
-          if (json.success) {
-              console.log(`Parts: ${json.data.created} created, ${json.data.skipped} skipped`);
-              return {
-                  success: true,
-                  created: json.data.created,
-                  skipped: json.data.skipped,
-                  errors: json.data.errors || []
-              };
-          } else {
-              console.error('Push parts failed:', json.data?.message);
-              return { success: false, errors: [json.data?.message] };
-          }
-      } catch (err) {
-          console.error('Push parts error:', err);
-          return { success: false, errors: [err.message] };
-      }
+    return { success: failedCount === 0, successCount, failedCount };
   };
 
   // Helper to POST FormData
@@ -832,7 +750,7 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
             
             return {
                 success: true,
-                mapping,        // ← এটা পরে টেমপ্লেটে লাগবে
+                mapping,
                 stats
             };
         } else {
@@ -897,6 +815,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       { key: "footers", label: "Creating footers...", status: "pending" },
       { key: "templates", label: "Creating templates...", status: "pending" },
       { key: "pages", label: "Creating pages...", status: "pending" },
+      { key: "posts", label: "Creating posts...", status: "pending" },
       { key: "global_styles", label: "Updating global styles...", status: "pending" },
       { key: "finalize", label: "Finalizing setup...", status: "pending" },
     ];
@@ -915,11 +834,10 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
   
       const siteData = siteResp.data;
       const pages = siteData.pages || [];
+      const posts = siteData.posts || templatesData.data.posts;
       const templates = siteData.templates || templatesData.data.templates;
       const headers = siteData.headers || templatesData.data.headers;
       const footers = siteData.footers || templatesData.data.footers;
-      console.log(headers, footers, templates)
-      // const allTemplateParts = siteData.templateParts || templatePartsData;
       const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
   
       /** STEP 2: UPLOAD FILES **/
@@ -933,7 +851,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       /** STEP 3: THEME **/
       setCurrentStep("theme");
       updateStepStatus("theme", "running");
-      setImportProgress(35);
+      setImportProgress(30);
   
       const themeRes = await activateTheme(template.theme || "frontis");
       updateStepStatus("theme", themeRes?.skipped ? "skipped" : "success");
@@ -941,34 +859,16 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       /** STEP 4: PLUGINS **/
       setCurrentStep("plugins");
       updateStepStatus("plugins", "running");
-      setImportProgress(55);
+      setImportProgress(45);
   
       const pluginRes = await installActivatePlugins(template.dependencies || []);
       updateStepStatus("plugins", pluginRes?.skipped ? "skipped" : "success");
-
-      // STEP 5: FETCH & PUSH TEMPLATE PARTS
-      // setCurrentStep("template_parts");
-      // updateStepStatus("template_parts", "running");
-      // setImportProgress(60);
-
-      // console.log("Pushing Template Parts:", allTemplateParts);
-
-      // const partsResult = await handlePushTemplateParts(allTemplateParts || []);
-      // updateStepStatus("template_parts", partsResult.success ? "success" : "warning");
-
-      // STEP 5.5: TEMPLATES
-      // setCurrentStep("templates");
-      // updateStepStatus("templates", "running");
-      // setImportProgress(65);
-
-      // const templateResult = await handlePushTemplates(templates || []);
-      // updateStepStatus("templates", templateResult.success ? "success" : "warning");
 
       // After plugins step...
       setCurrentStep("headers");
       updateStepStatus("headers", "running");
       updateStepStatus("footers", "running");  // একসাথে চালু
-      setImportProgress(58);
+      setImportProgress(55);
 
       let navigationMapping = {};
 
@@ -985,7 +885,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
           throw new Error("Header/Footer import failed");
       }
 
-      setImportProgress(70);
+      setImportProgress(65);
 
       // Step 6: Import Templates (using navigation mapping)
       setCurrentStep("templates");
@@ -1000,17 +900,25 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
           throw new Error("Templates import failed");
       }
 
-      setImportProgress(75);
+      setImportProgress(70);
 
       // STEP 6: PAGES
       setCurrentStep("pages");
       updateStepStatus("pages", "running");
-      setImportProgress(80);
+      setImportProgress(75);
 
       const pageResult = await handleStorePages(pages || []);
       updateStepStatus("pages", pageResult.success ? "success" : "warning");
 
-      // Update global Styles
+      // STEP 7: POSTS
+      setCurrentStep("posts");
+      updateStepStatus("posts", "running");
+      setImportProgress(80);
+
+      const postsResult = await handleStorePosts(posts || []);
+      updateStepStatus("posts", postsResult.success ? "success" : "warning");
+
+      // STEP 8: Update global Styles
       setCurrentStep("global_styles");
       updateStepStatus("global_styles", "running");
       setImportProgress(90);
@@ -1018,7 +926,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       await handleUpdateState();
       updateStepStatus("global_styles", "success");
 
-      /** STEP 6: FINALIZE **/
+      // STEP 9: FINALIZE
       setCurrentStep("finalize");
       updateStepStatus("finalize", "running");
       setImportProgress(100);
