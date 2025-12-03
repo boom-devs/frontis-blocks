@@ -712,9 +712,9 @@ class BlockList
             'critical-css' => [
                 'slug' => 'critical-css',
                 'title' => 'Critical css separator',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'content',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/tabs.svg',
                 'doc' => 'https://wpmessiah.com/',
