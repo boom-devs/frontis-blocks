@@ -226,7 +226,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         megaMenuIconRotateHover,
         megaMenuWidthSwitcher,
         megaMenuContentWidthValue,
-        megaMenuContentWidthValueUnits
+        megaMenuContentWidthValueUnits,
+        megaMenuContentTopPositionValue,
+        megaMenuContentTopPositionUnits
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -1146,6 +1148,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ? `
             position: absolute;
                 ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Desktop}${megaMenuContentWidthValueUnits?.Desktop};` : ''}
+                ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Desktop}${megaMenuContentTopPositionUnits?.Desktop} !important;` : ''}
             `
             : megaMenuWidthSwitcher === "full"
                 ? `
@@ -1189,6 +1192,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${megaMenuGlobalTypoSwitcher?.lineHeight === false && megaMenuLineHeight?.Tablet && megaMenuLineHeightUnits?.Tablet ? `line-height: ${megaMenuLineHeight?.Tablet}${megaMenuLineHeightUnits?.Tablet};` : ''}
                 gap: ${megaMenuIconGap?.Tablet}${megaMenuIconGapUnits?.Tablet};
             }
+            .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-panel{
+                ${megaMenuWidthSwitcher === "content"
+                ? `
+                position: absolute;
+                    ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Tablet}${megaMenuContentWidthValueUnits?.Tablet};` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Tablet}${megaMenuContentTopPositionUnits?.Tablet}; !important` : ''}
+                `
+                : megaMenuWidthSwitcher === "full"
+                    ? `
+                        position: fixed;
+                        width: 100%;
+                    `
+                    : ''
+                }
+            }
             .${blockId} .fb-advanced-mega-menu-link .fb-advanced-mega-menu-indicator svg{
                 transform: rotate(${megaMenuIconRotation?.Tablet}deg);
                 width: ${megaMenuIconSize?.Tablet}${megaMenuIconSizeUnits?.Tablet};
@@ -1217,6 +1235,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${megaMenuGlobalTypoSwitcher?.letterSpacing === false && megaMenuLetterSpacing?.Mobile && megaMenuLetterSpacingUnits?.Mobile ? `letter-spacing: ${megaMenuLetterSpacing?.Mobile}${megaMenuLetterSpacingUnits?.Mobile};` : ''}
                 ${megaMenuGlobalTypoSwitcher?.lineHeight === false && megaMenuLineHeight?.Mobile && megaMenuLineHeightUnits?.Mobile ? `line-height: ${megaMenuLineHeight?.Mobile}${megaMenuLineHeightUnits?.Mobile};` : ''}
                 gap: ${megaMenuIconGap?.Mobile}${megaMenuIconGapUnits?.Mobile};
+            }
+            .${blockId} .fb-advanced-mega-menu-item .fb-advanced-mega-menu-panel{
+                ${megaMenuWidthSwitcher === "content"
+                ? `
+                position: absolute;
+                    ${megaMenuContentWidthValue ? `width: ${megaMenuContentWidthValue?.Mobile}${megaMenuContentWidthValueUnits?.Mobile};` : ''}
+                    ${megaMenuContentTopPositionValue ? `top: ${megaMenuContentTopPositionValue?.Mobile}${megaMenuContentTopPositionUnits?.Mobile}; !important` : ''}
+                `
+                : megaMenuWidthSwitcher === "full"
+                    ? `
+                        position: fixed;
+                        width: 100%;
+                    `
+                    : ''
+                }
             }
             .${blockId} .fb-advanced-mega-menu-link .fb-advanced-mega-menu-indicator svg{
                 transform: rotate(${megaMenuIconRotation?.Mobile}deg);
@@ -1341,6 +1374,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             rangeUnitHandler={(value) => setAttributes({ megaMenuContentWidthValueUnits: value })}
                             deviceType={deviceType}
                             units={megaMenuContentWidthValueUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={''}
+                        />
+                        <FB_Range
+                            min={0}
+                            max={megaMenuContentTopPositionUnits === '%' ? 100 : 1000}
+                            label={__("Position Top", "frontis-blocks")}
+                            rangeValue={megaMenuContentTopPositionValue}
+                            onChangeHandler={(value) => setAttributes({ megaMenuContentTopPositionValue: value })}
+                            rangeUnitHandler={(value) => setAttributes({ megaMenuContentTopPositionUnits: value })}
+                            deviceType={deviceType}
+                            units={megaMenuContentTopPositionUnits}
                             setAttributes={setAttributes}
                             rangeStep={1}
                             resetFallbackValue={''}
