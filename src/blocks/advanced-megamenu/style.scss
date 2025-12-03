@@ -302,7 +302,7 @@
     .fb-advanced-mega-menu-toggle {
         display: flex !important;
     }
-    
+
     .fb-advanced-mega-menu-toggle {
         display: flex;
     }
@@ -337,7 +337,7 @@
 
         .fb-advanced-mega-menu-toggle {
             align-self: flex-end;
-            margin-bottom: 1rem;
+            margin-bottom: 64px;
         }
     }
 
@@ -345,10 +345,6 @@
         position: relative;
         margin-bottom: 14px;
         width: 100%;
-
-        &:first-child {
-            margin-top: 24px;
-        }
 
         &:last-child {
             margin-bottom: 0;
@@ -361,10 +357,16 @@
             box-shadow: none;
         }
 
-        &.active .fb-advanced-mega-menu-panel {
-            display: block;
-            visibility: visible;
-            opacity: 1;
+        &.active {
+            .fb-advanced-mega-menu-panel {
+                display: block;
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .fb-advanced-mega-menu-indicator {
+                transform: rotate(180deg);
+            }
         }
 
         &::after {

@@ -47,13 +47,7 @@
 
             // Determine if we should use mobile behavior
             function shouldUseMobileBehavior() {
-                const isMobile = isMobileDevice();
-                const isTablet = isTabletDevice();
-
-                if (isMobile && isMobileResponsive !== false) return true;
-                if (isTablet && isTabletResponsive) return true;
-
-                return false;
+                return window.innerWidth <= 1024;
             }
 
             // Close all menus
