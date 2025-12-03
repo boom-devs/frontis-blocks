@@ -16,7 +16,7 @@
 
     // Check if device is mobile/tablet
     function isMobileDevice() {
-        return window.matchMedia('(max-width: 767px)').matches;
+        return window.matchMedia('(max-width: 1024px)').matches;
     }
 
     function isTabletDevice() {
