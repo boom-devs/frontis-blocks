@@ -355,7 +355,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dynamicBtnTwoLinkSource,
 		/** End Dynamic Btn Two Text */
 	} = attributes;
-
+	console.log(ButtonColor);
 	const deviceType = useDeviceType();
 
 	useEffect(() => {

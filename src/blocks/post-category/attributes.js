@@ -522,16 +522,16 @@ const attributes = {
 	},
 
 	postTitleColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	postTitleColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postTitleHoverColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	/** End Title */

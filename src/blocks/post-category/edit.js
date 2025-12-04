@@ -87,7 +87,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			postDescriptionExcerptLength,
 		],
 	);
-
+	
 	// Improved hierarchical sorting function (same as frontend)
 	const sortTaxonomyTermsHierarchically = (terms) => {
 		if (!terms || !Array.isArray(terms)) return [];
