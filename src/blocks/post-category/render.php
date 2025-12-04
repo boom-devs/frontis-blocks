@@ -25,6 +25,48 @@ if (!function_exists('fb_trim_words')) {
     }
 }
 
+// NEW: Helper function to get post type label for a taxonomy
+if (!function_exists('fb_get_post_type_label_for_taxonomy')) {
+    function fb_get_post_type_label_for_taxonomy($taxonomy_slug) {
+        if (empty($taxonomy_slug)) {
+            return '';
+        }
+        
+        $taxonomy = get_taxonomy($taxonomy_slug);
+        if (!$taxonomy || empty($taxonomy->object_type)) {
+            return '';
+        }
+        
+        // Get the first post type associated with this taxonomy
+        $post_type_slug = $taxonomy->object_type[0];
+        $post_type = get_post_type_object($post_type_slug);
+        
+        if (!$post_type) {
+            return '';
+        }
+        
+        // Return the plural label if available, otherwise singular
+        return !empty($post_type->labels->name) ? $post_type->labels->name : $post_type_slug;
+    }
+}
+
+// NEW: Function to format count with separate HTML for number and label
+if (!function_exists('fb_format_count_with_label_html')) {
+    function fb_format_count_with_label_html($count, $taxonomy_slug, $show_label = true) {
+        if (!$show_label) {
+            return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+        }
+        
+        $label = fb_get_post_type_label_for_taxonomy($taxonomy_slug);
+        if (!empty($label)) {
+            return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>' . 
+                   '<span class="fb-taxonomy-count-label"> ' . esc_html($label) . '</span>';
+        }
+        
+        return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+    }
+}
+
 // Extract attributes
 $block_id = fb_norm_str(isset($attributes['blockId']) ? $attributes['blockId'] : '');
 $premade_style = fb_norm_str(isset($attributes['premadeStyle']) ? $attributes['premadeStyle'] : 'style-1');
@@ -39,6 +81,7 @@ $exclude_taxonomies = isset($attributes['excludeTaxonomies']) ? (array) $attribu
 $order_by = fb_norm_str(isset($attributes['orderBy']) ? $attributes['orderBy'] : 'name');
 $sort_order = fb_norm_str(isset($attributes['sortOrder']) ? $attributes['sortOrder'] : 'asc');
 $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
+$show_post_type_label = isset($attributes['showPostTypeLabel']) ? (bool) $attributes['showPostTypeLabel'] : true; // NEW
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -52,8 +95,6 @@ $read_more_text = fb_norm_str(isset($attributes['readMoreText']) ? $attributes['
 $read_more_icon_align = fb_norm_str(isset($attributes['readMoreIconAlign']) ? $attributes['readMoreIconAlign'] : 'none');
 $read_more_icon_image_url = fb_norm_str(isset($attributes['readMoreIconImageUrl']) ? $attributes['readMoreIconImageUrl'] : '');
 $read_more_icon_image_alt = fb_norm_str(isset($attributes['readMoreIconImageAlt']) ? $attributes['readMoreIconImageAlt'] : 'icon');
-// $read_more_icon_image_id = fb_norm_str(isset($attributes['readMoreIconImageID']) ? $attributes['readMoreIconImageID'] : '');
-// $read_more_icon_image_display = fb_norm_str(isset($attributes['readMoreIconImagedisplay']) ? $attributes['readMoreIconImagedisplay'] : 'full');
 
 // Description excerpt
 $post_description_excerpt_length = isset($attributes['postDescriptionExcerptLength']) ? (int) $attributes['postDescriptionExcerptLength'] : 10;
@@ -88,7 +129,6 @@ $wrapper_classes_arr = array_filter(array_map(function ($c) {
 $wrapper_attributes = get_block_wrapper_attributes([
     'class' => implode(' ', $wrapper_classes_arr),
 ]);
-
 
 // Get taxonomy terms
 $taxonomy_terms = [];
@@ -190,15 +230,17 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             $html .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $html .= '</a>';
 
-            // if ($args['show_count']) {
-            //     $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
-            // }
-
             if ($args['show_count']) {
+                $formatted_count_html = fb_format_count_with_label_html(
+                    $term->count, 
+                    $args['taxonomy_type'], 
+                    $args['show_post_type_label']
+                );
+                
                 if ($args['premade_style'] === 'style-1') {
-                    $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                    $html .= '<span class="fb-taxonomy-count">(' . $formatted_count_html . ')</span>';
                 } else {
-                    $html .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                    $html .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
                 }
             }
 
@@ -210,7 +252,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
                 $html .= '</p>';
             }
 
-              if (
+            if (
                 isset($args['premade_style'], $args['read_more_switcher']) &&
                 $args['premade_style'] === 'style-2' &&
                 $args['read_more_switcher']
@@ -321,9 +363,6 @@ if (empty($taxonomy_type)) {
             }
         }
 
-        
-
-
         if($premade_style === 'style-4') {
             $output .= '<div class="fb-taxonomy-card-content">';
         }
@@ -332,13 +371,14 @@ if (empty($taxonomy_type)) {
 
         $output .= '<div class="fb-taxonomy-link-count">';
             if ($show_count) {
-                $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                $formatted_count_html = fb_format_count_with_label_html(
+                    $term->count, 
+                    $taxonomy_type, 
+                    $show_post_type_label
+                );
+                $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
             }
             $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
-            // Visual indicator for child terms in grid layout
-            // if ($term->parent !== 0) {
-            //     $output .= '<span class="fb-child-indicator">(Child Category)</span>';
-            // }
             $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
             $output .= '</a>';
         $output .= '</div>';
@@ -401,6 +441,8 @@ if (empty($taxonomy_type)) {
         'read_more_icon_frontend' => $read_more_icon_frontend,
         'read_more_icon_image_url'=> $read_more_icon_image_url,
         'read_more_icon_image_alt'=> $read_more_icon_image_alt,
+        'taxonomy_type' => $taxonomy_type, // ADD THIS
+        'show_post_type_label' => $show_post_type_label, // ADD THIS
     ];
 
     if ($show_child_categories) {
@@ -426,19 +468,19 @@ if (empty($taxonomy_type)) {
             $output .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $output .= '</a>';
 
-            // if ($show_count) {
-            //     $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
-            // }
-
             if ($show_count) {
+                $formatted_count_html = fb_format_count_with_label_html(
+                    $term->count, 
+                    $taxonomy_type, 
+                    $show_post_type_label
+                );
+                
                 if ($premade_style === 'style-1') {
-                    $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                    $output .= '<span class="fb-taxonomy-count">(' . $formatted_count_html . ')</span>';
                 } else {
-                    $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                    $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
                 }
             }
-
-
 
             $output .= '</div>';
 
@@ -447,7 +489,6 @@ if (empty($taxonomy_type)) {
                 $output .= esc_html(fb_trim_words($term->description, $post_description_excerpt_length));
                 $output .= '</p>';
             }
-
 
             // Read More button for list + premadeStyle style-2
             if ($premade_style === 'style-2' && $read_more_switcher) {
@@ -477,7 +518,6 @@ if (empty($taxonomy_type)) {
 
                 $output .= '</a>';
             }
-
 
             if ($separator_style !== 'none') {
                 $output .= '<div class="fb-tax-separator"></div>';

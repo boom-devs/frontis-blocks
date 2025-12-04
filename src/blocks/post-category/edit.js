@@ -34,6 +34,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		postCategoryDesktopSwitcher,
 		postCategoryTabletSwitcher,
 		postCategoryMobileSwitcher,
+		showLabel,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -42,18 +43,59 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			}`,
 	});
 
-	// useEffect(() => {
-	// 	if (clientId && !blockId) {
-	// 		setAttributes({ blockId: "fb-category-" + clientId.slice(0, 8) });
-	// 	}
-	// }, [clientId]);
+	// Get all post types and taxonomies
+	const { useSelect } = wp.data;
+	const allTaxonomies = useSelect((select) => 
+		select("core").getTaxonomies({ per_page: -1 }), []);
+	const allPostTypes = useSelect((select) => 
+		select("core").getPostTypes({ per_page: -1 }), []);
+
+	// Helper function to get post type label for taxonomy
+	const getPostTypeLabelForTaxonomy = (taxSlug) => {
+		if (!taxSlug || !allTaxonomies || !allPostTypes) return null;
+		
+		const taxonomy = allTaxonomies.find(tax => tax.slug === taxSlug);
+		if (!taxonomy || !taxonomy.types || taxonomy.types.length === 0) return null;
+		
+		const postTypeSlug = taxonomy.types[0];
+		const postType = allPostTypes.find(pt => pt.slug === postTypeSlug);
+		
+		return postType ? postType.labels?.name || postTypeSlug : null;
+	};
+
+	// Function to format count with label HTML
+	const formatCountWithLabelHTML = (count) => {
+		if (!showCount) return null;
+		
+		if (!showLabel) {
+			return (
+				<span className="fb-taxonomy-count">
+					<span className="fb-taxonomy-count-number">{count}</span>
+				</span>
+			);
+		}
+		
+		const label = getPostTypeLabelForTaxonomy(taxonomyType);
+		if (label) {
+			return (
+				<span className="fb-taxonomy-count">
+					<span className="fb-taxonomy-count-number">{count}</span>
+					<span className="fb-taxonomy-count-label"> {label}</span>
+				</span>
+			);
+		}
+		
+		return (
+			<span className="fb-taxonomy-count">
+				<span className="fb-taxonomy-count-number">{count}</span>
+			</span>
+		);
+	};
 
 	let defaultImageUrl = '';
 	if (typeof FrontisBlocksData !== 'undefined') {
 		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
 	}
-
-	const { useSelect } = wp.data;
 
 	const taxonomies = useSelect(
 		(select) => {
@@ -152,17 +194,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						<div className="fb-taxonomy-link-count">
 							<a href={term.link} className="fb-taxonomy-link">
-								{/* visual indicator for child terms */}
-								{/* {term.parent !== 0 && (
-									<span className="fb-child-indicator">(Child Category)</span>
-								)} */}
 								<span className="fb-taxonomy-name">{term.name}</span>
 							</a>
 
-							{premadeStyle === "style-1" && showCount ? (
-								<span className="fb-taxonomy-count">({term.count})</span>
-							) : (
-								<span className="fb-taxonomy-count">{term.count}</span>
+							{showCount && (
+								<>
+									{premadeStyle === "style-1" ? (
+										<span className="fb-taxonomy-count">
+											(<span className="fb-taxonomy-count-number">{term.count}</span>
+											{showLabel && getPostTypeLabelForTaxonomy(taxonomyType) && (
+												<span className="fb-taxonomy-count-label"> {getPostTypeLabelForTaxonomy(taxonomyType)}</span>
+											)})
+										</span>
+									) : (
+										formatCountWithLabelHTML(term.count)
+									)}
+								</>
 							)}
 		
 						</div>
@@ -236,9 +283,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const renderGridLayout = () => {
 		if (!sortedTaxonomies) return null;
 
-		// const imageSource = taxonomy.fb_taxonomy_image || defaultImageUrl;
-
-
 		return (
 			<div
 				className={`fb_post_category_container fb-taxonomy-grid ${postCategoryGlobalWraperClass ? postCategoryGlobalWraperClass : ""
@@ -263,13 +307,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 									<div className="fb-taxonomy-link-count">
 										{showCount && (
-											<span className="fb-taxonomy-count">{taxonomy.count}</span>
+											formatCountWithLabelHTML(taxonomy.count)
 										)}
 										<a href={taxonomy.link} className="fb-taxonomy-link">
-											{/* visual indicator for child terms in grid */}
-											{/* {taxonomy.parent !== 0 && (
-												<span className="fb-child-indicator">(Child Category)</span>
-											)} */}
 											<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
 										</a>
 									</div>
@@ -339,13 +379,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 								<div className="fb-taxonomy-link-count">
 									{showCount && (
-										<span className="fb-taxonomy-count">{taxonomy.count}</span>
+										formatCountWithLabelHTML(taxonomy.count)
 									)}
 									<a href={taxonomy.link} className="fb-taxonomy-link">
-										{/* visual indicator for child terms in grid */}
-										{/* {taxonomy.parent !== 0 && (
-											<span className="fb-child-indicator">(Child Category)</span>
-										)} */}
 										<h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
 									</a>
 								</div>
@@ -428,17 +464,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					>
 						<div className="fb-taxonomy-link-count">
 							<a href={taxonomy.link} className="fb-taxonomy-link">
-								{/*  visual indicator for child terms */}
-								{/* {taxonomy.parent !== 0 && (
-									<span className="fb-child-indicator">(child category)</span>
-								)} */}
 								<span className="fb-taxonomy-name">{taxonomy.name}</span>
 							</a>
 
-							{premadeStyle === "style-1" && showCount ? (
-								<span className="fb-taxonomy-count">({taxonomy.count})</span>
-							) : (
-								<span className="fb-taxonomy-count">{taxonomy.count}</span>
+							{showCount && (
+								<>
+									{premadeStyle === "style-1" ? (
+										<span className="fb-taxonomy-count">
+											(<span className="fb-taxonomy-count-number">{taxonomy.count}</span>
+											{showLabel && getPostTypeLabelForTaxonomy(taxonomyType) && (
+												<span className="fb-taxonomy-count-label"> {getPostTypeLabelForTaxonomy(taxonomyType)}</span>
+											)})
+										</span>
+									) : (
+										formatCountWithLabelHTML(taxonomy.count)
+									)}
+								</>
 							)}
 
 						</div>

@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useMemo, useState } from "@wordpress/element";
+import { useEffect, useMemo, useState, useCallback } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -46,8 +46,10 @@ import "./editor.scss";
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		premadeStyle,
 		taxonomyType,
+		showLabel,
 		showCount,
 		showDescription,
 		showEmpty,
@@ -448,12 +450,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
-		if (clientId && typeof clientId === "string" && !blockId) {
-			setAttributes({
-				blockId: "fb-post-category-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-post-category-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
@@ -470,24 +472,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	// Fetch all post types
 	const { useSelect } = wp.data;
-	const postTypes =
-		useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []) ||
-		[];
+	const postTypes = useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []) || [];
 
 	// Filter post types: only those visible in UI, with taxonomies, and exclude internal types
-	const filteredPostTypes = postTypes.filter(
-		(pt) =>
-			pt.visibility?.show_ui &&
-			pt.taxonomies?.length > 0 &&
-			!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(
-				pt.slug,
+	const filteredPostTypes = useMemo(
+		() =>
+			postTypes.filter(
+				(pt) =>
+					pt.visibility?.show_ui &&
+					pt.taxonomies?.length > 0 &&
+					!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(
+						pt.slug,
+					),
 			),
+		[postTypes],
 	);
 
 	// Fetch all taxonomies
-	const allTaxonomies =
-		useSelect((select) => select("core").getTaxonomies({ per_page: -1 }), []) ||
-		[];
+	const allTaxonomies = useSelect((select) => select("core").getTaxonomies({ per_page: -1 }),[]) || [];
+
+	const allPostTypes = useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []);
+	const getPostTypeLabelForTaxonomy = useCallback((taxSlug) => {
+		if (!taxSlug || !allPostTypes.length) return null;
+		
+		// Find the taxonomy object
+		const taxonomy = allTaxonomies.find(tax => tax.slug === taxSlug);
+		if (!taxonomy || !taxonomy.types || taxonomy.types.length === 0) return null;
+		
+		// Get the first post type associated with this taxonomy
+		const postTypeSlug = taxonomy.types[0];
+		const postType = allPostTypes.find(pt => pt.slug === postTypeSlug);
+		
+		return postType ? postType.labels?.name || postTypeSlug : null;
+	}, [allTaxonomies, allPostTypes]);
 
 	const dynamicTaxonomyOptions = useMemo(() => {
 		return filteredPostTypes.flatMap((pt) => {
@@ -495,107 +512,168 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				.filter((tax) => tax.types?.includes(pt.slug))
 				.map((tax) => ({
 					value: tax.slug,
-					label: `  ${tax.labels?.singular_name || tax.name}`, // Indent taxonomies with 4 spaces (one tab)
+					label: `    ${tax.labels?.singular_name || tax.name}`,
+					isDisabled: false,
 				}));
-			if (taxonomiesForPostType.length > 0) {
-				return [
-					{
-						value: `group-${pt.slug}`,
-						label: pt.labels?.name || pt.slug,
-						isDisabled: true, // Post type as non-selectable group header
-					},
-					...taxonomiesForPostType,
-				];
-			}
-			return [];
+
+			if (taxonomiesForPostType.length === 0) return [];
+
+			return [
+				{
+					value: `group-${pt.slug}`,
+					label: pt.labels?.name || pt.slug,
+					isDisabled: true,
+				},
+				...taxonomiesForPostType,
+			];
 		});
 	}, [filteredPostTypes, allTaxonomies]);
-	
 
+	// Separate useState for selectedTaxonomy
 	const [selectedTaxonomy, setSelectedTaxonomy] = useState(() => {
-		return (
-			dynamicTaxonomyOptions.find(
-				(opt) => opt.value === taxonomyType && !opt.isDisabled,
-			) ||
-			dynamicTaxonomyOptions.find((opt) => !opt.isDisabled) ||
-			null
-		);
+		if (taxonomyType) {
+			const matched = dynamicTaxonomyOptions.find(
+				(opt) => opt.value === taxonomyType && !opt.isDisabled
+			);
+			if (matched) return matched;
+		}
+		
+		const firstAvailable = dynamicTaxonomyOptions.find(opt => !opt.isDisabled);
+		return firstAvailable || null;
 	});
 
-	useEffect(() => {
-		if (
-			dynamicTaxonomyOptions.length > 0 &&
-			(!taxonomyType ||
-				!dynamicTaxonomyOptions.find(
-					(opt) => opt.value === taxonomyType && !opt.isDisabled,
-				))
-		) {
-			const defaultTax = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-			if (defaultTax) {
-				setSelectedTaxonomy(defaultTax);
-				setAttributes({ taxonomyType: defaultTax.value });
-			}
-		} else if (!taxonomyType && dynamicTaxonomyOptions.length === 0) {
-			setSelectedTaxonomy(null);
-			setAttributes({ taxonomyType: "" });
-		} else if (taxonomyType) {
-			const currentTax =
-				dynamicTaxonomyOptions.find(
-					(opt) => opt.value === taxonomyType && !opt.isDisabled,
-				) || null;
-			setSelectedTaxonomy(currentTax);
-		}
-	}, [dynamicTaxonomyOptions, taxonomyType]);
+	// Separate useState for postTypeLabel
+	const [postTypeLabel, setPostTypeLabel] = useState("");
 
-	// Handle taxonomy change (only allow selection of taxonomies, not group headers)
-	const handleTaxonomyChange = (option) => {
-		if (option && !option.isDisabled) {
-			setSelectedTaxonomy(option);
-			setAttributes({
-				taxonomyType: option.value,
-				includeTaxonomies: [],
-				excludeTaxonomies: [],
-				showChildCategories: false,
-			});
+	useEffect(() => {
+		if (dynamicTaxonomyOptions.length > 0) {
+			const hasValidTaxonomy = taxonomyType && 
+				dynamicTaxonomyOptions.some(opt => 
+					opt.value === taxonomyType && !opt.isDisabled
+				);
+			
+			if (!hasValidTaxonomy) {
+				const defaultTax = dynamicTaxonomyOptions.find(opt => !opt.isDisabled);
+				if (defaultTax) {
+					if (selectedTaxonomy?.value !== defaultTax.value) {
+						setSelectedTaxonomy(defaultTax);
+					}
+					if (taxonomyType !== defaultTax.value) {
+						setAttributes({ 
+							taxonomyType: defaultTax.value,
+							includeTaxonomies: [],
+							excludeTaxonomies: [],
+							showChildCategories: false,
+						});
+					}
+					// Update post type label for default taxonomy
+					const label = getPostTypeLabelForTaxonomy(defaultTax.value);
+					setPostTypeLabel(label || "");
+					return;
+				}
+			}
 		}
+
+		if (dynamicTaxonomyOptions.length === 0) {
+			if (selectedTaxonomy !== null) {
+				setSelectedTaxonomy(null);
+			}
+			if (taxonomyType) {
+				setAttributes({ 
+					taxonomyType: "",
+					includeTaxonomies: [],
+					excludeTaxonomies: [],
+					showChildCategories: false,
+				});
+			}
+			setPostTypeLabel("");
+			return;
+		}
+
+		if (taxonomyType) {
+			const currentTax = dynamicTaxonomyOptions.find(
+				opt => opt.value === taxonomyType && !opt.isDisabled
+			);
+			
+			const isDifferent = 
+				(!currentTax && selectedTaxonomy) ||
+				(currentTax && !selectedTaxonomy) ||
+				(currentTax && selectedTaxonomy && currentTax.value !== selectedTaxonomy.value);
+			
+			if (isDifferent) {
+				setSelectedTaxonomy(currentTax || null);
+			}
+			
+			// Update post type label when taxonomyType changes
+			const label = getPostTypeLabelForTaxonomy(taxonomyType);
+			setPostTypeLabel(label || "");
+		} else {
+			setPostTypeLabel("");
+		}
+	}, [dynamicTaxonomyOptions, taxonomyType, getPostTypeLabelForTaxonomy, selectedTaxonomy]);
+
+	const formatCountWithLabel = (count, taxonomySlug) => {
+		const label = getPostTypeLabelForTaxonomy(taxonomySlug);
+		if (label) {
+			return `${count} ${label}`;
+		}
+		return `${count}`;
 	};
 
-	// Get selected taxonomy object for hierarchical check
-	const selectedTaxonomyObj = allTaxonomies.find(
-		(tax) => tax.slug === taxonomyType,
+	const handleTaxonomyChange = useCallback((option) => {
+		if (!option || option.isDisabled) return;
+		
+		if (selectedTaxonomy?.value === option.value) return;
+		
+		setSelectedTaxonomy(option);
+		
+		// Update post type label for the new taxonomy
+		const label = getPostTypeLabelForTaxonomy(option.value);
+		setPostTypeLabel(label || "");
+		
+		setAttributes({
+			taxonomyType: option.value,
+			includeTaxonomies: [],
+			excludeTaxonomies: [],
+			showChildCategories: false,
+		});
+	}, [selectedTaxonomy, getPostTypeLabelForTaxonomy]);
+
+	const selectedTaxonomyObj = useMemo(() => 
+		allTaxonomies.find(tax => tax.slug === taxonomyType),
+		[allTaxonomies, taxonomyType]
 	);
 
-	// Fetch taxonomy terms for include/exclude
 	const taxonomyItems = useSelect(
 		(select) => {
-			return taxonomyType
-				? select("core").getEntityRecords("taxonomy", taxonomyType, {
-						per_page: 100,
-						hide_empty: false,
-				  })
-				: [];
+			if (!taxonomyType) return [];
+			return select("core").getEntityRecords("taxonomy", taxonomyType, {
+				per_page: 100,
+				hide_empty: false,
+			}) || [];
 		},
-		[taxonomyType],
+		[taxonomyType]
 	);
 
-	const taxonomyOptions = taxonomyItems
-		? taxonomyItems.map((tax) => ({
-				value: tax.id,
-				label: tax.name,
-		  }))
-		: [];
+	const taxonomyOptions = useMemo(() => 
+		taxonomyItems.map(tax => ({
+			value: tax.id,
+			label: tax.name,
+		})),
+		[taxonomyItems]
+	);
 
-	const handleIncludeTaxonomiesChange = (options) => {
+	const handleIncludeTaxonomiesChange = useCallback((options) => {
 		setAttributes({
-			includeTaxonomies: options ? options.map((opt) => opt.value) : [],
+			includeTaxonomies: options ? options.map(opt => opt.value) : [],
 		});
-	};
+	}, []);
 
-	const handleExcludeTaxonomiesChange = (options) => {
+	const handleExcludeTaxonomiesChange = useCallback((options) => {
 		setAttributes({
-			excludeTaxonomies: options ? options.map((opt) => opt.value) : [],
+			excludeTaxonomies: options ? options.map(opt => opt.value) : [],
 		});
-	};
+	}, []);
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -2047,9 +2125,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const postGlobalDesktopMarginWidth = `${postGlobalMarginDesktop.top}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.right}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.bottom}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.left}${postGlobalMarginUnits.Desktop}`;
-
-	const postGlobalTabletMarginWidth = `${postGlobalMarginTablet.top}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.right}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.bottom}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.left}${postGlobalMarginUnits.Tabelet}`;
-
+	const postGlobalTabletMarginWidth = `${postGlobalMarginTablet.top}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.right}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.bottom}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.left}${postGlobalMarginUnits.Tablet}`;
 	const postGlobalMobileMarginWidth = `${postGlobalMarginMobile.top}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.right}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.bottom}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.left}${postGlobalMarginUnits.Mobile}`;
 	/* End Global Margin */
 
@@ -3009,7 +3085,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ postCountGlobalTypoSwitcher.fontWeight === true && postCountGlobalTypographyData.fontWeight ? `font-weight: ${postCountGlobalTypographyData.fontWeight};` : "" }
 				${ postCountGlobalTypoSwitcher.fontStyle === true && postCountGlobalTypographyData.fontStyle ? `font-style: ${postCountGlobalTypographyData.fontStyle};` : "" }
 				${ postCountGlobalTypoSwitcher.textTransform === true && postCountGlobalTypographyData.textTransform ? `text-transform: ${postCountGlobalTypographyData.textTransform};` : "" }
-				${ postCountGlobalTypoSwitcher.textDecoration === true && postCountGlobalTypographyData.textDecoration ? `text-decoration: ${posCounteGlobalTypographyData.textDecoration};` : "" }
+				${ postCountGlobalTypoSwitcher.textDecoration === true && postCountGlobalTypographyData.textDecoration ? `text-decoration: ${postCountGlobalTypographyData.textDecoration};` : "" }
 				${ postCountGlobalTypoSwitcher.letterSpacing === true && postCountGlobalTypographyData.letterSpacing ? `letter-spacing: ${postCountGlobalTypographyData.letterSpacing};` : "" }
 				${ postCountGlobalTypoSwitcher.lineHeight === true && postCountGlobalTypographyData.lineHeight ? `line-height: ${postCountGlobalTypographyData.lineHeight};` : "" }
 				${ postCountGlobalTypoSwitcher.fontFamily === false && postCountFontFamily ? `font-family: ${postCountFontFamily};` : "" }
@@ -3117,7 +3193,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ""}
 				${buttonIconBorder ? `border: ${buttonIconBorder};` : ""}
 				${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ""}
-				${ buttonIconBorderDesktopWidth !== buttonIconBorderDesktop.top ? `border-width: ${buttonIconBorderDesktopWidth};` : "" }
+				${ buttonIconBorderDesktopWidth && buttonIconBorderDesktop.top
+					? `border-width: ${buttonIconBorderDesktopWidth};`
+					: ""
+				}
 				${ buttonIconBorderRadiusDesktopWidth !== buttonIconBorderRadiusDesktop.top ? `border-radius: ${buttonIconBorderRadiusDesktopWidth};` : "" }
 				${ buttonIconDesktopPaddingStr && buttonIconDesktopPadding?.top ? `padding: ${buttonIconDesktopPaddingStr}` : "" }
 			}
@@ -3284,10 +3363,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				${postGlobalZIndex.Desktop ? `z-index: ${postGlobalZIndex.Desktop};` : ""}
-				
-			}
 
-			.${blockId}.fb-post-category-area  {
 				${ postGlobalDesktopPaddingWidth && postGlobalPaddingDesktop.top ? `padding: ${postGlobalDesktopPaddingWidth};` : "" }
 				${ postGlobalDesktopMarginWidth && postGlobalMarginDesktop.top ? `margin: ${postGlobalDesktopMarginWidth};` : "" }
 				${ postGlobalBorder ? `border: ${postGlobalBorder};` : "" } 
@@ -3309,6 +3385,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ postCategoryOverflow !== "default" ? `overflow: ${postCategoryOverflow};` : "" }
 				
 				transition: all 0.3s ease-in-out;
+				
 			}
 
 			.${blockId}.fb-post-category-area:hover {
@@ -3541,9 +3618,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						: ""
 				}
 				${postGlobalZIndex.Tablet ? `z-index: ${postGlobalZIndex.Tablet}` : ""}
-			}
-								
-			.${blockId}.fb-post-category-area  {
+
 				${ postGlobalTabletPaddingWidth && postGlobalPaddingTablet.top ? `padding: ${postGlobalTabletPaddingWidth};` : "" }
 				${ postGlobalTabletMarginWidth && postGlobalMarginTablet.top ? `margin: ${postGlobalTabletMarginWidth};` : "" }
 				${ postGlobalBorder ? `border: ${postGlobalBorder};` : "" } 
@@ -3787,9 +3862,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				} 
 
 				${postGlobalZIndex.Mobile ? `z-index: ${postGlobalZIndex.Mobile}` : ""}
-			}
 
-			.${blockId}.fb-post-category-area  {
 				${ postGlobalMobilePaddingWidth && postGlobalPaddingMobile.top ? `padding: ${postGlobalMobilePaddingWidth}` : "" }
 				${ postGlobalMobileMarginWidth && postGlobalMarginMobile.top ? `margin: ${postGlobalMobileMarginWidth}` : "" }
 
@@ -3797,18 +3870,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ postGlobalMobileBorderWidth && postGlobalBorderMobile.top ? `border-width: ${postGlobalMobileBorderWidth};` : "" }
 				${ postGlobalMobileBorderRadiusWidth && postGlobalBorderRadiusMobile.top ? `border-radius: ${postGlobalMobileBorderRadiusWidth}!important;` : "" }
 			}
+
         }
 
 
-    `, [attributes]);
+	`,[attributes]);
 
 	const customCss = getCustomCss(postCategoryGlobalCustomCSS, `.${blockId}`);
-	useEffect(() => {
-			setAttributes({blockStyle: `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim()});
-	}, [allBlockStyle, customCss] );
-	const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
 
-	
+	useEffect(() => {
+		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle, customCss]);
+
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	const generalControls = (
 		<>
@@ -3888,6 +3962,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							checked={showCount}
 							onChange={(value) => setAttributes({ showCount: value })}
 						/>
+
+						{showCount && (
+							<ToggleControl
+								label={__("Show Post Type Name With Count", "frontis-blocks")}
+								checked={showLabel}
+								onChange={(value) => setAttributes({ showLabel: value })}
+							/>
+						)}
 
 						<ToggleControl
 							label={__("Show Description", "frontis-blocks")}
@@ -6337,7 +6419,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>{editorStyle}</style>
+			<style>
+				{editorStyle}
+			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
