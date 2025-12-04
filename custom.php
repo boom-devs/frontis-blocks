@@ -1,62 +1,10 @@
-megaMenuCloseIconColorSwitcher: {
-        type: 'string',
-        default: 'normal'
-    },
-    megaMenuCloseIconColor: {
-        type: 'string'
-    },
-    megaMenuCloseIconHoverColor: {
-        type: 'string',
-    },
-    megaMenuCloseIconSize: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+.${blockId} .fb-advanced-mega-menu-wrapper .fb-advanced-mega-menu-toggle .close-icon svg{
+            ${megaMenuCloseIconColor ? `stroke: ${megaMenuCloseIconColor};` : ''}
+            transform: rotate(${megaMenuCloseIconRotation?.Desktop}deg);
+            width: ${megaMenuCloseIconSize?.Desktop}${megaMenuCloseIconSizeUnits?.Desktop};
+            height: ${megaMenuCloseIconSize?.Desktop}${megaMenuCloseIconSizeUnits?.Desktop};
         }
-    },
-    megaMenuCloseIconSizeUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
+        .${blockId} .fb-advanced-mega-menu-wrapper .fb-advanced-mega-menu-toggle:hover .close-icon svg{
+            ${megaMenuCloseIconHoverColor ? `stroke: ${megaMenuCloseIconHoverColor};` : ''}
+            transform: rotate(${megaMenuCloseIconRotateHover?.Desktop}deg);
         }
-    },
-    megaMenuCloseIconGap: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    megaMenuCloseIconGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
-    megaMenuCloseIconRotateSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
-    megaMenuCloseIconRotation: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    megaMenuCloseIconRotateHover: {
-        type: 'object',
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        }
-    },
