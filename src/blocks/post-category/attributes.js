@@ -16,6 +16,10 @@ const attributes = {
 		type: "string",
 		default: "", // Default taxonomy
 	},
+	showLabel: {
+		type: "boolean",
+		default: true,
+	},
 	showCount: {
 		type: "boolean",
 		default: true,
