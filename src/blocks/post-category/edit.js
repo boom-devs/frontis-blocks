@@ -42,11 +42,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			}`,
 	});
 
-	useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({ blockId: "fb-category-" + clientId.slice(0, 8) });
-		}
-	}, [clientId]);
+	// useEffect(() => {
+	// 	if (clientId && !blockId) {
+	// 		setAttributes({ blockId: "fb-post-category-" + clientId.slice(0, 8) });
+	// 	}
+	// }, [clientId]);
 
 	let defaultImageUrl = '';
 	if (typeof FrontisBlocksData !== 'undefined') {
