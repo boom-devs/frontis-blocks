@@ -46,6 +46,7 @@ import "./editor.scss";
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		premadeStyle,
 		taxonomyType,
 		showCount,
@@ -448,12 +449,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const deviceType = useDeviceType();
 
 	useEffect(() => {
-		if (clientId && typeof clientId === "string" && !blockId) {
-			setAttributes({
-				blockId: "fb-post-category-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-post-category-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
@@ -2046,9 +2047,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	const postGlobalDesktopMarginWidth = `${postGlobalMarginDesktop.top}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.right}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.bottom}${postGlobalMarginUnits.Desktop} ${postGlobalMarginDesktop.left}${postGlobalMarginUnits.Desktop}`;
-
-	const postGlobalTabletMarginWidth = `${postGlobalMarginTablet.top}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.right}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.bottom}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.left}${postGlobalMarginUnits.Tabelet}`;
-
+	const postGlobalTabletMarginWidth = `${postGlobalMarginTablet.top}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.right}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.bottom}${postGlobalMarginUnits.Tablet} ${postGlobalMarginTablet.left}${postGlobalMarginUnits.Tablet}`;
 	const postGlobalMobileMarginWidth = `${postGlobalMarginMobile.top}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.right}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.bottom}${postGlobalMarginUnits.Mobile} ${postGlobalMarginMobile.left}${postGlobalMarginUnits.Mobile}`;
 	/* End Global Margin */
 
@@ -2993,7 +2992,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ postCountGlobalTypoSwitcher.fontWeight === true && postCountGlobalTypographyData.fontWeight ? `font-weight: ${postCountGlobalTypographyData.fontWeight};` : "" }
 				${ postCountGlobalTypoSwitcher.fontStyle === true && postCountGlobalTypographyData.fontStyle ? `font-style: ${postCountGlobalTypographyData.fontStyle};` : "" }
 				${ postCountGlobalTypoSwitcher.textTransform === true && postCountGlobalTypographyData.textTransform ? `text-transform: ${postCountGlobalTypographyData.textTransform};` : "" }
-				${ postCountGlobalTypoSwitcher.textDecoration === true && postCountGlobalTypographyData.textDecoration ? `text-decoration: ${posCounteGlobalTypographyData.textDecoration};` : "" }
+				${ postCountGlobalTypoSwitcher.textDecoration === true && postCountGlobalTypographyData.textDecoration ? `text-decoration: ${postCountGlobalTypographyData.textDecoration};` : "" }
 				${ postCountGlobalTypoSwitcher.letterSpacing === true && postCountGlobalTypographyData.letterSpacing ? `letter-spacing: ${postCountGlobalTypographyData.letterSpacing};` : "" }
 				${ postCountGlobalTypoSwitcher.lineHeight === true && postCountGlobalTypographyData.lineHeight ? `line-height: ${postCountGlobalTypographyData.lineHeight};` : "" }
 				${ postCountGlobalTypoSwitcher.fontFamily === false && postCountFontFamily ? `font-family: ${postCountFontFamily};` : "" }
@@ -3101,7 +3100,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonIconBgColor ? `background-color: ${buttonIconBgColor};` : ""}
 				${buttonIconBorder ? `border: ${buttonIconBorder};` : ""}
 				${buttonIconBorderColor ? `border-color: ${buttonIconBorderColor};` : ""}
-				${ buttonIconBorderDesktopWidth !== buttonIconBorderDesktop.top ? `border-width: ${buttonIconBorderDesktopWidth};` : "" }
+				${ buttonIconBorderDesktopWidth && buttonIconBorderDesktop.top
+					? `border-width: ${buttonIconBorderDesktopWidth};`
+					: ""
+				}
 				${ buttonIconBorderRadiusDesktopWidth !== buttonIconBorderRadiusDesktop.top ? `border-radius: ${buttonIconBorderRadiusDesktopWidth};` : "" }
 				${ buttonIconDesktopPaddingStr && buttonIconDesktopPadding?.top ? `padding: ${buttonIconDesktopPaddingStr}` : "" }
 			}
@@ -3784,16 +3786,419 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
 
-    `,[attributes]);
+	`,[
+		blockId,
+		blockStyle,
+		premadeStyle,
+		taxonomyType,
+		showCount,
+		showDescription,
+		showEmpty,
+		showChildCategories,
+		selectionType,
+		includeTaxonomies,
+		excludeTaxonomies,
+		orderBy,
+		sortOrder,
+		perPage,
+
+		layoutType,
+		gridColumns,
+		gridGapUnits,
+		gridRowGap,
+		gridColumnGap,
+		listStyle,
+		listIndentation,
+		listIndentationUnits,
+		postCategoryGlobalCustomCSS,
+
+		readMoreSwitcher,
+		readMoreText,
+		readMoreIconAlign,
+		readMoreIcon,
+		readMoreIconFrontend,
+		readMoreIconImageUrl,
+		readMoreIconImageAlt,
+		readMoreIconImageID,
+
+		readMoreIconImagedisplay,
+
+		/* Position */
+		postCategoryPositionType,
+		postCategoryHZOrientationType,
+		postCategoryVROrientationType,
+		postCategoryHZLeftOffset,
+		postCategoryHZLeftOffsetUnits,
+		postCategoryHZRightOffset,
+		postCategoryHZRightOffsetUnits,
+		postCategoryVRTopOffset,
+		postCategoryVRTopOffsetUnits,
+		postCategoryVRBottomOffset,
+		postCategoryVRBottomOffsetUnits,
+
+		/** Start Grid */
+
+		taxonomyHeight,
+		taxonomyHeightUnits,
+
+		postCategoryPaddingUnits,
+		postCategoryPaddingDesktop,
+		postCategoryPaddingTablet,
+		postCategoryPaddingMobile,
+		postCategoryPaddingLink,
+
+		postCategoryMarginUnits,
+		postCategoryMarginDesktop,
+		postCategoryMarginTablet,
+		postCategoryMarginMobile,
+		postCategoryMarginLink,
+
+		/** Background */
+		postCategoryBgColorSwitcher,
+		postCategoryNormalBackgroundType,
+		postCategoryNormalClassicColor,
+		postCategoryNormalGradientColor,
+		postCategoryNormalCustomGradientSwitcher,
+		postCategoryNormalCustomGradientInputValue,
+		postCategoryHoverBackgroundType,
+		postCategoryHoverClassicColor,
+		postCategoryHoverGradientColor,
+		postCategoryHoverCustomGradientSwitcher,
+		postCategoryHoverCustomGradientInputValue,
+
+		/** Border */
+		postCategoryBorder,
+		postCategoryBorderColorSwitcher,
+		postCategoryBorderColor,
+		postCategoryBorderHoverColor,
+		postCategoryBorderUnits,
+		postCategoryBorderDesktop,
+		postCategoryBorderTablet,
+		postCategoryBorderMobile,
+		postCategoryBorderLink,
+
+		/** Border Radius */
+		postCategoryBorderRadiusUnits,
+		postCategoryBorderRadiusDesktop,
+		postCategoryBorderRadiusTablet,
+		postCategoryBorderRadiusMobile,
+		postCategoryBorderRadiusLink,
+
+		/** Box Shadow */
+		postCategoryBoxShadowSwitcher,
+		postCategoryBoxShadowValues,
+		postCategoryBoxShadowCssValue,
+		postCategoryBoxShadowHoverValues,
+		postCategoryBoxShadowHoverCssValue,
+
+		/** Start title     */
+		postTitleGlobalTypoSwitcher,
+		postTitleGlobalTypographyData,
+		postTitleGlobalTypoType,
+		postTitleGlobalTypoOption,
+		postTitleFontFamily,
+		postTitleFontSize,
+		postTitleFontSizeUnits,
+		postTitleFontWeight,
+		postTitleFontStyle,
+		postTitleTextTransform,
+		postTitleTextDecoration,
+		postTitleLetterSpacing,
+		postTitleLetterSpacingUnits,
+		postTitleLineHeight,
+		postTitleLineHeightUnits,
+
+		postTitleColorSwitcher,
+		postTitleColor,
+		postTitleHoverColor,
+		/** End title */
+
+		/** Start description     */
+		postDescriptionGlobalTypoSwitcher,
+		postDescriptionGlobalTypographyData,
+		postDescriptionGlobalTypoType,
+		postDescriptionGlobalTypoOption,
+		postDescriptionFontFamily,
+		postDescriptionFontSize,
+		postDescriptionFontSizeUnits,
+		postDescriptionFontWeight,
+		postDescriptionFontStyle,
+		postDescriptionTextTransform,
+		postDescriptionTextDecoration,
+		postDescriptionLetterSpacing,
+		postDescriptionLetterSpacingUnits,
+		postDescriptionLineHeight,
+		postDescriptionLineHeightUnits,
+
+		postDescriptionColorSwitcher,
+		postDescriptionColor,
+		postDescriptionHoverColor,
+
+		postDescriptionSpacing,
+		postDescriptionSpacingUnits,
+
+		postDescriptionExcerptLength,
+		/** End description */
+
+		/** Start count     */
+		postCountGlobalTypoSwitcher,
+		postCountGlobalTypographyData,
+		postCountGlobalTypoType,
+		postCountGlobalTypoOption,
+		postCountFontFamily,
+		postCountFontSize,
+		postCountFontSizeUnits,
+		postCountFontWeight,
+		postCountFontStyle,
+		postCountTextTransform,
+		postCountTextDecoration,
+		postCountLetterSpacing,
+		postCountLetterSpacingUnits,
+		postCountLineHeight,
+		postCountLineHeightUnits,
+
+		postCountColorSwitcher,
+		postCountColor,
+		postCountHoverColor,
+
+		postCountSpacing,
+		postCountSpacingUnits,
+		/** End count */
+
+		/** Start Read More Button style */
+		buttonWidth,
+		buttonWidthUnits,
+
+		buttonGlobalTypoSwitcher,
+		buttonGlobalTypographyData,
+		buttonGlobalTypoType,
+		buttonGlobalTypoOption,
+		buttonFontFamily,
+		buttonFontSize,
+		buttonFontSizeUnits,
+		buttonFontWeight,
+		buttonFontStyle,
+		buttonTextTransform,
+		buttonTextDecoration,
+		buttonLetterSpacing,
+		buttonLetterSpacingUnits,
+		buttonLineHeight,
+		buttonLineHeightUnits,
+
+		buttonColorSwitcher,
+		buttonColor,
+		buttonHoverColor,
+		buttonBgColorSwitcher,
+		buttonBgColor,
+		buttonBgHoverColor,
+		buttonBorder,
+		buttonBorderColorSwitcher,
+		buttonBorderColor,
+		buttonBorderHoverColor,
+
+		buttonBorderUnits,
+		buttonDesktopBorderWidth,
+		buttonTabBorderWidth,
+		buttonMobileBorderWidth,
+		buttonBorderLink,
+
+		buttonBorderRadiusUnits,
+		buttonDesktopBorderRadiusWidth,
+		buttonTabBorderRadiusWidth,
+		buttonMobileBorderRadiusWidth,
+		buttonBorderRadiusLink,
+
+		buttonBoxShadowSwitcher,
+		buttonBoxShadowValues,
+		buttonBoxShadowCssValue,
+		buttonBoxShadowHoverValues,
+		buttonBoxShadowHoverCssValue,
+
+		buttonPaddingUnits,
+		buttonDesktopPadding,
+		buttonTabPadding,
+		buttonMobilePadding,
+		buttonPaddingLink,
+
+		buttonMarginUnits,
+		buttonDesktopMargin,
+		buttonTabMargin,
+		buttonMobileMargin,
+		buttonMarginLink,
+
+		buttonIconSize,
+		buttonIconSizeUnits,
+		buttonIconColorSwitcher,
+		buttonIconColor,
+		buttonIconHoverColor,
+		buttonIconBgColorSwitcher,
+		buttonIconBgColor,
+		buttonIconBgHoverColor,
+		buttonIconBorder,
+		buttonIconBorderColorSwitcher,
+		buttonIconBorderColor,
+		buttonIconBorderHoverColor,
+		buttonIconBorderUnits,
+		buttonIconBorderDesktop,
+		buttonIconBorderTablet,
+		buttonIconBorderMobile,
+		buttonIconBorderLink,
+		buttonIconBorderRadiusUnits,
+		buttonIconBorderRadiusDesktop,
+		buttonIconBorderRadiusTablet,
+		buttonIconBorderRadiusMobile,
+		buttonIconBorderRadiusLink,
+
+		buttonIconPaddingUnits,
+		buttonIconDesktopPadding,
+		buttonIconTabPadding,
+		buttonIconMobilePadding,
+		buttonIconPaddingLink,
+
+		buttonIconGapSize,
+		buttonIconGapUnits,
+		buttonIconRotateSwitcher,
+		buttonIconRotate,
+		buttonIconRotateHover,
+		buttonImageRotateSwitcher,
+		buttonImageRotate,
+		buttonImageRotateHover,
+
+		buttonIconImageWidth,
+		buttonIconImageWidthUnits,
+		buttonIconImageHeight,
+		buttonIconImageHeightUnits,
+		/** Read More Button */
+
+		/** Start List Layout */
+		postListTypeColorSwitcher,
+		postListTypeColor,
+		postListTypeHoverColor,
+
+		postListItemSpacing,
+		postListItemSpacingUnits,
+
+		separatorStyle,
+		separatorThickness,
+		separatorThicknessUnits,
+		separatorWidth,
+		separatorWidthUnits,
+		separatorColorSwitcher,
+		separatorColor,
+		separatorHoverColor,
+
+		postCountBgColorSwitcher,
+		postCountNormalBackgroundType,
+		postCountNormalClassicColor,
+		postCountNormalGradientColor,
+		postCountNormalCustomGradientSwitcher,
+		postCountNormalCustomGradientInputValue,
+		postCountHoverBackgroundType,
+		postCountHoverClassicColor,
+		postCountHoverGradientColor,
+		postCountHoverCustomGradientSwitcher,
+		postCountHoverCustomGradientInputValue,
+
+		postCountPaddingUnits,
+		postCountPaddingDesktop,
+		postCountPaddingTablet,
+		postCountPaddingMobile,
+		postCountPaddingLink,
+
+		postCountBorder,
+		postCountBorderColorSwitcher,
+		postCountBorderColor,
+		postCountBorderHoverColor,
+		postCountBorderUnits,
+		postCountBorderDesktop,
+		postCountBorderTablet,
+		postCountBorderMobile,
+		postCountBorderLink,
+
+		postCountBorderRadiusUnits,
+		postCountBorderRadiusDesktop,
+		postCountBorderRadiusTablet,
+		postCountBorderRadiusMobile,
+		postCountBorderRadiusLink,
+
+		postCountBoxShadowSwitcher,
+		postCountBoxShadowValues,
+		postCountBoxShadowCssValue,
+		postCountBoxShadowHoverValues,
+		postCountBoxShadowHoverCssValue,
+		/** End List Layout */
+
+		/** Start Global Setting */
+		postGlobalZIndex,
+		postCategoryOverflow,
+		postCategoryGlobalWraperID,
+		postCategoryGlobalWraperClass,
+
+		postGlobalPaddingUnits,
+		postGlobalPaddingDesktop,
+		postGlobalPaddingTablet,
+		postGlobalPaddingMobile,
+		postGlobalPaddingLink,
+
+		postGlobalMarginUnits,
+		postGlobalMarginDesktop,
+		postGlobalMarginTablet,
+		postGlobalMarginMobile,
+		postGlobalMarginLink,
+
+		postGlobalBgColorSwitcher,
+		postGlobalNormalBackgroundType,
+		postGlobalNormalClassicColor,
+		postGlobalNormalGradientColor,
+		postGlobalNormalCustomGradientSwitcher,
+		postGlobalNormalCustomGradientInputValue,
+
+		postGlobalHoverBackgroundType,
+		postGlobalHoverClassicColor,
+		postGlobalHoverGradientColor,
+		postGlobalHoverCustomGradientSwitcher,
+		postGlobalHoverCustomGradientInputValue,
+
+		postGlobalBorder,
+		postGlobalBorderColorSwitcher,
+		postGlobalBorderColor,
+		postGlobalBorderHoverColor,
+
+		postGlobalBorderUnits,
+		postGlobalBorderDesktop,
+		postGlobalBorderTablet,
+		postGlobalBorderMobile,
+		postGlobalBorderLink,
+
+		postGlobalBorderRadiusUnits,
+		postGlobalBorderRadiusDesktop,
+		postGlobalBorderRadiusTablet,
+		postGlobalBorderRadiusMobile,
+		postGlobalBorderRadiusLink,
+
+		postGlobalBoxShadowSwitcher,
+		postGlobalBoxShadowValues,
+		postGlobalBoxShadowCssValue,
+		postGlobalBoxShadowHoverValues,
+		postGlobalBoxShadowHoverCssValue,
+		/** End Global Setting */
+
+		postCategoryDesktopSwitcher,
+		postCategoryTabletSwitcher,
+		postCategoryMobileSwitcher,
+	]);
+
 
 	const customCss = getCustomCss(postCategoryGlobalCustomCSS, `.${blockId}`);
-	const editorStyle = `${allBlockStyle} ${customCss}`
-		.replace(/\s+/g, " ")
-		.trim();
 
 	useEffect(() => {
-		setAttributes({ blockStyle: editorStyle });
-	}, [editorStyle]);
+		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+	}, [allBlockStyle, customCss]);
+
+
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
+	console.log(postCategoryBorderColor);
 
 	const generalControls = (
 		<>
@@ -6322,7 +6727,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>{editorStyle}</style>
+			<style>
+				{editorStyle}
+			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
