@@ -475,15 +475,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []) ||
 		[];
 
-	// Filter post types: only those visible in UI, with taxonomies, and exclude internal types
-	const filteredPostTypes = postTypes.filter(
-		(pt) =>
-			pt.visibility?.show_ui &&
-			pt.taxonomies?.length > 0 &&
-			!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(
-				pt.slug,
-			),
-	);
+		// Filter post types: only those visible in UI, with taxonomies, and exclude internal types
+		const filteredPostTypes = useMemo(
+			() =>
+				postTypes.filter(
+					(pt) =>
+						pt.visibility?.show_ui &&
+						pt.taxonomies?.length > 0 &&
+						!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(
+							pt.slug,
+						),
+				),
+			[postTypes],
+		);
 
 	// Fetch all taxonomies
 	const allTaxonomies =
@@ -522,30 +526,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		);
 	});
 
-	useEffect(() => {
-		if (
-			dynamicTaxonomyOptions.length > 0 &&
-			(!taxonomyType ||
-				!dynamicTaxonomyOptions.find(
-					(opt) => opt.value === taxonomyType && !opt.isDisabled,
-				))
-		) {
-			const defaultTax = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-			if (defaultTax) {
-				setSelectedTaxonomy(defaultTax);
-				setAttributes({ taxonomyType: defaultTax.value });
+		useEffect(() => {
+			if (
+				dynamicTaxonomyOptions.length > 0 &&
+				(!taxonomyType ||
+					!dynamicTaxonomyOptions.find(
+						(opt) => opt.value === taxonomyType && !opt.isDisabled,
+					))
+			) {
+				const defaultTax = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
+				if (defaultTax && taxonomyType !== defaultTax.value) {
+					setSelectedTaxonomy(defaultTax);
+					setAttributes({ taxonomyType: defaultTax.value });
+				}
+			} else if (!taxonomyType && dynamicTaxonomyOptions.length === 0) {
+				if (selectedTaxonomy !== null) {
+					setSelectedTaxonomy(null);
+				}
+				if (taxonomyType !== "") {
+					setAttributes({ taxonomyType: "" });
+				}
+			} else if (taxonomyType) {
+				const currentTax =
+					dynamicTaxonomyOptions.find(
+						(opt) => opt.value === taxonomyType && !opt.isDisabled,
+					) || null;
+				if (currentTax?.value !== selectedTaxonomy?.value) {
+					setSelectedTaxonomy(currentTax);
+				}
 			}
-		} else if (!taxonomyType && dynamicTaxonomyOptions.length === 0) {
-			setSelectedTaxonomy(null);
-			setAttributes({ taxonomyType: "" });
-		} else if (taxonomyType) {
-			const currentTax =
-				dynamicTaxonomyOptions.find(
-					(opt) => opt.value === taxonomyType && !opt.isDisabled,
-				) || null;
-			setSelectedTaxonomy(currentTax);
-		}
-	}, [dynamicTaxonomyOptions, taxonomyType]);
+		}, [dynamicTaxonomyOptions, taxonomyType, selectedTaxonomy]);
 
 	// Handle taxonomy change (only allow selection of taxonomies, not group headers)
 	const handleTaxonomyChange = (option) => {
@@ -4198,7 +4208,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-	console.log(postCategoryBorderColor);
+		console.log(postCategoryBorderColor);
 
 	const generalControls = (
 		<>
