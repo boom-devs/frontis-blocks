@@ -637,3 +637,9 @@ export const MENU_TYPE = [
     { value: 'text', label: __('Text', 'frontis-blocks') },
     { value: 'icon-text', label: __('Both', 'frontis-blocks') },
 ];
+
+export const LOTTIE_RENDER_TYPE = [
+    { value: 'svg', label: __('SVG', 'frontis-blocks') },
+    { value: 'canvas', label: __('Canvas', 'frontis-blocks') },
+    { value: 'html', label: __('HTML', 'frontis-blocks') },
+];
