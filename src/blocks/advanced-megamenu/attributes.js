@@ -14,6 +14,10 @@ export default {
             Mobile: '',
         },
     },
+    megaMenuIconTypeSwitcher: {
+        type: 'string',
+        default: 'opener',
+    },
     //Mega menu width
     megaMenuWidthSwitcher: {
         type: 'string',
@@ -270,6 +274,69 @@ export default {
         }
     },
     megaMenuIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    //Open Icon
+    megaMenuOpenIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    megaMenuOpenIconColor: {
+        type: 'string'
+    },
+    megaMenuOpenIconHoverColor: {
+        type: 'string',
+    },
+    megaMenuOpenIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuOpenIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuOpenIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    megaMenuOpenIconRotation: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconRotateHover: {
         type: 'object',
         default: {
             Desktop: "",
