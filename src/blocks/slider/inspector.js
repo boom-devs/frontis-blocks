@@ -51,6 +51,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+        enableKeyboardNavigation,
         displayArrows,
         displayDots,
         paginationType,
@@ -1990,6 +1991,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Enable Mouse Wheel", "frontis-blocks")}
                     checked={enableMouseWheel}
                     onChange={(value) => setAttributes({ enableMouseWheel: value })}
+                />
+                <ToggleControl
+                    label={__("Enable Keyboard Navigation", "frontis-blocks")}
+                    checked={enableKeyboardNavigation}
+                    onChange={(value) => setAttributes({ enableKeyboardNavigation: value })}
                 />
                 <ToggleControl
                     label={ __( 'Enable Autoplay', 'frontis-blocks' ) }
