@@ -11,6 +11,9 @@ export default function save({ attributes }) {
 		lottieRenderer = 'svg',
 		lottieLoop = true,
 		lottieAutoplay = true,
+		lottieAnimationSpeed,
+		lottieEffectsOnHover,
+		lottieAnimationReverse
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -41,6 +44,9 @@ export default function save({ attributes }) {
 				data-renderer={lottieRenderer}
 				data-loop={lottieLoop}
 				data-autoplay={lottieAutoplay}
+				data-speed={lottieAnimationSpeed}
+				data-hover-effect={lottieEffectsOnHover}
+				data-reverse={lottieAnimationReverse}
 				style={{ width: '100%' }}
 			/>
 		</div>

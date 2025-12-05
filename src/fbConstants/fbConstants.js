@@ -639,7 +639,13 @@ export const MENU_TYPE = [
 ];
 
 export const LOTTIE_RENDER_TYPE = [
-    { value: 'svg', label: __('SVG', 'frontis-blocks') },
     { value: 'canvas', label: __('Canvas', 'frontis-blocks') },
-    { value: 'html', label: __('HTML', 'frontis-blocks') },
+    { value: 'svg', label: __('SVG', 'frontis-blocks') },
+];
+
+export const LOTTIE_HOVER_STATE = [
+    { value: 'none', label: __('None', 'frontis-blocks') },
+    { value: 'pause', label: __('Pause', 'frontis-blocks') },
+    { value: 'play', label: __('Play', 'frontis-blocks') },
+    { value: 'reverse', label: __('Reverse', 'frontis-blocks') },
 ];
