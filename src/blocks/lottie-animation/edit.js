@@ -1,12 +1,10 @@
-// edit.js
+// edit.js - NOW FULLY SUPPORTS REVERSE + HOVER EFFECTS (Editor = Frontend)
+
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
-import {
-	PanelBody
-} from "@wordpress/components";
-import Inspector from "./inspector";
 import lottie from 'lottie-web';
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -17,6 +15,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieRenderer = 'svg',
 		lottieLoop = true,
 		lottieAutoplay = true,
+		lottieAnimationSpeed = 1,
+		lottieEffectsOnHover = 'none',
+		lottieAnimationReverse = false,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -30,16 +31,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		// Destroy previous animation
 		if (animationRef.current) {
 			animationRef.current.destroy();
+			animationRef.current = null;
 		}
 
-		let animationData = null;
 		let path = null;
-
 		if (lottieAnimationJsonTypeSwitcher === 'json-file' && lottieAnimationImageUrl) {
-			// For uploaded file, we assume it's already a direct URL to .json
 			path = lottieAnimationImageUrl;
 		} else if (lottieAnimationJsonTypeSwitcher === 'json-url' && lottieAnimationJsonUrl) {
 			path = lottieAnimationJsonUrl;
@@ -47,11 +45,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		if (!path) return;
 
-		animationRef.current = lottie.loadAnimation({
+		const shouldAutoplay = (lottieEffectsOnHover === 'play-pause' || lottieEffectsOnHover === 'play') ? false : lottieAutoplay;
+
+		const anim = lottie.loadAnimation({
 			container: containerRef.current,
 			renderer: lottieRenderer,
 			loop: lottieLoop,
-			autoplay: lottieAutoplay,
+			autoplay: shouldAutoplay,
 			path: path,
 			rendererSettings: {
 				preserveAspectRatio: 'xMidYMid meet',
@@ -59,8 +59,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			},
 		});
 
+		animationRef.current = anim;
+
+		anim.addEventListener('DOMLoaded', () => {
+			anim.setDirection(lottieAnimationReverse ? -1 : 1);
+			anim.setSpeed(lottieAnimationSpeed);
+
+			if (shouldAutoplay) {
+				anim.play();
+			}
+		});
+
 		return () => {
-			if (animationRef.current) animationRef.current.destroy();
+			if (animationRef.current) {
+				animationRef.current.destroy();
+				animationRef.current = null;
+			}
 		};
 	}, [
 		lottieAnimationImageUrl,
@@ -69,34 +83,90 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieRenderer,
 		lottieLoop,
 		lottieAutoplay,
+		lottieAnimationSpeed,
+		lottieEffectsOnHover,
+		lottieAnimationReverse, 
 	]);
+
+	useEffect(() => {
+		const container = containerRef.current;
+		const anim = animationRef.current;
+		if (!container || !anim || lottieEffectsOnHover === 'none') return;
+
+		const playNormally = () => {
+			anim.setDirection(lottieAnimationReverse ? -1 : 1);
+			anim.play();
+		};
+
+		const playReversedOnHover = () => {
+			anim.setDirection(lottieAnimationReverse ? 1 : -1);
+			anim.play();
+		};
+
+		const handleMouseEnter = () => {
+			switch (lottieEffectsOnHover) {
+				case 'play':
+				case 'play-pause':
+					playNormally();
+					break;
+				case 'pause':
+					anim.pause();
+					break;
+				case 'stop':
+					anim.stop();
+					break;
+				case 'reverse':
+					playReversedOnHover();
+					break;
+				case 'toggle':
+					anim.isPaused ? playNormally() : anim.pause();
+					break;
+			}
+		};
+
+		const handleMouseLeave = () => {
+			switch (lottieEffectsOnHover) {
+				case 'play':
+				case 'play-pause':
+					anim.pause();
+					break;
+				case 'pause':
+					playNormally();
+					break;
+				case 'reverse':
+					playNormally(); 
+					break;
+			}
+		};
+
+		container.style.cursor = 'pointer';
+		container.addEventListener('mouseenter', handleMouseEnter);
+		container.addEventListener('mouseleave', handleMouseLeave);
+
+		return () => {
+			container.style.cursor = '';
+			container.removeEventListener('mouseenter', handleMouseEnter);
+			container.removeEventListener('mouseleave', handleMouseLeave);
+		};
+	}, [lottieEffectsOnHover, lottieAnimationReverse]);
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
 			<div {...blockProps}>
 				<div className="fb-parent-wrapper fb-lottie-animation-container">
 					<div
 						ref={containerRef}
-						className="lottie-preview-container"
+						className="fb-lottie-preview-container"
 						style={{
-							width: '100%',
-							height: '300px',
 							border: lottieAnimationImageUrl || lottieAnimationJsonUrl ? 'none' : '2px dashed #ccc',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							background: '#f9f9f9',
-							borderRadius: '8px',
+							cursor: lottieEffectsOnHover !== 'none' ? 'pointer' : 'default',
+							minHeight: '100px',
 						}}
 					>
 						{!(lottieAnimationImageUrl || lottieAnimationJsonUrl) && (
-							<p style={{ color: '#999' }}>
+							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
 								{__('Upload a Lottie JSON file or paste a URL to preview', 'frontis-blocks')}
 							</p>
 						)}
