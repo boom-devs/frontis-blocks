@@ -25,45 +25,79 @@ if (!function_exists('fb_trim_words')) {
     }
 }
 
-// NEW: Helper function to get post type label for a taxonomy
-if (!function_exists('fb_get_post_type_label_for_taxonomy')) {
-    function fb_get_post_type_label_for_taxonomy($taxonomy_slug) {
-        if (empty($taxonomy_slug)) {
-            return '';
-        }
-        
-        $taxonomy = get_taxonomy($taxonomy_slug);
-        if (!$taxonomy || empty($taxonomy->object_type)) {
-            return '';
-        }
-        
-        // Get the first post type associated with this taxonomy
-        $post_type_slug = $taxonomy->object_type[0];
-        $post_type = get_post_type_object($post_type_slug);
-        
-        if (!$post_type) {
-            return '';
-        }
-        
-        // Return the plural label if available, otherwise singular
-        return !empty($post_type->labels->name) ? $post_type->labels->name : $post_type_slug;
-    }
-}
-
-// NEW: Function to format count with separate HTML for number and label
 if (!function_exists('fb_format_count_with_label_html')) {
-    function fb_format_count_with_label_html($count, $taxonomy_slug, $show_label = true) {
+    function fb_format_count_with_label_html($count, $term_id, $taxonomy_slug, $show_label = true) {
         if (!$show_label) {
             return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
         }
         
-        $label = fb_get_post_type_label_for_taxonomy($taxonomy_slug);
+        $label = fb_get_post_type_label_for_term($term_id, $taxonomy_slug, $count);
         if (!empty($label)) {
             return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>' . 
                    '<span class="fb-taxonomy-count-label"> ' . esc_html($label) . '</span>';
         }
         
         return '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+    }
+}
+
+if (!function_exists('fb_get_post_type_label_for_term')) {
+    function fb_get_post_type_label_for_term($term_id, $taxonomy_slug, $count = 1) {
+        if (empty($term_id) || empty($taxonomy_slug)) {
+            return '';
+        }
+        
+        global $wpdb;
+        
+        // Get all posts that have this term
+        $post_ids = $wpdb->get_col($wpdb->prepare(
+            "SELECT object_id 
+            FROM {$wpdb->term_relationships} 
+            WHERE term_taxonomy_id = %d",
+            $term_id
+        ));
+        
+        if (empty($post_ids)) {
+            return '';
+        }
+        
+        // Get post types of these posts
+        $post_types = $wpdb->get_col($wpdb->prepare(
+            "SELECT DISTINCT post_type 
+            FROM {$wpdb->posts} 
+            WHERE ID IN (" . implode(',', array_fill(0, count($post_ids), '%d')) . ") 
+            AND post_status = 'publish'",
+            ...$post_ids
+        ));
+        
+        if (empty($post_types)) {
+            return '';
+        }
+        
+        // Remove duplicates and filter
+        $post_types = array_unique($post_types);
+        
+        // Get post type labels
+        $post_type_labels = [];
+        foreach ($post_types as $post_type_slug) {
+            $post_type = get_post_type_object($post_type_slug);
+            if ($post_type && $post_type->public) {
+                $post_type_labels[] = $post_type->labels->singular_name ?? $post_type_slug;
+            }
+        }
+        
+        if (empty($post_type_labels)) {
+            return '';
+        }
+        
+        // Return appropriate label
+        if (count($post_type_labels) === 1) {
+            $label = $post_type_labels[0];
+            return $count > 1 ? $label . 's' : $label;
+        }
+        
+        // Multiple post types
+        return __('Posts', 'frontis-blocks');
     }
 }
 
@@ -81,7 +115,7 @@ $exclude_taxonomies = isset($attributes['excludeTaxonomies']) ? (array) $attribu
 $order_by = fb_norm_str(isset($attributes['orderBy']) ? $attributes['orderBy'] : 'name');
 $sort_order = fb_norm_str(isset($attributes['sortOrder']) ? $attributes['sortOrder'] : 'asc');
 $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
-$show_post_type_label = isset($attributes['showPostTypeLabel']) ? (bool) $attributes['showPostTypeLabel'] : true; // NEW
+$show_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true; // CHANGED from showPostTypeLabel to showLabel
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -233,8 +267,9 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             if ($args['show_count']) {
                 $formatted_count_html = fb_format_count_with_label_html(
                     $term->count, 
+                    $term->term_id, // ADDED term ID
                     $args['taxonomy_type'], 
-                    $args['show_post_type_label']
+                    $args['show_label'] // CHANGED from show_post_type_label
                 );
                 
                 if ($args['premade_style'] === 'style-1') {
@@ -373,8 +408,9 @@ if (empty($taxonomy_type)) {
             if ($show_count) {
                 $formatted_count_html = fb_format_count_with_label_html(
                     $term->count, 
+                    $term->term_id, // ADDED term ID
                     $taxonomy_type, 
-                    $show_post_type_label
+                    $show_label // CHANGED from show_post_type_label
                 );
                 $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
             }
@@ -441,8 +477,8 @@ if (empty($taxonomy_type)) {
         'read_more_icon_frontend' => $read_more_icon_frontend,
         'read_more_icon_image_url'=> $read_more_icon_image_url,
         'read_more_icon_image_alt'=> $read_more_icon_image_alt,
-        'taxonomy_type' => $taxonomy_type, // ADD THIS
-        'show_post_type_label' => $show_post_type_label, // ADD THIS
+        'taxonomy_type' => $taxonomy_type,
+        'show_label' => $show_label, // CHANGED from show_post_type_label
     ];
 
     if ($show_child_categories) {
@@ -471,8 +507,9 @@ if (empty($taxonomy_type)) {
             if ($show_count) {
                 $formatted_count_html = fb_format_count_with_label_html(
                     $term->count, 
+                    $term->term_id, // ADDED term ID
                     $taxonomy_type, 
-                    $show_post_type_label
+                    $show_label // CHANGED from show_post_type_label
                 );
                 
                 if ($premade_style === 'style-1') {
