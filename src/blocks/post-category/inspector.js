@@ -470,45 +470,56 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [readMoreIcon]);
 
-	// Fetch all post types
+	// ---- FETCH CORE DATA ----
 	const { useSelect } = wp.data;
-	const postTypes = useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []) || [];
 
-	// Filter post types: only those visible in UI, with taxonomies, and exclude internal types
-	const filteredPostTypes = useMemo(
-		() =>
-			postTypes.filter(
-				(pt) =>
-					pt.visibility?.show_ui &&
-					pt.taxonomies?.length > 0 &&
-					!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(
-						pt.slug,
-					),
-			),
-		[postTypes],
+	// All post types (one fetch only)
+	const allPostTypes = useSelect(
+		(select) => select("core").getPostTypes({ per_page: -1 }) || [],
+		[]
 	);
 
-	// Fetch all taxonomies
-	const allTaxonomies = useSelect((select) => select("core").getTaxonomies({ per_page: -1 }),[]) || [];
+	// All taxonomies
+	const allTaxonomies = useSelect(
+		(select) => select("core").getTaxonomies({ per_page: -1 }) || [],
+		[]
+	);
 
-	const allPostTypes = useSelect((select) => select("core").getPostTypes({ per_page: -1 }), []);
-	const getPostTypeLabelForTaxonomy = useCallback((taxSlug) => {
-		if (!taxSlug || !allPostTypes.length) return null;
-		
-		// Find the taxonomy object
-		const taxonomy = allTaxonomies.find(tax => tax.slug === taxSlug);
-		if (!taxonomy || !taxonomy.types || taxonomy.types.length === 0) return null;
-		
-		// Get the first post type associated with this taxonomy
-		const postTypeSlug = taxonomy.types[0];
-		const postType = allPostTypes.find(pt => pt.slug === postTypeSlug);
-		
-		return postType ? postType.labels?.name || postTypeSlug : null;
-	}, [allTaxonomies, allPostTypes]);
+	const selectedTaxonomyObj = useMemo(() => allTaxonomies.find(tax => tax.slug === taxonomyType), [allTaxonomies, taxonomyType] );
 
+	// ---- FILTER POST TYPES FOR DROPDOWN GROUPING ----
+	const filteredPostTypes = useMemo(() => {
+		return allPostTypes.filter(
+			(pt) =>
+				pt.visibility?.show_ui &&
+				pt.taxonomies?.length > 0 &&
+				!["attachment", "wp_block", "nav_menu_item", "revision", "page"].includes(pt.slug)
+		);
+	}, [allPostTypes]);
+
+	// ---- MAP TAXONOMY → POST TYPE LABEL ----
+	const getPostTypeLabelForTaxonomy = useCallback(
+		(taxSlug) => {
+			const taxonomy = allTaxonomies.find((tax) => tax.slug === taxSlug);
+			if (!taxonomy?.types?.length) return null;
+
+			// If taxonomy is used by multiple post types, choose based on filteredPostTypes priority
+			const preferred = taxonomy.types.find((type) =>
+				filteredPostTypes.some((pt) => pt.slug === type)
+			);
+
+			const postTypeSlug = preferred || taxonomy.types[0];
+			const postType = allPostTypes.find((pt) => pt.slug === postTypeSlug);
+
+			return postType?.labels?.name || postTypeSlug;
+		},
+		[allTaxonomies, filteredPostTypes, allPostTypes]
+	);
+
+	// ---- BUILD TAXONOMY DROPDOWN (WITH GROUPS) ----
 	const dynamicTaxonomyOptions = useMemo(() => {
 		return filteredPostTypes.flatMap((pt) => {
-			const taxonomiesForPostType = allTaxonomies
+			const taxList = allTaxonomies
 				.filter((tax) => tax.types?.includes(pt.slug))
 				.map((tax) => ({
 					value: tax.slug,
@@ -516,7 +527,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					isDisabled: false,
 				}));
 
-			if (taxonomiesForPostType.length === 0) return [];
+			if (!taxList.length) return [];
 
 			return [
 				{
@@ -524,156 +535,113 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label: pt.labels?.name || pt.slug,
 					isDisabled: true,
 				},
-				...taxonomiesForPostType,
+				...taxList,
 			];
 		});
 	}, [filteredPostTypes, allTaxonomies]);
 
-	// Separate useState for selectedTaxonomy
-	const [selectedTaxonomy, setSelectedTaxonomy] = useState(() => {
-		if (taxonomyType) {
-			const matched = dynamicTaxonomyOptions.find(
-				(opt) => opt.value === taxonomyType && !opt.isDisabled
-			);
-			if (matched) return matched;
-		}
-		
-		const firstAvailable = dynamicTaxonomyOptions.find(opt => !opt.isDisabled);
-		return firstAvailable || null;
-	});
-
-	// Separate useState for postTypeLabel
-	const [postTypeLabel, setPostTypeLabel] = useState("");
-
+	// ---- AUTO-FIX INVALID taxonomyType ----
 	useEffect(() => {
-		if (dynamicTaxonomyOptions.length > 0) {
-			const hasValidTaxonomy = taxonomyType && 
-				dynamicTaxonomyOptions.some(opt => 
-					opt.value === taxonomyType && !opt.isDisabled
-				);
-			
-			if (!hasValidTaxonomy) {
-				const defaultTax = dynamicTaxonomyOptions.find(opt => !opt.isDisabled);
-				if (defaultTax) {
-					if (selectedTaxonomy?.value !== defaultTax.value) {
-						setSelectedTaxonomy(defaultTax);
-					}
-					if (taxonomyType !== defaultTax.value) {
-						setAttributes({ 
-							taxonomyType: defaultTax.value,
-							includeTaxonomies: [],
-							excludeTaxonomies: [],
-							showChildCategories: false,
-						});
-					}
-					// Update post type label for default taxonomy
-					const label = getPostTypeLabelForTaxonomy(defaultTax.value);
-					setPostTypeLabel(label || "");
-					return;
-				}
-			}
-		}
-
-		if (dynamicTaxonomyOptions.length === 0) {
-			if (selectedTaxonomy !== null) {
-				setSelectedTaxonomy(null);
-			}
+		// no taxonomies available
+		if (!dynamicTaxonomyOptions.length) {
 			if (taxonomyType) {
-				setAttributes({ 
+				setAttributes({
 					taxonomyType: "",
 					includeTaxonomies: [],
 					excludeTaxonomies: [],
 					showChildCategories: false,
 				});
 			}
-			setPostTypeLabel("");
 			return;
 		}
 
-		if (taxonomyType) {
-			const currentTax = dynamicTaxonomyOptions.find(
-				opt => opt.value === taxonomyType && !opt.isDisabled
-			);
-			
-			const isDifferent = 
-				(!currentTax && selectedTaxonomy) ||
-				(currentTax && !selectedTaxonomy) ||
-				(currentTax && selectedTaxonomy && currentTax.value !== selectedTaxonomy.value);
-			
-			if (isDifferent) {
-				setSelectedTaxonomy(currentTax || null);
+		// check valid taxonomy selection
+		const isValid = dynamicTaxonomyOptions.some(
+			(opt) => opt.value === taxonomyType && !opt.isDisabled
+		);
+
+		if (!isValid) {
+			const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
+			if (firstAllowed) {
+				setAttributes({
+					taxonomyType: firstAllowed.value,
+					includeTaxonomies: [],
+					excludeTaxonomies: [],
+					showChildCategories: false,
+				});
 			}
-			
-			// Update post type label when taxonomyType changes
-			const label = getPostTypeLabelForTaxonomy(taxonomyType);
-			setPostTypeLabel(label || "");
-		} else {
-			setPostTypeLabel("");
 		}
-	}, [dynamicTaxonomyOptions, taxonomyType, getPostTypeLabelForTaxonomy, selectedTaxonomy]);
+	}, [dynamicTaxonomyOptions, taxonomyType]);
 
-	const formatCountWithLabel = (count, taxonomySlug) => {
-		const label = getPostTypeLabelForTaxonomy(taxonomySlug);
-		if (label) {
-			return `${count} ${label}`;
-		}
-		return `${count}`;
-	};
+	// ---- SELECTED TAXONOMY (Derived, not state) ----
+	const selectedTaxonomy = useMemo(() => {
+		return dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType) || null;
+	}, [dynamicTaxonomyOptions, taxonomyType]);
 
-	const handleTaxonomyChange = useCallback((option) => {
-		if (!option || option.isDisabled) return;
-		
-		if (selectedTaxonomy?.value === option.value) return;
-		
-		setSelectedTaxonomy(option);
-		
-		// Update post type label for the new taxonomy
-		const label = getPostTypeLabelForTaxonomy(option.value);
-		setPostTypeLabel(label || "");
-		
-		setAttributes({
-			taxonomyType: option.value,
-			includeTaxonomies: [],
-			excludeTaxonomies: [],
-			showChildCategories: false,
-		});
-	}, [selectedTaxonomy, getPostTypeLabelForTaxonomy]);
+	// ---- POST TYPE LABEL (Derived from taxonomyType) ----
+	const postTypeLabel = useMemo(() => {
+		if (!taxonomyType) return "";
+		return getPostTypeLabelForTaxonomy(taxonomyType) || "";
+	}, [taxonomyType, getPostTypeLabelForTaxonomy]);
 
-	const selectedTaxonomyObj = useMemo(() => 
-		allTaxonomies.find(tax => tax.slug === taxonomyType),
-		[allTaxonomies, taxonomyType]
+	// ---- HANDLE CHANGE ----
+	const handleTaxonomyChange = useCallback(
+		(option) => {
+			if (!option || option.isDisabled) return;
+
+			setAttributes({
+				taxonomyType: option.value,
+				includeTaxonomies: [],
+				excludeTaxonomies: [],
+				showChildCategories: false,
+			});
+		},
+		[setAttributes]
 	);
 
+	// ---- FETCH TERMS FOR CURRENT TAXONOMY ----
 	const taxonomyItems = useSelect(
 		(select) => {
 			if (!taxonomyType) return [];
-			return select("core").getEntityRecords("taxonomy", taxonomyType, {
-				per_page: 100,
-				hide_empty: false,
-			}) || [];
+			return (
+				select("core").getEntityRecords("taxonomy", taxonomyType, {
+					per_page: 100,
+					hide_empty: false,
+				}) || []
+			);
 		},
 		[taxonomyType]
 	);
 
-	const taxonomyOptions = useMemo(() => 
-		taxonomyItems.map(tax => ({
-			value: tax.id,
-			label: tax.name,
-		})),
+	// ---- TERM OPTIONS ----
+	const taxonomyOptions = useMemo(
+		() =>
+			taxonomyItems.map((term) => ({
+				value: term.id,
+				label: term.name,
+			})),
 		[taxonomyItems]
 	);
 
-	const handleIncludeTaxonomiesChange = useCallback((options) => {
-		setAttributes({
-			includeTaxonomies: options ? options.map(opt => opt.value) : [],
-		});
-	}, []);
+	// ---- INCLUDE/EXCLUDE ACTIONS ----
+	const handleIncludeTaxonomiesChange = useCallback(
+		(options) => {
+			setAttributes({
+				includeTaxonomies: options ? options.map((opt) => opt.value) : [],
+			});
+		},
+		[setAttributes]
+	);
 
-	const handleExcludeTaxonomiesChange = useCallback((options) => {
-		setAttributes({
-			excludeTaxonomies: options ? options.map(opt => opt.value) : [],
-		});
-	}, []);
+	const handleExcludeTaxonomiesChange = useCallback(
+		(options) => {
+			setAttributes({
+				excludeTaxonomies: options ? options.map((opt) => opt.value) : [],
+			});
+		},
+		[setAttributes]
+	);
+
 
 	/** Start Load Google Font */
 	useEffect(() => {
