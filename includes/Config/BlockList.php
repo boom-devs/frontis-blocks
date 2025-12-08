@@ -747,6 +747,19 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
+            'rive-animation' => [
+                'slug' => 'rive-animation',
+                'title' => 'Rive Animation',
+                'package' => 'free',
+                'category' => 'content',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/tabs.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
         ];
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
     }

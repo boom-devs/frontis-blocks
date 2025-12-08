@@ -1,124 +1,129 @@
-// edit.js - NOW FULLY SUPPORTS REVERSE + HOVER EFFECTS (Editor = Frontend)
+// edit.js - Rive Animation Block Editor
 
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
+import { Rive } from '@rive-app/canvas';
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
-		riveAnimationJsonTypeSwitcher,
 		riveAnimationImageUrl,
-		riveAnimationJsonUrl,
-		riveRenderer = 'svg',
 		riveLoop = true,
 		riveAutoplay = true,
 		riveAnimationSpeed = 1,
-		riveEffectsOnHover = 'none',
 		riveAnimationReverse = false,
+		riveEffectsOnHover = 'none',
 	} = attributes;
 
 	const blockProps = useBlockProps({
 		className: `fb-rive-animation-main-wrapper ${blockID}`,
 	});
 
-	const containerRef = useRef(null);
-	const animationRef = useRef(null);
+	const canvasRef = useRef(null);
+	const riveInstanceRef = useRef(null);
 
-	// Load animation when attributes change
+	// Load and configure Rive animation
 	useEffect(() => {
-		if (!containerRef.current) return;
-
-		if (animationRef.current) {
-			animationRef.current.destroy();
-			animationRef.current = null;
+		if (!canvasRef.current || !riveAnimationImageUrl) {
+			return;
 		}
 
-		let path = null;
-		if (riveAnimationJsonTypeSwitcher === 'json-file' && riveAnimationImageUrl) {
-			path = riveAnimationImageUrl;
-		} else if (riveAnimationJsonTypeSwitcher === 'json-url' && riveAnimationJsonUrl) {
-			path = riveAnimationJsonUrl;
+		// Cleanup previous instance
+		if (riveInstanceRef.current) {
+			riveInstanceRef.current.cleanup();
+			riveInstanceRef.current = null;
 		}
-
-		if (!path) return;
 
 		const shouldAutoplay = (riveEffectsOnHover === 'play-pause' || riveEffectsOnHover === 'play') ? false : riveAutoplay;
 
-		const anim = rive.loadAnimation({
-			container: containerRef.current,
-			renderer: riveRenderer,
-			loop: riveLoop,
-			autoplay: shouldAutoplay,
-			path: path,
-			rendererSettings: {
-				preserveAspectRatio: 'xMidYMid meet',
-				className: 'fb-rive-inner',
-			},
-		});
+		try {
+			// First, detect what's in the file
+			const tempRive = new Rive({
+				src: riveAnimationImageUrl,
+				canvas: canvasRef.current,
+				autoplay: false,
+				onLoad: () => {
+					const animations = tempRive.animationNames || [];
+					const stateMachines = tempRive.stateMachineNames || [];
 
-		animationRef.current = anim;
+					console.log('Detected animations:', animations);
+					console.log('Detected state machines:', stateMachines);
 
-		anim.addEventListener('DOMLoaded', () => {
-			anim.setDirection(riveAnimationReverse ? -1 : 1);
-			anim.setSpeed(riveAnimationSpeed);
+					// Cleanup temp instance
+					tempRive.cleanup();
 
-			if (shouldAutoplay) {
-				anim.play();
-			}
-		});
+					// Now create the actual instance with proper config
+					const config = {
+						src: riveAnimationImageUrl,
+						canvas: canvasRef.current,
+						autoplay: shouldAutoplay,
+						automaticallyHandleEvents: true,
+						onLoad: () => {
+							const instance = riveInstanceRef.current;
+							if (instance) {
+								instance.resizeDrawingSurfaceToCanvas();
+								console.log('Rive animation loaded successfully');
+							}
+						},
+						onLoadError: (err) => {
+							console.error('Rive load error:', err);
+						}
+					};
+
+					// Add state machine or animation
+					if (stateMachines.length > 0) {
+						config.stateMachines = stateMachines[0];
+					} else if (animations.length > 0) {
+						config.animations = animations[0];
+					}
+
+					riveInstanceRef.current = new Rive(config);
+				},
+				onLoadError: (err) => {
+					console.error('Rive detection error:', err);
+				}
+			});
+		} catch (error) {
+			console.error('Error loading Rive animation:', error);
+		}
 
 		return () => {
-			if (animationRef.current) {
-				animationRef.current.destroy();
-				animationRef.current = null;
+			if (riveInstanceRef.current) {
+				riveInstanceRef.current.cleanup();
+				riveInstanceRef.current = null;
 			}
 		};
 	}, [
 		riveAnimationImageUrl,
-		riveAnimationJsonUrl,
-		riveAnimationJsonTypeSwitcher,
-		riveRenderer,
 		riveLoop,
 		riveAutoplay,
 		riveAnimationSpeed,
+		riveAnimationReverse,
 		riveEffectsOnHover,
-		riveAnimationReverse, 
 	]);
 
+	// Handle hover effects
 	useEffect(() => {
-		const container = containerRef.current;
-		const anim = animationRef.current;
-		if (!container || !anim || riveEffectsOnHover === 'none') return;
+		const canvas = canvasRef.current;
+		const instance = riveInstanceRef.current;
 
-		const playNormally = () => {
-			anim.setDirection(riveAnimationReverse ? -1 : 1);
-			anim.play();
-		};
-
-		const playReversedOnHover = () => {
-			anim.setDirection(riveAnimationReverse ? 1 : -1);
-			anim.play();
-		};
+		if (!canvas || !instance || riveEffectsOnHover === 'none') {
+			return;
+		}
 
 		const handleMouseEnter = () => {
 			switch (riveEffectsOnHover) {
 				case 'play':
 				case 'play-pause':
-					playNormally();
+					instance.play();
 					break;
 				case 'pause':
-					anim.pause();
+					instance.pause();
 					break;
 				case 'stop':
-					anim.stop();
-					break;
-				case 'reverse':
-					playReversedOnHover();
-					break;
-				case 'toggle':
-					anim.isPaused ? playNormally() : anim.pause();
+					instance.stop();
 					break;
 			}
 		};
@@ -127,27 +132,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			switch (riveEffectsOnHover) {
 				case 'play':
 				case 'play-pause':
-					anim.pause();
+					instance.pause();
 					break;
 				case 'pause':
-					playNormally();
-					break;
-				case 'reverse':
-					playNormally(); 
+					instance.play();
 					break;
 			}
 		};
 
-		container.style.cursor = 'pointer';
-		container.addEventListener('mouseenter', handleMouseEnter);
-		container.addEventListener('mouseleave', handleMouseLeave);
+		canvas.style.cursor = 'pointer';
+		canvas.addEventListener('mouseenter', handleMouseEnter);
+		canvas.addEventListener('mouseleave', handleMouseLeave);
 
 		return () => {
-			container.style.cursor = '';
-			container.removeEventListener('mouseenter', handleMouseEnter);
-			container.removeEventListener('mouseleave', handleMouseLeave);
+			canvas.style.cursor = '';
+			canvas.removeEventListener('mouseenter', handleMouseEnter);
+			canvas.removeEventListener('mouseleave', handleMouseLeave);
 		};
-	}, [riveEffectsOnHover, riveAnimationReverse]);
+	}, [riveEffectsOnHover]);
 
 	return (
 		<>
@@ -156,17 +158,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<div {...blockProps}>
 				<div className="fb-parent-wrapper fb-rive-animation-container">
 					<div
-						ref={containerRef}
-						className="fb-rive-preview-container"
+						className="fb-rive-canvas-wrapper"
 						style={{
-							border: riveAnimationImageUrl || riveAnimationJsonUrl ? 'none' : '2px dashed #ccc',
-							cursor: riveEffectsOnHover !== 'none' ? 'pointer' : 'default',
-							minHeight: '100px',
+							border: riveAnimationImageUrl ? 'none' : '2px dashed #ccc',
+							minHeight: '200px',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							position: 'relative',
+							width: '100%',
 						}}
 					>
-						{!(riveAnimationImageUrl || riveAnimationJsonUrl) && (
+						{riveAnimationImageUrl ? (
+							<canvas
+								ref={canvasRef}
+								style={{
+									width: '100%',
+									height: '100%',
+									maxWidth: '100%',
+								}}
+							/>
+						) : (
 							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
-								{__('Upload a rive JSON file or paste a URL to preview', 'frontis-blocks')}
+								{__('Upload a .riv file to preview', 'frontis-blocks')}
 							</p>
 						)}
 					</div>

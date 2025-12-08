@@ -31,7 +31,6 @@ import {
 } from "../../fbConstants/fbConstants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
-import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
@@ -479,7 +478,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${riveAnimationGlobalZIndex?.Desktop ? `z-index: ${riveAnimationGlobalZIndex?.Desktop};` : ''}
 				${riveAnimationOverflow !== 'default' ? `overflow: ${riveAnimationOverflow};` : ''}
 			}
-			.${blockID}.fb-rive-animation-main-wrapper .fb-rive-preview-container {
+			.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
 				${riveAnimationGlobalNormalBackgroundType === 'gradient' ? `  
 					${riveAnimationGlobalNormalCustomGradientSwitcher && riveAnimationGlobalNormalCustomGradientInputValue ? `background: ${riveAnimationGlobalNormalCustomGradientInputValue};` : `background: ${riveAnimationGlobalNormalGradientColor};`}
 				`: `
@@ -498,7 +497,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 				position: relative;
 			}
-			.${blockID} .fb-rive-animation-container:hover .fb-rive-preview-container{
+			.${blockID} .fb-rive-animation-container:hover .fb-rive-canvas-wrapper{
 				${riveAnimationGlobalHoverBackgroundType === 'gradient' ? `   	
 					${riveAnimationGlobalHoverCustomGradientSwitcher && riveAnimationGlobalHoverCustomGradientInputValue ? `background: ${riveAnimationGlobalHoverCustomGradientInputValue};` : `background: ${riveAnimationGlobalHoverGradientColor};`}
 				`: `
@@ -517,7 +516,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${riveAnimationPositionType !== 'default' && riveAnimationPositionType !== 'relative' && riveAnimationVROrientationType === 'bottom' && riveAnimationVRBottomOffset?.Tablet ? `bottom: ${riveAnimationVRBottomOffset?.Tablet}${riveAnimationVRBottomOffsetUnits?.Tablet};` : ''}
 					${riveAnimationGlobalZIndex?.Tablet ? `z-index: ${riveAnimationGlobalZIndex?.Tablet};` : ''}
 				}
-				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-preview-container {
+				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
 					${riveAnimationContainerWidth?.Tablet ? `width: ${riveAnimationContainerWidth?.Tablet}${riveAnimationContainerWidthUnits?.Tablet};` : ''}
 					${riveAnimationContainerHeight?.Tablet ? `height: ${riveAnimationContainerHeight?.Tablet}${riveAnimationContainerHeightUnits?.Tablet};` : ''}
 					${globalTabletPadding && riveAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
@@ -534,7 +533,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${riveAnimationPositionType !== 'default' && riveAnimationPositionType !== 'relative' && riveAnimationVROrientationType === 'bottom' && riveAnimationVRBottomOffset?.Mobile ? `bottom: ${riveAnimationVRBottomOffset?.Mobile}${riveAnimationVRBottomOffsetUnits?.Mobile};` : ''}
 					${riveAnimationGlobalZIndex?.Mobile ? `z-index: ${riveAnimationGlobalZIndex?.Mobile};` : ''}
 				}
-				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-preview-container {
+				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
 					${riveAnimationContainerWidth?.Mobile ? `width: ${riveAnimationContainerWidth?.Mobile}${riveAnimationContainerWidthUnits?.Mobile};` : ''}
 					${riveAnimationContainerHeight?.Mobile ? `height: ${riveAnimationContainerHeight?.Mobile}${riveAnimationContainerHeightUnits?.Mobile};` : ''}
 					${globalMobilePadding && riveAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
@@ -566,49 +565,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		<>
 			<div className="fb-dual-riveAnimation-pressets">
 				<PanelBody
-					title={__("rive", "frontis-blocks")}
+					title={__("Rive", "frontis-blocks")}
 					initialOpen={true}
 				>
-					<FB_SwitcherControl
-						label={__("Select Json", "frontis-blocks")}
-						globalSwitcher={riveAnimationJsonTypeSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ riveAnimationJsonTypeSwitcher: value })}
-						options={[
-							{ label: __('Json File', 'frontis-blocks'), value: 'json-file' },
-							{ label: __('Json Url', 'frontis-blocks'), value: 'json-url' },
-						]
-						}
-					/>
-					{riveAnimationJsonTypeSwitcher === 'json-file' && (
-						<>
-							<FB_ImageControl
-								globalImageUrl={riveAnimationImageUrl}
-								setglobalImageUrl={(value) => setAttributes({ riveAnimationImageUrl: value })}
-								globalImageAlt={riveAnimationImageAlt}
-								setglobalImageAlt={(value) => setAttributes({ riveAnimationImageAlt: value })}
-								globalImageID={riveAnimationImageID}
-								setglobalImageID={(value) => setAttributes({ riveAnimationImageID: value })}
-								isImageSize={false}
-							/>
-						</>
-					)}
-					{riveAnimationJsonTypeSwitcher === 'json-url' && (
-						<>
-							<FB_UrlControl
-								url={riveAnimationJsonUrl}
-								onChangeUrl={(value) => setAttributes({ riveAnimationJsonUrl: value })}
-								openInNewTab={riveAnimationJsonTargetUrl}
-								onChangeOpenInNewTab={(value) => setAttributes({ riveAnimationJsonTargetUrl: value })}
-							/>
-						</>
-					)}
-					<SelectControl
-						label={__("Render Type", "frontis-blocks")}
-						value={riveRenderer}
-						options={rive_RENDER_TYPE}
-						onChange={(value) =>
-							setAttributes({ riveRenderer: value })
-						}
+					<FB_ImageControl
+						globalImageUrl={riveAnimationImageUrl}
+						setglobalImageUrl={(value) => setAttributes({ riveAnimationImageUrl: value })}
+						globalImageAlt={riveAnimationImageAlt}
+						setglobalImageAlt={(value) => setAttributes({ riveAnimationImageAlt: value })}
+						globalImageID={riveAnimationImageID}
+						setglobalImageID={(value) => setAttributes({ riveAnimationImageID: value })}
+						isImageSize={false}
 					/>
 
 					<ToggleControl
@@ -626,38 +593,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setAttributes({ riveAutoplay: value })
 						}
 					/>
-
-					<ToggleControl
-						label={__("Reverse", "frontis-block")}
-						checked={riveAnimationReverse}
-						onChange={(value) =>
-							setAttributes({ riveAnimationReverse: value })
-						}
-					/>
-
-					<RangeControl
-						label={__("Speed", "frontis-blocks")}
-						value={riveAnimationSpeed || 1}
-						onChange={(value) =>
-							setAttributes({
-								riveAnimationSpeed: value,
-							})
-						}
-						min={0.1}
-						max={5}
-						step={0.1}
-						resetFallbackValue={1}
-						help={__("Control animation playback speed. 1 = normal speed, 2 = double speed, 0.5 = half speed", "frontis-blocks")}
-					/>
-					<SelectControl
-						label={__("On Hover", "frontis-blocks")}
-						value={riveEffectsOnHover}
-						options={rive_HOVER_STATE}
-						onChange={(value) =>
-							setAttributes({ riveEffectsOnHover: value })
-						}
-						help={__("Choose what happens when user hovers over the animation", "frontis-blocks")}
-					/>
 				</PanelBody>
 
 			</div>
@@ -671,7 +606,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const styleControls = (
 		<>
 			<PanelBody
-				title={__("rive", "frontis-blocks")}
+				title={__("Rive", "frontis-blocks")}
 				initialOpen={false}
 			>
 				<FB_Range
@@ -708,47 +643,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				<FB_SwitcherControl
-					label={__("Opacity", "frontis-blocks")}
-					globalSwitcher={riveOpacitySwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ riveOpacitySwitcher: value })}
-					options={[
-						{ label: __('Normal', 'frontis-blocks'), value: 'normal' },
-						{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
-					]
-					}
-				/>
-				{riveOpacitySwitcher === 'normal' && (
-					<RangeControl
-						label={__("Opacity", "frontis-blocks")}
-						value={riveAnimationNormalOpacity}
-						onChange={(value) =>
-							setAttributes({
-								riveAnimationNormalOpacity: value,
-							})
-						}
-						min={0.1}
-						max={1}
-						step={0.1}
-						resetFallbackValue={1}
-					/>
-				)}
-
-				{riveOpacitySwitcher === 'hover' && (
-					<RangeControl
-						label={__("Opacity", "frontis-blocks")}
-						value={riveAnimationHoverOpacity}
-						onChange={(value) =>
-							setAttributes({
-								riveAnimationHoverOpacity: value,
-							})
-						}
-						min={0.1}
-						max={1}
-						step={0.1}
-						resetFallbackValue={1}
-					/>
-				)}
+				
 
 			</PanelBody>
 		</>

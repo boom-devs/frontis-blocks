@@ -1,54 +1,44 @@
-// save.js
+// save.js - Frontend rendering for Rive Animation Block
+
 import { useBlockProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
 
 export default function save({ attributes }) {
 	const {
 		blockID,
-		riveAnimationJsonTypeSwitcher,
 		riveAnimationImageUrl,
-		riveAnimationJsonUrl,
-		riveRenderer = 'svg',
-		riveLoop = true,
-		riveAutoplay = true,
+		riveLoop,
+		riveAutoplay,
 		riveAnimationSpeed,
+		riveAnimationReverse,
 		riveEffectsOnHover,
-		riveAnimationReverse
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: `fb-rive-animation-main-wrapper ${blockID}`,
 	});
 
-	// Determine source
-	const isFile = riveAnimationJsonTypeSwitcher === 'json-file';
-	const sourceUrl = isFile ? riveAnimationImageUrl : riveAnimationJsonUrl;
-
-	if (!sourceUrl) {
-		return (
-			<div {...blockProps}>
-				<div className="fb-parent-wrapper fb-rive-animation-container">
-					<div style={{ padding: '50px', textAlign: 'center', color: '#999' }}>
-						{__('No rive animation selected.', 'frontis-blocks')}
-					</div>
-				</div>
-			</div>
-		);
+	if (!riveAnimationImageUrl) {
+		return null;
 	}
 
 	return (
 		<div {...blockProps}>
-			<div
-				className={`fb-parent-wrapper fb-rive-animation-container ${blockID}`}
-				data-json-url={sourceUrl}
-				data-renderer={riveRenderer}
-				data-loop={riveLoop}
-				data-autoplay={riveAutoplay}
-				data-speed={riveAnimationSpeed}
-				data-hover-effect={riveEffectsOnHover}
-				data-reverse={riveAnimationReverse}
-				style={{ width: '100%' }}
-			/>
+			<div className="fb-parent-wrapper fb-rive-animation-container">
+				<canvas
+					className="fb-rive-canvas"
+					data-rive-src={riveAnimationImageUrl}
+					data-rive-loop={riveLoop}
+					data-rive-autoplay={riveAutoplay}
+					data-rive-speed={riveAnimationSpeed}
+					data-rive-reverse={riveAnimationReverse}
+					data-rive-hover={riveEffectsOnHover}
+					style={{
+						width: '100%',
+						height: '100%',
+						display: 'block',
+					}}
+				/>
+			</div>
 		</div>
 	);
 }
