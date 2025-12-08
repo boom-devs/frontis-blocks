@@ -457,6 +457,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
+	useEffect(() => {
+		if (showLabel === undefined) {
+			setAttributes({ showLabel: true });
+		}
+	}, [showLabel]);
+
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
 	};
@@ -536,7 +542,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [filteredPostTypes, allTaxonomies]);
 
+	// FIX: Add state to track if data is loaded
+	const [isDataLoaded, setIsDataLoaded] = useState(false);
+
 	useEffect(() => {
+		// Mark data as loaded when we have taxonomy options
+		if (dynamicTaxonomyOptions.length > 0) {
+			setIsDataLoaded(true);
+		}
+	}, [dynamicTaxonomyOptions]);
+
+	// FIX: Only run validation after data is loaded
+	useEffect(() => {
+		if (!isDataLoaded) {
+			return; // Don't do anything until data is loaded
+		}
+
 		if (!dynamicTaxonomyOptions.length) {
 			if (taxonomyType) {
 				setAttributes({
@@ -553,9 +574,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			(opt) => opt.value === taxonomyType && !opt.isDisabled
 		);
 
+		// Only reset if current selection is invalid AND we have a valid option
 		if (!isValid) {
 			const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-			if (firstAllowed) {
+			if (firstAllowed && firstAllowed.value !== taxonomyType) {
 				setAttributes({
 					taxonomyType: firstAllowed.value,
 					includeTaxonomies: [],
@@ -564,7 +586,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				});
 			}
 		}
-	}, [dynamicTaxonomyOptions, taxonomyType]);
+	}, [dynamicTaxonomyOptions, taxonomyType, isDataLoaded]);
 
 	const selectedTaxonomy = useMemo(() => {
 		return dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType) || null;
@@ -628,7 +650,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		},
 		[setAttributes]
 	);
-
 
 	/** Start Load Google Font */
 	useEffect(() => {

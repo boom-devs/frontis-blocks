@@ -14,7 +14,11 @@ const attributes = {
 	},
 	taxonomyType: {
 		type: "string",
-		default: "", // Default taxonomy
+		default: "",
+	},
+	showLabel: {
+		type: "boolean",
+		default: false,
 	},
 	showPostTypeLabel: {
 		type: "boolean",

@@ -1,8 +1,7 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useState } from "@wordpress/element"; // useState যোগ করুন
+import { useEffect, useState } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 import Inspector from "./inspector";
-
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -11,6 +10,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		premadeStyle,
 		taxonomyType,
 		showCount,
+		showLabel,
 		showDescription,
 		showEmpty,
 		showChildCategories,
@@ -34,7 +34,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		postCategoryDesktopSwitcher,
 		postCategoryTabletSwitcher,
 		postCategoryMobileSwitcher,
-		showLabel,
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -48,118 +47,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const allTaxonomies = useSelect((select) => 
 		select("core").getTaxonomies({ per_page: -1 }), []);
 
+	const selectedTaxonomy = allTaxonomies?.find(tax => tax.slug === taxonomyType);
+
 	// Load all post types dynamically
 	const allPostTypes = useSelect(
 		(select) => select("core").getPostTypes({ per_page: -1 }),
 		[]
 	);
 
-	// Load all categories
-	const categories = useSelect(
-		(select) =>
-			select("core").getEntityRecords("taxonomy", "category", {
-				per_page: -1,
-				_fields: "id,name,slug,count",
-			}),
-		[]
-	);
-
-	// Load posts for each category to find post types
-	const allPostsByType = useSelect((select) => {
-		if (!allPostTypes) return {};
-		
-		const postsByType = {};
-		allPostTypes.forEach((pt) => {
-			if (!pt.viewable) return;
-			
-			const posts = select("core").getEntityRecords("postType", pt.slug, {
-				per_page: -1,
-				_fields: "id,type,categories",
-			});
-			
-			if (posts) {
-				postsByType[pt.slug] = posts;
-			}
-		});
-		
-		return postsByType;
-	}, [allPostTypes]);
-
-	// Function to get post type labels for a specific category
-	const getPostTypeLabelsForCategory = (categoryId) => {
-		if (!allPostTypes || !allPostsByType || !categoryId) return [];
-		
-		const postTypeLabels = [];
-		
-		// Check each post type
-		allPostTypes.forEach((postType) => {
-			if (!postType.viewable) return;
-			
-			const posts = allPostsByType[postType.slug];
-			if (!posts) return;
-			
-			// Check if any post in this post type has this category
-			const hasCategory = posts.some(post => 
-				post.categories && post.categories.includes(categoryId)
-			);
-			
-			if (hasCategory) {
-				postTypeLabels.push(postType.labels?.singular_name || postType.slug);
-			}
-		});
-		
-		return postTypeLabels;
-	};
-
-	// Helper function to format post type label for display
-	const formatPostTypeLabel = (postTypeLabels) => {
-		if (!postTypeLabels || postTypeLabels.length === 0) return null;
-		
-		// If only one post type, show singular
-		if (postTypeLabels.length === 1) {
-			return postTypeLabels[0];
-		}
-		
-		// If multiple post types, show combined label
-		return __("Posts", "frontis-blocks");
-	};
-
-	// Function to format count with label HTML - UPDATED
-	const formatCountWithLabelHTML = (count, categoryId) => {
-		if (!showCount) return null;
-		
-		if (!showLabel) {
-			return (
-				<span className="fb-taxonomy-count">
-					<span className="fb-taxonomy-count-number">{count}</span>
-				</span>
-			);
-		}
-		
-		// Get post type labels for this specific category
-		const postTypeLabels = getPostTypeLabelsForCategory(categoryId);
-		const label = formatPostTypeLabel(postTypeLabels);
-		
-		if (label) {
-			return (
-				<span className="fb-taxonomy-count">
-					<span className="fb-taxonomy-count-number">{count}</span>
-					<span className="fb-taxonomy-count-label"> {label}</span>
-				</span>
-			);
-		}
-		
-		return (
-			<span className="fb-taxonomy-count">
-				<span className="fb-taxonomy-count-number">{count}</span>
-			</span>
-		);
-	};
-
-	let defaultImageUrl = '';
-	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
-	}
+	// State to store post type labels for terms
+	const [termPostTypeLabels, setTermPostTypeLabels] = useState({});
+	const [isLoadingLabels, setIsLoadingLabels] = useState(false);
 
 	const taxonomies = useSelect(
 		(select) => {
@@ -234,6 +132,112 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			? sortTaxonomyTermsHierarchically(taxonomies)
 			: taxonomies;
 
+	// SIMPLIFIED: Get post type labels from taxonomy data (no API calls needed in editor)
+	useEffect(() => {
+		if (!sortedTaxonomies || !taxonomyType || !allPostTypes || !allTaxonomies) {
+			return;
+		}
+
+		const labelsMap = {};
+		const taxonomy = allTaxonomies.find(tax => tax.slug === taxonomyType);
+		
+		if (!taxonomy?.types) {
+			setTermPostTypeLabels({});
+			return;
+		}
+
+		// Get post types that this taxonomy belongs to
+		sortedTaxonomies.forEach(term => {
+			const termLabels = [];
+			
+			taxonomy.types.forEach(postTypeSlug => {
+				const postType = allPostTypes.find(pt => pt.slug === postTypeSlug);
+				if (postType?.viewable) {
+					// In editor, show all post types that the taxonomy belongs to
+					// The actual filtering happens on frontend
+					termLabels.push(postType.labels?.singular_name || postType.slug);
+				}
+			});
+			
+			labelsMap[term.id] = termLabels;
+		});
+		
+		setTermPostTypeLabels(labelsMap);
+	}, [sortedTaxonomies, taxonomyType, allPostTypes, allTaxonomies]);
+
+	// Helper function to format post type label for display
+	const formatPostTypeLabel = (postTypeLabels) => {
+		if (!postTypeLabels || postTypeLabels.length === 0) return null;
+		
+		// If only one post type, show singular
+		if (postTypeLabels.length === 1) {
+			return postTypeLabels[0];
+		}
+		
+		// If multiple post types, show combined label
+		return __("Posts", "frontis-blocks");
+	};
+
+	// Function to format count with label HTML
+	const formatCountWithLabelHTML = (count, termId) => {
+		if (!showCount) return null;
+		
+		if (!showLabel) {
+			return (
+				<span className="fb-taxonomy-count">
+					<span className="fb-taxonomy-count-number">{count}</span>
+				</span>
+			);
+		}
+		
+		// Get post type labels for this term
+		const postTypeLabels = termPostTypeLabels[termId] || [];
+		
+		// Show loading indicator while labels are being fetched
+		if (Object.keys(termPostTypeLabels).length === 0 && sortedTaxonomies?.length > 0) {
+			return (
+				<span className="fb-taxonomy-count">
+					<span className="fb-taxonomy-count-number">{count}</span>
+					<span className="fb-taxonomy-count-label"> {__("Loading...", "frontis-blocks")}</span>
+				</span>
+			);
+		}
+		
+		if (postTypeLabels.length === 0) {
+			return (
+				<span className="fb-taxonomy-count">
+					<span className="fb-taxonomy-count-number">{count}</span>
+				</span>
+			);
+		}
+		
+		const label = formatPostTypeLabel(postTypeLabels);
+		
+		return (
+			<span className="fb-taxonomy-count">
+				<span className="fb-taxonomy-count-number">{count}</span>
+				{label && <span className="fb-taxonomy-count-label"> {label}</span>}
+			</span>
+		);
+	};
+
+	// Function to get post type label for style-1 format
+	const getPostTypeLabelForStyle1 = (termId) => {
+		const postTypeLabels = termPostTypeLabels[termId] || [];
+		
+		// Show loading indicator while labels are being fetched
+		if (Object.keys(termPostTypeLabels).length === 0 && sortedTaxonomies?.length > 0) {
+			return __("Loading...", "frontis-blocks");
+		}
+		
+		return formatPostTypeLabel(postTypeLabels);
+	};
+
+	let defaultImageUrl = '';
+	if (typeof FrontisBlocksData !== 'undefined') {
+		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+	}
+
 	// Improved hierarchical list builder with visual indicators
 	const buildTermHierarchy = (terms, parentId = 0, level = 0) => {
 		const children = terms.filter((term) => term.parent === parentId);
@@ -250,9 +254,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				id={parentId === 0 ? postCategoryGlobalWraperID : undefined}
 			>
 				{children.map((term) => (
-					<>
+					<React.Fragment key={term.id}>
 					<li
-						key={term.id}
 						className="fb-taxonomy-item"
 						data-parent-id={term.parent || 0}
 					>
@@ -266,9 +269,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									{premadeStyle === "style-1" ? (
 										<span className="fb-taxonomy-count">
 											(<span className="fb-taxonomy-count-number">{term.count}</span>
-											{showLabel && (
+											{showLabel && getPostTypeLabelForStyle1(term.id) && (
 												<span className="fb-taxonomy-count-label"> 
-													{formatPostTypeLabel(getPostTypeLabelsForCategory(term.id))}
+													{getPostTypeLabelForStyle1(term.id)}
 												</span>
 											)})
 										</span>
@@ -288,7 +291,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								)}
 							</p>
 						)}
-
 
 						{ premadeStyle === "style-2" && readMoreSwitcher && (
 								<a
@@ -337,9 +339,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</li>
 
 					{showChildCategories &&	buildTermHierarchy(terms, term.id, level + 1)}
-					
-					</>
-						
+					</React.Fragment>
 				))}
 			</ul>
 		);
@@ -356,10 +356,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				id={postCategoryGlobalWraperID || undefined}
 			>
 				{sortedTaxonomies.map((taxonomy) => (
-
 					<div key={taxonomy.id} className="fb-taxonomy-item">
-
-
 						{premadeStyle === "style-4" ? (
 							<>
 							<div className="fb-taxonomy-image-container">
@@ -503,10 +500,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										</a>
 							)}
 						</>
-
 						)}
-
-						
 					</div>
 				))}
 			</div>
@@ -538,9 +532,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									{premadeStyle === "style-1" ? (
 										<span className="fb-taxonomy-count">
 											(<span className="fb-taxonomy-count-number">{taxonomy.count}</span>
-											{showLabel && (
+											{showLabel && getPostTypeLabelForStyle1(taxonomy.id) && (
 												<span className="fb-taxonomy-count-label">
-													{formatPostTypeLabel(getPostTypeLabelsForCategory(taxonomy.id))}
+													{getPostTypeLabelForStyle1(taxonomy.id)}
 												</span>
 											)})
 										</span>
@@ -549,7 +543,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									)}
 								</>
 							)}
-
 						</div>
 
 						{showDescription && taxonomy.description && (
@@ -609,19 +602,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			</ul>
 		);
 	};
-
-	// Debug: Check what post types are found for each category
-	useEffect(() => {
-		if (sortedTaxonomies && allPostsByType) {
-			console.log("=== Category Post Type Analysis ===");
-			sortedTaxonomies.forEach((tax) => {
-				const postTypeLabels = getPostTypeLabelsForCategory(tax.id);
-				console.log(`Category: ${tax.name} (ID: ${tax.id})`);
-				console.log(`- Post Types: ${postTypeLabels.join(", ") || "None"}`);
-				console.log(`- Count: ${tax.count}`);
-			});
-		}
-	}, [sortedTaxonomies, allPostsByType]);
 
 	return (
 		<>
