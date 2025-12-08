@@ -11,12 +11,12 @@ import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
 
 const ALLOWED_BLOCKS = [
-    "form-builder/field-container",
-    "form-builder/field-text",
-    "form-builder/field-textarea",
-    "form-builder/field-radio",
-    "form-builder/field-select",
-    "form-builder/field-checkbox"
+    "frontis-blocks/container",
+    "frontis-blocks/field-text",
+    "frontis-blocks/field-textarea",
+    "frontis-blocks/field-radio",
+    "frontis-blocks/field-select",
+    "frontis-blocks/field-checkbox"
 ];
 
 
@@ -167,11 +167,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                         allowedBlocks={ALLOWED_BLOCKS}
                         template={hasInnerBlocks ? undefined : defaultTemplate}
                         templateLock={false}
-                        renderAppender={() => (
-                            <div className="fb-form-builder-add-button-wrapper">
-                                <InnerBlocks.ButtonBlockAppender />
-                            </div>
-                        )}
                     />
 
                     {/* Submit Button */}
