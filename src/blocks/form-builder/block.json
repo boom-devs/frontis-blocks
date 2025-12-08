@@ -1,0 +1,34 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/form-builder",
+	"version": "1.0.0",
+	"title": "Form Builder",
+	"category": "frontis-blocks",
+	"textdomain": "frontis-blocks",
+	"description": "A customizable form builder block for organizing content in a collapsible format.",
+	"example": {},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
+	"providesContext": {
+	  "fb/form-builderItemID": "blockID",
+	  "fb/form-builderparentBlockID": "blockID",
+	  "fb/form-builderInheritedFormBuilderType": "formBuilderType",
+	  "fb/form-builderInheritedDisplayIcon": "displayIcon",
+	  "fb/form-builderInheritedTabIconSwitcher": "tabIconSwitcher",
+	  "fb/form-builderInheritedTabIcon": "tabIcon",
+	  "fb/form-builderInheritedTabImageUrl": "tabImageUrl",
+	  "fb/form-builderInheritedTabImageAlt": "tabImageAlt",
+	  "fb/form-builderInheritedExpandedIconSwitcher": "expandedIconSwitcher",
+	  "fb/form-builderInheritedExpandedIcon": "expandedIcon",
+	  "fb/form-builderInheritedExpandedImageUrl": "expandedImageUrl",
+	  "fb/form-builderInheritedExpandedImageAlt": "expandedImageAlt",
+	  "fb/form-builderInheritedTagName": "tagName",
+	  "fb/form-builderFaqSchema": "faqSchema"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}
