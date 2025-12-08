@@ -11,16 +11,16 @@ export default function save({ attributes }) {
 		lottieRenderer = 'svg',
 		lottieLoop = true,
 		lottieAutoplay = true,
-		lottieAnimationSpeed,
-		lottieEffectsOnHover,
-		lottieAnimationReverse
+		lottieAnimationSpeed = 1,
+		lottieEffectsOnHover = 'none',
+		lottieAnimationReverse = false
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
 		className: `fb-lottie-animation-main-wrapper ${blockID}`,
 	});
 
-	// Determine source
+	// Determine animation path
 	const isFile = lottieAnimationJsonTypeSwitcher === 'json-file';
 	const sourceUrl = isFile ? lottieAnimationImageUrl : lottieAnimationJsonUrl;
 
@@ -36,6 +36,12 @@ export default function save({ attributes }) {
 		);
 	}
 
+	// Match logic from edit.js -> shouldAutoplay
+	const shouldAutoplay =
+		(lottieEffectsOnHover === 'play-pause' || lottieEffectsOnHover === 'play')
+			? false
+			: lottieAutoplay;
+
 	return (
 		<div {...blockProps}>
 			<div
@@ -43,10 +49,11 @@ export default function save({ attributes }) {
 				data-json-url={sourceUrl}
 				data-renderer={lottieRenderer}
 				data-loop={lottieLoop}
-				data-autoplay={lottieAutoplay}
+				data-autoplay={shouldAutoplay}
 				data-speed={lottieAnimationSpeed}
 				data-hover-effect={lottieEffectsOnHover}
 				data-reverse={lottieAnimationReverse}
+				data-type={lottieAnimationJsonTypeSwitcher}  
 				style={{ width: '100%' }}
 			/>
 		</div>
