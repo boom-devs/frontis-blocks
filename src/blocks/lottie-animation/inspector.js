@@ -23,10 +23,7 @@ import {
  * Internal depencencies
  */
 import {
-	ICON_ALIGN,
 	BORDER_STYLES,
-	ICON_POSITION,
-	PRESETS,
 	OVERFLOW_OP,
 	LOTTIE_RENDER_TYPE,
 	LOTTIE_HOVER_STATE
@@ -50,11 +47,6 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import getProToggleControls from '@Utils/getProToggleControls';
-import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
-import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
-import generateSvgIcon from '@Utils/generateSvgIcon';
-import getProActive from '@Utils/getProActive';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
@@ -461,12 +453,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${lottieAnimationGlobalBorderRadiusMobile?.top}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.right}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.bottom}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.left}${lottieAnimationGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/* Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont();
-	}, []);
-	/* End Load Google Fonts */
-
 	const lottieAnimationStyle = useMemo(
 		() => `
 			.${blockID}.fb-lottie-animation-main-wrapper {
@@ -479,7 +465,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${lottieAnimationGlobalZIndex?.Desktop ? `z-index: ${lottieAnimationGlobalZIndex?.Desktop};` : ''}
 				${lottieAnimationOverflow !== 'default' ? `overflow: ${lottieAnimationOverflow};` : ''}
 			}
-			.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-preview-container {
+			.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 				${lottieAnimationGlobalNormalBackgroundType === 'gradient' ? `  
 					${lottieAnimationGlobalNormalCustomGradientSwitcher && lottieAnimationGlobalNormalCustomGradientInputValue ? `background: ${lottieAnimationGlobalNormalCustomGradientInputValue};` : `background: ${lottieAnimationGlobalNormalGradientColor};`}
 				`: `
@@ -498,7 +484,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				transition: all .3s ease-in-out;
 				position: relative;
 			}
-			.${blockID} .fb-lottie-animation-container:hover .fb-lottie-preview-container{
+			.${blockID} .fb-lottie-animation-container:hover{
 				${lottieAnimationGlobalHoverBackgroundType === 'gradient' ? `   	
 					${lottieAnimationGlobalHoverCustomGradientSwitcher && lottieAnimationGlobalHoverCustomGradientInputValue ? `background: ${lottieAnimationGlobalHoverCustomGradientInputValue};` : `background: ${lottieAnimationGlobalHoverGradientColor};`}
 				`: `
@@ -517,7 +503,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Tablet ? `bottom: ${lottieAnimationVRBottomOffset?.Tablet}${lottieAnimationVRBottomOffsetUnits?.Tablet};` : ''}
 					${lottieAnimationGlobalZIndex?.Tablet ? `z-index: ${lottieAnimationGlobalZIndex?.Tablet};` : ''}
 				}
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-preview-container {
+				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${lottieAnimationContainerWidth?.Tablet ? `width: ${lottieAnimationContainerWidth?.Tablet}${lottieAnimationContainerWidthUnits?.Tablet};` : ''}
 					${lottieAnimationContainerHeight?.Tablet ? `height: ${lottieAnimationContainerHeight?.Tablet}${lottieAnimationContainerHeightUnits?.Tablet};` : ''}
 					${globalTabletPadding && lottieAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
@@ -534,7 +520,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Mobile ? `bottom: ${lottieAnimationVRBottomOffset?.Mobile}${lottieAnimationVRBottomOffsetUnits?.Mobile};` : ''}
 					${lottieAnimationGlobalZIndex?.Mobile ? `z-index: ${lottieAnimationGlobalZIndex?.Mobile};` : ''}
 				}
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-preview-container {
+				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${lottieAnimationContainerWidth?.Mobile ? `width: ${lottieAnimationContainerWidth?.Mobile}${lottieAnimationContainerWidthUnits?.Mobile};` : ''}
 					${lottieAnimationContainerHeight?.Mobile ? `height: ${lottieAnimationContainerHeight?.Mobile}${lottieAnimationContainerHeightUnits?.Mobile};` : ''}
 					${globalMobilePadding && lottieAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
