@@ -16,45 +16,28 @@ const Edit = (props) => {
     const {
         parentBlockID ,
         blockID,
-		blockStyle,
-        deviceType,
-        clickable,
+        inheritedFieldType,
+        inheritedIconSwitcher,
+        inheritedLabelSwitcher,
+        inheritedLabel,
+        inheritedPlaceholderSwitcher,
+        inheritedPlaceholder,
+        inheritedRequiredFieldSwitcher,
+        inheritedRequiredSymbolSwitcher,
+        inheritedRequiredText,
 
-        title,
-        titlePrefixType,
-        titlePrefixIcon,
-        titlePrefixImgUrl,
-        titlePrefixImgId,
-
-        titleSuffixType,
-        titleSuffixIcon,
-        titleSuffixImgUrl,
-        titleSuffixImgId,
-
-        toggleClick,
-        inheritedTagName,
-        inheritedTabIconSwitcher,
-        inheritedDisplayIcon,
-        inheritedAccordionType,
-        inheritedTabIcon,
-        inheritedTabImageUrl,
-        inheritedExpandedIconSwitcher,
-        inheritedExpandedIcon,
-        inheritedExpandedImageUrl,
-
-        accordionItemGlobalWraperID,
-        accordionItemGlobalWraperClass,
+        textFieldGlobalWraperID,
+        textFieldGlobalWraperClass,
 
     } = attributes;
 
 
     useEffect(() => {
         setAttributes({
-
             inheritedFieldType:  context["fb/formInheritedFieldType"],
-            inheritedIconSwitcher: context["fb/formInheritedDisplayIcon"],
+            inheritedIconSwitcher: context["fb/formInheritedIconSwitcher"],
             inheritedLabelSwitcher: context["fb/formInheritedLabelSwitcher"],
-            inheritedLabel: context["fb/formInheritedLabelSwitcher"],
+            inheritedLabel: context["fb/formInheritedLabel"],
             inheritedPlaceholderSwitcher: context["fb/formInheritedPlaceholderSwitcher"],
             inheritedPlaceholder: context["fb/formInheritedPlaceholder"],
             inheritedRequiredFieldSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
@@ -74,134 +57,34 @@ const Edit = (props) => {
     ])
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+        className: `fb-text-field-wrapper fb-form-group ${parentBlockID} ${blockID}`,
     });
-
-    const accordionTitle = useRef(null);
-
-    const handleSlidingOfAccordion = () => {
-        let contentWrapper = accordionTitle.current.parentNode.querySelector(`.fb-accordion-content-wrapper.${blockID}`);
-
-        if (contentWrapper.style.display === "block") {
-            contentWrapper.style.display = "none";
-            setAttributes({toggleClick: false});
-        } else {
-            contentWrapper.style.display = "block";
-            contentWrapper.style.opacity = "1";
-            setAttributes({toggleClick: true});
-        }
-    };
 
     return (
         <>
-            {isSelected && <Inspector {...props} />}
+            <Inspector {...props} />
 
             <div {...blockProps}>
-                <div className={`fb-accordion-item-wrapper for_edit_page ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>
-                    <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`} onClick={handleSlidingOfAccordion}>
-                        <div className={`fb-accordion-title-inner`}>
-                            {titlePrefixType !== 'none' && (
-                                <div className="fb-accordion-title-prefix">
-                                    {titlePrefixType === 'icon' && titlePrefixIcon && (
-                                        renderSVG(titlePrefixIcon)
-                                    )}
-
-                                    {titlePrefixType === "image" ? (
-                                        <MediaUpload
-                                            onSelect={(media) =>
-                                                setAttributes({
-                                                    titlePrefixImgUrl: media.url,
-                                                    titlePrefixImgId: media.id,
-                                                    titlePrefixImgAlt: media.alt,
-                                                })
-                                            }
-                                            type="image"
-                                            value={titlePrefixImgId}
-                                            render={({ open }) => {
-                                                if (!titlePrefixImgUrl) {
-                                                    return (
-                                                        <Button
-                                                            label={__(
-                                                                "Upload Image",
-                                                                "frontis-blocks"
-                                                            )}
-                                                            icon="format-image"
-                                                            onClick={open}
-                                                        />
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <img src={titlePrefixImgUrl} />
-                                                    );
-                                                }
-                                            }}
-                                        />
-                                    ) : null}
-                                </div>
-                            )}
-
-                            <RichText
-                                value={title}
-                                tagName={inheritedTagName}
-                                className="fb-accordion-title"
-                                onChange={ (value) => setAttributes({ title: value }) }
-                            />
-
-                            {titleSuffixType !== 'none' && (
-                                <div className="fb-accordion-title-suffix">
-
-                                    {titleSuffixType === 'icon' && titleSuffixIcon && (
-                                        renderSVG(titleSuffixIcon)
-                                    )}
-
-                                    {titleSuffixType === "image" ? (
-                                        <MediaUpload
-                                            onSelect={(media) =>
-                                                setAttributes({
-                                                    titleSuffixImgUrl: media.url,
-                                                    titleSuffixImgId: media.id,
-                                                    titleSuffixImgAlt: media.alt,
-                                                })
-                                            }
-                                            type="image"
-                                            value={titleSuffixImgId}
-                                            render={({ open }) => {
-                                                if (!titleSuffixImgUrl) {
-                                                    return (
-                                                        <Button
-                                                            label={__(
-                                                                "Upload Image",
-                                                                "frontis-blocks"
-                                                            )}
-                                                            icon="format-image"
-                                                            onClick={open}
-                                                        />
-                                                    );
-                                                } else {
-                                                    return (
-                                                        <img src={titleSuffixImgUrl} />
-                                                    );
-                                                }
-                                            }}
-                                        />
-                                    ) : null}
-                                </div>
-                            )}
-                        </div>
-                        <div className="fb-accordion-icon">
-                            {inheritedTabIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === false && renderSVG(inheritedTabIcon)}
-                            {inheritedTabIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === false && <img src={inheritedTabImageUrl}/>}
-                            {inheritedExpandedIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === true && renderSVG(inheritedExpandedIcon)}
-                            {inheritedExpandedIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === true && <img src={inheritedExpandedImageUrl}/>}
-                        </div>
+                <div className="fb-form-group-wrapper">
+                    <div className="fb-form-label-wrapper">
+                        {inheritedLabelSwitcher && (
+                            <label className="fb-form-label fb-text-field-label">
+                                {inheritedLabel}
+                            </label>
+                        )}
+                        {inheritedRequiredFieldSwitcher && inheritedRequiredSymbolSwitcher && (
+                            <span className="fb-required-symbol">*</span>
+                        )}
                     </div>
-                    <div
-                        className={`fb-accordion-content-wrapper ${blockID} ${parentBlockID} ${clickable === true ? 'active' : ''}`}
-                        style={{display: "none"}}
-                    >
-                        <div className="fb-accordion-content">
-                            <InnerBlocks templateLock={false} />
-                        </div>
+                    <div className="fb-form-input-wrapper">
+                        <input
+                            type={inheritedFieldType}
+                            className="fb-form-input fb-text-field-input"
+                            placeholder={inheritedPlaceholderSwitcher ? inheritedPlaceholder : ''}
+                        />
+                        {inheritedRequiredFieldSwitcher && !inheritedRequiredSymbolSwitcher && (
+                            <div className="fb-required-text">{inheritedRequiredText}</div>
+                        )}
                     </div>
                 </div>
             </div>
