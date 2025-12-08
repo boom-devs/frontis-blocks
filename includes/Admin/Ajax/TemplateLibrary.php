@@ -310,7 +310,7 @@ class TemplateLibrary extends AjaxBase {
     
         // Input data
         $title           = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content          = isset($_POST['content']) ? $_POST['content'] : '';
+        $content         = isset($_POST['content']) ? $_POST['content'] : '';
         $slug            = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
         $template        = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
         $badge           = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
@@ -557,8 +557,8 @@ class TemplateLibrary extends AjaxBase {
         $this->check_permission();
 
         // JSON decode safely
-        $headers = isset($_POST['headers']) ? json_decode(wp_unslash($_POST['headers']), true) : [];
-        $footers = isset($_POST['footers']) ? json_decode(wp_unslash($_POST['footers']), true) : [];
+        $headers = isset($_POST['headers']) ? json_decode(wp_unslash($_POST['headers']), associative: true) : [];
+        $footers = isset($_POST['footers']) ? json_decode(wp_unslash($_POST['footers']), associative: true) : [];
 
         if (!is_array($headers)) $headers = [];
         if (!is_array($footers)) $footers = [];
