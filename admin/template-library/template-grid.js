@@ -428,7 +428,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                handleFullSiteImport(id)
+                                // handleFullSiteImport(id);
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -440,14 +440,14 @@ const TemplateGrid = ({
                                     importPage(id);
                                 } else if (templateData.type === 'sites') {
                                     // console.log('sites');
-                                    handleFullSiteImport()
+                                    // handleFullSiteImport();
                                 }
                             }
                         }}
 
                         disabled={isImporting}
                     >
-                        <span>Import</span>
+                        {!activeTab === 'sites' ? <span>Import</span> : <span>Coming Soon</span>}
                     </button>
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
