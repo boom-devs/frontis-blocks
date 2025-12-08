@@ -487,7 +487,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const selectedTaxonomyObj = useMemo(() => allTaxonomies.find(tax => tax.slug === taxonomyType), [allTaxonomies, taxonomyType] );
 
-	// ---- FILTER POST TYPES FOR DROPDOWN GROUPING ----
 	const filteredPostTypes = useMemo(() => {
 		return allPostTypes.filter(
 			(pt) =>
@@ -497,13 +496,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		);
 	}, [allPostTypes]);
 
-	// ---- MAP TAXONOMY → POST TYPE LABEL ----
 	const getPostTypeLabelForTaxonomy = useCallback(
 		(taxSlug) => {
 			const taxonomy = allTaxonomies.find((tax) => tax.slug === taxSlug);
 			if (!taxonomy?.types?.length) return null;
 
-			// If taxonomy is used by multiple post types, choose based on filteredPostTypes priority
 			const preferred = taxonomy.types.find((type) =>
 				filteredPostTypes.some((pt) => pt.slug === type)
 			);
@@ -516,7 +513,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[allTaxonomies, filteredPostTypes, allPostTypes]
 	);
 
-	// ---- BUILD TAXONOMY DROPDOWN (WITH GROUPS) ----
 	const dynamicTaxonomyOptions = useMemo(() => {
 		return filteredPostTypes.flatMap((pt) => {
 			const taxList = allTaxonomies
@@ -540,9 +536,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [filteredPostTypes, allTaxonomies]);
 
-	// ---- AUTO-FIX INVALID taxonomyType ----
 	useEffect(() => {
-		// no taxonomies available
 		if (!dynamicTaxonomyOptions.length) {
 			if (taxonomyType) {
 				setAttributes({
@@ -555,7 +549,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			return;
 		}
 
-		// check valid taxonomy selection
 		const isValid = dynamicTaxonomyOptions.some(
 			(opt) => opt.value === taxonomyType && !opt.isDisabled
 		);
@@ -573,18 +566,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 	}, [dynamicTaxonomyOptions, taxonomyType]);
 
-	// ---- SELECTED TAXONOMY (Derived, not state) ----
 	const selectedTaxonomy = useMemo(() => {
 		return dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType) || null;
 	}, [dynamicTaxonomyOptions, taxonomyType]);
 
-	// ---- POST TYPE LABEL (Derived from taxonomyType) ----
 	const postTypeLabel = useMemo(() => {
 		if (!taxonomyType) return "";
 		return getPostTypeLabelForTaxonomy(taxonomyType) || "";
 	}, [taxonomyType, getPostTypeLabelForTaxonomy]);
 
-	// ---- HANDLE CHANGE ----
 	const handleTaxonomyChange = useCallback(
 		(option) => {
 			if (!option || option.isDisabled) return;
@@ -599,7 +589,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[setAttributes]
 	);
 
-	// ---- FETCH TERMS FOR CURRENT TAXONOMY ----
 	const taxonomyItems = useSelect(
 		(select) => {
 			if (!taxonomyType) return [];
@@ -613,7 +602,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[taxonomyType]
 	);
 
-	// ---- TERM OPTIONS ----
 	const taxonomyOptions = useMemo(
 		() =>
 			taxonomyItems.map((term) => ({
@@ -623,7 +611,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[taxonomyItems]
 	);
 
-	// ---- INCLUDE/EXCLUDE ACTIONS ----
 	const handleIncludeTaxonomiesChange = useCallback(
 		(options) => {
 			setAttributes({
