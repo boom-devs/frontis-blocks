@@ -26,7 +26,6 @@ import {
 	ICON_ALIGN,
 	BORDER_STYLES,
 	ICON_POSITION,
-	lottieAnimationS_DIRECTION,
 	PRESETS,
 	OVERFLOW_OP,
 	LOTTIE_RENDER_TYPE,
@@ -34,12 +33,10 @@ import {
 } from "../../fbConstants/fbConstants";
 
 import { useState, useEffect, useMemo } from "@wordpress/element";
-import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
 import FB_BoxShadowControl from "@Components/box-shadow";
-import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
