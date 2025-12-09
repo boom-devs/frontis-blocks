@@ -119,7 +119,17 @@ class PostGrid {
      * Get author info for the rest field.
      */
     public function get_post_author_info($object, $field_name, $request) {
-        $author_id = $object['author'];
+
+        if ( ! isset( $object['author'] ) || empty( $object['author'] ) ) {
+            return null;
+        }
+
+        $author_id = (int) $object['author'];
+        
+        if ( ! $author_id ) {
+            return null;
+        }
+
         $author_has_posts = count_user_posts($author_id, 'post', true) > 0;
 
         if (!$author_has_posts) {
