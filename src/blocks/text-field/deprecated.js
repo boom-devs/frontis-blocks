@@ -13,7 +13,6 @@ const v1_0_3 = {
     save({ attributes }) {
         const {
             blockID,
-            clickable,
             parentBlockID,
     
             inheritedTagName,
@@ -48,7 +47,7 @@ const v1_0_3 = {
             <>
                 <div {...blockProps}>
                     <div className={`fb-accordion-item-wrapper ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
-                        <div className={`fb-accordion-item-title-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`}>
+                        <div className={`fb-accordion-item-title-wrapper ${parentBlockID}`}>
                             <div className={`fb-accordion-title-inner`}>
                                 {titlePrefixType !== 'none' && (
                                     <div className="fb-accordion-title-prefix">
@@ -101,7 +100,7 @@ const v1_0_3 = {
                             }
                         </div>
                         <div
-                            className={`fb-accordion-content-wrapper ${parentBlockID} ${clickable === true ? 'active' : ''}`}
+                            className={`fb-accordion-content-wrapper ${parentBlockID}`}
                         >
                             <div className="fb-accordion-content">
                                 <InnerBlocks.Content />

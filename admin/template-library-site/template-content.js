@@ -210,7 +210,6 @@ const TemplateContent = ({
                     </div>
                 </div>
 
-                <TemplateLibraryCardsSkeleton count={15} />
                 {loading ? (
                 <TemplateLibraryCardsSkeleton count={15} />
                 ) : (

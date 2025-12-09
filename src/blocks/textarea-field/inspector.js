@@ -14,9 +14,10 @@ import {
     ResponsiveWrapper, 
     __experimentalHStack as HStack,
     RangeControl,
+    SelectControl,
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
-import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
+import { BORDER_STYLES, FIELD_TYPES, MEDIA_TYPES } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
 import { useEffect, useMemo } from "@wordpress/element";
@@ -35,36 +36,36 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         blockID,
 		parentBlockID,
         // deviceType,
-        clickable,
 
-        title,
-        titlePrefixType,
-        titlePrefixIcon,
-        titlePrefixImgUrl,
-        titlePrefixImgAlt,
-        titlePrefixImgID,
-        titlePrefixImgPosition,
-        titlePrefixImgAttachment,
-        titlePrefixImgRepeat,
-        titlePrefixImgSize,
+        // general
+        fieldType,
+        fieldLabelSwitcher,
+        fieldLabel,
+        fieldIconSwitcher,
+        fieldIcon,
+        fieldPlaceholderSwitcher,
+        fieldPlaceholder,
+        fieldRequiredFieldSwitcher,
+        fieldRequiredSymbolSwitcher,
+        fieldRequiredText,
+        fieldDefaultValue,
+        fieldCustomNameAttribute,
 
-        titleSuffixType,
-        titleSuffixIcon,
-        titleSuffixImgUrl,
-        titleSuffixImgAlt,
-        titleSuffixImgID,
-        titleSuffixImgPosition,
-        titleSuffixImgAttachment,
-        titleSuffixImgRepeat,
-        titleSuffixImgSize,
+        // layout
+        fieldWidth,
+        fieldMinHeight,
 
-        titlePrefixColorSwitcher,
-        titlePrefixColor,
-        titlePrefixHoverColor,
 
-        titleSuffixColorSwitcher,
-        titleSuffixColor,
-        titleSuffixHoverColor,
+        inheritedFieldType,
+        inheritedFieldIconSwitcher,
+        inheritedFieldLabelSwitcher,
+        inheritedFieldLabel,
+        inheritedFieldPlaceholderSwitcher,
+        inheritedFieldPlaceholder,
+        inheritedFieldRequiredFieldSwitcher,
+        inheritedFieldRequiredSymbolSwitcher,
+        inheritedFieldRequiredText,
+
 
         // Accordion Item Advance
         accordionItemZIndex,
@@ -273,26 +274,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			margin: 0;
 		  }
 	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
 		  @media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
@@ -316,14 +297,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		[
             blockID,
             deviceType,
-    
-            titlePrefixColorSwitcher,
-            titlePrefixColor,
-            titlePrefixHoverColor,
-    
-            titleSuffixColorSwitcher,
-            titleSuffixColor,
-            titleSuffixHoverColor,
     
             // Accordion Item Advance
             accordionItemZIndex,
@@ -383,27 +356,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             transition: all 0.3s ease-in-out;
 		}
 
-		
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
 
 		@media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
@@ -427,12 +379,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		`, [
 			blockID,
             deviceType,
-    
-            titlePrefixColor,
-            titlePrefixHoverColor,
-    
-            titleSuffixColor,
-            titleSuffixHoverColor,
     
             // Accordion Item Advance
             accordionItemZIndex,
@@ -458,8 +404,29 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const generalControls = (
         <>
             <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+                <SelectControl
+                    label={__("Field Type", "frontis-blocks")}
+                    value={fieldType}
+                    options={FIELD_TYPES}
+                    onChange={(value) => setAttributes({ fieldType: value })}
+                />
                 <ToggleControl
-                    label={__("Default Open?", "frontis-blocks")}
+                    label={__("Show Label", "frontis-blocks")}
+                    checked={clickable}
+                    onChange={(value) => setAttributes({ clickable: value })}
+                />
+                <ToggleControl
+                    label={__("Is It Required Field?", "frontis-blocks")}
+                    checked={clickable}
+                    onChange={(value) => setAttributes({ clickable: value })}
+                />
+                <ToggleControl
+                    label={__("Show Required Symbol", "frontis-blocks")}
+                    checked={clickable}
+                    onChange={(value) => setAttributes({ clickable: value })}
+                />
+                <ToggleControl
+                    label={__("Show icon", "frontis-blocks")}
                     checked={clickable}
                     onChange={(value) => setAttributes({ clickable: value })}
                 />
@@ -639,38 +606,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
      */
     const styleControls = (
         <>
-            <PanelBody
-                title={__("Padding & Margin", "frontis-blocks")}
-                initialOpen={true}
-            >
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleAccordionItemMarginUnitsHandler}
-                    spacingUnits={accordionItemMarginUnits}
-                    spacingDesktop={accordionItemDesktopMargin}
-                    spacingTablet={accordionItemTabMargin}
-                    spacingMobile={accordionItemMobileMargin}
-                    handleSpacingUnitHandler={handleAccordionItemMarginUnitChange}
-                    spacingCombineBtn={accordionItemMarginLink}
-                    spacingCombineBtnHandler={handleAccordionItemMarginCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
-                    spacingUnits={accordionItemPaddingUnits}
-                    spacingDesktop={accordionItemDesktopPadding}
-                    spacingTablet={accordionItemTabPadding}
-                    spacingMobile={accordionItemMobilePadding}
-                    handleSpacingUnitHandler={handleAccordionItemPaddingUnitChange}
-                    spacingCombineBtn={accordionItemPaddingLink}
-                    spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />                                     
-            </PanelBody>
+            
         </>
     );
         
@@ -713,6 +649,39 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             onChangeValue={(value) => setAttributes({ accordionItemGlobalWraperClass: value })}
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Padding & Margin", "frontis-blocks")}
+                        initialOpen={true}
+                    >
+                        <FB_Spacing
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleAccordionItemMarginUnitsHandler}
+                            spacingUnits={accordionItemMarginUnits}
+                            spacingDesktop={accordionItemDesktopMargin}
+                            spacingTablet={accordionItemTabMargin}
+                            spacingMobile={accordionItemMobileMargin}
+                            handleSpacingUnitHandler={handleAccordionItemMarginUnitChange}
+                            spacingCombineBtn={accordionItemMarginLink}
+                            spacingCombineBtnHandler={handleAccordionItemMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing 
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
+                            spacingUnits={accordionItemPaddingUnits}
+                            spacingDesktop={accordionItemDesktopPadding}
+                            spacingTablet={accordionItemTabPadding}
+                            spacingMobile={accordionItemMobilePadding}
+                            handleSpacingUnitHandler={handleAccordionItemPaddingUnitChange}
+                            spacingCombineBtn={accordionItemPaddingLink}
+                            spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />                                     
                     </PanelBody>
 
                     <PanelBody

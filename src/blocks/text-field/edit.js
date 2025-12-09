@@ -17,14 +17,14 @@ const Edit = (props) => {
         parentBlockID ,
         blockID,
         inheritedFieldType,
-        inheritedIconSwitcher,
-        inheritedLabelSwitcher,
-        inheritedLabel,
-        inheritedPlaceholderSwitcher,
-        inheritedPlaceholder,
-        inheritedRequiredFieldSwitcher,
-        inheritedRequiredSymbolSwitcher,
-        inheritedRequiredText,
+        inheritedFieldIconSwitcher,
+        inheritedFieldLabelSwitcher,
+        inheritedFieldLabel,
+        inheritedFieldPlaceholderSwitcher,
+        inheritedFieldPlaceholder,
+        inheritedFieldRequiredSwitcher,
+        inheritedFieldRequiredSymbolSwitcher,
+        inheritedFieldRequiredText,
 
         textFieldGlobalWraperID,
         textFieldGlobalWraperClass,
@@ -35,20 +35,20 @@ const Edit = (props) => {
     useEffect(() => {
         setAttributes({
             inheritedFieldType:  context["fb/formInheritedFieldType"],
-            inheritedIconSwitcher: context["fb/formInheritedIconSwitcher"],
-            inheritedLabelSwitcher: context["fb/formInheritedLabelSwitcher"],
-            inheritedLabel: context["fb/formInheritedLabel"],
-            inheritedPlaceholderSwitcher: context["fb/formInheritedPlaceholderSwitcher"],
-            inheritedPlaceholder: context["fb/formInheritedPlaceholder"],
-            inheritedRequiredFieldSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
-            inheritedRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
-            inheritedRequiredText: context["fb/formInheritedRequiredText"],
+            inheritedFieldIconSwitcher: context["fb/formInheritedIconSwitcher"],
+            inheritedFieldLabelSwitcher: context["fb/formInheritedLabelSwitcher"],
+            inheritedFieldLabel: context["fb/formInheritedLabel"],
+            inheritedFieldPlaceholderSwitcher: context["fb/formInheritedPlaceholderSwitcher"],
+            inheritedFieldPlaceholder: context["fb/formInheritedPlaceholder"],
+            inheritedFieldRequiredSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
+            inheritedFieldRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
+            inheritedFieldRequiredText: context["fb/formInheritedRequiredText"],
         })
     }, [
         context["fb/formInheritedFieldType"],
-        context["fb/formInheritedDisplayIcon"],
+        context["fb/formInheritedIconSwitcher"],
         context["fb/formInheritedLabelSwitcher"],
-        context["fb/formInheritedLabelSwitcher"],
+        context["fb/formInheritedLabel"],
         context["fb/formInheritedPlaceholderSwitcher"],
         context["fb/formInheritedPlaceholder"],
         context["fb/formInheritedRequiredFieldSwitcher"],
@@ -67,12 +67,12 @@ const Edit = (props) => {
             <div {...blockProps}>
                 <div className="fb-form-group-wrapper">
                     <div className="fb-form-label-wrapper">
-                        {inheritedLabelSwitcher && (
+                        {inheritedFieldLabelSwitcher && (
                             <label className="fb-form-label fb-text-field-label">
-                                {inheritedLabel}
+                                {inheritedFieldLabel}
                             </label>
                         )}
-                        {inheritedRequiredFieldSwitcher && inheritedRequiredSymbolSwitcher && (
+                        {inheritedFieldRequiredSwitcher && inheritedFieldRequiredSymbolSwitcher && (
                             <span className="fb-required-symbol">*</span>
                         )}
                     </div>
@@ -80,10 +80,10 @@ const Edit = (props) => {
                         <input
                             type={inheritedFieldType}
                             className="fb-form-input fb-text-field-input"
-                            placeholder={inheritedPlaceholderSwitcher ? inheritedPlaceholder : ''}
+                            placeholder={inheritedFieldPlaceholderSwitcher ? inheritedFieldPlaceholder : ''}
                         />
-                        {inheritedRequiredFieldSwitcher && !inheritedRequiredSymbolSwitcher && (
-                            <div className="fb-required-text">{inheritedRequiredText}</div>
+                        {inheritedFieldRequiredSwitcher && !inheritedFieldRequiredSymbolSwitcher && (
+                            <div className="fb-required-text">{inheritedFieldRequiredText}</div>
                         )}
                     </div>
                 </div>
