@@ -26,11 +26,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieAnimationSpeed = 1,
 		lottieEffectsOnHover = 'none',
 		lottieAnimationReverse = false,
-		lottieAnimationImageID
+		lottieAnimationImageID,
+		lottieAnimationDesktopSwitcher,
+		lottieAnimationTabletSwitcher,
+		lottieAnimationMobileSwitcher,
+		lottieAnimationGlobalWraperClass,
+		lottieAnimationGlobalWraperID
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-lottie-animation-main-wrapper ${blockID}`,
+		className: `fb-lottie-animation-main-wrapper ${blockID} ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'} ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'} ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	const containerRef = useRef(null);
@@ -171,54 +176,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 			<BlockControls>
 				<ToolbarGroup>
-					{(lottieAnimationImageUrl || lottieAnimationImageID) ? (
-						<>
-							<ToolbarButton
-								icon="trash"
-								label={__("Remove JSON File", "frontis-blocks")}
-								onClick={() =>
-									setAttributes({
-										lottieAnimationImageID: "",
-										lottieAnimationImageUrl: "",
-									})
-								}
-							/>
-							<MediaUploadCheck>
-								<MediaUpload
-									onSelect={onSelectImage}
-									allowedTypes={["application/json"]}
-									value={lottieAnimationImageID}
-									render={({ open }) => (
-										<ToolbarButton
-											onClick={open}
-											icon="edit"
-											label={__("Replace JSON File", "frontis-blocks")}
-										/>
-									)}
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={onSelectImage}
+							allowedTypes={["application/json"]}
+							value={lottieAnimationImageID}
+							render={({ open }) => (
+								<ToolbarButton
+									onClick={open}
+									icon={(lottieAnimationImageUrl || lottieAnimationImageID) ? "edit" : "upload"}
+									label={(lottieAnimationImageUrl || lottieAnimationImageID) ? __("Replace JSON File", "frontis-blocks") : __("Add JSON File", "frontis-blocks")}
 								/>
-							</MediaUploadCheck>
-						</>
-					) : (
-						<MediaUploadCheck>
-							<MediaUpload
-								onSelect={onSelectImage}
-								allowedTypes={["application/json"]}
-								value={lottieAnimationImageID}
-								render={({ open }) => (
-									<ToolbarButton
-										onClick={open}
-										icon="upload"
-										label={__("Add JSON File", "frontis-blocks")}
-									/>
-								)}
-							/>
-						</MediaUploadCheck>
-					)}
+							)}
+						/>
+					</MediaUploadCheck>
 				</ToolbarGroup>
 			</BlockControls>
 			<div {...blockProps}>
-				<div className="fb-parent-wrapper fb-lottie-animation-container"
-					ref={containerRef}>
+				<div className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`} id={lottieAnimationGlobalWraperID} ref={containerRef}>
 					{!(lottieAnimationImageUrl || lottieAnimationJsonUrl) && (
 						<MediaPlaceholder
 							onSelect={onSelectImage}

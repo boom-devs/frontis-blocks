@@ -13,11 +13,16 @@ export default function save({ attributes }) {
 		lottieAutoplay = true,
 		lottieAnimationSpeed = 1,
 		lottieEffectsOnHover = 'none',
-		lottieAnimationReverse = false
+		lottieAnimationReverse = false,
+		lottieAnimationDesktopSwitcher,
+		lottieAnimationTabletSwitcher,
+		lottieAnimationMobileSwitcher,
+		lottieAnimationGlobalWraperClass,
+		lottieAnimationGlobalWraperID
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-lottie-animation-main-wrapper ${blockID}`,
+		className: `fb-lottie-animation-main-wrapper ${blockID} ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'} ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'} ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	// Determine animation path
@@ -27,7 +32,7 @@ export default function save({ attributes }) {
 	if (!sourceUrl) {
 		return (
 			<div {...blockProps}>
-				<div className="fb-parent-wrapper fb-lottie-animation-container">
+				<div className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`} id={lottieAnimationGlobalWraperID}>
 					<div style={{ padding: '50px', textAlign: 'center', color: '#999' }}>
 						{__('No Lottie animation selected.', 'frontis-blocks')}
 					</div>
@@ -45,7 +50,7 @@ export default function save({ attributes }) {
 	return (
 		<div {...blockProps}>
 			<div
-				className={`fb-parent-wrapper fb-lottie-animation-container ${blockID}`}
+				className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`} id={lottieAnimationGlobalWraperID}
 				data-json-url={sourceUrl}
 				data-renderer={lottieRenderer}
 				data-loop={lottieLoop}
