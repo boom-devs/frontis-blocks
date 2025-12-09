@@ -51,6 +51,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		lottieAnimationJsonTypeSwitcher,
 		lottieAnimationImageUrl,
 		lottieAnimationImageAlt,
@@ -464,6 +465,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Desktop ? `bottom: ${lottieAnimationVRBottomOffset?.Desktop}${lottieAnimationVRBottomOffsetUnits?.Desktop};` : ''}
 				${lottieAnimationGlobalZIndex?.Desktop ? `z-index: ${lottieAnimationGlobalZIndex?.Desktop};` : ''}
 				${lottieAnimationOverflow !== 'default' ? `overflow: ${lottieAnimationOverflow};` : ''}
+				${lottieAnimationContainerWidth?.Desktop ? `width: ${lottieAnimationContainerWidth?.Desktop}${lottieAnimationContainerWidthUnits?.Desktop};` : ''}
+				${lottieAnimationContainerHeight?.Desktop ? `height: ${lottieAnimationContainerHeight?.Desktop}${lottieAnimationContainerHeightUnits?.Desktop};` : ''}
 			}
 			.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 				${lottieAnimationGlobalNormalBackgroundType === 'gradient' ? `  
@@ -471,8 +474,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`: `
 					${lottieAnimationGlobalNormalClassicColor ? `background: ${lottieAnimationGlobalNormalClassicColor};` : ''}
 				`}
-				${lottieAnimationContainerWidth?.Desktop ? `width: ${lottieAnimationContainerWidth?.Desktop}${lottieAnimationContainerWidthUnits?.Desktop};` : ''}
-				${lottieAnimationContainerHeight?.Desktop ? `height: ${lottieAnimationContainerHeight?.Desktop}${lottieAnimationContainerHeightUnits?.Desktop};` : ''}
 				${globalDesktopPadding && lottieAnimationGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin && lottieAnimationGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
 				${lottieAnimationGlobalBorder ? `border: ${lottieAnimationGlobalBorder};` : ''} 
@@ -502,10 +503,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'top' && lottieAnimationVRTopOffset?.Tablet ? `top: ${lottieAnimationVRTopOffset?.Tablet}${lottieAnimationVRTopOffsetUnits?.Tablet};` : ''}
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Tablet ? `bottom: ${lottieAnimationVRBottomOffset?.Tablet}${lottieAnimationVRBottomOffsetUnits?.Tablet};` : ''}
 					${lottieAnimationGlobalZIndex?.Tablet ? `z-index: ${lottieAnimationGlobalZIndex?.Tablet};` : ''}
-				}
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${lottieAnimationContainerWidth?.Tablet ? `width: ${lottieAnimationContainerWidth?.Tablet}${lottieAnimationContainerWidthUnits?.Tablet};` : ''}
 					${lottieAnimationContainerHeight?.Tablet ? `height: ${lottieAnimationContainerHeight?.Tablet}${lottieAnimationContainerHeightUnits?.Tablet};` : ''}
+				}
+				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${globalTabletPadding && lottieAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && lottieAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
 					${globalTabletBorderWidth && lottieAnimationGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -519,10 +520,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'top' && lottieAnimationVRTopOffset?.Mobile ? `top: ${lottieAnimationVRTopOffset?.Mobile}${lottieAnimationVRTopOffsetUnits?.Mobile};` : ''}
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Mobile ? `bottom: ${lottieAnimationVRBottomOffset?.Mobile}${lottieAnimationVRBottomOffsetUnits?.Mobile};` : ''}
 					${lottieAnimationGlobalZIndex?.Mobile ? `z-index: ${lottieAnimationGlobalZIndex?.Mobile};` : ''}
-				}
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${lottieAnimationContainerWidth?.Mobile ? `width: ${lottieAnimationContainerWidth?.Mobile}${lottieAnimationContainerWidthUnits?.Mobile};` : ''}
 					${lottieAnimationContainerHeight?.Mobile ? `height: ${lottieAnimationContainerHeight?.Mobile}${lottieAnimationContainerHeightUnits?.Mobile};` : ''}
+				}
+				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${globalMobilePadding && lottieAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin && lottieAnimationGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
 					${globalMobileBorderWidth && lottieAnimationGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -569,11 +570,26 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<>
 							<FB_ImageControl
 								globalImageUrl={lottieAnimationImageUrl}
-								setglobalImageUrl={(value) => setAttributes({ lottieAnimationImageUrl: value })}
+								setglobalImageUrl={(value) => {
+									// Only update if value is not null/empty, otherwise keep current value
+									if (value !== null && value !== undefined && value !== '') {
+										setAttributes({ lottieAnimationImageUrl: value });
+									}
+								}}
 								globalImageAlt={lottieAnimationImageAlt}
-								setglobalImageAlt={(value) => setAttributes({ lottieAnimationImageAlt: value })}
+								setglobalImageAlt={(value) => {
+									// Only update if value is not null/empty, otherwise keep current value
+									if (value !== null && value !== undefined && value !== '') {
+										setAttributes({ lottieAnimationImageAlt: value });
+									}
+								}}
 								globalImageID={lottieAnimationImageID}
-								setglobalImageID={(value) => setAttributes({ lottieAnimationImageID: value })}
+								setglobalImageID={(value) => {
+									// Only update if value is not null/empty, otherwise keep current value
+									if (value !== null && value !== undefined && value !== '') {
+										setAttributes({ lottieAnimationImageID: value });
+									}
+								}}
 								isImageSize={false}
 							/>
 						</>
@@ -582,7 +598,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<>
 							<FB_UrlControl
 								url={lottieAnimationJsonUrl}
-								onChangeUrl={(value) => setAttributes({ lottieAnimationJsonUrl: value })}
+								onChangeUrl={(value) => {
+									// Only update if value is not null/empty, otherwise keep current value
+									if (value !== null && value !== undefined && value !== '') {
+										setAttributes({ lottieAnimationJsonUrl: value });
+									}
+								}}
 								openInNewTab={lottieAnimationJsonTargetUrl}
 								onChangeOpenInNewTab={(value) => setAttributes({ lottieAnimationJsonTargetUrl: value })}
 							/>
