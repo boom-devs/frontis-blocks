@@ -16,6 +16,67 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+	showAuthor: {
+		type: "boolean",
+		default: true,
+	},
+	authorAvatarSize: {
+		type: "number",
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	authorAvatarSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	/** Start Border Radius */
+	authorAvatarBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorAvatarBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
 	showLabel: {
 		type: "boolean",
 		default: false,

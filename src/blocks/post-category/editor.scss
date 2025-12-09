@@ -1,0 +1,39 @@
+.fb-taxonomy-more-info{
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    .fb-taxonomy-author{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: row-reverse;
+    }
+    .fb-taxonomy-author-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        margin-left: -10px;
+    }
+    .fb-taxonomy-author-avatar, .fb-child-category-avatar{
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+    }
+    .fb-child-categories-avatars{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .fb-child-category-avatar-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -10px;
+    }
+    .fb-child-category-avatar-item:first-child{
+        margin-left: 0;
+    }
+}
