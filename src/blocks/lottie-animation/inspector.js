@@ -682,7 +682,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		<>
 			<PanelBody
 				title={__("Lottie", "frontis-blocks")}
-				initialOpen={false}
+				initialOpen={true}
 			>
 				<FB_Range
 					min={0}
