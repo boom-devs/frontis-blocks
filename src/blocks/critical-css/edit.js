@@ -1,5 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { applyFilters } from '@wordpress/hooks';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 
 import {
 	useBlockProps
@@ -23,7 +24,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	if(!criticalCssAvailable) {
 		return (
-			<p>Critical CSS is not available in this version of the plugin. Please upgrade to the premium version to use this block.</p>
+			<UpgradeToProPopup />
 		)
 	}
 
