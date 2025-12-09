@@ -466,7 +466,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${lottieAnimationGlobalZIndex?.Desktop ? `z-index: ${lottieAnimationGlobalZIndex?.Desktop};` : ''}
 				${lottieAnimationOverflow !== 'default' ? `overflow: ${lottieAnimationOverflow};` : ''}
 				${lottieAnimationContainerWidth?.Desktop ? `width: ${lottieAnimationContainerWidth?.Desktop}${lottieAnimationContainerWidthUnits?.Desktop};` : ''}
-				${lottieAnimationContainerHeight?.Desktop ? `height: ${lottieAnimationContainerHeight?.Desktop}${lottieAnimationContainerHeightUnits?.Desktop};` : ''}
+				
 			}
 			.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 				${lottieAnimationGlobalNormalBackgroundType === 'gradient' ? `  
@@ -482,6 +482,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${lottieAnimationGlobalBorderColor ? `border-color: ${lottieAnimationGlobalBorderColor};` : ''}
 				${lottieAnimationGlobalBoxShadowCssValue ? `box-shadow: ${lottieAnimationGlobalBoxShadowCssValue};` : ''}
 				${lottieAnimationNormalOpacity ? `opacity: ${lottieAnimationNormalOpacity};` : ''}
+				${lottieAnimationContainerHeight?.Desktop ? `height: ${lottieAnimationContainerHeight?.Desktop}${lottieAnimationContainerHeightUnits?.Desktop};` : ''}
 				transition: all .3s ease-in-out;
 				position: relative;
 			}
@@ -504,13 +505,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Tablet ? `bottom: ${lottieAnimationVRBottomOffset?.Tablet}${lottieAnimationVRBottomOffsetUnits?.Tablet};` : ''}
 					${lottieAnimationGlobalZIndex?.Tablet ? `z-index: ${lottieAnimationGlobalZIndex?.Tablet};` : ''}
 					${lottieAnimationContainerWidth?.Tablet ? `width: ${lottieAnimationContainerWidth?.Tablet}${lottieAnimationContainerWidthUnits?.Tablet};` : ''}
-					${lottieAnimationContainerHeight?.Tablet ? `height: ${lottieAnimationContainerHeight?.Tablet}${lottieAnimationContainerHeightUnits?.Tablet};` : ''}
+					
 				}
 				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${globalTabletPadding && lottieAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && lottieAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
 					${globalTabletBorderWidth && lottieAnimationGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
 					${globalTabletBorderRadiusWidth && lottieAnimationGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
+					${lottieAnimationContainerHeight?.Tablet ? `height: ${lottieAnimationContainerHeight?.Tablet}${lottieAnimationContainerHeightUnits?.Tablet};` : ''}
 				}
 			}
 			@media only screen and (max-width: 767px) {
@@ -521,13 +523,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Mobile ? `bottom: ${lottieAnimationVRBottomOffset?.Mobile}${lottieAnimationVRBottomOffsetUnits?.Mobile};` : ''}
 					${lottieAnimationGlobalZIndex?.Mobile ? `z-index: ${lottieAnimationGlobalZIndex?.Mobile};` : ''}
 					${lottieAnimationContainerWidth?.Mobile ? `width: ${lottieAnimationContainerWidth?.Mobile}${lottieAnimationContainerWidthUnits?.Mobile};` : ''}
-					${lottieAnimationContainerHeight?.Mobile ? `height: ${lottieAnimationContainerHeight?.Mobile}${lottieAnimationContainerHeightUnits?.Mobile};` : ''}
+					
 				}
 				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${globalMobilePadding && lottieAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin && lottieAnimationGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
 					${globalMobileBorderWidth && lottieAnimationGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
 					${globalMobileBorderRadiusWidth && lottieAnimationGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
+					${lottieAnimationContainerHeight?.Mobile ? `height: ${lottieAnimationContainerHeight?.Mobile}${lottieAnimationContainerHeightUnits?.Mobile};` : ''}
 				}
 			}
 		`,
