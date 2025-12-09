@@ -683,7 +683,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			>
 				<FB_Range
 					min={0}
-					max={lottieAnimationContainerWidthUnits === '%' ? 100 : 1000}
+					max={lottieAnimationContainerWidthUnits[deviceType] === '%' ? 100 : 1000}
 					label={__("Width", "frontis-blocks")}
 					rangeValue={lottieAnimationContainerWidth}
 					onChangeHandler={(value) =>
@@ -700,7 +700,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 				<FB_Range
 					min={0}
-					max={lottieAnimationContainerHeightUnits === '%' ? 100 : 1000}
+					max={lottieAnimationContainerHeightUnits[deviceType] === '%' ? 100 : 1000}
 					label={__("Height", "frontis-blocks")}
 					rangeValue={lottieAnimationContainerHeight}
 					onChangeHandler={(value) =>
