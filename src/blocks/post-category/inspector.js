@@ -49,6 +49,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		blockStyle,
 		premadeStyle,
 		taxonomyType,
+		showAuthor,
+		authorAvatarSize,
+		authorAvatarSizeUnits,
 		showLabel,
 		showCount,
 		showDescription,
@@ -457,12 +460,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
     }, [clientId]);
 
-	useEffect(() => {
-		if (showLabel === undefined) {
-			setAttributes({ showLabel: true });
-		}
-	}, [showLabel]);
-
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
 	};
@@ -493,6 +490,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const selectedTaxonomyObj = useMemo(() => allTaxonomies.find(tax => tax.slug === taxonomyType), [allTaxonomies, taxonomyType] );
 
+	// ---- FILTER POST TYPES FOR DROPDOWN GROUPING ----
 	const filteredPostTypes = useMemo(() => {
 		return allPostTypes.filter(
 			(pt) =>
@@ -502,11 +500,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		);
 	}, [allPostTypes]);
 
+	// ---- MAP TAXONOMY → POST TYPE LABEL ----
 	const getPostTypeLabelForTaxonomy = useCallback(
 		(taxSlug) => {
 			const taxonomy = allTaxonomies.find((tax) => tax.slug === taxSlug);
 			if (!taxonomy?.types?.length) return null;
 
+			// If taxonomy is used by multiple post types, choose based on filteredPostTypes priority
 			const preferred = taxonomy.types.find((type) =>
 				filteredPostTypes.some((pt) => pt.slug === type)
 			);
@@ -519,6 +519,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[allTaxonomies, filteredPostTypes, allPostTypes]
 	);
 
+	// ---- BUILD TAXONOMY DROPDOWN (WITH GROUPS) ----
 	const dynamicTaxonomyOptions = useMemo(() => {
 		return filteredPostTypes.flatMap((pt) => {
 			const taxList = allTaxonomies
@@ -542,22 +543,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [filteredPostTypes, allTaxonomies]);
 
-	// FIX: Add state to track if data is loaded
-	const [isDataLoaded, setIsDataLoaded] = useState(false);
-
+	// ---- AUTO-FIX INVALID taxonomyType ----
 	useEffect(() => {
-		// Mark data as loaded when we have taxonomy options
-		if (dynamicTaxonomyOptions.length > 0) {
-			setIsDataLoaded(true);
-		}
-	}, [dynamicTaxonomyOptions]);
-
-	// FIX: Only run validation after data is loaded
-	useEffect(() => {
-		if (!isDataLoaded) {
-			return; // Don't do anything until data is loaded
-		}
-
+		// no taxonomies available
 		if (!dynamicTaxonomyOptions.length) {
 			if (taxonomyType) {
 				setAttributes({
@@ -570,14 +558,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			return;
 		}
 
+		// check valid taxonomy selection
 		const isValid = dynamicTaxonomyOptions.some(
 			(opt) => opt.value === taxonomyType && !opt.isDisabled
 		);
 
-		// Only reset if current selection is invalid AND we have a valid option
 		if (!isValid) {
 			const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-			if (firstAllowed && firstAllowed.value !== taxonomyType) {
+			if (firstAllowed) {
 				setAttributes({
 					taxonomyType: firstAllowed.value,
 					includeTaxonomies: [],
@@ -586,17 +574,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				});
 			}
 		}
-	}, [dynamicTaxonomyOptions, taxonomyType, isDataLoaded]);
+	}, [dynamicTaxonomyOptions, taxonomyType]);
 
+	// ---- SELECTED TAXONOMY (Derived, not state) ----
 	const selectedTaxonomy = useMemo(() => {
 		return dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType) || null;
 	}, [dynamicTaxonomyOptions, taxonomyType]);
 
+	// ---- POST TYPE LABEL (Derived from taxonomyType) ----
 	const postTypeLabel = useMemo(() => {
 		if (!taxonomyType) return "";
 		return getPostTypeLabelForTaxonomy(taxonomyType) || "";
 	}, [taxonomyType, getPostTypeLabelForTaxonomy]);
 
+	// ---- HANDLE CHANGE ----
 	const handleTaxonomyChange = useCallback(
 		(option) => {
 			if (!option || option.isDisabled) return;
@@ -611,6 +602,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[setAttributes]
 	);
 
+	// ---- FETCH TERMS FOR CURRENT TAXONOMY ----
 	const taxonomyItems = useSelect(
 		(select) => {
 			if (!taxonomyType) return [];
@@ -624,6 +616,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[taxonomyType]
 	);
 
+	// ---- TERM OPTIONS ----
 	const taxonomyOptions = useMemo(
 		() =>
 			taxonomyItems.map((term) => ({
@@ -633,6 +626,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[taxonomyItems]
 	);
 
+	// ---- INCLUDE/EXCLUDE ACTIONS ----
 	const handleIncludeTaxonomiesChange = useCallback(
 		(options) => {
 			setAttributes({
@@ -650,6 +644,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		},
 		[setAttributes]
 	);
+
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -3863,6 +3858,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const generalControls = (
 		<>
 			<div className="fb-setting-general-wrapper">
+				
 				<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
 					<BaseControl
 						label={__("Premade Style", "frontis-blocks")}
@@ -3934,6 +3930,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						className="fb-setting-show-hide-elements"
 					>
 						<ToggleControl
+							label={__("Show Author", "frontis-blocks")}
+							checked={showAuthor}
+							onChange={(value) => setAttributes({ showAuthor: value })}
+						/>
+
+						<ToggleControl
 							label={__("Show Count", "frontis-blocks")}
 							checked={showCount}
 							onChange={(value) => setAttributes({ showCount: value })}
@@ -3979,6 +3981,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						)}
 
 						<div className="fb-control-divider"></div>
+
+						{showAuthor && (
+							<RangeControl
+								label={__("Creator Avatar Size", "frontis-blocks")}
+								value={authorAvatarSize || 40}
+								onChange={(value) => setAttributes({ authorAvatarSize: value })}
+								min={24}
+								max={100}
+								step={4}
+							/>
+						)}
 
 						<RangeControl
 							label={__("Item Limit", "frontis-blocks")}

@@ -26,32 +26,35 @@ if (!function_exists('fb_trim_words')) {
 }
 
 if (!function_exists('fb_format_count_with_label_html')) {
-    function fb_format_count_with_label_html($count, $term_id, $taxonomy_slug, $show_label = true, $wrap_in_parentheses = false) {
-        $inner_html = '';
+    function fb_format_count_with_label_html($count, $term_id, $taxonomy_slug, $show_label = true) {
+        $html = '<span class="fb-taxonomy-count">';
         
         if (!$show_label) {
-            $inner_html = '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+            $html .= '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
         } else {
             $label = fb_get_post_type_label_for_term($term_id, $taxonomy_slug, $count);
             if (!empty($label)) {
-                $inner_html = '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>' . 
-                           '<span class="fb-taxonomy-count-label"> ' . esc_html($label) . '</span>';
+                $html .= '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>' . 
+                       '<span class="fb-taxonomy-count-label"> ' . esc_html($label) . '</span>';
             } else {
-                $inner_html = '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+                $html .= '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
             }
         }
         
-        if ($wrap_in_parentheses) {
-            return '<span class="fb-taxonomy-count">(' . $inner_html . ')</span>';
-        } else {
-            return '<span class="fb-taxonomy-count">' . $inner_html . '</span>';
-        }
+        $html .= '</span>';
+        return $html;
     }
 }
 
 if (!function_exists('fb_get_post_type_label_for_term')) {
     function fb_get_post_type_label_for_term($term_id, $taxonomy_slug, $count = 1) {
         if (empty($term_id) || empty($taxonomy_slug)) {
+            return '';
+        }
+        
+        // Get the term
+        $term = get_term($term_id, $taxonomy_slug);
+        if (is_wp_error($term) || !$term) {
             return '';
         }
         
@@ -67,11 +70,36 @@ if (!function_exists('fb_get_post_type_label_for_term')) {
             return '';
         }
         
-        // Get labels for post types
+        // Use a single query to check all post types at once
+        $valid_post_types = [];
+        
+        // Build a tax query to check multiple post types
+        $query_args = array(
+            'post_type' => $post_types,
+            'posts_per_page' => 1,
+            'fields' => 'ids',
+            'post_status' => 'publish',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomy_slug,
+                    'field' => 'term_id',
+                    'terms' => $term_id,
+                )
+            )
+        );
+        
+        $posts = get_posts($query_args);
+        
+        if (empty($posts)) {
+            return '';
+        }
+        
+        // Since we found posts, now we need to know which post types they belong to
+        // Get labels for all post types (simplified approach)
         $post_type_labels = [];
         foreach ($post_types as $post_type_slug) {
             $post_type = get_post_type_object($post_type_slug);
-            if ($post_type && ($post_type->public || $post_type->publicly_queryable)) {
+            if ($post_type && $post_type->public) {
                 if ($count == 1) {
                     $post_type_labels[] = $post_type->labels->singular_name ?? ucfirst($post_type_slug);
                 } else {
@@ -112,7 +140,7 @@ $exclude_taxonomies = isset($attributes['excludeTaxonomies']) ? (array) $attribu
 $order_by = fb_norm_str(isset($attributes['orderBy']) ? $attributes['orderBy'] : 'name');
 $sort_order = fb_norm_str(isset($attributes['sortOrder']) ? $attributes['sortOrder'] : 'asc');
 $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
-$show_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true;
+$show_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true; // FIXED: showLabel not showPostTypeLabel
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -256,10 +284,9 @@ if (empty($taxonomy_type)) {
                     $term->count, 
                     $term->term_id,
                     $taxonomy_type, 
-                    $show_label,
-                    false // No parentheses for grid
+                    $show_label
                 );
-                $output .= $formatted_count_html;
+                $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
             }
             $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
             $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
@@ -331,10 +358,14 @@ if (empty($taxonomy_type)) {
                 $term->count, 
                 $term->term_id,
                 $taxonomy_type, 
-                $show_label,
-                ($premade_style === 'style-1') // Parentheses only for style-1
+                $show_label
             );
-            $output .= $formatted_count_html;
+            
+            if ($premade_style === 'style-1') {
+                $output .= '<span class="fb-taxonomy-count">(' . $formatted_count_html . ')</span>';
+            } else {
+                $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
+            }
         }
 
         $output .= '</div>';
