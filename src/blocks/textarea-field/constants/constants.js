@@ -16,3 +16,9 @@ export const BORDER_STYLES = [
 	{ label: __("Outset", "frontis-block"), value: "outset" },
 	{ label: __("Ridge", "frontis-block"), value: "ridge" },
 ];
+export const FIELD_TYPES = [
+	{ label: __("Text", "frontis-block"), value: "text" },
+	{ label: __("Email", "frontis-block"), value: "email" },
+	{ label: __("Number", "frontis-block"), value: "number" },
+];
+

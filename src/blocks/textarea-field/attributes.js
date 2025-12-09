@@ -21,190 +21,50 @@ const attributes = {
         type: 'string',
         default: 'frontis_block',
     },
-    highlightColor: {
-        type: 'string',
-        default: '',
-    },
-    hoverHighlightColor: {
-        type: 'string',
-        default: '',
-    },
-    // blockMeta is for keeping all the styles ⬇
-    blockMeta: {
-        type: 'object',
-    },
-
-    itemId: {
-        type: 'string',
-    },
-    title: {
-        type: 'string',
-    },
-
-    clickable: {
+    
+    textFieldIconSwitcher: {
         type: 'boolean',
         default: false,
     },
-    toggleClick: {
+    textFieldIconSwitcher: {
         type: 'boolean',
         default: false,
     },
-
-    accordionItemColorSwitcher: {
-        type: 'string',
-        default: 'normal'
+    textFieldIconSwitcher: {
+        type: 'boolean',
+        default: false,
     },
-    accordionItemColor: {
-        type: 'string',
-        default: 'antiquewhite'
-    },
-    accordionItemHoverColor: {
-        type: 'string',
-        default: 'antiquewhite'
-    },
-
-    iconColorSwitcher: {
-        type: 'string',
-        default: 'normal'
-    },
-    iconColor: {
-        type: 'string',
-        default: '#000000'
-    },
-    iconHoverColor: {
-        type: 'string',
-        default: ''
+    textFieldIconSwitcher: {
+        type: 'boolean',
+        default: false,
     },
 
     inheritedFieldType: {
         type: 'string',
-        default: 'accordion',
     },
-    inheritedIconSwitcher: {
+    inheritedFieldIconSwitcher: {
         type: 'boolean',
-        default: true,
     },
-    inheritedTabIconSwitcher: {
-        type: 'string',
-    },
-    faqSchema: {
+    inheritedFieldLabelSwitcher: {
         type: 'boolean',
-        default: false,
     },
-    parentBlockID: {
+    inheritedFieldLabel: {
         type: 'string',
     },
-    titlePrefixType: {
-        type: 'string',
-        default: 'none',
+    inheritedFieldPlaceholderSwitcher: {
+        type: 'boolean',
     },
-
-    titlePrefixColorSwitcher: {
+    inheritedFieldPlaceholder: {
         type: 'string',
-        default: 'normal'
     },
-    titlePrefixColor: {
+    inheritedFieldRequiredFieldSwitcher: {
+        type: 'boolean',
+    },
+    inheritedFieldRequiredSymbolSwitcher: {
+        type: 'boolean',
+    },
+    inheritedFieldRequiredText: {
         type: 'string',
-        default: '#000'
-    },
-    titlePrefixHoverColor: {
-        type: 'string',
-        default: ''
-    },
-
-    titlePrefixImgUrl: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgAlt: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgID: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgPosition: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgAttachment: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgRepeat: {
-        type: 'string',
-        default: ''
-    },
-    titlePrefixImgSize: {
-        type: 'string',
-        default: ''
-    },
-
-    titleSuffixType: {
-        type: 'string',
-        default: 'none',
-    },
-
-    titleSuffixColorSwitcher: {
-        type: 'string',
-        default: 'normal'
-    },
-    titleSuffixColor: {
-        type: 'string',
-        default: '#000'
-    },
-    titleSuffixHoverColor: {
-        type: 'string',
-        default: ''
-    },
-
-    titleSuffixImgUrl: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgAlt: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgID: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgPosition: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgAttachment: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgRepeat: {
-        type: 'string',
-        default: ''
-    },
-    titleSuffixImgSize: {
-        type: 'string',
-        default: ''
-    },
-    
-    
-    titlePrefixIcon: {
-        type: 'string',
-        default: 'quote-left',
-    },
-    titleSuffixIcon: {
-        type: 'string',
-        default: 'quote-left',
-    },
-
-    accordionItemZIndex: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
     },
 
     accordionItemPaddingUnits : {
