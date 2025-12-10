@@ -1,13 +1,12 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
-import { Button } from '@wordpress/components';
-import { useEffect, useMemo, useRef } from "@wordpress/element";
-import { select, dispatch, useSelect } from "@wordpress/data";
-import { times } from 'lodash';
-import { createBlock } from "@wordpress/blocks";
+import { useBlockProps, InnerBlocks, RichText } from '@wordpress/block-editor';
+import { useRef } from "@wordpress/element";
+import { useSelect } from "@wordpress/data";
+import { store as blockEditorStore } from '@wordpress/block-editor';
 import './editor.scss';
 import Inspector from './inspector';
 import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 
 
 const ALLOWED_BLOCKS = [
@@ -18,7 +17,6 @@ const ALLOWED_BLOCKS = [
     "frontis-blocks/field-select",
     "frontis-blocks/field-checkbox"
 ];
-
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
@@ -38,6 +36,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tagName,
         faqSchema,
         formBuilderChildCount,
+
+        submiteBtnLabel,
+        submiteBtnIconSwitcher,
+        submiteBtnIcon,
 
         formBuilderGlobalWraperID,
         formBuilderGlobalWraperClass,
@@ -62,19 +64,27 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         [clientId]
     );
 
+    const isParentOrChildSelected = useSelect(
+        (select) => {
+            return select(blockEditorStore).hasSelectedInnerBlock(clientId, true);
+        },
+        [clientId]
+    );
+
     const defaultTemplate = [
         ['frontis-blocks/text-field', {
-            label: __('Name', 'frontis-blocks'),
-            name: 'user_name',
-            placeholder: __('Enter your name', 'frontis-blocks'),
-            required: true
+            fieldType: 'text',
+            fieldLabel: __('Name', 'frontis-blocks'),
+            fieldCustomNameAttribute: 'user_name',
+            fieldPlaceholder: __('Enter your name', 'frontis-blocks'),
+            fieldRequiredText: ''
         }],
         ['frontis-blocks/text-field', {
-            label: __('Email', 'frontis-blocks'),
-            name: 'user_email',
-            type: 'email',
-            placeholder: __('Enter your email', 'frontis-blocks'),
-            required: true
+            fieldType: 'email',
+            fieldLabel: __('Email', 'frontis-blocks'),
+            fieldCustomNameAttribute: 'user_email',
+            fieldPlaceholder: __('Enter your email', 'frontis-blocks'),
+            fieldRequiredText: ''
         }],
         ['frontis-blocks/textarea-field', {
             label: __('Message', 'frontis-blocks'),
@@ -82,74 +92,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             placeholder: __('Write your message here...', 'frontis-blocks'),
             required: true
         }],
-        ['frontis-blocks/checkbox-field', {
-            label: __('I agree to the terms and conditions', 'frontis-blocks'),
-            name: 'agree_terms',
-            required: true
-        }],
     ];
 
-
-    // const addAccordion = () => {
-    //     const innerBlocks = [
-    //         ...select("core/block-editor").getBlocks(clientId),
-    //     ];
-    //     let count = innerBlocks ? innerBlocks.length : 3;
-
-    //     const newBlock = createBlock("frontis-blocks/accordion-item", {
-    //         itemId: count + 1,
-    //         title: __(`Accordion title ${count + 1}`, "frontis-blocks"),
-    //         inheritedAccordionType: accordionType,
-    //         inheritedTagName: tagName,
-    //         inheritedDisplayIcon: displayIcon,
-    //         inheritedTabIconSwitcher: tabIconSwitcher,
-    //         inheritedTabIcon: tabIcon,
-    //         inheritedTabImageUrl: tabImageUrl,
-    //         inheritedTabImageAlt: tabImageAlt,
-    //         inheritedExpandedIconSwitcher: tabIconSwitcher,
-    //         inheritedExpandedIcon: expandedIcon,
-    //         inheritedExpandedImageUrl: expandedImageUrl,
-    //         inheritedExpandedImageAlt: expandedImageAlt,
-    //         parentBlockID: blockID,
-    //     });
-    //     innerBlocks.splice(innerBlocks.length, 0, newBlock);
-    //     dispatch("core/block-editor")
-    //         .replaceInnerBlocks(clientId, innerBlocks)
-    //         .then(() => {
-    //             setAttributes({ accordionChildCount: count + 1 });
-    //         });
-    // };
-
-    
-
-    // useEffect(() => {
-    //     if (!tabIcon) {
-    //         setAttributes({ tabIcon: "fas fa-angle-right" });
-    //     }
-    //     if (!expandedIcon) {
-    //         setAttributes({ expandedIcon: "fas fa-angle-down" });
-    //     }
-    // }, []);
-    
-    // const insertAccodionItem = (accordionChildCount) => {
-    //     return times(accordionChildCount, (n) => [
-    //         "frontis-blocks/accordion-item",
-    //         {
-    //             itemId: n + 1,
-    //             title: __(`Accordion title ${n + 1}`, "frontis-blocks"),
-    //             inheritedAccordionType: accordionType,
-    //             inheritedDisplayIcon: displayIcon,
-    //             inheritedTabIcon: "fas fa-angle-right",
-    //             inheritedExpandedIcon: "fas fa-angle-down",
-    //             inheritedTagName: tagName,
-    //             faqSchema: faqSchema,
-    //             parentBlockID: blockID,
-    //         },
-    //     ]);
-    // };
-
-
-    
 
     return (
         <>
@@ -171,15 +115,27 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                     {/* Submit Button */}
                     <div className="fb-field-item fb-form-builder-submit-wrapper">
-                        <Button isPrimary className="fb-submit-button">
-                            <span className="fb-submit-button-label">{__('Submit', 'form-builder')}</span>
-                            <span className="fb-submit-button-icon"></span>
-                        </Button>
+                        <button isPrimary className="fb-submit-button" onClick={(e) => e.preventDefault()}>
+                            <RichText
+                                tagName="span"
+                                className="fb-submit-button-label"
+                                value={submiteBtnLabel}
+                                placeholder={__('Submit', 'frontis-blocks')}
+                                onChange={(value) => setAttributes({ submiteBtnLabel: value })}
+                            />
+                            {submiteBtnIconSwitcher && (
+                                <span className="fb-submit-button-icon">
+                                    {renderSVG(submiteBtnIcon)}
+                                </span>
+                            )}
+                        </button>
                     </div>
 
-                    <div className="fb-form-builder-add-button-wrapper">
-                        <InnerBlocks.ButtonBlockAppender />
-                    </div>
+                    {isSelected || isParentOrChildSelected ? (
+                        <div className="fb-add-field-btn-wrapper">
+                            <InnerBlocks.ButtonBlockAppender />
+                        </div>
+                    ) : null}
                 </form>
             </div>
         </>

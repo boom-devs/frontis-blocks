@@ -21,50 +21,96 @@ const attributes = {
         type: 'string',
         default: 'frontis_block',
     },
-    
-    textFieldIconSwitcher: {
-        type: 'boolean',
-        default: false,
+
+    fieldType: {
+        type: 'string',
+        default: '',
     },
-    textFieldIconSwitcher: {
-        type: 'boolean',
-        default: false,
+    fieldLabel: {
+        type: 'string',
+        default: '',
     },
-    textFieldIconSwitcher: {
+    fieldLabelSwitcher: {
         type: 'boolean',
-        default: false,
+        default: null,
     },
-    textFieldIconSwitcher: {
+    fieldIcon: {
+        type: 'string',
+        default: '',
+    },
+    fieldPlaceholderSwitcher: {
         type: 'boolean',
-        default: false,
+        default: null,
+    },
+    fieldPlaceholder: {
+        type: 'string',
+        default: '',
+    },
+    fieldRequiredSwitcher: {
+        type: 'boolean',
+        default: null,
+    },
+    fieldRequiredSymbolSwitcher: {
+        type: 'boolean',
+        default: null,
+    },
+    fieldRequiredText: {
+        type: 'string',
+        default: '',
+    },
+    fieldDefaultValue: {
+        type: 'string',
+        default: '',
+    },
+    fieldCustomNameAttribute: {
+        type: 'string',
+        default: '',
     },
 
-    inheritedFieldType: {
-        type: 'string',
+    fieldWidth: {
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
     },
+    fieldWidthUnits: {
+        type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '',
+			Mobile: ''
+		}
+    },
+    fieldMinHeight: {
+        type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+    },
+    fieldMinHeightUnits: {
+        type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '',
+			Mobile: ''
+		}
+    },
+
     inheritedFieldIconSwitcher: {
         type: 'boolean',
     },
     inheritedFieldLabelSwitcher: {
         type: 'boolean',
     },
-    inheritedFieldLabel: {
-        type: 'string',
-    },
-    inheritedFieldPlaceholderSwitcher: {
-        type: 'boolean',
-    },
-    inheritedFieldPlaceholder: {
-        type: 'string',
-    },
     inheritedFieldRequiredFieldSwitcher: {
         type: 'boolean',
     },
     inheritedFieldRequiredSymbolSwitcher: {
         type: 'boolean',
-    },
-    inheritedFieldRequiredText: {
-        type: 'string',
     },
 
     accordionItemPaddingUnits : {

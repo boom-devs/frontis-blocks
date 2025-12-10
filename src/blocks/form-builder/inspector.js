@@ -13,6 +13,8 @@ import {
     ButtonGroup,
     SelectControl,
     ToggleControl,
+    TextControl,
+    TextareaControl,
 } from '@wordpress/components';
 
 import {
@@ -21,6 +23,8 @@ import {
     ICON_POSITIONS,
     ICON_SWITCHER,
     OVERFLOW_OP,
+    ALIGN_ITEMS,
+    SUTMIT_BTN_POSITION,
 } from "./constants/constants";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -42,47 +46,32 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
 export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         blockStyle,
-        accordionAlignment,
-        accordionIconZIndex,
-        accordionItems,
+    
+        fieldLabelSwitcher,
+        fieldIconSwitcher,
+        fieldRequiredSwitcher,
+        fieldRequiredSymbolSwitcher,
 
-        accordionIconSize,
-        accordionIconSizeUnits,
+        submiteBtnLabel,
+        submiteBtnIcon,
+        submiteBtnAlignment,
+        submiteBtnIconSwitcher,
+        submiteBtnIconPosition,
 
-        accordionIconColorSwitcher,
-        accordionIconColor,
-        accordionIconHoverColor,
-
-        accordionIconBorder,
-        accordionIconBorderColorSwitcher,
-        accordionIconBorderColor,
-        accordionIconBorderHoverColor,
-
-        accordionIconBorderUnits,
-        accordionIconBorderDesktop,
-        accordionIconBorderTablet,
-        accordionIconBorderMobile,
-        accordionIconBorderLink,
-
-        accordionIconBorderRadiusUnits,
-        accordionIconBorderRadiusDesktop,
-        accordionIconBorderRadiusTablet,
-        accordionIconBorderRadiusMobile,
-        accordionIconBorderRadiusLink,
-
-        accordionIconGapSize,
-        accordionIconGapUnits,
-
-        accordionIconPaddingUnits,
-        accordionIconPaddingDesktop,
-        accordionIconPaddingTablet,
-        accordionIconPaddingMobile,
-        accordionIconPaddingLink,
+        formTitle,
+        formEmailTo,
+        formCCEmail,
+        formBCCEmail,
+        formEmailSubject,
+        formSuccessMessage,
+        formFailMessage,
+        formValidtionMessage,
 
         titleGlobalTypoSwitcher,
         titleGlobalTypographyData,
@@ -393,70 +382,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End load font */
 
 
-    /** Start Accordions Gap */
-    const accordionItemGapHandler = (value) => {
-        setAttributes({ accordionItemGap: value });
-    };
-
-    const accordionItemGapUnitsHandler = (value) => {
-        setAttributes({ accordionItemGapUnits: value });
-    };
-
-    /** Start Title Spacing */
-    const titleSpacingHandler = (value) => {
-        setAttributes({ titleSpacing: value });
-    };
-
-    const titleSpacingUnitsHandler = (value) => {
-        setAttributes({ titleSpacingUnits: value });
-    };
-
-    /** Start Prefix Suffix Spacing */
-    const prefixSuffixSpacingHandler = (value) => {
-        setAttributes({ prefixSuffixSpacing: value });
-    };
-
-    const prefixSuffixSpacingUnitsHandler = (value) => {
-        setAttributes({ prefixSuffixSpacingUnits: value });
-    };
-
-
-    /** Start Title Suffix Icon Size */
-    const titleSuffixIconSizeHandler = (value) => {
-        setAttributes({ titleSuffixIconSize: value });
-    };
-
-    const titleSuffixIconSizeUnitsHandler = (value) => {
-        setAttributes({ titleSuffixIconSizeUnits: value });
-    };
-
-
-    /** Start Title Suffix Icon Size */
-    const titleIconSizeHandler = (value) => {
-        setAttributes({ titleIconSize: value });
-    };
-
-    const titleIconSizeUnitsHandler = (value) => {
-        setAttributes({ titleIconSizeUnits: value });
-    };
-
-    /** Start Title Suffix Icon Size */
-    const titlePrefixIconSizeHandler = (value) => {
-        setAttributes({ titlePrefixIconSize: value });
-    };
-
-    const titlePrefixIconSizeUnitsHandler = (value) => {
-        setAttributes({ titlePrefixIconSizeUnits: value });
-    };
-
-
-    // FB_Icon function
-    const titleTabIconHandler = (value) => {
-		setAttributes({tabIcon: value})
-	}
-    const titleExpandedIconHandler = (value) => {
-		setAttributes({expandedIcon: value})
-	}
 
     // accordionItems Padding Functionb
     const handleAccordionItemsPaddingUnitChange = ( event, position ) => {
@@ -1796,27 +1721,152 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const generalControls = (
         <>
-        <PanelBody initialOpen={true}>
-            <FB_HtmlTagControl
-                label={__("Accordion Items Title Tag", "frontis-blocks")}
-                globalHtmlTag={tagName}
-                setGlobalHtmlTag={(value) => setAttributes({ tagName: value })}
-            />
+            <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+                <ToggleControl
+                    label={__("Show Label", "frontis-blocks")}
+                    checked={fieldLabelSwitcher}
+                    onChange={(value) => setAttributes({ fieldLabelSwitcher: value })}
+                />
+                <ToggleControl
+                    label={__("Is It Required Field?", "frontis-blocks")}
+                    checked={fieldRequiredSwitcher}
+                    onChange={(value) => setAttributes({ fieldRequiredSwitcher: value })}
+                />
+                {fieldRequiredSwitcher && (
+                    <ToggleControl
+                        label={__("Show Required Symbol", "frontis-blocks")}
+                        checked={fieldRequiredSymbolSwitcher}
+                        onChange={(value) => setAttributes({ fieldRequiredSymbolSwitcher: value })}
+                    />
+                )}
+                <ToggleControl
+                    label={__("Show icon", "frontis-blocks")}
+                    checked={fieldIconSwitcher}
+                    onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
+                />
+            </PanelBody>
 
-            <FB_Range
-                min={1}
-                max={100}
-                label={__("Accordion Gap", "frontis-blocks")}
-                rangeValue={accordionItemGap}
-                onChangeHandler={accordionItemGapHandler}
-                rangeUnitHandler={accordionItemGapUnitsHandler}
-                deviceType={deviceType}
-                units={accordionItemGapUnits}
-                setAttributes={setAttributes}
-                rangeStep={1}
-                resetFallbackValue={20}
-            />
-        </PanelBody>
+            <PanelBody title={__("Submit Button", "frontis-blocks")} initialOpen={false}>
+                <TextControl
+                    label={__('Label', 'frontis-blocks')}
+                    value={submiteBtnLabel}
+                    onChange={(value) => setAttributes({ submiteBtnLabel: value })}
+                />
+
+                <BaseControl className={"fb-form-btn-alignment"} >
+                    <FB_ResponsiveAlignmentControl
+                        label={__("Alignment", "frontis-blocks")}
+                        globalAlignment={submiteBtnAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ submiteBtnAlignment: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        options={ALIGN_ITEMS}
+                    />
+                </BaseControl>
+
+
+                <ToggleControl
+                    label={__("Show Icon", "frontis-blocks")}
+                    checked={submiteBtnIconSwitcher}
+                    onChange={(value) => setAttributes({ submiteBtnIconSwitcher: value })}
+                />
+
+                {submiteBtnIconSwitcher && (
+                    <BaseControl
+                        label={__("Icon", "frontis-blocks")}
+                    >
+                        <FBIconPicker
+                            value={submiteBtnIcon} 
+                            setIconHandler={(value) => setAttributes({ submiteBtnIcon: value })} 
+                        />
+                    </BaseControl>
+                )}
+            
+                
+                    <FB_ResponsiveAlignmentControl
+                        label={__("Icon Position", "frontis-blocks")}
+                        globalAlignment={submiteBtnIconPosition}
+                        setGlobalAlignment={(value) => setAttributes({ submiteBtnIconPosition: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        options={SUTMIT_BTN_POSITION}
+                    />
+
+            </PanelBody>
+
+            <PanelBody title={__("Form Settings", "frontis-blocks")} initialOpen={false}>
+                <TextControl
+                    label={__('Form Title', 'frontis-blocks')}
+                    value={formTitle}
+                    onChange={(value) => setAttributes({ formTitle: value })}
+                />
+
+                {/* <SelectControl
+                    label={__("Overflow", "frontis-blocks")}
+                    value={accordionOverflow}
+                    options={OVERFLOW_OP}
+                    onChange={(value) => setAttributes({ accordionOverflow: value })}
+                /> */}
+
+                <TextControl
+                    label={__('Email To', 'frontis-blocks')}
+                    value={formEmailTo}
+                    onChange={(value) => setAttributes({ formEmailTo: value })}
+                    help={__('This email will receive the form submission.', 'frontis-block')}
+                />
+                <TextControl
+                    label={__('Email CC (optional)', 'frontis-blocks')}
+                    value={formCCEmail}
+                    onChange={(value) => setAttributes({ formCCEmail: value })}
+                    help={__('This email will receive the form submission.', 'frontis-block')}
+                />
+                <TextControl
+                    label={__('Email BCC (optional)', 'frontis-blocks')}
+                    value={formBCCEmail}
+                    onChange={(value) => setAttributes({ formBCCEmail: value })}
+                    help={__('This will be the subject of the email.', 'frontis-block')}
+                />
+                <TextControl
+                    label={__('Email Subject', 'frontis-blocks')}
+                    value={formEmailSubject}
+                    onChange={(value) => setAttributes({ formEmailSubject: value })}
+                    help={__('This will be the subject of the email.', 'frontis-block')}
+                />
+            </PanelBody>
+
+            <PanelBody title={__("Form Submission", "frontis-blocks")} initialOpen={false}>
+                {/* <SelectControl
+                    label={__("Success Type", "frontis-blocks")}
+                    value={accordionOverflow}
+                    options={OVERFLOW_OP}
+                    onChange={(value) => setAttributes({ accordionOverflow: value })}
+                />
+                <SelectControl
+                    label={__("Message Position", "frontis-blocks")}
+                    value={accordionOverflow}
+                    options={OVERFLOW_OP}
+                    onChange={(value) => setAttributes({ accordionOverflow: value })}
+                /> */}
+                <TextareaControl
+                    label={__('Success Message', 'frontis-blocks')}
+                    value={formSuccessMessage}
+                    onChange={(value) => setAttributes({ formSuccessMessage: value })}
+                    help={__('This message will be shown when the form is submitted successfully.', 'frontis-blocks')}
+                />
+                <TextareaControl
+                    label={__('Fail Message', 'frontis-blocks')}
+                    value={formFailMessage}
+                    onChange={(value) => setAttributes({ formFailMessage: value })}
+                    help={__('This message will be shown when the form submission fails.', 'frontis-blocks')}
+                />
+                <TextareaControl
+                    label={__('Validation Message', 'frontis-blocks')}
+                    value={formValidtionMessage}
+                    onChange={(value) => setAttributes({ formValidtionMessage: value })}
+                    help={__('This message will be shown when the form validation fails.', 'frontis-blocks')}
+                />
+            </PanelBody>
+
         </>
     );
 
@@ -1825,847 +1875,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
      */
     const styleControls = (
         <>
-        <PanelBody
-            title={__("Items Icon", "frontis-blocks")}
-            initialOpen={true}
-        >
-            <ToggleControl
-                label={__(
-                    "Display Icon",
-                    "frontis-blocks"
-                )}
-                checked={displayIcon}
-                onChange={() =>
-                    setAttributes({
-                        displayIcon: !displayIcon,
-                    })
-                }
-            />
-            {displayIcon && (
-                <>
-                    <BaseControl
-                        label={__("Tab Icon", "frontis-blocks")}
-                    >
-                        <div className="fb-setting-switcher-container">
-                            <BaseControl
-                                className="fb-setting-switcher-panel-wrapper"
-                            >
-                                <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                    {ICON_SWITCHER.map((item, key) => (
-                                        <Button
-                                            key={key}
-                                            onClick={() => setAttributes({ tabIconSwitcher: item.value })} 
-                                            className={`fb-setting-switcher-panel-btn-switcher ${tabIconSwitcher === item.value ? 'active' : ''}`}
-                                        >
-                                            {item.label}
-                                        </Button>
-                                    ))}
-                                </ButtonGroup>
-                            </BaseControl>
-                        </div>
-                        { tabIconSwitcher === 'icon' &&
-                            <FBIconPicker
-                                value={tabIcon} 
-                                setIconHandler={titleTabIconHandler} 
-                            />
-                        }
-                        { tabIconSwitcher === 'image' &&
-                            <FB_BackgroundImageControl
-                                globalBackgroundImageUrl={tabImageUrl}
-                                setGlobalBackgroundImageUrl={(value) => setAttributes({ tabImageUrl: value })}
-                                globalBackgroundImageAlt={tabImageAlt}
-                                setGlobalBackgroundImageAlt={(value) => setAttributes({ tabImageAlt: value })}
-                                globalBackgroundImageID={tabImageID}
-                                setGlobalBackgroundImageID={(value) => setAttributes({ tabImageID: value })}
-                                globalBackgroundImagePosition={tabImagePosition}
-                                setGlobalBackgroundImagePosition={(value) => setAttributes({ tabImagePosition: value })}
-                                globalBackgroundImageAttachment={tabImageAttachment} 
-                                setGlobalBackgroundImageAttachment={(value) => setAttributes({ tabImageAttachment: value })}
-                                globalBackgroundImageRepeat={tabImageRepeat}
-                                setGlobalBackgroundImageRepeat={(value) => setAttributes({ tabImageRepeat: value })}
-                                globalBackgroundImageSize={tabImageSize}
-                                setGlobalBackgroundImageSize={(value) => setAttributes({ tabImageSize: value })}
-                            />
-                        }
-                    </BaseControl>
-
-                    <BaseControl
-                        label={__("Expanded Icon", "frontis-blocks")}
-                    >
-                        <div className="fb-setting-switcher-container">
-                            <BaseControl
-                                className="fb-setting-switcher-panel-wrapper"
-                            >
-                                <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                    {ICON_SWITCHER.map((item, key) => (
-                                        <Button
-                                            key={key}
-                                            onClick={() => setAttributes({ expandedIconSwitcher: item.value })} 
-                                            className={`fb-setting-switcher-panel-btn-switcher ${expandedIconSwitcher === item.value ? 'active' : ''}`}
-                                        >
-                                            {item.label}
-                                        </Button>
-                                    ))}
-                                </ButtonGroup>
-                            </BaseControl>
-                        </div>
-                        { expandedIconSwitcher === 'icon' &&
-                            <FBIconPicker
-                                value={expandedIcon} 
-                                setIconHandler={titleExpandedIconHandler} 
-                            />
-                        }
-                        { expandedIconSwitcher === 'image' &&
-                            <FB_BackgroundImageControl 
-                                globalBackgroundImageUrl={expandedImageUrl}
-                                setGlobalBackgroundImageUrl={(value) => setAttributes({ expandedImageUrl: value })}
-                                globalBackgroundImageAlt={expandedImageAlt}
-                                setGlobalBackgroundImageAlt={(value) => setAttributes({ expandedImageAlt: value })}
-                                globalBackgroundImageID={expandedImageID}
-                                setGlobalBackgroundImageID={(value) => setAttributes({ expandedImageID: value })}
-                                globalBackgroundImagePosition={expandedImagePosition}
-                                setGlobalBackgroundImagePosition={(value) => setAttributes({ expandedImagePosition: value })}
-                                globalBackgroundImageAttachment={expandedImageAttachment} 
-                                setGlobalBackgroundImageAttachment={(value) => setAttributes({ expandedImageAttachment: value })}
-                                globalBackgroundImageRepeat={expandedImageRepeat}
-                                setGlobalBackgroundImageRepeat={(value) => setAttributes({ expandedImageRepeat: value })}
-                                globalBackgroundImageSize={expandedImageSize}
-                                setGlobalBackgroundImageSize={(value) => setAttributes({ expandedImageSize: value })}
-                            />
-                        }
-                    </BaseControl>
-
-                    <FB_Range
-                        min={1}
-                        max={100}
-                        label={__("Icon Size", "frontis-blocks")}
-                        rangeValue={titleIconSize}
-                        onChangeHandler={titleIconSizeHandler}
-                        rangeUnitHandler={titleIconSizeUnitsHandler}
-                        deviceType={deviceType}
-                        units={titleIconSizeUnits}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={22}
-                    />
-
-                    <BaseControl
-                        label={__(
-                            "Icon Position",
-                            "frontis-blocks"
-                        )}
-                        id="fb-setting-text-alignment"
-                        className="fb-setting-text-alignment"
-                    >
-                        <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                            {ICON_POSITIONS.map((item) => (
-                                <Button
-                                    key={item.value}
-                                    onClick={() => setAttributes({ iconPosition: item.value })}
-                                    className={`fb-setting-text-alignment-single-btn ${iconPosition === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
-
-                    <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
-                        globalSwitcher={titleIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ titleIconColorSwitcher: value })}
-                    />
-                    
-                    {titleIconColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={titleIconColor}
-                            setGlobalColor={(value) => setAttributes({ titleIconColor: value === undefined ? '' : value })}
-                        />
-                    )}
-                    
-                    {titleIconColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={titleIconHoverColor}
-                            setGlobalColor={(value) => setAttributes({ titleIconHoverColor: value === undefined ? '' : value })}
-                        />
-                    )}
-                </>
-            )}
-        </PanelBody>
-
-        <PanelBody
-            title={__("Items Title", "frontis-blocks")}
-            initialOpen={false}
-        >
-            <BaseControl
-                label={__(
-                    "Title Align ",
-                    "frontis-blocks"
-                )}
-                id="fb-setting-text-alignment"
-                className="fb-setting-text-alignment"
-            >
-                <ButtonGroup className="fb-setting-text-alignment-group-btn">
-                    {TITLE_ALIGNMENT.map((item) => (
-                        <Button
-                            key={item.value}
-                            onClick={() => setAttributes({ titleAlignment: item.value })}
-                            className={`fb-setting-text-alignment-single-btn ${titleAlignment === item.value ? 'active' : ''}`}
-                        >
-                            {item.label}
-                        </Button>
-                    ))}
-                </ButtonGroup>
-            </BaseControl>
-
-            {titleAlignment !== 'between' && <FB_Range
-                min={1}
-                max={100}
-                label={__("Spacing", "frontis-blocks")}
-                rangeValue={titleSpacing}
-                onChangeHandler={titleSpacingHandler}
-                rangeUnitHandler={titleSpacingUnitsHandler}
-                deviceType={deviceType}
-                units={titleSpacingUnits}
-                setAttributes={setAttributes}
-                rangeStep={1}
-                resetFallbackValue={20}
-            />}
-
-            <FB_TypographyControl
-                globalTypoControlActive={true}
-                globalTypoSwitcher={titleGlobalTypoSwitcher}
-                storeGlobalTypographyData={(value) => setAttributes({ titleGlobalTypographyData: value })}
-
-                globalTypoType={titleGlobalTypoType}
-                onChangeGlobalTypoType={(value) => {
-                    setAttributes({ 
-                        titleGlobalTypoType: value, 
-                        titleGlobalTypoSwitcher: value === 'default' ? {...titleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...titleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                    })
-                }}
-
-                globalTypoOption={titleGlobalTypoOption}
-                onChangeGlobalTypoOption={(value) => setAttributes({ titleGlobalTypoOption: value })}
-
-                fontFamily={titleFontFamily}
-                onChangeFontFamily={(value) => setAttributes({ titleFontFamily: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                fontSize={titleFontSize}
-                onChangeFontSize={(value) => setAttributes({ titleFontSize: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, fontSize: value && false} })}
-
-                fontSizeUnits={titleFontSizeUnits}
-                onChangeFontSizeUnit={(value) => setAttributes({ titleFontSizeUnits: value })}
-
-                fontWeight={titleFontWeight}
-                onChangeFontWeight={(value) => setAttributes({ titleFontWeight: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                fontStyle={titleFontStyle}
-                onChangeFontStyle={(value) => setAttributes({ titleFontStyle: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                textTransform={titleTextTransform}
-                onChangeTextTransform={(value) => setAttributes({ titleTextTransform: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, textTransform: value && false} })}
-
-                textDecoration={titleTextDecoration}
-                onChangeTextDecoration={(value) => setAttributes({ titleTextDecoration: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                letterSpacing={titleLetterSpacing}
-                onChangeLetterSpacing={(value) => setAttributes({ titleLetterSpacing: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                letterSpacingUnits={titleLetterSpacingUnits}
-                onChangeLetterSpacingUnit={(value) => setAttributes({ titleLetterSpacingUnits: value })}
-
-                lineHeight={titleLineHeight}
-                onChangeLineHeight={(value) => setAttributes({ titleLineHeight: value, titleGlobalTypoSwitcher: {...titleGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                lineHeightUnits={titleLineHeightUnits}
-                onChangeLineHeightUnit={(value) => setAttributes({ titleLineHeightUnits: value })}
-
-                deviceType={deviceType}
-                setAttributes={setAttributes}
-            />
-
-            <FB_SwitcherControl
-                label={__("Color", "frontis-blocks")}
-                globalSwitcher={titleColorSwitcher}
-                setGlobalSwitcher={(value) => setAttributes({ titleColorSwitcher: value })}
-            />
-            
-            {titleColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={titleColor}
-                    setGlobalColor={(value) => setAttributes({ titleColor: value === undefined ? '' : value })}
-                />
-            )}
-            
-            {titleColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={titleHoverColor}
-                    setGlobalColor={(value) => setAttributes({ titleHoverColor: value === undefined ? '' : value })}
-                />
-            )}
-
-            <FB_BackgroundColorControl
-                label={__("Background Color", "frontis-blocks")}
-                        bgColorSwitcher={titleBgColorSwitcher}
-                        setBgColorSwitcher={(value) =>
-                            setAttributes({ titleBgColorSwitcher: value })
-                        }
-                        normalBackgroundType={titleBgType}
-                        setNormalBackgroundType={(value) =>
-                            setAttributes({ titleBgType: value })
-                        }
-                        normalClassicColor={titleBgClassicColor}
-                        setNormalClassicColor={(value) =>
-                            setAttributes({ titleBgClassicColor: value === undefined ? '' : value })
-                        }
-                        normalGradientColor={titleBgGradientColor}
-                        setNormalGradientColor={(value) =>
-                            setAttributes({ titleBgGradientColor: value === undefined ? null : value })
-                        }
-                        normalCustomGradientSwitcher={
-                            titleBgCustomGradientSwitcher
-                        }
-                        setNormalCustomGradientSwitcher={(value) =>
-                            setAttributes({
-                                titleBgCustomGradientSwitcher: value,
-                            })
-                        }
-                        normalCustomGradientInputValue={
-                            titleBgCustomGradientInputValue
-                        }
-                        setNormalCustomGradientInputValue={(value) =>
-                            setAttributes({
-                                titleBgCustomGradientInputValue: value,
-                            })
-                        }
-                        normalBackgroundImageUrl={titleBgImageUrl}
-                        setNormalBackgroundImageUrl={(value) =>
-                            setAttributes({ titleBgImageUrl: value })
-                        }
-                        normalBackgroundImageAlt={titleBgImageAlt}
-                        setNormalBackgroundImageAlt={(value) =>
-                            setAttributes({ titleBgImageAlt: value })
-                        }
-                        normalBackgroundImageID={titleBgImageID}
-                        setNormalBackgroundImageID={(value) =>
-                            setAttributes({ titleBgImageID: value })
-                        }
-                        normalBackgroundImagePosition={
-                            titleBgImagePosition
-                        }
-                        setNormalBackgroundImagePosition={(value) =>
-                            setAttributes({
-                                titleBgImagePosition: value,
-                            })
-                        }
-                        normalBackgroundImageAttachment={
-                            titleBgImageAttachment
-                        }
-                        setNormalBackgroundImageAttachment={(value) =>
-                            setAttributes({
-                                titleBgImageAttachment: value,
-                            })
-                        }
-                        normalBackgroundImageRepeat={
-                            titleBgImageRepeat
-                        }
-                        setNormalBackgroundImageRepeat={(value) =>
-                            setAttributes({
-                                titleBgImageRepeat: value,
-                            })
-                        }
-                        normalBackgroundImageSize={titleBgImageSize}
-                        setNormalBackgroundImageSize={(value) =>
-                            setAttributes({ titleBgImageSize: value })
-                        }
-                        hoverBackgroundType={titleBgHoverType}
-                        setHoverBackgroundType ={(value) =>
-                            setAttributes({ titleBgHoverType: value })
-                        }
-                        hoverClassicColor={titleBgHoverClassicColor}
-                        setHoverClassicColor={(value) =>
-                            setAttributes({ titleBgHoverClassicColor: value === undefined ? '' : value })
-                        }
-                        hoverGradientColor={titleBgHoverGradientColor}
-                        setHoverGradientColor={(value) =>
-                            setAttributes({ titleBgHoverGradientColor: value === undefined ? null : value })
-                        }
-                        hoverCustomGradientSwitcher={
-                            titleBgHoverCustomGradientSwitcher
-                        }
-                        setHoverCustomGradientSwitcher={(value) =>
-                            setAttributes({
-                                titleBgHoverCustomGradientSwitcher: value,
-                            })
-                        }
-                        hoverCustomGradientInputValue={
-                            titleBgHoverCustomGradientInputValue
-                        }
-                        setHoverCustomGradientInputValue={(value) =>
-                            setAttributes({
-                                titleBgHoverCustomGradientInputValue: value,
-                            })
-                        }
-                        hoverBackgroundImageUrl={titleBgHoverImageUrl}
-                        setBgHoverImageUrl={(value) =>
-                            setAttributes({ titleBgHoverImageUrl: value })
-                        }
-                        hoverBackgroundImageAlt={titleBgHoverImageAlt}
-                        setBgHoverImageAlt={(value) =>
-                            setAttributes({ titleBgHoverImageAlt: value })
-                        }
-                        hoverBackgroundImageID={titleBgHoverImageID}
-                        setBgHoverImageID={(value) =>
-                            setAttributes({ titleBgHoverImageID: value })
-                        }
-                        hoverBackgroundImagePosition={
-                            titleBgHoverImagePosition
-                        }
-                        setBgHoverImagePosition={(value) =>
-                            setAttributes({
-                                titleBgHoverImagePosition: value,
-                            })
-                        }
-                        hoverBackgroundImageAttachment={
-                            titleBgHoverImageAttachment
-                        }
-                        setBgHoverImageAttachment={(value) =>
-                            setAttributes({
-                                titleBgHoverImageAttachment: value,
-                            })
-                        }
-                        hoverBackgroundImageRepeat={
-                            titleBgHoverImageRepeat
-                        }
-                        setBgHoverImageRepeat={(value) =>
-                            setAttributes({
-                                titleBgHoverImageRepeat: value,
-                            })
-                        }
-                        hoverBackgroundImageSize={titleBgHoverImageSize}
-                        setBgHoverImageSize={(value) =>
-                            setAttributes({ titleBgHoverImageSize: value })
-                        }
-            />
-        
-            <FB_Range
-                min={1}
-                max={100}
-                label={__("Spacing", "frontis-blocks")}
-                rangeValue={prefixSuffixSpacing}
-                onChangeHandler={prefixSuffixSpacingHandler}
-                rangeUnitHandler={prefixSuffixSpacingUnitsHandler}
-                deviceType={deviceType}
-                units={prefixSuffixSpacingUnits}
-                setAttributes={setAttributes}
-                rangeStep={1}
-                resetFallbackValue={20}
-            />
-
-            <PanelBody
-                title={__("Title Prefix", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_Range
-                    min={1}
-                    max={100}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={titlePrefixIconSize}
-                    onChangeHandler={titlePrefixIconSizeHandler}
-                    rangeUnitHandler={titlePrefixIconSizeUnitsHandler}
-                    deviceType={deviceType}
-                    units={titlePrefixIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={20}
-                />
-            </PanelBody>
-            
-            <PanelBody
-                title={__("Title Suffix", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_Range
-                    min={1}
-                    max={100}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={titleSuffixIconSize}
-                    onChangeHandler={titleSuffixIconSizeHandler}
-                    rangeUnitHandler={titleSuffixIconSizeUnitsHandler}
-                    deviceType={deviceType}
-                    units={titleSuffixIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={20}
-                />
-            </PanelBody>
-        </PanelBody>
-
-        <PanelBody
-            title={__(
-                "Items Title Spacing",
-                "frontis-blocks"
-            )}
-            initialOpen={false}
-        >
-            <FB_Spacing 
-                label={__("Padding", "frontis-blocks")}
-                deviceType={deviceType}
-                spacingUnitsHandler={handleAccordionItemsPaddingUnitsHandler}
-                spacingUnits={accordionItemsPaddingUnits}
-                spacingDesktop={accordionItemsDesktopPadding}
-                spacingTablet={accordionItemsTabPadding}
-                spacingMobile={accordionItemsMobilePadding}
-                handleSpacingUnitHandler={handleAccordionItemsPaddingUnitChange}
-                spacingCombineBtn={accordionItemsPaddingLink}
-                spacingCombineBtnHandler={handleAccordionItemsPaddingCombineBtn}
-                setAttributes={setAttributes}
-            /> 
-        </PanelBody>
-
-        <PanelBody
-            title={__(
-                "Titles Border & Radius",
-                "frontis-blocks"
-            )}
-            initialOpen={false}
-        >
-                    <SelectControl
-                        label={__("Border Style", "frontis-blocks")}
-                        value={accordionItemsBorder}
-                        options={BORDER_STYLES}
-                        onChange={(value) => setAttributes({ accordionItemsBorder: value })}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Border Color", "frontis-blocks")}
-                        globalSwitcher={accordionItemsBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ accordionItemsBorderColorSwitcher: value })}
-                    />
-                    
-                    {accordionItemsBorderColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={accordionItemsBorderColor}
-                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderColor: value === undefined ? '' : value })}
-                        />
-                    )}
-                    
-                    {accordionItemsBorderColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={accordionItemsBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ accordionItemsBorderHoverColor: value === undefined ? '' : value })}
-                        />
-                    )}
-
-                    <FB_Spacing 
-                        label={__("Border", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleAccordionItemsBorderUnitsHandler}
-                        spacingUnits={accordionItemsBorderUnits}
-                        spacingDesktop={accordionItemsDesktopBorderWidth}
-                        spacingTablet={accordionItemsTabBorderWidth}
-                        spacingMobile={accordionItemsMobileBorderWidth}
-                        handleSpacingUnitHandler={handleAccordionItemsBorderUnitChange}
-                        spacingCombineBtn={accordionItemsBorderLink}
-                        spacingCombineBtnHandler={handleAccordionItemsBorderCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_Spacing 
-                        label={__("Border Radius", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleAccordionItemsBorderRadiusUnitsHandler}
-                        spacingUnits={accordionItemsBorderRadiusUnits}
-                        spacingDesktop={accordionItemsDesktopBorderRadiusWidth}
-                        spacingTablet={accordionItemsTabBorderRadiusWidth}
-                        spacingMobile={accordionItemsMobileBorderRadiusWidth}
-                        handleSpacingUnitHandler={handleAccordionItemsBorderRadiusUnitChange}
-                        spacingCombineBtn={accordionItemsBorderRadiusLink}
-                        spacingCombineBtnHandler={handleAccordionItemsBorderRadiusCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        globalSwitcher={accordionItemBoxShadowSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ accordionItemBoxShadowSwitcher: value })}
-                    />
-                    
-                    {accordionItemBoxShadowSwitcher === 'normal' && (
-                        <FB_BoxShadowControl
-                            label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) =>
-                                setAttributes({ accordionItemBoxShadowValues: value })
-                            }
-                            initialShadowValue={accordionItemBoxShadowValues}
-                            onBoxShadowStyleChange={(value) =>
-                                setAttributes({
-                                    accordionItemBoxShadowCssValue: value,
-                                })
-                            }
-                        />
-                    )}
-                    
-                    {accordionItemBoxShadowSwitcher === 'hover' && (
-                        <FB_BoxShadowControl
-                            label={__("Hover Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) =>
-                                setAttributes({ accordionItemHoverBoxShadowValues: value })
-                            }
-                            initialShadowValue={accordionItemHoverBoxShadowValues}
-                            onBoxShadowStyleChange={(value) =>
-                                setAttributes({
-                                    accordionItemHoverBoxShadowCssValue: value,
-                                })
-                            }
-                        />
-                    )}
-        </PanelBody>
-
-        <PanelBody title="Item Content" initialOpen={false} >
-            <FB_BackgroundColorControl
-                        bgColorSwitcher={contentBgColorSwitcher}
-                        setBgColorSwitcher={(value) =>
-                            setAttributes({ contentBgColorSwitcher: value })
-                        }
-                        normalBackgroundType={contentBgType}
-                        setNormalBackgroundType={(value) =>
-                            setAttributes({ contentBgType: value })
-                        }
-                        normalClassicColor={contentBgClassicColor}
-                        setNormalClassicColor={(value) =>
-                            setAttributes({ contentBgClassicColor: value === undefined ? '' : value })
-                        }
-                        normalGradientColor={contentBgGradientColor}
-                        setNormalGradientColor={(value) =>
-                            setAttributes({ contentBgGradientColor: value === undefined ? null : value })
-                        }
-                        normalCustomGradientSwitcher={
-                            contentBgCustomGradientSwitcher
-                        }
-                        setNormalCustomGradientSwitcher={(value) =>
-                            setAttributes({
-                                contentBgCustomGradientSwitcher: value,
-                            })
-                        }
-                        normalCustomGradientInputValue={
-                            contentBgCustomGradientInputValue
-                        }
-                        setNormalCustomGradientInputValue={(value) =>
-                            setAttributes({
-                                contentBgCustomGradientInputValue: value,
-                            })
-                        }
-                        normalBackgroundImageUrl={contentBgImageUrl}
-                        setNormalBackgroundImageUrl={(value) =>
-                            setAttributes({ contentBgImageUrl: value })
-                        }
-                        normalBackgroundImageAlt={contentBgImageAlt}
-                        setNormalBackgroundImageAlt={(value) =>
-                            setAttributes({ contentBgImageAlt: value })
-                        }
-                        normalBackgroundImageID={contentBgImageID}
-                        setNormalBackgroundImageID={(value) =>
-                            setAttributes({ contentBgImageID: value })
-                        }
-                        normalBackgroundImagePosition={
-                            contentBgImagePosition
-                        }
-                        setNormalBackgroundImagePosition={(value) =>
-                            setAttributes({
-                                contentBgImagePosition: value,
-                            })
-                        }
-                        normalBackgroundImageAttachment={
-                            contentBgImageAttachment
-                        }
-                        setNormalBackgroundImageAttachment={(value) =>
-                            setAttributes({
-                                contentBgImageAttachment: value,
-                            })
-                        }
-                        normalBackgroundImageRepeat={
-                            contentBgImageRepeat
-                        }
-                        setNormalBackgroundImageRepeat={(value) =>
-                            setAttributes({
-                                contentBgImageRepeat: value,
-                            })
-                        }
-                        normalBackgroundImageSize={contentBgImageSize}
-                        setNormalBackgroundImageSize={(value) =>
-                            setAttributes({ contentBgImageSize: value })
-                        }
-                        hoverBackgroundType={contentBgHoverType}
-                        setHoverBackgroundType={(value) =>
-                            setAttributes({ contentBgHoverType: value })
-                        }
-                        hoverClassicColor={contentBgHoverClassicColor}
-                        setHoverClassicColor={(value) =>
-                            setAttributes({ contentBgHoverClassicColor: value === undefined ? '' : value })
-                        }
-                        hoverGradientColor={contentBgHoverGradientColor}
-                        setHoverGradientColor={(value) =>
-                            setAttributes({ contentBgHoverGradientColor: value === undefined ? null : value })
-                        }
-                        hoverCustomGradientSwitcher={
-                            contentBgHoverCustomGradientSwitcher
-                        }
-                        setHoverCustomGradientSwitcher={(value) =>
-                            setAttributes({
-                                contentBgHoverCustomGradientSwitcher: value,
-                            })
-                        }
-                        hoverCustomGradientInputValue={
-                            contentBgHoverCustomGradientInputValue
-                        }
-                        setHoverCustomGradientInputValue={(value) =>
-                            setAttributes({
-                                contentBgHoverCustomGradientInputValue: value,
-                            })
-                        }
-                        hoverBackgroundImageUrl={contentBgHoverImageUrl}
-                        setBgHoverImageUrl={(value) =>
-                            setAttributes({ contentBgHoverImageUrl: value })
-                        }
-                        hoverBackgroundImageAlt={contentBgHoverImageAlt}
-                        setBgHoverImageAlt={(value) =>
-                            setAttributes({ contentBgHoverImageAlt: value })
-                        }
-                        hoverBackgroundImageID={contentBgHoverImageID}
-                        setBgHoverImageID={(value) =>
-                            setAttributes({ contentBgHoverImageID: value })
-                        }
-                        hoverBackgroundImagePosition={
-                            contentBgHoverImagePosition
-                        }
-                        setBgHoverImagePosition={(value) =>
-                            setAttributes({
-                                contentBgHoverImagePosition: value,
-                            })
-                        }
-                        hoverBackgroundImageAttachment={
-                            contentBgHoverImageAttachment
-                        }
-                        setBgHoverImageAttachment={(value) =>
-                            setAttributes({
-                                contentBgHoverImageAttachment: value,
-                            })
-                        }
-                        hoverBackgroundImageRepeat={
-                            contentBgHoverImageRepeat
-                        }
-                        setBgHoverImageRepeat={(value) =>
-                            setAttributes({
-                                contentBgHoverImageRepeat: value,
-                            })
-                        }
-                        hoverBackgroundImageSize={contentBgHoverImageSize}
-                        setBgHoverImageSize={(value) =>
-                            setAttributes({ contentBgHoverImageSize: value })
-                        }
-            />
-
-            <SelectControl
-                label={__("Border Style", "frontis-blocks")}
-                value={contentBorder}
-                options={BORDER_STYLES}
-                onChange={(value) => setAttributes({ contentBorder: value })}
-            />
-
-            <FB_SwitcherControl
-                label={__("Border Color", "frontis-blocks")}
-                globalSwitcher={contentBorderColorSwitcher}
-                setGlobalSwitcher={(value) => setAttributes({ contentBorderColorSwitcher: value })}
-            />
-            
-            {contentBorderColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={contentBorderColor}
-                    setGlobalColor={(value) => setAttributes({ contentBorderColor: value === undefined ? '' : value })}
-                />
-            )}
-            
-            {contentBorderColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={contentBorderHoverColor}
-                    setGlobalColor={(value) => setAttributes({ contentBorderHoverColor: value === undefined ? '' : value })}
-                />
-            )}
-
-            <FB_Spacing
-                label={__("Border", "frontis-blocks")}
-                deviceType={deviceType}
-                spacingUnitsHandler={handleContentBorderUnitsHandler}
-                spacingUnits={contentBorderUnits}
-                spacingDesktop={contentDesktopBorderWidth}
-                spacingTablet={contentTabBorderWidth}
-                spacingMobile={contentMobileBorderWidth}
-                handleSpacingUnitHandler={handleContentBorderUnitChange}
-                spacingCombineBtn={contentBorderLink}
-                spacingCombineBtnHandler={handleContentBorderCombineBtn}
-                setAttributes={setAttributes}
-            />
-
-            <FB_Spacing 
-                label={__("Border Radius", "frontis-blocks")}
-                deviceType={deviceType}
-                spacingUnitsHandler={handleContentBorderRadiusUnitsHandler}
-                spacingUnits={contentBorderRadiusUnits}
-                spacingDesktop={contentDesktopBorderRadiusWidth}
-                spacingTablet={contentTabBorderRadiusWidth}
-                spacingMobile={contentMobileBorderRadiusWidth}
-                handleSpacingUnitHandler={handleContentBorderRadiusUnitChange}
-                spacingCombineBtn={contentBorderRadiusLink}
-                spacingCombineBtnHandler={handleContentBorderRadiusCombineBtn}
-                setAttributes={setAttributes}
-            />
-
-            <FB_SwitcherControl
-                label={__("Box Shadow", "frontis-blocks")}
-                globalSwitcher={contentBoxShadowSwitcher}
-                setGlobalSwitcher={(value) => setAttributes({ contentBoxShadowSwitcher: value })}
-            />
-            
-            {contentBoxShadowSwitcher === 'normal' && (
-                <FB_BoxShadowControl
-                    label={__("Normal Shadow", "frontis-blocks")}
-                    onBoxShadowChange={(value) =>
-                        setAttributes({ contentBoxShadowValues: value })
-                    }
-                    initialShadowValue={contentBoxShadowValues}
-                    onBoxShadowStyleChange={(value) =>
-                        setAttributes({
-                            contentBoxShadowCssValue: value,
-                        })
-                    }
-                />
-            )}
-            
-            {contentBoxShadowSwitcher === 'hover' && (
-                <FB_BoxShadowControl
-                    label={__("Hover Shadow", "frontis-blocks")}
-                    onBoxShadowChange={(value) =>
-                        setAttributes({ contentHoverBoxShadowValues: value })
-                    }
-                    initialShadowValue={contentHoverBoxShadowValues}
-                    onBoxShadowStyleChange={(value) =>
-                        setAttributes({
-                            contentHoverBoxShadowCssValue: value,
-                        })
-                    }
-                />
-            )}
-        </PanelBody>
         </>
     );
         

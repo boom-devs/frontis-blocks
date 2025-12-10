@@ -12,11 +12,81 @@ const attributes = {
         default: 'Desktop'
     },
 
-    highlightColor: {
+    fieldLabelSwitcher: {
+        type: 'boolean',
+        default: true,
+    },
+    fieldIconSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    fieldRequiredSwitcher: {
+        type: 'boolean',
+        default: true,
+    },
+    fieldRequiredSymbolSwitcher: {
+        type: 'boolean',
+        default: true,
+    },
+
+    submiteBtnLabel: {
+        type: 'string',
+        default: 'Submit',
+    },
+    submiteBtnIconSwitcher: {
+        type: 'boolean',
+        default: true,
+    },
+    submiteBtnIcon: {
         type: 'string',
         default: '',
     },
-    hoverHighlightColor: {
+    submiteBtnAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    submiteBtnIconPosition: {
+        type: 'object',
+        default: {
+            Desktop: 'right',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+
+    formTitle: {
+        type: 'string',
+        default: '',
+    },
+    formEmailTo: {
+        type: 'string',
+        default: '',
+    },
+    formCCEmail: {
+        type: 'string',
+        default: '',
+    },
+    formBCCEmail: {
+        type: 'string',
+        default: '',
+    },
+    formEmailSubject: {
+        type: 'string',
+        default: '',
+    },
+    formSuccessMessage: {
+        type: 'string',
+        default: '',
+    },
+    formFailMessage: {
+        type: 'string',
+        default: '',
+    },
+    formValidtionMessage: {
         type: 'string',
         default: '',
     },

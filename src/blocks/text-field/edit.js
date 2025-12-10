@@ -30,15 +30,10 @@ const Edit = (props) => {
         fieldDefaultValue,
         fieldCustomNameAttribute,
 
-        inheritedFieldType,
         inheritedFieldIconSwitcher,
         inheritedFieldLabelSwitcher,
-        inheritedFieldLabel,
-        inheritedFieldPlaceholderSwitcher,
-        inheritedFieldPlaceholder,
         inheritedFieldRequiredSwitcher,
         inheritedFieldRequiredSymbolSwitcher,
-        inheritedFieldRequiredText,
 
         textFieldGlobalWraperID,
         textFieldGlobalWraperClass,
@@ -48,40 +43,30 @@ const Edit = (props) => {
 
     useEffect(() => {
         setAttributes({
-            inheritedFieldType:  context["fb/formInheritedFieldType"],
+            inheritedParentBlockID:  context["fb/formBuilderParentBlockID"],
             inheritedFieldLabelSwitcher: context["fb/formInheritedLabelSwitcher"],
-            inheritedFieldLabel: context["fb/formInheritedLabel"],
-            inheritedFieldPlaceholder: context["fb/formInheritedPlaceholder"],
             inheritedFieldIconSwitcher: context["fb/formInheritedIconSwitcher"],
             inheritedFieldRequiredSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
             inheritedFieldRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
-            inheritedFieldRequiredText: context["fb/formInheritedRequiredText"],
         })
     }, [
-        context["fb/formInheritedFieldType"],
+        context["fb/formBuilderParentBlockID"],
         context["fb/formInheritedIconSwitcher"],
         context["fb/formInheritedLabelSwitcher"],
-        context["fb/formInheritedLabel"],
-        context["fb/formInheritedPlaceholder"],
         context["fb/formInheritedRequiredFieldSwitcher"],
         context["fb/formInheritedRequiredSymbolSwitcher"],
-        context["fb/formInheritedRequiredText"],
     ])
 
     const blockProps = useBlockProps({
         className: `fb-text-field-wrapper fb-field-group fb-form-group ${blockID}`,
     });
 
-    const mergeFieldType = fieldType ? fieldType : inheritedFieldType;
     const mergeFieldLabelSwitcher = fieldLabelSwitcher ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
-    const mergeFieldLabel = fieldLabel ? fieldLabel : inheritedFieldLabel;
-    const mergeFieldPlaceholder = fieldPlaceholder ? fieldPlaceholder : inheritedFieldPlaceholder;
     const mergeFieldIconSwitcher = fieldIconSwitcher ? fieldIconSwitcher : inheritedFieldIconSwitcher;
     const mergeFieldRequiredSwitcher = fieldRequiredSwitcher ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
     const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
-    const mergeFieldRequiredText = fieldRequiredText ? fieldRequiredText : inheritedFieldRequiredText;
 
-    const defaultNameAttribute = `fb_${mergeFieldType}_${blockID}`;
+    const defaultNameAttribute = `fb_${fieldType}_${blockID}`;
 
 
     return (
@@ -95,7 +80,8 @@ const Edit = (props) => {
                             <RichText
                                 tagName="label"
                                 className="fb-form-label fb-text-field-label"
-                                value={mergeFieldLabel ? mergeFieldLabel : 'Label'}
+                                value={fieldLabel}
+                                placeholder={__('Label', 'frontis-blocks')}
                                 onChange={(value) => setAttributes({ fieldLabel: value })}
                             />
                             {mergeFieldRequiredSymbolSwitcher && (
@@ -106,8 +92,8 @@ const Edit = (props) => {
                     <div className="fb-form-input-wrapper">
                         <div className="fb-form-input fb-text-field-input">
                             <input
-                                type={mergeFieldType ? mergeFieldType : 'text'}
-                                placeholder={mergeFieldPlaceholder ? mergeFieldPlaceholder : 'Enter your text here'}
+                                type={fieldType ? fieldType : 'text'}
+                                placeholder={fieldPlaceholder ? fieldPlaceholder : 'Enter your text here'}
                                 name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
                                 defaultValue={fieldDefaultValue ? fieldDefaultValue : ''}
                                 required={mergeFieldRequiredSwitcher ? true : false}
@@ -119,7 +105,7 @@ const Edit = (props) => {
                             )}
                         </div>
                         {mergeFieldRequiredSwitcher && (
-                            <div className="fb-field-required-text fb-help-text">{mergeFieldRequiredText ? mergeFieldRequiredText : 'This field is required'}</div>
+                            <div className="fb-field-required-text fb-help-text">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
                         )}
                     </div>
                 </div>

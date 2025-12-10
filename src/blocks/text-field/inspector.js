@@ -58,15 +58,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldMinHeight,
 
 
-        inheritedFieldType,
         inheritedFieldIconSwitcher,
         inheritedFieldLabelSwitcher,
-        inheritedFieldLabel,
-        inheritedFieldPlaceholderSwitcher,
-        inheritedFieldPlaceholder,
         inheritedFieldRequiredSwitcher,
         inheritedFieldRequiredSymbolSwitcher,
-        inheritedFieldRequiredText,
 
 
         // Accordion Item Advance
@@ -401,13 +396,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         }, [fbAccordionItemStyleTwo, customCss]);
 
     const mergeFieldLabelSwitcher = fieldLabelSwitcher ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
-    const mergeFieldLabel = fieldLabel ? fieldLabel : inheritedFieldLabel;
-    const mergeFieldPlaceholderSwitcher = fieldPlaceholderSwitcher ? fieldPlaceholderSwitcher : inheritedFieldPlaceholderSwitcher;
-    const mergeFieldPlaceholder = fieldPlaceholder ? fieldPlaceholder : inheritedFieldPlaceholder;
     const mergeFieldIconSwitcher = fieldIconSwitcher ? fieldIconSwitcher : inheritedFieldIconSwitcher;
     const mergeFieldRequiredSwitcher = fieldRequiredSwitcher ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
     const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
-    const mergeFieldRequiredText = fieldRequiredText ? fieldRequiredText : inheritedFieldRequiredText;
     /**
      * Inspector General Controls
      */
@@ -448,19 +439,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 {mergeFieldLabelSwitcher && (
                     <TextControl
                         label={__('Field Label', 'frontis-blocks')}
-                        value={mergeFieldLabel}
+                        value={fieldLabel}
                         onChange={(value) => setAttributes({ fieldLabel: value })}
                     />
                 )}
                 <TextControl
                     label={__('Placeholder', 'frontis-blocks')}
-                    value={mergeFieldPlaceholder}
+                    value={fieldPlaceholder}
                     onChange={(value) => setAttributes({ fieldPlaceholder: value })}
                 />
                 {mergeFieldRequiredSwitcher && (
                     <TextareaControl
                         label={__('Required Message', 'frontis-blocks')}
-                        value={mergeFieldRequiredText}
+                        value={fieldRequiredText}
                         onChange={(value) => setAttributes({ fieldRequiredText: value })}
                         help={__('This message will be shown when the field is required', 'frontis-blocks')}
                     />

@@ -15,6 +15,7 @@ import {
     __experimentalHStack as HStack,
     RangeControl,
     SelectControl,
+    TextareaControl,
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, FIELD_TYPES, MEDIA_TYPES } from "./constants/constants";
@@ -31,10 +32,11 @@ import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 
+
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
-		parentBlockID,
+        parentBlockID,
         // deviceType,
 
         // general
@@ -45,7 +47,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldIcon,
         fieldPlaceholderSwitcher,
         fieldPlaceholder,
-        fieldRequiredFieldSwitcher,
+        fieldRequiredSwitcher,
         fieldRequiredSymbolSwitcher,
         fieldRequiredText,
         fieldDefaultValue,
@@ -56,15 +58,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldMinHeight,
 
 
-        inheritedFieldType,
         inheritedFieldIconSwitcher,
         inheritedFieldLabelSwitcher,
-        inheritedFieldLabel,
-        inheritedFieldPlaceholderSwitcher,
-        inheritedFieldPlaceholder,
-        inheritedFieldRequiredFieldSwitcher,
+        inheritedFieldRequiredSwitcher,
         inheritedFieldRequiredSymbolSwitcher,
-        inheritedFieldRequiredText,
 
 
         // Accordion Item Advance
@@ -100,201 +97,201 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     }, [clientId]);
 
     const titlePfIconHandler = (IconName) => {
-		setAttributes({titlePrefixIcon: IconName})
-	}
+        setAttributes({titlePrefixIcon: IconName})
+    }
     const titleSfIconHandler = (IconName) => {
-		setAttributes({titleSuffixIcon: IconName})
-	}
+        setAttributes({titleSuffixIcon: IconName})
+    }
     
     // accordionItem content margin
     const handleAccordionItemMarginUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( accordionItemMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						accordionItemDesktopMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						accordionItemTabMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						accordionItemMobileMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {accordionItemDesktopMargin: {...accordionItemDesktopMargin, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {accordionItemTabMargin: {...accordionItemTabMargin, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {accordionItemMobileMargin: {...accordionItemMobileMargin, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	
-	}
-	
-	const handleAccordionItemMarginCombineBtn = () => {
-		setAttributes( {accordionItemMarginLink: !accordionItemMarginLink} );
-	}
-	
-	const handleAccordionItemMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			accordionItemMarginUnits: {
-				...accordionItemMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	
-	const accordionItemMarginDesktopWidth = `${accordionItemDesktopMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	const accordionItemMarginTabletWidth = `${accordionItemTabMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	const accordionItemMarginMobileWidth = `${accordionItemMobileMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	
-	// accordionItem Padding Functionb
-	const handleAccordionItemPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( accordionItemPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						accordionItemDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						accordionItemTabPadding: {
-							top: value,
-							right: value,	
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						accordionItemMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {accordionItemDesktopPadding: {...accordionItemDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {accordionItemTabPadding: {...accordionItemTabPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {accordionItemMobilePadding: {...accordionItemMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	
-	}
-	
-	const handleAccordionItemPaddingCombineBtn = () => {
-		setAttributes( {accordionItemPaddingLink: !accordionItemPaddingLink} );
-	}
-	
-	const handleAccordionItemPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			accordionItemPaddingUnits: {
-				...accordionItemPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	
-	const accordionItemPaddingDesktopWidth = `${accordionItemDesktopPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-	const accordionItemPaddingTabletWidth = `${accordionItemTabPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-	const accordionItemPaddingMobileWidth = `${accordionItemMobilePadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+        const value = event.target.value;
+        if ( accordionItemMarginLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        accordionItemDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        accordionItemTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        accordionItemMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {accordionItemDesktopMargin: {...accordionItemDesktopMargin, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {accordionItemTabMargin: {...accordionItemTabMargin, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {accordionItemMobileMargin: {...accordionItemMobileMargin, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    
+    }
+    
+    const handleAccordionItemMarginCombineBtn = () => {
+        setAttributes( {accordionItemMarginLink: !accordionItemMarginLink} );
+    }
+    
+    const handleAccordionItemMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            accordionItemMarginUnits: {
+                ...accordionItemMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    
+    const accordionItemMarginDesktopWidth = `${accordionItemDesktopMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+    const accordionItemMarginTabletWidth = `${accordionItemTabMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+    const accordionItemMarginMobileWidth = `${accordionItemMobileMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+    
+    // accordionItem Padding Functionb
+    const handleAccordionItemPaddingUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( accordionItemPaddingLink ) {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        accordionItemDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        accordionItemTabPadding: {
+                            top: value,
+                            right: value,	
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        accordionItemMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {accordionItemDesktopPadding: {...accordionItemDesktopPadding, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {accordionItemTabPadding: {...accordionItemTabPadding, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {accordionItemMobilePadding: {...accordionItemMobilePadding, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    
+    }
+    
+    const handleAccordionItemPaddingCombineBtn = () => {
+        setAttributes( {accordionItemPaddingLink: !accordionItemPaddingLink} );
+    }
+    
+    const handleAccordionItemPaddingUnitsHandler = (unit) => {
+        setAttributes( {
+            accordionItemPaddingUnits: {
+                ...accordionItemPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    
+    const accordionItemPaddingDesktopWidth = `${accordionItemDesktopPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+    const accordionItemPaddingTabletWidth = `${accordionItemTabPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+    const accordionItemPaddingMobileWidth = `${accordionItemMobilePadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.left}${accordionItemPaddingUnits[deviceType]}`;
 
-	const fbAccordionItemStyle = useMemo(
-		() => `
-		.fb-accordion-item-main-wrapper.${blockID} {
-			position: relative;
-			${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
+    const fbAccordionItemStyle = useMemo(
+        () => `
+        .fb-accordion-item-main-wrapper.${blockID} {
+            position: relative;
+            ${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
-		}
-		
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			${accordionItemPaddingDesktopWidth && accordionItemDesktopPadding?.top ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth && accordionItemDesktopMargin?.top ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
-			transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
-			display: block;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
-			margin: 0;
-		  }
-	  
-		  @media only screen and (max-width: 1024px) {
+        }
+        
+          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+            ${accordionItemPaddingDesktopWidth && accordionItemDesktopPadding?.top ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
+            ${accordionItemMarginDesktopWidth && accordionItemDesktopMargin?.top ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+            transition: all 0.3s ease-in-out;
+          }
+      
+          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
+            display: block;
+          }
+      
+          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
+            margin: 0;
+          }
+      
+          @media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingTabletWidth && accordionItemTabPadding?.top ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-			  ${accordionItemMarginTabletWidth && accordionItemTabMargin?.top ? `margin: ${accordionItemMarginTabletWidth};` : ''}
-			}
-		  }
-	  
-		  @media only screen and (max-width: 767px) {
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+              ${accordionItemPaddingTabletWidth && accordionItemTabPadding?.top ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+              ${accordionItemMarginTabletWidth && accordionItemTabMargin?.top ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+            }
+          }
+      
+          @media only screen and (max-width: 767px) {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingMobileWidth && accordionItemMobilePadding?.top ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-			  ${accordionItemMarginMobileWidth && accordionItemMobileMargin?.top ? `margin: ${accordionItemMarginMobileWidth};` : ''}
-			}
-		  }
-		`,
-		[
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+              ${accordionItemPaddingMobileWidth && accordionItemMobilePadding?.top ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+              ${accordionItemMarginMobileWidth && accordionItemMobileMargin?.top ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+            }
+          }
+        `,
+        [
             blockID,
             deviceType,
     
@@ -308,76 +305,76 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             accordionItemDesktopMargin,
             accordionItemTabMargin,
             accordionItemMobileMargin,
-		]
-	  );
-	  
-	  const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
+        ]
+      );
+      
+      const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
 
-	  useEffect(() => {
-		setAttributes({
-		  blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
-		});
-	  }, [fbAccordionItemStyle, customCss]);
+      useEffect(() => {
+        setAttributes({
+          blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
+        });
+      }, [fbAccordionItemStyle, customCss]);
 
-	  const editorStyle = `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+      const editorStyle = `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-	  const fbAccordionItemStyleTwo = useMemo(() => `
-		.fb-accordion-item-main-wrapper.${blockID} {
-			position: relative;
-			display: block;
-			overflow: hidden;
-			${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
+      const fbAccordionItemStyleTwo = useMemo(() => `
+        .fb-accordion-item-main-wrapper.${blockID} {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            ${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
-		}
+        }
 
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
-			display: none;
-			margin: 0;
-			padding: 0;
+        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
+            display: none;
+            margin: 0;
+            padding: 0;
             height: 0;
             position: absolute;
-			visibility: hidden;
-			transition: all 0.3s ease-in-out;
-		}
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
             display: block;
             height: auto;
-			position: static;
-			visibility: visible;
+            position: static;
+            visibility: visible;
             transition: all 0.3s ease-in-out;
-		}
+        }
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
             ${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
+            ${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
             transition: all 0.3s ease-in-out;
-		}
+        }
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
             margin: 0;
             transition: all 0.3s ease-in-out;
-		}
+        }
 
 
-		@media only screen and (max-width: 1024px) {
+        @media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-				${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
-			}
-		}
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+                ${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
+                ${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
+            }
+        }
 
-		@media only screen and (max-width: 767px) {
+        @media only screen and (max-width: 767px) {
             .fb-accordion-item-main-wrapper.${blockID} {
                 ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
             }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-				${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
-			}
-		}
-		`, [
-			blockID,
+            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+                ${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
+                ${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
+            }
+        }
+        `, [
+            blockID,
             deviceType,
     
             // Accordion Item Advance
@@ -390,14 +387,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             accordionItemDesktopMargin,
             accordionItemTabMargin,
             accordionItemMobileMargin,
-		]);
+        ]);
 
-		useEffect(() => {
+        useEffect(() => {
             setAttributes({
                 blockStyleTwo: `${fbAccordionItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
             });
-		}, [fbAccordionItemStyleTwo, customCss]);
+        }, [fbAccordionItemStyleTwo, customCss]);
 
+    const mergeFieldLabelSwitcher = fieldLabelSwitcher ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
+    const mergeFieldIconSwitcher = fieldIconSwitcher ? fieldIconSwitcher : inheritedFieldIconSwitcher;
+    const mergeFieldRequiredSwitcher = fieldRequiredSwitcher ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
+    const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
     /**
      * Inspector General Controls
      */
@@ -412,191 +413,71 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 />
                 <ToggleControl
                     label={__("Show Label", "frontis-blocks")}
-                    checked={clickable}
-                    onChange={(value) => setAttributes({ clickable: value })}
+                    checked={mergeFieldLabelSwitcher}
+                    onChange={(value) => setAttributes({ fieldLabelSwitcher: value })}
                 />
                 <ToggleControl
                     label={__("Is It Required Field?", "frontis-blocks")}
-                    checked={clickable}
-                    onChange={(value) => setAttributes({ clickable: value })}
+                    checked={mergeFieldRequiredSwitcher}
+                    onChange={(value) => setAttributes({ fieldRequiredSwitcher: value })}
                 />
-                <ToggleControl
-                    label={__("Show Required Symbol", "frontis-blocks")}
-                    checked={clickable}
-                    onChange={(value) => setAttributes({ clickable: value })}
-                />
+                {mergeFieldRequiredSwitcher && (
+                    <ToggleControl
+                        label={__("Show Required Symbol", "frontis-blocks")}
+                        checked={mergeFieldRequiredSymbolSwitcher}
+                        onChange={(value) => setAttributes({ fieldRequiredSymbolSwitcher: value })}
+                    />
+                )}
                 <ToggleControl
                     label={__("Show icon", "frontis-blocks")}
-                    checked={clickable}
-                    onChange={(value) => setAttributes({ clickable: value })}
-                />
-                <TextControl
-                    label="Title Text"
-                    value={title}
-                    onChange={(text) => setAttributes({ title: text })}
+                    checked={mergeFieldIconSwitcher}
+                    onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
                 />
             </PanelBody>
 
-            <PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
-                <PanelBody title={__("Title Prefix", "frontis-blocks")}>
-                    <div className="fb-setting-switcher-container">
-                        <BaseControl
-                            className="fb-setting-switcher-panel-wrapper"
-                        >
-                            <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                {MEDIA_TYPES.map((item, key) => (
-                                    <Button
-                                        key={key}
-                                        onClick={() => setAttributes({ titlePrefixType: item.value })} 
-                                        className={`fb-setting-switcher-panel-btn-switcher ${titlePrefixType === item.value ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                        </BaseControl>
-                    </div>
-
-                    {titlePrefixType !== "none" && (
-                        <>
-                            {titlePrefixType === "icon" && (
-                                <BaseControl label={__("Icon", "frontis-blocks")}>
-                                    <FBIconPicker 
-                                        value={titlePrefixIcon} 
-                                        setIconHandler={titlePfIconHandler} 
-                                    />
-                                </BaseControl>
-                            )}
-
-                            {(titlePrefixType === "icon") && (
-                                    <>
-                                        <FB_SwitcherControl
-                                            label={__("Color", "frontis-blocks")}
-                                            globalSwitcher={titlePrefixColorSwitcher}
-                                            setGlobalSwitcher={(value) => setAttributes({ titlePrefixColorSwitcher: value })}
-                                        />
-                                        
-                                        {titlePrefixColorSwitcher === 'normal' && (
-                                            <FB_ColorControl
-                                                label={__("Normal Color", "frontis-blocks")}
-                                                globalColor={titlePrefixColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                        
-                                        {titlePrefixColorSwitcher === 'hover' && (
-                                            <FB_ColorControl
-                                                label={__("Hover Color", "frontis-blocks")}
-                                                globalColor={titlePrefixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                    </>
-                                )}
-
-                            {titlePrefixType === "image" && (
-                                <FB_BackgroundImageControl
-                                    globalBackgroundImageUrl={titlePrefixImgUrl}
-                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ titlePrefixImgUrl: value })}
-                                    globalBackgroundImageAlt={titlePrefixImgAlt}
-                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ titlePrefixImgAlt: value })}
-                                    globalBackgroundImageID={titlePrefixImgID}
-                                    setGlobalBackgroundImageID={(value) => setAttributes({ titlePrefixImgID: value })}
-                                    globalBackgroundImagePosition={titlePrefixImgPosition}
-                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ titlePrefixImgPosition: value })}
-                                    globalBackgroundImageAttachment={titlePrefixImgAttachment} 
-                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ titlePrefixImgAttachment: value })}
-                                    globalBackgroundImageRepeat={titlePrefixImgRepeat}
-                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ titlePrefixImgRepeat: value })}
-                                    globalBackgroundImageSize={titlePrefixImgSize}
-                                    setGlobalBackgroundImageSize={(value) => setAttributes({ titlePrefixImgSize: value })}
-                                />
-                                    
-                            )}
-                        </>
-                    )}
-                </PanelBody>
-
-                <PanelBody title={__("Title Suffix", "frontis-blocks")}>
-                    <div className="fb-setting-switcher-container">
-                        <BaseControl
-                            className="fb-setting-switcher-panel-wrapper"
-                        >
-                            <ButtonGroup className="fb-setting-switcher-panel-btn">
-                                {MEDIA_TYPES.map((item, key) => (
-                                    <Button
-                                        key={key}
-                                        onClick={() => setAttributes({ titleSuffixType: item.value })} 
-                                        className={`fb-setting-switcher-panel-btn-switcher ${titleSuffixType === item.value ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                        </BaseControl>
-                    </div>
-
-                    {titleSuffixType !== "none" && (
-                        <>
-
-
-                            {titleSuffixType === "icon" && (
-                                <BaseControl label={__("Icon", "frontis-blocks")}>
-                                    <FBIconPicker
-                                        value={titleSuffixIcon} 
-                                        setIconHandler={titleSfIconHandler} 
-                                    />
-                                </BaseControl>
-                            )}
-
-                            {(titleSuffixType === "icon") && (
-                                    <>
-                                        <FB_SwitcherControl
-                                            label={__("Color", "frontis-blocks")}
-                                            globalSwitcher={titleSuffixColorSwitcher}
-                                            setGlobalSwitcher={(value) => setAttributes({ titleSuffixColorSwitcher: value })}
-                                        />
-                                        
-                                        {titleSuffixColorSwitcher === 'normal' && (
-                                            <FB_ColorControl
-                                                label={__("Normal Color", "frontis-blocks")}
-                                                globalColor={titleSuffixColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                        
-                                        {titleSuffixColorSwitcher === 'hover' && (
-                                            <FB_ColorControl
-                                                label={__("Hover Color", "frontis-blocks")}
-                                                globalColor={titleSuffixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                    </>
-                                )}
-
-                            {titleSuffixType === "image" && (
-                                <FB_BackgroundImageControl 
-                                    globalBackgroundImageUrl={titleSuffixImgUrl}
-                                    setGlobalBackgroundImageUrl={(value) => setAttributes({ titleSuffixImgUrl: value })}
-                                    globalBackgroundImageAlt={titleSuffixImgAlt}
-                                    setGlobalBackgroundImageAlt={(value) => setAttributes({ titleSuffixImgAlt: value })}
-                                    globalBackgroundImageID={titleSuffixImgID}
-                                    setGlobalBackgroundImageID={(value) => setAttributes({ titleSuffixImgID: value })}
-                                    globalBackgroundImagePosition={titleSuffixImgPosition}
-                                    setGlobalBackgroundImagePosition={(value) => setAttributes({ titleSuffixImgPosition: value })}
-                                    globalBackgroundImageAttachment={titleSuffixImgAttachment} 
-                                    setGlobalBackgroundImageAttachment={(value) => setAttributes({ titleSuffixImgAttachment: value })}
-                                    globalBackgroundImageRepeat={titleSuffixImgRepeat}
-                                    setGlobalBackgroundImageRepeat={(value) => setAttributes({ titleSuffixImgRepeat: value })}
-                                    globalBackgroundImageSize={titleSuffixImgSize}
-                                    setGlobalBackgroundImageSize={(value) => setAttributes({ titleSuffixImgSize: value })}
-                                />
-                            )}
-                        </>
-                    )}
-                </PanelBody>
-
+            <PanelBody title={__("Content", "frontis-blocks")} initialOpen={false}>
+                {mergeFieldLabelSwitcher && (
+                    <TextControl
+                        label={__('Field Label', 'frontis-blocks')}
+                        value={fieldLabel}
+                        onChange={(value) => setAttributes({ fieldLabel: value })}
+                    />
+                )}
+                <TextControl
+                    label={__('Placeholder', 'frontis-blocks')}
+                    value={fieldPlaceholder}
+                    onChange={(value) => setAttributes({ fieldPlaceholder: value })}
+                />
+                {mergeFieldRequiredSwitcher && (
+                    <TextareaControl
+                        label={__('Required Message', 'frontis-blocks')}
+                        value={fieldRequiredText}
+                        onChange={(value) => setAttributes({ fieldRequiredText: value })}
+                        help={__('This message will be shown when the field is required', 'frontis-blocks')}
+                    />
+                )}
+                <TextControl
+                    label={__('Default Value', 'frontis-blocks')}
+                    value={fieldDefaultValue}
+                    onChange={(value) => setAttributes({ fieldDefaultValue: value })}
+                    help={__('Leave empty if no default value is needed.', 'frontis-block')}
+                />
+                <TextControl
+                    label={__('Custom Name Attribute', 'frontis-blocks')}
+                    value={fieldCustomNameAttribute}
+                    onChange={(value) => setAttributes({ fieldCustomNameAttribute: value })}
+                    help={__('Each name attribute must be unique to submit form data correctly. Leave the field blank if no custom name attribute is necessary.', 'frontis-block')}
+                />
+                {mergeFieldIconSwitcher && (
+                    <BaseControl
+                        label={__("Field Icon", "frontis-blocks")}
+                    >
+                        <FBIconPicker
+                            value={fieldIcon} 
+                            setIconHandler={(value) => setAttributes({ fieldIcon: value })} 
+                        />
+                    </BaseControl>
+                )}
             </PanelBody>
         </>
     );
@@ -726,9 +607,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     return (
         <>
         <style>
-			{`
-            	${editorStyle}
-			`}
+            {`
+                ${editorStyle}
+            `}
         </style>
 
         <FB_InspectorControls

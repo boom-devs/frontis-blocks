@@ -18,17 +18,9 @@
     "parent": ["frontis-blocks/form-builder"],
     "usesContext": [
       "fb/formBuilderParentBlockID",
-      "fb/formBuilderInheritedformBuilderType",
-      "fb/formBuilderInheritedDisplayIcon",
-      "fb/formBuilderInheritedTabIconSwitcher",
-      "fb/formBuilderInheritedTabIcon",
-      "fb/formBuilderInheritedTabImageUrl",
-      "fb/formBuilderInheritedTabImageAlt",
-      "fb/formBuilderInheritedExpandedIconSwitcher",
-      "fb/formBuilderInheritedExpandedIcon",
-      "fb/formBuilderInheritedExpandedImageUrl",
-      "fb/formBuilderInheritedExpandedImageAlt",
-      "fb/formBuilderInheritedTagName",
-      "fb/formBuilderFaqSchema"
+      "fb/formInheritedIconSwitcher",
+      "fb/formInheritedLabelSwitcher",
+      "fb/formInheritedRequiredFieldSwitcher",
+      "fb/formInheritedRequiredSymbolSwitcher"
     ]
   }
