@@ -1,6 +1,6 @@
 import { Rive } from '@rive-app/canvas';
 
-(function() {
+(function () {
 	'use strict';
 
 	// Initialize a single Rive animation
@@ -11,6 +11,10 @@ import { Rive } from '@rive-app/canvas';
 		const speed = parseFloat(canvas.getAttribute('data-rive-speed') || '1');
 		const reverse = canvas.getAttribute('data-rive-reverse') === 'true';
 		const hoverEffect = canvas.getAttribute('data-rive-hover') || 'none';
+		const selectedAnimation = canvas.getAttribute('data-rive-selected');
+		const animationType = canvas.getAttribute('data-rive-type');
+		const playOnScroll = canvas.getAttribute('data-rive-scroll') === 'true';
+		const scrollThreshold = parseInt(canvas.getAttribute('data-rive-scroll-threshold') || '50');
 
 		if (!src) return;
 
@@ -25,12 +29,34 @@ import { Rive } from '@rive-app/canvas';
 				onLoad: () => {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
-					
+
 					console.log('Rive detected - Animations:', animations, 'State Machines:', stateMachines);
-					
+
 					// Cleanup temp instance
 					tempRive.cleanup();
-					
+
+					// Determine which animation/state machine to use
+					let useAnimation = null;
+					let useStateMachine = null;
+
+					if (selectedAnimation) {
+						const [type, name] = selectedAnimation.split(':');
+						if (type === 'stateMachine' && stateMachines.includes(name)) {
+							useStateMachine = name;
+						} else if (type === 'animation' && animations.includes(name)) {
+							useAnimation = name;
+						}
+					}
+
+					// Fallback to first available
+					if (!useAnimation && !useStateMachine) {
+						if (stateMachines.length > 0) {
+							useStateMachine = stateMachines[0];
+						} else if (animations.length > 0) {
+							useAnimation = animations[0];
+						}
+					}
+
 					// Create actual instance with proper configuration
 					const config = {
 						src: src,
@@ -45,11 +71,13 @@ import { Rive } from '@rive-app/canvas';
 						}
 					};
 
-					// Add state machine or animation
-					if (stateMachines.length > 0) {
-						config.stateMachines = stateMachines[0];
-					} else if (animations.length > 0) {
-						config.animations = animations[0];
+					// Add state machine or animation based on selection
+					if (useStateMachine) {
+						config.stateMachines = useStateMachine;
+						console.log('Using state machine:', useStateMachine);
+					} else if (useAnimation) {
+						config.animations = useAnimation;
+						console.log('Using animation:', useAnimation);
 					}
 
 					const riveInstance = new Rive(config);
@@ -57,36 +85,38 @@ import { Rive } from '@rive-app/canvas';
 					// Store instance on canvas for cleanup
 					canvas._riveInstance = riveInstance;
 
-					// Setup hover effects
-					if (hoverEffect !== 'none') {
-						canvas.style.cursor = 'pointer';
+					if (playOnScroll) {
+						let hasPlayed = false; // Track if animation has played once
 
-						canvas.addEventListener('mouseenter', () => {
-							switch (hoverEffect) {
-								case 'play':
-								case 'play-pause':
-									riveInstance.play();
-									break;
-								case 'pause':
-									riveInstance.pause();
-									break;
-								case 'stop':
-									riveInstance.stop();
-									break;
-							}
+						const observer = new IntersectionObserver((entries) => {
+							entries.forEach(entry => {
+								// Calculate visible percentage
+								const visiblePercentage = entry.intersectionRatio * 100;
+
+								if (visiblePercentage >= scrollThreshold) {
+									// Element is visible beyond threshold
+									if (!hasPlayed || loop) {
+										riveInstance.play();
+										if (!loop) {
+											hasPlayed = true;
+										}
+									}
+								} else {
+									// Element is not visible enough
+									if (!loop) {
+										riveInstance.pause();
+									}
+								}
+							});
+						}, {
+							// Create thresholds from 0 to 1 in steps of 0.01 (1%)
+							threshold: Array.from({ length: 101 }, (_, i) => i / 100)
 						});
 
-						canvas.addEventListener('mouseleave', () => {
-							switch (hoverEffect) {
-								case 'play':
-								case 'play-pause':
-									riveInstance.pause();
-									break;
-								case 'pause':
-									riveInstance.play();
-									break;
-							}
-						});
+						observer.observe(canvas);
+						canvas._scrollObserver = observer;
+
+						console.log('Scroll trigger enabled with threshold:', scrollThreshold + '%');
 					}
 				},
 				onLoadError: (err) => {
@@ -122,4 +152,16 @@ import { Rive } from '@rive-app/canvas';
 			subtree: true
 		});
 	}
+
+	window.addEventListener('beforeunload', () => {
+		const canvases = document.querySelectorAll('.fb-rive-canvas');
+		canvases.forEach(canvas => {
+			if (canvas._riveInstance) {
+				canvas._riveInstance.cleanup();
+			}
+			if (canvas._scrollObserver) {
+				canvas._scrollObserver.disconnect();
+			}
+		});
+	});
 })();

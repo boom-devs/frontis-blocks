@@ -575,14 +575,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							<FB_ImageControl
 								globalImageUrl={lottieAnimationImageUrl}
 								setglobalImageUrl={(value) => {
-									// Only update if value is not null/empty, otherwise keep current value
 									if (value !== null && value !== undefined && value !== '') {
 										setAttributes({ lottieAnimationImageUrl: value });
 									}
 								}}
 								globalImageAlt={lottieAnimationImageAlt}
 								setglobalImageAlt={(value) => {
-									// Only update if value is not null/empty, otherwise keep current value
 									if (value !== null && value !== undefined && value !== '') {
 										setAttributes({ lottieAnimationImageAlt: value });
 									}

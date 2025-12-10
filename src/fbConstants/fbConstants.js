@@ -649,3 +649,10 @@ export const LOTTIE_HOVER_STATE = [
     { value: 'play', label: __('Play', 'frontis-blocks') },
     { value: 'reverse', label: __('Reverse', 'frontis-blocks') },
 ];
+
+export const RIVE_HOVER_STATE = [
+    { value: 'none', label: __('None', 'frontis-blocks') },
+    { value: 'pause', label: __('Pause', 'frontis-blocks') },
+    { value: 'play', label: __('Play', 'frontis-blocks') },
+    { value: 'reverse', label: __('Reverse', 'frontis-blocks') },
+];

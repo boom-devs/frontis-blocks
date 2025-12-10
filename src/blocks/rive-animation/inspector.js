@@ -7,16 +7,10 @@ import {
 	PanelBody,
 	TabPanel,
 	BaseControl,
-	riveAnimation,
-	riveAnimationGroup,
 	ToggleControl,
-	TextControl,
-	TextareaControl,
 	Dropdown,
 	Dashicon,
 	RangeControl,
-	ColorPicker,
-	ColorPalette,
 } from "@wordpress/components";
 
 /**
@@ -152,6 +146,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		riveAnimationVRBottomOffset,
 		riveAnimationVRBottomOffsetUnits,
+
+		riveSelectedAnimation,
+		riveAvailableAnimations,
+		riveAnimationType,
+		riveFitMode = 'contain',
+		riveAlignment = 'center',
+		rivePlayOnScroll,
+		riveScrollThreshold = 50
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -579,22 +581,41 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 					<ToggleControl
-						label={__("Loop Animation", "frontis-block")}
-						checked={riveLoop}
-						onChange={(value) =>
-							setAttributes({ riveLoop: value })
-						}
-					/>
-
-					<ToggleControl
 						label={__("Autoplay", "frontis-block")}
 						checked={riveAutoplay}
 						onChange={(value) =>
 							setAttributes({ riveAutoplay: value })
 						}
 					/>
-				</PanelBody>
 
+					<SelectControl
+						label={__("Animation/State Machine", "frontis-blocks")}
+						value={riveSelectedAnimation}
+						options={riveAvailableAnimations}
+						onChange={(value) => setAttributes({ riveSelectedAnimation: value })}
+						help={__("Choose which animation or state machine to play", "frontis-blocks")}
+					/>
+
+					<ToggleControl
+						label={__("Play on Scroll Into View", "frontis-blocks")}
+						checked={rivePlayOnScroll}
+						onChange={(value) => setAttributes({ rivePlayOnScroll: value })}
+						help={__("Animation will play when scrolled into view", "frontis-blocks")}
+					/>
+
+					{rivePlayOnScroll && (
+						<RangeControl
+							label={__("Scroll Threshold (%)", "frontis-blocks")}
+							value={riveScrollThreshold}
+							onChange={(value) => setAttributes({ riveScrollThreshold: value })}
+							min={0}
+							max={100}
+							step={5}
+							help={__("Percentage of element visible before triggering", "frontis-blocks")}
+						/>
+					)}
+					
+				</PanelBody>
 			</div>
 
 		</>
@@ -643,7 +664,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				
+
+				<FB_SwitcherControl
+					label={__("Opacity", "frontis-blocks")}
+					globalSwitcher={riveOpacitySwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ riveOpacitySwitcher: value })}
+					options={[
+						{ label: __('Normal', 'frontis-blocks'), value: 'normal' },
+						{ label: __('Hover', 'frontis-blocks'), value: 'hover' },
+					]
+					}
+				/>
+				{riveOpacitySwitcher === 'normal' && (
+					<RangeControl
+						label={__("Opacity", "frontis-blocks")}
+						value={riveAnimationNormalOpacity}
+						onChange={(value) =>
+							setAttributes({
+								riveAnimationNormalOpacity: value,
+							})
+						}
+						min={0.1}
+						max={1}
+						step={0.1}
+						resetFallbackValue={1}
+					/>
+				)}
+
+				{riveOpacitySwitcher === 'hover' && (
+					<RangeControl
+						label={__("Opacity", "frontis-blocks")}
+						value={riveAnimationHoverOpacity}
+						onChange={(value) =>
+							setAttributes({
+								riveAnimationHoverOpacity: value,
+							})
+						}
+						min={0.1}
+						max={1}
+						step={0.1}
+						resetFallbackValue={1}
+					/>
+				)}
 
 			</PanelBody>
 		</>

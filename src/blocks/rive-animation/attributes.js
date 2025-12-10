@@ -3,6 +3,10 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+	blockStyle: {
+		type: 'string',
+		default: '',
+	},
 	riveAnimationJsonTypeSwitcher: {
         type: 'string',
         default: 'json-file',
@@ -61,6 +65,34 @@ const attributes = {
 	riveAnimationSpeed: {
         type: 'number',
     },
+	riveSelectedAnimation: {
+        type: 'string',
+        default: ''
+    },
+    riveAvailableAnimations: {
+        type: 'array',
+        default: []
+    },
+    riveAnimationType: {
+        type: 'string',
+        default: 'animation'
+    },
+    riveFitMode: {
+        type: 'string',
+        default: 'contain'
+    },
+    riveAlignment: {
+        type: 'string',
+        default: 'center'
+    },
+    rivePlayOnScroll: {
+        type: 'boolean',
+        default: false
+    },
+    riveScrollThreshold: {
+        type: 'number',
+        default: 50
+    },
 	riveAnimationNormalOpacity: {
         type: 'number',
     },
@@ -69,6 +101,7 @@ const attributes = {
     },
     riveEffectsOnHover: {
         type: 'string',
+		default: 'none'
     },
 	riveAnimationContainerHeight: {
         type: 'object',

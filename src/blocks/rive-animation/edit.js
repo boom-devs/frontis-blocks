@@ -1,9 +1,15 @@
-// edit.js - Rive Animation Block Editor
-
 import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	BlockControls,
+	MediaPlaceholder,
+	MediaUpload,
+	MediaUploadCheck,
+} from '@wordpress/block-editor';
+
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import { useEffect, useRef } from '@wordpress/element';
-import { Rive } from '@rive-app/canvas';
+import { Rive, Layout, Fit, Alignment } from '@rive-app/canvas';
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -12,9 +18,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationImageUrl,
 		riveLoop = true,
 		riveAutoplay = true,
-		riveAnimationSpeed = 1,
-		riveAnimationReverse = false,
-		riveEffectsOnHover = 'none',
+		riveAnimationGlobalWraperClass,
+		riveAnimationGlobalWraperID,
+		riveAnimationImageID,
+		riveSelectedAnimation,
+		riveAvailableAnimations,
+		riveAnimationType,
+		riveFitMode = 'contain',
+		riveAlignment = 'center',
+		rivePlayOnScroll,
+		riveScrollThreshold = 50
 	} = attributes;
 
 	const blockProps = useBlockProps({
@@ -32,14 +45,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		// Cleanup previous instance
 		if (riveInstanceRef.current) {
-			riveInstanceRef.current.cleanup();
 			riveInstanceRef.current = null;
 		}
 
-		const shouldAutoplay = (riveEffectsOnHover === 'play-pause' || riveEffectsOnHover === 'play') ? false : riveAutoplay;
-
 		try {
-			// First, detect what's in the file
+			// First detect animations and state machines
 			const tempRive = new Rive({
 				src: riveAnimationImageUrl,
 				canvas: canvasRef.current,
@@ -51,14 +61,73 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					console.log('Detected animations:', animations);
 					console.log('Detected state machines:', stateMachines);
 
+					// Build options array for SelectControl
+					const animationOptions = [];
+
+					animations.forEach(anim => {
+						animationOptions.push({
+							label: `Animation: ${anim}`,
+							value: `animation:${anim}`
+						});
+					});
+
+					stateMachines.forEach(sm => {
+						animationOptions.push({
+							label: `State Machine: ${sm}`,
+							value: `stateMachine:${sm}`
+						});
+					});
+
+					// Update available animations in attributes
+					setAttributes({
+						riveAvailableAnimations: animationOptions
+					});
+
+					// Set default selection if none exists
+					if (!riveSelectedAnimation && animationOptions.length > 0) {
+						setAttributes({
+							riveSelectedAnimation: animationOptions[0].value
+						});
+					}
+
 					// Cleanup temp instance
 					tempRive.cleanup();
 
-					// Now create the actual instance with proper config
+					// Determine which animation/state machine to use
+					let useAnimation = null;
+					let useStateMachine = null;
+					let animType = 'animation';
+
+					if (riveSelectedAnimation) {
+						const [type, name] = riveSelectedAnimation.split(':');
+						if (type === 'stateMachine' && stateMachines.includes(name)) {
+							useStateMachine = name;
+							animType = 'stateMachine';
+						} else if (type === 'animation' && animations.includes(name)) {
+							useAnimation = name;
+							animType = 'animation';
+						}
+					}
+
+					// Fallback to first available
+					if (!useAnimation && !useStateMachine) {
+						if (stateMachines.length > 0) {
+							useStateMachine = stateMachines[0];
+							animType = 'stateMachine';
+						} else if (animations.length > 0) {
+							useAnimation = animations[0];
+							animType = 'animation';
+						}
+					}
+
+					// Update animation type
+					setAttributes({ riveAnimationType: animType });
+					
+					// Create actual instance with proper configuration
 					const config = {
 						src: riveAnimationImageUrl,
 						canvas: canvasRef.current,
-						autoplay: shouldAutoplay,
+						autoplay: riveAutoplay,
 						automaticallyHandleEvents: true,
 						onLoad: () => {
 							const instance = riveInstanceRef.current;
@@ -72,11 +141,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						}
 					};
 
-					// Add state machine or animation
-					if (stateMachines.length > 0) {
-						config.stateMachines = stateMachines[0];
-					} else if (animations.length > 0) {
-						config.animations = animations[0];
+					// Add state machine or animation based on selection
+					if (useStateMachine) {
+						config.stateMachines = useStateMachine;
+					} else if (useAnimation) {
+						config.animations = useAnimation;
 					}
 
 					riveInstanceRef.current = new Rive(config);
@@ -91,83 +160,64 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		return () => {
 			if (riveInstanceRef.current) {
-				riveInstanceRef.current.cleanup();
 				riveInstanceRef.current = null;
 			}
 		};
 	}, [
 		riveAnimationImageUrl,
-		riveLoop,
 		riveAutoplay,
-		riveAnimationSpeed,
-		riveAnimationReverse,
-		riveEffectsOnHover,
+		riveSelectedAnimation,
+		rivePlayOnScroll
 	]);
 
-	// Handle hover effects
-	useEffect(() => {
-		const canvas = canvasRef.current;
-		const instance = riveInstanceRef.current;
 
-		if (!canvas || !instance || riveEffectsOnHover === 'none') {
-			return;
-		}
-
-		const handleMouseEnter = () => {
-			switch (riveEffectsOnHover) {
-				case 'play':
-				case 'play-pause':
-					instance.play();
-					break;
-				case 'pause':
-					instance.pause();
-					break;
-				case 'stop':
-					instance.stop();
-					break;
-			}
-		};
-
-		const handleMouseLeave = () => {
-			switch (riveEffectsOnHover) {
-				case 'play':
-				case 'play-pause':
-					instance.pause();
-					break;
-				case 'pause':
-					instance.play();
-					break;
-			}
-		};
-
-		canvas.style.cursor = 'pointer';
-		canvas.addEventListener('mouseenter', handleMouseEnter);
-		canvas.addEventListener('mouseleave', handleMouseLeave);
-
-		return () => {
-			canvas.style.cursor = '';
-			canvas.removeEventListener('mouseenter', handleMouseEnter);
-			canvas.removeEventListener('mouseleave', handleMouseLeave);
-		};
-	}, [riveEffectsOnHover]);
+	const onSelectImage = (media) => {
+		setAttributes({
+			riveAnimationImageUrl: media.url,
+			riveAnimationImageID: media.id,
+			riveSelectedAnimation: '',
+			riveAvailableAnimations: []
+		});
+	};
 
 	return (
 		<>
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="trash"
+						onClick={() =>
+							setAttributes({
+								riveAnimationImageUrl: "",
+								riveAnimationImageID: "",
+								riveSelectedAnimation: '',
+								riveAvailableAnimations: []
+							})
+						}
+					/>
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={onSelectImage}
+							allowedTypes={["application/octet-stream"]}
+							value={riveAnimationImageID}
+							render={({ open }) => (
+								<ToolbarButton
+									onClick={open}
+									icon={(riveAnimationImageUrl || riveAnimationImageID) ? "edit" : "upload"}
+									label={(riveAnimationImageUrl || riveAnimationImageID) ? __("Replace Rive File", "frontis-blocks") : __("Add Rive File", "frontis-blocks")}
+								/>
+							)}
+						/>
+					</MediaUploadCheck>
+				</ToolbarGroup>
+			</BlockControls>
 
 			<div {...blockProps}>
-				<div className="fb-parent-wrapper fb-rive-animation-container">
+				<div className={`fb-parent-wrapper fb-rive-animation-container ${blockID} ${riveAnimationGlobalWraperClass}`} id={riveAnimationGlobalWraperID} ref={riveInstanceRef}>
 					<div
 						className="fb-rive-canvas-wrapper"
-						style={{
-							border: riveAnimationImageUrl ? 'none' : '2px dashed #ccc',
-							minHeight: '200px',
-							display: 'flex',
-							alignItems: 'center',
-							justifyContent: 'center',
-							position: 'relative',
-							width: '100%',
-						}}
+
 					>
 						{riveAnimationImageUrl ? (
 							<canvas
@@ -179,9 +229,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								}}
 							/>
 						) : (
-							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
-								{__('Upload a .riv file to preview', 'frontis-blocks')}
-							</p>
+							<MediaPlaceholder
+								onSelect={onSelectImage}
+								allowedTypes={["application/octet-stream"]}
+								multiple={false}
+								labels={{ title: __("Add Rive File", "frontis-blocks") }}
+							/>
 						)}
 					</div>
 				</div>
