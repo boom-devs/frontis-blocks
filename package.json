@@ -90,6 +90,7 @@
     "clean-webpack-plugin": "^4.0.0",
     "countries-and-timezones": "^3.8.0",
     "gsap": "^3.12.7",
+    "lottie-web": "^5.13.0",
     "rc-switch": "^4.1.0",
     "react-hook-form": "^7.62.0",
     "react-player": "^2.16.0",
