@@ -507,6 +507,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${lottieAnimationContainerWidth?.Tablet ? `width: ${lottieAnimationContainerWidth?.Tablet}${lottieAnimationContainerWidthUnits?.Tablet};` : ''}
 					
 				}
+					
 				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
 					${globalTabletPadding && lottieAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && lottieAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
