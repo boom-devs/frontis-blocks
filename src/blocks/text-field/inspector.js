@@ -445,22 +445,26 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             </PanelBody>
 
             <PanelBody title={__("Content", "frontis-blocks")} initialOpen={false}>
-                <TextControl
-                    label={__('Field Label', 'frontis-blocks')}
-                    value={mergeFieldLabel}
-                    onChange={(value) => setAttributes({ fieldLabel: value })}
-                />
+                {mergeFieldLabelSwitcher && (
+                    <TextControl
+                        label={__('Field Label', 'frontis-blocks')}
+                        value={mergeFieldLabel}
+                        onChange={(value) => setAttributes({ fieldLabel: value })}
+                    />
+                )}
                 <TextControl
                     label={__('Placeholder', 'frontis-blocks')}
                     value={mergeFieldPlaceholder}
                     onChange={(value) => setAttributes({ fieldPlaceholder: value })}
                 />
-                <TextareaControl
-                    label={__('Required Message', 'frontis-blocks')}
-                    value={mergeFieldRequiredText}
-                    onChange={(value) => setAttributes({ fieldRequiredText: value })}
-                    help={__('This message will be shown when the field is required', 'frontis-blocks')}
-                />
+                {mergeFieldRequiredSwitcher && (
+                    <TextareaControl
+                        label={__('Required Message', 'frontis-blocks')}
+                        value={mergeFieldRequiredText}
+                        onChange={(value) => setAttributes({ fieldRequiredText: value })}
+                        help={__('This message will be shown when the field is required', 'frontis-blocks')}
+                    />
+                )}
                 <TextControl
                     label={__('Default Value', 'frontis-blocks')}
                     value={fieldDefaultValue}
@@ -473,7 +477,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     onChange={(value) => setAttributes({ fieldCustomNameAttribute: value })}
                     help={__('Each name attribute must be unique to submit form data correctly. Leave the field blank if no custom name attribute is necessary.', 'frontis-block')}
                 />
-                {fieldIconSwitcher || inheritedFieldIconSwitcher ? (
+                {mergeFieldIconSwitcher && (
                     <BaseControl
                         label={__("Field Icon", "frontis-blocks")}
                     >
@@ -482,7 +486,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             setIconHandler={(value) => setAttributes({ fieldIcon: value })} 
                         />
                     </BaseControl>
-                ) : null}
+                )}
             </PanelBody>
         </>
     );
