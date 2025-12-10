@@ -682,7 +682,6 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'true',
             ],
-
             'tabs' => [
                 'slug' => 'tabs',
                 'title' => 'Tabs',
@@ -725,6 +724,19 @@ class BlockList
             'news-ticker' => [
                 'slug' => 'news-ticker',
                 'title' => 'News Ticker',
+                'package' => 'free',
+                'category' => 'content',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/tabs.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
+            'lottie-animation' => [
+                'slug' => 'lottie-animation',
+                'title' => 'Lottie Animation',
                 'package' => 'free',
                 'category' => 'content',
                 'badge' => 'free',
