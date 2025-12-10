@@ -78,3 +78,37 @@ $white_color: #ffffff;
         height: 22px;
     }
 }
+
+.fb-add-field-btn-wrapper {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    .components-button {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        flex-direction: row;
+        background-color: #EBF5FF;
+        border: none;
+        box-shadow: none;
+        border-radius: 8px;
+
+        &::before {
+            position: relative;
+            content: "Add Field";
+            font-size: 14px;
+            font-weight: 500;
+            color: #121212;
+        }
+        svg {
+            fill: #121212;
+        }
+    }
+}
+
+.fb-form-btn-alignment {
+    .components-button svg {
+        rotate: -90deg;
+    }
+}

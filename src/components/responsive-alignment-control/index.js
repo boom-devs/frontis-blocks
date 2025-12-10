@@ -11,13 +11,13 @@ const FB_ResponsiveAlignmentControl = ({
 	deviceType,
 	setAttributes,
 	disabled,
- }) => {
-
-	const TEXT_ALIGN = [
+	options = [
 		{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 		{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 		{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
-	];
+	]
+ }) => {
+	
 
 	const handleAlignmentChange = (value) => {
 		setGlobalAlignment({
@@ -42,7 +42,7 @@ const FB_ResponsiveAlignmentControl = ({
                 device={deviceType}
             />
 			<ButtonGroup className={`fb-setting-text-alignment-group-btn fb-btn-group-icon-only ${disabled ? 'is-disabled' : ''} `}>
-				{TEXT_ALIGN.map((item) => (
+				{options.map((item) => (
 					<Button
 						key={item.value}
 						onClick={() => !disabled && handleAlignmentChange(item.value)}

@@ -14,20 +14,11 @@
         "customClassName": false
     },
 	"providesContext": {
-	  "fb/form-builderItemID": "blockID",
-	  "fb/form-builderparentBlockID": "blockID",
-	  "fb/form-builderInheritedFormBuilderType": "formBuilderType",
-	  "fb/form-builderInheritedDisplayIcon": "displayIcon",
-	  "fb/form-builderInheritedTabIconSwitcher": "tabIconSwitcher",
-	  "fb/form-builderInheritedTabIcon": "tabIcon",
-	  "fb/form-builderInheritedTabImageUrl": "tabImageUrl",
-	  "fb/form-builderInheritedTabImageAlt": "tabImageAlt",
-	  "fb/form-builderInheritedExpandedIconSwitcher": "expandedIconSwitcher",
-	  "fb/form-builderInheritedExpandedIcon": "expandedIcon",
-	  "fb/form-builderInheritedExpandedImageUrl": "expandedImageUrl",
-	  "fb/form-builderInheritedExpandedImageAlt": "expandedImageAlt",
-	  "fb/form-builderInheritedTagName": "tagName",
-	  "fb/form-builderFaqSchema": "faqSchema"
+	  "fb/formBuilderParentBlockID": "blockID",
+	  "fb/formInheritedIconSwitcher": "fieldIconSwitcher",
+	  "fb/formInheritedLabelSwitcher": "fieldLabelSwitcher",
+	  "fb/formInheritedRequiredFieldSwitcher": "fieldRequiredSwitcher",
+	  "fb/formInheritedRequiredSymbolSwitcher": "fieldRequiredSymbolSwitcher"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"

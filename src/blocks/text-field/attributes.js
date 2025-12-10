@@ -24,7 +24,7 @@ const attributes = {
 
     fieldType: {
         type: 'string',
-        default: '',
+        default: 'text',
     },
     fieldLabel: {
         type: 'string',
@@ -38,7 +38,7 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    fieldPlaceholderSwitcher: {
+    fieldIconSwitcher: {
         type: 'boolean',
         default: null,
     },
@@ -100,32 +100,17 @@ const attributes = {
 		}
     },
 
-    inheritedFieldType: {
-        type: 'string',
-    },
     inheritedFieldIconSwitcher: {
         type: 'boolean',
     },
     inheritedFieldLabelSwitcher: {
         type: 'boolean',
     },
-    inheritedFieldLabel: {
-        type: 'string',
-    },
-    inheritedFieldPlaceholderSwitcher: {
-        type: 'boolean',
-    },
-    inheritedFieldPlaceholder: {
-        type: 'string',
-    },
     inheritedFieldRequiredFieldSwitcher: {
         type: 'boolean',
     },
     inheritedFieldRequiredSymbolSwitcher: {
         type: 'boolean',
-    },
-    inheritedFieldRequiredText: {
-        type: 'string',
     },
 
     accordionItemPaddingUnits : {
