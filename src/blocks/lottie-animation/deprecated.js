@@ -1,8 +1,10 @@
-import { useBlockProps, RichText } from "@wordpress/block-editor";
-import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+// save.js (converted in your versioning format)
+
+import { useBlockProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
 import attributes from './attributes.js';
 
-const v1_0_3 = {
+const v1_1_3 = {
     attributes,
 
     supports: {
@@ -13,113 +15,73 @@ const v1_0_3 = {
     save({ attributes }) {
         const {
             blockID,
-            ButtonAlignment,
-            ButtonText,
-            ButtonUrl,
-            ButtonTargetUrl,
-            ButtonIcon,
-            ButtonTwoText,
-            ButtonTwoUrl,
-            ButtonTwoTargetUrl,
-            ButtonTwoIcon,
-    
-            connectorSwitcher,
-            connectorText,
-            
-            buttonTwoIconAlign,
-            buttonIconAlign,
-            buttonsDirection,
-            btnIconPosition,
-            btnTwoIconPosition,
-    
-            dualButtonGlobalWraperID,
-            dualButtonGlobalWraperClass,
-    
-            dualBtnDesktopSwitcher,
-            dualBtnTabletSwitcher,
-            dualBtnMobileSwitcher,
+            lottieAnimationJsonTypeSwitcher,
+            lottieAnimationImageUrl,
+            lottieAnimationJsonUrl,
+            lottieRenderer = 'svg',
+            lottieLoop = true,
+            lottieAutoplay = true,
+            lottieAnimationSpeed = 1,
+            lottieEffectsOnHover = 'none',
+            lottieAnimationReverse = false,
+            lottieAnimationDesktopSwitcher,
+            lottieAnimationTabletSwitcher,
+            lottieAnimationMobileSwitcher,
+            lottieAnimationGlobalWraperClass,
+            lottieAnimationGlobalWraperID
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `fb-dual-button-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
+            className: `fb-lottie-animation-main-wrapper ${blockID} 
+                ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'}
+                ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'}
+                ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`
         });
 
-        return (
-            <>
+        // Determine animation path
+        const isFile = lottieAnimationJsonTypeSwitcher === 'json-file';
+        const sourceUrl = isFile ? lottieAnimationImageUrl : lottieAnimationJsonUrl;
+
+        // No animation fallback
+        if (!sourceUrl) {
+            return (
                 <div {...blockProps}>
-                    <div className={`fb-parent-wrapper fb-dual-button-container ${blockID} ${dualButtonGlobalWraperClass}`} id={dualButtonGlobalWraperID}>
-                        <div
-                            className="fb-dual-button-wrapper"
-                            style={{
-                                justifyContent: ButtonAlignment,
-                                flexDirection: buttonsDirection === "vertical" ? "row" : "column",
-                            }}
-                        >
-                            <div className="fb-dual-button-one-wrapper">
-                                <a
-                                    className="fb-advanced-button fb-dual-button-one"
-                                    href={ButtonUrl}
-                                    target={ButtonTargetUrl ? "_blank" : undefined}
-                                    rel={ButtonTargetUrl ? "noopener noreferrer" : undefined}
-                                    style={{
-                                        flexDirection:
-                                            btnIconPosition === "left" ? "row-reverse" : "row",
-                                    }}
-                                >
-                                    <RichText.Content
-                                        tagName="span"
-                                        value={ButtonText}
-                                        className="fb-advanced-button-text"
-                                    />
-                                    {buttonIconAlign === "icon-text" && (
-                                        <div className="fb-advanced-button-icon-wrapper">
-                                            <div className="fb-advanced-button-icon">
-                                                {renderSVG(ButtonIcon)}
-                                            </div>
-                                        </div>
-                                    )}
-                                </a>
-                            </div>
-                            {connectorSwitcher && (
-                                <div className="fb-dual-button-connector">
-                                    <RichText.Content
-                                        tagName="span"
-                                        value={connectorText}
-                                        className="fb-dual-button-connector-text"
-                                    />
-                                </div>
-                            )}
-                            <div className="fb-dual-button-two-wrapper">
-                                <a
-                                    className="fb-advanced-button fb-dual-button-two"
-                                    href={ButtonTwoUrl}
-                                    target={ButtonTwoTargetUrl ? "_blank" : undefined}
-                                    rel={ButtonTwoTargetUrl ? "noopener noreferrer" : undefined}
-                                    style={{
-                                        flexDirection:
-                                            btnTwoIconPosition === "left" ? "row-reverse" : "row",
-                                    }}
-                                >
-                                    <RichText.Content
-                                        tagName="span"
-                                        value={ButtonTwoText}
-                                        className="fb-advanced-button-text"
-                                    />
-                                    {buttonTwoIconAlign === "icon-text" && (
-                                        <div className="fb-advanced-button-icon-wrapper">
-                                            <div className="fb-advanced-button-icon">
-                                                {renderSVG(ButtonTwoIcon)}
-                                            </div>
-                                        </div>
-                                    )}
-                                </a>
-                            </div>
+                    <div
+                        className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`}
+                        id={lottieAnimationGlobalWraperID}
+                    >
+                        <div style={{ padding: '50px', textAlign: 'center', color: '#999' }}>
+                            {__('No Lottie animation selected.', 'frontis-blocks')}
                         </div>
                     </div>
                 </div>
-            </>
+            );
+        }
+
+        // Match logic from edit.js
+        const shouldAutoplay =
+            (lottieEffectsOnHover === 'play-pause' || lottieEffectsOnHover === 'play')
+                ? false
+                : lottieAutoplay;
+
+        return (
+            <div {...blockProps}>
+                <div
+                    className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`}
+                    id={lottieAnimationGlobalWraperID}
+                    data-json-url={sourceUrl}
+                    data-renderer={lottieRenderer}
+                    data-loop={lottieLoop}
+                    data-autoplay={shouldAutoplay}
+                    data-speed={lottieAnimationSpeed}
+                    data-hover-effect={lottieEffectsOnHover}
+                    data-reverse={lottieAnimationReverse}
+                    data-type={lottieAnimationJsonTypeSwitcher}
+                    style={{ width: '100%' }}
+                />
+            </div>
         );
     },
 };
 
-export default [v1_0_3];
+export default [v1_1_3];

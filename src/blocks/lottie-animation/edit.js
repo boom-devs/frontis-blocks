@@ -1,7 +1,15 @@
-// edit.js - NOW FULLY SUPPORTS REVERSE + HOVER EFFECTS (Editor = Frontend)
+// edit.js - Fixed toolbar to accept JSON files
 
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import {
+	useBlockProps,
+	BlockControls,
+	MediaPlaceholder,
+	MediaUpload,
+	MediaUploadCheck,
+} from '@wordpress/block-editor';
+import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
+import generateSrcSet from "@Utils/generateSrcSet";
 import { useEffect, useRef } from '@wordpress/element';
 import lottie from 'lottie-web';
 import Inspector from "./inspector";
@@ -18,10 +26,16 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieAnimationSpeed = 1,
 		lottieEffectsOnHover = 'none',
 		lottieAnimationReverse = false,
+		lottieAnimationImageID,
+		lottieAnimationDesktopSwitcher,
+		lottieAnimationTabletSwitcher,
+		lottieAnimationMobileSwitcher,
+		lottieAnimationGlobalWraperClass,
+		lottieAnimationGlobalWraperID
 	} = attributes;
 
 	const blockProps = useBlockProps({
-		className: `fb-lottie-animation-main-wrapper ${blockID}`,
+		className: `fb-lottie-animation-main-wrapper ${blockID} ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'} ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'} ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	const containerRef = useRef(null);
@@ -85,7 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieAutoplay,
 		lottieAnimationSpeed,
 		lottieEffectsOnHover,
-		lottieAnimationReverse, 
+		lottieAnimationReverse,
 	]);
 
 	useEffect(() => {
@@ -134,7 +148,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					playNormally();
 					break;
 				case 'reverse':
-					playNormally(); 
+					playNormally();
 					break;
 			}
 		};
@@ -150,27 +164,44 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		};
 	}, [lottieEffectsOnHover, lottieAnimationReverse]);
 
+	const onSelectImage = (media) => {
+		setAttributes({
+			lottieAnimationImageUrl: media.url,
+			lottieAnimationImageID: media.id,
+		});
+	};
+
 	return (
 		<>
 			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
-
+			<BlockControls>
+				<ToolbarGroup>
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={onSelectImage}
+							allowedTypes={["application/json"]}
+							value={lottieAnimationImageID}
+							render={({ open }) => (
+								<ToolbarButton
+									onClick={open}
+									icon={(lottieAnimationImageUrl || lottieAnimationImageID) ? "edit" : "upload"}
+									label={(lottieAnimationImageUrl || lottieAnimationImageID) ? __("Replace JSON File", "frontis-blocks") : __("Add JSON File", "frontis-blocks")}
+								/>
+							)}
+						/>
+					</MediaUploadCheck>
+				</ToolbarGroup>
+			</BlockControls>
 			<div {...blockProps}>
-				<div className="fb-parent-wrapper fb-lottie-animation-container">
-					<div
-						ref={containerRef}
-						className="fb-lottie-preview-container"
-						style={{
-							border: lottieAnimationImageUrl || lottieAnimationJsonUrl ? 'none' : '2px dashed #ccc',
-							cursor: lottieEffectsOnHover !== 'none' ? 'pointer' : 'default',
-							minHeight: '100px',
-						}}
-					>
-						{!(lottieAnimationImageUrl || lottieAnimationJsonUrl) && (
-							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
-								{__('Upload a Lottie JSON file or paste a URL to preview', 'frontis-blocks')}
-							</p>
-						)}
-					</div>
+				<div className={`fb-parent-wrapper fb-lottie-animation-container ${blockID} ${lottieAnimationGlobalWraperClass}`} id={lottieAnimationGlobalWraperID} ref={containerRef}>
+					{!(lottieAnimationImageUrl || lottieAnimationJsonUrl) && (
+						<MediaPlaceholder
+							onSelect={onSelectImage}
+							allowedTypes={["application/json"]}
+							multiple={false}
+							labels={{ title: __("Add Json File", "frontis-blocks") }}
+						/>
+					)}
 				</div>
 			</div>
 		</>

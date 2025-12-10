@@ -3,6 +3,10 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+	blockStyle: {
+        type: "string",
+        default: "",
+    },
 	lottieAnimationJsonTypeSwitcher: {
         type: 'string',
         default: 'json-file',
