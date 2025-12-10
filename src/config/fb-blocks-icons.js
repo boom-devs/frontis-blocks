@@ -1041,6 +1041,52 @@ const FB_Block_Icons = {
 			strokeLinejoin: 'round',
 			d: `M15 9L12 12L15 15`,
 		})
+	),
+	lottie_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'lottieAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M16 8C16 8 13 8 12 12C11 16 8 16 8 16
+				M21 5V19C21 20.1046 20.1046 21 19 21H5
+				C3.89543 21 3 20.1046 3 19V5
+				C3 3.89543 3.89543 3 5 3H19
+				C20.1046 3 21 3.89543 21 5Z`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+	),
+	rive_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'riveAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M3 3H16C18.7614 3 21 5.23858 21 8C21 10.7614 18.7614 13 16 13H14M7 13H14M20 21L14 13`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
 	),	
 
 };

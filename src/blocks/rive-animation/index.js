@@ -14,7 +14,7 @@ import deprecated from './deprecated';
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.dual_button,
+	icon: FB_Block_Icons.rive_animation,
 	edit: Edit,
 	save,
 	deprecated
