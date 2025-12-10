@@ -637,3 +637,15 @@ export const MENU_TYPE = [
     { value: 'text', label: __('Text', 'frontis-blocks') },
     { value: 'icon-text', label: __('Both', 'frontis-blocks') },
 ];
+
+export const LOTTIE_RENDER_TYPE = [
+    { value: 'canvas', label: __('Canvas', 'frontis-blocks') },
+    { value: 'svg', label: __('SVG', 'frontis-blocks') },
+];
+
+export const LOTTIE_HOVER_STATE = [
+    { value: 'none', label: __('None', 'frontis-blocks') },
+    { value: 'pause', label: __('Pause', 'frontis-blocks') },
+    { value: 'play', label: __('Play', 'frontis-blocks') },
+    { value: 'reverse', label: __('Reverse', 'frontis-blocks') },
+];

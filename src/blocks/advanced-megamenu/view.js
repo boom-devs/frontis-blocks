@@ -1,235 +1,244 @@
-(function() {
-    'use strict';
+(function () {
+	"use strict";
 
-    // Debounce function for resize events
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    }
+	// Debounce function for resize events
+	function debounce(func, wait) {
+		let timeout;
+		return function executedFunction(...args) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	}
 
-    // Check if device is mobile/tablet
-    function isMobileDevice() {
-        return window.matchMedia('(max-width: 767px)').matches;
-    }
+	// Check if device is mobile/tablet
+	function isMobileDevice() {
+		return window.matchMedia("(max-width: 1024px)").matches;
+	}
 
-    function isTabletDevice() {
-        return window.matchMedia('(min-width: 768px) and (max-width: 1024px)').matches;
-    }
+	function isTabletDevice() {
+		return window.matchMedia("(min-width: 768px) and (max-width: 1024px)")
+			.matches;
+	}
 
-    function initMegaMenu() {
-        const menus = document.querySelectorAll('.fb-advanced-mega-menu');
+	function initMegaMenu() {
+		const menus = document.querySelectorAll(".fb-advanced-mega-menu");
 
-        menus.forEach(function(menu) {
-            const triggerType = menu.getAttribute('data-trigger');
-            const menuItems = menu.querySelectorAll('.fb-advanced-mega-menu-item.has-mega-menu');
-            const toggleButton = menu.querySelector('.fb-advanced-mega-menu-toggle');
-            const menuList = menu.querySelector('.fb-advanced-mega-menu-list');
-            const mainWrapper = menu.closest('.fb-advanced-mega-menu-main-wrapper');
-            
-            // Check responsive settings
-            const isTabletResponsive = mainWrapper && mainWrapper.classList.contains('fb-tablet-responsive');
-            const isMobileResponsive = mainWrapper && mainWrapper.classList.contains('fb-mobile-responsive');
+		menus.forEach(function (menu) {
+			const triggerType = menu.getAttribute("data-trigger");
+			const menuItems = menu.querySelectorAll(
+				".fb-advanced-mega-menu-item.has-mega-menu",
+			);
+			const toggleButton = menu.querySelector(".fb-advanced-mega-menu-toggle");
+			const menuList = menu.querySelector(".fb-advanced-mega-menu-list");
+			const mainWrapper = menu.closest(".fb-advanced-mega-menu-main-wrapper");
 
-            // Create overlay element if it doesn't exist
-            let overlay = menu.querySelector('.fb-advanced-mega-menu-overlay');
-            if (!overlay) {
-                overlay = document.createElement('div');
-                overlay.className = 'fb-advanced-mega-menu-overlay';
-                menu.appendChild(overlay);
-            }
+			// Check responsive settings
+			const isTabletResponsive =
+				mainWrapper && mainWrapper.classList.contains("fb-tablet-responsive");
+			const isMobileResponsive =
+				mainWrapper && mainWrapper.classList.contains("fb-mobile-responsive");
 
-            // Determine if we should use mobile behavior
-            function shouldUseMobileBehavior() {
-                const isMobile = isMobileDevice();
-                const isTablet = isTabletDevice();
-                
-                if (isMobile && isMobileResponsive !== false) return true;
-                if (isTablet && isTabletResponsive) return true;
-                
-                return false;
-            }
+			// Create overlay element if it doesn't exist
+			let overlay = menu.querySelector(".fb-advanced-mega-menu-overlay");
+			if (!overlay) {
+				overlay = document.createElement("div");
+				overlay.className = "fb-advanced-mega-menu-overlay";
+				menu.appendChild(overlay);
+			}
 
-            // Close all menus
-            function closeAllMenus() {
-                menuList.classList.remove('active');
-                toggleButton.classList.remove('active');
-                overlay.classList.remove('active');
-                menuItems.forEach(function(item) {
-                    item.classList.remove('active', 'hovering', 'keyboard-focus');
-                });
-                document.body.style.overflow = '';
-                
-                if (toggleButton.parentElement === menuList) {
-                    menu.insertBefore(toggleButton, menuList);
-                }
-            }
+			// Determine if we should use mobile behavior
+			function shouldUseMobileBehavior() {
+				return window.innerWidth <= 1024;
+			}
 
-            // Toggle mobile menu
-            function toggleMobileMenu(e) {
-                e.stopPropagation();
-                const isActive = menuList.classList.toggle('active');
-                toggleButton.classList.toggle('active');
-                overlay.classList.toggle('active');
-                
-                if (isActive) {
-                    if (menuList.firstChild) {
-                        menuList.insertBefore(toggleButton, menuList.firstChild);
-                    } else {
-                        menuList.appendChild(toggleButton);
-                    }
-                } else {
-                    menu.insertBefore(toggleButton, menuList);
-                }
-                
-                document.body.style.overflow = isActive ? 'hidden' : '';
-            }
+			// Close all menus
+			function closeAllMenus() {
+				menuList.classList.remove("active");
+				toggleButton.classList.remove("active");
+				overlay.classList.remove("active");
+				menuItems.forEach(function (item) {
+					item.classList.remove("active", "hovering", "keyboard-focus");
+				});
+				document.body.style.overflow = "";
 
-            // Mobile menu toggle
-            if (toggleButton) {
-                toggleButton.addEventListener('click', toggleMobileMenu);
-            }
+				if (toggleButton.parentElement === menuList) {
+					menu.insertBefore(toggleButton, menuList);
+				}
+			}
 
-            // Handle click outside to close mobile menu
-            document.addEventListener('click', function(e) {
-                if (shouldUseMobileBehavior() && 
-                    !menu.contains(e.target) && 
-                    !toggleButton.contains(e.target)) {
-                    closeAllMenus();
-                }
-            });
+			// Toggle mobile menu
+			function toggleMobileMenu(e) {
+				e.stopPropagation();
+				const isActive = menuList.classList.toggle("active");
+				toggleButton.classList.toggle("active");
+				overlay.classList.toggle("active");
 
-            // Close mobile menu on Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape') {
-                    closeAllMenus();
-                }
-            });
+				if (isActive) {
+					if (menuList.firstChild) {
+						menuList.insertBefore(toggleButton, menuList.firstChild);
+					} else {
+						menuList.appendChild(toggleButton);
+					}
+				} else {
+					menu.insertBefore(toggleButton, menuList);
+				}
 
-            overlay.addEventListener('click', closeAllMenus);
+				document.body.style.overflow = isActive ? "hidden" : "";
+			}
 
-            // Setup menu items behavior
-            function setupMenuItems() {
-                const useMobileBehavior = shouldUseMobileBehavior() || triggerType === 'click';
+			// Mobile menu toggle
+			if (toggleButton) {
+				toggleButton.addEventListener("click", toggleMobileMenu);
+			}
 
-                menuItems.forEach(function(item) {
-                    const link = item.querySelector('.fb-advanced-mega-menu-link');
-                    const panel = item.querySelector('.fb-advanced-mega-menu-panel');
+			// Handle click outside to close mobile menu
+			document.addEventListener("click", function (e) {
+				if (
+					shouldUseMobileBehavior() &&
+					!menu.contains(e.target) &&
+					!toggleButton.contains(e.target)
+				) {
+					closeAllMenus();
+				}
+			});
 
-                    const newLink = link.cloneNode(true);
-                    link.parentNode.replaceChild(newLink, link);
+			// Close mobile menu on Escape key
+			document.addEventListener("keydown", function (e) {
+				if (e.key === "Escape") {
+					closeAllMenus();
+				}
+			});
 
-                    if (useMobileBehavior) {
-                        newLink.addEventListener('click', function(e) {
-                            if (item.classList.contains('has-mega-menu')) {
-                                e.preventDefault();
-                                
-                                menuItems.forEach(function(otherItem) {
-                                    if (otherItem !== item) {
-                                        otherItem.classList.remove('active');
-                                    }
-                                });
-                                
-                                item.classList.toggle('active');
-                            }
-                        });
-                    } else {
-                        newLink.addEventListener('focus', function() {
-                            menuItems.forEach(function(otherItem) {
-                                if (otherItem !== item) {
-                                    otherItem.classList.remove('keyboard-focus');
-                                }
-                            });
-                            item.classList.add('keyboard-focus');
-                        });
+			overlay.addEventListener("click", closeAllMenus);
 
-                        newLink.addEventListener('blur', function() {
-                            setTimeout(function() {
-                                if (!item.contains(document.activeElement)) {
-                                    item.classList.remove('keyboard-focus');
-                                }
-                            }, 100);
-                        });
+			// Setup menu items behavior
+			function setupMenuItems() {
+				const isMobileOrTablet = isMobileDevice();
+				const useMobileBehavior = isMobileOrTablet || triggerType === "click";
 
-                        // Mouse hover
-                        item.addEventListener('mouseenter', function() {
-                            menuItems.forEach(function(otherItem) {
-                                if (otherItem !== item) {
-                                    otherItem.classList.remove('hovering');
-                                }
-                            });
-                            item.classList.add('hovering');
-                        });
+				menuItems.forEach(function (item) {
+					const link = item.querySelector(".fb-advanced-mega-menu-link");
+					const panel = item.querySelector(".fb-advanced-mega-menu-panel");
 
-                        item.addEventListener('mouseleave', function() {
-                            item.classList.remove('hovering');
-                        });
-                    }
-                });
-            }
+					if (!link || !panel) return;
 
-            // Position mega menu panel relative to menu bar on desktop
-            function positionPanels() {
-                if (!shouldUseMobileBehavior()) {
-                    const menuRect = menu.getBoundingClientRect();
-                    const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-                    
-                    panels.forEach(function(panel) {
-                        panel.style.top = (menuRect.bottom) + 'px';
-                    });
-                } else {
-                    const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-                    panels.forEach(function(panel) {
-                        panel.style.top = '';
-                    });
-                }
-            }
+					// Remove ALL previous listeners to avoid duplicates
+					const newLink = link.cloneNode(true);
+					link.parentNode.replaceChild(newLink, link);
 
-            // Close menu when clicking links inside panels
-            const panels = menu.querySelectorAll('.fb-advanced-mega-menu-panel');
-            panels.forEach(function(panel) {
-                const links = panel.querySelectorAll('a');
-                links.forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        closeAllMenus();
-                    });
-                });
-            });
+					if (useMobileBehavior) {
+						// Mobile/tablet: click to toggle (accordion style)
+						newLink.addEventListener("click", function (e) {
+							// Only prevent default if it has a mega menu
+							if (item.classList.contains("has-mega-menu")) {
+								e.preventDefault();
+								e.stopPropagation();
 
-            // Initialize
-            setupMenuItems();
-            positionPanels();
+								const isActive = item.classList.contains("active");
 
-            // Handle window resize
-            const handleResize = debounce(function() {
-                closeAllMenus();
-                setupMenuItems();
-                positionPanels();
-            }, 250);
+								// Close others
+								menuItems.forEach((other) => {
+									if (other !== item) other.classList.remove("active");
+								});
 
-            window.addEventListener('resize', handleResize);
+								// Toggle current
+								item.classList.toggle("active");
+							}
+							// If no mega menu → allow normal navigation (do nothing)
+						});
+                        newLink.addEventListener('touchstart', function () {}, { passive: true });
+					} else {
+						// Desktop: hover + keyboard support
+						item.addEventListener("mouseenter", function () {
+							menuItems.forEach((other) =>
+								other.classList.remove("hovering", "keyboard-focus"),
+							);
+							item.classList.add("hovering");
+						});
 
-            // Handle scroll to update panel position on desktop
-            const handleScroll = debounce(function() {
-                if (!shouldUseMobileBehavior()) {
-                    positionPanels();
-                }
-            }, 100);
+						item.addEventListener("mouseleave", function () {
+							item.classList.remove("hovering");
+						});
 
-            window.addEventListener('scroll', handleScroll);
-        });
-    }
+						newLink.addEventListener("focus", function () {
+							menuItems.forEach((other) =>
+								other.classList.remove("hovering", "keyboard-focus"),
+							);
+							item.classList.add("keyboard-focus");
+						});
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMegaMenu);
-    } else {
-        initMegaMenu();
-    }
+						// Optional: close on blur if focus leaves entire item
+						newLink.addEventListener("blur", function () {
+							setTimeout(() => {
+								if (!item.contains(document.activeElement)) {
+									item.classList.remove("keyboard-focus");
+								}
+							}, 10);
+						});
+					}
+				});
+			}
+
+			// Position mega menu panel relative to menu bar on desktop
+			function positionPanels() {
+				if (!shouldUseMobileBehavior()) {
+					const menuRect = menu.getBoundingClientRect();
+					const panels = menu.querySelectorAll(".fb-advanced-mega-menu-panel");
+
+					panels.forEach(function (panel) {
+						panel.style.top = menuRect.bottom + "px";
+					});
+				} else {
+					const panels = menu.querySelectorAll(".fb-advanced-mega-menu-panel");
+					panels.forEach(function (panel) {
+						panel.style.top = "";
+					});
+				}
+			}
+
+			// Close menu when clicking links inside panels
+			const panels = menu.querySelectorAll(".fb-advanced-mega-menu-panel");
+			panels.forEach(function (panel) {
+				const links = panel.querySelectorAll("a");
+				links.forEach(function (link) {
+					link.addEventListener("click", function () {
+						closeAllMenus();
+					});
+				});
+			});
+
+			// Initialize
+			setupMenuItems();
+			// positionPanels();
+
+			// Handle window resize
+			const handleResize = debounce(function () {
+				closeAllMenus();
+				setupMenuItems();
+				// positionPanels();
+			}, 250);
+
+			window.addEventListener("resize", handleResize);
+
+			// Handle scroll to update panel position on desktop
+			const handleScroll = debounce(function () {
+				if (!shouldUseMobileBehavior()) {
+					// positionPanels();
+				}
+			}, 100);
+
+			window.addEventListener("scroll", handleScroll);
+		});
+	}
+
+	// Initialize when DOM is ready
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initMegaMenu);
+	} else {
+		initMegaMenu();
+	}
 })();
