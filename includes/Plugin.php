@@ -11,6 +11,7 @@ use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Admin\Ajax\TemplateLibrary;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
+use FrontisBlocks\Core\SupportRive;
 use FrontisBlocks\Core\Enqueues;
 use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
@@ -160,6 +161,7 @@ final class Plugin {
 		BlocksAjax::get_instance()->register_blocks_ajax_events();
 		TemplateLibrary::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
+		SupportRive::get_instance();
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();
