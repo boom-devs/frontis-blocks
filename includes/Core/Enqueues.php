@@ -193,6 +193,7 @@ class Enqueues
         wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/backend/responsive-css.js', [], FB_VERSION, true);
         wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/backend/swiper/swiper-bundle.min.css', [], FB_VERSION);
         wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/backend/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
+        
 
         wp_register_style('frontis-slick-style', FB_PLUGIN_URL . 'assets/css/backend/slick/slick.css', [], FB_VERSION);
         wp_register_style('frontis-slick-theme-style', FB_PLUGIN_URL . 'assets/css/backend/slick/slick-theme.css', [], FB_VERSION);
