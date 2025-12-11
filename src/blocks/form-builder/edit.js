@@ -24,33 +24,22 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         blockID,
         
         classHook,
-        formBuilderType,
-        displayIcon,
-        tabIconSwitcher,
-        tabIcon,
-        tabImageUrl,
-        tabImageAlt,
-        expandedIcon,
-        expandedImageUrl,
-        expandedImageAlt,
-        tagName,
-        faqSchema,
-        formBuilderChildCount,
+        formType,
 
         submiteBtnLabel,
         submiteBtnIconSwitcher,
         submiteBtnIcon,
 
-        formBuilderGlobalWraperID,
-        formBuilderGlobalWraperClass,
+        formGlobalWraperID,
+        formGlobalWraperClass,
 
-        formBuilderDesktopSwitcher,
-        formBuilderTabletSwitcher,
-        formBuilderMobileSwitcher,
+        formDesktopSwitcher,
+        formTabletSwitcher,
+        formMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-accordion-main-wrapper ${blockID} ${formBuilderDesktopSwitcher && 'fb-desktop-responsive'} ${formBuilderTabletSwitcher && 'fb-tablet-responsive'} ${formBuilderMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-form-builder-main-wrapper ${blockID} ${formDesktopSwitcher && 'fb-desktop-responsive'} ${formTabletSwitcher && 'fb-tablet-responsive'} ${formMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**
@@ -105,7 +94,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
             <div {...blockProps}>
                 <form
-                    className={`fb-parent-wrapper fb-form-builder-wrapper fb-parent-${blockID} ${classHook} ${formBuilderGlobalWraperClass}`} id={formBuilderGlobalWraperID} ref={panelRef}
+                    className={`fb-parent-wrapper fb-form-builder-wrapper fb-parent-${blockID} ${classHook} ${formGlobalWraperClass}`} id={formGlobalWraperID} ref={panelRef}
                 >
                     <InnerBlocks
                         allowedBlocks={ALLOWED_BLOCKS}

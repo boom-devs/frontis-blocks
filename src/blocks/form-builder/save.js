@@ -1,37 +1,58 @@
-import { useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { InnerBlocks } from '@wordpress/block-editor';
+import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 
 export default function save({ attributes }) {
 
     const { 
         blockID,
+        
         classHook,
-        accordionGlobalWraperID,
-        accordionGlobalWraperClass,
+        formType,
 
-        accordionDesktopSwitcher,
-        accordionTabletSwitcher,
-        accordionMobileSwitcher,
+        submiteBtnLabel,
+        submiteBtnIconSwitcher,
+        submiteBtnIcon,
+
+        formGlobalWraperID,
+        formGlobalWraperClass,
+
+        formDesktopSwitcher,
+        formTabletSwitcher,
+        formMobileSwitcher,
     } = attributes;
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-main-wrapper ${blockID} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-form-builder-main-wrapper ${blockID} ${formDesktopSwitcher && 'fb-desktop-responsive'} ${formTabletSwitcher && 'fb-tablet-responsive'} ${formMobileSwitcher && 'fb-mobile-responsive'}`,
     });
+
 
 
     return (
         <>
             <div {...blockProps}>
-                <div
-                    className={`fb-parent-wrapper fb-accordion-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID}
+                <form
+                    className={`fb-parent-wrapper fb-form-builder-wrapper fb-parent-${blockID} ${classHook} ${formGlobalWraperClass}`} id={formGlobalWraperID}
                 >
-                    <div className={`fb-accordion-container`}>
-                        <div className="fb-accordion-inner">
-                            <InnerBlocks.Content />
-                        </div>
+                    <InnerBlocks.Content />
+
+                    {/* Submit Button */}
+                    <div className="fb-field-item fb-form-builder-submit-wrapper">
+                        <button id="fb-form-submit" className="fb-submit-button">
+                            <RichText.Content
+                                tagName="span"
+                                className="fb-submit-button-label"
+                                value={submiteBtnLabel}
+                            />
+                            {submiteBtnIconSwitcher && (
+                                <span className="fb-submit-button-icon">
+                                    {renderSVG(submiteBtnIcon)}
+                                </span>
+                            )}
+                        </button>
                     </div>
-                </div>
+                </form>
             </div>
         </>
     );
