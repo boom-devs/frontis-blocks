@@ -1,0 +1,32 @@
+.fb-taxonomy-more-info{
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    .fb-taxonomy-author{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+    .fb-taxonomy-author-wrapper{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    .fb-child-categories-avatars{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .fb-child-category-avatar-item{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
