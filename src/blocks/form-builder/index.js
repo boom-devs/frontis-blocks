@@ -20,5 +20,3 @@ registerBlockType( metadata.name, {
 	deprecated,
 } );
 
-
-							
