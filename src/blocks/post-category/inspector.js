@@ -174,6 +174,28 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		postTitleColor,
 		postTitleHoverColor,
 		/** End title */
+		
+		/** Start Author Name     */
+		authorNameGlobalTypoSwitcher,
+		authorNameGlobalTypographyData,
+		authorNameGlobalTypoType,
+		authorNameGlobalTypoOption,
+		authorNameFontFamily,
+		authorNameFontSize,
+		authorNameFontSizeUnits,
+		authorNameFontWeight,
+		authorNameFontStyle,
+		authorNameTextTransform,
+		authorNameTextDecoration,
+		authorNameLetterSpacing,
+		authorNameLetterSpacingUnits,
+		authorNameLineHeight,
+		authorNameLineHeightUnits,
+
+		authorNameColorSwitcher,
+		authorNameColor,
+		authorNameHoverColor,
+		/** End Author Name */
 
 		/** Start description     */
 		postDescriptionGlobalTypoSwitcher,
@@ -476,21 +498,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	// ---- FETCH CORE DATA ----
 	const { useSelect } = wp.data;
 
-	// All post types (one fetch only)
+	// Stable data from WordPress
 	const allPostTypes = useSelect(
 		(select) => select("core").getPostTypes({ per_page: -1 }) || [],
 		[]
 	);
 
-	// All taxonomies
 	const allTaxonomies = useSelect(
 		(select) => select("core").getTaxonomies({ per_page: -1 }) || [],
 		[]
 	);
 
-	const selectedTaxonomyObj = useMemo(() => allTaxonomies.find(tax => tax.slug === taxonomyType), [allTaxonomies, taxonomyType] );
+	// Only depend on allTaxonomies & taxonomyType
+	const selectedTaxonomyObj = useMemo(
+		() => allTaxonomies.find((tax) => tax.slug === taxonomyType),
+		[allTaxonomies, taxonomyType]
+	);
 
-	// ---- FILTER POST TYPES FOR DROPDOWN GROUPING ----
+	// Filter post types that have taxonomies
 	const filteredPostTypes = useMemo(() => {
 		return allPostTypes.filter(
 			(pt) =>
@@ -500,17 +525,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		);
 	}, [allPostTypes]);
 
-	// ---- MAP TAXONOMY → POST TYPE LABEL ----
+	// Helper: get post type label for a taxonomy
 	const getPostTypeLabelForTaxonomy = useCallback(
 		(taxSlug) => {
 			const taxonomy = allTaxonomies.find((tax) => tax.slug === taxSlug);
 			if (!taxonomy?.types?.length) return null;
 
-			// If taxonomy is used by multiple post types, choose based on filteredPostTypes priority
 			const preferred = taxonomy.types.find((type) =>
 				filteredPostTypes.some((pt) => pt.slug === type)
 			);
-
 			const postTypeSlug = preferred || taxonomy.types[0];
 			const postType = allPostTypes.find((pt) => pt.slug === postTypeSlug);
 
@@ -519,75 +542,97 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[allTaxonomies, filteredPostTypes, allPostTypes]
 	);
 
-	// ---- BUILD TAXONOMY DROPDOWN (WITH GROUPS) ----
+	// Stable taxonomy options
 	const dynamicTaxonomyOptions = useMemo(() => {
-		return filteredPostTypes.flatMap((pt) => {
+		const options = [];
+		const addedTaxonomies = new Set();
+
+		filteredPostTypes.forEach((pt) => {
 			const taxList = allTaxonomies
 				.filter((tax) => tax.types?.includes(pt.slug))
 				.map((tax) => ({
 					value: tax.slug,
-					label: `    ${tax.labels?.singular_name || tax.name}`,
+					label: `    ${tax.labels?.singular_name || tax.name} (${tax.slug})`,
 					isDisabled: false,
+					isCustom: tax._isCustom || false,
 				}));
 
-			if (!taxList.length) return [];
-
-			return [
-				{
+			if (taxList.length) {
+				options.push({
 					value: `group-${pt.slug}`,
 					label: pt.labels?.name || pt.slug,
 					isDisabled: true,
-				},
-				...taxList,
-			];
-		});
-	}, [filteredPostTypes, allTaxonomies]);
+				});
 
-	// ---- AUTO-FIX INVALID taxonomyType ----
-	useEffect(() => {
-		// no taxonomies available
-		if (!dynamicTaxonomyOptions.length) {
-			if (taxonomyType) {
-				setAttributes({
-					taxonomyType: "",
-					includeTaxonomies: [],
-					excludeTaxonomies: [],
-					showChildCategories: false,
+				taxList.forEach((tax) => {
+					if (!addedTaxonomies.has(tax.value)) {
+						addedTaxonomies.add(tax.value);
+						options.push(tax);
+					}
 				});
 			}
-			return;
+		});
+
+		// Only add current custom taxonomy if it's not already in the list
+		if (taxonomyType && !addedTaxonomies.has(taxonomyType)) {
+			const customTax = allTaxonomies.find((tax) => tax.slug === taxonomyType);
+			const label = customTax
+				? `Custom ${customTax.labels?.singular_name || customTax.name} (${customTax.slug})`
+				: `Custom ${taxonomyType} (custom)`;
+
+			options.push({
+				value: taxonomyType,
+				label,
+				isDisabled: false,
+				isCustom: true,
+			});
 		}
 
-		// check valid taxonomy selection
-		const isValid = dynamicTaxonomyOptions.some(
-			(opt) => opt.value === taxonomyType && !opt.isDisabled
+		return options;
+	}, [filteredPostTypes, allTaxonomies, taxonomyType]);
+
+	useEffect(() => {
+		if (taxonomyType) return;
+		if (!allTaxonomies.length || !filteredPostTypes.length) return;
+
+		const firstValid = dynamicTaxonomyOptions.find(opt => 
+			!opt.isDisabled && opt.value && !opt.isCustom
 		);
 
-		if (!isValid) {
-			const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-			if (firstAllowed) {
-				setAttributes({
-					taxonomyType: firstAllowed.value,
+		if (firstValid) {
+			// Batch update to avoid multiple re-renders
+			wp.data.dispatch('core/block-editor').updateBlockAttributes(
+				clientId,
+				{
+					taxonomyType: firstValid.value,
 					includeTaxonomies: [],
 					excludeTaxonomies: [],
-					showChildCategories: false,
-				});
-			}
+				}
+			);
 		}
-	}, [dynamicTaxonomyOptions, taxonomyType]);
+	}, [
+		taxonomyType,
+		allTaxonomies.length,
+		filteredPostTypes.length,
+		dynamicTaxonomyOptions,
+		clientId
+	]);
+	// Only run once on mount – set default taxonomy if empty
+	// useEffect(() => {
+	// 	if (taxonomyType || !allTaxonomies.length || !filteredPostTypes.length) return;
 
-	// ---- SELECTED TAXONOMY (Derived, not state) ----
-	const selectedTaxonomy = useMemo(() => {
-		return dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType) || null;
-	}, [dynamicTaxonomyOptions, taxonomyType]);
+	// 	const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
+	// 	console.log(firstAllowed);
+	// 	if (firstAllowed) {
+	// 		setAttributes({
+	// 			taxonomyType: firstAllowed.value,
+	// 			includeTaxonomies: [],
+	// 			excludeTaxonomies: [],
+	// 		});
+	// 	}
+	// }, []);
 
-	// ---- POST TYPE LABEL (Derived from taxonomyType) ----
-	const postTypeLabel = useMemo(() => {
-		if (!taxonomyType) return "";
-		return getPostTypeLabelForTaxonomy(taxonomyType) || "";
-	}, [taxonomyType, getPostTypeLabelForTaxonomy]);
-
-	// ---- HANDLE CHANGE ----
+	// Handle taxonomy change
 	const handleTaxonomyChange = useCallback(
 		(option) => {
 			if (!option || option.isDisabled) return;
@@ -596,27 +641,66 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				taxonomyType: option.value,
 				includeTaxonomies: [],
 				excludeTaxonomies: [],
-				showChildCategories: false,
 			});
+
+			if (option.isCustom) {
+				wp.data.dispatch("core/notices").createNotice(
+					"info",
+					`Custom taxonomy "${option.value}" selected. Make sure it exists.`,
+					{ isDismissible: true }
+				);
+			}
 		},
 		[setAttributes]
 	);
 
-	// ---- FETCH TERMS FOR CURRENT TAXONOMY ----
+	// Current selected taxonomy for display
+	const selectedTaxonomy = useMemo(() => {
+		if (!taxonomyType) return null;
+
+		const found = dynamicTaxonomyOptions.find((opt) => opt.value === taxonomyType);
+		if (found) return found;
+
+		const taxFromApi = allTaxonomies.find((tax) => tax.slug === taxonomyType);
+		if (taxFromApi) {
+			return {
+				value: taxFromApi.slug,
+				label: `Custom ${taxFromApi.labels?.singular_name || taxFromApi.name} (${taxFromApi.slug})`,
+				isDisabled: false,
+				isCustom: true,
+			};
+		}
+
+		return {
+			value: taxonomyType,
+			label: `Custom ${taxonomyType} (custom)`,
+			isDisabled: false,
+			isCustom: true,
+		};
+	}, [dynamicTaxonomyOptions, taxonomyType, allTaxonomies]);
+
+	const postTypeLabel = useMemo(() => {
+		if (!taxonomyType) return "";
+		return getPostTypeLabelForTaxonomy(taxonomyType) || "";
+	}, [taxonomyType, getPostTypeLabelForTaxonomy]);
+
+	// Fetch terms for selected taxonomy
 	const taxonomyItems = useSelect(
 		(select) => {
 			if (!taxonomyType) return [];
-			return (
-				select("core").getEntityRecords("taxonomy", taxonomyType, {
-					per_page: 100,
-					hide_empty: false,
-				}) || []
-			);
+			const args = {
+				per_page: 100,
+				hide_empty: false,
+			};
+			// Only add parent: 0 if showChildCategories is FALSE
+			if (!showChildCategories) {
+				args.parent = 0;
+			}
+			return select("core").getEntityRecords("taxonomy", taxonomyType, args) || [];
 		},
-		[taxonomyType]
+		[taxonomyType, showChildCategories] // ← showChildCategories add koro dependency te!
 	);
 
-	// ---- TERM OPTIONS ----
 	const taxonomyOptions = useMemo(
 		() =>
 			taxonomyItems.map((term) => ({
@@ -626,7 +710,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[taxonomyItems]
 	);
 
-	// ---- INCLUDE/EXCLUDE ACTIONS ----
 	const handleIncludeTaxonomiesChange = useCallback(
 		(options) => {
 			setAttributes({
@@ -645,6 +728,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		[setAttributes]
 	);
 
+	// Optional: Validate custom taxonomy
+	const validateTaxonomy = useCallback(async (taxSlug) => {
+		try {
+			await wp.apiFetch({ path: `/wp/v2/taxonomies/${taxSlug}` });
+			return { isValid: true };
+		} catch {
+			return { isValid: false };
+		}
+	}, []);
+
+	useEffect(() => {
+		if (taxonomyType && taxonomyType !== "category") {
+			validateTaxonomy(taxonomyType).then((result) => {
+				if (!result.isValid) {
+					console.warn(`Taxonomy "${taxonomyType}" might not exist.`);
+				}
+			});
+		}
+	}, [taxonomyType, validateTaxonomy]);
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -2330,6 +2432,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const allBlockStyle = useMemo(
 		() => `
+			.${blockId} .fb_post_category_container.single-item {
+				margin:auto;
+			}
 
 			.${blockId} .fb_post_category_container  .fb-taxonomy-item .fb-taxonomy-link-count{
 				display: flex;
@@ -2341,6 +2446,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				flex-direction: row;
 				align-items: center;
 				gap: 16px;
+			}
+
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-more-info .fb-taxonomy-author-name {
+				${authorNameColor ? `color: ${authorNameColor};` : ""}
+				${ authorNameGlobalTypoSwitcher.fontFamily === true && authorNameGlobalTypographyData.fontFamily ? `font-family: ${authorNameGlobalTypographyData.fontFamily};` : "" }
+           		${ authorNameGlobalTypoSwitcher.fontSize === true && authorNameGlobalTypographyData.fontSize ? `font-size: ${authorNameGlobalTypographyData.fontSize};` : "" }
+            	${ authorNameGlobalTypoSwitcher.fontWeight === true && authorNameGlobalTypographyData.fontWeight ? `font-weight: ${authorNameGlobalTypographyData.fontWeight};` : "" }
+            	${ authorNameGlobalTypoSwitcher.fontStyle === true && authorNameGlobalTypographyData.fontStyle ? `font-style: ${authorNameGlobalTypographyData.fontStyle};` : "" }
+            	${ authorNameGlobalTypoSwitcher.textTransform === true && authorNameGlobalTypographyData.textTransform ? `text-transform: ${authorNameGlobalTypographyData.textTransform};` : "" }
+            	${ authorNameGlobalTypoSwitcher.textDecoration === true && authorNameGlobalTypographyData.textDecoration ? `text-decoration: ${authorNameGlobalTypographyData.textDecoration};` : "" }
+            	${ authorNameGlobalTypoSwitcher.letterSpacing === true && authorNameGlobalTypographyData.letterSpacing ? `letter-spacing: ${authorNameGlobalTypographyData.letterSpacing};` : "" }
+            	${ authorNameGlobalTypoSwitcher.lineHeight === true && authorNameGlobalTypographyData.lineHeight ? `line-height: ${authorNameGlobalTypographyData.lineHeight};` : "" }
+
+				${ authorNameGlobalTypoSwitcher.fontFamily === false && authorNameFontFamily ? `font-family: ${authorNameFontFamily};` : "" }
+				${ authorNameGlobalTypoSwitcher.fontSize === false && authorNameFontSize.Desktop ? `font-size: ${authorNameFontSize.Desktop}${authorNameFontSizeUnits.Desktop};` : "" }
+				${ authorNameGlobalTypoSwitcher.fontWeight === false && authorNameFontWeight ? `font-weight: ${authorNameFontWeight};` : "" }
+				${ authorNameGlobalTypoSwitcher.fontStyle === false && authorNameFontStyle ? `font-style: ${authorNameFontStyle};` : "" }
+				${ authorNameGlobalTypoSwitcher.textTransform === false && authorNameTextTransform ? `text-transform: ${authorNameTextTransform};` : "" }
+				${ authorNameGlobalTypoSwitcher.textDecoration === false && authorNameTextDecoration ? `text-decoration: ${authorNameTextDecoration};` : "" }
+				${ authorNameGlobalTypoSwitcher.letterSpacing === false && authorNameLetterSpacing.Desktop ? `letter-spacing: ${authorNameLetterSpacing.Desktop}${authorNameLetterSpacingUnits.Desktop};` : "" }
+				${ authorNameGlobalTypoSwitcher.lineHeight === false && authorNameLineHeight.Desktop ? `line-height: ${authorNameLineHeight.Desktop}${authorNameLineHeightUnits.Desktop};` : "" }
+			}
+
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-author-name:hover {
+				${authorNameHoverColor ? `color: ${authorNameHoverColor};` : ""}
+			}
+			
+			.${blockId} .fb-taxonomy-author-avatar {
+				width: ${authorAvatarSize.Desktop}${authorAvatarSizeUnits.Desktop} ;
+				height: ${authorAvatarSize.Desktop}${authorAvatarSizeUnits.Desktop};
+				border-radius: 50%;
+				object-fit: cover;							
 			}
 
 			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
@@ -2394,7 +2531,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				box-sizing: content-box;
 			}
 
-			.${blockId} .fb-taxonomy-grid .fb-taxonomy-count {
+			.${blockId} .fb-taxonomy-grid .fb-taxonomy-count,
+			.${blockId} .single-item .fb-taxonomy-count {
 				background: #D7E9FF;
 				padding: 6px 14px;
 			}
@@ -2593,22 +2731,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						grid-template-columns: repeat(3, 1fr);
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId} .single-item .fb-taxonomy-item {
 						padding: 24px;
 						border-radius: 10px;
 					}
 		
-					.${blockId} .fb-taxonomy-grid  .fb-taxonomy-item .fb-taxonomy-link-count{
+					.${blockId} .fb-taxonomy-grid  .fb-taxonomy-item .fb-taxonomy-link-count,
+					.${blockId} .single-item  .fb-taxonomy-item .fb-taxonomy-link-count{
 						gap: 42px;
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link, 
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
 						font-size: 24px;
 						font-weight: 500;
 					}
 		
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						margin-top: 42px;
 					}
 				`
@@ -2620,7 +2763,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						grid-template-columns: repeat(3, 1fr);
 					}
 
-					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item, 
+					.${blockId}.fb-taxonomy-style-2 .single-item .fb-taxonomy-item{
 						${ postCategoryBorderRadiusDesktopWidth && postCategoryBorderRadiusDesktop.top ? "" : "border-radius: 20px;" }
 						background: #FFFFFF;
 						padding: 10px;
@@ -2628,7 +2772,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
 					}
 		
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-meta {
 						${ postCategoryBorderRadiusDesktopWidth && postCategoryBorderRadiusDesktop.top ? "" : "border-radius: 10px;" }
 						height: 100%;
 						background: #EBF4FF;
@@ -2636,12 +2781,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link, 
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
 						font-size: 32px;
 						font-weight: 600;
 					}
 		
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						margin-left: 14px;
 						margin-top: 32px;
 					}
@@ -2651,11 +2799,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-3"
 				? `
+					.${blockId} .fb-taxonomy-more-info {
+						flex-direction: column;
+						align-items: flex-start;
+					}
+					.${blockId} .fb-taxonomy-read-more-wrapper {
+						width: 100%;
+					}
+
+					.${blockId} .fb-taxonomy-author-name {
+						color: #FFFFFF;
+					}
+
 					.${blockId} .fb-taxonomy-grid {
 						grid-template-columns: repeat(3, 1fr);
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId} .single-item .fb-taxonomy-item {
 						position: relative;
 						min-height: 300px;
 						overflow: hidden;
@@ -2663,11 +2824,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						border-radius: 8px;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-count{
 						background: #FFFFFF;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image {
 						position: absolute;
 						top: 0;
 						left: 0;
@@ -2676,7 +2839,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						z-index: 0;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image:before,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image:before{
 						background: linear-gradient(45deg, rgba(0, 0, 0, .2), transparent);
 						content: "";
 						width: 100%;
@@ -2687,7 +2851,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						z-index: 1;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image img {
 						width: 100%;
 						height: 100%;
 						object-fit: cover;
@@ -2696,29 +2861,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						filter 0.4s ease; /* Slightly longer duration for smoothness */
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img,
+					.${blockId} .single-item .fb-taxonomy-item:hover .fb-taxonomy-image img{
 						transform: scale(1.08) translateY(-8px);
 						filter: brightness(1.05);
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link-count,
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link-count,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-meta{
 						z-index: 2;
 					}
 
 					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link, 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link, 
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name {
 						color: #FFFFFF;
 						font-size: 24px;
 						font-weight: 500;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-description{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-description,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-description{
 						color: #F7F7F7;
 					}
 
-					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button{
+					.${blockId}.fb-taxonomy-style-3 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button,
+					.${blockId}.fb-taxonomy-style-3 .single-item .fb-taxonomy-item .fb-taxonomy-read-more-button{
 						width: 100%;
+						margin-top: 24px;
 						border: solid;
 						border-width: 1px;
 						border-color: #FFFFFF4D;
@@ -2732,11 +2905,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-4"
 				? `
+					.${blockId} .fb-taxonomy-more-info {
+						flex-direction: column;
+						align-items: flex-start;
+					}
+
 					.${blockId} .fb-taxonomy-grid {
 						grid-template-columns: repeat(2, 1fr);
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId} .single-item .fb-taxonomy-item {
 						padding: 32px;
 						border-radius: 14px;
 						flex-direction: row !important;
@@ -2745,17 +2924,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						box-shadow: 0 8px 24px rgba(0, 0, 0, 0.02), 0 0px 6px rgba(0, 0, 0, 0.02);
 					}
 						
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-count,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-count{
 						background: #F9F9F9;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image-container{
 						position: relative;
 						overflow: hidden;
 						width: 100%;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-card-content{
 						width: 100%;
 						padding: 32px 24px;
 						display: flex;
@@ -2763,7 +2945,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						justify-content: space-between;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image-container .fb-taxonomy-image {
 						position: absolute;
 						top: 0;
 						left: 0;
@@ -2772,7 +2955,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						z-index: 0;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-image img,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-image img {
 						width: 100%;
 						height: 100%;
 						object-fit: cover;
@@ -2780,12 +2964,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						transition: transform 0.4s cubic-bezier(0.33, 0.04, 0.63, 0.99), filter 0.4s ease;
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover .fb-taxonomy-image img,
+					.${blockId} .single-item .fb-taxonomy-item:hover .fb-taxonomy-image img{
 						transform: scale(1.08) translateY(-8px);
 						filter: brightness(1.05);
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-read-more-button,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-read-more-button {
 						margin-top: 32px;
 					}
 
@@ -2807,7 +2993,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop};							
 			}
 
-        	.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+        	.${blockId} .fb-taxonomy-grid .fb-taxonomy-item, 
+			.${blockId} .single-item .fb-taxonomy-item{
+
 
 				${ premadeStyle === "style-4"
 					? `background: #FFFFFF;`
@@ -2826,7 +3014,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-2"
 				? `
-					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {					
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId}.fb-taxonomy-style-2 .single-item .fb-taxonomy-item {					
 					
 						${ postCategoryInnerPaddingDesktopWidth && postCategoryPaddingDesktop.top
 							? `
@@ -2842,7 +3031,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					}				
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-meta{
 					
 						${ postCategoryNormalBackgroundType === "gradient"
 							? `  
@@ -2883,7 +3073,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 
-			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+			.${blockId} .single-item .fb-taxonomy-item {
 
 				${ taxonomyHeight.Desktop
 					? `
@@ -2941,7 +3132,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: background-color 0.3s ease, border-color 0.3s ease;
             }
 
-            .${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover {
+            .${blockId} .fb-taxonomy-grid .fb-taxonomy-item:hover,
+			.${blockId} .single-item .fb-taxonomy-item:hover {
                 ${ postCategoryHoverBackgroundType === "gradient"
 					? `  
 						${ postCategoryHoverCustomGradientSwitcher && postCategoryHoverCustomGradientInputValue
@@ -2965,7 +3157,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-4"
 				? `
-					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content,
+					.${blockId}.fb-taxonomy-style-4 .single-item .fb-taxonomy-item .fb-taxonomy-card-content{
 						${ postCategoryPaddingDesktopWidth && postCategoryPaddingDesktop.top
 							? `
 								padding: ${postCategoryPaddingDesktopWidth};
@@ -3384,7 +3577,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
 
-			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+			.${blockId} .single-item .fb-taxonomy-item {
 				${ taxonomyHeight.Tablet ? `min-height: ${taxonomyHeight.Tablet}${taxonomyHeightUnits.Tablet};` : "" }
 				${ postCategoryPaddingTabletWidth && postCategoryPaddingTablet.top ? `padding: ${postCategoryPaddingTabletWidth};` : "" }
 				${ postCategoryMarginTabletWidth && postCategoryMarginTablet.top ? `margin: ${postCategoryMarginTabletWidth};` : "" }
@@ -3395,12 +3589,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-2"
 				? `
-					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {			
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId}.fb-taxonomy-style-2 .single-item .fb-taxonomy-item {			
 						${ postCategoryInnerPaddingTabletWidth && postCategoryPaddingTablet.top ? `padding: ${postCategoryInnerPaddingTabletWidth};` : "" }
 						${ postCategoryPaddingTabletWidth && postCategoryPaddingTablet.top ? `padding-bottom: ${postCategoryPaddingTablet.top}${postCategoryPaddingUnits.Tablet};` : "" }
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta {
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-meta  {
 
 						${ postCategoryPaddingTabletWidth && postCategoryPaddingTablet.top ? `padding: ${postCategoryPaddingTabletWidth};` : "" }
 
@@ -3423,7 +3619,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-4"
 				? `
-					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content,
+					.${blockId}.fb-taxonomy-style-4 .single-item .fb-taxonomy-item .fb-taxonomy-card-content{
 						${ postCategoryPaddingTabletWidth && postCategoryPaddingTablet.top ? `padding: ${postCategoryPaddingTabletWidth};` : "" }
 					}
 				` : ""
@@ -3607,7 +3804,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 column-gap: ${gridColumnGap.Mobile}${gridGapUnits.Mobile};
         	}
 					
-			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item {
+			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
+			.${blockId} .single-item .fb-taxonomy-item {
 				${
 					taxonomyHeight.Mobile
 						? `min-height: ${taxonomyHeight.Mobile}${taxonomyHeightUnits.Mobile};`
@@ -3638,7 +3836,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-2"
 				? `
-					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item {		
+					.${blockId}.fb-taxonomy-style-2 .fb-taxonomy-grid .fb-taxonomy-item,
+					.${blockId}.fb-taxonomy-style-2 .single-item .fb-taxonomy-item {		
 						
 						${ postCategoryInnerPaddingMobileWidth && postCategoryPaddingMobile.top
 							? `padding: ${postCategoryInnerPaddingMobileWidth};` : "" 
@@ -3649,7 +3848,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 					}
 
-					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta{
+					.${blockId} .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-meta,
+					.${blockId} .single-item .fb-taxonomy-item .fb-taxonomy-meta{
 
 						${ postCategoryPaddingMobileWidth && postCategoryPaddingMobile.top ? `padding: ${postCategoryPaddingMobileWidth};` : "" }
 
@@ -3671,7 +3871,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			${ premadeStyle === "style-4"
 				? `
-					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content{
+					.${blockId}.fb-taxonomy-style-4 .fb-taxonomy-grid .fb-taxonomy-item .fb-taxonomy-card-content, 
+					.${blockId}.fb-taxonomy-style-4 .single-item .fb-taxonomy-item .fb-taxonomy-card-content{
 						${ postCategoryPaddingMobileWidth && postCategoryPaddingMobile.top ? `padding: ${postCategoryPaddingMobileWidth};` : "" }
 					}
 				` : ""
@@ -3895,33 +4096,52 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							isLoading={!allTaxonomies.length}
 							isDisabled={!dynamicTaxonomyOptions.length}
 							placeholder={
-								dynamicTaxonomyOptions.length
-									? "Select Taxonomy"
-									: "Taxonomy not available"
+								taxonomyType 
+									? `Selected: ${taxonomyType}` 
+									: "Select Taxonomy"
+							}
+							noOptionsMessage={({ inputValue }) => 
+								inputValue 
+									? `No taxonomy found for "${inputValue}"` 
+									: "No taxonomies available. Please check if any post type has taxonomies."
 							}
 							styles={{
 								option: (provided, state) => ({
 									...provided,
-									fontWeight: state.data.isDisabled ? "600" : "normal", // Bold for post type headers
-									color: state.data.isDisabled ? "#1f1e1e" : "#000000", // Dark color for headers, default for taxonomies
-									paddingLeft: state.data.isDisabled ? "10px" : "15px", // 10px for headers, 20px (1em + 10px) for taxonomies
+									fontWeight: state.data.isDisabled ? "600" : "normal",
+									color: state.data.isDisabled ? "#1f1e1e" : 
+										state.data.isCustom ? "#d63638" : "#000000", // Custom taxonomies in red
+									paddingLeft: state.data.isDisabled ? "10px" : "15px",
+									fontStyle: state.data.isCustom ? "italic" : "normal",
 								}),
-
 								menu: (provided) => ({
 									...provided,
 									zIndex: 999999,
 								}),
+								singleValue: (provided, state) => ({
+									...provided,
+									color: state.data.isCustom ? "#d63638" : "#000000",
+									fontStyle: state.data.isCustom ? "italic" : "normal",
+								}),
 							}}
-							formatOptionLabel={(option, { context }) => (
-								// remove whitespace for selected value, preserve for dropdown list
-								<span
-									style={{
-										whiteSpace: context === "value" ? "normal" : "pre",
-									}}
-								>
-									{context === "value" ? option.label.trim() : option.label}
-								</span>
-							)}
+							formatOptionLabel={(option, { context }) => {
+								// Custom taxonomy হলে icon দেখান
+								const label = context === "value" ? option.label.trim() : option.label;
+								
+								if (option.isCustom && context === "menu") {
+									return (
+										<span style={{ whiteSpace: "pre" }}>
+											🔧 {label.replace('🔧 ', '')}
+										</span>
+									);
+								}
+								
+								return (
+									<span style={{ whiteSpace: context === "value" ? "normal" : "pre" }}>
+										{label}
+									</span>
+								);
+							}}
 						/>
 					</BaseControl>
 
@@ -3943,7 +4163,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						{showCount && (
 							<ToggleControl
-								label={__("Show Post Type Name With Count", "frontis-blocks")}
+								label={__("Count With Post Type Name", "frontis-blocks")}
 								checked={showLabel}
 								onChange={(value) => setAttributes({ showLabel: value })}
 							/>
@@ -3983,13 +4203,22 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<div className="fb-control-divider"></div>
 
 						{showAuthor && (
-							<RangeControl
-								label={__("Creator Avatar Size", "frontis-blocks")}
-								value={authorAvatarSize || 40}
-								onChange={(value) => setAttributes({ authorAvatarSize: value })}
-								min={24}
+							<FB_Range
+								min={0}
 								max={100}
-								step={4}
+								label={__("Avatar Size", "frontis-blocks")}
+								rangeValue={authorAvatarSize}
+								onChangeHandler={(value) =>
+									setAttributes({ authorAvatarSize: value })
+								}
+								rangeUnitHandler={(value) =>
+									setAttributes({ authorAvatarSizeUnits: value })
+								}
+								deviceType={deviceType}
+								units={authorAvatarSizeUnits}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={40}
 							/>
 						)}
 
@@ -6051,6 +6280,176 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						)}
 					</PanelBody>
 				)}
+
+			<PanelBody title={__("Author Name", "frontis-blocks")} initialOpen={false}>
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={authorNameGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) =>
+						setAttributes({ authorNameGlobalTypographyData: value })
+					}
+					globalTypoType={authorNameGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							authorNameGlobalTypoType: value,
+							authorNameGlobalTypoSwitcher:
+								value === "default"
+									? {
+										...authorNameGlobalTypoSwitcher,
+										fontFamily: false,
+										fontSize: false,
+										fontWeight: false,
+										fontStyle: false,
+										textTransform: false,
+										textDecoration: false,
+										letterSpacing: false,
+										lineHeight: false,
+									}
+									: {
+										...authorNameGlobalTypoSwitcher,
+										fontFamily: true,
+										fontSize: true,
+										fontWeight: true,
+										fontStyle: true,
+										textTransform: true,
+										textDecoration: true,
+										letterSpacing: true,
+										lineHeight: true,
+									},
+						});
+					}}
+					globalTypoOption={authorNameGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) =>
+						setAttributes({ authorNameGlobalTypoOption: value })
+					}
+					fontFamily={authorNameFontFamily}
+					onChangeFontFamily={(value) =>
+						setAttributes({
+							authorNameFontFamily: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								fontFamily: value && false,
+							},
+						})
+					}
+					fontSize={authorNameFontSize}
+					onChangeFontSize={(value) =>
+						setAttributes({
+							authorNameFontSize: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								fontSize: value && false,
+							},
+						})
+					}
+					fontSizeUnits={authorNameFontSizeUnits}
+					onChangeFontSizeUnit={(value) =>
+						setAttributes({ authorNameFontSizeUnits: value })
+					}
+					fontWeight={authorNameFontWeight}
+					onChangeFontWeight={(value) =>
+						setAttributes({
+							authorNameFontWeight: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								fontWeight: value && false,
+							},
+						})
+					}
+					fontStyle={authorNameFontStyle}
+					onChangeFontStyle={(value) =>
+						setAttributes({
+							authorNameFontStyle: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								fontStyle: value && false,
+							},
+						})
+					}
+					textTransform={authorNameTextTransform}
+					onChangeTextTransform={(value) =>
+						setAttributes({
+							authorNameTextTransform: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								textTransform: value && false,
+							},
+						})
+					}
+					textDecoration={authorNameTextDecoration}
+					onChangeTextDecoration={(value) =>
+						setAttributes({
+							authorNameTextDecoration: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								textDecoration: value && false,
+							},
+						})
+					}
+					letterSpacing={authorNameLetterSpacing}
+					onChangeLetterSpacing={(value) =>
+						setAttributes({
+							authorNameLetterSpacing: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								letterSpacing: value && false,
+							},
+						})
+					}
+					letterSpacingUnits={authorNameLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) =>
+						setAttributes({ authorNameLetterSpacingUnits: value })
+					}
+					lineHeight={authorNameLineHeight}
+					onChangeLineHeight={(value) =>
+						setAttributes({
+							authorNameLineHeight: value,
+							authorNameGlobalTypoSwitcher: {
+								...authorNameGlobalTypoSwitcher,
+								lineHeight: value && false,
+							},
+						})
+					}
+					lineHeightUnits={authorNameLineHeightUnits}
+					onChangeLineHeightUnit={(value) =>
+						setAttributes({ authorNameLineHeightUnits: value })
+					}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
+
+				<FB_SwitcherControl
+					label={__("Color", "frontis-blocks")}
+					globalSwitcher={authorNameColorSwitcher}
+					setGlobalSwitcher={(value) =>
+						setAttributes({ authorNameColorSwitcher: value })
+					}
+				/>
+
+				{authorNameColorSwitcher === "normal" && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={authorNameColor}
+						setGlobalColor={(value) => {
+							setAttributes({
+								authorNameColor: value === undefined ? '' : value,
+							});
+						}}
+					/>
+				)}
+
+				{authorNameColorSwitcher === "hover" && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={authorNameHoverColor}
+						setGlobalColor={(value) =>
+							setAttributes({
+								authorNameHoverColor: value === undefined ? '' : value,
+							})
+						}
+					/>
+				)}
+			</PanelBody>
 		</>
 	);
 	const advancedControls = (

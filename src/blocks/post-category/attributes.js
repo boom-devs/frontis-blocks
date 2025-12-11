@@ -10,7 +10,7 @@ const attributes = {
 	},
 	premadeStyle: {
 		type: "string",
-		default: "style-1",
+		default: "",
 	},
 	taxonomyType: {
 		type: "string",
@@ -20,10 +20,14 @@ const attributes = {
 		type: "boolean",
 		default: true,
 	},
+	categoryCreators: {
+        type: "object",
+        default: {}
+    },
 	authorAvatarSize: {
-		type: "number",
+		type: "object",
 		default: {
-			Desktop: '24',
+			Desktop: '40',
 			Tablet: '',
 			Mobile: '',
 		},
@@ -257,28 +261,28 @@ const attributes = {
 	postCategoryPaddingDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
 		},
 	},
 	postCategoryPaddingTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
 		},
 	},
 	postCategoryPaddingMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "16",
+			bottom: "16",
+			left: "16",
+			right: "16",
 		},
 	},
 	postCategoryPaddingLink: {
@@ -398,10 +402,10 @@ const attributes = {
 	postCategoryBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "20",
+			bottom: "20",
+			left: "20",
+			right: "20",
 		},
 	},
 	postCategoryBorderRadiusTablet: {
@@ -608,6 +612,116 @@ const attributes = {
 	},
 
 	/** End Title */
+
+	/** Start Author Name */
+	authorNameGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	authorNameGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	authorNameGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	authorNameGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	authorNameFontFamily: {
+		type: "string",
+		default: "Onest",
+	},
+	authorNameFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorNameFontWeight: {
+		type: "string",
+		default: "",
+	},
+	authorNameFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	authorNameTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	authorNameTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	authorNameLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorNameLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	authorNameColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	authorNameColor: {
+		type: 'string',
+		default: '',
+	},
+	authorNameHoverColor: {
+		type: 'string',
+		default: '',
+	},
+
+	/** End Author Name */
 
 	/** Start Description */
 	postDescriptionGlobalTypographyData: {
