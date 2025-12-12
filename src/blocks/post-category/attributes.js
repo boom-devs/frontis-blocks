@@ -10,7 +10,7 @@ const attributes = {
 	},
 	premadeStyle: {
 		type: "string",
-		default: "",
+		default: "style-1",
 	},
 	taxonomyType: {
 		type: "string",
@@ -39,6 +39,22 @@ const attributes = {
 			Tablet: "px",
 			Mobile: "px",
 		},
+	},
+	authorAvatarGaps: {
+		type: "object",
+		default: {
+			Desktop: "10",
+			Tablet: "10",
+			Mobile: "10",
+		}
+	},
+	authorAvatarGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
 	},
 	/** Start Border Radius */
 	authorAvatarBorderRadiusUnits: {
@@ -970,6 +986,22 @@ const attributes = {
 		}
 	},
 	postCountSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+	labelGaps: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		}
+	},
+	labelGapUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
