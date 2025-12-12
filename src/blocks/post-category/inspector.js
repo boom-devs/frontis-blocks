@@ -52,6 +52,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		showAuthor,
 		authorAvatarSize,
 		authorAvatarSizeUnits,
+		authorAvatarGaps,
+		authorAvatarGapUnits,
 		showLabel,
 		showCount,
 		showDescription,
@@ -247,6 +249,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		postCountSpacing,
 		postCountSpacingUnits,
+		labelGaps,
+		labelGapUnits,
 		/** End count */
 
 		/** Start Read More Button style */
@@ -2434,6 +2438,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				gap: 16px;
 			}
 
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
+				display: flex;
+				flex-direction: row;
+				${ labelGaps.Desktop ? `gap: ${labelGaps.Desktop}${labelGapUnits.Desktop};` : "" }
+			}
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-author-wrapper{
+				${ authorAvatarGaps.Desktop ? `gap: ${authorAvatarGaps.Desktop}${authorAvatarGapUnits.Desktop};` : "" }
+			}
+
 			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-more-info .fb-taxonomy-author-name {
 				${authorNameColor ? `color: ${authorNameColor};` : ""}
 				${ authorNameGlobalTypoSwitcher.fontFamily === true && authorNameGlobalTypographyData.fontFamily ? `font-family: ${authorNameGlobalTypographyData.fontFamily};` : "" }
@@ -3057,8 +3070,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				` : ""
 			}
 
-
-
 			.${blockId} .fb-taxonomy-grid .fb-taxonomy-item,
 			.${blockId} .single-item .fb-taxonomy-item {
 
@@ -3556,6 +3567,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         @media only screen and (max-width: 1024px) {
 
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-author-wrapper{
+				${ authorAvatarGaps.Tablet ? `gap: ${authorAvatarGaps.Tablet}${authorAvatarGapUnits.Tablet};` : "" }
+			}
+				
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count{
+				display: flex;
+				flex-direction: row;
+				${ labelGaps.Tablet ? `gap: ${labelGaps.Tablet}${labelGapUnits.Tablet};` : "" }
+			}
+
 			.${blockId} .fb-taxonomy-grid {
                 grid-template-columns: repeat(${gridColumns.Tablet}, 1fr);
                 row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};
@@ -3783,6 +3804,16 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		}
 
         @media only screen and (max-width: 767px) {
+
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-author-wrapper{
+				${ authorAvatarGaps.Mobile ? `gap: ${authorAvatarGaps.Mobile}${authorAvatarGapUnits.Mobile};` : "" }
+			}
+				
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link-count .fb-taxonomy-count {
+				display: flex;
+				flex-direction: row;
+				${ labelGaps.Mobile ? `gap: ${labelGaps.Mobile}${labelGapUnits.Mobile};` : "" }
+			}
 					
 			.${blockId} .fb-taxonomy-grid {
                 grid-template-columns: repeat(${gridColumns.Mobile}, 1fr);
@@ -4187,26 +4218,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						)}
 
 						<div className="fb-control-divider"></div>
-
-						{showAuthor && (
-							<FB_Range
-								min={0}
-								max={100}
-								label={__("Avatar Size", "frontis-blocks")}
-								rangeValue={authorAvatarSize}
-								onChangeHandler={(value) =>
-									setAttributes({ authorAvatarSize: value })
-								}
-								rangeUnitHandler={(value) =>
-									setAttributes({ authorAvatarSizeUnits: value })
-								}
-								deviceType={deviceType}
-								units={authorAvatarSizeUnits}
-								setAttributes={setAttributes}
-								rangeStep={1}
-								resetFallbackValue={40}
-							/>
-						)}
 
 						<RangeControl
 							label={__("Item Limit", "frontis-blocks")}
@@ -4849,6 +4860,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 			{showCount && (
 				<PanelBody title={__("Count", "frontis-blocks")} initialOpen={false}>
+					<FB_Range
+						min={1}
+						max={100}
+						label={__("Label Gap", "frontis-blocks")}
+						rangeValue={labelGaps}
+						onChangeHandler={(value) =>
+							setAttributes({ labelGaps: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ labelGapUnits: value })
+						}
+						deviceType={deviceType}
+						units={labelGapUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
 					<FB_TypographyControl
 						globalTypoControlActive={true}
 						globalTypoSwitcher={postCountGlobalTypoSwitcher}
@@ -6267,7 +6295,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					</PanelBody>
 				)}
 
-			<PanelBody title={__("Author Name", "frontis-blocks")} initialOpen={false}>
+			<PanelBody title={__("Author", "frontis-blocks")} initialOpen={false}>
+				<FB_Range
+						min={1}
+						max={100}
+						label={__("Gap", "frontis-blocks")}
+						rangeValue={authorAvatarGaps}
+						onChangeHandler={(value) =>
+							setAttributes({ authorAvatarGaps: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ authorAvatarGapUnits: value })
+						}
+						deviceType={deviceType}
+						units={authorAvatarGapUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={""}
+					/>
+				{showAuthor && (
+					<FB_Range
+						min={0}
+						max={100}
+						label={__("Avatar Size", "frontis-blocks")}
+						rangeValue={authorAvatarSize}
+						onChangeHandler={(value) =>
+							setAttributes({ authorAvatarSize: value })
+						}
+						rangeUnitHandler={(value) =>
+							setAttributes({ authorAvatarSizeUnits: value })
+						}
+						deviceType={deviceType}
+						units={authorAvatarSizeUnits}
+						setAttributes={setAttributes}
+						rangeStep={1}
+						resetFallbackValue={40}
+					/>
+				)}
 				<FB_TypographyControl
 					globalTypoControlActive={true}
 					globalTypoSwitcher={authorNameGlobalTypoSwitcher}
