@@ -8,104 +8,77 @@ const save = ({ attributes }) => {
 
     const {
         blockID,
-        parentBlockID,
 
-        inheritedTagName,
-        inheritedDisplayIcon,
-        inheritedTabIconSwitcher,
-        inheritedTabImageUrl,
-        inheritedTabImageAlt,
-        inheritedTabIcon,
-        inheritedExpandedIconSwitcher,
-        inheritedExpandedImageUrl,
-        inheritedExpandedImageAlt,
-        inheritedExpandedIcon,
+        // general
+        fieldType,
+        fieldLabelSwitcher,
+        fieldLabel,
+        fieldIconSwitcher,
+        fieldIcon,
+        fieldPlaceholderSwitcher,
+        fieldPlaceholder,
+        fieldRequiredSwitcher,
+        fieldRequiredSymbolSwitcher,
+        fieldRequiredText,
+        fieldDefaultValue,
+        fieldCustomNameAttribute,
 
-        title,
-        titlePrefixType,
-        titlePrefixIcon,
-        titlePrefixImgUrl,
-        titlePrefixImgAlt,
-        titlePrefixImgId,
+        inheritedFieldIconSwitcher,
+        inheritedFieldLabelSwitcher,
+        inheritedFieldRequiredSwitcher,
+        inheritedFieldRequiredSymbolSwitcher,
 
-        titleSuffixType,
-        titleSuffixIcon,
-        titleSuffixImgUrl,
-        titleSuffixImgAlt,
-        titleSuffixImgId,
-
-        accordionItemGlobalWraperID,
-        accordionItemGlobalWraperClass,
+        textFieldGlobalWraperID,
+        textFieldGlobalWraperClass,
     } = attributes;
 
 
     const blockProps = useBlockProps.save({
-        className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+        className: `fb-text-field-wrapper fb-field-group fb-form-group ${blockID}`,
     });
+
+    const mergeFieldLabelSwitcher = fieldLabelSwitcher ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
+    const mergeFieldIconSwitcher = fieldIconSwitcher ? fieldIconSwitcher : inheritedFieldIconSwitcher;
+    const mergeFieldRequiredSwitcher = fieldRequiredSwitcher ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
+    const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
+
+    const defaultNameAttribute = `fb_${fieldType}_${blockID}`;
 
 
     return (
         <>
             <div {...blockProps}>
-                <div className={`fb-accordion-item-wrapper ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
-                    <div className={`fb-accordion-item-title-wrapper ${parentBlockID}`}>
-                        <div className={`fb-accordion-title-inner`}>
-                            {titlePrefixType !== 'none' && (
-                                <div className="fb-accordion-title-prefix">
-                                    {titlePrefixType === 'icon' && titlePrefixIcon && (
-                                           renderSVG(titlePrefixIcon)
-                                    )}
-
-                                    {titlePrefixType === 'image' && titlePrefixImgUrl && (
-                                        <img
-                                            src={titlePrefixImgUrl}
-                                            alt={titlePrefixImgAlt}
-                                        />
-                                    )}
-                                </div>
-                            )}
-
+                <div className="fb-form-group-wrapper fb-field-group-wrapper">
+                    {mergeFieldLabelSwitcher && (
+                        <div className="fb-form-label-wrapper">
                             <RichText.Content
-                                value={title}
-                                tagName={inheritedTagName}
-                                className="fb-accordion-title"
+                                tagName="label"
+                                className="fb-form-label fb-text-field-label"
+                                value={fieldLabel}
                             />
-
-                            {titleSuffixType !== 'none' && (
-                                <div className="fb-accordion-title-suffix">
-
-                                    {titleSuffixType === 'icon' && titleSuffixIcon && (
-                                        renderSVG(titleSuffixIcon)
-                                    )}
-
-                                    {titleSuffixType === 'image' && titleSuffixImgUrl && (
-                                        <img
-                                            src={titleSuffixImgUrl}
-                                            alt={titleSuffixImgAlt}
-                                        />
-                                    )}
-                                </div>
+                            {mergeFieldRequiredSymbolSwitcher && (
+                                <span className="fb-required-symbol">*</span>
                             )}
                         </div>
-                        {inheritedDisplayIcon && 
-                            <div className="fb-accordion-tab-icon">
-                                {inheritedTabIconSwitcher === 'icon' && inheritedTabIcon && renderSVG(inheritedTabIcon)}
-                                {inheritedTabIconSwitcher === 'image' && inheritedTabIcon && <img src={inheritedTabImageUrl} alt={inheritedTabImageAlt}/>}
-                            </div>
-                        }
-                        {inheritedDisplayIcon && 
-                            <div className="fb-accordion-expanded-icon">
-                                {inheritedExpandedIconSwitcher === 'icon' && inheritedExpandedIcon && renderSVG(inheritedExpandedIcon)}
-                                {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedIcon && <img src={inheritedExpandedImageUrl} alt={inheritedExpandedImageAlt}/>}
-                            </div>
-                        }
-                    </div>
-                    <div
-                        className={`fb-accordion-content-wrapper ${parentBlockID} `}
-                    >
-                        <div className="fb-accordion-content">
-                            <InnerBlocks.Content />
+                    )}
+                    <div className="fb-form-input-wrapper">
+                        <div className="fb-form-input fb-text-field-input">
+                            <input
+                                type={fieldType ? fieldType : 'text'}
+                                placeholder={fieldPlaceholder ? fieldPlaceholder : 'Enter your text here'}
+                                name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
+                                defaultValue={fieldDefaultValue ? fieldDefaultValue : ''}
+                                required={mergeFieldRequiredSwitcher ? true : false}
+                            />
+                            {mergeFieldIconSwitcher && fieldIcon && (
+                                <span className="fb-text-field-icon fb-field-icon">
+                                    {renderSVG(fieldIcon)}
+                                </span>
+                            )}
                         </div>
+                        {mergeFieldRequiredSwitcher && (
+                            <div className="fb-field-required-text fb-help-text">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
+                        )}
                     </div>
                 </div>
             </div>
