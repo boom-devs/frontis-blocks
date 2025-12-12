@@ -3,6 +3,7 @@ namespace FrontisBlocks\BackgroundProcess;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Assets\AssetsGenerator;
 use FrontisBlocks\Utils\Helper;
+use Exception;
 
 defined('ABSPATH') || exit;
 
@@ -12,7 +13,7 @@ class AssetsGenerationProcess {
     public function __construct() {
         add_action('wp', [$this, 'setup_data_processing_cron']);
         add_filter('cron_schedules', [$this, 'add_cron_interval']);
-        add_action('fb_process_assets_generation', [$this, 'process_pending_data']);
+        add_action('fb_process_assets_generation', [$this, 'process_data_cron_job']);
     }
 
     /**
@@ -21,6 +22,7 @@ class AssetsGenerationProcess {
     function process_pending_data($batch_size = 50, $time_limit = 30) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'fb_job_schedule';
+        $start_time = microtime(true);
        
         // Get unprocessed data
         $data_rows = $wpdb->get_results(
@@ -36,33 +38,27 @@ class AssetsGenerationProcess {
         }
         
         foreach ($data_rows as $row) {
-            try {
-                // Validate row exists
-                $row_exists = $wpdb->get_var($wpdb->prepare(
-                    "SELECT job_id FROM $table_name WHERE job_id = %d", 
-                    $row->job_id
-                ));
-                
-                if (!$row_exists) {
-                    error_log("Row ID {$row->job_id} not found, skipping...");
+            if ((microtime(true) - $start_time) >= $time_limit) {
+                error_log('FB: Assets generation time limit reached, stopping this batch.');
+                break;
+            }
 
-                    // Write php file
-                    $myfile = fopen($row->job_id."skipped.txt", "w") or die("Unable to open file!");
-                    $txt = "Row ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
-                    continue;
-                }
-                
+            try {
                 $post = get_post($row->job_id);
                 if (!$post) {
-                    error_log("Post ID {$row->job_id} not found, skipping...");
-
-                    // Write php file
-                    $myfile = fopen($row->job_id."skipped_post.txt", "w") or die("Unable to open file!");
-                    $txt = "Post ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
+                    error_log("FB: Post ID {$row->job_id} not found, marking job complete.");
+                    $current_attempts = (int) ($row->job_attempts ?? 0);
+                    $wpdb->update(
+                        $table_name,
+                        array(
+                            'job_status' => 1,
+                            'job_last_attempt' => current_time('mysql'),
+                            'job_attempts' => $current_attempts + 1
+                        ),
+                        array('job_id' => (int) $row->job_id),
+                        array('%d', '%s', '%d'),
+                        array('%d')
+                    );
                     continue;
                 }
                 
@@ -86,12 +82,15 @@ class AssetsGenerationProcess {
                         array('%d', '%s', '%d'),
                         array('%d')
                     );
+                    if ($checking_data_updated === false) {
+                        error_log("FB: Failed to update job {$row->job_id} after completion.");
+                    }
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 error_log("Exception in process_pending_data: " . $e->getMessage());
                 
                 $current_attempts = $row->job_attempts ?? 0;
-                $wpdb->update(
+                $updated = $wpdb->update(
                     $table_name,
                     array(
                         'job_last_attempt' => current_time('mysql'),
@@ -101,17 +100,16 @@ class AssetsGenerationProcess {
                     array('%s', '%d'),
                     array('%d')
                 );
-
-                $myfile = fopen($row->job_id."error.txt", "w") or die("Unable to open file!");
-                $txt = "Error: " . $e->getMessage();
-                fwrite($myfile, json_encode($txt));
-                fclose($myfile);
+                if ($updated === false) {
+                    error_log("FB: Failed to update job {$row->job_id} after exception.");
+                }
             }
             
-            usleep(2000000); // 0.02 seconds delay per item
+            usleep(20000); // 0.02 seconds delay per item
         }
         
-        $wpdb->query("DELETE FROM $table_name");
+        // Clean up completed jobs only
+        $wpdb->delete($table_name, array('job_status' => 1), array('%d'));
         return true;
     }
     
