@@ -188,7 +188,6 @@ const TemplateHeader = ({
                                 if (typeof onClose === 'function') {
                                     onClose();
                                     disableMenu && dispatch(setAttribute({ sitePreviewLoading: true }));
-                                    console.log("close");
                                 }
                             }}
                             aria-label="Close"

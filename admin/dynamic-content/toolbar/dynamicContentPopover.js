@@ -37,8 +37,6 @@ const DynamicContentPopover = ({ dataSource, setDataSource, sourceField, setSour
 	}, []);
 
 
-	console.log(selectedBlockAttributes)
-
 	const [initialValues, setInitialValues] = useState({});
 
 	useEffect(() => {

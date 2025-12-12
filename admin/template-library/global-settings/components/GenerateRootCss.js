@@ -374,8 +374,6 @@ const generateCSSVariables = (data, deviceType, previewType) => {
         iframe = document.querySelector('iframe[name="editor-canvas"]');
         iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
         styleTag = iframeDocument.getElementById(styleId);
-
-        console.log("iframeDocument", iframeDocument);
     }
 
     if (!styleTag) {

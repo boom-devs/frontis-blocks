@@ -26,8 +26,6 @@ import { Rive } from '@rive-app/canvas';
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
 					
-					console.log('Rive detected - Animations:', animations, 'State Machines:', stateMachines);
-					
 					// Cleanup temp instance
 					tempRive.cleanup();
 					
