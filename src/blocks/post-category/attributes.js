@@ -629,6 +629,47 @@ const attributes = {
 
 	/** End Title */
 
+	/** Start author Margin */
+	postAuthorMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	postAuthorMarginDesktop: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginTablet: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginMobile: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Margin */
 	/** Start Author Name */
 	authorNameGlobalTypographyData: {
 		type: "object",
@@ -996,9 +1037,9 @@ const attributes = {
 	labelGaps: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+			Desktop: "5",
+			Tablet: "5",
+			Mobile: "5",
 		}
 	},
 	labelGapUnits: {
