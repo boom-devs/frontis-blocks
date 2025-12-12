@@ -26,7 +26,6 @@ function LibraryFontVariant( { face, font } ) {
 			: isFontActivated( font.slug, null, null, font.source );
 
 	const handleToggleActivation = () => {
-		console.log("Hello this is checked");
 		if ( font?.fontFace?.length > 0 ) {
 			toggleActivateFont( font, face );
 			return;

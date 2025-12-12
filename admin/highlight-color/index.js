@@ -27,7 +27,6 @@ addFilter(
     'frontis-blocks/highlight-color-attributes',
     // addHighlightAttributes,
     () => {
-        console.log("Call back function")
     }
 );
 
