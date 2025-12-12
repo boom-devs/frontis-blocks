@@ -63,11 +63,6 @@ function InstalledFonts() {
 		globalStylesId
 	);
 
-	console.log("globalStyles?.edits")
-	console.log(globalStyles?.edits)
-	console.log("globalStyles?.edits?.settings?.typography?.fontFamilies")
-	console.log(globalStyles?.edits?.settings?.typography?.fontFamilies)
-
 	const fontFamiliesHasChanges =
 		!! globalStyles?.edits?.settings?.typography?.fontFamilies;
 
@@ -218,10 +213,6 @@ function InstalledFonts() {
 			} );
 		}
 	};
-
-	console.log("! fontFamiliesHasChanges")
-	console.log(! fontFamiliesHasChanges)
-	console.log(fontFamiliesHasChanges)
 
 	const hasFonts = baseThemeFonts.length > 0 || baseCustomFonts.length > 0;
 	return (

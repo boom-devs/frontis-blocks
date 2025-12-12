@@ -139,7 +139,6 @@ const Blocks = () => {
 	}
 
 	const categoryBlocksHandler = (category) => {
-		console.log(category)
 		const currentStatus = disabledCategories[category] || false;
 		const newStatus = currentStatus ? '1' : '0';
 		const updatedBlocks = blocks.map(block => {
