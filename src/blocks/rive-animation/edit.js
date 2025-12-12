@@ -48,9 +48,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
 
-					console.log('Detected animations:', animations);
-					console.log('Detected state machines:', stateMachines);
-
 					// Cleanup temp instance
 					tempRive.cleanup();
 
@@ -64,7 +61,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							const instance = riveInstanceRef.current;
 							if (instance) {
 								instance.resizeDrawingSurfaceToCanvas();
-								console.log('Rive animation loaded successfully');
 							}
 						},
 						onLoadError: (err) => {

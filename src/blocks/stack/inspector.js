@@ -848,8 +848,6 @@ const Inspector = (props) => {
 						containerMarginTablet[position] = containerDesktopMargin[position];
 					}
 
-					console.log(containerMarginTablet)
-
 					setAttributes({ containerTabletMargin: { ...containerMarginTablet, [position]: value } });
 					break;
 				case 'Mobile':
