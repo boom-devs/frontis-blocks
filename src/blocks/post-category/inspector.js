@@ -197,6 +197,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		authorNameColorSwitcher,
 		authorNameColor,
 		authorNameHoverColor,
+
+		postAuthorMarginUnits,
+		postAuthorMarginDesktop,
+		postAuthorMarginTablet,
+		postAuthorMarginMobile,
+		postAuthorMarginLink,
 		/** End Author Name */
 
 		/** Start description     */
@@ -761,6 +767,96 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		buttonFontFamily,
 	]);
 	/** End Load Google Font */
+
+	/** Start Post Author Item Margin */
+	const handlePostAuthorMarginUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (postAuthorMarginLink) {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						postAuthorMarginDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						postAuthorMarginTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						postAuthorMarginMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case "Desktop":
+					setAttributes({
+						postAuthorMarginDesktop: {
+							...postAuthorMarginDesktop,
+							[position]: value,
+						},
+					});
+					break;
+				case "Tablet":
+					setAttributes({
+						postAuthorMarginTablet: {
+							...postAuthorMarginTablet,
+							[position]: value,
+						},
+					});
+					break;
+				case "Mobile":
+					setAttributes({
+						postAuthorMarginMobile: {
+							...postAuthorMarginMobile,
+							[position]: value,
+						},
+					});
+					break;
+				default:
+					break;
+			}
+		}
+	};
+
+	const handlePostAuthorMarginCombineBtn = () => {
+		setAttributes({ postAuthorMarginLink: !postAuthorMarginLink });
+	};
+
+	const handlePostAuthorMarginUnitsHandler = (unit) => {
+		setAttributes({
+			postAuthorMarginUnits: {
+				...postAuthorMarginUnits,
+				[deviceType]: unit,
+			},
+		});
+	};
+
+	const postAuthorMarginDesktopWidth = `${postAuthorMarginDesktop.top}${postAuthorMarginUnits.Desktop} ${postAuthorMarginDesktop.right}${postAuthorMarginUnits.Desktop} ${postAuthorMarginDesktop.bottom}${postAuthorMarginUnits.Desktop} ${postAuthorMarginDesktop.left}${postAuthorMarginUnits.Desktop}`;
+
+	const postAuthorMarginTabletWidth = `${postAuthorMarginTablet.top}${postAuthorMarginUnits.Tablet} ${postAuthorMarginTablet.right}${postAuthorMarginUnits.Tablet} ${postAuthorMarginTablet.bottom}${postAuthorMarginUnits.Tablet} ${postAuthorMarginTablet.left}${postAuthorMarginUnits.Tablet}`;
+
+	const postAuthorMarginMobileWidth = `${postAuthorMarginMobile.top}${postAuthorMarginUnits.Mobile} ${postAuthorMarginMobile.right}${postAuthorMarginUnits.Mobile} ${postAuthorMarginMobile.bottom}${postAuthorMarginUnits.Mobile} ${postAuthorMarginMobile.left}${postAuthorMarginUnits.Mobile}`;
+	/** End Post Author Item Margin */
 
 	/** Start Post Category Item Padding */
 	const handlePostCategoryPaddingUnitChange = (event, position) => {
@@ -2478,6 +2574,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				border-radius: 50%;
 				object-fit: cover;							
 			}
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-more-info{
+				${ postAuthorMarginDesktopWidth && postAuthorMarginDesktop.top ? `margin: ${postAuthorMarginDesktopWidth};` : ""}
+			}
 
 			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-link .fb-taxonomy-name{
 				${postTitleColor ? `color: ${postTitleColor};` : ''}
@@ -3577,6 +3676,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${ labelGaps.Tablet ? `gap: ${labelGaps.Tablet}${labelGapUnits.Tablet};` : "" }
 			}
 
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-more-info{
+				${ postAuthorMarginTabletWidth && postAuthorMarginTablet.top ? `margin: ${postAuthorMarginTabletWidth};` : ""}
+			}
+
 			.${blockId} .fb-taxonomy-grid {
                 grid-template-columns: repeat(${gridColumns.Tablet}, 1fr);
                 row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};
@@ -3813,6 +3916,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				display: flex;
 				flex-direction: row;
 				${ labelGaps.Mobile ? `gap: ${labelGaps.Mobile}${labelGapUnits.Mobile};` : "" }
+			}
+
+			.${blockId} .fb_post_category_container .fb-taxonomy-item .fb-taxonomy-more-info{
+				${ postAuthorMarginMobileWidth && postAuthorMarginMobile.top ? `margin: ${postAuthorMarginMobileWidth};` : ""}
 			}
 					
 			.${blockId} .fb-taxonomy-grid {
@@ -6499,6 +6606,20 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						}
 					/>
 				)}
+
+				<FB_Spacing
+					label={__("Margin", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handlePostAuthorMarginUnitsHandler}
+					spacingUnits={postAuthorMarginUnits}
+					spacingDesktop={postAuthorMarginDesktop}
+					spacingTablet={postAuthorMarginTablet}
+					spacingMobile={postAuthorMarginMobile}
+					handleSpacingUnitHandler={handlePostAuthorMarginUnitChange}
+					spacingCombineBtn={postAuthorMarginLink}
+					spacingCombineBtnHandler={handlePostAuthorMarginCombineBtn}
+					setAttributes={setAttributes}
+				/>
 			</PanelBody>
 		</>
 	);
