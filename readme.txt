@@ -2,8 +2,8 @@
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
-Tested up to: 6.8
-Stable tag: 1.1.3
+Tested up to: 6.9
+Stable tag: 1.1.4
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,6 +197,16 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.4 – 12 december 2025 =
+- **Added**
+- Introduced a new Lottie Animation block to help you add lightweight, scalable animations using Lottie files (JSON) directly in the editor.
+- Improved the block setup for smoother insertion and easier configuration inside the block editor.
+- **Bug fixsing**
+- Resolved multiple issues in the Post Category block, including more stable category rendering and improved behavior in different post/category scenarios.
+- Fixed minor UI/selection inconsistencies to ensure the block works more reliably in the editor and on the frontend.
+- **Compatibility**
+- Confirmed compatibility with WordPress 6.9, ensuring the plugin works properly with the latest editor and core updates.
 
 = 1.1.3 – 28 November 2025 =
 - **Added**

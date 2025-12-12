@@ -8,6 +8,7 @@ import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 
 import { usePostDataMutation } from './services/laravelapi';
+import { use } from "@wordpress/data";
 
 const PatternLibraryButton = () => {
     const [loading, setLoading] = useState(false);
@@ -31,7 +32,6 @@ const PatternLibraryButton = () => {
         templatelibrary: ''
     });
 
-    const [isLoginModalOpen, setIsLoginModalOpen] = useState(true);
     const [currentPage, setCurrentPage] = useState({
         patterns: 1,
         pages: 1,
@@ -52,6 +52,18 @@ const PatternLibraryButton = () => {
         pages: [],
         sites: []
     });
+
+    const pageUrl = window.location.href;
+
+    useEffect(() => {
+        if (pageUrl.includes('/design-library/?patterns')) {
+            setActiveTab('patterns');
+        } else if (pageUrl.includes('/design-library/?pages')) {
+            setActiveTab('pages');
+        } else if (pageUrl.includes('/design-library/?sites')) {
+            setActiveTab('sites');
+        }
+    }, []);
     
 
     const [patternsData, { data: patternsResponse, error, isLoading }] = usePostDataMutation();
