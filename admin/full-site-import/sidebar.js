@@ -735,8 +735,6 @@ function FrontisBlocksSidebarFullSite(props) {
 
 					// Add globaltypo
 					if (key === 'fb_globaltypo') {
-						console.log("fb_globaltypo")
-						console.log(localStorageData)
 						if (localStorageData.length < 1) {
 							const res = await getGlobalStyle('fb_get_globaltypo');
 

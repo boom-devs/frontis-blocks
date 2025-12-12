@@ -61,12 +61,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	// Update innerBlocks when pattern changes
 	useEffect(() => {
-		console.log("Selected template:", selectedTemplate);
-		console.log("Pattern data:", patternData);
 
 		if (patternData && patternData.content) {
 			const parsedBlocks = parse(patternData.content);
-			console.log("Parsed blocks:", parsedBlocks);
 
 			if (parsedBlocks && parsedBlocks.length > 0) {
 				const { replaceInnerBlocks } = wp.data.dispatch(blockEditorStore);

@@ -446,8 +446,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					label: pattern.title && pattern.title.raw ? pattern.title.raw : `Pattern ${pattern.id}`
 				}))
 			);
-	
-			console.log('User patterns found:', patternData.userPatterns);
 		}
 	
 		setPatterns(patternOptions);

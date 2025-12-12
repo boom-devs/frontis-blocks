@@ -617,20 +617,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dynamicTaxonomyOptions,
 		clientId
 	]);
-	// Only run once on mount – set default taxonomy if empty
-	// useEffect(() => {
-	// 	if (taxonomyType || !allTaxonomies.length || !filteredPostTypes.length) return;
-
-	// 	const firstAllowed = dynamicTaxonomyOptions.find((opt) => !opt.isDisabled);
-	// 	console.log(firstAllowed);
-	// 	if (firstAllowed) {
-	// 		setAttributes({
-	// 			taxonomyType: firstAllowed.value,
-	// 			includeTaxonomies: [],
-	// 			excludeTaxonomies: [],
-	// 		});
-	// 	}
-	// }, []);
 
 	// Handle taxonomy change
 	const handleTaxonomyChange = useCallback(
