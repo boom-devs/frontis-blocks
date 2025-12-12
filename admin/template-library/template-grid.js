@@ -447,7 +447,7 @@ const TemplateGrid = ({
 
                         disabled={isImporting}
                     >
-                        {!activeTab === 'sites' ? <span>Import</span> : <span>Coming Soon</span>}
+                        {activeTab === 'sites' ? <span>Coming Soon</span> : <span>Import</span>}
                     </button>
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
