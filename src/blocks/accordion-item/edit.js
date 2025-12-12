@@ -101,7 +101,7 @@ const Edit = (props) => {
 
     return (
         <>
-            {isSelected && <Inspector {...props} />}
+            <Inspector {...props} />
 
             <div {...blockProps}>
                 <div className={`fb-accordion-item-wrapper for_edit_page ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>

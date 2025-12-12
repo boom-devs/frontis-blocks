@@ -1,0 +1,116 @@
+/**
+ * WordPress dependencies
+ */
+import { __ } from "@wordpress/i18n";
+import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
+import { Button } from "@wordpress/components";
+import { useRef, memo , useEffect, useMemo} from "@wordpress/element";
+import Inspector from "./inspector";
+import './editor.scss';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+
+
+const Edit = (props) => {
+    const { attributes, setAttributes, isSelected, clientId, context } = props;
+
+    const {
+        blockID,
+
+        // general
+        fieldType,
+        fieldLabelSwitcher,
+        fieldLabel,
+        fieldIconSwitcher,
+        fieldIcon,
+        fieldPlaceholderSwitcher,
+        fieldPlaceholder,
+        fieldRequiredSwitcher,
+        fieldRequiredSymbolSwitcher,
+        fieldRequiredText,
+        fieldDefaultValue,
+        fieldCustomNameAttribute,
+
+        inheritedFieldIconSwitcher,
+        inheritedFieldLabelSwitcher,
+        inheritedFieldRequiredSwitcher,
+        inheritedFieldRequiredSymbolSwitcher,
+
+        textFieldGlobalWraperID,
+        textFieldGlobalWraperClass,
+
+    } = attributes;
+
+
+    useEffect(() => {
+        setAttributes({
+            inheritedParentBlockID:  context["fb/formBuilderParentBlockID"],
+            inheritedFieldLabelSwitcher: context["fb/formInheritedLabelSwitcher"],
+            inheritedFieldIconSwitcher: context["fb/formInheritedIconSwitcher"],
+            inheritedFieldRequiredSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
+            inheritedFieldRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
+        })
+    }, [
+        context["fb/formBuilderParentBlockID"],
+        context["fb/formInheritedIconSwitcher"],
+        context["fb/formInheritedLabelSwitcher"],
+        context["fb/formInheritedRequiredFieldSwitcher"],
+        context["fb/formInheritedRequiredSymbolSwitcher"],
+    ])
+
+    const blockProps = useBlockProps({
+        className: `fb-text-field-wrapper fb-field-group fb-form-group ${blockID}`,
+    });
+
+    const mergeFieldLabelSwitcher = fieldLabelSwitcher ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
+    const mergeFieldIconSwitcher = fieldIconSwitcher ? fieldIconSwitcher : inheritedFieldIconSwitcher;
+    const mergeFieldRequiredSwitcher = fieldRequiredSwitcher ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
+    const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
+
+    const defaultNameAttribute = `fb_${fieldType}_${blockID}`;
+
+
+    return (
+        <>
+            <Inspector {...props} />
+
+            <div {...blockProps}>
+                <div className="fb-form-group-wrapper fb-field-group-wrapper">
+                    {mergeFieldLabelSwitcher && (
+                        <div className="fb-form-label-wrapper">
+                            <RichText
+                                tagName="label"
+                                className="fb-form-label fb-text-field-label"
+                                value={fieldLabel ? fieldLabel : 'Label'}
+                                onChange={(value) => setAttributes({ fieldLabel: value })}
+                            />
+                            {mergeFieldRequiredSymbolSwitcher && (
+                                <span className="fb-required-symbol">*</span>
+                            )}
+                        </div>
+                    )}
+                    <div className="fb-form-input-wrapper">
+                        <div className="fb-form-input fb-text-field-input">
+                            <textarea
+                                type={fieldType ? fieldType : 'text'}
+                                placeholder={fieldPlaceholder ? fieldPlaceholder : 'Enter your text here'}
+                                name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
+                                defaultValue={fieldDefaultValue ? fieldDefaultValue : ''}
+                                required={mergeFieldRequiredSwitcher ? true : false}
+                            />
+                            {mergeFieldIconSwitcher && fieldIcon && (
+                                <span className="fb-text-field-icon fb-field-icon">
+                                    {renderSVG(fieldIcon)}
+                                </span>
+                            )}
+                        </div>
+                        {mergeFieldRequiredSwitcher && (
+                            <div className="fb-field-required-text fb-help-text">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
+                        )}
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export default memo(Edit);

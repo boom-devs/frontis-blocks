@@ -3,6 +3,7 @@
         margin-bottom: 10px;
         &.is-opened {
             padding: 0;
+            margin-bottom: 24px;
             .components-button {
                 background: $neutral-color-50;
                 border-color: transparent;
@@ -88,8 +89,9 @@
             }
 
             .components-text-control__input {
-                height: 52px;
-                border-radius: 10px;
+                height: 40px;
+                border-radius: 4px;
+                padding: 12px;
             }
 
             .components-textarea-control__input {
