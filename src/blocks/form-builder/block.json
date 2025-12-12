@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/form-builder",
+	"version": "1.0.0",
+	"title": "Form Builder",
+	"category": "frontis-blocks",
+	"textdomain": "frontis-blocks",
+	"description": "A customizable form builder block for organizing content in a collapsible format.",
+	"example": {},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
+	"providesContext": {
+	  "fb/formBuilderParentBlockID": "blockID",
+	  "fb/formInheritedIconSwitcher": "fieldIconSwitcher",
+	  "fb/formInheritedLabelSwitcher": "fieldLabelSwitcher",
+	  "fb/formInheritedRequiredFieldSwitcher": "fieldRequiredSwitcher",
+	  "fb/formInheritedRequiredSymbolSwitcher": "fieldRequiredSymbolSwitcher"
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}

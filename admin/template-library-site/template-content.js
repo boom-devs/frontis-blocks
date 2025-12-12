@@ -149,7 +149,6 @@ const TemplateContent = ({
                         </div>
                     </div>
                     <div className="fb-template-library-content-header-bottom">
-                        <div className="fb-template-library-sort-wrapper"></div>
                         { tagLoading ? (
                             <>
                                 <ClipLoader color="fff" size={24} />
@@ -212,7 +211,7 @@ const TemplateContent = ({
                 </div>
 
                 {loading ? (
-                    <TemplateLibraryCardsSkeleton count={15} />
+                <TemplateLibraryCardsSkeleton count={15} />
                 ) : (
                     <>
                         <div className="fb-template-library-cards">
@@ -227,6 +226,7 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         preview_url={template.preview_url || ''}
+                                        read_more_url={template.read_more_url || ''}
                                         uploads={template.uploads || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}

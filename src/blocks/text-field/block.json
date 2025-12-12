@@ -1,0 +1,26 @@
+  {
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/text-field",
+    "version": "1.0.0",
+    "title": "Text Field",
+    "category": "frontis-blocks",
+    "textdomain": "frontis-blocks",
+    "description": "A customizable formBuilder item block for organizing content in a collapsible format.",
+    "example": {},
+    "supports": {
+      "anchor": false,
+      "align": ["wide", "full"],
+      "customClassName": false
+    },
+	  "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "parent": ["frontis-blocks/form-builder"],
+    "usesContext": [
+      "fb/formBuilderParentBlockID",
+      "fb/formInheritedIconSwitcher",
+      "fb/formInheritedLabelSwitcher",
+      "fb/formInheritedRequiredFieldSwitcher",
+      "fb/formInheritedRequiredSymbolSwitcher"
+    ]
+  }
