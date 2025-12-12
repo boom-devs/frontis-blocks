@@ -157,9 +157,11 @@ const attributes = {
 	},
 	ButtonColor: {
 		type: 'string',
+		default: '',
 	},
 	ButtonHoverColor: {
 		type: 'string',
+		default: '',
 	},
 	ButtonBgColorSwitcher: {
 		type: 'string',

@@ -67,7 +67,6 @@ const SystemRequirements = () => {
         }
     };
 
-    console.log(blocksInfo);
 
     const totalBlocks = Object.keys(blocksInfo).length;
     const activeBlocks = Object.values(blocksInfo).filter(status => status === true).length;

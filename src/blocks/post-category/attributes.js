@@ -14,7 +14,100 @@ const attributes = {
 	},
 	taxonomyType: {
 		type: "string",
-		default: "", // Default taxonomy
+		default: "",
+	},
+	showAuthor: {
+		type: "boolean",
+		default: true,
+	},
+	categoryCreators: {
+        type: "object",
+        default: {}
+    },
+	authorAvatarSize: {
+		type: "object",
+		default: {
+			Desktop: '40',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	authorAvatarSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorAvatarGaps: {
+		type: "object",
+		default: {
+			Desktop: "10",
+			Tablet: "10",
+			Mobile: "10",
+		}
+	},
+	authorAvatarGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+	/** Start Border Radius */
+	authorAvatarBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorAvatarBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+	},
+	authorAvatarBorderRadiusLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Border Radius */
+	showLabel: {
+		type: "boolean",
+		default: false,
+	},
+	showPostTypeLabel: {
+		type: "boolean",
+		default: true,
+	},
+	postTypeForLabel: {
+		type: "string",
+		default: ""
 	},
 	showCount: {
 		type: "boolean",
@@ -184,28 +277,28 @@ const attributes = {
 	postCategoryPaddingDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
 		},
 	},
 	postCategoryPaddingTablet: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "24",
+			bottom: "24",
+			left: "24",
+			right: "24",
 		},
 	},
 	postCategoryPaddingMobile: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "16",
+			bottom: "16",
+			left: "16",
+			right: "16",
 		},
 	},
 	postCategoryPaddingLink: {
@@ -325,10 +418,10 @@ const attributes = {
 	postCategoryBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			bottom: "",
-			left: "",
-			right: "",
+			top: "20",
+			bottom: "20",
+			left: "20",
+			right: "20",
 		},
 	},
 	postCategoryBorderRadiusTablet: {
@@ -522,19 +615,170 @@ const attributes = {
 	},
 
 	postTitleColorSwitcher: {
-		type: "string",
-		default: "normal",
+		type: 'string',
+		default: 'normal',
 	},
 	postTitleColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	postTitleHoverColor: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 
 	/** End Title */
+
+	/** Start author Margin */
+	postAuthorMarginUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	postAuthorMarginDesktop: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginTablet: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginMobile: {
+		type: "object",
+		default: {
+			top: "24",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+	},
+	postAuthorMarginLink: {
+		type: "boolean",
+		default: true,
+	},
+	/** End Margin */
+	/** Start Author Name */
+	authorNameGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	authorNameGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	authorNameGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	authorNameGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	authorNameFontFamily: {
+		type: "string",
+		default: "Onest",
+	},
+	authorNameFontSize: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorNameFontWeight: {
+		type: "string",
+		default: "",
+	},
+	authorNameFontStyle: {
+		type: "string",
+		default: "normal",
+	},
+	authorNameTextTransform: {
+		type: "string",
+		default: "none",
+	},
+	authorNameTextDecoration: {
+		type: "string",
+		default: "none",
+	},
+	authorNameLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	authorNameLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "30",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	authorNameLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
+	authorNameColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	authorNameColor: {
+		type: 'string',
+		default: '',
+	},
+	authorNameHoverColor: {
+		type: 'string',
+		default: '',
+	},
+
+	/** End Author Name */
 
 	/** Start Description */
 	postDescriptionGlobalTypographyData: {
@@ -783,6 +1027,22 @@ const attributes = {
 		}
 	},
 	postCountSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		}
+	},
+	labelGaps: {
+		type: "object",
+		default: {
+			Desktop: "5",
+			Tablet: "5",
+			Mobile: "5",
+		}
+	},
+	labelGapUnits: {
 		type: "object",
 		default: {
 			Desktop: "px",
