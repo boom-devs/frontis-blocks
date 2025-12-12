@@ -9,7 +9,6 @@ const STORE_NAME = 'frontis-blocks/copy-paste-style';
 
 const actions = {
     setCopyStyle(attributes, blockName) {
-        console.log('Action: setCopyStyle', { attributes, blockName });
         return {
             type: 'SET_COPY_STYLE',
             attributes,
@@ -17,7 +16,6 @@ const actions = {
         };
     },
     clearCopyStyle() {
-        console.log('Action: clearCopyStyle');
         return {
             type: 'CLEAR_COPY_STYLE',
         };
@@ -26,7 +24,6 @@ const actions = {
 
 const store = createReduxStore( STORE_NAME, {
     reducer: (state = DEFAULT_STATE, action) => {
-        console.log('Reducer: Current state', state, 'Action', action);
         switch (action.type) {
             case 'SET_COPY_STYLE':
                 return {
