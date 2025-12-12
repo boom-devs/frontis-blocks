@@ -11,7 +11,6 @@ export default function FrontisColorPanel() {
 	// const features = wp.data.select( 'core/block-editor' ).getFeatures();
 	const features = wp.data.select('core').getSettings().__experimentalFeatures;
 
-	console.log(features)
 	const elements = [
 		{
 			name: 'text',
