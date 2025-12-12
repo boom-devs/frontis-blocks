@@ -439,8 +439,6 @@ const generateCSSVariables = (data, deviceType) => {
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
             styleTag = iframeDocument.getElementById("global-typo");
 
-            console.log("iframeDocument")
-            console.log(iframeDocument)
         } else {
             iframe = document.querySelector('iframe[name="editor-canvas"]');
             iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
