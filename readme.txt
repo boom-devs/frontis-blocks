@@ -1,4 +1,4 @@
-=== Frontis Blocks – The Ultimate WordPress Block Plugin ===
+=== Frontis Blocks – The Ultimate Gutenberg Block Plugin for WordPress ===
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
