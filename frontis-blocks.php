@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Frontis Blocks – The Ultimate WordPress Block Plugin
+ * Plugin Name:       Frontis Blocks – The Ultimate Gutenberg Block Plugin for WordPress
  * Plugin URI:        https://wpmessiah.com/products/frontis-blocks/
  * Description:       The ultimate blocks library for Gutenberg editor.
  * Version:           1.1.4
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Define things
 define( 'FB_PLUGIN_FILE', __FILE__ );
-define( 'PORTAL_API', 'https://template-library.boomdevshub.com' );
-define( 'WORDPRESS_SYNC_API', 'https://frontis-sync.boomdevshub.com' );
+define( 'PORTAL_API', 'https://template-library.frontiswp.com' );
+define( 'WORDPRESS_SYNC_API', 'https://sync.frontiswp.com' );
 
 /**
  * Autoloader
