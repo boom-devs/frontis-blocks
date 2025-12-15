@@ -124,6 +124,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBgHoverCustomGradientColorSwitcher,
         tabListBgHoverCustomGradientColor,
 
+        tabListActiveBgColorTypeSwitcher,
+        tabListActiveBgColorType,
+        tabListActiveBgHoverColorType,
+        tabListActiveBgColor, 
+        tabListActiveBgHoverColor,
+        tabListActiveBgGradientColor,
+        tabListActiveBgHoverGradientColor,
+        tabListActiveBgCustomGradientColorSwitcher,
+        tabListActiveBgCustomGradientColor,
+        tabListActiveBgHoverCustomGradientColorSwitcher,
+        tabListActiveBgHoverCustomGradientColor,
+
         tabListPaddingUnits,
         tabListPaddingDesktop,
         tabListPaddingTablet,
@@ -139,6 +151,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBorder,
         tabListBorderColorSwitcher,
         tabListBorderColor,
+        tabListActiveBorderColor,
         tabListBorderHoverColor,
 
         tabListBorderUnits,
@@ -173,6 +186,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabTitleColorSwitcher,
         tabTitleColor,
+        tabTitleActiveColor,
         tabTitleHoverColor,
 
         tabTitlePaddingUnits,
@@ -224,6 +238,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabDescriptionColorSwitcher,
         tabDescriptionColor,
+        tabDescriptionActiveColor,
         tabDescriptionHoverColor,
 
         tabDescriptionPaddingUnits,
@@ -262,6 +277,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconSizeUnits,
         tabIconColorSwitcher,
         tabIconColor,
+        tabIconActiveColor,
         tabIconHoverColor,
 
         /** Start Background */
@@ -277,6 +293,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconHoverGradientColor,
         tabIconHoverCustomGradientSwitcher,
         tabIconHoverCustomGradientInputValue,
+        
+        //Active BG
+        tabIconBgActiveColorSwitcher,
+        tabIconActiveNormalBackgroundType,
+        tabIconBgActiveColor,
+        tabIconActiveNormalGradientColor,
+        tabIconActiveNormalCustomGradientSwitcher,
+        tabIconActiveNormalCustomGradientInputValue,
+
+        tabIconActiveHoverBackgroundType,
+        tabIconBgActiveHoverColor,
+        tabIconActiveHoverGradientColor,
+        tabIconActiveHoverCustomGradientSwitcher,
+        tabIconActiveHoverCustomGradientInputValue,
         /** End Background */
 
         tabIconBorder,
@@ -2430,7 +2460,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockId} .fb-tabs-wrapper {
+        .${blockId}.fb-tabs-wrapper {
             ${tabGlobalPaddingDesktopWidth && tabGlobalPaddingDesktop?.top ? `padding: ${tabGlobalPaddingDesktopWidth};` : ''}  
             ${tabGlobalMarginDesktopWidth && tabGlobalMarginDesktop?.top ? `margin: ${tabGlobalMarginDesktopWidth};` : ''}
             ${tabGlobalBorder ? `border: ${tabGlobalBorder};` : ''}
@@ -2449,7 +2479,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
             transition: all .3s ease-in-out;
         }
-        .${blockId} .fb-tabs-wrapper:hover {
+        .${blockId}.fb-tabs-wrapper:hover {
             ${tabGlobalBorderHoverColor ? `border-color: ${tabGlobalBorderHoverColor};` : ''}
             ${tabGlobalBoxShadowHoverCssValue ? `box-shadow: ${tabGlobalBoxShadowHoverCssValue};` : ''}
             ${tabGlobalBgHoverColorType === "gradient"
@@ -2548,9 +2578,36 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
-            background-color: #f0f0f0;
+            ${tabListActiveBgColorType === "gradient"
+                ? `background-color: ${
+                    tabListActiveBgCustomGradientColorSwitcher && tabListActiveBgCustomGradientColor
+                    ? tabListActiveBgCustomGradientColor
+                    : tabListActiveBgGradientColor
+                };`
+                : tabListActiveBgColor ? `background-color: ${tabListActiveBgColor};` : ''
+            }
+
+            ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor};` : ''}
         }
 
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon svg{
+            ${tabIconActiveColor ? `fill: ${tabIconActiveColor};` : ''}
+        }
+        
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon {
+			${tabIconActiveNormalBackgroundType === 'gradient' ? `   	
+                ${tabIconActiveNormalCustomGradientSwitcher && tabIconActiveNormalCustomGradientInputValue ? `background: ${tabIconActiveNormalCustomGradientInputValue};` : `background: ${tabIconActiveNormalGradientColor};`}
+            `: `
+                ${tabIconBgActiveColor ? `background: ${tabIconBgActiveColor};` : ''}
+            `}
+        }
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-title{
+            ${tabTitleActiveColor ? `color: ${tabTitleActiveColor};` : ''}
+        }
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-description{
+            ${tabDescriptionActiveColor ? `color: ${tabDescriptionActiveColor};` : ''}
+        }
+            
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li .fb-tab-title {
             ${tabTitleGlobalTypoSwitcher?.fontFamily === true && tabTitleGlobalTypographyData?.fontFamily ? `font-family: ${tabTitleGlobalTypographyData?.fontFamily};` : ''}
             ${tabTitleGlobalTypoSwitcher?.fontSize === true && tabTitleGlobalTypographyData?.fontSize ? `font-size: ${tabTitleGlobalTypographyData?.fontSize};` : ''}
@@ -2711,7 +2768,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         `}
 
         @media only screen and (max-width: 1024px) {
-            .${blockId} .fb-tabs-wrapper {
+            .${blockId}.fb-tabs-wrapper {
                 ${tabGlobalPaddingTabletWidth && tabGlobalPaddingTablet?.top ? `padding: ${tabGlobalPaddingTabletWidth};` : ''}   
                 ${tabGlobalMarginTabletWidth && tabGlobalMarginTablet?.top ? `margin: ${tabGlobalMarginTabletWidth};` : ''}
                 ${tabGlobalBorderTabletWidth && tabGlobalBorderTablet?.top ? `border-width: ${tabGlobalBorderTabletWidth};` : ''}
@@ -2791,7 +2848,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId} .fb-tabs-wrapper {
+            .${blockId}.fb-tabs-wrapper {
                 ${tabGlobalPaddingMobileWidth && tabGlobalPaddingMobile?.top ? `padding: ${tabGlobalPaddingMobileWidth};` : ''}   
                 ${tabGlobalMarginMobileWidth && tabGlobalMarginMobile?.top ? `margin: ${tabGlobalMarginMobileWidth};` : ''}
                 ${tabGlobalBorderMobileWidth && tabGlobalBorderMobile?.top ? `border-width: ${tabGlobalBorderMobileWidth};` : ''}
@@ -2955,6 +3012,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBgHoverCustomGradientColorSwitcher,
         tabListBgHoverCustomGradientColor,
 
+        tabListActiveBgColorTypeSwitcher,
+        tabListActiveBgColorType,
+        tabListActiveBgHoverColorType,
+        tabListActiveBgColor, 
+        tabListActiveBgHoverColor,
+        tabListActiveBgGradientColor,
+        tabListActiveBgHoverGradientColor,
+        tabListActiveBgCustomGradientColorSwitcher,
+        tabListActiveBgCustomGradientColor,
+        tabListActiveBgHoverCustomGradientColorSwitcher,
+        tabListActiveBgHoverCustomGradientColor,
+
         tabListPaddingUnits,
         tabListPaddingDesktop,
         tabListPaddingTablet,
@@ -3016,6 +3085,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabTitleColorSwitcher,
         tabTitleColor,
+        tabTitleActiveColor,
         tabTitleHoverColor,
 
         tabTitlePaddingUnits,
@@ -3079,6 +3149,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabDescriptionColorSwitcher,
         tabDescriptionColor,
+        tabDescriptionActiveColor,
         tabDescriptionHoverColor,
 
         tabDescriptionPaddingUnits,
@@ -3129,6 +3200,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconSizeUnits,
         tabIconColorSwitcher,
         tabIconColor,
+        tabIconActiveColor,
         tabIconHoverColor,
 
         /** Start Background */
@@ -3144,6 +3216,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconHoverGradientColor,
         tabIconHoverCustomGradientSwitcher,
         tabIconHoverCustomGradientInputValue,
+
+        //Active BG
+        tabIconBgActiveColorSwitcher,
+        tabIconActiveNormalBackgroundType,
+        tabIconBgActiveColor,
+        tabIconActiveNormalGradientColor,
+        tabIconActiveNormalCustomGradientSwitcher,
+        tabIconActiveNormalCustomGradientInputValue,
+
+        tabIconActiveHoverBackgroundType,
+        tabIconBgActiveHoverColor,
+        tabIconActiveHoverGradientColor,
+        tabIconActiveHoverCustomGradientSwitcher,
+        tabIconActiveHoverCustomGradientInputValue,
         /** End Background */
 
         tabIconBorder,
@@ -3620,7 +3706,35 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
+				/>
+                <FB_BackgroundColorControl
+					label={__("Active BG Color", "frontis-blocks")}
+					bgColorSwitcher={tabListActiveBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ tabListActiveBgColorTypeSwitcher: value })}
 
+					normalBackgroundType={tabListActiveBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ tabListActiveBgColorType: value })}
+					normalClassicColor={tabListActiveBgColor}
+					setNormalClassicColor={(value) => setAttributes({ tabListActiveBgColor: value === undefined ? '' : value })}
+					normalGradientColor={tabListActiveBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ tabListActiveBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={tabListActiveBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabListActiveBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={tabListActiveBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabListActiveBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={tabListActiveBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ tabListActiveBgHoverColorType: value })}
+					hoverClassicColor={tabListActiveBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ tabListActiveBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={tabListActiveBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ tabListActiveBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={tabListActiveBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabListActiveBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={tabListActiveBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListActiveBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
 				/>
                 <FB_Spacing 
                     label={__("Padding", "frontis-blocks")} 
@@ -3679,6 +3793,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                         setGlobalColor={(value) => setAttributes({ tabListBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
+
+                <FB_ColorControl
+                    label={__("Active Border Color", "frontis-blocks")}
+                    globalColor={tabListActiveBorderColor}
+                    setGlobalColor={(value) => setAttributes({ tabListActiveBorderColor: value === undefined ? '' : value })}
+                />
 
                 <FB_Spacing 
                     label={__("Border", "frontis-blocks")}
@@ -3789,6 +3909,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                             setGlobalColor={(value) => setAttributes({ tabTitleHoverColor: value === undefined ? '' : value })}
                         />
                     )}
+
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={tabTitleActiveColor}
+                        setGlobalColor={(value) => setAttributes({ tabTitleActiveColor: value === undefined ? '' : value })}
+                    />
 
                     <FB_Spacing 
                         label={__("Padding", "frontis-blocks")} 
@@ -3958,6 +4084,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                         />
                     )}
 
+                    <FB_ColorControl
+                        label={__("Active Color", "frontis-blocks")}
+                        globalColor={tabDescriptionActiveColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionActiveColor: value === undefined ? '' : value })}
+                    />
+
                     <FB_Spacing 
                         label={__("Padding", "frontis-blocks")} 
                         deviceType={deviceType}
@@ -4093,6 +4225,11 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                             />
                         )}
 
+                        <FB_ColorControl
+                            label={__("Icon Active Color", "frontis-blocks")}
+                            globalColor={tabIconActiveColor}
+                            setGlobalColor={(value) => setAttributes({ tabIconActiveColor: value === undefined ? '' : value })}
+                        />
 
                         <FB_BackgroundColorControl
                             label={__("Background Color", "frontis-blocks")}
@@ -4120,6 +4257,37 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                             setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconHoverCustomGradientSwitcher: value })}
                             hoverCustomGradientInputValue={tabIconHoverCustomGradientInputValue}
                             setHoverCustomGradientInputValue={(value) => setAttributes({ tabIconHoverCustomGradientInputValue: value })}
+
+                            isBackgroundImage={false}
+
+                        />
+
+                        <FB_BackgroundColorControl
+                            label={__("BG Active Color", "frontis-blocks")}
+                            bgColorSwitcher={tabIconBgActiveColorSwitcher}  
+                            setBgColorSwitcher={(value) => setAttributes({ tabIconBgActiveColorSwitcher: value })}
+                            
+                            normalBackgroundType={tabIconActiveNormalBackgroundType} 
+                            setNormalBackgroundType={(value) => setAttributes({ tabIconActiveNormalBackgroundType: value })}
+                            normalClassicColor={tabIconBgActiveColor}
+                            setNormalClassicColor={(value) => setAttributes({ tabIconBgActiveColor: value === undefined ? '' : value })}
+                            normalGradientColor={tabIconActiveNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ tabIconActiveNormalGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={tabIconActiveNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ tabIconActiveNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={tabIconActiveNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ tabIconActiveNormalCustomGradientInputValue: value })}
+                            
+                            hoverBackgroundType={tabIconActiveHoverBackgroundType} 
+                            setHoverBackgroundType={(value) => setAttributes({ tabIconActiveHoverBackgroundType: value })}
+                            hoverClassicColor={ tabIconBgActiveHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({  tabIconBgActiveHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={tabIconActiveHoverGradientColor} 
+                            setHoverGradientColor={(value) => setAttributes({ tabIconActiveHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={tabIconActiveHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconActiveHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={tabIconActiveHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ tabIconActiveHoverCustomGradientInputValue: value })}
 
                             isBackgroundImage={false}
 
@@ -4315,7 +4483,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             
             <PanelBody 
                 title={__("Tab Content", "frontis-blocks")} 
-                initialOpen={true}
+                initialOpen={false}
             >
                 <FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
