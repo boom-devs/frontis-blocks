@@ -241,91 +241,6 @@ const attributes = {
         default: true
     },
 
-    titleSpacing: {
-		type: 'object',
-		default: {
-			Desktop: '16',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	titleSpacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-
-    prefixSuffixSpacing: {
-		type: 'object',
-		default: {
-			Desktop: '20',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	prefixSuffixSpacingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-
-    titleSuffixIconSize: {
-		type: 'object',
-		default: {
-			Desktop: '22',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	titleSuffixIconSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-
-    titleIconSize: {
-		type: 'object',
-		default: {
-			Desktop: '22',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	titleIconSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-
-    titlePrefixIconSize: {
-		type: 'object',
-		default: {
-			Desktop: '22',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	titlePrefixIconSizeUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px',
-		}
-	},
-
     labelGlobalTypographyData: {
         type: 'object',
         default: {}
@@ -514,31 +429,6 @@ const attributes = {
 		}
 	},
 
-    formType: {
-        type: 'string',
-        source: 'attribute',
-        selector: '.fb-form-container',
-        attribute: 'data-form-type',
-        default: 'form',
-    },
-    displayIcon: {
-        type: 'boolean',
-        default: true,
-    },
-    tabIconSwitcher : {
-        type: 'string',
-        default: 'icon'
-    },
-    tabIcon: {
-        type: 'string',
-        default: 'angle-right',
-    },
-
-    transitionDuration: {
-        type: 'number',
-        default: 0.5,
-    },
-
     labelColor: {
         type: 'string',
         default: '#000000',
@@ -559,32 +449,6 @@ const attributes = {
     inputFieldFocusColor: {
         type: 'string',
         default: '',
-    },
-
-    titleIconColorSwitcher: {
-        type: 'string',
-        default: 'normal'
-    },
-    titleIconColor: {
-        type: 'string',
-        default: '#000000',
-    },
-    titleIconHoverColor: {
-        type: 'string',
-        default: '#FFFFFF',
-    },
-
-    tagName: {
-        type: 'string',
-        default: 'h4',
-    },
-    formChildCount: {
-        type: 'number',
-        default: 3,
-    },
-    faqSchema: {
-        type: 'boolean',
-        default: false,
     },
 
     labelMarginUnits : {
@@ -705,335 +569,6 @@ const attributes = {
     inputFieldPaddingLink : {
         type : 'boolean',
         default: true
-    },
-
-    formZIndex : {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-
-    formOverflow: {
-        type: 'string',
-        default: 'default',
-    },
-    
-    formPaddingUnits : {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
-    formDesktopPadding: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formTabPadding: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formMobilePadding: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formPaddingLink : {
-        type : 'boolean',
-        default: true
-    },
-    
-    formMarginUnits : {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
-    formDesktopMargin: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formTabMargin: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formMobileMargin: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formMarginLink : {
-        type : 'boolean',
-        default: true
-    },
-    
-    
-    formBorder: {
-        type: 'string',
-        default: 'none',
-    },
-    formBorderColor: {
-        type: 'string',
-    },
-    formBorderHoverColor: {
-        type: 'string',
-    },
-    formBorderColorSwitcher : {
-        type: 'string',
-        default: 'normal'
-    },
-    
-    formBorderUnits : {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
-    formDesktopBorderWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formTabBorderWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formMobileBorderWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formBorderLink : {
-        type : 'boolean',
-        default: true
-    },
-    
-    formBorderRadiusUnits : {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px'
-        }
-    },
-    formDesktopBorderRadiusWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formTabBorderRadiusWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formMobileBorderRadiusWidth: {
-        type: 'object', 
-        default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    formBorderRadiusLink : {
-        type : 'boolean',
-        default: true
-    },
-    formDesktopSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    formTabletSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    formMobileSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-
-
-    formGlobalBoxShadowSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
-    formGlobalBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    formGlobalBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-    formGlobalHoverBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    formGlobalHoverBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-
-    formBgColorSwitcher: {
-        type: 'string',
-        default: 'normal'
-    },
-    formBgType: {
-        type: 'string',
-        default: 'classic'
-    },
-    formBgClassicColor: {
-        type: 'string',
-    },
-    formBgGradientColor: {
-        type: 'string',
-    },
-    formBgCustomGradientSwitcher: {
-        type: 'boolean',
-        default: false
-    },
-    formBgCustomGradientInputValue: {
-        type: 'string',
-        default: ''
-    },
-    formBgColorStyle: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageUrl: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageAlt: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageID: {
-        type: 'string',
-        default: ''
-    },
-    formBgImagePosition: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageAttachment: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageSize: {
-        type: 'string',
-        default: ''
-    },
-    formBgImageRepeat: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverType: {
-        type: 'string',
-        default: 'classic'
-    },
-    formBgHoverClassicColor: {
-        type: 'string',
-    },
-    formBgHoverGradientColor: {
-        type: 'string',
-    },
-    formBgHoverCustomGradientSwitcher: {
-        type: 'boolean',
-        default: false
-    },
-    formBgHoverCustomGradientInputValue: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverColorStyle: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageUrl: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageAlt: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageID: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImagePosition: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageAttachment: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageSize: {
-        type: 'string',
-        default: ''
-    },
-    formBgHoverImageRepeat: {
-        type: 'string',
-        default: ''
     },
 
     inputFieldBgColorSwitcher: {
@@ -2523,6 +2058,340 @@ const attributes = {
             Tablet: 'px',
             Mobile: 'px',
         }
+    },
+
+    formZIndex : {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+
+    formOverflow: {
+        type: 'string',
+        default: 'default',
+    },
+    
+    formPaddingUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    formDesktopPadding: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formTabPadding: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formMobilePadding: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formPaddingLink : {
+        type : 'boolean',
+        default: true
+    },
+    
+    formMarginUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    formDesktopMargin: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formTabMargin: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formMobileMargin: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formMarginLink : {
+        type : 'boolean',
+        default: true
+    },
+    
+    
+    formBorder: {
+        type: 'string',
+        default: 'none',
+    },
+    formBorderColor: {
+        type: 'string',
+    },
+    formBorderHoverColor: {
+        type: 'string',
+    },
+    formBorderColorSwitcher : {
+        type: 'string',
+        default: 'normal'
+    },
+    
+    formBorderUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    formDesktopBorderWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formTabBorderWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formMobileBorderWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formBorderLink : {
+        type : 'boolean',
+        default: true
+    },
+    
+    formBorderRadiusUnits : {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    formDesktopBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formTabBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formMobileBorderRadiusWidth: {
+        type: 'object', 
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    formBorderRadiusLink : {
+        type : 'boolean',
+        default: true
+    },
+    formDesktopSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    formTabletSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+    formMobileSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+
+
+    formGlobalBoxShadowSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    formGlobalBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    formGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+    formGlobalHoverBoxShadowValues: {
+        type: 'array',
+        default: [],
+    },
+    formGlobalHoverBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
+
+    formBgColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    formBgType: {
+        type: 'string',
+        default: 'classic'
+    },
+    formBgClassicColor: {
+        type: 'string',
+    },
+    formBgGradientColor: {
+        type: 'string',
+    },
+    formBgCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    formBgCustomGradientInputValue: {
+        type: 'string',
+        default: ''
+    },
+    formBgColorStyle: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageID: {
+        type: 'string',
+        default: ''
+    },
+    formBgImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageSize: {
+        type: 'string',
+        default: ''
+    },
+    formBgImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverType: {
+        type: 'string',
+        default: 'classic'
+    },
+    formBgHoverClassicColor: {
+        type: 'string',
+    },
+    formBgHoverGradientColor: {
+        type: 'string',
+    },
+    formBgHoverCustomGradientSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    formBgHoverCustomGradientInputValue: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverColorStyle: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageUrl: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageAlt: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageID: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImagePosition: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageAttachment: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageSize: {
+        type: 'string',
+        default: ''
+    },
+    formBgHoverImageRepeat: {
+        type: 'string',
+        default: ''
+    },
+
+    transitionDuration: {
+        type: 'number',
+        default: 0.5,
     },
 };
 
