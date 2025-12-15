@@ -18,12 +18,11 @@ import {
     TextareaControl,
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
-import { BORDER_STYLES, FIELD_TYPES, MEDIA_TYPES } from "./constants/constants";
+import { BORDER_STYLES, FIELD_TYPES, MEDIA_TYPES, OVERFLOW_OP } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
 import { useEffect, useMemo } from "@wordpress/element";
 import FB_Range from "../../components/range";
-import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_ColorControl from "../../components/color-control";
 import FB_InputControl from "@Components/input-control";
@@ -31,6 +30,10 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
+import FB_TypographyControl from '../../components/typography-control';
+import FB_BackgroundColorControl from '../../components/background-color-control';
+import FB_BoxShadowControl from '../../components/box-shadow';
+import FB_VisibilityControl from '@Components/visibility-control';
 
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
@@ -240,14 +243,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     } = attributes;
 
     const deviceType= useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
     
 
     // Label Margin Function
@@ -914,13 +909,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         () => `
         .fb-accordion-item-main-wrapper.${blockID} {
             position: relative;
-            ${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
         }
         
           .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            ${accordionItemPaddingDesktopWidth && accordionItemDesktopPadding?.top ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-            ${accordionItemMarginDesktopWidth && accordionItemDesktopMargin?.top ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
             transition: all 0.3s ease-in-out;
           }
       
@@ -934,42 +926,25 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
       
           @media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
             }
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-              ${accordionItemPaddingTabletWidth && accordionItemTabPadding?.top ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-              ${accordionItemMarginTabletWidth && accordionItemTabMargin?.top ? `margin: ${accordionItemMarginTabletWidth};` : ''}
             }
           }
       
           @media only screen and (max-width: 767px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
             }
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-              ${accordionItemPaddingMobileWidth && accordionItemMobilePadding?.top ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-              ${accordionItemMarginMobileWidth && accordionItemMobileMargin?.top ? `margin: ${accordionItemMarginMobileWidth};` : ''}
             }
           }
         `,
         [
             blockID,
             deviceType,
-    
-            // Accordion Item Advance
-            accordionItemZIndex,
-            accordionItemPaddingUnits,
-            accordionItemDesktopPadding,
-            accordionItemTabPadding,
-            accordionItemMobilePadding,
-            accordionItemMarginUnits,
-            accordionItemDesktopMargin,
-            accordionItemTabMargin,
-            accordionItemMobileMargin,
         ]
       );
       
-      const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
+      const customCss = getCustomCss(textFieldCustomCSS, `.${blockID}`);
 
       useEffect(() => {
         setAttributes({
@@ -984,7 +959,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             position: relative;
             display: block;
             overflow: hidden;
-            ${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
             transition: all 0.3s ease-in-out;
         }
 
@@ -1005,8 +979,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             transition: all 0.3s ease-in-out;
         }
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            ${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-            ${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
             transition: all 0.3s ease-in-out;
         }
         .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
@@ -1017,37 +989,20 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
         @media only screen and (max-width: 1024px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
             }
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-                ${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-                ${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
             .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
             }
             .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-                ${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-                ${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
             }
         }
         `, [
             blockID,
             deviceType,
-    
-            // Accordion Item Advance
-            accordionItemZIndex,
-            accordionItemPaddingUnits,
-            accordionItemDesktopPadding,
-            accordionItemTabPadding,
-            accordionItemMobilePadding,
-            accordionItemMarginUnits,
-            accordionItemDesktopMargin,
-            accordionItemTabMargin,
-            accordionItemMobileMargin,
         ]);
 
         useEffect(() => {
