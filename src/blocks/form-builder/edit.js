@@ -75,12 +75,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             fieldPlaceholder: __('Enter your email', 'frontis-blocks'),
             fieldRequiredText: ''
         }],
-        ['frontis-blocks/textarea-field', {
-            label: __('Message', 'frontis-blocks'),
-            name: 'user_message',
-            placeholder: __('Write your message here...', 'frontis-blocks'),
-            required: true
-        }],
+        // ['frontis-blocks/textarea-field', {
+        //     label: __('Message', 'frontis-blocks'),
+        //     name: 'user_message',
+        //     placeholder: __('Write your message here...', 'frontis-blocks'),
+        //     required: true
+        // }],
     ];
 
 
