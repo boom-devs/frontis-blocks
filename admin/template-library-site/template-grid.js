@@ -51,7 +51,7 @@ const TemplateGrid = ({
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <div className={`fb-template-library-card-img ${templateType !== 'patterns' ? 'scroll-img' : ''}`}>
-                    <img src={`https://template-library.boomdevshub.com/storage/${imageUrl}`} alt={title || "Template preview"} />
+                    <img src={`https://template-library.frontiswp.com/storage/${imageUrl}`} alt={title || "Template preview"} />
                     <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
                         {is_premium ? "PRO" : "FREE"}
                     </div>
