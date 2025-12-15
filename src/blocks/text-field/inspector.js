@@ -170,76 +170,76 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
-        textFieldCustomCSS,
-        textFieldGlobalWraperID,
-        textFieldGlobalWraperClass,
+        fieldCustomCSS,
+        fieldGlobalWraperID,
+        fieldGlobalWraperClass,
 
         // form Advance
-        textFieldZIndex,
-        textFieldOverflow,
-        textFieldPaddingUnits,
-        textFieldDesktopPadding,
-        textFieldTabPadding,
-        textFieldMobilePadding,
-        textFieldPaddingLink,
+        fieldZIndex,
+        fieldOverflow,
+        fieldPaddingUnits,
+        fieldDesktopPadding,
+        fieldTabPadding,
+        fieldMobilePadding,
+        fieldPaddingLink,
 
-        textFieldMarginUnits,
-        textFieldDesktopMargin,
-        textFieldTabMargin,
-        textFieldMobileMargin,
-        textFieldMarginLink,
+        fieldMarginUnits,
+        fieldDesktopMargin,
+        fieldTabMargin,
+        fieldMobileMargin,
+        fieldMarginLink,
 
-        textFieldBorder,
-        textFieldBorderColor,
-        textFieldBorderHoverColor,
-        textFieldBorderColorSwitcher,
-        textFieldBorderUnits,
-        textFieldDesktopBorderWidth,
-        textFieldTabBorderWidth,
-        textFieldMobileBorderWidth,
-        textFieldBorderLink,
+        fieldBorder,
+        fieldBorderColor,
+        fieldBorderHoverColor,
+        fieldBorderColorSwitcher,
+        fieldBorderUnits,
+        fieldDesktopBorderWidth,
+        fieldTabBorderWidth,
+        fieldMobileBorderWidth,
+        fieldBorderLink,
 
-        textFieldBorderRadiusUnits,
-        textFieldDesktopBorderRadiusWidth,
-        textFieldTabBorderRadiusWidth,
-        textFieldMobileBorderRadiusWidth,
-        textFieldBorderRadiusLink,
+        fieldBorderRadiusUnits,
+        fieldDesktopBorderRadiusWidth,
+        fieldTabBorderRadiusWidth,
+        fieldMobileBorderRadiusWidth,
+        fieldBorderRadiusLink,
 
-        textFieldDesktopSwitcher,
-        textFieldTabletSwitcher,
-        textFieldMobileSwitcher,
+        fieldDesktopSwitcher,
+        fieldTabletSwitcher,
+        fieldMobileSwitcher,
 
-        textFieldBgColorSwitcher,
-        textFieldBgType,
-        textFieldBgClassicColor,
-        textFieldBgGradientColor,
-        textFieldBgCustomGradientSwitcher,
-        textFieldBgCustomGradientInputValue,
-        textFieldBgImageUrl,
-        textFieldBgImageAlt,
-        textFieldBgImageID,
-        textFieldBgImagePosition,
-        textFieldBgImageAttachment,
-        textFieldBgImageRepeat,
-        textFieldBgImageSize,
-        textFieldBgHoverType,
-        textFieldBgHoverClassicColor,
-        textFieldBgHoverGradientColor,
-        textFieldBgHoverCustomGradientSwitcher,
-        textFieldBgHoverCustomGradientInputValue,
-        textFieldBgHoverImageUrl,
-        textFieldBgHoverImageAlt,
-        textFieldBgHoverImageID,
-        textFieldBgHoverImagePosition,
-        textFieldBgHoverImageAttachment,
-        textFieldBgHoverImageRepeat,
-        textFieldBgHoverImageSize,
+        fieldBgColorSwitcher,
+        fieldBgType,
+        fieldBgClassicColor,
+        fieldBgGradientColor,
+        fieldBgCustomGradientSwitcher,
+        fieldBgCustomGradientInputValue,
+        fieldBgImageUrl,
+        fieldBgImageAlt,
+        fieldBgImageID,
+        fieldBgImagePosition,
+        fieldBgImageAttachment,
+        fieldBgImageRepeat,
+        fieldBgImageSize,
+        fieldBgHoverType,
+        fieldBgHoverClassicColor,
+        fieldBgHoverGradientColor,
+        fieldBgHoverCustomGradientSwitcher,
+        fieldBgHoverCustomGradientInputValue,
+        fieldBgHoverImageUrl,
+        fieldBgHoverImageAlt,
+        fieldBgHoverImageID,
+        fieldBgHoverImagePosition,
+        fieldBgHoverImageAttachment,
+        fieldBgHoverImageRepeat,
+        fieldBgHoverImageSize,
 
-        textFieldGlobalBoxShadowSwitcher,
-        textFieldGlobalBoxShadowValues,
-        textFieldGlobalBoxShadowCssValue,
-        textFieldGlobalHoverBoxShadowValues,
-        textFieldGlobalHoverBoxShadowCssValue,
+        fieldGlobalBoxShadowSwitcher,
+        fieldGlobalBoxShadowValues,
+        fieldGlobalBoxShadowCssValue,
+        fieldGlobalHoverBoxShadowValues,
+        fieldGlobalHoverBoxShadowCssValue,
     } = attributes;
 
     const deviceType= useDeviceType();
@@ -455,13 +455,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 
     // form content margin
-    const handleTextFieldMarginUnitChange = ( event, position ) => {
+    const handleFieldMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( textFieldMarginLink ) {
+        if ( fieldMarginLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        textFieldDesktopMargin: {
+                        fieldDesktopMargin: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -471,7 +471,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        textFieldTabMargin: {
+                        fieldTabMargin: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -481,7 +481,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        textFieldMobileMargin: {
+                        fieldMobileMargin: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -495,13 +495,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {textFieldDesktopMargin: {...textFieldDesktopMargin, [position]: value}} );
+                    setAttributes( {fieldDesktopMargin: {...fieldDesktopMargin, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {textFieldTabMargin: {...textFieldTabMargin, [position]: value}} );
+                    setAttributes( {fieldTabMargin: {...fieldTabMargin, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {textFieldMobileMargin: {...textFieldMobileMargin, [position]: value}} );
+                    setAttributes( {fieldMobileMargin: {...fieldMobileMargin, [position]: value}} );
                     break;
                 default:
                     break;
@@ -510,27 +510,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     }
 
-    const handleTextFieldMarginCombineBtn = () => {
-        setAttributes( {textFieldMarginLink: !textFieldMarginLink} );
+    const handleFieldMarginCombineBtn = () => {
+        setAttributes( {fieldMarginLink: !fieldMarginLink} );
     }
 
-    const handleTextFieldMarginUnitsHandler = (unit) => {
+    const handleFieldMarginUnitsHandler = (unit) => {
         setAttributes( {
-            textFieldMarginUnits: {
-                ...textFieldMarginUnits,
+            fieldMarginUnits: {
+                ...fieldMarginUnits,
                 [deviceType]: unit
             }
         })
     }
     
     // form Padding Functionb
-    const handleTextFieldPaddingUnitChange = ( event, position ) => {
+    const handleFieldPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( textFieldPaddingLink ) {
+        if ( fieldPaddingLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        textFieldDesktopPadding: {
+                        fieldDesktopPadding: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -540,7 +540,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        textFieldTabPadding: {
+                        fieldTabPadding: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -550,7 +550,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        textFieldMobilePadding: {
+                        fieldMobilePadding: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -564,13 +564,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {textFieldDesktopPadding: {...textFieldDesktopPadding, [position]: value}} );
+                    setAttributes( {fieldDesktopPadding: {...fieldDesktopPadding, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {textFieldTabPadding: {...textFieldTabPadding, [position]: value}} );
+                    setAttributes( {fieldTabPadding: {...fieldTabPadding, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {textFieldMobilePadding: {...textFieldMobilePadding, [position]: value}} );
+                    setAttributes( {fieldMobilePadding: {...fieldMobilePadding, [position]: value}} );
                     break;
                 default:
                     break;
@@ -579,27 +579,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     }
 
-    const handleTextFieldPaddingCombineBtn = () => {
-        setAttributes( {textFieldPaddingLink: !textFieldPaddingLink} );
+    const handleFieldPaddingCombineBtn = () => {
+        setAttributes( {fieldPaddingLink: !fieldPaddingLink} );
     }
 
-    const handleTextFieldPaddingUnitsHandler = (unit) => {
+    const handleFieldPaddingUnitsHandler = (unit) => {
         setAttributes( {
-            textFieldPaddingUnits: {
-                ...textFieldPaddingUnits,
+            fieldPaddingUnits: {
+                ...fieldPaddingUnits,
                 [deviceType]: unit
             }
         })
     }
 
     // form BorderWidth Function
-    const handleTextFieldBorderUnitChange = ( event, position ) => {
+    const handleFieldBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( textFieldBorderLink ) {
+        if ( fieldBorderLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        textFieldDesktopBorderWidth: {
+                        fieldDesktopBorderWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -609,7 +609,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        textFieldTabBorderWidth: {
+                        fieldTabBorderWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -619,7 +619,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        textFieldMobileBorderWidth: {
+                        fieldMobileBorderWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -633,13 +633,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {textFieldDesktopBorderWidth: {...textFieldDesktopBorderWidth, [position]: value}} );
+                    setAttributes( {fieldDesktopBorderWidth: {...fieldDesktopBorderWidth, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {textFieldTabBorderWidth: {...textFieldTabBorderWidth, [position]: value}} );
+                    setAttributes( {fieldTabBorderWidth: {...fieldTabBorderWidth, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {textFieldMobileBorderWidth: {...textFieldMobileBorderWidth, [position]: value}} );
+                    setAttributes( {fieldMobileBorderWidth: {...fieldMobileBorderWidth, [position]: value}} );
                     break;
                 default:
                     break;
@@ -648,27 +648,27 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     }
 
-    const handleTextFieldBorderCombineBtn = () => {
-        setAttributes( {textFieldBorderLink: !textFieldBorderLink} );
+    const handleFieldBorderCombineBtn = () => {
+        setAttributes( {fieldBorderLink: !fieldBorderLink} );
     }
 
-    const handleTextFieldBorderUnitsHandler = (unit) => {
+    const handleFieldBorderUnitsHandler = (unit) => {
         setAttributes( {
-            textFieldBorderUnits: {
-                ...textFieldBorderUnits,
+            fieldBorderUnits: {
+                ...fieldBorderUnits,
                 [deviceType]: unit
             }
         })
     }
 
     // form BorderRadiusWidth Function
-    const handleTextFieldBorderRadiusUnitChange = ( event, position ) => {
+    const handleFieldBorderRadiusUnitChange = ( event, position ) => {
         const value = event.target.value;
-        if ( textFieldBorderRadiusLink ) {
+        if ( fieldBorderRadiusLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        textFieldDesktopBorderRadiusWidth: {
+                        fieldDesktopBorderRadiusWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -678,7 +678,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        textFieldTabBorderRadiusWidth: {
+                        fieldTabBorderRadiusWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -688,7 +688,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        textFieldMobileBorderRadiusWidth: {
+                        fieldMobileBorderRadiusWidth: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -702,13 +702,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {textFieldDesktopBorderRadiusWidth: {...textFieldDesktopBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldDesktopBorderRadiusWidth: {...fieldDesktopBorderRadiusWidth, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {textFieldTabBorderRadiusWidth: {...textFieldTabBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldTabBorderRadiusWidth: {...fieldTabBorderRadiusWidth, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {textFieldMobileBorderRadiusWidth: {...textFieldMobileBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldMobileBorderRadiusWidth: {...fieldMobileBorderRadiusWidth, [position]: value}} );
                     break;
                 default:
                     break;
@@ -717,14 +717,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     }
 
-    const handleTextFieldBorderRadiusCombineBtn = () => {
-        setAttributes( {textFieldBorderRadiusLink: !textFieldBorderRadiusLink} );
+    const handleFieldBorderRadiusCombineBtn = () => {
+        setAttributes( {fieldBorderRadiusLink: !fieldBorderRadiusLink} );
     }
 
-    const handleTextFieldBorderRadiusUnitsHandler = (unit) => {
+    const handleFieldBorderRadiusUnitsHandler = (unit) => {
         setAttributes( {
-            textFieldBorderRadiusUnits: {
-                ...textFieldBorderRadiusUnits,
+            fieldBorderRadiusUnits: {
+                ...fieldBorderRadiusUnits,
                 [deviceType]: unit
             }
         })
@@ -881,21 +881,21 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const inputFieldPaddingTabletWidth = `${inputFieldTabletPadding?.top}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.right}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.bottom}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.left}${inputFieldPaddingUnits?.Tablet}`;
     const inputFieldPaddingMobileWidth = `${inputFieldMobilePadding?.top}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.right}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.bottom}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.left}${inputFieldPaddingUnits?.Mobile}`;
 
-    const textFieldMarginDesktopWidth = `${textFieldDesktopMargin?.top}${textFieldMarginUnits?.Desktop} ${textFieldDesktopMargin?.right}${textFieldMarginUnits?.Desktop} ${textFieldDesktopMargin?.bottom}${textFieldMarginUnits?.Desktop} ${textFieldDesktopMargin?.left}${textFieldMarginUnits?.Desktop}`;
-    const textFieldMarginTabletWidth = `${textFieldTabMargin?.top}${textFieldMarginUnits?.Tablet} ${textFieldTabMargin?.right}${textFieldMarginUnits?.Tablet} ${textFieldTabMargin?.bottom}${textFieldMarginUnits?.Tablet} ${textFieldTabMargin?.left}${textFieldMarginUnits?.Tablet}`;
-    const textFieldMarginMobileWidth = `${textFieldMobileMargin?.top}${textFieldMarginUnits?.Mobile} ${textFieldMobileMargin?.right}${textFieldMarginUnits?.Mobile} ${textFieldMobileMargin?.bottom}${textFieldMarginUnits?.Mobile} ${textFieldMobileMargin?.left}${textFieldMarginUnits?.Mobile}`;
+    const fieldMarginDesktopWidth = `${fieldDesktopMargin?.top}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.right}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.bottom}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.left}${fieldMarginUnits?.Desktop}`;
+    const fieldMarginTabletWidth = `${fieldTabMargin?.top}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.right}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.bottom}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.left}${fieldMarginUnits?.Tablet}`;
+    const fieldMarginMobileWidth = `${fieldMobileMargin?.top}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.right}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.bottom}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.left}${fieldMarginUnits?.Mobile}`;
 
-    const textFieldPaddingDesktopWidth = `${textFieldDesktopPadding?.top}${textFieldPaddingUnits?.Desktop} ${textFieldDesktopPadding?.right}${textFieldPaddingUnits?.Desktop} ${textFieldDesktopPadding?.bottom}${textFieldPaddingUnits?.Desktop} ${textFieldDesktopPadding?.left}${textFieldPaddingUnits?.Desktop}`;
-    const textFieldPaddingTabletWidth = `${textFieldTabPadding?.top}${textFieldPaddingUnits?.Tablet} ${textFieldTabPadding?.right}${textFieldPaddingUnits?.Tablet} ${textFieldTabPadding?.bottom}${textFieldPaddingUnits?.Tablet} ${textFieldTabPadding?.left}${textFieldPaddingUnits?.Tablet}`;
-    const textFieldPaddingMobileWidth = `${textFieldMobilePadding?.top}${textFieldPaddingUnits?.Mobile} ${textFieldMobilePadding?.right}${textFieldPaddingUnits?.Mobile} ${textFieldMobilePadding?.bottom}${textFieldPaddingUnits?.Mobile} ${textFieldMobilePadding?.left}${textFieldPaddingUnits?.Mobile}`;
+    const fieldPaddingDesktopWidth = `${fieldDesktopPadding?.top}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.right}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.bottom}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.left}${fieldPaddingUnits?.Desktop}`;
+    const fieldPaddingTabletWidth = `${fieldTabPadding?.top}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.right}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.bottom}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.left}${fieldPaddingUnits?.Tablet}`;
+    const fieldPaddingMobileWidth = `${fieldMobilePadding?.top}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.right}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.bottom}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.left}${fieldPaddingUnits?.Mobile}`;
 
-    const textFieldBorderDesktopWidth = `${textFieldDesktopBorderWidth?.top}${textFieldBorderUnits?.Desktop} ${textFieldDesktopBorderWidth?.right}${textFieldBorderUnits?.Desktop} ${textFieldDesktopBorderWidth?.bottom}${textFieldBorderUnits?.Desktop} ${textFieldDesktopBorderWidth?.left}${textFieldBorderUnits?.Desktop}`;
-    const textFieldBorderTabletWidth = `${textFieldTabBorderWidth?.top}${textFieldBorderUnits?.Tablet} ${textFieldTabBorderWidth?.right}${textFieldBorderUnits?.Tablet} ${textFieldTabBorderWidth?.bottom}${textFieldBorderUnits?.Tablet} ${textFieldTabBorderWidth?.left}${textFieldBorderUnits?.Tablet}`;
-    const textFieldBorderMobileWidth = `${textFieldMobileBorderWidth?.top}${textFieldBorderUnits?.Mobile} ${textFieldMobileBorderWidth?.right}${textFieldBorderUnits?.Mobile} ${textFieldMobileBorderWidth?.bottom}${textFieldBorderUnits?.Mobile} ${textFieldMobileBorderWidth?.left}${textFieldBorderUnits?.Mobile}`;
+    const fieldBorderDesktopWidth = `${fieldDesktopBorderWidth?.top}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.right}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.bottom}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.left}${fieldBorderUnits?.Desktop}`;
+    const fieldBorderTabletWidth = `${fieldTabBorderWidth?.top}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.right}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.bottom}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.left}${fieldBorderUnits?.Tablet}`;
+    const fieldBorderMobileWidth = `${fieldMobileBorderWidth?.top}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.right}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.bottom}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.left}${fieldBorderUnits?.Mobile}`;
 
-    const textFieldBorderRadiusDesktopWidth = `${textFieldDesktopBorderRadiusWidth?.top}${textFieldBorderRadiusUnits?.Desktop} ${textFieldDesktopBorderRadiusWidth?.right}${textFieldBorderRadiusUnits?.Desktop} ${textFieldDesktopBorderRadiusWidth?.bottom}${textFieldBorderRadiusUnits?.Desktop} ${textFieldDesktopBorderRadiusWidth?.left}${textFieldBorderRadiusUnits?.Desktop}`;
-    const textFieldBorderRadiusTabletWidth = `${textFieldTabBorderRadiusWidth?.top}${textFieldBorderRadiusUnits?.Tablet} ${textFieldTabBorderRadiusWidth?.right}${textFieldBorderRadiusUnits?.Tablet} ${textFieldTabBorderRadiusWidth?.bottom}${textFieldBorderRadiusUnits?.Tablet} ${textFieldTabBorderRadiusWidth?.left}${textFieldBorderRadiusUnits?.Tablet}`;
-    const textFieldBorderRadiusMobileWidth = `${textFieldMobileBorderRadiusWidth?.top}${textFieldBorderRadiusUnits?.Mobile} ${textFieldMobileBorderRadiusWidth?.right}${textFieldBorderRadiusUnits?.Mobile} ${textFieldMobileBorderRadiusWidth?.bottom}${textFieldBorderRadiusUnits?.Mobile} ${textFieldMobileBorderRadiusWidth?.left}${textFieldBorderRadiusUnits?.Mobile}`;
+    const fieldBorderRadiusDesktopWidth = `${fieldDesktopBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Desktop}`;
+    const fieldBorderRadiusTabletWidth = `${fieldTabBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Tablet}`;
+    const fieldBorderRadiusMobileWidth = `${fieldMobileBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Mobile}`;
 
     const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop?.top}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.right}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.bottom}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.left}${inputFieldBorderUnits?.Desktop}`;
     const inputFieldBorderTabletWidth = `${inputFieldBorderTablet?.top}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.right}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.bottom}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.left}${inputFieldBorderUnits?.Tablet}`;
@@ -906,7 +906,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const inputFieldBorderRadiusMobileWidth = `${inputFieldBorderRadiusMobile?.top}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.right}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.bottom}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.left}${inputFieldBorderRadiusUnits?.Mobile}`;
 
 
-    const fbTextFieldItemStyle = useMemo(
+    const fbfieldItemStyle = useMemo(
         () => `
         .fb-accordion-item-main-wrapper.${blockID} {
             position: relative;
@@ -945,17 +945,17 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         ]
       );
       
-      const customCss = getCustomCss(textFieldCustomCSS, `.${blockID}`);
+      const customCss = getCustomCss(fieldCustomCSS, `.${blockID}`);
 
       useEffect(() => {
         setAttributes({
-          blockStyle: `${fbTextFieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
+          blockStyle: `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
         });
-      }, [fbTextFieldItemStyle, customCss]);
+      }, [fbfieldItemStyle, customCss]);
 
-      const editorStyle = `${fbTextFieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+      const editorStyle = `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-      const fbTextFieldItemStyleTwo = useMemo(() => `
+      const fbfieldItemStyleTwo = useMemo(() => `
         .fb-accordion-item-main-wrapper.${blockID} {
             position: relative;
             display: block;
@@ -1008,9 +1008,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
         useEffect(() => {
             setAttributes({
-                blockStyleTwo: `${fbTextFieldItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
+                blockStyleTwo: `${fbfieldItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
             });
-        }, [fbTextFieldItemStyleTwo, customCss]);
+        }, [fbfieldItemStyleTwo, customCss]);
 
     const mergeFieldLabelSwitcher = fieldLabelSwitcher !== null ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
     const mergeFieldIconSwitcher = fieldIconSwitcher !== null ? fieldIconSwitcher : inheritedFieldIconSwitcher;
@@ -1547,8 +1547,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             min={0}
                             max={10000000}
                             label={__("Z Index", "frontis-blocks")}
-                            rangeValue={textFieldZIndex}
-                            onChangeHandler={(value) => setAttributes({ textFieldZIndex: value === 0 ? undefined : value })}
+                            rangeValue={fieldZIndex}
+                            onChangeHandler={(value) => setAttributes({ fieldZIndex: value === 0 ? undefined : value })}
                             deviceType={deviceType}
                             setAttributes={setAttributes}
                             rangeStep={1}
@@ -1559,22 +1559,22 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                         <SelectControl
                             label={__("Overflow", "frontis-blocks")}
-                            value={textFieldOverflow}
+                            value={fieldOverflow}
                             options={OVERFLOW_OP}
-                            onChange={(value) => setAttributes({ textFieldOverflow: value })}
+                            onChange={(value) => setAttributes({ fieldOverflow: value })}
                         />
 
                         <FB_InputControl
                             label={__("CSS ID", "frontis-blocks")}
-                            value={textFieldGlobalWraperID}
-                            onChangeValue={(value) => setAttributes({ textFieldGlobalWraperID: value })}
+                            value={fieldGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ fieldGlobalWraperID: value })}
                             helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
                         />
 
                         <FB_InputControl
                             label={__("CSS Class", "frontis-blocks")}
-                            value={textFieldGlobalWraperClass}
-                            onChangeValue={(value) => setAttributes({ textFieldGlobalWraperClass: value })}
+                            value={fieldGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ fieldGlobalWraperClass: value })}
                             helpText={__("Separate with spaces key.", "frontis-blocks")}
                         />
                     </PanelBody>
@@ -1586,28 +1586,28 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         <FB_Spacing
                             label={__("Margin", "frontis-blocks")}
                             deviceType={deviceType}
-                            spacingUnitsHandler={handleTextFieldMarginUnitsHandler}
-                            spacingUnits={textFieldMarginUnits}
-                            spacingDesktop={textFieldDesktopMargin}
-                            spacingTablet={textFieldTabMargin}
-                            spacingMobile={textFieldMobileMargin}
-                            handleSpacingUnitHandler={handleTextFieldMarginUnitChange}
-                            spacingCombineBtn={textFieldMarginLink}
-                            spacingCombineBtnHandler={handleTextFieldMarginCombineBtn}
+                            spacingUnitsHandler={handleFieldMarginUnitsHandler}
+                            spacingUnits={fieldMarginUnits}
+                            spacingDesktop={fieldDesktopMargin}
+                            spacingTablet={fieldTabMargin}
+                            spacingMobile={fieldMobileMargin}
+                            handleSpacingUnitHandler={handleFieldMarginUnitChange}
+                            spacingCombineBtn={fieldMarginLink}
+                            spacingCombineBtnHandler={handleFieldMarginCombineBtn}
                             setAttributes={setAttributes}
                         />
 
                         <FB_Spacing 
                             label={__("Padding", "frontis-blocks")}
                             deviceType={deviceType}
-                            spacingUnitsHandler={handleTextFieldPaddingUnitsHandler}
-                            spacingUnits={textFieldPaddingUnits}
-                            spacingDesktop={textFieldDesktopPadding}
-                            spacingTablet={textFieldTabPadding}
-                            spacingMobile={textFieldMobilePadding}
-                            handleSpacingUnitHandler={handleTextFieldPaddingUnitChange}
-                            spacingCombineBtn={textFieldPaddingLink}
-                            spacingCombineBtnHandler={handleTextFieldPaddingCombineBtn}
+                            spacingUnitsHandler={handleFieldPaddingUnitsHandler}
+                            spacingUnits={fieldPaddingUnits}
+                            spacingDesktop={fieldDesktopPadding}
+                            spacingTablet={fieldTabPadding}
+                            spacingMobile={fieldMobilePadding}
+                            handleSpacingUnitHandler={handleFieldPaddingUnitChange}
+                            spacingCombineBtn={fieldPaddingLink}
+                            spacingCombineBtnHandler={handleFieldPaddingCombineBtn}
                             setAttributes={setAttributes}
                         />                                     
                     </PanelBody>
@@ -1617,125 +1617,125 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         initialOpen={false} 
                     >
                         <FB_BackgroundColorControl
-                            bgColorSwitcher={textFieldBgColorSwitcher}
+                            bgColorSwitcher={fieldBgColorSwitcher}
                             setBgColorSwitcher={(value) =>
-                                setAttributes({ textFieldBgColorSwitcher: value })
+                                setAttributes({ fieldBgColorSwitcher: value })
                             }
-                            normalBackgroundType={textFieldBgType}
+                            normalBackgroundType={fieldBgType}
                             setNormalBackgroundType={(value) =>
-                                setAttributes({ textFieldBgType: value })
+                                setAttributes({ fieldBgType: value })
                             }
-                            normalClassicColor={textFieldBgClassicColor}
+                            normalClassicColor={fieldBgClassicColor}
                             setNormalClassicColor={(value) =>
-                                setAttributes({ textFieldBgClassicColor: value === undefined ? '' : value })
+                                setAttributes({ fieldBgClassicColor: value === undefined ? '' : value })
                             }
-                            normalGradientColor={textFieldBgGradientColor}
+                            normalGradientColor={fieldBgGradientColor}
                             setNormalGradientColor={(value) =>
-                                setAttributes({ textFieldBgGradientColor: value === undefined ? null : value })
+                                setAttributes({ fieldBgGradientColor: value === undefined ? null : value })
                             }
-                            normalCustomGradientSwitcher={textFieldBgCustomGradientSwitcher}
+                            normalCustomGradientSwitcher={fieldBgCustomGradientSwitcher}
                             setNormalCustomGradientSwitcher={(value) =>
                                 setAttributes({
-                                    textFieldBgCustomGradientSwitcher: value,
+                                    fieldBgCustomGradientSwitcher: value,
                                 })
                             }
-                            normalCustomGradientInputValue={textFieldBgCustomGradientInputValue}
+                            normalCustomGradientInputValue={fieldBgCustomGradientInputValue}
                             setNormalCustomGradientInputValue={(value) =>
                                 setAttributes({
-                                    textFieldBgCustomGradientInputValue: value,
+                                    fieldBgCustomGradientInputValue: value,
                                 })
                             }
-                            normalBackgroundImageUrl={textFieldBgImageUrl}
+                            normalBackgroundImageUrl={fieldBgImageUrl}
                             setNormalBackgroundImageUrl={(value) =>
-                                setAttributes({ textFieldBgImageUrl: value })
+                                setAttributes({ fieldBgImageUrl: value })
                             }
-                            normalBackgroundImageAlt={textFieldBgImageAlt}
+                            normalBackgroundImageAlt={fieldBgImageAlt}
                             setNormalBackgroundImageAlt={(value) =>
-                                setAttributes({ textFieldBgImageAlt: value })
+                                setAttributes({ fieldBgImageAlt: value })
                             }
-                            normalBackgroundImageID={textFieldBgImageID}
+                            normalBackgroundImageID={fieldBgImageID}
                             setNormalBackgroundImageID={(value) =>
-                                setAttributes({ textFieldBgImageID: value })
+                                setAttributes({ fieldBgImageID: value })
                             }
-                            normalBackgroundImagePosition={textFieldBgImagePosition}
+                            normalBackgroundImagePosition={fieldBgImagePosition}
                             setNormalBackgroundImagePosition={(value) =>
                                 setAttributes({
-                                    textFieldBgImagePosition: value,
+                                    fieldBgImagePosition: value,
                                 })
                             }
-                            normalBackgroundImageAttachment={textFieldBgImageAttachment}
+                            normalBackgroundImageAttachment={fieldBgImageAttachment}
                             setNormalBackgroundImageAttachment={(value) =>
                                 setAttributes({
-                                    textFieldBgImageAttachment: value,
+                                    fieldBgImageAttachment: value,
                                 })
                             }
-                            normalBackgroundImageRepeat={textFieldBgImageRepeat}
+                            normalBackgroundImageRepeat={fieldBgImageRepeat}
                             setNormalBackgroundImageRepeat={(value) =>
                                 setAttributes({
-                                    textFieldBgImageRepeat: value,
+                                    fieldBgImageRepeat: value,
                                 })
                             }
-                            normalBackgroundImageSize={textFieldBgImageSize}
+                            normalBackgroundImageSize={fieldBgImageSize}
                             setNormalBackgroundImageSize={(value) =>
-                                setAttributes({ textFieldBgImageSize: value })
+                                setAttributes({ fieldBgImageSize: value })
                             }
-                            hoverBackgroundType={textFieldBgHoverType}
+                            hoverBackgroundType={fieldBgHoverType}
                             setHoverBackgroundType={(value) =>
-                                setAttributes({ textFieldBgHoverType: value })
+                                setAttributes({ fieldBgHoverType: value })
                             }
-                            hoverClassicColor={textFieldBgHoverClassicColor}
+                            hoverClassicColor={fieldBgHoverClassicColor}
                             setHoverClassicColor={(value) =>
-                                setAttributes({ textFieldBgHoverClassicColor: value === undefined ? '' : value })
+                                setAttributes({ fieldBgHoverClassicColor: value === undefined ? '' : value })
                             }
-                            hoverGradientColor={textFieldBgHoverGradientColor}
+                            hoverGradientColor={fieldBgHoverGradientColor}
                             setHoverGradientColor={(value) =>
-                                setAttributes({ textFieldBgHoverGradientColor: value === undefined ? null : value })
+                                setAttributes({ fieldBgHoverGradientColor: value === undefined ? null : value })
                             }
-                            hoverCustomGradientSwitcher={textFieldBgHoverCustomGradientSwitcher}
+                            hoverCustomGradientSwitcher={fieldBgHoverCustomGradientSwitcher}
                             setHoverCustomGradientSwitcher={(value) =>
                                 setAttributes({
-                                    textFieldBgHoverCustomGradientSwitcher: value,
+                                    fieldBgHoverCustomGradientSwitcher: value,
                                 })
                             }
-                            hoverCustomGradientInputValue={textFieldBgHoverCustomGradientInputValue}
+                            hoverCustomGradientInputValue={fieldBgHoverCustomGradientInputValue}
                             setHoverCustomGradientInputValue={(value) =>
                                 setAttributes({
-                                    textFieldBgHoverCustomGradientInputValue: value,
+                                    fieldBgHoverCustomGradientInputValue: value,
                                 })
                             }
-                            hoverBackgroundImageUrl={textFieldBgHoverImageUrl}
+                            hoverBackgroundImageUrl={fieldBgHoverImageUrl}
                             setBgHoverImageUrl={(value) =>
-                                setAttributes({ textFieldBgHoverImageUrl: value })
+                                setAttributes({ fieldBgHoverImageUrl: value })
                             }
-                            hoverBackgroundImageAlt={textFieldBgHoverImageAlt}
+                            hoverBackgroundImageAlt={fieldBgHoverImageAlt}
                             setBgHoverImageAlt={(value) =>
-                                setAttributes({ textFieldBgHoverImageAlt: value })
+                                setAttributes({ fieldBgHoverImageAlt: value })
                             }
-                            hoverBackgroundImageID={textFieldBgHoverImageID}
+                            hoverBackgroundImageID={fieldBgHoverImageID}
                             setBgHoverImageID={(value) =>
-                                setAttributes({ textFieldBgHoverImageID: value })
+                                setAttributes({ fieldBgHoverImageID: value })
                             }
-                            hoverBackgroundImagePosition={textFieldBgHoverImagePosition}
+                            hoverBackgroundImagePosition={fieldBgHoverImagePosition}
                             setBgHoverImagePosition={(value) =>
                                 setAttributes({
-                                    textFieldBgHoverImagePosition: value,
+                                    fieldBgHoverImagePosition: value,
                                 })
                             }
-                            hoverBackgroundImageAttachment={textFieldBgHoverImageAttachment}
+                            hoverBackgroundImageAttachment={fieldBgHoverImageAttachment}
                             setBgHoverImageAttachment={(value) =>
                                 setAttributes({
-                                    textFieldBgHoverImageAttachment: value,
+                                    fieldBgHoverImageAttachment: value,
                                 })
                             }
-                            hoverBackgroundImageRepeat={textFieldBgHoverImageRepeat}
+                            hoverBackgroundImageRepeat={fieldBgHoverImageRepeat}
                             setBgHoverImageRepeat={(value) =>
                                 setAttributes({
-                                    textFieldBgHoverImageRepeat: value,
+                                    fieldBgHoverImageRepeat: value,
                                 })
                             }
-                            hoverBackgroundImageSize={textFieldBgHoverImageSize}
+                            hoverBackgroundImageSize={fieldBgHoverImageSize}
                             setBgHoverImageSize={(value) =>
-                                setAttributes({ textFieldBgHoverImageSize: value })
+                                setAttributes({ fieldBgHoverImageSize: value })
                             }
                         />
                     </PanelBody>
@@ -1747,92 +1747,92 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     >
                         <SelectControl
                             label={__("Border Style", "frontis-blocks")}
-                            value={textFieldBorder}
+                            value={fieldBorder}
                             options={BORDER_STYLES}
-                            onChange={(value) => setAttributes({ textFieldBorder: value })}
+                            onChange={(value) => setAttributes({ fieldBorder: value })}
                         />
 
                         <FB_SwitcherControl
                             label={__("Border Color", "frontis-blocks")}
-                            globalSwitcher={textFieldBorderColorSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ textFieldBorderColorSwitcher: value })}
+                            globalSwitcher={fieldBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ fieldBorderColorSwitcher: value })}
                         />
                         
-                        {textFieldBorderColorSwitcher === 'normal' && (
+                        {fieldBorderColorSwitcher === 'normal' && (
                             <FB_ColorControl
                                 label={__("Normal Color", "frontis-blocks")}
-                                globalColor={textFieldBorderColor}
-                                setGlobalColor={(value) => setAttributes({ textFieldBorderColor: value === undefined ? '' : value })}
+                                globalColor={fieldBorderColor}
+                                setGlobalColor={(value) => setAttributes({ fieldBorderColor: value === undefined ? '' : value })}
                             />
                         )}
                         
-                        {textFieldBorderColorSwitcher === 'hover' && (
+                        {fieldBorderColorSwitcher === 'hover' && (
                             <FB_ColorControl
                                 label={__("Hover Color", "frontis-blocks")}
-                                globalColor={textFieldBorderHoverColor}
-                                setGlobalColor={(value) => setAttributes({ textFieldBorderHoverColor: value === undefined ? '' : value })}
+                                globalColor={fieldBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ fieldBorderHoverColor: value === undefined ? '' : value })}
                             />
                         )}
 
                         <FB_Spacing 
                             label={__("Border", "frontis-blocks")}
                             deviceType={deviceType}
-                            spacingUnitsHandler={handleTextFieldBorderUnitsHandler}
-                            spacingUnits={textFieldBorderUnits}
-                            spacingDesktop={textFieldDesktopBorderWidth}
-                            spacingTablet={textFieldTabBorderWidth}
-                            spacingMobile={textFieldMobileBorderWidth}
-                            handleSpacingUnitHandler={handleTextFieldBorderUnitChange}
-                            spacingCombineBtn={textFieldBorderLink}
-                            spacingCombineBtnHandler={handleTextFieldBorderCombineBtn}
+                            spacingUnitsHandler={handleFieldBorderUnitsHandler}
+                            spacingUnits={fieldBorderUnits}
+                            spacingDesktop={fieldDesktopBorderWidth}
+                            spacingTablet={fieldTabBorderWidth}
+                            spacingMobile={fieldMobileBorderWidth}
+                            handleSpacingUnitHandler={handleFieldBorderUnitChange}
+                            spacingCombineBtn={fieldBorderLink}
+                            spacingCombineBtnHandler={handleFieldBorderCombineBtn}
                             setAttributes={setAttributes}
                         />
 
                         <FB_Spacing 
                             label={__("Border Radius", "frontis-blocks")}
                             deviceType={deviceType}
-                            spacingUnitsHandler={handleTextFieldBorderRadiusUnitsHandler}
-                            spacingUnits={textFieldBorderRadiusUnits}
-                            spacingDesktop={textFieldDesktopBorderRadiusWidth}
-                            spacingTablet={textFieldTabBorderRadiusWidth}
-                            spacingMobile={textFieldMobileBorderRadiusWidth}
-                            handleSpacingUnitHandler={handleTextFieldBorderRadiusUnitChange}
-                            spacingCombineBtn={textFieldBorderRadiusLink}
-                            spacingCombineBtnHandler={handleTextFieldBorderRadiusCombineBtn}
+                            spacingUnitsHandler={handleFieldBorderRadiusUnitsHandler}
+                            spacingUnits={fieldBorderRadiusUnits}
+                            spacingDesktop={fieldDesktopBorderRadiusWidth}
+                            spacingTablet={fieldTabBorderRadiusWidth}
+                            spacingMobile={fieldMobileBorderRadiusWidth}
+                            handleSpacingUnitHandler={handleFieldBorderRadiusUnitChange}
+                            spacingCombineBtn={fieldBorderRadiusLink}
+                            spacingCombineBtnHandler={handleFieldBorderRadiusCombineBtn}
                             setAttributes={setAttributes}
                         />
 
                         <FB_SwitcherControl
                             label={__("Box Shadow", "frontis-blocks")}
-                            globalSwitcher={textFieldGlobalBoxShadowSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ textFieldGlobalBoxShadowSwitcher: value })}
+                            globalSwitcher={fieldGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ fieldGlobalBoxShadowSwitcher: value })}
                         />
                         
-                        {textFieldGlobalBoxShadowSwitcher === 'normal' && (
+                        {fieldGlobalBoxShadowSwitcher === 'normal' && (
                             <FB_BoxShadowControl
                                 label={__("Normal Shadow", "frontis-blocks")}
                                 onBoxShadowChange={(value) =>
-                                    setAttributes({ textFieldGlobalBoxShadowValues: value })
+                                    setAttributes({ fieldGlobalBoxShadowValues: value })
                                 }
-                                initialShadowValue={textFieldGlobalBoxShadowValues}
+                                initialShadowValue={fieldGlobalBoxShadowValues}
                                 onBoxShadowStyleChange={(value) =>
                                     setAttributes({
-                                        textFieldGlobalBoxShadowCssValue: value,
+                                        fieldGlobalBoxShadowCssValue: value,
                                     })
                                 }
                             />
                         )}
                         
-                        {textFieldGlobalBoxShadowSwitcher === 'hover' && (
+                        {fieldGlobalBoxShadowSwitcher === 'hover' && (
                             <FB_BoxShadowControl
                                 label={__("Hover Shadow", "frontis-blocks")}
                                 onBoxShadowChange={(value) =>
-                                    setAttributes({ textFieldGlobalHoverBoxShadowValues: value })
+                                    setAttributes({ fieldGlobalHoverBoxShadowValues: value })
                                 }
-                                initialShadowValue={textFieldGlobalHoverBoxShadowValues}
+                                initialShadowValue={fieldGlobalHoverBoxShadowValues}
                                 onBoxShadowStyleChange={(value) =>
                                     setAttributes({
-                                        textFieldGlobalHoverBoxShadowCssValue: value,
+                                        fieldGlobalHoverBoxShadowCssValue: value,
                                     })
                                 }
                             />
@@ -1845,14 +1845,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         className="fb-setting-responsive-control-wrapper"
                     >
                         <FB_VisibilityControl
-                            desktopValue={textFieldDesktopSwitcher}
-                            setDesktopValue={(value) => setAttributes({ textFieldDesktopSwitcher: value })}
+                            desktopValue={fieldDesktopSwitcher}
+                            setDesktopValue={(value) => setAttributes({ fieldDesktopSwitcher: value })}
 
-                            tabletValue={textFieldTabletSwitcher}
-                            setTabletValue={(value) => setAttributes({ textFieldTabletSwitcher: value })}
+                            tabletValue={fieldTabletSwitcher}
+                            setTabletValue={(value) => setAttributes({ fieldTabletSwitcher: value })}
 
-                            mobileValue={textFieldMobileSwitcher}
-                            setMobileValue={(value) => setAttributes({ textFieldMobileSwitcher: value })}
+                            mobileValue={fieldMobileSwitcher}
+                            setMobileValue={(value) => setAttributes({ fieldMobileSwitcher: value })}
                         />
                     </PanelBody>
 
@@ -1861,8 +1861,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         initialOpen={false}
                     >
                         <FB_CustomCSSEditor  
-                            value={textFieldCustomCSS} 
-                            onChangeValue={(value) => setAttributes({ textFieldCustomCSS: value })}
+                            value={fieldCustomCSS} 
+                            onChangeValue={(value) => setAttributes({ fieldCustomCSS: value })}
                         />
                     </PanelBody>
                 </div>
