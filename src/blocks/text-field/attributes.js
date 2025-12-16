@@ -331,7 +331,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    labelDesktopMargin: {
+    labelMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -340,7 +340,7 @@ const attributes = {
             right: '20',
         },
     },
-    labelTabletMargin: {
+    labelMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -349,7 +349,7 @@ const attributes = {
             right: '',
         },
     },
-    labelMobileMargin: {
+    labelMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -371,7 +371,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    inputFieldDesktopMargin: {
+    inputFieldMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -380,7 +380,7 @@ const attributes = {
             right: '20',
         },
     },
-    inputFieldTabletMargin: {
+    inputFieldMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -389,7 +389,7 @@ const attributes = {
             right: '',
         },
     },
-    inputFieldMobileMargin: {
+    inputFieldMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -411,7 +411,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    inputFieldDesktopPadding: {
+    inputFieldPaddingDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -420,7 +420,7 @@ const attributes = {
             right: '20',
         },
     },
-    inputFieldTabletPadding: {
+    inputFieldPaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -429,7 +429,7 @@ const attributes = {
             right: '',
         },
     },
-    inputFieldMobilePadding: {
+    inputFieldPaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -781,7 +781,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    fieldDesktopPadding: {
+    fieldPaddingDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -790,7 +790,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldTabPadding: {
+    fieldPaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -799,7 +799,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldMobilePadding: {
+    fieldPaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -821,7 +821,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    fieldDesktopMargin: {
+    fieldMarginDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -830,7 +830,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldTabMargin: {
+    fieldMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -839,7 +839,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldMobileMargin: {
+    fieldMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -877,7 +877,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    fieldDesktopBorderWidth: {
+    fieldBorderDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -886,7 +886,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldTabBorderWidth: {
+    fieldBorderTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -895,7 +895,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldMobileBorderWidth: {
+    fieldBorderMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -917,7 +917,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    fieldDesktopBorderRadiusWidth: {
+    fieldBorderRadiusDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -926,7 +926,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldTabBorderRadiusWidth: {
+    fieldBorderRadiusTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -935,7 +935,7 @@ const attributes = {
             right: '',
         },
     },
-    fieldMobileBorderRadiusWidth: {
+    fieldBorderRadiusMobile: {
         type: 'object', 
         default: {
             top: '',
