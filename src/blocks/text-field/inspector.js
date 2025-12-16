@@ -106,21 +106,21 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inputFieldPlaceholderColor,
 
         labelMarginUnits,
-        labelDesktopMargin,
-        labelTabletMargin,
-        labelMobileMargin,
+        labelMarginDesktop,
+        labelMarginTablet,
+        labelMarginMobile,
         labelMarginLink,
 
         inputFieldMarginUnits,
-        inputFieldDesktopMargin,
-        inputFieldTabletMargin,
-        inputFieldMobileMargin,
+        inputFieldMarginDesktop,
+        inputFieldMarginTablet,
+        inputFieldMarginMobile,
         inputFieldMarginLink,
 
         inputFieldPaddingUnits,
-        inputFieldDesktopPadding,
-        inputFieldTabletPadding,
-        inputFieldMobilePadding,
+        inputFieldPaddingDesktop,
+        inputFieldPaddingTablet,
+        inputFieldPaddingMobile,
         inputFieldPaddingLink,
 
         inputFieldBgColorSwitcher,
@@ -178,15 +178,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldZIndex,
         fieldOverflow,
         fieldPaddingUnits,
-        fieldDesktopPadding,
-        fieldTabPadding,
-        fieldMobilePadding,
+        fieldPaddingDesktop,
+        fieldPaddingTablet,
+        fieldPaddingMobile,
         fieldPaddingLink,
 
         fieldMarginUnits,
-        fieldDesktopMargin,
-        fieldTabMargin,
-        fieldMobileMargin,
+        fieldMarginDesktop,
+        fieldMarginTablet,
+        fieldMarginMobile,
         fieldMarginLink,
 
         fieldBorder,
@@ -194,15 +194,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldBorderHoverColor,
         fieldBorderColorSwitcher,
         fieldBorderUnits,
-        fieldDesktopBorderWidth,
-        fieldTabBorderWidth,
-        fieldMobileBorderWidth,
+        fieldBorderDesktop,
+        fieldBorderTablet,
+        fieldBorderMobile,
         fieldBorderLink,
 
         fieldBorderRadiusUnits,
-        fieldDesktopBorderRadiusWidth,
-        fieldTabBorderRadiusWidth,
-        fieldMobileBorderRadiusWidth,
+        fieldBorderRadiusDesktop,
+        fieldBorderRadiusTablet,
+        fieldBorderRadiusMobile,
         fieldBorderRadiusLink,
 
         fieldDesktopSwitcher,
@@ -237,12 +237,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
         fieldGlobalBoxShadowSwitcher,
         fieldGlobalBoxShadowValues,
-        fieldGlobalBoxShadowCssValue,
         fieldGlobalHoverBoxShadowValues,
-        fieldGlobalHoverBoxShadowCssValue,
     } = attributes;
 
     const deviceType= useDeviceType();
+
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-field-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
     
 
     // Label Margin Function
@@ -252,7 +259,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        labelDesktopMargin: {
+                        labelMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -262,7 +269,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        labelTabletMargin: {
+                        labelMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -272,7 +279,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        labelMobileMargin: {
+                        labelMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -286,13 +293,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {labelDesktopMargin: {...labelDesktopMargin, [position]: value}} );
+                    setAttributes( {labelMarginDesktop: {...labelMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {labelTabletMargin: {...labelTabletMargin, [position]: value}} );
+                    setAttributes( {labelMarginTablet: {...labelMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {labelMobileMargin: {...labelMobileMargin, [position]: value}} );
+                    setAttributes( {labelMarginMobile: {...labelMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -321,7 +328,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        inputFieldDesktopMargin: {
+                        inputFieldMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -331,7 +338,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        inputFieldTabletMargin: {
+                        inputFieldMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -341,7 +348,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        inputFieldMobileMargin: {
+                        inputFieldMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -355,13 +362,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {inputFieldDesktopMargin: {...inputFieldDesktopMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginDesktop: {...inputFieldMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {inputFieldTabletMargin: {...inputFieldTabletMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginTablet: {...inputFieldMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {inputFieldMobileMargin: {...inputFieldMobileMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginMobile: {...inputFieldMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -391,7 +398,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        inputFieldDesktopPadding: {
+                        inputFieldPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -401,7 +408,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        inputFieldTabletPadding: {
+                        inputFieldPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -411,7 +418,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        inputFieldMobilePadding: {
+                        inputFieldPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -425,13 +432,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {inputFieldDesktopPadding: {...inputFieldDesktopPadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingDesktop: {...inputFieldPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {inputFieldTabletPadding: {...inputFieldTabletPadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingTablet: {...inputFieldPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {inputFieldMobilePadding: {...inputFieldMobilePadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingMobile: {...inputFieldPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -461,7 +468,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        fieldDesktopMargin: {
+                        fieldMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -471,7 +478,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        fieldTabMargin: {
+                        fieldMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -481,7 +488,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        fieldMobileMargin: {
+                        fieldMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -495,13 +502,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {fieldDesktopMargin: {...fieldDesktopMargin, [position]: value}} );
+                    setAttributes( {fieldMarginDesktop: {...fieldMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {fieldTabMargin: {...fieldTabMargin, [position]: value}} );
+                    setAttributes( {fieldMarginTablet: {...fieldMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {fieldMobileMargin: {...fieldMobileMargin, [position]: value}} );
+                    setAttributes( {fieldMarginMobile: {...fieldMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -530,7 +537,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        fieldDesktopPadding: {
+                        fieldPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -540,7 +547,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        fieldTabPadding: {
+                        fieldPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -550,7 +557,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        fieldMobilePadding: {
+                        fieldPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -564,13 +571,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {fieldDesktopPadding: {...fieldDesktopPadding, [position]: value}} );
+                    setAttributes( {fieldPaddingDesktop: {...fieldPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {fieldTabPadding: {...fieldTabPadding, [position]: value}} );
+                    setAttributes( {fieldPaddingTablet: {...fieldPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {fieldMobilePadding: {...fieldMobilePadding, [position]: value}} );
+                    setAttributes( {fieldPaddingMobile: {...fieldPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -599,7 +606,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        fieldDesktopBorderWidth: {
+                        fieldBorderDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -609,7 +616,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        fieldTabBorderWidth: {
+                        fieldBorderTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -619,7 +626,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        fieldMobileBorderWidth: {
+                        fieldBorderMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -633,13 +640,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {fieldDesktopBorderWidth: {...fieldDesktopBorderWidth, [position]: value}} );
+                    setAttributes( {fieldBorderDesktop: {...fieldBorderDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {fieldTabBorderWidth: {...fieldTabBorderWidth, [position]: value}} );
+                    setAttributes( {fieldBorderTablet: {...fieldBorderTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {fieldMobileBorderWidth: {...fieldMobileBorderWidth, [position]: value}} );
+                    setAttributes( {fieldBorderMobile: {...fieldBorderMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -668,7 +675,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        fieldDesktopBorderRadiusWidth: {
+                        fieldBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -678,7 +685,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        fieldTabBorderRadiusWidth: {
+                        fieldBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -688,7 +695,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        fieldMobileBorderRadiusWidth: {
+                        fieldBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -702,13 +709,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {fieldDesktopBorderRadiusWidth: {...fieldDesktopBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldBorderRadiusDesktop: {...fieldBorderRadiusDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {fieldTabBorderRadiusWidth: {...fieldTabBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldBorderRadiusTablet: {...fieldBorderRadiusTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {fieldMobileBorderRadiusWidth: {...fieldMobileBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {fieldBorderRadiusMobile: {...fieldBorderRadiusMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -869,33 +876,17 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     }
 
     
-    const labelMarginDesktopWidth = `${labelDesktopMargin?.top}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.right}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.bottom}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.left}${labelMarginUnits?.Desktop}`;
-    const labelMarginTabletWidth = `${labelTabletMargin?.top}${labelMarginUnits?.Tablet} ${labelTabletMargin?.right}${labelMarginUnits?.Tablet} ${labelTabletMargin?.bottom}${labelMarginUnits?.Tablet} ${labelTabletMargin?.left}${labelMarginUnits?.Tablet}`;
-    const labelMarginMobileWidth = `${labelMobileMargin?.top}${labelMarginUnits?.Mobile} ${labelMobileMargin?.right}${labelMarginUnits?.Mobile} ${labelMobileMargin?.bottom}${labelMarginUnits?.Mobile} ${labelMobileMargin?.left}${labelMarginUnits?.Mobile}`;
+    const labelMarginDesktopWidth = `${labelMarginDesktop?.top}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.right}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.bottom}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.left}${labelMarginUnits?.Desktop}`;
+    const labelMarginTabletWidth = `${labelMarginTablet?.top}${labelMarginUnits?.Tablet} ${labelMarginTablet?.right}${labelMarginUnits?.Tablet} ${labelMarginTablet?.bottom}${labelMarginUnits?.Tablet} ${labelMarginTablet?.left}${labelMarginUnits?.Tablet}`;
+    const labelMarginMobileWidth = `${labelMarginMobile?.top}${labelMarginUnits?.Mobile} ${labelMarginMobile?.right}${labelMarginUnits?.Mobile} ${labelMarginMobile?.bottom}${labelMarginUnits?.Mobile} ${labelMarginMobile?.left}${labelMarginUnits?.Mobile}`;
 
-    const inputFieldMarginDesktopWidth = `${inputFieldDesktopMargin?.top}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.right}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.bottom}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.left}${inputFieldMarginUnits?.Desktop}`;
-    const inputFieldMarginTabletWidth = `${inputFieldTabletMargin?.top}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.right}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.bottom}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.left}${inputFieldMarginUnits?.Tablet}`;
-    const inputFieldMarginMobileWidth = `${inputFieldMobileMargin?.top}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.right}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.bottom}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.left}${inputFieldMarginUnits?.Mobile}`;
+    const inputFieldMarginDesktopWidth = `${inputFieldMarginDesktop?.top}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.right}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.bottom}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.left}${inputFieldMarginUnits?.Desktop}`;
+    const inputFieldMarginTabletWidth = `${inputFieldMarginTablet?.top}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.right}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.bottom}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.left}${inputFieldMarginUnits?.Tablet}`;
+    const inputFieldMarginMobileWidth = `${inputFieldMarginMobile?.top}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.right}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.bottom}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.left}${inputFieldMarginUnits?.Mobile}`;
 
-    const inputFieldPaddingDesktopWidth = `${inputFieldDesktopPadding?.top}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.right}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.bottom}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.left}${inputFieldPaddingUnits?.Desktop}`;
-    const inputFieldPaddingTabletWidth = `${inputFieldTabletPadding?.top}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.right}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.bottom}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.left}${inputFieldPaddingUnits?.Tablet}`;
-    const inputFieldPaddingMobileWidth = `${inputFieldMobilePadding?.top}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.right}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.bottom}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.left}${inputFieldPaddingUnits?.Mobile}`;
-
-    const fieldMarginDesktopWidth = `${fieldDesktopMargin?.top}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.right}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.bottom}${fieldMarginUnits?.Desktop} ${fieldDesktopMargin?.left}${fieldMarginUnits?.Desktop}`;
-    const fieldMarginTabletWidth = `${fieldTabMargin?.top}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.right}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.bottom}${fieldMarginUnits?.Tablet} ${fieldTabMargin?.left}${fieldMarginUnits?.Tablet}`;
-    const fieldMarginMobileWidth = `${fieldMobileMargin?.top}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.right}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.bottom}${fieldMarginUnits?.Mobile} ${fieldMobileMargin?.left}${fieldMarginUnits?.Mobile}`;
-
-    const fieldPaddingDesktopWidth = `${fieldDesktopPadding?.top}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.right}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.bottom}${fieldPaddingUnits?.Desktop} ${fieldDesktopPadding?.left}${fieldPaddingUnits?.Desktop}`;
-    const fieldPaddingTabletWidth = `${fieldTabPadding?.top}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.right}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.bottom}${fieldPaddingUnits?.Tablet} ${fieldTabPadding?.left}${fieldPaddingUnits?.Tablet}`;
-    const fieldPaddingMobileWidth = `${fieldMobilePadding?.top}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.right}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.bottom}${fieldPaddingUnits?.Mobile} ${fieldMobilePadding?.left}${fieldPaddingUnits?.Mobile}`;
-
-    const fieldBorderDesktopWidth = `${fieldDesktopBorderWidth?.top}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.right}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.bottom}${fieldBorderUnits?.Desktop} ${fieldDesktopBorderWidth?.left}${fieldBorderUnits?.Desktop}`;
-    const fieldBorderTabletWidth = `${fieldTabBorderWidth?.top}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.right}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.bottom}${fieldBorderUnits?.Tablet} ${fieldTabBorderWidth?.left}${fieldBorderUnits?.Tablet}`;
-    const fieldBorderMobileWidth = `${fieldMobileBorderWidth?.top}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.right}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.bottom}${fieldBorderUnits?.Mobile} ${fieldMobileBorderWidth?.left}${fieldBorderUnits?.Mobile}`;
-
-    const fieldBorderRadiusDesktopWidth = `${fieldDesktopBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Desktop} ${fieldDesktopBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Desktop}`;
-    const fieldBorderRadiusTabletWidth = `${fieldTabBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Tablet} ${fieldTabBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Tablet}`;
-    const fieldBorderRadiusMobileWidth = `${fieldMobileBorderRadiusWidth?.top}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.right}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.bottom}${fieldBorderRadiusUnits?.Mobile} ${fieldMobileBorderRadiusWidth?.left}${fieldBorderRadiusUnits?.Mobile}`;
+    const inputFieldPaddingDesktopWidth = `${inputFieldPaddingDesktop?.top}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.right}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.bottom}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.left}${inputFieldPaddingUnits?.Desktop}`;
+    const inputFieldPaddingTabletWidth = `${inputFieldPaddingTablet?.top}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.right}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.bottom}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.left}${inputFieldPaddingUnits?.Tablet}`;
+    const inputFieldPaddingMobileWidth = `${inputFieldPaddingMobile?.top}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.right}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.bottom}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.left}${inputFieldPaddingUnits?.Mobile}`;
 
     const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop?.top}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.right}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.bottom}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.left}${inputFieldBorderUnits?.Desktop}`;
     const inputFieldBorderTabletWidth = `${inputFieldBorderTablet?.top}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.right}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.bottom}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.left}${inputFieldBorderUnits?.Tablet}`;
@@ -905,112 +896,420 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const inputFieldBorderRadiusTabletWidth = `${inputFieldBorderRadiusTablet?.top}${inputFieldBorderRadiusUnits?.Tablet} ${inputFieldBorderRadiusTablet?.right}${inputFieldBorderRadiusUnits?.Tablet} ${inputFieldBorderRadiusTablet?.bottom}${inputFieldBorderRadiusUnits?.Tablet} ${inputFieldBorderRadiusTablet?.left}${inputFieldBorderRadiusUnits?.Tablet}`;
     const inputFieldBorderRadiusMobileWidth = `${inputFieldBorderRadiusMobile?.top}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.right}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.bottom}${inputFieldBorderRadiusUnits?.Mobile} ${inputFieldBorderRadiusMobile?.left}${inputFieldBorderRadiusUnits?.Mobile}`;
 
+    const fieldMarginDesktopWidth = `${fieldMarginDesktop?.top}${fieldMarginUnits?.Desktop} ${fieldMarginDesktop?.right}${fieldMarginUnits?.Desktop} ${fieldMarginDesktop?.bottom}${fieldMarginUnits?.Desktop} ${fieldMarginDesktop?.left}${fieldMarginUnits?.Desktop}`;
+    const fieldMarginTabletWidth = `${fieldMarginTablet?.top}${fieldMarginUnits?.Tablet} ${fieldMarginTablet?.right}${fieldMarginUnits?.Tablet} ${fieldMarginTablet?.bottom}${fieldMarginUnits?.Tablet} ${fieldMarginTablet?.left}${fieldMarginUnits?.Tablet}`;
+    const fieldMarginMobileWidth = `${fieldMarginMobile?.top}${fieldMarginUnits?.Mobile} ${fieldMarginMobile?.right}${fieldMarginUnits?.Mobile} ${fieldMarginMobile?.bottom}${fieldMarginUnits?.Mobile} ${fieldMarginMobile?.left}${fieldMarginUnits?.Mobile}`;
+
+    const fieldPaddingDesktopWidth = `${fieldPaddingDesktop?.top}${fieldPaddingUnits?.Desktop} ${fieldPaddingDesktop?.right}${fieldPaddingUnits?.Desktop} ${fieldPaddingDesktop?.bottom}${fieldPaddingUnits?.Desktop} ${fieldPaddingDesktop?.left}${fieldPaddingUnits?.Desktop}`;
+    const fieldPaddingTabletWidth = `${fieldPaddingTablet?.top}${fieldPaddingUnits?.Tablet} ${fieldPaddingTablet?.right}${fieldPaddingUnits?.Tablet} ${fieldPaddingTablet?.bottom}${fieldPaddingUnits?.Tablet} ${fieldPaddingTablet?.left}${fieldPaddingUnits?.Tablet}`;
+    const fieldPaddingMobileWidth = `${fieldPaddingMobile?.top}${fieldPaddingUnits?.Mobile} ${fieldPaddingMobile?.right}${fieldPaddingUnits?.Mobile} ${fieldPaddingMobile?.bottom}${fieldPaddingUnits?.Mobile} ${fieldPaddingMobile?.left}${fieldPaddingUnits?.Mobile}`;
+
+    const fieldBorderDesktopWidth = `${fieldBorderDesktop?.top}${fieldBorderUnits?.Desktop} ${fieldBorderDesktop?.right}${fieldBorderUnits?.Desktop} ${fieldBorderDesktop?.bottom}${fieldBorderUnits?.Desktop} ${fieldBorderDesktop?.left}${fieldBorderUnits?.Desktop}`;
+    const fieldBorderTabletWidth = `${fieldBorderTablet?.top}${fieldBorderUnits?.Tablet} ${fieldBorderTablet?.right}${fieldBorderUnits?.Tablet} ${fieldBorderTablet?.bottom}${fieldBorderUnits?.Tablet} ${fieldBorderTablet?.left}${fieldBorderUnits?.Tablet}`;
+    const fieldBorderMobileWidth = `${fieldBorderMobile?.top}${fieldBorderUnits?.Mobile} ${fieldBorderMobile?.right}${fieldBorderUnits?.Mobile} ${fieldBorderMobile?.bottom}${fieldBorderUnits?.Mobile} ${fieldBorderMobile?.left}${fieldBorderUnits?.Mobile}`;
+
+    const fieldBorderRadiusDesktopWidth = `${fieldBorderRadiusDesktop?.top}${fieldBorderRadiusUnits?.Desktop} ${fieldBorderRadiusDesktop?.right}${fieldBorderRadiusUnits?.Desktop} ${fieldBorderRadiusDesktop?.bottom}${fieldBorderRadiusUnits?.Desktop} ${fieldBorderRadiusDesktop?.left}${fieldBorderRadiusUnits?.Desktop}`;
+    const fieldBorderRadiusTabletWidth = `${fieldBorderRadiusTablet?.top}${fieldBorderRadiusUnits?.Tablet} ${fieldBorderRadiusTablet?.right}${fieldBorderRadiusUnits?.Tablet} ${fieldBorderRadiusTablet?.bottom}${fieldBorderRadiusUnits?.Tablet} ${fieldBorderRadiusTablet?.left}${fieldBorderRadiusUnits?.Tablet}`;
+    const fieldBorderRadiusMobileWidth = `${fieldBorderRadiusMobile?.top}${fieldBorderRadiusUnits?.Mobile} ${fieldBorderRadiusMobile?.right}${fieldBorderRadiusUnits?.Mobile} ${fieldBorderRadiusMobile?.bottom}${fieldBorderRadiusUnits?.Mobile} ${fieldBorderRadiusMobile?.left}${fieldBorderRadiusUnits?.Mobile}`;
+
 
     const fbfieldItemStyle = useMemo(
         () => `
-        .fb-accordion-item-main-wrapper.${blockID} {
-            position: relative;
-            transition: all 0.3s ease-in-out;
-        }
+            .fb-text-field-wrapper.${blockID} {
+                position: relative;
+                ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
+				${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
+            }
+            
+            .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
+                position: relative;
+				${
+                    fieldBgType === "gradient"
+                      ? `background: ${
+                          fieldBgCustomGradientSwitcher && fieldBgCustomGradientInputValue
+                            ? fieldBgCustomGradientInputValue
+                            : fieldBgGradientColor
+                        };`
+                      : fieldBgImageUrl && fieldBgImageUrl !== null && fieldBgImageUrl !== ""
+                      ? `
+                        ${fieldBgImageUrl ? `background-image: url(${fieldBgImageUrl});` : ''}
+                        ${fieldBgImagePosition ? `background-position: ${fieldBgImagePosition};` : ''}
+                        ${fieldBgImageAttachment ? `background-attachment: ${fieldBgImageAttachment};` : ''}
+                        ${fieldBgImageRepeat ? `background-repeat: ${fieldBgImageRepeat};` : ''}
+                        ${fieldBgImageSize ? `background-size: ${fieldBgImageSize};` : ''}
+                      `
+                      : fieldBgClassicColor ? `background: ${fieldBgClassicColor};` : ''
+                }
+				${fieldPaddingDesktopWidth && fieldPaddingDesktop?.top ? `padding: ${fieldPaddingDesktopWidth};` : ''}
+				${fieldMarginDesktopWidth && fieldMarginDesktop?.top ? `margin: ${fieldMarginDesktopWidth};` : ''}
+				${fieldBorder ? `border-style: ${fieldBorder};` : ''}
+				${fieldBorderDesktopWidth && fieldBorderDesktop?.top ? `border-width: ${fieldBorderDesktopWidth};` : ''}
+				${fieldBorderColor ? `border-color: ${fieldBorderColor};` : ''}
+				${fieldBorderRadiusDesktopWidth && fieldBorderRadiusDesktop?.top ? `border-radius: ${fieldBorderRadiusDesktopWidth};` : ''}
+				transition: all 0.3s ease-in-out;
+            }
         
-          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            transition: all 0.3s ease-in-out;
-          }
-      
-          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
-            display: block;
-          }
-      
-          .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
-            margin: 0;
-          }
-      
-          @media only screen and (max-width: 1024px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                display: flex;
+                align-items: start;
+                ${labelMarginDesktopWidth && labelMarginDesktop?.top ? `margin: ${labelMarginDesktopWidth};` : ''}
+                
+                ${labelGlobalTypoSwitcher?.fontFamily === true && labelGlobalTypographyData?.fontFamily ? `font-family: ${labelGlobalTypographyData?.fontFamily};` : ''}
+				${labelGlobalTypoSwitcher?.fontSize === true && labelGlobalTypographyData?.fontSize ? `font-size: ${labelGlobalTypographyData?.fontSize};` : ''}
+				${labelGlobalTypoSwitcher?.fontWeight === true && labelGlobalTypographyData?.fontWeight ? `font-weight: ${labelGlobalTypographyData?.fontWeight};` : ''}
+				${labelGlobalTypoSwitcher?.fontStyle === true && labelGlobalTypographyData?.fontStyle ? `font-style: ${labelGlobalTypographyData?.fontStyle};` : ''}
+				${labelGlobalTypoSwitcher?.textTransform === true && labelGlobalTypographyData?.textTransform ? `text-transform: ${labelGlobalTypographyData?.textTransform};` : ''}
+				${labelGlobalTypoSwitcher?.textDecoration === true && labelGlobalTypographyData?.textDecoration ? `text-decoration: ${labelGlobalTypographyData?.textDecoration};` : ''}
+				${labelGlobalTypoSwitcher?.letterSpacing === true && labelGlobalTypographyData?.letterSpacing ? `letter-spacing: ${labelGlobalTypographyData?.letterSpacing};` : ''}
+				${labelGlobalTypoSwitcher?.lineHeight === true && labelGlobalTypographyData?.lineHeight ? `line-height: ${labelGlobalTypographyData?.lineHeight};` : ''}
+				
+				${labelGlobalTypoSwitcher?.fontFamily === false && labelFontFamily && labelFontFamily !== 'Default' ? `font-family: ${labelFontFamily};` : ''}
+				${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Desktop ? `font-size: ${labelFontSize?.Desktop}${labelFontSizeUnits?.Desktop};` : ''}
+				${labelGlobalTypoSwitcher?.fontWeight === false && labelFontWeight ? `font-weight: ${labelFontWeight};` : ''}
+				${labelGlobalTypoSwitcher?.fontStyle === false && labelFontStyle ? `font-style: ${labelFontStyle};` : ''}
+				${labelGlobalTypoSwitcher?.textTransform === false && labelTextTransform ? `text-transform: ${labelTextTransform};` : ''}
+				${labelGlobalTypoSwitcher?.textDecoration === false && labelTextDecoration ? `text-decoration: ${labelTextDecoration};` : ''}
+				${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Desktop ? `letter-spacing: ${labelLetterSpacing?.Desktop}${labelLetterSpacingUnits?.Desktop};` : ''}
+				${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Desktop ? `line-height: ${labelLineHeight?.Desktop}${labelLineHeightUnits?.Desktop};` : ''}
+				
             }
-            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-form-label {
+                ${labelColor ? `color: ${labelColor};` : ''}
             }
-          }
-      
-          @media only screen and (max-width: 767px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-required-symbol {
+                ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
             }
-            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
+        
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper {
             }
-          }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
+                position: relative;
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
+                ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
+				${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                width: 100%;
+                
+                ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontSize === true && inputFieldGlobalTypographyData?.fontSize ? `font-size: ${inputFieldGlobalTypographyData?.fontSize};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontWeight === true && inputFieldGlobalTypographyData?.fontWeight ? `font-weight: ${inputFieldGlobalTypographyData?.fontWeight};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontStyle === true && inputFieldGlobalTypographyData?.fontStyle ? `font-style: ${inputFieldGlobalTypographyData?.fontStyle};` : ''}
+				${inputFieldGlobalTypoSwitcher?.textTransform === true && inputFieldGlobalTypographyData?.textTransform ? `text-transform: ${inputFieldGlobalTypographyData?.textTransform};` : ''}
+				${inputFieldGlobalTypoSwitcher?.textDecoration === true && inputFieldGlobalTypographyData?.textDecoration ? `text-decoration: ${inputFieldGlobalTypographyData?.textDecoration};` : ''}
+				${inputFieldGlobalTypoSwitcher?.letterSpacing === true && inputFieldGlobalTypographyData?.letterSpacing ? `letter-spacing: ${inputFieldGlobalTypographyData?.letterSpacing};` : ''}
+				${inputFieldGlobalTypoSwitcher?.lineHeight === true && inputFieldGlobalTypographyData?.lineHeight ? `line-height: ${inputFieldGlobalTypographyData?.lineHeight};` : ''}
+				
+				${inputFieldGlobalTypoSwitcher?.fontFamily === false && inputFieldFontFamily && inputFieldFontFamily !== 'Default' ? `font-family: ${inputFieldFontFamily};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Desktop ? `font-size: ${inputFieldFontSize?.Desktop}${inputFieldFontSizeUnits?.Desktop};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontWeight === false && inputFieldFontWeight ? `font-weight: ${inputFieldFontWeight};` : ''}
+				${inputFieldGlobalTypoSwitcher?.fontStyle === false && inputFieldFontStyle ? `font-style: ${inputFieldFontStyle};` : ''}
+				${inputFieldGlobalTypoSwitcher?.textTransform === false && inputFieldTextTransform ? `text-transform: ${inputFieldTextTransform};` : ''}
+				${inputFieldGlobalTypoSwitcher?.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
+				${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Desktop ? `letter-spacing: ${inputFieldLetterSpacing?.Desktop}${inputFieldLetterSpacingUnits?.Desktop};` : ''}
+				${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Desktop ? `line-height: ${inputFieldLineHeight?.Desktop}${inputFieldLineHeightUnits?.Desktop};` : ''}
+				
+                ${inputFieldColor ? `color: ${inputFieldColor};` : ''}
+                ${
+                    inputFieldBgType === "gradient"
+                      ? `background: ${
+                          inputFieldBgCustomGradientSwitcher && inputFieldBgCustomGradientInputValue
+                            ? inputFieldBgCustomGradientInputValue
+                            : inputFieldBgGradientColor
+                        };`
+                      : inputFieldBgImageUrl && inputFieldBgImageUrl !== null && inputFieldBgImageUrl !== ""
+                      ? `
+                        ${inputFieldBgImageUrl ? `background-image: url(${inputFieldBgImageUrl});` : ''}
+                        ${inputFieldBgImagePosition ? `background-position: ${inputFieldBgImagePosition};` : ''}
+                        ${inputFieldBgImageAttachment ? `background-attachment: ${inputFieldBgImageAttachment};` : ''}
+                        ${inputFieldBgImageRepeat ? `background-repeat: ${inputFieldBgImageRepeat};` : ''}
+                        ${inputFieldBgImageSize ? `background-size: ${inputFieldBgImageSize};` : ''}
+                      `
+                      : inputFieldBgClassicColor ? `background: ${inputFieldBgClassicColor};` : ''
+                }
+
+				${inputFieldBorder ? `border-style: ${inputFieldBorder};` : ''}
+				${inputFieldBorderDesktopWidth && inputFieldBorderDesktop?.top ? `border-width: ${inputFieldBorderDesktopWidth};` : ''}
+				${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
+				${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
+                ${inputFieldBoxShadowCssValue ? `box-shadow: ${inputFieldBoxShadowCssValue};` : ""}
+
+                ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
+				${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
+
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:hover {
+                ${
+					inputFieldBgHoverType === "gradient"
+					  ? `background: ${
+						  inputFieldBgHoverCustomGradientSwitcher && inputFieldBgHoverCustomGradientInputValue
+							? inputFieldBgHoverCustomGradientInputValue
+							: inputFieldBgHoverGradientColor
+						};`
+					  : inputFieldBgHoverImageUrl && inputFieldBgHoverImageUrl !== null && inputFieldBgHoverImageUrl !== ""
+					  ? `
+						${inputFieldBgHoverImageUrl ? `background-image: url(${inputFieldBgHoverImageUrl});` : ''}
+						${inputFieldBgHoverImagePosition ? `background-position: ${inputFieldBgHoverImagePosition};` : ''}
+						${inputFieldBgHoverImageAttachment ? `background-attachment: ${inputFieldBgHoverImageAttachment};` : ''}
+						${inputFieldBgHoverImageRepeat ? `background-repeat: ${inputFieldBgHoverImageRepeat};` : ''}
+						${inputFieldBgHoverImageSize ? `background-size: ${inputFieldBgHoverImageSize};` : ''}
+					  `
+					  : inputFieldBgHoverClassicColor ? `background: ${inputFieldBgHoverClassicColor};` : ''
+				}
+				${inputFieldBorderHoverColor ? `border-color: ${inputFieldBorderHoverColor};` : ''}
+                ${inputFieldBoxShadowHoverCssValue ? `box-shadow: ${inputFieldBoxShadowHoverCssValue};` : ""}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
+                
+            }
+        
+            @media only screen and (max-width: 1024px) {
+                .fb-text-field-wrapper.${blockID} {
+                    position: relative;
+                    ${fieldZIndex?.Tablet ? `z-index: ${fieldZIndex?.Tablet};` : ''}
+                }
+                
+                .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
+                    ${fieldPaddingTabletWidth && fieldPaddingTablet?.top ? `padding: ${fieldPaddingTabletWidth};` : ''}
+                    ${fieldMarginTabletWidth && fieldMarginTablet?.top ? `margin: ${fieldMarginTabletWidth};` : ''}
+                    ${fieldBorderTabletWidth && fieldBorderTablet?.top ? `border-width: ${fieldBorderTabletWidth};` : ''}
+                    ${fieldBorderRadiusTabletWidth && fieldBorderRadiusTablet?.top ? `border-radius: ${fieldBorderRadiusTabletWidth};` : ''}
+                }
+            
+                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                    ${labelMarginTabletWidth && labelMarginTablet?.top ? `margin: ${labelMarginTabletWidth};` : ''}
+
+                    ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Tablet ? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};` : ''}
+                    ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Tablet ? `letter-spacing: ${labelLetterSpacing?.Tablet}${labelLetterSpacingUnits?.Tablet};` : ''}
+                    ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Tablet ? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};` : ''}
+                    
+                }
+                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                    ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Tablet ? `letter-spacing: ${inputFieldLetterSpacing?.Tablet}${inputFieldLetterSpacingUnits?.Tablet};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
+                    
+                    ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
+                    ${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
+
+                    ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
+                    ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
+                }
+            }
+        
+            @media only screen and (max-width: 767px) {
+                .fb-text-field-wrapper.${blockID} {
+                    position: relative;
+                    ${fieldZIndex?.Mobile ? `z-index: ${fieldZIndex?.Mobile};` : ''}
+                }
+                
+                .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
+                    ${fieldPaddingMobileWidth && fieldPaddingMobile?.top ? `padding: ${fieldPaddingMobileWidth};` : ''}
+                    ${fieldMarginMobileWidth && fieldMarginMobile?.top ? `margin: ${fieldMarginMobileWidth};` : ''}
+                    ${fieldBorderMobileWidth && fieldBorderMobile?.top ? `border-width: ${fieldBorderMobileWidth};` : ''}
+                    ${fieldBorderRadiusMobileWidth && fieldBorderRadiusMobile?.top ? `border-radius: ${fieldBorderRadiusMobileWidth};` : ''}
+                }
+            
+                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                    ${labelMarginMobileWidth && labelMarginMobile?.top ? `margin: ${labelMarginMobileWidth};` : ''}
+
+                    ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Mobile ? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};` : ''}
+                    ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Mobile ? `letter-spacing: ${labelLetterSpacing?.Mobile}${labelLetterSpacingUnits?.Mobile};` : ''}
+                    ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
+                    
+                }
+                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                    ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Mobile ? `letter-spacing: ${inputFieldLetterSpacing?.Mobile}${inputFieldLetterSpacingUnits?.Mobile};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Mobile ? `line-height: ${inputFieldLineHeight?.Mobile}${inputFieldLineHeightUnits?.Mobile};` : ''}
+                    
+                    ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
+                    ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
+
+                    ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
+                    ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
+                }
+            }
         `,
         [
             blockID,
             deviceType,
+
+            labelGlobalTypoSwitcher,
+            labelGlobalTypographyData,
+            labelGlobalTypoType,
+            labelGlobalTypoOption,
+            labelFontFamily,
+            labelFontSize,
+            labelFontSizeUnits,
+            labelFontWeight,
+            labelFontStyle,
+            labelTextTransform,
+            labelTextDecoration,
+            labelLetterSpacing,
+            labelLetterSpacingUnits,
+            labelLineHeight,
+            labelLineHeightUnits,
+            
+            inputFieldGlobalTypoSwitcher,
+            inputFieldGlobalTypographyData,
+            inputFieldGlobalTypoType,
+            inputFieldGlobalTypoOption,
+            inputFieldFontFamily,
+            inputFieldFontSize,
+            inputFieldFontSizeUnits,
+            inputFieldFontWeight,
+            inputFieldFontStyle,
+            inputFieldTextTransform,
+            inputFieldTextDecoration,
+            inputFieldLetterSpacing,
+            inputFieldLetterSpacingUnits,
+            inputFieldLineHeight,
+            inputFieldLineHeightUnits,
+
+            labelColor,
+            labelRequiredColor,
+
+            inputFieldColor,
+            inputFieldFocusColor,
+            inputFieldPlaceholderColor,
+
+            labelMarginUnits,
+            labelMarginDesktop,
+            labelMarginTablet,
+            labelMarginMobile,
+
+            inputFieldMarginUnits,
+            inputFieldMarginDesktop,
+            inputFieldMarginTablet,
+            inputFieldMarginMobile,
+
+            inputFieldPaddingUnits,
+            inputFieldPaddingDesktop,
+            inputFieldPaddingTablet,
+            inputFieldPaddingMobile,
+
+            inputFieldBgColorSwitcher,
+            inputFieldBgType,
+            inputFieldBgClassicColor,
+            inputFieldBgGradientColor,
+            inputFieldBgCustomGradientSwitcher,
+            inputFieldBgCustomGradientInputValue,
+            inputFieldBgImageUrl,
+            inputFieldBgImageAlt,
+            inputFieldBgImageID,
+            inputFieldBgImagePosition,
+            inputFieldBgImageAttachment,
+            inputFieldBgImageRepeat,
+            inputFieldBgImageSize,
+            inputFieldBgHoverType,
+            inputFieldBgHoverClassicColor,
+            inputFieldBgHoverGradientColor,
+            inputFieldBgHoverCustomGradientSwitcher,
+            inputFieldBgHoverCustomGradientInputValue,
+            inputFieldBgHoverImageUrl,
+            inputFieldBgHoverImageAlt,
+            inputFieldBgHoverImageID,
+            inputFieldBgHoverImagePosition,
+            inputFieldBgHoverImageAttachment,
+            inputFieldBgHoverImageRepeat,
+            inputFieldBgHoverImageSize,
+
+            inputFieldBorder,
+            inputFieldBorderColor,
+            inputFieldBorderHoverColor,
+            inputFieldBorderColorSwitcher,
+            inputFieldBorderUnits,
+            inputFieldBorderDesktop,
+            inputFieldBorderTablet,
+            inputFieldBorderMobile,
+            inputFieldBorderRadiusUnits,
+            inputFieldBorderRadiusDesktop,
+            inputFieldBorderRadiusTablet,
+            inputFieldBorderRadiusMobile,
+
+            inputFieldBoxShadowSwitcher,
+            inputFieldBoxShadowValues,
+            inputFieldBoxShadowCssValue,
+            inputFieldBoxShadowHoverValues,
+            inputFieldBoxShadowHoverCssValue,
+
+            fieldCustomCSS,
+            fieldGlobalWraperID,
+            fieldGlobalWraperClass,
+
+            // form Advance
+            fieldZIndex,
+            fieldOverflow,
+            fieldPaddingUnits,
+            fieldPaddingDesktop,
+            fieldPaddingTablet,
+            fieldPaddingMobile,
+
+            fieldMarginUnits,
+            fieldMarginDesktop,
+            fieldMarginTablet,
+            fieldMarginMobile,
+
+            fieldBorder,
+            fieldBorderColor,
+            fieldBorderHoverColor,
+            fieldBorderColorSwitcher,
+            fieldBorderUnits,
+            fieldBorderDesktop,
+            fieldBorderTablet,
+            fieldBorderMobile,
+
+            fieldBorderRadiusUnits,
+            fieldBorderRadiusDesktop,
+            fieldBorderRadiusTablet,
+            fieldBorderRadiusMobile,
+
+            fieldBgColorSwitcher,
+            fieldBgType,
+            fieldBgClassicColor,
+            fieldBgGradientColor,
+            fieldBgCustomGradientSwitcher,
+            fieldBgCustomGradientInputValue,
+            fieldBgImageUrl,
+            fieldBgImageAlt,
+            fieldBgImageID,
+            fieldBgImagePosition,
+            fieldBgImageAttachment,
+            fieldBgImageRepeat,
+            fieldBgImageSize,
+            fieldBgHoverType,
+            fieldBgHoverClassicColor,
+            fieldBgHoverGradientColor,
+            fieldBgHoverCustomGradientSwitcher,
+            fieldBgHoverCustomGradientInputValue,
+            fieldBgHoverImageUrl,
+            fieldBgHoverImageAlt,
+            fieldBgHoverImageID,
+            fieldBgHoverImagePosition,
+            fieldBgHoverImageAttachment,
+            fieldBgHoverImageRepeat,
+            fieldBgHoverImageSize,
+
+            fieldGlobalBoxShadowSwitcher,
+            fieldGlobalBoxShadowValues,
+            fieldGlobalHoverBoxShadowValues,
         ]
-      );
+    );
       
-      const customCss = getCustomCss(fieldCustomCSS, `.${blockID}`);
+    const customCss = getCustomCss(fieldCustomCSS, `.${blockID}`);
 
-      useEffect(() => {
-        setAttributes({
-          blockStyle: `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
-        });
-      }, [fbfieldItemStyle, customCss]);
+    useEffect(() => {
+    setAttributes({
+        blockStyle: `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
+    });
+    }, [fbfieldItemStyle, customCss]);
 
-      const editorStyle = `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+    const editorStyle = `${fbfieldItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
-      const fbfieldItemStyleTwo = useMemo(() => `
-        .fb-accordion-item-main-wrapper.${blockID} {
-            position: relative;
-            display: block;
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
-            display: none;
-            margin: 0;
-            padding: 0;
-            height: 0;
-            position: absolute;
-            visibility: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
-            display: block;
-            height: auto;
-            position: static;
-            visibility: visible;
-            transition: all 0.3s ease-in-out;
-        }
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            transition: all 0.3s ease-in-out;
-        }
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
-            margin: 0;
-            transition: all 0.3s ease-in-out;
-        }
-
-
-        @media only screen and (max-width: 1024px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-            }
-            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            }
-        }
-
-        @media only screen and (max-width: 767px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-            }
-            .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            }
-        }
-        `, [
-            blockID,
-            deviceType,
-        ]);
-
-        useEffect(() => {
-            setAttributes({
-                blockStyleTwo: `${fbfieldItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
-            });
-        }, [fbfieldItemStyleTwo, customCss]);
 
     const mergeFieldLabelSwitcher = fieldLabelSwitcher !== null ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
     const mergeFieldIconSwitcher = fieldIconSwitcher !== null ? fieldIconSwitcher : inheritedFieldIconSwitcher;
@@ -1178,9 +1477,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     deviceType={deviceType}
                     spacingUnitsHandler={handleLabelMarginUnitsHandler}
                     spacingUnits={labelMarginUnits}
-                    spacingDesktop={labelDesktopMargin}
-                    spacingTablet={labelTabletMargin}
-                    spacingMobile={labelMobileMargin}
+                    spacingDesktop={labelMarginDesktop}
+                    spacingTablet={labelMarginTablet}
+                    spacingMobile={labelMarginMobile}
                     handleSpacingUnitHandler={handleLabelMarginUnitChange}
                     spacingCombineBtn={labelMarginLink}
                     spacingCombineBtnHandler={handleLabelMarginCombineBtn}
@@ -1412,9 +1711,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     deviceType={deviceType}
                     spacingUnitsHandler={handleInputFieldMarginUnitsHandler}
                     spacingUnits={inputFieldMarginUnits}
-                    spacingDesktop={inputFieldDesktopMargin}
-                    spacingTablet={inputFieldTabletMargin}
-                    spacingMobile={inputFieldMobileMargin}
+                    spacingDesktop={inputFieldMarginDesktop}
+                    spacingTablet={inputFieldMarginTablet}
+                    spacingMobile={inputFieldMarginMobile}
                     handleSpacingUnitHandler={handleInputFieldMarginUnitChange}
                     spacingCombineBtn={inputFieldMarginLink}
                     spacingCombineBtnHandler={handleInputFieldMarginCombineBtn}
@@ -1426,9 +1725,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     deviceType={deviceType}
                     spacingUnitsHandler={handleInputFieldPaddingUnitsHandler}
                     spacingUnits={inputFieldPaddingUnits}
-                    spacingDesktop={inputFieldDesktopPadding}
-                    spacingTablet={inputFieldTabletPadding}
-                    spacingMobile={inputFieldMobilePadding}
+                    spacingDesktop={inputFieldPaddingDesktop}
+                    spacingTablet={inputFieldPaddingTablet}
+                    spacingMobile={inputFieldPaddingMobile}
                     handleSpacingUnitHandler={handleInputFieldPaddingUnitChange}
                     spacingCombineBtn={inputFieldPaddingLink}
                     spacingCombineBtnHandler={handleInputFieldPaddingCombineBtn}
@@ -1588,9 +1887,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             deviceType={deviceType}
                             spacingUnitsHandler={handleFieldMarginUnitsHandler}
                             spacingUnits={fieldMarginUnits}
-                            spacingDesktop={fieldDesktopMargin}
-                            spacingTablet={fieldTabMargin}
-                            spacingMobile={fieldMobileMargin}
+                            spacingDesktop={fieldMarginDesktop}
+                            spacingTablet={fieldMarginTablet}
+                            spacingMobile={fieldMarginMobile}
                             handleSpacingUnitHandler={handleFieldMarginUnitChange}
                             spacingCombineBtn={fieldMarginLink}
                             spacingCombineBtnHandler={handleFieldMarginCombineBtn}
@@ -1602,9 +1901,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             deviceType={deviceType}
                             spacingUnitsHandler={handleFieldPaddingUnitsHandler}
                             spacingUnits={fieldPaddingUnits}
-                            spacingDesktop={fieldDesktopPadding}
-                            spacingTablet={fieldTabPadding}
-                            spacingMobile={fieldMobilePadding}
+                            spacingDesktop={fieldPaddingDesktop}
+                            spacingTablet={fieldPaddingTablet}
+                            spacingMobile={fieldPaddingMobile}
                             handleSpacingUnitHandler={handleFieldPaddingUnitChange}
                             spacingCombineBtn={fieldPaddingLink}
                             spacingCombineBtnHandler={handleFieldPaddingCombineBtn}
@@ -1779,9 +2078,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             deviceType={deviceType}
                             spacingUnitsHandler={handleFieldBorderUnitsHandler}
                             spacingUnits={fieldBorderUnits}
-                            spacingDesktop={fieldDesktopBorderWidth}
-                            spacingTablet={fieldTabBorderWidth}
-                            spacingMobile={fieldMobileBorderWidth}
+                            spacingDesktop={fieldBorderDesktop}
+                            spacingTablet={fieldBorderTablet}
+                            spacingMobile={fieldBorderMobile}
                             handleSpacingUnitHandler={handleFieldBorderUnitChange}
                             spacingCombineBtn={fieldBorderLink}
                             spacingCombineBtnHandler={handleFieldBorderCombineBtn}
@@ -1793,9 +2092,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             deviceType={deviceType}
                             spacingUnitsHandler={handleFieldBorderRadiusUnitsHandler}
                             spacingUnits={fieldBorderRadiusUnits}
-                            spacingDesktop={fieldDesktopBorderRadiusWidth}
-                            spacingTablet={fieldTabBorderRadiusWidth}
-                            spacingMobile={fieldMobileBorderRadiusWidth}
+                            spacingDesktop={fieldBorderRadiusDesktop}
+                            spacingTablet={fieldBorderRadiusTablet}
+                            spacingMobile={fieldBorderRadiusMobile}
                             handleSpacingUnitHandler={handleFieldBorderRadiusUnitChange}
                             spacingCombineBtn={fieldBorderRadiusLink}
                             spacingCombineBtnHandler={handleFieldBorderRadiusCombineBtn}
@@ -1839,7 +2138,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         )}
                     </PanelBody>
 
-                    <PanelBody
+                    {/* <PanelBody
                         title={__("Responsive Control", "frontis-blocks")}
                         initialOpen={false}
                         className="fb-setting-responsive-control-wrapper"
@@ -1854,9 +2153,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             mobileValue={fieldMobileSwitcher}
                             setMobileValue={(value) => setAttributes({ fieldMobileSwitcher: value })}
                         />
-                    </PanelBody>
+                    </PanelBody> */}
 
-                    <PanelBody
+                    {/* <PanelBody
                         title={__("Custom CSS", "frontis-blocks")}
                         initialOpen={false}
                     >
@@ -1864,7 +2163,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             value={fieldCustomCSS} 
                             onChangeValue={(value) => setAttributes({ fieldCustomCSS: value })}
                         />
-                    </PanelBody>
+                    </PanelBody> */}
                 </div>
             </div>
         </>

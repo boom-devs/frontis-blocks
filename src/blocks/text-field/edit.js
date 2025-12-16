@@ -76,10 +76,10 @@ const Edit = (props) => {
             <div {...blockProps}>
                 <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textFieldGlobalWraperClass}`} id={textFieldGlobalWraperID}>
                     {mergeFieldLabelSwitcher && (
-                        <div className="fb-form-label-wrapper">
+                        <div className="fb-field-label-wrapper fb-form-label-wrapper">
                             <RichText
                                 tagName="label"
-                                className="fb-form-label fb-text-field-label"
+                                className="fb-form-label fb-field-label"
                                 value={fieldLabel ? fieldLabel : fieldType}
                                 placeholder={__('Label', 'frontis-blocks')}
                                 onChange={(value) => setAttributes({ fieldLabel: value })}
@@ -89,8 +89,8 @@ const Edit = (props) => {
                             )}
                         </div>
                     )}
-                    <div className="fb-form-input-wrapper">
-                        <div className="fb-form-input fb-text-field-input">
+                    <div className="fb-field-input-wrapper fb-form-input-wrapper">
+                        <div className="fb-form-input fb-field-input">
                             <input
                                 type={fieldType ? fieldType : 'text'}
                                 placeholder={fieldPlaceholder ? fieldPlaceholder : `Enter your ${fieldType} here`}
@@ -99,7 +99,7 @@ const Edit = (props) => {
                                 required={mergeFieldRequiredSwitcher ? true : false}
                             />
                             {mergeFieldIconSwitcher && fieldIcon && (
-                                <span className="fb-text-field-icon fb-field-icon">
+                                <span className="fb-field-icon">
                                     {renderSVG(fieldIcon)}
                                 </span>
                             )}
