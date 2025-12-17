@@ -113,6 +113,39 @@ const attributes = {
         type: 'boolean',
     },
 
+    inputFieldMaxWidth: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldMaxWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+    inputFieldHeight: {
+		type: 'object',
+		default: {
+			Desktop: '36',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
     labelGlobalTypographyData: {
         type: 'object',
         default: {}

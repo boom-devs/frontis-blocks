@@ -66,6 +66,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inheritedFieldRequiredSwitcher,
         inheritedFieldRequiredSymbolSwitcher,
 
+        inputFieldMaxWidth,
+        inputFieldMaxWidthUnits,
+        inputFieldHeight,
+        inputFieldHeightUnits,
+
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
         labelGlobalTypoType,
@@ -1048,6 +1053,37 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     label={__("Show icon", "frontis-blocks")}
                     checked={mergeFieldIconSwitcher}
                     onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Layout", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={inputFieldMaxWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Max Width", "frontis-blocks")}
+                    rangeValue={inputFieldMaxWidth}
+                    onChangeHandler={(value) => setAttributes({ inputFieldMaxWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ inputFieldMaxWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={inputFieldMaxWidthUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={inputFieldHeightUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Height", "frontis-blocks")}
+                    rangeValue={inputFieldHeight}
+                    onChangeHandler={(value) => setAttributes({ inputFieldHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ inputFieldHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={inputFieldHeightUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
                 />
             </PanelBody>
 
