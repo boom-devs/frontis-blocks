@@ -26,6 +26,12 @@ const attributes = {
 	blockStyle: {
 		type: 'string',
 	},
+
+	formContainerSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+
 	containerType: {
 		type: 'string',
 		default: 'full-width'
