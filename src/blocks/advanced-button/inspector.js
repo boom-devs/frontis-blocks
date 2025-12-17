@@ -346,8 +346,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
     } = attributes;  
-
-	console.log(attributes);
 	  
 	const deviceType= useDeviceType();
 
@@ -2962,7 +2960,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							onChange={(selected) => changeAdvancedButtonPreset(selected)}
 						/> */}
 						<FB_Presets
-							className="fb-info-box-presets"
+							className="fb-advanced-button-presets"
 							label={__('Select Preset', 'frontis-blocks')}
 							presets={advancedButtonPresets}
 							value = {buttonPresetStyle}
