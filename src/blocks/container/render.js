@@ -6,6 +6,15 @@ import backgroundCss from './backgroundCss';
 import {useDeviceType} from "@Config/displayType";
 import getCustomCss from '@Utils/getCustomCss';
 
+const ALLOWED_FORM_BLOCKS = [
+    "frontis-blocks/container",
+    "frontis-blocks/field-text",
+    "frontis-blocks/field-textarea",
+    "frontis-blocks/field-radio",
+    "frontis-blocks/field-select",
+    "frontis-blocks/field-checkbox"
+];
+
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
 	const { attributes, setAttributes, clientId, hasSliderParent, hasPopupParent } = props;
@@ -15,6 +24,8 @@ const Render = ( props ) => {
 		backgroundType,
 		backgroundVideo,
 		isBlockRootParent,
+		formContainerSwitcher,
+
 		// From fb
 		containerType,
 		containerDesktopSwitcher,
@@ -81,6 +92,10 @@ const Render = ( props ) => {
 		innerBlocksParams.allowedBlocks = parentBlocks.map((block) => block.name);
 	}
 
+	if( formContainerSwitcher ){
+		innerBlocksParams.allowedBlocks = ALLOWED_FORM_BLOCKS;
+	}
+
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 
@@ -97,6 +112,7 @@ const Render = ( props ) => {
 		const newRotation = currentRotation === 'rotate(0deg)' ? 'rotate(180deg)' : 'rotate(0deg)';
 		rotateContainer.style.transform = newRotation;
 	};
+
 
 	return (
 		<>

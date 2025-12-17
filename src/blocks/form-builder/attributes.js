@@ -12,6 +12,11 @@ const attributes = {
         default: 'Desktop'
     },
 
+    formContainerSwitcher: {
+        type: 'boolean',
+        default: true,
+    },
+
     fieldLabelSwitcher: {
         type: 'boolean',
         default: true,
@@ -39,7 +44,7 @@ const attributes = {
     },
     submiteBtnIcon: {
         type: 'string',
-        default: '',
+        default: 'arrow-right',
     },
     submiteBtnAlignment: {
         type: 'object',
@@ -459,7 +464,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    labelDesktopMargin: {
+    labelMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -468,7 +473,7 @@ const attributes = {
             right: '20',
         },
     },
-    labelTabletMargin: {
+    labelMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -477,7 +482,7 @@ const attributes = {
             right: '',
         },
     },
-    labelMobileMargin: {
+    labelMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -499,7 +504,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    inputFieldDesktopMargin: {
+    inputFieldMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -508,7 +513,7 @@ const attributes = {
             right: '20',
         },
     },
-    inputFieldTabletMargin: {
+    inputFieldMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -517,7 +522,7 @@ const attributes = {
             right: '',
         },
     },
-    inputFieldMobileMargin: {
+    inputFieldMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -539,7 +544,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    inputFieldDesktopPadding: {
+    inputFieldPaddingDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -548,7 +553,7 @@ const attributes = {
             right: '20',
         },
     },
-    inputFieldTabletPadding: {
+    inputFieldPaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -557,7 +562,7 @@ const attributes = {
             right: '',
         },
     },
-    inputFieldMobilePadding: {
+    inputFieldPaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -900,7 +905,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    submitBtnDesktopPadding: {
+    submitBtnPaddingDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -909,7 +914,7 @@ const attributes = {
             right: '20',
         },
     },
-    submitBtnTabletPadding: {
+    submitBtnPaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -918,7 +923,7 @@ const attributes = {
             right: '',
         },
     },
-    submitBtnMobilePadding: {
+    submitBtnPaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -940,7 +945,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    submitBtnDesktopMargin: {
+    submitBtnMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -949,7 +954,7 @@ const attributes = {
             right: '20',
         },
     },
-    submitBtnTabletMargin: {
+    submitBtnMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -958,7 +963,7 @@ const attributes = {
             right: '',
         },
     },
-    submitBtnMobileMargin: {
+    submitBtnMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -1303,7 +1308,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    successMessageDesktopPadding: {
+    successMessagePaddingDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -1312,7 +1317,7 @@ const attributes = {
             right: '20',
         },
     },
-    successMessageTabletPadding: {
+    successMessagePaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -1321,7 +1326,7 @@ const attributes = {
             right: '',
         },
     },
-    successMessageMobilePadding: {
+    successMessagePaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -1343,7 +1348,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    successMessageDesktopMargin: {
+    successMessageMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -1352,7 +1357,7 @@ const attributes = {
             right: '20',
         },
     },
-    successMessageTabletMargin: {
+    successMessageMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -1361,7 +1366,7 @@ const attributes = {
             right: '',
         },
     },
-    successMessageMobileMargin: {
+    successMessageMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -1684,7 +1689,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    errorMessageDesktopPadding: {
+    errorMessagePaddingDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -1693,7 +1698,7 @@ const attributes = {
             right: '20',
         },
     },
-    errorMessageTabletPadding: {
+    errorMessagePaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -1702,7 +1707,7 @@ const attributes = {
             right: '',
         },
     },
-    errorMessageMobilePadding: {
+    errorMessagePaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -1724,7 +1729,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    errorMessageDesktopMargin: {
+    errorMessageMarginDesktop: {
         type: 'object', 
         default: {
             top: '20',
@@ -1733,7 +1738,7 @@ const attributes = {
             right: '20',
         },
     },
-    errorMessageTabletMargin: {
+    errorMessageMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -1742,7 +1747,7 @@ const attributes = {
             right: '',
         },
     },
-    errorMessageMobileMargin: {
+    errorMessageMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -2082,7 +2087,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    formDesktopPadding: {
+    formPaddingDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -2091,7 +2096,7 @@ const attributes = {
             right: '',
         },
     },
-    formTabPadding: {
+    formPaddingTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -2100,7 +2105,7 @@ const attributes = {
             right: '',
         },
     },
-    formMobilePadding: {
+    formPaddingMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -2122,7 +2127,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    formDesktopMargin: {
+    formMarginDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -2131,7 +2136,7 @@ const attributes = {
             right: '',
         },
     },
-    formTabMargin: {
+    formMarginTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -2140,7 +2145,7 @@ const attributes = {
             right: '',
         },
     },
-    formMobileMargin: {
+    formMarginMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -2178,7 +2183,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    formDesktopBorderWidth: {
+    formBorderDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -2187,7 +2192,7 @@ const attributes = {
             right: '',
         },
     },
-    formTabBorderWidth: {
+    formBorderTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -2196,7 +2201,7 @@ const attributes = {
             right: '',
         },
     },
-    formMobileBorderWidth: {
+    formBorderMobile: {
         type: 'object', 
         default: {
             top: '',
@@ -2218,7 +2223,7 @@ const attributes = {
             Mobile: 'px'
         }
     },
-    formDesktopBorderRadiusWidth: {
+    formBorderRadiusDesktop: {
         type: 'object', 
         default: {
             top: '',
@@ -2227,7 +2232,7 @@ const attributes = {
             right: '',
         },
     },
-    formTabBorderRadiusWidth: {
+    formBorderRadiusTablet: {
         type: 'object', 
         default: {
             top: '',
@@ -2236,7 +2241,7 @@ const attributes = {
             right: '',
         },
     },
-    formMobileBorderRadiusWidth: {
+    formBorderRadiusMobile: {
         type: 'object', 
         default: {
             top: '',

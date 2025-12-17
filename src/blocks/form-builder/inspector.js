@@ -111,21 +111,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldPlaceholderColor,
 
         labelMarginUnits,
-        labelDesktopMargin,
-        labelTabletMargin,
-        labelMobileMargin,
+        labelMarginDesktop,
+        labelMarginTablet,
+        labelMarginMobile,
         labelMarginLink,
 
         inputFieldMarginUnits,
-        inputFieldDesktopMargin,
-        inputFieldTabletMargin,
-        inputFieldMobileMargin,
+        inputFieldMarginDesktop,
+        inputFieldMarginTablet,
+        inputFieldMarginMobile,
         inputFieldMarginLink,
 
         inputFieldPaddingUnits,
-        inputFieldDesktopPadding,
-        inputFieldTabletPadding,
-        inputFieldMobilePadding,
+        inputFieldPaddingDesktop,
+        inputFieldPaddingTablet,
+        inputFieldPaddingMobile,
         inputFieldPaddingLink,
 
         inputFieldBgColorSwitcher,
@@ -228,15 +228,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         submitBtnBgHoverImageSize,
 
         submitBtnPaddingUnits,
-        submitBtnDesktopPadding,
-        submitBtnTabletPadding,
-        submitBtnMobilePadding,
+        submitBtnPaddingDesktop,
+        submitBtnPaddingTablet,
+        submitBtnPaddingMobile,
         submitBtnPaddingLink,
 
         submitBtnMarginUnits,
-        submitBtnDesktopMargin,
-        submitBtnTabletMargin,
-        submitBtnMobileMargin,
+        submitBtnMarginDesktop,
+        submitBtnMarginTablet,
+        submitBtnMarginMobile,
         submitBtnMarginLink,
 
         submitBtnBorder,
@@ -305,15 +305,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         successMessageBgHoverImageSize,
 
         successMessagePaddingUnits,
-        successMessageDesktopPadding,
-        successMessageTabletPadding,
-        successMessageMobilePadding,
+        successMessagePaddingDesktop,
+        successMessagePaddingTablet,
+        successMessagePaddingMobile,
         successMessagePaddingLink,
 
         successMessageMarginUnits,
-        successMessageDesktopMargin,
-        successMessageTabletMargin,
-        successMessageMobileMargin,
+        successMessageMarginDesktop,
+        successMessageMarginTablet,
+        successMessageMarginMobile,
         successMessageMarginLink,
 
         successMessageBorder,
@@ -376,15 +376,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         errorMessageBgHoverImageSize,
 
         errorMessagePaddingUnits,
-        errorMessageDesktopPadding,
-        errorMessageTabletPadding,
-        errorMessageMobilePadding,
+        errorMessagePaddingDesktop,
+        errorMessagePaddingTablet,
+        errorMessagePaddingMobile,
         errorMessagePaddingLink,
 
         errorMessageMarginUnits,
-        errorMessageDesktopMargin,
-        errorMessageTabletMargin,
-        errorMessageMobileMargin,
+        errorMessageMarginDesktop,
+        errorMessageMarginTablet,
+        errorMessageMarginMobile,
         errorMessageMarginLink,
 
         errorMessageBorder,
@@ -423,15 +423,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formZIndex,
         formOverflow,
         formPaddingUnits,
-        formDesktopPadding,
-        formTabPadding,
-        formMobilePadding,
+        formPaddingDesktop,
+        formPaddingTablet,
+        formPaddingMobile,
         formPaddingLink,
 
         formMarginUnits,
-        formDesktopMargin,
-        formTabMargin,
-        formMobileMargin,
+        formMarginDesktop,
+        formMarginTablet,
+        formMarginMobile,
         formMarginLink,
 
         formBorder,
@@ -439,15 +439,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formBorderHoverColor,
         formBorderColorSwitcher,
         formBorderUnits,
-        formDesktopBorderWidth,
-        formTabBorderWidth,
-        formMobileBorderWidth,
+        formBorderDesktop,
+        formBorderTablet,
+        formBorderMobile,
         formBorderLink,
 
         formBorderRadiusUnits,
-        formDesktopBorderRadiusWidth,
-        formTabBorderRadiusWidth,
-        formMobileBorderRadiusWidth,
+        formBorderRadiusDesktop,
+        formBorderRadiusTablet,
+        formBorderRadiusMobile,
         formBorderRadiusLink,
 
         formDesktopSwitcher,
@@ -514,7 +514,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        labelDesktopMargin: {
+                        labelMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -524,7 +524,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        labelTabletMargin: {
+                        labelMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -534,7 +534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        labelMobileMargin: {
+                        labelMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -548,13 +548,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {labelDesktopMargin: {...labelDesktopMargin, [position]: value}} );
+                    setAttributes( {labelMarginDesktop: {...labelMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {labelTabletMargin: {...labelTabletMargin, [position]: value}} );
+                    setAttributes( {labelMarginTablet: {...labelMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {labelMobileMargin: {...labelMobileMargin, [position]: value}} );
+                    setAttributes( {labelMarginMobile: {...labelMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -583,7 +583,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        inputFieldDesktopMargin: {
+                        inputFieldMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -593,7 +593,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        inputFieldTabletMargin: {
+                        inputFieldMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -603,7 +603,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        inputFieldMobileMargin: {
+                        inputFieldMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -617,13 +617,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {inputFieldDesktopMargin: {...inputFieldDesktopMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginDesktop: {...inputFieldMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {inputFieldTabletMargin: {...inputFieldTabletMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginTablet: {...inputFieldMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {inputFieldMobileMargin: {...inputFieldMobileMargin, [position]: value}} );
+                    setAttributes( {inputFieldMarginMobile: {...inputFieldMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -652,7 +652,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        inputFieldDesktopPadding: {
+                        inputFieldPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -662,7 +662,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        inputFieldTabletPadding: {
+                        inputFieldPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -672,7 +672,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        inputFieldMobilePadding: {
+                        inputFieldPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -686,13 +686,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {inputFieldDesktopPadding: {...inputFieldDesktopPadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingDesktop: {...inputFieldPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {inputFieldTabletPadding: {...inputFieldTabletPadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingTablet: {...inputFieldPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {inputFieldMobilePadding: {...inputFieldMobilePadding, [position]: value}} );
+                    setAttributes( {inputFieldPaddingMobile: {...inputFieldPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -721,7 +721,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        submitBtnDesktopPadding: {
+                        submitBtnPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -731,7 +731,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        submitBtnTabletPadding: {
+                        submitBtnPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -741,7 +741,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        submitBtnMobilePadding: {
+                        submitBtnPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -755,13 +755,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {submitBtnDesktopPadding: {...submitBtnDesktopPadding, [position]: value}} );
+                    setAttributes( {submitBtnPaddingDesktop: {...submitBtnPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {submitBtnTabletPadding: {...submitBtnTabletPadding, [position]: value}} );
+                    setAttributes( {submitBtnPaddingTablet: {...submitBtnPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {submitBtnMobilePadding: {...submitBtnMobilePadding, [position]: value}} );
+                    setAttributes( {submitBtnPaddingMobile: {...submitBtnPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -790,7 +790,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        submitBtnDesktopMargin: {
+                        submitBtnMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -800,7 +800,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        submitBtnTabletMargin: {
+                        submitBtnMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -810,7 +810,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        submitBtnMobileMargin: {
+                        submitBtnMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -824,13 +824,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {submitBtnDesktopMargin: {...submitBtnDesktopMargin, [position]: value}} );
+                    setAttributes( {submitBtnMarginDesktop: {...submitBtnMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {submitBtnTabletMargin: {...submitBtnTabletMargin, [position]: value}} );
+                    setAttributes( {submitBtnMarginTablet: {...submitBtnMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {submitBtnMobileMargin: {...submitBtnMobileMargin, [position]: value}} );
+                    setAttributes( {submitBtnMarginMobile: {...submitBtnMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -997,7 +997,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        successMessageDesktopPadding: {
+                        successMessagePaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1007,7 +1007,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        successMessageTabletPadding: {
+                        successMessagePaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1017,7 +1017,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        successMessageMobilePadding: {
+                        successMessagePaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1031,13 +1031,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {successMessageDesktopPadding: {...successMessageDesktopPadding, [position]: value}} );
+                    setAttributes( {successMessagePaddingDesktop: {...successMessagePaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {successMessageTabletPadding: {...successMessageTabletPadding, [position]: value}} );
+                    setAttributes( {successMessagePaddingTablet: {...successMessagePaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {successMessageMobilePadding: {...successMessageMobilePadding, [position]: value}} );
+                    setAttributes( {successMessagePaddingMobile: {...successMessagePaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1066,7 +1066,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        successMessageDesktopMargin: {
+                        successMessageMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1076,7 +1076,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        successMessageTabletMargin: {
+                        successMessageMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1086,7 +1086,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        successMessageMobileMargin: {
+                        successMessageMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1100,13 +1100,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {successMessageDesktopMargin: {...successMessageDesktopMargin, [position]: value}} );
+                    setAttributes( {successMessageMarginDesktop: {...successMessageMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {successMessageTabletMargin: {...successMessageTabletMargin, [position]: value}} );
+                    setAttributes( {successMessageMarginTablet: {...successMessageMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {successMessageMobileMargin: {...successMessageMobileMargin, [position]: value}} );
+                    setAttributes( {successMessageMarginMobile: {...successMessageMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1273,7 +1273,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        errorMessageDesktopPadding: {
+                        errorMessagePaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1283,7 +1283,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        errorMessageTabletPadding: {
+                        errorMessagePaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1293,7 +1293,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        errorMessageMobilePadding: {
+                        errorMessagePaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1307,13 +1307,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {errorMessageDesktopPadding: {...errorMessageDesktopPadding, [position]: value}} );
+                    setAttributes( {errorMessagePaddingDesktop: {...errorMessagePaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {errorMessageTabletPadding: {...errorMessageTabletPadding, [position]: value}} );
+                    setAttributes( {errorMessagePaddingTablet: {...errorMessagePaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {errorMessageMobilePadding: {...errorMessageMobilePadding, [position]: value}} );
+                    setAttributes( {errorMessagePaddingMobile: {...errorMessagePaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1342,7 +1342,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        errorMessageDesktopMargin: {
+                        errorMessageMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1352,7 +1352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        errorMessageTabletMargin: {
+                        errorMessageMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1362,7 +1362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        errorMessageMobileMargin: {
+                        errorMessageMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1376,13 +1376,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {errorMessageDesktopMargin: {...errorMessageDesktopMargin, [position]: value}} );
+                    setAttributes( {errorMessageMarginDesktop: {...errorMessageMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {errorMessageTabletMargin: {...errorMessageTabletMargin, [position]: value}} );
+                    setAttributes( {errorMessageMarginTablet: {...errorMessageMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {errorMessageMobileMargin: {...errorMessageMobileMargin, [position]: value}} );
+                    setAttributes( {errorMessageMarginMobile: {...errorMessageMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1549,7 +1549,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        formDesktopMargin: {
+                        formMarginDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1559,7 +1559,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        formTabMargin: {
+                        formMarginTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1569,7 +1569,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        formMobileMargin: {
+                        formMarginMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1583,13 +1583,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {formDesktopMargin: {...formDesktopMargin, [position]: value}} );
+                    setAttributes( {formMarginDesktop: {...formMarginDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {formTabMargin: {...formTabMargin, [position]: value}} );
+                    setAttributes( {formMarginTablet: {...formMarginTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {formMobileMargin: {...formMobileMargin, [position]: value}} );
+                    setAttributes( {formMarginMobile: {...formMarginMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1618,7 +1618,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        formDesktopPadding: {
+                        formPaddingDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1628,7 +1628,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        formTabPadding: {
+                        formPaddingTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1638,7 +1638,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        formMobilePadding: {
+                        formPaddingMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1652,13 +1652,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {formDesktopPadding: {...formDesktopPadding, [position]: value}} );
+                    setAttributes( {formPaddingDesktop: {...formPaddingDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {formTabPadding: {...formTabPadding, [position]: value}} );
+                    setAttributes( {formPaddingTablet: {...formPaddingTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {formMobilePadding: {...formMobilePadding, [position]: value}} );
+                    setAttributes( {formPaddingMobile: {...formPaddingMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1687,7 +1687,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        formDesktopBorderWidth: {
+                        formBorderDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1697,7 +1697,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        formTabBorderWidth: {
+                        formBorderTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1707,7 +1707,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        formMobileBorderWidth: {
+                        formBorderMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1721,13 +1721,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {formDesktopBorderWidth: {...formDesktopBorderWidth, [position]: value}} );
+                    setAttributes( {formBorderDesktop: {...formBorderDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {formTabBorderWidth: {...formTabBorderWidth, [position]: value}} );
+                    setAttributes( {formBorderTablet: {...formBorderTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {formMobileBorderWidth: {...formMobileBorderWidth, [position]: value}} );
+                    setAttributes( {formBorderMobile: {...formBorderMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1756,7 +1756,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             switch ( deviceType ) {
                 case 'Desktop':
                     setAttributes( {
-                        formDesktopBorderRadiusWidth: {
+                        formBorderRadiusDesktop: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1766,7 +1766,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Tablet':
                     setAttributes( {
-                        formTabBorderRadiusWidth: {
+                        formBorderRadiusTablet: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1776,7 +1776,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     break;
                 case 'Mobile':
                     setAttributes( {
-                        formMobileBorderRadiusWidth: {
+                        formBorderRadiusMobile: {
                             top: value,
                             right: value,
                             bottom: value,
@@ -1790,13 +1790,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {formDesktopBorderRadiusWidth: {...formDesktopBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {formBorderRadiusDesktop: {...formBorderRadiusDesktop, [position]: value}} );
                     break;
                 case 'Tablet':
-                    setAttributes( {formTabBorderRadiusWidth: {...formTabBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {formBorderRadiusTablet: {...formBorderRadiusTablet, [position]: value}} );
                     break;
                 case 'Mobile':
-                    setAttributes( {formMobileBorderRadiusWidth: {...formMobileBorderRadiusWidth, [position]: value}} );
+                    setAttributes( {formBorderRadiusMobile: {...formBorderRadiusMobile, [position]: value}} );
                     break;
                 default:
                     break;
@@ -1956,25 +1956,25 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
 
-    const labelMarginDesktopWidth = `${labelDesktopMargin?.top}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.right}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.bottom}${labelMarginUnits?.Desktop} ${labelDesktopMargin?.left}${labelMarginUnits?.Desktop}`;
-    const labelMarginTabletWidth = `${labelTabletMargin?.top}${labelMarginUnits?.Tablet} ${labelTabletMargin?.right}${labelMarginUnits?.Tablet} ${labelTabletMargin?.bottom}${labelMarginUnits?.Tablet} ${labelTabletMargin?.left}${labelMarginUnits?.Tablet}`;
-    const labelMarginMobileWidth = `${labelMobileMargin?.top}${labelMarginUnits?.Mobile} ${labelMobileMargin?.right}${labelMarginUnits?.Mobile} ${labelMobileMargin?.bottom}${labelMarginUnits?.Mobile} ${labelMobileMargin?.left}${labelMarginUnits?.Mobile}`;
+    const labelMarginDesktopWidth = `${labelMarginDesktop?.top}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.right}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.bottom}${labelMarginUnits?.Desktop} ${labelMarginDesktop?.left}${labelMarginUnits?.Desktop}`;
+    const labelMarginTabletWidth = `${labelMarginTablet?.top}${labelMarginUnits?.Tablet} ${labelMarginTablet?.right}${labelMarginUnits?.Tablet} ${labelMarginTablet?.bottom}${labelMarginUnits?.Tablet} ${labelMarginTablet?.left}${labelMarginUnits?.Tablet}`;
+    const labelMarginMobileWidth = `${labelMarginMobile?.top}${labelMarginUnits?.Mobile} ${labelMarginMobile?.right}${labelMarginUnits?.Mobile} ${labelMarginMobile?.bottom}${labelMarginUnits?.Mobile} ${labelMarginMobile?.left}${labelMarginUnits?.Mobile}`;
 
-    const inputFieldMarginDesktopWidth = `${inputFieldDesktopMargin?.top}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.right}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.bottom}${inputFieldMarginUnits?.Desktop} ${inputFieldDesktopMargin?.left}${inputFieldMarginUnits?.Desktop}`;
-    const inputFieldMarginTabletWidth = `${inputFieldTabletMargin?.top}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.right}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.bottom}${inputFieldMarginUnits?.Tablet} ${inputFieldTabletMargin?.left}${inputFieldMarginUnits?.Tablet}`;
-    const inputFieldMarginMobileWidth = `${inputFieldMobileMargin?.top}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.right}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.bottom}${inputFieldMarginUnits?.Mobile} ${inputFieldMobileMargin?.left}${inputFieldMarginUnits?.Mobile}`;
+    const inputFieldMarginDesktopWidth = `${inputFieldMarginDesktop?.top}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.right}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.bottom}${inputFieldMarginUnits?.Desktop} ${inputFieldMarginDesktop?.left}${inputFieldMarginUnits?.Desktop}`;
+    const inputFieldMarginTabletWidth = `${inputFieldMarginTablet?.top}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.right}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.bottom}${inputFieldMarginUnits?.Tablet} ${inputFieldMarginTablet?.left}${inputFieldMarginUnits?.Tablet}`;
+    const inputFieldMarginMobileWidth = `${inputFieldMarginMobile?.top}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.right}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.bottom}${inputFieldMarginUnits?.Mobile} ${inputFieldMarginMobile?.left}${inputFieldMarginUnits?.Mobile}`;
 
-    const inputFieldPaddingDesktopWidth = `${inputFieldDesktopPadding?.top}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.right}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.bottom}${inputFieldPaddingUnits?.Desktop} ${inputFieldDesktopPadding?.left}${inputFieldPaddingUnits?.Desktop}`;
-    const inputFieldPaddingTabletWidth = `${inputFieldTabletPadding?.top}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.right}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.bottom}${inputFieldPaddingUnits?.Tablet} ${inputFieldTabletPadding?.left}${inputFieldPaddingUnits?.Tablet}`;
-    const inputFieldPaddingMobileWidth = `${inputFieldMobilePadding?.top}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.right}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.bottom}${inputFieldPaddingUnits?.Mobile} ${inputFieldMobilePadding?.left}${inputFieldPaddingUnits?.Mobile}`;
+    const inputFieldPaddingDesktopWidth = `${inputFieldPaddingDesktop?.top}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.right}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.bottom}${inputFieldPaddingUnits?.Desktop} ${inputFieldPaddingDesktop?.left}${inputFieldPaddingUnits?.Desktop}`;
+    const inputFieldPaddingTabletWidth = `${inputFieldPaddingTablet?.top}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.right}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.bottom}${inputFieldPaddingUnits?.Tablet} ${inputFieldPaddingTablet?.left}${inputFieldPaddingUnits?.Tablet}`;
+    const inputFieldPaddingMobileWidth = `${inputFieldPaddingMobile?.top}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.right}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.bottom}${inputFieldPaddingUnits?.Mobile} ${inputFieldPaddingMobile?.left}${inputFieldPaddingUnits?.Mobile}`;
 
-    const submitBtnMarginDesktopWidth = `${submitBtnDesktopMargin?.top}${submitBtnMarginUnits?.Desktop} ${submitBtnDesktopMargin?.right}${submitBtnMarginUnits?.Desktop} ${submitBtnDesktopMargin?.bottom}${submitBtnMarginUnits?.Desktop} ${submitBtnDesktopMargin?.left}${submitBtnMarginUnits?.Desktop}`;
-    const submitBtnMarginTabletWidth = `${submitBtnTabletMargin?.top}${submitBtnMarginUnits?.Tablet} ${submitBtnTabletMargin?.right}${submitBtnMarginUnits?.Tablet} ${submitBtnTabletMargin?.bottom}${submitBtnMarginUnits?.Tablet} ${submitBtnTabletMargin?.left}${submitBtnMarginUnits?.Tablet}`;
-    const submitBtnMarginMobileWidth = `${submitBtnMobileMargin?.top}${submitBtnMarginUnits?.Mobile} ${submitBtnMobileMargin?.right}${submitBtnMarginUnits?.Mobile} ${submitBtnMobileMargin?.bottom}${submitBtnMarginUnits?.Mobile} ${submitBtnMobileMargin?.left}${submitBtnMarginUnits?.Mobile}`;
+    const submitBtnMarginDesktopWidth = `${submitBtnMarginDesktop?.top}${submitBtnMarginUnits?.Desktop} ${submitBtnMarginDesktop?.right}${submitBtnMarginUnits?.Desktop} ${submitBtnMarginDesktop?.bottom}${submitBtnMarginUnits?.Desktop} ${submitBtnMarginDesktop?.left}${submitBtnMarginUnits?.Desktop}`;
+    const submitBtnMarginTabletWidth = `${submitBtnMarginTablet?.top}${submitBtnMarginUnits?.Tablet} ${submitBtnMarginTablet?.right}${submitBtnMarginUnits?.Tablet} ${submitBtnMarginTablet?.bottom}${submitBtnMarginUnits?.Tablet} ${submitBtnMarginTablet?.left}${submitBtnMarginUnits?.Tablet}`;
+    const submitBtnMarginMobileWidth = `${submitBtnMarginMobile?.top}${submitBtnMarginUnits?.Mobile} ${submitBtnMarginMobile?.right}${submitBtnMarginUnits?.Mobile} ${submitBtnMarginMobile?.bottom}${submitBtnMarginUnits?.Mobile} ${submitBtnMarginMobile?.left}${submitBtnMarginUnits?.Mobile}`;
 
-	const submitBtnPaddingDesktopWidth = `${submitBtnDesktopPadding?.top}${submitBtnPaddingUnits?.Desktop} ${submitBtnDesktopPadding?.right}${submitBtnPaddingUnits?.Desktop} ${submitBtnDesktopPadding?.bottom}${submitBtnPaddingUnits?.Desktop} ${submitBtnDesktopPadding?.left}${submitBtnPaddingUnits?.Desktop}`;
-    const submitBtnPaddingTabletWidth = `${submitBtnTabletPadding?.top}${submitBtnPaddingUnits?.Tablet} ${submitBtnTabletPadding?.right}${submitBtnPaddingUnits?.Tablet} ${submitBtnTabletPadding?.bottom}${submitBtnPaddingUnits?.Tablet} ${submitBtnTabletPadding?.left}${submitBtnPaddingUnits?.Tablet}`;
-    const submitBtnPaddingMobileWidth = `${submitBtnMobilePadding?.top}${submitBtnPaddingUnits?.Mobile} ${submitBtnMobilePadding?.right}${submitBtnPaddingUnits?.Mobile} ${submitBtnMobilePadding?.bottom}${submitBtnPaddingUnits?.Mobile} ${submitBtnMobilePadding?.left}${submitBtnPaddingUnits?.Mobile}`;
+	const submitBtnPaddingDesktopWidth = `${submitBtnPaddingDesktop?.top}${submitBtnPaddingUnits?.Desktop} ${submitBtnPaddingDesktop?.right}${submitBtnPaddingUnits?.Desktop} ${submitBtnPaddingDesktop?.bottom}${submitBtnPaddingUnits?.Desktop} ${submitBtnPaddingDesktop?.left}${submitBtnPaddingUnits?.Desktop}`;
+    const submitBtnPaddingTabletWidth = `${submitBtnPaddingTablet?.top}${submitBtnPaddingUnits?.Tablet} ${submitBtnPaddingTablet?.right}${submitBtnPaddingUnits?.Tablet} ${submitBtnPaddingTablet?.bottom}${submitBtnPaddingUnits?.Tablet} ${submitBtnPaddingTablet?.left}${submitBtnPaddingUnits?.Tablet}`;
+    const submitBtnPaddingMobileWidth = `${submitBtnPaddingMobile?.top}${submitBtnPaddingUnits?.Mobile} ${submitBtnPaddingMobile?.right}${submitBtnPaddingUnits?.Mobile} ${submitBtnPaddingMobile?.bottom}${submitBtnPaddingUnits?.Mobile} ${submitBtnPaddingMobile?.left}${submitBtnPaddingUnits?.Mobile}`;
 
     const submitBtnBorderDesktopWidth = `${submitBtnBorderDesktop?.top}${submitBtnBorderUnits?.Desktop} ${submitBtnBorderDesktop?.right}${submitBtnBorderUnits?.Desktop} ${submitBtnBorderDesktop?.bottom}${submitBtnBorderUnits?.Desktop} ${submitBtnBorderDesktop?.left}${submitBtnBorderUnits?.Desktop}`;
     const submitBtnBorderTabletWidth = `${submitBtnBorderTablet?.top}${submitBtnBorderUnits?.Tablet} ${submitBtnBorderTablet?.right}${submitBtnBorderUnits?.Tablet} ${submitBtnBorderTablet?.bottom}${submitBtnBorderUnits?.Tablet} ${submitBtnBorderTablet?.left}${submitBtnBorderUnits?.Tablet}`;
@@ -1984,13 +1984,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const submitBtnBorderRadiusTabletWidth = `${submitBtnBorderRadiusTablet?.top}${submitBtnBorderRadiusUnits?.Tablet} ${submitBtnBorderRadiusTablet?.right}${submitBtnBorderRadiusUnits?.Tablet} ${submitBtnBorderRadiusTablet?.bottom}${submitBtnBorderRadiusUnits?.Tablet} ${submitBtnBorderRadiusTablet?.left}${submitBtnBorderRadiusUnits?.Tablet}`;
     const submitBtnBorderRadiusMobileWidth = `${submitBtnBorderRadiusMobile?.top}${submitBtnBorderRadiusUnits?.Mobile} ${submitBtnBorderRadiusMobile?.right}${submitBtnBorderRadiusUnits?.Mobile} ${submitBtnBorderRadiusMobile?.bottom}${submitBtnBorderRadiusUnits?.Mobile} ${submitBtnBorderRadiusMobile?.left}${submitBtnBorderRadiusUnits?.Mobile}`;
       
-    const successMessageMarginDesktopWidth = `${successMessageDesktopMargin?.top}${successMessageMarginUnits?.Desktop} ${successMessageDesktopMargin?.right}${successMessageMarginUnits?.Desktop} ${successMessageDesktopMargin?.bottom}${successMessageMarginUnits?.Desktop} ${successMessageDesktopMargin?.left}${successMessageMarginUnits?.Desktop}`;
-    const successMessageMarginTabletWidth = `${successMessageTabletMargin?.top}${successMessageMarginUnits?.Tablet} ${successMessageTabletMargin?.right}${successMessageMarginUnits?.Tablet} ${successMessageTabletMargin?.bottom}${successMessageMarginUnits?.Tablet} ${successMessageTabletMargin?.left}${successMessageMarginUnits?.Tablet}`;
-    const successMessageMarginMobileWidth = `${successMessageMobileMargin?.top}${successMessageMarginUnits?.Mobile} ${successMessageMobileMargin?.right}${successMessageMarginUnits?.Mobile} ${successMessageMobileMargin?.bottom}${successMessageMarginUnits?.Mobile} ${successMessageMobileMargin?.left}${successMessageMarginUnits?.Mobile}`;
+    const successMessageMarginDesktopWidth = `${successMessageMarginDesktop?.top}${successMessageMarginUnits?.Desktop} ${successMessageMarginDesktop?.right}${successMessageMarginUnits?.Desktop} ${successMessageMarginDesktop?.bottom}${successMessageMarginUnits?.Desktop} ${successMessageMarginDesktop?.left}${successMessageMarginUnits?.Desktop}`;
+    const successMessageMarginTabletWidth = `${successMessageMarginTablet?.top}${successMessageMarginUnits?.Tablet} ${successMessageMarginTablet?.right}${successMessageMarginUnits?.Tablet} ${successMessageMarginTablet?.bottom}${successMessageMarginUnits?.Tablet} ${successMessageMarginTablet?.left}${successMessageMarginUnits?.Tablet}`;
+    const successMessageMarginMobileWidth = `${successMessageMarginMobile?.top}${successMessageMarginUnits?.Mobile} ${successMessageMarginMobile?.right}${successMessageMarginUnits?.Mobile} ${successMessageMarginMobile?.bottom}${successMessageMarginUnits?.Mobile} ${successMessageMarginMobile?.left}${successMessageMarginUnits?.Mobile}`;
 
-	const successMessagePaddingDesktopWidth = `${successMessageDesktopPadding?.top}${successMessagePaddingUnits?.Desktop} ${successMessageDesktopPadding?.right}${successMessagePaddingUnits?.Desktop} ${successMessageDesktopPadding?.bottom}${successMessagePaddingUnits?.Desktop} ${successMessageDesktopPadding?.left}${successMessagePaddingUnits?.Desktop}`;
-    const successMessagePaddingTabletWidth = `${successMessageTabletPadding?.top}${successMessagePaddingUnits?.Tablet} ${successMessageTabletPadding?.right}${successMessagePaddingUnits?.Tablet} ${successMessageTabletPadding?.bottom}${successMessagePaddingUnits?.Tablet} ${successMessageTabletPadding?.left}${successMessagePaddingUnits?.Tablet}`;
-    const successMessagePaddingMobileWidth = `${successMessageMobilePadding?.top}${successMessagePaddingUnits?.Mobile} ${successMessageMobilePadding?.right}${successMessagePaddingUnits?.Mobile} ${successMessageMobilePadding?.bottom}${successMessagePaddingUnits?.Mobile} ${successMessageMobilePadding?.left}${successMessagePaddingUnits?.Mobile}`;
+	const successMessagePaddingDesktopWidth = `${successMessagePaddingDesktop?.top}${successMessagePaddingUnits?.Desktop} ${successMessagePaddingDesktop?.right}${successMessagePaddingUnits?.Desktop} ${successMessagePaddingDesktop?.bottom}${successMessagePaddingUnits?.Desktop} ${successMessagePaddingDesktop?.left}${successMessagePaddingUnits?.Desktop}`;
+    const successMessagePaddingTabletWidth = `${successMessagePaddingTablet?.top}${successMessagePaddingUnits?.Tablet} ${successMessagePaddingTablet?.right}${successMessagePaddingUnits?.Tablet} ${successMessagePaddingTablet?.bottom}${successMessagePaddingUnits?.Tablet} ${successMessagePaddingTablet?.left}${successMessagePaddingUnits?.Tablet}`;
+    const successMessagePaddingMobileWidth = `${successMessagePaddingMobile?.top}${successMessagePaddingUnits?.Mobile} ${successMessagePaddingMobile?.right}${successMessagePaddingUnits?.Mobile} ${successMessagePaddingMobile?.bottom}${successMessagePaddingUnits?.Mobile} ${successMessagePaddingMobile?.left}${successMessagePaddingUnits?.Mobile}`;
 
     const successMessageBorderDesktopWidth = `${successMessageBorderDesktop?.top}${successMessageBorderUnits?.Desktop} ${successMessageBorderDesktop?.right}${successMessageBorderUnits?.Desktop} ${successMessageBorderDesktop?.bottom}${successMessageBorderUnits?.Desktop} ${successMessageBorderDesktop?.left}${successMessageBorderUnits?.Desktop}`;
     const successMessageBorderTabletWidth = `${successMessageBorderTablet?.top}${successMessageBorderUnits?.Tablet} ${successMessageBorderTablet?.right}${successMessageBorderUnits?.Tablet} ${successMessageBorderTablet?.bottom}${successMessageBorderUnits?.Tablet} ${successMessageBorderTablet?.left}${successMessageBorderUnits?.Tablet}`;
@@ -2000,13 +2000,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const successMessageBorderRadiusTabletWidth = `${successMessageBorderRadiusTablet?.top}${successMessageBorderRadiusUnits?.Tablet} ${successMessageBorderRadiusTablet?.right}${successMessageBorderRadiusUnits?.Tablet} ${successMessageBorderRadiusTablet?.bottom}${successMessageBorderRadiusUnits?.Tablet} ${successMessageBorderRadiusTablet?.left}${successMessageBorderRadiusUnits?.Tablet}`;
     const successMessageBorderRadiusMobileWidth = `${successMessageBorderRadiusMobile?.top}${successMessageBorderRadiusUnits?.Mobile} ${successMessageBorderRadiusMobile?.right}${successMessageBorderRadiusUnits?.Mobile} ${successMessageBorderRadiusMobile?.bottom}${successMessageBorderRadiusUnits?.Mobile} ${successMessageBorderRadiusMobile?.left}${successMessageBorderRadiusUnits?.Mobile}`;
       
-    const errorMessageMarginDesktopWidth = `${errorMessageDesktopMargin?.top}${errorMessageMarginUnits?.Desktop} ${errorMessageDesktopMargin?.right}${errorMessageMarginUnits?.Desktop} ${errorMessageDesktopMargin?.bottom}${errorMessageMarginUnits?.Desktop} ${errorMessageDesktopMargin?.left}${errorMessageMarginUnits?.Desktop}`;
-    const errorMessageMarginTabletWidth = `${errorMessageTabletMargin?.top}${errorMessageMarginUnits?.Tablet} ${errorMessageTabletMargin?.right}${errorMessageMarginUnits?.Tablet} ${errorMessageTabletMargin?.bottom}${errorMessageMarginUnits?.Tablet} ${errorMessageTabletMargin?.left}${errorMessageMarginUnits?.Tablet}`;
-    const errorMessageMarginMobileWidth = `${errorMessageMobileMargin?.top}${errorMessageMarginUnits?.Mobile} ${errorMessageMobileMargin?.right}${errorMessageMarginUnits?.Mobile} ${errorMessageMobileMargin?.bottom}${errorMessageMarginUnits?.Mobile} ${errorMessageMobileMargin?.left}${errorMessageMarginUnits?.Mobile}`;
+    const errorMessageMarginDesktopWidth = `${errorMessageMarginDesktop?.top}${errorMessageMarginUnits?.Desktop} ${errorMessageMarginDesktop?.right}${errorMessageMarginUnits?.Desktop} ${errorMessageMarginDesktop?.bottom}${errorMessageMarginUnits?.Desktop} ${errorMessageMarginDesktop?.left}${errorMessageMarginUnits?.Desktop}`;
+    const errorMessageMarginTabletWidth = `${errorMessageMarginTablet?.top}${errorMessageMarginUnits?.Tablet} ${errorMessageMarginTablet?.right}${errorMessageMarginUnits?.Tablet} ${errorMessageMarginTablet?.bottom}${errorMessageMarginUnits?.Tablet} ${errorMessageMarginTablet?.left}${errorMessageMarginUnits?.Tablet}`;
+    const errorMessageMarginMobileWidth = `${errorMessageMarginMobile?.top}${errorMessageMarginUnits?.Mobile} ${errorMessageMarginMobile?.right}${errorMessageMarginUnits?.Mobile} ${errorMessageMarginMobile?.bottom}${errorMessageMarginUnits?.Mobile} ${errorMessageMarginMobile?.left}${errorMessageMarginUnits?.Mobile}`;
 
-	const errorMessagePaddingDesktopWidth = `${errorMessageDesktopPadding?.top}${errorMessagePaddingUnits?.Desktop} ${errorMessageDesktopPadding?.right}${errorMessagePaddingUnits?.Desktop} ${errorMessageDesktopPadding?.bottom}${errorMessagePaddingUnits?.Desktop} ${errorMessageDesktopPadding?.left}${errorMessagePaddingUnits?.Desktop}`;
-    const errorMessagePaddingTabletWidth = `${errorMessageTabletPadding?.top}${errorMessagePaddingUnits?.Tablet} ${errorMessageTabletPadding?.right}${errorMessagePaddingUnits?.Tablet} ${errorMessageTabletPadding?.bottom}${errorMessagePaddingUnits?.Tablet} ${errorMessageTabletPadding?.left}${errorMessagePaddingUnits?.Tablet}`;
-    const errorMessagePaddingMobileWidth = `${errorMessageMobilePadding?.top}${errorMessagePaddingUnits?.Mobile} ${errorMessageMobilePadding?.right}${errorMessagePaddingUnits?.Mobile} ${errorMessageMobilePadding?.bottom}${errorMessagePaddingUnits?.Mobile} ${errorMessageMobilePadding?.left}${errorMessagePaddingUnits?.Mobile}`;
+	const errorMessagePaddingDesktopWidth = `${errorMessagePaddingDesktop?.top}${errorMessagePaddingUnits?.Desktop} ${errorMessagePaddingDesktop?.right}${errorMessagePaddingUnits?.Desktop} ${errorMessagePaddingDesktop?.bottom}${errorMessagePaddingUnits?.Desktop} ${errorMessagePaddingDesktop?.left}${errorMessagePaddingUnits?.Desktop}`;
+    const errorMessagePaddingTabletWidth = `${errorMessagePaddingTablet?.top}${errorMessagePaddingUnits?.Tablet} ${errorMessagePaddingTablet?.right}${errorMessagePaddingUnits?.Tablet} ${errorMessagePaddingTablet?.bottom}${errorMessagePaddingUnits?.Tablet} ${errorMessagePaddingTablet?.left}${errorMessagePaddingUnits?.Tablet}`;
+    const errorMessagePaddingMobileWidth = `${errorMessagePaddingMobile?.top}${errorMessagePaddingUnits?.Mobile} ${errorMessagePaddingMobile?.right}${errorMessagePaddingUnits?.Mobile} ${errorMessagePaddingMobile?.bottom}${errorMessagePaddingUnits?.Mobile} ${errorMessagePaddingMobile?.left}${errorMessagePaddingUnits?.Mobile}`;
 
     const errorMessageBorderDesktopWidth = `${errorMessageBorderDesktop?.top}${errorMessageBorderUnits?.Desktop} ${errorMessageBorderDesktop?.right}${errorMessageBorderUnits?.Desktop} ${errorMessageBorderDesktop?.bottom}${errorMessageBorderUnits?.Desktop} ${errorMessageBorderDesktop?.left}${errorMessageBorderUnits?.Desktop}`;
     const errorMessageBorderTabletWidth = `${errorMessageBorderTablet?.top}${errorMessageBorderUnits?.Tablet} ${errorMessageBorderTablet?.right}${errorMessageBorderUnits?.Tablet} ${errorMessageBorderTablet?.bottom}${errorMessageBorderUnits?.Tablet} ${errorMessageBorderTablet?.left}${errorMessageBorderUnits?.Tablet}`;
@@ -2016,21 +2016,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const errorMessageBorderRadiusTabletWidth = `${errorMessageBorderRadiusTablet?.top}${errorMessageBorderRadiusUnits?.Tablet} ${errorMessageBorderRadiusTablet?.right}${errorMessageBorderRadiusUnits?.Tablet} ${errorMessageBorderRadiusTablet?.bottom}${errorMessageBorderRadiusUnits?.Tablet} ${errorMessageBorderRadiusTablet?.left}${errorMessageBorderRadiusUnits?.Tablet}`;
     const errorMessageBorderRadiusMobileWidth = `${errorMessageBorderRadiusMobile?.top}${errorMessageBorderRadiusUnits?.Mobile} ${errorMessageBorderRadiusMobile?.right}${errorMessageBorderRadiusUnits?.Mobile} ${errorMessageBorderRadiusMobile?.bottom}${errorMessageBorderRadiusUnits?.Mobile} ${errorMessageBorderRadiusMobile?.left}${errorMessageBorderRadiusUnits?.Mobile}`;
       
-    const formMarginDesktopWidth = `${formDesktopMargin?.top}${formMarginUnits?.Desktop} ${formDesktopMargin?.right}${formMarginUnits?.Desktop} ${formDesktopMargin?.bottom}${formMarginUnits?.Desktop} ${formDesktopMargin?.left}${formMarginUnits?.Desktop}`;
-    const formMarginTabletWidth = `${formTabMargin?.top}${formMarginUnits?.Tablet} ${formTabMargin?.right}${formMarginUnits?.Tablet} ${formTabMargin?.bottom}${formMarginUnits?.Tablet} ${formTabMargin?.left}${formMarginUnits?.Tablet}`;
-    const formMarginMobileWidth = `${formMobileMargin?.top}${formMarginUnits?.Mobile} ${formMobileMargin?.right}${formMarginUnits?.Mobile} ${formMobileMargin?.bottom}${formMarginUnits?.Mobile} ${formMobileMargin?.left}${formMarginUnits?.Mobile}`;
+    const formMarginDesktopWidth = `${formMarginDesktop?.top}${formMarginUnits?.Desktop} ${formMarginDesktop?.right}${formMarginUnits?.Desktop} ${formMarginDesktop?.bottom}${formMarginUnits?.Desktop} ${formMarginDesktop?.left}${formMarginUnits?.Desktop}`;
+    const formMarginTabletWidth = `${formMarginTablet?.top}${formMarginUnits?.Tablet} ${formMarginTablet?.right}${formMarginUnits?.Tablet} ${formMarginTablet?.bottom}${formMarginUnits?.Tablet} ${formMarginTablet?.left}${formMarginUnits?.Tablet}`;
+    const formMarginMobileWidth = `${formMarginMobile?.top}${formMarginUnits?.Mobile} ${formMarginMobile?.right}${formMarginUnits?.Mobile} ${formMarginMobile?.bottom}${formMarginUnits?.Mobile} ${formMarginMobile?.left}${formMarginUnits?.Mobile}`;
 
-    const formPaddingDesktopWidth = `${formDesktopPadding?.top}${formPaddingUnits?.Desktop} ${formDesktopPadding?.right}${formPaddingUnits?.Desktop} ${formDesktopPadding?.bottom}${formPaddingUnits?.Desktop} ${formDesktopPadding?.left}${formPaddingUnits?.Desktop}`;
-    const formPaddingTabletWidth = `${formTabPadding?.top}${formPaddingUnits?.Tablet} ${formTabPadding?.right}${formPaddingUnits?.Tablet} ${formTabPadding?.bottom}${formPaddingUnits?.Tablet} ${formTabPadding?.left}${formPaddingUnits?.Tablet}`;
-    const formPaddingMobileWidth = `${formMobilePadding?.top}${formPaddingUnits?.Mobile} ${formMobilePadding?.right}${formPaddingUnits?.Mobile} ${formMobilePadding?.bottom}${formPaddingUnits?.Mobile} ${formMobilePadding?.left}${formPaddingUnits?.Mobile}`;
+    const formPaddingDesktopWidth = `${formPaddingDesktop?.top}${formPaddingUnits?.Desktop} ${formPaddingDesktop?.right}${formPaddingUnits?.Desktop} ${formPaddingDesktop?.bottom}${formPaddingUnits?.Desktop} ${formPaddingDesktop?.left}${formPaddingUnits?.Desktop}`;
+    const formPaddingTabletWidth = `${formPaddingTablet?.top}${formPaddingUnits?.Tablet} ${formPaddingTablet?.right}${formPaddingUnits?.Tablet} ${formPaddingTablet?.bottom}${formPaddingUnits?.Tablet} ${formPaddingTablet?.left}${formPaddingUnits?.Tablet}`;
+    const formPaddingMobileWidth = `${formPaddingMobile?.top}${formPaddingUnits?.Mobile} ${formPaddingMobile?.right}${formPaddingUnits?.Mobile} ${formPaddingMobile?.bottom}${formPaddingUnits?.Mobile} ${formPaddingMobile?.left}${formPaddingUnits?.Mobile}`;
 
-    const formBorderDesktopWidth = `${formDesktopBorderWidth?.top}${formBorderUnits?.Desktop} ${formDesktopBorderWidth?.right}${formBorderUnits?.Desktop} ${formDesktopBorderWidth?.bottom}${formBorderUnits?.Desktop} ${formDesktopBorderWidth?.left}${formBorderUnits?.Desktop}`;
-    const formBorderTabletWidth = `${formTabBorderWidth?.top}${formBorderUnits?.Tablet} ${formTabBorderWidth?.right}${formBorderUnits?.Tablet} ${formTabBorderWidth?.bottom}${formBorderUnits?.Tablet} ${formTabBorderWidth?.left}${formBorderUnits?.Tablet}`;
-    const formBorderMobileWidth = `${formMobileBorderWidth?.top}${formBorderUnits?.Mobile} ${formMobileBorderWidth?.right}${formBorderUnits?.Mobile} ${formMobileBorderWidth?.bottom}${formBorderUnits?.Mobile} ${formMobileBorderWidth?.left}${formBorderUnits?.Mobile}`;
+    const formBorderDesktopWidth = `${formBorderDesktop?.top}${formBorderUnits?.Desktop} ${formBorderDesktop?.right}${formBorderUnits?.Desktop} ${formBorderDesktop?.bottom}${formBorderUnits?.Desktop} ${formBorderDesktop?.left}${formBorderUnits?.Desktop}`;
+    const formBorderTabletWidth = `${formBorderTablet?.top}${formBorderUnits?.Tablet} ${formBorderTablet?.right}${formBorderUnits?.Tablet} ${formBorderTablet?.bottom}${formBorderUnits?.Tablet} ${formBorderTablet?.left}${formBorderUnits?.Tablet}`;
+    const formBorderMobileWidth = `${formBorderMobile?.top}${formBorderUnits?.Mobile} ${formBorderMobile?.right}${formBorderUnits?.Mobile} ${formBorderMobile?.bottom}${formBorderUnits?.Mobile} ${formBorderMobile?.left}${formBorderUnits?.Mobile}`;
 
-    const formBorderRadiusDesktopWidth = `${formDesktopBorderRadiusWidth?.top}${formBorderRadiusUnits?.Desktop} ${formDesktopBorderRadiusWidth?.right}${formBorderRadiusUnits?.Desktop} ${formDesktopBorderRadiusWidth?.bottom}${formBorderRadiusUnits?.Desktop} ${formDesktopBorderRadiusWidth?.left}${formBorderRadiusUnits?.Desktop}`;
-    const formBorderRadiusTabletWidth = `${formTabBorderRadiusWidth?.top}${formBorderRadiusUnits?.Tablet} ${formTabBorderRadiusWidth?.right}${formBorderRadiusUnits?.Tablet} ${formTabBorderRadiusWidth?.bottom}${formBorderRadiusUnits?.Tablet} ${formTabBorderRadiusWidth?.left}${formBorderRadiusUnits?.Tablet}`;
-    const formBorderRadiusMobileWidth = `${formMobileBorderRadiusWidth?.top}${formBorderRadiusUnits?.Mobile} ${formMobileBorderRadiusWidth?.right}${formBorderRadiusUnits?.Mobile} ${formMobileBorderRadiusWidth?.bottom}${formBorderRadiusUnits?.Mobile} ${formMobileBorderRadiusWidth?.left}${formBorderRadiusUnits?.Mobile}`;
+    const formBorderRadiusDesktopWidth = `${formBorderRadiusDesktop?.top}${formBorderRadiusUnits?.Desktop} ${formBorderRadiusDesktop?.right}${formBorderRadiusUnits?.Desktop} ${formBorderRadiusDesktop?.bottom}${formBorderRadiusUnits?.Desktop} ${formBorderRadiusDesktop?.left}${formBorderRadiusUnits?.Desktop}`;
+    const formBorderRadiusTabletWidth = `${formBorderRadiusTablet?.top}${formBorderRadiusUnits?.Tablet} ${formBorderRadiusTablet?.right}${formBorderRadiusUnits?.Tablet} ${formBorderRadiusTablet?.bottom}${formBorderRadiusUnits?.Tablet} ${formBorderRadiusTablet?.left}${formBorderRadiusUnits?.Tablet}`;
+    const formBorderRadiusMobileWidth = `${formBorderRadiusMobile?.top}${formBorderRadiusUnits?.Mobile} ${formBorderRadiusMobile?.right}${formBorderRadiusUnits?.Mobile} ${formBorderRadiusMobile?.bottom}${formBorderRadiusUnits?.Mobile} ${formBorderRadiusMobile?.left}${formBorderRadiusUnits?.Mobile}`;
 
     const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop?.top}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.right}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.bottom}${inputFieldBorderUnits?.Desktop} ${inputFieldBorderDesktop?.left}${inputFieldBorderUnits?.Desktop}`;
     const inputFieldBorderTabletWidth = `${inputFieldBorderTablet?.top}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.right}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.bottom}${inputFieldBorderUnits?.Tablet} ${inputFieldBorderTablet?.left}${inputFieldBorderUnits?.Tablet}`;
@@ -2044,123 +2044,75 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const fbformItemstyle = useMemo(() => {
         let styles = `
-          .fb-form-main-wrapper.${blockID} {
-            ${formPositionType === 'default' ? `position: relative;` : ''}
-            width: 100%;
-            ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
-            ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Desktop ? `left: ${formHZLeftOffset?.Desktop}${formHZLeftOffsetUnits?.Desktop};` : ''}
-            ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Desktop ? `right: ${formHZRightOffset?.Desktop}${formHZRightOffsetUnits?.Desktop};` : ''}
-            ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Desktop ? `top: ${formVRTopOffset?.Desktop}${formVRTopOffsetUnits?.Desktop};` : ''}
-            ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Desktop ? `bottom: ${formVRBottomOffset?.Desktop}${formVRBottomOffsetUnits?.Desktop};` : ''}
-            ${formZIndex?.Desktop ? `z-index: ${formZIndex?.Desktop};` : ''}
-            ${formOverflow !== 'default' ? `overflow: ${formOverflow};` : ''}
-          }
-          .fb-form-main-wrapper.${blockID} .fb-form-wrapper {
+            .fb-form-builder-main-wrapper.${blockID} {
+                ${formPositionType === 'default' ? `position: relative;` : ''}
+                width: 100%;
+                ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
+                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Desktop ? `left: ${formHZLeftOffset?.Desktop}${formHZLeftOffsetUnits?.Desktop};` : ''}
+                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Desktop ? `right: ${formHZRightOffset?.Desktop}${formHZRightOffsetUnits?.Desktop};` : ''}
+                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Desktop ? `top: ${formVRTopOffset?.Desktop}${formVRTopOffsetUnits?.Desktop};` : ''}
+                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Desktop ? `bottom: ${formVRBottomOffset?.Desktop}${formVRBottomOffsetUnits?.Desktop};` : ''}
+                ${formZIndex?.Desktop ? `z-index: ${formZIndex?.Desktop};` : ''}
+                ${formOverflow !== 'default' ? `overflow: ${formOverflow};` : ''}
+            }
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-wrapper {
                 position: relative;
-                ${formPaddingDesktopWidth && formDesktopPadding?.top ? `padding: ${formPaddingDesktopWidth};` : ''}
-                ${formMarginDesktopWidth && formDesktopMargin?.top ? `margin: ${formMarginDesktopWidth};` : ''}
+                ${formPaddingDesktopWidth && formPaddingDesktop?.top ? `padding: ${formPaddingDesktopWidth};` : ''}
+                ${formMarginDesktopWidth && formMarginDesktop?.top ? `margin: ${formMarginDesktopWidth};` : ''}
                 ${formBorder !== 'none' ? `border-style: ${formBorder};` : ''}
-                ${formBorderDesktopWidth && formDesktopBorderWidth?.top ? `border-width: ${formBorderDesktopWidth};` : ''}
+                ${formBorderDesktopWidth && formBorderDesktop?.top ? `border-width: ${formBorderDesktopWidth};` : ''}
                 ${formBorderColor ? `border-color: ${formBorderColor};` : ''}
-                ${formBorderRadiusDesktopWidth && formDesktopBorderRadiusWidth?.top ? `border-radius: ${formBorderRadiusDesktopWidth};` : ''}
+                ${formBorderRadiusDesktopWidth && formBorderRadiusDesktop?.top ? `border-radius: ${formBorderRadiusDesktopWidth};` : ''}
                 ${
                     formBgType === "gradient"
-                      ? `background: ${
-                          formBgCustomGradientSwitcher && formBgCustomGradientInputValue
+                    ? `background: ${
+                        formBgCustomGradientSwitcher && formBgCustomGradientInputValue
                             ? formBgCustomGradientInputValue
                             : formBgGradientColor
                         };`
-                      : formBgImageUrl !== undefined && formBgImageUrl !== null && formBgImageUrl !== ""
-                      ? `
+                    : formBgImageUrl !== undefined && formBgImageUrl !== null && formBgImageUrl !== ""
+                    ? `
                         ${formBgImageUrl !== undefined ? `background-image: url(${formBgImageUrl});` : ''}
                         ${formBgImagePosition !== undefined ? `background-position: ${formBgImagePosition};` : ''}
                         ${formBgImageAttachment !== undefined ? `background-attachment: ${formBgImageAttachment};` : ''}
                         ${formBgImageRepeat !== undefined ? `background-repeat: ${formBgImageRepeat};` : ''}
                         ${formBgImageSize !== undefined ? `background-size: ${formBgImageSize};` : ''}
-                      `
-                      : formBgClassicColor ? `background: ${formBgClassicColor};` : ''
+                    `
+                    : formBgClassicColor ? `background: ${formBgClassicColor};` : ''
                 }
                 ${formGlobalBoxShadowCssValue ? `box-shadow: ${formGlobalBoxShadowCssValue};` : ''}
                 overflow: hidden;
                 transition: all .3s ease-in-out;
             }
         
-            .fb-form-main-wrapper.${blockID} .fb-form-wrapper:hover {
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-wrapper:hover {
                 ${
                     formBgHoverType === "gradient"
-                      ? `background: ${
-                          formBgHoverCustomGradientSwitcher && formBgHoverCustomGradientInputValue
+                    ? `background: ${
+                        formBgHoverCustomGradientSwitcher && formBgHoverCustomGradientInputValue
                             ? formBgHoverCustomGradientInputValue
                             : formBgHoverGradientColor
                         };`
-                      : formBgHoverImageUrl !== undefined && formBgHoverImageUrl !== null && formBgHoverImageUrl !== ""
-                      ? `
+                    : formBgHoverImageUrl !== undefined && formBgHoverImageUrl !== null && formBgHoverImageUrl !== ""
+                    ? `
                         ${formBgHoverImageUrl !== undefined ? `background-image: url(${formBgHoverImageUrl});` : ''}
                         ${formBgHoverImagePosition !== undefined ? `background-position: ${formBgHoverImagePosition};` : ''}
                         ${formBgHoverImageAttachment !== undefined ? `background-attachment: ${formBgHoverImageAttachment};` : ''}
                         ${formBgHoverImageRepeat !== undefined ? `background-repeat: ${formBgHoverImageRepeat};` : ''}
                         ${formBgHoverImageSize !== undefined ? `background-size: ${formBgHoverImageSize};` : ''}
-                      `
-                      : formBgHoverClassicColor ? `background: ${formBgHoverClassicColor};` : ''
+                    `
+                    : formBgHoverClassicColor ? `background: ${formBgHoverClassicColor};` : ''
                 }
                 ${formBorderHoverColor ? `border-color: ${formBorderHoverColor};` : ''}
                 ${formGlobalHoverBoxShadowCssValue ? `box-shadow: ${formGlobalHoverBoxShadowCssValue};` : ''}
                 transition: all .3s ease-in-out;
             }
 
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper {
-                ${
-                    inputFieldBgType === "gradient"
-                      ? `background: ${
-                          inputFieldBgCustomGradientSwitcher && inputFieldBgCustomGradientInputValue
-                            ? inputFieldBgCustomGradientInputValue
-                            : inputFieldBgGradientColor
-                        };`
-                      : inputFieldBgImageUrl !== undefined && inputFieldBgImageUrl !== null && inputFieldBgImageUrl !== ""
-                      ? `
-                        ${inputFieldBgImageUrl !== undefined ? `background-image: url(${inputFieldBgImageUrl});` : ''}
-                        ${inputFieldBgImagePosition !== undefined ? `background-position: ${inputFieldBgImagePosition};` : ''}
-                        ${inputFieldBgImageAttachment !== undefined ? `background-attachment: ${inputFieldBgImageAttachment};` : ''}
-                        ${inputFieldBgImageRepeat !== undefined ? `background-repeat: ${inputFieldBgImageRepeat};` : ''}
-                        ${inputFieldBgImageSize !== undefined ? `background-size: ${inputFieldBgImageSize};` : ''}
-                      `
-                      : inputFieldBgClassicColor ? `background: ${inputFieldBgClassicColor};` : ''
-                }
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
                 display: flex;
-                align-items: center;
-                cursor: pointer;
-                ${labelMarginDesktopWidth && labelDesktopMargin?.top ? `padding: ${labelMarginDesktopWidth};` : ''}
-                ${submitBtnBorder ? `border-style: ${submitBtnBorder};` : ''}
-                ${submitBtnBorderColor ? `border-color: ${submitBtnBorderColor};` : ''}
-                ${submitBtnBorderDesktopWidth && submitBtnBorderDesktop?.top ? `border-width: ${submitBtnBorderDesktopWidth};` : ''}
-                ${submitBtnBorderRadiusDesktopWidth && submitBtnBorderRadiusDesktop?.top ? `border-radius: ${submitBtnBorderRadiusDesktopWidth};` : ''}
-                ${submitBtnBoxShadowCssValue ? `box-shadow: ${submitBtnBoxShadowCssValue};` : ''}
-                transition: all .3s ease-in-out;
-            }
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper:hover {
-                ${
-                    inputFieldBgHoverType === "gradient"
-                      ? `background: ${
-                          inputFieldBgHoverCustomGradientSwitcher && inputFieldBgHoverCustomGradientInputValue
-                            ? inputFieldBgHoverCustomGradientInputValue
-                            : inputFieldBgHoverGradientColor
-                        };`
-                      : inputFieldBgHoverImageUrl !== undefined && inputFieldBgHoverImageUrl !== null && inputFieldBgHoverImageUrl !== ""
-                      ? `
-                        ${inputFieldBgHoverImageUrl !== undefined ? `background-image: url(${inputFieldBgHoverImageUrl});` : ''}
-                        ${inputFieldBgHoverImagePosition !== undefined ? `background-position: ${inputFieldBgHoverImagePosition};` : ''}
-                        ${inputFieldBgHoverImageAttachment !== undefined ? `background-attachment: ${inputFieldBgHoverImageAttachment};` : ''}
-                        ${inputFieldBgHoverImageRepeat !== undefined ? `background-repeat: ${inputFieldBgHoverImageRepeat};` : ''}
-                        ${inputFieldBgHoverImageSize !== undefined ? `background-size: ${inputFieldBgHoverImageSize};` : ''}
-                      `
-                      : inputFieldBgHoverClassicColor ? `background: ${inputFieldBgHoverClassicColor};` : ''
-                }
-                ${submitBtnBorderHoverColor ? `border-color: ${submitBtnBorderHoverColor};` : ''}
-                ${submitBtnBoxShadowHoverCssValue ? `box-shadow: ${submitBtnBoxShadowHoverCssValue};` : ''}
-                transition: all .3s ease-in-out;
-            }
-
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper .fb-form-title {
+                align-items: start;
+                ${labelMarginDesktopWidth && labelMarginDesktop?.top ? `margin: ${labelMarginDesktopWidth};` : ''}
+                
                 ${labelGlobalTypoSwitcher?.fontFamily === true && labelGlobalTypographyData?.fontFamily ? `font-family: ${labelGlobalTypographyData?.fontFamily};` : ''}
                 ${labelGlobalTypoSwitcher?.fontSize === true && labelGlobalTypographyData?.fontSize ? `font-size: ${labelGlobalTypographyData?.fontSize};` : ''}
                 ${labelGlobalTypoSwitcher?.fontWeight === true && labelGlobalTypographyData?.fontWeight ? `font-weight: ${labelGlobalTypographyData?.fontWeight};` : ''}
@@ -2178,121 +2130,191 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${labelGlobalTypoSwitcher?.textDecoration === false && labelTextDecoration ? `text-decoration: ${labelTextDecoration};` : ''}
                 ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Desktop ? `letter-spacing: ${labelLetterSpacing?.Desktop}${labelLetterSpacingUnits?.Desktop};` : ''}
                 ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Desktop ? `line-height: ${labelLineHeight?.Desktop}${labelLineHeightUnits?.Desktop};` : ''}
+                
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-form-label {
                 ${labelColor ? `color: ${labelColor};` : ''}
             }
-
-            .fb-form-main-wrapper.${blockID} .fb-form-inner,
-            .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
+            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-required-symbol {
+                ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
+            }
+        
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper {
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
+                position: relative;
                 display: flex;
-                flex-direction: column;
-                ${formItemGap?.Desktop ? `gap: ${formItemGap?.Desktop}${formItemGapUnits?.Desktop};` : ''}
-                padding: 0;
-                margin: 0;
             }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
+                ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
+                ${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                width: 100%;
+                
+                ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontSize === true && inputFieldGlobalTypographyData?.fontSize ? `font-size: ${inputFieldGlobalTypographyData?.fontSize};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontWeight === true && inputFieldGlobalTypographyData?.fontWeight ? `font-weight: ${inputFieldGlobalTypographyData?.fontWeight};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontStyle === true && inputFieldGlobalTypographyData?.fontStyle ? `font-style: ${inputFieldGlobalTypographyData?.fontStyle};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textTransform === true && inputFieldGlobalTypographyData?.textTransform ? `text-transform: ${inputFieldGlobalTypographyData?.textTransform};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textDecoration === true && inputFieldGlobalTypographyData?.textDecoration ? `text-decoration: ${inputFieldGlobalTypographyData?.textDecoration};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.letterSpacing === true && inputFieldGlobalTypographyData?.letterSpacing ? `letter-spacing: ${inputFieldGlobalTypographyData?.letterSpacing};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.lineHeight === true && inputFieldGlobalTypographyData?.lineHeight ? `line-height: ${inputFieldGlobalTypographyData?.lineHeight};` : ''}
+                
+                ${inputFieldGlobalTypoSwitcher?.fontFamily === false && inputFieldFontFamily && inputFieldFontFamily !== 'Default' ? `font-family: ${inputFieldFontFamily};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Desktop ? `font-size: ${inputFieldFontSize?.Desktop}${inputFieldFontSizeUnits?.Desktop};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontWeight === false && inputFieldFontWeight ? `font-weight: ${inputFieldFontWeight};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontStyle === false && inputFieldFontStyle ? `font-style: ${inputFieldFontStyle};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textTransform === false && inputFieldTextTransform ? `text-transform: ${inputFieldTextTransform};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Desktop ? `letter-spacing: ${inputFieldLetterSpacing?.Desktop}${inputFieldLetterSpacingUnits?.Desktop};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Desktop ? `line-height: ${inputFieldLineHeight?.Desktop}${inputFieldLineHeightUnits?.Desktop};` : ''}
+                
+                ${inputFieldColor ? `color: ${inputFieldColor};` : ''}
+                ${
+                    inputFieldBgType === "gradient"
+                    ? `background: ${
+                        inputFieldBgCustomGradientSwitcher && inputFieldBgCustomGradientInputValue
+                            ? inputFieldBgCustomGradientInputValue
+                            : inputFieldBgGradientColor
+                        };`
+                    : inputFieldBgImageUrl && inputFieldBgImageUrl !== null && inputFieldBgImageUrl !== ""
+                    ? `
+                        ${inputFieldBgImageUrl ? `background-image: url(${inputFieldBgImageUrl});` : ''}
+                        ${inputFieldBgImagePosition ? `background-position: ${inputFieldBgImagePosition};` : ''}
+                        ${inputFieldBgImageAttachment ? `background-attachment: ${inputFieldBgImageAttachment};` : ''}
+                        ${inputFieldBgImageRepeat ? `background-repeat: ${inputFieldBgImageRepeat};` : ''}
+                        ${inputFieldBgImageSize ? `background-size: ${inputFieldBgImageSize};` : ''}
+                    `
+                    : inputFieldBgClassicColor ? `background: ${inputFieldBgClassicColor};` : ''
+                }
 
-        .fb-form-main-wrapper.${blockID} .fb-form-item-main-wrapper .fb-form-item-wrapper {
-            ${inputFieldBoxShadowCssValue ? `box-shadow: ${inputFieldBoxShadowCssValue};` : ''}
-            ${inputFieldBorder ? `border-style: ${inputFieldBorder};` : ''}
-            ${inputFieldBorderDesktopWidth && inputFieldBorderDesktop?.top ? `border-width: ${inputFieldBorderDesktopWidth};` : ''}  
-            ${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
-            ${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
-            overflow: hidden;
-            transition: all 0.3s ease-in-out;
-        }
-        .fb-form-main-wrapper.${blockID} .fb-form-item-main-wrapper .fb-form-item-wrapper:hover {
-            ${inputFieldBoxShadowHoverCssValue ? `box-shadow: ${inputFieldBoxShadowHoverCssValue};` : ''}
-            ${inputFieldBorderHoverColor ? `border-color: ${inputFieldBorderHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-        }
-      
-        @media only screen and (max-width: 1024px) {
-            .fb-form-main-wrapper.${blockID} {
-                ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Tablet ? `left: ${formHZLeftOffset?.Tablet}${formHZLeftOffsetUnits?.Tablet};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Tablet ? `right: ${formHZRightOffset?.Tablet}${formHZRightOffsetUnits?.Tablet};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Tablet ? `top: ${formVRTopOffset?.Tablet}${formVRTopOffsetUnits?.Tablet};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Tablet ? `bottom: ${formVRBottomOffset?.Tablet}${formVRBottomOffsetUnits?.Tablet};` : ''}
-                ${formZIndex?.Tablet ? `z-index: ${formZIndex?.Tablet};` : ''}
-            }
-            .fb-form-main-wrapper.${blockID} .fb-form-wrapper {
-                ${formPaddingTabletWidth && formTabPadding?.top ? `padding: ${formPaddingTabletWidth};` : ''}  
-                ${formMarginTabletWidth && formTabMargin?.top ? `margin: ${formMarginTabletWidth};` : ''}
-                ${formBorderTabletWidth && formTabBorderWidth?.top ? `border-width: ${formBorderTabletWidth};` : ''}
-                ${formBorderRadiusTabletWidth && formTabBorderRadiusWidth?.top ? `border-radius: ${formBorderRadiusTabletWidth};` : ''}
-            }
+                ${inputFieldBorder ? `border-style: ${inputFieldBorder};` : ''}
+                ${inputFieldBorderDesktopWidth && inputFieldBorderDesktop?.top ? `border-width: ${inputFieldBorderDesktopWidth};` : ''}
+                ${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
+                ${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
+                ${inputFieldBoxShadowCssValue ? `box-shadow: ${inputFieldBoxShadowCssValue};` : ""}
 
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper .fb-form-title {
-                ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Tablet ? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};` : ''}
-                ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Tablet ? `letter-spacing: ${labelLetterSpacing?.Tablet}${labelLetterSpacingUnits?.Tablet};` : ''}
-                ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Tablet ? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};` : ''}
-            }
+                ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
+                ${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
 
-            .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
-                ${formItemGap?.Tablet ? `gap: ${formItemGap?.Tablet}${formItemGapUnits?.Tablet};` : ''}
+                transition: all 0.3s ease-in-out;
             }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:hover {
+                ${
+                    inputFieldBgHoverType === "gradient"
+                    ? `background: ${
+                        inputFieldBgHoverCustomGradientSwitcher && inputFieldBgHoverCustomGradientInputValue
+                            ? inputFieldBgHoverCustomGradientInputValue
+                            : inputFieldBgHoverGradientColor
+                        };`
+                    : inputFieldBgHoverImageUrl && inputFieldBgHoverImageUrl !== null && inputFieldBgHoverImageUrl !== ""
+                    ? `
+                        ${inputFieldBgHoverImageUrl ? `background-image: url(${inputFieldBgHoverImageUrl});` : ''}
+                        ${inputFieldBgHoverImagePosition ? `background-position: ${inputFieldBgHoverImagePosition};` : ''}
+                        ${inputFieldBgHoverImageAttachment ? `background-attachment: ${inputFieldBgHoverImageAttachment};` : ''}
+                        ${inputFieldBgHoverImageRepeat ? `background-repeat: ${inputFieldBgHoverImageRepeat};` : ''}
+                        ${inputFieldBgHoverImageSize ? `background-size: ${inputFieldBgHoverImageSize};` : ''}
+                    `
+                    : inputFieldBgHoverClassicColor ? `background: ${inputFieldBgHoverClassicColor};` : ''
+                }
+                ${inputFieldBorderHoverColor ? `border-color: ${inputFieldBorderHoverColor};` : ''}
+                ${inputFieldBoxShadowHoverCssValue ? `box-shadow: ${inputFieldBoxShadowHoverCssValue};` : ""}
+                transition: all 0.3s ease-in-out;
+            }
+            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
+                
+            }
+        
+            @media only screen and (max-width: 1024px) {
+                .fb-form-builder-main-wrapper.${blockID} {
+                    ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Tablet ? `left: ${formHZLeftOffset?.Tablet}${formHZLeftOffsetUnits?.Tablet};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Tablet ? `right: ${formHZRightOffset?.Tablet}${formHZRightOffsetUnits?.Tablet};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Tablet ? `top: ${formVRTopOffset?.Tablet}${formVRTopOffsetUnits?.Tablet};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Tablet ? `bottom: ${formVRBottomOffset?.Tablet}${formVRBottomOffsetUnits?.Tablet};` : ''}
+                    ${formZIndex?.Tablet ? `z-index: ${formZIndex?.Tablet};` : ''}
+                }
+                .fb-form-builder-main-wrapper.${blockID} .fb-form-wrapper {
+                    ${formPaddingTabletWidth && formPaddingTablet?.top ? `padding: ${formPaddingTabletWidth};` : ''}  
+                    ${formMarginTabletWidth && formMarginTablet?.top ? `margin: ${formMarginTabletWidth};` : ''}
+                    ${formBorderTabletWidth && formBorderTablet?.top ? `border-width: ${formBorderTabletWidth};` : ''}
+                    ${formBorderRadiusTabletWidth && formBorderRadiusTablet?.top ? `border-radius: ${formBorderRadiusTabletWidth};` : ''}
+                }
 
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper {
-                ${labelMarginTabletWidth && labelTabletMargin?.top ? `padding: ${labelMarginTabletWidth};` : ''}
-                ${submitBtnBorderTabletWidth && submitBtnBorderTablet?.top ? `border-width: ${submitBtnBorderTabletWidth};` : ''}
-                ${submitBtnBorderRadiusTabletWidth && submitBtnBorderRadiusTablet?.top ? `border-radius: ${submitBtnBorderRadiusTabletWidth};` : ''}
-            }
-            
-            .fb-form-main-wrapper.${blockID} .fb-form-item-main-wrapper .fb-form-item-wrapper {
-                ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
-                ${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
-            }
-        }
-      
-        @media only screen and (max-width: 767px) {
-            .fb-form-main-wrapper.${blockID} {
-                ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Mobile ? `left: ${formHZLeftOffset?.Mobile}${formHZLeftOffsetUnits?.Mobile};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Mobile ? `right: ${formHZRightOffset?.Mobile}${formHZRightOffsetUnits?.Mobile};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Mobile ? `top: ${formVRTopOffset?.Mobile}${formVRTopOffsetUnits?.Mobile};` : ''}
-                ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Mobile ? `bottom: ${formVRBottomOffset?.Mobile}${formVRBottomOffsetUnits?.Mobile};` : ''}
-                ${formZIndex?.Mobile ? `z-index: ${formZIndex?.Mobile};` : ''}
-            }
-            .fb-form-main-wrapper.${blockID} .fb-form-wrapper {
-                ${formPaddingMobileWidth && formMobilePadding?.top ? `padding: ${formPaddingMobileWidth};` : ''}
-                ${formMarginMobileWidth && formMobileMargin?.top ? `margin: ${formMarginMobileWidth};` : ''}
-                ${formBorderMobileWidth && formMobileBorderWidth?.top ? `border-width: ${formBorderMobileWidth};` : ''}
-                ${formBorderRadiusMobileWidth && formMobileBorderRadiusWidth?.top ? `border-radius: ${formBorderRadiusMobileWidth};` : ''}
-            }
+                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                    ${labelMarginTabletWidth && labelMarginTablet?.top ? `margin: ${labelMarginTabletWidth};` : ''}
 
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper .fb-form-title {
-                ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Mobile ? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};` : ''}
-                ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Mobile ? `letter-spacing: ${labelLetterSpacing?.Mobile}${labelLetterSpacingUnits?.Mobile};` : ''}
-                ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
-            }
+                    ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Tablet ? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};` : ''}
+                    ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Tablet ? `letter-spacing: ${labelLetterSpacing?.Tablet}${labelLetterSpacingUnits?.Tablet};` : ''}
+                    ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Tablet ? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};` : ''}
+                    
+                }
+                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                    ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Tablet ? `letter-spacing: ${inputFieldLetterSpacing?.Tablet}${inputFieldLetterSpacingUnits?.Tablet};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
+                    
+                    ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
+                    ${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
 
-            .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
-                ${formItemGap?.Mobile ? `gap: ${formItemGap?.Mobile}${formItemGapUnits?.Mobile};` : ''}
+                    ${inputFieldMarginTabletWidth && inputFieldMarginTablet?.top ? `margin: ${inputFieldMarginTabletWidth};` : ''}
+                    ${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
+                }
             }
+        
+            @media only screen and (max-width: 767px) {
+                .fb-form-builder-main-wrapper.${blockID} {
+                    ${formPositionType !== 'default' ? `position: ${formPositionType};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'left' && formHZLeftOffset?.Mobile ? `left: ${formHZLeftOffset?.Mobile}${formHZLeftOffsetUnits?.Mobile};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formHZOrientationType === 'right' && formHZRightOffset?.Mobile ? `right: ${formHZRightOffset?.Mobile}${formHZRightOffsetUnits?.Mobile};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'top' && formVRTopOffset?.Mobile ? `top: ${formVRTopOffset?.Mobile}${formVRTopOffsetUnits?.Mobile};` : ''}
+                    ${formPositionType !== 'default' && formPositionType !== 'relative' && formVROrientationType === 'bottom' && formVRBottomOffset?.Mobile ? `bottom: ${formVRBottomOffset?.Mobile}${formVRBottomOffsetUnits?.Mobile};` : ''}
+                    ${formZIndex?.Mobile ? `z-index: ${formZIndex?.Mobile};` : ''}
+                }
+                .fb-form-builder-main-wrapper.${blockID} .fb-form-wrapper {
+                    ${formPaddingMobileWidth && formPaddingMobile?.top ? `padding: ${formPaddingMobileWidth};` : ''}
+                    ${formMarginMobileWidth && formMarginMobile?.top ? `margin: ${formMarginMobileWidth};` : ''}
+                    ${formBorderMobileWidth && formBorderMobile?.top ? `border-width: ${formBorderMobileWidth};` : ''}
+                    ${formBorderRadiusMobileWidth && formBorderRadiusMobile?.top ? `border-radius: ${formBorderRadiusMobileWidth};` : ''}
+                }
 
-            .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper {
-                ${labelMarginMobileWidth && labelMobileMargin?.top ? `padding: ${labelMarginMobileWidth};` : ''}
-                ${submitBtnBorderMobileWidth && submitBtnBorderMobile?.top ? `border-width: ${submitBtnBorderMobileWidth};` : ''}
-                ${submitBtnBorderRadiusMobileWidth && submitBtnBorderRadiusMobile?.top ? `border-radius: ${submitBtnBorderRadiusMobileWidth};` : ''}
-            }
-            
-            .fb-form-main-wrapper.${blockID} .fb-form-item-main-wrapper .fb-form-item-wrapper {
-                ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
-                ${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
-            }
-        }
+                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                    ${labelMarginMobileWidth && labelMarginMobile?.top ? `margin: ${labelMarginMobileWidth};` : ''}
 
+                    ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Mobile ? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};` : ''}
+                    ${labelGlobalTypoSwitcher?.letterSpacing === false && labelLetterSpacing?.Mobile ? `letter-spacing: ${labelLetterSpacing?.Mobile}${labelLetterSpacingUnits?.Mobile};` : ''}
+                    ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
+                    
+                }
+                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                    ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Mobile ? `letter-spacing: ${inputFieldLetterSpacing?.Mobile}${inputFieldLetterSpacingUnits?.Mobile};` : ''}
+                    ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Mobile ? `line-height: ${inputFieldLineHeight?.Mobile}${inputFieldLineHeightUnits?.Mobile};` : ''}
+                    
+                    ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
+                    ${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
+
+                    ${inputFieldMarginMobileWidth && inputFieldMarginMobile?.top ? `margin: ${inputFieldMarginMobileWidth};` : ''}
+                    ${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
+                }
+            }
         `;
         return styles.replace(/\s+/g, ' ').trim();
       }, [
         blockID,
         blockStyle,
-        deviceType,
-        
+
         formType,
+        fieldLabelSwitcher,
+        fieldIconSwitcher,
+        fieldRequiredSwitcher,
+        fieldRequiredSymbolSwitcher,
 
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
         labelGlobalTypoType,
+        labelGlobalTypoOption,
         labelFontFamily,
         labelFontSize,
         labelFontSizeUnits,
@@ -2304,41 +2326,48 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         labelLetterSpacingUnits,
         labelLineHeight,
         labelLineHeightUnits,
+        
+        inputFieldGlobalTypoSwitcher,
+        inputFieldGlobalTypographyData,
+        inputFieldGlobalTypoType,
+        inputFieldGlobalTypoOption,
+        inputFieldFontFamily,
+        inputFieldFontSize,
+        inputFieldFontSizeUnits,
+        inputFieldFontWeight,
+        inputFieldFontStyle,
+        inputFieldTextTransform,
+        inputFieldTextDecoration,
+        inputFieldLetterSpacing,
+        inputFieldLetterSpacingUnits,
+        inputFieldLineHeight,
+        inputFieldLineHeightUnits,
 
         labelColor,
         labelRequiredColor,
 
-        formItemGap,
-        formItemGapUnits,
+        inputFieldColor,
+        inputFieldFocusColor,
+        inputFieldPlaceholderColor,
 
-        // form Items
         labelMarginUnits,
-        labelDesktopMargin,
-        labelTabletMargin,
-        labelMobileMargin,
+        labelMarginDesktop,
+        labelMarginTablet,
+        labelMarginMobile,
+        labelMarginLink,
 
-        submitBtnBorder,
-        submitBtnBorderColor,
-        submitBtnBorderHoverColor,
-        
-        submitBtnBorderUnits,
-        submitBtnBorderDesktop,
-        submitBtnBorderTablet,
-        submitBtnBorderMobile,
+        inputFieldMarginUnits,
+        inputFieldMarginDesktop,
+        inputFieldMarginTablet,
+        inputFieldMarginMobile,
+        inputFieldMarginLink,
 
-        submitBtnBorderRadiusUnits,
-        submitBtnBorderRadiusDesktop,
-        submitBtnBorderRadiusTablet,
-        submitBtnBorderRadiusMobile,
+        inputFieldPaddingUnits,
+        inputFieldPaddingDesktop,
+        inputFieldPaddingTablet,
+        inputFieldPaddingMobile,
+        inputFieldPaddingLink,
 
-        // Item Box Shadow
-        submitBtnBoxShadowSwitcher,
-        submitBtnBoxShadowValues,
-        submitBtnBoxShadowCssValue,
-        submitBtnBoxShadowHoverValues,
-        submitBtnBoxShadowHoverCssValue,
-
-        // Item Backgorund
         inputFieldBgColorSwitcher,
         inputFieldBgType,
         inputFieldBgClassicColor,
@@ -2386,6 +2415,237 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
+        submiteBtnLabel,
+        submiteBtnIcon,
+        submiteBtnAlignment,
+        submiteBtnIconSwitcher,
+        submiteBtnIconPosition,
+
+        submitBtnGlobalTypoSwitcher,
+        submitBtnGlobalTypographyData,
+        submitBtnGlobalTypoType,
+        submitBtnGlobalTypoOption,
+        submitBtnFontFamily,
+        submitBtnFontSize,
+        submitBtnFontSizeUnits,
+        submitBtnFontWeight,
+        submitBtnFontStyle,
+        submitBtnTextTransform,
+        submitBtnTextDecoration,
+        submitBtnLetterSpacing,
+        submitBtnLetterSpacingUnits,
+        submitBtnLineHeight,
+        submitBtnLineHeightUnits,
+
+        submitBtnColorSwitcher,
+        submitBtnColor,
+        submitBtnHoverColor,
+
+        submitBtnBgColorSwitcher,
+        submitBtnBgType,
+        submitBtnBgClassicColor,
+        submitBtnBgGradientColor,
+        submitBtnBgCustomGradientSwitcher,
+        submitBtnBgCustomGradientInputValue,
+        submitBtnBgImageUrl,
+        submitBtnBgImageAlt,
+        submitBtnBgImageID,
+        submitBtnBgImagePosition,
+        submitBtnBgImageAttachment,
+        submitBtnBgImageRepeat,
+        submitBtnBgImageSize,
+        submitBtnBgHoverType,
+        submitBtnBgHoverClassicColor,
+        submitBtnBgHoverGradientColor,
+        submitBtnBgHoverCustomGradientSwitcher,
+        submitBtnBgHoverCustomGradientInputValue,
+        submitBtnBgHoverImageUrl,
+        submitBtnBgHoverImageAlt,
+        submitBtnBgHoverImageID,
+        submitBtnBgHoverImagePosition,
+        submitBtnBgHoverImageAttachment,
+        submitBtnBgHoverImageRepeat,
+        submitBtnBgHoverImageSize,
+
+        submitBtnPaddingUnits,
+        submitBtnPaddingDesktop,
+        submitBtnPaddingTablet,
+        submitBtnPaddingMobile,
+        submitBtnPaddingLink,
+
+        submitBtnMarginUnits,
+        submitBtnMarginDesktop,
+        submitBtnMarginTablet,
+        submitBtnMarginMobile,
+        submitBtnMarginLink,
+
+        submitBtnBorder,
+        submitBtnBorderColor,
+        submitBtnBorderHoverColor,
+        submitBtnBorderColorSwitcher,
+        submitBtnBorderUnits,
+        submitBtnBorderDesktop,
+        submitBtnBorderTablet,
+        submitBtnBorderMobile,
+        submitBtnBorderLink,
+        submitBtnBorderRadiusUnits,
+        submitBtnBorderRadiusDesktop,
+        submitBtnBorderRadiusTablet,
+        submitBtnBorderRadiusMobile,
+        submitBtnBorderRadiusLink,
+
+        submitBtnBoxShadowSwitcher,
+        submitBtnBoxShadowValues,
+        submitBtnBoxShadowCssValue,
+        submitBtnBoxShadowHoverValues,
+        submitBtnBoxShadowHoverCssValue,
+
+        successMessageGlobalTypoSwitcher,
+        successMessageGlobalTypographyData,
+        successMessageGlobalTypoType,
+        successMessageGlobalTypoOption,
+        successMessageFontFamily,
+        successMessageFontSize,
+        successMessageFontSizeUnits,
+        successMessageFontWeight,
+        successMessageFontStyle,
+        successMessageTextTransform,
+        successMessageTextDecoration,
+        successMessageLetterSpacing,
+        successMessageLetterSpacingUnits,
+        successMessageLineHeight,
+        successMessageLineHeightUnits,
+
+        successMessageColor,
+
+        successMessageBgColorSwitcher,
+        successMessageBgType,
+        successMessageBgClassicColor,
+        successMessageBgGradientColor,
+        successMessageBgCustomGradientSwitcher,
+        successMessageBgCustomGradientInputValue,
+        successMessageBgImageUrl,
+        successMessageBgImageAlt,
+        successMessageBgImageID,
+        successMessageBgImagePosition,
+        successMessageBgImageAttachment,
+        successMessageBgImageRepeat,
+        successMessageBgImageSize,
+        successMessageBgHoverType,
+        successMessageBgHoverClassicColor,
+        successMessageBgHoverGradientColor,
+        successMessageBgHoverCustomGradientSwitcher,
+        successMessageBgHoverCustomGradientInputValue,
+        successMessageBgHoverImageUrl,
+        successMessageBgHoverImageAlt,
+        successMessageBgHoverImageID,
+        successMessageBgHoverImagePosition,
+        successMessageBgHoverImageAttachment,
+        successMessageBgHoverImageRepeat,
+        successMessageBgHoverImageSize,
+
+        successMessagePaddingUnits,
+        successMessagePaddingDesktop,
+        successMessagePaddingTablet,
+        successMessagePaddingMobile,
+        successMessagePaddingLink,
+
+        successMessageMarginUnits,
+        successMessageMarginDesktop,
+        successMessageMarginTablet,
+        successMessageMarginMobile,
+        successMessageMarginLink,
+
+        successMessageBorder,
+        successMessageBorderColor,
+        successMessageBorderHoverColor,
+        successMessageBorderColorSwitcher,
+        successMessageBorderUnits,
+        successMessageBorderDesktop,
+        successMessageBorderTablet,
+        successMessageBorderMobile,
+        successMessageBorderLink,
+        successMessageBorderRadiusUnits,
+        successMessageBorderRadiusDesktop,
+        successMessageBorderRadiusTablet,
+        successMessageBorderRadiusMobile,
+        successMessageBorderRadiusLink,
+
+        errorMessageGlobalTypoSwitcher,
+        errorMessageGlobalTypographyData,
+        errorMessageGlobalTypoType,
+        errorMessageGlobalTypoOption,
+        errorMessageFontFamily,
+        errorMessageFontSize,
+        errorMessageFontSizeUnits,
+        errorMessageFontWeight,
+        errorMessageFontStyle,
+        errorMessageTextTransform,
+        errorMessageTextDecoration,
+        errorMessageLetterSpacing,
+        errorMessageLetterSpacingUnits,
+        errorMessageLineHeight,
+        errorMessageLineHeightUnits,
+
+        errorMessageColor,
+
+        errorMessageBgColorSwitcher,
+        errorMessageBgType,
+        errorMessageBgClassicColor,
+        errorMessageBgGradientColor,
+        errorMessageBgCustomGradientSwitcher,
+        errorMessageBgCustomGradientInputValue,
+        errorMessageBgImageUrl,
+        errorMessageBgImageAlt,
+        errorMessageBgImageID,
+        errorMessageBgImagePosition,
+        errorMessageBgImageAttachment,
+        errorMessageBgImageRepeat,
+        errorMessageBgImageSize,
+        errorMessageBgHoverType,
+        errorMessageBgHoverClassicColor,
+        errorMessageBgHoverGradientColor,
+        errorMessageBgHoverCustomGradientSwitcher,
+        errorMessageBgHoverCustomGradientInputValue,
+        errorMessageBgHoverImageUrl,
+        errorMessageBgHoverImageAlt,
+        errorMessageBgHoverImageID,
+        errorMessageBgHoverImagePosition,
+        errorMessageBgHoverImageAttachment,
+        errorMessageBgHoverImageRepeat,
+        errorMessageBgHoverImageSize,
+
+        errorMessagePaddingUnits,
+        errorMessagePaddingDesktop,
+        errorMessagePaddingTablet,
+        errorMessagePaddingMobile,
+        errorMessagePaddingLink,
+
+        errorMessageMarginUnits,
+        errorMessageMarginDesktop,
+        errorMessageMarginTablet,
+        errorMessageMarginMobile,
+        errorMessageMarginLink,
+
+        errorMessageBorder,
+        errorMessageBorderColor,
+        errorMessageBorderHoverColor,
+        errorMessageBorderColorSwitcher,
+        errorMessageBorderUnits,
+        errorMessageBorderDesktop,
+        errorMessageBorderTablet,
+        errorMessageBorderMobile,
+        errorMessageBorderLink,
+        errorMessageBorderRadiusUnits,
+        errorMessageBorderRadiusDesktop,
+        errorMessageBorderRadiusTablet,
+        errorMessageBorderRadiusMobile,
+        errorMessageBorderRadiusLink,
+
+        formCustomCSS,
+        formGlobalWraperID,
+        formGlobalWraperClass,
+
         // Position
         formPositionType,
         formHZOrientationType,
@@ -2403,9 +2663,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formZIndex,
         formOverflow,
         formPaddingUnits,
-        formDesktopPadding,
-        formTabPadding,
-        formMobilePadding,
+        formPaddingDesktop,
+        formPaddingTablet,
+        formPaddingMobile,
+
+        formMarginUnits,
+        formMarginDesktop,
+        formMarginTablet,
+        formMarginMobile,
+
+        formBorder,
+        formBorderColor,
+        formBorderHoverColor,
+        formBorderColorSwitcher,
+        formBorderUnits,
+        formBorderDesktop,
+        formBorderTablet,
+        formBorderMobile,
+
+        formBorderRadiusUnits,
+        formBorderRadiusDesktop,
+        formBorderRadiusTablet,
+        formBorderRadiusMobile,
+
+        formDesktopSwitcher,
+        formTabletSwitcher,
+        formMobileSwitcher,
 
         formBgColorSwitcher,
         formBgType,
@@ -2433,30 +2716,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formBgHoverImageRepeat,
         formBgHoverImageSize,
 
-        formMarginUnits,
-        formDesktopMargin,
-        formTabMargin,
-        formMobileMargin,
-
-        formBorder,
-        formBorderColor,
-        formBorderHoverColor,
-
-        formBorderUnits,
-        formDesktopBorderWidth,
-        formTabBorderWidth,
-        formMobileBorderWidth,
-
-        formBorderRadiusUnits,
-        formDesktopBorderRadiusWidth,
-        formTabBorderRadiusWidth,
-        formMobileBorderRadiusWidth,
-
-        formDesktopSwitcher,
-        formTabletSwitcher,
-        formMobileSwitcher,
-
-        // Boxshadow
         formGlobalBoxShadowSwitcher,
         formGlobalBoxShadowValues,
         formGlobalBoxShadowCssValue,
@@ -2707,9 +2966,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleLabelMarginUnitsHandler}
                         spacingUnits={labelMarginUnits}
-                        spacingDesktop={labelDesktopMargin}
-                        spacingTablet={labelTabletMargin}
-                        spacingMobile={labelMobileMargin}
+                        spacingDesktop={labelMarginDesktop}
+                        spacingTablet={labelMarginTablet}
+                        spacingMobile={labelMarginMobile}
                         handleSpacingUnitHandler={handleLabelMarginUnitChange}
                         spacingCombineBtn={labelMarginLink}
                         spacingCombineBtnHandler={handleLabelMarginCombineBtn}
@@ -2941,9 +3200,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldMarginUnitsHandler}
                         spacingUnits={inputFieldMarginUnits}
-                        spacingDesktop={inputFieldDesktopMargin}
-                        spacingTablet={inputFieldTabletMargin}
-                        spacingMobile={inputFieldMobileMargin}
+                        spacingDesktop={inputFieldMarginDesktop}
+                        spacingTablet={inputFieldMarginTablet}
+                        spacingMobile={inputFieldMarginMobile}
                         handleSpacingUnitHandler={handleInputFieldMarginUnitChange}
                         spacingCombineBtn={inputFieldMarginLink}
                         spacingCombineBtnHandler={handleInputFieldMarginCombineBtn}
@@ -2955,9 +3214,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleInputFieldPaddingUnitsHandler}
                         spacingUnits={inputFieldPaddingUnits}
-                        spacingDesktop={inputFieldDesktopPadding}
-                        spacingTablet={inputFieldTabletPadding}
-                        spacingMobile={inputFieldMobilePadding}
+                        spacingDesktop={inputFieldPaddingDesktop}
+                        spacingTablet={inputFieldPaddingTablet}
+                        spacingMobile={inputFieldPaddingMobile}
                         handleSpacingUnitHandler={handleInputFieldPaddingUnitChange}
                         spacingCombineBtn={inputFieldPaddingLink}
                         spacingCombineBtnHandler={handleInputFieldPaddingCombineBtn}
@@ -3286,9 +3545,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnPaddingUnitsHandler}
                         spacingUnits={submitBtnPaddingUnits}
-                        spacingDesktop={submitBtnDesktopPadding}
-                        spacingTablet={submitBtnTabletPadding}
-                        spacingMobile={submitBtnMobilePadding}
+                        spacingDesktop={submitBtnPaddingDesktop}
+                        spacingTablet={submitBtnPaddingTablet}
+                        spacingMobile={submitBtnPaddingMobile}
                         handleSpacingUnitHandler={handleSubmitBtnPaddingUnitChange}
                         spacingCombineBtn={submitBtnPaddingLink}
                         spacingCombineBtnHandler={handleSubmitBtnPaddingCombineBtn}
@@ -3300,9 +3559,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleSubmitBtnMarginUnitsHandler}
                         spacingUnits={submitBtnMarginUnits}
-                        spacingDesktop={submitBtnDesktopMargin}
-                        spacingTablet={submitBtnTabletMargin}
-                        spacingMobile={submitBtnMobileMargin}
+                        spacingDesktop={submitBtnMarginDesktop}
+                        spacingTablet={submitBtnMarginTablet}
+                        spacingMobile={submitBtnMarginMobile}
                         handleSpacingUnitHandler={handleSubmitBtnMarginUnitChange}
                         spacingCombineBtn={submitBtnMarginLink}
                         spacingCombineBtnHandler={handleSubmitBtnMarginCombineBtn}
@@ -3615,9 +3874,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessagePaddingUnitsHandler}
                         spacingUnits={successMessagePaddingUnits}
-                        spacingDesktop={successMessageDesktopPadding}
-                        spacingTablet={successMessageTabletPadding}
-                        spacingMobile={successMessageMobilePadding}
+                        spacingDesktop={successMessagePaddingDesktop}
+                        spacingTablet={successMessagePaddingTablet}
+                        spacingMobile={successMessagePaddingMobile}
                         handleSpacingUnitHandler={handlesuccessMessagePaddingUnitChange}
                         spacingCombineBtn={successMessagePaddingLink}
                         spacingCombineBtnHandler={handlesuccessMessagePaddingCombineBtn}
@@ -3629,9 +3888,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handlesuccessMessageMarginUnitsHandler}
                         spacingUnits={successMessageMarginUnits}
-                        spacingDesktop={successMessageDesktopMargin}
-                        spacingTablet={successMessageTabletMargin}
-                        spacingMobile={successMessageMobileMargin}
+                        spacingDesktop={successMessageMarginDesktop}
+                        spacingTablet={successMessageMarginTablet}
+                        spacingMobile={successMessageMarginMobile}
                         handleSpacingUnitHandler={handlesuccessMessageMarginUnitChange}
                         spacingCombineBtn={successMessageMarginLink}
                         spacingCombineBtnHandler={handlesuccessMessageMarginCombineBtn}
@@ -3908,9 +4167,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessagePaddingUnitsHandler}
                         spacingUnits={errorMessagePaddingUnits}
-                        spacingDesktop={errorMessageDesktopPadding}
-                        spacingTablet={errorMessageTabletPadding}
-                        spacingMobile={errorMessageMobilePadding}
+                        spacingDesktop={errorMessagePaddingDesktop}
+                        spacingTablet={errorMessagePaddingTablet}
+                        spacingMobile={errorMessagePaddingMobile}
                         handleSpacingUnitHandler={handleErrorMessagePaddingUnitChange}
                         spacingCombineBtn={errorMessagePaddingLink}
                         spacingCombineBtnHandler={handleErrorMessagePaddingCombineBtn}
@@ -3922,9 +4181,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleErrorMessageMarginUnitsHandler}
                         spacingUnits={errorMessageMarginUnits}
-                        spacingDesktop={errorMessageDesktopMargin}
-                        spacingTablet={errorMessageTabletMargin}
-                        spacingMobile={errorMessageMobileMargin}
+                        spacingDesktop={errorMessageMarginDesktop}
+                        spacingTablet={errorMessageMarginTablet}
+                        spacingMobile={errorMessageMarginMobile}
                         handleSpacingUnitHandler={handleErrorMessageMarginUnitChange}
                         spacingCombineBtn={errorMessageMarginLink}
                         spacingCombineBtnHandler={handleErrorMessageMarginCombineBtn}
@@ -4083,9 +4342,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformMarginUnitsHandler}
                         spacingUnits={formMarginUnits}
-                        spacingDesktop={formDesktopMargin}
-                        spacingTablet={formTabMargin}
-                        spacingMobile={formMobileMargin}
+                        spacingDesktop={formMarginDesktop}
+                        spacingTablet={formMarginTablet}
+                        spacingMobile={formMarginMobile}
                         handleSpacingUnitHandler={handleformMarginUnitChange}
                         spacingCombineBtn={formMarginLink}
                         spacingCombineBtnHandler={handleformMarginCombineBtn}
@@ -4097,9 +4356,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformPaddingUnitsHandler}
                         spacingUnits={formPaddingUnits}
-                        spacingDesktop={formDesktopPadding}
-                        spacingTablet={formTabPadding}
-                        spacingMobile={formMobilePadding}
+                        spacingDesktop={formPaddingDesktop}
+                        spacingTablet={formPaddingTablet}
+                        spacingMobile={formPaddingMobile}
                         handleSpacingUnitHandler={handleformPaddingUnitChange}
                         spacingCombineBtn={formPaddingLink}
                         spacingCombineBtnHandler={handleformPaddingCombineBtn}
@@ -4271,9 +4530,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformBorderUnitsHandler}
                         spacingUnits={formBorderUnits}
-                        spacingDesktop={formDesktopBorderWidth}
-                        spacingTablet={formTabBorderWidth}
-                        spacingMobile={formMobileBorderWidth}
+                        spacingDesktop={formBorderDesktop}
+                        spacingTablet={formBorderTablet}
+                        spacingMobile={formBorderMobile}
                         handleSpacingUnitHandler={handleformBorderUnitChange}
                         spacingCombineBtn={formBorderLink}
                         spacingCombineBtnHandler={handleformBorderCombineBtn}
@@ -4285,9 +4544,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         deviceType={deviceType}
                         spacingUnitsHandler={handleformBorderRadiusUnitsHandler}
                         spacingUnits={formBorderRadiusUnits}
-                        spacingDesktop={formDesktopBorderRadiusWidth}
-                        spacingTablet={formTabBorderRadiusWidth}
-                        spacingMobile={formMobileBorderRadiusWidth}
+                        spacingDesktop={formBorderRadiusDesktop}
+                        spacingTablet={formBorderRadiusTablet}
+                        spacingMobile={formBorderRadiusMobile}
                         handleSpacingUnitHandler={handleformBorderRadiusUnitChange}
                         spacingCombineBtn={formBorderRadiusLink}
                         spacingCombineBtnHandler={handleformBorderRadiusCombineBtn}

@@ -15,7 +15,7 @@
     },
 	  "editorScript": "file:./index.js",
     "editorStyle": "file:./index.css",
-    "parent": ["frontis-blocks/form-builder"],
+    "parent": ["frontis-blocks/form-builder", "frontis-blocks/container"],
     "usesContext": [
       "fb/formBuilderParentBlockID",
       "fb/formInheritedIconSwitcher",

@@ -18,7 +18,8 @@
 	  "fb/formInheritedIconSwitcher": "fieldIconSwitcher",
 	  "fb/formInheritedLabelSwitcher": "fieldLabelSwitcher",
 	  "fb/formInheritedRequiredFieldSwitcher": "fieldRequiredSwitcher",
-	  "fb/formInheritedRequiredSymbolSwitcher": "fieldRequiredSymbolSwitcher"
+	  "fb/formInheritedRequiredSymbolSwitcher": "fieldRequiredSymbolSwitcher",
+	  "fb/formContainerSwitcher": "formContainerSwitcher"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"

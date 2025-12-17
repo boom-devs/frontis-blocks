@@ -916,6 +916,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const fbfieldItemStyle = useMemo(
         () => `
             .fb-text-field-wrapper.${blockID} {
+                width: 100%;
                 position: relative;
                 ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
 				${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
@@ -984,6 +985,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 position: relative;
+                display: flex;
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
                 ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
