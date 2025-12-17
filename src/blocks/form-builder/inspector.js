@@ -68,8 +68,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formFailMessage,
         formValidtionMessage,
 
-        formItemGap,
-        formItemGapUnits,
+        fieldColumnGap,
+        fieldColumnGapUnits,
+        fieldRowGap,
+        fieldRowGapUnits,
 
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
@@ -2185,7 +2187,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
                 display: flex;
                 flex-direction: column;
-                ${formItemGap?.Desktop ? `gap: ${formItemGap?.Desktop}${formItemGapUnits?.Desktop};` : ''}
                 padding: 0;
                 margin: 0;
             }
@@ -2228,7 +2229,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
-                ${formItemGap?.Tablet ? `gap: ${formItemGap?.Tablet}${formItemGapUnits?.Tablet};` : ''}
             }
 
             .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper {
@@ -2266,7 +2266,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
 
             .fb-form-main-wrapper.${blockID} .fb-form-inner .block-editor-block-list__layout {
-                ${formItemGap?.Mobile ? `gap: ${formItemGap?.Mobile}${formItemGapUnits?.Mobile};` : ''}
             }
 
             .fb-form-item-main-wrapper.${blockID} .fb-form-item-title-wrapper {
@@ -2307,9 +2306,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         labelColor,
         labelRequiredColor,
-
-        formItemGap,
-        formItemGapUnits,
 
         // form Items
         labelMarginUnits,
@@ -2501,6 +2497,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Show icon", "frontis-blocks")}
                     checked={fieldIconSwitcher}
                     onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
+                />
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Field Gaps", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={fieldColumnGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Column", "frontis-blocks")}
+                    rangeValue={fieldColumnGap}
+                    onChangeHandler={(value) => setAttributes({ fieldColumnGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ fieldColumnGapUnits: value })}
+                    deviceType={deviceType}
+                    units={fieldColumnGapUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={fieldRowGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Row", "frontis-blocks")}
+                    rangeValue={fieldRowGap}
+                    onChangeHandler={(value) => setAttributes({ fieldRowGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ fieldRowGapUnits: value })}
+                    deviceType={deviceType}
+                    units={fieldRowGapUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
                 />
             </PanelBody>
 
