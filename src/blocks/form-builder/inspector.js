@@ -68,8 +68,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         formFailMessage,
         formValidtionMessage,
 
-        formItemGap,
-        formItemGapUnits,
+        fieldColumnGap,
+        fieldColumnGapUnits,
+        fieldRowGap,
+        fieldRowGapUnits,
 
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
@@ -2108,7 +2110,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all .3s ease-in-out;
             }
 
-            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+            .fb-form-builder-main-wrapper.${blockID} .wp-block-frontis-blocks-container.child {
+                box-sizing: border-box;
+            }
+            .fb-form-builder-main-wrapper.${blockID} .block-editor-block-list__layout,
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                ${fieldColumnGap?.Desktop ? `column-gap: ${fieldColumnGap?.Desktop}${fieldColumnGapUnits?.Desktop};` : ''}
+                ${fieldRowGap?.Desktop ? `row-gap: ${fieldRowGap?.Desktop}${fieldRowGapUnits?.Desktop};` : ''}
+            }
+
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper {
                 display: flex;
                 align-items: start;
                 ${labelMarginDesktopWidth && labelMarginDesktop?.top ? `margin: ${labelMarginDesktopWidth};` : ''}
@@ -2132,24 +2145,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Desktop ? `line-height: ${labelLineHeight?.Desktop}${labelLineHeightUnits?.Desktop};` : ''}
                 
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-form-label {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper .fb-form-label {
                 ${labelColor ? `color: ${labelColor};` : ''}
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper .fb-required-symbol {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper .fb-required-symbol {
                 ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
             }
         
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper {
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 position: relative;
                 display: flex;
+                flex-direction: column;
+                padding: 0;
+                margin: 0;
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
                 ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
                 ${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
                 width: 100%;
                 
                 ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
@@ -2197,10 +2213,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 ${inputFieldMarginDesktopWidth && inputFieldMarginDesktop?.top ? `margin: ${inputFieldMarginDesktopWidth};` : ''}
                 ${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
-
-                transition: all 0.3s ease-in-out;
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:hover {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input:hover {
                 ${
                     inputFieldBgHoverType === "gradient"
                     ? `background: ${
@@ -2222,8 +2236,74 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${inputFieldBoxShadowHoverCssValue ? `box-shadow: ${inputFieldBoxShadowHoverCssValue};` : ""}
                 transition: all 0.3s ease-in-out;
             }
-            .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
                 
+            }
+
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper {
+                width: 100%;
+                display: flex;
+                
+            }
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                cursor: pointer;
+
+                ${submitBtnGlobalTypoSwitcher?.fontFamily === true && submitBtnGlobalTypographyData?.fontFamily ? `font-family: ${submitBtnGlobalTypographyData?.fontFamily};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontSize === true && submitBtnGlobalTypographyData?.fontSize ? `font-size: ${submitBtnGlobalTypographyData?.fontSize};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontWeight === true && submitBtnGlobalTypographyData?.fontWeight ? `font-weight: ${submitBtnGlobalTypographyData?.fontWeight};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontStyle === true && submitBtnGlobalTypographyData?.fontStyle ? `font-style: ${submitBtnGlobalTypographyData?.fontStyle};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.textTransform === true && submitBtnGlobalTypographyData?.textTransform ? `text-transform: ${submitBtnGlobalTypographyData?.textTransform};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.textDecoration === true && submitBtnGlobalTypographyData?.textDecoration ? `text-decoration: ${submitBtnGlobalTypographyData?.textDecoration};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.letterSpacing === true && submitBtnGlobalTypographyData?.letterSpacing ? `letter-spacing: ${submitBtnGlobalTypographyData?.letterSpacing};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.lineHeight === true && submitBtnGlobalTypographyData?.lineHeight ? `line-height: ${submitBtnGlobalTypographyData?.lineHeight};` : ''}
+                
+                ${submitBtnGlobalTypoSwitcher?.fontFamily === false && submitBtnFontFamily && submitBtnFontFamily !== 'Default' ? `font-family: ${submitBtnFontFamily};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontSize === false && submitBtnFontSize?.Desktop ? `font-size: ${submitBtnFontSize?.Desktop}${submitBtnFontSizeUnits?.Desktop};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontWeight === false && submitBtnFontWeight ? `font-weight: ${submitBtnFontWeight};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.fontStyle === false && submitBtnFontStyle ? `font-style: ${submitBtnFontStyle};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.textTransform === false && submitBtnTextTransform ? `text-transform: ${submitBtnTextTransform};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.textDecoration === false && submitBtnTextDecoration ? `text-decoration: ${submitBtnTextDecoration};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.letterSpacing === false && submitBtnLetterSpacing?.Desktop ? `letter-spacing: ${submitBtnLetterSpacing?.Desktop}${submitBtnLetterSpacingUnits?.Desktop};` : ''}
+                ${submitBtnGlobalTypoSwitcher?.lineHeight === false && submitBtnLineHeight?.Desktop ? `line-height: ${submitBtnLineHeight?.Desktop}${submitBtnLineHeightUnits?.Desktop};` : ''}
+                
+                ${submitBtnColor ? `color: ${submitBtnColor};` : ''}
+                ${
+                    submitBtnBgType === "gradient"
+                    ? `background: ${
+                        submitBtnBgCustomGradientSwitcher && submitBtnBgCustomGradientInputValue
+                            ? submitBtnBgCustomGradientInputValue
+                            : submitBtnBgGradientColor
+                        };`
+                    : submitBtnBgImageUrl && submitBtnBgImageUrl !== null && submitBtnBgImageUrl !== ""
+                    ? `
+                        ${submitBtnBgImageUrl ? `background-image: url(${submitBtnBgImageUrl});` : ''}
+                        ${submitBtnBgImagePosition ? `background-position: ${submitBtnBgImagePosition};` : ''}
+                        ${submitBtnBgImageAttachment ? `background-attachment: ${submitBtnBgImageAttachment};` : ''}
+                        ${submitBtnBgImageRepeat ? `background-repeat: ${submitBtnBgImageRepeat};` : ''}
+                        ${submitBtnBgImageSize ? `background-size: ${submitBtnBgImageSize};` : ''}
+                    `
+                    : submitBtnBgClassicColor ? `background: ${submitBtnBgClassicColor};` : ''
+                }
+
+                ${submitBtnBorder ? `border-style: ${submitBtnBorder};` : ''}
+                ${submitBtnBorderDesktopWidth && submitBtnBorderDesktop?.top ? `border-width: ${submitBtnBorderDesktopWidth};` : ''}
+                ${submitBtnBorderColor ? `border-color: ${submitBtnBorderColor};` : ''}
+                ${submitBtnBorderRadiusDesktopWidth && submitBtnBorderRadiusDesktop?.top ? `border-radius: ${submitBtnBorderRadiusDesktopWidth};` : ''}
+                ${submitBtnBoxShadowCssValue ? `box-shadow: ${submitBtnBoxShadowCssValue};` : ""}
+
+                ${submitBtnMarginDesktopWidth && submitBtnMarginDesktop?.top ? `margin: ${submitBtnMarginDesktopWidth};` : ''}
+                ${submitBtnPaddingDesktopWidth && submitBtnPaddingDesktop?.top ? `padding: ${submitBtnPaddingDesktopWidth};` : ''}
+            }
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button-icon {
+                display: flex;
+            }
+            .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button-icon svg {
+                width: 100%;
+                height: auto;
             }
         
             @media only screen and (max-width: 1024px) {
@@ -2242,7 +2322,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${formBorderRadiusTabletWidth && formBorderRadiusTablet?.top ? `border-radius: ${formBorderRadiusTabletWidth};` : ''}
                 }
 
-                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper {
                     ${labelMarginTabletWidth && labelMarginTablet?.top ? `margin: ${labelMarginTabletWidth};` : ''}
 
                     ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Tablet ? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};` : ''}
@@ -2250,7 +2330,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Tablet ? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};` : ''}
                     
                 }
-                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
                     ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Tablet ? `letter-spacing: ${inputFieldLetterSpacing?.Tablet}${inputFieldLetterSpacingUnits?.Tablet};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
@@ -2279,7 +2359,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${formBorderRadiusMobileWidth && formBorderRadiusMobile?.top ? `border-radius: ${formBorderRadiusMobileWidth};` : ''}
                 }
 
-                .fb-text-field-wrapper.${blockID} .fb-field-label-wrapper {
+                .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper {
                     ${labelMarginMobileWidth && labelMarginMobile?.top ? `margin: ${labelMarginMobileWidth};` : ''}
 
                     ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Mobile ? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};` : ''}
@@ -2287,7 +2367,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
                     
                 }
-                .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
                     ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Mobile ? `letter-spacing: ${inputFieldLetterSpacing?.Mobile}${inputFieldLetterSpacingUnits?.Mobile};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Mobile ? `line-height: ${inputFieldLineHeight?.Mobile}${inputFieldLineHeightUnits?.Mobile};` : ''}
@@ -2310,6 +2390,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         fieldIconSwitcher,
         fieldRequiredSwitcher,
         fieldRequiredSymbolSwitcher,
+
+        fieldColumnGap,
+        fieldColumnGapUnits,
+        fieldRowGap,
+        fieldRowGapUnits,
 
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
@@ -2760,6 +2845,38 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Show icon", "frontis-blocks")}
                     checked={fieldIconSwitcher}
                     onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
+                />
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Field Gaps", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={fieldColumnGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Column", "frontis-blocks")}
+                    rangeValue={fieldColumnGap}
+                    onChangeHandler={(value) => setAttributes({ fieldColumnGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ fieldColumnGapUnits: value })}
+                    deviceType={deviceType}
+                    units={fieldColumnGapUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={fieldRowGapUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Row", "frontis-blocks")}
+                    rangeValue={fieldRowGap}
+                    onChangeHandler={(value) => setAttributes({ fieldRowGap: value })}
+                    rangeUnitHandler={(value) => setAttributes({ fieldRowGapUnits: value })}
+                    deviceType={deviceType}
+                    units={fieldRowGapUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
                 />
             </PanelBody>
 
