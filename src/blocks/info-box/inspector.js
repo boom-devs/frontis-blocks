@@ -774,8 +774,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Preset Style **/
 
 	/**
-	 * Preset Styles Data Object
-	 */
+	* Preset Styles Data Object
+	*/
 	const presetStyles = {
 		'preset-1': {
 			info_Button_Switcher: true,
