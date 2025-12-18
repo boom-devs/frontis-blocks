@@ -66,6 +66,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inheritedFieldRequiredSwitcher,
         inheritedFieldRequiredSymbolSwitcher,
 
+        inputFieldMaxWidth,
+        inputFieldMaxWidthUnits,
+        inputFieldHeight,
+        inputFieldHeightUnits,
+
         labelGlobalTypoSwitcher,
         labelGlobalTypographyData,
         labelGlobalTypoType,
@@ -916,8 +921,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const fbfieldItemStyle = useMemo(
         () => `
             .fb-text-field-wrapper.${blockID} {
-                width: 100%;
                 position: relative;
+                width: 100%;
+                ${inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''}
                 ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
 				${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
             }
@@ -992,7 +998,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                box-sizing: border-box;
                 width: 100%;
+                ${inputFieldHeight?.Desktop ? `height: ${inputFieldHeight?.Desktop}${inputFieldHeightUnits?.Desktop};` : ''}
                 
                 ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
 				${inputFieldGlobalTypoSwitcher?.fontSize === true && inputFieldGlobalTypographyData?.fontSize ? `font-size: ${inputFieldGlobalTypographyData?.fontSize};` : ''}
@@ -1139,6 +1147,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         [
             blockID,
             deviceType,
+
+            inputFieldMaxWidth,
+            inputFieldMaxWidthUnits,
+            inputFieldHeight,
+            inputFieldHeightUnits,
 
             labelGlobalTypoSwitcher,
             labelGlobalTypographyData,
@@ -1350,6 +1363,37 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     label={__("Show icon", "frontis-blocks")}
                     checked={mergeFieldIconSwitcher}
                     onChange={(value) => setAttributes({ fieldIconSwitcher: value })}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Layout", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_Range
+                    min={1}
+                    max={inputFieldMaxWidthUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Max Width", "frontis-blocks")}
+                    rangeValue={inputFieldMaxWidth}
+                    onChangeHandler={(value) => setAttributes({ inputFieldMaxWidth: value })}
+                    rangeUnitHandler={(value) => setAttributes({ inputFieldMaxWidthUnits: value })}
+                    deviceType={deviceType}
+                    units={inputFieldMaxWidthUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
+                />
+
+                <FB_Range
+                    min={1}
+                    max={inputFieldHeightUnits[deviceType] !== 'px' ? 100 : 2000}
+                    label={__("Height", "frontis-blocks")}
+                    rangeValue={inputFieldHeight}
+                    onChangeHandler={(value) => setAttributes({ inputFieldHeight: value })}
+                    rangeUnitHandler={(value) => setAttributes({ inputFieldHeightUnits: value })}
+                    deviceType={deviceType}
+                    units={inputFieldHeightUnits}
+                    rangeStep={1}
+                    resetFallbackValue={'100'}
                 />
             </PanelBody>
 
