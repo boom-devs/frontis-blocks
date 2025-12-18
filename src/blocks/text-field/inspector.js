@@ -175,6 +175,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
+        inputFieldIconSize,
+        inputFieldIconSizeUnits,
+        inputFieldIconGap,
+        inputFieldIconGapUnits,
+
         fieldCustomCSS,
         fieldGlobalWraperID,
         fieldGlobalWraperClass,
@@ -1873,6 +1878,39 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     />
                 )}
             </PanelBody>
+
+            {mergeFieldIconSwitcher && (
+                <PanelBody
+                    title={__("Field Icons", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={inputFieldIconSize}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconSizeUnits}
+                        rangeStep={1}
+                        resetFallbackValue={'24'}
+                    />
+
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
+                        label={__("Icon Gap", "frontis-blocks")}
+                        rangeValue={inputFieldIconGap}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconGapUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconGapUnits}
+                        rangeStep={1}
+                        resetFallbackValue={''}
+                    />
+                </PanelBody>
+            )}
         </>
     );
         
