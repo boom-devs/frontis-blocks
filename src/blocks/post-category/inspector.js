@@ -38,6 +38,7 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_VisibilityControl from "@Components/visibility-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_TypographyControl from "@Components/typography-control";
+import FB_Presets from '@Components/presets';
 
 import generateSvgIcon from "@Utils/generateSvgIcon";
 
@@ -4203,6 +4204,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 							onChange={(value) => setAttributes({ premadeStyle: value })}
 						/>
+						{/* <FB_Presets
+							className="fb-post-category-presets"
+							label={__('Select Preset', 'frontis-blocks')}
+							presets={POST_CATEGORY_PREMADE_STYLE}
+							value = {premadeStyle}
+							onChangeValue = 'premadeStyle'
+							defaultPresetValue="style-2"
+							setAttributes={setAttributes}
+						/> */}
 					</BaseControl>
 
 					{/* Taxonomy Type Control */}
