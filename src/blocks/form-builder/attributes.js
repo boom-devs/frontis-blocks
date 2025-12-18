@@ -716,6 +716,39 @@ const attributes = {
         default: ''
     },
 
+    inputFieldIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    inputFieldIconGap: {
+		type: 'object',
+		default: {
+			Desktop: '8',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
     submitBtnGlobalTypographyData: {
         type: 'object',
         default: {}
@@ -1125,6 +1158,39 @@ const attributes = {
         type : 'boolean',
         default: true
     },
+
+    submitBtnIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	submitBtnIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    submitBtnIconGap: {
+		type: 'object',
+		default: {
+			Desktop: '8',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	submitBtnIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     // Success Message Style Settings
     successMessageGlobalTypographyData: {

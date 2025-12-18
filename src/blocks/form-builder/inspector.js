@@ -177,6 +177,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
+        inputFieldIconSize,
+        inputFieldIconSizeUnits,
+        inputFieldIconGap,
+        inputFieldIconGapUnits,
+
         submiteBtnLabel,
         submiteBtnIcon,
         submiteBtnAlignment,
@@ -261,6 +266,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         submitBtnBoxShadowCssValue,
         submitBtnBoxShadowHoverValues,
         submitBtnBoxShadowHoverCssValue,
+
+        submitBtnIconSize,
+        submitBtnIconSizeUnits,
+        submitBtnIconGap,
+        submitBtnIconGapUnits,
 
         successMessageGlobalTypoSwitcher,
         successMessageGlobalTypographyData,
@@ -2120,6 +2130,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${fieldColumnGap?.Desktop ? `column-gap: ${fieldColumnGap?.Desktop}${fieldColumnGapUnits?.Desktop};` : ''}
                 ${fieldRowGap?.Desktop ? `row-gap: ${fieldRowGap?.Desktop}${fieldRowGapUnits?.Desktop};` : ''}
             }
+            .fb-form-builder-main-wrapper.${blockID} .block-editor-inner-blocks {
+                width: 100%;
+            }
 
             .fb-form-builder-main-wrapper.${blockID} .fb-field-label-wrapper {
                 display: flex;
@@ -3433,6 +3446,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         />
                     )}
                 </PanelBody>
+
+                <PanelBody
+                    title={__("Field Icons", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={inputFieldIconSize}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconSizeUnits}
+                        rangeStep={1}
+                        resetFallbackValue={'24'}
+                    />
+
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
+                        label={__("Icon Gap", "frontis-blocks")}
+                        rangeValue={inputFieldIconGap}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconGapUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconGapUnits}
+                        rangeStep={1}
+                        resetFallbackValue={''}
+                    />
+                </PanelBody>
         
                 <PanelBody
                     title={__("Submit Button", "frontis-blocks")}
@@ -3777,6 +3821,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             }
                         />
                     )}
+
+                    <FB_Range
+                        min={1}
+                        max={submitBtnIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={submitBtnIconSize}
+                        onChangeHandler={(value) => setAttributes({ submitBtnIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ submitBtnIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={submitBtnIconSizeUnits}
+                        rangeStep={1}
+                        resetFallbackValue={'24'}
+                    />
+
+                    <FB_Range
+                        min={1}
+                        max={submitBtnIconGapUnits[deviceType] !== 'px' ? 100 : 200}
+                        label={__("Icon Gap", "frontis-blocks")}
+                        rangeValue={submitBtnIconGap}
+                        onChangeHandler={(value) => setAttributes({ submitBtnIconGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ submitBtnIconGapUnits: value })}
+                        deviceType={deviceType}
+                        units={submitBtnIconGapUnits}
+                        rangeStep={1}
+                        resetFallbackValue={''}
+                    />
                 </PanelBody>
 
                 <PanelBody
