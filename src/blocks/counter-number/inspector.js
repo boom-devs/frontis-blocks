@@ -2032,7 +2032,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     onChange={(selected) => changeCounterPreset(selected)}
                 /> */}
                 <FB_Presets
-                    className="fb-info-box-presets"
+                    className="fb-counter-number-presets"
                     label={__('Select Preset', 'frontis-blocks')}
                     presets={counterNumberPresets}
                     value = {counterPresetStyle}
