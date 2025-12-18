@@ -2250,7 +2250,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 transition: all 0.3s ease-in-out;
             }
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
-                
+                display: flex;
+                ${inputFieldIconSize?.Desktop ? `width: ${inputFieldIconSize?.Desktop}${inputFieldIconSizeUnits?.Desktop};` : ''}
+            }
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon svg {
+                width: 100%;
+                height: auto;
             }
 
             .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper {
@@ -2264,6 +2269,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 justify-content: center;
                 box-sizing: border-box;
                 cursor: pointer;
+                ${submitBtnIconGap?.Desktop ? `gap: ${submitBtnIconGap?.Desktop}${submitBtnIconGapUnits?.Desktop};` : ''}
 
                 ${submitBtnGlobalTypoSwitcher?.fontFamily === true && submitBtnGlobalTypographyData?.fontFamily ? `font-family: ${submitBtnGlobalTypographyData?.fontFamily};` : ''}
                 ${submitBtnGlobalTypoSwitcher?.fontSize === true && submitBtnGlobalTypographyData?.fontSize ? `font-size: ${submitBtnGlobalTypographyData?.fontSize};` : ''}
@@ -2313,6 +2319,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
             .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button-icon {
                 display: flex;
+                ${submitBtnIconSize?.Desktop ? `width: ${submitBtnIconSize?.Desktop}${submitBtnIconSizeUnits?.Desktop};` : ''}
             }
             .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button-icon svg {
                 width: 100%;
@@ -2513,6 +2520,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
+        inputFieldIconSize,
+        inputFieldIconSizeUnits,
+        inputFieldIconGap,
+        inputFieldIconGapUnits,
+
         submiteBtnLabel,
         submiteBtnIcon,
         submiteBtnAlignment,
@@ -2597,6 +2609,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         submitBtnBoxShadowCssValue,
         submitBtnBoxShadowHoverValues,
         submitBtnBoxShadowHoverCssValue,
+
+        submitBtnIconSize,
+        submitBtnIconSizeUnits,
+        submitBtnIconGap,
+        submitBtnIconGapUnits,
 
         successMessageGlobalTypoSwitcher,
         successMessageGlobalTypographyData,
@@ -3447,37 +3464,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     )}
                 </PanelBody>
 
-                <PanelBody
-                    title={__("Field Icons", "frontis-blocks")}
-                    initialOpen={false}
-                >
-                    <FB_Range
-                        min={1}
-                        max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
-                        label={__("Icon Size", "frontis-blocks")}
-                        rangeValue={inputFieldIconSize}
-                        onChangeHandler={(value) => setAttributes({ inputFieldIconSize: value })}
-                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconSizeUnits: value })}
-                        deviceType={deviceType}
-                        units={inputFieldIconSizeUnits}
-                        rangeStep={1}
-                        resetFallbackValue={'24'}
-                    />
+                {fieldIconSwitcher && (
+                    <PanelBody
+                        title={__("Field Icons", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_Range
+                            min={1}
+                            max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
+                            label={__("Icon Size", "frontis-blocks")}
+                            rangeValue={inputFieldIconSize}
+                            onChangeHandler={(value) => setAttributes({ inputFieldIconSize: value })}
+                            rangeUnitHandler={(value) => setAttributes({ inputFieldIconSizeUnits: value })}
+                            deviceType={deviceType}
+                            units={inputFieldIconSizeUnits}
+                            rangeStep={1}
+                            resetFallbackValue={'24'}
+                        />
 
-                    <FB_Range
-                        min={1}
-                        max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
-                        label={__("Icon Gap", "frontis-blocks")}
-                        rangeValue={inputFieldIconGap}
-                        onChangeHandler={(value) => setAttributes({ inputFieldIconGap: value })}
-                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconGapUnits: value })}
-                        deviceType={deviceType}
-                        units={inputFieldIconGapUnits}
-                        rangeStep={1}
-                        resetFallbackValue={''}
-                    />
-                </PanelBody>
-        
+                        <FB_Range
+                            min={1}
+                            max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
+                            label={__("Icon Gap", "frontis-blocks")}
+                            rangeValue={inputFieldIconGap}
+                            onChangeHandler={(value) => setAttributes({ inputFieldIconGap: value })}
+                            rangeUnitHandler={(value) => setAttributes({ inputFieldIconGapUnits: value })}
+                            deviceType={deviceType}
+                            units={inputFieldIconGapUnits}
+                            rangeStep={1}
+                            resetFallbackValue={''}
+                        />
+                    </PanelBody>
+                )}
+
                 <PanelBody
                     title={__("Submit Button", "frontis-blocks")}
                     initialOpen={false}

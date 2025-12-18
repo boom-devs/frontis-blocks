@@ -250,10 +250,10 @@ const attributes = {
     formIconPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     formIconPaddingTablet: {
@@ -500,10 +500,10 @@ const attributes = {
     labelMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     labelMarginTablet: {
@@ -540,10 +540,10 @@ const attributes = {
     inputFieldMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     inputFieldMarginTablet: {
@@ -580,10 +580,10 @@ const attributes = {
     inputFieldPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     inputFieldPaddingTablet: {
@@ -974,10 +974,10 @@ const attributes = {
     submitBtnPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '30',
+            bottom: '14',
+            left: '30',
+            right: '14',
         },
     },
     submitBtnPaddingTablet: {
@@ -1014,10 +1014,10 @@ const attributes = {
     submitBtnMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     submitBtnMarginTablet: {
@@ -1410,10 +1410,10 @@ const attributes = {
     successMessagePaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     successMessagePaddingTablet: {
@@ -1450,10 +1450,10 @@ const attributes = {
     successMessageMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     successMessageMarginTablet: {
@@ -1791,10 +1791,10 @@ const attributes = {
     errorMessagePaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     errorMessagePaddingTablet: {
@@ -1831,10 +1831,10 @@ const attributes = {
     errorMessageMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     errorMessageMarginTablet: {
