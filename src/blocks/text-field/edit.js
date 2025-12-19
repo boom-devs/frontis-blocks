@@ -74,7 +74,7 @@ const Edit = (props) => {
             <Inspector {...props} />
 
             <div {...blockProps}>
-                <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textFieldGlobalWraperClass}`} id={textFieldGlobalWraperID}>
+                <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textFieldGlobalWraperClass && textFieldGlobalWraperClass}`} id={textFieldGlobalWraperID}>
                     {mergeFieldLabelSwitcher && (
                         <div className="fb-field-label-wrapper fb-form-label-wrapper">
                             <RichText

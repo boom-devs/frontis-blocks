@@ -1033,7 +1033,7 @@ class Helper
         // check $post_id not exist then insert
         $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id));
         if (!$check_post_id) {
-            update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
+            // update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
             $wpdb->insert(
                 $table_name,
                 array(

@@ -103,6 +103,8 @@ class AssetsGenerator
 						$single_post = get_post($single_post_id);
 						if (!$single_post) continue;
 						
+						update_post_meta($single_post_id, 'fb_page_assets_generation', 'compiling');
+
 						$post_content = $single_post->post_content;
 						$pattern = "/frontis-blocks/i";
 						
