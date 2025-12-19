@@ -367,10 +367,10 @@ const attributes = {
     labelMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     labelMarginTablet: {
@@ -407,10 +407,10 @@ const attributes = {
     inputFieldMarginDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     inputFieldMarginTablet: {
@@ -447,10 +447,10 @@ const attributes = {
     inputFieldPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '20',
-            bottom: '20',
-            left: '20',
-            right: '20',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     inputFieldPaddingTablet: {
@@ -698,6 +698,39 @@ const attributes = {
         type: 'string',
         default: '',
     },
+
+    inputFieldIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+    inputFieldIconGap: {
+		type: 'object',
+		default: {
+			Desktop: '8',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	inputFieldIconGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 
     /** Start Class & ID Setting */
     fieldCustomCSS : {

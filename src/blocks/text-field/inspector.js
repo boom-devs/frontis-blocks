@@ -175,6 +175,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         inputFieldBoxShadowHoverValues,
         inputFieldBoxShadowHoverCssValue,
 
+        inputFieldIconSize,
+        inputFieldIconSizeUnits,
+        inputFieldIconGap,
+        inputFieldIconGapUnits,
+
         fieldCustomCSS,
         fieldGlobalWraperID,
         fieldGlobalWraperClass,
@@ -922,6 +927,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         () => `
             .fb-text-field-wrapper.${blockID} {
                 position: relative;
+                width: 100%;
+                ${inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''}
                 ${fieldZIndex?.Desktop ? `z-index: ${fieldZIndex?.Desktop};` : ''}
 				${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
             }
@@ -989,13 +996,16 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 position: relative;
+                display: flex;
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input::placeholder {
                 ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
 				${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
             }
             .fb-text-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input input {
+                box-sizing: border-box;
                 width: 100%;
+                ${inputFieldHeight?.Desktop ? `height: ${inputFieldHeight?.Desktop}${inputFieldHeightUnits?.Desktop};` : ''}
                 
                 ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
 				${inputFieldGlobalTypoSwitcher?.fontSize === true && inputFieldGlobalTypographyData?.fontSize ? `font-size: ${inputFieldGlobalTypographyData?.fontSize};` : ''}
@@ -1142,6 +1152,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         [
             blockID,
             deviceType,
+
+            inputFieldMaxWidth,
+            inputFieldMaxWidthUnits,
+            inputFieldHeight,
+            inputFieldHeightUnits,
 
             labelGlobalTypoSwitcher,
             labelGlobalTypographyData,
@@ -1863,6 +1878,39 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     />
                 )}
             </PanelBody>
+
+            {mergeFieldIconSwitcher && (
+                <PanelBody
+                    title={__("Field Icons", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconSizeUnits[deviceType] !== 'px' ? 100 : 100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={inputFieldIconSize}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconSizeUnits}
+                        rangeStep={1}
+                        resetFallbackValue={'24'}
+                    />
+
+                    <FB_Range
+                        min={1}
+                        max={inputFieldIconGapUnits[deviceType] !== 'px' ? 100 : 200}
+                        label={__("Icon Gap", "frontis-blocks")}
+                        rangeValue={inputFieldIconGap}
+                        onChangeHandler={(value) => setAttributes({ inputFieldIconGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ inputFieldIconGapUnits: value })}
+                        deviceType={deviceType}
+                        units={inputFieldIconGapUnits}
+                        rangeStep={1}
+                        resetFallbackValue={''}
+                    />
+                </PanelBody>
+            )}
         </>
     );
         

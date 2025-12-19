@@ -38,6 +38,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         formMobileSwitcher,
     } = attributes;
 
+
     const blockProps = useBlockProps({
         className: `fb-form-builder-main-wrapper ${blockID} ${formDesktopSwitcher && 'fb-desktop-responsive'} ${formTabletSwitcher && 'fb-tablet-responsive'} ${formMobileSwitcher && 'fb-mobile-responsive'}`,
     });
