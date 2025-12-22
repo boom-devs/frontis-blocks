@@ -8,11 +8,11 @@ import getCustomCss from '@Utils/getCustomCss';
 
 const ALLOWED_FORM_BLOCKS = [
     "frontis-blocks/container",
-    "frontis-blocks/field-text",
-    "frontis-blocks/field-textarea",
-    "frontis-blocks/field-radio",
-    "frontis-blocks/field-select",
-    "frontis-blocks/field-checkbox"
+    "frontis-forms/field-text",
+    "frontis-forms/field-textarea",
+    "frontis-forms/field-radio",
+    "frontis-forms/field-select",
+    "frontis-forms/field-checkbox"
 ];
 
 const Render = ( props ) => {
