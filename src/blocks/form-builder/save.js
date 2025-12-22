@@ -39,7 +39,7 @@ export default function save({ attributes }) {
 
                     {/* Submit Button */}
                     <div className="fb-field-item fb-form-builder-submit-wrapper">
-                        <button id="fb-form-submit" className="fb-submit-button">
+                        <button isPrimary className="fb-submit-button" onClick={(e) => e.preventDefault()}>
                             <RichText.Content
                                 tagName="span"
                                 className="fb-submit-button-label"

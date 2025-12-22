@@ -48,30 +48,30 @@ const save = ({ attributes }) => {
     return (
         <>
             <div {...blockProps}>
-                <div className="fb-form-group-wrapper fb-field-group-wrapper">
+                <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textFieldGlobalWraperClass && textFieldGlobalWraperClass}`} id={textFieldGlobalWraperID}>
                     {mergeFieldLabelSwitcher && (
-                        <div className="fb-form-label-wrapper">
+                        <div className="fb-field-label-wrapper fb-form-label-wrapper">
                             <RichText.Content
                                 tagName="label"
-                                className="fb-form-label fb-text-field-label"
-                                value={fieldLabel}
+                                className="fb-form-label fb-field-label"
+                                value={fieldLabel ? fieldLabel : fieldType}
                             />
-                            {mergeFieldRequiredSymbolSwitcher && (
+                            {mergeFieldRequiredSwitcher && mergeFieldRequiredSymbolSwitcher && (
                                 <span className="fb-required-symbol">*</span>
                             )}
                         </div>
                     )}
-                    <div className="fb-form-input-wrapper">
-                        <div className="fb-form-input fb-text-field-input">
+                    <div className="fb-field-input-wrapper fb-form-input-wrapper">
+                        <div className="fb-form-input fb-field-input">
                             <input
                                 type={fieldType ? fieldType : 'text'}
-                                placeholder={fieldPlaceholder ? fieldPlaceholder : 'Enter your text here'}
+                                placeholder={fieldPlaceholder ? fieldPlaceholder : `Enter your ${fieldType} here`}
                                 name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
                                 defaultValue={fieldDefaultValue ? fieldDefaultValue : ''}
                                 required={mergeFieldRequiredSwitcher ? true : false}
                             />
                             {mergeFieldIconSwitcher && fieldIcon && (
-                                <span className="fb-text-field-icon fb-field-icon">
+                                <span className="fb-field-icon">
                                     {renderSVG(fieldIcon)}
                                 </span>
                             )}
