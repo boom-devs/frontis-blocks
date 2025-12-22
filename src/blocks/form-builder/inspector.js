@@ -182,11 +182,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldIconGap,
         inputFieldIconGapUnits,
 
-        submiteBtnLabel,
-        submiteBtnIcon,
-        submiteBtnAlignment,
-        submiteBtnIconSwitcher,
-        submiteBtnIconPosition,
+        submitBtnLabel,
+        submitBtnIcon,
+        submitBtnAlignment,
+        submitBtnIconSwitcher,
+        submitBtnIconPosition,
 
         submitBtnGlobalTypoSwitcher,
         submitBtnGlobalTypographyData,
@@ -2249,6 +2249,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${inputFieldBoxShadowHoverCssValue ? `box-shadow: ${inputFieldBoxShadowHoverCssValue};` : ""}
                 transition: all 0.3s ease-in-out;
             }
+            .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
+                ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
+
+                ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontSize === true && inputFieldGlobalTypographyData?.fontSize ? `font-size: ${inputFieldGlobalTypographyData?.fontSize};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontWeight === true && inputFieldGlobalTypographyData?.fontWeight ? `font-weight: ${inputFieldGlobalTypographyData?.fontWeight};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontStyle === true && inputFieldGlobalTypographyData?.fontStyle ? `font-style: ${inputFieldGlobalTypographyData?.fontStyle};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textTransform === true && inputFieldGlobalTypographyData?.textTransform ? `text-transform: ${inputFieldGlobalTypographyData?.textTransform};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textDecoration === true && inputFieldGlobalTypographyData?.textDecoration ? `text-decoration: ${inputFieldGlobalTypographyData?.textDecoration};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.letterSpacing === true && inputFieldGlobalTypographyData?.letterSpacing ? `letter-spacing: ${inputFieldGlobalTypographyData?.letterSpacing};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.lineHeight === true && inputFieldGlobalTypographyData?.lineHeight ? `line-height: ${inputFieldGlobalTypographyData?.lineHeight};` : ''}
+                
+                ${inputFieldGlobalTypoSwitcher?.fontFamily === false && inputFieldFontFamily && inputFieldFontFamily !== 'Default' ? `font-family: ${inputFieldFontFamily};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Desktop ? `font-size: ${inputFieldFontSize?.Desktop}${inputFieldFontSizeUnits?.Desktop};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontWeight === false && inputFieldFontWeight ? `font-weight: ${inputFieldFontWeight};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.fontStyle === false && inputFieldFontStyle ? `font-style: ${inputFieldFontStyle};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textTransform === false && inputFieldTextTransform ? `text-transform: ${inputFieldTextTransform};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Desktop ? `letter-spacing: ${inputFieldLetterSpacing?.Desktop}${inputFieldLetterSpacingUnits?.Desktop};` : ''}
+                ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Desktop ? `line-height: ${inputFieldLineHeight?.Desktop}${inputFieldLineHeightUnits?.Desktop};` : ''}
+
+            }
+
             .fb-form-builder-main-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
                 display: flex;
                 ${inputFieldIconSize?.Desktop ? `width: ${inputFieldIconSize?.Desktop}${inputFieldIconSizeUnits?.Desktop};` : ''}
@@ -2525,11 +2548,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         inputFieldIconGap,
         inputFieldIconGapUnits,
 
-        submiteBtnLabel,
-        submiteBtnIcon,
-        submiteBtnAlignment,
-        submiteBtnIconSwitcher,
-        submiteBtnIconPosition,
+        submitBtnLabel,
+        submitBtnIcon,
+        submitBtnAlignment,
+        submitBtnIconSwitcher,
+        submitBtnIconPosition,
 
         submitBtnGlobalTypoSwitcher,
         submitBtnGlobalTypographyData,
@@ -2913,15 +2936,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <PanelBody title={__("Submit Button", "frontis-blocks")} initialOpen={false}>
                 <TextControl
                     label={__('Label', 'frontis-blocks')}
-                    value={submiteBtnLabel}
-                    onChange={(value) => setAttributes({ submiteBtnLabel: value })}
+                    value={submitBtnLabel}
+                    onChange={(value) => setAttributes({ submitBtnLabel: value })}
                 />
 
                 <BaseControl className={"fb-form-btn-alignment"} >
                     <FB_ResponsiveAlignmentControl
                         label={__("Alignment", "frontis-blocks")}
-                        globalAlignment={submiteBtnAlignment}
-                        setGlobalAlignment={(value) => setAttributes({ submiteBtnAlignment: value })}
+                        globalAlignment={submitBtnAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ submitBtnAlignment: value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
                         options={ALIGN_ITEMS}
@@ -2931,17 +2954,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
                 <ToggleControl
                     label={__("Show Icon", "frontis-blocks")}
-                    checked={submiteBtnIconSwitcher}
-                    onChange={(value) => setAttributes({ submiteBtnIconSwitcher: value })}
+                    checked={submitBtnIconSwitcher}
+                    onChange={(value) => setAttributes({ submitBtnIconSwitcher: value })}
                 />
 
-                {submiteBtnIconSwitcher && (
+                {submitBtnIconSwitcher && (
                     <BaseControl
                         label={__("Icon", "frontis-blocks")}
                     >
                         <FBIconPicker
-                            value={submiteBtnIcon} 
-                            setIconHandler={(value) => setAttributes({ submiteBtnIcon: value })} 
+                            value={submitBtnIcon} 
+                            setIconHandler={(value) => setAttributes({ submitBtnIcon: value })} 
                         />
                     </BaseControl>
                 )}
@@ -2949,8 +2972,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 
                     <FB_ResponsiveAlignmentControl
                         label={__("Icon Position", "frontis-blocks")}
-                        globalAlignment={submiteBtnIconPosition}
-                        setGlobalAlignment={(value) => setAttributes({ submiteBtnIconPosition: value })}
+                        globalAlignment={submitBtnIconPosition}
+                        setGlobalAlignment={(value) => setAttributes({ submitBtnIconPosition: value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
                         options={SUTMIT_BTN_POSITION}

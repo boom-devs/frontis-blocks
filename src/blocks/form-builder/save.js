@@ -10,9 +10,9 @@ export default function save({ attributes }) {
         classHook,
         formType,
 
-        submiteBtnLabel,
-        submiteBtnIconSwitcher,
-        submiteBtnIcon,
+        submitBtnLabel,
+        submitBtnIconSwitcher,
+        submitBtnIcon,
 
         formGlobalWraperID,
         formGlobalWraperClass,
@@ -43,11 +43,11 @@ export default function save({ attributes }) {
                             <RichText.Content
                                 tagName="span"
                                 className="fb-submit-button-label"
-                                value={submiteBtnLabel}
+                                value={submitBtnLabel}
                             />
-                            {submiteBtnIconSwitcher && (
+                            {submitBtnIconSwitcher && (
                                 <span className="fb-submit-button-icon">
-                                    {renderSVG(submiteBtnIcon)}
+                                    {renderSVG(submitBtnIcon)}
                                 </span>
                             )}
                         </button>
