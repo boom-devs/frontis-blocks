@@ -52,7 +52,6 @@ const Edit = (props) => {
         context["fb/formContainerSwitcher"],
     ])
 
-	console.log(isBlockRootParent,formContainerSwitcher, clientId, );
 
 	// Loop Builder Check
 	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
