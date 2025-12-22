@@ -340,7 +340,7 @@ const attributes = {
     },
     labelRequiredColor: {
         type: 'string',
-        default: '#FFFFFF',
+        default: '',
     },
 
     inputFieldColor: {
