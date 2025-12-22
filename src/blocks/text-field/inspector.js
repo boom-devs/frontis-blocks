@@ -56,11 +56,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         fieldDefaultValue,
         fieldCustomNameAttribute,
 
-        // layout
-        fieldWidth,
-        fieldMinHeight,
-
-
         inheritedFieldIconSwitcher,
         inheritedFieldLabelSwitcher,
         inheritedFieldRequiredSwitcher,

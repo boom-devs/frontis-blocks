@@ -132,7 +132,7 @@ const attributes = {
     inputFieldHeight: {
 		type: 'object',
 		default: {
-			Desktop: '36',
+			Desktop: '50',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -486,7 +486,7 @@ const attributes = {
     },
     inputFieldBgClassicColor: {
         type: 'string',
-        default: '#EBF5FF'
+        default: ''
     },
     inputFieldBgGradientColor: {
         type: 'string',
@@ -537,7 +537,7 @@ const attributes = {
     },
     inputFieldBgHoverClassicColor: {
         type: 'string',
-        default: '#399CFF'
+        default: ''
     },
     inputFieldBgHoverGradientColor: {
         type: 'string',
@@ -922,7 +922,7 @@ const attributes = {
     
     fieldBorder: {
         type: 'string',
-        default: 'none',
+        default: '',
     },
     fieldBorderColor: {
         type: 'string',

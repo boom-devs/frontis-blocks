@@ -37,7 +37,7 @@ const attributes = {
     fieldColumnGap: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '24',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -53,7 +53,7 @@ const attributes = {
     fieldRowGap: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '24',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -67,19 +67,19 @@ const attributes = {
 		}
 	},
 
-    submiteBtnLabel: {
+    submitBtnLabel: {
         type: 'string',
-        default: 'Submit',
+        default: 'Submit Now',
     },
-    submiteBtnIconSwitcher: {
+    submitBtnIconSwitcher: {
         type: 'boolean',
-        default: true,
+        default: false,
     },
-    submiteBtnIcon: {
+    submitBtnIcon: {
         type: 'string',
         default: 'arrow-right',
     },
-    submiteBtnAlignment: {
+    submitBtnAlignment: {
         type: 'object',
         default: {
             Desktop: 'left',
@@ -87,7 +87,7 @@ const attributes = {
             Mobile: '',
         },
     },
-    submiteBtnIconPosition: {
+    submitBtnIconPosition: {
         type: 'object',
         default: {
             Desktop: 'right',
@@ -311,7 +311,7 @@ const attributes = {
     labelFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -405,7 +405,7 @@ const attributes = {
     inputFieldFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '14',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -473,7 +473,7 @@ const attributes = {
     },
     labelRequiredColor: {
         type: 'string',
-        default: '#FFFFFF',
+        default: '#b80606',
     },
 
     inputFieldColor: {
@@ -500,10 +500,10 @@ const attributes = {
     labelMarginDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '12',
+            left: '0',
+            right: '0',
         },
     },
     labelMarginTablet: {
@@ -540,10 +540,10 @@ const attributes = {
     inputFieldMarginDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '8',
+            left: '0',
+            right: '0',
         },
     },
     inputFieldMarginTablet: {
@@ -580,10 +580,10 @@ const attributes = {
     inputFieldPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '14',
+            bottom: '14',
+            left: '12',
+            right: '12',
         },
     },
     inputFieldPaddingTablet: {
@@ -619,7 +619,7 @@ const attributes = {
     },
     inputFieldBgClassicColor: {
         type: 'string',
-        default: '#EBF5FF'
+        default: '#f9f9f9'
     },
     inputFieldBgGradientColor: {
         type: 'string',
@@ -670,7 +670,7 @@ const attributes = {
     },
     inputFieldBgHoverClassicColor: {
         type: 'string',
-        default: '#399CFF'
+        default: ''
     },
     inputFieldBgHoverGradientColor: {
         type: 'string',
@@ -781,7 +781,7 @@ const attributes = {
     submitBtnFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -849,7 +849,7 @@ const attributes = {
     },
     submitBtnColor: {
         type: 'string',
-        default: ''
+        default: '#ffffff'
     },
     submitBtnHoverColor: {
         type: 'string',
@@ -866,7 +866,7 @@ const attributes = {
     },
     submitBtnBgClassicColor: {
         type: 'string',
-        default: '#EBF5FF'
+        default: '#3f8efc'
     },
     submitBtnBgGradientColor: {
         type: 'string',
@@ -917,7 +917,7 @@ const attributes = {
     },
     submitBtnBgHoverClassicColor: {
         type: 'string',
-        default: '#399CFF'
+        default: ''
     },
     submitBtnBgHoverGradientColor: {
         type: 'string',
@@ -974,10 +974,10 @@ const attributes = {
     submitBtnPaddingDesktop: {
         type: 'object', 
         default: {
-            top: '30',
+            top: '14',
             bottom: '14',
             left: '30',
-            right: '14',
+            right: '30',
         },
     },
     submitBtnPaddingTablet: {
@@ -1130,10 +1130,10 @@ const attributes = {
     submitBtnBorderRadiusDesktop: {
         type: 'object', 
         default: {
-            top: '8',
-            bottom: '8',
-            left: '8',
-            right: '8',
+            top: '4',
+            bottom: '4',
+            left: '4',
+            right: '4',
         },
     },
     submitBtnBorderRadiusTablet: {
@@ -1957,10 +1957,11 @@ const attributes = {
     
     inputFieldBorder: {
         type: 'string',
-        default: 'none',
+        default: 'solid',
     },
     inputFieldBorderColor: {
         type: 'string',
+        default: '#edededfe'
     },
     inputFieldBorderHoverColor: {
         type: 'string',
@@ -1981,10 +1982,10 @@ const attributes = {
     inputFieldBorderDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '1',
+            bottom: '1',
+            left: '1',
+            right: '1',
         },
     },
     inputFieldBorderTablet: {
@@ -2021,10 +2022,10 @@ const attributes = {
     inputFieldBorderRadiusDesktop: {
         type: 'object', 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '4',
+            bottom: '4',
+            left: '4',
+            right: '4',
         },
     },
     inputFieldBorderRadiusTablet: {

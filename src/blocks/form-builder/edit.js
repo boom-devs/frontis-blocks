@@ -26,9 +26,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         classHook,
         formType,
 
-        submiteBtnLabel,
-        submiteBtnIconSwitcher,
-        submiteBtnIcon,
+        submitBtnLabel,
+        submitBtnIconSwitcher,
+        submitBtnIcon,
 
         formGlobalWraperID,
         formGlobalWraperClass,
@@ -109,13 +109,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             <RichText
                                 tagName="span"
                                 className="fb-submit-button-label"
-                                value={submiteBtnLabel}
+                                value={submitBtnLabel}
                                 placeholder={__('Submit', 'frontis-blocks')}
-                                onChange={(value) => setAttributes({ submiteBtnLabel: value })}
+                                onChange={(value) => setAttributes({ submitBtnLabel: value })}
                             />
-                            {submiteBtnIconSwitcher && (
+                            {submitBtnIconSwitcher && (
                                 <span className="fb-submit-button-icon">
-                                    {renderSVG(submiteBtnIcon)}
+                                    {renderSVG(submitBtnIcon)}
                                 </span>
                             )}
                         </button>
