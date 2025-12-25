@@ -5,10 +5,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${FB_TLibrary.portalApi}/api/`,
     prepareHeaders: (headers) => {
-      headers.set(
-        'Authorization',
-        'Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw'
-      );
+      // Token removed for security - use server-side proxy if authentication needed
       headers.set('Content-Type', 'application/json');
       return headers;
     },
