@@ -124,7 +124,7 @@ class Admin {
         if('toplevel_page_frontis-blocks' == $hook || 'post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook){
             $suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '';
 
-            wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/dashboard' . $suffix . '.css', array(), '1.0.0');
+            wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/dashboard' . $suffix . '.css', array(), '1.0.1');
         }
     }
 
@@ -887,7 +887,7 @@ class Admin {
             'frontis_theme' => 'Frontis' == $theme->name || 'Frontis' == $theme->parent_theme
         ));
 
-        wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.0');
+        wp_enqueue_style('frontis-blocks-admin-sidebar', FB_PLUGIN_URL . 'assets/admin/sidebar' . $suffix . '.css', array(), '1.0.1');
 	}
 
     public function template_proxy() {
