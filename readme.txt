@@ -1,4 +1,4 @@
-=== Frontis Blocks – The Ultimate Gutenberg Block Plugin for WordPress ===
+=== Frontis Blocks — Block Library for the Block Editor ===
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
@@ -8,31 +8,31 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Enhance your WordPress Gutenberg editor with powerful and flexible custom blocks.
+Enhance your WordPress Block Editor with powerful and flexible custom blocks.
 
 == Description ==
 
-**Frontis Blocks — a Gutenberg block** library with **30+ blocks,** global styling, sliders/galleries, CTAs, and map/form integrations, plus **pre-made design** patterns everything you need to launch in minutes with the **best Gutenberg blocks plugin.**
+**Frontis Blocks** is a block library with **30+ blocks,** global styling, sliders/galleries, CTAs, and map/form integrations, plus **pre-made design** patterns everything you need to launch in minutes.
 
 [youtube https://youtu.be/8d0m7ZHNrzI]
 
-**DESIGN BEAUTIFUL, FAST-LOADING WEBSITES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG BLOCK EDITOR) WITH THE BEST GUTENBERG BLOCKS PLUGIN — 30+ BLOCKS, PREMADE DESIGNS, NO CODING.**
+**DESIGN BEAUTIFUL, FAST-LOADING WEBSITES IN THE WORDPRESS BLOCK EDITOR — 30+ BLOCKS, PREMADE DESIGNS, NO CODING.**
 
 **[You can try a live demo of Frontis](https://app.zipwp.com/wp?plugins=frontis-blocks)**
 
-Finally, a **Gutenberg block** library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful **Gutenberg block** elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
+Finally, a block library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful block elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
 
-You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That’s why we built **Frontis Blocks**. It works right inside the Block Editor **(Gutenberg Block Editor)** so you can launch real pages right now. (With 30+ lightweight Gutenberg blocks plus premade designs.)
+You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That’s why we built **Frontis Blocks**. It works right inside the Block Editor so you can launch real pages right now. (With 30+ lightweight blocks plus premade designs.)
 
-Add a hero with an advanced/animated heading, place a clear button, show a few testimonials, a pricing table, a gallery or slider, even a Google Map (no API key). It’s simple because it stays with native **Gutenberg blocks** that feel fast and look clean.
+Add a hero with an advanced/animated heading, place a clear button, show a few testimonials, a pricing table, a gallery or slider, even a Google Map (no API key). It’s simple because it stays with native blocks that feel fast and look clean.
 
-Now, if you’ve tried big page builders — **Elementor, Divi, WPBakery, Bricks, Beaver Builder** — you already know the downsides: extra interfaces, extra scripts, and sometimes slower pages as your site grows. Frontis takes a different approach which is Gutenberg first. Your content stays in standard **Gutenberg Block** markup, so it’s easy to edit, easy to move, and built to be fast.
+Now, if you’ve tried big page builders — **Elementor, Divi, WPBakery, Bricks, Beaver Builder** — you already know the downsides: extra interfaces, extra scripts, and sometimes slower pages as your site grows. Frontis takes a different approach which is Block Editor first. Your content stays in standard block markup, so it’s easy to edit, easy to move, and built to be fast.
 
 **Why Frontis instead of heavy page builders (Elementor, Divi, etc.)?**
 
-- **Native & simple:** Build inside Gutenberg (no new UI to learn).
+- **Native & simple:** Build inside the Block Editor (no new UI to learn).
 - **Fast by default:** Lightweight assets help pages load quickly and support SEO.
-- **No lock-in:** Standard **Gutenberg blocks** mean you can switch themes anytime.
+- **No lock-in:** Standard blocks mean you can switch themes anytime.
 - **Real features you’ll use:** **Container* for layout, **global control** for consistent styles, **Copy & Paste Styles** to speed up your work.
 - **Launch today:** **Premade designs** and patterns give you a head start. Just replace text and images.
 - **Container:**
@@ -47,19 +47,19 @@ Now, if you’ve tried big page builders — **Elementor, Divi, WPBakery, Bricks
 
 == SOME POWERFUL FEATURES OF FRONTIS BLOCKS 💪 ==
 
-- **Layouts** – Build and resize rows/columns with the **Container** controls (padding, gaps, backgrounds) for clean, responsive sections in the **Gutenberg editor.**
-- **Starter Designs & Patterns** – Create pages faster with premade sections and layouts, mix, match, and publish faster with a **Gutenberg blocks** workflow.
+- **Layouts** – Build and resize rows/columns with the **Container** controls (padding, gaps, backgrounds) for clean, responsive sections in the Block Editor.
+- **Starter Designs & Patterns** – Create pages faster with premade sections and layouts, mix, match, and publish faster.
 - **Global Styling** – Set site-wide defaults (container width, spacing, colors, typography) so every page stays consistent and no extra CSS.
-- **Copy & Paste Styles** – Style a block once, reuse it everywhere. Keep designs uniform and save time across your **Gutenberg block** pages.
-- **Performance & No Lock-In** – Optimized assets and clean markup keep pages fast. Content stays standard based on **Gutenberg blocks,** so you can switch themes or plugin anytime, exactly what you want from the **best Gutenberg blocks plugin.**
+- **Copy & Paste Styles** – Style a block once, reuse it everywhere. Keep designs uniform and save time across your pages.
+- **Performance & No Lock-In** – Optimized assets and clean markup keep pages fast. Content stays in standard block format, so you can switch themes or plugins anytime.
 - **Responsive Controls** — Tweak layouts for mobile, tablet, and desktop inside the **WordPress Block Editor.**
-- **Clean, SEO-Friendly Markup** — Semantic structure that helps pages rank (a must for the **best Gutenberg blocks plugin** experience).
+- **Clean, SEO-Friendly Markup** — Semantic structure that helps pages rank.
 - **Theme-Agnostic** — Works with any theme, and pairs smoothly with the Frontis theme if you want extra compatibility.
-- **Real Support & Updates** — Actively improved so your **Gutenberg blocks** stay modern and reliable.
+- **Real Support & Updates** — Actively improved so your blocks stay modern and reliable.
 
 == Features at a Glance ==
 
-Our **WordPress Gutenberg blocks plugin** offers a rich set of blocks to cover almost any design need. With **Frontis Blocks,** you can build dynamic layouts, interactive sections, and polished content elements in a snap:
+Our plugin offers a rich set of blocks to cover almost any design need. With **Frontis Blocks,** you can build dynamic layouts, interactive sections, and polished content elements in a snap:
 
 - **Container:** Create structured layouts effortlessly using the Container Block. It allows you to group multiple blocks together with custom padding, margins, background styles, and layout controls. Perfect for building advanced page sections while maintaining responsive design.
 - **Accordion:** Features collapsible elements for displaying content in a limited space. It allows users to expand and collapse sections as needed, which is ideal for FAQs or detailed lists that require space efficiency.
@@ -68,7 +68,7 @@ Our **WordPress Gutenberg blocks plugin** offers a rich set of blocks to cover a
 - **Advanced Button:** A variety of button styles including gradients, icons, and different shapes, providing versatile options for different design needs and interaction cues.
 - **Advanced Image:** Enhances images with text overlays, gradient backgrounds for readability, strategic content placement, and dynamic effects like blur and zoom to elevate visual engagement.
 - **Advanced Video:** Displays different styles for embedding video content that enhance the visual appeal and engage users. These styles might include overlays, animations, or unique graphical elements that draw attention to the video content.
-- **Call to Action:** Tired of clunky page builders? Frontis Blocks gives you everything you need to create beautiful, modern websites — right inside the Gutenberg editor. It’s fast, flexible, and fun to use!
+- **Call to Action:** Tired of clunky page builders? Frontis Blocks gives you everything you need to create beautiful, modern websites — right inside the Block Editor. It’s fast, flexible, and fun to use!
 - **Image Gallery:** Various layouts and hover effects for displaying images, suitable for portfolios, product galleries, or visual storytelling, enhancing the visual appeal and user engagement on websites.
 - **Info Box:** Information boxes that combine icons, headings, and text in a structured layout, ideal for quick facts or highlights that need to stand out on a page.
 - **Icon Box:** Utilizes icons combined with text to visually represent different services or features succinctly. This design is effective for quick scanning by users, offering an immediate understanding of the core services or features offered.
@@ -89,19 +89,19 @@ Our **WordPress Gutenberg blocks plugin** offers a rich set of blocks to cover a
 - **Slider:** Add eye-catching sliders to your site using the Slider Block. Display multiple images or content slides in a rotating carousel with transition effects. Fully customizable to suit hero sections, product showcases, or testimonials.
 - **Marquee Carousel:** Showcase continuous scrolling content with the Marquee Carousel Block. Ideal for displaying partner logos, product highlights, or announcement tickers in a smooth, horizontal scroll. Customize speed, direction, and content with ease.
 - **Tabs:** Show content in tidy tabs (e.g., Features / Specs / FAQs). Mobile-friendly, easy to scan, perfect for long info.
-- **Google Map Block:** Add Google Maps in seconds **(no API key).** Drop a responsive map in Gutenberg with custom pin, light/dark styles, and zoom—perfect for contact & local SEO pages.
+- **Google Map Block:** Add Google Maps in seconds **(no API key).** Drop a responsive map with custom pin, light/dark styles, and zoom—perfect for contact & local SEO pages.
 
 This collection of **block plugins** is curated to fit any project—whether you’re building a portfolio, business site, blog, or e-commerce store.
 
 == Frontis Blocks + Frontis Theme = Future-Ready WordPress (FSE) ==
 
-**Frontis Blocks** works with any theme, but it works **best** with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
+**Frontis Blocks** works with any theme, and it integrates seamlessly with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
 
-- **One smooth workflow:** Design headers, footers, and templates in the **Gutenberg editor** with the same **Gutenberg blocks** you use for pages.
-- **Perfect fit out of the box:** Global colors, fonts, and spacing from the Frontis Theme match every **Gutenberg block** in Frontis Blocks.
+- **One smooth workflow:** Design headers, footers, and templates in the Block Editor with the same blocks you use for pages.
+- **Perfect fit out of the box:** Global colors, fonts, and spacing from the Frontis Theme match every block in Frontis Blocks.
 - **Fast & stable:** Shared lightweight styles (no CSS fights) for better performance and Core Web Vitals.
 - **Consistent design system:** Premade designs/patterns look the same site-wide—no patchwork.
-- **No lock-in:** Still standard **Gutenberg blocks.** You can change themes at any time.
+- **No lock-in:** Still standard blocks. You can change themes at any time.
 
 
 == All Your Favorite Plugins—Supported ==
@@ -179,7 +179,7 @@ Yes. Frontis Blocks works great with FSE, and it’s best paired with the Fronti
 Yes. All blocks are responsive. You can adjust spacing, alignment, and layout for mobile, tablet, and desktop.
 
 = Is Frontis Blocks good for SEO? =
-Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It’s built with SEO and performance in mind—what you’d expect from the best Gutenberg blocks plugin experience.
+Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It’s built with SEO and performance in mind.
 
 = Can I switch themes later? =
 Yes. Your content is standard Gutenberg block markup, so you can switch themes or tools anytime—no lock-in.
