@@ -8,7 +8,7 @@ use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Core\PclZip;
 
 // Ensure WP_Filesystem is available
-if ( ! function_exists( 'request_filesystem_credentials' ) ) {
+if (!function_exists('request_filesystem_credentials')) {
     require_once ABSPATH . 'wp-admin/includes/file.php';
 }
 
@@ -17,19 +17,21 @@ if ( ! function_exists( 'request_filesystem_credentials' ) ) {
  *
  * @package FrontisBlocks
  */
-class TemplateLibrary extends AjaxBase {
+class TemplateLibrary extends AjaxBase
+{
 
-	use Singleton;
+    use Singleton;
 
-	/**
-	 * register_ajax_events
-	 *
-	 * @return void
-	 */
-	public function register_ajax_events() {
-		$ajax_events = [
-			'update_option',
-			'get_option',
+    /**
+     * register_ajax_events
+     *
+     * @return void
+     */
+    public function register_ajax_events()
+    {
+        $ajax_events = [
+            'update_option',
+            'get_option',
             'update_site_settings',
             'demo_import',
             'upload_files',
@@ -39,24 +41,26 @@ class TemplateLibrary extends AjaxBase {
             'import_templates',
             'pages_import',
             'posts_import',
-		];
+        ];
 
-		$this->init_ajax_events($ajax_events);
-	}
-
-    public function check_permission() {
-        if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
-			wp_send_json_error(['message' => 'Invalid nonce'], 400);
-			return;
-		}
-
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
-			return;
-		}
+        $this->init_ajax_events($ajax_events);
     }
 
-    public function update_option() {
+    public function check_permission()
+    {
+        if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
+            wp_send_json_error(['message' => 'Invalid nonce'], 400);
+            return;
+        }
+
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error(['message' => 'Insufficient permissions'], 403);
+            return;
+        }
+    }
+
+    public function update_option()
+    {
         $this->check_permission();
 
         $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
@@ -71,7 +75,8 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    public function get_option() {
+    public function get_option()
+    {
         $this->check_permission();
 
         $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
@@ -84,24 +89,25 @@ class TemplateLibrary extends AjaxBase {
         }
     }
 
-    function upload_files() {
+    function upload_files()
+    {
         $this->check_permission();
-    
+
         $zip_url = isset($_POST['uploads']) ? esc_url_raw($_POST['uploads']) : '';
 
         if (!$zip_url) {
             wp_send_json_error(['message' => 'No uploads URL provided'], 400);
         }
-    
+
         $uploads_dir = wp_upload_dir();
         $destination = trailingslashit($uploads_dir['basedir']);
-    
+
         if (!is_dir($destination)) {
             wp_mkdir_p($destination);
         }
-    
+
         $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
-    
+
         try {
             // Download ZIP
             $ch = curl_init($zip_url);
@@ -111,30 +117,34 @@ class TemplateLibrary extends AjaxBase {
             curl_setopt($ch, CURLOPT_TIMEOUT, 300);
             $data = curl_exec($ch);
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    
-            if (curl_errno($ch)) throw new Exception('cURL Error: ' . curl_error($ch));
+
+            if (curl_errno($ch))
+                throw new Exception('cURL Error: ' . curl_error($ch));
             curl_close($ch);
-    
-            if ($httpCode !== 200 || !$data) throw new Exception('Failed to download zip file');
-    
+
+            if ($httpCode !== 200 || !$data)
+                throw new Exception('Failed to download zip file');
+
             file_put_contents($tempZipFile, $data);
-    
+
             // Extract ZIP
             $zip = new PclZip($tempZipFile);
             $content = $zip->listContent();
-            if ($content == 0) throw new Exception('Failed to read zip content');
-    
+            if ($content == 0)
+                throw new Exception('Failed to read zip content');
+
             $extracted_files = [];
-    
+
             foreach ($content as $file_info) {
                 $filePath = $destination . $file_info['filename'];
-    
+
                 // Create folder structure too
                 if (!empty($file_info['folder'])) {
-                    if (!is_dir($filePath)) wp_mkdir_p($filePath);
+                    if (!is_dir($filePath))
+                        wp_mkdir_p($filePath);
                     continue;
                 }
-    
+
                 // Extract file
                 $result = $zip->extractByIndex(
                     $file_info['index'],
@@ -142,82 +152,85 @@ class TemplateLibrary extends AjaxBase {
                     $destination,
                     PCLZIP_OPT_REPLACE_NEWER
                 );
-    
+
                 if ($result != 0 && file_exists($filePath)) {
                     $extracted_files[] = $file_info['filename'];
                 }
             }
-    
+
             unlink($tempZipFile);
-    
+
             wp_send_json_success([
                 'message' => 'Files extracted successfully',
-                'path'    => $destination,
-                'files'   => $extracted_files,
-                'count'   => count($extracted_files),
+                'path' => $destination,
+                'files' => $extracted_files,
+                'count' => count($extracted_files),
             ]);
-    
+
         } catch (Exception $e) {
-            if (file_exists($tempZipFile)) unlink($tempZipFile);
+            if (file_exists($tempZipFile))
+                unlink($tempZipFile);
             wp_send_json_error(['message' => $e->getMessage()], 500);
         }
     }
-    
+
     /**
      * Activate Theme (install if missing)
      * AJAX action: fb_active_theme
      */
-    public function active_theme() {
+    public function active_theme()
+    {
         $this->check_permission();
-    
+
         $theme_slug = !empty($_POST['theme_slug']) ? sanitize_text_field($_POST['theme_slug']) : 'frontis';
-    
+
         require_once ABSPATH . 'wp-admin/includes/file.php';
         require_once ABSPATH . 'wp-admin/includes/misc.php';
         require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
         require_once ABSPATH . 'wp-admin/includes/theme.php';
         require_once ABSPATH . 'wp-admin/includes/template.php';
-    
+
         $wp_theme = wp_get_theme($theme_slug);
-    
+
         // If theme is not installed - download & install
         if (!$wp_theme->exists()) {
-    
+
             // Correct API endpoint
             $theme_information = wp_remote_get("https://api.wordpress.org/themes/info/1.2/?action=theme_information&request[slug]={$theme_slug}");
-    
+
             if (is_wp_error($theme_information)) {
                 wp_send_json_error(['message' => 'Theme info request failed: ' . $theme_information->get_error_message()]);
             }
-    
+
             $theme_data = json_decode(wp_remote_retrieve_body($theme_information), true);
             $download_url = $theme_data['download_link'] ?? null;
-    
+
             if (!$download_url) {
                 wp_send_json_error(['message' => 'Theme download link not found from wordpress.org']);
             }
-    
+
             $upgrader = new \Theme_Upgrader(new \Automatic_Upgrader_Skin());
             $install_result = $upgrader->install($download_url);
-    
+
             if (!$install_result) {
                 wp_send_json_error(['message' => 'Theme installation failed']);
             }
         }
-    
+
         // Activate this theme
         switch_theme($theme_slug);
-    
+
         wp_send_json_success(['theme' => $theme_slug, 'activated' => true]);
-    }    
-    
+    }
+
 
     /**
      * Install & Activate Plugins
      * AJAX action: fb_install_active_plugins
      * Expected $_POST['plugins'] = json_encode([ {slug: 'plugin-slug', version: '1.2.3'}, ... ])
      */
-    public function install_active_plugins() {
+    public function install_active_plugins()
+    {
         $this->check_permission();
 
         $plugins = json_decode(stripslashes($_POST['plugins'] ?? '[]'), true);
@@ -261,7 +274,7 @@ class TemplateLibrary extends AjaxBase {
             if ($need_install) {
                 $download_url = $version ? "https://downloads.wordpress.org/plugin/{$slug}.{$version}.zip" : "https://downloads.wordpress.org/plugin/{$slug}.zip";
 
-                $upgrader = new \Plugin_Upgrader( new \Automatic_Upgrader_Skin() );
+                $upgrader = new \Plugin_Upgrader(new \Automatic_Upgrader_Skin());
                 $install_result = $upgrader->install($download_url);
 
                 if (!$install_result) {
@@ -303,41 +316,42 @@ class TemplateLibrary extends AjaxBase {
 
         wp_send_json_success(['plugins' => $results]);
     }
-    
 
-    public function pages_import() {
+
+    public function pages_import()
+    {
         $this->check_permission();
-    
+
         // Input data
-        $title           = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content         = isset($_POST['content']) ? $_POST['content'] : '';
-        $slug            = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
-        $template        = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
-        $badge           = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
-        $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
+        $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $slug = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
+        $template = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
+        $badge = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
+        $site_url = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
         $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
-    
+
         if (empty($title)) {
             wp_send_json_error(['message' => 'Title is required']);
         }
-    
+
         // Step 1: Update image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
             $content = $this->replace_image_urls($content, $my_domain = trailingslashit($site_url));
         }
-    
+
         // Step 2: Generate unique slug if not provided or duplicate
         if (empty($slug)) {
             $slug = sanitize_title($title);
         }
-    
+
         $original_slug = $slug;
         $suffix = 1;
         while (get_page_by_path($slug)) {
             $slug = $original_slug . '-' . $suffix;
             $suffix++;
         }
-    
+
         // Step 3: Check if page with same title exists → unique title
         $original_title = $title;
         $title_suffix = 1;
@@ -345,25 +359,25 @@ class TemplateLibrary extends AjaxBase {
             $title = $original_title . ' ' . $title_suffix;
             $title_suffix++;
         }
-    
+
         // Step 4: Create page
         $page_id = wp_insert_post([
-            'post_title'   => $title,
-            'post_name'    => $slug,
+            'post_title' => $title,
+            'post_name' => $slug,
             'post_content' => $content,
-            'post_status'  => 'publish',
-            'post_type'    => 'page',
+            'post_status' => 'publish',
+            'post_type' => 'page',
         ], true);
-    
+
         if (is_wp_error($page_id)) {
             wp_send_json_error(['message' => 'Failed to create page: ' . $page_id->get_error_message()]);
         }
-    
+
         // Step 5: Assign template
         if (!empty($template)) {
             update_post_meta($page_id, '_wp_page_template', $template);
         }
-    
+
         // Step 6: Handle badge
         if ($badge === 'front-page' || stripos($title, 'home') !== false || $slug === 'home') {
             update_option('page_on_front', $page_id);
@@ -371,34 +385,36 @@ class TemplateLibrary extends AjaxBase {
         }
         // Future: Add logic for 'blog', 'privacy', etc.
         // Example: if ($badge === 'blog') { update_option('page_for_posts', $page_id); }
-    
+
         // Step 7: Save badge as meta (optional, for future use)
         if (!empty($badge)) {
             update_post_meta($page_id, '_fb_page_badge', $badge);
         }
-    
+
         // Step 8: Insert job (your helper)
         if (class_exists('FrontisBlocks\Utils\Helper')) {
             Helper::insert_job($page_id, $title . '-' . $page_id);
         }
-    
+
         wp_send_json_success([
-            'message'     => 'Page created successfully',
-            'page_id'     => $page_id,
-            'title'       => $title,
-            'slug'        => $slug,
-            'template'    => $template,
-            'badge'       => $badge
+            'message' => 'Page created successfully',
+            'page_id' => $page_id,
+            'title' => $title,
+            'slug' => $slug,
+            'template' => $template,
+            'badge' => $badge
         ]);
     }
 
     /**
      * Replace image URLs from external to local uploads
      */
-    private function replace_image_urls($content, $my_domain) {
+    private function replace_image_urls($content, $my_domain)
+    {
         preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg|avif)/i', $content, $matches);
 
-        if (empty($matches[0])) return $content;
+        if (empty($matches[0]))
+            return $content;
 
         $image_urls = array_unique($matches[0]);
 
@@ -431,23 +447,26 @@ class TemplateLibrary extends AjaxBase {
     /**
      * Check if post exists by title and post type
      */
-    private function post_exists_by_title($title, $post_type = 'page') {
+    private function post_exists_by_title($title, $post_type = 'page')
+    {
         global $wpdb;
         $exists = $wpdb->get_var($wpdb->prepare(
             "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s AND post_status IN ('publish', 'draft', 'private') LIMIT 1",
-            $title, $post_type
+            $title,
+            $post_type
         ));
         return !empty($exists);
     }
-    
-    
-    public function demo_import() {
+
+
+    public function demo_import()
+    {
         if (!isset($_POST['json_data'])) {
             wp_send_json_error('No JSON data found');
             return;
         }
 
-        $data    = json_decode($_POST['json_data'], true);
+        $data = json_decode($_POST['json_data'], true);
         $content = $data['content'] ?? '';
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -458,7 +477,7 @@ class TemplateLibrary extends AjaxBase {
         // Define patterns for img src and background-image
         $patterns = [
             'img' => '/<img[^>]+src=[\'"]([^\'"]+)[\'"][^>]*>/i',
-            'bg'  => '/background-image\s*:\s*url\((["\']?)([^"\')]+)\1\)/i'
+            'bg' => '/background-image\s*:\s*url\((["\']?)([^"\')]+)\1\)/i'
         ];
 
         $all_img_srcs = [];
@@ -484,7 +503,7 @@ class TemplateLibrary extends AjaxBase {
                 continue;
             }
 
-            $body     = wp_remote_retrieve_body($response);
+            $body = wp_remote_retrieve_body($response);
             $filename = basename($img_src);
 
             // Use WordPress functions to handle file uploads
@@ -496,11 +515,11 @@ class TemplateLibrary extends AjaxBase {
 
             // Add image to media library
             $wp_filetype = wp_check_filetype($filename, null);
-            $attachment  = [
+            $attachment = [
                 'post_mime_type' => $wp_filetype['type'],
-                'post_title'     => sanitize_file_name($filename),
-                'post_content'   => '',
-                'post_status'    => 'inherit',
+                'post_title' => sanitize_file_name($filename),
+                'post_content' => '',
+                'post_status' => 'inherit',
             ];
             $attach_id = wp_insert_attachment($attachment, $upload['file']);
 
@@ -517,21 +536,22 @@ class TemplateLibrary extends AjaxBase {
 
         // Process your JSON data here
         wp_send_json_success([
-            'status'   => 'success',
-            'message'  => __('Pattern imported successfully!', 'zoloblocks'),
-            'content'  => $content,
+            'status' => 'success',
+            'message' => __('Pattern imported successfully!', 'frontis-blocks'),
+            'content' => $content,
             'img_srcs' => $img_srcs,
-            'bg_srcs'  => $bg_srcs,
+            'bg_srcs' => $bg_srcs,
         ]);
     }
 
-    function update_site_settings() {
+    function update_site_settings()
+    {
         $this->check_permission();
-    
-        $site_name    = isset($_POST['siteName']) ? sanitize_text_field($_POST['siteName']) : '';
+
+        $site_name = isset($_POST['siteName']) ? sanitize_text_field($_POST['siteName']) : '';
         $site_tagline = isset($_POST['siteTagline']) ? sanitize_text_field($_POST['siteTagline']) : '';
-        $site_logo    = isset($_POST['siteLogo']) ? intval($_POST['siteLogo']) : 0;
-    
+        $site_logo = isset($_POST['siteLogo']) ? intval($_POST['siteLogo']) : 0;
+
         if (!empty($site_name)) {
             update_option('blogname', $site_name);
         }
@@ -541,27 +561,30 @@ class TemplateLibrary extends AjaxBase {
         if (!empty($site_logo)) {
             set_theme_mod('custom_logo', $site_logo);
         }
-    
+
         wp_send_json_success([
             'message' => 'Site settings updated',
             'site' => [
-                'name'     => get_option('blogname'),
-                'tagline'  => get_option('blogdescription'),
-                'logo'     => get_theme_mod('custom_logo'),
+                'name' => get_option('blogname'),
+                'tagline' => get_option('blogdescription'),
+                'logo' => get_theme_mod('custom_logo'),
             ]
         ]);
     }
 
 
-    public function import_headers_footers() {
+    public function import_headers_footers()
+    {
         $this->check_permission();
 
         // JSON decode safely
         $headers = isset($_POST['headers']) ? json_decode(wp_unslash($_POST['headers']), associative: true) : [];
         $footers = isset($_POST['footers']) ? json_decode(wp_unslash($_POST['footers']), associative: true) : [];
 
-        if (!is_array($headers)) $headers = [];
-        if (!is_array($footers)) $footers = [];
+        if (!is_array($headers))
+            $headers = [];
+        if (!is_array($footers))
+            $footers = [];
 
         // PHP 7.0+ compatible merge (no spread operator)
         $header_parts = [];
@@ -592,7 +615,7 @@ class TemplateLibrary extends AjaxBase {
             }
 
             foreach ($part['navigations'] as $nav) {
-                $old_id  = $nav['id'] ?? null;
+                $old_id = $nav['id'] ?? null;
                 $content = $nav['content'] ?? '';
 
                 if (!$old_id || empty($content)) {
@@ -609,11 +632,11 @@ class TemplateLibrary extends AjaxBase {
                 }
 
                 $new_id = wp_insert_post([
-                    'post_title'   => 'Imported Nav ' . $old_id,
-                    'post_name'    => $slug,
+                    'post_title' => 'Imported Nav ' . $old_id,
+                    'post_name' => $slug,
                     'post_content' => $content,
-                    'post_status'  => 'publish',
-                    'post_type'    => 'wp_navigation',
+                    'post_status' => 'publish',
+                    'post_type' => 'wp_navigation',
                 ]);
 
                 if (!is_wp_error($new_id)) {
@@ -625,10 +648,10 @@ class TemplateLibrary extends AjaxBase {
 
         // Step 2: Create/Update Header & Footer
         foreach ($all_parts as $part) {
-            $slug    = $part['slug'] ?? '';
-            $title   = $part['title'] ?? $slug;
+            $slug = $part['slug'] ?? '';
+            $title = $part['title'] ?? $slug;
             $content = $part['content'] ?? '';
-            $area    = $part['area'] ?? 'uncategorized';
+            $area = $part['area'] ?? 'uncategorized';
 
             if (empty($slug)) {
                 continue;
@@ -636,36 +659,38 @@ class TemplateLibrary extends AjaxBase {
 
             // Replace navigation refs
             foreach ($navigation_mapping as $old => $new) {
-                $content = preg_replace('/("ref":\s*)' . preg_quote((string)$old, '/') . '\b/', '$1' . $new, $content);
+                $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
             $existing = get_posts([
-                'post_type'      => 'wp_template_part',
-                'name'           => $slug,
-                'post_status'    => 'publish',
+                'post_type' => 'wp_template_part',
+                'name' => $slug,
+                'post_status' => 'publish',
                 'posts_per_page' => 1,
-                'tax_query'      => [[
-                    'taxonomy' => 'wp_theme',
-                    'field'    => 'slug',
-                    'terms'    => get_stylesheet(),
-                ]],
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'wp_theme',
+                        'field' => 'slug',
+                        'terms' => get_stylesheet(),
+                    ]
+                ],
                 'fields' => 'ids'
             ]);
 
             if (!empty($existing)) {
                 wp_update_post([
-                    'ID'           => $existing[0],
+                    'ID' => $existing[0],
                     'post_content' => $content,
-                    'post_title'   => $title,
+                    'post_title' => $title,
                 ]);
                 $stats['part_skipped']++;
             } else {
                 $id = wp_insert_post([
-                    'post_title'   => $title,
-                    'post_name'    => $slug,
+                    'post_title' => $title,
+                    'post_name' => $slug,
                     'post_content' => $content,
-                    'post_status'  => 'publish',
-                    'post_type'    => 'wp_template_part',
+                    'post_status' => 'publish',
+                    'post_type' => 'wp_template_part',
                 ]);
 
                 if (!is_wp_error($id)) {
@@ -680,48 +705,51 @@ class TemplateLibrary extends AjaxBase {
 
         wp_send_json_success([
             'message' => 'Headers & Footers imported successfully!',
-            'stats'   => $stats,
+            'stats' => $stats,
             'mapping' => $navigation_mapping
         ]);
     }
 
-    public function import_templates() {
+    public function import_templates()
+    {
         $this->check_permission();
 
         $templates = isset($_POST['templates']) ? json_decode(wp_unslash($_POST['templates']), true) : [];
-        $mapping   = isset($_POST['mapping']) ? json_decode(wp_unslash($_POST['mapping']), true) : [];
+        $mapping = isset($_POST['mapping']) ? json_decode(wp_unslash($_POST['mapping']), true) : [];
 
-        if (!is_array($templates)) $templates = [];
+        if (!is_array($templates))
+            $templates = [];
 
         $created = 0;
         $skipped = 0;
 
         foreach ($templates as $tmpl) {
-            $slug    = $tmpl['slug'] ?? '';
-            $title   = $tmpl['title'] ?? $slug;
+            $slug = $tmpl['slug'] ?? '';
+            $title = $tmpl['title'] ?? $slug;
             $content = $tmpl['content'] ?? '';
 
-            if (empty($slug)) continue;
+            if (empty($slug))
+                continue;
 
             foreach ($mapping as $old => $new) {
-                $content = preg_replace('/("ref":\s*)' . preg_quote((string)$old, '/') . '\b/', '$1' . $new, $content);
+                $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
             $existing = get_page_by_path($slug, OBJECT, 'wp_template');
             if ($existing) {
                 wp_update_post([
-                    'ID'           => $existing->ID,
+                    'ID' => $existing->ID,
                     'post_content' => $content,
-                    'post_title'   => $title,
+                    'post_title' => $title,
                 ]);
                 $skipped++;
             } else {
                 $id = wp_insert_post([
-                    'post_title'   => $title,
-                    'post_name'    => $slug,
+                    'post_title' => $title,
+                    'post_name' => $slug,
                     'post_content' => $content,
-                    'post_status'  => 'publish',
-                    'post_type'    => 'wp_template',
+                    'post_status' => 'publish',
+                    'post_type' => 'wp_template',
                 ]);
                 if (!is_wp_error($id)) {
                     wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
@@ -738,12 +766,13 @@ class TemplateLibrary extends AjaxBase {
     }
 
 
-    public function posts_import() {
+    public function posts_import()
+    {
         $this->check_permission();
 
-        $title    = sanitize_text_field($_POST['title'] ?? '');
-        $content  = wp_unslash($_POST['content'] ?? '');
-        $slug     = sanitize_title($_POST['slug'] ?? '');
+        $title = sanitize_text_field($_POST['title'] ?? '');
+        $content = wp_unslash($_POST['content'] ?? '');
+        $slug = sanitize_title($_POST['slug'] ?? '');
         $template = sanitize_text_field($_POST['template'] ?? '');
 
         if (empty($title)) {
@@ -771,13 +800,13 @@ class TemplateLibrary extends AjaxBase {
 
         // Create post
         $post_id = wp_insert_post([
-            'post_title'   => $title,
-            'post_name'    => $slug,
+            'post_title' => $title,
+            'post_name' => $slug,
             'post_content' => $content,
-            'post_status'  => 'publish',
-            'post_type'    => 'post',
-            'post_date'    => current_time('mysql'),
-            'post_date_gmt'=> current_time('mysql', 1),
+            'post_status' => 'publish',
+            'post_type' => 'post',
+            'post_date' => current_time('mysql'),
+            'post_date_gmt' => current_time('mysql', 1),
         ], true);
 
         if (is_wp_error($post_id)) {
@@ -794,10 +823,10 @@ class TemplateLibrary extends AjaxBase {
         }
 
         wp_send_json_success([
-            'message'  => 'Post imported successfully',
-            'post_id'  => $post_id,
-            'title'    => $title,
-            'slug'     => $slug,
+            'message' => 'Post imported successfully',
+            'post_id' => $post_id,
+            'title' => $title,
+            'slug' => $slug,
             'template' => $template ?: 'default'
         ]);
     }

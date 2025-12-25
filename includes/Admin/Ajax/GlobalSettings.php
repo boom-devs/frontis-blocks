@@ -823,10 +823,25 @@ class GlobalSettings extends AjaxBase
                 [
                     'type' => 'string',
                     'show_in_rest' => true,
-                    'default' => ''
+                    'default' => '',
+                    'sanitize_callback' => array($this, 'sanitize_typography_setting')
                 ]
             );
         }
+    }
+
+    /**
+     * Sanitize typography setting value
+     *
+     * @param mixed $value The value to sanitize.
+     * @return mixed Sanitized value.
+     */
+    public function sanitize_typography_setting($value)
+    {
+        if (is_array($value)) {
+            return array_map('sanitize_text_field', $value);
+        }
+        return sanitize_text_field($value);
     }
 
 }
