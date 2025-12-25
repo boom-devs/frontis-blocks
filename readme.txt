@@ -1,4 +1,4 @@
-=== Frontis Blocks – The Ultimate Gutenberg Block Plugin for WordPress ===
+=== Frontis Blocks — Block Library for the Block Editor ===
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
@@ -12,11 +12,11 @@ Enhance your WordPress Gutenberg editor with powerful and flexible custom blocks
 
 == Description ==
 
-**Frontis Blocks — a Gutenberg block** library with **30+ blocks,** global styling, sliders/galleries, CTAs, and map/form integrations, plus **pre-made design** patterns everything you need to launch in minutes with the **best Gutenberg blocks plugin.**
+**Frontis Blocks — a Gutenberg block** library with **30+ blocks,** global styling, sliders/galleries, CTAs, and map/form integrations, plus **pre-made design** patterns everything you need to launch in minutes.
 
 [youtube https://youtu.be/8d0m7ZHNrzI]
 
-**DESIGN BEAUTIFUL, FAST-LOADING WEBSITES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG BLOCK EDITOR) WITH THE BEST GUTENBERG BLOCKS PLUGIN — 30+ BLOCKS, PREMADE DESIGNS, NO CODING.**
+**DESIGN BEAUTIFUL, FAST-LOADING WEBSITES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG BLOCK EDITOR) — 30+ BLOCKS, PREMADE DESIGNS, NO CODING.**
 
 **[You can try a live demo of Frontis](https://app.zipwp.com/wp?plugins=frontis-blocks)**
 
@@ -51,9 +51,9 @@ Now, if you’ve tried big page builders — **Elementor, Divi, WPBakery, Bricks
 - **Starter Designs & Patterns** – Create pages faster with premade sections and layouts, mix, match, and publish faster with a **Gutenberg blocks** workflow.
 - **Global Styling** – Set site-wide defaults (container width, spacing, colors, typography) so every page stays consistent and no extra CSS.
 - **Copy & Paste Styles** – Style a block once, reuse it everywhere. Keep designs uniform and save time across your **Gutenberg block** pages.
-- **Performance & No Lock-In** – Optimized assets and clean markup keep pages fast. Content stays standard based on **Gutenberg blocks,** so you can switch themes or plugin anytime, exactly what you want from the **best Gutenberg blocks plugin.**
+- **Performance & No Lock-In** – Optimized assets and clean markup keep pages fast. Content stays standard based on **Gutenberg blocks,** so you can switch themes or plugin anytime.
 - **Responsive Controls** — Tweak layouts for mobile, tablet, and desktop inside the **WordPress Block Editor.**
-- **Clean, SEO-Friendly Markup** — Semantic structure that helps pages rank (a must for the **best Gutenberg blocks plugin** experience).
+- **Clean, SEO-Friendly Markup** — Semantic structure that helps pages rank.
 - **Theme-Agnostic** — Works with any theme, and pairs smoothly with the Frontis theme if you want extra compatibility.
 - **Real Support & Updates** — Actively improved so your **Gutenberg blocks** stay modern and reliable.
 
@@ -95,7 +95,7 @@ This collection of **block plugins** is curated to fit any project—whether you
 
 == Frontis Blocks + Frontis Theme = Future-Ready WordPress (FSE) ==
 
-**Frontis Blocks** works with any theme, but it works **best** with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
+**Frontis Blocks** works with any theme, and it integrates seamlessly with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
 
 - **One smooth workflow:** Design headers, footers, and templates in the **Gutenberg editor** with the same **Gutenberg blocks** you use for pages.
 - **Perfect fit out of the box:** Global colors, fonts, and spacing from the Frontis Theme match every **Gutenberg block** in Frontis Blocks.
@@ -179,7 +179,7 @@ Yes. Frontis Blocks works great with FSE, and it’s best paired with the Fronti
 Yes. All blocks are responsive. You can adjust spacing, alignment, and layout for mobile, tablet, and desktop.
 
 = Is Frontis Blocks good for SEO? =
-Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It’s built with SEO and performance in mind—what you’d expect from the best Gutenberg blocks plugin experience.
+Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It’s built with SEO and performance in mind.
 
 = Can I switch themes later? =
 Yes. Your content is standard Gutenberg block markup, so you can switch themes or tools anytime—no lock-in.
