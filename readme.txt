@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.4
+Stable tag: 1.1.5
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,6 +197,10 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.5 – 23 december 2025 =
+- **Bug fixsing**
+- When saving a template, the related pages and posts will be in assets generation ( compiling ) mode, so the pages and posts will not appear broken.
 
 = 1.1.4 – 12 december 2025 =
 - **Added**
