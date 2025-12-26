@@ -468,7 +468,9 @@ class Admin
         register_rest_route('custom/v1', '/proxy-image', [
             'methods' => 'GET',
             'callback' => [$this, 'proxy_image'],
-            'permission_callback' => '__return_true', // Adjust permissions as needed
+            'permission_callback' => function () {
+                return current_user_can('edit_posts');
+            },
         ]);
 
         register_rest_route(
@@ -559,7 +561,7 @@ class Admin
             return new WP_Error('invalid_url', 'Invalid or missing URL', ['status' => 400]);
         }
 
-        $response = wp_remote_get($image_url);
+        $response = wp_safe_remote_get($image_url);
         if (is_wp_error($response)) {
             return new WP_Error('fetch_failed', 'Failed to fetch image', ['status' => 500]);
         }
