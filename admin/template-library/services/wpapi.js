@@ -5,7 +5,10 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: `${FB_TLibrary.wordpressSyncApi}/wp-json`,
     prepareHeaders: (headers) => {
-      // Token removed for security - use server-side proxy if authentication needed
+      headers.set(
+        'Authorization',
+        'Bearer nbcnrqfyorftyzpiojzfnjbidchpgnawnifdbnhhbxbuedphusbaunvecxtvvjvnrehznbmccyanndwrjloncuhobjtfbkcazfjtbbvtsuvgiokjknvgrwdwfgfsonbw'
+      );
       headers.set('Content-Type', 'application/json');
       return headers;
     },
