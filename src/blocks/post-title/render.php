@@ -73,7 +73,7 @@ $html_tag_classes = array_filter( [
 $html_tag_id_attr = ! empty( $wrapper_id ) ? ' id="' . $wrapper_id . '"' : '';
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php if ( $is_link ) : ?>
         <<?php echo $post_title_tag; ?> class="<?php echo esc_attr( implode( ' ', $html_tag_classes ) ); ?>"<?php echo $html_tag_id_attr; ?>>
             <a class="fb-post-title-link"

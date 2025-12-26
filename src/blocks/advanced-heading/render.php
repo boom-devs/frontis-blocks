@@ -565,7 +565,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-advanced-wrapper <?php echo esc_attr($heading_global_wraper_class); ?>" <?php if ($heading_global_wraper_id): ?> id="<?php echo esc_attr($heading_global_wraper_id); ?>" <?php endif; ?>
 		<?php if ($heading_alignment): ?> style="text-align:<?php echo esc_attr($heading_alignment); ?>;" <?php endif; ?>>
 

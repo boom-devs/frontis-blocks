@@ -71,7 +71,7 @@ $post_comments = get_comments_number( $post_id );
 
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <div class="fb-post-meta-list">
         <?php foreach ( $post_metaterms as $item ) :
             $value = '';

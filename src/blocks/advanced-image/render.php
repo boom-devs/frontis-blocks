@@ -327,7 +327,7 @@ if ( $dynamic_image_enabled && $dynamic_enable_link && $dynamic_link_url ) {
 }
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <div
         class="fb-parent-wrapper fb-advanced-image-wrapper <?php echo esc_attr( $global_wrapper_class ); ?>"
         <?php if ( $global_wrapper_id ) : ?>

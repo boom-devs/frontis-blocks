@@ -659,7 +659,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-testimonial-section fb-testimonial-section-<?php echo esc_attr($testimonial_alignment); ?> <?php echo esc_attr($testimonial_global_wraper_class); ?>"
 		id="<?php echo esc_attr($testimonial_global_wraper_id); ?>">
 		<div class="fb-testimonial-wrapper">

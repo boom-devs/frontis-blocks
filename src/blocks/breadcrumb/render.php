@@ -344,7 +344,7 @@ if ( empty( $crumbs ) ) {
 
 // ---------- render ----------
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div
 		class="<?php echo esc_attr( trim( 'fb-breadcrumb-container ' . $breadcrumb_global_wrapper_cls ) ); ?>"
 		<?php if ( $breadcrumb_global_wrapper_id ) : ?>

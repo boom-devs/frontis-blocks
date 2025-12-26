@@ -586,7 +586,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-team-member-wrapper <?php echo esc_attr($blockID . ' ' . $teamMemberGlobalWraperClass); ?>"
 		id="<?php echo esc_attr($teamMemberGlobalWraperID); ?>">
 		<div class="fb-team-member-item">

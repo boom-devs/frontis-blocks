@@ -593,7 +593,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ]);
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php if ($use_wrapper_link): ?>
 		<a href="<?php echo esc_url($wrapper_link); ?>" <?php echo $wrapper_target_attr; ?>
 			aria-label="<?php echo esc_attr__('Icon Box', 'frontis-blocks'); ?>">

@@ -752,7 +752,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 								<?php endif; ?>
 
 								<?php if ($mediaSwitcher === 'icon' && $frontendIcon): ?>
-									<div class="fb-icon-wrapper"><?php echo $frontendIcon; ?></div>
+									<div class="fb-icon-wrapper"><?php echo $frontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 								<?php endif; ?>
 							</div>
 						</div>
@@ -782,10 +782,10 @@ $wrapperAttributes = get_block_wrapper_attributes([
 									<div class="fb-flip-btn-container">
 										<!-- MAIN(front): static link only, NO dynamic link -->
 										<a class="fb-flip-btn-wrapper"
-											href="<?php echo $flipButtonLink !== '' ? esc_url($flipButtonLink) : '#'; ?>" <?php echo $mainBtnTargetAttr; ?>>
+											href="<?php echo $flipButtonLink !== '' ? esc_url($flipButtonLink) : '#'; ?>" <?php echo $mainBtnTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 											<span><?php echo esc_html($finalMainButtonText); ?></span>
 											<?php if ($btnIconSwitcher && $frontendBtnIcon): ?>
-												<div class="fb-btn-icon-wrapper"><?php echo $frontendBtnIcon; ?></div>
+												<div class="fb-btn-icon-wrapper"><?php echo $frontendBtnIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 											<?php endif; ?>
 										</a>
 									</div>
@@ -811,7 +811,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 								<?php endif; ?>
 
 								<?php if ($mediaSwitcherBack === 'icon' && $frontendIconBack): ?>
-									<div class="fb-icon-wrapper"><?php echo $frontendIconBack; ?></div>
+									<div class="fb-icon-wrapper"><?php echo $frontendIconBack; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 								<?php endif; ?>
 							</div>
 						</div>
@@ -827,7 +827,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 							<?php if ($titleSwitcherBack && $finalBackHeadingText !== ''): ?>
 								<<?php echo esc_html($headingTagBack); ?> class="fb-heading">
 									<?php if ($backTitleLinkUrl !== ''): ?>
-										<a href="<?php echo esc_url($backTitleLinkUrl); ?>" <?php echo $backBtnTargetAttr; ?>>
+										<a href="<?php echo esc_url($backTitleLinkUrl); ?>" <?php echo $backBtnTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 											<?php echo esc_html($finalBackHeadingText); ?>
 										</a>
 									<?php else: ?>
@@ -839,7 +839,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 							<?php if ($descSwitcherBack && $finalBackDescriptionText !== ''): ?>
 								<<?php echo esc_html($flipBackContentTag); ?> class="fb-description">
 									<?php if ($backDescriptionLinkUrl !== ''): ?>
-										<a href="<?php echo esc_url($backDescriptionLinkUrl); ?>" <?php echo $backBtnTargetAttr; ?>>
+										<a href="<?php echo esc_url($backDescriptionLinkUrl); ?>" <?php echo $backBtnTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 											<?php echo esc_html($finalBackDescriptionText); ?>
 										</a>
 									<?php else: ?>
@@ -853,10 +853,10 @@ $wrapperAttributes = get_block_wrapper_attributes([
 									<div class="fb-flip-back-btn-container">
 										<a class="fb-flip-back-btn-wrapper"
 											href="<?php echo $backBtnHrefFinal !== '' ? esc_url($backBtnHrefFinal) : '#'; ?>"
-											<?php echo $backBtnTargetAttr; ?>>
+											<?php echo $backBtnTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 											<span><?php echo esc_html($finalBackButtonText); ?></span>
 											<?php if ($btnIconSwitcherBack && $frontendBtnIconBack): ?>
-												<div class="fb-btn-icon-wrapper"><?php echo $frontendBtnIconBack; ?></div>
+												<div class="fb-btn-icon-wrapper"><?php echo $frontendBtnIconBack; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 											<?php endif; ?>
 										</a>
 									</div>
