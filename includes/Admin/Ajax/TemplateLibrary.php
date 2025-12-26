@@ -669,6 +669,7 @@ class TemplateLibrary extends AjaxBase
                 $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for template detection
             $existing = get_posts([
                 'post_type' => 'wp_template_part',
                 'name' => $slug,
