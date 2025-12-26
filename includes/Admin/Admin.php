@@ -571,7 +571,7 @@ class Admin
 
         // Set headers and output the image
         header('Content-Type: ' . $content_type);
-        echo $body;
+        echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary image data
         exit;
     }
 
@@ -955,7 +955,7 @@ class Admin
                 $body
             );
 
-            echo $body;
+            echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary image data
             exit;
         }
     }
