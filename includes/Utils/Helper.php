@@ -602,6 +602,7 @@ class Helper
     {
         global $wpdb;
         $table = $site_wide ? $wpdb->base_prefix . 'options' : $wpdb->prefix . 'options';
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from $wpdb->prefix is safe
         $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name));
         return is_object($row);
     }
@@ -862,6 +863,7 @@ class Helper
     public static function get_single_field($post_id, $field)
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Field name is hardcoded
         $query = $wpdb->prepare(
             "SELECT $field FROM $wpdb->posts WHERE ID = %d",
             $post_id
