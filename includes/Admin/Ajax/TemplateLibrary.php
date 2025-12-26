@@ -145,6 +145,12 @@ class TemplateLibrary extends AjaxBase
                     continue;
                 }
 
+                // Security: Skip dangerous file types
+                $dangerous_extensions = array('php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'phar', 'exe', 'sh', 'bat', 'htaccess');
+                $ext = strtolower(pathinfo($file_info['filename'], PATHINFO_EXTENSION));
+                if (in_array($ext, $dangerous_extensions))
+                    continue;
+
                 // Extract file
                 $result = $zip->extractByIndex(
                     $file_info['index'],
