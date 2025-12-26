@@ -193,7 +193,7 @@ class Enqueues
         wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/backend/responsive-css.js', [], FB_VERSION, true);
         wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/backend/swiper/swiper-bundle.min.css', [], FB_VERSION);
         wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/backend/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
-
+        
 
         wp_register_style('frontis-slick-style', FB_PLUGIN_URL . 'assets/css/backend/slick/slick.css', [], FB_VERSION);
         wp_register_style('frontis-slick-theme-style', FB_PLUGIN_URL . 'assets/css/backend/slick/slick-theme.css', [], FB_VERSION);
@@ -206,7 +206,7 @@ class Enqueues
         if ($google_font_url) {
             echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
             echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-            echo '<link rel="preload" as="style" href="' . esc_url($google_font_url) . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
+            echo '<link rel="preload" as="style" href="' . $google_font_url . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
             // echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
         }
     }
