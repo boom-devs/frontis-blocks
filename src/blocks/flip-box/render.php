@@ -734,7 +734,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 ]);
 
 ?>
-<div <?php echo $wrapperAttributes; ?>>
+<div <?php echo $wrapperAttributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-flip-box-wrapper <?php echo esc_attr(trim($blockID . ' ' . $flipBoxGlobalWraperClass)); ?>"
 		id="<?php echo esc_attr($flipBoxGlobalWraperID); ?>">
 		<div class="fb-flipper-wrapper <?php echo esc_attr($flipAnimationType); ?>">
