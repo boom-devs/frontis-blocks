@@ -669,11 +669,16 @@ class Settings extends AjaxBase
 
 				$tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
 
-				$ch = curl_init($icon_url);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-				$data = curl_exec($ch);
+				$response = wp_safe_remote_get($icon_url, array(
+					'timeout' => 60,
+					'sslverify' => true,
+				));
+
+				if (is_wp_error($response)) {
+					continue;
+				}
+
+				$data = wp_remote_retrieve_body($response);
 				file_put_contents($tempZipFile, $data);
 				$zip = new \PclZip($tempZipFile);
 

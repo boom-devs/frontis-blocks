@@ -109,21 +109,22 @@ class TemplateLibrary extends AjaxBase
         $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
 
         try {
-            // Download ZIP
-            $ch = curl_init($zip_url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-            $data = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            // Download ZIP using WordPress safe HTTP API
+            $response = wp_safe_remote_get($zip_url, array(
+                'timeout' => 300,
+                'sslverify' => true,
+            ));
 
-            if (curl_errno($ch))
-                throw new Exception('cURL Error: ' . curl_error($ch));
-            curl_close($ch);
+            if (is_wp_error($response))
+                throw new \Exception('Download Error: ' . $response->get_error_message());
 
-            if ($httpCode !== 200 || !$data)
-                throw new Exception('Failed to download zip file');
+            $httpCode = wp_remote_retrieve_response_code($response);
+            if ($httpCode !== 200)
+                throw new \Exception('Failed to download zip file');
+
+            $data = wp_remote_retrieve_body($response);
+            if (empty($data))
+                throw new \Exception('Downloaded file is empty');
 
             file_put_contents($tempZipFile, $data);
 
@@ -504,7 +505,7 @@ class TemplateLibrary extends AjaxBase
         }
 
         foreach ($all_img_srcs as $img_src) {
-            $response = wp_remote_get($img_src);
+            $response = wp_safe_remote_get($img_src);
             if (is_wp_error($response)) {
                 continue;
             }
