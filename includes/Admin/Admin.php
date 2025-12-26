@@ -938,7 +938,7 @@ class Admin
 
             $response = wp_remote_get($remote_url);
             if (is_wp_error($response)) {
-                wp_die('Proxy request failed: ' . $response->get_error_message());
+                wp_die('Proxy request failed: ' . esc_html( $response->get_error_message() ));
             }
 
             $body = wp_remote_retrieve_body($response);

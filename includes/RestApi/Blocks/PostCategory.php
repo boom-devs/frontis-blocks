@@ -39,12 +39,12 @@ class PostCategory {
         wp_enqueue_media(); // Enqueue WordPress media uploader scripts
         ?>
         <div class="form-field">
-            <label><?php _e('Taxonomy Image', 'frontis-blocks'); ?></label>
+            <label><?php esc_html_e('Taxonomy Image', 'frontis-blocks'); ?></label>
             <div id="taxonomy_image_preview" style="margin-top: 2px;"></div>
-            <button class="button upload-taxonomy-image"><?php _e('Add Image', 'frontis-blocks'); ?></button>
-            <button class="button remove-taxonomy-image" style="display: none;"><?php _e('Remove Image', 'frontis-blocks'); ?></button>
+            <button class="button upload-taxonomy-image"><?php esc_html_e('Add Image', 'frontis-blocks'); ?></button>
+            <button class="button remove-taxonomy-image" style="display: none;"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
             <input type="hidden" name="fb_taxonomy_image" id="fb_taxonomy_image" value="" />
-            <p><?php _e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
+            <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
         </div>
         <script>
             jQuery(document).ready(function($) {
@@ -95,15 +95,15 @@ class PostCategory {
         $remove_style = $image_url ? 'display: inline-block;' : 'display: none;';
         ?>
         <tr class="form-field">
-            <th><label><?php _e('Taxonomy Image', 'frontis-blocks'); ?></label></th>
+            <th><label><?php esc_html_e('Taxonomy Image', 'frontis-blocks'); ?></label></th>
             <td>
                 <div id="taxonomy_image_preview" style="margin-top: 2px;<?php echo esc_attr($preview_style); ?>">
                     <img src="<?php echo esc_url($image_url); ?>" style="max-width: 150px; height: auto; object-fit: cover;" />
                 </div>
-                <button class="button upload-taxonomy-image"><?php _e('Add Image', 'frontis-blocks'); ?></button>
-                <button class="button remove-taxonomy-image" style="<?php echo esc_attr($remove_style); ?>"><?php _e('Remove Image', 'frontis-blocks'); ?></button>
+                <button class="button upload-taxonomy-image"><?php esc_html_e('Add Image', 'frontis-blocks'); ?></button>
+                <button class="button remove-taxonomy-image" style="<?php echo esc_attr($remove_style); ?>"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
                 <input type="hidden" name="fb_taxonomy_image" id="fb_taxonomy_image" value="<?php echo esc_attr($image_url); ?>" />
-                <p><?php _e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
+                <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
             </td>
         </tr>
         <script>
