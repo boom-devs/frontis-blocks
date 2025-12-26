@@ -603,7 +603,7 @@ class Helper
         global $wpdb;
         $table = $site_wide ? $wpdb->base_prefix . 'options' : $wpdb->prefix . 'options';
         // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from $wpdb->prefix is safe
-        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name));
         return is_object($row);
     }
 
@@ -839,7 +839,7 @@ class Helper
           AND post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
           ORDER BY post_date DESC";
 
-        $results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        $results = $wpdb->get_results($query);
 
         if (!empty($results)) {
             return array_map(function ($result) {
@@ -869,7 +869,7 @@ class Helper
             $post_id
         );
 
-        return $wpdb->get_var($query) ?: ''; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        return $wpdb->get_var($query) ?: '';
     }
 
     /**
@@ -1033,7 +1033,7 @@ class Helper
         $table_name = $wpdb->prefix . 'fb_job_schedule';
 
         // check $post_id not exist then insert
-        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id));
         if (!$check_post_id) {
             // update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
             $wpdb->insert(
@@ -1080,7 +1080,7 @@ class Helper
         );
 
         // Execute the query
-        $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        $template_contents = $wpdb->get_results($query);
         return $template_contents;
     }
 
@@ -1112,7 +1112,7 @@ class Helper
         );
 
         // Execute the query
-        $template_id = $wpdb->get_var($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+        $template_id = $wpdb->get_var($query);
 
         return $template_id;
     }
@@ -1148,27 +1148,26 @@ class Helper
      * @param int $template_id
      * @return array
      */
-    public static function resolve_frontis_settings($post_id = 0, $template_id = 0)
-    {
-        $post_id = $post_id ?: get_the_ID();
-        $post_type = get_post_type($post_id);
+    public static function resolve_frontis_settings( $post_id = 0, $template_id = 0 ) {
+        $post_id   = $post_id ?: get_the_ID();
+        $post_type = get_post_type( $post_id );
 
         // Only keep header/footer
         $default_settings = [
             'disableHeader' => false,
             'disableFooter' => false,
-            'disablePageTitle' => false,
+            'disablePageTitle'   => false,
         ];
 
         // Global settings (filtered to only allowed keys)
-        $global_settings = get_option('frontis_theme_options', []);
-        $global_settings = is_array($global_settings) ? $global_settings : [];
-        $global_settings = array_intersect_key($global_settings, $default_settings);
+        $global_settings = get_option( 'frontis_theme_options', [] );
+        $global_settings = is_array( $global_settings ) ? $global_settings : [];
+        $global_settings = array_intersect_key( $global_settings, $default_settings );
 
         $template_settings = [];
-        $page_settings = [];
+        $page_settings     = [];
 
-        if ($post_type === 'wp_template') {
+        if ( $post_type === 'wp_template' ) {
 
             $template_settings = get_post_meta(
                 $post_id,
@@ -1179,9 +1178,9 @@ class Helper
         } else {
 
             // Assigned template ID
-            $template_id = $template_id ?: Helper::get_template_id($post_id);
+            $template_id = $template_id ?: Helper::get_template_id( $post_id );
 
-            if ($template_id) {
+            if ( $template_id ) {
                 $template_settings = get_post_meta(
                     $template_id,
                     '_frontis_template_settings',
@@ -1197,12 +1196,12 @@ class Helper
         }
 
         // Ensure arrays + filter unwanted keys
-        $template_settings = is_array($template_settings)
-            ? array_intersect_key($template_settings, $default_settings)
+        $template_settings = is_array( $template_settings )
+            ? array_intersect_key( $template_settings, $default_settings )
             : [];
 
-        $page_settings = is_array($page_settings)
-            ? array_intersect_key($page_settings, $default_settings)
+        $page_settings = is_array( $page_settings )
+            ? array_intersect_key( $page_settings, $default_settings )
             : [];
 
         // Priority: default → global → template → page
