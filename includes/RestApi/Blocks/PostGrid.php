@@ -502,7 +502,7 @@ class PostGrid {
         /** Start Count total number of records */
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query built dynamically with escaped values
-        $total_records = $wpdb->get_var($count_query);
+        $total_records = $wpdb->get_var($count_query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
         /** Start Calculate total number of pages */
         $total_pages = ceil($total_records / $limit);
@@ -513,7 +513,7 @@ class PostGrid {
         $final_query = $wpdb->prepare($query_with_limit, $limit, $offset);
 
         /** Start Execute the query to get results */
-        $results = $wpdb->get_results($final_query);
+        $results = $wpdb->get_results($final_query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 
 
         $get_custom_permalink = '';
