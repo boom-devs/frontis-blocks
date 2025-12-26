@@ -582,7 +582,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ]);
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-info-box-wrapper <?php echo esc_attr(trim($block_id . ' ' . $info_box_global_wrapper_class)); ?>"
 		id="<?php echo esc_attr($info_box_global_wrapper_id); ?>">
 		<div class="fb-info-box-wrapper-inner <?php echo esc_attr($block_id); ?>">

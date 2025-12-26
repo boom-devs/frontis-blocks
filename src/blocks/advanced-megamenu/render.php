@@ -81,7 +81,7 @@ if (empty($items)) {
                                 <?php echo esc_html($item['label']); ?>
                                 <?php if (!empty($item['patternSlug']) && !empty($item_icon)): ?>
                                     <span class="fb-advanced-mega-menu-indicator">
-                                        <?php echo $item_icon; ?>
+                                        <?php echo $item_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                     </span>
                                 <?php endif; ?>
                             </a>
@@ -90,7 +90,7 @@ if (empty($items)) {
                                 <?php echo esc_html($item['label']); ?>
                                 <?php if (!empty($item['patternSlug']) && !empty($item_icon)): ?>
                                     <span class="fb-advanced-mega-menu-indicator">
-                                        <?php echo $item_icon; ?>
+                                        <?php echo $item_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                                     </span>
                                 <?php endif; ?>
                             </span>

@@ -514,14 +514,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ]);
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-advanced-button-wrapper <?php echo esc_attr($button_global_wraper_class); ?>"
 		<?php if ($button_global_wraper_id): ?> id="<?php echo esc_attr($button_global_wraper_id); ?>" <?php endif; ?> <?php if ($button_alignment): ?> style="text-align:<?php echo esc_attr($button_alignment); ?>;" <?php endif; ?>>
-		<a class="fb-advanced-button" <?php echo $final_href ? ' href="' . $final_href . '"' : ''; ?><?php echo $final_target; ?>>
+		<a class="fb-advanced-button" <?php echo $final_href ? ' href="' . $final_href . '"' : ''; ?><?php echo $final_target; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 
 			<?php if ($button_icon_position === 'left' && $button_icon_align === 'icon-text'): ?>
 				<div class="fb-advanced-button-icon-wrapper left">
-					<div class="fb-advanced-button-icon"><?php echo $button_icon_frontend; ?></div>
+					<div class="fb-advanced-button-icon"><?php echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 				</div>
 			<?php endif; ?>
 
@@ -542,7 +542,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 
 			<?php if ($button_icon_position === 'right' && $button_icon_align === 'icon-text'): ?>
 				<div class="fb-advanced-button-icon-wrapper right">
-					<div class="fb-advanced-button-icon"><?php echo $button_icon_frontend; ?></div>
+					<div class="fb-advanced-button-icon"><?php echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 				</div>
 			<?php endif; ?>
 

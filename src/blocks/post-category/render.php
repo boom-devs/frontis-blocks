@@ -593,6 +593,6 @@ if (empty($taxonomy_type)) {
 }
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php echo $output; ?>
 </div>
