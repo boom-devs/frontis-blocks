@@ -371,7 +371,7 @@ class TemplateLibrary extends AjaxBase
         $page_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => $content,
+            'post_content' => wp_kses_post($content),
             'post_status' => 'publish',
             'post_type' => 'page',
         ], true);
@@ -641,7 +641,7 @@ class TemplateLibrary extends AjaxBase
                 $new_id = wp_insert_post([
                     'post_title' => 'Imported Nav ' . $old_id,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_navigation',
                 ]);
@@ -687,7 +687,7 @@ class TemplateLibrary extends AjaxBase
             if (!empty($existing)) {
                 wp_update_post([
                     'ID' => $existing[0],
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_title' => $title,
                 ]);
                 $stats['part_skipped']++;
@@ -695,7 +695,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template_part',
                 ]);
@@ -746,7 +746,7 @@ class TemplateLibrary extends AjaxBase
             if ($existing) {
                 wp_update_post([
                     'ID' => $existing->ID,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_title' => $title,
                 ]);
                 $skipped++;
@@ -754,7 +754,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template',
                 ]);
@@ -809,7 +809,7 @@ class TemplateLibrary extends AjaxBase
         $post_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => $content,
+            'post_content' => wp_kses_post($content),
             'post_status' => 'publish',
             'post_type' => 'post',
             'post_date' => current_time('mysql'),
