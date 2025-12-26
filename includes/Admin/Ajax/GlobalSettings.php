@@ -804,7 +804,7 @@ class GlobalSettings extends AjaxBase
         if (!empty($styles)) {
             // Add debugging comment
             echo "<!-- Typography styles begin -->\n";
-            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
+            echo "<style id='fb-global-styles'>\n" . wp_kses_post( $styles ) . "\n</style>";
             echo "<!-- Typography styles end -->\n";
         } else {
             // Debug if no styles were found

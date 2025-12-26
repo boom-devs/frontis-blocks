@@ -988,7 +988,7 @@ class PostGrid {
                                 // end dots
                                 if ($current_page < $total_pages - ($range + 2)) {
                                     echo '<span class="fb_pagination_ellipsis">...</span>';
-                                    echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
+                                    echo '<button class="fb_pagination_item" data-pagenumber="' . esc_attr( $total_pages ) . '">' . esc_attr( $total_pages ) . '</button>';
                                 }
                             }
                             echo '</div>';
