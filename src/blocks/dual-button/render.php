@@ -512,7 +512,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 
 /* ---------- render ---------- */
 ?>
-<div <?php echo $wrapperAttributes; ?>>
+<div <?php echo $wrapperAttributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php
 		$containerWrapperClasses = trim('fb-parent-wrapper fb-dual-button-container ' . $blockID . ' ' . $dualButtonGlobalWraperClass);
 		$flexDirWrapper  = ($buttonsDirection === 'vertical') ? 'row' : 'column'; 
