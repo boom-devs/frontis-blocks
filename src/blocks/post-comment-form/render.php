@@ -264,7 +264,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                 <?php if ($show_comments_count) : ?>
                     <span><?php echo esc_html($comments_count); ?></span>
                 <?php endif; ?>
-                <?php printf(_n('Comment', 'Comments', $comments_count, 'frontis-blocks')); ?>
+                <?php /* translators: %d: number of comments */ printf(_n('Comment', 'Comments', $comments_count, 'frontis-blocks')); ?>
             </h3>
         <?php endif; ?>
 

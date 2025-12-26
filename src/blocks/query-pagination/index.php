@@ -23,7 +23,7 @@ function render_block_core_query_pagination( $attributes, $content ) {
 	$classes            = ( isset( $attributes['style']['elements']['link']['color']['text'] ) ) ? 'has-link-color' : '';
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'aria-label' => __( 'Pagination' ),
+			'aria-label' => __( 'Pagination', 'frontis-blocks' ),
 			'class'      => $classes,
 		)
 	);
