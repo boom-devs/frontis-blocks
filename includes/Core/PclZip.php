@@ -218,7 +218,7 @@ define( 'PCLZIP_CB_POST_DELETE', 78008 );
 
 			// ----- Tests the zlib
 			if (!function_exists('gzopen')) {
-				die('Abort ' . basename(__FILE__) . ' : Missing zlib extensions');
+				die('Abort ' . esc_html( basename(__FILE__) ) . ' : Missing zlib extensions');
 			}
 
 			// ----- Set the attributes
@@ -3917,7 +3917,7 @@ define( 'PCLZIP_CB_POST_DELETE', 78008 );
 						$v_buffer = @fread($this->zip_fd, $p_entry['compressed_size']);
 
 						// ----- Send the file to the output
-						echo $v_buffer;
+						echo $v_buffer; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary data output
 						unset($v_buffer);
 					} else {
 
@@ -3929,7 +3929,7 @@ define( 'PCLZIP_CB_POST_DELETE', 78008 );
 						unset($v_buffer);
 
 						// ----- Send the file to the output
-						echo $v_file_content;
+						echo $v_file_content; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary data output
 						unset($v_file_content);
 					}
 				}
