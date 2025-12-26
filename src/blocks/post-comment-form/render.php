@@ -254,7 +254,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
         <!-- Comment Count -->
         <!-- <?php if ($show_comment_title && $comments_count > 0) : ?>
             <h3 class="fb-comment-count-title">
-                <?php printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); ?>
+                <?php /* translators: %d: number of comments */ printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); ?>
             </h3>
         <?php endif; ?> -->
 
