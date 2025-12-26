@@ -266,6 +266,7 @@ class Blocks
 		$template    = get_block_template($template_id, 'wp_template');
 	
 		// Template parts
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for theme template parts
 		$template_part_posts = get_posts(
 			array(
 				'post_type'     => 'wp_template_part',

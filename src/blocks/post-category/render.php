@@ -202,7 +202,7 @@ if ($taxonomy_type) {
     if ($selection_type === 'include' && !empty($include_taxonomies)) {
         $args['include'] = $include_taxonomies;
     } elseif ($selection_type === 'exclude' && !empty($exclude_taxonomies)) {
-        $args['exclude'] = $exclude_taxonomies;
+        $args['exclude'] = $exclude_taxonomies; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
     }
 
     $taxonomy_terms = get_terms($args);
