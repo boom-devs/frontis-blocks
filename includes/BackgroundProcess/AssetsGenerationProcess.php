@@ -128,7 +128,7 @@ class AssetsGenerationProcess {
         if (!isset($schedules['every_minute'])) {
             $schedules['every_minute'] = [
                 'interval' => 60,
-                'display' => __('Every Minute')
+                'display' => __('Every Minute', 'frontis-blocks')
             ];
         }
         return $schedules;
