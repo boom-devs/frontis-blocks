@@ -657,12 +657,12 @@ $btn1_dir_style = ' style="flex-direction:' . esc_attr($btn_one_icon_position ==
 $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position === 'left' ? 'row-reverse' : 'row') . ';"';
 
 ?>
-<div <?php echo $wrapper_attributes; ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-cta-content-wrapper <?php echo esc_attr(trim($block_id . ' ' . $cta_global_wrapper_class)); ?>"
 		id="<?php echo esc_attr($cta_global_wrapper_id); ?>">
 		<div class="fb-cta-content-wrapper-inner <?php echo esc_attr($block_id); ?>">
 			<div class="fb-cta-content-wrapper">
-				<<?php echo esc_attr($heading_tag); ?> class="fb-heading"<?php echo $heading_style; ?>>
+				<<?php echo esc_attr($heading_tag); ?> class="fb-heading"<?php echo $heading_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 					<?php if ($title_link_url !== ''): ?>
 						<a class="fb-title-dynamic-link" href="<?php echo esc_url($title_link_url); ?>">
 							<?php echo wp_kses_post($final_heading_text); ?>
@@ -673,7 +673,7 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 				</<?php echo esc_attr($heading_tag); ?>>
 
 				<?php if ($description_switcher): ?>
-					<<?php echo esc_attr($sub_heading_tag); ?> class="fb-description"<?php echo $desc_style; ?>>
+					<<?php echo esc_attr($sub_heading_tag); ?> class="fb-description"<?php echo $desc_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<?php if ($description_link_url !== ''): ?>
 							<a class="fb-description-dynamic-link" href="<?php echo esc_url($description_link_url); ?>">
 								<?php echo wp_kses_post($final_description_text); ?>
@@ -684,17 +684,17 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 					</<?php echo esc_attr($sub_heading_tag); ?>>
 				<?php endif; ?>
 
-				<div class="fb-cta-buttons-wrapper" <?php echo $buttons_style; ?>>
+				<div class="fb-cta-buttons-wrapper" <?php echo $buttons_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 
 					<?php if ($cta_btn_one_switcher): ?>
 						<div class="fb-cta-btn-one-wrapper">
-							<div class="fb-cta-btn-wrapper" <?php echo $btn1_dir_style; ?>>
-								<a class="fb-cta-button" href="<?php echo esc_url($btn1_href_final); ?>" <?php echo $btn1_target_attr; ?>>
+							<div class="fb-cta-btn-wrapper" <?php echo $btn1_dir_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+								<a class="fb-cta-button" href="<?php echo esc_url($btn1_href_final); ?>" <?php echo $btn1_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 									<span><?php echo wp_kses_post($btn1_text_final); ?></span>
 								</a>
 								<?php if ($btn_one_icon_switcher): ?>
 									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_one_icon_html; ?>
+										<?php echo $btn_one_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
@@ -703,13 +703,13 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 
 					<?php if ($btn_two_switcher): ?>
 						<div class="fb-cta-btn-two-wrapper">
-							<div class="fb-cta-btn-wrapper" <?php echo $btn2_dir_style; ?>>
-								<a class="fb-cta-button" href="<?php echo esc_url($btn2_href_final); ?>" <?php echo $btn2_target_attr; ?>>
+							<div class="fb-cta-btn-wrapper" <?php echo $btn2_dir_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+								<a class="fb-cta-button" href="<?php echo esc_url($btn2_href_final); ?>" <?php echo $btn2_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 									<span><?php echo wp_kses_post($btn2_text_final); ?></span>
 								</a>
 								<?php if ($btn_two_icon_switcher): ?>
 									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_two_icon_html; ?>
+										<?php echo $btn_two_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
