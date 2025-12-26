@@ -501,6 +501,7 @@ class PostGrid {
 
         /** Start Count total number of records */
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query built dynamically with escaped values
         $total_records = $wpdb->get_var($count_query);
 
         /** Start Calculate total number of pages */
