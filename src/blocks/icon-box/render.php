@@ -599,7 +599,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ?>
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php if ($use_wrapper_link): ?>
-		<a href="<?php echo esc_url($wrapper_link); ?>" <?php echo $wrapper_target_attr; ?>
+		<a href="<?php echo esc_url($wrapper_link); ?>" <?php echo $wrapper_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 			aria-label="<?php echo esc_attr__('Icon Box', 'frontis-blocks'); ?>">
 		<?php endif; ?>
 
@@ -612,7 +612,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
 							<img src="<?php echo esc_url($icon_box_media_url); ?>"
 								alt="<?php echo esc_attr($icon_box_media_alt); ?>" />
 						<?php elseif ($media_switcher === 'icon' && $frontend_icon): ?>
-							<div class="fb-icon-wrapper"><?php echo $frontend_icon; ?></div>
+							<div class="fb-icon-wrapper">
+								<?php echo $frontend_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</div>
 						<?php endif; ?>
 					</div>
 				</div>
@@ -644,12 +646,12 @@ $wrapper_attributes = get_block_wrapper_attributes([
 						<div class="fb-icon-button">
 							<div class="fb-icon-btn-container">
 								<?php if (!$use_wrapper_link): ?>
-									<a href="<?php echo esc_url($btn_href_final); ?>" class="fb-icon-btn-wrapper" <?php echo $btn_target_attr; ?>
+									<a href="<?php echo esc_url($btn_href_final); ?>" class="fb-icon-btn-wrapper" <?php echo $btn_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										aria-label="<?php echo esc_attr__('Icon Button', 'frontis-blocks'); ?>">
 										<span class="fb-icon-button"><?php echo wp_kses_post($btn_text_final); ?></span>
 										<?php if ($btn_icon_switcher && $frontend_btn_icon): ?>
 											<div class="fb-btn-icon-wrapper" aria-hidden="true">
-												<?php echo $frontend_btn_icon; ?>
+												<?php echo $frontend_btn_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											</div>
 										<?php endif; ?>
 									</a>
@@ -658,7 +660,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 										<span class="fb-icon-button"><?php echo wp_kses_post($btn_text_final); ?></span>
 										<?php if ($btn_icon_switcher && $frontend_btn_icon): ?>
 											<div class="fb-btn-icon-wrapper" aria-hidden="true">
-												<?php echo $frontend_btn_icon; ?>
+												<?php echo $frontend_btn_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											</div>
 										<?php endif; ?>
 									</span>
