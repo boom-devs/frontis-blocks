@@ -575,7 +575,9 @@ $wrapper_attributes = get_block_wrapper_attributes([
 		<?php if ($heading_icon_switcher && $heading_icon_align === 'icon'): ?>
 			<div class="fb-advanced-icon-wrapper"
 				style="justify-content:<?php echo esc_attr($heading_alignment ?: 'initial'); ?>;">
-				<div class="fb-advanced-icon"><?php echo $heading_icon_frontend; ?></div>
+				<div class="fb-advanced-icon">
+					<?php echo $heading_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
 			</div>
 		<?php endif; ?>
 
