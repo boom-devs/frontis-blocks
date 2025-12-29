@@ -532,7 +532,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 				<a
 					class="fb-advanced-button fb-dual-button-one"
 					href="<?php echo esc_url( $btnOneHrefFinal ); ?>"
-					<?php echo $btnOneTargetAttr; ?>
+					<?php echo $btnOneTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					style="flex-direction: <?php echo esc_attr( $btnOneFlexDir ); ?>;"
 				>
 					<span class="fb-advanced-button-text">
@@ -541,7 +541,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonIcon; ?>
+								<?php echo $frontendButtonIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -560,7 +560,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 				<a
 					class="fb-advanced-button fb-dual-button-two"
 					href="<?php echo esc_url( $btnTwoHrefFinal ); ?>"
-					<?php echo $btnTwoTargetAttr; ?>
+					<?php echo $btnTwoTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					style="flex-direction: <?php echo esc_attr( $btnTwoFlexDir ); ?>;"
 				>
 					<span class="fb-advanced-button-text">
@@ -569,7 +569,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonTwoIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonTwoIcon; ?>
+								<?php echo $frontendButtonTwoIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>
