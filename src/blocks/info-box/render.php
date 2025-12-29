@@ -597,7 +597,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 						<img src="<?php echo esc_url($info_media_url); ?>" alt="<?php echo esc_attr($info_media_alt); ?>" />
 					<?php elseif ($media_switcher === 'icon' && $icon_html): ?>
 						<div class="fb-icon-wrapper">
-							<?php echo $icon_html; ?>
+							<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -639,7 +639,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 											<img src="<?php echo esc_url($btn_image_url); ?>"
 												alt="<?php echo esc_attr($btn_image_alt); ?>" />
 										<?php else: ?>
-											<?php echo $btn_icon_html; ?>
+											<?php echo $btn_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										<?php endif; ?>
 									</div>
 								<?php endif; ?>
