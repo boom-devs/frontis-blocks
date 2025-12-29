@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Utils\Helper;
 
 /* ---------- helpers ---------- */

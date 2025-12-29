@@ -1,19 +1,25 @@
 <?php
 namespace FrontisBlocks\RestApi\Blocks;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use WP_REST_Response;
 use WP_Error;
 use WP_REST_Request;
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 
-class PostCategory {
+class PostCategory
+{
     use Singleton;
 
     /**
      * Constructor: Register hooks for taxonomy image and REST API.
      */
-    public function __construct() {
+    public function __construct()
+    {
         // Get all taxonomies with show_ui = true
         $taxonomies = get_taxonomies(['show_ui' => true], 'names');
 
@@ -35,26 +41,29 @@ class PostCategory {
      * Add image upload field to taxonomy add screen (only buttons, no input).
      * @param string $taxonomy The taxonomy slug.
      */
-    public function add_taxonomy_image_field($taxonomy) {
+    public function add_taxonomy_image_field($taxonomy)
+    {
         wp_enqueue_media(); // Enqueue WordPress media uploader scripts
         ?>
         <div class="form-field">
             <label><?php esc_html_e('Taxonomy Image', 'frontis-blocks'); ?></label>
             <div id="taxonomy_image_preview" style="margin-top: 2px;"></div>
             <button class="button upload-taxonomy-image"><?php esc_html_e('Add Image', 'frontis-blocks'); ?></button>
-            <button class="button remove-taxonomy-image" style="display: none;"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
+            <button class="button remove-taxonomy-image"
+                style="display: none;"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
             <input type="hidden" name="fb_taxonomy_image" id="fb_taxonomy_image" value="" />
-            <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
+            <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?>
+            </p>
         </div>
         <script>
-            jQuery(document).ready(function($) {
-                $('.upload-taxonomy-image').click(function(e) {
+            jQuery(document).ready(function ($) {
+                $('.upload-taxonomy-image').click(function (e) {
                     e.preventDefault();
                     var uploader = wp.media({
                         title: 'Select Taxonomy Image',
                         button: { text: 'Select Image' },
                         multiple: false
-                    }).on('select', function() {
+                    }).on('select', function () {
                         var attachment = uploader.state().get('selection').first().toJSON();
                         $('#fb_taxonomy_image').val(attachment.url);
                         $('#taxonomy_image_preview').html(`<img src="${attachment.url}" style="max-width: 124px; height: auto; object-fit: cover;" />`);
@@ -62,15 +71,15 @@ class PostCategory {
                     }).open();
                 });
 
-                $('.remove-taxonomy-image').click(function(e) {
+                $('.remove-taxonomy-image').click(function (e) {
                     e.preventDefault();
                     $('#fb_taxonomy_image').val('');
                     $('#taxonomy_image_preview').empty();
                     $(this).hide();
                 });
 
-                    // ===== Reset image when category is added =====
-                $(document).ajaxComplete(function(event, xhr, settings) {
+                // ===== Reset image when category is added =====
+                $(document).ajaxComplete(function (event, xhr, settings) {
                     if (settings.data && settings.data.indexOf("action=add-tag") !== -1) {
                         $('#fb_taxonomy_image').val('');
                         $('#taxonomy_image_preview').empty();
@@ -88,7 +97,8 @@ class PostCategory {
      * @param WP_Term $term The term object.
      * @param string $taxonomy The taxonomy slug.
      */
-    public function edit_taxonomy_image_field($term, $taxonomy) {
+    public function edit_taxonomy_image_field($term, $taxonomy)
+    {
         wp_enqueue_media();
         $image_url = get_term_meta($term->term_id, 'fb_taxonomy_image', true);
         $preview_style = $image_url ? '' : 'display: none;';
@@ -101,20 +111,23 @@ class PostCategory {
                     <img src="<?php echo esc_url($image_url); ?>" style="max-width: 150px; height: auto; object-fit: cover;" />
                 </div>
                 <button class="button upload-taxonomy-image"><?php esc_html_e('Add Image', 'frontis-blocks'); ?></button>
-                <button class="button remove-taxonomy-image" style="<?php echo esc_attr($remove_style); ?>"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
-                <input type="hidden" name="fb_taxonomy_image" id="fb_taxonomy_image" value="<?php echo esc_attr($image_url); ?>" />
-                <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?></p>
+                <button class="button remove-taxonomy-image"
+                    style="<?php echo esc_attr($remove_style); ?>"><?php esc_html_e('Remove Image', 'frontis-blocks'); ?></button>
+                <input type="hidden" name="fb_taxonomy_image" id="fb_taxonomy_image"
+                    value="<?php echo esc_attr($image_url); ?>" />
+                <p><?php esc_html_e('Upload a featured image to visually represent this category in the Post Category Block, enhancing both clarity and visual appeal in your Frontis-powered site.', 'frontis-blocks'); ?>
+                </p>
             </td>
         </tr>
         <script>
-            jQuery(document).ready(function($) {
-                $('.upload-taxonomy-image').click(function(e) {
+            jQuery(document).ready(function ($) {
+                $('.upload-taxonomy-image').click(function (e) {
                     e.preventDefault();
                     var uploader = wp.media({
                         title: 'Select Taxonomy Image',
                         button: { text: 'Select Image' },
                         multiple: false
-                    }).on('select', function() {
+                    }).on('select', function () {
                         var attachment = uploader.state().get('selection').first().toJSON();
                         $('#fb_taxonomy_image').val(attachment.url);
                         $('#taxonomy_image_preview').html(`<img src="${attachment.url}" style="max-width: 150px; height: auto;" />`).show();
@@ -122,7 +135,7 @@ class PostCategory {
                     }).open();
                 });
 
-                $('.remove-taxonomy-image').click(function(e) {
+                $('.remove-taxonomy-image').click(function (e) {
                     e.preventDefault();
                     $('#fb_taxonomy_image').val('');
                     $('#taxonomy_image_preview').empty().hide();
@@ -139,7 +152,8 @@ class PostCategory {
      * @param int $term_id The term ID.
      * @param int $tt_id The term taxonomy ID.
      */
-    public function save_taxonomy_image($term_id, $tt_id) {
+    public function save_taxonomy_image($term_id, $tt_id)
+    {
         // Save only fb_taxonomy_image meta, ignore other image meta (e.g., category_image)
         if (isset($_POST['fb_taxonomy_image'])) {
             update_term_meta($term_id, 'fb_taxonomy_image', esc_url_raw($_POST['fb_taxonomy_image']));
@@ -149,7 +163,8 @@ class PostCategory {
     /**
      * Extend REST API to include fb_taxonomy_image field for all taxonomies.
      */
-    public function register_taxonomy_image_field() {
+    public function register_taxonomy_image_field()
+    {
         $taxonomies = get_taxonomies(['show_ui' => true], 'names');
         foreach ($taxonomies as $taxonomy) {
             register_rest_field($taxonomy, 'fb_taxonomy_image', [
