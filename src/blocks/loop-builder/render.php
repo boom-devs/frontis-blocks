@@ -178,7 +178,7 @@ if (!function_exists('render_loop_builder')):
 									$wrapper_inner_blocks = $inner_block['innerBlocks'] ?? [];
 									foreach ($wrapper_inner_blocks as $wrapper_inner_block):
 										$wrapper_inner_block['context'] = ['postId' => get_the_ID()];
-										echo render_block($wrapper_inner_block);
+										echo render_block($wrapper_inner_block); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									endforeach;
 								endif;
 							endforeach;
@@ -256,7 +256,7 @@ if (!function_exists('render_loop_builder')):
 
 							<?php if ($has_nums && !empty($number_links)): ?>
 								<div class="fb-page-numbers">
-									<?php echo implode('', $number_links); ?>
+									<?php echo implode('', $number_links); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 							<?php endif; ?>
 
