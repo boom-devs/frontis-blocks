@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Utils\Helper;
 
 // ---------- helpers ----------
@@ -67,62 +71,62 @@ if (!function_exists('fb_humanize_date')) {
 						case 'year':
 							/* translators: %d: number of years */
 							/* translators: %d: number of years */
-						return sprintf(_n('%d year ago', '%d years ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d year ago', '%d years ago', $v, 'frontis-blocks'), $v);
 						case 'month':
 							/* translators: %d: number of months */
 							/* translators: %d: number of months */
-						return sprintf(_n('%d month ago', '%d months ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d month ago', '%d months ago', $v, 'frontis-blocks'), $v);
 						case 'week':
 							/* translators: %d: number of weeks */
 							/* translators: %d: number of weeks */
-						return sprintf(_n('%d week ago', '%d weeks ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d week ago', '%d weeks ago', $v, 'frontis-blocks'), $v);
 						case 'day':
 							/* translators: %d: number of days */
 							/* translators: %d: number of days */
-						return sprintf(_n('%d day ago', '%d days ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d day ago', '%d days ago', $v, 'frontis-blocks'), $v);
 						case 'hour':
 							/* translators: %d: number of hours */
 							/* translators: %d: number of hours */
-						return sprintf(_n('%d hour ago', '%d hours ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d hour ago', '%d hours ago', $v, 'frontis-blocks'), $v);
 						case 'minute':
 							/* translators: %d: number of minutes */
 							/* translators: %d: number of minutes */
-						return sprintf(_n('%d minute ago', '%d minutes ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d minute ago', '%d minutes ago', $v, 'frontis-blocks'), $v);
 						case 'second':
 							/* translators: %d: number of seconds */
 							/* translators: %d: number of seconds */
-						return sprintf(_n('%d second ago', '%d seconds ago', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('%d second ago', '%d seconds ago', $v, 'frontis-blocks'), $v);
 					}
 				} else {
 					switch ($u) {
 						case 'year':
 							/* translators: %d: number of years */
 							/* translators: %d: number of years */
-						return sprintf(_n('in %d year', 'in %d years', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d year', 'in %d years', $v, 'frontis-blocks'), $v);
 						case 'month':
 							/* translators: %d: number of months */
 							/* translators: %d: number of months */
-						return sprintf(_n('in %d month', 'in %d months', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d month', 'in %d months', $v, 'frontis-blocks'), $v);
 						case 'week':
 							/* translators: %d: number of weeks */
 							/* translators: %d: number of weeks */
-						return sprintf(_n('in %d week', 'in %d weeks', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d week', 'in %d weeks', $v, 'frontis-blocks'), $v);
 						case 'day':
 							/* translators: %d: number of days */
 							/* translators: %d: number of days */
-						return sprintf(_n('in %d day', 'in %d days', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d day', 'in %d days', $v, 'frontis-blocks'), $v);
 						case 'hour':
 							/* translators: %d: number of hours */
 							/* translators: %d: number of hours */
-						return sprintf(_n('in %d hour', 'in %d hours', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d hour', 'in %d hours', $v, 'frontis-blocks'), $v);
 						case 'minute':
 							/* translators: %d: number of minutes */
 							/* translators: %d: number of minutes */
-						return sprintf(_n('in %d minute', 'in %d minutes', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d minute', 'in %d minutes', $v, 'frontis-blocks'), $v);
 						case 'second':
 							/* translators: %d: number of seconds */
 							/* translators: %d: number of seconds */
-						return sprintf(_n('in %d second', 'in %d seconds', $v, 'frontis-blocks'), $v);
+							return sprintf(_n('in %d second', 'in %d seconds', $v, 'frontis-blocks'), $v);
 					}
 				}
 			}
@@ -566,8 +570,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ?>
 
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-	<div class="fb-parent-wrapper fb-advanced-wrapper <?php echo esc_attr($heading_global_wraper_class); ?>" <?php if ($heading_global_wraper_id): ?> id="<?php echo esc_attr($heading_global_wraper_id); ?>" <?php endif; ?>
-		<?php if ($heading_alignment): ?> style="text-align:<?php echo esc_attr($heading_alignment); ?>;" <?php endif; ?>>
+	<div class="fb-parent-wrapper fb-advanced-wrapper <?php echo esc_attr($heading_global_wraper_class); ?>" <?php if ($heading_global_wraper_id): ?> id="<?php echo esc_attr($heading_global_wraper_id); ?>" <?php endif; ?> <?php if ($heading_alignment): ?> style="text-align:<?php echo esc_attr($heading_alignment); ?>;" <?php endif; ?>>
 
 		<?php if ($heading_icon_switcher && $heading_icon_align === 'icon'): ?>
 			<div class="fb-advanced-icon-wrapper"

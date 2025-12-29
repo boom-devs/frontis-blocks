@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 
@@ -13,85 +17,86 @@ use FrontisBlocks\Utils\Helper;
 class BlocksAjax extends AjaxBase
 {
 
-	use Singleton;
+    use Singleton;
 
-	public function __construct()
-	{
+    public function __construct()
+    {
 
-	}
-	/**
-	 * register_global_settings_events
-	 *
-	 * @return void
-	 */
-	public function register_blocks_ajax_events()
-	{
-		$events = [
-			'get_post'
-		];
+    }
+    /**
+     * register_global_settings_events
+     *
+     * @return void
+     */
+    public function register_blocks_ajax_events()
+    {
+        $events = [
+            'get_post'
+        ];
 
-		$this->init_ajax_events($events);
-	}
+        $this->init_ajax_events($events);
+    }
 
-	/**
-	 * handle_option_update
-	 *
-	 * @param string $option_name
-	 * @param string $type
-	 * @return void
-	 */
-	private function check_authorized()
-	{
-		$this->validate_nonce();
-		$this->validate_permissions();
-	}
+    /**
+     * handle_option_update
+     *
+     * @param string $option_name
+     * @param string $type
+     * @return void
+     */
+    private function check_authorized()
+    {
+        $this->validate_nonce();
+        $this->validate_permissions();
+    }
 
-	/**
-	 * validate_nonce
-	 *
-	 * @return void
-	 */
-	private function validate_nonce()
-	{
-		if (!wp_verify_nonce($_POST['security'], 'fb_block_nonce')) {
-			wp_send_json_error('Invalid nonce');
-		}
-	}
+    /**
+     * validate_nonce
+     *
+     * @return void
+     */
+    private function validate_nonce()
+    {
+        if (!wp_verify_nonce($_POST['security'], 'fb_block_nonce')) {
+            wp_send_json_error('Invalid nonce');
+        }
+    }
 
-	/**
-	 * check permissions
-	 *
-	 * @return void
-	 */
-	private function validate_permissions()
-	{
-		if (!current_user_can('manage_options')) {
-			wp_send_json_error('Insufficient permissions');
-		}
-	}
+    /**
+     * check permissions
+     *
+     * @return void
+     */
+    private function validate_permissions()
+    {
+        if (!current_user_can('manage_options')) {
+            wp_send_json_error('Insufficient permissions');
+        }
+    }
 
-	public function get_post() {
-		$this->check_authorized();
+    public function get_post()
+    {
+        $this->check_authorized();
 
         // Data source is post type
         if ($_POST['data_source'] === 'post_type') {
             switch ($_POST['source_field']) {
                 // Post group fields
                 case 'post_title':
-                    $post_title =  Helper::get_single_field($_POST['post_id'], 'post_title');
+                    $post_title = Helper::get_single_field($_POST['post_id'], 'post_title');
                     $data = array(
                         'post_title' => $post_title,
                     );
                     Helper::json_success($data);
                 case 'post_excerpt':
-                    $post_excerpt =  Helper::get_single_field($_POST['post_id'], 'post_excerpt');
+                    $post_excerpt = Helper::get_single_field($_POST['post_id'], 'post_excerpt');
                     $data = array(
                         'post_excerpt' => $post_excerpt,
                     );
                     Helper::json_success($data);
                 case 'featured_image':
                     $thumbnail_id = get_post_meta($_POST['post_id'], '_thumbnail_id', true);
-                    $attachment_url =  $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '';
+                    $attachment_url = $thumbnail_id ? wp_get_attachment_url($thumbnail_id) : '';
                     $data = array(
                         'featured_image' => $attachment_url,
                     );
@@ -155,5 +160,5 @@ class BlocksAjax extends AjaxBase
                     return '';
             }
         }
-	}
+    }
 }

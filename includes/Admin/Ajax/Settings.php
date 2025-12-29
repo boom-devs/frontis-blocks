@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Assets\AssetsGenerator;

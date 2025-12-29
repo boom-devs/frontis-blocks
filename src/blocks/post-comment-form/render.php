@@ -3,6 +3,10 @@
  * Server-side rendering for the Post Comment Form block
  */
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 if ( ! function_exists( 'fb_norm_str' ) ) {
     function fb_norm_str( $val, $default = '' ) {
         if ( is_array( $val ) ) {
