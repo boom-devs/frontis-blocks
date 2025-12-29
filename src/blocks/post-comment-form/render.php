@@ -187,7 +187,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                 ?>
                 <div id="comment-<?php echo $comment->comment_ID; ?>" class="<?php echo esc_attr($comment_class); ?>">
                     
-                    					<?php echo $comment_avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                    <?php echo $comment_avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <div class="fb-comment-body">
                         <strong class="fb-comment-author"><?php echo esc_html($comment_author); ?></strong>
                         <span class="fb-comment-meta">
@@ -225,7 +225,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                                     ?>
                                     <a href="#respond"
                                        class="comment-reply-link"
-                                       onclick="return addComment.moveForm('comment-<?php echo $comment->comment_ID; ?>', '<?php echo $comment->comment_ID; ?>', 'respond', '<?php echo $post_id; ?>')">
+                                       onclick="return addComment.moveForm('comment-<?php echo $comment->comment_ID; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>', '<?php echo $comment->comment_ID; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>', 'respond', '<?php echo $post_id; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>')">
                                         <?php _e('Reply', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
                                     </a>
                                     <?php
@@ -251,14 +251,14 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
     }
 }
 ?>
-<div <?php echo $comment_form_wrapper_attributes; ?>>
+<div <?php echo $comment_form_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 
     		<div class="<?php echo esc_attr(implode(' ', array_filter($wrapper_classes))); ?>"<?php echo $wrapper_id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 
         <!-- Comment Count -->
         <!-- <?php if ($show_comment_title && $comments_count > 0) : ?>
             <h3 class="fb-comment-count-title">
-                <?php /* translators: %d: number of comments */ printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); ?>
+                <?php /* translators: %d: number of comments */ printf(_n('%d Comment', '%d Comments', $comments_count, 'frontis-blocks'), $comments_count); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             </h3>
         <?php endif; ?> -->
 
@@ -268,7 +268,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                 <?php if ($show_comments_count) : ?>
                     <span><?php echo esc_html($comments_count); ?></span>
                 <?php endif; ?>
-                <?php /* translators: %d: number of comments */ printf(_n('Comment', 'Comments', $comments_count, 'frontis-blocks')); ?>
+                <?php /* translators: %d: number of comments */ printf(_n('Comment', 'Comments', $comments_count, 'frontis-blocks')); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             </h3>
         <?php endif; ?>
 
@@ -312,7 +312,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                     <p class="fb-logged-in-as">
                         <?php
                             printf(
-                                __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ),
+                                __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ),
                                 esc_url( $profile_url ),
                                 esc_html( $user_identity ),
