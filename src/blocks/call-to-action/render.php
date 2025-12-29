@@ -700,7 +700,7 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 								</a>
 								<?php if ($btn_one_icon_switcher): ?>
 									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_one_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<?php echo $btn_one_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
@@ -715,7 +715,7 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 								</a>
 								<?php if ($btn_two_icon_switcher): ?>
 									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_two_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<?php echo $btn_two_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
