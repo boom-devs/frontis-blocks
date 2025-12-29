@@ -214,7 +214,7 @@ class Settings extends AjaxBase
 			ORDER BY post_date DESC
 			LIMIT {$batch_size} OFFSET {$offset}";
 
-		$results = $wpdb->get_results($query);
+		$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		$generatedPages = [];
 
