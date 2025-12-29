@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;
@@ -17,7 +21,8 @@ use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
 use FrontisBlocks\Assets\AssetsGenerationStatus;
 
-final class Plugin {
+final class Plugin
+{
 	/**
 	 * Plugin version
 	 *
@@ -84,9 +89,9 @@ final class Plugin {
 	/**
 	 * Constructor
 	 */
-	private function __construct() {
+	private function __construct()
+	{
 		$this->define_constants();
-		$this->set_locale();
 		$this->init_classes();
 		$this->init_hooks();
 	}
@@ -107,7 +112,8 @@ final class Plugin {
 	/**
 	 * Define constants
 	 */
-	private function define_constants() {
+	private function define_constants()
+	{
 		define('FB_VERSION', self::VERSION);
 		define('FB_SLUG', self::SLUG);
 		define('FB_PREFIX', self::PREFIX);
@@ -121,18 +127,10 @@ final class Plugin {
 	}
 
 	/**
-	 * Set locale
-	 */
-	private function set_locale() {
-		add_action('plugins_loaded', function () {
-			load_plugin_textdomain(self::TEXT_DOMAIN, false, dirname(plugin_basename(FB_PLUGIN_FILE)) . '/languages');
-		});
-	}
-
-	/**
 	 * Initialize classes
 	 */
-	private function init_classes() {
+	private function init_classes()
+	{
 
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
@@ -144,14 +142,16 @@ final class Plugin {
 	/**
 	 * Initialize hooks
 	 */
-	private function init_hooks() {
+	private function init_hooks()
+	{
 		add_action('plugins_loaded', [$this, 'init_plugin']);
 	}
 
 	/**
 	 * Initialize plugin
 	 */
-	public function init_plugin() {
+	public function init_plugin()
+	{
 		Blocks::get_instance();
 		Enqueues::get_instance();
 		Admin::get_instance();

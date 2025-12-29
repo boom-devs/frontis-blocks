@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 
 /**
@@ -804,7 +808,7 @@ class GlobalSettings extends AjaxBase
         if (!empty($styles)) {
             // Add debugging comment
             echo "<!-- Typography styles begin -->\n";
-            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
+            echo "<style id='fb-global-styles'>\n" . wp_kses_post($styles) . "\n</style>";
             echo "<!-- Typography styles end -->\n";
         } else {
             // Debug if no styles were found
@@ -823,10 +827,25 @@ class GlobalSettings extends AjaxBase
                 [
                     'type' => 'string',
                     'show_in_rest' => true,
-                    'default' => ''
+                    'default' => '',
+                    'sanitize_callback' => array($this, 'sanitize_typography_setting')
                 ]
             );
         }
+    }
+
+    /**
+     * Sanitize typography setting value
+     *
+     * @param mixed $value The value to sanitize.
+     * @return mixed Sanitized value.
+     */
+    public function sanitize_typography_setting($value)
+    {
+        if (is_array($value)) {
+            return array_map('sanitize_text_field', $value);
+        }
+        return sanitize_text_field($value);
     }
 
 }

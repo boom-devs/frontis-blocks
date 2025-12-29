@@ -1,6 +1,9 @@
 <?php
-
 namespace FrontisBlocks\Config;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 use FrontisBlocks\Traits\Singleton;
 
@@ -422,19 +425,19 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
-			'loop-builder-wrapper' => [
-				'slug' => 'loop-builder-wrapper',
-				'title' => 'Loop Builder Wrapper',
-				'package' => 'pro',
-				'category' => 'content',
-				'badge' => 'pro',
-				'status' => 'true',
-				'icon' => FB_PLUGIN_URL . 'assets/icons/loop-builder.svg',
-				'doc' => 'https://wpmessiah.com/',
-				'demo' => 'https://wpmessiah.com/',
-				'complete' => 'true',
-				'child' => 'false',
-			],
+            'loop-builder-wrapper' => [
+                'slug' => 'loop-builder-wrapper',
+                'title' => 'Loop Builder Wrapper',
+                'package' => 'pro',
+                'category' => 'content',
+                'badge' => 'pro',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/loop-builder.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
             'post-grid' => [
                 'slug' => 'post-grid',
                 'title' => 'Post Grid',

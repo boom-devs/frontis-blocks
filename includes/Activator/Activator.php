@@ -1,6 +1,10 @@
 <?php
 namespace FrontisBlocks\Activator;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Utils\Helper;
@@ -10,26 +14,29 @@ use FrontisBlocks\Utils\Helper;
  *
  * @package FrontisBlocks\Activator
  */
-class Activator {
+class Activator
+{
 
-    const VERSION = '1.1.0';
-    const SLUG = 'frontis-blocks';
+	const VERSION = '1.1.0';
+	const SLUG = 'frontis-blocks';
 
-    use Singleton;
+	use Singleton;
 
-    public function __construct() {
-        $this->appsero_init_tracker_frontis_blocks();
-        $this->init_hooks();
-    }
+	public function __construct()
+	{
+		$this->appsero_init_tracker_frontis_blocks();
+		$this->init_hooks();
+	}
 
-    public function init_hooks() {
-        add_action('plugins_loaded', [$this, 'fb_set_initial_version']);
-        add_action('upgrader_process_complete', [$this, 'fb_on_update'], 10, 2);
-        add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
-        register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
-    }
+	public function init_hooks()
+	{
+		add_action('plugins_loaded', [$this, 'fb_set_initial_version']);
+		add_action('upgrader_process_complete', [$this, 'fb_on_update'], 10, 2);
+		add_action('admin_init', [$this, 'handle_activation_redirect'], 999);
+		register_activation_hook(FB_PLUGIN_FILE, [$this, 'set_activation_redirect']);
+	}
 
-    /**
+	/**
 	 * Set flag to trigger redirect on activation
 	 */
 	public function set_activation_redirect()
@@ -38,44 +45,48 @@ class Activator {
 		$this->fb_on_activate_or_update();
 	}
 
-    /**
+	/**
 	 * Handle plugin activation and update
 	 */
 	public function fb_on_activate_or_update()
 	{
 		update_option('frontis_blocks_version', self::VERSION);
 		$this->generate_job_table();
-		
+
 		try {
 			$post_ids = Helper::get_all_post_ids();
-			
+
 			if (!empty($post_ids)) {
 				foreach ($post_ids as $single_post_id) {
 					$single_post = get_post($single_post_id);
-					if (!$single_post) continue;
-					
+					if (!$single_post)
+						continue;
+
 					$post_content = $single_post->post_content;
 					$pattern = "/frontis-blocks/i";
-					
-					if (get_post_type($single_post_id) !== 'wp_template' && 
-						preg_match_all($pattern, $post_content) === 0) {
+
+					if (
+						get_post_type($single_post_id) !== 'wp_template' &&
+						preg_match_all($pattern, $post_content) === 0
+					) {
 						continue;
 					}
-					
+
 					// Insert job using your existing Helper method
 					Helper::insert_job($single_post_id, $single_post->post_name . $single_post_id);
 				}
 			}
-			} catch (Exception $e) {
+		} catch (Exception $e) {
 			error_log('Failed to schedule assets generation: ' . $e->getMessage());
 		}
 	}
 
-	public function generate_job_table() {
+	public function generate_job_table()
+	{
 		global $wpdb;
 		$table_name = $wpdb->prefix . 'fb_job_schedule';
 		$charset_collate = $wpdb->get_charset_collate();
-	
+
 		$sql = "CREATE TABLE IF NOT EXISTS $table_name (
 			id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
 			job_id INT NOT NULL,
@@ -87,12 +98,12 @@ class Activator {
 			job_attempts INT DEFAULT 0,
 			PRIMARY KEY (id)
 		) $charset_collate;";
-	
+
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta($sql);
 	}
 
-    /**
+	/**
 	 * Set the version if it was never saved before
 	 */
 	public function fb_set_initial_version()
@@ -132,7 +143,7 @@ class Activator {
 		}
 	}
 
-    /**
+	/**
 	 * Handle redirect to settings page after activation
 	 */
 	public function handle_activation_redirect()
@@ -149,7 +160,7 @@ class Activator {
 		}
 	}
 
-    /**
+	/**
 	 * Initialize the plugin tracker
 	 *
 	 * @return void
