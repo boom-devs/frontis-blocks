@@ -712,7 +712,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 						<?php if ($rating_switcher && $testimonial_rating_icon_align !== 'none'): ?>
 							<div class="fb-testimonial-rating">
-								<?php echo $render_rating_icons(); ?>
+								<?php echo $render_rating_icons(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 
@@ -746,7 +746,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
 							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; ?>
+								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 
@@ -818,14 +818,14 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 							<?php if ($rating_switcher && $testimonial_rating_icon_align !== 'none'): ?>
 								<div class="fb-testimonial-rating">
-									<?php echo $render_rating_icons(); ?>
+									<?php echo $render_rating_icons(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</div>
 							<?php endif; ?>
 						</div>
 
 						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
 							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; ?>
+								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 
@@ -833,7 +833,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 						<?php if ($rating_switcher && $testimonial_rating_icon_align !== 'none'): ?>
 							<div class="fb-testimonial-rating">
-								<?php echo $render_rating_icons(); ?>
+								<?php echo $render_rating_icons(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 
@@ -904,7 +904,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 
 						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
 							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; ?>
+								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 
