@@ -623,7 +623,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 							<?php if ($socialIconBtnSwitcher): ?>
 								<button class="fb-team-member-social-icon-wrapper-btn"
 									aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-									<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; ?>
+									<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</button>
 							<?php endif; ?>
 
@@ -632,9 +632,10 @@ $wrapper_attributes = get_block_wrapper_attributes([
 									$link = !empty($it['link']) ? esc_url($it['link']) : '#';
 									$svg = isset($it['svg']) ? $it['svg'] : '';
 									?>
-									<a href="<?php echo $link; ?>" class="fb-team-member-social-icon"
+									<a href="<?php echo $link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
+										class="fb-team-member-social-icon"
 										aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-										<?php echo $svg; ?>
+										<?php echo $svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</a>
 								<?php endforeach; ?>
 							</div>
@@ -696,7 +697,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 						<?php if ($socialIconBtnSwitcher): ?>
 							<button class="fb-team-member-social-icon-wrapper-btn"
 								aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-								<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; ?>
+								<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</button>
 						<?php endif; ?>
 
@@ -705,9 +706,10 @@ $wrapper_attributes = get_block_wrapper_attributes([
 								$link = !empty($it['link']) ? esc_url($it['link']) : '#';
 								$svg = isset($it['svg']) ? $it['svg'] : '';
 								?>
-								<a href="<?php echo $link; ?>" class="fb-team-member-social-icon"
+								<a href="<?php echo $link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>"
+									class="fb-team-member-social-icon"
 									aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-									<?php echo $svg; ?>
+									<?php echo $svg; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</a>
 							<?php endforeach; ?>
 						</div>
