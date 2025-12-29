@@ -361,10 +361,10 @@ if (empty($crumbs)) {
 				$total = count($crumbs);
 
 				foreach ($crumbs as $index => $crumb_html) {
-					echo $crumb_html;
-
+					echo $crumb_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+				
 					if ($index < $total - 1 && $separator_html) {
-						echo $separator_html;
+						echo $separator_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					}
 				}
 				?>
