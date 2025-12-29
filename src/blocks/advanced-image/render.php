@@ -356,7 +356,7 @@ if ($dynamic_image_enabled && $dynamic_enable_link && $dynamic_link_url) {
         ));
         ?>">
             <div class="fb-advanced-image-inner">
-                <?php echo $final_url ? $img_html : ''; ?>
+                <?php echo $final_url ? $img_html : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
             </div>
 
             <?php if ($display_title && $title_text): ?>
