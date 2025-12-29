@@ -185,7 +185,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
 
                 ob_start();
                 ?>
-                <div id="comment-<?php echo $comment->comment_ID; ?>" class="<?php echo esc_attr($comment_class); ?>">
+                <div id="comment-<?php echo $comment->comment_ID; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>" class="<?php echo esc_attr($comment_class); ?>">
                     
                     <?php echo $comment_avatar; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
                     <div class="fb-comment-body">
@@ -313,7 +313,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                         <?php
                             printf(
                                 __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ),
+                                esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
                                 esc_url( $profile_url ),
                                 esc_html( $user_identity ),
                                 '<a href="' . esc_url( $logout_url ) . '">' .
