@@ -120,7 +120,7 @@ if (empty($items)) {
                                     }
 
                                     if ($pattern_content) {
-                                        echo do_blocks($pattern_content);
+                                        echo do_blocks($pattern_content); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                     }
                                     ?>
                                 </div>
