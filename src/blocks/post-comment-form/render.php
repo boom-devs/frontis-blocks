@@ -308,24 +308,31 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                     <?php endif; ?>
                 </div>
 
-                <?php if ($current_user->exists()) : ?>
+                <?php if ( $current_user->exists() ) : ?>
                     <p class="fb-logged-in-as">
                         <?php
-                            /* translators: 1: Login text, 2: Profile URL, 3: User identity, 4: Logout link */
-                            printf(
-                                __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-                                esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
-                                esc_url( $profile_url ),
-                                esc_html( $user_identity ),
-                                '<a href="' . esc_url( $logout_url ) . '">' .
-                                esc_html( $logout_text ?: __( 'Log out?', 'frontis-blocks' ) ) .
-                                '</a>'
-                            );
+                        $login_label  = $login_text ?: __( 'Logged in as', 'frontis-blocks' );
+                        $logout_label = $logout_text ?: __( 'Log out?', 'frontis-blocks' );
+
+                        /* translators: 1: "Logged in as" text, 2: Profile URL, 3: User display name, 4: Logout link */
+                        $logged_in_text = __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' );
+
+                        printf(
+                            wp_kses_post( $logged_in_text ),
+                            esc_html( $login_label ),
+                            esc_url( $profile_url ),
+                            esc_html( $user_identity ),
+                            sprintf(
+                                '<a href="%1$s">%2$s</a>',
+                                esc_url( $logout_url ),
+                                esc_html( $logout_label )
+                            )
+                        );
                         ?>
                     </p>
                 <?php else : ?>
                     <p class="fb-logged-in-as">
-                        Your email address will not be published. Required fields are marked *
+                        <?php esc_html_e( 'Your email address will not be published. Required fields are marked *', 'frontis-blocks' ); ?>
                     </p>
                 <?php endif; ?>
 
