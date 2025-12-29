@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.5
+Stable tag: 1.1.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -197,6 +197,16 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.6 – 29 december 2025 =
+- **Fix**
+- Removed GSAP library to ensure full GPL compatibility.
+- Corrected text domain mismatches for internationalization.
+- Improved sanitization for plugin settings.
+- Resolved dynamic string issues in translation functions.
+- **Update**
+- Updated plugin name and description to meet directory guidelines.
+
 
 = 1.1.5 – 23 december 2025 =
 - **Bug fixsing**
