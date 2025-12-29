@@ -661,13 +661,13 @@ $btn1_dir_style = ' style="flex-direction:' . esc_attr($btn_one_icon_position ==
 $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position === 'left' ? 'row-reverse' : 'row') . ';"';
 
 ?>
-<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<div class="fb-parent-wrapper fb-cta-content-wrapper <?php echo esc_attr(trim($block_id . ' ' . $cta_global_wrapper_class)); ?>"
 		id="<?php echo esc_attr($cta_global_wrapper_id); ?>">
 		<div class="fb-cta-content-wrapper-inner <?php echo esc_attr($block_id); ?>">
 			<div class="fb-cta-content-wrapper">
 				<<?php echo esc_attr($heading_tag); ?>
-					class="fb-heading"<?php echo $heading_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+					class="fb-heading"<?php echo $heading_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 					<?php if ($title_link_url !== ''): ?>
 						<a class="fb-title-dynamic-link" href="<?php echo esc_url($title_link_url); ?>">
 							<?php echo wp_kses_post($final_heading_text); ?>
@@ -679,7 +679,7 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 
 				<?php if ($description_switcher): ?>
 					<<?php echo esc_attr($sub_heading_tag); ?>
-						class="fb-description"<?php echo $desc_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+						class="fb-description"<?php echo $desc_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 						<?php if ($description_link_url !== ''): ?>
 							<a class="fb-description-dynamic-link" href="<?php echo esc_url($description_link_url); ?>">
 								<?php echo wp_kses_post($final_description_text); ?>
