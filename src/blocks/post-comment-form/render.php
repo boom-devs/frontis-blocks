@@ -311,6 +311,7 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                 <?php if ($current_user->exists()) : ?>
                     <p class="fb-logged-in-as">
                         <?php
+                            /* translators: 1: Login text, 2: Profile URL, 3: User identity, 4: Logout link */
                             printf(
                                 __( '%1$s <a href="%2$s">%3$s</a>. %4$s', 'frontis-blocks' ), // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 esc_html( $login_text ?: __( 'Logged in as', 'frontis-blocks' ) ), // phpcs:ignore WordPress.WP.I18n.MissingTranslatorsComment
