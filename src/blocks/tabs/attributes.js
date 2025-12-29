@@ -171,9 +171,9 @@ const attributes = {
     tabWrapperGap : {
         type: 'object',
         default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10',
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0',
         }
     },
     tabWrapperGapUnits: {
@@ -573,7 +573,7 @@ const attributes = {
 
     tabListBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     tabListBorderColorSwitcher : {
         type: "string",
@@ -581,9 +581,11 @@ const attributes = {
     },
     tabListBorderColor: {
         type: 'string',
+        default: '#E1E3E8'
     },
     tabListActiveBorderColor: {
         type: 'string',
+        default: '#3991FF'
     },
     tabListBorderHoverColor: {
         type: 'string',
@@ -599,28 +601,28 @@ const attributes = {
     tabListBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderLink : { 
