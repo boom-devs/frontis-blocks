@@ -103,7 +103,8 @@ $parent_classes_arr = array_merge(
 // Build image wrapper classes
 $image_wrapper_classes_arr = array_filter(array_map(
     function ($c) {
-        return sanitize_html_class(fb_norm_str($c)); },
+        return sanitize_html_class(fb_norm_str($c));
+    },
     $parent_classes_arr
 ));
 
@@ -122,8 +123,8 @@ $image_html_tag_classes = array_filter([
 $image_html_tag_id_attr = !empty($wrapper_id) ? ' id="' . esc_attr($wrapper_id) . '"' : '';
 
 ?>
-<div <?php echo $image_wrapper_attributes; ?>>
-    <div class="<?php echo esc_attr(implode(' ', $image_html_tag_classes)); ?>" <?php echo $image_html_tag_id_attr; ?>>
+<div <?php echo $image_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+    <div class="<?php echo esc_attr(implode(' ', $image_html_tag_classes)); ?>" <?php echo $image_html_tag_id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
         <?php if (!empty($display_image_url)): ?>
             <?php if ($is_link): ?>
                 <div class="fb-post-featured-image-inner">
