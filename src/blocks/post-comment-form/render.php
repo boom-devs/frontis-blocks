@@ -220,13 +220,13 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                                 ], $comment->comment_ID, $post_id);
 
                                 if ($reply_link) {
-                                    									echo $reply_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                                    echo $reply_link; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                                 } else {
                                     ?>
                                     <a href="#respond"
                                        class="comment-reply-link"
                                        onclick="return addComment.moveForm('comment-<?php echo $comment->comment_ID; ?>', '<?php echo $comment->comment_ID; ?>', 'respond', '<?php echo $post_id; ?>')">
-                                        										<?php _e('Reply', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
+                                        <?php _e('Reply', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
                                     </a>
                                     <?php
                                 }
@@ -279,9 +279,9 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
             <?php
             $comments = frontis_get_comments_to_display($post_id);
             if (!empty($comments)) :
-                					echo frontis_display_comments_manual($comments, $post_id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                echo frontis_display_comments_manual($comments, $post_id); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             else :
-                					?><p class="fb-no-comments"><?php _e('No comments yet.', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></p><?php
+                ?><p class="fb-no-comments"><?php _e('No comments yet.', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?></p><?php
             endif;
             ?>
         </div>
@@ -377,10 +377,10 @@ if ( ! function_exists( 'frontis_display_comments_manual' ) ) {
                                 name="wp-comment-cookies-consent" 
                                 type="checkbox" 
                                 value="yes" 
-                                								<?php echo $consent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> 
+                                <?php echo $consent; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> 
                             />
                             <label for="wp-comment-cookies-consent">
-                                								<?php _e('Save my name, email, and website in this browser for the next time I comment.', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
+                                <?php _e('Save my name, email, and website in this browser for the next time I comment.', 'frontis-blocks'); // phpcs:ignore WordPress.Security.EscapeOutput.UnsafePrintingFunction ?>
                             </label>
                         </div>
                         <?php endif; ?>
