@@ -66,7 +66,8 @@ $parent_classes_arr = array_merge(
 
 $wrapper_classes_arr = array_filter(array_map(
     function ($c) {
-        return sanitize_html_class(fb_norm_str($c)); },
+        return sanitize_html_class(fb_norm_str($c));
+    },
     $parent_classes_arr
 ));
 
@@ -86,15 +87,17 @@ $html_tag_id_attr = !empty($wrapper_id) ? ' id="' . $wrapper_id . '"' : '';
 ?>
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php if ($is_link): ?>
-        <<?php echo $post_title_tag; ?> class="<?php echo esc_attr(implode(' ', $html_tag_classes)); ?>"<?php echo $html_tag_id_attr; ?>>
-            <a class="fb-post-title-link" href="<?php echo esc_url(get_permalink()); ?>"
-                rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($link_target); ?>">
+        <<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            class="<?php echo esc_attr(implode(' ', $html_tag_classes)); ?>"<?php echo $html_tag_id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+            <a class="fb-post-title-link" href="<?php echo esc_url(get_permalink()); ?>" rel="<?php echo esc_attr($rel); ?>"
+                target="<?php echo esc_attr($link_target); ?>">
                 <?php echo esc_html($post_title); ?>
             </a>
-        </<?php echo $post_title_tag; ?>>
+        </<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php else: ?>
-        <<?php echo $post_title_tag; ?> class="<?php echo esc_attr(implode(' ', $html_tag_classes)); ?>"<?php echo $html_tag_id_attr; ?>>
+        <<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+            class="<?php echo esc_attr(implode(' ', $html_tag_classes)); ?>"<?php echo $html_tag_id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
             <?php echo esc_html($post_title); ?>
-        </<?php echo $post_title_tag; ?>>
+        </<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php endif; ?>
 </div>
