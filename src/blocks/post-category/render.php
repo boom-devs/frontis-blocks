@@ -610,5 +610,5 @@ if (empty($taxonomy_type)) {
 ?>
 
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-    <?php echo $output; ?>
+    <?php echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 </div>
