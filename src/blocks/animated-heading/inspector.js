@@ -27,9 +27,7 @@ import {
     BORDER_STYLES,
 	PRESETS,
 	OVERFLOW_OP,
-    ANIMATION_OPTIONS,
-    TEXT_ANIMATION_TYPE,
-    HIGHLIGHT_ANIMATION_TYPE,
+    ANIMATION_TYPE,
 } from "./constants/constants";
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
@@ -55,18 +53,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
-        animationOption,
         animationType,
-        startDuration,
-        endDuration,
-        delayDuration,
         animatedHeadingAlignment,
         animatedHeadingMainTag,
         animatedHeadingGap,
         animatedHeadingGapUnits,
         animatedHeadingPrefix,
         animatedHeadingItems,
-        animatedHeadingHighlightText,
         animatedHeadingCursorSwitch,
         animatedHeadingCursor,
         animatedHeadingSuffix,
@@ -284,9 +277,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default padding for Typing Text */
-    const animatedHeadingGlobalDesktopPaddingWidth = `${animatedHeadingGlobalDesktopPadding?.top}${animatedHeadingGlobalPaddingUnits?.Desktop} ${animatedHeadingGlobalDesktopPadding?.right}${animatedHeadingGlobalPaddingUnits?.Desktop} ${animatedHeadingGlobalDesktopPadding?.bottom}${animatedHeadingGlobalPaddingUnits?.Desktop} ${animatedHeadingGlobalDesktopPadding?.left}${animatedHeadingGlobalPaddingUnits?.Desktop}`;  
-    const animatedHeadingGlobalTabletPaddingWidth = `${animatedHeadingGlobalTabletPadding?.top}${animatedHeadingGlobalPaddingUnits?.Tablet} ${animatedHeadingGlobalTabletPadding?.right}${animatedHeadingGlobalPaddingUnits?.Tablet} ${animatedHeadingGlobalTabletPadding?.bottom}${animatedHeadingGlobalPaddingUnits?.Tablet} ${animatedHeadingGlobalTabletPadding?.left}${animatedHeadingGlobalPaddingUnits?.Tablet}`;
-    const animatedHeadingGlobalMobilePaddingWidth = `${animatedHeadingGlobalMobilePadding?.top}${animatedHeadingGlobalPaddingUnits?.Mobile} ${animatedHeadingGlobalMobilePadding?.right}${animatedHeadingGlobalPaddingUnits?.Mobile} ${animatedHeadingGlobalMobilePadding?.bottom}${animatedHeadingGlobalPaddingUnits?.Mobile} ${animatedHeadingGlobalMobilePadding?.left}${animatedHeadingGlobalPaddingUnits?.Mobile}`;
+    const animatedHeadingGlobalDesktopPaddingWidth = `${animatedHeadingGlobalDesktopPadding.top}${animatedHeadingGlobalPaddingUnits.Desktop} ${animatedHeadingGlobalDesktopPadding.right}${animatedHeadingGlobalPaddingUnits.Desktop} ${animatedHeadingGlobalDesktopPadding.bottom}${animatedHeadingGlobalPaddingUnits.Desktop} ${animatedHeadingGlobalDesktopPadding.left}${animatedHeadingGlobalPaddingUnits.Desktop}`;
+    const animatedHeadingGlobalTabletPaddingWidth = `${animatedHeadingGlobalTabletPadding.top}${animatedHeadingGlobalPaddingUnits.Tablet} ${animatedHeadingGlobalTabletPadding.right}${animatedHeadingGlobalPaddingUnits.Tablet} ${animatedHeadingGlobalTabletPadding.bottom}${animatedHeadingGlobalPaddingUnits.Tablet} ${animatedHeadingGlobalTabletPadding.left}${animatedHeadingGlobalPaddingUnits.Tablet}`;
+    const animatedHeadingGlobalMobilePaddingWidth = `${animatedHeadingGlobalMobilePadding.top}${animatedHeadingGlobalPaddingUnits.Mobile} ${animatedHeadingGlobalMobilePadding.right}${animatedHeadingGlobalPaddingUnits.Mobile} ${animatedHeadingGlobalMobilePadding.bottom}${animatedHeadingGlobalPaddingUnits.Mobile} ${animatedHeadingGlobalMobilePadding.left}${animatedHeadingGlobalPaddingUnits.Mobile}`;
     /** End Global Padding */
 
     /** Start Global Margin */
@@ -360,9 +353,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default margin for Global */
-    const animatedHeadingGlobalDesktopMarginWidth = `${animatedHeadingGlobalDesktopMargin?.top}${animatedHeadingGlobalMarginUnits?.Desktop} ${animatedHeadingGlobalDesktopMargin?.right}${animatedHeadingGlobalMarginUnits?.Desktop} ${animatedHeadingGlobalDesktopMargin?.bottom}${animatedHeadingGlobalMarginUnits?.Desktop} ${animatedHeadingGlobalDesktopMargin?.left}${animatedHeadingGlobalMarginUnits?.Desktop}`;
-    const animatedHeadingGlobalTabletMarginWidth = `${animatedHeadingGlobalTabletMargin?.top}${animatedHeadingGlobalMarginUnits?.Tablet} ${animatedHeadingGlobalTabletMargin?.right}${animatedHeadingGlobalMarginUnits?.Tablet} ${animatedHeadingGlobalTabletMargin?.bottom}${animatedHeadingGlobalMarginUnits?.Tablet} ${animatedHeadingGlobalTabletMargin?.left}${animatedHeadingGlobalMarginUnits?.Tablet}`;
-    const animatedHeadingGlobalMobileMarginWidth = `${animatedHeadingGlobalMobileMargin?.top}${animatedHeadingGlobalMarginUnits?.Mobile} ${animatedHeadingGlobalMobileMargin?.right}${animatedHeadingGlobalMarginUnits?.Mobile} ${animatedHeadingGlobalMobileMargin?.bottom}${animatedHeadingGlobalMarginUnits?.Mobile} ${animatedHeadingGlobalMobileMargin?.left}${animatedHeadingGlobalMarginUnits?.Mobile}`;
+    const animatedHeadingGlobalDesktopMarginWidth = `${animatedHeadingGlobalDesktopMargin.top}${animatedHeadingGlobalMarginUnits.Desktop} ${animatedHeadingGlobalDesktopMargin.right}${animatedHeadingGlobalMarginUnits.Desktop} ${animatedHeadingGlobalDesktopMargin.bottom}${animatedHeadingGlobalMarginUnits.Desktop} ${animatedHeadingGlobalDesktopMargin.left}${animatedHeadingGlobalMarginUnits.Desktop}`;
+    const animatedHeadingGlobalTabletMarginWidth = `${animatedHeadingGlobalTabletMargin.top}${animatedHeadingGlobalMarginUnits.Tablet} ${animatedHeadingGlobalTabletMargin.right}${animatedHeadingGlobalMarginUnits.Tablet} ${animatedHeadingGlobalTabletMargin.bottom}${animatedHeadingGlobalMarginUnits.Tablet} ${animatedHeadingGlobalTabletMargin.left}${animatedHeadingGlobalMarginUnits.Tablet}`;
+    const animatedHeadingGlobalMobileMarginWidth = `${animatedHeadingGlobalMobileMargin.top}${animatedHeadingGlobalMarginUnits.Mobile} ${animatedHeadingGlobalMobileMargin.right}${animatedHeadingGlobalMarginUnits.Mobile} ${animatedHeadingGlobalMobileMargin.bottom}${animatedHeadingGlobalMarginUnits.Mobile} ${animatedHeadingGlobalMobileMargin.left}${animatedHeadingGlobalMarginUnits.Mobile}`;
     /** End Global Margin */
 
     /** Start Global Border */
@@ -436,9 +429,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border for Global */
-    const animatedHeadingGlobalDesktopBorderWidth = `${animatedHeadingGlobalDesktopBorder?.top}${animatedHeadingGlobalBorderUnits?.Desktop} ${animatedHeadingGlobalDesktopBorder?.right}${animatedHeadingGlobalBorderUnits?.Desktop} ${animatedHeadingGlobalDesktopBorder?.bottom}${animatedHeadingGlobalBorderUnits?.Desktop} ${animatedHeadingGlobalDesktopBorder?.left}${animatedHeadingGlobalBorderUnits?.Desktop}`;
-    const animatedHeadingGlobalTabletBorderWidth = `${animatedHeadingGlobalTabletBorder?.top}${animatedHeadingGlobalBorderUnits?.Tablet} ${animatedHeadingGlobalTabletBorder?.right}${animatedHeadingGlobalBorderUnits?.Tablet} ${animatedHeadingGlobalTabletBorder?.bottom}${animatedHeadingGlobalBorderUnits?.Tablet} ${animatedHeadingGlobalTabletBorder?.left}${animatedHeadingGlobalBorderUnits?.Tablet}`;
-    const animatedHeadingGlobalMobileBorderWidth = `${animatedHeadingGlobalMobileBorder?.top}${animatedHeadingGlobalBorderUnits?.Mobile} ${animatedHeadingGlobalMobileBorder?.right}${animatedHeadingGlobalBorderUnits?.Mobile} ${animatedHeadingGlobalMobileBorder?.bottom}${animatedHeadingGlobalBorderUnits?.Mobile} ${animatedHeadingGlobalMobileBorder?.left}${animatedHeadingGlobalBorderUnits?.Mobile}`;
+    const animatedHeadingGlobalDesktopBorderWidth = `${animatedHeadingGlobalDesktopBorder.top}${animatedHeadingGlobalBorderUnits.Desktop} ${animatedHeadingGlobalDesktopBorder.right}${animatedHeadingGlobalBorderUnits.Desktop} ${animatedHeadingGlobalDesktopBorder.bottom}${animatedHeadingGlobalBorderUnits.Desktop} ${animatedHeadingGlobalDesktopBorder.left}${animatedHeadingGlobalBorderUnits.Desktop}`;
+    const animatedHeadingGlobalTabletBorderWidth = `${animatedHeadingGlobalTabletBorder.top}${animatedHeadingGlobalBorderUnits.Tablet} ${animatedHeadingGlobalTabletBorder.right}${animatedHeadingGlobalBorderUnits.Tablet} ${animatedHeadingGlobalTabletBorder.bottom}${animatedHeadingGlobalBorderUnits.Tablet} ${animatedHeadingGlobalTabletBorder.left}${animatedHeadingGlobalBorderUnits.Tablet}`;
+    const animatedHeadingGlobalMobileBorderWidth = `${animatedHeadingGlobalMobileBorder.top}${animatedHeadingGlobalBorderUnits.Mobile} ${animatedHeadingGlobalMobileBorder.right}${animatedHeadingGlobalBorderUnits.Mobile} ${animatedHeadingGlobalMobileBorder.bottom}${animatedHeadingGlobalBorderUnits.Mobile} ${animatedHeadingGlobalMobileBorder.left}${animatedHeadingGlobalBorderUnits.Mobile}`;
     /** End Global Border */
 
     /** Start Global Border Radius */
@@ -512,9 +505,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     };
 
     /** Default border radius for Global */
-    const animatedHeadingGlobalDesktopBorderRadiusWidth = `${animatedHeadingGlobalDesktopBorderRadius?.top}${animatedHeadingGlobalBorderRadiusUnits?.Desktop} ${animatedHeadingGlobalDesktopBorderRadius?.right}${animatedHeadingGlobalBorderRadiusUnits?.Desktop} ${animatedHeadingGlobalDesktopBorderRadius?.bottom}${animatedHeadingGlobalBorderRadiusUnits?.Desktop} ${animatedHeadingGlobalDesktopBorderRadius?.left}${animatedHeadingGlobalBorderRadiusUnits?.Desktop}`;
-    const animatedHeadingGlobalTabletBorderRadiusWidth = `${animatedHeadingGlobalTabletBorderRadius?.top}${animatedHeadingGlobalBorderRadiusUnits?.Tablet} ${animatedHeadingGlobalTabletBorderRadius?.right}${animatedHeadingGlobalBorderRadiusUnits?.Tablet} ${animatedHeadingGlobalTabletBorderRadius?.bottom}${animatedHeadingGlobalBorderRadiusUnits?.Tablet} ${animatedHeadingGlobalTabletBorderRadius?.left}${animatedHeadingGlobalBorderRadiusUnits?.Tablet}`;
-    const animatedHeadingGlobalMobileBorderRadiusWidth = `${animatedHeadingGlobalMobileBorderRadius?.top}${animatedHeadingGlobalBorderRadiusUnits?.Mobile} ${animatedHeadingGlobalMobileBorderRadius?.right}${animatedHeadingGlobalBorderRadiusUnits?.Mobile} ${animatedHeadingGlobalMobileBorderRadius?.bottom}${animatedHeadingGlobalBorderRadiusUnits?.Mobile} ${animatedHeadingGlobalMobileBorderRadius?.left}${animatedHeadingGlobalBorderRadiusUnits?.Mobile}`;
+    const animatedHeadingGlobalDesktopBorderRadiusWidth = `${animatedHeadingGlobalDesktopBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Desktop} ${animatedHeadingGlobalDesktopBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Desktop} ${animatedHeadingGlobalDesktopBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Desktop} ${animatedHeadingGlobalDesktopBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Desktop}`;
+    const animatedHeadingGlobalTabletBorderRadiusWidth = `${animatedHeadingGlobalTabletBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Tablet}`;
+    const animatedHeadingGlobalMobileBorderRadiusWidth = `${animatedHeadingGlobalMobileBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Mobile}`;
     /** End Global Border Radius */
 
 
@@ -531,7 +524,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb-animated-heading-main-wrapper {
             position: relative;
-            ${animatedHeadingGlobalZIndex?.Desktop ? `z-index: ${animatedHeadingGlobalZIndex?.Desktop};` : ''}
+            ${animatedHeadingGlobalZIndex.Desktop ? `z-index: ${animatedHeadingGlobalZIndex.Desktop};` : ''}
         }
 
         .${blockId} .fb-animated-heading-wrapper {
@@ -549,11 +542,15 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${animatedHeadingGlobalBorderHoverColor ? `border-color: ${animatedHeadingGlobalBorderHoverColor};` : ''}
         }
 
-        .${blockId} .fb-animated-heading-wrapper {
+        .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
             display: flex;
             align-items: center;
-            ${animatedHeadingGap?.Desktop &&animatedHeadingGapUnits?.Desktop ? `gap: ${animatedHeadingGap?.Desktop}${animatedHeadingGapUnits?.Desktop};` : ''}
-            ${animatedHeadingAlignment?.Desktop ? `justify-content: ${animatedHeadingAlignment?.Desktop};` : ''}
+            ${animatedHeadingGap.Desktop &&animatedHeadingGapUnits.Desktop ? `gap: ${animatedHeadingGap.Desktop}${animatedHeadingGapUnits.Desktop};` : ''}
+            ${animatedHeadingAlignment.Desktop ? `justify-content: ${animatedHeadingAlignment.Desktop};` : ''}
+        }
+        .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+            display: block;
+            ${animatedHeadingAlignment.Desktop ? `text-align: ${animatedHeadingAlignment.Desktop};` : ''}
         }
 
         .${blockId} .fb-animated-heading-wrapper .fb-animated-headings:empty {
@@ -566,23 +563,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${animatedHeadingNormalTextColor ? `color: ${animatedHeadingNormalTextColor};` : ''}
             ${animatedHeadingNormalTextBgColor ? `background-color: ${animatedHeadingNormalTextBgColor};` : ''}
 
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontFamily === true && animatedHeadingNormalTextGlobalTypographyData?.fontFamily ? `font-family: ${animatedHeadingNormalTextGlobalTypographyData?.fontFamily};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontSize === true && animatedHeadingNormalTextGlobalTypographyData?.fontSize ? `font-size: ${animatedHeadingNormalTextGlobalTypographyData?.fontSize};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontWeight === true && animatedHeadingNormalTextGlobalTypographyData?.fontWeight ? `font-weight: ${animatedHeadingNormalTextGlobalTypographyData?.fontWeight};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontStyle === true && animatedHeadingNormalTextGlobalTypographyData?.fontStyle ? `font-style: ${animatedHeadingNormalTextGlobalTypographyData?.fontStyle};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.textTransform === true && animatedHeadingNormalTextGlobalTypographyData?.textTransform ? `text-transform: ${animatedHeadingNormalTextGlobalTypographyData?.textTransform};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.textDecoration === true && animatedHeadingNormalTextGlobalTypographyData?.textDecoration ? `text-decoration: ${animatedHeadingNormalTextGlobalTypographyData?.textDecoration};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.letterSpacing === true && animatedHeadingNormalTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${animatedHeadingNormalTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.lineHeight === true && animatedHeadingNormalTextGlobalTypographyData?.lineHeight ? `line-height: ${animatedHeadingNormalTextGlobalTypographyData?.lineHeight};` : ''} 
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontFamily === true && animatedHeadingNormalTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingNormalTextGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === true && animatedHeadingNormalTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingNormalTextGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontWeight === true && animatedHeadingNormalTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingNormalTextGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontStyle === true && animatedHeadingNormalTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingNormalTextGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textTransform === true && animatedHeadingNormalTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingNormalTextGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textDecoration === true && animatedHeadingNormalTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingNormalTextGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === true && animatedHeadingNormalTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingNormalTextGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === true && animatedHeadingNormalTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingNormalTextGlobalTypographyData.lineHeight};` : ''}
                 
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontFamily === false && animatedHeadingNormalTextFontFamily && animatedHeadingNormalTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingNormalTextFontFamily};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontSize === false && animatedHeadingNormalTextFontSize?.Desktop && animatedHeadingNormalTextFontSizeUnits?.Desktop ? `font-size: ${animatedHeadingNormalTextFontSize?.Desktop}${animatedHeadingNormalTextFontSizeUnits?.Desktop};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontWeight === false && animatedHeadingNormalTextFontWeight ? `font-weight: ${animatedHeadingNormalTextFontWeight};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontStyle === false && animatedHeadingNormalTextFontStyle ? `font-style: ${animatedHeadingNormalTextFontStyle};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.textTransform === false && animatedHeadingNormalTextTransform ? `text-transform: ${animatedHeadingNormalTextTransform};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.textDecoration === false && animatedHeadingNormalTextDecoration ? `text-decoration: ${animatedHeadingNormalTextDecoration};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.letterSpacing === false && animatedHeadingNormalTextLetterSpacing?.Desktop && animatedHeadingNormalTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing?.Desktop}${animatedHeadingNormalTextLetterSpacingUnits?.Desktop};` : ''}
-            ${animatedHeadingNormalTextGlobalTypoSwitcher?.lineHeight === false && animatedHeadingNormalTextLineHeight?.Desktop && animatedHeadingNormalTextLineHeightUnits?.Desktop ? `line-height: ${animatedHeadingNormalTextLineHeight?.Desktop}${animatedHeadingNormalTextLineHeightUnits?.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontFamily === false && animatedHeadingNormalTextFontFamily && animatedHeadingNormalTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingNormalTextFontFamily};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Desktop && animatedHeadingNormalTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingNormalTextFontSize.Desktop}${animatedHeadingNormalTextFontSizeUnits.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontWeight === false && animatedHeadingNormalTextFontWeight ? `font-weight: ${animatedHeadingNormalTextFontWeight};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.fontStyle === false && animatedHeadingNormalTextFontStyle ? `font-style: ${animatedHeadingNormalTextFontStyle};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textTransform === false && animatedHeadingNormalTextTransform ? `text-transform: ${animatedHeadingNormalTextTransform};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.textDecoration === false && animatedHeadingNormalTextDecoration ? `text-decoration: ${animatedHeadingNormalTextDecoration};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Desktop && animatedHeadingNormalTextLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Desktop}${animatedHeadingNormalTextLetterSpacingUnits.Desktop};` : ''}
+            ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Desktop && animatedHeadingNormalTextLineHeightUnits.Desktop ? `line-height: ${animatedHeadingNormalTextLineHeight.Desktop}${animatedHeadingNormalTextLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
 
@@ -598,23 +595,23 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${animatedHeadingAnimationTextColor ? `color: ${animatedHeadingAnimationTextColor};` : ''}
             ${animatedHeadingAnimationTextBgColor ? `background-color: ${animatedHeadingAnimationTextBgColor};` : ''} 
 
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontFamily === true &&animatedHeadingAnimationTextGlobalTypographyData?.fontFamily ? `font-family: ${animatedHeadingAnimationTextGlobalTypographyData?.fontFamily};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontSize === true &&animatedHeadingAnimationTextGlobalTypographyData?.fontSize ? `font-size: ${animatedHeadingAnimationTextGlobalTypographyData?.fontSize};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontWeight === true &&animatedHeadingAnimationTextGlobalTypographyData?.fontWeight ? `font-weight: ${animatedHeadingAnimationTextGlobalTypographyData?.fontWeight};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontStyle === true &&animatedHeadingAnimationTextGlobalTypographyData?.fontStyle ? `font-style: ${animatedHeadingAnimationTextGlobalTypographyData?.fontStyle};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.textTransform === true &&animatedHeadingAnimationTextGlobalTypographyData?.textTransform ? `text-transform: ${animatedHeadingAnimationTextGlobalTypographyData?.textTransform};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.textDecoration === true &&animatedHeadingAnimationTextGlobalTypographyData?.textDecoration ? `text-decoration: ${animatedHeadingAnimationTextGlobalTypographyData?.textDecoration};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.letterSpacing === true &&animatedHeadingAnimationTextGlobalTypographyData?.letterSpacing ? `letter-spacing: ${animatedHeadingAnimationTextGlobalTypographyData?.letterSpacing};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.lineHeight === true &&animatedHeadingAnimationTextGlobalTypographyData?.lineHeight ? `line-height: ${animatedHeadingAnimationTextGlobalTypographyData?.lineHeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === true &&animatedHeadingAnimationTextGlobalTypographyData.fontFamily ? `font-family: ${animatedHeadingAnimationTextGlobalTypographyData.fontFamily};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === true &&animatedHeadingAnimationTextGlobalTypographyData.fontSize ? `font-size: ${animatedHeadingAnimationTextGlobalTypographyData.fontSize};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === true &&animatedHeadingAnimationTextGlobalTypographyData.fontWeight ? `font-weight: ${animatedHeadingAnimationTextGlobalTypographyData.fontWeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === true &&animatedHeadingAnimationTextGlobalTypographyData.fontStyle ? `font-style: ${animatedHeadingAnimationTextGlobalTypographyData.fontStyle};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === true &&animatedHeadingAnimationTextGlobalTypographyData.textTransform ? `text-transform: ${animatedHeadingAnimationTextGlobalTypographyData.textTransform};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === true &&animatedHeadingAnimationTextGlobalTypographyData.textDecoration ? `text-decoration: ${animatedHeadingAnimationTextGlobalTypographyData.textDecoration};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === true &&animatedHeadingAnimationTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${animatedHeadingAnimationTextGlobalTypographyData.letterSpacing};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === true &&animatedHeadingAnimationTextGlobalTypographyData.lineHeight ? `line-height: ${animatedHeadingAnimationTextGlobalTypographyData.lineHeight};` : ''}
                 
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontFamily === false &&animatedHeadingAnimationTextFontFamily &&animatedHeadingAnimationTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingAnimationTextFontFamily};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontSize === false &&animatedHeadingAnimationTextFontSize?.Desktop &&animatedHeadingAnimationTextFontSizeUnits?.Desktop ? `font-size: ${animatedHeadingAnimationTextFontSize?.Desktop}${animatedHeadingAnimationTextFontSizeUnits?.Desktop};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontWeight === false &&animatedHeadingAnimationTextFontWeight ? `font-weight: ${animatedHeadingAnimationTextFontWeight};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontStyle === false &&animatedHeadingAnimationTextFontStyle ? `font-style: ${animatedHeadingAnimationTextFontStyle};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.textTransform === false &&animatedHeadingAnimationTextTransform ? `text-transform: ${animatedHeadingAnimationTextTransform};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.textDecoration === false &&animatedHeadingAnimationTextDecoration ? `text-decoration: ${animatedHeadingAnimationTextDecoration};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing?.Desktop &&animatedHeadingAnimationTextLetterSpacingUnits?.Desktop ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing?.Desktop}${animatedHeadingAnimationTextLetterSpacingUnits?.Desktop};` : ''}
-            ${animatedHeadingAnimationTextGlobalTypoSwitcher?.lineHeight === false &&animatedHeadingAnimationTextLineHeight?.Desktop &&animatedHeadingAnimationTextLineHeightUnits?.Desktop ? `line-height: ${animatedHeadingAnimationTextLineHeight?.Desktop}${animatedHeadingAnimationTextLineHeightUnits?.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontFamily === false &&animatedHeadingAnimationTextFontFamily &&animatedHeadingAnimationTextFontFamily !== 'Default' ? `font-family: ${animatedHeadingAnimationTextFontFamily};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Desktop &&animatedHeadingAnimationTextFontSizeUnits.Desktop ? `font-size: ${animatedHeadingAnimationTextFontSize.Desktop}${animatedHeadingAnimationTextFontSizeUnits.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontWeight === false &&animatedHeadingAnimationTextFontWeight ? `font-weight: ${animatedHeadingAnimationTextFontWeight};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontStyle === false &&animatedHeadingAnimationTextFontStyle ? `font-style: ${animatedHeadingAnimationTextFontStyle};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textTransform === false &&animatedHeadingAnimationTextTransform ? `text-transform: ${animatedHeadingAnimationTextTransform};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.textDecoration === false &&animatedHeadingAnimationTextDecoration ? `text-decoration: ${animatedHeadingAnimationTextDecoration};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Desktop &&animatedHeadingAnimationTextLetterSpacingUnits.Desktop ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Desktop}${animatedHeadingAnimationTextLetterSpacingUnits.Desktop};` : ''}
+            ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Desktop &&animatedHeadingAnimationTextLineHeightUnits.Desktop ? `line-height: ${animatedHeadingAnimationTextLineHeight.Desktop}${animatedHeadingAnimationTextLineHeightUnits.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
 
@@ -629,31 +626,39 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 1024px) {
 
             .${blockId}.fb-animated-heading-main-wrapper {
-                ${animatedHeadingGlobalZIndex?.Tablet ? `z-index: ${animatedHeadingGlobalZIndex?.Tablet};` : ''}
+                ${animatedHeadingGlobalZIndex.Tablet ? `z-index: ${animatedHeadingGlobalZIndex.Tablet};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper {
-                ${animatedHeadingGap?.Tablet &&animatedHeadingGapUnits?.Tablet ? `gap: ${animatedHeadingGap?.Tablet}${animatedHeadingGapUnits?.Tablet};` : ''}
-                ${animatedHeadingAlignment?.Tablet ? `text-align: ${animatedHeadingAlignment?.Tablet};` : ''}
+                ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingAlignment.Tablet ? `text-align: ${animatedHeadingAlignment.Tablet};` : ''}
                 ${animatedHeadingGlobalTabletPaddingWidth && animatedHeadingGlobalTabletPadding?.top ? `padding: ${animatedHeadingGlobalTabletPaddingWidth};` : ''}
                 ${animatedHeadingGlobalTabletMarginWidth && animatedHeadingGlobalTabletMargin?.top ? `margin: ${animatedHeadingGlobalTabletMarginWidth};` : ''}
-                ${animatedHeadingGlobalTabletBorderWidth && animatedHeadingGlobalTabletBorder?.top ? `border-width: ${animatedHeadingGlobalTabletBorderWidth};` : ''} 
+                ${animatedHeadingGlobalTabletBorderWidth && animatedHeadingGlobalTabletBorder?.top ? `border-width: ${animatedHeadingGlobalTabletBorderWidth};` : ''}
                 ${animatedHeadingGlobalTabletBorderRadiusWidth && animatedHeadingGlobalTabletBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalTabletBorderRadiusWidth};` : ''}
+            }
+
+            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+                ${animatedHeadingGap.Tablet &&animatedHeadingGapUnits.Tablet ? `gap: ${animatedHeadingGap.Tablet}${animatedHeadingGapUnits.Tablet};` : ''}
+                ${animatedHeadingAlignment.Tablet ? `justify-content: ${animatedHeadingAlignment.Tablet};` : ''}
+            }
+            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+                ${animatedHeadingAlignment.Tablet ? `text-align: ${animatedHeadingAlignment.Tablet};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-suffix {
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontSize === false && animatedHeadingNormalTextFontSize?.Tablet && animatedHeadingNormalTextFontSizeUnits?.Tablet ? `font-size: ${animatedHeadingNormalTextFontSize?.Tablet}${animatedHeadingNormalTextFontSizeUnits?.Tablet};` : ''}
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.letterSpacing === false && animatedHeadingNormalTextLetterSpacing?.Tablet && animatedHeadingNormalTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing?.Tablet}${animatedHeadingNormalTextLetterSpacingUnits?.Tablet};` : ''}
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.lineHeight === false && animatedHeadingNormalTextLineHeight?.Tablet && animatedHeadingNormalTextLineHeightUnits?.Tablet ? `line-height: ${animatedHeadingNormalTextLineHeight?.Tablet}${animatedHeadingNormalTextLineHeightUnits?.Tablet};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Tablet && animatedHeadingNormalTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingNormalTextFontSize.Tablet}${animatedHeadingNormalTextFontSizeUnits.Tablet};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Tablet && animatedHeadingNormalTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Tablet}${animatedHeadingNormalTextLetterSpacingUnits.Tablet};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Tablet && animatedHeadingNormalTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingNormalTextLineHeight.Tablet}${animatedHeadingNormalTextLineHeightUnits.Tablet};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-headings,
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
             .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontSize === false &&animatedHeadingAnimationTextFontSize?.Tablet &&animatedHeadingAnimationTextFontSizeUnits?.Tablet ? `font-size: ${animatedHeadingAnimationTextFontSize?.Tablet}${animatedHeadingAnimationTextFontSizeUnits?.Tablet};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing?.Tablet &&animatedHeadingAnimationTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing?.Tablet}${animatedHeadingAnimationTextLetterSpacingUnits?.Tablet};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.lineHeight === false &&animatedHeadingAnimationTextLineHeight?.Tablet &&animatedHeadingAnimationTextLineHeightUnits?.Tablet ? `line-height: ${animatedHeadingAnimationTextLineHeight?.Tablet}${animatedHeadingAnimationTextLineHeightUnits?.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Tablet &&animatedHeadingAnimationTextFontSizeUnits.Tablet ? `font-size: ${animatedHeadingAnimationTextFontSize.Tablet}${animatedHeadingAnimationTextFontSizeUnits.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Tablet &&animatedHeadingAnimationTextLetterSpacingUnits.Tablet ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Tablet}${animatedHeadingAnimationTextLetterSpacingUnits.Tablet};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Tablet &&animatedHeadingAnimationTextLineHeightUnits.Tablet ? `line-height: ${animatedHeadingAnimationTextLineHeight.Tablet}${animatedHeadingAnimationTextLineHeightUnits.Tablet};` : ''}
             }
 
         }
@@ -661,31 +666,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         @media only screen and (max-width: 767px) {
 
             .${blockId}.fb-animated-heading-main-wrapper {
-                ${animatedHeadingGlobalZIndex?.Mobile ? `z-index: ${animatedHeadingGlobalZIndex?.Mobile};` : ''}
+                ${animatedHeadingGlobalZIndex.Mobile ? `z-index: ${animatedHeadingGlobalZIndex.Mobile};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper {
-                ${animatedHeadingGap?.Mobile &&animatedHeadingGapUnits?.Mobile ? `gap: ${animatedHeadingGap?.Mobile}${animatedHeadingGapUnits?.Mobile};` : ''}
-                ${animatedHeadingAlignment?.Mobile ? `text-align: ${animatedHeadingAlignment?.Mobile};` : ''}
+                ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingAlignment.Mobile ? `text-align: ${animatedHeadingAlignment.Mobile};` : ''}
                 ${animatedHeadingGlobalMobilePaddingWidth && animatedHeadingGlobalMobilePadding?.top ? `padding: ${animatedHeadingGlobalMobilePaddingWidth};` : ''}
                 ${animatedHeadingGlobalMobileMarginWidth && animatedHeadingGlobalMobileMargin?.top ? `margin: ${animatedHeadingGlobalMobileMarginWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderWidth && animatedHeadingGlobalMobileBorder?.top ? `border-width: ${animatedHeadingGlobalMobileBorderWidth};` : ''}
                 ${animatedHeadingGlobalMobileBorderRadiusWidth && animatedHeadingGlobalMobileBorderRadius?.top ? `border-radius: ${animatedHeadingGlobalMobileBorderRadiusWidth};` : ''}
             }
 
+            .${blockId} .fb-animated-heading-wrapper.animated-type-typing {
+                ${animatedHeadingGap.Mobile &&animatedHeadingGapUnits.Mobile ? `gap: ${animatedHeadingGap.Mobile}${animatedHeadingGapUnits.Mobile};` : ''}
+                ${animatedHeadingAlignment.Mobile ? `justify-content: ${animatedHeadingAlignment.Mobile};` : ''}
+            }
+
+            .${blockId} .fb-animated-heading-wrapper.animated-type-swirl {
+                ${animatedHeadingAlignment.Mobile ? `text-align: ${animatedHeadingAlignment.Mobile};` : ''}
+            }
+
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-prefix,
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-suffix {
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.fontSize === false && animatedHeadingNormalTextFontSize?.Mobile && animatedHeadingNormalTextFontSizeUnits?.Mobile ? `font-size: ${animatedHeadingNormalTextFontSize?.Mobile}${animatedHeadingNormalTextFontSizeUnits?.Mobile};` : ''}
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.letterSpacing === false && animatedHeadingNormalTextLetterSpacing?.Mobile && animatedHeadingNormalTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing?.Mobile}${animatedHeadingNormalTextLetterSpacingUnits?.Mobile};` : ''}
-                ${animatedHeadingNormalTextGlobalTypoSwitcher?.lineHeight === false && animatedHeadingNormalTextLineHeight?.Mobile && animatedHeadingNormalTextLineHeightUnits?.Mobile ? `line-height: ${animatedHeadingNormalTextLineHeight?.Mobile}${animatedHeadingNormalTextLineHeightUnits?.Mobile};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.fontSize === false && animatedHeadingNormalTextFontSize.Mobile && animatedHeadingNormalTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingNormalTextFontSize.Mobile}${animatedHeadingNormalTextFontSizeUnits.Mobile};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.letterSpacing === false && animatedHeadingNormalTextLetterSpacing.Mobile && animatedHeadingNormalTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingNormalTextLetterSpacing.Mobile}${animatedHeadingNormalTextLetterSpacingUnits.Mobile};` : ''}
+                ${animatedHeadingNormalTextGlobalTypoSwitcher.lineHeight === false && animatedHeadingNormalTextLineHeight.Mobile && animatedHeadingNormalTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingNormalTextLineHeight.Mobile}${animatedHeadingNormalTextLineHeightUnits.Mobile};` : ''}
             }
 
             .${blockId} .fb-animated-heading-wrapper .fb-animated-headings,
             .${blockId} .fb-animated-heading-wrapper .fb-animated-heading-cursor,
             .${blockId} .fb-animated-heading-dynamic-wrapper .fb-animated-heading-dynamic-text {  
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.fontSize === false &&animatedHeadingAnimationTextFontSize?.Mobile &&animatedHeadingAnimationTextFontSizeUnits?.Mobile ? `font-size: ${animatedHeadingAnimationTextFontSize?.Mobile}${animatedHeadingAnimationTextFontSizeUnits?.Mobile};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing?.Mobile &&animatedHeadingAnimationTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing?.Mobile}${animatedHeadingAnimationTextLetterSpacingUnits?.Mobile};` : ''}
-                ${animatedHeadingAnimationTextGlobalTypoSwitcher?.lineHeight === false &&animatedHeadingAnimationTextLineHeight?.Mobile &&animatedHeadingAnimationTextLineHeightUnits?.Mobile ? `line-height: ${animatedHeadingAnimationTextLineHeight?.Mobile}${animatedHeadingAnimationTextLineHeightUnits?.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.fontSize === false &&animatedHeadingAnimationTextFontSize.Mobile &&animatedHeadingAnimationTextFontSizeUnits.Mobile ? `font-size: ${animatedHeadingAnimationTextFontSize.Mobile}${animatedHeadingAnimationTextFontSizeUnits.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.letterSpacing === false &&animatedHeadingAnimationTextLetterSpacing.Mobile &&animatedHeadingAnimationTextLetterSpacingUnits.Mobile ? `letter-spacing: ${animatedHeadingAnimationTextLetterSpacing.Mobile}${animatedHeadingAnimationTextLetterSpacingUnits.Mobile};` : ''}
+                ${animatedHeadingAnimationTextGlobalTypoSwitcher.lineHeight === false &&animatedHeadingAnimationTextLineHeight.Mobile &&animatedHeadingAnimationTextLineHeightUnits.Mobile ? `line-height: ${animatedHeadingAnimationTextLineHeight.Mobile}${animatedHeadingAnimationTextLineHeightUnits.Mobile};` : ''}
             }
         }
     `, [
@@ -803,6 +817,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     animatedHeadingGlobalTabletBorderRadiusWidth,
     animatedHeadingGlobalMobileBorderRadiusWidth,
 
+
+
+
     ]);
 
     const customCss = getCustomCss(animatedHeadingCustomCSS, `.${blockId}`);
@@ -822,49 +839,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             <PanelBody title={__("General Info", "frontis-blocks")} initialOpen={true}>
 
                 <SelectControl
-                    label={__("Animation Category", "frontis-blocks")}
-                    value={animationOption}
-                    options={ANIMATION_OPTIONS}
-                    onChange={(value) => setAttributes({ animationOption: value })}
-                />
-
-                <SelectControl
                     label={__("Animation Type", "frontis-blocks")}
                     value={animationType}
-                    options={animationOption === "text-animation" ? TEXT_ANIMATION_TYPE : HIGHLIGHT_ANIMATION_TYPE}
+                    options={ANIMATION_TYPE}
                     onChange={(value) => setAttributes({ animationType: value })}
                 />
-
-                <RangeControl
-                    label="Start Duration"
-                    value={startDuration}
-                    onChange={(value) => setAttributes({ startDuration: value })}
-                    min={0.01}
-                    max={5}
-                    step={0.01}
-                    resetFallbackValue={""}
-                />
-
-                <RangeControl
-                    label="End Duration"
-                    value={endDuration}
-                    onChange={(value) => setAttributes({ endDuration: value })}
-                    min={0.01}
-                    max={5}
-                    step={0.01}
-                    resetFallbackValue={""}
-                />
-
-                {/* <RangeControl
-                    label={__("Delay Duration (seconds)", "frontis-blocks")}
-                    value={delayDuration}
-                    onChange={(value) =>
-                        setAttributes({ delayDuration: value })
-                    }
-                    min={0}
-                    max={5}
-                    step={0.01}
-                /> */}
 
                 <FB_ResponsiveAlignmentControl
                     label={__("Alignment", "frontis-blocks")}
@@ -888,39 +867,37 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                {animationOption === "text-animation" && (
-                    <BaseControl
-                        label={__("Text Items", "frontis-blocks")}
-                    >
-                        <div className="fb-animated-heading-items-wrapper">
-                            <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-                                <SortableContext items={animatedHeadingItems.map(item => item.id)}>
-                                    <ul className='dnd-items-wrapper'>
-                                        {animatedHeadingItems.map((item, index) => (
-                                            <SortableItem
-                                                key={item.id}
-                                                id={item.id}
-                                                item={item}
-                                                handleChangeItem={handleChangeItem}
-                                                handleDeleteItem={handleDeleteItem}
-                                                handleDuplicateItem={handleDuplicateItem}
-                                                index={index}
-                                            />
-                                        ))}
-                                    </ul>
-                                </SortableContext>
-                            </DndContext>
-                            <Button isPrimary onClick={handleAddItem}>
-                                {__("Add Item", "frontis-blocks")}
-                            </Button>
-                        </div>
-                    </BaseControl>
-                )}
+                <BaseControl
+                    label={__("Text Items", "frontis-blocks")}
+                >
+                    <div className="fb-animated-heading-items-wrapper">
+                        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                            <SortableContext items={animatedHeadingItems.map(item => item.id)}>
+                                <ul className='dnd-items-wrapper'>
+                                    {animatedHeadingItems.map((item, index) => (
+                                        <SortableItem
+                                            key={item.id}
+                                            id={item.id}
+                                            item={item}
+                                            handleChangeItem={handleChangeItem}
+                                            handleDeleteItem={handleDeleteItem}
+                                            handleDuplicateItem={handleDuplicateItem}
+                                            index={index}
+                                        />
+                                    ))}
+                                </ul>
+                            </SortableContext>
+                        </DndContext>
+                        <Button isPrimary onClick={handleAddItem}>
+                            {__("Add Item", "frontis-blocks")}
+                        </Button>
+                    </div>
+                </BaseControl>
 
                 {animationType === "typing" && (
                     <>
                         <ToggleControl
-                            label={__("Cursor Switch", "frontis-blocks")}
+                                label={__("Cursor Switch", "frontis-blocks")}
                             checked={animatedHeadingCursorSwitch}
                             onChange={(value) => setAttributes({animatedHeadingCursorSwitch: value })}
                         />
@@ -937,14 +914,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </>
                 )}
 
-                {animationOption === "highlight-animation" && (
-                    <TextControl
-                        label={__("Highlight Text", "frontis-blocks")}
-                        value={animatedHeadingHighlightText}
-                        onChange={(value) => setAttributes({animatedHeadingHighlightText: value })}
-                    />
-                )}
-
                 <TextControl
                     label={__("Suffix Text", "frontis-blocks")}
                     value={animatedHeadingSuffix}
@@ -953,7 +922,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     help={__("Keep empty to hide.", "frontis-blocks")}
                 />
 
-                {/* {animationType === "typing" && ( */}
+                {animationType === "typing" && (
                     <FB_Range
                         min={0}
                         max={100}
@@ -967,7 +936,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         rangeStep={1}
                         resetFallbackValue={"8"}
                     />
-                {/* )} */}
+                )}
             </PanelBody>
 
         </>
