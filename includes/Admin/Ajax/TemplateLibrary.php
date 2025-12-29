@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 // require_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');

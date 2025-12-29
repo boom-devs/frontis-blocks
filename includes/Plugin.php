@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;

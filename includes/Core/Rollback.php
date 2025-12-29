@@ -4,6 +4,10 @@ namespace Frontis\Blocks\Core;
 
 use FrontisBlocks\Traits\Singleton;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 class Rollback
 {
     use Singleton;

@@ -1,6 +1,10 @@
 <?php
-
 namespace FrontisBlocks\Utils;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Config\BlockList;
 
 /**
@@ -1148,26 +1152,27 @@ class Helper
      * @param int $template_id
      * @return array
      */
-    public static function resolve_frontis_settings( $post_id = 0, $template_id = 0 ) {
-        $post_id   = $post_id ?: get_the_ID();
-        $post_type = get_post_type( $post_id );
+    public static function resolve_frontis_settings($post_id = 0, $template_id = 0)
+    {
+        $post_id = $post_id ?: get_the_ID();
+        $post_type = get_post_type($post_id);
 
         // Only keep header/footer
         $default_settings = [
             'disableHeader' => false,
             'disableFooter' => false,
-            'disablePageTitle'   => false,
+            'disablePageTitle' => false,
         ];
 
         // Global settings (filtered to only allowed keys)
-        $global_settings = get_option( 'frontis_theme_options', [] );
-        $global_settings = is_array( $global_settings ) ? $global_settings : [];
-        $global_settings = array_intersect_key( $global_settings, $default_settings );
+        $global_settings = get_option('frontis_theme_options', []);
+        $global_settings = is_array($global_settings) ? $global_settings : [];
+        $global_settings = array_intersect_key($global_settings, $default_settings);
 
         $template_settings = [];
-        $page_settings     = [];
+        $page_settings = [];
 
-        if ( $post_type === 'wp_template' ) {
+        if ($post_type === 'wp_template') {
 
             $template_settings = get_post_meta(
                 $post_id,
@@ -1178,9 +1183,9 @@ class Helper
         } else {
 
             // Assigned template ID
-            $template_id = $template_id ?: Helper::get_template_id( $post_id );
+            $template_id = $template_id ?: Helper::get_template_id($post_id);
 
-            if ( $template_id ) {
+            if ($template_id) {
                 $template_settings = get_post_meta(
                     $template_id,
                     '_frontis_template_settings',
@@ -1196,12 +1201,12 @@ class Helper
         }
 
         // Ensure arrays + filter unwanted keys
-        $template_settings = is_array( $template_settings )
-            ? array_intersect_key( $template_settings, $default_settings )
+        $template_settings = is_array($template_settings)
+            ? array_intersect_key($template_settings, $default_settings)
             : [];
 
-        $page_settings = is_array( $page_settings )
-            ? array_intersect_key( $page_settings, $default_settings )
+        $page_settings = is_array($page_settings)
+            ? array_intersect_key($page_settings, $default_settings)
             : [];
 
         // Priority: default → global → template → page

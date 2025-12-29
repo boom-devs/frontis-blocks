@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 if (!function_exists('render_loop_builder')):
 	function render_loop_builder($block_content, $block)
 	{
@@ -226,14 +230,14 @@ if (!function_exists('render_loop_builder')):
 						<nav class="fb-query-pagination" aria-label="Pagination"
 							data-current-page="<?php echo esc_attr($current_page); ?>"
 							data-total-pages="<?php echo esc_attr($total_pages); ?>"
-							data-page-param="<?php echo esc_attr($page_param); ?>"
-							data-base-url="<?php echo esc_url($base_url); ?>">
+							data-page-param="<?php echo esc_attr($page_param); ?>" data-base-url="<?php echo esc_url($base_url); ?>">
 							<?php if ($has_prev): ?>
 								<?php if ($prev_url): ?>
 									<a class="fb-page-prev" href="<?php echo esc_url($prev_url); ?>" rel="prev"
 										aria-label="<?php esc_attr_e('Previous page', 'frontis-blocks'); ?>">
 										<?php if ($paginationPrevNextType === 'icon'): ?>
-											<span class="fb-pagination-icon" aria-hidden="true"><?php echo $paginationPrevFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+											<span class="fb-pagination-icon"
+												aria-hidden="true"><?php echo $paginationPrevFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 										<?php else: ?>
 											<span class="fb-pagination-text"><?php echo esc_html($paginationPrevTxt); ?></span>
 										<?php endif; ?>
@@ -241,7 +245,8 @@ if (!function_exists('render_loop_builder')):
 								<?php else: ?>
 									<span class="fb-page-prev is-disabled" aria-disabled="true">
 										<?php if ($paginationPrevNextType === 'icon'): ?>
-											<span class="fb-pagination-icon" aria-hidden="true"><?php echo $paginationPrevFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+											<span class="fb-pagination-icon"
+												aria-hidden="true"><?php echo $paginationPrevFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 										<?php else: ?>
 											<span class="fb-pagination-text"><?php echo esc_html($paginationPrevTxt); ?></span>
 										<?php endif; ?>
@@ -260,7 +265,8 @@ if (!function_exists('render_loop_builder')):
 									<a class="fb-page-next" href="<?php echo esc_url($next_url); ?>" rel="next"
 										aria-label="<?php esc_attr_e('Next page', 'frontis-blocks'); ?>">
 										<?php if ($paginationPrevNextType === 'icon'): ?>
-											<span class="fb-pagination-icon" aria-hidden="true"><?php echo $paginationNextFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+											<span class="fb-pagination-icon"
+												aria-hidden="true"><?php echo $paginationNextFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 										<?php else: ?>
 											<span class="fb-pagination-text"><?php echo esc_html($paginationNextTxt); ?></span>
 										<?php endif; ?>
@@ -268,7 +274,8 @@ if (!function_exists('render_loop_builder')):
 								<?php else: ?>
 									<span class="fb-page-next is-disabled" aria-disabled="true">
 										<?php if ($paginationPrevNextType === 'icon'): ?>
-											<span class="fb-pagination-icon" aria-hidden="true"><?php echo $paginationNextFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+											<span class="fb-pagination-icon"
+												aria-hidden="true"><?php echo $paginationNextFrontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 										<?php else: ?>
 											<span class="fb-pagination-text"><?php echo esc_html($paginationNextTxt); ?></span>
 										<?php endif; ?>
