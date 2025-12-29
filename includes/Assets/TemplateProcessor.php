@@ -1,11 +1,18 @@
 <?php
 namespace FrontisBlocks\Assets;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 
-class TemplateProcessor {
+class TemplateProcessor
+{
     use Singleton;
 
-    public function process_template($data) {
+    public function process_template($data)
+    {
 
         $template_content = '';
         if (is_array($data) && isset($data[0]) && isset($data[0]->post_content)) {
@@ -56,8 +63,8 @@ class TemplateProcessor {
         if (!empty($index_to_slug)) {
             foreach ($index_to_slug as $i => $slug) {
                 $args = [
-                    'name'        => sanitize_title($slug),
-                    'post_type'   => 'wp_template_part',
+                    'name' => sanitize_title($slug),
+                    'post_type' => 'wp_template_part',
                     'post_status' => 'publish',
                     'numberposts' => 1
                 ];
@@ -78,20 +85,20 @@ class TemplateProcessor {
         //     $template_content,
         //     $megamenu_matches
         // );
-        
+
         // if ($megamenu_block_exists) {
         //     foreach ($megamenu_matches[1] as $index => $attributes) {
         //         if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
         //             $pattern_slug = $pattern_slug_match[1];
         //             $pattern_post = get_post((int) $pattern_slug);
-                    
+
         //             if ($pattern_post && $pattern_post->post_type === 'wp_block') {
         //                 // Convert self-closing block to opening/closing format with pattern content inside
         //                 $megamenu_opening = str_replace('/-->', '-->', $megamenu_matches[0][$index]);
         //                 $megamenu_block_with_content = $megamenu_opening . "\n" 
         //                     . $pattern_post->post_content . "\n"
         //                     . '<!-- /wp:frontis-blocks/advanced-megamenu -->';
-                        
+
         //                 $template_content = str_replace(
         //                     $megamenu_matches[0][$index],
         //                     $megamenu_block_with_content,
@@ -107,20 +114,20 @@ class TemplateProcessor {
             $template_content,
             $megamenu_matches
         );
-        
+
         if ($megamenu_block_exists) {
             foreach ($megamenu_matches[1] as $index => $attributes) {
                 if (preg_match('/"patternSlug"\s*:\s*"([^"]+)"/', $attributes, $pattern_slug_match)) {
                     $pattern_slug = $pattern_slug_match[1];
                     $pattern_post = get_post((int) $pattern_slug);
-                     
+
                     if ($pattern_post && $pattern_post->post_type === 'wp_block') {
-                         // Convert self-closing block to opening/closing format with pattern content inside
+                        // Convert self-closing block to opening/closing format with pattern content inside
                         $megamenu_opening = str_replace('/-->', '-->', $megamenu_matches[0][$index]);
-                        $megamenu_block_with_content = $megamenu_opening . "\n" 
-                             . (string) $pattern_post->post_content . "\n"
-                             . '<!-- /wp:frontis-blocks/advanced-megamenu -->';
-                         
+                        $megamenu_block_with_content = $megamenu_opening . "\n"
+                            . (string) $pattern_post->post_content . "\n"
+                            . '<!-- /wp:frontis-blocks/advanced-megamenu -->';
+
                         $template_content = str_replace(
                             $megamenu_matches[0][$index],
                             $megamenu_block_with_content,
