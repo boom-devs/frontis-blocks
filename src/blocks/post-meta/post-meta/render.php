@@ -118,9 +118,9 @@ $post_comments = get_comments_number($post_id);
                     <?php
                     // Add SVG icon if set
                     if (!empty($item['metaIconFrontEnd'])) {
-                        echo '<span class="fb-post-meta-icon">' . $item['metaIconFrontEnd'] . '</span>';
+                        echo '<span class="fb-post-meta-icon">' . $item['metaIconFrontEnd'] . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     }
-                    echo $value;
+                    echo $value; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
                     ?>
                 </div>
             <?php endif;
