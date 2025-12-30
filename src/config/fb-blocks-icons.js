@@ -936,11 +936,11 @@ const FB_Block_Icons = {
 			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
 		})
 	),
-	timezone: fb(
+	business_hours: fb( 
 		'svg',
 		{
 		  version: '1.1',
-		  id: 'timezoneIcon',
+		  id: 'businessHoursIcon',
 		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
