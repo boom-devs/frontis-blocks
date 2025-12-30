@@ -598,7 +598,7 @@ class BlockList
                 'slug' => 'business-hours',
                 'title' => 'Business Hours',
                 'package' => 'free',
-                'category' => 'navigation',
+                'category' => 'content',
                 'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/business-hours.svg',
