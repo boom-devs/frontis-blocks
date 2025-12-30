@@ -225,7 +225,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 = 1.1.3 – 28 November 2025 =
 - **Added**
 - `Breadcrumbs` block for contextual navigation trails.
-- `Timezone` block to display location-aware time information.
+- `Business Hours` block to display location-aware time information.
 - Global header/footer and page title visibility controls in the settings panel.
 - Update the native setting panel UI
 

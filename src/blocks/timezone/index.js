@@ -10,12 +10,12 @@ import metadata from './block.json';
 import attributes from './attributes.js';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 
-registerBlockType( metadata.name, {
+registerBlockType(metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.timezone,
+	icon: FB_Block_Icons.business_hours,
 	edit: Edit,
 	save
-} );
+});
 
 
 
