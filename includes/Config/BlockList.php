@@ -594,14 +594,14 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
-            'timezone' => [
-                'slug' => 'timezone',
-                'title' => 'Timezone',
+            'business-hours' => [
+                'slug' => 'business-hours',
+                'title' => 'Business Hours',
                 'package' => 'free',
                 'category' => 'navigation',
                 'badge' => 'free',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/timezone.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/business-hours.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
