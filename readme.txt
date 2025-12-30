@@ -8,100 +8,149 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Enhance your WordPress Block Editor with powerful and flexible custom blocks.
+Frontis Blocks is a block library with 40+ blocks, global styles, sliders/galleries, CTAs, and map/form integrations, plus ready-made patterns to help you build pages faster in the Block Editor.
 
 == Description ==
 
-**Frontis Blocks** is a block library with **30+ blocks,** global styling, sliders/galleries, CTAs, and map/form integrations, plus **pre-made design** patterns everything you need to launch in minutes.
+**Frontis Blocks** is a block library with **40+ blocks,** global styles, sliders/galleries, CTAs, and map/form integrations, plus **ready-made patterns** to help you build pages faster in the Block Editor.
 
 [youtube https://youtu.be/8d0m7ZHNrzI]
 
-**DESIGN BEAUTIFUL, FAST-LOADING WEBSITES IN THE WORDPRESS BLOCK EDITOR — 30+ BLOCKS, PREMADE DESIGNS, NO CODING.**
+**BUILD MODERN, FAST-LOADING PAGES IN THE WORDPRESS BLOCK EDITOR (GUTENBERG) WITH 40+ BLOCKS AND READY-MADE PATTERNS. NO CODING REQUIRED.**
 
 **[You can try a live demo of Frontis](https://app.zipwp.com/wp?plugins=frontis-blocks)**
 
-Finally, a block library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful block elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
+Finally, a block library that lets you design beautiful, fast, and professional websites right inside WordPress. Frontis Blocks adds a wide set of powerful elements so you can build landing pages, blogs, portfolios, and stores in minutes. It works with **any theme** and pairs perfectly with the Frontis theme for a seamless full-site editing workflow.
 
-You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That’s why we built **Frontis Blocks**. It works right inside the Block Editor so you can launch real pages right now. (With 30+ lightweight blocks plus premade designs.)
+You open the WordPress editor and just want to make a good page fast. No heavy plugin, no code, no guesswork. That's why we built **Frontis Blocks**. It works right inside the Block Editor (Gutenberg Block Editor) so you can launch real pages right now. (With 40+ lightweight blocks plus premade designs.)
 
-Add a hero with an advanced/animated heading, place a clear button, show a few testimonials, a pricing table, a gallery or slider, even a Google Map (no API key). It’s simple because it stays with native blocks that feel fast and look clean.
+Add an animated heading, buttons, testimonials, pricing tables, galleries, sliders, and a map block—all with simple controls that feel consistent with the Editor.
 
-Now, if you’ve tried big page builders — **Elementor, Divi, WPBakery, Bricks, Beaver Builder** — you already know the downsides: extra interfaces, extra scripts, and sometimes slower pages as your site grows. Frontis takes a different approach which is Block Editor first. Your content stays in standard block markup, so it’s easy to edit, easy to move, and built to be fast.
+Now, if you've tried big page builders — **Elementor, Divi, WPBakery, Bricks, Beaver Builder** — you already know the downsides: extra interfaces, extra scripts, and sometimes slower pages as your site grows. Frontis takes a different approach which is Gutenberg first. Your content stays in standard markup, so it's easy to edit, easy to move, and built to be fast.
 
 **Why Frontis instead of heavy page builders (Elementor, Divi, etc.)?**
 
-- **Native & simple:** Build inside the Block Editor (no new UI to learn).
+- **Native & simple:** Build directly in the WordPress Block Editor, using the familiar interface you already know.
 - **Fast by default:** Lightweight assets help pages load quickly and support SEO.
-- **No lock-in:** Standard blocks mean you can switch themes anytime.
-- **Real features you’ll use:** **Container* for layout, **global control** for consistent styles, **Copy & Paste Styles** to speed up your work.
-- **Launch today:** **Premade designs** and patterns give you a head start. Just replace text and images.
-- **Container:**
+- **No lock-in:** You can switch themes anytime.
+- **Real features you'll use:** Container for layout, global control for consistent styles, Copy & Paste Styles to speed up your work.
+- **Launch today:** Premade designs and patterns give you a head start. Just replace text and images.
 
 **Why is Frontis vs. other block libraries?**
 
-- **Focused, not bloated:** **30+ blocks** that cover real pages — headings, CTAs, accordions/tabs, sliders, counters, post grids, teams, pricing, testimonials, galleries and more.
+- **Focused, not bloated:** **40+ blocks** that cover real pages — headings, CTAs, accordions/tabs, sliders, counters, post grids, teams, pricing, testimonials, galleries and more.
 - **Premade designs are included:** Start with ready-made sections and full layouts, then tweak with global styles.
-- **Features:** Form styling for **Fluent Forms** and **Contact Form 7, Google Map block (no API key),** animated headings, sliders/carousels.
+- **Features:** Form styling for **Fluent Forms** and **Contact Form 7,** Google Map (no API key), animated headings, sliders/carousels.
 - **SEO-friendly structure:** Clean markup and clear structure help pages rank.
 - **Beginner-friendly, pro-ready:** Easy controls for newcomers, deeper options when you need precision.
 
 == SOME POWERFUL FEATURES OF FRONTIS BLOCKS 💪 ==
 
-- **Layouts** – Build and resize rows/columns with the **Container** controls (padding, gaps, backgrounds) for clean, responsive sections in the Block Editor.
-- **Starter Designs & Patterns** – Create pages faster with premade sections and layouts, mix, match, and publish faster.
+- **Layouts** – Build responsive sections with the Container (padding, gaps, backgrounds, and layout controls).
+- **Starter Designs & Patterns** – Mix ready-made sections and layouts to assemble pages faster.
 - **Global Styling** – Set site-wide defaults (container width, spacing, colors, typography) so every page stays consistent and no extra CSS.
-- **Copy & Paste Styles** – Style a block once, reuse it everywhere. Keep designs uniform and save time across your pages.
-- **Performance & No Lock-In** – Optimized assets and clean markup keep pages fast. Content stays in standard block format, so you can switch themes or plugins anytime.
-- **Responsive Controls** — Tweak layouts for mobile, tablet, and desktop inside the **WordPress Block Editor.**
-- **Clean, SEO-Friendly Markup** — Semantic structure that helps pages rank.
-- **Theme-Agnostic** — Works with any theme, and pairs smoothly with the Frontis theme if you want extra compatibility.
-- **Real Support & Updates** — Actively improved so your blocks stay modern and reliable.
+- **Copy & Paste Styles** – Style a block once, reuse it everywhere. Reuse the same styling elsewhere for consistent pages.
+- **Performance & No Lock-In** – Designed to keep markup clean and your content in standard blocks, so switching themes is straightforward.
+- **Responsive Controls** — Tweak spacing and alignment for mobile, tablet, and desktop.
+- **Clean, SEO-Friendly Markup** — Structured blocks that work well with modern themes and SEO plugins.
+- **Theme-Agnostic** — Regular improvements to keep compatible with current WordPress releases.
+- **Real Support & Updates** — Actively improved so your design stays modern and reliable.
 
 == Features at a Glance ==
 
-Our plugin offers a rich set of blocks to cover almost any design need. With **Frontis Blocks,** you can build dynamic layouts, interactive sections, and polished content elements in a snap:
+Frontis Blocks includes a growing collection of custom Gutenberg blocks for WordPress, organized by purpose, so you can design faster, stay consistent, and build page-builder style layouts inside the native editor.
 
-- **Container:** Create structured layouts effortlessly using the Container Block. It allows you to group multiple blocks together with custom padding, margins, background styles, and layout controls. Perfect for building advanced page sections while maintaining responsive design.
-- **Accordion:** Features collapsible elements for displaying content in a limited space. It allows users to expand and collapse sections as needed, which is ideal for FAQs or detailed lists that require space efficiency.
-- **Advanced Heading:** Offers diverse heading designs using various fonts, and decorative elements. Includes unique image masking techniques that highlight headings with creative backgrounds and shapes to capture attention.
-- **Animated Heading:** Grab your visitors’ attention with the Animated Heading Block. Add dynamic, motion-based headings that animate as users scroll or load the page. Choose from multiple animation styles to create visually engaging titles.
-- **Advanced Button:** A variety of button styles including gradients, icons, and different shapes, providing versatile options for different design needs and interaction cues.
-- **Advanced Image:** Enhances images with text overlays, gradient backgrounds for readability, strategic content placement, and dynamic effects like blur and zoom to elevate visual engagement.
-- **Advanced Video:** Displays different styles for embedding video content that enhance the visual appeal and engage users. These styles might include overlays, animations, or unique graphical elements that draw attention to the video content.
-- **Call to Action:** Tired of clunky page builders? Frontis Blocks gives you everything you need to create beautiful, modern websites — right inside the Block Editor. It’s fast, flexible, and fun to use!
-- **Image Gallery:** Various layouts and hover effects for displaying images, suitable for portfolios, product galleries, or visual storytelling, enhancing the visual appeal and user engagement on websites.
-- **Info Box:** Information boxes that combine icons, headings, and text in a structured layout, ideal for quick facts or highlights that need to stand out on a page.
-- **Icon Box:** Utilizes icons combined with text to visually represent different services or features succinctly. This design is effective for quick scanning by users, offering an immediate understanding of the core services or features offered.
-- **Dual Button:** Dual button designs for situations requiring two actions, like ‘Buy Now’ vs. ‘Learn More’, with stylistic coherence that ensures both options are visually balanced.
-- **Countdown:** Offers various countdown styles that can be used to highlight upcoming events, sales, or deadlines. Styles may range from simple numeric countdowns to more elaborate designs with full background images or animations.
-- **Feature List:** Lists the key attributes or services of a product in an organized manner, using icons, short descriptions, and varying background colors to highlight individual features effectively.
-- **Testimonials:** Features customer reviews in multiple styles, from simple text formats to more graphical interfaces with star ratings and photos, enhancing credibility and trust through user experiences.
-- **Counter:** Displays numerical information such as user counts or project stats in an aesthetically pleasing format. Options include plain numbers, progress bars, and icons that cater to various design preferences.
-- **Flip Box:** Interactive boxes that flip to reveal additional content on hover or click, offering a dynamic way to present information such as team profiles or service details in a compact space.
-- **Contact Form 7:** Different form designs that are crucial for gathering visitor information or inquiries. These designs vary in layout and styling, ensuring they can be seamlessly integrated into any site design while maintaining functionality and user engagement.
-- **Fluent Form:** Seamlessly integrate Fluent Form, one of the fastest form builders for WordPress. With this block, you can embed beautifully styled forms with just a few clicks—ideal for contact forms, surveys, or lead generation without any coding.
-- **Call to Action:** Various button styles for engaging users to take action, with contrasting colors and different shapes, including round and rectangle. Placement on boldly colored backgrounds enhances visibility and prompts user interaction.
-- **Pricing Table:** Showcases different pricing plans or product packages in a clear and comparative way. This feature helps potential customers quickly scan different options and features, facilitating easier decision-making based on cost and service level.
-- **Social Icons:** Multiple styles showcasing social media icons, ranging from minimalistic to brightly colored backgrounds, with or without text labels. This offers flexibility for integration into different website themes while maintaining brand consistency.
-- **Post Grid:** Arrange posts or articles in a grid layout, optimizing the use of space and providing a clean, organized way to browse content. Different styles may include varying image sizes, hover effects, and metadata configurations.
-- **Team Member:** Displays team member profiles in various formats, from basic lists to more dynamic presentations with social media links and detailed bios. This helps personalize a brand and showcase the people behind it in a visually engaging manner.
-- **Advanced Navigation:** Provides various navigation menu styles that can enhance the user interface of websites or applications. This feature includes options like multi-level dropdowns, mega menus, or icon-based navigation that improve the discoverability of site content.
-- **Slider:** Add eye-catching sliders to your site using the Slider Block. Display multiple images or content slides in a rotating carousel with transition effects. Fully customizable to suit hero sections, product showcases, or testimonials.
-- **Marquee Carousel:** Showcase continuous scrolling content with the Marquee Carousel Block. Ideal for displaying partner logos, product highlights, or announcement tickers in a smooth, horizontal scroll. Customize speed, direction, and content with ease.
-- **Tabs:** Show content in tidy tabs (e.g., Features / Specs / FAQs). Mobile-friendly, easy to scan, perfect for long info.
-- **Google Map Block:** Add Google Maps in seconds **(no API key).** Drop a responsive map with custom pin, light/dark styles, and zoom—perfect for contact & local SEO pages.
+**Headings & Text**
 
-This collection of **block plugins** is curated to fit any project—whether you’re building a portfolio, business site, blog, or e-commerce store.
+- **Advanced Heading:** Create stylish headings with decorative elements, custom typography, and eye-catching designs.
+- **Animated Heading:** Add motion to your headings for stronger visual impact and better engagement.
+- **Advanced Paragraph:** Improve normal text with better spacing, styling controls, and readable layouts.
+- **Post Title:** Dynamically display the current post/page title with full design control.
+
+**Buttons & Call To Action**
+
+- **Advanced Button:** Build modern buttons with icons, gradients, shapes, and hover effects.
+- **Dual Button:** Show two actions side-by-side (like Buy Now / Learn More) with balanced styling.
+- **Call to Action:** Create high-converting CTA sections with bold text + buttons that stand out.
+
+**Sliders, Carousels & Tickers**
+
+- **Slider:** Showcase multiple slides with smooth transitions, layouts, and controls.
+- **Slide Item:** Add and design individual slides inside the Slider.
+- **Marquee Carousel:** Create an infinite scrolling carousel for logos, images, or highlights.
+- **Marquee Carousel Item:** Add each scrolling item inside the Marquee Carousel.
+- **News Ticker:** Display scrolling headlines or updates—great for announcements and latest posts.
+
+**Tabs & Accordions**
+
+- **Tabs:** Organize content into clean tabbed sections to reduce scrolling and improve clarity.
+- **Tabs Item:** Add each tab panel inside the Tabs.
+- **Accordion:** Show collapsible content for FAQs, feature details, or compact layouts.
+- **Accordion Item:** Add each expandable section inside the Accordion.
+
+**Images, Media & Galleries**
+
+- **Advanced Image:** Enhance images with overlays, gradients, layout positioning, and visual effects.
+- **Advanced Video:** Embed videos with styled layouts such as overlays and attention-grabbing designs.
+- **Image Gallery:** Build galleries with multiple layouts and hover effects for portfolios or showcases.
+
+**Content & Info Boxes**
+
+- **Icon Box:** Highlight services or features with an icon + title + short text (easy to scan).
+- **Info Box:** Display key info in a structured layout for quick highlights or callouts.
+- **Flip Box:** Reveal additional content on hover/click—great for compact info or team/service cards.
+- **Feature List:** Create clean feature lists using icons and short descriptions for clarity.
+- **Team Member:** Show team profiles with photos, roles, and social links to build trust.
+- **Testimonial:** Display customer reviews in polished layouts to increase credibility.
+- **Pricing Table:** Compare plans clearly with feature lists and strong call-to-action buttons.
+
+**Forms & Integrations**
+
+- **Post Comment Form:** Add a styled comment form layout that matches your site design.
+- **Contact Form 7:** Display CF7 forms with design-friendly layouts that blend into your page.
+- **Fluent Form:** Present Fluent Forms in clean, modern styles for better user experience.
+
+**Blog & Post Elements**
+
+- **Post Grid:** Show posts in a grid layout with flexible styling for blogs and magazines.
+- **Post Category:** Display post categories with customizable design.
+- **Post Featured Image:** Show featured images dynamically with layout and style control.
+
+**Social & Sharing**
+
+- **Social Share:** Add share buttons so visitors can share your content faster.
+- **Social Share Child:** Build each share option inside the Social Share block.
+- **Social Icons:** Add social profile icons with multiple styles, layouts, and spacing controls.
+
+**Counters, Timers & Progress**
+
+- **Counter Number:** Highlight numbers like users, downloads, or milestones with style controls.
+- **Progressbar:** Visualize progress, skills, or stats using clean progress indicators.
+- **Countdown:** Create countdown timers for launches, sales, events, and deadlines.
+
+**Layout & Structure**
+
+- **Container:** Build flexible sections and layouts with better control over spacing and alignment.
+
+**Navigation & Maps**
+
+- **Advanced Navigation:** Create modern menus with improved styling and layout options.
+- **Google Map:** Add a map section for locations, contact pages, and store pages.
+
+**Technical & Performance**
+
+- **Critical CSS Separator:** Organize and separate critical styling sections to help manage performance-focused layouts.
+
+This collection is designed to fit any project—whether you're building a portfolio, business site, blog, or e-commerce store—while keeping everything inside the editor for a faster, cleaner workflow.
 
 == Frontis Blocks + Frontis Theme = Future-Ready WordPress (FSE) ==
 
-**Frontis Blocks** works with any theme, and it integrates seamlessly with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
+**Frontis Blocks** works with any theme, but it works best with the **Frontis Theme** — both are built for **Full Site Editing (FSE),** which is the future of WordPress.
 
-- **One smooth workflow:** Design headers, footers, and templates in the Block Editor with the same blocks you use for pages.
-- **Perfect fit out of the box:** Global colors, fonts, and spacing from the Frontis Theme match every block in Frontis Blocks.
+- **One smooth workflow:** Design headers, footers, and templates in the editor with the same blocks you use for pages.
 - **Fast & stable:** Shared lightweight styles (no CSS fights) for better performance and Core Web Vitals.
 - **Consistent design system:** Premade designs/patterns look the same site-wide—no patchwork.
-- **No lock-in:** Still standard blocks. You can change themes at any time.
+- **No lock-in:** You can change themes at any time.
 
 
 == All Your Favorite Plugins—Supported ==
@@ -128,19 +177,19 @@ And More
 
 == Documentation ==
 
-Start with the **Frontis Blocks documentation** for quick setup, block guides, and best practices. Clear steps, screenshots, and tips to help you build faster in the Gutenberg editor.
+Start with the **Frontis Blocks documentation** for quick setup, guides, and best practices. Clear steps, screenshots, and tips to help you build faster in the Gutenberg editor.
 
 **[Docs](https://docs.wpmessiah.com/docs/frontis-blocks/)**
 
 == Support ==
 
-Need help after checking the docs? Send us a message via **Frontis Blocks support.** Share your WordPress version, theme, and steps to reproduce—we’ll reply fast.
+Need help after checking the docs? Send us a message via **Frontis support.** Share your WordPress version, theme, and steps to reproduce—we'll reply fast.
 
 **[Support](https://support.wpmessiah.com/)**
 
-== Say Hello, Get Help - Connect with the Frontis Blocks Team ==
+== Say Hello, Get Help - Connect with the Frontis Team ==
 
-We’re just a message away. Follow us for quick tips, release news, 60-second tutorials, and fast help from real humans. Got a question about **Frontis Block** or your setup? DM us — we’ll jump in.
+We're just a message away. Follow us for quick tips, release news, 60-second tutorials, and fast help from real humans. Got a question about **Frontis** or your setup? DM us — we'll jump in.
 
 - **Facebook Group:** https://www.facebook.com/groups/wpmessiah
 - **Discord:** https://discord.gg/wEVmDvRbad
@@ -152,7 +201,7 @@ We’re just a message away. Follow us for quick tips, release news, 60-second t
 Frontis Blocks is a WordPress plugin that adds powerful blocks to the Gutenberg editor (Block Editor). It helps you build modern pages fast.
 
 = How many blocks are included? =  
-Right now, Frontis Blocks includes 30+ blocks (and growing). You’ll find headings, buttons, galleries, sliders, tabs/accordions, pricing tables, testimonials, post grids, and more.
+Right now, Frontis Blocks includes 40+ blocks (and growing). You'll find headings, buttons, galleries, sliders, tabs/accordions, pricing tables, testimonials, post grids, and more.
 
 = Does it work with any theme? =  
 Yes. Frontis Blocks works with any WordPress theme. It works best with the Frontis Theme, which is built for Full Site Editing (FSE).
@@ -161,28 +210,28 @@ Yes. Frontis Blocks works with any WordPress theme. It works best with the Front
 Yes. Frontis Blocks is free to install and use.
 
 = Will it slow down my site? =  
-No. Frontis Blocks is lightweight and performance-minded. Assets are optimized so your pages stay fast and SEO-friendly.
+No. Frontis is lightweight and performance-minded. Assets are optimized so your pages stay fast and SEO-friendly.
 
 = Is this a page builder? =  
-No. It’s a Gutenberg block library that gives you a page-builder-style workflow inside the Gutenberg editor. You get page-builder results without the extra weight or lock-in.
+No. It's a Gutenberg block library that gives you a page-builder-style workflow inside the Gutenberg editor. You get page-builder results without the extra weight or lock-in.
 
 = Do I need coding skills? =  
-No. You can build everything with simple controls. If you’re advanced, you can still fine-tune designs with the tools you already know.
+No. You can build everything with simple controls. If you're advanced, you can still fine-tune designs with the tools you already know.
 
 = Do you have premade designs or patterns? =  
 Yes. You can start with pre-made sections/patterns and then customize them. It helps you launch pages in minutes.
 
 = Does it support Full Site Editing (FSE)? =  
-Yes. Frontis Blocks works great with FSE, and it’s best paired with the Frontis Theme for a smooth, future-ready setup.
+Yes. Frontis works great with FSE, and it's best paired with the Frontis Theme for a smooth, future-ready setup.
 
 = Is it mobile-friendly? =
 Yes. All blocks are responsive. You can adjust spacing, alignment, and layout for mobile, tablet, and desktop.
 
 = Is Frontis Blocks good for SEO? =
-Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It’s built with SEO and performance in mind.
+Yes. Blocks use clean, semantic markup, which helps search engines understand your content. It's built with SEO and performance in mind.
 
 = Can I switch themes later? =
-Yes. Your content is standard Gutenberg block markup, so you can switch themes or tools anytime—no lock-in.
+Yes. Your content is standard markup, so you can switch themes or tools anytime—no lock-in.
 
 == Screenshots ==
 
@@ -284,7 +333,7 @@ Quick Action Bar
 Resolved Issues:
 - Advanced Button Block – Fixed background color reset, removed width limitation (now supports larger values), eliminated unnecessary icon gap for icon-only buttons, removed unwanted placeholder text when button text is cleared, and resolved wrapper conflict with slider controls.
 
-- Post Grid Block – Fixed “Read More” button background reset issue and ensured “Load More” button hides automatically once all posts are loaded.
+- Post Grid Block – Fixed "Read More" button background reset issue and ensured "Load More" button hides automatically once all posts are loaded.
 
 - Team Member Block – Added responsive alignment controls for both Social Profiles (Basic Tab) and Content section (Style Tab).
 
