@@ -1,4 +1,4 @@
-=== Frontis Blocks — Block Library for the Block Editor ===
+=== Frontis Blocks — Gutenberg Block Library for the Block Editor ===
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0

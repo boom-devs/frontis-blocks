@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:       Frontis Blocks — Block Library for the Block Editor
+ * Plugin Name:       Frontis Blocks — Gutenberg Block Library for the Block Editor
  * Plugin URI:        https://wpmessiah.com/products/frontis-blocks/
  * Description:       A blocks library for the Gutenberg editor.
  * Version:           1.1.6
