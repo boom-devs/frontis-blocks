@@ -142,6 +142,12 @@ class Helper
      */
     public static function get_related_taxonomy()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_related_taxonomy');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $post_types = self::get_post_types();
         $return_array = array();
 
@@ -157,10 +163,15 @@ class Helper
                 }
 
                 $data[$tax_slug] = $tax;
-                $terms = get_terms($tax_slug);
+                // Limit terms to 100 for better performance
+                $terms = get_terms(array(
+                    'taxonomy' => $tax_slug,
+                    'number' => 100,
+                    'hide_empty' => false,
+                ));
                 $related_tax = array();
 
-                if (!empty($terms)) {
+                if (!empty($terms) && !is_wp_error($terms)) {
                     foreach ($terms as $t_index => $t_obj) {
                         $related_tax[] = array(
                             'id' => $t_obj->term_id,
@@ -175,7 +186,12 @@ class Helper
             $return_array[$post_type]['taxonomy'] = $data;
         }
 
-        return apply_filters('fb_post_loop_taxonomies', $return_array);
+        $result = apply_filters('fb_post_loop_taxonomies', $return_array);
+
+        // Cache for 12 hours
+        set_transient('frontis_related_taxonomy', $result, 12 * HOUR_IN_SECONDS);
+
+        return $result;
     }
 
     /**
@@ -183,11 +199,22 @@ class Helper
      */
     public static function get_all_authors_with_posts()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_authors_with_posts');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $args = array(
             'has_published_posts' => true,
             'fields' => 'all_with_meta',
         );
-        return get_users($args);
+        $authors = get_users($args);
+
+        // Cache for 12 hours
+        set_transient('frontis_authors_with_posts', $authors, 12 * HOUR_IN_SECONDS);
+
+        return $authors;
     }
 
     /**
@@ -421,6 +448,12 @@ class Helper
      */
     public static function get_post_types()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_post_types');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $post_types = get_post_types(
             array(
                 'public' => true,
@@ -443,7 +476,12 @@ class Helper
             );
         }
 
-        return apply_filters('fb_loop_post_types', $options);
+        $result = apply_filters('fb_loop_post_types', $options);
+
+        // Cache for 12 hours
+        set_transient('frontis_post_types', $result, 12 * HOUR_IN_SECONDS);
+
+        return $result;
     }
 
     /**
@@ -1216,5 +1254,21 @@ class Helper
             $template_settings,
             $page_settings
         );
+    }
+
+    /**
+     * Clear all Frontis Blocks performance caches.
+     * 
+     * Call this function when you need to manually clear cached data.
+     * Caches are also automatically cleared on post save, term changes, and user updates.
+     * 
+     * @since 1.1.7
+     * @return void
+     */
+    public static function clear_frontis_caches()
+    {
+        delete_transient('frontis_related_taxonomy');
+        delete_transient('frontis_authors_with_posts');
+        delete_transient('frontis_post_types');
     }
 }
