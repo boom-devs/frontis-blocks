@@ -131,10 +131,6 @@ final class Plugin
 	 */
 	private function init_classes()
 	{
-
-		//load blocks
-		self::$blocks = BlockList::get_instance()->get_blocks();
-
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
 	}
