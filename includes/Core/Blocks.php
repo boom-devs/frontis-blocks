@@ -61,6 +61,76 @@ class Blocks
 		$tablet_breakpoint = isset($container_widths['Tablet']) ? intval($container_widths['Tablet']) : 1024;
 		$mobile_breakpoint = isset($container_widths['Mobile']) ? intval($container_widths['Mobile']) : 767;
 
+		// Pre-load all expensive data ONCE before the loop (Performance optimization)
+		$license_options = get_option('frontisblockspro_license_options');
+		$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
+		$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
+
+		// Pre-load admin data once (these are now cached via transients)
+		$admin_localize_array = [];
+		if (is_admin()) {
+			$admin_localize_array = [
+				'admin_nonce' => wp_create_nonce('admin-nonce'),
+				'fluent_plugin_active' => FluentForms::check_enable(),
+				'fluent_form_lists' => json_encode(FluentForms::form_list()),
+				'contact_form_active' => ContactForms7::check_enable(),
+				'contact_form7_lists' => ContactForms7::form_list(),
+				'contact_form7_html' => ContactForms7::wf7_form_html(),
+				'post_types' => Helper::get_post_types(),
+				'all_cats' => Helper::get_related_taxonomy(),
+				'all_authors' => Helper::get_all_authors_with_posts(),
+				'image_sizes' => Helper::get_image_sizes(),
+				'desktop_breakpoint' => $desktop_breakpoint,
+				'tablet_breakpoint' => $tablet_breakpoint,
+				'mobile_breakpoint' => $mobile_breakpoint,
+				'global_typography' => get_option('fb_globaltypo'),
+				'sc_license_id' => $sc_license_id,
+				'sc_license_key' => $sc_license_key,
+			];
+		}
+
+		// Pre-load common data once
+		$common_localize_array = [
+			'site_url' => site_url(),
+			'pluginUrl' => FB_PLUGIN_URL,
+			'fluent_form_install_url' => admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term'),
+			'contact_form7_install_url' => admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term'),
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('fb_post_like_nonce'),
+			'user_logged_in' => is_user_logged_in(),
+			'prefix' => FB_PREFIX,
+			'desktop_breakpoint' => $desktop_breakpoint,
+			'tablet_breakpoint' => $tablet_breakpoint,
+			'mobile_breakpoint' => $mobile_breakpoint,
+			'container_column_gap' => $container_column_gap,
+			'container_row_gap' => $container_row_gap,
+			'container_padding' => $container_padding,
+		];
+
+		// Pre-load social share data once
+		$social_share_data = [
+			'permalink' => get_permalink(),
+			'title' => get_the_title(),
+			'network_labels' => [
+				'facebook' => 'Facebook',
+				'twitter' => 'Twitter',
+				'linkedin' => 'LinkedIn',
+				'whatsapp' => 'WhatsApp',
+				'pinterest' => 'Pinterest',
+				'reddit' => 'Reddit',
+			],
+			'share_urls' => [
+				'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
+				'twitter' => 'https://twitter.com/intent/tweet?url=',
+				'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
+				'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
+				'reddit' => 'https://reddit.com/submit?url=',
+				'whatsapp' => 'https://wa.me/?text=',
+			]
+		];
+
+		// Merge all localize data once
+		$localize_array = array_merge($admin_localize_array, $common_localize_array, $social_share_data);
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
@@ -74,7 +144,6 @@ class Blocks
 				if ($complete !== 'true') {
 					continue;
 				}
-				$package = $block['package'];
 				$plugin_dir = FB_PLUGIN_PATH;
 				$blocks_dir = FB_BLOCKS_DIR . $slug;
 				$plugin_slug = 'frontis-blocks';
@@ -83,8 +152,6 @@ class Blocks
 					continue;
 				}
 
-				$localize_array = [];
-
 				// Enqueue block style in the editor
 				register_block_type($blocks_dir);
 				wp_set_script_translations("{$plugin_slug}-{$slug}-editor-script", $plugin_slug, $plugin_dir . 'languages');
@@ -92,74 +159,8 @@ class Blocks
 				// Enqueue block editor script and pass localized data
 				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
 				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
-				$license_options = get_option('frontisblockspro_license_options');
-				$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
-				$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
 
-				if (is_admin()) {
-					$admin_localize_array = [
-						'admin_nonce' => wp_create_nonce('admin-nonce'),
-						'fluent_plugin_active' => FluentForms::check_enable(),
-						'fluent_form_lists' => json_encode(FluentForms::form_list()),
-						'contact_form_active' => ContactForms7::check_enable(),
-						'contact_form7_lists' => ContactForms7::form_list(),
-						'contact_form7_html' => ContactForms7::wf7_form_html(),
-						'post_types' => Helper::get_post_types(),
-						'all_cats' => Helper::get_related_taxonomy(),
-						'all_authors' => Helper::get_all_authors_with_posts(),
-						'image_sizes' => Helper::get_image_sizes(),
-						'desktop_breakpoint' => $desktop_breakpoint,
-						'tablet_breakpoint' => $tablet_breakpoint,
-						'mobile_breakpoint' => $mobile_breakpoint,
-						'global_typography' => get_option('fb_globaltypo'),
-						'sc_license_id' => $sc_license_id,
-						'sc_license_key' => $sc_license_key,
-					];
-
-					$localize_array = array_merge($localize_array, $admin_localize_array);
-				}
-
-				$common_localize_array = [
-					'site_url' => site_url(),
-					'pluginUrl' => FB_PLUGIN_URL,
-					'fluent_form_install_url' => admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term'),
-					'contact_form7_install_url' => admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term'),
-					'ajax_url' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('fb_post_like_nonce'),
-					'user_logged_in' => is_user_logged_in(),
-					'prefix' => FB_PREFIX,
-					// 'default_container_width' => $default_container_width,
-					'desktop_breakpoint' => $desktop_breakpoint,
-					'tablet_breakpoint' => $tablet_breakpoint,
-					'mobile_breakpoint' => $mobile_breakpoint,
-					'container_column_gap' => $container_column_gap,
-					'container_row_gap' => $container_row_gap,
-					'container_padding' => $container_padding,
-				];
-
-				$social_share_data = [
-					'permalink' => get_permalink(),
-					'title' => get_the_title(),
-					'network_labels' => [
-						'facebook' => 'Facebook',
-						'twitter' => 'Twitter',
-						'linkedin' => 'LinkedIn',
-						'whatsapp' => 'WhatsApp',
-						'pinterest' => 'Pinterest',
-						'reddit' => 'Reddit',
-					],
-					'share_urls' => [
-						'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
-						'twitter' => 'https://twitter.com/intent/tweet?url=',
-						'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
-						'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
-						'reddit' => 'https://reddit.com/submit?url=',
-						'whatsapp' => 'https://wa.me/?text=',
-					]
-				];
-
-				$localize_array = array_merge($localize_array, $common_localize_array, $social_share_data);
-				// Localize scripts
+				// Localize scripts (using pre-loaded data)
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
