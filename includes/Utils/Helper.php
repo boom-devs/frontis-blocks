@@ -1267,8 +1267,14 @@ class Helper
      */
     public static function clear_frontis_caches()
     {
+        // Helper caches
         delete_transient('frontis_related_taxonomy');
         delete_transient('frontis_authors_with_posts');
         delete_transient('frontis_post_types');
+
+        // Form caches
+        delete_transient('frontis_fluent_forms_list');
+        delete_transient('frontis_cf7_form_list');
+        delete_transient('frontis_cf7_form_html');
     }
 }
