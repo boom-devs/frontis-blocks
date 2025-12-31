@@ -31,6 +31,14 @@ class Blocks
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
+
+		// Cache invalidation hooks - clear caches when content changes
+		add_action('save_post', [Helper::class, 'clear_frontis_caches'], 20);
+		add_action('created_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('edited_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
+		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
 	}
 
 	/**
@@ -224,35 +232,36 @@ class Blocks
 			),
 			$categories
 		);
-	}	
+	}
 
 	/**
 	 * Apply header/footer disable logic when rendering template part blocks.
 	 */
-	public function header_footer_settings( $block_content, $block ) {
+	public function header_footer_settings($block_content, $block)
+	{
 
 		// Only process template-part blocks
 		if (
-			empty( $block['blockName'] ) ||
+			empty($block['blockName']) ||
 			'core/template-part' !== $block['blockName']
 		) {
 			return $block_content;
 		}
-	
+
 		// Current context post ID
 		$post_id = get_queried_object_id();
-		if ( ! $post_id ) {
+		if (!$post_id) {
 			$post_id = get_the_ID();
 		}
-		$post_id = absint( $post_id );
-	
+		$post_id = absint($post_id);
+
 		// Priority already handled here: default < global < template < page
-		$settings = Helper::resolve_frontis_settings( $post_id );
-	
+		$settings = Helper::resolve_frontis_settings($post_id);
+
 		// Detect template slug
 		$template_slug = get_page_template_slug($post_id);
-		$post          = get_post($post_id);
-		
+		$post = get_post($post_id);
+
 		if (!$template_slug) {
 			if ($post && $post->post_type === 'page') {
 				$template_slug = 'page';
@@ -260,70 +269,70 @@ class Blocks
 				$template_slug = 'single';
 			}
 		}
-	
-		$stylesheet  = get_stylesheet();
+
+		$stylesheet = get_stylesheet();
 		$template_id = $stylesheet . '//' . $template_slug;
-		$template    = get_block_template($template_id, 'wp_template');
-	
+		$template = get_block_template($template_id, 'wp_template');
+
 		// Template parts
 		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for theme template parts
 		$template_part_posts = get_posts(
 			array(
-				'post_type'     => 'wp_template_part',
-				'post_status'   => 'publish',
-				'tax_query'     => array(
+				'post_type' => 'wp_template_part',
+				'post_status' => 'publish',
+				'tax_query' => array(
 					array(
 						'taxonomy' => 'wp_theme',
-						'field'    => 'name',
-						'terms'    => $stylesheet,
+						'field' => 'name',
+						'terms' => $stylesheet,
 					),
 				),
 				'no_found_rows' => true,
 			)
 		);
-	
+
 		/**
 		 * Correct Tag Detection
 		 * =====================
 		 * Use a single clean array and strictly match the slug.
 		 */
 		$tag = [];
-	
+
 		// Add the current block slug
 		if (!empty($block['attrs']['slug'])) {
 			$tag[] = $block['attrs']['slug'];
 		}
-	
+
 		// Detect whether the template part is a header or footer
-		if ( $template_part_posts ) {
-			foreach ( $template_part_posts as $template_part_post ) {
-	
-				$block_template = _build_block_template_result_from_post( $template_part_post );
-	
+		if ($template_part_posts) {
+			foreach ($template_part_posts as $template_part_post) {
+
+				$block_template = _build_block_template_result_from_post($template_part_post);
+
 				// Strict slug match
 				if (
-					! empty($block['attrs']['slug']) &&
+					!empty($block['attrs']['slug']) &&
 					$block_template->slug === $block['attrs']['slug']
 				) {
-					if ( isset( $block_template->area ) ) {
-						if ( $block_template->area === 'header' ) {
+					if (isset($block_template->area)) {
+						if ($block_template->area === 'header') {
 							$tag[] = 'header';
 						}
-						if ( $block_template->area === 'footer' ) {
+						if ($block_template->area === 'footer') {
 							$tag[] = 'footer';
 						}
 					}
 				}
 			}
 		}
-	
+
 		/**
 		 * HANDLING DISABLE LOGIC
 		 * ======================
 		 * When the tag contains 'header', only the header will be disabled.
 		 * When it contains 'footer', only the footer will be disabled.
 		 */
-	
+
 		// Disable Header
 		if (
 			isset($settings['disableHeader']) &&
@@ -332,7 +341,7 @@ class Blocks
 		) {
 			return '';
 		}
-	
+
 		// Disable Footer
 		if (
 			isset($settings['disableFooter']) &&
@@ -341,7 +350,7 @@ class Blocks
 		) {
 			return '';
 		}
-	
+
 		// Default return
 		return $block_content;
 	}
@@ -362,23 +371,24 @@ class Blocks
 	/**
 	 * Central render filter to inject Frontis-specific behaviors.
 	 */
-	public function render_block($block_content, $parsed_block, $block_obj){
+	public function render_block($block_content, $parsed_block, $block_obj)
+	{
 
 		// 1) Get current post ID
 		$post_id = get_queried_object_id();
-		if ( ! $post_id ) {
+		if (!$post_id) {
 			$post_id = get_the_ID();
 		}
-		$post_id = absint( $post_id );
-	
+		$post_id = absint($post_id);
+
 		// 2) Get merged settings (global -> template -> page)
-		$settings = Helper::resolve_frontis_settings( $post_id );
-	
+		$settings = Helper::resolve_frontis_settings($post_id);
+
 		// 3) Handle Page Title disable for core/post-title block
 		if (
-			! empty( $parsed_block['blockName'] )
+			!empty($parsed_block['blockName'])
 			&& $parsed_block['blockName'] === 'core/post-title'
-			&& ! empty( $settings['disablePageTitle'] )
+			&& !empty($settings['disablePageTitle'])
 		) {
 			return ''; // Completely hide the title block
 		}
