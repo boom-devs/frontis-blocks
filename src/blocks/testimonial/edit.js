@@ -15,10 +15,11 @@ import {
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
-const Inspector = lazy(() => import('./inspector'));
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import('./inspector'));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {

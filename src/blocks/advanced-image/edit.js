@@ -8,12 +8,13 @@ import {
   MediaUploadCheck,
 } from "@wordpress/block-editor";
 import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
-import { useEffect } from "@wordpress/element";
+import { useEffect, lazy, Suspense } from "@wordpress/element";
 // Internal
-import Inspector from "./inspector";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
 import useDynamicImage from "@Components/use-dynamic-image";
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
   const {
@@ -67,20 +68,19 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     dynamicImageFallbackId,
     dynamicImageEnableLink,
     dynamicImageLinkSource,
+    blockStyle,
 
   } = attributes;
 
   // block props (unchanged)
   const blockProps = useBlockProps({
-    className: `fb-advanced-image-main-wrapper ${blockID} ${
-      advancedImageDesktopSwitcher && "fb-desktop-responsive"
-    } ${advancedImageTabletSwitcher && "fb-tablet-responsive"} ${
-      advancedImageMobileSwitcher && "fb-mobile-responsive"
-    }`,
+    className: `fb-advanced-image-main-wrapper ${blockID} ${advancedImageDesktopSwitcher && "fb-desktop-responsive"
+      } ${advancedImageTabletSwitcher && "fb-tablet-responsive"} ${advancedImageMobileSwitcher && "fb-mobile-responsive"
+      }`,
   });
 
   // loop context from block.json usesContext (unchanged)
-  const loopPostId   = context?.postId;
+  const loopPostId = context?.postId;
   const loopPostType = context?.postType;
 
   // dynamic image source
@@ -129,21 +129,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
   const renderSource = dynamicImageEnabled
     ? (dynamicSource || null)
     : {
-        url: advancedImageUrl,
-        alt: advancedImageAlt || "",
-        width: advancedImageDefaultWidth,
-        height: advancedImageDefaultHeight,
-        srcSet: advancedImageSrcSet || undefined,
-      };
+      url: advancedImageUrl,
+      alt: advancedImageAlt || "",
+      width: advancedImageDefaultWidth,
+      height: advancedImageDefaultHeight,
+      srcSet: advancedImageSrcSet || undefined,
+    };
 
   return (
     <>
-      <Inspector
-        attributes={attributes}
-        setAttributes={setAttributes}
-        clientId={clientId}
-        onSelectImage={onSelectImage}
-      />
+      <Suspense fallback={null}>
+        <Inspector
+          attributes={attributes}
+          setAttributes={setAttributes}
+          clientId={clientId}
+          onSelectImage={onSelectImage}
+        />
+      </Suspense>
 
       <BlockControls>
         <ToolbarGroup>
@@ -267,8 +269,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
               />
             </div>
           )}
+
         </div>
       </div>
+      <style>{blockStyle}</style>
     </>
   );
 }

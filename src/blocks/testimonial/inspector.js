@@ -3197,9 +3197,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
     }, [allBlockStyle, customCss]);
 
-
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     /**
      * Generate SVG Icons for Icon
      */
