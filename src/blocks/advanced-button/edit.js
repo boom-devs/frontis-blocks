@@ -12,12 +12,11 @@ import { useRef, lazy, Suspense } from '@wordpress/element';
 /**
  * Internal dependencies
  */
+const Inspector = lazy(() => import('./inspector'));
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
-
-const Inspector = lazy(() => import('./inspector'));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {

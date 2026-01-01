@@ -6,9 +6,8 @@ import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
-import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-
 const Inspector = lazy(() => import('./inspector'));
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];

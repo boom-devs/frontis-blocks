@@ -5,10 +5,9 @@ import { __ } from "@wordpress/i18n";
 import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
 import { useRef, memo, useEffect, useMemo, lazy, Suspense } from "@wordpress/element";
+const Inspector = lazy(() => import('./inspector'));
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-
-const Inspector = lazy(() => import('./inspector'));
 
 
 const Edit = (props) => {
