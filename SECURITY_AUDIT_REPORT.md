@@ -13,6 +13,29 @@
 
 ---
 
+## 📊 Resolution Status
+
+| # | Issue | Severity | Status |
+|---|-------|----------|--------|
+| 1 | Missing Data Sanitization in `GlobalSettings.php` | 🔴 Critical | ⏳ Pending |
+| 2 | Missing Sanitization in `TemplateLibrary.php` | 🔴 Critical | ✅ **RESOLVED** (2026-01-01) |
+| 3 | Missing Sanitization in `Settings.php` | 🔴 Critical | ✅ **RESOLVED** (2026-01-01) |
+| 4 | Open REST API Endpoint | 🟠 High | ⏳ Pending |
+| 5 | Potential Path Traversal in Icon Upload | 🟠 High | ⏳ Pending |
+| 6 | Debug Logging in Production | 🟡 Medium | ⏳ Pending |
+| 7 | `flush_rewrite_rules()` on Every Load | 🔴 Critical | ⏳ Pending |
+| 8 | No Caching for Google Fonts API | 🟠 High | ⏳ Pending |
+| 9 | Multiple Database Queries | 🟠 High | ⏳ Pending |
+| 10 | auth_callback Returns True | 🟠 High | ⏳ Pending |
+| 11 | Unused Variable `$suffix` | 🟡 Medium | ⏳ Pending |
+| 12 | Commented-Out Code Blocks | 🟡 Medium | ⏳ Pending |
+| 13 | Missing Return Statement | 🟡 Medium | ⏳ Pending |
+| 14 | Inconsistent Nonce Naming | 🟡 Medium | ⏳ Pending |
+
+**Progress: 2/14 issues resolved (14%)**
+
+---
+
 ## Security Issues
 
 ### 🔴 CRITICAL
@@ -35,33 +58,29 @@ if (!wp_verify_nonce($_POST['nonce'], 'fb_sidebar_nonce')) {
 
 ---
 
-#### 2. Missing Sanitization in `TemplateLibrary.php`
+#### 2. ~~Missing Sanitization in `TemplateLibrary.php`~~ ✅ SOLVED
 **File**: [TemplateLibrary.php](file:///Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/includes/Admin/Ajax/TemplateLibrary.php)  
-**Lines**: 70-71, 338
+**Lines**: 70-71, 338  
+**Status**: ✅ Fixed on 2026-01-01
 
+**Applied Fix**:
 ```php
-// Lines 70-71 - No sanitization
-$option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
-$value = isset($_POST['value']) ? $_POST['value'] : '';
-
-// Line 338 - Content not properly sanitized before database storage
-$content = isset($_POST['content']) ? $_POST['content'] : '';
-```
-
-**Issue**: User input is used to create dynamic option names and values without sanitization, enabling potential option injection attacks.
-
-**Fix**:
-```php
+// Lines 70-71 - Now sanitized
 $option_name = isset($_POST['option_name']) ? sanitize_key($_POST['option_name']) : '';
 $value = isset($_POST['value']) ? sanitize_text_field($_POST['value']) : '';
+
+// Line 338 - Content now sanitized with wp_kses_post()
+$content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
 ```
 
 ---
 
-#### 3. Missing Sanitization in `Settings.php`
+#### 3. ~~Missing Sanitization in `Settings.php`~~ ✅ SOLVED
 **File**: [Settings.php](file:///Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/includes/Admin/Ajax/Settings.php)  
-**Lines**: 80, 368
+**Lines**: 80, 368  
+**Status**: ✅ Fixed on 2026-01-01
 
+**Original Code (Vulnerable)**:
 ```php
 // Line 80 - Array keys not sanitized
 $keys = isset($_POST['keys']) ? $_POST['keys'] : [];
@@ -70,7 +89,14 @@ $keys = isset($_POST['keys']) ? $_POST['keys'] : [];
 $allowed_blocks = isset($_POST['data']) ? ($_POST['data']) : [];
 ```
 
-**Issue**: User-provided array keys are used directly in database queries, potentially allowing unauthorized data access.
+**Applied Fix**:
+```php
+// Line 80 - Array keys now sanitized
+$keys = isset($_POST['keys']) ? array_map('sanitize_key', (array) $_POST['keys']) : [];
+
+// Line 368 - Data now sanitized
+$allowed_blocks = isset($_POST['data']) ? array_map('sanitize_text_field', (array) $_POST['data']) : [];
+```
 
 ---
 
