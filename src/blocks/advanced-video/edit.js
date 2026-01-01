@@ -1,16 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useRef, useMemo } from '@wordpress/element';
-import Inspector from "./inspector";
+import { useRef, useMemo, lazy, Suspense } from '@wordpress/element';
 import ReactPlayer from "react-player";
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
+const Inspector = lazy(() => import("./inspector"));
+
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockID,
+        blockStyle,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
@@ -47,11 +49,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} ref={panelRef} id={videoGlobalWraperID}>
@@ -77,6 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }
