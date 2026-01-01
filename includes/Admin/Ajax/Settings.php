@@ -77,11 +77,12 @@ class Settings extends AjaxBase
 			return;
 		}
 
-		$keys = isset($_POST['keys']) ? $_POST['keys'] : [];
+		$keys = isset($_POST['keys']) ? array_map('sanitize_key', (array) $_POST['keys']) : [];
 		$options = [];
 
 		foreach ($keys as $key) {
-			$options[$key] = get_option("fb_$key");
+			$sanitized_key = sanitize_key($key);
+			$options[$sanitized_key] = get_option("fb_$sanitized_key");
 		}
 
 		wp_send_json_success($options);
@@ -365,7 +366,7 @@ class Settings extends AjaxBase
 			return;
 		}
 
-		$allowed_blocks = isset($_POST['data']) ? ($_POST['data']) : [];
+		$allowed_blocks = isset($_POST['data']) ? array_map('sanitize_text_field', (array) $_POST['data']) : [];
 
 		$value = json_encode($allowed_blocks);
 
