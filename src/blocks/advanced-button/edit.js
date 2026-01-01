@@ -1,26 +1,28 @@
 import { __ } from '@wordpress/i18n';
-import { 
-    useBlockProps, 
-    RichText, 
+import {
+    useBlockProps,
+    RichText,
     BlockControls,
     AlignmentToolbar,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
 
-import { useRef } from '@wordpress/element';
+import { useRef, lazy, Suspense } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
+const Inspector = lazy(() => import('./inspector'));
+
 export default function Edit({ attributes, setAttributes, clientId, context }) {
-    const { 
+    const {
         blockId,
+        blockStyle,
         buttonAlignment,
         buttonTextSwitcher,
         buttonText,
@@ -31,7 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         buttonIconPosition,
 
         buttonIconImageUrl,
-		buttonIconImageAlt,
+        buttonIconImageAlt,
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
@@ -41,27 +43,27 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         advancedBtnMobileSwitcher,
 
         dynamicTextEnabled,
-		dynamicTextSource,
-		dynamicTextPostId,
-		dynamicTextPostType,
-		dynamicTextPostLabel,
-		dynamicTextField,
-		dynamicFeaturedImageField,
+        dynamicTextSource,
+        dynamicTextPostId,
+        dynamicTextPostType,
+        dynamicTextPostLabel,
+        dynamicTextField,
+        dynamicFeaturedImageField,
 
-		dynamicTextDateType,
-		dynamicTextDateFormat,
+        dynamicTextDateType,
+        dynamicTextDateFormat,
 
-		dynamicTextTimeType,
-		dynamicTextTimeFormat,
+        dynamicTextTimeType,
+        dynamicTextTimeFormat,
 
-		dynamicTextCommentsZeroText,
-		dynamicTextCommentsOneText,
-		dynamicTextCommentsManyText,
+        dynamicTextCommentsZeroText,
+        dynamicTextCommentsOneText,
+        dynamicTextCommentsManyText,
 
-		dynamicTextTermsTaxonomy,
-		dynamicTextTermsSeparator,
-		dynamicTextEnableLink,
-		dynamicTextLinkSource,
+        dynamicTextTermsTaxonomy,
+        dynamicTextTermsSeparator,
+        dynamicTextEnableLink,
+        dynamicTextLinkSource,
     } = attributes;
 
     const blockProps = useBlockProps({
@@ -74,7 +76,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
      */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-    
+
     /**
      * Prevent link navigation in the editor and focus on text
      */
@@ -82,45 +84,47 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         event.preventDefault();
     };
 
-	/**
-	 * Dynamic Text Value for Title
-	 */
-	const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({ 
-		textEnabled:            dynamicTextEnabled,
-		textSource:             dynamicTextSource, 
-		textField:              dynamicTextField,
+    /**
+     * Dynamic Text Value for Title
+     */
+    const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({
+        textEnabled: dynamicTextEnabled,
+        textSource: dynamicTextSource,
+        textField: dynamicTextField,
 
-		textPostId:             dynamicTextPostId,
-		textPostType:           dynamicTextPostType,
-		textPostLabel:          dynamicTextPostLabel,
+        textPostId: dynamicTextPostId,
+        textPostType: dynamicTextPostType,
+        textPostLabel: dynamicTextPostLabel,
 
-		textFeaturedImageField: dynamicFeaturedImageField, 
+        textFeaturedImageField: dynamicFeaturedImageField,
 
-		textDateType:           dynamicTextDateType,
-		textDateFormat:         dynamicTextDateFormat,
-		textTimeType:           dynamicTextTimeType,
-		textTimeFormat:         dynamicTextTimeFormat,
+        textDateType: dynamicTextDateType,
+        textDateFormat: dynamicTextDateFormat,
+        textTimeType: dynamicTextTimeType,
+        textTimeFormat: dynamicTextTimeFormat,
 
-		textCommentsZeroText:   dynamicTextCommentsZeroText,
-		textCommentsOneText:    dynamicTextCommentsOneText,
-		textCommentsManyText:   dynamicTextCommentsManyText,
+        textCommentsZeroText: dynamicTextCommentsZeroText,
+        textCommentsOneText: dynamicTextCommentsOneText,
+        textCommentsManyText: dynamicTextCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
-		textTermsSeparator:     dynamicTextTermsSeparator,
+        textTermsTaxonomy: dynamicTextTermsTaxonomy,
+        textTermsSeparator: dynamicTextTermsSeparator,
 
-		textLinkEnabled:        dynamicTextEnableLink,
-		textLinkSource:         dynamicTextLinkSource,
+        textLinkEnabled: dynamicTextEnableLink,
+        textLinkSource: dynamicTextLinkSource,
 
-		context,
-	});
+        context,
+    });
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <BlockControls>
                 <AlignmentToolbar
@@ -129,11 +133,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     controls={['left', 'center', 'right', 'justify']}
                 />
             </BlockControls>
-            
+
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
-                    <a 
-                        className="fb-advanced-button" 
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
+                    <a
+                        className="fb-advanced-button"
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
@@ -209,6 +213,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     </a>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }
