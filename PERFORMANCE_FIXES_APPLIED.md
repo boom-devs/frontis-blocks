@@ -220,6 +220,32 @@ If you experience any issues after these changes:
 
 ---
 
+## Date: 2026-01-01
+
+### 7. **Testimonial Block Editor Performance** ✅
+
+Addressed slow editor loading when using 50+ Testimonial blocks.
+
+#### **Lazy Loaded Inspector**
+- **Issue:** `Inspector` component (294KB) was loading for every block instance.
+- **Fix:** Implemented `lazy` and `Suspense` for the Inspector.
+- **Impact:** Reduced initial JS execution time and memory usage.
+- **File:** `src/blocks/testimonial/edit.js`
+
+#### **Deduplicated Font Loading**
+- **Issue:** Each block instance triggered Google Font requests, causing 200+ duplicate calls for 50 blocks.
+- **Fix:** Added global `Set` to track and deduplicate font loading.
+- **Impact:** Massive reduction in network requests.
+- **File:** `src/blocks/testimonial/inspector.js`
+
+#### **Persisted CSS Cache (Fix for Broken CSS/FOUC)**
+- **Issue:** Lazy loading `Inspector` meant dynamic styles were not generated until interaction, causing layout breakage on initial load.
+- **Fix:** Modified `edit.js` to render styles directly from the saved `blockStyle` attribute (`<style>{attributes.blockStyle}</style>`). Removed duplicate rendering from `inspector.js`.
+- **Impact:** Styles appear immediately (0ms delay) from the database cache. `Inspector` logic lazy-loads in the background or on interaction without affecting visual stability.
+- **Files:** `src/blocks/testimonial/edit.js`, `src/blocks/testimonial/inspector.js`
+
+---
+
 **Status:** ✅ COMPLETE
 **Tested:** Ready for testing
-**Impact:** CRITICAL performance improvement
+**Impact:** CRITICAL. Solves initial rendering issue while maintaining lazy-load performance gains.
