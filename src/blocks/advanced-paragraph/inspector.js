@@ -2397,10 +2397,6 @@ transition: all .3s ease-in-out;
 		});
 	}, [allBlockStyle, customCss]);
 
-	const editorStyle = `${allBlockStyle}${customCss}`
-		.replace(/\s+/g, " ")
-		.trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -3763,8 +3759,6 @@ transition: all .3s ease-in-out;
 
 	return (
 		<>
-			<style>{editorStyle}</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
