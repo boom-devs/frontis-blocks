@@ -5816,8 +5816,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [fbflipBoxStyle, customCss]);
 
-	const editorStyle = `${fbflipBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 		/**
      * Generate SVG Icons for Icon
      */
@@ -5914,10 +5912,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
-
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel

@@ -3234,8 +3234,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [dualButtonStyle, customCss]);
 
-	const editorStyle = `${dualButtonStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 
 	/**
      * Generate SVG Icons for Icon
@@ -4822,9 +4820,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

@@ -1,15 +1,17 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
 import './editor.scss';
-import { useRef } from '@wordpress/element';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useRef, lazy, Suspense } from '@wordpress/element';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+const Inspector = lazy(() => import("./inspector"));
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
+        blockStyle,
         GalleryItems,
         GalleryType,
 
@@ -26,12 +28,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         imageGalleryGlobalWraperClass,
 
         GalleryDesktopSwitcher,
-		GalleryTabletSwitcher,
-		GalleryMobileSwitcher,
-     } = attributes;
+        GalleryTabletSwitcher,
+        GalleryMobileSwitcher,
+    } = attributes;
 
     const blockProps = useBlockProps({
-        className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`, 
+        className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     /**
@@ -40,9 +42,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
-    
+
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = GalleryItems.map(item => 
+        const updatedItems = GalleryItems.map(item =>
             item.id === id ? { ...item, [key]: value } : item
         );
         setAttributes({ GalleryItems: updatedItems });
@@ -51,20 +53,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-            
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID} ref={panelRef}>
-                        <div className="fb-image-gallery-items">
-                            {GalleryItems.map(item => 
-                                item?.image?.url ? (
-                                    <>
-                                        {GalleryType === 'mesonry' && <style>
-                                            {`
+                    <div className="fb-image-gallery-items">
+                        {GalleryItems.map(item =>
+                            item?.image?.url ? (
+                                <>
+                                    {GalleryType === 'mesonry' && <style>
+                                        {`
                                             .fb-gallery-main-wrapper.${blockID} .fb-image-gallery-items .fb-image-gallery-item.${item.id} {
                                                     grid-column: ${item.column?.desktop > 1 ? `span ${item.column?.desktop}` : 'unset'};
                                                     grid-row: ${item.row?.desktop > 1 ? `span ${item.row?.desktop}` : 'unset'};
@@ -82,35 +86,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     }
                                                 } 
                                             `}
-                                        </style>}
-                                        
-                                        <a key={item.id} 
-                                            className={`fb-image-gallery-item ${item.id}`}
-                                            aria-label={item.image.alt || __("Image", "frontis-blocks")}
-                                        >
-                                            <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt} aria-hidden="true"></img>
-                                            {ImageOverlayStyle === 'overlay' && <span className="fb-image-overlay"></span>}
-                                            { lightboxIconSwitcher === true && 
-                                                <div className="fb-lightbox-icon-wrapper">
-                                                    <div className="fb-lightbox-icon">{renderSVG(lightboxIcon)}</div>
-                                                </div>
-                                            }
-                                        </a>
-                                    </>
-                                ) : (
-                                    <MediaPlaceholder
-                                        onSelect={(media) => handleChangeItem(item.id, 'image' , {id: media.id, url: media.url, alt: media.alt, width: media.width, height: media.height}) }
-                                        allowedTypes={['image']}
-                                        multiple={false}
-                                        labels={{ title: 'Add Author Image' }}
-                                    />
-                                )
-                            )}
-                        </div>
-                        {GalleryButtonSwitcher && <div className="fb-image-gallery-btn-wrapper"><a href={GalleryButtonLink} className="fb-image-gallery-btn">{GalleryButtonText}</a>
-                        </div>}
+                                    </style>}
+
+                                    <a key={item.id}
+                                        className={`fb-image-gallery-item ${item.id}`}
+                                        aria-label={item.image.alt || __("Image", "frontis-blocks")}
+                                    >
+                                        <img className="fb-image-gallery-image" src={item.image.url} alt={item.image.alt} aria-hidden="true"></img>
+                                        {ImageOverlayStyle === 'overlay' && <span className="fb-image-overlay"></span>}
+                                        {lightboxIconSwitcher === true &&
+                                            <div className="fb-lightbox-icon-wrapper">
+                                                <div className="fb-lightbox-icon">{renderSVG(lightboxIcon)}</div>
+                                            </div>
+                                        }
+                                    </a>
+                                </>
+                            ) : (
+                                <MediaPlaceholder
+                                    onSelect={(media) => handleChangeItem(item.id, 'image', { id: media.id, url: media.url, alt: media.alt, width: media.width, height: media.height })}
+                                    allowedTypes={['image']}
+                                    multiple={false}
+                                    labels={{ title: 'Add Author Image' }}
+                                />
+                            )
+                        )}
+                    </div>
+                    {GalleryButtonSwitcher && <div className="fb-image-gallery-btn-wrapper"><a href={GalleryButtonLink} className="fb-image-gallery-btn">{GalleryButtonText}</a>
+                    </div>}
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

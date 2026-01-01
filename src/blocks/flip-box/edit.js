@@ -7,15 +7,17 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
+import { useRef, lazy, Suspense } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -157,7 +159,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnTermsTaxonomy,
 		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
+		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
 		/** End Dynamic Btn Text */
 
@@ -232,7 +234,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBackBtnTermsTaxonomy,
 		dynamicBackBtnTermsSeparator,
-		dynamicBackBtnEnableLink,	
+		dynamicBackBtnEnableLink,
 		dynamicBackBtnLinkSource,
 		/** End Dynamic Back btn Text */
 	} = attributes;
@@ -344,13 +346,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textLinkSource:         dynamicBtnLinkSource,
 
 		context,
-	});	
+	});
 
 
 	/**
 	 * Dynamic Text Value for Back Title Text
 	 */
-	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({  
+	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({
 		textEnabled:            dynamicBackTitleEnabled,
 		textSource:             dynamicBackTitleSource,
 		textField:              dynamicBackTitleField,
@@ -441,16 +443,18 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textLinkSource:         dynamicBackBtnLinkSource,
 
 		context,
-	});	
+	});
 
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				<div
@@ -467,7 +471,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							<div className="fb-flipbox-content-wrapper">
 
 								{(mediaSwitcher === "image" && flipMediaUrl) ||
-								(mediaSwitcher === "icon" && icon) ? (
+									(mediaSwitcher === "icon" && icon) ? (
 									<div className="fb-flip-media-container">
 										<div className="fb-flip-media-wrapper">
 											{mediaSwitcher === "image" && flipMediaUrl && (
@@ -493,7 +497,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 												className="fb-heading"
 											/>
 										)}
-										
+
 										{descSwitcher && (
 											<RichText
 												tagName={Sub_Heading_Tag}
@@ -517,7 +521,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													>
 														<RichText
 															tagName={"span"}
-															value={dynamicBtnEnabled ? dynamicBtnValue : flip_Button_Text} 
+															value={dynamicBtnEnabled ? dynamicBtnValue : flip_Button_Text}
 															onChange={(value) => {
 																if (!dynamicBtnEnabled) setAttributes({ flip_Button_Text: value });
 															}}
@@ -534,14 +538,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										)}
 									</div>
 								)}
-								
+
 							</div>
 						</div>
 						<div className={`fb-flipbox-back ${flipSelectedSide === 'back' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
 
 								{(mediaSwitcherBack === "image" && flipMediaUrl) ||
-								(mediaSwitcherBack === "icon" && iconBack) ? (
+									(mediaSwitcherBack === "icon" && iconBack) ? (
 									<div className="fb-flip-back-media-container">
 										<div className="fb-flip-back-media-wrapper">
 											{mediaSwitcherBack === "image" && flipBackMediaUrl && (
@@ -553,7 +557,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										</div>
 									</div>
 								) : null}
-								
+
 								{(titleSwitcherBack || descSwitcherBack || flipBack_Button_Switcher) && (
 									<div className="fb-flip-back-box-content-wrapper">
 										{titleSwitcherBack && (
@@ -591,7 +595,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													>
 														<RichText
 															tagName={"span"}
-															value={dynamicBackBtnEnabled ? dynamicBackBtnValue : flipBack_Button_Text} 
+															value={dynamicBackBtnEnabled ? dynamicBackBtnValue : flipBack_Button_Text}
 															onChange={(value) => {
 																if (!dynamicBackBtnEnabled) setAttributes({ flipBack_Button_Text: value });
 															}}
@@ -608,12 +612,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										)}
 									</div>
 								)}
-							
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

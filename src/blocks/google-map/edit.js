@@ -1,17 +1,20 @@
 import { __ } from '@wordpress/i18n';
-import { 
-    useBlockProps, 
+import { lazy, Suspense } from '@wordpress/element';
+import {
+    useBlockProps,
 } from '@wordpress/block-editor';
 
 /**
  * Internal dependencies
  */
-import Inspector from "./inspector";
 import './editor.scss';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
-        blockId,    
+        blockId,
+        blockStyle,
         googleMapLocation,
         googleMapZoomLevel,
         googleMapMapType,
@@ -19,20 +22,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         googleMapWraperID,
         googleMapWraperClass,
     } = attributes;
-    
+
 
     const blockProps = useBlockProps({
         className: `fb-google-map-main-wrapper ${blockId}`,
     });
-    
+
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId = {clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
             <div {...blockProps}>
                 <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>
                     <iframe
@@ -44,6 +49,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     ></iframe>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }
