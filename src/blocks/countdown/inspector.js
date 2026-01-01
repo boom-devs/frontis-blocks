@@ -3947,8 +3947,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [countDownStyle, customCss]);
 	
-	const editorStyle = `${countDownStyle} ${customCss}`.replace(/\s+/g, " ").trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -5098,11 +5096,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	return (
 		<>
-
-			<style>
-				{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

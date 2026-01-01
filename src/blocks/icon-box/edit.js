@@ -7,17 +7,19 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useRef, lazy, Suspense } from "@wordpress/element";
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -42,7 +44,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        iconBoxIconPosition,
+		iconBoxIconPosition,
 		iconBoxButtonLink,
 		iconBoxbtnTargetUrl,
 		iconBoxIconVerticalPosition,
@@ -126,7 +128,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnTermsTaxonomy,
 		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
+		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
 		/** End Dynamic Btn Text */
 	} = attributes;
@@ -136,16 +138,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	});
 
 	// Prevent link navigation in the editor and focus on text
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-    };
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
 
 	/**
 	* Manages tab button settings and switches to block settings on click
 	*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
-	
+
 	/**
 	 * Dynamic Text Value for Title
 	 */
@@ -240,15 +242,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textLinkSource:         dynamicBtnLinkSource,
 
 		context,
-	});	
+	});
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<BlockControls>
 				<AlignmentToolbar
@@ -262,16 +266,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID} ${iconBoxGlobalWraperClass}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">
-						<div
-							className="fb-icon-media-wrapper"
-						>
-							{mediaSwitcher === "image" && (
-								<img src={attributes.iconBoxMediaUrl} />
-							)}
-							{mediaSwitcher === "icon" && (
-								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
-							)}
-						</div>
+							<div
+								className="fb-icon-media-wrapper"
+							>
+								{mediaSwitcher === "image" && (
+									<img src={attributes.iconBoxMediaUrl} />
+								)}
+								{mediaSwitcher === "icon" && (
+									<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+								)}
+							</div>
 						</div>
 						<div className="fb-icon-box-content-wrapper">
 							<RichText
@@ -300,21 +304,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									<div className="fb-icon-btn-container">
 										<a
 											className="fb-icon-btn-wrapper"
-											href={iconBoxButtonLink} 
+											href={iconBoxButtonLink}
 											target={iconBoxbtnTargetUrl ? '_blank' : undefined}
 											rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 											onClick={handleButtonClick}
 											aria-label={__("Icon Button", "frontis-blocks")}
 										>
 											<RichText
-												value={dynamicBtnEnabled ? dynamicBtnValue : icon_Box_Button_Text} 
+												value={dynamicBtnEnabled ? dynamicBtnValue : icon_Box_Button_Text}
 												tagName={"span"}
 												onChange={(value) => {
 													if (!dynamicBtnEnabled) setAttributes({ icon_Box_Button_Text: value });
 												}}
 												placeholder={__("Icon Button", "frontis-block")}
-												
-												
+
+
 											/>
 											{buttonIconSwitcher && (
 												<div className="fb-btn-icon-wrapper" aria-hidden="true">
@@ -329,6 +333,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

@@ -8,17 +8,19 @@ import {
 } from "@wordpress/block-editor";
 
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
+import { useRef, lazy, Suspense } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -132,7 +134,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnTermsTaxonomy,
 		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
+		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
 		/** End Dynamic Btn Text */
 	} = attributes;
@@ -246,15 +248,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		textLinkSource:         dynamicBtnLinkSource,
 
 		context,
-	});	
+	});
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<BlockControls>
 				<AlignmentToolbar
@@ -312,7 +316,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 											onClick={handleButtonClick}
 										>
 											<RichText
-												value={dynamicBtnEnabled ? dynamicBtnValue : info_Button_Text} 
+												value={dynamicBtnEnabled ? dynamicBtnValue : info_Button_Text}
 												tagName={"span"}
 												onChange={(value) => {
 													if (!dynamicBtnEnabled) setAttributes({ info_Button_Text: value });
@@ -342,6 +346,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
