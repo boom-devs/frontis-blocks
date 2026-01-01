@@ -3883,10 +3883,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [fbTeamMemberStyle, customCss]);
 
-	const editorStyle = `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim();
-
-
-
 	/**
      * Generate SVG Icons for Icon
      */
@@ -6025,10 +6021,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
