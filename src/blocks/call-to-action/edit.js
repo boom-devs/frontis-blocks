@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useRef, lazy, Suspense } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -8,16 +8,18 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -45,8 +47,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		ctaGlobalWraperClass,
 
 		ctaDesktopSwitcher,
-        ctaTabletSwitcher,
-        ctaMobileSwitcher,
+		ctaTabletSwitcher,
+		ctaMobileSwitcher,
 
 		/** Start Dynamic Title Text */
 		dynamicTitleEnabled,
@@ -119,7 +121,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnOneTermsTaxonomy,
 		dynamicBtnOneTermsSeparator,
-		dynamicBtnOneEnableLink,	
+		dynamicBtnOneEnableLink,
 		dynamicBtnOneLinkSource,
 		/** End Dynamic Btn One Text */
 
@@ -298,11 +300,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -353,7 +357,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													btnIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a 
+											<a
 												className="fb-cta-button"
 												href={info_Button_Link}
 												onClick={handleBtnClick}
@@ -361,13 +365,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
 											>
 												<RichText
-													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text} 
+													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text}
 													tagName="span"
 													onChange={(value) => {
 														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-													
+
 												/>
 											</a>
 											{buttonIconSwitcher && (
@@ -375,7 +379,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													{renderSVG(btnIcon)}
 												</div>
 											)}
-										
+
 										</div>
 									</div>
 								)}
@@ -389,7 +393,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													btnTwoIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a 
+											<a
 												className="fb-cta-button"
 												href={btnTwoLink}
 												onClick={handleBtnTwoClick}
@@ -403,7 +407,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														if (!dynamicBtnTwoEnabled) setAttributes({ btnTwoText: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-													
+
 												/>
 											</a>
 											{buttonTwoIconSwitcher && (
@@ -411,7 +415,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													{renderSVG(btnTwoIcon)}
 												</div>
 											)}
-											
+
 										</div>
 									</div>
 								)}
@@ -421,6 +425,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

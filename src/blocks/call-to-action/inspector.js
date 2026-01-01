@@ -2618,8 +2618,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [ctaContentStyle, customCss]);
 
-	const editorStyle = `${ctaContentStyle}${customCss}`.replace(/\s+/g, ' ').trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -4208,10 +4206,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-			{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

@@ -1,13 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { useState, useEffect, useCallback } from '@wordpress/element';
-import Inspector from './inspector';
+import { useState, useEffect, useCallback, lazy, Suspense } from '@wordpress/element';
 import './editor.scss';
+
+const Inspector = lazy(() => import('./inspector'));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		location,
 		timezone,
 		timeFormat,
@@ -51,14 +53,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			timezoneDesktopSwitcher ? 'fb-desktop-responsive' : ''
 		} ${timezoneTabletSwitcher ? 'fb-tablet-responsive' : ''} ${
 			timezoneMobileSwitcher ? 'fb-mobile-responsive' : ''
-		} ${alignment ? `align-${alignment}` : ''}`,
+			} ${alignment ? `align-${alignment}` : ''}`,
 	});
 
 	// Get timezone offset only
 	const getTimezoneOffset = useCallback((timezoneToFormat) => {
 		try {
 			const now = new Date();
-			
+
 			if (useUTCTimezoneFormat) {
 				const formatter = new Intl.DateTimeFormat('en-US', {
 					timeZone: timezoneToFormat,
@@ -66,22 +68,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				});
 				const parts = formatter.formatToParts(now);
 				const offsetPart = parts.find(part => part.type === 'timeZoneName');
-				
+
 				if (offsetPart && offsetPart.value.startsWith('GMT')) {
 					const offset = offsetPart.value.replace('GMT', '').replace('UTC', '');
-					return `(UTC${offset})`; 
+					return `(UTC${offset})`;
 				}
 			} else {
-				const offset = now.toLocaleString('en-US', { 
-					timeZone: timezoneToFormat, 
-					timeZoneName: 'shortOffset' 
+				const offset = now.toLocaleString('en-US', {
+					timeZone: timezoneToFormat,
+					timeZoneName: 'shortOffset'
 				}).split(' ').pop();
-				
+
 				return `(${offset})`;
 			}
 		} catch (error) {
 			// Fallback with brackets
-			return useUTCTimezoneFormat ? '(UTC+06:00)' : '(GMT+6)'; 
+			return useUTCTimezoneFormat ? '(UTC+06:00)' : '(GMT+6)';
 		}
 		return '';
 	}, [useUTCTimezoneFormat]);
@@ -131,7 +133,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const getCurrentTimeInTimezone = useCallback(() => {
 		const effectiveTimezone = getEffectiveTimezone();
 		if (!effectiveTimezone) return 'Time Unavailable';
-		
+
 		try {
 			const now = new Date();
 			const formatConfig = {
@@ -140,7 +142,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				'HH:mm': { hour: '2-digit', minute: '2-digit', hour12: false },
 				'hh:mm A': { hour: '2-digit', minute: '2-digit', hour12: true }
 			};
-			
+
 			const config = formatConfig[timeFormat] || formatConfig['hh:mm A'];
 			return now.toLocaleTimeString('en-US', {
 				timeZone: effectiveTimezone,
@@ -168,7 +170,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		if (!time) return '';
 		const [hours, minutes] = time.split(':').map(Number);
 		if (isNaN(hours) || isNaN(minutes)) return '';
-		
+
 		if (timeFormat === 'HH:mm' || timeFormat === 'HH:mm:ss') {
 			// 24-hour format
 			return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
@@ -184,7 +186,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const getRemainingTime = useCallback(() => {
 		const effectiveTimezone = getEffectiveTimezone();
 		const { endTime: effectiveEndTime } = getEffectiveOfficeHours();
-		
+
 		if (!effectiveTimezone || !effectiveEndTime) return '';
 
 		try {
@@ -205,7 +207,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			}
 
 			const remainingMinutes = endTotal - currentTotal;
-			
+
 			if (remainingMinutes <= 0) return '';
 
 			const hours = Math.floor(remainingMinutes / 60);
@@ -221,14 +223,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					} else {
 						return `${minutes}m`;
 					}
-					
+
 				case 'minutes-only':
 					return `${remainingMinutes} minutes`;
-					
+
 				case 'decimal':
 					const decimalHours = (remainingMinutes / 60).toFixed(2);
 					return `${decimalHours} hours`;
-					
+
 				case 'hours-minutes':
 				default:
 					if (hours > 0 && minutes > 0) {
@@ -290,13 +292,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		do {
 			next.setDate(next.getDate() + 1);
 		} while (
-			weekends.includes(next.getDay().toString()) || 
+			weekends.includes(next.getDay().toString()) ||
 			holidaysArr.includes(next.toISOString().split('T')[0])
 		);
-		return next.toLocaleDateString('en-US', { 
-			weekday: 'long', 
-			month: 'long', 
-			day: 'numeric' 
+		return next.toLocaleDateString('en-US', {
+			weekday: 'long',
+			month: 'long',
+			day: 'numeric'
 		});
 	}, [weekendDays, holidays]);
 
@@ -307,7 +309,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		const effectiveHours = getEffectiveOfficeHours();
 		const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-		
+
 		const isValidTime = (time) => {
 			if (!time) return false;
 			const timeRegex = /^([0-1]?[0-9]|2[0-3]):[0-5][0-9]$/;
@@ -327,9 +329,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			if (closedReason) return closedReason;
 
 			const currentTimeStr = now.toLocaleTimeString('en-US', {
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
+				timeZone: effectiveTimezone,
+				hour: '2-digit',
+				minute: '2-digit',
 				hour12: false
 			});
 
@@ -362,17 +364,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			// Regular office hours check
 			const effectiveHours = getEffectiveOfficeHours();
 			const { startTime: effectiveStartTime, endTime: effectiveEndTime } = effectiveHours;
-			
-			const currentTimeStr = now.toLocaleTimeString('en-US', { 
-				timeZone: effectiveTimezone, 
-				hour: '2-digit', 
-				minute: '2-digit', 
-				hour12: false 
+
+			const currentTimeStr = now.toLocaleTimeString('en-US', {
+				timeZone: effectiveTimezone,
+				hour: '2-digit',
+				minute: '2-digit',
+				hour12: false
 			});
-			
+
 			const status = calculateTimeStatus(currentTimeStr, effectiveStartTime, effectiveEndTime);
 			const remaining = getRemainingTime();
-			
+
 			if (status === 'Open') {
 				return `${afterTimeText || 'Will close at'} ${formatTimeForDisplay(effectiveEndTime)}${showRemainingTime && remaining ? `, ${remainingTimeLabel}${remaining}` : ''}`;
 			} else {
@@ -396,9 +398,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		calculateTimeStatus,
 		getRemainingTime,
 		showRemainingTime,
-		remainingTimeLabel 
+		remainingTimeLabel
 	]);
-	
+
 	useEffect(() => {
 		const updateDisplay = () => {
 			setCurrentTime(getCurrentTimeInTimezone());
@@ -413,39 +415,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		getCurrentTimeInTimezone,
 		getCurrentOfficeStatus,
 		getDisplayMessage,
-		showRemainingTime,       
-		remainingTimeLabel, 
-		remainingTimeFormat 
+		showRemainingTime,
+		remainingTimeLabel,
+		remainingTimeFormat
 	]);
 
 	// Display values
 	const effectiveTimezone = getEffectiveTimezone();
-	
+
 	// Timezone offset (GMT+6 / UTC+06:00)
-	const timezoneOffset = timezoneMode === 'auto' ? 
-		getTimezoneOffset(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
+	const timezoneOffset = timezoneMode === 'auto' ?
+		getTimezoneOffset(Intl.DateTimeFormat().resolvedOptions().timeZone) :
 		getTimezoneOffset(timezone);
-	
+
 	// Timezone location name (Bangladesh - Dhaka)
-	const timezoneLocation = timezoneMode === 'auto' ? 
-		getTimezoneLocationName(Intl.DateTimeFormat().resolvedOptions().timeZone) : 
+	const timezoneLocation = timezoneMode === 'auto' ?
+		getTimezoneLocationName(Intl.DateTimeFormat().resolvedOptions().timeZone) :
 		getTimezoneLocationName(timezone);
 
 	// Display location
 	const displayLocation = useCustomLocation && location ? location : timezoneLocation;
-	
+
 	const displaySeparator = separator || ' | ';
 	const statusType = currentStatus.toLowerCase();
-	const statusText = currentStatus === 'Open' ? 
-		(openStatusText || 'Open') : 
+	const statusText = currentStatus === 'Open' ?
+		(openStatusText || 'Open') :
 		(currentStatus === 'Weekend' ? (weekendMessage || 'Weekend') :
-		(currentStatus === 'Holiday' ? (holidayMessage || 'Holiday') :
-		(closedStatusText || 'Closed')));
+			(currentStatus === 'Holiday' ? (holidayMessage || 'Holiday') :
+				(closedStatusText || 'Closed')));
 
 	return (
 		<>
-		
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+
+			<Suspense fallback={null}>
+				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			</Suspense>
 
 			<div {...blockProps}>
 				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>
@@ -463,20 +467,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							) : (
 								<span className="fb-location-name">{displayLocation}</span>
 							)}
-							
+
 							{showSeparatorSwitcher && (
 								<span className='fb-timezone-separator'>{displaySeparator}</span>
 							)}
-							
+
 							{/* Current Time */}
 							<span className='fb-current-time'>{currentTime}</span>
-							
+
 							{showTimezoneOffset && (
 								<span className='fb-timezone-offset'>{timezoneOffset}</span>
 							)}
 						</div>
 					</div>
-					
+
 					{showStatusSwitcher && (
 						<div className='fb-timezone-status-wrapper'>
 							<div className={`fb-timezone-status-info-box ${statusType}`}>
@@ -491,6 +495,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
