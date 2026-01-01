@@ -5,20 +5,22 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
-import { useRef } from "@wordpress/element";
+import { useRef, lazy, Suspense } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 /**
  * Internal dependencies
  */
-import Inspector from "./inspector";
 import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import { useDeviceType } from "@Config/displayType";
 import "./editor.scss";
 
+const Inspector = lazy(() => import("./inspector"));
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		paragraphText,
 		paragraphAlignment,
 
@@ -35,7 +37,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			advancedParagraphDesktopSwitcher && "fb-desktop-responsive"
 		} ${advancedParagraphTabletSwitcher && "fb-tablet-responsive"} ${
 			advancedParagraphMobileSwitcher && "fb-mobile-responsive"
-		}`,
+			}`,
 	});
 
 	const deviceType = useDeviceType();
@@ -48,11 +50,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<BlockControls>
 				<AlignmentToolbar
@@ -91,6 +95,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
