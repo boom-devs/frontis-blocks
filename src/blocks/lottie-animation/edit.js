@@ -10,13 +10,15 @@ import {
 } from '@wordpress/block-editor';
 import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
 import generateSrcSet from "@Utils/generateSrcSet";
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
 import lottie from 'lottie-web';
-import Inspector from "./inspector";
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		lottieAnimationJsonTypeSwitcher,
 		lottieAnimationImageUrl,
 		lottieAnimationJsonUrl,
@@ -173,7 +175,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Suspense fallback={null}>
+				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			</Suspense>
 			<BlockControls>
 				<ToolbarGroup>
 					<MediaUploadCheck>
@@ -204,6 +208,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
