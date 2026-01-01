@@ -14,7 +14,8 @@ import { useRef, lazy, Suspense } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -152,30 +153,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Title
 	 */
 	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
 
 		textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
 
 		context,
 	});
@@ -184,30 +185,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Description
 	 */
 	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
 
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
 
 		context,
 	});
@@ -216,43 +217,41 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button One Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnEnabled,
-		textSource:             dynamicBtnSource,
-		textField:              dynamicBtnField,
+		textEnabled: dynamicBtnEnabled,
+		textSource: dynamicBtnSource,
+		textField: dynamicBtnField,
 
-		textPostId:             dynamicBtnPostId,
-		textPostType:           dynamicBtnPostType,
-		textPostLabel:          dynamicBtnPostLabel,
+		textPostId: dynamicBtnPostId,
+		textPostType: dynamicBtnPostType,
+		textPostLabel: dynamicBtnPostLabel,
 
 		textFeaturedImageField: dynamicBtnFeaturedImageField,
 
-		textDateType:           dynamicBtnDateType,
-		textDateFormat:         dynamicBtnDateFormat,
-		textTimeType:           dynamicBtnTimeType,
-		textTimeFormat:         dynamicBtnTimeFormat,
+		textDateType: dynamicBtnDateType,
+		textDateFormat: dynamicBtnDateFormat,
+		textTimeType: dynamicBtnTimeType,
+		textTimeFormat: dynamicBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBtnCommentsOneText,
-		textCommentsManyText:   dynamicBtnCommentsManyText,
+		textCommentsZeroText: dynamicBtnCommentsZeroText,
+		textCommentsOneText: dynamicBtnCommentsOneText,
+		textCommentsManyText: dynamicBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnEnableLink,
-		textLinkSource:         dynamicBtnLinkSource,
+		textLinkEnabled: dynamicBtnEnableLink,
+		textLinkSource: dynamicBtnLinkSource,
 
 		context,
 	});
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
 			<BlockControls>
 				<AlignmentToolbar
