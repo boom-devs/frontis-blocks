@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { useState, useEffect, useMemo } from '@wordpress/element';
 
-import { 
+import {
     SelectControl,
     PanelBody,
     TabPanel,
@@ -46,7 +46,7 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
@@ -61,8 +61,11 @@ import FB_Presets from '@Components/presets';
 
 import './editor.scss';
 
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
+
 export default function Inspector({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
         // deviceType,
         TestimonialPresetStyle,
@@ -298,12 +301,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         blockStyle,
 
         testimonialDesktopSwitcher,
-		testimonialTabletSwitcher,
-		testimonialMobileSwitcher,
+        testimonialTabletSwitcher,
+        testimonialMobileSwitcher,
 
         testimonialCustomCSS,
-		testimonialGlobalWraperID,
-		testimonialGlobalWraperClass,
+        testimonialGlobalWraperID,
+        testimonialGlobalWraperClass,
 
         // Position
         testimonialPositionType,
@@ -319,107 +322,107 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         testimonialVRBottomOffsetUnits,
 
         /** Start Dynamic Title Text */
-		dynamicTitleEnabled,
-		dynamicTitleSource,
-		dynamicTitlePostId,
-		dynamicTitlePostType,
-		dynamicTitlePostLabel,
-		dynamicTitleField,
-		dynamicTitleFeaturedImageField,
+        dynamicTitleEnabled,
+        dynamicTitleSource,
+        dynamicTitlePostId,
+        dynamicTitlePostType,
+        dynamicTitlePostLabel,
+        dynamicTitleField,
+        dynamicTitleFeaturedImageField,
 
-		dynamicTitleDateType,
-		dynamicTitleDateFormat,
+        dynamicTitleDateType,
+        dynamicTitleDateFormat,
 
-		dynamicTitleTimeType,
-		dynamicTitleTimeFormat,
+        dynamicTitleTimeType,
+        dynamicTitleTimeFormat,
 
-		dynamicTitleCommentsZeroText,
-		dynamicTitleCommentsOneText,
-		dynamicTitleCommentsManyText,
+        dynamicTitleCommentsZeroText,
+        dynamicTitleCommentsOneText,
+        dynamicTitleCommentsManyText,
 
-		dynamicTitleTermsTaxonomy,
-		dynamicTitleTermsSeparator,
-		dynamicTitleEnableLink,
-		dynamicTitleLinkSource,
-		/** End Dynamic Title Text */
+        dynamicTitleTermsTaxonomy,
+        dynamicTitleTermsSeparator,
+        dynamicTitleEnableLink,
+        dynamicTitleLinkSource,
+        /** End Dynamic Title Text */
 
-		/** Start Dynamic Description Text */
-		dynamicDescriptionEnabled,
-		dynamicDescriptionSource,
-		dynamicDescriptionPostId,
-		dynamicDescriptionPostType,
-		dynamicDescriptionPostLabel,
-		dynamicDescriptionField,
-		dynamicDescriptionFeaturedImageField,
+        /** Start Dynamic Description Text */
+        dynamicDescriptionEnabled,
+        dynamicDescriptionSource,
+        dynamicDescriptionPostId,
+        dynamicDescriptionPostType,
+        dynamicDescriptionPostLabel,
+        dynamicDescriptionField,
+        dynamicDescriptionFeaturedImageField,
 
-		dynamicDescriptionDateType,
-		dynamicDescriptionDateFormat,
+        dynamicDescriptionDateType,
+        dynamicDescriptionDateFormat,
 
-		dynamicDescriptionTimeType,
-		dynamicDescriptionTimeFormat,
+        dynamicDescriptionTimeType,
+        dynamicDescriptionTimeFormat,
 
-		dynamicDescriptionCommentsZeroText,
-		dynamicDescriptionCommentsOneText,
-		dynamicDescriptionCommentsManyText,
+        dynamicDescriptionCommentsZeroText,
+        dynamicDescriptionCommentsOneText,
+        dynamicDescriptionCommentsManyText,
 
-		dynamicDescriptionTermsTaxonomy,
-		dynamicDescriptionTermsSeparator,
-		dynamicDescriptionEnableLink,
-		dynamicDescriptionLinkSource,
-		/** End Dynamic Description Text */
+        dynamicDescriptionTermsTaxonomy,
+        dynamicDescriptionTermsSeparator,
+        dynamicDescriptionEnableLink,
+        dynamicDescriptionLinkSource,
+        /** End Dynamic Description Text */
 
         /** Start Dynamic Author Name Text */
-		dynamicAuthorNameEnabled,
-		dynamicAuthorNameSource,
-		dynamicAuthorNamePostId,
-		dynamicAuthorNamePostType,
-		dynamicAuthorNamePostLabel,
-		dynamicAuthorNameField,
-		dynamicAuthorNameFeaturedImageField,
+        dynamicAuthorNameEnabled,
+        dynamicAuthorNameSource,
+        dynamicAuthorNamePostId,
+        dynamicAuthorNamePostType,
+        dynamicAuthorNamePostLabel,
+        dynamicAuthorNameField,
+        dynamicAuthorNameFeaturedImageField,
 
-		dynamicAuthorNameDateType,
-		dynamicAuthorNameDateFormat,
+        dynamicAuthorNameDateType,
+        dynamicAuthorNameDateFormat,
 
-		dynamicAuthorNameTimeType,
-		dynamicAuthorNameTimeFormat,
+        dynamicAuthorNameTimeType,
+        dynamicAuthorNameTimeFormat,
 
-		dynamicAuthorNameCommentsZeroText,
-		dynamicAuthorNameCommentsOneText,
-		dynamicAuthorNameCommentsManyText,
+        dynamicAuthorNameCommentsZeroText,
+        dynamicAuthorNameCommentsOneText,
+        dynamicAuthorNameCommentsManyText,
 
-		dynamicAuthorNameTermsTaxonomy,
-		dynamicAuthorNameTermsSeparator,
-		dynamicAuthorNameEnableLink,
-		dynamicAuthorNameLinkSource,
-		/** End Dynamic Author Name Text */
+        dynamicAuthorNameTermsTaxonomy,
+        dynamicAuthorNameTermsSeparator,
+        dynamicAuthorNameEnableLink,
+        dynamicAuthorNameLinkSource,
+        /** End Dynamic Author Name Text */
 
         /** Start Dynamic Author Designation Text */
-		dynamicAuthorDesignationEnabled,
-		dynamicAuthorDesignationSource,
-		dynamicAuthorDesignationPostId,
-		dynamicAuthorDesignationPostType,
-		dynamicAuthorDesignationPostLabel,
-		dynamicAuthorDesignationField,
-		dynamicAuthorDesignationFeaturedImageField,
+        dynamicAuthorDesignationEnabled,
+        dynamicAuthorDesignationSource,
+        dynamicAuthorDesignationPostId,
+        dynamicAuthorDesignationPostType,
+        dynamicAuthorDesignationPostLabel,
+        dynamicAuthorDesignationField,
+        dynamicAuthorDesignationFeaturedImageField,
 
-		dynamicAuthorDesignationDateType,
-		dynamicAuthorDesignationDateFormat,
+        dynamicAuthorDesignationDateType,
+        dynamicAuthorDesignationDateFormat,
 
-		dynamicAuthorDesignationTimeType,
-		dynamicAuthorDesignationTimeFormat,
+        dynamicAuthorDesignationTimeType,
+        dynamicAuthorDesignationTimeFormat,
 
-		dynamicAuthorDesignationCommentsZeroText,
-		dynamicAuthorDesignationCommentsOneText,
-		dynamicAuthorDesignationCommentsManyText,
+        dynamicAuthorDesignationCommentsZeroText,
+        dynamicAuthorDesignationCommentsOneText,
+        dynamicAuthorDesignationCommentsManyText,
 
-		dynamicAuthorDesignationTermsTaxonomy,
-		dynamicAuthorDesignationTermsSeparator,
-		dynamicAuthorDesignationEnableLink,
-		dynamicAuthorDesignationLinkSource,
-		/** End Dynamic Author Designation Text */
+        dynamicAuthorDesignationTermsTaxonomy,
+        dynamicAuthorDesignationTermsSeparator,
+        dynamicAuthorDesignationEnableLink,
+        dynamicAuthorDesignationLinkSource,
+        /** End Dynamic Author Designation Text */
     } = attributes;
 
-    const deviceType= useDeviceType();
+    const deviceType = useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -432,32 +435,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Start load font */
     useEffect(() => {
-        loadGoogleFont(TestimonialTitleFontFamily);
-        loadGoogleFont(TestimonialDescFontFamily);
-        loadGoogleFont(TestimonialAuthorFontFamily);
-        loadGoogleFont(TestimonialDesignationFontFamily);
-    }, [TestimonialTitleFontFamily, 
-        TestimonialDescFontFamily, 
-        TestimonialAuthorFontFamily, 
+        [TestimonialTitleFontFamily, TestimonialDescFontFamily, TestimonialAuthorFontFamily, TestimonialDesignationFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [TestimonialTitleFontFamily,
+        TestimonialDescFontFamily,
+        TestimonialAuthorFontFamily,
         TestimonialDesignationFontFamily
     ]);
     /** End load font */
 
 
     const quoteIconHandler = (IconName) => {
-		setAttributes({TestimonialQuoteIcon: IconName})
+        setAttributes({ TestimonialQuoteIcon: IconName })
 
-	}
+    }
     const ratingIconHandler = (IconName) => {
-		setAttributes({TestimonialRatingicon: IconName})
-	}
+        setAttributes({ TestimonialRatingicon: IconName })
+    }
 
 
     let defaultImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
     }
-    
+
     // Set default value for TestimonialImageUrl
     useEffect(() => {
         if (!TestimonialImageUrl) {
@@ -501,33 +506,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageTabletRadiusWidth :{
+                TestimonialImageTabletRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageMobileRadiusWidth :{
+                TestimonialImageMobileRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialAuthorMarginDesktop : {
+                TestimonialAuthorMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialDesignationMarginDesktop : {
+                TestimonialDesignationMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgNormalClassicColor : '#fefaf3',
-                TestimonialDescColor : '',
-                TestimonialAuthorColor : '',
+                TestimonialGlobalBgNormalClassicColor: '#fefaf3',
+                TestimonialDescColor: '',
+                TestimonialAuthorColor: '',
 
             },
             "preset-2": {
@@ -563,33 +568,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageTabletRadiusWidth :{
+                TestimonialImageTabletRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageMobileRadiusWidth :{
+                TestimonialImageMobileRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialAuthorMarginDesktop : {
+                TestimonialAuthorMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialDesignationMarginDesktop : {
+                TestimonialDesignationMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-                TestimonialDescColor : '',
-                TestimonialAuthorColor : '',
+                TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+                TestimonialDescColor: '',
+                TestimonialAuthorColor: '',
 
             },
             "preset-3": {
@@ -635,33 +640,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageTabletRadiusWidth :{
+                TestimonialImageTabletRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageMobileRadiusWidth :{
+                TestimonialImageMobileRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialAuthorMarginDesktop : {
+                TestimonialAuthorMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialDesignationMarginDesktop : {
+                TestimonialDesignationMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-                TestimonialDescColor : '',
-                TestimonialAuthorColor : '',
+                TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+                TestimonialDescColor: '',
+                TestimonialAuthorColor: '',
             },
             "preset-4": {
                 RatingSwitcher: true,
@@ -712,13 +717,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: '10',
                     left: '10',
                 },
-                TestimonialImageTabletRadiusWidth :{
+                TestimonialImageTabletRadiusWidth: {
                     top: '10',
                     right: '10',
                     bottom: '10',
                     left: '10',
                 },
-                TestimonialImageMobileRadiusWidth :{
+                TestimonialImageMobileRadiusWidth: {
                     top: '10',
                     right: '10',
                     bottom: '10',
@@ -730,21 +735,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     Tablet: '110',
                     Mobile: '110',
                 },
-                TestimonialAuthorMarginDesktop : {
+                TestimonialAuthorMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '100',
                     right: '0',
                 },
-                TestimonialDesignationMarginDesktop : {
+                TestimonialDesignationMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '100',
                     right: '0',
                 },
-                TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-                TestimonialDescColor : '',
-                TestimonialAuthorColor : '',
+                TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+                TestimonialDescColor: '',
+                TestimonialAuthorColor: '',
             },
             "preset-5": {
                 RatingSwitcher: true,
@@ -789,33 +794,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageTabletRadiusWidth :{
+                TestimonialImageTabletRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialImageMobileRadiusWidth :{
+                TestimonialImageMobileRadiusWidth: {
                     top: '50',
                     right: '50',
                     bottom: '50',
                     left: '50',
                 },
-                TestimonialAuthorMarginDesktop : {
+                TestimonialAuthorMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialDesignationMarginDesktop : {
+                TestimonialDesignationMarginDesktop: {
                     top: '0',
                     bottom: '0',
                     left: '0',
                     right: '0',
                 },
-                TestimonialGlobalBgNormalClassicColor : '#404655',
-                TestimonialDescColor : '#ffffff',
-                TestimonialAuthorColor : '#ffffff',
+                TestimonialGlobalBgNormalClassicColor: '#404655',
+                TestimonialDescColor: '#ffffff',
+                TestimonialAuthorColor: '#ffffff',
             },
         };
 
@@ -868,33 +873,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageTabletRadiusWidth :{
+            TestimonialImageTabletRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageMobileRadiusWidth :{
+            TestimonialImageMobileRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialAuthorMarginDesktop : {
+            TestimonialAuthorMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialDesignationMarginDesktop : {
+            TestimonialDesignationMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialGlobalBgNormalClassicColor : '#fefaf3',
-            TestimonialDescColor : '',
-            TestimonialAuthorColor : '',
+            TestimonialGlobalBgNormalClassicColor: '#fefaf3',
+            TestimonialDescColor: '',
+            TestimonialAuthorColor: '',
 
         },
         "preset-2": {
@@ -930,33 +935,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageTabletRadiusWidth :{
+            TestimonialImageTabletRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageMobileRadiusWidth :{
+            TestimonialImageMobileRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialAuthorMarginDesktop : {
+            TestimonialAuthorMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialDesignationMarginDesktop : {
+            TestimonialDesignationMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-            TestimonialDescColor : '',
-            TestimonialAuthorColor : '',
+            TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+            TestimonialDescColor: '',
+            TestimonialAuthorColor: '',
 
         },
         "preset-3": {
@@ -1002,33 +1007,33 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageTabletRadiusWidth :{
+            TestimonialImageTabletRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageMobileRadiusWidth :{
+            TestimonialImageMobileRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialAuthorMarginDesktop : {
+            TestimonialAuthorMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialDesignationMarginDesktop : {
+            TestimonialDesignationMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-            TestimonialDescColor : '',
-            TestimonialAuthorColor : '',
+            TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+            TestimonialDescColor: '',
+            TestimonialAuthorColor: '',
         },
         "preset-4": {
             RatingSwitcher: true,
@@ -1079,13 +1084,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 bottom: '10',
                 left: '10',
             },
-            TestimonialImageTabletRadiusWidth :{
+            TestimonialImageTabletRadiusWidth: {
                 top: '10',
                 right: '10',
                 bottom: '10',
                 left: '10',
             },
-            TestimonialImageMobileRadiusWidth :{
+            TestimonialImageMobileRadiusWidth: {
                 top: '10',
                 right: '10',
                 bottom: '10',
@@ -1097,21 +1102,21 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 Tablet: '110',
                 Mobile: '110',
             },
-            TestimonialAuthorMarginDesktop : {
+            TestimonialAuthorMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '100',
                 right: '0',
             },
-            TestimonialDesignationMarginDesktop : {
+            TestimonialDesignationMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '100',
                 right: '0',
             },
-            TestimonialGlobalBgNormalClassicColor : '#f7f7f7',
-            TestimonialDescColor : '',
-            TestimonialAuthorColor : '',
+            TestimonialGlobalBgNormalClassicColor: '#f7f7f7',
+            TestimonialDescColor: '',
+            TestimonialAuthorColor: '',
         },
         "preset-5": {
             RatingSwitcher: true,
@@ -1156,36 +1161,36 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageTabletRadiusWidth :{
+            TestimonialImageTabletRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialImageMobileRadiusWidth :{
+            TestimonialImageMobileRadiusWidth: {
                 top: '50',
                 right: '50',
                 bottom: '50',
                 left: '50',
             },
-            TestimonialAuthorMarginDesktop : {
+            TestimonialAuthorMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialDesignationMarginDesktop : {
+            TestimonialDesignationMarginDesktop: {
                 top: '0',
                 bottom: '0',
                 left: '0',
                 right: '0',
             },
-            TestimonialGlobalBgNormalClassicColor : '#404655',
-            TestimonialDescColor : '#ffffff',
-            TestimonialAuthorColor : '#ffffff',
+            TestimonialGlobalBgNormalClassicColor: '#404655',
+            TestimonialDescColor: '#ffffff',
+            TestimonialAuthorColor: '#ffffff',
         },
     };
-        
+
     const testimonialPresets = [
         {
             value: 'preset-1',
@@ -1606,7 +1611,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     </svg>`,
         },
     ];
-    
+
     /** Start Testimonial Rating Icon Margin */
     const testimonialRatingIconMarginUnitsChange = (event, position) => {
         const value = event.target.value;
@@ -2217,302 +2222,302 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /** End Testimonial Image Border Radius */
 
 
-    	/** Start Global padding */
-	const handleGlobalPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( TestimonialGlobalPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						TestimonialGlobalPaddingDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						TestimonialGlobalPaddingTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						TestimonialGlobalPaddingMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {TestimonialGlobalPaddingDesktop: {...TestimonialGlobalPaddingDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {TestimonialGlobalPaddingTablet: {...TestimonialGlobalPaddingTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {TestimonialGlobalPaddingMobile: {...TestimonialGlobalPaddingMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    /** Start Global padding */
+    const handleGlobalPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialGlobalPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialGlobalPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialGlobalPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialGlobalPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialGlobalPaddingDesktop: { ...TestimonialGlobalPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialGlobalPaddingTablet: { ...TestimonialGlobalPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialGlobalPaddingMobile: { ...TestimonialGlobalPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	}
+    }
 
-	const handleGlobalPaddingCombineBtn = () => {
-		setAttributes( {TestimonialGlobalPaddingLink: !TestimonialGlobalPaddingLink} );
-	}
+    const handleGlobalPaddingCombineBtn = () => {
+        setAttributes({ TestimonialGlobalPaddingLink: !TestimonialGlobalPaddingLink });
+    }
 
-	const handleGlobalPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			TestimonialGlobalPaddingUnits: {
-				...TestimonialGlobalPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const globalDesktopPadding    = `${TestimonialGlobalPaddingDesktop?.top}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.right}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.bottom}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.left}${TestimonialGlobalPaddingUnits?.Desktop}`;
-	const globalTabletPadding     = `${TestimonialGlobalPaddingTablet?.top}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.right}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.bottom}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.left}${TestimonialGlobalPaddingUnits?.Tablet}`;
-	const globalMobilePadding     = `${TestimonialGlobalPaddingMobile?.top}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.right}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.bottom}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.left}${TestimonialGlobalPaddingUnits?.Mobile}`;
-	/** End Global Padding */
-	
-	/** Start Global Margin */
-	const handleGlobalMarginUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( TestimonialGlobalMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						TestimonialGlobalMarginDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						TestimonialGlobalMarginTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						TestimonialGlobalMarginMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {TestimonialGlobalMarginDesktop: {...TestimonialGlobalMarginDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {TestimonialGlobalMarginTablet: {...TestimonialGlobalMarginTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {TestimonialGlobalMarginMobile: {...TestimonialGlobalMarginMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    const handleGlobalPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialGlobalPaddingUnits: {
+                ...TestimonialGlobalPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const globalDesktopPadding = `${TestimonialGlobalPaddingDesktop?.top}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.right}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.bottom}${TestimonialGlobalPaddingUnits?.Desktop} ${TestimonialGlobalPaddingDesktop?.left}${TestimonialGlobalPaddingUnits?.Desktop}`;
+    const globalTabletPadding = `${TestimonialGlobalPaddingTablet?.top}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.right}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.bottom}${TestimonialGlobalPaddingUnits?.Tablet} ${TestimonialGlobalPaddingTablet?.left}${TestimonialGlobalPaddingUnits?.Tablet}`;
+    const globalMobilePadding = `${TestimonialGlobalPaddingMobile?.top}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.right}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.bottom}${TestimonialGlobalPaddingUnits?.Mobile} ${TestimonialGlobalPaddingMobile?.left}${TestimonialGlobalPaddingUnits?.Mobile}`;
+    /** End Global Padding */
 
-	}
+    /** Start Global Margin */
+    const handleGlobalMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialGlobalMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialGlobalMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialGlobalMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialGlobalMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialGlobalMarginDesktop: { ...TestimonialGlobalMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialGlobalMarginTablet: { ...TestimonialGlobalMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialGlobalMarginMobile: { ...TestimonialGlobalMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	const handleGlobalMarginCombineBtn = () => {
-		setAttributes( {TestimonialGlobalMarginLink: !TestimonialGlobalMarginLink} );
-	}
+    }
 
-	const handleGlobalMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			TestimonialGlobalMarginUnits: {
-				...TestimonialGlobalMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
+    const handleGlobalMarginCombineBtn = () => {
+        setAttributes({ TestimonialGlobalMarginLink: !TestimonialGlobalMarginLink });
+    }
 
-	const globalDesktopMargin = `${TestimonialGlobalMarginDesktop?.top}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.right}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.bottom}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.left}${TestimonialGlobalMarginUnits?.Desktop}`;
-	const globalTabletMargin = `${TestimonialGlobalMarginTablet?.top}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.right}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.bottom}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.left}${TestimonialGlobalMarginUnits?.Tablet}`;
-	const globalMobileMargin = `${TestimonialGlobalMarginMobile?.top}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.right}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.bottom}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.left}${TestimonialGlobalMarginUnits?.Mobile}`;
-	/** End Global Margin */
+    const handleGlobalMarginUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialGlobalMarginUnits: {
+                ...TestimonialGlobalMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
 
-	/** Start Global border */
-	const handleGlobalBorderUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( TestimonialGlobalBorderLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						TestimonialGlobalBorderDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						TestimonialGlobalBorderTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						TestimonialGlobalBorderMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {TestimonialGlobalBorderDesktop: {...TestimonialGlobalBorderDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {TestimonialGlobalBorderTablet: {...TestimonialGlobalBorderTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {TestimonialGlobalBorderMobile: {...TestimonialGlobalBorderMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    const globalDesktopMargin = `${TestimonialGlobalMarginDesktop?.top}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.right}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.bottom}${TestimonialGlobalMarginUnits?.Desktop} ${TestimonialGlobalMarginDesktop?.left}${TestimonialGlobalMarginUnits?.Desktop}`;
+    const globalTabletMargin = `${TestimonialGlobalMarginTablet?.top}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.right}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.bottom}${TestimonialGlobalMarginUnits?.Tablet} ${TestimonialGlobalMarginTablet?.left}${TestimonialGlobalMarginUnits?.Tablet}`;
+    const globalMobileMargin = `${TestimonialGlobalMarginMobile?.top}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.right}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.bottom}${TestimonialGlobalMarginUnits?.Mobile} ${TestimonialGlobalMarginMobile?.left}${TestimonialGlobalMarginUnits?.Mobile}`;
+    /** End Global Margin */
 
-	}
+    /** Start Global border */
+    const handleGlobalBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialGlobalBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialGlobalBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialGlobalBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialGlobalBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialGlobalBorderDesktop: { ...TestimonialGlobalBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialGlobalBorderTablet: { ...TestimonialGlobalBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialGlobalBorderMobile: { ...TestimonialGlobalBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	const handleGlobalBorderCombineBtn = () => {
-		setAttributes( {TestimonialGlobalBorderLink: !TestimonialGlobalBorderLink} );
-	}
+    }
 
-	const handleGlobalBorderUnitsHandler = (unit) => {
-		setAttributes( {
-			TestimonialGlobalBorderUnits: {
-				...TestimonialGlobalBorderUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop?.top}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.right}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.bottom}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.left}${TestimonialGlobalBorderUnits?.Desktop}`;
-	const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet?.top}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.right}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.bottom}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.left}${TestimonialGlobalBorderUnits?.Tablet}`;
-	const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile?.top}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.right}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.bottom}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.left}${TestimonialGlobalBorderUnits?.Mobile}`;
-	/** End Border */
+    const handleGlobalBorderCombineBtn = () => {
+        setAttributes({ TestimonialGlobalBorderLink: !TestimonialGlobalBorderLink });
+    }
+
+    const handleGlobalBorderUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialGlobalBorderUnits: {
+                ...TestimonialGlobalBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    const globalDesktopBorderWidth = `${TestimonialGlobalBorderDesktop?.top}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.right}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.bottom}${TestimonialGlobalBorderUnits?.Desktop} ${TestimonialGlobalBorderDesktop?.left}${TestimonialGlobalBorderUnits?.Desktop}`;
+    const globalTabletBorderWidth = `${TestimonialGlobalBorderTablet?.top}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.right}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.bottom}${TestimonialGlobalBorderUnits?.Tablet} ${TestimonialGlobalBorderTablet?.left}${TestimonialGlobalBorderUnits?.Tablet}`;
+    const globalMobileBorderWidth = `${TestimonialGlobalBorderMobile?.top}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.right}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.bottom}${TestimonialGlobalBorderUnits?.Mobile} ${TestimonialGlobalBorderMobile?.left}${TestimonialGlobalBorderUnits?.Mobile}`;
+    /** End Border */
 
 
-	/** Start Global border radius*/
-	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( TestimonialGlobalBorderRadiusLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						TestimonialGlobalBorderRadiusDesktop: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						TestimonialGlobalBorderRadiusTablet: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						TestimonialGlobalBorderRadiusMobile: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {TestimonialGlobalBorderRadiusDesktop: {...TestimonialGlobalBorderRadiusDesktop, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {TestimonialGlobalBorderRadiusTablet: {...TestimonialGlobalBorderRadiusTablet, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {TestimonialGlobalBorderRadiusMobile: {...TestimonialGlobalBorderRadiusMobile, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
+    /** Start Global border radius*/
+    const handleGlobalBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (TestimonialGlobalBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        TestimonialGlobalBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        TestimonialGlobalBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        TestimonialGlobalBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ TestimonialGlobalBorderRadiusDesktop: { ...TestimonialGlobalBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ TestimonialGlobalBorderRadiusTablet: { ...TestimonialGlobalBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ TestimonialGlobalBorderRadiusMobile: { ...TestimonialGlobalBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
 
-	}
+    }
 
-	const handleGlobalBorderRadiusCombineBtn = () => {
-		setAttributes( {TestimonialGlobalBorderRadiusLink: !TestimonialGlobalBorderRadiusLink} );
-	}
+    const handleGlobalBorderRadiusCombineBtn = () => {
+        setAttributes({ TestimonialGlobalBorderRadiusLink: !TestimonialGlobalBorderRadiusLink });
+    }
 
-	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
-			TestimonialGlobalBorderRadiusUnits: {
-				...TestimonialGlobalBorderRadiusUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	/** end Global border */
+    const handleGlobalBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            TestimonialGlobalBorderRadiusUnits: {
+                ...TestimonialGlobalBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Global border */
 
-	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop?.top}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.right}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.bottom}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.left}${TestimonialGlobalBorderRadiusUnits?.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet?.top}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.right}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.bottom}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.left}${TestimonialGlobalBorderRadiusUnits?.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile?.top}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.right}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.bottom}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.left}${TestimonialGlobalBorderRadiusUnits?.Mobile}`;
-	/** End Border Radius */
+    /** End Global Border Radius */
+    const globalDesktopBorderRadiusWidth = `${TestimonialGlobalBorderRadiusDesktop?.top}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.right}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.bottom}${TestimonialGlobalBorderRadiusUnits?.Desktop} ${TestimonialGlobalBorderRadiusDesktop?.left}${TestimonialGlobalBorderRadiusUnits?.Desktop}`;
+    const globalTabletBorderRadiusWidth = `${TestimonialGlobalBorderRadiusTablet?.top}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.right}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.bottom}${TestimonialGlobalBorderRadiusUnits?.Tablet} ${TestimonialGlobalBorderRadiusTablet?.left}${TestimonialGlobalBorderRadiusUnits?.Tablet}`;
+    const globalMobileBorderRadiusWidth = `${TestimonialGlobalBorderRadiusMobile?.top}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.right}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.bottom}${TestimonialGlobalBorderRadiusUnits?.Mobile} ${TestimonialGlobalBorderRadiusMobile?.left}${TestimonialGlobalBorderRadiusUnits?.Mobile}`;
+    /** End Border Radius */
 
 
 
@@ -2539,11 +2544,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialGlobalBorderColor ? `border-color: ${TestimonialGlobalBorderColor};` : ''}
             ${TestimonialGlobalBoxShadowCssValue ? `box-shadow: ${TestimonialGlobalBoxShadowCssValue};` : ''}
             ${TestimonialGlobalBgNormalBackgroundType === 'gradient' ? `  
-                background: ${
-                    TestimonialGlobalBgNormalCustomGradientSwitcher && TestimonialGlobalBgNormalCustomGradientInputValue 
-                        ? TestimonialGlobalBgNormalCustomGradientInputValue 
-                        : TestimonialGlobalBgNormalGradientColor || TestimonialGlobalBgNormalClassicColor
-                };
+                background: ${TestimonialGlobalBgNormalCustomGradientSwitcher && TestimonialGlobalBgNormalCustomGradientInputValue
+                ? TestimonialGlobalBgNormalCustomGradientInputValue
+                : TestimonialGlobalBgNormalGradientColor || TestimonialGlobalBgNormalClassicColor
+            };
             ` : `
                 background: ${TestimonialGlobalBgNormalClassicColor};
             `}
@@ -2552,11 +2556,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID}.fb-testimonial-main-wrapper .fb-testimonial-section:hover {
             ${TestimonialGlobalBgHoverBackgroundType === 'gradient' ? `  
-                background: ${
-                    TestimonialGlobalBgHoverCustomGradientSwitcher && TestimonialGlobalBgHoverCustomGradientInputValue 
-                        ? TestimonialGlobalBgHoverCustomGradientInputValue 
-                        : TestimonialGlobalBgHoverGradientColor || TestimonialGlobalBgHoverClassicColor
-                };
+                background: ${TestimonialGlobalBgHoverCustomGradientSwitcher && TestimonialGlobalBgHoverCustomGradientInputValue
+                ? TestimonialGlobalBgHoverCustomGradientInputValue
+                : TestimonialGlobalBgHoverGradientColor || TestimonialGlobalBgHoverClassicColor
+            };
             ` : `
                 ${TestimonialGlobalBgHoverClassicColor ? `background: ${TestimonialGlobalBgHoverClassicColor};` : ''}
             `} 
@@ -2578,7 +2581,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${TestimonialQuoteIconPositionSwitcher ? 'position: absolute;' : ''}
             ${TestimonialQuoteIconPositionSwitcher ? `top: ${TestimonialQuoteIconTopPosition?.Desktop && TestimonialQuoteIconTopPositionUnits?.Desktop ? `${TestimonialQuoteIconTopPosition?.Desktop}${TestimonialQuoteIconTopPositionUnits?.Desktop}` : '0'};` : ''}
             ${TestimonialQuoteIconPositionSwitcher ? `left: ${TestimonialQuoteIconLeftPosition?.Desktop && TestimonialQuoteIconLeftPositionUnits?.Desktop ? `${TestimonialQuoteIconLeftPosition?.Desktop}${TestimonialQuoteIconLeftPositionUnits?.Desktop}` : '0'};` : ''}
-            ${testimonialQuoteIconDesktopMargin && TestimonialQuoteIconMarginDesktop?.top? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
+            ${testimonialQuoteIconDesktopMargin && TestimonialQuoteIconMarginDesktop?.top ? `margin: ${testimonialQuoteIconDesktopMargin};` : ''}
         }
         .${blockID} .fb-testimonial-quote-icon svg {
             ${TestimonialQuoteIconSize?.Desktop && TestimonialQuoteIconSizeUnits?.Desktop ? `width: ${TestimonialQuoteIconSize?.Desktop}${TestimonialQuoteIconSizeUnits?.Desktop};` : ''}
@@ -2723,8 +2726,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockID} .fb-testimonial-author-container {
-            ${TestimonialPresetStyle === "preset-5" ? 
-                `
+            ${TestimonialPresetStyle === "preset-5" ?
+            `
                 display: flex;
                 align-items: center;
                 justify-content: space-between !important;
@@ -2732,8 +2735,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         }
         .${blockID} .fb-user-desc {
-                ${TestimonialPresetStyle === "preset-5" ? 
-                `
+                ${TestimonialPresetStyle === "preset-5" ?
+            `
                 padding-top: 24px;
                 ` : ''}
         }
@@ -2933,7 +2936,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         TestimonialImageWidth,
         TestimonialImageWidthUnits,
         TestimonialImageObjectFit,
-        
+
         TestimonialImageRadiusUnits,
         TestimonialImageDesktopRadiusWidth,
         TestimonialImageTabRadiusWidth,
@@ -3191,7 +3194,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const customCss = getCustomCss(testimonialCustomCSS, `.${blockID}`);
 
     useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+        setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
     }, [allBlockStyle, customCss]);
 
 
@@ -3200,276 +3203,276 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     /**
      * Generate SVG Icons for Icon
      */
-	useEffect(() => {
-		setAttributes({
-			FrontendTestimonialRatingicon: generateSvgIcon(TestimonialRatingicon), 
-			FrontendTestimonialQuoteIcon: generateSvgIcon(TestimonialQuoteIcon), 
-		})
-	}, [TestimonialRatingicon, TestimonialQuoteIcon]);
+    useEffect(() => {
+        setAttributes({
+            FrontendTestimonialRatingicon: generateSvgIcon(TestimonialRatingicon),
+            FrontendTestimonialQuoteIcon: generateSvgIcon(TestimonialQuoteIcon),
+        })
+    }, [TestimonialRatingicon, TestimonialQuoteIcon]);
 
-	// Check if Pro is active
-	const getProActiveState = getProActive();
-	useEffect(() => {
-		if (!getProActiveState) { 
-			setAttributes({
-				dynamicTitleEnabled: false,
-				dynamicTitleEnableLink: false,
-				dynamicDescriptionEnabled: false,
-				dynamicDescriptionEnableLink: false,
+    // Check if Pro is active
+    const getProActiveState = getProActive();
+    useEffect(() => {
+        if (!getProActiveState) {
+            setAttributes({
+                dynamicTitleEnabled: false,
+                dynamicTitleEnableLink: false,
+                dynamicDescriptionEnabled: false,
+                dynamicDescriptionEnableLink: false,
                 dynamicAuthorNameEnabled: false,
                 dynamicAuthorNameEnableLink: false,
                 dynamicAuthorDesignationEnabled: false,
                 dynamicAuthorDesignationEnableLink: false,
-			});
-		}
-	}, [getProActiveState]);
-
-	/**
-	 * Toggle Controls for Dynamic Content
-	 */
-	const dynamicTitleContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-title-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicTitleEnabled',
-		label: __('Dynamic Title', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-title-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicDescriptionContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-description-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicDescriptionEnabled',
-		label: __('Dynamic Description', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-description-content',
-		isProActive : getProActiveState
-	});
-
-    const dynamicAuthorNameContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-author-name-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicAuthorNameEnabled',
-		label: __('Dynamic Author Name', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-author-name-content',
-		isProActive : getProActiveState
-	});
-
-	const dynamicAuthorDesignationContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-testimonial-dynamic-author-designation-toggle-controls',
-		attributes,
-		setAttributes,
-		dynamicAttr: 'dynamicAuthorDesignationEnabled',
-		label: __('Dynamic Author Designation', 'frontis-blocks'),
-		keyPrefix: 'testimonial-dynamic-author-designation-content',
-		isProActive : getProActiveState
-	});
+            });
+        }
+    }, [getProActiveState]);
 
     /**
-	 * Inspector General Controls
-	 */
-	const generalControls = (
+     * Toggle Controls for Dynamic Content
+     */
+    const dynamicTitleContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-testimonial-dynamic-title-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicTitleEnabled',
+        label: __('Dynamic Title', 'frontis-blocks'),
+        keyPrefix: 'testimonial-dynamic-title-content',
+        isProActive: getProActiveState
+    });
+
+    const dynamicDescriptionContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-testimonial-dynamic-description-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicDescriptionEnabled',
+        label: __('Dynamic Description', 'frontis-blocks'),
+        keyPrefix: 'testimonial-dynamic-description-content',
+        isProActive: getProActiveState
+    });
+
+    const dynamicAuthorNameContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-testimonial-dynamic-author-name-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicAuthorNameEnabled',
+        label: __('Dynamic Author Name', 'frontis-blocks'),
+        keyPrefix: 'testimonial-dynamic-author-name-content',
+        isProActive: getProActiveState
+    });
+
+    const dynamicAuthorDesignationContentToggleControls = getProToggleControls({
+        hook: 'frontisblocks-testimonial-dynamic-author-designation-toggle-controls',
+        attributes,
+        setAttributes,
+        dynamicAttr: 'dynamicAuthorDesignationEnabled',
+        label: __('Dynamic Author Designation', 'frontis-blocks'),
+        keyPrefix: 'testimonial-dynamic-author-designation-content',
+        isProActive: getProActiveState
+    });
+
+    /**
+     * Inspector General Controls
+     */
+    const generalControls = (
         <>
             <PanelBody
                 title={__("Testimonial Info", "frontis-blocks")}
                 initialOpen={true}
             >
-                    {/* <SelectControl
+                {/* <SelectControl
                         label={__("Preset Style", "frontis-blocks")}
                         value={TestimonialPresetStyle}
                         options={PRESETS}
                         onChange={(selected) => changeTestimonialPreset(selected)}
                     /> */}
-                    <FB_Presets
-                        className="fb-testimonial-presets"
-                        label={__('Select Preset', 'frontis-blocks')}
-                        presets={testimonialPresets}
-                        value = {TestimonialPresetStyle}
-                        onChangeValue = 'TestimonialPresetStyle'
-                        defaultPresetValue="preset-1"
-                        setAttributes={setAttributes}
+                <FB_Presets
+                    className="fb-testimonial-presets"
+                    label={__('Select Preset', 'frontis-blocks')}
+                    presets={testimonialPresets}
+                    value={TestimonialPresetStyle}
+                    onChangeValue='TestimonialPresetStyle'
+                    defaultPresetValue="preset-1"
+                    setAttributes={setAttributes}
+                />
+                <BaseControl
+                    label={__("Element Visibility", "frontis-blocks")}
+                    className="fb-setting-show-hide-elements"
+                >
+                    <ToggleControl
+                        label={__("Show Rating", "frontis-blocks")}
+                        checked={RatingSwitcher}
+                        onChange={(value) => setAttributes({ RatingSwitcher: value })}
                     />
-                    <BaseControl
-                        label={__("Element Visibility", "frontis-blocks")}
-                        className="fb-setting-show-hide-elements" 
-                    >
-                        <ToggleControl
-                            label={__("Show Rating", "frontis-blocks")}
-                            checked={RatingSwitcher}
-                            onChange={(value) => setAttributes({ RatingSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Title", "frontis-blocks")}
-                            checked={TitleSwitcher}
-                            onChange={(value) => setAttributes({ TitleSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Description", "frontis-blocks")}
-                            checked={DescSwitcher}
-                            onChange={(value) => setAttributes({ DescSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Avatar", "frontis-blocks")}
-                            checked={TestimonialImageSwitcher}
-                            onChange={(value) => setAttributes({ TestimonialImageSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Author", "frontis-blocks")}
-                            checked={AuthorSwitcher}
-                            onChange={(value) => setAttributes({ AuthorSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Designation", "frontis-blocks")}
-                            checked={DesignationSwitcher}
-                            onChange={(value) => setAttributes({ DesignationSwitcher: value })}
-                        />
-                        <ToggleControl
-                            label={__("Show Quote Icon", "frontis-blocks")}
-                            checked={QuoteIconSwitcher}
-                            onChange={(value) => setAttributes({ QuoteIconSwitcher: value })}
-                        />
-                    </BaseControl>
-
-                    <BaseControl
-                        label={__("Alignment", "frontis-blocks")}
-                        id="fb-setting-text-alignment"
-                        className="fb-setting-text-alignment"
-                    >
-                        <ButtonGroup
-                            className="fb-setting-text-alignment-group-btn"
-                        >
-                            {TEXT_ALIGN.map((item, key) => (
-                                <Button
-                                    key={key}
-                                    onClick={() => setAttributes({ TestimonialAlignment: item.value })}
-                                    className={`fb-setting-text-alignment-single-btn ${TestimonialAlignment === item.value ? 'active' : ''}`}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </BaseControl>
-
-					{dynamicTitleContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-	
-					<DynamicDataSourceControl
-						enabled={dynamicTitleEnabled}
-						
-						source={dynamicTitleSource}
-						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
-						postId={dynamicTitlePostId}
-						setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
-						postType={dynamicTitlePostType}
-						setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
-						postLabel={dynamicTitlePostLabel}
-						setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
-
-						field={dynamicTitleField}
-						setField={(value) => setAttributes({ dynamicTitleField: value })}
-						featuredImageField={dynamicTitleFeaturedImageField}
-						setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
-
-						dateType={dynamicTitleDateType}
-						setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
-						dateFormat={dynamicTitleDateFormat}
-						setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
-						timeType={dynamicTitleTimeType}
-						setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
-						timeFormat={dynamicTitleTimeFormat}
-						setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
-
-						commentsZeroText={dynamicTitleCommentsZeroText}
-						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
-						commentsOneText={dynamicTitleCommentsOneText}
-						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
-						commentsManyText={dynamicTitleCommentsManyText}
-						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
-
-						termsTaxonomy={dynamicTitleTermsTaxonomy}
-						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
-						termsSeparator={dynamicTitleTermsSeparator}
-						setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
-					/>
-					{dynamicTitleEnabled && (
-						<DynamicDataLinkControl
-							enableLink={dynamicTitleEnableLink}
-							setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
-							linkSource={dynamicTitleLinkSource}
-							setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
-						/>
-					)}
-                    {!dynamicTitleEnabled && TitleSwitcher && (
-                        <TextareaControl
-                            label={__("Title", "frontis-blocks")}
-                            value={TestimonialTitle}
-                            onChange={(value) => setAttributes({ TestimonialTitle: value })}
-                            className="fb-testimonial-title-control"
-                        />
-                    )}
-
-                    {dynamicDescriptionContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicDescriptionEnabled}
-                        
-                        source={dynamicDescriptionSource}
-                        setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
-                        postId={dynamicDescriptionPostId}
-                        setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
-                        postType={dynamicDescriptionPostType}
-                        setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
-                        postLabel={dynamicDescriptionPostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
-
-                        field={dynamicDescriptionField}
-                        setField={(value) => setAttributes({ dynamicDescriptionField: value })}
-                        featuredImageField={dynamicDescriptionFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
-
-                        dateType={dynamicDescriptionDateType}
-                        setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
-                        dateFormat={dynamicDescriptionDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
-                        timeType={dynamicDescriptionTimeType}
-                        setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
-                        timeFormat={dynamicDescriptionTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
-
-                        commentsZeroText={dynamicDescriptionCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
-                        commentsOneText={dynamicDescriptionCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
-                        commentsManyText={dynamicDescriptionCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
-
-                        termsTaxonomy={dynamicDescriptionTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
-                        termsSeparator={dynamicDescriptionTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
+                    <ToggleControl
+                        label={__("Show Title", "frontis-blocks")}
+                        checked={TitleSwitcher}
+                        onChange={(value) => setAttributes({ TitleSwitcher: value })}
                     />
+                    <ToggleControl
+                        label={__("Show Description", "frontis-blocks")}
+                        checked={DescSwitcher}
+                        onChange={(value) => setAttributes({ DescSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Show Avatar", "frontis-blocks")}
+                        checked={TestimonialImageSwitcher}
+                        onChange={(value) => setAttributes({ TestimonialImageSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Show Author", "frontis-blocks")}
+                        checked={AuthorSwitcher}
+                        onChange={(value) => setAttributes({ AuthorSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Show Designation", "frontis-blocks")}
+                        checked={DesignationSwitcher}
+                        onChange={(value) => setAttributes({ DesignationSwitcher: value })}
+                    />
+                    <ToggleControl
+                        label={__("Show Quote Icon", "frontis-blocks")}
+                        checked={QuoteIconSwitcher}
+                        onChange={(value) => setAttributes({ QuoteIconSwitcher: value })}
+                    />
+                </BaseControl>
 
-                    {dynamicDescriptionEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicDescriptionEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
-                            linkSource={dynamicDescriptionLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
-                        />
-                    )}
-                    {!dynamicDescriptionEnabled && DescSwitcher && (
-                        <TextareaControl
-                            label={__("Description", "frontis-blocks")}
-                            value={TestimonialDesc}
-                            onChange={(value) => setAttributes({ TestimonialDesc: value })}
-                            className="fb-testimonial-desc-control"
-                        />
-                    )}
+                <BaseControl
+                    label={__("Alignment", "frontis-blocks")}
+                    id="fb-setting-text-alignment"
+                    className="fb-setting-text-alignment"
+                >
+                    <ButtonGroup
+                        className="fb-setting-text-alignment-group-btn"
+                    >
+                        {TEXT_ALIGN.map((item, key) => (
+                            <Button
+                                key={key}
+                                onClick={() => setAttributes({ TestimonialAlignment: item.value })}
+                                className={`fb-setting-text-alignment-single-btn ${TestimonialAlignment === item.value ? 'active' : ''}`}
+                            >
+                                {item.label}
+                            </Button>
+                        ))}
+                    </ButtonGroup>
+                </BaseControl>
+
+                {dynamicTitleContentToggleControls.map((control, index) => (
+                    <div key={control.key || index}>{control.comp}</div>
+                ))}
+
+                <DynamicDataSourceControl
+                    enabled={dynamicTitleEnabled}
+
+                    source={dynamicTitleSource}
+                    setSource={(value) => setAttributes({ dynamicTitleSource: value })}
+                    postId={dynamicTitlePostId}
+                    setPostId={(value) => setAttributes({ dynamicTitlePostId: value })}
+                    postType={dynamicTitlePostType}
+                    setPostType={(value) => setAttributes({ dynamicTitlePostType: value })}
+                    postLabel={dynamicTitlePostLabel}
+                    setPostLabel={(value) => setAttributes({ dynamicTitlePostLabel: value })}
+
+                    field={dynamicTitleField}
+                    setField={(value) => setAttributes({ dynamicTitleField: value })}
+                    featuredImageField={dynamicTitleFeaturedImageField}
+                    setFeaturedImageField={(value) => setAttributes({ dynamicTitleFeaturedImageField: value })}
+
+                    dateType={dynamicTitleDateType}
+                    setDateType={(value) => setAttributes({ dynamicTitleDateType: value })}
+                    dateFormat={dynamicTitleDateFormat}
+                    setDateFormat={(value) => setAttributes({ dynamicTitleDateFormat: value })}
+                    timeType={dynamicTitleTimeType}
+                    setTimeType={(value) => setAttributes({ dynamicTitleTimeType: value })}
+                    timeFormat={dynamicTitleTimeFormat}
+                    setTimeFormat={(value) => setAttributes({ dynamicTitleTimeFormat: value })}
+
+                    commentsZeroText={dynamicTitleCommentsZeroText}
+                    setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
+                    commentsOneText={dynamicTitleCommentsOneText}
+                    setCommentsOneText={(value) => setAttributes({ dynamicTitleCommentsOneText: value })}
+                    commentsManyText={dynamicTitleCommentsManyText}
+                    setCommentsManyText={(value) => setAttributes({ dynamicTitleCommentsManyText: value })}
+
+                    termsTaxonomy={dynamicTitleTermsTaxonomy}
+                    setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
+                    termsSeparator={dynamicTitleTermsSeparator}
+                    setTermsSeparator={(value) => setAttributes({ dynamicTitleTermsSeparator: value })}
+                />
+                {dynamicTitleEnabled && (
+                    <DynamicDataLinkControl
+                        enableLink={dynamicTitleEnableLink}
+                        setEnableLink={(value) => setAttributes({ dynamicTitleEnableLink: value })}
+                        linkSource={dynamicTitleLinkSource}
+                        setLinkSource={(value) => setAttributes({ dynamicTitleLinkSource: value })}
+                    />
+                )}
+                {!dynamicTitleEnabled && TitleSwitcher && (
+                    <TextareaControl
+                        label={__("Title", "frontis-blocks")}
+                        value={TestimonialTitle}
+                        onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                        className="fb-testimonial-title-control"
+                    />
+                )}
+
+                {dynamicDescriptionContentToggleControls.map((control, index) => (
+                    <div key={control.key || index}>{control.comp}</div>
+                ))}
+
+                <DynamicDataSourceControl
+                    enabled={dynamicDescriptionEnabled}
+
+                    source={dynamicDescriptionSource}
+                    setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
+                    postId={dynamicDescriptionPostId}
+                    setPostId={(value) => setAttributes({ dynamicDescriptionPostId: value })}
+                    postType={dynamicDescriptionPostType}
+                    setPostType={(value) => setAttributes({ dynamicDescriptionPostType: value })}
+                    postLabel={dynamicDescriptionPostLabel}
+                    setPostLabel={(value) => setAttributes({ dynamicDescriptionPostLabel: value })}
+
+                    field={dynamicDescriptionField}
+                    setField={(value) => setAttributes({ dynamicDescriptionField: value })}
+                    featuredImageField={dynamicDescriptionFeaturedImageField}
+                    setFeaturedImageField={(value) => setAttributes({ dynamicDescriptionFeaturedImageField: value })}
+
+                    dateType={dynamicDescriptionDateType}
+                    setDateType={(value) => setAttributes({ dynamicDescriptionDateType: value })}
+                    dateFormat={dynamicDescriptionDateFormat}
+                    setDateFormat={(value) => setAttributes({ dynamicDescriptionDateFormat: value })}
+                    timeType={dynamicDescriptionTimeType}
+                    setTimeType={(value) => setAttributes({ dynamicDescriptionTimeType: value })}
+                    timeFormat={dynamicDescriptionTimeFormat}
+                    setTimeFormat={(value) => setAttributes({ dynamicDescriptionTimeFormat: value })}
+
+                    commentsZeroText={dynamicDescriptionCommentsZeroText}
+                    setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
+                    commentsOneText={dynamicDescriptionCommentsOneText}
+                    setCommentsOneText={(value) => setAttributes({ dynamicDescriptionCommentsOneText: value })}
+                    commentsManyText={dynamicDescriptionCommentsManyText}
+                    setCommentsManyText={(value) => setAttributes({ dynamicDescriptionCommentsManyText: value })}
+
+                    termsTaxonomy={dynamicDescriptionTermsTaxonomy}
+                    setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
+                    termsSeparator={dynamicDescriptionTermsSeparator}
+                    setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
+                />
+
+                {dynamicDescriptionEnabled && (
+                    <DynamicDataLinkControl
+                        enableLink={dynamicDescriptionEnableLink}
+                        setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
+                        linkSource={dynamicDescriptionLinkSource}
+                        setLinkSource={(value) => setAttributes({ dynamicDescriptionLinkSource: value })}
+                    />
+                )}
+                {!dynamicDescriptionEnabled && DescSwitcher && (
+                    <TextareaControl
+                        label={__("Description", "frontis-blocks")}
+                        value={TestimonialDesc}
+                        onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                        className="fb-testimonial-desc-control"
+                    />
+                )}
             </PanelBody>
 
             <PanelBody
@@ -3483,7 +3486,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         label={__("Avatar", "frontis-blocks")}
                     >
                         {TestimonialImageUrl ? (
-                            <div className="fb-testimonial-image-control" style={{backgroundImage: `url(${TestimonialImageUrl})`}}>
+                            <div className="fb-testimonial-image-control" style={{ backgroundImage: `url(${TestimonialImageUrl})` }}>
                                 <button
                                     className='fb-testimonial-image-delete'
                                     onClick={() => {
@@ -3495,8 +3498,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     }}
                                 >
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C"/>
-                                        <path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C"/>
+                                        <path d="M12.9431 22C18.466 22 22.9431 17.5228 22.9431 12C22.9431 6.47715 18.466 2 12.9431 2C7.42027 2 2.94312 6.47715 2.94312 12C2.94312 17.5228 7.42027 22 12.9431 22Z" stroke="#1C274C" />
+                                        <path d="M15.4431 9.50002L10.4431 14.5M10.4431 9.5L15.4431 14.5" stroke="#1C274C" />
                                     </svg>
                                 </button>
                                 <button
@@ -3510,7 +3513,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                             multiple: false
                                         });
 
-                                        mediaUploader.on('select', function() {
+                                        mediaUploader.on('select', function () {
                                             const attachment = mediaUploader.state().get('selection').first().toJSON();
                                             setAttributes({
                                                 TestimonialImageUrl: attachment.url,
@@ -3523,8 +3526,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                     }}
                                 >
                                     <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C"/>
-                                        <path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C"/>
+                                        <path d="M10.4431 19.75C10.8573 19.75 11.1931 19.4142 11.1931 19C11.1931 18.5858 10.8573 18.25 10.4431 18.25V19.75ZM11.9431 5V5.75C12.2464 5.75 12.5199 5.56727 12.636 5.28701C12.7521 5.00676 12.6879 4.68417 12.4734 4.46967L11.9431 5ZM10.4734 2.46967C10.1806 2.17678 9.70568 2.17678 9.41279 2.46967C9.1199 2.76256 9.1199 3.23744 9.41279 3.53033L10.4734 2.46967ZM10.4431 18.25H9.9434V19.75H10.4431V18.25ZM9.94312 5.75H11.9431V4.25H9.94312V5.75ZM12.4734 4.46967L10.4734 2.46967L9.41279 3.53033L11.4128 5.53033L12.4734 4.46967ZM2.19312 12C2.19312 16.2802 5.66323 19.75 9.9434 19.75V18.25C6.49158 18.25 3.69312 15.4517 3.69312 12H2.19312ZM3.69312 12C3.69312 8.54822 6.49134 5.75 9.94312 5.75V4.25C5.66291 4.25 2.19312 7.71979 2.19312 12H3.69312Z" fill="#1C274C" />
+                                        <path d="M13.9431 19V18.25C13.6398 18.25 13.3663 18.4327 13.2502 18.713C13.1341 18.9932 13.1983 19.3158 13.4128 19.5303L13.9431 19ZM15.4128 21.5303C15.7057 21.8232 16.1805 21.8232 16.4734 21.5303C16.7663 21.2374 16.7663 20.7626 16.4734 20.4697L15.4128 21.5303ZM15.4431 4.25C15.0289 4.25 14.6931 4.58579 14.6931 5C14.6931 5.41421 15.0289 5.75 15.4431 5.75V4.25ZM15.9431 18.25H13.9431V19.75H15.9431V18.25ZM13.4128 19.5303L15.4128 21.5303L16.4734 20.4697L14.4734 18.4697L13.4128 19.5303ZM15.4431 5.75H15.9431V4.25H15.4431V5.75ZM22.1931 12C22.1931 15.4518 19.3949 18.25 15.9431 18.25V19.75C20.2233 19.75 23.6931 16.2802 23.6931 12H22.1931ZM23.6931 12C23.6931 7.71979 20.2233 4.25 15.9431 4.25V5.75C19.3949 5.75 22.1931 8.54822 22.1931 12H23.6931Z" fill="#1C274C" />
                                     </svg>
                                     Replace
                                 </button>
@@ -3541,7 +3544,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                         multiple: false
                                     });
 
-                                    mediaUploader.on('select', function() {
+                                    mediaUploader.on('select', function () {
                                         const attachment = mediaUploader.state().get('selection').first().toJSON();
                                         setAttributes({
                                             TestimonialImageUrl: attachment.url,
@@ -3557,128 +3560,128 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 Upload
                             </button>
                         )}
-                        </BaseControl>
-                    )}
+                    </BaseControl>
+                )}
 
-                    {dynamicAuthorNameContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicAuthorNameEnabled}  
-                        
-                        source={dynamicAuthorNameSource} 
-                        setSource={(value) => setAttributes({ dynamicAuthorNameSource: value })}   
-                        postId={dynamicAuthorNamePostId}
-                        setPostId={(value) => setAttributes({ dynamicAuthorNamePostId: value })}
-                        postType={dynamicAuthorNamePostType}
-                        setPostType={(value) => setAttributes({ dynamicAuthorNamePostType: value })}
-                        postLabel={dynamicAuthorNamePostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicAuthorNamePostLabel: value })}
+                {dynamicAuthorNameContentToggleControls.map((control, index) => (
+                    <div key={control.key || index}>{control.comp}</div>
+                ))}
 
-                        field={dynamicAuthorNameField}
-                        setField={(value) => setAttributes({ dynamicAuthorNameField: value })}
-                        featuredImageField={dynamicAuthorNameFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorNameFeaturedImageField: value })}
+                <DynamicDataSourceControl
+                    enabled={dynamicAuthorNameEnabled}
 
-                        dateType={dynamicAuthorNameDateType}
-                        setDateType={(value) => setAttributes({ dynamicAuthorNameDateType: value })}
-                        dateFormat={dynamicAuthorNameDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicAuthorNameDateFormat: value })}
-                        timeType={dynamicAuthorNameTimeType}
-                        setTimeType={(value) => setAttributes({ dynamicAuthorNameTimeType: value })}
-                        timeFormat={dynamicAuthorNameTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicAuthorNameTimeFormat: value })}
+                    source={dynamicAuthorNameSource}
+                    setSource={(value) => setAttributes({ dynamicAuthorNameSource: value })}
+                    postId={dynamicAuthorNamePostId}
+                    setPostId={(value) => setAttributes({ dynamicAuthorNamePostId: value })}
+                    postType={dynamicAuthorNamePostType}
+                    setPostType={(value) => setAttributes({ dynamicAuthorNamePostType: value })}
+                    postLabel={dynamicAuthorNamePostLabel}
+                    setPostLabel={(value) => setAttributes({ dynamicAuthorNamePostLabel: value })}
 
-                        commentsZeroText={dynamicAuthorNameCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorNameCommentsZeroText: value })}
-                        commentsOneText={dynamicAuthorNameCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorNameCommentsOneText: value })}
-                        commentsManyText={dynamicAuthorNameCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorNameCommentsManyText: value })}
+                    field={dynamicAuthorNameField}
+                    setField={(value) => setAttributes({ dynamicAuthorNameField: value })}
+                    featuredImageField={dynamicAuthorNameFeaturedImageField}
+                    setFeaturedImageField={(value) => setAttributes({ dynamicAuthorNameFeaturedImageField: value })}
 
-                        termsTaxonomy={dynamicAuthorNameTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorNameTermsTaxonomy: value })}
-                        termsSeparator={dynamicAuthorNameTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorNameTermsSeparator: value })}
+                    dateType={dynamicAuthorNameDateType}
+                    setDateType={(value) => setAttributes({ dynamicAuthorNameDateType: value })}
+                    dateFormat={dynamicAuthorNameDateFormat}
+                    setDateFormat={(value) => setAttributes({ dynamicAuthorNameDateFormat: value })}
+                    timeType={dynamicAuthorNameTimeType}
+                    setTimeType={(value) => setAttributes({ dynamicAuthorNameTimeType: value })}
+                    timeFormat={dynamicAuthorNameTimeFormat}
+                    setTimeFormat={(value) => setAttributes({ dynamicAuthorNameTimeFormat: value })}
+
+                    commentsZeroText={dynamicAuthorNameCommentsZeroText}
+                    setCommentsZeroText={(value) => setAttributes({ dynamicAuthorNameCommentsZeroText: value })}
+                    commentsOneText={dynamicAuthorNameCommentsOneText}
+                    setCommentsOneText={(value) => setAttributes({ dynamicAuthorNameCommentsOneText: value })}
+                    commentsManyText={dynamicAuthorNameCommentsManyText}
+                    setCommentsManyText={(value) => setAttributes({ dynamicAuthorNameCommentsManyText: value })}
+
+                    termsTaxonomy={dynamicAuthorNameTermsTaxonomy}
+                    setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorNameTermsTaxonomy: value })}
+                    termsSeparator={dynamicAuthorNameTermsSeparator}
+                    setTermsSeparator={(value) => setAttributes({ dynamicAuthorNameTermsSeparator: value })}
+                />
+
+                {dynamicAuthorNameEnabled && (
+                    <DynamicDataLinkControl
+                        enableLink={dynamicAuthorNameEnableLink}
+                        setEnableLink={(value) => setAttributes({ dynamicAuthorNameEnableLink: value })}
+                        linkSource={dynamicAuthorNameLinkSource}
+                        setLinkSource={(value) => setAttributes({ dynamicAuthorNameLinkSource: value })}
                     />
-
-                    {dynamicAuthorNameEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicAuthorNameEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicAuthorNameEnableLink: value })}
-                            linkSource={dynamicAuthorNameLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicAuthorNameLinkSource: value })}
-                        />
-                    )}
-                    {!dynamicAuthorNameEnabled && AuthorSwitcher && (
-                        <TextareaControl
-                            label={__("Author", "frontis-blocks")}
-                            value={TestimonialAuthor}
-                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
-                            className="fb-testimonial-author-control"
-                        />
-                    )}
-
-                    {dynamicAuthorDesignationContentToggleControls.map((control, index) => ( 
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-    
-                    <DynamicDataSourceControl
-                        enabled={dynamicAuthorDesignationEnabled}  
-                        
-                        source={dynamicAuthorDesignationSource} 
-                        setSource={(value) => setAttributes({ dynamicAuthorDesignationSource: value })}   
-                        postId={dynamicAuthorDesignationPostId}
-                        setPostId={(value) => setAttributes({ dynamicAuthorDesignationPostId: value })}
-                        postType={dynamicAuthorDesignationPostType}
-                        setPostType={(value) => setAttributes({ dynamicAuthorDesignationPostType: value })}
-                        postLabel={dynamicAuthorDesignationPostLabel}
-                        setPostLabel={(value) => setAttributes({ dynamicAuthorDesignationPostLabel: value })}
-
-                        field={dynamicAuthorDesignationField}
-                        setField={(value) => setAttributes({ dynamicAuthorDesignationField: value })}
-                        featuredImageField={dynamicAuthorDesignationFeaturedImageField}
-                        setFeaturedImageField={(value) => setAttributes({ dynamicAuthorDesignationFeaturedImageField: value })}
-
-                        dateType={dynamicAuthorDesignationDateType} 
-                        setDateType={(value) => setAttributes({ dynamicAuthorDesignationDateType: value })}
-                        dateFormat={dynamicAuthorDesignationDateFormat}
-                        setDateFormat={(value) => setAttributes({ dynamicAuthorDesignationDateFormat: value })}
-                        timeType={dynamicAuthorDesignationTimeType}   
-                        setTimeType={(value) => setAttributes({ dynamicAuthorDesignationTimeType: value })}
-                        timeFormat={dynamicAuthorDesignationTimeFormat}
-                        setTimeFormat={(value) => setAttributes({ dynamicAuthorDesignationTimeFormat: value })}
-
-                        commentsZeroText={dynamicAuthorDesignationCommentsZeroText}
-                        setCommentsZeroText={(value) => setAttributes({ dynamicAuthorDesignationCommentsZeroText: value })}
-                        commentsOneText={dynamicAuthorDesignationCommentsOneText}
-                        setCommentsOneText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsOneText: value })}
-                        commentsManyText={dynamicAuthorDesignationCommentsManyText}
-                        setCommentsManyText={(value) =>setAttributes({ dynamicAuthorDesignationCommentsManyText: value })}
-
-                        termsTaxonomy={dynamicAuthorDesignationTermsTaxonomy}
-                        setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorDesignationTermsTaxonomy: value })}
-                        termsSeparator={dynamicAuthorDesignationTermsSeparator}
-                        setTermsSeparator={(value) => setAttributes({ dynamicAuthorDesignationTermsSeparator: value })}
+                )}
+                {!dynamicAuthorNameEnabled && AuthorSwitcher && (
+                    <TextareaControl
+                        label={__("Author", "frontis-blocks")}
+                        value={TestimonialAuthor}
+                        onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                        className="fb-testimonial-author-control"
                     />
+                )}
 
-                    {dynamicAuthorDesignationEnabled && ( 
-                        <DynamicDataLinkControl
-                            enableLink={dynamicAuthorDesignationEnableLink}
-                            setEnableLink={(value) => setAttributes({ dynamicAuthorDesignationEnableLink: value })}
-                            linkSource={dynamicAuthorDesignationLinkSource}
-                            setLinkSource={(value) => setAttributes({ dynamicAuthorDesignationLinkSource: value })}
-                        />
-                    )}
-                    {!dynamicAuthorDesignationEnabled && DesignationSwitcher && ( 
-                        <TextareaControl
-                            label={__("Designation", "frontis-blocks")}
-                            value={TestimonialDesignation}
-                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
-                            className="fb-testimonial-designation-control"
-                        />
-                    )}
+                {dynamicAuthorDesignationContentToggleControls.map((control, index) => (
+                    <div key={control.key || index}>{control.comp}</div>
+                ))}
+
+                <DynamicDataSourceControl
+                    enabled={dynamicAuthorDesignationEnabled}
+
+                    source={dynamicAuthorDesignationSource}
+                    setSource={(value) => setAttributes({ dynamicAuthorDesignationSource: value })}
+                    postId={dynamicAuthorDesignationPostId}
+                    setPostId={(value) => setAttributes({ dynamicAuthorDesignationPostId: value })}
+                    postType={dynamicAuthorDesignationPostType}
+                    setPostType={(value) => setAttributes({ dynamicAuthorDesignationPostType: value })}
+                    postLabel={dynamicAuthorDesignationPostLabel}
+                    setPostLabel={(value) => setAttributes({ dynamicAuthorDesignationPostLabel: value })}
+
+                    field={dynamicAuthorDesignationField}
+                    setField={(value) => setAttributes({ dynamicAuthorDesignationField: value })}
+                    featuredImageField={dynamicAuthorDesignationFeaturedImageField}
+                    setFeaturedImageField={(value) => setAttributes({ dynamicAuthorDesignationFeaturedImageField: value })}
+
+                    dateType={dynamicAuthorDesignationDateType}
+                    setDateType={(value) => setAttributes({ dynamicAuthorDesignationDateType: value })}
+                    dateFormat={dynamicAuthorDesignationDateFormat}
+                    setDateFormat={(value) => setAttributes({ dynamicAuthorDesignationDateFormat: value })}
+                    timeType={dynamicAuthorDesignationTimeType}
+                    setTimeType={(value) => setAttributes({ dynamicAuthorDesignationTimeType: value })}
+                    timeFormat={dynamicAuthorDesignationTimeFormat}
+                    setTimeFormat={(value) => setAttributes({ dynamicAuthorDesignationTimeFormat: value })}
+
+                    commentsZeroText={dynamicAuthorDesignationCommentsZeroText}
+                    setCommentsZeroText={(value) => setAttributes({ dynamicAuthorDesignationCommentsZeroText: value })}
+                    commentsOneText={dynamicAuthorDesignationCommentsOneText}
+                    setCommentsOneText={(value) => setAttributes({ dynamicAuthorDesignationCommentsOneText: value })}
+                    commentsManyText={dynamicAuthorDesignationCommentsManyText}
+                    setCommentsManyText={(value) => setAttributes({ dynamicAuthorDesignationCommentsManyText: value })}
+
+                    termsTaxonomy={dynamicAuthorDesignationTermsTaxonomy}
+                    setTermsTaxonomy={(value) => setAttributes({ dynamicAuthorDesignationTermsTaxonomy: value })}
+                    termsSeparator={dynamicAuthorDesignationTermsSeparator}
+                    setTermsSeparator={(value) => setAttributes({ dynamicAuthorDesignationTermsSeparator: value })}
+                />
+
+                {dynamicAuthorDesignationEnabled && (
+                    <DynamicDataLinkControl
+                        enableLink={dynamicAuthorDesignationEnableLink}
+                        setEnableLink={(value) => setAttributes({ dynamicAuthorDesignationEnableLink: value })}
+                        linkSource={dynamicAuthorDesignationLinkSource}
+                        setLinkSource={(value) => setAttributes({ dynamicAuthorDesignationLinkSource: value })}
+                    />
+                )}
+                {!dynamicAuthorDesignationEnabled && DesignationSwitcher && (
+                    <TextareaControl
+                        label={__("Designation", "frontis-blocks")}
+                        value={TestimonialDesignation}
+                        onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                        className="fb-testimonial-designation-control"
+                    />
+                )}
             </PanelBody>
 
             {RatingSwitcher && (
@@ -3706,7 +3709,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 ))}
                             </ButtonGroup>
                             {TestimonialRatinIconAlign === 'icon' && (
-                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} /> 
+                                <FBIconPicker value={TestimonialRatingicon} setIconHandler={ratingIconHandler} />
                             )}
                             {TestimonialRatinIconAlign === 'image' && (
                                 <FB_ImageControl
@@ -3721,7 +3724,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             )}
                         </BaseControl>
                     </div>
-                    
+
                     {TestimonialRatinIconAlign !== 'none' && (
                         <div className="fb-setting-rating-rangecontrol">
                             <RangeControl
@@ -3762,7 +3765,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 ))}
                             </ButtonGroup>
                             {TestimonialQuoteIconAlign === 'icon' && (
-                                <FBIconPicker value={TestimonialQuoteIcon} setIconHandler={quoteIconHandler} /> 
+                                <FBIconPicker value={TestimonialQuoteIcon} setIconHandler={quoteIconHandler} />
                             )}
                             {TestimonialQuoteIconAlign === 'image' && (
                                 <FB_ImageControl
@@ -3780,24 +3783,24 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 </PanelBody>
             )}
         </>
-	);
+    );
 
-	/**
-	 * Inspector Style Controls
-	 */
-	const styleControls = (
-    <>                    
-        {RatingSwitcher && (
-            <PanelBody
-                title={__("Rating Icon", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-feature-icon-wrapper"
-            >
+    /**
+     * Inspector Style Controls
+     */
+    const styleControls = (
+        <>
+            {RatingSwitcher && (
+                <PanelBody
+                    title={__("Rating Icon", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-feature-icon-wrapper"
+                >
 
-                <BaseControl
-                    label={__("Alignment", "frontis-blocks")}
-                    id="fb-setting-text-alignment"
-                    className="fb-setting-text-alignment"
+                    <BaseControl
+                        label={__("Alignment", "frontis-blocks")}
+                        id="fb-setting-text-alignment"
+                        className="fb-setting-text-alignment"
                     >
                         <ButtonGroup
                             className="fb-setting-text-alignment-group-btn"
@@ -3812,692 +3815,692 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                                 </Button>
                             ))}
                         </ButtonGroup>
-                </BaseControl>
+                    </BaseControl>
 
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Icon Gap", "frontis-blocks")}
-                    rangeValue={TestimonialRatingIconGap} 
-                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconGap: value })}
-                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconGapUnits: value })}
-                    deviceType={deviceType}
-                    units={TestimonialRatingIconGapUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
-
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={TestimonialRatingIconSize} 
-                    onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={TestimonialRatingIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
-
-                {TestimonialRatinIconAlign === 'icon' && (<>
-                <FB_SwitcherControl
-                    label={__("Rating Color", "frontis-blocks")}
-                    globalSwitcher={TestimonialRatingIconColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
-                />
-
-                {TestimonialRatingIconColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={TestimonialRatingIconColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {TestimonialRatingIconColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={TestimonialRatingIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-                </>)}
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialRatingIconMarginUnitsHandler}
-                    spacingUnits={TestimonialRatingIconMarginUnits}
-                    spacingDesktop={TestimonialRatingIconMarginDesktop}
-                    spacingTablet={TestimonialRatingIconMarginTablet}
-                    spacingMobile={TestimonialRatingIconMarginMobile}
-                    handleSpacingUnitHandler={testimonialRatingIconMarginUnitsChange}
-                    spacingCombineBtn={TestimonialRatingIconMarginLink}
-                    spacingCombineBtnHandler={testimonialRatingIconMarginLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-            </PanelBody>
-        )}
-        {TitleSwitcher && (
-            <PanelBody
-                    title={__("Title", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-testimonial-title-wrapper"
-            >
-
-                <FB_HtmlTagControl
-                    label={__("Title Tag", "frontis-blocks")}
-                    globalHtmlTag={TestimonialTitleTag}
-                    setGlobalHtmlTag={(value) => setAttributes({ TestimonialTitleTag: value })}
-                />
-
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={TestimonialTitleGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialTitleGlobalTypographyData: value })}
-
-                    globalTypoType={TestimonialTitleGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            TestimonialTitleGlobalTypoType: value, 
-                            TestimonialTitleGlobalTypoSwitcher: value === 'default' ? {...TestimonialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
-
-                    globalTypoOption={TestimonialTitleGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialTitleGlobalTypoOption: value })}
-
-                    fontFamily={TestimonialTitleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                    fontSize={TestimonialTitleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ TestimonialTitleFontSize: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontSize: value && false} })}
-
-                    fontSizeUnits={TestimonialTitleFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialTitleFontSizeUnits: value })}
-
-                    fontWeight={TestimonialTitleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ TestimonialTitleFontWeight: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                    fontStyle={TestimonialTitleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ TestimonialTitleFontStyle: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                    textTransform={TestimonialTitleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ TestimonialTitleTextTransform: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, textTransform: value && false} })}
-
-                    textDecoration={TestimonialTitleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ TestimonialTitleTextDecoration: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                    letterSpacing={TestimonialTitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialTitleLetterSpacing: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                    letterSpacingUnits={TestimonialTitleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialTitleLetterSpacingUnits: value })}
-
-                    lineHeight={TestimonialTitleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ TestimonialTitleLineHeight: value, TestimonialTitleGlobalTypoSwitcher: {...TestimonialTitleGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                    lineHeightUnits={TestimonialTitleLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialTitleLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                        label={__("Color", "frontis-blocks")}
-                        globalSwitcher={TestimonialTitleColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
-                />
-
-                {TestimonialTitleColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={TestimonialTitleColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialTitleColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {TestimonialTitleColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={TestimonialTitleHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialTitleHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialTitleMarginUnitsHandler}
-                    spacingUnits={TestimonialTitleMarginUnits}
-                    spacingDesktop={TestimonialTitleMarginDesktop}
-                    spacingTablet={TestimonialTitleMarginTablet}
-                    spacingMobile={TestimonialTitleMarginMobile}
-                    handleSpacingUnitHandler={testimonialTitleMarginUnitsChange}
-                    spacingCombineBtn={TestimonialTitleMarginLink}
-                    spacingCombineBtnHandler={testimonialTitleMarginLinkBtn}
-                    setAttributes={setAttributes}
-                />
-
-            </PanelBody>
-        )}
-
-        {DescSwitcher && (
-            <PanelBody
-            title={__("Description", "frontis-blocks")}
-            initialOpen={false}
-            className="fb-setting-testimonial-description-wrapper"
-        >
-            <FB_TypographyControl
-                globalTypoControlActive={true}
-                globalTypoSwitcher={TestimonialDescGlobalTypoSwitcher}
-                storeGlobalTypographyData={(value) => setAttributes({ TestimonialDescGlobalTypographyData: value })}
-
-                globalTypoType={TestimonialDescGlobalTypoType}
-                onChangeGlobalTypoType={(value) => {
-                    setAttributes({ 
-                        TestimonialDescGlobalTypoType: value, 
-                        TestimonialDescGlobalTypoSwitcher: value === 'default' ? {...TestimonialDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                    })
-                }}
-
-                globalTypoOption={TestimonialDescGlobalTypoOption}
-                onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDescGlobalTypoOption: value })}
-
-                fontFamily={TestimonialDescFontFamily}
-                onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                fontSize={TestimonialDescFontSize}
-                onChangeFontSize={(value) => setAttributes({ TestimonialDescFontSize: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontSize: value && false} })}
-
-                fontSizeUnits={TestimonialDescFontSizeUnits}
-                onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDescFontSizeUnits: value })}
-
-                fontWeight={TestimonialDescFontWeight}
-                onChangeFontWeight={(value) => setAttributes({ TestimonialDescFontWeight: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                fontStyle={TestimonialDescFontStyle}
-                onChangeFontStyle={(value) => setAttributes({ TestimonialDescFontStyle: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                textTransform={TestimonialDescTextTransform}
-                onChangeTextTransform={(value) => setAttributes({ TestimonialDescTextTransform: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, textTransform: value && false} })}
-
-                textDecoration={TestimonialDescTextDecoration}
-                onChangeTextDecoration={(value) => setAttributes({ TestimonialDescTextDecoration: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                letterSpacing={TestimonialDescLetterSpacing}
-                onChangeLetterSpacing={(value) => setAttributes({ TestimonialDescLetterSpacing: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                letterSpacingUnits={TestimonialDescLetterSpacingUnits}
-                onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDescLetterSpacingUnits: value })}
-
-                lineHeight={TestimonialDescLineHeight}
-                onChangeLineHeight={(value) => setAttributes({ TestimonialDescLineHeight: value, TestimonialDescGlobalTypoSwitcher: {...TestimonialDescGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                lineHeightUnits={TestimonialDescLineHeightUnits}
-                onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDescLineHeightUnits: value })}
-
-                deviceType={deviceType}
-                setAttributes={setAttributes}
-            />
-
-            <FB_SwitcherControl
-                    label={__("Color", "frontis-blocks")}
-                    globalSwitcher={TestimonialDescColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ TestimonialDescColorSwitcher: value })}
-            />
-
-            {TestimonialDescColorSwitcher === 'normal' && (
-                <FB_ColorControl
-                    label={__("Normal Color", "frontis-blocks")}
-                    globalColor={TestimonialDescColor}
-                    setGlobalColor={(value) => setAttributes({ TestimonialDescColor: value === undefined ? '' : value })}
-                />
-            )}
-
-            {TestimonialDescColorSwitcher === 'hover' && (
-                <FB_ColorControl
-                    label={__("Hover Color", "frontis-blocks")}
-                    globalColor={TestimonialDescHoverColor}
-                    setGlobalColor={(value) => setAttributes({ TestimonialDescHoverColor: value === undefined ? '' : value })}
-                />
-            )}
-
-            <FB_Spacing
-                label={__("Margin", "frontis-blocks")}
-                deviceType={deviceType}
-                spacingUnitsHandler={testimonialDescMarginUnitsHandler}
-                spacingUnits={TestimonialDescMarginUnits}
-                spacingDesktop={TestimonialDescMarginDesktop}
-                spacingTablet={TestimonialDescMarginTablet}
-                spacingMobile={TestimonialDescMarginMobile}
-                handleSpacingUnitHandler={testimonialDescMarginUnitsChange}
-                spacingCombineBtn={TestimonialDescMarginLink}
-                spacingCombineBtnHandler={testimonialDescMarginLinkBtn}
-                setAttributes={setAttributes}
-            />
-
-            </PanelBody>
-        )}
-
-        {TestimonialImageSwitcher && (
-            <PanelBody
-                title={__("Avatar", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-testimonial-image-wrapper"
-            >
-                <FB_Range
-                    min={0}
-                    max={200}
-                    label={__("Image Width", "frontis-blocks")}
-                    rangeValue={TestimonialImageWidth} 
-                    onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
-                    rangeUnitHandler={(value) => setAttributes({ TestimonialImageWidthUnits: value })}
-                    deviceType={deviceType}
-                    units={TestimonialImageWidthUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
-
-                <SelectControl
-					label={__("Image Object Fit", "frontis-blocks")}
-					value={TestimonialImageObjectFit}
-					options={IMAGE_OBJECT_FIT}
-					onChange={(value) =>
-						setAttributes({ TestimonialImageObjectFit: value })
-					}
-					__nextHasNoMarginBottom
-				/>
-
-                <FB_Spacing
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialImageBorderRadiusUnitsHandler}
-                    spacingUnits={TestimonialImageRadiusUnits}
-                    spacingDesktop={TestimonialImageDesktopRadiusWidth}
-                    spacingTablet={TestimonialImageTabRadiusWidth}
-                    spacingMobile={TestimonialImageMobileRadiusWidth}
-                    handleSpacingUnitHandler={testimonialImageBorderRadiusUnitsChange}
-                    spacingCombineBtn={TestimonialImageRadiusLink}
-                    spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
-                    setAttributes={setAttributes}
-                />
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialImageMarginUnitChange}
-                    spacingUnits={TestimonialImageMarginUnits}
-                    spacingDesktop={TestimonialImageMarginDesktop}
-                    spacingTablet={TestimonialImageMarginTablet}
-                    spacingMobile={TestimonialImageMarginMobile}
-                    handleSpacingUnitHandler={testimonialImageMarginChange}
-                    spacingCombineBtn={TestimonialImageMarginLink}
-                    spacingCombineBtnHandler={testimonialImageMarginToggle}
-                    setAttributes={setAttributes}
-                />
-
-                <ToggleControl
-                    label={__("Position", "frontis-blocks")}
-                    checked={TestimonialImagePositionSwitcher}
-                    onChange={(value) => setAttributes({ TestimonialImagePositionSwitcher: value })}
-                />
-                
-                {TestimonialImagePositionSwitcher && (
-                    <>
-                        <FB_Range
-                            min={-100}
-                            max={100}
-                            label={__("Top", "frontis-blocks")}
-                            rangeValue={TestimonialImageTopPosition} 
-                            onChangeHandler={(value) => setAttributes({ TestimonialImageTopPosition: value })}
-                            rangeUnitHandler={(value) => setAttributes({ TestimonialImageTopPositionUnits: value })}
-                            deviceType={deviceType}
-                            units={TestimonialImageTopPositionUnits}
-                            setAttributes={setAttributes}
-                            rangeStep={1}
-                            resetFallbackValue={""}
-                        />
-                        <FB_Range
-                            min={-100}
-                            max={100}
-                            label={__("Left", "frontis-blocks")}
-                            rangeValue={TestimonialImageLeftPosition} 
-                            onChangeHandler={(value) => setAttributes({ TestimonialImageLeftPosition: value })}
-                            rangeUnitHandler={(value) => setAttributes({ TestimonialImageLeftPositionUnits: value })}
-                            deviceType={deviceType}
-                            units={TestimonialImageLeftPositionUnits}
-                            setAttributes={setAttributes}
-                            rangeStep={1}
-                            resetFallbackValue={""}
-                        />
-                    </>
-                )}
-            </PanelBody>
-        )}
-
-        {AuthorSwitcher && (
-            <PanelBody
-                title={__("Author Name", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-testimonial-author-wrapper"
-            >
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={TestimonialAuthorGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialAuthorGlobalTypographyData: value })}
-
-                    globalTypoType={TestimonialAuthorGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            TestimonialAuthorGlobalTypoType: value, 
-                            TestimonialAuthorGlobalTypoSwitcher: value === 'default' ? {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
-
-                    globalTypoOption={TestimonialAuthorGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialAuthorGlobalTypoOption: value })}
-
-                    fontFamily={TestimonialAuthorFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                    fontSize={TestimonialAuthorFontSize}
-                    onChangeFontSize={(value) => setAttributes({ TestimonialAuthorFontSize: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontSize: value && false} })}
-
-                    fontSizeUnits={TestimonialAuthorFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialAuthorFontSizeUnits: value })}
-
-                    fontWeight={TestimonialAuthorFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ TestimonialAuthorFontWeight: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                    fontStyle={TestimonialAuthorFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ TestimonialAuthorFontStyle: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                    textTransform={TestimonialAuthorTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ TestimonialAuthorTextTransform: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, textTransform: value && false} })}
-
-                    textDecoration={TestimonialAuthorTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ TestimonialAuthorTextDecoration: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                    letterSpacing={TestimonialAuthorLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialAuthorLetterSpacing: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                    letterSpacingUnits={TestimonialAuthorLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialAuthorLetterSpacingUnits: value })}
-
-                    lineHeight={TestimonialAuthorLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ TestimonialAuthorLineHeight: value, TestimonialAuthorGlobalTypoSwitcher: {...TestimonialAuthorGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                    lineHeightUnits={TestimonialAuthorLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialAuthorLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                        label={__("Color", "frontis-blocks")}
-                        globalSwitcher={TestimonialAuthorColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
-                />
-
-                {TestimonialAuthorColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={TestimonialAuthorColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {TestimonialAuthorColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={TestimonialAuthorHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialAuthorHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialAuthorMarginUnitChange}
-                    spacingUnits={TestimonialAuthorMarginUnits}
-                    spacingDesktop={TestimonialAuthorMarginDesktop}
-                    spacingTablet={TestimonialAuthorMarginTablet}
-                    spacingMobile={TestimonialAuthorMarginMobile}
-                    handleSpacingUnitHandler={testimonialAuthorMarginChange}
-                    spacingCombineBtn={TestimonialAuthorMarginLink}
-                    spacingCombineBtnHandler={testimonialAuthorMarginToggle}
-                    setAttributes={setAttributes}
-                />
-
-            </PanelBody>
-        )}
-
-        {DesignationSwitcher && (
-            <PanelBody
-                title={__("Author Designation", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-testimonial-designation-wrapper"
-            >
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={TestimonialDesignationGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ TestimonialDesignationGlobalTypographyData: value })}
-
-                    globalTypoType={TestimonialDesignationGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({ 
-                            TestimonialDesignationGlobalTypoType: value, 
-                            TestimonialDesignationGlobalTypoSwitcher: value === 'default' ? {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
-
-                    globalTypoOption={TestimonialDesignationGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDesignationGlobalTypoOption: value })}
-
-                    fontFamily={TestimonialDesignationFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                    fontSize={TestimonialDesignationFontSize}
-                    onChangeFontSize={(value) => setAttributes({ TestimonialDesignationFontSize: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontSize: value && false} })}
-
-                    fontSizeUnits={TestimonialDesignationFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDesignationFontSizeUnits: value })}
-
-                    fontWeight={TestimonialDesignationFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ TestimonialDesignationFontWeight: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                    fontStyle={TestimonialDesignationFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ TestimonialDesignationFontStyle: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                    textTransform={TestimonialDesignationTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ TestimonialDesignationTextTransform: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, textTransform: value && false} })}
-
-                    textDecoration={TestimonialDesignationTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ TestimonialDesignationTextDecoration: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                    letterSpacing={TestimonialDesignationLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ TestimonialDesignationLetterSpacing: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                    letterSpacingUnits={TestimonialDesignationLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDesignationLetterSpacingUnits: value })}
-
-                    lineHeight={TestimonialDesignationLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ TestimonialDesignationLineHeight: value, TestimonialDesignationGlobalTypoSwitcher: {...TestimonialDesignationGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                    lineHeightUnits={TestimonialDesignationLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDesignationLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                        label={__("Color", "frontis-blocks")}
-                        globalSwitcher={TestimonialDesignationColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialDesignationColorSwitcher: value })}
-                />
-
-                {TestimonialDesignationColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={TestimonialDesignationColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {TestimonialDesignationColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={TestimonialDesignationHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialDesignationHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialDesignationMarginUnitChange}
-                    spacingUnits={TestimonialDesignationMarginUnits}
-                    spacingDesktop={TestimonialDesignationMarginDesktop}
-                    spacingTablet={TestimonialDesignationMarginTablet}
-                    spacingMobile={TestimonialDesignationMarginMobile}
-                    handleSpacingUnitHandler={testimonialDesignationMarginChange}
-                    spacingCombineBtn={TestimonialDesignationMarginLink}
-                    spacingCombineBtnHandler={testimonialDesignationMarginToggle}
-                    setAttributes={setAttributes}
-                />
-
-            </PanelBody>
-        )}
-        {QuoteIconSwitcher && (
-            <PanelBody
-                title={__("Quote Icon", "frontis-blocks")}
-                initialOpen={false}
-                className="fb-setting-feature-icon-wrapper"
-            >
-                <FB_Range
-                    min={0}
-                    max={100}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={TestimonialQuoteIconSize} 
-                    onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={TestimonialQuoteIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
-
-                {TestimonialQuoteIconAlign === 'icon' && (<>
-                <FB_SwitcherControl
-                        label={__("Icon Color", "frontis-blocks")}
-                        globalSwitcher={TestimonialQuoteIconColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
-                />
-
-                {TestimonialQuoteIconColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={TestimonialQuoteIconColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {TestimonialQuoteIconColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={TestimonialQuoteIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-                </>)}
-
-                <FB_Spacing
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={testimonialQuoteIconMarginUnitChange}
-                    spacingUnits={TestimonialQuoteIconMarginUnits}
-                    spacingDesktop={TestimonialQuoteIconMarginDesktop}
-                    spacingTablet={TestimonialQuoteIconMarginTablet}
-                    spacingMobile={TestimonialQuoteIconMarginMobile}
-                    handleSpacingUnitHandler={testimonialQuoteIconMarginChange}
-                    spacingCombineBtn={TestimonialQuoteIconMarginLink}
-                    spacingCombineBtnHandler={testimonialQuoteIconMarginToggle}
-                    setAttributes={setAttributes}
-                />
-                <ToggleControl
-                    label={__("Position", "frontis-blocks")}
-                    checked={TestimonialQuoteIconPositionSwitcher}
-                    onChange={(value) => setAttributes({ TestimonialQuoteIconPositionSwitcher: value })}
-                />
-                
-                {TestimonialQuoteIconPositionSwitcher && (
-                    <>
-                        <FB_Range
-                            min={0}
-                            max={100}
-                            label={__("Top", "frontis-blocks")}
-                            rangeValue={TestimonialQuoteIconTopPosition} 
-                            onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconTopPosition: value })}
-                            rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconTopPositionUnits: value })}
-                            deviceType={deviceType}
-                            units={TestimonialQuoteIconTopPositionUnits}
-                            setAttributes={setAttributes}
-                            rangeStep={1}
-                            resetFallbackValue={""}
-                        />
-                        <FB_Range
-                            min={0}
-                            max={100}
-                            label={__("Left", "frontis-blocks")}
-                            rangeValue={TestimonialQuoteIconLeftPosition} 
-                            onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPosition: value })}
-                            rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPositionUnits: value })}
-                            deviceType={deviceType}
-                            units={TestimonialQuoteIconLeftPositionUnits}
-                            setAttributes={setAttributes}
-                            rangeStep={1}
-                            resetFallbackValue={""}
-                        />
-                    </>
-                )}  
-            </PanelBody>
-        )}
-    </>
-	);
-		
-	/**
-	 * Inspector Advanced Controls
-	 */
-	const advancedControls = (
-    <>
-        <div className="fb-setting-advanced-tab-wrapper">
-            <div className="fb-setting-inner-wrapper">
-                <PanelBody
-                    title={__("Layout", "frontis-blocks")}
-                    initialOpen={true}
-                    className='fb-setting-layout-header'
-                >
                     <FB_Range
                         min={0}
-                        max={10000000}
-                        label={__("Z Index", "frontis-blocks")}
-                        rangeValue={TestimonialGlobalZIndex}
-                        onChangeHandler={(value) => setAttributes({ TestimonialGlobalZIndex: value === 0 ? undefined : value })}
+                        max={100}
+                        label={__("Icon Gap", "frontis-blocks")}
+                        rangeValue={TestimonialRatingIconGap}
+                        onChangeHandler={(value) => setAttributes({ TestimonialRatingIconGap: value })}
+                        rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconGapUnits: value })}
                         deviceType={deviceType}
+                        units={TestimonialRatingIconGapUnits}
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={""}
-                        isRangeUnit={false}
                     />
+
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={TestimonialRatingIconSize}
+                        onChangeHandler={(value) => setAttributes({ TestimonialRatingIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ TestimonialRatingIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={TestimonialRatingIconSizeUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                    />
+
+                    {TestimonialRatinIconAlign === 'icon' && (<>
+                        <FB_SwitcherControl
+                            label={__("Rating Color", "frontis-blocks")}
+                            globalSwitcher={TestimonialRatingIconColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ TestimonialRatingIconColorSwitcher: value })}
+                        />
+
+                        {TestimonialRatingIconColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={TestimonialRatingIconColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialRatingIconColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {TestimonialRatingIconColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={TestimonialRatingIconHoverColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialRatingIconHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+                    </>)}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialRatingIconMarginUnitsHandler}
+                        spacingUnits={TestimonialRatingIconMarginUnits}
+                        spacingDesktop={TestimonialRatingIconMarginDesktop}
+                        spacingTablet={TestimonialRatingIconMarginTablet}
+                        spacingMobile={TestimonialRatingIconMarginMobile}
+                        handleSpacingUnitHandler={testimonialRatingIconMarginUnitsChange}
+                        spacingCombineBtn={TestimonialRatingIconMarginLink}
+                        spacingCombineBtnHandler={testimonialRatingIconMarginLinkBtn}
+                        setAttributes={setAttributes}
+                    />
+
+                </PanelBody>
+            )}
+            {TitleSwitcher && (
+                <PanelBody
+                    title={__("Title", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-testimonial-title-wrapper"
+                >
+
+                    <FB_HtmlTagControl
+                        label={__("Title Tag", "frontis-blocks")}
+                        globalHtmlTag={TestimonialTitleTag}
+                        setGlobalHtmlTag={(value) => setAttributes({ TestimonialTitleTag: value })}
+                    />
+
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={TestimonialTitleGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ TestimonialTitleGlobalTypographyData: value })}
+
+                        globalTypoType={TestimonialTitleGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                TestimonialTitleGlobalTypoType: value,
+                                TestimonialTitleGlobalTypoSwitcher: value === 'default' ? { ...TestimonialTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...TestimonialTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                            })
+                        }}
+
+                        globalTypoOption={TestimonialTitleGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialTitleGlobalTypoOption: value })}
+
+                        fontFamily={TestimonialTitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ TestimonialTitleFontFamily: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                        fontSize={TestimonialTitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ TestimonialTitleFontSize: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, fontSize: value && false } })}
+
+                        fontSizeUnits={TestimonialTitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ TestimonialTitleFontSizeUnits: value })}
+
+                        fontWeight={TestimonialTitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ TestimonialTitleFontWeight: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                        fontStyle={TestimonialTitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ TestimonialTitleFontStyle: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                        textTransform={TestimonialTitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ TestimonialTitleTextTransform: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, textTransform: value && false } })}
+
+                        textDecoration={TestimonialTitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ TestimonialTitleTextDecoration: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                        letterSpacing={TestimonialTitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ TestimonialTitleLetterSpacing: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                        letterSpacingUnits={TestimonialTitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialTitleLetterSpacingUnits: value })}
+
+                        lineHeight={TestimonialTitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ TestimonialTitleLineHeight: value, TestimonialTitleGlobalTypoSwitcher: { ...TestimonialTitleGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                        lineHeightUnits={TestimonialTitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ TestimonialTitleLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={TestimonialTitleColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ TestimonialTitleColorSwitcher: value })}
+                    />
+
+                    {TestimonialTitleColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={TestimonialTitleColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialTitleColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {TestimonialTitleColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={TestimonialTitleHoverColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialTitleHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialTitleMarginUnitsHandler}
+                        spacingUnits={TestimonialTitleMarginUnits}
+                        spacingDesktop={TestimonialTitleMarginDesktop}
+                        spacingTablet={TestimonialTitleMarginTablet}
+                        spacingMobile={TestimonialTitleMarginMobile}
+                        handleSpacingUnitHandler={testimonialTitleMarginUnitsChange}
+                        spacingCombineBtn={TestimonialTitleMarginLink}
+                        spacingCombineBtnHandler={testimonialTitleMarginLinkBtn}
+                        setAttributes={setAttributes}
+                    />
+
+                </PanelBody>
+            )}
+
+            {DescSwitcher && (
+                <PanelBody
+                    title={__("Description", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-testimonial-description-wrapper"
+                >
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={TestimonialDescGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ TestimonialDescGlobalTypographyData: value })}
+
+                        globalTypoType={TestimonialDescGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                TestimonialDescGlobalTypoType: value,
+                                TestimonialDescGlobalTypoSwitcher: value === 'default' ? { ...TestimonialDescGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...TestimonialDescGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                            })
+                        }}
+
+                        globalTypoOption={TestimonialDescGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDescGlobalTypoOption: value })}
+
+                        fontFamily={TestimonialDescFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ TestimonialDescFontFamily: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                        fontSize={TestimonialDescFontSize}
+                        onChangeFontSize={(value) => setAttributes({ TestimonialDescFontSize: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, fontSize: value && false } })}
+
+                        fontSizeUnits={TestimonialDescFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDescFontSizeUnits: value })}
+
+                        fontWeight={TestimonialDescFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ TestimonialDescFontWeight: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                        fontStyle={TestimonialDescFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ TestimonialDescFontStyle: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                        textTransform={TestimonialDescTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ TestimonialDescTextTransform: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, textTransform: value && false } })}
+
+                        textDecoration={TestimonialDescTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ TestimonialDescTextDecoration: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                        letterSpacing={TestimonialDescLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ TestimonialDescLetterSpacing: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                        letterSpacingUnits={TestimonialDescLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDescLetterSpacingUnits: value })}
+
+                        lineHeight={TestimonialDescLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ TestimonialDescLineHeight: value, TestimonialDescGlobalTypoSwitcher: { ...TestimonialDescGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                        lineHeightUnits={TestimonialDescLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDescLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={TestimonialDescColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ TestimonialDescColorSwitcher: value })}
+                    />
+
+                    {TestimonialDescColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={TestimonialDescColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialDescColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {TestimonialDescColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={TestimonialDescHoverColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialDescHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialDescMarginUnitsHandler}
+                        spacingUnits={TestimonialDescMarginUnits}
+                        spacingDesktop={TestimonialDescMarginDesktop}
+                        spacingTablet={TestimonialDescMarginTablet}
+                        spacingMobile={TestimonialDescMarginMobile}
+                        handleSpacingUnitHandler={testimonialDescMarginUnitsChange}
+                        spacingCombineBtn={TestimonialDescMarginLink}
+                        spacingCombineBtnHandler={testimonialDescMarginLinkBtn}
+                        setAttributes={setAttributes}
+                    />
+
+                </PanelBody>
+            )}
+
+            {TestimonialImageSwitcher && (
+                <PanelBody
+                    title={__("Avatar", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-testimonial-image-wrapper"
+                >
+                    <FB_Range
+                        min={0}
+                        max={200}
+                        label={__("Image Width", "frontis-blocks")}
+                        rangeValue={TestimonialImageWidth}
+                        onChangeHandler={(value) => setAttributes({ TestimonialImageWidth: value })}
+                        rangeUnitHandler={(value) => setAttributes({ TestimonialImageWidthUnits: value })}
+                        deviceType={deviceType}
+                        units={TestimonialImageWidthUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                    />
+
+                    <SelectControl
+                        label={__("Image Object Fit", "frontis-blocks")}
+                        value={TestimonialImageObjectFit}
+                        options={IMAGE_OBJECT_FIT}
+                        onChange={(value) =>
+                            setAttributes({ TestimonialImageObjectFit: value })
+                        }
+                        __nextHasNoMarginBottom
+                    />
+
+                    <FB_Spacing
+                        label={__("Border Radius", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialImageBorderRadiusUnitsHandler}
+                        spacingUnits={TestimonialImageRadiusUnits}
+                        spacingDesktop={TestimonialImageDesktopRadiusWidth}
+                        spacingTablet={TestimonialImageTabRadiusWidth}
+                        spacingMobile={TestimonialImageMobileRadiusWidth}
+                        handleSpacingUnitHandler={testimonialImageBorderRadiusUnitsChange}
+                        spacingCombineBtn={TestimonialImageRadiusLink}
+                        spacingCombineBtnHandler={testimonialImageBorderRadiusLinkBtn}
+                        setAttributes={setAttributes}
+                    />
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialImageMarginUnitChange}
+                        spacingUnits={TestimonialImageMarginUnits}
+                        spacingDesktop={TestimonialImageMarginDesktop}
+                        spacingTablet={TestimonialImageMarginTablet}
+                        spacingMobile={TestimonialImageMarginMobile}
+                        handleSpacingUnitHandler={testimonialImageMarginChange}
+                        spacingCombineBtn={TestimonialImageMarginLink}
+                        spacingCombineBtnHandler={testimonialImageMarginToggle}
+                        setAttributes={setAttributes}
+                    />
+
+                    <ToggleControl
+                        label={__("Position", "frontis-blocks")}
+                        checked={TestimonialImagePositionSwitcher}
+                        onChange={(value) => setAttributes({ TestimonialImagePositionSwitcher: value })}
+                    />
+
+                    {TestimonialImagePositionSwitcher && (
+                        <>
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Top", "frontis-blocks")}
+                                rangeValue={TestimonialImageTopPosition}
+                                onChangeHandler={(value) => setAttributes({ TestimonialImageTopPosition: value })}
+                                rangeUnitHandler={(value) => setAttributes({ TestimonialImageTopPositionUnits: value })}
+                                deviceType={deviceType}
+                                units={TestimonialImageTopPositionUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
+                            <FB_Range
+                                min={-100}
+                                max={100}
+                                label={__("Left", "frontis-blocks")}
+                                rangeValue={TestimonialImageLeftPosition}
+                                onChangeHandler={(value) => setAttributes({ TestimonialImageLeftPosition: value })}
+                                rangeUnitHandler={(value) => setAttributes({ TestimonialImageLeftPositionUnits: value })}
+                                deviceType={deviceType}
+                                units={TestimonialImageLeftPositionUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
+                        </>
+                    )}
+                </PanelBody>
+            )}
+
+            {AuthorSwitcher && (
+                <PanelBody
+                    title={__("Author Name", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-testimonial-author-wrapper"
+                >
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={TestimonialAuthorGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ TestimonialAuthorGlobalTypographyData: value })}
+
+                        globalTypoType={TestimonialAuthorGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                TestimonialAuthorGlobalTypoType: value,
+                                TestimonialAuthorGlobalTypoSwitcher: value === 'default' ? { ...TestimonialAuthorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...TestimonialAuthorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                            })
+                        }}
+
+                        globalTypoOption={TestimonialAuthorGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialAuthorGlobalTypoOption: value })}
+
+                        fontFamily={TestimonialAuthorFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ TestimonialAuthorFontFamily: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                        fontSize={TestimonialAuthorFontSize}
+                        onChangeFontSize={(value) => setAttributes({ TestimonialAuthorFontSize: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, fontSize: value && false } })}
+
+                        fontSizeUnits={TestimonialAuthorFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ TestimonialAuthorFontSizeUnits: value })}
+
+                        fontWeight={TestimonialAuthorFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ TestimonialAuthorFontWeight: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                        fontStyle={TestimonialAuthorFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ TestimonialAuthorFontStyle: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                        textTransform={TestimonialAuthorTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ TestimonialAuthorTextTransform: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, textTransform: value && false } })}
+
+                        textDecoration={TestimonialAuthorTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ TestimonialAuthorTextDecoration: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                        letterSpacing={TestimonialAuthorLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ TestimonialAuthorLetterSpacing: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                        letterSpacingUnits={TestimonialAuthorLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialAuthorLetterSpacingUnits: value })}
+
+                        lineHeight={TestimonialAuthorLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ TestimonialAuthorLineHeight: value, TestimonialAuthorGlobalTypoSwitcher: { ...TestimonialAuthorGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                        lineHeightUnits={TestimonialAuthorLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ TestimonialAuthorLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={TestimonialAuthorColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ TestimonialAuthorColorSwitcher: value })}
+                    />
+
+                    {TestimonialAuthorColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={TestimonialAuthorColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialAuthorColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {TestimonialAuthorColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={TestimonialAuthorHoverColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialAuthorHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialAuthorMarginUnitChange}
+                        spacingUnits={TestimonialAuthorMarginUnits}
+                        spacingDesktop={TestimonialAuthorMarginDesktop}
+                        spacingTablet={TestimonialAuthorMarginTablet}
+                        spacingMobile={TestimonialAuthorMarginMobile}
+                        handleSpacingUnitHandler={testimonialAuthorMarginChange}
+                        spacingCombineBtn={TestimonialAuthorMarginLink}
+                        spacingCombineBtnHandler={testimonialAuthorMarginToggle}
+                        setAttributes={setAttributes}
+                    />
+
+                </PanelBody>
+            )}
+
+            {DesignationSwitcher && (
+                <PanelBody
+                    title={__("Author Designation", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-testimonial-designation-wrapper"
+                >
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={TestimonialDesignationGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ TestimonialDesignationGlobalTypographyData: value })}
+
+                        globalTypoType={TestimonialDesignationGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                TestimonialDesignationGlobalTypoType: value,
+                                TestimonialDesignationGlobalTypoSwitcher: value === 'default' ? { ...TestimonialDesignationGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...TestimonialDesignationGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                            })
+                        }}
+
+                        globalTypoOption={TestimonialDesignationGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ TestimonialDesignationGlobalTypoOption: value })}
+
+                        fontFamily={TestimonialDesignationFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ TestimonialDesignationFontFamily: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                        fontSize={TestimonialDesignationFontSize}
+                        onChangeFontSize={(value) => setAttributes({ TestimonialDesignationFontSize: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, fontSize: value && false } })}
+
+                        fontSizeUnits={TestimonialDesignationFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ TestimonialDesignationFontSizeUnits: value })}
+
+                        fontWeight={TestimonialDesignationFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ TestimonialDesignationFontWeight: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                        fontStyle={TestimonialDesignationFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ TestimonialDesignationFontStyle: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                        textTransform={TestimonialDesignationTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ TestimonialDesignationTextTransform: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, textTransform: value && false } })}
+
+                        textDecoration={TestimonialDesignationTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ TestimonialDesignationTextDecoration: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                        letterSpacing={TestimonialDesignationLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ TestimonialDesignationLetterSpacing: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                        letterSpacingUnits={TestimonialDesignationLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ TestimonialDesignationLetterSpacingUnits: value })}
+
+                        lineHeight={TestimonialDesignationLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ TestimonialDesignationLineHeight: value, TestimonialDesignationGlobalTypoSwitcher: { ...TestimonialDesignationGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                        lineHeightUnits={TestimonialDesignationLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ TestimonialDesignationLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={TestimonialDesignationColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ TestimonialDesignationColorSwitcher: value })}
+                    />
+
+                    {TestimonialDesignationColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={TestimonialDesignationColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialDesignationColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {TestimonialDesignationColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={TestimonialDesignationHoverColor}
+                            setGlobalColor={(value) => setAttributes({ TestimonialDesignationHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialDesignationMarginUnitChange}
+                        spacingUnits={TestimonialDesignationMarginUnits}
+                        spacingDesktop={TestimonialDesignationMarginDesktop}
+                        spacingTablet={TestimonialDesignationMarginTablet}
+                        spacingMobile={TestimonialDesignationMarginMobile}
+                        handleSpacingUnitHandler={testimonialDesignationMarginChange}
+                        spacingCombineBtn={TestimonialDesignationMarginLink}
+                        spacingCombineBtnHandler={testimonialDesignationMarginToggle}
+                        setAttributes={setAttributes}
+                    />
+
+                </PanelBody>
+            )}
+            {QuoteIconSwitcher && (
+                <PanelBody
+                    title={__("Quote Icon", "frontis-blocks")}
+                    initialOpen={false}
+                    className="fb-setting-feature-icon-wrapper"
+                >
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Icon Size", "frontis-blocks")}
+                        rangeValue={TestimonialQuoteIconSize}
+                        onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconSize: value })}
+                        rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconSizeUnits: value })}
+                        deviceType={deviceType}
+                        units={TestimonialQuoteIconSizeUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                    />
+
+                    {TestimonialQuoteIconAlign === 'icon' && (<>
+                        <FB_SwitcherControl
+                            label={__("Icon Color", "frontis-blocks")}
+                            globalSwitcher={TestimonialQuoteIconColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ TestimonialQuoteIconColorSwitcher: value })}
+                        />
+
+                        {TestimonialQuoteIconColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={TestimonialQuoteIconColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {TestimonialQuoteIconColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={TestimonialQuoteIconHoverColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialQuoteIconHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+                    </>)}
+
+                    <FB_Spacing
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={testimonialQuoteIconMarginUnitChange}
+                        spacingUnits={TestimonialQuoteIconMarginUnits}
+                        spacingDesktop={TestimonialQuoteIconMarginDesktop}
+                        spacingTablet={TestimonialQuoteIconMarginTablet}
+                        spacingMobile={TestimonialQuoteIconMarginMobile}
+                        handleSpacingUnitHandler={testimonialQuoteIconMarginChange}
+                        spacingCombineBtn={TestimonialQuoteIconMarginLink}
+                        spacingCombineBtnHandler={testimonialQuoteIconMarginToggle}
+                        setAttributes={setAttributes}
+                    />
+                    <ToggleControl
+                        label={__("Position", "frontis-blocks")}
+                        checked={TestimonialQuoteIconPositionSwitcher}
+                        onChange={(value) => setAttributes({ TestimonialQuoteIconPositionSwitcher: value })}
+                    />
+
+                    {TestimonialQuoteIconPositionSwitcher && (
+                        <>
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Top", "frontis-blocks")}
+                                rangeValue={TestimonialQuoteIconTopPosition}
+                                onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconTopPosition: value })}
+                                rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconTopPositionUnits: value })}
+                                deviceType={deviceType}
+                                units={TestimonialQuoteIconTopPositionUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
+                            <FB_Range
+                                min={0}
+                                max={100}
+                                label={__("Left", "frontis-blocks")}
+                                rangeValue={TestimonialQuoteIconLeftPosition}
+                                onChangeHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPosition: value })}
+                                rangeUnitHandler={(value) => setAttributes({ TestimonialQuoteIconLeftPositionUnits: value })}
+                                deviceType={deviceType}
+                                units={TestimonialQuoteIconLeftPositionUnits}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                            />
+                        </>
+                    )}
+                </PanelBody>
+            )}
+        </>
+    );
+
+    /**
+     * Inspector Advanced Controls
+     */
+    const advancedControls = (
+        <>
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
+                    <PanelBody
+                        title={__("Layout", "frontis-blocks")}
+                        initialOpen={true}
+                        className='fb-setting-layout-header'
+                    >
+                        <FB_Range
+                            min={0}
+                            max={10000000}
+                            label={__("Z Index", "frontis-blocks")}
+                            rangeValue={TestimonialGlobalZIndex}
+                            onChangeHandler={(value) => setAttributes({ TestimonialGlobalZIndex: value === 0 ? undefined : value })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
+                        />
 
                         <SelectControl
                             label={__("Overflow", "frontis-blocks")}
@@ -4506,11 +4509,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             onChange={(value) => setAttributes({ TestimonialOverflow: value })}
                         />
 
-                    <FB_PositionControl
+                        <FB_PositionControl
                             deviceType={deviceType}
                             positionType={testimonialPositionType}
                             setPositionType={(value) => setAttributes({ testimonialPositionType: value })}
-                                                                            
+
                             HZOrientationType={testimonialHZOrientationType}
                             setHZOrientationType={(value) =>
                                 setAttributes({ testimonialHZOrientationType: value })
@@ -4519,7 +4522,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setVROrientationType={(value) =>
                                 setAttributes({ testimonialVROrientationType: value })
                             }
-                                                                                
+
                             HZLeftOffset={testimonialHZLeftOffset}
                             setHZLeftOffset={(value) => setAttributes({ testimonialHZLeftOffset: value })}
                             HZLeftOffsetUnits={testimonialHZLeftOffsetUnits}
@@ -4528,7 +4531,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setHZRightOffset={(value) => setAttributes({ testimonialHZRightOffset: value })}
                             HZRightOffsetUnits={testimonialHZRightOffsetUnits}
                             setHZRightOffsetUnits={(value) => setAttributes({ testimonialHZRightOffsetUnits: value })}
-                                                                            
+
                             VRTopOffset={testimonialVRTopOffset}
                             setVRTopOffset={(value) => setAttributes({ testimonialVRTopOffset: value })}
                             VRTopOffsetUnits={testimonialVRTopOffsetUnits}
@@ -4541,173 +4544,173 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setAttributes={setAttributes}
                         />
 
-                    <FB_InputControl
-                        label={__("CSS ID", "frontis-blocks")}
-                        value={testimonialGlobalWraperID}
-                        onChangeValue={(value) => setAttributes({ testimonialGlobalWraperID: value })}
-                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                    />  
+                        <FB_InputControl
+                            label={__("CSS ID", "frontis-blocks")}
+                            value={testimonialGlobalWraperID}
+                            onChangeValue={(value) => setAttributes({ testimonialGlobalWraperID: value })}
+                            helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                        />
 
-                    <FB_InputControl
-                        label={__("CSS Class", "frontis-blocks")}
-                        value={testimonialGlobalWraperClass}
-                        onChangeValue={(value) => setAttributes({ testimonialGlobalWraperClass: value })}
-                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                    />
-                </PanelBody>
-                
-                <PanelBody
-                    title={__("Background Color", "frontis-blocks")}
-                    initialOpen={false} 
-                >
-                    <FB_BackgroundColorControl
-                        label={__("Background Color", "frontis-blocks")}
-                        bgColorSwitcher={TestimonialGlobalBgColorSwitcher}
-                        setBgColorSwitcher={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
-                        
-                        normalBackgroundType={TestimonialGlobalBgNormalBackgroundType}
-                        setNormalBackgroundType={(value) => setAttributes({ TestimonialGlobalBgNormalBackgroundType: value })}
-                        normalClassicColor={TestimonialGlobalBgNormalClassicColor}
-                        setNormalClassicColor={(value) => setAttributes({ TestimonialGlobalBgNormalClassicColor: value === undefined ? '' : value })}
-                        normalGradientColor={TestimonialGlobalBgNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ TestimonialGlobalBgNormalGradientColor: value === undefined ? '' : value })}
-                        normalCustomGradientSwitcher={TestimonialGlobalBgNormalCustomGradientSwitcher}
-                        setNormalCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientSwitcher: value })}
-                        normalCustomGradientInputValue={TestimonialGlobalBgNormalCustomGradientInputValue}
-                        setNormalCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientInputValue: value })}
-                        
-                        hoverBackgroundType={TestimonialGlobalBgHoverBackgroundType}
-                        setHoverBackgroundType={(value) => setAttributes({ TestimonialGlobalBgHoverBackgroundType: value })}
-                        hoverClassicColor={TestimonialGlobalBgHoverClassicColor}
-                        setHoverClassicColor={(value) => setAttributes({ TestimonialGlobalBgHoverClassicColor: value === undefined ? '' : value })}
-                        hoverGradientColor={TestimonialGlobalBgHoverGradientColor}
-                        setHoverGradientColor={(value) => setAttributes({ TestimonialGlobalBgHoverGradientColor: value === undefined ? '' : value })}
-                        hoverCustomGradientSwitcher={TestimonialGlobalBgHoverCustomGradientSwitcher}
-                        setHoverCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientSwitcher: value })}
-                        hoverCustomGradientInputValue={TestimonialGlobalBgHoverCustomGradientInputValue}
-                        setHoverCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientInputValue: value })}
+                        <FB_InputControl
+                            label={__("CSS Class", "frontis-blocks")}
+                            value={testimonialGlobalWraperClass}
+                            onChangeValue={(value) => setAttributes({ testimonialGlobalWraperClass: value })}
+                            helpText={__("Separate with spaces key.", "frontis-blocks")}
+                        />
+                    </PanelBody>
 
-                        isBackgroundImage={false}
-                    />
-                </PanelBody>
+                    <PanelBody
+                        title={__("Background Color", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_BackgroundColorControl
+                            label={__("Background Color", "frontis-blocks")}
+                            bgColorSwitcher={TestimonialGlobalBgColorSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ TestimonialGlobalBgColorSwitcher: value })}
 
-                <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-                    <FB_Spacing 
-                        label={__("Padding", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
-                        spacingUnits={TestimonialGlobalPaddingUnits}
-                        spacingDesktop={TestimonialGlobalPaddingDesktop}
-                        spacingTablet={TestimonialGlobalPaddingTablet}
-                        spacingMobile={TestimonialGlobalPaddingMobile}
-                        handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
-                        spacingCombineBtn={TestimonialGlobalPaddingLink}
-                        spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-                    <FB_Spacing 
-                        label={__("Margin", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleGlobalMarginUnitsHandler}
-                        spacingUnits={TestimonialGlobalMarginUnits}
-                        spacingDesktop={TestimonialGlobalMarginDesktop}
-                        spacingTablet={TestimonialGlobalMarginTablet}
-                        spacingMobile={TestimonialGlobalMarginMobile}
-                        handleSpacingUnitHandler={handleGlobalMarginUnitChange}
-                        spacingCombineBtn={TestimonialGlobalMarginLink}
-                        spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-                </PanelBody>
+                            normalBackgroundType={TestimonialGlobalBgNormalBackgroundType}
+                            setNormalBackgroundType={(value) => setAttributes({ TestimonialGlobalBgNormalBackgroundType: value })}
+                            normalClassicColor={TestimonialGlobalBgNormalClassicColor}
+                            setNormalClassicColor={(value) => setAttributes({ TestimonialGlobalBgNormalClassicColor: value === undefined ? '' : value })}
+                            normalGradientColor={TestimonialGlobalBgNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ TestimonialGlobalBgNormalGradientColor: value === undefined ? '' : value })}
+                            normalCustomGradientSwitcher={TestimonialGlobalBgNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={TestimonialGlobalBgNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgNormalCustomGradientInputValue: value })}
 
-                <PanelBody
-                    title={__("Border and Shadow", "frontis-blocks")}
-                    initialOpen={false}
-                >
-                    <SelectControl
+                            hoverBackgroundType={TestimonialGlobalBgHoverBackgroundType}
+                            setHoverBackgroundType={(value) => setAttributes({ TestimonialGlobalBgHoverBackgroundType: value })}
+                            hoverClassicColor={TestimonialGlobalBgHoverClassicColor}
+                            setHoverClassicColor={(value) => setAttributes({ TestimonialGlobalBgHoverClassicColor: value === undefined ? '' : value })}
+                            hoverGradientColor={TestimonialGlobalBgHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ TestimonialGlobalBgHoverGradientColor: value === undefined ? '' : value })}
+                            hoverCustomGradientSwitcher={TestimonialGlobalBgHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={TestimonialGlobalBgHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ TestimonialGlobalBgHoverCustomGradientInputValue: value })}
+
+                            isBackgroundImage={false}
+                        />
+                    </PanelBody>
+
+                    <PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
+                        <FB_Spacing
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
+                            spacingUnits={TestimonialGlobalPaddingUnits}
+                            spacingDesktop={TestimonialGlobalPaddingDesktop}
+                            spacingTablet={TestimonialGlobalPaddingTablet}
+                            spacingMobile={TestimonialGlobalPaddingMobile}
+                            handleSpacingUnitHandler={handleGlobalPaddingUnitChange}
+                            spacingCombineBtn={TestimonialGlobalPaddingLink}
+                            spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                        <FB_Spacing
+                            label={__("Margin", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalMarginUnitsHandler}
+                            spacingUnits={TestimonialGlobalMarginUnits}
+                            spacingDesktop={TestimonialGlobalMarginDesktop}
+                            spacingTablet={TestimonialGlobalMarginTablet}
+                            spacingMobile={TestimonialGlobalMarginMobile}
+                            handleSpacingUnitHandler={handleGlobalMarginUnitChange}
+                            spacingCombineBtn={TestimonialGlobalMarginLink}
+                            spacingCombineBtnHandler={handleGlobalMarginCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                    </PanelBody>
+
+                    <PanelBody
+                        title={__("Border and Shadow", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={TestimonialGlobalBorder}
                             options={BORDER_STYLES}
                             onChange={(value) => setAttributes({ TestimonialGlobalBorder: value })}
-                    />
+                        />
 
-                    <FB_SwitcherControl
+                        <FB_SwitcherControl
                             label={__("Border Color", "frontis-blocks")}
                             globalSwitcher={TestimonialGlobalBorderColorSwitcher}
                             setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBorderColorSwitcher: value })}
-                    />
-
-                    {TestimonialGlobalBorderColorSwitcher === 'normal' && (
-                        <FB_ColorControl
-                            label={__("Normal Color", "frontis-blocks")}
-                            globalColor={TestimonialGlobalBorderColor}
-                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderColor: value === undefined ? '' : value })}
                         />
-                    )}
 
-                    {TestimonialGlobalBorderColorSwitcher === 'hover' && (
-                        <FB_ColorControl
-                            label={__("Hover Color", "frontis-blocks")}
-                            globalColor={TestimonialGlobalBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value === undefined ? '' : value })}
+                        {TestimonialGlobalBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={TestimonialGlobalBorderColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {TestimonialGlobalBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={TestimonialGlobalBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ TestimonialGlobalBorderHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        <FB_Spacing
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderUnitsHandler}
+                            spacingUnits={TestimonialGlobalBorderUnits}
+                            spacingDesktop={TestimonialGlobalBorderDesktop}
+                            spacingTablet={TestimonialGlobalBorderTablet}
+                            spacingMobile={TestimonialGlobalBorderMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderUnitChange}
+                            spacingCombineBtn={TestimonialGlobalBorderLink}
+                            spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
+                            setAttributes={setAttributes}
                         />
-                    )}
 
-                    <FB_Spacing 
-                        label={__("Border", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleGlobalBorderUnitsHandler}
-                        spacingUnits={TestimonialGlobalBorderUnits}
-                        spacingDesktop={TestimonialGlobalBorderDesktop}
-                        spacingTablet={TestimonialGlobalBorderTablet}
-                        spacingMobile={TestimonialGlobalBorderMobile}
-                        handleSpacingUnitHandler={handleGlobalBorderUnitChange}
-                        spacingCombineBtn={TestimonialGlobalBorderLink}
-                        spacingCombineBtnHandler={handleGlobalBorderCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_Spacing 
-                        label={__("Border Radius", "frontis-blocks")}
-                        deviceType={deviceType}
-                        spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
-                        spacingUnits={TestimonialGlobalBorderRadiusUnits}
-                        spacingDesktop={TestimonialGlobalBorderRadiusDesktop}
-                        spacingTablet={TestimonialGlobalBorderRadiusTablet}
-                        spacingMobile={TestimonialGlobalBorderRadiusMobile}
-                        handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
-                        spacingCombineBtn={TestimonialGlobalBorderRadiusLink}
-                        spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
-                        setAttributes={setAttributes}
-                    />
-
-                    <FB_SwitcherControl
-                        label={__("Box Shadow", "frontis-blocks")}
-                        globalSwitcher={TestimonialGlobalBoxShadowSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBoxShadowSwitcher: value })}
-                    />
-
-                    {TestimonialGlobalBoxShadowSwitcher === 'normal' && (
-                        <FB_BoxShadowControl
-                            label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowValues: value })}
-                            initialShadowValue={TestimonialGlobalBoxShadowValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowCssValue: value })}
+                        <FB_Spacing
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
+                            spacingUnits={TestimonialGlobalBorderRadiusUnits}
+                            spacingDesktop={TestimonialGlobalBorderRadiusDesktop}
+                            spacingTablet={TestimonialGlobalBorderRadiusTablet}
+                            spacingMobile={TestimonialGlobalBorderRadiusMobile}
+                            handleSpacingUnitHandler={handleGlobalBorderRadiusUnitChange}
+                            spacingCombineBtn={TestimonialGlobalBorderRadiusLink}
+                            spacingCombineBtnHandler={handleGlobalBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
                         />
-                    )}
 
-                    {TestimonialGlobalBoxShadowSwitcher === 'hover' && (
-                        <FB_BoxShadowControl
-                            label={__("Hover Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverValues: value })}
-                            initialShadowValue={TestimonialGlobalBoxShadowHoverValues}
-                            onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverCssValue: value })}
+                        <FB_SwitcherControl
+                            label={__("Box Shadow", "frontis-blocks")}
+                            globalSwitcher={TestimonialGlobalBoxShadowSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ TestimonialGlobalBoxShadowSwitcher: value })}
                         />
-                    )}
 
-                </PanelBody>
+                        {TestimonialGlobalBoxShadowSwitcher === 'normal' && (
+                            <FB_BoxShadowControl
+                                label={__("Normal Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowValues: value })}
+                                initialShadowValue={TestimonialGlobalBoxShadowValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowCssValue: value })}
+                            />
+                        )}
 
-                <PanelBody
+                        {TestimonialGlobalBoxShadowSwitcher === 'hover' && (
+                            <FB_BoxShadowControl
+                                label={__("Hover Shadow", "frontis-blocks")}
+                                onBoxShadowChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={TestimonialGlobalBoxShadowHoverValues}
+                                onBoxShadowStyleChange={(value) => setAttributes({ TestimonialGlobalBoxShadowHoverCssValue: value })}
+                            />
+                        )}
+
+                    </PanelBody>
+
+                    <PanelBody
                         title={__("Responsive Control", "frontis-blocks")}
                         initialOpen={false}
                         className="fb-setting-responsive-control-wrapper"
@@ -4723,33 +4726,29 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                             setMobileValue={(value) => setAttributes({ testimonialMobileSwitcher: value })}
                         />
 
-                </PanelBody>
+                    </PanelBody>
 
-                <PanelBody
+                    <PanelBody
                         title={__("Custom CSS", "frontis-blocks")}
                         initialOpen={false}
                     >
-                        <FB_CustomCSSEditor  
-                            value={testimonialCustomCSS} 
+                        <FB_CustomCSSEditor
+                            value={testimonialCustomCSS}
                             onChangeValue={(value) => setAttributes({ testimonialCustomCSS: value })}
                         />
                     </PanelBody>
+                </div>
             </div>
-        </div>
-    </>
-	);
+        </>
+    );
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
-            
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
                 advancedControls={advancedControls}
             />
-        </>   
+        </>
     );
 }
