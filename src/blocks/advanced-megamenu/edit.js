@@ -3,15 +3,17 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { useDeviceType } from '@Config/displayType';
-import { useRef } from '@wordpress/element';
+import { useRef, lazy, Suspense } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from './inspector';
 import './editor.scss';
+
+const Inspector = lazy(() => import('./inspector'));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		menuItems,
 		megaMenuDesktopSwitcher,
 		megaMenuTabletSwitcher,
@@ -21,7 +23,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		megaMenuIcon
 	} = attributes;
 
-	
+
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-mega-menu-main-wrapper ${blockId} ${megaMenuDesktopSwitcher && 'fb-desktop-responsive'} ${megaMenuTabletSwitcher && 'fb-tablet-responsive'} ${megaMenuMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
@@ -35,11 +37,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>
 					<div className="fb-mega-menu-editor">
@@ -78,6 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
