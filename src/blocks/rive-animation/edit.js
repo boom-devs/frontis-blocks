@@ -2,13 +2,14 @@
 
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
 import { Rive } from '@rive-app/canvas';
-import Inspector from "./inspector";
+const Inspector = lazy(() => import('./inspector'));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		riveAnimationImageUrl,
 		riveLoop = true,
 		riveAutoplay = true,
@@ -149,7 +150,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Suspense fallback={null}>
+				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			</Suspense>
 
 			<div {...blockProps}>
 				<div className="fb-parent-wrapper fb-rive-animation-container">
@@ -182,6 +185,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

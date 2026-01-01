@@ -556,8 +556,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [riveAnimationStyle, customCss]);
 
-	const editorStyle = `${riveAnimationStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -914,9 +912,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

@@ -1,19 +1,20 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	 RichText,
+	RichText,
 } from '@wordpress/block-editor';
 
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from './inspector';
-import { useRef } from '@wordpress/element';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useRef, lazy, Suspense } from '@wordpress/element';
+const Inspector = lazy(() => import('./inspector'));
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 
 		// Photo
 		teamMemberImageUrl,
@@ -77,7 +78,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicDescriptionLinkSource,
 		/** End Dynamic Description Text */
 
-	/** Start Dynamic Team Member Name Text */
+		/** Start Dynamic Team Member Name Text */
 		dynamicTeamMemberNameEnabled,
 		dynamicTeamMemberNameSource,
 		dynamicTeamMemberNamePostId,
@@ -130,8 +131,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	} = attributes;
 
 	const blockProps = useBlockProps({
-        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
-    });
+		className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
 
 	/**
 	* Manages tab button settings and switches to block settings on click
@@ -174,7 +175,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Team Member Name
 	 */
-	const { dynamicDisplayValue: dynamicTeamMemberNameValue, dynamicDisplayLink: dynamicTeamMemberNameLink } = DynamicTextValue({ 
+	const { dynamicDisplayValue: dynamicTeamMemberNameValue, dynamicDisplayLink: dynamicTeamMemberNameLink } = DynamicTextValue({
 		textEnabled:            dynamicTeamMemberNameEnabled,
 		textSource:             dynamicTeamMemberNameSource,
 		textField:              dynamicTeamMemberNameField,
@@ -237,11 +238,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID} ref={panelRef}>
@@ -252,7 +255,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									<RichText
 										tagName={'span'}
 										value={teamMemberBadge}
-										onChange={(value) => setAttributes({teamMemberBadge: value})}
+										onChange={(value) => setAttributes({ teamMemberBadge: value })}
 										className="fb-team-member-badge"
 									/>
 								</div>
@@ -265,7 +268,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										<RichText
 											tagName={'span'}
 											value={teamMemberBadge}
-											onChange={(value) => setAttributes({teamMemberBadge: value})}
+											onChange={(value) => setAttributes({ teamMemberBadge: value })}
 											className="fb-team-member-badge"
 										/>
 									</div>
@@ -274,13 +277,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true"/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true" />
 								)}
-								
-								{teamMemberSocialProfileSwitcher === true && 
+
+								{teamMemberSocialProfileSwitcher === true &&
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
-											{socialIconBtnSwitcher === true && 
+											{socialIconBtnSwitcher === true &&
 												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
@@ -291,7 +294,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
-											</div> 
+											</div>
 										</div>}
 									</>
 								}
@@ -318,23 +321,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									className="fb-team-member-designation"
 								/>
 
-								{ teamMemberDescSwitcher === true && <RichText
+								{teamMemberDescSwitcher === true && <RichText
 									tagName={'p'}
 									value={dynamicDescriptionEnabled ? dynamicDescriptionValue : teamMemberDesc}
 									onChange={(value) => {
 										if (!dynamicDescriptionEnabled) setAttributes({ teamMemberDesc: value });
 									}}
 									className="fb-team-member-desc"
-								/> }
+								/>}
 
 							</div>
-							{teamMemberSocialProfileSwitcher === true && 
+							{teamMemberSocialProfileSwitcher === true &&
 								<>
 									{teamMemberSocialType === 'content' && <>
-										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr /></div>}
 
 										<div className="fb-team-member-social-profile-wrapper">
-											{socialIconBtnSwitcher === true && 
+											{socialIconBtnSwitcher === true &&
 												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
@@ -345,10 +348,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
-											</div> 
+											</div>
 										</div>
 
-										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') &&(teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr /></div>}
 									</>}
 								</>
 							}
@@ -356,6 +359,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }
