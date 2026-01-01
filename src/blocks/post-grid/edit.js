@@ -6,7 +6,8 @@ import LayoutGrid from './layoutGrid';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -96,10 +97,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     /**
      * Get taxonomy data
      */
-    const tax    = FrontisBlocksData?.all_cats?.[postType] || {};
-    const terms  = tax?.terms || {};
-    const tkeys  = Object.keys(terms);
-    const meta   = tax?.taxonomy || {};
+    const tax = FrontisBlocksData?.all_cats?.[postType] || {};
+    const terms = tax?.terms || {};
+    const tkeys = Object.keys(terms);
+    const meta = tax?.taxonomy || {};
 
     /**
      * Get category and tag keys
@@ -288,13 +289,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             {postLists ? (
                 <div {...blockProps}>

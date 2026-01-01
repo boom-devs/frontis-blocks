@@ -12,7 +12,9 @@ import { useRef, lazy, Suspense } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -256,30 +258,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Title
 	 */
 	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
 
 		textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
 
 		context,
 	});
@@ -288,30 +290,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Description
 	 */
 	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
 
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
 
 		context,
 	});
@@ -320,30 +322,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnEnabled,
-		textSource:             dynamicBtnSource,
-		textField:              dynamicBtnField,
+		textEnabled: dynamicBtnEnabled,
+		textSource: dynamicBtnSource,
+		textField: dynamicBtnField,
 
-		textPostId:             dynamicBtnPostId,
-		textPostType:           dynamicBtnPostType,
-		textPostLabel:          dynamicBtnPostLabel,
+		textPostId: dynamicBtnPostId,
+		textPostType: dynamicBtnPostType,
+		textPostLabel: dynamicBtnPostLabel,
 
 		textFeaturedImageField: dynamicBtnFeaturedImageField,
 
-		textDateType:           dynamicBtnDateType,
-		textDateFormat:         dynamicBtnDateFormat,
-		textTimeType:           dynamicBtnTimeType,
-		textTimeFormat:         dynamicBtnTimeFormat,
+		textDateType: dynamicBtnDateType,
+		textDateFormat: dynamicBtnDateFormat,
+		textTimeType: dynamicBtnTimeType,
+		textTimeFormat: dynamicBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBtnCommentsOneText,
-		textCommentsManyText:   dynamicBtnCommentsManyText,
+		textCommentsZeroText: dynamicBtnCommentsZeroText,
+		textCommentsOneText: dynamicBtnCommentsOneText,
+		textCommentsManyText: dynamicBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnEnableLink,
-		textLinkSource:         dynamicBtnLinkSource,
+		textLinkEnabled: dynamicBtnEnableLink,
+		textLinkSource: dynamicBtnLinkSource,
 
 		context,
 	});
@@ -353,30 +355,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Back Title Text
 	 */
 	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicBackTitleEnabled,
-		textSource:             dynamicBackTitleSource,
-		textField:              dynamicBackTitleField,
+		textEnabled: dynamicBackTitleEnabled,
+		textSource: dynamicBackTitleSource,
+		textField: dynamicBackTitleField,
 
-		textPostId:             dynamicBackTitlePostId,
-		textPostType:           dynamicBackTitlePostType,
-		textPostLabel:          dynamicBackTitlePostLabel,
+		textPostId: dynamicBackTitlePostId,
+		textPostType: dynamicBackTitlePostType,
+		textPostLabel: dynamicBackTitlePostLabel,
 
 		textFeaturedImageField: dynamicBackTitleFeaturedImageField,
 
-		textDateType:           dynamicBackTitleDateType,
-		textDateFormat:         dynamicBackTitleDateFormat,
-		textTimeType:           dynamicBackTitleTimeType, 
-		textTimeFormat:         dynamicBackTitleTimeFormat,
+		textDateType: dynamicBackTitleDateType,
+		textDateFormat: dynamicBackTitleDateFormat,
+		textTimeType: dynamicBackTitleTimeType,
+		textTimeFormat: dynamicBackTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicBackTitleCommentsZeroText,
-		textCommentsOneText:    dynamicBackTitleCommentsOneText,
-		textCommentsManyText:   dynamicBackTitleCommentsManyText,
+		textCommentsZeroText: dynamicBackTitleCommentsZeroText,
+		textCommentsOneText: dynamicBackTitleCommentsOneText,
+		textCommentsManyText: dynamicBackTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicBackTitleTermsSeparator,
+		textTermsTaxonomy: dynamicBackTitleTermsTaxonomy,
+		textTermsSeparator: dynamicBackTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicBackTitleEnableLink,
-		textLinkSource:         dynamicBackTitleLinkSource,
+		textLinkEnabled: dynamicBackTitleEnableLink,
+		textLinkSource: dynamicBackTitleLinkSource,
 
 		context,
 	});
@@ -385,30 +387,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Back Description Text
 	 */
 	const { dynamicDisplayValue: dynamicBackDescriptionValue, dynamicDisplayLink: dynamicBackDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicBackDescriptionEnabled,
-		textSource:             dynamicBackDescriptionSource,
-		textField:              dynamicBackDescriptionField,
+		textEnabled: dynamicBackDescriptionEnabled,
+		textSource: dynamicBackDescriptionSource,
+		textField: dynamicBackDescriptionField,
 
-		textPostId:             dynamicBackDescriptionPostId,
-		textPostType:           dynamicBackDescriptionPostType,
-		textPostLabel:          dynamicBackDescriptionPostLabel,
+		textPostId: dynamicBackDescriptionPostId,
+		textPostType: dynamicBackDescriptionPostType,
+		textPostLabel: dynamicBackDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicBackDescriptionFeaturedImageField,
 
-		textDateType:           dynamicBackDescriptionDateType,
-		textDateFormat:         dynamicBackDescriptionDateFormat,
-		textTimeType:           dynamicBackDescriptionTimeType, 
-		textTimeFormat:         dynamicBackDescriptionTimeFormat,
+		textDateType: dynamicBackDescriptionDateType,
+		textDateFormat: dynamicBackDescriptionDateFormat,
+		textTimeType: dynamicBackDescriptionTimeType,
+		textTimeFormat: dynamicBackDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicBackDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicBackDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicBackDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicBackDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicBackDescriptionCommentsOneText,
+		textCommentsManyText: dynamicBackDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicBackDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicBackDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicBackDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicBackDescriptionEnableLink,
-		textLinkSource:         dynamicBackDescriptionLinkSource,
+		textLinkEnabled: dynamicBackDescriptionEnableLink,
+		textLinkSource: dynamicBackDescriptionLinkSource,
 
 		context,
 	});
@@ -417,30 +419,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Back Button Text
 	 */
 	const { dynamicDisplayValue: dynamicBackBtnValue, dynamicDisplayLink: dynamicBackBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBackBtnEnabled,
-		textSource:             dynamicBackBtnSource,
-		textField:              dynamicBackBtnField,
+		textEnabled: dynamicBackBtnEnabled,
+		textSource: dynamicBackBtnSource,
+		textField: dynamicBackBtnField,
 
-		textPostId:             dynamicBackBtnPostId,
-		textPostType:           dynamicBackBtnPostType, 
-		textPostLabel:          dynamicBackBtnPostLabel,
+		textPostId: dynamicBackBtnPostId,
+		textPostType: dynamicBackBtnPostType,
+		textPostLabel: dynamicBackBtnPostLabel,
 
 		textFeaturedImageField: dynamicBackBtnFeaturedImageField,
 
-		textDateType:           dynamicBackBtnDateType,
-		textDateFormat:         dynamicBackBtnDateFormat,
-		textTimeType:           dynamicBackBtnTimeType,
-		textTimeFormat:         dynamicBackBtnTimeFormat,
+		textDateType: dynamicBackBtnDateType,
+		textDateFormat: dynamicBackBtnDateFormat,
+		textTimeType: dynamicBackBtnTimeType,
+		textTimeFormat: dynamicBackBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBackBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBackBtnCommentsOneText,
-		textCommentsManyText:   dynamicBackBtnCommentsManyText,
+		textCommentsZeroText: dynamicBackBtnCommentsZeroText,
+		textCommentsOneText: dynamicBackBtnCommentsOneText,
+		textCommentsManyText: dynamicBackBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBackBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBackBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBackBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBackBtnEnableLink,
-		textLinkSource:         dynamicBackBtnLinkSource,
+		textLinkEnabled: dynamicBackBtnEnableLink,
+		textLinkSource: dynamicBackBtnLinkSource,
 
 		context,
 	});
@@ -448,13 +450,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
 			<div {...blockProps}>
 				<div

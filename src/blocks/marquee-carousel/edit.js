@@ -12,7 +12,8 @@ import { createBlock } from "@wordpress/blocks";
 import { Swiper } from "swiper/react";
 import "./editor.scss";
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 const ALLOWED_BLOCKS = ["frontis-blocks/marquee-carousel-item"];
 
@@ -244,13 +245,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			{renderSliderToolbarControls()}
 			<div {...blockProps}>
 				<Swiper

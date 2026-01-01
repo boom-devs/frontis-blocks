@@ -4,7 +4,9 @@ import { useMemo, useEffect, lazy, Suspense } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import "./editor.scss";
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -47,22 +49,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// console.log(finalArrowsId);
 	// console.log(arrowsUniqueId);
 	const blockProps = useBlockProps({
-		className: `fb-news-ticker-wrapper ${blockID} ${
-			newsTickerDesktopSwitcher && "fb-desktop-responsive"
-		} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${
-			newsTickerMobileSwitcher && "fb-mobile-responsive"
+		className: `fb-news-ticker-wrapper ${blockID} ${newsTickerDesktopSwitcher && "fb-desktop-responsive"
+			} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${newsTickerMobileSwitcher && "fb-mobile-responsive"
 			}`,
 	});
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			<div {...blockProps} id={newsTickerGlobalWraperID}>
 				<div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass}`}>
 					<div className="fb-news-ticker-label-container">
@@ -117,12 +115,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className={`fb-news-ticker-pause-btn ${finalArrowsId}`}>
 									{/* Pause Icon */}
 									<svg className="icon-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-										<path fillRule="evenodd" clipRule="evenodd" d="M6.75 5.75C6.75 5.33579 7.08579 5 7.5 5H9C9.41421 5 9.75 5.33579 9.75 5.75V19.25C9.75 19.6642 9.41421 20 9 20H7.5C7.30109 20 7.11032 19.921 6.96967 19.7803C6.82902 19.6397 6.75 19.4489 6.75 19.25V5.75ZM14.25 5.75C14.25 5.33579 14.5858 5 15 5H16.5C16.6989 5 16.8897 5.07902 17.0303 5.21967C17.171 5.36032 17.25 5.55109 17.25 5.75V19.25C17.25 19.6642 16.9142 20 16.5 20H15C14.5858 20 14.25 19.6642 14.25 19.25V5.75Z" fill=""/>
+										<path fillRule="evenodd" clipRule="evenodd" d="M6.75 5.75C6.75 5.33579 7.08579 5 7.5 5H9C9.41421 5 9.75 5.33579 9.75 5.75V19.25C9.75 19.6642 9.41421 20 9 20H7.5C7.30109 20 7.11032 19.921 6.96967 19.7803C6.82902 19.6397 6.75 19.4489 6.75 19.25V5.75ZM14.25 5.75C14.25 5.33579 14.5858 5 15 5H16.5C16.6989 5 16.8897 5.07902 17.0303 5.21967C17.171 5.36032 17.25 5.55109 17.25 5.75V19.25C17.25 19.6642 16.9142 20 16.5 20H15C14.5858 20 14.25 19.6642 14.25 19.25V5.75Z" fill="" />
 									</svg>
 
 									{/* Play Icon */}
 									<svg className="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-										<path d="M8 5V20L19 12.5L8 5Z" fill="currentColor"/>
+										<path d="M8 5V20L19 12.5L8 5Z" fill="currentColor" />
 									</svg>
 								</div>
 							)}
