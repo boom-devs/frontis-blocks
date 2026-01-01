@@ -1,11 +1,13 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
+import { useEffect, lazy, Suspense } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
-import Inspector from "./inspector";
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		postTitleTag,
 		isLink,
 		rel,
@@ -26,7 +28,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			postTitleDesktopSwitcher && "fb-desktop-responsive"
 		} ${postTitleTabletSwitcher && "fb-tablet-responsive"} ${
 			postTitleMobileSwitcher && "fb-mobile-responsive"
-		}`,
+			}`,
 	});
 
 	useEffect(() => {
@@ -51,11 +53,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				<TagName className={htmlTagClasses} id={wrapperId || undefined}>
@@ -73,6 +77,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</TagName>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

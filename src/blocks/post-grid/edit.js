@@ -1,34 +1,36 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
 import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
 import './editor.scss';
-import Inspector from "./inspector";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+const Inspector = lazy(() => import("./inspector"));
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
-		premadeStyle,
-		postType,
-		postPerPage,
+        blockStyle,
+        premadeStyle,
+        postType,
+        postPerPage,
         categoryKey,
         tagKey,
-		selectedCatSwitcher,
-		selectedCat,
-		deSelectedCat,
-		selectedTagSwitcher,
-		selectedTag,
-		deSelectedTag,
-		selectedAuthorSwitcher,
-		selectedAuthor,
-		deSelectedAuthor,
-		orderBy,
-		sortOrder,
-		postTitleTag,
-		postDescriptionTag,
+        selectedCatSwitcher,
+        selectedCat,
+        deSelectedCat,
+        selectedTagSwitcher,
+        selectedTag,
+        deSelectedTag,
+        selectedAuthorSwitcher,
+        selectedAuthor,
+        deSelectedAuthor,
+        orderBy,
+        sortOrder,
+        postTitleTag,
+        postDescriptionTag,
         postDescriptionExcerptLength,
         showExcerptSwitcher,
         showAuthorSwitcher,
@@ -46,8 +48,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         postGridGlobalWraperClass,
 
         postGridDesktopSwitcher,
-		postGridTabletSwitcher,
-		postGridMobileSwitcher,
+        postGridTabletSwitcher,
+        postGridMobileSwitcher,
 
         showFilterByTaxonomy,
         filterSelectedTaxonomy,
@@ -86,9 +88,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     });
 
     let defaultImageUrl = '';
-	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
-	}
+    if (typeof FrontisBlocksData !== 'undefined') {
+        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
+    }
 
 
     /**
@@ -103,14 +105,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      * Get category and tag keys
      */
     const category_Key =
-    tkeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) ||
-    tkeys.find(k => meta?.[k]?.hierarchical === true) ||
-    tkeys[0];
+        tkeys.find(k => /(^|[-_])category($|[-_])/i.test(k)) ||
+        tkeys.find(k => meta?.[k]?.hierarchical === true) ||
+        tkeys[0];
 
     const tag_Key =
-    tkeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k)) ||
-    tkeys.find(k => meta?.[k]?.hierarchical === false) ||
-    null;
+        tkeys.find(k => /(^|[-_])(post[-_]?tag|tags?)($|[-_])/i.test(k)) ||
+        tkeys.find(k => meta?.[k]?.hierarchical === false) ||
+        null;
 
     /**
      * Get REST base
@@ -120,26 +122,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     const { useSelect } = wp.data;
 
-	const postLists = useSelect((select) => {
-		const query = {
-			orderby: orderBy,
-			order: sortOrder,
-			per_page: -1,
-		};
+    const postLists = useSelect((select) => {
+        const query = {
+            orderby: orderBy,
+            order: sortOrder,
+            per_page: -1,
+        };
 
         if (showFilterByTaxonomy) {
             if (filterSelectedTaxonomy === 'category' && catBase) {
-              query[catBase] = filterCatId !== 0 ? filterCatId : filterSelectedCat;
+                query[catBase] = filterCatId !== 0 ? filterCatId : filterSelectedCat;
             } else if (filterSelectedTaxonomy === 'tag' && tagBase) {
-              query[tagBase] = filterTagId !== 0 ? filterTagId : filterSelectedTag;
+                query[tagBase] = filterTagId !== 0 ? filterTagId : filterSelectedTag;
             }
         }
-        
+
         applyCategoryTagFilters(query);
         applyAuthorFilters(query);
 
-		return select('core').getEntityRecords('postType', postType, query);
-	}, [
+        return select('core').getEntityRecords('postType', postType, query);
+    }, [
         postType,
         postPerPage,
         orderBy,
@@ -158,7 +160,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         selectedAuthor,
         deSelectedAuthor,
     ]);
-    
+
     /**
     * Category & Tag Filtering
     */
@@ -169,7 +171,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         } else if (selectedCatSwitcher === 'exclude' && Array.isArray(deSelectedCat) && deSelectedCat.length > 0) {
             if (catBase) query[`${catBase}_exclude`] = deSelectedCat;
         }
-        
+
         // Tag Filtering (generic)
         if (selectedTagSwitcher === 'include' && Array.isArray(selectedTag) && selectedTag.length > 0) {
             if (tagBase) query[tagBase] = selectedTag;
@@ -184,7 +186,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         const isValidCategory = category_Key !== undefined && category_Key !== '';
         const isValidTag = tag_Key !== undefined && tag_Key !== '';
-    
+
         if (isValidCategory || isValidTag) {
             setAttributes({
                 ...(isValidCategory && { categoryKey: category_Key }),
@@ -213,20 +215,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     /**
      * Handle Category Click
      */
-	const handleCategoryClick = (category) => {
-		if (category && typeof category.value !== 'undefined') {
-			setFilterCatId(category.value);
-		}
-	};
+    const handleCategoryClick = (category) => {
+        if (category && typeof category.value !== 'undefined') {
+            setFilterCatId(category.value);
+        }
+    };
 
     /**
      * Handle Tag Click
      */
-	const handleTagClick = (tag) => {
-		if (tag && typeof tag.value !== 'undefined') {
-			setFilterTagId(tag.value);
-		}
-	};
+    const handleTagClick = (tag) => {
+        if (tag && typeof tag.value !== 'undefined') {
+            setFilterTagId(tag.value);
+        }
+    };
 
 
     /**
@@ -243,7 +245,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      */
     const getCategoryCounts = () => {
         const counts = {};
-    
+
         if (allPosts && Array.isArray(allPosts)) {
             allPosts.forEach((post) => {
                 if (post.categories && Array.isArray(post.categories)) {
@@ -253,7 +255,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 }
             });
         }
-    
+
         return counts;
     };
 
@@ -262,7 +264,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
      */
     const getTagCounts = () => {
         const counts = {};
-    
+
         if (allPosts && Array.isArray(allPosts)) {
             allPosts.forEach((post) => {
                 if (post.tags && Array.isArray(post.tags)) {
@@ -272,7 +274,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 }
             });
         }
-    
+
         return counts;
     };
 
@@ -286,27 +288,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-    
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
+
             {postLists ? (
                 <div {...blockProps}>
                     {postLists.length > 0 ? (
                         <>
                             {showFilterByTaxonomy && filterSelectedTaxonomy === 'category' && filterSelectedCatLabel.length > 0 && (
                                 <div className="fb_post_grid_filter_categories">
-                                    
+
                                     {filterSelectedCatLabel.map((category, idx) => (
                                         <div
                                             key={idx}
                                             className={`fb_post_grid_filter_category ${filterCatId === category.value ? 'active' : ''}`}
                                             onClick={() => handleCategoryClick(category)}
                                         >
-                                              <span className="fb-post-grid-filter-category-label">{category.label}</span>
-                                              {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-category-count">{' '}{category.value === 0 ? filterAllPostsCount : filterSelectedCatCount[category.value] || 0}</span> : ''}
+                                            <span className="fb-post-grid-filter-category-label">{category.label}</span>
+                                            {filerselectedCountSwitcher ? <span className="fb-post-grid-filter-category-count">{' '}{category.value === 0 ? filterAllPostsCount : filterSelectedCatCount[category.value] || 0}</span> : ''}
                                         </div>
                                     ))}
                                 </div>
@@ -326,7 +330,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     ))}
                                 </div>
                             )}
-    
+
                             <div
                                 className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
                                 id={postGridGlobalWraperID}
@@ -379,7 +383,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             ) : (
                 <div>Loading...</div>
             )}
+            <style>{blockStyle}</style>
         </>
     );
-    
+
 }

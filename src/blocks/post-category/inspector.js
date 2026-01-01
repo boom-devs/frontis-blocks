@@ -4179,8 +4179,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
 	}, [allBlockStyle, customCss]);
 
-	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 	const generalControls = (
 		<>
 			<div className="fb-setting-general-wrapper">
@@ -6988,9 +6986,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
