@@ -67,8 +67,8 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
-        $value = isset($_POST['value']) ? $_POST['value'] : '';
+        $option_name = isset($_POST['option_name']) ? sanitize_key($_POST['option_name']) : '';
+        $value = isset($_POST['value']) ? sanitize_text_field($_POST['value']) : '';
 
         $updated = update_option("fb_$option_name", $value);
 
@@ -83,7 +83,7 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
+        $option_name = isset($_POST['option_name']) ? sanitize_key($_POST['option_name']) : '';
         $value = get_option("fb_$option_name");
 
         if ($value) {
@@ -335,7 +335,7 @@ class TemplateLibrary extends AjaxBase
 
         // Input data
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
         $slug = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
         $template = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
         $badge = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
