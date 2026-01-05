@@ -6,7 +6,8 @@ import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-const Inspector = lazy(() => import("./inspector"));
+// const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -49,13 +50,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} ref={panelRef} id={videoGlobalWraperID}>

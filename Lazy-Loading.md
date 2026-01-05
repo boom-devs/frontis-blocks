@@ -12,8 +12,7 @@ These blocks have `lazy` loading working correctly.
 4. `advanced-image`
 5. `advanced-navigation`
 6. `advanced-paragraph`
-7. `advanced-video`
-8. `breadcrumb`
+7. `breadcrumb`
 9. `business-hours`
 10. `call-to-action`
 11. `contact-form-7`
@@ -47,15 +46,12 @@ These blocks need `lazy` loading applied. Groups are sorted by `editor.scss` siz
 
 ### High Priority (Small & Easy)
 Small `editor.scss` files mean easy CSS inlining.
+- [ ] `advanced-video` (Reverted due to video player error)
 - [ ] `animated-heading` (Reverted due to issues)
 - [ ] `marquee-carousel` (24 lines CSS)
 - [ ] `query-pagination-numbers` (6 lines CSS)
-- [ ] `text-field` (61 lines CSS)
-- [ ] `textarea-field` (61 lines CSS)
-- [ ] `search` (78 lines CSS)
 - [ ] `slider-item` (86 lines CSS)
 - [ ] `news-ticker` (103 lines CSS)
-- [ ] `form-builder` (113 lines CSS)
 - [ ] `slider` (142 lines CSS)
 
 ### Complex / Requires Care
