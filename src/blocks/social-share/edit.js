@@ -3,14 +3,15 @@ import {
     useBlockProps,
     InnerBlocks,
 } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useRef, lazy, Suspense } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import Inspector from './inspector';
+const Inspector = lazy(() => import('./inspector'));
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockID,
+        blockStyle,
         socialShareDesktopSwitcher,
         socialShareTabletSwitcher,
         socialShareMobileSwitcher,
@@ -54,11 +55,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <div {...blockProps}>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <div className={`social-share-parent-container ${socialShareGlobalWraperClass}`} id={socialShareGlobalWraperID} ref={panelRef}>
                 <InnerBlocks
@@ -67,6 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     templateLock={false}
                 />
             </div>
+            <style>{blockStyle}</style>
         </div>
     );
 }

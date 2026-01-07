@@ -8956,7 +8956,6 @@ buttonWidth,
 
 	return (
 		<>
-			<style>{editorStyle}</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

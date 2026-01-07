@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Core;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 
 // Exit if accessed directly.

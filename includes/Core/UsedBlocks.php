@@ -2,17 +2,23 @@
 
 namespace FrontisBlocks\Core;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 
-class UsedBlocks {
+class UsedBlocks
+{
 
-    use Singleton;
+	use Singleton;
 
-    public function get_used_frontis_blocks() {
+	public function get_used_frontis_blocks()
+	{
 
 		$args = [
 			'numberposts' => -1,
-			'post_type'   => ['post', 'page', 'wp_block', 'wp_area']
+			'post_type' => ['post', 'page', 'wp_block', 'wp_area']
 		];
 
 
@@ -42,10 +48,11 @@ class UsedBlocks {
 		error_log(print_r(array_unique($frontis_blocks), true));
 	}
 
-    // Function to get inner blocks that start with "frontis/"
-    public function get_inner_frontis_blocks($innerBlocks) {
-        $frontis_blocks = [];
-        foreach ($innerBlocks as $innerBlock) {
+	// Function to get inner blocks that start with "frontis/"
+	public function get_inner_frontis_blocks($innerBlocks)
+	{
+		$frontis_blocks = [];
+		foreach ($innerBlocks as $innerBlock) {
 			if (strpos($innerBlock['blockName'], 'frontis/') === 0) {
 				$frontis_blocks[] = $innerBlock['blockName'];
 			}

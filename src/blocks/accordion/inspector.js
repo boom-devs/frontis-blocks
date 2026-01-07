@@ -1789,8 +1789,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
       }, [fbaccordionItemstyle, customCss]);
 
-      const editorStyle = `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     /**
      * Inspector General Controls
      */
@@ -3043,10 +3041,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
-
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}

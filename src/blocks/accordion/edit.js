@@ -1,23 +1,24 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { useEffect, useMemo, useRef } from "@wordpress/element";
+import { useEffect, useMemo, useRef, lazy, Suspense } from "@wordpress/element";
 import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
-import Inspector from './inspector';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+const Inspector = lazy(() => import('./inspector'));
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
-const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"]; 
+const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
 
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
-    const { 
+    const {
         blockID,
-        
+        blockStyle,
+
         classHook,
         accordionType,
         displayIcon,
@@ -81,7 +82,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             });
     };
 
-    
+
 
     useEffect(() => {
         if (!tabIcon) {
@@ -91,7 +92,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             setAttributes({ expandedIcon: "fas fa-angle-down" });
         }
     }, []);
-    
+
     const insertAccodionItem = (accordionChildCount) => {
         return times(accordionChildCount, (n) => [
             "frontis-blocks/accordion-item",
@@ -110,15 +111,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     };
 
 
-    
+
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <div {...blockProps}>
                 <div
@@ -149,6 +152,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

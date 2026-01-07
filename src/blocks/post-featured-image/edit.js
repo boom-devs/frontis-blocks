@@ -1,11 +1,13 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect } from "@wordpress/element";
+import { useEffect, lazy, Suspense } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
-import Inspector from "./inspector";
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		isLink,
 		rel,
 		linkTarget,
@@ -25,7 +27,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			featuredImageDesktopSwitcher && "fb-desktop-responsive"
 		} ${featuredImageTabletSwitcher && "fb-tablet-responsive"} ${
 			featuredImageMobileSwitcher && "fb-mobile-responsive"
-		}`,
+			}`,
 	});
 
 	useEffect(() => {
@@ -94,11 +96,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				<div className={imageWrapperClasses} id={wrapperId || undefined}>
@@ -134,6 +138,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

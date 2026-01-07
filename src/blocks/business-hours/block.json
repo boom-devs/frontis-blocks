@@ -1,11 +1,11 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "frontis-blocks/timezone",
+	"name": "frontis-blocks/business-hours",
 	"version": "1.0.0",
-	"title": "Timezone",
+	"title": "Business Hours",
 	"category": "frontis-blocks",
-	"description": "Add a timezone selector",
+	"description": "Add a business hours selector",
 	"example": {},
 	"supports": {
 		"html": false,

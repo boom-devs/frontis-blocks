@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Utils\Helper;
 
 /* ---------- helpers ---------- */
@@ -54,8 +58,55 @@ if ( ! function_exists('fb_humanize_date') ) {
 		foreach ( $units as $u => $s ) {
 			$v = floor( $abs / $s );
 			if ( $v >= 1 ) {
-				return $diff >= 0 ? sprintf( _n( '%d '.$u.' ago', '%d '.$u.'s ago', $v, 'frontis-blocks' ), $v )
-				                  : sprintf( _n( 'in %d '.$u, 'in %d '.$u.'s', $v, 'frontis-blocks' ), $v );
+				if ( $diff >= 0 ) {
+					switch ( $u ) {
+						case 'year':
+							/* translators: %d: number of years */
+							return sprintf( _n( '%d year ago', '%d years ago', $v, 'frontis-blocks' ), $v );
+						case 'month':
+							/* translators: %d: number of months */
+							return sprintf( _n( '%d month ago', '%d months ago', $v, 'frontis-blocks' ), $v );
+						case 'week':
+							/* translators: %d: number of weeks */
+							return sprintf( _n( '%d week ago', '%d weeks ago', $v, 'frontis-blocks' ), $v );
+						case 'day':
+							/* translators: %d: number of days */
+							return sprintf( _n( '%d day ago', '%d days ago', $v, 'frontis-blocks' ), $v );
+						case 'hour':
+							/* translators: %d: number of hours */
+							return sprintf( _n( '%d hour ago', '%d hours ago', $v, 'frontis-blocks' ), $v );
+						case 'minute':
+							/* translators: %d: number of minutes */
+							return sprintf( _n( '%d minute ago', '%d minutes ago', $v, 'frontis-blocks' ), $v );
+						case 'second':
+							/* translators: %d: number of seconds */
+							return sprintf( _n( '%d second ago', '%d seconds ago', $v, 'frontis-blocks' ), $v );
+					}
+				} else {
+					switch ( $u ) {
+						case 'year':
+							/* translators: %d: number of years */
+							return sprintf( _n( 'in %d year', 'in %d years', $v, 'frontis-blocks' ), $v );
+						case 'month':
+							/* translators: %d: number of months */
+							return sprintf( _n( 'in %d month', 'in %d months', $v, 'frontis-blocks' ), $v );
+						case 'week':
+							/* translators: %d: number of weeks */
+							return sprintf( _n( 'in %d week', 'in %d weeks', $v, 'frontis-blocks' ), $v );
+						case 'day':
+							/* translators: %d: number of days */
+							return sprintf( _n( 'in %d day', 'in %d days', $v, 'frontis-blocks' ), $v );
+						case 'hour':
+							/* translators: %d: number of hours */
+							return sprintf( _n( 'in %d hour', 'in %d hours', $v, 'frontis-blocks' ), $v );
+						case 'minute':
+							/* translators: %d: number of minutes */
+							return sprintf( _n( 'in %d minute', 'in %d minutes', $v, 'frontis-blocks' ), $v );
+						case 'second':
+							/* translators: %d: number of seconds */
+							return sprintf( _n( 'in %d second', 'in %d seconds', $v, 'frontis-blocks' ), $v );
+					}
+				}
 			}
 		}
 		return __( 'just now', 'frontis-blocks' );
@@ -465,7 +516,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 
 /* ---------- render ---------- */
 ?>
-<div <?php echo $wrapperAttributes; ?>>
+<div <?php echo $wrapperAttributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 	<?php
 		$containerWrapperClasses = trim('fb-parent-wrapper fb-dual-button-container ' . $blockID . ' ' . $dualButtonGlobalWraperClass);
 		$flexDirWrapper  = ($buttonsDirection === 'vertical') ? 'row' : 'column'; 
@@ -481,7 +532,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 				<a
 					class="fb-advanced-button fb-dual-button-one"
 					href="<?php echo esc_url( $btnOneHrefFinal ); ?>"
-					<?php echo $btnOneTargetAttr; ?>
+					<?php echo $btnOneTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					style="flex-direction: <?php echo esc_attr( $btnOneFlexDir ); ?>;"
 				>
 					<span class="fb-advanced-button-text">
@@ -490,7 +541,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonIcon; ?>
+								<?php echo $frontendButtonIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -509,7 +560,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 				<a
 					class="fb-advanced-button fb-dual-button-two"
 					href="<?php echo esc_url( $btnTwoHrefFinal ); ?>"
-					<?php echo $btnTwoTargetAttr; ?>
+					<?php echo $btnTwoTargetAttr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 					style="flex-direction: <?php echo esc_attr( $btnTwoFlexDir ); ?>;"
 				>
 					<span class="fb-advanced-button-text">
@@ -518,7 +569,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonTwoIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonTwoIcon; ?>
+								<?php echo $frontendButtonTwoIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>

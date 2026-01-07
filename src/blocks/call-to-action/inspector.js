@@ -45,7 +45,7 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
@@ -218,7 +218,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		boxBgHoverColor,
 		mediaSize,
 		mediaSizeUnits,
-		
+
 		btnOneBorderUnits,
 		btnOneDesktopBorder,
 		btnOneTabBorder,
@@ -461,7 +461,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		dynamicBtnOneTermsTaxonomy,
 		dynamicBtnOneTermsSeparator,
-		dynamicBtnOneEnableLink,	
+		dynamicBtnOneEnableLink,
 		dynamicBtnOneLinkSource,
 		/** End Dynamic Btn One Text */
 
@@ -493,7 +493,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	
+
 	useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
@@ -512,19 +512,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	};
 
 	/**
-     * Generate SVG Icons for Icon
-     */
+	 * Generate SVG Icons for Icon
+	 */
 	useEffect(() => {
 		setAttributes({
-			btnFrontendIcon: generateSvgIcon(btnIcon), 
-			btnTwoFrontendIcon: generateSvgIcon(btnTwoIcon), 
+			btnFrontendIcon: generateSvgIcon(btnIcon),
+			btnTwoFrontendIcon: generateSvgIcon(btnTwoIcon),
 		})
 	}, [btnIcon, btnTwoIcon]);
 
 	// Check if Pro is active
 	const getProActiveState = getProActive();
 	useEffect(() => {
-		if (!getProActiveState) { 
+		if (!getProActiveState) {
 			setAttributes({
 				dynamicTitleEnabled: false,
 				dynamicTitleEnableLink: false,
@@ -539,8 +539,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [getProActiveState]);
 
 	/**
-     * Toggle Controls for Dynamic Content
-     */
+	 * Toggle Controls for Dynamic Content
+	 */
 	const dynamicTitleContentToggleControls = getProToggleControls({
 		hook: 'frontisblocks-call-to-action-title-toggle-controls',
 		attributes,
@@ -548,7 +548,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dynamicAttr: 'dynamicTitleEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'call-to-action-dynamic-title-content',
-		isProActive : getProActiveState
+		isProActive: getProActiveState
 	});
 
 	const dynamicDescriptionContentToggleControls = getProToggleControls({
@@ -558,27 +558,27 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		dynamicAttr: 'dynamicDescriptionEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'call-to-action-dynamic-description-content',
-		isProActive : getProActiveState
+		isProActive: getProActiveState
 	});
 
-	const dynamicBtnOneContentToggleControls = getProToggleControls({ 
+	const dynamicBtnOneContentToggleControls = getProToggleControls({
 		hook: 'frontisblocks-call-to-action-btn-one-toggle-controls',
 		attributes,
 		setAttributes,
 		dynamicAttr: 'dynamicBtnOneEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'call-to-action-dynamic-btn-one-content',
-		isProActive : getProActiveState
+		isProActive: getProActiveState
 	});
 
-	const dynamicBtnTwoContentToggleControls = getProToggleControls({ 
+	const dynamicBtnTwoContentToggleControls = getProToggleControls({
 		hook: 'frontisblocks-call-to-action-btn-two-toggle-controls',
 		attributes,
 		setAttributes,
 		dynamicAttr: 'dynamicBtnTwoEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'call-to-action-dynamic-btn-two-content',
-		isProActive : getProActiveState
+		isProActive: getProActiveState
 	});
 
 	/** Start Heading padding */
@@ -659,7 +659,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const headingDesktopPaddingWidth = `${headingDesktopPadding?.top}${headingPaddingUnits?.Desktop} ${headingDesktopPadding?.right}${headingPaddingUnits?.Desktop} ${headingDesktopPadding?.bottom}${headingPaddingUnits?.Desktop} ${headingDesktopPadding?.left}${headingPaddingUnits?.Desktop}`;
 	const headingTabletPaddingWidth = `${headingTabPadding?.top}${headingPaddingUnits?.Tablet} ${headingTabPadding?.right}${headingPaddingUnits?.Tablet} ${headingTabPadding?.bottom}${headingPaddingUnits?.Tablet} ${headingTabPadding?.left}${headingPaddingUnits?.Tablet}`;
 	const headingMobilePaddingWidth = `${headingMobilePadding?.top}${headingPaddingUnits?.Mobile} ${headingMobilePadding?.right}${headingPaddingUnits?.Mobile} ${headingMobilePadding?.bottom}${headingPaddingUnits?.Mobile} ${headingMobilePadding?.left}${headingPaddingUnits?.Mobile}`;
-	/** End Padding */	
+	/** End Padding */
 
 	/** Start Heading margin */
 	const handleHeadingMarginUnitChange = (event, position) => {
@@ -901,7 +901,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const headingMobileBorderRadiusWidth = `${headingMobileBorderRadius?.top}${headingBorderRadiusUnits?.Mobile} ${headingMobileBorderRadius?.right}${headingBorderRadiusUnits?.Mobile} ${headingMobileBorderRadius?.bottom}${headingBorderRadiusUnits?.Mobile} ${headingMobileBorderRadius?.left}${headingBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	
+
 	/** Start Description padding */
 	const handleDescPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -2080,43 +2080,43 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${DesktopMargin && globalMarginDesktop?.top ? `margin: ${DesktopMargin};` : ""}
 				${globalBorder ? `border: ${globalBorder};` : ""}
 				${BorderDesktopWidth && globalBorderDesktop?.top ? `border-width: ${BorderDesktopWidth};` : ""}
-				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop?.top ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : "" }
-				${globalBorderColor ? `border-color: ${globalBorderColor};` : "" }
-				${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : "" }
-				${ctaGlobalBackgroundType === "gradient" 
-					? (ctaGlobalCustomGradientSwitcher && ctaGlobalCustomGradientInputValue 
-						? `background: ${ctaGlobalCustomGradientInputValue};` 
-						: (ctaGlobalGradientColor 
-							? `background: ${ctaGlobalGradientColor};` 
-							: `background: ${ctaGlobalClassicColor};`))
-					: (ctaGlobalBackgroundImageUrl && ctaGlobalBackgroundImageUrl !== "null" 
-						? `
-							${ctaGlobalBackgroundImageUrl ? `background-image: url(${ctaGlobalBackgroundImageUrl});` : "" }
-							${ctaGlobalBackgroundImagePosition ? `background-position: ${ctaGlobalBackgroundImagePosition};` : "" }
-							${ctaGlobalBackgroundImageAttachment ? `background-attachment: ${ctaGlobalBackgroundImageAttachment};` : "" }
-							${ctaGlobalBackgroundImageRepeat ? `background-repeat: ${ctaGlobalBackgroundImageRepeat};` : "" }
-							${ctaGlobalBackgroundImageSize ? `background-size: ${ctaGlobalBackgroundImageSize};` : "" } 
+				${BorderRadiusDesktopWidth && globalBorderRadiusDesktop?.top ? `border-radius: ${BorderRadiusDesktopWidth} !important;` : ""}
+				${globalBorderColor ? `border-color: ${globalBorderColor};` : ""}
+				${globalBoxShadowCssValue ? `box-shadow: ${globalBoxShadowCssValue};` : ""}
+				${ctaGlobalBackgroundType === "gradient"
+				? (ctaGlobalCustomGradientSwitcher && ctaGlobalCustomGradientInputValue
+					? `background: ${ctaGlobalCustomGradientInputValue};`
+					: (ctaGlobalGradientColor
+						? `background: ${ctaGlobalGradientColor};`
+						: `background: ${ctaGlobalClassicColor};`))
+				: (ctaGlobalBackgroundImageUrl && ctaGlobalBackgroundImageUrl !== "null"
+					? `
+							${ctaGlobalBackgroundImageUrl ? `background-image: url(${ctaGlobalBackgroundImageUrl});` : ""}
+							${ctaGlobalBackgroundImagePosition ? `background-position: ${ctaGlobalBackgroundImagePosition};` : ""}
+							${ctaGlobalBackgroundImageAttachment ? `background-attachment: ${ctaGlobalBackgroundImageAttachment};` : ""}
+							${ctaGlobalBackgroundImageRepeat ? `background-repeat: ${ctaGlobalBackgroundImageRepeat};` : ""}
+							${ctaGlobalBackgroundImageSize ? `background-size: ${ctaGlobalBackgroundImageSize};` : ""} 
 						`
-						: ctaGlobalClassicColor ? `background: ${ctaGlobalClassicColor};` : '')
-				}
+					: ctaGlobalClassicColor ? `background: ${ctaGlobalClassicColor};` : '')
+			}
 				transition: all .3s ease-in-out;
 			}
 
 			.fb-cta-content-wrapper.${blockID}:hover {
-				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor };` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
-				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : "" }
-				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : "" }
-				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : "" }
-				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : "" }
-				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : "" } ` 
-				: hoverClassicColor ? `background: ${hoverClassicColor};` : '' }
-				${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : "" }
-				${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : "" }
+				${hoverBackgroundType === "gradient" ? `background: ${hoverCustomGradientSwitcher && hoverCustomGradientInputValue ? hoverCustomGradientInputValue : hoverGradientColor};` : hoverBackgroundImageUrl && hoverBackgroundImageUrl !== "null" ? `
+				${hoverBackgroundImageUrl ? `background-image: url(${hoverBackgroundImageUrl});` : ""}
+				${hoverBackgroundImagePosition ? `background-position: ${hoverBackgroundImagePosition};` : ""}
+				${hoverBackgroundImageAttachment ? `background-attachment: ${hoverBackgroundImageAttachment};` : ""}
+				${hoverBackgroundImageRepeat ? `background-repeat: ${hoverBackgroundImageRepeat};` : ""}
+				${hoverBackgroundImageSize ? `background-size: ${hoverBackgroundImageSize};` : ""} `
+				: hoverClassicColor ? `background: ${hoverClassicColor};` : ''}
+				${globalHoverBoxShadowCssValue ? `box-shadow: ${globalHoverBoxShadowCssValue};` : ""}
+				${globalBorderHoverColor ? `border-color: ${globalBorderHoverColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-heading,
 			.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
 				${headingColor ? `color: ${headingColor};` : ""}
-				${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : "" }
+				${Heading_Background_Color ? `background-color: ${Heading_Background_Color};` : ""}
 
 				${headingGlobalTypoSwitcher?.fontFamily === true && headingGlobalTypographyData?.fontFamily ? `font-family: ${headingGlobalTypographyData?.fontFamily};` : ''}
 				${headingGlobalTypoSwitcher?.fontSize === true && headingGlobalTypographyData?.fontSize ? `font-size: ${headingGlobalTypographyData?.fontSize};` : ''}
@@ -2147,7 +2147,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID}:hover .fb-heading,
 			.fb-cta-content-wrapper.${blockID}:hover .fb-title-dynamic-link {
 				${headingHoverColor ? `color: ${headingHoverColor};` : ""}
-				${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : "" }
+				${headingBorderHoverColor ? `border-color: ${headingBorderHoverColor};` : ""}
 			}
 			
 			.fb-cta-content-wrapper.${blockID} .fb-description,
@@ -2178,8 +2178,17 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			.fb-cta-content-wrapper.${blockID}:hover .fb-description-dynamic-link {
 				${SubHeadingHoverColor ? `color: ${SubHeadingHoverColor};` : ""}
 			}
+			.fb-cta-content-wrapper.${blockID} .fb-cta-buttons-wrapper{
+				align-items: center;
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px
+			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-				${buttonBgColor ? `background-color: ${buttonBgColor};` : "" }
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
 				${buttonOneDesktopPadding && btnOneDesktopPadding?.top ? `padding: ${buttonOneDesktopPadding};` : ''}
 				${btnOneDesktopMarginWidth && btnOneDesktopMargin?.top ? `margin: ${btnOneDesktopMarginWidth};` : ''}
 				${infoButtonBorder ? `border: ${infoButtonBorder};` : ""}
@@ -2213,11 +2222,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonTextHoverColor ? `color: ${buttonTextHoverColor};` : ""}	
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper:hover {
-				${buttonBgHoverColor ? `background-color: ${buttonBgHoverColor};` : "" }
+				${buttonBgHoverColor ? `background-color: ${buttonBgHoverColor};` : ""}
 				${infoButtonHoverBorderColor ? `border-color: ${infoButtonHoverBorderColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-				${ buttonTwoBgColor ? `background-color: ${buttonTwoBgColor};` : "" }
+				display: inline-flex;
+				align-items: center;
+				gap: 10px;
+				${buttonTwoBgColor ? `background-color: ${buttonTwoBgColor};` : ""}
 				${buttonTwoDesktopPadding && btnTwoDesktopPadding?.top ? `padding: ${buttonTwoDesktopPadding};` : ''}
 				${btnTwoDesktopMarginWidth && btnTwoDesktopMargin?.top ? `margin: ${btnTwoDesktopMarginWidth};` : ''}
 				${btnTwoBorder ? `border: ${btnTwoBorder};` : ""}
@@ -2236,40 +2248,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${buttonTwoGlobalTypoSwitcher?.letterSpacing === true && buttonTwoGlobalTypographyData?.letterSpacing ? `letter-spacing: ${buttonTwoGlobalTypographyData?.letterSpacing};` : ''}
 				${buttonTwoGlobalTypoSwitcher?.lineHeight === true && buttonTwoGlobalTypographyData?.lineHeight ? `line-height: ${buttonTwoGlobalTypographyData?.lineHeight};` : ''}
 				
-				${buttonTwoGlobalTypoSwitcher?.fontFamily === false && buttonTwoFontFamily && buttonTwoFontFamily !== "Default" ? `font-family: ${buttonTwoFontFamily};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Desktop && buttonTwoFontSizeUnits?.Desktop ? `font-size: ${buttonTwoFontSize?.Desktop}${buttonTwoFontSizeUnits?.Desktop};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.fontWeight === false && buttonTwoFontWeight ? `font-weight: ${buttonTwoFontWeight};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.fontStyle === false && buttonTwoFontStyle ? `font-style: ${buttonTwoFontStyle};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.textTransform === false && buttonTwoTextTransform ? `text-transform: ${buttonTwoTextTransform};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.textDecoration === false && buttonTwoTextDecoration ? `text-decoration: ${buttonTwoTextDecoration};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Desktop && buttonTwoLetterSpacingUnits?.Desktop ? `letter-spacing: ${buttonTwoLetterSpacing?.Desktop}${buttonTwoLetterSpacingUnits?.Desktop};` : "" }
-				${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Desktop && buttonTwoLineHeightUnits?.Desktop ? `line-height: ${buttonTwoLineHeight?.Desktop}${buttonTwoLineHeightUnits?.Desktop};` : "" }
+				${buttonTwoGlobalTypoSwitcher?.fontFamily === false && buttonTwoFontFamily && buttonTwoFontFamily !== "Default" ? `font-family: ${buttonTwoFontFamily};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Desktop && buttonTwoFontSizeUnits?.Desktop ? `font-size: ${buttonTwoFontSize?.Desktop}${buttonTwoFontSizeUnits?.Desktop};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.fontWeight === false && buttonTwoFontWeight ? `font-weight: ${buttonTwoFontWeight};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.fontStyle === false && buttonTwoFontStyle ? `font-style: ${buttonTwoFontStyle};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.textTransform === false && buttonTwoTextTransform ? `text-transform: ${buttonTwoTextTransform};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.textDecoration === false && buttonTwoTextDecoration ? `text-decoration: ${buttonTwoTextDecoration};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Desktop && buttonTwoLetterSpacingUnits?.Desktop ? `letter-spacing: ${buttonTwoLetterSpacing?.Desktop}${buttonTwoLetterSpacingUnits?.Desktop};` : ""}
+				${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Desktop && buttonTwoLineHeightUnits?.Desktop ? `line-height: ${buttonTwoLineHeight?.Desktop}${buttonTwoLineHeightUnits?.Desktop};` : ""}
 				
-				${buttonTwoTextColor ? `color: ${buttonTwoTextColor};` : "" }
+				${buttonTwoTextColor ? `color: ${buttonTwoTextColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
-				${ buttonTwoTextHoverColor ? `color: ${buttonTwoTextHoverColor};` : "" }
+				${buttonTwoTextHoverColor ? `color: ${buttonTwoTextHoverColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover {
-				${buttonTwoBgHoverColor ? `background-color: ${buttonTwoBgHoverColor};` : "" }
+				${buttonTwoBgHoverColor ? `background-color: ${buttonTwoBgHoverColor};` : ""}
 				${btnTwoHoverBorderColor ? `border-color: ${btnTwoHoverBorderColor};` : ""}
 			}
 			
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
 				${btnIconSize?.Desktop && btnIconSizeUnits?.Desktop ? `width: ${btnIconSize?.Desktop}${btnIconSizeUnits?.Desktop};` : ""}
-				${btnIconColor ? `fill: ${btnIconColor};` : "" }
+				${btnIconColor ? `fill: ${btnIconColor};` : ""}
 				${btnIconRotate?.Desktop ? `transform: rotate(${btnIconRotate?.Desktop}deg);` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper:hover .fb-btn-icon-wrapper svg {
-				${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : "" }
+				${btnIconHoverColor ? `fill: ${btnIconHoverColor};` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-btn-icon-wrapper svg {
 				${btnTwoIconSize?.Desktop && btnTwoIconSizeUnits?.Desktop ? `width: ${btnTwoIconSize?.Desktop}${btnTwoIconSizeUnits?.Desktop};` : ""}
-				${btnTwoIconColor ? `fill: ${btnTwoIconColor};` : "" }
+				${btnTwoIconColor ? `fill: ${btnTwoIconColor};` : ""}
 				${btnTwoIconRotate?.Desktop ? `transform: rotate(${btnTwoIconRotate?.Desktop}deg);` : ""}
 			}
 			.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper:hover .fb-btn-icon-wrapper svg {
-				${btnTwoIconHoverColor ? `fill: ${btnTwoIconHoverColor};` : "" }
+				${btnTwoIconHoverColor ? `fill: ${btnTwoIconHoverColor};` : ""}
 			}
 			@media only screen and (max-width: 1024px) {
 				.fb-cta-main-wrapper.${blockID} {
@@ -2284,7 +2296,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${TabletPadding && globalPaddingTablet?.top ? `padding: ${TabletPadding};` : ""}
 					${TabletMargin && globalMarginTablet?.top ? `margin: ${TabletMargin};` : ""}
 					${BorderTabletWidth && globalBorderTablet?.top ? `border-width: ${BorderTabletWidth};` : ""}
-					${BorderRadiusTabletWidth && globalBorderRadiusTablet?.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : "" }
+					${BorderRadiusTabletWidth && globalBorderRadiusTablet?.top ? `border-radius: ${BorderRadiusTabletWidth} !important;` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading,
 				.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
@@ -2306,9 +2318,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 				
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-cta-button {
-					${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Tablet && buttonFontSizeUnits?.Tablet ? `font-size: ${buttonFontSize?.Tablet}${buttonFontSizeUnits?.Tablet};` : "" }
-					${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Tablet && buttonLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonLetterSpacing?.Tablet}${buttonLetterSpacingUnits?.Tablet};` : "" }
-					${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Tablet && buttonLineHeightUnits?.Tablet ? `line-height: ${buttonLineHeight?.Tablet}${buttonLineHeightUnits?.Tablet};` : "" }
+					${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Tablet && buttonFontSizeUnits?.Tablet ? `font-size: ${buttonFontSize?.Tablet}${buttonFontSizeUnits?.Tablet};` : ""}
+					${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Tablet && buttonLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonLetterSpacing?.Tablet}${buttonLetterSpacingUnits?.Tablet};` : ""}
+					${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Tablet && buttonLineHeightUnits?.Tablet ? `line-height: ${buttonLineHeight?.Tablet}${buttonLineHeightUnits?.Tablet};` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
 					${buttonOneTabletPadding && btnOneTabPadding?.top ? `padding: ${buttonOneTabletPadding};` : ''}
@@ -2318,9 +2330,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				}
 
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button {
-					${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Tablet && buttonTwoFontSizeUnits?.Tablet ? `font-size: ${buttonTwoFontSize?.Tablet}${buttonTwoFontSizeUnits?.Tablet};` : "" }
-					${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Tablet && buttonTwoLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonTwoLetterSpacing?.Tablet}${buttonTwoLetterSpacingUnits?.Tablet};` : "" }
-					${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Tablet && buttonTwoLineHeightUnits?.Tablet ? `line-height: ${buttonTwoLineHeight?.Tablet}${buttonTwoLineHeightUnits?.Tablet};` : "" }
+					${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Tablet && buttonTwoFontSizeUnits?.Tablet ? `font-size: ${buttonTwoFontSize?.Tablet}${buttonTwoFontSizeUnits?.Tablet};` : ""}
+					${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Tablet && buttonTwoLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonTwoLetterSpacing?.Tablet}${buttonTwoLetterSpacingUnits?.Tablet};` : ""}
+					${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Tablet && buttonTwoLineHeightUnits?.Tablet ? `line-height: ${buttonTwoLineHeight?.Tablet}${buttonTwoLineHeightUnits?.Tablet};` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
 					${buttonTwoTabletPadding && btnTwoTabPadding?.top ? `padding: ${buttonTwoTabletPadding};` : ''}
@@ -2350,7 +2362,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${MobilePadding && globalPaddingMobile?.top ? `padding: ${MobilePadding};` : ""}
 					${MobileMargin && globalMarginMobile?.top ? `margin: ${MobileMargin};` : ""}
 					${BorderMobileWidth && globalBorderMobile?.top ? `border-width: ${BorderMobileWidth};` : ""}
-					${BorderRadiusMobileWidth && globalBorderRadiusMobile?.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : "" }
+					${BorderRadiusMobileWidth && globalBorderRadiusMobile?.top ? `border-radius: ${BorderRadiusMobileWidth} !important;` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-heading,
 				.fb-cta-content-wrapper.${blockID} .fb-title-dynamic-link {
@@ -2371,9 +2383,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${SubHeadingGlobalTypoSwitcher?.lineHeight === false && SubHeadingLineHeight?.Mobile && SubHeadingLineHeightUnits?.Mobile ? `line-height: ${SubHeadingLineHeight?.Mobile}${SubHeadingLineHeightUnits?.Mobile};` : ''}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-cta-button {
-					${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Mobile && buttonFontSizeUnits?.Mobile ? `font-size: ${buttonFontSize?.Mobile}${buttonFontSizeUnits?.Mobile};` : "" }
-					${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Mobile && buttonLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonLetterSpacing?.Mobile}${buttonLetterSpacingUnits?.Mobile};` : "" }
-					${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Mobile && buttonLineHeightUnits?.Mobile ? `line-height: ${buttonLineHeight?.Mobile}${buttonLineHeightUnits?.Mobile};` : "" }
+					${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Mobile && buttonFontSizeUnits?.Mobile ? `font-size: ${buttonFontSize?.Mobile}${buttonFontSizeUnits?.Mobile};` : ""}
+					${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Mobile && buttonLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonLetterSpacing?.Mobile}${buttonLetterSpacingUnits?.Mobile};` : ""}
+					${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Mobile && buttonLineHeightUnits?.Mobile ? `line-height: ${buttonLineHeight?.Mobile}${buttonLineHeightUnits?.Mobile};` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
 					${buttonOneMobilePadding && btnOneMobilePadding?.top ? `padding: ${buttonOneMobilePadding};` : ''}
@@ -2382,9 +2394,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${btnOneMobileBorderRadiusWidth && btnOneMobileBorderRadius?.top ? `border-radius: ${btnOneMobileBorderRadiusWidth};` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button {
-					${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Mobile && buttonTwoFontSizeUnits?.Mobile ? `font-size: ${buttonTwoFontSize?.Mobile}${buttonTwoFontSizeUnits?.Mobile};` : "" }
-					${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Mobile && buttonTwoLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonTwoLetterSpacing?.Mobile}${buttonTwoLetterSpacingUnits?.Mobile};` : "" }
-					${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Mobile && buttonTwoLineHeightUnits?.Mobile ? `line-height: ${buttonTwoLineHeight?.Mobile}${buttonTwoLineHeightUnits?.Mobile};` : "" }
+					${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Mobile && buttonTwoFontSizeUnits?.Mobile ? `font-size: ${buttonTwoFontSize?.Mobile}${buttonTwoFontSizeUnits?.Mobile};` : ""}
+					${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Mobile && buttonTwoLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonTwoLetterSpacing?.Mobile}${buttonTwoLetterSpacingUnits?.Mobile};` : ""}
+					${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Mobile && buttonTwoLineHeightUnits?.Mobile ? `line-height: ${buttonTwoLineHeight?.Mobile}${buttonTwoLineHeightUnits?.Mobile};` : ""}
 				}
 				.fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
 					${buttonTwoMobilePadding && btnTwoMobilePadding?.top ? `padding: ${buttonTwoMobilePadding};` : ''}
@@ -2618,8 +2630,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [ctaContentStyle, customCss]);
 
-	const editorStyle = `${ctaContentStyle}${customCss}`.replace(/\s+/g, ' ').trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -2631,7 +2641,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					title={__("Title", "frontis-block")}
 					initialOpen={false}
 				>
-					
+
 					<FB_AlignmentControl
 						label={__("Title Alignment", "frontis-blocks")}
 						globalAlignment={Alignment}
@@ -2645,12 +2655,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 					{dynamicTitleContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
-	
+						<div key={control.key || index}>{control.comp}</div>
+					))}
+
 					<DynamicDataSourceControl
 						enabled={dynamicTitleEnabled}
-						
+
 						source={dynamicTitleSource}
 						setSource={(value) => setAttributes({ dynamicTitleSource: value })}
 						postId={dynamicTitlePostId}
@@ -2677,9 +2687,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						commentsZeroText={dynamicTitleCommentsZeroText}
 						setCommentsZeroText={(value) => setAttributes({ dynamicTitleCommentsZeroText: value })}
 						commentsOneText={dynamicTitleCommentsOneText}
-						setCommentsOneText={(value) =>setAttributes({ dynamicTitleCommentsOneText: value })}
+						setCommentsOneText={(value) => setAttributes({ dynamicTitleCommentsOneText: value })}
 						commentsManyText={dynamicTitleCommentsManyText}
-						setCommentsManyText={(value) =>setAttributes({ dynamicTitleCommentsManyText: value })}
+						setCommentsManyText={(value) => setAttributes({ dynamicTitleCommentsManyText: value })}
 
 						termsTaxonomy={dynamicTitleTermsTaxonomy}
 						setTermsTaxonomy={(value) => setAttributes({ dynamicTitleTermsTaxonomy: value })}
@@ -2723,7 +2733,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{descriptionSwitcher && (
 						<>
-							
+
 							<FB_AlignmentControl
 								label={__("Alignment", "frontis-blocks")}
 								globalAlignment={descAlignment}
@@ -2733,10 +2743,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							{dynamicDescriptionContentToggleControls.map((control, index) => (
 								<div key={control.key || index}>{control.comp}</div>
 							))}
-			
+
 							<DynamicDataSourceControl
 								enabled={dynamicDescriptionEnabled}
-								
+
 								source={dynamicDescriptionSource}
 								setSource={(value) => setAttributes({ dynamicDescriptionSource: value })}
 								postId={dynamicDescriptionPostId}
@@ -2763,9 +2773,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								commentsZeroText={dynamicDescriptionCommentsZeroText}
 								setCommentsZeroText={(value) => setAttributes({ dynamicDescriptionCommentsZeroText: value })}
 								commentsOneText={dynamicDescriptionCommentsOneText}
-								setCommentsOneText={(value) =>setAttributes({ dynamicDescriptionCommentsOneText: value })}
+								setCommentsOneText={(value) => setAttributes({ dynamicDescriptionCommentsOneText: value })}
 								commentsManyText={dynamicDescriptionCommentsManyText}
-								setCommentsManyText={(value) =>setAttributes({ dynamicDescriptionCommentsManyText: value })}
+								setCommentsManyText={(value) => setAttributes({ dynamicDescriptionCommentsManyText: value })}
 
 								termsTaxonomy={dynamicDescriptionTermsTaxonomy}
 								setTermsTaxonomy={(value) => setAttributes({ dynamicDescriptionTermsTaxonomy: value })}
@@ -2773,7 +2783,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								setTermsSeparator={(value) => setAttributes({ dynamicDescriptionTermsSeparator: value })}
 							/>
 
-							{dynamicDescriptionEnabled && ( 
+							{dynamicDescriptionEnabled && (
 								<DynamicDataLinkControl
 									enableLink={dynamicDescriptionEnableLink}
 									setEnableLink={(value) => setAttributes({ dynamicDescriptionEnableLink: value })}
@@ -2782,7 +2792,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								/>
 							)}
 
-							{!dynamicDescriptionEnabled && ( 
+							{!dynamicDescriptionEnabled && (
 								<TextareaControl
 									label={__("Description Text", "frontis-block")}
 									value={Sub_Heading_Text}
@@ -2813,7 +2823,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{ctaBtnOneSwitcher && (
 						<>
-							
+
 							<FB_AlignmentControl
 								label={__("Alignment", "frontis-blocks")}
 								globalAlignment={buttonAlignment}
@@ -2823,10 +2833,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							{dynamicBtnOneContentToggleControls.map((control, index) => (
 								<div key={control.key || index}>{control.comp}</div>
 							))}
-			
+
 							<DynamicDataSourceControl
 								enabled={dynamicBtnOneEnabled}
-								
+
 								source={dynamicBtnOneSource}
 								setSource={(value) => setAttributes({ dynamicBtnOneSource: value })}
 								postId={dynamicBtnOnePostId}
@@ -2853,9 +2863,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								commentsZeroText={dynamicBtnOneCommentsZeroText}
 								setCommentsZeroText={(value) => setAttributes({ dynamicBtnOneCommentsZeroText: value })}
 								commentsOneText={dynamicBtnOneCommentsOneText}
-								setCommentsOneText={(value) =>setAttributes({ dynamicBtnOneCommentsOneText: value })}
+								setCommentsOneText={(value) => setAttributes({ dynamicBtnOneCommentsOneText: value })}
 								commentsManyText={dynamicBtnOneCommentsManyText}
-								setCommentsManyText={(value) =>setAttributes({ dynamicBtnOneCommentsManyText: value })}
+								setCommentsManyText={(value) => setAttributes({ dynamicBtnOneCommentsManyText: value })}
 
 								termsTaxonomy={dynamicBtnOneTermsTaxonomy}
 								setTermsTaxonomy={(value) => setAttributes({ dynamicBtnOneTermsTaxonomy: value })}
@@ -2863,7 +2873,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								setTermsSeparator={(value) => setAttributes({ dynamicBtnOneTermsSeparator: value })}
 							/>
 
-							{!dynamicBtnOneEnabled && ( 
+							{!dynamicBtnOneEnabled && (
 								<TextareaControl
 									label={__("Button Text", "frontis-block")}
 									value={info_Button_Text}
@@ -2898,7 +2908,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									/>
 								</>
 							)}
-							{dynamicBtnOneEnabled && ( 
+							{dynamicBtnOneEnabled && (
 								<DynamicDataLinkControl
 									enableLink={dynamicBtnOneEnableLink}
 									setEnableLink={(value) => setAttributes({ dynamicBtnOneEnableLink: value })}
@@ -2943,10 +2953,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							{dynamicBtnTwoContentToggleControls.map((control, index) => (
 								<div key={control.key || index}>{control.comp}</div>
 							))}
-			
+
 							<DynamicDataSourceControl
 								enabled={dynamicBtnTwoEnabled}
-								
+
 								source={dynamicBtnTwoSource}
 								setSource={(value) => setAttributes({ dynamicBtnTwoSource: value })}
 								postId={dynamicBtnTwoPostId}
@@ -2973,9 +2983,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								commentsZeroText={dynamicBtnTwoCommentsZeroText}
 								setCommentsZeroText={(value) => setAttributes({ dynamicBtnTwoCommentsZeroText: value })}
 								commentsOneText={dynamicBtnTwoCommentsOneText}
-								setCommentsOneText={(value) =>setAttributes({ dynamicBtnTwoCommentsOneText: value })}
+								setCommentsOneText={(value) => setAttributes({ dynamicBtnTwoCommentsOneText: value })}
 								commentsManyText={dynamicBtnTwoCommentsManyText}
-								setCommentsManyText={(value) =>setAttributes({ dynamicBtnTwoCommentsManyText: value })}
+								setCommentsManyText={(value) => setAttributes({ dynamicBtnTwoCommentsManyText: value })}
 
 								termsTaxonomy={dynamicBtnTwoTermsTaxonomy}
 								setTermsTaxonomy={(value) => setAttributes({ dynamicBtnTwoTermsTaxonomy: value })}
@@ -2983,7 +2993,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								setTermsSeparator={(value) => setAttributes({ dynamicBtnTwoTermsSeparator: value })}
 							/>
 
-							{!dynamicBtnTwoEnabled && ( 
+							{!dynamicBtnTwoEnabled && (
 								<TextareaControl
 									label={__("Button Text", "frontis-block")}
 									value={btnTwoText}
@@ -3018,7 +3028,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 									/>
 								</>
 							)}
-							{dynamicBtnTwoEnabled && ( 
+							{dynamicBtnTwoEnabled && (
 								<DynamicDataLinkControl
 									enableLink={dynamicBtnTwoEnableLink}
 									setEnableLink={(value) => setAttributes({ dynamicBtnTwoEnableLink: value })}
@@ -3064,9 +3074,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={headingGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							headingGlobalTypoType: value, 
-							headingGlobalTypoSwitcher: value === 'default' ? {...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							headingGlobalTypoType: value,
+							headingGlobalTypoSwitcher: value === 'default' ? { ...headingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...headingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -3074,34 +3084,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ headingGlobalTypoOption: value })}
 
 					fontFamily={headingFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ headingFontFamily: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={headingFontSize}
-					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ headingFontSize: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={headingFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ headingFontSizeUnits: value })}
 
 					fontWeight={headingFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ headingFontWeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={headingFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ headingFontStyle: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={headingTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ headingTextTransform: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={headingTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ headingTextDecoration: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={headingLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ headingLetterSpacing: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={headingLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ headingLetterSpacingUnits: value })}
 
 					lineHeight={headingLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: {...headingGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ headingLineHeight: value, headingGlobalTypoSwitcher: { ...headingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={headingLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ headingLineHeightUnits: value })}
@@ -3109,7 +3119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
-				
+
 				<FB_SwitcherControl
 					label={__("Text Color", "frontis-blocks")}
 					globalSwitcher={headingColorSwitcher}
@@ -3159,7 +3169,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleHeadingMarginCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				
+
 				<SelectControl
 					label={__("Border Style", "frontis-block")}
 					value={Heading_Border}
@@ -3204,19 +3214,19 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={handleHeadingBorderCombineBtn}
 					setAttributes={setAttributes}
 				/>
-				
+
 				<FB_Spacing
-				label={__("Border Radius", "frontis-blocks")}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleHeadingBorderRadiusUnitsHandler}
-				spacingUnits={headingBorderRadiusUnits}
-				spacingDesktop={headingDesktopBorderRadius}
-				spacingTablet={headingTabBorderRadius}
-				spacingMobile={headingMobileBorderRadius}
-				handleSpacingUnitHandler={handleHeadingBorderRadiusUnitChange}
-				spacingCombineBtn={headingBorderRadiusLink}
-				spacingCombineBtnHandler={handleHeadingBorderRadiusCombineBtn}
-				setAttributes={setAttributes}
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleHeadingBorderRadiusUnitsHandler}
+					spacingUnits={headingBorderRadiusUnits}
+					spacingDesktop={headingDesktopBorderRadius}
+					spacingTablet={headingTabBorderRadius}
+					spacingMobile={headingMobileBorderRadius}
+					handleSpacingUnitHandler={handleHeadingBorderRadiusUnitChange}
+					spacingCombineBtn={headingBorderRadiusLink}
+					spacingCombineBtnHandler={handleHeadingBorderRadiusCombineBtn}
+					setAttributes={setAttributes}
 				/>
 
 			</PanelBody>
@@ -3235,9 +3245,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						globalTypoType={SubHeadingGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								SubHeadingGlobalTypoType: value, 
-								SubHeadingGlobalTypoSwitcher: value === 'default' ? {...SubHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...SubHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								SubHeadingGlobalTypoType: value,
+								SubHeadingGlobalTypoSwitcher: value === 'default' ? { ...SubHeadingGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...SubHeadingGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -3245,34 +3255,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ SubHeadingGlobalTypoOption: value })}
 
 						fontFamily={SubHeadingFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ SubHeadingFontFamily: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ SubHeadingFontFamily: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={SubHeadingFontSize}
-						onChangeFontSize={(value) => setAttributes({ SubHeadingFontSize: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ SubHeadingFontSize: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={SubHeadingFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ SubHeadingFontSizeUnits: value })}
 
 						fontWeight={SubHeadingFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ SubHeadingFontWeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ SubHeadingFontWeight: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={SubHeadingFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ SubHeadingFontStyle: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ SubHeadingFontStyle: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={SubHeadingTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ SubHeadingTextTransform: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ SubHeadingTextTransform: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={SubHeadingTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ SubHeadingTextDecoration: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ SubHeadingTextDecoration: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={SubHeadingLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ SubHeadingLetterSpacing: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ SubHeadingLetterSpacing: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={SubHeadingLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ SubHeadingLetterSpacingUnits: value })}
 
 						lineHeight={SubHeadingLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ SubHeadingLineHeight: value, SubHeadingGlobalTypoSwitcher: {...SubHeadingGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ SubHeadingLineHeight: value, SubHeadingGlobalTypoSwitcher: { ...SubHeadingGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={SubHeadingLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ SubHeadingLineHeightUnits: value })}
@@ -3281,11 +3291,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setAttributes={setAttributes}
 					/>
 					{/*Color*/}
-					
+
 					<FB_SwitcherControl
-					label={__("Text Color", "frontis-blocks")}
-					globalSwitcher={SubHeadingColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
+						label={__("Text Color", "frontis-blocks")}
+						globalSwitcher={SubHeadingColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ SubHeadingColorSwitcher: value })}
 					/>
 
 					{SubHeadingColorSwitcher === 'normal' && (
@@ -3346,9 +3356,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						globalTypoType={buttonGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								buttonGlobalTypoType: value, 
-								buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								buttonGlobalTypoType: value,
+								buttonGlobalTypoSwitcher: value === 'default' ? { ...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -3356,34 +3366,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 						fontFamily={buttonFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={buttonFontSize}
-						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={buttonFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
 
 						fontWeight={buttonFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={buttonFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={buttonTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={buttonTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={buttonLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={buttonLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
 
 						lineHeight={buttonLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={buttonLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
@@ -3394,9 +3404,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{/*Color*/}
 					<FB_SwitcherControl
-					label={__("Text Color", "frontis-blocks")}
-					globalSwitcher={buttonColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
+						label={__("Text Color", "frontis-blocks")}
+						globalSwitcher={buttonColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
 					/>
 
 					{buttonColorSwitcher === 'normal' && (
@@ -3417,9 +3427,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					{/* Start Button Bg Color*/}
 					<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={buttonBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
+						label={__("Background Color", "frontis-blocks")}
+						globalSwitcher={buttonBgColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
 					/>
 
 					{buttonBgColorSwitcher === 'normal' && (
@@ -3443,9 +3453,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						<>
 							{/* Start Icon Color*/}
 							<FB_SwitcherControl
-							label={__("Icon Color", "frontis-blocks")}
-							globalSwitcher={btnIconColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
+								label={__("Icon Color", "frontis-blocks")}
+								globalSwitcher={btnIconColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ btnIconColorSwitcher: value })}
 							/>
 
 							{btnIconColorSwitcher === 'normal' && (
@@ -3464,31 +3474,31 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 								/>
 							)}
 							<FB_Range
-							min={0}
-							max={360}
-							label={__("Rotate Icon", "frontis-blocks")}
-							rangeValue={btnIconRotate}
-							onChangeHandler={(value) => setAttributes({ btnIconRotate: value === 0 ? undefined : value })}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={""}
-							isRangeUnit={false}
+								min={0}
+								max={360}
+								label={__("Rotate Icon", "frontis-blocks")}
+								rangeValue={btnIconRotate}
+								onChangeHandler={(value) => setAttributes({ btnIconRotate: value === 0 ? undefined : value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={""}
+								isRangeUnit={false}
 							/>
 						</>
 					)}
-					
+
 					<FB_Spacing
 						label={__("Padding", "frontis-blocks")}
 						deviceType={deviceType}
-						spacingUnitsHandler={ handleButtonOnePaddingUnitsHandler }
+						spacingUnitsHandler={handleButtonOnePaddingUnitsHandler}
 						spacingUnits={btnOnePaddingUnits}
 						spacingDesktop={btnOneDesktopPadding}
 						spacingTablet={btnOneTabPadding}
 						spacingMobile={btnOneMobilePadding}
-						handleSpacingUnitHandler={ handleButtonOnePaddingUnitChange }
+						handleSpacingUnitHandler={handleButtonOnePaddingUnitChange}
 						spacingCombineBtn={btnOnePaddingLink}
-						spacingCombineBtnHandler={ handleButtonOnePaddingCombineBtn }
+						spacingCombineBtnHandler={handleButtonOnePaddingCombineBtn}
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
@@ -3516,9 +3526,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 
 					<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={infoButtonBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ infoButtonBorderColorSwitcher: value })}
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={infoButtonBorderColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ infoButtonBorderColorSwitcher: value })}
 					/>
 
 					{infoButtonBorderColorSwitcher === 'normal' && (
@@ -3581,9 +3591,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 						globalTypoType={buttonTwoGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								buttonTwoGlobalTypoType: value, 
-								buttonTwoGlobalTypoSwitcher: value === 'default' ? {...buttonTwoGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonTwoGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								buttonTwoGlobalTypoType: value,
+								buttonTwoGlobalTypoSwitcher: value === 'default' ? { ...buttonTwoGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonTwoGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -3591,34 +3601,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ buttonTwoGlobalTypoOption: value })}
 
 						fontFamily={buttonTwoFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ buttonTwoFontFamily: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ buttonTwoFontFamily: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={buttonTwoFontSize}
-						onChangeFontSize={(value) => setAttributes({ buttonTwoFontSize: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ buttonTwoFontSize: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={buttonTwoFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ buttonTwoFontSizeUnits: value })}
 
 						fontWeight={buttonTwoFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ buttonTwoFontWeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ buttonTwoFontWeight: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={buttonTwoFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ buttonTwoFontStyle: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ buttonTwoFontStyle: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={buttonTwoTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ buttonTwoTextTransform: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ buttonTwoTextTransform: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={buttonTwoTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ buttonTwoTextDecoration: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTwoTextDecoration: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={buttonTwoLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ buttonTwoLetterSpacing: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonTwoLetterSpacing: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={buttonTwoLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonTwoLetterSpacingUnits: value })}
 
 						lineHeight={buttonTwoLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ buttonTwoLineHeight: value, buttonTwoGlobalTypoSwitcher: {...buttonTwoGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ buttonTwoLineHeight: value, buttonTwoGlobalTypoSwitcher: { ...buttonTwoGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={buttonTwoLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ buttonTwoLineHeightUnits: value })}
@@ -3626,11 +3636,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						deviceType={deviceType}
 						setAttributes={setAttributes}
 					/>
-					
+
 					<FB_SwitcherControl
-					label={__("Text Color", "frontis-blocks")}
-					globalSwitcher={buttonTwoColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ buttonTwoColorSwitcher: value })}
+						label={__("Text Color", "frontis-blocks")}
+						globalSwitcher={buttonTwoColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ buttonTwoColorSwitcher: value })}
 					/>
 
 					{buttonTwoColorSwitcher === 'normal' && (
@@ -3648,11 +3658,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setGlobalColor={(value) => setAttributes({ buttonTwoTextHoverColor: value === undefined ? '' : value })}
 						/>
 					)}
-					
+
 					<FB_SwitcherControl
-					label={__("Background Color", "frontis-blocks")}
-					globalSwitcher={buttonTwoBgColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ buttonTwoBgColorSwitcher: value })}
+						label={__("Background Color", "frontis-blocks")}
+						globalSwitcher={buttonTwoBgColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ buttonTwoBgColorSwitcher: value })}
 					/>
 
 					{buttonTwoBgColorSwitcher === 'normal' && (
@@ -3671,12 +3681,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 					)}
 
-					{buttonTwoIconSwitcher &&(
+					{buttonTwoIconSwitcher && (
 						<>
 							<FB_SwitcherControl
-							label={__("Icon Color", "frontis-blocks")}
-							globalSwitcher={btnTwoIconColorSwitcher}
-							setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
+								label={__("Icon Color", "frontis-blocks")}
+								globalSwitcher={btnTwoIconColorSwitcher}
+								setGlobalSwitcher={(value) => setAttributes({ btnTwoIconColorSwitcher: value })}
 							/>
 
 							{btnTwoIconColorSwitcher === 'normal' && (
@@ -3709,18 +3719,18 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 						</>
 					)}
-					
+
 					<FB_Spacing
 						label={__("Padding", "frontis-blocks")}
 						deviceType={deviceType}
-						spacingUnitsHandler={ handleButtonTwoPaddingUnitsHandler }
+						spacingUnitsHandler={handleButtonTwoPaddingUnitsHandler}
 						spacingUnits={btnTwoPaddingUnits}
 						spacingDesktop={btnTwoDesktopPadding}
 						spacingTablet={btnTwoTabPadding}
 						spacingMobile={btnTwoMobilePadding}
-						handleSpacingUnitHandler={ handleButtonTwoPaddingUnitChange }
+						handleSpacingUnitHandler={handleButtonTwoPaddingUnitChange}
 						spacingCombineBtn={btnTwoPaddingLink}
-						spacingCombineBtnHandler={ handleButtonTwoPaddingCombineBtn }
+						spacingCombineBtnHandler={handleButtonTwoPaddingCombineBtn}
 						setAttributes={setAttributes}
 					/>
 					<FB_Spacing
@@ -3744,11 +3754,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setAttributes({ btnTwoBorder: value })
 						}
 					/>
-					
+
 					<FB_SwitcherControl
-					label={__("Border Color", "frontis-blocks")}
-					globalSwitcher={btnTwoBorderColorSwitcher}
-					setGlobalSwitcher={(value) => setAttributes({ btnTwoBorderColorSwitcher: value })}
+						label={__("Border Color", "frontis-blocks")}
+						globalSwitcher={btnTwoBorderColorSwitcher}
+						setGlobalSwitcher={(value) => setAttributes({ btnTwoBorderColorSwitcher: value })}
 					/>
 
 					{btnTwoBorderColorSwitcher === 'normal' && (
@@ -3799,7 +3809,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			)}
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3810,7 +3820,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className="fb-setting-layout-header" 
+						className="fb-setting-layout-header"
 					>
 						<FB_Range
 							min={0}
@@ -3836,7 +3846,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							deviceType={deviceType}
 							positionType={ctaPositionType}
 							setPositionType={(value) => setAttributes({ ctaPositionType: value })}
-																			
+
 							HZOrientationType={ctaHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ ctaHZOrientationType: value })
@@ -3845,7 +3855,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setVROrientationType={(value) =>
 								setAttributes({ ctaVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={ctaHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ ctaHZLeftOffset: value })}
 							HZLeftOffsetUnits={ctaHZLeftOffsetUnits}
@@ -3854,7 +3864,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setHZRightOffset={(value) => setAttributes({ ctaHZRightOffset: value })}
 							HZRightOffsetUnits={ctaHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ ctaHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={ctaVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ ctaVRTopOffset: value })}
 							VRTopOffsetUnits={ctaVRTopOffsetUnits}
@@ -3880,7 +3890,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							onChangeValue={(value) => setAttributes({ ctaGlobalWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
-						
+
 					</PanelBody>
 					<PanelBody
 						title={__("Padding and Margin", "frontis-blocks")}
@@ -4082,9 +4092,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						/>
 
 						<FB_SwitcherControl
-						label={__("Border Color", "frontis-blocks")}
-						globalSwitcher={globalBorderColorSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
+							label={__("Border Color", "frontis-blocks")}
+							globalSwitcher={globalBorderColorSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ globalBorderColorSwitcher: value })}
 						/>
 
 						{globalBorderColorSwitcher === 'normal' && (
@@ -4151,9 +4161,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							}
 						/>
 						<FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={globalBoxShadowSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
+							label={__("Box Shadow", "frontis-blocks")}
+							globalSwitcher={globalBoxShadowSwitcher}
+							setGlobalSwitcher={(value) => setAttributes({ globalBoxShadowSwitcher: value })}
 						/>
 
 						{globalBoxShadowSwitcher === 'normal' && (
@@ -4196,8 +4206,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
-							value={ctaCustomCSS} 
+						<FB_CustomCSSEditor
+							value={ctaCustomCSS}
 							onChangeValue={(value) => setAttributes({ ctaCustomCSS: value })}
 						/>
 					</PanelBody>
@@ -4208,10 +4218,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-			{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

@@ -2935,8 +2935,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [offCanvasStyle, customCss]);
 
-	const editorStyle = `${offCanvasStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 	const generalControls = (
 		<>
 			<PanelBody title={__("Menu Opener", "frontis-blocks")} initialOpen={true}>
@@ -4567,9 +4565,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

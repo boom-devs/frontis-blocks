@@ -2539,6 +2539,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth};` : ''}
             ${tabListMarginDesktopWidth && tabListMarginDesktop?.top ? `margin: ${tabListMarginDesktopWidth};` : ''}
             ${tabListMinWidth?.Desktop && tabListMinWidthUnits?.Desktop ? `min-width: ${tabListMinWidth?.Desktop}${tabListMinWidthUnits?.Desktop};` : ''}
+            ${tabLayoutSwitcher === 'vertical' ? 'width: 100px;' : ''}
             ${tabListItemGap?.Desktop && tabListItemGapUnits?.Desktop ? `gap: ${tabListItemGap?.Desktop}${tabListItemGapUnits?.Desktop};` : ''}
             ${tabListBorder ? `border: ${tabListBorder};` : ''}
 			${tabListBorderColor ? `border-color: ${tabListBorderColor};` : ''}
@@ -3413,8 +3414,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     /**
 	 * Inspector General Controls
 	 */
@@ -3911,7 +3910,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     )}
 
                     <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
+                        label={__("Active Color", "frontis-blocks")}
                         globalColor={tabTitleActiveColor}
                         setGlobalColor={(value) => setAttributes({ tabTitleActiveColor: value === undefined ? '' : value })}
                     />
@@ -4810,9 +4809,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     return (
 
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
