@@ -1,13 +1,15 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useState, useMemo } from "@wordpress/element";
+import { useEffect, useState, useMemo, lazy, Suspense } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import apiFetch from "@wordpress/api-fetch";
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
+        blockStyle,
         premadeStyle,
         taxonomyType,
         showCount,
@@ -177,11 +179,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return sortedTerms;
     };
 
-    const sortedTaxonomies = useMemo(() => 
-        showChildCategories 
+    const sortedTaxonomies = useMemo(() =>
+        showChildCategories
             ? sortTaxonomyTermsHierarchically(filteredTaxonomies)
             : filteredTaxonomies
-    , [filteredTaxonomies, showChildCategories]);
+        , [filteredTaxonomies, showChildCategories]);
 
     //Get post type labels from taxonomy data
     useEffect(() => {
@@ -348,12 +350,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         return (
             <div className="fb-taxonomy-author-wrapper">
                 {creator.avatar && (
-                    <img 
+                    <img
                         className="fb-taxonomy-author-avatar"
                         src={creator.avatar}
                         alt={creator.name}
                         title={!showName ? creator.name : ""}
-                        style={{width: `${authorAvatarSize}${authorAvatarSizeUnits}`}}
+                        style={{ width: `${authorAvatarSize}${authorAvatarSizeUnits}` }}
                     />
                 )}
                 {showName && (
@@ -389,7 +391,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     const hasChildren = terms.some(t => t.parent === term.id);
                     const isParentCategory = term.parent === 0;
                     const isChildCategory = !isParentCategory;
-                    
+
                     return (
                         <React.Fragment key={term.id}>
                             <li
@@ -408,7 +410,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                 <span className="fb-taxonomy-count">
                                                     (<span className="fb-taxonomy-count-number">{term.count}</span>
                                                     {showLabel && getPostTypeLabelForStyle1(term.id) && (
-                                                        <span className="fb-taxonomy-count-label"> 
+                                                        <span className="fb-taxonomy-count-label">
                                                             {getPostTypeLabelForStyle1(term.id)}
                                                         </span>
                                                     )})
@@ -418,7 +420,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             )}
                                         </>
                                     )}
-                
+
                                 </div>
 
                                 {showDescription && term.description && (
@@ -432,7 +434,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
                                 <div className="fb-taxonomy-more-info">
                                     <div className="fb-taxonomy-author">
-                                        
+
                                         {isChildCategory && showAuthor && renderAuthorWithAvatar(term.id, true)}
 
                                         {isParentCategory && (
@@ -440,10 +442,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                 {showAuthor && renderAuthorWithAvatar(term.id, true)}
                                             </>
                                         )}
-                                        
+
                                     </div>
-                                    
-                                    { premadeStyle === "style-2" && readMoreSwitcher && (
+
+                                    {premadeStyle === "style-2" && readMoreSwitcher && (
                                         <div className="fb-taxonomy-read-more-wrapper">
                                             <a
                                                 href={term.link}
@@ -514,18 +516,105 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             >
                 {sortedTaxonomies.map((taxonomy) => {
                     const isParentCategory = taxonomy.parent === 0;
-                    
+
                     return (
                         <div key={taxonomy.id} className="fb-taxonomy-item">
                             {premadeStyle === "style-4" ? (
                                 <>
-                                <div className="fb-taxonomy-image-container">
+                                    <div className="fb-taxonomy-image-container">
                                         <div className="fb-taxonomy-image">
                                             <img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
                                         </div>
-                                </div>
+                                    </div>
 
-                                <div className="fb-taxonomy-card-content">
+                                    <div className="fb-taxonomy-card-content">
+                                        <div className="fb-taxonomy-meta">
+
+                                            <div className="fb-taxonomy-link-count">
+                                                {showCount && (
+                                                    formatCountWithLabelHTML(taxonomy.count, taxonomy.id)
+                                                )}
+                                                <a href={taxonomy.link} className="fb-taxonomy-link">
+                                                    <h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
+                                                </a>
+                                            </div>
+
+                                            {showDescription && taxonomy.description && (
+                                                <p className="fb-taxonomy-description">
+                                                    {trimWords(
+                                                        taxonomy.description,
+                                                        postDescriptionExcerptLength || 10,
+                                                    )}
+                                                </p>
+                                            )}
+
+                                        </div>
+
+                                        <div className="fb-taxonomy-more-info">
+                                            <div className="fb-taxonomy-author">
+                                                {!isParentCategory && showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
+
+                                                {isParentCategory && (
+                                                    <>
+                                                        {showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
+                                                    </>
+                                                )}
+
+                                            </div>
+
+                                            {readMoreSwitcher && (
+                                                <div className="fb-taxonomy-read-more-wrapper">
+                                                    <a
+                                                        href={taxonomy.link}
+                                                        className="fb-taxonomy-read-more-button"
+                                                    >
+                                                        {readMoreIconAlign !== "icon-only" && (
+                                                            <span className="fb-taxonomy-read-more-text">
+                                                                {readMoreText}
+                                                            </span>
+                                                        )}
+
+                                                        {readMoreIconAlign === "icon-text" && (
+                                                            <div className="fb-taxonomy-read-more-icon-wrapper">
+                                                                <div className="fb-taxonomy-read-more-icon">
+                                                                    {renderSVG(readMoreIcon)}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {readMoreIconAlign === "image" && readMoreIconImageUrl && (
+                                                            <div className="fb-taxonomy-read-more-icon-wrapper">
+                                                                <div className="fb-taxonomy-read-more-icon-image">
+                                                                    <img
+                                                                        src={readMoreIconImageUrl}
+                                                                        alt={readMoreIconImageAlt}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {readMoreIconAlign === "icon-only" && (
+                                                            <div className="fb-taxonomy-read-more-icon-wrapper">
+                                                                <div className="fb-taxonomy-read-more-icon">
+                                                                    {renderSVG(readMoreIcon)}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+
+                                <>
+                                    {premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
+                                        <div className="fb-taxonomy-image">
+                                            <img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
+                                        </div>
+                                    )}
+
                                     <div className="fb-taxonomy-meta">
 
                                         <div className="fb-taxonomy-link-count">
@@ -557,9 +646,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
                                                 </>
                                             )}
-                                            
+
                                         </div>
-                                        
+
                                         {readMoreSwitcher && (
                                             <div className="fb-taxonomy-read-more-wrapper">
                                                 <a
@@ -602,94 +691,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             </div>
                                         )}
                                     </div>
-                                </div>
                                 </>
-                            ) : (
-                            
-                            <>
-                                {premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
-                                    <div className="fb-taxonomy-image">
-                                        <img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
-                                    </div>
-                                )}
-
-                                <div className="fb-taxonomy-meta">
-
-                                    <div className="fb-taxonomy-link-count">
-                                        {showCount && (
-                                            formatCountWithLabelHTML(taxonomy.count, taxonomy.id)
-                                        )}
-                                        <a href={taxonomy.link} className="fb-taxonomy-link">
-                                            <h4 className="fb-taxonomy-name">{taxonomy.name}</h4>
-                                        </a>
-                                    </div>
-
-                                    {showDescription && taxonomy.description && (
-                                        <p className="fb-taxonomy-description">
-                                            {trimWords(
-                                                taxonomy.description,
-                                                postDescriptionExcerptLength || 10,
-                                            )}
-                                        </p>
-                                    )}
-
-                                </div>
-
-                                <div className="fb-taxonomy-more-info">
-                                    <div className="fb-taxonomy-author">
-                                        {!isParentCategory && showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
-
-                                        {isParentCategory && (
-                                            <>
-                                                {showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
-                                            </>
-                                        )}
-                                        
-                                    </div>
-                                    
-                                    {readMoreSwitcher && (
-                                        <div className="fb-taxonomy-read-more-wrapper">
-                                            <a
-                                                href={taxonomy.link}
-                                                className="fb-taxonomy-read-more-button"
-                                            >
-                                                {readMoreIconAlign !== "icon-only" && (
-                                                    <span className="fb-taxonomy-read-more-text">
-                                                        {readMoreText}
-                                                    </span>
-                                                )}
-
-                                                {readMoreIconAlign === "icon-text" && (
-                                                    <div className="fb-taxonomy-read-more-icon-wrapper">
-                                                        <div className="fb-taxonomy-read-more-icon">
-                                                            {renderSVG(readMoreIcon)}
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {readMoreIconAlign === "image" && readMoreIconImageUrl && (
-                                                    <div className="fb-taxonomy-read-more-icon-wrapper">
-                                                        <div className="fb-taxonomy-read-more-icon-image">
-                                                            <img
-                                                                src={readMoreIconImageUrl}
-                                                                alt={readMoreIconImageAlt}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                {readMoreIconAlign === "icon-only" && (
-                                                    <div className="fb-taxonomy-read-more-icon-wrapper">
-                                                        <div className="fb-taxonomy-read-more-icon">
-                                                            {renderSVG(readMoreIcon)}
-                                                        </div>
-                                                        </div>
-                                                )}
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
-                            </>
                             )}
                         </div>
                     );
@@ -710,7 +712,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 {sortedTaxonomies.map((taxonomy) => {
 
                     const isParentCategory = taxonomy.parent === 0;
-                    
+
                     return (
                         <li
                             key={taxonomy.id}
@@ -758,10 +760,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             {showAuthor && renderAuthorWithAvatar(taxonomy.id, true)}
                                         </>
                                     )}
-                                    
+
                                 </div>
-                                
-                                { premadeStyle === "style-2" && readMoreSwitcher && (
+
+                                {premadeStyle === "style-2" && readMoreSwitcher && (
                                     <div className="fb-taxonomy-read-more-wrapper">
                                         <a
                                             href={taxonomy.link}
@@ -816,11 +818,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <div {...blockProps}>
                 {!taxonomyType ? (
@@ -841,6 +845,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     showChildCategories ? buildTermHierarchy(sortedTaxonomies) : renderListLayout()
                 )}
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

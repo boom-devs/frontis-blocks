@@ -1,14 +1,16 @@
 import { __ } from "@wordpress/i18n";
-import { useState, useEffect, useRef } from "@wordpress/element";
+import { useState, useEffect, useRef, lazy, Suspense } from "@wordpress/element";
 import { Placeholder, SelectControl } from "@wordpress/components";
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
-import Inspector from "./inspector";
 import './editor.scss';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		deviceType,
 		formId,
 		showLabels,
@@ -48,11 +50,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.fluent_plugin_active ? (
@@ -96,6 +100,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</>
 				)}
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

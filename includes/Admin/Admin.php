@@ -1,6 +1,11 @@
 <?php
 
 namespace FrontisBlocks\Admin;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Admin\Settings;
 use FrontisBlocks\Admin\TemplateLibrary;
 use FrontisBlocks\Config\BlockList;
@@ -468,7 +473,9 @@ class Admin
         register_rest_route('custom/v1', '/proxy-image', [
             'methods' => 'GET',
             'callback' => [$this, 'proxy_image'],
-            'permission_callback' => '__return_true', // Adjust permissions as needed
+            'permission_callback' => function () {
+                return current_user_can('edit_posts');
+            },
         ]);
 
         register_rest_route(
@@ -559,7 +566,7 @@ class Admin
             return new WP_Error('invalid_url', 'Invalid or missing URL', ['status' => 400]);
         }
 
-        $response = wp_remote_get($image_url);
+        $response = wp_safe_remote_get($image_url);
         if (is_wp_error($response)) {
             return new WP_Error('fetch_failed', 'Failed to fetch image', ['status' => 500]);
         }
@@ -569,7 +576,7 @@ class Admin
 
         // Set headers and output the image
         header('Content-Type: ' . $content_type);
-        echo $body;
+        echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary image data
         exit;
     }
 
@@ -936,7 +943,7 @@ class Admin
 
             $response = wp_remote_get($remote_url);
             if (is_wp_error($response)) {
-                wp_die('Proxy request failed: ' . $response->get_error_message());
+                wp_die('Proxy request failed: ' . esc_html($response->get_error_message()));
             }
 
             $body = wp_remote_retrieve_body($response);
@@ -953,7 +960,7 @@ class Admin
                 $body
             );
 
-            echo $body;
+            echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary image data
             exit;
         }
     }

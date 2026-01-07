@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { 
+import {
     useBlockProps,
     RichText,
     BlockControls,
@@ -7,22 +7,24 @@ import {
     MediaUploadCheck,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
-import { 
+import {
     Toolbar,
     ToolbarGroup,
     ToolbarButton
 } from '@wordpress/components';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
+const Inspector = lazy(() => import('./inspector'));
+
 export default function Edit({ attributes, setAttributes, clientId, context }) {
-    const { 
+    const {
         blockID,
+        blockStyle,
         TestimonialPresetStyle,
         TestimonialImageSwitcher,
         TestimonialImageUrl,
@@ -54,108 +56,108 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         testimonialGlobalWraperClass,
 
         testimonialDesktopSwitcher,
-		testimonialTabletSwitcher,
-		testimonialMobileSwitcher,
+        testimonialTabletSwitcher,
+        testimonialMobileSwitcher,
 
         /** Start Dynamic Title Text */
-		dynamicTitleEnabled,
-		dynamicTitleSource,
-		dynamicTitlePostId,
-		dynamicTitlePostType,
-		dynamicTitlePostLabel,
-		dynamicTitleField,
-		dynamicTitleFeaturedImageField,
+        dynamicTitleEnabled,
+        dynamicTitleSource,
+        dynamicTitlePostId,
+        dynamicTitlePostType,
+        dynamicTitlePostLabel,
+        dynamicTitleField,
+        dynamicTitleFeaturedImageField,
 
-		dynamicTitleDateType,
-		dynamicTitleDateFormat,
+        dynamicTitleDateType,
+        dynamicTitleDateFormat,
 
-		dynamicTitleTimeType,
-		dynamicTitleTimeFormat,
+        dynamicTitleTimeType,
+        dynamicTitleTimeFormat,
 
-		dynamicTitleCommentsZeroText,
-		dynamicTitleCommentsOneText,
-		dynamicTitleCommentsManyText,
+        dynamicTitleCommentsZeroText,
+        dynamicTitleCommentsOneText,
+        dynamicTitleCommentsManyText,
 
-		dynamicTitleTermsTaxonomy,
-		dynamicTitleTermsSeparator,
-		dynamicTitleEnableLink,
-		dynamicTitleLinkSource,
-		/** End Dynamic Title Text */
+        dynamicTitleTermsTaxonomy,
+        dynamicTitleTermsSeparator,
+        dynamicTitleEnableLink,
+        dynamicTitleLinkSource,
+        /** End Dynamic Title Text */
 
-		/** Start Dynamic Description Text */
-		dynamicDescriptionEnabled,
-		dynamicDescriptionSource,
-		dynamicDescriptionPostId,
-		dynamicDescriptionPostType,
-		dynamicDescriptionPostLabel,
-		dynamicDescriptionField,
-		dynamicDescriptionFeaturedImageField,
+        /** Start Dynamic Description Text */
+        dynamicDescriptionEnabled,
+        dynamicDescriptionSource,
+        dynamicDescriptionPostId,
+        dynamicDescriptionPostType,
+        dynamicDescriptionPostLabel,
+        dynamicDescriptionField,
+        dynamicDescriptionFeaturedImageField,
 
-		dynamicDescriptionDateType,
-		dynamicDescriptionDateFormat,
+        dynamicDescriptionDateType,
+        dynamicDescriptionDateFormat,
 
-		dynamicDescriptionTimeType,
-		dynamicDescriptionTimeFormat,
+        dynamicDescriptionTimeType,
+        dynamicDescriptionTimeFormat,
 
-		dynamicDescriptionCommentsZeroText,
-		dynamicDescriptionCommentsOneText,
-		dynamicDescriptionCommentsManyText,
+        dynamicDescriptionCommentsZeroText,
+        dynamicDescriptionCommentsOneText,
+        dynamicDescriptionCommentsManyText,
 
-		dynamicDescriptionTermsTaxonomy,
-		dynamicDescriptionTermsSeparator,
-		dynamicDescriptionEnableLink,
-		dynamicDescriptionLinkSource,
-		/** End Dynamic Description Text */
+        dynamicDescriptionTermsTaxonomy,
+        dynamicDescriptionTermsSeparator,
+        dynamicDescriptionEnableLink,
+        dynamicDescriptionLinkSource,
+        /** End Dynamic Description Text */
 
         /** Start Dynamic Author Name Text */
-		dynamicAuthorNameEnabled,
-		dynamicAuthorNameSource,
-		dynamicAuthorNamePostId,
-		dynamicAuthorNamePostType,
-		dynamicAuthorNamePostLabel,
-		dynamicAuthorNameField,
-		dynamicAuthorNameFeaturedImageField,
+        dynamicAuthorNameEnabled,
+        dynamicAuthorNameSource,
+        dynamicAuthorNamePostId,
+        dynamicAuthorNamePostType,
+        dynamicAuthorNamePostLabel,
+        dynamicAuthorNameField,
+        dynamicAuthorNameFeaturedImageField,
 
-		dynamicAuthorNameDateType,
-		dynamicAuthorNameDateFormat,
+        dynamicAuthorNameDateType,
+        dynamicAuthorNameDateFormat,
 
-		dynamicAuthorNameTimeType,
-		dynamicAuthorNameTimeFormat,
+        dynamicAuthorNameTimeType,
+        dynamicAuthorNameTimeFormat,
 
-		dynamicAuthorNameCommentsZeroText,
-		dynamicAuthorNameCommentsOneText,
-		dynamicAuthorNameCommentsManyText,
+        dynamicAuthorNameCommentsZeroText,
+        dynamicAuthorNameCommentsOneText,
+        dynamicAuthorNameCommentsManyText,
 
-		dynamicAuthorNameTermsTaxonomy,
-		dynamicAuthorNameTermsSeparator,
-		dynamicAuthorNameEnableLink,
-		dynamicAuthorNameLinkSource,
-		/** End Dynamic Author Name Text */
+        dynamicAuthorNameTermsTaxonomy,
+        dynamicAuthorNameTermsSeparator,
+        dynamicAuthorNameEnableLink,
+        dynamicAuthorNameLinkSource,
+        /** End Dynamic Author Name Text */
 
         /** Start Dynamic Author Designation Text */
-		dynamicAuthorDesignationEnabled,
-		dynamicAuthorDesignationSource,
-		dynamicAuthorDesignationPostId,
-		dynamicAuthorDesignationPostType,
-		dynamicAuthorDesignationPostLabel,
-		dynamicAuthorDesignationField,
-		dynamicAuthorDesignationFeaturedImageField,
+        dynamicAuthorDesignationEnabled,
+        dynamicAuthorDesignationSource,
+        dynamicAuthorDesignationPostId,
+        dynamicAuthorDesignationPostType,
+        dynamicAuthorDesignationPostLabel,
+        dynamicAuthorDesignationField,
+        dynamicAuthorDesignationFeaturedImageField,
 
-		dynamicAuthorDesignationDateType,
-		dynamicAuthorDesignationDateFormat,
+        dynamicAuthorDesignationDateType,
+        dynamicAuthorDesignationDateFormat,
 
-		dynamicAuthorDesignationTimeType,
-		dynamicAuthorDesignationTimeFormat,
+        dynamicAuthorDesignationTimeType,
+        dynamicAuthorDesignationTimeFormat,
 
-		dynamicAuthorDesignationCommentsZeroText,
-		dynamicAuthorDesignationCommentsOneText,
-		dynamicAuthorDesignationCommentsManyText,
+        dynamicAuthorDesignationCommentsZeroText,
+        dynamicAuthorDesignationCommentsOneText,
+        dynamicAuthorDesignationCommentsManyText,
 
-		dynamicAuthorDesignationTermsTaxonomy,
-		dynamicAuthorDesignationTermsSeparator,
-		dynamicAuthorDesignationEnableLink,
-		dynamicAuthorDesignationLinkSource,
-		/** End Dynamic Author Designation Text */
+        dynamicAuthorDesignationTermsTaxonomy,
+        dynamicAuthorDesignationTermsSeparator,
+        dynamicAuthorDesignationEnableLink,
+        dynamicAuthorDesignationLinkSource,
+        /** End Dynamic Author Designation Text */
 
     } = attributes;
 
@@ -183,141 +185,145 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
-    	/**
-	 * Dynamic Text Value for Title
-	 */
-	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+    /**
+ * Dynamic Text Value for Title
+ */
+    const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
+        textEnabled: dynamicTitleEnabled,
+        textSource: dynamicTitleSource,
+        textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+        textPostId: dynamicTitlePostId,
+        textPostType: dynamicTitlePostType,
+        textPostLabel: dynamicTitlePostLabel,
 
-		textFeaturedImageField: dynamicTitleFeaturedImageField,
+        textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+        textDateType: dynamicTitleDateType,
+        textDateFormat: dynamicTitleDateFormat,
+        textTimeType: dynamicTitleTimeType,
+        textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+        textCommentsZeroText: dynamicTitleCommentsZeroText,
+        textCommentsOneText: dynamicTitleCommentsOneText,
+        textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+        textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+        textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+        textLinkEnabled: dynamicTitleEnableLink,
+        textLinkSource: dynamicTitleLinkSource,
 
-		context,
-	});
-
-	/**
-	 * Dynamic Text Value for Description
-	 */
-	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
-
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
-
-		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
-
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
-
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
-
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
-
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
-
-		context,
-	});
+        context,
+    });
 
     /**
-	 * Dynamic Text Value for Author Name
-	 */
-	const { dynamicDisplayValue: dynamicAuthorNameValue, dynamicDisplayLink: dynamicAuthorNameLink } = DynamicTextValue({
-		textEnabled:            dynamicAuthorNameEnabled,
-		textSource:             dynamicAuthorNameSource,
-		textField:              dynamicAuthorNameField,
+     * Dynamic Text Value for Description
+     */
+    const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
+        textEnabled: dynamicDescriptionEnabled,
+        textSource: dynamicDescriptionSource,
+        textField: dynamicDescriptionField,
 
-		textPostId:             dynamicAuthorNamePostId,
-		textPostType:           dynamicAuthorNamePostType,
-		textPostLabel:          dynamicAuthorNamePostLabel,
+        textPostId: dynamicDescriptionPostId,
+        textPostType: dynamicDescriptionPostType,
+        textPostLabel: dynamicDescriptionPostLabel,
 
-		textFeaturedImageField: dynamicAuthorNameFeaturedImageField,
+        textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicAuthorNameDateType,
-		textDateFormat:         dynamicAuthorNameDateFormat,
-		textTimeType:           dynamicAuthorNameTimeType, 
-		textTimeFormat:         dynamicAuthorNameTimeFormat,
+        textDateType: dynamicDescriptionDateType,
+        textDateFormat: dynamicDescriptionDateFormat,
+        textTimeType: dynamicDescriptionTimeType,
+        textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicAuthorNameCommentsZeroText,
-		textCommentsOneText:    dynamicAuthorNameCommentsOneText,
-		textCommentsManyText:   dynamicAuthorNameCommentsManyText,
+        textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+        textCommentsOneText: dynamicDescriptionCommentsOneText,
+        textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicAuthorNameTermsTaxonomy,
-		textTermsSeparator:     dynamicAuthorNameTermsSeparator,
+        textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+        textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicAuthorNameEnableLink,
-		textLinkSource:         dynamicAuthorNameLinkSource,
+        textLinkEnabled: dynamicDescriptionEnableLink,
+        textLinkSource: dynamicDescriptionLinkSource,
 
-		context,
-	});
+        context,
+    });
 
     /**
-	 * Dynamic Text Value for Author Designation
-	 */
-	const { dynamicDisplayValue: dynamicAuthorDesignationValue, dynamicDisplayLink: dynamicAuthorDesignationLink } = DynamicTextValue({
-		textEnabled:            dynamicAuthorDesignationEnabled,
-		textSource:             dynamicAuthorDesignationSource,
-		textField:              dynamicAuthorDesignationField,
+     * Dynamic Text Value for Author Name
+     */
+    const { dynamicDisplayValue: dynamicAuthorNameValue, dynamicDisplayLink: dynamicAuthorNameLink } = DynamicTextValue({
+        textEnabled: dynamicAuthorNameEnabled,
+        textSource: dynamicAuthorNameSource,
+        textField: dynamicAuthorNameField,
 
-		textPostId:             dynamicAuthorDesignationPostId,
-		textPostType:           dynamicAuthorDesignationPostType,
-		textPostLabel:          dynamicAuthorDesignationPostLabel,
+        textPostId: dynamicAuthorNamePostId,
+        textPostType: dynamicAuthorNamePostType,
+        textPostLabel: dynamicAuthorNamePostLabel,
 
-		textFeaturedImageField: dynamicAuthorDesignationFeaturedImageField,
+        textFeaturedImageField: dynamicAuthorNameFeaturedImageField,
 
-		textDateType:           dynamicAuthorDesignationDateType,
-		textDateFormat:         dynamicAuthorDesignationDateFormat,
-		textTimeType:           dynamicAuthorDesignationTimeType, 
-		textTimeFormat:         dynamicAuthorDesignationTimeFormat,
+        textDateType: dynamicAuthorNameDateType,
+        textDateFormat: dynamicAuthorNameDateFormat,
+        textTimeType: dynamicAuthorNameTimeType,
+        textTimeFormat: dynamicAuthorNameTimeFormat,
 
-		textCommentsZeroText:   dynamicAuthorDesignationCommentsZeroText,
-		textCommentsOneText:    dynamicAuthorDesignationCommentsOneText,
-		textCommentsManyText:   dynamicAuthorDesignationCommentsManyText,
+        textCommentsZeroText: dynamicAuthorNameCommentsZeroText,
+        textCommentsOneText: dynamicAuthorNameCommentsOneText,
+        textCommentsManyText: dynamicAuthorNameCommentsManyText,
 
-		textTermsTaxonomy:      dynamicAuthorDesignationTermsTaxonomy,
-		textTermsSeparator:     dynamicAuthorDesignationTermsSeparator,
+        textTermsTaxonomy: dynamicAuthorNameTermsTaxonomy,
+        textTermsSeparator: dynamicAuthorNameTermsSeparator,
 
-		textLinkEnabled:        dynamicAuthorDesignationEnableLink,
-		textLinkSource:         dynamicAuthorDesignationLinkSource,
+        textLinkEnabled: dynamicAuthorNameEnableLink,
+        textLinkSource: dynamicAuthorNameLinkSource,
 
-		context,
-	});
+        context,
+    });
+
+    /**
+     * Dynamic Text Value for Author Designation
+     */
+    const { dynamicDisplayValue: dynamicAuthorDesignationValue, dynamicDisplayLink: dynamicAuthorDesignationLink } = DynamicTextValue({
+        textEnabled: dynamicAuthorDesignationEnabled,
+        textSource: dynamicAuthorDesignationSource,
+        textField: dynamicAuthorDesignationField,
+
+        textPostId: dynamicAuthorDesignationPostId,
+        textPostType: dynamicAuthorDesignationPostType,
+        textPostLabel: dynamicAuthorDesignationPostLabel,
+
+        textFeaturedImageField: dynamicAuthorDesignationFeaturedImageField,
+
+        textDateType: dynamicAuthorDesignationDateType,
+        textDateFormat: dynamicAuthorDesignationDateFormat,
+        textTimeType: dynamicAuthorDesignationTimeType,
+        textTimeFormat: dynamicAuthorDesignationTimeFormat,
+
+        textCommentsZeroText: dynamicAuthorDesignationCommentsZeroText,
+        textCommentsOneText: dynamicAuthorDesignationCommentsOneText,
+        textCommentsManyText: dynamicAuthorDesignationCommentsManyText,
+
+        textTermsTaxonomy: dynamicAuthorDesignationTermsTaxonomy,
+        textTermsSeparator: dynamicAuthorDesignationTermsSeparator,
+
+        textLinkEnabled: dynamicAuthorDesignationEnableLink,
+        textLinkSource: dynamicAuthorDesignationLinkSource,
+
+        context,
+    });
+
+
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
@@ -331,7 +337,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                             icon="trash"
                         />
                         <MediaUploadCheck>
-                            <MediaUpload 
+                            <MediaUpload
                                 onSelect={(media) => setAttributes({
                                     TestimonialImageID: media.id,
                                     TestimonialImageUrl: media.url,
@@ -350,7 +356,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     </ToolbarGroup>
                 )}
             </BlockControls>
-            
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment} ${testimonialGlobalWraperClass}`} id={testimonialGlobalWraperID} ref={panelRef}>
                     <div className={`fb-testimonial-wrapper`}>
@@ -365,7 +371,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -446,7 +452,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
@@ -486,7 +492,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -540,12 +546,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
 
-                                 ) : (
+                                ) : (
                                     <>
                                         {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                             <div className="fb-testimonial-rating">
@@ -580,13 +586,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                             </div>
                                         )}
 
-                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}> 
+                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                             <div className='fb-testimonial-author-inner-container'>
                                                 <div className='fb-testimonial-author-image-container'>
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -635,7 +641,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
@@ -645,6 +651,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

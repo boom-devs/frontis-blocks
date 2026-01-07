@@ -1,15 +1,21 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Server-side rendering for the Post Featured Image block
  */
 
-if ( ! function_exists( 'fb_norm_str' ) ) {
-    function fb_norm_str( $val, $default = '' ) {
-        if ( is_array( $val ) ) {
-            $val = implode( ' ', array_filter( array_map( 'strval', $val ) ) );
+if (!function_exists('fb_norm_str')) {
+    function fb_norm_str($val, $default = '')
+    {
+        if (is_array($val)) {
+            $val = implode(' ', array_filter(array_map('strval', $val)));
         }
-        if ( $val === null ) return $default;
+        if ($val === null)
+            return $default;
         return (string) $val;
     }
 }
@@ -96,7 +102,9 @@ $parent_classes_arr = array_merge(
 
 // Build image wrapper classes
 $image_wrapper_classes_arr = array_filter(array_map(
-    function($c) {return sanitize_html_class(fb_norm_str($c));},
+    function ($c) {
+        return sanitize_html_class(fb_norm_str($c));
+    },
     $parent_classes_arr
 ));
 
@@ -107,7 +115,7 @@ $image_wrapper_attributes = get_block_wrapper_attributes([
 
 // Build HTML tag classes for the image wrapper
 $image_html_tag_classes = array_filter([
-    'fb-post-featured-image', 
+    'fb-post-featured-image',
     $wrapper_class, // Custom CSS classes from the advanced tab
 ]);
 
@@ -115,30 +123,24 @@ $image_html_tag_classes = array_filter([
 $image_html_tag_id_attr = !empty($wrapper_id) ? ' id="' . esc_attr($wrapper_id) . '"' : '';
 
 ?>
-<div <?php echo $image_wrapper_attributes; ?>>
-    <div class="<?php echo esc_attr(implode(' ', $image_html_tag_classes)); ?>" <?php echo $image_html_tag_id_attr; ?>>
-        <?php if (! empty($display_image_url)) : ?>
-            <?php if ($is_link) : ?>
+<div <?php echo $image_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+    <div class="<?php echo esc_attr(implode(' ', $image_html_tag_classes)); ?>" <?php echo $image_html_tag_id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+        <?php if (!empty($display_image_url)): ?>
+            <?php if ($is_link): ?>
                 <div class="fb-post-featured-image-inner">
-                    <a class="fb-post-featured-image-link"
-                        href="<?php echo esc_url(get_permalink()); ?>"
-                        rel="<?php echo esc_attr($rel); ?>"
-                        target="<?php echo esc_attr($link_target); ?>">
-                        <img
-                            src="<?php echo esc_url($display_image_url); ?>"
-                            alt="<?php echo esc_attr($display_image_alt); ?>"
+                    <a class="fb-post-featured-image-link" href="<?php echo esc_url(get_permalink()); ?>"
+                        rel="<?php echo esc_attr($rel); ?>" target="<?php echo esc_attr($link_target); ?>">
+                        <img src="<?php echo esc_url($display_image_url); ?>" alt="<?php echo esc_attr($display_image_alt); ?>"
                             class="fb-post-featured-image-img" />
                     </a>
                 </div>
-            <?php else : ?>
+            <?php else: ?>
                 <div class="fb-post-featured-image-inner">
-                    <img
-                        src="<?php echo esc_url($display_image_url); ?>"
-                        alt="<?php echo esc_attr($display_image_alt); ?>"
+                    <img src="<?php echo esc_url($display_image_url); ?>" alt="<?php echo esc_attr($display_image_alt); ?>"
                         class="fb-post-featured-image-img" />
                 </div>
             <?php endif; ?>
-        <?php else : ?>
+        <?php else: ?>
             <div class="fb-post-featured-image-placeholder">
                 <?php echo esc_html__('No featured image set', 'frontis-blocks'); ?>
             </div>

@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 // require_once(ABSPATH . 'wp-admin/includes/class-pclzip.php');
@@ -63,8 +67,8 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
-        $value = isset($_POST['value']) ? $_POST['value'] : '';
+        $option_name = isset($_POST['option_name']) ? sanitize_key($_POST['option_name']) : '';
+        $value = isset($_POST['value']) ? sanitize_text_field($_POST['value']) : '';
 
         $updated = update_option("fb_$option_name", $value);
 
@@ -79,7 +83,7 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        $option_name = isset($_POST['option_name']) ? $_POST['option_name'] : '';
+        $option_name = isset($_POST['option_name']) ? sanitize_key($_POST['option_name']) : '';
         $value = get_option("fb_$option_name");
 
         if ($value) {
@@ -109,21 +113,22 @@ class TemplateLibrary extends AjaxBase
         $tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
 
         try {
-            // Download ZIP
-            $ch = curl_init($zip_url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 300);
-            $data = curl_exec($ch);
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            // Download ZIP using WordPress safe HTTP API
+            $response = wp_safe_remote_get($zip_url, array(
+                'timeout' => 300,
+                'sslverify' => true,
+            ));
 
-            if (curl_errno($ch))
-                throw new Exception('cURL Error: ' . curl_error($ch));
-            curl_close($ch);
+            if (is_wp_error($response))
+                throw new \Exception('Download Error: ' . $response->get_error_message());
 
-            if ($httpCode !== 200 || !$data)
-                throw new Exception('Failed to download zip file');
+            $httpCode = wp_remote_retrieve_response_code($response);
+            if ($httpCode !== 200)
+                throw new \Exception('Failed to download zip file');
+
+            $data = wp_remote_retrieve_body($response);
+            if (empty($data))
+                throw new \Exception('Downloaded file is empty');
 
             file_put_contents($tempZipFile, $data);
 
@@ -144,6 +149,12 @@ class TemplateLibrary extends AjaxBase
                         wp_mkdir_p($filePath);
                     continue;
                 }
+
+                // Security: Skip dangerous file types
+                $dangerous_extensions = array('php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'phar', 'exe', 'sh', 'bat', 'htaccess');
+                $ext = strtolower(pathinfo($file_info['filename'], PATHINFO_EXTENSION));
+                if (in_array($ext, $dangerous_extensions))
+                    continue;
 
                 // Extract file
                 $result = $zip->extractByIndex(
@@ -324,7 +335,7 @@ class TemplateLibrary extends AjaxBase
 
         // Input data
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
         $slug = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
         $template = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
         $badge = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
@@ -364,7 +375,7 @@ class TemplateLibrary extends AjaxBase
         $page_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => $content,
+            'post_content' => wp_kses_post($content),
             'post_status' => 'publish',
             'post_type' => 'page',
         ], true);
@@ -498,7 +509,7 @@ class TemplateLibrary extends AjaxBase
         }
 
         foreach ($all_img_srcs as $img_src) {
-            $response = wp_remote_get($img_src);
+            $response = wp_safe_remote_get($img_src);
             if (is_wp_error($response)) {
                 continue;
             }
@@ -634,7 +645,7 @@ class TemplateLibrary extends AjaxBase
                 $new_id = wp_insert_post([
                     'post_title' => 'Imported Nav ' . $old_id,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_navigation',
                 ]);
@@ -662,6 +673,7 @@ class TemplateLibrary extends AjaxBase
                 $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for template detection
             $existing = get_posts([
                 'post_type' => 'wp_template_part',
                 'name' => $slug,
@@ -680,7 +692,7 @@ class TemplateLibrary extends AjaxBase
             if (!empty($existing)) {
                 wp_update_post([
                     'ID' => $existing[0],
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_title' => $title,
                 ]);
                 $stats['part_skipped']++;
@@ -688,7 +700,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template_part',
                 ]);
@@ -739,7 +751,7 @@ class TemplateLibrary extends AjaxBase
             if ($existing) {
                 wp_update_post([
                     'ID' => $existing->ID,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_title' => $title,
                 ]);
                 $skipped++;
@@ -747,7 +759,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_kses_post($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template',
                 ]);
@@ -802,7 +814,7 @@ class TemplateLibrary extends AjaxBase
         $post_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => $content,
+            'post_content' => wp_kses_post($content),
             'post_status' => 'publish',
             'post_type' => 'post',
             'post_date' => current_time('mysql'),

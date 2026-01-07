@@ -1124,9 +1124,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		});
 	}, [advancedImageStyle, customCss]);
 
-	const editorStyle = `${advancedImageStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
-
 	useEffect(() => {
 		if (IMAGE_MASK_IMAEGS[imageStyle]) {
 			setAttributes({ maskImageUrl: IMAGE_MASK_IMAEGS[imageStyle] });
@@ -2000,9 +1997,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}

@@ -2704,8 +2704,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({blockStyle: `${socialItemColorStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
 	}, [socialItemColorStyle, allBlockStyle, customCss]);
 
-	const editorStyle = `${socialItemColorStyle} ${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 	/**
 	 * Inspector General Controls
 	 */
@@ -3390,9 +3388,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-            	{editorStyle}
-            </style>
 			<FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}

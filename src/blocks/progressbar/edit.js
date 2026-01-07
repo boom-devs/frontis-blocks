@@ -1,34 +1,35 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEffect, useRef, useState } from '@wordpress/element';
-import Inspector from "./inspector";
+import { useEffect, useRef, useState, lazy, Suspense } from '@wordpress/element';
+const Inspector = lazy(() => import('./inspector'));
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const {
-		blockID,
-		progressbarType,
-		progressTextPosition,
-		progressNumberPosition,
-		progressNumber,
-		progressTitle,
-		progressHeadingTag,
+  const {
+    blockID,
+    blockStyle,
+    progressbarType,
+    progressTextPosition,
+    progressNumberPosition,
+    progressNumber,
+    progressTitle,
+    progressHeadingTag,
 
-		progressGlobalWraperID,
-		progressGlobalWraperClass,
+    progressGlobalWraperID,
+    progressGlobalWraperClass,
 
-		progressbarDesktopSwitcher,
-		progressbarTabletSwitcher,
-		progressbarMobileSwitcher,
-	} = attributes;
+    progressbarDesktopSwitcher,
+    progressbarTabletSwitcher,
+    progressbarMobileSwitcher,
+  } = attributes;
 
-	/**
+  /**
     * Manages tab button settings and switches to block settings on click
     */
-    const panelRef = useRef(null);
-    SwitchToBlockSettings(panelRef);
+  const panelRef = useRef(null);
+  SwitchToBlockSettings(panelRef);
 
 
 
@@ -66,9 +67,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       requestAnimationFrame(() => {
         if (isVertical) {
           line.style.height = `${progressNumber}%`;
-          line.style.width  = '100%';
+          line.style.width = '100%';
         } else {
-          line.style.width  = `${progressNumber}%`;
+          line.style.width = `${progressNumber}%`;
           line.style.height = '100%';
         }
       });
@@ -90,74 +91,77 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     requestAnimationFrame(step);
   };
 
-	
-	
 
-    const blockProps = useBlockProps({
-        className: `fb-progressbar-main-wrapper ${blockID} ${progressbarDesktopSwitcher && 'fb-desktop-responsive'} ${progressbarTabletSwitcher && 'fb-tablet-responsive'} ${progressbarMobileSwitcher && 'fb-mobile-responsive'}`,
-    });
 
-    
 
-    return (
-        <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-            
-            <div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID} ref={panelRef}>
-						<div className="fb-progressbar-item">
-							{progressbarType === 'horizontal' && progressTextPosition === 'text-outSide' && (
-								<div className="fb-progressbar-content">
-									<RichText
-										tagName={progressHeadingTag}
-										className="fb-progressbar-label"
-										value={progressTitle}
-										onChange={(value) => setAttributes({ progressTitle: value })}
-										placeholder={__('Progress', 'frontis-blocks')}
-									/>
-									{progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
-								</div>
-							)}
-							{progressbarType === 'vertical' && progressNumberPosition === 'default' && (
-								<div className="fb-progressbar-content">
-									<span className="fb-progressbar-number">{progressNumber}%</span>
-								</div>
-							)}
-							<div className='fb-progressbar-line-wrapper'>
-								<div className="fb-progressbar-line">
-									{progressNumberPosition === 'with-progressbar' && <span className="fb-progressbar-number">{progressNumber}%</span>}
-								</div>
-									{progressbarType === 'horizontal' && progressTextPosition === 'text-inSide' && (
-										<div className="fb-progressbar-content">
-											<RichText
-												tagName={progressHeadingTag}
-												className="fb-progressbar-label"
-												value={progressTitle}
-												onChange={(value) => setAttributes({ progressTitle: value })}
-												placeholder={__('Progress', 'frontis-blocks')}
-											/>
-											{progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
-										</div>
-									)}
-							</div>
-							{progressbarType === 'vertical' && (
-								<div className="fb-progressbar-content">
-									<RichText
-										tagName={progressHeadingTag}
-										className="fb-progressbar-label"
-										value={progressTitle}
-										onChange={(value) => setAttributes({ progressTitle: value })}
-										placeholder={__('Progress', 'frontis-blocks')}
-									/>
-								</div>
-							)}
-						</div>
-				</div>
+  const blockProps = useBlockProps({
+    className: `fb-progressbar-main-wrapper ${blockID} ${progressbarDesktopSwitcher && 'fb-desktop-responsive'} ${progressbarTabletSwitcher && 'fb-tablet-responsive'} ${progressbarMobileSwitcher && 'fb-mobile-responsive'}`,
+  });
+
+
+
+  return (
+    <>
+      <Suspense fallback={null}>
+        <Inspector
+          attributes={attributes}
+          setAttributes={setAttributes}
+          clientId={clientId}
+        />
+      </Suspense>
+
+      <div {...blockProps}>
+        <div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID} ref={panelRef}>
+          <div className="fb-progressbar-item">
+            {progressbarType === 'horizontal' && progressTextPosition === 'text-outSide' && (
+              <div className="fb-progressbar-content">
+                <RichText
+                  tagName={progressHeadingTag}
+                  className="fb-progressbar-label"
+                  value={progressTitle}
+                  onChange={(value) => setAttributes({ progressTitle: value })}
+                  placeholder={__('Progress', 'frontis-blocks')}
+                />
+                {progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+              </div>
+            )}
+            {progressbarType === 'vertical' && progressNumberPosition === 'default' && (
+              <div className="fb-progressbar-content">
+                <span className="fb-progressbar-number">{progressNumber}%</span>
+              </div>
+            )}
+            <div className='fb-progressbar-line-wrapper'>
+              <div className="fb-progressbar-line">
+                {progressNumberPosition === 'with-progressbar' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+              </div>
+              {progressbarType === 'horizontal' && progressTextPosition === 'text-inSide' && (
+                <div className="fb-progressbar-content">
+                  <RichText
+                    tagName={progressHeadingTag}
+                    className="fb-progressbar-label"
+                    value={progressTitle}
+                    onChange={(value) => setAttributes({ progressTitle: value })}
+                    placeholder={__('Progress', 'frontis-blocks')}
+                  />
+                  {progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+                </div>
+              )}
             </div>
-        </>
-    );
+            {progressbarType === 'vertical' && (
+              <div className="fb-progressbar-content">
+                <RichText
+                  tagName={progressHeadingTag}
+                  className="fb-progressbar-label"
+                  value={progressTitle}
+                  onChange={(value) => setAttributes({ progressTitle: value })}
+                  placeholder={__('Progress', 'frontis-blocks')}
+                />
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      <style>{blockStyle}</style>
+    </>
+  );
 }

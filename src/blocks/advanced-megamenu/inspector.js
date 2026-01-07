@@ -1372,8 +1372,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ blockStyle: `${megaMenuBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
     }, [megaMenuBlockStyle, customCss]);
 
-    const editorStyle = `${megaMenuBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     const generalControls = (
         <>
             <PanelBody title={__('Mega Menu Settings', 'frontis-blocks')} initialOpen={false}>
@@ -2419,11 +2417,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {`
-				${editorStyle}
-            `}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}

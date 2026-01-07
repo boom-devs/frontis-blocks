@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useRef, lazy, Suspense } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -8,16 +8,18 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const Inspector = lazy(() => import("./inspector"));
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -45,8 +47,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		ctaGlobalWraperClass,
 
 		ctaDesktopSwitcher,
-        ctaTabletSwitcher,
-        ctaMobileSwitcher,
+		ctaTabletSwitcher,
+		ctaMobileSwitcher,
 
 		/** Start Dynamic Title Text */
 		dynamicTitleEnabled,
@@ -119,7 +121,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnOneTermsTaxonomy,
 		dynamicBtnOneTermsSeparator,
-		dynamicBtnOneEnableLink,	
+		dynamicBtnOneEnableLink,
 		dynamicBtnOneLinkSource,
 		/** End Dynamic Btn One Text */
 
@@ -160,11 +162,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	const handleBtnClick = (e) =>{
+	const handleBtnClick = (e) => {
 		e.preventDefault();
 	}
 
-	const handleBtnTwoClick = (e) =>{
+	const handleBtnTwoClick = (e) => {
 		e.preventDefault();
 	}
 
@@ -172,30 +174,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Title
 	 */
 	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
 
 		textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
 
 		context,
 	});
@@ -204,30 +206,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Description
 	 */
 	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
 
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
 
 		context,
 	});
@@ -236,30 +238,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button One Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnOneValue, dynamicDisplayLink: dynamicBtnOneLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnOneEnabled,
-		textSource:             dynamicBtnOneSource,
-		textField:              dynamicBtnOneField,
+		textEnabled: dynamicBtnOneEnabled,
+		textSource: dynamicBtnOneSource,
+		textField: dynamicBtnOneField,
 
-		textPostId:             dynamicBtnOnePostId,
-		textPostType:           dynamicBtnOnePostType,
-		textPostLabel:          dynamicBtnOnePostLabel,
+		textPostId: dynamicBtnOnePostId,
+		textPostType: dynamicBtnOnePostType,
+		textPostLabel: dynamicBtnOnePostLabel,
 
 		textFeaturedImageField: dynamicBtnOneFeaturedImageField,
 
-		textDateType:           dynamicBtnOneDateType,
-		textDateFormat:         dynamicBtnOneDateFormat,
-		textTimeType:           dynamicBtnOneTimeType,
-		textTimeFormat:         dynamicBtnOneTimeFormat,
+		textDateType: dynamicBtnOneDateType,
+		textDateFormat: dynamicBtnOneDateFormat,
+		textTimeType: dynamicBtnOneTimeType,
+		textTimeFormat: dynamicBtnOneTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnOneCommentsZeroText,
-		textCommentsOneText:    dynamicBtnOneCommentsOneText,
-		textCommentsManyText:   dynamicBtnOneCommentsManyText,
+		textCommentsZeroText: dynamicBtnOneCommentsZeroText,
+		textCommentsOneText: dynamicBtnOneCommentsOneText,
+		textCommentsManyText: dynamicBtnOneCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnOneTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnOneTermsSeparator,
+		textTermsTaxonomy: dynamicBtnOneTermsTaxonomy,
+		textTermsSeparator: dynamicBtnOneTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnOneEnableLink,
-		textLinkSource:         dynamicBtnOneLinkSource,
+		textLinkEnabled: dynamicBtnOneEnableLink,
+		textLinkSource: dynamicBtnOneLinkSource,
 
 		context,
 	});
@@ -268,41 +270,43 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button Two Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnTwoValue, dynamicDisplayLink: dynamicBtnTwoLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnTwoEnabled,
-		textSource:             dynamicBtnTwoSource,
-		textField:              dynamicBtnTwoField,
+		textEnabled: dynamicBtnTwoEnabled,
+		textSource: dynamicBtnTwoSource,
+		textField: dynamicBtnTwoField,
 
-		textPostId:             dynamicBtnTwoPostId,
-		textPostType:           dynamicBtnTwoPostType,
-		textPostLabel:          dynamicBtnTwoPostLabel,
+		textPostId: dynamicBtnTwoPostId,
+		textPostType: dynamicBtnTwoPostType,
+		textPostLabel: dynamicBtnTwoPostLabel,
 
 		textFeaturedImageField: dynamicBtnTwoFeaturedImageField,
 
-		textDateType:           dynamicBtnTwoDateType,
-		textDateFormat:         dynamicBtnTwoDateFormat,
-		textTimeType:           dynamicBtnTwoTimeType,
-		textTimeFormat:         dynamicBtnTwoTimeFormat,
+		textDateType: dynamicBtnTwoDateType,
+		textDateFormat: dynamicBtnTwoDateFormat,
+		textTimeType: dynamicBtnTwoTimeType,
+		textTimeFormat: dynamicBtnTwoTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnTwoCommentsZeroText,
-		textCommentsOneText:    dynamicBtnTwoCommentsOneText,
-		textCommentsManyText:   dynamicBtnTwoCommentsManyText,
+		textCommentsZeroText: dynamicBtnTwoCommentsZeroText,
+		textCommentsOneText: dynamicBtnTwoCommentsOneText,
+		textCommentsManyText: dynamicBtnTwoCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnTwoTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTwoTermsSeparator,
+		textTermsTaxonomy: dynamicBtnTwoTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTwoTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnTwoEnableLink,
-		textLinkSource:         dynamicBtnTwoLinkSource,
+		textLinkEnabled: dynamicBtnTwoEnableLink,
+		textLinkSource: dynamicBtnTwoLinkSource,
 
 		context,
 	});
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -353,7 +357,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													btnIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a 
+											<a
 												className="fb-cta-button"
 												href={info_Button_Link}
 												onClick={handleBtnClick}
@@ -361,13 +365,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
 											>
 												<RichText
-													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text} 
+													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text}
 													tagName="span"
 													onChange={(value) => {
 														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-													
+
 												/>
 											</a>
 											{buttonIconSwitcher && (
@@ -375,7 +379,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													{renderSVG(btnIcon)}
 												</div>
 											)}
-										
+
 										</div>
 									</div>
 								)}
@@ -389,7 +393,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													btnTwoIconPosition === "left" ? "row-reverse" : "row",
 											}}
 										>
-											<a 
+											<a
 												className="fb-cta-button"
 												href={btnTwoLink}
 												onClick={handleBtnTwoClick}
@@ -403,7 +407,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														if (!dynamicBtnTwoEnabled) setAttributes({ btnTwoText: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-													
+
 												/>
 											</a>
 											{buttonTwoIconSwitcher && (
@@ -411,7 +415,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													{renderSVG(btnTwoIcon)}
 												</div>
 											)}
-											
+
 										</div>
 									</div>
 								)}
@@ -421,6 +425,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

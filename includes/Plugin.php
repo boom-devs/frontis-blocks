@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Admin\Admin;
 use FrontisBlocks\Admin\Ajax\BlocksAjax;
 use FrontisBlocks\Core\Blocks;
@@ -24,7 +28,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.4';
+	const VERSION = '1.1.6';
 
 	/**
 	 * Plugin slug
@@ -127,10 +131,6 @@ final class Plugin
 	 */
 	private function init_classes()
 	{
-
-		//load blocks
-		self::$blocks = BlockList::get_instance()->get_blocks();
-
 		//load blocks
 		self::$blocks = BlockList::get_instance()->get_blocks();
 	}

@@ -1,14 +1,16 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
-import { useRef } from '@wordpress/element';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useRef, lazy, Suspense } from '@wordpress/element';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
+const Inspector = lazy(() => import("./inspector"));
+
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
+        blockStyle,
         FeatureItems,
         FeatureTag,
         FeatureIconShape,
@@ -19,9 +21,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         featuresListGlobalWraperClass,
 
         featuresListDesktopSwitcher,
-		featuresListTabletSwitcher,
-		featuresListMobileSwitcher,
-     } = attributes;
+        featuresListTabletSwitcher,
+        featuresListMobileSwitcher,
+    } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -35,18 +37,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-            
+            <Suspense fallback={null}>
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            </Suspense>
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-feature-wrapper ${featuresListGlobalWraperClass}`} id={featuresListGlobalWraperID} ref={panelRef}>
                     <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>
                         <ul className="fb-feature-list-items">
                             {FeatureItems.map(item => (
-                                  
+
                                 <li key={item.id} className={`fb-feature-list-item single-item-${item.id}`}>
 
                                     {item.FeatureIconAlign !== 'none' && (
@@ -56,7 +60,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     <span className="fb-feature-list-icon">
                                                         {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
                                                     </span>
-                                                    
+
                                                 ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
                                                     <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
 
@@ -71,8 +75,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             </div>
                                         </div>
                                     )}
-                                    
-                                    { (item.Title || item.Description) && (
+
+                                    {(item.Title || item.Description) && (
                                         <div className="fb-feature-list-content">
                                             {item.Title && (
                                                 <RichText
@@ -110,6 +114,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

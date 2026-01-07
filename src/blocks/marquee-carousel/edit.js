@@ -6,12 +6,14 @@ import {
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
-import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
-import Inspector from "./inspector";
 import { Swiper } from "swiper/react";
 import "./editor.scss";
+
+// const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 const ALLOWED_BLOCKS = ["frontis-blocks/marquee-carousel-item"];
 
@@ -40,6 +42,7 @@ import "swiper/css/effect-creative";
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
+		blockStyle,
 		speed,
 		reverseDirection,
 		pauseOnHover,
@@ -68,10 +71,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		const handleClick = () => {
 			if (swiperRef.current.autoplay?.running) {
 				swiperRef.current.autoplay.stop();
-				btn.classList.add("paused"); 
+				btn.classList.add("paused");
 			} else {
 				swiperRef.current.autoplay.start();
-				btn.classList.remove("paused"); 
+				btn.classList.remove("paused");
 			}
 		};
 
@@ -146,31 +149,31 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	// );
 
 	const settings = useMemo(
-	() => ({
-		spaceBetween: 0,
-		centeredSlides: false,
-		speed: speed || 5000,
-		autoplay: {
-		delay: 0,
-		reverseDirection: reverseDirection,
-		pauseOnMouseEnter: pauseOnHover,
-		disableOnInteraction: false,
-		waitForTransition: true,
-		},
-		loop: true,
-		slidesPerView: "auto",
-		allowTouchMove: false,
-		freeMode: true,
-		freeModeMomentum: false,
-		navigation: arrowsId
-		? {
-			nextEl: `.${arrowsId} .fb-news-ticker-next`,
-			prevEl: `.${arrowsId} .fb-news-ticker-prev`,
-			hideOnClick: false,
-			}
-		: false,
-	}),
-	[speed, reverseDirection, pauseOnHover, arrowsId],
+		() => ({
+			spaceBetween: 0,
+			centeredSlides: false,
+			speed: speed || 5000,
+			autoplay: {
+				delay: 0,
+				reverseDirection: reverseDirection,
+				pauseOnMouseEnter: pauseOnHover,
+				disableOnInteraction: false,
+				waitForTransition: true,
+			},
+			loop: true,
+			slidesPerView: "auto",
+			allowTouchMove: false,
+			freeMode: true,
+			freeModeMomentum: false,
+			navigation: arrowsId
+				? {
+					nextEl: `.${arrowsId} .fb-news-ticker-next`,
+					prevEl: `.${arrowsId} .fb-news-ticker-prev`,
+					hideOnClick: false,
+				}
+				: false,
+		}),
+		[speed, reverseDirection, pauseOnHover, arrowsId],
 	);
 
 
@@ -275,6 +278,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					<div {...innerBlocksProps} />
 				</Swiper>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

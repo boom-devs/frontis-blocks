@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Core;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\Assets\AssetsGenerator;
@@ -206,7 +210,7 @@ class Enqueues
         if ($google_font_url) {
             echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
             echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-            echo '<link rel="preload" as="style" href="' . $google_font_url . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
+            echo '<link rel="preload" as="style" href="' . esc_url( $google_font_url ) . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
             // echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
         }
     }

@@ -1,6 +1,10 @@
 <?php
-
 namespace FrontisBlocks\Utils;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Config\BlockList;
 
 /**
@@ -138,6 +142,12 @@ class Helper
      */
     public static function get_related_taxonomy()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_related_taxonomy');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $post_types = self::get_post_types();
         $return_array = array();
 
@@ -153,10 +163,15 @@ class Helper
                 }
 
                 $data[$tax_slug] = $tax;
-                $terms = get_terms($tax_slug);
+                // Limit terms to 100 for better performance
+                $terms = get_terms(array(
+                    'taxonomy' => $tax_slug,
+                    'number' => 100,
+                    'hide_empty' => false,
+                ));
                 $related_tax = array();
 
-                if (!empty($terms)) {
+                if (!empty($terms) && !is_wp_error($terms)) {
                     foreach ($terms as $t_index => $t_obj) {
                         $related_tax[] = array(
                             'id' => $t_obj->term_id,
@@ -171,7 +186,12 @@ class Helper
             $return_array[$post_type]['taxonomy'] = $data;
         }
 
-        return apply_filters('fb_post_loop_taxonomies', $return_array);
+        $result = apply_filters('fb_post_loop_taxonomies', $return_array);
+
+        // Cache for 12 hours
+        set_transient('frontis_related_taxonomy', $result, 12 * HOUR_IN_SECONDS);
+
+        return $result;
     }
 
     /**
@@ -179,11 +199,22 @@ class Helper
      */
     public static function get_all_authors_with_posts()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_authors_with_posts');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $args = array(
             'has_published_posts' => true,
             'fields' => 'all_with_meta',
         );
-        return get_users($args);
+        $authors = get_users($args);
+
+        // Cache for 12 hours
+        set_transient('frontis_authors_with_posts', $authors, 12 * HOUR_IN_SECONDS);
+
+        return $authors;
     }
 
     /**
@@ -417,6 +448,12 @@ class Helper
      */
     public static function get_post_types()
     {
+        // Check for cached data first
+        $cached = get_transient('frontis_post_types');
+        if (false !== $cached) {
+            return $cached;
+        }
+
         $post_types = get_post_types(
             array(
                 'public' => true,
@@ -439,7 +476,12 @@ class Helper
             );
         }
 
-        return apply_filters('fb_loop_post_types', $options);
+        $result = apply_filters('fb_loop_post_types', $options);
+
+        // Cache for 12 hours
+        set_transient('frontis_post_types', $result, 12 * HOUR_IN_SECONDS);
+
+        return $result;
     }
 
     /**
@@ -602,7 +644,8 @@ class Helper
     {
         global $wpdb;
         $table = $site_wide ? $wpdb->base_prefix . 'options' : $wpdb->prefix . 'options';
-        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name));
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from $wpdb->prefix is safe
+        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return is_object($row);
     }
 
@@ -838,7 +881,7 @@ class Helper
           AND post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
           ORDER BY post_date DESC";
 
-        $results = $wpdb->get_results($query);
+        $results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
         if (!empty($results)) {
             return array_map(function ($result) {
@@ -862,12 +905,13 @@ class Helper
     public static function get_single_field($post_id, $field)
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Field name is hardcoded
         $query = $wpdb->prepare(
             "SELECT $field FROM $wpdb->posts WHERE ID = %d",
             $post_id
         );
 
-        return $wpdb->get_var($query) ?: '';
+        return $wpdb->get_var($query) ?: ''; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
     }
 
     /**
@@ -1031,10 +1075,10 @@ class Helper
         $table_name = $wpdb->prefix . 'fb_job_schedule';
 
         // check $post_id not exist then insert
-        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id));
+        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         if (!$check_post_id) {
             // update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
-            $wpdb->insert(
+            $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
                 $table_name,
                 array(
                     'job_id' => $post_id,
@@ -1078,7 +1122,7 @@ class Helper
         );
 
         // Execute the query
-        $template_contents = $wpdb->get_results($query);
+        $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         return $template_contents;
     }
 
@@ -1110,7 +1154,7 @@ class Helper
         );
 
         // Execute the query
-        $template_id = $wpdb->get_var($query);
+        $template_id = $wpdb->get_var($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 
         return $template_id;
     }
@@ -1146,26 +1190,27 @@ class Helper
      * @param int $template_id
      * @return array
      */
-    public static function resolve_frontis_settings( $post_id = 0, $template_id = 0 ) {
-        $post_id   = $post_id ?: get_the_ID();
-        $post_type = get_post_type( $post_id );
+    public static function resolve_frontis_settings($post_id = 0, $template_id = 0)
+    {
+        $post_id = $post_id ?: get_the_ID();
+        $post_type = get_post_type($post_id);
 
         // Only keep header/footer
         $default_settings = [
             'disableHeader' => false,
             'disableFooter' => false,
-            'disablePageTitle'   => false,
+            'disablePageTitle' => false,
         ];
 
         // Global settings (filtered to only allowed keys)
-        $global_settings = get_option( 'frontis_theme_options', [] );
-        $global_settings = is_array( $global_settings ) ? $global_settings : [];
-        $global_settings = array_intersect_key( $global_settings, $default_settings );
+        $global_settings = get_option('frontis_theme_options', []);
+        $global_settings = is_array($global_settings) ? $global_settings : [];
+        $global_settings = array_intersect_key($global_settings, $default_settings);
 
         $template_settings = [];
-        $page_settings     = [];
+        $page_settings = [];
 
-        if ( $post_type === 'wp_template' ) {
+        if ($post_type === 'wp_template') {
 
             $template_settings = get_post_meta(
                 $post_id,
@@ -1176,9 +1221,9 @@ class Helper
         } else {
 
             // Assigned template ID
-            $template_id = $template_id ?: Helper::get_template_id( $post_id );
+            $template_id = $template_id ?: Helper::get_template_id($post_id);
 
-            if ( $template_id ) {
+            if ($template_id) {
                 $template_settings = get_post_meta(
                     $template_id,
                     '_frontis_template_settings',
@@ -1194,12 +1239,12 @@ class Helper
         }
 
         // Ensure arrays + filter unwanted keys
-        $template_settings = is_array( $template_settings )
-            ? array_intersect_key( $template_settings, $default_settings )
+        $template_settings = is_array($template_settings)
+            ? array_intersect_key($template_settings, $default_settings)
             : [];
 
-        $page_settings = is_array( $page_settings )
-            ? array_intersect_key( $page_settings, $default_settings )
+        $page_settings = is_array($page_settings)
+            ? array_intersect_key($page_settings, $default_settings)
             : [];
 
         // Priority: default → global → template → page
@@ -1209,5 +1254,27 @@ class Helper
             $template_settings,
             $page_settings
         );
+    }
+
+    /**
+     * Clear all Frontis Blocks performance caches.
+     * 
+     * Call this function when you need to manually clear cached data.
+     * Caches are also automatically cleared on post save, term changes, and user updates.
+     * 
+     * @since 1.1.7
+     * @return void
+     */
+    public static function clear_frontis_caches()
+    {
+        // Helper caches
+        delete_transient('frontis_related_taxonomy');
+        delete_transient('frontis_authors_with_posts');
+        delete_transient('frontis_post_types');
+
+        // Form caches
+        delete_transient('frontis_fluent_forms_list');
+        delete_transient('frontis_cf7_form_list');
+        delete_transient('frontis_cf7_form_html');
     }
 }

@@ -244,7 +244,7 @@ const attributes = {
 	countDownItemGap: {
 		type: 'object',
 		default: {
-			Desktop: '104',
+			Desktop: '72',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -683,7 +683,7 @@ const attributes = {
 	digitLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '',
+			Desktop: '80',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -935,7 +935,7 @@ const attributes = {
 	countDownSeparatorHorizontalGap: {
 		type: 'object',
 		default: {
-			Desktop: '60',
+			Desktop: '40',
 			Tablet: '',
 			Mobile: ''
 		}

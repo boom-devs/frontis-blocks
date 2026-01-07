@@ -640,8 +640,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
     }, [fbSocialShareStyle]);
 
-    const editorStyle = `${fbSocialShareStyle}`.replace(/\s+/g, ' ').trim();
-
     const generalControls = (
         <>
             <PanelBody title={__("Layout Settings", "frontis-blocks")} initialOpen={true}>
@@ -1104,9 +1102,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     );
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}

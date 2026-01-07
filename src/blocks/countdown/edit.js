@@ -4,15 +4,17 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-import { useEffect, useState, useRef } from '@wordpress/element';
-import Inspector from "./inspector";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useEffect, useState, useRef, lazy, Suspense } from '@wordpress/element';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
+
+const Inspector = lazy(() => import("./inspector"));
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -32,9 +34,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 
-/**
-	* Manages tab button settings and switches to block settings on click
-	*/
+	/**
+		* Manages tab button settings and switches to block settings on click
+		*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
@@ -101,11 +103,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID} ref={panelRef}>
@@ -138,6 +142,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

@@ -4,9 +4,6 @@ export default function save({ attributes }) {
     const {
         blockId,
         animationType,
-        startDuration,
-        endDuration,
-        animationTransition,
         animatedHeadingItems,
         animatedHeadingMainTag,
         animatedHeadingPrefix,
@@ -29,10 +26,6 @@ export default function save({ attributes }) {
                 className={`fb-animated-heading-container ${animatedHeadingGlobalWraperClass}`}
                 id={animatedHeadingGlobalWraperID}
                 data-animation-type={animationType}
-                data-start-duration={startDuration}
-                data-end-duration={endDuration}
-                data-animation-transition={animationTransition}
-                data-cursor={animatedHeadingCursorSwitch ? animatedHeadingCursor : ''}
             >
                 <Tag className={`fb-animated-heading-wrapper animated-type-${animationType}`}>
                     {animatedHeadingPrefix && (
@@ -43,28 +36,37 @@ export default function save({ attributes }) {
                         />
                     )}
 
-                    {/* Hidden text items for animation */}
-                    <div className="fb-animated-heading-items" style={{ display: 'none' }}>
-                        {animatedHeadingItems?.map((item, index) => (
-                            <span key={index} className="fb-animated-heading-item">
-                                {item.animatedHeadingTitle}
-                            </span>
-                        ))}
-                    </div>
-
-                    {/* Typing Animation Structure */}
-                    {animationType === "typing" ? (
-                        <>
-                            <span className="fb-animated-headings"></span>
-                            {animatedHeadingCursorSwitch && animatedHeadingCursor && (
-                                <span className="fb-animated-heading-cursor">{animatedHeadingCursor}</span>
-                            )}
-                        </>
-                    ) : (
+                    {animationType === 'typing' && (
                         <>
                             <span className="fb-animated-headings">
-                                <span className="fb-animated-heading-dynamic-wrapper"></span>
+                                {animatedHeadingItems &&
+                                    animatedHeadingItems.map((item) => (
+                                        <span key={item.id} className="fb-animated-heading-item">
+                                            {item.animatedHeadingTitle}
+                                        </span>
+                                    ))}
                             </span>
+                            {animatedHeadingCursorSwitch && animatedHeadingCursor && (
+                                <span className="fb-animated-heading-cursor">
+                                    {animatedHeadingCursor}
+                                </span>
+                            )}
+                        </>
+                    )}
+
+                    {animationType === 'swirl' && (
+                        <>
+                        <span className="fb-animated-heading-swirl-wrapper">
+                            <span className="fb-animated-heading-dynamic-wrapper" id="animated-heading-wrapper">
+                                {animatedHeadingItems && animatedHeadingItems.length > 0 &&
+                                    animatedHeadingItems.map((item, index) => (
+                                        <span key={index} className="fb-animated-heading-item">
+                                            {' '}{item.animatedHeadingTitle}{' '}
+                                        </span>
+                                    ))
+                                }
+                            </span>
+                        </span>
                         </>
                     )}
 

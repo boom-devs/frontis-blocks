@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Assets\AssetsGenerator;
@@ -12,7 +16,8 @@ use FrontisBlocks\Utils\Helper;
  *
  * @package FrontisBlocks
  */
-class Settings extends AjaxBase {
+class Settings extends AjaxBase
+{
 
 	use Singleton;
 
@@ -21,7 +26,8 @@ class Settings extends AjaxBase {
 	 *
 	 * @return void
 	 */
-	public function register_ajax_events() {
+	public function register_ajax_events()
+	{
 		$ajax_events = [
 			'get_options',
 			'default_content_width',
@@ -59,7 +65,8 @@ class Settings extends AjaxBase {
 		$this->init_ajax_events($ajax_events);
 	}
 
-	public function get_options() {
+	public function get_options()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -70,45 +77,54 @@ class Settings extends AjaxBase {
 			return;
 		}
 
-		$keys = isset($_POST['keys']) ? $_POST['keys'] : [];
+		$keys = isset($_POST['keys']) ? array_map('sanitize_key', (array) $_POST['keys']) : [];
 		$options = [];
 
 		foreach ($keys as $key) {
-			$options[$key] = get_option("fb_$key");
+			$sanitized_key = sanitize_key($key);
+			$options[$sanitized_key] = get_option("fb_$sanitized_key");
 		}
 
 		wp_send_json_success($options);
 	}
 
 	// Individual option handlers
-	public function default_content_width() {
+	public function default_content_width()
+	{
 		$this->handle_option_update('default_content_width', 'number');
 	}
 
-	public function container_column_gap() {
+	public function container_column_gap()
+	{
 		$this->handle_option_update('container_column_gap', 'number');
 	}
 
-	public function container_row_gap() {
+	public function container_row_gap()
+	{
 		$this->handle_option_update('container_row_gap', 'number');
 	}
 
-	public function container_padding() {
+	public function container_padding()
+	{
 		$this->handle_option_update('container_padding', 'number');
 	}
 
-	public function custom_css() {
+	public function custom_css()
+	{
 		$this->handle_option_update('custom_css', 'boolean');
 	}
-    public function automatic_block_recovery() {
-        $this->handle_option_update('automatic_block_recovery', 'boolean');
-    }
+	public function automatic_block_recovery()
+	{
+		$this->handle_option_update('automatic_block_recovery', 'boolean');
+	}
 
-	public function copy_paste_style() {
+	public function copy_paste_style()
+	{
 		$this->handle_option_update('copy_paste_style', 'boolean');
 	}
 
-	public function file_generation() {
+	public function file_generation()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -120,11 +136,12 @@ class Settings extends AjaxBase {
 	}
 
 	/**
-	* generate_assets
-	*
-	* @return void
-	*/
-	public function generate_assets() {
+	 * generate_assets
+	 *
+	 * @return void
+	 */
+	public function generate_assets()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 		}
@@ -139,7 +156,7 @@ class Settings extends AjaxBase {
 
 		$response = $this->generate_assets_for_post($batch, $batch_size);
 
-		if($response['success']) {
+		if ($response['success']) {
 			wp_send_json_success([
 				'message' => $response['message'],
 				'completed' => $response['completed'],
@@ -186,7 +203,7 @@ class Settings extends AjaxBase {
 			WHERE post_status = 'publish'
 			AND post_name != 'wp-global-styles-frontis-theme'
 			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')";
-		
+
 		$total_posts = $wpdb->get_var($count_query);
 
 		// Query to get batch of post IDs
@@ -197,19 +214,19 @@ class Settings extends AjaxBase {
 			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
 			ORDER BY post_date DESC
 			LIMIT {$batch_size} OFFSET {$offset}";
-		
-		$results = $wpdb->get_results($query);
+
+		$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 
 		$generatedPages = [];
-		
-		if(!empty($results)) {
+
+		if (!empty($results)) {
 			foreach ($results as $post) {
 				$modified_post = $post;
 				$post_content = $post->post_content;
 
 				$pattern = "/frontis-blocks/i";
 
-				if((preg_match_all($pattern, $post->post_content) === 0 && get_post_type($post->ID) !== 'wp_template')) {
+				if ((preg_match_all($pattern, $post->post_content) === 0 && get_post_type($post->ID) !== 'wp_template')) {
 					continue;
 				}
 
@@ -227,13 +244,13 @@ class Settings extends AjaxBase {
 				update_post_meta($post->ID, 'frontis_blocks_used', false);
 				update_post_meta($post->ID, 'generate_critical_css', false);
 
-				if(preg_match_all($pattern, $post->post_content) > 0) {
+				if (preg_match_all($pattern, $post->post_content) > 0) {
 					update_post_meta($post->ID, 'frontis_blocks_used', true);
 				}
 
 				$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
 
-				if($critical_css_used) {
+				if ($critical_css_used) {
 					update_post_meta($post->ID, 'generate_critical_css', $critical_css_used);
 				}
 
@@ -257,7 +274,8 @@ class Settings extends AjaxBase {
 	/**
 	 * generate_assets_on_activation_update
 	 */
-	public function generate_assets_on_activation_update() {
+	public function generate_assets_on_activation_update()
+	{
 		$response = $this->generate_assets_for_post();
 
 		if ($response) {
@@ -273,7 +291,8 @@ class Settings extends AjaxBase {
 	 * @param string $folder_path
 	 * @return void
 	 */
-	private function delete_folder($folder_path) {
+	private function delete_folder($folder_path)
+	{
 		if (!is_dir($folder_path)) {
 			return false;
 		}
@@ -291,19 +310,23 @@ class Settings extends AjaxBase {
 		return rmdir($folder_path); // Remove the directory itself
 	}
 
-	public function version_control() {
+	public function version_control()
+	{
 		$this->handle_option_update('version_control', 'text');
 	}
 
-	public function enable_quick_action_bar() {
+	public function enable_quick_action_bar()
+	{
 		$this->handle_option_update('enable_quick_action_bar', 'boolean');
 	}
 
-	public function collapse_panel() {
+	public function collapse_panel()
+	{
 		$this->handle_option_update('collapse_panel', 'boolean');
 	}
 
-	public function enable_templates_button() {
+	public function enable_templates_button()
+	{
 		$this->handle_option_update('enable_templates_button', 'boolean');
 	}
 
@@ -321,7 +344,7 @@ class Settings extends AjaxBase {
 
 		$allowed_blocks = get_option("fb_update_allowed_blocks");
 
-		if($allowed_blocks) {
+		if ($allowed_blocks) {
 			$allowed_blocks = json_decode($allowed_blocks);
 			wp_send_json_success($allowed_blocks);
 		} else {
@@ -343,9 +366,9 @@ class Settings extends AjaxBase {
 			return;
 		}
 
-		$allowed_blocks = isset($_POST['data']) ? ($_POST['data']) : [];
+		$allowed_blocks = isset($_POST['data']) ? array_map('sanitize_text_field', (array) $_POST['data']) : [];
 
-		$value =  json_encode($allowed_blocks);
+		$value = json_encode($allowed_blocks);
 
 		$old_value = get_option("fb_update_allowed_blocks");
 
@@ -378,7 +401,8 @@ class Settings extends AjaxBase {
 	 * @param string $type
 	 * @return void
 	 */
-	private function handle_option_update($option_name, $type) {
+	private function handle_option_update($option_name, $type)
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -391,7 +415,7 @@ class Settings extends AjaxBase {
 
 		$post_value = isset($_POST['value']) ? ($_POST['value']) : [];
 
-		$value =  json_encode($post_value);
+		$value = json_encode($post_value);
 
 		$old_value = get_option("fb_$option_name");
 		// Convert old_value to the correct type for comparison
@@ -431,7 +455,8 @@ class Settings extends AjaxBase {
 	 * @param string $type
 	 * @return mixed
 	 */
-	private function sanitize_option_value($value, $type) {
+	private function sanitize_option_value($value, $type)
+	{
 		switch ($type) {
 			case 'number':
 				return intval($value);
@@ -445,7 +470,8 @@ class Settings extends AjaxBase {
 	}
 
 	// New method to save blocks
-	public function save_blocks() {
+	public function save_blocks()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -464,7 +490,7 @@ class Settings extends AjaxBase {
 			return;
 		}
 
-		if($activeBlocks) {
+		if ($activeBlocks) {
 			foreach ($blocks as $key => $value) {
 				if ($value === true) {
 					$activeBlocks[$key] = true;
@@ -485,7 +511,8 @@ class Settings extends AjaxBase {
 		}
 	}
 
-	public function get_blocks() {
+	public function get_blocks()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			error_log('Invalid nonce in get_blocks');
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
@@ -510,47 +537,58 @@ class Settings extends AjaxBase {
 		wp_send_json_success($completeBlocks);
 	}
 
-	public function recaptcha_v2_site_key() {
+	public function recaptcha_v2_site_key()
+	{
 		$this->handle_option_update('recaptcha_v2_site_key', 'text');
 	}
 
-	public function recaptcha_v2_secret_key() {
+	public function recaptcha_v2_secret_key()
+	{
 		$this->handle_option_update('recaptcha_v2_secret_key', 'text');
 	}
 
-	public function recaptcha_v3_site_key() {
+	public function recaptcha_v3_site_key()
+	{
 		$this->handle_option_update('recaptcha_v3_site_key', 'text');
 	}
 
-	public function recaptcha_v3_secret_key() {
+	public function recaptcha_v3_secret_key()
+	{
 		$this->handle_option_update('recaptcha_v3_secret_key', 'text');
 	}
 
-	public function google_maps_api_key() {
+	public function google_maps_api_key()
+	{
 		$this->handle_option_update('google_maps_api_key', 'text');
 	}
 
-	public function instagram_access_token() {
+	public function instagram_access_token()
+	{
 		$this->handle_option_update('instagram_access_token', 'text');
 	}
 
-	public function coming_soon_mode() {
+	public function coming_soon_mode()
+	{
 		$this->handle_option_update('coming_soon_mode', 'boolean');
 	}
 
-	public function maintenance_mode() {
+	public function maintenance_mode()
+	{
 		$this->handle_option_update('maintenance_mode', 'boolean');
 	}
 
-	public function coming_soon_page_id() {
+	public function coming_soon_page_id()
+	{
 		$this->handle_option_update('coming_soon_page_id', 'text');
 	}
 
-	public function maintenance_page_id() {
+	public function maintenance_page_id()
+	{
 		$this->handle_option_update('maintenance_page_id', 'text');
 	}
 
-	public function get_custom_icons_category() {
+	public function get_custom_icons_category()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
@@ -575,8 +613,8 @@ class Settings extends AjaxBase {
 		// Execute the query and get results
 		$results = $wpdb->get_results($query);
 		$categories = [];
-		if($results) {
-			foreach( $results as $key => $single_result) {
+		if ($results) {
+			foreach ($results as $key => $single_result) {
 				$categories[] = array(
 					'slug' => $single_result->post_name,
 					'title' => $single_result->post_title
@@ -584,22 +622,23 @@ class Settings extends AjaxBase {
 			}
 		}
 
-		if($categories) {
+		if ($categories) {
 			$icons_name = get_option('fb_custom_icons_name');
 			$icons = get_option('fb_custom_icons');
 			wp_send_json_success(['categories' => $categories, 'names' => $icons_name, 'icons' => $icons]);
-		}else {
+		} else {
 			wp_send_json_error(['message' => 'Categories not found']);
 		}
 	}
 
-	public function upload_custom_icons() {
+	public function upload_custom_icons()
+	{
 		if (!check_ajax_referer('fb_settings_nonce', 'security', false)) {
 			wp_send_json_error(['message' => 'Invalid nonce'], 400);
 			return;
 		}
 
-		if ( ! class_exists( 'PclZip' ) ) {
+		if (!class_exists('PclZip')) {
 			require_once ABSPATH . 'wp-admin/includes/class-pclzip.php';
 		}
 
@@ -622,26 +661,53 @@ class Settings extends AjaxBase {
 		// Execute the query and get results
 		$results = $wpdb->get_results($query);
 
-		if($results) {
+		if ($results) {
 			$custom_icons = [];
 			$custom_icons_name = [];
-			foreach($results as $key => $single_icon) {
+			foreach ($results as $key => $single_icon) {
 				$icon_url = $single_icon->fb_custom_icon;
 				$fileName = pathinfo(basename($icon_url), PATHINFO_FILENAME);
-				$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-custom-icons/'.$fileName;
+				$upload_directory = WP_CONTENT_DIR . '/uploads/frontis-custom-icons/' . $fileName;
 				if (!is_dir($upload_directory)) {
 					mkdir($upload_directory, 0755, true);
 				}
 
 				$tempZipFile = tempnam(sys_get_temp_dir(), 'downloaded_zip_');
 
-				$ch = curl_init($icon_url);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-				$data = curl_exec($ch);
+				$response = wp_safe_remote_get($icon_url, array(
+					'timeout' => 60,
+					'sslverify' => true,
+				));
+
+				if (is_wp_error($response)) {
+					continue;
+				}
+
+				$data = wp_remote_retrieve_body($response);
 				file_put_contents($tempZipFile, $data);
 				$zip = new \PclZip($tempZipFile);
+
+				// Security: Validate ZIP contents before extraction
+				$zip_contents = $zip->listContent();
+				if ($zip_contents === 0) {
+					unlink($tempZipFile);
+					continue;
+				}
+
+				$dangerous_extensions = array('php', 'php3', 'php4', 'php5', 'php7', 'php8', 'phtml', 'phar', 'exe', 'sh', 'bat', 'htaccess');
+				$safe_to_extract = true;
+				foreach ($zip_contents as $zip_file) {
+					$ext = strtolower(pathinfo($zip_file['filename'], PATHINFO_EXTENSION));
+					if (in_array($ext, $dangerous_extensions)) {
+						$safe_to_extract = false;
+						break;
+					}
+				}
+
+				if (!$safe_to_extract) {
+					unlink($tempZipFile);
+					continue;
+				}
 
 				$extractResult = $zip->extract(PCLZIP_OPT_PATH, $upload_directory);
 
@@ -657,8 +723,8 @@ class Settings extends AjaxBase {
 					return false;
 				} else {
 					$filesInDirectory = scandir($upload_directory);
-					if($filesInDirectory) {
-						foreach($filesInDirectory as $single_dir_icon) {
+					if ($filesInDirectory) {
+						foreach ($filesInDirectory as $single_dir_icon) {
 							// Skip special entries '.' and '..'
 							if ($single_dir_icon === '.' || $single_dir_icon === '..') {
 								continue;
@@ -679,8 +745,8 @@ class Settings extends AjaxBase {
 									preg_match('/height="([0-9]+)px"/', $svgContent, $heightMatch);
 									preg_match('/viewBox="([^"]+)"/', $svgContent, $viewBoxMatch);
 
-									$width = isset($widthMatch[1]) ? (int)$widthMatch[1] : 320;  // Default width if not found
-									$height = isset($heightMatch[1]) ? (int)$heightMatch[1] : 512; // Default height if not found
+									$width = isset($widthMatch[1]) ? (int) $widthMatch[1] : 320;  // Default width if not found
+									$height = isset($heightMatch[1]) ? (int) $heightMatch[1] : 512; // Default height if not found
 									$viewBox = isset($viewBoxMatch[1]) ? $viewBoxMatch[1] : '0 0 24 24'; // Default viewBox if not found
 
 									// Remove XML declaration and <svg> tag attributes, keeping only inner SVG elements
@@ -723,7 +789,7 @@ class Settings extends AjaxBase {
 										"custom_icons" => true
 									];
 
-									if(!in_array($icon_name, $custom_icons_name)) {
+									if (!in_array($icon_name, $custom_icons_name)) {
 										$custom_icons_name[] = $icon_name;
 									}
 								}
@@ -743,7 +809,8 @@ class Settings extends AjaxBase {
 	}
 
 	// In your Settings class (already there)
-	public function get_plugin_changelog() {
+	public function get_plugin_changelog()
+	{
 		// $this->check_permission();
 
 		$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_text_field($_POST['plugin_slug']) : 'frontis-blocks';
@@ -753,14 +820,14 @@ class Settings extends AjaxBase {
 		}
 
 		$cache_key = 'fb_changelog_' . $plugin_slug;
-		$cached    = get_transient($cache_key);
+		$cached = get_transient($cache_key);
 
 		if ($cached !== false) {
 			wp_send_json_success([
-				'changelog'     => $cached,
-				'source'        => 'cache',
-				'version'       => get_option('fb_plugin_version', 'N/A'),
-				'last_updated'  => get_option('fb_last_updated', 'N/A'),
+				'changelog' => $cached,
+				'source' => 'cache',
+				'version' => get_option('fb_plugin_version', 'N/A'),
+				'last_updated' => get_option('fb_last_updated', 'N/A'),
 			]);
 		}
 
@@ -789,14 +856,15 @@ class Settings extends AjaxBase {
 		set_transient($cache_key, $changelog, 12 * HOUR_IN_SECONDS);
 
 		wp_send_json_success([
-			'changelog'     => $changelog,
-			'source'        => 'api',
-			'version'       => $data['version'] ?? 'N/A',
-			'last_updated'  => $data['last_updated'] ?? 'N/A',
+			'changelog' => $changelog,
+			'source' => 'api',
+			'version' => $data['version'] ?? 'N/A',
+			'last_updated' => $data['last_updated'] ?? 'N/A',
 		]);
 	}
 
-	private function format_changelog($changelog) {
+	private function format_changelog($changelog)
+	{
 		$changelog = preg_replace_callback(
 			'/<h[3-4][^>]*>([^<]+)<\/h[3-4]>/i',
 			function ($m) {

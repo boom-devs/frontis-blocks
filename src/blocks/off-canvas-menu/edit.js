@@ -4,17 +4,19 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { useState, useEffect, useRef } from '@wordpress/element';
+import { useState, useEffect, useRef, lazy, Suspense } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { parse } from '@wordpress/blocks';
-import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
+const Inspector = lazy(() => import('./inspector'));
+
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		selectedTemplate,
 		menuPosition,
 		hamburgerIcon,
@@ -121,11 +123,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<div {...blockProps}>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			<Suspense fallback={null}>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+				/>
+			</Suspense>
 
 			<div className={`fb-off-canvas-menu-container ${offCanvasGlobalWraperClass}`} id={offCanvasGlobalWraperID} ref={panelRef}>
 				<div
@@ -186,6 +190,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					></div>
 				)}
 			</div>
+			<style>{blockStyle}</style>
 		</div>
 	);
 }
