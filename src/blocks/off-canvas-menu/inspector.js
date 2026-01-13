@@ -2609,7 +2609,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${offCanvasPositionType !== 'default' && offCanvasPositionType !== 'relative' && offCanvasVROrientationType === 'bottom' && offCanvasVRBottomOffset?.Desktop ? `bottom: ${offCanvasVRBottomOffset?.Desktop}${offCanvasVRBottomOffsetUnits?.Desktop};` : ''}
 					${offCanvasGlobalZIndex?.Desktop ? `z-index: ${offCanvasGlobalZIndex?.Desktop};` : ''}
 					${offCanvasOverflow !== 'default' ? `overflow: ${offCanvasOverflow};` : ''}
-					transition: all .3s ease-in-out;
 				}
 				.${blockID}.fb-off-canvas-menu-block .fb-off-canvas-menu-container{
 					${desktopGlobalBackgroundNormalStyles}
@@ -2620,7 +2619,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${globalDesktopBorderRadiusWidth && offCanvasGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
 					${offCanvasGlobalBorderColor ? `border-color: ${offCanvasGlobalBorderColor};` : ''}
 					${offCanvasGlobalBoxShadowCssValue ? `box-shadow: ${offCanvasGlobalBoxShadowCssValue};` : ''}
-					transition: all .3s ease-in-out;
 				}
 				.${blockID}.fb-off-canvas-menu-block:hover .fb-off-canvas-menu-container{
 					${desktopGlobalBackgroundHoverStyles}
@@ -2656,7 +2654,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${offCanvashamburgerIconDesktopBorderRadiusStr && offCanvashamburgerIconDesktopBorderRadiusWidth?.top ? `border-radius: ${offCanvashamburgerIconDesktopBorderRadiusStr};` : ''}
 					${offCanvasHamburgerIconDesktopMarginWidth && offCanvasHamburgerIconDesktopMargin?.top ? `margin: ${offCanvasHamburgerIconDesktopMarginWidth};` : ''}
 					${offCanvasHamburgerIconDesktopPaddingWidth && offCanvasHamburgerIconDesktopPadding?.top ? `padding: ${offCanvasHamburgerIconDesktopPaddingWidth};` : ''}
-					transition: 0.3s all ease;
 				}
 
 				.${blockID}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-menu-icon:hover{
@@ -2668,7 +2665,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${offCanvasHamburgerIconWidth?.Desktop ? `width: ${offCanvasHamburgerIconWidth?.Desktop}${offCanvasHamburgerIconWidthUnits?.Desktop};` : ''}
 					${offCanvasHamburgerIconWidth?.Desktop ? `height: ${offCanvasHamburgerIconWidth?.Desktop}${offCanvasHamburgerIconWidthUnits?.Desktop};` : ''}
 					${offCanvashamburgerIconColor ? `fill: ${offCanvashamburgerIconColor};` : ''}
-					transition: 0.3s all ease;
 				}
 				.${blockID}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-menu-icon:hover svg{
 					${offCanvashamburgerIconHoverColor ? `fill: ${offCanvashamburgerIconHoverColor};` : ''}
@@ -2717,7 +2713,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${offCanvasCloseIconDesktopMarginWidth && offCanvasCloseIconDesktopMargin?.top ? `margin: ${offCanvasCloseIconDesktopMarginWidth};` : ''}
 					${offCanvasCloseIconDesktopBorderWidthStr && offCanvasCloseIconDesktopBorderWidth?.top ? `border-width: ${offCanvasCloseIconDesktopBorderWidthStr};` : ''}
 					${offCanvasCloseIconDesktopBorderRadiusStr && offCanvasCloseIconDesktopBorderRadiusWidth?.top ? `border-radius: ${offCanvasCloseIconDesktopBorderRadiusStr};` : ''}
-					transition: 0.3s all ease;
 				}
 				.${blockID}.fb-off-canvas-menu-block .fb-off-canvas-menu .fb-close-menu.icon:hover{
 					${offCanvasCloseIconBgHoverColor ? `background: ${offCanvasCloseIconBgHoverColor};` : ''}
@@ -2727,7 +2722,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${offCanvasCloseIconWidth?.Desktop ? `width: ${offCanvasCloseIconWidth?.Desktop}${offCanvasCloseIconWidthUnits?.Desktop};` : ''}
 					${offCanvasCloseIconWidth?.Desktop ? `height: ${offCanvasCloseIconWidth?.Desktop}${offCanvasCloseIconWidthUnits?.Desktop};` : ''}
 					${offCanvasCloseIconColor ? `fill: ${offCanvasCloseIconColor};` : ''}
-					transition: 0.3s all ease;
 				}
 				.${blockID}.fb-off-canvas-menu-block .fb-off-canvas-menu .fb-close-menu.icon:hover svg{
 					${offCanvasCloseIconHoverColor ? `fill: ${offCanvasCloseIconHoverColor};` : ''}

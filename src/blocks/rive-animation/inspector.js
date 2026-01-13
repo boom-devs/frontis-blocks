@@ -494,8 +494,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				${riveAnimationGlobalBorderColor ? `border-color: ${riveAnimationGlobalBorderColor};` : ''}
 				${riveAnimationGlobalBoxShadowCssValue ? `box-shadow: ${riveAnimationGlobalBoxShadowCssValue};` : ''}
 				${riveAnimationNormalOpacity ? `opacity: ${riveAnimationNormalOpacity};` : ''}
-				transition: all .3s ease-in-out;
-				position: relative;
 			}
 			.${blockID} .fb-rive-animation-container:hover .fb-rive-canvas-wrapper{
 				${riveAnimationGlobalHoverBackgroundType === 'gradient' ? `   	

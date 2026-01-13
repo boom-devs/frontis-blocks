@@ -686,8 +686,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     const allBlockStyle = useMemo(() => `
         .${blockId}.fb-query-pagination-wrapper .fb-query-pagination {
-            display: flex;
-            align-items: center;
+
             ${paginationAlignment[deviceType] ? `justify-content: ${paginationAlignment[deviceType]};` : ''}
             ${paginationItemGap[deviceType] ? `gap: ${paginationItemGap[deviceType]}${paginationItemGapUnits[deviceType]};` : ''}
 
@@ -754,9 +753,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
 
         .${blockId} .fb-query-pagination .fb-page-numbers{
-            display: flex;
-            align-items: center;
-            justify-content: center;
+
             ${paginationBtnGap?.Desktop ? `gap: ${paginationBtnGap?.Desktop}${paginationBtnGapUnits?.Desktop};` : ''}
         }
 

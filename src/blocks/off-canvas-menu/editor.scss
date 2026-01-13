@@ -1,5 +1,10 @@
 .fb-off-canvas-menu-block {
     position: relative;
+    transition: all .3s ease-in-out;
+
+    .fb-off-canvas-menu-container {
+        transition: all .3s ease-in-out;
+    }
 
     &::after {
         outline: none !important;
@@ -20,7 +25,7 @@
 
         .fb-menu-icon {
             position: relative;
-            transition: transform 0.3s ease-in-out;
+            transition: 0.3s all ease;
 
             svg {
                 width: 20px;
@@ -351,7 +356,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: 0.3s all ease;
 
             svg {
                 width: 20px;

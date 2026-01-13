@@ -1,0 +1,22 @@
+.fb-loop-builder-wrapper-main-container.grid-layout {
+    display: grid;
+}
+
+.fb-loop-builder-wrapper-main-container.list-layout {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+@media only screen and (max-width: 1024px) {
+    .fb-loop-builder-wrapper-main-container.list-layout {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .fb-loop-builder-wrapper-main-container.list-layout {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

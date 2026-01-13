@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import './editor.scss';
 
 import {
 	useBlockProps,
@@ -2792,21 +2793,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbInfoBoxStyle = useMemo(
 		() => `
-		  .fb-info-box-wrapper-inner.${blockID} .fb-icon-wrapper {
-			line-height: 0;
-		  }
-		  .fb-info-box-wrapper-inner.${blockID} .fb-info-btn-wrapper {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-		  }
-		  .fb-info-box-wrapper-inner.${blockID} .fb-info-btn-wrapper .fb-btn-icon-wrapper {
-			line-height: 0;
-		  }
-		  .fb-info-box-wrapper-inner.${blockID} .fb-info-media-wrapper {
-			display: flex;
-			align-items: center;
-		  }
 		  .fb-info-box-main-wrapper.${blockID} {
 			${infoBoxPositionType === 'default' ? `position: relative;` : ''}
 			${infoBoxPositionType !== 'default' && infoBoxPositionType !== 'relative' ? `width: 100%;` : ''}

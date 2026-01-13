@@ -45,15 +45,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const allBlockStyle = useMemo(() => `
 
         .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
-            display: grid;
+
             grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, 1fr); 
             row-gap: ${gridRowGap?.Desktop}${gridGapUnits?.Desktop};  
             column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop}; 
         }
 
         .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
+
             gap: ${listRowGap?.Desktop}${listGapUnits?.Desktop}; 
         }
 
@@ -64,8 +63,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
             }
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
-                display: grid;
-                grid-template-columns: repeat(1, 1fr);
+
                 gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet}; 
             }
         }
@@ -77,8 +75,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
             }
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
-                display: grid;
-                grid-template-columns: repeat(1, 1fr);
+
                 gap: ${listRowGap?.Mobile}${listGapUnits?.Mobile};  
             }
         }

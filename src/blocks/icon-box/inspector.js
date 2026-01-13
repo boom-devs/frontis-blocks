@@ -66,6 +66,8 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
+import './editor.scss';
+
 export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
@@ -2927,21 +2929,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const fbIconBoxStyle = useMemo(
 		() => `
-		  .fb-icon-box-wrapper-inner .fb-icon-wrapper {
-			line-height: 0;
-		  }
-		  .fb-icon-box-wrapper-inner .fb-icon-btn-wrapper {
-			display: inline-flex;
-			align-items: center;
-			gap: 10px;
-		  }
-		  .fb-icon-box-wrapper-inner .fb-icon-btn-wrapper .fb-btn-icon-wrapper {
-			line-height: 0;
-		  }
-		  .fb-icon-box-wrapper-inner .fb-icon-media-wrapper {
-			display: flex;
-			align-items: center;
-		  }
+
 		  .fb-icon-box-main-wrapper.${blockID} {
 			${iconBoxPositionType === 'default' ? `position: relative;` : ''}
 			${iconBoxPositionType !== 'default' && iconBoxPositionType !== 'relative' ? `width: 100%;` : ''}
