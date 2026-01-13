@@ -4,8 +4,8 @@
 import { __ } from "@wordpress/i18n";
 import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { useRef, memo, useEffect, useMemo, lazy, Suspense } from "@wordpress/element";
-const Inspector = lazy(() => import('./inspector'));
+import { useRef, memo, useEffect, useMemo } from "@wordpress/element";
+import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
@@ -101,9 +101,7 @@ const Edit = (props) => {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector {...props} />
-            </Suspense>
+            <Inspector {...props} />
 
             <div {...blockProps}>
                 <div className={`fb-accordion-item-wrapper for_edit_page ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>
