@@ -34,8 +34,8 @@ export default memo(Edit);
 ## 📋 Block Status List
 
 ### Core Blocks
-- [ ] accordion
-- [ ] accordion-item
+- [x] accordion
+- [x] accordion-item
 - [x] advanced-button (Fixed)
 - [ ] advanced-heading
 - [ ] advanced-image
