@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -135,6 +135,7 @@ Frontis Blocks includes a growing collection of custom Gutenberg blocks for Word
 **Navigation & Maps**
 
 - **Advanced Navigation:** Create modern menus with improved styling and layout options.
+- **Off-Canvas Menu:** Add an off-canvas slide-in menu with a toggleable hamburger icon, customizable menu positions (left/right), and responsive controls for modern mobile-friendly navigation.
 - **Google Map:** Add a map section for locations, contact pages, and store pages.
 
 **Technical & Performance**
@@ -246,6 +247,24 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.7 – 09 January 2026 =
+- **New Block**
+- Introduced Off-Canvas Menu block with toggleable hamburger icon, customizable menu positions (left/right), and responsive controls for a modern navigation experience.
+
+- **Performance Optimizations**
+- Implemented lazy loading for Inspector components across all blocks to improve editor performance and reduce initial load time.
+- Optimized block rendering by persisting blockStyle attribute and removing redundant editorStyle declarations.
+- Enhanced loading efficiency for 20+ blocks including Advanced Navigation, Icon Box, Info Box, Testimonial, Countdown, Counter Number, Google Map, Image Gallery, Lottie Animation, Marquee Carousel, News Ticker, and more.
+
+- **Improvements**
+- Better code organization and formatting across multiple blocks.
+- Improved inline CSS handling for faster page rendering.
+- Enhanced editor experience with smoother block insertion and configuration.
+
+- **Compatibility**
+- Tested and confirmed compatibility with the latest WordPress and Gutenberg versions.
+
 
 = 1.1.6 – 29 december 2025 =
 - **Fix**
