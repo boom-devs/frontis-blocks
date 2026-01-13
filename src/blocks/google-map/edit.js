@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { lazy, Suspense } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import {
     useBlockProps,
 } from '@wordpress/block-editor';
@@ -9,9 +9,9 @@ import {
  */
 import './editor.scss';
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
@@ -31,13 +31,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
+            <Inspector
                     attributes={attributes}
                     setAttributes={setAttributes}
                     clientId={clientId}
                 />
-            </Suspense>
             <div {...blockProps}>
                 <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>
                     <iframe
@@ -53,3 +51,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+
+export default memo(Edit);

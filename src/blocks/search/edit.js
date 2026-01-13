@@ -4,10 +4,10 @@ import {
 } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, memo } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const { 
 		blockId, 
 		searchActive,
@@ -68,3 +68,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+
+export default memo(Edit);

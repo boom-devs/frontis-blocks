@@ -1,12 +1,12 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useState, useMemo, lazy, Suspense } from "@wordpress/element";
+import { useEffect, useState, useMemo, memo } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import apiFetch from "@wordpress/api-fetch";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
@@ -818,13 +818,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <div {...blockProps}>
                 {!taxonomyType ? (
@@ -858,3 +856,5 @@ function trimWords(text, wordLimit) {
         ? words.slice(0, wordLimit).join(" ") + "..."
         : text;
 }
+
+export default memo(Edit);

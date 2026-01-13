@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useRef, lazy, Suspense } from "@wordpress/element";
+import { useRef, memo } from "@wordpress/element";
 import {
 	useBlockProps,
 	RichText,
@@ -14,9 +14,9 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 		blockStyle,
@@ -68,13 +68,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
+			<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
 					clientId={clientId}
 				/>
-			</Suspense>
 
 			<div {...blockProps}>
 				<div className={`fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID} ref={panelRef}>
@@ -107,3 +105,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);

@@ -1,6 +1,6 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo, memo } from "@wordpress/element";
 import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
 import './editor.scss';
@@ -10,7 +10,7 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import Inspector from "./inspector";
 
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
@@ -387,3 +387,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     );
 
 }
+
+export default memo(Edit);

@@ -77,7 +77,7 @@ function PostTemplateBlockPreview( {
 
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 
 	const {
 		blockId,
@@ -363,3 +363,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);

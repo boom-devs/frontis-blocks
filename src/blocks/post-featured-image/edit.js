@@ -1,10 +1,10 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, lazy, Suspense } from "@wordpress/element";
+import { useEffect, memo } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 		blockStyle,
@@ -96,13 +96,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
+			<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
 					clientId={clientId}
 				/>
-			</Suspense>
 
 			<div {...blockProps}>
 				<div className={imageWrapperClasses} id={wrapperId || undefined}>
@@ -142,3 +140,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+
+export default memo(Edit);

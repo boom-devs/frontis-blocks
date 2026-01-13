@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
-import { useRef, useEffect, useState, lazy, Suspense } from '@wordpress/element';
+import { useRef, useEffect, useState, memo } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
@@ -10,7 +10,7 @@ import { useDeviceType } from "@Config/displayType";
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
@@ -272,3 +272,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+
+export default memo(Edit);

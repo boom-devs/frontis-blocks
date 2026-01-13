@@ -1,4 +1,5 @@
 import { __ } from "@wordpress/i18n";
+import { memo } from "@wordpress/element";
 import { applyFilters } from '@wordpress/hooks';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 
@@ -11,7 +12,7 @@ import {
 } from "@wordpress/components";
 
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID
 	} = attributes;
@@ -40,3 +41,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+
+export default memo(Edit);

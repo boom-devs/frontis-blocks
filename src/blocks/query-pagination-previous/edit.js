@@ -2,10 +2,11 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import { memo } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	
 	const {
 		blockId,
@@ -31,3 +32,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			</>
 	);
 }
+
+export default memo(Edit);

@@ -11,13 +11,13 @@ import {
  * Internal dependencies
  */
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef, lazy, Suspense } from "@wordpress/element";
+import { useRef, memo } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 		blockStyle,
@@ -252,13 +252,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
+			<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
 					clientId={clientId}
 				/>
-			</Suspense>
 
 			<BlockControls>
 				<AlignmentToolbar
@@ -350,3 +348,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);

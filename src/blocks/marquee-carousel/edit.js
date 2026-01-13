@@ -6,7 +6,7 @@ import {
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo, memo } from "@wordpress/element";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
 import { Swiper } from "swiper/react";
@@ -39,7 +39,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/effect-flip";
 import "swiper/css/effect-creative";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
 		blockStyle,
@@ -282,3 +282,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);

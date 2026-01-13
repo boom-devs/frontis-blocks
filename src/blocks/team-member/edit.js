@@ -6,12 +6,12 @@ import {
 
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef, lazy, Suspense } from '@wordpress/element';
-const Inspector = lazy(() => import('./inspector'));
+import { useRef, memo } from '@wordpress/element';
+import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
 		blockStyle,
@@ -238,13 +238,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID} ref={panelRef}>
@@ -363,3 +361,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);

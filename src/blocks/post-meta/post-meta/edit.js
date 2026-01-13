@@ -2,11 +2,12 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { dateI18n, __experimentalGetSettings } from '@wordpress/date';
+import { memo } from '@wordpress/element';
 import Inspector from "./inspector";
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const { blockID, postMetaterms, singleItemColorStyle, blockStyle, alignment } = attributes;
 
 
@@ -115,3 +116,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+
+export default memo(Edit);

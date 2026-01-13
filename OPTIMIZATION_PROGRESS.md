@@ -37,58 +37,57 @@ export default memo(Edit);
 - [x] accordion
 - [x] accordion-item
 - [x] advanced-button (Fixed)
-- [ ] advanced-heading
-- [ ] advanced-image
-- [ ] advanced-megamenu
-- [ ] advanced-navigation
-- [ ] advanced-paragraph
-- [ ] advanced-video
-- [ ] animated-heading
-- [ ] breadcrumb
-- [ ] business-hours
-- [ ] call-to-action
-- [ ] contact-form-7
-- [ ] container
-- [ ] countdown
-- [ ] counter-number
-- [ ] critical-css
-- [ ] dual-button
-- [ ] features-list
-- [ ] flip-box
-- [ ] fluent-form
-- [ ] google-map
-- [ ] icon-box
-- [ ] image-gallery
-- [ ] info-box
-- [ ] loop-builder
-- [ ] loop-builder-wrapper
-- [ ] lottie-animation
-- [ ] marquee-carousel
-- [ ] marquee-carousel-item
-- [ ] news-ticker
-- [ ] off-canvas-menu
-- [ ] post-category
-- [ ] post-comment-form
-- [ ] post-featured-image
-- [ ] post-grid
-- [ ] post-meta
-- [ ] post-title
-- [ ] pricing-table
-- [ ] progressbar
-- [ ] query-pagination
-- [ ] query-pagination-next
-- [ ] query-pagination-numbers
-- [ ] query-pagination-previous
-- [ ] rive-animation
-- [ ] search
-- [ ] slider
-- [ ] slider-item
-- [ ] social-icons
-- [ ] social-share
-- [ ] social-share-child
-- [ ] stack
-- [ ] tabs
-- [ ] tabs-item
-- [ ] team-member
-- [ ] testimonial
-- [ ] utils
+- [x] advanced-heading
+- [x] advanced-image
+- [x] advanced-megamenu
+- [x] advanced-navigation
+- [x] advanced-paragraph
+- [x] advanced-video
+- [x] animated-heading
+- [x] breadcrumb
+- [x] business-hours
+- [x] call-to-action
+- [x] contact-form-7
+- [x] container
+- [x] countdown
+- [x] counter-number
+- [x] critical-css
+- [x] dual-button
+- [x] features-list
+- [x] flip-box
+- [x] fluent-form
+- [x] google-map
+- [x] icon-box
+- [x] image-gallery
+- [x] info-box
+- [x] loop-builder
+- [x] loop-builder-wrapper
+- [x] lottie-animation
+- [x] marquee-carousel
+- [x] marquee-carousel-item
+- [x] news-ticker
+- [x] off-canvas-menu
+- [x] post-category
+- [x] post-comment-form
+- [x] post-featured-image
+- [x] post-grid
+- [x] post-meta
+- [x] post-title
+- [x] pricing-table
+- [x] progressbar
+- [x] query-pagination
+- [x] query-pagination-next
+- [x] query-pagination-numbers
+- [x] query-pagination-previous
+- [x] rive-animation
+- [x] search
+- [x] slider
+- [x] slider-item
+- [x] social-icons
+- [x] social-share
+- [x] social-share-child
+- [x] stack
+- [x] tabs
+- [x] tabs-item
+- [x] team-member
+- [x] testimonial

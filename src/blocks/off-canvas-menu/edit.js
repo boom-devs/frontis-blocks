@@ -4,16 +4,16 @@ import {
 	useInnerBlocksProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { useState, useEffect, useRef, lazy, Suspense } from '@wordpress/element';
+import { useState, useEffect, useRef, memo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { parse } from '@wordpress/blocks';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
@@ -123,13 +123,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<div {...blockProps}>
-			<Suspense fallback={null}>
-				<Inspector
+			<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
 					clientId={clientId}
 				/>
-			</Suspense>
 
 			<div className={`fb-off-canvas-menu-container ${offCanvasGlobalWraperClass}`} id={offCanvasGlobalWraperID} ref={panelRef}>
 				<div
@@ -194,3 +192,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</div>
 	);
 }
+
+export default memo(Edit);

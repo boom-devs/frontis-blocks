@@ -8,7 +8,7 @@ import {
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { withSelect, withDispatch, useDispatch, useSelect } from '@wordpress/data';
 import { createBlock } from '@wordpress/blocks';
-import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
+import { useState, useMemo, useEffect, useRef, memo } from "@wordpress/element";
 import { compose } from '@wordpress/compose';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
@@ -559,7 +559,7 @@ const Edit = (props) => {
     );
 };
 
-export default compose(
+export default memo(compose(
     withSelect((select, props) => {
         const { getSelectedBlock, getBlockParents } = select('core/block-editor');
         const selectedBlock = getSelectedBlock();
@@ -577,4 +577,4 @@ export default compose(
             insertBlock,
         };
     })
-)(Edit);
+)(Edit));

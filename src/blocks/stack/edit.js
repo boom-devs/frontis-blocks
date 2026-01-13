@@ -1,5 +1,5 @@
 import {select, useSelect} from '@wordpress/data';
-import {useEffect, useMemo} from '@wordpress/element';
+import {useEffect, useMemo, memo} from '@wordpress/element';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import {ColumnsPicker} from './variationPicker';
@@ -184,4 +184,4 @@ const Edit = (props) => {
 	);
 };
 
-export default Edit;
+export default memo(Edit);

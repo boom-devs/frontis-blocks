@@ -1,5 +1,5 @@
-import { __ } from '@wordpress/i18n';
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { memo } from '@wordpress/element';
 import Inspector from './inspector';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';
@@ -70,4 +70,4 @@ const applyWithSelect = withSelect((select, props) => {
     };
 });
 
-export default compose(applyWithSelect)(Edit);
+export default memo(compose(applyWithSelect)(Edit));

@@ -14,14 +14,14 @@ import {
 } from '@wordpress/components';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
+import { useEffect, useRef, memo } from '@wordpress/element';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockID,
         blockStyle,
@@ -317,13 +317,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
@@ -655,3 +653,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         </>
     );
 }
+
+export default memo(Edit);

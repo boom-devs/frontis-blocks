@@ -6,6 +6,7 @@ import {
   useBlockProps,
   useInnerBlocksProps,
 } from '@wordpress/block-editor';
+import { memo } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -18,7 +19,7 @@ const TEMPLATE = [
   ['frontis-blocks/query-pagination-next'],
 ];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 	} = attributes;
@@ -45,3 +46,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     </>
   );
 }
+
+export default memo(Edit);

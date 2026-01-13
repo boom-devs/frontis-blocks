@@ -9,6 +9,7 @@ import {
 	RangeControl,
 } from '@wordpress/components';
 import './editor.scss';
+import { memo } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -48,7 +49,7 @@ const previewPaginationNumbers = ( midSize ) => {
 	return <>{ paginationItems }</>;
 };
 
-export default function Edit({ attributes, setAttributes, clientId, }) {
+function Edit({ attributes, setAttributes, clientId, }) {
 	
 	const {
 		blockId,
@@ -104,3 +105,5 @@ export default function Edit({ attributes, setAttributes, clientId, }) {
 		</>
 	);
 }
+
+export default memo(Edit);

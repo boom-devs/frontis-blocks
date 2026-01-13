@@ -1,16 +1,15 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useRef, useMemo, lazy, Suspense } from '@wordpress/element';
+import { useRef, useMemo, memo } from '@wordpress/element';
 import ReactPlayer from "react-player";
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-// const Inspector = lazy(() => import("./inspector"));
 import Inspector from "./inspector";
 
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         blockStyle,
@@ -84,3 +83,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+
+export default memo(Edit);

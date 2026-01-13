@@ -1,15 +1,15 @@
 import { __ } from "@wordpress/i18n";
-import { memo, useState, useEffect, useRef, lazy, Suspense } from "@wordpress/element";
+import { memo, useState, useEffect, useRef } from "@wordpress/element";
 import { SelectControl } from "@wordpress/components";
 import { useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-const Inspector = lazy(() => import("../contact-form-7/inspector"));
+import Inspector from "../contact-form-7/inspector";
 
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
 	const [selectedForm, setSelectedForm] = useState();
 
@@ -65,13 +65,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
+			<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
 					clientId={clientId}
 				/>
-			</Suspense>
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.contact_form_active ? (
@@ -109,3 +107,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+
+export default memo(Edit);

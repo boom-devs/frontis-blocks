@@ -32,7 +32,7 @@ const Render = memo(({ attributes }) => {
 	);
 });
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+function Edit({ attributes, setAttributes, clientId }) {
 
 	const { blockId } = attributes;
 
@@ -84,3 +84,5 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		</>
 	);
 };
+
+export default memo(Edit);

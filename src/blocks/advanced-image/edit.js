@@ -8,15 +8,15 @@ import {
   MediaUploadCheck,
 } from "@wordpress/block-editor";
 import { ToolbarButton, ToolbarGroup } from "@wordpress/components";
-import { useEffect, lazy, Suspense } from "@wordpress/element";
+import { useEffect, memo } from "@wordpress/element";
 // Internal
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
 import useDynamicImage from "@Components/use-dynamic-image";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
   const {
     // base
     blockID,
@@ -138,14 +138,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
   return (
     <>
-      <Suspense fallback={null}>
         <Inspector
           attributes={attributes}
           setAttributes={setAttributes}
           clientId={clientId}
           onSelectImage={onSelectImage}
         />
-      </Suspense>
 
       <BlockControls>
         <ToolbarGroup>
@@ -276,3 +274,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     </>
   );
 }
+
+export default memo(Edit);

@@ -5,19 +5,19 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from '@wordpress/block-editor';
-import { useRef, lazy, Suspense } from '@wordpress/element';
+import { useRef, memo } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 import renderSVG from '../../components/icon-picker/components/icon-picker/controls/renderIcon';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
 		blockStyle,
@@ -167,9 +167,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
-			</Suspense>
+			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
 			<BlockControls>
 				<AlignmentToolbar
@@ -334,3 +332,5 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		</>
 	);
 }
+
+export default memo(Edit);
