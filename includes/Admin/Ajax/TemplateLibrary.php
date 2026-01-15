@@ -335,7 +335,7 @@ class TemplateLibrary extends AjaxBase
 
         // Input data
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
         $slug = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
         $template = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
         $badge = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
