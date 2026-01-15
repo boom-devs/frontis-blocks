@@ -1,4 +1,6 @@
 @import "../scss/variables";
+
+.fb-inspector-control {
 .controlPane {
 	&.controls {
 		width: 250px;
@@ -99,6 +101,7 @@
 			}
 		}
 	}
+}
 }
 
 .fb-box-shadow-wrapper {

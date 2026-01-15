@@ -96,11 +96,9 @@
     "react-player": "^2.16.0",
     "react-redux": "^9.2.0",
     "react-select": "^5.8.3",
-    "react-slick": "^0.31.0",
     "react-spinners": "^0.15.0",
     "react-toastify": "^10.0.6",
     "react-virtualized": "^9.22.5",
-    "slick-carousel": "^1.8.1",
     "swiper": "^11.1.15"
   }
 }

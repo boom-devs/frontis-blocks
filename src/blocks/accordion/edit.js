@@ -1,19 +1,19 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { useEffect, useMemo, useRef, lazy, Suspense } from "@wordpress/element";
+import { useEffect, useMemo, useRef, memo } from "@wordpress/element";
 import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
 
 
-export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
     const {
         blockID,
@@ -115,13 +115,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <div {...blockProps}>
                 <div
@@ -156,3 +154,5 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         </>
     );
 }
+
+export default memo(Edit);
