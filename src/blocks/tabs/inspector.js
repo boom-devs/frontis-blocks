@@ -2590,12 +2590,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
             ${tabListActiveBgColorType === "gradient"
-                ? `background-color: ${
+                ? `background: ${
                     tabListActiveBgCustomGradientColorSwitcher && tabListActiveBgCustomGradientColor
                     ? tabListActiveBgCustomGradientColor
                     : tabListActiveBgGradientColor
                 };`
-                : tabListActiveBgColor ? `background-color: ${tabListActiveBgColor};` : ''
+                : tabListActiveBgColor ? `background: ${tabListActiveBgColor};` : ''
             }
 
             ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor};` : ''}
