@@ -100,6 +100,7 @@ const Edit = (props) => {
     const swiperRef = useRef();
 	const sliderNavPrevRef = useRef();
 	const sliderNavNextRef = useRef();
+    const prevSlideIndexRef = useRef(0);
 
     const [swiperInstance, setSwiperInstance] = useState(null);
 	const { selectBlock } = useDispatch( blockEditorStore );
@@ -256,7 +257,7 @@ const Edit = (props) => {
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
         if (swiperInstance) {
-
+            
             // Update carousel settings
             if (sliderType === 'carousel') {
                 swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
@@ -481,7 +482,12 @@ const Edit = (props) => {
                     onSwiper={(swiper) => {
                         setSwiperInstance(swiper);
                         swiper.on('slideChange', () => {
-                            setAttributes({ currentSlideIndex: swiper.activeIndex });
+                            const newIndex = swiper.activeIndex;
+                            if (newIndex !== prevSlideIndexRef.current) {
+                                setAttributes({ currentSlideIndex: newIndex });
+                                prevSlideIndexRef.current = newIndex;
+                            }
+                            setAttributes({ currentSlideIndex: newIndex });
                         });
                         
                         // Add reach end handler for stopOnLastSlide
