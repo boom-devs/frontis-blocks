@@ -428,7 +428,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                // handleFullSiteImport(id);
+                                handleFullSiteImport(id);
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -440,7 +440,7 @@ const TemplateGrid = ({
                                     importPage(id);
                                 } else if (templateData.type === 'sites') {
                                     // console.log('sites');
-                                    // handleFullSiteImport();
+                                    handleFullSiteImport();
                                 }
                             }
                         }}
