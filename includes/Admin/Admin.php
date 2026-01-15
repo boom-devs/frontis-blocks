@@ -136,7 +136,7 @@ class Admin
         if ('toplevel_page_frontis-blocks' == $hook || 'post.php' == $hook || 'post-new.php' == $hook || 'site-editor.php' == $hook) {
             $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '';
 
-            wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/dashboard' . $suffix . '.css', array(), '1.0.0');
+            wp_enqueue_style('frontis-blocks-admin', FB_PLUGIN_URL . 'assets/admin/dashboard' . $suffix . '.css', array(), '1.0.1');
         }
     }
 

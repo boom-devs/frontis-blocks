@@ -89,6 +89,7 @@ const FB_TypographyControl = ({
         });
     }, []);
 
+
     // useEffect(() => {
 	// 	if (fontFamily !== 'Default') {
 	// 		loadGoogleFont(fontFamily);
