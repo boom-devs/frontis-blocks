@@ -8,8 +8,6 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
-// const Inspector = lazy(() => import('./inspector'));
-
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
