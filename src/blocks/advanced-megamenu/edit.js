@@ -3,7 +3,7 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { useDeviceType } from '@Config/displayType';
-import { useRef, lazy, Suspense } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
