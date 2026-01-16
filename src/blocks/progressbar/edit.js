@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEffect, useRef, useState, lazy, Suspense } from '@wordpress/element';
-const Inspector = lazy(() => import('./inspector'));
+import { useEffect, useRef, useState } from '@wordpress/element';
+import Inspector from './inspector';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
@@ -102,13 +102,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   return (
     <>
-      <Suspense fallback={null}>
-        <Inspector
-          attributes={attributes}
-          setAttributes={setAttributes}
-          clientId={clientId}
-        />
-      </Suspense>
+      <Inspector
+        attributes={attributes}
+        setAttributes={setAttributes}
+        clientId={clientId}
+      />
 
       <div {...blockProps}>
         <div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID} ref={panelRef}>

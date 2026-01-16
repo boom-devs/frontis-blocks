@@ -1,6 +1,6 @@
 // Edit.js
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
 import './editor.scss';

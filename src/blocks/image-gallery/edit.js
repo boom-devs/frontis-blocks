@@ -2,10 +2,10 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
-import { useRef, lazy, Suspense } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -53,13 +53,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID} ref={panelRef}>
