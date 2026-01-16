@@ -1082,10 +1082,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Start All Block Style */
     const allBlockStyle = useMemo(() => `
-        .${blockId}.fb-marquee-slider-container {
+        #block-${clientId}.fb-marquee-slider-container {
             width: 100% !important;
         }
         .${blockId}.fb-marquee-slider-container {
+            width: 100% !important;
             ${desktopBackgroundNormalStyles}
             ${globalDesktopPaddingWidth && sliderGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPaddingWidth};` : ''} 
             ${globalDesktopMarginWidth && sliderGlobalMarginDesktop?.top ? `margin: ${globalDesktopMarginWidth};` : ''} 

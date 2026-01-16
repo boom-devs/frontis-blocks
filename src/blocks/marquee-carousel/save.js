@@ -37,12 +37,12 @@ export default function Save({ attributes }) {
 		freeModeMomentum: false,   // prevents sudden stops
 		navigation: arrowsUniqueId
 			? {
-					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
-					prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
-					hideOnClick: false,
-					disabledClass: "swiper-button-disabled",
-					hiddenClass: "swiper-button-hidden",
-			  }
+				nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
+				prevEl: `.${arrowsUniqueId} .fb-news-ticker-prev`,
+				hideOnClick: false,
+				disabledClass: "swiper-button-disabled",
+				hiddenClass: "swiper-button-hidden",
+			}
 			: false,
 	});
 
