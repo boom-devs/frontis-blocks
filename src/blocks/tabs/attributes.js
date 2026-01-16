@@ -125,6 +125,15 @@ const attributes = {
         default: true,
     },
 
+    tabTitlesAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+
     tabTitleTag: {
         type : 'string',
         default: 'span'

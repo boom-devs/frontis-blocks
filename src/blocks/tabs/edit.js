@@ -6,7 +6,8 @@ import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControl
 import { select, dispatch, subscribe } from '@wordpress/data';
 import { arrayMove } from '@dnd-kit/sortable';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-const Inspector = lazy(() => import('./inspector'));
+// const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 import './editor.scss';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/tabs-item'];
@@ -299,19 +300,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		<>
 			<div {...blockProps} >
 
-				<Suspense fallback={null}>
-					<Inspector
-						attributes={attributes}
-						setAttributes={setAttributes}
-						clientId={clientId}
-						handleDragEnd={handleDragEnd}
-						handleAddItem={handleAddItem}
-						handleChangeItem={handleChangeItem}
-						handleDeleteItem={handleDeleteItem}
-						handleDuplicateItem={handleDuplicateItem}
-						tabsItemList={tabsItemList}
-					/>
-				</Suspense>
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+					clientId={clientId}
+					handleDragEnd={handleDragEnd}
+					handleAddItem={handleAddItem}
+					handleChangeItem={handleChangeItem}
+					handleDeleteItem={handleDeleteItem}
+					handleDuplicateItem={handleDuplicateItem}
+					tabsItemList={tabsItemList}
+				/>
 
 				{renderTabsToolbarControls()}
 
