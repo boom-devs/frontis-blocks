@@ -2,9 +2,9 @@
 
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import { Rive } from '@rive-app/canvas';
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -150,9 +150,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
-			</Suspense>
+			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
 			<div {...blockProps}>
 				<div className="fb-parent-wrapper fb-rive-animation-container">

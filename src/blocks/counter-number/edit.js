@@ -4,11 +4,11 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-import { useEffect, useRef, useState, lazy, Suspense } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -154,13 +154,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 					<div className="fb-counter-item">

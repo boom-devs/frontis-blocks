@@ -1,12 +1,10 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
-import { useRef, useEffect, useState, lazy, Suspense } from '@wordpress/element';
+import { useRef, useEffect, useState } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from "@Config/displayType";
-
-// const Inspector = lazy(() => import("./inspector"));
 
 import Inspector from "./inspector";
 

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useMemo, lazy, Suspense } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { createBlock, cloneBlock } from '@wordpress/blocks';
 import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControls } from '@wordpress/block-editor';
