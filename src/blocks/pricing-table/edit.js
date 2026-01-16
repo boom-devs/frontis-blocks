@@ -22,7 +22,7 @@ import {
 	ColorPalette,
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
-import { useState, useEffect, useRef, lazy, Suspense } from '@wordpress/element';
+import { useState, useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 import {
 	NORMAL_HOVER,
@@ -32,7 +32,7 @@ import {
 	BORDER_STYLES
 } from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -107,13 +107,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
 					<div className="fb-pricing-inner-wrapper">

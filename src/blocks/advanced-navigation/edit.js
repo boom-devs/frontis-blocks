@@ -3,14 +3,14 @@ import {
     useBlockProps,
     InnerBlocks,
 } from "@wordpress/block-editor";
-import { useEffect, lazy, Suspense } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
 import { select, dispatch, subscribe } from "@wordpress/data";
 
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { overlayText } from "@wordpress/icons";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 const CustomInspectorControls = createHigherOrderComponent((BlockEdit) => {
@@ -124,13 +124,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
             <div {...blockProps}>
                 <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                     <div
