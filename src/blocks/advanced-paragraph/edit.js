@@ -5,7 +5,7 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
-import { useRef, lazy, Suspense } from "@wordpress/element";
+import { useRef } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 /**
@@ -15,7 +15,7 @@ import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import { useDeviceType } from "@Config/displayType";
 import "./editor.scss";
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -50,13 +50,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
 			<BlockControls>
 				<AlignmentToolbar

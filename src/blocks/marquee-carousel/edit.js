@@ -6,13 +6,12 @@ import {
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
-import { useState, useEffect, useRef, useMemo, lazy, Suspense } from "@wordpress/element";
+import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
 import { Swiper } from "swiper/react";
 import "./editor.scss";
 
-// const Inspector = lazy(() => import("./inspector"));
 import Inspector from "./inspector";
 
 const ALLOWED_BLOCKS = ["frontis-blocks/marquee-carousel-item"];

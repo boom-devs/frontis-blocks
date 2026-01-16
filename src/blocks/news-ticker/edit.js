@@ -1,10 +1,8 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
-import { useMemo, useEffect, lazy, Suspense } from "@wordpress/element";
+import { useMemo, useEffect } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import "./editor.scss";
-
-// const Inspector = lazy(() => import("./inspector"));
 
 import Inspector from "./inspector";
 
