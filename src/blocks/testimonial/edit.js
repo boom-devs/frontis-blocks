@@ -25,7 +25,7 @@ import Inspector from './inspector';
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockID,
         blockStyle,
@@ -352,12 +352,10 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
     return (
         <>
 
-            {isSelected && (
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                />
-            )}
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
