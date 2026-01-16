@@ -6,7 +6,6 @@ import LayoutGrid from './layoutGrid';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-// const Inspector = lazy(() => import("./inspector"));
 import Inspector from "./inspector";
 
 

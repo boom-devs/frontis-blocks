@@ -6,7 +6,6 @@ import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
-// const Inspector = lazy(() => import("./inspector"));
 import Inspector from "./inspector";
 
 

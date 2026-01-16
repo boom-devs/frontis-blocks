@@ -12,8 +12,6 @@ import { useRef } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
-// const Inspector = lazy(() => import("./inspector"));
-
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
