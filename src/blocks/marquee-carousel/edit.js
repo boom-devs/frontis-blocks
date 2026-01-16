@@ -50,7 +50,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	} = attributes;
 
 	const arrowsId = context["frontisBlocks:arrowsUniqueId"];
-	// console.log("Marque edit ", arrowsId);
 
 	useEffect(() => {
 		if (arrowsId && arrowsId !== attributes.arrowsUniqueId) {
@@ -250,7 +249,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				clientId={clientId}
 			/>
 			{renderSliderToolbarControls()}
-			<div {...blockProps}>
+			<div {...blockProps} id={`block-${clientId}`}>
 				<Swiper
 					{...settings}
 					onSwiper={(instance) => {
