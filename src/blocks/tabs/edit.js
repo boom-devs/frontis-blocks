@@ -6,7 +6,6 @@ import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControl
 import { select, dispatch, subscribe } from '@wordpress/data';
 import { arrayMove } from '@dnd-kit/sortable';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-// const Inspector = lazy(() => import('./inspector'));
 import Inspector from './inspector';
 import './editor.scss';
 
