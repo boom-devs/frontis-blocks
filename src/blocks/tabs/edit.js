@@ -1,12 +1,11 @@
 import { __ } from '@wordpress/i18n';
-import { useState, useEffect, useMemo, lazy, Suspense } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { createBlock, cloneBlock } from '@wordpress/blocks';
 import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControls } from '@wordpress/block-editor';
 import { select, dispatch, subscribe } from '@wordpress/data';
 import { arrayMove } from '@dnd-kit/sortable';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-// const Inspector = lazy(() => import('./inspector'));
 import Inspector from './inspector';
 import './editor.scss';
 

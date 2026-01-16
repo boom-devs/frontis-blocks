@@ -8,7 +8,7 @@ import {
 } from "@wordpress/block-editor";
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef, lazy, Suspense } from "@wordpress/element";
+import { useRef } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
