@@ -34,6 +34,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import {useDeviceType} from "@Config/displayType";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_InputControl from '@Components/input-control';
@@ -447,6 +448,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         /** Custom CSS */
         tabGlobalCustomCSS,
 
+        tabTitlesAlignment
 
     } = attributes;
 
@@ -459,6 +461,13 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 	}, [clientId]);
 
     const deviceType = useDeviceType();
+
+    // Mapping for tab title alignment
+    const tabTitlesAlignmentMap = {
+        left: 'flex-start',
+        center: 'center',
+        right: 'flex-end'
+    };
 
     /** Start Wrapper Padding */
     const handleTabWrapperPaddingUnitChange = ( event, position ) => {  
@@ -2498,6 +2507,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             max-width: 100%;
         }
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+            ${tabTitlesAlignment?.Desktop ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Desktop] || 'flex-start'};` : ''}
             ${tabWrapperPaddingDesktopWidth && tabWrapperPaddingDesktop?.top ? `padding: ${tabWrapperPaddingDesktopWidth};` : ''} 
             ${tabWrapperMarginDesktopWidth && tabWrapperMarginDesktop?.top ? `margin: ${tabWrapperMarginDesktopWidth};` : ''}
             ${tabWrapperGap?.Desktop && tabWrapperGapUnits?.Desktop ? `gap: ${tabWrapperGap?.Desktop}${tabWrapperGapUnits?.Desktop};` : ''}
@@ -2536,7 +2546,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li {
-            ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth};` : ''}
+            ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth} !important;` : ''}
             ${tabListMarginDesktopWidth && tabListMarginDesktop?.top ? `margin: ${tabListMarginDesktopWidth};` : ''}
             ${tabListMinWidth?.Desktop && tabListMinWidthUnits?.Desktop ? `min-width: ${tabListMinWidth?.Desktop}${tabListMinWidthUnits?.Desktop};` : ''}
             ${tabLayoutSwitcher === 'vertical' ? 'width: 100px;' : ''}
@@ -2580,12 +2590,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
             ${tabListActiveBgColorType === "gradient"
-                ? `background-color: ${
+                ? `background: ${
                     tabListActiveBgCustomGradientColorSwitcher && tabListActiveBgCustomGradientColor
                     ? tabListActiveBgCustomGradientColor
                     : tabListActiveBgGradientColor
                 };`
-                : tabListActiveBgColor ? `background-color: ${tabListActiveBgColor};` : ''
+                : tabListActiveBgColor ? `background: ${tabListActiveBgColor};` : ''
             }
 
             ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor};` : ''}
@@ -2778,6 +2788,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
 
             .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+                ${tabTitlesAlignment?.Tablet ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Tablet]};` : ''}
                 ${tabWrapperPaddingTabletWidth && tabWrapperPaddingTablet?.top ? `padding: ${tabWrapperPaddingTabletWidth};` : ''} 
                 ${tabWrapperMarginTabletWidth && tabWrapperMarginTablet?.top ? `margin: ${tabWrapperMarginTabletWidth};` : ''}
                 ${tabWrapperGap?.Tablet && tabWrapperGapUnits?.Tablet ? `gap: ${tabWrapperGap?.Tablet}${tabWrapperGapUnits?.Tablet};` : ''}
@@ -2858,6 +2869,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
 
             .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+                ${tabTitlesAlignment?.Mobile ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Mobile]};` : ''}
                 ${tabWrapperPaddingMobileWidth && tabWrapperPaddingMobile?.top ? `padding: ${tabWrapperPaddingMobileWidth};` : ''} 
                 ${tabWrapperMarginMobileWidth && tabWrapperMarginMobile?.top ? `margin: ${tabWrapperMarginMobileWidth};` : ''}
                 ${tabWrapperGap?.Mobile && tabWrapperGapUnits?.Mobile ? `gap: ${tabWrapperGap?.Mobile}${tabWrapperGapUnits?.Mobile};` : ''}
@@ -3406,6 +3418,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     
         /** Custom CSS */
         tabGlobalCustomCSS,
+        tabTitlesAlignment,
     ]);
 
     const customCss = getCustomCss(tabGlobalCustomCSS, `.${blockId}`);
@@ -3448,6 +3461,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     />
                 )}
 
+                {!fillTitlesWrapper && (
+                     <FB_ResponsiveAlignmentControl
+                        label={__("Title Alignment", "frontis-blocks")}
+                        globalAlignment={tabTitlesAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ tabTitlesAlignment: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+                )}
 
                 <FB_SwitcherControl
                     label={__("Layout", "frontis-blocks")}

@@ -735,10 +735,10 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 								<p class="fb-user-desc">
 									<?php if (!empty($dynamic_testimonial_description_link_url)): ?>
 										<a href="<?php echo esc_url($dynamic_testimonial_description_link_url); ?>">
-											<?php echo esc_html($dynamic_testimonial_description); ?>
+											<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 										</a>
 									<?php else: ?>
-										<?php echo esc_html($dynamic_testimonial_description); ?>
+										<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 									<?php endif; ?>
 								</p>
 							</div>
@@ -771,10 +771,10 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 								<p class="fb-user-desc">
 									<?php if (!empty($dynamic_testimonial_description_link_url)): ?>
 										<a href="<?php echo esc_url($dynamic_testimonial_description_link_url); ?>">
-											<?php echo esc_html($dynamic_testimonial_description); ?>
+											<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 										</a>
 									<?php else: ?>
-										<?php echo esc_html($dynamic_testimonial_description); ?>
+										<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 									<?php endif; ?>
 								</p>
 							</div>
@@ -856,10 +856,10 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 								<p class="fb-user-desc">
 									<?php if (!empty($dynamic_testimonial_description_link_url)): ?>
 										<a href="<?php echo esc_url($dynamic_testimonial_description_link_url); ?>">
-											<?php echo esc_html($dynamic_testimonial_description); ?>
+											<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 										</a>
 									<?php else: ?>
-										<?php echo esc_html($dynamic_testimonial_description); ?>
+										<?php echo wp_kses_post($dynamic_testimonial_description); ?>
 									<?php endif; ?>
 								</p>
 							</div>
