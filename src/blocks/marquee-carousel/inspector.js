@@ -1110,7 +1110,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
           ${slideHeight?.Desktop && slideHeightUnits?.Desktop ? `height: ${slideHeight?.Desktop}${slideHeightUnits?.Desktop} !important;` : ''}
           ${slideDesktopPaddingWidth && slidePaddingDesktop?.top ? `padding: ${slideDesktopPaddingWidth} !important;` : ''}
         }
-
+        .${blockId} .fb-marquee-swiper.swiper{
+            // pointer-events: none;
+        }
         ${sliderOverlaySwitcher ? `
         .${blockId} .fb-marquee-swiper::before {
             left: 0;
@@ -1138,7 +1140,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${tabletBackgroundHoverStyles}
             }
  
-            .${blockId} .swiper-slide { 
+            .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide { 
                 ${slideWidth?.Tablet && slideWidthUnits?.Tablet ? `width: ${slideWidth?.Tablet}${slideWidthUnits?.Tablet} !important;` : ''}  
                 ${slideHeight?.Tablet && slideHeightUnits?.Tablet ? `height: ${slideHeight?.Tablet}${slideHeightUnits?.Tablet} !important;` : ''}
                 ${slideTabletPaddingWidth && slidePaddingTablet?.top ? `padding: ${slideTabletPaddingWidth} !important;` : ''}
@@ -1156,7 +1158,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${mobileBackgroundHoverStyles}
             }
 
-            .${blockId} .swiper-slide {
+            .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide {
                 ${slideWidth?.Mobile && slideWidthUnits?.Mobile ? `width: ${slideWidth?.Mobile}${slideWidthUnits?.Mobile} !important;` : ''}  
                 ${slideHeight?.Mobile && slideHeightUnits?.Mobile ? `height: ${slideHeight?.Mobile}${slideHeightUnits?.Mobile} !important;` : ''}
                 ${slideMobilePaddingWidth && slidePaddingMobile?.top ? `padding: ${slideMobilePaddingWidth} !important;` : ''}
