@@ -60,7 +60,7 @@ import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
 import './editor.scss';
-import { presetConfigurations, presetStyles, testimonialPresets } from './presets';
+import { testimonialPresets } from './presets';
 
 
 export default function Inspector({ attributes, setAttributes }) {
@@ -444,20 +444,7 @@ export default function Inspector({ attributes, setAttributes }) {
         }
     }, []);
 
-    /** Start Preset Style */
-    const changeTestimonialPreset = (selectedPreset) => {
-        const selectedPresetConfig = presetConfigurations[selectedPreset];
 
-        if (selectedPresetConfig) {
-            setAttributes({
-                TestimonialPresetStyle: selectedPreset,
-                ...selectedPresetConfig,
-            });
-        } else {
-            console.warn(`Testimonial: Preset "${selectedPreset}" not found.`);
-        }
-    };
-    /** End Preset Style */
     /**
     * Preset Styles Data Object
     */
@@ -2127,12 +2114,7 @@ export default function Inspector({ attributes, setAttributes }) {
                 title={__("Testimonial Info", "frontis-blocks")}
                 initialOpen={true}
             >
-                {/* <SelectControl
-                        label={__("Preset Style", "frontis-blocks")}
-                        value={TestimonialPresetStyle}
-                        options={PRESETS}
-                        onChange={(selected) => changeTestimonialPreset(selected)}
-                    /> */}
+
                 <FB_Presets
                     className="fb-testimonial-presets"
                     label={__('Select Preset', 'frontis-blocks')}
