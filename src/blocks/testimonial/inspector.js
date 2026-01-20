@@ -62,8 +62,10 @@ import FB_Presets from '@Components/presets';
 import './editor.scss';
 import { testimonialPresets } from './presets';
 
+import { memo } from '@wordpress/element';
 
-export default function Inspector({ attributes, setAttributes }) {
+
+function Inspector({ attributes, setAttributes }) {
     const {
         blockID,
         // deviceType,
@@ -3582,3 +3584,4 @@ export default function Inspector({ attributes, setAttributes }) {
         </>
     );
 }
+export default memo(Inspector);
