@@ -200,7 +200,7 @@ class Enqueues
 
         // Enqueue global editor styles to prevent FOUC
         if (file_exists(FB_PLUGIN_PATH . 'build/assets/css/global-editor.css')) {
-            wp_enqueue_style('frontis-global-editor-style', FB_PLUGIN_URL . 'build/assets/css/global-editor.css', [], FB_VERSION);
+            wp_enqueue_style('frontis-global-editor-style', FB_PLUGIN_URL . 'build/assets/css/global-editor.css', ['wp-edit-blocks'], FB_VERSION);
         }
     }
     public function load_google_font()

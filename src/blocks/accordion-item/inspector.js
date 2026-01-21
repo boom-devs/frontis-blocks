@@ -30,7 +30,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         parentBlockID,
@@ -89,14 +89,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const titlePfIconHandler = (IconName) => {
         setAttributes({ titlePrefixIcon: IconName })

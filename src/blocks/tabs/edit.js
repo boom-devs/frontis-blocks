@@ -5,11 +5,15 @@ import { createBlock, cloneBlock } from '@wordpress/blocks';
 import { InnerBlocks, RichText, useBlockProps, useInnerBlocksProps, BlockControls } from '@wordpress/block-editor';
 import { select, dispatch, subscribe } from '@wordpress/data';
 import { arrayMove } from '@dnd-kit/sortable';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import './editor.scss';
 
 const ALLOWED_BLOCKS = ['frontis-blocks/tabs-item'];
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 
@@ -29,7 +33,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		tabGlobalWraperID,
 		tabGlobalWraperClass,
+
+        /** Typography Fonts */
+        tabTitleFontFamily,
+        tabDescriptionFontFamily,
 	} = attributes;
+
+	    useEffect(() => {
+        if (clientId && typeof clientId === 'string' && !blockId) {
+            setAttributes({
+                blockId: "fb-tabs-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId, blockId]);
+
+    /** Start load font */
+    useEffect(() => {
+        [tabTitleFontFamily, tabDescriptionFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [tabTitleFontFamily, tabDescriptionFontFamily]);
+    /** End load font */
 
 	const beSelect = select('core/block-editor');
 	const beDispatch = dispatch('core/block-editor');
@@ -145,7 +172,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			beDispatch.updateBlockAttributes(cid, { id: i });
 		});
 
-		// 4) active tab ঠিক করো
+		// 4) active tab 
 		if (reindexedItems.length === 0) {
 			updateActiveTab(0);
 		} else {
@@ -198,11 +225,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		updateActiveTab(index + 1);
 	};
 
-	useEffect(() => {
-		setAttributes({ tabItems: tabsItemList });
-	}, [tabsItemList, setAttributes]);
-
-
+    useEffect(() => {
+        setAttributes({ tabItems: tabsItemList });
+    }, [tabsItemList, setAttributes]);
 
 	const updateTabOrder = () => {
 		const childIds = getChildren();
@@ -302,7 +327,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
-					clientId={clientId}
 					handleDragEnd={handleDragEnd}
 					handleAddItem={handleAddItem}
 					handleChangeItem={handleChangeItem}

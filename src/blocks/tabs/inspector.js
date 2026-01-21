@@ -47,7 +47,7 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) => {
+const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) => {
     
     const { 
         blockId,
@@ -452,13 +452,7 @@ const Inspector = ({ attributes, setAttributes, clientId, handleDragEnd, handleA
 
     } = attributes;
 
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-tabs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+
 
     const deviceType = useDeviceType();
 
