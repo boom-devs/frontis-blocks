@@ -1,6 +1,6 @@
 import { Rive } from '@rive-app/canvas';
 
-(function() {
+(function () {
 	'use strict';
 
 	// Initialize a single Rive animation
@@ -11,6 +11,54 @@ import { Rive } from '@rive-app/canvas';
 		const speed = parseFloat(canvas.getAttribute('data-rive-speed') || '1');
 		const reverse = canvas.getAttribute('data-rive-reverse') === 'true';
 		const hoverEffect = canvas.getAttribute('data-rive-hover') || 'none';
+
+		// Parse responsive dimensions
+		const dimensions = {
+			Desktop: {
+				width: canvas.getAttribute('data-width-desktop'),
+				height: canvas.getAttribute('data-height-desktop')
+			},
+			Tablet: {
+				width: canvas.getAttribute('data-width-tablet'),
+				height: canvas.getAttribute('data-height-tablet')
+			},
+			Mobile: {
+				width: canvas.getAttribute('data-width-mobile'),
+				height: canvas.getAttribute('data-height-mobile')
+			}
+		};
+
+		const updateCanvasDimensions = () => {
+			const width = window.innerWidth;
+			let targetWidth, targetHeight;
+
+			if (width <= 767) {
+				targetWidth = dimensions.Mobile.width || dimensions.Tablet.width || dimensions.Desktop.width;
+				targetHeight = dimensions.Mobile.height || dimensions.Tablet.height || dimensions.Desktop.height;
+			} else if (width <= 1024) {
+				targetWidth = dimensions.Tablet.width || dimensions.Desktop.width;
+				targetHeight = dimensions.Tablet.height || dimensions.Desktop.height;
+			} else {
+				targetWidth = dimensions.Desktop.width;
+				targetHeight = dimensions.Desktop.height;
+			}
+
+			if (targetWidth && targetHeight) {
+				if (canvas.width != targetWidth || canvas.height != targetHeight) {
+					canvas.width = targetWidth;
+					canvas.height = targetHeight;
+					if (canvas._riveInstance) {
+						canvas._riveInstance.resizeDrawingSurfaceToCanvas();
+					}
+				}
+			}
+		};
+
+		// Initial sizing
+		updateCanvasDimensions();
+
+		// Add to global resize listener (managed via a set to avoid duplicates if possible, or simple event listener)
+		window.addEventListener('resize', updateCanvasDimensions);
 
 		if (!src) return;
 
@@ -25,10 +73,10 @@ import { Rive } from '@rive-app/canvas';
 				onLoad: () => {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
-					
+
 					// Cleanup temp instance
 					tempRive.cleanup();
-					
+
 					// Create actual instance with proper configuration
 					const config = {
 						src: src,

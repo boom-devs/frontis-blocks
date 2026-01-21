@@ -152,6 +152,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		riveAnimationVRBottomOffset,
 		riveAnimationVRBottomOffsetUnits,
+
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight,
 	} = attributes;
 
 	const deviceType = useDeviceType();
@@ -641,8 +644,32 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				
 
+				<FB_Range
+					min={0}
+					max={2000}
+					label={__("Animation Width", "frontis-blocks")}
+					rangeValue={riveAnimationCanvasWidth}
+					onChangeHandler={(value) => setAttributes({ riveAnimationCanvasWidth: value === 0 ? undefined : value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+					isRangeUnit={false}
+				/>
+
+				<FB_Range
+					min={0}
+					max={2000}
+					label={__("Animation Height", "frontis-blocks")}
+					rangeValue={riveAnimationCanvasHeight}
+					onChangeHandler={(value) => setAttributes({ riveAnimationCanvasHeight: value === 0 ? undefined : value })}
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+					rangeStep={1}
+					resetFallbackValue={""}
+					isRangeUnit={false}
+				/>
 			</PanelBody>
 		</>
 	);

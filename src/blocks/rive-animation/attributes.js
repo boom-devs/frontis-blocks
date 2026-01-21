@@ -102,6 +102,22 @@ const attributes = {
             Mobile: 'px',
         }
     },
+	riveAnimationCanvasWidth: {
+		type: "object",
+        default: {
+            Desktop: '500',
+            Tablet: '',
+            Mobile: '',
+        }
+	},
+	riveAnimationCanvasHeight: {
+		type: "object",
+        default: {
+            Desktop: '300',
+            Tablet: '',
+            Mobile: '',
+        }
+	},
 	/** Start Class & ID Setting */
 	riveAnimationGlobalWraperCustomCSS : {
 		type: 'string',

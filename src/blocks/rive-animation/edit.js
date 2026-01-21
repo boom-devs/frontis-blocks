@@ -3,6 +3,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
+import { useDeviceType } from "@Config/displayType";
 import { Rive } from '@rive-app/canvas';
 import Inspector from './inspector';
 
@@ -16,7 +17,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationSpeed = 1,
 		riveAnimationReverse = false,
 		riveEffectsOnHover = 'none',
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight,
 	} = attributes;
+
+	const deviceType = useDeviceType();
 
 	const blockProps = useBlockProps({
 		className: `fb-rive-animation-main-wrapper ${blockID}`,
@@ -99,6 +104,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationSpeed,
 		riveAnimationReverse,
 		riveEffectsOnHover,
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight
 	]);
 
 	// Handle hover effects
@@ -163,17 +170,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							alignItems: 'center',
 							justifyContent: 'center',
 							position: 'relative',
-							width: '100%',
 						}}
 					>
 						{riveAnimationImageUrl ? (
 							<canvas
 								ref={canvasRef}
-								style={{
-									width: '100%',
-									height: '100%',
-									maxWidth: '100%',
-								}}
+								width={riveAnimationCanvasWidth[deviceType]}
+								height={riveAnimationCanvasHeight[deviceType]}
 							/>
 						) : (
 							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
