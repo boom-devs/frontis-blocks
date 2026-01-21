@@ -32,7 +32,7 @@ import {
 
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import Select2 from "react-select";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
@@ -44,7 +44,6 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
@@ -63,7 +62,7 @@ import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockId,
 		blockStyle,
@@ -348,14 +347,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockId: "fb-advanced-button-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	/**
 	 * Generate SVG Icons for Icon
@@ -2316,13 +2307,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${buttonGlobalBorderRadiusMobile?.top}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.right}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.bottom}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.left}${buttonGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/** Start Load Google Font */
-	useEffect(() => {
-		if (buttonFontFamily) {
-			loadGoogleFont(buttonFontFamily);
-		}
-	}, [buttonFontFamily]);
-	/** End Load Google Font */
+
 
 	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
@@ -4008,3 +3993,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

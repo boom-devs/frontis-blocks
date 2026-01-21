@@ -7,18 +7,21 @@ import {
     MediaPlaceholder,
 } from '@wordpress/block-editor';
 
-import { useRef, memo } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
 import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
-function Edit({ attributes, setAttributes, clientId, context }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockId,
         blockStyle,
@@ -63,7 +66,25 @@ function Edit({ attributes, setAttributes, clientId, context }) {
         dynamicTextTermsSeparator,
         dynamicTextEnableLink,
         dynamicTextLinkSource,
+        buttonFontFamily,
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-advanced-button-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+            loadGoogleFont(buttonFontFamily);
+            loadedFonts.add(buttonFontFamily);
+        }
+    }, [buttonFontFamily]);
+    /** End Load Google Font */
 
     const blockProps = useBlockProps({
         className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -120,7 +141,6 @@ function Edit({ attributes, setAttributes, clientId, context }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <BlockControls>
@@ -214,5 +234,3 @@ function Edit({ attributes, setAttributes, clientId, context }) {
         </>
     );
 }
-
-export default memo(Edit);
