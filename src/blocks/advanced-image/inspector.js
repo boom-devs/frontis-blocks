@@ -57,7 +57,7 @@ import getProDynamicButton from '@Utils/getProDynamicButton';
 import "./editor.scss";
 import DynamicImageSourceControl from '@Components/dynamic-image-source-control';
 
-const Inspector = ({ attributes, setAttributes, clientId, onSelectImage }) => {
+const Inspector = ({ attributes, setAttributes, onSelectImage }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -251,20 +251,6 @@ const Inspector = ({ attributes, setAttributes, clientId, onSelectImage }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-advanced-image-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	useEffect(() => {
-		if (headingFontFamily) {
-			loadGoogleFont(headingFontFamily);
-		}
-	}, [headingFontFamily]);
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
