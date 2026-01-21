@@ -2,9 +2,12 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { useState, useEffect, useCallback } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 import Inspector from './inspector';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -40,8 +43,59 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTimezoneOffset,
 		showRemainingTime,
 		remainingTimeLabel,
-		remainingTimeFormat
+		remainingTimeFormat,
+		
+		timezoneLocationTextFontFamily,
+		timezoneTimeTextFontFamily,
+		timezoneTextFontFamily,
+		statusTextFontFamily,
+		noticeTextFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "fb-timezone-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (timezoneLocationTextFontFamily && !loadedFonts.has(timezoneLocationTextFontFamily)) {
+			loadGoogleFont(timezoneLocationTextFontFamily);
+			loadedFonts.add(timezoneLocationTextFontFamily);
+		}
+	}, [timezoneLocationTextFontFamily]);
+
+	useEffect(() => {
+		if (timezoneTimeTextFontFamily && !loadedFonts.has(timezoneTimeTextFontFamily)) {
+			loadGoogleFont(timezoneTimeTextFontFamily);
+			loadedFonts.add(timezoneTimeTextFontFamily);
+		}
+	}, [timezoneTimeTextFontFamily]);
+
+	useEffect(() => {
+		if (timezoneTextFontFamily && !loadedFonts.has(timezoneTextFontFamily)) {
+			loadGoogleFont(timezoneTextFontFamily);
+			loadedFonts.add(timezoneTextFontFamily);
+		}
+	}, [timezoneTextFontFamily]);
+
+	useEffect(() => {
+		if (statusTextFontFamily && !loadedFonts.has(statusTextFontFamily)) {
+			loadGoogleFont(statusTextFontFamily);
+			loadedFonts.add(statusTextFontFamily);
+		}
+	}, [statusTextFontFamily]);
+
+	useEffect(() => {
+		if (noticeTextFontFamily && !loadedFonts.has(noticeTextFontFamily)) {
+			loadGoogleFont(noticeTextFontFamily);
+			loadedFonts.add(noticeTextFontFamily);
+		}
+	}, [noticeTextFontFamily]);
+	/** End Load Google Font */
 
 	// State for real-time updates
 	const [currentTime, setCurrentTime] = useState('');
@@ -447,7 +501,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
 			<div {...blockProps}>
 				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>

@@ -110,12 +110,28 @@ const attributes = {
 			Mobile: '200',
 		}
 	},
+	riveAnimationCanvasWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	riveAnimationCanvasHeight: {
 		type: "object",
 		default: {
 			Desktop: '250',
 			Tablet: '150',
 			Mobile: '100',
+		}
+	},
+	riveAnimationCanvasHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
 		}
 	},
 	/** Start Class & ID Setting */
