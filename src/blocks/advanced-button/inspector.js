@@ -32,7 +32,7 @@ import {
 
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import Select2 from "react-select";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
@@ -63,7 +63,7 @@ import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockId,
 		blockStyle,
@@ -4008,3 +4008,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);
