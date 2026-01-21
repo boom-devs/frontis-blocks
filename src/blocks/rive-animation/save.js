@@ -11,6 +11,8 @@ export default function save({ attributes }) {
 		riveAnimationSpeed,
 		riveAnimationReverse,
 		riveEffectsOnHover,
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -32,11 +34,12 @@ export default function save({ attributes }) {
 					data-rive-speed={riveAnimationSpeed}
 					data-rive-reverse={riveAnimationReverse}
 					data-rive-hover={riveEffectsOnHover}
-					style={{
-						width: '100%',
-						height: '100%',
-						display: 'block',
-					}}
+					data-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}
+					data-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
+					data-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ''}
+					data-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
+					data-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ''}
+					data-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
 				/>
 			</div>
 		</div>
