@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 
 import {
     SelectControl,
@@ -51,7 +50,6 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
@@ -62,7 +60,7 @@ import FB_Presets from '@Components/presets';
 import './editor.scss';
 
 
-export default function Inspector({ attributes, setAttributes }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         // deviceType,
@@ -4722,3 +4720,5 @@ export default function Inspector({ attributes, setAttributes }) {
         </>
     );
 }
+
+export default memo(Inspector);
