@@ -50,7 +50,7 @@ import {
 } from '@Constants/fbConstants';
 
 import Select2 from "react-select";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -82,7 +82,7 @@ import FB_Presets from '@Components/presets';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,
         // deviceType,
@@ -481,14 +481,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-advanced-headings-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const headingIconHandler = (IconName) => {
         setAttributes({ headingIcon: IconName })
@@ -2531,15 +2523,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const globalTabletBorderRadiusWidth = `${headingGlobalBorderRadiusTablet?.top}${headingGlobalBorderRadiusUnits?.Tablet} ${headingGlobalBorderRadiusTablet?.right}${headingGlobalBorderRadiusUnits?.Tablet} ${headingGlobalBorderRadiusTablet?.bottom}${headingGlobalBorderRadiusUnits?.Tablet} ${headingGlobalBorderRadiusTablet?.left}${headingGlobalBorderRadiusUnits?.Tablet}`;
     const globalMobileBorderRadiusWidth = `${headingGlobalBorderRadiusMobile?.top}${headingGlobalBorderRadiusUnits?.Mobile} ${headingGlobalBorderRadiusMobile?.right}${headingGlobalBorderRadiusUnits?.Mobile} ${headingGlobalBorderRadiusMobile?.bottom}${headingGlobalBorderRadiusUnits?.Mobile} ${headingGlobalBorderRadiusMobile?.left}${headingGlobalBorderRadiusUnits?.Mobile}`;
     /** End Border Radius */
-
-    useEffect(() => {
-        if (headingFontFamily !== 'Default') {
-            loadGoogleFont(headingFontFamily);
-        }
-        if (subHeadingFontFamily !== 'Default') {
-            loadGoogleFont(subHeadingFontFamily);
-        }
-    }, [headingFontFamily, subHeadingFontFamily]);
 
     /**
      * Get background normal styles
@@ -5290,3 +5273,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

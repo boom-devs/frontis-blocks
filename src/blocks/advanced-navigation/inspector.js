@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { 
     PanelBody, 
     SelectControl, 
@@ -36,7 +36,7 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 
-export default function Inspector ({ attributes, setAttributes,  clientId}) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         blockStyle,
@@ -3930,3 +3930,4 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     );
 }
+export default memo(Inspector);

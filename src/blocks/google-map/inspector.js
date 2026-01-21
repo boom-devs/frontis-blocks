@@ -36,7 +36,7 @@ import {
     BORDER_STYLES,
 } from '@Constants/fbConstants';
 
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -62,7 +62,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 
 import './editor.scss';
 
-export default function Inspector ({ attributes, setAttributes,  clientId}) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         blockStyle,
@@ -870,3 +870,4 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         </>
     );
 }
+export default memo(Inspector);

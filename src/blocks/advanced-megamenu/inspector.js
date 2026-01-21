@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useMemo, useState } from '@wordpress/element';
+import { useEffect, useMemo, useState, memo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
@@ -43,7 +43,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         blockStyle,
@@ -2425,3 +2425,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);
