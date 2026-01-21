@@ -15,6 +15,8 @@ export default function save({ attributes }) {
 		riveAnimationCanvasHeight,
 		riveAnimationContainerWidthUnits,
 		riveAnimationContainerHeightUnits,
+		riveAnimationCanvasHeightUnits,
+		riveAnimationCanvasWidthUnits,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -30,12 +32,12 @@ export default function save({ attributes }) {
 
 	// Set width
 	if (riveAnimationCanvasWidth?.Desktop) {
-		wrapperStyles.width = `${riveAnimationCanvasWidth.Desktop}${riveAnimationContainerWidthUnits?.Desktop || 'px'}`;
+		wrapperStyles.width = `${riveAnimationCanvasWidth.Desktop}${riveAnimationCanvasWidthUnits?.Desktop || 'px'}`;
 	}
 
 	// Set height
 	if (riveAnimationCanvasHeight?.Desktop) {
-		wrapperStyles.height = `${riveAnimationCanvasHeight.Desktop}${riveAnimationContainerHeightUnits?.Desktop || 'px'}`;
+		wrapperStyles.height = `${riveAnimationCanvasHeight.Desktop}${riveAnimationCanvasHeightUnits?.Desktop || 'px'}`;
 	}
 
 	return (
@@ -49,12 +51,12 @@ export default function save({ attributes }) {
 					data-container-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
 					data-container-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
 					data-container-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
-					data-container-width-units-desktop={riveAnimationContainerWidthUnits?.Desktop ?? 'px'}
-					data-container-width-units-tablet={riveAnimationContainerWidthUnits?.Tablet ?? 'px'}
-					data-container-width-units-mobile={riveAnimationContainerWidthUnits?.Mobile ?? 'px'}
-					data-container-height-units-desktop={riveAnimationContainerHeightUnits?.Desktop ?? 'px'}
-					data-container-height-units-tablet={riveAnimationContainerHeightUnits?.Tablet ?? 'px'}
-					data-container-height-units-mobile={riveAnimationContainerHeightUnits?.Mobile ?? 'px'}
+					data-container-width-units-desktop={riveAnimationCanvasWidthUnits?.Desktop ?? 'px'}
+					data-container-width-units-tablet={riveAnimationCanvasWidthUnits?.Tablet ?? 'px'}
+					data-container-width-units-mobile={riveAnimationCanvasWidthUnits?.Mobile ?? 'px'}
+					data-container-height-units-desktop={riveAnimationCanvasHeightUnits?.Desktop ?? 'px'}
+					data-container-height-units-tablet={riveAnimationCanvasHeightUnits?.Tablet ?? 'px'}
+					data-container-height-units-mobile={riveAnimationCanvasHeightUnits?.Mobile ?? 'px'}
 					style={wrapperStyles}
 				>
 					<canvas

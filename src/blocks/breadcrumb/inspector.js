@@ -50,7 +50,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		breadcrumbAlignment,
@@ -271,15 +271,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-breadcrumb-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 
 	const homeIconHandler = (IconName) => {
 		setAttributes({ homeIcon: IconName })

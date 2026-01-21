@@ -250,14 +250,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 	const deviceType = useDeviceType();
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-advanced-paragraphs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const paragraphColumnGapFn = (value) => {
 		setAttributes({ paragraphColumnGap: value });
 	};
@@ -1264,12 +1256,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const globalTabletBorderRadiusWidth = `${paragraphGlobalBorderRadiusTablet.top}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.right}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.bottom}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.left}${paragraphGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${paragraphGlobalBorderRadiusMobile.top}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.right}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.bottom}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.left}${paragraphGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
-
-	useEffect(() => {
-		if (paragraphFontFamily !== "Default") {
-			loadGoogleFont(paragraphFontFamily);
-		}
-	}, [paragraphFontFamily]);
 
 	// detect <a> tags inside the RichText
 	const hasLinkInParagraph = useMemo(() => {

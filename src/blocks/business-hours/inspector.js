@@ -38,7 +38,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
         countries,
@@ -457,38 +457,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType= useDeviceType();
-
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-timezone-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    useEffect(() => {
-        if (timezoneLocationTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneLocationTextFontFamily);
-        }
-        if (timezoneTimeTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTimeTextFontFamily);
-        }
-        if (timezoneTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTextFontFamily);
-        }
-        if (statusTextFontFamily !== 'Default') {
-            loadGoogleFont(statusTextFontFamily);
-        }
-        if (noticeTextFontFamily !== 'Default') {
-            loadGoogleFont(noticeTextFontFamily);
-        }
-    }, [
-        timezoneLocationTextFontFamily, 
-        timezoneTimeTextFontFamily, 
-        timezoneTextFontFamily, 
-        statusTextFontFamily, 
-        noticeTextFontFamily
-    ]);
 
 	// State variables
     const [selectedDate, setSelectedDate] = useState('');

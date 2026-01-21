@@ -33,6 +33,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownMobileSwitcher,
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "countdown-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	/**
 		* Manages tab button settings and switches to block settings on click
@@ -106,7 +113,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

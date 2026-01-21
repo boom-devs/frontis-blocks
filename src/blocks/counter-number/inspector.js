@@ -51,7 +51,7 @@ import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-cont
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         counterAlignment,
@@ -741,15 +741,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     </svg>`,
         },
     ];
-
-    // Generate unique block ID if not set
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "counter-number-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     // Icon media remove handler
     const removeCounterMedia = () => {

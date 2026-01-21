@@ -1,11 +1,14 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -23,7 +26,33 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         featuresListDesktopSwitcher,
         featuresListTabletSwitcher,
         featuresListMobileSwitcher,
+        FeatureTitleFontFamily,
+        FeatureDescFontFamily,
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-feature-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (FeatureTitleFontFamily && !loadedFonts.has(FeatureTitleFontFamily)) {
+            loadGoogleFont(FeatureTitleFontFamily);
+            loadedFonts.add(FeatureTitleFontFamily);
+        }
+    }, [FeatureTitleFontFamily]);
+
+    useEffect(() => {
+        if (FeatureDescFontFamily && !loadedFonts.has(FeatureDescFontFamily)) {
+            loadGoogleFont(FeatureDescFontFamily);
+            loadedFonts.add(FeatureDescFontFamily);
+        }
+    }, [FeatureDescFontFamily]);
+    /** End Load Google Font */
 
     const blockProps = useBlockProps({
         className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -40,7 +69,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <div {...blockProps}>

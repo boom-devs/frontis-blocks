@@ -198,9 +198,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	return (
 		<>
 			<Inspector 
-			attributes={attributes}
-			setAttributes={setAttributes}
-
+				attributes={attributes}
+				setAttributes={setAttributes}
 			/>
 
 			<BlockControls>
