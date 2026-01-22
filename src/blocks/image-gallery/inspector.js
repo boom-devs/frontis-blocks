@@ -48,7 +48,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
     const { 
         blockID,
         blockStyle,
@@ -261,14 +261,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
     
     const deviceType= useDeviceType();
-    
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-gallery-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -3266,12 +3258,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		setAttributes({lightboxIcon: IconName})
 	}
 
-    useEffect(() => {
-        loadGoogleFont(GalleryButtonFontFamily);
-    }, [GalleryButtonFontFamily]);
-    
-
-
+    /* Gallery Style Css */
     const fbGalleryStyle = useMemo(() => `
         .fb-gallery-main-wrapper.${blockID} {
             ${GalleryPositionType === 'default' ? `position: relative;` : ''}
