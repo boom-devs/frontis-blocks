@@ -160,6 +160,14 @@ export default function Inspector({ attributes, setAttributes }) {
 		riveAnimationCanvasWidthUnits,
 	} = attributes;
 
+	 useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-slider-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const deviceType = useDeviceType();
 
 	/** Start Global padding */
