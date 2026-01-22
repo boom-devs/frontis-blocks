@@ -123,11 +123,13 @@ const Edit = (props) => {
     });
 
 
-    const getSliderTemplate = useMemo(() => {
-        // Generate template based on slideItem count
-        const itemCount = parseInt(slideItem) || 3;
-        return Array(itemCount).fill(null).map(() => ['frontis-blocks/slider-item']);
-    }, [slideItem]);
+
+    const getSliderTemplate = useMemo(() => [
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+        ['frontis-blocks/slider-item'],
+    ], [slideItem, slideContent]);
 
     const innerBlocksProps = useInnerBlocksProps(
         {
@@ -142,24 +144,6 @@ const Edit = (props) => {
         }
     );
 
-    // Calculate the max slides per view needed for loop
-    const maxSlidesPerView = useMemo(() => {
-        if (sliderType !== 'carousel') return 1;
-        return Math.max(
-            parseInt(carouselPerColumn?.Desktop) || 1,
-            parseInt(carouselPerColumn?.Tablet) || 1,
-            parseInt(carouselPerColumn?.Mobile) || 1
-        );
-    }, [carouselPerColumn, sliderType]);
-
-    // Determine if loop should be enabled (need at least slidesPerView + 1 slides for proper loop)
-    const shouldEnableLoop = useMemo(() => {
-        if (!loop) return false;
-        const slideCount = Math.max(hasChildren ? 1 : 0, parseInt(slideItem) || 3);
-        // Need at least (maxSlidesPerView + 1) slides for loop to work properly
-        return slideCount > maxSlidesPerView;
-    }, [loop, slideItem, maxSlidesPerView, hasChildren]);
-
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
         autoplay: autoplay ? {
@@ -169,7 +153,7 @@ const Edit = (props) => {
             reverseDirection: reverseDirection,
         } : false,
         speed: transitionSpeed,
-        loop: shouldEnableLoop,
+        loop: loop,
         effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
         ...(sliderType === 'carousel' && {
@@ -222,7 +206,6 @@ const Edit = (props) => {
         stopOnLastSlide,
         reverseDirection,
         transitionSpeed,
-        shouldEnableLoop,
         loop,
         carouselEffect,
         slideEffect,
@@ -238,16 +221,36 @@ const Edit = (props) => {
         displayDots,
     ]);
 
-    /* Dynamic Swiper Key - Only remount when effect or layout fundamentally changes */
+    /* Dynamic Swiper Key */
     useEffect(() => {
         setSwiperKey(prevKey => prevKey + 1);
     }, [
-        sliderType, // slider vs carousel
-        carouselEffect, // carousel layout
-        slideEffect, // slider layout
+        sliderType,
+        carouselEffect,
+        slideEffect,
         carouselPerColumn?.Desktop,
         carouselPerColumn?.Tablet,
         carouselPerColumn?.Mobile,
+        carouselPerColumnGap?.Desktop,
+        carouselPerColumnGap?.Tablet,
+        carouselPerColumnGap?.Mobile,
+        transitionSpeed,
+        loop,
+        autoplay,
+        autoplaySpeed,
+        stopOnLastSlide,
+        reverseDirection,
+        allowTouchMove,
+        enableMouseWheel,
+        enableKeyboardNavigation,
+        paginationType,
+        displayDots,
+        displayArrows,
+        sliderArrowsIconSwitcher,
+        sliderArrowPositionType,
+        sliderArrowPosition,
+        sliderArrowsIconLeft,
+        sliderArrowsIconRight,
     ]);
 
     // Add useEffect to update Swiper when settings change
@@ -256,22 +259,12 @@ const Edit = (props) => {
 
             // Update carousel settings
             if (sliderType === 'carousel') {
-                const slidesPerView = deviceType === 'Desktop' ? carouselPerColumn?.Desktop : deviceType === 'Tablet' ? carouselPerColumn?.Tablet : carouselPerColumn?.Mobile;
-                const spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap?.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap?.Tablet : carouselPerColumnGap?.Mobile;
-
-                swiperInstance.params.slidesPerView = slidesPerView;
-                swiperInstance.params.spaceBetween = spaceBetween;
-
-                // Force layout recalculation for carousel
-                swiperInstance.loopDestroy();
-                swiperInstance.update();
-                if (shouldEnableLoop) {
-                    swiperInstance.loopCreate();
-                }
+                swiperInstance.params.slidesPerView = deviceType === 'Desktop' ? carouselPerColumn.Desktop : deviceType === 'Tablet' ? carouselPerColumn.Tablet : carouselPerColumn.Mobile;
+                swiperInstance.params.spaceBetween = deviceType === 'Desktop' ? carouselPerColumnGap.Desktop : deviceType === 'Tablet' ? carouselPerColumnGap.Tablet : carouselPerColumnGap.Mobile;
             }
 
             swiperInstance.params.speed = transitionSpeed;
-            swiperInstance.params.loop = shouldEnableLoop;
+            swiperInstance.params.loop = loop;
             swiperInstance.params.allowTouchMove = allowTouchMove;
 
             // Handle autoplay settings
@@ -307,16 +300,16 @@ const Edit = (props) => {
             swiperInstance.update();
 
             // If loop setting changed, need to re-initialize
-            if (swiperInstance.params.loop !== shouldEnableLoop) {
+            if (swiperInstance.params.loop !== loop) {
                 swiperInstance.loopDestroy();
-                if (shouldEnableLoop) {
+                if (loop) {
                     swiperInstance.loopCreate();
                 }
             }
 
             // Reset event listeners
             swiperInstance.off('reachEnd');
-            if (stopOnLastSlide && !shouldEnableLoop && autoplay) {
+            if (stopOnLastSlide && !loop && autoplay) {
                 swiperInstance.on('reachEnd', () => {
                     swiperInstance.autoplay.stop();
                 });
@@ -330,7 +323,7 @@ const Edit = (props) => {
         stopOnLastSlide,
         reverseDirection,
         transitionSpeed,
-        shouldEnableLoop,
+        loop,
         allowTouchMove,
         sliderType,
         carouselPerColumn,
