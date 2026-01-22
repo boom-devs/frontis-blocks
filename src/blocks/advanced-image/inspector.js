@@ -30,7 +30,7 @@ import {
 
 import Select2 from "react-select";
 import { useSelect } from "@wordpress/data";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 import FB_BackgroundColorControl from "@Components/background-color-control";
@@ -57,7 +57,7 @@ import getProDynamicButton from '@Utils/getProDynamicButton';
 import "./editor.scss";
 import DynamicImageSourceControl from '@Components/dynamic-image-source-control';
 
-export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
+const Inspector = ({ attributes, setAttributes, onSelectImage }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -251,20 +251,6 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-advanced-image-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	useEffect(() => {
-		if (headingFontFamily) {
-			loadGoogleFont(headingFontFamily);
-		}
-	}, [headingFontFamily]);
 
 	// Heading Padding
 	const handleHeadingPaddingUnitChange = (event, position) => {
@@ -2005,3 +1991,4 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		</>
 	);
 }
+export default memo(Inspector);

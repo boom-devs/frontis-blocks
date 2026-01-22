@@ -2,11 +2,14 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { useRef, useEffect, useState } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from "@Config/displayType";
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -24,7 +27,35 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
 
+        animatedHeadingNormalTextFontFamily,
+        animatedHeadingAnimationTextFontFamily,
+
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-animated-heading-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (animatedHeadingNormalTextFontFamily && !loadedFonts.has(animatedHeadingNormalTextFontFamily)) {
+            loadGoogleFont(animatedHeadingNormalTextFontFamily);
+            loadedFonts.add(animatedHeadingNormalTextFontFamily);
+        }
+    }, [animatedHeadingNormalTextFontFamily]);
+
+    useEffect(() => {
+        if (animatedHeadingAnimationTextFontFamily && !loadedFonts.has(animatedHeadingAnimationTextFontFamily)) {
+            loadGoogleFont(animatedHeadingAnimationTextFontFamily);
+            loadedFonts.add(animatedHeadingAnimationTextFontFamily);
+        }
+    }, [animatedHeadingAnimationTextFontFamily]);
+    /** End Load Google Font */
+    
 
     const blockProps = useBlockProps({
         className: `fb-animated-heading-main-wrapper ${blockId}`,
@@ -206,7 +237,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <BlockControls>

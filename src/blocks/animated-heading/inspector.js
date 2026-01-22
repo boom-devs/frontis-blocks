@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import {
@@ -36,7 +36,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -49,7 +48,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,
         blockStyle,
@@ -158,14 +157,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 	
     const deviceType= useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-animated-heading-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -509,16 +500,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const animatedHeadingGlobalTabletBorderRadiusWidth = `${animatedHeadingGlobalTabletBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Tablet} ${animatedHeadingGlobalTabletBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Tablet}`;
     const animatedHeadingGlobalMobileBorderRadiusWidth = `${animatedHeadingGlobalMobileBorderRadius.top}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.right}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.bottom}${animatedHeadingGlobalBorderRadiusUnits.Mobile} ${animatedHeadingGlobalMobileBorderRadius.left}${animatedHeadingGlobalBorderRadiusUnits.Mobile}`;
     /** End Global Border Radius */
-
-
-    useEffect(() => {
-        if (animatedHeadingNormalTextFontFamily !== 'Default') { 
-            loadGoogleFont(animatedHeadingNormalTextFontFamily);
-        }
-        if (animatedHeadingAnimationTextFontFamily !== 'Default') {
-            loadGoogleFont(animatedHeadingAnimationTextFontFamily);
-        }
-    }, [animatedHeadingNormalTextFontFamily,animatedHeadingAnimationTextFontFamily]);
 
     const allBlockStyle = useMemo(() => `
 
@@ -1331,3 +1312,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

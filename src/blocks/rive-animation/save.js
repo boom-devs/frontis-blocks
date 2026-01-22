@@ -11,6 +11,12 @@ export default function save({ attributes }) {
 		riveAnimationSpeed,
 		riveAnimationReverse,
 		riveEffectsOnHover,
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight,
+		riveAnimationContainerWidthUnits,
+		riveAnimationContainerHeightUnits,
+		riveAnimationCanvasHeightUnits,
+		riveAnimationCanvasWidthUnits,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -21,23 +27,60 @@ export default function save({ attributes }) {
 		return null;
 	}
 
+	// Build wrapper styles with responsive width/height
+	const wrapperStyles = {};
+
+	// Set width
+	if (riveAnimationCanvasWidth?.Desktop) {
+		wrapperStyles.width = `${riveAnimationCanvasWidth.Desktop}${riveAnimationCanvasWidthUnits?.Desktop || 'px'}`;
+	}
+
+	// Set height
+	if (riveAnimationCanvasHeight?.Desktop) {
+		wrapperStyles.height = `${riveAnimationCanvasHeight.Desktop}${riveAnimationCanvasHeightUnits?.Desktop || 'px'}`;
+	}
+
 	return (
 		<div {...blockProps}>
 			<div className="fb-parent-wrapper fb-rive-animation-container">
-				<canvas
-					className="fb-rive-canvas"
-					data-rive-src={riveAnimationImageUrl}
-					data-rive-loop={riveLoop}
-					data-rive-autoplay={riveAutoplay}
-					data-rive-speed={riveAnimationSpeed}
-					data-rive-reverse={riveAnimationReverse}
-					data-rive-hover={riveEffectsOnHover}
-					style={{
-						width: '100%',
-						height: '100%',
-						display: 'block',
-					}}
-				/>
+				<div
+					className="fb-rive-canvas-wrapper"
+					data-container-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}
+					data-container-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ''}
+					data-container-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ''}
+					data-container-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
+					data-container-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
+					data-container-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
+					data-container-width-units-desktop={riveAnimationCanvasWidthUnits?.Desktop ?? 'px'}
+					data-container-width-units-tablet={riveAnimationCanvasWidthUnits?.Tablet ?? 'px'}
+					data-container-width-units-mobile={riveAnimationCanvasWidthUnits?.Mobile ?? 'px'}
+					data-container-height-units-desktop={riveAnimationCanvasHeightUnits?.Desktop ?? 'px'}
+					data-container-height-units-tablet={riveAnimationCanvasHeightUnits?.Tablet ?? 'px'}
+					data-container-height-units-mobile={riveAnimationCanvasHeightUnits?.Mobile ?? 'px'}
+					style={wrapperStyles}
+				>
+					<canvas
+						className="fb-rive-canvas"
+						data-rive-src={riveAnimationImageUrl}
+						data-rive-loop={riveLoop}
+						data-rive-autoplay={riveAutoplay}
+						data-rive-speed={riveAnimationSpeed}
+						data-rive-reverse={riveAnimationReverse}
+						data-rive-hover={riveEffectsOnHover}
+						data-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}
+						data-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
+						data-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ''}
+						data-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
+						data-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ''}
+						data-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
+						style={
+							{
+								width: '100%',
+								height: '100%'
+							}
+						}
+					/>
+				</div>
 			</div>
 		</div>
 	);

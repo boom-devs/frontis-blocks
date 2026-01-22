@@ -1,0 +1,906 @@
+
+> frontis-blocks@1.0.0 build
+> wp-scripts build --config webpack.config.js
+
+assets by status 20.2 MiB [cached] 364 assets
+orphan modules 11.5 MiB (javascript) 1.87 KiB (asset) 100 KiB (runtime) [orphan] 1598 modules
+runtime modules 160 KiB 252 modules
+built modules 211 KiB (css/mini-extract) 43.2 MiB (javascript) [built]
+  cacheable modules 211 KiB (css/mini-extract) 1.13 MiB (javascript)
+    modules by path ./src/ 194 KiB (css/mini-extract) 115 KiB (javascript)
+      css modules 194 KiB 99 modules
+      javascript modules 115 KiB 31 modules
+    modules by path ./node_modules/ 1.02 MiB (javascript) 13.9 KiB (css/mini-extract)
+      javascript modules 1.02 MiB 35 modules
+      css modules 13.9 KiB
+        css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]!./node_modules/swiper/swiper.css 6.25 KiB [built] [code generated]
+        + 7 modules
+    css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./admin/scss/_upgrade-to-pro-popup.scss 2.61 KiB [built] [code generated]
+  + 57 modules
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/assets/scss/backend/global-editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src/assets/scss/backend/global-editor.scss 4:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src/assets/scss/backend/global-editor.scss 5:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src/assets/scss/backend/global-editor.scss 6:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src/assets/scss/backend/global-editor.scss 7:9  root stylesheet
+<w> 
+<w> Deprecation Sass @import rules are deprecated and will be removed in Dart Sass 3.0.0.
+<w> 
+<w> More info and automated migrator: https://sass-lang.com/d/import
+<w> 
+<w> src/assets/scss/backend/global-editor.scss 8:9  root stylesheet
+<w> 
+<w> 50 repetitive deprecation warnings omitted.
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion-item/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-button/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-image/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-navigation/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-heading/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/breadcrumb/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/animated-heading/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-video/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-megamenu/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/counter-number/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-paragraph/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/contact-form-7/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/call-to-action/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/critical-css/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/business-hours/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/countdown/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/dual-button/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/features-list/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/google-map/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/container/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/image-gallery/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/fluent-form/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/icon-box/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/flip-box/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/info-box/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-featured-image/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-category/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel-item/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/lottie-animation/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-comment-form/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-grid/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/pricing-table/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/off-canvas-menu/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-title/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/progressbar/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/rive-animation/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/search/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/stack/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-icons/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider-item/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs-item/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/team-member/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/news-ticker/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/testimonial/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share-child/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share/style.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion-item/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-button/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-image/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-heading/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-megamenu/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/breadcrumb/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/counter-number/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-video/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-paragraph/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/animated-heading/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/countdown/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/container/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/dual-button/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/business-hours/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/contact-form-7/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/features-list/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/fluent-form/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/google-map/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/image-gallery/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/pricing-table/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-grid/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/off-canvas-menu/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/progressbar/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination-numbers/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/search/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/news-ticker/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/stack/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/team-member/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-icons/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share-child/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/testimonial/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./admin/scss/_upgrade-to-pro-popup.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder-wrapper/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/call-to-action/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/flip-box/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel-item/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/lottie-animation/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider-item/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/rive-animation/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-category/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-comment-form/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+LOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder/editor.scss
+<w> Deprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+<w> 
+<w> More info: https://sass-lang.com/d/legacy-js-api
+<w> 
+<w> null
+
+ERROR in ./src/assets/scss/backend/global-editor.scss (./src/assets/scss/backend/global-editor.scss.webpack[javascript/auto]!=!./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/assets/scss/backend/global-editor.scss) 5:36-87
+Module not found: Error: Can't resolve 'transparent-bg-demo.png' in '/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend'
+resolve 'transparent-bg-demo.png' in '/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend'
+  Parsed request is a module
+  using description file: /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/package.json (relative path: ./src/assets/scss/backend)
+    using description file: /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/package.json (relative path: ./src/assets/scss/backend/transparent-bg-demo.png)
+      no extension
+        /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/transparent-bg-demo.png doesn't exist
+      as directory
+        /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/transparent-bg-demo.png doesn't exist
+    resolve as module
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/node_modules doesn't exist or is not a directory
+      looking for modules in /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules
+        single file module
+          using description file: /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/package.json (relative path: ./node_modules/transparent-bg-demo.png)
+            no extension
+              /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/transparent-bg-demo.png doesn't exist
+        /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/transparent-bg-demo.png doesn't exist
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/public/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/app/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/test/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/Local Sites/node_modules doesn't exist or is not a directory
+      /Users/noruzzamanrubel/node_modules doesn't exist or is not a directory
+      /Users/node_modules doesn't exist or is not a directory
+      /node_modules doesn't exist or is not a directory
+ @ ./src/assets/scss/backend/global-editor.scss
+
+ERROR in ./src/assets/scss/backend/global-editor.scss
+Module build failed (from ./node_modules/mini-css-extract-plugin/dist/loader.js):
+HookWebpackError: Cannot find module 'transparent-bg-demo.png'
+    at tryRunOrWebpackError (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/HookWebpackError.js:114:9)
+    at __webpack_require_module__ (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5578:12)
+    at __webpack_require__ (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5525:18)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5613:20
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at done (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3527:9)
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5500:43
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3482:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5463:16
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at done (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3527:9)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5377:8
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3781:6
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/HookWebpackError.js:95:2
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:6:1)
+    at Cache.store (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:114:20)
+    at ItemCacheFacade.store (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/CacheFacade.js:141:15)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3780:11
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:100:5
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:6:1)
+    at Cache.get (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:82:18)
+    at ItemCacheFacade.get (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/CacheFacade.js:115:15)
+    at Compilation._codeGenerationModule (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3747:9)
+    at codeGen (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5365:11)
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3482:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5431:15
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5395:14
+    at processQueue (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/util/processAsyncTree.js:61:4)
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+    at runNextTicks (node:internal/process/task_queues:64:3)
+    at process.processImmediate (node:internal/timers:454:9)
+-- inner error --
+Error: Cannot find module 'transparent-bg-demo.png'
+    at webpackMissingModule (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/global-editor.scss:15:113)
+    at Module.<anonymous> (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/global-editor.scss:15:211)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/javascript/JavascriptModulesPlugin.js:551:10
+    at Hook.eval [as call] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:19:10), <anonymous>:7:1)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5580:39
+    at tryRunOrWebpackError (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/HookWebpackError.js:109:7)
+    at __webpack_require_module__ (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5578:12)
+    at __webpack_require__ (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5525:18)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5613:20
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at done (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3527:9)
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:15:1)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5500:43
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3482:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5463:16
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at done (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3527:9)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5377:8
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3781:6
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/HookWebpackError.js:95:2
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:6:1)
+    at Cache.store (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:114:20)
+    at ItemCacheFacade.store (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/CacheFacade.js:141:15)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3780:11
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:100:5
+    at Hook.eval [as callAsync] (eval at create (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/tapable/lib/HookCodeFactory.js:31:10), <anonymous>:6:1)
+    at Cache.get (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Cache.js:82:18)
+    at ItemCacheFacade.get (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/CacheFacade.js:115:15)
+    at Compilation._codeGenerationModule (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:3747:9)
+    at codeGen (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5365:11)
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3482:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5431:15
+    at symbolIterator (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3485:9)
+    at timesSync (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:2297:7)
+    at Object.eachLimit (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/neo-async/async.js:3463:5)
+    at /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/Compilation.js:5395:14
+    at processQueue (/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/webpack/lib/util/processAsyncTree.js:61:4)
+    at processTicksAndRejections (node:internal/process/task_queues:77:11)
+    at runNextTicks (node:internal/process/task_queues:64:3)
+    at process.processImmediate (node:internal/timers:454:9)
+
+Generated code for /Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/src/assets/scss/backend/global-editor.scss
+ 1 | __webpack_require__.r(__webpack_exports__);
+ 2 | /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+ 3 | /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+ 4 | /* harmony export */ });
+ 5 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/runtime/noSourceMaps.js");
+ 6 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0__);
+ 7 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/runtime/api.js");
+ 8 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1__);
+ 9 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("/Users/noruzzamanrubel/Local Sites/test/app/public/wp-content/plugins/frontis-blocks/node_modules/@wordpress/scripts/node_modules/css-loader/dist/runtime/getUrl.js");
+10 | /* harmony import */ var _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2__);
+11 | // Imports
+12 | 
+13 | 
+14 | 
+15 | var ___CSS_LOADER_URL_IMPORT_0___ = new URL(/* asset import */ Object(function webpackMissingModule() { var e = new Error("Cannot find module 'transparent-bg-demo.png'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), __webpack_require__.b);
+16 | var ___CSS_LOADER_EXPORT___ = _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_noSourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
+17 | var ___CSS_LOADER_URL_REPLACEMENT_0___ = _node_modules_wordpress_scripts_node_modules_css_loader_dist_runtime_getUrl_js__WEBPACK_IMPORTED_MODULE_2___default()(___CSS_LOADER_URL_IMPORT_0___);
+18 | // Module
+19 | ___CSS_LOADER_EXPORT___.push([module.id, `.fb-accordion-add-button-wrapper{margin-top:24px}.fb-accordion-add-button-wrapper .fb-accordion-add-button{align-items:center;background-color:#ebf5ff;border-radius:8px;color:#000;display:flex;flex-direction:row;gap:5px;height:auto;padding:12px 24px!important}.fb-accordion-add-button-wrapper .fb-accordion-add-button:hover{color:#000}.fb-accordion-add-button-wrapper .fb-accordion-add-button .dashicons-plus{font-size:18px;height:unset;margin-bottom:-4px;padding:0;width:unset}.fb-accordion-add-button-wrapper .fb-accordion-add-button .fb-accordion-add-button-label{font-size:16px;font-weight:500}.fb-accordion-item-main-wrapper .fb-accordion-item-title-wrapper .fb-accordion-title{margin:0}.fb-accordion-item-wrapper .fb-accordion-icon{height:22px;width:22px}.fb-accordion-item-image-upload-wrapper .components-base-control__field{position:relative}.fb-accordion-item-image-upload-wrapper .components-base-control__field:hover .editor-post-featured-image__actions{opacity:1}.fb-accordion-item-image-upload-wrapper .components-base-control__field .editor-post-featured-image__actions{height:unset;justify-content:center;padding:8px 12px;text-align:center;width:100%;z-index:1}.fb-accordion-item-image-upload-wrapper .components-base-control__field .editor-post-featured-image__actions.active{background-color:#5f5f5f;border-radius:3px;color:#007cba}.fb-accordion-item-title-wrapper{align-items:center;background:#ebf5ff;border-radius:8px 8px 8px 8px;border-style:none;border-width:0;cursor:pointer;display:flex;flex-direction:row;gap:16px;justify-content:space-between;padding:20px;transition:all .3s ease-in-out}.fb-accordion-title-inner{align-items:center;display:inline-flex;gap:20px}.fb-accordion-icon{height:22px;width:22px}.fb-accordion-icon svg{height:100%;width:100%}.fb-link-control-icon-popup{min-width:220px;padding:.2rem}.fb-link-control-icon-popup .fb-link-control-icon-popup-inner{position:relative;z-index:99999}.fb-link-control-icon-popup .fb-link-control-icon-popup-inner .components-base-control__field{margin-bottom:0}.fb-link-control-icon-popup .fb-link-control-icon-popup-inner .components-base-control__field label{color:#5f5f5f!important;display:block;font-size:12px!important;font-weight:500!important;line-height:16px!important;margin:10px 0!important;min-height:auto;text-transform:capitalize!important}.fb-link-control-icon-popup .fb-link-control-icon-popup-inner .components-base-control__field .components-toggle-control{margin-bottom:0!important}.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-link-control-url{flex:1;margin-bottom:0}.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-link-control-url .components-base-control__field{margin-bottom:0}.fb-advanced-button-wrapper .fb-advanced-button{align-items:center;border-radius:0;box-sizing:border-box;cursor:pointer;display:inline-flex;justify-content:center;outline:none;position:relative;text-align:center;text-decoration:none;transition:all .3s ease-in-out;white-space:nowrap}.fb-advanced-button-wrapper .fb-advanced-button:focus{box-shadow:none;outline:none}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-text{transition:all .3s ease-in-out}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper{align-items:center;display:flex}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon{align-items:center;display:flex;justify-content:center;position:relative;z-index:1}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon svg{box-sizing:content-box;display:block;height:16px;width:16px}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image{align-items:center;display:flex;height:20px;justify-content:center;position:relative;width:20px;z-index:1}.fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper .fb-advanced-button-icon-image img{box-sizing:content-box;display:block;height:100%;width:100%}.fb-advanced-separator-wrapper .components-base-control,.fb-advanced-sub-heading-wrapper .components-base-control{margin-bottom:8px}.fb-advanced-heading-bg-image{margin-bottom:16px}.fb-advanced-heading-bg-image .components-base-control__field{display:block}.fb-advanced-heading-bg-image .fb-image-avatar-control{background-color:#ccc;background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:6px;height:150px;margin-bottom:16px;padding:2px;position:relative;width:100%}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-image-avatar-delete{align-items:center;background:none;border:0;border-radius:2px;cursor:pointer;display:inline-flex;font-family:inherit;font-weight:400;height:36px;margin:0 8px!important;padding:0!important;position:absolute;right:0;text-decoration:none;transition:box-shadow .1s linear}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-image-avatar-delete svg{fill:none;filter:drop-shadow(1px 1px 3px rgb(100,100,100))}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-image-replace-btn{align-items:center;backdrop-filter:blur(2px);background:hsla(0,0%,95%,.749);border:0;border-radius:0 0 6px 6px;bottom:0;color:#000;cursor:pointer;display:flex;font-family:inherit;font-size:13px;font-weight:400;gap:10px;height:36px;justify-content:center;left:0;margin:0;padding:6px 12px;position:absolute;text-decoration:none;transition:.3s;width:100%}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-image-replace-btn svg{fill:none}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-image-replace-btn{padding-right:44px}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-components-button{align-items:center;background:#fff;border:1px solid #dcdcde;border-radius:6px;bottom:8px;box-shadow:0 1px 1px rgba(0,0,0,.04);cursor:pointer;display:inline-flex;height:36px;justify-content:center;position:absolute;right:8px;width:36px;z-index:2}.fb-advanced-heading-bg-image .fb-image-avatar-control .fb-components-button svg{display:block}.fb-advanced-heading-bg-image .fb-image-upload-btn{align-items:center;background-color:#f2f2f2;background-image:url(${___CSS_LOADER_URL_REPLACEMENT_0___});border:1px solid #e9e8eb;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;font-weight:400;gap:8px;height:130px;justify-content:center;margin:0;padding:0;text-decoration:none;transition:box-shadow .1s linear;width:100%}.fb-advanced-image-upload-control{margin-bottom:16px}.fb-advanced-image-upload-control .components-base-control__field{display:block}.fb-advanced-image-upload-control .fb-image-avatar-control{background-color:#ccc;background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:6px;height:150px;margin-bottom:16px;padding:2px;position:relative;width:100%}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-avatar-delete{align-items:center;background:none;border:0;border-radius:2px;cursor:pointer;display:inline-flex;font-family:inherit;font-weight:400;height:36px;margin:0 8px!important;padding:0!important;position:absolute;right:0;text-decoration:none;transition:box-shadow .1s linear}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-avatar-delete svg{fill:none;filter:drop-shadow(1px 1px 3px rgb(100,100,100))}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-replace-dynamic-btn-wrapper{align-items:center;background:hsla(0,0%,95%,.749);border-radius:0 0 6px 6px;bottom:0;display:flex;justify-content:space-between;left:0;padding:0 8px;position:absolute;width:100%}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-replace-dynamic-btn-wrapper .fb-image-replace-btn{align-items:center;background:transparent;border:0;cursor:pointer;display:flex;flex:1;font-size:13px;gap:8px;height:36px}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-replace-dynamic-btn-wrapper .fb-components-button{align-items:center;background:transparent;border:0;cursor:pointer;display:flex;height:36px;justify-content:center;padding-left:10px;position:relative}.fb-advanced-image-upload-control .fb-image-avatar-control .fb-image-replace-dynamic-btn-wrapper .fb-components-button:before{background:#a7a7a7;border-radius:1px;bottom:6px;content:"";left:-8px;position:absolute;top:6px;width:1px}.fb-advanced-image-upload-control .fb-image-upload-btn{align-items:center;background-color:#f2f2f2;background-image:url(${___CSS_LOADER_URL_REPLACEMENT_0___});border:1px solid #e9e8eb;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;font-weight:400;gap:8px;height:130px;justify-content:center;margin:0;padding:0;text-decoration:none;transition:box-shadow .1s linear;width:100%}.fb-advanced-icon-wrapper{align-items:center;display:flex}.fb-advanced-icon-wrapper .fb-advanced-icon{align-items:center;display:flex;justify-content:center}.fb-advanced-heading.active-line:after{background-color:#b0d7ff;bottom:-5px;content:"";height:2px;left:0;position:absolute;right:0;width:100%}.fb-advanced-heading.active-line:before{background-color:#399cff;bottom:-5px;content:"";height:3px;position:absolute;width:30%;z-index:1}.fb-advanced-heading-before-after{width:100%}.fb-advanced-wrapper[style*="text-align: left"] .fb-advanced-heading.active-line:before{left:0}.fb-advanced-wrapper[style*="text-align: center"] .fb-advanced-heading.active-line:before{left:50%;transform:translateX(-50%)}.fb-advanced-wrapper[style*="text-align: right"] .fb-advanced-heading.active-line:before{right:0}.fb-advanced-image-wrapper .fb-advanced-image{position:relative;width:100%}.fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner{overflow:hidden;position:relative}.fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-inner img{display:block;height:inherit;max-height:100%;max-width:100%;width:100%}.fb-advanced-image-wrapper .fb-advanced-image .fb-advanced-image-title{display:flex;flex-direction:column;left:0;position:absolute;right:0;top:0;z-index:99}.fb-advanced-image-wrapper .fb-advanced-image.center .fb-advanced-image-title{left:50%;top:50%;transform:translate(-50%,-50%)}.fb-advanced-image-wrapper .fb-advanced-image.center .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:center}.fb-advanced-image-wrapper .fb-advanced-image.center-left .fb-advanced-image-title{left:0;top:50%;transform:translateY(-50%)}.fb-advanced-image-wrapper .fb-advanced-image.center-left .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:left}.fb-advanced-image-wrapper .fb-advanced-image.vertical-center .fb-advanced-image-title{left:50%;top:50%;transform:translate(-50%,-50%) rotate(-90deg)}.fb-advanced-image-wrapper .fb-advanced-image.vertical-center .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:center}.fb-advanced-image-wrapper .fb-advanced-image.center-right .fb-advanced-image-title{right:0;top:50%;transform:translateY(-50%)}.fb-advanced-image-wrapper .fb-advanced-image.center-right .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:right}.fb-advanced-image-wrapper .fb-advanced-image.top-left .fb-advanced-image-title{align-items:flex-start;justify-content:flex-start}.fb-advanced-image-wrapper .fb-advanced-image.top-left .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:left}.fb-advanced-image-wrapper .fb-advanced-image.top-center .fb-advanced-image-title{align-items:center;justify-content:center}.fb-advanced-image-wrapper .fb-advanced-image.top-center .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:center}.fb-advanced-image-wrapper .fb-advanced-image.top-right .fb-advanced-image-title{align-items:flex-end;justify-content:flex-end}.fb-advanced-image-wrapper .fb-advanced-image.top-right .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:right}.fb-advanced-image-wrapper .fb-advanced-image.bottom-left .fb-advanced-image-title{align-items:flex-start;bottom:0;justify-content:flex-end}.fb-advanced-image-wrapper .fb-advanced-image.bottom-left .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:left}.fb-advanced-image-wrapper .fb-advanced-image.bottom-center .fb-advanced-image-title{align-items:center;bottom:0;justify-content:flex-end}.fb-advanced-image-wrapper .fb-advanced-image.bottom-center .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:center}.fb-advanced-image-wrapper .fb-advanced-image.bottom-right .fb-advanced-image-title{align-items:flex-end;bottom:0;justify-content:flex-end}.fb-advanced-image-wrapper .fb-advanced-image.bottom-right .fb-advanced-image-title .fb-advanced-image-title-inner{text-align:right}.fb-advanced-image-wrapper .fb-advanced-image.circle .fb-advanced-image-inner{border-radius:50%}.fb-advanced-image-wrapper .fb-advanced-image.square .fb-advanced-image-inner{border-radius:0}.fb-advanced-image-wrapper .fb-advanced-image.rounded .fb-advanced-image-inner{border-radius:15px}.fb-advanced-image-wrapper .fb-advanced-image.triangle .fb-advanced-image-inner{clip-path:polygon(50% 0,0 100%,100% 100%)}.fb-advanced-image-wrapper .fb-advanced-image.octagon .fb-advanced-image-inner{clip-path:polygon(30% 0,70% 0,100% 30%,100% 70%,70% 100%,30% 100%,0 70%,0 30%)}.fb-advanced-image-wrapper .fb-advanced-image.rhombus .fb-advanced-image-inner{clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%)}.fb-advanced-image-wrapper .fb-advanced-image.hexagon .fb-advanced-image-inner{clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)}.fb-advanced-image-wrapper .fb-advanced-image.bevel .fb-advanced-image-inner{clip-path:polygon(20% 0,80% 0,100% 20%,100% 80%,80% 100%,20% 100%,0 80%,0 20%)}.fb-advanced-image-wrapper .fb-advanced-image.cover img{-o-object-fit:cover;object-fit:cover}.fb-advanced-image-wrapper .fb-advanced-image.contain img{-o-object-fit:contain;object-fit:contain}.fb-advanced-image-wrapper .fb-advanced-image.fill img{-o-object-fit:fill;object-fit:fill}.fb-advanced-image-wrapper .fb-advanced-image.thumbnail .fb-advanced-image-inner{height:150px!important;width:150px!important}.fb-advanced-image-wrapper .fb-advanced-image.medium .fb-advanced-image-inner{height:300px!important;width:300px!important}.fb-advanced-image-wrapper .fb-advanced-image.large .fb-advanced-image-inner{height:1024px!important;width:1024px!important}.fb-advanced-image-wrapper .fb-advanced-image.default .fb-advanced-image-inner,.fb-advanced-image-wrapper .fb-advanced-image.full-size .fb-advanced-image-inner{height:unset;width:unset}.fb-advanced-image-wrapper .fb-advanced-image.zoom-in .fb-advanced-image-inner img{transform:scale(1);transition:transform .3s ease}.fb-advanced-image-wrapper .fb-advanced-image.zoom-in .fb-advanced-image-inner:hover img{transform:scale(1.3)}.fb-advanced-image-wrapper .fb-advanced-image.zoom-out .fb-advanced-image-inner img{transform:scale(1.3);transition:transform .3s ease}.fb-advanced-image-wrapper .fb-advanced-image.zoom-out .fb-advanced-image-inner:hover img{transform:scale(1)}.fb-advanced-image-wrapper .fb-advanced-image.slide .fb-advanced-image-inner img{margin-left:30px;transform:scale(1.3);transition:all .3s ease-in-out}.fb-advanced-image-wrapper .fb-advanced-image.slide .fb-advanced-image-inner:hover img{margin-left:0}.fb-advanced-image-wrapper .fb-advanced-image.blur .fb-advanced-image-inner img{filter:blur(15px);transition:all .3s ease}.fb-advanced-image-wrapper .fb-advanced-image.blur .fb-advanced-image-inner:hover img{filter:blur(0)}.fb-advanced-image-wrapper .fb-advanced-image.overlay .fb-advanced-image-inner{position:relative}.fb-advanced-image-wrapper .fb-advanced-image.overlay .fb-advanced-image-inner:before{background:rgba(0,0,0,.5);bottom:0;content:"";left:0;position:absolute;right:9999px;top:0;transition:all .3s ease;z-index:999}.fb-advanced-image-wrapper .fb-advanced-image.overlay .fb-advanced-image-inner:hover:before{right:0}.fb-advanced-image-wrapper .fb-advanced-image.tilt .fb-advanced-image-inner{transition:all .3s ease}.fb-advanced-image-wrapper .fb-advanced-image.tilt .fb-advanced-image-inner:hover{transform:rotateY(30deg) rotateX(30deg)}.fb-advanced-image-wrapper .fb-advanced-image.skew .fb-advanced-image-inner{transition:all .3s ease}.fb-advanced-image-wrapper .fb-advanced-image.skew .fb-advanced-image-inner:hover{transform:skewY(10deg) skewX(10deg)}.fb-advanced-image-wrapper .fb-advanced-image.overlay-simple .fb-advanced-image-inner{position:relative}.fb-advanced-image-wrapper .fb-advanced-image.overlay-simple .fb-advanced-image-inner:before{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.1));bottom:0;content:"";left:0;pointer-events:none;position:absolute;right:0;top:0;z-index:1}.fb-advanced-mega-menu-wrapper ul{display:flex;gap:10px;list-style:none;margin:0;padding:0}.fb-advanced-mega-menu-wrapper ul li{cursor:pointer}.fb-advanced-mega-menu-wrapper ul li .fb-advanced-mega-menu-link{align-items:center;display:flex;gap:5px}.fb-advanced-mega-menu-wrapper ul li .fb-advanced-mega-menu-link svg{width:14px}.fb-advanced-mega-menu-list{display:flex;gap:1rem;list-style:none;margin:0;padding:0;position:relative}.fb-advanced-mega-menu-item{position:relative}.fb-advanced-mega-menu-item.has-mega-menu .fb-advanced-mega-menu-link{align-items:center;display:flex;gap:.5rem}.fb-advanced-mega-menu-link{color:inherit;cursor:pointer;display:inline-block;padding:.5rem 1rem;text-decoration:none}.fb-advanced-mega-menu-link:hover{color:#0073aa}.fb-advanced-mega-menu-indicator{align-items:center;display:inline-flex}.fb-advanced-mega-menu-indicator svg{height:12px;transition:transform .2s ease;width:12px}.fb-advanced-mega-menu-item:hover .fb-advanced-mega-menu-indicator svg{transform:rotate(180deg)}.fb-mega-menu-dropdown{animation:fadeIn .2s ease;background:#fff;border:1px solid #ddd;border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.1);left:0;max-width:1200px;min-width:300px;opacity:1;padding:1.5rem;pointer-events:none;position:absolute;top:100%;z-index:1000}.fb-mega-menu-dropdown .block-editor-block-preview__container{min-height:200px}@keyframes fadeIn{0%{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}.fb-device-mobile .fb-mega-menu-dropdown{left:0;min-width:100%;right:0}.fb-device-tablet .fb-mega-menu-dropdown{max-width:600px}.advanced-navigation-wrapper .wp-block-navigation:not(ul.wp-block-navigation){gap:0}.wp-block-navigation__responsive-container-open.components-button{opacity:1}.fb-video-options-setting .components-base-control{margin-bottom:0}.components-form-toggle .components-form-toggle__input:focus+.components-form-toggle__track{box-shadow:none;outline:none}.fb-parent-wrapper{filter:unset}.fb-parent-wrapper .fb-advanced-video-wrapper{display:block;overflow:hidden;position:relative;transition:.5s;transition:border .5s,border-radius .5s,box-shadow .5s}.fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper{padding-top:56.25%;position:relative;transition:transform .5s,border .5s,border-radius .5s,box-shadow .5s}.fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option .fb-react-player{left:0;position:absolute;top:0}.fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option .fb-react-player iframe{box-sizing:border-box}.fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option .fb-react-player .react-player__shadow{display:none!important}.fb-advanced-video-main-wrapper{width:100%}.fb-advanced-video-main-wrapper:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper .fb-advanced-video-wrapper:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option .fb-react-player:focus-visible{outline:none}.fb-advanced-video-main-wrapper .fb-parent-wrapper .fb-advanced-video-wrapper .fb-player-wrapper .fb-player-option .fb-react-player div:focus-visible{outline:none}.fb-animated-heading-wrapper{margin:0}.fb-animated-heading-wrapper h1,.fb-animated-heading-wrapper h2,.fb-animated-heading-wrapper h3,.fb-animated-heading-wrapper h4,.fb-animated-heading-wrapper h5,.fb-animated-heading-wrapper h6,.fb-animated-heading-wrapper p{display:inline-block;margin:0}.fb-animated-heading-cursor{display:inline-block;font-size:40px;line-height:40px;vertical-align:middle}.fb-animated-heading-swirl-wrapper{display:inline-block;transition:all .5s ease-in-out;vertical-align:bottom}.fb-animated-heading-dynamic-wrapper{display:inline-block;overflow:hidden;perspective:300px;position:relative;vertical-align:bottom}.fb-animated-heading-dynamic-text{left:0;position:absolute;top:0;transform:scaleX(1.0005);white-space:nowrap;width:100%}.fb-animated-heading-dynamic-text.fb-animated-heading-text-active{opacity:1;position:relative}.fb-animated-heading-dynamic-letter{backface-visibility:hidden;display:inline-block;opacity:0;transform:translateZ(-20px) rotateX(90deg);transform-style:preserve-3d;transition:transform .5s ease,opacity .5s ease}.fb-animated-heading-dynamic-letter.fb-animated-heading-animation-in{animation:fb-animated-heading-swirl-in .4s forwards}.fb-animated-heading-dynamic-letter.fb-animated-heading-animation-out{animation:fb-animated-heading-swirl-out .4s forwards}@keyframes fb-animated-heading-swirl-in{0%{opacity:0;transform:translateZ(-20px) rotateX(90deg)}60%{opacity:1;transform:translateZ(-20px) rotateX(-10deg)}to{opacity:1;transform:translateZ(-20px) rotateX(0deg)}}@keyframes fb-animated-heading-swirl-out{0%{opacity:1;transform:translateZ(-20px) rotateX(0)}60%{opacity:0;transform:translateZ(-20px) rotateX(-100deg)}to{opacity:0;transform:translateZ(-20px) rotateX(-90deg)}}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list{align-items:center;display:flex;flex-wrap:wrap;gap:5px}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item{align-items:center;display:flex;font-size:16px;gap:5px;transition:.3s ease-in-out}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-label{align-items:center;display:inline-flex;gap:5px}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-link{color:#000;text-decoration:none}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-icon{align-items:center;display:inline-flex;justify-content:center;line-height:0}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-icon svg{display:block;height:16px;width:16px}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home{align-items:center;display:inline-flex;justify-content:center;line-height:0}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.home svg{height:16px;width:16px}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item{align-items:center;display:inline-flex;justify-content:center;line-height:0}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-item .fb-breadcrumb-icon.item svg{height:16px;width:16px}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator{align-items:center;display:flex;justify-content:center;line-height:1}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator:not(div){align-items:center;display:inline-flex}.fb-breadcrumb-inner-wrapper .fb-breadcrumb-list .fb-breadcrumb-separator svg{display:block;height:16px;width:16px}.fb-timezone-main-wrapper .fb-timezone-container{align-items:center;display:flex;flex-wrap:wrap}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-wrapper{display:flex}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-wrapper .fb-location-timezone{align-items:center;display:flex;justify-content:left;position:relative;transition:all .3s ease-in-out;width:-moz-max-content;width:max-content}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box{align-items:center;display:flex}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse{display:flex}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-closed,.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-holiday,.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-open,.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-time-pulse-weekend{align-items:center;display:flex;justify-content:center}.fb-timezone-main-wrapper .fb-timezone-container .fb-timezone-status-wrapper .fb-timezone-status-info-box .fb-timezone-status-info{align-items:center;display:flex}.fb-cta-content-wrapper{position:relative}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner{gap:20px}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner .fb-icon-wrapper{line-height:0}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner .fb-cta-btn-wrapper{align-items:center;display:inline-flex;gap:10px}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner .fb-cta-btn-wrapper .fb-btn-icon-wrapper{line-height:0}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner .fb-cta-media-wrapper{align-items:center;display:flex;justify-content:center}.fb-cta-content-wrapper .fb-cta-content-wrapper-inner .fb-cta-buttons-wrapper{align-items:center;display:flex}.fb-contact-form-select{align-items:flex-start;box-sizing:border-box;color:#399cff;display:flex;flex-direction:column;font-size:13px;gap:16px!important;margin:0;padding:24px!important;position:relative;text-align:left;width:100%;-moz-font-smoothing:subpixel-antialiased;-webkit-font-smoothing:subpixel-antialiased;background-color:#fff;border-radius:10px;box-shadow:inset 0 0 0 1px #399cff;outline:1px solid #399cff}.fb-contact-form-select label{color:#399cff}.fb-contact-form-wrapper *,.fb-contact-form-wrapper :after,.fb-contact-form-wrapper :before{box-sizing:border-box}.fb-count-down-wrapper .fb-count-down-item{align-items:center;display:flex;flex-direction:column;justify-content:center;position:relative;text-align:center}.fb-count-down-wrapper .fb-count-down-item:last-child:before{display:none}.fb-count-down-wrapper .fb-count-down-item:before{position:absolute;right:0;top:50%;transform:translateY(-50%)}.fb-counter-wrapper{display:flex;gap:50px}.fb-counter-wrapper .fb-counter-item{align-items:center;display:flex;flex-direction:column;justify-content:center;text-align:center}.fb-counter-wrapper .fb-counter-item .fb-counter-number-wrapper{align-items:center;display:flex}.fb-dual-button-container .fb-dual-button-wrapper .fb-advanced-button{height:100%}@media (max-width:1024px){.fb-dual-button-container .fb-dual-button-connector-text{height:15px;line-height:1.3;padding:5px;width:-moz-fit-content;width:fit-content}}@media (max-width:767px){.fb-dual-button-container .fb-dual-button-connector-text{height:15px;line-height:1.3;padding:5px;width:-moz-fit-content;width:fit-content}}.fb-advanced-button-icon-popup{min-width:220px;padding:.2rem}.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner{position:relative;z-index:99999}.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field{margin-bottom:0}.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field label{color:#c3c8d2!important;display:block;font-size:12px!important;font-weight:500!important;line-height:16px!important;margin:10px 0!important;min-height:auto;text-transform:capitalize!important}.fb-advanced-button-icon-popup .fb-advanced-button-icon-popup-inner .components-base-control__field .components-toggle-control{margin-bottom:0!important}.fb-link-control-wrapper .fb-link-control-inner-wrapper{align-items:center;display:flex;gap:10px}.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-advanced-button-url{flex:1;margin-bottom:0}.fb-link-control-wrapper .fb-link-control-inner-wrapper .fb-advanced-button-url .components-base-control__field{margin-bottom:0}.fb-dual-button-container .fb-advanced-button{align-items:center;background-color:#3f8efc;border-radius:0;box-sizing:border-box;cursor:pointer;display:inline-flex;height:100%;justify-content:center;outline:none;padding:12px 30px;position:relative;text-align:center;text-decoration:none;transition:all .3s ease-in-out;white-space:nowrap}.fb-dual-button-container .fb-advanced-button .fb-advanced-button-text{color:#fff;transition:all .3s ease-in-out}.fb-dual-button-container .fb-dual-button-wrapper{display:flex}.fb-dual-button-container .fb-dual-button-connector{position:relative}.fb-dual-button-container .fb-dual-button-connector-text{border-radius:50px;height:35px;left:50%;line-height:35px;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%);width:35px;z-index:99}@media (max-width:1024px){.fb-dual-button-container .fb-dual-button-connector-text{height:15px;line-height:1.3;width:-moz-fit-content;width:fit-content}}@media (max-width:767px){.fb-dual-button-container .fb-dual-button-connector-text{height:15px;line-height:1.3;width:-moz-fit-content;width:fit-content}}.fb-dual-button-container .fb-advanced-button-icon{display:block;position:relative;z-index:1}.fb-dual-button-container .fb-advanced-button-icon svg{box-sizing:content-box;display:block;fill:#fff;height:auto;width:16px}.fb-feature-list-wrapper{align-items:center;display:flex;transition:.5s ease-in-out}.fb-feature-list-wrapper.fb-feature-list-top .fb-feature-list-item{align-items:flex-start!important}.fb-feature-list-wrapper.fb-feature-list-center .fb-feature-list-item{align-items:center!important}.fb-feature-list-wrapper.fb-feature-list-bottom .fb-feature-list-item{align-items:flex-end!important}.fb-feature-list-wrapper.fb-icon-position-left .fb-feature-list-item{align-items:center;display:flex;text-align:left}.fb-feature-list-wrapper.fb-icon-position-right .fb-feature-list-item{align-items:center;display:flex;flex-direction:row-reverse;text-align:right}.fb-feature-list-wrapper.fb-icon-position-right .fb-feature-list-item .fb-feature-icon-image-wrapper,.fb-feature-list-wrapper.fb-icon-position-right .fb-feature-list-item .fb-feature-list-icon-inner{margin-left:20px}.fb-feature-list-wrapper .fb-feature-list-items{list-style-type:none!important;margin:0!important;padding:0!important;text-align:center;width:100%}.fb-feature-list-item{align-items:center;position:relative}.fb-feature-list-item .fb-feature-list-icon-box{transition:.5s ease-in-out;z-index:2}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner{align-items:center;display:inline-flex;justify-content:center;transition:.5s ease-in-out}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner .fb-feature-list-icon{align-items:center;display:flex;justify-content:center;transition:all .5s}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner .fb-feature-list-icon svg{transition:all .5s}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.circle{border-radius:50%}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.square{border-radius:0}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.rhombus{margin:15px 0;transform:rotate(45deg)}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.rhombus .fb-feature-list-icon{transform:rotate(-45deg)}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-list-icon-inner.none{display:none!important}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper{display:inline-flex;transition:.5s ease-in-out}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper img{height:100%;transition:.5s ease-in-out;width:100%}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper.circle img{border-radius:50%}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper.square img{border-radius:0}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper.rhombus img{margin:15px 0;transform:rotate(45deg)}.fb-feature-list-item .fb-feature-list-icon-box .fb-feature-icon-image-wrapper.none{display:none!important}.fb-feature-list-item .fb-feature-list-content .fb-feature-list-title{margin:0 0 5px;padding:0}.fb-feature-list-item .fb-feature-list-content .fb-feature-list-text{margin:0;padding:0}@media(min-width:1025px){.fb-icon-position-left .fb-feature-list-item{flex-direction:row;text-align:left}.fb-icon-position-left .fb-feature-list-item,.fb-icon-position-left .fb-feature-list-item .fb-icon-position-right .fb-feature-list-item{align-items:flex-start;display:flex}.fb-icon-position-left .fb-feature-list-content-box{margin:0!important}}.fb-flip-box-wrapper{perspective:1000px;width:100%}.fb-flip-box-wrapper .fb-flipper-wrapper{height:auto;position:relative;transform-origin:center center;transform-style:preserve-3d;transition:transform .6s ease-out;width:100%}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-back,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-front{backface-visibility:hidden;-wfbkit-backface-visibility:hidden;-moz-backface-visibility:hidden;height:100%;left:0;min-height:310px;position:absolute;top:0;transform-style:preserve-3d;width:100%;will-change:transform;-wfbkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;box-sizing:border-box}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-back .fb-flipbox-content-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-front .fb-flipbox-content-wrapper{backface-visibility:hidden;-wfbkit-backface-visibility:hidden;display:flex;flex-direction:column;height:100%;-wfbkit-perspective:1000;position:relative;transform:translateZ(0);-wfbkit-transform:translateZ(0);width:100%}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-back .fb-flipbox-content-wrapper .fb-flip-back-media-container,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-back .fb-flipbox-content-wrapper .fb-flip-media-container,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-front .fb-flipbox-content-wrapper .fb-flip-back-media-container,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-front .fb-flipbox-content-wrapper .fb-flip-media-container{display:flex}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-front{transform:rotateY(0deg);z-index:2}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flipbox-back{transform:rotateY(180deg);z-index:1}.fb-flip-box-wrapper .fb-flipper-wrapper.fb-editor-mode .fb-flipbox-back,.fb-flip-box-wrapper .fb-flipper-wrapper.fb-editor-mode .fb-flipbox-front{backface-visibility:hidden;-wfbkit-backface-visibility:hidden;transition:opacity .3s ease,visibility .3s ease}.fb-flip-box-wrapper .fb-flipper-wrapper.fb-editor-mode.fb-show-back{transform:rotateY(-180deg)}.fb-flip-box-wrapper .fb-flipper-wrapper.fb-editor-mode.fb-show-back .fb-flipbox-front.fb-inactive-side{opacity:0;z-index:-1}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-back-button .fb-flip-back-btn-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-back-button .fb-flip-btn-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-button .fb-flip-back-btn-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-button .fb-flip-btn-wrapper{align-items:center;display:inline-flex}.fb-flip-box-wrapper .fb-flipper-wrapper .fb-btn-icon-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-back-media-wrapper .fb-icon-wrapper,.fb-flip-box-wrapper .fb-flipper-wrapper .fb-flip-media-wrapper .fb-icon-wrapper{line-height:0}.fb-flip-box-wrapper:hover .flip-up{transform:rotateX(180deg)!important}.fb-flip-box-wrapper:hover .flip-down{transform:rotateX(-180deg)!important}.fb-flip-box-wrapper:hover .flip-left{transform:rotateY(-180deg)!important}.fb-flip-box-wrapper:hover .flip-right{transform:rotateY(180deg)!important}.fb-flip-box-wrapper:hover .zoom-in{transform:scale(1.1)!important}.fb-flip-box-wrapper:hover .zoom-in .fb-flipbox-back{transform:none;z-index:5}.fb-flip-box-wrapper:hover .zoom-out{transform:scale(.8)!important}.fb-flip-box-wrapper:hover .zoom-out .fb-flipbox-back{transform:none;z-index:5}@media(prefers-reduced-motion:reduce){.fb-flip-box-wrapper .fb-flipper-wrapper{transition:transform .2s ease}}.fb-fluent-from .components-base-control{margin-bottom:0}.fb-reusable_notice{background-color:#fff;border-radius:4px;box-shadow:inset 0 0 0 1px #399cff;padding:1em}.fb-reusable_notice .title{align-items:center;color:#399cff;display:flex;font-size:18pt;font-weight:400;gap:15px;line-height:1;margin:0 0 20px;text-transform:uppercase}.fb-reusable_notice .title svg{height:24px;width:auto}.fb-reusable_notice .content{font-size:13px;font-weight:400;margin:0 0 1em}.fb-reusable_notice .content .fb-reusable-notice-text{color:#399cff}.fb-reusable_notice .content a{color:#399cff;font-weight:600;text-decoration:underline}.fb-fluent-form-select{align-items:flex-start;box-sizing:border-box;color:#399cff;display:flex;flex-direction:column;font-size:13px;gap:16px!important;margin:0;padding:24px!important;position:relative;text-align:left;width:100%;-moz-font-smoothing:subpixel-antialiased;-webkit-font-smoothing:subpixel-antialiased;background-color:#fff;border-radius:10px;box-shadow:inset 0 0 0 1px #399cff;outline:1px solid #399cff}.fb-fluent-form-select label{color:#399cff}.fb-icon-box-wrapper-inner .fb-icon-wrapper{line-height:0}.fb-icon-box-wrapper-inner .fb-icon-btn-wrapper{align-items:center;display:inline-flex;gap:10px}.fb-icon-box-wrapper-inner .fb-icon-btn-wrapper .fb-btn-icon-wrapper{line-height:0}.fb-icon-box-wrapper-inner .fb-icon-media-wrapper{align-items:center;display:flex}.fb-gallery-wrapper .dnd-items-wrapper{list-style:none;margin:0;padding:0}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item{margin-bottom:10px;margin-top:10px}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-header{align-items:center;background:#f9f9f9;border:1px solid #ddd;border-radius:4px;display:flex;justify-content:space-between}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title{cursor:pointer;flex:12;overflow:hidden;padding-left:5px;text-overflow:ellipsis;white-space:nowrap;width:200px}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus{box-shadow:none;outline:none}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button{color:#d63638}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus{box-shadow:none;outline:none}.fb-gallery-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content{padding-top:10px}.fb-gallery-wrapper .sortable-item-content .fb-image-upload-field-wrapper .components-base-control__field{position:relative}.fb-gallery-wrapper .sortable-item-content .fb-image-upload-field-wrapper .components-base-control__field:hover .editor-post-featured-image__actions{opacity:1}.fb-gallery-wrapper .sortable-item-content .fb-image-upload-field-wrapper .components-base-control__field .editor-post-featured-image__action{height:unset;justify-content:center;padding:8px 12px;text-align:center;width:100%}.fb-gallery-wrapper .sortable-item-content .fb-image-upload-field-wrapper .components-base-control__field .editor-post-featured-image__action.active{background-color:#5f5f5f;border-radius:3px;color:#007cba}.lightbox{align-items:center;background:rgba(0,0,0,.9);display:flex;height:100%;justify-content:center;left:0;position:fixed;top:0;width:100%;z-index:1000}.lightbox .lightbox-content .lightbox-close{background:none;border:none;color:#fff;cursor:pointer;font-size:28px;position:absolute;right:30px;top:30px}.lightbox .lightbox-content .lightbox-counter{color:#fff;font-size:14px;left:30px;position:absolute;top:30px}.lightbox .lightbox-content .lightbox-next,.lightbox .lightbox-content .lightbox-prev{background:none;border:none;color:#fff;cursor:pointer;font-size:28px;outline:none;position:absolute;top:50%;transform:translateY(-50%)}.lightbox .lightbox-content .lightbox-prev{left:2%}.lightbox .lightbox-content .lightbox-next{right:2%}.lightbox .lightbox-content .lightbox-image-container img{max-height:80vh;max-width:100%}.lightbox .lightbox-content .lightbox-thumbnails{display:flex;justify-content:center;margin-top:20px}.lightbox .lightbox-content .lightbox-thumbnails img{cursor:pointer;height:60px;margin:0 5px;-o-object-fit:cover;object-fit:cover;opacity:.6;transition:opacity .3s;width:60px}.lightbox .lightbox-content .lightbox-thumbnails img.active{border:2px solid #fff;opacity:1}.lightbox .lightbox-content .lightbox-thumbnails img:hover{opacity:1}.fb-info-box-wrapper-inner .fb-icon-wrapper{line-height:0}.fb-info-box-wrapper-inner .fb-info-btn-wrapper{align-items:center;display:inline-flex;gap:10px}.fb-info-box-wrapper-inner .fb-info-btn-wrapper .fb-btn-icon-wrapper{line-height:0}.fb-info-box-wrapper-inner .fb-info-media-wrapper{align-items:center;display:flex}.fb-marquee-swiper:after,.fb-marquee-swiper:before{content:"";height:100%;pointer-events:none;position:absolute;top:0;z-index:2}.fb-marquee-swiper .swiper-wrapper{transition-timing-function:linear!important;will-change:transform}.fb-marquee-swiper .swiper-wrapper .swiper-slide{align-items:center;display:flex;justify-content:center;padding:0 10px;width:12rem}.fb-news-ticker-wrapper .fb-news-ticker-inner{align-items:center;border:solid;border-color:#399cff;border-radius:6px;border-width:1px;display:flex;overflow:hidden;position:relative}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-label-container{align-items:center;background:#399cff;color:#fff;display:flex;gap:10px;padding:28px 36px}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-label-container .fb-icon-wrapper{line-height:0}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-label-container .fb-icon-wrapper svg{fill:#fff;line-height:0}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-content{flex:1;overflow:hidden}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-arrows{align-items:center;display:flex;gap:10px;line-height:0;margin-left:auto;position:absolute;z-index:99}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-arrows .fb-news-ticker-pause-btn{cursor:pointer}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-arrows .fb-news-ticker-pause-btn .icon-play,.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-arrows .fb-news-ticker-pause-btn.paused .icon-pause{display:none}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-arrows .fb-news-ticker-pause-btn.paused .icon-play{display:inline}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-next,.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-prev{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;user-select:none}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time{position:absolute}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time.top-right{right:0;top:0}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time.bottom-right{bottom:0;right:0}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time.top-left{left:0;top:0}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time.bottom-left{align-items:center;bottom:0;display:flex;justify-content:center;left:0;max-width:100%;padding:6px 0;width:218px}.fb-news-ticker-wrapper .fb-news-ticker-inner .fb-news-ticker-time span{color:#fff;text-transform:uppercase}.fb-off-canvas-menu-block{position:relative}.fb-off-canvas-menu-block:after{outline:none!important}.fb-off-canvas-menu-block .fb-menu-toggle-btn{cursor:pointer;display:flex;gap:10px;padding:10px;width:-moz-max-content;width:max-content}.fb-off-canvas-menu-block .fb-menu-toggle-btn:focus{box-shadow:none!important;outline:none!important}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-menu-icon{position:relative;transition:transform .3s ease-in-out}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-menu-icon svg{height:20px;width:20px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon{height:20px;position:relative;width:30px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon span{background:#333;border-radius:3px;display:block;height:3px;left:0;opacity:1;position:absolute;transform:rotate(0deg);transition:.25s ease-in-out;width:100%}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon span:first-child{top:0}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon span:nth-child(2){top:8px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon span:nth-child(3){top:16px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon.active span:first-child,.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-hamburger-icon span:first-child{top:8px;transform:rotate(45deg)}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon.active span:nth-child(2),.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-hamburger-icon span:nth-child(2){opacity:0;width:0}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-hamburger-icon.active span:nth-child(3),.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-hamburger-icon span:nth-child(3){top:8px;transform:rotate(-45deg)}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon{height:20px;position:relative;width:30px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon span{background:#333;border-radius:50%;display:block;height:5px;left:12.5px;position:absolute;transition:.25s ease-in-out;width:5px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon span:first-child{top:0}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon span:nth-child(2){top:8px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon span:nth-child(3){top:16px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon.active span:first-child,.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-dots-icon span:first-child{border-radius:3px;height:3px;left:0;top:8px;transform:rotate(45deg);width:100%}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon.active span:nth-child(2),.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-dots-icon span:nth-child(2){opacity:0}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-dots-icon.active span:nth-child(3),.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-dots-icon span:nth-child(3){border-radius:3px;height:3px;left:0;top:8px;transform:rotate(-45deg);width:100%}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon{height:30px;position:relative;width:30px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon span{background:#333;border-radius:3px;display:block;position:absolute;transition:.25s ease-in-out}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon span:first-child{height:3px;top:50%;transform:translateY(-50%);width:100%}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon span:nth-child(2){height:100%;left:50%;transform:translateX(-50%);width:3px}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon.active span:first-child,.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-plus-icon span:first-child{top:13.5px;transform:rotate(45deg)}.fb-off-canvas-menu-block .fb-menu-toggle-btn .fb-plus-icon.active span:nth-child(2),.fb-off-canvas-menu-block .fb-menu-toggle-btn.active .fb-plus-icon span:nth-child(2){left:13.5px;transform:rotate(45deg)}.fb-off-canvas-menu-block.fb-menu-open .fb-hamburger-icon span:first-child{top:8px;transform:rotate(45deg)}.fb-off-canvas-menu-block.fb-menu-open .fb-hamburger-icon span:nth-child(2){opacity:0;width:0}.fb-off-canvas-menu-block.fb-menu-open .fb-hamburger-icon span:nth-child(3){top:8px;transform:rotate(-45deg)}.fb-off-canvas-menu-block.fb-menu-open .fb-dots-icon span:first-child{border-radius:3px;height:3px;left:0;top:8px;transform:rotate(45deg);width:100%}.fb-off-canvas-menu-block.fb-menu-open .fb-dots-icon span:nth-child(2){opacity:0}.fb-off-canvas-menu-block.fb-menu-open .fb-dots-icon span:nth-child(3){border-radius:3px;height:3px;left:0;top:8px;transform:rotate(-45deg);width:100%}.fb-off-canvas-menu-block.fb-menu-open .fb-plus-icon span:first-child{top:13.5px;transform:rotate(45deg)}.fb-off-canvas-menu-block.fb-menu-open .fb-plus-icon span:nth-child(2){left:13.5px;transform:rotate(45deg)}.fb-off-canvas-menu-block .fb-off-canvas-menu{background-color:#fff;box-shadow:0 0 10px rgba(0,0,0,.2);height:100vh;overflow-y:auto;position:fixed;top:0;transition:transform .3s ease;width:350px;z-index:999}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-default{left:unset;transform:unsettransform}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-left{left:0;transform:translateX(-100%)}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-right{right:0;transform:translateX(100%)}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-top{height:auto;left:0;top:0;transform:translateY(-100%);width:100%}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-bottom{bottom:0;height:auto;left:0;top:auto;transform:translateY(100%);width:100%}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-fade{left:0;opacity:0;transition:opacity .3s ease,transform .3s ease;visibility:hidden;z-index:-1}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-fade.open{opacity:1;transform:translateX(0) translateY(0);visibility:visible;z-index:999}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-zoom{left:0;opacity:0;transform:scale(.7);transition:opacity .3s ease,transform .3s ease;visibility:hidden}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-zoom.open{opacity:1;transform:scale(1) translateX(0) translateY(0);visibility:visible;z-index:999}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-flip{opacity:0;transform:perspective(1000px) rotateY(-90deg);transform-origin:left center;transition:opacity .3s ease,transform .3s ease}.fb-off-canvas-menu-block .fb-off-canvas-menu.fb-off-canvas-menu-flip.open{opacity:1;transform:perspective(1000px) rotateY(0deg)}.fb-off-canvas-menu-block .fb-off-canvas-menu.open{transform:translateX(0) translateY(0)}.fb-off-canvas-menu-block .fb-off-canvas-header{align-items:center;display:flex;gap:30px;justify-content:flex-end;position:sticky;top:0;z-index:10}.fb-off-canvas-menu-block .fb-off-canvas-header .fb-close-menu{align-items:center;background:none;border:none;color:#333;cursor:pointer;display:flex;font-size:20px;justify-content:center;line-height:1;padding:0;transition:all .2s ease}.fb-off-canvas-menu-block .fb-off-canvas-header .fb-close-menu svg{height:20px;width:20px}.fb-off-canvas-menu-block .fb-pattern-placeholder{background-color:#f7f7f7;border:1px dashed #ccc;padding:30px;text-align:center}.fb-off-canvas-menu-block .fb-menu-overlay{background-color:rgba(0,0,0,.5);height:100%;left:0;opacity:0;position:fixed;top:0;transition:opacity .3s ease;visibility:hidden;width:100%;z-index:998}.fb-off-canvas-menu-block .fb-menu-overlay.active{opacity:1;visibility:visible}body.fb-menu-open{overflow:hidden}.block-editor-block-list__block .fb-off-canvas-menu-block .fb-off-canvas-menu{max-height:400px;position:absolute;z-index:90}.block-editor-block-list__block .fb-off-canvas-menu-block .fb-menu-overlay{position:absolute}.fb-taxonomy-more-info{align-items:flex-end;display:flex;flex-wrap:wrap;justify-content:space-between;position:relative;width:100%}.fb-taxonomy-more-info .fb-taxonomy-author,.fb-taxonomy-more-info .fb-taxonomy-author-wrapper{align-items:center;display:flex;justify-content:flex-start;position:relative}.fb-taxonomy-more-info .fb-child-categories-avatars{align-items:center;display:flex;justify-content:flex-start}.fb-taxonomy-more-info .fb-child-category-avatar-item{align-items:center;display:flex;justify-content:center}.fb_post_grid_container .fb_post_grid_wrapper{box-sizing:border-box;overflow:hidden;width:100%}.fb_post_grid_container .fb_post_grid_wrapper img{box-sizing:border-box;display:block;-o-object-fit:cover;object-fit:cover;width:100%}.fb_post_grid_container .fb_post_grid_categories{align-items:center;display:flex;flex-wrap:wrap;gap:10px}.fb_post_grid_container .fb_post_grid_categories a:focus{box-shadow:none;outline:none}.fb_post_grid_container .fb_post_grid_tags{align-items:center;display:flex;flex-wrap:wrap;gap:10px}.fb_post_grid_container .fb_post_grid_content .fb_post_title:focus,.fb_post_grid_container .fb_post_grid_tags a:focus{box-shadow:none;outline:none}.fb_post_grid_container .fb_post_grid_content a{text-decoration:none}.fb_post_grid_container .fb_post_grid_content a:focus{box-shadow:none;outline:none}.fb_post_grid_author{align-items:center;display:flex}.fb_post_grid_author a:focus{box-shadow:none;outline:none}.fb_post_grid_author .fb_post_grid_author_avatar{overflow:hidden}.fb_post_grid_author .fb_post_grid_author_avatar img{display:block;height:100%;width:100%}.fb_post_grid_author .fb_post_grid_author_info,.fb_post_grid_author .fb_post_grid_author_info .fb_post_grid_author_info_name{align-items:center;display:flex}.load_more_button_icon{display:none;opacity:0;visibility:hidden}.fb_post_grid_container .fb_load_more_wrapper{overflow:hidden}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more{align-items:center;cursor:pointer;display:inline-flex}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more span{fill:#000;height:20px;position:relative;transition:all .3s ease-in-out;width:20px}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more span svg{height:100%;width:100%}.fb_post_grid_container .fb_load_more_wrapper .fb_load_more_loader{animation:loader 1s linear infinite;border-color:#000 rgba(0,0,0,.6) rgba(0,0,0,.302) rgba(0,0,0,.102);border-radius:50%;border-style:solid;border-width:2px;box-sizing:border-box;display:inline-block}.fb_post_grid_container .fb_load_more_wrapper .load_more_button_icon_wrap .load_more_button_icon{align-items:center;display:flex!important;justify-content:center;opacity:1!important;visibility:visible!important}.fb_post_grid_container .fb_load_more_wrapper .load_more_button_icon_wrap .load_more_button_icon svg{height:20px;width:20px}.fb_post_grid_container .fb_load_more_outter_wrap{display:none;margin-left:5px;position:absolute;top:50%;transform:translateY(-40%)}.fb_post_grid_container .empty-post{flex-basis:100%}.skeleton-item{display:flex;flex-direction:column;position:relative}.skeleton-item .skeleton-item-title{height:260px;width:100%}.skeleton-item .loading{position:relative}.skeleton-item .skeleton-item-location{height:43px;margin:32px 0 16px;width:100%}.skeleton-item .skeleton-item-sport{height:24px;width:80%}.post-card.skeleton .loading:before{animation-duration:2s;animation-fill-mode:forwards;animation-iteration-count:infinite;animation-name:loading;animation-timing-function:linear;background:linear-gradient(90deg,#212121 8%,#2b2b2b 30%,#212121 51%);background-size:800px 104px;content:"";height:100%;left:0;opacity:.7;position:absolute;width:100%}.post-card.skeleton .post-card-content{width:100%}.post-card.skeleton .post-card-content .post-card-excerpt{margin-top:2rem;width:100%}.post-card.skeleton .post-card-content .post-card-excerpt h5{min-height:1.75rem;width:100%}.post-card.skeleton .post-card-content .post-card-excerpt p{margin-top:1rem;min-height:3.5rem;width:100%}.post-card.skeleton .post-card-content .post-card-excerpt div{min-height:3.25rem;width:50%}@keyframes loading{0%{background-position:-800px 0}to{background-position:800px 0}}@keyframes loader{0%{transform:rotate(0deg)}to{transform:rotate(1turn)}}.fb_post_grid_filter_categories{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-bottom:60px}@media only screen and (max-width:767px){.fb_post_grid_filter_categories{display:grid;gap:16px 8px;grid-template-columns:repeat(2,1fr);margin-bottom:32px}}.fb_post_grid_filter_categories .fb_post_grid_filter_category{align-items:center;border:1px solid #d9d9d9;border-radius:50px;color:#000;cursor:pointer;display:flex;font-family:Cabin;font-size:16px;font-weight:700;justify-content:center;line-height:20px;padding:16px 30px;text-align:center;text-transform:uppercase;transition:all .3s ease;white-space:nowrap}.fb_post_grid_filter_categories .fb_post_grid_filter_category:hover{border-color:#a4000f;color:#a4000f;transition:all .3s ease-in-out}.fb_post_grid_filter_categories .fb_post_grid_filter_category:hover .fb-post-grid-filter-category-count{background-color:#f8a948;color:#000;transition:all .3s ease-in-out}.fb_post_grid_filter_categories .fb_post_grid_filter_category.active{border-color:#a4000f;color:#a4000f;transition:all .3s ease-in-out}.fb_post_grid_filter_categories .fb_post_grid_filter_category.active .fb-post-grid-filter-category-count{background-color:#f8a948;color:#000;transition:all .3s ease-in-out}@media only screen and (max-width:767px){.fb_post_grid_filter_categories .fb_post_grid_filter_category{font-size:12px;line-height:14px;padding:16px 0;width:100%}}.fb_post_grid_filter_categories .fb_post_grid_filter_category .fb-post-grid-filter-category-count{align-items:center;background-color:#f0f0f0;border-radius:40px;display:flex;font-family:Cabin;font-size:14px;font-weight:700;justify-content:center;line-height:18px;margin-left:8px;transition:all .3s ease-in-out;width:34px}@media only screen and (max-width:767px){.fb_post_grid_filter_categories .fb_post_grid_filter_category .fb-post-grid-filter-category-count{font-size:12px;line-height:14px;width:31px}}.fb_pagination_next_icon,.fb_pagination_previous_icon{display:none;opacity:0;visibility:hidden}.fb_pagination_wrapper{align-items:center;display:flex;gap:12px;justify-content:center}.fb_pagination_wrapper .fb_pagination_item{align-items:center;border-radius:50%;color:#000;cursor:pointer;display:flex;font-family:Cabin;font-size:14px;font-weight:400;justify-content:center;padding:7px 15px}.fb_pagination_wrapper .fb_pagination_item:focus{box-shadow:none;outline:none}.fb_pagination_wrapper .fb_pagination_item.active{background-color:hsla(0,0%,87%,.62);color:#15171c}.fb_pagination_wrapper .fb_pagination_next_icon,.fb_pagination_wrapper .fb_pagination_previous_icon{align-items:center;display:flex!important;justify-content:center;opacity:1!important;visibility:visible!important}.fb_pagination_wrapper .fb_pagination_next_icon svg,.fb_pagination_wrapper .fb_pagination_previous_icon svg{height:20px;width:20px}.fb_pagination_next,.fb_pagination_previous{align-items:center;cursor:pointer;display:flex;justify-content:center}.fb_pagination_next:focus,.fb_pagination_previous:focus{box-shadow:none;outline:none}.fb_pagination_next.disabled,.fb_pagination_previous.disabled{cursor:default;opacity:.4;pointer-events:none}.fb_post_grid_read_more_icon svg{height:20px;width:20px}.fb_post_grid_read_more_button{align-items:center;box-sizing:border-box;cursor:pointer;display:inline-flex;justify-content:center}.fb_post_grid_read_more_button:focus{box-shadow:none;outline:none}.fb_post_grid_read_more_button .fb_post_grid_read_more_icon_wrapper{line-height:0}.fb_post_grid_read_more_button .fb_post_grid_read_more_icon_image{height:auto}.fb_post_grid_read_more_button .fb_post_grid_read_more_icon_image img{height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.fb-post-meta-icon{display:inline-block;width:20px}.fb-post-meta-icon-group-btn{display:flex}button.components-button.fb-post-meta-icon-single-btn{align-items:center;box-shadow:inset 0 0 0 1px #dcdcde;color:#5f5f5f;display:flex;flex:1;height:unset;justify-content:center;line-height:16px;margin-bottom:10px;padding:6px}button.components-button.fb-post-meta-icon-single-btn.active{background-color:#dcdcde!important;color:#5f5f5f!important}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul{margin:0;padding:0}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta{display:flex;flex-wrap:wrap;list-style:none}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a{transition:all .3s}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a.fb-post-meta-icon-link{align-items:center;box-sizing:border-box;cursor:pointer;display:flex;text-decoration:none;transition:.3s ease-in-out}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a.fb-post-meta-icon-link .fb-post-meta-icon-wrapper{align-items:center;display:flex;justify-content:center}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a.fb-post-meta-icon-link .fb-post-meta-icon-wrapper .fb-post-meta-icon{align-items:center;display:flex;justify-content:center;transition:all .3s}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a.fb-post-meta-icon-link .fb-post-meta-icon-wrapper .fb-post-meta-icon svg{transition:fill .3s}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a.fb-post-meta-icon-link .fb-post-meta-icon-wrapper .fb-post-meta-icon-title{transition:color .3s}.fb-post-meta-main-wrapper .fb-post-meta-wrapper .fb-post-meta-list-wrapper ul.fb-post-meta .fb-post-meta-list-item a:focus{box-shadow:none;outline:none}.fb-pricing-wrapper{transition:all .3s ease-in-out}.fb-pricing-ribbon-wrapper{position:relative;width:100%}.fb-pricing-ribbon-wrapper .fb-pricing-ribbon{font-size:14px;font-weight:700;padding:10px;position:absolute;text-align:center;top:30px;transform:rotate(-45deg);width:180px;z-index:1}.fb-pricing-ribbon-wrapper .fb-pricing-ribbon.fb-pricing-ribbon-left{left:-50px;transform:rotate(-45deg)}.fb-pricing-ribbon-wrapper .fb-pricing-ribbon.fb-pricing-ribbon-right{right:-50px;transform:rotate(45deg)}.fb-pricing-ribbon-wrapper .fb-pricing-ribbon span{display:block;line-height:1}.fb-pricing-ribbon-icon-wrapper .fb-pricing-ribbon-icon{align-items:center;display:inline-flex;justify-content:center;transition:background-color .3s ease,border-color .3s ease}.fb-pricing-price-wrapper .fb-pricing-price-inner-wrapper .fb-pricing-normal-price.line-through{padding-right:8px;text-decoration:line-through}.fb-pricing-title-wrapper{display:block}.fb-pricing-title-wrapper.fb-pricing-title-left{text-align:left}.fb-pricing-title-wrapper.fb-pricing-title-center{text-align:center}.fb-pricing-title-wrapper.fb-pricing-title-right{text-align:right}.fb-pricing-title-wrapper .fb-pricing-subtitle,.fb-pricing-title-wrapper .fb-pricing-title{margin:0}.fb-pricing-content .fb-pricing-features-wrapper .fb-pricing-features-list{list-style:none;margin:0;padding:0}.fb-pricing-content .fb-pricing-features-wrapper .fb-pricing-features-list .fb-pricing-feature-item{align-items:center;display:flex}.fb-pricing-content .fb-pricing-features-wrapper .fb-pricing-features-list .fb-pricing-feature-item .fb-pricing-feature-icon{align-items:center;display:flex;justify-content:center;margin-right:10px}.fb-pricing-content .fb-pricing-features-wrapper .fb-pricing-features-list .fb-pricing-feature-item .fb-pricing-feature-icon .fb-pricing-feature-icon-inner{display:flex}.fb-pricing-content .fb-pricing-feature-after-text-wrapper .fb-pricing-feature-after-text,.fb-pricing-footer-wrapper .fb-pricing-button-wrapper{align-items:center;display:flex}.fb-pricing-footer-wrapper .fb-pricing-button-wrapper .fb-pricing-button{align-items:center;display:inline-flex;justify-content:center;text-decoration:none;transition:background-color .3s ease}.fb-pricing-footer-wrapper .fb-pricing-button-wrapper .fb-pricing-button:focus{box-shadow:none;outline:none}.fb-pricing-footer-wrapper .fb-pricing-button-wrapper .fb-pricing-button .fb-pricing-button-icon{align-items:center;display:flex}.progress-bar-text-inSide-wrapper{display:flex}.progress-bar-text-inSide-wrapper .progress-bar-label{display:flex;flex-direction:column;justify-content:center;transition:width .6s ease}.progress-bar-text-inSide-wrapper .progress-bar-label .progress-bar-info{align-items:center;display:flex;justify-content:space-between;line-height:1;padding-left:1rem;padding-right:1rem}.fb-query-pagination .fb-page-prev{align-items:center;display:flex;justify-content:center;text-decoration:none!important}.fb-query-pagination .fb-page-prev .fb-pagination-icon{display:flex}.fb-query-pagination .fb-page-prev .fb-pagination-icon svg{height:100%;width:100%}.fb-query-pagination .fb-page-prev:focus{outline:none!important}.fb-query-pagination .fb-page-prev.is-disabled{cursor:default;opacity:.4;pointer-events:none}.fb-query-pagination .fb-page-next{align-items:center;display:flex;justify-content:center;text-decoration:none!important}.fb-query-pagination .fb-page-next .fb-pagination-icon{display:flex}.fb-query-pagination .fb-page-next .fb-pagination-icon svg{height:100%;width:100%}.fb-query-pagination .fb-page-next:focus{outline:none!important}.fb-query-pagination .fb-page-next.is-disabled{cursor:default;opacity:.4;pointer-events:none}.fb-query-pagination .page-numbers{align-items:center;aspect-ratio:1/1;background-color:hsla(0,0%,100%,0);border:none;border-radius:50%;color:#000;cursor:pointer;display:flex;font-family:Cabin;font-size:14px;font-weight:400;justify-content:center;transition:all .3s ease-in-out;width:36px}.fb-query-pagination .page-numbers:focus{outline:none!important}.wp-block-frontis-blocks-query-pagination-numbers{display:flex}.wp-block-frontis-blocks-query-pagination-numbers a{text-decoration:none}.fb-search-container{position:relative;z-index:1}.fb-search-container .fb-search-button-wrapper{align-items:center;border:1px solid #a4a7ae;border-radius:50px;cursor:pointer;display:flex;gap:1px;padding:12px 24px;width:88px}.fb-search-container .fb-search-button-wrapper .fb-search-block-wrapper-inner-input-icon{align-items:center;display:flex}.fb-search-container .fb-search-button-wrapper span{color:#000;font-family:Radio Canada Big;font-size:18px;font-weight:400}.fb-search-container .fb-search-block-wrapper-inner-input-field{height:100%;opacity:0;position:absolute;right:0;top:0;transition:all .3s ease;visibility:hidden;width:0}.fb-search-container .fb-search-block-wrapper-inner-input-field form,.fb-search-container .fb-search-block-wrapper-inner-input-field form .wp-block-search__inside-wrapper{height:100%}.fb-search-container .fb-search-block-wrapper-inner-input-field input{border:1px solid #a4a7ae;border-radius:50px;color:#000;font-size:18px;height:100%;padding:0 24px;width:100%}.fb-search-container .fb-search-block-wrapper-inner-input-field.active{opacity:1;visibility:visible;width:1080px}.fb-search-block-wrapper-overlay{height:100%;left:0;opacity:0;position:fixed;top:0;visibility:hidden;width:100%}.fb-search-block-wrapper-overlay.active{opacity:1;visibility:visible}.swiper-wrapper.block-editor-block-list__layout{display:flex;width:100%}.swiper-wrapper{display:none}:root{--swiper-theme-color:#007aff}.fb-swiper{overflow:hidden;position:relative}.fb-slider-container{min-width:0;position:relative;transition:box-shadow .2s ease;width:100%}.fb-slider-container .swiper-notification{left:0;opacity:0;pointer-events:none;position:absolute;top:0;z-index:-1000}.fb-slider-container .swiper-button-next.swiper-button-disabled,.fb-slider-container .swiper-button-prev.swiper-button-disabled{pointer-events:all}.fb-slider-container .swiper-pagination{bottom:0!important}.fb-slider-container .swiper-pagination.swiper-pagination-bullets{max-width:100%}.fb-slider-container .swiper-button-next,.fb-slider-container .swiper-button-prev{border-style:none}:where(.wp-site-blocks :focus){outline-width:0!important}.fb-slider-wrapper .dnd-items-wrapper{list-style:none;margin:0;padding:0}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item{margin-bottom:10px;margin-top:10px}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header{align-items:center;background:#f9f9f9;border:1px solid #ddd;border-radius:4px;display:flex;justify-content:space-between}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title{cursor:pointer;flex:12;overflow:hidden;padding-left:5px;text-overflow:ellipsis;white-space:nowrap;width:200px}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus{box-shadow:none;outline:none}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button{color:#d63638}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus{box-shadow:none;outline:none}.fb-slider-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content{padding-top:10px}.fb-slider-content-wrapper{align-items:center;display:flex;flex-direction:column;height:clamp(300px,60vh,500px);justify-content:center}.fb-slider-content-wrapper .fb-slider-content-inner{box-sizing:border-box;margin:0 auto;max-width:80%;padding:clamp(15px,6vw,30px);text-align:center;width:100%}.swiper-wrapper{height:auto!important}.fb-setting-color-panel-btn{display:flex!important;width:100%}.fb-setting-color-panel-btn .fb-setting-color-panel-btn-switchr{box-shadow:inset 0 0 0 1px #dcdcde;color:#5f5f5f!important;font-size:13px;font-weight:400;height:unset;justify-content:center;line-height:16px;min-height:30px;padding:10px;width:100%}.fb-setting-color-panel-btn .fb-setting-color-panel-btn-switchr.active{background-color:#dcdcde}.dnd-items-wrapper{list-style:none;margin:0;padding:0}.dnd-items-wrapper li.sortable-item{margin-bottom:10px;margin-top:10px}.dnd-items-wrapper li.sortable-item .sortable-header{align-items:center;background:#f9f9f9;border:1px solid #ddd;border-radius:4px;display:flex;justify-content:space-between}.dnd-items-wrapper li.sortable-item .sortable-header .sortable-title{cursor:pointer;flex:12;overflow:hidden;padding-left:5px;text-overflow:ellipsis;white-space:nowrap;width:200px}.dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus{box-shadow:none;outline:none}.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button{color:#d63638}.dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus{box-shadow:none;outline:none}.dnd-items-wrapper li.sortable-item .sortable-item-content{padding-top:10px}.fb-social-icon-group-btn{display:flex}button.components-button.fb-social-icon-single-btn{align-items:center;box-shadow:inset 0 0 0 1px #dcdcde;color:#5f5f5f;display:flex;flex:1;height:unset;justify-content:center;line-height:16px;margin-bottom:10px;padding:6px}button.components-button.fb-social-icon-single-btn.active{background-color:#dcdcde!important;color:#5f5f5f!important}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul{margin:0;padding:0}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials{display:flex;flex-wrap:wrap;list-style:none}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a{transition:all .3s}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a.fb-social-icon-link{align-items:center;box-sizing:border-box;cursor:pointer;display:flex;text-decoration:none;transition:.3s ease-in-out}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a.fb-social-icon-link .fb-social-icon-wrapper{align-items:center;display:flex;justify-content:center}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a.fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon{align-items:center;display:flex;justify-content:center;transition:all .3s}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a.fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon svg{transition:fill .3s}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a.fb-social-icon-link .fb-social-icon-wrapper .fb-social-icon-title{transition:color .3s}.fb-social-main-wrapper .fb-social-wrapper .fb-social-links-wrapper ul.fb-socials .fb-social-list-item a:focus{box-shadow:none;outline:none}.fb-social-share .social-share-parent-container{display:flex;flex-wrap:wrap}.fb-social-share .social-share-parent-container .block-editor-inner-blocks .block-editor-block-list__layout{display:flex}.fb-social-share.vertical .social-share-parent-container .block-editor-inner-blocks .block-editor-block-list__layout{flex-direction:column}.fb-social-share.horizontal .social-share-parent-container .block-editor-inner-blocks .block-editor-block-list__layout{flex-direction:row}.fb-social-share .social-share-button{align-items:center;border:none;cursor:pointer;display:inline-flex;text-decoration:none;transition:opacity .2s}.fb-social-share .social-share-button:hover{opacity:.8}.fb-social-share .social-share-icon{align-items:center;display:inline-flex;justify-content:center}.fb-social-share .social-share-icon svg,.fb-social-share .social-share-icon svg path{fill:#717680}.fb-social-share .social-share-icon .custom-icon{display:flex}.fb-social-share .social-share-icon .custom-icon svg{fill:#717680;height:24px;width:24px}.fb-social-share .social-share-icon .custom-icon svg path{fill:#717680}.fb-social-share .social-share-label{font-size:14px}.fb-social-share-child .social-share-label{color:#000}.frontis-blocks-container-variation-picker .frontis-blocks-variation-close{align-self:flex-end;background:none;border:none;box-shadow:none;color:#d5dadf;cursor:pointer;display:flex;font-size:35px;outline:none;position:absolute;top:3px;z-index:999999}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations{gap:0;justify-content:center;margin:16px 0;width:75%}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button.is-secondary,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button.is-tertiary,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button:hover:not(:disabled){box-shadow:none;color:#d5dadf!important;margin-bottom:0;outline:none;padding:0}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button svg,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button.is-secondary svg,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button.is-tertiary svg,.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button:hover:not(:disabled) svg{fill:#d5dadf!important;height:50px;width:100px}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations .components-button:hover:not(:disabled) svg{color:#bcc0c4!important}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations>li{flex-basis:content;margin:20px 16px 0 0;width:80px}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__skip .components-button{color:#0073aa}.frontis-blocks-container-variation-picker .components-placeholder{align-items:center;border:1px dashed #555d66;box-shadow:none}.frontis-blocks-container-variation-picker .components-placeholder.components-placeholder{align-items:center;gap:0}.frontis-blocks-container-variation-picker .components-placeholder .components-placeholder__label,.frontis-blocks-container-variation-picker .components-placeholder.is-large .components-placeholder__label{color:#1d2327;font-size:24px;font-weight:400;line-height:29px;margin-bottom:4px}.frontis-blocks-container-variation-picker .components-placeholder__label circle,.frontis-blocks-container-variation-picker .components-placeholder__label path,.frontis-blocks-container-variation-picker .components-placeholder__label rect{stroke:#0063a1}.frontis-blocks-container-variation-picker .components-placeholder__label svg{margin-right:12px}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variation:before{padding-bottom:0}.frontis-blocks-container-variation-picker .components-placeholder__fieldset{justify-content:center}.frontis-blocks-editor-preview-mode-mobile .components-button.is-secondary:hover:not(:disabled),.frontis-blocks-editor-preview-mode-tablet .components-button.is-secondary:hover:not(:disabled){box-shadow:none;color:#d5dadf;outline:none}.frontis-blocks-editor-preview-mode-mobile .components-placeholder__fieldset,.frontis-blocks-editor-preview-mode-tablet .components-placeholder__fieldset{max-width:100%!important}.frontis-blocks-editor-preview-mode-mobile .components-placeholder__fieldset .block-editor-block-variation-picker__variations,.frontis-blocks-editor-preview-mode-tablet .components-placeholder__fieldset .block-editor-block-variation-picker__variations{justify-content:center!important}.block-editor-block-list__layout.is-root-container .frontis-blocks-container-has-children .wp-block-frontis-blocks-container,.block-editor-block-list__layout.is-root-container .frontis-blocks-is-root-container{border-radius:unset}#customize-theme-controls .frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations{width:300px}#customize-theme-controls .frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations>li{margin:8px 6px 0 0}#customize-theme-controls .frontis-blocks-container-variation-picker .components-button,#customize-theme-controls .frontis-blocks-container-variation-picker .components-button.is-secondary,#customize-theme-controls .frontis-blocks-container-variation-picker .components-button.is-tertiary,#customize-theme-controls .frontis-blocks-container-variation-picker .components-button:hover:not(:disabled) svg{width:95px}#customize-theme-controls .frontis-blocks-container-variation-picker .frontis-blocks-variation-close{right:0;top:-8px}#customize-theme-controls .frontis-blocks-container-variation-picker .components-placeholder__label .dashicon{display:none}@media only screen and (min-width:1024px){.is-root-container{margin-left:10px;margin-right:10px}.is-root-container>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.is-root-container>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.is-root-container>.frontis-blocks-slider-container .frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.is-root-container>.frontis-blocks-slider-container .frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.is-root-container>.wp-block-template-part>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.is-root-container>.wp-block-template-part>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.wp-block-columns>.wp-block-column>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.wp-block-columns>.wp-block-column>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.wp-block-frontis-blocks-countdown-innerblocks .frontis-blocks-container-has-children>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.wp-block-frontis-blocks-countdown-innerblocks .frontis-blocks-container-has-children>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.wp-block-frontis-blocks-popup-builder .frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.wp-block-frontis-blocks-popup-builder .frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block,.wp-block-group>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block,.wp-block-group>.frontis-blocks-container-has-children.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.wp-block{width:100%}}@media only screen and (max-width:412px){.frontis-blocks-container-variation-picker .components-placeholder__fieldset{max-width:100%!important}.frontis-blocks-container-variation-picker .block-editor-block-variation-picker__variations{width:100%}}.wp-block-frontis-blocks-container:before{border:1px dashed #d5dadf;bottom:10px;content:"";left:10px;position:absolute;right:10px;top:10px;width:calc(100% - 20px)}.frontis-blocks-container-has-children.wp-block-frontis-blocks-container:before{border:0}.wp-block-frontis-blocks-container{display:flex}.wp-block-frontis-blocks-container .block-editor-block-list__layout .block-list-appender.wp-block{height:unset!important;width:auto}.wp-block-frontis-blocks-container .block-editor-block-list__layout .block-list-appender.wp-block button{border:none;box-shadow:none;color:#a0a7ac;font-size:62px}.wp-block-frontis-blocks-container .block-editor-block-list__layout .block-list-appender.wp-block button svg{height:36px;width:36px}.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks,.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks>.block-editor-block-list__layout,.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks,.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout{display:flex;height:100%;width:100%}.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks .wp-block[data-type*="core/"]:not([data-type="core/button"]),.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks .wp-block[data-type*="frontis-blocks/"],.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks>.block-editor-block-list__layout .wp-block[data-type*="core/"]:not([data-type="core/button"]),.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.block-editor-inner-blocks>.block-editor-block-list__layout .wp-block[data-type*="frontis-blocks/"],.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks .wp-block[data-type*="core/"]:not([data-type="core/button"]),.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks .wp-block[data-type*="frontis-blocks/"],.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout .wp-block[data-type*="core/"]:not([data-type="core/button"]),.wp-block-frontis-blocks-container:not(.frontis-blocks-layout-grid)>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout .wp-block[data-type*="frontis-blocks/"]{box-sizing:border-box}.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.block-editor-inner-blocks,.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks{display:flex;height:100%;width:100%}.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.block-editor-inner-blocks>.block-editor-block-list__layout,.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout{display:grid;height:100%;width:100%}.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block[data-type*="frontis-blocks/"],.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block[data-type*="frontis-blocks/"]{width:auto!important}.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block-frontis-blocks-container,.wp-block-frontis-blocks-container.frontis-blocks-layout-grid>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks>.block-editor-block-list__layout>.wp-block-frontis-blocks-container{max-width:unset!important}.block-editor-block-list__empty-block-inserter .block-editor-inserter{right:-35px}.uag-container-block-inserter .components-button{color:#1e1e1e}.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap>.block-editor-inner-blocks{z-index:2}.wp-block-frontis-blocks-container>.frontis-blocks-container-inner-blocks-wrap{width:100%}.editor-styles-wrapper .has-global-padding>.alignfull.wp-block-frontis-blocks-container.frontis-blocks-is-root-container{margin-left:auto;margin-right:auto}@media only screen and (max-width:767px){.wp-block-frontis-blocks-container .block-editor-inner-blocks .wp-block[data-type="frontis-blocks/advanced-heading"]{width:-webkit-fill-available}}.is-root-container>.block-editor-block-list__block.wp-block-frontis-blocks-container .block-editor-block-list__block:not(.is-selected):hover,.is-root-container>.block-editor-block-list__block.wp-block-frontis-blocks-container:not(.is-selected):hover{outline:1.5px solid #2271b1;outline-offset:0}.frontis-blocks-grid-repeater-container>.components-base-control__field{display:flex;flex-direction:column;gap:15px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-head{align-items:center;display:flex;justify-content:space-between}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-head>label{margin-bottom:0}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-head>button{all:unset;align-items:center;background-color:#dcf2ff;border-color:#cde9f9;border-radius:2px;box-shadow:inset 0 0 0 1px #cde9f9;cursor:pointer;display:flex;height:20px;justify-content:center;padding:3px;width:20px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-head>button>span{color:#007cba;font-size:18px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-items{display:flex;flex-direction:column;gap:10px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-item{align-items:center;display:flex;gap:8px;justify-content:space-between}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-content{border:1px solid #e6e7e9;border-radius:3px;display:flex;flex:1;justify-content:space-between;padding:8px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-content>label{margin-bottom:0}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-content>button{all:unset;cursor:pointer}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-content>button>svg{height:15px;width:15px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-delete>button{all:unset;cursor:pointer}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-delete>button>svg{fill:#94a3b8;height:15px;width:15px}.frontis-blocks-grid-repeater-container .frontis-blocks-grid-repeater-delete>button:hover>svg{fill:#ef4444}.frontis-blocks-grid-settings{border-radius:2px;box-shadow:0 2px 8px 0 rgba(0,0,0,.2);display:flex;flex-direction:column;gap:15px;padding:15px;width:255px}.frontis-blocks-grid-settings .components-base-control__help{margin-bottom:0}.editor-styles-wrapper .is-root-container.has-global-padding{padding-left:clamp(1.5rem,5vw,2rem);padding-right:clamp(1.5rem,5vw,2rem)}.justify-content-btn svg{rotate:-90deg}.column-direction.justify-content-btn svg{rotate:none}.column-direction svg{rotate:-90deg}.wp-block-frontis-blocks-container.child{padding:10px}.fb-tabs-wrap ul.fb-tabs-panel{display:flex;flex-wrap:wrap;list-style-type:none;margin:0;padding:0}.fb-tabs-wrap ul.fb-tabs-panel li{align-items:center;cursor:pointer;display:flex;gap:10px;justify-content:center;padding:5px;position:relative}.fb-tabs-wrap ul.fb-tabs-panel li:focus{outline:none!important}.fb-tabs-wrap ul.fb-tabs-panel li:focus-visible{outline:none!important}.fb-tabs-wrap ul.fb-tabs-panel li .fb-tab-icon-image-box .fb-tab-icon{align-items:center;display:flex;justify-content:center}.fb-tabs-wrap ul.fb-tabs-panel li .fb-tab-icon-image-box .fb-tab-icon-image img{height:100%;-o-object-fit:cover;object-fit:cover;width:100%}.fb-team-member-wrapper .fb-team-member-item .fb-team-member-image-wrapper img{-o-object-fit:cover;object-fit:cover}.fb-feature-wrapper .dnd-items-wrapper{list-style:none;margin:0;padding:0}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item{margin-bottom:10px;margin-top:10px}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header{align-items:center;background:#f9f9f9;border:1px solid #ddd;border-radius:4px;display:flex;justify-content:space-between}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-title{cursor:pointer;flex:12;overflow:hidden;padding-left:5px;text-overflow:ellipsis;white-space:nowrap;width:200px}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-sort button:focus{box-shadow:none;outline:none}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button{color:#d63638}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-header .sortable-delete button:focus{box-shadow:none;outline:none}.fb-feature-wrapper .dnd-items-wrapper li.sortable-item .sortable-item-content{padding-top:10px}.fb-feature-icon-group-btn{display:flex}.fb-image-upload-field-wrapper .components-base-control__field{position:relative}.fb-image-upload-field-wrapper .components-base-control__field:hover .editor-post-featured-image__actions{opacity:1}.fb-image-upload-field-wrapper .components-base-control__field .editor-post-featured-image__actions{height:unset;justify-content:center;padding:8px 12px;text-align:center;width:100%;z-index:1}.fb-image-upload-field-wrapper .components-base-control__field .editor-post-featured-image__actions.active{background-color:#5f5f5f;border-radius:3px;color:#007cba}button.components-button.fb-feature-icon-single-btn{align-items:center;box-shadow:inset 0 0 0 1px #dcdcde;color:#5f5f5f;display:flex;flex:1;height:unset;justify-content:center;line-height:16px;margin-bottom:10px;padding:6px}button.components-button.fb-feature-icon-single-btn.active{background-color:#dcdcde!important;color:#5f5f5f!important}button.components-button:focus{box-shadow:none!important;outline:none!important}.editor-post-featured-image__actions{z-index:-1}.fb-team-member-main-wrapper,.fb-team-member-wrapper .fb-team-member-item{overflow:hidden;position:relative}.fb-team-member-wrapper .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay{height:100%;left:0;position:absolute;top:0;width:100%;z-index:1}.fb-team-member-wrapper .fb-team-member-item .fb-team-member-image-wrapper img{height:100%;left:0;position:absolute;top:0;width:100%}.fb-setting-responsive-control-wrapper .fb-setting-responsive-control{margin-bottom:0}.fb-testimonial-image-control-wrapper{margin-bottom:16px}.fb-testimonial-image-control-wrapper .components-base-control__field{display:block}.fb-testimonial-image-control-wrapper .fb-testimonial-image-control{background-color:#ccc;background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:6px;height:150px;margin-bottom:16px;padding:2px;position:relative;width:100%}.fb-testimonial-image-control-wrapper .fb-testimonial-image-control .fb-testimonial-image-delete{align-items:center;background:none;border:0;border-radius:2px;cursor:pointer;display:inline-flex;font-family:inherit;font-weight:400;height:36px;margin:0 8px!important;padding:0!important;position:absolute;right:0;text-decoration:none;transition:box-shadow .1s linear}.fb-testimonial-image-control-wrapper .fb-testimonial-image-control .fb-testimonial-image-delete svg{fill:none;filter:drop-shadow(1px 1px 3px rgb(100,100,100))}.fb-testimonial-image-control-wrapper .fb-testimonial-image-control .fb-testimonial-image-replace-btn{align-items:center;backdrop-filter:blur(2px);background:hsla(0,0%,95%,.749);border:0;border-radius:0 0 6px 6px;bottom:0;color:#000;cursor:pointer;display:flex;font-family:inherit;font-size:13px;font-weight:400;gap:10px;height:36px;justify-content:center;left:0;margin:0;padding:6px 12px;position:absolute;text-decoration:none;transition:.3s;width:100%}.fb-testimonial-image-control-wrapper .fb-testimonial-image-control .fb-testimonial-image-replace-btn svg{fill:none}.fb-testimonial-image-control-wrapper .fb-testimonial-image-upload-btn{align-items:center;background-color:#f2f2f2;background-image:url(${___CSS_LOADER_URL_REPLACEMENT_0___});border:1px solid #e9e8eb;border-radius:6px;cursor:pointer;display:flex;flex-direction:column;font-weight:400;gap:8px;height:130px;justify-content:center;margin:0;padding:0;text-decoration:none;transition:box-shadow .1s linear;width:100%}.fb-testimonial-section{display:block;transition:.5s ease-in-out}.fb-testimonial-section.fb-testimonial-section-left{text-align:left}.fb-testimonial-section.fb-testimonial-section-center{text-align:center}.fb-testimonial-section.fb-testimonial-section-right{text-align:right}.fb-testimonial-section .fb-testimonial-wrapper{width:100%}.fb-testimonial-section .fb-testimonial-rating .fb-testimonial-rating-icon{display:inline-block}.fb-testimonial-section .fb-testimonial-rating svg{transition:.5s ease-in-out}.fb-testimonial-section .fb-testimonial-author-container{align-items:center;display:flex}.fb-testimonial-section .fb-testimonial-author-container.left{justify-content:flex-start}.fb-testimonial-section .fb-testimonial-author-container.center{justify-content:center}.fb-testimonial-section .fb-testimonial-author-container.right{justify-content:flex-end}.fb-testimonial-section .fb-testimonial-author-container .fb-testimonial-author-inner-container{align-items:center;display:flex}.fb-testimonial-section .fb-testimonial-author-container .fb-testimonial-author-inner-container .fb-testimonial-author-image-container .fb-testimonial-image{align-items:center;display:flex;justify-content:center}.fb-testimonial-section .fb-testimonial-author-container .fb-testimonial-author-inner-container .fb-testimonial-author-image-container .fb-testimonial-image img{max-width:100%}.fb-testimonial-section .fb-testimonial-author-container .fb-testimonial-author-inner-container .fb-testimonial-userinfo-container{align-items:flex-start;display:flex;flex-direction:column}.fb-testimonial-section .fb-testimonial-quote-icon{display:inline-block}.fb-testimonial-section .fb-testimonial-quote-icon svg{transition:.5s ease-in-out}`, ""]);
+20 | // Exports
+21 | /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+22 |
+
+webpack 5.104.1 compiled with 2 errors in 22069 ms
