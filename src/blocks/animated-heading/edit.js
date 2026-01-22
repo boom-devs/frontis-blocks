@@ -41,20 +41,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [clientId]);
 
     /** Start Load Google Font */
-        useEffect(() => {
-            if (animatedHeadingNormalTextFontFamily && !loadedFonts.has(animatedHeadingNormalTextFontFamily)) {
-                loadGoogleFont(animatedHeadingNormalTextFontFamily);
-                loadedFonts.add(animatedHeadingNormalTextFontFamily);
-            }
-        }, [animatedHeadingNormalTextFontFamily]);
-    
-        useEffect(() => {
-            if (animatedHeadingAnimationTextFontFamily && !loadedFonts.has(animatedHeadingAnimationTextFontFamily)) {
-                loadGoogleFont(animatedHeadingAnimationTextFontFamily);
-                loadedFonts.add(animatedHeadingAnimationTextFontFamily);
-            }
-        }, [animatedHeadingAnimationTextFontFamily]);
-        /** End Load Google Font */
+    useEffect(() => {
+        if (animatedHeadingNormalTextFontFamily && !loadedFonts.has(animatedHeadingNormalTextFontFamily)) {
+            loadGoogleFont(animatedHeadingNormalTextFontFamily);
+            loadedFonts.add(animatedHeadingNormalTextFontFamily);
+        }
+    }, [animatedHeadingNormalTextFontFamily]);
+
+    useEffect(() => {
+        if (animatedHeadingAnimationTextFontFamily && !loadedFonts.has(animatedHeadingAnimationTextFontFamily)) {
+            loadGoogleFont(animatedHeadingAnimationTextFontFamily);
+            loadedFonts.add(animatedHeadingAnimationTextFontFamily);
+        }
+    }, [animatedHeadingAnimationTextFontFamily]);
+    /** End Load Google Font */
     
 
     const blockProps = useBlockProps({

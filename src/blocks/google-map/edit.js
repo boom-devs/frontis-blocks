@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+import { useEffect } from "@wordpress/element";
 import {
     useBlockProps,
 } from '@wordpress/block-editor';
@@ -22,18 +23,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         googleMapWraperClass,
     } = attributes;
 
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-google-map-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     const blockProps = useBlockProps({
         className: `fb-google-map-main-wrapper ${blockId}`,
     });
-
 
     return (
         <>
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
             <div {...blockProps}>
                 <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>

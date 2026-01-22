@@ -62,7 +62,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,
         blockStyle,
@@ -129,16 +129,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     } = attributes;
 
     const deviceType= useDeviceType();
-
-
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-google-map-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     /** Start Google Map Padding */
     const googleMapPaddingUnitsChange = (event, position) => {
