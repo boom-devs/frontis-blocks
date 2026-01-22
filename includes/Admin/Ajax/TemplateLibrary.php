@@ -461,11 +461,19 @@ class TemplateLibrary extends AjaxBase
     private function post_exists_by_title($title, $post_type = 'page')
     {
         global $wpdb;
-        $exists = $wpdb->get_var($wpdb->prepare(
-            "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s AND post_status IN ('publish', 'draft', 'private') LIMIT 1",
-            $title,
-            $post_type
-        ));
+
+        $cache_key = 'fb_post_exists_' . md5($title . $post_type);
+        $exists = wp_cache_get($cache_key, 'frontis_blocks');
+
+        if (false === $exists) {
+            $exists = $wpdb->get_var($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+                "SELECT ID FROM $wpdb->posts WHERE post_title = %s AND post_type = %s AND post_status IN ('publish', 'draft', 'private') LIMIT 1",
+                $title,
+                $post_type
+            ));
+            wp_cache_set($cache_key, $exists, 'frontis_blocks', 300);
+        }
+
         return !empty($exists);
     }
 
@@ -681,6 +689,7 @@ class TemplateLibrary extends AjaxBase
                 'name' => $slug,
                 'post_status' => 'publish',
                 'posts_per_page' => 1,
+                // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for template detection
                 'tax_query' => [
                     [
                         'taxonomy' => 'wp_theme',

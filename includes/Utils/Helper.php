@@ -644,9 +644,17 @@ class Helper
     {
         global $wpdb;
         $table = $site_wide ? $wpdb->base_prefix . 'options' : $wpdb->prefix . 'options';
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Table name from $wpdb->prefix is safe
-        $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
-        return is_object($row);
+        
+        $cache_key = 'fb_option_exists_' . md5($option_name . ($site_wide ? '_sw' : ''));
+        $exists = wp_cache_get($cache_key, 'frontis_blocks');
+
+        if (false === $exists) {
+            $row = $wpdb->get_row($wpdb->prepare("SELECT option_value FROM $table WHERE option_name = %s LIMIT 1", $option_name)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            $exists = is_object($row);
+            wp_cache_set($cache_key, $exists, 'frontis_blocks', 3600);
+        }
+
+        return $exists;
     }
 
     // Get font families from global settings
@@ -875,21 +883,28 @@ class Helper
     {
         global $wpdb;
 
-        $query = "SELECT ID
-          FROM {$wpdb->posts}
-          WHERE post_status = 'publish'
-          AND post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
-          ORDER BY post_date DESC";
+        $cache_key = 'fb_all_post_ids';
+        $post_ids = wp_cache_get($cache_key, 'frontis_blocks');
 
-        $results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        if (false === $post_ids) {
+            $query = "SELECT ID
+              FROM {$wpdb->posts}
+              WHERE post_status = 'publish'
+              AND post_type NOT IN ('wp_font_family', 'acf-field', 'acf-field-group', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'acf-taxonomy', 'wphb_minify_group', 'wp_block')
+              ORDER BY post_date DESC";
 
-        if (!empty($results)) {
-            return array_map(function ($result) {
-                return $result->ID;
-            }, $results);
+            $results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+
+            $post_ids = [];
+            if (!empty($results)) {
+                $post_ids = array_map(function ($result) {
+                    return $result->ID;
+                }, $results);
+            }
+            wp_cache_set($cache_key, $post_ids, 'frontis_blocks', 300);
         }
 
-        return [];
+        return $post_ids;
     }
 
     /**
@@ -905,13 +920,26 @@ class Helper
     public static function get_single_field($post_id, $field)
     {
         global $wpdb;
-        // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared -- Field name is hardcoded
-        $query = $wpdb->prepare(
-            "SELECT $field FROM $wpdb->posts WHERE ID = %d",
-            $post_id
-        );
+        
+        // Allow-list for field names to satisfy security checks
+        $allowed_fields = ['post_content', 'post_title', 'post_excerpt', 'post_name', 'post_status', 'post_type'];
+        if (!in_array($field, $allowed_fields, true)) {
+            return '';
+        }
 
-        return $wpdb->get_var($query) ?: ''; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $cache_key = 'fb_single_field_' . $post_id . '_' . $field;
+        $value = wp_cache_get($cache_key, 'frontis_blocks');
+
+        if (false === $value) {
+            $query = $wpdb->prepare(
+                "SELECT $field FROM $wpdb->posts WHERE ID = %d",
+                $post_id
+            );
+            $value = $wpdb->get_var($query) ?: ''; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            wp_cache_set($cache_key, $value, 'frontis_blocks', 300);
+        }
+
+        return $value;
     }
 
     /**
@@ -1075,7 +1103,7 @@ class Helper
         $table_name = $wpdb->prefix . 'fb_job_schedule';
 
         // check $post_id not exist then insert
-        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        $check_post_id = $wpdb->get_var($wpdb->prepare("SELECT job_id FROM $table_name WHERE job_id = %d", $post_id)); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         if (!$check_post_id) {
             // update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
             $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
@@ -1105,24 +1133,31 @@ class Helper
             }
         }
 
-        $query = $wpdb->prepare(
-            "SELECT
-                ID,
-                post_type,
-                post_content
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-            $post_name
-        );
+        $cache_key = 'fb_template_content_' . md5($post_name);
+        $template_contents = wp_cache_get($cache_key, 'frontis_blocks');
 
-        // Execute the query
-        $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        if (false === $template_contents) {
+            $query = $wpdb->prepare(
+                "SELECT
+                    ID,
+                    post_type,
+                    post_content
+                FROM
+                    {$wpdb->posts}
+                WHERE
+                    post_type = 'wp_template'
+                    AND post_status = 'publish'
+                    AND post_name = %s
+                ORDER BY
+                    post_modified DESC",
+                $post_name
+            );
+
+            // Execute the query
+            $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            wp_cache_set($cache_key, $template_contents, 'frontis_blocks', 300);
+        }
+
         return $template_contents;
     }
 
@@ -1139,22 +1174,28 @@ class Helper
             }
         }
 
-        $query = $wpdb->prepare(
-            "SELECT
-                ID
-            FROM
-                {$wpdb->posts}
-            WHERE
-                post_type = 'wp_template'
-                AND post_status = 'publish'
-                AND post_name = %s
-            ORDER BY
-                post_modified DESC",
-            $post_name
-        );
+        $cache_key = 'fb_template_id_' . md5($post_name);
+        $template_id = wp_cache_get($cache_key, 'frontis_blocks');
 
-        // Execute the query
-        $template_id = $wpdb->get_var($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
+        if (false === $template_id) {
+            $query = $wpdb->prepare(
+                "SELECT
+                    ID
+                FROM
+                    {$wpdb->posts}
+                WHERE
+                    post_type = 'wp_template'
+                    AND post_status = 'publish'
+                    AND post_name = %s
+                ORDER BY
+                    post_modified DESC",
+                $post_name
+            );
+
+            // Execute the query
+            $template_id = $wpdb->get_var($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            wp_cache_set($cache_key, $template_id, 'frontis_blocks', 300);
+        }
 
         return $template_id;
     }
