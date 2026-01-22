@@ -12,7 +12,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -54,7 +53,7 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
     const { 
         blockID,
         // deviceType,
@@ -342,14 +341,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
     
 	const deviceType= useDeviceType();
-    
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-feature-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const [FeatureItemList, setFeatureItemList] = useState(FeatureItems);
 
@@ -1419,14 +1410,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const featureIconImageMobileBorderRadiusWidth = `${FeatureIconImageBorderRadiusMobile?.top}${FeatureIconImageBorderRadiusUnits?.Mobile} ${FeatureIconImageBorderRadiusMobile?.right}${FeatureIconImageBorderRadiusUnits?.Mobile} ${FeatureIconImageBorderRadiusMobile?.bottom}${FeatureIconImageBorderRadiusUnits?.Mobile} ${FeatureIconImageBorderRadiusMobile?.left}${FeatureIconImageBorderRadiusUnits?.Mobile}`;
 
     /** End Border Radius */
-
-    /* Start Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont(FeatureTitleFontFamily);
-        loadGoogleFont(FeatureDescFontFamily);
-	}, [FeatureTitleFontFamily, FeatureDescFontFamily]);
-
-    /* End Load Google Fonts */
 
     /** Start Feature Item Color Style */
 	const featureSingleItemStyle = useMemo(() => {

@@ -24,6 +24,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialShareChildGlobalWraperID
     } = attributes;
 
+     // Generate unique block ID
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-social-share-child-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
     // Function to get SVG string for different networks
     const getIconSvg = (networkId) => {
         switch (networkId) {
@@ -100,7 +109,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <div className={`social-share-child-container ${socialShareChildGlobalWraperClass}`} id={socialShareChildGlobalWraperID} style={{ textAlign: alignment }}>

@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
+import { useEffect } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { dateI18n, __experimentalGetSettings } from '@wordpress/date';
 import Inspector from "./inspector";
@@ -9,6 +10,12 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
     const { blockID, postMetaterms, singleItemColorStyle, blockStyle, alignment } = attributes;
 
+    // Set blockID based on clientId
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({ blockID: "fb-post-meta-" + clientId.slice(0, 8) });
+        }
+    }, [clientId]);
 
     const blockProps = useBlockProps({
         className: `fb-post-meta-main-wrapper ${blockID} ${blockStyle} align-${alignment}`,

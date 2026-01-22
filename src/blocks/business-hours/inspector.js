@@ -13,7 +13,7 @@ import {
     ButtonGroup,
 } from '@wordpress/components';
 
-import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
+import { useEffect, useState, useMemo, useCallback, memo } from '@wordpress/element';
 import { TIMEZONE, WEEKENDDAY, timeFormatOptions, monthOptions, BORDER_STYLES, OVERFLOW_OP, BACKGROUND_TYPES } from '@Constants/fbConstants';
 import FB_VisibilityControl from '@Components/visibility-control';
 import Select2 from "react-select";
@@ -38,7 +38,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
         countries,
@@ -457,38 +457,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType= useDeviceType();
-
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-timezone-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    useEffect(() => {
-        if (timezoneLocationTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneLocationTextFontFamily);
-        }
-        if (timezoneTimeTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTimeTextFontFamily);
-        }
-        if (timezoneTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTextFontFamily);
-        }
-        if (statusTextFontFamily !== 'Default') {
-            loadGoogleFont(statusTextFontFamily);
-        }
-        if (noticeTextFontFamily !== 'Default') {
-            loadGoogleFont(noticeTextFontFamily);
-        }
-    }, [
-        timezoneLocationTextFontFamily, 
-        timezoneTimeTextFontFamily, 
-        timezoneTextFontFamily, 
-        statusTextFontFamily, 
-        noticeTextFontFamily
-    ]);
 
 	// State variables
     const [selectedDate, setSelectedDate] = useState('');
@@ -5146,3 +5114,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
 	);
 }
+export default memo(Inspector);

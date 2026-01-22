@@ -3,10 +3,14 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { useDeviceType } from '@Config/displayType';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 import Inspector from "./inspector";
 
@@ -20,9 +24,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		megaMenuMobileSwitcher,
 		megaMenuGlobalWraperClass,
 		megaMenuGlobalWraperID,
-		megaMenuIcon
+		megaMenuIcon,
+		megaMenuFontFamily,
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-advanced-megamenu-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start load font */
+	useEffect(() => {
+		[megaMenuFontFamily].forEach((font) => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [megaMenuFontFamily]);
+	/** End load font */
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-mega-menu-main-wrapper ${blockId} ${megaMenuDesktopSwitcher && 'fb-desktop-responsive'} ${megaMenuTabletSwitcher && 'fb-tablet-responsive'} ${megaMenuMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -40,7 +63,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>

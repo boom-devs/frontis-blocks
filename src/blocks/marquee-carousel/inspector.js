@@ -130,14 +130,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
     } = attributes;
 
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "marquee-carousel-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
     const deviceType = useDeviceType();
 
     /** Start slide padding */
@@ -1082,9 +1074,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** Start All Block Style */
     const allBlockStyle = useMemo(() => `
-
+        #block-${clientId}.fb-marquee-slider-container {
+            width: 100% !important;
+        }
         .${blockId}.fb-marquee-slider-container {
-            width: 100%;
+            width: 100% !important;
             ${desktopBackgroundNormalStyles}
             ${globalDesktopPaddingWidth && sliderGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPaddingWidth};` : ''} 
             ${globalDesktopMarginWidth && sliderGlobalMarginDesktop?.top ? `margin: ${globalDesktopMarginWidth};` : ''} 
@@ -1108,7 +1102,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
           ${slideHeight?.Desktop && slideHeightUnits?.Desktop ? `height: ${slideHeight?.Desktop}${slideHeightUnits?.Desktop} !important;` : ''}
           ${slideDesktopPaddingWidth && slidePaddingDesktop?.top ? `padding: ${slideDesktopPaddingWidth} !important;` : ''}
         }
-
+        .${blockId} .fb-marquee-swiper.swiper{
+            // pointer-events: none;
+        }
         ${sliderOverlaySwitcher ? `
         .${blockId} .fb-marquee-swiper::before {
             left: 0;
@@ -1136,7 +1132,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${tabletBackgroundHoverStyles}
             }
  
-            .${blockId} .swiper-slide { 
+            .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide { 
                 ${slideWidth?.Tablet && slideWidthUnits?.Tablet ? `width: ${slideWidth?.Tablet}${slideWidthUnits?.Tablet} !important;` : ''}  
                 ${slideHeight?.Tablet && slideHeightUnits?.Tablet ? `height: ${slideHeight?.Tablet}${slideHeightUnits?.Tablet} !important;` : ''}
                 ${slideTabletPaddingWidth && slidePaddingTablet?.top ? `padding: ${slideTabletPaddingWidth} !important;` : ''}
@@ -1154,7 +1150,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 ${mobileBackgroundHoverStyles}
             }
 
-            .${blockId} .swiper-slide {
+            .${blockId} .fb-marquee-swiper .swiper-wrapper .swiper-slide {
                 ${slideWidth?.Mobile && slideWidthUnits?.Mobile ? `width: ${slideWidth?.Mobile}${slideWidthUnits?.Mobile} !important;` : ''}  
                 ${slideHeight?.Mobile && slideHeightUnits?.Mobile ? `height: ${slideHeight?.Mobile}${slideHeightUnits?.Mobile} !important;` : ''}
                 ${slideMobilePaddingWidth && slidePaddingMobile?.top ? `padding: ${slideMobilePaddingWidth} !important;` : ''}

@@ -63,7 +63,6 @@ import './editor.scss';
 const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
-        // deviceType,
         TestimonialPresetStyle,
         TestimonialAlignment,
 

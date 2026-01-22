@@ -4,9 +4,9 @@ const attributes = {
 		default: '',
 	},
 	riveAnimationJsonTypeSwitcher: {
-        type: 'string',
-        default: 'json-file',
-    },
+		type: 'string',
+		default: 'json-file',
+	},
 	riveAnimationImageUrl: {
 		type: 'string',
 		default: ''
@@ -14,198 +14,230 @@ const attributes = {
 	riveAnimationImageAlt: {
 		type: 'string',
 		default: ''
-	},	
+	},
 	riveAnimationImageID: {
 		type: 'string',
 		default: ''
 	},
 	riveAnimationJsonUrl: {
-        type: "string",
-        default: "",
-    },
-    riveAnimationJsonTargetUrl: {
-        type: "boolean",
-    },
+		type: "string",
+		default: "",
+	},
+	riveAnimationJsonTargetUrl: {
+		type: "boolean",
+	},
 	riveAnimationDesktopSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    riveAnimationTabletSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    riveAnimationMobileSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
+		type: 'boolean',
+		default: false,
+	},
+	riveAnimationTabletSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	riveAnimationMobileSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
 	riveOpacitySwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
+		type: 'string',
+		default: 'normal',
+	},
 	riveRenderer: {
-        type: 'string',
+		type: 'string',
 		default: 'canvas'
-    },
+	},
 	riveLoop: {
-        type: 'boolean',
+		type: 'boolean',
 		default: true
-    },
+	},
 	riveAutoplay: {
-        type: 'boolean',
+		type: 'boolean',
 		default: true
-    },
+	},
 	riveAnimationReverse: {
-        type: 'boolean',
+		type: 'boolean',
 		default: false
-    },
+	},
 	riveAnimationSpeed: {
-        type: 'number',
-    },
+		type: 'number',
+	},
 	riveAnimationNormalOpacity: {
-        type: 'number',
-    },
+		type: 'number',
+	},
 	riveAnimationHoverOpacity: {
-        type: 'number',
-    },
-    riveEffectsOnHover: {
-        type: 'string',
-    },
+		type: 'number',
+	},
+	riveEffectsOnHover: {
+		type: 'string',
+	},
 	riveAnimationContainerHeight: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationContainerHeightUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationContainerHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	riveAnimationContainerWidth: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationContainerWidthUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationContainerWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationCanvasWidth: {
+		type: "object",
+		default: {
+			Desktop: '500',
+			Tablet: '300',
+			Mobile: '200',
+		}
+	},
+	riveAnimationCanvasWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationCanvasHeight: {
+		type: "object",
+		default: {
+			Desktop: '250',
+			Tablet: '150',
+			Mobile: '100',
+		}
+	},
+	riveAnimationCanvasHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	/** Start Class & ID Setting */
-	riveAnimationGlobalWraperCustomCSS : {
+	riveAnimationGlobalWraperCustomCSS: {
 		type: 'string',
 		default: '',
 	},
-	riveAnimationGlobalWraperID : {
+	riveAnimationGlobalWraperID: {
 		type: 'string',
 		default: ''
 	},
 
-	riveAnimationGlobalWraperClass : {
+	riveAnimationGlobalWraperClass: {
 		type: 'string',
 		default: ''
 	},
 	/** Start Global Setting */
 	riveAnimationPositionType: {
-        type: "string",
-        default: "default"
-    },
-    riveAnimationHZOrientationType: {
-        type: "string",
-        default: "left"
-    },
-    riveAnimationVROrientationType: {
-        type: "string",
-        default: "top"
-    },
-    riveAnimationHZLeftOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationHZLeftOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    riveAnimationHZRightOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationHZRightOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    riveAnimationVRTopOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationVRTopOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    riveAnimationVRBottomOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    riveAnimationVRBottomOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-	riveAnimationGlobalZIndex : {
-        type: "object",
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        }
-    },
+		type: "string",
+		default: "default"
+	},
+	riveAnimationHZOrientationType: {
+		type: "string",
+		default: "left"
+	},
+	riveAnimationVROrientationType: {
+		type: "string",
+		default: "top"
+	},
+	riveAnimationHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	riveAnimationVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	riveAnimationGlobalZIndex: {
+		type: "object",
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
 
-    riveAnimationOverflow: {
-        type: 'string',
-        default: "default",
-    },
+	riveAnimationOverflow: {
+		type: 'string',
+		default: "default",
+	},
 	/** Start Padding */
 	riveAnimationGlobalPaddingUnits: {
 		type: 'object',
@@ -216,7 +248,7 @@ const attributes = {
 		}
 	},
 	riveAnimationGlobalPaddingDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -225,7 +257,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalPaddingTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -234,7 +266,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalPaddingMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -242,8 +274,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	riveAnimationGlobalPaddingLink : {
-		type : "boolean",
+	riveAnimationGlobalPaddingLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Padding */
@@ -258,7 +290,7 @@ const attributes = {
 		}
 	},
 	riveAnimationGlobalMarginDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -267,7 +299,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalMarginTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -276,7 +308,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalMarginMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -284,18 +316,18 @@ const attributes = {
 			right: '',
 		},
 	},
-	riveAnimationGlobalMarginLink : {
-		type : "boolean",
+	riveAnimationGlobalMarginLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Margin */
 
 	/** Start Background */
-	riveAnimationGlobalBgColorSwitcher : {
+	riveAnimationGlobalBgColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	riveAnimationGlobalNormalBackgroundType: { 
+	riveAnimationGlobalNormalBackgroundType: {
 		type: "string",
 		default: "classic",
 	},
@@ -343,7 +375,7 @@ const attributes = {
 		type: 'string',
 		default: "none",
 	},
-	riveAnimationGlobalBorderColorSwitcher : {
+	riveAnimationGlobalBorderColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
@@ -363,7 +395,7 @@ const attributes = {
 		}
 	},
 	riveAnimationGlobalBorderDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -372,7 +404,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalBorderTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -381,7 +413,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalBorderMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -389,8 +421,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	riveAnimationGlobalBorderLink : {
-		type : "boolean",
+	riveAnimationGlobalBorderLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Border */
@@ -405,7 +437,7 @@ const attributes = {
 		}
 	},
 	riveAnimationGlobalBorderRadiusDesktop: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -414,7 +446,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalBorderRadiusTablet: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -423,7 +455,7 @@ const attributes = {
 		},
 	},
 	riveAnimationGlobalBorderRadiusMobile: {
-		type: "object", 
+		type: "object",
 		default: {
 			top: '',
 			bottom: '',
@@ -431,33 +463,33 @@ const attributes = {
 			right: '',
 		},
 	},
-	riveAnimationGlobalBorderRadiusLink : {
-		type : "boolean",
+	riveAnimationGlobalBorderRadiusLink: {
+		type: "boolean",
 		default: true
 	},
 	/** End Border Radius */
 
 	/** Start Box Shadow */
-    riveAnimationGlobalBoxShadowSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
+	riveAnimationGlobalBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
 	riveAnimationGlobalBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    riveAnimationGlobalBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-    riveAnimationGlobalBoxShadowHoverValues: {
-        type: 'array',
-        default: [],
-    },
-    riveAnimationGlobalBoxShadowHoverCssValue: {
-        type: 'string',
-        default: '',
-    },
-    /** End Global Style */
+		type: 'array',
+		default: [],
+	},
+	riveAnimationGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	riveAnimationGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	riveAnimationGlobalBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Global Style */
 };
 export default attributes;

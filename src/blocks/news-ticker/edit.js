@@ -2,9 +2,12 @@ import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
 import { useMemo, useEffect } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import "./editor.scss";
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -22,8 +25,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTime,
 		timerPosition,
 		arrowsUniqueId,
-		showAutoplayButton
+		showAutoplayButton,
+
+		tickerLabelFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-news-ticker-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start load font */
+	useEffect(() => {
+		[tickerLabelFontFamily].forEach(font => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [tickerLabelFontFamily]);
+	/** End load font */
 
 	// Generate unique ID for arrows
 	const generatedArrowsId = useMemo(() => {
@@ -57,7 +81,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			<div {...blockProps} id={newsTickerGlobalWraperID}>
 				<div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass}`}>

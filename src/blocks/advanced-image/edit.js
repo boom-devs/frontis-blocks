@@ -13,7 +13,11 @@ import { useEffect } from "@wordpress/element";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
 import useDynamicImage from "@Components/use-dynamic-image";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from "./inspector";
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
   const {
@@ -27,6 +31,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     advancedImageDefaultWidth,
     advancedImageDefaultHeight,
     advancedImageSrcSet,
+    headingFontFamily,
 
     // display options
     imageCaption,
@@ -70,6 +75,25 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     blockStyle,
 
   } = attributes;
+
+  useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-advanced-image-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+    /** Start load font */
+    useEffect(() => {
+        [headingFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [headingFontFamily]);
+    /** End load font */
 
   // block props (unchanged)
   const blockProps = useBlockProps({
@@ -140,7 +164,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
       <Inspector
         attributes={attributes}
         setAttributes={setAttributes}
-        clientId={clientId}
         onSelectImage={onSelectImage}
       />
 

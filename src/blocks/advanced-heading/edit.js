@@ -5,7 +5,7 @@ import {
 	BlockControls,
 	AlignmentToolbar,
 } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -15,7 +15,10 @@ import renderSVG from '../../components/icon-picker/components/icon-picker/contr
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -90,7 +93,34 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicSubHeadingTextEnableLink,
 		dynamicSubHeadingTextLinkSource,
 
+		headingFontFamily,
+		subHeadingFontFamily,
+
 	} = attributes;
+
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-advanced-headings-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
@@ -167,7 +197,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Inspector 
+				attributes={attributes}
+				setAttributes={setAttributes}
+			/>
 
 			<BlockControls>
 				<AlignmentToolbar

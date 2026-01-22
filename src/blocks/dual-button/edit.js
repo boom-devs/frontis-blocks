@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 import {
 	useBlockProps,
 	RichText,
@@ -12,10 +12,13 @@ import {
  */
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -96,8 +99,34 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnTwoTermsSeparator,
 		dynamicBtnTwoEnableLink,
 		dynamicBtnTwoLinkSource,
+		ButtonFontFamily,
+		connectorFontFamily,
 		/** End Dynamic Btn Two Text */
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-dual-button-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (ButtonFontFamily && !loadedFonts.has(ButtonFontFamily)) {
+			loadGoogleFont(ButtonFontFamily);
+			loadedFonts.add(ButtonFontFamily);
+		}
+	}, [ButtonFontFamily]);
+
+	useEffect(() => {
+		if (connectorFontFamily && !loadedFonts.has(connectorFontFamily)) {
+			loadGoogleFont(connectorFontFamily);
+			loadedFonts.add(connectorFontFamily);
+		}
+	}, [connectorFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `fb-dual-button-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -183,7 +212,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<BlockControls>

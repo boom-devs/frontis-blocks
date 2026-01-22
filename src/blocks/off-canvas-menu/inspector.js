@@ -35,7 +35,6 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -53,7 +52,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
 	const {
 		blockID,
 		blockStyle,
@@ -499,14 +498,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			return '';
 		}
 	};
-	// Generate unique block ID if not set
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "off-canvas-menu-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const hamburgerIconHandler = (IconName) => {
 		setAttributes({ hamburgerIcon: IconName })

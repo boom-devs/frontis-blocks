@@ -32,6 +32,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		offCanvasMobileSwitcher
 	} = attributes;
 
+	// Generate unique block ID if not set
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "off-canvas-menu-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const patternData = useSelect(select => {
@@ -126,7 +135,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div className={`fb-off-canvas-menu-container ${offCanvasGlobalWraperClass}`} id={offCanvasGlobalWraperID} ref={panelRef}>
