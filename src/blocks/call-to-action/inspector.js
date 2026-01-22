@@ -27,7 +27,7 @@ import {
 
 import Select2 from "react-select";
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useEffect, useMemo, useState, memo } from "@wordpress/element";
+import { useEffect, useMemo, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -41,6 +41,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -54,7 +55,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		blockStyle,
@@ -492,6 +493,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-cta-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const blockProps = useBlockProps();
 
@@ -2038,6 +2047,21 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Border Radius */
 
 	/* set default values for the style attributes */
+	useEffect(() => {
+		if (headingFontFamily) {
+			loadGoogleFont(headingFontFamily);
+		}
+		if (buttonFontFamily) {
+			loadGoogleFont(buttonFontFamily);
+		}
+		if (SubHeadingFontFamily) {
+			loadGoogleFont(SubHeadingFontFamily);
+		}
+		if (buttonTwoFontFamily) {
+			loadGoogleFont(buttonTwoFontFamily);
+		}
+	}, [headingFontFamily, buttonFontFamily, SubHeadingFontFamily, buttonTwoFontFamily]);
+
 	const ctaContentStyle = useMemo(
 		() => `
 			.fb-cta-main-wrapper.${blockID} {
@@ -4202,5 +4226,3 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 }
-
-export default memo(Inspector);

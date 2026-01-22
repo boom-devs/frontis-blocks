@@ -12,6 +12,7 @@ import FB_TypographyControl from "@Components/typography-control";
 import FB_BackgroundColorControl from "@Components/background-color-control";
 import FB_UrlControl from "@Components/url-control";
 import FB_HtmlTagControl from "@Components/html-tag-control";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import getCustomCss from "@Utils/getCustomCss";
@@ -45,7 +46,7 @@ import {
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
@@ -378,6 +379,14 @@ export default function Inspector({ attributes, setAttributes }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-news-ticker-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const iconHandler = (iconName) => {
 		setAttributes({ tickerLabelIcon: iconName });
@@ -2528,7 +2537,13 @@ export default function Inspector({ attributes, setAttributes }) {
 	const tickerTimerMobileBorderRadiusWidth = `${tickerTimerBorderRadiusMobile?.top}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.right}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.bottom}${tickerTimerBorderRadiusUnits?.Mobile} ${tickerTimerBorderRadiusMobile?.left}${tickerTimerBorderRadiusUnits?.Mobile}`;
 	/** End Ticker Timer Border Radius */
 
-	/** Start All Block Style */
+	/* Start Load Google Fonts */
+	useEffect(() => {
+		loadGoogleFont(tickerLabelFontFamily);
+	}, [tickerLabelFontFamily]);
+
+	/* End Load Google Fonts */
+
 	const allBlockStyle = useMemo(() => {
         let style = `
             .fb-news-ticker-wrapper.${blockID} .fb-news-ticker-inner{

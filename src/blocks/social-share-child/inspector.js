@@ -36,7 +36,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         socialMediaType,
@@ -160,6 +160,15 @@ export default function Inspector({ attributes, setAttributes }) {
     } = attributes;
 
     const deviceType = useDeviceType();
+
+    // Generate unique block ID
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-social-share-child-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     // Available social media types
     const socialMediaTypes = [

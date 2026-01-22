@@ -3,11 +3,8 @@ import { useEffect, useState, useMemo } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import apiFetch from "@wordpress/api-fetch";
-import loadGoogleFont from "@Utils/loadGoogleFont";
 
 import Inspector from "./inspector";
-
-const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -43,51 +40,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         postCategoryDesktopSwitcher,
         postCategoryTabletSwitcher,
         postCategoryMobileSwitcher,
-
-        postTitleFontFamily,
-		postDescriptionFontFamily,
-		postCountFontFamily,
-		buttonFontFamily,
     } = attributes;
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-post-category-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    /** Start Load Google Font */
-    useEffect(() => {
-        if (postTitleFontFamily && !loadedFonts.has(postTitleFontFamily)) {
-            loadGoogleFont(postTitleFontFamily);
-            loadedFonts.add(postTitleFontFamily);
-        }
-    }, [postTitleFontFamily]);
-
-    useEffect(() => {
-        if (postDescriptionFontFamily && !loadedFonts.has(postDescriptionFontFamily)) {
-            loadGoogleFont(postDescriptionFontFamily);
-            loadedFonts.add(postDescriptionFontFamily);
-        }
-    }, [postDescriptionFontFamily]);
-
-    useEffect(() => {
-        if (postCountFontFamily && !loadedFonts.has(postCountFontFamily)) {
-            loadGoogleFont(postCountFontFamily);
-            loadedFonts.add(postCountFontFamily);
-        }
-    }, [postCountFontFamily]);
-
-    useEffect(() => {
-        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
-            loadGoogleFont(buttonFontFamily);
-            loadedFonts.add(buttonFontFamily);
-        }
-    }, [buttonFontFamily]);
-    /** End Load Google Font */
-
 
     const blockProps = useBlockProps({
         className: `fb-taxonomy-block fb-post-category-area ${blockId} fb-taxonomy-${premadeStyle} ${postCategoryDesktopSwitcher && "fb-desktop-responsive"
@@ -868,6 +821,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             <div {...blockProps}>

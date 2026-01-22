@@ -1,18 +1,8 @@
+// edit.js - Rive Animation Block Editor
+
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps,
-	MediaUpload,
-	MediaPlaceholder,
-	BlockControls,
-	MediaUploadCheck
-} from '@wordpress/block-editor';
-import {
-	Button,
-	ToolbarButton,
-	ToolbarGroup
-} from '@wordpress/components';
+import { useBlockProps } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
-import { useDeviceType } from "@Config/displayType";
 import { Rive } from '@rive-app/canvas';
 import Inspector from './inspector';
 
@@ -26,21 +16,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationSpeed = 1,
 		riveAnimationReverse = false,
 		riveEffectsOnHover = 'none',
-		riveAnimationCanvasWidth,
-		riveAnimationCanvasHeight,
-		riveAnimationImageID,
-		riveAnimationImageAlt
 	} = attributes;
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	const deviceType = useDeviceType();
 
 	const blockProps = useBlockProps({
 		className: `fb-rive-animation-main-wrapper ${blockID}`,
@@ -123,17 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationSpeed,
 		riveAnimationReverse,
 		riveEffectsOnHover,
-		riveAnimationCanvasWidth,
-		riveAnimationCanvasHeight
 	]);
-
-	// Handle canvas resize when dimensions change
-	useEffect(() => {
-		const instance = riveInstanceRef.current;
-		if (instance && canvasRef.current) {
-			instance.resizeDrawingSurfaceToCanvas();
-		}
-	}, [deviceType, riveAnimationCanvasWidth, riveAnimationCanvasHeight]);
 
 	// Handle hover effects
 	useEffect(() => {
@@ -182,87 +148,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		};
 	}, [riveEffectsOnHover]);
 
-	const onSelectRiveFile = (media) => {
-		if (!media) return;
-
-		if (!media.url.endsWith('.riv')) {
-			return;
-		}
-
-		setAttributes({
-			riveAnimationImageUrl: media.url,
-			riveAnimationImageID: media.id,
-			riveAnimationImageAlt: media.alt || media.title,
-		});
-	};
-
 	return (
 		<>
-			<Inspector 
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
-
-			<BlockControls>
-				<ToolbarGroup>
-					{riveAnimationImageUrl && (
-						<>
-							<ToolbarButton
-								icon="trash"
-								onClick={() =>
-									setAttributes({
-										riveAnimationImageUrl: "",
-										riveAnimationImageID: "",
-										riveAnimationImageAlt: "",
-									})
-								}
-							/>
-							<MediaUploadCheck>
-								<MediaUpload
-									onSelect={onSelectRiveFile}
-									allowedTypes={['application/octet-stream', 'application/json']}
-									value={riveAnimationImageID}
-									render={({ open }) => <ToolbarButton onClick={open} icon="edit" />}
-								/>
-							</MediaUploadCheck>
-						</>
-					)}
-				</ToolbarGroup>
-			</BlockControls>
+			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
 
 			<div {...blockProps}>
 				<div className="fb-parent-wrapper fb-rive-animation-container">
-					{riveAnimationImageUrl ? (
-						<div
-							className="fb-rive-canvas-wrapper"
-							style={{
-								border: riveAnimationImageUrl ? 'none' : '',
-								minHeight: !riveAnimationImageUrl ? '200px' : undefined,
-								display: 'flex',
-								alignItems: 'center',
-								justifyContent: 'center',
-								position: 'relative',
-							}}
-						>
+					<div
+						className="fb-rive-canvas-wrapper"
+						style={{
+							border: riveAnimationImageUrl ? 'none' : '2px dashed #ccc',
+							minHeight: '200px',
+							display: 'flex',
+							alignItems: 'center',
+							justifyContent: 'center',
+							position: 'relative',
+							width: '100%',
+						}}
+					>
+						{riveAnimationImageUrl ? (
 							<canvas
 								ref={canvasRef}
-								width={riveAnimationCanvasWidth?.[deviceType]}
-								height={riveAnimationCanvasHeight?.[deviceType]}
+								style={{
+									width: '100%',
+									height: '100%',
+									maxWidth: '100%',
+								}}
 							/>
-						</div>
-					) : (
-						<MediaPlaceholder
-							onSelect={onSelectRiveFile}
-							allowedTypes={['application/octet-stream', 'application/json']}
-							accept=".riv"
-							multiple={false}
-							labels={{
-								title: __("Rive Animation", "frontis-blocks"),
-								instructions: __("Drag and drop a .riv animation file, upload, or choose from your library", "frontis-blocks")
-							}}
-							icon="media-interactive"
-						/>
-					)}
+						) : (
+							<p style={{ color: '#999', textAlign: 'center', padding: '40px 20px' }}>
+								{__('Upload a .riv file to preview', 'frontis-blocks')}
+							</p>
+						)}
+					</div>
 				</div>
 			</div>
 			<style>{blockStyle}</style>

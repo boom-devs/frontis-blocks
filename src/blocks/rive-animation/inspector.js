@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-import { InspectorControls, MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 
 import {
 	SelectControl,
@@ -15,7 +15,6 @@ import {
 	Dropdown,
 	Dashicon,
 	RangeControl,
-	Button,
 	ColorPicker,
 	ColorPalette,
 } from "@wordpress/components";
@@ -39,6 +38,7 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -152,12 +152,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		riveAnimationVRBottomOffset,
 		riveAnimationVRBottomOffsetUnits,
-
-		//canvas width and height
-		riveAnimationCanvasWidth,
-		riveAnimationCanvasHeight,
-		riveAnimationCanvasHeightUnits,
-		riveAnimationCanvasWidthUnits,
 	} = attributes;
 
 	 useEffect(() => {
@@ -169,6 +163,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}, [clientId]);
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -466,7 +468,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${riveAnimationGlobalBorderRadiusMobile?.top}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.right}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.bottom}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.left}${riveAnimationGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/** Rive Animation Style */
+	/* Load Google Fonts */
+	useEffect(() => {
+		loadGoogleFont();
+	}, []);
+	/* End Load Google Fonts */
+
 	const riveAnimationStyle = useMemo(
 		() => `
 			.${blockID}.fb-rive-animation-main-wrapper {
@@ -485,8 +492,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				`: `
 					${riveAnimationGlobalNormalClassicColor ? `background: ${riveAnimationGlobalNormalClassicColor};` : ''}
 				`}
-				${riveAnimationCanvasWidth?.Desktop ? `width: ${riveAnimationCanvasWidth?.Desktop}${riveAnimationCanvasWidthUnits?.Desktop};` : ''}
-				${riveAnimationCanvasHeight?.Desktop ? `height: ${riveAnimationCanvasHeight?.Desktop}${riveAnimationCanvasHeightUnits?.Desktop};` : ''}
+				${riveAnimationContainerWidth?.Desktop ? `width: ${riveAnimationContainerWidth?.Desktop}${riveAnimationContainerWidthUnits?.Desktop};` : ''}
+				${riveAnimationContainerHeight?.Desktop ? `height: ${riveAnimationContainerHeight?.Desktop}${riveAnimationContainerHeightUnits?.Desktop};` : ''}
 				${globalDesktopPadding && riveAnimationGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin && riveAnimationGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
 				${riveAnimationGlobalBorder ? `border: ${riveAnimationGlobalBorder};` : ''} 
@@ -518,8 +525,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${riveAnimationGlobalZIndex?.Tablet ? `z-index: ${riveAnimationGlobalZIndex?.Tablet};` : ''}
 				}
 				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
-					${riveAnimationCanvasWidth?.Tablet ? `width: ${riveAnimationCanvasWidth?.Tablet}${riveAnimationCanvasWidthUnits?.Tablet};` : ''}
-					${riveAnimationCanvasHeight?.Tablet ? `height: ${riveAnimationCanvasHeight?.Tablet}${riveAnimationCanvasHeightUnits?.Tablet};` : ''}
+					${riveAnimationContainerWidth?.Tablet ? `width: ${riveAnimationContainerWidth?.Tablet}${riveAnimationContainerWidthUnits?.Tablet};` : ''}
+					${riveAnimationContainerHeight?.Tablet ? `height: ${riveAnimationContainerHeight?.Tablet}${riveAnimationContainerHeightUnits?.Tablet};` : ''}
 					${globalTabletPadding && riveAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && riveAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
 					${globalTabletBorderWidth && riveAnimationGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -535,8 +542,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					${riveAnimationGlobalZIndex?.Mobile ? `z-index: ${riveAnimationGlobalZIndex?.Mobile};` : ''}
 				}
 				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
-					${riveAnimationCanvasWidth?.Mobile ? `width: ${riveAnimationCanvasWidth?.Mobile}${riveAnimationCanvasWidthUnits?.Mobile};` : ''}
-					${riveAnimationCanvasHeight?.Mobile ? `height: ${riveAnimationCanvasHeight?.Mobile}${riveAnimationCanvasHeightUnits?.Mobile};` : ''}
+					${riveAnimationContainerWidth?.Mobile ? `width: ${riveAnimationContainerWidth?.Mobile}${riveAnimationContainerWidthUnits?.Mobile};` : ''}
+					${riveAnimationContainerHeight?.Mobile ? `height: ${riveAnimationContainerHeight?.Mobile}${riveAnimationContainerHeightUnits?.Mobile};` : ''}
 					${globalMobilePadding && riveAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin && riveAnimationGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
 					${globalMobileBorderWidth && riveAnimationGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -545,7 +552,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		`,
 		[
-			attributes,
+			attributes
 		],
 	);
 
@@ -575,9 +582,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						globalImageID={riveAnimationImageID}
 						setglobalImageID={(value) => setAttributes({ riveAnimationImageID: value })}
 						isImageSize={false}
-						showThumbnail={false}
-						allowedExtension="riv"
-						allowedTypes={['application/octet-stream']}
 					/>
 
 					<ToggleControl
@@ -613,32 +617,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			>
 				<FB_Range
 					min={0}
-					max={2000}
+					max={riveAnimationContainerWidthUnits === '%' ? 100 : 1000}
 					label={__("Width", "frontis-blocks")}
-					rangeValue={riveAnimationCanvasWidth}
+					rangeValue={riveAnimationContainerWidth}
 					onChangeHandler={(value) =>
-						setAttributes({ riveAnimationCanvasWidth: value })
+						setAttributes({ riveAnimationContainerWidth: value })
 					}
-					isRangeUnit={false}
+					rangeUnitHandler={(value) =>
+						setAttributes({ riveAnimationContainerWidthUnits: value })
+					}
 					deviceType={deviceType}
+					units={riveAnimationContainerWidthUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
 				<FB_Range
 					min={0}
-					max={2000}
+					max={riveAnimationContainerHeightUnits === '%' ? 100 : 1000}
 					label={__("Height", "frontis-blocks")}
-					rangeValue={riveAnimationCanvasHeight}
+					rangeValue={riveAnimationContainerHeight}
 					onChangeHandler={(value) =>
-						setAttributes({ riveAnimationCanvasHeight: value })
+						setAttributes({ riveAnimationContainerHeight: value })
 					}
-					isRangeUnit={false}
+					rangeUnitHandler={(value) =>
+						setAttributes({ riveAnimationContainerHeightUnits: value })
+					}
 					deviceType={deviceType}
+					units={riveAnimationContainerHeightUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
+				
+
 			</PanelBody>
 		</>
 	);

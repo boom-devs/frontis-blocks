@@ -19,7 +19,7 @@ import {
 	ColorPalette,
 } from "@wordpress/components";
 
-import { useState, useEffect, useMemo, memo } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 import {
 	OVERFLOW_OP,
 	BACKGROUND_TYPES,
@@ -50,7 +50,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		breadcrumbAlignment,
@@ -271,6 +271,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-breadcrumb-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 
 	const homeIconHandler = (IconName) => {
 		setAttributes({ homeIcon: IconName })
@@ -2641,4 +2650,3 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 }
-export default memo(Inspector);

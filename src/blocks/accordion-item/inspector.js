@@ -19,7 +19,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
-import { useEffect, useMemo, memo } from "@wordpress/element";
+import { useEffect, useMemo } from "@wordpress/element";
 import FB_Range from "../../components/range";
 import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
@@ -30,7 +30,7 @@ import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 
-const Inspector = ({ attributes, setAttributes }) => {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,
         parentBlockID,
@@ -89,6 +89,14 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     const titlePfIconHandler = (IconName) => {
         setAttributes({ titlePrefixIcon: IconName })
@@ -755,4 +763,4 @@ const Inspector = ({ attributes, setAttributes }) => {
     );
 };
 
-export default memo(Inspector);
+export default Inspector;

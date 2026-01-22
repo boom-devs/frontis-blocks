@@ -49,15 +49,8 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		sliderGlobalWraperClass,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "marquee-carousel-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const arrowsId = context["frontisBlocks:arrowsUniqueId"];
+	// console.log("Marque edit ", arrowsId);
 
 	useEffect(() => {
 		if (arrowsId && arrowsId !== attributes.arrowsUniqueId) {
@@ -254,9 +247,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
+				clientId={clientId}
 			/>
 			{renderSliderToolbarControls()}
-			<div {...blockProps} id={`block-${clientId}`}>
+			<div {...blockProps}>
 				<Swiper
 					{...settings}
 					onSwiper={(instance) => {

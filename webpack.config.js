@@ -8,9 +8,7 @@ const blocks = fs.readdirSync(blocksDir).filter((block) =>
 	fs.existsSync(path.join(blocksDir, block, 'view.js'))
 );
 
-const entry = {
-    'assets/css/global-editor': './src/assets/scss/backend/global-editor.scss',
-};
+const entry = {};
 blocks.forEach((block) => {
 	const blockPath = path.join(blocksDir, block);
 	if (fs.existsSync(path.join(blockPath, 'index.js'))) {
