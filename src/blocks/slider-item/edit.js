@@ -11,26 +11,26 @@ const Edit = (props) => {
     const { blockId } = attributes;
 
 
-    const parentBlocks = wp.blocks.getBlockTypes().filter(function (item) {
-        return !item.parent;
-    });
+    const parentBlocks = wp.blocks.getBlockTypes().filter( function ( item ) {
+		return ! item.parent;
+	} );
 
     const TEMPLATE = [
         [
             'frontis-blocks/container',
             {},
             [
-                ['frontis-blocks/testimonial']
+                [ 'frontis-blocks/testimonial' ]
             ]
         ]
     ];
 
     // Hide slider block.
-    const ALLOWED_BLOCKS = parentBlocks
-        .map((block) => block.name)
-        .filter(
-            (blockName) => ['frontis-blocks/slider',].indexOf(blockName) === -1
-        );
+	const ALLOWED_BLOCKS = parentBlocks
+    .map( ( block ) => block.name )
+    .filter(
+        ( blockName ) => [ 'frontis-blocks/slider', ].indexOf( blockName ) === -1
+    );
 
     const innerBlockOptions = {
         allowedBlocks: ALLOWED_BLOCKS,
@@ -51,7 +51,7 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            {/* <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} /> */}
             <div {...blockProps}>
                 <div {...innerBlocksProps} />
             </div>
