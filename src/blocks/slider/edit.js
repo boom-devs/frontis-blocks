@@ -14,10 +14,10 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import Inspector from './inspector';
 import { Swiper } from 'swiper/react';
 import { useDeviceType } from "@Config/displayType";
-import {
-    Navigation,
-    Pagination,
-    Autoplay,
+import { 
+    Navigation, 
+    Pagination, 
+    Autoplay, 
     Manipulation,
     Mousewheel,
     EffectFade,
@@ -56,7 +56,7 @@ const Edit = (props) => {
         slideItem,
         transitionSpeed,
         displayArrows,
-        displayDots,
+		displayDots,
         autoplay,
         autoplaySpeed,
         loop,
@@ -91,8 +91,8 @@ const Edit = (props) => {
         sliderGlobalWraperClass,
 
         sliderDesktopSwitcher,
-        sliderTabletSwitcher,
-        sliderMobileSwitcher,
+		sliderTabletSwitcher,
+		sliderMobileSwitcher,
     } = attributes;
 
     useEffect(() => {
@@ -106,29 +106,29 @@ const Edit = (props) => {
     const deviceType = useDeviceType();
 
     const swiperRef = useRef();
-    const sliderNavPrevRef = useRef();
-    const sliderNavNextRef = useRef();
+	const sliderNavPrevRef = useRef();
+	const sliderNavNextRef = useRef();
 
     const [swiperInstance, setSwiperInstance] = useState(null);
-    const { selectBlock } = useDispatch(blockEditorStore);
+	const { selectBlock } = useDispatch( blockEditorStore );
 
-    // A key to force re-mounting of <Swiper> when critical settings change
-    const [swiperKey, setSwiperKey] = useState(0);
+	// A key to force re-mounting of <Swiper> when critical settings change
+	const [swiperKey, setSwiperKey] = useState(0);
 
-    const { isListViewOpen, hasChildren } = useSelect((select) => {
-        const getStore = select('core/editor') || select('core/edit-widgets');
+    const { isListViewOpen, hasChildren } = useSelect( ( select ) => {
+		const getStore = select( 'core/editor' ) || select( 'core/edit-widgets' );
 
-        return {
-            isListViewOpen: getStore?.isListViewOpened ? getStore.isListViewOpened() : false,
-            hasChildren: 0 !== select('core/block-editor')?.getBlocks(clientId).length,
-        };
-    }, [clientId]);
+		return {
+			isListViewOpen: getStore?.isListViewOpened ? getStore.isListViewOpened() : false,
+			hasChildren: 0 !== select( 'core/block-editor' )?.getBlocks( clientId ).length,
+		};
+	}, [clientId] );
 
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
-    const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
-    const blockProps = useBlockProps({
-        className: `${blockId} ${hasChildrenClass} ${listViewClass} fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${deviceType.toLowerCase()} ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
-    });
+	const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
+	const blockProps = useBlockProps( {
+		className: `${ blockId } ${ hasChildrenClass } ${ listViewClass } fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${ deviceType.toLowerCase() } ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+	} );
 
 
 
@@ -140,17 +140,17 @@ const Edit = (props) => {
     ], [slideItem, slideContent]);
 
     const innerBlocksProps = useInnerBlocksProps(
-        {
-            className: `swiper-wrapper fb-swiper-wrapper`,
-            slot: 'container-start',
-        },
-        {
-            allowedBlocks: ALLOWED_BLOCKS,
-            template: getSliderTemplate,
-            renderAppender: false,
-            orientation: 'horizontal',
-        }
-    );
+		{
+			className: `swiper-wrapper fb-swiper-wrapper`,
+			slot: 'container-start',
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: getSliderTemplate,
+			renderAppender: false,
+			orientation: 'horizontal',
+		}
+	);
 
     // First, move settings into a useMemo to avoid unnecessary recalculations
     const settings = useMemo(() => ({
@@ -162,7 +162,7 @@ const Edit = (props) => {
         } : false,
         speed: transitionSpeed,
         loop: loop,
-        effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
 
         ...(sliderType === 'carousel' && {
             breakpoints: {
@@ -184,7 +184,7 @@ const Edit = (props) => {
             ? {
                 type: paginationType,
                 clickable: true,
-            }
+              }
             : false,
 
         ...(slideEffect === 'creative' && {
@@ -193,7 +193,7 @@ const Edit = (props) => {
                 next: { translate: ['100%', 0, 0] },
             },
         }),
-
+        
         allowTouchMove: allowTouchMove,
         mousewheel: enableMouseWheel,
 
@@ -202,7 +202,7 @@ const Edit = (props) => {
             onlyInViewport: true,
             pageUpDown: false,
         } : false,
-
+        
         onBeforeInit(swiperInst) {
             swiperRef.current = swiperInst;
             setSwiperInstance(swiperInst);
@@ -274,7 +274,7 @@ const Edit = (props) => {
             swiperInstance.params.speed = transitionSpeed;
             swiperInstance.params.loop = loop;
             swiperInstance.params.allowTouchMove = allowTouchMove;
-
+    
             // Handle autoplay settings
             if (autoplay) {
                 swiperInstance.params.autoplay = {
@@ -283,7 +283,7 @@ const Edit = (props) => {
                     stopOnLastSlide: stopOnLastSlide,
                     reverseDirection: reverseDirection,
                 };
-
+    
                 // Only start autoplay if we're not on the last slide when stopOnLastSlide is true
                 if (!stopOnLastSlide || (stopOnLastSlide && swiperInstance.activeIndex !== swiperInstance.slides.length - 1)) {
                     swiperInstance.autoplay.start();
@@ -303,10 +303,10 @@ const Edit = (props) => {
             } else if (swiperInstance.keyboard) {
                 swiperInstance.keyboard.disable();
             }
-
+    
             // Update the Swiper instance with new parameters
             swiperInstance.update();
-
+    
             // If loop setting changed, need to re-initialize
             if (swiperInstance.params.loop !== loop) {
                 swiperInstance.loopDestroy();
@@ -314,7 +314,7 @@ const Edit = (props) => {
                     swiperInstance.loopCreate();
                 }
             }
-
+    
             // Reset event listeners
             swiperInstance.off('reachEnd');
             if (stopOnLastSlide && !loop && autoplay) {
@@ -343,7 +343,7 @@ const Edit = (props) => {
     useEffect(() => {
         if (swiperInstance && autoplay && pauseOnHover) {
             const swiperEl = swiperInstance.el;
-
+            
             const handleMouseEnter = () => {
                 if (swiperInstance.autoplay.running) {
                     swiperInstance.autoplay.stop();
@@ -366,28 +366,24 @@ const Edit = (props) => {
         }
     }, [swiperInstance, autoplay, pauseOnHover, stopOnLastSlide]);
 
-    /** 
-     * Unlimited Updates (useEffect dependency): edit.js e ekta useEffect silo jar dependency silo [props]. React e props object protibar render e notun hoy (change na holeo react mone kore change hoyese). Tai useEffect ta bar bar run hos silo.
-     * Responsive mode e gele Gutenberg props update kore, r tokhoni oi loop ta infinite hoye jeto.
-     * Unnecessary Attribute Change: onSwiper event er moddhe setAttributes({ currentSlideIndex: ... }) call kora hos silo. currentSlideIndex attribute list eo nai. Ota bar bar call howar karone block ta bar bar re-render hos silo.
-    */
-    // useEffect(() => {
-    //     if (swiperInstance) {
-    //         swiperInstance.update();
-    //     }
-    // }, [props]);
+
+    useEffect( () => {
+		if ( swiperInstance ) {
+			swiperInstance.update();
+		}
+	}, [ props ] );
 
     /* Custom Icon */
     useEffect(() => {
         if (!swiperInstance || !displayArrows) return;
-
+    
         const prevEl = sliderNavPrevRef.current;
         const nextEl = sliderNavNextRef.current;
-
+    
         if (prevEl && nextEl && swiperInstance.navigation) {
             swiperInstance.params.navigation.prevEl = prevEl;
             swiperInstance.params.navigation.nextEl = nextEl;
-
+    
             setTimeout(() => {
                 // Check again in case swiperInstance.navigation was reloaded in the meantime
                 if (swiperInstance.navigation) {
@@ -411,52 +407,52 @@ const Edit = (props) => {
         sliderArrowsIconRightImageUrl
     ]);
 
-    useEffect(() => {
-        if (swiperInstance && swiperInstance.slides) {
-            const slidesCount = swiperInstance.slides.length;
+    useEffect( () => {
+		if ( swiperInstance && swiperInstance.slides ) {
+			const slidesCount = swiperInstance.slides.length;
 
-            // Slide to the slide index more than number of slides, this will reset slider UI.
-            swiperInstance.slideTo(slidesCount + 1, transitionSpeed, false);
+			// Slide to the slide index more than number of slides, this will reset slider UI.
+			swiperInstance.slideTo( slidesCount + 1, transitionSpeed, false );
 
-            setTimeout(() => {
-                // Reset Slider to first slide to avoid UI break.
-                swiperInstance.slideTo(0, 0, false);
-            }, 100);
+			setTimeout( () => {
+				// Reset Slider to first slide to avoid UI break.
+				swiperInstance.slideTo( 0, 0, false );
+			}, 100 );
 
-            const sliderBlocks = ['frontis-blocks/slider', 'frontis-blocks/slider-item'];
-            let hasSliderParent = false;
+			const sliderBlocks = [ 'frontis-blocks/slider', 'frontis-blocks/slider-item' ];
+			let hasSliderParent = false;
 
-            for (let index = 0; index < blockParents.length; index++) {
-                if (sliderBlocks.includes(blockParents[index].name)) {
-                    hasSliderParent = true;
-                    break;
-                }
-            }
+			for ( let index = 0; index < blockParents.length; index++ ) {
+				if ( sliderBlocks.includes( blockParents[ index ].name ) ) {
+					hasSliderParent = true;
+					break;
+				}
+			}
 
-            if (hasSliderParent) {
-                selectBlock(block.clientId);
-            }
-        }
-    }, [isListViewOpen]);
+			if ( hasSliderParent ) {
+				selectBlock( block.clientId );
+			}
+		}
+	}, [ isListViewOpen ] );
 
     const getBlockControls = () => {
-        return (
-            <BlockControls>
-                <ToolbarGroup>
-                    <ToolbarButton
-                        icon="insert"
-                        label={__('Add Slide', 'ultimate-addons-for-gutenberg')}
-                        onClick={() => {
-                            insertBlock(createBlock('frontis-blocks/slider-item'), block.innerBlocks.length, block.clientId);
+		return (
+			<BlockControls>
+				<ToolbarGroup>
+					<ToolbarButton
+						icon="insert"
+						label={ __( 'Add Slide', 'ultimate-addons-for-gutenberg' ) }
+						onClick={ () => {
+							insertBlock( createBlock( 'frontis-blocks/slider-item' ), block.innerBlocks.length, block.clientId );
 
-                            setAttributes({ slideItem: attributes.slideItem + 1 });
-                            swiperInstance.activeIndex = attributes.slideItem + 1;
-                        }}
-                    />
-                </ToolbarGroup>
-            </BlockControls>
-        );
-    };
+							setAttributes( { slideItem: attributes.slideItem + 1 } );
+							swiperInstance.activeIndex = attributes.slideItem + 1;
+						} }
+					/>
+				</ToolbarGroup>
+			</BlockControls>
+		);
+	};
 
     return (
         <>
@@ -485,17 +481,17 @@ const Edit = (props) => {
                     navigation={
                         displayArrows
                             ? {
-                                nextEl: '#block-' + clientId + ' .swiper-button-next',
-                                prevEl: '#block-' + clientId + ' .swiper-button-prev',
+                                    nextEl: '#block-' + clientId + ' .swiper-button-next',
+                                    prevEl: '#block-' + clientId + ' .swiper-button-prev',
                             }
                             : false
                     }
                     onSwiper={(swiper) => {
                         setSwiperInstance(swiper);
                         swiper.on('slideChange', () => {
-                            // setAttributes({ currentSlideIndex: swiper.activeIndex }); 
+                            setAttributes({ currentSlideIndex: swiper.activeIndex });
                         });
-
+                        
                         // Add reach end handler for stopOnLastSlide
                         swiper.on('reachEnd', () => {
                             if (stopOnLastSlide && !loop && autoplay) {
@@ -511,56 +507,56 @@ const Edit = (props) => {
                 >
                     <div {...innerBlocksProps} />
 
-                    {displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
+                    { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (
                         <>
                             <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                                <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'></div>
-                                <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'></div>
+                                <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'></div>
+                                <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'></div>
                             </div>
                         </>
-                    )}
+                    ) }
 
                     {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                         <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
-                            <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
                         </div>
                     )}
 
                     {sliderArrowsIconSwitcher && sliderArrowPositionType === 'inside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
                         <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>
                                 <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
                             </div>
-                            <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>
                                 <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
                             </div>
                         </div>
                     )}
                 </Swiper>
-
-                {displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
+                
+                { displayArrows && !sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (
                     <>
                         <div className={`fb-slider-default-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                            <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'></div>
-                            <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'></div>
+                            <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'></div>
+                            <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'></div>
                         </div>
                     </>
-                )}
+                ) }
 
                 {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'icon' || sliderArrowsIconRightAlign === 'icon') && (
                     <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
-                        <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>{renderSVG(sliderArrowsIconLeft)}</div>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>{renderSVG(sliderArrowsIconRight)}</div>
                     </div>
                 )}
 
                 {sliderArrowsIconSwitcher && sliderArrowPositionType === 'outside' && (sliderArrowsIconLeftAlign === 'image' || sliderArrowsIconRightAlign === 'image') && (sliderArrowsIconLeftImageUrl || sliderArrowsIconRightImageUrl) && (
                     <div className={`fb-slider-custom-icon-wrapper ${sliderArrowPositionType} ${sliderArrowPosition}`}>
-                        <div className="swiper-button-prev" ref={sliderNavPrevRef} aria-label="Previous slide" title='Previous slide'>
+                        <div className="swiper-button-prev" ref={ sliderNavPrevRef } aria-label="Previous slide" title='Previous slide'>
                             <img src={sliderArrowsIconLeftImageUrl} alt={sliderArrowsIconLeftImageAlt} />
                         </div>
-                        <div className="swiper-button-next" ref={sliderNavNextRef} aria-label="Next slide" title='Next slide'>
+                        <div className="swiper-button-next" ref={ sliderNavNextRef } aria-label="Next slide" title='Next slide'>
                             <img src={sliderArrowsIconRightImageUrl} alt={sliderArrowsIconRightImageAlt} />
                         </div>
                     </div>
