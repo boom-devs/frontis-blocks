@@ -474,7 +474,7 @@ class Admin
             'methods' => 'GET',
             'callback' => [$this, 'proxy_image'],
             'permission_callback' => function () {
-                return current_user_can('edit_posts');
+                return current_user_can('manage_options');
             },
         ]);
 
@@ -562,8 +562,15 @@ class Admin
     function proxy_image($request)
     {
         $image_url = $request->get_param('url');
-        if (!$image_url || !filter_var($image_url, FILTER_VALIDATE_URL)) {
-            return new WP_Error('invalid_url', 'Invalid or missing URL', ['status' => 400]);
+        if (!$image_url) {
+            return new WP_Error('invalid_url', 'Missing URL', ['status' => 400]);
+        }
+
+        $image_url = urldecode($image_url);
+        $parsed_url = parse_url($image_url);
+
+        if (!$parsed_url || !isset($parsed_url['scheme']) || !in_array($parsed_url['scheme'], ['http', 'https'], true)) {
+             return new WP_Error('invalid_url', 'Invalid URL scheme', ['status' => 400]);
         }
 
         $response = wp_safe_remote_get($image_url);
@@ -939,9 +946,40 @@ class Admin
         }
 
         if ($is_proxy && $remote_url) {
+            // Security: Only allow admins to use this proxy
+            if (!current_user_can('manage_options')) {
+                wp_die('Unauthorized', 403);
+            }
+
             $remote_url = urldecode($remote_url);
 
-            $response = wp_remote_get($remote_url);
+            // Security: Validate URL format and scheme
+            $parsed_url = parse_url($remote_url);
+            if (!$parsed_url || !isset($parsed_url['scheme']) || !in_array($parsed_url['scheme'], ['http', 'https'], true)) {
+                wp_die('Invalid URL scheme', 400);
+            }
+
+            // Security: Strict Domain Allowlist
+            $allowed_hosts = [];
+            if (defined('PORTAL_API')) {
+                $allowed_hosts[] = parse_url(PORTAL_API, PHP_URL_HOST);
+            }
+            if (defined('WORDPRESS_SYNC_API')) {
+                $allowed_hosts[] = parse_url(WORDPRESS_SYNC_API, PHP_URL_HOST);
+            }
+
+            // Helper to get host from URL even if scheme is missing or slight differences
+            $remote_host = $parsed_url['host'] ?? '';
+
+            if (!in_array($remote_host, $allowed_hosts, true)) {
+                 // Fallback or Strict? 
+                 // If the plugin ONLY needs these two, strict is better.
+                 wp_die('Domain not allowed', 403);
+            }
+
+            // Security: Use wp_safe_remote_get to prevent SSRF to private IPs
+            $response = wp_safe_remote_get($remote_url);
+
             if (is_wp_error($response)) {
                 wp_die('Proxy request failed: ' . esc_html($response->get_error_message()));
             }

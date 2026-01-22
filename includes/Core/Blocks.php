@@ -284,6 +284,7 @@ class Blocks
 			array(
 				'post_type' => 'wp_template_part',
 				'post_status' => 'publish',
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for theme template parts
 				'tax_query' => array(
 					array(
 						'taxonomy' => 'wp_theme',

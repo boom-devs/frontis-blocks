@@ -149,6 +149,7 @@ if (!function_exists('fb_get_term_owner')) {
             'posts_per_page' => 1,
             'orderby' => 'date',
             'order' => 'ASC',
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for term owner detection
             'tax_query' => [
                 [
                     'taxonomy' => $taxonomy,

@@ -248,7 +248,13 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.1.7 – 09 January 2026 =
+= 1.1.7 – 22 January 2026 =
+- **Security Fixes**
+- **Fixed Unauthenticated SSRF**: Secured `template_proxy` and `/proxy-image` endpoints. Added strict `manage_options` capability checks and implemented `wp_safe_remote_get()` to block private network access (CVE-2026-0807).
+- **Implemented Domain Allowlist**: Restricted proxy requests to only trusted domains (`PORTAL_API` and `WORDPRESS_SYNC_API`) to prevent arbitrary URL access.
+- **Improved Database Security**: Updated SQL queries in `Settings.php` to use `$wpdb->prepare()` for all variable inputs.
+- **Enhanced Sanitization**: Enabled strict type-based sanitization for all option updates and added `wp_unslash()` for JSON import handling.
+
 - **New Block**
 - Introduced Off-Canvas Menu block with toggleable hamburger icon, customizable menu positions (left/right), and responsive controls for a modern navigation experience.
 
