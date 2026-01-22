@@ -95,6 +95,14 @@ const Edit = (props) => {
         sliderMobileSwitcher,
     } = attributes;
 
+    useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-slider-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
     const deviceType = useDeviceType();
 
     const swiperRef = useRef();
@@ -452,7 +460,7 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            <Inspector attributes={attributes} setAttributes={setAttributes} />
             {getBlockControls()}
 
             <div {...blockProps}>

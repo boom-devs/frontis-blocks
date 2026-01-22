@@ -39,7 +39,6 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -56,7 +55,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
 	const {
 		blockID,
 		riveAnimationJsonTypeSwitcher,
@@ -162,14 +161,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -467,12 +458,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${riveAnimationGlobalBorderRadiusMobile?.top}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.right}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.bottom}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.left}${riveAnimationGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/* Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont();
-	}, []);
-	/* End Load Google Fonts */
-
+	/** Rive Animation Style */
 	const riveAnimationStyle = useMemo(
 		() => `
 			.${blockID}.fb-rive-animation-main-wrapper {

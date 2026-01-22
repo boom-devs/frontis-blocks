@@ -10,7 +10,7 @@ import { TEXT_ALIGN, PRESETS } from './constants/constants';
 import { useDeviceType } from '@Config/displayType';
 import generateSvgIcon from "@Utils/generateSvgIcon";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
     const { blockID, metaIconFrontEnd, metaIcon, postMetaterms } = attributes;
     const deviceType = useDeviceType();
 
@@ -31,13 +31,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 		setAttributes({ postMetaterms: updatedItems });
 	}, []); // run once on block mount
-
-    // Set blockID based on clientId
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({ blockID: "fb-post-meta-" + clientId.slice(0, 8) });
-        }
-    }, [clientId]);
 
     // Drag & drop sorting
     const handleDragEnd = (event) => {

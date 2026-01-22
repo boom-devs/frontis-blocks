@@ -7,7 +7,6 @@ import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 // Global set to track loaded fonts across all block instances

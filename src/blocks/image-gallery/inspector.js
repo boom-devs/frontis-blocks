@@ -35,7 +35,6 @@ import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_AlignmentControl from '../../components/alignment-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
