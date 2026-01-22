@@ -966,6 +966,12 @@ const Inspector = ({ attributes, setAttributes }) => {
     const globalMobileBorderRadiusWidth = `${megaMenuGlobalBorderRadiusMobile?.top}${megaMenuGlobalBorderRadiusUnits?.Mobile} ${megaMenuGlobalBorderRadiusMobile?.right}${megaMenuGlobalBorderRadiusUnits?.Mobile} ${megaMenuGlobalBorderRadiusMobile?.bottom}${megaMenuGlobalBorderRadiusUnits?.Mobile} ${megaMenuGlobalBorderRadiusMobile?.left}${megaMenuGlobalBorderRadiusUnits?.Mobile}`;
     /** End Border Radius */
 
+    useEffect(() => {
+        if (megaMenuFontFamily !== 'Default') {
+            loadGoogleFont(megaMenuFontFamily);
+        }
+    }, [megaMenuFontFamily]);
+
     /**
      * Get background normal styles
      */
