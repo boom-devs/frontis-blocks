@@ -21,6 +21,7 @@ import {
 	READ_MORE_ICON_ALIGN,
 	BORDER_STYLES,
 } from "@Constants/fbConstants";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from "@Components/InspectorControls";
@@ -484,6 +485,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const deviceType = useDeviceType();
 
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-post-category-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
 	};
@@ -735,6 +744,30 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [taxonomyType, validateTaxonomy]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (postTitleFontFamily !== "Default") {
+			loadGoogleFont(postTitleFontFamily);
+		}
+		if (postDescriptionFontFamily !== "Default") {
+			loadGoogleFont(postDescriptionFontFamily);
+		}
+
+		if (postCountFontFamily !== "Default") {
+			loadGoogleFont(postCountFontFamily);
+		}
+
+		if (buttonFontFamily !== "Default") {
+			loadGoogleFont(buttonFontFamily);
+		}
+	}, [
+		postTitleFontFamily,
+		postDescriptionFontFamily,
+		postCountFontFamily,
+		buttonFontFamily,
+	]);
+	/** End Load Google Font */
 
 	/** Start Post Author Item Margin */
 	const handlePostAuthorMarginUnitChange = (event, position) => {

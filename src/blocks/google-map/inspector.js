@@ -36,7 +36,7 @@ import {
     BORDER_STYLES,
 } from '@Constants/fbConstants';
 
-import { useState, useEffect, useMemo, memo } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -62,7 +62,7 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector ({ attributes, setAttributes,  clientId}) {
     const {
         blockId,
         blockStyle,
@@ -129,6 +129,16 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType= useDeviceType();
+
+
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-google-map-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     /** Start Google Map Padding */
     const googleMapPaddingUnitsChange = (event, position) => {
@@ -860,4 +870,3 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-export default memo(Inspector);

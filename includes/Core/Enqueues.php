@@ -197,11 +197,6 @@ class Enqueues
         wp_enqueue_script('frontis-responsive-css', FB_PLUGIN_URL . 'assets/js/backend/responsive-css.js', [], FB_VERSION, true);
         wp_register_style('frontis-swiper-style', FB_PLUGIN_URL . 'assets/css/backend/swiper/swiper-bundle.min.css', [], FB_VERSION);
         wp_enqueue_script('frontis-swiper-script', FB_PLUGIN_URL . 'assets/js/backend/swiper/swiper-bundle.min.js', [], FB_VERSION, true);
-
-        // Enqueue global editor styles to prevent FOUC
-        if (file_exists(FB_PLUGIN_PATH . 'build/assets/css/global-editor.css')) {
-            wp_enqueue_style('frontis-global-editor-style', FB_PLUGIN_URL . 'build/assets/css/global-editor.css', ['wp-edit-blocks'], FB_VERSION);
-        }
     }
     public function load_google_font()
     {

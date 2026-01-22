@@ -1,14 +1,13 @@
+// Edit.js
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 import Inspector from "./inspector";
 
-const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -79,74 +78,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         tagLinkSwitcher,
         authorLinkSwitcher,
         titleLinkSwitcher,
-
-        postTitleFontFamily, 
-        postDescriptionFontFamily, 
-        postCategoryFontFamily, 
-        postTagFontFamily, 
-        postAuthorFontFamily, 
-        postDateFontFamily, 
-        buttonFontFamily,
     } = attributes;
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-post-grid-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    /** Start Load Google Font */
-    useEffect(() => {
-        if (postTitleFontFamily && !loadedFonts.has(postTitleFontFamily)) {
-            loadGoogleFont(postTitleFontFamily);
-            loadedFonts.add(postTitleFontFamily);
-        }
-    }, [postTitleFontFamily]);
-
-    useEffect(() => {
-        if (postDescriptionFontFamily && !loadedFonts.has(postDescriptionFontFamily)) {
-            loadGoogleFont(postDescriptionFontFamily);
-            loadedFonts.add(postDescriptionFontFamily);
-        }
-    }, [postDescriptionFontFamily]);
-
-    useEffect(() => {
-        if (postCategoryFontFamily && !loadedFonts.has(postCategoryFontFamily)) {
-            loadGoogleFont(postCategoryFontFamily);
-            loadedFonts.add(postCategoryFontFamily);
-        }
-    }, [postCategoryFontFamily]);
-
-    useEffect(() => {
-        if (postTagFontFamily && !loadedFonts.has(postTagFontFamily)) {
-            loadGoogleFont(postTagFontFamily);
-            loadedFonts.add(postTagFontFamily);
-        }
-    }, [postTagFontFamily]);
-
-    useEffect(() => {
-        if (postAuthorFontFamily && !loadedFonts.has(postAuthorFontFamily)) {
-            loadGoogleFont(postAuthorFontFamily);
-            loadedFonts.add(postAuthorFontFamily);
-        }
-    }, [postAuthorFontFamily]);
-
-    useEffect(() => {
-        if (postDateFontFamily && !loadedFonts.has(postDateFontFamily)) {
-            loadGoogleFont(postDateFontFamily);
-            loadedFonts.add(postDateFontFamily);
-        }
-    }, [postDateFontFamily]);
-
-    useEffect(() => {
-        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
-            loadGoogleFont(buttonFontFamily);
-            loadedFonts.add(buttonFontFamily);
-        }
-    }, [buttonFontFamily]);
-    /** End Load Google Font */
 
     const [allPosts, setAllPosts] = useState([]);
     const [filterCatId, setFilterCatId] = useState(0);
@@ -159,6 +91,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
     }
+
 
     /**
      * Get taxonomy data
@@ -358,6 +291,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             {postLists ? (

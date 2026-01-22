@@ -41,6 +41,7 @@ import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -52,7 +53,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
         blockId,
 		// deviceType,
@@ -837,10 +838,20 @@ export default function Inspector({ attributes, setAttributes }) {
 	} = attributes;
 
     const deviceType= useDeviceType();
+    
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-post-grid-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
 
     useEffect(() => {
         setAttributes({ postPerPage: postPerPage === 0 ? undefined : postPerPage });
     }, [postPerPage]);
+
 
     /** Start post type */
     const postTypes = FrontisBlocksData.post_types;
@@ -1058,6 +1069,34 @@ export default function Inspector({ attributes, setAttributes }) {
         setAttributes({ orderBy: option.value });
     };
     /** End order by */
+
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (postTitleFontFamily !== 'Default') {
+            loadGoogleFont(postTitleFontFamily);
+        }
+        if (postDescriptionFontFamily !== 'Default') {
+            loadGoogleFont(postDescriptionFontFamily);
+        }
+        if (postCategoryFontFamily !== 'Default') {
+            loadGoogleFont(postCategoryFontFamily);
+        }
+        if (postTagFontFamily !== 'Default') {
+            loadGoogleFont(postTagFontFamily);
+        }
+        if (postAuthorFontFamily !== 'Default') {
+            loadGoogleFont(postAuthorFontFamily);
+        }
+        if (postDateFontFamily !== 'Default') {
+            loadGoogleFont(postDateFontFamily);
+        }
+
+        if (buttonFontFamily !== 'Default') {
+            loadGoogleFont(buttonFontFamily);
+        }
+    }, [postTitleFontFamily, postDescriptionFontFamily, postCategoryFontFamily, postTagFontFamily, postAuthorFontFamily, postDateFontFamily, buttonFontFamily]);
+    /** End Load Google Font */
 
     /** Start Post Grid Padding */
     const handlePostGridPaddingUnitChange = ( event, position ) => {
