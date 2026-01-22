@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -43,7 +43,7 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -2596,3 +2596,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

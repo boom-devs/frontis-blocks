@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useMemo, useEffect } from "@wordpress/element";
+import { useMemo, memo, useEffect } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -27,7 +27,7 @@ import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
 import FB_BoxShadowControl from "@Components/box-shadow";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockId,
 		/** Start General Settings */
@@ -1721,3 +1721,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

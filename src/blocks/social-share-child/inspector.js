@@ -17,7 +17,7 @@ import {
     BACKGROUND_TYPES,
     OVERFLOW_OP
 } from '@Constants/fbConstants';
-import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useEffect, useState, useMemo, memo } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
@@ -36,7 +36,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,
         socialMediaType,
@@ -1313,3 +1313,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

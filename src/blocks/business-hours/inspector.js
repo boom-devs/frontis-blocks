@@ -13,7 +13,7 @@ import {
     ButtonGroup,
 } from '@wordpress/components';
 
-import { useEffect, useState, useMemo, useCallback } from '@wordpress/element';
+import { useEffect, useState, useMemo, memo, useCallback } from '@wordpress/element';
 import { TIMEZONE, WEEKENDDAY, timeFormatOptions, monthOptions, BORDER_STYLES, OVERFLOW_OP, BACKGROUND_TYPES } from '@Constants/fbConstants';
 import FB_VisibilityControl from '@Components/visibility-control';
 import Select2 from "react-select";
@@ -38,7 +38,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
         countries,
@@ -5146,3 +5146,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
 	);
 }
+export default memo(Inspector);

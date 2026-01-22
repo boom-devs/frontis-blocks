@@ -4720,5 +4720,4 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-
 export default memo(Inspector);

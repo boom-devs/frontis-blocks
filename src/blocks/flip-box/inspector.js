@@ -41,7 +41,7 @@ import {
 	FLIP_ANIMATION
 } from "./constants/constants";
 
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -69,7 +69,8 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		flipBoxPresetStyle,
@@ -9327,3 +9328,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

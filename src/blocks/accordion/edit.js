@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InnerBlocks, useInnerBlocksProps, RichText } from '@wordpress/block-editor';
 import { Button } from '@wordpress/components';
-import { useEffect, useMemo, useRef, memo } from "@wordpress/element";
+import { useEffect, useMemo, useRef } from "@wordpress/element";
 import { select, dispatch } from "@wordpress/data";
 import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
@@ -13,7 +13,7 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
 
 
-function Edit({ attributes, setAttributes, clientId, isSelected }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
     const {
         blockID,
@@ -154,5 +154,3 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
         </>
     );
 }
-
-export default memo(Edit);

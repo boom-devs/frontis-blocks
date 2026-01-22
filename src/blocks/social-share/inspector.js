@@ -19,7 +19,7 @@ import {
     OVERFLOW_OP
 } from '@Constants/fbConstants';
 
-import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useEffect, useState, useMemo, memo } from '@wordpress/element';
 import FB_Range from '@Components/range';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_Spacing from '@Components/spacing';
@@ -37,7 +37,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,
         layoutType,
@@ -1110,3 +1110,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

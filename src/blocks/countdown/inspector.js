@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	BaseControl
 } from '@wordpress/components';
-import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useEffect, useState, useMemo, memo } from '@wordpress/element';
 
 import {
 	BORDER_STYLES,
@@ -45,7 +45,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		countDownPresetStyle,
@@ -5104,3 +5104,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

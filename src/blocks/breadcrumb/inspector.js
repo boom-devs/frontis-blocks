@@ -19,7 +19,7 @@ import {
 	ColorPalette,
 } from "@wordpress/components";
 
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import {
 	OVERFLOW_OP,
 	BACKGROUND_TYPES,
@@ -50,7 +50,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		breadcrumbAlignment,
@@ -2650,3 +2650,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

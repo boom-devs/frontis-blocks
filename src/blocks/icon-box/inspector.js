@@ -37,7 +37,7 @@ import {
 	OVERFLOW_OP
 } from "./constants/constants";
 
-import { useState, createRef, useEffect, useMemo } from "@wordpress/element";
+import { useState, createRef, useEffect, useMemo, memo } from "@wordpress/element";
 
 
 import FBIconPicker from "../../components/icon-picker";
@@ -66,7 +66,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		iconBoxPresetStyle,
@@ -5199,3 +5199,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

@@ -16,7 +16,7 @@ import {
 	Dropdown
 } from '@wordpress/components';
 import Select2 from "react-select";
-import { useEffect, useState, useMemo } from '@wordpress/element';
+import { useEffect, useState, useMemo, memo } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
 import { store as editorStore } from '@wordpress/editor';
@@ -53,7 +53,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		blockStyle,
@@ -4573,3 +4573,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

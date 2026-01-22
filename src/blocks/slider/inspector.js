@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 import FB_SwitcherControl from '@Components/switcher-control';
@@ -37,7 +37,7 @@ import {
     ARROW_ICON_ALIGN,
 } from "./constants/constants";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         sliderItems,
@@ -3163,3 +3163,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

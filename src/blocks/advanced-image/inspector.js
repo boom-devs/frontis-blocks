@@ -30,7 +30,7 @@ import {
 
 import Select2 from "react-select";
 import { useSelect } from "@wordpress/data";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 
 import FB_BackgroundColorControl from "@Components/background-color-control";
@@ -57,7 +57,7 @@ import getProDynamicButton from '@Utils/getProDynamicButton';
 import "./editor.scss";
 import DynamicImageSourceControl from '@Components/dynamic-image-source-control';
 
-export default function Inspector({ attributes, setAttributes, clientId, onSelectImage }) {
+const Inspector = ({ attributes, setAttributes, clientId, onSelectImage }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -2005,3 +2005,5 @@ export default function Inspector({ attributes, setAttributes, clientId, onSelec
 		</>
 	);
 }
+
+export default memo(Inspector);
