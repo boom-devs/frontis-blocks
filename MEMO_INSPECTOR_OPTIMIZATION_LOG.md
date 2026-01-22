@@ -7,7 +7,6 @@ The following block inspector components (`inspector.js`) have been optimized wi
 - [x] Accordion
 - [x] Accordion Item
 - [x] Advanced Button
-- [x] Call to Action
 - [x] Advanced Heading
 - [x] Advanced Image
 - [x] Advanced Megamenu
