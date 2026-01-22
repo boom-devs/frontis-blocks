@@ -452,8 +452,6 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
 
     } = attributes;
 
-
-
     const deviceType = useDeviceType();
 
     // Mapping for tab title alignment

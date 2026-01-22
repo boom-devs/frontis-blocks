@@ -3,7 +3,7 @@ import {
     useBlockProps,
     InnerBlocks,
 } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import Inspector from './inspector';
 import './editor.scss';
@@ -18,6 +18,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialShareGlobalWraperClass,
         socialShareGlobalWraperID
     } = attributes;
+
+    // Generate unique block ID
+    useEffect(() => {
+        if (clientId && typeof clientId === "string") {
+            setAttributes({
+                blockID: "fb-social-share-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     const blockProps = useBlockProps({
         className: `frontis-block fb-social-share ${blockID} ${socialShareDesktopSwitcher && 'fb-desktop-responsive'} ${socialShareTabletSwitcher && 'fb-tablet-responsive'} ${socialShareMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -58,7 +67,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <div className={`social-share-parent-container ${socialShareGlobalWraperClass}`} id={socialShareGlobalWraperID} ref={panelRef}>

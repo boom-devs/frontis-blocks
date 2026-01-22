@@ -32,6 +32,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationImageAlt
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const deviceType = useDeviceType();
 
 	const blockProps = useBlockProps({
@@ -190,7 +198,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Inspector 
+				attributes={attributes}
+				setAttributes={setAttributes}
+			/>
 
 			<BlockControls>
 				<ToolbarGroup>

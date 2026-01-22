@@ -39,7 +39,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         tabDescriptionFontFamily,
 	} = attributes;
 
-	    useEffect(() => {
+	useEffect(() => {
         if (clientId && typeof clientId === 'string' && !blockId) {
             setAttributes({
                 blockId: "fb-tabs-" + clientId.slice(0, 8),

@@ -37,7 +37,7 @@ import {
     ARROW_ICON_ALIGN,
 } from "./constants/constants";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+export default function Inspector({ attributes, setAttributes }) {
     const {
         blockId,
         sliderItems,
@@ -297,14 +297,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderVRBottomOffsetUnits,
     } = attributes;
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-slider-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
     const sliderArrowsIconLeftHandler = (IconName) => {
 		setAttributes({sliderArrowsIconLeft: IconName})

@@ -130,14 +130,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         
     } = attributes;
 
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "marquee-carousel-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
     const deviceType = useDeviceType();
 
     /** Start slide padding */
