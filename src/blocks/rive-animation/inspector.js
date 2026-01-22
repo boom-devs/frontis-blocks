@@ -55,7 +55,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		riveAnimationJsonTypeSwitcher,
