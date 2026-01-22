@@ -4,7 +4,7 @@
 import { __ } from "@wordpress/i18n";
 import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { useRef, useEffect, useMemo } from "@wordpress/element";
+import { useRef, memo, useEffect, useMemo } from "@wordpress/element";
 import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -47,14 +47,6 @@ const Edit = (props) => {
 
     } = attributes;
 
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId, blockID]);
 
     useEffect(() => {
         setAttributes({
@@ -225,4 +217,4 @@ const Edit = (props) => {
     );
 }
 
-export default Edit;
+export default memo(Edit);

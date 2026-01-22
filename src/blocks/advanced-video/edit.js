@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEffect, useRef, useMemo } from '@wordpress/element';
+import { useRef, useMemo } from '@wordpress/element';
 import ReactPlayer from "react-player";
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -31,14 +31,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         advancedVideoMobileSwitcher,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-advanced-video-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
     const blockProps = useBlockProps({
         className: `fb-advanced-video-main-wrapper ${blockID} ${advancedVideoDesktopSwitcher && 'fb-desktop-responsive'} ${advancedVideoTabletSwitcher && 'fb-tablet-responsive'} ${advancedVideoMobileSwitcher && 'fb-mobile-responsive'}`,
     });
@@ -60,6 +52,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             <div {...blockProps}>

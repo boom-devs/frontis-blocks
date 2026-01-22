@@ -96,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 buttons.forEach(button => {
                     button.addEventListener("click", function() {
                         setTimeout(() => {
+                            console.log('Device button clicked');
 
                             // Select all iframes inside Gutenberg
                             const iframes = document.querySelectorAll('body.block-editor-page iframe');

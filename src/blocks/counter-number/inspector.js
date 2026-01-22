@@ -27,7 +27,7 @@ import {
     PRESETS
 } from "./constants/constants";
 
-import { useEffect, useRef, useState, useMemo, memo } from '@wordpress/element';
+import { useEffect, useRef, useState, useMemo } from '@wordpress/element';
 import './editor.scss';
 import { mediaType, BORDER_STYLES, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
@@ -51,7 +51,7 @@ import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-cont
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         counterAlignment,
@@ -741,6 +741,15 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </svg>`,
         },
     ];
+
+    // Generate unique block ID if not set
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "counter-number-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     // Icon media remove handler
     const removeCounterMedia = () => {
@@ -2829,4 +2838,3 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-export default memo(Inspector);

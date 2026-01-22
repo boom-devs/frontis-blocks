@@ -8,6 +8,7 @@ import {
     ToggleControl,
 } from "@wordpress/components";
 import { OVERFLOW_OP, BORDER_STYLES } from "@Constants/fbConstants";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
@@ -25,7 +26,7 @@ import FB_InputControl from "@Components/input-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_VisibilityControl from "@Components/visibility-control";
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         isLink,
@@ -142,6 +143,20 @@ export default function Inspector({ attributes, setAttributes }) {
     } = attributes;
 
     const deviceType = useDeviceType();
+
+    useEffect(() => {
+        if (clientId && !blockId) {
+            setAttributes({ blockId: "fb-post-title-" + clientId.slice(0, 8) });
+        }
+    }, [clientId]);
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (postTitleFontFamily !== "Default") {
+            loadGoogleFont(postTitleFontFamily);
+        }
+    }, [postTitleFontFamily]);
+    /** End Load Google Font */
 
     /* Start Global Padding */
     const handleGlobalPaddingUnitChange = (event, position) => {

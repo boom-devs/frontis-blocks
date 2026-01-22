@@ -36,6 +36,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -46,7 +47,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         // deviceType,
@@ -424,6 +425,14 @@ export default function Inspector({ attributes, setAttributes }) {
     } = attributes;
 
 	const deviceType= useDeviceType();
+    
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-fluent-form-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     /** Start  Label Margin */
     const handleLabelMarginUnitChange = ( event, position ) => {
@@ -2409,6 +2418,28 @@ export default function Inspector({ attributes, setAttributes }) {
     const BorderRadiusTabletWidth = `${fluentFormGlobalBorderRadiusTablet?.top}${fluentFormGlobalBorderRadiusUnits?.Tablet} ${fluentFormGlobalBorderRadiusTablet?.right}${fluentFormGlobalBorderRadiusUnits?.Tablet} ${fluentFormGlobalBorderRadiusTablet?.bottom}${fluentFormGlobalBorderRadiusUnits?.Tablet} ${fluentFormGlobalBorderRadiusTablet?.left}${fluentFormGlobalBorderRadiusUnits?.Tablet}`;
     const BorderRadiusMobileWidth = `${fluentFormGlobalBorderRadiusMobile?.top}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.right}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.bottom}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.left}${fluentFormGlobalBorderRadiusUnits?.Mobile}`;
     /** End Border Radius */
+
+
+    /* Start Load Google Fonts */
+    useEffect(() => {
+        loadGoogleFont(fluentFormLabelFontFamily);
+        loadGoogleFont(fluentFormInputFontFamily);
+        loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
+        loadGoogleFont(fluentFormSectionBreakDescFontFamily);
+        loadGoogleFont(fluentFormHtmlFontFamily);
+        loadGoogleFont(fluentFormSubmitFontFamily);
+        loadGoogleFont(fluentFormSuccessFontFamily);
+        loadGoogleFont(fluentFormErrorFontFamily);
+    }, [fluentFormLabelFontFamily,
+         fluentFormInputFontFamily, 
+         fluentFormSectionBreakTitleFontFamily, 
+         fluentFormSectionBreakDescFontFamily,
+         fluentFormHtmlFontFamily, 
+         fluentFormSubmitFontFamily, 
+         fluentFormSuccessFontFamily, 
+         fluentFormErrorFontFamily] 
+    );
+    /* End Load Google Fonts */
 
     const allBlockStyle = useMemo(() => `
 

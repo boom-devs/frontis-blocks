@@ -37,6 +37,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterMobileSwitcher,
 	} = attributes;
 
+	const counterRef = useRef(null);
+	const observerRef = useRef(null);
+	const hasCounted = useRef(false);
+
+
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
@@ -45,9 +50,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [clientId]);
 
-	const counterRef = useRef(null);
-	const observerRef = useRef(null);
-	const hasCounted = useRef(false);
 
 	// Set up Intersection Observer and animation in the editor
 	const animateCounter = () => {

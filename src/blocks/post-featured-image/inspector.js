@@ -27,7 +27,7 @@ import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
 import FB_BoxShadowControl from "@Components/box-shadow";
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 		/** Start General Settings */
@@ -142,6 +142,14 @@ export default function Inspector({ attributes, setAttributes }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && !blockId) {
+			setAttributes({
+				blockId: "fb-post-featured-image-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	/** Start Image Border */
 	const handleImageBorderUnitChange = (event, position) => {

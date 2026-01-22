@@ -1,13 +1,13 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { PanelBody, TabPanel, Button } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
 import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockId,
         sliderItems,
@@ -65,4 +65,3 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         </>
     );
 }
-export default memo(Inspector);

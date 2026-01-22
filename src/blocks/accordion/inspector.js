@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { select, dispatch } from "@wordpress/data";
@@ -43,7 +43,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         blockStyle,
@@ -353,6 +353,45 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType= useDeviceType();
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-accordion-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    useEffect(() => {
+        const parentBlocks = select("core/block-editor").getBlocksByClientId(
+            clientId
+        )[0];
+
+        const innerBlocks = parentBlocks?.innerBlocks;
+
+        const { updateBlockAttributes } = dispatch("core/block-editor");
+
+        if (innerBlocks) {
+            innerBlocks.length, (n) => {
+                updateBlockAttributes(innerBlocks[n].clientId, {
+                    inheritedAccordionType: accordionType,
+                    inheritedDisplayIcon: displayIcon,
+                    inheritedTabIcon: tabIcon,
+                    inheritedExpandedIcon: expandedIcon,
+                    inheritedTagName: tagName,
+                    faqSchema: faqSchema,
+                });
+            };
+        }
+    }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
+
+
+     /** Start load font */
+     useEffect(() => {
+        loadGoogleFont(titleFontFamily);
+    }, [titleFontFamily]);
+    /** End load font */
+
 
     /** Start Accordions Gap */
     const accordionItemGapHandler = (value) => {
@@ -3010,4 +3049,3 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-export default memo(Inspector);

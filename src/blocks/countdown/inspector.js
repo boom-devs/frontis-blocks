@@ -14,7 +14,7 @@ import {
 	SelectControl,
 	BaseControl
 } from '@wordpress/components';
-import { useEffect, useState, useMemo, memo } from '@wordpress/element';
+import { useEffect, useState, useMemo } from '@wordpress/element';
 
 import {
 	BORDER_STYLES,
@@ -45,7 +45,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		countDownPresetStyle,
@@ -369,6 +369,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
 	}, [date, setAttributes]);
+
+	// Generate unique block ID if not set
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "countdown-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	// Countdown Timer Logic
 	useEffect(() => {
@@ -5095,4 +5104,3 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 }
-export default memo(Inspector);

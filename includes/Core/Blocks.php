@@ -39,9 +39,6 @@ class Blocks
 		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
 		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
 		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
-
-		// Filter to remove individual editor styles from block metadata (FOUC fix)
-		add_filter('block_type_metadata', [$this, 'filter_block_metadata']);
 	}
 
 	/**
@@ -474,19 +471,5 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
-	}
-
-	/**
-	 * Filter block metadata to remove individual editor styles.
-	 * This prevents FOUC by relying on the global editor stylesheet instead.
-	 */
-	public function filter_block_metadata($metadata)
-	{
-		if (isset($metadata['name']) && strpos($metadata['name'], 'frontis-blocks/') === 0) {
-			if (isset($metadata['editorStyle'])) {
-				unset($metadata['editorStyle']);
-			}
-		}
-		return $metadata;
 	}
 }
