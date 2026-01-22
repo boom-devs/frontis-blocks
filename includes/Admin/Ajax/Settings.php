@@ -204,7 +204,11 @@ class Settings extends AjaxBase
 			AND post_name != 'wp-global-styles-frontis-theme'
 			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')";
 
-		$total_posts = $wpdb->get_var($count_query);
+		$total_posts = wp_cache_get('fb_assets_total_count', 'frontis_blocks');
+		if (false === $total_posts) {
+			$total_posts = $wpdb->get_var($count_query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			wp_cache_set('fb_assets_total_count', $total_posts, 'frontis_blocks', 300);
+		}
 
 		// Query to get batch of post IDs
 		$query = $wpdb->prepare(
@@ -219,7 +223,13 @@ class Settings extends AjaxBase
 			$offset
 		);
 
-		$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		$cache_key = 'fb_assets_batch_' . md5($query);
+		$results = wp_cache_get($cache_key, 'frontis_blocks');
+
+		if (false === $results) {
+			$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			wp_cache_set($cache_key, $results, 'frontis_blocks', 300);
+		}
 
 		$generatedPages = [];
 
@@ -636,7 +646,14 @@ class Settings extends AjaxBase
 		);
 
 		// Execute the query and get results
-		$results = $wpdb->get_results($query);
+		$cache_key = 'fb_custom_icons_cat_' . md5($query);
+		$results = wp_cache_get($cache_key, 'frontis_blocks');
+
+		if (false === $results) {
+			$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			wp_cache_set($cache_key, $results, 'frontis_blocks', 3600);
+		}
+		
 		$categories = [];
 		if ($results) {
 			foreach ($results as $key => $single_result) {
@@ -684,7 +701,13 @@ class Settings extends AjaxBase
 		);
 
 		// Execute the query and get results
-		$results = $wpdb->get_results($query);
+		$cache_key = 'fb_custom_icons_upload_' . md5($query);
+		$results = wp_cache_get($cache_key, 'frontis_blocks');
+
+		if (false === $results) {
+			$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+			wp_cache_set($cache_key, $results, 'frontis_blocks', 3600);
+		}
 
 		if ($results) {
 			$custom_icons = [];

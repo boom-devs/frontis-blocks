@@ -267,15 +267,24 @@ class AssetsGenerator
 		$results = [];
 
 		foreach ($possible_templates as $template) {
-			$pages = $wpdb->get_results($wpdb->prepare("
-				SELECT DISTINCT p.ID, p.post_title, p.post_name, pm.meta_value as template_used
-				FROM {$wpdb->posts} p
-				INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
-				WHERE pm.meta_key = '_wp_page_template'
-				AND (pm.meta_value = %s OR pm.meta_value LIKE %s)
-				AND p.post_type = 'page'
-				AND p.post_status = 'publish'
-			", $template, '%' . $template . '%'));
+
+
+			$cache_key = 'fb_assets_gen_pages_' . md5($template);
+			$pages = wp_cache_get($cache_key, 'frontis_blocks');
+
+			if (false === $pages) {
+				// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+				$pages = $wpdb->get_results($wpdb->prepare("
+					SELECT DISTINCT p.ID, p.post_title, p.post_name, pm.meta_value as template_used
+					FROM {$wpdb->posts} p
+					INNER JOIN {$wpdb->postmeta} pm ON p.ID = pm.post_id
+					WHERE pm.meta_key = '_wp_page_template'
+					AND (pm.meta_value = %s OR pm.meta_value LIKE %s)
+					AND p.post_type = 'page'
+					AND p.post_status = 'publish'
+				", $template, '%' . $template . '%'));
+				wp_cache_set($cache_key, $pages, 'frontis_blocks', 300);
+			}
 
 			if ($pages) {
 				$results = array_merge($results, $pages);
@@ -1049,7 +1058,14 @@ class AssetsGenerator
 		);
 
 		// Execute the query
-		$template_contents = $wpdb->get_results($query);
+		$cache_key_tpl = 'fb_assets_wp_tpl_' . md5($post_name);
+		$template_contents = wp_cache_get($cache_key_tpl, 'frontis_blocks');
+
+		if (false === $template_contents) {
+			// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			$template_contents = $wpdb->get_results($query);
+			wp_cache_set($cache_key_tpl, $template_contents, 'frontis_blocks', 300);
+		}
 
 		if ($template_contents) {
 			foreach ($template_contents as $template) {
