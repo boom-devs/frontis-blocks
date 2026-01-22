@@ -27,7 +27,7 @@ import {
 
 import Select2 from "react-select";
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useEffect, useMemo, useState, memo } from "@wordpress/element";
+import { useEffect, useMemo, useState } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -54,7 +54,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes }) {
 	const {
 		blockID,
 		blockStyle,
@@ -4202,5 +4202,3 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 }
-
-export default memo(Inspector);
