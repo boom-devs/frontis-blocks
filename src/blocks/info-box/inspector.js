@@ -39,8 +39,7 @@ import {
 	OVERFLOW_OP
 } from "./constants/constants";
 
-import { useEffect, useMemo } from "@wordpress/element";
-
+import { useEffect, useMemo, memo } from "@wordpress/element";
 
 import FBIconPicker from "../../components/icon-picker";
 import FB_Range from "@Components/range";
@@ -69,7 +68,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		infoBoxPresetStyle,
@@ -4981,3 +4980,5 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+
+export default memo(Inspector);

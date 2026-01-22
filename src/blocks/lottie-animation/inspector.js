@@ -29,7 +29,7 @@ import {
 	LOTTIE_HOVER_STATE
 } from "../../fbConstants/fbConstants";
 
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
@@ -48,7 +48,7 @@ import FB_ImageControl from '@Components/image-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		blockStyle,
@@ -1036,3 +1036,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

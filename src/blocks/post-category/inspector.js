@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useEffect, useMemo, useState, useCallback } from "@wordpress/element";
+import { useEffect, useMemo, memo, useState, useCallback } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -44,7 +44,7 @@ import generateSvgIcon from "@Utils/generateSvgIcon";
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockId,
 		blockStyle,
@@ -6994,3 +6994,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

@@ -12,7 +12,7 @@ import {
  * Internal depencencies
  */
 import { BORDER_STYLES, OVERFLOW_OP } from "@Constants/fbConstants";
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_Range from "@Components/range";
@@ -31,7 +31,7 @@ import FB_InspectorControls from "@Components/InspectorControls";
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockId,
 		paragraphText,
@@ -3767,3 +3767,4 @@ transition: all .3s ease-in-out;
 		</>
 	);
 }
+export default memo(Inspector);

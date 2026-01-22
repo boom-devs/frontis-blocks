@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { select, dispatch } from "@wordpress/data";
@@ -43,7 +43,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,
         blockStyle,
@@ -179,7 +179,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionItemsDesktopBorderRadiusWidth,
         accordionItemsTabBorderRadiusWidth,
         accordionItemsMobileBorderRadiusWidth,
-        accordionItemsBorderRadiusLink,	
+        accordionItemsBorderRadiusLink,
 
         // Accordion Advance
         accordionZIndex,
@@ -352,7 +352,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 
-    const deviceType= useDeviceType();
+    const deviceType = useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
@@ -3049,3 +3049,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

@@ -7,7 +7,7 @@ import {
     MediaPlaceholder,
 } from '@wordpress/block-editor';
 
-import { useRef, memo } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -18,7 +18,8 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
-function Edit({ attributes, setAttributes, clientId, context }) {
+
+export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockId,
         blockStyle,
@@ -214,5 +215,3 @@ function Edit({ attributes, setAttributes, clientId, context }) {
         </>
     );
 }
-
-export default memo(Edit);

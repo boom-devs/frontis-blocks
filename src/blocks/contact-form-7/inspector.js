@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
-import { useEffect, useState, useMemo } from "@wordpress/element";
+import { useEffect, useState, useMemo, memo } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -48,7 +48,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -3926,3 +3926,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

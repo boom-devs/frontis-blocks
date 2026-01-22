@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useMemo, useEffect } from "@wordpress/element";
+import { useMemo, memo, useEffect } from "@wordpress/element";
 import {
     PanelBody,
     BaseControl,
@@ -26,7 +26,7 @@ import FB_InputControl from "@Components/input-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_VisibilityControl from "@Components/visibility-control";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         isLink,
@@ -1680,3 +1680,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);
