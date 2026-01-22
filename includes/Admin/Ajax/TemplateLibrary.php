@@ -472,12 +472,14 @@ class TemplateLibrary extends AjaxBase
 
     public function demo_import()
     {
+        $this->check_permission();
+
         if (!isset($_POST['json_data'])) {
             wp_send_json_error('No JSON data found');
             return;
         }
 
-        $data = json_decode($_POST['json_data'], true);
+        $data = json_decode(wp_unslash($_POST['json_data']), true);
         $content = $data['content'] ?? '';
 
         if (json_last_error() !== JSON_ERROR_NONE) {
