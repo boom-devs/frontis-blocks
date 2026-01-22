@@ -27,6 +27,7 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_Range from '@Components/range';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -42,7 +43,7 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
@@ -277,6 +278,22 @@ export default function Inspector({ attributes, setAttributes }) {
 	} = attributes;
     
     const deviceType= useDeviceType();
+
+    useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "progressbar-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+    /** Start load font */
+    useEffect(() => {
+        loadGoogleFont(progressTitleFontFamily); 
+        loadGoogleFont(progressNumberFontFamily); 
+    }, [progressTitleFontFamily, progressNumberFontFamily]);
+    /** End load font */
+
 
     /** Start Progress Border Radius */
     const progressBorderWidthUnitsChange = (event, position) => {

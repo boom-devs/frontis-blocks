@@ -31,7 +31,7 @@ import {
 	OVERFLOW_OP
 } from "./constants/constants";
 
-import { useState, useEffect, useMemo, memo } from "@wordpress/element";
+import { useState, useEffect, useMemo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
@@ -40,6 +40,7 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -54,7 +55,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
 		// deviceType,
@@ -357,6 +358,14 @@ const Inspector = ({ attributes, setAttributes }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-dual-button-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const connectorSizeHandler = (value) => {
 		setAttributes({ connectorSize: value });
@@ -2910,6 +2919,13 @@ const Inspector = ({ attributes, setAttributes }) => {
 	const globalTabletBorderRadiusWidth = `${dualButtonGlobalBorderRadiusTablet?.top}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.right}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.bottom}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.left}${dualButtonGlobalBorderRadiusUnits?.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${dualButtonGlobalBorderRadiusMobile?.top}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.right}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.bottom}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.left}${dualButtonGlobalBorderRadiusUnits?.Mobile}`;
 
+	/* Load Google Fonts */
+	useEffect(() => {
+		loadGoogleFont(ButtonFontFamily);
+		loadGoogleFont(connectorFontFamily);
+	}, [ButtonFontFamily, connectorFontFamily]);
+	/* End Load Google Fonts */
+
 	const iconHandler = (IconName) => {
 		setAttributes({ ButtonIcon: IconName });
 	};
@@ -4812,4 +4828,3 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 }
-export default memo(Inspector);

@@ -95,14 +95,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationMobileSwitcher,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-advanced-navigation-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
     const { updateBlockAttributes } = useDispatch("core/block-editor");
 
     const innerBlocks = useSelect(
@@ -135,6 +127,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
             <div {...blockProps}>
                 <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>

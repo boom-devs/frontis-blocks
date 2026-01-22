@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useRef, useEffect } from "@wordpress/element";
+import { useRef } from "@wordpress/element";
 import {
 	useBlockProps,
 	RichText,
@@ -38,14 +38,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		breadcrumbMobileSwitcher,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-breadcrumb-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const blockProps = useBlockProps({
 		className: `fb-breadcrumb-main-wrapper ${blockID} ${breadcrumbDesktopSwitcher && 'fb-desktop-responsive'} ${breadcrumbTabletSwitcher && 'fb-tablet-responsive'} ${breadcrumbMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
@@ -79,6 +71,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
+				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

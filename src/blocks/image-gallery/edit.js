@@ -2,13 +2,11 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
-import { useRef, useEffect } from '@wordpress/element';
+import { useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "./inspector";
 
-const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
@@ -32,29 +30,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         GalleryDesktopSwitcher,
         GalleryTabletSwitcher,
         GalleryMobileSwitcher,
-
-        GalleryButtonFontFamily,
     } = attributes;
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-gallery-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    /** Start load font */
-    useEffect(() => {
-        [GalleryButtonFontFamily].forEach(font => {
-            if (font && !loadedFonts.has(font)) {
-                loadGoogleFont(font);
-                loadedFonts.add(font);
-            }
-        });
-    }, [GalleryButtonFontFamily]);
-    /** End load font */
-    
 
     const blockProps = useBlockProps({
         className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -80,6 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             <div {...blockProps}>

@@ -35,6 +35,7 @@ import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_AlignmentControl from '../../components/alignment-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_ColorControl from '../../components/color-control';
@@ -47,7 +48,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const { 
         blockID,
         blockStyle,
@@ -260,6 +261,14 @@ export default function Inspector({ attributes, setAttributes }) {
     } = attributes;
     
     const deviceType= useDeviceType();
+    
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-gallery-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -3257,7 +3266,12 @@ export default function Inspector({ attributes, setAttributes }) {
 		setAttributes({lightboxIcon: IconName})
 	}
 
-    /* Gallery Style Css */
+    useEffect(() => {
+        loadGoogleFont(GalleryButtonFontFamily);
+    }, [GalleryButtonFontFamily]);
+    
+
+
     const fbGalleryStyle = useMemo(() => `
         .fb-gallery-main-wrapper.${blockID} {
             ${GalleryPositionType === 'default' ? `position: relative;` : ''}

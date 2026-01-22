@@ -22,14 +22,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		wrapperClass,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({
-				blockId: "fb-post-featured-image-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const blockProps = useBlockProps({
 		className: `fb-post-featured-image-block ${blockId} ${
 			featuredImageDesktopSwitcher && "fb-desktop-responsive"
@@ -107,6 +99,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
+				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

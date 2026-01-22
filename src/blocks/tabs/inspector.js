@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo, memo } from '@wordpress/element';
+import { useState, useEffect, useMemo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { 
@@ -47,7 +47,7 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) => {
+export default function Inspector({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) {
     
     const { 
         blockId,
@@ -451,6 +451,14 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
         tabTitlesAlignment
 
     } = attributes;
+
+    useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-tabs-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     const deviceType = useDeviceType();
 
@@ -4831,4 +4839,3 @@ const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, ha
         </>
     );
 }
-export default memo(Inspector);

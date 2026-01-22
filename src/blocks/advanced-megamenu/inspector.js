@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useMemo, useState, memo } from '@wordpress/element';
+import { useEffect, useMemo, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
@@ -41,8 +41,9 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockId,
         blockStyle,
@@ -250,6 +251,14 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-advanced-megamenu-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     const [MenuItemList, setMenuItemList] = useState(menuItems);
     const [patterns, setPatterns] = useState([]);
@@ -2416,4 +2425,3 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-export default memo(Inspector);

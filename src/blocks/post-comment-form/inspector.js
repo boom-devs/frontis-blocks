@@ -10,6 +10,7 @@ import {
 	OVERFLOW_OP,
 	BORDER_STYLES,
 } from "@Constants/fbConstants";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
@@ -27,7 +28,7 @@ import FB_TypographyControl from "@Components/typography-control";
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes }) {
+export default function Inspector({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
 		showCommentTitle,
@@ -576,6 +577,14 @@ buttonWidth,
 
 	const deviceType = useDeviceType();
 
+	useEffect(() => {
+		if (clientId && !blockId) {
+			setAttributes({
+				blockId: "fb-post-comment-form-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	/* ===============Helper Function================== */
 
 	// nested comment item
@@ -594,6 +603,46 @@ buttonWidth,
 
 		return `${scaleValue(top)} ${scaleValue(right)} ${scaleValue(bottom)} 0`;
 	}
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (commentCountTitleFontFamily !== "Default") {
+			loadGoogleFont(commentCountTitleFontFamily);
+		}
+
+		if (authorFontFamily !== "Default") {
+			loadGoogleFont(authorFontFamily);
+		}
+
+		if (commentMetaFontFamily !== "Default") {
+			loadGoogleFont(commentMetaFontFamily);
+		}
+
+		if (messageFontFamily !== "Default") {
+			loadGoogleFont(messageFontFamily);
+		}
+
+		if (replyButtonFontFamily !== "Default") {
+			loadGoogleFont(replyButtonFontFamily);
+		}
+
+		if (formTitleFontFamily !== "Default") {
+			loadGoogleFont(formTitleFontFamily);
+		}
+
+		if (cancelReplyFontFamily !== "Default") {
+			loadGoogleFont(cancelReplyFontFamily);
+		}
+	}, [
+		commentCountTitleFontFamily,
+		authorFontFamily,
+		messageFontFamily,
+		commentMetaFontFamily,
+		replyButtonFontFamily,
+		formTitleFontFamily,
+		cancelReplyFontFamily,
+	]);
+	/** End Load Google Font */
 
 	/* ======================================= */
 	/** Start Post Comment Item Padding */
