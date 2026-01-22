@@ -207,13 +207,17 @@ class Settings extends AjaxBase
 		$total_posts = $wpdb->get_var($count_query);
 
 		// Query to get batch of post IDs
-		$query = "SELECT ID, post_content, post_name
+		$query = $wpdb->prepare(
+			"SELECT ID, post_content, post_name
 			FROM {$wpdb->posts}
 			WHERE post_status = 'publish'
 			AND post_name != 'wp-global-styles-frontis-theme'
 			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')
 			ORDER BY post_date DESC
-			LIMIT {$batch_size} OFFSET {$offset}";
+			LIMIT %d OFFSET %d",
+			$batch_size,
+			$offset
+		);
 
 		$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared,WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 
@@ -419,8 +423,29 @@ class Settings extends AjaxBase
 
 		$old_value = get_option("fb_$option_name");
 		// Convert old_value to the correct type for comparison
-		// $old_value = $this->sanitize_option_value($old_value, $type);
+		$old_value = $this->sanitize_option_value($old_value, $type);
+        $value = $this->sanitize_option_value($post_value, $type);
 
+        // Convert back to string for saving if it's boolean (as the old code seemed to encode it)
+        // Actually, looking at the code: $value = json_encode($post_value); was used before.
+        // We should sanitize BEFORE encoding if we are encoding.
+        // But sanitize_option_value returns int/bool/string.
+        // Let's look at how it was done.
+        
+        // Original:
+        // $post_value = isset($_POST['value']) ? ($_POST['value']) : [];
+		// $value = json_encode($post_value);
+        
+        // If we want to strictly sanitize based on type:
+        $sanitized_value = $this->sanitize_option_value($post_value, $type);
+        
+        // Re-encode if necessary? The original code did json_encode without checking type.
+        // But get_option also returns string usually if it was saved as string.
+        
+        // Let's stick to the previous pattern but sanitize the INPUT.
+        
+        $value = json_encode($sanitized_value);
+        
 		if ($old_value === $value) {
 			wp_send_json_success(['message' => 'No changes were made']);
 			return;
@@ -811,7 +836,7 @@ class Settings extends AjaxBase
 	// In your Settings class (already there)
 	public function get_plugin_changelog()
 	{
-		// $this->check_permission();
+		$this->check_permission();
 
 		$plugin_slug = isset($_POST['plugin_slug']) ? sanitize_text_field($_POST['plugin_slug']) : 'frontis-blocks';
 
