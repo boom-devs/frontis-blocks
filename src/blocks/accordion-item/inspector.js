@@ -30,6 +30,8 @@ import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 
+import "./editor.scss";
+
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,

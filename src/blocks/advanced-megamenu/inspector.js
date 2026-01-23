@@ -42,6 +42,8 @@ import FB_InputControl from '@Components/input-control';
 import FB_ResponsiveBackgroundImageControl from '@Components/responsive-background-image-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
+import "./editor.scss";
+
 const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,

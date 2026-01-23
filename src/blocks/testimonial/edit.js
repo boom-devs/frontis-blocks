@@ -179,21 +179,35 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         }
     }, [clientId, blockID]);
 
-
-    /** Start load font */
+    /** Start Load Google Font */
     useEffect(() => {
-        [TestimonialTitleFontFamily, TestimonialDescFontFamily, TestimonialAuthorFontFamily, TestimonialDesignationFontFamily].forEach(font => {
-            if (font && !loadedFonts.has(font)) {
-                loadGoogleFont(font);
-                loadedFonts.add(font);
-            }
-        });
-    }, [TestimonialTitleFontFamily,
-        TestimonialDescFontFamily,
-        TestimonialAuthorFontFamily,
-        TestimonialDesignationFontFamily
-    ]);
-    /** End load font */
+    if (TestimonialTitleFontFamily && !loadedFonts.has(TestimonialTitleFontFamily)) {
+        loadGoogleFont(TestimonialTitleFontFamily);
+        loadedFonts.add(TestimonialTitleFontFamily);
+    }
+    }, [TestimonialTitleFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDescFontFamily && !loadedFonts.has(TestimonialDescFontFamily)) {
+        loadGoogleFont(TestimonialDescFontFamily);
+        loadedFonts.add(TestimonialDescFontFamily);
+    }
+    }, [TestimonialDescFontFamily]);
+    
+    useEffect(() => {
+    if (TestimonialAuthorFontFamily && !loadedFonts.has(TestimonialAuthorFontFamily)) {
+        loadGoogleFont(TestimonialAuthorFontFamily);
+        loadedFonts.add(TestimonialAuthorFontFamily);
+    }
+    }, [TestimonialAuthorFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDesignationFontFamily && !loadedFonts.has(TestimonialDesignationFontFamily)) {
+        loadGoogleFont(TestimonialDesignationFontFamily);
+        loadedFonts.add(TestimonialDesignationFontFamily);
+    }
+    }, [TestimonialDesignationFontFamily]);
+    /** End Load Google Font */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,

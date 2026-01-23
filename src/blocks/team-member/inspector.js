@@ -34,7 +34,6 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
@@ -49,8 +48,10 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
+import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+
+const Inspector = ({ attributes, setAttributes }) => {
 
 	const {
 		blockID,
@@ -589,29 +590,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType= useDeviceType();
-
-	// Set blockID if it doesn't exist
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "fb-team-member-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	/** Start load font */
-	useEffect(() => {
-		loadGoogleFont(teamMemberDesignationFontFamily);
-		loadGoogleFont(teamMemberNameFontFamily);
-		loadGoogleFont(teamMemberDescFontFamily);
-		loadGoogleFont(teamMemberBadgeFontFamily);
-	}, [
-		teamMemberDesignationFontFamily, 
-		teamMemberNameFontFamily, 
-		teamMemberDescFontFamily,
-		teamMemberBadgeFontFamily
-	]);
-	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
 	const handleDragEnd = (event) => {

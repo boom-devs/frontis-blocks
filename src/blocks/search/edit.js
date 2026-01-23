@@ -19,6 +19,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		searchGlobalWraperClass,
 	} = attributes;
 
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-search-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
 	const blockProps = useBlockProps({
 		className: `fb-search-block ${blockId}`,
 	});
@@ -28,7 +36,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 		<div {...blockProps}>
 			<div className={`fb-search-container ${searchGlobalWraperClass}`} id={searchGlobalWraperID}>

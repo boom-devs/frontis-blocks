@@ -22,7 +22,6 @@ import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_Range from '@Components/range';
 import {useDeviceType} from "@Config/displayType";
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '@Components/color-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -457,38 +456,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType= useDeviceType();
-
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-timezone-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    useEffect(() => {
-        if (timezoneLocationTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneLocationTextFontFamily);
-        }
-        if (timezoneTimeTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTimeTextFontFamily);
-        }
-        if (timezoneTextFontFamily !== 'Default') {
-            loadGoogleFont(timezoneTextFontFamily);
-        }
-        if (statusTextFontFamily !== 'Default') {
-            loadGoogleFont(statusTextFontFamily);
-        }
-        if (noticeTextFontFamily !== 'Default') {
-            loadGoogleFont(noticeTextFontFamily);
-        }
-    }, [
-        timezoneLocationTextFontFamily, 
-        timezoneTimeTextFontFamily, 
-        timezoneTextFontFamily, 
-        statusTextFontFamily, 
-        noticeTextFontFamily
-    ]);
 
 	// State variables
     const [selectedDate, setSelectedDate] = useState('');

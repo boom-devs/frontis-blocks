@@ -40,7 +40,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
     const { 
         blockId,
         blockStyle,
@@ -129,14 +129,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         sliderGlobalCustomCSS,
         
     } = attributes;
-
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "marquee-carousel-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
     const deviceType = useDeviceType();
 

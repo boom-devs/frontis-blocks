@@ -400,6 +400,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 					left: "4",
 					right: "4",
 				},
+				buttonFontSize:{
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '14'
+				}
 			},
 			"preset-2": {
 				buttonBgColor: "#fff",
@@ -2511,7 +2516,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 				${buttonIconGapSize?.Tablet ? `gap: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
-				
 				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
 				${buttonTabletMarginStr && buttonTabMargin?.top ? `margin: ${buttonTabletMarginStr};` : ''}
 				${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
@@ -2539,8 +2543,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingTabletWidth && buttonIconPaddingTablet?.top ? `padding: ${buttonIconPaddingTabletWidth};` : ''}
-				${buttonIconPosition === 'left' && buttonIconGapSize?.Tablet ? `margin-right: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
-				${buttonIconPosition === 'right' && buttonIconGapSize?.Tablet ? `margin-left: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
 				${buttonIconBorderTabletWidth !== 'px px px px' ? `border-width: ${buttonIconBorderTabletWidth};` : ''}
 				${buttonIconBorderRadiusTabletWidth !== 'px px px px' ? `border-radius: ${buttonIconBorderRadiusTabletWidth};` : ''}
 			}
@@ -2617,8 +2619,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingMobileWidth && buttonIconPaddingMobile?.top ? `padding: ${buttonIconPaddingMobileWidth};` : ''}
-				${buttonIconPosition === 'left' && buttonIconGapSize?.Mobile ? `margin-right: ${buttonIconGapSize?.Mobile}${buttonIconGapUnits?.Mobile};` : ''}
-				${buttonIconPosition === 'right' && buttonIconGapSize?.Mobile ? `margin-left: ${buttonIconGapSize?.Mobile}${buttonIconGapUnits?.Mobile};` : ''}
 				${buttonIconBorderMobileWidth !== 'px px px px' ? `border-width: ${buttonIconBorderMobileWidth};` : ''}
 				${buttonIconBorderRadiusMobileWidth !== 'px px px px' ? `border-radius: ${buttonIconBorderRadiusMobileWidth};` : ''}
 			}

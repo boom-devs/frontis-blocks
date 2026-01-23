@@ -37,7 +37,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -324,14 +323,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 		FrontisBlocksData.contact_form7_html,
 	);
 	const [selectedForm, setSelectedForm] = useState();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-contact-form-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const modifiedFormLists = FrontisBlocksData.contact_form7_lists.map(
 		(obj, i) => {
@@ -1950,22 +1941,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const BorderRadiusTabletWidth = `${contactFormGlobalBorderRadiusTablet?.top}${contactFormGlobalBorderRadiusUnits?.Tablet} ${contactFormGlobalBorderRadiusTablet?.right}${contactFormGlobalBorderRadiusUnits?.Tablet} ${contactFormGlobalBorderRadiusTablet?.bottom}${contactFormGlobalBorderRadiusUnits?.Tablet} ${contactFormGlobalBorderRadiusTablet?.left}${contactFormGlobalBorderRadiusUnits?.Tablet}`;
 	const BorderRadiusMobileWidth = `${contactFormGlobalBorderRadiusMobile?.top}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.right}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.bottom}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.left}${contactFormGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
-
-
-	// Helper function to load fonts
-	useEffect(() => {
-		loadGoogleFont(contactFormLabelFontFamily);
-		loadGoogleFont(contactFormInputFontFamily);
-		loadGoogleFont(contactFormSubmitFontFamily);
-		loadGoogleFont(contactFormSuccessFontFamily);
-		loadGoogleFont(contactFormErrorFontFamily);
-	}, [contactFormLabelFontFamily,
-		contactFormInputFontFamily,
-		contactFormSubmitFontFamily,
-		contactFormSuccessFontFamily,
-		contactFormErrorFontFamily,
-	]);
-
 
 	const allBlockStyle = useMemo(() => `
 

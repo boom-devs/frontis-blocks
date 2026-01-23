@@ -23,6 +23,7 @@ import {
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
 import { useState, useEffect, useRef } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import {
 	NORMAL_HOVER,
@@ -34,6 +35,8 @@ import {
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -93,7 +96,107 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTableDesktopSwitcher,
 		pricingTableTabletSwitcher,
 		pricingTableMobileSwitcher,
+
+		pricingTopSectionTextFontFamily,
+		normalPricingFontFamily, 
+		salePricingFontFamily, 
+		priceCurrencyFontFamily, 
+		pricePeriodFontFamily, 
+		pricingTitleFontFamily, 
+		pricingSubtitleFontFamily, 
+		priceAfterTextFontFamily, 
+		pricingfeatureTitleFontFamily, 
+		priceButtonFontFamily, 
+		priceFeatureAfterTextFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-feature-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (pricingTopSectionTextFontFamily && !loadedFonts.has(pricingTopSectionTextFontFamily)) {
+			loadGoogleFont(pricingTopSectionTextFontFamily);
+			loadedFonts.add(pricingTopSectionTextFontFamily);
+		}
+	}, [pricingTopSectionTextFontFamily]);
+
+	useEffect(() => {
+		if (normalPricingFontFamily && !loadedFonts.has(normalPricingFontFamily)) {
+			loadGoogleFont(normalPricingFontFamily);
+			loadedFonts.add(normalPricingFontFamily);
+		}
+	}, [normalPricingFontFamily]);
+
+	useEffect(() => {
+		if (salePricingFontFamily && !loadedFonts.has(salePricingFontFamily)) {
+			loadGoogleFont(salePricingFontFamily);
+			loadedFonts.add(salePricingFontFamily);
+		}
+	}, [salePricingFontFamily]);
+
+	useEffect(() => {
+		if (priceCurrencyFontFamily && !loadedFonts.has(priceCurrencyFontFamily)) {
+			loadGoogleFont(priceCurrencyFontFamily);
+			loadedFonts.add(priceCurrencyFontFamily);
+		}
+	}, [priceCurrencyFontFamily]);
+
+	useEffect(() => {
+		if (pricePeriodFontFamily && !loadedFonts.has(pricePeriodFontFamily)) {
+			loadGoogleFont(pricePeriodFontFamily);
+			loadedFonts.add(pricePeriodFontFamily);
+		}
+	}, [pricePeriodFontFamily]);
+
+	useEffect(() => {
+		if (pricingTitleFontFamily && !loadedFonts.has(pricingTitleFontFamily)) {
+			loadGoogleFont(pricingTitleFontFamily);
+			loadedFonts.add(pricingTitleFontFamily);
+		}
+	}, [pricingTitleFontFamily]);
+
+	useEffect(() => {
+		if (pricingSubtitleFontFamily && !loadedFonts.has(pricingSubtitleFontFamily)) {
+			loadGoogleFont(pricingSubtitleFontFamily);
+			loadedFonts.add(pricingSubtitleFontFamily);
+		}
+	}, [pricingSubtitleFontFamily]);
+	
+	useEffect(() => {
+		if (priceAfterTextFontFamily && !loadedFonts.has(priceAfterTextFontFamily)) {
+			loadGoogleFont(priceAfterTextFontFamily);
+			loadedFonts.add(priceAfterTextFontFamily);
+		}
+	}, [priceAfterTextFontFamily]);
+	
+	useEffect(() => {
+		if (pricingfeatureTitleFontFamily && !loadedFonts.has(pricingfeatureTitleFontFamily)) {
+			loadGoogleFont(pricingfeatureTitleFontFamily);
+			loadedFonts.add(pricingfeatureTitleFontFamily);
+		}
+	}, [pricingfeatureTitleFontFamily]);
+	
+	useEffect(() => {
+		if (priceButtonFontFamily && !loadedFonts.has(priceButtonFontFamily)) {
+			loadGoogleFont(priceButtonFontFamily);
+			loadedFonts.add(priceButtonFontFamily);
+		}
+	}, [priceButtonFontFamily]);
+	
+	useEffect(() => {
+		if (priceFeatureAfterTextFontFamily && !loadedFonts.has(priceFeatureAfterTextFontFamily)) {
+			loadGoogleFont(priceFeatureAfterTextFontFamily);
+			loadedFonts.add(priceFeatureAfterTextFontFamily);
+		}
+	}, [priceFeatureAfterTextFontFamily]);
+	/** End Load Google Font */
+
 
 	const blockProps = useBlockProps({
 		className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,

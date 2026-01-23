@@ -31,6 +31,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabGlobalWraperClass,
 	} = attributes;
 
+	 useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "fb-tabs-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const beSelect = select('core/block-editor');
 	const beDispatch = dispatch('core/block-editor');
 	const getChildren = () => beSelect.getBlockOrder(clientId) || [];
@@ -302,7 +310,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				<Inspector
 					attributes={attributes}
 					setAttributes={setAttributes}
-					clientId={clientId}
 					handleDragEnd={handleDragEnd}
 					handleAddItem={handleAddItem}
 					handleChangeItem={handleChangeItem}

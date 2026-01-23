@@ -54,7 +54,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_InputControl from '@Components/input-control';
@@ -69,8 +68,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		flipBoxPresetStyle,
@@ -1003,14 +1001,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-flip-box-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	/** flip Image */
 	let defaultImageUrl = '';
@@ -4565,13 +4555,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const flipBoxBackBorderRadiusDesktopWidth = `${flipBoxBackBorderRadiusDesktop?.top}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.right}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.bottom}${flipBoxBackBorderRadiusUnits?.Desktop} ${flipBoxBackBorderRadiusDesktop?.left}${flipBoxBackBorderRadiusUnits?.Desktop}`;
 	const flipBoxBackBorderRadiusTabletWidth = `${flipBoxBackBorderRadiusTablet?.top}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.right}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.bottom}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.left}${flipBoxBackBorderRadiusUnits?.Tablet}`;
 	const flipBoxBackBorderRadiusMobileWidth = `${flipBoxBackBorderRadiusMobile?.top}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.right}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.bottom}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.left}${flipBoxBackBorderRadiusUnits?.Mobile}`;
-
-	useEffect(() => {
-		loadGoogleFont(headingFontFamily);
-		loadGoogleFont(buttonFontFamily);
-		loadGoogleFont(subHeadingFontFamily);
-	}, [headingFontFamily, buttonFontFamily, subHeadingFontFamily]);
-
 
 	const fbflipBoxStyle = useMemo(
 		() => `

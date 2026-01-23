@@ -37,6 +37,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterMobileSwitcher,
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "counter-number-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const counterRef = useRef(null);
 	const observerRef = useRef(null);
 	const hasCounted = useRef(false);
@@ -157,7 +165,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>

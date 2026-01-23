@@ -36,6 +36,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieAnimationGlobalWraperID
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-lottie-animation-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
 	const blockProps = useBlockProps({
 		className: `fb-lottie-animation-main-wrapper ${blockID} ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'} ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'} ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
@@ -175,7 +183,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<BlockControls>
 				<ToolbarGroup>
 					<MediaUploadCheck>

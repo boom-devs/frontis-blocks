@@ -33,7 +33,7 @@ import './editor.scss';
 
 import { useEffect, useMemo, memo } from '@wordpress/element';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockId,
 		searchButtonWidth,
@@ -163,14 +163,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-search-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 	
 	/** Start Button Border */
 	const handleButtonBorderUnitChange = ( event, position ) => {

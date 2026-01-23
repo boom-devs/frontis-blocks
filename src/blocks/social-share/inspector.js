@@ -26,7 +26,6 @@ import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import { useDeviceType } from "@Config/displayType";
@@ -37,7 +36,7 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         layoutType,
@@ -134,16 +133,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    // Generate unique block ID
-
-    useEffect(() => {
-        if (clientId && typeof clientId === "string") {
-            setAttributes({
-                blockID: "fb-social-share-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
