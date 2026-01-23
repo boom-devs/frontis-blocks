@@ -1,10 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { useEffect, useRef, useState } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from './inspector';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
   const {
@@ -23,15 +25,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     progressbarDesktopSwitcher,
     progressbarTabletSwitcher,
     progressbarMobileSwitcher,
+
+    progressNumberFontFamily,
+    progressTitleFontFamily,
   } = attributes;
+
+  useEffect(() => {
+    if (clientId && typeof clientId === "string") {
+      setAttributes({
+        blockID: "progressbar-" + clientId.slice(0, 8),
+      });
+    }
+  }, [clientId]);
+
+  /** Start Load Google Font */
+  useEffect(() => {
+    if (progressTitleFontFamily && !loadedFonts.has(progressTitleFontFamily)) {
+      loadGoogleFont(progressTitleFontFamily);
+      loadedFonts.add(progressTitleFontFamily);
+    }
+  }, [progressTitleFontFamily]);
+
+  useEffect(() => {
+    if (progressNumberFontFamily && !loadedFonts.has(progressNumberFontFamily)) {
+      loadGoogleFont(progressNumberFontFamily);
+      loadedFonts.add(progressNumberFontFamily);
+    }
+  }, [progressNumberFontFamily]);
+  /** End Load Google Font */
 
   /**
     * Manages tab button settings and switches to block settings on click
     */
   const panelRef = useRef(null);
   SwitchToBlockSettings(panelRef);
-
-
 
   useEffect(() => {
     const panel = panelRef.current;
@@ -105,7 +132,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
       <Inspector
         attributes={attributes}
         setAttributes={setAttributes}
-        clientId={clientId}
       />
 
       <div {...blockProps}>

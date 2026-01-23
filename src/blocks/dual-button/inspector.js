@@ -40,7 +40,6 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -55,7 +54,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -358,14 +357,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-dual-button-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const connectorSizeHandler = (value) => {
 		setAttributes({ connectorSize: value });
@@ -2918,13 +2909,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const globalDesktopBorderRadiusWidth = `${dualButtonGlobalBorderRadiusDesktop?.top}${dualButtonGlobalBorderRadiusUnits?.Desktop} ${dualButtonGlobalBorderRadiusDesktop?.right}${dualButtonGlobalBorderRadiusUnits?.Desktop} ${dualButtonGlobalBorderRadiusDesktop?.bottom}${dualButtonGlobalBorderRadiusUnits?.Desktop} ${dualButtonGlobalBorderRadiusDesktop?.left}${dualButtonGlobalBorderRadiusUnits?.Desktop}`;
 	const globalTabletBorderRadiusWidth = `${dualButtonGlobalBorderRadiusTablet?.top}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.right}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.bottom}${dualButtonGlobalBorderRadiusUnits?.Tablet} ${dualButtonGlobalBorderRadiusTablet?.left}${dualButtonGlobalBorderRadiusUnits?.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${dualButtonGlobalBorderRadiusMobile?.top}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.right}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.bottom}${dualButtonGlobalBorderRadiusUnits?.Mobile} ${dualButtonGlobalBorderRadiusMobile?.left}${dualButtonGlobalBorderRadiusUnits?.Mobile}`;
-
-	/* Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont(ButtonFontFamily);
-		loadGoogleFont(connectorFontFamily);
-	}, [ButtonFontFamily, connectorFontFamily]);
-	/* End Load Google Fonts */
 
 	const iconHandler = (IconName) => {
 		setAttributes({ ButtonIcon: IconName });

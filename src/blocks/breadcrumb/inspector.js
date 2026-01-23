@@ -33,7 +33,6 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -271,15 +270,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-breadcrumb-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 
 	const homeIconHandler = (IconName) => {
 		setAttributes({ homeIcon: IconName })

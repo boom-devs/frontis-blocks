@@ -35,6 +35,8 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 
+import "./editor.scss";
+
 const Inspector = ({ attributes, setAttributes,  clientId}) => {
     const {
         blockId,
@@ -420,7 +422,7 @@ const Inspector = ({ attributes, setAttributes,  clientId}) => {
     } = attributes;
 
     const deviceType= useDeviceType();
-    
+
     /** Start Navigation padding */
 	const handleNavigationPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;

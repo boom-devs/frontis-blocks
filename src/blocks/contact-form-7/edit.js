@@ -5,9 +5,11 @@ import { useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "../contact-form-7/inspector";
 
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
@@ -26,7 +28,57 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		contactFormDesktopSwitcher,
 		contactFormTabletSwitcher,
 		contactFormMobileSwitcher,
+		contactFormLabelFontFamily,
+		contactFormInputFontFamily,
+		contactFormSubmitFontFamily,
+		contactFormSuccessFontFamily,
+		contactFormErrorFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-contact-form-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (contactFormLabelFontFamily && !loadedFonts.has(contactFormLabelFontFamily)) {
+			loadGoogleFont(contactFormLabelFontFamily);
+			loadedFonts.add(contactFormLabelFontFamily);
+		}
+	}, [contactFormLabelFontFamily]);
+
+	useEffect(() => {
+		if (contactFormInputFontFamily && !loadedFonts.has(contactFormInputFontFamily)) {
+			loadGoogleFont(contactFormInputFontFamily);
+			loadedFonts.add(contactFormInputFontFamily);
+		}
+	}, [contactFormInputFontFamily]);
+
+	useEffect(() => {
+		if (contactFormSubmitFontFamily && !loadedFonts.has(contactFormSubmitFontFamily)) {
+			loadGoogleFont(contactFormSubmitFontFamily);
+			loadedFonts.add(contactFormSubmitFontFamily);
+		}
+	}, [contactFormSubmitFontFamily]);
+
+	useEffect(() => {
+		if (contactFormSuccessFontFamily && !loadedFonts.has(contactFormSuccessFontFamily)) {
+			loadGoogleFont(contactFormSuccessFontFamily);
+			loadedFonts.add(contactFormSuccessFontFamily);
+		}
+	}, [contactFormSuccessFontFamily]);
+
+	useEffect(() => {
+		if (contactFormErrorFontFamily && !loadedFonts.has(contactFormErrorFontFamily)) {
+			loadGoogleFont(contactFormErrorFontFamily);
+			loadedFonts.add(contactFormErrorFontFamily);
+		}
+	}, [contactFormErrorFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: [
@@ -68,7 +120,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

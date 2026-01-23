@@ -22,14 +22,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		wrapperClass,
 	} = attributes;
 
-	const blockProps = useBlockProps({
-		className: `fb-post-featured-image-block ${blockId} ${
-			featuredImageDesktopSwitcher && "fb-desktop-responsive"
-		} ${featuredImageTabletSwitcher && "fb-tablet-responsive"} ${
-			featuredImageMobileSwitcher && "fb-mobile-responsive"
-			}`,
-	});
-
 	useEffect(() => {
 		if (clientId && !blockId) {
 			setAttributes({
@@ -37,6 +29,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
+
+	const blockProps = useBlockProps({
+		className: `fb-post-featured-image-block ${blockId} ${
+			featuredImageDesktopSwitcher && "fb-desktop-responsive"
+		} ${featuredImageTabletSwitcher && "fb-tablet-responsive"} ${
+			featuredImageMobileSwitcher && "fb-mobile-responsive"
+			}`,
+	});
 
 	let placeholderImageUrl = "";
 	if (typeof FrontisBlocksData !== "undefined") {
@@ -99,7 +99,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

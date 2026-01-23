@@ -3,9 +3,12 @@ import { useState, useEffect, useRef } from "@wordpress/element";
 import { Placeholder, SelectControl } from "@wordpress/components";
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
@@ -23,7 +26,73 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		fluentFormDesktopSwitcher,
 		fluentFormTabletSwitcher,
 		fluentFormMobileSwitcher,
+		fluentFormInputFontFamily, 
+		fluentFormSectionBreakTitleFontFamily, 
+		fluentFormSectionBreakDescFontFamily,
+		fluentFormHtmlFontFamily, 
+		fluentFormSubmitFontFamily, 
+		fluentFormSuccessFontFamily, 
+		fluentFormErrorFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-fluent-form-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (fluentFormInputFontFamily && !loadedFonts.has(fluentFormInputFontFamily)) {
+			loadGoogleFont(fluentFormInputFontFamily);
+			loadedFonts.add(fluentFormInputFontFamily);
+		}
+	}, [fluentFormInputFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSectionBreakTitleFontFamily && !loadedFonts.has(fluentFormSectionBreakTitleFontFamily)) {
+			loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
+			loadedFonts.add(fluentFormSectionBreakTitleFontFamily);
+		}
+	}, [fluentFormSectionBreakTitleFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSectionBreakDescFontFamily && !loadedFonts.has(fluentFormSectionBreakDescFontFamily)) {
+			loadGoogleFont(fluentFormSectionBreakDescFontFamily);
+			loadedFonts.add(fluentFormSectionBreakDescFontFamily);
+		}
+	}, [fluentFormSectionBreakDescFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormHtmlFontFamily && !loadedFonts.has(fluentFormHtmlFontFamily)) {
+			loadGoogleFont(fluentFormHtmlFontFamily);
+			loadedFonts.add(fluentFormHtmlFontFamily);
+		}
+	}, [fluentFormHtmlFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSubmitFontFamily && !loadedFonts.has(fluentFormSubmitFontFamily)) {
+			loadGoogleFont(fluentFormSubmitFontFamily);
+			loadedFonts.add(fluentFormSubmitFontFamily);
+		}
+	}, [fluentFormSubmitFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSuccessFontFamily && !loadedFonts.has(fluentFormSuccessFontFamily)) {
+			loadGoogleFont(fluentFormSuccessFontFamily);
+			loadedFonts.add(fluentFormSuccessFontFamily);
+		}
+	}, [fluentFormSuccessFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormErrorFontFamily && !loadedFonts.has(fluentFormErrorFontFamily)) {
+			loadGoogleFont(fluentFormErrorFontFamily);
+			loadedFonts.add(fluentFormErrorFontFamily);
+		}
+	}, [fluentFormErrorFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: [
@@ -53,7 +122,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

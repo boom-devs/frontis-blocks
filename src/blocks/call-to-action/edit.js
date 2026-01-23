@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -13,8 +13,11 @@ import {
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -148,9 +151,44 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnTwoTermsSeparator,
 		dynamicBtnTwoEnableLink,
 		dynamicBtnTwoLinkSource,
+
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonTwoFontFamily,
 		/** End Dynamic Btn Two Text */
 
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-cta-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+
+	useEffect(() => {
+		if (buttonTwoFontFamily && !loadedFonts.has(buttonTwoFontFamily)) {
+			loadGoogleFont(buttonTwoFontFamily);
+			loadedFonts.add(buttonTwoFontFamily);
+		}
+	}, [buttonTwoFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -303,7 +341,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			<BlockControls>
 				<AlignmentToolbar

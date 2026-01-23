@@ -45,7 +45,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		countDownPresetStyle,
@@ -369,15 +369,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	useEffect(() => {
 		setAttributes({ targetDate: date.toISOString() });
 	}, [date, setAttributes]);
-
-	// Generate unique block ID if not set
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "countdown-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	// Countdown Timer Logic
 	useEffect(() => {

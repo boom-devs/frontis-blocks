@@ -6,10 +6,13 @@ import {
 
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
@@ -126,9 +129,53 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTeamMemberDesignationTermsSeparator,
 		dynamicTeamMemberDesignationEnableLink,
 		dynamicTeamMemberDesignationLinkSource,
+
+		teamMemberDesignationFontFamily, 
+		teamMemberNameFontFamily, 
+		teamMemberDescFontFamily,
+		teamMemberBadgeFontFamily,
 		/** End Dynamic Team Member Designation Text */
 
 	} = attributes;
+
+	// Set blockID if it doesn't exist
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "fb-team-member-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+	if (teamMemberDesignationFontFamily && !loadedFonts.has(teamMemberDesignationFontFamily)) {
+		loadGoogleFont(teamMemberDesignationFontFamily);
+		loadedFonts.add(teamMemberDesignationFontFamily);
+	}
+	}, [teamMemberDesignationFontFamily]);
+
+	useEffect(() => {
+	if (teamMemberNameFontFamily && !loadedFonts.has(teamMemberNameFontFamily)) {
+		loadGoogleFont(teamMemberNameFontFamily);
+		loadedFonts.add(teamMemberNameFontFamily);
+	}
+	}, [teamMemberNameFontFamily]);
+	
+	useEffect(() => {
+	if (teamMemberDescFontFamily && !loadedFonts.has(teamMemberDescFontFamily)) {
+		loadGoogleFont(teamMemberDescFontFamily);
+		loadedFonts.add(teamMemberDescFontFamily);
+	}
+	}, [teamMemberDescFontFamily]);
+
+	useEffect(() => {
+	if (teamMemberBadgeFontFamily && !loadedFonts.has(teamMemberBadgeFontFamily)) {
+		loadGoogleFont(teamMemberBadgeFontFamily);
+		loadedFonts.add(teamMemberBadgeFontFamily);
+	}
+	}, [teamMemberBadgeFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -241,7 +288,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>
