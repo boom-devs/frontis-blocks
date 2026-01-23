@@ -32,7 +32,6 @@ import FB_BackgroundColorControl from '../../components/background-color-control
 import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_BackgroundImageControl from '../../components/background-image-control';
 import FB_HtmlTagControl from '../../components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_InputControl from '@Components/input-control';
@@ -355,14 +354,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     const deviceType = useDeviceType();
 
     useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-    useEffect(() => {
         const parentBlocks = select("core/block-editor").getBlocksByClientId(
             clientId
         )[0];
@@ -384,14 +375,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             };
         }
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
-
-
-     /** Start load font */
-     useEffect(() => {
-        loadGoogleFont(titleFontFamily);
-    }, [titleFontFamily]);
-    /** End load font */
-
 
     /** Start Accordions Gap */
     const accordionItemGapHandler = (value) => {

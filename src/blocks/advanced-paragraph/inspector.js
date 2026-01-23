@@ -19,7 +19,6 @@ import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
-import loadGoogleFont from "@Utils/loadGoogleFont";
 import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import getCustomCss from "@Utils/getCustomCss";
@@ -31,7 +30,7 @@ import FB_InspectorControls from "@Components/InspectorControls";
 
 import "./editor.scss";
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockId,
 		paragraphText,
@@ -249,14 +248,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-advanced-paragraphs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const paragraphColumnGapFn = (value) => {
 		setAttributes({ paragraphColumnGap: value });
@@ -1264,12 +1255,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const globalTabletBorderRadiusWidth = `${paragraphGlobalBorderRadiusTablet.top}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.right}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.bottom}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.left}${paragraphGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${paragraphGlobalBorderRadiusMobile.top}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.right}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.bottom}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.left}${paragraphGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
-
-	useEffect(() => {
-		if (paragraphFontFamily !== "Default") {
-			loadGoogleFont(paragraphFontFamily);
-		}
-	}, [paragraphFontFamily]);
 
 	// detect <a> tags inside the RichText
 	const hasLinkInParagraph = useMemo(() => {

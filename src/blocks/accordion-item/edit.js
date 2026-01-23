@@ -47,6 +47,13 @@ export default function Edit (props) {
 
     } = attributes;
 
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     useEffect(() => {
         setAttributes({
