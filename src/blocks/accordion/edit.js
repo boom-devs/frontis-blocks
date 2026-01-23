@@ -10,7 +10,12 @@ import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
@@ -32,14 +37,58 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tagName,
         faqSchema,
         accordionChildCount,
-
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
 
         accordionDesktopSwitcher,
         accordionTabletSwitcher,
         accordionMobileSwitcher,
+
+        /** Typography Fonts */
+        titleFontFamily,
+        
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-accordion-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    useEffect(() => {
+        const parentBlocks = select("core/block-editor").getBlocksByClientId(
+            clientId
+        )[0];
+
+        const innerBlocks = parentBlocks?.innerBlocks;
+
+        const { updateBlockAttributes } = dispatch("core/block-editor");
+
+        if (innerBlocks) {
+            innerBlocks.length, (n) => {
+                updateBlockAttributes(innerBlocks[n].clientId, {
+                    inheritedAccordionType: accordionType,
+                    inheritedDisplayIcon: displayIcon,
+                    inheritedTabIcon: tabIcon,
+                    inheritedExpandedIcon: expandedIcon,
+                    inheritedTagName: tagName,
+                    faqSchema: faqSchema,
+                });
+            };
+        }
+    }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
+
+
+     /** Start load font */
+     useEffect(() => {
+        if (titleFontFamily && !loadedFonts.has(titleFontFamily)) {
+            loadGoogleFont(titleFontFamily);
+            loadedFonts.add(titleFontFamily);
+        }
+    }, [titleFontFamily]);
+    /** End load font */
 
     const blockProps = useBlockProps({
         className: `fb-accordion-main-wrapper ${blockID} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -50,7 +99,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-
 
     const addAccordion = () => {
         const innerBlocks = [
@@ -82,8 +130,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             });
     };
 
-
-
     useEffect(() => {
         if (!tabIcon) {
             setAttributes({ tabIcon: "fas fa-angle-right" });
@@ -110,15 +156,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         ]);
     };
 
-
-
-
     return (
         <>
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <div {...blockProps}>

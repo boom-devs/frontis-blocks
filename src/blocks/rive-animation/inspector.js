@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, MediaUpload, MediaUploadCheck } from "@wordpress/block-editor";
 
 import {
 	SelectControl,
@@ -15,6 +15,7 @@ import {
 	Dropdown,
 	Dashicon,
 	RangeControl,
+	Button,
 	ColorPicker,
 	ColorPalette,
 } from "@wordpress/components";
@@ -38,7 +39,6 @@ import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -55,7 +55,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		riveAnimationJsonTypeSwitcher,
@@ -152,25 +152,15 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 		riveAnimationVRBottomOffset,
 		riveAnimationVRBottomOffsetUnits,
+
+		//canvas width and height
+		riveAnimationCanvasWidth,
+		riveAnimationCanvasHeight,
+		riveAnimationCanvasHeightUnits,
+		riveAnimationCanvasWidthUnits,
 	} = attributes;
 
-	 useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-slider-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
@@ -468,12 +458,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	const globalMobileBorderRadiusWidth = `${riveAnimationGlobalBorderRadiusMobile?.top}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.right}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.bottom}${riveAnimationGlobalBorderRadiusUnits?.Mobile} ${riveAnimationGlobalBorderRadiusMobile?.left}${riveAnimationGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/* Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont();
-	}, []);
-	/* End Load Google Fonts */
-
+	/** Rive Animation Style */
 	const riveAnimationStyle = useMemo(
 		() => `
 			.${blockID}.fb-rive-animation-main-wrapper {
@@ -492,8 +477,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				`: `
 					${riveAnimationGlobalNormalClassicColor ? `background: ${riveAnimationGlobalNormalClassicColor};` : ''}
 				`}
-				${riveAnimationContainerWidth?.Desktop ? `width: ${riveAnimationContainerWidth?.Desktop}${riveAnimationContainerWidthUnits?.Desktop};` : ''}
-				${riveAnimationContainerHeight?.Desktop ? `height: ${riveAnimationContainerHeight?.Desktop}${riveAnimationContainerHeightUnits?.Desktop};` : ''}
+				${riveAnimationCanvasWidth?.Desktop ? `width: ${riveAnimationCanvasWidth?.Desktop}${riveAnimationCanvasWidthUnits?.Desktop};` : ''}
+				${riveAnimationCanvasHeight?.Desktop ? `height: ${riveAnimationCanvasHeight?.Desktop}${riveAnimationCanvasHeightUnits?.Desktop};` : ''}
 				${globalDesktopPadding && riveAnimationGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
 				${globalDesktopMargin && riveAnimationGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
 				${riveAnimationGlobalBorder ? `border: ${riveAnimationGlobalBorder};` : ''} 
@@ -525,8 +510,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 					${riveAnimationGlobalZIndex?.Tablet ? `z-index: ${riveAnimationGlobalZIndex?.Tablet};` : ''}
 				}
 				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
-					${riveAnimationContainerWidth?.Tablet ? `width: ${riveAnimationContainerWidth?.Tablet}${riveAnimationContainerWidthUnits?.Tablet};` : ''}
-					${riveAnimationContainerHeight?.Tablet ? `height: ${riveAnimationContainerHeight?.Tablet}${riveAnimationContainerHeightUnits?.Tablet};` : ''}
+					${riveAnimationCanvasWidth?.Tablet ? `width: ${riveAnimationCanvasWidth?.Tablet}${riveAnimationCanvasWidthUnits?.Tablet};` : ''}
+					${riveAnimationCanvasHeight?.Tablet ? `height: ${riveAnimationCanvasHeight?.Tablet}${riveAnimationCanvasHeightUnits?.Tablet};` : ''}
 					${globalTabletPadding && riveAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
 					${globalTabletMargin && riveAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
 					${globalTabletBorderWidth && riveAnimationGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
@@ -542,8 +527,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 					${riveAnimationGlobalZIndex?.Mobile ? `z-index: ${riveAnimationGlobalZIndex?.Mobile};` : ''}
 				}
 				.${blockID}.fb-rive-animation-main-wrapper .fb-rive-canvas-wrapper {
-					${riveAnimationContainerWidth?.Mobile ? `width: ${riveAnimationContainerWidth?.Mobile}${riveAnimationContainerWidthUnits?.Mobile};` : ''}
-					${riveAnimationContainerHeight?.Mobile ? `height: ${riveAnimationContainerHeight?.Mobile}${riveAnimationContainerHeightUnits?.Mobile};` : ''}
+					${riveAnimationCanvasWidth?.Mobile ? `width: ${riveAnimationCanvasWidth?.Mobile}${riveAnimationCanvasWidthUnits?.Mobile};` : ''}
+					${riveAnimationCanvasHeight?.Mobile ? `height: ${riveAnimationCanvasHeight?.Mobile}${riveAnimationCanvasHeightUnits?.Mobile};` : ''}
 					${globalMobilePadding && riveAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
 					${globalMobileMargin && riveAnimationGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
 					${globalMobileBorderWidth && riveAnimationGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
@@ -552,7 +537,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			}
 		`,
 		[
-			attributes
+			attributes,
 		],
 	);
 
@@ -582,6 +567,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 						globalImageID={riveAnimationImageID}
 						setglobalImageID={(value) => setAttributes({ riveAnimationImageID: value })}
 						isImageSize={false}
+						showThumbnail={false}
+						allowedExtension="riv"
+						allowedTypes={['application/octet-stream']}
 					/>
 
 					<ToggleControl
@@ -617,40 +605,32 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			>
 				<FB_Range
 					min={0}
-					max={riveAnimationContainerWidthUnits === '%' ? 100 : 1000}
+					max={2000}
 					label={__("Width", "frontis-blocks")}
-					rangeValue={riveAnimationContainerWidth}
+					rangeValue={riveAnimationCanvasWidth}
 					onChangeHandler={(value) =>
-						setAttributes({ riveAnimationContainerWidth: value })
+						setAttributes({ riveAnimationCanvasWidth: value })
 					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ riveAnimationContainerWidthUnits: value })
-					}
+					isRangeUnit={false}
 					deviceType={deviceType}
-					units={riveAnimationContainerWidthUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
 				<FB_Range
 					min={0}
-					max={riveAnimationContainerHeightUnits === '%' ? 100 : 1000}
+					max={2000}
 					label={__("Height", "frontis-blocks")}
-					rangeValue={riveAnimationContainerHeight}
+					rangeValue={riveAnimationCanvasHeight}
 					onChangeHandler={(value) =>
-						setAttributes({ riveAnimationContainerHeight: value })
+						setAttributes({ riveAnimationCanvasHeight: value })
 					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ riveAnimationContainerHeightUnits: value })
-					}
+					isRangeUnit={false}
 					deviceType={deviceType}
-					units={riveAnimationContainerHeightUnits}
 					setAttributes={setAttributes}
 					rangeStep={1}
 					resetFallbackValue={""}
 				/>
-				
-
 			</PanelBody>
 		</>
 	);
