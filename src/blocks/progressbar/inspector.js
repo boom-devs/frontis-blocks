@@ -274,6 +274,10 @@ const Inspector = ({ attributes, setAttributes }) => {
         progressbarGlobalHoverBoxShadowValues,
         progressbarGlobalHoverBoxShadowCssValue,
 
+        // title
+        showProgressTitle,
+        showProgressNumber
+
 	} = attributes;
     
     const deviceType= useDeviceType();
@@ -1043,6 +1047,7 @@ const Inspector = ({ attributes, setAttributes }) => {
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-progressbar-main-wrapper {
+            width: 100%;
             ${progressbarPositionType === 'default' ? `position: relative;` : ''}
             ${progressbarPositionType !== 'default' && progressbarPositionType !== 'relative' ? `width: 100%;` : ''}
             ${progressbarPositionType !== 'default' ? `position: ${progressbarPositionType};` : ''}
@@ -1453,6 +1458,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 		progressbarTabletSwitcher,
 		progressbarMobileSwitcher,
 
+        //switcher
+        showProgressTitle,
+        showProgressNumber,
+
         progressGlobalCustomCSS,
         progressGlobalWraperID,
 		progressGlobalWraperClass,
@@ -1554,6 +1563,16 @@ const Inspector = ({ attributes, setAttributes }) => {
     const generalControls = (
         <>
         <PanelBody title={__("Layout", "frontis-blocks")} initialOpen={true}>
+            <ToggleControl
+                label={__("Show Title", "frontis-blocks")}
+                checked={showProgressTitle}
+                onChange={(value) => setAttributes({ showProgressTitle: value })}
+            />
+            <ToggleControl
+                label={__("Show Number", "frontis-blocks")}
+                checked={showProgressNumber}
+                onChange={(value) => setAttributes({ showProgressNumber: value })}
+            />
             <SelectControl
                 label={__("Layout Type", "frontis-blocks")}
                 value={progressbarType}
@@ -1632,17 +1651,17 @@ const Inspector = ({ attributes, setAttributes }) => {
             </div>
         </PanelBody>
         <PanelBody title={__("Title", "frontis-blocks")} initialOpen={true}>
-                <TextControl
-                    label={__("Title", "frontis-blocks")}
-                    value={progressTitle}
-                    onChange={(value) => setAttributes({ progressTitle: value })}
-                />
+            <TextControl
+                label={__("Title", "frontis-blocks")}
+                value={progressTitle}
+                onChange={(value) => setAttributes({ progressTitle: value })}
+            />
 
-                <FB_HtmlTagControl
-                    label={__("Title Tag", "frontis-blocks")}
-                    globalHtmlTag={progressHeadingTag}
-                    setGlobalHtmlTag={(value) => setAttributes({ progressHeadingTag: value })}
-                />
+            <FB_HtmlTagControl
+                label={__("Title Tag", "frontis-blocks")}
+                globalHtmlTag={progressHeadingTag}
+                setGlobalHtmlTag={(value) => setAttributes({ progressHeadingTag: value })}
+            />
         </PanelBody>
         </>
     );

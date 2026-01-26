@@ -46,7 +46,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
         /** Typography Fonts */
         titleFontFamily,
-        
+
     } = attributes;
 
     useEffect(() => {
@@ -81,8 +81,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
 
 
-     /** Start load font */
-     useEffect(() => {
+    /** Start load font */
+    useEffect(() => {
         if (titleFontFamily && !loadedFonts.has(titleFontFamily)) {
             loadGoogleFont(titleFontFamily);
             loadedFonts.add(titleFontFamily);
