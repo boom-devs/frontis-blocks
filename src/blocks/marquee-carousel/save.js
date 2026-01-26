@@ -28,13 +28,16 @@ export default function Save({ attributes }) {
 			reverseDirection: reverseDirection,
 			pauseOnMouseEnter: pauseOnHover,
 			disableOnInteraction: false,
+			stopOnLastSlide: false, // Ensure loop continues
 			waitForTransition: true,
 		},
 		loop: true,
 		slidesPerView: "auto",
 		allowTouchMove: false,
-		freeMode: true,            // continuous ticker effect
-		freeModeMomentum: false,   // prevents sudden stops
+		freeMode: {
+			enabled: true,
+			momentum: false,
+		},   // continuous ticker effect
 		navigation: arrowsUniqueId
 			? {
 					nextEl: `.${arrowsUniqueId} .fb-news-ticker-next`,
