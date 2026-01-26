@@ -37,7 +37,7 @@ import FB_VisibilityControl from '@Components/visibility-control';
 
 import "./editor.scss";
 
-const Inspector = ({ attributes, setAttributes,  clientId}) => {
+const Inspector = ({ attributes, setAttributes}) => {
     const {
         blockId,
         blockStyle,
