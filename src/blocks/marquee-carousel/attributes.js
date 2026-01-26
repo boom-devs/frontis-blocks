@@ -28,10 +28,6 @@ const attributes = {
 		type: "boolean",
 		default: false,
 	},
-	pauseOnHover: {
-		type: "boolean",
-		default: false,
-	},
 
 	/** Start Width Height */
 	slideWidth: {

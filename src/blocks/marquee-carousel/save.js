@@ -5,7 +5,6 @@ export default function Save({ attributes }) {
 		blockId,
 		speed,
 		reverseDirection,
-		pauseOnHover,
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
 		arrowsUniqueId,
@@ -26,7 +25,6 @@ export default function Save({ attributes }) {
 		autoplay: {
 			delay: 0, // continuous scroll (no pause)
 			reverseDirection: reverseDirection,
-			pauseOnMouseEnter: pauseOnHover,
 			disableOnInteraction: false,
 			stopOnLastSlide: false, // Ensure loop continues
 			waitForTransition: true,
