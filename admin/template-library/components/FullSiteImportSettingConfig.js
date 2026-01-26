@@ -538,7 +538,9 @@ const FullSiteImportSettingConfig = ({
             formData.append("title", post.title || "Untitled");
             formData.append("content", post.content || "");
             formData.append("slug", post.slug || "");
-            formData.append("template", post.template || ""); // শুধু এটাই পাঠাবে
+            formData.append("template", post.template || "");
+            formData.append("uploads_updated", uploadsUpdated);
+            formData.append("site_url", window.location.origin);
 
             const res = await fetch(ajaxUrl, {
                 method: "POST",
@@ -733,6 +735,8 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
     form.append('security', nonce);
     form.append('headers', JSON.stringify(headers));
     form.append('footers', JSON.stringify(footers));
+    form.append('uploads_updated', uploadsUpdated);
+    form.append('site_url', window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {
@@ -775,6 +779,8 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
     form.append('security', nonce);
     form.append('templates', JSON.stringify(templates));
     form.append('mapping', JSON.stringify(navigationMapping));
+    form.append('uploads_updated', uploadsUpdated);
+    form.append('site_url', window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {
