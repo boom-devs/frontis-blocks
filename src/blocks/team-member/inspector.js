@@ -86,11 +86,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 		teamMemberImageBorderColorSwitcher,
 		teamMemberImageBorderColor,
 		teamMemberImageBorderHoverColor,
-		teamMemberImageOverlaySwitcher,
-		teamMemberImageBGColorSwitcher,
 		teamMemberImageBGColor,
 		teamMemberImageBGHoverColor,
 		teamMemberImageOverlayOpacity,
+
+		//overlay color
+		teamMemberImageOverlaySwitcher,
+		teamMemberImageBGColorSwitcher,
+		teamMemberImageBgType,
+		teamMemberImageBgClassicColor,
+		teamMemberImageBgGradientColor,
+		teamMemberImageBgCustomGradientSwitcher,
+		teamMemberImageBgCustomGradientInputValue,
+		teamMemberImageBgHoverType,
+		teamMemberImageBgHoverClassicColor,
+		teamMemberImageBgHoverGradientColor,
+		teamMemberImageBgHoverCustomGradientSwitcher,
+		teamMemberImageBgHoverCustomGradientInputValue,
 
 		teamMemberImageBorderUnits,
 		teamMemberImageBorderDesktop,
@@ -2916,12 +2928,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 			
 			.fb-team-member-wrapper.${blockID} .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
-				${teamMemberImageBGColor ? `background: ${teamMemberImageBGColor};` : ''}
+				${
+                    teamMemberImageBgType === "gradient"
+                      ? `background: ${
+                          teamMemberImageBgCustomGradientSwitcher && teamMemberImageBgCustomGradientInputValue
+                            ? teamMemberImageBgCustomGradientInputValue
+                            : teamMemberImageBgGradientColor
+                        };` : teamMemberImageBgClassicColor ? `background: ${teamMemberImageBgClassicColor};` : ''
+                }
 				${teamMemberImageOverlayOpacity?.Desktop ? `opacity: ${teamMemberImageOverlayOpacity?.Desktop};` : ''}
 				transition: all 0.3s ease-in-out;
 			}
 			.fb-team-member-wrapper.${blockID}:hover .fb-team-member-item .fb-team-member-image-wrapper .fb-team-member-image-overlay {
-				${teamMemberImageBGHoverColor ? `background: ${teamMemberImageBGHoverColor};` : ''}
+				${
+					teamMemberImageBgHoverType === "gradient"
+					  ? `background: ${
+						  teamMemberImageBgHoverCustomGradientSwitcher && teamMemberImageBgHoverCustomGradientInputValue
+							? teamMemberImageBgHoverCustomGradientInputValue
+							: teamMemberImageBgHoverGradientColor
+						};` : teamMemberImageBgHoverClassicColor ? `background: ${teamMemberImageBgHoverClassicColor};` : ''
+				}
 				transition: all 0.3s ease-in-out;
 			}
 
@@ -3509,10 +3535,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 			teamMemberImageBorder,
 			teamMemberImageBorderColor,
 			teamMemberImageBorderHoverColor,
-			teamMemberImageOverlaySwitcher,
 			teamMemberImageBGColor,
 			teamMemberImageBGHoverColor,
 			teamMemberImageOverlayOpacity,
+
+			//overlay color
+			teamMemberImageOverlaySwitcher,
+			teamMemberImageBGColorSwitcher,
+			teamMemberImageBgType,
+			teamMemberImageBgClassicColor,
+			teamMemberImageBgGradientColor,
+			teamMemberImageBgCustomGradientSwitcher,
+			teamMemberImageBgCustomGradientInputValue,
+			teamMemberImageBgHoverType,
+			teamMemberImageBgHoverClassicColor,
+			teamMemberImageBgHoverGradientColor,
+			teamMemberImageBgHoverCustomGradientSwitcher,
+			teamMemberImageBgHoverCustomGradientInputValue,
 
 			teamMemberImageBorderUnits,
 			teamMemberImageBorderDesktop,
@@ -4364,7 +4403,97 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{ teamMemberImageOverlaySwitcher === true && 
 				<>
-					<FB_SwitcherControl
+					<FB_BackgroundColorControl
+						label={__("Overlay Color", "frontis-blocks")}
+						bgColorSwitcher={teamMemberImageBGColorSwitcher}
+						setBgColorSwitcher={(value) =>
+							setAttributes({ teamMemberImageBGColorSwitcher: value })
+						}
+						normalBackgroundType={teamMemberImageBgType}
+						setNormalBackgroundType={(value) =>
+							setAttributes({ teamMemberImageBgType: value })
+						}
+						normalClassicColor={teamMemberImageBgClassicColor}
+						setNormalClassicColor={(value) =>
+							setAttributes({ teamMemberImageBgClassicColor: value === undefined ? '' : value })
+						}
+						normalGradientColor={teamMemberImageBgGradientColor}
+						setNormalGradientColor={(value) =>
+							setAttributes({ teamMemberImageBgGradientColor: value === undefined ? null : value })
+						}
+						normalCustomGradientSwitcher={
+							teamMemberImageBgCustomGradientSwitcher
+						}
+						setNormalCustomGradientSwitcher={(value) =>
+							setAttributes({
+								teamMemberImageBgCustomGradientSwitcher: value,
+							})
+						}
+						normalCustomGradientInputValue={
+							teamMemberImageBgCustomGradientInputValue
+						}
+						setNormalCustomGradientInputValue={(value) =>
+							setAttributes({
+								teamMemberImageBgCustomGradientInputValue: value,
+							})
+						}
+						normalBackgroundImageUrl=""
+						normalBackgroundImageAlt=""
+						normalBackgroundImageID=""
+						normalBackgroundImagePosition=""
+						normalBackgroundImageAttachment=""
+						normalBackgroundImageRepeat=""
+						normalBackgroundImageSize=""
+						hoverBackgroundType={teamMemberImageBgHoverType}
+						setHoverBackgroundType={(value) =>
+							setAttributes({ teamMemberImageBgHoverType: value })
+						}
+						hoverClassicColor={teamMemberImageBgHoverClassicColor}
+						setHoverClassicColor={(value) =>
+							setAttributes({ teamMemberImageBgHoverClassicColor: value === undefined ? '' : value })
+						}
+						hoverGradientColor={teamMemberImageBgHoverGradientColor}
+						setHoverGradientColor={(value) =>
+							setAttributes({ teamMemberImageBgHoverGradientColor: value === undefined ? null : value })
+						}
+						hoverCustomGradientSwitcher={
+							teamMemberImageBgHoverCustomGradientSwitcher
+						}
+						setHoverCustomGradientSwitcher={(value) =>
+							setAttributes({
+								teamMemberImageBgHoverCustomGradientSwitcher: value,
+							})
+						}
+						hoverCustomGradientInputValue={
+							teamMemberImageBgHoverCustomGradientInputValue
+						}
+						setHoverCustomGradientInputValue={(value) =>
+							setAttributes({
+								teamMemberImageBgHoverCustomGradientInputValue: value,
+							})
+						}
+						hoverBackgroundImageUrl=""
+						hoverBackgroundImageAlt=""
+						hoverBackgroundImageID=""
+						hoverBackgroundImagePosition=""
+						hoverBackgroundImageAttachment=""
+						hoverBackgroundImageRepeat=""
+						hoverBackgroundImageSize=""
+						isBackgroundImage={false}
+					/>
+					<FB_Range
+						label={__("Opacity", "frontis-blocks")}
+						min={0}
+						max={1}
+						rangeValue={teamMemberImageOverlayOpacity}
+						onChangeHandler={(value) => setAttributes({ teamMemberImageOverlayOpacity: value })}
+						deviceType={deviceType}
+						setAttributes={setAttributes}
+						rangeStep={0.1}
+						resetFallbackValue={0.5}
+						isRangeUnit={false}
+					/>
+					{/* <FB_SwitcherControl
 						label={__("Overlay Color", "frontis-blocks")}
 						globalSwitcher={teamMemberImageBGColorSwitcher}
 						setGlobalSwitcher={(value) => setAttributes({ teamMemberImageBGColorSwitcher: value })}
@@ -4397,7 +4526,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						rangeStep={0.1}
 						resetFallbackValue={0.5}
 						isRangeUnit={false}
-					/>
+					/> */}
 				</>
 				}
 
@@ -4486,148 +4615,148 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 
 				<FB_BackgroundColorControl
-							label={__("Background Color", "frontis-blocks")}
-							bgColorSwitcher={teamMemberContentBgColorSwitcher}
-							setBgColorSwitcher={(value) =>
-								setAttributes({ teamMemberContentBgColorSwitcher: value })
-							}
-							normalBackgroundType={teamMemberContentBgType}
-							setNormalBackgroundType={(value) =>
-								setAttributes({ teamMemberContentBgType: value })
-							}
-							normalClassicColor={teamMemberContentBgClassicColor}
-							setNormalClassicColor={(value) =>
-								setAttributes({ teamMemberContentBgClassicColor: value === undefined ? '' : value })
-							}
-							normalGradientColor={teamMemberContentBgGradientColor}
-							setNormalGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgGradientColor: value === undefined ? null : value })
-							}
-							normalCustomGradientSwitcher={
-								teamMemberContentBgCustomGradientSwitcher
-							}
-							setNormalCustomGradientSwitcher={(value) =>
-								setAttributes({
-									teamMemberContentBgCustomGradientSwitcher: value,
-								})
-							}
-							normalCustomGradientInputValue={
-								teamMemberContentBgCustomGradientInputValue
-							}
-							setNormalCustomGradientInputValue={(value) =>
-								setAttributes({
-									teamMemberContentBgCustomGradientInputValue: value,
-								})
-							}
-							normalBackgroundImageUrl={teamMemberContentBgImageUrl}
-							setNormalBackgroundImageUrl={(value) =>
-								setAttributes({ teamMemberContentBgImageUrl: value })
-							}
-							normalBackgroundImageAlt={teamMemberContentBgImageAlt}
-							setNormalBackgroundImageAlt={(value) =>
-								setAttributes({ teamMemberContentBgImageAlt: value })
-							}
-							normalBackgroundImageID={teamMemberContentBgImageID}
-							setNormalBackgroundImageID={(value) =>
-								setAttributes({ teamMemberContentBgImageID: value })
-							}
-							normalBackgroundImagePosition={
-								teamMemberContentBgImagePosition
-							}
-							setNormalBackgroundImagePosition={(value) =>
-								setAttributes({
-									teamMemberContentBgImagePosition: value,
-								})
-							}
-							normalBackgroundImageAttachment={
-								teamMemberContentBgImageAttachment
-							}
-							setNormalBackgroundImageAttachment={(value) =>
-								setAttributes({
-									teamMemberContentBgImageAttachment: value,
-								})
-							}
-							normalBackgroundImageRepeat={
-								teamMemberContentBgImageRepeat
-							}
-							setNormalBackgroundImageRepeat={(value) =>
-								setAttributes({
-									teamMemberContentBgImageRepeat: value,
-								})
-							}
-							normalBackgroundImageSize={teamMemberContentBgImageSize}
-							setNormalBackgroundImageSize={(value) =>
-								setAttributes({ teamMemberContentBgImageSize: value })
-							}
-							hoverBackgroundType={teamMemberContentBgHoverType}
-							setHoverBackgroundType={(value) =>
-								setAttributes({ teamMemberContentBgHoverType: value })
-							}
-							hoverClassicColor={teamMemberContentBgHoverClassicColor}
-							setHoverClassicColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverClassicColor: value === undefined ? '' : value })
-							}
-							hoverGradientColor={teamMemberContentBgHoverGradientColor}
-							setHoverGradientColor={(value) =>
-								setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? null : value })
-							}
-							hoverCustomGradientSwitcher={
-								teamMemberContentBgHoverCustomGradientSwitcher
-							}
-							setHoverCustomGradientSwitcher={(value) =>
-								setAttributes({
-									teamMemberContentBgHoverCustomGradientSwitcher: value,
-								})
-							}
-							hoverCustomGradientInputValue={
-								teamMemberContentBgHoverCustomGradientInputValue
-							}
-							setHoverCustomGradientInputValue={(value) =>
-								setAttributes({
-									teamMemberContentBgHoverCustomGradientInputValue: value,
-								})
-							}
-							hoverBackgroundImageUrl={teamMemberContentBgHoverImageUrl}
-							setBgHoverImageUrl={(value) =>
-								setAttributes({ teamMemberContentBgHoverImageUrl: value })
-							}
-							hoverBackgroundImageAlt={teamMemberContentBgHoverImageAlt}
-							setBgHoverImageAlt={(value) =>
-								setAttributes({ teamMemberContentBgHoverImageAlt: value })
-							}
-							hoverBackgroundImageID={teamMemberContentBgHoverImageID}
-							setBgHoverImageID={(value) =>
-								setAttributes({ teamMemberContentBgHoverImageID: value })
-							}
-							hoverBackgroundImagePosition={
-								teamMemberContentBgHoverImagePosition
-							}
-							setBgHoverImagePosition={(value) =>
-								setAttributes({
-									teamMemberContentBgHoverImagePosition: value,
-								})
-							}
-							hoverBackgroundImageAttachment={
-								teamMemberContentBgHoverImageAttachment
-							}
-							setBgHoverImageAttachment={(value) =>
-								setAttributes({
-									teamMemberContentBgHoverImageAttachment: value,
-								})
-							}
-							hoverBackgroundImageRepeat={
-								teamMemberContentBgHoverImageRepeat
-							}
-							setBgHoverImageRepeat={(value) =>
-								setAttributes({
-									teamMemberContentBgHoverImageRepeat: value,
-								})
-							}
-							hoverBackgroundImageSize={teamMemberContentBgHoverImageSize}
-							setBgHoverImageSize={(value) =>
-								setAttributes({ teamMemberContentBgHoverImageSize: value })
-							}
-						/>
+					label={__("Background Color", "frontis-blocks")}
+					bgColorSwitcher={teamMemberContentBgColorSwitcher}
+					setBgColorSwitcher={(value) =>
+						setAttributes({ teamMemberContentBgColorSwitcher: value })
+					}
+					normalBackgroundType={teamMemberContentBgType}
+					setNormalBackgroundType={(value) =>
+						setAttributes({ teamMemberContentBgType: value })
+					}
+					normalClassicColor={teamMemberContentBgClassicColor}
+					setNormalClassicColor={(value) =>
+						setAttributes({ teamMemberContentBgClassicColor: value === undefined ? '' : value })
+					}
+					normalGradientColor={teamMemberContentBgGradientColor}
+					setNormalGradientColor={(value) =>
+						setAttributes({ teamMemberContentBgGradientColor: value === undefined ? null : value })
+					}
+					normalCustomGradientSwitcher={
+						teamMemberContentBgCustomGradientSwitcher
+					}
+					setNormalCustomGradientSwitcher={(value) =>
+						setAttributes({
+							teamMemberContentBgCustomGradientSwitcher: value,
+						})
+					}
+					normalCustomGradientInputValue={
+						teamMemberContentBgCustomGradientInputValue
+					}
+					setNormalCustomGradientInputValue={(value) =>
+						setAttributes({
+							teamMemberContentBgCustomGradientInputValue: value,
+						})
+					}
+					normalBackgroundImageUrl={teamMemberContentBgImageUrl}
+					setNormalBackgroundImageUrl={(value) =>
+						setAttributes({ teamMemberContentBgImageUrl: value })
+					}
+					normalBackgroundImageAlt={teamMemberContentBgImageAlt}
+					setNormalBackgroundImageAlt={(value) =>
+						setAttributes({ teamMemberContentBgImageAlt: value })
+					}
+					normalBackgroundImageID={teamMemberContentBgImageID}
+					setNormalBackgroundImageID={(value) =>
+						setAttributes({ teamMemberContentBgImageID: value })
+					}
+					normalBackgroundImagePosition={
+						teamMemberContentBgImagePosition
+					}
+					setNormalBackgroundImagePosition={(value) =>
+						setAttributes({
+							teamMemberContentBgImagePosition: value,
+						})
+					}
+					normalBackgroundImageAttachment={
+						teamMemberContentBgImageAttachment
+					}
+					setNormalBackgroundImageAttachment={(value) =>
+						setAttributes({
+							teamMemberContentBgImageAttachment: value,
+						})
+					}
+					normalBackgroundImageRepeat={
+						teamMemberContentBgImageRepeat
+					}
+					setNormalBackgroundImageRepeat={(value) =>
+						setAttributes({
+							teamMemberContentBgImageRepeat: value,
+						})
+					}
+					normalBackgroundImageSize={teamMemberContentBgImageSize}
+					setNormalBackgroundImageSize={(value) =>
+						setAttributes({ teamMemberContentBgImageSize: value })
+					}
+					hoverBackgroundType={teamMemberContentBgHoverType}
+					setHoverBackgroundType={(value) =>
+						setAttributes({ teamMemberContentBgHoverType: value })
+					}
+					hoverClassicColor={teamMemberContentBgHoverClassicColor}
+					setHoverClassicColor={(value) =>
+						setAttributes({ teamMemberContentBgHoverClassicColor: value === undefined ? '' : value })
+					}
+					hoverGradientColor={teamMemberContentBgHoverGradientColor}
+					setHoverGradientColor={(value) =>
+						setAttributes({ teamMemberContentBgHoverGradientColor: value === undefined ? null : value })
+					}
+					hoverCustomGradientSwitcher={
+						teamMemberContentBgHoverCustomGradientSwitcher
+					}
+					setHoverCustomGradientSwitcher={(value) =>
+						setAttributes({
+							teamMemberContentBgHoverCustomGradientSwitcher: value,
+						})
+					}
+					hoverCustomGradientInputValue={
+						teamMemberContentBgHoverCustomGradientInputValue
+					}
+					setHoverCustomGradientInputValue={(value) =>
+						setAttributes({
+							teamMemberContentBgHoverCustomGradientInputValue: value,
+						})
+					}
+					hoverBackgroundImageUrl={teamMemberContentBgHoverImageUrl}
+					setBgHoverImageUrl={(value) =>
+						setAttributes({ teamMemberContentBgHoverImageUrl: value })
+					}
+					hoverBackgroundImageAlt={teamMemberContentBgHoverImageAlt}
+					setBgHoverImageAlt={(value) =>
+						setAttributes({ teamMemberContentBgHoverImageAlt: value })
+					}
+					hoverBackgroundImageID={teamMemberContentBgHoverImageID}
+					setBgHoverImageID={(value) =>
+						setAttributes({ teamMemberContentBgHoverImageID: value })
+					}
+					hoverBackgroundImagePosition={
+						teamMemberContentBgHoverImagePosition
+					}
+					setBgHoverImagePosition={(value) =>
+						setAttributes({
+							teamMemberContentBgHoverImagePosition: value,
+						})
+					}
+					hoverBackgroundImageAttachment={
+						teamMemberContentBgHoverImageAttachment
+					}
+					setBgHoverImageAttachment={(value) =>
+						setAttributes({
+							teamMemberContentBgHoverImageAttachment: value,
+						})
+					}
+					hoverBackgroundImageRepeat={
+						teamMemberContentBgHoverImageRepeat
+					}
+					setBgHoverImageRepeat={(value) =>
+						setAttributes({
+							teamMemberContentBgHoverImageRepeat: value,
+						})
+					}
+					hoverBackgroundImageSize={teamMemberContentBgHoverImageSize}
+					setBgHoverImageSize={(value) =>
+						setAttributes({ teamMemberContentBgHoverImageSize: value })
+					}
+				/>
 
 				<SelectControl
 					label={__("Border Style", "frontis-blocks")}

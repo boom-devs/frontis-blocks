@@ -4429,10 +4429,16 @@ const Inspector = ({ attributes, setAttributes }) => {
         .${blockId}.fb_post_grid_container .fb_post_grid_author {
             ${postAuthorMarginDesktopWidth && postAuthorMarginDesktop?.top ? `margin: ${postAuthorMarginDesktopWidth};` : ''}
         }
+        .${blockId} .fb_post_grid_author_wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
 
         .${blockId}.fb_post_grid_container .fb_post_grid_author,
         .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info,
-        .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name {
+        .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name,
+        .${blockId} .fb_post_grid_author_wrapper {
             ${postAuthorGap?.Desktop ? `gap: ${postAuthorGap?.Desktop}${postAuthorGapUnits?.Desktop};` : ''}
         }
 
@@ -4783,7 +4789,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             .${blockId}.fb_post_grid_container .fb_post_grid_author,
             .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info,
-            .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name {
+            .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name,
+            .${blockId} .fb_post_grid_author_wrapper {
                 ${postAuthorGap?.Tablet ? `gap: ${postAuthorGap?.Tablet}${postAuthorGapUnits?.Tablet};` : ''} 
             }
 
@@ -5117,7 +5124,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             .${blockId}.fb_post_grid_container .fb_post_grid_author,
             .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info,
-            .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name {
+            .${blockId}.fb_post_grid_container .fb_post_grid_author .fb_post_grid_author_info_name,
+            .${blockId} .fb_post_grid_author_wrapper {
                 ${postAuthorGap?.Mobile ? `gap: ${postAuthorGap?.Mobile}${postAuthorGapUnits?.Mobile};` : ''} 
             }
 

@@ -577,9 +577,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 				buttonBgHoverColor: '',
 				btnIcon: 'arrow-left',
 				buttonIconRotate: {
-					Desktop: "145",
-					Tablet: "145",
-					Mobile: "145",
+					Desktop: "135",
+					Tablet: "135",
+					Mobile: "135",
 				},
 				btnIconPosition: 'right',
 				infoButtonDesktopMargin: {
