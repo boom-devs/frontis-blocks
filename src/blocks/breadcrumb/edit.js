@@ -79,7 +79,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>

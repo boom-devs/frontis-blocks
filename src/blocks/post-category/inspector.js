@@ -484,14 +484,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
 	const deviceType = useDeviceType();
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockId: "fb-post-category-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	const readMoreIconHandler = (icon) => {
 		setAttributes({ readMoreIcon: icon });
 	};

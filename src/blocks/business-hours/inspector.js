@@ -37,7 +37,7 @@ import FB_AlignmentControl from '@Components/alignment-control';
 
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
         countries,

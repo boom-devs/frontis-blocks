@@ -49,7 +49,7 @@ import FB_ResponsiveBackgroundImageControl from '@Components/responsive-backgrou
 import FB_GradientColorControl from '@Components/gradient-color-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 
-const Inspector = ({ attributes, setAttributes, clientId }) => {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		breadcrumbAlignment,

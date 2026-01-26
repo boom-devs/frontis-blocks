@@ -50,13 +50,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		buttonFontFamily,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-post-category-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockId: "fb-post-category-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -868,6 +868,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
+                clientId={clientId}
             />
 
             <div {...blockProps}>
