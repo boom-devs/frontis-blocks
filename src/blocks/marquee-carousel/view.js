@@ -28,13 +28,13 @@
 
 				// Force autoplay to continue/resume on click/touch
 				swiperEl.addEventListener('click', () => {
-					if (swiperInstance.autoplay && !swiperInstance.autoplay.running) {
+					if (swiperInstance.autoplay) {
 						swiperInstance.autoplay.start();
 					}
 				});
 				
 				swiperEl.addEventListener('touchstart', () => {
-					if (swiperInstance.autoplay && !swiperInstance.autoplay.running) {
+					if (swiperInstance.autoplay) {
 						swiperInstance.autoplay.start();
 					}
 				});

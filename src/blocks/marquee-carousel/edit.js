@@ -268,6 +268,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 						// ensure first mount is synced
 						updateSwiperSoon();
 					}}
+					onClick={() => {
+						if (swiperRef.current?.autoplay) {
+							swiperRef.current.autoplay.start();
+						}
+					}}
 					className={`fb-marquee-swiper ${sliderGlobalWraperClass}`}
 					id={sliderGlobalWraperID}
 					modules={[
