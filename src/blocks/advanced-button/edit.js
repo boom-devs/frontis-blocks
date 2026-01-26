@@ -1,26 +1,30 @@
 import { __ } from '@wordpress/i18n';
-import { 
-    useBlockProps, 
-    RichText, 
+import {
+    useBlockProps,
+    RichText,
     BlockControls,
     AlignmentToolbar,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
 
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import Inspector from "./inspector";
+import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
 
+const loadedFonts = new Set();
+
 export default function Edit({ attributes, setAttributes, clientId, context }) {
-    const { 
+    const {
         blockId,
+        blockStyle,
         buttonAlignment,
         buttonTextSwitcher,
         buttonText,
@@ -31,7 +35,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         buttonIconPosition,
 
         buttonIconImageUrl,
-		buttonIconImageAlt,
+        buttonIconImageAlt,
 
         buttonGlobalWraperID,
         buttonGlobalWraperClass,
@@ -41,28 +45,46 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         advancedBtnMobileSwitcher,
 
         dynamicTextEnabled,
-		dynamicTextSource,
-		dynamicTextPostId,
-		dynamicTextPostType,
-		dynamicTextPostLabel,
-		dynamicTextField,
-		dynamicFeaturedImageField,
+        dynamicTextSource,
+        dynamicTextPostId,
+        dynamicTextPostType,
+        dynamicTextPostLabel,
+        dynamicTextField,
+        dynamicFeaturedImageField,
 
-		dynamicTextDateType,
-		dynamicTextDateFormat,
+        dynamicTextDateType,
+        dynamicTextDateFormat,
 
-		dynamicTextTimeType,
-		dynamicTextTimeFormat,
+        dynamicTextTimeType,
+        dynamicTextTimeFormat,
 
-		dynamicTextCommentsZeroText,
-		dynamicTextCommentsOneText,
-		dynamicTextCommentsManyText,
+        dynamicTextCommentsZeroText,
+        dynamicTextCommentsOneText,
+        dynamicTextCommentsManyText,
 
-		dynamicTextTermsTaxonomy,
-		dynamicTextTermsSeparator,
-		dynamicTextEnableLink,
-		dynamicTextLinkSource,
+        dynamicTextTermsTaxonomy,
+        dynamicTextTermsSeparator,
+        dynamicTextEnableLink,
+        dynamicTextLinkSource,
+        buttonFontFamily,
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-advanced-button-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+            loadGoogleFont(buttonFontFamily);
+            loadedFonts.add(buttonFontFamily);
+        }
+    }, [buttonFontFamily]);
+    /** End Load Google Font */
 
     const blockProps = useBlockProps({
         className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -74,7 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
      */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-    
+
     /**
      * Prevent link navigation in the editor and focus on text
      */
@@ -82,44 +104,43 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         event.preventDefault();
     };
 
-	/**
-	 * Dynamic Text Value for Title
-	 */
-	const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({ 
-		textEnabled:            dynamicTextEnabled,
-		textSource:             dynamicTextSource, 
-		textField:              dynamicTextField,
+    /**
+     * Dynamic Text Value for Title
+     */
+    const { dynamicDisplayValue, dynamicDisplayLink } = DynamicTextValue({
+        textEnabled: dynamicTextEnabled,
+        textSource: dynamicTextSource,
+        textField: dynamicTextField,
 
-		textPostId:             dynamicTextPostId,
-		textPostType:           dynamicTextPostType,
-		textPostLabel:          dynamicTextPostLabel,
+        textPostId: dynamicTextPostId,
+        textPostType: dynamicTextPostType,
+        textPostLabel: dynamicTextPostLabel,
 
-		textFeaturedImageField: dynamicFeaturedImageField, 
+        textFeaturedImageField: dynamicFeaturedImageField,
 
-		textDateType:           dynamicTextDateType,
-		textDateFormat:         dynamicTextDateFormat,
-		textTimeType:           dynamicTextTimeType,
-		textTimeFormat:         dynamicTextTimeFormat,
+        textDateType: dynamicTextDateType,
+        textDateFormat: dynamicTextDateFormat,
+        textTimeType: dynamicTextTimeType,
+        textTimeFormat: dynamicTextTimeFormat,
 
-		textCommentsZeroText:   dynamicTextCommentsZeroText,
-		textCommentsOneText:    dynamicTextCommentsOneText,
-		textCommentsManyText:   dynamicTextCommentsManyText,
+        textCommentsZeroText: dynamicTextCommentsZeroText,
+        textCommentsOneText: dynamicTextCommentsOneText,
+        textCommentsManyText: dynamicTextCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTextTermsTaxonomy,
-		textTermsSeparator:     dynamicTextTermsSeparator,
+        textTermsTaxonomy: dynamicTextTermsTaxonomy,
+        textTermsSeparator: dynamicTextTermsSeparator,
 
-		textLinkEnabled:        dynamicTextEnableLink,
-		textLinkSource:         dynamicTextLinkSource,
+        textLinkEnabled: dynamicTextEnableLink,
+        textLinkSource: dynamicTextLinkSource,
 
-		context,
-	});
+        context,
+    });
 
     return (
         <>
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
 
             <BlockControls>
@@ -129,11 +150,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     controls={['left', 'center', 'right', 'justify']}
                 />
             </BlockControls>
-            
+
             <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}` } id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
-                    <a 
-                        className="fb-advanced-button" 
+                <div className={`fb-parent-wrapper fb-advanced-button-wrapper ${buttonGlobalWraperClass}`} id={buttonGlobalWraperID} style={{ textAlign: buttonAlignment }} ref={panelRef}>
+                    <a
+                        className="fb-advanced-button"
                         rel={buttonTargetUrl ? 'noopener noreferrer' : undefined}
                         onClick={handleButtonClick}
                     >
@@ -209,6 +230,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
                     </a>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

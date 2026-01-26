@@ -17,7 +17,7 @@ import {
 	TextareaControl,
 	RangeControl,
 } from '@wordpress/components';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
@@ -34,7 +34,6 @@ import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
@@ -49,8 +48,10 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
+import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+
+const Inspector = ({ attributes, setAttributes }) => {
 
 	const {
 		blockID,
@@ -589,29 +590,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType= useDeviceType();
-
-	// Set blockID if it doesn't exist
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "fb-team-member-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	/** Start load font */
-	useEffect(() => {
-		loadGoogleFont(teamMemberDesignationFontFamily);
-		loadGoogleFont(teamMemberNameFontFamily);
-		loadGoogleFont(teamMemberDescFontFamily);
-		loadGoogleFont(teamMemberBadgeFontFamily);
-	}, [
-		teamMemberDesignationFontFamily, 
-		teamMemberNameFontFamily, 
-		teamMemberDescFontFamily,
-		teamMemberBadgeFontFamily
-	]);
-	/** End load font */
 
 	/** Start Team Member Social Drag And Drop Handle Control */
 	const handleDragEnd = (event) => {
@@ -3883,10 +3861,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [fbTeamMemberStyle, customCss]);
 
-	const editorStyle = `${fbTeamMemberStyle} ${customCss}`.replace(/\s+/g, " ").trim();
-
-
-
 	/**
      * Generate SVG Icons for Icon
      */
@@ -3918,8 +3892,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			frontendSocialIconBtnIcon: generateSvgIcon(socialIconBtnIcon), 
 		})
 	}, [socialIconBtnIcon]);
-
-	console.log(frontendSocialIconBtnIcon);
 
 	// Check if Pro is active
 	const getProActiveState = getProActive();
@@ -6027,10 +5999,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
@@ -6040,3 +6008,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -27,7 +27,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_Range from '@Components/range';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -43,7 +42,7 @@ import FB_HtmlTagControl from '../../components/html-tag-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -278,22 +277,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
     
     const deviceType= useDeviceType();
-
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "progressbar-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-    /** Start load font */
-    useEffect(() => {
-        loadGoogleFont(progressTitleFontFamily); 
-        loadGoogleFont(progressNumberFontFamily); 
-    }, [progressTitleFontFamily, progressNumberFontFamily]);
-    /** End load font */
-
 
     /** Start Progress Border Radius */
     const progressBorderWidthUnitsChange = (event, position) => {
@@ -1565,8 +1548,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     /**
      * Inspector General Controls
      */
@@ -2590,10 +2571,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
-
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -2602,3 +2579,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

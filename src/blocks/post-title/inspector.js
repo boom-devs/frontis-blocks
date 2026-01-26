@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useMemo, useEffect } from "@wordpress/element";
+import { useMemo, memo, useEffect } from "@wordpress/element";
 import {
     PanelBody,
     BaseControl,
@@ -8,7 +8,6 @@ import {
     ToggleControl,
 } from "@wordpress/components";
 import { OVERFLOW_OP, BORDER_STYLES } from "@Constants/fbConstants";
-import loadGoogleFont from "@Utils/loadGoogleFont";
 import getCustomCss from "@Utils/getCustomCss";
 import { useDeviceType } from "@Config/displayType";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
@@ -26,7 +25,9 @@ import FB_InputControl from "@Components/input-control";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_VisibilityControl from "@Components/visibility-control";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+import './editor.scss';
+
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,
         isLink,
@@ -143,20 +144,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-        if (clientId && !blockId) {
-            setAttributes({ blockId: "fb-post-title-" + clientId.slice(0, 8) });
-        }
-    }, [clientId]);
-
-    /** Start Load Google Font */
-    useEffect(() => {
-        if (postTitleFontFamily !== "Default") {
-            loadGoogleFont(postTitleFontFamily);
-        }
-    }, [postTitleFontFamily]);
-    /** End Load Google Font */
 
     /* Start Global Padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
@@ -1672,7 +1659,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>{editorStyle}</style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -1681,3 +1667,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

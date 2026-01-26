@@ -47,7 +47,7 @@ class AssetsGenerationStatus {
         
         ?>
         <div class="fb-assets-meta-box">
-            <div name="fb_page_assets_generation" id="fb_page_assets_generation">Compilation Status:<span><?php echo $status; ?></span></div>
+            <div name="fb_page_assets_generation" id="fb_page_assets_generation">Compilation Status:<span><?php echo esc_html( $status ); ?></span></div>
         </div>
         <?php
     }

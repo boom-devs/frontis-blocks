@@ -384,7 +384,7 @@ const TemplateGrid = ({
                 onMouseLeave={() => setIsHovered(false)}
             >
                 <div className={`fb-template-library-card-img ${templateType !== 'patterns' ? 'scroll-img' : ''}`}>
-                    <img src={`https://template-library.boomdevshub.com/storage/${imageUrl}`} alt={title || "Template preview"} />
+                    <img src={`https://template-library.frontiswp.com/storage/${imageUrl}`} alt={title || "Template preview"} />
                     <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
                         {is_premium ? "PRO" : "FREE"}
                     </div>
@@ -435,7 +435,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                handleFullSiteImport(id)
+                                // handleFullSiteImport(id);
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -447,14 +447,14 @@ const TemplateGrid = ({
                                     importPage(id);
                                 } else if (templateData.type === 'sites') {
                                     // console.log('sites');
-                                    handleFullSiteImport()
+                                    // handleFullSiteImport();
                                 }
                             }
                         }}
 
                         disabled={isImporting}
                     >
-                        <span>Import</span>
+                        {activeTab === 'sites' ? <span>Coming Soon</span> : <span>Import</span>}
                     </button>
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}

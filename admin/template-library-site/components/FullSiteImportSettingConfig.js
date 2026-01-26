@@ -440,79 +440,6 @@ const FullSiteImportSettingConfig = ({
   }, [customColors, customGradientColors, deviceType]);
 
 
-  // Import pages
-  // const handleStorePages = async (pages) => {
-  //   if (pages) {
-  //       try {
-  //           // First update site settings (once only)
-  //           const siteSettings = new FormData();
-  //           siteSettings.append("action", "fb_update_site_settings");
-  //           siteSettings.append("security", nonce);
-  //           siteSettings.append("siteName", formData.siteName || "");
-  //           siteSettings.append("siteTagline", formData.siteTagline || "");
-  //           siteSettings.append("siteLogo", formData.siteLogo.id || "");
-
-  //           await fetch(ajaxUrl, {
-  //               method: "POST",
-  //               body: siteSettings,
-  //               credentials: "same-origin",
-  //           });
-
-  //           // Then import pages one by one
-  //           for (const page of pages) {
-  //               try {
-  //                   let pageObj = page.page;
-  //                   if (typeof page.page === "string") {
-  //                       try {
-  //                           pageObj = JSON.parse(page.page);
-  //                       } catch (err) {
-  //                           console.error("JSON parse failed:", err);
-  //                           pageObj = { content: page.page };
-  //                       }
-  //                   }
-
-  //                   const parsedBlocks = pageObj.content || "";
-
-  //                   const pageData = new FormData();
-  //                   pageData.append("action", "fb_full_site_import");
-  //                   pageData.append("security", nonce);
-  //                   pageData.append("title", page.name);
-  //                   pageData.append("content", parsedBlocks);
-  //                   pageData.append("site_url", window.location.origin || "");
-  //                   pageData.append("uploads_updated", uploadsUpdated);
-
-  //                   const response = await fetch(ajaxUrl, {
-  //                       method: "POST",
-  //                       body: pageData,
-  //                       credentials: "same-origin",
-  //                   });
-
-  //                   const result = await response.json();
-
-  //                   if (result.success) {
-  //                       console.log(`${page.name} created successfully`);
-  //                   } else {
-  //                       console.error(`Failed to create ${page.name}`, result.data);
-  //                   }
-  //               } catch (error) {
-  //                   console.error(`Error creating ${page.name}:`, error);
-  //               }
-  //           }
-
-  //           toast.success("Site imported successfully!", {
-  //               position: "top-right",
-  //               autoClose: 3000,
-  //           });
-  //       } catch (err) {
-  //           console.error("Import error:", err);
-  //           toast.error("Failed to import site", {
-  //               position: "top-right",
-  //               autoClose: 3000,
-  //           });
-  //       }
-  //   }
-  // };
-
   const handleStorePages = async (pages) => {
     if (!pages || pages.length === 0) {
         console.log("No pages to import.");
@@ -558,12 +485,12 @@ const FullSiteImportSettingConfig = ({
             const parsedBlocks = pageObj.content || "";
 
             const pageData = new FormData();
-            pageData.append("action", "fb_full_site_import");
+            pageData.append("action", "fb_pages_import");
             pageData.append("security", nonce);
             pageData.append("title", page.name);
             pageData.append("content", parsedBlocks || "");
             pageData.append("slug", page.slug || "");
-            pageData.append("template", page.template || "wp-custom-template-fb-template-pages");
+            pageData.append("template", page.template || "fb-template-pages");
             pageData.append("badge", page.badge || "");
             pageData.append("site_url", window.location.origin);
             pageData.append("uploads_updated", uploadsUpdated);

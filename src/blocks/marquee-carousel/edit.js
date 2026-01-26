@@ -9,9 +9,10 @@ import { ToolbarGroup, ToolbarButton } from "@wordpress/components";
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useDispatch, useSelect } from "@wordpress/data";
 import { createBlock } from "@wordpress/blocks";
-import Inspector from "./inspector";
 import { Swiper } from "swiper/react";
 import "./editor.scss";
+
+import Inspector from "./inspector";
 
 const ALLOWED_BLOCKS = ["frontis-blocks/marquee-carousel-item"];
 
@@ -40,12 +41,21 @@ import "swiper/css/effect-creative";
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockId,
+		blockStyle,
 		speed,
 		reverseDirection,
 		pauseOnHover,
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockId: "marquee-carousel-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
 	const arrowsId = context["frontisBlocks:arrowsUniqueId"];
 	// console.log("Marque edit ", arrowsId);
@@ -68,10 +78,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		const handleClick = () => {
 			if (swiperRef.current.autoplay?.running) {
 				swiperRef.current.autoplay.stop();
-				btn.classList.add("paused"); 
+				btn.classList.add("paused");
 			} else {
 				swiperRef.current.autoplay.start();
-				btn.classList.remove("paused"); 
+				btn.classList.remove("paused");
 			}
 		};
 
@@ -146,31 +156,31 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	// );
 
 	const settings = useMemo(
-	() => ({
-		spaceBetween: 0,
-		centeredSlides: false,
-		speed: speed || 5000,
-		autoplay: {
-		delay: 0,
-		reverseDirection: reverseDirection,
-		pauseOnMouseEnter: pauseOnHover,
-		disableOnInteraction: false,
-		waitForTransition: true,
-		},
-		loop: true,
-		slidesPerView: "auto",
-		allowTouchMove: false,
-		freeMode: true,
-		freeModeMomentum: false,
-		navigation: arrowsId
-		? {
-			nextEl: `.${arrowsId} .fb-news-ticker-next`,
-			prevEl: `.${arrowsId} .fb-news-ticker-prev`,
-			hideOnClick: false,
-			}
-		: false,
-	}),
-	[speed, reverseDirection, pauseOnHover, arrowsId],
+		() => ({
+			spaceBetween: 0,
+			centeredSlides: false,
+			speed: speed || 5000,
+			autoplay: {
+				delay: 0,
+				reverseDirection: reverseDirection,
+				pauseOnMouseEnter: pauseOnHover,
+				disableOnInteraction: false,
+				waitForTransition: true,
+			},
+			loop: true,
+			slidesPerView: "auto",
+			allowTouchMove: false,
+			freeMode: true,
+			freeModeMomentum: false,
+			navigation: arrowsId
+				? {
+					nextEl: `.${arrowsId} .fb-news-ticker-next`,
+					prevEl: `.${arrowsId} .fb-news-ticker-prev`,
+					hideOnClick: false,
+				}
+				: false,
+		}),
+		[speed, reverseDirection, pauseOnHover, arrowsId],
 	);
 
 
@@ -245,7 +255,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			{renderSliderToolbarControls()}
 			<div {...blockProps}>
@@ -275,6 +284,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					<div {...innerBlocksProps} />
 				</Swiper>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

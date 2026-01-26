@@ -5,14 +5,15 @@ import {
 } from '@wordpress/block-editor';
 
 import { useEffect, useState, useRef } from '@wordpress/element';
-import Inspector from "./inspector";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
+import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -31,10 +32,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownMobileSwitcher,
 	} = attributes;
 
+	// Generate unique block ID if not set
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "countdown-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
 
-/**
-	* Manages tab button settings and switches to block settings on click
-	*/
+	/**
+		* Manages tab button settings and switches to block settings on click
+		*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
@@ -138,6 +147,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

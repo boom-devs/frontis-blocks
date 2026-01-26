@@ -1,11 +1,16 @@
 import { __ } from "@wordpress/i18n";
 import { useEffect } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
+import loadGoogleFont from "@Utils/loadGoogleFont";
+
 import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+		blockStyle,
 		postTitleTag,
 		isLink,
 		rel,
@@ -19,14 +24,34 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 		wrapperId,
 		wrapperClass,
+
+		postTitleFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && !blockId) {
+			setAttributes({ blockId: "fb-post-title-" + clientId.slice(0, 8) });
+		}
+	}, [clientId]);
+
+	/** Start load font */
+	useEffect(() => {
+		[postTitleFontFamily].forEach(font => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [postTitleFontFamily]);
+	/** End load font */
+
 
 	const blockProps = useBlockProps({
 		className: `fb-post-title-block ${blockId} ${
 			postTitleDesktopSwitcher && "fb-desktop-responsive"
 		} ${postTitleTabletSwitcher && "fb-tablet-responsive"} ${
 			postTitleMobileSwitcher && "fb-mobile-responsive"
-		}`,
+			}`,
 	});
 
 	useEffect(() => {
@@ -54,7 +79,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>
@@ -73,6 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</TagName>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

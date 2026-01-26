@@ -22,6 +22,7 @@ import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_GBSelectControl from '@Components/gb-select-control';
 
+
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
 
@@ -88,11 +89,12 @@ const FB_TypographyControl = ({
         });
     }, []);
 
-    useEffect(() => {
-		if (fontFamily !== 'Default') {
-			loadGoogleFont(fontFamily);
-		}
-	}, [fontFamily]);
+
+    // useEffect(() => {
+	// 	if (fontFamily !== 'Default') {
+	// 		loadGoogleFont(fontFamily);
+	// 	}
+	// }, [fontFamily]);
 
     const handleFontFamilyChange = (selectedOption) => {
         setSelectedFontFamilyOption(selectedOption);
@@ -103,9 +105,9 @@ const FB_TypographyControl = ({
         // Update font weight list
         setAvailableFontWeights(selectedOption?.weights || []);
     
-        if (newFontFamily !== 'Default') {
-            loadGoogleFont(newFontFamily);
-        }
+        // if (newFontFamily !== 'Default') {
+        //     loadGoogleFont(newFontFamily);
+        // }
     };
 
     const handleGlobalTypoTypeChange = (selectedOption) => {

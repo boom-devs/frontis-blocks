@@ -14,16 +14,56 @@ export default {
             Mobile: '',
         },
     },
+    megaMenuIconTypeSwitcher: {
+        type: 'string',
+        default: 'opener',
+    },
     //Mega menu width
     megaMenuWidthSwitcher: {
         type: 'string',
         default: 'full',
     },
     megaMenuContentWidthValue: {
-        type: 'string',
-        default: '1200'
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
     megaMenuContentWidthValueUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    megaMenuContentTopPositionValue: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuContentTopPositionUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    megaMenuContentLeftPositionValue: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuContentLeftPositionUnits: {
         type: 'object',
         default: {
             Desktop: 'px',
@@ -234,6 +274,132 @@ export default {
         }
     },
     megaMenuIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    //Open Icon
+    megaMenuOpenIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    megaMenuOpenIconColor: {
+        type: 'string'
+    },
+    megaMenuOpenIconHoverColor: {
+        type: 'string',
+    },
+    megaMenuOpenIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuOpenIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuOpenIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    megaMenuOpenIconRotation: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuOpenIconRotateHover: {
+        type: 'object',
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        }
+    },
+    //Close Icon
+    megaMenuCloseIconColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    megaMenuCloseIconColor: {
+        type: 'string'
+    },
+    megaMenuCloseIconHoverColor: {
+        type: 'string',
+    },
+    megaMenuCloseIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuCloseIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuCloseIconGap: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuCloseIconGapUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    megaMenuCloseIconRotateSwitcher: {
+        type: 'string',
+        default: 'normal',
+    },
+    megaMenuCloseIconRotation: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    megaMenuCloseIconRotateHover: {
         type: 'object',
         default: {
             Desktop: "",

@@ -12,14 +12,13 @@ import {
  * Internal depencencies
  */
 import { BORDER_STYLES, OVERFLOW_OP } from "@Constants/fbConstants";
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 import FB_Spacing from "@Components/spacing";
 import FB_TypographyControl from "@Components/typography-control";
 import FB_Range from "@Components/range";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from "@Components/switcher-control";
 import FB_ColorControl from "@Components/color-control";
-import loadGoogleFont from "@Utils/loadGoogleFont";
 import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import getCustomCss from "@Utils/getCustomCss";
@@ -31,7 +30,7 @@ import FB_InspectorControls from "@Components/InspectorControls";
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockId,
 		paragraphText,
@@ -249,14 +248,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-advanced-paragraphs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const paragraphColumnGapFn = (value) => {
 		setAttributes({ paragraphColumnGap: value });
@@ -1264,12 +1255,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalTabletBorderRadiusWidth = `${paragraphGlobalBorderRadiusTablet.top}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.right}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.bottom}${paragraphGlobalBorderRadiusUnits.Tablet} ${paragraphGlobalBorderRadiusTablet.left}${paragraphGlobalBorderRadiusUnits.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${paragraphGlobalBorderRadiusMobile.top}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.right}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.bottom}${paragraphGlobalBorderRadiusUnits.Mobile} ${paragraphGlobalBorderRadiusMobile.left}${paragraphGlobalBorderRadiusUnits.Mobile}`;
 	/** End Border Radius */
-
-	useEffect(() => {
-		if (paragraphFontFamily !== "Default") {
-			loadGoogleFont(paragraphFontFamily);
-		}
-	}, [paragraphFontFamily]);
 
 	// detect <a> tags inside the RichText
 	const hasLinkInParagraph = useMemo(() => {
@@ -2396,10 +2381,6 @@ transition: all .3s ease-in-out;
 			blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
 		});
 	}, [allBlockStyle, customCss]);
-
-	const editorStyle = `${allBlockStyle}${customCss}`
-		.replace(/\s+/g, " ")
-		.trim();
 
 	/**
 	 * Inspector General Controls
@@ -3763,8 +3744,6 @@ transition: all .3s ease-in-out;
 
 	return (
 		<>
-			<style>{editorStyle}</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
@@ -3773,3 +3752,4 @@ transition: all .3s ease-in-out;
 		</>
 	);
 }
+export default memo(Inspector);

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import FB_BoxShadowControl from '@Components/box-shadow';
@@ -12,7 +12,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -21,6 +20,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveControl from '@Components/responsive-control';
+import "./editor.scss";
 
 
 import { 
@@ -54,7 +54,7 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const { 
         blockID,
         // deviceType,
@@ -342,14 +342,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
     
 	const deviceType= useDeviceType();
-    
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-feature-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const [FeatureItemList, setFeatureItemList] = useState(FeatureItems);
 
@@ -1420,14 +1412,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     /** End Border Radius */
 
-    /* Start Load Google Fonts */
-	useEffect(() => {
-		loadGoogleFont(FeatureTitleFontFamily);
-        loadGoogleFont(FeatureDescFontFamily);
-	}, [FeatureTitleFontFamily, FeatureDescFontFamily]);
-
-    /* End Load Google Fonts */
-
     /** Start Feature Item Color Style */
 	const featureSingleItemStyle = useMemo(() => {
         let style = '';
@@ -2320,8 +2304,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     useEffect(() => {
         setAttributes({blockStyle: `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [featureSingleItemStyle, allBlockStyle, customCss]);
-
-    const editorStyle = `${featureSingleItemStyle}${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -3411,9 +3393,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -3422,3 +3401,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>   
     );
 }
+export default memo(Inspector);

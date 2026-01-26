@@ -41,15 +41,15 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	}
 
 	.fb-setting-spacing-container {
-		padding: 0 6px 0 0;
+		padding: 0;
 
 		.fb-setting-spacing-inner-container {
-			padding: 0 10px;
+			padding: 0;
 		}
 	}
 
 	.fb-setting-spacing-label-container {
-		margin: 14px -7px !important;
+		margin: 0 0 12px !important;
 	}
 
 	.fb-global-color-panel .components-tools-panel-header {
@@ -216,58 +216,61 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 
 }
 
-.block-editor-tools-panel-color-gradient-settings__dropdown>button.is-open {
-	background: transparent;
-}
 
-.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
-	padding: 0;
-	border: 1px solid $neutral-color-100;
-	border-radius: 4px;
+.fb-global-controls {
+	.block-editor-tools-panel-color-gradient-settings__dropdown>button.is-open {
+		background: transparent;
+	}
 
-	.block-editor-tools-panel-color-gradient-settings__item {
-		border: none;
-		border-bottom: 1px solid $neutral-color-100;
-
-		&:first-child {
-			margin-top: 0;
-		}
-
-		&:last-child {
-			border-bottom: none;
+	.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-global-color-panel {
+		padding: 0;
+		border: 1px solid $neutral-color-100;
+		border-radius: 4px;
+	
+		.block-editor-tools-panel-color-gradient-settings__item {
+			border: none;
+			border-bottom: 1px solid $neutral-color-100;
+	
+			&:first-child {
+				margin-top: 0;
+			}
+	
+			&:last-child {
+				border-bottom: none;
+			}
 		}
 	}
-}
-
-.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
-	padding: 0 !important;
-
-	.block-editor-tools-panel-color-gradient-settings__item {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding-right: 12px;
-		margin-top: 0;
-
-		&:first-child {
-			border-radius: 4px 4px 0 0;
-		}
-
-		&:last-child {
-			border-radius: 0 0 4px 4px;
-		}
-
-		.fb-delete-custom-color {
-			display: none;
-			border: none;
-			background: transparent;
-			color: $error-color;
-			border-left: 1px solid #E1E3E8;
-			padding-left: 12px;
-			cursor: pointer;
-
-			&:first-of-type {
-				display: block;
+	
+	.components-grid.components-tools-panel.block-editor-panel-color-gradient-settings.fb-color-panel.fb-custom-color-panel {
+		padding: 0 !important;
+	
+		.block-editor-tools-panel-color-gradient-settings__item {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding-right: 12px;
+			margin-top: 0;
+	
+			&:first-child {
+				border-radius: 4px 4px 0 0;
+			}
+	
+			&:last-child {
+				border-radius: 0 0 4px 4px;
+			}
+	
+			.fb-delete-custom-color {
+				display: none;
+				border: none;
+				background: transparent;
+				color: $error-color;
+				border-left: 1px solid #E1E3E8;
+				padding-left: 12px;
+				cursor: pointer;
+	
+				&:first-of-type {
+					display: block;
+				}
 			}
 		}
 	}
@@ -357,8 +360,10 @@ div#frontis-blocks-sidebar\:frontis-blocks-sidebar {
 	}
 }
 
-.components-navigator-screen {
-    scrollbar-width: none;
+.fb-global-controls {
+	.components-navigator-screen {
+		scrollbar-width: none;
+	}
 }
 
 .fb-gradient-color-popup {
@@ -572,11 +577,13 @@ svg#fb-global-panel-icon {
 	height: 25px;
 }
 
-.block-editor-panel-color-gradient-settings__color-name {
-	font-family: $heading-font-family;
-	font-size: $base-font-size;
-	font-weight: 500;
-	line-height: 16px;
+.fb-global-controls {
+	.block-editor-panel-color-gradient-settings__color-name {
+		font-family: $heading-font-family;
+		font-size: $base-font-size;
+		font-weight: 500;
+		line-height: 16px;
+	}
 }
 
 .fb-delete {
@@ -595,14 +602,6 @@ button.fb-custom-color-btn:hover {
     color: #FFF !important;
 }
 
-// .fb-global-color-panel, .fb-custom-color-panel {
-// 	.components-popover__content {
-// 		width: 230px;
-// 	}
-// 	.block-editor-color-gradient-control__panel {
-// 		width: 100%;
-// 	}
-// }
 
 
 .fb-theme-settings-wrapper {
@@ -613,26 +612,4 @@ button.fb-custom-color-btn:hover {
 			}
 		}
 	}
-	// .components-panel__body {
-	// 	padding: 0 I !important;
-
-	// 	&.is-opened {
-	// 		padding: 0 17px !important;
-	// 	}
-	// }
-	// .fb-theme-settings-element {
-	// 	min-height: 58px;
-	// 	background: #FFFFFF;
-	// 	padding: 14px 16px;
-	// 	color: #050607;
-	// 	font-family: "Onest", sans-serif;
-	// 	font-size: 14px;
-	// 	font-weight: 600;
-	// 	letter-spacing: 0px;
-	// 	line-height: 19px;
-	// 	border-top: 1px solid #ddd;
-	// 	border-bottom: 1px solid #ddd;
-	// 	display: flex;
-	// 	align-items: center;
-	// }
 }

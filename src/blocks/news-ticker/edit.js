@@ -1,13 +1,18 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
 import { useMemo, useEffect } from "@wordpress/element";
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import "./editor.scss";
+
+import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockID,
+		blockStyle,
 		newsTickerGlobalWraperID,
 		newsTickerGlobalWraperClass,
 		newsTickerDesktopSwitcher,
@@ -20,36 +25,55 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTime,
 		timerPosition,
 		arrowsUniqueId,
-		showAutoplayButton
+		showAutoplayButton,
+
+		tickerLabelFontFamily,
 	} = attributes;
 
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-news-ticker-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start load font */
+	useEffect(() => {
+		[tickerLabelFontFamily].forEach(font => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [tickerLabelFontFamily]);
+	/** End load font */
+
 	// Generate unique ID for arrows
-    const generatedArrowsId = useMemo(() => {
-        if (arrowsUniqueId) return arrowsUniqueId;
-        
-        const randomString = Math.random().toString(36).substring(2, 10) +
-                            Date.now().toString(36).substring(2);
-        return `arrows-${randomString}`;
-    }, [arrowsUniqueId]);
+	const generatedArrowsId = useMemo(() => {
+		if (arrowsUniqueId) return arrowsUniqueId;
 
-    // Save the generated ID to attributes
-    useEffect(() => {
-        if (!arrowsUniqueId || arrowsUniqueId !== generatedArrowsId) {
-            setAttributes({ arrowsUniqueId: generatedArrowsId });
-        }
-    }, [generatedArrowsId, arrowsUniqueId, setAttributes]);
+		const randomString = Math.random().toString(36).substring(2, 10) +
+			Date.now().toString(36).substring(2);
+		return `arrows-${randomString}`;
+	}, [arrowsUniqueId]);
 
-    // Use the generated/saved ID
-    const finalArrowsId = arrowsUniqueId || generatedArrowsId;
+	// Save the generated ID to attributes
+	useEffect(() => {
+		if (!arrowsUniqueId || arrowsUniqueId !== generatedArrowsId) {
+			setAttributes({ arrowsUniqueId: generatedArrowsId });
+		}
+	}, [generatedArrowsId, arrowsUniqueId, setAttributes]);
+
+	// Use the generated/saved ID
+	const finalArrowsId = arrowsUniqueId || generatedArrowsId;
 
 	// console.log(finalArrowsId);
 	// console.log(arrowsUniqueId);
 	const blockProps = useBlockProps({
-		className: `fb-news-ticker-wrapper ${blockID} ${
-			newsTickerDesktopSwitcher && "fb-desktop-responsive"
-		} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${
-			newsTickerMobileSwitcher && "fb-mobile-responsive"
-		}`,
+		className: `fb-news-ticker-wrapper ${blockID} ${newsTickerDesktopSwitcher && "fb-desktop-responsive"
+			} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${newsTickerMobileSwitcher && "fb-mobile-responsive"
+			}`,
 	});
 
 	return (
@@ -57,7 +81,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 			<div {...blockProps} id={newsTickerGlobalWraperID}>
 				<div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass}`}>
@@ -88,7 +111,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							]}
 							templateLock={false}
 						/>
-						
+
 					</div>
 					{showArrows && (
 						<div className={`fb-news-ticker-arrows ${finalArrowsId}`}>
@@ -113,12 +136,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								<div className={`fb-news-ticker-pause-btn ${finalArrowsId}`}>
 									{/* Pause Icon */}
 									<svg className="icon-pause" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-										<path fillRule="evenodd" clipRule="evenodd" d="M6.75 5.75C6.75 5.33579 7.08579 5 7.5 5H9C9.41421 5 9.75 5.33579 9.75 5.75V19.25C9.75 19.6642 9.41421 20 9 20H7.5C7.30109 20 7.11032 19.921 6.96967 19.7803C6.82902 19.6397 6.75 19.4489 6.75 19.25V5.75ZM14.25 5.75C14.25 5.33579 14.5858 5 15 5H16.5C16.6989 5 16.8897 5.07902 17.0303 5.21967C17.171 5.36032 17.25 5.55109 17.25 5.75V19.25C17.25 19.6642 16.9142 20 16.5 20H15C14.5858 20 14.25 19.6642 14.25 19.25V5.75Z" fill=""/>
+										<path fillRule="evenodd" clipRule="evenodd" d="M6.75 5.75C6.75 5.33579 7.08579 5 7.5 5H9C9.41421 5 9.75 5.33579 9.75 5.75V19.25C9.75 19.6642 9.41421 20 9 20H7.5C7.30109 20 7.11032 19.921 6.96967 19.7803C6.82902 19.6397 6.75 19.4489 6.75 19.25V5.75ZM14.25 5.75C14.25 5.33579 14.5858 5 15 5H16.5C16.6989 5 16.8897 5.07902 17.0303 5.21967C17.171 5.36032 17.25 5.55109 17.25 5.75V19.25C17.25 19.6642 16.9142 20 16.5 20H15C14.5858 20 14.25 19.6642 14.25 19.25V5.75Z" fill="" />
 									</svg>
 
 									{/* Play Icon */}
 									<svg className="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="25" viewBox="0 0 24 25" fill="none">
-										<path d="M8 5V20L19 12.5L8 5Z" fill="currentColor"/>
+										<path d="M8 5V20L19 12.5L8 5Z" fill="currentColor" />
 									</svg>
 								</div>
 							)}
@@ -144,7 +167,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					{showTime && (
 						<div className={`fb-news-ticker-time ${timerPosition}`}>
 							<span>
-								Time: 
+								Time:
 								{new Date()
 									.toLocaleTimeString("en-US", {
 										hour: "numeric",
@@ -158,6 +181,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

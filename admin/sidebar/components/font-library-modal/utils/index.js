@@ -132,8 +132,6 @@ export async function loadFontFaceInBrowser( fontFace, source, addTo = 'all' ) {
  * @see https://developer.mozilla.org/en-US/docs/Web/API/FontFaceSet/delete.
  */
 export function unloadFontFaceInBrowser( fontFace, removeFrom = 'all' ) {
-	console.log("fontFace")
-	console.log(fontFace);
 	const unloadFontFace = ( fonts ) => {
 		fonts.forEach( ( f ) => {
 			if (

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { 
     PanelBody, 
     SelectControl, 
@@ -28,7 +28,6 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_Range from '@Components/range';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -36,7 +35,9 @@ import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 
-export default function Inspector ({ attributes, setAttributes,  clientId}) {
+import "./editor.scss";
+
+const Inspector = ({ attributes, setAttributes}) => {
     const {
         blockId,
         blockStyle,
@@ -421,14 +422,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     } = attributes;
 
     const deviceType= useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-advanced-navigation-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     /** Start Navigation padding */
 	const handleNavigationPaddingUnitChange = ( event, position ) => {
@@ -2701,7 +2694,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
     /**
 	 * Inspector General Controls
 	 */
@@ -3922,9 +3914,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
     return (
 
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -3934,3 +3923,4 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
     );
 }
+export default memo(Inspector);

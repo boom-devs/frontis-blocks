@@ -1,14 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
+import Inspector from './inspector';
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
+        blockStyle,
         socialItems,
         socialTitleSwitcher,
         socialIconUrl,
@@ -18,9 +22,30 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialGlobalWraperClass,
 
         socialIconsDesktopSwitcher,
-		socialIconsTabletSwitcher,
-		socialIconsMobileSwitcher,
-     } = attributes;
+        socialIconsTabletSwitcher,
+        socialIconsMobileSwitcher,
+
+        socialTitleFontFamily,
+    } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-social-icons-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
+    /** Start load font */
+    useEffect(() => {
+        [socialTitleFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [socialTitleFontFamily]);
+    /** End load font */
 
     const blockProps = useBlockProps({
         className: `fb-social-main-wrapper ${blockID} ${socialIconsDesktopSwitcher && 'fb-desktop-responsive'} ${socialIconsTabletSwitcher && 'fb-tablet-responsive'} ${socialIconsMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -41,9 +66,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
-            
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-social-wrapper ${socialGlobalWraperClass}`} id={socialGlobalWraperID} ref={panelRef}>
                     <div className="fb-social-links-wrapper">
@@ -51,8 +75,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {socialItems.map(item => (
                                 <li key={item.id} className={`fb-social-list-item single-item-${item.id}`}>
                                     <a
-                                        className="fb-social-icon-link" 
-                                        href={item.socialIconUrl} 
+                                        className="fb-social-icon-link"
+                                        href={item.socialIconUrl}
                                         target={item.socialIconTargetUrl ? '_blank' : undefined}
                                         rel={item.socialIconTargetUrl ? 'noopener noreferrer' : undefined}
                                         onClick={handleSocialClick}
@@ -73,6 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

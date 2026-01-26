@@ -7,15 +7,20 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
+import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -157,7 +162,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnTermsTaxonomy,
 		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
+		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
 		/** End Dynamic Btn Text */
 
@@ -232,10 +237,44 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBackBtnTermsTaxonomy,
 		dynamicBackBtnTermsSeparator,
-		dynamicBackBtnEnableLink,	
+		dynamicBackBtnEnableLink,
 		dynamicBackBtnLinkSource,
 		/** End Dynamic Back btn Text */
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonFontFamily,
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-flip-box-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+
+	useEffect(() => {
+		if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+			loadGoogleFont(buttonFontFamily);
+			loadedFonts.add(buttonFontFamily);
+		}
+	}, [buttonFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `fb-flip-box-main-wrapper ${blockID} ${flipBoxDesktopSwitcher && 'fb-desktop-responsive'} ${flipBoxTabletSwitcher && 'fb-tablet-responsive'} ${flipBoxMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -254,30 +293,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Title
 	 */
 	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
 
 		textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
 
 		context,
 	});
@@ -286,30 +325,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Description
 	 */
 	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
 
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
 
 		context,
 	});
@@ -318,63 +357,63 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnEnabled,
-		textSource:             dynamicBtnSource,
-		textField:              dynamicBtnField,
+		textEnabled: dynamicBtnEnabled,
+		textSource: dynamicBtnSource,
+		textField: dynamicBtnField,
 
-		textPostId:             dynamicBtnPostId,
-		textPostType:           dynamicBtnPostType,
-		textPostLabel:          dynamicBtnPostLabel,
+		textPostId: dynamicBtnPostId,
+		textPostType: dynamicBtnPostType,
+		textPostLabel: dynamicBtnPostLabel,
 
 		textFeaturedImageField: dynamicBtnFeaturedImageField,
 
-		textDateType:           dynamicBtnDateType,
-		textDateFormat:         dynamicBtnDateFormat,
-		textTimeType:           dynamicBtnTimeType,
-		textTimeFormat:         dynamicBtnTimeFormat,
+		textDateType: dynamicBtnDateType,
+		textDateFormat: dynamicBtnDateFormat,
+		textTimeType: dynamicBtnTimeType,
+		textTimeFormat: dynamicBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBtnCommentsOneText,
-		textCommentsManyText:   dynamicBtnCommentsManyText,
+		textCommentsZeroText: dynamicBtnCommentsZeroText,
+		textCommentsOneText: dynamicBtnCommentsOneText,
+		textCommentsManyText: dynamicBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnEnableLink,
-		textLinkSource:         dynamicBtnLinkSource,
+		textLinkEnabled: dynamicBtnEnableLink,
+		textLinkSource: dynamicBtnLinkSource,
 
 		context,
-	});	
+	});
 
 
 	/**
 	 * Dynamic Text Value for Back Title Text
 	 */
-	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({  
-		textEnabled:            dynamicBackTitleEnabled,
-		textSource:             dynamicBackTitleSource,
-		textField:              dynamicBackTitleField,
+	const { dynamicDisplayValue: dynamicBackTitleValue, dynamicDisplayLink: dynamicBackTitleLink } = DynamicTextValue({
+		textEnabled: dynamicBackTitleEnabled,
+		textSource: dynamicBackTitleSource,
+		textField: dynamicBackTitleField,
 
-		textPostId:             dynamicBackTitlePostId,
-		textPostType:           dynamicBackTitlePostType,
-		textPostLabel:          dynamicBackTitlePostLabel,
+		textPostId: dynamicBackTitlePostId,
+		textPostType: dynamicBackTitlePostType,
+		textPostLabel: dynamicBackTitlePostLabel,
 
 		textFeaturedImageField: dynamicBackTitleFeaturedImageField,
 
-		textDateType:           dynamicBackTitleDateType,
-		textDateFormat:         dynamicBackTitleDateFormat,
-		textTimeType:           dynamicBackTitleTimeType, 
-		textTimeFormat:         dynamicBackTitleTimeFormat,
+		textDateType: dynamicBackTitleDateType,
+		textDateFormat: dynamicBackTitleDateFormat,
+		textTimeType: dynamicBackTitleTimeType,
+		textTimeFormat: dynamicBackTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicBackTitleCommentsZeroText,
-		textCommentsOneText:    dynamicBackTitleCommentsOneText,
-		textCommentsManyText:   dynamicBackTitleCommentsManyText,
+		textCommentsZeroText: dynamicBackTitleCommentsZeroText,
+		textCommentsOneText: dynamicBackTitleCommentsOneText,
+		textCommentsManyText: dynamicBackTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicBackTitleTermsSeparator,
+		textTermsTaxonomy: dynamicBackTitleTermsTaxonomy,
+		textTermsSeparator: dynamicBackTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicBackTitleEnableLink,
-		textLinkSource:         dynamicBackTitleLinkSource,
+		textLinkEnabled: dynamicBackTitleEnableLink,
+		textLinkSource: dynamicBackTitleLinkSource,
 
 		context,
 	});
@@ -383,30 +422,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Back Description Text
 	 */
 	const { dynamicDisplayValue: dynamicBackDescriptionValue, dynamicDisplayLink: dynamicBackDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicBackDescriptionEnabled,
-		textSource:             dynamicBackDescriptionSource,
-		textField:              dynamicBackDescriptionField,
+		textEnabled: dynamicBackDescriptionEnabled,
+		textSource: dynamicBackDescriptionSource,
+		textField: dynamicBackDescriptionField,
 
-		textPostId:             dynamicBackDescriptionPostId,
-		textPostType:           dynamicBackDescriptionPostType,
-		textPostLabel:          dynamicBackDescriptionPostLabel,
+		textPostId: dynamicBackDescriptionPostId,
+		textPostType: dynamicBackDescriptionPostType,
+		textPostLabel: dynamicBackDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicBackDescriptionFeaturedImageField,
 
-		textDateType:           dynamicBackDescriptionDateType,
-		textDateFormat:         dynamicBackDescriptionDateFormat,
-		textTimeType:           dynamicBackDescriptionTimeType, 
-		textTimeFormat:         dynamicBackDescriptionTimeFormat,
+		textDateType: dynamicBackDescriptionDateType,
+		textDateFormat: dynamicBackDescriptionDateFormat,
+		textTimeType: dynamicBackDescriptionTimeType,
+		textTimeFormat: dynamicBackDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicBackDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicBackDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicBackDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicBackDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicBackDescriptionCommentsOneText,
+		textCommentsManyText: dynamicBackDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicBackDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicBackDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicBackDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicBackDescriptionEnableLink,
-		textLinkSource:         dynamicBackDescriptionLinkSource,
+		textLinkEnabled: dynamicBackDescriptionEnableLink,
+		textLinkSource: dynamicBackDescriptionLinkSource,
 
 		context,
 	});
@@ -415,33 +454,33 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Back Button Text
 	 */
 	const { dynamicDisplayValue: dynamicBackBtnValue, dynamicDisplayLink: dynamicBackBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBackBtnEnabled,
-		textSource:             dynamicBackBtnSource,
-		textField:              dynamicBackBtnField,
+		textEnabled: dynamicBackBtnEnabled,
+		textSource: dynamicBackBtnSource,
+		textField: dynamicBackBtnField,
 
-		textPostId:             dynamicBackBtnPostId,
-		textPostType:           dynamicBackBtnPostType, 
-		textPostLabel:          dynamicBackBtnPostLabel,
+		textPostId: dynamicBackBtnPostId,
+		textPostType: dynamicBackBtnPostType,
+		textPostLabel: dynamicBackBtnPostLabel,
 
 		textFeaturedImageField: dynamicBackBtnFeaturedImageField,
 
-		textDateType:           dynamicBackBtnDateType,
-		textDateFormat:         dynamicBackBtnDateFormat,
-		textTimeType:           dynamicBackBtnTimeType,
-		textTimeFormat:         dynamicBackBtnTimeFormat,
+		textDateType: dynamicBackBtnDateType,
+		textDateFormat: dynamicBackBtnDateFormat,
+		textTimeType: dynamicBackBtnTimeType,
+		textTimeFormat: dynamicBackBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBackBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBackBtnCommentsOneText,
-		textCommentsManyText:   dynamicBackBtnCommentsManyText,
+		textCommentsZeroText: dynamicBackBtnCommentsZeroText,
+		textCommentsOneText: dynamicBackBtnCommentsOneText,
+		textCommentsManyText: dynamicBackBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBackBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBackBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBackBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBackBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBackBtnEnableLink,
-		textLinkSource:         dynamicBackBtnLinkSource,
+		textLinkEnabled: dynamicBackBtnEnableLink,
+		textLinkSource: dynamicBackBtnLinkSource,
 
 		context,
-	});	
+	});
 
 
 	return (
@@ -449,7 +488,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<div {...blockProps}>
@@ -467,7 +505,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							<div className="fb-flipbox-content-wrapper">
 
 								{(mediaSwitcher === "image" && flipMediaUrl) ||
-								(mediaSwitcher === "icon" && icon) ? (
+									(mediaSwitcher === "icon" && icon) ? (
 									<div className="fb-flip-media-container">
 										<div className="fb-flip-media-wrapper">
 											{mediaSwitcher === "image" && flipMediaUrl && (
@@ -493,7 +531,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 												className="fb-heading"
 											/>
 										)}
-										
+
 										{descSwitcher && (
 											<RichText
 												tagName={Sub_Heading_Tag}
@@ -517,7 +555,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													>
 														<RichText
 															tagName={"span"}
-															value={dynamicBtnEnabled ? dynamicBtnValue : flip_Button_Text} 
+															value={dynamicBtnEnabled ? dynamicBtnValue : flip_Button_Text}
 															onChange={(value) => {
 																if (!dynamicBtnEnabled) setAttributes({ flip_Button_Text: value });
 															}}
@@ -534,14 +572,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										)}
 									</div>
 								)}
-								
+
 							</div>
 						</div>
 						<div className={`fb-flipbox-back ${flipSelectedSide === 'back' ? 'fb-active-side' : 'fb-inactive-side'}`}>
 							<div className="fb-flipbox-content-wrapper">
 
 								{(mediaSwitcherBack === "image" && flipMediaUrl) ||
-								(mediaSwitcherBack === "icon" && iconBack) ? (
+									(mediaSwitcherBack === "icon" && iconBack) ? (
 									<div className="fb-flip-back-media-container">
 										<div className="fb-flip-back-media-wrapper">
 											{mediaSwitcherBack === "image" && flipBackMediaUrl && (
@@ -553,7 +591,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										</div>
 									</div>
 								) : null}
-								
+
 								{(titleSwitcherBack || descSwitcherBack || flipBack_Button_Switcher) && (
 									<div className="fb-flip-back-box-content-wrapper">
 										{titleSwitcherBack && (
@@ -591,7 +629,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													>
 														<RichText
 															tagName={"span"}
-															value={dynamicBackBtnEnabled ? dynamicBackBtnValue : flipBack_Button_Text} 
+															value={dynamicBackBtnEnabled ? dynamicBackBtnValue : flipBack_Button_Text}
 															onChange={(value) => {
 																if (!dynamicBackBtnEnabled) setAttributes({ flipBack_Button_Text: value });
 															}}
@@ -608,12 +646,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										)}
 									</div>
 								)}
-							
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

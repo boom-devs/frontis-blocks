@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { 
@@ -34,6 +34,7 @@ import FB_ColorControl from '@Components/color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import {useDeviceType} from "@Config/displayType";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
+import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_InputControl from '@Components/input-control';
@@ -46,7 +47,7 @@ import SortableItem from './sortableItem';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) {
+const Inspector = ({ attributes, setAttributes, handleDragEnd, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem, tabsItemList }) => {
     
     const { 
         blockId,
@@ -124,6 +125,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBgHoverCustomGradientColorSwitcher,
         tabListBgHoverCustomGradientColor,
 
+        tabListActiveBgColorTypeSwitcher,
+        tabListActiveBgColorType,
+        tabListActiveBgHoverColorType,
+        tabListActiveBgColor, 
+        tabListActiveBgHoverColor,
+        tabListActiveBgGradientColor,
+        tabListActiveBgHoverGradientColor,
+        tabListActiveBgCustomGradientColorSwitcher,
+        tabListActiveBgCustomGradientColor,
+        tabListActiveBgHoverCustomGradientColorSwitcher,
+        tabListActiveBgHoverCustomGradientColor,
+
         tabListPaddingUnits,
         tabListPaddingDesktop,
         tabListPaddingTablet,
@@ -139,6 +152,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBorder,
         tabListBorderColorSwitcher,
         tabListBorderColor,
+        tabListActiveBorderColor,
         tabListBorderHoverColor,
 
         tabListBorderUnits,
@@ -173,6 +187,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabTitleColorSwitcher,
         tabTitleColor,
+        tabTitleActiveColor,
         tabTitleHoverColor,
 
         tabTitlePaddingUnits,
@@ -224,6 +239,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabDescriptionColorSwitcher,
         tabDescriptionColor,
+        tabDescriptionActiveColor,
         tabDescriptionHoverColor,
 
         tabDescriptionPaddingUnits,
@@ -262,6 +278,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconSizeUnits,
         tabIconColorSwitcher,
         tabIconColor,
+        tabIconActiveColor,
         tabIconHoverColor,
 
         /** Start Background */
@@ -277,6 +294,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconHoverGradientColor,
         tabIconHoverCustomGradientSwitcher,
         tabIconHoverCustomGradientInputValue,
+        
+        //Active BG
+        tabIconBgActiveColorSwitcher,
+        tabIconActiveNormalBackgroundType,
+        tabIconBgActiveColor,
+        tabIconActiveNormalGradientColor,
+        tabIconActiveNormalCustomGradientSwitcher,
+        tabIconActiveNormalCustomGradientInputValue,
+
+        tabIconActiveHoverBackgroundType,
+        tabIconBgActiveHoverColor,
+        tabIconActiveHoverGradientColor,
+        tabIconActiveHoverCustomGradientSwitcher,
+        tabIconActiveHoverCustomGradientInputValue,
         /** End Background */
 
         tabIconBorder,
@@ -417,18 +448,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         /** Custom CSS */
         tabGlobalCustomCSS,
 
+        tabTitlesAlignment
 
     } = attributes;
 
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-tabs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
     const deviceType = useDeviceType();
+
+    // Mapping for tab title alignment
+    const tabTitlesAlignmentMap = {
+        left: 'flex-start',
+        center: 'center',
+        right: 'flex-end'
+    };
 
     /** Start Wrapper Padding */
     const handleTabWrapperPaddingUnitChange = ( event, position ) => {  
@@ -2430,7 +2461,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockId} .fb-tabs-wrapper {
+        .${blockId}.fb-tabs-wrapper {
             ${tabGlobalPaddingDesktopWidth && tabGlobalPaddingDesktop?.top ? `padding: ${tabGlobalPaddingDesktopWidth};` : ''}  
             ${tabGlobalMarginDesktopWidth && tabGlobalMarginDesktop?.top ? `margin: ${tabGlobalMarginDesktopWidth};` : ''}
             ${tabGlobalBorder ? `border: ${tabGlobalBorder};` : ''}
@@ -2449,7 +2480,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
             transition: all .3s ease-in-out;
         }
-        .${blockId} .fb-tabs-wrapper:hover {
+        .${blockId}.fb-tabs-wrapper:hover {
             ${tabGlobalBorderHoverColor ? `border-color: ${tabGlobalBorderHoverColor};` : ''}
             ${tabGlobalBoxShadowHoverCssValue ? `box-shadow: ${tabGlobalBoxShadowHoverCssValue};` : ''}
             ${tabGlobalBgHoverColorType === "gradient"
@@ -2468,6 +2499,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             max-width: 100%;
         }
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+            ${tabTitlesAlignment?.Desktop ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Desktop] || 'flex-start'};` : ''}
             ${tabWrapperPaddingDesktopWidth && tabWrapperPaddingDesktop?.top ? `padding: ${tabWrapperPaddingDesktopWidth};` : ''} 
             ${tabWrapperMarginDesktopWidth && tabWrapperMarginDesktop?.top ? `margin: ${tabWrapperMarginDesktopWidth};` : ''}
             ${tabWrapperGap?.Desktop && tabWrapperGapUnits?.Desktop ? `gap: ${tabWrapperGap?.Desktop}${tabWrapperGapUnits?.Desktop};` : ''}
@@ -2506,9 +2538,10 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li {
-            ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth};` : ''}
+            ${tabListPaddingDesktopWidth && tabListPaddingDesktop?.top ? `padding: ${tabListPaddingDesktopWidth} !important;` : ''}
             ${tabListMarginDesktopWidth && tabListMarginDesktop?.top ? `margin: ${tabListMarginDesktopWidth};` : ''}
             ${tabListMinWidth?.Desktop && tabListMinWidthUnits?.Desktop ? `min-width: ${tabListMinWidth?.Desktop}${tabListMinWidthUnits?.Desktop};` : ''}
+            ${tabLayoutSwitcher === 'vertical' ? 'width: 100px;' : ''}
             ${tabListItemGap?.Desktop && tabListItemGapUnits?.Desktop ? `gap: ${tabListItemGap?.Desktop}${tabListItemGapUnits?.Desktop};` : ''}
             ${tabListBorder ? `border: ${tabListBorder};` : ''}
 			${tabListBorderColor ? `border-color: ${tabListBorderColor};` : ''}
@@ -2548,9 +2581,36 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active {
-            background-color: #f0f0f0;
+            ${tabListActiveBgColorType === "gradient"
+                ? `background: ${
+                    tabListActiveBgCustomGradientColorSwitcher && tabListActiveBgCustomGradientColor
+                    ? tabListActiveBgCustomGradientColor
+                    : tabListActiveBgGradientColor
+                };`
+                : tabListActiveBgColor ? `background: ${tabListActiveBgColor};` : ''
+            }
+
+            ${tabListActiveBorderColor ? `border-color: ${tabListActiveBorderColor};` : ''}
         }
 
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon svg{
+            ${tabIconActiveColor ? `fill: ${tabIconActiveColor};` : ''}
+        }
+        
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-icon {
+			${tabIconActiveNormalBackgroundType === 'gradient' ? `   	
+                ${tabIconActiveNormalCustomGradientSwitcher && tabIconActiveNormalCustomGradientInputValue ? `background: ${tabIconActiveNormalCustomGradientInputValue};` : `background: ${tabIconActiveNormalGradientColor};`}
+            `: `
+                ${tabIconBgActiveColor ? `background: ${tabIconBgActiveColor};` : ''}
+            `}
+        }
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-title{
+            ${tabTitleActiveColor ? `color: ${tabTitleActiveColor};` : ''}
+        }
+        .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li.fb-tabs-active .fb-tab-description{
+            ${tabDescriptionActiveColor ? `color: ${tabDescriptionActiveColor};` : ''}
+        }
+            
         .${blockId} .fb-tabs-wrap ul.fb-tabs-panel li .fb-tab-title {
             ${tabTitleGlobalTypoSwitcher?.fontFamily === true && tabTitleGlobalTypographyData?.fontFamily ? `font-family: ${tabTitleGlobalTypographyData?.fontFamily};` : ''}
             ${tabTitleGlobalTypoSwitcher?.fontSize === true && tabTitleGlobalTypographyData?.fontSize ? `font-size: ${tabTitleGlobalTypographyData?.fontSize};` : ''}
@@ -2711,7 +2771,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         `}
 
         @media only screen and (max-width: 1024px) {
-            .${blockId} .fb-tabs-wrapper {
+            .${blockId}.fb-tabs-wrapper {
                 ${tabGlobalPaddingTabletWidth && tabGlobalPaddingTablet?.top ? `padding: ${tabGlobalPaddingTabletWidth};` : ''}   
                 ${tabGlobalMarginTabletWidth && tabGlobalMarginTablet?.top ? `margin: ${tabGlobalMarginTabletWidth};` : ''}
                 ${tabGlobalBorderTabletWidth && tabGlobalBorderTablet?.top ? `border-width: ${tabGlobalBorderTabletWidth};` : ''}
@@ -2720,6 +2780,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
 
             .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+                ${tabTitlesAlignment?.Tablet ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Tablet]};` : ''}
                 ${tabWrapperPaddingTabletWidth && tabWrapperPaddingTablet?.top ? `padding: ${tabWrapperPaddingTabletWidth};` : ''} 
                 ${tabWrapperMarginTabletWidth && tabWrapperMarginTablet?.top ? `margin: ${tabWrapperMarginTabletWidth};` : ''}
                 ${tabWrapperGap?.Tablet && tabWrapperGapUnits?.Tablet ? `gap: ${tabWrapperGap?.Tablet}${tabWrapperGapUnits?.Tablet};` : ''}
@@ -2791,7 +2852,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId} .fb-tabs-wrapper {
+            .${blockId}.fb-tabs-wrapper {
                 ${tabGlobalPaddingMobileWidth && tabGlobalPaddingMobile?.top ? `padding: ${tabGlobalPaddingMobileWidth};` : ''}   
                 ${tabGlobalMarginMobileWidth && tabGlobalMarginMobile?.top ? `margin: ${tabGlobalMarginMobileWidth};` : ''}
                 ${tabGlobalBorderMobileWidth && tabGlobalBorderMobile?.top ? `border-width: ${tabGlobalBorderMobileWidth};` : ''}
@@ -2800,6 +2861,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
             }
 
             .${blockId} .fb-tabs-wrap ul.fb-tabs-panel {
+                ${tabTitlesAlignment?.Mobile ? `justify-content: ${tabTitlesAlignmentMap[tabTitlesAlignment?.Mobile]};` : ''}
                 ${tabWrapperPaddingMobileWidth && tabWrapperPaddingMobile?.top ? `padding: ${tabWrapperPaddingMobileWidth};` : ''} 
                 ${tabWrapperMarginMobileWidth && tabWrapperMarginMobile?.top ? `margin: ${tabWrapperMarginMobileWidth};` : ''}
                 ${tabWrapperGap?.Mobile && tabWrapperGapUnits?.Mobile ? `gap: ${tabWrapperGap?.Mobile}${tabWrapperGapUnits?.Mobile};` : ''}
@@ -2955,6 +3017,18 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabListBgHoverCustomGradientColorSwitcher,
         tabListBgHoverCustomGradientColor,
 
+        tabListActiveBgColorTypeSwitcher,
+        tabListActiveBgColorType,
+        tabListActiveBgHoverColorType,
+        tabListActiveBgColor, 
+        tabListActiveBgHoverColor,
+        tabListActiveBgGradientColor,
+        tabListActiveBgHoverGradientColor,
+        tabListActiveBgCustomGradientColorSwitcher,
+        tabListActiveBgCustomGradientColor,
+        tabListActiveBgHoverCustomGradientColorSwitcher,
+        tabListActiveBgHoverCustomGradientColor,
+
         tabListPaddingUnits,
         tabListPaddingDesktop,
         tabListPaddingTablet,
@@ -3016,6 +3090,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabTitleColorSwitcher,
         tabTitleColor,
+        tabTitleActiveColor,
         tabTitleHoverColor,
 
         tabTitlePaddingUnits,
@@ -3079,6 +3154,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
         tabDescriptionColorSwitcher,
         tabDescriptionColor,
+        tabDescriptionActiveColor,
         tabDescriptionHoverColor,
 
         tabDescriptionPaddingUnits,
@@ -3129,6 +3205,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconSizeUnits,
         tabIconColorSwitcher,
         tabIconColor,
+        tabIconActiveColor,
         tabIconHoverColor,
 
         /** Start Background */
@@ -3144,6 +3221,20 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         tabIconHoverGradientColor,
         tabIconHoverCustomGradientSwitcher,
         tabIconHoverCustomGradientInputValue,
+
+        //Active BG
+        tabIconBgActiveColorSwitcher,
+        tabIconActiveNormalBackgroundType,
+        tabIconBgActiveColor,
+        tabIconActiveNormalGradientColor,
+        tabIconActiveNormalCustomGradientSwitcher,
+        tabIconActiveNormalCustomGradientInputValue,
+
+        tabIconActiveHoverBackgroundType,
+        tabIconBgActiveHoverColor,
+        tabIconActiveHoverGradientColor,
+        tabIconActiveHoverCustomGradientSwitcher,
+        tabIconActiveHoverCustomGradientInputValue,
         /** End Background */
 
         tabIconBorder,
@@ -3319,6 +3410,7 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     
         /** Custom CSS */
         tabGlobalCustomCSS,
+        tabTitlesAlignment,
     ]);
 
     const customCss = getCustomCss(tabGlobalCustomCSS, `.${blockId}`);
@@ -3326,8 +3418,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     useEffect(() => {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
-
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -3363,6 +3453,15 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     />
                 )}
 
+                {!fillTitlesWrapper && (
+                     <FB_ResponsiveAlignmentControl
+                        label={__("Title Alignment", "frontis-blocks")}
+                        globalAlignment={tabTitlesAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ tabTitlesAlignment: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+                )}
 
                 <FB_SwitcherControl
                     label={__("Layout", "frontis-blocks")}
@@ -3620,7 +3719,35 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListBgHoverCustomGradientColor: value === undefined ? null : value })}
 
 					isBackgroundImage={false}
+				/>
+                <FB_BackgroundColorControl
+					label={__("Active BG Color", "frontis-blocks")}
+					bgColorSwitcher={tabListActiveBgColorTypeSwitcher}
+					setBgColorSwitcher={(value) => setAttributes({ tabListActiveBgColorTypeSwitcher: value })}
 
+					normalBackgroundType={tabListActiveBgColorType}
+					setNormalBackgroundType={(value) => setAttributes({ tabListActiveBgColorType: value })}
+					normalClassicColor={tabListActiveBgColor}
+					setNormalClassicColor={(value) => setAttributes({ tabListActiveBgColor: value === undefined ? '' : value })}
+					normalGradientColor={tabListActiveBgGradientColor}
+					setNormalGradientColor={(value) => setAttributes({ tabListActiveBgGradientColor: value === undefined ? null : value })}
+					normalCustomGradientSwitcher={tabListActiveBgCustomGradientColorSwitcher}
+					setNormalCustomGradientSwitcher={(value) => setAttributes({ tabListActiveBgCustomGradientColorSwitcher: value })}
+					normalCustomGradientInputValue={tabListActiveBgCustomGradientColor}
+					setNormalCustomGradientInputValue={(value) => setAttributes({ tabListActiveBgCustomGradientColor: value === undefined ? null : value })}
+
+					hoverBackgroundType={tabListActiveBgHoverColorType}
+					setHoverBackgroundType={(value) => setAttributes({ tabListActiveBgHoverColorType: value })}
+					hoverClassicColor={tabListActiveBgHoverColor}
+					setHoverClassicColor={(value) => setAttributes({ tabListActiveBgHoverColor: value === undefined ? '' : value })}
+					hoverGradientColor={tabListActiveBgHoverGradientColor}
+					setHoverGradientColor={(value) => setAttributes({ tabListActiveBgHoverGradientColor: value === undefined ? null : value })}
+					hoverCustomGradientSwitcher={tabListActiveBgHoverCustomGradientColorSwitcher}
+					setHoverCustomGradientSwitcher={(value) => setAttributes({ tabListActiveBgHoverCustomGradientColorSwitcher: value })}
+					hoverCustomGradientInputValue={tabListActiveBgHoverCustomGradientColor}
+					setHoverCustomGradientInputValue={(value) => setAttributes({ tabListActiveBgHoverCustomGradientColor: value === undefined ? null : value })}
+
+					isBackgroundImage={false}
 				/>
                 <FB_Spacing 
                     label={__("Padding", "frontis-blocks")} 
@@ -3680,6 +3807,12 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
                     />
                 )}
 
+                <FB_ColorControl
+                    label={__("Active Border Color", "frontis-blocks")}
+                    globalColor={tabListActiveBorderColor}
+                    setGlobalColor={(value) => setAttributes({ tabListActiveBorderColor: value === undefined ? '' : value })}
+                />
+
                 <FB_Spacing 
                     label={__("Border", "frontis-blocks")}
                     deviceType={deviceType}
@@ -3709,597 +3842,661 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
 
             </PanelBody>
 
-            <PanelBody 
-                title={__("Title", "frontis-blocks")} 
-                initialOpen={false}
-            >
+            {showTitle && (
+               <PanelBody 
+                    title={__("Title", "frontis-blocks")} 
+                    initialOpen={false}
+                >
 
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={tabTitleGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ tabTitleGlobalTypographyData: value })}
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={tabTitleGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ tabTitleGlobalTypographyData: value })}
 
-                    globalTypoType={tabTitleGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({
-                            tabTitleGlobalTypoType: value,
-                            tabTitleGlobalTypoSwitcher: value === 'default' ? {...tabTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...tabTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
+                        globalTypoType={tabTitleGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                tabTitleGlobalTypoType: value,
+                                tabTitleGlobalTypoSwitcher: value === 'default' ? {...tabTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...tabTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                            })
+                        }}
 
-                    globalTypoOption={tabTitleGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ tabTitleGlobalTypoOption: value })}
+                        globalTypoOption={tabTitleGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ tabTitleGlobalTypoOption: value })}
 
-                    fontFamily={tabTitleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ tabTitleFontFamily: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontFamily: value && false} })}
+                        fontFamily={tabTitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ tabTitleFontFamily: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontFamily: value && false} })}
 
-                    fontSize={tabTitleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ tabTitleFontSize: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontSize: value && false} })}
+                        fontSize={tabTitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ tabTitleFontSize: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontSize: value && false} })}
 
-                    fontSizeUnits={tabTitleFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ tabTitleFontSizeUnits: value })}
+                        fontSizeUnits={tabTitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ tabTitleFontSizeUnits: value })}
 
-                    fontWeight={tabTitleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ tabTitleFontWeight: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontWeight: value && false} })}
+                        fontWeight={tabTitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ tabTitleFontWeight: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontWeight: value && false} })}
 
-                    fontStyle={tabTitleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ tabTitleFontStyle: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontStyle: value && false} })}
+                        fontStyle={tabTitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ tabTitleFontStyle: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, fontStyle: value && false} })}
 
-                    textTransform={tabTitleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ tabTitleTextTransform: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, textTransform: value && false} })}
+                        textTransform={tabTitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ tabTitleTextTransform: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, textTransform: value && false} })}
 
-                    textDecoration={tabTitleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ tabTitleTextDecoration: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, textDecoration: value && false} })}
+                        textDecoration={tabTitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ tabTitleTextDecoration: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, textDecoration: value && false} })}
 
-                    letterSpacing={tabTitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ tabTitleLetterSpacing: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
+                        letterSpacing={tabTitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ tabTitleLetterSpacing: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
 
-                    letterSpacingUnits={tabTitleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ tabTitleLetterSpacingUnits: value })}
+                        letterSpacingUnits={tabTitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ tabTitleLetterSpacingUnits: value })}
 
-                    lineHeight={tabTitleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ tabTitleLineHeight: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, lineHeight: value && false} })}
+                        lineHeight={tabTitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ tabTitleLineHeight: value, tabTitleGlobalTypoSwitcher: {...tabTitleGlobalTypoSwitcher, lineHeight: value && false} })}
 
-                    lineHeightUnits={tabTitleLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ tabTitleLineHeightUnits: value })}
+                        lineHeightUnits={tabTitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ tabTitleLineHeightUnits: value })}
 
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Color", "frontis-blocks")}
-                    globalSwitcher={tabTitleColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabTitleColorSwitcher: value })}
-                />
-
-                {tabTitleColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabTitleColor}
-                        setGlobalColor={(value) => setAttributes({ tabTitleColor: value === undefined ? '' : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
                     />
-                )}
 
-                {tabTitleColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabTitleHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabTitleHoverColor: value === undefined ? '' : value })}
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={tabTitleColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ tabTitleColorSwitcher: value })}
                     />
-                )}
 
-                <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")} 
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTitlePaddingUnitsHandler} 
-                    spacingUnits={tabTitlePaddingUnits}
-                    spacingDesktop={tabTitlePaddingDesktop}
-                    spacingTablet={tabTitlePaddingTablet}
-                    spacingMobile={tabTitlePaddingMobile}
-                    handleSpacingUnitHandler={handleTitlePaddingUnitChange}
-                    spacingCombineBtn={tabTitlePaddingLink}
-                    spacingCombineBtnHandler={handleTitlePaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />
+                    {tabTitleColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={tabTitleColor}
+                            setGlobalColor={(value) => setAttributes({ tabTitleColor: value === undefined ? '' : value })}
+                        />
+                    )}
 
-                <FB_Spacing 
-                    label={__("Margin", "frontis-blocks")} 
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTitleMarginUnitsHandler}
-                    spacingUnits={tabTitleMarginUnits}
-                    spacingDesktop={tabTitleMarginDesktop}
-                    spacingTablet={tabTitleMarginTablet}
-                    spacingMobile={tabTitleMarginMobile}
-                    handleSpacingUnitHandler={handleTitleMarginUnitChange}
-                    spacingCombineBtn={tabTitleMarginLink}
-                    spacingCombineBtnHandler={handleTitleMarginCombineBtn}
-                    setAttributes={setAttributes}
-                />
+                    {tabTitleColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={tabTitleHoverColor}
+                            setGlobalColor={(value) => setAttributes({ tabTitleHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
 
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={tabTitleBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ tabTitleBorder: value })}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={tabTitleBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabTitleBorderColorSwitcher: value })}
-                />
-
-                {tabTitleBorderColorSwitcher === 'normal' && (
                     <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabTitleBorderColor}
-                        setGlobalColor={(value) => setAttributes({ tabTitleBorderColor: value === undefined ? '' : value })}
+                        label={__("Active Color", "frontis-blocks")}
+                        globalColor={tabTitleActiveColor}
+                        setGlobalColor={(value) => setAttributes({ tabTitleActiveColor: value === undefined ? '' : value })}
                     />
-                )}
 
-                {tabTitleBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabTitleBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabTitleBorderHoverColor: value === undefined ? '' : value })}
+                    <FB_Spacing 
+                        label={__("Padding", "frontis-blocks")} 
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleTitlePaddingUnitsHandler} 
+                        spacingUnits={tabTitlePaddingUnits}
+                        spacingDesktop={tabTitlePaddingDesktop}
+                        spacingTablet={tabTitlePaddingTablet}
+                        spacingMobile={tabTitlePaddingMobile}
+                        handleSpacingUnitHandler={handleTitlePaddingUnitChange}
+                        spacingCombineBtn={tabTitlePaddingLink}
+                        spacingCombineBtnHandler={handleTitlePaddingCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
 
-                <FB_Spacing 
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTitleBorderUnitsHandler}
-                    spacingUnits={tabTitleBorderUnits} 
-                    spacingDesktop={tabTitleBorderDesktop}
-                    spacingTablet={tabTitleBorderTablet}
-                    spacingMobile={tabTitleBorderMobile}
-                    handleSpacingUnitHandler={handleTitleBorderUnitChange}      
-                    spacingCombineBtn={tabTitleBorderLink}
-                    spacingCombineBtnHandler={handleTitleBorderCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                <FB_Spacing 
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTitleBorderRadiusUnitsHandler}
-                    spacingUnits={tabTitleBorderRadiusUnits}
-                    spacingDesktop={tabTitleBorderRadiusDesktop}
-                    spacingTablet={tabTitleBorderRadiusTablet}
-                    spacingMobile={tabTitleBorderRadiusMobile}
-                    handleSpacingUnitHandler={handleTitleBorderRadiusUnitChange}  
-                    spacingCombineBtn={tabTitleBorderRadiusLink}
-                    spacingCombineBtnHandler={handleTitleBorderRadiusCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                
-            </PanelBody>
-
-            <PanelBody 
-                title={__("Description", "frontis-blocks")} 
-                initialOpen={false}
-            >
-
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={tabDescriptionGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ tabDescriptionGlobalTypographyData: value })}
-
-                    globalTypoType={tabDescriptionGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({
-                            tabDescriptionGlobalTypoType: value,
-                            tabDescriptionGlobalTypoSwitcher: value === 'default' ? {...tabDescriptionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...tabDescriptionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                        })
-                    }}
-
-                    globalTypoOption={tabDescriptionGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ tabDescriptionGlobalTypoOption: value })}
-
-                    fontFamily={tabDescriptionFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ tabDescriptionFontFamily: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontFamily: value && false} })}
-
-                    fontSize={tabDescriptionFontSize}
-                    onChangeFontSize={(value) => setAttributes({ tabDescriptionFontSize: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontSize: value && false} })}
-
-                    fontSizeUnits={tabDescriptionFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ tabDescriptionFontSizeUnits: value })}
-
-                    fontWeight={tabDescriptionFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ tabDescriptionFontWeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontWeight: value && false} })}
-
-                    fontStyle={tabDescriptionFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ tabDescriptionFontStyle: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontStyle: value && false} })}
-
-                    textTransform={tabDescriptionTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ tabDescriptionTextTransform: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textTransform: value && false} })}
-
-                    textDecoration={tabDescriptionTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ tabDescriptionTextDecoration: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textDecoration: value && false} })}
-
-                    letterSpacing={tabDescriptionLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ tabDescriptionLetterSpacing: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, letterSpacing: value && false} })}
-
-                    letterSpacingUnits={tabDescriptionLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ tabDescriptionLetterSpacingUnits: value })}
-
-                    lineHeight={tabDescriptionLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ tabDescriptionLineHeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, lineHeight: value && false} })}
-
-                    lineHeightUnits={tabDescriptionLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ tabDescriptionLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Color", "frontis-blocks")}
-                    globalSwitcher={tabDescriptionColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabDescriptionColorSwitcher: value })}
-                />
-
-                {tabDescriptionColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabDescriptionColor}
-                        setGlobalColor={(value) => setAttributes({ tabDescriptionColor: value === undefined ? '' : value })}
+                    <FB_Spacing 
+                        label={__("Margin", "frontis-blocks")} 
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleTitleMarginUnitsHandler}
+                        spacingUnits={tabTitleMarginUnits}
+                        spacingDesktop={tabTitleMarginDesktop}
+                        spacingTablet={tabTitleMarginTablet}
+                        spacingMobile={tabTitleMarginMobile}
+                        handleSpacingUnitHandler={handleTitleMarginUnitChange}
+                        spacingCombineBtn={tabTitleMarginLink}
+                        spacingCombineBtnHandler={handleTitleMarginCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
 
-                {tabDescriptionColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabDescriptionHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabDescriptionHoverColor: value === undefined ? '' : value })}
+                    <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={tabTitleBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ tabTitleBorder: value })}
                     />
-                )}
 
-                <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")} 
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleDescriptionPaddingUnitsHandler} 
-                    spacingUnits={tabDescriptionPaddingUnits}
-                    spacingDesktop={tabDescriptionPaddingDesktop}
-                    spacingTablet={tabDescriptionPaddingTablet}
-                    spacingMobile={tabDescriptionPaddingMobile}
-                    handleSpacingUnitHandler={handleDescriptionPaddingUnitChange}
-                    spacingCombineBtn={tabDescriptionPaddingLink}
-                    spacingCombineBtnHandler={handleDescriptionPaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing 
-                    label={__("Margin", "frontis-blocks")} 
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleDescriptionMarginUnitsHandler}     
-                    spacingUnits={tabDescriptionMarginUnits}
-                    spacingDesktop={tabDescriptionMarginDesktop}
-                    spacingTablet={tabDescriptionMarginTablet}
-                    spacingMobile={tabDescriptionMarginMobile}
-                    handleSpacingUnitHandler={handleDescriptionMarginUnitChange}
-                    spacingCombineBtn={tabDescriptionMarginLink}
-                    spacingCombineBtnHandler={handleDescriptionMarginCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={tabDescriptionBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ tabDescriptionBorder: value })}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={tabDescriptionBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabDescriptionBorderColorSwitcher: value })}
-                />
-
-                {tabDescriptionBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabDescriptionBorderColor}
-                        setGlobalColor={(value) => setAttributes({ tabDescriptionBorderColor: value === undefined ? '' : value })}
+                    <FB_SwitcherControl
+                        label={__("Border Color", "frontis-blocks")}
+                        globalSwitcher={tabTitleBorderColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ tabTitleBorderColorSwitcher: value })}
                     />
-                )}
 
-                {tabDescriptionBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabDescriptionBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabDescriptionBorderHoverColor: value === undefined ? '' : value })}
+                    {tabTitleBorderColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={tabTitleBorderColor}
+                            setGlobalColor={(value) => setAttributes({ tabTitleBorderColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {tabTitleBorderColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={tabTitleBorderHoverColor}
+                            setGlobalColor={(value) => setAttributes({ tabTitleBorderHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing 
+                        label={__("Border", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleTitleBorderUnitsHandler}
+                        spacingUnits={tabTitleBorderUnits} 
+                        spacingDesktop={tabTitleBorderDesktop}
+                        spacingTablet={tabTitleBorderTablet}
+                        spacingMobile={tabTitleBorderMobile}
+                        handleSpacingUnitHandler={handleTitleBorderUnitChange}      
+                        spacingCombineBtn={tabTitleBorderLink}
+                        spacingCombineBtnHandler={handleTitleBorderCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
-
-                <FB_Spacing 
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleDescriptionBorderUnitsHandler}
-                    spacingUnits={tabDescriptionBorderUnits} 
-                    spacingDesktop={tabDescriptionBorderDesktop}
-                    spacingTablet={tabDescriptionBorderTablet}
-                    spacingMobile={tabDescriptionBorderMobile}
-                    handleSpacingUnitHandler={handleDescriptionBorderUnitChange}      
-                    spacingCombineBtn={tabDescriptionBorderLink}
-                    spacingCombineBtnHandler={handleDescriptionBorderCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                <FB_Spacing 
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleDescriptionBorderRadiusUnitsHandler}
-                    spacingUnits={tabDescriptionBorderRadiusUnits}
-                    spacingDesktop={tabDescriptionBorderRadiusDesktop}
-                    spacingTablet={tabDescriptionBorderRadiusTablet}
-                    spacingMobile={tabDescriptionBorderRadiusMobile}
-                    handleSpacingUnitHandler={handleDescriptionBorderRadiusUnitChange}  
-                    spacingCombineBtn={tabDescriptionBorderRadiusLink}
-                    spacingCombineBtnHandler={handleDescriptionBorderRadiusCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                
-            </PanelBody>
-
-            <PanelBody
-                title={__("Icon", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_Range
-                    min={1}
-                    max={100}
-                    label={__("Icon Size", "frontis-blocks")}
-                    rangeValue={tabIconSize}
-                    onChangeHandler={(value) => setAttributes({ tabIconSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ tabIconSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={tabIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={25}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Icon Color", "frontis-blocks")}
-                    globalSwitcher={tabIconColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabIconColorSwitcher: value })}
-                />
-
-                {tabIconColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabIconColor}
-                        setGlobalColor={(value) => setAttributes({ tabIconColor: value === undefined ? '' : value })}
+                    <FB_Spacing 
+                        label={__("Border Radius", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleTitleBorderRadiusUnitsHandler}
+                        spacingUnits={tabTitleBorderRadiusUnits}
+                        spacingDesktop={tabTitleBorderRadiusDesktop}
+                        spacingTablet={tabTitleBorderRadiusTablet}
+                        spacingMobile={tabTitleBorderRadiusMobile}
+                        handleSpacingUnitHandler={handleTitleBorderRadiusUnitChange}  
+                        spacingCombineBtn={tabTitleBorderRadiusLink}
+                        spacingCombineBtnHandler={handleTitleBorderRadiusCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
-
-                {tabIconColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabIconHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-
-                <FB_BackgroundColorControl
-                    label={__("Background Color", "frontis-blocks")}
-                    bgColorSwitcher={tabIconBgColorSwitcher}  
-                    setBgColorSwitcher={(value) => setAttributes({ tabIconBgColorSwitcher: value })}
                     
-                    normalBackgroundType={tabIconNormalBackgroundType} 
-                    setNormalBackgroundType={(value) => setAttributes({ tabIconNormalBackgroundType: value })}
-                    normalClassicColor={tabIconBgColor}
-                    setNormalClassicColor={(value) => setAttributes({ tabIconBgColor: value === undefined ? '' : value })}
-                    normalGradientColor={tabIconNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ tabIconNormalGradientColor: value === undefined ? null : value })}
-                    normalCustomGradientSwitcher={tabIconNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ tabIconNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={tabIconNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ tabIconNormalCustomGradientInputValue: value })}
+                </PanelBody> 
+            )}
+            
+            {showDescription && (
+                <PanelBody 
+                    title={__("Description", "frontis-blocks")} 
+                    initialOpen={false}
+                >
+
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={tabDescriptionGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ tabDescriptionGlobalTypographyData: value })}
+
+                        globalTypoType={tabDescriptionGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                tabDescriptionGlobalTypoType: value,
+                                tabDescriptionGlobalTypoSwitcher: value === 'default' ? {...tabDescriptionGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...tabDescriptionGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                            })
+                        }}
+
+                        globalTypoOption={tabDescriptionGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ tabDescriptionGlobalTypoOption: value })}
+
+                        fontFamily={tabDescriptionFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ tabDescriptionFontFamily: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                        fontSize={tabDescriptionFontSize}
+                        onChangeFontSize={(value) => setAttributes({ tabDescriptionFontSize: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontSize: value && false} })}
+
+                        fontSizeUnits={tabDescriptionFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ tabDescriptionFontSizeUnits: value })}
+
+                        fontWeight={tabDescriptionFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ tabDescriptionFontWeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                        fontStyle={tabDescriptionFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ tabDescriptionFontStyle: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                        textTransform={tabDescriptionTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ tabDescriptionTextTransform: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textTransform: value && false} })}
+
+                        textDecoration={tabDescriptionTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ tabDescriptionTextDecoration: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                        letterSpacing={tabDescriptionLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ tabDescriptionLetterSpacing: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                        letterSpacingUnits={tabDescriptionLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ tabDescriptionLetterSpacingUnits: value })}
+
+                        lineHeight={tabDescriptionLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ tabDescriptionLineHeight: value, tabDescriptionGlobalTypoSwitcher: {...tabDescriptionGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                        lineHeightUnits={tabDescriptionLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ tabDescriptionLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Color", "frontis-blocks")}
+                        globalSwitcher={tabDescriptionColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ tabDescriptionColorSwitcher: value })}
+                    />
+
+                    {tabDescriptionColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={tabDescriptionColor}
+                            setGlobalColor={(value) => setAttributes({ tabDescriptionColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {tabDescriptionColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={tabDescriptionHoverColor}
+                            setGlobalColor={(value) => setAttributes({ tabDescriptionHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_ColorControl
+                        label={__("Active Color", "frontis-blocks")}
+                        globalColor={tabDescriptionActiveColor}
+                        setGlobalColor={(value) => setAttributes({ tabDescriptionActiveColor: value === undefined ? '' : value })}
+                    />
+
+                    <FB_Spacing 
+                        label={__("Padding", "frontis-blocks")} 
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleDescriptionPaddingUnitsHandler} 
+                        spacingUnits={tabDescriptionPaddingUnits}
+                        spacingDesktop={tabDescriptionPaddingDesktop}
+                        spacingTablet={tabDescriptionPaddingTablet}
+                        spacingMobile={tabDescriptionPaddingMobile}
+                        handleSpacingUnitHandler={handleDescriptionPaddingUnitChange}
+                        spacingCombineBtn={tabDescriptionPaddingLink}
+                        spacingCombineBtnHandler={handleDescriptionPaddingCombineBtn}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_Spacing 
+                        label={__("Margin", "frontis-blocks")} 
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleDescriptionMarginUnitsHandler}     
+                        spacingUnits={tabDescriptionMarginUnits}
+                        spacingDesktop={tabDescriptionMarginDesktop}
+                        spacingTablet={tabDescriptionMarginTablet}
+                        spacingMobile={tabDescriptionMarginMobile}
+                        handleSpacingUnitHandler={handleDescriptionMarginUnitChange}
+                        spacingCombineBtn={tabDescriptionMarginLink}
+                        spacingCombineBtnHandler={handleDescriptionMarginCombineBtn}
+                        setAttributes={setAttributes}
+                    />
+
+                    <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={tabDescriptionBorder}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ tabDescriptionBorder: value })}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Border Color", "frontis-blocks")}
+                        globalSwitcher={tabDescriptionBorderColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ tabDescriptionBorderColorSwitcher: value })}
+                    />
+
+                    {tabDescriptionBorderColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={tabDescriptionBorderColor}
+                            setGlobalColor={(value) => setAttributes({ tabDescriptionBorderColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {tabDescriptionBorderColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={tabDescriptionBorderHoverColor}
+                            setGlobalColor={(value) => setAttributes({ tabDescriptionBorderHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    <FB_Spacing 
+                        label={__("Border", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleDescriptionBorderUnitsHandler}
+                        spacingUnits={tabDescriptionBorderUnits} 
+                        spacingDesktop={tabDescriptionBorderDesktop}
+                        spacingTablet={tabDescriptionBorderTablet}
+                        spacingMobile={tabDescriptionBorderMobile}
+                        handleSpacingUnitHandler={handleDescriptionBorderUnitChange}      
+                        spacingCombineBtn={tabDescriptionBorderLink}
+                        spacingCombineBtnHandler={handleDescriptionBorderCombineBtn}
+                        setAttributes={setAttributes}
+                    />
+                    <FB_Spacing 
+                        label={__("Border Radius", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handleDescriptionBorderRadiusUnitsHandler}
+                        spacingUnits={tabDescriptionBorderRadiusUnits}
+                        spacingDesktop={tabDescriptionBorderRadiusDesktop}
+                        spacingTablet={tabDescriptionBorderRadiusTablet}
+                        spacingMobile={tabDescriptionBorderRadiusMobile}
+                        handleSpacingUnitHandler={handleDescriptionBorderRadiusUnitChange}  
+                        spacingCombineBtn={tabDescriptionBorderRadiusLink}
+                        spacingCombineBtnHandler={handleDescriptionBorderRadiusCombineBtn}
+                        setAttributes={setAttributes}
+                    />
                     
-                    hoverBackgroundType={tabIconHoverBackgroundType} 
-                    setHoverBackgroundType={(value) => setAttributes({ tabIconHoverBackgroundType: value })}
-                    hoverClassicColor={ tabIconBgHoverColor}
-                    setHoverClassicColor={(value) => setAttributes({  tabIconBgHoverColor: value === undefined ? '' : value })}
-                    hoverGradientColor={tabIconHoverGradientColor} 
-                    setHoverGradientColor={(value) => setAttributes({ tabIconHoverGradientColor: value === undefined ? null : value })}
-                    hoverCustomGradientSwitcher={tabIconHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={tabIconHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ tabIconHoverCustomGradientInputValue: value })}
+                </PanelBody>
+            )}
 
-                    isBackgroundImage={false}
+            {showIcon && (
+                <>
+                    <PanelBody
+                        title={__("Icon", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_SwitcherControl
+                            label={__("Position", "frontis-blocks")}
+                            options={ICON_POSITION}
+                            globalSwitcher={tabIconPosition}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconPosition: value })}
+                        />
+                        <FB_Range
+                            min={1}
+                            max={100}
+                            label={__("Icon Size", "frontis-blocks")}
+                            rangeValue={tabIconSize}
+                            onChangeHandler={(value) => setAttributes({ tabIconSize: value })}
+                            rangeUnitHandler={(value) => setAttributes({ tabIconSizeUnits: value })}
+                            deviceType={deviceType}
+                            units={tabIconSizeUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={25}
+                        />
 
-                />
+                        <FB_SwitcherControl
+                            label={__("Icon Color", "frontis-blocks")}
+                            globalSwitcher={tabIconColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconColorSwitcher: value })}
+                        />
 
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={tabIconBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ tabIconBorder: value })}
-                />
+                        {tabIconColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={tabIconColor}
+                                setGlobalColor={(value) => setAttributes({ tabIconColor: value === undefined ? '' : value })}
+                            />
+                        )}
 
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={tabIconBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabIconBorderColorSwitcher: value })}
-                />
+                        {tabIconColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={tabIconHoverColor}
+                                setGlobalColor={(value) => setAttributes({ tabIconHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
 
-                {tabIconBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={tabIconBorderColor}
-                        setGlobalColor={(value) => setAttributes({ tabIconBorderColor: value === undefined ? '' : value })}
-                    />
-                )}
+                        <FB_ColorControl
+                            label={__("Icon Active Color", "frontis-blocks")}
+                            globalColor={tabIconActiveColor}
+                            setGlobalColor={(value) => setAttributes({ tabIconActiveColor: value === undefined ? '' : value })}
+                        />
 
-                {tabIconBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={tabIconBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ tabIconBorderHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
+                        <FB_BackgroundColorControl
+                            label={__("Background Color", "frontis-blocks")}
+                            bgColorSwitcher={tabIconBgColorSwitcher}  
+                            setBgColorSwitcher={(value) => setAttributes({ tabIconBgColorSwitcher: value })}
+                            
+                            normalBackgroundType={tabIconNormalBackgroundType} 
+                            setNormalBackgroundType={(value) => setAttributes({ tabIconNormalBackgroundType: value })}
+                            normalClassicColor={tabIconBgColor}
+                            setNormalClassicColor={(value) => setAttributes({ tabIconBgColor: value === undefined ? '' : value })}
+                            normalGradientColor={tabIconNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ tabIconNormalGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={tabIconNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ tabIconNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={tabIconNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ tabIconNormalCustomGradientInputValue: value })}
+                            
+                            hoverBackgroundType={tabIconHoverBackgroundType} 
+                            setHoverBackgroundType={(value) => setAttributes({ tabIconHoverBackgroundType: value })}
+                            hoverClassicColor={ tabIconBgHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({  tabIconBgHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={tabIconHoverGradientColor} 
+                            setHoverGradientColor={(value) => setAttributes({ tabIconHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={tabIconHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={tabIconHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ tabIconHoverCustomGradientInputValue: value })}
 
-                <FB_Spacing 
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTabIconBorderUnitsHandler}
-                    spacingUnits={tabIconBorderUnits}
-                    spacingDesktop={tabIconBorderDesktop}
-                    spacingTablet={tabIconBorderTablet}
-                    spacingMobile={tabIconBorderMobile}
-                    handleSpacingUnitHandler={handleTabIconBorderUnitChange}
-                    spacingCombineBtn={tabIconBorderLink}
-                    spacingCombineBtnHandler={handleTabIconBorderCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                <FB_Spacing 
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTabIconBorderRadiusUnitsHandler}
-                    spacingUnits={tabIconBorderRadiusUnits}
-                    spacingDesktop={tabIconBorderRadiusDesktop}
-                    spacingTablet={tabIconBorderRadiusTablet}
-                    spacingMobile={tabIconBorderRadiusMobile}
-                    handleSpacingUnitHandler={handleTabIconBorderRadiusUnitChange}
-                    spacingCombineBtn={tabIconBorderRadiusLink}
-                    spacingCombineBtnHandler={handleTabIconBorderRadiusCombineBtn}
-                    setAttributes={setAttributes}
-                />
+                            isBackgroundImage={false}
 
-                <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handleTabIconPaddingUnitsHandler}
-                    spacingUnits={tabIconPaddingUnits}
-                    spacingDesktop={tabIconPaddingDesktop}
-                    spacingTablet={tabIconPaddingTablet}
-                    spacingMobile={tabIconPaddingMobile}
-                    handleSpacingUnitHandler={handleTabIconPaddingUnitChange}
-                    spacingCombineBtn={tabIconPaddingLink}
-                    spacingCombineBtnHandler={handleTabIconPaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />
+                        />
 
-                <FB_SwitcherControl
-                    label={__("Icon Rotation", "frontis-blocks")}
-                    globalSwitcher={tabIconRotateSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabIconRotateSwitcher: value })}
-                />
+                        <FB_BackgroundColorControl
+                            label={__("BG Active Color", "frontis-blocks")}
+                            bgColorSwitcher={tabIconBgActiveColorSwitcher}  
+                            setBgColorSwitcher={(value) => setAttributes({ tabIconBgActiveColorSwitcher: value })}
+                            
+                            normalBackgroundType={tabIconActiveNormalBackgroundType} 
+                            setNormalBackgroundType={(value) => setAttributes({ tabIconActiveNormalBackgroundType: value })}
+                            normalClassicColor={tabIconBgActiveColor}
+                            setNormalClassicColor={(value) => setAttributes({ tabIconBgActiveColor: value === undefined ? '' : value })}
+                            normalGradientColor={tabIconActiveNormalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ tabIconActiveNormalGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={tabIconActiveNormalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ tabIconActiveNormalCustomGradientSwitcher: value })}
+                            normalCustomGradientInputValue={tabIconActiveNormalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ tabIconActiveNormalCustomGradientInputValue: value })}
+                            
+                            hoverBackgroundType={tabIconActiveHoverBackgroundType} 
+                            setHoverBackgroundType={(value) => setAttributes({ tabIconActiveHoverBackgroundType: value })}
+                            hoverClassicColor={ tabIconBgActiveHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({  tabIconBgActiveHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={tabIconActiveHoverGradientColor} 
+                            setHoverGradientColor={(value) => setAttributes({ tabIconActiveHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={tabIconActiveHoverCustomGradientSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ tabIconActiveHoverCustomGradientSwitcher: value })}
+                            hoverCustomGradientInputValue={tabIconActiveHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ tabIconActiveHoverCustomGradientInputValue: value })}
 
-                {tabIconRotateSwitcher === 'normal' && (
-                    <FB_Range 
-                        min={-360}
-                        max={360}
-                        label={__("Icon Rotation", "frontis-blocks")}
-                        rangeValue={tabIconRotate}
-                        onChangeHandler={(value) => setAttributes({ tabIconRotate: value === 0 ? undefined : value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
+                            isBackgroundImage={false}
 
-                    />
-                )}
+                        />
 
-                {tabIconRotateSwitcher === 'hover' && (
-                    <FB_Range
-                        min={-360}
-                        max={360}
-                        label={__("Icon Rotation", "frontis-blocks")}
-                        rangeValue={tabIconRotateHover}
-                        onChangeHandler={(value) => setAttributes({ tabIconRotateHover: value === 0 ? undefined : value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
-                    />
-                )}
+                        <SelectControl
+                            label={__("Border Style", "frontis-blocks")}
+                            value={tabIconBorder}
+                            options={BORDER_STYLES}
+                            onChange={(value) => setAttributes({ tabIconBorder: value })}
+                        />
 
-            </PanelBody>
-            <PanelBody
-                title={__("Image", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <SelectControl
-                    label={__("Position", "frontis-blocks")}
-                    value={tabIconPosition} 
-                    options={ICON_POSITION}
-                    onChange={(value) => setAttributes({ tabIconPosition: value })}
-                />
-                <FB_Range
-                    min={1}
-                    max={tabIconImageWidthUnits === '%' ? 100 : 1000}
-                    label={__("Width", "frontis-blocks")}
-                    rangeValue={tabIconImageWidth}
-                    onChangeHandler={(value) => setAttributes({ tabIconImageWidth: value })}
-                    rangeUnitHandler={(value) => setAttributes({ tabIconImageWidthUnits: value })}
-                    deviceType={deviceType}
-                    units={tabIconImageWidthUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={20}
-                />
+                        <FB_SwitcherControl
+                            label={__("Border Color", "frontis-blocks")}
+                            globalSwitcher={tabIconBorderColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconBorderColorSwitcher: value })}
+                        />
 
-                <FB_Range
-                    min={1}
-                    max={tabIconImageHeightUnits === '%' ? 100 : 1000}
-                    label={__("Height", "frontis-blocks")}
-                    rangeValue={tabIconImageHeight}
-                    onChangeHandler={(value) => setAttributes({ tabIconImageHeight: value })}
-                    rangeUnitHandler={(value) => setAttributes({ tabIconImageHeightUnits: value })}
-                    deviceType={deviceType}
-                    units={tabIconImageHeightUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={20}
-                />
+                        {tabIconBorderColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Normal Color", "frontis-blocks")}
+                                globalColor={tabIconBorderColor}
+                                setGlobalColor={(value) => setAttributes({ tabIconBorderColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {tabIconBorderColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={tabIconBorderHoverColor}
+                                setGlobalColor={(value) => setAttributes({ tabIconBorderHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        <FB_Spacing 
+                            label={__("Border", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleTabIconBorderUnitsHandler}
+                            spacingUnits={tabIconBorderUnits}
+                            spacingDesktop={tabIconBorderDesktop}
+                            spacingTablet={tabIconBorderTablet}
+                            spacingMobile={tabIconBorderMobile}
+                            handleSpacingUnitHandler={handleTabIconBorderUnitChange}
+                            spacingCombineBtn={tabIconBorderLink}
+                            spacingCombineBtnHandler={handleTabIconBorderCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+                        <FB_Spacing 
+                            label={__("Border Radius", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleTabIconBorderRadiusUnitsHandler}
+                            spacingUnits={tabIconBorderRadiusUnits}
+                            spacingDesktop={tabIconBorderRadiusDesktop}
+                            spacingTablet={tabIconBorderRadiusTablet}
+                            spacingMobile={tabIconBorderRadiusMobile}
+                            handleSpacingUnitHandler={handleTabIconBorderRadiusUnitChange}
+                            spacingCombineBtn={tabIconBorderRadiusLink}
+                            spacingCombineBtnHandler={handleTabIconBorderRadiusCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_Spacing 
+                            label={__("Padding", "frontis-blocks")}
+                            deviceType={deviceType}
+                            spacingUnitsHandler={handleTabIconPaddingUnitsHandler}
+                            spacingUnits={tabIconPaddingUnits}
+                            spacingDesktop={tabIconPaddingDesktop}
+                            spacingTablet={tabIconPaddingTablet}
+                            spacingMobile={tabIconPaddingMobile}
+                            handleSpacingUnitHandler={handleTabIconPaddingUnitChange}
+                            spacingCombineBtn={tabIconPaddingLink}
+                            spacingCombineBtnHandler={handleTabIconPaddingCombineBtn}
+                            setAttributes={setAttributes}
+                        />
+
+                        <FB_SwitcherControl
+                            label={__("Icon Rotation", "frontis-blocks")}
+                            globalSwitcher={tabIconRotateSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconRotateSwitcher: value })}
+                        />
+
+                        {tabIconRotateSwitcher === 'normal' && (
+                            <FB_Range 
+                                min={-360}
+                                max={360}
+                                label={__("Icon Rotation", "frontis-blocks")}
+                                rangeValue={tabIconRotate}
+                                onChangeHandler={(value) => setAttributes({ tabIconRotate: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+
+                            />
+                        )}
+
+                        {tabIconRotateSwitcher === 'hover' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Icon Rotation", "frontis-blocks")}
+                                rangeValue={tabIconRotateHover}
+                                onChangeHandler={(value) => setAttributes({ tabIconRotateHover: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+                            />
+                        )}
+
+                    </PanelBody>
+                    <PanelBody
+                        title={__("Image", "frontis-blocks")}
+                        initialOpen={false}
+                    >
+                        <FB_SwitcherControl
+                            label={__("Position", "frontis-blocks")}
+                            options={ICON_POSITION}
+                            globalSwitcher={tabIconPosition}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconPosition: value })}
+                        />
+                        <FB_Range
+                            min={1}
+                            max={tabIconImageWidthUnits === '%' ? 100 : 1000}
+                            label={__("Width", "frontis-blocks")}
+                            rangeValue={tabIconImageWidth}
+                            onChangeHandler={(value) => setAttributes({ tabIconImageWidth: value })}
+                            rangeUnitHandler={(value) => setAttributes({ tabIconImageWidthUnits: value })}
+                            deviceType={deviceType}
+                            units={tabIconImageWidthUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={20}
+                        />
+
+                        <FB_Range
+                            min={1}
+                            max={tabIconImageHeightUnits === '%' ? 100 : 1000}
+                            label={__("Height", "frontis-blocks")}
+                            rangeValue={tabIconImageHeight}
+                            onChangeHandler={(value) => setAttributes({ tabIconImageHeight: value })}
+                            rangeUnitHandler={(value) => setAttributes({ tabIconImageHeightUnits: value })}
+                            deviceType={deviceType}
+                            units={tabIconImageHeightUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={20}
+                        />
 
 
-                <FB_SwitcherControl
-                    label={__("Image Rotation", "frontis-blocks")}
-                    globalSwitcher={tabIconImageRotateSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ tabIconImageRotateSwitcher: value })}
-                />
+                        <FB_SwitcherControl
+                            label={__("Image Rotation", "frontis-blocks")}
+                            globalSwitcher={tabIconImageRotateSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ tabIconImageRotateSwitcher: value })}
+                        />
 
-                {tabIconImageRotateSwitcher === 'normal' && ( 
-                    <FB_Range 
-                        min={-360}
-                        max={360}
-                        label={__("Image Rotation", "frontis-blocks")}
-                        rangeValue={tabIconImageRotate}
-                        onChangeHandler={(value) => setAttributes({ tabIconImageRotate: value === 0 ? undefined : value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
+                        {tabIconImageRotateSwitcher === 'normal' && ( 
+                            <FB_Range 
+                                min={-360}
+                                max={360}
+                                label={__("Image Rotation", "frontis-blocks")}
+                                rangeValue={tabIconImageRotate}
+                                onChangeHandler={(value) => setAttributes({ tabIconImageRotate: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
 
-                    />
-                )}
+                            />
+                        )}
 
-                {tabIconImageRotateSwitcher === 'hover' && (
-                    <FB_Range
-                        min={-360}
-                        max={360}
-                        label={__("Image Rotation", "frontis-blocks")}
-                        rangeValue={tabIconImageRotateHover}
-                        onChangeHandler={(value) => setAttributes({ tabIconImageRotateHover: value === 0 ? undefined : value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                        rangeStep={1}
-                        resetFallbackValue={""}
-                        isRangeUnit={false}
-                    />
-                )}
-            </PanelBody>
+                        {tabIconImageRotateSwitcher === 'hover' && (
+                            <FB_Range
+                                min={-360}
+                                max={360}
+                                label={__("Image Rotation", "frontis-blocks")}
+                                rangeValue={tabIconImageRotateHover}
+                                onChangeHandler={(value) => setAttributes({ tabIconImageRotateHover: value === 0 ? undefined : value })}
+                                deviceType={deviceType}
+                                setAttributes={setAttributes}
+                                rangeStep={1}
+                                resetFallbackValue={""}
+                                isRangeUnit={false}
+                            />
+                        )}
+                    </PanelBody>
+                </>
+            )}
+            
+            
             <PanelBody 
                 title={__("Tab Content", "frontis-blocks")} 
-                initialOpen={true}
+                initialOpen={false}
             >
                 <FB_BackgroundColorControl
 					label={__("Background Color", "frontis-blocks")}
@@ -4626,9 +4823,6 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
     return (
 
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -4637,3 +4831,4 @@ export default function Inspector({ attributes, setAttributes, clientId, handleD
         </>
     );
 }
+export default memo(Inspector);

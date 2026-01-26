@@ -936,11 +936,11 @@ const FB_Block_Icons = {
 			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
 		})
 	),
-	timezone: fb(
+	business_hours: fb(
 		'svg',
 		{
 		  version: '1.1',
-		  id: 'timezoneIcon',
+		  id: 'businessHoursIcon',
 		  xmlns: 'http://www.w3.org/2000/svg',
 		  width: '24',
 		  height: '24',
@@ -967,6 +967,127 @@ const FB_Block_Icons = {
 			  M11 16C11 13.2386 13.2386 11 16 11C18.7614 11 21 13.2386 21 16C21 18.7614 18.7614 21 16 21C13.2386 21 11 18.7614 11 16Z`,
 		})
 	),
+	breadcrumb: fb(
+		'svg',
+		{
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  fill: 'none',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		[
+		  fb('path', {
+			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		  }),
+		  fb('path', {
+			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		  })
+		]
+	),
+	off_canvas_menu: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'offCanvasMenuIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: 2,
+			y: 4,
+			width: 20,
+			height: 16,
+			rx: 2.5,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 9,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 12,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 15,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('path', {
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+			d: `M15 9L12 12L15 15`,
+		})
+	),
+	lottie_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'lottieAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M16 8C16 8 13 8 12 12C11 16 8 16 8 16
+				M21 5V19C21 20.1046 20.1046 21 19 21H5
+				C3.89543 21 3 20.1046 3 19V5
+				C3 3.89543 3.89543 3 5 3H19
+				C20.1046 3 21 3.89543 21 5Z`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+	),
+	rive_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'riveAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M3 3H16C18.7614 3 21 5.23858 21 8C21 10.7614 18.7614 13 16 13H14M7 13H14M20 21L14 13`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+	),	
 
 };
 

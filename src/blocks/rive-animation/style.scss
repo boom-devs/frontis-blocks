@@ -1,0 +1,11 @@
+
+// style.scss
+.fb-lottie-animation-container {
+	width: 100%;
+
+	> svg, canvas {
+		width: 100% !important;
+		height: auto !important;
+		display: block;
+	}
+}

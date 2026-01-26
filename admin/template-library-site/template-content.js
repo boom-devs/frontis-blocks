@@ -4,8 +4,6 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect, useCallback } from "@wordpress/element";
 import TemplateGrid from "./template-grid";
-import {ToastContainer, toast } from "react-toastify";
-import { TemplateContentLoader } from "./template-loader";
 import { ClipLoader } from "react-spinners";
 import { useRef } from "@wordpress/element";
 import TemplateLibraryCardsSkeleton from "./components/TemplateLibraryCardsSkeleton";
@@ -33,12 +31,18 @@ const TemplateContent = ({
     setActiveCategory,
     currentPage,
     onPageChange,
+    isSidebarCollapsed,
+    handleSidebarToggle,
 }) => {
 
     const schema = data || {};
     const [filteredTemplates, setFilteredTemplates] = useState([]);
-
     const scrollContainer = useRef(null);
+
+    const handleLocalToggle = () => {
+        setIsSidebarCollapsed(false);
+    };
+
 
     const scroll = useCallback((direction) => {
         if (!scrollContainer.current) return;
@@ -89,94 +93,26 @@ const TemplateContent = ({
 
     }, [activeTab, activeCategory, activeTagTab, TagTabsOptions, schema]);
 
-    const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
-
-    // Update user data inside database
-    const updateUserDataToDb = (optionName, data) => {
-        window.jQuery.ajax({
-            url: ajaxUrl,
-            type: 'POST',
-            data: {
-                action: 'fb_update_option',
-                'option_name': optionName,
-                'value': data,
-                security: nonce
-            },
-            success: function(response) {
-                console.log(response)
-            },
-            error: function(xhr, status, error) {
-                console.log("Somthing went wrong.")
-            }
-        });
-    }
-
-    const getUserDataFromDb = () => {
-        window.jQuery.ajax({
-            data: {
-                action: 'fb_get_option',
-                'option_name': 'frontis_tl_user_data',
-                security: nonce,
-            },
-            success: function(response) {
-                localStorage.setItem('userData', JSON.stringify(response.data));
-            },
-            error: function(xhr, status, error) {
-                console.log("Somthing went wrong.")
-            }
-        });
-    }
-
-    const handleLoginSuccess = useCallback((response, activeTab) => {
-        toast( activeTab === "signup" ? "Your account has been created!" : "Logged in successfully!", {
-            position:"top-right",
-            autoClose:3000,
-            hideProgressBar:false,
-            newestOnTop:false,
-            closeOnClick:true,
-            rtl:false,
-            pauseOnFocusLoss:true,
-            draggable:true,
-            pauseOnHover:true,
-            theme:"light"
-        } );
-
-        updateUserDataToDb('frontis_tl_user_data', {
-            'name': response?.user?.name,
-            'email': response?.user?.email,
-            'access_token': response?.access_token,
-            'refresh_token': response?.refresh_token,
-        })
-        setIsLogedIn(true);
-    }, []);
 
     const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-    // Get user data from local storage
-    useEffect(() => {
-        // Get userData from local storage
-        
-        const userData = JSON.parse(localStorage.getItem("userData"));
-        if (userData === 'undefined' || userData === 'null' || userData === '') {
-            getUserDataFromDb();
-        }
 
-        // Get user data from localstorage and set setIsLoginModalOpen is false
-        if (userData) {
-        }
-        
-    }, []);
-
-
-    
 
     return (
         <>
-            <div className="fb-template-library-store-content-wrapper">
+            <div className="fb-template-library-store-content-wrapper" onClick={isSidebarCollapsed ? handleSidebarToggle : null}>
             <div className="fb-template-library-store-content" >
                 <div className="fb-template-library-content-header">
-                    <div className="fb-template-library-content-header-left">
+                    <div className="fb-template-library-content-header-top">
                         <div className="fb-template-library-tabs">
+                            <button
+                                className={`fb-template-library-tab nav-icon`}
+                                onClick={handleSidebarToggle}
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M3 5H21M3 12H21M3 19H15" stroke="#0B0C0E" stroke-width="1.4" stroke-linecap="round"/>
+                                </svg>
+                            </button>
                             {TabsOptions.map(tab => (
                                 <button
                                     key={tab.value}
@@ -188,20 +124,18 @@ const TemplateContent = ({
                                 </button>
                             ))}
                         </div>
-                    </div>
-                    <div className="fb-template-library-content-header-right">
                         <div className="fb-template-library-search-wrapper">
                             <div className="fb-search-input-wrapper">
                                 <div className="fb-search-input-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                        <g clipPath="url(#clip0_13116_5586)">
-                                            <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
-                                            <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                        <g clip-path="url(#clip0_13497_8589)">
+                                        <circle cx="8.625" cy="8.625" r="7.125" stroke="#3991FF" stroke-width="1.5"/>
+                                        <path d="M13.875 13.875L16.5 16.5" stroke="#3991FF" stroke-width="1.5" stroke-linecap="round"/>
                                         </g>
                                         <defs>
-                                            <clipPath id="clip0_131ikt16_5586">
-                                                <rect width="18" height="18" fill="white" />
-                                            </clipPath>
+                                        <clipPath id="clip0_13497_8589">
+                                        <rect width="18" height="18" fill="white"/>
+                                        </clipPath>
                                         </defs>
                                     </svg>
                                 </div>
@@ -213,6 +147,8 @@ const TemplateContent = ({
                                 />
                             </div>
                         </div>
+                    </div>
+                    <div className="fb-template-library-content-header-bottom">
                         { tagLoading ? (
                             <>
                                 <ClipLoader color="fff" size={24} />
@@ -275,7 +211,7 @@ const TemplateContent = ({
                 </div>
 
                 {loading ? (
-                    <TemplateLibraryCardsSkeleton count={15} />
+                <TemplateLibraryCardsSkeleton count={15} />
                 ) : (
                     <>
                         <div className="fb-template-library-cards">
@@ -290,6 +226,7 @@ const TemplateContent = ({
                                         categories={template.categories || []}
                                         templateType={activeTab}
                                         preview_url={template.preview_url || ''}
+                                        read_more_url={template.read_more_url || ''}
                                         uploads={template.uploads || ''}
                                         colors={template.colors || []}
                                         customColors={template.custom_colors || []}
@@ -317,10 +254,16 @@ const TemplateContent = ({
                                     disabled={currentPage === 1}
                                     onClick={() => onPageChange(activeTab, currentPage - 1)}
                                 >
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g clip-path="url(#clip0_16781_5554)">
+                                        <path d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997" stroke="#050607" stroke-width="1.5"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_16781_5554">
+                                        <rect width="24" height="24" fill="white" transform="matrix(-1 0 0 1 24 0)"/>
+                                        </clipPath>
+                                        </defs>
                                     </svg>
-                                    Previous
                                 </button>
                             
                                 {/* Page Numbers */}
@@ -404,9 +347,15 @@ const TemplateContent = ({
                                     disabled={currentPage === schema[activeTab].pagination.last_page}
                                     onClick={() => onPageChange(activeTab, currentPage + 1)}
                                 >
-                                    Next
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <g clip-path="url(#clip0_16781_5554)">
+                                        <path d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997" stroke="#050607" stroke-width="1.5"/>
+                                        </g>
+                                        <defs>
+                                        <clipPath id="clip0_16781_5554">
+                                        <rect width="24" height="24" fill="white" transform="matrix(-1 0 0 1 24 0)"/>
+                                        </clipPath>
+                                        </defs>
                                     </svg>
                                 </button>
                             </div>

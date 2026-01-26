@@ -1697,7 +1697,7 @@ const attributes = {
 
     headingPresetStyle: {
         type: 'string',
-        default: 'preset-0',
+        default: 'preset-1',
     },
     activeLineSwitcher: {
         type: 'boolean',

@@ -530,16 +530,8 @@ function FrontisBlocksSidebar() {
 										<NavigatorButton path="/colors">
 											<div className="fb-tab-wrapper">
 												<span className="fb-tab-icon">
-													<svg
-														viewBox="0 0 24 24"
-														xmlns="http://www.w3.org/2000/svg"
-														width="24"
-														height="24"
-													>
-														<path
-															fill="currentcolor"
-															d="M17.2 10.9c-.5-1-1.2-2.1-2.1-3.2-.6-.9-1.3-1.7-2.1-2.6L12 4l-1 1.1c-.6.9-1.3 1.7-2 2.6-.8 1.2-1.5 2.3-2 3.2-.6 1.2-1 2.2-1 3 0 3.4 2.7 6.1 6.1 6.1s6.1-2.7 6.1-6.1c0-.8-.3-1.8-1-3zm-5.1 7.6c-2.5 0-4.6-2.1-4.6-4.6 0-.3.1-1 .8-2.3.5-.9 1.1-1.9 2-3.1.7-.9 1.3-1.7 1.8-2.3.7.8 1.3 1.6 1.8 2.3.8 1.1 1.5 2.2 2 3.1.7 1.3.8 2 .8 2.3 0 2.5-2.1 4.6-4.6 4.6z"
-														/>
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+														<path d="M16.816 10.6584C17.2519 9.87049 17.5 8.96422 17.5 8C17.5 4.96243 15.0376 2.5 12 2.5C8.96243 2.5 6.5 4.96243 6.5 8C6.5 8.96422 6.74812 9.87049 7.184 10.6584M16.816 10.6584C16.0838 11.9821 14.8217 12.9719 13.316 13.3416C12.8943 13.4451 12.4536 13.5 12 13.5C11.5464 13.5 11.1057 13.4451 10.684 13.3416M16.816 10.6584C19.2181 11.2482 21 13.416 21 16C21 19.0376 18.5376 21.5 15.5 21.5C14.1704 21.5 12.9509 21.0282 12 20.2428M7.184 10.6584C7.91622 11.9821 9.17827 12.9719 10.684 13.3416M7.184 10.6584C4.78193 11.2482 3 13.416 3 16C3 19.0376 5.46243 21.5 8.5 21.5C9.82963 21.5 11.0491 21.0282 12 20.2428M10.684 13.3416C10.2481 14.1295 10 15.0358 10 16C10 17.7079 10.7785 19.234 12 20.2428" stroke="#0B0C0E" stroke-width="1.4"/>
 													</svg>
 												</span>
 												<span className="fb-tab-title">
@@ -553,28 +545,15 @@ function FrontisBlocksSidebar() {
 
 							<NavigatorScreen path="/typography">
 								<div className="fb-global-header-inner-wrapper">
-									<NavigatorButton path="/" className="back-button">
-										<span>
-											<svg
-												width="16"
-												height="17"
-												viewBox="0 0 16 17"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													d="M10.5 13.5L5.5 8.5L10.5 3.5"
-													stroke="#404655"
-													strokeWidth="1.2"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												/>
-											</svg>
-										</span>
-									</NavigatorButton>
-									
 									<div className="fb-global-header-inner">
-										<h3>{__("Typography", "frontis-blocks")}</h3>
+										<h3>
+											<NavigatorButton path="/" className="back-button">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+													<path d="M10.5 13L5.5 8L10.5 3" stroke="#404655" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											</NavigatorButton>
+											{__("Typography", "frontis-blocks")}
+										</h3>
 										<p>
 											{__(
 												"Available fonts, typographic styles, application of those styles.",
@@ -593,27 +572,15 @@ function FrontisBlocksSidebar() {
 
 							<NavigatorScreen path="/colors">
 								<div className="fb-global-header-inner-wrapper">
-									<NavigatorButton path="/" className="back-button">
-										<span>
-											<svg
-												width="16"
-												height="17"
-												viewBox="0 0 16 17"
-												fill="none"
-												xmlns="http://www.w3.org/2000/svg"
-											>
-												<path
-													d="M10.5 13.5L5.5 8.5L10.5 3.5"
-													stroke="#404655"
-													strokeWidth="1.2"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												/>
-											</svg>
-										</span>
-									</NavigatorButton>
 									<div className="fb-global-header-inner">
-										<h3>{__("Color", "frontis-blocks")}</h3>
+										<h3>
+											<NavigatorButton path="/" className="back-button">
+												<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+													<path d="M10.5 13L5.5 8L10.5 3" stroke="#404655" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+												</svg>
+											</NavigatorButton>
+											{__("Colors", "frontis-blocks")}
+										</h3>
 										<p>
 											{__(
 												"Available texts, links, Button, Headings global colors",
@@ -683,7 +650,7 @@ function FrontisBlocksSidebar() {
 							</NavigatorScreen>
 						</NavigatorProvider>
 
-						{/* <div className="fb-theme-settings-wrapper">
+						<div className="fb-theme-settings-wrapper">
 							{onlyCanvasEditor &&
 								<FrontisThemeSiteEditor />
 							}
@@ -691,7 +658,7 @@ function FrontisBlocksSidebar() {
 							{(isPagePost || isSiteEditor) &&
 								<FrontisMetaBox whichEditor={isPagePost ? 'post' : 'template'} />
 							}
-						</div> */}
+						</div>
 					</div>
 				</PluginSidebar>
 			</div>
