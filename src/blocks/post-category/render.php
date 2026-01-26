@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 /**
  * Server-side rendering for the Post Category block
  */
@@ -11,7 +15,8 @@ if (!function_exists('fb_norm_str')) {
         if (is_array($val)) {
             $val = implode(' ', array_filter(array_map('strval', $val)));
         }
-        if ($val === null) return $default;
+        if ($val === null)
+            return $default;
         return (string) $val;
     }
 }
@@ -19,7 +24,8 @@ if (!function_exists('fb_norm_str')) {
 if (!function_exists('fb_trim_words')) {
     function fb_trim_words($text, $word_limit)
     {
-        if (!$text) return '';
+        if (!$text)
+            return '';
         $words = explode(' ', $text);
         return count($words) > $word_limit ? implode(' ', array_slice($words, 0, $word_limit)) . '...' : $text;
     }
@@ -39,6 +45,9 @@ $exclude_taxonomies = isset($attributes['excludeTaxonomies']) ? (array) $attribu
 $order_by = fb_norm_str(isset($attributes['orderBy']) ? $attributes['orderBy'] : 'name');
 $sort_order = fb_norm_str(isset($attributes['sortOrder']) ? $attributes['sortOrder'] : 'asc');
 $per_page = isset($attributes['perPage']) ? (int) $attributes['perPage'] : 6;
+$show_post_type_label = !empty($attributes['showLabel']);
+// $show_post_type_label = isset($attributes['showLabel']) ? (bool) $attributes['showLabel'] : true;
+$show_author = isset($attributes['showAuthor']) ? (bool) $attributes['showAuthor'] : true;
 
 // Layout attributes
 $layout_type = fb_norm_str(isset($attributes['layoutType']) ? $attributes['layoutType'] : 'grid');
@@ -46,14 +55,12 @@ $grid_columns = isset($attributes['gridColumns']) ? $attributes['gridColumns'] :
 $list_style = fb_norm_str(isset($attributes['listStyle']) ? $attributes['listStyle'] : 'none');
 
 // Read More attributes
-$read_more_icon_frontend         = fb_norm_str(isset($attributes['readMoreIconFrontend']) ? $attributes['readMoreIconFrontend'] : '');
+$read_more_icon_frontend = fb_norm_str(isset($attributes['readMoreIconFrontend']) ? $attributes['readMoreIconFrontend'] : '');
 $read_more_switcher = isset($attributes['readMoreSwitcher']) ? (bool) $attributes['readMoreSwitcher'] : false;
 $read_more_text = fb_norm_str(isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'View All');
 $read_more_icon_align = fb_norm_str(isset($attributes['readMoreIconAlign']) ? $attributes['readMoreIconAlign'] : 'none');
 $read_more_icon_image_url = fb_norm_str(isset($attributes['readMoreIconImageUrl']) ? $attributes['readMoreIconImageUrl'] : '');
 $read_more_icon_image_alt = fb_norm_str(isset($attributes['readMoreIconImageAlt']) ? $attributes['readMoreIconImageAlt'] : 'icon');
-// $read_more_icon_image_id = fb_norm_str(isset($attributes['readMoreIconImageID']) ? $attributes['readMoreIconImageID'] : '');
-// $read_more_icon_image_display = fb_norm_str(isset($attributes['readMoreIconImagedisplay']) ? $attributes['readMoreIconImagedisplay'] : 'full');
 
 // Description excerpt
 $post_description_excerpt_length = isset($attributes['postDescriptionExcerptLength']) ? (int) $attributes['postDescriptionExcerptLength'] : 10;
@@ -69,9 +76,12 @@ $post_category_tablet_switcher = isset($attributes['postCategoryTabletSwitcher']
 $post_category_mobile_switcher = isset($attributes['postCategoryMobileSwitcher']) ? (bool) $attributes['postCategoryMobileSwitcher'] : false;
 
 $responsive_classes = [];
-if ($post_category_desktop_switcher) $responsive_classes[] = 'fb-desktop-responsive';
-if ($post_category_tablet_switcher) $responsive_classes[] = 'fb-tablet-responsive';
-if ($post_category_mobile_switcher) $responsive_classes[] = 'fb-mobile-responsive';
+if ($post_category_desktop_switcher)
+    $responsive_classes[] = 'fb-desktop-responsive';
+if ($post_category_tablet_switcher)
+    $responsive_classes[] = 'fb-tablet-responsive';
+if ($post_category_mobile_switcher)
+    $responsive_classes[] = 'fb-mobile-responsive';
 
 // Base classes
 $base_classes = array_merge([
@@ -89,6 +99,106 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'class' => implode(' ', $wrapper_classes_arr),
 ]);
 
+if (!function_exists('fb_get_post_type_label_for_taxonomy')) {
+    function fb_get_post_type_label_for_taxonomy($taxonomy_slug, $count = 1)
+    {
+        if (empty($taxonomy_slug)) {
+            return '';
+        }
+
+        $taxonomy = get_taxonomy($taxonomy_slug);
+        if (!$taxonomy || empty($taxonomy->object_type)) {
+            return '';
+        }
+
+        // Get the first post type associated with this taxonomy
+        $post_type_slug = $taxonomy->object_type[0];
+        $post_type = get_post_type_object($post_type_slug);
+
+        if (!$post_type) {
+            return '';
+        }
+
+        $is_plural = $count !== 1;
+
+        // For custom post types
+        if ($post_type->labels) {
+            if (!$is_plural && !empty($post_type->labels->singular_name)) {
+                return $post_type->labels->singular_name;
+            } else if ($is_plural && !empty($post_type->labels->name)) {
+                return $post_type->labels->name;
+            } else if (!empty($post_type->labels->name)) {
+                return $post_type->labels->name;
+            } else if (!empty($post_type->labels->singular_name)) {
+                return $post_type->labels->singular_name;
+            }
+        }
+
+        // Fallback
+        $base_name = ucfirst($post_type_slug);
+        return $is_plural ? $base_name . 's' : $base_name;
+    }
+}
+
+if (!function_exists('fb_get_term_owner')) {
+    function fb_get_term_owner($term_id, $taxonomy = 'category')
+    {
+        $posts = get_posts([
+            'post_type' => 'any',
+            'post_status' => 'publish',
+            'posts_per_page' => 1,
+            'orderby' => 'date',
+            'order' => 'ASC',
+            // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for term owner detection
+            'tax_query' => [
+                [
+                    'taxonomy' => $taxonomy,
+                    'field' => 'term_id',
+                    'terms' => $term_id,
+                ]
+            ],
+            'fields' => 'ids'
+        ]);
+
+        if (empty($posts)) {
+            $admin = get_users(['role' => 'administrator', 'number' => 1, 'orderby' => 'ID']);
+            $user_id = !empty($admin) ? $admin[0]->ID : 1;
+        } else {
+            $user_id = get_post_field('post_author', $posts[0]);
+        }
+
+        $user = get_userdata($user_id);
+        if (!$user)
+            return null;
+
+        return [
+            'id' => $user->ID,
+            'name' => $user->display_name,
+            'avatar' => get_avatar_url($user->ID, ['size' => 40]),
+            'url' => get_author_posts_url($user->ID),
+        ];
+    }
+}
+
+if (!function_exists('fb_format_count_with_label_html')) {
+    function fb_format_count_with_label_html($count, $taxonomy_slug, $show_label = true)
+    {
+        $number_html = '<span class="fb-taxonomy-count-number">' . esc_html($count) . '</span>';
+
+        // Main fix: jodi user label dekhte na chay, tahole label add koro na
+        if (!$show_label) {
+            return $number_html;
+        }
+
+        $label = fb_get_post_type_label_for_taxonomy($taxonomy_slug, $count);
+
+        if (empty($label)) {
+            return $number_html;
+        }
+
+        return $number_html . '<span class="fb-taxonomy-count-label"> ' . esc_html($label) . '</span>';
+    }
+}
 
 // Get taxonomy terms
 $taxonomy_terms = [];
@@ -108,7 +218,7 @@ if ($taxonomy_type) {
     if ($selection_type === 'include' && !empty($include_taxonomies)) {
         $args['include'] = $include_taxonomies;
     } elseif ($selection_type === 'exclude' && !empty($exclude_taxonomies)) {
-        $args['exclude'] = $exclude_taxonomies;
+        $args['exclude'] = $exclude_taxonomies; // phpcs:ignore WordPressVIPMinimum.Performance.WPQueryParams.PostNotIn_exclude
     }
 
     $taxonomy_terms = get_terms($args);
@@ -162,7 +272,7 @@ if (!function_exists('fb_sort_taxonomy_terms_hierarchically')) {
     }
 }
 
-// Improved hierarchical list builder
+// hierarchical list builder
 if (!function_exists('fb_build_taxonomy_hierarchy')) {
     function fb_build_taxonomy_hierarchy($terms, $parent_id = 0, $level = 0, $args = array())
     {
@@ -170,7 +280,8 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             return $term->parent == $parent_id;
         });
 
-        if (empty($children)) return '';
+        if (empty($children))
+            return '';
 
         $ul_class = $parent_id === 0 ?
             'fb-taxonomy-list fb_post_category_container ' . $args['wrapper_class'] :
@@ -190,15 +301,17 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             $html .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $html .= '</a>';
 
-            // if ($args['show_count']) {
-            //     $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
-            // }
-
             if ($args['show_count']) {
+                $formatted_count_html = fb_format_count_with_label_html(
+                    $term->count,
+                    $args['taxonomy_type'],
+                    $args['show_post_type_label']
+                );
+
                 if ($args['premade_style'] === 'style-1') {
-                    $html .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                    $html .= '<span class="fb-taxonomy-count">(' . $formatted_count_html . ')</span>';
                 } else {
-                    $html .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                    $html .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
                 }
             }
 
@@ -210,7 +323,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
                 $html .= '</p>';
             }
 
-              if (
+            if (
                 isset($args['premade_style'], $args['read_more_switcher']) &&
                 $args['premade_style'] === 'style-2' &&
                 $args['read_more_switcher']
@@ -245,7 +358,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
             if ($args['separator_style'] !== 'none') {
                 $html .= '<div class="fb-tax-separator"></div>';
             }
-            
+
             $html .= '</li>';
             // Recursive call for child terms
             $html .= fb_build_taxonomy_hierarchy($terms, $term->term_id, $level + 1, $args);
@@ -270,7 +383,13 @@ if (empty($taxonomy_type)) {
         $taxonomy_terms = fb_sort_taxonomy_terms_hierarchically($taxonomy_terms);
     }
 
-    $grid_class = 'fb_post_category_container fb-taxonomy-grid';
+    $is_single_item = count($taxonomy_terms) === 1;
+    $grid_class = 'fb_post_category_container';
+    if (!$is_single_item) {
+        $grid_class .= ' fb-taxonomy-grid';
+    } else {
+        $grid_class .= ' single-item';
+    }
     if ($post_category_global_wraper_class) {
         $grid_class .= ' ' . $post_category_global_wraper_class;
     }
@@ -284,63 +403,54 @@ if (empty($taxonomy_type)) {
         $term_image = get_term_meta($term->term_id, 'fb_taxonomy_image', true);
         $default_image_url = FB_PLUGIN_URL . 'assets/images/preset-bg.jpg';
         $image_source = !empty($term_image) ? $term_image : $default_image_url;
+        $author = fb_get_term_owner($term->term_id, $term->taxonomy);
 
         $output .= '<div class="fb-taxonomy-item">';
 
-        // Determine if the image block should be rendered at all
         $should_render_image = false;
 
-        // For style-3, only render if a custom term image exists
         if ($premade_style === 'style-3' && !empty($term_image)) {
             $should_render_image = true;
-        } 
-        // For style-4, render if the default image is set, meaning $image_source will have a value
-        elseif ($premade_style === 'style-4') {
+        } elseif ($premade_style === 'style-4') {
             $should_render_image = true;
         }
 
-        // Show image for style-3 & style-4
         if ($should_render_image) {
-            
-            // Start the output wrapper for style-4 only
+
             if ($premade_style === 'style-4') {
                 $output .= '<div class="fb-taxonomy-image-container">';
             }
 
-            // Output the image container common to both styles
             $output .= '<div class="fb-taxonomy-image">';
-            
-            // Use $image_source which handles the fallback for style-4, and the term image for style-3
+
             $output .= '<img src="' . esc_url($image_source) . '" alt="' . esc_attr($term->name) . '" />';
-            
+
             $output .= '</div>';
 
-            // Close the output wrapper for style-4 only
             if ($premade_style === 'style-4') {
                 $output .= '</div>';
             }
         }
 
-        
-
-
-        if($premade_style === 'style-4') {
+        if ($premade_style === 'style-4') {
             $output .= '<div class="fb-taxonomy-card-content">';
         }
 
         $output .= '<div class="fb-taxonomy-meta">';
 
         $output .= '<div class="fb-taxonomy-link-count">';
-            if ($show_count) {
-                $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
-            }
-            $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
-            // Visual indicator for child terms in grid layout
-            // if ($term->parent !== 0) {
-            //     $output .= '<span class="fb-child-indicator">(Child Category)</span>';
-            // }
-            $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
-            $output .= '</a>';
+        if ($show_count) {
+            $formatted_count_html = fb_format_count_with_label_html(
+                $term->count,
+                $taxonomy_type,
+                $show_post_type_label
+            );
+
+            $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
+        }
+        $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-link">';
+        $output .= '<h4 class="fb-taxonomy-name">' . esc_html($term->name) . '</h4>';
+        $output .= '</a>';
         $output .= '</div>';
 
         if ($show_description && $term->description) {
@@ -350,6 +460,16 @@ if (empty($taxonomy_type)) {
         }
 
         $output .= '</div>';
+        $output .= '<div class="fb-taxonomy-more-info">';
+
+        if ($show_author && $author) {
+            $output .= '<div class="fb-taxonomy-author-wrapper">';
+            $output .= '<a href="' . esc_url($author['url']) . '">';
+            $output .= '<img src="' . esc_url($author['avatar']) . '" alt="' . esc_attr($author['name']) . '" class="fb-taxonomy-author-avatar">';
+            $output .= '</a>';
+            $output .= '<a href="' . esc_url($author['url']) . '" class="fb-taxonomy-author-name">' . esc_html($author['name']) . '</a>';
+            $output .= '</div>';
+        }
 
         if ($read_more_switcher) {
             $output .= '<a href="' . esc_url($term_link) . '" class="fb-taxonomy-read-more-button">';
@@ -358,14 +478,12 @@ if (empty($taxonomy_type)) {
                 $output .= '<span class="fb-taxonomy-read-more-text">' . esc_html($read_more_text) . '</span>';
             }
 
-            // Note: Icons would need additional handling
             if ($read_more_icon_align === 'icon-only' || $read_more_icon_align === 'icon-text') {
                 $output .= '<div class="fb-taxonomy-read-more-icon-wrapper">';
                 $output .= '<div class="fb-taxonomy-read-more-icon">' . $read_more_icon_frontend . '</div>';
                 $output .= '</div>';
             }
 
-            // Image : Show Custom Image 
             if ($read_more_icon_align === 'image' && $read_more_icon_image_url) {
                 $output .= '<div class="fb-taxonomy-read-more-icon-wrapper">';
                 $output .= '<div class="fb-taxonomy-read-more-icon-image">';
@@ -376,12 +494,13 @@ if (empty($taxonomy_type)) {
 
             $output .= '</a>';
         }
+        $output .= '</div>';
 
-        if($premade_style === 'style-4') {
+        if ($premade_style === 'style-4') {
             $output .= '</div>';
         }
 
-        $output .= '</div>'; // closed taxonomy item div
+        $output .= '</div>';
     }
 
     $output .= '</div>';
@@ -395,12 +514,14 @@ if (empty($taxonomy_type)) {
         'excerpt_length' => $post_description_excerpt_length,
         'separator_style' => $separator_style,
         'premade_style' => $premade_style,
-        'read_more_switcher'      => $read_more_switcher,
-        'read_more_text'          => $read_more_text,
-        'read_more_icon_align'    => $read_more_icon_align,
+        'read_more_switcher' => $read_more_switcher,
+        'read_more_text' => $read_more_text,
+        'read_more_icon_align' => $read_more_icon_align,
         'read_more_icon_frontend' => $read_more_icon_frontend,
-        'read_more_icon_image_url'=> $read_more_icon_image_url,
-        'read_more_icon_image_alt'=> $read_more_icon_image_alt,
+        'read_more_icon_image_url' => $read_more_icon_image_url,
+        'read_more_icon_image_alt' => $read_more_icon_image_alt,
+        'taxonomy_type' => $taxonomy_type,
+        'show_post_type_label' => $show_post_type_label,
     ];
 
     if ($show_child_categories) {
@@ -426,19 +547,19 @@ if (empty($taxonomy_type)) {
             $output .= '<span class="fb-taxonomy-name">' . esc_html($term->name) . '</span>';
             $output .= '</a>';
 
-            // if ($show_count) {
-            //     $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
-            // }
-
             if ($show_count) {
+                $formatted_count_html = fb_format_count_with_label_html(
+                    $term->count,
+                    $taxonomy_type,
+                    $show_post_type_label
+                );
+
                 if ($premade_style === 'style-1') {
-                    $output .= '<span class="fb-taxonomy-count">(' . esc_html($term->count) . ')</span>';
+                    $output .= '<span class="fb-taxonomy-count">(' . $formatted_count_html . ')</span>';
                 } else {
-                    $output .= '<span class="fb-taxonomy-count">' . esc_html($term->count) . '</span>';
+                    $output .= '<span class="fb-taxonomy-count">' . $formatted_count_html . '</span>';
                 }
             }
-
-
 
             $output .= '</div>';
 
@@ -447,7 +568,6 @@ if (empty($taxonomy_type)) {
                 $output .= esc_html(fb_trim_words($term->description, $post_description_excerpt_length));
                 $output .= '</p>';
             }
-
 
             // Read More button for list + premadeStyle style-2
             if ($premade_style === 'style-2' && $read_more_switcher) {
@@ -459,25 +579,24 @@ if (empty($taxonomy_type)) {
 
                 if ($read_more_icon_align === 'icon-text') {
                     $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                            . $read_more_icon_frontend .
-                            '</div></div>';
+                        . $read_more_icon_frontend .
+                        '</div></div>';
                 }
 
                 if ($read_more_icon_align === 'image' && $read_more_icon_image_url) {
                     $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon-image">'
-                            . '<img src="' . esc_url($read_more_icon_image_url) . '" alt="' . esc_attr($read_more_icon_image_alt) . '" />'
-                            . '</div></div>';
+                        . '<img src="' . esc_url($read_more_icon_image_url) . '" alt="' . esc_attr($read_more_icon_image_alt) . '" />'
+                        . '</div></div>';
                 }
 
                 if ($read_more_icon_align === 'icon-only') {
                     $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                            . $read_more_icon_frontend .
-                            '</div></div>';
+                        . $read_more_icon_frontend .
+                        '</div></div>';
                 }
 
                 $output .= '</a>';
             }
-
 
             if ($separator_style !== 'none') {
                 $output .= '<div class="fb-tax-separator"></div>';
@@ -491,6 +610,6 @@ if (empty($taxonomy_type)) {
 }
 ?>
 
-<div <?php echo $wrapper_attributes; ?>>
-    <?php echo $output; ?>
+<div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+    <?php echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 </div>

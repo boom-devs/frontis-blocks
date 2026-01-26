@@ -1,0 +1,42 @@
+.fb-timezone-main-wrapper{
+    .fb-timezone-container{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        .fb-timezone-wrapper {
+            display: flex;
+
+            .fb-location-timezone {
+                position: relative;
+                width: max-content;
+                display: flex;
+                justify-content: left;
+                align-items: center;
+                transition: all .3s ease-in-out;
+            }
+        }
+
+        .fb-timezone-status-wrapper{
+
+            .fb-timezone-status-info-box{
+                display: flex;
+                align-items: center;
+
+                .fb-time-pulse{
+                    display: flex;
+                }
+                .fb-time-pulse-open, .fb-time-pulse-closed, .fb-time-pulse-weekend, .fb-time-pulse-holiday {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            
+                .fb-timezone-status-info{
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}

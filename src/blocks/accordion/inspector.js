@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { select, dispatch } from "@wordpress/data";
@@ -32,7 +32,6 @@ import FB_BackgroundColorControl from '../../components/background-color-control
 import FB_BoxShadowControl from '../../components/box-shadow';
 import FB_BackgroundImageControl from '../../components/background-image-control';
 import FB_HtmlTagControl from '../../components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from '../../components/color-control';
 import FB_SwitcherControl from '../../components/switcher-control';
 import FB_InputControl from '@Components/input-control';
@@ -43,7 +42,7 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockID,
         blockStyle,
@@ -179,7 +178,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         accordionItemsDesktopBorderRadiusWidth,
         accordionItemsTabBorderRadiusWidth,
         accordionItemsMobileBorderRadiusWidth,
-        accordionItemsBorderRadiusLink,	
+        accordionItemsBorderRadiusLink,
 
         // Accordion Advance
         accordionZIndex,
@@ -352,15 +351,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 
-    const deviceType= useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    const deviceType = useDeviceType();
 
     useEffect(() => {
         const parentBlocks = select("core/block-editor").getBlocksByClientId(
@@ -384,14 +375,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             };
         }
     }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
-
-
-     /** Start load font */
-     useEffect(() => {
-        loadGoogleFont(titleFontFamily);
-    }, [titleFontFamily]);
-    /** End load font */
-
 
     /** Start Accordions Gap */
     const accordionItemGapHandler = (value) => {
@@ -1789,8 +1772,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         });
       }, [fbaccordionItemstyle, customCss]);
 
-      const editorStyle = `${fbaccordionItemstyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
     /**
      * Inspector General Controls
      */
@@ -3043,10 +3024,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
-
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -3055,3 +3032,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

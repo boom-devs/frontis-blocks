@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { useEffect, useMemo, useState } from '@wordpress/element';
+import { useEffect, useMemo, memo, useState } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
     PanelBody,
@@ -41,7 +41,6 @@ import FB_Range from '@Components/range';
 import FB_IncludeExcludeSwitcherControl from '@Components/switcher-include-exclude-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -53,7 +52,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
         blockId,
 		// deviceType,
@@ -838,15 +837,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
     const deviceType= useDeviceType();
-    
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-post-grid-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
 
     useEffect(() => {
         setAttributes({ postPerPage: postPerPage === 0 ? undefined : postPerPage });
@@ -1069,34 +1059,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({ orderBy: option.value });
     };
     /** End order by */
-
-
-    /** Start Load Google Font */
-    useEffect(() => {
-        if (postTitleFontFamily !== 'Default') {
-            loadGoogleFont(postTitleFontFamily);
-        }
-        if (postDescriptionFontFamily !== 'Default') {
-            loadGoogleFont(postDescriptionFontFamily);
-        }
-        if (postCategoryFontFamily !== 'Default') {
-            loadGoogleFont(postCategoryFontFamily);
-        }
-        if (postTagFontFamily !== 'Default') {
-            loadGoogleFont(postTagFontFamily);
-        }
-        if (postAuthorFontFamily !== 'Default') {
-            loadGoogleFont(postAuthorFontFamily);
-        }
-        if (postDateFontFamily !== 'Default') {
-            loadGoogleFont(postDateFontFamily);
-        }
-
-        if (buttonFontFamily !== 'Default') {
-            loadGoogleFont(buttonFontFamily);
-        }
-    }, [postTitleFontFamily, postDescriptionFontFamily, postCategoryFontFamily, postTagFontFamily, postAuthorFontFamily, postDateFontFamily, buttonFontFamily]);
-    /** End Load Google Font */
 
     /** Start Post Grid Padding */
     const handlePostGridPaddingUnitChange = ( event, position ) => {
@@ -6138,10 +6100,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
-
-
     /**
 	 * Inspector General Controls
 	 */
@@ -9388,11 +9346,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-
-            <style>
-                {editorStyle}
-            </style>
-
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -9401,3 +9354,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

@@ -1422,19 +1422,19 @@ const attributes = {
     mediaPaddingTablet: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: "24",
+            bottom: "24",
+            left: "24",
+            right: "24",
         },
     },
     mediaPaddingMobile: {
         type: "object",
         default: {
-            top: "0",
-            bottom: "0",
-            left: "0",
-            right: "0",
+            top: "16",
+            bottom: "16",
+            left: "16",
+            right: "16",
         },
     },
     mediaPaddingLink: {

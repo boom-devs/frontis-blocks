@@ -106,7 +106,7 @@ const attributes = {
 	gridColumnsPerSection: {
 		type: 'object',
 		default: {
-			Desktop: '3',
+			Desktop: '2',
 			Tablet: '2',
 			Mobile: '1'
 		}
@@ -441,7 +441,7 @@ const attributes = {
 	postImageHeight: {
 		type: 'object',
 		default: {
-			Desktop: '400',
+			Desktop: '300',
 			Tablet: '',
 			Mobile: ''
 		}

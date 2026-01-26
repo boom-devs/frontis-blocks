@@ -23,20 +23,25 @@ import {
 	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
 } from '@wordpress/components';
 import { useState, useEffect, useRef } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
-import {	NORMAL_HOVER,
+import {
+	NORMAL_HOVER,
 	UNIT_TYPES,
 	TEXT_ALIGN,
 	HEADING,
 	BORDER_STYLES
 } from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import Inspector from './inspector';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
-        blockId,
+		blockId,
+		blockStyle,
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
@@ -75,7 +80,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceButtonIcon,
 		priceButtonIconPosition,
 		priceButtonIconSpacing,
-		/** End Button */	
+		/** End Button */
 
 		pricingTitleAlignment,
 
@@ -91,27 +96,127 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		pricingTableDesktopSwitcher,
 		pricingTableTabletSwitcher,
 		pricingTableMobileSwitcher,
+
+		pricingTopSectionTextFontFamily,
+		normalPricingFontFamily, 
+		salePricingFontFamily, 
+		priceCurrencyFontFamily, 
+		pricePeriodFontFamily, 
+		pricingTitleFontFamily, 
+		pricingSubtitleFontFamily, 
+		priceAfterTextFontFamily, 
+		pricingfeatureTitleFontFamily, 
+		priceButtonFontFamily, 
+		priceFeatureAfterTextFontFamily,
 	} = attributes;
 
-    const blockProps = useBlockProps({
-        className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
-    });
+	useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-feature-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
-    /**
-    * Manages tab button settings and switches to block settings on click
-    */
-    const panelRef = useRef(null);
-    SwitchToBlockSettings(panelRef);
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (pricingTopSectionTextFontFamily && !loadedFonts.has(pricingTopSectionTextFontFamily)) {
+			loadGoogleFont(pricingTopSectionTextFontFamily);
+			loadedFonts.add(pricingTopSectionTextFontFamily);
+		}
+	}, [pricingTopSectionTextFontFamily]);
+
+	useEffect(() => {
+		if (normalPricingFontFamily && !loadedFonts.has(normalPricingFontFamily)) {
+			loadGoogleFont(normalPricingFontFamily);
+			loadedFonts.add(normalPricingFontFamily);
+		}
+	}, [normalPricingFontFamily]);
+
+	useEffect(() => {
+		if (salePricingFontFamily && !loadedFonts.has(salePricingFontFamily)) {
+			loadGoogleFont(salePricingFontFamily);
+			loadedFonts.add(salePricingFontFamily);
+		}
+	}, [salePricingFontFamily]);
+
+	useEffect(() => {
+		if (priceCurrencyFontFamily && !loadedFonts.has(priceCurrencyFontFamily)) {
+			loadGoogleFont(priceCurrencyFontFamily);
+			loadedFonts.add(priceCurrencyFontFamily);
+		}
+	}, [priceCurrencyFontFamily]);
+
+	useEffect(() => {
+		if (pricePeriodFontFamily && !loadedFonts.has(pricePeriodFontFamily)) {
+			loadGoogleFont(pricePeriodFontFamily);
+			loadedFonts.add(pricePeriodFontFamily);
+		}
+	}, [pricePeriodFontFamily]);
+
+	useEffect(() => {
+		if (pricingTitleFontFamily && !loadedFonts.has(pricingTitleFontFamily)) {
+			loadGoogleFont(pricingTitleFontFamily);
+			loadedFonts.add(pricingTitleFontFamily);
+		}
+	}, [pricingTitleFontFamily]);
+
+	useEffect(() => {
+		if (pricingSubtitleFontFamily && !loadedFonts.has(pricingSubtitleFontFamily)) {
+			loadGoogleFont(pricingSubtitleFontFamily);
+			loadedFonts.add(pricingSubtitleFontFamily);
+		}
+	}, [pricingSubtitleFontFamily]);
+	
+	useEffect(() => {
+		if (priceAfterTextFontFamily && !loadedFonts.has(priceAfterTextFontFamily)) {
+			loadGoogleFont(priceAfterTextFontFamily);
+			loadedFonts.add(priceAfterTextFontFamily);
+		}
+	}, [priceAfterTextFontFamily]);
+	
+	useEffect(() => {
+		if (pricingfeatureTitleFontFamily && !loadedFonts.has(pricingfeatureTitleFontFamily)) {
+			loadGoogleFont(pricingfeatureTitleFontFamily);
+			loadedFonts.add(pricingfeatureTitleFontFamily);
+		}
+	}, [pricingfeatureTitleFontFamily]);
+	
+	useEffect(() => {
+		if (priceButtonFontFamily && !loadedFonts.has(priceButtonFontFamily)) {
+			loadGoogleFont(priceButtonFontFamily);
+			loadedFonts.add(priceButtonFontFamily);
+		}
+	}, [priceButtonFontFamily]);
+	
+	useEffect(() => {
+		if (priceFeatureAfterTextFontFamily && !loadedFonts.has(priceFeatureAfterTextFontFamily)) {
+			loadGoogleFont(priceFeatureAfterTextFontFamily);
+			loadedFonts.add(priceFeatureAfterTextFontFamily);
+		}
+	}, [priceFeatureAfterTextFontFamily]);
+	/** End Load Google Font */
+
+
+	const blockProps = useBlockProps({
+		className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
+
+	/**
+	* Manages tab button settings and switches to block settings on click
+	*/
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
 
 	return (
 		<>
-		    <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}> 
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">
@@ -154,37 +259,37 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 										<span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
 											<span className="price-currency">
 												{priceCurrencyPosition === 'left' ? (
-													<RichText 
-														tagName="span" 
-														value={priceCurrency} 
+													<RichText
+														tagName="span"
+														value={priceCurrency}
 														placeholder={__('Enter currency', 'frontis-blocks')}
 													/>
 												) : ''}
 											</span>
-											<RichText 
-												tagName="span" 
-												value={normalPrice} 
+											<RichText
+												tagName="span"
+												value={normalPrice}
 												placeholder={__('Enter price', 'frontis-blocks')}
 											/>
 											<span className="price-currency">
 												{priceCurrencyPosition === 'right' ? (
-													<RichText 
-														tagName="span" 
-														value={priceCurrency} 
+													<RichText
+														tagName="span"
+														value={priceCurrency}
 														placeholder={__('Enter currency', 'frontis-blocks')}
 													/>
 												) : ''}
 											</span>
 											{!salePriceSwitcher && (
 												<span className="price-period">
-													<RichText 
-														tagName="span" 
-														value={pricePeriodSeparator} 
+													<RichText
+														tagName="span"
+														value={pricePeriodSeparator}
 														placeholder={__('Enter separator', 'frontis-blocks')}
 													/>
-													<RichText 
-														tagName="span" 
-														value={pricePeriod} 
+													<RichText
+														tagName="span"
+														value={pricePeriod}
 														placeholder={__('Enter period', 'frontis-blocks')}
 													/>
 												</span>
@@ -194,36 +299,36 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											<span className="fb-pricing-sale-price">
 												<span className="price-currency">
 													{priceCurrencyPosition === 'left' ? (
-														<RichText 
-															tagName="span" 
-															value={priceCurrency} 
+														<RichText
+															tagName="span"
+															value={priceCurrency}
 															placeholder={__('Enter currency', 'frontis-blocks')}
 														/>
 													) : ''}
 												</span>
-												<RichText 
-													tagName="span" 
-													value={salePrice} 
+												<RichText
+													tagName="span"
+													value={salePrice}
 													placeholder={__('Enter price', 'frontis-blocks')}
 												/>
 												<span className="price-currency">
 													{priceCurrencyPosition === 'right' ? (
-														<RichText 
-															tagName="span" 
-															value={priceCurrency} 
+														<RichText
+															tagName="span"
+															value={priceCurrency}
 															placeholder={__('Enter currency', 'frontis-blocks')}
 														/>
 													) : ''}
 												</span>
 												<span className="price-period">
-													<RichText 
-														tagName="span" 
-														value={pricePeriodSeparator} 
+													<RichText
+														tagName="span"
+														value={pricePeriodSeparator}
 														placeholder={__('Enter separator', 'frontis-blocks')}
 													/>
-													<RichText 
-														tagName="span" 
-														value={pricePeriod} 
+													<RichText
+														tagName="span"
+														value={pricePeriod}
 														placeholder={__('Enter period', 'frontis-blocks')}
 													/>
 												</span>
@@ -243,9 +348,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 								</div>
 
 							</div>
-							<div className ='fb-pricing-content'>
+							<div className='fb-pricing-content'>
 								<div className="fb-pricing-features-wrapper">
-									{ priceHideFeaturesSwitcher && (
+									{priceHideFeaturesSwitcher && (
 										<ul className="fb-pricing-features-list">
 											{priceFeatureItems.map(item => (
 												<li className="fb-pricing-feature-item" key={item.id}>
@@ -287,31 +392,31 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<div className="fb-pricing-footer-wrapper">
 								<div className="fb-pricing-button-wrapper">
 									{priceButtonSwitcher && (
-									<a
-										className={`fb-pricing-button fb-button-icon-${priceButtonIconPosition}`}
-										href={priceButtonUrl}
-										target={priceButtonTargetUrl ? "_blank" : undefined}
-										rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
-										onClick={(event) => event.preventDefault()}
-									>
-										{priceButtonIconPosition === 'left' && priceButtonIconAlign === 'icon' && (
-										<div className="fb-pricing-button-icon">
-											{renderSVG(priceButtonIcon)}
-										</div>
-										)}
-										<RichText
-										tagName="span"
-										value={priceButtonText}
-										onChange={(value) => setAttributes({ priceButtonText: value })}
-										placeholder={__('Enter button text...', 'frontis-blocks')}
-										className="fb-button-text"
-										/>
-										{priceButtonIconPosition === 'right' && priceButtonIconAlign === 'icon' && (
-										<div className="fb-pricing-button-icon">
-											{renderSVG(priceButtonIcon)}
-										</div>
-										)}
-									</a>
+										<a
+											className={`fb-pricing-button fb-button-icon-${priceButtonIconPosition}`}
+											href={priceButtonUrl}
+											target={priceButtonTargetUrl ? "_blank" : undefined}
+											rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
+											onClick={(event) => event.preventDefault()}
+										>
+											{priceButtonIconPosition === 'left' && priceButtonIconAlign === 'icon' && (
+												<div className="fb-pricing-button-icon">
+													{renderSVG(priceButtonIcon)}
+												</div>
+											)}
+											<RichText
+												tagName="span"
+												value={priceButtonText}
+												onChange={(value) => setAttributes({ priceButtonText: value })}
+												placeholder={__('Enter button text...', 'frontis-blocks')}
+												className="fb-button-text"
+											/>
+											{priceButtonIconPosition === 'right' && priceButtonIconAlign === 'icon' && (
+												<div className="fb-pricing-button-icon">
+													{renderSVG(priceButtonIcon)}
+												</div>
+											)}
+										</a>
 									)}
 								</div>
 							</div>
@@ -319,6 +424,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

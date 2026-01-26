@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, URLInput } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -46,7 +46,6 @@ import FB_ColorControl from '@Components/color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -57,7 +56,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockId,
 		// deviceType,
@@ -686,14 +685,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
 	const deviceType= useDeviceType();
-
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-feature-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
@@ -2912,34 +2903,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile?.top}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.right}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.bottom}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.left}${priceGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-	/** Start load font */
-	useEffect(() => {
-		loadGoogleFont(pricingTopSectionTextFontFamily);
-		loadGoogleFont(normalPricingFontFamily);
-		loadGoogleFont(salePricingFontFamily);
-		loadGoogleFont(priceCurrencyFontFamily);
-		loadGoogleFont(pricePeriodFontFamily);
-		loadGoogleFont(pricingTitleFontFamily);
-		loadGoogleFont(pricingSubtitleFontFamily);
-		loadGoogleFont(priceAfterTextFontFamily);
-		loadGoogleFont(pricingfeatureTitleFontFamily);
-		loadGoogleFont(priceButtonFontFamily);
-		loadGoogleFont(priceFeatureAfterTextFontFamily);
-	}, [pricingTopSectionTextFontFamily,
-		 normalPricingFontFamily, 
-		 salePricingFontFamily, 
-		 priceCurrencyFontFamily, 
-		 pricePeriodFontFamily, 
-		 pricingTitleFontFamily, 
-		 pricingSubtitleFontFamily, 
-		 priceAfterTextFontFamily, 
-		 pricingfeatureTitleFontFamily, 
-		 priceButtonFontFamily, 
-		 priceFeatureAfterTextFontFamily]);
-	/** End load font */
-
-
-
 	const allBlockStyle = useMemo(() => ` 
 
 		.${blockId}.fb-pricing-area {
@@ -4470,8 +4433,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	useEffect(() => {
 		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
 	}, [allBlockStyle, customCss]);
-
-	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -6826,10 +6787,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-			<style>
-				{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
@@ -6838,3 +6795,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

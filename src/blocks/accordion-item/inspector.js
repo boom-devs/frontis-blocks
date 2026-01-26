@@ -11,7 +11,7 @@ import {
     TextControl,
     PanelBody,
     TabPanel,
-    ResponsiveWrapper, 
+    ResponsiveWrapper,
     __experimentalHStack as HStack,
     RangeControl,
 } from "@wordpress/components";
@@ -19,7 +19,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 import FB_Range from "../../components/range";
 import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
@@ -27,13 +27,15 @@ import FB_ColorControl from "../../components/color-control";
 import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
 
+import "./editor.scss";
+
 const Inspector = ({ attributes, setAttributes, clientId }) => {
-    const { 
+    const {
         blockID,
-		parentBlockID,
+        parentBlockID,
         // deviceType,
         clickable,
 
@@ -88,171 +90,163 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         accordionItemGlobalWraperClass,
     } = attributes;
 
-    const deviceType= useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    const deviceType = useDeviceType();
 
     const titlePfIconHandler = (IconName) => {
-		setAttributes({titlePrefixIcon: IconName})
-	}
+        setAttributes({ titlePrefixIcon: IconName })
+    }
     const titleSfIconHandler = (IconName) => {
-		setAttributes({titleSuffixIcon: IconName})
-	}
-    
-    // accordionItem content margin
-    const handleAccordionItemMarginUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( accordionItemMarginLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						accordionItemDesktopMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						accordionItemTabMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						accordionItemMobileMargin: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {accordionItemDesktopMargin: {...accordionItemDesktopMargin, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {accordionItemTabMargin: {...accordionItemTabMargin, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {accordionItemMobileMargin: {...accordionItemMobileMargin, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	
-	}
-	
-	const handleAccordionItemMarginCombineBtn = () => {
-		setAttributes( {accordionItemMarginLink: !accordionItemMarginLink} );
-	}
-	
-	const handleAccordionItemMarginUnitsHandler = (unit) => {
-		setAttributes( {
-			accordionItemMarginUnits: {
-				...accordionItemMarginUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	
-	const accordionItemMarginDesktopWidth = `${accordionItemDesktopMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	const accordionItemMarginTabletWidth = `${accordionItemTabMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	const accordionItemMarginMobileWidth = `${accordionItemMobileMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-	
-	// accordionItem Padding Functionb
-	const handleAccordionItemPaddingUnitChange = ( event, position ) => {
-		const value = event.target.value;
-		if ( accordionItemPaddingLink ) {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {
-						accordionItemDesktopPadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Tablet':
-					setAttributes( {
-						accordionItemTabPadding: {
-							top: value,
-							right: value,	
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				case 'Mobile':
-					setAttributes( {
-						accordionItemMobilePadding: {
-							top: value,
-							right: value,
-							bottom: value,
-							left: value
-						}
-					} );
-					break;
-				default:
-					break;
-			}
-		} else {
-			switch ( deviceType ) {
-				case 'Desktop':
-					setAttributes( {accordionItemDesktopPadding: {...accordionItemDesktopPadding, [position]: value}} );
-					break;
-				case 'Tablet':
-					setAttributes( {accordionItemTabPadding: {...accordionItemTabPadding, [position]: value}} );
-					break;
-				case 'Mobile':
-					setAttributes( {accordionItemMobilePadding: {...accordionItemMobilePadding, [position]: value}} );
-					break;
-				default:
-					break;
-			}
-		}
-	
-	}
-	
-	const handleAccordionItemPaddingCombineBtn = () => {
-		setAttributes( {accordionItemPaddingLink: !accordionItemPaddingLink} );
-	}
-	
-	const handleAccordionItemPaddingUnitsHandler = (unit) => {
-		setAttributes( {
-			accordionItemPaddingUnits: {
-				...accordionItemPaddingUnits,
-				[deviceType]: unit
-			}
-		})
-	}
-	
-	const accordionItemPaddingDesktopWidth = `${accordionItemDesktopPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-	const accordionItemPaddingTabletWidth = `${accordionItemTabPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-	const accordionItemPaddingMobileWidth = `${accordionItemMobilePadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+        setAttributes({ titleSuffixIcon: IconName })
+    }
 
-	const fbAccordionItemStyle = useMemo(
-		() => `
+    // accordionItem content margin
+    const handleAccordionItemMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (accordionItemMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        accordionItemDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        accordionItemTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        accordionItemMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ accordionItemDesktopMargin: { ...accordionItemDesktopMargin, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ accordionItemTabMargin: { ...accordionItemTabMargin, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ accordionItemMobileMargin: { ...accordionItemMobileMargin, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleAccordionItemMarginCombineBtn = () => {
+        setAttributes({ accordionItemMarginLink: !accordionItemMarginLink });
+    }
+
+    const handleAccordionItemMarginUnitsHandler = (unit) => {
+        setAttributes({
+            accordionItemMarginUnits: {
+                ...accordionItemMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const accordionItemMarginDesktopWidth = `${accordionItemDesktopMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+    const accordionItemMarginTabletWidth = `${accordionItemTabMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+    const accordionItemMarginMobileWidth = `${accordionItemMobileMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.left}${accordionItemMarginUnits[deviceType]}`;
+
+    // accordionItem Padding Functionb
+    const handleAccordionItemPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (accordionItemPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        accordionItemDesktopPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        accordionItemTabPadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        accordionItemMobilePadding: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ accordionItemDesktopPadding: { ...accordionItemDesktopPadding, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ accordionItemTabPadding: { ...accordionItemTabPadding, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ accordionItemMobilePadding: { ...accordionItemMobilePadding, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handleAccordionItemPaddingCombineBtn = () => {
+        setAttributes({ accordionItemPaddingLink: !accordionItemPaddingLink });
+    }
+
+    const handleAccordionItemPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            accordionItemPaddingUnits: {
+                ...accordionItemPaddingUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+
+    const accordionItemPaddingDesktopWidth = `${accordionItemDesktopPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+    const accordionItemPaddingTabletWidth = `${accordionItemTabPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+    const accordionItemPaddingMobileWidth = `${accordionItemMobilePadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.left}${accordionItemPaddingUnits[deviceType]}`;
+
+    const fbAccordionItemStyle = useMemo(
+        () => `
 		.fb-accordion-item-main-wrapper.${blockID} {
 			position: relative;
 			${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
@@ -313,18 +307,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			}
 		  }
 		`,
-		[
+        [
             blockID,
             deviceType,
-    
+
             titlePrefixColorSwitcher,
             titlePrefixColor,
             titlePrefixHoverColor,
-    
+
             titleSuffixColorSwitcher,
             titleSuffixColor,
             titleSuffixHoverColor,
-    
+
             // Accordion Item Advance
             accordionItemZIndex,
             accordionItemPaddingUnits,
@@ -335,20 +329,18 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             accordionItemDesktopMargin,
             accordionItemTabMargin,
             accordionItemMobileMargin,
-		]
-	  );
-	  
-	  const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
+        ]
+    );
 
-	  useEffect(() => {
-		setAttributes({
-		  blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
-		});
-	  }, [fbAccordionItemStyle, customCss]);
+    const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
 
-	  const editorStyle = `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+    useEffect(() => {
+        setAttributes({
+            blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
+        });
+    }, [fbAccordionItemStyle, customCss]);
 
-	  const fbAccordionItemStyleTwo = useMemo(() => `
+    const fbAccordionItemStyleTwo = useMemo(() => `
 		.fb-accordion-item-main-wrapper.${blockID} {
 			position: relative;
 			display: block;
@@ -425,32 +417,32 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 			}
 		}
 		`, [
-			blockID,
-            deviceType,
-    
-            titlePrefixColor,
-            titlePrefixHoverColor,
-    
-            titleSuffixColor,
-            titleSuffixHoverColor,
-    
-            // Accordion Item Advance
-            accordionItemZIndex,
-            accordionItemPaddingUnits,
-            accordionItemDesktopPadding,
-            accordionItemTabPadding,
-            accordionItemMobilePadding,
-            accordionItemMarginUnits,
-            accordionItemDesktopMargin,
-            accordionItemTabMargin,
-            accordionItemMobileMargin,
-		]);
+        blockID,
+        deviceType,
 
-		useEffect(() => {
-            setAttributes({
-                blockStyleTwo: `${fbAccordionItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
-            });
-		}, [fbAccordionItemStyleTwo, customCss]);
+        titlePrefixColor,
+        titlePrefixHoverColor,
+
+        titleSuffixColor,
+        titleSuffixHoverColor,
+
+        // Accordion Item Advance
+        accordionItemZIndex,
+        accordionItemPaddingUnits,
+        accordionItemDesktopPadding,
+        accordionItemTabPadding,
+        accordionItemMobilePadding,
+        accordionItemMarginUnits,
+        accordionItemDesktopMargin,
+        accordionItemTabMargin,
+        accordionItemMobileMargin,
+    ]);
+
+    useEffect(() => {
+        setAttributes({
+            blockStyleTwo: `${fbAccordionItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
+        });
+    }, [fbAccordionItemStyleTwo, customCss]);
 
     /**
      * Inspector General Controls
@@ -480,7 +472,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                 {MEDIA_TYPES.map((item, key) => (
                                     <Button
                                         key={key}
-                                        onClick={() => setAttributes({ titlePrefixType: item.value })} 
+                                        onClick={() => setAttributes({ titlePrefixType: item.value })}
                                         className={`fb-setting-switcher-panel-btn-switcher ${titlePrefixType === item.value ? 'active' : ''}`}
                                     >
                                         {item.label}
@@ -494,38 +486,38 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         <>
                             {titlePrefixType === "icon" && (
                                 <BaseControl label={__("Icon", "frontis-blocks")}>
-                                    <FBIconPicker 
-                                        value={titlePrefixIcon} 
-                                        setIconHandler={titlePfIconHandler} 
+                                    <FBIconPicker
+                                        value={titlePrefixIcon}
+                                        setIconHandler={titlePfIconHandler}
                                     />
                                 </BaseControl>
                             )}
 
                             {(titlePrefixType === "icon") && (
-                                    <>
-                                        <FB_SwitcherControl
-                                            label={__("Color", "frontis-blocks")}
-                                            globalSwitcher={titlePrefixColorSwitcher}
-                                            setGlobalSwitcher={(value) => setAttributes({ titlePrefixColorSwitcher: value })}
+                                <>
+                                    <FB_SwitcherControl
+                                        label={__("Color", "frontis-blocks")}
+                                        globalSwitcher={titlePrefixColorSwitcher}
+                                        setGlobalSwitcher={(value) => setAttributes({ titlePrefixColorSwitcher: value })}
+                                    />
+
+                                    {titlePrefixColorSwitcher === 'normal' && (
+                                        <FB_ColorControl
+                                            label={__("Normal Color", "frontis-blocks")}
+                                            globalColor={titlePrefixColor}
+                                            setGlobalColor={(value) => setAttributes({ titlePrefixColor: value === undefined ? '' : value })}
                                         />
-                                        
-                                        {titlePrefixColorSwitcher === 'normal' && (
-                                            <FB_ColorControl
-                                                label={__("Normal Color", "frontis-blocks")}
-                                                globalColor={titlePrefixColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                        
-                                        {titlePrefixColorSwitcher === 'hover' && (
-                                            <FB_ColorControl
-                                                label={__("Hover Color", "frontis-blocks")}
-                                                globalColor={titlePrefixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                    </>
-                                )}
+                                    )}
+
+                                    {titlePrefixColorSwitcher === 'hover' && (
+                                        <FB_ColorControl
+                                            label={__("Hover Color", "frontis-blocks")}
+                                            globalColor={titlePrefixHoverColor}
+                                            setGlobalColor={(value) => setAttributes({ titlePrefixHoverColor: value === undefined ? '' : value })}
+                                        />
+                                    )}
+                                </>
+                            )}
 
                             {titlePrefixType === "image" && (
                                 <FB_BackgroundImageControl
@@ -537,14 +529,14 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                     setGlobalBackgroundImageID={(value) => setAttributes({ titlePrefixImgID: value })}
                                     globalBackgroundImagePosition={titlePrefixImgPosition}
                                     setGlobalBackgroundImagePosition={(value) => setAttributes({ titlePrefixImgPosition: value })}
-                                    globalBackgroundImageAttachment={titlePrefixImgAttachment} 
+                                    globalBackgroundImageAttachment={titlePrefixImgAttachment}
                                     setGlobalBackgroundImageAttachment={(value) => setAttributes({ titlePrefixImgAttachment: value })}
                                     globalBackgroundImageRepeat={titlePrefixImgRepeat}
                                     setGlobalBackgroundImageRepeat={(value) => setAttributes({ titlePrefixImgRepeat: value })}
                                     globalBackgroundImageSize={titlePrefixImgSize}
                                     setGlobalBackgroundImageSize={(value) => setAttributes({ titlePrefixImgSize: value })}
                                 />
-                                    
+
                             )}
                         </>
                     )}
@@ -559,7 +551,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                 {MEDIA_TYPES.map((item, key) => (
                                     <Button
                                         key={key}
-                                        onClick={() => setAttributes({ titleSuffixType: item.value })} 
+                                        onClick={() => setAttributes({ titleSuffixType: item.value })}
                                         className={`fb-setting-switcher-panel-btn-switcher ${titleSuffixType === item.value ? 'active' : ''}`}
                                     >
                                         {item.label}
@@ -576,40 +568,40 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                             {titleSuffixType === "icon" && (
                                 <BaseControl label={__("Icon", "frontis-blocks")}>
                                     <FBIconPicker
-                                        value={titleSuffixIcon} 
-                                        setIconHandler={titleSfIconHandler} 
+                                        value={titleSuffixIcon}
+                                        setIconHandler={titleSfIconHandler}
                                     />
                                 </BaseControl>
                             )}
 
                             {(titleSuffixType === "icon") && (
-                                    <>
-                                        <FB_SwitcherControl
-                                            label={__("Color", "frontis-blocks")}
-                                            globalSwitcher={titleSuffixColorSwitcher}
-                                            setGlobalSwitcher={(value) => setAttributes({ titleSuffixColorSwitcher: value })}
+                                <>
+                                    <FB_SwitcherControl
+                                        label={__("Color", "frontis-blocks")}
+                                        globalSwitcher={titleSuffixColorSwitcher}
+                                        setGlobalSwitcher={(value) => setAttributes({ titleSuffixColorSwitcher: value })}
+                                    />
+
+                                    {titleSuffixColorSwitcher === 'normal' && (
+                                        <FB_ColorControl
+                                            label={__("Normal Color", "frontis-blocks")}
+                                            globalColor={titleSuffixColor}
+                                            setGlobalColor={(value) => setAttributes({ titleSuffixColor: value === undefined ? '' : value })}
                                         />
-                                        
-                                        {titleSuffixColorSwitcher === 'normal' && (
-                                            <FB_ColorControl
-                                                label={__("Normal Color", "frontis-blocks")}
-                                                globalColor={titleSuffixColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                        
-                                        {titleSuffixColorSwitcher === 'hover' && (
-                                            <FB_ColorControl
-                                                label={__("Hover Color", "frontis-blocks")}
-                                                globalColor={titleSuffixHoverColor}
-                                                setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value === undefined ? '' : value })}
-                                            />
-                                        )}
-                                    </>
-                                )}
+                                    )}
+
+                                    {titleSuffixColorSwitcher === 'hover' && (
+                                        <FB_ColorControl
+                                            label={__("Hover Color", "frontis-blocks")}
+                                            globalColor={titleSuffixHoverColor}
+                                            setGlobalColor={(value) => setAttributes({ titleSuffixHoverColor: value === undefined ? '' : value })}
+                                        />
+                                    )}
+                                </>
+                            )}
 
                             {titleSuffixType === "image" && (
-                                <FB_BackgroundImageControl 
+                                <FB_BackgroundImageControl
                                     globalBackgroundImageUrl={titleSuffixImgUrl}
                                     setGlobalBackgroundImageUrl={(value) => setAttributes({ titleSuffixImgUrl: value })}
                                     globalBackgroundImageAlt={titleSuffixImgAlt}
@@ -618,7 +610,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                                     setGlobalBackgroundImageID={(value) => setAttributes({ titleSuffixImgID: value })}
                                     globalBackgroundImagePosition={titleSuffixImgPosition}
                                     setGlobalBackgroundImagePosition={(value) => setAttributes({ titleSuffixImgPosition: value })}
-                                    globalBackgroundImageAttachment={titleSuffixImgAttachment} 
+                                    globalBackgroundImageAttachment={titleSuffixImgAttachment}
                                     setGlobalBackgroundImageAttachment={(value) => setAttributes({ titleSuffixImgAttachment: value })}
                                     globalBackgroundImageRepeat={titleSuffixImgRepeat}
                                     setGlobalBackgroundImageRepeat={(value) => setAttributes({ titleSuffixImgRepeat: value })}
@@ -657,7 +649,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     setAttributes={setAttributes}
                 />
 
-                <FB_Spacing 
+                <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
                     spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
@@ -669,11 +661,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     spacingCombineBtn={accordionItemPaddingLink}
                     spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
                     setAttributes={setAttributes}
-                />                                     
+                />
             </PanelBody>
         </>
     );
-        
+
     /**
      * Inspector Advanced Controls
      */
@@ -684,7 +676,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     <PanelBody
                         title={__("Layout", "frontis-blocks")}
                         initialOpen={true}
-                        className='fb-setting-layout-header' 
+                        className='fb-setting-layout-header'
                     >
                         <FB_Range
                             min={0}
@@ -744,8 +736,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                         title={__("Custom CSS", "frontis-blocks")}
                         initialOpen={false}
                     >
-                        <FB_CustomCSSEditor  
-                            value={accordionItemCustomCSS} 
+                        <FB_CustomCSSEditor
+                            value={accordionItemCustomCSS}
                             onChangeValue={(value) => setAttributes({ accordionItemCustomCSS: value })}
                         />
                     </PanelBody>
@@ -756,19 +748,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     return (
         <>
-        <style>
-			{`
-            	${editorStyle}
-			`}
-        </style>
-
-        <FB_InspectorControls
-            generalControls={generalControls}
-            styleControls={styleControls}
-            advancedControls={advancedControls}
-        />
+            <FB_InspectorControls
+                generalControls={generalControls}
+                styleControls={styleControls}
+                advancedControls={advancedControls}
+            />
         </>
     );
 };
 
-export default Inspector;
+export default memo(Inspector);

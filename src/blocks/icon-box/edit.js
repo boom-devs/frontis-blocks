@@ -7,17 +7,22 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import { useRef, useEffect } from "@wordpress/element";
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+
+import Inspector from "./inspector";
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -42,7 +47,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		btnIcon,
 		buttonIconSwitcher,
 		btnIconPosition,
-        iconBoxIconPosition,
+		iconBoxIconPosition,
 		iconBoxButtonLink,
 		iconBoxbtnTargetUrl,
 		iconBoxIconVerticalPosition,
@@ -126,54 +131,89 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 		dynamicBtnTermsTaxonomy,
 		dynamicBtnTermsSeparator,
-		dynamicBtnEnableLink,	
+		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
+
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonFontFamily,
 		/** End Dynamic Btn Text */
 	} = attributes;
+
+	useEffect(() => {
+		if (clientId && typeof clientId === "string") {
+			setAttributes({
+				blockID: "fb-icon-box-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+	
+	useEffect(() => {
+		if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+			loadGoogleFont(buttonFontFamily);
+			loadedFonts.add(buttonFontFamily);
+		}
+	}, [buttonFontFamily]);
+	/** End Load Google Font */
 
 	const blockProps = useBlockProps({
 		className: `fb-icon-box-main-wrapper ${blockID} ${iconBoxDesktopSwitcher && 'fb-desktop-responsive'} ${iconBoxTabletSwitcher && 'fb-tablet-responsive'} ${iconBoxMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	// Prevent link navigation in the editor and focus on text
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-    };
+	const handleButtonClick = (event) => {
+		event.preventDefault();
+	};
 
 	/**
 	* Manages tab button settings and switches to block settings on click
 	*/
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
-	
+
 	/**
 	 * Dynamic Text Value for Title
 	 */
 	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
-		textEnabled:            dynamicTitleEnabled,
-		textSource:             dynamicTitleSource,
-		textField:              dynamicTitleField,
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
 
-		textPostId:             dynamicTitlePostId,
-		textPostType:           dynamicTitlePostType,
-		textPostLabel:          dynamicTitlePostLabel,
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
 
 		textFeaturedImageField: dynamicTitleFeaturedImageField,
 
-		textDateType:           dynamicTitleDateType,
-		textDateFormat:         dynamicTitleDateFormat,
-		textTimeType:           dynamicTitleTimeType, 
-		textTimeFormat:         dynamicTitleTimeFormat,
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
 
-		textCommentsZeroText:   dynamicTitleCommentsZeroText,
-		textCommentsOneText:    dynamicTitleCommentsOneText,
-		textCommentsManyText:   dynamicTitleCommentsManyText,
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
 
-		textTermsTaxonomy:      dynamicTitleTermsTaxonomy,
-		textTermsSeparator:     dynamicTitleTermsSeparator,
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
 
-		textLinkEnabled:        dynamicTitleEnableLink,
-		textLinkSource:         dynamicTitleLinkSource,
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
 
 		context,
 	});
@@ -182,30 +222,30 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Description
 	 */
 	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
-		textEnabled:            dynamicDescriptionEnabled,
-		textSource:             dynamicDescriptionSource,
-		textField:              dynamicDescriptionField,
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
 
-		textPostId:             dynamicDescriptionPostId,
-		textPostType:           dynamicDescriptionPostType,
-		textPostLabel:          dynamicDescriptionPostLabel,
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
 
 		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
 
-		textDateType:           dynamicDescriptionDateType,
-		textDateFormat:         dynamicDescriptionDateFormat,
-		textTimeType:           dynamicDescriptionTimeType, 
-		textTimeFormat:         dynamicDescriptionTimeFormat,
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
 
-		textCommentsZeroText:   dynamicDescriptionCommentsZeroText,
-		textCommentsOneText:    dynamicDescriptionCommentsOneText,
-		textCommentsManyText:   dynamicDescriptionCommentsManyText,
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
 
-		textTermsTaxonomy:      dynamicDescriptionTermsTaxonomy,
-		textTermsSeparator:     dynamicDescriptionTermsSeparator,
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
 
-		textLinkEnabled:        dynamicDescriptionEnableLink,
-		textLinkSource:         dynamicDescriptionLinkSource,
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
 
 		context,
 	});
@@ -214,40 +254,39 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	 * Dynamic Text Value for Button One Text
 	 */
 	const { dynamicDisplayValue: dynamicBtnValue, dynamicDisplayLink: dynamicBtnLink } = DynamicTextValue({
-		textEnabled:            dynamicBtnEnabled,
-		textSource:             dynamicBtnSource,
-		textField:              dynamicBtnField,
+		textEnabled: dynamicBtnEnabled,
+		textSource: dynamicBtnSource,
+		textField: dynamicBtnField,
 
-		textPostId:             dynamicBtnPostId,
-		textPostType:           dynamicBtnPostType,
-		textPostLabel:          dynamicBtnPostLabel,
+		textPostId: dynamicBtnPostId,
+		textPostType: dynamicBtnPostType,
+		textPostLabel: dynamicBtnPostLabel,
 
 		textFeaturedImageField: dynamicBtnFeaturedImageField,
 
-		textDateType:           dynamicBtnDateType,
-		textDateFormat:         dynamicBtnDateFormat,
-		textTimeType:           dynamicBtnTimeType,
-		textTimeFormat:         dynamicBtnTimeFormat,
+		textDateType: dynamicBtnDateType,
+		textDateFormat: dynamicBtnDateFormat,
+		textTimeType: dynamicBtnTimeType,
+		textTimeFormat: dynamicBtnTimeFormat,
 
-		textCommentsZeroText:   dynamicBtnCommentsZeroText,
-		textCommentsOneText:    dynamicBtnCommentsOneText,
-		textCommentsManyText:   dynamicBtnCommentsManyText,
+		textCommentsZeroText: dynamicBtnCommentsZeroText,
+		textCommentsOneText: dynamicBtnCommentsOneText,
+		textCommentsManyText: dynamicBtnCommentsManyText,
 
-		textTermsTaxonomy:      dynamicBtnTermsTaxonomy,
-		textTermsSeparator:     dynamicBtnTermsSeparator,
+		textTermsTaxonomy: dynamicBtnTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTermsSeparator,
 
-		textLinkEnabled:        dynamicBtnEnableLink,
-		textLinkSource:         dynamicBtnLinkSource,
+		textLinkEnabled: dynamicBtnEnableLink,
+		textLinkSource: dynamicBtnLinkSource,
 
 		context,
-	});	
+	});
 
 	return (
 		<>
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 
 			<BlockControls>
@@ -262,16 +301,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				<div className={`fb-parent-wrapper fb-icon-box-wrapper ${blockID} ${iconBoxGlobalWraperClass}`} id={iconBoxGlobalWraperID} ref={panelRef}>
 					<div className={`fb-icon-box-wrapper-inner ${blockID}`}>
 						<div className="fb-icon-media-container">
-						<div
-							className="fb-icon-media-wrapper"
-						>
-							{mediaSwitcher === "image" && (
-								<img src={attributes.iconBoxMediaUrl} />
-							)}
-							{mediaSwitcher === "icon" && (
-								<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
-							)}
-						</div>
+							<div
+								className="fb-icon-media-wrapper"
+							>
+								{mediaSwitcher === "image" && (
+									<img src={attributes.iconBoxMediaUrl} />
+								)}
+								{mediaSwitcher === "icon" && (
+									<div className="fb-icon-wrapper">{renderSVG(icon)}</div>
+								)}
+							</div>
 						</div>
 						<div className="fb-icon-box-content-wrapper">
 							<RichText
@@ -300,21 +339,21 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									<div className="fb-icon-btn-container">
 										<a
 											className="fb-icon-btn-wrapper"
-											href={iconBoxButtonLink} 
+											href={iconBoxButtonLink}
 											target={iconBoxbtnTargetUrl ? '_blank' : undefined}
 											rel={iconBoxbtnTargetUrl ? 'noopener noreferrer' : undefined}
 											onClick={handleButtonClick}
 											aria-label={__("Icon Button", "frontis-blocks")}
 										>
 											<RichText
-												value={dynamicBtnEnabled ? dynamicBtnValue : icon_Box_Button_Text} 
+												value={dynamicBtnEnabled ? dynamicBtnValue : icon_Box_Button_Text}
 												tagName={"span"}
 												onChange={(value) => {
 													if (!dynamicBtnEnabled) setAttributes({ icon_Box_Button_Text: value });
 												}}
 												placeholder={__("Icon Button", "frontis-block")}
-												
-												
+
+
 											/>
 											{buttonIconSwitcher && (
 												<div className="fb-btn-icon-wrapper" aria-hidden="true">
@@ -329,6 +368,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

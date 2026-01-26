@@ -41,7 +41,7 @@ import {
 	FLIP_ANIMATION
 } from "./constants/constants";
 
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -54,7 +54,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_InputControl from '@Components/input-control';
@@ -69,7 +68,7 @@ import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		flipBoxPresetStyle,
@@ -1002,14 +1001,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	} = attributes;
 
 	const deviceType = useDeviceType();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-flip-box-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	/** flip Image */
 	let defaultImageUrl = '';
@@ -4565,13 +4556,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const flipBoxBackBorderRadiusTabletWidth = `${flipBoxBackBorderRadiusTablet?.top}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.right}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.bottom}${flipBoxBackBorderRadiusUnits?.Tablet} ${flipBoxBackBorderRadiusTablet?.left}${flipBoxBackBorderRadiusUnits?.Tablet}`;
 	const flipBoxBackBorderRadiusMobileWidth = `${flipBoxBackBorderRadiusMobile?.top}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.right}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.bottom}${flipBoxBackBorderRadiusUnits?.Mobile} ${flipBoxBackBorderRadiusMobile?.left}${flipBoxBackBorderRadiusUnits?.Mobile}`;
 
-	useEffect(() => {
-		loadGoogleFont(headingFontFamily);
-		loadGoogleFont(buttonFontFamily);
-		loadGoogleFont(subHeadingFontFamily);
-	}, [headingFontFamily, buttonFontFamily, subHeadingFontFamily]);
-
-
 	const fbflipBoxStyle = useMemo(
 		() => `
 			.fb-flip-box-main-wrapper.${blockID} {
@@ -5816,8 +5800,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		});
 	}, [fbflipBoxStyle, customCss]);
 
-	const editorStyle = `${fbflipBoxStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 		/**
      * Generate SVG Icons for Icon
      */
@@ -5914,10 +5896,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
-
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
@@ -9333,3 +9311,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

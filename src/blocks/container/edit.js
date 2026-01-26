@@ -18,6 +18,7 @@ const Edit = (props) => {
 		attributes,
 		attributes: {
 			p_block_id,
+			block_id,
 			borderStyle,
 			borderWidth,
 			borderColor,
@@ -32,6 +33,8 @@ const Edit = (props) => {
 			containerChildrenWidth,
 			containerGlobalPadding,
 			loopAutoApplied,
+			isBlockRootParent,
+			formContainerSwitcher,
 		},
 		clientId,
 		setAttributes,
@@ -40,6 +43,15 @@ const Edit = (props) => {
 		context,
 		hasDynamicContent,
 	} = props;
+
+	useEffect(() => {
+        setAttributes({
+            formContainerSwitcher: context["fb/formContainerSwitcher"] === undefined ? false : context["fb/formContainerSwitcher"],
+        })
+    }, [
+        context["fb/formContainerSwitcher"],
+    ])
+
 
 	// Loop Builder Check
 	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
@@ -93,8 +105,12 @@ const Edit = (props) => {
 		const attributesToUpdate = {};
 
 		// Conditionally set the isBlockRootParent attribute
-		if ( ! parentBlocks || parentBlocks.length === 0 || ! parentBlocks.some( parent => parent.name === 'frontis-blocks/container' ) ) {
-			attributesToUpdate.isBlockRootParent = true;
+		if (!parentBlocks || parentBlocks.length === 0 || !parentBlocks.some( parent => parent.name === 'frontis-blocks/container' )) {
+			if(formContainerSwitcher === false ) {
+				attributesToUpdate.isBlockRootParent = true;
+			} else {
+				attributesToUpdate.isBlockRootParent = false;
+			}
 		}
 
 		// If the legacy video overlay opacity for video background was set, migrate it.
@@ -104,7 +120,7 @@ const Edit = (props) => {
 		}
 
 		// Compare with attribute and attributeToUpdate and update only if there is a change.
-		if ( attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
+		if (attributesToUpdate.isBlockRootParent !== attributes.isBlockRootParent
 			|| attributesToUpdate.hasPopupParent !== attributes.hasPopupParent
 			|| attributesToUpdate.hasSliderParent !== attributes.hasSliderParent
 			|| attributesToUpdate.backgroundVideoOpacity !== attributes.backgroundVideoOpacity
@@ -144,7 +160,7 @@ const Edit = (props) => {
 				attributes
 			);
 		}
-	}, [] );
+	}, [formContainerSwitcher] );
 
 	useEffect( () => {
 		if ( hasDynamicContent && ! attributes?.context?.postId ) {
@@ -174,6 +190,7 @@ const Edit = (props) => {
 
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
+
 
 	return (
 		<>

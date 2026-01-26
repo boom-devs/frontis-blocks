@@ -1,6 +1,6 @@
 import { __ } from "@wordpress/i18n";
 import { InspectorControls } from "@wordpress/block-editor";
-import { useEffect, useState, useMemo } from "@wordpress/element";
+import { useEffect, useState, useMemo, memo } from "@wordpress/element";
 import {
 	PanelBody,
 	BaseControl,
@@ -37,18 +37,17 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 
 import "./editor.scss";
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		// deviceType,
@@ -318,20 +317,12 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormVRBottomOffsetUnits,
 	} = attributes;
 
-	const deviceType= useDeviceType();
-	
+	const deviceType = useDeviceType();
+
 	const [wpCf7Form, setWpCf7Forms] = useState(
 		FrontisBlocksData.contact_form7_html,
 	);
 	const [selectedForm, setSelectedForm] = useState();
-
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-contact-form-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
 	const modifiedFormLists = FrontisBlocksData.contact_form7_lists.map(
 		(obj, i) => {
@@ -442,7 +433,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	/** End Padding */
 
 	/** Start  margin */
-	const handleMarginUnitChange = (event, position) => { 
+	const handleMarginUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (contactFormMarginLink) {
 			switch (deviceType) {
@@ -712,53 +703,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 	/** Start  Focus Border */
-	const handleFocusBorderUnitChange = ( event, position ) => {
+	const handleFocusBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( contactFormFocusBorderLink ) {
-			switch ( deviceType ) {
+		if (contactFormFocusBorderLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {contactFormFocusBorderDesktop: {...contactFormFocusBorderDesktop, [position]: value}} );
+					setAttributes({ contactFormFocusBorderDesktop: { ...contactFormFocusBorderDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {contactFormFocusBorderTablet: {...contactFormFocusBorderTablet, [position]: value}} );
+					setAttributes({ contactFormFocusBorderTablet: { ...contactFormFocusBorderTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {contactFormFocusBorderMobile: {...contactFormFocusBorderMobile, [position]: value}} );
+					setAttributes({ contactFormFocusBorderMobile: { ...contactFormFocusBorderMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -768,11 +759,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 	const handleFocusBorderCombineBtn = () => {
-		setAttributes( {contactFormFocusBorderLink: !contactFormFocusBorderLink} );
+		setAttributes({ contactFormFocusBorderLink: !contactFormFocusBorderLink });
 	}
 
-	const handleFocusBorderUnitsHandler = (unit) => { 
-		setAttributes( {
+	const handleFocusBorderUnitsHandler = (unit) => {
+		setAttributes({
 			contactFormFocusBorderUnits: {
 				...contactFormFocusBorderUnits,
 				[deviceType]: unit
@@ -787,53 +778,53 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 
 	/** Start  border radius*/
-	const handleFocusBorderRadiusUnitChange = ( event, position ) => {
+	const handleFocusBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( contactFormFocusBorderRadiusLink ) {
-			switch ( deviceType ) {
+		if (contactFormFocusBorderRadiusLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						contactFormFocusBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {contactFormFocusBorderRadiusDesktop: {...contactFormFocusBorderRadiusDesktop, [position]: value}} );
+					setAttributes({ contactFormFocusBorderRadiusDesktop: { ...contactFormFocusBorderRadiusDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {contactFormFocusBorderRadiusTablet: {...contactFormFocusBorderRadiusTablet, [position]: value}} );
+					setAttributes({ contactFormFocusBorderRadiusTablet: { ...contactFormFocusBorderRadiusTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {contactFormFocusBorderRadiusMobile: {...contactFormFocusBorderRadiusMobile, [position]: value}} );
+					setAttributes({ contactFormFocusBorderRadiusMobile: { ...contactFormFocusBorderRadiusMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -843,11 +834,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	}
 
 	const handleFocusBorderRadiusCombineBtn = () => {
-		setAttributes( {contactFormFocusBorderRadiusLink: !contactFormFocusBorderRadiusLink} );
+		setAttributes({ contactFormFocusBorderRadiusLink: !contactFormFocusBorderRadiusLink });
 	}
 
-	const handleFocusBorderRadiusUnitsHandler = (unit) => { 
-		setAttributes( {
+	const handleFocusBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
 			contactFormFocusBorderRadiusUnits: {
 				...contactFormFocusBorderRadiusUnits,
 				[deviceType]: unit
@@ -1951,23 +1942,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 	const BorderRadiusMobileWidth = `${contactFormGlobalBorderRadiusMobile?.top}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.right}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.bottom}${contactFormGlobalBorderRadiusUnits?.Mobile} ${contactFormGlobalBorderRadiusMobile?.left}${contactFormGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
 
-
-	// Helper function to load fonts
-	useEffect(() => {
-		loadGoogleFont(contactFormLabelFontFamily);
-		loadGoogleFont(contactFormInputFontFamily);
-		loadGoogleFont(contactFormSubmitFontFamily);
-		loadGoogleFont(contactFormSuccessFontFamily);
-		loadGoogleFont(contactFormErrorFontFamily);
-	}, [contactFormLabelFontFamily,
-		contactFormInputFontFamily,
-		contactFormSubmitFontFamily,
-		contactFormSuccessFontFamily,
-		contactFormErrorFontFamily,
-	]);
-
-
-    const allBlockStyle = useMemo(() => `
+	const allBlockStyle = useMemo(() => `
 
 		.${blockID}.fb-contact-form-wrapper {
 			${contactFormPositionType === 'default' ? `position: relative;` : ''}
@@ -2035,14 +2010,14 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			${contactFormLabelGlobalTypoSwitcher?.letterSpacing === true && contactFormLabelGlobalTypographyData?.letterSpacing ? `letter-spacing: ${contactFormLabelGlobalTypographyData?.letterSpacing};` : ''}
 			${contactFormLabelGlobalTypoSwitcher?.lineHeight === true && contactFormLabelGlobalTypographyData?.lineHeight ? `line-height: ${contactFormLabelGlobalTypographyData?.lineHeight};` : ''}
 				
-			${contactFormLabelGlobalTypoSwitcher?.fontFamily === false &&contactFormLabelFontFamily && contactFormLabelFontFamily !=='Default' ? `font-family: ${contactFormLabelFontFamily};` : ""}
-            ${contactFormLabelGlobalTypoSwitcher?.fontSize === false &&contactFormLabelFontSize?.Desktop != "" ? `font-size: ${contactFormLabelFontSize?.Desktop}${contactFormLabelFontSizeUnits?.Desktop};` : ''}
-            ${contactFormLabelGlobalTypoSwitcher?.fontWeight === false &&contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
-            ${contactFormLabelGlobalTypoSwitcher?.fontStyle === false &&contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
-            ${contactFormLabelGlobalTypoSwitcher?.textTransform === false &&contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
-            ${contactFormLabelGlobalTypoSwitcher?.textDecoration === false &&contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
-            ${contactFormLabelGlobalTypoSwitcher?.letterSpacing === false &&contactFormLabelLetterSpacing?.Desktop && contactFormLabelLetterSpacingUnits?.Desktop ? `letter-spacing: ${contactFormLabelLetterSpacing?.Desktop}${contactFormLabelLetterSpacingUnits?.Desktop};` : ''}
-            ${contactFormLabelGlobalTypoSwitcher?.lineHeight === false &&contactFormLabelLineHeight?.Desktop && contactFormLabelLineHeightUnits?.Desktop ? `line-height: ${contactFormLabelLineHeight?.Desktop}${contactFormLabelLineHeightUnits?.Desktop};` : ''}
+			${contactFormLabelGlobalTypoSwitcher?.fontFamily === false && contactFormLabelFontFamily && contactFormLabelFontFamily !== 'Default' ? `font-family: ${contactFormLabelFontFamily};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher?.fontSize === false && contactFormLabelFontSize?.Desktop != "" ? `font-size: ${contactFormLabelFontSize?.Desktop}${contactFormLabelFontSizeUnits?.Desktop};` : ''}
+            ${contactFormLabelGlobalTypoSwitcher?.fontWeight === false && contactFormLabelFontWeight ? `font-weight: ${contactFormLabelFontWeight};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher?.fontStyle === false && contactFormLabelFontStyle ? `font-style: ${contactFormLabelFontStyle};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher?.textTransform === false && contactFormLabelTextTransform ? `text-transform: ${contactFormLabelTextTransform};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher?.textDecoration === false && contactFormLabelTextDecoration ? `text-decoration: ${contactFormLabelTextDecoration};` : ""}
+            ${contactFormLabelGlobalTypoSwitcher?.letterSpacing === false && contactFormLabelLetterSpacing?.Desktop && contactFormLabelLetterSpacingUnits?.Desktop ? `letter-spacing: ${contactFormLabelLetterSpacing?.Desktop}${contactFormLabelLetterSpacingUnits?.Desktop};` : ''}
+            ${contactFormLabelGlobalTypoSwitcher?.lineHeight === false && contactFormLabelLineHeight?.Desktop && contactFormLabelLineHeightUnits?.Desktop ? `line-height: ${contactFormLabelLineHeight?.Desktop}${contactFormLabelLineHeightUnits?.Desktop};` : ''}
         }
 		.${blockID}.fb-contact-form-wrapper .wpcf7-form label:hover {
             ${contactFormLabelHoverColor ? `color: ${contactFormLabelHoverColor};` : ''}
@@ -2172,9 +2147,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         }
         .${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
             ${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
-            ${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Desktop 
-            ? `width: ${contactFormSubmitWidth?.Desktop}${contactFormSubmitWidthUnits?.Desktop};` 
-            : ''}
+            ${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Desktop
+			? `width: ${contactFormSubmitWidth?.Desktop}${contactFormSubmitWidthUnits?.Desktop};`
+			: ''}
         }
 
 		.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
@@ -2231,6 +2206,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		.${blockID}.fb-contact-form-wrapper .wpcf7-response-output:hover {
             ${contactFormSuccessBorderHoverColor ? `border-color: ${contactFormSuccessBorderHoverColor};` : ""}
         }
+			
+		.${blockID}.fb-contact-form-wrapper fieldset.hidden-fields-container {
+			display: none;
+		}
 
         @media only screen and (max-width: 1024px) {
 
@@ -2337,9 +2316,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
-				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Tablet 
-				? `width: ${contactFormSubmitWidth?.Tablet}${contactFormSubmitWidthUnits?.Tablet};` 
-				: ''}
+				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Tablet
+			? `width: ${contactFormSubmitWidth?.Tablet}${contactFormSubmitWidthUnits?.Tablet};`
+			: ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
@@ -2471,9 +2450,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 			.${blockID}.fb-contact-form-wrapper .wpcf7-form .wpcf7-submit {
 				${contactFormSubmitWidthSelect === 'full-width' ? 'width: 100%;' : ''}
-				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Mobile 
-				? `width: ${contactFormSubmitWidth?.Mobile}${contactFormSubmitWidthUnits?.Mobile};` 
-				: ''}
+				${contactFormSubmitWidthSelect === 'custom' && contactFormSubmitWidth?.Mobile
+			? `width: ${contactFormSubmitWidth?.Mobile}${contactFormSubmitWidthUnits?.Mobile};`
+			: ''}
 			}
 
 			.${blockID}.fb-contact-form-wrapper .wpcf7-not-valid-tip {
@@ -2737,70 +2716,70 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormGlobalBorderRadiusMobile,
 		contactFormGlobalBorderRadiusLink,
 
-        contactFormDesktopPadding,
-        contactFormTabletPadding,
-        contactFormMobilePadding,
+		contactFormDesktopPadding,
+		contactFormTabletPadding,
+		contactFormMobilePadding,
 
-        contactFormDesktopMargin,
-        contactFormTabletMargin,
-        contactFormMobileMargin,
+		contactFormDesktopMargin,
+		contactFormTabletMargin,
+		contactFormMobileMargin,
 
-        contactFormBorderDesktopWidth,
-        contactFormBorderTabletWidth,
-        contactFormBorderMobileWidth,
+		contactFormBorderDesktopWidth,
+		contactFormBorderTabletWidth,
+		contactFormBorderMobileWidth,
 
-        contactFormBorderRadiusDesktopWidth,
-        contactFormBorderRadiusTabletWidth,
-        contactFormBorderRadiusMobileWidth,
+		contactFormBorderRadiusDesktopWidth,
+		contactFormBorderRadiusTabletWidth,
+		contactFormBorderRadiusMobileWidth,
 
 
-        contactFormSubmitDesktopPadding,
-        contactFormSubmitTabletPadding,
-        contactFormSubmitMobilePadding,
+		contactFormSubmitDesktopPadding,
+		contactFormSubmitTabletPadding,
+		contactFormSubmitMobilePadding,
 
-        contactFormSubmitDesktopMargin,
-        contactFormSubmitTabletMargin,
-        contactFormSubmitMobileMargin,
+		contactFormSubmitDesktopMargin,
+		contactFormSubmitTabletMargin,
+		contactFormSubmitMobileMargin,
 
-        contactFormSubmitDesktopBorderWidth,
-        contactFormSubmitTabletBorderWidth,
-        contactFormSubmitMobileBorderWidth,
+		contactFormSubmitDesktopBorderWidth,
+		contactFormSubmitTabletBorderWidth,
+		contactFormSubmitMobileBorderWidth,
 
-        contactFormSubmitDesktopBorderRadiusWidth,
-        contactFormSubmitTabletBorderRadiusWidth,
-        contactFormSubmitMobileBorderRadiusWidth,
+		contactFormSubmitDesktopBorderRadiusWidth,
+		contactFormSubmitTabletBorderRadiusWidth,
+		contactFormSubmitMobileBorderRadiusWidth,
 
-        contactFormSuccessDesktopBorderWidth,
-        contactFormSuccessTabletBorderWidth,
-        contactFormSuccessMobileBorderWidth,
+		contactFormSuccessDesktopBorderWidth,
+		contactFormSuccessTabletBorderWidth,
+		contactFormSuccessMobileBorderWidth,
 
-        contactFormSuccessDesktopBorderRadiusWidth,
-        contactFormSuccessTabletBorderRadiusWidth,
-        contactFormSuccessMobileBorderRadiusWidth,
+		contactFormSuccessDesktopBorderRadiusWidth,
+		contactFormSuccessTabletBorderRadiusWidth,
+		contactFormSuccessMobileBorderRadiusWidth,
 
-        contactFormErrorDesktopPadding,
-        contactFormErrorTabletPadding,
-        contactFormErrorMobilePadding,
+		contactFormErrorDesktopPadding,
+		contactFormErrorTabletPadding,
+		contactFormErrorMobilePadding,
 
-        contactFormErrorDesktopMargin,
-        contactFormErrorTabletMargin,
-        contactFormErrorMobileMargin,
+		contactFormErrorDesktopMargin,
+		contactFormErrorTabletMargin,
+		contactFormErrorMobileMargin,
 
-        DesktopPadding,
-        TabletPadding,
-        MobilePadding,
+		DesktopPadding,
+		TabletPadding,
+		MobilePadding,
 
-        DesktopMargin,
-        TabletMargin,
-        MobileMargin,
+		DesktopMargin,
+		TabletMargin,
+		MobileMargin,
 
-        BorderDesktopWidth,
-        BorderTabletWidth,
-        BorderMobileWidth,
+		BorderDesktopWidth,
+		BorderTabletWidth,
+		BorderMobileWidth,
 
-        BorderRadiusDesktopWidth,
-        BorderRadiusTabletWidth,
-        BorderRadiusMobileWidth,
+		BorderRadiusDesktopWidth,
+		BorderRadiusTabletWidth,
+		BorderRadiusMobileWidth,
 
 		contactFormGlobalBoxShadowSwitcher,
 		contactFormGlobalBoxShadowValues,
@@ -2820,57 +2799,54 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		contactFormVRTopOffsetUnits,
 		contactFormVRBottomOffset,
 		contactFormVRBottomOffsetUnits,
-    ]);
+	]);
 
-    const customCss = getCustomCss(contactFormCustomCSS, `.${blockID}`); 
+	const customCss = getCustomCss(contactFormCustomCSS, `.${blockID}`);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, customCss]);
-
-
-    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
+	useEffect(() => {
+		setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
+	}, [allBlockStyle, customCss]);
 
 	/**
 	 * Inspector General Controls
 	 */
 	const generalControls = (
-	<>
-		<PanelBody
-			title={__("Contact Form", "frontis-blocks")}
-			initialOpen={true}
-		>
-			<BaseControl className="fb-fluent-from">
-				<SelectControl
-					label={__("Select Form", "frontis-blocks")}
-					value={formId}
-					options={modifiedFormLists}
-					onChange={(newSelectedForm) =>
-						selectWcf7Form(newSelectedForm)
-					}
-				/>
+		<>
+			<PanelBody
+				title={__("Contact Form", "frontis-blocks")}
+				initialOpen={true}
+			>
+				<BaseControl className="fb-fluent-from">
+					<SelectControl
+						label={__("Select Form", "frontis-blocks")}
+						value={formId}
+						options={modifiedFormLists}
+						onChange={(newSelectedForm) =>
+							selectWcf7Form(newSelectedForm)
+						}
+					/>
 
-				<ToggleControl
-					label={__("Show Placeholder", "frontis-blocks")}
-					checked={showPlaceholder}
-					onChange={(showPlaceholder) =>
-						setAttributes({
-							showPlaceholder,
-						})
-					}
-				/>
-				<ToggleControl
-					label={__("Show Error Message", "frontis-blocks")}
-					checked={showErrorMessage}
-					onChange={(showErrorMessage) =>
-						setAttributes({
-							showErrorMessage,
-						})
-					}
-				/>
-			</BaseControl>
-		</PanelBody>
-	</>
+					<ToggleControl
+						label={__("Show Placeholder", "frontis-blocks")}
+						checked={showPlaceholder}
+						onChange={(showPlaceholder) =>
+							setAttributes({
+								showPlaceholder,
+							})
+						}
+					/>
+					<ToggleControl
+						label={__("Show Error Message", "frontis-blocks")}
+						checked={showErrorMessage}
+						onChange={(showErrorMessage) =>
+							setAttributes({
+								showErrorMessage,
+							})
+						}
+					/>
+				</BaseControl>
+			</PanelBody>
+		</>
 	);
 
 	/**
@@ -2910,9 +2886,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={contactFormLabelGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							contactFormLabelGlobalTypoType: value, 
-							contactFormLabelGlobalTypoSwitcher: value === 'default' ? {...contactFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							contactFormLabelGlobalTypoType: value,
+							contactFormLabelGlobalTypoSwitcher: value === 'default' ? { ...contactFormLabelGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...contactFormLabelGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -2920,34 +2896,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormLabelGlobalTypoOption: value })}
 
 					fontFamily={contactFormLabelFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ contactFormLabelFontFamily: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={contactFormLabelFontSize}
-					onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ contactFormLabelFontSize: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={contactFormLabelFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ contactFormLabelFontSizeUnits: value })}
 
 					fontWeight={contactFormLabelFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ contactFormLabelFontWeight: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={contactFormLabelFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ contactFormLabelFontStyle: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={contactFormLabelTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ contactFormLabelTextTransform: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={contactFormLabelTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormLabelTextDecoration: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={contactFormLabelLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormLabelLetterSpacing: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={contactFormLabelLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormLabelLetterSpacingUnits: value })}
 
 					lineHeight={contactFormLabelLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value, contactFormLabelGlobalTypoSwitcher: {...contactFormLabelGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ contactFormLabelLineHeight: value, contactFormLabelGlobalTypoSwitcher: { ...contactFormLabelGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={contactFormLabelLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ contactFormLabelLineHeightUnits: value })}
@@ -2978,9 +2954,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={contactFormInputGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							contactFormInputGlobalTypoType: value, 
-							contactFormInputGlobalTypoSwitcher: value === 'default' ? {...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							contactFormInputGlobalTypoType: value,
+							contactFormInputGlobalTypoSwitcher: value === 'default' ? { ...contactFormInputGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...contactFormInputGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -2988,34 +2964,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormInputGlobalTypoOption: value })}
 
 					fontFamily={contactFormInputFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ contactFormInputFontFamily: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={contactFormInputFontSize}
-					onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ contactFormInputFontSize: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={contactFormInputFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ contactFormInputFontSizeUnits: value })}
 
 					fontWeight={contactFormInputFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ contactFormInputFontWeight: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={contactFormInputFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ contactFormInputFontStyle: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={contactFormInputTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ contactFormInputTextTransform: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={contactFormInputTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormInputTextDecoration: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={contactFormInputLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormInputLetterSpacing: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={contactFormInputLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormInputLetterSpacingUnits: value })}
 
 					lineHeight={contactFormInputLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value, contactFormInputGlobalTypoSwitcher: {...contactFormInputGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ contactFormInputLineHeight: value, contactFormInputGlobalTypoSwitcher: { ...contactFormInputGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={contactFormInputLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ contactFormInputLineHeightUnits: value })}
@@ -3102,7 +3078,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					resetFallbackValue={""}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handlePaddingUnitsHandler}
@@ -3116,7 +3092,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setAttributes={setAttributes}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleMarginUnitsHandler}
@@ -3131,10 +3107,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 
 				<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={contactFormBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ contactFormBorder: value })}
+					label={__("Border Style", "frontis-blocks")}
+					value={contactFormBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ contactFormBorder: value })}
 				/>
 
 				<FB_ColorControl
@@ -3143,7 +3119,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setGlobalColor={(value) => setAttributes({ contactFormBorderColor: value === undefined ? '' : value })}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleBorderUnitsHandler}
@@ -3157,7 +3133,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setAttributes={setAttributes}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleBorderRadiusUnitsHandler}
@@ -3172,10 +3148,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 				/>
 
 				<SelectControl
-						label={__("Focus Border Style", "frontis-blocks")}
-						value={contactFormFocusBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ contactFormFocusBorder: value })}
+					label={__("Focus Border Style", "frontis-blocks")}
+					value={contactFormFocusBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ contactFormFocusBorder: value })}
 				/>
 
 				<FB_ColorControl
@@ -3184,7 +3160,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setGlobalColor={(value) => setAttributes({ contactFormInputFocusColor: value === undefined ? '' : value })}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Focus Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleFocusBorderUnitsHandler}
@@ -3198,7 +3174,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setAttributes={setAttributes}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Focus Radius Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={handleFocusBorderRadiusUnitsHandler}
@@ -3243,7 +3219,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					rangeStep={1}
 					resetFallbackValue={''}
 				/>
-				
+
 				<SelectControl
 					label={__("Width", "frontis-blocks")}
 					value={contactFormSubmitWidthSelect}
@@ -3274,9 +3250,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 					globalTypoType={contactFormSubmitGlobalTypoType}
 					onChangeGlobalTypoType={(value) => {
-						setAttributes({ 
-							contactFormSubmitGlobalTypoType: value, 
-							contactFormSubmitGlobalTypoSwitcher: value === 'default' ? {...contactFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+						setAttributes({
+							contactFormSubmitGlobalTypoType: value,
+							contactFormSubmitGlobalTypoSwitcher: value === 'default' ? { ...contactFormSubmitGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...contactFormSubmitGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 						})
 					}}
 
@@ -3284,34 +3260,34 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSubmitGlobalTypoOption: value })}
 
 					fontFamily={contactFormSubmitFontFamily}
-					onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false} })}
+					onChangeFontFamily={(value) => setAttributes({ contactFormSubmitFontFamily: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, fontFamily: value && false } })}
 
 					fontSize={contactFormSubmitFontSize}
-					onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontSize: value && false} })}
+					onChangeFontSize={(value) => setAttributes({ contactFormSubmitFontSize: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, fontSize: value && false } })}
 
 					fontSizeUnits={contactFormSubmitFontSizeUnits}
 					onChangeFontSizeUnit={(value) => setAttributes({ contactFormSubmitFontSizeUnits: value })}
 
 					fontWeight={contactFormSubmitFontWeight}
-					onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontWeight: value && false} })}
+					onChangeFontWeight={(value) => setAttributes({ contactFormSubmitFontWeight: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, fontWeight: value && false } })}
 
 					fontStyle={contactFormSubmitFontStyle}
-					onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, fontStyle: value && false} })}
+					onChangeFontStyle={(value) => setAttributes({ contactFormSubmitFontStyle: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, fontStyle: value && false } })}
 
 					textTransform={contactFormSubmitTextTransform}
-					onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textTransform: value && false} })}
+					onChangeTextTransform={(value) => setAttributes({ contactFormSubmitTextTransform: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, textTransform: value && false } })}
 
 					textDecoration={contactFormSubmitTextDecoration}
-					onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, textDecoration: value && false} })}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormSubmitTextDecoration: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, textDecoration: value && false } })}
 
 					letterSpacing={contactFormSubmitLetterSpacing}
-					onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, letterSpacing: value && false} })}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormSubmitLetterSpacing: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 					letterSpacingUnits={contactFormSubmitLetterSpacingUnits}
 					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSubmitLetterSpacingUnits: value })}
 
 					lineHeight={contactFormSubmitLineHeight}
-					onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value, contactFormSubmitGlobalTypoSwitcher: {...contactFormSubmitGlobalTypoSwitcher, lineHeight: value && false} })}
+					onChangeLineHeight={(value) => setAttributes({ contactFormSubmitLineHeight: value, contactFormSubmitGlobalTypoSwitcher: { ...contactFormSubmitGlobalTypoSwitcher, lineHeight: value && false } })}
 
 					lineHeightUnits={contactFormSubmitLineHeightUnits}
 					onChangeLineHeightUnit={(value) => setAttributes({ contactFormSubmitLineHeightUnits: value })}
@@ -3319,7 +3295,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					deviceType={deviceType}
 					setAttributes={setAttributes}
 				/>
-				
+
 				<FB_SwitcherControl
 					label={__("Color", "frontis-blocks")}
 					globalSwitcher={contactFormSubmitColorSwitcher}
@@ -3364,7 +3340,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						setGlobalColor={(value) => setAttributes({ contactFormSubmitBgHoverColor: value === undefined ? '' : value })}
 					/>
 				)}
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSubmitPaddingUnitsHandler}
@@ -3377,7 +3353,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={contactFormSubmitPaddingLinkBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSubmitMarginUnitsHandler}
@@ -3419,7 +3395,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSubmitBorderUnitsHandler}
@@ -3432,7 +3408,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={contactFormSubmitBorderLinkBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSubmitBorderRadiusUnitsHandler}
@@ -3451,58 +3427,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			<PanelBody title={__("Success Message", "frontis-blocks")} initialOpen={false}>
 
 
-			<FB_TypographyControl
-				globalTypoControlActive={true}
-				globalTypoSwitcher={contactFormSuccessGlobalTypoSwitcher}
-				storeGlobalTypographyData={(value) => setAttributes({ contactFormSuccessGlobalTypographyData: value })}
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={contactFormSuccessGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ contactFormSuccessGlobalTypographyData: value })}
 
-				globalTypoType={contactFormSuccessGlobalTypoType}
-				onChangeGlobalTypoType={(value) => {
-					setAttributes({ 
-						contactFormSuccessGlobalTypoType: value, 
-						contactFormSuccessGlobalTypoSwitcher: value === 'default' ? {...contactFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-					})
-				}}
+					globalTypoType={contactFormSuccessGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							contactFormSuccessGlobalTypoType: value,
+							contactFormSuccessGlobalTypoSwitcher: value === 'default' ? { ...contactFormSuccessGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...contactFormSuccessGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+						})
+					}}
 
-				globalTypoOption={contactFormSuccessGlobalTypoOption}
-				onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSuccessGlobalTypoOption: value })}
+					globalTypoOption={contactFormSuccessGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormSuccessGlobalTypoOption: value })}
 
-				fontFamily={contactFormSuccessFontFamily}
-				onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false} })}
+					fontFamily={contactFormSuccessFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ contactFormSuccessFontFamily: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, fontFamily: value && false } })}
 
-				fontSize={contactFormSuccessFontSize}
-				onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontSize: value && false} })}
+					fontSize={contactFormSuccessFontSize}
+					onChangeFontSize={(value) => setAttributes({ contactFormSuccessFontSize: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, fontSize: value && false } })}
 
-				fontSizeUnits={contactFormSuccessFontSizeUnits}
-				onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
+					fontSizeUnits={contactFormSuccessFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ contactFormSuccessFontSizeUnits: value })}
 
-				fontWeight={contactFormSuccessFontWeight}
-				onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontWeight: value && false} })}
+					fontWeight={contactFormSuccessFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ contactFormSuccessFontWeight: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, fontWeight: value && false } })}
 
-				fontStyle={contactFormSuccessFontStyle}
-				onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, fontStyle: value && false} })}
+					fontStyle={contactFormSuccessFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ contactFormSuccessFontStyle: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, fontStyle: value && false } })}
 
-				textTransform={contactFormSuccessTextTransform}
-				onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textTransform: value && false} })}
+					textTransform={contactFormSuccessTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ contactFormSuccessTextTransform: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, textTransform: value && false } })}
 
-				textDecoration={contactFormSuccessTextDecoration}
-				onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, textDecoration: value && false} })}
+					textDecoration={contactFormSuccessTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormSuccessTextDecoration: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, textDecoration: value && false } })}
 
-				letterSpacing={contactFormSuccessLetterSpacing}
-				onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, letterSpacing: value && false} })}
+					letterSpacing={contactFormSuccessLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormSuccessLetterSpacing: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-				letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
-				onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
+					letterSpacingUnits={contactFormSuccessLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormSuccessLetterSpacingUnits: value })}
 
-				lineHeight={contactFormSuccessLineHeight}
-				onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value, contactFormSuccessGlobalTypoSwitcher: {...contactFormSuccessGlobalTypoSwitcher, lineHeight: value && false} })}
+					lineHeight={contactFormSuccessLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ contactFormSuccessLineHeight: value, contactFormSuccessGlobalTypoSwitcher: { ...contactFormSuccessGlobalTypoSwitcher, lineHeight: value && false } })}
 
-				lineHeightUnits={contactFormSuccessLineHeightUnits}
-				onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
+					lineHeightUnits={contactFormSuccessLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ contactFormSuccessLineHeightUnits: value })}
 
-				deviceType={deviceType}
-				setAttributes={setAttributes}
-			/>
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
 
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
@@ -3545,7 +3521,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					/>
 				)}
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSuccessBorderUnitsHandler}
@@ -3558,7 +3534,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={contactFormSuccessBorderLinkBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Border Radius", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormSuccessBorderRadiusUnitsHandler}
@@ -3575,58 +3551,58 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			<PanelBody title={__("Error Message", "frontis-blocks")} initialOpen={false}>
 
 
-			<FB_TypographyControl
-				globalTypoControlActive={true}
-				globalTypoSwitcher={contactFormErrorGlobalTypoSwitcher}
-				storeGlobalTypographyData={(value) => setAttributes({ contactFormErrorGlobalTypographyData: value })}
+				<FB_TypographyControl
+					globalTypoControlActive={true}
+					globalTypoSwitcher={contactFormErrorGlobalTypoSwitcher}
+					storeGlobalTypographyData={(value) => setAttributes({ contactFormErrorGlobalTypographyData: value })}
 
-				globalTypoType={contactFormErrorGlobalTypoType}
-				onChangeGlobalTypoType={(value) => {
-					setAttributes({ 
-						contactFormErrorGlobalTypoType: value, 
-						contactFormErrorGlobalTypoSwitcher: value === 'default' ? {...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-					})
-				}}
+					globalTypoType={contactFormErrorGlobalTypoType}
+					onChangeGlobalTypoType={(value) => {
+						setAttributes({
+							contactFormErrorGlobalTypoType: value,
+							contactFormErrorGlobalTypoSwitcher: value === 'default' ? { ...contactFormErrorGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...contactFormErrorGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+						})
+					}}
 
-				globalTypoOption={contactFormErrorGlobalTypoOption}
-				onChangeGlobalTypoOption={(value) => setAttributes({ contactFormErrorGlobalTypoOption: value })}
+					globalTypoOption={contactFormErrorGlobalTypoOption}
+					onChangeGlobalTypoOption={(value) => setAttributes({ contactFormErrorGlobalTypoOption: value })}
 
-				fontFamily={contactFormErrorFontFamily}
-				onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false} })}
+					fontFamily={contactFormErrorFontFamily}
+					onChangeFontFamily={(value) => setAttributes({ contactFormErrorFontFamily: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, fontFamily: value && false } })}
 
-				fontSize={contactFormErrorFontSize}
-				onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontSize: value && false} })}
+					fontSize={contactFormErrorFontSize}
+					onChangeFontSize={(value) => setAttributes({ contactFormErrorFontSize: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, fontSize: value && false } })}
 
-				fontSizeUnits={contactFormErrorFontSizeUnits}
-				onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
+					fontSizeUnits={contactFormErrorFontSizeUnits}
+					onChangeFontSizeUnit={(value) => setAttributes({ contactFormErrorFontSizeUnits: value })}
 
-				fontWeight={contactFormErrorFontWeight}
-				onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontWeight: value && false} })}
+					fontWeight={contactFormErrorFontWeight}
+					onChangeFontWeight={(value) => setAttributes({ contactFormErrorFontWeight: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, fontWeight: value && false } })}
 
-				fontStyle={contactFormErrorFontStyle}
-				onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, fontStyle: value && false} })}
+					fontStyle={contactFormErrorFontStyle}
+					onChangeFontStyle={(value) => setAttributes({ contactFormErrorFontStyle: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, fontStyle: value && false } })}
 
-				textTransform={contactFormErrorTextTransform}
-				onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textTransform: value && false} })}
+					textTransform={contactFormErrorTextTransform}
+					onChangeTextTransform={(value) => setAttributes({ contactFormErrorTextTransform: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, textTransform: value && false } })}
 
-				textDecoration={contactFormErrorTextDecoration}
-				onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, textDecoration: value && false} })}
+					textDecoration={contactFormErrorTextDecoration}
+					onChangeTextDecoration={(value) => setAttributes({ contactFormErrorTextDecoration: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, textDecoration: value && false } })}
 
-				letterSpacing={contactFormErrorLetterSpacing}
-				onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, letterSpacing: value && false} })}
+					letterSpacing={contactFormErrorLetterSpacing}
+					onChangeLetterSpacing={(value) => setAttributes({ contactFormErrorLetterSpacing: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-				letterSpacingUnits={contactFormErrorLetterSpacingUnits}
-				onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
+					letterSpacingUnits={contactFormErrorLetterSpacingUnits}
+					onChangeLetterSpacingUnit={(value) => setAttributes({ contactFormErrorLetterSpacingUnits: value })}
 
-				lineHeight={contactFormErrorLineHeight}
-				onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value, contactFormErrorGlobalTypoSwitcher: {...contactFormErrorGlobalTypoSwitcher, lineHeight: value && false} })}
+					lineHeight={contactFormErrorLineHeight}
+					onChangeLineHeight={(value) => setAttributes({ contactFormErrorLineHeight: value, contactFormErrorGlobalTypoSwitcher: { ...contactFormErrorGlobalTypoSwitcher, lineHeight: value && false } })}
 
-				lineHeightUnits={contactFormErrorLineHeightUnits}
-				onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
+					lineHeightUnits={contactFormErrorLineHeightUnits}
+					onChangeLineHeightUnit={(value) => setAttributes({ contactFormErrorLineHeightUnits: value })}
 
-				deviceType={deviceType}
-				setAttributes={setAttributes}
-			/>
+					deviceType={deviceType}
+					setAttributes={setAttributes}
+				/>
 
 				<FB_ColorControl
 					label={__("Color", "frontis-blocks")}
@@ -3634,7 +3610,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					setGlobalColor={(value) => setAttributes({ contactFormErrorColor: value === undefined ? '' : value })}
 				/>
 
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormErrorPaddingUnitsHandler}
@@ -3647,7 +3623,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					spacingCombineBtnHandler={contactFormErrorPaddingLinkBtn}
 					setAttributes={setAttributes}
 				/>
-				<FB_Spacing 
+				<FB_Spacing
 					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={contactFormErrorMarginUnitsHandler}
@@ -3663,7 +3639,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			</PanelBody>
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3674,7 +3650,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className='fb-setting-layout-header' 
+						className='fb-setting-layout-header'
 					>
 						<FB_Range
 							min={0}
@@ -3701,7 +3677,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							deviceType={deviceType}
 							positionType={contactFormPositionType}
 							setPositionType={(value) => setAttributes({ contactFormPositionType: value })}
-																			
+
 							HZOrientationType={contactFormHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ contactFormHZOrientationType: value })
@@ -3710,7 +3686,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setVROrientationType={(value) =>
 								setAttributes({ contactFormVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={contactFormHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ contactFormHZLeftOffset: value })}
 							HZLeftOffsetUnits={contactFormHZLeftOffsetUnits}
@@ -3719,7 +3695,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setHZRightOffset={(value) => setAttributes({ contactFormHZRightOffset: value })}
 							HZRightOffsetUnits={contactFormHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ contactFormHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={contactFormVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ contactFormVRTopOffset: value })}
 							VRTopOffsetUnits={contactFormVRTopOffsetUnits}
@@ -3745,11 +3721,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							onChangeValue={(value) => setAttributes({ contactFormGlobalWraperClass: value })}
 							helpText={__("Separate with spaces key.", "frontis-blocks")}
 						/>
-						
+
 					</PanelBody>
 
 					<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
@@ -3762,7 +3738,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Margin", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
@@ -3803,10 +3779,10 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 					<PanelBody title={__("Border and Shadow", "frontis-blocks")} initialOpen={false}>
 
 						<SelectControl
-								label={__("Border Style", "frontis-blocks")}
-								value={contactFormGlobalBorder}
-								options={BORDER_STYLES}
-								onChange={(value) => setAttributes({ contactFormGlobalBorder: value })}
+							label={__("Border Style", "frontis-blocks")}
+							value={contactFormGlobalBorder}
+							options={BORDER_STYLES}
+							onChange={(value) => setAttributes({ contactFormGlobalBorder: value })}
 						/>
 
 
@@ -3832,7 +3808,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							/>
 						)}
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
@@ -3846,7 +3822,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 							setAttributes={setAttributes}
 						/>
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
@@ -3905,8 +3881,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
-							value={contactFormCustomCSS} 
+						<FB_CustomCSSEditor
+							value={contactFormCustomCSS}
 							onChangeValue={(value) => setAttributes({ contactFormCustomCSS: value })}
 						/>
 					</PanelBody>
@@ -3917,12 +3893,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<style>
-				{`
-				${editorStyle}
-                
-            `}
-			</style>
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
@@ -3931,3 +3901,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

@@ -13,26 +13,26 @@ import {
 /**
  * Internal depencencies
  */
-import { 
+import {
 	ADVANCED_BUTTON_PRESETS,
 	TEXT_ALIGN_JUSTIFY,
 	ICON_TEXT_ALIGN,
 	BORDER_STYLES,
 	ICON_POSITION,
 	OVERFLOW_OP,
-    DYNAMIC_DATA_SOURCE_OPTIONS,
-    DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
-    DYNAMIC_FEATURED_IMAGE_OPTIONS,
-    DYNAMIC_DATE_TIME_TYPE_OPTIONS,
-    DYNAMIC_TAXONOMY_OPTIONS,
-    getdynamicTextDateFormatOptions,
-    getdynamicTextTimeFormatOptions,
-    DYNAMIC_LINK_SOURCE_OPTIONS,
+	DYNAMIC_DATA_SOURCE_OPTIONS,
+	DYNAMIC_DATA_SOURCE_FIELD_OPTIONS,
+	DYNAMIC_FEATURED_IMAGE_OPTIONS,
+	DYNAMIC_DATE_TIME_TYPE_OPTIONS,
+	DYNAMIC_TAXONOMY_OPTIONS,
+	getdynamicTextDateFormatOptions,
+	getdynamicTextTimeFormatOptions,
+	DYNAMIC_LINK_SOURCE_OPTIONS,
 } from '@Constants/fbConstants';
 
 import { useEntityProp, store as coreStore } from '@wordpress/core-data';
 import Select2 from "react-select";
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
@@ -44,12 +44,11 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_ImageControl from '@Components/image-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_ScaleControl from '@Components/scale-control';
@@ -60,9 +59,10 @@ import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import getProActive from '@Utils/getProActive';
+import FB_Presets from '@Components/presets';
 import './editor.scss';
 
-export default function Inspector ({ attributes, setAttributes,  clientId}) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockId,
 		blockStyle,
@@ -154,16 +154,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonMobileMargin,
 		buttonMarginLink,
 
-        buttonIconAlign,
-        buttonIcon,
+		buttonIconAlign,
+		buttonIcon,
 		buttonIconFrontend,
-        buttonIconPosition,
+		buttonIconPosition,
 
-        buttonIconSize,
-        buttonIconSizeUnits,
-        buttonIconColorSwitcher,
-        buttonIconColor,
-        buttonIconHoverColor,
+		buttonIconSize,
+		buttonIconSizeUnits,
+		buttonIconColorSwitcher,
+		buttonIconColor,
+		buttonIconHoverColor,
 
 		/** Start Background */
 		buttonIconBgColorSwitcher,
@@ -173,26 +173,26 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconNormalCustomGradientSwitcher,
 		buttonIconNormalCustomGradientInputValue,
 		buttonIconHoverBackgroundType,
-		 buttonIconBgHoverColor,
+		buttonIconBgHoverColor,
 		buttonIconHoverGradientColor,
 		buttonIconHoverCustomGradientSwitcher,
 		buttonIconHoverCustomGradientInputValue,
 		/** End Background */
 
-        buttonIconBorder,
-        buttonIconBorderColorSwitcher,
-        buttonIconBorderColor,
-        buttonIconBorderHoverColor,
-        buttonIconBorderUnits,
-        buttonIconBorderDesktop,
-        buttonIconBorderTablet,
-        buttonIconBorderMobile,
-        buttonIconBorderLink,
-        buttonIconBorderRadiusUnits,
-        buttonIconBorderRadiusDesktop,
-        buttonIconBorderRadiusTablet,
-        buttonIconBorderRadiusMobile,
-        buttonIconBorderRadiusLink,
+		buttonIconBorder,
+		buttonIconBorderColorSwitcher,
+		buttonIconBorderColor,
+		buttonIconBorderHoverColor,
+		buttonIconBorderUnits,
+		buttonIconBorderDesktop,
+		buttonIconBorderTablet,
+		buttonIconBorderMobile,
+		buttonIconBorderLink,
+		buttonIconBorderRadiusUnits,
+		buttonIconBorderRadiusDesktop,
+		buttonIconBorderRadiusTablet,
+		buttonIconBorderRadiusMobile,
+		buttonIconBorderRadiusLink,
 
 		/** Start Icon Padding */
 		buttonIconPaddingUnits,
@@ -211,8 +211,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		/** End Icon Margin */
 
 
-        buttonIconGapSize,
-        buttonIconGapUnits,
+		buttonIconGapSize,
+		buttonIconGapUnits,
 		buttonIconRotateSwitcher,
 		buttonIconRotate,
 		buttonIconRotateHover,
@@ -221,20 +221,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonImageRotateHover,
 
 
-        /** Start Global Setting */
-        buttonGlobalZIndex,
+		/** Start Global Setting */
+		buttonGlobalZIndex,
 		advancedBtnOverflow,
-        buttonGlobalPaddingUnits,
-        buttonGlobalPaddingDesktop,
-        buttonGlobalPaddingTablet,
-        buttonGlobalPaddingMobile,
-        buttonGlobalPaddingLink,
+		buttonGlobalPaddingUnits,
+		buttonGlobalPaddingDesktop,
+		buttonGlobalPaddingTablet,
+		buttonGlobalPaddingMobile,
+		buttonGlobalPaddingLink,
 
-        buttonGlobalMarginUnits,
-        buttonGlobalMarginDesktop,
-        buttonGlobalMarginTablet,
-        buttonGlobalMarginMobile,
-        buttonGlobalMarginLink,
+		buttonGlobalMarginUnits,
+		buttonGlobalMarginDesktop,
+		buttonGlobalMarginTablet,
+		buttonGlobalMarginMobile,
+		buttonGlobalMarginLink,
 
 		/** Start Background */
 		buttonGlobalBgColorSwitcher,
@@ -251,29 +251,29 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonGlobalHoverCustomGradientInputValue,
 		/** End Background */
 
-        buttonGlobalBorder,
-        buttonGlobalBorderColorSwitcher,
-        buttonGlobalBorderColor,
-        buttonGlobalBorderHoverColor,
+		buttonGlobalBorder,
+		buttonGlobalBorderColorSwitcher,
+		buttonGlobalBorderColor,
+		buttonGlobalBorderHoverColor,
 
-        buttonGlobalBorderUnits,
-        buttonGlobalBorderDesktop,
-        buttonGlobalBorderTablet,
-        buttonGlobalBorderMobile,
-        buttonGlobalBorderLink,
+		buttonGlobalBorderUnits,
+		buttonGlobalBorderDesktop,
+		buttonGlobalBorderTablet,
+		buttonGlobalBorderMobile,
+		buttonGlobalBorderLink,
 
-        buttonGlobalBorderRadiusUnits,
-        buttonGlobalBorderRadiusDesktop,
-        buttonGlobalBorderRadiusTablet,
-        buttonGlobalBorderRadiusMobile,
-        buttonGlobalBorderRadiusLink,
+		buttonGlobalBorderRadiusUnits,
+		buttonGlobalBorderRadiusDesktop,
+		buttonGlobalBorderRadiusTablet,
+		buttonGlobalBorderRadiusMobile,
+		buttonGlobalBorderRadiusLink,
 
 		buttonGlobalBoxShadowSwitcher,
-        buttonGlobalBoxShadowValues,
-        buttonGlobalBoxShadowCssValue,
+		buttonGlobalBoxShadowValues,
+		buttonGlobalBoxShadowCssValue,
 		buttonGlobalBoxShadowHoverValues,
 		buttonGlobalBoxShadowHoverCssValue,
-        /** End Global Setting */
+		/** End Global Setting */
 
 		/** Start button Icon Image */
 		buttonIconImageUrl,
@@ -289,7 +289,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		advancedBtnDesktopSwitcher,
 		advancedBtnTabletSwitcher,
 		advancedBtnMobileSwitcher,
-		
+
 		/** Start Global Setting */
 		buttonGlobalWraperID,
 		buttonGlobalWraperClass,
@@ -344,30 +344,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-    } = attributes;  
-	  
-	const deviceType= useDeviceType();
+	} = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-advanced-button-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+	const deviceType = useDeviceType();
 
 	/**
-     * Generate SVG Icons for Icon
-     */
+	 * Generate SVG Icons for Icon
+	 */
 	useEffect(() => {
 		setAttributes({
-			buttonIconFrontend: generateSvgIcon(buttonIcon), 
+			buttonIconFrontend: generateSvgIcon(buttonIcon),
 		})
 	}, [buttonIcon]);
 
 	/** Start Preset Style */
 	const changeAdvancedButtonPreset = (selectedPreset) => {
-        const presetConfigurations = {
+		const presetConfigurations = {
 			"preset-1": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
@@ -384,6 +376,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '0',
 					Mobile: '0'
 				},
+				buttonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "24",
+					right: "24",
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -402,7 +400,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "4",
 					right: "4",
 				},
-            },
+				buttonFontSize:{
+					Desktop: '18',
+					Tablet: '18',
+					Mobile: '14'
+				}
+			},
 			"preset-2": {
 				buttonBgColor: "#fff",
 				buttonBorder: "",
@@ -419,6 +422,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '0',
 					Mobile: '0'
 				},
+				buttonDesktopPadding: {
+					top: "12",
+					bottom: "12",
+					left: "24",
+					right: "24",
+				},
 				buttonIconPaddingDesktop: {
 					top: "0",
 					bottom: "0",
@@ -431,19 +440,19 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "0",
 					right: "0",
 				},
-				buttonDesktopBorderWidth:{
+				buttonDesktopBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonTabBorderWidth:{
+				buttonTabBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonMobileBorderWidth:{
+				buttonMobileBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
@@ -455,7 +464,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "4",
 					right: "4",
 				},
-            },
+			},
 			"preset-3": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
@@ -521,8 +530,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					left: "4",
 					right: "4",
 				},
-            },
-			
+			},
+
 			"preset-4": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
@@ -582,25 +591,25 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '18',
 					Mobile: '18'
 				},
-				buttonDesktopBorderWidth:{
+				buttonDesktopBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonTabBorderWidth:{
+				buttonTabBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonMobileBorderWidth:{
+				buttonMobileBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-            },
+			},
 			"preset-5": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
@@ -660,25 +669,25 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '18',
 					Mobile: '18'
 				},
-				buttonDesktopBorderWidth:{
+				buttonDesktopBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonTabBorderWidth:{
+				buttonTabBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonMobileBorderWidth:{
+				buttonMobileBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-            },
+			},
 			"preset-6": {
 				buttonBgColor: "#399CFF",
 				buttonBorder: "none",
@@ -755,239 +764,824 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					Tablet: '18',
 					Mobile: '18'
 				},
-				buttonDesktopBorderWidth:{
+				buttonDesktopBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonTabBorderWidth:{
+				buttonTabBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-				buttonMobileBorderWidth:{
+				buttonMobileBorderWidth: {
 					top: "1",
 					bottom: "1",
 					left: "1",
 					right: "1",
 				},
-            },
+			},
 		}
 		const selectedPresetConfig = presetConfigurations[selectedPreset];
 
-        if (selectedPresetConfig) {
-            setAttributes({
-                buttonPresetStyle: selectedPreset,
-                ...selectedPresetConfig,
-            });
-        } else {
-            console.warn(`Advanced Button: Preset "${selectedPreset}" not found.`);
-        }
+		if (selectedPresetConfig) {
+			setAttributes({
+				buttonPresetStyle: selectedPreset,
+				...selectedPresetConfig,
+			});
+		} else {
+			console.warn(`Advanced Button: Preset "${selectedPreset}" not found.`);
+		}
 	}
 	/** End Preset Style */
 
-    /** Start Icon border */
-    const handlebuttonIconBorderUnitChange = ( event, position ) => {
-        const value = event.target.value;
-        if ( buttonIconBorderLink ) {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {
-                        buttonIconBorderDesktop: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Tablet':
-                    setAttributes( {
-                        buttonIconBorderTablet: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Mobile':
-                    setAttributes( {
-                        buttonIconBorderMobile: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {buttonIconBorderDesktop: {...buttonIconBorderDesktop, [position]: value}} );
-                    break;
-                case 'Tablet':
-                    setAttributes( {buttonIconBorderTablet: {...buttonIconBorderTablet, [position]: value}} );
-                    break;
-                case 'Mobile':
-                    setAttributes( {buttonIconBorderMobile: {...buttonIconBorderMobile, [position]: value}} );
-                    break;
-                default:
-                    break;
-            }
-        }
+	/**
+	 * Preset Styles Data Object
+	 */
+	const presetStyles = {
+		"preset-1": {
+			buttonBgColor: "#399CFF",
+			buttonBorder: "none",
+			buttonBorderColor: "",
+			buttonColor: "#fff",
+			buttonIconImageUrl: "",
+			buttonIconBgColor: "",
+			buttonIcon: "",
+			buttonIconAlign: "",
+			buttonIconColor: "#fff",
+			buttonIconBorder: "none",
+			buttonTextSwitcher: true,
+			buttonText: "Add Text",
+			buttonIconRotate: {
+				Desktop: '0',
+				Tablet: '0',
+				Mobile: '0'
+			},
+			buttonDesktopPadding: {
+				top: "12",
+				bottom: "12",
+				left: "24",
+				right: "24",
+			},
+			buttonIconPaddingDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "4",
+				bottom: "4",
+				left: "4",
+				right: "4",
+			},
+		},
+		"preset-2": {
+			buttonBgColor: "#fff",
+			buttonBorder: "",
+			buttonBorderColor: "#C3C8D2",
+			buttonColor: "#399CFF",
+			buttonIconBgColor: "",
+			buttonIconImageUrl: "",
+			buttonIconAlign: "icon-text",
+			buttonIcon: "arrow-left",
+			buttonIconPosition: 'right',
+			buttonIconColor: "#399CFF",
+			buttonIconBorder: "none",
+			buttonTextSwitcher: true,
+			buttonText: "Link Button",
+			buttonIconRotate: {
+				Desktop: '180',
+				Tablet: '0',
+				Mobile: '0'
+			},
+			buttonDesktopPadding: {
+				top: "12",
+				bottom: "12",
+				left: "24",
+				right: "24",
+			},
+			buttonIconPaddingDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonDesktopBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonTabBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonMobileBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "4",
+				bottom: "4",
+				left: "4",
+				right: "4",
+			},
+		},
+		"preset-3": {
+			buttonBgColor: "#399CFF",
+			buttonBorder: "none",
+			buttonBorderColor: "",
+			buttonColor: "#fff",
+			buttonIcon: "arrow-rotate-right",
+			buttonIconColor: "#fff",
+			buttonIconBgColor: "transparent",
+			buttonIconAlign: "icon-text",
+			buttonIconPosition: "left",
+			buttonIconBorder: "none",
+			buttonIconImageUrl: "",
+			buttonTextSwitcher: true,
+			buttonText: "Search",
+			buttonIconRotate: {
+				Desktop: '0',
+				Tablet: '0',
+				Mobile: '0'
+			},
+			buttonIconPaddingDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconPaddingDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonDesktopPadding: {
+				top: "14",
+				bottom: "14",
+				left: "20",
+				right: "20",
+			},
+			buttonIconImageWidth: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonIconImageHeight: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "4",
+				bottom: "4",
+				left: "4",
+				right: "4",
+			},
+		},
 
-    }
+		"preset-4": {
+			buttonBgColor: "#399CFF",
+			buttonBorder: "none",
+			buttonBorderColor: "#C3C8D2",
+			buttonColor: "#fff",
+			buttonIconBgColor: "#fff",
+			buttonIconColor: "#399CFF",
+			buttonIcon: "arrow-left-long",
+			buttonIconAlign: "icon-text",
+			buttonIconPosition: "left",
+			buttonIconBorder: "none",
+			buttonIconImageUrl: "",
+			buttonTextSwitcher: true,
+			buttonText: "Style - 1",
+			buttonIconRotate: {
+				Desktop: '180',
+				Tablet: '180',
+				Mobile: '180'
+			},
+			buttonDesktopPadding: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "16",
+			},
+			buttonIconPaddingDesktop: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "8",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconImageWidth: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonIconBorderRadiusDesktop: {
+				top: "4",
+				bottom: "4",
+				left: "4",
+				right: "4",
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "8",
+			},
+			buttonIconImageHeight: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonDesktopBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonTabBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonMobileBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+		},
+		"preset-5": {
+			buttonBgColor: "#399CFF",
+			buttonBorder: "none",
+			buttonBorderColor: "#C3C8D2",
+			buttonColor: "#fff",
+			buttonIconBgColor: "#fff",
+			buttonIconColor: "#399CFF",
+			buttonIcon: "arrow-left-long",
+			buttonIconAlign: "icon-text",
+			buttonIconPosition: "right",
+			buttonIconBorder: "none",
+			buttonIconImageUrl: "",
+			buttonTextSwitcher: true,
+			buttonText: "Style - 2",
+			buttonIconRotate: {
+				Desktop: '180',
+				Tablet: '180',
+				Mobile: '180'
+			},
+			buttonDesktopPadding: {
+				top: "8",
+				bottom: "8",
+				left: "24",
+				right: "8",
+			},
+			buttonIconPaddingDesktop: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "8",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "0",
+			},
+			buttonIconImageWidth: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonIconBorderRadiusDesktop: {
+				top: "999",
+				bottom: "999",
+				left: "999",
+				right: "999",
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "8",
+			},
+			buttonIconImageHeight: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonDesktopBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonTabBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonMobileBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+		},
+		"preset-6": {
+			buttonBgColor: "#399CFF",
+			buttonBorder: "none",
+			buttonBorderColor: "#C3C8D2",
+			buttonColor: "#fff",
+			buttonIconBgColor: "#399CFF",
+			buttonIconColor: "#fff",
+			buttonIcon: "arrow-left-long",
+			buttonIconAlign: "icon-text",
+			buttonIconPosition: "right",
+			buttonIconBorder: "solid",
+			buttonIconBorderColor: "#fff",
+			buttonIconRotate: {
+				Desktop: '180',
+				Tablet: '180',
+				Mobile: '180'
+			},
+			buttonIconBorderDesktop: {
+				top: "3",
+				bottom: "3",
+				left: "3",
+				right: "3",
+			},
+			buttonIconImageUrl: "",
+			buttonTextSwitcher: true,
+			buttonText: "Style - 3",
+			buttonIconSize: {
+				Desktop: '14',
+				Tablet: '14',
+				Mobile: '14'
+			},
+			buttonDesktopPadding: {
+				top: "8",
+				bottom: "8",
+				left: "24",
+				right: "24",
+			},
+			buttonIconGapSize: {
+				Desktop: '13',
+				Tablet: '13',
+				Mobile: '13'
+			},
+			buttonIconPaddingDesktop: {
+				top: "6",
+				bottom: "6",
+				left: "6",
+				right: "6",
+			},
+			buttonIconMarginDesktop: {
+				top: "0",
+				bottom: "0",
+				left: "0",
+				right: "-38",
+			},
+			buttonIconImageWidth: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonIconBorderRadiusDesktop: {
+				top: "999",
+				bottom: "999",
+				left: "999",
+				right: "999",
+			},
+			buttonDesktopBorderRadiusWidth: {
+				top: "8",
+				bottom: "8",
+				left: "8",
+				right: "8",
+			},
+			buttonIconImageHeight: {
+				Desktop: '18',
+				Tablet: '18',
+				Mobile: '18'
+			},
+			buttonDesktopBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonTabBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+			buttonMobileBorderWidth: {
+				top: "1",
+				bottom: "1",
+				left: "1",
+				right: "1",
+			},
+		},
+	};
 
-    const handlebuttonIconBorderCombineBtn = () => {
-        setAttributes( {buttonIconBorderLink: !buttonIconBorderLink} );
-    }
+	const advancedButtonPresets = [
+		{
+			value: 'preset-1',
+			label: __('Preset 1', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-1']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14968)">
+						<path d="M88 138C88 120.327 102.327 106 120 106H228C245.673 106 260 120.327 260 138C260 155.673 245.673 170 228 170H120C102.327 170 88 155.673 88 138Z" fill="white" shape-rendering="crispEdges"/>
+						<rect x="112" y="130" width="124" height="16" rx="8" fill="#E1E3E8"/>
+						</g>
+						<defs>
+						<filter id="filter0_d_16980_14968" x="87" y="106" width="174" height="67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14968"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14968" result="shape"/>
+						</filter>
+						</defs>
+					</svg>`,
+		},
+		{
+			value: 'preset-2',
+			label: __('Preset 2', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-2']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14995)">
+						<rect x="86" y="129" width="144" height="18" rx="9" fill="white"/>
+						</g>
+						<path d="M246 138H260M260 138L254 132M260 138L254 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<defs>
+						<filter id="filter0_d_16980_14995" x="85" y="129" width="146" height="21" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14995"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14995" result="shape"/>
+						</filter>
+						</defs>
+					</svg>`,
+		},
+		{
+			value: 'preset-3',
+			label: __('Preset 3', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-3']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14971)">
+						<path d="M88 119C88 111.268 94.268 105 102 105H246C253.732 105 260 111.268 260 119V157C260 164.732 253.732 171 246 171H102C94.268 171 88 164.732 88 157V119Z" fill="white" shape-rendering="crispEdges"/>
+						<path d="M114.807 130.998H116.665V133.374C117.67 132.586 118.885 132.111 120.158 132.008C121.432 131.905 122.707 132.179 123.825 132.797C124.944 133.414 125.855 134.347 126.447 135.479C127.039 136.611 127.284 137.892 127.153 139.163C127.021 140.433 126.518 141.637 125.707 142.624C124.896 143.611 123.812 144.337 122.591 144.712C121.37 145.086 120.065 145.094 118.84 144.732C117.615 144.37 116.524 143.656 115.702 142.678L117.206 141.577C117.803 142.249 118.581 142.733 119.448 142.972C120.314 143.21 121.231 143.193 122.087 142.921C122.943 142.649 123.702 142.135 124.272 141.44C124.843 140.746 125.199 139.901 125.299 139.008C125.399 138.115 125.238 137.213 124.835 136.409C124.433 135.606 123.806 134.937 123.031 134.483C122.256 134.028 121.365 133.808 120.468 133.85C119.57 133.891 118.704 134.191 117.974 134.715H120.382V136.573H114.806L114.807 130.998Z" fill="#404655"/>
+						<rect x="140" y="130" width="96" height="16" rx="8" fill="#E1E3E8"/>
+						</g>
+						<defs>
+						<filter id="filter0_d_16980_14971" x="87" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14971"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14971" result="shape"/>
+						</filter>
+						</defs>
+					</svg>
+`,
+		},
+		{
+			value: 'preset-4',
+			label: __('Preset 4', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-4']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14976)">
+						<path d="M88 119C88 111.268 94.268 105 102 105H246C253.732 105 260 111.268 260 119V157C260 164.732 253.732 171 246 171H102C94.268 171 88 164.732 88 157V119Z" fill="white" shape-rendering="crispEdges"/>
+						<rect x="104" y="121" width="34" height="34" rx="6" fill="#E1E3E8"/>
+						<path d="M114 138H128M128 138L122 132M128 138L122 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<rect x="148" y="130" width="96" height="16" rx="8" fill="#E1E3E8"/>
+						</g>
+						<defs>
+						<filter id="filter0_d_16980_14976" x="87" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14976"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14976" result="shape"/>
+						</filter>
+						</defs>
+					</svg>`,
+		},
+		{
+			value: 'preset-5',
+			label: __('Preset 5', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-5']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14982)">
+						<path d="M88 119C88 111.268 94.268 105 102 105H246C253.732 105 260 111.268 260 119V157C260 164.732 253.732 171 246 171H102C94.268 171 88 164.732 88 157V119Z" fill="white" shape-rendering="crispEdges"/>
+						<rect x="104" y="130" width="96" height="16" rx="8" fill="#E1E3E8"/>
+						<path d="M210 138C210 128.611 217.611 121 227 121C236.389 121 244 128.611 244 138C244 147.389 236.389 155 227 155C217.611 155 210 147.389 210 138Z" fill="#E1E3E8"/>
+						<path d="M220 138H234M234 138L228 132M234 138L228 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						</g>
+						<defs>
+						<filter id="filter0_d_16980_14982" x="87" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14982"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14982" result="shape"/>
+						</filter>
+						</defs>
+					</svg>`,
+		},
+		{
+			value: 'preset-6',
+			label: __('Preset 6', 'frontis-blocks'),
+			attributes: Object.entries(presetStyles['preset-6']).map(([label, value]) => ({ label, value })),
+			icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+						<g filter="url(#filter0_d_16980_14988)">
+						<path d="M80 119C80 111.268 86.268 105 94 105H238C245.732 105 252 111.268 252 119V157C252 164.732 245.732 171 238 171H94C86.268 171 80 164.732 80 157V119Z" fill="white" shape-rendering="crispEdges"/>
+						<rect x="96" y="130" width="118" height="16" rx="8" fill="#E1E3E8"/>
+						</g>
+						<rect x="232" y="119" width="38" height="38" rx="19" fill="white"/>
+						<rect x="232" y="119" width="38" height="38" rx="19" stroke="#EBEBEB" stroke-width="4"/>
+						<path d="M244 138H258M258 138L252 132M258 138L252 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+						<defs>
+						<filter id="filter0_d_16980_14988" x="79" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+						<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+						<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+						<feOffset dy="2"/>
+						<feGaussianBlur stdDeviation="0.5"/>
+						<feComposite in2="hardAlpha" operator="out"/>
+						<feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+						<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14988"/>
+						<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14988" result="shape"/>
+						</filter>
+						</defs>
+					</svg>`,
+		},
+	];
 
-    const handlebuttonIconBorderUnitsHandler = (unit) => {
-        setAttributes( {
-            buttonIconBorderUnits: {
-                ...buttonIconBorderUnits,
-                [deviceType]: unit
-            }
-        })
-    }
-	
-    /** End Icon border */
-    const buttonIconBorderDesktopWidth = `${buttonIconBorderDesktop?.top}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.right}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.bottom}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.left}${buttonIconBorderUnits?.Desktop}`;
-    const buttonIconBorderTabletWidth = `${buttonIconBorderTablet?.top}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.right}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.bottom}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.left}${buttonIconBorderUnits?.Tablet}`;
-    const buttonIconBorderMobileWidth = `${buttonIconBorderMobile?.top}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.right}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.bottom}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.left}${buttonIconBorderUnits?.Mobile}`;
-    /** End Border */
+	/** Start Icon border */
+	const handlebuttonIconBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (buttonIconBorderLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						buttonIconBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						buttonIconBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						buttonIconBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ buttonIconBorderDesktop: { ...buttonIconBorderDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ buttonIconBorderTablet: { ...buttonIconBorderTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ buttonIconBorderMobile: { ...buttonIconBorderMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
 
-    /** Start Icon border radius*/
-    const handlebuttonIconBorderRadiusUnitChange = ( event, position ) => {
-        const value = event.target.value;
-        if ( buttonIconBorderRadiusLink ) {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {
-                        buttonIconBorderRadiusDesktop: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Tablet':
-                    setAttributes( {
-                        buttonIconBorderRadiusTablet: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Mobile':
-                    setAttributes( {
-                        buttonIconBorderRadiusMobile: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {buttonIconBorderRadiusDesktop: {...buttonIconBorderRadiusDesktop, [position]: value}} );
-                    break;
-                case 'Tablet':
-                    setAttributes( {buttonIconBorderRadiusTablet: {...buttonIconBorderRadiusTablet, [position]: value}} );
-                    break;
-                case 'Mobile':
-                    setAttributes( {buttonIconBorderRadiusMobile: {...buttonIconBorderRadiusMobile, [position]: value}} );
-                    break;
-                default:
-                    break;
-            }
-        }
+	}
 
-    }
+	const handlebuttonIconBorderCombineBtn = () => {
+		setAttributes({ buttonIconBorderLink: !buttonIconBorderLink });
+	}
 
-    const handlebuttonIconBorderRadiusCombineBtn = () => {
-        setAttributes( {buttonIconBorderRadiusLink: !buttonIconBorderRadiusLink} );
-    }
+	const handlebuttonIconBorderUnitsHandler = (unit) => {
+		setAttributes({
+			buttonIconBorderUnits: {
+				...buttonIconBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
 
-    const handlebuttonIconBorderRadiusUnitsHandler = (unit) => {
-        setAttributes( {
-            buttonIconBorderRadiusUnits: {
-                ...buttonIconBorderRadiusUnits,
-                [deviceType]: unit
-            }
-        })
-    }
-    /** end Global border */
+	/** End Icon border */
+	const buttonIconBorderDesktopWidth = `${buttonIconBorderDesktop?.top}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.right}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.bottom}${buttonIconBorderUnits?.Desktop} ${buttonIconBorderDesktop?.left}${buttonIconBorderUnits?.Desktop}`;
+	const buttonIconBorderTabletWidth = `${buttonIconBorderTablet?.top}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.right}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.bottom}${buttonIconBorderUnits?.Tablet} ${buttonIconBorderTablet?.left}${buttonIconBorderUnits?.Tablet}`;
+	const buttonIconBorderMobileWidth = `${buttonIconBorderMobile?.top}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.right}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.bottom}${buttonIconBorderUnits?.Mobile} ${buttonIconBorderMobile?.left}${buttonIconBorderUnits?.Mobile}`;
+	/** End Border */
 
-    /** End Icon Border Radius */
-    const buttonIconBorderRadiusDesktopWidth = `${buttonIconBorderRadiusDesktop?.top}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.right}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.bottom}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.left}${buttonIconBorderRadiusUnits?.Desktop}`;
-    const buttonIconBorderRadiusTabletWidth = `${buttonIconBorderRadiusTablet?.top}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.right}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.bottom}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.left}${buttonIconBorderRadiusUnits?.Tablet}`;
-    const buttonIconBorderRadiusMobileWidth = `${buttonIconBorderRadiusMobile?.top}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.right}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.bottom}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.left}${buttonIconBorderRadiusUnits?.Mobile}`;
-    /** End Border Radius */
+	/** Start Icon border radius*/
+	const handlebuttonIconBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (buttonIconBorderRadiusLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						buttonIconBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						buttonIconBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						buttonIconBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ buttonIconBorderRadiusDesktop: { ...buttonIconBorderRadiusDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ buttonIconBorderRadiusTablet: { ...buttonIconBorderRadiusTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ buttonIconBorderRadiusMobile: { ...buttonIconBorderRadiusMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlebuttonIconBorderRadiusCombineBtn = () => {
+		setAttributes({ buttonIconBorderRadiusLink: !buttonIconBorderRadiusLink });
+	}
+
+	const handlebuttonIconBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			buttonIconBorderRadiusUnits: {
+				...buttonIconBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** end Global border */
+
+	/** End Icon Border Radius */
+	const buttonIconBorderRadiusDesktopWidth = `${buttonIconBorderRadiusDesktop?.top}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.right}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.bottom}${buttonIconBorderRadiusUnits?.Desktop} ${buttonIconBorderRadiusDesktop?.left}${buttonIconBorderRadiusUnits?.Desktop}`;
+	const buttonIconBorderRadiusTabletWidth = `${buttonIconBorderRadiusTablet?.top}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.right}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.bottom}${buttonIconBorderRadiusUnits?.Tablet} ${buttonIconBorderRadiusTablet?.left}${buttonIconBorderRadiusUnits?.Tablet}`;
+	const buttonIconBorderRadiusMobileWidth = `${buttonIconBorderRadiusMobile?.top}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.right}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.bottom}${buttonIconBorderRadiusUnits?.Mobile} ${buttonIconBorderRadiusMobile?.left}${buttonIconBorderRadiusUnits?.Mobile}`;
+	/** End Border Radius */
 
 
 	/** Start Icon padding*/
-	const handlebuttonIconPaddingUnitChange = ( event, position ) => {
+	const handlebuttonIconPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonIconPaddingLink ) { 
-			switch ( deviceType ) {
+		if (buttonIconPaddingLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonIconPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonIconPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonIconPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonIconPaddingDesktop: {...buttonIconPaddingDesktop, [position]: value}} );
+					setAttributes({ buttonIconPaddingDesktop: { ...buttonIconPaddingDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonIconPaddingTablet: {...buttonIconPaddingTablet, [position]: value}} );
+					setAttributes({ buttonIconPaddingTablet: { ...buttonIconPaddingTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonIconPaddingMobile: {...buttonIconPaddingMobile, [position]: value}} );
+					setAttributes({ buttonIconPaddingMobile: { ...buttonIconPaddingMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -997,11 +1591,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handlebuttonIconPaddingCombineBtn = () => {
-		setAttributes( {buttonIconPaddingLink: !buttonIconPaddingLink} );
+		setAttributes({ buttonIconPaddingLink: !buttonIconPaddingLink });
 	}
 
 	const handlebuttonIconPaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonIconPaddingUnits: {
 				...buttonIconPaddingUnits,
 				[deviceType]: unit
@@ -1015,55 +1609,55 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const buttonIconPaddingTabletWidth = `${buttonIconPaddingTablet?.top}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.right}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.bottom}${buttonIconPaddingUnits?.Tablet} ${buttonIconPaddingTablet?.left}${buttonIconPaddingUnits?.Tablet}`;
 	const buttonIconPaddingMobileWidth = `${buttonIconPaddingMobile?.top}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.right}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.bottom}${buttonIconPaddingUnits?.Mobile} ${buttonIconPaddingMobile?.left}${buttonIconPaddingUnits?.Mobile}`;
 	/** End Padding */
-	
+
 	/** Start Icon Margin*/
-	const handlebuttonIconMarginUnitChange = ( event, position ) => {
+	const handlebuttonIconMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonIconMarginLink ) { 
-			switch ( deviceType ) {
+		if (buttonIconMarginLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonIconMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonIconMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonIconMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonIconMarginDesktop: {...buttonIconMarginDesktop, [position]: value}} );
+					setAttributes({ buttonIconMarginDesktop: { ...buttonIconMarginDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonIconMarginTablet: {...buttonIconMarginTablet, [position]: value}} );
+					setAttributes({ buttonIconMarginTablet: { ...buttonIconMarginTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonIconMarginMobile: {...buttonIconMarginMobile, [position]: value}} );
+					setAttributes({ buttonIconMarginMobile: { ...buttonIconMarginMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -1073,11 +1667,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handlebuttonIconMarginCombineBtn = () => {
-		setAttributes( {buttonIconMarginLink: !buttonIconMarginLink} );
+		setAttributes({ buttonIconMarginLink: !buttonIconMarginLink });
 	}
 
 	const handlebuttonIconMarginUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonIconMarginUnits: {
 				...buttonIconMarginUnits,
 				[deviceType]: unit
@@ -1093,67 +1687,67 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** End Margin */
 
 
-    /** Start padding */
-    const handlePaddingUnitChange = ( event, position ) => {
-        const value = event.target.value;
-        if ( buttonPaddingLink ) {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {
-                        buttonDesktopPadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Tablet':
-                    setAttributes( {
-                        buttonTabPadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                case 'Mobile':
-                    setAttributes( {
-                        buttonMobilePadding: {
-                            top: value,
-                            right: value,
-                            bottom: value,
-                            left: value
-                        }
-                    } );
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch ( deviceType ) {
-                case 'Desktop':
-                    setAttributes( {buttonDesktopPadding: {...buttonDesktopPadding, [position]: value}} );
-                    break;
-                case 'Tablet':
-                    setAttributes( {buttonTabPadding: {...buttonTabPadding, [position]: value}} );
-                    break;
-                case 'Mobile':
-                    setAttributes( {buttonMobilePadding: {...buttonMobilePadding, [position]: value}} );
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+	/** Start padding */
+	const handlePaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (buttonPaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						buttonDesktopPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						buttonTabPadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						buttonMobilePadding: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ buttonDesktopPadding: { ...buttonDesktopPadding, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ buttonTabPadding: { ...buttonTabPadding, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ buttonMobilePadding: { ...buttonMobilePadding, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
 	const handlePaddingCombineBtn = () => {
-		setAttributes( {buttonPaddingLink: !buttonPaddingLink} );
+		setAttributes({ buttonPaddingLink: !buttonPaddingLink });
 	}
 
 	const handlePaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonPaddingUnits: {
 				...buttonPaddingUnits,
 				[deviceType]: unit
@@ -1423,53 +2017,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** End Border Radius */
 
 	/** Start Global padding */
-	const handleGlobalPaddingUnitChange = ( event, position ) => {
+	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonGlobalPaddingLink ) {
-			switch ( deviceType ) {
+		if (buttonGlobalPaddingLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonGlobalPaddingDesktop: {...buttonGlobalPaddingDesktop, [position]: value}} );
+					setAttributes({ buttonGlobalPaddingDesktop: { ...buttonGlobalPaddingDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonGlobalPaddingTablet: {...buttonGlobalPaddingTablet, [position]: value}} );
+					setAttributes({ buttonGlobalPaddingTablet: { ...buttonGlobalPaddingTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonGlobalPaddingMobile: {...buttonGlobalPaddingMobile, [position]: value}} );
+					setAttributes({ buttonGlobalPaddingMobile: { ...buttonGlobalPaddingMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -1479,70 +2073,70 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handleGlobalPaddingCombineBtn = () => {
-		setAttributes( {buttonGlobalPaddingLink: !buttonGlobalPaddingLink} );
+		setAttributes({ buttonGlobalPaddingLink: !buttonGlobalPaddingLink });
 	}
 
 	const handleGlobalPaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonGlobalPaddingUnits: {
 				...buttonGlobalPaddingUnits,
 				[deviceType]: unit
 			}
 		})
 	}
-	const globalDesktopPadding    = `${buttonGlobalPaddingDesktop?.top}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.right}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.bottom}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.left}${buttonGlobalPaddingUnits?.Desktop}`;
-	const globalTabletPadding     = `${buttonGlobalPaddingTablet?.top}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.right}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.bottom}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.left}${buttonGlobalPaddingUnits?.Tablet}`;
-	const globalMobilePadding     = `${buttonGlobalPaddingMobile?.top}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.right}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.bottom}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.left}${buttonGlobalPaddingUnits?.Mobile}`;
+	const globalDesktopPadding = `${buttonGlobalPaddingDesktop?.top}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.right}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.bottom}${buttonGlobalPaddingUnits?.Desktop} ${buttonGlobalPaddingDesktop?.left}${buttonGlobalPaddingUnits?.Desktop}`;
+	const globalTabletPadding = `${buttonGlobalPaddingTablet?.top}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.right}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.bottom}${buttonGlobalPaddingUnits?.Tablet} ${buttonGlobalPaddingTablet?.left}${buttonGlobalPaddingUnits?.Tablet}`;
+	const globalMobilePadding = `${buttonGlobalPaddingMobile?.top}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.right}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.bottom}${buttonGlobalPaddingUnits?.Mobile} ${buttonGlobalPaddingMobile?.left}${buttonGlobalPaddingUnits?.Mobile}`;
 	/** End Global Padding */
-	
+
 	/** Start Global Margin */
-	const handleGlobalMarginUnitChange = ( event, position ) => {
+	const handleGlobalMarginUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonGlobalMarginLink ) {
-			switch ( deviceType ) {
+		if (buttonGlobalMarginLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalMarginDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalMarginTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalMarginMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonGlobalMarginDesktop: {...buttonGlobalMarginDesktop, [position]: value}} );
+					setAttributes({ buttonGlobalMarginDesktop: { ...buttonGlobalMarginDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonGlobalMarginTablet: {...buttonGlobalMarginTablet, [position]: value}} );
+					setAttributes({ buttonGlobalMarginTablet: { ...buttonGlobalMarginTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonGlobalMarginMobile: {...buttonGlobalMarginMobile, [position]: value}} );
+					setAttributes({ buttonGlobalMarginMobile: { ...buttonGlobalMarginMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -1552,11 +2146,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handleGlobalMarginCombineBtn = () => {
-		setAttributes( {buttonGlobalMarginLink: !buttonGlobalMarginLink} );
+		setAttributes({ buttonGlobalMarginLink: !buttonGlobalMarginLink });
 	}
 
 	const handleGlobalMarginUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonGlobalMarginUnits: {
 				...buttonGlobalMarginUnits,
 				[deviceType]: unit
@@ -1570,53 +2164,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** End Global Margin */
 
 	/** Start Global border */
-	const handleGlobalBorderUnitChange = ( event, position ) => {
+	const handleGlobalBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonGlobalBorderLink ) {
-			switch ( deviceType ) {
+		if (buttonGlobalBorderLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonGlobalBorderDesktop: {...buttonGlobalBorderDesktop, [position]: value}} );
+					setAttributes({ buttonGlobalBorderDesktop: { ...buttonGlobalBorderDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonGlobalBorderTablet: {...buttonGlobalBorderTablet, [position]: value}} );
+					setAttributes({ buttonGlobalBorderTablet: { ...buttonGlobalBorderTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonGlobalBorderMobile: {...buttonGlobalBorderMobile, [position]: value}} );
+					setAttributes({ buttonGlobalBorderMobile: { ...buttonGlobalBorderMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -1626,11 +2220,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handleGlobalBorderCombineBtn = () => {
-		setAttributes( {buttonGlobalBorderLink: !buttonGlobalBorderLink} );
+		setAttributes({ buttonGlobalBorderLink: !buttonGlobalBorderLink });
 	}
 
 	const handleGlobalBorderUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonGlobalBorderUnits: {
 				...buttonGlobalBorderUnits,
 				[deviceType]: unit
@@ -1643,53 +2237,53 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	/** End Border */
 
 	/** Start Global border radius*/
-	const handleGlobalBorderRadiusUnitChange = ( event, position ) => {
+	const handleGlobalBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonGlobalBorderRadiusLink ) {
-			switch ( deviceType ) {
+		if (buttonGlobalBorderRadiusLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonGlobalBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonGlobalBorderRadiusDesktop: {...buttonGlobalBorderRadiusDesktop, [position]: value}} );
+					setAttributes({ buttonGlobalBorderRadiusDesktop: { ...buttonGlobalBorderRadiusDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonGlobalBorderRadiusTablet: {...buttonGlobalBorderRadiusTablet, [position]: value}} );
+					setAttributes({ buttonGlobalBorderRadiusTablet: { ...buttonGlobalBorderRadiusTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonGlobalBorderRadiusMobile: {...buttonGlobalBorderRadiusMobile, [position]: value}} );
+					setAttributes({ buttonGlobalBorderRadiusMobile: { ...buttonGlobalBorderRadiusMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -1699,11 +2293,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}
 
 	const handleGlobalBorderRadiusCombineBtn = () => {
-		setAttributes( {buttonGlobalBorderRadiusLink: !buttonGlobalBorderRadiusLink} );
+		setAttributes({ buttonGlobalBorderRadiusLink: !buttonGlobalBorderRadiusLink });
 	}
 
 	const handleGlobalBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonGlobalBorderRadiusUnits: {
 				...buttonGlobalBorderRadiusUnits,
 				[deviceType]: unit
@@ -1716,19 +2310,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	const globalDesktopBorderRadiusWidth = `${buttonGlobalBorderRadiusDesktop?.top}${buttonGlobalBorderRadiusUnits?.Desktop} ${buttonGlobalBorderRadiusDesktop?.right}${buttonGlobalBorderRadiusUnits?.Desktop} ${buttonGlobalBorderRadiusDesktop?.bottom}${buttonGlobalBorderRadiusUnits?.Desktop} ${buttonGlobalBorderRadiusDesktop?.left}${buttonGlobalBorderRadiusUnits?.Desktop}`;
 	const globalTabletBorderRadiusWidth = `${buttonGlobalBorderRadiusTablet?.top}${buttonGlobalBorderRadiusUnits?.Tablet} ${buttonGlobalBorderRadiusTablet?.right}${buttonGlobalBorderRadiusUnits?.Tablet} ${buttonGlobalBorderRadiusTablet?.bottom}${buttonGlobalBorderRadiusUnits?.Tablet} ${buttonGlobalBorderRadiusTablet?.left}${buttonGlobalBorderRadiusUnits?.Tablet}`;
 	const globalMobileBorderRadiusWidth = `${buttonGlobalBorderRadiusMobile?.top}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.right}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.bottom}${buttonGlobalBorderRadiusUnits?.Mobile} ${buttonGlobalBorderRadiusMobile?.left}${buttonGlobalBorderRadiusUnits?.Mobile}`;
-	/** End Border Radius */    
-
-	/** Start Load Google Font */
-	useEffect(() => {
-		if (buttonFontFamily) {
-			loadGoogleFont(buttonFontFamily);
-		}
-	}, [buttonFontFamily]);
-	/** End Load Google Font */
+	/** End Border Radius */
 
 	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
-		setAttributes({buttonIcon: IconName})
+		setAttributes({ buttonIcon: IconName })
 	}
 	/** End Icon Handler */
 
@@ -1757,22 +2343,22 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonGlobalBorderColor ? `border-color: ${buttonGlobalBorderColor};` : ''}
 			${buttonGlobalBoxShadowCssValue ? `box-shadow: ${buttonGlobalBoxShadowCssValue};` : ''}
 
-			${buttonTransformNormalProportions 
-				? (buttonTransformNormalScale?.Desktop 
-					? `transform: scale(${buttonTransformNormalScale?.Desktop});` 
+			${buttonTransformNormalProportions
+			? (buttonTransformNormalScale?.Desktop
+				? `transform: scale(${buttonTransformNormalScale?.Desktop});`
+				: ''
+			)
+			: (
+				(buttonTransformNormalScaleX?.Desktop || buttonTransformNormalScaleY?.Desktop)
+					? `transform: ${buttonTransformNormalScaleX?.Desktop ? `scaleX(${buttonTransformNormalScaleX?.Desktop}) ` : ''}${buttonTransformNormalScaleY?.Desktop ? `scaleY(${buttonTransformNormalScaleY?.Desktop})` : ''};`
 					: ''
-				) 
-				: (
-					(buttonTransformNormalScaleX?.Desktop || buttonTransformNormalScaleY?.Desktop) 
-					? `transform: ${buttonTransformNormalScaleX?.Desktop ? `scaleX(${buttonTransformNormalScaleX?.Desktop}) ` : ''}${buttonTransformNormalScaleY?.Desktop ? `scaleY(${buttonTransformNormalScaleY?.Desktop})` : ''};` 
-					: ''
-				)
-			}			
+			)
+		}			
 			transition: all .3s ease-in-out;
 			position: relative;
 		}
 		.${blockId} .fb-advanced-button-wrapper:hover {
-            ${buttonGlobalHoverBackgroundType	 === 'gradient' ? `   	
+            ${buttonGlobalHoverBackgroundType === 'gradient' ? `   	
                 ${buttonGlobalHoverCustomGradientSwitcher && buttonGlobalHoverCustomGradientInputValue ? `background: ${buttonGlobalHoverCustomGradientInputValue};` : `background: ${buttonGlobalHoverGradientColor};`}
             `: `
                 ${buttonGlobalHoverClassicColor ? `background: ${buttonGlobalHoverClassicColor};` : ''}
@@ -1780,17 +2366,17 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonGlobalBorderHoverColor ? `border-color: ${buttonGlobalBorderHoverColor};` : ''}
 			${buttonGlobalBoxShadowHoverCssValue ? `box-shadow: ${buttonGlobalBoxShadowHoverCssValue};` : ''}
 
-			${buttonTransformHoverProportions 
-				? (buttonTransformHoverScale?.Desktop 
-					? `transform: scale(${buttonTransformHoverScale?.Desktop});` 
+			${buttonTransformHoverProportions
+			? (buttonTransformHoverScale?.Desktop
+				? `transform: scale(${buttonTransformHoverScale?.Desktop});`
+				: ''
+			)
+			: (
+				(buttonTransformHoverScaleX?.Desktop || buttonTransformHoverScaleY?.Desktop)
+					? `transform: ${buttonTransformHoverScaleX?.Desktop ? `scaleX(${buttonTransformHoverScaleX?.Desktop}) ` : ''}${buttonTransformHoverScaleY?.Desktop ? `scaleY(${buttonTransformHoverScaleY?.Desktop})` : ''};`
 					: ''
-				) 
-				: (
-					(buttonTransformHoverScaleX?.Desktop || buttonTransformHoverScaleY?.Desktop) 
-					? `transform: ${buttonTransformHoverScaleX?.Desktop ? `scaleX(${buttonTransformHoverScaleX?.Desktop}) ` : ''}${buttonTransformHoverScaleY?.Desktop ? `scaleY(${buttonTransformHoverScaleY?.Desktop})` : ''};` 
-					: ''
-				)
-			}
+			)
+		}
 		}
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 			${buttonIconGapSize?.Desktop ? `gap: ${buttonIconGapSize?.Desktop}${buttonIconGapUnits?.Desktop};` : ''}
@@ -1845,7 +2431,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				background: ${buttonTextCustomGradientColorSwitcher && buttonTextCustomGradientColor ? buttonTextCustomGradientColor : buttonTextGradientColor};
 				${buttonTextCustomGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
 				${buttonTextGradientColor && '-webkit-background-clip: text; -webkit-text-fill-color: transparent;'}
-		` : `${buttonColor ? `color: ${buttonColor};` : ''}` }
+		` : `${buttonColor ? `color: ${buttonColor};` : ''}`}
 		}
 
 		.${blockId} .fb-advanced-button-wrapper .fb-advanced-button:hover .fb-advanced-button-text {
@@ -1874,7 +2460,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			${buttonIconHoverBackgroundType === 'gradient' ? `   	
                 ${buttonIconHoverCustomGradientSwitcher && buttonIconHoverCustomGradientInputValue ? `background: ${buttonIconHoverCustomGradientInputValue};` : `background: ${buttonIconHoverGradientColor};`}
             `: `
-                ${ buttonIconBgHoverColor ? `background: ${ buttonIconBgHoverColor};` : ''}
+                ${buttonIconBgHoverColor ? `background: ${buttonIconBgHoverColor};` : ''}
             `}
 			${buttonIconBorderHoverColor ? `border-color: ${buttonIconBorderHoverColor};` : ''}
 		}
@@ -1916,21 +2502,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${globalTabletBorderWidth && buttonGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
 				${globalTabletBorderRadiusWidth && buttonGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
 
-				${buttonTransformNormalProportions 
-						? (buttonTransformNormalScale?.Tablet 
-							? `transform: scale(${buttonTransformNormalScale?.Tablet});` 
-							: ''
-					) 
-					: (
-						(buttonTransformNormalScaleX?.Tablet || buttonTransformNormalScaleY?.Tablet) 
-						? `transform: ${buttonTransformNormalScaleX?.Tablet ? `scaleX(${buttonTransformNormalScaleX?.Tablet}) ` : ''}${buttonTransformNormalScaleY?.Tablet ? `scaleY(${buttonTransformNormalScaleY?.Tablet})` : ''};` 
-						: ''
-					)
-				}
+				${buttonTransformNormalProportions
+			? (buttonTransformNormalScale?.Tablet
+				? `transform: scale(${buttonTransformNormalScale?.Tablet});`
+				: ''
+			)
+			: (
+				(buttonTransformNormalScaleX?.Tablet || buttonTransformNormalScaleY?.Tablet)
+					? `transform: ${buttonTransformNormalScaleX?.Tablet ? `scaleX(${buttonTransformNormalScaleX?.Tablet}) ` : ''}${buttonTransformNormalScaleY?.Tablet ? `scaleY(${buttonTransformNormalScaleY?.Tablet})` : ''};`
+					: ''
+			)
+		}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 				${buttonIconGapSize?.Tablet ? `gap: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
-				
 				${buttonTabletPaddingStr && buttonTabPadding?.top ? `padding: ${buttonTabletPaddingStr};` : ''}
 				${buttonTabletMarginStr && buttonTabMargin?.top ? `margin: ${buttonTabletMarginStr};` : ''}
 				${buttonTabletBorderWidthStr && buttonTabBorderWidth?.top ? `border-width: ${buttonTabletBorderWidthStr};` : ''}
@@ -1943,23 +2528,21 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 			.${blockId} .fb-advanced-button-wrapper:hover {
 
-				${buttonTransformHoverProportions 
-					? (buttonTransformHoverScale?.Tablet 
-						? `transform: scale(${buttonTransformHoverScale?.Tablet});` 
-						: ''
-					) 
-					: (
-						(buttonTransformHoverScaleX?.Tablet || buttonTransformHoverScaleY?.Tablet) 
-						? `transform: ${buttonTransformHoverScaleX?.Tablet ? `scaleX(${buttonTransformHoverScaleX?.Tablet}) ` : ''}${buttonTransformHoverScaleY?.Tablet ? `scaleY(${buttonTransformHoverScaleY?.Tablet})` : ''};` 
-						: ''
-					)
-				}
+				${buttonTransformHoverProportions
+			? (buttonTransformHoverScale?.Tablet
+				? `transform: scale(${buttonTransformHoverScale?.Tablet});`
+				: ''
+			)
+			: (
+				(buttonTransformHoverScaleX?.Tablet || buttonTransformHoverScaleY?.Tablet)
+					? `transform: ${buttonTransformHoverScaleX?.Tablet ? `scaleX(${buttonTransformHoverScaleX?.Tablet}) ` : ''}${buttonTransformHoverScaleY?.Tablet ? `scaleY(${buttonTransformHoverScaleY?.Tablet})` : ''};`
+					: ''
+			)
+		}
 			}
 
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingTabletWidth && buttonIconPaddingTablet?.top ? `padding: ${buttonIconPaddingTabletWidth};` : ''}
-				${buttonIconPosition === 'left' && buttonIconGapSize?.Tablet ? `margin-right: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
-				${buttonIconPosition === 'right' && buttonIconGapSize?.Tablet ? `margin-left: ${buttonIconGapSize?.Tablet}${buttonIconGapUnits?.Tablet};` : ''}
 				${buttonIconBorderTabletWidth !== 'px px px px' ? `border-width: ${buttonIconBorderTabletWidth};` : ''}
 				${buttonIconBorderRadiusTabletWidth !== 'px px px px' ? `border-radius: ${buttonIconBorderRadiusTabletWidth};` : ''}
 			}
@@ -1997,31 +2580,31 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				${globalMobileBorderWidth && buttonGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
 				${globalMobileBorderRadiusWidth && buttonGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
 
-				${buttonTransformNormalProportions 
-						? (buttonTransformNormalScale?.Mobile 
-							? `transform: scale(${buttonTransformNormalScale?.Mobile});` 
-							: ''
-					) 
-					: (
-						(buttonTransformNormalScaleX?.Mobile || buttonTransformNormalScaleY?.Mobile) 
-						? `transform: ${buttonTransformNormalScaleX?.Mobile ? `scaleX(${buttonTransformNormalScaleX?.Mobile}) ` : ''}${buttonTransformNormalScaleY?.Mobile ? `scaleY(${buttonTransformNormalScaleY?.Mobile})` : ''};` 
-						: ''
-					)
-				}
+				${buttonTransformNormalProportions
+			? (buttonTransformNormalScale?.Mobile
+				? `transform: scale(${buttonTransformNormalScale?.Mobile});`
+				: ''
+			)
+			: (
+				(buttonTransformNormalScaleX?.Mobile || buttonTransformNormalScaleY?.Mobile)
+					? `transform: ${buttonTransformNormalScaleX?.Mobile ? `scaleX(${buttonTransformNormalScaleX?.Mobile}) ` : ''}${buttonTransformNormalScaleY?.Mobile ? `scaleY(${buttonTransformNormalScaleY?.Mobile})` : ''};`
+					: ''
+			)
+		}
 			}
 
 			.${blockId} .fb-advanced-button-wrapper:hover {
-				${buttonTransformHoverProportions 
-					? (buttonTransformHoverScale?.Mobile 
-						? `transform: scale(${buttonTransformHoverScale?.Mobile});` 
-						: ''
-					) 
-					: (
-						(buttonTransformHoverScaleX?.Mobile || buttonTransformHoverScaleY?.Mobile) 
-						? `transform: ${buttonTransformHoverScaleX?.Mobile ? `scaleX(${buttonTransformHoverScaleX?.Mobile}) ` : ''}${buttonTransformHoverScaleY?.Mobile ? `scaleY(${buttonTransformHoverScaleY?.Mobile})` : ''};` 
-						: ''
-					)
-				}
+				${buttonTransformHoverProportions
+			? (buttonTransformHoverScale?.Mobile
+				? `transform: scale(${buttonTransformHoverScale?.Mobile});`
+				: ''
+			)
+			: (
+				(buttonTransformHoverScaleX?.Mobile || buttonTransformHoverScaleY?.Mobile)
+					? `transform: ${buttonTransformHoverScaleX?.Mobile ? `scaleX(${buttonTransformHoverScaleX?.Mobile}) ` : ''}${buttonTransformHoverScaleY?.Mobile ? `scaleY(${buttonTransformHoverScaleY?.Mobile})` : ''};`
+					: ''
+			)
+		}
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button {
 				${buttonIconGapSize?.Mobile ? `gap: ${buttonIconGapSize?.Mobile}${buttonIconGapUnits?.Mobile};` : ''}
@@ -2036,8 +2619,6 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			}
 			.${blockId} .fb-advanced-button-wrapper .fb-advanced-button .fb-advanced-button-icon-wrapper {
 				${buttonIconPaddingMobileWidth && buttonIconPaddingMobile?.top ? `padding: ${buttonIconPaddingMobileWidth};` : ''}
-				${buttonIconPosition === 'left' && buttonIconGapSize?.Mobile ? `margin-right: ${buttonIconGapSize?.Mobile}${buttonIconGapUnits?.Mobile};` : ''}
-				${buttonIconPosition === 'right' && buttonIconGapSize?.Mobile ? `margin-left: ${buttonIconGapSize?.Mobile}${buttonIconGapUnits?.Mobile};` : ''}
 				${buttonIconBorderMobileWidth !== 'px px px px' ? `border-width: ${buttonIconBorderMobileWidth};` : ''}
 				${buttonIconBorderRadiusMobileWidth !== 'px px px px' ? `border-radius: ${buttonIconBorderRadiusMobileWidth};` : ''}
 			}
@@ -2070,8 +2651,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		globalDesktopBorderRadiusWidth,
 		buttonGlobalBorderColor,
 		buttonGlobalBoxShadowSwitcher,
-        buttonGlobalBoxShadowValues,
-        buttonGlobalBoxShadowCssValue,
+		buttonGlobalBoxShadowValues,
+		buttonGlobalBoxShadowCssValue,
 		buttonGlobalBoxShadowHoverValues,
 		buttonGlobalBoxShadowHoverCssValue,
 		buttonGlobalBorderHoverColor,
@@ -2195,7 +2776,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		buttonIconNormalCustomGradientSwitcher,
 		buttonIconNormalCustomGradientInputValue,
 		buttonIconHoverBackgroundType,
-		 buttonIconBgHoverColor,
+		buttonIconBgHoverColor,
 		buttonIconHoverGradientColor,
 		buttonIconHoverCustomGradientSwitcher,
 		buttonIconHoverCustomGradientInputValue,
@@ -2308,23 +2889,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 		dynamicTextTermsSeparator,
 		dynamicTextEnableLink,
 		dynamicTextLinkSource,
-		
+
 	]);
 
 
 	const customCss = getCustomCss(buttonCustomCSS, `.${blockId}`);
 
 	useEffect(() => {
-		setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
+		setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
 	}, [allBlockStyle, customCss]);
-
-
-	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	// Check if Pro is active
 	const getProActiveState = getProActive();
 	useEffect(() => {
-		if (!getProActiveState) { 
+		if (!getProActiveState) {
 			setAttributes({
 				dynamicTextEnabled: false,
 				dynamicTextEnableLink: false,
@@ -2333,16 +2911,16 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 	}, [getProActiveState]);
 
 	/**
-     * Toggle Controls for Dynamic Content
-     */
+	 * Toggle Controls for Dynamic Content
+	 */
 	const dynamicContentToggleControls = getProToggleControls({
-		hook: 'frontisblocks-advanced-button-dynamic-controls', 
+		hook: 'frontisblocks-advanced-button-dynamic-controls',
 		attributes,
 		setAttributes,
 		dynamicAttr: 'dynamicTextEnabled',
 		label: __('Dynamic Content', 'frontis-blocks'),
 		keyPrefix: 'advanced-button-dynamic-content',
-		isProActive : getProActiveState
+		isProActive: getProActiveState
 	});
 
 	/**
@@ -2355,11 +2933,20 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					title={__("Button", "frontis-blocks")}
 					initialOpen={true}
 				>
-  					<BaseControl label={__("Preset Style", "frontis-blocks")}>
-						<SelectControl
+					<BaseControl label={__("Preset Style", "frontis-blocks")}>
+						{/* <SelectControl
 							value={buttonPresetStyle}
 							options={ADVANCED_BUTTON_PRESETS}
 							onChange={(selected) => changeAdvancedButtonPreset(selected)}
+						/> */}
+						<FB_Presets
+							className="fb-advanced-button-presets"
+							label={__('Select Preset', 'frontis-blocks')}
+							presets={advancedButtonPresets}
+							value={buttonPresetStyle}
+							onChangeValue='buttonPresetStyle'
+							defaultPresetValue="preset-1"
+							setAttributes={setAttributes}
 						/>
 					</BaseControl>
 
@@ -2390,12 +2977,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					/>
 
 					{dynamicContentToggleControls.map((control, index) => (
-                        <div key={control.key || index}>{control.comp}</div>
-                    ))}
+						<div key={control.key || index}>{control.comp}</div>
+					))}
 
 					<DynamicDataSourceControl
-						enabled={dynamicTextEnabled} 
-						
+						enabled={dynamicTextEnabled}
+
 						source={dynamicTextSource}
 						setSource={(value) => setAttributes({ dynamicTextSource: value })}
 						postId={dynamicTextPostId}
@@ -2405,12 +2992,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						postLabel={dynamicTextPostLabel}
 						setPostLabel={(value) => setAttributes({ dynamicTextPostLabel: value })}
 
-						field={dynamicTextField} 
+						field={dynamicTextField}
 						setField={(value) => setAttributes({ dynamicTextField: value })}
 						featuredImageField={dynamicFeaturedImageField}
 						setFeaturedImageField={(value) => setAttributes({ dynamicFeaturedImageField: value })}
 
-						dateType={dynamicTextDateType} 
+						dateType={dynamicTextDateType}
 						setDateType={(value) => setAttributes({ dynamicTextDateType: value })}
 						dateFormat={dynamicTextDateFormat}
 						setDateFormat={(value) => setAttributes({ dynamicTextDateFormat: value })}
@@ -2422,9 +3009,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						commentsZeroText={dynamicTextCommentsZeroText}
 						setCommentsZeroText={(value) => setAttributes({ dynamicTextCommentsZeroText: value })}
 						commentsOneText={dynamicTextCommentsOneText}
-						setCommentsOneText={(value) =>setAttributes({ dynamicTextCommentsOneText: value })}
+						setCommentsOneText={(value) => setAttributes({ dynamicTextCommentsOneText: value })}
 						commentsManyText={dynamicTextCommentsManyText}
-						setCommentsManyText={(value) =>setAttributes({ dynamicTextCommentsManyText: value })}
+						setCommentsManyText={(value) => setAttributes({ dynamicTextCommentsManyText: value })}
 
 						termsTaxonomy={dynamicTextTermsTaxonomy}
 						setTermsTaxonomy={(value) => setAttributes({ dynamicTextTermsTaxonomy: value })}
@@ -2458,12 +3045,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							onChangeOpenInNewTab={(value) => setAttributes({ buttonTargetUrl: value })}
 						/>
 					)}
-					
+
 					<div className='fb-advanced-btn-icon-wrapper'>
 						<BaseControl
 							label={__("Icon", "frontis-blocks")}
-								id="fb-setting-text-alignment"
-								className="fb-setting-text-alignment"
+							id="fb-setting-text-alignment"
+							className="fb-setting-text-alignment"
 						>
 							<ButtonGroup
 								className="fb-setting-text-alignment-group-btn"
@@ -2479,11 +3066,11 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 								))}
 							</ButtonGroup>
 							{(buttonIconAlign === 'icon-text') && (
-								<FBIconPicker value={buttonIcon} setIconHandler={iconHandler} /> 
+								<FBIconPicker value={buttonIcon} setIconHandler={iconHandler} />
 							)}
 
 							{(buttonIconAlign === 'image') && (
-								<FB_ImageControl 
+								<FB_ImageControl
 									globalImageUrl={buttonIconImageUrl}
 									setglobalImageUrl={(value) => setAttributes({ buttonIconImageUrl: value })}
 									globalImageAlt={buttonIconImageAlt}
@@ -2533,9 +3120,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 						globalTypoType={buttonGlobalTypoType}
 						onChangeGlobalTypoType={(value) => {
-							setAttributes({ 
-								buttonGlobalTypoType: value, 
-								buttonGlobalTypoSwitcher: value === 'default' ? {...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+							setAttributes({
+								buttonGlobalTypoType: value,
+								buttonGlobalTypoSwitcher: value === 'default' ? { ...buttonGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
 							})
 						}}
 
@@ -2543,34 +3130,34 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						onChangeGlobalTypoOption={(value) => setAttributes({ buttonGlobalTypoOption: value })}
 
 						fontFamily={buttonFontFamily}
-						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontFamily: value && false} })}
+						onChangeFontFamily={(value) => setAttributes({ buttonFontFamily: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontFamily: value && false } })}
 
 						fontSize={buttonFontSize}
-						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontSize: value && false} })}
+						onChangeFontSize={(value) => setAttributes({ buttonFontSize: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontSize: value && false } })}
 
 						fontSizeUnits={buttonFontSizeUnits}
 						onChangeFontSizeUnit={(value) => setAttributes({ buttonFontSizeUnits: value })}
 
 						fontWeight={buttonFontWeight}
-						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontWeight: value && false} })}
+						onChangeFontWeight={(value) => setAttributes({ buttonFontWeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontWeight: value && false } })}
 
 						fontStyle={buttonFontStyle}
-						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, fontStyle: value && false} })}
+						onChangeFontStyle={(value) => setAttributes({ buttonFontStyle: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, fontStyle: value && false } })}
 
 						textTransform={buttonTextTransform}
-						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textTransform: value && false} })}
+						onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textTransform: value && false } })}
 
 						textDecoration={buttonTextDecoration}
-						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, textDecoration: value && false} })}
+						onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, textDecoration: value && false } })}
 
 						letterSpacing={buttonLetterSpacing}
-						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, letterSpacing: value && false} })}
+						onChangeLetterSpacing={(value) => setAttributes({ buttonLetterSpacing: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, letterSpacing: value && false } })}
 
 						letterSpacingUnits={buttonLetterSpacingUnits}
 						onChangeLetterSpacingUnit={(value) => setAttributes({ buttonLetterSpacingUnits: value })}
 
 						lineHeight={buttonLineHeight}
-						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: {...buttonGlobalTypoSwitcher, lineHeight: value && false} })}
+						onChangeLineHeight={(value) => setAttributes({ buttonLineHeight: value, buttonGlobalTypoSwitcher: { ...buttonGlobalTypoSwitcher, lineHeight: value && false } })}
 
 						lineHeightUnits={buttonLineHeightUnits}
 						onChangeLineHeightUnit={(value) => setAttributes({ buttonLineHeightUnits: value })}
@@ -2581,7 +3168,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 					<FB_BackgroundColorControl
 						label={__("Text Color", "frontis-blocks")}
-						bgColorSwitcher={buttonColorSwitcher}  
+						bgColorSwitcher={buttonColorSwitcher}
 						setBgColorSwitcher={(value) => setAttributes({ buttonColorSwitcher: value })}
 
 						normalLabel={__("Text Color Type", "frontis-blocks")}
@@ -2607,9 +3194,9 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonTextHoverCustomGradientColorSwitcher: value })}
 						hoverCustomGradientInputValue={buttonTextHoverCustomGradientColor}
 						setHoverCustomGradientInputValue={(value) => setAttributes({ buttonTextHoverCustomGradientColor: value === undefined ? null : value })}
-	
+
 						isBackgroundImage={false}
-					/>	
+					/>
 
 					{/* <FB_SwitcherControl
 						label={__("Color", "frontis-blocks")}
@@ -2636,10 +3223,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 					<FB_BackgroundColorControl
 						label={__("Background Color", "frontis-blocks")}
-						bgColorSwitcher={buttonBgColorSwitcher}  
+						bgColorSwitcher={buttonBgColorSwitcher}
 						setBgColorSwitcher={(value) => setAttributes({ buttonBgColorSwitcher: value })}
-						
-						normalBackgroundType={buttonNormalBackgroundType} 
+
+						normalBackgroundType={buttonNormalBackgroundType}
 						setNormalBackgroundType={(value) => setAttributes({ buttonNormalBackgroundType: value })}
 						normalClassicColor={buttonBgColor}
 						setNormalClassicColor={(value) => setAttributes({ buttonBgColor: value === undefined ? '' : value })}
@@ -2649,12 +3236,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={buttonNormalCustomGradientInputValue}
 						setNormalCustomGradientInputValue={(value) => setAttributes({ buttonNormalCustomGradientInputValue: value })}
-						
-						hoverBackgroundType={buttonHoverBackgroundType} 
+
+						hoverBackgroundType={buttonHoverBackgroundType}
 						setHoverBackgroundType={(value) => setAttributes({ buttonHoverBackgroundType: value })}
 						hoverClassicColor={buttonBgHoverColor}
 						setHoverClassicColor={(value) => setAttributes({ buttonBgHoverColor: value === undefined ? '' : value })}
-						hoverGradientColor={buttonHoverGradientColor} 
+						hoverGradientColor={buttonHoverGradientColor}
 						setHoverGradientColor={(value) => setAttributes({ buttonHoverGradientColor: value === undefined ? null : value })}
 						hoverCustomGradientSwitcher={buttonHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonHoverCustomGradientSwitcher: value })}
@@ -2699,87 +3286,87 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 				title={__("Border and Shadow", "frontis-blocks")}
 				initialOpen={false}
 				className="fb-setting-border-setting-wrapper"
-				>
-					<SelectControl
-						label={__("Border Style", "frontis-blocks")}
-						value={buttonBorder}
-						options={BORDER_STYLES}
-						onChange={(value) => setAttributes({ buttonBorder: value })}
+			>
+				<SelectControl
+					label={__("Border Style", "frontis-blocks")}
+					value={buttonBorder}
+					options={BORDER_STYLES}
+					onChange={(value) => setAttributes({ buttonBorder: value })}
+				/>
+
+
+				<FB_SwitcherControl
+					label={__("Border Color", "frontis-blocks")}
+					globalSwitcher={buttonBorderColorSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+				/>
+
+				{buttonBorderColorSwitcher === 'normal' && (
+					<FB_ColorControl
+						label={__("Normal Color", "frontis-blocks")}
+						globalColor={buttonBorderColor}
+						setGlobalColor={(value) => setAttributes({ buttonBorderColor: value === undefined ? '' : value })}
 					/>
+				)}
 
-
-					<FB_SwitcherControl
-						label={__("Border Color", "frontis-blocks")}
-						globalSwitcher={buttonBorderColorSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ buttonBorderColorSwitcher: value })}
+				{buttonBorderColorSwitcher === 'hover' && (
+					<FB_ColorControl
+						label={__("Hover Color", "frontis-blocks")}
+						globalColor={buttonBorderHoverColor}
+						setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value === undefined ? '' : value })}
 					/>
+				)}
 
-					{buttonBorderColorSwitcher === 'normal' && (
-						<FB_ColorControl
-							label={__("Normal Color", "frontis-blocks")}
-							globalColor={buttonBorderColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderColor: value === undefined ? '' : value })}
-						/>
-					)}
+				<FB_Spacing
+					label={__("Border", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleBorderUnitsChange}
+					spacingUnits={buttonBorderUnits}
+					spacingDesktop={buttonDesktopBorderWidth}
+					spacingTablet={buttonTabBorderWidth}
+					spacingMobile={buttonMobileBorderWidth}
+					handleSpacingUnitHandler={handleBorderWidthChange}
+					spacingCombineBtn={buttonBorderLink}
+					spacingCombineBtnHandler={handleBorderLinkToggle}
+					setAttributes={setAttributes}
+				/>
+				<FB_Spacing
+					label={__("Border Radius", "frontis-blocks")}
+					deviceType={deviceType}
+					spacingUnitsHandler={handleBorderRadiusUnitsChange}
+					spacingUnits={buttonBorderRadiusUnits}
+					spacingDesktop={buttonDesktopBorderRadiusWidth}
+					spacingTablet={buttonTabBorderRadiusWidth}
+					spacingMobile={buttonMobileBorderRadiusWidth}
+					handleSpacingUnitHandler={handleBorderRadiusChange}
+					spacingCombineBtn={buttonBorderRadiusLink}
+					spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
+					setAttributes={setAttributes}
+				/>
 
-					{buttonBorderColorSwitcher === 'hover' && (
-						<FB_ColorControl
-							label={__("Hover Color", "frontis-blocks")}
-							globalColor={buttonBorderHoverColor}
-							setGlobalColor={(value) => setAttributes({ buttonBorderHoverColor: value === undefined ? '' : value })}
-						/>
-					)}
+				<FB_SwitcherControl
+					label={__("Box Shadow", "frontis-blocks")}
+					globalSwitcher={buttonBoxShadowSwitcher}
+					setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
+				/>
 
-					<FB_Spacing
-						label={__("Border", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleBorderUnitsChange}
-						spacingUnits={buttonBorderUnits}
-						spacingDesktop={buttonDesktopBorderWidth}
-						spacingTablet={buttonTabBorderWidth}
-						spacingMobile={buttonMobileBorderWidth}
-						handleSpacingUnitHandler={handleBorderWidthChange}
-						spacingCombineBtn={buttonBorderLink}
-						spacingCombineBtnHandler={handleBorderLinkToggle}
-						setAttributes={setAttributes}
+				{buttonBoxShadowSwitcher === 'normal' && (
+					<FB_BoxShadowControl
+						label={__("Normal Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
+						initialShadowValue={buttonBoxShadowValues}
+						onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
 					/>
-					<FB_Spacing
-						label={__("Border Radius", "frontis-blocks")}
-						deviceType={deviceType}
-						spacingUnitsHandler={handleBorderRadiusUnitsChange}
-						spacingUnits={buttonBorderRadiusUnits}
-						spacingDesktop={buttonDesktopBorderRadiusWidth}
-						spacingTablet={buttonTabBorderRadiusWidth}
-						spacingMobile={buttonMobileBorderRadiusWidth}
-						handleSpacingUnitHandler={handleBorderRadiusChange}
-						spacingCombineBtn={buttonBorderRadiusLink}
-						spacingCombineBtnHandler={handleBorderRadiusLinkToggle}
-						setAttributes={setAttributes}
+				)}
+
+				{buttonBoxShadowSwitcher === 'hover' && (
+					<FB_BoxShadowControl
+						label={__("Hover Shadow", "frontis-blocks")}
+						onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
+						initialShadowValue={buttonBoxShadowHoverValues}
+						onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
 					/>
-
-					<FB_SwitcherControl
-						label={__("Box Shadow", "frontis-blocks")}
-						globalSwitcher={buttonBoxShadowSwitcher}
-						setGlobalSwitcher={(value) => setAttributes({ buttonBoxShadowSwitcher: value })}
-					/>
-
-					{buttonBoxShadowSwitcher === 'normal' && (
-						<FB_BoxShadowControl
-							label={__("Normal Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowValues: value })}
-							initialShadowValue={buttonBoxShadowValues}
-							onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowCssValue: value })}
-						/>
-					)}
-
-					{buttonBoxShadowSwitcher === 'hover' && (
-						<FB_BoxShadowControl
-							label={__("Hover Shadow", "frontis-blocks")}
-							onBoxShadowChange={(value) => setAttributes({ buttonBoxShadowHoverValues: value })}
-							initialShadowValue={buttonBoxShadowHoverValues}
-							onBoxShadowStyleChange={(value) => setAttributes({ buttonBoxShadowHoverCssValue: value })}
-						/>
-					)}
+				)}
 			</PanelBody>
 
 			{(buttonIconAlign === 'icon-text') && (
@@ -2832,10 +3419,10 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 					<FB_BackgroundColorControl
 						label={__("Background Color", "frontis-blocks")}
-						bgColorSwitcher={buttonIconBgColorSwitcher}  
+						bgColorSwitcher={buttonIconBgColorSwitcher}
 						setBgColorSwitcher={(value) => setAttributes({ buttonIconBgColorSwitcher: value })}
-						
-						normalBackgroundType={buttonIconNormalBackgroundType} 
+
+						normalBackgroundType={buttonIconNormalBackgroundType}
 						setNormalBackgroundType={(value) => setAttributes({ buttonIconNormalBackgroundType: value })}
 						normalClassicColor={buttonIconBgColor}
 						setNormalClassicColor={(value) => setAttributes({ buttonIconBgColor: value === undefined ? '' : value })}
@@ -2845,12 +3432,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonIconNormalCustomGradientSwitcher: value })}
 						normalCustomGradientInputValue={buttonIconNormalCustomGradientInputValue}
 						setNormalCustomGradientInputValue={(value) => setAttributes({ buttonIconNormalCustomGradientInputValue: value })}
-						
-						hoverBackgroundType={buttonIconHoverBackgroundType} 
+
+						hoverBackgroundType={buttonIconHoverBackgroundType}
 						setHoverBackgroundType={(value) => setAttributes({ buttonIconHoverBackgroundType: value })}
-						hoverClassicColor={ buttonIconBgHoverColor}
-						setHoverClassicColor={(value) => setAttributes({  buttonIconBgHoverColor: value === undefined ? '' : value })}
-						hoverGradientColor={buttonIconHoverGradientColor} 
+						hoverClassicColor={buttonIconBgHoverColor}
+						setHoverClassicColor={(value) => setAttributes({ buttonIconBgHoverColor: value === undefined ? '' : value })}
+						hoverGradientColor={buttonIconHoverGradientColor}
 						setHoverGradientColor={(value) => setAttributes({ buttonIconHoverGradientColor: value === undefined ? null : value })}
 						hoverCustomGradientSwitcher={buttonIconHoverCustomGradientSwitcher}
 						setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonIconHoverCustomGradientSwitcher: value })}
@@ -2890,7 +3477,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						/>
 					)}
 
-					<FB_Spacing 
+					<FB_Spacing
 						label={__("Border", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={handlebuttonIconBorderUnitsHandler}
@@ -2903,7 +3490,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						spacingCombineBtnHandler={handlebuttonIconBorderCombineBtn}
 						setAttributes={setAttributes}
 					/>
-					<FB_Spacing 
+					<FB_Spacing
 						label={__("Border Radius", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={handlebuttonIconBorderRadiusUnitsHandler}
@@ -2917,7 +3504,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setAttributes={setAttributes}
 					/>
 
-					<FB_Spacing 
+					<FB_Spacing
 						label={__("Padding", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={handlebuttonIconPaddingUnitsHandler}
@@ -2930,7 +3517,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						spacingCombineBtnHandler={handlebuttonIconPaddingCombineBtn}
 						setAttributes={setAttributes}
 					/>
-					<FB_Spacing 
+					<FB_Spacing
 						label={__("Margin", "frontis-blocks")}
 						deviceType={deviceType}
 						spacingUnitsHandler={handlebuttonIconMarginUnitsHandler}
@@ -2964,7 +3551,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					/>
 
 					{buttonIconRotateSwitcher === 'normal' && (
-						<FB_Range 
+						<FB_Range
 							min={-360}
 							max={360}
 							label={__("Icon Rotation", "frontis-blocks")}
@@ -2996,7 +3583,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 				</PanelBody>
 			)}
-			{(buttonIconAlign === 'image') &&(
+			{(buttonIconAlign === 'image') && (
 				<PanelBody
 					title={__("Image Styles", "frontis-blocks")}
 					initialOpen={false}
@@ -3034,7 +3621,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						rangeStep={1}
 						resetFallbackValue={20}
 					/>
-					
+
 					<FB_Range
 						min={0}
 						max={100}
@@ -3056,8 +3643,8 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						setGlobalSwitcher={(value) => setAttributes({ buttonImageRotateSwitcher: value })}
 					/>
 
-					{buttonImageRotateSwitcher === 'normal' && ( 
-						<FB_Range 
+					{buttonImageRotateSwitcher === 'normal' && (
+						<FB_Range
 							min={-360}
 							max={360}
 							label={__("Image Rotation", "frontis-blocks")}
@@ -3090,7 +3677,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 			)}
 		</>
 	);
-		
+
 	/**
 	 * Inspector Advanced Controls
 	 */
@@ -3101,7 +3688,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					<PanelBody
 						title={__("Layout", "frontis-blocks")}
 						initialOpen={true}
-						className='fb-setting-layout-header' 
+						className='fb-setting-layout-header'
 					>
 						<FB_Range
 							min={0}
@@ -3128,7 +3715,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							deviceType={deviceType}
 							positionType={advancedBtnPositionType}
 							setPositionType={(value) => setAttributes({ advancedBtnPositionType: value })}
-																			
+
 							HZOrientationType={advancedBtnHZOrientationType}
 							setHZOrientationType={(value) =>
 								setAttributes({ advancedBtnHZOrientationType: value })
@@ -3137,7 +3724,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							setVROrientationType={(value) =>
 								setAttributes({ advancedBtnVROrientationType: value })
 							}
-																				
+
 							HZLeftOffset={advancedBtnHZLeftOffset}
 							setHZLeftOffset={(value) => setAttributes({ advancedBtnHZLeftOffset: value })}
 							HZLeftOffsetUnits={advancedBtnHZLeftOffsetUnits}
@@ -3146,7 +3733,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							setHZRightOffset={(value) => setAttributes({ advancedBtnHZRightOffset: value })}
 							HZRightOffsetUnits={advancedBtnHZRightOffsetUnits}
 							setHZRightOffsetUnits={(value) => setAttributes({ advancedBtnHZRightOffsetUnits: value })}
-																			
+
 							VRTopOffset={advancedBtnVRTopOffset}
 							setVRTopOffset={(value) => setAttributes({ advancedBtnVRTopOffset: value })}
 							VRTopOffsetUnits={advancedBtnVRTopOffsetUnits}
@@ -3175,7 +3762,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 					</PanelBody>
 
 					<PanelBody title={__("Padding and Margin", "frontis-blocks")} initialOpen={false}>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Padding", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalPaddingUnitsHandler}
@@ -3188,7 +3775,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							spacingCombineBtnHandler={handleGlobalPaddingCombineBtn}
 							setAttributes={setAttributes}
 						/>
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Margin", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalMarginUnitsHandler}
@@ -3203,49 +3790,49 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						/>
 					</PanelBody>
 
-                    <PanelBody title="Background Color" initialOpen={false} >
+					<PanelBody title="Background Color" initialOpen={false} >
 
-                        <FB_BackgroundColorControl
-                            label={__("Background Color", "frontis-blocks")}
-                            bgColorSwitcher={buttonGlobalBgColorSwitcher}  
-                            setBgColorSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
-                            
-                            normalBackgroundType={buttonGlobalNormalBackgroundType} 
-                            setNormalBackgroundType={(value) => setAttributes({ buttonGlobalNormalBackgroundType: value })}
-                            normalClassicColor={buttonGlobalNormalClassicColor}
-                            setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value === undefined ? '' : value })}
-                            normalGradientColor={buttonGlobalNormalGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value === undefined ? null : value })}
-                            normalCustomGradientSwitcher={buttonGlobalNormalCustomGradientSwitcher}
-                            setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalNormalCustomGradientSwitcher: value })}
-                            normalCustomGradientInputValue={buttonGlobalNormalCustomGradientInputValue}
-                            setNormalCustomGradientInputValue={(value) => setAttributes({ buttonGlobalNormalCustomGradientInputValue: value })}
-                            
-                            hoverBackgroundType={buttonGlobalHoverBackgroundType} 
-                            setHoverBackgroundType={(value) => setAttributes({ buttonGlobalHoverBackgroundType: value })}
-                            hoverClassicColor={buttonGlobalHoverClassicColor}
-                            setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value === undefined ? '' : value })}
-                            hoverGradientColor={buttonGlobalHoverGradientColor} 
-                            setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value === undefined ? null : value })}
-                            hoverCustomGradientSwitcher={buttonGlobalHoverCustomGradientSwitcher}
-                            setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalHoverCustomGradientSwitcher: value })}
-                            hoverCustomGradientInputValue={buttonGlobalHoverCustomGradientInputValue}
-                            setHoverCustomGradientInputValue={(value) => setAttributes({ buttonGlobalHoverCustomGradientInputValue: value })}
+						<FB_BackgroundColorControl
+							label={__("Background Color", "frontis-blocks")}
+							bgColorSwitcher={buttonGlobalBgColorSwitcher}
+							setBgColorSwitcher={(value) => setAttributes({ buttonGlobalBgColorSwitcher: value })}
 
-                            isBackgroundImage={false}
+							normalBackgroundType={buttonGlobalNormalBackgroundType}
+							setNormalBackgroundType={(value) => setAttributes({ buttonGlobalNormalBackgroundType: value })}
+							normalClassicColor={buttonGlobalNormalClassicColor}
+							setNormalClassicColor={(value) => setAttributes({ buttonGlobalNormalClassicColor: value === undefined ? '' : value })}
+							normalGradientColor={buttonGlobalNormalGradientColor}
+							setNormalGradientColor={(value) => setAttributes({ buttonGlobalNormalGradientColor: value === undefined ? null : value })}
+							normalCustomGradientSwitcher={buttonGlobalNormalCustomGradientSwitcher}
+							setNormalCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalNormalCustomGradientSwitcher: value })}
+							normalCustomGradientInputValue={buttonGlobalNormalCustomGradientInputValue}
+							setNormalCustomGradientInputValue={(value) => setAttributes({ buttonGlobalNormalCustomGradientInputValue: value })}
 
-                        />
-                    </PanelBody>
+							hoverBackgroundType={buttonGlobalHoverBackgroundType}
+							setHoverBackgroundType={(value) => setAttributes({ buttonGlobalHoverBackgroundType: value })}
+							hoverClassicColor={buttonGlobalHoverClassicColor}
+							setHoverClassicColor={(value) => setAttributes({ buttonGlobalHoverClassicColor: value === undefined ? '' : value })}
+							hoverGradientColor={buttonGlobalHoverGradientColor}
+							setHoverGradientColor={(value) => setAttributes({ buttonGlobalHoverGradientColor: value === undefined ? null : value })}
+							hoverCustomGradientSwitcher={buttonGlobalHoverCustomGradientSwitcher}
+							setHoverCustomGradientSwitcher={(value) => setAttributes({ buttonGlobalHoverCustomGradientSwitcher: value })}
+							hoverCustomGradientInputValue={buttonGlobalHoverCustomGradientInputValue}
+							setHoverCustomGradientInputValue={(value) => setAttributes({ buttonGlobalHoverCustomGradientInputValue: value })}
+
+							isBackgroundImage={false}
+
+						/>
+					</PanelBody>
 					<PanelBody
 						title={__("Border and Shadow", "frontis-blocks")}
 						initialOpen={false}
 					>
 
 						<SelectControl
-								label={__("Border Style", "frontis-blocks")}
-								value={buttonGlobalBorder}
-								options={BORDER_STYLES}
-								onChange={(value) => setAttributes({ buttonGlobalBorder: value })}
+							label={__("Border Style", "frontis-blocks")}
+							value={buttonGlobalBorder}
+							options={BORDER_STYLES}
+							onChange={(value) => setAttributes({ buttonGlobalBorder: value })}
 						/>
 
 						<FB_SwitcherControl
@@ -3270,7 +3857,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							/>
 						)}
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderUnitsHandler}
@@ -3284,7 +3871,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 							setAttributes={setAttributes}
 						/>
 
-						<FB_Spacing 
+						<FB_Spacing
 							label={__("Border Radius", "frontis-blocks")}
 							deviceType={deviceType}
 							spacingUnitsHandler={handleGlobalBorderRadiusUnitsHandler}
@@ -3358,7 +3945,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 								setScale={(value) => setAttributes({ buttonTransformNormalScale: value })}
 								scaleX={buttonTransformNormalScaleX}
 								setScaleX={(value) => setAttributes({ buttonTransformNormalScaleX: value })}
-								scaleY={buttonTransformNormalScaleY}	
+								scaleY={buttonTransformNormalScaleY}
 								setScaleY={(value) => setAttributes({ buttonTransformNormalScaleY: value })}
 								deviceType={deviceType}
 								setAttributes={setAttributes}
@@ -3373,7 +3960,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 								setScale={(value) => setAttributes({ buttonTransformHoverScale: value })}
 								scaleX={buttonTransformHoverScaleX}
 								setScaleX={(value) => setAttributes({ buttonTransformHoverScaleX: value })}
-								scaleY={buttonTransformHoverScaleY}	
+								scaleY={buttonTransformHoverScaleY}
 								setScaleY={(value) => setAttributes({ buttonTransformHoverScaleY: value })}
 								deviceType={deviceType}
 								setAttributes={setAttributes}
@@ -3384,7 +3971,7 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 						title={__("Custom CSS", "frontis-blocks")}
 						initialOpen={false}
 					>
-						<FB_CustomCSSEditor  
+						<FB_CustomCSSEditor
 							value={buttonCustomCSS}
 							onChangeValue={(value) => setAttributes({ buttonCustomCSS: value })}
 						/>
@@ -3396,15 +3983,12 @@ export default function Inspector ({ attributes, setAttributes,  clientId}) {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
-
 			<FB_InspectorControls
 				generalControls={generalControls}
 				styleControls={styleControls}
 				advancedControls={advancedControls}
 			/>
-        </>
-    );
+		</>
+	);
 }
+export default memo(Inspector);

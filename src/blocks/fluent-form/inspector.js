@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -36,7 +36,6 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -47,7 +46,7 @@ import FB_InspectorControls from '@Components/InspectorControls';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         // deviceType,
@@ -425,14 +424,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
 	const deviceType= useDeviceType();
-    
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-fluent-form-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     /** Start  Label Margin */
     const handleLabelMarginUnitChange = ( event, position ) => {
@@ -2419,28 +2410,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     const BorderRadiusMobileWidth = `${fluentFormGlobalBorderRadiusMobile?.top}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.right}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.bottom}${fluentFormGlobalBorderRadiusUnits?.Mobile} ${fluentFormGlobalBorderRadiusMobile?.left}${fluentFormGlobalBorderRadiusUnits?.Mobile}`;
     /** End Border Radius */
 
-
-    /* Start Load Google Fonts */
-    useEffect(() => {
-        loadGoogleFont(fluentFormLabelFontFamily);
-        loadGoogleFont(fluentFormInputFontFamily);
-        loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
-        loadGoogleFont(fluentFormSectionBreakDescFontFamily);
-        loadGoogleFont(fluentFormHtmlFontFamily);
-        loadGoogleFont(fluentFormSubmitFontFamily);
-        loadGoogleFont(fluentFormSuccessFontFamily);
-        loadGoogleFont(fluentFormErrorFontFamily);
-    }, [fluentFormLabelFontFamily,
-         fluentFormInputFontFamily, 
-         fluentFormSectionBreakTitleFontFamily, 
-         fluentFormSectionBreakDescFontFamily,
-         fluentFormHtmlFontFamily, 
-         fluentFormSubmitFontFamily, 
-         fluentFormSuccessFontFamily, 
-         fluentFormErrorFontFamily] 
-    );
-    /* End Load Google Fonts */
-
     const allBlockStyle = useMemo(() => `
 
         .${blockID}.fb-fluent-form-wrapper {
@@ -3710,8 +3679,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
     }, [allBlockStyle, customCss]);
 
-
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -5222,9 +5189,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <style>
-                {editorStyle}
-            </style>
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
@@ -5233,3 +5197,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

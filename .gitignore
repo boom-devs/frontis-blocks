@@ -23,3 +23,4 @@ blocks/**/index.js.LICENSE.txt
 *.log
 
 .prettierrc
+.agent/

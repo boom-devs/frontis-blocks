@@ -1,19 +1,23 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	 RichText,
+	RichText,
 } from '@wordpress/block-editor';
 
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import { useRef, useEffect } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from './inspector';
-import { useRef } from '@wordpress/element';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
 	const {
 		blockID,
+		blockStyle,
 
 		// Photo
 		teamMemberImageUrl,
@@ -77,7 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicDescriptionLinkSource,
 		/** End Dynamic Description Text */
 
-	/** Start Dynamic Team Member Name Text */
+		/** Start Dynamic Team Member Name Text */
 		dynamicTeamMemberNameEnabled,
 		dynamicTeamMemberNameSource,
 		dynamicTeamMemberNamePostId,
@@ -125,13 +129,57 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicTeamMemberDesignationTermsSeparator,
 		dynamicTeamMemberDesignationEnableLink,
 		dynamicTeamMemberDesignationLinkSource,
+
+		teamMemberDesignationFontFamily, 
+		teamMemberNameFontFamily, 
+		teamMemberDescFontFamily,
+		teamMemberBadgeFontFamily,
 		/** End Dynamic Team Member Designation Text */
 
 	} = attributes;
 
+	// Set blockID if it doesn't exist
+	useEffect(() => {
+		if (clientId && typeof clientId === 'string') {
+			setAttributes({
+				blockID: "fb-team-member-" + clientId.slice(0, 8),
+			});
+		}
+	}, [clientId]);
+
+	/** Start Load Google Font */
+	useEffect(() => {
+	if (teamMemberDesignationFontFamily && !loadedFonts.has(teamMemberDesignationFontFamily)) {
+		loadGoogleFont(teamMemberDesignationFontFamily);
+		loadedFonts.add(teamMemberDesignationFontFamily);
+	}
+	}, [teamMemberDesignationFontFamily]);
+
+	useEffect(() => {
+	if (teamMemberNameFontFamily && !loadedFonts.has(teamMemberNameFontFamily)) {
+		loadGoogleFont(teamMemberNameFontFamily);
+		loadedFonts.add(teamMemberNameFontFamily);
+	}
+	}, [teamMemberNameFontFamily]);
+	
+	useEffect(() => {
+	if (teamMemberDescFontFamily && !loadedFonts.has(teamMemberDescFontFamily)) {
+		loadGoogleFont(teamMemberDescFontFamily);
+		loadedFonts.add(teamMemberDescFontFamily);
+	}
+	}, [teamMemberDescFontFamily]);
+
+	useEffect(() => {
+	if (teamMemberBadgeFontFamily && !loadedFonts.has(teamMemberBadgeFontFamily)) {
+		loadGoogleFont(teamMemberBadgeFontFamily);
+		loadedFonts.add(teamMemberBadgeFontFamily);
+	}
+	}, [teamMemberBadgeFontFamily]);
+	/** End Load Google Font */
+
 	const blockProps = useBlockProps({
-        className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
-    });
+		className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
+	});
 
 	/**
 	* Manages tab button settings and switches to block settings on click
@@ -174,7 +222,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	/**
 	 * Dynamic Text Value for Team Member Name
 	 */
-	const { dynamicDisplayValue: dynamicTeamMemberNameValue, dynamicDisplayLink: dynamicTeamMemberNameLink } = DynamicTextValue({ 
+	const { dynamicDisplayValue: dynamicTeamMemberNameValue, dynamicDisplayLink: dynamicTeamMemberNameLink } = DynamicTextValue({
 		textEnabled:            dynamicTeamMemberNameEnabled,
 		textSource:             dynamicTeamMemberNameSource,
 		textField:              dynamicTeamMemberNameField,
@@ -238,10 +286,9 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	return (
 		<>
 			<Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+				attributes={attributes}
+				setAttributes={setAttributes}
+			/>
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID} ref={panelRef}>
@@ -252,7 +299,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									<RichText
 										tagName={'span'}
 										value={teamMemberBadge}
-										onChange={(value) => setAttributes({teamMemberBadge: value})}
+										onChange={(value) => setAttributes({ teamMemberBadge: value })}
 										className="fb-team-member-badge"
 									/>
 								</div>
@@ -265,7 +312,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 										<RichText
 											tagName={'span'}
 											value={teamMemberBadge}
-											onChange={(value) => setAttributes({teamMemberBadge: value})}
+											onChange={(value) => setAttributes({ teamMemberBadge: value })}
 											className="fb-team-member-badge"
 										/>
 									</div>
@@ -274,13 +321,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 							<div className={`fb-team-member-image`}>
 								{teamMemberImageOverlaySwitcher === true && <div className={`fb-team-member-image-overlay`}></div>}
 								{teamMemberImageUrl && (
-									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true"/>
+									<img src={teamMemberImageUrl} alt={teamMemberImageAlt} aria-hidden="true" />
 								)}
-								
-								{teamMemberSocialProfileSwitcher === true && 
+
+								{teamMemberSocialProfileSwitcher === true &&
 									<>
 										{teamMemberSocialType === 'image' && <div className="fb-team-member-social-profile-wrapper">
-											{socialIconBtnSwitcher === true && 
+											{socialIconBtnSwitcher === true &&
 												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
@@ -291,7 +338,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
-											</div> 
+											</div>
 										</div>}
 									</>
 								}
@@ -318,23 +365,23 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 									className="fb-team-member-designation"
 								/>
 
-								{ teamMemberDescSwitcher === true && <RichText
+								{teamMemberDescSwitcher === true && <RichText
 									tagName={'p'}
 									value={dynamicDescriptionEnabled ? dynamicDescriptionValue : teamMemberDesc}
 									onChange={(value) => {
 										if (!dynamicDescriptionEnabled) setAttributes({ teamMemberDesc: value });
 									}}
 									className="fb-team-member-desc"
-								/> }
+								/>}
 
 							</div>
-							{teamMemberSocialProfileSwitcher === true && 
+							{teamMemberSocialProfileSwitcher === true &&
 								<>
 									{teamMemberSocialType === 'content' && <>
-										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'top' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr /></div>}
 
 										<div className="fb-team-member-social-profile-wrapper">
-											{socialIconBtnSwitcher === true && 
+											{socialIconBtnSwitcher === true &&
 												<button className="fb-team-member-social-icon-wrapper-btn" aria-label={__("Social Icon", "frontis-blocks")}>
 													{socialIconBtnIcon ? renderSVG(socialIconBtnIcon) : ''}
 												</button>
@@ -345,10 +392,10 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														{item.teamMemberSocialIcon ? renderSVG(item.teamMemberSocialIcon) : ''}
 													</a>
 												))}
-											</div> 
+											</div>
 										</div>
 
-										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') &&(teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr/></div>}
+										{(teamMemberSocialPosition === 'top' || teamMemberSocialPosition === 'bottom') && (teamMemberSocialProfileSeparatorPosition === 'bottom' && teamMemberSocialProfileSeparator === true) && <div className="fb-team-member-social-profile-separator"><hr /></div>}
 									</>}
 								</>
 							}
@@ -356,6 +403,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

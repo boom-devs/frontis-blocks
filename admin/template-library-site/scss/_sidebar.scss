@@ -1,21 +1,47 @@
+#frontis-dl {
 .fb-template-library-store-sidebar-wrapper {
     display: flex;
+    gap: 24px;
 
     .fb-template-library-store-sidebar {
-        padding: 32px 0 0 0;
-        background: #FFFFFF;
-        border-right: 1px solid #E1E3E8;
-        height: 100vh;
-        max-width: 240px;
+        padding: 0;
+        background: $white-color;
+        height: calc(100vh - 87px);
+        max-width: 321px;
         width: 100%;
         flex-shrink: 0;
+        border-radius: 12px;
+        border: 1px solid $neutral-color-50;
+        overflow: hidden;
+
+        @media only screen and (max-width: 1200px) {
+            position: absolute;
+            z-index: 20;
+            top: 10px;
+            left: 10px;
+            transform: translateX(-110%);
+            transition: transform 0.3s ease-in-out;
+            overflow: visible;
+
+            &.collapsed {
+                transform: translateX(0);
+                transition: transform 0.3s ease-in-out;
+            }
+        }
+        @media only screen and (max-width: 767px) {
+            max-width: 260px;
+        }
 
         .fb-template-category-wrapper {
             display: flex;
             align-items: center;
             gap: 8px;
             justify-content: space-between;
-            padding: 0 16px 32px 16px;
+            padding: 24px;
+            height: 80px;
+            box-sizing: border-box;
+            background-color: $primary-color;
+            border-radius: 12px 12px 0 0;
 
             .fb-template-category-label {
                 h2 {
@@ -23,7 +49,7 @@
                     font-weight: 500;
                     font-size: $h5-font-size;
                     line-height: 28px;
-                    color: $neutral-color-950;
+                    color: $white-color;
                     margin: 0;
 
                 }
@@ -48,7 +74,7 @@
                     color: $primary-color-400;
 
                     &.active {
-                        background-color: $primary-color-400;
+                        background-color: $success-color-400;
                         color: $white-color;
                     }
                 }
@@ -70,20 +96,21 @@
             scrollbar-width: none;
             height: calc(100vh - 200px);
             position: relative;
+            padding: 0 24px;
 
             .fb-template-library-store-sidebar-tab {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 15px 16px;
+                padding: 18px 0;
                 border: none;
                 border-bottom: 1px solid $neutral-color-100;
-                border-left: 4px solid transparent;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all 0.3s ease-in-out;
 
                 span {
                     color: $neutral-color-600;
+                    font-family: $body-font-family;
                     font-size: $large-font-size;
                     font-style: normal;
                     font-weight: 500;
@@ -128,7 +155,7 @@
                     width: 24px;
                     height: 24px;
                     border-radius: 4px;
-                    background: $primary-color-50;
+                    background-color: $neutral-color-50;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -140,11 +167,6 @@
                 }
 
                 &.active {
-                    background: $primary-color-50;
-                    border-bottom: 1px solid transparent;
-                    border-left: 4px solid $primary-color;
-                    transition: all 0.3s ease;
-
                     span.fb-template-library-store-sidebar-tab-count {
                         background: $primary-color;
                         color: $white-color;
@@ -162,17 +184,40 @@
                         }
                     }
                 }
-
-                &:has(+ .active) {
-                    border-bottom: 1px solid transparent;
-                }
             }
 
             button {
-                border: none;
                 background: none;
                 width: 100%;
             }
         }
     }
+
+    .fb-import-sidebar-collapse {
+        display: none;
+        position: absolute;
+        top: 90px;
+        left: calc(100% - 15px);
+        cursor: pointer;
+        z-index: 10;
+        transition: left 0.1s ease;
+
+        @media only screen and (max-width: 1200px) {
+            display: flex;
+        }
+
+        &.collapsed {
+            svg {
+                transform: rotate(0deg);
+                transform-origin: center;
+                transition: transform 0.3s ease;
+            }
+        }
+
+        svg {
+            transform: rotate(180deg);
+            transition: transform 0.3s ease;
+        }
+    }
+}
 }

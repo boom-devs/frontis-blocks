@@ -5,12 +5,12 @@ import {
 } from "@wordpress/block-editor";
 import { useEffect } from "@wordpress/element";
 import { useSelect, useDispatch } from "@wordpress/data";
-
-import Inspector from "./inspector";
 import { select, dispatch, subscribe } from "@wordpress/data";
 
 import { createHigherOrderComponent } from "@wordpress/compose";
 import { overlayText } from "@wordpress/icons";
+
+import Inspector from "./inspector";
 
 
 const CustomInspectorControls = createHigherOrderComponent((BlockEdit) => {
@@ -77,6 +77,7 @@ wp.hooks.addFilter(
 export default function Edit({ attributes, setAttributes, clientId }) {
     const {
         blockId,
+        blockStyle,
         navigationLayout,
         navigationHorizontalAlign,
         dropdownOpenOnClick,
@@ -94,6 +95,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationMobileSwitcher,
     } = attributes;
 
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockId: "fb-advanced-navigation-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
+
     const { updateBlockAttributes } = useDispatch("core/block-editor");
 
     const innerBlocks = useSelect(
@@ -105,7 +114,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         if (innerBlocks.length > 0) {
             innerBlocks.forEach((block) => {
                 updateBlockAttributes(block.clientId, {
-                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${navigationFlexWrapSwitcher ? "no-wrap" : ""}`, 
+                    className: `${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign} ${navigationFlexWrapSwitcher ? "no-wrap" : ""}`,
                     openSubmenusOnClick: dropdownOpenOnClick,
                     showSubmenuIcon: showDropdownIcon,
                     hasIcon: hamburgerMenuIconType === "icon" ? true : false,
@@ -126,16 +135,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
             <Inspector
                 attributes={attributes}
                 setAttributes={setAttributes}
-                clientId={clientId}
             />
             <div {...blockProps}>
                 <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                     <div
-                        className={`advanced-navigation-inner-wrapper ${navigationLayout} ${
-                            navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
-                        } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${
-                            hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
-                        }`}
+                        className={`advanced-navigation-inner-wrapper ${navigationLayout} ${navigationLayout === "is-horizontal" ? navigationHorizontalAlign : navigationVerticalAlign
+                            } ${showDropdownIcon ? "" : "remove-dropdown-icon"} ${hamburgerMenuIconType === "icon" ? "responsive-icon" : "responsive-text"
+                            }`}
                     >
                         <div className="advanced-navigation-contents">
                             <InnerBlocks
@@ -143,7 +149,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                 template={[
                                     [
                                         "core/navigation",
-                                        { className: `${navigationLayout} ${navigationHorizontalAlign}` }, 
+                                        { className: `${navigationLayout} ${navigationHorizontalAlign}` },
                                     ],
                                 ]}
                                 allowedBlocks={["core/navigation"]}
@@ -157,6 +163,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }
