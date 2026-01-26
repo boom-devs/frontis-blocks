@@ -255,7 +255,7 @@ const Edit = (props) => {
 
     // Add useEffect to update Swiper when settings change
     useEffect(() => {
-        if (swiperInstance) {
+        if (swiperInstance && swiperInstance.params) {
 
             // Update carousel settings
             if (sliderType === 'carousel') {

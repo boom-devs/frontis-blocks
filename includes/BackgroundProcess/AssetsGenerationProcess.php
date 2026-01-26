@@ -23,7 +23,7 @@ class AssetsGenerationProcess {
         $table_name = $wpdb->prefix . 'fb_job_schedule';
        
         // Get unprocessed data
-        $data_rows = $wpdb->get_results(
+        $data_rows = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
             $wpdb->prepare(
                 "SELECT * FROM $table_name WHERE job_status = %d AND (job_attempts < %d OR job_attempts IS NULL) 
                 ORDER BY job_created_at ASC LIMIT %d",
@@ -38,7 +38,7 @@ class AssetsGenerationProcess {
         foreach ($data_rows as $row) {
             try {
                 // Validate row exists
-                $row_exists = $wpdb->get_var($wpdb->prepare(
+                $row_exists = $wpdb->get_var($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
                     "SELECT job_id FROM $table_name WHERE job_id = %d", 
                     $row->job_id
                 ));
@@ -75,7 +75,7 @@ class AssetsGenerationProcess {
                     $current_attempts = (int) $current_attempts;
                     
                     // Update with proper error handling
-                    $checking_data_updated = $wpdb->update(
+                    $checking_data_updated = $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
                         $table_name,
                         array(
                             'job_status' => 1,
@@ -91,7 +91,7 @@ class AssetsGenerationProcess {
                 error_log("Exception in process_pending_data: " . $e->getMessage());
                 
                 $current_attempts = $row->job_attempts ?? 0;
-                $wpdb->update(
+                $wpdb->update( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
                     $table_name,
                     array(
                         'job_last_attempt' => current_time('mysql'),
@@ -111,7 +111,7 @@ class AssetsGenerationProcess {
             usleep(2000000); // 0.02 seconds delay per item
         }
         
-        $wpdb->query("DELETE FROM $table_name");
+        $wpdb->query("DELETE FROM $table_name"); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
         return true;
     }
     

@@ -2,8 +2,8 @@ import { __ } from '@wordpress/i18n';
 import {
     useBlockProps,
 } from '@wordpress/block-editor';
-import { useEffect, useState, useMemo, lazy, Suspense } from '@wordpress/element';
-const Inspector = lazy(() => import('./inspector'));
+import { useEffect, useState, useMemo } from '@wordpress/element';
+import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
@@ -97,13 +97,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <div {...blockProps}>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+                clientId={clientId}
+            />
 
             <div className={`social-share-child-container ${socialShareChildGlobalWraperClass}`} id={socialShareChildGlobalWraperID} style={{ textAlign: alignment }}>
                 {socialMediaType && (

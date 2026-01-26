@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 
 import {
     SelectControl,
@@ -42,7 +41,7 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
+
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -51,7 +50,6 @@ import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import getProToggleControls from '@Utils/getProToggleControls';
 import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
@@ -61,10 +59,8 @@ import FB_Presets from '@Components/presets';
 
 import './editor.scss';
 
-// Global set to track loaded fonts across all block instances
-const loadedFonts = new Set();
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
         // deviceType,
@@ -423,31 +419,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-testimonial-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
-
-
-    /** Start load font */
-    useEffect(() => {
-        [TestimonialTitleFontFamily, TestimonialDescFontFamily, TestimonialAuthorFontFamily, TestimonialDesignationFontFamily].forEach(font => {
-            if (font && !loadedFonts.has(font)) {
-                loadGoogleFont(font);
-                loadedFonts.add(font);
-            }
-        });
-    }, [TestimonialTitleFontFamily,
-        TestimonialDescFontFamily,
-        TestimonialAuthorFontFamily,
-        TestimonialDesignationFontFamily
-    ]);
-    /** End load font */
-
 
     const quoteIconHandler = (IconName) => {
         setAttributes({ TestimonialQuoteIcon: IconName })
@@ -4749,3 +4720,5 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+
+export default memo(Inspector);
