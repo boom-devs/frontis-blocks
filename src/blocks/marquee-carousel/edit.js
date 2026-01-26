@@ -165,13 +165,16 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				reverseDirection: reverseDirection,
 				pauseOnMouseEnter: pauseOnHover,
 				disableOnInteraction: false,
+				stopOnLastSlide: false,
 				waitForTransition: true,
 			},
 			loop: true,
 			slidesPerView: "auto",
 			allowTouchMove: false,
-			freeMode: true,
-			freeModeMomentum: false,
+			freeMode: {
+				enabled: true,
+				momentum: false,
+			},
 			navigation: arrowsId
 				? {
 					nextEl: `.${arrowsId} .fb-news-ticker-next`,
