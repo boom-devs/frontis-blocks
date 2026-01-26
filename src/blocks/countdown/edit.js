@@ -4,11 +4,11 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 
-import { useEffect, useState, useRef, lazy, Suspense } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
-const Inspector = lazy(() => import("./inspector"));
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -103,13 +103,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	return (
 		<>
 
-			<Suspense fallback={null}>
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-				/>
-			</Suspense>
+			<Inspector
+				attributes={attributes}
+				setAttributes={setAttributes}
+				clientId={clientId}
+			/>
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID} ref={panelRef}>

@@ -14,12 +14,16 @@ import {
 } from '@wordpress/components';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useRef, lazy, Suspense } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
-const Inspector = lazy(() => import('./inspector'));
+import Inspector from './inspector';
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
@@ -159,7 +163,37 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         dynamicAuthorDesignationLinkSource,
         /** End Dynamic Author Designation Text */
 
+        // Typography Fonts
+        TestimonialTitleFontFamily,
+        TestimonialDescFontFamily,
+        TestimonialAuthorFontFamily,
+        TestimonialDesignationFontFamily,
+
     } = attributes;
+
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string' && !blockID) {
+            setAttributes({
+                blockID: "fb-testimonial-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId, blockID]);
+
+
+    /** Start load font */
+    useEffect(() => {
+        [TestimonialTitleFontFamily, TestimonialDescFontFamily, TestimonialAuthorFontFamily, TestimonialDesignationFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [TestimonialTitleFontFamily,
+        TestimonialDescFontFamily,
+        TestimonialAuthorFontFamily,
+        TestimonialDesignationFontFamily
+    ]);
+    /** End load font */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -317,13 +351,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     return (
         <>
-            <Suspense fallback={null}>
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                    clientId={clientId}
-                />
-            </Suspense>
+
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
