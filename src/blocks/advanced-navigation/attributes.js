@@ -236,6 +236,54 @@ const attributes = {
 	},
 	/** End Navigation Background */
 
+	/** Start Navigation Background */
+	navigationItemActiveBgColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	navigationItemActiveNormalBackgroundType: { 
+		type: 'string',
+		default: 'classic',
+	},
+	navigationItemActiveNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	navigationItemActiveNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	navigationItemActiveNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	navigationItemActiveNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	navigationItemActiveHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	navigationItemActiveHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	navigationItemActiveHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	navigationItemActiveHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	navigationItemActiveHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Navigation Background */
+
 	/** Start Navigation Padding and Margin */
 	navigationPaddingUnits: {
 		type: 'object',
