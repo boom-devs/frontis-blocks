@@ -807,44 +807,41 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
 };
   
 
-  const handleGenerateAssets = async () => {
+  const handleGenerateAssets = () => {
     return new Promise((resolve, reject) => {
       let batch = 0;
-      
-      const processBatch = async () => {
-        try {
-          const formData = new FormData();
-          formData.append("action", "fb_generate_assets");
-          formData.append("security", nonce);
-          formData.append("batch", batch);
 
-          const response = await fetch(ajaxUrl, {
-            method: "POST",
-            body: formData,
-            credentials: "same-origin",
-          });
-
-          const result = await response.json();
-
-          if (result.success) {
-            if (result.data.completed) {
-              console.log("Asset generation completed");
-              resolve({ success: true, message: result.data.message });
+      const processNextBatch = () => {
+        window.jQuery.ajax({
+          url: ajaxUrl,
+          type: 'POST',
+          data: {
+            action: 'fb_generate_assets',
+            security: nonce,
+            batch: batch,
+          },
+          success: (response) => {
+            if (response.success) {
+              if (response.data.completed) {
+                console.log("Asset generation completed");
+                resolve({ success: true, message: response.data.message });
+              } else {
+                batch++;
+                processNextBatch();
+              }
             } else {
-              batch++;
-              processBatch();
+              console.error("Asset generation failed:", response.data?.message);
+              reject(new Error(response.data?.message || "Asset generation failed"));
             }
-          } else {
-            console.error("Asset generation failed:", result.data?.message);
-            reject(new Error(result.data?.message || "Asset generation failed"));
+          },
+          error: (xhr, status, error) => {
+            console.error("Error in asset generation:", status, error);
+            reject(new Error(`${status}: ${error}`));
           }
-        } catch (error) {
-          console.error("Error in asset generation:", error);
-          reject(error);
-        }
+        });
       };
 
-      processBatch();
+      processNextBatch();
     });
   };
   
@@ -882,12 +879,14 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       updateStepStatus("fetch_site", "success");
   
       const siteData = siteResp.data;
-      const pages = siteData.pages || [];
-      const posts = siteData.posts || templatesData.data.posts;
-      const templates = siteData.templates || templatesData.data.templates;
-      const headers = siteData.headers || templatesData.data.headers;
-      const footers = siteData.footers || templatesData.data.footers;
-      const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
+      const pages = siteData?.pages || [];
+      const posts = siteData?.posts || [];
+      const templates = siteData?.templates || [];
+      const headers = siteData?.headers || [];
+      const footers = siteData?.footers || [];
+      const uploads = siteData?.uploads_url || '';
+
+      console.log("Site data:", siteData);
   
       /** STEP 2: UPLOAD FILES **/
       setCurrentStep("upload_files");

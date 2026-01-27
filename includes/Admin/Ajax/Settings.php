@@ -150,22 +150,28 @@ class Settings extends AjaxBase
 			wp_send_json_error(['message' => 'Insufficient permissions'], 403);
 		}
 
-		// Get batch parameters
-		$batch = isset($_POST['batch']) ? intval($_POST['batch']) : 0;
-		$batch_size = 10; // Process 10 posts at a time
+		try {
+			// Get batch parameters
+			$batch = isset($_POST['batch']) ? intval($_POST['batch']) : 0;
+			$batch_size = 10; // Process 10 posts at a time
 
-		$response = $this->generate_assets_for_post($batch, $batch_size);
+			$response = $this->generate_assets_for_post($batch, $batch_size);
 
-		if ($response['success']) {
-			wp_send_json_success([
-				'message' => $response['message'],
-				'completed' => $response['completed'],
-				'total' => $response['total'],
-				'processed' => $response['processed']
-			]);
+			if ($response['success']) {
+				wp_send_json_success([
+					'message' => $response['message'],
+					'completed' => $response['completed'],
+					'total' => $response['total'],
+					'processed' => $response['processed']
+				]);
+			}
+
+			wp_send_json_error(['message' => $response['message']]);
+		} catch (\Exception $e) {
+			wp_send_json_error(['message' => 'PHP Error: ' . $e->getMessage()], 500);
+		} catch (\Error $e) {
+			wp_send_json_error(['message' => 'PHP Fatal Error: ' . $e->getMessage()], 500);
 		}
-
-		wp_send_json_error(['message' => $response['message']], 500);
 	}
 
 	/**
