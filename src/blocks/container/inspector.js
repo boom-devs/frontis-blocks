@@ -8,7 +8,7 @@ import {
 	Dropdown,
 	ToggleControl
 } from "@wordpress/components";
-import {useEffect, useState, useRef, useMemo } from "@wordpress/element";
+import {useEffect, useState, useRef, useMemo, memo } from "@wordpress/element";
 
 import {select, useSelect} from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
@@ -2153,4 +2153,4 @@ const Inspector = (props) => {
 	);
 };
 
-export default Inspector;
+export default memo(Inspector);
