@@ -230,40 +230,30 @@ const Inspector = (props) => {
 				Tablet: formatted_tablet_breakpoint || "1024",
 				Mobile: formatted_mobile_breakpoint || "767",
 			},
-		});
-	}, [formatted_desktop_breakpoint, formatted_tablet_breakpoint, formatted_mobile_breakpoint]);
-
-
-	useEffect(() => {
-		setAttributes({
 			globalColumnGap: {
 				Desktop: formatted_container_column_gap.Desktop || "",
 				Tablet: formatted_container_column_gap.Tablet || "",
 				Mobile: formatted_container_column_gap.Mobile || "",
 			},
-		});
-	}, [formatted_container_column_gap]);
-
-
-	useEffect(() => {
-		setAttributes({
 			globalRowGap: {
 				Desktop: formatted_container_row_gap.Desktop || "",
 				Tablet: formatted_container_row_gap.Tablet || "",
 				Mobile: formatted_container_row_gap.Mobile || "",
 			},
-		});
-	}, [formatted_container_row_gap]);
-
-	useEffect(() => {
-		setAttributes({
 			containerGlobalPadding: {
 				Desktop: formatted_container_padding.Desktop || "",
 				Tablet: formatted_container_padding.Tablet || "",
 				Mobile: formatted_container_padding.Mobile || "",
 			},
 		});
-	}, [formatted_container_padding]);
+	}, [
+		formatted_desktop_breakpoint, 
+		formatted_tablet_breakpoint, 
+		formatted_mobile_breakpoint,
+		formatted_container_column_gap,
+		formatted_container_row_gap,
+		formatted_container_padding
+	]);
 
 	const CONTAINER_TYPE = [
 		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
