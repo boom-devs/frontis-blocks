@@ -11,7 +11,7 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    videoGlobalZIndex : {
+    videoGlobalZIndex: {
         type: 'object',
         default: {
             Desktop: '',
@@ -29,7 +29,7 @@ const attributes = {
     },
     autoPlaySwitcher: {
         type: 'boolean',
-        default: false,
+        default: true,
     },
     muteSwitcher: {
         type: 'boolean',
@@ -91,9 +91,9 @@ const attributes = {
         default: false,
     },
     videoPlayIcon: {
-		type: 'string',
-		default: 'play',
-	},
+        type: 'string',
+        default: 'play',
+    },
 
     /** Start Video Play Icon */
     videoPlayIconSize: {
@@ -125,11 +125,11 @@ const attributes = {
         default: ''
     },
 
-    videoPlayIconBgColorSwitcher : {
+    videoPlayIconBgColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-    videoPlayIconBgColor : {
+    videoPlayIconBgColor: {
         type: 'string',
         default: ''
     },
@@ -141,7 +141,7 @@ const attributes = {
         type: 'string',
         default: 'solid',
     },
-    videoPlayIconBorderColorSwitcher : {
+    videoPlayIconBorderColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
@@ -161,7 +161,7 @@ const attributes = {
         }
     },
     videoPlayIconBorderDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '1',
             bottom: '1',
@@ -170,7 +170,7 @@ const attributes = {
         },
     },
     videoPlayIconBorderTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -179,7 +179,7 @@ const attributes = {
         },
     },
     videoPlayIconBorderMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -187,8 +187,8 @@ const attributes = {
             right: '',
         },
     },
-    videoPlayIconBorderLink : {
-        type : 'boolean',
+    videoPlayIconBorderLink: {
+        type: 'boolean',
         default: true
     },
     videoPlayIconBorderRadiusUnits: {
@@ -200,7 +200,7 @@ const attributes = {
         }
     },
     videoPlayIconBorderRadiusDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '50',
             bottom: '50',
@@ -209,16 +209,7 @@ const attributes = {
         },
     },
     videoPlayIconBorderRadiusTablet: {
-        type: 'object', 
-        default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    videoPlayIconBorderRadiusMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -226,8 +217,17 @@ const attributes = {
             right: '',
         },
     },
-    videoPlayIconBorderRadiusLink : {
-        type : 'boolean',
+    videoPlayIconBorderRadiusMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    videoPlayIconBorderRadiusLink: {
+        type: 'boolean',
         default: true
     },
     videoPlayIconPaddingUnits: {
@@ -239,7 +239,7 @@ const attributes = {
         }
     },
     videoPlayIconPaddingDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '20',
             bottom: '20',
@@ -248,16 +248,7 @@ const attributes = {
         },
     },
     videoPlayIconPaddingTablet: {
-        type: 'object', 
-        default: {
-            top: '', 
-            bottom: '',
-            left: '',
-            right: '',
-        },
-    },
-    videoPlayIconPaddingMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -265,8 +256,17 @@ const attributes = {
             right: '',
         },
     },
-    videoPlayIconPaddingLink : {
-        type : 'boolean',
+    videoPlayIconPaddingMobile: {
+        type: 'object',
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    videoPlayIconPaddingLink: {
+        type: 'boolean',
         default: true
     },
     /** End Video Play Icon */
@@ -296,7 +296,7 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
-    videoBorderColorSwitcher : {
+    videoBorderColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
@@ -307,15 +307,15 @@ const attributes = {
         type: 'string',
     },
     videoBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoBorderDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -324,7 +324,7 @@ const attributes = {
         },
     },
     videoBorderTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -333,7 +333,7 @@ const attributes = {
         },
     },
     videoBorderMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -341,20 +341,20 @@ const attributes = {
             right: '',
         },
     },
-    videoBorderLink : {
-        type : 'boolean',
+    videoBorderLink: {
+        type: 'boolean',
         default: true
     },
     videoBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoBorderRadiusDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -363,7 +363,7 @@ const attributes = {
         },
     },
     videoBorderRadiusTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -372,7 +372,7 @@ const attributes = {
         },
     },
     videoBorderRadiusMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -380,8 +380,8 @@ const attributes = {
             right: '',
         },
     },
-    videoBorderRadiusLink : {
-        type : 'boolean',
+    videoBorderRadiusLink: {
+        type: 'boolean',
         default: true
     },
     /** End Border */
@@ -389,15 +389,15 @@ const attributes = {
     /** Start Global Style */
 
     videoGlobalPaddingUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoGlobalPaddingDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -406,7 +406,7 @@ const attributes = {
         },
     },
     videoGlobalPaddingTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -415,7 +415,7 @@ const attributes = {
         },
     },
     videoGlobalPaddingMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -423,20 +423,20 @@ const attributes = {
             right: '',
         },
     },
-    videoGlobalPaddingLink : {
-        type : 'boolean',
+    videoGlobalPaddingLink: {
+        type: 'boolean',
         default: true
     },
     videoGlobalMarginUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoGlobalMarginDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -445,7 +445,7 @@ const attributes = {
         },
     },
     videoGlobalMarginTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -454,7 +454,7 @@ const attributes = {
         },
     },
     videoGlobalMarginMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -462,15 +462,15 @@ const attributes = {
             right: '',
         },
     },
-    videoGlobalMarginLink : {
-        type : 'boolean',
+    videoGlobalMarginLink: {
+        type: 'boolean',
         default: true
     },
-    videoGlobalBgColorSwitcher : {
+    videoGlobalBgColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
-    videoGlobalBgColor : {
+    videoGlobalBgColor: {
         type: 'string',
     },
     videoGlobalBgHoverColor: {
@@ -482,7 +482,7 @@ const attributes = {
         type: 'string',
         default: 'none',
     },
-    videoGlobalBorderColorSwitcher : {
+    videoGlobalBorderColorSwitcher: {
         type: 'string',
         default: 'normal'
     },
@@ -493,15 +493,15 @@ const attributes = {
         type: 'string',
     },
     videoGlobalBorderUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoGlobalBorderDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -510,7 +510,7 @@ const attributes = {
         },
     },
     videoGlobalBorderTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -519,7 +519,7 @@ const attributes = {
         },
     },
     videoGlobalBorderMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -527,20 +527,20 @@ const attributes = {
             right: '',
         },
     },
-    videoGlobalBorderLink : {
-        type : 'boolean',
+    videoGlobalBorderLink: {
+        type: 'boolean',
         default: true
     },
     videoGlobalBorderRadiusUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
     },
     videoGlobalBorderRadiusDesktop: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '10',
             bottom: '10',
@@ -549,7 +549,7 @@ const attributes = {
         },
     },
     videoGlobalBorderRadiusTablet: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -558,7 +558,7 @@ const attributes = {
         },
     },
     videoGlobalBorderRadiusMobile: {
-        type: 'object', 
+        type: 'object',
         default: {
             top: '',
             bottom: '',
@@ -566,8 +566,8 @@ const attributes = {
             right: '',
         },
     },
-    videoGlobalBorderRadiusLink : {
-        type : 'boolean',
+    videoGlobalBorderRadiusLink: {
+        type: 'boolean',
         default: true
     },
 
@@ -595,11 +595,11 @@ const attributes = {
     /** End Global Style */
 
     /** Start Global Setting */
-    videoGlobalWraperID : {
+    videoGlobalWraperID: {
         type: 'string',
         default: ''
     },
-    videoGlobalWraperClass : {
+    videoGlobalWraperClass: {
         type: 'string',
         default: ''
     },
@@ -695,7 +695,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
-    advancedVideoCustomCSS : { 
+    advancedVideoCustomCSS: {
         type: 'string',
         default: '',
     },

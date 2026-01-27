@@ -95,6 +95,21 @@ const Inspector = ({ attributes, setAttributes}) => {
         navigationHoverCustomGradientInputValue,
         /** End Navigation Background */
 
+        /** Start Navigation item active Background */
+        navigationItemActiveBgColorSwitcher,
+        navigationItemActiveNormalBackgroundType,
+        navigationItemActiveNormalClassicColor,
+        navigationItemActiveNormalGradientColor,
+        navigationItemActiveNormalCustomGradientSwitcher,
+        navigationItemActiveNormalCustomGradientInputValue,
+
+        navigationItemActiveHoverBackgroundType,
+        navigationItemActiveHoverClassicColor,
+        navigationItemActiveHoverGradientColor,
+        navigationItemActiveHoverCustomGradientSwitcher,
+        navigationItemActiveHoverCustomGradientInputValue,
+        /** End Navigation item active Background */
+
         /** Start Navigation Padding and Margin */
         navigationPaddingUnits,
         navigationDesktopPadding,
@@ -1880,29 +1895,17 @@ const Inspector = ({ attributes, setAttributes}) => {
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
-            ${navigationDesktopPaddingWidth && navigationDesktopPadding?.top? `padding: ${navigationDesktopPaddingWidth};` : ''} 
             ${navigationDesktopMarginWidth && navigationDesktopMargin?.top? `margin: ${navigationDesktopMarginWidth};` : ''} 
             ${navigationBorder ? `border: ${navigationBorder};` : ''} 
             ${navigationBorderColor ? `border-color: ${navigationBorderColor};` : ''}
             ${navigationDesktopBorderWidth && navigationDesktopBorder?.top? `border-width: ${navigationDesktopBorderWidth};` : ''}
             ${navigationDesktopBorderRadiusWidth && navigationDesktopBorderRadius?.top? `border-radius: ${navigationDesktopBorderRadiusWidth};` : ''}
             ${navigationBoxShadowCssValue ? `box-shadow: ${navigationBoxShadowCssValue};` : ''}
-
-            ${navigationNormalBackgroundType === 'gradient' ? `  
-                ${navigationNormalCustomGradientSwitcher && navigationNormalCustomGradientInputValue ? `background: ${navigationNormalCustomGradientInputValue};` : `background: ${navigationNormalGradientColor};`}
-            `: `
-                ${navigationNormalClassicColor ? `background: ${navigationNormalClassicColor};` : ''}
-            `}
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
             ${navigationBorderHoverColor ? `border-color: ${navigationBorderHoverColor};` : ''}
             ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
-            ${navigationHoverBackgroundType === 'gradient' ? `  
-                ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
-            `: `
-                ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
-            `}
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
@@ -1927,22 +1930,47 @@ const Inspector = ({ attributes, setAttributes}) => {
             ${navigationGlobalTypoSwitcher?.letterSpacing === false && navigationLetterSpacing?.Desktop && navigationLetterSpacingUnits?.Desktop ? `letter-spacing: ${navigationLetterSpacing?.Desktop}${navigationLetterSpacingUnits?.Desktop};` : ''}
             ${navigationGlobalTypoSwitcher?.lineHeight === false && navigationLineHeight?.Desktop && navigationLineHeightUnits?.Desktop ? `line-height: ${navigationLineHeight?.Desktop}${navigationLineHeightUnits?.Desktop};` : ''}
             
+            ${navigationNormalBackgroundType === 'gradient' ? `  
+                ${navigationNormalCustomGradientSwitcher && navigationNormalCustomGradientInputValue ? `background: ${navigationNormalCustomGradientInputValue};` : `background: ${navigationNormalGradientColor};`}
+            `: `
+                ${navigationNormalClassicColor ? `background: ${navigationNormalClassicColor};` : ''}
+            `}
+            
             ${navigationColor ? `color: ${navigationColor};` : ''}
+            ${navigationDesktopPaddingWidth && navigationDesktopPadding?.top? `padding: ${navigationDesktopPaddingWidth};` : ''} 
             outline: none !important;
             box-shadow: none !important;
             transition: all .3s ease-in-out;
         }
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content:hover {
             ${navigationHoverColor ? `color: ${navigationHoverColor};` : ''}
+            
+            ${navigationHoverBackgroundType === 'gradient' ? `  
+                ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
+            `: `
+                ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
+            `}
             text-decoration: none !important;
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content {
             ${navigationActiveColor ? `color: ${navigationActiveColor};` : ''}
+            ${navigationItemActiveNormalBackgroundType === 'gradient' ? `  
+                ${navigationItemActiveNormalCustomGradientSwitcher && navigationItemActiveNormalCustomGradientInputValue ? `background: ${navigationItemActiveNormalCustomGradientInputValue};` : `background: ${navigationItemActiveNormalGradientColor};`}
+            `: `
+                ${navigationItemActiveNormalClassicColor ? `background: ${navigationItemActiveNormalClassicColor};` : ''}
+            `}
+            transition: all .3s ease-in-out;
         }
 
         .${blockId} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item.current-menu-item .wp-block-navigation-item__content:hover {
-            ${navigationActiveHoverColor ? `color: ${navigationActiveHoverColor};` : ''}
+            ${navigationActiveHoverColor ? `color: ${navigationActiveHoverColor};` : `color: ${navigationHoverColor};`}
+            ${navigationHoverBackgroundType === 'gradient' ? `  
+                ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
+            `: `
+                ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
+            `}
+            transition: all .3s ease-in-out;
         }
 
         .${blockId} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {
@@ -2308,6 +2336,21 @@ const Inspector = ({ attributes, setAttributes}) => {
         navigationHoverCustomGradientSwitcher,
         navigationHoverCustomGradientInputValue,
         /** End Navigation Background */
+
+        /** Start Navigation item active Background */
+        navigationItemActiveBgColorSwitcher,
+        navigationItemActiveNormalBackgroundType,
+        navigationItemActiveNormalClassicColor,
+        navigationItemActiveNormalGradientColor,
+        navigationItemActiveNormalCustomGradientSwitcher,
+        navigationItemActiveNormalCustomGradientInputValue,
+
+        navigationItemActiveHoverBackgroundType,
+        navigationItemActiveHoverClassicColor,
+        navigationItemActiveHoverGradientColor,
+        navigationItemActiveHoverCustomGradientSwitcher,
+        navigationItemActiveHoverCustomGradientInputValue,
+        /** End Navigation item active Background */
 
         /** Start Navigation Padding and Margin */
         navigationPaddingUnits,
@@ -2921,6 +2964,36 @@ const Inspector = ({ attributes, setAttributes}) => {
                     setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationHoverCustomGradientSwitcher: value })}
                     hoverCustomGradientInputValue={navigationHoverCustomGradientInputValue}
                     setHoverCustomGradientInputValue={(value) => setAttributes({ navigationHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+                <FB_BackgroundColorControl
+                    label={__("Active Background Color", "frontis-blocks")}
+                    bgColorSwitcher={navigationItemActiveBgColorSwitcher}  
+                    setBgColorSwitcher={(value) => setAttributes({ navigationItemActiveBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={navigationItemActiveNormalBackgroundType} 
+                    setNormalBackgroundType={(value) => setAttributes({ navigationItemActiveNormalBackgroundType: value })}
+                    normalClassicColor={navigationItemActiveNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ navigationItemActiveNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={navigationItemActiveNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ navigationItemActiveNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={navigationItemActiveNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ navigationItemActiveNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={navigationItemActiveNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ navigationItemActiveNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={navigationItemActiveHoverBackgroundType} 
+                    setHoverBackgroundType={(value) => setAttributes({ navigationItemActiveHoverBackgroundType: value })}
+                    hoverClassicColor={navigationItemActiveHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ navigationItemActiveHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={navigationItemActiveHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ navigationItemActiveHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={navigationItemActiveHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ navigationItemActiveHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={navigationItemActiveHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ navigationItemActiveHoverCustomGradientInputValue: value })}
 
                     isBackgroundImage={false}
 
