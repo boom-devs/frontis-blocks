@@ -21,7 +21,7 @@ import './editor.scss';
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
+export default function Edit({ attributes, setAttributes, clientId, context }) {
     const {
         blockId,
         blockStyle,
@@ -138,12 +138,10 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 
     return (
         <>
-            {isSelected && (
-                <Inspector
-                    attributes={attributes}
-                    setAttributes={setAttributes}
-                />
-            )}
+            <Inspector
+                attributes={attributes}
+                setAttributes={setAttributes}
+            />
 
             <BlockControls>
                 <AlignmentToolbar
