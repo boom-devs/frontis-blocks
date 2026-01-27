@@ -720,4 +720,17 @@ export const WRAP = [
 	{ title: 'Wrap Reverse', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.35999 8.76794H15.26C16.34 8.76794 17.22 9.72562 17.22 10.901V16.5926C17.22 17.7679 16.34 18.7256 15.26 18.7256H7.51999" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.0699 12.2068L6.7699 8.76783L10.0699 5.30713" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap-reverse" },
 ];
 
+// Grid column/row sortable item constants
+export const GRID_COLUMN_TYPE = [
+	{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
+	{ title: 'Min/Max', label: __('Min/Max', 'frontis-blocks'), value: "min-max" },
+	{ title: 'Custom', label: __('Custom', 'frontis-blocks'), value: "custom" },
+];
+
+export const GRID_UNIT_TYPES = [
+	{ title: 'Fr', label: __('Fr', 'frontis-blocks'), value: "fr" },
+	{ title: 'Px', label: __('Px', 'frontis-blocks'), value: "px" },
+	{ title: '%', label: __('%', 'frontis-blocks'), value: "%" }
+];
+
 /** End Container Layout Constants */
