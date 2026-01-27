@@ -428,54 +428,36 @@ With `memo()`, parent re-renders won't cause unnecessary recreation.
 
 ## 📊 Summary Comparison Table
 
-| Aspect | Spectra | Frontis-Blocks | Fix Priority |
-|--------|---------|----------------|--------------|
-| `memo()` on Settings/Inspector | ✅ Yes | ❌ No | 🔴 High |
-| Double render prevention | ✅ No loop | ❌ Has loop | 🔴 High |
-| Icon optimization | ✅ External file | ❌ Inline SVGs | 🟡 Medium |
-| Single useEffect for init | ✅ Optimized | ❌ 4 separate | 🟡 Medium |
-| Single source of truth | ✅ Attributes only | ❌ Duplicate state | 🟢 Low |
-| useCallback for handlers | ✅ Not needed (memo) | ❌ All recreated | 🟢 Low |
+| Aspect | Spectra | Frontis-Blocks | Status |
+|--------|---------|----------------|--------|
+| `memo()` on Settings/Inspector | ✅ Yes | ✅ Yes | Fixed |
+| Double render prevention | ✅ No loop | ✅ Fixed | Fixed |
+| Icon optimization | ✅ External file | ✅ External file | Fixed |
+| Single useEffect for init | ✅ Optimized | ✅ Optimized | Fixed |
+| Single source of truth | ✅ Attributes only | ❌ Duplicate state | Phase 3 |
+| useCallback for handlers | ✅ Not needed | ❌ All recreated | Phase 3 |
 
 ---
 
-## 🛠️ Implementation Priority
+## 🛠️ Implementation Status
 
-### Phase 1 (Immediate - 80% improvement expected)
+### ✅ Completed (Phase 1 & 2)
 
 1. **Add memo() to Inspector**
-   - File: `inspector.js`
-   - Time: 2 minutes
-   - Impact: Prevents all unnecessary re-renders
-
+   - Result: Prevents all unnecessary re-renders.
 2. **Fix double render in edit.js**
-   - File: `edit.js`
-   - Time: 5 minutes
-   - Impact: Halves render count
-
-### Phase 2 (Short-term - Additional 10% improvement)
-
-3. **Move SVG icons outside component**
-   - File: `inspector.js` or new `icons.js`
-   - Time: 30 minutes
-   - Impact: Reduces memory allocation
-
+   - Result: Halves render count per action.
+3. **Move SVG icons to global constants**
+   - Result: Reduces memory allocation and object recreation.
 4. **Combine useEffect calls**
-   - File: `inspector.js`
-   - Time: 15 minutes
-   - Impact: Reduces initial renders
+   - Result: Reduces initial renders from 4 to 1 on mount.
 
-### Phase 3 (Long-term - Additional 5% improvement)
+### 🕒 Planned (Phase 3)
 
 5. **Remove duplicate state**
-   - File: `inspector.js`
-   - Time: 1 hour
-   - Impact: Cleaner code, less memory
-
+   - Goal: Cleaner code, less memory usage.
 6. **Add useCallback to handlers**
-   - File: `inspector.js`
-   - Time: 1 hour
-   - Impact: Better for child component optimization
+   - Goal: Optimize child component re-renders.
 
 ---
 
