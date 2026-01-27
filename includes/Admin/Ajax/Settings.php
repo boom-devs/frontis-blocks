@@ -492,6 +492,15 @@ class Settings extends AjaxBase
 	 */
 	private function sanitize_option_value($value, $type)
 	{
+		// Handle arrays (for responsive values like Desktop/Tablet/Mobile)
+		if (is_array($value)) {
+			$sanitized = [];
+			foreach ($value as $key => $val) {
+				$sanitized[sanitize_key($key)] = $this->sanitize_option_value($val, $type);
+			}
+			return $sanitized;
+		}
+
 		switch ($type) {
 			case 'number':
 				return intval($value);
