@@ -678,6 +678,10 @@ class TemplateLibrary extends AjaxBase
                     continue;
                 }
 
+                // Decode and unslash navigation content
+                $content = $this->decode_content($content);
+                $content = wp_unslash($content);
+
                 $slug = 'imported-nav-' . $old_id;
 
                 $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
@@ -712,6 +716,12 @@ class TemplateLibrary extends AjaxBase
             if (empty($slug)) {
                 continue;
             }
+
+            // Decode and unslash part content
+            $content = $this->decode_content($content);
+            $content = wp_unslash($content);
+
+            error_log("FB Import: Header/Footer part $title, content length: " . strlen($content));
 
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
@@ -799,6 +809,10 @@ class TemplateLibrary extends AjaxBase
             if (empty($slug))
                 continue;
 
+            // Decode and unslash template content
+            $content = $this->decode_content($content);
+            $content = wp_unslash($content);
+
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
                 $content = $this->replace_image_urls($content, trailingslashit($site_url));
@@ -808,14 +822,35 @@ class TemplateLibrary extends AjaxBase
                 $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
-            $existing = get_page_by_path($slug, OBJECT, 'wp_template');
-            if ($existing) {
-                wp_update_post([
-                    'ID' => $existing->ID,
+            error_log("FB Import: Template $title, slug $slug, content length: " . strlen($content));
+
+            // Check if template exists for CURRENT THEME
+            $existing = get_posts([
+                'post_type' => 'wp_template',
+                'name' => $slug,
+                'posts_per_page' => 1,
+                'post_status' => 'any',
+                'fields' => 'ids',
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'wp_theme',
+                        'field' => 'slug',
+                        'terms' => get_stylesheet(),
+                    ]
+                ],
+            ]);
+
+            if (!empty($existing)) {
+                $update_res = wp_update_post([
+                    'ID' => $existing[0],
                     'post_content' => $content,
                     'post_title' => $title,
                 ]);
-                $skipped++;
+                if ($update_res) {
+                    $skipped++;
+                } else {
+                    error_log("FB Import Error: Failed to update template $slug (ID: {$existing[0]})");
+                }
             } else {
                 $id = wp_insert_post([
                     'post_title' => $title,
@@ -827,6 +862,8 @@ class TemplateLibrary extends AjaxBase
                 if (!is_wp_error($id)) {
                     wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
                     $created++;
+                } else {
+                    error_log("FB Import Error: Failed to insert template $slug - " . $id->get_error_message());
                 }
             }
         }
