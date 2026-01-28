@@ -57,6 +57,7 @@ import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
 import { testimonialPresets } from './presets';
+import { computeSpacing, cssRule, conditionalRule } from './styling';
 
 import './editor.scss';
 
