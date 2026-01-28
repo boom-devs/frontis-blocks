@@ -21,6 +21,7 @@ import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from './inspector';
+import generateTestimonialStyle from './styling';
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
@@ -208,6 +209,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     }
     }, [TestimonialDesignationFontFamily]);
     /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateTestimonialStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
