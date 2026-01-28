@@ -371,15 +371,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
         context,
     });
 
-
-
     return (
         <>
-
+            {isSelected && (
                 <Inspector
                     attributes={attributes}
                     setAttributes={setAttributes}
                 />
+            )}
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
