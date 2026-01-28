@@ -26,7 +26,7 @@ import generateTestimonialStyle from './styling';
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -376,10 +376,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     return (
         <>
 
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (

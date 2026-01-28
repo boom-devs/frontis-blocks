@@ -60,6 +60,7 @@ export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
 ];
+
 export const ICON_IMAGE_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
@@ -99,6 +100,19 @@ export const TEXT_ALIGN = [
 	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "left" },
 	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
 	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "right" },
+];
+
+export const FLEX_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "flex-start" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "flex-end" },
+];
+
+export const IMAGE_OBJECT_FIT = [
+	{ label: __('Default', 'frontis-blocks'), value: 'default' },
+	{ label: __('Cover', 'frontis-blocks'), value: 'cover' },
+	{ label: __('Contain', 'frontis-blocks'), value: 'contain' },
+	{ label: __('Fill', 'frontis-blocks'), value: 'fill' },
 ];
 
 export const TEXT_ALIGN_JUSTIFY = [

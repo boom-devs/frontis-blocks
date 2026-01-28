@@ -19,18 +19,13 @@ import {
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
     TEXT_ALIGN,
-    ICON_ALIGN,
+    ICON_IMAGE_ALIGN,
     FLEX_ALIGN,
-    Testimonial,
     BORDER_STYLES,
-    HEADING,
-    PRESETS,
     OVERFLOW_OP,
     IMAGE_OBJECT_FIT,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FBIconPicker from "../../components/icon-picker";
 import FB_TypographyControl from '@Components/typography-control';
@@ -1783,7 +1778,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             <ButtonGroup
                                 className="fb-setting-text-alignment-group-btn"
                             >
-                                {ICON_ALIGN.map((item, key) => (
+                                {ICON_IMAGE_ALIGN.map((item, key) => (
                                     <Button
                                         key={key}
                                         onClick={() => setAttributes({ TestimonialRatinIconAlign: item.value })}
@@ -1839,7 +1834,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             <ButtonGroup
                                 className="fb-setting-text-alignment-group-btn"
                             >
-                                {ICON_ALIGN.map((item, key) => (
+                                {ICON_IMAGE_ALIGN.map((item, key) => (
                                     <Button
                                         key={key}
                                         onClick={() => setAttributes({ TestimonialQuoteIconAlign: item.value })}
