@@ -24,51 +24,79 @@ useEffect(() => {
 
 ---
 
-## নতুন Code (`edit.js`):
+## নতুন Code
+
+### Step 1: Custom Hook তৈরি করা হয়েছে
+
+**File:** `src/utils/useBlockIdGenerator.js`
 
 ```javascript
-// Track previous attributes to detect style changes
-const prevAttributesRef = useRef(attributes);
+import { useEffect, useRef } from '@wordpress/element';
 
-useEffect(() => {
-    if (clientId && typeof clientId === 'string') {
-        const expectedIdPrefix = "fb-testimonial-" + clientId.slice(0, 8);
-        
-        // Case 1: Brand new block with no ID
-        if (!blockID) {
-            setAttributes({
-                blockID: expectedIdPrefix,
-            });
-            prevAttributesRef.current = attributes;
-            return;
-        }
+const useBlockIdGenerator = ({
+    clientId,
+    blockID,
+    blockPrefix,
+    isSelected,
+    attributes,
+    setAttributes,
+    excludeKeys = [],
+}) => {
+    const prevAttributesRef = useRef(attributes);
 
-        // Case 2: Duplicated block - blockID doesn't match current clientId
-        // This means the block was copied from another block
-        const isDuplicate = blockID !== expectedIdPrefix;
-        
-        if (isDuplicate && isSelected) {
-            const prevAttrs = prevAttributesRef.current;
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            const expectedIdPrefix = `${blockPrefix}-${clientId.slice(0, 8)}`;
             
-            // Check if any attribute (except meta attributes) changed
-            const hasStyleChange = Object.keys(attributes).some(key => {
-                if (['blockID', 'blockStyle'].includes(key)) {
-                    return false;
-                }
-                return JSON.stringify(attributes[key]) !== JSON.stringify(prevAttrs[key]);
-            });
+            // Case 1: Brand new block with no ID
+            if (!blockID) {
+                setAttributes({ blockID: expectedIdPrefix });
+                prevAttributesRef.current = attributes;
+                return;
+            }
 
-            if (hasStyleChange) {
-                setAttributes({
-                    blockID: expectedIdPrefix,
+            // Case 2: Duplicated block - blockID doesn't match current clientId
+            const isDuplicate = blockID !== expectedIdPrefix;
+            
+            if (isDuplicate && isSelected) {
+                const prevAttrs = prevAttributesRef.current;
+                const defaultExcludeKeys = ['blockID', 'blockStyle'];
+                const allExcludeKeys = [...defaultExcludeKeys, ...excludeKeys];
+                
+                const hasStyleChange = Object.keys(attributes).some(key => {
+                    if (allExcludeKeys.includes(key)) return false;
+                    return JSON.stringify(attributes[key]) !== JSON.stringify(prevAttrs[key]);
                 });
+
+                if (hasStyleChange) {
+                    setAttributes({ blockID: expectedIdPrefix });
+                }
             }
         }
-    }
+        prevAttributesRef.current = attributes;
+    }, [clientId, blockID, blockPrefix, isSelected, attributes, setAttributes, excludeKeys]);
+};
 
-    // Update ref for next comparison
-    prevAttributesRef.current = attributes;
-}, [clientId, blockID, isSelected, attributes]);
+export default useBlockIdGenerator;
+```
+
+### Step 2: Block-এ Use করা হয়েছে
+
+**File:** `src/blocks/testimonial/edit.js`
+
+```javascript
+// Import
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+
+// Component এর ভিতরে - শুধু এক লাইন!
+useBlockIdGenerator({
+    clientId,
+    blockID,
+    blockPrefix: 'fb-testimonial',
+    isSelected,
+    attributes,
+    setAttributes,
+});
 ```
 
 ---
@@ -95,27 +123,39 @@ useEffect(() => {
    isSelected: true ✅
    hasStyleChange: true ✅
    → নতুন আইডি জেনারেট ✅
-
-৫. পেজ রিলোড:
-   সব blockID তাদের নিজস্ব clientId এর সাথে match করে
-   isDuplicate = false
-   → কোনো কাজ নেই (ফাস্ট!)
 ```
 
 ---
 
 ## অন্য Block-এ Apply করা
 
-### যেকোনো block-এ এই fix করতে:
+### যেকোনো block-এ এই fix করতে শুধু:
 
-1. `edit.js` এ `useRef` import করুন (যদি না থাকে)
-2. `prevAttributesRef` যোগ করুন
-3. আগের `useEffect` রিপ্লেস করুন নতুনটা দিয়ে
-4. Block prefix চেঞ্জ করুন:
+**1. Import যোগ করুন:**
+
+```javascript
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+```
+
+**2. Hook call করুন:**
+
+```javascript
+useBlockIdGenerator({
+    clientId,
+    blockID,
+    blockPrefix: 'fb-YOUR-BLOCK-NAME',  // এখানে আপনার block prefix দিন
+    isSelected,
+    attributes,
+    setAttributes,
+});
+```
+
+### Block Prefix Examples:
 
 | Block | Prefix |
 |-------|--------|
-| Testimonial | `fb-testimonial-` |
-| Icon Box | `fb-icon-box-` |
-| Info Box | `fb-info-box-` |
-| Advanced Heading | `fb-advanced-heading-` |
+| Testimonial | `fb-testimonial` |
+| Icon Box | `fb-icon-box` |
+| Info Box | `fb-info-box` |
+| Advanced Heading | `fb-advanced-heading` |
+| Team Member | `fb-team-member` |

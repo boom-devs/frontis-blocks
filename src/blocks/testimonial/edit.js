@@ -19,6 +19,7 @@ import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
 import Inspector from './inspector';
 import generateTestimonialStyle from './styling';
@@ -172,48 +173,15 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 
     } = attributes;
 
-    // Track previous attributes to detect style changes
-    const prevAttributesRef = useRef(attributes);
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            const expectedIdPrefix = "fb-testimonial-" + clientId.slice(0, 8);
-            
-            // Case 1: Brand new block with no ID
-            if (!blockID) {
-                setAttributes({
-                    blockID: expectedIdPrefix,
-                });
-                prevAttributesRef.current = attributes;
-                return;
-            }
-
-            // Case 2: Duplicated block - blockID doesn't match current clientId
-            // This means the block was copied from another block
-            const isDuplicate = blockID !== expectedIdPrefix;
-            
-            if (isDuplicate && isSelected) {
-                const prevAttrs = prevAttributesRef.current;
-                
-                // Check if any attribute (except meta attributes) changed
-                const hasStyleChange = Object.keys(attributes).some(key => {
-                    if (['blockID', 'blockStyle'].includes(key)) {
-                        return false;
-                    }
-                    return JSON.stringify(attributes[key]) !== JSON.stringify(prevAttrs[key]);
-                });
-
-                if (hasStyleChange) {
-                    setAttributes({
-                        blockID: expectedIdPrefix,
-                    });
-                }
-            }
-        }
-
-        // Update ref for next comparison
-        prevAttributesRef.current = attributes;
-    }, [clientId, blockID, isSelected, attributes]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-testimonial',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
