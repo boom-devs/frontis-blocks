@@ -12,9 +12,11 @@ import {
     ToolbarGroup,
     ToolbarButton
 } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
+import { store as blockEditorStore } from '@wordpress/block-editor';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, useMemo } from '@wordpress/element';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
@@ -172,13 +174,19 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 
     } = attributes;
 
+    const isDuplicate = useSelect((select) => {
+        const { getBlocks } = select(blockEditorStore);
+        const blocks = getBlocks();
+        return blocks.some(b => b.clientId !== clientId && b.attributes.blockID === blockID);
+    }, [clientId, blockID]);
+
     useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
+        if (!blockID || (isDuplicate && blockID === attributes.blockID)) {
             setAttributes({
                 blockID: "fb-testimonial-" + clientId.slice(0, 8),
             });
         }
-    }, [clientId, blockID]);
+    }, [clientId, isDuplicate]);
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -211,12 +219,16 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
     /** End Load Google Font */
 
     /** Start Generate Block Style */
-    useEffect(() => {
-        if (blockID) {
-            const css = generateTestimonialStyle(attributes);
-            setAttributes({ blockStyle: css });
-        }
+    const editorialStyle = useMemo(() => {
+        if (!blockID) return '';
+        return generateTestimonialStyle(attributes);
     }, [attributes, blockID]);
+
+    useEffect(() => {
+        if (editorialStyle && editorialStyle !== blockStyle) {
+            setAttributes({ blockStyle: editorialStyle });
+        }
+    }, [editorialStyle]);
     /** End Generate Block Style */
 
     const blockProps = useBlockProps({
@@ -706,7 +718,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
                     </div>
                 </div>
             </div>
-            <style>{blockStyle}</style>
+            <style>{editorialStyle}</style>
         </>
     );
 }
