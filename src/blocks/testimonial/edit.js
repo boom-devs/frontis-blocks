@@ -12,8 +12,8 @@ import {
     ToolbarGroup,
     ToolbarButton
 } from '@wordpress/components';
-import { useSelect } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useDebounce } from '@wordpress/compose';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useEffect, useRef, useMemo } from '@wordpress/element';
@@ -174,19 +174,12 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 
     } = attributes;
 
-    const isDuplicate = useSelect((select) => {
-        const { getBlocks } = select(blockEditorStore);
-        const blocks = getBlocks();
-        return blocks.some(b => b.clientId !== clientId && b.attributes.blockID === blockID);
-    }, [clientId, blockID]);
-
     useEffect(() => {
-        if (!blockID || (isDuplicate && blockID === attributes.blockID)) {
-            setAttributes({
-                blockID: "fb-testimonial-" + clientId.slice(0, 8),
-            });
+        const newBlockID = "fb-testimonial-" + clientId.slice(0, 8);
+        if (blockID !== newBlockID) {
+            setAttributes({ blockID: newBlockID });
         }
-    }, [clientId, isDuplicate]);
+    }, [clientId, blockID]);
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -224,9 +217,13 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
         return generateTestimonialStyle(attributes);
     }, [attributes, blockID]);
 
+    const debouncedSetStyle = useDebounce((style) => {
+        setAttributes({ blockStyle: style });
+    }, 500);
+
     useEffect(() => {
         if (editorialStyle && editorialStyle !== blockStyle) {
-            setAttributes({ blockStyle: editorialStyle });
+            debouncedSetStyle(editorialStyle);
         }
     }, [editorialStyle]);
     /** End Generate Block Style */
