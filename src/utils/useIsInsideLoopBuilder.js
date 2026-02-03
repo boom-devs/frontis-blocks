@@ -1,8 +1,11 @@
 import { useSelect } from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
 
-const useIsInsideLoopBuilder = (clientId) => {
+const useIsInsideLoopBuilder = (clientId, skip = false) => {
   return useSelect((select) => {
+    // Skip expensive parent traversal if already applied
+    if (skip) return false;
+    
     const { getBlockParents, getBlock } = select(blockEditorStore);
     return getBlockParents(clientId).some((pid) => {
       const name = getBlock(pid)?.name;
@@ -11,7 +14,7 @@ const useIsInsideLoopBuilder = (clientId) => {
         name === 'frontis-blocks/loop-builder-wrapper'
       );
     });
-  }, [clientId]);
+  }, [clientId, skip]);
 };
 
 export default useIsInsideLoopBuilder;

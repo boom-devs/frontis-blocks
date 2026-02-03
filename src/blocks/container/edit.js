@@ -45,21 +45,23 @@ const Edit = (props) => {
 	} = props;
 
 	useEffect(() => {
-        setAttributes({
-            formContainerSwitcher: context["fb/formContainerSwitcher"] === undefined ? false : context["fb/formContainerSwitcher"],
-        })
-    }, [
-        context["fb/formContainerSwitcher"],
-    ])
+		const newValue = context["fb/formContainerSwitcher"] === undefined ? false : context["fb/formContainerSwitcher"];
+		// Only update if value actually changed
+		if (formContainerSwitcher !== newValue) {
+			setAttributes({ formContainerSwitcher: newValue });
+		}
+	}, [context["fb/formContainerSwitcher"]]);
 
 
 	// Loop Builder Check
-	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId, loopAutoApplied);
 	useEffect(() => {
 		if (isInsideLoopBuilder && !loopAutoApplied) {
-			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
-			setAttributes({ containerChildrenWidth: 'full' });
-			setAttributes({loopAutoApplied: true});
+			setAttributes({ 
+				containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' },
+				containerChildrenWidth: 'full',
+				loopAutoApplied: true
+			});
 		}
 	}, [isInsideLoopBuilder, loopAutoApplied]);
 
@@ -85,12 +87,18 @@ const Edit = (props) => {
 		};
 	} );
 
-	if ( isParentOfSelectedBlock ) {
-		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
-		if ( emptyBlockInserter ) {
-			emptyBlockInserter.style.display = 'none';
+	/**
+	 * Hide empty block inserter when this container has selected inner blocks.
+	 * Only runs when selection state changes, avoiding unnecessary DOM queries on every render.
+	 */
+	useEffect(() => {
+		if ( isParentOfSelectedBlock ) {
+			const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
+			if ( emptyBlockInserter ) {
+				emptyBlockInserter.style.display = 'none';
+			}
 		}
-	}
+	}, [isParentOfSelectedBlock]);
 
 	useEffect( () => {
 		const gridCssInParent = 'grid' === parentAttributes?.layout;
@@ -184,14 +192,21 @@ const Edit = (props) => {
         }
     }, [blockFrontEndStyle]);
 
-	if ( ! variationSelected && 0 === getBlockParents?.length ) {
-		const block = select('core/block-editor').getBlock(clientId);
-		if (block) {
+	// Handle variation picker - show picker when no variation selected and block is root
+	const shouldShowVariationPicker = ! variationSelected && 0 === getBlockParents?.length;
+	
+	// Set p_block_id when showing variation picker - must be in useEffect, not render
+	useEffect(() => {
+		if (shouldShowVariationPicker) {
 			const coreBlockEditord = select( 'core/block-editor' );
 			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
-			setAttributes({p_block_id: parentBlockId});
+			if (parentBlockId !== attributes.p_block_id) {
+				setAttributes({p_block_id: parentBlockId});
+			}
 		}
+	}, [shouldShowVariationPicker, props.clientId, attributes.p_block_id]);
 
+	if ( shouldShowVariationPicker ) {
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 
