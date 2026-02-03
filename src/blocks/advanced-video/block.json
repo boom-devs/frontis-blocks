@@ -7,12 +7,16 @@
 	"category": "frontis-blocks",
 	"description": "A customizable advanced video block with various styling options.",
 	"example": {},
-    "supports": {
-        "anchor": false,
-		"align": ["wide", "full"],
-        "customClassName": false
-    },
+	"supports": {
+		"anchor": false,
+		"align": [
+			"wide",
+			"full"
+		],
+		"customClassName": false
+	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./view.js"
 }

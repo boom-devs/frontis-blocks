@@ -1,200 +1,168 @@
 (function () {
     var initializedPlayers = new Set();
 
+    /**
+     * Smart Video URL Parser
+     */
+    function getEmbedUrl(url) {
+        if (!url) return null;
+        var str = url.trim();
+
+        // 1. Check if it's already an iframe
+        var iframeMatch = str.match(/src=["']([^"']+)["']/);
+        if (iframeMatch) return { type: 'iframe', url: iframeMatch[1] };
+
+        // 2. YouTube
+        var youtubeMatch = str.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
+        if (youtubeMatch) return { type: 'youtube', id: youtubeMatch[1], url: 'https://www.youtube.com/embed/' + youtubeMatch[1] };
+
+        // 3. Vimeo
+        var vimeoMatch = str.match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([a-z0-9]+))?/i);
+        if (vimeoMatch) {
+            var vUrl = 'https://player.vimeo.com/video/' + vimeoMatch[1];
+            if (vimeoMatch[2]) vUrl += '?h=' + vimeoMatch[2];
+            return { type: 'vimeo', id: vimeoMatch[1], hash: vimeoMatch[2], url: vUrl };
+        }
+
+        // 4. Facebook
+        if (str.includes('facebook.com') || str.includes('fb.watch')) {
+            return {
+                type: 'facebook',
+                url: 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(str)
+            };
+        }
+
+        // 5. Direct Video File
+        var videoExtensions = /\.(mp4|webm|ogg|mov|m4v|ogv)(\?|$)/i;
+        if (videoExtensions.test(str)) return { type: 'video', url: str };
+
+        return { type: 'iframe', url: str };
+    }
+
     function initVideoPlayer(container) {
         var containerId = container.id;
         if (!containerId || initializedPlayers.has(containerId)) return;
-
         initializedPlayers.add(containerId);
 
         var blockID = containerId.replace('fb-player-option-', '').replace('fb-player-option', '');
         var playIconSpan = blockID ? document.querySelector('.fb-play-icon.' + blockID) : document.querySelector('.fb-play-icon');
 
         var rawUrl = container.getAttribute('data-url');
-        if (!rawUrl) return;
-        rawUrl = rawUrl.trim();
+        var videoRes = getEmbedUrl(rawUrl);
+        if (!videoRes) return;
 
-        // High-Quality Video URL Sanitizer
-        function getSanitizedUrl(str) {
-            // Check for iframe code
-            var iframeMatch = str.match(/src=["']([^"']+)["']/);
-            var url = iframeMatch ? iframeMatch[1] : str;
-
-            if (url.includes('youtube.com') || url.includes('youtu.be')) {
-                // Precise ID extraction
-                var idMatch = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-                var videoId = idMatch ? idMatch[1] : null;
-
-                if (videoId) {
-                    // Rebuild a high-compatibility watch URL
-                    url = 'https://www.youtube.com/watch?v=' + videoId;
-
-                    // Restore playlist if present
-                    var listMatch = str.match(/[?&]list=([^#&?]+)/);
-                    if (listMatch) url += '&list=' + listMatch[1];
-                }
-            }
-            return url;
-        }
-
-        var url = getSanitizedUrl(rawUrl);
-        var isAutoplay = container.getAttribute('data-autoplay') === 'true';
-        var isMuted = container.getAttribute('data-muted') === 'true';
-        var isLoop = container.getAttribute('data-loop') === 'true';
-        var hasControls = container.getAttribute('data-controls') === 'true';
-        var previewImage = container.getAttribute('data-preview-image');
-
-        // State tracking
-        var playerState = {
-            playing: isAutoplay,
-            hasStarted: isAutoplay || !previewImage,
-            light: !isAutoplay && previewImage ? previewImage : false
+        var options = {
+            autoplay: container.getAttribute('data-autoplay') === 'true',
+            muted: container.getAttribute('data-muted') === 'true',
+            loop: container.getAttribute('data-loop') === 'true',
+            controls: container.getAttribute('data-controls') === 'true',
+            previewImage: container.getAttribute('data-preview-image')
         };
 
-        function getBaseConfig() {
-            var siteOrigin = window.location.origin ? window.location.origin.replace(/\/$/, '') : (window.location.protocol + '//' + window.location.hostname);
+        var playerWrapper = document.createElement('div');
+        playerWrapper.className = 'fb-videojs-wrapper';
+        playerWrapper.style.cssText = 'position:relative;width:100%;padding-top:56.25%;overflow:hidden;background:#000;';
 
-            return {
-                url: url,
-                playing: playerState.playing,
-                muted: isMuted,
-                loop: isLoop,
-                controls: hasControls,
-                light: playerState.light,
-                width: '100%',
-                height: '100%',
-                className: 'fb-react-player',
-                config: {
-                    youtube: {
-                        playerVars: {
-                            origin: siteOrigin,
-                            enablejsapi: 1,
-                            rel: 0,
-                            modestbranding: 0, // Set to 0 to avoid configuration conflicts
-                        }
-                    },
-                    vimeo: {
-                        playerOptions: {
-                            origin: siteOrigin,
-                            transparent: 0,
-                        }
-                    }
-                }
-            };
-        }
+        function buildUrl(isForcedPlay) {
+            var baseUrl = videoRes.url;
+            var params = [];
+            var forAutoplay = isForcedPlay || options.autoplay;
 
-        function render(forceUpdate) {
-            var config = getBaseConfig();
-
-            config.onClickPreview = function () {
-                playerState.hasStarted = true;
-                playerState.playing = true;
-                playerState.light = false;
-                if (playIconSpan) playIconSpan.style.display = 'none';
-                render(true);
-            };
-
-            config.onPlay = function () {
-                playerState.playing = true;
-                playerState.hasStarted = true;
-                if (playIconSpan) playIconSpan.style.display = 'none';
-            };
-
-            config.onPause = function () {
-                playerState.playing = false;
-                if (playIconSpan) playIconSpan.style.display = 'flex';
-            };
-
-            config.onEnded = function () {
-                if (!isLoop) {
-                    playerState.playing = false;
-                    if (playIconSpan) playIconSpan.style.display = 'flex';
-                }
-            };
-
-            renderReactPlayer(container, config);
-        }
-
-        // Initial render
-        render();
-
-        const iframe = container.querySelector('iframe');
-        if (iframe) {
-            iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
-        }
-
-        if (playIconSpan) {
-            // Initial state for play icon - show if not playing OR if it's youtube and we need to show preview
-            var shouldShow = !playerState.playing;
-            playIconSpan.style.display = shouldShow ? 'flex' : 'none';
-
-            playIconSpan.addEventListener('click', function (e) {
-                e.preventDefault();
-                e.stopPropagation();
-
-                if (!playerState.hasStarted && playerState.light) {
-                    var previewTrigger = container.querySelector('.react-player__preview');
-                    if (previewTrigger) {
-                        previewTrigger.click();
-                    } else {
-                        playerState.hasStarted = true;
-                        playerState.playing = true;
-                        playerState.light = false;
-                        render();
-                    }
+            if (videoRes.type === 'facebook') {
+                params.push('show_text=false');
+                params.push('show_captions=false');
+                params.push('appId'); // Facebook requirement sometimes
+                if (forAutoplay) {
+                    params.push('autoplay=true');
+                    params.push('mute=true');
                 } else {
-                    playerState.playing = !playerState.playing;
-                    render();
+                    params.push('autoplay=false');
+                    if (options.muted) params.push('mute=true');
                 }
-            });
+            } else if (videoRes.type === 'youtube') {
+                params.push('enablejsapi=1');
+                params.push('origin=' + encodeURIComponent(window.location.origin));
+                params.push('rel=0');
+                if (forAutoplay) {
+                    params.push('autoplay=1');
+                    params.push('mute=1');
+                } else if (options.muted) {
+                    params.push('mute=1');
+                }
+                if (options.loop) {
+                    params.push('loop=1');
+                    params.push('playlist=' + videoRes.id);
+                }
+                if (!options.controls) params.push('controls=0');
+            } else if (videoRes.type === 'vimeo') {
+                if (forAutoplay) {
+                    params.push('autoplay=1');
+                    params.push('muted=1');
+                } else if (options.muted) {
+                    params.push('muted=1');
+                }
+                if (options.loop) params.push('loop=1');
+                if (!options.controls) params.push('controls=0');
+            }
+
+            var finalUrl = baseUrl + (baseUrl.includes('?') ? '&' : '?') + params.join('&');
+            return finalUrl;
+        }
+
+        function renderIframe(isForced) {
+            var oldIframe = playerWrapper.querySelector('iframe');
+            if (oldIframe) oldIframe.remove();
+
+            var iframe = document.createElement('iframe');
+            iframe.src = buildUrl(isForced);
+            iframe.className = 'fb-video-iframe';
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allowfullscreen', 'true');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen');
+            iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+            iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+            playerWrapper.appendChild(iframe);
+        }
+
+        if (!options.previewImage || options.autoplay) {
+            renderIframe(false);
+            container.appendChild(playerWrapper);
+        }
+
+        if (options.previewImage && !options.autoplay) {
+            container.style.position = 'relative';
+            var overlay = document.createElement('div');
+            overlay.className = 'fb-video-overlay';
+            overlay.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;background-image:url(' + options.previewImage + ');background-size:cover;background-position:center;cursor:pointer;z-index:5;';
+
+            var onPlayClick = function (e) {
+                if (e) e.preventDefault();
+                overlay.style.display = 'none';
+                if (playIconSpan) playIconSpan.style.display = 'none';
+                if (!container.contains(playerWrapper)) container.appendChild(playerWrapper);
+                renderIframe(true);
+            };
+
+            overlay.addEventListener('click', onPlayClick);
+            if (playIconSpan) {
+                playIconSpan.style.display = 'flex';
+                playIconSpan.addEventListener('click', onPlayClick);
+            }
+            container.appendChild(overlay);
         }
     }
 
-    function initAllVideoPlayers() {
-        var containers = document.querySelectorAll('.fb-player-option:not(.initialized)');
-        containers.forEach(function (el) {
-            if (!initializedPlayers.has(el.id)) {
-                initVideoPlayer(el);
-                el.classList.add('initialized');
-            }
+    function initAll() {
+        document.querySelectorAll('.fb-player-option:not(.fb-initialized)').forEach(function (el) {
+            initVideoPlayer(el);
+            el.classList.add('fb-initialized');
         });
     }
 
-    var initToken;
-    function requestInit() {
-        if (initToken) cancelAnimationFrame(initToken);
-        initToken = requestAnimationFrame(function () {
-            initAllVideoPlayers();
-        });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', requestInit);
-    } else {
-        requestInit();
-    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initAll);
+    else initAll();
 
     if (typeof window !== 'undefined') {
-        var currentUrl = window.location.href;
-        var mutationObserver = new MutationObserver(function (mutations) {
-            var hasNewVideo = false;
-            if (currentUrl !== window.location.href) {
-                currentUrl = window.location.href;
-                initializedPlayers.clear();
-                hasNewVideo = true;
-            } else {
-                for (var i = 0; i < mutations.length; i++) {
-                    if (mutations[i].addedNodes.length) {
-                        hasNewVideo = true;
-                        break;
-                    }
-                }
-            }
-            if (hasNewVideo) requestInit();
-        });
-
-        mutationObserver.observe(document.body, { childList: true, subtree: true });
+        new MutationObserver(initAll).observe(document.body, { childList: true, subtree: true });
     }
-
-    window.reinitVideoPlayer = initAllVideoPlayers;
 })();
