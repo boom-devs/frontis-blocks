@@ -3,7 +3,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 
 export default function save({ attributes }) {
     const { 
-        blockId,
+        blockID,
         headingText, 
         headingTag,
         subHeadingSwitcher,
@@ -30,7 +30,7 @@ export default function save({ attributes }) {
 
 
     const blockProps = useBlockProps.save({
-        className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
+        className: `frontis-block fb-advanced-heading-main-wrapper ${blockID} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
     });
 
 

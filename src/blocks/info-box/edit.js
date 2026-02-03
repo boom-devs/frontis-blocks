@@ -15,12 +15,14 @@ import { useRef, useEffect } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
+import generateInfoBoxStyle from './styling';
 import Inspector from "./inspector";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -146,13 +148,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		/** End Dynamic Btn Text */
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-info-box-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-info-box',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -176,6 +180,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	}, [buttonFontFamily]);
 	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateInfoBoxStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-info-box-main-wrapper ${blockID} ${infoBoxDesktopSwitcher && 'fb-desktop-responsive'} ${infoBoxTabletSwitcher && 'fb-tablet-responsive'} ${infoBoxMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -290,10 +303,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<BlockControls>
 				<AlignmentToolbar

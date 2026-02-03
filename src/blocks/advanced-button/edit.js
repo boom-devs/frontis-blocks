@@ -18,12 +18,14 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import './editor.scss';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateButtonStyle from './styling';
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         buttonAlignment,
         buttonTextSwitcher,
@@ -69,13 +71,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         buttonFontFamily,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-advanced-button-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-advanced-button',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -86,8 +90,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     }, [buttonFontFamily]);
     /** End Load Google Font */
 
+    /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateButtonStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `frontis-block fb-advanced-button-main-wrapper ${blockID} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
@@ -138,10 +151,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                 <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 <AlignmentToolbar
