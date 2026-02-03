@@ -14,12 +14,14 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCallToActionStyle from './styling';
 
 import Inspector from "./inspector";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -159,13 +161,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-cta-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-icon-box',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -189,6 +193,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	}, [buttonTwoFontFamily]);
 	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateCallToActionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -338,10 +351,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
