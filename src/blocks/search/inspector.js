@@ -9,14 +9,17 @@ import {
 	BaseControl,
 	ButtonGroup,
 	Button,
+	ToggleControl,
+	TextareaControl
 } from '@wordpress/components';
 /**
  * Internal depencencies
  */
 import {
-    BORDER_STYLES,
-	ICON_ALIGN,
-} from "./constants/constants";
+	BORDER_STYLES,
+	SEARCH_ICON_ALIGN,
+	SEARCH_APPEARANCE
+} from '@Constants/fbConstants';
 import Select2 from "react-select";
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
@@ -28,7 +31,7 @@ import FB_InputControl from '@Components/input-control';
 import FBIconPicker from "../../components/icon-picker";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
-import {useDeviceType} from "@Config/displayType";
+import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 
 import { useEffect, useMemo, memo } from '@wordpress/element';
@@ -42,7 +45,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 		searchButtonInputFieldWidthUnits,
 		searchIconGap,
 		searchIconGapUnits,
-
+		showPlaceholderSwitcher,
+		placeholderText,
+		showButtonSwitcher,
+		searchButtonText,
+		searchAppearance,
 		buttonTextGlobalTypographyData,
 		buttonTextGlobalTypoSwitcher,
 		buttonTextGlobalTypoType,
@@ -58,7 +65,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		buttonTextLetterSpacingUnits,
 		buttonTextLineHeight,
 		buttonTextLineHeightUnits,
-		
+
 		buttonTextColorSwitcher,
 		buttonTextColor,
 		buttonTextColorHover,
@@ -128,7 +135,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		inputFieldTextLetterSpacingUnits,
 		inputFieldTextLineHeight,
 		inputFieldTextLineHeightUnits,
-		
+
 		inputFieldTextColorSwitcher,
 		inputFieldTextColor,
 		inputFieldTextColorHover,
@@ -159,59 +166,59 @@ const Inspector = ({ attributes, setAttributes }) => {
 		searchIconZIndex,
 		searchGlobalWraperID,
 		searchGlobalWraperClass,
-		searchCustomCSS,	
+		searchCustomCSS,
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	
+
 	/** Start Button Border */
-	const handleButtonBorderUnitChange = ( event, position ) => {
+	const handleButtonBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonBorderLink ) {
-			switch ( deviceType ) {
+		if (buttonBorderLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonBorderDesktop: {...buttonBorderDesktop, [position]: value}} );
+					setAttributes({ buttonBorderDesktop: { ...buttonBorderDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonBorderTablet: {...buttonBorderTablet, [position]: value}} );
+					setAttributes({ buttonBorderTablet: { ...buttonBorderTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonBorderMobile: {...buttonBorderMobile, [position]: value}} );
+					setAttributes({ buttonBorderMobile: { ...buttonBorderMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -221,11 +228,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleButtonBorderCombineBtn = () => {
-		setAttributes( {buttonBorderLink: !buttonBorderLink} );
+		setAttributes({ buttonBorderLink: !buttonBorderLink });
 	}
 
 	const handleButtonBorderUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonBorderUnits: {
 				...buttonBorderUnits,
 				[deviceType]: unit
@@ -238,53 +245,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Border */
 
 	/** Start Button Border Radius*/
-	const handleButtonBorderRadiusUnitChange = ( event, position ) => {
+	const handleButtonBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonBorderRadiusLink ) {
-			switch ( deviceType ) {
+		if (buttonBorderRadiusLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonBorderRadiusDesktop: {...buttonBorderRadiusDesktop, [position]: value}} );
+					setAttributes({ buttonBorderRadiusDesktop: { ...buttonBorderRadiusDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonBorderRadiusTablet: {...buttonBorderRadiusTablet, [position]: value}} );
+					setAttributes({ buttonBorderRadiusTablet: { ...buttonBorderRadiusTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonBorderRadiusMobile: {...buttonBorderRadiusMobile, [position]: value}} );
+					setAttributes({ buttonBorderRadiusMobile: { ...buttonBorderRadiusMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -294,11 +301,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleButtonBorderRadiusCombineBtn = () => {
-		setAttributes( {buttonBorderRadiusLink: !buttonBorderRadiusLink} );
+		setAttributes({ buttonBorderRadiusLink: !buttonBorderRadiusLink });
 	}
 
 	const handleButtonBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonBorderRadiusUnits: {
 				...buttonBorderRadiusUnits,
 				[deviceType]: unit
@@ -314,53 +321,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Button Border Radius */
 
 	/** Start Button Padding*/
-	const handleButtonPaddingUnitChange = ( event, position ) => {
+	const handleButtonPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( buttonPaddingLink ) {
-			switch ( deviceType ) {
+		if (buttonPaddingLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						buttonPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						buttonPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						buttonPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {buttonPaddingDesktop: {...buttonPaddingDesktop, [position]: value}} );
+					setAttributes({ buttonPaddingDesktop: { ...buttonPaddingDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {buttonPaddingTablet: {...buttonPaddingTablet, [position]: value}} );
+					setAttributes({ buttonPaddingTablet: { ...buttonPaddingTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {buttonPaddingMobile: {...buttonPaddingMobile, [position]: value}} );
+					setAttributes({ buttonPaddingMobile: { ...buttonPaddingMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -370,11 +377,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleButtonPaddingCombineBtn = () => {
-		setAttributes( {buttonPaddingLink: !buttonPaddingLink} );
+		setAttributes({ buttonPaddingLink: !buttonPaddingLink });
 	}
 
 	const handleButtonPaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			buttonPaddingUnits: {
 				...buttonPaddingUnits,
 				[deviceType]: unit
@@ -390,53 +397,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Button Padding */
 
 	/** Start Input Field Border */
-	const handleInputFieldBorderUnitChange = ( event, position ) => {
+	const handleInputFieldBorderUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( inputFieldBorderLink ) {
-			switch ( deviceType ) {
+		if (inputFieldBorderLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {inputFieldBorderDesktop: {...inputFieldBorderDesktop, [position]: value}} );
+					setAttributes({ inputFieldBorderDesktop: { ...inputFieldBorderDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {inputFieldBorderTablet: {...inputFieldBorderTablet, [position]: value}} );
+					setAttributes({ inputFieldBorderTablet: { ...inputFieldBorderTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {inputFieldBorderMobile: {...inputFieldBorderMobile, [position]: value}} );
+					setAttributes({ inputFieldBorderMobile: { ...inputFieldBorderMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -446,11 +453,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleInputFieldBorderCombineBtn = () => {
-		setAttributes( {inputFieldBorderLink: !inputFieldBorderLink} );
+		setAttributes({ inputFieldBorderLink: !inputFieldBorderLink });
 	}
 
 	const handleInputFieldBorderUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			inputFieldBorderUnits: {
 				...inputFieldBorderUnits,
 				[deviceType]: unit
@@ -466,53 +473,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Input Field Border */
 
 	/** Start Input Field Border Radius*/
-	const handleInputFieldBorderRadiusUnitChange = ( event, position ) => {
+	const handleInputFieldBorderRadiusUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( inputFieldBorderRadiusLink ) {
-			switch ( deviceType ) {
+		if (inputFieldBorderRadiusLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderRadiusDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderRadiusTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						inputFieldBorderRadiusMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {inputFieldBorderRadiusDesktop: {...inputFieldBorderRadiusDesktop, [position]: value}} );
+					setAttributes({ inputFieldBorderRadiusDesktop: { ...inputFieldBorderRadiusDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {inputFieldBorderRadiusTablet: {...inputFieldBorderRadiusTablet, [position]: value}} );
+					setAttributes({ inputFieldBorderRadiusTablet: { ...inputFieldBorderRadiusTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {inputFieldBorderRadiusMobile: {...inputFieldBorderRadiusMobile, [position]: value}} );
+					setAttributes({ inputFieldBorderRadiusMobile: { ...inputFieldBorderRadiusMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -522,11 +529,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleInputFieldBorderRadiusCombineBtn = () => {
-		setAttributes( {inputFieldBorderRadiusLink: !inputFieldBorderRadiusLink} );
+		setAttributes({ inputFieldBorderRadiusLink: !inputFieldBorderRadiusLink });
 	}
 
 	const handleInputFieldBorderRadiusUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			inputFieldBorderRadiusUnits: {
 				...inputFieldBorderRadiusUnits,
 				[deviceType]: unit
@@ -542,53 +549,53 @@ const Inspector = ({ attributes, setAttributes }) => {
 	/** End Input Field Border Radius */
 
 	/** Start Input Field Padding*/
-	const handleInputFieldPaddingUnitChange = ( event, position ) => {
+	const handleInputFieldPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
-		if ( inputFieldPaddingLink ) {
-			switch ( deviceType ) {
+		if (inputFieldPaddingLink) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {
+					setAttributes({
 						inputFieldPaddingDesktop: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Tablet':
-					setAttributes( {
+					setAttributes({
 						inputFieldPaddingTablet: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				case 'Mobile':
-					setAttributes( {
+					setAttributes({
 						inputFieldPaddingMobile: {
 							top: value,
 							right: value,
 							bottom: value,
 							left: value
 						}
-					} );
+					});
 					break;
 				default:
 					break;
 			}
 		} else {
-			switch ( deviceType ) {
+			switch (deviceType) {
 				case 'Desktop':
-					setAttributes( {inputFieldPaddingDesktop: {...inputFieldPaddingDesktop, [position]: value}} );
+					setAttributes({ inputFieldPaddingDesktop: { ...inputFieldPaddingDesktop, [position]: value } });
 					break;
 				case 'Tablet':
-					setAttributes( {inputFieldPaddingTablet: {...inputFieldPaddingTablet, [position]: value}} );
+					setAttributes({ inputFieldPaddingTablet: { ...inputFieldPaddingTablet, [position]: value } });
 					break;
 				case 'Mobile':
-					setAttributes( {inputFieldPaddingMobile: {...inputFieldPaddingMobile, [position]: value}} );
+					setAttributes({ inputFieldPaddingMobile: { ...inputFieldPaddingMobile, [position]: value } });
 					break;
 				default:
 					break;
@@ -598,11 +605,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 
 	const handleInputFieldPaddingCombineBtn = () => {
-		setAttributes( {inputFieldPaddingLink: !inputFieldPaddingLink} );
+		setAttributes({ inputFieldPaddingLink: !inputFieldPaddingLink });
 	}
 
 	const handleInputFieldPaddingUnitsHandler = (unit) => {
-		setAttributes( {
+		setAttributes({
 			inputFieldPaddingUnits: {
 				...inputFieldPaddingUnits,
 				[deviceType]: unit
@@ -620,12 +627,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
-		setAttributes({searchIcon: IconName})
+		setAttributes({ searchIcon: IconName })
 	}
 	/** End Icon Handler */
 
 
-    const allBlockStyle = useMemo(() => `
+	const allBlockStyle = useMemo(() => `
 
 		.${blockId}.fb-search-block{
 			${searchIconZIndex.Desktop ? `z-index: ${searchIconZIndex.Desktop};` : ''}
@@ -644,7 +651,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 			${buttonBorderColorHover ? `border-color: ${buttonBorderColorHover};` : ''}
 		}
 
-		.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+		.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field {
 			${searchButtonInputFieldWidth.Desktop && searchButtonInputFieldWidthUnits.Desktop ? `width: ${searchButtonInputFieldWidth.Desktop}${searchButtonInputFieldWidthUnits.Desktop};` : ''}
         }
 
@@ -667,7 +674,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             ${buttonTextGlobalTypoSwitcher.letterSpacing === false && buttonTextLetterSpacing.Desktop && buttonTextLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonTextLetterSpacing.Desktop}${buttonTextLetterSpacingUnits.Desktop};` : ''}
             ${buttonTextGlobalTypoSwitcher.lineHeight === false && buttonTextLineHeight.Desktop && buttonTextLineHeightUnits.Desktop ? `line-height: ${buttonTextLineHeight.Desktop}${buttonTextLineHeightUnits.Desktop};` : ''}
 
-			${ buttonTextColor ? `color: ${buttonTextColor};` : ''}
+			${buttonTextColor ? `color: ${buttonTextColor};` : ''}
 		}
 		.${blockId} .fb-search-container .fb-search-button-wrapper:hover span {
 			${buttonTextColorHover ? `color: ${buttonTextColorHover};` : ''}
@@ -715,7 +722,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             ${inputFieldTextGlobalTypoSwitcher.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
             ${inputFieldTextGlobalTypoSwitcher.letterSpacing === false && inputFieldTextLetterSpacing.Desktop && inputFieldTextLetterSpacingUnits.Desktop ? `letter-spacing: ${inputFieldTextLetterSpacing.Desktop}${inputFieldTextLetterSpacingUnits.Desktop};` : ''}
             ${inputFieldTextGlobalTypoSwitcher.lineHeight === false && inputFieldTextLineHeight.Desktop && inputFieldTextLineHeightUnits.Desktop ? `line-height: ${inputFieldTextLineHeight.Desktop}${inputFieldTextLineHeightUnits.Desktop};` : ''}
-			${ inputFieldTextColor ? `color: ${inputFieldTextColor};` : ''}
+			${inputFieldTextColor ? `color: ${inputFieldTextColor};` : ''}
 
 			${inputFieldBorder ? `border: ${inputFieldBorder};` : ''}
 			${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
@@ -741,7 +748,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				${buttonPaddingTabletWidth && buttonPaddingTablet?.top ? `padding: ${buttonPaddingTabletWidth};` : ''}
 			}
 
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field {
 				${searchButtonInputFieldWidth.Tablet && searchButtonInputFieldWidthUnits.Tablet ? `width: ${searchButtonInputFieldWidth.Tablet}${searchButtonInputFieldWidthUnits.Tablet};` : ''}
 			}
 
@@ -789,7 +796,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				${buttonPaddingMobileWidth && buttonPaddingMobile?.top ? `padding: ${buttonPaddingMobileWidth};` : ''}
 			}
 
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field {
 				${searchButtonInputFieldWidth.Mobile && searchButtonInputFieldWidthUnits.Mobile ? `width: ${searchButtonInputFieldWidth.Mobile}${searchButtonInputFieldWidthUnits.Mobile};` : ''}
 			}
 
@@ -926,7 +933,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		inputFieldTextLetterSpacingUnits,
 		inputFieldTextLineHeight,
 		inputFieldTextLineHeightUnits,
-		
+
 		inputFieldTextColorSwitcher,
 		inputFieldTextColor,
 		inputFieldTextColorHover,
@@ -965,16 +972,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 		inputFieldPaddingTabletWidth,
 		inputFieldPaddingMobileWidth,
 
-		searchIconZIndex,	
-    ]);
+		searchIconZIndex,
+	]);
 
 	const customCss = getCustomCss(searchCustomCSS, `.${blockId}`);
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, customCss] );
+	useEffect(() => {
+		setAttributes({ blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim() });
+	}, [allBlockStyle, customCss]);
 
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+	const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>
@@ -1009,19 +1016,43 @@ const Inspector = ({ attributes, setAttributes }) => {
 								{tab.name === 'general' && (
 									<>
 										<PanelBody title={__("General Settings", "frontis-blocks")} initialOpen={true}>
-											<FB_Range
-												min={1}
-												max={1000}
-												label={__("Button Width", "frontis-blocks")}
-												rangeValue={searchButtonWidth}
-												onChangeHandler={(value) => setAttributes({ searchButtonWidth: value })}
-												rangeUnitHandler={(value) => setAttributes({ searchButtonWidthUnits: value })}
-												deviceType={deviceType}
-												units={searchButtonWidthUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={"88"}
+											<SelectControl
+												label={__("Appearance", "frontis-blocks")}
+												value={searchAppearance}
+												options={SEARCH_APPEARANCE}
+												onChange={(value) => setAttributes({ searchAppearance: value })}
 											/>
+											{(searchAppearance === 'button-and-search') && (
+												<ToggleControl
+													label={__("Show Button Text", "frontis-blocks")}
+													checked={showButtonSwitcher}
+													onChange={(value) => setAttributes({ showButtonSwitcher: value })}
+												/>
+											)}
+											{(showButtonSwitcher && searchAppearance === 'button-and-search') && (
+												<TextareaControl
+													label={__("Button Text", "frontis-blocks")}
+													value={searchButtonText}
+													onChange={(value) => setAttributes({ searchButtonText: value })}
+													className="fb-advanced-text"
+												/>
+											)}
+											{(searchAppearance === 'button-and-search') && (
+
+												<FB_Range
+													min={1}
+													max={1000}
+													label={__("Button Width", "frontis-blocks")}
+													rangeValue={searchButtonWidth}
+													onChangeHandler={(value) => setAttributes({ searchButtonWidth: value })}
+													rangeUnitHandler={(value) => setAttributes({ searchButtonWidthUnits: value })}
+													deviceType={deviceType}
+													units={searchButtonWidthUnits}
+													setAttributes={setAttributes}
+													rangeStep={1}
+													resetFallbackValue={"88"}
+												/>
+											)}
 
 											<FB_Range
 												min={1}
@@ -1036,58 +1067,75 @@ const Inspector = ({ attributes, setAttributes }) => {
 												rangeStep={1}
 												resetFallbackValue={"1080"}
 											/>
-
-											<FB_Range
-												min={1}
-												max={100}
-												label={__("Icon Gap", "frontis-blocks")}
-												rangeValue={searchIconGap}
-												onChangeHandler={(value) => setAttributes({ searchIconGap: value })}
-												rangeUnitHandler={(value) => setAttributes({ searchIconGapUnits: value })}
-												deviceType={deviceType}
-												units={searchIconGapUnits}
-												setAttributes={setAttributes}
-												rangeStep={1}
-												resetFallbackValue={"5"}
-											/>
-
-
-											<BaseControl
-												label={__("Icon", "frontis-blocks")}
-													id="fb-setting-text-alignment"
-													className="fb-setting-text-alignment"
-											>
-												<ButtonGroup
-													className="fb-setting-text-alignment-group-btn"
-												>
-													{ICON_ALIGN.map((item, key) => (
-														<Button
-															key={key}
-															onClick={() => setAttributes({ searchIconAlign: item.value })} 
-															className={`fb-setting-text-alignment-single-btn ${searchIconAlign === item.value ? 'active' : ''}`}
-														>
-															{item.label}
-														</Button>
-													))}
-												</ButtonGroup>
-												{(searchIconAlign === 'icon-text') && (
-													<FBIconPicker value={searchIcon} setIconHandler={iconHandler} /> 
-												)}
-
-												{(searchIconAlign === 'image') && (
-													<FB_ImageControl 
-														globalImageUrl={searchIconImageUrl}
-														setglobalImageUrl={(value) => setAttributes({ searchIconImageUrl: value })}
-														globalImageAlt={searchIconImageAlt}
-														setglobalImageAlt={(value) => setAttributes({ searchIconImageAlt: value })}
-														globalImageID={searchIconImageID}
-														setglobalImageID={(value) => setAttributes({ searchIconImageID: value })}
-														globalImageSize={searchIconImageDisplay}
-														setglobalImageSize={(value) => setAttributes({ searchIconImageDisplay: value })}
+											{(searchAppearance === 'button-and-search') && (
+												<>
+													<FB_Range
+														min={1}
+														max={100}
+														label={__("Icon Gap", "frontis-blocks")}
+														rangeValue={searchIconGap}
+														onChangeHandler={(value) => setAttributes({ searchIconGap: value })}
+														rangeUnitHandler={(value) => setAttributes({ searchIconGapUnits: value })}
+														deviceType={deviceType}
+														units={searchIconGapUnits}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={"5"}
 													/>
-												)}
 
-											</BaseControl>
+
+													<BaseControl
+														label={__("Icon", "frontis-blocks")}
+														id="fb-setting-text-alignment"
+														className="fb-setting-text-alignment"
+													>
+														<ButtonGroup
+															className="fb-setting-text-alignment-group-btn"
+														>
+															{SEARCH_ICON_ALIGN.map((item, key) => (
+																<Button
+																	key={key}
+																	onClick={() => setAttributes({ searchIconAlign: item.value })}
+																	className={`fb-setting-text-alignment-single-btn ${searchIconAlign === item.value ? 'active' : ''}`}
+																>
+																	{item.label}
+																</Button>
+															))}
+														</ButtonGroup>
+														{(searchIconAlign === 'icon-text') && (
+															<FBIconPicker value={searchIcon} setIconHandler={iconHandler} />
+														)}
+
+														{(searchIconAlign === 'image') && (
+															<FB_ImageControl
+																globalImageUrl={searchIconImageUrl}
+																setglobalImageUrl={(value) => setAttributes({ searchIconImageUrl: value })}
+																globalImageAlt={searchIconImageAlt}
+																setglobalImageAlt={(value) => setAttributes({ searchIconImageAlt: value })}
+																globalImageID={searchIconImageID}
+																setglobalImageID={(value) => setAttributes({ searchIconImageID: value })}
+																globalImageSize={searchIconImageDisplay}
+																setglobalImageSize={(value) => setAttributes({ searchIconImageDisplay: value })}
+															/>
+														)}
+
+													</BaseControl>
+												</>
+											)}
+
+											<ToggleControl
+												label={__("Show Placeholder", "frontis-blocks")}
+												checked={showPlaceholderSwitcher}
+												onChange={(value) => setAttributes({ showPlaceholderSwitcher: value })}
+											/>
+											{showPlaceholderSwitcher && (
+												<TextareaControl
+													label={__("Placeholder Text", "frontis-blocks")}
+													value={placeholderText}
+													onChange={(value) => setAttributes({ placeholderText: value })}
+													className="fb-advanced-text"
+												/>
+											)}
 										</PanelBody>
 									</>
 								)}
@@ -1095,79 +1143,79 @@ const Inspector = ({ attributes, setAttributes }) => {
 									<>
 										<PanelBody title={__("Search Button", "frontis-blocks")} initialOpen={true}>
 											<FB_TypographyControl
-                                                globalTypoControlActive={true}
-                                                globalTypoSwitcher={buttonTextGlobalTypoSwitcher}
-                                                storeGlobalTypographyData={(value) => setAttributes({ buttonTextGlobalTypographyData: value })}
+												globalTypoControlActive={true}
+												globalTypoSwitcher={buttonTextGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ buttonTextGlobalTypographyData: value })}
 
-                                                globalTypoType={buttonTextGlobalTypoType}
-                                                onChangeGlobalTypoType={(value) => {
-                                                    setAttributes({ 
-                                                        buttonTextGlobalTypoType: value, 
-                                                        buttonTextGlobalTypoSwitcher: value === 'default' ? {...buttonTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...buttonTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                                                    })
-                                                }}
+												globalTypoType={buttonTextGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({
+														buttonTextGlobalTypoType: value,
+														buttonTextGlobalTypoSwitcher: value === 'default' ? { ...buttonTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...buttonTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+													})
+												}}
 
-                                                globalTypoOption={buttonTextGlobalTypoOption}
+												globalTypoOption={buttonTextGlobalTypoOption}
 												onChangeGlobalTypoOption={(value) => setAttributes({ buttonTextGlobalTypoOption: value })}
 
-                                                fontFamily={buttonTextFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ buttonTextFontFamily: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, fontFamily: value && false} })}
+												fontFamily={buttonTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ buttonTextFontFamily: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, fontFamily: value && false } })}
 
-                                                fontSize={buttonTextFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ buttonTextFontSize: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, fontSize: value && false} })}
+												fontSize={buttonTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ buttonTextFontSize: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, fontSize: value && false } })}
 
-                                                fontSizeUnits={buttonTextFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ buttonTextFontSizeUnits: value })}
+												fontSizeUnits={buttonTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ buttonTextFontSizeUnits: value })}
 
-                                                fontWeight={buttonTextFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ buttonTextFontWeight: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, fontWeight: value && false} })}
+												fontWeight={buttonTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ buttonTextFontWeight: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, fontWeight: value && false } })}
 
-                                                fontStyle={buttonTextFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ buttonTextFontStyle: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, fontStyle: value && false} })}
+												fontStyle={buttonTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ buttonTextFontStyle: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, fontStyle: value && false } })}
 
-                                                textTransform={buttonTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, textTransform: value && false} })}
+												textTransform={buttonTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ buttonTextTransform: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, textTransform: value && false } })}
 
-                                                textDecoration={buttonTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, textDecoration: value && false} })}
+												textDecoration={buttonTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ buttonTextDecoration: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, textDecoration: value && false } })}
 
-                                                letterSpacing={buttonTextLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ buttonTextLetterSpacing: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+												letterSpacing={buttonTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ buttonTextLetterSpacing: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-                                                letterSpacingUnits={buttonTextLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ buttonTextLetterSpacingUnits: value })}
+												letterSpacingUnits={buttonTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ buttonTextLetterSpacingUnits: value })}
 
-                                                lineHeight={buttonTextLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ buttonTextLineHeight: value, buttonTextGlobalTypoSwitcher: {...buttonTextGlobalTypoSwitcher, lineHeight: value && false} })}
+												lineHeight={buttonTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ buttonTextLineHeight: value, buttonTextGlobalTypoSwitcher: { ...buttonTextGlobalTypoSwitcher, lineHeight: value && false } })}
 
-                                                lineHeightUnits={buttonTextLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ buttonTextLineHeightUnits: value })}
+												lineHeightUnits={buttonTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ buttonTextLineHeightUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 
 											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={buttonTextColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ buttonTextColorSwitcher: value })}
-                                            />
+												label={__("Text Color", "frontis-blocks")}
+												globalSwitcher={buttonTextColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ buttonTextColorSwitcher: value })}
+											/>
 
-                                            {buttonTextColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={buttonTextColor}
-                                                    setGlobalColor={(value) => setAttributes({ buttonTextColor: value === undefined ? '' : value })}
-                                                />
-                                            )}
+											{buttonTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={buttonTextColor}
+													setGlobalColor={(value) => setAttributes({ buttonTextColor: value === undefined ? '' : value })}
+												/>
+											)}
 
-                                            {buttonTextColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={buttonTextColorHover}
-                                                    setGlobalColor={(value) => setAttributes({ buttonTextColorHover: value })}
-                                                />
-                                            )}
+											{buttonTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={buttonTextColorHover}
+													setGlobalColor={(value) => setAttributes({ buttonTextColorHover: value })}
+												/>
+											)}
 
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
@@ -1220,7 +1268,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												spacingDesktop={buttonBorderRadiusDesktop}
 												spacingTablet={buttonBorderRadiusTablet}
 												spacingMobile={buttonBorderRadiusMobile}
-												handleSpacingUnitHandler={handleButtonBorderRadiusUnitChange}  
+												handleSpacingUnitHandler={handleButtonBorderRadiusUnitChange}
 												spacingCombineBtn={buttonBorderRadiusLink}
 												spacingCombineBtnHandler={handleButtonBorderRadiusCombineBtn}
 												setAttributes={setAttributes}
@@ -1234,7 +1282,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												spacingDesktop={buttonPaddingDesktop}
 												spacingTablet={buttonPaddingTablet}
 												spacingMobile={buttonPaddingMobile}
-												handleSpacingUnitHandler={handleButtonPaddingUnitChange}  
+												handleSpacingUnitHandler={handleButtonPaddingUnitChange}
 												spacingCombineBtn={buttonPaddingLink}
 												spacingCombineBtnHandler={handleButtonPaddingCombineBtn}
 												setAttributes={setAttributes}
@@ -1289,7 +1337,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												/>
 
 												{searchIconRotateSwitcher === 'normal' && (
-													<FB_Range 
+													<FB_Range
 														min={-360}
 														max={360}
 														label={__("Icon Rotation", "frontis-blocks")}
@@ -1321,7 +1369,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 											</PanelBody>
 										)}
-										{(searchIconAlign === 'image') &&(
+										{(searchIconAlign === 'image') && (
 											<PanelBody
 												title={__("Image Styles", "frontis-blocks")}
 												initialOpen={true}
@@ -1360,8 +1408,8 @@ const Inspector = ({ attributes, setAttributes }) => {
 													setGlobalSwitcher={(value) => setAttributes({ searchIconImageRotateSwitcher: value })}
 												/>
 
-												{searchIconImageRotateSwitcher === 'normal' && ( 
-													<FB_Range 
+												{searchIconImageRotateSwitcher === 'normal' && (
+													<FB_Range
 														min={-360}
 														max={360}
 														label={__("Image Rotation", "frontis-blocks")}
@@ -1396,79 +1444,79 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<PanelBody title={__("Search Field", "frontis-blocks")} initialOpen={false}>
 
 											<FB_TypographyControl
-                                                globalTypoControlActive={true}
-                                                globalTypoSwitcher={inputFieldTextGlobalTypoSwitcher}
-                                                storeGlobalTypographyData={(value) => setAttributes({ inputFieldTextGlobalTypographyData: value })}
+												globalTypoControlActive={true}
+												globalTypoSwitcher={inputFieldTextGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ inputFieldTextGlobalTypographyData: value })}
 
-                                                globalTypoType={inputFieldTextGlobalTypoType}
-                                                onChangeGlobalTypoType={(value) => {
-                                                    setAttributes({ 
-                                                        inputFieldTextGlobalTypoType: value, 
-                                                        inputFieldTextGlobalTypoSwitcher: value === 'default' ? {...inputFieldTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...inputFieldTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
-                                                    })
-                                                }}
+												globalTypoType={inputFieldTextGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({
+														inputFieldTextGlobalTypoType: value,
+														inputFieldTextGlobalTypoSwitcher: value === 'default' ? { ...inputFieldTextGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...inputFieldTextGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+													})
+												}}
 
-                                                globalTypoOption={inputFieldTextGlobalTypoOption}
+												globalTypoOption={inputFieldTextGlobalTypoOption}
 												onChangeGlobalTypoOption={(value) => setAttributes({ inputFieldTextGlobalTypoOption: value })}
 
-                                                fontFamily={inputFieldTextFontFamily}
-                                                onChangeFontFamily={(value) => setAttributes({ inputFieldTextFontFamily: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, fontFamily: value && false} })}
+												fontFamily={inputFieldTextFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ inputFieldTextFontFamily: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, fontFamily: value && false } })}
 
-                                                fontSize={inputFieldTextFontSize}
-                                                onChangeFontSize={(value) => setAttributes({ inputFieldTextFontSize: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, fontSize: value && false} })}
+												fontSize={inputFieldTextFontSize}
+												onChangeFontSize={(value) => setAttributes({ inputFieldTextFontSize: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, fontSize: value && false } })}
 
-                                                fontSizeUnits={inputFieldTextFontSizeUnits}
-                                                onChangeFontSizeUnit={(value) => setAttributes({ inputFieldTextFontSizeUnits: value })}
+												fontSizeUnits={inputFieldTextFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ inputFieldTextFontSizeUnits: value })}
 
-                                                fontWeight={inputFieldTextFontWeight}
-                                                onChangeFontWeight={(value) => setAttributes({ inputFieldTextFontWeight: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, fontWeight: value && false} })}
+												fontWeight={inputFieldTextFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ inputFieldTextFontWeight: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, fontWeight: value && false } })}
 
-                                                fontStyle={inputFieldTextFontStyle}
-                                                onChangeFontStyle={(value) => setAttributes({ inputFieldTextFontStyle: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, fontStyle: value && false} })}
+												fontStyle={inputFieldTextFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ inputFieldTextFontStyle: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, fontStyle: value && false } })}
 
-                                                textTransform={inputFieldTextTransform}
-                                                onChangeTextTransform={(value) => setAttributes({ inputFieldTextTransform: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, textTransform: value && false} })}
+												textTransform={inputFieldTextTransform}
+												onChangeTextTransform={(value) => setAttributes({ inputFieldTextTransform: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, textTransform: value && false } })}
 
-                                                textDecoration={inputFieldTextDecoration}
-                                                onChangeTextDecoration={(value) => setAttributes({ inputFieldTextDecoration: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, textDecoration: value && false} })}
+												textDecoration={inputFieldTextDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ inputFieldTextDecoration: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, textDecoration: value && false } })}
 
-                                                letterSpacing={inputFieldTextLetterSpacing}
-                                                onChangeLetterSpacing={(value) => setAttributes({ inputFieldTextLetterSpacing: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, letterSpacing: value && false} })}
+												letterSpacing={inputFieldTextLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ inputFieldTextLetterSpacing: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, letterSpacing: value && false } })}
 
-                                                letterSpacingUnits={inputFieldTextLetterSpacingUnits}
-                                                onChangeLetterSpacingUnit={(value) => setAttributes({ inputFieldTextLetterSpacingUnits: value })}
+												letterSpacingUnits={inputFieldTextLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ inputFieldTextLetterSpacingUnits: value })}
 
-                                                lineHeight={inputFieldTextLineHeight}
-                                                onChangeLineHeight={(value) => setAttributes({ inputFieldTextLineHeight: value, inputFieldTextGlobalTypoSwitcher: {...inputFieldTextGlobalTypoSwitcher, lineHeight: value && false} })}
+												lineHeight={inputFieldTextLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ inputFieldTextLineHeight: value, inputFieldTextGlobalTypoSwitcher: { ...inputFieldTextGlobalTypoSwitcher, lineHeight: value && false } })}
 
-                                                lineHeightUnits={inputFieldTextLineHeightUnits}
-                                                onChangeLineHeightUnit={(value) => setAttributes({ inputFieldTextLineHeightUnits: value })}
+												lineHeightUnits={inputFieldTextLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ inputFieldTextLineHeightUnits: value })}
 
-                                                deviceType={deviceType}
-                                                setAttributes={setAttributes}
-                                            />
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
 
 											<FB_SwitcherControl
-                                                label={__("Text Color", "frontis-blocks")}
-                                                globalSwitcher={inputFieldTextColorSwitcher}
-                                                setGlobalSwitcher={(value) => setAttributes({ inputFieldTextColorSwitcher: value })}
-                                            />
+												label={__("Text Color", "frontis-blocks")}
+												globalSwitcher={inputFieldTextColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ inputFieldTextColorSwitcher: value })}
+											/>
 
-                                            {inputFieldTextColorSwitcher === 'normal' && (
-                                                <FB_ColorControl
-                                                    label={__("Normal Color", "frontis-blocks")}
-                                                    globalColor={inputFieldTextColor}
-                                                    setGlobalColor={(value) => setAttributes({ inputFieldTextColor: value === undefined ? '' : value })}
-                                                />
-                                            )}
+											{inputFieldTextColorSwitcher === 'normal' && (
+												<FB_ColorControl
+													label={__("Normal Color", "frontis-blocks")}
+													globalColor={inputFieldTextColor}
+													setGlobalColor={(value) => setAttributes({ inputFieldTextColor: value === undefined ? '' : value })}
+												/>
+											)}
 
-                                            {inputFieldTextColorSwitcher === 'hover' && (
-                                                <FB_ColorControl
-                                                    label={__("Hover Color", "frontis-blocks")}
-                                                    globalColor={inputFieldTextColorHover}
-                                                    setGlobalColor={(value) => setAttributes({ inputFieldTextColorHover: value })}
-                                                />
-                                            )}
+											{inputFieldTextColorSwitcher === 'hover' && (
+												<FB_ColorControl
+													label={__("Hover Color", "frontis-blocks")}
+													globalColor={inputFieldTextColorHover}
+													setGlobalColor={(value) => setAttributes({ inputFieldTextColorHover: value })}
+												/>
+											)}
 
 											<SelectControl
 												label={__("Border Style", "frontis-blocks")}
@@ -1521,7 +1569,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												spacingDesktop={inputFieldBorderRadiusDesktop}
 												spacingTablet={inputFieldBorderRadiusTablet}
 												spacingMobile={inputFieldBorderRadiusMobile}
-												handleSpacingUnitHandler={handleInputFieldBorderRadiusUnitChange}  
+												handleSpacingUnitHandler={handleInputFieldBorderRadiusUnitChange}
 												spacingCombineBtn={inputFieldBorderRadiusLink}
 												spacingCombineBtnHandler={handleInputFieldBorderRadiusCombineBtn}
 												setAttributes={setAttributes}
@@ -1535,7 +1583,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 												spacingDesktop={inputFieldPaddingDesktop}
 												spacingTablet={inputFieldPaddingTablet}
 												spacingMobile={inputFieldPaddingMobile}
-												handleSpacingUnitHandler={handleInputFieldPaddingUnitChange}  
+												handleSpacingUnitHandler={handleInputFieldPaddingUnitChange}
 												spacingCombineBtn={inputFieldPaddingLink}
 												spacingCombineBtnHandler={handleInputFieldPaddingCombineBtn}
 												setAttributes={setAttributes}
@@ -1550,40 +1598,40 @@ const Inspector = ({ attributes, setAttributes }) => {
 												<PanelBody
 													title={__("Layout", "frontis-blocks")}
 													initialOpen={true}
-													className='fb-setting-layout-header' 
+													className='fb-setting-layout-header'
 												>
 													<FB_Range
-                                                        min={0}
-                                                        max={10000000}
-                                                        label={__("Z Index", "frontis-blocks")}
-                                                        rangeValue={searchIconZIndex}
-                                                        onChangeHandler={(value) => setAttributes({ searchIconZIndex: value === 0 ? undefined : value })}
-                                                        deviceType={deviceType}
-                                                        setAttributes={setAttributes}
-                                                        rangeStep={1}
-                                                        resetFallbackValue={""}
-                                                        isRangeUnit={false}
+														min={0}
+														max={10000000}
+														label={__("Z Index", "frontis-blocks")}
+														rangeValue={searchIconZIndex}
+														onChangeHandler={(value) => setAttributes({ searchIconZIndex: value === 0 ? undefined : value })}
+														deviceType={deviceType}
+														setAttributes={setAttributes}
+														rangeStep={1}
+														resetFallbackValue={""}
+														isRangeUnit={false}
 
-                                                    />
+													/>
 													<FB_InputControl
-                                                        label={__("CSS ID", "frontis-blocks")}
-                                                        value={searchGlobalWraperID}
-                                                        onChangeValue={(value) => setAttributes({ searchGlobalWraperID: value })}
-                                                        helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                                                    />
+														label={__("CSS ID", "frontis-blocks")}
+														value={searchGlobalWraperID}
+														onChangeValue={(value) => setAttributes({ searchGlobalWraperID: value })}
+														helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+													/>
 
-                                                    <FB_InputControl
-                                                        label={__("CSS Class", "frontis-blocks")}
-                                                        value={searchGlobalWraperClass}
-                                                        onChangeValue={(value) => setAttributes({ searchGlobalWraperClass: value })}
-                                                        helpText={__("Separate with spaces key.", "frontis-blocks")}
-                                                    />
+													<FB_InputControl
+														label={__("CSS Class", "frontis-blocks")}
+														value={searchGlobalWraperClass}
+														onChangeValue={(value) => setAttributes({ searchGlobalWraperClass: value })}
+														helpText={__("Separate with spaces key.", "frontis-blocks")}
+													/>
 												</PanelBody>
 												<PanelBody
 													title={__("Custom CSS", "frontis-blocks")}
 													initialOpen={false}
 												>
-													<FB_CustomCSSEditor  
+													<FB_CustomCSSEditor
 														value={searchCustomCSS}
 														onChangeValue={(value) => setAttributes({ searchCustomCSS: value })}
 													/>

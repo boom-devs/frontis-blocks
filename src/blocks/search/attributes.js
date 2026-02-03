@@ -69,6 +69,26 @@ const attributes = {
 		}
 	},
 
+	showPlaceholderSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+	placeholderText: {
+        type : 'string',
+        default: 'Search'
+    },
+	showButtonSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+	searchButtonText: {
+        type : 'string',
+        default: 'Search'
+    },
+	searchAppearance: {
+        type : 'string',
+        default: 'button-and-search'
+    },
 	/** Start Typography */
 	buttonTextGlobalTypographyData: {
         type: "object",
