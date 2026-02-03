@@ -1012,7 +1012,7 @@ class AssetsGenerator
 					continue;
 				}
 
-				if ((!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'react-player.standalone.min.js') || $this->skip_advanced_video_js) {
+				if ((!in_array('frontis-blocks/advanced-video', $this->used_blocks) && basename($js_file) === 'videojs.min.js') || $this->skip_advanced_video_js) {
 					continue;
 				}
 
