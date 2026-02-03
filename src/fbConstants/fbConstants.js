@@ -747,4 +747,14 @@ export const GRID_UNIT_TYPES = [
 	{ title: '%', label: __('%', 'frontis-blocks'), value: "%" }
 ];
 
+export const SEARCH_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const SEARCH_APPEARANCE = [
+	{ title: 'Button and Search', label: __('Button and Search', 'frontis-blocks'), value: "button-and-search" },
+	{ title: 'Only Search', label: __('Only Search', 'frontis-blocks'), value: "only-search" },
+];
 /** End Container Layout Constants */
