@@ -744,10 +744,16 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							</div>
 						<?php endif; ?>
 
-						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
-							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							</div>
+						<?php if ($quote_icon_switcher): ?>
+							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</div>
+							<?php elseif ($testimonial_quote_icon_align === 'image' && !empty($testimonial_quote_image_url)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<img src="<?php echo esc_url($testimonial_quote_image_url); ?>" alt="<?php echo esc_attr($testimonial_quote_image_alt); ?>" aria-hidden="true" />
+								</div>
+							<?php endif; ?>
 						<?php endif; ?>
 
 					<?php elseif ($testimonial_preset_style === 'preset-5'): ?>
@@ -823,10 +829,16 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							<?php endif; ?>
 						</div>
 
-						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
-							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							</div>
+						<?php if ($quote_icon_switcher): ?>
+							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</div>
+							<?php elseif ($testimonial_quote_icon_align === 'image' && !empty($testimonial_quote_image_url)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<img src="<?php echo esc_url($testimonial_quote_image_url); ?>" alt="<?php echo esc_attr($testimonial_quote_image_alt); ?>" aria-hidden="true" />
+								</div>
+							<?php endif; ?>
 						<?php endif; ?>
 
 					<?php else: ?>
@@ -902,10 +914,16 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							</div>
 						</div>
 
-						<?php if ($quote_icon_switcher && !empty($testimonial_quote_icon)): ?>
-							<div class="fb-testimonial-quote-icon">
-								<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-							</div>
+						<?php if ($quote_icon_switcher): ?>
+							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<?php echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</div>
+							<?php elseif ($testimonial_quote_icon_align === 'image' && !empty($testimonial_quote_image_url)): ?>
+								<div class="fb-testimonial-quote-icon">
+									<img src="<?php echo esc_url($testimonial_quote_image_url); ?>" alt="<?php echo esc_attr($testimonial_quote_image_alt); ?>" aria-hidden="true" />
+								</div>
+							<?php endif; ?>
 						<?php endif; ?>
 
 					<?php endif; ?>
