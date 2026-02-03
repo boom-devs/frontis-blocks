@@ -70,14 +70,27 @@ const Render = ( props ) => {
 		style: getContainerBGStyle,
 	} );
 
+	/**
+	 * Generate and update Custom CSS.
+	 * 
+	 * Logic for Separator:
+	 * - Root Container: Uses ' ' (space) as separator.
+	 *   Example: `#block-id .custom-class` (Descendant selector).
+	 *   Reason: Root container wraps inner blocks in a separate div.
+	 * 
+	 * - Child Container: Uses '' (empty) as separator.
+	 *   Example: `#block-id.custom-class` (Chained selector).
+	 *   Reason: Child container applies custom class to the SAME element as the ID.
+	 */
 	useEffect(() => {
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`);
+		const separator = isBlockRootParent ? ' ' : '';
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, separator);
 		// Only update if value actually changed
 		if (containerGlobalCustomCSSValue !== customCss) {
 			setAttributes({containerGlobalCustomCSSValue: customCss});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [containerGlobalCustomCSS, blockProps.id]);
+	}, [containerGlobalCustomCSS, blockProps.id, isBlockRootParent]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
