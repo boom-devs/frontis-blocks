@@ -44,7 +44,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		blockStyle,
 		speed,
 		reverseDirection,
-		pauseOnHover,
 		sliderGlobalWraperID,
 		sliderGlobalWraperClass,
 	} = attributes;
@@ -128,33 +127,6 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		},
 	);
 
-	// Settings using the arrowsId for navigation
-	// const settings = useMemo(
-	// 	() => ({
-	// 		spaceBetween: 0,
-	// 		centeredSlides: false,
-	// 		speed: speed,
-	// 		autoplay: {
-	// 			delay: 1,
-	// 			reverseDirection: reverseDirection,
-	// 			pauseOnMouseEnter: pauseOnHover,
-	// 			disableOnInteraction: false,
-	// 			waitForTransition: false,
-	// 		},
-	// 		loop: true,
-	// 		slidesPerView: "auto",
-	// 		allowTouchMove: false,
-	// 		navigation: arrowsId
-	// 			? {
-	// 					nextEl: `.${arrowsId} .fb-news-ticker-next`,
-	// 					prevEl: `.${arrowsId} .fb-news-ticker-prev`,
-	// 					hideOnClick: false, // Keep navigation always visible
-	// 			  }
-	// 			: false,
-	// 	}),
-	// 	[speed, reverseDirection, pauseOnHover, arrowsId],
-	// );
-
 	const settings = useMemo(
 		() => ({
 			spaceBetween: 0,
@@ -163,15 +135,17 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 			autoplay: {
 				delay: 0,
 				reverseDirection: reverseDirection,
-				pauseOnMouseEnter: pauseOnHover,
 				disableOnInteraction: false,
+				stopOnLastSlide: false,
 				waitForTransition: true,
 			},
 			loop: true,
 			slidesPerView: "auto",
 			allowTouchMove: false,
-			freeMode: true,
-			freeModeMomentum: false,
+			freeMode: {
+				enabled: true,
+				momentum: false,
+			},
 			navigation: arrowsId
 				? {
 					nextEl: `.${arrowsId} .fb-news-ticker-next`,
@@ -180,7 +154,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				}
 				: false,
 		}),
-		[speed, reverseDirection, pauseOnHover, arrowsId],
+		[speed, reverseDirection, arrowsId],
 	);
 
 
@@ -264,6 +238,11 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 						swiperRef.current = instance;
 						// ensure first mount is synced
 						updateSwiperSoon();
+					}}
+					onClick={() => {
+						if (swiperRef.current?.autoplay) {
+							swiperRef.current.autoplay.start();
+						}
 					}}
 					className={`fb-marquee-swiper ${sliderGlobalWraperClass}`}
 					id={sliderGlobalWraperID}

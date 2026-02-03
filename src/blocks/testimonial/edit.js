@@ -19,13 +19,15 @@ import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
 import Inspector from './inspector';
+import generateTestimonialStyle from './styling';
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -171,13 +173,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
-            setAttributes({
-                blockID: "fb-testimonial-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId, blockID]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-testimonial',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -208,6 +212,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     }
     }, [TestimonialDesignationFontFamily]);
     /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateTestimonialStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -361,15 +374,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         context,
     });
 
-
-
     return (
         <>
-
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (

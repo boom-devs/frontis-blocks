@@ -177,8 +177,12 @@ const Edit = (props) => {
     // const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
 
     useEffect(() => {
-        setAttributes({blockStyle: `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [blockFrontEndStyle] );
+        const newStyle = `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim();
+        // Only update if the style actually changed - prevents double render loop
+        if (attributes.blockStyle !== newStyle) {
+            setAttributes({blockStyle: newStyle});
+        }
+    }, [blockFrontEndStyle]);
 
 	if ( ! variationSelected && 0 === getBlockParents?.length ) {
 		const block = select('core/block-editor').getBlock(clientId);

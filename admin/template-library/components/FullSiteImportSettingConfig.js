@@ -828,7 +828,10 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       updateStepStatus("fetch_site", "running");
       setImportProgress(5);
   
-      const siteResp = await getTemplatesData("import/site", "site_id", template.id);
+      const siteResp = await getTemplatesData("import/site", "site_id", 41);
+      console.log(siteResp);
+
+      return false;
       if (!siteResp?.data) throw new Error("Failed to fetch site data");
       updateStepStatus("fetch_site", "success");
   

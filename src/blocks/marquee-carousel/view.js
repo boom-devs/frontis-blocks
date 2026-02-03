@@ -26,6 +26,19 @@
 					...sliderOptions,
 				});
 
+				// Force autoplay to continue/resume on click/touch
+				swiperEl.addEventListener('click', () => {
+					if (swiperInstance.autoplay) {
+						swiperInstance.autoplay.start();
+					}
+				});
+				
+				swiperEl.addEventListener('touchstart', () => {
+					if (swiperInstance.autoplay) {
+						swiperInstance.autoplay.start();
+					}
+				});
+
 				// ===== Autoplay toggle support =====
 				if (sliderOptions.navigation?.nextEl) {
 					// Extract arrowsId from nextEl selector
