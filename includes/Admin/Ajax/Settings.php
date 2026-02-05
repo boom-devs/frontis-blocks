@@ -427,57 +427,42 @@ class Settings extends AjaxBase
 			return;
 		}
 
-		$post_value = isset($_POST['value']) ? ($_POST['value']) : [];
+		$post_value = isset($_POST['value']) ? $_POST['value'] : null;
+		$sanitized_value = $this->sanitize_option_value($post_value, $type);
 
-		$value = json_encode($post_value);
+		$old_value_raw = get_option("fb_$option_name");
+		// Decode old value if it's a JSON string, matching how it's stored
+		$old_value_decoded = is_string($old_value_raw) ? json_decode($old_value_raw, true) : $old_value_raw;
+		$old_value_sanitized = $this->sanitize_option_value($old_value_decoded === null && is_string($old_value_raw) ? $old_value_raw : ($old_value_decoded ?? $old_value_raw), $type);
 
-		$old_value = get_option("fb_$option_name");
-		// Convert old_value to the correct type for comparison
-		$old_value = $this->sanitize_option_value($old_value, $type);
-        $value = $this->sanitize_option_value($post_value, $type);
-
-        // Convert back to string for saving if it's boolean (as the old code seemed to encode it)
-        // Actually, looking at the code: $value = json_encode($post_value); was used before.
-        // We should sanitize BEFORE encoding if we are encoding.
-        // But sanitize_option_value returns int/bool/string.
-        // Let's look at how it was done.
-        
-        // Original:
-        // $post_value = isset($_POST['value']) ? ($_POST['value']) : [];
-		// $value = json_encode($post_value);
-        
-        // If we want to strictly sanitize based on type:
-        $sanitized_value = $this->sanitize_option_value($post_value, $type);
-        
-        // Re-encode if necessary? The original code did json_encode without checking type.
-        // But get_option also returns string usually if it was saved as string.
-        
-        // Let's stick to the previous pattern but sanitize the INPUT.
-        
-        $value = json_encode($sanitized_value);
-        
-		if ($old_value === $value) {
+		if ($old_value_sanitized === $sanitized_value) {
 			wp_send_json_success(['message' => 'No changes were made']);
 			return;
 		}
 
-		$updated = update_option("fb_$option_name", $value);
+		// Consistently JSON encode arrays and booleans as strings in DB
+		$value_to_save = (is_array($sanitized_value) || is_bool($sanitized_value)) ? json_encode($sanitized_value) : $sanitized_value;
+
+		$updated = update_option("fb_$option_name", $value_to_save);
 
 		if ($updated) {
 			wp_send_json_success(['message' => 'Option updated successfully']);
 		} else {
 			$error_message = 'Failed to update option';
-			if ($old_value === false) {
+			if ($old_value_raw === false) {
 				$error_message .= ': Option does not exist';
-			} elseif ($old_value === $value) {
-				$error_message .= ': Value unchanged';
+			} elseif (get_option("fb_$option_name") === $value_to_save) {
+				// Guard against race conditions or update_option false positives
+				wp_send_json_success(['message' => 'Option is already up to date']);
+				return;
 			} else {
 				$error_message .= ': Unknown reason';
 			}
+
 			wp_send_json_error([
 				'message' => $error_message,
-				'old_value' => $old_value,
-				'new_value' => $value,
+				'old_value' => $old_value_sanitized,
+				'new_value' => $sanitized_value,
 				'option_name' => "fb_$option_name"
 			]);
 		}
@@ -496,7 +481,7 @@ class Settings extends AjaxBase
 		if (is_array($value)) {
 			$sanitized = [];
 			foreach ($value as $key => $val) {
-				$sanitized[sanitize_key($key)] = $this->sanitize_option_value($val, $type);
+				$sanitized[sanitize_text_field($key)] = $this->sanitize_option_value($val, $type);
 			}
 			return $sanitized;
 		}
