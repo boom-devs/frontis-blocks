@@ -221,58 +221,8 @@ const Inspector = (props) => {
 	};
 
 	// 2️⃣ Memoize parsed values
-	const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
-	const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
-	const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
-
-	const formatted_container_column_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
-	}, [FrontisBlocksData.container_column_gap]);
-
-	const formatted_container_row_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
-	}, [FrontisBlocksData.container_row_gap]);
-
-	const formatted_container_padding = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_padding);
-	}, [FrontisBlocksData.container_padding]);
-
-
-	useEffect(() => {
-		setAttributes({
-			globalFullWidthContentBoxedWidth: {
-				Desktop: formatted_desktop_breakpoint || "1200",
-				Tablet: formatted_tablet_breakpoint || "1024",
-				Mobile: formatted_mobile_breakpoint || "767",
-			},
-			globalColumnGap: {
-				Desktop: formatted_container_column_gap.Desktop || "",
-				Tablet: formatted_container_column_gap.Tablet || "",
-				Mobile: formatted_container_column_gap.Mobile || "",
-			},
-			globalRowGap: {
-				Desktop: formatted_container_row_gap.Desktop || "",
-				Tablet: formatted_container_row_gap.Tablet || "",
-				Mobile: formatted_container_row_gap.Mobile || "",
-			},
-			containerGlobalPadding: {
-				Desktop: formatted_container_padding.Desktop || "",
-				Tablet: formatted_container_padding.Tablet || "",
-				Mobile: formatted_container_padding.Mobile || "",
-			},
-		});
-	}, [
-		formatted_desktop_breakpoint, 
-		formatted_tablet_breakpoint, 
-		formatted_mobile_breakpoint,
-		formatted_container_column_gap,
-		formatted_container_row_gap,
-		formatted_container_padding
-	]);
-
 	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
 	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
-	const [containerLocalDesktopPadding, setContainerLocalDesktopPadding] = useState(containerDesktopPadding);
 
 	const handleColumnAddItem = () => {
         const newItem = {
@@ -1411,7 +1361,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Column", "frontis-blocks")}
-					rangeValue={columnGap}
+					rangeValue={columnGap.Desktop === '' ? globalColumnGap : columnGap}
 					onChangeHandler={columnGapFn}
 					rangeUnitHandler={columnGapUnitsFn}
 					deviceType={deviceType}
@@ -1429,7 +1379,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Row", "frontis-blocks")}
-					rangeValue={rowGap}
+					rangeValue={rowGap.Desktop === '' ? globalRowGap : rowGap}
 					onChangeHandler={rowGapFn}
 					rangeUnitHandler={rowGapUnitsFn}
 					deviceType={deviceType}

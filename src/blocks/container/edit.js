@@ -195,6 +195,65 @@ const Edit = (props) => {
 	// Handle variation picker - show picker when no variation selected and block is root
 	const shouldShowVariationPicker = ! variationSelected && 0 === getBlockParents?.length;
 	
+	// Initialize global responsive settings
+	useEffect(() => {
+		const parseResponsiveValue = (value) => {
+			if (typeof value === "string") {
+				try {
+					return JSON.parse(value);
+				} catch (e) {
+					return { Desktop: value, Tablet: value, Mobile: value };
+				}
+			} else if (typeof value === "object") {
+				return value;
+			}
+			return { Desktop: value, Tablet: value, Mobile: value };
+		};
+
+		const formatted_container_column_gap = parseResponsiveValue(FrontisBlocksData.container_column_gap);
+		const formatted_container_row_gap = parseResponsiveValue(FrontisBlocksData.container_row_gap);
+		const formatted_container_padding = parseResponsiveValue(FrontisBlocksData.container_padding);
+		const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
+		const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
+		const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
+
+		const attributesToUpdate = {};
+
+		// Only update if not already set to avoid overwriting user changes or causing infinite loops
+		if (!attributes.globalColumnGap?.Desktop) {
+			attributesToUpdate.globalColumnGap = {
+				Desktop: formatted_container_column_gap.Desktop || "",
+				Tablet: formatted_container_column_gap.Tablet || "",
+				Mobile: formatted_container_column_gap.Mobile || "",
+			};
+		}
+		if (!attributes.globalRowGap?.Desktop) {
+			attributesToUpdate.globalRowGap = {
+				Desktop: formatted_container_row_gap.Desktop || "",
+				Tablet: formatted_container_row_gap.Tablet || "",
+				Mobile: formatted_container_row_gap.Mobile || "",
+			};
+		}
+		if (!attributes.containerGlobalPadding?.Desktop) {
+			attributesToUpdate.containerGlobalPadding = {
+				Desktop: formatted_container_padding.Desktop || "",
+				Tablet: formatted_container_padding.Tablet || "",
+				Mobile: formatted_container_padding.Mobile || "",
+			};
+		}
+		if (!attributes.globalFullWidthContentBoxedWidth?.Desktop) {
+			attributesToUpdate.globalFullWidthContentBoxedWidth = {
+				Desktop: formatted_desktop_breakpoint || "1200",
+				Tablet: formatted_tablet_breakpoint || "1024",
+				Mobile: formatted_mobile_breakpoint || "767",
+			};
+		}
+
+		if (Object.keys(attributesToUpdate).length > 0) {
+			setAttributes(attributesToUpdate);
+		}
+	}, []);
+
 	// Set p_block_id when showing variation picker - must be in useEffect, not render
 	useEffect(() => {
 		if (shouldShowVariationPicker) {
