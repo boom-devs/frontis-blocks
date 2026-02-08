@@ -33,7 +33,6 @@ export default function save({ attributes }) {
         className: `frontis-block fb-advanced-heading-main-wrapper ${blockID} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'} ${headingBeforeAfterSwitcher && 'fb-advanced-heading-before-after'}`,
     });
 
-
     return (
         <>
             <div {...blockProps}>

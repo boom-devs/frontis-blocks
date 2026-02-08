@@ -165,7 +165,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	useBlockIdGenerator({
 		clientId,
 		blockID,
-		blockPrefix: 'fb-icon-box',
+		blockPrefix: 'fb-call-to-action',
 		isSelected,
 		attributes,
 		setAttributes,

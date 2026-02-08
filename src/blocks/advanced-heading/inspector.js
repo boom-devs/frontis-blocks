@@ -78,9 +78,9 @@ import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import getProActive from '@Utils/getProActive';
 import FB_Presets from '@Components/presets';
-import { advancedHeadingPresets } from './preset';
 
 import './editor.scss';
+import { advancedHeadingPresets } from './preset';
 
 const Inspector = ({ attributes, setAttributes }) => {
     const {
@@ -1716,100 +1716,6 @@ const Inspector = ({ attributes, setAttributes }) => {
     /** end Global border */
     /** End Global Border Radius */
     /** End Border Radius */
-
-    /**
-     * Get background normal styles
-     */
-    const getBackgroundNormalStyles = (device) => {
-        const bgType = headingGlobalBgNormalBackgroundType;
-        const bgColor = headingGlobalBgNormalClassicColor;
-        const bgGradient = headingGlobalBgNormalGradientColor;
-        const customGradient = headingGlobalBgNormalCustomGradientInputValue;
-        const customGradientEnabled = headingGlobalBgNormalCustomGradientSwitcher;
-
-        const bgImageUrl = headingGlobalBgNormalBackgroundImageUrl?.[device];
-        const bgImagePosition = headingGlobalBgNormalBackgroundImagePosition?.[device];
-        const bgAttachment = headingGlobalBgNormalBackgroundImageAttachment?.[device];
-        const bgRepeat = headingGlobalBgNormalBackgroundImageRepeat?.[device];
-        const bgSize = headingGlobalBgNormalBackgroundImageSize?.[device];
-
-        if (bgType === 'gradient') {
-            return {
-                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
-            };
-        }
-
-        let styles = { background: bgColor };
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition
-                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
-                    : "50% 50%",
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-     * Get background hover styles
-     */
-    const getBackgroundHoverStyles = (device) => {
-        const bgType = headingGlobalBgHoverBackgroundType;
-        const bgColor = headingGlobalBgHoverClassicColor;
-        const bgGradient = headingGlobalBgHoverGradientColor;
-        const customGradient = headingGlobalBgHoverCustomGradientInputValue;
-        const customGradientEnabled = headingGlobalBgHoverCustomGradientSwitcher;
-
-        const bgImageUrl = headingGlobalBgHoverBackgroundImageUrl?.[device];
-        const bgImagePosition = headingGlobalBgHoverBackgroundImagePosition?.[device];
-        const bgAttachment = headingGlobalBgHoverBackgroundImageAttachment?.[device];
-        const bgRepeat = headingGlobalBgHoverBackgroundImageRepeat?.[device];
-        const bgSize = headingGlobalBgHoverBackgroundImageSize?.[device];
-
-        if (bgType === 'gradient') {
-            return {
-                background: customGradientEnabled && customGradient ? customGradient : bgGradient || bgColor
-            };
-        }
-
-        let styles = { background: bgColor };
-
-        if (bgType !== 'gradient' && bgImageUrl) {
-            styles = {
-                ...styles,
-                'background-image': `url(${bgImageUrl})`,
-                'background-position': bgImagePosition
-                    ? `${bgImagePosition.x * 100}% ${bgImagePosition.y * 100}%`
-                    : "50% 50%",
-                'background-attachment': bgAttachment || undefined,
-                'background-repeat': bgRepeat || undefined,
-                'background-size': bgSize || undefined,
-            };
-        }
-
-        return styles;
-    };
-
-    /**
-    * Convert object to string
-    */
-    const backgroundStyleObjectToString = (styleObj) =>
-        Object.entries(styleObj)
-            .map(([key, value]) => `${key}: ${value};`)
-            .join(' ');
-    const desktopBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Desktop'));
-    const desktopBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Desktop'));
-    const tabletBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Tablet'));
-    const tabletBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Tablet'));
-    const mobileBackgroundNormalStyles = backgroundStyleObjectToString(getBackgroundNormalStyles('Mobile'));
-    const mobileBackgroundHoverStyles = backgroundStyleObjectToString(getBackgroundHoverStyles('Mobile'));
 
     /**
      * subHeadingPosition
