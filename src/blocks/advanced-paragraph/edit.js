@@ -17,12 +17,15 @@ import { useDeviceType } from "@Config/displayType";
 import "./editor.scss";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+
+import generateAdvancedParagraphStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		paragraphText,
 		paragraphAlignment,
@@ -36,30 +39,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		paragraphFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "fb-advanced-paragraphs-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-advanced-paragraph',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
 
 	/** Start load font */
-    useEffect(() => {
-        [paragraphFontFamily].forEach(font => {
-            if (font && !loadedFonts.has(font)) {
-                loadGoogleFont(font);
-                loadedFonts.add(font);
-            }
-        });
-    }, [paragraphFontFamily]);
-    /** End load font */
+	useEffect(() => {
+		[paragraphFontFamily].forEach(font => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [paragraphFontFamily]);
+	/** End load font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateAdvancedParagraphStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
-		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockId} ${
-			advancedParagraphDesktopSwitcher && "fb-desktop-responsive"
-		} ${advancedParagraphTabletSwitcher && "fb-tablet-responsive"} ${
-			advancedParagraphMobileSwitcher && "fb-mobile-responsive"
+		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockID} ${advancedParagraphDesktopSwitcher && "fb-desktop-responsive"
+			} ${advancedParagraphTabletSwitcher && "fb-tablet-responsive"} ${advancedParagraphMobileSwitcher && "fb-mobile-responsive"
 			}`,
 	});
 
@@ -73,6 +86,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
+			{isSelected}
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}

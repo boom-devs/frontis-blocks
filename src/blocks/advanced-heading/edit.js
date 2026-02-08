@@ -16,9 +16,10 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from '@Config/displayType';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import './editor.scss';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateAdvancedHeadingStyle from './styling';
+
+import './editor.scss';
 
 const loadedFonts = new Set();
 

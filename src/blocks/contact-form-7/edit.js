@@ -8,10 +8,12 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "../contact-form-7/inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateContactFormStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
 	const [selectedForm, setSelectedForm] = useState();
 
@@ -35,13 +37,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		contactFormErrorFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-contact-form-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-contact-form-7',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -80,6 +84,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [contactFormErrorFontFamily]);
 	/** End Load Google Font */
 
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateContactFormStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+
 	const blockProps = useBlockProps({
 		className: [
 			'fb-contact-form-wrapper',
@@ -116,11 +129,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.contact_form_active ? (
