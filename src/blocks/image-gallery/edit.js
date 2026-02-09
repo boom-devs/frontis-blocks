@@ -7,10 +7,12 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateImageGalleryStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -36,13 +38,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         GalleryButtonFontFamily,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-gallery-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-image-gallery',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start load font */
     useEffect(() => {
@@ -54,7 +58,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         });
     }, [GalleryButtonFontFamily]);
     /** End load font */
-    
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateImageGalleryStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -76,11 +88,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
     return (
-        <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+        <>  
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID} ref={panelRef}>
