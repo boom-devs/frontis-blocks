@@ -14,8 +14,10 @@ import { useEffect, useRef } from '@wordpress/element';
 import lottie from 'lottie-web';
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateLottieAnimationStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -36,13 +38,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		lottieAnimationGlobalWraperID
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-lottie-animation',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
 	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-lottie-animation-" + clientId.slice(0, 8),
-			});
+		if (blockID) {
+			const css = generateLottieAnimationStyle(attributes);
+			setAttributes({ blockStyle: css });
 		}
-	}, [clientId]);
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-lottie-animation-main-wrapper ${blockID} ${lottieAnimationDesktopSwitcher && 'fb-desktop-responsive'} ${lottieAnimationTabletSwitcher && 'fb-tablet-responsive'} ${lottieAnimationMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -183,7 +196,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			{isSelected && (
+				<Inspector 
+					attributes={attributes} 
+					setAttributes={setAttributes} 
+				/>
+			)}
+			
 			<BlockControls>
 				<ToolbarGroup>
 					<MediaUploadCheck>

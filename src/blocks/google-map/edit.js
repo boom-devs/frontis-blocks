@@ -5,8 +5,8 @@ import {
 } from '@wordpress/block-editor';
 
 /**
- * Internal dependencies
- */
+* Internal dependencies
+*/
 import './editor.scss';
 
 import Inspector from "./inspector";
