@@ -6,12 +6,14 @@ import apiFetch from "@wordpress/api-fetch";
 import loadGoogleFont from "@Utils/loadGoogleFont";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostCategoryStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         premadeStyle,
         taxonomyType,
@@ -45,18 +47,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         postCategoryMobileSwitcher,
 
         postTitleFontFamily,
-		postDescriptionFontFamily,
-		postCountFontFamily,
-		buttonFontFamily,
+        postDescriptionFontFamily,
+        postCountFontFamily,
+        buttonFontFamily,
     } = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockId: "fb-post-category-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-post-category',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -88,9 +92,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [buttonFontFamily]);
     /** End Load Google Font */
 
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generatePostCategoryStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
-        className: `fb-taxonomy-block fb-post-category-area ${blockId} fb-taxonomy-${premadeStyle} ${postCategoryDesktopSwitcher && "fb-desktop-responsive"
+        className: `fb-taxonomy-block fb-post-category-area ${blockID} fb-taxonomy-${premadeStyle} ${postCategoryDesktopSwitcher && "fb-desktop-responsive"
             } ${postCategoryTabletSwitcher && "fb-tablet-responsive"} ${postCategoryMobileSwitcher && "fb-mobile-responsive"
             }`,
     });
@@ -258,7 +270,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sortedTaxonomies, taxonomyType, allPostTypes, allTaxonomies]);
 
     useEffect(() => {
-        if (!showAuthor || !allTerms || allTerms.length === 0 || !taxonomyType || !allTaxonomies || !adminEditorUsers) {
+        if (!showAuthor || !allTerms || allTerms.length === 0 || !taxonomyType || !allTaxonomies || !adminEditorUsers || !allPostTypes) {
             setCategoryCreators({});
             return;
         }
@@ -865,11 +877,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 {!taxonomyType ? (
