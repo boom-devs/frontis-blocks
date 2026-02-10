@@ -7,9 +7,12 @@ import Inspector from './inspector';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateSocialStyle from './styling';
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -28,13 +31,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialTitleFontFamily,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-social-icons-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-social-icons',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start load font */
     useEffect(() => {
@@ -46,6 +51,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         });
     }, [socialTitleFontFamily]);
     /** End load font */
+
+     /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateSocialStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-social-main-wrapper ${blockID} ${socialIconsDesktopSwitcher && 'fb-desktop-responsive'} ${socialIconsTabletSwitcher && 'fb-tablet-responsive'} ${socialIconsMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -63,10 +77,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-social-wrapper ${socialGlobalWraperClass}`} id={socialGlobalWraperID} ref={panelRef}>

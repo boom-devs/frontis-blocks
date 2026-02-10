@@ -3,7 +3,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 
 export default function save({ attributes }) {
     const {
-        blockId,
+        blockID,
 		/** Start Header */
 		pricingSectionTopSwitcher,
 		pricingSectionTopText,
@@ -60,13 +60,13 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-pricing-area ${blockID} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     return (
         <>
-            <div {...blockProps} id={blockId}>
-                <div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID}>
+            <div {...blockProps} id={blockID}>
+                <div className={`fb-parent-wrapper fb-pricing-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID}>
                     {pricingSectionTopSwitcher && (
                         <div className="fb-pricing-inner-wrapper">
                             <div className="fb-pricing-top-wrapper">

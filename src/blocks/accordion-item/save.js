@@ -2,7 +2,7 @@
 import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 import './style.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import {useState } from "@wordpress/element";
+import { useState } from "@wordpress/element";
 
 const save = ({ attributes }) => {
 
@@ -54,7 +54,7 @@ const save = ({ attributes }) => {
                             {titlePrefixType !== 'none' && (
                                 <div className="fb-accordion-title-prefix">
                                     {titlePrefixType === 'icon' && titlePrefixIcon && (
-                                           renderSVG(titlePrefixIcon)
+                                        renderSVG(titlePrefixIcon)
                                     )}
 
                                     {titlePrefixType === 'image' && titlePrefixImgUrl && (
@@ -88,16 +88,16 @@ const save = ({ attributes }) => {
                                 </div>
                             )}
                         </div>
-                        {inheritedDisplayIcon && 
+                        {inheritedDisplayIcon &&
                             <div className="fb-accordion-tab-icon">
                                 {inheritedTabIconSwitcher === 'icon' && inheritedTabIcon && renderSVG(inheritedTabIcon)}
-                                {inheritedTabIconSwitcher === 'image' && inheritedTabIcon && <img src={inheritedTabImageUrl} alt={inheritedTabImageAlt}/>}
+                                {inheritedTabIconSwitcher === 'image' && inheritedTabImageUrl && <img src={inheritedTabImageUrl} alt={inheritedTabImageAlt} />}
                             </div>
                         }
-                        {inheritedDisplayIcon && 
+                        {inheritedDisplayIcon &&
                             <div className="fb-accordion-expanded-icon">
                                 {inheritedExpandedIconSwitcher === 'icon' && inheritedExpandedIcon && renderSVG(inheritedExpandedIcon)}
-                                {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedIcon && <img src={inheritedExpandedImageUrl} alt={inheritedExpandedImageAlt}/>}
+                                {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedImageUrl && <img src={inheritedExpandedImageUrl} alt={inheritedExpandedImageAlt} />}
                             </div>
                         }
                     </div>
