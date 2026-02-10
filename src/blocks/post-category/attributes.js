@@ -1,6 +1,6 @@
 // attributes.js
 const attributes = {
-	blockId: {
+	blockID: {
 		type: "string",
 		default: "",
 	},

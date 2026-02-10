@@ -90,7 +90,7 @@
 		const {
 			postType,
 			premadeStyle,
-			blockId,
+			blockID,
 			categoryKey,
 			tagKey,
 			cat,

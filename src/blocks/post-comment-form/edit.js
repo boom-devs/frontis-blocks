@@ -4,12 +4,14 @@ import { useBlockProps } from '@wordpress/block-editor';
 import loadGoogleFont from "@Utils/loadGoogleFont";
 
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostCommentFormStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         showCommentTitle,
         showCommentsCount,
         showCommentForm,
@@ -37,13 +39,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		cancelReplyFontFamily,
     } = attributes;
 
-    useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({
-				blockId: "fb-post-comment-form-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-post-comment-form',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -96,13 +100,22 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [cancelReplyFontFamily]);
     /** End Load Google Font */
 
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generatePostCommentFormStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
     const blockProps = useBlockProps({
-        className: `fb-post-comment-form-block ${blockId} ${commentFormDesktopSwitcher && "fb-desktop-responsive"} ${commentFormTabletSwitcher && "fb-tablet-responsive"} ${commentFormMobileSwitcher && "fb-mobile-responsive"}`,
+        className: `fb-post-comment-form-block ${blockID} ${commentFormDesktopSwitcher && "fb-desktop-responsive"} ${commentFormTabletSwitcher && "fb-tablet-responsive"} ${commentFormMobileSwitcher && "fb-mobile-responsive"}`,
     });
 
     useEffect(() => {
-        if (clientId && !blockId) {
-            setAttributes({ blockId: "fb-post-comment-form-" + clientId.slice(0, 8) });
+        if (clientId && !blockID) {
+            setAttributes({ blockID: "fb-post-comment-form-" + clientId.slice(0, 8) });
         }
     }, [clientId]);
 
@@ -111,11 +124,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
 
+            )}
+            
             {/* Output block styles for editor */}
             {blockStyle && <style>{blockStyle}</style>}
 

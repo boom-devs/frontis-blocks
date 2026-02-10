@@ -3,10 +3,12 @@ import { useEffect } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostFeaturedImageStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		isLink,
 		rel,
@@ -22,16 +24,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		wrapperClass,
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-post-featured-image',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
 	useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({
-				blockId: "fb-post-featured-image-" + clientId.slice(0, 8),
-			});
+		if (blockID) {
+			const css = generatePostFeaturedImageStyle(attributes);
+			setAttributes({ blockStyle: css });
 		}
-	}, [clientId]);
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
-		className: `fb-post-featured-image-block ${blockId} ${
+		className: `fb-post-featured-image-block ${blockID} ${
 			featuredImageDesktopSwitcher && "fb-desktop-responsive"
 		} ${featuredImageTabletSwitcher && "fb-tablet-responsive"} ${
 			featuredImageMobileSwitcher && "fb-mobile-responsive"
@@ -96,11 +109,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
 
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps}>
 				<div className={imageWrapperClasses} id={wrapperId || undefined}>
 					{imageUrl ? (
