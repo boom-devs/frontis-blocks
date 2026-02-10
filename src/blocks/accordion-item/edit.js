@@ -9,6 +9,9 @@ import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateAccordionItemStyle from './styling';
+
 
 export default function Edit(props) {
     const { attributes, setAttributes, isSelected, clientId, context } = props;
@@ -47,13 +50,24 @@ export default function Edit(props) {
 
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-accordion-item',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
     useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
+        if (blockID) {
+            const css = generateAccordionItemStyle(attributes);
+            setAttributes({ blockStyle: css });
         }
-    }, [clientId]);
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     useEffect(() => {
         setAttributes({

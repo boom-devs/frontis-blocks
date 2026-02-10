@@ -35,7 +35,7 @@ import { useEffect, useMemo, memo } from '@wordpress/element';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
-		blockId,
+		blockID,
 		searchButtonWidth,
 		searchButtonWidthUnits,
 		searchButtonInputFieldWidth,
@@ -232,9 +232,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		})
 	}
-	const buttonBorderDesktopWidth = `${buttonBorderDesktop.top}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.right}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.bottom}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.left}${buttonBorderUnits.Desktop}`;
-	const buttonBorderTabletWidth = `${buttonBorderTablet.top}${buttonBorderUnits.Tablet} ${buttonBorderTablet.right}${buttonBorderUnits.Tablet} ${buttonBorderTablet.bottom}${buttonBorderUnits.Tablet} ${buttonBorderTablet.left}${buttonBorderUnits.Tablet}`;
-	const buttonBorderMobileWidth = `${buttonBorderMobile.top}${buttonBorderUnits.Mobile} ${buttonBorderMobile.right}${buttonBorderUnits.Mobile} ${buttonBorderMobile.bottom}${buttonBorderUnits.Mobile} ${buttonBorderMobile.left}${buttonBorderUnits.Mobile}`;
 	/** End Border */
 
 	/** Start Button Border Radius*/
@@ -307,12 +304,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 	/** End Button Border Radius */
 
-	/** Start Button Border Radius */
-	const buttonBorderRadiusDesktopWidth = `${buttonBorderRadiusDesktop.top}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.right}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.bottom}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.left}${buttonBorderRadiusUnits.Desktop}`;
-	const buttonBorderRadiusTabletWidth = `${buttonBorderRadiusTablet.top}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.right}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.bottom}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.left}${buttonBorderRadiusUnits.Tablet}`;
-	const buttonBorderRadiusMobileWidth = `${buttonBorderRadiusMobile.top}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.right}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.bottom}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.left}${buttonBorderRadiusUnits.Mobile}`;
-	/** End Button Border Radius */
-
 	/** Start Button Padding*/
 	const handleButtonPaddingUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -381,12 +372,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		})
 	}
-	/** End Button Padding */
-
-	/** Start Button Padding */
-	const buttonPaddingDesktopWidth = `${buttonPaddingDesktop.top}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.right}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.bottom}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.left}${buttonPaddingUnits.Desktop}`;
-	const buttonPaddingTabletWidth = `${buttonPaddingTablet.top}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.right}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.bottom}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.left}${buttonPaddingUnits.Tablet}`;
-	const buttonPaddingMobileWidth = `${buttonPaddingMobile.top}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.right}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.bottom}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.left}${buttonPaddingUnits.Mobile}`;
 	/** End Button Padding */
 
 	/** Start Input Field Border */
@@ -459,12 +444,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 	/** End Input Field Border */
 
-	/** Start Input Field Border */
-	const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop.top}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.right}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.bottom}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.left}${inputFieldBorderUnits.Desktop}`;
-	const inputFieldBorderTabletWidth = `${inputFieldBorderTablet.top}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.right}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.bottom}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.left}${inputFieldBorderUnits.Tablet}`;
-	const inputFieldBorderMobileWidth = `${inputFieldBorderMobile.top}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.right}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.bottom}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.left}${inputFieldBorderUnits.Mobile}`;
-	/** End Input Field Border */
-
 	/** Start Input Field Border Radius*/
 	const handleInputFieldBorderRadiusUnitChange = ( event, position ) => {
 		const value = event.target.value;
@@ -533,12 +512,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 			}
 		})
 	}
-	/** End Input Field Border Radius */
-
-	/** Start Input Field Border Radius */
-	const inputFieldBorderRadiusDesktopWidth = `${inputFieldBorderRadiusDesktop.top}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.right}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.bottom}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.left}${inputFieldBorderRadiusUnits.Desktop}`;
-	const inputFieldBorderRadiusTabletWidth = `${inputFieldBorderRadiusTablet.top}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.right}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.bottom}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.left}${inputFieldBorderRadiusUnits.Tablet}`;
-	const inputFieldBorderRadiusMobileWidth = `${inputFieldBorderRadiusMobile.top}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.right}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.bottom}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.left}${inputFieldBorderRadiusUnits.Mobile}`;
 	/** End Input Field Border Radius */
 
 	/** Start Input Field Padding*/
@@ -611,370 +584,11 @@ const Inspector = ({ attributes, setAttributes }) => {
 	}
 	/** End Input Field Padding */
 
-	/** Start Input Field Padding */
-	const inputFieldPaddingDesktopWidth = `${inputFieldPaddingDesktop.top}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.right}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.bottom}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.left}${inputFieldPaddingUnits.Desktop}`;
-	const inputFieldPaddingTabletWidth = `${inputFieldPaddingTablet.top}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.right}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.bottom}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.left}${inputFieldPaddingUnits.Tablet}`;
-	const inputFieldPaddingMobileWidth = `${inputFieldPaddingMobile.top}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.right}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.bottom}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.left}${inputFieldPaddingUnits.Mobile}`;
-	/** End Input Field Padding */
-
-
 	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
 		setAttributes({searchIcon: IconName})
 	}
 	/** End Icon Handler */
-
-
-    const allBlockStyle = useMemo(() => `
-
-		.${blockId}.fb-search-block{
-			${searchIconZIndex.Desktop ? `z-index: ${searchIconZIndex.Desktop};` : ''}
-		}
-		.${blockId} .fb-search-container .fb-search-button-wrapper {
-			${searchButtonWidth.Desktop && searchButtonWidthUnits.Desktop ? `width: ${searchButtonWidth.Desktop}${searchButtonWidthUnits.Desktop};` : ''}
-			${searchIconGap.Desktop && searchIconGapUnits.Desktop ? `gap: ${searchIconGap.Desktop}${searchIconGapUnits.Desktop};` : ''}
-			${buttonBorder ? `border: ${buttonBorder};` : ''}
-			${buttonBorderColor ? `border-color: ${buttonBorderColor};` : ''}
-			${buttonBorderDesktopWidth && buttonBorderDesktop?.top ? `border-width: ${buttonBorderDesktopWidth};` : ''}
-			${buttonBorderRadiusDesktopWidth && buttonBorderRadiusDesktop?.top ? `border-radius: ${buttonBorderRadiusDesktopWidth};` : ''}
-			${buttonPaddingDesktopWidth && buttonPaddingDesktop?.top ? `padding: ${buttonPaddingDesktopWidth};` : ''}
-			transition: ease-in-out 0.3s;
-        }
-		.${blockId} .fb-search-container .fb-search-button-wrapper:hover {
-			${buttonBorderColorHover ? `border-color: ${buttonBorderColorHover};` : ''}
-		}
-
-		.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
-			${searchButtonInputFieldWidth.Desktop && searchButtonInputFieldWidthUnits.Desktop ? `width: ${searchButtonInputFieldWidth.Desktop}${searchButtonInputFieldWidthUnits.Desktop};` : ''}
-        }
-
-		.${blockId} .fb-search-container .fb-search-button-wrapper span {
-            ${buttonTextGlobalTypoSwitcher.fontFamily === true && buttonTextGlobalTypographyData.fontFamily ? `font-family: ${buttonTextGlobalTypographyData.fontFamily};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontSize === true && buttonTextGlobalTypographyData.fontSize ? `font-size: ${buttonTextGlobalTypographyData.fontSize};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontWeight === true && buttonTextGlobalTypographyData.fontWeight ? `font-weight: ${buttonTextGlobalTypographyData.fontWeight};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontStyle === true && buttonTextGlobalTypographyData.fontStyle ? `font-style: ${buttonTextGlobalTypographyData.fontStyle};` : ''}
-            ${buttonTextGlobalTypoSwitcher.textTransform === true && buttonTextGlobalTypographyData.textTransform ? `text-transform: ${buttonTextGlobalTypographyData.textTransform};` : ''}
-            ${buttonTextGlobalTypoSwitcher.textDecoration === true && buttonTextGlobalTypographyData.textDecoration ? `text-decoration: ${buttonTextGlobalTypographyData.textDecoration};` : ''}
-            ${buttonTextGlobalTypoSwitcher.letterSpacing === true && buttonTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${buttonTextGlobalTypographyData.letterSpacing};` : ''}
-            ${buttonTextGlobalTypoSwitcher.lineHeight === true && buttonTextGlobalTypographyData.lineHeight ? `line-height: ${buttonTextGlobalTypographyData.lineHeight};` : ''}
-                
-            ${buttonTextGlobalTypoSwitcher.fontFamily === false && buttonTextFontFamily && buttonTextFontFamily !== 'Default' ? `font-family: ${buttonTextFontFamily};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontSize === false && buttonTextFontSize.Desktop && buttonTextFontSizeUnits.Desktop ? `font-size: ${buttonTextFontSize.Desktop}${buttonTextFontSizeUnits.Desktop};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontWeight === false && buttonTextFontWeight ? `font-weight: ${buttonTextFontWeight};` : ''}
-            ${buttonTextGlobalTypoSwitcher.fontStyle === false && buttonTextFontStyle ? `font-style: ${buttonTextFontStyle};` : ''}
-            ${buttonTextGlobalTypoSwitcher.textTransform === false && buttonTextTransform ? `text-transform: ${buttonTextTransform};` : ''}
-            ${buttonTextGlobalTypoSwitcher.textDecoration === false && buttonTextDecoration ? `text-decoration: ${buttonTextDecoration};` : ''}
-            ${buttonTextGlobalTypoSwitcher.letterSpacing === false && buttonTextLetterSpacing.Desktop && buttonTextLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonTextLetterSpacing.Desktop}${buttonTextLetterSpacingUnits.Desktop};` : ''}
-            ${buttonTextGlobalTypoSwitcher.lineHeight === false && buttonTextLineHeight.Desktop && buttonTextLineHeightUnits.Desktop ? `line-height: ${buttonTextLineHeight.Desktop}${buttonTextLineHeightUnits.Desktop};` : ''}
-
-			${ buttonTextColor ? `color: ${buttonTextColor};` : ''}
-		}
-		.${blockId} .fb-search-container .fb-search-button-wrapper:hover span {
-			${buttonTextColorHover ? `color: ${buttonTextColorHover};` : ''}
-		}
-
-		.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-wrapper svg {
-			${searchIconSize.Desktop && searchIconSizeUnits.Desktop ? `width: ${searchIconSize.Desktop}${searchIconSizeUnits.Desktop};` : ''} 
-			${searchIconSize.Desktop && searchIconSizeUnits.Desktop ? `height: ${searchIconSize.Desktop}${searchIconSizeUnits.Desktop};` : ''}
-			${searchIconColor ? `fill: ${searchIconColor};` : ''}
-			transform: rotate(${searchIconRotate.Desktop}deg);
-			transition: all .3s ease-in-out;
-		}
-		.${blockId} .fb-search-container .fb-search-button-wrapper:hover .fb-search-icon-wrapper svg {
-			${searchIconHoverColor ? `fill: ${searchIconHoverColor};` : ''}
-			transform: rotate(${searchIconRotateHover.Desktop}deg);
-		}
-
-		.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-image {
-			${searchIconImageWidth ? `width: ${searchIconImageWidth.Desktop}${searchIconImageWidthUnits.Desktop};` : ''}
-			${searchIconImageHeight ? `height: ${searchIconImageHeight.Desktop}${searchIconImageHeightUnits.Desktop};` : ''}
-			${searchIconImageDisplay ? `object-fit: ${searchIconImageDisplay};` : ''}
-			transform: rotate(${searchIconImageRotate.Desktop}deg);
-			transition: all .3s ease-in-out;
-		}
-		.${blockId} .fb-search-container .fb-search-button-wrapper:hover .fb-search-icon-image {
-			transform: rotate(${searchIconImageRotateHover.Desktop}deg);
-		}
-
-		.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field input {
-
-		    ${inputFieldTextGlobalTypoSwitcher.fontFamily === true && inputFieldTextGlobalTypographyData.fontFamily ? `font-family: ${inputFieldTextGlobalTypographyData.fontFamily};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontSize === true && inputFieldTextGlobalTypographyData.fontSize ? `font-size: ${inputFieldTextGlobalTypographyData.fontSize};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontWeight === true && inputFieldTextGlobalTypographyData.fontWeight ? `font-weight: ${inputFieldTextGlobalTypographyData.fontWeight};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontStyle === true && inputFieldTextGlobalTypographyData.fontStyle ? `font-style: ${inputFieldTextGlobalTypographyData.fontStyle};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.textTransform === true && inputFieldTextGlobalTypographyData.textTransform ? `text-transform: ${inputFieldTextGlobalTypographyData.textTransform};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.textDecoration === true && inputFieldTextGlobalTypographyData.textDecoration ? `text-decoration: ${inputFieldTextGlobalTypographyData.textDecoration};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.letterSpacing === true && inputFieldTextGlobalTypographyData.letterSpacing ? `letter-spacing: ${inputFieldTextGlobalTypographyData.letterSpacing};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.lineHeight === true && inputFieldTextGlobalTypographyData.lineHeight ? `line-height: ${inputFieldTextGlobalTypographyData.lineHeight};` : ''}
-                
-            ${inputFieldTextGlobalTypoSwitcher.fontFamily === false && inputFieldTextFontFamily && inputFieldTextFontFamily !== 'Default' ? `font-family: ${inputFieldTextFontFamily};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontSize === false && inputFieldTextFontSize.Desktop && inputFieldTextFontSizeUnits.Desktop ? `font-size: ${inputFieldTextFontSize.Desktop}${inputFieldTextFontSizeUnits.Desktop};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontWeight === false && inputFieldTextFontWeight ? `font-weight: ${inputFieldTextFontWeight};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.fontStyle === false && inputFieldTextFontStyle ? `font-style: ${inputFieldTextFontStyle};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.textTransform === false && inputFieldTextTransform ? `text-transform: ${inputFieldTextTransform};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.letterSpacing === false && inputFieldTextLetterSpacing.Desktop && inputFieldTextLetterSpacingUnits.Desktop ? `letter-spacing: ${inputFieldTextLetterSpacing.Desktop}${inputFieldTextLetterSpacingUnits.Desktop};` : ''}
-            ${inputFieldTextGlobalTypoSwitcher.lineHeight === false && inputFieldTextLineHeight.Desktop && inputFieldTextLineHeightUnits.Desktop ? `line-height: ${inputFieldTextLineHeight.Desktop}${inputFieldTextLineHeightUnits.Desktop};` : ''}
-			${ inputFieldTextColor ? `color: ${inputFieldTextColor};` : ''}
-
-			${inputFieldBorder ? `border: ${inputFieldBorder};` : ''}
-			${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
-			${inputFieldBorderDesktopWidth && inputFieldBorderDesktop?.top ? `border-width: ${inputFieldBorderDesktopWidth};` : ''}
-			${inputFieldBorderRadiusDesktopWidth && inputFieldBorderRadiusDesktop?.top ? `border-radius: ${inputFieldBorderRadiusDesktopWidth};` : ''}
-			${inputFieldPaddingDesktopWidth && inputFieldPaddingDesktop?.top ? `padding: ${inputFieldPaddingDesktopWidth};` : ''}
-		}
-
-		.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field:hover input {
-			${inputFieldTextColorHover ? `color: ${inputFieldTextColorHover};` : ''}
-		}
-
-		@media only screen and (max-width: 1024px) {
-			.${blockId}.fb-search-block{
-				${searchIconZIndex.Tablet ? `z-index: ${searchIconZIndex.Tablet};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper {
-				${searchButtonWidth.Tablet && searchButtonWidthUnits.Tablet ? `width: ${searchButtonWidth.Tablet}${searchButtonWidthUnits.Tablet};` : ''}
-				${searchIconGap.Tablet && searchIconGapUnits.Tablet ? `gap: ${searchIconGap.Tablet}${searchIconGapUnits.Tablet};` : ''}
-				${buttonBorderTabletWidth && buttonBorderTablet?.top ? `border-width: ${buttonBorderTabletWidth};` : ''}
-				${buttonBorderRadiusTabletWidth && buttonBorderRadiusTablet?.top ? `border-radius: ${buttonBorderRadiusTabletWidth};` : ''}
-				${buttonPaddingTabletWidth && buttonPaddingTablet?.top ? `padding: ${buttonPaddingTabletWidth};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
-				${searchButtonInputFieldWidth.Tablet && searchButtonInputFieldWidthUnits.Tablet ? `width: ${searchButtonInputFieldWidth.Tablet}${searchButtonInputFieldWidthUnits.Tablet};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper span {
-                ${buttonTextGlobalTypoSwitcher.fontSize === false && buttonTextFontSize.Tablet && buttonTextFontSizeUnits.Tablet ? `font-size: ${buttonTextFontSize.Tablet}${buttonTextFontSizeUnits.Tablet};` : ''}
-                ${buttonTextGlobalTypoSwitcher.letterSpacing === false && buttonTextLetterSpacing.Tablet && buttonTextLetterSpacingUnits.Tablet ? `letter-spacing: ${buttonTextLetterSpacing.Tablet}${buttonTextLetterSpacingUnits.Tablet};` : ''}
-                ${buttonTextGlobalTypoSwitcher.lineHeight === false && buttonTextLineHeight.Tablet && buttonTextLineHeightUnits.Tablet ? `line-height: ${buttonTextLineHeight.Tablet}${buttonTextLineHeightUnits.Tablet};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-wrapper svg {
-				${searchIconSize.Tablet && searchIconSizeUnits.Tablet ? `width: ${searchIconSize.Tablet}${searchIconSizeUnits.Tablet};` : ''} 
-				${searchIconSize.Tablet && searchIconSizeUnits.Tablet ? `height: ${searchIconSize.Tablet}${searchIconSizeUnits.Tablet};` : ''}
-				transform: rotate(${searchIconRotate.Tablet}deg);
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-image {
-				${searchIconImageWidth ? `width: ${searchIconImageWidth.Tablet}${searchIconImageWidthUnits.Tablet};` : ''}
-				${searchIconImageHeight ? `height: ${searchIconImageHeight.Tablet}${searchIconImageHeightUnits.Tablet};` : ''}
-				${searchIconImageDisplay ? `object-fit: ${searchIconImageDisplay};` : ''}
-				transform: rotate(${searchIconImageRotate.Tablet}deg);
-			}
-			.${blockId} .fb-search-container .fb-search-button-wrapper:hover .fb-search-icon-image {
-				transform: rotate(${searchIconImageRotateHover.Tablet}deg);
-			}
-
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field input {
-				${inputFieldTextGlobalTypoSwitcher.fontSize === false && inputFieldTextFontSize.Tablet && inputFieldTextFontSizeUnits.Tablet ? `font-size: ${inputFieldTextFontSize.Tablet}${inputFieldTextFontSizeUnits.Tablet};` : ''}
-				${inputFieldTextGlobalTypoSwitcher.letterSpacing === false && inputFieldTextLetterSpacing.Tablet && inputFieldTextLetterSpacingUnits.Tablet ? `letter-spacing: ${inputFieldTextLetterSpacing.Tablet}${inputFieldTextLetterSpacingUnits.Tablet};` : ''}
-				${inputFieldTextGlobalTypoSwitcher.lineHeight === false && inputFieldTextLineHeight.Tablet && inputFieldTextLineHeightUnits.Tablet ? `line-height: ${inputFieldTextLineHeight.Tablet}${inputFieldTextLineHeightUnits.Tablet};` : ''}
-				${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
-				${inputFieldBorderRadiusTabletWidth && inputFieldBorderRadiusTablet?.top ? `border-radius: ${inputFieldBorderRadiusTabletWidth};` : ''}
-				${inputFieldPaddingTabletWidth && inputFieldPaddingTablet?.top ? `padding: ${inputFieldPaddingTabletWidth};` : ''}
-			}
-		}
-			
-		@media only screen and (max-width: 767px) {
-			.${blockId}.fb-search-block{
-				${searchIconZIndex.Mobile ? `z-index: ${searchIconZIndex.Mobile};` : ''}
-			}
-			.${blockId} .fb-search-container .fb-search-button-wrapper {
-				${searchButtonWidth.Mobile && searchButtonWidthUnits.Mobile ? `width: ${searchButtonWidth.Mobile}${searchButtonWidthUnits.Mobile};` : ''}
-				${searchIconGap.Mobile && searchIconGapUnits.Mobile ? `gap: ${searchIconGap.Mobile}${searchIconGapUnits.Mobile};` : ''}
-				${buttonBorderMobileWidth && buttonBorderMobile?.top ? `border-width: ${buttonBorderMobileWidth};` : ''}
-				${buttonBorderRadiusMobileWidth && buttonBorderRadiusMobile?.top ? `border-radius: ${buttonBorderRadiusMobileWidth};` : ''}
-				${buttonPaddingMobileWidth && buttonPaddingMobile?.top ? `padding: ${buttonPaddingMobileWidth};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
-				${searchButtonInputFieldWidth.Mobile && searchButtonInputFieldWidthUnits.Mobile ? `width: ${searchButtonInputFieldWidth.Mobile}${searchButtonInputFieldWidthUnits.Mobile};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper span {
-                ${buttonTextGlobalTypoSwitcher.fontSize === false && buttonTextFontSize.Mobile && buttonTextFontSizeUnits.Mobile ? `font-size: ${buttonTextFontSize.Mobile}${buttonTextFontSizeUnits.Mobile};` : ''}
-                ${buttonTextGlobalTypoSwitcher.letterSpacing === false && buttonTextLetterSpacing.Mobile && buttonTextLetterSpacingUnits.Mobile ? `letter-spacing: ${buttonTextLetterSpacing.Mobile}${buttonTextLetterSpacingUnits.Mobile};` : ''}
-                ${buttonTextGlobalTypoSwitcher.lineHeight === false && buttonTextLineHeight.Mobile && buttonTextLineHeightUnits.Mobile ? `line-height: ${buttonTextLineHeight.Mobile}${buttonTextLineHeightUnits.Mobile};` : ''}
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-wrapper svg {
-				${searchIconSize.Mobile && searchIconSizeUnits.Mobile ? `width: ${searchIconSize.Mobile}${searchIconSizeUnits.Mobile};` : ''} 
-				${searchIconSize.Mobile && searchIconSizeUnits.Mobile ? `height: ${searchIconSize.Mobile}${searchIconSizeUnits.Mobile};` : ''}
-				transform: rotate(${searchIconRotate.Mobile}deg);
-			}
-
-			.${blockId} .fb-search-container .fb-search-button-wrapper .fb-search-icon-image {
-				${searchIconImageWidth ? `width: ${searchIconImageWidth.Mobile}${searchIconImageWidthUnits.Mobile};` : ''}
-				${searchIconImageHeight ? `height: ${searchIconImageHeight.Mobile}${searchIconImageHeightUnits.Mobile};` : ''}
-				${searchIconImageDisplay ? `object-fit: ${searchIconImageDisplay};` : ''}
-				transform: rotate(${searchIconImageRotate.Mobile}deg);
-			}
-			.${blockId} .fb-search-container .fb-search-button-wrapper:hover .fb-search-icon-image {
-				transform: rotate(${searchIconImageRotateHover.Mobile}deg);
-			}
-
-			.${blockId} .fb-search-container .fb-search-block-wrapper-inner-input-field input {
-				${inputFieldTextGlobalTypoSwitcher.fontSize === false && inputFieldTextFontSize.Mobile && inputFieldTextFontSizeUnits.Mobile ? `font-size: ${inputFieldTextFontSize.Mobile}${inputFieldTextFontSizeUnits.Mobile};` : ''}
-				${inputFieldTextGlobalTypoSwitcher.letterSpacing === false && inputFieldTextLetterSpacing.Mobile && inputFieldTextLetterSpacingUnits.Mobile ? `letter-spacing: ${inputFieldTextLetterSpacing.Mobile}${inputFieldTextLetterSpacingUnits.Mobile};` : ''}
-				${inputFieldTextGlobalTypoSwitcher.lineHeight === false && inputFieldTextLineHeight.Mobile && inputFieldTextLineHeightUnits.Mobile ? `line-height: ${inputFieldTextLineHeight.Mobile}${inputFieldTextLineHeightUnits.Mobile};` : ''}
-				${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
-				${inputFieldBorderRadiusMobileWidth && inputFieldBorderRadiusMobile?.top ? `border-radius: ${inputFieldBorderRadiusMobileWidth};` : ''}
-				${inputFieldPaddingMobileWidth && inputFieldPaddingMobile?.top ? `padding: ${inputFieldPaddingMobileWidth};` : ''}
-			}
-		}
-    `, [
-		blockId,
-		searchButtonWidth,
-		searchButtonWidthUnits,
-		searchButtonInputFieldWidth,
-		searchButtonInputFieldWidthUnits,
-		searchIconGap,
-		searchIconGapUnits,
-
-
-		buttonTextGlobalTypographyData,
-		buttonTextGlobalTypoSwitcher,
-		buttonTextGlobalTypoType,
-		buttonTextGlobalTypoOption,
-		buttonTextFontFamily,
-		buttonTextFontSize,
-		buttonTextFontSizeUnits,
-		buttonTextFontWeight,
-		buttonTextFontStyle,
-		buttonTextTransform,
-		buttonTextDecoration,
-		buttonTextLetterSpacing,
-		buttonTextLetterSpacingUnits,
-		buttonTextLineHeight,
-		buttonTextLineHeightUnits,
-
-		buttonTextColorSwitcher,
-		buttonTextColor,
-		buttonTextColorHover,
-
-
-		buttonBorder,
-		buttonBorderColorSwitcher,
-		buttonBorderColor,
-		buttonBorderColorHover,
-
-		buttonBorderUnits,
-		buttonBorderDesktop,
-		buttonBorderTablet,
-		buttonBorderMobile,
-		buttonBorderLink,
-		buttonBorderDesktopWidth,
-		buttonBorderTabletWidth,
-		buttonBorderMobileWidth,
-
-		buttonBorderRadiusUnits,
-		buttonBorderRadiusDesktop,
-		buttonBorderRadiusTablet,
-		buttonBorderRadiusMobile,
-		buttonBorderRadiusLink,
-		buttonBorderRadiusDesktopWidth,
-		buttonBorderRadiusTabletWidth,
-		buttonBorderRadiusMobileWidth,
-
-		buttonPaddingUnits,
-		buttonPaddingDesktop,
-		buttonPaddingTablet,
-		buttonPaddingMobile,
-		buttonPaddingLink,
-		buttonPaddingDesktopWidth,
-		buttonPaddingTabletWidth,
-		buttonPaddingMobileWidth,
-
-		searchIconAlign,
-		searchIcon,
-		searchIconImageUrl,
-		searchIconImageAlt,
-		searchIconImageID,
-		searchIconImageWidth,
-		searchIconImageWidthUnits,
-		searchIconImageHeight,
-		searchIconImageHeightUnits,
-		searchIconImageDisplay,
-
-		searchIconSize,
-		searchIconSizeUnits,
-		searchIconColorSwitcher,
-		searchIconColor,
-		searchIconHoverColor,
-
-		searchIconRotateSwitcher,
-		searchIconRotate,
-		searchIconRotateHover,
-		searchIconImageRotateSwitcher,
-		searchIconImageRotate,
-		searchIconImageRotateHover,
-
-		inputFieldTextGlobalTypographyData,
-		inputFieldTextGlobalTypoSwitcher,
-		inputFieldTextGlobalTypoType,
-		inputFieldTextGlobalTypoOption,
-		inputFieldTextFontFamily,
-		inputFieldTextFontSize,
-		inputFieldTextFontSizeUnits,
-		inputFieldTextFontWeight,
-		inputFieldTextFontStyle,
-		inputFieldTextTransform,
-		inputFieldTextDecoration,
-		inputFieldTextLetterSpacing,
-		inputFieldTextLetterSpacingUnits,
-		inputFieldTextLineHeight,
-		inputFieldTextLineHeightUnits,
-		
-		inputFieldTextColorSwitcher,
-		inputFieldTextColor,
-		inputFieldTextColorHover,
-
-		inputFieldBorder,
-		inputFieldBorderColorSwitcher,
-		inputFieldBorderColor,
-		inputFieldBorderColorHover,
-
-		inputFieldBorderUnits,
-		inputFieldBorderDesktop,
-		inputFieldBorderTablet,
-		inputFieldBorderMobile,
-		inputFieldBorderLink,
-		inputFieldBorderDesktopWidth,
-		inputFieldBorderTabletWidth,
-		inputFieldBorderMobileWidth,
-
-
-		inputFieldBorderRadiusUnits,
-		inputFieldBorderRadiusDesktop,
-		inputFieldBorderRadiusTablet,
-		inputFieldBorderRadiusMobile,
-		inputFieldBorderRadiusLink,
-		inputFieldBorderRadiusDesktopWidth,
-		inputFieldBorderRadiusTabletWidth,
-		inputFieldBorderRadiusMobileWidth,
-
-
-		inputFieldPaddingUnits,
-		inputFieldPaddingDesktop,
-		inputFieldPaddingTablet,
-		inputFieldPaddingMobile,
-		inputFieldPaddingLink,
-		inputFieldPaddingDesktopWidth,
-		inputFieldPaddingTabletWidth,
-		inputFieldPaddingMobileWidth,
-
-		searchIconZIndex,	
-    ]);
-
-	const customCss = getCustomCss(searchCustomCSS, `.${blockId}`);
-
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, customCss] );
-
-    const editorStyle = `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
 	return (
 		<>

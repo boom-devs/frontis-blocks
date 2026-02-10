@@ -6,9 +6,12 @@ import Inspector from './inspector';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateProgressbarStyle from "./styling";
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const {
     blockID,
     blockStyle,
@@ -33,13 +36,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     showProgressNumber,
   } = attributes;
 
-  useEffect(() => {
-    if (clientId && typeof clientId === "string") {
-      setAttributes({
-        blockID: "progressbar-" + clientId.slice(0, 8),
-      });
-    }
-  }, [clientId]);
+  // Handle block ID generation (handles duplication and initial ID)
+  useBlockIdGenerator({
+    clientId,
+    blockID,
+    blockPrefix: 'fb-progressbar',
+    isSelected,
+    attributes,
+    setAttributes,
+  });
 
   /** Start Load Google Font */
   useEffect(() => {
@@ -56,6 +61,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }
   }, [progressNumberFontFamily]);
   /** End Load Google Font */
+
+  /** Start Generate Block Style */
+  useEffect(() => {
+    if (blockID) {
+      const css = generateProgressbarStyle(attributes);
+      setAttributes({ blockStyle: css });
+    }
+  }, [attributes, blockID]);
+  /** End Generate Block Style */
 
   /**
     * Manages tab button settings and switches to block settings on click
@@ -132,10 +146,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
   return (
     <>
-      <Inspector
-        attributes={attributes}
-        setAttributes={setAttributes}
-      />
+      {isSelected && (
+        <Inspector
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+      )}
 
       <div {...blockProps}>
         <div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID} ref={panelRef}>

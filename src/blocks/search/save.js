@@ -4,7 +4,7 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 
 export default function Save({ attributes }) {
 	const { 
-		blockId,
+		blockID,
 		searchIcon,
 		searchIconAlign,
 		searchIconImageUrl,
@@ -14,7 +14,7 @@ export default function Save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-search-block ${blockId}`,
+		className: `fb-search-block ${blockID}`,
 	});
 
 	return (

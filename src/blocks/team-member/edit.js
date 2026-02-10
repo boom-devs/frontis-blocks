@@ -12,9 +12,12 @@ import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateTeamMemberStyle from './styling';
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -138,14 +141,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	} = attributes;
 
-	// Set blockID if it doesn't exist
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "fb-team-member-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-team-member',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -176,6 +180,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	}
 	}, [teamMemberBadgeFontFamily]);
 	/** End Load Google Font */
+
+	 /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateTeamMemberStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-team-member-main-wrapper ${blockID} ${teamMemberDesktopSwitcher && 'fb-desktop-responsive'} ${teamMemberTabletSwitcher && 'fb-tablet-responsive'} ${teamMemberMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -285,10 +298,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-team-member-wrapper ${blockID} ${teamMemberGlobalWraperClass}`} id={teamMemberGlobalWraperID} ref={panelRef}>

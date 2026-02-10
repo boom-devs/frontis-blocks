@@ -153,7 +153,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [buttonFontFamily]);
     /** End Load Google Font */
 
-     /** Start Generate Block Style */
+    /** Start Generate Block Style */
     useEffect(() => {
         if (blockID) {
             const css = generatePostGridStyle(attributes);
