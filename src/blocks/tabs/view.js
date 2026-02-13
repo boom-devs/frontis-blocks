@@ -38,7 +38,7 @@
 			panels.forEach((panelEl, idx) => {
 				// Multiple matching strategies
 				const matchByClass = panelEl.classList.contains(`fb-inner-tab-${i}`);
-				const matchById = panelEl.id === `fb-tabs-panel-${root.dataset.blockId || 'x'}-${i}`;
+				const matchById = panelEl.id === `fb-tabs-panel-${root.dataset.blockID || 'x'}-${i}`;
 				const fallbackMatch = idx === i;
 				
 				const isActive = matchByClass || matchById || fallbackMatch;

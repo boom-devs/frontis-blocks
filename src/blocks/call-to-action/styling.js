@@ -430,16 +430,7 @@ const generateCallToActionStyle = (attributes) => {
             gap: 10px
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            ${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
-            ${buttonOneDesktopPadding && btnOneDesktopPadding?.top ? `padding: ${buttonOneDesktopPadding};` : ''}
-            ${btnOneDesktopMarginWidth && btnOneDesktopMargin?.top ? `margin: ${btnOneDesktopMarginWidth};` : ''}
-            ${infoButtonBorder ? `border: ${infoButtonBorder};` : ""}
-            ${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
-            ${btnOneDesktopBorderWidth && btnOneDesktopBorder?.top ? `border-width: ${btnOneDesktopBorderWidth};` : ""}
-            ${btnOneDesktopBorderRadiusWidth && btnOneDesktopBorderRadius?.top ? `border-radius: ${btnOneDesktopBorderRadiusWidth};` : ""}
+             ${btnOneDesktopMarginWidth && btnOneDesktopMargin?.top ? `margin: ${btnOneDesktopMarginWidth};` : ''}
             transition: all .3s ease-in-out;
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper .fb-cta-button{
@@ -462,6 +453,16 @@ const generateCallToActionStyle = (attributes) => {
             ${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Desktop && buttonLineHeightUnits?.Desktop ? `line-height: ${buttonLineHeight?.Desktop}${buttonLineHeightUnits?.Desktop};` : ''}
             
             ${buttonTextColor ? `color: ${buttonTextColor};` : ""}
+
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            ${buttonOneDesktopPadding && btnOneDesktopPadding?.top ? `padding: ${buttonOneDesktopPadding};` : ''}
+            ${infoButtonBorder ? `border: ${infoButtonBorder};` : ""}
+            ${infoButtonBorderColor ? `border-color: ${infoButtonBorderColor};` : ""}
+            ${btnOneDesktopBorderWidth && btnOneDesktopBorder?.top ? `border-width: ${btnOneDesktopBorderWidth};` : ""}
+            ${buttonBgColor ? `background-color: ${buttonBgColor};` : ""}
+            ${btnOneDesktopBorderRadiusWidth && btnOneDesktopBorderRadius?.top ? `border-radius: ${btnOneDesktopBorderRadiusWidth};` : ""}
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
             ${buttonTextHoverColor ? `color: ${buttonTextHoverColor};` : ""}	
@@ -471,16 +472,7 @@ const generateCallToActionStyle = (attributes) => {
             ${infoButtonHoverBorderColor ? `border-color: ${infoButtonHoverBorderColor};` : ""}
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            ${buttonTwoBgColor ? `background-color: ${buttonTwoBgColor};` : ""}
-            ${buttonTwoDesktopPadding && btnTwoDesktopPadding?.top ? `padding: ${buttonTwoDesktopPadding};` : ''}
             ${btnTwoDesktopMarginWidth && btnTwoDesktopMargin?.top ? `margin: ${btnTwoDesktopMarginWidth};` : ''}
-            ${btnTwoBorder ? `border: ${btnTwoBorder};` : ""}
-            ${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
-            ${btnTwoDesktopBorderWidthStyle && btnTwoDesktopBorder?.top ? `border-width: ${btnTwoDesktopBorderWidthStyle};` : ""}
-            ${btnTwoDesktopBorderRadiusWidthStyle && btnTwoDesktopBorderRadius?.top ? `border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};` : ""}
             transition: all .3s ease-in-out;
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button {
@@ -503,6 +495,16 @@ const generateCallToActionStyle = (attributes) => {
             ${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Desktop && buttonTwoLineHeightUnits?.Desktop ? `line-height: ${buttonTwoLineHeight?.Desktop}${buttonTwoLineHeightUnits?.Desktop};` : ""}
             
             ${buttonTwoTextColor ? `color: ${buttonTwoTextColor};` : ""}
+
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            ${buttonTwoDesktopPadding && btnTwoDesktopPadding?.top ? `padding: ${buttonTwoDesktopPadding};` : ''}
+            ${btnTwoBorder ? `border: ${btnTwoBorder};` : ""}
+            ${btnTwoBorderColor ? `border-color: ${btnTwoBorderColor};` : ""}
+            ${btnTwoDesktopBorderWidthStyle && btnTwoDesktopBorder?.top ? `border-width: ${btnTwoDesktopBorderWidthStyle};` : ""}
+            ${buttonTwoBgColor ? `background-color: ${buttonTwoBgColor};` : ""}
+            ${btnTwoDesktopBorderRadiusWidthStyle && btnTwoDesktopBorderRadius?.top ? `border-radius: ${btnTwoDesktopBorderRadiusWidthStyle};` : ""}
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
             ${buttonTwoTextHoverColor ? `color: ${buttonTwoTextHoverColor};` : ""}
@@ -566,24 +568,24 @@ const generateCallToActionStyle = (attributes) => {
                 ${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Tablet && buttonFontSizeUnits?.Tablet ? `font-size: ${buttonFontSize?.Tablet}${buttonFontSizeUnits?.Tablet};` : ""}
                 ${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Tablet && buttonLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonLetterSpacing?.Tablet}${buttonLetterSpacingUnits?.Tablet};` : ""}
                 ${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Tablet && buttonLineHeightUnits?.Tablet ? `line-height: ${buttonLineHeight?.Tablet}${buttonLineHeightUnits?.Tablet};` : ""}
-            }
-            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
                 ${buttonOneTabletPadding && btnOneTabPadding?.top ? `padding: ${buttonOneTabletPadding};` : ''}
-                ${btnOneTabletMarginWidth && btnOneTabMargin?.top ? `margin: ${btnOneTabletMarginWidth};` : ''}
                 ${btnOneTabletBorderWidth && btnOneTabBorder?.top ? `border-width: ${btnOneTabletBorderWidth};` : ""}
                 ${btnOneTabletBorderRadiusWidth && btnOneTabBorderRadius?.top ? `border-radius: ${btnOneTabletBorderRadiusWidth};` : ""}
+            }
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+                ${btnOneTabletMarginWidth && btnOneTabMargin?.top ? `margin: ${btnOneTabletMarginWidth};` : ''}
             }
 
             .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button {
                 ${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Tablet && buttonTwoFontSizeUnits?.Tablet ? `font-size: ${buttonTwoFontSize?.Tablet}${buttonTwoFontSizeUnits?.Tablet};` : ""}
                 ${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Tablet && buttonTwoLetterSpacingUnits?.Tablet ? `letter-spacing: ${buttonTwoLetterSpacing?.Tablet}${buttonTwoLetterSpacingUnits?.Tablet};` : ""}
                 ${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Tablet && buttonTwoLineHeightUnits?.Tablet ? `line-height: ${buttonTwoLineHeight?.Tablet}${buttonTwoLineHeightUnits?.Tablet};` : ""}
-            }
-            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                ${buttonTwoTabletPadding && btnTwoTabPadding?.top ? `padding: ${buttonTwoTabletPadding};` : ''}
-                ${btnTwoTabletMarginWidth && btnTwoTabMargin?.top ? `margin: ${btnTwoTabletMarginWidth};` : ''}
                 ${btnTwoTabletBorderWidthStyle && btnTwoTabBorder?.top ? `border-width: ${btnTwoTabletBorderWidthStyle};` : ""}
                 ${btnTwoTabletBorderRadiusWidthStyle && btnTwoTabBorderRadius?.top ? `border-radius: ${btnTwoTabletBorderRadiusWidthStyle};` : ""}
+                ${buttonTwoTabletPadding && btnTwoTabPadding?.top ? `padding: ${buttonTwoTabletPadding};` : ''}
+            }
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+                ${btnTwoTabletMarginWidth && btnTwoTabMargin?.top ? `margin: ${btnTwoTabletMarginWidth};` : ''}
             }
             .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
                 ${btnIconSize?.Tablet && btnIconSizeUnits?.Tablet ? `width: ${btnIconSize?.Tablet}${btnIconSizeUnits?.Tablet};` : ""}
@@ -631,23 +633,23 @@ const generateCallToActionStyle = (attributes) => {
                 ${buttonGlobalTypoSwitcher?.fontSize === false && buttonFontSize?.Mobile && buttonFontSizeUnits?.Mobile ? `font-size: ${buttonFontSize?.Mobile}${buttonFontSizeUnits?.Mobile};` : ""}
                 ${buttonGlobalTypoSwitcher?.letterSpacing === false && buttonLetterSpacing?.Mobile && buttonLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonLetterSpacing?.Mobile}${buttonLetterSpacingUnits?.Mobile};` : ""}
                 ${buttonGlobalTypoSwitcher?.lineHeight === false && buttonLineHeight?.Mobile && buttonLineHeightUnits?.Mobile ? `line-height: ${buttonLineHeight?.Mobile}${buttonLineHeightUnits?.Mobile};` : ""}
-            }
-            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
-                ${buttonOneMobilePadding && btnOneMobilePadding?.top ? `padding: ${buttonOneMobilePadding};` : ''}
-                ${btnOneMobileMarginWidth && btnOneMobileMargin?.top ? `margin: ${btnOneMobileMarginWidth};` : ''}
                 ${btnOneMobileBorderWidth && btnOneMobileBorder?.top ? `border-width: ${btnOneMobileBorderWidth};` : ""}
                 ${btnOneMobileBorderRadiusWidth && btnOneMobileBorderRadius?.top ? `border-radius: ${btnOneMobileBorderRadiusWidth};` : ""}
+                ${buttonOneMobilePadding && btnOneMobilePadding?.top ? `padding: ${buttonOneMobilePadding};` : ''}
+            }
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper {
+                ${btnOneMobileMarginWidth && btnOneMobileMargin?.top ? `margin: ${btnOneMobileMarginWidth};` : ''}
             }
             .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper .fb-cta-button {
                 ${buttonTwoGlobalTypoSwitcher?.fontSize === false && buttonTwoFontSize?.Mobile && buttonTwoFontSizeUnits?.Mobile ? `font-size: ${buttonTwoFontSize?.Mobile}${buttonTwoFontSizeUnits?.Mobile};` : ""}
                 ${buttonTwoGlobalTypoSwitcher?.letterSpacing === false && buttonTwoLetterSpacing?.Mobile && buttonTwoLetterSpacingUnits?.Mobile ? `letter-spacing: ${buttonTwoLetterSpacing?.Mobile}${buttonTwoLetterSpacingUnits?.Mobile};` : ""}
                 ${buttonTwoGlobalTypoSwitcher?.lineHeight === false && buttonTwoLineHeight?.Mobile && buttonTwoLineHeightUnits?.Mobile ? `line-height: ${buttonTwoLineHeight?.Mobile}${buttonTwoLineHeightUnits?.Mobile};` : ""}
-            }
-            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
-                ${buttonTwoMobilePadding && btnTwoMobilePadding?.top ? `padding: ${buttonTwoMobilePadding};` : ''}
-                ${btnTwoMobileMarginWidth && btnTwoMobileMargin?.top ? `margin: ${btnTwoMobileMarginWidth};` : ''}
                 ${btnTwoMobileBorderWidthStyle && btnTwoMobileBorder?.top ? `border-width: ${btnTwoMobileBorderWidthStyle};` : ""}
                 ${btnTwoMobileBorderRadiusWidthStyle && btnTwoMobileBorderRadius?.top ? `border-radius: ${btnTwoMobileBorderRadiusWidthStyle};` : ""}
+                ${buttonTwoMobilePadding && btnTwoMobilePadding?.top ? `padding: ${buttonTwoMobilePadding};` : ''}
+            }
+            .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper {
+                ${btnTwoMobileMarginWidth && btnTwoMobileMargin?.top ? `margin: ${btnTwoMobileMarginWidth};` : ''}
             }
             .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
                 ${btnIconSize?.Mobile && btnIconSizeUnits?.Mobile ? `width: ${btnIconSize?.Mobile}${btnIconSizeUnits?.Mobile};` : ""}
