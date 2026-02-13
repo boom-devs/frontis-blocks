@@ -11,7 +11,8 @@ import { createHigherOrderComponent } from "@wordpress/compose";
 import { overlayText } from "@wordpress/icons";
 
 import Inspector from "./inspector";
-
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateAdvancedNavigationStyle from "./styling";
 
 const CustomInspectorControls = createHigherOrderComponent((BlockEdit) => {
     return (props) => {
@@ -74,9 +75,9 @@ wp.hooks.addFilter(
 );
 
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         navigationLayout,
         navigationHorizontalAlign,
@@ -94,6 +95,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         navigationTabletSwitcher,
         navigationMobileSwitcher,
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-advanced-navigation',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateAdvancedNavigationStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const { updateBlockAttributes } = useDispatch("core/block-editor");
 
@@ -118,17 +138,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
     const blockProps = useBlockProps({
-        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockId} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `frontis-block fb-advanced-navigation-main-wrapper ${blockID} ${navigationDesktopSwitcher && 'fb-desktop-responsive'} ${navigationTabletSwitcher && 'fb-tablet-responsive'} ${navigationMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
+
             <div {...blockProps}>
                 <div className={`advanced-navigation-wrapper ${navigationGlobalWraperClass}`} id={navigationGlobalWraperID}>
                     <div

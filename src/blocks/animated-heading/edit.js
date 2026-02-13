@@ -2,15 +2,20 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { useRef, useEffect, useState } from '@wordpress/element';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from "@Config/displayType";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateAnimatedHeadingStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         animationType,
         animatedHeadingAlignment,
@@ -24,10 +29,48 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         animatedHeadingGlobalWraperID,
         animatedHeadingGlobalWraperClass,
 
+        animatedHeadingNormalTextFontFamily,
+        animatedHeadingAnimationTextFontFamily,
+
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-animated-heading',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (animatedHeadingNormalTextFontFamily && !loadedFonts.has(animatedHeadingNormalTextFontFamily)) {
+            loadGoogleFont(animatedHeadingNormalTextFontFamily);
+            loadedFonts.add(animatedHeadingNormalTextFontFamily);
+        }
+    }, [animatedHeadingNormalTextFontFamily]);
+
+    useEffect(() => {
+        if (animatedHeadingAnimationTextFontFamily && !loadedFonts.has(animatedHeadingAnimationTextFontFamily)) {
+            loadGoogleFont(animatedHeadingAnimationTextFontFamily);
+            loadedFonts.add(animatedHeadingAnimationTextFontFamily);
+        }
+    }, [animatedHeadingAnimationTextFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateAnimatedHeadingStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+    
     const blockProps = useBlockProps({
-        className: `fb-animated-heading-main-wrapper ${blockId}`,
+        className: `fb-animated-heading-main-wrapper ${blockID}`,
     });
 
     const deviceType = useDeviceType();
@@ -203,11 +246,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 <AlignmentToolbar

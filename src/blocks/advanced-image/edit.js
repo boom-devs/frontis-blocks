@@ -13,9 +13,15 @@ import { useEffect } from "@wordpress/element";
 import "./editor.scss";
 import generateSrcSet from "@Utils/generateSrcSet";
 import useDynamicImage from "@Components/use-dynamic-image";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateAdvancedImageStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
   const {
     // base
     blockID,
@@ -27,6 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     advancedImageDefaultWidth,
     advancedImageDefaultHeight,
     advancedImageSrcSet,
+    headingFontFamily,
 
     // display options
     imageCaption,
@@ -70,6 +77,36 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
     blockStyle,
 
   } = attributes;
+
+  // Handle block ID generation (handles duplication and initial ID)
+  useBlockIdGenerator({
+    clientId,
+    blockID,
+    blockPrefix: 'fb-advanced-image',
+    isSelected,
+    attributes,
+    setAttributes,
+  });
+
+  /** Start load font */
+  useEffect(() => {
+      [headingFontFamily].forEach(font => {
+          if (font && !loadedFonts.has(font)) {
+              loadGoogleFont(font);
+              loadedFonts.add(font);
+          }
+      });
+  }, [headingFontFamily]);
+  /** End load font */
+
+  /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateAdvancedImageStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
   // block props (unchanged)
   const blockProps = useBlockProps({
@@ -137,13 +174,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
   return (
     <>
-      <Inspector
-        attributes={attributes}
-        setAttributes={setAttributes}
-        clientId={clientId}
-        onSelectImage={onSelectImage}
-      />
-
+      {isSelected && (
+        <Inspector
+          attributes={attributes}
+          setAttributes={setAttributes}
+          onSelectImage={onSelectImage}
+        />
+      )}
+    
       <BlockControls>
         <ToolbarGroup>
           {!dynamicImageEnabled && renderSource?.url && (

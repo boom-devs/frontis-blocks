@@ -7,9 +7,12 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 import { useEffect, useState } from '@wordpress/element';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateSearchStyle from "./styling";
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const { 
-		blockId, 
+		blockID, 
 		searchActive,
 		searchIcon,
 		searchIconAlign,
@@ -19,8 +22,27 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		searchGlobalWraperClass,
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-search',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateSearchStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+
 	const blockProps = useBlockProps({
-		className: `fb-search-block ${blockId}`,
+		className: `fb-search-block ${blockID}`,
 	});
 
 	return (
@@ -28,7 +50,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			<Inspector
 				attributes={attributes}
 				setAttributes={setAttributes}
-				clientId={clientId}
 			/>
 		<div {...blockProps}>
 			<div className={`fb-search-container ${searchGlobalWraperClass}`} id={searchGlobalWraperID}>

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useState, useEffect, useMemo } from '@wordpress/element';
+import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import { 
@@ -40,13 +40,12 @@ import FB_GradientColorControl from '@Components/gradient-color-control';
 
 import './editor.scss';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
     const { 
         blockId,
         blockStyle,
         speed,
         reverseDirection,
-        pauseOnHover,
 
         slideWidth,
         slideWidthUnits,
@@ -129,14 +128,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderGlobalCustomCSS,
         
     } = attributes;
-
-    useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockId: "marquee-carousel-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
 
     const deviceType = useDeviceType();
 
@@ -518,11 +509,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 title={__("General Settings", "frontis-blocks")} 
                 initialOpen={true}
             >
-                <ToggleControl
-                    label={__("Pause on Hover", "frontis-blocks")}
-                    checked={pauseOnHover}
-                    onChange={(value) => setAttributes({ pauseOnHover: value })}
-                />
                 <ToggleControl
                     label={__("Reverse Direction", "frontis-blocks")}
                     checked={reverseDirection}
@@ -1276,3 +1262,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

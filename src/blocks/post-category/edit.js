@@ -3,12 +3,17 @@ import { useEffect, useState, useMemo } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import apiFetch from "@wordpress/api-fetch";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostCategoryStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         premadeStyle,
         taxonomyType,
@@ -40,10 +45,64 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         postCategoryDesktopSwitcher,
         postCategoryTabletSwitcher,
         postCategoryMobileSwitcher,
+
+        postTitleFontFamily,
+        postDescriptionFontFamily,
+        postCountFontFamily,
+        buttonFontFamily,
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-post-category',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (postTitleFontFamily && !loadedFonts.has(postTitleFontFamily)) {
+            loadGoogleFont(postTitleFontFamily);
+            loadedFonts.add(postTitleFontFamily);
+        }
+    }, [postTitleFontFamily]);
+
+    useEffect(() => {
+        if (postDescriptionFontFamily && !loadedFonts.has(postDescriptionFontFamily)) {
+            loadGoogleFont(postDescriptionFontFamily);
+            loadedFonts.add(postDescriptionFontFamily);
+        }
+    }, [postDescriptionFontFamily]);
+
+    useEffect(() => {
+        if (postCountFontFamily && !loadedFonts.has(postCountFontFamily)) {
+            loadGoogleFont(postCountFontFamily);
+            loadedFonts.add(postCountFontFamily);
+        }
+    }, [postCountFontFamily]);
+
+    useEffect(() => {
+        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+            loadGoogleFont(buttonFontFamily);
+            loadedFonts.add(buttonFontFamily);
+        }
+    }, [buttonFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generatePostCategoryStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
     const blockProps = useBlockProps({
-        className: `fb-taxonomy-block fb-post-category-area ${blockId} fb-taxonomy-${premadeStyle} ${postCategoryDesktopSwitcher && "fb-desktop-responsive"
+        className: `fb-taxonomy-block fb-post-category-area ${blockID} fb-taxonomy-${premadeStyle} ${postCategoryDesktopSwitcher && "fb-desktop-responsive"
             } ${postCategoryTabletSwitcher && "fb-tablet-responsive"} ${postCategoryMobileSwitcher && "fb-mobile-responsive"
             }`,
     });
@@ -211,7 +270,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [sortedTaxonomies, taxonomyType, allPostTypes, allTaxonomies]);
 
     useEffect(() => {
-        if (!showAuthor || !allTerms || allTerms.length === 0 || !taxonomyType || !allTaxonomies || !adminEditorUsers) {
+        if (!showAuthor || !allTerms || allTerms.length === 0 || !taxonomyType || !allTaxonomies || !adminEditorUsers || !allPostTypes) {
             setCategoryCreators({});
             return;
         }
@@ -818,11 +877,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 {!taxonomyType ? (

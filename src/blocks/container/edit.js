@@ -45,21 +45,23 @@ const Edit = (props) => {
 	} = props;
 
 	useEffect(() => {
-        setAttributes({
-            formContainerSwitcher: context["fb/formContainerSwitcher"] === undefined ? false : context["fb/formContainerSwitcher"],
-        })
-    }, [
-        context["fb/formContainerSwitcher"],
-    ])
+		const newValue = context["fb/formContainerSwitcher"] === undefined ? false : context["fb/formContainerSwitcher"];
+		// Only update if value actually changed
+		if (formContainerSwitcher !== newValue) {
+			setAttributes({ formContainerSwitcher: newValue });
+		}
+	}, [context["fb/formContainerSwitcher"]]);
 
 
 	// Loop Builder Check
-	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId);
+	const isInsideLoopBuilder = useIsInsideLoopBuilder(clientId, loopAutoApplied);
 	useEffect(() => {
 		if (isInsideLoopBuilder && !loopAutoApplied) {
-			setAttributes({ containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' } });
-			setAttributes({ containerChildrenWidth: 'full' });
-			setAttributes({loopAutoApplied: true});
+			setAttributes({ 
+				containerDirection: { Desktop: 'column', Tablet: 'column', Mobile: 'column' },
+				containerChildrenWidth: 'full',
+				loopAutoApplied: true
+			});
 		}
 	}, [isInsideLoopBuilder, loopAutoApplied]);
 
@@ -85,12 +87,18 @@ const Edit = (props) => {
 		};
 	} );
 
-	if ( isParentOfSelectedBlock ) {
-		const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
-		if ( emptyBlockInserter ) {
-			emptyBlockInserter.style.display = 'none';
+	/**
+	 * Hide empty block inserter when this container has selected inner blocks.
+	 * Only runs when selection state changes, avoiding unnecessary DOM queries on every render.
+	 */
+	useEffect(() => {
+		if ( isParentOfSelectedBlock ) {
+			const emptyBlockInserter = document.querySelector( '.block-editor-block-list__empty-block-inserter' );
+			if ( emptyBlockInserter ) {
+				emptyBlockInserter.style.display = 'none';
+			}
 		}
-	}
+	}, [isParentOfSelectedBlock]);
 
 	useEffect( () => {
 		const gridCssInParent = 'grid' === parentAttributes?.layout;
@@ -177,17 +185,87 @@ const Edit = (props) => {
     // const customCss = getCustomCss(advancedHeadingCustomCSS, `.${blockId}`);
 
     useEffect(() => {
-        setAttributes({blockStyle: `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim()});
-    }, [blockFrontEndStyle] );
+        const newStyle = `${blockFrontEndStyle}`.replace(/\s+/g, ' ').trim();
+        // Only update if the style actually changed - prevents double render loop
+        if (attributes.blockStyle !== newStyle) {
+            setAttributes({blockStyle: newStyle});
+        }
+    }, [blockFrontEndStyle]);
 
-	if ( ! variationSelected && 0 === getBlockParents?.length ) {
-		const block = select('core/block-editor').getBlock(clientId);
-		if (block) {
-			const coreBlockEditord = select( 'core/block-editor' );
-			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
-			setAttributes({p_block_id: parentBlockId});
+	// Handle variation picker - show picker when no variation selected and block is root
+	const shouldShowVariationPicker = ! variationSelected && 0 === getBlockParents?.length;
+	
+	// Initialize global responsive settings
+	useEffect(() => {
+		const parseResponsiveValue = (value) => {
+			if (typeof value === "string") {
+				try {
+					return JSON.parse(value);
+				} catch (e) {
+					return { Desktop: value, Tablet: value, Mobile: value };
+				}
+			} else if (typeof value === "object") {
+				return value;
+			}
+			return { Desktop: value, Tablet: value, Mobile: value };
+		};
+
+		const formatted_container_column_gap = parseResponsiveValue(FrontisBlocksData.container_column_gap);
+		const formatted_container_row_gap = parseResponsiveValue(FrontisBlocksData.container_row_gap);
+		const formatted_container_padding = parseResponsiveValue(FrontisBlocksData.container_padding);
+		const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
+		const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
+		const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
+
+		const attributesToUpdate = {};
+
+		// Only update if not already set to avoid overwriting user changes or causing infinite loops
+		if (!attributes.globalColumnGap?.Desktop) {
+			attributesToUpdate.globalColumnGap = {
+				Desktop: formatted_container_column_gap.Desktop || "",
+				Tablet: formatted_container_column_gap.Tablet || "",
+				Mobile: formatted_container_column_gap.Mobile || "",
+			};
+		}
+		if (!attributes.globalRowGap?.Desktop) {
+			attributesToUpdate.globalRowGap = {
+				Desktop: formatted_container_row_gap.Desktop || "",
+				Tablet: formatted_container_row_gap.Tablet || "",
+				Mobile: formatted_container_row_gap.Mobile || "",
+			};
+		}
+		if (!attributes.containerGlobalPadding?.Desktop) {
+			attributesToUpdate.containerGlobalPadding = {
+				Desktop: formatted_container_padding.Desktop || "",
+				Tablet: formatted_container_padding.Tablet || "",
+				Mobile: formatted_container_padding.Mobile || "",
+			};
+		}
+		if (!attributes.globalFullWidthContentBoxedWidth?.Desktop) {
+			attributesToUpdate.globalFullWidthContentBoxedWidth = {
+				Desktop: formatted_desktop_breakpoint || "1200",
+				Tablet: formatted_tablet_breakpoint || "1024",
+				Mobile: formatted_mobile_breakpoint || "767",
+			};
 		}
 
+		if (Object.keys(attributesToUpdate).length > 0) {
+			setAttributes(attributesToUpdate);
+		}
+	}, []);
+
+	// Set p_block_id when showing variation picker - must be in useEffect, not render
+	useEffect(() => {
+		if (shouldShowVariationPicker) {
+			const coreBlockEditord = select( 'core/block-editor' );
+			const parentBlockId = coreBlockEditord.getBlockRootClientId( props.clientId );
+			if (parentBlockId !== attributes.p_block_id) {
+				setAttributes({p_block_id: parentBlockId});
+			}
+		}
+	}, [shouldShowVariationPicker, props.clientId, attributes.p_block_id]);
+
+	if ( shouldShowVariationPicker ) {
 		return <ColumnsPicker { ...{ ...props, variations, defaultVariation } } />
 	}
 

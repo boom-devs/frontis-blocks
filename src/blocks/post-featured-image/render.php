@@ -31,7 +31,7 @@ $image_size = isset($attributes['imageSize']) ? esc_attr($attributes['imageSize'
 $wrapper_id = isset($attributes['wrapperId']) ? $attributes['wrapperId'] : '';
 $wrapper_class = isset($attributes['wrapperClass']) ? $attributes['wrapperClass'] : '';
 
-$block_id = isset($attributes['blockId']) ? esc_attr($attributes['blockId']) : '';
+$block_id = isset($attributes['blockID']) ? esc_attr($attributes['blockID']) : '';
 
 $featured_image_desktop_switcher = isset($attributes['featuredImageDesktopSwitcher']) ? $attributes['featuredImageDesktopSwitcher'] : false;
 $featured_image_tablet_switcher = isset($attributes['featuredImageTabletSwitcher']) ? $attributes['featuredImageTabletSwitcher'] : false;

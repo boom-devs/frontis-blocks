@@ -13,7 +13,7 @@ const v1_0_3 = {
 
     save({ attributes }) {
         const {
-            blockId,
+            blockID,
             headingText,
             headingTag,
             headingAlignment,
@@ -37,7 +37,7 @@ const v1_0_3 = {
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `frontis-block fb-advanced-heading-main-wrapper ${blockId} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
+            className: `frontis-block fb-advanced-heading-main-wrapper ${blockID} ${advancedHeadingDesktopSwitcher && 'fb-desktop-responsive'} ${advancedHeadingTabletSwitcher && 'fb-tablet-responsive'} ${advancedHeadingMobileSwitcher && 'fb-mobile-responsive'}`,
         });
 
         return (

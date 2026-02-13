@@ -19,13 +19,15 @@ import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
 import Inspector from './inspector';
+import generateTestimonialStyle from './styling';
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -171,29 +173,68 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-testimonial',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
     useEffect(() => {
-        if (clientId && typeof clientId === 'string' && !blockID) {
-            setAttributes({
-                blockID: "fb-testimonial-" + clientId.slice(0, 8),
-            });
+    if (TestimonialTitleFontFamily && !loadedFonts.has(TestimonialTitleFontFamily)) {
+        loadGoogleFont(TestimonialTitleFontFamily);
+        loadedFonts.add(TestimonialTitleFontFamily);
+    }
+    }, [TestimonialTitleFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDescFontFamily && !loadedFonts.has(TestimonialDescFontFamily)) {
+        loadGoogleFont(TestimonialDescFontFamily);
+        loadedFonts.add(TestimonialDescFontFamily);
+    }
+    }, [TestimonialDescFontFamily]);
+    
+    useEffect(() => {
+    if (TestimonialAuthorFontFamily && !loadedFonts.has(TestimonialAuthorFontFamily)) {
+        loadGoogleFont(TestimonialAuthorFontFamily);
+        loadedFonts.add(TestimonialAuthorFontFamily);
+    }
+    }, [TestimonialAuthorFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDesignationFontFamily && !loadedFonts.has(TestimonialDesignationFontFamily)) {
+        loadGoogleFont(TestimonialDesignationFontFamily);
+        loadedFonts.add(TestimonialDesignationFontFamily);
+    }
+    }, [TestimonialDesignationFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateTestimonialStyle(attributes);
+            setAttributes({ blockStyle: css });
         }
-    }, [clientId, blockID]);
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
-
-    /** Start load font */
+    /** Start Default Image Initialization */
     useEffect(() => {
-        [TestimonialTitleFontFamily, TestimonialDescFontFamily, TestimonialAuthorFontFamily, TestimonialDesignationFontFamily].forEach(font => {
-            if (font && !loadedFonts.has(font)) {
-                loadGoogleFont(font);
-                loadedFonts.add(font);
+        if (!TestimonialImageUrl) {
+            let defaultImageUrl = '';
+            if (typeof FrontisBlocksData !== 'undefined') {
+                defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
             }
-        });
-    }, [TestimonialTitleFontFamily,
-        TestimonialDescFontFamily,
-        TestimonialAuthorFontFamily,
-        TestimonialDesignationFontFamily
-    ]);
-    /** End load font */
+            if (defaultImageUrl) {
+                setAttributes({ TestimonialImageUrl: defaultImageUrl });
+            }
+        }
+    }, [TestimonialImageUrl]);
+    /** End Default Image Initialization */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -347,15 +388,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
         context,
     });
 
-
-
     return (
         <>
-
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (

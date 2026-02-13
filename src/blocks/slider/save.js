@@ -7,7 +7,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
     const {
-        blockId,
+        blockID,
 		transitionSpeed,
         displayArrows,
 		displayDots,
@@ -85,15 +85,15 @@ export default function save( props ) {
 			// Add navigation if enabled
 			...(displayArrows && {
 				navigation: {
-					nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
-					prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
+					nextEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-next`,
+					prevEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-prev`,
 				},
 			}),
 
 			// Add pagination if enabled
 			...(displayDots && {
 				pagination: {
-					el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
+					el: `.fb-slider-container[data-block-id="${blockID}"] .swiper-pagination`,
 					clickable: true,
 					type: paginationType || 'bullets',
 					renderBullet: (index, className) =>
@@ -115,9 +115,9 @@ export default function save( props ) {
 
 	return (
 		<div
-			key={ blockId }
-			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', `${displayArrows ? sliderArrowPositionType : ''}`, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
-			data-block-id={ blockId }
+			key={ blockID }
+			className={ classnames( blockProps.className, `${ blockID }`, 'fb-slider-container', `${displayArrows ? sliderArrowPositionType : ''}`, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			data-block-id={ blockID }
 			data-swiper-settings={ swiperSettings }
 		>
 			<div className="fb-slides fb-swiper">

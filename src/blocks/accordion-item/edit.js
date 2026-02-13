@@ -2,15 +2,17 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
+import { InnerBlocks, useBlockProps, MediaUpload, RichText } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { useRef, memo, useEffect, useMemo } from "@wordpress/element";
+import { useRef, useEffect, useMemo } from "@wordpress/element";
 import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateAccordionItemStyle from './styling';
 
 
-const Edit = (props) => {
+export default function Edit(props) {
     const { attributes, setAttributes, isSelected, clientId, context } = props;
 
     const {
@@ -47,6 +49,24 @@ const Edit = (props) => {
 
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-accordion-item',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateAccordionItemStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     useEffect(() => {
         setAttributes({
@@ -216,5 +236,3 @@ const Edit = (props) => {
         </>
     );
 }
-
-export default memo(Edit);
