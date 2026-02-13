@@ -49,7 +49,6 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 		setAttributes,
 	});
 
-
 	/** Start load font */
 	useEffect(() => {
 		[paragraphFontFamily].forEach(font => {
