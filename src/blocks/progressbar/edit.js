@@ -135,14 +135,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     requestAnimationFrame(step);
   };
 
-
-
-
   const blockProps = useBlockProps({
     className: `fb-progressbar-main-wrapper ${blockID} ${progressbarDesktopSwitcher && 'fb-desktop-responsive'} ${progressbarTabletSwitcher && 'fb-tablet-responsive'} ${progressbarMobileSwitcher && 'fb-mobile-responsive'}`,
   });
-
-
 
   return (
     <>

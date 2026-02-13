@@ -120,7 +120,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	const formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
 
-
 	const modifiedFormLists = formLists.map((obj) => {
 		return {
 			label: obj.label,

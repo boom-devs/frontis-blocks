@@ -61,7 +61,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	}, [attributes, blockID]);
 	/** End Generate Block Style */
 
-
 	const blockProps = useBlockProps({
 		className: `fb-post-title-block ${blockID} ${
 			postTitleDesktopSwitcher && "fb-desktop-responsive"
