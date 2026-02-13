@@ -1198,7 +1198,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Preset Style", "frontis-blocks")}
 					value={socialIconsPresetStyle}
 					options={PRESETS}
-					onChange={(selected) => changeSocialIconsPreset(selected)}
+					onChange={(selected) => changeSocialIconsPreset(selected, socialItems, setAttributes)}
 				/>
 				<BaseControl
 					label={__("Alignment", "frontis-blocks")}
