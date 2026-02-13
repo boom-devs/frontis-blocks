@@ -44,7 +44,7 @@ export const presetStyles = {
                 }
             },
         ],
-        GalleryPresetStyle: "default",
+        GalleryPresetStyle: "preset-1",
         GalleryItemHeight: {
             Desktop: 300,
             Tablet: 300,
@@ -163,7 +163,7 @@ export const presetStyles = {
                 }
             }
         ],
-        GalleryPresetStyle: "preset-1",
+        GalleryPresetStyle: "preset-2",
         GalleryItemHeight: {
             Desktop: 410,
             Tablet: 300,
@@ -282,7 +282,7 @@ export const presetStyles = {
                 }
             }
         ],
-        GalleryPresetStyle: "preset-2",
+        GalleryPresetStyle: "preset-3",
         GalleryItemHeight: {
             Desktop: 411,
             Tablet: 300,
@@ -431,7 +431,7 @@ export const presetStyles = {
                 }
             }
         ],
-        GalleryPresetStyle: "preset-3",
+        GalleryPresetStyle: "preset-4",
         ImageOverlayStyle: "overlay",
         ImageOverlayStyleType: "bottom",
         lightboxIconSwitcher: false,
@@ -587,7 +587,7 @@ export const presetStyles = {
                 }
             }
         ],
-        GalleryPresetStyle: "preset-4",
+        GalleryPresetStyle: "preset-5",
         lightboxIconSwitcher: false,
         GalleryItemHeight: {
             Desktop: 410,
@@ -702,7 +702,7 @@ export const presetStyles = {
                 }
             },
         ],
-        GalleryPresetStyle: "preset-5",
+        GalleryPresetStyle: "preset-6",
         lightboxIconSwitcher: false,
         GalleryItemHeight: {
             Desktop: 410,

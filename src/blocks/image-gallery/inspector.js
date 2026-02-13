@@ -1283,7 +1283,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     <SelectControl
                         value={attributes.GalleryType}
                         options={[
-                            { label: __("Grid Layout", "frontis-blocks"), value: "gird" },
+                            { label: __("Grid Layout", "frontis-blocks"), value: "grid" },
                             { label: __("Mesonry Layout", "frontis-blocks"), value: "mesonry" },
                         ]}
                         onChange={(value) => setAttributes({ GalleryType: value })}
