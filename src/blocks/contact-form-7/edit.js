@@ -5,11 +5,15 @@ import { useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "../contact-form-7/inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateContactFormStyle from "./styling";
 
+const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const [wpCf7Form, setWpCf7Forms] = useState(FrontisBlocksData.contact_form7_html);
 	const [selectedForm, setSelectedForm] = useState();
 
@@ -26,7 +30,68 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		contactFormDesktopSwitcher,
 		contactFormTabletSwitcher,
 		contactFormMobileSwitcher,
+		contactFormLabelFontFamily,
+		contactFormInputFontFamily,
+		contactFormSubmitFontFamily,
+		contactFormSuccessFontFamily,
+		contactFormErrorFontFamily,
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-contact-form-7',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (contactFormLabelFontFamily && !loadedFonts.has(contactFormLabelFontFamily)) {
+			loadGoogleFont(contactFormLabelFontFamily);
+			loadedFonts.add(contactFormLabelFontFamily);
+		}
+	}, [contactFormLabelFontFamily]);
+
+	useEffect(() => {
+		if (contactFormInputFontFamily && !loadedFonts.has(contactFormInputFontFamily)) {
+			loadGoogleFont(contactFormInputFontFamily);
+			loadedFonts.add(contactFormInputFontFamily);
+		}
+	}, [contactFormInputFontFamily]);
+
+	useEffect(() => {
+		if (contactFormSubmitFontFamily && !loadedFonts.has(contactFormSubmitFontFamily)) {
+			loadGoogleFont(contactFormSubmitFontFamily);
+			loadedFonts.add(contactFormSubmitFontFamily);
+		}
+	}, [contactFormSubmitFontFamily]);
+
+	useEffect(() => {
+		if (contactFormSuccessFontFamily && !loadedFonts.has(contactFormSuccessFontFamily)) {
+			loadGoogleFont(contactFormSuccessFontFamily);
+			loadedFonts.add(contactFormSuccessFontFamily);
+		}
+	}, [contactFormSuccessFontFamily]);
+
+	useEffect(() => {
+		if (contactFormErrorFontFamily && !loadedFonts.has(contactFormErrorFontFamily)) {
+			loadGoogleFont(contactFormErrorFontFamily);
+			loadedFonts.add(contactFormErrorFontFamily);
+		}
+	}, [contactFormErrorFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateContactFormStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: [
@@ -64,12 +129,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.contact_form_active ? (

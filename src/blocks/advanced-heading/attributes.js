@@ -1,7 +1,7 @@
 import { separator } from '@wordpress/icons';
 
 const attributes = {
-    blockId: {
+    blockID: {
         type: 'string',
         default: ''
     },

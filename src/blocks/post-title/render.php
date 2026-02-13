@@ -29,7 +29,8 @@ $title_excerpt_length = isset($attributes['titleExcerptLength']) ? (int) $attrib
 $wrapper_id = isset($attributes['wrapperId']) ? esc_attr($attributes['wrapperId']) : '';
 $wrapper_class = isset($attributes['wrapperClass']) ? esc_attr($attributes['wrapperClass']) : '';
 
-$block_id = isset($attributes['blockId']) ? esc_attr($attributes['blockId']) : '';
+$block_id = isset($attributes['blockID']) ? esc_attr($attributes['blockID']) : '';
+$block_style = isset($attributes['blockStyle']) ? $attributes['blockStyle'] : '';
 
 $post_title_desktop_switcher = isset($attributes['postTitleDesktopSwitcher']) ? $attributes['postTitleDesktopSwitcher'] : false;
 $post_title_tablet_switcher = isset($attributes['postTitleTabletSwitcher']) ? $attributes['postTitleTabletSwitcher'] : false;
@@ -101,3 +102,8 @@ $html_tag_id_attr = !empty($wrapper_id) ? ' id="' . $wrapper_id . '"' : '';
         </<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php endif; ?>
 </div>
+<?php if ($block_style): ?>
+    <style>
+        <?php echo $block_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+    </style>
+<?php endif; ?>

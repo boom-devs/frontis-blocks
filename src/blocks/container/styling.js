@@ -1591,7 +1591,9 @@ function styling( attributes, clientId, name, deviceType, gbsSelector = false ) 
 	}
 	styling_css += containerGlobalCustomCSSValue;
 
-	return styling_css;
+	// Minify CSS: collapse multiple whitespace into single space, remove leading/trailing whitespace
+	// This is safe - only affects whitespace, not CSS values or selectors
+	return styling_css.replace(/\s+/g, ' ').trim();
 }
 
 export default styling;

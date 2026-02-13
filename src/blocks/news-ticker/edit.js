@@ -2,11 +2,17 @@ import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText, InnerBlocks } from "@wordpress/block-editor";
 import { useMemo, useEffect } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import loadGoogleFont from "@Utils/loadGoogleFont";
 import "./editor.scss";
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateNewsTickerStyle from "./styling";
+
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -22,8 +28,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTime,
 		timerPosition,
 		arrowsUniqueId,
-		showAutoplayButton
+		showAutoplayButton,
+
+		tickerLabelFontFamily,
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-news-ticker',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start load font */
+	useEffect(() => {
+		[tickerLabelFontFamily].forEach(font => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [tickerLabelFontFamily]);
+	/** End load font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateNewsTickerStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	// Generate unique ID for arrows
 	const generatedArrowsId = useMemo(() => {
@@ -44,8 +82,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// Use the generated/saved ID
 	const finalArrowsId = arrowsUniqueId || generatedArrowsId;
 
-	// console.log(finalArrowsId);
-	// console.log(arrowsUniqueId);
 	const blockProps = useBlockProps({
 		className: `fb-news-ticker-wrapper ${blockID} ${newsTickerDesktopSwitcher && "fb-desktop-responsive"
 			} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${newsTickerMobileSwitcher && "fb-mobile-responsive"
@@ -53,12 +89,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps} id={newsTickerGlobalWraperID}>
 				<div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass}`}>
 					<div className="fb-news-ticker-label-container">

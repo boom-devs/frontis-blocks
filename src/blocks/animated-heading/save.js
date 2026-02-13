@@ -2,7 +2,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
     const {
-        blockId,
+        blockID,
         animationType,
         animatedHeadingItems,
         animatedHeadingMainTag,
@@ -15,7 +15,7 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-animated-heading-main-wrapper ${blockId}`,
+        className: `fb-animated-heading-main-wrapper ${blockID}`,
     });
 
     const Tag = animatedHeadingMainTag || 'div';

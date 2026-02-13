@@ -2,7 +2,7 @@ import { useBlockProps, RichText } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
 	const {
-		blockId,
+		blockID,
 		paragraphText,
 		paragraphGlobalWraperID,
 		paragraphGlobalWraperClass,
@@ -17,7 +17,7 @@ export default function save({ attributes }) {
 	}
 
 	const blockProps = useBlockProps.save({
-		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockId} ${
+		className: `frontis-block fb-advanced-paragraph-main-wrapper ${blockID} ${
 			advancedParagraphDesktopSwitcher && "fb-desktop-responsive"
 		} ${advancedParagraphTabletSwitcher && "fb-tablet-responsive"} ${
 			advancedParagraphMobileSwitcher && "fb-mobile-responsive"

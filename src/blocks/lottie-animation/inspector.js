@@ -29,14 +29,13 @@ import {
 	LOTTIE_HOVER_STATE
 } from "../../fbConstants/fbConstants";
 
-import { useState, useEffect, useMemo } from "@wordpress/element";
+import { useState, useEffect, useMemo, memo } from "@wordpress/element";
 import "./editor.scss";
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
 import FB_BoxShadowControl from "@Components/box-shadow";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
-import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
@@ -48,7 +47,7 @@ import FB_ImageControl from '@Components/image-control';
 import FB_UrlControl from '@Components/url-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
 		blockStyle,
@@ -150,14 +149,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
 	const deviceType = useDeviceType();
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-lottie-animation-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
 	/** Start Global padding */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
@@ -226,9 +217,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopPadding = `${lottieAnimationGlobalPaddingDesktop?.top}${lottieAnimationGlobalPaddingUnits?.Desktop} ${lottieAnimationGlobalPaddingDesktop?.right}${lottieAnimationGlobalPaddingUnits?.Desktop} ${lottieAnimationGlobalPaddingDesktop?.bottom}${lottieAnimationGlobalPaddingUnits?.Desktop} ${lottieAnimationGlobalPaddingDesktop?.left}${lottieAnimationGlobalPaddingUnits?.Desktop}`;
-	const globalTabletPadding = `${lottieAnimationGlobalPaddingTablet?.top}${lottieAnimationGlobalPaddingUnits?.Tablet} ${lottieAnimationGlobalPaddingTablet?.right}${lottieAnimationGlobalPaddingUnits?.Tablet} ${lottieAnimationGlobalPaddingTablet?.bottom}${lottieAnimationGlobalPaddingUnits?.Tablet} ${lottieAnimationGlobalPaddingTablet?.left}${lottieAnimationGlobalPaddingUnits?.Tablet}`;
-	const globalMobilePadding = `${lottieAnimationGlobalPaddingMobile?.top}${lottieAnimationGlobalPaddingUnits?.Mobile} ${lottieAnimationGlobalPaddingMobile?.right}${lottieAnimationGlobalPaddingUnits?.Mobile} ${lottieAnimationGlobalPaddingMobile?.bottom}${lottieAnimationGlobalPaddingUnits?.Mobile} ${lottieAnimationGlobalPaddingMobile?.left}${lottieAnimationGlobalPaddingUnits?.Mobile}`;
 	/** End Global Padding */
 
 	/** Start Global Margin */
@@ -299,10 +287,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-
-	const globalDesktopMargin = `${lottieAnimationGlobalMarginDesktop?.top}${lottieAnimationGlobalMarginUnits?.Desktop} ${lottieAnimationGlobalMarginDesktop?.right}${lottieAnimationGlobalMarginUnits?.Desktop} ${lottieAnimationGlobalMarginDesktop?.bottom}${lottieAnimationGlobalMarginUnits?.Desktop} ${lottieAnimationGlobalMarginDesktop?.left}${lottieAnimationGlobalMarginUnits?.Desktop}`;
-	const globalTabletMargin = `${lottieAnimationGlobalMarginTablet?.top}${lottieAnimationGlobalMarginUnits?.Tablet} ${lottieAnimationGlobalMarginTablet?.right}${lottieAnimationGlobalMarginUnits?.Tablet} ${lottieAnimationGlobalMarginTablet?.bottom}${lottieAnimationGlobalMarginUnits?.Tablet} ${lottieAnimationGlobalMarginTablet?.left}${lottieAnimationGlobalMarginUnits?.Tablet}`;
-	const globalMobileMargin = `${lottieAnimationGlobalMarginMobile?.top}${lottieAnimationGlobalMarginUnits?.Mobile} ${lottieAnimationGlobalMarginMobile?.right}${lottieAnimationGlobalMarginUnits?.Mobile} ${lottieAnimationGlobalMarginMobile?.bottom}${lottieAnimationGlobalMarginUnits?.Mobile} ${lottieAnimationGlobalMarginMobile?.left}${lottieAnimationGlobalMarginUnits?.Mobile}`;
 	/** End Global Margin */
 
 	/** Start Global border */
@@ -373,9 +357,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 			}
 		})
 	}
-	const globalDesktopBorderWidth = `${lottieAnimationGlobalBorderDesktop?.top}${lottieAnimationGlobalBorderUnits?.Desktop} ${lottieAnimationGlobalBorderDesktop?.right}${lottieAnimationGlobalBorderUnits?.Desktop} ${lottieAnimationGlobalBorderDesktop?.bottom}${lottieAnimationGlobalBorderUnits?.Desktop} ${lottieAnimationGlobalBorderDesktop?.left}${lottieAnimationGlobalBorderUnits?.Desktop}`;
-	const globalTabletBorderWidth = `${lottieAnimationGlobalBorderTablet?.top}${lottieAnimationGlobalBorderUnits?.Tablet} ${lottieAnimationGlobalBorderTablet?.right}${lottieAnimationGlobalBorderUnits?.Tablet} ${lottieAnimationGlobalBorderTablet?.bottom}${lottieAnimationGlobalBorderUnits?.Tablet} ${lottieAnimationGlobalBorderTablet?.left}${lottieAnimationGlobalBorderUnits?.Tablet}`;
-	const globalMobileBorderWidth = `${lottieAnimationGlobalBorderMobile?.top}${lottieAnimationGlobalBorderUnits?.Mobile} ${lottieAnimationGlobalBorderMobile?.right}${lottieAnimationGlobalBorderUnits?.Mobile} ${lottieAnimationGlobalBorderMobile?.bottom}${lottieAnimationGlobalBorderUnits?.Mobile} ${lottieAnimationGlobalBorderMobile?.left}${lottieAnimationGlobalBorderUnits?.Mobile}`;
 	/** End Border */
 
 	/** Start Global border radius*/
@@ -447,106 +428,8 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		})
 	}
 	/** end Global border */
-
 	/** End Global Border Radius */
-	const globalDesktopBorderRadiusWidth = `${lottieAnimationGlobalBorderRadiusDesktop?.top}${lottieAnimationGlobalBorderRadiusUnits?.Desktop} ${lottieAnimationGlobalBorderRadiusDesktop?.right}${lottieAnimationGlobalBorderRadiusUnits?.Desktop} ${lottieAnimationGlobalBorderRadiusDesktop?.bottom}${lottieAnimationGlobalBorderRadiusUnits?.Desktop} ${lottieAnimationGlobalBorderRadiusDesktop?.left}${lottieAnimationGlobalBorderRadiusUnits?.Desktop}`;
-	const globalTabletBorderRadiusWidth = `${lottieAnimationGlobalBorderRadiusTablet?.top}${lottieAnimationGlobalBorderRadiusUnits?.Tablet} ${lottieAnimationGlobalBorderRadiusTablet?.right}${lottieAnimationGlobalBorderRadiusUnits?.Tablet} ${lottieAnimationGlobalBorderRadiusTablet?.bottom}${lottieAnimationGlobalBorderRadiusUnits?.Tablet} ${lottieAnimationGlobalBorderRadiusTablet?.left}${lottieAnimationGlobalBorderRadiusUnits?.Tablet}`;
-	const globalMobileBorderRadiusWidth = `${lottieAnimationGlobalBorderRadiusMobile?.top}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.right}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.bottom}${lottieAnimationGlobalBorderRadiusUnits?.Mobile} ${lottieAnimationGlobalBorderRadiusMobile?.left}${lottieAnimationGlobalBorderRadiusUnits?.Mobile}`;
 	/** End Border Radius */
-
-	const lottieAnimationStyle = useMemo(
-		() => `
-			.${blockID}.fb-lottie-animation-main-wrapper {
-				${lottieAnimationPositionType === 'default' ? `position: relative;` : ''}
-				${lottieAnimationPositionType !== 'default' ? `position: ${lottieAnimationPositionType} !important;` : ''}
-				${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'left' && lottieAnimationHZLeftOffset?.Desktop ? `left: ${lottieAnimationHZLeftOffset?.Desktop}${lottieAnimationHZLeftOffsetUnits?.Desktop};` : ''}
-				${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'right' && lottieAnimationHZRightOffset?.Desktop ? `right: ${lottieAnimationHZRightOffset?.Desktop}${lottieAnimationHZRightOffsetUnits?.Desktop};` : ''}
-				${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'top' && lottieAnimationVRTopOffset?.Desktop ? `top: ${lottieAnimationVRTopOffset?.Desktop}${lottieAnimationVRTopOffsetUnits?.Desktop};` : ''}
-				${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Desktop ? `bottom: ${lottieAnimationVRBottomOffset?.Desktop}${lottieAnimationVRBottomOffsetUnits?.Desktop};` : ''}
-				${lottieAnimationGlobalZIndex?.Desktop ? `z-index: ${lottieAnimationGlobalZIndex?.Desktop};` : ''}
-				${lottieAnimationOverflow !== 'default' ? `overflow: ${lottieAnimationOverflow};` : ''}
-				${lottieAnimationContainerWidth?.Desktop ? `width: ${lottieAnimationContainerWidth?.Desktop}${lottieAnimationContainerWidthUnits?.Desktop};` : ''}
-				
-			}
-			.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
-				${lottieAnimationGlobalNormalBackgroundType === 'gradient' ? `  
-					${lottieAnimationGlobalNormalCustomGradientSwitcher && lottieAnimationGlobalNormalCustomGradientInputValue ? `background: ${lottieAnimationGlobalNormalCustomGradientInputValue};` : `background: ${lottieAnimationGlobalNormalGradientColor};`}
-				`: `
-					${lottieAnimationGlobalNormalClassicColor ? `background: ${lottieAnimationGlobalNormalClassicColor};` : ''}
-				`}
-				${globalDesktopPadding && lottieAnimationGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ''}
-				${globalDesktopMargin && lottieAnimationGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ''} 
-				${lottieAnimationGlobalBorder ? `border: ${lottieAnimationGlobalBorder};` : ''} 
-				${globalDesktopBorderWidth && lottieAnimationGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ''}
-				${globalDesktopBorderRadiusWidth && lottieAnimationGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
-				${lottieAnimationGlobalBorderColor ? `border-color: ${lottieAnimationGlobalBorderColor};` : ''}
-				${lottieAnimationGlobalBoxShadowCssValue ? `box-shadow: ${lottieAnimationGlobalBoxShadowCssValue};` : ''}
-				${lottieAnimationNormalOpacity ? `opacity: ${lottieAnimationNormalOpacity};` : ''}
-				${lottieAnimationContainerHeight?.Desktop ? `height: ${lottieAnimationContainerHeight?.Desktop}${lottieAnimationContainerHeightUnits?.Desktop};` : ''}
-				transition: all .3s ease-in-out;
-				position: relative;
-			}
-			.${blockID} .fb-lottie-animation-container:hover{
-				${lottieAnimationGlobalHoverBackgroundType === 'gradient' ? `   	
-					${lottieAnimationGlobalHoverCustomGradientSwitcher && lottieAnimationGlobalHoverCustomGradientInputValue ? `background: ${lottieAnimationGlobalHoverCustomGradientInputValue};` : `background: ${lottieAnimationGlobalHoverGradientColor};`}
-				`: `
-					${lottieAnimationGlobalHoverClassicColor ? `background: ${lottieAnimationGlobalHoverClassicColor};` : ''}
-				`}
-				${lottieAnimationGlobalBorderHoverColor ? `border-color: ${lottieAnimationGlobalBorderHoverColor};` : ''}
-				${lottieAnimationGlobalBoxShadowHoverCssValue ? `box-shadow: ${lottieAnimationGlobalBoxShadowHoverCssValue};` : ''}
-				${lottieAnimationHoverOpacity ? `opacity: ${lottieAnimationHoverOpacity};` : ''}
-			}
-
-			@media only screen and (max-width: 1024px) {
-				.${blockID}.fb-lottie-animation-main-wrapper {
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'left' && lottieAnimationHZLeftOffset?.Tablet ? `left: ${lottieAnimationHZLeftOffset?.Tablet}${lottieAnimationHZLeftOffsetUnits?.Tablet};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'right' && lottieAnimationHZRightOffset?.Tablet ? `right: ${lottieAnimationHZRightOffset?.Tablet}${lottieAnimationHZRightOffsetUnits?.Tablet};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'top' && lottieAnimationVRTopOffset?.Tablet ? `top: ${lottieAnimationVRTopOffset?.Tablet}${lottieAnimationVRTopOffsetUnits?.Tablet};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Tablet ? `bottom: ${lottieAnimationVRBottomOffset?.Tablet}${lottieAnimationVRBottomOffsetUnits?.Tablet};` : ''}
-					${lottieAnimationGlobalZIndex?.Tablet ? `z-index: ${lottieAnimationGlobalZIndex?.Tablet};` : ''}
-					${lottieAnimationContainerWidth?.Tablet ? `width: ${lottieAnimationContainerWidth?.Tablet}${lottieAnimationContainerWidthUnits?.Tablet};` : ''}
-					
-				}
-					
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
-					${globalTabletPadding && lottieAnimationGlobalPaddingTablet?.top ? `padding: ${globalTabletPadding};` : ''}
-					${globalTabletMargin && lottieAnimationGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
-					${globalTabletBorderWidth && lottieAnimationGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
-					${globalTabletBorderRadiusWidth && lottieAnimationGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-					${lottieAnimationContainerHeight?.Tablet ? `height: ${lottieAnimationContainerHeight?.Tablet}${lottieAnimationContainerHeightUnits?.Tablet};` : ''}
-				}
-			}
-			@media only screen and (max-width: 767px) {
-				.${blockID}.fb-lottie-animation-main-wrapper {
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'left' && lottieAnimationHZLeftOffset?.Mobile ? `left: ${lottieAnimationHZLeftOffset?.Mobile}${lottieAnimationHZLeftOffsetUnits?.Mobile};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationHZOrientationType === 'right' && lottieAnimationHZRightOffset?.Mobile ? `right: ${lottieAnimationHZRightOffset?.Mobile}${lottieAnimationHZRightOffsetUnits?.Mobile};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'top' && lottieAnimationVRTopOffset?.Mobile ? `top: ${lottieAnimationVRTopOffset?.Mobile}${lottieAnimationVRTopOffsetUnits?.Mobile};` : ''}
-					${lottieAnimationPositionType !== 'default' && lottieAnimationPositionType !== 'relative' && lottieAnimationVROrientationType === 'bottom' && lottieAnimationVRBottomOffset?.Mobile ? `bottom: ${lottieAnimationVRBottomOffset?.Mobile}${lottieAnimationVRBottomOffsetUnits?.Mobile};` : ''}
-					${lottieAnimationGlobalZIndex?.Mobile ? `z-index: ${lottieAnimationGlobalZIndex?.Mobile};` : ''}
-					${lottieAnimationContainerWidth?.Mobile ? `width: ${lottieAnimationContainerWidth?.Mobile}${lottieAnimationContainerWidthUnits?.Mobile};` : ''}
-					
-				}
-				.${blockID}.fb-lottie-animation-main-wrapper .fb-lottie-animation-container {
-					${globalMobilePadding && lottieAnimationGlobalPaddingMobile?.top ? `padding: ${globalMobilePadding};` : ''}
-					${globalMobileMargin && lottieAnimationGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
-					${globalMobileBorderWidth && lottieAnimationGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
-					${globalMobileBorderRadiusWidth && lottieAnimationGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-					${lottieAnimationContainerHeight?.Mobile ? `height: ${lottieAnimationContainerHeight?.Mobile}${lottieAnimationContainerHeightUnits?.Mobile};` : ''}
-				}
-			}
-		`,
-		[
-			attributes
-		],
-	);
-
-	const customCss = getCustomCss(lottieAnimationGlobalWraperCustomCSS, `.${blockID}`);
-
-	useEffect(() => {
-		setAttributes({
-			blockStyle: `${lottieAnimationStyle} ${customCss}`.replace(/\s+/g, " ").trim(),
-		});
-	}, [lottieAnimationStyle, customCss]);
 
 	/**
 	 * Inspector General Controls
@@ -1036,3 +919,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 		</>
 	);
 }
+export default memo(Inspector);

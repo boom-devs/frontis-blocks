@@ -944,6 +944,46 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+
+	teamMemberImageBgType: {
+		type: 'string',
+		default: 'classic'
+	},
+	teamMemberImageBgClassicColor: {
+		type: 'string',
+		default: ''
+	},
+	teamMemberImageBgGradientColor: {
+		type: 'string',
+	},
+	teamMemberImageBgCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	teamMemberImageBgCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+	teamMemberImageBgHoverType: {
+		type: 'string',
+		default: 'classic'
+	},
+	teamMemberImageBgHoverClassicColor: {
+		type: 'string',
+		default: ''
+	},
+	teamMemberImageBgHoverGradientColor: {
+		type: 'string',
+	},
+	teamMemberImageBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	teamMemberImageBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+
 	// teamMemberImageOverlayOpacity: {
 	// 	type: 'string',
 	// 	default: ''

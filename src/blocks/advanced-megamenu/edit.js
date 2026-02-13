@@ -3,16 +3,22 @@ import {
 	useBlockProps,
 } from '@wordpress/block-editor';
 import { useDeviceType } from '@Config/displayType';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateAdvancedMegaMenuStyle from "./styling";
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		menuItems,
 		megaMenuDesktopSwitcher,
@@ -20,12 +26,42 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		megaMenuMobileSwitcher,
 		megaMenuGlobalWraperClass,
 		megaMenuGlobalWraperID,
-		megaMenuIcon
+		megaMenuIcon,
+		megaMenuFontFamily,
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-advanced-image',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start load font */
+	useEffect(() => {
+		[megaMenuFontFamily].forEach((font) => {
+			if (font && !loadedFonts.has(font)) {
+				loadGoogleFont(font);
+				loadedFonts.add(font);
+			}
+		});
+	}, [megaMenuFontFamily]);
+	/** End load font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateAdvancedMegaMenuStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
-		className: `frontis-block fb-advanced-mega-menu-main-wrapper ${blockId} ${megaMenuDesktopSwitcher && 'fb-desktop-responsive'} ${megaMenuTabletSwitcher && 'fb-tablet-responsive'} ${megaMenuMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `frontis-block fb-advanced-mega-menu-main-wrapper ${blockID} ${megaMenuDesktopSwitcher && 'fb-desktop-responsive'} ${megaMenuTabletSwitcher && 'fb-tablet-responsive'} ${megaMenuMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	const deviceType = useDeviceType();
@@ -37,11 +73,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (	
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-advanced-mega-menu-wrapper ${megaMenuGlobalWraperClass}`} id={megaMenuGlobalWraperID} ref={panelRef}>
 					<div className="fb-mega-menu-editor">
