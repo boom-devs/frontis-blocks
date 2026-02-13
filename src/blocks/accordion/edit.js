@@ -8,18 +8,14 @@ import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateAccordionStyle from './styling';
-
-
 import loadGoogleFont from '@Utils/loadGoogleFont';
 
 const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
-
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 

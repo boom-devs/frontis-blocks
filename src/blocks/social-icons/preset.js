@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 /** Start Preset Style */
-export const changeSocialIconsPreset = (selectedPreset) => {
+export const changeSocialIconsPreset = (selectedPreset, socialItems, setAttributes) => {
     const presetConfigurations = {
         "preset-1": {
             socialItems: socialItems.map((item, index) => {

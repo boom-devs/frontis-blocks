@@ -9,7 +9,7 @@
 		return {
 			postType: attrs.postType,
 			premadeStyle: attrs.premadeStyle,
-			blockId: attrs.blockId,
+			blockID: attrs.blockId,
 			categoryKey: attrs.categoryKey,
 			tagKey: attrs.tagKey,
 			cat: attrs.cat,
@@ -150,7 +150,7 @@
 			postWrapperLinkSwitcher,
 		} = options;
 
-		let currentPage = currentPages[blockId] || 1;
+		let currentPage = currentPages[blockID] || 1;
 
 
 
@@ -171,7 +171,7 @@
 			currentPage,
 			post_type: postType,
 			premade_style: premadeStyle,
-			block_id: blockId,
+			blockID: blockID,
 			categoryKey: categoryKey,
 			tagKey: tagKey,
 			category: categories,
@@ -241,7 +241,11 @@
 				return response.json();
 			})
 			.then(posts => {
-				const postGridElement = document.getElementById(blockId);
+				const postGridElement = document.getElementById(blockID);
+				if (!postGridElement) {
+					console.error(`PostGrid element with ID "${blockID}" not found.`);
+					return;
+				}
 				const postListElement = postGridElement.querySelector('.fb_post_grid_container');
 
 				const existingLoadMore = postListElement.querySelector('.fb_load_more_wrapper');
@@ -252,7 +256,7 @@
 				const loadingElement = postGridElement.querySelector('.loading.post');
 				if (loadingElement) loadingElement.style.display = 'none';
 
-				currentPages[blockId] = currentPage + 1;
+				currentPages[blockID] = currentPage + 1;
 
 
 				// Save the Read More icon HTML for when click on load more button
@@ -353,7 +357,7 @@
 			block.setAttribute('data-postgrid-initialized', 'true');
 
 			const options = getPostGridOptions(block);
-			currentPages[options.blockId] = 1;
+			currentPages[options.blockID] = 1;
 
 			// Save the Read More icon HTML for initial load
 			if (options.readMoreSwitcher) {
@@ -451,7 +455,7 @@
 			
 
 			// Reset page number for this block
-			currentPages[options.blockId] = 1;
+			currentPages[options.blockID] = 1;
 
 			// Update category based on selection
 			if (categoryId === '0') {
@@ -579,7 +583,7 @@
 			loadMoreIconAlign: grid.getAttribute('data-load-more-icon-align') || 'none',
 			defaultImageUrl: grid.getAttribute('data-default-image-url') || '',
 			loadMoreType: grid.getAttribute('data-load-more-type') || 'pagination',
-			block_id: grid.getAttribute('data-block-id'),
+			blockID: grid.getAttribute('data-block-id'),
 			paginationPrevNextType: grid.getAttribute('data-pagination-prev-next-type') || 'icon',
 			paginationPrevTxt: grid.getAttribute('data-pagination-prev-text') || 'Prev',
 			paginationPrevIcon: grid.getAttribute('data-pagination-prev-icon') || 'angle-left',
@@ -668,7 +672,7 @@
 				pagWrap.dataset.total_pages = data.total_pages;
 			}
 
-			currentPages = data.current_page;
+			currentPages[filterPost.blockID] = data.current_page;
 			totalPages = data.total_pages;
 
 		} catch (err) {
@@ -695,18 +699,18 @@
 		const pagWrapper = currentGrid.querySelector('.fb_pagination_wrapper');
 		if (!pagWrapper) return;
 
-		currentPages = parseInt(pagWrapper.dataset.current_page, 10) || 1; 
+		let currentPage = parseInt(pagWrapper.dataset.current_page, 10) || 1; 
 		totalPages = parseInt(pagWrapper.dataset.total_pages, 10) || 1;
 
 		if (pageBtn) {
-			currentPages = parseInt(pageBtn.dataset.pagenumber, 10);
+			currentPage = parseInt(pageBtn.dataset.pagenumber, 10);
 		} else if (prevBtn) {
-			currentPages = Math.max(1, currentPages - 1);
+			currentPage = Math.max(1, currentPage - 1);
 		} else if (nextBtn) {
-			currentPages = Math.min(totalPages, currentPages + 1);
+			currentPage = Math.min(totalPages, currentPage + 1);
 		}
 
-		fetchPage(currentGrid, currentPages);
+		fetchPage(currentGrid, currentPage);
 	});
 
 	window.reinitPostGrid = initPostGrid;

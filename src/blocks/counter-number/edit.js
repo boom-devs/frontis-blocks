@@ -120,8 +120,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		window.requestAnimationFrame(step);
 	};
 
-
-
 	useEffect(() => {
 		hasCounted.current = false;
 
@@ -144,8 +142,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		};
 	}, [counterNumberStart, counterNumberEnd, counterDuration, showThousandsSeparator, showThousandsSeparatorType]);
 
-
-
 	// Icon media remove handler
 	const removeCounterMedia = () => {
 		setAttributes({
@@ -160,7 +156,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const blockProps = useBlockProps({
 		className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
-
 
 	return (
 		<>	

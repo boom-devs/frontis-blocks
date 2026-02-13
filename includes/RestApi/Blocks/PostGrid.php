@@ -341,6 +341,7 @@ class PostGrid
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
         $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
         $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
+        $blockID = isset($_POST['blockID']) ? $_POST['blockID'] : '';
 
         $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
