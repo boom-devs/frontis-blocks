@@ -1,89 +1,66 @@
+.fb-parent-wrapper {
+    filter: unset;
+    .fb-advanced-video-wrapper {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    transition: .5s;
+    transition: border 0.5s, border-radius 0.5s, box-shadow 0.5s;
+        .fb-player-wrapper {
+            padding-top: 56.25%;
+            position: relative;
+            transition: transform 0.5s, border 0.5s, border-radius 0.5s, box-shadow 0.5s;
+            .fb-player-option {
+                .fb-react-player {
+                    left: 0;
+                    position: absolute;
+                    top: 0;
+                    iframe {
+                        box-sizing: border-box;
+                    }
+
+                    .react-player__shadow {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 .fb-advanced-video-main-wrapper {
     width: 100%;
-
     &:focus-visible {
         outline: none;
     }
-}
-
-.fb-parent-wrapper {
-    filter: unset;
-
-    .fb-advanced-video-wrapper {
-        display: block;
-        overflow: hidden;
-        position: relative;
-        transition: border 0.5s, border-radius 0.5s, box-shadow 0.5s;
-
-        .fb-player-wrapper {
-            position: relative;
-            width: 100%;
-            transition: transform 0.5s, border 0.5s, border-radius 0.5s, box-shadow 0.5s;
-
-            // Container for the player
-            .fb-player-option {
-                width: 100%;
-                height: 100%;
-
+    .fb-parent-wrapper {
+        &:focus-visible {
+            outline: none;
+        }
+        .fb-advanced-video-wrapper {
+            &:focus-visible {
+                outline: none;
+            }
+            .fb-player-wrapper {
                 &:focus-visible {
                     outline: none;
                 }
-            }
-
-            // Play Icon Styling
-            .fb-play-icon {
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                z-index: 10;
-
-                svg {
-                    width: 100%;
-                    height: 100%;
+                .fb-player-option {
+                    &:focus-visible {
+                        outline: none;
+                    }
+                    .fb-react-player {
+                        &:focus-visible {
+                            outline: none;
+                        }
+                        div{
+                            &:focus-visible {
+                                outline: none;
+                            }
+                        }
+                    }
                 }
             }
         }
     }
-}
-
-// Video.js and Iframe wrapper styling
-.fb-videojs-wrapper {
-    width: 100%;
-
-    // Ensure iframe is responsive
-    .fb-video-iframe {
-        width: 100%;
-        height: 100%;
-    }
-
-    // Video.js specific tweaks
-    .video-js {
-        width: 100%;
-        height: auto;
-
-        .vjs-big-play-button {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-    }
-}
-
-// Overlay styling
-.fb-video-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    cursor: pointer;
-    z-index: 5;
 }

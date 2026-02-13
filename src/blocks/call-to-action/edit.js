@@ -422,15 +422,13 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-
 												/>
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
 											</a>
-											{buttonIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}
@@ -460,13 +458,12 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 													placeholder={__("CTA Button", "frontis-block")}
 
 												/>
+												{buttonTwoIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnTwoIcon)}
+													</div>
+												)}
 											</a>
-											{buttonTwoIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnTwoIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}

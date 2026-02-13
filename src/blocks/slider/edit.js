@@ -12,6 +12,10 @@ import { useState, useMemo, useEffect, useRef } from "@wordpress/element";
 import { compose } from '@wordpress/compose';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
+
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateSliderStyle from "./styling";
+
 import { Swiper } from 'swiper/react';
 import { useDeviceType } from "@Config/displayType";
 import {
@@ -48,10 +52,12 @@ const Edit = (props) => {
         block,
         blockParents,
         insertBlock,
+        isSelected
     } = props;
 
     const {
-        blockId,
+        blockID,
+        blockStyle,
         slideContent,
         slideItem,
         transitionSpeed,
@@ -95,6 +101,25 @@ const Edit = (props) => {
         sliderMobileSwitcher,
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-slider',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateSliderStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
     const deviceType = useDeviceType();
 
     const swiperRef = useRef();
@@ -119,10 +144,8 @@ const Edit = (props) => {
     const hasChildrenClass = hasChildren ? 'fb-slider-has-children' : '';
     const listViewClass = isListViewOpen ? 'fb-list-view-enabled' : '';
     const blockProps = useBlockProps({
-        className: `${blockId} ${hasChildrenClass} ${listViewClass} fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${deviceType.toLowerCase()} ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `${blockID} ${hasChildrenClass} ${listViewClass} fb-slider-container fb-slider-editor-wrap ${displayArrows ? sliderArrowPositionType : ''} ${sliderArrowPosition}  fb-editor-preview-mode-${deviceType.toLowerCase()} ${sliderGlobalWraperClass} ${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}`,
     });
-
-
 
     const getSliderTemplate = useMemo(() => [
         ['frontis-blocks/slider-item'],
@@ -452,7 +475,14 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+            {isSelected && (
+                <Inspector 
+                    attributes={attributes} 
+                    setAttributes={setAttributes} 
+                    clientId={clientId} 
+                />
+            )}
+            
             {getBlockControls()}
 
             <div {...blockProps}>
@@ -559,6 +589,7 @@ const Edit = (props) => {
                 )}
 
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 };
