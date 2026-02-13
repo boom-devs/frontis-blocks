@@ -1303,7 +1303,7 @@ class Helper
      * Call this function when you need to manually clear cached data.
      * Caches are also automatically cleared on post save, term changes, and user updates.
      * 
-     * @since 1.1.7
+     * @since 1.1.8
      * @return void
      */
     public static function clear_frontis_caches()
