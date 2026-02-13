@@ -8,7 +8,6 @@ import { useRef, useEffect, useMemo } from "@wordpress/element";
 import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateAccordionItemStyle from './styling';
 
