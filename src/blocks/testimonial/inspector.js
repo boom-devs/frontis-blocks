@@ -424,19 +424,6 @@ const Inspector = ({ attributes, setAttributes }) => {
         setAttributes({ TestimonialRatingicon: IconName })
     }
 
-
-    let defaultImageUrl = '';
-    if (typeof FrontisBlocksData !== 'undefined') {
-        defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
-    }
-
-    // Set default value for TestimonialImageUrl
-    useEffect(() => {
-        if (!TestimonialImageUrl) {
-            setAttributes({ TestimonialImageUrl: defaultImageUrl });
-        }
-    }, []);
-
     /** Start Testimonial Rating Icon Margin */
     const testimonialRatingIconMarginUnitsChange = (event, position) => {
         const value = event.target.value;

@@ -222,6 +222,20 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
     }, [attributes, blockID]);
     /** End Generate Block Style */
 
+    /** Start Default Image Initialization */
+    useEffect(() => {
+        if (!TestimonialImageUrl) {
+            let defaultImageUrl = '';
+            if (typeof FrontisBlocksData !== 'undefined') {
+                defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
+            }
+            if (defaultImageUrl) {
+                setAttributes({ TestimonialImageUrl: defaultImageUrl });
+            }
+        }
+    }, [TestimonialImageUrl]);
+    /** End Default Image Initialization */
+
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
     });
