@@ -106,13 +106,6 @@ const TemplateGrid = ({
 
 
     const handleFullSiteImport = useCallback(async (id) => {
-        const siteResp = await getTemplatesData("import/site", "site_id", 41);
-        console.log(siteResp);
-        console.log("Hello world");
-        return false;
-
-
-
         if (!userData?.email) {
             setIsLoginModalOpen(true);
             return;
@@ -454,7 +447,7 @@ const TemplateGrid = ({
 
                         disabled={isImporting}
                     >
-                        {activeTab === 'sites' ? <span>Coming Soon</span> : <span>Import</span>}
+                        <span>Import</span>
                     </button>
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
