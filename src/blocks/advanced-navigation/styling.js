@@ -524,16 +524,6 @@ const generateAdvancedNavigationStyle = (attributes) => {
 
         .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
             ${navigationDesktopMarginWidth && navigationDesktopMargin?.top? `margin: ${navigationDesktopMarginWidth};` : ''} 
-            ${navigationBorder ? `border: ${navigationBorder};` : ''} 
-            ${navigationBorderColor ? `border-color: ${navigationBorderColor};` : ''}
-            ${navigationDesktopBorderWidth && navigationDesktopBorder?.top? `border-width: ${navigationDesktopBorderWidth};` : ''}
-            ${navigationDesktopBorderRadiusWidth && navigationDesktopBorderRadius?.top? `border-radius: ${navigationDesktopBorderRadiusWidth};` : ''}
-            ${navigationBoxShadowCssValue ? `box-shadow: ${navigationBoxShadowCssValue};` : ''}
-        }
-
-        .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item:hover {
-            ${navigationBorderHoverColor ? `border-color: ${navigationBorderHoverColor};` : ''}
-            ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
         }
 
         .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
@@ -566,18 +556,24 @@ const generateAdvancedNavigationStyle = (attributes) => {
             
             ${navigationColor ? `color: ${navigationColor};` : ''}
             ${navigationDesktopPaddingWidth && navigationDesktopPadding?.top? `padding: ${navigationDesktopPaddingWidth};` : ''} 
+            ${navigationBorder ? `border: ${navigationBorder};` : ''} 
+            ${navigationBorderColor ? `border-color: ${navigationBorderColor};` : ''}
+            ${navigationDesktopBorderWidth && navigationDesktopBorder?.top? `border-width: ${navigationDesktopBorderWidth};` : ''}
+            ${navigationDesktopBorderRadiusWidth && navigationDesktopBorderRadius?.top? `border-radius: ${navigationDesktopBorderRadiusWidth};` : ''}
+            ${navigationBoxShadowCssValue ? `box-shadow: ${navigationBoxShadowCssValue};` : ''}
             outline: none !important;
             box-shadow: none !important;
             transition: all .3s ease-in-out;
         }
         .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item .wp-block-navigation-item__content:hover {
             ${navigationHoverColor ? `color: ${navigationHoverColor};` : ''}
-            
             ${navigationHoverBackgroundType === 'gradient' ? `  
                 ${navigationHoverCustomGradientSwitcher && navigationHoverCustomGradientInputValue ? `background: ${navigationHoverCustomGradientInputValue};` : `background: ${navigationHoverGradientColor};`}
             `: `
                 ${navigationHoverClassicColor ? `background: ${navigationHoverClassicColor};` : ''}
             `}
+            ${navigationBorderHoverColor ? `border-color: ${navigationBorderHoverColor};` : ''}
+            ${navigationBoxShadowHoverCssValue ? `box-shadow: ${navigationBoxShadowHoverCssValue};` : ''}
             text-decoration: none !important;
         }
 
@@ -765,10 +761,7 @@ const generateAdvancedNavigationStyle = (attributes) => {
             }
 
             .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
-                ${navigationTabletPaddingWidth && navigationTabletPadding?.top? `padding: ${navigationTabletPaddingWidth};` : ''}
                 ${navigationTabletMarginWidth && navigationTabletMargin?.top? `margin: ${navigationTabletMarginWidth};` : ''} 
-                ${navigationTabletBorderWidth && navigationTabletBorder?.top? `border-width: ${navigationTabletBorderWidth};` : ''}
-                ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius?.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
             }
 
             .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
@@ -778,6 +771,9 @@ const generateAdvancedNavigationStyle = (attributes) => {
                 ${navigationGlobalTypoSwitcher?.fontSize === false && navigationFontSize?.Tablet && navigationFontSizeUnits?.Tablet ? `font-size: ${navigationFontSize?.Tablet}${navigationFontSizeUnits?.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher?.letterSpacing === false && navigationLetterSpacing?.Tablet && navigationLetterSpacingUnits?.Tablet ? `letter-spacing: ${navigationLetterSpacing?.Tablet}${navigationLetterSpacingUnits?.Tablet};` : ''}
                 ${navigationGlobalTypoSwitcher?.lineHeight === false && navigationLineHeight?.Tablet && navigationLineHeightUnits?.Tablet ? `line-height: ${navigationLineHeight?.Tablet}${navigationLineHeightUnits?.Tablet};` : ''}
+                ${navigationTabletPaddingWidth && navigationTabletPadding?.top? `padding: ${navigationTabletPaddingWidth};` : ''}
+                ${navigationTabletBorderWidth && navigationTabletBorder?.top? `border-width: ${navigationTabletBorderWidth};` : ''}
+                ${navigationTabletBorderRadiusWidth && navigationTabletBorderRadius?.top? `border-radius: ${navigationTabletBorderRadiusWidth};` : ''}
             }
 
             .${blockID} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {
@@ -845,10 +841,7 @@ const generateAdvancedNavigationStyle = (attributes) => {
             }
 
             .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation-item {
-                ${navigationMobilePaddingWidth && navigationMobilePadding?.top? `padding: ${navigationMobilePaddingWidth};` : ''}
                 ${navigationMobileMarginWidth && navigationMobileMargin?.top? `margin: ${navigationMobileMarginWidth};` : ''} 
-                ${navigationMobileBorderWidth && navigationMobileBorder?.top? `border-width: ${navigationMobileBorderWidth};` : ''}
-                ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius?.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
             }
 
             .${blockID} .advanced-navigation-wrapper .advanced-navigation-contents .wp-block-navigation__container {
@@ -858,6 +851,9 @@ const generateAdvancedNavigationStyle = (attributes) => {
                 ${navigationGlobalTypoSwitcher?.fontSize === false && navigationFontSize?.Mobile && navigationFontSizeUnits?.Mobile ? `font-size: ${navigationFontSize?.Mobile}${navigationFontSizeUnits?.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher?.letterSpacing === false && navigationLetterSpacing?.Mobile && navigationLetterSpacingUnits?.Mobile ? `letter-spacing: ${navigationLetterSpacing?.Mobile}${navigationLetterSpacingUnits?.Mobile};` : ''}
                 ${navigationGlobalTypoSwitcher?.lineHeight === false && navigationLineHeight?.Mobile && navigationLineHeightUnits?.Mobile ? `line-height: ${navigationLineHeight?.Mobile}${navigationLineHeightUnits?.Mobile};` : ''}
+                 ${navigationMobilePaddingWidth && navigationMobilePadding?.top? `padding: ${navigationMobilePaddingWidth};` : ''}
+                ${navigationMobileBorderWidth && navigationMobileBorder?.top? `border-width: ${navigationMobileBorderWidth};` : ''}
+                ${navigationMobileBorderRadiusWidth && navigationMobileBorderRadius?.top? `border-radius: ${navigationMobileBorderRadiusWidth};` : ''}
             }
 
             .${blockID} .advanced-navigation-wrapper .has-child .wp-block-navigation__submenu-container {

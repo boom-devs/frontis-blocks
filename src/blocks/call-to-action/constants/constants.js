@@ -21,11 +21,11 @@ export const PRESETS = [
 
 
 export const OVERFLOW_OP = [
-    { label: __('Default', 'frontis-blocks'), value: 'default' },
-    { label: __('Auto', 'frontis-blocks'), value: 'auto' },
-    { label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
-    { label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
-    { label: __('Clip', 'frontis-blocks'), value: 'clip' },
+	{ label: __('Default', 'frontis-blocks'), value: 'default' },
+	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
+	{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
+	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
+	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
 ];
 
 export const UNIT_TYPES = [
@@ -109,17 +109,17 @@ export const ICON_POSITION = [
 ];
 
 export const INFO_ICON_POSITION = [
-    { label: __("Top", "frontis-block"), value: "top" },
-    { label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
 	{ label: __("Left", "frontis-block"), value: "left" },
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
-	
+
 ];
 
 export const BG_TYPE = [
-    { label: __("Image", "frontis-block"), value: "image" },
-    { label: __("Color", "frontis-block"), value: "color" },
-	
+	{ label: __("Image", "frontis-block"), value: "image" },
+	{ label: __("Color", "frontis-block"), value: "color" },
+
 ];
 
 export const ICON_ALIGN = [

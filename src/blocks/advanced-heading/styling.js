@@ -493,11 +493,11 @@ const generateAdvancedHeadingStyle = (attributes) => {
             ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
             ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
 
-            ${headingAlignment?.Desktop ? `text-align: ${headingAlignment?.Desktop};` : ''}
-            transition: all .3s ease-in-out;
             position: relative;
             display: flex;
             flex-direction: column;
+            ${headingAlignment?.Desktop ? `align-items: ${headingAlignment?.Desktop};` : ''}
+            transition: all .3s ease-in-out;
         }
         .${blockID} .fb-advanced-wrapper:hover {
             ${desktopBackgroundHoverStyles}
@@ -767,7 +767,7 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-                ${headingAlignment?.Tablet ? `text-align: ${headingAlignment?.Tablet};` : ''}
+                ${headingAlignment?.Tablet ? `align-items: ${headingAlignment?.Tablet};` : ''}
             }
 
             .${blockID} .fb-advanced-wrapper:hover {
@@ -985,7 +985,7 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-                ${headingAlignment?.Mobile ? `text-align: ${headingAlignment?.Mobile};` : ''}
+                ${headingAlignment?.Mobile ? `align-items: ${headingAlignment?.Mobile};` : ''}
             }
 
             .${blockID} .fb-advanced-wrapper:hover {

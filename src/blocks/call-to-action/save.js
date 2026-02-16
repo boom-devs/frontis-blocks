@@ -31,8 +31,8 @@ export default function save({ attributes }) {
 		ctaGlobalWraperClass,
 
 		ctaDesktopSwitcher,
-        ctaTabletSwitcher,
-        ctaMobileSwitcher,
+		ctaTabletSwitcher,
+		ctaMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -67,18 +67,13 @@ export default function save({ attributes }) {
 							>
 								{ctaBtnOneSwitcher && (
 									<div className="fb-cta-btn-one-wrapper">
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={info_Button_Link}
 												target={btnOneTargetUrl ? "_blank" : undefined}
 												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText.Content
 													tagName="span"
@@ -96,18 +91,13 @@ export default function save({ attributes }) {
 								)}
 								{btnTwoSwitcher && (
 									<div className="fb-cta-btn-two-wrapper">
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnTwoIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={btnTwoLink}
 												target={btnTwoTargetUrl ? "_blank" : undefined}
 												rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnTwoIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText.Content
 													tagName="span"

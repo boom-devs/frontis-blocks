@@ -2225,11 +2225,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											setIconHandler={buttonIconHandler}
 										/>
 									</BaseControl>
-									<SelectControl
+									<FB_SwitcherControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnIconPosition}
 										options={ICON_POSITION}
-										onChange={(value) =>
+										globalSwitcher={btnIconPosition}
+										setGlobalSwitcher={(value) =>
 											setAttributes({ btnIconPosition: value })
 										}
 									/>
@@ -2345,11 +2346,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											setIconHandler={buttonTwoIconHandler}
 										/>
 									</BaseControl>
-									<SelectControl
+									<FB_SwitcherControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnTwoIconPosition}
 										options={ICON_POSITION}
-										onChange={(value) =>
+										globalSwitcher={btnTwoIconPosition}
+										setGlobalSwitcher={(value) =>
 											setAttributes({ btnTwoIconPosition: value })
 										}
 									/>
