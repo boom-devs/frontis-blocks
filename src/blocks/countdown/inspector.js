@@ -10,19 +10,18 @@ import {
 	DateTimePicker,
 	TextControl,
 	ToggleControl,
-	TabPanel,
 	SelectControl,
 	BaseControl
 } from '@wordpress/components';
-import { useEffect, useState, useMemo, memo } from '@wordpress/element';
+import { useEffect, useState, memo } from '@wordpress/element';
 
 import {
 	BORDER_STYLES,
 	LAYOUT_ALIGNMENT,
 	LAYOUT_TYPE,
 	OVERFLOW_OP,
-	PRESETS,
-} from "./constants/constants";
+	SELECT_SEPARATOR_TYPE,
+} from '@Constants/fbConstants';
 
 import FB_Range from "@Components/range";
 import FB_Spacing from "@Components/spacing";
@@ -30,21 +29,18 @@ import FB_TypographyControl from '@Components/typography-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_BackgroundColorControl from "@Components/background-color-control";
-import { SELECT_SEPARATOR_TYPE } from "@Blocks/countdown/constants/constants";
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 import { ButtonGroup } from '@wordpress/components';
 import { Button } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import FB_AlignmentControl from '@Components/alignment-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
 import { countdownPresets } from "./presets";
-
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {

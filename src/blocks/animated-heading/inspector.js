@@ -20,15 +20,9 @@ import {
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
     BORDER_STYLES,
-	PRESETS,
-	OVERFLOW_OP,
     ANIMATION_TYPE,
-} from "./constants/constants";
+} from "@Constants/fbConstants";
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';

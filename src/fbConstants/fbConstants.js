@@ -15,12 +15,23 @@ export const NORMAL_HOVER = [
 	{ label: __("Hover", "frontis-blocks"), value: "hover" },
 ];
 
+export const ANIMATION_TYPE = [
+	{ label: __("Typing", "frontis-blocks"), value: "typing" },
+	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+];
+
 export const OVERFLOW_OP = [
 	{ label: __('Default', 'frontis-blocks'), value: 'default' },
 	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
 	{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
 	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
 	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
+export const MEDIA_TYPES = [
+    { label: __("image", "frontis-blocks"), value: "image" },
+    { label: __("icon", "frontis-blocks"), value: "icon" },
+    { label: __("none", "frontis-blocks"), value: "none" },
 ];
 
 export const LINK_TARGET_OPTIONS = [
@@ -152,6 +163,23 @@ export const BORDER_STYLES = [
 	{ label: __("Groove", "frontis-blocks"), value: "groove" },
 	{ label: __("Outset", "frontis-blocks"), value: "outset" },
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
+];
+
+export const TITLE_ALIGNMENT = [
+    { label: __("Left", "frontis-blocks"), value: "left" },
+    { label: __("Center", "frontis-blocks"), value: "center" },
+    { label: __("Right", "frontis-blocks"), value: "right" },
+    { label: __("Between", "frontis-blocks"), value: "between" },
+];
+
+export const ICON_POSITIONS = [
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+];
+
+export const ICON_SWITCHER = [
+	{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
+	{ label: __('Image', 'frontis-blocks'), value: 'image' },
 ];
 
 export const FONT_STYLE = [
@@ -748,3 +776,39 @@ export const GRID_UNIT_TYPES = [
 ];
 
 /** End Container Layout Constants */
+
+export const WIDTH_STYLES = [
+	{ label: __("Custom", "frontis-blocks"), value: "custom" },
+	{ label: __("Full Width", "frontis-blocks"), value: "full-width" },
+];
+
+export const LAYOUT_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+export const SELECT_SEPARATOR_TYPE = [
+	{ label: "Colon", value: "colon" },
+	{ label: "Line", value: "line" },
+	{ label: "Slash", value: "slash" },
+	{ label: "Custom", value: "custom" },
+];
+
+export const mediaType = [
+	{ label: __("None", "frontis-block"), value: "none" },
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
+
+export const separatorType = [
+	{ label: __("Comma", "frontis-block"), value: "comma" },
+	{ label: __("Space", "frontis-block"), value: "space" },
+];
+
+export const ITEM_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
