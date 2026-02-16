@@ -407,7 +407,7 @@ if (!function_exists('fb_compute_dynamic_text')) {
 }
 
 /* ---------- extract & normalize (attributes) ---------- */
-$block_id = fb_norm_str(isset($attributes['blockId']) ? $attributes['blockId'] : '');
+$block_id = fb_norm_str(isset($attributes['blockID']) ? $attributes['blockID'] : '');
 
 $button_alignment = fb_norm_str(isset($attributes['buttonAlignment']) ? $attributes['buttonAlignment'] : 'left');
 $button_text_switcher = isset($attributes['buttonTextSwitcher']) ? !empty($attributes['buttonTextSwitcher']) : true;

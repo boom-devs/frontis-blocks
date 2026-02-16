@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import {
 	useBlockProps,
 	RichText,
@@ -16,8 +17,12 @@ import './editor.scss';
 import DynamicTextValue from '@Components/dynamic-text-value';
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateDualButtonStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -96,8 +101,45 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnTwoTermsSeparator,
 		dynamicBtnTwoEnableLink,
 		dynamicBtnTwoLinkSource,
+		ButtonFontFamily,
+		connectorFontFamily,
 		/** End Dynamic Btn Two Text */
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-dual-button',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (ButtonFontFamily && !loadedFonts.has(ButtonFontFamily)) {
+			loadGoogleFont(ButtonFontFamily);
+			loadedFonts.add(ButtonFontFamily);
+		}
+	}, [ButtonFontFamily]);
+
+	useEffect(() => {
+		if (connectorFontFamily && !loadedFonts.has(connectorFontFamily)) {
+			loadGoogleFont(connectorFontFamily);
+			loadedFonts.add(connectorFontFamily);
+		}
+	}, [connectorFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateDualButtonStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-dual-button-main-wrapper ${blockID} ${dualBtnDesktopSwitcher && 'fb-desktop-responsive'} ${dualBtnTabletSwitcher && 'fb-tablet-responsive'} ${dualBtnMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -180,11 +222,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}	
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<BlockControls>
 				<AlignmentToolbar

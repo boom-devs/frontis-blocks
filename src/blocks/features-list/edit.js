@@ -1,13 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateFeaturesListStyle from './styling';
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -23,7 +28,44 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         featuresListDesktopSwitcher,
         featuresListTabletSwitcher,
         featuresListMobileSwitcher,
+        FeatureTitleFontFamily,
+        FeatureDescFontFamily,
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-feature-list',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (FeatureTitleFontFamily && !loadedFonts.has(FeatureTitleFontFamily)) {
+            loadGoogleFont(FeatureTitleFontFamily);
+            loadedFonts.add(FeatureTitleFontFamily);
+        }
+    }, [FeatureTitleFontFamily]);
+
+    useEffect(() => {
+        if (FeatureDescFontFamily && !loadedFonts.has(FeatureDescFontFamily)) {
+            loadGoogleFont(FeatureDescFontFamily);
+            loadedFonts.add(FeatureDescFontFamily);
+        }
+    }, [FeatureDescFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateFeaturesListStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -37,12 +79,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
+            
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-feature-wrapper ${featuresListGlobalWraperClass}`} id={featuresListGlobalWraperID} ref={panelRef}>
                     <div className={`fb-feature-list-wrapper fb-feature-list-${FeatureAlignment} fb-icon-position-${FeatureIconAlignment} `}>

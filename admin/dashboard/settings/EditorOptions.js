@@ -130,13 +130,29 @@ const EditorOptions = () => {
             saveOption('automatic_block_recovery', options.automatic_block_recovery);
             saveOption('copy_paste_style', options.copy_paste_style);
 					} else {
+            const normalizeKeys = (jsonString) => {
+              if (!jsonString) return {};
+              try {
+                const obj = JSON.parse(jsonString);
+                if (!obj || typeof obj !== 'object') return obj;
+                const normalized = {};
+                Object.keys(obj).forEach(key => {
+                  const normalizedKey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+                  normalized[normalizedKey] = obj[key];
+                });
+                return normalized;
+              } catch (e) {
+                return {};
+              }
+            };
+
 						setOptions(prevOptions => ({
 							...prevOptions,
 							...fetchedOptions,
-							default_content_width: JSON.parse(fetchedOptions.default_content_width),
-              container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
-              container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
-              container_padding: JSON.parse(fetchedOptions.container_padding),
+							default_content_width: normalizeKeys(fetchedOptions.default_content_width),
+              container_column_gap: normalizeKeys(fetchedOptions.container_column_gap),
+              container_row_gap: normalizeKeys(fetchedOptions.container_row_gap),
+              container_padding: normalizeKeys(fetchedOptions.container_padding),
               automatic_block_recovery: JSON.parse(fetchedOptions.automatic_block_recovery),
               copy_paste_style: JSON.parse(fetchedOptions.copy_paste_style),
 						}));

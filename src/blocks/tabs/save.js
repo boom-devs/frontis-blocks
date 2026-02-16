@@ -4,7 +4,7 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 
 export default function save({ attributes }) {
   const {
-    blockId,
+    blockID,
     tabItems,
     tabActiveFrontend,
     tabTitleTag,
@@ -19,11 +19,11 @@ export default function save({ attributes }) {
   } = attributes;
 
   const blockProps = useBlockProps.save({
-    className: `fb-tabs-wrapper ${blockId || ''}`,
+    className: `fb-tabs-wrapper ${blockID || ''}`,
     'data-tab-active': tabActiveFrontend,
   });
 
-  const contentId = `fb-tabs-body-${blockId || 'x'}`;
+  const contentId = `fb-tabs-body-${blockID || 'x'}`;
 
   return (
     <div {...blockProps}>
@@ -31,7 +31,7 @@ export default function save({ attributes }) {
         <ul className="fb-tabs-panel" role="tablist">
           {tabItems.map((item, index) => {
             const isActive = tabActiveFrontend === index;
-            const tabId = `fb-tabs-tab-${blockId || 'x'}-${index}`;
+            const tabId = `fb-tabs-tab-${blockID || 'x'}-${index}`;
 
             return (
               <li

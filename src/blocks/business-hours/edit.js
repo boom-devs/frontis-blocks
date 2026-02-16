@@ -2,11 +2,16 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
 import { ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { useState, useEffect, useCallback } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateBusinessHoursStyle from './styling';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -40,8 +45,70 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		showTimezoneOffset,
 		showRemainingTime,
 		remainingTimeLabel,
-		remainingTimeFormat
+		remainingTimeFormat,
+		
+		timezoneLocationTextFontFamily,
+		timezoneTimeTextFontFamily,
+		timezoneTextFontFamily,
+		statusTextFontFamily,
+		noticeTextFontFamily,
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-business-hours',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (timezoneLocationTextFontFamily && !loadedFonts.has(timezoneLocationTextFontFamily)) {
+			loadGoogleFont(timezoneLocationTextFontFamily);
+			loadedFonts.add(timezoneLocationTextFontFamily);
+		}
+	}, [timezoneLocationTextFontFamily]);
+
+	useEffect(() => {
+		if (timezoneTimeTextFontFamily && !loadedFonts.has(timezoneTimeTextFontFamily)) {
+			loadGoogleFont(timezoneTimeTextFontFamily);
+			loadedFonts.add(timezoneTimeTextFontFamily);
+		}
+	}, [timezoneTimeTextFontFamily]);
+
+	useEffect(() => {
+		if (timezoneTextFontFamily && !loadedFonts.has(timezoneTextFontFamily)) {
+			loadGoogleFont(timezoneTextFontFamily);
+			loadedFonts.add(timezoneTextFontFamily);
+		}
+	}, [timezoneTextFontFamily]);
+
+	useEffect(() => {
+		if (statusTextFontFamily && !loadedFonts.has(statusTextFontFamily)) {
+			loadGoogleFont(statusTextFontFamily);
+			loadedFonts.add(statusTextFontFamily);
+		}
+	}, [statusTextFontFamily]);
+
+	useEffect(() => {
+		if (noticeTextFontFamily && !loadedFonts.has(noticeTextFontFamily)) {
+			loadGoogleFont(noticeTextFontFamily);
+			loadedFonts.add(noticeTextFontFamily);
+		}
+	}, [noticeTextFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateBusinessHoursStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	// State for real-time updates
 	const [currentTime, setCurrentTime] = useState('');
@@ -446,8 +513,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-
-			<Inspector attributes={attributes} setAttributes={setAttributes} clientId={clientId} />
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
 			<div {...blockProps}>
 				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>

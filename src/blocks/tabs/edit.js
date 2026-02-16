@@ -9,12 +9,15 @@ import renderSVG from "@Components/icon-picker/components/icon-picker/controls/r
 import Inspector from './inspector';
 import './editor.scss';
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateTabsStyle from './styling';
+
 const ALLOWED_BLOCKS = ['frontis-blocks/tabs-item'];
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		tabItems,
 		tabActive,
@@ -30,6 +33,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tabGlobalWraperID,
 		tabGlobalWraperClass,
 	} = attributes;
+
+  	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-tabs',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateTabsStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const beSelect = select('core/block-editor');
 	const beDispatch = dispatch('core/block-editor');
@@ -259,7 +281,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, []);
 
 	const blockProps = useBlockProps({
-		className: `fb-tabs-wrapper ${blockId}`,
+		className: `fb-tabs-wrapper ${blockID}`,
 	});
 
 	const getTabsTemplate = useMemo(() => tabItems.map(item => ['frontis-blocks/tabs-item']), [tabItems]);
@@ -299,17 +321,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		<>
 			<div {...blockProps} >
 
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-					clientId={clientId}
-					handleDragEnd={handleDragEnd}
-					handleAddItem={handleAddItem}
-					handleChangeItem={handleChangeItem}
-					handleDeleteItem={handleDeleteItem}
-					handleDuplicateItem={handleDuplicateItem}
-					tabsItemList={tabsItemList}
-				/>
+				{isSelected && (
+					<Inspector
+						attributes={attributes}
+						setAttributes={setAttributes}
+						handleDragEnd={handleDragEnd}
+						handleAddItem={handleAddItem}
+						handleChangeItem={handleChangeItem}
+						handleDeleteItem={handleDeleteItem}
+						handleDuplicateItem={handleDuplicateItem}
+						tabsItemList={tabsItemList}
+					/>
+				)}
 
 				{renderTabsToolbarControls()}
 
