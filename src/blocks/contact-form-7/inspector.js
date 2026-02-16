@@ -18,15 +18,10 @@ import {
 } from "@wordpress/components";
 
 import {
-	FORM_LISTS,
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	ICON_ALIGN,
-	TEXT_ALIGN,
 	BORDER_STYLES,
 	WIDTH_STYLES,
 	OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FB_Spacing from "@Components/spacing";
 import FB_Range from "@Components/range";

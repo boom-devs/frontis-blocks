@@ -16,7 +16,10 @@ import {
     RangeControl,
 } from "@wordpress/components";
 import { InspectorControls } from '@wordpress/block-editor';
-import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
+import { 
+    BORDER_STYLES,
+    MEDIA_TYPES,
+} from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
 import { useEffect, useMemo, memo } from "@wordpress/element";

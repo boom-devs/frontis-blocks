@@ -23,17 +23,18 @@ import {
     ResponsiveWrapper, __experimentalHStack as HStack,
 } from '@wordpress/components';
 
-import {
-    PRESETS
-} from "./constants/constants";
-
-import { useEffect, useRef, useState, useMemo, memo } from '@wordpress/element';
+import { useEffect, useRef, memo } from '@wordpress/element';
 import './editor.scss';
-import { mediaType, BORDER_STYLES, UNIT_TYPES, OVERFLOW_OP, separatorType, CARD_WRAP_HZ_ALIGNMENT, CARD_WRAP_VR_ALIGNMENT, ICON_POSITION, TITLE_POSITION } from "./constants/constants";
+import { 
+    mediaType, 
+    BORDER_STYLES, 
+    OVERFLOW_OP, 
+    separatorType,
+    ITEM_POSITION 
+} from '@Constants/fbConstants';
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
-import FB_AlignmentControl from '@Components/alignment-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
@@ -44,9 +45,7 @@ import FB_ImageControl from '@Components/image-control';
 import FB_PositionControl from '@Components/position-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import FB_VisibilityControl from '@Components/visibility-control';
-import FB_BackgroundImageControl from '../../components/background-image-control';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_Presets from '@Components/presets';
@@ -1208,7 +1207,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <SelectControl
                     label={__("Icon Position", "frontis-blocks")}
                     value={iconPosition}
-                    options={ICON_POSITION}
+                    options={ITEM_POSITION}
                     onChange={(value) => setAttributes({ iconPosition: value })}
                 />
 
@@ -1538,7 +1537,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <SelectControl
                     label={__("Title Position", "frontis-blocks")}
                     value={titlePosition}
-                    options={TITLE_POSITION}
+                    options={ITEM_POSITION}
                     onChange={(value) => setAttributes({ titlePosition: value })}
                 />
 

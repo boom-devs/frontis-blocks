@@ -14,7 +14,7 @@ import {
 import {
     BORDER_STYLES,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from "@Constants/fbConstants";
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
