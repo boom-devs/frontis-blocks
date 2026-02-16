@@ -17,9 +17,11 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
-import './editor.scss';
+
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateButtonStyle from './styling';
+
+import './editor.scss';
 
 const loadedFonts = new Set();
 

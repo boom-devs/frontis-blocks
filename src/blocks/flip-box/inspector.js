@@ -12,6 +12,7 @@ import {
 import {
 	SelectControl,
 	PanelBody,
+	Dashicon,
 	TabPanel,
 	BaseControl,
 	Button,
@@ -4405,10 +4406,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 												<BaseControl>
 													<FB_ResponsiveAlignmentControl
 														label={__("Alignment", "frontis-blocks")}
-														globalAlignment={flipBoxAlignment}
-														setGlobalAlignment={(value) => setAttributes({ flipBoxAlignment: value })}
+														globalAlignment={Object.fromEntries(
+															Object.entries(flipBoxAlignment || {}).map(([device, value]) => [
+																device,
+																value === 'left' ? 'flex-start' : (value === 'right' ? 'flex-end' : value)
+															])
+														)}
+														setGlobalAlignment={(value) => {
+															const updatedValue = { ...value };
+															if (updatedValue[deviceType] === 'left') updatedValue[deviceType] = 'flex-start';
+															if (updatedValue[deviceType] === 'right') updatedValue[deviceType] = 'flex-end';
+															setAttributes({ flipBoxAlignment: updatedValue });
+														}}
 														deviceType={deviceType}
 														setAttributes={setAttributes}
+														options={[
+															{ label: <Dashicon icon="editor-alignleft" />, value: "flex-start" },
+															{ label: <Dashicon icon="editor-aligncenter" />, value: "center" },
+															{ label: <Dashicon icon="editor-alignright" />, value: "flex-end" },
+														]}
 													/>
 												</BaseControl>
 											</PanelBody>

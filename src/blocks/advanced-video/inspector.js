@@ -976,7 +976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${videoBorder ? `border: ${videoBorder};` : ''}
             ${IframeBorderDesktopWidth && videoBorderDesktop?.top ? `border-width: ${IframeBorderDesktopWidth};` : ''}
             ${IframeBorderRadiusDesktopWidth && videoBorderRadiusDesktop?.top ? `border-radius: ${IframeBorderRadiusDesktopWidth} !important;` : ''}
-            ${videoBorderColor ? `border-color: ${videoBorderColor}` : ''}
+            ${videoBorderColor ? `border-color: ${videoBorderColor};` : ''}
             transition: all .3s ease-in-out;
         }
 
