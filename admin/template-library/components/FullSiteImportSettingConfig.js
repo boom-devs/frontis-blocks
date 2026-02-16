@@ -477,7 +477,7 @@ const FullSiteImportSettingConfig = ({
             pageData.append("title", page.title);
             pageData.append("content", parsedBlocks || "");
             pageData.append("slug", page.slug || "");
-            pageData.append("template", page.template || "fb-template-pages");
+            pageData.append("template", page.template || "");
             pageData.append("badge", page.badge || "");
             pageData.append("site_url", window.location.origin);
             pageData.append("uploads_updated", uploadsUpdated);
