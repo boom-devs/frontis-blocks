@@ -224,6 +224,8 @@ const Inspector = (props) => {
 	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
 	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
 
+	const formatted_container_padding = parseResponsiveValue(FrontisBlocksData.container_padding);
+
 	const handleColumnAddItem = () => {
         const newItem = {
             id: `column-${containerColumnsItem[deviceType].length + 1}`,
@@ -581,32 +583,32 @@ const Inspector = (props) => {
 					setAttributes({ containerDesktopPadding: updatedDesktopPadding});
 					break;
 				case 'Tablet':
-					let formatedContainerPaddingTablet = formatted_container_padding;
+					let formattedContainerPaddingTablet = formatted_container_padding;
 					if( isTabletPaddingEmpty() && containerTabletPadding.top === '') {
-						formatedContainerPaddingTablet = containerDesktopPadding;
+						formattedContainerPaddingTablet = containerDesktopPadding;
 					}
 
 					if(containerTabletPadding.top !== '') {
-						formatedContainerPaddingTablet = containerTabletPadding;
+						formattedContainerPaddingTablet = containerTabletPadding;
 					}
 
-					const updatedTabletPadding = updateContainerPadding(formatedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedTabletPadding = updateContainerPadding(formattedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({containerTabletPadding: updatedTabletPadding});
 					break;
 				case 'Mobile':
-					let formatedContainerPaddingMob = formatted_container_padding;
+					let formattedContainerPaddingMob = formatted_container_padding;
 					if( isMobilePaddingEmpty() && isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerDesktopPadding;
+						formattedContainerPaddingMob = containerDesktopPadding;
 					}
 					if(isMobilePaddingEmpty() && !isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerTabletPadding;
+						formattedContainerPaddingMob = containerTabletPadding;
 					}
 
 					if(containerMobilePadding.top !== '') {
-						formatedContainerPaddingMob = containerMobilePadding;
+						formattedContainerPaddingMob = containerMobilePadding;
 					}
 					
-					const updatedMobilePadding = updateContainerPadding(formatedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedMobilePadding = updateContainerPadding(formattedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({ containerMobilePadding: updatedMobilePadding });
 					break;
 				default:
@@ -634,17 +636,17 @@ const Inspector = (props) => {
 		if (!isBlockRootParent) {
 			// If not block root parent, set empty attributes to '0', preserve non-empty ones
 			updatedPadding = {
-				top: updatedPadding.top === '' ? '0' : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? '0' : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? '0' : updatedPadding.left,
-				right: updatedPadding.right === '' ? '0' : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? '0' : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? '0' : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? '0' : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? '0' : updatedPadding.right
 			};
-		} else if (padding[position] === '') {
+		} else if (padding[position] === '' || padding[position] === undefined) {
 			updatedPadding = {
-				top: updatedPadding.top === '' ? formatted_container_padding[deviceType] : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? formatted_container_padding[deviceType] : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? formatted_container_padding[deviceType] : updatedPadding.left,
-				right: updatedPadding.right === '' ? formatted_container_padding[deviceType] : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? formatted_container_padding[deviceType] : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? formatted_container_padding[deviceType] : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? formatted_container_padding[deviceType] : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? formatted_container_padding[deviceType] : updatedPadding.right
 			};
 		}
 	  
