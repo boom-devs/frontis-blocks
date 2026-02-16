@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
-import { 
-    BaseControl, 
+import {
+    BaseControl,
     SelectControl,
     FocalPointPicker,
 } from '@wordpress/components';
@@ -27,10 +27,12 @@ const FB_ResponsiveBackgroundImageControl = ({
 }) => {
 
     const handleFocalPointChange = (newValue) => {
-        setGlobalBackgroundImagePosition({
-            ...globalBackgroundImagePosition,
-            [deviceType]: newValue
-        });
+        if (typeof setGlobalBackgroundImagePosition === 'function') {
+            setGlobalBackgroundImagePosition({
+                ...globalBackgroundImagePosition,
+                [deviceType]: newValue
+            });
+        }
 
         setAttributes({
             globalBackgroundImagePosition: {
@@ -39,12 +41,14 @@ const FB_ResponsiveBackgroundImageControl = ({
             }
         });
     };
-    
+
     const handleAttachmentChange = (newValue) => {
-        setGlobalBackgroundImageAttachment({
-            ...globalBackgroundImageAttachment,
-            [deviceType]: newValue
-        });
+        if (typeof setGlobalBackgroundImageAttachment === 'function') {
+            setGlobalBackgroundImageAttachment({
+                ...globalBackgroundImageAttachment,
+                [deviceType]: newValue
+            });
+        }
 
         setAttributes({
             globalBackgroundImageAttachment: {
@@ -55,10 +59,12 @@ const FB_ResponsiveBackgroundImageControl = ({
     }
 
     const handleRepeatChange = (newValue) => {
-        setGlobalBackgroundImageRepeat({
-            ...globalBackgroundImageRepeat,
-            [deviceType]: newValue
-        });
+        if (typeof setGlobalBackgroundImageRepeat === 'function') {
+            setGlobalBackgroundImageRepeat({
+                ...globalBackgroundImageRepeat,
+                [deviceType]: newValue
+            });
+        }
 
         setAttributes({
             globalBackgroundImageRepeat: {
@@ -69,10 +75,12 @@ const FB_ResponsiveBackgroundImageControl = ({
     }
 
     const handleSizeChange = (newValue) => {
-        setGlobalBackgroundImageSize({
-            ...globalBackgroundImageSize,
-            [deviceType]: newValue
-        });
+        if (typeof setGlobalBackgroundImageSize === 'function') {
+            setGlobalBackgroundImageSize({
+                ...globalBackgroundImageSize,
+                [deviceType]: newValue
+            });
+        }
 
         setAttributes({
             globalBackgroundImageSize: {
@@ -83,10 +91,12 @@ const FB_ResponsiveBackgroundImageControl = ({
     }
 
     const handleImageUrlChange = (newValue) => {
-        setGlobalBackgroundImageUrl({
-            ...globalBackgroundImageUrl,
-            [deviceType]: newValue
-        });
+        if (typeof setGlobalBackgroundImageUrl === 'function') {
+            setGlobalBackgroundImageUrl({
+                ...globalBackgroundImageUrl,
+                [deviceType]: newValue
+            });
+        }
 
         setAttributes({
             globalBackgroundImageUrl: {
@@ -105,11 +115,15 @@ const FB_ResponsiveBackgroundImageControl = ({
             multiple: false
         });
 
-        mediaUploader.on('select', function() {
+        mediaUploader.on('select', function () {
             const attachment = mediaUploader.state().get('selection').first().toJSON();
             handleImageUrlChange(attachment.url);
-            setGlobalBackgroundImageAlt(attachment.alt);
-            setGlobalBackgroundImageID(attachment.id);
+            if (typeof setGlobalBackgroundImageAlt === 'function') {
+                setGlobalBackgroundImageAlt(attachment.alt);
+            }
+            if (typeof setGlobalBackgroundImageID === 'function') {
+                setGlobalBackgroundImageID(attachment.id);
+            }
         });
 
         mediaUploader.open();
@@ -117,8 +131,12 @@ const FB_ResponsiveBackgroundImageControl = ({
 
     const handleDeleteImage = () => {
         handleImageUrlChange(null);
-        setGlobalBackgroundImageAlt(null);
-        setGlobalBackgroundImageID(null);
+        if (typeof setGlobalBackgroundImageAlt === 'function') {
+            setGlobalBackgroundImageAlt(null);
+        }
+        if (typeof setGlobalBackgroundImageID === 'function') {
+            setGlobalBackgroundImageID(null);
+        }
     };
 
     return (
@@ -129,7 +147,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                 labelText={__("Image", "frontis-blocks")}
                 device={deviceType}
             />
-            
+
             {globalBackgroundImageUrl[deviceType] ? (
                 <div className="fb-image-control-integrated">
                     <div className="fb-image-focal-point-wrapper">
@@ -138,7 +156,7 @@ const FB_ResponsiveBackgroundImageControl = ({
                             value={globalBackgroundImagePosition[deviceType]}
                             onChange={handleFocalPointChange}
                         />
-                        
+
                         {/* Overlay buttons on FocalPointPicker */}
                         <div className="fb-image-overlay-buttons">
                             <button
@@ -170,12 +188,12 @@ const FB_ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageAttachment[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Scroll", "frontis-blocks"), value: "scroll"},
-                                            {label: __("Fixed", "frontis-blocks"), value: "fixed"},
+                                            { label: __("Default", "frontis-blocks"), value: "" },
+                                            { label: __("Scroll", "frontis-blocks"), value: "scroll" },
+                                            { label: __("Fixed", "frontis-blocks"), value: "fixed" },
                                         ]
                                     )}
-                                    onChange={handleAttachmentChange} 
+                                    onChange={handleAttachmentChange}
                                 />
                             </div>
 
@@ -189,14 +207,14 @@ const FB_ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageRepeat[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Repeat", "frontis-blocks"), value: "repeat"},
-                                            {label: __("Repeat X", "frontis-blocks"), value: "repeat-x"},
-                                            {label: __("Repeat Y", "frontis-blocks"), value: "repeat-y"},
-                                            {label: __("No Repeat", "frontis-blocks"), value: "no-repeat"},
+                                            { label: __("Default", "frontis-blocks"), value: "" },
+                                            { label: __("Repeat", "frontis-blocks"), value: "repeat" },
+                                            { label: __("Repeat X", "frontis-blocks"), value: "repeat-x" },
+                                            { label: __("Repeat Y", "frontis-blocks"), value: "repeat-y" },
+                                            { label: __("No Repeat", "frontis-blocks"), value: "no-repeat" },
                                         ]
                                     )}
-                                    onChange={handleRepeatChange} 
+                                    onChange={handleRepeatChange}
                                 />
                             </div>
 
@@ -210,13 +228,13 @@ const FB_ResponsiveBackgroundImageControl = ({
                                     value={globalBackgroundImageSize[deviceType]}
                                     options={(
                                         [
-                                            {label: __("Default", "frontis-blocks"), value: ""},
-                                            {label: __("Auto", "frontis-blocks"), value: "auto"},
-                                            {label: __("Cover", "frontis-blocks"), value: "cover"},
-                                            {label: __("Contain", "frontis-blocks"), value: "contain"},
+                                            { label: __("Default", "frontis-blocks"), value: "" },
+                                            { label: __("Auto", "frontis-blocks"), value: "auto" },
+                                            { label: __("Cover", "frontis-blocks"), value: "cover" },
+                                            { label: __("Contain", "frontis-blocks"), value: "contain" },
                                         ]
                                     )}
-                                    onChange={handleSizeChange} 
+                                    onChange={handleSizeChange}
                                 />
                             </div>
                         </BaseControl>

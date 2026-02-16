@@ -14,7 +14,7 @@ const v1_0_3 = {
   save({ attributes }) {
     const {
       // core
-      blockId,
+      blockID,
       premadeStyle,
       postType,
       postPerPage,
@@ -104,7 +104,7 @@ const v1_0_3 = {
     const filterSelectedTagString = (filterSelectedTag || []).toString();
 
     const blockProps = useBlockProps.save({
-      className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
+      className: `fb-post-grid-area ${blockID} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     let defaultImageUrl = '';
@@ -116,10 +116,10 @@ const v1_0_3 = {
       <>
         <div
           {...blockProps}
-          id={blockId}
+          id={blockID}
           data-premade-style={premadeStyle}
           data-post-type={postType}
-          data-block-id={blockId}
+          data-block-id={blockID}
           data-perpage={postPerPage}
           data-category-key={categoryKey}
           data-tag-key={tagKey}
@@ -228,7 +228,7 @@ const v1_0_3 = {
           )}
 
           <div
-            className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
+            className={`fb-parent-wrapper fb_post_grid_container ${blockID} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
             id={postGridGlobalWraperID}
           >
             <div className="load_more_button_icon">
@@ -250,7 +250,7 @@ const v1_0_3 = {
 
           <div className="loading post">
             {(placeholders || []).map((item, i) => (
-              <div key={`${item}-${i}`} className={`post-card skeleton skeleton-item ${blockId}`}>
+              <div key={`${item}-${i}`} className={`post-card skeleton skeleton-item ${blockID}`}>
                 <div className="skeleton-item-title loading"></div>
                 <div className="skeleton-item-location loading"></div>
                 <div className="skeleton-item-sport loading"></div>

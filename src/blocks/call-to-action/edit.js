@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -13,10 +13,15 @@ import {
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCallToActionStyle from './styling';
 
 import Inspector from "./inspector";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -148,9 +153,55 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnTwoTermsSeparator,
 		dynamicBtnTwoEnableLink,
 		dynamicBtnTwoLinkSource,
+
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonTwoFontFamily,
 		/** End Dynamic Btn Two Text */
 
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-call-to-action',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+
+	useEffect(() => {
+		if (buttonTwoFontFamily && !loadedFonts.has(buttonTwoFontFamily)) {
+			loadGoogleFont(buttonTwoFontFamily);
+			loadedFonts.add(buttonTwoFontFamily);
+		}
+	}, [buttonTwoFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateCallToActionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -300,11 +351,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -369,15 +422,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-
 												/>
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
 											</a>
-											{buttonIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}
@@ -407,13 +458,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													placeholder={__("CTA Button", "frontis-block")}
 
 												/>
+												{buttonTwoIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnTwoIcon)}
+													</div>
+												)}
 											</a>
-											{buttonTwoIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnTwoIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}

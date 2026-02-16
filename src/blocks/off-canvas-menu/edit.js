@@ -12,8 +12,10 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateOffCanvasStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -31,6 +33,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		offCanvasTabletSwitcher,
 		offCanvasMobileSwitcher
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-off-canvas-menu',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateOffCanvasStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -123,11 +144,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<div {...blockProps}>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div className={`fb-off-canvas-menu-container ${offCanvasGlobalWraperClass}`} id={offCanvasGlobalWraperID} ref={panelRef}>
 				<div

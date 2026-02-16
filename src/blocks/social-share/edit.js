@@ -3,12 +3,16 @@ import {
     useBlockProps,
     InnerBlocks,
 } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import Inspector from './inspector';
+
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateSocialShareStyle from "./styling";
+
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -18,6 +22,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialShareGlobalWraperClass,
         socialShareGlobalWraperID
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-social-share',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateSocialShareStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `frontis-block fb-social-share ${blockID} ${socialShareDesktopSwitcher && 'fb-desktop-responsive'} ${socialShareTabletSwitcher && 'fb-tablet-responsive'} ${socialShareMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -55,11 +78,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <div {...blockProps}>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+
+            {isSelected && (
+                 <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div className={`social-share-parent-container ${socialShareGlobalWraperClass}`} id={socialShareGlobalWraperID} ref={panelRef}>
                 <InnerBlocks

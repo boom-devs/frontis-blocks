@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '8bc800c343c7d5e7cd9f36a8160e80f5a9f1c9d7',
+        'reference' => '6cfc9443753e35ead33eabddbd800a09a2191b2d',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'appsero/client' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => 'aef4cf138ab4f348cee4e2f20f7d3cd815db0877',
+            'reference' => '96bc89344359e39104ab0da6464ee3aeff0b6897',
             'type' => 'library',
             'install_path' => __DIR__ . '/../appsero/client',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'deliciousbrains/wp-background-processing' => array(
             'pretty_version' => '1.4.0',
             'version' => '1.4.0.0',
-            'reference' => '004009c62309c655cdb9e40a915721519e5d6d36',
+            'reference' => '7ca7cc3504333db3a291bbab7f1917124fba4816',
             'type' => 'library',
             'install_path' => __DIR__ . '/../deliciousbrains/wp-background-processing',
             'aliases' => array(),
@@ -62,7 +62,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '8bc800c343c7d5e7cd9f36a8160e80f5a9f1c9d7',
+            'reference' => '6cfc9443753e35ead33eabddbd800a09a2191b2d',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

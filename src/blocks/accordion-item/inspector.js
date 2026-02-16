@@ -19,7 +19,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import { BORDER_STYLES, MEDIA_TYPES } from "./constants/constants";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from "../../components/spacing";
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect, useMemo, memo } from "@wordpress/element";
 import FB_Range from "../../components/range";
 import FB_BackgroundImageControl from "../../components/background-image-control";
 import FB_SwitcherControl from "../../components/switcher-control";
@@ -29,6 +29,8 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_InspectorControls from '@Components/InspectorControls';
+
+import "./editor.scss";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
@@ -89,14 +91,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockID: "fb-accordion-item-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
 
     const titlePfIconHandler = (IconName) => {
         setAttributes({ titlePrefixIcon: IconName })
@@ -174,10 +168,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         })
     }
 
-    const accordionItemMarginDesktopWidth = `${accordionItemDesktopMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemDesktopMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-    const accordionItemMarginTabletWidth = `${accordionItemTabMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemTabMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-    const accordionItemMarginMobileWidth = `${accordionItemMobileMargin?.top}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.right}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.bottom}${accordionItemMarginUnits[deviceType]} ${accordionItemMobileMargin?.left}${accordionItemMarginUnits[deviceType]}`;
-
     // accordionItem Padding Functionb
     const handleAccordionItemPaddingUnitChange = (event, position) => {
         const value = event.target.value;
@@ -246,209 +236,6 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             }
         })
     }
-
-    const accordionItemPaddingDesktopWidth = `${accordionItemDesktopPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemDesktopPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-    const accordionItemPaddingTabletWidth = `${accordionItemTabPadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemTabPadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-    const accordionItemPaddingMobileWidth = `${accordionItemMobilePadding?.top}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.right}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.bottom}${accordionItemPaddingUnits[deviceType]} ${accordionItemMobilePadding?.left}${accordionItemPaddingUnits[deviceType]}`;
-
-    const fbAccordionItemStyle = useMemo(
-        () => `
-		.fb-accordion-item-main-wrapper.${blockID} {
-			position: relative;
-			${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-		
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			${accordionItemPaddingDesktopWidth && accordionItemDesktopPadding?.top ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth && accordionItemDesktopMargin?.top ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
-			transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout {
-			display: block;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .block-editor-block-list__layout p {
-			margin: 0;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		  }
-	  
-		  @media only screen and (max-width: 1024px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
-            }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingTabletWidth && accordionItemTabPadding?.top ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-			  ${accordionItemMarginTabletWidth && accordionItemTabMargin?.top ? `margin: ${accordionItemMarginTabletWidth};` : ''}
-			}
-		  }
-	  
-		  @media only screen and (max-width: 767px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
-            }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-			  ${accordionItemPaddingMobileWidth && accordionItemMobilePadding?.top ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-			  ${accordionItemMarginMobileWidth && accordionItemMobileMargin?.top ? `margin: ${accordionItemMarginMobileWidth};` : ''}
-			}
-		  }
-		`,
-        [
-            blockID,
-            deviceType,
-
-            titlePrefixColorSwitcher,
-            titlePrefixColor,
-            titlePrefixHoverColor,
-
-            titleSuffixColorSwitcher,
-            titleSuffixColor,
-            titleSuffixHoverColor,
-
-            // Accordion Item Advance
-            accordionItemZIndex,
-            accordionItemPaddingUnits,
-            accordionItemDesktopPadding,
-            accordionItemTabPadding,
-            accordionItemMobilePadding,
-            accordionItemMarginUnits,
-            accordionItemDesktopMargin,
-            accordionItemTabMargin,
-            accordionItemMobileMargin,
-        ]
-    );
-
-    const customCss = getCustomCss(accordionItemCustomCSS, `.${blockID}`);
-
-    useEffect(() => {
-        setAttributes({
-            blockStyle: `${fbAccordionItemStyle} ${customCss}`.replace(/\s+/g, ' ').trim(),
-        });
-    }, [fbAccordionItemStyle, customCss]);
-
-    const fbAccordionItemStyleTwo = useMemo(() => `
-		.fb-accordion-item-main-wrapper.${blockID} {
-			position: relative;
-			display: block;
-			overflow: hidden;
-			${accordionItemZIndex?.Desktop ? `z-index: ${accordionItemZIndex?.Desktop};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper {
-			display: none;
-			margin: 0;
-			padding: 0;
-            height: 0;
-            position: absolute;
-			visibility: hidden;
-			transition: all 0.3s ease-in-out;
-		}
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper.active {
-            display: block;
-            height: auto;
-			position: static;
-			visibility: visible;
-            transition: all 0.3s ease-in-out;
-		}
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-            ${accordionItemPaddingDesktopWidth !== 'px px px px' ? `padding: ${accordionItemPaddingDesktopWidth};` : ''}
-			${accordionItemMarginDesktopWidth !== 'px px px px' ? `margin: ${accordionItemMarginDesktopWidth};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-        .fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content p {
-            margin: 0;
-            transition: all 0.3s ease-in-out;
-		}
-
-		
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixColor ? `fill: ${titlePrefixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-prefix {
-			${titlePrefixHoverColor ? `fill: ${titlePrefixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixColor ? `fill: ${titleSuffixColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-item-title-wrapper:hover .fb-accordion-title-inner .fb-accordion-title-suffix {
-			${titleSuffixHoverColor ? `fill: ${titleSuffixHoverColor};` : ''}
-            transition: all 0.3s ease-in-out;
-		}
-
-		@media only screen and (max-width: 1024px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Tablet ? `z-index: ${accordionItemZIndex?.Tablet};` : ''}
-            }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingTabletWidth !== 'px px px px' ? `padding: ${accordionItemPaddingTabletWidth};` : ''}
-				${accordionItemMarginTabletWidth !== 'px px px px' ? `margin: ${accordionItemMarginTabletWidth};` : ''}
-			}
-		}
-
-		@media only screen and (max-width: 767px) {
-            .fb-accordion-item-main-wrapper.${blockID} {
-                ${accordionItemZIndex?.Mobile ? `z-index: ${accordionItemZIndex?.Mobile};` : ''}
-            }
-			.fb-accordion-item-main-wrapper.${blockID} .fb-accordion-content-wrapper .fb-accordion-content {
-				${accordionItemPaddingMobileWidth !== 'px px px px' ? `padding: ${accordionItemPaddingMobileWidth};` : ''}
-				${accordionItemMarginMobileWidth !== 'px px px px' ? `margin: ${accordionItemMarginMobileWidth};` : ''}
-			}
-		}
-		`, [
-        blockID,
-        deviceType,
-
-        titlePrefixColor,
-        titlePrefixHoverColor,
-
-        titleSuffixColor,
-        titleSuffixHoverColor,
-
-        // Accordion Item Advance
-        accordionItemZIndex,
-        accordionItemPaddingUnits,
-        accordionItemDesktopPadding,
-        accordionItemTabPadding,
-        accordionItemMobilePadding,
-        accordionItemMarginUnits,
-        accordionItemDesktopMargin,
-        accordionItemTabMargin,
-        accordionItemMobileMargin,
-    ]);
-
-    useEffect(() => {
-        setAttributes({
-            blockStyleTwo: `${fbAccordionItemStyleTwo} ${customCss}`.replace(/\s+/g, ' ').trim(),
-        });
-    }, [fbAccordionItemStyleTwo, customCss]);
 
     /**
      * Inspector General Controls
@@ -763,4 +550,4 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     );
 };
 
-export default Inspector;
+export default memo(Inspector);

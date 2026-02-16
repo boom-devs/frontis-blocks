@@ -49,17 +49,21 @@ class Blocks
 		$blocks_list = BlockList::get_instance()->get_blocks();
 		$active_blocks = get_option('fb_active_blocks');
 
-		$default_container_width = get_option('fb_default_content_width');
-		$container_column_gap = get_option('fb_container_column_gap');
-		$container_row_gap = get_option('fb_container_row_gap');
-		$container_padding = get_option('fb_container_padding');
+		$default_container_width = $this->normalize_responsive_keys(get_option('fb_default_content_width'));
+		$container_column_gap = $this->normalize_responsive_keys(get_option('fb_container_column_gap'));
+		$container_row_gap = $this->normalize_responsive_keys(get_option('fb_container_row_gap'));
+		$container_padding = $this->normalize_responsive_keys(get_option('fb_container_padding'));
 
-		$container_widths_json = get_option('fb_default_content_width');
-		$container_widths = json_decode($container_widths_json, true);
+		$container_widths = is_array($default_container_width) ? $default_container_width : json_decode($default_container_width, true);
 
 		$desktop_breakpoint = isset($container_widths['Desktop']) ? intval($container_widths['Desktop']) : 1200;
 		$tablet_breakpoint = isset($container_widths['Tablet']) ? intval($container_widths['Tablet']) : 1024;
 		$mobile_breakpoint = isset($container_widths['Mobile']) ? intval($container_widths['Mobile']) : 767;
+
+		// Convert back to JSON for localization if they were fetched as strings/arrays
+		$container_column_gap = is_array($container_column_gap) ? json_encode($container_column_gap) : $container_column_gap;
+		$container_row_gap = is_array($container_row_gap) ? json_encode($container_row_gap) : $container_row_gap;
+		$container_padding = is_array($container_padding) ? json_encode($container_padding) : $container_padding;
 
 		// Pre-load all expensive data ONCE before the loop (Performance optimization)
 		$license_options = get_option('frontisblockspro_license_options');
@@ -471,5 +475,32 @@ class Blocks
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
+	}
+
+	/**
+	 * Normalize responsive keys to Uppercase (Desktop, Tablet, Mobile)
+	 *
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	private function normalize_responsive_keys($value)
+	{
+		if (empty($value)) {
+			return $value;
+		}
+
+		$data = is_array($value) ? $value : json_decode($value, true);
+
+		if (!is_array($data)) {
+			return $value;
+		}
+
+		$normalized = [];
+		foreach ($data as $key => $val) {
+			$normalized_key = ucfirst(strtolower($key));
+			$normalized[$normalized_key] = $val;
+		}
+
+		return is_array($value) ? $normalized : json_encode($normalized);
 	}
 }

@@ -10,13 +10,17 @@ import {
  * Internal dependencies
  */
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
-
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from "./inspector";
+import generateIconBoxStyle from './styling';
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -130,8 +134,54 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		dynamicBtnTermsSeparator,
 		dynamicBtnEnableLink,
 		dynamicBtnLinkSource,
+
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonFontFamily,
 		/** End Dynamic Btn Text */
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-icon-box',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+	
+	useEffect(() => {
+		if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+			loadGoogleFont(buttonFontFamily);
+			loadedFonts.add(buttonFontFamily);
+		}
+	}, [buttonFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateIconBoxStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-icon-box-main-wrapper ${blockID} ${iconBoxDesktopSwitcher && 'fb-desktop-responsive'} ${iconBoxTabletSwitcher && 'fb-tablet-responsive'} ${iconBoxMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -246,11 +296,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<BlockControls>
 				<AlignmentToolbar

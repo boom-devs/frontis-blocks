@@ -12,7 +12,7 @@ const v1_0_9 = {
 
     save({ attributes }) {
         const {
-            blockId,
+            blockID,
             buttonAlignment,
             buttonTextSwitcher,
             buttonText,
@@ -43,7 +43,7 @@ const v1_0_9 = {
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `frontis-block fb-advanced-button-main-wrapper ${blockId} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
+            className: `frontis-block fb-advanced-button-main-wrapper ${blockID} ${advancedBtnDesktopSwitcher && 'fb-desktop-responsive'} ${advancedBtnTabletSwitcher && 'fb-tablet-responsive'} ${advancedBtnMobileSwitcher && 'fb-mobile-responsive'}`,
         });
     
         const handleButtonClick = (event) => {

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 import {
 	useBlockProps,
 	RichText,
@@ -15,8 +15,10 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import './editor.scss';
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateBreadcrumbBlockStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -37,6 +39,25 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		breadcrumbTabletSwitcher,
 		breadcrumbMobileSwitcher,
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-breadcrumb',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateBreadcrumbBlockStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-breadcrumb-main-wrapper ${blockID} ${breadcrumbDesktopSwitcher && 'fb-desktop-responsive'} ${breadcrumbTabletSwitcher && 'fb-tablet-responsive'} ${breadcrumbMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -68,11 +89,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>	
+			)}
 
 			<div {...blockProps}>
 				<div className={`fb-breadcrumb-container ${breadcrumbGlobalWraperClass}`} id={breadcrumbGlobalWraperID} ref={panelRef}>

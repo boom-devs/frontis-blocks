@@ -697,12 +697,12 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 							<div class="fb-cta-btn-wrapper" <?php echo $btn1_dir_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 								<a class="fb-cta-button" href="<?php echo esc_url($btn1_href_final); ?>" <?php echo $btn1_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 									<span><?php echo wp_kses_post($btn1_text_final); ?></span>
+									<?php if ($btn_one_icon_switcher): ?>
+										<div class="fb-btn-icon-wrapper">
+											<?php echo $btn_one_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										</div>
+									<?php endif; ?>
 								</a>
-								<?php if ($btn_one_icon_switcher): ?>
-									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_one_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									</div>
-								<?php endif; ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -712,12 +712,12 @@ $btn2_dir_style = ' style="flex-direction:' . esc_attr($btn_two_icon_position ==
 							<div class="fb-cta-btn-wrapper" <?php echo $btn2_dir_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 								<a class="fb-cta-button" href="<?php echo esc_url($btn2_href_final); ?>" <?php echo $btn2_target_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 									<span><?php echo wp_kses_post($btn2_text_final); ?></span>
+									<?php if ($btn_two_icon_switcher): ?>
+										<div class="fb-btn-icon-wrapper">
+											<?php echo $btn_two_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										</div>
+									<?php endif; ?>
 								</a>
-								<?php if ($btn_two_icon_switcher): ?>
-									<div class="fb-btn-icon-wrapper">
-										<?php echo $btn_two_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-									</div>
-								<?php endif; ?>
 							</div>
 						</div>
 					<?php endif; ?>

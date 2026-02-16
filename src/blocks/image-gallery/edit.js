@@ -2,13 +2,17 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText, MediaPlaceholder } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
-import { useRef } from '@wordpress/element';
+import { useRef, useEffect } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateImageGalleryStyle from "./styling";
 
+const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -30,7 +34,39 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         GalleryDesktopSwitcher,
         GalleryTabletSwitcher,
         GalleryMobileSwitcher,
+
+        GalleryButtonFontFamily,
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-image-gallery',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start load font */
+    useEffect(() => {
+        [GalleryButtonFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [GalleryButtonFontFamily]);
+    /** End load font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateImageGalleryStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-gallery-main-wrapper ${blockID} ${GalleryDesktopSwitcher && 'fb-desktop-responsive'} ${GalleryTabletSwitcher && 'fb-tablet-responsive'} ${GalleryMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -52,12 +88,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 
     return (
-        <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+        <>  
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-image-gallery-wrapper ${imageGalleryGlobalWraperClass}`} id={imageGalleryGlobalWraperID} ref={panelRef}>

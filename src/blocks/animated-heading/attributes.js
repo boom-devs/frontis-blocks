@@ -1,5 +1,5 @@
 const attributes = {
-    blockId: {
+    blockID: {
         type: 'string',
         default: ''
     },

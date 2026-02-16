@@ -1,17 +1,21 @@
-// Edit.js
 import { __ } from '@wordpress/i18n';
 import { useState, useEffect, useRef, useMemo } from "@wordpress/element";
 import { useBlockProps } from '@wordpress/block-editor';
 import LayoutGrid from './layoutGrid';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 import Inspector from "./inspector";
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostGridStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         premadeStyle,
         postType,
@@ -78,20 +82,97 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         tagLinkSwitcher,
         authorLinkSwitcher,
         titleLinkSwitcher,
+
+        postTitleFontFamily, 
+        postDescriptionFontFamily, 
+        postCategoryFontFamily, 
+        postTagFontFamily, 
+        postAuthorFontFamily, 
+        postDateFontFamily, 
+        buttonFontFamily,
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-post-grid',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
+    useEffect(() => {
+        if (postTitleFontFamily && !loadedFonts.has(postTitleFontFamily)) {
+            loadGoogleFont(postTitleFontFamily);
+            loadedFonts.add(postTitleFontFamily);
+        }
+    }, [postTitleFontFamily]);
+
+    useEffect(() => {
+        if (postDescriptionFontFamily && !loadedFonts.has(postDescriptionFontFamily)) {
+            loadGoogleFont(postDescriptionFontFamily);
+            loadedFonts.add(postDescriptionFontFamily);
+        }
+    }, [postDescriptionFontFamily]);
+
+    useEffect(() => {
+        if (postCategoryFontFamily && !loadedFonts.has(postCategoryFontFamily)) {
+            loadGoogleFont(postCategoryFontFamily);
+            loadedFonts.add(postCategoryFontFamily);
+        }
+    }, [postCategoryFontFamily]);
+
+    useEffect(() => {
+        if (postTagFontFamily && !loadedFonts.has(postTagFontFamily)) {
+            loadGoogleFont(postTagFontFamily);
+            loadedFonts.add(postTagFontFamily);
+        }
+    }, [postTagFontFamily]);
+
+    useEffect(() => {
+        if (postAuthorFontFamily && !loadedFonts.has(postAuthorFontFamily)) {
+            loadGoogleFont(postAuthorFontFamily);
+            loadedFonts.add(postAuthorFontFamily);
+        }
+    }, [postAuthorFontFamily]);
+
+    useEffect(() => {
+        if (postDateFontFamily && !loadedFonts.has(postDateFontFamily)) {
+            loadGoogleFont(postDateFontFamily);
+            loadedFonts.add(postDateFontFamily);
+        }
+    }, [postDateFontFamily]);
+
+    useEffect(() => {
+        if (buttonFontFamily && !loadedFonts.has(buttonFontFamily)) {
+            loadGoogleFont(buttonFontFamily);
+            loadedFonts.add(buttonFontFamily);
+        }
+    }, [buttonFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generatePostGridStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const [allPosts, setAllPosts] = useState([]);
     const [filterCatId, setFilterCatId] = useState(0);
     const [filterTagId, setFilterTagId] = useState(0);
     const blockProps = useBlockProps({
-        className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-post-grid-area ${blockID} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     let defaultImageUrl = '';
     if (typeof FrontisBlocksData !== 'undefined') {
         defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
     }
-
 
     /**
      * Get taxonomy data
@@ -288,11 +369,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />  
+            )}
 
             {postLists ? (
                 <div {...blockProps}>
@@ -330,7 +412,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             )}
 
                             <div
-                                className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
+                                className={`fb-parent-wrapper fb_post_grid_container ${blockID} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
                                 id={postGridGlobalWraperID}
                                 ref={panelRef}
                             >
