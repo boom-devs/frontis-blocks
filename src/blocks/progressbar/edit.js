@@ -1,13 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEffect, useRef, useState } from '@wordpress/element';
+import { useEffect, useRef } from '@wordpress/element';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import Inspector from './inspector';
-import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateProgressbarStyle from "./styling";
+import './editor.scss';
 
 const loadedFonts = new Set();
 

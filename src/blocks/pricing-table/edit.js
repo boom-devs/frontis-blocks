@@ -1,43 +1,14 @@
 import { __ } from '@wordpress/i18n';
-import {
-	MediaUpload,
-	MediaUploadCheck,
-	useBlockProps,
-	InspectorControls, RichText, URLInput,
-} from '@wordpress/block-editor';
-import {
-	TabPanel,
-	PanelBody,
-	TextControl,
-	ColorPicker,
-	BaseControl,
-	RangeControl,
-	ToggleControl,
-	DateTimePicker,
-	Dropdown,
-	Button,
-	Dashicon,
-	SelectControl,
-	ButtonGroup,
-	ColorPalette,
-	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
-} from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useEffect, useRef } from '@wordpress/element';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import './editor.scss';
-import {
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	TEXT_ALIGN,
-	HEADING,
-	BORDER_STYLES
-} from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generatePricingTableStyle from "./styling";
+import './editor.scss';
 
 const loadedFonts = new Set();
 

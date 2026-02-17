@@ -1,9 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import {
-    useBlockProps,
-    InspectorControls,
-} from '@wordpress/block-editor';
-import {
     PanelBody,
     TabPanel,
     SelectControl,
@@ -17,7 +13,7 @@ import {
     BACKGROUND_TYPES,
     OVERFLOW_OP
 } from '@Constants/fbConstants';
-import { useEffect, useState, useMemo, memo } from '@wordpress/element';
+import { useEffect, memo } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';

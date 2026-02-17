@@ -1,7 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import {
-    MediaUpload,
-    MediaUploadCheck,
     useBlockProps,
     InspectorControls,
 } from '@wordpress/block-editor';

@@ -1,38 +1,26 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, URLInput } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
-    TabPanel,
     Button,
     ButtonGroup,
-    RangeControl,
     SelectControl,
     TextareaControl,
     TextControl,
-	Dropdown,
-	Dashicon,
-	ColorPicker,
-	ColorPalette,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
-    PROGRESS_TEXT_OPTIONS,
-	HEADING,
     TEXT_ALIGN,
-	ICON_ALIGN,
+	POST_GRID_ICON_ALIGN,
 	CURRENCY_POSITION,
 	ICON_POSITION,
-	RIBBON_POSITION,
 	BORDER_STYLES,
-	NORMAL_HOVER,
 	OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FBIconPicker from "../../components/icon-picker";
-
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import SortableItem from './sortableItem.js';
@@ -48,7 +36,6 @@ import FB_AlignmentControl from '@Components/alignment-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -59,9 +46,8 @@ import './editor.scss';
 const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
-		// deviceType,
 		blockStyle,
-
+		
 		/** Start Top Section */
 		pricingTopSectionBgColorSwitcher,
 		pricingTopSectionNormalBackgroundType,
@@ -2831,7 +2817,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<ButtonGroup
 							className="fb-setting-text-alignment-group-btn"
 						>
-							{ICON_ALIGN.map((item, key) => (
+							{POST_GRID_ICON_ALIGN.map((item, key) => (
 								<Button
 									key={key}
 									onClick={() => setAttributes({ pricingIconAlign: item.value })}
@@ -3007,7 +2993,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							<ButtonGroup
 								className="fb-setting-text-alignment-group-btn"
 							>
-								{ICON_ALIGN.map((item, key) => (
+								{POST_GRID_ICON_ALIGN.map((item, key) => (
 										<Button
 											key={key}
 											onClick={() => setAttributes({ priceButtonIconAlign: item.value })}

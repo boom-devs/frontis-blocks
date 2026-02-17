@@ -72,6 +72,11 @@ export const ICON_ALIGN = [
 	{ label: __("Icon"), value: "icon" },
 ];
 
+export const FEATURE_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+];
+
 export const ICON_IMAGE_ALIGN = [
 	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
 	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
@@ -311,6 +316,12 @@ export const TAXONOMY_OPTIONS = [
 export const PAGINATION_TYPE = [
 	{ label: __('Button', 'frontis-blocks'), value: 'button' },
 	{ label: __('Pagination', 'frontis-blocks'), value: 'pagination' },
+];
+
+export const SLIDER_PAGINATION_TYPE = [
+	{ value: 'bullets', label: __('Bullets', 'frontis-blocks') },
+	{ value: 'fraction', label: __('Fraction', 'frontis-blocks') },
+	{ value: 'progressbar', label: __('Progress Bar', 'frontis-blocks') }
 ];
 
 export const PAGINATION_PREV_NEXT_TYPE = [
@@ -884,3 +895,146 @@ export const FORM_LISTS =
 			value: obj.value,
 		};
 	});
+
+export const POST_GRID_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+];
+
+export const CURRENCY_POSITION = [
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+];
+
+export const PROGRESS_TEXT_OPTIONS = [
+	{ label: __("Text Outside", "frontis-blocks"), value: "text-outSide" },
+	{ label: __("Text Inside", "frontis-blocks"), value: "text-inSide" },
+];
+
+export const PROGRESSBAR_TYPE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
+];
+
+export const PROGRESS_NUMBER_POSITION = [
+	{ label: __("Default", "frontis-blocks"), value: "default" },
+	{ label: __("With Progress Bar", "frontis-blocks"), value: "with-progressbar" },
+];
+
+export const SLIDER_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'fade', label: __('Fade', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+	{ value: 'flip', label: __('Flip', 'frontis-blocks') },
+	{ value: 'creative', label: __('Creative', 'frontis-blocks') },
+];
+
+export const CAROUSEL_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+];
+
+export const SLIDER_TYPE = [
+	{ value: 'slider', label: __('Slider', 'frontis-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'frontis-blocks') },
+];
+
+export const SLIDER_ARROW_POSITION_TYPE = [
+	{ label: __('Inside', 'frontis-blocks'), value: 'inside' },
+	{ label: __('Outside', 'frontis-blocks'), value: 'outside' },
+];
+
+export const SLIDER_ARROW_POSITION = [
+	{ label: __('Center Center', 'frontis-blocks'), value: 'center' },
+	{ label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+	{ label: __('Top Center', 'frontis-blocks'), value: 'top-center' },
+	{ label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+	{ label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+	{ label: __('Bottom Center', 'frontis-blocks'), value: 'bottom-center' },
+	{ label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+];
+
+export const SLIDER_ARROW_DIRECTION = [
+	{ label: __('Row', 'frontis-blocks'), value: 'row' },
+	{ label: __('Column', 'frontis-blocks'), value: 'column' },
+	{ label: __('Row Reverse', 'frontis-blocks'), value: 'row-reverse' },
+	{ label: __('Column Reverse', 'frontis-blocks'), value: 'column-reverse' },
+];
+
+export const ARROW_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"text"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const SOCIAL_ICONS_PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+];
+
+export const BADGE_ALIGNMENT = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+
+export const BADGE_POSITION  = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const CARD_WRAP_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
+export const CONTENT_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+    { label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const CONTENT_SOCIAL_ICON_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const IMAGE_SOCIAL_ICON_POSITION = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+
+export const SOCIAL_ICON_ANIMATION = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const SOCIAL_ICON_TYPE = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];

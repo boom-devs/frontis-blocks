@@ -1,12 +1,9 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { useEffect, useMemo, memo, useState } from '@wordpress/element';
-import { useSelect } from '@wordpress/data';
+import { useEffect, memo, useState } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
-    TabPanel,
     Button,
     ButtonGroup,
     RangeControl,
@@ -18,14 +15,14 @@ import {
 import { 
     BORDER_STYLES, 
     POST_SWITCHER, 
-    ICON_ALIGN, 
+    POST_GRID_ICON_ALIGN,
     OVERFLOW_OP,
     TAXONOMY_OPTIONS,
     PAGINATION_TYPE,
     PAGINATION_PREV_NEXT_TYPE,
     PREMADE_STYLE,
     READ_MORE_ICON_ALIGN,
-} from './constants/constants';
+} from '@Constants/fbConstants';
 
 /**
  * External Dependencies
@@ -43,7 +40,6 @@ import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -4209,7 +4205,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                                     <ButtonGroup
                                         className="fb-setting-text-alignment-group-btn"
                                     >
-                                        {ICON_ALIGN.map((item, key) => (
+                                        {POST_GRID_ICON_ALIGN.map((item, key) => (
                                             <Button
                                                 key={key}
                                                 onClick={() => setAttributes({ loadMoreIconAlign: item.value })}

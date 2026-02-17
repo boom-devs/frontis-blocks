@@ -1,14 +1,13 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import { useRef, useEffect } from '@wordpress/element';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
-import './editor.scss';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import generateSocialStyle from './styling';
+import './editor.scss';
 
 const loadedFonts = new Set();
 
