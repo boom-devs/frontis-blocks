@@ -1,7 +1,18 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
-import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
+import {
+    BORDER_STYLES,
+    SLIDER_EFFECT_OPTIONS,
+    CAROUSEL_EFFECT_OPTIONS,
+    OVERFLOW_OP,
+    SLIDER_PAGINATION_TYPE,
+    SLIDER_TYPE,
+    SLIDER_ARROW_POSITION_TYPE,
+    SLIDER_ARROW_POSITION,
+    SLIDER_ARROW_DIRECTION,
+    ARROW_ICON_ALIGN,
+} from '@Constants/fbConstants';
+import { useEffect, memo } from '@wordpress/element';
+import { PanelBody, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
@@ -13,29 +24,12 @@ import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from '@Config/displayType';
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-
-
 import './editor.scss';
-
-import {
-    BORDER_STYLES,
-    EFFECT_OPTIONS,
-    SLIDER_EFFECT_OPTIONS,
-    CAROUSEL_EFFECT_OPTIONS,
-    OVERFLOW_OP,
-    PAGINATION_TYPE,
-    SLIDER_TYPE,
-    SLIDER_ARROW_POSITION_TYPE,
-    SLIDER_ARROW_POSITION,
-    SLIDER_ARROW_DIRECTION,
-    ARROW_ICON_ALIGN,
-} from "./constants/constants";
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
@@ -1589,7 +1583,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     <SelectControl
                         label={__('Pagination Type', 'frontis-blocks')}
                         value={paginationType}
-                        options={PAGINATION_TYPE}
+                        options={SLIDER_PAGINATION_TYPE}
                         onChange={(value) => setAttributes({ paginationType: value })}
                     />
                 </PanelBody>

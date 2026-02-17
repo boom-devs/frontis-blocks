@@ -1094,3 +1094,115 @@ export const changeSocialIconsPreset = (selectedPreset, socialItems, setAttribut
     }
 };
 /** End Preset Style */
+
+const getPresetColors = (preset) => {
+    switch (preset) {
+        case 'preset-1':
+            return {
+                socialIconColor: '#1877F2',
+                socialIconHoverColor: '#1877F2',
+                socialIconBgColor: "#ffffff",
+                socialIconHoverBgColor: "#ffffff",
+                normalItemClassicColor: "#ffffff",
+            };
+        case 'preset-2':
+            return {
+                socialIconColor: "#ffffff",
+                socialIconHoverColor: "#ffffff",
+                socialIconBgColor: "#1877F2",
+                socialIconHoverBgColor: "#1877F2",
+                normalItemClassicColor: "#1877F2",
+            };
+        case 'preset-3':
+            return {
+                socialIconColor: "#FFFFFF",
+                socialIconHoverColor: "#FFFFFF",
+                socialIconBgColor: "",
+                socialIconHoverBgColor: "",
+                normalItemClassicColor: "#1877F2",
+            };
+        case 'preset-4':
+            return {
+                socialIconColor: "#FFFFFF",
+                socialIconHoverColor: "#FFFFFF",
+                socialIconBgColor: "#1877F2",
+                socialIconHoverBgColor: "#1877F2",
+                normalItemClassicColor: "#1877F2",
+            };
+        case 'preset-5':
+            return {
+                socialIconColor: "#1877F2",
+                socialIconHoverColor: "#1877F2",
+                socialIconBgColor: "#FFFFFF",
+                socialIconHoverBgColor: "#FFFFFF",
+                normalItemClassicColor: "#ffffff",
+            };
+        case 'preset-6':
+            return {
+                socialIconColor: "#FFFFFF",
+                socialIconHoverColor: "#FFFFFF",
+                socialIconBgColor: "#15171C",
+                socialIconHoverBgColor: "#15171C",
+                normalItemClassicColor: "#15171C",
+            };
+        default:
+            console.warn(`Preset "${preset}" not found. Default colors will not be set.`);
+            return {};
+    }
+};
+
+export const handleAddItem = () => {
+    const presetColors = getPresetColors(socialIconsPresetStyle);
+
+    const newItem = {
+        id: `item-${socialItems.length + 1}`,
+        socialIconTitle: 'Facebook',
+        socialIconUrl: '',
+        socialIcon: 'facebook-f',
+
+        socialIconTargetUrl: false,
+        socialIconColorSwitcher: 'normal',
+
+        // Apply preset colors as default values
+        socialIconColor: presetColors.socialIconColor || '',
+        socialIconHoverColor: presetColors.socialIconHoverColor || '',
+        socialIconBgColor: presetColors.socialIconBgColor || '',
+        socialIconHoverBgColor: presetColors.socialIconHoverBgColor || '',
+
+        socialItemBgColorSwitcher: 'normal',
+
+        normalItemBackgroundType: 'classic',
+        normalItemClassicColor: presetColors.normalItemClassicColor || '',
+        normalItemGradientColor: '',
+        normalItemCustomGradientSwitcher: false,
+        normalItemCustomGradientInputValue: '',
+
+        hoverItemBackgroundType: 'classic',
+        hoverItemClassicColor: '',
+        hoverItemGradientColor: '',
+        hoverItemCustomGradientSwitcher: false,
+        hoverItemCustomGradientInputValue: '',
+    };
+
+    setAttributes({ socialItems: [...socialItems, newItem] });
+};
+
+export const handleChangeItem = (id, key, value) => {
+    const updatedItems = socialItems.map(item => 
+        item.id === id ? { ...item, [key]: value } : item
+    );
+    setAttributes({ socialItems: updatedItems });
+};
+
+export const handleDeleteItem = (id) => {
+    const updatedItems = socialItems.filter(item => item.id !== id);
+    setAttributes({ socialItems: updatedItems });
+};
+
+export const handleDuplicateItem = (id) => {
+    const itemToDuplicate = socialItems.find(item => item.id === id);
+    if (itemToDuplicate) {
+        const newItem = { ...itemToDuplicate, id: `item-${socialItems.length + 1}` };
+        setAttributes({ socialItems: [...socialItems, newItem] });
+    }
+};

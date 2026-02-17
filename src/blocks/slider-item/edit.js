@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { RichText, useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import { withSelect } from '@wordpress/data';
 import { compose } from '@wordpress/compose';

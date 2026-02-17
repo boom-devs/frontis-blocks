@@ -19,7 +19,7 @@ import {
     OVERFLOW_OP
 } from '@Constants/fbConstants';
 
-import { useEffect, useState, useMemo, memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import FB_Range from '@Components/range';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
 import FB_Spacing from '@Components/spacing';

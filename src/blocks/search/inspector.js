@@ -1,7 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import {
-	InspectorControls
-} from '@wordpress/block-editor';
+import { InspectorControls } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TabPanel,
@@ -10,14 +8,9 @@ import {
 	ButtonGroup,
 	Button,
 } from '@wordpress/components';
-/**
- * Internal depencencies
- */
-import {
-    BORDER_STYLES,
-	ICON_ALIGN,
-} from "./constants/constants";
-import Select2 from "react-select";
+
+import { BORDER_STYLES, ICON_ALIGN } from '@Constants/fbConstants';
+import { memo } from '@wordpress/element';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -27,11 +20,8 @@ import FB_ImageControl from '@Components/image-control';
 import FB_InputControl from '@Components/input-control';
 import FBIconPicker from "../../components/icon-picker";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import './editor.scss';
-
-import { useEffect, useMemo, memo } from '@wordpress/element';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {

@@ -1,14 +1,11 @@
 import { __ } from '@wordpress/i18n';
-import {
-	useBlockProps
-} from '@wordpress/block-editor';
+import { useBlockProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useState } from '@wordpress/element';
-import './editor.scss';
-
+import { useEffect } from '@wordpress/element';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateSearchStyle from "./styling";
+import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const { 
