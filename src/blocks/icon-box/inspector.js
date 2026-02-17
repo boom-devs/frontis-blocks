@@ -3,9 +3,7 @@ import { __ } from "@wordpress/i18n";
 import {
 	SelectControl,
 	PanelBody,
-	TabPanel,
 	BaseControl,
-	Button,
 	ToggleControl,
 	TextareaControl,
 	__experimentalHStack as HStack,
@@ -16,20 +14,16 @@ import {
  * Internal depencencies
  */
 import {
-	TEXT_ALIGN,
-	HEADING,
 	BORDER_STYLES,
-	mediaType,
+	mediaTypes,
+	ITEM_POSITION,
 	ICON_POSITION,
-	ICON_ICON_POSITION,
-	ICON_ICON_VERTICAL_POSITION,
-	ICON_WRAP_ALIGNMENT,
-	PRESETS,
+	ICON_VERTICAL_POSITION,
+	LAYOUT_ALIGNMENT,
 	OVERFLOW_OP
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
-import { useState, createRef, useEffect, useMemo, memo } from "@wordpress/element";
-
+import { useEffect, memo } from "@wordpress/element";
 
 import FBIconPicker from "../../components/icon-picker";
 import FB_Range from "@Components/range";
@@ -2814,7 +2808,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<SelectControl
 							label={__("Media Type", "frontis-block")}
 							value={mediaSwitcher}
-							options={mediaType}
+							options={mediaTypes}
 							onChange={(value) =>
 								setAttributes({ mediaSwitcher: value })
 							}
@@ -2825,7 +2819,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<SelectControl
 							label={__("Media Position", "frontis-block")}
 							value={iconBoxIconPosition}
-							options={ICON_ICON_POSITION}
+							options={ITEM_POSITION}
 							onChange={(value) =>
 								setAttributes({ iconBoxIconPosition: value })
 							}
@@ -2837,7 +2831,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<SelectControl
 							label={__("Card Alignment", "frontis-block")}
 							value={iconBoxCardAlignment}
-							options={ICON_WRAP_ALIGNMENT}
+							options={LAYOUT_ALIGNMENT}
 							onChange={(value) =>
 								setAttributes({ iconBoxCardAlignment: value })
 							}
@@ -2850,7 +2844,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						<SelectControl
 							label={__("Vertical Position", "frontis-block")}
 							value={iconBoxIconVerticalPosition}
-							options={ICON_ICON_VERTICAL_POSITION}
+							options={ICON_VERTICAL_POSITION}
 							onChange={(value) =>
 								setAttributes({ iconBoxIconVerticalPosition: value })
 							}

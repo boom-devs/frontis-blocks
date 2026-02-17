@@ -1,32 +1,18 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
-    TabPanel,
-    Button,
-    ButtonGroup,
-    Dropdown,
-    RangeControl,
     SelectControl,
-    Dashicon,
-    ColorPicker,
-    TextControl,
-    TextareaControl,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
     FORM_LISTS,
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
-    TEXT_ALIGN,
     BORDER_STYLES,
     WIDTH_STYLES,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -34,11 +20,9 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_AlignmentControl from '@Components/alignment-control';
-import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';

@@ -41,7 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	useBlockIdGenerator({
 		clientId,
 		blockID,
-		blockPrefix: 'fb-dual-button',
+		blockPrefix: 'fb-fluent-form',
 		isSelected,
 		attributes,
 		setAttributes,
