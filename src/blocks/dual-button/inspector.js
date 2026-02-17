@@ -1,37 +1,29 @@
 import { __ } from "@wordpress/i18n";
 
-import { InspectorControls } from "@wordpress/block-editor";
-
 import {
 	SelectControl,
 	PanelBody,
-	TabPanel,
 	BaseControl,
 	Button,
 	ButtonGroup,
 	ToggleControl,
 	TextControl,
-	TextareaControl,
 	Dropdown,
 	Dashicon,
-	RangeControl,
-	ColorPicker,
-	ColorPalette,
 } from "@wordpress/components";
 
 /**
  * Internal depencencies
  */
 import {
-	ICON_ALIGN,
+	DUAL_BTN_ICON_ALIGN,
 	BORDER_STYLES,
 	ICON_POSITION,
-	BUTTONS_DIRECTION,
-	PRESETS,
+	DUAL_BUTTONS_DIRECTION,
 	OVERFLOW_OP
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
-import { useState, useEffect, useMemo, memo } from "@wordpress/element";
+import { useEffect, memo } from "@wordpress/element";
 import FBIconPicker from "../../components/icon-picker";
 import "./editor.scss";
 import FB_Range from "@Components/range";
@@ -42,7 +34,6 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -1899,7 +1890,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								className="fb-setting-text-alignment"
 							>
 								<ButtonGroup className="fb-setting-text-alignment-group-btn">
-									{ICON_ALIGN.map((item, key) => (
+									{DUAL_BTN_ICON_ALIGN.map((item, key) => (
 										<Button
 											key={key}
 											onClick={() =>
@@ -2094,7 +2085,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 								className="fb-setting-text-alignment"
 							>
 								<ButtonGroup className="fb-setting-text-alignment-group-btn">
-									{ICON_ALIGN.map((item, key) => (
+									{DUAL_BTN_ICON_ALIGN.map((item, key) => (
 										<Button
 											key={key}
 											onClick={() =>
@@ -2160,7 +2151,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 				<SelectControl
 					label={__("Direction", "frontis-blocks")}
-					options={BUTTONS_DIRECTION}
+					options={DUAL_BUTTONS_DIRECTION}
 					value={buttonsDirection}
 					onChange={(value) =>
 						setAttributes({ buttonsDirection: value })

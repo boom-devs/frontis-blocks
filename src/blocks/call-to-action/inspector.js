@@ -8,7 +8,6 @@ import {
 import {
 	SelectControl,
 	PanelBody,
-	TabPanel,
 	BaseControl,
 	Button,
 	ToggleControl,
@@ -25,10 +24,7 @@ import {
 	OVERFLOW_OP,
 } from '@Constants/fbConstants';
 
-import Select2 from "react-select";
-import { useEntityProp, store as coreStore } from '@wordpress/core-data';
-import { useEffect, useMemo, memo, useState } from "@wordpress/element";
-import { useSelect } from "@wordpress/data";
+import { useEffect, memo } from "@wordpress/element";
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
 import FB_BoxShadowControl from "@Components/box-shadow";
@@ -43,7 +39,6 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -2225,11 +2220,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											setIconHandler={buttonIconHandler}
 										/>
 									</BaseControl>
-									<SelectControl
+									<FB_SwitcherControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnIconPosition}
 										options={ICON_POSITION}
-										onChange={(value) =>
+										globalSwitcher={btnIconPosition}
+										setGlobalSwitcher={(value) =>
 											setAttributes({ btnIconPosition: value })
 										}
 									/>
@@ -2345,11 +2341,12 @@ const Inspector = ({ attributes, setAttributes }) => {
 											setIconHandler={buttonTwoIconHandler}
 										/>
 									</BaseControl>
-									<SelectControl
+									<FB_SwitcherControl
 										label={__("Icon Position", "frontis-block")}
 										value={btnTwoIconPosition}
 										options={ICON_POSITION}
-										onChange={(value) =>
+										globalSwitcher={btnTwoIconPosition}
+										setGlobalSwitcher={(value) =>
 											setAttributes({ btnTwoIconPosition: value })
 										}
 									/>

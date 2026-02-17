@@ -1867,11 +1867,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <FB_ResponsiveAlignmentControl
                         label={__("Alignment", "frontis-blocks")}
-                        globalAlignment={headingAlignment}
-                        setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
+                        globalAlignment={Object.fromEntries(
+                            Object.entries(headingAlignment || {}).map(([device, value]) => [
+                                device,
+                                value === 'left' ? 'start' : (value === 'right' ? 'end' : value)
+                            ])
+                        )}
+                        setGlobalAlignment={(value) => {
+                            const updatedValue = { ...value };
+                            if (updatedValue[deviceType] === 'left') updatedValue[deviceType] = 'start';
+                            if (updatedValue[deviceType] === 'right') updatedValue[deviceType] = 'end';
+                            setAttributes({ headingAlignment: updatedValue });
+                        }}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
+                        options={[
+                            { label: <Dashicon icon="editor-alignleft" />, value: "start" },
+                            { label: <Dashicon icon="editor-aligncenter" />, value: "center" },
+                            { label: <Dashicon icon="editor-alignright" />, value: "end" },
+                        ]}
                     />
+
                 </PanelBody>
 
                 <PanelBody

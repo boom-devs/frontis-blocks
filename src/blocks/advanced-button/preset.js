@@ -12,7 +12,7 @@ export const presetStyles = {
         buttonIconImageUrl: "",
         buttonIconBgColor: "",
         buttonIcon: "",
-        buttonIconAlign: "",
+        buttonIconAlign: "none",
         buttonIconColor: "#fff",
         buttonIconBorder: "none",
         buttonTextSwitcher: true,

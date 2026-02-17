@@ -12,13 +12,13 @@ import FB_ImageControl from '@Components/image-control';
 
 
 import {
-    ICON_ALIGN,
-} from "./constants/constants";
+    FEATURE_LIST_ICON_ALIGN,
+} from '@Constants/fbConstants';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem, handleDuplicateItem, index }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
-    const [FeatureIconAlign, setFeatureIconAlign] = useState(ICON_ALIGN[1].value);
+    const [FeatureIconAlign, setFeatureIconAlign] = useState(FEATURE_LIST_ICON_ALIGN[1].value);
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -36,7 +36,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
         handleChangeItem(item.id, 'FeatureIconAlign', newAlignment);
     };
     useEffect(() => {
-        setFeatureIconAlign(item.FeatureIconAlign || ICON_ALIGN[1].value);
+        setFeatureIconAlign(item.FeatureIconAlign || FEATURE_LIST_ICON_ALIGN[1].value);
     }, [item.FeatureIconAlign]);  
 
     const TrashIcon = (
@@ -116,7 +116,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             className="fb-feature-icon"
                         >
                             <ButtonGroup className="fb-feature-icon-group-btn">
-                                {ICON_ALIGN.map((alignItem, key) => (
+                                {FEATURE_LIST_ICON_ALIGN.map((alignItem, key) => (
                                     <Button
                                         key={key}
                                         onClick={() => handleAlignmentChange(alignItem.value)}

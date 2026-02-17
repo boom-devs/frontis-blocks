@@ -26,7 +26,7 @@ export const presetStyles = {
         headingTextStrokeColor: "",
         headingTextStrokeHoverColor: "",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             bottom: '24',
@@ -66,7 +66,7 @@ export const presetStyles = {
         headingTextStrokeColor: "#399CFF",
         headingTextStrokeHoverColor: "#399CFF",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             top: '0',
@@ -94,7 +94,7 @@ export const presetStyles = {
         headingTextStrokeColor: "",
         headingTextStrokeHoverColor: "",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             top: '0',
@@ -126,7 +126,7 @@ export const presetStyles = {
         headingTextStrokeColor: "",
         headingTextStrokeHoverColor: "",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             top: '0',
@@ -163,7 +163,7 @@ export const presetStyles = {
         headingTextStrokeColor: "",
         headingTextStrokeHoverColor: "",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             top: '0',
@@ -203,7 +203,7 @@ export const presetStyles = {
         headingTextStrokeColor: "",
         headingTextStrokeHoverColor: "",
         headingAlignment: {
-            Desktop: "left"
+            Desktop: "start"
         },
         headingDesktopPadding: {
             top: '24',
