@@ -603,6 +603,5 @@ const generateAdvancedButtonStyle = (attributes) => {
 
     const customCss = getCustomCss(buttonCustomCSS, `.${blockID}`);
     return `${advancedButtonBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-
 }
 export default generateAdvancedButtonStyle;

@@ -269,15 +269,15 @@ $border_color: #dddddd;
 .fb-advanced-heading-before-after {
     width: 100%;
 }
-.fb-advanced-wrapper[style*="text-align: left"] .fb-advanced-heading.active-line::before {
+.fb-advanced-wrapper[style*="align-items: start"] .fb-advanced-heading.active-line::before {
     left: 0;
 }
 
-.fb-advanced-wrapper[style*="text-align: center"] .fb-advanced-heading.active-line::before {
+.fb-advanced-wrapper[style*="align-items: center"] .fb-advanced-heading.active-line::before {
     left: 50%;
     transform: translateX(-50%);
 }
 
-.fb-advanced-wrapper[style*="text-align: right"] .fb-advanced-heading.active-line::before {
+.fb-advanced-wrapper[style*="align-items: end"] .fb-advanced-heading.active-line::before {
     right: 0;
 }

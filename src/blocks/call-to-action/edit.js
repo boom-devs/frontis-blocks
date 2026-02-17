@@ -357,7 +357,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 					setAttributes={setAttributes}
 				/>
 			)}
-			
+
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -401,19 +401,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 
 									}}>
 
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={info_Button_Link}
 												onClick={handleBtnClick}
 												target={btnOneTargetUrl ? "_blank" : undefined}
 												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText
 													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text}
@@ -435,19 +430,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 								{btnTwoSwitcher && (
 									<div className="fb-cta-btn-two-wrapper" style={{
 									}}>
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnTwoIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={btnTwoLink}
 												onClick={handleBtnTwoClick}
 												target={btnTwoTargetUrl ? "_blank" : undefined}
 												rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnTwoIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText
 													value={dynamicBtnTwoEnabled ? dynamicBtnTwoValue : btnTwoText}

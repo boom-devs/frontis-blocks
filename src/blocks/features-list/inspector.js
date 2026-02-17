@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
 import { useState, useEffect, useMemo, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
@@ -10,11 +9,9 @@ import FB_ColorControl from '@Components/color-control';
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
-import FB_UrlControl from '@Components/url-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -22,33 +19,22 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveControl from '@Components/responsive-control';
 import "./editor.scss";
 
-
 import { 
     SelectControl,
     PanelBody,
-    TabPanel,
     BaseControl,
     Button,
     ButtonGroup,
-    ToggleControl,
-    TextareaControl,
-    Dropdown,
-    Dashicon,
-    RangeControl,
-    ColorPicker,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_VERTICAL_ALIGN,
+    FEATURE_LIST_ICON_VERTICAL_ALIGN,
     TEXT_ALIGN,
-    HEADING,
     BORDER_STYLES,
     OVERFLOW_OP,
-    LIST_DIRECTION_ICON,
-    LIST_WRAP_ICON,
-} from "./constants/constants";
+    FEATURE_LIST_DIRECTION_ICON,
+    FEATURE_LIST_WRAP_ICON,
+} from '@Constants/fbConstants';
 
 import SortableItem from './sortableItem';
 
@@ -57,7 +43,6 @@ import './editor.scss';
 const Inspector = ({ attributes, setAttributes }) => {
     const { 
         blockID,
-        // deviceType,
         blockStyle,
         FeatureItems,
         FeatureTag,
@@ -1677,7 +1662,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                         <ButtonGroup
                             className="fb-setting-text-alignment-group-btn"
                         >
-                            {ICON_VERTICAL_ALIGN.map((item, key) => (
+                            {FEATURE_LIST_ICON_VERTICAL_ALIGN.map((item, key) => (
                                 <Button
                                     key={key}
                                     onClick={() => setAttributes({ FeatureAlignment: item.value })}
@@ -1715,7 +1700,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                     <br />
                     <ButtonGroup className="fb-advanced-alignment-group-btn">
-                        {LIST_DIRECTION_ICON.map((item, key) => (
+                        {FEATURE_LIST_DIRECTION_ICON.map((item, key) => (
                             <Button
                                 key={key}
                                 onClick={() =>
@@ -1745,7 +1730,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                     <br />
                     <ButtonGroup className="fb-advanced-alignment-group-btn">
-                        {LIST_WRAP_ICON.map((item, key) => (
+                        {FEATURE_LIST_WRAP_ICON.map((item, key) => (
                             <Button
                                 key={key}
                                 onClick={() =>

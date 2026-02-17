@@ -219,6 +219,9 @@ const generateCallToActionStyle = (attributes) => {
 		ctaVRBottomOffset,
 		ctaVRBottomOffsetUnits,
 
+        btnIconPosition,
+        btnTwoIconPosition,
+
 	} = attributes;
 
     /** Default padding for desktop **/
@@ -455,6 +458,7 @@ const generateCallToActionStyle = (attributes) => {
             ${buttonTextColor ? `color: ${buttonTextColor};` : ""}
 
             display: inline-flex;
+            ${btnIconPosition ? `flex-direction: ${btnIconPosition};` : ""}
             align-items: center;
             gap: 10px;
             ${buttonOneDesktopPadding && btnOneDesktopPadding?.top ? `padding: ${buttonOneDesktopPadding};` : ''}
@@ -466,8 +470,6 @@ const generateCallToActionStyle = (attributes) => {
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
             ${buttonTextHoverColor ? `color: ${buttonTextHoverColor};` : ""}	
-        }
-        .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-cta-btn-wrapper:hover {
             ${buttonBgHoverColor ? `background-color: ${buttonBgHoverColor};` : ""}
             ${infoButtonHoverBorderColor ? `border-color: ${infoButtonHoverBorderColor};` : ""}
         }
@@ -497,6 +499,7 @@ const generateCallToActionStyle = (attributes) => {
             ${buttonTwoTextColor ? `color: ${buttonTwoTextColor};` : ""}
 
             display: inline-flex;
+            ${btnTwoIconPosition ? `flex-direction: ${btnTwoIconPosition};` : ""}
             align-items: center;
             gap: 10px;
             ${buttonTwoDesktopPadding && btnTwoDesktopPadding?.top ? `padding: ${buttonTwoDesktopPadding};` : ''}
@@ -508,12 +511,9 @@ const generateCallToActionStyle = (attributes) => {
         }
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover .fb-cta-button{
             ${buttonTwoTextHoverColor ? `color: ${buttonTwoTextHoverColor};` : ""}
-        }
-        .fb-cta-content-wrapper.${blockID} .fb-cta-btn-two-wrapper .fb-cta-btn-wrapper:hover {
             ${buttonTwoBgHoverColor ? `background-color: ${buttonTwoBgHoverColor};` : ""}
             ${btnTwoHoverBorderColor ? `border-color: ${btnTwoHoverBorderColor};` : ""}
         }
-        
         .fb-cta-content-wrapper.${blockID} .fb-cta-btn-one-wrapper .fb-btn-icon-wrapper svg {
             ${btnIconSize?.Desktop && btnIconSizeUnits?.Desktop ? `width: ${btnIconSize?.Desktop}${btnIconSizeUnits?.Desktop};` : ""}
             ${btnIconColor ? `fill: ${btnIconColor};` : ""}

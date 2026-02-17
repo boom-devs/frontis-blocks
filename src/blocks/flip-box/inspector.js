@@ -1,17 +1,13 @@
 import { __ } from "@wordpress/i18n";
 
 import {
-	useBlockProps,
-	RichText,
 	InspectorControls,
-	MediaUploadCheck,
-	MediaUpload,
-	URLInput,
 } from "@wordpress/block-editor";
 
 import {
 	SelectControl,
 	PanelBody,
+	Dashicon,
 	TabPanel,
 	BaseControl,
 	Button,
@@ -27,21 +23,17 @@ import {
  * Internal depencencies
  */
 import {
-	TEXT_ALIGN,
-	HEADING,
 	BORDER_STYLES,
 	mediaType,
 	ICON_POSITION,
-	FLIP_ICON_POSITION,
-	FLIP_ICON_VERTICAL_POSITION,
-	FLIP_WRAP_ALIGNMENT,
-	PRESETS,
+	ICON_VERTICAL_POSITION,
+	LAYOUT_ALIGNMENT,
 	OVERFLOW_OP,
-	SELECTED_SIDE,
+	FLIP_BOX_SELECTED_SIDE,
 	FLIP_ANIMATION
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
-import { useEffect, useMemo, memo } from "@wordpress/element";
+import { useEffect, memo } from "@wordpress/element";
 
 import "./editor.scss";
 import FBIconPicker from "../../components/icon-picker";
@@ -58,7 +50,6 @@ import FB_ColorControl from "../../components/color-control";
 import FB_SwitcherControl from "../../components/switcher-control";
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
@@ -4365,7 +4356,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 													<ButtonGroup
 														className="fb-setting-switcher-panel-btn"
 														id="fb-flipbox-sides">
-														{SELECTED_SIDE.map(
+														{FLIP_BOX_SELECTED_SIDE.map(
 															(item, index) => (
 																<Button
 																	className="fb-setting-switcher-panel-btn-switcher"
@@ -4405,10 +4396,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 												<BaseControl>
 													<FB_ResponsiveAlignmentControl
 														label={__("Alignment", "frontis-blocks")}
-														globalAlignment={flipBoxAlignment}
-														setGlobalAlignment={(value) => setAttributes({ flipBoxAlignment: value })}
+														globalAlignment={Object.fromEntries(
+															Object.entries(flipBoxAlignment || {}).map(([device, value]) => [
+																device,
+																value === 'left' ? 'flex-start' : (value === 'right' ? 'flex-end' : value)
+															])
+														)}
+														setGlobalAlignment={(value) => {
+															const updatedValue = { ...value };
+															if (updatedValue[deviceType] === 'left') updatedValue[deviceType] = 'flex-start';
+															if (updatedValue[deviceType] === 'right') updatedValue[deviceType] = 'flex-end';
+															setAttributes({ flipBoxAlignment: updatedValue });
+														}}
 														deviceType={deviceType}
 														setAttributes={setAttributes}
+														options={[
+															{ label: <Dashicon icon="editor-alignleft" />, value: "flex-start" },
+															{ label: <Dashicon icon="editor-aligncenter" />, value: "center" },
+															{ label: <Dashicon icon="editor-alignright" />, value: "flex-end" },
+														]}
 													/>
 												</BaseControl>
 											</PanelBody>
@@ -4443,7 +4449,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 																<SelectControl
 																	label={__("Card Alignment", "frontis-block")}
 																	value={flipCardAlignment}
-																	options={FLIP_WRAP_ALIGNMENT}
+																	options={LAYOUT_ALIGNMENT}
 																	onChange={(value) =>
 																		setAttributes({ flipCardAlignment: value })
 																	}
@@ -4456,7 +4462,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 																<SelectControl
 																	label={__("Vertical Position", "frontis-block")}
 																	value={flipIconVerticalPosition}
-																	options={FLIP_ICON_VERTICAL_POSITION}
+																	options={ICON_VERTICAL_POSITION}
 																	onChange={(value) =>
 																		setAttributes({ flipIconVerticalPosition: value })
 																	}
@@ -4922,7 +4928,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 																<SelectControl
 																	label={__("Card Alignment", "frontis-block")}
 																	value={flipBackCardAlignment}
-																	options={FLIP_WRAP_ALIGNMENT}
+																	options={LAYOUT_ALIGNMENT}
 																	onChange={(value) =>
 																		setAttributes({ flipBackCardAlignment: value })
 																	}
@@ -4935,7 +4941,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 																<SelectControl
 																	label={__("Vertical Position", "frontis-block")}
 																	value={flipBackIconVerticalPosition}
-																	options={FLIP_ICON_VERTICAL_POSITION}
+																	options={ICON_VERTICAL_POSITION}
 																	onChange={(value) =>
 																		setAttributes({ flipBackIconVerticalPosition: value })
 																	}

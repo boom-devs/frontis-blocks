@@ -14,7 +14,7 @@ import {
 import {
     BORDER_STYLES,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from "@Constants/fbConstants";
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -976,7 +976,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             ${videoBorder ? `border: ${videoBorder};` : ''}
             ${IframeBorderDesktopWidth && videoBorderDesktop?.top ? `border-width: ${IframeBorderDesktopWidth};` : ''}
             ${IframeBorderRadiusDesktopWidth && videoBorderRadiusDesktop?.top ? `border-radius: ${IframeBorderRadiusDesktopWidth} !important;` : ''}
-            ${videoBorderColor ? `border-color: ${videoBorderColor}` : ''}
+            ${videoBorderColor ? `border-color: ${videoBorderColor};` : ''}
             transition: all .3s ease-in-out;
         }
 

@@ -21,11 +21,9 @@ import {
 } from '@wordpress/components';
 
 import {
-    TEXT_ALIGN,
     BORDER_STYLES,
-    PRESETS,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import SortableItem from './sortableItem';
 

@@ -15,13 +15,14 @@ import {
     ToggleControl,
 } from '@wordpress/components';
 
-import {
+import { 
     BORDER_STYLES,
     TITLE_ALIGNMENT,
     ICON_POSITIONS,
     ICON_SWITCHER,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from "@Constants/fbConstants";
+
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 
