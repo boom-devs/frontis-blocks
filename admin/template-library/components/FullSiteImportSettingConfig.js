@@ -437,7 +437,8 @@ const FullSiteImportSettingConfig = ({
   }, [customColors, customGradientColors, deviceType]);
 
 
-  const handleStorePages = async (pages) => {
+  const handleStorePages = async (pages, uploadsUpdatedOverride = null) => {
+    const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
     if (!pages || pages.length === 0) {
         console.log("No pages to import.");
         return { success: true, skipped: true, successCount: 0, failedCount: 0, errors: [] };
@@ -480,7 +481,7 @@ const FullSiteImportSettingConfig = ({
             pageData.append("template", page.template || "");
             pageData.append("badge", page.badge || "");
             pageData.append("site_url", window.location.origin);
-            pageData.append("uploads_updated", uploadsUpdated);
+            pageData.append("uploads_updated", isUploadsUpdated);
 
             const response = await fetch(ajaxUrl, {
                 method: "POST",
@@ -521,7 +522,8 @@ const FullSiteImportSettingConfig = ({
     return { success: failedCount === 0, successCount, failedCount, errors };
   };
 
-  const handleStorePosts = async (posts = []) => {
+  const handleStorePosts = async (posts = [], uploadsUpdatedOverride = null) => {
+    const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
     if (!posts || posts.length === 0) {
         console.log("No posts to import.");
         return { success: true, count: 0 };
@@ -539,7 +541,7 @@ const FullSiteImportSettingConfig = ({
             formData.append("content", post.content || "");
             formData.append("slug", post.slug || "");
             formData.append("template", post.template || "");
-            formData.append("uploads_updated", uploadsUpdated);
+            formData.append("uploads_updated", isUploadsUpdated);
             formData.append("site_url", window.location.origin);
 
             const res = await fetch(ajaxUrl, {
@@ -724,7 +726,8 @@ const FullSiteImportSettingConfig = ({
   };
 
   // 1. Header + Footer + Auto Navigation Import
-const handleImportHeadersFooters = async (headers = [], footers = []) => {
+const handleImportHeadersFooters = async (headers = [], footers = [], uploadsUpdatedOverride = null) => {
+    const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
     if ((!headers || headers.length === 0) && (!footers || footers.length === 0)) {
         console.log("No headers or footers to import.");
         return { success: true, mapping: {}, stats: { nav_created: 0, part_created: 0 } };
@@ -735,7 +738,7 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
     form.append('security', nonce);
     form.append('headers', JSON.stringify(headers));
     form.append('footers', JSON.stringify(footers));
-    form.append('uploads_updated', uploadsUpdated);
+    form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', window.location.origin);
 
     try {
@@ -768,7 +771,8 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
 };
 
 // 2. Templates Import (with navigation mapping)
-const handleImportTemplates = async (templates = [], navigationMapping = {}) => {
+const handleImportTemplates = async (templates = [], navigationMapping = {}, uploadsUpdatedOverride = null) => {
+    const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
     if (!templates || templates.length === 0) {
         console.log("No templates to import.");
         return { success: true, created: 0, skipped: templates.length };
@@ -779,7 +783,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
     form.append('security', nonce);
     form.append('templates', JSON.stringify(templates));
     form.append('mapping', JSON.stringify(navigationMapping));
-    form.append('uploads_updated', uploadsUpdated);
+    form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', window.location.origin);
 
     try {
@@ -894,6 +898,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       setImportProgress(20);
   
       const uploadRes = await uploadFiles(uploads);
+      const isUploadsSuccessful = !uploadRes?.skipped;
       updateStepStatus("upload_files", uploadRes?.skipped ? "skipped" : "success");
   
       /** STEP 3: THEME **/
@@ -921,7 +926,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       let navigationMapping = {};
 
       // Step 5: Import Headers + Footers (with auto navigation creation)
-      const hfResult = await handleImportHeadersFooters(headers, footers);
+      const hfResult = await handleImportHeadersFooters(headers, footers, isUploadsSuccessful);
 
       if (hfResult.success) {
           navigationMapping = hfResult.mapping || {};
@@ -939,7 +944,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       setCurrentStep("templates");
       updateStepStatus("templates", "running");
 
-      const templateResult = await handleImportTemplates(templates, navigationMapping);
+      const templateResult = await handleImportTemplates(templates, navigationMapping, isUploadsSuccessful);
 
       if (templateResult.success) {
           updateStepStatus("templates", "success");
@@ -955,7 +960,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       updateStepStatus("pages", "running");
       setImportProgress(75);
 
-      const pageResult = await handleStorePages(pages || []);
+      const pageResult = await handleStorePages(pages || [], isUploadsSuccessful);
       updateStepStatus("pages", pageResult.success ? "success" : "warning");
 
       // STEP 7: POSTS
@@ -963,7 +968,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       updateStepStatus("posts", "running");
       setImportProgress(80);
 
-      const postsResult = await handleStorePosts(posts || []);
+      const postsResult = await handleStorePosts(posts || [], isUploadsSuccessful);
       updateStepStatus("posts", postsResult.success ? "success" : "warning");
 
       // STEP 8: Update global Styles
