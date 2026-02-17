@@ -50,8 +50,8 @@ export const TABS_LAYOUT = [
 ];
 
 export const ICON_POSITION = [
-	{ label: __("Left"), value: "left" },
-	{ label: __("Right"), value: "right" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+	{ label: __("Right", "frontis-block"), value: "right" },
 ];
 
 export const MULTI_ICON_POSITION = [
@@ -801,6 +801,11 @@ export const mediaType = [
 	{ label: __("Image", "frontis-block"), value: "image" },
 ];
 
+export const mediaTypes = [
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
+
 export const separatorType = [
 	{ label: __("Comma", "frontis-block"), value: "comma" },
 	{ label: __("Space", "frontis-block"), value: "space" },
@@ -812,3 +817,70 @@ export const ITEM_POSITION = [
 	{ label: __("Bottom", "frontis-block"), value: "bottom" },
 	{ label: __("Left", "frontis-block"), value: "left" },
 ];
+
+export const DUAL_BTN_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-only" },
+];
+
+export const DUAL_BUTTONS_DIRECTION = [
+	{ label: "Vertical", value: "vertical" },
+	{ label: "Horizontal", value: "horizontal" },
+];
+
+export const FEATURE_LIST_ICON_VERTICAL_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "top" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "bottom" },
+];
+
+export const FEATURE_LIST_DIRECTION_ICON = [
+	{ title: 'Column', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.391 6.72949L16.391 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3909 17.1923L18.606 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.391 17.1923L14.176 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 6.72949L7.65393 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65381 17.1923L9.85767 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 17.1923L5.43889 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column" },
+	{ title: 'Row', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.64246 7.53723H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53729L15.3485 5.28601" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53723L15.3485 9.78851" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.64246 16.4172H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4173L15.3485 14.1774" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4172L15.3485 18.6685" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M2.85132 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21.1487 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row" },
+];
+
+export const FEATURE_LIST_WRAP_ICON = [
+	{ title: 'No Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
+	{ title: 'Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
+];
+
+export const FEATURE_LIST_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const ICON_VERTICAL_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "v-top" },
+	{ label: __("Middle", "frontis-block"), value: "v-middle" },
+	{ label: __("Bottom", "frontis-block"), value: "v-bottom" },
+];
+
+export const FLIP_BOX_SELECTED_SIDE = [
+	{ label: __("Front", "frontis-blocks"), value: "front" },
+	{ label: __("Back", "frontis-blocks"), value: "back" },
+];
+
+export const FLIP_ANIMATION = [
+	{ label: __("Flip Left", "frontis-blocks"), value: "flip-left" },
+	{ label: __("Flip Right", "frontis-blocks"), value: "flip-right" },
+	{ label: __("Flip Up", "frontis-blocks"), value: "flip-up" },
+	{ label: __("Flip Down", "frontis-blocks"), value: "flip-down" },
+	{ label: __("Zoom in", "frontis-blocks"), value: "zoom-in" },
+	{ label: __("Zoom out", "frontis-blocks"), value: "zoom-out" },
+	{ label: __("Fade", "frontis-blocks"), value: "fade" },
+];
+
+export const FORM_FULL_LISTS =
+    FrontisBlocksData.fluent_form_lists &&
+    JSON.parse(FrontisBlocksData.fluent_form_lists);
+
+export const FORM_LISTS =
+	FORM_FULL_LISTS &&
+	FORM_FULL_LISTS.map((obj) => {
+		return {
+			label: obj.label,
+			value: obj.value,
+		};
+	});
