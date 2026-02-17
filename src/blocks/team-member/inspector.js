@@ -1,44 +1,44 @@
 import { __ } from '@wordpress/i18n';
 import {
-	MediaUpload,
-	MediaUploadCheck,
-	InspectorControls,
-} from '@wordpress/block-editor';
-import {
-	TabPanel,
 	PanelBody,
 	TextControl,
-	BaseControl,
 	ToggleControl,
 	Button,
 	SelectControl,
-	ButtonGroup,
 	ResponsiveWrapper, __experimentalHStack as HStack,
 	TextareaControl,
-	RangeControl,
 } from '@wordpress/components';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+
+import { useEffect, memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
-
-import {BADGE_ALIGNMENT, BADGE_POSITION, BORDER_STYLES, CARD_WRAP_ALIGNMENT, CONTENT_POSITION, CONTENT_SOCIAL_ICON_POSITION, EMAIL_ICON_POSITION, EMAIL_ICON_SWITCHER, HEADING, IMAGE_SOCIAL_ICON_POSITION, OVERFLOW_OP, SEPARATOR_POSITION, SOCIAL_ICON_ANIMATION, SOCIAL_ICON_TYPE} from "./constants/constants";
+import {
+	BADGE_ALIGNMENT, 
+	BADGE_POSITION, 
+	BORDER_STYLES, 
+	CARD_WRAP_ALIGNMENT, 
+	CONTENT_POSITION, 
+	CONTENT_SOCIAL_ICON_POSITION, 
+	IMAGE_SOCIAL_ICON_POSITION, 
+	OVERFLOW_OP, 
+	SEPARATOR_POSITION, 
+	SOCIAL_ICON_ANIMATION, 
+	SOCIAL_ICON_TYPE
+} from '@Constants/fbConstants';
 
 import SortableItem from './sortableItem.js';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
 import FB_TypographyControl from '@Components/typography-control';
 import FB_ColorControl from '@Components/color-control';
-import FB_BackgroundImageControl from '@Components/background-image-control';
 import FB_HtmlTagControl from '@Components/html-tag-control';
 import FB_BackgroundColorControl from '@Components/background-color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import FB_SwitcherControl from '@Components/switcher-control';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
-import FBIconPicker from '../../components/icon-picker/index.js';
 import FB_ImageControl from '@Components/image-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
@@ -47,17 +47,14 @@ import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import generateSvgIcon from '@Utils/generateSvgIcon';
 import getProActive from '@Utils/getProActive';
-
 import './editor.scss';
-
 
 const Inspector = ({ attributes, setAttributes }) => {
 
 	const {
 		blockID,
 		blockStyle,
-		// deviceType,
-
+		
 		// Photo
 		teamMemberImageAlignment,
 		teamMemberImageUrl,

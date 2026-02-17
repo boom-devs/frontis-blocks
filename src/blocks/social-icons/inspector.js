@@ -1,31 +1,22 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 import {
     PanelBody,
     BaseControl,
-    TabPanel,
     Button,
     ButtonGroup,
-    Dropdown,
-    RangeControl,
     SelectControl,
-    Dashicon,
-    ColorPicker,
     ToggleControl,
 } from '@wordpress/components';
 
 import {
-    NORMAL_HOVER,
-    UNIT_TYPES,
-    ICON_ALIGN,
     TEXT_ALIGN,
     BORDER_STYLES,
-	PRESETS,
+	SOCIAL_ICONS_PRESETS,
 	OVERFLOW_OP,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 import SortableItem from './sortableItem';
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -35,19 +26,16 @@ import FB_SwitcherControl from '@Components/switcher-control';
 import FB_ColorControl from '@Components/color-control';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
-import {changeSocialIconsPreset} from './preset';
-
+import {changeSocialIconsPreset, handleAddItem, handleChangeItem, handleDeleteItem, handleDuplicateItem} from './preset';
 import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes }) => {
     const {
         blockID,
-        // deviceType,
         socialAlignment,
         socialItems,
 
@@ -232,118 +220,6 @@ const Inspector = ({ attributes, setAttributes }) => {
             const newIndex = socialItems.findIndex(item => item.id === over.id);
             const updatedItems = arrayMove(socialItems, oldIndex, newIndex);
             setAttributes({ socialItems: updatedItems });
-        }
-    };
-
-	const getPresetColors = (preset) => {
-		switch (preset) {
-			case 'preset-1':
-				return {
-					socialIconColor: '#1877F2',
-					socialIconHoverColor: '#1877F2',
-					socialIconBgColor: "#ffffff",
-					socialIconHoverBgColor: "#ffffff",
-					normalItemClassicColor: "#ffffff",
-				};
-			case 'preset-2':
-				return {
-					socialIconColor: "#ffffff",
-					socialIconHoverColor: "#ffffff",
-					socialIconBgColor: "#1877F2",
-					socialIconHoverBgColor: "#1877F2",
-					normalItemClassicColor: "#1877F2",
-				};
-			case 'preset-3':
-				return {
-					socialIconColor: "#FFFFFF",
-					socialIconHoverColor: "#FFFFFF",
-					socialIconBgColor: "",
-					socialIconHoverBgColor: "",
-					normalItemClassicColor: "#1877F2",
-				};
-			case 'preset-4':
-				return {
-					socialIconColor: "#FFFFFF",
-					socialIconHoverColor: "#FFFFFF",
-					socialIconBgColor: "#1877F2",
-					socialIconHoverBgColor: "#1877F2",
-					normalItemClassicColor: "#1877F2",
-				};
-			case 'preset-5':
-				return {
-					socialIconColor: "#1877F2",
-					socialIconHoverColor: "#1877F2",
-					socialIconBgColor: "#FFFFFF",
-					socialIconHoverBgColor: "#FFFFFF",
-					normalItemClassicColor: "#ffffff",
-				};
-			case 'preset-6':
-				return {
-					socialIconColor: "#FFFFFF",
-					socialIconHoverColor: "#FFFFFF",
-					socialIconBgColor: "#15171C",
-					socialIconHoverBgColor: "#15171C",
-					normalItemClassicColor: "#15171C",
-				};
-			default:
-				console.warn(`Preset "${preset}" not found. Default colors will not be set.`);
-				return {};
-		}
-	};
-
-	const handleAddItem = () => {
-		const presetColors = getPresetColors(socialIconsPresetStyle);
-	
-		const newItem = {
-			id: `item-${socialItems.length + 1}`,
-			socialIconTitle: 'Facebook',
-			socialIconUrl: '',
-			socialIcon: 'facebook-f',
-	
-			socialIconTargetUrl: false,
-			socialIconColorSwitcher: 'normal',
-	
-			// Apply preset colors as default values
-			socialIconColor: presetColors.socialIconColor || '',
-			socialIconHoverColor: presetColors.socialIconHoverColor || '',
-			socialIconBgColor: presetColors.socialIconBgColor || '',
-			socialIconHoverBgColor: presetColors.socialIconHoverBgColor || '',
-
-			socialItemBgColorSwitcher: 'normal',
-	
-			normalItemBackgroundType: 'classic',
-			normalItemClassicColor: presetColors.normalItemClassicColor || '',
-			normalItemGradientColor: '',
-			normalItemCustomGradientSwitcher: false,
-			normalItemCustomGradientInputValue: '',
-	
-			hoverItemBackgroundType: 'classic',
-			hoverItemClassicColor: '',
-			hoverItemGradientColor: '',
-			hoverItemCustomGradientSwitcher: false,
-			hoverItemCustomGradientInputValue: '',
-		};
-	
-		setAttributes({ socialItems: [...socialItems, newItem] });
-	};
-
-    const handleChangeItem = (id, key, value) => {
-        const updatedItems = socialItems.map(item => 
-            item.id === id ? { ...item, [key]: value } : item
-        );
-        setAttributes({ socialItems: updatedItems });
-    };
-
-    const handleDeleteItem = (id) => {
-        const updatedItems = socialItems.filter(item => item.id !== id);
-        setAttributes({ socialItems: updatedItems });
-    };
-
-    const handleDuplicateItem = (id) => {
-        const itemToDuplicate = socialItems.find(item => item.id === id);
-        if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${socialItems.length + 1}` };
-            setAttributes({ socialItems: [...socialItems, newItem] });
         }
     };
 
@@ -1197,7 +1073,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				<SelectControl
 					label={__("Preset Style", "frontis-blocks")}
 					value={socialIconsPresetStyle}
-					options={PRESETS}
+					options={SOCIAL_ICONS_PRESETS}
 					onChange={(selected) => changeSocialIconsPreset(selected, socialItems, setAttributes)}
 				/>
 				<BaseControl

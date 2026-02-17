@@ -2,17 +2,14 @@ import { useState } from 'react';
 import { __ } from '@wordpress/i18n';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { TextControl, TextareaControl, Button, ButtonGroup, BaseControl } from '@wordpress/components';
+import { TextControl, Button, ButtonGroup, BaseControl } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
-
-import {
-    ICON_ALIGN,
-} from "./constants/constants";
+import { FEATURE_ICON_ALIGN } from '@Constants/fbConstants';
 
 export default function SortableItem({ id, item, handleChangeItem, handleDeleteItem }) {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const [isOpen, setIsOpen] = useState(false);
-    const [FeatureIconAlign, setFeatureIconAlign] = useState( ICON_ALIGN[1].value );
+    const [FeatureIconAlign, setFeatureIconAlign] = useState( FEATURE_ICON_ALIGN[1].value );
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -88,7 +85,7 @@ export default function SortableItem({ id, item, handleChangeItem, handleDeleteI
                             className="fb-feature-icon"
                         >
                             <ButtonGroup className="fb-feature-icon-group-btn">
-                                {ICON_ALIGN.map((alignItem, key) => (
+                                {FEATURE_ICON_ALIGN.map((alignItem, key) => (
                                     <Button
                                         key={key}
                                         onClick={() => handleAlignmentChange(alignItem.value)}

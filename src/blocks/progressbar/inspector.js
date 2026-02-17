@@ -1,12 +1,7 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { memo } from '@wordpress/element';
 import {
     PanelBody,
-    BaseControl,
-    TabPanel,
-    Button,
-    ButtonGroup,
     RangeControl,
     SelectControl,
     TextControl,
@@ -15,12 +10,11 @@ import {
 
 import {
     PROGRESS_TEXT_OPTIONS,
-	HEADING,
     OVERFLOW_OP,
     PROGRESSBAR_TYPE,
     PROGRESS_NUMBER_POSITION,
     BORDER_STYLES,
-} from "./constants/constants";
+} from '@Constants/fbConstants';
 
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -29,23 +23,19 @@ import FB_ColorControl from '@Components/color-control';
 import FB_Range from '@Components/range';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import {useDeviceType} from "@Config/displayType";
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ResponsiveAlignmentControl from '@Components/responsive-alignment-control';
-
-
-import './editor.scss';
 import FB_HtmlTagControl from '../../components/html-tag-control';
 import FB_BackgroundColorControl from '../../components/background-color-control';
 import FB_BoxShadowControl from '../../components/box-shadow';
+import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		blockID,
-		// deviceType,
         progressGlobalZIndex,
         progressbarOverflow,
         progressbarType,
@@ -54,11 +44,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		progressNumber,
         progressbarVrAlignment,
 
-
         progressNumberColorSwitcher,
 		progressNumberColor,
         progressNumberHoverColor,
-        
 
         // progress color
         progressZebraTrackSwitcher,
