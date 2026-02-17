@@ -96,6 +96,7 @@ class TemplateLibrary extends AjaxBase
     function upload_files()
     {
         $this->check_permission();
+        global $wpdb;
 
         $zip_url = isset($_POST['uploads']) ? esc_url_raw($_POST['uploads']) : '';
 
@@ -171,11 +172,59 @@ class TemplateLibrary extends AjaxBase
 
             unlink($tempZipFile);
 
+            // Register files in Media Library
+            require_once ABSPATH . 'wp-admin/includes/image.php';
+            require_once ABSPATH . 'wp-admin/includes/media.php';
+            require_once ABSPATH . 'wp-admin/includes/file.php';
+
+            $registered_count = 0;
+            foreach ($extracted_files as $relative_file_path) {
+                $full_path = $destination . $relative_file_path;
+                
+                if (!file_exists($full_path) || is_dir($full_path)) {
+                    continue;
+                }
+
+                // Filter out resized images (e.g., filename-1024x768.webp)
+                if (preg_match('/-(\d+)x(\d+)\.(jpg|jpeg|png|gif|webp|svg|avif)$/i', basename($full_path))) {
+                    continue;
+                }
+
+                // Check if already registered
+                $existing_attachment = $wpdb->get_var($wpdb->prepare(
+                    "SELECT post_id FROM $wpdb->postmeta WHERE meta_key = '_wp_attached_file' AND meta_value = %s LIMIT 1",
+                    $relative_file_path
+                ));
+
+                if ($existing_attachment) {
+                    continue;
+                }
+
+                $filetype = wp_check_filetype(basename($full_path), null);
+                
+                $attachment = array(
+                    'guid'           => $uploads_dir['baseurl'] . '/' . $relative_file_path,
+                    'post_mime_type' => $filetype['type'],
+                    'post_title'     => preg_replace('/\.[^.]+$/', '', basename($full_path)),
+                    'post_content'   => '',
+                    'post_status'    => 'inherit'
+                );
+
+                $attach_id = wp_insert_attachment($attachment, $full_path);
+
+                if (!is_wp_error($attach_id)) {
+                    $attach_data = wp_generate_attachment_metadata($attach_id, $full_path);
+                    wp_update_attachment_metadata($attach_id, $attach_data);
+                    $registered_count++;
+                }
+            }
+
             wp_send_json_success([
-                'message' => 'Files extracted successfully',
+                'message' => 'Files extracted and registered successfully',
                 'path' => $destination,
                 'files' => $extracted_files,
                 'count' => count($extracted_files),
+                'registered' => $registered_count,
             ]);
 
         } catch (Exception $e) {
@@ -353,7 +402,7 @@ class TemplateLibrary extends AjaxBase
 
         // Step 1: Update image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
-            $content = $this->replace_image_urls($content, trailingslashit($site_url));
+            $content = $this->replace_media_urls($content, trailingslashit($site_url));
         }
 
         // Step 2: Generate unique slug if not provided or duplicate
@@ -453,29 +502,57 @@ class TemplateLibrary extends AjaxBase
     }
 
     /**
-     * Replace image URLs from external to local uploads
+     * Replace media URLs from external to local uploads
      */
-    private function replace_image_urls($content, $my_domain)
+    private function replace_media_urls($content, $my_domain)
     {
-        preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg|avif)/i', $content, $matches);
+        if (empty($content)) {
+            return $content;
+        }
+
+        // 1. Match normal URLs: https://domain.com/wp-content/uploads/...
+        // 2. Match escaped URLs: https:\/\/domain.com\/wp-content\/uploads\/...
+        
+        // Comprehensive regex to catch both normal and escaped versions
+        // It looks for http/https followed by anything until it finds wp-content/uploads
+        // then captures everything until a space, quote, or other terminator.
+        $regex = '/https?(?::|\\\\:)\/\/(?:[^"\'\s>]+?)(?:wp-content(?:\/|\\\\\/)uploads(?:\/|\\\\\/))([^"\'\s>]+)/i';
+        
+        preg_match_all($regex, $content, $matches);
 
         if (empty($matches[0])) {
             return $content;
         }
 
-        $image_urls = array_unique($matches[0]);
+        $found_urls = array_unique($matches[0]);
         $upload_dir = wp_upload_dir();
-        $local_upload_url = trailingslashit($upload_dir['baseurl']);
+        $local_upload_base = trailingslashit($upload_dir['baseurl']);
+        
+        error_log("FB Import: Found " . count($found_urls) . " media URLs to potentialy replace.");
 
-        foreach ($image_urls as $url) {
-            // Find the position of 'wp-content/uploads/' in the URL
-            $pos = strpos($url, 'wp-content/uploads/');
+        foreach ($found_urls as $original_url) {
+            // Determine if this specific match is escaped
+            $is_escaped = (strpos($original_url, '\/') !== false);
+            
+            // Find the split point
+            $search_str = $is_escaped ? 'wp-content\/uploads\/' : 'wp-content/uploads/';
+            $pos = strpos($original_url, $search_str);
             
             if ($pos !== false) {
-                // Get everything after 'wp-content/uploads/'
-                $relative_path = substr($url, $pos + strlen('wp-content/uploads/'));
-                $new_url = $local_upload_url . $relative_path;
-                $content = str_replace($url, $new_url, $content);
+                $relative_path = substr($original_url, $pos + strlen($search_str));
+                
+                // Content sometimes has trailing garbage if regex was too greedy
+                $relative_path = rtrim($relative_path, '"\'\\ ');
+                
+                $local_url = $local_upload_base . $relative_path;
+                
+                // If the original was escaped, the replacement should be too
+                if ($is_escaped) {
+                    $local_url = str_replace('/', '\/', $local_url);
+                }
+                
+                $content = str_replace($original_url, $local_url, $content);
+                error_log("FB Import: Replaced $original_url with $local_url");
             }
         }
 
@@ -725,7 +802,7 @@ class TemplateLibrary extends AjaxBase
 
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
-                $content = $this->replace_image_urls($content, trailingslashit($site_url));
+                $content = $this->replace_media_urls($content, trailingslashit($site_url));
             }
 
             // Replace navigation refs
@@ -815,7 +892,7 @@ class TemplateLibrary extends AjaxBase
 
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
-                $content = $this->replace_image_urls($content, trailingslashit($site_url));
+                $content = $this->replace_media_urls($content, trailingslashit($site_url));
             }
 
             foreach ($mapping as $old => $new) {
@@ -898,7 +975,7 @@ class TemplateLibrary extends AjaxBase
 
         // Replace image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
-            $content = $this->replace_image_urls($content, trailingslashit($site_url));
+            $content = $this->replace_media_urls($content, trailingslashit($site_url));
         }
 
         // Slug generate if empty
