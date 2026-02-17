@@ -477,7 +477,7 @@ const FullSiteImportSettingConfig = ({
             pageData.append("title", page.title);
             pageData.append("content", parsedBlocks || "");
             pageData.append("slug", page.slug || "");
-            pageData.append("template", page.template || "fb-template-pages");
+            pageData.append("template", page.template || "");
             pageData.append("badge", page.badge || "");
             pageData.append("site_url", window.location.origin);
             pageData.append("uploads_updated", uploadsUpdated);
@@ -538,7 +538,9 @@ const FullSiteImportSettingConfig = ({
             formData.append("title", post.title || "Untitled");
             formData.append("content", post.content || "");
             formData.append("slug", post.slug || "");
-            formData.append("template", post.template || ""); // শুধু এটাই পাঠাবে
+            formData.append("template", post.template || "");
+            formData.append("uploads_updated", uploadsUpdated);
+            formData.append("site_url", window.location.origin);
 
             const res = await fetch(ajaxUrl, {
                 method: "POST",
@@ -733,6 +735,8 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
     form.append('security', nonce);
     form.append('headers', JSON.stringify(headers));
     form.append('footers', JSON.stringify(footers));
+    form.append('uploads_updated', uploadsUpdated);
+    form.append('site_url', window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {
@@ -763,7 +767,7 @@ const handleImportHeadersFooters = async (headers = [], footers = []) => {
     }
 };
 
-// 2. Templates Import (navigation mapping দিয়ে)
+// 2. Templates Import (with navigation mapping)
 const handleImportTemplates = async (templates = [], navigationMapping = {}) => {
     if (!templates || templates.length === 0) {
         console.log("No templates to import.");
@@ -775,6 +779,8 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
     form.append('security', nonce);
     form.append('templates', JSON.stringify(templates));
     form.append('mapping', JSON.stringify(navigationMapping));
+    form.append('uploads_updated', uploadsUpdated);
+    form.append('site_url', window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {
@@ -801,6 +807,45 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
 };
   
 
+  const handleGenerateAssets = () => {
+    return new Promise((resolve, reject) => {
+      let batch = 0;
+
+      const processNextBatch = () => {
+        window.jQuery.ajax({
+          url: ajaxUrl,
+          type: 'POST',
+          data: {
+            action: 'fb_generate_assets',
+            security: nonce,
+            batch: batch,
+          },
+          success: (response) => {
+            if (response.success) {
+              if (response.data.completed) {
+                console.log("Asset generation completed");
+                resolve({ success: true, message: response.data.message });
+              } else {
+                batch++;
+                processNextBatch();
+              }
+            } else {
+              console.error("Asset generation failed:", response.data?.message);
+              reject(new Error(response.data?.message || "Asset generation failed"));
+            }
+          },
+          error: (xhr, status, error) => {
+            console.error("Error in asset generation:", status, error);
+            reject(new Error(`${status}: ${error}`));
+          }
+        });
+      };
+
+      processNextBatch();
+    });
+  };
+  
+
   const handleImport = useCallback(async () => {
     setIsImporting(true);
     dispatch(setAttribute({ showFullSiteImportModal: true }));
@@ -817,6 +862,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       { key: "pages", label: "Creating pages...", status: "pending" },
       { key: "posts", label: "Creating posts...", status: "pending" },
       { key: "global_styles", label: "Updating global styles...", status: "pending" },
+      { key: "asset_generation", label: "Generating assets...", status: "pending" },
       { key: "finalize", label: "Finalizing setup...", status: "pending" },
     ];
   
@@ -828,20 +874,19 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       updateStepStatus("fetch_site", "running");
       setImportProgress(5);
   
-      const siteResp = await getTemplatesData("import/site", "site_id", 41);
-      console.log(siteResp);
-
-      return false;
+      const siteResp = await getTemplatesData("import/site", "site_id", template.id);
       if (!siteResp?.data) throw new Error("Failed to fetch site data");
       updateStepStatus("fetch_site", "success");
   
       const siteData = siteResp.data;
-      const pages = siteData.pages || [];
-      const posts = siteData.posts || templatesData.data.posts;
-      const templates = siteData.templates || templatesData.data.templates;
-      const headers = siteData.headers || templatesData.data.headers;
-      const footers = siteData.footers || templatesData.data.footers;
-      const uploads = siteData.uploads_url || "https://templates.frontiswp.com/melinoe/wp-content/uploads/sites/14/2025.zip";
+      const pages = siteData?.pages || [];
+      const posts = siteData?.posts || [];
+      const templates = siteData?.templates || [];
+      const headers = siteData?.headers || [];
+      const footers = siteData?.footers || [];
+      const uploads = siteData?.uploads_url || '';
+
+      console.log("Site data:", siteData);
   
       /** STEP 2: UPLOAD FILES **/
       setCurrentStep("upload_files");
@@ -870,7 +915,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       // After plugins step...
       setCurrentStep("headers");
       updateStepStatus("headers", "running");
-      updateStepStatus("footers", "running");  // একসাথে চালু
+      updateStepStatus("footers", "running");
       setImportProgress(55);
 
       let navigationMapping = {};
@@ -929,7 +974,20 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
       await handleUpdateState();
       updateStepStatus("global_styles", "success");
 
-      // STEP 9: FINALIZE
+      // STEP 9: Asset Generation
+      setCurrentStep("asset_generation");
+      updateStepStatus("asset_generation", "running");
+      setImportProgress(95);
+
+      try {
+        await handleGenerateAssets();
+        updateStepStatus("asset_generation", "success");
+      } catch (assetErr) {
+        console.warn("Asset generation encountered an issue:", assetErr);
+        updateStepStatus("asset_generation", "warning");
+      }
+
+      // STEP 10: FINALIZE
       setCurrentStep("finalize");
       updateStepStatus("finalize", "running");
       setImportProgress(100);
@@ -948,92 +1006,6 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}) => 
     } finally {
       setIsImporting(false);
     }
-  }, []);
-
-  
-  const getTemplates = async (postType = 'page') => {
-    const maxAttempts = 2;
-  
-    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-      try {
-        const form = new FormData();
-        form.append('action', 'fb_get_templates');
-        form.append('security', nonce); // Nonce from localized script.
-        form.append('post_type', postType);
-  
-        const response = await fetch(ajaxUrl, {
-          method: 'POST',
-          body: form,
-        });
-  
-        const ok = response.ok;
-        const json = await response.json();
-  
-        if (ok && json?.success) {
-          return { status: 'success', data: json.data.templates };
-        }
-  
-        throw new Error(json?.data?.message || json?.message || 'Template fetch failed');
-      } catch (err) {
-        console.warn(`Attempt ${attempt} failed:`, err.message);
-  
-        if (attempt === maxAttempts) {
-          console.log(`Failed to fetch templates for "${postType}": ${err.message}`);
-          return { status: 'failed', reason: err.message };
-        }
-  
-        await new Promise((resolve) => setTimeout(resolve, 800));
-      }
-    }
-  };
-
-
-  const getAllTemplateParts = async () => {
-    const form = new FormData();
-    form.append('action', 'fb_get_all_template_parts');
-    form.append('security', nonce);
-
-    try {
-        const res = await fetch(ajaxUrl, { method: 'POST', body: form });
-        const json = await res.json();
-
-        if (json.success) {
-            return json.data.template_parts;
-        }
-
-        console.warn('No parts found:', json.data?.message);
-        return [];
-    } catch (err) {
-        console.error('Error fetching all parts:', err);
-        return [];
-    }
-  };
-
-  useEffect(() => {
-    const fetch = async () => {
-        const allParts = await getAllTemplateParts();
-        dispatch(setAttribute({ templateParts: allParts }));
-    };
-    fetch();
-  }, []);
-
-
-  useEffect(() => {
-    const fetchTemplates = async () => {
-      dispatch(setAttribute({ pageTemplatesLoading: true }));
-      const result = await getTemplates('page'); // Call for 'page' post type.
-
-      if (result.status === 'success') {
-        dispatch(setAttribute({ pageTemplates: result.data }));
-        dispatch(setAttribute({ pageTemplatesError: null }));
-      } else {
-        dispatch(setAttribute({ pageTemplatesError: result.reason }));
-        dispatch(setAttribute({ pageTemplates: [] }));
-      }
-      dispatch(setAttribute({ pageTemplatesLoading: false }));
-    };
-
-    fetchTemplates();
   }, []);
 
 

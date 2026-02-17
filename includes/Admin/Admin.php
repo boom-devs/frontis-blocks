@@ -960,7 +960,7 @@ class Admin
             }
 
             // Security: Strict Domain Allowlist
-            $allowed_hosts = [];
+            $allowed_hosts = ['demo.frontiswp.com', 'frontistest.1wp.site'];
             if (defined('PORTAL_API')) {
                 $allowed_hosts[] = parse_url(PORTAL_API, PHP_URL_HOST);
             }
