@@ -335,7 +335,12 @@ class TemplateLibrary extends AjaxBase
 
         // Input data
         $title = isset($_POST['title']) ? sanitize_text_field($_POST['title']) : '';
-        $content = isset($_POST['content']) ? wp_kses_post($_POST['content']) : '';
+        $content = isset($_POST['content']) ? $_POST['content'] : '';
+        
+        // Decode unicode escapes BEFORE unslashing to preserve the backslash
+        $content = $this->decode_content($content);
+        $content = wp_unslash($content);
+
         $slug = isset($_POST['slug']) ? sanitize_title($_POST['slug']) : '';
         $template = isset($_POST['template']) ? sanitize_text_field($_POST['template']) : '';
         $badge = isset($_POST['badge']) ? sanitize_text_field($_POST['badge']) : '';
@@ -348,7 +353,7 @@ class TemplateLibrary extends AjaxBase
 
         // Step 1: Update image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
-            $content = $this->replace_image_urls($content, $my_domain = trailingslashit($site_url));
+            $content = $this->replace_image_urls($content, trailingslashit($site_url));
         }
 
         // Step 2: Generate unique slug if not provided or duplicate
@@ -375,7 +380,7 @@ class TemplateLibrary extends AjaxBase
         $page_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => wp_kses_post($content),
+            'post_content' => $content,
             'post_status' => 'publish',
             'post_type' => 'page',
         ], true);
@@ -418,38 +423,60 @@ class TemplateLibrary extends AjaxBase
     }
 
     /**
+     * Decode unicode escapes like \u003c to <
+     */
+    private function decode_content($content)
+    {
+        if (empty($content)) {
+            return $content;
+        }
+
+        // If it starts and ends with quotes, it might be a double-encoded JSON string
+        // We need to handle both \uXXXX and \\uXXXX (handled by \\\\+u)
+        $content = preg_replace_callback('/\\\\+u([0-9a-fA-F]{4})/', function ($match) {
+            $hex = strtolower($match[1]);
+            
+            // SECURITY/INTEGRITY: Do not decode characters that could break JSON attributes or HTML structure
+            // 0022: " | 005c: \ | 0027: ' | 003c: < | 003e: >
+            // Wait, we actually WANT to decode < and > for the user's "weird text" issue
+            // but we MUST NOT decode " and \ in attributes.
+            // Since we can't easily tell if we are in an attribute here without a full parser,
+            // we will only skip the most dangerous ones for JSON: " and \
+            if (in_array($hex, ['0022', '005c'])) {
+                return $match[0];
+            }
+            
+            return mb_convert_encoding(pack('H*', $match[1]), 'UTF-8', 'UCS-2BE');
+        }, $content);
+
+        return $content;
+    }
+
+    /**
      * Replace image URLs from external to local uploads
      */
     private function replace_image_urls($content, $my_domain)
     {
         preg_match_all('/https?:\/\/[^"\'\s>]+?\.(jpg|jpeg|png|gif|webp|svg|avif)/i', $content, $matches);
 
-        if (empty($matches[0]))
+        if (empty($matches[0])) {
             return $content;
+        }
 
         $image_urls = array_unique($matches[0]);
+        $upload_dir = wp_upload_dir();
+        $local_upload_url = trailingslashit($upload_dir['baseurl']);
 
         foreach ($image_urls as $url) {
-            $parsed = parse_url($url);
-            $path = isset($parsed['path']) ? $parsed['path'] : '';
-
-            if (preg_match('/\/2025\//', $path)) {
-                $new_url = preg_replace(
-                    '/^https?:\/\/[^\/]+\/.*?(?=2025\/)/',
-                    $my_domain . 'wp-content/uploads/',
-                    $url
-                );
-            } elseif (preg_match('/wp-content\/uploads/', $path)) {
-                $new_url = preg_replace(
-                    '/^https?:\/\/[^\/]+\//',
-                    $my_domain,
-                    $url
-                );
-            } else {
-                $new_url = $my_domain . ltrim($path, '/');
+            // Find the position of 'wp-content/uploads/' in the URL
+            $pos = strpos($url, 'wp-content/uploads/');
+            
+            if ($pos !== false) {
+                // Get everything after 'wp-content/uploads/'
+                $relative_path = substr($url, $pos + strlen('wp-content/uploads/'));
+                $new_url = $local_upload_url . $relative_path;
+                $content = str_replace($url, $new_url, $content);
             }
-
-            $content = str_replace($url, $new_url, $content);
         }
 
         return $content;
@@ -599,8 +626,13 @@ class TemplateLibrary extends AjaxBase
         $this->check_permission();
 
         // JSON decode safely
-        $headers = isset($_POST['headers']) ? json_decode(wp_unslash($_POST['headers']), associative: true) : [];
-        $footers = isset($_POST['footers']) ? json_decode(wp_unslash($_POST['footers']), associative: true) : [];
+        // Note: json_decode already handles unicode escapes if they are standard JSON.
+        // But if they are double-escaped or malformed, we might need decode_content.
+        $headers_raw = isset($_POST['headers']) ? wp_unslash($_POST['headers']) : '[]';
+        $footers_raw = isset($_POST['footers']) ? wp_unslash($_POST['footers']) : '[]';
+        
+        $headers = json_decode($headers_raw, true) ?: [];
+        $footers = json_decode($footers_raw, true) ?: [];
 
         if (!is_array($headers))
             $headers = [];
@@ -619,6 +651,9 @@ class TemplateLibrary extends AjaxBase
         }
 
         $all_parts = array_merge($header_parts, $footer_parts);
+
+        $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
+        $site_url = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
 
         $navigation_mapping = [];
         $stats = [
@@ -643,6 +678,10 @@ class TemplateLibrary extends AjaxBase
                     continue;
                 }
 
+                // Decode and unslash navigation content
+                $content = $this->decode_content($content);
+                $content = wp_unslash($content);
+
                 $slug = 'imported-nav-' . $old_id;
 
                 $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
@@ -655,7 +694,7 @@ class TemplateLibrary extends AjaxBase
                 $new_id = wp_insert_post([
                     'post_title' => 'Imported Nav ' . $old_id,
                     'post_name' => $slug,
-                    'post_content' => wp_kses_post($content),
+                    'post_content' => $content,
                     'post_status' => 'publish',
                     'post_type' => 'wp_navigation',
                 ]);
@@ -676,6 +715,17 @@ class TemplateLibrary extends AjaxBase
 
             if (empty($slug)) {
                 continue;
+            }
+
+            // Decode and unslash part content
+            $content = $this->decode_content($content);
+            $content = wp_unslash($content);
+
+            error_log("FB Import: Header/Footer part $title, content length: " . strlen($content));
+
+            // Replace image URLs (if uploads_updated)
+            if ($uploads_updated && !empty($site_url)) {
+                $content = $this->replace_image_urls($content, trailingslashit($site_url));
             }
 
             // Replace navigation refs
@@ -703,7 +753,7 @@ class TemplateLibrary extends AjaxBase
             if (!empty($existing)) {
                 wp_update_post([
                     'ID' => $existing[0],
-                    'post_content' => wp_kses_post($content),
+                    'post_content' => $content,
                     'post_title' => $title,
                 ]);
                 $stats['part_skipped']++;
@@ -711,7 +761,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => wp_kses_post($content),
+                    'post_content' => $content,
                     'post_status' => 'publish',
                     'post_type' => 'wp_template_part',
                 ]);
@@ -737,8 +787,13 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        $templates = isset($_POST['templates']) ? json_decode(wp_unslash($_POST['templates']), true) : [];
-        $mapping = isset($_POST['mapping']) ? json_decode(wp_unslash($_POST['mapping']), true) : [];
+        $templates_raw = isset($_POST['templates']) ? wp_unslash($_POST['templates']) : '[]';
+        $mapping_raw = isset($_POST['mapping']) ? wp_unslash($_POST['mapping']) : '[]';
+        
+        $templates = json_decode($templates_raw, true) ?: [];
+        $mapping = json_decode($mapping_raw, true) ?: [];
+        $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
+        $site_url = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
 
         if (!is_array($templates))
             $templates = [];
@@ -754,29 +809,61 @@ class TemplateLibrary extends AjaxBase
             if (empty($slug))
                 continue;
 
+            // Decode and unslash template content
+            $content = $this->decode_content($content);
+            $content = wp_unslash($content);
+
+            // Replace image URLs (if uploads_updated)
+            if ($uploads_updated && !empty($site_url)) {
+                $content = $this->replace_image_urls($content, trailingslashit($site_url));
+            }
+
             foreach ($mapping as $old => $new) {
                 $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
 
-            $existing = get_page_by_path($slug, OBJECT, 'wp_template');
-            if ($existing) {
-                wp_update_post([
-                    'ID' => $existing->ID,
-                    'post_content' => wp_kses_post($content),
+            error_log("FB Import: Template $title, slug $slug, content length: " . strlen($content));
+
+            // Check if template exists for CURRENT THEME
+            $existing = get_posts([
+                'post_type' => 'wp_template',
+                'name' => $slug,
+                'posts_per_page' => 1,
+                'post_status' => 'any',
+                'fields' => 'ids',
+                'tax_query' => [
+                    [
+                        'taxonomy' => 'wp_theme',
+                        'field' => 'slug',
+                        'terms' => get_stylesheet(),
+                    ]
+                ],
+            ]);
+
+            if (!empty($existing)) {
+                $update_res = wp_update_post([
+                    'ID' => $existing[0],
+                    'post_content' => $content,
                     'post_title' => $title,
                 ]);
-                $skipped++;
+                if ($update_res) {
+                    $skipped++;
+                } else {
+                    error_log("FB Import Error: Failed to update template $slug (ID: {$existing[0]})");
+                }
             } else {
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => wp_kses_post($content),
+                    'post_content' => $content,
                     'post_status' => 'publish',
                     'post_type' => 'wp_template',
                 ]);
                 if (!is_wp_error($id)) {
                     wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
                     $created++;
+                } else {
+                    error_log("FB Import Error: Failed to insert template $slug - " . $id->get_error_message());
                 }
             }
         }
@@ -794,12 +881,24 @@ class TemplateLibrary extends AjaxBase
         $this->check_permission();
 
         $title = sanitize_text_field($_POST['title'] ?? '');
-        $content = wp_unslash($_POST['content'] ?? '');
+        $content_raw = $_POST['content'] ?? '';
+        
+        // Decode BEFORE unslashing
+        $content = $this->decode_content($content_raw);
+        $content = wp_unslash($content);
+
         $slug = sanitize_title($_POST['slug'] ?? '');
         $template = sanitize_text_field($_POST['template'] ?? '');
+        $uploads_updated = isset($_POST['uploads_updated']) ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
+        $site_url = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
 
         if (empty($title)) {
             wp_send_json_error(['message' => 'Post title is required']);
+        }
+
+        // Replace image URLs (if uploads_updated)
+        if ($uploads_updated && !empty($site_url)) {
+            $content = $this->replace_image_urls($content, trailingslashit($site_url));
         }
 
         // Slug generate if empty
@@ -825,7 +924,7 @@ class TemplateLibrary extends AjaxBase
         $post_id = wp_insert_post([
             'post_title' => $title,
             'post_name' => $slug,
-            'post_content' => wp_kses_post($content),
+            'post_content' => $content,
             'post_status' => 'publish',
             'post_type' => 'post',
             'post_date' => current_time('mysql'),

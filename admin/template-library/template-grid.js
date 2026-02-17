@@ -106,13 +106,6 @@ const TemplateGrid = ({
 
 
     const handleFullSiteImport = useCallback(async (id) => {
-        const siteResp = await getTemplatesData("import/site", "site_id", 41);
-        console.log(siteResp);
-        console.log("Hello world");
-        return false;
-
-
-
         if (!userData?.email) {
             setIsLoginModalOpen(true);
             return;
@@ -435,7 +428,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                // handleFullSiteImport(id);
+                                handleFullSiteImport(id);
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -447,14 +440,14 @@ const TemplateGrid = ({
                                     importPage(id);
                                 } else if (templateData.type === 'sites') {
                                     // console.log('sites');
-                                    // handleFullSiteImport();
+                                    handleFullSiteImport();
                                 }
                             }
                         }}
 
                         disabled={isImporting}
                     >
-                        {activeTab === 'sites' ? <span>Coming Soon</span> : <span>Import</span>}
+                        <span>Import</span>
                     </button>
                     <button
                         className={`fb-template-save-my-cloud ${isProPlugin && saveLoading ? "loading" : ""}`}
