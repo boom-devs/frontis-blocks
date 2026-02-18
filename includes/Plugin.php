@@ -28,7 +28,7 @@ final class Plugin
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.8';
+	const VERSION = '1.1.9';
 
 	/**
 	 * Plugin slug
