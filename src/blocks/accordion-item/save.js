@@ -39,11 +39,9 @@ const save = ({ attributes }) => {
         accordionItemGlobalWraperClass,
     } = attributes;
 
-
     const blockProps = useBlockProps.save({
         className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
     });
-
 
     return (
         <>
