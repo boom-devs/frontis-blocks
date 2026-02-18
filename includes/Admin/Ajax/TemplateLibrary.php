@@ -544,6 +544,10 @@ class TemplateLibrary extends AjaxBase
                 // Content sometimes has trailing garbage if regex was too greedy
                 $relative_path = rtrim($relative_path, '"\'\\ ');
                 
+                // FIX MULTISITE PATHS: Remove 'sites/14/' etc. from the path
+                // This covers both normal slashes and escaped slashes
+                $relative_path = preg_replace('/^sites(?:\/|\\\\\/)\d+(?:\/|\\\\\/)/', '', $relative_path);
+
                 $local_url = $local_upload_base . $relative_path;
                 
                 // If the original was escaped, the replacement should be too
