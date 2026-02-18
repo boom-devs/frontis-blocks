@@ -45,73 +45,73 @@ export default function save( props ) {
 
 	const blockProps = useBlockProps.save();
 
-		const swiperSettings = JSON.stringify({
-			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-			...(sliderType === 'carousel' && {
-				breakpoints: {
-				0: {
-					slidesPerView: carouselPerColumn?.Mobile || 1,
-					spaceBetween: carouselPerColumnGap?.Mobile || 10,
-				},
-				768: {
-					slidesPerView: carouselPerColumn?.Tablet || 2,
-					spaceBetween: carouselPerColumnGap?.Tablet || 15,
-				},
-				1025: {
-					slidesPerView: carouselPerColumn?.Desktop || 3,
-					spaceBetween: carouselPerColumnGap?.Desktop || 20,
-				},
-				},
-			}),
+	const swiperSettings = JSON.stringify({
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+		...(sliderType === 'carousel' && {
+			breakpoints: {
+			0: {
+				slidesPerView: carouselPerColumn?.Mobile || 1,
+				spaceBetween: carouselPerColumnGap?.Mobile || 10,
+			},
+			768: {
+				slidesPerView: carouselPerColumn?.Tablet || 2,
+				spaceBetween: carouselPerColumnGap?.Tablet || 15,
+			},
+			1025: {
+				slidesPerView: carouselPerColumn?.Desktop || 3,
+				spaceBetween: carouselPerColumnGap?.Desktop || 20,
+			},
+			},
+		}),
 
-			loop: loop,
-			autoplay: autoplay ? {
-				delay: autoplaySpeed,
-				pauseOnMouseEnter: pauseOnHover,
-				disableOnInteraction: false,
-				stopOnLastSlide: stopOnLastSlide,
-				reverseDirection: reverseDirection,
-			} : false,
-			speed: transitionSpeed,
-			allowTouchMove: allowTouchMove,
-			mousewheel: enableMouseWheel,
+		loop: loop,
+		autoplay: autoplay ? {
+			delay: autoplaySpeed,
+			pauseOnMouseEnter: pauseOnHover,
+			disableOnInteraction: false,
+			stopOnLastSlide: stopOnLastSlide,
+			reverseDirection: reverseDirection,
+		} : false,
+		speed: transitionSpeed,
+		allowTouchMove: allowTouchMove,
+		mousewheel: enableMouseWheel,
 
-			keyboard: enableKeyboardNavigation ? {
-				enabled: true,
-				onlyInViewport: true,
-				pageUpDown: false,
-			} : false,
+		keyboard: enableKeyboardNavigation ? {
+			enabled: true,
+			onlyInViewport: true,
+			pageUpDown: false,
+		} : false,
 
-			// Add navigation if enabled
-			...(displayArrows && {
-				navigation: {
-					nextEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-next`,
-					prevEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-prev`,
-				},
-			}),
+		// Add navigation if enabled
+		...(displayArrows && {
+			navigation: {
+				nextEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-next`,
+				prevEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-prev`,
+			},
+		}),
 
-			// Add pagination if enabled
-			...(displayDots && {
-				pagination: {
-					el: `.fb-slider-container[data-block-id="${blockID}"] .swiper-pagination`,
-					clickable: true,
-					type: paginationType || 'bullets',
-					renderBullet: (index, className) =>
-						`<button class="${className}" aria-label="Go to slide ${index + 1}" ${
-						  index === 0 ? 'aria-current="true"' : ''
-						}></button>`,
-				},
-			}),
-			
-			// Creative effect settings if needed
-			...(slideEffect === 'creative' && {
-				creativeEffect: {
-					prev: { shadow: true, translate: [0, 0, -400] },
-					next: { translate: ['100%', 0, 0] },
-				},
-			}),
-			
-		});
+		// Add pagination if enabled
+		...(displayDots && {
+			pagination: {
+				el: `.fb-slider-container[data-block-id="${blockID}"] .swiper-pagination`,
+				clickable: true,
+				type: paginationType || 'bullets',
+				renderBullet: (index, className) =>
+					`<button class="${className}" aria-label="Go to slide ${index + 1}" ${
+						index === 0 ? 'aria-current="true"' : ''
+					}></button>`,
+			},
+		}),
+		
+		// Creative effect settings if needed
+		...(slideEffect === 'creative' && {
+			creativeEffect: {
+				prev: { shadow: true, translate: [0, 0, -400] },
+				next: { translate: ['100%', 0, 0] },
+			},
+		}),
+		
+	});
 
 	return (
 		<div
