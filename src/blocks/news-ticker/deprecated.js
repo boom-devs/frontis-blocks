@@ -1,5 +1,6 @@
 import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
 import attributes from './attributes.js';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 const v1_0_3 = {
     attributes,
