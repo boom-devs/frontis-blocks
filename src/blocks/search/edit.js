@@ -10,6 +10,7 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const { 
 		blockID, 
+		blockStyle,
 		searchActive,
 		searchIcon,
 		searchIconAlign,
@@ -83,6 +84,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 			<div className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`} onClick={() => setAttributes({ searchActive: false })}></div>
 		</div>
+		<style>{blockStyle}</style>
 		</>
 	);
 }

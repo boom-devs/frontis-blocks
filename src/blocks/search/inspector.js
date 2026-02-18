@@ -582,9 +582,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	return (
 		<>
-			<style>
-				{editorStyle}
-			</style>
 			<InspectorControls key="controls">
 				<div className="fb-inspector-control">
 					<TabPanel
