@@ -33,7 +33,7 @@ const save = ({ attributes }) => {
 
 
     const blockProps = useBlockProps.save({
-        className: `frontis-forms-textarea-field-wrapper frontis-forms-field-group frontis-forms-form-group ${blockID}`,
+        className: `fb-textarea-field-wrapper fb-field-group fb-form-group ${blockID}`,
     });
 
     const mergeFieldLabelSwitcher = fieldLabelSwitcher !== null ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
@@ -46,28 +46,28 @@ const save = ({ attributes }) => {
 
     return (
         <>
-            <style>
+            {/* <style>
                 {`
                     ${blockStyle}
                 `}
-            </style>
+            </style> */}
 
             <div {...blockProps}>
-                <div className={`frontis-forms-form-group-wrapper frontis-forms-field-group-wrapper ${textareaFieldGlobalWraperClass && textareaFieldGlobalWraperClass}`} id={textareaFieldGlobalWraperID}>
+                <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textareaFieldGlobalWraperClass && textareaFieldGlobalWraperClass}`} id={textareaFieldGlobalWraperID}>
                     {mergeFieldLabelSwitcher && (
-                        <div className="frontis-forms-field-label-wrapper frontis-forms-form-label-wrapper">
+                        <div className="fb-field-label-wrapper fb-form-label-wrapper">
                             <RichText.Content
                                 tagName="label"
-                                className="frontis-forms-form-label frontis-forms-field-label"
+                                className="fb-form-label fb-field-label"
                                 value={fieldLabel ? fieldLabel : 'Message'}
                             />
                             {mergeFieldRequiredSwitcher && mergeFieldRequiredSymbolSwitcher && (
-                                <span className="frontis-forms-required-symbol">*</span>
+                                <span className="fb-required-symbol">*</span>
                             )}
                         </div>
                     )}
-                    <div className="frontis-forms-field-input-wrapper frontis-forms-form-input-wrapper">
-                        <div className="frontis-forms-form-input frontis-forms-field-input">
+                    <div className="fb-field-input-wrapper fb-form-input-wrapper">
+                        <div className="fb-form-input fb-field-input">
                             <textarea
                                 placeholder={fieldPlaceholder ? fieldPlaceholder : `Enter your message here`}
                                 name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
@@ -75,13 +75,13 @@ const save = ({ attributes }) => {
                                 required={mergeFieldRequiredSwitcher ? true : false}
                             />
                             {mergeFieldIconSwitcher && fieldIcon && (
-                                <span className="frontis-forms-field-icon">
+                                <span className="fb-field-icon">
                                     {renderSVG(fieldIcon)}
                                 </span>
                             )}
                         </div>
                         {mergeFieldRequiredSwitcher && (
-                            <div className="frontis-forms-field-required-text frontis-forms-help-text frontis-forms-hide">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
+                            <div className="fb-field-required-text fb-help-text fb-hide">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
                         )}
                     </div>
                 </div>

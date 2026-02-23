@@ -4,7 +4,7 @@ $background_color: #dcdcde;
 $white_color: #ffffff;
 
 
-.frontis-forms-accordion-item-image-upload-wrapper {
+.fb-accordion-item-image-upload-wrapper {
 	.components-base-control__field {
 		position: relative;
 
@@ -30,26 +30,29 @@ $white_color: #ffffff;
 		}
 	}
 }
-.frontis-forms-accordion-item-title-wrapper {
-    background: #EBF5FF;
-    display: flex;
-    align-items: center;
+
+.fb-accordion-item-title-wrapper {
+	background: #EBF5FF;
+	display: flex;
+	align-items: center;
 	justify-content: space-between;
-    flex-direction: row;
-    cursor: pointer;
-    gap: 16px;
-    padding: 20px 20px 20px 20px;
-    border-style: none;
-    border-width: 0px 0px 0px 0px;
-    border-radius: 8px 8px 8px 8px;
-    transition: all .3s ease-in-out;
+	flex-direction: row;
+	cursor: pointer;
+	gap: 16px;
+	padding: 20px 20px 20px 20px;
+	border-style: none;
+	border-width: 0px 0px 0px 0px;
+	border-radius: 8px 8px 8px 8px;
+	transition: all .3s ease-in-out;
 }
-.frontis-forms-accordion-title-inner {
-    display: inline-flex;
-    align-items: center;
-    gap: 20px;
+
+.fb-accordion-title-inner {
+	display: inline-flex;
+	align-items: center;
+	gap: 20px;
 }
-.frontis-forms-accordion-icon {
+
+.fb-accordion-icon {
 	width: 22px;
 	height: 22px;
 
@@ -58,4 +61,3 @@ $white_color: #ffffff;
 		height: 100%;
 	}
 }
-
