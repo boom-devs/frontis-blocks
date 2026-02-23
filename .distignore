@@ -65,7 +65,28 @@ vendor-bundle/index.js.map
 vendor-bundle/style.css
 verdor-bundle/style.css.map
 
-.wordpress-org
+
+.idea
+.agent
+.agents
+_agent
+_agents
+
+# Source & dev directories
+src
+admin
+
+# Additional webpack configs
+webpack.blocks.config.js
+webpack.config.admin.js
+webpack.zip.js
+
+# Dev-only files
+log
+full-site.json
+testing-page.json
+frontis-blocks.zip
+
 # dev tools
 tools
 *.log
