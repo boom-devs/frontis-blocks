@@ -40,17 +40,17 @@ const v1_0_3 = {
         } = attributes;
 
         const blockProps = useBlockProps.save({
-            className: `frontis-forms-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
+            className: `fb-accordion-item-main-wrapper ${parentBlockID} ${blockID}`,
         });
 
         return (
             <>
                 <div {...blockProps}>
-                    <div className={`frontis-forms-accordion-item-wrapper ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
-                        <div className={`frontis-forms-accordion-item-title-wrapper ${parentBlockID}`}>
-                            <div className={`frontis-forms-accordion-title-inner`}>
+                    <div className={`fb-accordion-item-wrapper ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} data-id={parentBlockID}>
+                        <div className={`fb-accordion-item-title-wrapper ${parentBlockID}`}>
+                            <div className={`fb-accordion-title-inner`}>
                                 {titlePrefixType !== 'none' && (
-                                    <div className="frontis-forms-accordion-title-prefix">
+                                    <div className="fb-accordion-title-prefix">
                                         {titlePrefixType === 'icon' && titlePrefixIcon && (
                                             renderSVG(titlePrefixIcon)
                                         )}
@@ -67,11 +67,11 @@ const v1_0_3 = {
                                 <RichText.Content
                                     value={title}
                                     tagName={inheritedTagName}
-                                    className="frontis-forms-accordion-title"
+                                    className="fb-accordion-title"
                                 />
 
                                 {titleSuffixType !== 'none' && (
-                                    <div className="frontis-forms-accordion-title-suffix">
+                                    <div className="fb-accordion-title-suffix">
 
                                         {titleSuffixType === 'icon' && titleSuffixIcon && (
                                             renderSVG(titleSuffixIcon)
@@ -87,22 +87,22 @@ const v1_0_3 = {
                                 )}
                             </div>
                             {inheritedDisplayIcon && 
-                                <div className="frontis-forms-accordion-tab-icon">
+                                <div className="fb-accordion-tab-icon">
                                     {inheritedTabIconSwitcher === 'icon' && inheritedTabIcon && renderSVG(inheritedTabIcon)}
                                     {inheritedTabIconSwitcher === 'image' && inheritedTabIcon && <img src={inheritedTabImageUrl}/>}
                                 </div>
                             }
                             {inheritedDisplayIcon && 
-                                <div className="frontis-forms-accordion-expanded-icon">
+                                <div className="fb-accordion-expanded-icon">
                                     {inheritedExpandedIconSwitcher === 'icon' && inheritedExpandedIcon && renderSVG(inheritedExpandedIcon)}
                                     {inheritedExpandedIconSwitcher === 'image' && inheritedExpandedIcon && <img src={inheritedExpandedImageUrl}/>}
                                 </div>
                             }
                         </div>
                         <div
-                            className={`frontis-forms-accordion-content-wrapper ${parentBlockID}`}
+                            className={`fb-accordion-content-wrapper ${parentBlockID}`}
                         >
-                            <div className="frontis-forms-accordion-content">
+                            <div className="fb-accordion-content">
                                 <InnerBlocks.Content />
                             </div>
                         </div>

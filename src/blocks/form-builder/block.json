@@ -5,7 +5,6 @@
 	"version": "1.0.0",
 	"title": "Form Builder",
 	"category": "frontis-blocks",
-	"render": "file:./render.php",
 	"textdomain": "frontis-blocks",
 	"description": "A customizable form builder block for organizing content in a collapsible format.",
 	"example": {},

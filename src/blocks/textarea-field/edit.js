@@ -5,8 +5,10 @@ import { __ } from "@wordpress/i18n";
 import { useBlockProps, RichText, } from "@wordpress/block-editor";
 import { useRef, memo , useEffect, useMemo} from "@wordpress/element";
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import generateTextareaFieldStyle from "./styling";
 
 
 const Edit = (props) => {
@@ -14,6 +16,7 @@ const Edit = (props) => {
 
     const {
         blockID,
+        blockStyle,
 
         // general
         fieldLabelSwitcher,
@@ -38,6 +41,23 @@ const Edit = (props) => {
 
     } = attributes;
 
+    // Generate Block ID
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-textarea-field',
+        isSelected,
+        attributes,
+        setAttributes
+    });
+
+    // Generate Dynamic Styles
+    useEffect(() => {
+        const styles = generateTextareaFieldStyle(attributes);
+        if (blockStyle !== styles) {
+            setAttributes({ blockStyle: styles });
+        }
+    }, [attributes, blockID]);
 
     useEffect(() => {
         setAttributes({
@@ -56,7 +76,7 @@ const Edit = (props) => {
     ])
 
     const blockProps = useBlockProps({
-        className: `frontis-forms-textarea-field-wrapper frontis-forms-field-group frontis-forms-form-group ${blockID}`,
+        className: `fb-textarea-field-wrapper fb-field-group fb-form-group ${blockID}`,
     });
 
     const mergeFieldLabelSwitcher = fieldLabelSwitcher !== null ? fieldLabelSwitcher : inheritedFieldLabelSwitcher;
@@ -89,23 +109,23 @@ const Edit = (props) => {
             <Inspector {...props} />
 
             <div {...blockProps}>
-                <div className={`frontis-forms-form-group-wrapper frontis-forms-field-group-wrapper ${textareaFieldGlobalWraperClass && textareaFieldGlobalWraperClass}`} id={textareaFieldGlobalWraperID}>
+                <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textareaFieldGlobalWraperClass && textareaFieldGlobalWraperClass}`} id={textareaFieldGlobalWraperID}>
                     {mergeFieldLabelSwitcher && (
-                        <div className="frontis-forms-field-label-wrapper frontis-forms-form-label-wrapper">
+                        <div className="fb-field-label-wrapper fb-form-label-wrapper">
                             <RichText
                                 tagName="label"
-                                className="frontis-forms-form-label frontis-forms-field-label"
+                                className="fb-form-label fb-field-label"
                                 value={fieldLabel ? fieldLabel : 'Message'}
                                 placeholder={__('Label', 'frontis-forms')}
                                 onChange={(value) => setAttributes({ fieldLabel: value })}
                             />
                             {mergeFieldRequiredSwitcher && mergeFieldRequiredSymbolSwitcher && (
-                                <span className="frontis-forms-required-symbol">*</span>
+                                <span className="fb-required-symbol">*</span>
                             )}
                         </div>
                     )}
-                    <div className="frontis-forms-field-input-wrapper frontis-forms-form-input-wrapper">
-                        <div className="frontis-forms-form-input frontis-forms-field-input">
+                    <div className="fb-field-input-wrapper fb-form-input-wrapper">
+                        <div className="fb-form-input fb-field-input">
                             <textarea
                                 placeholder={fieldPlaceholder ? fieldPlaceholder : `Enter your message here`}
                                 name={fieldCustomNameAttribute ? fieldCustomNameAttribute : defaultNameAttribute}
@@ -113,17 +133,19 @@ const Edit = (props) => {
                                 required={mergeFieldRequiredSwitcher ? true : false}
                             />
                             {mergeFieldIconSwitcher && fieldIcon && (
-                                <span className="frontis-forms-field-icon">
+                                <span className="fb-field-icon">
                                     {renderSVG(fieldIcon)}
                                 </span>
                             )}
                         </div>
                         {mergeFieldRequiredSwitcher && (
-                            <div className="frontis-forms-field-required-text frontis-forms-help-text">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
+                            <div className="fb-field-required-text fb-help-text">{fieldRequiredText ? fieldRequiredText : 'This field is required'}</div>
                         )}
                     </div>
                 </div>
             </div>
+
+            <style>{blockStyle}</style>
         </>
     );
 }

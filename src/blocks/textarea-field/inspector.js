@@ -245,7 +245,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
     useEffect(() => {
         if (clientId && typeof clientId === 'string') {
             setAttributes({
-                blockID: "frontis-forms-field-" + clientId.slice(0, 8),
+                blockID: "fb-field-" + clientId.slice(0, 8),
             });
         }
     }, [clientId]);
@@ -926,7 +926,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     const fbfieldItemStyle = useMemo(
         () => `
-            .frontis-forms-textarea-field-wrapper.${blockID} {
+            .fb-textarea-field-wrapper.${blockID} {
                 position: relative;
                 width: 100%;
                 ${inputFieldMaxWidth?.Desktop ? `max-width: ${inputFieldMaxWidth?.Desktop}${inputFieldMaxWidthUnits?.Desktop};` : ''}
@@ -934,7 +934,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				${fieldOverflow !== 'default' ? `overflow: ${fieldOverflow};` : ''}
             }
             
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-group-wrapper {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-group-wrapper {
                 position: relative;
 				${
                     fieldBgType === "gradient"
@@ -962,7 +962,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				transition: all 0.3s ease-in-out;
             }
         
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-label-wrapper {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-label-wrapper {
                 display: flex;
                 align-items: start;
                 gap: 5px;
@@ -987,24 +987,24 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 				${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Desktop ? `line-height: ${labelLineHeight?.Desktop}${labelLineHeightUnits?.Desktop};` : ''}
 				
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-label-wrapper .frontis-forms-form-label {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-label-wrapper .fb-form-label {
                 ${labelColor ? `color: ${labelColor};` : ''}
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-label-wrapper .frontis-forms-required-symbol {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-label-wrapper .fb-required-symbol {
                 ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
             }
         
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper {
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                 position: relative;
                 display: flex;
                 ${inputFieldIconGap?.Desktop ? `gap: ${inputFieldIconGap?.Desktop}${inputFieldIconGapUnits?.Desktop};` : ''}
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea::placeholder {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea::placeholder {
                 ${inputFieldPlaceholderColor ? `color: ${inputFieldPlaceholderColor};` : ''}
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea:focus {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea:focus {
                 box-shadow: none;
                 outline: none;
                 ${inputFieldFocusColor ? `color: ${inputFieldFocusColor};` : ''}
@@ -1029,10 +1029,10 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 ${inputFieldBoxShadowFocusCssValue ? `box-shadow: ${inputFieldBoxShadowFocusCssValue};` : ""}
                 transition: all 0.3s ease-in-out;
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea:focus::placeholder {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea:focus::placeholder {
                 ${inputFieldPlaceholderFocusColor ? `color: ${inputFieldPlaceholderFocusColor};` : ''}
             }
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea {
                 box-sizing: border-box;
                 width: 100%;
                 ${inputFieldHeight?.Desktop ? `height: ${inputFieldHeight?.Desktop}${inputFieldHeightUnits?.Desktop};` : ''}
@@ -1086,7 +1086,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 transition: all 0.3s ease-in-out;
             }
 
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-field-required-text {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                 ${labelRequiredColor ? `color: ${labelRequiredColor};` : ''}
 
                 ${inputFieldGlobalTypoSwitcher?.fontFamily === true && inputFieldGlobalTypographyData?.fontFamily ? `font-family: ${inputFieldGlobalTypographyData?.fontFamily};` : ''}
@@ -1109,25 +1109,25 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
             }
 
-            .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input .frontis-forms-field-icon {
+            .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
                 display: flex;
                 ${inputFieldIconSize?.Desktop ? `width: ${inputFieldIconSize?.Desktop}${inputFieldIconSizeUnits?.Desktop};` : ''}
             }
         
             @media only screen and (max-width: 1024px) {
-                .frontis-forms-textarea-field-wrapper.${blockID} {
+                .fb-textarea-field-wrapper.${blockID} {
                     position: relative;
                     ${fieldZIndex?.Tablet ? `z-index: ${fieldZIndex?.Tablet};` : ''}
                 }
                 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-group-wrapper {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-group-wrapper {
                     ${fieldPaddingTabletWidth && fieldPaddingTablet?.top ? `padding: ${fieldPaddingTabletWidth};` : ''}
                     ${fieldMarginTabletWidth && fieldMarginTablet?.top ? `margin: ${fieldMarginTabletWidth};` : ''}
                     ${fieldBorderTabletWidth && fieldBorderTablet?.top ? `border-width: ${fieldBorderTabletWidth};` : ''}
                     ${fieldBorderRadiusTabletWidth && fieldBorderRadiusTablet?.top ? `border-radius: ${fieldBorderRadiusTabletWidth};` : ''}
                 }
             
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-label-wrapper {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-label-wrapper {
                     ${labelMarginTabletWidth && labelMarginTablet?.top ? `margin: ${labelMarginTabletWidth};` : ''}
 
                     ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Tablet ? `font-size: ${labelFontSize?.Tablet}${labelFontSizeUnits?.Tablet};` : ''}
@@ -1135,22 +1135,22 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Tablet ? `line-height: ${labelLineHeight?.Tablet}${labelLineHeightUnits?.Tablet};` : ''}
                     
                 }
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                     ${inputFieldIconGap?.Tablet ? `gap: ${inputFieldIconGap?.Tablet}${inputFieldIconGapUnits?.Tablet};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input .frontis-forms-field-icon {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
                     ${inputFieldIconSize?.Tablet ? `width: ${inputFieldIconSize?.Tablet}${inputFieldIconSizeUnits?.Tablet};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea,
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-field-required-text {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                     ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Tablet ? `font-size: ${inputFieldFontSize?.Tablet}${inputFieldFontSizeUnits?.Tablet};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Tablet ? `letter-spacing: ${inputFieldLetterSpacing?.Tablet}${inputFieldLetterSpacingUnits?.Tablet};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Tablet ? `line-height: ${inputFieldLineHeight?.Tablet}${inputFieldLineHeightUnits?.Tablet};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea {
                     ${inputFieldHeight?.Tablet ? `height: ${inputFieldHeight?.Tablet}${inputFieldHeightUnits?.Tablet};` : ''}
                     
                     ${inputFieldBorderTabletWidth && inputFieldBorderTablet?.top ? `border-width: ${inputFieldBorderTabletWidth};` : ''}
@@ -1162,19 +1162,19 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             }
         
             @media only screen and (max-width: 767px) {
-                .frontis-forms-textarea-field-wrapper.${blockID} {
+                .fb-textarea-field-wrapper.${blockID} {
                     position: relative;
                     ${fieldZIndex?.Mobile ? `z-index: ${fieldZIndex?.Mobile};` : ''}
                 }
                 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-group-wrapper {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-group-wrapper {
                     ${fieldPaddingMobileWidth && fieldPaddingMobile?.top ? `padding: ${fieldPaddingMobileWidth};` : ''}
                     ${fieldMarginMobileWidth && fieldMarginMobile?.top ? `margin: ${fieldMarginMobileWidth};` : ''}
                     ${fieldBorderMobileWidth && fieldBorderMobile?.top ? `border-width: ${fieldBorderMobileWidth};` : ''}
                     ${fieldBorderRadiusMobileWidth && fieldBorderRadiusMobile?.top ? `border-radius: ${fieldBorderRadiusMobileWidth};` : ''}
                 }
             
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-label-wrapper {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-label-wrapper {
                     ${labelMarginMobileWidth && labelMarginMobile?.top ? `margin: ${labelMarginMobileWidth};` : ''}
 
                     ${labelGlobalTypoSwitcher?.fontSize === false && labelFontSize?.Mobile ? `font-size: ${labelFontSize?.Mobile}${labelFontSizeUnits?.Mobile};` : ''}
@@ -1182,22 +1182,22 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     ${labelGlobalTypoSwitcher?.lineHeight === false && labelLineHeight?.Mobile ? `line-height: ${labelLineHeight?.Mobile}${labelLineHeightUnits?.Mobile};` : ''}
                     
                 }
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input {
                     ${inputFieldIconGap?.Mobile ? `gap: ${inputFieldIconGap?.Mobile}${inputFieldIconGapUnits?.Mobile};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input .frontis-forms-field-icon {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input .fb-field-icon {
                     ${inputFieldIconSize?.Mobile ? `width: ${inputFieldIconSize?.Mobile}${inputFieldIconSizeUnits?.Mobile};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea,
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-field-required-text {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea,
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-field-required-text {
                     ${inputFieldGlobalTypoSwitcher?.fontSize === false && inputFieldFontSize?.Mobile ? `font-size: ${inputFieldFontSize?.Mobile}${inputFieldFontSizeUnits?.Mobile};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.letterSpacing === false && inputFieldLetterSpacing?.Mobile ? `letter-spacing: ${inputFieldLetterSpacing?.Mobile}${inputFieldLetterSpacingUnits?.Mobile};` : ''}
                     ${inputFieldGlobalTypoSwitcher?.lineHeight === false && inputFieldLineHeight?.Mobile ? `line-height: ${inputFieldLineHeight?.Mobile}${inputFieldLineHeightUnits?.Mobile};` : ''}
                 }
 
-                .frontis-forms-textarea-field-wrapper.${blockID} .frontis-forms-field-input-wrapper .frontis-forms-form-input textarea {
+                .fb-textarea-field-wrapper.${blockID} .fb-field-input-wrapper .fb-form-input textarea {
                     ${inputFieldHeight?.Mobile ? `height: ${inputFieldHeight?.Mobile}${inputFieldHeightUnits?.Mobile};` : ''}
                     
                     ${inputFieldBorderMobileWidth && inputFieldBorderMobile?.top ? `border-width: ${inputFieldBorderMobileWidth};` : ''}
@@ -2025,12 +2025,12 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
      */
     const advancedControls = (
         <>
-            <div className="frontis-forms-setting-advanced-tab-wrapper">
-                <div className="frontis-forms-setting-inner-wrapper">
+            <div className="fb-setting-advanced-tab-wrapper">
+                <div className="fb-setting-inner-wrapper">
                     <PanelBody
                         title={__("Layout", "frontis-forms")}
                         initialOpen={true}
-                        className='frontis-forms-setting-layout-header' 
+                        className='fb-setting-layout-header' 
                     >
                         <FrontisForms_Range
                             min={0}
@@ -2232,7 +2232,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     <PanelBody
                         title={__("Border & Border Radius", "frontis-forms")}
                         initialOpen={false}
-                        className="frontis-forms-setting-border-setting-wrapper"
+                        className="fb-setting-border-setting-wrapper"
                     >
                         <SelectControl
                             label={__("Border Style", "frontis-forms")}
@@ -2331,7 +2331,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     {/* <PanelBody
                         title={__("Responsive Control", "frontis-forms")}
                         initialOpen={false}
-                        className="frontis-forms-setting-responsive-control-wrapper"
+                        className="fb-setting-responsive-control-wrapper"
                     >
                         <FrontisForms_VisibilityControl
                             desktopValue={fieldDesktopSwitcher}

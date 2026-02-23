@@ -81,7 +81,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         if (blockStyle !== styles) {
             setAttributes({ blockStyle: styles });
         }
-    }, [attributes]);
+    }, [attributes, blockID]);
 
 
     const blockProps = useBlockProps({
@@ -132,14 +132,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId}
+                />
+            )}
 
             <div {...blockProps}>
-                <style>{blockStyle}</style>
                 <form
                     className={`fb-parent-wrapper fb-form-builder-wrapper fb-parent-${blockID} ${classHook} ${formGlobalWraperClass}`} id={formGlobalWraperID} ref={panelRef}
                 >
@@ -182,6 +183,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     ) : null}
                 </form>
             </div>
+
+            <style>{blockStyle}</style>
         </>
     );
 }
