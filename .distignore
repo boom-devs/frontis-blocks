@@ -83,6 +83,7 @@ webpack.zip.js
 
 # Dev-only files
 backlog
+RELEASE_NOTES.md
 full-site.json
 testing-page.json
 frontis-blocks.zip
