@@ -10,7 +10,7 @@ node_modules/
 *.tar.gz
 *.zip
 .tags*
-.log/
+backlog/
 .vscode/
 yarn.lock
 build
