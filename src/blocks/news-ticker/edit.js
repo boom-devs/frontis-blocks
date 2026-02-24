@@ -7,9 +7,12 @@ import "./editor.scss";
 
 import Inspector from "./inspector";
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateNewsTickerStyle from "./styling";
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -30,13 +33,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		tickerLabelFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-news-ticker-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-news-ticker',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start load font */
 	useEffect(() => {
@@ -48,6 +53,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		});
 	}, [tickerLabelFontFamily]);
 	/** End load font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateNewsTickerStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	// Generate unique ID for arrows
 	const generatedArrowsId = useMemo(() => {
@@ -68,8 +82,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	// Use the generated/saved ID
 	const finalArrowsId = arrowsUniqueId || generatedArrowsId;
 
-	// console.log(finalArrowsId);
-	// console.log(arrowsUniqueId);
 	const blockProps = useBlockProps({
 		className: `fb-news-ticker-wrapper ${blockID} ${newsTickerDesktopSwitcher && "fb-desktop-responsive"
 			} ${newsTickerTabletSwitcher && "fb-tablet-responsive"} ${newsTickerMobileSwitcher && "fb-mobile-responsive"
@@ -77,11 +89,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps} id={newsTickerGlobalWraperID}>
 				<div className={`fb-news-ticker-inner ${newsTickerGlobalWraperClass}`}>
 					<div className="fb-news-ticker-label-container">

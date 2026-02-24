@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo, memo } from '@wordpress/element';
+import { useEffect, useMemo } from '@wordpress/element';
 import {
     PanelBody,
     BaseControl,
@@ -14,7 +14,7 @@ import {
 import {
     BORDER_STYLES,
     OVERFLOW_OP,
-} from "./constants/constants";
+} from "@Constants/fbConstants";
 
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -33,7 +33,7 @@ import FB_ScaleControl from '@Components/scale-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import './editor.scss';
 
-const Inspector = ({ attributes, setAttributes }) => {
+export default function Inspector({ attributes, setAttributes, clientId }) {
     const {
         blockID,
         // deviceType,
@@ -186,6 +186,14 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType= useDeviceType();
+    
+    useEffect(() => {
+        if (clientId && typeof clientId === 'string') {
+            setAttributes({
+                blockID: "fb-advanced-video-" + clientId.slice(0, 8),
+            });
+        }
+    }, [clientId]);
 
     /** Start border */
     const handleIframeBorderUnitChange = ( event, position ) => {
@@ -968,7 +976,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             ${videoBorder ? `border: ${videoBorder};` : ''}
             ${IframeBorderDesktopWidth && videoBorderDesktop?.top ? `border-width: ${IframeBorderDesktopWidth};` : ''}
             ${IframeBorderRadiusDesktopWidth && videoBorderRadiusDesktop?.top ? `border-radius: ${IframeBorderRadiusDesktopWidth} !important;` : ''}
-            ${videoBorderColor ? `border-color: ${videoBorderColor}` : ''}
+            ${videoBorderColor ? `border-color: ${videoBorderColor};` : ''}
             transition: all .3s ease-in-out;
         }
 
@@ -1923,4 +1931,3 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 }
-export default memo(Inspector);

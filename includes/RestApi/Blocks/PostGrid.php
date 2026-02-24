@@ -341,6 +341,7 @@ class PostGrid
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
         $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
         $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
+        $blockID = isset($_POST['blockID']) ? $_POST['blockID'] : '';
 
         $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
@@ -594,67 +595,73 @@ class PostGrid
                             </div>
 
                             <div class="fb_post_grid_content_wrapper">
-                                <?php if ($show_author_switcher == 'true'): ?>
+                                <?php if ($show_author_switcher == 'true' || $show_date_switcher == 'true'): ?>
                                     <div class="fb_post_grid_author">
-                                        <?php if ($post_author_avatar_switcher == 'true'): ?>
-                                            <div class="fb_post_grid_author_avatar">
-                                                <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                    <a class="fb_post_grid_author_avatar_url"
-                                                        href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                        aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                        <?php
-                                                        echo wp_kses_post(
-                                                            get_avatar(
-                                                                $single_post->post_author,
-                                                                96,
-                                                                '',
-                                                                esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                                array('class' => 'avatar')
-                                                            )
-                                                        ); ?>
-                                                    </a>
-                                                <?php else: ?>
-                                                    <div>
-                                                        <?php
-                                                        echo wp_kses_post(
-                                                            get_avatar(
-                                                                $single_post->post_author,
-                                                                96,
-                                                                '',
-                                                                esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                                array('class' => 'avatar')
-                                                            )
-                                                        ); ?>
+                                        <?php if ($show_author_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_author_wrapper">
+                                                <?php if ($post_author_avatar_switcher == 'true'): ?>
+                                                    <div class="fb_post_grid_author_avatar">
+                                                        <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_author_avatar_url"
+                                                                href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <div>
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </div>
+                                                        <?php endif; ?>
                                                     </div>
                                                 <?php endif; ?>
+                                                <div class="fb_post_grid_author_info">
+                                                    <div class="fb_post_grid_author_info_name">
+                                                        <?php if ($post_author_prefix_switcher == 'true'): ?>
+                                                            <span
+                                                                class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
+                                                        <?php endif; ?>
+                                                        <div class="fb_post_grid_author_name">
+                                                            <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                                <a class="fb_post_grid_author_name_url"
+                                                                    href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                                </a>
+                                                            <?php else: ?>
+                                                                <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
                                         <?php endif; ?>
-                                        <div class="fb_post_grid_author_info">
-                                            <div class="fb_post_grid_author_info_name">
-                                                <?php if ($post_author_prefix_switcher == 'true'): ?>
-                                                    <span
-                                                        class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
-                                                <?php endif; ?>
-                                                <div class="fb_post_grid_author_name">
-                                                    <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                        <a class="fb_post_grid_author_name_url"
-                                                            href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                            aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                            <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
-                                                        </a>
-                                                    <?php else: ?>
-                                                        <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
+                                        <?php if ($show_date_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_date">
+                                                <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
                                             </div>
-                                            <?php if ($show_date_switcher == 'true'): ?>
-                                                <div class="fb_post_grid_date">
-                                                    <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
+                                
 
                                 <?php if ($show_category_switcher == 'true'): ?>
                                     <div class="fb_post_grid_categories">
@@ -854,66 +861,71 @@ class PostGrid
                             </div>
 
                             <div class="fb_post_grid_content_wrapper">
-                                <?php if ($show_author_switcher == 'true'): ?>
+                                <?php if ($show_author_switcher == 'true' || $show_date_switcher == 'true'): ?>
                                     <div class="fb_post_grid_author">
-                                        <?php if ($post_author_avatar_switcher == 'true'): ?>
-                                            <div class="fb_post_grid_author_avatar">
-                                                <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                    <a class="fb_post_grid_author_avatar_url"
-                                                        href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                        aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                        <?php
-                                                        echo wp_kses_post(
-                                                            get_avatar(
-                                                                $single_post->post_author,
-                                                                96,
-                                                                '',
-                                                                esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                                array('class' => 'avatar')
-                                                            )
-                                                        ); ?>
-                                                    </a>
-                                                <?php else: ?>
-                                                    <div>
-                                                        <?php
-                                                        echo wp_kses_post(
-                                                            get_avatar(
-                                                                $single_post->post_author,
-                                                                96,
-                                                                '',
-                                                                esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                                array('class' => 'avatar')
-                                                            )
-                                                        ); ?>
+                                        <?php if ($show_author_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_author_wrapper">
+                                                <?php if ($post_author_avatar_switcher == 'true'): ?>
+                                                    <div class="fb_post_grid_author_avatar">
+                                                        <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_author_avatar_url"
+                                                                href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <div>
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </div>
+                                                        <?php endif; ?>
                                                     </div>
                                                 <?php endif; ?>
+                                                <div class="fb_post_grid_author_info">
+                                                    <div class="fb_post_grid_author_info_name">
+                                                        <?php if ($post_author_prefix_switcher == 'true'): ?>
+                                                            <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
+                                                        <?php endif; ?>
+                                                        <div class="fb_post_grid_author_name">
+                                                            <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                                <a class="fb_post_grid_author_name_url"
+                                                                    href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                                </a>
+                                                            <?php else: ?>
+                                                                <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         <?php endif; ?>
-                                        <div class="fb_post_grid_author_info">
-                                            <div class="fb_post_grid_author_info_name">
-                                                <?php if ($post_author_prefix_switcher == 'true'): ?>
-                                                    <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
-                                                <?php endif; ?>
-                                                <div class="fb_post_grid_author_name">
-                                                    <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                        <a class="fb_post_grid_author_name_url"
-                                                            href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                            aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                            <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
-                                                        </a>
-                                                    <?php else: ?>
-                                                        <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
+                                        <?php if ($show_date_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_date">
+                                                <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
                                             </div>
-                                            <?php if ($show_date_switcher == 'true'): ?>
-                                                <div class="fb_post_grid_date">
-                                                    <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
-                                                </div>
-                                            <?php endif; ?>
-                                        </div>
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
+                                
 
                                 <div class="fb_post_grid_content">
                                     <?php if ($title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>

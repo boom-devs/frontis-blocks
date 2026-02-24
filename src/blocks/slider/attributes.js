@@ -8,7 +8,7 @@ for (let i = 1; i <= slideCount; i++) {
 }
 
 const attributes = {
-	blockId: {
+	blockID: {
 		type: 'string',
 		default: ''
 	},

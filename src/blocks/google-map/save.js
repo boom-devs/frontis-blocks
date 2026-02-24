@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
-        blockId,
+        blockID,
         googleMapLocation,
         googleMapZoomLevel,
         googleMapMapType,
@@ -11,7 +11,7 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-google-map-main-wrapper ${blockId}`,
+        className: `fb-google-map-main-wrapper ${blockID}`,
     });
 
     return (

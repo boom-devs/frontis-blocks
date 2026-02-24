@@ -1135,5 +1135,13 @@ const attributes = {
         type: 'string',
         default: '',
     },
+    showProgressTitle: {
+        type: 'boolean',
+        default: true
+    },
+    showProgressNumber: {
+        type: 'boolean',
+        default: true
+    },
 };
 export default attributes;

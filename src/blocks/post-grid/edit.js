@@ -8,11 +8,14 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 
 import Inspector from "./inspector";
 
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generatePostGridStyle from "./styling";
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         premadeStyle,
         postType,
@@ -89,13 +92,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         buttonFontFamily,
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-post-grid-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-post-grid',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -148,11 +153,20 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     }, [buttonFontFamily]);
     /** End Load Google Font */
 
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generatePostGridStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
     const [allPosts, setAllPosts] = useState([]);
     const [filterCatId, setFilterCatId] = useState(0);
     const [filterTagId, setFilterTagId] = useState(0);
     const blockProps = useBlockProps({
-        className: `fb-post-grid-area ${blockId} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-post-grid-area ${blockID} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
     });
 
     let defaultImageUrl = '';
@@ -355,10 +369,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />  
+            )}
 
             {postLists ? (
                 <div {...blockProps}>
@@ -396,7 +412,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             )}
 
                             <div
-                                className={`fb-parent-wrapper fb_post_grid_container ${blockId} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
+                                className={`fb-parent-wrapper fb_post_grid_container ${blockID} ${postGridGlobalWraperClass} ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`}
                                 id={postGridGlobalWraperID}
                                 ref={panelRef}
                             >

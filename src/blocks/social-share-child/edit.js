@@ -7,7 +7,10 @@ import Inspector from './inspector';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateSocialShareChildStyle from './styling';
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
         blockStyle,
@@ -23,6 +26,25 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialShareChildGlobalWraperClass,
         socialShareChildGlobalWraperID
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-social-share-child',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateSocialShareChildStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     // Function to get SVG string for different networks
     const getIconSvg = (networkId) => {
@@ -97,11 +119,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <div {...blockProps}>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                 <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />  
+            )}
 
             <div className={`social-share-child-container ${socialShareChildGlobalWraperClass}`} id={socialShareChildGlobalWraperID} style={{ textAlign: alignment }}>
                 {socialMediaType && (

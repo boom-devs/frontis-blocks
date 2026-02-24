@@ -16,7 +16,11 @@ import { useDeviceType } from "@Config/displayType";
 import { Rive } from '@rive-app/canvas';
 import Inspector from './inspector';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateRiveAnimationStyle from "./styling";
+
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -32,13 +36,24 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		riveAnimationImageAlt
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-rive-animation',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+	
+	/** Start Generate Block Style */
 	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-rive-animation-" + clientId.slice(0, 8),
-			});
+		if (blockID) {
+			const css = generateRiveAnimationStyle(attributes);
+			setAttributes({ blockStyle: css });
 		}
-	}, [clientId]);
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const deviceType = useDeviceType();
 
@@ -198,10 +213,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector 
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+
+			{isSelected && (
+				<Inspector 
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<BlockControls>
 				<ToolbarGroup>
