@@ -1,5 +1,4 @@
 import { __ } from '@wordpress/i18n';
-<<<<<<< HEAD
 import {
 	useBlockProps,
 	RichText
@@ -8,25 +7,14 @@ import Inspector from './inspector';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 import { useEffect, useState, useRef, useCallback } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
-import './editor.scss';
-
-export default function Edit({ attributes, setAttributes, clientId }) {
-	const {
-		blockId,
-=======
-import { useBlockProps } from '@wordpress/block-editor';
-import Inspector from './inspector';
-import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect } from '@wordpress/element';
-import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
-import generateSearchStyle from "./styling";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateSearchStyle from './styling';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
-	const { 
-		blockID, 
+	const {
+		blockID,
 		blockStyle,
->>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
 		searchActive,
 		searchIcon,
 		searchIconAlign,
@@ -41,21 +29,20 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		searchAppearance
 	} = attributes;
 
-<<<<<<< HEAD
 	const [searchQuery, setSearchQuery] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [showResults, setShowResults] = useState(false);
 	const debounceTimer = useRef(null);
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockId: "fb-search-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-search-block',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 	// Debounced search using apiFetch
 	const handleSearchInput = useCallback((e) => {
 		const query = e.target.value;
@@ -86,16 +73,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 				});
 		}, 350);
 	}, []);
-=======
-	// Handle block ID generation (handles duplication and initial ID)
-	useBlockIdGenerator({
-		clientId,
-		blockID,
-		blockPrefix: 'fb-search',
-		isSelected,
-		attributes,
-		setAttributes,
-	});
 
 	/** Start Generate Block Style */
 	useEffect(() => {
@@ -105,7 +82,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 	}, [attributes, blockID]);
 	/** End Generate Block Style */
->>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
 
 	const blockProps = useBlockProps({
 		className: `fb-search-block ${blockID}`,
@@ -120,10 +96,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 			<div {...blockProps}>
 				<div className={`fb-search-container ${searchGlobalWraperClass}${searchAppearance}`} id={searchGlobalWraperID}>
 					<div className="fb-search-button-wrapper" onClick={handleSearchButtonClick}>
@@ -222,13 +200,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					onClick={() => setAttributes({ searchActive: false })}
 				></div>
 			</div>
-<<<<<<< HEAD
-=======
-
-			<div className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`} onClick={() => setAttributes({ searchActive: false })}></div>
-		</div>
-		<style>{blockStyle}</style>
->>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
+			<style>{blockStyle}</style>
 		</>
 	);
 }

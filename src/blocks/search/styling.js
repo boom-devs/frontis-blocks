@@ -193,7 +193,7 @@ const generateSearchStyle = (attributes) => {
             ${buttonBorderColorHover ? `border-color: ${buttonBorderColorHover};` : ''}
         }
 
-        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field {
             ${searchButtonInputFieldWidth.Desktop && searchButtonInputFieldWidthUnits.Desktop ? `width: ${searchButtonInputFieldWidth.Desktop}${searchButtonInputFieldWidthUnits.Desktop};` : ''}
         }
 
@@ -290,7 +290,7 @@ const generateSearchStyle = (attributes) => {
                 ${buttonPaddingTabletWidth && buttonPaddingTablet?.top ? `padding: ${buttonPaddingTabletWidth};` : ''}
             }
 
-            .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+            .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field {
                 ${searchButtonInputFieldWidth.Tablet && searchButtonInputFieldWidthUnits.Tablet ? `width: ${searchButtonInputFieldWidth.Tablet}${searchButtonInputFieldWidthUnits.Tablet};` : ''}
             }
 
@@ -338,7 +338,7 @@ const generateSearchStyle = (attributes) => {
                 ${buttonPaddingMobileWidth && buttonPaddingMobile?.top ? `padding: ${buttonPaddingMobileWidth};` : ''}
             }
 
-            .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field.active {
+            .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field {
                 ${searchButtonInputFieldWidth.Mobile && searchButtonInputFieldWidthUnits.Mobile ? `width: ${searchButtonInputFieldWidth.Mobile}${searchButtonInputFieldWidthUnits.Mobile};` : ''}
             }
 
