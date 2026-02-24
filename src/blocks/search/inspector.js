@@ -10,6 +10,7 @@ import {
 	ToggleControl,
 	TextareaControl
 } from '@wordpress/components';
+
 /**
  * Internal depencencies
  */
@@ -19,6 +20,8 @@ import {
 	SEARCH_APPEARANCE
 } from '@Constants/fbConstants';
 import Select2 from "react-select";
+
+import { memo } from '@wordpress/element';
 import FB_Range from '@Components/range';
 import FB_Spacing from '@Components/spacing';
 import FB_TypographyControl from '@Components/typography-control';
@@ -28,7 +31,6 @@ import FB_ImageControl from '@Components/image-control';
 import FB_InputControl from '@Components/input-control';
 import FBIconPicker from "../../components/icon-picker";
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from "@Config/displayType";
 import './editor.scss';
 
