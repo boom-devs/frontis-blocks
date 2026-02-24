@@ -12,170 +12,234 @@ import getCustomCss from '@Utils/getCustomCss';
  */
 const generateSearchStyle = (attributes) => {
     const {
-		blockID,
-		searchButtonWidth,
-		searchButtonWidthUnits,
-		searchButtonInputFieldWidth,
-		searchButtonInputFieldWidthUnits,
-		searchIconGap,
-		searchIconGapUnits,
+        blockID,
+        searchButtonWidth,
+        searchButtonWidthUnits,
+        searchButtonInputFieldWidth,
+        searchButtonInputFieldWidthUnits,
+        searchIconGap,
+        searchIconGapUnits,
 
-		buttonTextGlobalTypographyData,
-		buttonTextGlobalTypoSwitcher,
-		buttonTextGlobalTypoType,
-		buttonTextGlobalTypoOption,
-		buttonTextFontFamily,
-		buttonTextFontSize,
-		buttonTextFontSizeUnits,
-		buttonTextFontWeight,
-		buttonTextFontStyle,
-		buttonTextTransform,
-		buttonTextDecoration,
-		buttonTextLetterSpacing,
-		buttonTextLetterSpacingUnits,
-		buttonTextLineHeight,
-		buttonTextLineHeightUnits,
-		
-		buttonTextColorSwitcher,
-		buttonTextColor,
-		buttonTextColorHover,
+        buttonTextGlobalTypographyData,
+        buttonTextGlobalTypoSwitcher,
+        buttonTextGlobalTypoType,
+        buttonTextGlobalTypoOption,
+        buttonTextFontFamily,
+        buttonTextFontSize,
+        buttonTextFontSizeUnits,
+        buttonTextFontWeight,
+        buttonTextFontStyle,
+        buttonTextTransform,
+        buttonTextDecoration,
+        buttonTextLetterSpacing,
+        buttonTextLetterSpacingUnits,
+        buttonTextLineHeight,
+        buttonTextLineHeightUnits,
 
-		buttonBorder,
-		buttonBorderColorSwitcher,
-		buttonBorderColor,
-		buttonBorderColorHover,
+        buttonTextColorSwitcher,
+        buttonTextColor,
+        buttonTextColorHover,
 
-		buttonBorderUnits,
-		buttonBorderDesktop,
-		buttonBorderTablet,
-		buttonBorderMobile,
-		buttonBorderLink,
+        buttonBorder,
+        buttonBorderColorSwitcher,
+        buttonBorderColor,
+        buttonBorderColorHover,
 
-		buttonBorderRadiusUnits,
-		buttonBorderRadiusDesktop,
-		buttonBorderRadiusTablet,
-		buttonBorderRadiusMobile,
-		buttonBorderRadiusLink,
+        buttonBorderUnits,
+        buttonBorderDesktop,
+        buttonBorderTablet,
+        buttonBorderMobile,
+        buttonBorderLink,
 
-		buttonPaddingUnits,
-		buttonPaddingDesktop,
-		buttonPaddingTablet,
-		buttonPaddingMobile,
-		buttonPaddingLink,
+        buttonBorderRadiusUnits,
+        buttonBorderRadiusDesktop,
+        buttonBorderRadiusTablet,
+        buttonBorderRadiusMobile,
+        buttonBorderRadiusLink,
 
-		searchIconAlign,
-		searchIcon,
-		searchIconImageUrl,
-		searchIconImageAlt,
-		searchIconImageID,
-		searchIconImageWidth,
-		searchIconImageWidthUnits,
-		searchIconImageHeight,
-		searchIconImageHeightUnits,
-		searchIconImageDisplay,
+        buttonPaddingUnits,
+        buttonPaddingDesktop,
+        buttonPaddingTablet,
+        buttonPaddingMobile,
+        buttonPaddingLink,
 
-		/** Start Icon Styles */
-		searchIconSize,
-		searchIconSizeUnits,
-		searchIconColorSwitcher,
-		searchIconColor,
-		searchIconHoverColor,
+        searchIconAlign,
+        searchIcon,
+        searchIconImageUrl,
+        searchIconImageAlt,
+        searchIconImageID,
+        searchIconImageWidth,
+        searchIconImageWidthUnits,
+        searchIconImageHeight,
+        searchIconImageHeightUnits,
+        searchIconImageDisplay,
 
-		searchIconRotateSwitcher,
-		searchIconRotate,
-		searchIconRotateHover,
-		searchIconImageRotateSwitcher,
-		searchIconImageRotate,
-		searchIconImageRotateHover,
-		/** End Icon Styles */
+        /** Start Icon Styles */
+        searchIconSize,
+        searchIconSizeUnits,
+        searchIconColorSwitcher,
+        searchIconColor,
+        searchIconHoverColor,
 
-		/** Start Input Field Typography */
-		inputFieldTextGlobalTypographyData,
-		inputFieldTextGlobalTypoSwitcher,
-		inputFieldTextGlobalTypoType,
-		inputFieldTextGlobalTypoOption,
-		inputFieldTextFontFamily,
-		inputFieldTextFontSize,
-		inputFieldTextFontSizeUnits,
-		inputFieldTextFontWeight,
-		inputFieldTextFontStyle,
-		inputFieldTextTransform,
-		inputFieldTextDecoration,
-		inputFieldTextLetterSpacing,
-		inputFieldTextLetterSpacingUnits,
-		inputFieldTextLineHeight,
-		inputFieldTextLineHeightUnits,
-		
-		inputFieldTextColorSwitcher,
-		inputFieldTextColor,
-		inputFieldTextColorHover,
+        searchIconRotateSwitcher,
+        searchIconRotate,
+        searchIconRotateHover,
+        searchIconImageRotateSwitcher,
+        searchIconImageRotate,
+        searchIconImageRotateHover,
+        /** End Icon Styles */
 
-		inputFieldBorder,
-		inputFieldBorderColorSwitcher,
-		inputFieldBorderColor,
-		inputFieldBorderColorHover,
+        /** Start Input Field Typography */
+        inputFieldTextGlobalTypographyData,
+        inputFieldTextGlobalTypoSwitcher,
+        inputFieldTextGlobalTypoType,
+        inputFieldTextGlobalTypoOption,
+        inputFieldTextFontFamily,
+        inputFieldTextFontSize,
+        inputFieldTextFontSizeUnits,
+        inputFieldTextFontWeight,
+        inputFieldTextFontStyle,
+        inputFieldTextTransform,
+        inputFieldTextDecoration,
+        inputFieldTextLetterSpacing,
+        inputFieldTextLetterSpacingUnits,
+        inputFieldTextLineHeight,
+        inputFieldTextLineHeightUnits,
 
-		inputFieldBorderUnits,
-		inputFieldBorderDesktop,
-		inputFieldBorderTablet,
-		inputFieldBorderMobile,
-		inputFieldBorderLink,
+        inputFieldTextColorSwitcher,
+        inputFieldTextColor,
+        inputFieldTextColorHover,
 
-		inputFieldBorderRadiusUnits,
-		inputFieldBorderRadiusDesktop,
-		inputFieldBorderRadiusTablet,
-		inputFieldBorderRadiusMobile,
-		inputFieldBorderRadiusLink,
+        inputFieldBorder,
+        inputFieldBorderColorSwitcher,
+        inputFieldBorderColor,
+        inputFieldBorderColorHover,
 
-		inputFieldPaddingUnits,
-		inputFieldPaddingDesktop,
-		inputFieldPaddingTablet,
-		inputFieldPaddingMobile,
-		inputFieldPaddingLink,
+        inputFieldBorderUnits,
+        inputFieldBorderDesktop,
+        inputFieldBorderTablet,
+        inputFieldBorderMobile,
+        inputFieldBorderLink,
+
+        inputFieldBorderRadiusUnits,
+        inputFieldBorderRadiusDesktop,
+        inputFieldBorderRadiusTablet,
+        inputFieldBorderRadiusMobile,
+        inputFieldBorderRadiusLink,
+
+        inputFieldPaddingUnits,
+        inputFieldPaddingDesktop,
+        inputFieldPaddingTablet,
+        inputFieldPaddingMobile,
+        inputFieldPaddingLink,
+
+        searchFieldTextGlobalTypographyData,
+		searchFieldTextGlobalTypoSwitcher,
+		searchFieldTextGlobalTypoType,
+		searchFieldTextGlobalTypoOption,
+		searchFieldTextFontFamily,
+		searchFieldTextFontSize,
+		searchFieldTextFontSizeUnits,
+		searchFieldTextFontWeight,
+		searchFieldTextFontStyle,
+		searchFieldTextTransform,
+		searchFieldTextDecoration,
+		searchFieldTextLetterSpacing,
+		searchFieldTextLetterSpacingUnits,
+		searchFieldTextLineHeight,
+		searchFieldTextLineHeightUnits,
+
+		searchFieldBgColorSwitcher,
+		searchFieldBgColor,
+		searchFieldBgColorHover,
+		searchFieldTextColorSwitcher,
+		searchFieldTextColor,
+		searchFieldTextColorHover,
+
+		searchFieldBorderColorSwitcher,
+		searchFieldBorderColorHover,
+		searchFieldBorderUnits,
+		searchFieldBorderTablet,
+		searchFieldBorderMobile,
+		searchFieldBorderLink,
+
+		searchFieldBorderRadiusUnits,
+		searchFieldBorderRadiusTablet,
+		searchFieldBorderRadiusMobile,
+		searchFieldBorderRadiusLink,
+
+		searchFieldPaddingUnits,
+		searchFieldPaddingTablet,
+		searchFieldPaddingMobile,
+		searchFieldPaddingLink,
+        searchFieldColor,
+        searchFieldColorHover,
+        searchFieldBorder,
+        searchFieldBorderColor,
+        searchFieldBorderDesktop,
+        searchFieldBorderRadiusDesktop,
+        searchFieldPaddingDesktop,
 
 		searchIconZIndex,
-		searchGlobalWraperID,
-		searchGlobalWraperClass,
-		searchCustomCSS,	
-	} = attributes;
+        searchGlobalWraperID,
+        searchGlobalWraperClass,
+        searchCustomCSS,
+    } = attributes;
 
     const buttonBorderDesktopWidth = `${buttonBorderDesktop.top}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.right}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.bottom}${buttonBorderUnits.Desktop} ${buttonBorderDesktop.left}${buttonBorderUnits.Desktop}`;
-	const buttonBorderTabletWidth = `${buttonBorderTablet.top}${buttonBorderUnits.Tablet} ${buttonBorderTablet.right}${buttonBorderUnits.Tablet} ${buttonBorderTablet.bottom}${buttonBorderUnits.Tablet} ${buttonBorderTablet.left}${buttonBorderUnits.Tablet}`;
-	const buttonBorderMobileWidth = `${buttonBorderMobile.top}${buttonBorderUnits.Mobile} ${buttonBorderMobile.right}${buttonBorderUnits.Mobile} ${buttonBorderMobile.bottom}${buttonBorderUnits.Mobile} ${buttonBorderMobile.left}${buttonBorderUnits.Mobile}`;
+    const buttonBorderTabletWidth = `${buttonBorderTablet.top}${buttonBorderUnits.Tablet} ${buttonBorderTablet.right}${buttonBorderUnits.Tablet} ${buttonBorderTablet.bottom}${buttonBorderUnits.Tablet} ${buttonBorderTablet.left}${buttonBorderUnits.Tablet}`;
+    const buttonBorderMobileWidth = `${buttonBorderMobile.top}${buttonBorderUnits.Mobile} ${buttonBorderMobile.right}${buttonBorderUnits.Mobile} ${buttonBorderMobile.bottom}${buttonBorderUnits.Mobile} ${buttonBorderMobile.left}${buttonBorderUnits.Mobile}`;
 
     /** Start Button Border Radius */
-	const buttonBorderRadiusDesktopWidth = `${buttonBorderRadiusDesktop.top}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.right}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.bottom}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.left}${buttonBorderRadiusUnits.Desktop}`;
-	const buttonBorderRadiusTabletWidth = `${buttonBorderRadiusTablet.top}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.right}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.bottom}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.left}${buttonBorderRadiusUnits.Tablet}`;
-	const buttonBorderRadiusMobileWidth = `${buttonBorderRadiusMobile.top}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.right}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.bottom}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.left}${buttonBorderRadiusUnits.Mobile}`;
-	/** End Button Border Radius */
+    const buttonBorderRadiusDesktopWidth = `${buttonBorderRadiusDesktop.top}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.right}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.bottom}${buttonBorderRadiusUnits.Desktop} ${buttonBorderRadiusDesktop.left}${buttonBorderRadiusUnits.Desktop}`;
+    const buttonBorderRadiusTabletWidth = `${buttonBorderRadiusTablet.top}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.right}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.bottom}${buttonBorderRadiusUnits.Tablet} ${buttonBorderRadiusTablet.left}${buttonBorderRadiusUnits.Tablet}`;
+    const buttonBorderRadiusMobileWidth = `${buttonBorderRadiusMobile.top}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.right}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.bottom}${buttonBorderRadiusUnits.Mobile} ${buttonBorderRadiusMobile.left}${buttonBorderRadiusUnits.Mobile}`;
+    /** End Button Border Radius */
 
     /** Start Button Padding */
-	const buttonPaddingDesktopWidth = `${buttonPaddingDesktop.top}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.right}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.bottom}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.left}${buttonPaddingUnits.Desktop}`;
-	const buttonPaddingTabletWidth = `${buttonPaddingTablet.top}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.right}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.bottom}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.left}${buttonPaddingUnits.Tablet}`;
-	const buttonPaddingMobileWidth = `${buttonPaddingMobile.top}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.right}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.bottom}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.left}${buttonPaddingUnits.Mobile}`;
-	/** End Button Padding */
-    
+    const buttonPaddingDesktopWidth = `${buttonPaddingDesktop.top}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.right}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.bottom}${buttonPaddingUnits.Desktop} ${buttonPaddingDesktop.left}${buttonPaddingUnits.Desktop}`;
+    const buttonPaddingTabletWidth = `${buttonPaddingTablet.top}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.right}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.bottom}${buttonPaddingUnits.Tablet} ${buttonPaddingTablet.left}${buttonPaddingUnits.Tablet}`;
+    const buttonPaddingMobileWidth = `${buttonPaddingMobile.top}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.right}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.bottom}${buttonPaddingUnits.Mobile} ${buttonPaddingMobile.left}${buttonPaddingUnits.Mobile}`;
+    /** End Button Padding */
+
     /** Start Input Field Border */
-	const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop.top}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.right}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.bottom}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.left}${inputFieldBorderUnits.Desktop}`;
-	const inputFieldBorderTabletWidth = `${inputFieldBorderTablet.top}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.right}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.bottom}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.left}${inputFieldBorderUnits.Tablet}`;
-	const inputFieldBorderMobileWidth = `${inputFieldBorderMobile.top}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.right}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.bottom}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.left}${inputFieldBorderUnits.Mobile}`;
-	/** End Input Field Border */
+    const inputFieldBorderDesktopWidth = `${inputFieldBorderDesktop.top}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.right}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.bottom}${inputFieldBorderUnits.Desktop} ${inputFieldBorderDesktop.left}${inputFieldBorderUnits.Desktop}`;
+    const inputFieldBorderTabletWidth = `${inputFieldBorderTablet.top}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.right}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.bottom}${inputFieldBorderUnits.Tablet} ${inputFieldBorderTablet.left}${inputFieldBorderUnits.Tablet}`;
+    const inputFieldBorderMobileWidth = `${inputFieldBorderMobile.top}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.right}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.bottom}${inputFieldBorderUnits.Mobile} ${inputFieldBorderMobile.left}${inputFieldBorderUnits.Mobile}`;
+    /** End Input Field Border */
 
     /** Start Input Field Border Radius */
-	const inputFieldBorderRadiusDesktopWidth = `${inputFieldBorderRadiusDesktop.top}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.right}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.bottom}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.left}${inputFieldBorderRadiusUnits.Desktop}`;
-	const inputFieldBorderRadiusTabletWidth = `${inputFieldBorderRadiusTablet.top}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.right}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.bottom}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.left}${inputFieldBorderRadiusUnits.Tablet}`;
-	const inputFieldBorderRadiusMobileWidth = `${inputFieldBorderRadiusMobile.top}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.right}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.bottom}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.left}${inputFieldBorderRadiusUnits.Mobile}`;
-	/** End Input Field Border Radius */
+    const inputFieldBorderRadiusDesktopWidth = `${inputFieldBorderRadiusDesktop.top}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.right}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.bottom}${inputFieldBorderRadiusUnits.Desktop} ${inputFieldBorderRadiusDesktop.left}${inputFieldBorderRadiusUnits.Desktop}`;
+    const inputFieldBorderRadiusTabletWidth = `${inputFieldBorderRadiusTablet.top}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.right}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.bottom}${inputFieldBorderRadiusUnits.Tablet} ${inputFieldBorderRadiusTablet.left}${inputFieldBorderRadiusUnits.Tablet}`;
+    const inputFieldBorderRadiusMobileWidth = `${inputFieldBorderRadiusMobile.top}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.right}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.bottom}${inputFieldBorderRadiusUnits.Mobile} ${inputFieldBorderRadiusMobile.left}${inputFieldBorderRadiusUnits.Mobile}`;
+    /** End Input Field Border Radius */
 
     /** Start Input Field Padding */
-	const inputFieldPaddingDesktopWidth = `${inputFieldPaddingDesktop.top}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.right}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.bottom}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.left}${inputFieldPaddingUnits.Desktop}`;
-	const inputFieldPaddingTabletWidth = `${inputFieldPaddingTablet.top}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.right}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.bottom}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.left}${inputFieldPaddingUnits.Tablet}`;
-	const inputFieldPaddingMobileWidth = `${inputFieldPaddingMobile.top}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.right}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.bottom}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.left}${inputFieldPaddingUnits.Mobile}`;
-	/** End Input Field Padding */
+    const inputFieldPaddingDesktopWidth = `${inputFieldPaddingDesktop.top}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.right}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.bottom}${inputFieldPaddingUnits.Desktop} ${inputFieldPaddingDesktop.left}${inputFieldPaddingUnits.Desktop}`;
+    const inputFieldPaddingTabletWidth = `${inputFieldPaddingTablet.top}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.right}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.bottom}${inputFieldPaddingUnits.Tablet} ${inputFieldPaddingTablet.left}${inputFieldPaddingUnits.Tablet}`;
+    const inputFieldPaddingMobileWidth = `${inputFieldPaddingMobile.top}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.right}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.bottom}${inputFieldPaddingUnits.Mobile} ${inputFieldPaddingMobile.left}${inputFieldPaddingUnits.Mobile}`;
+    /** End Input Field Padding */
 
-    
+    /** Start Input Field Border */
+    const searchFieldBorderDesktopWidth = `${searchFieldBorderDesktop.top}${searchFieldBorderUnits.Desktop} ${searchFieldBorderDesktop.right}${searchFieldBorderUnits.Desktop} ${searchFieldBorderDesktop.bottom}${searchFieldBorderUnits.Desktop} ${searchFieldBorderDesktop.left}${searchFieldBorderUnits.Desktop}`;
+    const searchFieldBorderTabletWidth = `${searchFieldBorderTablet.top}${searchFieldBorderUnits.Tablet} ${searchFieldBorderTablet.right}${searchFieldBorderUnits.Tablet} ${searchFieldBorderTablet.bottom}${searchFieldBorderUnits.Tablet} ${searchFieldBorderTablet.left}${searchFieldBorderUnits.Tablet}`;
+    const searchFieldBorderMobileWidth = `${searchFieldBorderMobile.top}${searchFieldBorderUnits.Mobile} ${searchFieldBorderMobile.right}${searchFieldBorderUnits.Mobile} ${searchFieldBorderMobile.bottom}${searchFieldBorderUnits.Mobile} ${searchFieldBorderMobile.left}${searchFieldBorderUnits.Mobile}`;
+    /** End Input Field Border */
+
+    /** Start Input Field Border Radius */
+    const searchFieldBorderRadiusDesktopWidth = `${searchFieldBorderRadiusDesktop.top}${searchFieldBorderRadiusUnits.Desktop} ${searchFieldBorderRadiusDesktop.right}${searchFieldBorderRadiusUnits.Desktop} ${searchFieldBorderRadiusDesktop.bottom}${searchFieldBorderRadiusUnits.Desktop} ${searchFieldBorderRadiusDesktop.left}${searchFieldBorderRadiusUnits.Desktop}`;
+    const searchFieldBorderRadiusTabletWidth = `${searchFieldBorderRadiusTablet.top}${searchFieldBorderRadiusUnits.Tablet} ${searchFieldBorderRadiusTablet.right}${searchFieldBorderRadiusUnits.Tablet} ${searchFieldBorderRadiusTablet.bottom}${searchFieldBorderRadiusUnits.Tablet} ${searchFieldBorderRadiusTablet.left}${searchFieldBorderRadiusUnits.Tablet}`;
+    const searchFieldBorderRadiusMobileWidth = `${searchFieldBorderRadiusMobile.top}${searchFieldBorderRadiusUnits.Mobile} ${searchFieldBorderRadiusMobile.right}${searchFieldBorderRadiusUnits.Mobile} ${searchFieldBorderRadiusMobile.bottom}${searchFieldBorderRadiusUnits.Mobile} ${searchFieldBorderRadiusMobile.left}${searchFieldBorderRadiusUnits.Mobile}`;
+    /** End Input Field Border Radius */
+
+    /** Start Input Field Padding */
+    const searchFieldPaddingDesktopWidth = `${searchFieldPaddingDesktop.top}${searchFieldPaddingUnits.Desktop} ${searchFieldPaddingDesktop.right}${searchFieldPaddingUnits.Desktop} ${searchFieldPaddingDesktop.bottom}${searchFieldPaddingUnits.Desktop} ${searchFieldPaddingDesktop.left}${searchFieldPaddingUnits.Desktop}`;
+    const searchFieldPaddingTabletWidth = `${searchFieldPaddingTablet.top}${searchFieldPaddingUnits.Tablet} ${searchFieldPaddingTablet.right}${searchFieldPaddingUnits.Tablet} ${searchFieldPaddingTablet.bottom}${searchFieldPaddingUnits.Tablet} ${searchFieldPaddingTablet.left}${searchFieldPaddingUnits.Tablet}`;
+    const searchFieldPaddingMobileWidth = `${searchFieldPaddingMobile.top}${searchFieldPaddingUnits.Mobile} ${searchFieldPaddingMobile.right}${searchFieldPaddingUnits.Mobile} ${searchFieldPaddingMobile.bottom}${searchFieldPaddingUnits.Mobile} ${searchFieldPaddingMobile.left}${searchFieldPaddingUnits.Mobile}`;
+    /** End Input Field Padding */
+
+
     const searchBlockStyle = `
-
         .${blockID}.fb-search-block{
             ${searchIconZIndex.Desktop ? `z-index: ${searchIconZIndex.Desktop};` : ''}
         }
@@ -216,7 +280,7 @@ const generateSearchStyle = (attributes) => {
             ${buttonTextGlobalTypoSwitcher.letterSpacing === false && buttonTextLetterSpacing.Desktop && buttonTextLetterSpacingUnits.Desktop ? `letter-spacing: ${buttonTextLetterSpacing.Desktop}${buttonTextLetterSpacingUnits.Desktop};` : ''}
             ${buttonTextGlobalTypoSwitcher.lineHeight === false && buttonTextLineHeight.Desktop && buttonTextLineHeightUnits.Desktop ? `line-height: ${buttonTextLineHeight.Desktop}${buttonTextLineHeightUnits.Desktop};` : ''}
 
-            ${ buttonTextColor ? `color: ${buttonTextColor};` : ''}
+            ${buttonTextColor ? `color: ${buttonTextColor};` : ''}
         }
         .${blockID} .fb-search-container .fb-search-button-wrapper:hover span {
             ${buttonTextColorHover ? `color: ${buttonTextColorHover};` : ''}
@@ -264,7 +328,7 @@ const generateSearchStyle = (attributes) => {
             ${inputFieldTextGlobalTypoSwitcher.textDecoration === false && inputFieldTextDecoration ? `text-decoration: ${inputFieldTextDecoration};` : ''}
             ${inputFieldTextGlobalTypoSwitcher.letterSpacing === false && inputFieldTextLetterSpacing.Desktop && inputFieldTextLetterSpacingUnits.Desktop ? `letter-spacing: ${inputFieldTextLetterSpacing.Desktop}${inputFieldTextLetterSpacingUnits.Desktop};` : ''}
             ${inputFieldTextGlobalTypoSwitcher.lineHeight === false && inputFieldTextLineHeight.Desktop && inputFieldTextLineHeightUnits.Desktop ? `line-height: ${inputFieldTextLineHeight.Desktop}${inputFieldTextLineHeightUnits.Desktop};` : ''}
-            ${ inputFieldTextColor ? `color: ${inputFieldTextColor};` : ''}
+            ${inputFieldTextColor ? `color: ${inputFieldTextColor};` : ''}
 
             ${inputFieldBorder ? `border: ${inputFieldBorder};` : ''}
             ${inputFieldBorderColor ? `border-color: ${inputFieldBorderColor};` : ''}
@@ -277,6 +341,17 @@ const generateSearchStyle = (attributes) => {
             ${inputFieldTextColorHover ? `color: ${inputFieldTextColorHover};` : ''}
         }
 
+        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results{
+            ${searchFieldColor ? `background: ${searchFieldColor};` : ''}
+            ${searchFieldBorder ? `border: ${searchFieldBorder};` : ''}
+            ${searchFieldBorderColor ? `border-color: ${searchFieldBorderColor};` : ''}
+            ${searchFieldBorderDesktopWidth && searchFieldBorderDesktop?.top ? `border-width: ${searchFieldBorderDesktopWidth};` : ''}
+            ${searchFieldBorderRadiusDesktopWidth && searchFieldBorderRadiusDesktop?.top ? `border-radius: ${searchFieldBorderRadiusDesktopWidth};` : ''}
+            ${searchFieldPaddingDesktopWidth && searchFieldPaddingDesktop?.top ? `padding: ${searchFieldPaddingDesktopWidth};` : ''}
+        }
+        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results:hover{
+            ${searchFieldColorHover ? `background: ${searchFieldColorHover};` : ''}
+        }
         @media only screen and (max-width: 1024px) {
             .${blockID}.fb-search-block{
                 ${searchIconZIndex.Tablet ? `z-index: ${searchIconZIndex.Tablet};` : ''}
