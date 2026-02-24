@@ -12,7 +12,6 @@ node_modules/
 .tags*
 .log/
 .vscode/
-package-lock.json
 yarn.lock
 build
 dist
