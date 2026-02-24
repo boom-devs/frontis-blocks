@@ -89,6 +89,11 @@ class Blocks
 			];
 		}
 
+		$ajax_search_data = [
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('fb_ajax_search_nonce'),
+		];
+
 		// Pre-load common data once
 		$common_localize_array = [
 			'site_url' => site_url(),
@@ -130,7 +135,7 @@ class Blocks
 		];
 
 		// Merge all localize data once
-		$localize_array = array_merge($admin_localize_array, $common_localize_array, $social_share_data);
+		$localize_array = array_merge($admin_localize_array, $common_localize_array, $social_share_data, $ajax_search_data);
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
@@ -164,7 +169,14 @@ class Blocks
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
-				wp_localize_script('frontis-blocks-frontend', 'SocialShareData', $localize_array);
+
+				// In the search block slug condition
+				if ($slug === 'advanced-search') {
+					wp_localize_script($view_script_handle, 'SearchBlockData', [
+						'rest_url' => rest_url('frontis-blocks/v1/search'),
+						'home_url' => home_url('/'),
+					]);
+				}
 			}
 		}
 	}

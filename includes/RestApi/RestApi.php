@@ -12,6 +12,7 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 use FrontisBlocks\RestApi\Blocks\PostGrid;
 use FrontisBlocks\RestApi\Blocks\PostCategory;
+use FrontisBlocks\RestApi\Blocks\Search;
 
 
 class RestApi
@@ -33,5 +34,6 @@ class RestApi
     {
         PostGrid::get_instance();
         PostCategory::get_instance();
+        Search::get_instance();
     }
 }

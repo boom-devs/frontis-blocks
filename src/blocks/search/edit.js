@@ -5,7 +5,8 @@ import {
 } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef, useCallback } from '@wordpress/element';
+import apiFetch from '@wordpress/api-fetch';
 import './editor.scss';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
@@ -25,6 +26,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		searchAppearance
 	} = attributes;
 
+	const [searchQuery, setSearchQuery] = useState('');
+	const [searchResults, setSearchResults] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
+	const [showResults, setShowResults] = useState(false);
+	const debounceTimer = useRef(null);
+
 	useEffect(() => {
 		if (clientId && typeof clientId === 'string') {
 			setAttributes({
@@ -32,6 +39,37 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			});
 		}
 	}, [clientId]);
+
+	// Debounced search using apiFetch
+	const handleSearchInput = useCallback((e) => {
+		const query = e.target.value;
+		setSearchQuery(query);
+
+		clearTimeout(debounceTimer.current);
+
+		if (query.length < 2) {
+			setSearchResults([]);
+			setShowResults(false);
+			return;
+		}
+
+		setIsLoading(true);
+		setShowResults(true);
+
+		debounceTimer.current = setTimeout(() => {
+			apiFetch({
+				path: `/frontis-blocks/v1/search?query=${encodeURIComponent(query)}`,
+			})
+				.then((data) => {
+					setSearchResults(data.results || []);
+					setIsLoading(false);
+				})
+				.catch(() => {
+					setSearchResults([]);
+					setIsLoading(false);
+				});
+		}, 350);
+	}, []);
 
 	const blockProps = useBlockProps({
 		className: `fb-search-block ${blockId}`,
@@ -41,10 +79,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		if (searchAppearance !== 'button-and-search') {
 			return;
 		}
-
 		setAttributes({ searchActive: !searchActive });
 	};
-
 
 	return (
 		<>
@@ -57,11 +93,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className="fb-search-button-wrapper" onClick={handleSearchButtonClick}>
 						<div className="fb-search-block-wrapper-inner-input-icon">
 							{searchIconAlign === 'icon-text' && searchIcon ? (
-								<div className={`fb-search-icon-wrapper`}>
+								<div className="fb-search-icon-wrapper">
 									<div className="fb-search-icon">{renderSVG(searchIcon)}</div>
 								</div>
 							) : searchIconAlign === 'image' && searchIconImageUrl ? (
-								<div className={`fb-search-icon-wrapper`}>
+								<div className="fb-search-icon-wrapper">
 									<div className="fb-search-icon-image">
 										<img src={searchIconImageUrl} alt={searchIconImageAlt} />
 									</div>
@@ -77,9 +113,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							<span>
 								<RichText
 									value={searchButtonText}
-									onChange={(value) => {
-										setAttributes({ searchButtonText: value });
-									}}
+									onChange={(value) => setAttributes({ searchButtonText: value })}
 									placeholder={__('Search', 'frontis-blocks')}
 								/>
 							</span>
@@ -87,19 +121,70 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 
 					<div className={`fb-search-block-wrapper-inner-input-field ${searchActive ? 'active' : ''}`}>
-						<form role="search" method="get" action={frontisBlocksAdmin.home_url} >
-							<div class="wp-block-search__inside-wrapper ">
-								<input class="wp-block-search__input" placeholder={
-									showPlaceholderSwitcher
-										? (placeholderText || __('Search', 'frontis-blocks'))
-										: ''
-								} id="wp-block-search__input-2" type="search" name="s" required="" />
+						<form role="search" method="get" action={frontisBlocksAdmin.home_url} onSubmit={(e) => e.preventDefault()}>
+							<div className="wp-block-search__inside-wrapper">
+								<input
+									className="wp-block-search__input"
+									placeholder={
+										showPlaceholderSwitcher
+											? (placeholderText || __('Search', 'frontis-blocks'))
+											: ''
+									}
+									type="search"
+									value={searchQuery}
+									onChange={handleSearchInput}
+									onBlur={() => setTimeout(() => setShowResults(false), 200)}
+									onFocus={() => searchQuery.length >= 2 && setShowResults(true)}
+									autoComplete="off"
+								/>
 							</div>
 						</form>
+
+						{/* Live results dropdown — editor only */}
+						{showResults && (
+							<div className="fb-search-ajax-results active">
+								{isLoading ? (
+									<div className="fb-search-loading">
+										<span className="fb-search-spinner"></span>
+										<span>{__('Searching...', 'frontis-blocks')}</span>
+									</div>
+								) : searchResults.length === 0 ? (
+									<div className="fb-search-no-results">
+										{__('No results found.', 'frontis-blocks')}
+									</div>
+								) : (
+									<>
+										{searchResults.map((item) => (
+											<div key={item.id} className="fb-search-result-item">
+												<a href={item.permalink} className="fb-search-result-link" onClick={(e) => e.preventDefault()}>
+													<div className="fb-search-result-content">
+														<span className="fb-search-result-title">{item.title}</span>
+														{item.excerpt && (
+															<span className="fb-search-result-excerpt">{item.excerpt}</span>
+														)}
+														<span className="fb-search-result-meta">
+															{item.type} · {item.date}
+														</span>
+													</div>
+												</a>
+											</div>
+										))}
+										<div className="fb-search-results-footer">
+											<span className="fb-search-view-all">
+												{__('View all results', 'frontis-blocks')} →
+											</span>
+										</div>
+									</>
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 
-				<div className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`} onClick={() => setAttributes({ searchActive: false })}></div>
+				<div
+					className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`}
+					onClick={() => setAttributes({ searchActive: false })}
+				></div>
 			</div>
 		</>
 	);
