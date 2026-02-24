@@ -10,9 +10,8 @@ node_modules/
 *.tar.gz
 *.zip
 .tags*
-.log/
+backlog/
 .vscode/
-package-lock.json
 yarn.lock
 build
 dist
