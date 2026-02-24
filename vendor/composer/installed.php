@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6cfc9443753e35ead33eabddbd800a09a2191b2d',
+        'reference' => '40e4711967aba80f1ab17c13a8cd52dea9942474',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'appsero/client' => array(
             'pretty_version' => 'dev-develop',
             'version' => 'dev-develop',
-            'reference' => '96bc89344359e39104ab0da6464ee3aeff0b6897',
+            'reference' => '2e553be6a47b387a7b05496f6a6e8d8595dd0d08',
             'type' => 'library',
             'install_path' => __DIR__ . '/../appsero/client',
             'aliases' => array(
@@ -62,7 +62,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6cfc9443753e35ead33eabddbd800a09a2191b2d',
+            'reference' => '40e4711967aba80f1ab17c13a8cd52dea9942474',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
