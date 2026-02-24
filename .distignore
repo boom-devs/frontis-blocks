@@ -17,7 +17,7 @@ docker-compose.yml
 Thumbs.db
 behat.yml
 bitbucket-pipelines.yml
-bin
+/bin
 .circleci/config.yml
 composer.json
 composer.lock
@@ -37,8 +37,8 @@ README.md
 webpack.config.js
 wp-cli.local.yml
 yarn.lock
-tests
-node_modules
+/tests
+/node_modules
 *.sql
 *.tar.gz
 *.zip
@@ -73,8 +73,8 @@ _agent
 _agents
 
 # Source & dev directories
-src
-admin
+/src
+/admin
 
 # Additional webpack configs
 webpack.blocks.config.js
