@@ -6,10 +6,12 @@ import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
 import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateBusinessHoursStyle from './styling';
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -52,13 +54,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		noticeTextFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "fb-timezone-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-business-hours',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -96,6 +100,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		}
 	}, [noticeTextFontFamily]);
 	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateBusinessHoursStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	// State for real-time updates
 	const [currentTime, setCurrentTime] = useState('');
@@ -500,8 +513,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
 			<div {...blockProps}>
 				<div className={`fb-timezone-container ${timezoneGlobalWraperClass}`} id={timezoneGlobalWraperID}>

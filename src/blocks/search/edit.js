@@ -1,4 +1,5 @@
 import { __ } from '@wordpress/i18n';
+<<<<<<< HEAD
 import {
 	useBlockProps,
 	RichText
@@ -12,6 +13,20 @@ import './editor.scss';
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const {
 		blockId,
+=======
+import { useBlockProps } from '@wordpress/block-editor';
+import Inspector from './inspector';
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
+import { useEffect } from '@wordpress/element';
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateSearchStyle from "./styling";
+import './editor.scss';
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+	const { 
+		blockID, 
+		blockStyle,
+>>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
 		searchActive,
 		searchIcon,
 		searchIconAlign,
@@ -26,6 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		searchAppearance
 	} = attributes;
 
+<<<<<<< HEAD
 	const [searchQuery, setSearchQuery] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -70,9 +86,29 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 				});
 		}, 350);
 	}, []);
+=======
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-search',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateSearchStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+>>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
 
 	const blockProps = useBlockProps({
-		className: `fb-search-block ${blockId}`,
+		className: `fb-search-block ${blockID}`,
 	});
 
 	const handleSearchButtonClick = () => {
@@ -186,6 +222,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					onClick={() => setAttributes({ searchActive: false })}
 				></div>
 			</div>
+<<<<<<< HEAD
+=======
+
+			<div className={`fb-search-block-wrapper-overlay ${searchActive ? 'active' : ''}`} onClick={() => setAttributes({ searchActive: false })}></div>
+		</div>
+		<style>{blockStyle}</style>
+>>>>>>> d5645822ba31560265127b5c0c6cf7b62cee47ab
 		</>
 	);
 }

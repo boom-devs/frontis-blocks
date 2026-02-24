@@ -15,12 +15,23 @@ export const NORMAL_HOVER = [
 	{ label: __("Hover", "frontis-blocks"), value: "hover" },
 ];
 
+export const ANIMATION_TYPE = [
+	{ label: __("Typing", "frontis-blocks"), value: "typing" },
+	{ label: __("Swirl", "frontis-blocks"), value: "swirl" },
+];
+
 export const OVERFLOW_OP = [
 	{ label: __('Default', 'frontis-blocks'), value: 'default' },
 	{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
 	{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
 	{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
 	{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
+];
+
+export const MEDIA_TYPES = [
+    { label: __("image", "frontis-blocks"), value: "image" },
+    { label: __("icon", "frontis-blocks"), value: "icon" },
+    { label: __("none", "frontis-blocks"), value: "none" },
 ];
 
 export const LINK_TARGET_OPTIONS = [
@@ -39,8 +50,8 @@ export const TABS_LAYOUT = [
 ];
 
 export const ICON_POSITION = [
-	{ label: __("Left"), value: "left" },
-	{ label: __("Right"), value: "right" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+	{ label: __("Right", "frontis-block"), value: "right" },
 ];
 
 export const MULTI_ICON_POSITION = [
@@ -59,6 +70,11 @@ export const ICON_TEXT_ALIGN = [
 export const ICON_ALIGN = [
 	{ label: __("None"), value: "none" },
 	{ label: __("Icon"), value: "icon" },
+];
+
+export const FEATURE_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
 ];
 
 export const ICON_IMAGE_ALIGN = [
@@ -152,6 +168,23 @@ export const BORDER_STYLES = [
 	{ label: __("Groove", "frontis-blocks"), value: "groove" },
 	{ label: __("Outset", "frontis-blocks"), value: "outset" },
 	{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
+];
+
+export const TITLE_ALIGNMENT = [
+    { label: __("Left", "frontis-blocks"), value: "left" },
+    { label: __("Center", "frontis-blocks"), value: "center" },
+    { label: __("Right", "frontis-blocks"), value: "right" },
+    { label: __("Between", "frontis-blocks"), value: "between" },
+];
+
+export const ICON_POSITIONS = [
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+];
+
+export const ICON_SWITCHER = [
+	{ label: __('Icon', 'frontis-blocks'), value: 'icon' },
+	{ label: __('Image', 'frontis-blocks'), value: 'image' },
 ];
 
 export const FONT_STYLE = [
@@ -283,6 +316,12 @@ export const TAXONOMY_OPTIONS = [
 export const PAGINATION_TYPE = [
 	{ label: __('Button', 'frontis-blocks'), value: 'button' },
 	{ label: __('Pagination', 'frontis-blocks'), value: 'pagination' },
+];
+
+export const SLIDER_PAGINATION_TYPE = [
+	{ value: 'bullets', label: __('Bullets', 'frontis-blocks') },
+	{ value: 'fraction', label: __('Fraction', 'frontis-blocks') },
+	{ value: 'progressbar', label: __('Progress Bar', 'frontis-blocks') }
 ];
 
 export const PAGINATION_PREV_NEXT_TYPE = [
@@ -758,3 +797,254 @@ export const SEARCH_APPEARANCE = [
 	{ title: 'Only Search', label: __('Only Search', 'frontis-blocks'), value: "only-search" },
 ];
 /** End Container Layout Constants */
+
+export const WIDTH_STYLES = [
+	{ label: __("Custom", "frontis-blocks"), value: "custom" },
+	{ label: __("Full Width", "frontis-blocks"), value: "full-width" },
+];
+
+export const LAYOUT_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+export const SELECT_SEPARATOR_TYPE = [
+	{ label: "Colon", value: "colon" },
+	{ label: "Line", value: "line" },
+	{ label: "Slash", value: "slash" },
+	{ label: "Custom", value: "custom" },
+];
+
+export const mediaType = [
+	{ label: __("None", "frontis-block"), value: "none" },
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
+
+export const mediaTypes = [
+	{ label: __("Icon", "frontis-block"), value: "icon" },
+	{ label: __("Image", "frontis-block"), value: "image" },
+];
+
+export const separatorType = [
+	{ label: __("Comma", "frontis-block"), value: "comma" },
+	{ label: __("Space", "frontis-block"), value: "space" },
+];
+
+export const ITEM_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const DUAL_BTN_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon-only" },
+];
+
+export const DUAL_BUTTONS_DIRECTION = [
+	{ label: "Vertical", value: "vertical" },
+	{ label: "Horizontal", value: "horizontal" },
+];
+
+export const FEATURE_LIST_ICON_VERTICAL_ALIGN = [
+	{ label: __(<Dashicon icon={"editor-alignleft"} />), value: "top" },
+	{ label: __(<Dashicon icon={"editor-aligncenter"} />), value: "center" },
+	{ label: __(<Dashicon icon={"editor-alignright"} />), value: "bottom" },
+];
+
+export const FEATURE_LIST_DIRECTION_ICON = [
+	{ title: 'Column', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.391 6.72949L16.391 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3909 17.1923L18.606 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.391 17.1923L14.176 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 6.72949L7.65393 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65381 17.1923L9.85767 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 17.1923L5.43889 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column" },
+	{ title: 'Row', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.64246 7.53723H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53729L15.3485 5.28601" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53723L15.3485 9.78851" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.64246 16.4172H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4173L15.3485 14.1774" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4172L15.3485 18.6685" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M2.85132 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21.1487 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row" },
+];
+
+export const FEATURE_LIST_WRAP_ICON = [
+	{ title: 'No Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
+	{ title: 'Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
+];
+
+export const FEATURE_LIST_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const ICON_VERTICAL_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "v-top" },
+	{ label: __("Middle", "frontis-block"), value: "v-middle" },
+	{ label: __("Bottom", "frontis-block"), value: "v-bottom" },
+];
+
+export const FLIP_BOX_SELECTED_SIDE = [
+	{ label: __("Front", "frontis-blocks"), value: "front" },
+	{ label: __("Back", "frontis-blocks"), value: "back" },
+];
+
+export const FLIP_ANIMATION = [
+	{ label: __("Flip Left", "frontis-blocks"), value: "flip-left" },
+	{ label: __("Flip Right", "frontis-blocks"), value: "flip-right" },
+	{ label: __("Flip Up", "frontis-blocks"), value: "flip-up" },
+	{ label: __("Flip Down", "frontis-blocks"), value: "flip-down" },
+	{ label: __("Zoom in", "frontis-blocks"), value: "zoom-in" },
+	{ label: __("Zoom out", "frontis-blocks"), value: "zoom-out" },
+	{ label: __("Fade", "frontis-blocks"), value: "fade" },
+];
+
+export const FORM_FULL_LISTS =
+    FrontisBlocksData.fluent_form_lists &&
+    JSON.parse(FrontisBlocksData.fluent_form_lists);
+
+export const FORM_LISTS =
+	FORM_FULL_LISTS &&
+	FORM_FULL_LISTS.map((obj) => {
+		return {
+			label: obj.label,
+			value: obj.value,
+		};
+	});
+
+export const POST_GRID_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"admin-generic"} />), value: "icon" },
+];
+
+export const CURRENCY_POSITION = [
+	{ label: __("Left", "frontis-blocks"), value: "left" },
+	{ label: __("Right", "frontis-blocks"), value: "right" },
+];
+
+export const PROGRESS_TEXT_OPTIONS = [
+	{ label: __("Text Outside", "frontis-blocks"), value: "text-outSide" },
+	{ label: __("Text Inside", "frontis-blocks"), value: "text-inSide" },
+];
+
+export const PROGRESSBAR_TYPE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
+	{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
+];
+
+export const PROGRESS_NUMBER_POSITION = [
+	{ label: __("Default", "frontis-blocks"), value: "default" },
+	{ label: __("With Progress Bar", "frontis-blocks"), value: "with-progressbar" },
+];
+
+export const SLIDER_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'fade', label: __('Fade', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+	{ value: 'flip', label: __('Flip', 'frontis-blocks') },
+	{ value: 'creative', label: __('Creative', 'frontis-blocks') },
+];
+
+export const CAROUSEL_EFFECT_OPTIONS = [
+	{ value: 'slide', label: __('Slide', 'frontis-blocks') },
+	{ value: 'coverflow', label: __('Coverflow', 'frontis-blocks') },
+];
+
+export const SLIDER_TYPE = [
+	{ value: 'slider', label: __('Slider', 'frontis-blocks') },
+	{ value: 'carousel', label: __('Carousel', 'frontis-blocks') },
+];
+
+export const SLIDER_ARROW_POSITION_TYPE = [
+	{ label: __('Inside', 'frontis-blocks'), value: 'inside' },
+	{ label: __('Outside', 'frontis-blocks'), value: 'outside' },
+];
+
+export const SLIDER_ARROW_POSITION = [
+	{ label: __('Center Center', 'frontis-blocks'), value: 'center' },
+	{ label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+	{ label: __('Top Center', 'frontis-blocks'), value: 'top-center' },
+	{ label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+	{ label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+	{ label: __('Bottom Center', 'frontis-blocks'), value: 'bottom-center' },
+	{ label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+];
+
+export const SLIDER_ARROW_DIRECTION = [
+	{ label: __('Row', 'frontis-blocks'), value: 'row' },
+	{ label: __('Column', 'frontis-blocks'), value: 'column' },
+	{ label: __('Row Reverse', 'frontis-blocks'), value: 'row-reverse' },
+	{ label: __('Column Reverse', 'frontis-blocks'), value: 'column-reverse' },
+];
+
+export const ARROW_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"text"} />), value: "icon" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const SOCIAL_ICONS_PRESETS = [
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+	{ label: __("Preset 5", "frontis-blocks"), value: "preset-5" },
+	{ label: __("Preset 6", "frontis-blocks"), value: "preset-6" },
+];
+
+export const BADGE_ALIGNMENT = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+
+export const BADGE_POSITION  = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const CARD_WRAP_ALIGNMENT = [
+    { label: __("Left", "frontis-block"), value: "start" },
+    { label: __("Center", "frontis-block"), value: "center" },
+	{ label: __("Right", "frontis-block"), value: "end" },
+	{ label: __("Between", "frontis-block"), value: "space-between" },
+];
+
+export const CONTENT_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+    { label: __("In Image", "frontis-block"), value: "image" },
+];
+
+export const CONTENT_SOCIAL_ICON_POSITION = [
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const IMAGE_SOCIAL_ICON_POSITION = [
+	{ label: __("Top Left", "frontis-block"), value: "top_left" },
+	{ label: __("Top Center", "frontis-block"), value: "top_center" },
+	{ label: __("Top Right", "frontis-block"), value: "top_right" },
+	{ label: __("Center Left", "frontis-block"), value: "center_left" },
+	{ label: __("Center Center", "frontis-block"), value: "center_center" },
+	{ label: __("Center Right", "frontis-block"), value: "center_right" },
+	{ label: __("Bottom Left", "frontis-block"), value: "bottom_left" },
+	{ label: __("Bottom Center", "frontis-block"), value: "bottom_center" },
+	{ label: __("Bottom Right", "frontis-block"), value: "bottom_right" },
+];
+
+export const SOCIAL_ICON_ANIMATION = [
+	{ label: __("Default", "frontis-block"), value: "default" },
+	{ label: __("Top", "frontis-block"), value: "top" },
+	{ label: __("Right", "frontis-block"), value: "right" },
+	{ label: __("Bottom", "frontis-block"), value: "bottom" },
+	{ label: __("Left", "frontis-block"), value: "left" },
+];
+
+export const SOCIAL_ICON_TYPE = [
+	{ label: __("In Content", "frontis-block"), value: "content" },
+	{ label: __("In Image", "frontis-block"), value: "image" },
+];

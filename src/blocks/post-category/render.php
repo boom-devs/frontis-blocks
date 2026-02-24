@@ -32,7 +32,7 @@ if (!function_exists('fb_trim_words')) {
 }
 
 // Extract attributes
-$block_id = fb_norm_str(isset($attributes['blockId']) ? $attributes['blockId'] : '');
+$block_id = fb_norm_str(isset($attributes['blockID']) ? $attributes['blockID'] : '');
 $premade_style = fb_norm_str(isset($attributes['premadeStyle']) ? $attributes['premadeStyle'] : 'style-1');
 $taxonomy_type = fb_norm_str(isset($attributes['taxonomyType']) ? $attributes['taxonomyType'] : '');
 $show_count = isset($attributes['showCount']) ? (bool) $attributes['showCount'] : true;

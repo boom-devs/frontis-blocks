@@ -34,6 +34,7 @@ const Render = ( props ) => {
 		containerGlobalCustomCSS,
 		containerGlobalCustomCSSClass,
 		containerGlobalCustomCSSID,
+		containerGlobalCustomCSSValue,
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
@@ -69,10 +70,29 @@ const Render = ( props ) => {
 		style: getContainerBGStyle,
 	} );
 
+	/**
+	 * Generate and update Custom CSS.
+	 * 
+	 * Always uses space separator (descendant selector) for all containers.
+	 * For child containers, custom classes added to the container are passed
+	 * as selfClasses to getCustomCss, which auto-detects when a selector
+	 * matches a self-class and uses a chained selector (no space) instead.
+	 * 
+	 * Example with custom class "my-section" on child container:
+	 *   .my-section { bg: red }  → #block-id.my-section { bg: red }  (chained, self)
+	 *   .heading { color: blue } → #block-id .heading { color: blue } (descendant)
+	 */
 	useEffect(() => {
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`);
-		setAttributes({containerGlobalCustomCSSValue: customCss});
-	}, [containerGlobalCustomCSS, blockProps.id]);
+		const selfClasses = !isBlockRootParent
+			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
+			: [];
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, ' ', selfClasses);
+		// Only update if value actually changed
+		if (containerGlobalCustomCSSValue !== customCss) {
+			setAttributes({containerGlobalCustomCSSValue: customCss});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [containerGlobalCustomCSS, blockProps.id, containerGlobalCustomCSSClass]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
@@ -96,14 +116,19 @@ const Render = ( props ) => {
 		innerBlocksParams.allowedBlocks = ALLOWED_FORM_BLOCKS;
 	}
 
+	/**
+	 * Set p_block_id attribute only when it differs from blockProps.id
+	 * Avoids unnecessary setAttributes calls on every render
+	 */
 	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-
+		// Only set p_block_id if it's empty or different
+		if (clientId && typeof clientId === 'string' && attributes.p_block_id !== blockProps.id) {
 			setAttributes({
 				p_block_id: blockProps.id,
 			});
 		}
-	}, [clientId]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [clientId, blockProps.id]);
 
 	const rotateContainer = () => {
 		console.log("working on click ?");

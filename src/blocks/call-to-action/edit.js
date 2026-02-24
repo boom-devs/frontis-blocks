@@ -14,12 +14,14 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import DynamicTextValue from '@Components/dynamic-text-value';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCallToActionStyle from './styling';
 
 import Inspector from "./inspector";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -159,13 +161,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === "string") {
-			setAttributes({
-				blockID: "fb-cta-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-call-to-action',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -189,6 +193,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 		}
 	}, [buttonTwoFontFamily]);
 	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateCallToActionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -338,10 +351,13 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -385,19 +401,14 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 									}}>
 
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={info_Button_Link}
 												onClick={handleBtnClick}
 												target={btnOneTargetUrl ? "_blank" : undefined}
 												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText
 													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text}
@@ -406,34 +417,27 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
 													}}
 													placeholder={__("CTA Button", "frontis-block")}
-
 												/>
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
 											</a>
-											{buttonIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}
 								{btnTwoSwitcher && (
 									<div className="fb-cta-btn-two-wrapper" style={{
 									}}>
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnTwoIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
+										<div className="fb-cta-btn-wrapper">
 											<a
 												className="fb-cta-button"
 												href={btnTwoLink}
 												onClick={handleBtnTwoClick}
 												target={btnTwoTargetUrl ? "_blank" : undefined}
 												rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnTwoIconPosition === "left" ? "row-reverse" : "row",}}
 											>
 												<RichText
 													value={dynamicBtnTwoEnabled ? dynamicBtnTwoValue : btnTwoText}
@@ -444,13 +448,12 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 													placeholder={__("CTA Button", "frontis-block")}
 
 												/>
+												{buttonTwoIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnTwoIcon)}
+													</div>
+												)}
 											</a>
-											{buttonTwoIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnTwoIcon)}
-												</div>
-											)}
-
 										</div>
 									</div>
 								)}

@@ -121,26 +121,57 @@ const EditorOptions = () => {
         if (response.success) {
 					const fetchedOptions = response.data;
 
-					// If default_content_width, container_column_gap, container_row_gap or container_padding is undefined or empty in DB, save your default
-					if (!fetchedOptions.default_content_width || !fetchedOptions.container_column_gap || !fetchedOptions.container_row_gap || !fetchedOptions.container_padding || !fetchedOptions.automatic_block_recovery || !fetchedOptions.copy_paste_style) {
-						saveOption('default_content_width', options.default_content_width);
-            saveOption('container_column_gap', options.container_column_gap);
-            saveOption('container_row_gap', options.container_row_gap);
-            saveOption('container_padding', options.container_padding);
-            saveOption('automatic_block_recovery', options.automatic_block_recovery);
-            saveOption('copy_paste_style', options.copy_paste_style);
-					} else {
-						setOptions(prevOptions => ({
-							...prevOptions,
-							...fetchedOptions,
-							default_content_width: JSON.parse(fetchedOptions.default_content_width),
-              container_column_gap: JSON.parse(fetchedOptions.container_column_gap),
-              container_row_gap: JSON.parse(fetchedOptions.container_row_gap),
-              container_padding: JSON.parse(fetchedOptions.container_padding),
-              automatic_block_recovery: JSON.parse(fetchedOptions.automatic_block_recovery),
-              copy_paste_style: JSON.parse(fetchedOptions.copy_paste_style),
-						}));
+					// Check which options are actually missing from DB (null/undefined/empty string)
+					const isMissing = (val) => val === undefined || val === null || val === '' || val === false;
+					const missingKeys = Object.keys(options).filter(key => isMissing(fetchedOptions[key]));
+
+					if (missingKeys.length > 0) {
+						// Silently save only missing defaults (no toast)
+						missingKeys.forEach(key => {
+							window.jQuery.ajax({
+								url: ajaxUrl,
+								type: 'POST',
+								data: {
+									action: `fb_${key}`,
+									security: nonce,
+									value: options[key],
+								},
+							});
+						});
 					}
+
+					const normalizeKeys = (jsonString) => {
+						if (!jsonString) return {};
+						try {
+							const obj = JSON.parse(jsonString);
+							if (!obj || typeof obj !== 'object') return obj;
+							const normalized = {};
+							Object.keys(obj).forEach(key => {
+								const normalizedKey = key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+								normalized[normalizedKey] = obj[key];
+							});
+							return normalized;
+						} catch (e) {
+							return {};
+						}
+					};
+
+					setOptions(prevOptions => {
+						const merged = { ...prevOptions };
+
+						if (fetchedOptions.default_content_width) merged.default_content_width = normalizeKeys(fetchedOptions.default_content_width);
+						if (fetchedOptions.container_column_gap) merged.container_column_gap = normalizeKeys(fetchedOptions.container_column_gap);
+						if (fetchedOptions.container_row_gap) merged.container_row_gap = normalizeKeys(fetchedOptions.container_row_gap);
+						if (fetchedOptions.container_padding) merged.container_padding = normalizeKeys(fetchedOptions.container_padding);
+						if (fetchedOptions.automatic_block_recovery !== undefined && fetchedOptions.automatic_block_recovery !== null && fetchedOptions.automatic_block_recovery !== '' && fetchedOptions.automatic_block_recovery !== false) {
+							merged.automatic_block_recovery = JSON.parse(fetchedOptions.automatic_block_recovery);
+						}
+						if (fetchedOptions.copy_paste_style !== undefined && fetchedOptions.copy_paste_style !== null && fetchedOptions.copy_paste_style !== '' && fetchedOptions.copy_paste_style !== false) {
+							merged.copy_paste_style = JSON.parse(fetchedOptions.copy_paste_style);
+						}
+
+						return merged;
+					});
         } else {
           toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
             position: "top-right",

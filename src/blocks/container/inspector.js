@@ -221,58 +221,10 @@ const Inspector = (props) => {
 	};
 
 	// 2️⃣ Memoize parsed values
-	const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
-	const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
-	const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
-
-	const formatted_container_column_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
-	}, [FrontisBlocksData.container_column_gap]);
-
-	const formatted_container_row_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
-	}, [FrontisBlocksData.container_row_gap]);
-
-	const formatted_container_padding = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_padding);
-	}, [FrontisBlocksData.container_padding]);
-
-
-	useEffect(() => {
-		setAttributes({
-			globalFullWidthContentBoxedWidth: {
-				Desktop: formatted_desktop_breakpoint || "1200",
-				Tablet: formatted_tablet_breakpoint || "1024",
-				Mobile: formatted_mobile_breakpoint || "767",
-			},
-			globalColumnGap: {
-				Desktop: formatted_container_column_gap.Desktop || "",
-				Tablet: formatted_container_column_gap.Tablet || "",
-				Mobile: formatted_container_column_gap.Mobile || "",
-			},
-			globalRowGap: {
-				Desktop: formatted_container_row_gap.Desktop || "",
-				Tablet: formatted_container_row_gap.Tablet || "",
-				Mobile: formatted_container_row_gap.Mobile || "",
-			},
-			containerGlobalPadding: {
-				Desktop: formatted_container_padding.Desktop || "",
-				Tablet: formatted_container_padding.Tablet || "",
-				Mobile: formatted_container_padding.Mobile || "",
-			},
-		});
-	}, [
-		formatted_desktop_breakpoint, 
-		formatted_tablet_breakpoint, 
-		formatted_mobile_breakpoint,
-		formatted_container_column_gap,
-		formatted_container_row_gap,
-		formatted_container_padding
-	]);
-
 	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
 	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
-	const [containerLocalDesktopPadding, setContainerLocalDesktopPadding] = useState(containerDesktopPadding);
+
+	const formatted_container_padding = parseResponsiveValue(FrontisBlocksData.container_padding);
 
 	const handleColumnAddItem = () => {
         const newItem = {
@@ -631,32 +583,32 @@ const Inspector = (props) => {
 					setAttributes({ containerDesktopPadding: updatedDesktopPadding});
 					break;
 				case 'Tablet':
-					let formatedContainerPaddingTablet = formatted_container_padding;
+					let formattedContainerPaddingTablet = formatted_container_padding;
 					if( isTabletPaddingEmpty() && containerTabletPadding.top === '') {
-						formatedContainerPaddingTablet = containerDesktopPadding;
+						formattedContainerPaddingTablet = containerDesktopPadding;
 					}
 
 					if(containerTabletPadding.top !== '') {
-						formatedContainerPaddingTablet = containerTabletPadding;
+						formattedContainerPaddingTablet = containerTabletPadding;
 					}
 
-					const updatedTabletPadding = updateContainerPadding(formatedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedTabletPadding = updateContainerPadding(formattedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({containerTabletPadding: updatedTabletPadding});
 					break;
 				case 'Mobile':
-					let formatedContainerPaddingMob = formatted_container_padding;
+					let formattedContainerPaddingMob = formatted_container_padding;
 					if( isMobilePaddingEmpty() && isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerDesktopPadding;
+						formattedContainerPaddingMob = containerDesktopPadding;
 					}
 					if(isMobilePaddingEmpty() && !isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerTabletPadding;
+						formattedContainerPaddingMob = containerTabletPadding;
 					}
 
 					if(containerMobilePadding.top !== '') {
-						formatedContainerPaddingMob = containerMobilePadding;
+						formattedContainerPaddingMob = containerMobilePadding;
 					}
 					
-					const updatedMobilePadding = updateContainerPadding(formatedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedMobilePadding = updateContainerPadding(formattedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({ containerMobilePadding: updatedMobilePadding });
 					break;
 				default:
@@ -684,17 +636,17 @@ const Inspector = (props) => {
 		if (!isBlockRootParent) {
 			// If not block root parent, set empty attributes to '0', preserve non-empty ones
 			updatedPadding = {
-				top: updatedPadding.top === '' ? '0' : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? '0' : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? '0' : updatedPadding.left,
-				right: updatedPadding.right === '' ? '0' : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? '0' : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? '0' : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? '0' : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? '0' : updatedPadding.right
 			};
-		} else if (padding[position] === '') {
+		} else if (padding[position] === '' || padding[position] === undefined) {
 			updatedPadding = {
-				top: updatedPadding.top === '' ? formatted_container_padding[deviceType] : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? formatted_container_padding[deviceType] : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? formatted_container_padding[deviceType] : updatedPadding.left,
-				right: updatedPadding.right === '' ? formatted_container_padding[deviceType] : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? formatted_container_padding[deviceType] : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? formatted_container_padding[deviceType] : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? formatted_container_padding[deviceType] : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? formatted_container_padding[deviceType] : updatedPadding.right
 			};
 		}
 	  
@@ -1411,7 +1363,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Column", "frontis-blocks")}
-					rangeValue={columnGap}
+					rangeValue={columnGap.Desktop === '' ? globalColumnGap : columnGap}
 					onChangeHandler={columnGapFn}
 					rangeUnitHandler={columnGapUnitsFn}
 					deviceType={deviceType}
@@ -1429,7 +1381,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Row", "frontis-blocks")}
-					rangeValue={rowGap}
+					rangeValue={rowGap.Desktop === '' ? globalRowGap : rowGap}
 					onChangeHandler={rowGapFn}
 					rangeUnitHandler={rowGapUnitsFn}
 					deviceType={deviceType}

@@ -421,7 +421,7 @@ if (!function_exists('fb_compute_dynamic_text')) {
 }
 
 // ---------- extract & normalize ----------
-$block_id = fb_norm_str(isset($attributes['blockId']) ? $attributes['blockId'] : '');
+$block_id = fb_norm_str(isset($attributes['blockID']) ? $attributes['blockID'] : '');
 $heading_text = fb_norm_str(isset($attributes['headingText']) ? $attributes['headingText'] : 'Advanced Heading');
 $heading_tag = fb_tag_whitelist(isset($attributes['headingTag']) ? $attributes['headingTag'] : 'h2', 'h2');
 $heading_alignment = fb_norm_str(isset($attributes['headingAlignment']) ? $attributes['headingAlignment'] : '');

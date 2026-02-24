@@ -5,11 +5,14 @@ import loadGoogleFont from "@Utils/loadGoogleFont";
 
 import Inspector from "./inspector";
 
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generatePostTitleStyle from "./styling";
+
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		postTitleTag,
 		isLink,
@@ -28,11 +31,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		postTitleFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({ blockId: "fb-post-title-" + clientId.slice(0, 8) });
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-post-title',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start load font */
 	useEffect(() => {
@@ -45,9 +52,17 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [postTitleFontFamily]);
 	/** End load font */
 
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generatePostTitleStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
-		className: `fb-post-title-block ${blockId} ${
+		className: `fb-post-title-block ${blockID} ${
 			postTitleDesktopSwitcher && "fb-desktop-responsive"
 		} ${postTitleTabletSwitcher && "fb-tablet-responsive"} ${
 			postTitleMobileSwitcher && "fb-mobile-responsive"
@@ -55,8 +70,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	});
 
 	useEffect(() => {
-		if (clientId && !blockId) {
-			setAttributes({ blockId: "fb-post-title-" + clientId.slice(0, 8) });
+		if (clientId && !blockID) {
+			setAttributes({ blockID: "fb-post-title-" + clientId.slice(0, 8) });
 		}
 	}, [clientId]);
 
@@ -75,11 +90,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const htmlTagClasses = `fb-post-title ${wrapperClass}`.trim();
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				<TagName className={htmlTagClasses} id={wrapperId || undefined}>

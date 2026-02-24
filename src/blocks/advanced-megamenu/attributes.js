@@ -1,5 +1,5 @@
 export default {
-    blockId: {
+    blockID: {
         type: "string",
     },
     blockStyle: {

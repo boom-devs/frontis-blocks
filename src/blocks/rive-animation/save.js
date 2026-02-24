@@ -17,10 +17,15 @@ export default function save({ attributes }) {
 		riveAnimationContainerHeightUnits,
 		riveAnimationCanvasHeightUnits,
 		riveAnimationCanvasWidthUnits,
+		riveAnimationGlobalWraperID,
+		riveAnimationGlobalWraperClass,
+		riveAnimationDesktopSwitcher,
+		riveAnimationTabletSwitcher,
+		riveAnimationMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-rive-animation-main-wrapper ${blockID}`,
+		className: `fb-rive-animation-main-wrapper ${blockID} ${riveAnimationDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${riveAnimationTabletSwitcher ? 'fb-tablet-responsive' : ''} ${riveAnimationMobileSwitcher ? 'fb-mobile-responsive' : ''}`,
 	});
 
 	if (!riveAnimationImageUrl) {
@@ -41,8 +46,8 @@ export default function save({ attributes }) {
 	}
 
 	return (
-		<div {...blockProps}>
-			<div className="fb-parent-wrapper fb-rive-animation-container">
+		<div {...blockProps} id={riveAnimationGlobalWraperID || undefined}>
+			<div className={`fb-parent-wrapper fb-rive-animation-container ${riveAnimationGlobalWraperClass || ''}`}>
 				<div
 					className="fb-rive-canvas-wrapper"
 					data-container-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}

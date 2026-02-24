@@ -17,7 +17,7 @@ use FrontisBlocks\Utils\Helper;
 class Activator
 {
 
-	const VERSION = '1.1.0';
+	const VERSION = '1.1.9';
 	const SLUG = 'frontis-blocks';
 
 	use Singleton;
@@ -52,6 +52,7 @@ class Activator
 	{
 		update_option('frontis_blocks_version', self::VERSION);
 		$this->generate_job_table();
+		$this->set_default_editor_options();
 
 		try {
 			$post_ids = Helper::get_all_post_ids();
@@ -108,8 +109,11 @@ class Activator
 	 */
 	public function fb_set_initial_version()
 	{
-		if (get_option('frontis_blocks_version') === false) {
-			update_option('frontis_blocks_version', self::VERSION);
+		$stored_version = get_option('frontis_blocks_version');
+
+		// Run activation/update logic if version is missing or changed
+		if ($stored_version === false || $stored_version !== self::VERSION) {
+			$this->fb_on_activate_or_update();
 		}
 	}
 
@@ -157,6 +161,26 @@ class Activator
 
 			wp_safe_redirect(admin_url('admin.php?page=frontis-blocks'));
 			exit;
+		}
+	}
+
+	/**
+	 * Set default editor options on activation/update.
+	 * Uses add_option() so existing values are never overwritten.
+	 */
+	private function set_default_editor_options()
+	{
+		$defaults = [
+			'fb_default_content_width'    => json_encode(['Desktop' => '1200', 'Tablet' => '1024', 'Mobile' => '767']),
+			'fb_container_column_gap'     => json_encode(['Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0']),
+			'fb_container_row_gap'        => json_encode(['Desktop' => '0', 'Tablet' => '0', 'Mobile' => '0']),
+			'fb_container_padding'        => json_encode(['Desktop' => '10', 'Tablet' => '10', 'Mobile' => '10']),
+			'fb_automatic_block_recovery' => json_encode(true),
+			'fb_copy_paste_style'         => json_encode(false),
+		];
+
+		foreach ($defaults as $key => $value) {
+			add_option($key, $value);
 		}
 	}
 

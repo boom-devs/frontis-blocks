@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.7
+Stable tag: 1.1.9
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -247,6 +247,28 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.1.9 – 18 February 2026 =
+- **Fixed**: Resolved Editor Options dashboard "Option updated successfully" toast notification flood issue.
+- **Fixed**: Improved logic for Automatic Block Recovery and Copy-Paste settings to prevent unnecessary auto-saving.
+- **Fixed**: Resolved Advanced Heading block recovery and Container padding unlink issues.
+- **Fixed**: Fixed media link replacement issues during uploads.
+- **Improved**: Enhanced plugin update handling to ensure default settings are correctly initialized without user intervention.
+- **Improved**: Full-site-import data validation and synchronization from the portal.
+- **Refactor**: Cleaned up unnecessary files and code across multiple blocks (Advanced Heading, Container, Slider, etc.) to improve plugin footprint.
+- **Deprecation**: Improved handling for deprecated block versions and file organization.
+
+
+= 1.1.8 – 13 February 2026 =
+- **New**: Added Rive Animation block.
+- **Fixed**: Resolved Advanced Video block "Error 153" loading issues in the Gutenberg editor.
+- **Optimization**: Improved overall block performance and editor speed by reducing re-renders and optimizing `useEffect` cycles.
+- **Performance**: Significant optimizations across all blocks to improve stability and editor experience.
+- **Refactor**: Implemented `useBlockIdGenerator` hook to resolve block ID mismatch and duplication issues.
+- **Container Block**: Unified layout constants and fixed Child Container custom CSS selector issues.
+- **Testimonial Block**: Refactored styling logic and presets into separate modules for better performance.
+- **Marquee**: Fixed autoplay and interaction issues across frontend and editor.
+- **Bug Fixes**: Resolved SVG attribute formatting errors, dashboard save errors, and various block-specific bugs (Slider, Image Gallery, Social Icons).
 
 = 1.1.7 – 22 January 2026 =
 - **Security Fixes**

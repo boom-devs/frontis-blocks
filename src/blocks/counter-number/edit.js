@@ -9,9 +9,10 @@ import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCounterNumberStyle from "./styling";
 
-
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
 		blockStyle,
@@ -37,27 +38,28 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		counterMobileSwitcher,
 	} = attributes;
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "counter-number-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-counter-number',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	const counterRef = useRef(null);
 	const observerRef = useRef(null);
 	const hasCounted = useRef(false);
 
-
+	/** Start Generate Block Style */
 	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "counter-number-" + clientId.slice(0, 8),
-			});
+		if (blockID) {
+			const css = generateCounterNumberStyle(attributes);
+			setAttributes({ blockStyle: css });
 		}
-	}, [clientId]);
-
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	// Set up Intersection Observer and animation in the editor
 	const animateCounter = () => {
@@ -118,8 +120,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		window.requestAnimationFrame(step);
 	};
 
-
-
 	useEffect(() => {
 		hasCounted.current = false;
 
@@ -142,8 +142,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		};
 	}, [counterNumberStart, counterNumberEnd, counterDuration, showThousandsSeparator, showThousandsSeparatorType]);
 
-
-
 	// Icon media remove handler
 	const removeCounterMedia = () => {
 		setAttributes({
@@ -159,13 +157,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		className: `fb-counter-main-wrapper ${blockID} ${counterDesktopSwitcher && 'fb-desktop-responsive'} ${counterTabletSwitcher && 'fb-tablet-responsive'} ${counterMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
-
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 					<div className="fb-counter-item">

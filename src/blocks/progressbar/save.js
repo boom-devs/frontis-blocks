@@ -18,6 +18,9 @@ export default function save({ attributes }) {
         progressbarDesktopSwitcher,
 		progressbarTabletSwitcher,
 		progressbarMobileSwitcher,
+
+        showProgressTitle,
+        showProgressNumber,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -29,37 +32,37 @@ export default function save({ attributes }) {
         	<div {...blockProps}>
             	<div className={`fb-parent-wrapper fb-progressbar-wrapper ${progressGlobalWraperClass}`} id={progressGlobalWraperID}>
 						<div className="fb-progressbar-item" data-progressbar-type={progressbarType}  data-progress={progressNumber} data-progress-number-position={progressNumberPosition}>
-							{progressbarType === 'horizontal' && progressTextPosition === 'text-outSide' && (
+							{progressbarType === 'horizontal' && progressTextPosition === 'text-outSide' && (showProgressTitle || showProgressNumber) && (
 								<div className="fb-progressbar-content">
 									<RichText.Content
 										tagName={progressHeadingTag}
 										className="fb-progressbar-label"
 										value={progressTitle}
 									/>
-									{progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+									{progressNumberPosition === 'default' && showProgressNumber && <span className="fb-progressbar-number">{progressNumber}%</span>}
 								</div>
 							)}
-							{progressbarType === 'vertical' && progressNumberPosition === 'default' && (
+							{progressbarType === 'vertical' && progressNumberPosition === 'default' && showProgressNumber && (
 								<div className="fb-progressbar-content">
 									<span className="fb-progressbar-number">{progressNumber}%</span>
 								</div>
 							)}
 							<div className='fb-progressbar-line-wrapper'>
 								<div className="fb-progressbar-line">
-									{progressNumberPosition === 'with-progressbar' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+									{progressNumberPosition === 'with-progressbar' && showProgressNumber && <span className="fb-progressbar-number">{progressNumber}%</span>}
 								</div>
-									{progressbarType === 'horizontal' && progressTextPosition === 'text-inSide' && (
+									{progressbarType === 'horizontal' && progressTextPosition === 'text-inSide' && (showProgressTitle || showProgressNumber) && (
 										<div className="fb-progressbar-content">
 											<RichText.Content
 												tagName={progressHeadingTag}
 												className="fb-progressbar-label"
 												value={progressTitle}
 											/>
-											{progressNumberPosition === 'default' && <span className="fb-progressbar-number">{progressNumber}%</span>}
+											{progressNumberPosition === 'default' && showProgressNumber && <span className="fb-progressbar-number">{progressNumber}%</span>}
 										</div>
 									)}
 							</div>
-							{progressbarType === 'vertical' && (
+							{progressbarType === 'vertical' && showProgressTitle && (
 								<div className="fb-progressbar-content">
 									<RichText.Content
 										tagName={progressHeadingTag}

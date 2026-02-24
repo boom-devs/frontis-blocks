@@ -62,41 +62,46 @@ export default function LayoutGrid({
                 </div>
 
                 <div className="fb_post_grid_content_wrapper">
-                    {showAuthorSwitcher && (
+                    {(showAuthorSwitcher || showDateSwitcher) && (
                         <div className="fb_post_grid_author">
-                            {postAuthorAvatarSwitcher && (
-                                <div className="fb_post_grid_author_avatar">
-                                    {authorLinkSwitcher && (
-                                        <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
-                                            <img src={author.avatar} alt={author.name} />
-                                        </a>
+                            {showAuthorSwitcher && (
+                                <div className="fb_post_grid_author_wrapper">
+                                    {postAuthorAvatarSwitcher && (
+                                        <div className="fb_post_grid_author_avatar">
+                                            {authorLinkSwitcher && (
+                                                <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
+                                                    <img src={author.avatar} alt={author.name} />
+                                                </a>
+                                            )}
+                                            {!authorLinkSwitcher && (
+                                                <img src={author.avatar} alt={author.name} />
+                                            )}
+                                        </div>
                                     )}
-                                    {!authorLinkSwitcher && (
-                                        <img src={author.avatar} alt={author.name} />
-                                    )}
-                                </div>
-                            )}
-                            <div className="fb_post_grid_author_info">
-                                <div className="fb_post_grid_author_info_name">
-                                    {postAuthorPrefixSwitcher && (
-                                        <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
-                                    )}
-                                    <div className="fb_post_grid_author_name">
-                                        {authorLinkSwitcher && (
-                                            <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
-                                        )}
-                                        {!authorLinkSwitcher && (
-                                            author.name
-                                        )}
+                                    <div className="fb_post_grid_author_info">
+                                        <div className="fb_post_grid_author_info_name">
+                                            {postAuthorPrefixSwitcher && (
+                                                <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
+                                            )}
+                                            <div className="fb_post_grid_author_name">
+                                                {authorLinkSwitcher && (
+                                                    <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
+                                                )}
+                                                {!authorLinkSwitcher && (
+                                                    author.name
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                {showDateSwitcher && (
-                                    <div className="fb_post_grid_date">{author.latest_post_date}</div>
-                                )}
-                            </div>
+                            )}
+
+                            {showDateSwitcher && (
+                                <div className="fb_post_grid_date">{author.latest_post_date}</div>
+                            )}
                         </div>
                     )}
-
+                    
                     {showCategorySwitcher && (
                         <div className="fb_post_grid_categories">
                             {categories.map((category, index) => (
@@ -210,40 +215,45 @@ export default function LayoutGrid({
                 </div>
 
                 <div className="fb_post_grid_content_wrapper">
-                    {showAuthorSwitcher && (
+                    {(showAuthorSwitcher || showDateSwitcher) && (
                         <div className="fb_post_grid_author">
-                            {postAuthorAvatarSwitcher && (
-                                <div className="fb_post_grid_author_avatar">
-                                    {authorLinkSwitcher && (
-                                        <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
-                                            <img src={author.avatar} alt={author.name} />
-                                        </a>
+                            {showAuthorSwitcher && (
+                                <div className="fb_post_grid_author_wrapper">
+                                    {postAuthorAvatarSwitcher && (
+                                        <div className="fb_post_grid_author_avatar">
+                                            {authorLinkSwitcher && (
+                                                <a className="fb_post_grid_author_avatar_url" onClick={(e) => e.preventDefault()}>
+                                                    <img src={author.avatar} alt={author.name} />
+                                                </a>
+                                            )}
+                                            {!authorLinkSwitcher && (
+                                                <img src={author.avatar} alt={author.name} />
+                                            )}
+                                        </div>
                                     )}
-                                    {!authorLinkSwitcher && (
-                                        <img src={author.avatar} alt={author.name} />
-                                    )}
-                                </div>
-                            )}
-                            <div className="fb_post_grid_author_info">
-                                <div className="fb_post_grid_author_info_name">
-                                    {postAuthorPrefixSwitcher && (
-                                        <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
-                                    )}
-                                    <div className="fb_post_grid_author_name">
-                                        {authorLinkSwitcher && (
-                                            <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
-                                        )}
-                                        {!authorLinkSwitcher && (
-                                            author.name
-                                        )}
+                                    <div className="fb_post_grid_author_info">
+                                        <div className="fb_post_grid_author_info_name">
+                                            {postAuthorPrefixSwitcher && (
+                                                <span className="fb_post_grid_author_posted_by">{postAuthorPrefix}</span>
+                                            )}
+                                            <div className="fb_post_grid_author_name">
+                                                {authorLinkSwitcher && (
+                                                    <a className="fb_post_grid_author_name_url" onClick={(e) => e.preventDefault()}>{author.name}</a>
+                                                )}
+                                                {!authorLinkSwitcher && (
+                                                    author.name
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                {showDateSwitcher && (
-                                    <div className="fb_post_grid_date">{author.latest_post_date}</div>
-                                )}
-                            </div>
+                            )}
+                            {showDateSwitcher && (
+                                <div className="fb_post_grid_date">{author.latest_post_date}</div>
+                            )}
                         </div>
                     )}
+                    
                     <div className="fb_post_grid_content">
                         <a onClick={(e) => e.preventDefault()} className="fb_post_link">{React.createElement(postTitleTag || 'h3', { className: 'fb_post_title' }, title)}</a>
                         {React.createElement(postDescriptionTag || 'p', { className: 'fb_post_desc' }, excerpt)}

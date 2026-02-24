@@ -36,7 +36,7 @@ $block_style = isset($attributes['blockStyle']) ? $attributes['blockStyle'] : ''
 // Advanced Attributes
 $wrapper_id    = isset($attributes['wrapperId']) ? sanitize_text_field($attributes['wrapperId']) : '';
 $wrapper_class = isset($attributes['wrapperClass']) ? sanitize_text_field($attributes['wrapperClass']) : '';
-$block_id      = isset($attributes['blockId']) ? sanitize_text_field($attributes['blockId']) : '';
+$block_id      = isset($attributes['blockID']) ? sanitize_text_field($attributes['blockID']) : '';
 
 // Responsive Control
 $comment_form_desktop_switcher = isset($attributes['commentFormDesktopSwitcher']) ? (bool) $attributes['commentFormDesktopSwitcher'] : false;

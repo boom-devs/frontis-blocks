@@ -8,12 +8,14 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import { useDeviceType } from "@Config/displayType";
 
 import Inspector from "./inspector";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateAnimatedHeadingStyle from "./styling";
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,
+        blockID,
         blockStyle,
         animationType,
         animatedHeadingAlignment,
@@ -32,13 +34,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     } = attributes;
 
-    useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-animated-heading-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-animated-heading',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
 
     /** Start Load Google Font */
     useEffect(() => {
@@ -55,10 +59,18 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         }
     }, [animatedHeadingAnimationTextFontFamily]);
     /** End Load Google Font */
-    
 
+    /** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateAnimatedHeadingStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+    
     const blockProps = useBlockProps({
-        className: `fb-animated-heading-main-wrapper ${blockId}`,
+        className: `fb-animated-heading-main-wrapper ${blockID}`,
     });
 
     const deviceType = useDeviceType();
@@ -234,10 +246,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 <AlignmentToolbar

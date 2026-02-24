@@ -1,46 +1,20 @@
 import { __ } from '@wordpress/i18n';
-import {
-	MediaUpload,
-	MediaUploadCheck,
-	useBlockProps,
-	InspectorControls, RichText, URLInput,
-} from '@wordpress/block-editor';
-import {
-	TabPanel,
-	PanelBody,
-	TextControl,
-	ColorPicker,
-	BaseControl,
-	RangeControl,
-	ToggleControl,
-	DateTimePicker,
-	Dropdown,
-	Button,
-	Dashicon,
-	SelectControl,
-	ButtonGroup,
-	ColorPalette,
-	ResponsiveWrapper, __experimentalHStack as HStack, TextareaControl,
-} from '@wordpress/components';
-import { useState, useEffect, useRef } from '@wordpress/element';
+
+import { useBlockProps, RichText } from '@wordpress/block-editor';
+import { useEffect, useRef } from '@wordpress/element';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-import './editor.scss';
-import {
-	NORMAL_HOVER,
-	UNIT_TYPES,
-	TEXT_ALIGN,
-	HEADING,
-	BORDER_STYLES
-} from "./constants/constants";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generatePricingTableStyle from "./styling";
+import './editor.scss';
 
 const loadedFonts = new Set();
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
-		blockId,
+		blockID,
 		blockStyle,
 		/** Start Header */
 		pricingSectionTopSwitcher,
@@ -110,13 +84,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		priceFeatureAfterTextFontFamily,
 	} = attributes;
 
-	useEffect(() => {
-        if (clientId && typeof clientId === 'string') {
-            setAttributes({
-                blockId: "fb-feature-" + clientId.slice(0, 8),
-            });
-        }
-    }, [clientId]);
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-pricing-table',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
 	/** Start Load Google Font */
 	useEffect(() => {
@@ -197,9 +173,19 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [priceFeatureAfterTextFontFamily]);
 	/** End Load Google Font */
 
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generatePricingTableStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+
 
 	const blockProps = useBlockProps({
-		className: `fb-pricing-area ${blockId} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
+		className: `fb-pricing-area ${blockID
+		} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
 
 	/**
@@ -210,13 +196,15 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+			
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockId} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
+				<div className={`fb-parent-wrapper fb-pricing-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-pricing-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
 					<div className="fb-pricing-inner-wrapper">
 						{pricingSectionTopSwitcher && (
 							<div className="fb-pricing-top-wrapper">
