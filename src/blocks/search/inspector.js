@@ -226,6 +226,165 @@ const Inspector = ({ attributes, setAttributes }) => {
 		searchFieldItemPaddingTablet,
 		searchFieldItemPaddingMobile,
 		searchFieldItemPaddingLink,
+		searchFieldItemColorSwitcher,
+		searchFieldItemColor,
+		searchFieldItemColorHover,
+
+		searchFieldItemTitleGlobalTypographyData,
+		searchFieldItemTitleGlobalTypoSwitcher,
+		searchFieldItemTitleGlobalTypoType,
+		searchFieldItemTitleGlobalTypoOption,
+
+		searchFieldItemTitleFontFamily,
+		searchFieldItemTitleFontSize,
+		searchFieldItemTitleFontSizeUnits,
+		searchFieldItemTitleFontWeight,
+		searchFieldItemTitleFontStyle,
+		searchFieldItemTitleTransform,
+		searchFieldItemTitleDecoration,
+
+		searchFieldItemTitleLetterSpacing,
+		searchFieldItemTitleLetterSpacingUnits,
+
+		searchFieldItemTitleLineHeight,
+		searchFieldItemTitleLineHeightUnits,
+
+		searchFieldItemTitleColorSwitcher,
+		searchFieldItemTitleColor,
+		searchFieldItemTitleColorHover,
+
+		searchFieldItemTitleBorder,
+		searchFieldItemTitleBorderColorSwitcher,
+		searchFieldItemTitleBorderColor,
+		searchFieldItemTitleBorderColorHover,
+		searchFieldItemTitleBorderUnits,
+		searchFieldItemTitleBorderDesktop,
+		searchFieldItemTitleBorderTablet,
+		searchFieldItemTitleBorderMobile,
+		searchFieldItemTitleBorderLink,
+
+		searchFieldItemTitleBorderRadiusUnits,
+		searchFieldItemTitleBorderRadiusDesktop,
+		searchFieldItemTitleBorderRadiusTablet,
+		searchFieldItemTitleBorderRadiusMobile,
+		searchFieldItemTitleBorderRadiusLink,
+
+		searchFieldItemTitlePaddingUnits,
+		searchFieldItemTitlePaddingDesktop,
+		searchFieldItemTitlePaddingTablet,
+		searchFieldItemTitlePaddingMobile,
+		searchFieldItemTitlePaddingLink,
+
+		// Typography
+		searchFieldItemMetaGlobalTypographyData,
+		searchFieldItemMetaGlobalTypoSwitcher,
+		searchFieldItemMetaGlobalTypoType,
+		searchFieldItemMetaGlobalTypoOption,
+
+		searchFieldItemMetaFontFamily,
+		searchFieldItemMetaFontSize,
+		searchFieldItemMetaFontSizeUnits,
+		searchFieldItemMetaFontWeight,
+		searchFieldItemMetaFontStyle,
+		searchFieldItemMetaTransform,
+		searchFieldItemMetaDecoration,
+
+		searchFieldItemMetaLetterSpacing,
+		searchFieldItemMetaLetterSpacingUnits,
+
+		searchFieldItemMetaLineHeight,
+		searchFieldItemMetaLineHeightUnits,
+
+		// Color
+		searchFieldItemMetaColorSwitcher,
+		searchFieldItemMetaColor,
+		searchFieldItemMetaColorHover,
+
+		// Border
+		searchFieldItemMetaBorder,
+		searchFieldItemMetaBorderColorSwitcher,
+		searchFieldItemMetaBorderColor,
+		searchFieldItemMetaBorderColorHover,
+		searchFieldItemMetaBorderUnits,
+		searchFieldItemMetaBorderDesktop,
+		searchFieldItemMetaBorderTablet,
+		searchFieldItemMetaBorderMobile,
+		searchFieldItemMetaBorderLink,
+
+		// Border Radius
+		searchFieldItemMetaBorderRadiusUnits,
+		searchFieldItemMetaBorderRadiusDesktop,
+		searchFieldItemMetaBorderRadiusTablet,
+		searchFieldItemMetaBorderRadiusMobile,
+		searchFieldItemMetaBorderRadiusLink,
+
+		// Padding
+		searchFieldItemMetaPaddingUnits,
+		searchFieldItemMetaPaddingDesktop,
+		searchFieldItemMetaPaddingTablet,
+		searchFieldItemMetaPaddingMobile,
+		searchFieldItemMetaPaddingLink,
+
+		resultMetaGap,
+		resultMetaGapUnits,
+		metaDividerSize,
+		metaDividerSizeUnits,
+		metaDividerColorSwitcher,
+		metaDividerColor,
+		metaDividerColorHover,
+
+		// Typography
+		SearchViewAllResultsGlobalTypographyData,
+		SearchViewAllResultsGlobalTypoSwitcher,
+		SearchViewAllResultsGlobalTypoType,
+		SearchViewAllResultsGlobalTypoOption,
+
+		SearchViewAllResultsFontFamily,
+		SearchViewAllResultsFontSize,
+		SearchViewAllResultsFontSizeUnits,
+		SearchViewAllResultsFontWeight,
+		SearchViewAllResultsFontStyle,
+		SearchViewAllResultsTransform,
+		SearchViewAllResultsDecoration,
+
+		SearchViewAllResultsLetterSpacing,
+		SearchViewAllResultsLetterSpacingUnits,
+
+		SearchViewAllResultsLineHeight,
+		SearchViewAllResultsLineHeightUnits,
+
+		// Color
+		SearchViewAllResultsColorSwitcher,
+		SearchViewAllResultsColor,
+		SearchViewAllResultsColorHover,
+		SearchViewAllResultsBgColorSwitcher,
+		SearchViewAllResultsBgColor,
+		SearchViewAllResultsBgColorHover,
+
+		// Border
+		SearchViewAllResultsBorder,
+		SearchViewAllResultsBorderColorSwitcher,
+		SearchViewAllResultsBorderColor,
+		SearchViewAllResultsBorderColorHover,
+		SearchViewAllResultsBorderUnits,
+		SearchViewAllResultsBorderDesktop,
+		SearchViewAllResultsBorderTablet,
+		SearchViewAllResultsBorderMobile,
+		SearchViewAllResultsBorderLink,
+
+		// Border Radius
+		SearchViewAllResultsBorderRadiusUnits,
+		SearchViewAllResultsBorderRadiusDesktop,
+		SearchViewAllResultsBorderRadiusTablet,
+		SearchViewAllResultsBorderRadiusMobile,
+		SearchViewAllResultsBorderRadiusLink,
+
+		// Padding
+		SearchViewAllResultsPaddingUnits,
+		SearchViewAllResultsPaddingDesktop,
+		SearchViewAllResultsPaddingTablet,
+		SearchViewAllResultsPaddingMobile,
+		SearchViewAllResultsPaddingLink,
 
 		searchIconZIndex,
 		searchGlobalWraperID,
@@ -1074,6 +1233,637 @@ const Inspector = ({ attributes, setAttributes }) => {
 		})
 	}
 	/** End Search Field Padding */
+
+	/** Start Input Field Border */
+	const handlesearchFieldItemTitleBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemTitleBorderLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemTitleBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemTitleBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemTitleBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemTitleBorderDesktop: { ...searchFieldItemTitleBorderDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemTitleBorderTablet: { ...searchFieldItemTitleBorderTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemTitleBorderMobile: { ...searchFieldItemTitleBorderMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemTitleBorderCombineBtn = () => {
+		setAttributes({ searchFieldItemTitleBorderLink: !searchFieldItemTitleBorderLink });
+	}
+
+	const handlesearchFieldItemTitleBorderUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemTitleBorderUnits: {
+				...searchFieldItemTitleBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius*/
+	const handlesearchFieldItemTitleBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemTitleBorderRadiusLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemTitleBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemTitleBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemTitleBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemTitleBorderRadiusDesktop: { ...searchFieldItemTitleBorderRadiusDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemTitleBorderRadiusTablet: { ...searchFieldItemTitleBorderRadiusTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemTitleBorderRadiusMobile: { ...searchFieldItemTitleBorderRadiusMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemTitleBorderRadiusCombineBtn = () => {
+		setAttributes({ searchFieldItemTitleBorderRadiusLink: !searchFieldItemTitleBorderRadiusLink });
+	}
+
+	const handlesearchFieldItemTitleBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemTitleBorderRadiusUnits: {
+				...searchFieldItemTitleBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border Radius */
+
+	/** Start Input Field Padding*/
+	const handlesearchFieldItemTitlePaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemTitlePaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemTitlePaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemTitlePaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemTitlePaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemTitlePaddingDesktop: { ...searchFieldItemTitlePaddingDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemTitlePaddingTablet: { ...searchFieldItemTitlePaddingTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemTitlePaddingMobile: { ...searchFieldItemTitlePaddingMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemTitlePaddingCombineBtn = () => {
+		setAttributes({ searchFieldItemTitlePaddingLink: !searchFieldItemTitlePaddingLink });
+	}
+
+	const handlesearchFieldItemTitlePaddingUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemTitlePaddingUnits: {
+				...searchFieldItemTitlePaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Search Field Padding */
+
+	/** Start Input Field Border */
+	const handlesearchFieldItemMetaBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemMetaBorderLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemMetaBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemMetaBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemMetaBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemMetaBorderDesktop: { ...searchFieldItemMetaBorderDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemMetaBorderTablet: { ...searchFieldItemMetaBorderTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemMetaBorderMobile: { ...searchFieldItemMetaBorderMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemMetaBorderCombineBtn = () => {
+		setAttributes({ searchFieldItemMetaBorderLink: !searchFieldItemMetaBorderLink });
+	}
+
+	const handlesearchFieldItemMetaBorderUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemMetaBorderUnits: {
+				...searchFieldItemMetaBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius*/
+	const handlesearchFieldItemMetaBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemMetaBorderRadiusLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemMetaBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemMetaBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemMetaBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemMetaBorderRadiusDesktop: { ...searchFieldItemMetaBorderRadiusDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemMetaBorderRadiusTablet: { ...searchFieldItemMetaBorderRadiusTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemMetaBorderRadiusMobile: { ...searchFieldItemMetaBorderRadiusMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemMetaBorderRadiusCombineBtn = () => {
+		setAttributes({ searchFieldItemMetaBorderRadiusLink: !searchFieldItemMetaBorderRadiusLink });
+	}
+
+	const handlesearchFieldItemMetaBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemMetaBorderRadiusUnits: {
+				...searchFieldItemMetaBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border Radius */
+
+	/** Start Input Field Padding*/
+	const handlesearchFieldItemMetaPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (searchFieldItemMetaPaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						searchFieldItemMetaPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						searchFieldItemMetaPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						searchFieldItemMetaPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ searchFieldItemMetaPaddingDesktop: { ...searchFieldItemMetaPaddingDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ searchFieldItemMetaPaddingTablet: { ...searchFieldItemMetaPaddingTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ searchFieldItemMetaPaddingMobile: { ...searchFieldItemMetaPaddingMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handlesearchFieldItemMetaPaddingCombineBtn = () => {
+		setAttributes({ searchFieldItemMetaPaddingLink: !searchFieldItemMetaPaddingLink });
+	}
+
+	const handlesearchFieldItemMetaPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			searchFieldItemMetaPaddingUnits: {
+				...searchFieldItemMetaPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Search Field Padding */
+
+	/** Start Input Field Border */
+	const handleSearchViewAllResultsBorderUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (SearchViewAllResultsBorderLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						SearchViewAllResultsBorderDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						SearchViewAllResultsBorderTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						SearchViewAllResultsBorderMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ SearchViewAllResultsBorderDesktop: { ...SearchViewAllResultsBorderDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ SearchViewAllResultsBorderTablet: { ...SearchViewAllResultsBorderTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ SearchViewAllResultsBorderMobile: { ...SearchViewAllResultsBorderMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSearchViewAllResultsBorderCombineBtn = () => {
+		setAttributes({ SearchViewAllResultsBorderLink: !SearchViewAllResultsBorderLink });
+	}
+
+	const handleSearchViewAllResultsBorderUnitsHandler = (unit) => {
+		setAttributes({
+			SearchViewAllResultsBorderUnits: {
+				...SearchViewAllResultsBorderUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius*/
+	const handleSearchViewAllResultsBorderRadiusUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (SearchViewAllResultsBorderRadiusLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						SearchViewAllResultsBorderRadiusDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						SearchViewAllResultsBorderRadiusTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						SearchViewAllResultsBorderRadiusMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ SearchViewAllResultsBorderRadiusDesktop: { ...SearchViewAllResultsBorderRadiusDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ SearchViewAllResultsBorderRadiusTablet: { ...SearchViewAllResultsBorderRadiusTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ SearchViewAllResultsBorderRadiusMobile: { ...SearchViewAllResultsBorderRadiusMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSearchViewAllResultsBorderRadiusCombineBtn = () => {
+		setAttributes({ SearchViewAllResultsBorderRadiusLink: !SearchViewAllResultsBorderRadiusLink });
+	}
+
+	const handleSearchViewAllResultsBorderRadiusUnitsHandler = (unit) => {
+		setAttributes({
+			SearchViewAllResultsBorderRadiusUnits: {
+				...SearchViewAllResultsBorderRadiusUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Input Field Border Radius */
+
+	/** Start Input Field Padding*/
+	const handleSearchViewAllResultsPaddingUnitChange = (event, position) => {
+		const value = event.target.value;
+		if (SearchViewAllResultsPaddingLink) {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({
+						SearchViewAllResultsPaddingDesktop: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Tablet':
+					setAttributes({
+						SearchViewAllResultsPaddingTablet: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				case 'Mobile':
+					setAttributes({
+						SearchViewAllResultsPaddingMobile: {
+							top: value,
+							right: value,
+							bottom: value,
+							left: value
+						}
+					});
+					break;
+				default:
+					break;
+			}
+		} else {
+			switch (deviceType) {
+				case 'Desktop':
+					setAttributes({ SearchViewAllResultsPaddingDesktop: { ...SearchViewAllResultsPaddingDesktop, [position]: value } });
+					break;
+				case 'Tablet':
+					setAttributes({ SearchViewAllResultsPaddingTablet: { ...SearchViewAllResultsPaddingTablet, [position]: value } });
+					break;
+				case 'Mobile':
+					setAttributes({ SearchViewAllResultsPaddingMobile: { ...SearchViewAllResultsPaddingMobile, [position]: value } });
+					break;
+				default:
+					break;
+			}
+		}
+
+	}
+
+	const handleSearchViewAllResultsPaddingCombineBtn = () => {
+		setAttributes({ SearchViewAllResultsPaddingLink: !SearchViewAllResultsPaddingLink });
+	}
+
+	const handleSearchViewAllResultsPaddingUnitsHandler = (unit) => {
+		setAttributes({
+			SearchViewAllResultsPaddingUnits: {
+				...SearchViewAllResultsPaddingUnits,
+				[deviceType]: unit
+			}
+		})
+	}
+	/** End Search Field Padding */
+
 	/** Start Icon Handler */
 	const iconHandler = (IconName) => {
 		setAttributes({ searchIcon: IconName })
@@ -1790,26 +2580,26 @@ const Inspector = ({ attributes, setAttributes }) => {
 										<PanelBody title={__("Result Item", "frontis-blocks")} initialOpen={false}>
 											<FB_SwitcherControl
 												label={__("Background Color", "frontis-blocks")}
-												globalSwitcher={searchFieldItemItemColorSwitcher}
-												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemItemColorSwitcher: value })}
+												globalSwitcher={searchFieldItemColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemColorSwitcher: value })}
 											/>
 
 											{
-												searchFieldItemItemColorSwitcher === 'normal' && (
+												searchFieldItemColorSwitcher === 'normal' && (
 													<FB_ColorControl
 														label={__("Normal Color", "frontis-blocks")}
-														globalColor={searchFieldItemItemColor}
-														setGlobalColor={(value) => setAttributes({ searchFieldItemItemColor: value === undefined ? '' : value })}
+														globalColor={searchFieldItemColor}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemColor: value === undefined ? '' : value })}
 													/>
 												)
 											}
 
 											{
-												searchFieldItemItemColorSwitcher === 'hover' && (
+												searchFieldItemColorSwitcher === 'hover' && (
 													<FB_ColorControl
 														label={__("Hover Color", "frontis-blocks")}
-														globalColor={searchFieldItemItemColorHover}
-														setGlobalColor={(value) => setAttributes({ searchFieldItemItemColorHover: value })}
+														globalColor={searchFieldItemColorHover}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemColorHover: value })}
 													/>
 												)
 											}
@@ -1886,6 +2676,560 @@ const Inspector = ({ attributes, setAttributes }) => {
 												handleSpacingUnitHandler={handlesearchFieldItemPaddingUnitChange}
 												spacingCombineBtn={searchFieldItemPaddingLink}
 												spacingCombineBtnHandler={handlesearchFieldItemPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody title={__("Item Title", "frontis-blocks")} initialOpen={false}>
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={searchFieldItemTitleGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ searchFieldItemTitleGlobalTypographyData: value })}
+
+												globalTypoType={searchFieldItemTitleGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({
+														searchFieldItemTitleGlobalTypoType: value,
+														searchFieldItemTitleGlobalTypoSwitcher: value === 'default' ? { ...searchFieldItemTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...searchFieldItemTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+													})
+												}}
+
+												globalTypoOption={searchFieldItemTitleGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ searchFieldItemTitleGlobalTypoOption: value })}
+
+												fontFamily={searchFieldItemTitleFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ searchFieldItemTitleFontFamily: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, fontFamily: value && false } })}
+
+												fontSize={searchFieldItemTitleFontSize}
+												onChangeFontSize={(value) => setAttributes({ searchFieldItemTitleFontSize: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, fontSize: value && false } })}
+
+												fontSizeUnits={searchFieldItemTitleFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ searchFieldItemTitleFontSizeUnits: value })}
+
+												fontWeight={searchFieldItemTitleFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ searchFieldItemTitleFontWeight: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, fontWeight: value && false } })}
+
+												fontStyle={searchFieldItemTitleFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ searchFieldItemTitleFontStyle: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, fontStyle: value && false } })}
+
+												textTransform={searchFieldItemTitleTransform}
+												onChangeTextTransform={(value) => setAttributes({ searchFieldItemTitleTransform: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, textTransform: value && false } })}
+
+												textDecoration={searchFieldItemTitleDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ searchFieldItemTitleDecoration: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, textDecoration: value && false } })}
+
+												letterSpacing={searchFieldItemTitleLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ searchFieldItemTitleLetterSpacing: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+												letterSpacingUnits={searchFieldItemTitleLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ searchFieldItemTitleLetterSpacingUnits: value })}
+
+												lineHeight={searchFieldItemTitleLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ searchFieldItemTitleLineHeight: value, searchFieldItemTitleGlobalTypoSwitcher: { ...searchFieldItemTitleGlobalTypoSwitcher, lineHeight: value && false } })}
+
+												lineHeightUnits={searchFieldItemTitleLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ searchFieldItemTitleLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+											<FB_SwitcherControl
+												label={__("Title Color", "frontis-blocks")}
+												globalSwitcher={searchFieldItemTitleColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemTitleColorSwitcher: value })}
+											/>
+
+											{
+												searchFieldItemTitleColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={searchFieldItemTitleColor}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemTitleColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												searchFieldItemTitleColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={searchFieldItemTitleColorHover}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemTitleColorHover: value })}
+													/>
+												)
+											}
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={searchFieldItemTitleBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ searchFieldItemTitleBorder: value })}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={searchFieldItemTitleBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemTitleBorderColorSwitcher: value })}
+											/>
+
+											{
+												searchFieldItemTitleBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={searchFieldItemTitleBorderColor}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemTitleBorderColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												searchFieldItemTitleBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={searchFieldItemTitleBorderColorHover}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemTitleBorderColorHover: value })}
+													/>
+												)
+											}
+
+											<FB_Spacing
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemTitleBorderUnitsHandler}
+												spacingUnits={searchFieldItemTitleBorderUnits}
+												spacingDesktop={searchFieldItemTitleBorderDesktop}
+												spacingTablet={searchFieldItemTitleBorderTablet}
+												spacingMobile={searchFieldItemTitleBorderMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemTitleBorderUnitChange}
+												spacingCombineBtn={searchFieldItemTitleBorderLink}
+												spacingCombineBtnHandler={handlesearchFieldItemTitleBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemTitleBorderRadiusUnitsHandler}
+												spacingUnits={searchFieldItemTitleBorderRadiusUnits}
+												spacingDesktop={searchFieldItemTitleBorderRadiusDesktop}
+												spacingTablet={searchFieldItemTitleBorderRadiusTablet}
+												spacingMobile={searchFieldItemTitleBorderRadiusMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemTitleBorderRadiusUnitChange}
+												spacingCombineBtn={searchFieldItemTitleBorderRadiusLink}
+												spacingCombineBtnHandler={handlesearchFieldItemTitleBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemTitlePaddingUnitsHandler}
+												spacingUnits={searchFieldItemTitlePaddingUnits}
+												spacingDesktop={searchFieldItemTitlePaddingDesktop}
+												spacingTablet={searchFieldItemTitlePaddingTablet}
+												spacingMobile={searchFieldItemTitlePaddingMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemTitlePaddingUnitChange}
+												spacingCombineBtn={searchFieldItemTitlePaddingLink}
+												spacingCombineBtnHandler={handlesearchFieldItemTitlePaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody title={__("Item Meta", "frontis-blocks")} initialOpen={false}>
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={searchFieldItemMetaGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ searchFieldItemMetaGlobalTypographyData: value })}
+
+												globalTypoType={searchFieldItemMetaGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({
+														searchFieldItemMetaGlobalTypoType: value,
+														searchFieldItemMetaGlobalTypoSwitcher: value === 'default' ? { ...searchFieldItemMetaGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...searchFieldItemMetaGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+													})
+												}}
+
+												globalTypoOption={searchFieldItemMetaGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ searchFieldItemMetaGlobalTypoOption: value })}
+
+												fontFamily={searchFieldItemMetaFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ searchFieldItemMetaFontFamily: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, fontFamily: value && false } })}
+
+												fontSize={searchFieldItemMetaFontSize}
+												onChangeFontSize={(value) => setAttributes({ searchFieldItemMetaFontSize: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, fontSize: value && false } })}
+
+												fontSizeUnits={searchFieldItemMetaFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ searchFieldItemMetaFontSizeUnits: value })}
+
+												fontWeight={searchFieldItemMetaFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ searchFieldItemMetaFontWeight: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, fontWeight: value && false } })}
+
+												fontStyle={searchFieldItemMetaFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ searchFieldItemMetaFontStyle: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, fontStyle: value && false } })}
+
+												textTransform={searchFieldItemMetaTransform}
+												onChangeTextTransform={(value) => setAttributes({ searchFieldItemMetaTransform: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, textTransform: value && false } })}
+
+												textDecoration={searchFieldItemMetaDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ searchFieldItemMetaDecoration: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, textDecoration: value && false } })}
+
+												letterSpacing={searchFieldItemMetaLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ searchFieldItemMetaLetterSpacing: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+												letterSpacingUnits={searchFieldItemMetaLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ searchFieldItemMetaLetterSpacingUnits: value })}
+
+												lineHeight={searchFieldItemMetaLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ searchFieldItemMetaLineHeight: value, searchFieldItemMetaGlobalTypoSwitcher: { ...searchFieldItemMetaGlobalTypoSwitcher, lineHeight: value && false } })}
+
+												lineHeightUnits={searchFieldItemMetaLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ searchFieldItemMetaLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+											<FB_SwitcherControl
+												label={__("Meta Color", "frontis-blocks")}
+												globalSwitcher={searchFieldItemMetaColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemMetaColorSwitcher: value })}
+											/>
+
+											{
+												searchFieldItemMetaColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={searchFieldItemMetaColor}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemMetaColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												searchFieldItemMetaColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={searchFieldItemMetaColorHover}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemMetaColorHover: value })}
+													/>
+												)
+											}
+
+											<FB_Range
+												min={0}
+												max={resultMetaGapUnits === '%' ? 100 : 1000}
+												label={__("Gap", "frontis-blocks")}
+												rangeValue={resultMetaGap}
+												onChangeHandler={(value) =>
+													setAttributes({ resultMetaGap: value })
+												}
+												rangeUnitHandler={(value) =>
+													setAttributes({ resultMetaGapUnits: value })
+												}
+												deviceType={deviceType}
+												units={resultMetaGapUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={searchFieldItemMetaBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ searchFieldItemMetaBorder: value })}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={searchFieldItemMetaBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ searchFieldItemMetaBorderColorSwitcher: value })}
+											/>
+
+											{
+												searchFieldItemMetaBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={searchFieldItemMetaBorderColor}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemMetaBorderColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												searchFieldItemMetaBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={searchFieldItemMetaBorderColorHover}
+														setGlobalColor={(value) => setAttributes({ searchFieldItemMetaBorderColorHover: value })}
+													/>
+												)
+											}
+
+											<FB_Spacing
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemMetaBorderUnitsHandler}
+												spacingUnits={searchFieldItemMetaBorderUnits}
+												spacingDesktop={searchFieldItemMetaBorderDesktop}
+												spacingTablet={searchFieldItemMetaBorderTablet}
+												spacingMobile={searchFieldItemMetaBorderMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemMetaBorderUnitChange}
+												spacingCombineBtn={searchFieldItemMetaBorderLink}
+												spacingCombineBtnHandler={handlesearchFieldItemMetaBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemMetaBorderRadiusUnitsHandler}
+												spacingUnits={searchFieldItemMetaBorderRadiusUnits}
+												spacingDesktop={searchFieldItemMetaBorderRadiusDesktop}
+												spacingTablet={searchFieldItemMetaBorderRadiusTablet}
+												spacingMobile={searchFieldItemMetaBorderRadiusMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemMetaBorderRadiusUnitChange}
+												spacingCombineBtn={searchFieldItemMetaBorderRadiusLink}
+												spacingCombineBtnHandler={handlesearchFieldItemMetaBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handlesearchFieldItemMetaPaddingUnitsHandler}
+												spacingUnits={searchFieldItemMetaPaddingUnits}
+												spacingDesktop={searchFieldItemMetaPaddingDesktop}
+												spacingTablet={searchFieldItemMetaPaddingTablet}
+												spacingMobile={searchFieldItemMetaPaddingMobile}
+												handleSpacingUnitHandler={handlesearchFieldItemMetaPaddingUnitChange}
+												spacingCombineBtn={searchFieldItemMetaPaddingLink}
+												spacingCombineBtnHandler={handlesearchFieldItemMetaPaddingCombineBtn}
+												setAttributes={setAttributes}
+											/>
+										</PanelBody>
+
+										<PanelBody title={__("Meta Divider", "frontis-blocks")} initialOpen={false}>
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={metaDividerColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ metaDividerColorSwitcher: value })}
+											/>
+
+											{
+												metaDividerColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={metaDividerColor}
+														setGlobalColor={(value) => setAttributes({ metaDividerColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												metaDividerColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={metaDividerColorHover}
+														setGlobalColor={(value) => setAttributes({ metaDividerColorHover: value })}
+													/>
+												)
+											}
+
+											<FB_Range
+												min={0}
+												max={metaDividerSizeUnits === '%' ? 100 : 1000}
+												label={__("Size", "frontis-blocks")}
+												rangeValue={metaDividerSize}
+												onChangeHandler={(value) =>
+													setAttributes({ metaDividerSize: value })
+												}
+												rangeUnitHandler={(value) =>
+													setAttributes({ metaDividerSizeUnits: value })
+												}
+												deviceType={deviceType}
+												units={metaDividerSizeUnits}
+												setAttributes={setAttributes}
+												rangeStep={1}
+												resetFallbackValue={""}
+											/>
+										</PanelBody>
+
+										<PanelBody title={__("View All", "frontis-blocks")} initialOpen={false}>
+											<FB_TypographyControl
+												globalTypoControlActive={true}
+												globalTypoSwitcher={SearchViewAllResultsGlobalTypoSwitcher}
+												storeGlobalTypographyData={(value) => setAttributes({ SearchViewAllResultsGlobalTypographyData: value })}
+
+												globalTypoType={SearchViewAllResultsGlobalTypoType}
+												onChangeGlobalTypoType={(value) => {
+													setAttributes({
+														SearchViewAllResultsGlobalTypoType: value,
+														SearchViewAllResultsGlobalTypoSwitcher: value === 'default' ? { ...SearchViewAllResultsGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...SearchViewAllResultsGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+													})
+												}}
+
+												globalTypoOption={SearchViewAllResultsGlobalTypoOption}
+												onChangeGlobalTypoOption={(value) => setAttributes({ SearchViewAllResultsGlobalTypoOption: value })}
+
+												fontFamily={SearchViewAllResultsFontFamily}
+												onChangeFontFamily={(value) => setAttributes({ SearchViewAllResultsFontFamily: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, fontFamily: value && false } })}
+
+												fontSize={SearchViewAllResultsFontSize}
+												onChangeFontSize={(value) => setAttributes({ SearchViewAllResultsFontSize: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, fontSize: value && false } })}
+
+												fontSizeUnits={SearchViewAllResultsFontSizeUnits}
+												onChangeFontSizeUnit={(value) => setAttributes({ SearchViewAllResultsFontSizeUnits: value })}
+
+												fontWeight={SearchViewAllResultsFontWeight}
+												onChangeFontWeight={(value) => setAttributes({ SearchViewAllResultsFontWeight: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, fontWeight: value && false } })}
+
+												fontStyle={SearchViewAllResultsFontStyle}
+												onChangeFontStyle={(value) => setAttributes({ SearchViewAllResultsFontStyle: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, fontStyle: value && false } })}
+
+												textTransform={SearchViewAllResultsTransform}
+												onChangeTextTransform={(value) => setAttributes({ SearchViewAllResultsTransform: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, textTransform: value && false } })}
+
+												textDecoration={SearchViewAllResultsDecoration}
+												onChangeTextDecoration={(value) => setAttributes({ SearchViewAllResultsDecoration: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, textDecoration: value && false } })}
+
+												letterSpacing={SearchViewAllResultsLetterSpacing}
+												onChangeLetterSpacing={(value) => setAttributes({ SearchViewAllResultsLetterSpacing: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+												letterSpacingUnits={SearchViewAllResultsLetterSpacingUnits}
+												onChangeLetterSpacingUnit={(value) => setAttributes({ SearchViewAllResultsLetterSpacingUnits: value })}
+
+												lineHeight={SearchViewAllResultsLineHeight}
+												onChangeLineHeight={(value) => setAttributes({ SearchViewAllResultsLineHeight: value, SearchViewAllResultsGlobalTypoSwitcher: { ...SearchViewAllResultsGlobalTypoSwitcher, lineHeight: value && false } })}
+
+												lineHeightUnits={SearchViewAllResultsLineHeightUnits}
+												onChangeLineHeightUnit={(value) => setAttributes({ SearchViewAllResultsLineHeightUnits: value })}
+
+												deviceType={deviceType}
+												setAttributes={setAttributes}
+											/>
+											<FB_SwitcherControl
+                                                label={__("Background Color", "frontis-blocks")}
+                                                globalSwitcher={SearchViewAllResultsBgColorSwitcher}
+                                                setGlobalSwitcher={(value) => setAttributes({ SearchViewAllResultsBgColorSwitcher: value })}
+                                            />
+
+                                            {
+                                                SearchViewAllResultsBgColorSwitcher === 'normal' && (
+                                                    <FB_ColorControl
+                                                        label={__("Normal Color", "frontis-blocks")}
+                                                        globalColor={SearchViewAllResultsBgColor}
+                                                        setGlobalColor={(value) => setAttributes({ SearchViewAllResultsBgColor: value === undefined ? '' : value })}
+                                                    />
+                                                )
+                                            }
+
+                                            {
+                                                SearchViewAllResultsBgColorSwitcher === 'hover' && (
+                                                    <FB_ColorControl
+                                                        label={__("Hover Color", "frontis-blocks")}
+                                                        globalColor={SearchViewAllResultsBgColorHover}
+                                                        setGlobalColor={(value) => setAttributes({ SearchViewAllResultsBgColorHover: value })}
+                                                    />
+                                                )
+                                            }
+											<FB_SwitcherControl
+												label={__("Color", "frontis-blocks")}
+												globalSwitcher={SearchViewAllResultsColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ SearchViewAllResultsColorSwitcher: value })}
+											/>
+
+											{
+												SearchViewAllResultsColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={SearchViewAllResultsColor}
+														setGlobalColor={(value) => setAttributes({ SearchViewAllResultsColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												SearchViewAllResultsColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={SearchViewAllResultsColorHover}
+														setGlobalColor={(value) => setAttributes({ SearchViewAllResultsColorHover: value })}
+													/>
+												)
+											}
+
+											<SelectControl
+												label={__("Border Style", "frontis-blocks")}
+												value={SearchViewAllResultsBorder}
+												options={BORDER_STYLES}
+												onChange={(value) => setAttributes({ SearchViewAllResultsBorder: value })}
+											/>
+
+											<FB_SwitcherControl
+												label={__("Border Color", "frontis-blocks")}
+												globalSwitcher={SearchViewAllResultsBorderColorSwitcher}
+												setGlobalSwitcher={(value) => setAttributes({ SearchViewAllResultsBorderColorSwitcher: value })}
+											/>
+
+											{
+												SearchViewAllResultsBorderColorSwitcher === 'normal' && (
+													<FB_ColorControl
+														label={__("Normal Color", "frontis-blocks")}
+														globalColor={SearchViewAllResultsBorderColor}
+														setGlobalColor={(value) => setAttributes({ SearchViewAllResultsBorderColor: value === undefined ? '' : value })}
+													/>
+												)
+											}
+
+											{
+												SearchViewAllResultsBorderColorSwitcher === 'hover' && (
+													<FB_ColorControl
+														label={__("Hover Color", "frontis-blocks")}
+														globalColor={SearchViewAllResultsBorderColorHover}
+														setGlobalColor={(value) => setAttributes({ SearchViewAllResultsBorderColorHover: value })}
+													/>
+												)
+											}
+
+											<FB_Spacing
+												label={__("Border", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleSearchViewAllResultsBorderUnitsHandler}
+												spacingUnits={SearchViewAllResultsBorderUnits}
+												spacingDesktop={SearchViewAllResultsBorderDesktop}
+												spacingTablet={SearchViewAllResultsBorderTablet}
+												spacingMobile={SearchViewAllResultsBorderMobile}
+												handleSpacingUnitHandler={handleSearchViewAllResultsBorderUnitChange}
+												spacingCombineBtn={SearchViewAllResultsBorderLink}
+												spacingCombineBtnHandler={handleSearchViewAllResultsBorderCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Border Radius", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleSearchViewAllResultsBorderRadiusUnitsHandler}
+												spacingUnits={SearchViewAllResultsBorderRadiusUnits}
+												spacingDesktop={SearchViewAllResultsBorderRadiusDesktop}
+												spacingTablet={SearchViewAllResultsBorderRadiusTablet}
+												spacingMobile={SearchViewAllResultsBorderRadiusMobile}
+												handleSpacingUnitHandler={handleSearchViewAllResultsBorderRadiusUnitChange}
+												spacingCombineBtn={SearchViewAllResultsBorderRadiusLink}
+												spacingCombineBtnHandler={handleSearchViewAllResultsBorderRadiusCombineBtn}
+												setAttributes={setAttributes}
+											/>
+
+											<FB_Spacing
+												label={__("Padding", "frontis-blocks")}
+												deviceType={deviceType}
+												spacingUnitsHandler={handleSearchViewAllResultsPaddingUnitsHandler}
+												spacingUnits={SearchViewAllResultsPaddingUnits}
+												spacingDesktop={SearchViewAllResultsPaddingDesktop}
+												spacingTablet={SearchViewAllResultsPaddingTablet}
+												spacingMobile={SearchViewAllResultsPaddingMobile}
+												handleSpacingUnitHandler={handleSearchViewAllResultsPaddingUnitChange}
+												spacingCombineBtn={SearchViewAllResultsPaddingLink}
+												spacingCombineBtnHandler={handleSearchViewAllResultsPaddingCombineBtn}
 												setAttributes={setAttributes}
 											/>
 										</PanelBody>

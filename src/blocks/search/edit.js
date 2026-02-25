@@ -177,7 +177,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 															<span className="fb-search-result-excerpt">{item.excerpt}</span>
 														)}
 														<span className="fb-search-result-meta">
-															{item.type} · {item.date}
+															{item.type}<span class="meta-divider"></span>{item.date}
 														</span>
 													</div>
 												</a>

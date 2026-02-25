@@ -146,7 +146,11 @@
                             <div class="fb-search-result-content">
                                 <span class="fb-search-result-title">${highlightedTitle}</span>
                                 ${item.excerpt ? `<span class="fb-search-result-excerpt">${escapeHtml(item.excerpt)}</span>` : ''}
-                                <span class="fb-search-result-meta">${capitalizeFirst(item.type)} &middot; ${item.date}</span>
+                                <span class="fb-search-result-meta">
+                                    ${capitalizeFirst(item.type)}
+                                    <span class="meta-divider"></span>
+                                    ${item.date}
+                                </span>
                             </div>
                         </a>
                     `;
