@@ -106,7 +106,13 @@ const Edit = (props) => {
 
     return (
         <>
-            <Inspector {...props} />
+            {isSelected && (
+                <Inspector 
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    clientId={clientId} 
+                />
+            )}
 
             <div {...blockProps}>
                 <div className={`fb-form-group-wrapper fb-field-group-wrapper ${textareaFieldGlobalWraperClass && textareaFieldGlobalWraperClass}`} id={textareaFieldGlobalWraperID}>
