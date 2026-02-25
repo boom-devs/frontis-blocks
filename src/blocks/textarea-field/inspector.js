@@ -10,7 +10,7 @@ import {
     SelectControl,
     TextareaControl,
 } from "@wordpress/components";
-import { BORDER_STYLES, OVERFLOW_OP } from "./constants/constants";
+import { BORDER_STYLES, OVERFLOW_OP } from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import FrontisForms_Spacing from "../../components/spacing";
 import { useEffect, useMemo } from "@wordpress/element";
