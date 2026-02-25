@@ -168,7 +168,6 @@ class Blocks
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
-				wp_localize_script('frontis-blocks-frontend', 'SocialShareData', $localize_array);
 			}
 		}
 	}
