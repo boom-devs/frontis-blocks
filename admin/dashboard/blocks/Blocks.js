@@ -13,7 +13,7 @@ const Blocks = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [selectedCategory, setSelectedCategory] = useState('all');
 	const [searchTerm, setSearchTerm] = useState('');
-	const { ajaxUrl, nonce, blocks: allBlocks, completedBlocks } = window.frontisBlocksAdmin;
+	const { ajaxUrl, nonce, blocks: allBlocks, completedBlocks, isProActive } = window.frontisBlocksAdmin;
 	const [blocks, setBlocks] = useState([]);
 
 	const handleChange = () => {
@@ -56,7 +56,7 @@ const Blocks = () => {
 
 	const blocksCategory = useMemo(() => {
 		const filteredBlocks = blocks.filter(block =>
-			block.title.toLowerCase().includes(searchTerm.toLowerCase())
+			block.title.toLowerCase().includes(searchTerm.toLowerCase()) && block.child === 'false'
 		);
 
 		const info = filteredBlocks.reduce((acc, block) => {
@@ -131,7 +131,7 @@ const Blocks = () => {
 
 		const updatedBlocks = blocks.map(block => ({
 			...block,
-			status: newStatus
+			status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus
 		}));
 
 		setBlocks(updatedBlocks);
@@ -143,7 +143,10 @@ const Blocks = () => {
 		const newStatus = currentStatus ? '1' : '0';
 		const updatedBlocks = blocks.map(block => {
 			if (block.category === category) {
-				return { ...block, status: newStatus };
+				return { 
+					...block, 
+					status: (newStatus === '1' && isProActive === 'false' && block.package === 'pro') ? '0' : newStatus 
+				};
 			}
 			return block;
 		});
