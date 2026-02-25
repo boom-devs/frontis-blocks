@@ -24,10 +24,10 @@ import {
     ICON_POSITIONS,
     ICON_SWITCHER,
     OVERFLOW_OP,
-    ALIGN_ITEMS,
-    SUTMIT_BTN_POSITION,
-    SUCCESS_TYPE,
-} from "./constants/constants";
+    FORM_ALIGN_ITEMS,
+    FORM_SUBMIT_BTN_POSITION,
+    FORM_SUCCESS_TYPE,
+} from "@Constants/fbConstants";
 import FrontisForms_Spacing from '@Components/spacing';
 import FrontisForms_Range from '@Components/range';
 
@@ -2068,7 +2068,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalAlignment={(value) => setAttributes({ submitBtnAlignment: value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
-                        options={ALIGN_ITEMS}
+                        options={FORM_ALIGN_ITEMS}
                     />
                 </BaseControl>
 
@@ -2097,7 +2097,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                         setGlobalAlignment={(value) => setAttributes({ submitBtnIconPosition: value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
-                        options={SUTMIT_BTN_POSITION}
+                        options={FORM_SUBMIT_BTN_POSITION}
                     />
 
             </PanelBody>
@@ -2139,7 +2139,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                 <SelectControl
                     label={__("Success Type", "frontis-forms")}
                     value={formSuccessType}
-                    options={SUCCESS_TYPE}
+                    options={FORM_SUCCESS_TYPE}
                     onChange={(value) => setAttributes({ formSuccessType: value })}
                 />
                 {formSuccessType === 'message' && (
