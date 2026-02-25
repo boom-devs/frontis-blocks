@@ -158,6 +158,8 @@
             }
 
             .fb-search-result-meta {
+                display: flex;
+                align-items: center;
                 font-size: 11px;
                 color: #9ca3af;
                 text-transform: capitalize;
@@ -170,6 +172,19 @@
                 border-radius: 2px;
                 padding: 0 1px;
             }
+
+            .meta-divider {
+                line-height: 0;
+                &::before {
+                    content: "";
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50px;
+                    display: inline-flex;
+                    margin: 0 6px;
+                }
+            }
+
 
             .fb-search-results-footer {
                 padding: 10px 14px;

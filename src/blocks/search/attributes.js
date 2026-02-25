@@ -992,6 +992,19 @@ const attributes = {
 		default: true
 	},
 	/** Start Search Result Item Styling */
+	searchFieldItemColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	searchFieldItemColor: {
+		type: "string",
+		default: "",
+	},
+	searchFieldItemColorHover: {
+		type: "string",
+		default: "",
+	},
+
 	searchFieldItemBorder: {
 		type: 'string',
 		default: "solid",
@@ -1131,8 +1144,811 @@ const attributes = {
 		type: "boolean",
 		default: true
 	},
-	
-	/** End Search Result Styling */
+
+	/** Start Search Result Item Title Styling */
+	/** Start Typography */
+	searchFieldItemTitleGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	searchFieldItemTitleGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	searchFieldItemTitleGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	searchFieldItemTitleGlobalTypoOption: {
+		type: "object",
+		default: { label: 'Default', value: 'default' },
+	},
+	searchFieldItemTitleFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	searchFieldItemTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemTitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	searchFieldItemTitleFontWeight: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemTitleFontStyle: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemTitleTransform: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemTitleDecoration: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	searchFieldItemTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Input Field Typography */
+	searchFieldItemTitleColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	searchFieldItemTitleColor: {
+		type: "string",
+		default: "",
+	},
+	searchFieldItemTitleColorHover: {
+		type: "string",
+		default: "",
+	},
+
+	searchFieldItemTitleBorder: {
+		type: 'string',
+		default: "solid",
+	},
+	searchFieldItemTitleBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	searchFieldItemTitleBorderColor: {
+		type: 'string',
+		default: "#A4A7AE"
+	},
+	searchFieldItemTitleBorderColorHover: {
+		type: 'string',
+		default: ""
+	},
+	searchFieldItemTitleBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemTitleBorderDesktop: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemTitleBorderTablet: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemTitleBorderMobile: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemTitleBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius */
+	searchFieldItemTitleBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemTitleBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemTitleBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemTitleBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemTitleBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border Radius */
+
+	/** Start Padding */
+	searchFieldItemTitlePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemTitlePaddingDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemTitlePaddingTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemTitlePaddingMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemTitlePaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	/** Start Search Result Item Title Styling */
+	/** Start Typography */
+	searchFieldItemMetaGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	searchFieldItemMetaGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	searchFieldItemMetaGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	searchFieldItemMetaGlobalTypoOption: {
+		type: "object",
+		default: { label: 'Default', value: 'default' },
+	},
+	searchFieldItemMetaFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	searchFieldItemMetaFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemMetaFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	searchFieldItemMetaFontWeight: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemMetaFontStyle: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemMetaTransform: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemMetaDecoration: {
+		type: "string",
+		default: ""
+	},
+	searchFieldItemMetaLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemMetaLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	searchFieldItemMetaLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	searchFieldItemMetaLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Input Field Typography */
+	searchFieldItemMetaColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	searchFieldItemMetaColor: {
+		type: "string",
+		default: "",
+	},
+	searchFieldItemMetaColorHover: {
+		type: "string",
+		default: "",
+	},
+
+	searchFieldItemMetaBorder: {
+		type: 'string',
+		default: "solid",
+	},
+	searchFieldItemMetaBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	searchFieldItemMetaBorderColor: {
+		type: 'string',
+		default: "#A4A7AE"
+	},
+	searchFieldItemMetaBorderColorHover: {
+		type: 'string',
+		default: ""
+	},
+	searchFieldItemMetaBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemMetaBorderDesktop: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemMetaBorderTablet: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemMetaBorderMobile: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	searchFieldItemMetaBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius */
+	searchFieldItemMetaBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemMetaBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemMetaBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemMetaBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	searchFieldItemMetaBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border Radius */
+
+	/** Start Padding */
+	searchFieldItemMetaPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	searchFieldItemMetaPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemMetaPaddingTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemMetaPaddingMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	searchFieldItemMetaPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+
+	resultMetaGap: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	resultMetaGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** Meta Divider */
+	metaDividerSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	metaDividerSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	metaDividerColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	metaDividerColor: {
+		type: "string",
+		default: "",
+	},
+	metaDividerColorHover: {
+		type: "string",
+		default: "",
+	},
+
+	/** Start Search View All Result Styling */
+	SearchViewAllResultsGlobalTypographyData: {
+		type: "object",
+		default: {}
+	},
+	SearchViewAllResultsGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	SearchViewAllResultsGlobalTypoType: {
+		type: "string",
+		default: 'default',
+	},
+	SearchViewAllResultsGlobalTypoOption: {
+		type: "object",
+		default: { label: 'Default', value: 'default' },
+	},
+	SearchViewAllResultsFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	SearchViewAllResultsFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	SearchViewAllResultsFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	SearchViewAllResultsFontWeight: {
+		type: "string",
+		default: ""
+	},
+	SearchViewAllResultsFontStyle: {
+		type: "string",
+		default: ""
+	},
+	SearchViewAllResultsTransform: {
+		type: "string",
+		default: ""
+	},
+	SearchViewAllResultsDecoration: {
+		type: "string",
+		default: ""
+	},
+	SearchViewAllResultsLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	SearchViewAllResultsLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	SearchViewAllResultsLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	SearchViewAllResultsLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Input Field Typography */
+	SearchViewAllResultsColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	SearchViewAllResultsColor: {
+		type: "string",
+		default: "",
+	},
+	SearchViewAllResultsColorHover: {
+		type: "string",
+		default: "",
+	},
+
+	SearchViewAllResultsBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	SearchViewAllResultsBgColor: {
+		type: "string",
+		default: "",
+	},
+	SearchViewAllResultsBgColorHover: {
+		type: "string",
+		default: "",
+	},
+	SearchViewAllResultsBorder: {
+		type: 'string',
+		default: "solid",
+	},
+	SearchViewAllResultsBorderColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	SearchViewAllResultsBorderColor: {
+		type: 'string',
+		default: "#A4A7AE"
+	},
+	SearchViewAllResultsBorderColorHover: {
+		type: 'string',
+		default: ""
+	},
+	SearchViewAllResultsBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	SearchViewAllResultsBorderDesktop: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	SearchViewAllResultsBorderTablet: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	SearchViewAllResultsBorderMobile: {
+		type: "object",
+		default: {
+			top: '1',
+			bottom: '1',
+			left: '1',
+			right: '1',
+		},
+	},
+	SearchViewAllResultsBorderLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border */
+
+	/** Start Input Field Border Radius */
+	SearchViewAllResultsBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	SearchViewAllResultsBorderRadiusDesktop: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	SearchViewAllResultsBorderRadiusTablet: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	SearchViewAllResultsBorderRadiusMobile: {
+		type: "object",
+		default: {
+			top: '50',
+			bottom: '50',
+			left: '50',
+			right: '50',
+		},
+	},
+	SearchViewAllResultsBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Input Field Border Radius */
+
+	/** Start Padding */
+	SearchViewAllResultsPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	SearchViewAllResultsPaddingDesktop: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	SearchViewAllResultsPaddingTablet: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	SearchViewAllResultsPaddingMobile: {
+		type: "object",
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '24',
+			right: '24',
+		},
+	},
+	SearchViewAllResultsPaddingLink: {
+		type: "boolean",
+		default: true
+	},
+	/** End Search View All Result Styling */
 	searchIconZIndex: {
 		type: "object",
 		default: {
