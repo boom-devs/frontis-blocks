@@ -42,7 +42,24 @@ const save = ({ attributes }) => {
     const mergeFieldRequiredSwitcher = fieldRequiredSwitcher !== null ? fieldRequiredSwitcher : inheritedFieldRequiredSwitcher;
     const mergeFieldRequiredSymbolSwitcher = fieldRequiredSymbolSwitcher !== null ? fieldRequiredSymbolSwitcher : inheritedFieldRequiredSymbolSwitcher;
 
-    const defaultNameAttribute = `frontis_forms_${fieldType}_${blockID}`;
+    const generateDefaultNameAttribute = () => {
+        let base = fieldLabel;
+        if (!base) {
+            base = fieldType || 'text';
+        }
+        
+        // Remove HTML tags if any and sanitization
+        base = base.replace(/<[^>]*>?/gm, '');
+        
+        let slug = base.toString().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+        
+        if (!slug.includes('user')) {
+             slug = slug;
+        }
+        return slug;
+    };
+
+    const defaultNameAttribute = generateDefaultNameAttribute();
 
 
     return (
