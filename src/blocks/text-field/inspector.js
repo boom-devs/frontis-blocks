@@ -16,7 +16,7 @@ import {
     SelectControl,
     TextareaControl,
 } from "@wordpress/components";
-import { BORDER_STYLES, FIELD_TYPES, MEDIA_TYPES, OVERFLOW_OP } from "./constants/constants";
+import { BORDER_STYLES, FORM_FIELD_TYPES, OVERFLOW_OP } from "@Constants/fbConstants";
 import FBIconPicker from "../../components/icon-picker";
 import FrontisForms_Spacing from "../../components/spacing";
 import { useEffect, useMemo } from "@wordpress/element";
@@ -906,7 +906,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 <SelectControl
                     label={__("Field Type", "frontis-forms")}
                     value={fieldType}
-                    options={FIELD_TYPES}
+                    options={FORM_FIELD_TYPES}
                     onChange={(value) => setAttributes({ fieldType: value })}
                 />
                 <ToggleControl
