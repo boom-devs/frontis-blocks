@@ -18,6 +18,11 @@ const FB_BackgroundColorControl = ({
     label = __("Background Color", "frontis-blocks"),
     normalLabel = __("Background Type", "frontis-blocks"),
     hoverLabel = __("Background Type", "frontis-blocks"),
+    options = [
+        { label: __('Normal', 'frontis-forms'), value: 'normal' },
+        { label: __('Hover', 'frontis-forms'), value: 'hover' },
+    ],
+
     bgColorSwitcher,
     setBgColorSwitcher,
 
@@ -88,6 +93,7 @@ const FB_BackgroundColorControl = ({
                 label={label}
                 globalSwitcher={bgColorSwitcher}
                 setGlobalSwitcher={(value) => setBgColorSwitcher(value)}
+                options={options}
             />}
 
             {bgColorSwitcher === 'normal' && (
@@ -177,7 +183,7 @@ const FB_BackgroundColorControl = ({
                     />
                 </BaseControl>
             )}
-            {isBackgroundHover && bgColorSwitcher === 'hover' && (
+            {isBackgroundHover && bgColorSwitcher !== 'normal' && (
                 <BaseControl
                     className="fb-setting-background-color-setting-wrapper"
                     label={hoverLabel}

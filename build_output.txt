@@ -1,0 +1,878 @@
+
+> frontis-blocks@1.0.0 build
+> wp-scripts build --config webpack.config.js
+
+[baseline-browser-mapping] The data in this module is over two months old.  To ensure accurate Baseline data, please update: `npm i baseline-browser-mapping@latest -D`
+assets by status 23.1 MiB [1m[32m[cached][39m[22m 385 assets
+orphan modules 12 MiB (javascript) 1.87 KiB (asset) 109 KiB (runtime) [1m[33m[orphan][39m[22m 1724 modules
+runtime modules 170 KiB 267 modules
+built modules 215 KiB (css/mini-extract) 48.5 MiB (javascript) [1m[33m[built][39m[22m
+  cacheable modules 215 KiB (css/mini-extract) 1.14 MiB (javascript)
+    modules by path [1m./src/blocks/[39m[22m 199 KiB (css/mini-extract) 122 KiB (javascript)
+      css modules 199 KiB 110 modules
+      javascript modules 122 KiB 32 modules
+    modules by path [1m./node_modules/[39m[22m 1.02 MiB (javascript) 13.9 KiB (css/mini-extract)
+      javascript modules 1.02 MiB 35 modules
+      css modules 13.9 KiB
+        css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[1].use[2]![1m./node_modules/swiper/swiper.css[39m[22m 6.25 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+        + 7 modules
+    css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]![1m./admin/scss/_upgrade-to-pro-popup.scss[39m[22m 2.61 KiB [1m[33m[built][39m[22m [1m[33m[code generated][39m[22m
+  + 60 modules
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-button/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-image/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-megamenu/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-heading/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-navigation/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-paragraph/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/animated-heading/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion-item/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-video/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/breadcrumb/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/business-hours/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/call-to-action/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/contact-form-7/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/countdown/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/container/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/counter-number/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/dual-button/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/features-list/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/critical-css/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/form-builder/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/flip-box/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/fluent-form/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/image-gallery/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/google-map/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/icon-box/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/info-box/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/lottie-animation/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/off-canvas-menu/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel-item/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/news-ticker/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/pricing-table/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-comment-form/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-featured-image/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-title/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-category/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/progressbar/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-grid/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/rive-animation/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/search/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider-item/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-icons/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share-child/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/stack/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/testimonial/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/textarea-field/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/team-member/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/text-field/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs-item/style.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-button/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-image/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-megamenu/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-heading/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-paragraph/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/accordion-item/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/animated-heading/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-video/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/business-hours/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/contact-form-7/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/breadcrumb/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/counter-number/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/container/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/countdown/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/dual-button/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/features-list/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/fluent-form/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/form-builder/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/image-gallery/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/google-map/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/news-ticker/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/off-canvas-menu/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/pricing-table/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/progressbar/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-grid/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination-numbers/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share-child/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/search/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-icons/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/social-share/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/textarea-field/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/tabs/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/stack/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/team-member/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/text-field/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/testimonial/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/call-to-action/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/advanced-navigation/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./admin/scss/_upgrade-to-pro-popup.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/icon-box/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/flip-box/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder-wrapper/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/marquee-carousel-item/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/lottie-animation/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-featured-image/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-title/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/info-box/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/rive-animation/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-comment-form/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider-item/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/query-pagination/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/slider/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/post-category/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1mLOG from ./node_modules/sass-loader/dist/cjs.js sass-loader ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/blocks/loop-builder/editor.scss[39m[22m
+<w> [1m[33mDeprecation The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mMore info: https://sass-lang.com/d/legacy-js-api[39m[22m
+<w> [1m[33m[39m[22m
+<w> [1m[33mnull[39m[22m
+
+[1m[31mERROR[39m[22m in [1m./src/blocks/form-builder/edit.js[39m[22m [1m[32m12:0-72[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve '@Components/hooks/useBlockIdGenerator' in 'C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\src\blocks\form-builder'[39m[22m
+ @ ./src/blocks/form-builder/index.js 7:0-26 16:8-12
+
+[1m[31mERROR[39m[22m in [1m./src/blocks/form-builder/edit.js[39m[22m [1m[32m13:0-60[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve '@Components/hooks/useDeviceType' in 'C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\src\blocks\form-builder'[39m[22m
+ @ ./src/blocks/form-builder/index.js 7:0-26 16:8-12
+
+[1m[31mERROR[39m[22m in [1m./src/blocks/form-builder/edit.js[39m[22m [1m[32m15:0-58[39m[22m
+[1mModule [1m[31mnot found[39m[22m[1m: [1m[31mError[39m[22m[1m: Can't resolve '@Components/hooks/useBlockId' in 'C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\src\blocks\form-builder'[39m[22m
+ @ ./src/blocks/form-builder/index.js 7:0-26 16:8-12
+
+[1m[31mERROR[39m[22m in [1m./src/blocks/form-builder/styling.js[39m[22m
+Module build failed (from ./node_modules/@wordpress/scripts/node_modules/babel-loader/lib/index.js):
+SyntaxError: C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\src\blocks\form-builder\styling.js: Missing semicolon. (1065:12)
+
+[0m [90m 1063 |[39m [32m[39m
+ [90m 1064 |[39m [32m    const customCss = getCustomCss(formCustomCSS, \`.\${blockID}\`);[39m
+[31m[1m>[22m[39m[90m 1065 |[39m [32m    return `[39m${styles} ${customCss}[32m`.replace(/\s+/g, ' ').trim();[39m
+ [90m      |[39m             [31m[1m^[22m[39m
+ [90m 1066 |[39m [32m[39m
+ [90m 1067 |[39m [32m};[39m
+ [90m 1068 |[39m [32m[39m[0m
+    at constructor (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:367:19)
+    at JSXParserMixin.raise (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:6624:19)
+    at JSXParserMixin.semicolon (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:6920:10)
+    at JSXParserMixin.parseVarStatement (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13307:10)
+    at JSXParserMixin.parseStatementContent (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12927:23)
+    at JSXParserMixin.parseStatementLike (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12843:17)
+    at JSXParserMixin.parseStatementListItem (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12823:17)
+    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13392:61)
+    at JSXParserMixin.parseBlockBody (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13385:10)
+    at JSXParserMixin.parseBlock (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13373:10)
+    at JSXParserMixin.parseFunctionBody (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12174:24)
+    at JSXParserMixin.parseArrowExpression (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12149:10)
+    at JSXParserMixin.parseParenAndDistinguishExpression (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:11759:12)
+    at JSXParserMixin.parseExprAtom (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:11395:23)
+    at JSXParserMixin.parseExprAtom (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:4793:20)
+    at JSXParserMixin.parseExprSubscripts (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:11145:23)
+    at JSXParserMixin.parseUpdate (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:11130:21)
+    at JSXParserMixin.parseMaybeUnary (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:11110:23)
+    at JSXParserMixin.parseMaybeUnaryOrPrivate (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10963:61)
+    at JSXParserMixin.parseExprOps (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10968:23)
+    at JSXParserMixin.parseMaybeConditional (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10945:23)
+    at JSXParserMixin.parseMaybeAssign (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10895:21)
+    at C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10864:39
+    at JSXParserMixin.allowInAnd (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12495:16)
+    at JSXParserMixin.parseMaybeAssignAllowIn (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:10864:17)
+    at JSXParserMixin.parseVar (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13460:91)
+    at JSXParserMixin.parseVarStatement (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13306:10)
+    at JSXParserMixin.parseStatementContent (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12927:23)
+    at JSXParserMixin.parseStatementLike (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12843:17)
+    at JSXParserMixin.parseModuleItem (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12820:17)
+    at JSXParserMixin.parseBlockOrModuleBlockBody (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13392:36)
+    at JSXParserMixin.parseBlockBody (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:13385:10)
+    at JSXParserMixin.parseProgram (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12698:10)
+    at JSXParserMixin.parseTopLevel (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:12688:25)
+    at JSXParserMixin.parse (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:14568:25)
+    at parse (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\parser\lib\index.js:14602:38)
+    at parser (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\core\lib\parser\index.js:41:34)
+    at parser.next (<anonymous>)
+    at normalizeFile (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\core\lib\transformation\normalize-file.js:64:37)
+    at normalizeFile.next (<anonymous>)
+    at run (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\core\lib\transformation\index.js:22:50)
+    at run.next (<anonymous>)
+    at transform (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\core\lib\transform.js:22:33)
+    at transform.next (<anonymous>)
+    at step (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\gensync\index.js:261:32)
+    at C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\gensync\index.js:273:13
+    at async.call.result.err.err (C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\gensync\index.js:223:11)
+    at C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\gensync\index.js:189:28
+    at C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\@babel\core\lib\gensync-utils\async.js:67:7
+    at C:\Users\Mehedi\Local Sites\frontis-blocks\app\public\wp-content\plugins\frontis-blocks\node_modules\gensync\index.js:113:33
+ @ ./src/blocks/form-builder/edit.js 11:0-49 62:19-43
+ @ ./src/blocks/form-builder/index.js 7:0-26 16:8-12
+
+[1m[33m3 errors have detailed information that is not shown.
+Use 'stats.errorDetails: true' resp. '--stats-error-details' to show it.[39m[22m
+
+webpack 5.103.0 compiled with [1m[31m4 errors[39m[22m in 34577 ms
