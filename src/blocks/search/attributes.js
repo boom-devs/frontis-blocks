@@ -203,7 +203,7 @@ const attributes = {
 	/** Start Button Border */
 	buttonBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	buttonBorderColorSwitcher: {
 		type: "string",
@@ -228,28 +228,28 @@ const attributes = {
 	buttonBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderLink: {
@@ -270,28 +270,28 @@ const attributes = {
 	buttonBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	buttonBorderRadiusLink: {
@@ -315,8 +315,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	buttonPaddingTablet: {
@@ -324,8 +324,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	buttonPaddingMobile: {
@@ -333,8 +333,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	buttonPaddingLink: {
@@ -406,8 +406,8 @@ const attributes = {
 	searchIconSize: {
 		type: 'object',
 		default: {
-			Desktop: '50',
-			Tablet: '50',
+			Desktop: '',
+			Tablet: '',
 			Mobile: '30'
 		}
 	},
@@ -589,7 +589,7 @@ const attributes = {
 	/** Start Input Field Border */
 	inputFieldBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	inputFieldBorderColorSwitcher: {
 		type: "string",
@@ -614,28 +614,28 @@ const attributes = {
 	inputFieldBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderLink: {
@@ -656,28 +656,28 @@ const attributes = {
 	inputFieldBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldBorderRadiusLink: {
@@ -701,8 +701,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldPaddingTablet: {
@@ -710,8 +710,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldPaddingMobile: {
@@ -719,8 +719,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	inputFieldPaddingLink: {
@@ -854,7 +854,7 @@ const attributes = {
 	/** Start Input Field Border */
 	searchFieldBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	searchFieldBorderColorSwitcher: {
 		type: "string",
@@ -879,28 +879,28 @@ const attributes = {
 	searchFieldBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderLink: {
@@ -921,28 +921,28 @@ const attributes = {
 	searchFieldBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldBorderRadiusLink: {
@@ -965,8 +965,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldPaddingTablet: {
@@ -974,8 +974,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldPaddingMobile: {
@@ -983,8 +983,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldPaddingLink: {
@@ -1007,7 +1007,7 @@ const attributes = {
 
 	searchFieldItemBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	searchFieldItemBorderColorSwitcher: {
 		type: "string",
@@ -1032,28 +1032,28 @@ const attributes = {
 	searchFieldItemBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderLink: {
@@ -1074,28 +1074,28 @@ const attributes = {
 	searchFieldItemBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemBorderRadiusLink: {
@@ -1118,8 +1118,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemPaddingTablet: {
@@ -1127,8 +1127,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemPaddingMobile: {
@@ -1136,8 +1136,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemPaddingLink: {
@@ -1256,7 +1256,7 @@ const attributes = {
 
 	searchFieldItemTitleBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	searchFieldItemTitleBorderColorSwitcher: {
 		type: "string",
@@ -1281,28 +1281,28 @@ const attributes = {
 	searchFieldItemTitleBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderLink: {
@@ -1323,28 +1323,28 @@ const attributes = {
 	searchFieldItemTitleBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitleBorderRadiusLink: {
@@ -1367,8 +1367,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitlePaddingTablet: {
@@ -1376,8 +1376,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitlePaddingMobile: {
@@ -1385,8 +1385,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemTitlePaddingLink: {
@@ -1505,7 +1505,7 @@ const attributes = {
 
 	searchFieldItemMetaBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	searchFieldItemMetaBorderColorSwitcher: {
 		type: "string",
@@ -1530,28 +1530,28 @@ const attributes = {
 	searchFieldItemMetaBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderLink: {
@@ -1572,28 +1572,28 @@ const attributes = {
 	searchFieldItemMetaBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaBorderRadiusLink: {
@@ -1616,8 +1616,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaPaddingTablet: {
@@ -1625,8 +1625,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaPaddingMobile: {
@@ -1634,8 +1634,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	searchFieldItemMetaPaddingLink: {
@@ -1646,7 +1646,7 @@ const attributes = {
 	resultMetaGap: {
 		type: 'object',
 		default: {
-			Desktop: '24',
+			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -1663,7 +1663,7 @@ const attributes = {
 	metaDividerSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
+			Desktop: '',
 			Tablet: '',
 			Mobile: ''
 		}
@@ -1811,7 +1811,7 @@ const attributes = {
 	},
 	SearchViewAllResultsBorder: {
 		type: 'string',
-		default: "solid",
+		default: '',
 	},
 	SearchViewAllResultsBorderColorSwitcher: {
 		type: "string",
@@ -1836,28 +1836,28 @@ const attributes = {
 	SearchViewAllResultsBorderDesktop: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderTablet: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderMobile: {
 		type: "object",
 		default: {
-			top: '1',
-			bottom: '1',
-			left: '1',
-			right: '1',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderLink: {
@@ -1878,28 +1878,28 @@ const attributes = {
 	SearchViewAllResultsBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: '50',
-			bottom: '50',
-			left: '50',
-			right: '50',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsBorderRadiusLink: {
@@ -1922,8 +1922,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsPaddingTablet: {
@@ -1931,8 +1931,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsPaddingMobile: {
@@ -1940,8 +1940,8 @@ const attributes = {
 		default: {
 			top: '0',
 			bottom: '0',
-			left: '24',
-			right: '24',
+			left: '',
+			right: '',
 		},
 	},
 	SearchViewAllResultsPaddingLink: {
