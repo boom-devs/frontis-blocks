@@ -111,23 +111,21 @@ class FormBuilder extends AjaxBase
 		$site_name = get_bloginfo('name');
 		$site_url  = home_url();
 
-		$message  = "New form submission received!\n";
-		$message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
-		$message .= "Form:      {$form_title}\n";
-		$message .= "Site:      {$site_name} ({$site_url})\n";
-		$message .= "Page URL:  {$page_url}\n";
+		$message  = "Form Name: {$form_title}\n";
 		$message .= "Date:      " . current_time('F j, Y g:i A') . "\n\n";
-		$message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-		$message .= "SUBMITTED DATA\n";
-		$message .= "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
-
+		$message .= "\n-- \n";
+		
 		foreach ($clean_data as $key => $value) {
 			$label = ucwords(str_replace(['_', '-'], ' ', $key));
 			$message .= "{$label}: {$value}\n";
 		}
 
-		$message .= "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-		$message .= "— {$site_name}\n";
+		$message .= "\n-- \n";
+		$message .= sprintf(
+			__('This is a notification that a contact form was submitted on your website (%s %s).', 'frontis-blocks'),
+			$site_name,
+			$site_url
+		);
 
 		$headers = ['Content-Type: text/plain; charset=UTF-8'];
 		if (!empty($cc_emails)) {
