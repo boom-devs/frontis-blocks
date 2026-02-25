@@ -170,6 +170,10 @@ class Enqueues
             'nonce' => wp_create_nonce('frontis_loop_nonce'),
         ];
         wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
+        wp_localize_script('frontis-blocks-frontend', 'frontisFormsAjax', [
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('fb_form_nonce'),
+        ]);
         wp_localize_script('frontis-blocks-frontend', 'SocialShareData', [
             'permalink' => get_permalink(),
             'title' => get_the_title(),
