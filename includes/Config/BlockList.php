@@ -422,7 +422,7 @@ class BlockList
                 'icon' => FB_PLUGIN_URL . 'assets/icons/post-grid.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
-                'complete' => 'true',
+                'complete' => 'false',
                 'child' => 'false',
             ],
             'post-title' => [
@@ -605,7 +605,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'team-member' => [
                 'slug' => 'team-member',
@@ -652,12 +652,12 @@ class BlockList
                 'package' => 'pro',
                 'category' => 'content',
                 'badge' => 'pro',
-                'status' => 'true',
+                'status' => 'ture',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-heading.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'query-pagination-next' => [
                 'slug' => 'query-pagination-next',
@@ -670,7 +670,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'query-pagination-previous' => [
                 'slug' => 'query-pagination-previous',
@@ -683,7 +683,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'query-pagination-numbers' => [
                 'slug' => 'query-pagination-numbers',
@@ -696,7 +696,7 @@ class BlockList
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
-                'child' => 'false',
+                'child' => 'true',
             ],
             'marquee-carousel' => [
                 'slug' => 'marquee-carousel',
