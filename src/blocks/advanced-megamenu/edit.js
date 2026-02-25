@@ -8,6 +8,8 @@ import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import './editor.scss';
+import { applyFilters } from '@wordpress/hooks';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateAdvancedMegaMenuStyle from "./styling";
 
@@ -17,6 +19,7 @@ const loadedFonts = new Set();
 import Inspector from "./inspector";
 
 export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
+
 	const {
 		blockID,
 		blockStyle,
@@ -70,6 +73,14 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	 */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
+
+	const advancedMegamenuAvailable = applyFilters('frontisblocks-advanced-megamenu-available', false);
+
+	if (!advancedMegamenuAvailable) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
 
 	return (
 		<>

@@ -13,6 +13,7 @@ use FrontisBlocks\Config\BlockList;
 use FrontisBlocks\Admin\Ajax\Settings;
 use FrontisBlocks\Admin\Ajax\GlobalSettings;
 use FrontisBlocks\Admin\Ajax\TemplateLibrary;
+use FrontisBlocks\Admin\Ajax\FormBuilder;
 use FrontisBlocks\Core\InitialActivatedBlocks;
 use FrontisBlocks\Core\SupportSVG;
 use FrontisBlocks\Core\SupportRive;
@@ -156,6 +157,7 @@ final class Plugin
 		GlobalSettings::get_instance()->register_global_settings_events();
 		BlocksAjax::get_instance()->register_blocks_ajax_events();
 		TemplateLibrary::get_instance()->register_ajax_events();
+		FormBuilder::get_instance()->register_ajax_events();
 		SupportSVG::get_instance();
 		SupportRive::get_instance();
 		RestApi::get_instance();
