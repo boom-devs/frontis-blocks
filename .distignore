@@ -17,7 +17,7 @@ docker-compose.yml
 Thumbs.db
 behat.yml
 bitbucket-pipelines.yml
-bin
+/bin
 .circleci/config.yml
 composer.json
 composer.lock
@@ -37,8 +37,8 @@ README.md
 webpack.config.js
 wp-cli.local.yml
 yarn.lock
-tests
-node_modules
+/tests
+/node_modules
 *.sql
 *.tar.gz
 *.zip
@@ -65,7 +65,29 @@ vendor-bundle/index.js.map
 vendor-bundle/style.css
 verdor-bundle/style.css.map
 
-.wordpress-org
+
+.idea
+.agent
+.agents
+_agent
+_agents
+
+# Source & dev directories
+/src
+/admin
+
+# Additional webpack configs
+webpack.blocks.config.js
+webpack.config.admin.js
+webpack.zip.js
+
+# Dev-only files
+backlog
+RELEASE_NOTES.md
+full-site.json
+testing-page.json
+frontis-blocks.zip
+
 # dev tools
 tools
 *.log

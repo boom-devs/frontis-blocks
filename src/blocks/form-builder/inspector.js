@@ -538,34 +538,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     ]);
     /** End load font */
 
-    // Fetch forms Title
-    const [formsList, setFormsList] = useState([]);
-
-    useEffect(() => {
-        fetchForms();
-    }, []);
-
-    const fetchForms = async () => {
-        try {
-            const res = await fetch(
-                `${frontisFormsAdmin.ajaxUrl}?action=frontis_forms_get_forms_dropdown&nonce=${frontisFormsAdmin.nonce}`
-            );
-            const data = await res.json();
-            console.log(data);
-            if (data.success) {
-                setFormsList(data.data || []);
-            }
-        } catch (err) {
-            console.error('Failed to fetch forms:', err);
-        }
-    };
-
-    const formOptions = [
-        { label: __('-- Select a Form --', 'frontis-forms'), value: '' },
-        ...formsList.map(form => ({ label: form.title, value: form.title })),
-    ];
-
-
 
     // Label Margin Function
     const handleLabelMarginUnitChange = ( event, position ) => {
@@ -2131,21 +2103,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             </PanelBody>
 
             <PanelBody title={__("Form Settings", "frontis-forms")} initialOpen={false}>
-                <SelectControl
-                    label={__('Select Form', 'frontis-forms')}
-                    value={formTitle || ''}
-                    options={formOptions}
-                    onChange={(value) => setAttributes({ formTitle: value })}
-                    help={__('Select a form created in the Forms tab of Frontis Forms dashboard.', 'frontis-forms')}
-                />
-
-                {/* <SelectControl
-                    label={__("Overflow", "frontis-forms")}
-                    value={formOverflow}
-                    options={OVERFLOW_OP}
-                    onChange={(value) => setAttributes({ formOverflow: value })}
-                /> */}
-
                 <TextareaControl
                     label={__('Email To', 'frontis-forms')}
                     value={formToEmail}
@@ -2185,12 +2142,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     options={SUCCESS_TYPE}
                     onChange={(value) => setAttributes({ formSuccessType: value })}
                 />
-                {/* <SelectControl
-                    label={__("Message Position", "frontis-forms")}
-                    value={formOverflow}
-                    options={OVERFLOW_OP}
-                    onChange={(value) => setAttributes({ formOverflow: value })}
-                /> */}
                 {formSuccessType === 'message' && (
                 <TextareaControl
                     label={__('Success Message', 'frontis-forms')}
