@@ -575,6 +575,7 @@ const generateSearchStyle = (attributes) => {
 
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field:hover input {
             ${inputFieldTextColorHover ? `color: ${inputFieldTextColorHover};` : ''}
+            ${inputFieldBorderColorHover ? `border-color: ${inputFieldBorderColorHover};` : ''}
         }
 
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results{
@@ -587,7 +588,7 @@ const generateSearchStyle = (attributes) => {
         }
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results:hover{
             ${searchFieldColorHover ? `background: ${searchFieldColorHover};` : ''}
-            ${searchFieldBorderColorHover ? `border: ${searchFieldBorderColorHover};` : ''}
+            ${searchFieldBorderColorHover ? `border-color: ${searchFieldBorderColorHover};` : ''}
         }
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item{
             ${searchFieldItemColor ? `background: ${searchFieldItemColor};` : ''}

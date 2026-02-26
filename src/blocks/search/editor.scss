@@ -27,13 +27,22 @@
             display: flex;
             align-items: center;
         }
-    }
 
-    .fb-search-button-wrapper span {
-        font-family: 'Radio Canada Big';
-        font-size: 18px;
-        font-weight: 400;
-        color: #000;
+        span {
+            font-family: 'Radio Canada Big';
+            font-size: 18px;
+            font-weight: 400;
+            color: #000;
+        }
+        .fb-search-icon{
+            svg{
+                width: 16px;
+                height: 16px;
+            }
+        }
+        &.hidden{
+            visibility: hidden;
+        }
     }
 
     .fb-search-block-wrapper-inner-input-field {
@@ -175,6 +184,7 @@
 
             .meta-divider {
                 line-height: 0;
+
                 &::before {
                     content: "";
                     width: 6px;
