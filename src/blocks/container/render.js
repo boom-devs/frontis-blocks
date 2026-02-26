@@ -73,24 +73,26 @@ const Render = ( props ) => {
 	/**
 	 * Generate and update Custom CSS.
 	 * 
-	 * Logic for Separator:
-	 * - Root Container: Uses ' ' (space) as separator.
-	 *   Example: `#block-id .custom-class` (Descendant selector).
-	 *   Reason: Root container wraps inner blocks in a separate div.
+	 * Always uses space separator (descendant selector) for all containers.
+	 * For child containers, custom classes added to the container are passed
+	 * as selfClasses to getCustomCss, which auto-detects when a selector
+	 * matches a self-class and uses a chained selector (no space) instead.
 	 * 
-	 * - Child Container: Uses '' (empty) as separator.
-	 *   Example: `#block-id.custom-class` (Chained selector).
-	 *   Reason: Child container applies custom class to the SAME element as the ID.
+	 * Example with custom class "my-section" on child container:
+	 *   .my-section { bg: red }  → #block-id.my-section { bg: red }  (chained, self)
+	 *   .heading { color: blue } → #block-id .heading { color: blue } (descendant)
 	 */
 	useEffect(() => {
-		const separator = isBlockRootParent ? ' ' : '';
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, separator);
+		const selfClasses = !isBlockRootParent
+			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
+			: [];
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, ' ', selfClasses);
 		// Only update if value actually changed
 		if (containerGlobalCustomCSSValue !== customCss) {
 			setAttributes({containerGlobalCustomCSSValue: customCss});
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [containerGlobalCustomCSS, blockProps.id, isBlockRootParent]);
+	}, [containerGlobalCustomCSS, blockProps.id, containerGlobalCustomCSSClass]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
