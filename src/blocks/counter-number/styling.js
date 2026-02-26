@@ -14,7 +14,6 @@ const generateCounterNumberStyle = (attributes) => {
     const {
         blockID,
         counterAlignment,
-        // deviceType,
         counterNumberStart,
         counterNumberEnd,
         counterDuration,
