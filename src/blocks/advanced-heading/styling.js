@@ -873,8 +873,8 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 : ''}
                     
                 align-self: ${
-                    headingAlignment.Desktop === 'center' ? 'center' :
-                    headingAlignment.Desktop === 'right'  ? 'self-end' : 'self-start'
+                    headingAlignment.Tablet === 'center' ? 'center' :
+                    headingAlignment.Tablet === 'right'  ? 'self-end' : 'self-start'
                 };
             }
             .${blockID} .fb-advanced-wrapper .fb-advanced-heading.active-line::after,
@@ -981,8 +981,8 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 : ''}
 
                 align-self: ${
-                    headingAlignment.Desktop === 'center' ? 'center' :
-                    headingAlignment.Desktop === 'right'  ? 'self-end' : 'self-start'
+                    headingAlignment.Mobile === 'center' ? 'center' :
+                    headingAlignment.Mobile === 'right'  ? 'self-end' : 'self-start'
                 };
             }
 
