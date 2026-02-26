@@ -11,7 +11,7 @@ import getCustomCss from '@Utils/getCustomCss';
  * @returns {string} CSS string
  */
 const generateAdvancedHeadingStyle = (attributes) => {
-     const {
+    const {
         blockID,
         headingAlignment,
 
@@ -267,7 +267,7 @@ const generateAdvancedHeadingStyle = (attributes) => {
         headingBeforeAfterMobileBorderRadius,
         /** End Before After */
 
-         /** Start Background */
+        /** Start Background */
         headingGlobalBgNormalBackgroundType,
         headingGlobalBgNormalClassicColor,
         headingGlobalBgNormalGradientColor,
@@ -492,11 +492,10 @@ const generateAdvancedHeadingStyle = (attributes) => {
             ${globalDesktopBorderRadiusWidth && headingGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ''}
             ${headingGlobalBorderColor ? `border-color: ${headingGlobalBorderColor};` : ''}
             ${headingGlobalBoxShadowCssValue ? `box-shadow: ${headingGlobalBoxShadowCssValue};` : ''}
-
+            ${headingAlignment?.Desktop ? `text-align: ${headingAlignment?.Desktop};` : ''}
             position: relative;
             display: flex;
             flex-direction: column;
-            ${headingAlignment?.Desktop ? `align-items: ${headingAlignment?.Desktop};` : ''}
             transition: all .3s ease-in-out;
         }
         .${blockID} .fb-advanced-wrapper:hover {
@@ -728,6 +727,12 @@ const generateAdvancedHeadingStyle = (attributes) => {
                     `margin-bottom: ${separatorSpacing?.Desktop}${separatorSpacingUnits?.Desktop};`
                     : ''}`
                 : ''}
+            
+            align-self: ${
+                headingAlignment.Desktop === 'center' ? 'center' :
+                headingAlignment.Desktop === 'right'  ? 'self-end' : 'self-start'
+            };
+            
         }
         .${blockID} .fb-advanced-wrapper .fb-advanced-title-separator-zigzag {
             display: flex;
@@ -767,7 +772,7 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 ${globalTabletMargin && headingGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ''}
                 ${globalTabletBorderWidth && headingGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ''}
                 ${globalTabletBorderRadiusWidth && headingGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
-                ${headingAlignment?.Tablet ? `align-items: ${headingAlignment?.Tablet};` : ''}
+                ${headingAlignment?.Tablet ? `text-align: ${headingAlignment?.Tablet};` : ''}
             }
 
             .${blockID} .fb-advanced-wrapper:hover {
@@ -866,6 +871,11 @@ const generateAdvancedHeadingStyle = (attributes) => {
                     `margin-bottom: ${separatorSpacing?.Tablet}${separatorSpacingUnits?.Tablet};`
                     : ''}`
                 : ''}
+                    
+                align-self: ${
+                    headingAlignment.Tablet === 'center' ? 'center' :
+                    headingAlignment.Tablet === 'right'  ? 'self-end' : 'self-start'
+                };
             }
             .${blockID} .fb-advanced-wrapper .fb-advanced-heading.active-line::after,
             .${blockID} .fb-advanced-wrapper .fb-advanced-heading .fb-heading-dynamic-link.active-line::after {
@@ -969,6 +979,11 @@ const generateAdvancedHeadingStyle = (attributes) => {
                     `margin-bottom: ${separatorSpacing?.Mobile}${separatorSpacingUnits?.Mobile};`
                     : ''}`
                 : ''}
+
+                align-self: ${
+                    headingAlignment.Mobile === 'center' ? 'center' :
+                    headingAlignment.Mobile === 'right'  ? 'self-end' : 'self-start'
+                };
             }
 
             .${blockID}.fb-advanced-heading-main-wrapper {
@@ -985,7 +1000,7 @@ const generateAdvancedHeadingStyle = (attributes) => {
                 ${globalMobileMargin && headingGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ''}
                 ${globalMobileBorderWidth && headingGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ''}
                 ${globalMobileBorderRadiusWidth && headingGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
-                ${headingAlignment?.Mobile ? `align-items: ${headingAlignment?.Mobile};` : ''}
+                ${headingAlignment?.Mobile ? `text-align: ${headingAlignment?.Mobile};` : ''}
             }
 
             .${blockID} .fb-advanced-wrapper:hover {

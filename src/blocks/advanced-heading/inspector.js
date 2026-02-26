@@ -40,6 +40,7 @@ import {
     getdynamicTextTimeFormatOptions,
     DYNAMIC_LINK_SOURCE_OPTIONS,
     SEPARATOR_POSITION,
+    SEPARATOR_ALIGN,
     SUBHEADING_POSITION,
     BORDER_STYLES,
     BACKGROUND_TYPES,
@@ -1866,26 +1867,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </BaseControl>
 
                     <FB_ResponsiveAlignmentControl
-                        label={__("Alignment", "frontis-blocks")}
-                        globalAlignment={Object.fromEntries(
-                            Object.entries(headingAlignment || {}).map(([device, value]) => [
-                                device,
-                                value === 'left' ? 'start' : (value === 'right' ? 'end' : value)
-                            ])
-                        )}
-                        setGlobalAlignment={(value) => {
-                            const updatedValue = { ...value };
-                            if (updatedValue[deviceType] === 'left') updatedValue[deviceType] = 'start';
-                            if (updatedValue[deviceType] === 'right') updatedValue[deviceType] = 'end';
-                            setAttributes({ headingAlignment: updatedValue });
-                        }}
+                        label={__("Text Align", "frontis-blocks")}
+                        globalAlignment={headingAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ headingAlignment: value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
-                        options={[
-                            { label: <Dashicon icon="editor-alignleft" />, value: "start" },
-                            { label: <Dashicon icon="editor-aligncenter" />, value: "center" },
-                            { label: <Dashicon icon="editor-alignright" />, value: "end" },
-                        ]}
                     />
 
                 </PanelBody>
