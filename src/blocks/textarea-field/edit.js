@@ -96,7 +96,7 @@ const Edit = (props) => {
         let slug = base.toString().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
         
         if (!slug.includes('user')) {
-             slug = 'user_' + slug;
+             slug = slug;
         }
         return slug;
     };

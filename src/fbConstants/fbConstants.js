@@ -279,6 +279,7 @@ export const SEPARATOR_POSITION = [
 	{ label: __("Top", "frontis-blocks"), value: "top" },
 	{ label: __("Bottom", "frontis-blocks"), value: "bottom" },
 ];
+
 export const SEPARATOR_STYLE_OPTIONS = [
 	{ label: __("Solid", "frontis-blocks"), value: "solid" },
 	{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
