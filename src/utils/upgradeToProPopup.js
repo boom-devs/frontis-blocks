@@ -27,13 +27,13 @@ const UpgradeToProPopup = () => {
 				<div className="fb-pro-card-content">
 					<h3 className="fb-pro-card-heading">Upgrade to PRO</h3>
 					<p className="fb-pro-card-text">
-						Upgrade to Essential Blocks PRO and gain access to advanced blocks
+						Upgrade to Frontis Blocks PRO and gain access to advanced blocks
 						and features to build websites more efficiently.
 					</p>
 				</div>
 				<div className="fb-pro-upgrade-btn-wrapper">
 					<div className="fb-pro-upgrade-now-btn">
-						<a href="#">Upgrade Now</a>
+						<a target="_blank" href="https://frontiswp.com/block/pricing-table/">Upgrade Now</a>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"

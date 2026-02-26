@@ -786,6 +786,16 @@ export const GRID_UNIT_TYPES = [
 	{ title: '%', label: __('%', 'frontis-blocks'), value: "%" }
 ];
 
+export const SEARCH_ICON_ALIGN = [
+	{ label: __(<Dashicon icon={"remove"} />), value: "none" },
+	{ label: __(<Dashicon icon={"text"} />), value: "icon-text" },
+	{ label: __(<Dashicon icon={"format-image"} />), value: "image" },
+];
+
+export const SEARCH_APPEARANCE = [
+	{ title: 'Button and Search', label: __('Button and Search', 'frontis-blocks'), value: "button-and-search" },
+	{ title: 'Only Search', label: __('Only Search', 'frontis-blocks'), value: "only-search" },
+];
 /** End Container Layout Constants */
 
 export const WIDTH_STYLES = [
@@ -1037,4 +1047,28 @@ export const SOCIAL_ICON_ANIMATION = [
 export const SOCIAL_ICON_TYPE = [
 	{ label: __("In Content", "frontis-block"), value: "content" },
 	{ label: __("In Image", "frontis-block"), value: "image" },
+];
+
+// Form Builder Constants'
+export const FORM_ALIGN_ITEMS = [
+    { title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "left" },
+    { title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
+    { title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "right" },
+    { title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }	
+];
+
+export const FORM_SUBMIT_BTN_POSITION = [
+	{ label: "Left", value: "left" },
+	{ label: "Right", value: "right" },
+];
+
+export const FORM_SUCCESS_TYPE = [
+	{ label: "Message", value: "message" },
+	{ label: "Redirect", value: "redirect" },
+];
+
+export const FORM_FIELD_TYPES = [
+	{ label: __("Text", "frontis-block"), value: "text" },
+	{ label: __("Email", "frontis-block"), value: "email" },
+	{ label: __("Number", "frontis-block"), value: "number" },
 ];

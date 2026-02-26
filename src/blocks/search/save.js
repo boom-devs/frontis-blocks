@@ -11,6 +11,9 @@ export default function Save({ attributes }) {
 		searchIconImageAlt,
 		searchGlobalWraperID,
 		searchGlobalWraperClass,
+		searchAppearance,
+		showPlaceholderSwitcher,
+		placeholderText
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -19,7 +22,7 @@ export default function Save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			<div className={`fb-search-container ${searchGlobalWraperClass}`} id={searchGlobalWraperID}>
+			<div className={`fb-search-container ${searchGlobalWraperClass}${searchAppearance}`} id={searchGlobalWraperID}>
 				<div className="fb-search-button-wrapper">
 					<div className="fb-search-block-wrapper-inner-input-icon">
 						{searchIconAlign === 'icon-text' && searchIcon ? ( 
@@ -45,7 +48,11 @@ export default function Save({ attributes }) {
 				<div className="fb-search-block-wrapper-inner-input-field">
 					<form role="search" method="get" action={frontisBlocksAdmin.home_url} >
 						<div className="wp-block-search__inside-wrapper">
-							<input className="wp-block-search__input" placeholder='Search...' id="wp-block-search__input-2" type="search" name="s" required="" />
+							<input className="wp-block-search__input" placeholder={
+									showPlaceholderSwitcher
+										? (placeholderText || __('Search', 'frontis-blocks'))
+										: ''
+								} id="wp-block-search__input-2" type="search" name="s" required="" />
 						</div>
 					</form>
 				</div>
