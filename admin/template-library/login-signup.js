@@ -438,7 +438,8 @@ const LoginSignupModal = ({ onLoginSuccess = () => {}, isLoginModalOpen, setIsLo
 					<button
 						type="submit"
 						className={`fb-auth-submit-btn ${isLoading ? "loading" : ""}`}
-						// disabled={isLoading}
+						disabled={isLoading}
+						onClick={() => clearErrors()}
 					>
 						{isLoading ? (
 							<>
