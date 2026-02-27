@@ -535,7 +535,7 @@ const TypographySettings = ({
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
 				'textDecoration': {
-					variable: `--fb-global-${selectedHeading}--font-decoration`,
+					variable: `--fb-global-${selectedHeading}--text-decoration`,
 					value: value
 				}
 			}
@@ -560,7 +560,7 @@ const TypographySettings = ({
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
 				'textTransform': {
-					variable: `--fb-global-${selectedHeading}--font-transform`,
+					variable: `--fb-global-${selectedHeading}--text-transform`,
 					value: value
 				}
 			}
@@ -833,7 +833,7 @@ const TypographySettings = ({
 			[item]: {
 				...globalTypography[item],
 				'textDecoration': {
-					variable: `--fb-global-${item}--font-decoration`,
+					variable: `--fb-global-${item}--text-decoration`,
 					value: value
 				}
 			}
@@ -855,7 +855,7 @@ const TypographySettings = ({
 			[item]: {
 				...globalTypography[item],
 				'textTransform': {
-					variable: `--fb-global-${item}--font-transform`,
+					variable: `--fb-global-${item}--text-transform`,
 					value: value
 				}
 			}
