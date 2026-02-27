@@ -33,7 +33,7 @@
 			cursor: pointer;
 			padding: 16px 12px;
 			flex: 1 1 0%;
-			
+
 			&.general,
 			&.styles,
 			&.advance,
@@ -48,7 +48,7 @@
 
 	}
 
-	
+
 
 	.components-datetime__time {
 		.components-datetime__time-separator {
@@ -549,6 +549,10 @@
 	.fb-image-upload-btn {
 		background-image: url(../../assets/images/transparent-bg-demo.png);
 	}
+}
+
+.fb-box-shadow-icon-dropdown-content .components-popover__content {
+	width: 260px;
 }
 
 /** End Admin Panel scss **/
