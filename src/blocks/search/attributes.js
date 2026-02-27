@@ -38,9 +38,9 @@ const attributes = {
 	searchButtonInputFieldWidth: {
 		type: 'object',
 		default: {
-			Desktop: '1080',
-			Tablet: '1080',
-			Mobile: '1080'
+			Desktop: '300',
+			Tablet: '',
+			Mobile: ''
 		}
 	},
 	searchButtonInputFieldWidthUnits: {
