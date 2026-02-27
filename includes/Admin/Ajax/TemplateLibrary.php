@@ -763,6 +763,11 @@ class TemplateLibrary extends AjaxBase
                 $content = $this->decode_content($content);
                 $content = wp_unslash($content);
 
+                // Replace media URLs in navigation content
+                if ($uploads_updated && !empty($site_url)) {
+                    $content = $this->replace_media_urls($content, trailingslashit($site_url));
+                }
+
                 $slug = 'imported-nav-' . $old_id;
 
                 $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
@@ -809,10 +814,16 @@ class TemplateLibrary extends AjaxBase
                 $content = $this->replace_media_urls($content, trailingslashit($site_url));
             }
 
-            // Replace navigation refs
+            // Replace navigation refs in both block comments and escaped JSON
             foreach ($navigation_mapping as $old => $new) {
-                $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
+                $old_str = preg_quote((string) $old, '/');
+                // Pattern for block comments: "ref":OLD_ID or "ref": OLD_ID
+                $content = preg_replace('/("ref"\s*:\s*)' . $old_str . '\b/', '${1}' . $new, $content);
+                // Pattern for escaped JSON attributes: \"ref\":OLD_ID
+                $content = preg_replace('/(\\\\"ref\\\\"\s*:\s*)' . $old_str . '\b/', '${1}' . $new, $content);
             }
+
+            error_log("FB Import: Navigation mapping applied to $title: " . wp_json_encode($navigation_mapping));
 
             // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for template detection
             $existing = get_posts([
