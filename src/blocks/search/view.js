@@ -13,10 +13,20 @@
                     inputField.classList.add('active');
                     overlay.classList.add('active');
 
+                    updateButtonVisibility();
+
                     if (inputEl) {
                         setTimeout(() => inputEl.focus(), 50);
                     }
                 });
+            }
+
+            function updateButtonVisibility() {
+                if (inputField.classList.contains('active')) {
+                    buttonWrapper.style.visibility = 'hidden';
+                } else {
+                    buttonWrapper.style.visibility = 'visible';
+                }
             }
 
             if (overlay) {
