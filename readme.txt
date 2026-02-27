@@ -249,13 +249,28 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 == Changelog ==
 
 = 1.1.9 – 18 February 2026 =
+- **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls.
+- **New**: Added SMTP functionality for form email delivery.
+- **New**: Added Ajax search support.
 - **Fixed**: Resolved Editor Options dashboard "Option updated successfully" toast notification flood issue.
 - **Fixed**: Improved logic for Automatic Block Recovery and Copy-Paste settings to prevent unnecessary auto-saving.
 - **Fixed**: Resolved Advanced Heading block recovery and Container padding unlink issues.
 - **Fixed**: Fixed media link replacement issues during uploads.
+- **Fixed**: Fixed custom CSS rendering issues.
+- **Fixed**: Fixed dashboard child block hidden issues and Pro block toggle disable issues.
+- **Fixed**: Fixed Advanced Heading alignment and Separator alignment issues.
+- **Fixed**: Fixed navigation template import issues.
+- **Fixed**: Corrected global typography CSS variable names for textTransform and textDecoration in the editor.
+- **Fixed**: Fixed offcanvas dashboard text issues.
 - **Improved**: Enhanced plugin update handling to ensure default settings are correctly initialized without user intervention.
 - **Improved**: Full-site-import data validation and synchronization from the portal.
+- **Improved**: Added responsive alignment controls for blocks.
+- **Improved**: Updated Pro condition checks and links.
+- **Improved**: Added Advanced Mega Menu Pro availability check.
+- **Improved**: Updated form-builder message body format.
+- **Improved**: Added Composer support for deployment workflow.
 - **Refactor**: Cleaned up unnecessary files and code across multiple blocks (Advanced Heading, Container, Slider, etc.) to improve plugin footprint.
+- **Refactor**: Removed unused constants.js files from Form Builder, Text Field, and Textarea Field blocks.
 - **Deprecation**: Improved handling for deprecated block versions and file organization.
 
 
