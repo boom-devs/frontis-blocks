@@ -71,7 +71,7 @@ const attributes = {
 
 	showPlaceholderSwitcher: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	placeholderText: {
 		type: 'string',
@@ -79,7 +79,7 @@ const attributes = {
 	},
 	showButtonSwitcher: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	searchButtonText: {
 		type: 'string',
@@ -852,6 +852,18 @@ const attributes = {
 	/** End Input Field Text Color */
 
 	/** Start Input Field Border */
+	searchFieldItemColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	searchFieldColor: {
+		type: "string",
+		default: "",
+	},
+	searchFieldColorHover: {
+		type: "string",
+		default: "",
+	},
 	searchFieldBorder: {
 		type: 'string',
 		default: '',

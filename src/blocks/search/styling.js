@@ -172,8 +172,6 @@ const generateSearchStyle = (attributes) => {
         searchFieldPaddingTablet,
         searchFieldPaddingMobile,
         searchFieldPaddingLink,
-        searchFieldColor,
-        searchFieldColorHover,
         searchFieldBorder,
         searchFieldBorderColor,
         searchFieldBorderDesktop,
@@ -579,17 +577,19 @@ const generateSearchStyle = (attributes) => {
         }
 
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results{
-            ${searchFieldColor ? `background: ${searchFieldColor};` : ''}
+            ${searchFieldBgColor ? `background: ${searchFieldBgColor};` : ''}
             ${searchFieldBorder ? `border: ${searchFieldBorder};` : ''}
             ${searchFieldBorderColor ? `border-color: ${searchFieldBorderColor};` : ''}
             ${searchFieldBorderDesktopWidth && searchFieldBorderDesktop?.top ? `border-width: ${searchFieldBorderDesktopWidth};` : ''}
             ${searchFieldBorderRadiusDesktopWidth && searchFieldBorderRadiusDesktop?.top ? `border-radius: ${searchFieldBorderRadiusDesktopWidth};` : ''}
             ${searchFieldPaddingDesktopWidth && searchFieldPaddingDesktop?.top ? `padding: ${searchFieldPaddingDesktopWidth};` : ''}
         }
+
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results:hover{
-            ${searchFieldColorHover ? `background: ${searchFieldColorHover};` : ''}
+            ${searchFieldBgColorHover ? `background: ${searchFieldBgColorHover};` : ''}
             ${searchFieldBorderColorHover ? `border-color: ${searchFieldBorderColorHover};` : ''}
         }
+
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item{
             ${searchFieldItemColor ? `background: ${searchFieldItemColor};` : ''}
             ${searchFieldItemBorder ? `border: ${searchFieldItemBorder};` : ''}
@@ -598,9 +598,10 @@ const generateSearchStyle = (attributes) => {
             ${searchFieldItemBorderRadiusDesktopWidth && searchFieldItemBorderRadiusDesktop?.top ? `border-radius: ${searchFieldItemBorderRadiusDesktopWidth};` : ''}
             ${searchFieldItemPaddingDesktopWidth && searchFieldItemPaddingDesktop?.top ? `padding: ${searchFieldItemPaddingDesktopWidth};` : ''}
         }
+
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item:hover{
             ${searchFieldItemColorHover ? `background: ${searchFieldItemColorHover};` : ''}
-            ${searchFieldItemBorderColorHover ? `border: ${searchFieldItemBorderColorHover};` : ''}
+            ${searchFieldItemBorderColorHover ? `border-color: ${searchFieldItemBorderColorHover};` : ''}
         }
 
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item .fb-search-result-title{
@@ -630,7 +631,7 @@ const generateSearchStyle = (attributes) => {
         }
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item:hover .fb-search-result-title{
             ${searchFieldItemTitleColorHover ? `color: ${searchFieldItemTitleColorHover};` : ''}
-            ${searchFieldItemTitleBorderColorHover ? `border: ${searchFieldItemTitleBorderColorHover};` : ''}
+            ${searchFieldItemTitleBorderColorHover ? `border-color: ${searchFieldItemTitleBorderColorHover};` : ''}
         }
 
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item .fb-search-result-meta{
@@ -661,7 +662,7 @@ const generateSearchStyle = (attributes) => {
         }
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-result-item:hover .fb-search-result-meta{
             ${searchFieldItemMetaColorHover ? `color: ${searchFieldItemMetaColorHover};` : ''}
-            ${searchFieldItemMetaBorderColorHover ? `border: ${searchFieldItemMetaBorderColorHover};` : ''}
+            ${searchFieldItemMetaBorderColorHover ? `border-color: ${searchFieldItemMetaBorderColorHover};` : ''}
         }
         .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-results-footer{
             ${SearchViewAllResultsBgColor ? `background: ${SearchViewAllResultsBgColor};` : ''}
@@ -671,7 +672,7 @@ const generateSearchStyle = (attributes) => {
             ${SearchViewAllResultsBorderRadiusDesktopWidth && SearchViewAllResultsBorderRadiusDesktop?.top ? `border-radius: ${SearchViewAllResultsBorderRadiusDesktopWidth};` : ''}
             ${SearchViewAllResultsPaddingDesktopWidth && SearchViewAllResultsPaddingDesktop?.top ? `padding: ${SearchViewAllResultsPaddingDesktopWidth};` : ''}
         }
-        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-results-footer{
+        .${blockID} .fb-search-container .fb-search-block-wrapper-inner-input-field .fb-search-ajax-results .fb-search-results-footer:hover{
             ${SearchViewAllResultsBgColorHover ? `background: ${SearchViewAllResultsBgColorHover};` : ''}
             ${SearchViewAllResultsBorderColorHover ? `border-color: ${SearchViewAllResultsBorderColorHover};` : ''}
         }
