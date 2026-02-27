@@ -104,7 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			)}
 			<div {...blockProps}>
 				<div className={`fb-search-container ${searchGlobalWraperClass}${searchAppearance}`} id={searchGlobalWraperID}>
-					<div className="fb-search-button-wrapper" onClick={handleSearchButtonClick}>
+					<div className={`fb-search-button-wrapper ${searchActive ? 'hidden' : ''}`} onClick={handleSearchButtonClick}>
 						<div className="fb-search-block-wrapper-inner-input-icon">
 							{searchIconAlign === 'icon-text' && searchIcon ? (
 								<div className="fb-search-icon-wrapper">
