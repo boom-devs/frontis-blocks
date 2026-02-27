@@ -569,7 +569,7 @@ class BlockList
                 'child' => 'false',
             ],
             'search' => [
-                'slug' => 'search',
+                'slug' => 'advanced-search',
                 'title' => 'Advanced Search',
                 'package' => 'free',
                 'category' => 'content',
