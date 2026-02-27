@@ -1,7 +1,7 @@
 {
 	"apiVersion": 3,
-	"name": "frontis-blocks/search",
-	"title": "Search",
+	"name": "frontis-blocks/advanced-search",
+	"title": "Advanced Search",
 	"category": "frontis-blocks",
 	"icon": "search",
 	"description": "Add a search form",
