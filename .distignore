@@ -91,3 +91,4 @@ frontis-blocks.zip
 # dev tools
 tools
 *.log
+build_output.txt
