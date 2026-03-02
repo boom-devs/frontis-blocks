@@ -444,12 +444,15 @@ class TemplateLibrary extends AjaxBase
         }
 
         // Step 6: Handle badge
-        if ($badge === 'front-page' || stripos($title, 'home') !== false || $slug === 'home') {
+        if ($badge === 'front-page') {
+            update_option('page_on_front', $page_id);
+            update_option('show_on_front', 'page');
+        } elseif ($badge === 'blog-page') {
+            update_option('page_for_posts', $page_id);
+        } elseif (empty($badge) && (stripos($title, 'home') !== false || $slug === 'home')) {
             update_option('page_on_front', $page_id);
             update_option('show_on_front', 'page');
         }
-        // Future: Add logic for 'blog', 'privacy', etc.
-        // Example: if ($badge === 'blog') { update_option('page_for_posts', $page_id); }
 
         // Step 7: Save badge as meta (optional, for future use)
         if (!empty($badge)) {

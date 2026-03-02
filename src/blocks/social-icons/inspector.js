@@ -1108,16 +1108,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 											key={item.id}
 											id={item.id}
 											item={item}
-											handleChangeItem={handleChangeItem}
-											handleDeleteItem={handleDeleteItem}
-											handleDuplicateItem={handleDuplicateItem}
+											handleChangeItem={(id, key, value) => handleChangeItem(id, key, value, socialItems, setAttributes)}
+											handleDeleteItem={(id) => handleDeleteItem(id, socialItems, setAttributes)}
+											handleDuplicateItem={(id) => handleDuplicateItem(id, socialItems, setAttributes)}
 											index={index}
 										/>
 									))}
 								</ul>
 							</SortableContext>
 						</DndContext>
-						<Button isPrimary onClick={handleAddItem}>
+						<Button isPrimary onClick={() => handleAddItem(socialItems, socialIconsPresetStyle, setAttributes)}>
 							{__("Add Social Item", "frontis-blocks")}
 						</Button>
 					</div>
