@@ -1151,7 +1151,7 @@ const getPresetColors = (preset) => {
     }
 };
 
-export const handleAddItem = () => {
+export const handleAddItem = (socialItems, socialIconsPresetStyle, setAttributes) => {
     const presetColors = getPresetColors(socialIconsPresetStyle);
 
     const newItem = {
@@ -1187,19 +1187,19 @@ export const handleAddItem = () => {
     setAttributes({ socialItems: [...socialItems, newItem] });
 };
 
-export const handleChangeItem = (id, key, value) => {
+export const handleChangeItem = (id, key, value, socialItems, setAttributes) => {
     const updatedItems = socialItems.map(item => 
         item.id === id ? { ...item, [key]: value } : item
     );
     setAttributes({ socialItems: updatedItems });
 };
 
-export const handleDeleteItem = (id) => {
+export const handleDeleteItem = (id, socialItems, setAttributes) => {
     const updatedItems = socialItems.filter(item => item.id !== id);
     setAttributes({ socialItems: updatedItems });
 };
 
-export const handleDuplicateItem = (id) => {
+export const handleDuplicateItem = (id, socialItems, setAttributes) => {
     const itemToDuplicate = socialItems.find(item => item.id === id);
     if (itemToDuplicate) {
         const newItem = { ...itemToDuplicate, id: `item-${socialItems.length + 1}` };
