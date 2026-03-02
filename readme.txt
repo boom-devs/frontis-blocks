@@ -248,7 +248,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.1.9 – 27 February 2026 =
+= 1.1.9 – 02 March 2026 =
 - **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls and SMTP email delivery.
 - **New**: Added Ajax search support.
 - **Fixed**: Resolved Editor Options dashboard toast notification flood, offcanvas text issues, child block hidden issues, and Pro block toggle disable issues.
