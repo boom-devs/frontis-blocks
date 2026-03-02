@@ -33,7 +33,7 @@ const UpgradeToProPopup = () => {
 				</div>
 				<div className="fb-pro-upgrade-btn-wrapper">
 					<div className="fb-pro-upgrade-now-btn">
-						<a target="_blank" href="https://frontiswp.com/block/pricing-table/">Upgrade Now</a>
+						<a target="_blank" href="https://frontiswp.com/frontis-blocks/">Upgrade Now</a>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="20"
