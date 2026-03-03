@@ -480,7 +480,7 @@ const FullSiteImportSettingConfig = ({
             pageData.append("slug", page.slug || "");
             pageData.append("template", page.template || "");
             pageData.append("badge", page.badge || "");
-            pageData.append("site_url", window.location.origin);
+            pageData.append("site_url", template?.preview_url || window.location.origin);
             pageData.append("uploads_updated", isUploadsUpdated);
 
             const response = await fetch(ajaxUrl, {
@@ -542,7 +542,7 @@ const FullSiteImportSettingConfig = ({
             formData.append("slug", post.slug || "");
             formData.append("template", post.template || "");
             formData.append("uploads_updated", isUploadsUpdated);
-            formData.append("site_url", window.location.origin);
+            formData.append("site_url", template?.preview_url || window.location.origin);
 
             const res = await fetch(ajaxUrl, {
                 method: "POST",
@@ -739,7 +739,7 @@ const handleImportHeadersFooters = async (headers = [], footers = [], uploadsUpd
     form.append('headers', JSON.stringify(headers));
     form.append('footers', JSON.stringify(footers));
     form.append('uploads_updated', isUploadsUpdated);
-    form.append('site_url', window.location.origin);
+    form.append('site_url', template?.preview_url || window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {
@@ -784,7 +784,7 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
     form.append('templates', JSON.stringify(templates));
     form.append('mapping', JSON.stringify(navigationMapping));
     form.append('uploads_updated', isUploadsUpdated);
-    form.append('site_url', window.location.origin);
+    form.append('site_url', template?.preview_url || window.location.origin);
 
     try {
         const response = await fetch(ajaxUrl, {

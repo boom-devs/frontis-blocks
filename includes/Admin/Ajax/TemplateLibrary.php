@@ -405,6 +405,9 @@ class TemplateLibrary extends AjaxBase
             $content = $this->replace_media_urls($content, trailingslashit($site_url));
         }
 
+        // Step 1.1: Replace demo URLs with relative paths
+        $content = $this->replace_demo_urls($content, $site_url);
+
         // Step 2: Generate unique slug if not provided or duplicate
         if (empty($slug)) {
             $slug = sanitize_title($title);
@@ -449,9 +452,6 @@ class TemplateLibrary extends AjaxBase
             update_option('show_on_front', 'page');
         } elseif ($badge === 'blog-page') {
             update_option('page_for_posts', $page_id);
-        } elseif (empty($badge) && (stripos($title, 'home') !== false || $slug === 'home')) {
-            update_option('page_on_front', $page_id);
-            update_option('show_on_front', 'page');
         }
 
         // Step 7: Save badge as meta (optional, for future use)
@@ -562,6 +562,28 @@ class TemplateLibrary extends AjaxBase
                 error_log("FB Import: Replaced $original_url with $local_url");
             }
         }
+
+        return $content;
+    }
+
+    /**
+     * Replace demo URLs from external to relative
+     */
+    private function replace_demo_urls($content, $site_url)
+    {
+        if (empty($content) || empty($site_url)) {
+            return $content;
+        }
+
+        $demo_url = trailingslashit($site_url);
+        $escaped_demo_url = str_replace('/', '\/', $demo_url);
+
+        $content = str_replace($demo_url, '/', $content);
+        $content = str_replace($escaped_demo_url, '\/', $content);
+
+        // Fix multisite paths: remove /sites/X/ from any wp-content/uploads/ path
+        // This covers both normal slashes and escaped slashes
+        $content = preg_replace('/(wp-content(?:\/|\\\\\/)uploads(?:\/|\\\\\/))sites(?:\/|\\\\\/)\d+(?:\/|\\\\\/)/i', '$1', $content);
 
         return $content;
     }
@@ -771,10 +793,19 @@ class TemplateLibrary extends AjaxBase
                     $content = $this->replace_media_urls($content, trailingslashit($site_url));
                 }
 
+                // Replace demo URLs with relative paths
+                $content = $this->replace_demo_urls($content, $site_url);
+
+                // slug for navigation
                 $slug = 'imported-nav-' . $old_id;
 
                 $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
                 if ($existing) {
+                    wp_update_post([
+                        'ID' => $existing->ID,
+                        'post_content' => $content,
+                        'post_title' => 'Imported Nav ' . $old_id,
+                    ]);
                     $navigation_mapping[$old_id] = $existing->ID;
                     $stats['nav_skipped']++;
                     continue;
@@ -816,6 +847,9 @@ class TemplateLibrary extends AjaxBase
             if ($uploads_updated && !empty($site_url)) {
                 $content = $this->replace_media_urls($content, trailingslashit($site_url));
             }
+
+            // Replace demo URLs with relative paths
+            $content = $this->replace_demo_urls($content, $site_url);
 
             // Replace navigation refs in both block comments and escaped JSON
             foreach ($navigation_mapping as $old => $new) {
@@ -913,6 +947,9 @@ class TemplateLibrary extends AjaxBase
                 $content = $this->replace_media_urls($content, trailingslashit($site_url));
             }
 
+            // Replace demo URLs with relative paths
+            $content = $this->replace_demo_urls($content, $site_url);
+
             foreach ($mapping as $old => $new) {
                 $content = preg_replace('/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/', '$1' . $new, $content);
             }
@@ -995,6 +1032,9 @@ class TemplateLibrary extends AjaxBase
         if ($uploads_updated && !empty($site_url)) {
             $content = $this->replace_media_urls($content, trailingslashit($site_url));
         }
+
+        // Replace demo URLs with relative paths
+        $content = $this->replace_demo_urls($content, $site_url);
 
         // Slug generate if empty
         if (empty($slug)) {
