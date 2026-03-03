@@ -9,8 +9,8 @@
     "minimum-stability": "dev",
     "require": {
         "sabberworm/php-css-parser": "^8.8",
-        "matthiasmullie/minify": "dev-master",
-        "appsero/client": "dev-develop",
+        "matthiasmullie/minify": "^1.3",
+        "appsero/client": "^2.0",
         "deliciousbrains/wp-background-processing": "^1.3"
     }
 }
