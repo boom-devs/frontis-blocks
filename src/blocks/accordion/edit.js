@@ -7,17 +7,22 @@ import { times } from 'lodash';
 import { createBlock } from "@wordpress/blocks";
 import './editor.scss';
 import Inspector from './inspector';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateAccordionStyle from './styling';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 
+const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"];
 
-const ALLOWED_BLOCKS = ["frontis-blocks/accordion-item"]; 
-
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 
-    const { 
+    const {
         blockID,
-        
+        blockStyle,
+
         classHook,
         accordionType,
         displayIcon,
@@ -31,14 +36,69 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         tagName,
         faqSchema,
         accordionChildCount,
-
         accordionGlobalWraperID,
         accordionGlobalWraperClass,
 
         accordionDesktopSwitcher,
         accordionTabletSwitcher,
         accordionMobileSwitcher,
+
+        /** Typography Fonts */
+        titleFontFamily,
+
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-accordion',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    useEffect(() => {
+        const parentBlocks = select("core/block-editor").getBlocksByClientId(
+            clientId
+        )[0];
+
+        const innerBlocks = parentBlocks?.innerBlocks;
+
+        const { updateBlockAttributes } = dispatch("core/block-editor");
+
+        if (innerBlocks) {
+            innerBlocks.forEach((block) => {
+                updateBlockAttributes(block.clientId, {
+                    inheritedAccordionType: accordionType,
+                    inheritedDisplayIcon: displayIcon,
+                    inheritedTabIcon: tabIcon,
+                    inheritedExpandedIcon: expandedIcon,
+                    inheritedTagName: tagName,
+                    faqSchema: faqSchema,
+                });
+            });
+        }
+    }, [accordionType, displayIcon, tabIcon, expandedIcon, tagName, faqSchema]);
+
+
+    /** Start load font */
+    useEffect(() => {
+        if (titleFontFamily && !loadedFonts.has(titleFontFamily)) {
+            loadGoogleFont(titleFontFamily);
+            loadedFonts.add(titleFontFamily);
+        }
+    }, [titleFontFamily]);
+    /** End load font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateAccordionStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-accordion-main-wrapper ${blockID} ${accordionDesktopSwitcher && 'fb-desktop-responsive'} ${accordionTabletSwitcher && 'fb-tablet-responsive'} ${accordionMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -49,7 +109,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
-
 
     const addAccordion = () => {
         const innerBlocks = [
@@ -81,8 +140,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             });
     };
 
-    
-
     useEffect(() => {
         if (!tabIcon) {
             setAttributes({ tabIcon: "fas fa-angle-right" });
@@ -91,7 +148,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             setAttributes({ expandedIcon: "fas fa-angle-down" });
         }
     }, []);
-    
+
     const insertAccodionItem = (accordionChildCount) => {
         return times(accordionChildCount, (n) => [
             "frontis-blocks/accordion-item",
@@ -109,20 +166,18 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         ]);
     };
 
-
-    
-
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <div {...blockProps}>
                 <div
-                    className={`fb-parent-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
+                    className={`fb-parent-wrapper fb-accordion-wrapper fb-parent-${blockID} ${classHook} ${accordionGlobalWraperClass}`} id={accordionGlobalWraperID} ref={panelRef}
                 >
                     <div className={`fb-accordion-container`}>
                         <div className="fb-accordion-inner">
@@ -149,6 +204,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

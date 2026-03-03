@@ -1,5 +1,6 @@
 
 import { registerBlockType } from '@wordpress/blocks';
+import { addFilter } from '@wordpress/hooks';
 import './style.scss';
 
 /**
@@ -18,3 +19,33 @@ registerBlockType( metadata.name, {
 	save,
 } );
 	
+/**
+ * Add custom attributes to core navigation blocks for mega menu functionality
+ */
+function addMegaMenuAttributes(settings, name) {
+    // Target navigation link and submenu blocks
+    if (name === 'core/navigation-link' || name === 'core/navigation-submenu') {
+        return {
+            ...settings,
+            attributes: {
+                ...settings.attributes,
+                enableItemMegaMenu: {
+                    type: 'boolean',
+                    default: false,
+                },
+                megaMenuPattern: {
+                    type: 'string',
+                    default: '',
+                },
+            },
+        };
+    }
+    return settings;
+}
+
+// Register the filter to add custom attributes
+addFilter(
+    'blocks.registerBlockType',
+    'frontis-blocks/add-mega-menu-attributes',
+    addMegaMenuAttributes
+);

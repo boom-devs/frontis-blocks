@@ -2,21 +2,23 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { InnerBlocks, useBlockProps, MediaUpload, RichText, } from "@wordpress/block-editor";
+import { InnerBlocks, useBlockProps, MediaUpload, RichText } from "@wordpress/block-editor";
 import { Button } from "@wordpress/components";
-import { useRef, memo , useEffect, useMemo} from "@wordpress/element";
-import Inspector from "./inspector";
+import { useRef, useEffect, useMemo } from "@wordpress/element";
+import Inspector from './inspector';
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateAccordionItemStyle from './styling';
 
 
-const Edit = (props) => {
+export default function Edit(props) {
     const { attributes, setAttributes, isSelected, clientId, context } = props;
 
     const {
-        parentBlockID ,
+        parentBlockID,
         blockID,
-		blockStyle,
+        blockStyle,
         deviceType,
         clickable,
 
@@ -47,11 +49,29 @@ const Edit = (props) => {
 
     } = attributes;
 
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-accordion-item',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateAccordionItemStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     useEffect(() => {
         setAttributes({
-            parentBlockID:  context["fb/accordionparentBlockID"],
-            inheritedAccordionType:  context["fb/accordionInheritedAccordionType"],
+            parentBlockID: context["fb/accordionparentBlockID"],
+            inheritedAccordionType: context["fb/accordionInheritedAccordionType"],
             inheritedDisplayIcon: context["fb/accordionInheritedDisplayIcon"],
             inheritedTabIconSwitcher: context["fb/accordionInheritedTabIconSwitcher"],
             inheritedTabIcon: context["fb/accordionInheritedTabIcon"],
@@ -91,17 +111,17 @@ const Edit = (props) => {
 
         if (contentWrapper.style.display === "block") {
             contentWrapper.style.display = "none";
-            setAttributes({toggleClick: false});
+            setAttributes({ toggleClick: false });
         } else {
             contentWrapper.style.display = "block";
             contentWrapper.style.opacity = "1";
-            setAttributes({toggleClick: true});
+            setAttributes({ toggleClick: true });
         }
     };
 
     return (
         <>
-            {isSelected && <Inspector {...props} />}
+            <Inspector {...props} />
 
             <div {...blockProps}>
                 <div className={`fb-accordion-item-wrapper for_edit_page ${accordionItemGlobalWraperClass}`} id={accordionItemGlobalWraperID} ref={accordionTitle} data-id={parentBlockID}>
@@ -151,7 +171,7 @@ const Edit = (props) => {
                                 value={title}
                                 tagName={inheritedTagName}
                                 className="fb-accordion-title"
-                                onChange={ (value) => setAttributes({ title: value }) }
+                                onChange={(value) => setAttributes({ title: value })}
                             />
 
                             {titleSuffixType !== 'none' && (
@@ -197,14 +217,14 @@ const Edit = (props) => {
                         </div>
                         <div className="fb-accordion-icon">
                             {inheritedTabIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === false && renderSVG(inheritedTabIcon)}
-                            {inheritedTabIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === false && <img src={inheritedTabImageUrl}/>}
+                            {inheritedTabIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === false && <img src={inheritedTabImageUrl} />}
                             {inheritedExpandedIconSwitcher === 'icon' && inheritedDisplayIcon && toggleClick === true && renderSVG(inheritedExpandedIcon)}
-                            {inheritedExpandedIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === true && <img src={inheritedExpandedImageUrl}/>}
+                            {inheritedExpandedIconSwitcher === 'image' && inheritedDisplayIcon && toggleClick === true && <img src={inheritedExpandedImageUrl} />}
                         </div>
                     </div>
                     <div
                         className={`fb-accordion-content-wrapper ${blockID} ${parentBlockID} ${clickable === true ? 'active' : ''}`}
-                        style={{display: "none"}}
+                        style={{ display: "none" }}
                     >
                         <div className="fb-accordion-content">
                             <InnerBlocks templateLock={false} />
@@ -212,8 +232,7 @@ const Edit = (props) => {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }
-
-export default memo(Edit);

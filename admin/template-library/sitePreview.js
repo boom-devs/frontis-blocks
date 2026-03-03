@@ -1,10 +1,17 @@
 import { useState, useEffect, useRef } from "@wordpress/element";
 import { TemplateContentLoader } from "./template-loader";
+import { useDispatch, useSelector } from "react-redux";
+import { setAttribute } from "./store/attributesSlice";
 
 const SitePreview = ({preview_url}) => {
 	const [previewUrl, setPreviewUrl] = useState('');
-	const [isLoading, setIsLoading] = useState(true);
 	const iframeRef = useRef(null);
+
+	const { 
+		sitePreviewLoading 
+	} = useSelector((state) => state.attributes);
+
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		const currentOrigin = window.location.origin;
@@ -22,7 +29,7 @@ const SitePreview = ({preview_url}) => {
 
 	return (
 		<div className="fb-site-preview-container">
-			{isLoading && (
+			{sitePreviewLoading && (
 				<TemplateContentLoader />
 			)}
 			<iframe
@@ -31,7 +38,7 @@ const SitePreview = ({preview_url}) => {
 				src={previewUrl}
 				className="fb-preview-frame"
 				title="Site Preview"
-				onLoad={() => setIsLoading(false)}
+				onLoad={() => dispatch(setAttribute({ sitePreviewLoading: false }))}
 				scrolling="yes"
 			/>
 		</div>

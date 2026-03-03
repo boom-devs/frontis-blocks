@@ -3,12 +3,19 @@ import { useState, useEffect, useRef } from "@wordpress/element";
 import { Placeholder, SelectControl } from "@wordpress/components";
 import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import ServerSideRender from "@wordpress/server-side-render";
-import Inspector from "./inspector";
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import Inspector from "./inspector";3
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateFluentFormStyle from "./styling";
+
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
+		blockStyle,
 		deviceType,
 		formId,
 		showLabels,
@@ -21,7 +28,84 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		fluentFormDesktopSwitcher,
 		fluentFormTabletSwitcher,
 		fluentFormMobileSwitcher,
+		fluentFormInputFontFamily, 
+		fluentFormSectionBreakTitleFontFamily, 
+		fluentFormSectionBreakDescFontFamily,
+		fluentFormHtmlFontFamily, 
+		fluentFormSubmitFontFamily, 
+		fluentFormSuccessFontFamily, 
+		fluentFormErrorFontFamily,
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-fluent-form',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (fluentFormInputFontFamily && !loadedFonts.has(fluentFormInputFontFamily)) {
+			loadGoogleFont(fluentFormInputFontFamily);
+			loadedFonts.add(fluentFormInputFontFamily);
+		}
+	}, [fluentFormInputFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSectionBreakTitleFontFamily && !loadedFonts.has(fluentFormSectionBreakTitleFontFamily)) {
+			loadGoogleFont(fluentFormSectionBreakTitleFontFamily);
+			loadedFonts.add(fluentFormSectionBreakTitleFontFamily);
+		}
+	}, [fluentFormSectionBreakTitleFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSectionBreakDescFontFamily && !loadedFonts.has(fluentFormSectionBreakDescFontFamily)) {
+			loadGoogleFont(fluentFormSectionBreakDescFontFamily);
+			loadedFonts.add(fluentFormSectionBreakDescFontFamily);
+		}
+	}, [fluentFormSectionBreakDescFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormHtmlFontFamily && !loadedFonts.has(fluentFormHtmlFontFamily)) {
+			loadGoogleFont(fluentFormHtmlFontFamily);
+			loadedFonts.add(fluentFormHtmlFontFamily);
+		}
+	}, [fluentFormHtmlFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSubmitFontFamily && !loadedFonts.has(fluentFormSubmitFontFamily)) {
+			loadGoogleFont(fluentFormSubmitFontFamily);
+			loadedFonts.add(fluentFormSubmitFontFamily);
+		}
+	}, [fluentFormSubmitFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormSuccessFontFamily && !loadedFonts.has(fluentFormSuccessFontFamily)) {
+			loadGoogleFont(fluentFormSuccessFontFamily);
+			loadedFonts.add(fluentFormSuccessFontFamily);
+		}
+	}, [fluentFormSuccessFontFamily]);
+
+	useEffect(() => {
+		if (fluentFormErrorFontFamily && !loadedFonts.has(fluentFormErrorFontFamily)) {
+			loadGoogleFont(fluentFormErrorFontFamily);
+			loadedFonts.add(fluentFormErrorFontFamily);
+		}
+	}, [fluentFormErrorFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateFluentFormStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: [
@@ -36,7 +120,6 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	const formLists = JSON.parse(FrontisBlocksData.fluent_form_lists);
 
-
 	const modifiedFormLists = formLists.map((obj) => {
 		return {
 			label: obj.label,
@@ -47,12 +130,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const pluginInstallUrl = FrontisBlocksData.fluent_form_install_url;
 
 	return (
-		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+		<>	
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				{!FrontisBlocksData.fluent_plugin_active ? (
@@ -96,6 +180,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</>
 				)}
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { useRef } from "@wordpress/element";
+import { useRef, useEffect } from "@wordpress/element";
 
 import {
 	useBlockProps,
@@ -8,15 +8,23 @@ import {
 	AlignmentToolbar,
 } from "@wordpress/block-editor";
 /**
- * Internal depencencies
+ * Internal dependencies
  */
-import Inspector from "./inspector";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCallToActionStyle from './styling';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import Inspector from "./inspector";
+
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 	const {
 		blockID,
+		blockStyle,
 		Heading_Text,
 		headingTag,
 		Alignment,
@@ -44,9 +52,156 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		ctaGlobalWraperClass,
 
 		ctaDesktopSwitcher,
-        ctaTabletSwitcher,
-        ctaMobileSwitcher,
+		ctaTabletSwitcher,
+		ctaMobileSwitcher,
+
+		/** Start Dynamic Title Text */
+		dynamicTitleEnabled,
+		dynamicTitleSource,
+		dynamicTitlePostId,
+		dynamicTitlePostType,
+		dynamicTitlePostLabel,
+		dynamicTitleField,
+		dynamicTitleFeaturedImageField,
+
+		dynamicTitleDateType,
+		dynamicTitleDateFormat,
+
+		dynamicTitleTimeType,
+		dynamicTitleTimeFormat,
+
+		dynamicTitleCommentsZeroText,
+		dynamicTitleCommentsOneText,
+		dynamicTitleCommentsManyText,
+
+		dynamicTitleTermsTaxonomy,
+		dynamicTitleTermsSeparator,
+		dynamicTitleEnableLink,
+		dynamicTitleLinkSource,
+		/** End Dynamic Title Text */
+
+		/** Start Dynamic Description Text */
+		dynamicDescriptionEnabled,
+		dynamicDescriptionSource,
+		dynamicDescriptionPostId,
+		dynamicDescriptionPostType,
+		dynamicDescriptionPostLabel,
+		dynamicDescriptionField,
+		dynamicDescriptionFeaturedImageField,
+
+		dynamicDescriptionDateType,
+		dynamicDescriptionDateFormat,
+
+		dynamicDescriptionTimeType,
+		dynamicDescriptionTimeFormat,
+
+		dynamicDescriptionCommentsZeroText,
+		dynamicDescriptionCommentsOneText,
+		dynamicDescriptionCommentsManyText,
+
+		dynamicDescriptionTermsTaxonomy,
+		dynamicDescriptionTermsSeparator,
+		dynamicDescriptionEnableLink,
+		dynamicDescriptionLinkSource,
+		/** End Dynamic Description Text */
+
+		/** Start Dynamic Btn One Text */
+		dynamicBtnOneEnabled,
+		dynamicBtnOneSource,
+		dynamicBtnOnePostId,
+		dynamicBtnOnePostType,
+		dynamicBtnOnePostLabel,
+		dynamicBtnOneField,
+		dynamicBtnOneFeaturedImageField,
+
+		dynamicBtnOneDateType,
+		dynamicBtnOneDateFormat,
+
+		dynamicBtnOneTimeType,
+		dynamicBtnOneTimeFormat,
+
+		dynamicBtnOneCommentsZeroText,
+		dynamicBtnOneCommentsOneText,
+		dynamicBtnOneCommentsManyText,
+
+		dynamicBtnOneTermsTaxonomy,
+		dynamicBtnOneTermsSeparator,
+		dynamicBtnOneEnableLink,
+		dynamicBtnOneLinkSource,
+		/** End Dynamic Btn One Text */
+
+		/** Start Dynamic Btn Two Text */
+		dynamicBtnTwoEnabled,
+		dynamicBtnTwoSource,
+		dynamicBtnTwoPostId,
+		dynamicBtnTwoPostType,
+		dynamicBtnTwoPostLabel,
+		dynamicBtnTwoField,
+		dynamicBtnTwoFeaturedImageField,
+
+		dynamicBtnTwoDateType,
+		dynamicBtnTwoDateFormat,
+
+		dynamicBtnTwoTimeType,
+		dynamicBtnTwoTimeFormat,
+
+		dynamicBtnTwoCommentsZeroText,
+		dynamicBtnTwoCommentsOneText,
+		dynamicBtnTwoCommentsManyText,
+
+		dynamicBtnTwoTermsTaxonomy,
+		dynamicBtnTwoTermsSeparator,
+		dynamicBtnTwoEnableLink,
+		dynamicBtnTwoLinkSource,
+
+		headingFontFamily,
+		subHeadingFontFamily,
+		buttonTwoFontFamily,
+		/** End Dynamic Btn Two Text */
+
 	} = attributes;
+
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-call-to-action',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (headingFontFamily && !loadedFonts.has(headingFontFamily)) {
+			loadGoogleFont(headingFontFamily);
+			loadedFonts.add(headingFontFamily);
+		}
+	}, [headingFontFamily]);
+
+	useEffect(() => {
+		if (subHeadingFontFamily && !loadedFonts.has(subHeadingFontFamily)) {
+			loadGoogleFont(subHeadingFontFamily);
+			loadedFonts.add(subHeadingFontFamily);
+		}
+	}, [subHeadingFontFamily]);
+
+	useEffect(() => {
+		if (buttonTwoFontFamily && !loadedFonts.has(buttonTwoFontFamily)) {
+			loadGoogleFont(buttonTwoFontFamily);
+			loadedFonts.add(buttonTwoFontFamily);
+		}
+	}, [buttonTwoFontFamily]);
+	/** End Load Google Font */
+
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateCallToActionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
 		className: `fb-cta-main-wrapper ${blockID} ${ctaDesktopSwitcher && 'fb-desktop-responsive'} ${ctaTabletSwitcher && 'fb-tablet-responsive'} ${ctaMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -58,21 +213,151 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	const handleBtnClick = (e) =>{
+	const handleBtnClick = (e) => {
 		e.preventDefault();
 	}
 
-	const handleBtnTwoClick = (e) =>{
+	const handleBtnTwoClick = (e) => {
 		e.preventDefault();
 	}
+
+	/**
+	 * Dynamic Text Value for Title
+	 */
+	const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
+		textEnabled: dynamicTitleEnabled,
+		textSource: dynamicTitleSource,
+		textField: dynamicTitleField,
+
+		textPostId: dynamicTitlePostId,
+		textPostType: dynamicTitlePostType,
+		textPostLabel: dynamicTitlePostLabel,
+
+		textFeaturedImageField: dynamicTitleFeaturedImageField,
+
+		textDateType: dynamicTitleDateType,
+		textDateFormat: dynamicTitleDateFormat,
+		textTimeType: dynamicTitleTimeType,
+		textTimeFormat: dynamicTitleTimeFormat,
+
+		textCommentsZeroText: dynamicTitleCommentsZeroText,
+		textCommentsOneText: dynamicTitleCommentsOneText,
+		textCommentsManyText: dynamicTitleCommentsManyText,
+
+		textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+		textTermsSeparator: dynamicTitleTermsSeparator,
+
+		textLinkEnabled: dynamicTitleEnableLink,
+		textLinkSource: dynamicTitleLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Description
+	 */
+	const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
+		textEnabled: dynamicDescriptionEnabled,
+		textSource: dynamicDescriptionSource,
+		textField: dynamicDescriptionField,
+
+		textPostId: dynamicDescriptionPostId,
+		textPostType: dynamicDescriptionPostType,
+		textPostLabel: dynamicDescriptionPostLabel,
+
+		textFeaturedImageField: dynamicDescriptionFeaturedImageField,
+
+		textDateType: dynamicDescriptionDateType,
+		textDateFormat: dynamicDescriptionDateFormat,
+		textTimeType: dynamicDescriptionTimeType,
+		textTimeFormat: dynamicDescriptionTimeFormat,
+
+		textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+		textCommentsOneText: dynamicDescriptionCommentsOneText,
+		textCommentsManyText: dynamicDescriptionCommentsManyText,
+
+		textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+		textTermsSeparator: dynamicDescriptionTermsSeparator,
+
+		textLinkEnabled: dynamicDescriptionEnableLink,
+		textLinkSource: dynamicDescriptionLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Button One Text
+	 */
+	const { dynamicDisplayValue: dynamicBtnOneValue, dynamicDisplayLink: dynamicBtnOneLink } = DynamicTextValue({
+		textEnabled: dynamicBtnOneEnabled,
+		textSource: dynamicBtnOneSource,
+		textField: dynamicBtnOneField,
+
+		textPostId: dynamicBtnOnePostId,
+		textPostType: dynamicBtnOnePostType,
+		textPostLabel: dynamicBtnOnePostLabel,
+
+		textFeaturedImageField: dynamicBtnOneFeaturedImageField,
+
+		textDateType: dynamicBtnOneDateType,
+		textDateFormat: dynamicBtnOneDateFormat,
+		textTimeType: dynamicBtnOneTimeType,
+		textTimeFormat: dynamicBtnOneTimeFormat,
+
+		textCommentsZeroText: dynamicBtnOneCommentsZeroText,
+		textCommentsOneText: dynamicBtnOneCommentsOneText,
+		textCommentsManyText: dynamicBtnOneCommentsManyText,
+
+		textTermsTaxonomy: dynamicBtnOneTermsTaxonomy,
+		textTermsSeparator: dynamicBtnOneTermsSeparator,
+
+		textLinkEnabled: dynamicBtnOneEnableLink,
+		textLinkSource: dynamicBtnOneLinkSource,
+
+		context,
+	});
+
+	/**
+	 * Dynamic Text Value for Button Two Text
+	 */
+	const { dynamicDisplayValue: dynamicBtnTwoValue, dynamicDisplayLink: dynamicBtnTwoLink } = DynamicTextValue({
+		textEnabled: dynamicBtnTwoEnabled,
+		textSource: dynamicBtnTwoSource,
+		textField: dynamicBtnTwoField,
+
+		textPostId: dynamicBtnTwoPostId,
+		textPostType: dynamicBtnTwoPostType,
+		textPostLabel: dynamicBtnTwoPostLabel,
+
+		textFeaturedImageField: dynamicBtnTwoFeaturedImageField,
+
+		textDateType: dynamicBtnTwoDateType,
+		textDateFormat: dynamicBtnTwoDateFormat,
+		textTimeType: dynamicBtnTwoTimeType,
+		textTimeFormat: dynamicBtnTwoTimeFormat,
+
+		textCommentsZeroText: dynamicBtnTwoCommentsZeroText,
+		textCommentsOneText: dynamicBtnTwoCommentsOneText,
+		textCommentsManyText: dynamicBtnTwoCommentsManyText,
+
+		textTermsTaxonomy: dynamicBtnTwoTermsTaxonomy,
+		textTermsSeparator: dynamicBtnTwoTermsSeparator,
+
+		textLinkEnabled: dynamicBtnTwoEnableLink,
+		textLinkSource: dynamicBtnTwoLinkSource,
+
+		context,
+	});
 
 	return (
 		<>
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
+
 			<BlockControls>
 				<AlignmentToolbar
 					value={contentAlignment}
@@ -88,8 +373,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						<div className="fb-cta-content-wrapper">
 							<RichText
 								tagName={headingTag}
-								value={Heading_Text}
-								onChange={(value) => setAttributes({ Heading_Text: value })}
+								value={dynamicTitleEnabled ? dynamicTitleValue : Heading_Text}
+								onChange={(value) => {
+									if (!dynamicTitleEnabled) setAttributes({ Heading_Text: value });
+								}}
 								placeholder={__("CTA Title", "frontis-block")}
 								className="fb-heading"
 								style={{ textAlign: Alignment }}
@@ -98,10 +385,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 							{descriptionSwitcher && (
 								<RichText
 									tagName={Sub_Heading_Tag}
-									value={Sub_Heading_Text}
-									onChange={(value) =>
-										setAttributes({ Sub_Heading_Text: value })
-									}
+									value={dynamicDescriptionEnabled ? dynamicDescriptionValue : Sub_Heading_Text}
+									onChange={(value) => {
+										if (!dynamicDescriptionEnabled) setAttributes({ Sub_Heading_Text: value });
+									}}
 									placeholder={__("CTA Description", "frontis-block")}
 									className="fb-description"
 									style={{ textAlign: descAlignment }}
@@ -114,72 +401,59 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 									}}>
 
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
-										<a 
-											className="fb-cta-button"
-											href={info_Button_Link}
-											onClick={handleBtnClick}
-											target={btnOneTargetUrl ? "_blank" : undefined}
-											rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+										<div className="fb-cta-btn-wrapper">
+											<a
+												className="fb-cta-button"
+												href={info_Button_Link}
+												onClick={handleBtnClick}
+												target={btnOneTargetUrl ? "_blank" : undefined}
+												rel={btnOneTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnIconPosition === "left" ? "row-reverse" : "row",}}
 											>
-											<RichText
-												value={info_Button_Text}
-												tagName="span"
-												onChange={(value) =>
-													setAttributes({info_Button_Text: value})
-												}
-												placeholder={__("CTA Button", "frontis-block")}
-												
-											/>
+												<RichText
+													value={dynamicBtnOneEnabled ? dynamicBtnOneValue : info_Button_Text}
+													tagName="span"
+													onChange={(value) => {
+														if (!dynamicBtnOneEnabled) setAttributes({ info_Button_Text: value });
+													}}
+													placeholder={__("CTA Button", "frontis-block")}
+												/>
+												{buttonIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnIcon)}
+													</div>
+												)}
 											</a>
-											{buttonIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnIcon)}
-												</div>
-											)}
-										
 										</div>
 									</div>
 								)}
 								{btnTwoSwitcher && (
 									<div className="fb-cta-btn-two-wrapper" style={{
 									}}>
-										<div
-											className="fb-cta-btn-wrapper"
-											style={{
-												flexDirection:
-													btnTwoIconPosition === "left" ? "row-reverse" : "row",
-											}}
-										>
-											<a 
-											className="fb-cta-button"
-											href={btnTwoLink}
-											onClick={handleBtnTwoClick}
-											target={btnTwoTargetUrl ? "_blank" : undefined}
-											rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+										<div className="fb-cta-btn-wrapper">
+											<a
+												className="fb-cta-button"
+												href={btnTwoLink}
+												onClick={handleBtnTwoClick}
+												target={btnTwoTargetUrl ? "_blank" : undefined}
+												rel={btnTwoTargetUrl ? "noopener noreferrer" : undefined}
+												style={{flexDirection: btnTwoIconPosition === "left" ? "row-reverse" : "row",}}
 											>
-											<RichText
-												value={btnTwoText}
-												tagName="span"
-												onChange={(value) =>
-													setAttributes({btnTwoText: value})
-												}
-												placeholder={__("CTA Button", "frontis-block")}
-												
-											/>
+												<RichText
+													value={dynamicBtnTwoEnabled ? dynamicBtnTwoValue : btnTwoText}
+													tagName="span"
+													onChange={(value) => {
+														if (!dynamicBtnTwoEnabled) setAttributes({ btnTwoText: value });
+													}}
+													placeholder={__("CTA Button", "frontis-block")}
+
+												/>
+												{buttonTwoIconSwitcher && (
+													<div className="fb-btn-icon-wrapper">
+														{renderSVG(btnTwoIcon)}
+													</div>
+												)}
 											</a>
-											{buttonTwoIconSwitcher && (
-												<div className="fb-btn-icon-wrapper">
-													{renderSVG(btnTwoIcon)}
-												</div>
-											)}
-											
 										</div>
 									</div>
 								)}
@@ -189,6 +463,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					</div>
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

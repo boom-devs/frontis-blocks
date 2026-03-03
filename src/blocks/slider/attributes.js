@@ -1,21 +1,21 @@
 const slideCount = 3;
 const slideContent = [];
 
-for ( let i = 1; i <= slideCount; i++ ) {
-	slideContent.push( {
+for (let i = 1; i <= slideCount; i++) {
+	slideContent.push({
 		isPreview: false,
-	} );
+	});
 }
 
 const attributes = {
-    blockId: {
-        type: 'string',
-        default: ''
-    },
-    blockStyle: {
-        type: 'string',
-        default: '',
-    },
+	blockID: {
+		type: 'string',
+		default: ''
+	},
+	blockStyle: {
+		type: 'string',
+		default: '',
+	},
 	highlightColor: {
 		type: 'string',
 		default: '',
@@ -24,20 +24,20 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
-    slideContent: {
-        type: 'array',
+	slideContent: {
+		type: 'array',
 		default: slideContent
-    },
-    slideItem: {
-        type: 'number',
-        default: slideCount
-    },
+	},
+	slideItem: {
+		type: 'number',
+		default: slideCount
+	},
 
-    slidePerView: {
+	slidePerView: {
 		type: 'number',
 		default: 1,
 	},
-    spaceBetween: {
+	spaceBetween: {
 		type: 'number',
 		default: 0,
 	},
@@ -49,43 +49,47 @@ const attributes = {
 		type: 'boolean',
 		default: false,
 	},
-    autoplaySpeed: {
-        type: 'number',
-        default: 2000,
-    },
+	autoplaySpeed: {
+		type: 'number',
+		default: 2000,
+	},
 	loop: {
 		type: 'boolean',
 		default: true,
 	},
-    allowTouchMove: {
+	allowTouchMove: {
 		type: 'boolean',
 		default: true,
 	},
-    pauseOnHover: {
-        'type': 'boolean',
-        'default': false
-    },
-    stopOnLastSlide: {
-        'type': 'boolean',
-        'default': false
-    },
-    reverseDirection: {
-        'type': 'boolean',
-        'default': false
-    },
-    enableKeyboardControl: {
-        'type': 'boolean',
-        'default': true
-    },
-    enableMouseWheel: {
-        'type': 'boolean',
-        'default': false
-    },
-    effect: {
-        type: 'string',
-        default: 'slide'
-    },
-    displayArrows: {
+	pauseOnHover: {
+		'type': 'boolean',
+		'default': false
+	},
+	stopOnLastSlide: {
+		'type': 'boolean',
+		'default': false
+	},
+	reverseDirection: {
+		'type': 'boolean',
+		'default': false
+	},
+	enableKeyboardControl: {
+		'type': 'boolean',
+		'default': true
+	},
+	enableMouseWheel: {
+		'type': 'boolean',
+		'default': false
+	},
+	enableKeyboardNavigation: {
+		type: 'boolean',
+		default: false
+	},
+	effect: {
+		type: 'string',
+		default: 'slide'
+	},
+	displayArrows: {
 		type: 'boolean',
 		default: true,
 	},
@@ -94,9 +98,9 @@ const attributes = {
 		default: true,
 	},
 	paginationType: {
-        type: 'string',
-        default: 'bullets'
-    },
+		type: 'string',
+		default: 'bullets'
+	},
 	sliderHeight: {
 		type: 'object',
 		default: {
@@ -120,133 +124,133 @@ const attributes = {
 	},
 
 	slideEffect: {
-        'type': 'string',
-        'default': 'slide'
-    },
-    carouselEffect: {
-        'type': 'string',
-        'default': 'slide'
-    },
+		'type': 'string',
+		'default': 'slide'
+	},
+	carouselEffect: {
+		'type': 'string',
+		'default': 'slide'
+	},
 
 	carouselPerColumn: {
-        type: 'object',
-        default: {
-            Desktop: '3',
-            Tablet: '2',
-            Mobile: '1',
-        },
-    },
-    carouselPerColumnGap: {
-        type: 'object',
-        default: {
-            Desktop: '20',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    carouselPerColumnGapUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        },
-    },
+		type: 'object',
+		default: {
+			Desktop: '2',
+			Tablet: '2',
+			Mobile: '1',
+		},
+	},
+	carouselPerColumnGap: {
+		type: 'object',
+		default: {
+			Desktop: '20',
+			Tablet: '10',
+			Mobile: '10',
+		},
+	},
+	carouselPerColumnGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
 
 
 	sliderArrowPositionType: {
-        type: 'string',
-        default: 'outside',
-    },
+		type: 'string',
+		default: 'outside',
+	},
 
-    sliderArrowPosition: {
-        type: 'string',
-        default: 'center',
-    },
+	sliderArrowPosition: {
+		type: 'string',
+		default: 'center',
+	},
 	sliderArrowDirection: {
 		type: 'string',
 		default: 'row',
 	},
-    sliderArrowPositionTopOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    sliderArrowPositionTopOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: '%',
-            Tablet: '%',
-            Mobile: '%',
-        },
-    },
-    sliderArrowPositionLeftOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    sliderArrowPositionLeftOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: '%',
-            Tablet: '%',
-            Mobile: '%',
-        },
-    },
-    sliderArrowPositionRightOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    sliderArrowPositionRightOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: '%',
-            Tablet: '%',
-            Mobile: '%',
-        },
-    },
-    sliderArrowPositionBottomOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    sliderArrowPositionBottomOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: '%',
-            Tablet: '%',
-            Mobile: '%',
-        },
-    },
-    sliderArrowPositionOutsidePadding: {
-        type: 'object',
-        default: {
-            Desktop: '50',
-            Tablet: '',
-            Mobile: '',
-        },
-    },
-    sliderArrowPositionOutsidePaddingUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        },
-    },
+	sliderArrowPositionTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderArrowPositionTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		},
+	},
+	sliderArrowPositionLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderArrowPositionLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		},
+	},
+	sliderArrowPositionRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderArrowPositionRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		},
+	},
+	sliderArrowPositionBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderArrowPositionBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		},
+	},
+	sliderArrowPositionOutsidePadding: {
+		type: 'object',
+		default: {
+			Desktop: '50',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	sliderArrowPositionOutsidePaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
 	sliderArrowGap: {
 		type: 'object',
 		default: {
@@ -265,9 +269,9 @@ const attributes = {
 	},
 
 	sliderArrowsIconSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
+		type: 'boolean',
+		default: false,
+	},
 
 	sliderArrowsIconLeftAlign: {
 		type: 'string',
@@ -345,8 +349,8 @@ const attributes = {
 		default: '',
 	},
 
-    /** Start Background */
-	sliderArrowsBgColorSwitcher : { 
+	/** Start Background */
+	sliderArrowsBgColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -394,11 +398,11 @@ const attributes = {
 	},
 
 	/** Start Border */
-	sliderArrowsBorder: { 
+	sliderArrowsBorder: {
 		type: 'string',
 		default: 'none',
 	},
-	sliderArrowsBorderColorSwitcher : {
+	sliderArrowsBorderColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -418,7 +422,7 @@ const attributes = {
 		}
 	},
 	sliderArrowsBorderDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -427,7 +431,7 @@ const attributes = {
 		},
 	},
 	sliderArrowsBorderTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -436,7 +440,7 @@ const attributes = {
 		},
 	},
 	sliderArrowsBorderMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -444,8 +448,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderArrowsBorderLink : {
-		type : 'boolean',
+	sliderArrowsBorderLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -460,7 +464,7 @@ const attributes = {
 		}
 	},
 	sliderArrowsBorderRadiusDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '50',
 			bottom: '50',
@@ -469,7 +473,7 @@ const attributes = {
 		},
 	},
 	sliderArrowsBorderRadiusTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -478,7 +482,7 @@ const attributes = {
 		},
 	},
 	sliderArrowsBorderRadiusMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -486,13 +490,13 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderArrowsBorderRadiusLink : {
-		type : 'boolean',
+	sliderArrowsBorderRadiusLink: {
+		type: 'boolean',
 		default: true
 	},
 
 	/** Start Box Shadow */
-	sliderArrowsBoxShadowSwitcher: { 
+	sliderArrowsBoxShadowSwitcher: {
 		type: 'string',
 		default: 'normal',
 	},
@@ -524,7 +528,7 @@ const attributes = {
 		}
 	},
 	sliderDotsMarginDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -533,7 +537,7 @@ const attributes = {
 		},
 	},
 	sliderDotsMarginTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -542,7 +546,7 @@ const attributes = {
 		},
 	},
 	sliderDotsMarginMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -550,8 +554,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderDotsMarginLink : {
-		type : 'boolean',
+	sliderDotsMarginLink: {
+		type: 'boolean',
 		default: true
 	},
 
@@ -618,11 +622,11 @@ const attributes = {
 	},
 
 	/** Start Border */
-	sliderNormalDotsBorder: { 
+	sliderNormalDotsBorder: {
 		type: 'string',
 		default: 'none',
 	},
-	sliderNormalDotsBorderColorSwitcher : {
+	sliderNormalDotsBorderColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -642,7 +646,7 @@ const attributes = {
 		}
 	},
 	sliderNormalDotsBorderDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -651,7 +655,7 @@ const attributes = {
 		},
 	},
 	sliderNormalDotsBorderTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -660,7 +664,7 @@ const attributes = {
 		},
 	},
 	sliderNormalDotsBorderMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -668,8 +672,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderNormalDotsBorderLink : {
-		type : 'boolean',
+	sliderNormalDotsBorderLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -684,7 +688,7 @@ const attributes = {
 		}
 	},
 	sliderNormalDotsBorderRadiusDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '50',
 			bottom: '50',
@@ -693,7 +697,7 @@ const attributes = {
 		},
 	},
 	sliderNormalDotsBorderRadiusTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -702,7 +706,7 @@ const attributes = {
 		},
 	},
 	sliderNormalDotsBorderRadiusMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -710,8 +714,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderNormalDotsBorderRadiusLink : {
-		type : 'boolean',
+	sliderNormalDotsBorderRadiusLink: {
+		type: 'boolean',
 		default: true
 	},
 
@@ -749,11 +753,11 @@ const attributes = {
 	},
 
 	/** Start Border */
-	sliderActiveDotsBorder: { 
+	sliderActiveDotsBorder: {
 		type: 'string',
 		default: 'none',
 	},
-	sliderActiveDotsBorderColorSwitcher : {
+	sliderActiveDotsBorderColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -773,7 +777,7 @@ const attributes = {
 		}
 	},
 	sliderActiveDotsBorderDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -782,7 +786,7 @@ const attributes = {
 		},
 	},
 	sliderActiveDotsBorderTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -791,7 +795,7 @@ const attributes = {
 		},
 	},
 	sliderActiveDotsBorderMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -799,8 +803,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderActiveDotsBorderLink : {
-		type : 'boolean',
+	sliderActiveDotsBorderLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -815,7 +819,7 @@ const attributes = {
 		}
 	},
 	sliderActiveDotsBorderRadiusDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -824,7 +828,7 @@ const attributes = {
 		},
 	},
 	sliderActiveDotsBorderRadiusTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -833,7 +837,7 @@ const attributes = {
 		},
 	},
 	sliderActiveDotsBorderRadiusMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -841,8 +845,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderActiveDotsBorderRadiusLink : {
-		type : 'boolean',
+	sliderActiveDotsBorderRadiusLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border Radius */
@@ -861,36 +865,36 @@ const attributes = {
 	},
 
 	sliderFractionGlobalTypographyData: {
-        type: 'object',
-        default: {}
-    },
-    sliderFractionGlobalTypoSwitcher: {
-        type: 'object',
-        default: {
-            fontFamily: false,
-            fontSize: false,
-            fontWeight: false,
-            fontStyle: false,
-            textTransform: false,
-            textDecoration: false,
-            letterSpacing: false,
-            lineHeight: false,
-        },
-    },
-    sliderFractionGlobalTypoType: {
-        type: 'string',
-        default: 'default',
-    },
+		type: 'object',
+		default: {}
+	},
+	sliderFractionGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	sliderFractionGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
 	sliderFractionGlobalTypoOption: {
 		type: 'object',
-		default: {label: 'Default', value: 'default'},
+		default: { label: 'Default', value: 'default' },
 	},
 
 	sliderFractionFontFamily: {
-        type: 'string',
-        default: 'Default',
-    },
-    sliderFractionFontSize: {
+		type: 'string',
+		default: 'Default',
+	},
+	sliderFractionFontSize: {
 		type: 'object',
 		default: {
 			Desktop: '16',
@@ -906,23 +910,23 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    sliderFractionFontWeight : {
-        type: 'string',
-        default: ''
-    },
-    sliderFractionFontStyle : {
-        type: 'string',
-        default: ''
-    },
-    sliderFractionTextTransform : {
-        type: 'string',
-        default: ''
-    },
-    sliderFractionTextDecoration : {
-        type: 'string',
-        default: ''
-    },
-    sliderFractionLetterSpacing: {
+	sliderFractionFontWeight: {
+		type: 'string',
+		default: ''
+	},
+	sliderFractionFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	sliderFractionTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	sliderFractionTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	sliderFractionLetterSpacing: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -938,7 +942,7 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
-    sliderFractionLineHeight: {
+	sliderFractionLineHeight: {
 		type: 'object',
 		default: {
 			Desktop: '',
@@ -989,19 +993,19 @@ const attributes = {
 
 	/** End Dots Style */
 
-    /** Start Global Setting */
+	/** Start Global Setting */
 	sliderGlobalZIndex: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderOverflow: {
-        type: 'string',
-        default: 'default',
-    },
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderOverflow: {
+		type: 'string',
+		default: 'default',
+	},
 	/** Start Padding */
 	sliderGlobalPaddingUnits: {
 		type: 'object',
@@ -1012,7 +1016,7 @@ const attributes = {
 		}
 	},
 	sliderGlobalPaddingDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '0',
 			bottom: '0',
@@ -1021,7 +1025,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalPaddingTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1030,7 +1034,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalPaddingMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1038,8 +1042,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderGlobalPaddingLink : {
-		type : 'boolean',
+	sliderGlobalPaddingLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Padding */
@@ -1054,7 +1058,7 @@ const attributes = {
 		}
 	},
 	sliderGlobalMarginDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1063,7 +1067,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalMarginTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1072,7 +1076,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalMarginMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1080,18 +1084,18 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderGlobalMarginLink : {
-		type : 'boolean',
+	sliderGlobalMarginLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Margin */
 
-    /** Start Background */
-	sliderGlobalBgColorSwitcher : {
+	/** Start Background */
+	sliderGlobalBgColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
-	sliderGlobalBgNormalBackgroundType: {  
+	sliderGlobalBgNormalBackgroundType: {
 		type: 'string',
 		default: 'classic',
 	},
@@ -1139,7 +1143,7 @@ const attributes = {
 		type: 'string',
 		default: 'none',
 	},
-	sliderGlobalBorderColorSwitcher : {
+	sliderGlobalBorderColorSwitcher: {
 		type: 'string',
 		default: 'normal'
 	},
@@ -1159,7 +1163,7 @@ const attributes = {
 		}
 	},
 	sliderGlobalBorderDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1168,7 +1172,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalBorderTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1177,7 +1181,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalBorderMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1185,8 +1189,8 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderGlobalBorderLink : {
-		type : 'boolean',
+	sliderGlobalBorderLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border */
@@ -1201,7 +1205,7 @@ const attributes = {
 		}
 	},
 	sliderGlobalBorderRadiusDesktop: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '10',
 			bottom: '10',
@@ -1210,7 +1214,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalBorderRadiusTablet: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1219,7 +1223,7 @@ const attributes = {
 		},
 	},
 	sliderGlobalBorderRadiusMobile: {
-		type: 'object', 
+		type: 'object',
 		default: {
 			top: '',
 			bottom: '',
@@ -1227,139 +1231,139 @@ const attributes = {
 			right: '',
 		},
 	},
-	sliderGlobalBorderRadiusLink : {
-		type : 'boolean',
+	sliderGlobalBorderRadiusLink: {
+		type: 'boolean',
 		default: true
 	},
 	/** End Border Radius */
 
 	/** Start Box Shadow */
-    sliderGlobalBoxShadowSwitcher: {
-        type: 'string',
-        default: 'normal',
-    },
+	sliderGlobalBoxShadowSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
 	sliderGlobalBoxShadowValues: {
-        type: 'array',
-        default: [],
-    },
-    sliderGlobalBoxShadowCssValue: {
-        type: 'string',
-        default: '',
-    },
-    sliderGlobalBoxShadowHoverValues: {
-        type: 'array',
-        default: [],
-    },
-    sliderGlobalBoxShadowHoverCssValue: {
-        type: 'string',
-        default: '',
-    },
+		type: 'array',
+		default: [],
+	},
+	sliderGlobalBoxShadowCssValue: {
+		type: 'string',
+		default: '',
+	},
+	sliderGlobalBoxShadowHoverValues: {
+		type: 'array',
+		default: [],
+	},
+	sliderGlobalBoxShadowHoverCssValue: {
+		type: 'string',
+		default: '',
+	},
 
-    sliderDesktopSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    sliderTabletSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
-    sliderMobileSwitcher: {
-        type: 'boolean',
-        default: false,
-    },
+	sliderDesktopSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	sliderTabletSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	sliderMobileSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
 
 
-    /** Start Class & ID Setting */
-    sliderGlobalWraperClass : {
-        type: 'string',
-        default: ''
-    },
-    sliderGlobalCustomCSS : {
-        type: 'string',
-        default: '',
-    },
-    /** End Class & ID Setting */
+	/** Start Class & ID Setting */
+	sliderGlobalWraperClass: {
+		type: 'string',
+		default: ''
+	},
+	sliderGlobalCustomCSS: {
+		type: 'string',
+		default: '',
+	},
+	/** End Class & ID Setting */
 
-    /** Start Position */
-    sliderPositionType: {
-        type: 'string',
-        default: 'default'
-    },
-    sliderHZOrientationType: {
-        type: 'string',
-        default: 'left'
-    },
-    sliderVROrientationType: {
-        type: 'string',
-        default: 'top'
-    },
-    sliderHZLeftOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderHZLeftOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    sliderHZRightOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderHZRightOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    sliderVRTopOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderVRTopOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    sliderVRBottomOffset: {
-        type: 'object',
-        default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
-        }
-    },
-    sliderVRBottomOffsetUnits: {
-        type: 'object',
-        default: {
-            Desktop: 'px',
-            Tablet: 'px',
-            Mobile: 'px',
-        }
-    },
-    /** End Position */
+	/** Start Position */
+	sliderPositionType: {
+		type: 'string',
+		default: 'default'
+	},
+	sliderHZOrientationType: {
+		type: 'string',
+		default: 'left'
+	},
+	sliderVROrientationType: {
+		type: 'string',
+		default: 'top'
+	},
+	sliderHZLeftOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderHZLeftOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	sliderHZRightOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderHZRightOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	sliderVRTopOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderVRTopOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	sliderVRBottomOffset: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	sliderVRBottomOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Position */
 
-    /** Start Dots Style */
+	/** Start Dots Style */
 	sliderDotsSize: {
 		type: 'object',
 		default: {

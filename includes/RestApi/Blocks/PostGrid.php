@@ -1,6 +1,10 @@
 <?php
 namespace FrontisBlocks\RestApi\Blocks;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use WP_REST_Response;
 use WP_Error;
 use WP_REST_Request;
@@ -8,118 +12,133 @@ use FrontisBlocks\Traits\Singleton;
 use FrontisBlocks\Utils\Helper;
 
 
-class PostGrid {
+class PostGrid
+{
     use Singleton;
 
     /**
      * Constructor
      */
-    public function __construct() {
+    public function __construct()
+    {
         add_action('rest_api_init', [$this, 'fb_register_routes']);
     }
 
     /**
      * Register routes for the post grid block
      */
-    public function fb_register_routes() {
+    public function fb_register_routes()
+    {
 
         register_rest_route('wp/v2/frontis-blocks', '/post', [
-			'methods' => 'POST',
-			'callback' => [$this, 'get_posts'],
-			'permission_callback' => function () {
-				return true;
-			},
-		]);
+            'methods' => 'POST',
+            'callback' => [$this, 'get_posts'],
+            'permission_callback' => function () {
+                return true;
+            },
+        ]);
 
         $post_type = Helper::get_post_types();
 
-		foreach ( $post_type as $key => $value ) {
-			register_rest_field(
-				$value['value'],
-				'fb_featured_image_src',
-				array(
-					'get_callback'    => array( $this, 'get_post_img_src' ),
-					'update_callback' => null,
-					'schema'          => null,
-				)
-			);
+        foreach ($post_type as $key => $value) {
+            register_rest_field(
+                $value['value'],
+                'fb_featured_image_src',
+                array(
+                    'get_callback' => array($this, 'get_post_img_src'),
+                    'update_callback' => null,
+                    'schema' => null,
+                )
+            );
 
-			// Add author info.
-			register_rest_field(
-				$value['value'],
-				'fb_author_info',
-				array(
-					'get_callback'    => array( $this, 'get_post_author_info' ),
-					'update_callback' => null,
-					'schema'          => null,
-				)
-			);
+            // Add author info.
+            register_rest_field(
+                $value['value'],
+                'fb_author_info',
+                array(
+                    'get_callback' => array($this, 'get_post_author_info'),
+                    'update_callback' => null,
+                    'schema' => null,
+                )
+            );
 
-			// Add category info.
-			register_rest_field(
-				$value['value'],
-				'fb_category_info',
-				array(
-					'get_callback'    => array( $this, 'get_post_category_info' ),
-					'update_callback' => null,
-					'schema'          => null,
-				)
-			);
+            // Add category info.
+            register_rest_field(
+                $value['value'],
+                'fb_category_info',
+                array(
+                    'get_callback' => array($this, 'get_post_category_info'),
+                    'update_callback' => null,
+                    'schema' => null,
+                )
+            );
 
-			// Add post_tag info.
-			register_rest_field(
-				$value['value'],
-				'fb_post_tag_info',
-				array(
-					'get_callback'    => array( $this, 'get_post_post_tag_info' ),
-					'update_callback' => null,
-					'schema'          => null,
-				)
-			);
+            // Add post_tag info.
+            register_rest_field(
+                $value['value'],
+                'fb_post_tag_info',
+                array(
+                    'get_callback' => array($this, 'get_post_post_tag_info'),
+                    'update_callback' => null,
+                    'schema' => null,
+                )
+            );
 
-			// Add excerpt info.
-			register_rest_field(
-				$value['value'],
-				'fb_post_excerpt',
-				array(
-					'get_callback'    => array( $this, 'get_post_excerpt' ),
-					'update_callback' => null,
-					'schema'          => null,
-				)
-			);
-		}
+            // Add excerpt info.
+            register_rest_field(
+                $value['value'],
+                'fb_post_excerpt',
+                array(
+                    'get_callback' => array($this, 'get_post_excerpt'),
+                    'update_callback' => null,
+                    'schema' => null,
+                )
+            );
+        }
     }
 
     /**
      * Get featured image source for the rest field as per size.
      */
-	public function get_post_img_src( $object, $field_name, $request ) {
-		$image_sizes = Helper::get_image_sizes();
+    public function get_post_img_src($object, $field_name, $request)
+    {
+        $image_sizes = Helper::get_image_sizes();
 
-		$featured_images = array();
+        $featured_images = array();
 
-		if ( ! isset( $object['featured_media'] ) ) {
-			return $featured_images;
-		}
+        if (!isset($object['featured_media'])) {
+            return $featured_images;
+        }
 
-		foreach ( $image_sizes as $key => $value ) {
-			$size = $value['value'];
+        foreach ($image_sizes as $key => $value) {
+            $size = $value['value'];
 
-			$featured_images[ $size ] = wp_get_attachment_image_src(
-				$object['featured_media'],
-				$size,
-				false
-			);
-		}
+            $featured_images[$size] = wp_get_attachment_image_src(
+                $object['featured_media'],
+                $size,
+                false
+            );
+        }
 
-		return $featured_images;
-	}
+        return $featured_images;
+    }
 
     /**
      * Get author info for the rest field.
      */
-    public function get_post_author_info($object, $field_name, $request) {
-        $author_id = $object['author'];
+    public function get_post_author_info($object, $field_name, $request)
+    {
+
+        if (!isset($object['author']) || empty($object['author'])) {
+            return null;
+        }
+
+        $author_id = (int) $object['author'];
+
+        if (!$author_id) {
+            return null;
+        }
+
         $author_has_posts = count_user_posts($author_id, 'post', true) > 0;
 
         if (!$author_has_posts) {
@@ -143,11 +162,11 @@ class PostGrid {
         $author_email = get_the_author_meta('email', $author_id);
 
         return array(
-            'name'        => $author_name,
-            'avatar'      => $author_avatar,
-            'bio'         => $author_bio,
+            'name' => $author_name,
+            'avatar' => $author_avatar,
+            'bio' => $author_bio,
             'archive_url' => $author_archive_url,
-            'email'       => $author_email,
+            'email' => $author_email,
             'latest_post_date' => $latest_post_date,
         );
     }
@@ -155,122 +174,127 @@ class PostGrid {
     /**
      * Get category info for the rest field.
      */
-    public function get_post_category_info( $object, $field_name, $request ) {
-        $post_id   = $object['id'];
-        $post_type = get_post_type( $post_id );
-    
-        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
-    
+    public function get_post_category_info($object, $field_name, $request)
+    {
+        $post_id = $object['id'];
+        $post_type = get_post_type($post_id);
+
+        $tax_objects = get_object_taxonomies($post_type, 'objects');
+
         $category_tax = null;
-        foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'category' ) {
+        foreach ($tax_objects as $tax) {
+            if ($tax->name === 'category') {
                 $category_tax = 'category';
                 break;
             }
         }
 
-        if ( ! $category_tax ) {
-            foreach ( $tax_objects as $tax ) {
-                if ( strpos( $tax->name, 'category' ) !== false || ! empty( $tax->hierarchical ) ) {
+        if (!$category_tax) {
+            foreach ($tax_objects as $tax) {
+                if (strpos($tax->name, 'category') !== false || !empty($tax->hierarchical)) {
                     $category_tax = $tax->name;
                     break;
                 }
             }
         }
-    
-        if ( ! $category_tax ) {
+
+        if (!$category_tax) {
             return [];
         }
-    
-        $terms = get_the_terms( $post_id, $category_tax );
-        if ( empty( $terms ) || is_wp_error( $terms ) ) {
+
+        $terms = get_the_terms($post_id, $category_tax);
+        if (empty($terms) || is_wp_error($terms)) {
             return [];
         }
-    
-        return array_map( function ( $term ) use ( $category_tax ) {
+
+        return array_map(function ($term) use ($category_tax) {
             return [
-                'id'       => $term->term_id,
-                'name'     => $term->name,
-                'slug'     => $term->slug,
-                'url'      => get_term_link( $term, $category_tax ),
+                'id' => $term->term_id,
+                'name' => $term->name,
+                'slug' => $term->slug,
+                'url' => get_term_link($term, $category_tax),
                 'taxonomy' => $term->taxonomy,
             ];
-        }, $terms );
+        }, $terms);
     }
 
     /**
      * Get post tag info for the rest field.
      */
-    public function get_post_post_tag_info( $object, $field_name, $request ) {
-        $post_id   = $object['id'];
-        $post_type = get_post_type( $post_id );
-    
-        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
-    
+    public function get_post_post_tag_info($object, $field_name, $request)
+    {
+        $post_id = $object['id'];
+        $post_type = get_post_type($post_id);
+
+        $tax_objects = get_object_taxonomies($post_type, 'objects');
+
         $tag_tax = null;
-        foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'post_tag' ) {
+        foreach ($tax_objects as $tax) {
+            if ($tax->name === 'post_tag') {
                 $tag_tax = 'post_tag';
                 break;
             }
         }
-    
-        if ( ! $tag_tax ) {
-            foreach ( $tax_objects as $tax ) {
-                if ( strpos( $tax->name, 'tag' ) !== false || empty( $tax->hierarchical ) ) {
+
+        if (!$tag_tax) {
+            foreach ($tax_objects as $tax) {
+                if (strpos($tax->name, 'tag') !== false || empty($tax->hierarchical)) {
                     $tag_tax = $tax->name;
                     break;
                 }
             }
         }
-    
-        if ( ! $tag_tax ) {
+
+        if (!$tag_tax) {
             return [];
         }
-    
-        $terms = get_the_terms( $post_id, $tag_tax );
-        if ( empty( $terms ) || is_wp_error( $terms ) ) {
+
+        $terms = get_the_terms($post_id, $tag_tax);
+        if (empty($terms) || is_wp_error($terms)) {
             return [];
         }
-    
-        return array_map( function( $term ) use ( $tag_tax ) {
-            $url = get_term_link( $term, $tag_tax );
-            if ( is_wp_error( $url ) ) {
+
+        return array_map(function ($term) use ($tag_tax) {
+            $url = get_term_link($term, $tag_tax);
+            if (is_wp_error($url)) {
                 $url = '';
             }
             return [
-                'id'       => $term->term_id,
-                'name'     => $term->name,
-                'slug'     => $term->slug,
-                'url'      => $url,
+                'id' => $term->term_id,
+                'name' => $term->name,
+                'slug' => $term->slug,
+                'url' => $url,
                 'taxonomy' => $term->taxonomy,
             ];
-        }, $terms );
+        }, $terms);
     }
 
     /**
-	 * Get excerpt for the rest field.
-	 */
-	public function get_post_excerpt( $object, $field_name, $request ) {
-		$excerpt = wp_trim_words( get_the_excerpt( $object['id'] ) );
-		if ( ! $excerpt ) {
-			$excerpt = null;
-		}
-		return $excerpt;
-	}
+     * Get excerpt for the rest field.
+     */
+    public function get_post_excerpt($object, $field_name, $request)
+    {
+        $excerpt = wp_trim_words(get_the_excerpt($object['id']));
+        if (!$excerpt) {
+            $excerpt = null;
+        }
+        return $excerpt;
+    }
 
     /**
      * Resolve category tax for the post
      */
-    public function fb_resolve_category_tax_for_post( $post_id ) {
-        $post_type   = get_post_type( $post_id );
-        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+    public function fb_resolve_category_tax_for_post($post_id)
+    {
+        $post_type = get_post_type($post_id);
+        $tax_objects = get_object_taxonomies($post_type, 'objects');
 
-        foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'category' ) return 'category';
+        foreach ($tax_objects as $tax) {
+            if ($tax->name === 'category')
+                return 'category';
         }
-        foreach ( $tax_objects as $tax ) {
-            if ( strpos( $tax->name, 'category' ) !== false || ! empty( $tax->hierarchical ) ) {
+        foreach ($tax_objects as $tax) {
+            if (strpos($tax->name, 'category') !== false || !empty($tax->hierarchical)) {
                 return $tax->name;
             }
         }
@@ -280,15 +304,17 @@ class PostGrid {
     /**
      * Resolve tag tax for the post
      */
-    public function fb_resolve_tag_tax_for_post( $post_id ) {
-        $post_type   = get_post_type( $post_id );
-        $tax_objects = get_object_taxonomies( $post_type, 'objects' );
+    public function fb_resolve_tag_tax_for_post($post_id)
+    {
+        $post_type = get_post_type($post_id);
+        $tax_objects = get_object_taxonomies($post_type, 'objects');
 
-        foreach ( $tax_objects as $tax ) {
-            if ( $tax->name === 'post_tag' ) return 'post_tag';
+        foreach ($tax_objects as $tax) {
+            if ($tax->name === 'post_tag')
+                return 'post_tag';
         }
-        foreach ( $tax_objects as $tax ) {
-            if ( strpos( $tax->name, 'tag' ) !== false || empty( $tax->hierarchical ) ) {
+        foreach ($tax_objects as $tax) {
+            if (strpos($tax->name, 'tag') !== false || empty($tax->hierarchical)) {
                 return $tax->name;
             }
         }
@@ -298,8 +324,9 @@ class PostGrid {
     /**
      * Get posts for the rest field
      */
-    public function get_posts() {
-    	global $wpdb;
+    public function get_posts()
+    {
+        global $wpdb;
 
         // Get parameters from AJAX request
         $post_type = isset($_POST['post_type']) ? $_POST['post_type'] : 'post';
@@ -314,6 +341,7 @@ class PostGrid {
         $current_page = isset($_POST['currentPage']) ? intval($_POST['currentPage']) : 1;
         $orderby = isset($_POST['orderby']) ? $_POST['orderby'] : 'date';
         $sortorder = isset($_POST['sortorder']) ? $_POST['sortorder'] : 'desc';
+        $blockID = isset($_POST['blockID']) ? $_POST['blockID'] : '';
 
         $post_title_tag = isset($_POST['postTitleTag']) ? $_POST['postTitleTag'] : 'h3';
         $post_description_tag = isset($_POST['postDescriptionTag']) ? $_POST['postDescriptionTag'] : 'p';
@@ -366,9 +394,9 @@ class PostGrid {
         $category_key = isset($_POST['categoryKey']) ? $_POST['categoryKey'] : 'category';
         $tag_key = isset($_POST['tagKey']) ? $_POST['tagKey'] : 'post_tag';
 
-        
+
         ob_start();
-        
+
         /**
          * Initial query to select posts based on type and status
          */
@@ -464,12 +492,7 @@ class PostGrid {
         /**
          * Sortorder
          */
-        $valid_sortorder_values = ['asc', 'desc'];
-        if (!in_array(strtolower($sortorder), $valid_sortorder_values)) {
-            $sortorder = 'desc';
-        }
-
-        $sortorder = strtoupper($sortorder);
+        $sortorder = (isset($_POST['sortorder']) && 'asc' === strtolower($_POST['sortorder'])) ? 'ASC' : 'DESC';
 
         $orderby = sanitize_key($orderby);
 
@@ -491,7 +514,15 @@ class PostGrid {
 
         /** Start Count total number of records */
         $count_query = "SELECT COUNT(*) FROM ($query) AS CountQuery";
-        $total_records = $wpdb->get_var($count_query);
+        // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared -- Query built dynamically with escaped values
+        
+        $cache_key_total = 'fb_post_grid_total_' . md5($count_query);
+        $total_records = wp_cache_get($cache_key_total, 'frontis_blocks');
+
+        if (false === $total_records) {
+            $total_records = $wpdb->get_var($count_query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            wp_cache_set($cache_key_total, $total_records, 'frontis_blocks', 300);
+        }
 
         /** Start Calculate total number of pages */
         $total_pages = ceil($total_records / $limit);
@@ -502,13 +533,19 @@ class PostGrid {
         $final_query = $wpdb->prepare($query_with_limit, $limit, $offset);
 
         /** Start Execute the query to get results */
-        $results = $wpdb->get_results($final_query);
+        $cache_key_results = 'fb_post_grid_results_' . md5($final_query);
+        $results = wp_cache_get($cache_key_results, 'frontis_blocks');
+
+        if (false === $results) {
+            $results = $wpdb->get_results($final_query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            wp_cache_set($cache_key_results, $results, 'frontis_blocks', 300);
+        }
 
 
         $get_custom_permalink = '';
 
         if ($results) {
-            foreach($results as $key => $single_post):
+            foreach ($results as $key => $single_post):
 
                 $permalink = get_permalink($single_post->ID);
 
@@ -519,401 +556,418 @@ class PostGrid {
                     $get_custom_permalink = $permalink;
                 }
 
-            ?>
+                ?>
 
-                <?php if ( $premade_style == 'style-1' ): ?>
-                    <?php if ( ! empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true' ): ?>
-                        <a href="<?php echo esc_url( $get_custom_permalink ); ?>" class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
-                    <?php else: ?>
-                        <div class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
-                    <?php endif; ?>
+                <?php if ($premade_style == 'style-1'): ?>
+                    <?php if (!empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true'): ?>
+                        <a href="<?php echo esc_url($get_custom_permalink); ?>"
+                            class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
+                        <?php else: ?>
+                            <div class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
+                            <?php endif; ?>
 
-                        <div class="fb_post_grid_image_wrapper">
-                            <div class="fb_post_grid_image">
-                                <?php
-                                    if ( has_post_thumbnail( $single_post->ID ) ) :
-                                        $image        = wp_get_attachment_image_src( get_post_thumbnail_id( $single_post->ID ), $post_image_size );
-                                        $image_srcset = wp_get_attachment_image_srcset( get_post_thumbnail_id( $single_post->ID ), $post_image_size );
-                                        $image_url    = ( $image && isset( $image[0] ) ) ? $image[0] : $default_image_url;
-                                    else :
-                                        $image_url    = $default_image_url;
+                            <div class="fb_post_grid_image_wrapper">
+                                <div class="fb_post_grid_image">
+                                    <?php
+                                    if (has_post_thumbnail($single_post->ID)):
+                                        $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
+                                        $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
+                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
+                                    else:
+                                        $image_url = $default_image_url;
                                         $image_srcset = '';
                                     endif;
-                                ?>
+                                    ?>
 
-                                <?php if ( $thumbnail_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                    <a href="<?php echo esc_url( $get_custom_permalink ); ?>" aria-label="<?php esc_attr_e( 'Read more about', 'frontis-blocks' ); ?> <?php echo esc_attr( $single_post->post_title ); ?>">
-                                        <img src="<?php echo esc_url( $image_url ); ?>"
-                                            srcset="<?php echo esc_attr( $image_srcset ); ?>"
-                                            alt="<?php echo esc_attr( get_the_title( $single_post->ID ) ); ?>" />
-                                    </a>
-                                <?php else: ?>
-                                    <div>
-                                        <img src="<?php echo esc_url( $image_url ); ?>"
-                                            srcset="<?php echo esc_attr( $image_srcset ); ?>"
-                                            alt="<?php echo esc_attr( get_the_title( $single_post->ID ) ); ?>" />
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-
-                        <div class="fb_post_grid_content_wrapper">
-                            <?php if ( $show_author_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_author">
-                                    <?php if ( $post_author_avatar_switcher == 'true' ): ?>
-                                        <div class="fb_post_grid_author_avatar">
-                                            <?php if ( $author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url( get_author_posts_url( $single_post->post_author ) ); ?>"
-                                                    aria-label="<?php esc_attr_e( 'View all posts by', 'frontis-blocks' ); ?> <?php echo esc_attr( get_the_author_meta( 'display_name', $single_post->post_author ) ); ?>">
-                                                    <?php
-                                                    echo wp_kses_post(
-                                                        get_avatar(
-                                                            $single_post->post_author,
-                                                            96,
-                                                            '',
-                                                            esc_attr( get_the_author_meta( 'display_name', $single_post->post_author ) ),
-                                                            array( 'class' => 'avatar' )
-                                                        )
-                                                    ); ?>
-                                                </a>
-                                            <?php else: ?>
-                                                <div>
-                                                    <?php
-                                                    echo wp_kses_post(
-                                                        get_avatar(
-                                                            $single_post->post_author,
-                                                            96,
-                                                            '',
-                                                            esc_attr( get_the_author_meta( 'display_name', $single_post->post_author ) ),
-                                                            array( 'class' => 'avatar' )
-                                                        )
-                                                    ); ?>
-                                                </div>
-                                            <?php endif; ?>
+                                    <?php if ($thumbnail_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                        <a href="<?php echo esc_url($get_custom_permalink); ?>"
+                                            aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                            <img src="<?php echo esc_url($image_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
+                                                alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
+                                        </a>
+                                    <?php else: ?>
+                                        <div>
+                                            <img src="<?php echo esc_url($image_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
+                                                alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
                                         </div>
                                     <?php endif; ?>
-                                    <div class="fb_post_grid_author_info">
-                                        <div class="fb_post_grid_author_info_name">
-                                            <?php if ( $post_author_prefix_switcher == 'true' ): ?>
-                                                <span class="fb_post_grid_author_posted_by"><?php echo esc_html( $post_author_prefix ); ?></span>
-                                            <?php endif; ?>
-                                            <div class="fb_post_grid_author_name">
-                                                <?php if ( $author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                    <a class="fb_post_grid_author_name_url" href="<?php echo esc_url( get_author_posts_url( $single_post->post_author ) ); ?>"
-                                                    aria-label="View all posts by <?php echo esc_attr( get_the_author_meta( 'display_name', $single_post->post_author ) ); ?>">
-                                                    <?php echo esc_html( get_the_author_meta( 'display_name', $single_post->post_author ) ); ?>
-                                                    </a>
-                                                <?php else: ?>
-                                                    <span><?php echo esc_html( get_the_author_meta( 'display_name', $single_post->post_author ) ); ?></span>
+                                </div>
+                            </div>
+
+                            <div class="fb_post_grid_content_wrapper">
+                                <?php if ($show_author_switcher == 'true' || $show_date_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_author">
+                                        <?php if ($show_author_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_author_wrapper">
+                                                <?php if ($post_author_avatar_switcher == 'true'): ?>
+                                                    <div class="fb_post_grid_author_avatar">
+                                                        <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_author_avatar_url"
+                                                                href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <div>
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
                                                 <?php endif; ?>
+                                                <div class="fb_post_grid_author_info">
+                                                    <div class="fb_post_grid_author_info_name">
+                                                        <?php if ($post_author_prefix_switcher == 'true'): ?>
+                                                            <span
+                                                                class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
+                                                        <?php endif; ?>
+                                                        <div class="fb_post_grid_author_name">
+                                                            <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                                <a class="fb_post_grid_author_name_url"
+                                                                    href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                                </a>
+                                                            <?php else: ?>
+                                                                <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
                                             </div>
-                                        </div>
-                                        <?php if ( $show_date_switcher == 'true' ): ?>
+                                        <?php endif; ?>
+                                        <?php if ($show_date_switcher == 'true'): ?>
                                             <div class="fb_post_grid_date">
-                                                <?php echo esc_html( get_the_date( 'j M Y', $single_post->ID ) ); ?>
+                                                <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                                
 
-                            <?php if ( $show_category_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_categories">
-                                    <?php
-                                        $cat_tax    = $this->fb_resolve_category_tax_for_post( $single_post->ID );
-                                        $categories = $cat_tax ? get_the_terms( $single_post->ID, $cat_tax ) : [];
+                                <?php if ($show_category_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_categories">
+                                        <?php
+                                        $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
+                                        $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
 
-                                        if ( $categories ):
-                                            foreach ( $categories as $category ): ?>
-                                                <div class="fb_post_grid_category" key="<?php echo esc_attr( $category->term_id ); ?>">
-                                                    <?php if ( $category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
+                                        if ($categories):
+                                            foreach ($categories as $category): ?>
+                                                <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
+                                                    <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
                                                         <a class="fb_post_grid_category_url"
-                                                        href="<?php echo esc_url( get_term_link( $category, $category->taxonomy ) ); ?>"
-                                                        aria-label="<?php echo esc_attr( sprintf( 'View posts in %s category', $category->name ) ); ?>">
-                                                        <?php echo esc_html( $category->name ); ?>
+                                                            href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                            <?php echo esc_html($category->name); ?>
                                                         </a>
                                                     <?php else: ?>
-                                                        <span class="fb_post_grid_category_name"><?php echo esc_html( $category->name ); ?></span>
+                                                        <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
                                                     <?php endif; ?>
                                                 </div>
                                             <?php endforeach;
                                         endif;
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <?php if ( $show_tag_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_tags">
-                                    <?php
-                                        $tag_tax = $this->fb_resolve_tag_tax_for_post( $single_post->ID );
-                                        $tags    = $tag_tax ? get_the_terms( $single_post->ID, $tag_tax ) : [];
-                                        if ( $tags ):
-                                            foreach ( $tags as $tag ): ?>
-                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr( $tag->term_id ); ?>">
-                                                    <?php if ( $tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                        <a class="fb_post_grid_tag_url"
-                                                        href="<?php echo esc_url( get_term_link( $tag, $tag->taxonomy ) ); ?>"
-                                                        aria-label="<?php echo esc_attr( sprintf( 'View posts tagged with %s', $tag->name ) ); ?>">
-                                                            <?php echo esc_html( $tag->name ); ?>
-                                                        </a>
-                                                    <?php else: ?>
-                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html( $tag->name ); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach;
-                                        endif;
-                                    ?>
-                                </div>
-                            <?php endif; ?>
-
-                            <div class="fb_post_grid_content">
-                                <?php if ( $title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                    <a href="<?php echo esc_url( $get_custom_permalink ); ?>">
-                                        <<?php echo esc_html( $post_title_tag ); ?> class="fb_post_title">
-                                        <?php echo esc_html( $single_post->post_title ); ?>
-                                        </<?php echo esc_html( $post_title_tag ); ?>>
-                                    </a>
-                                <?php else: ?>
-                                    <<?php echo esc_html( $post_title_tag ); ?> class="fb_post_title">
-                                        <?php echo esc_html( $single_post->post_title ); ?>
-                                    </<?php echo esc_html( $post_title_tag ); ?>>
+                                        ?>
+                                    </div>
                                 <?php endif; ?>
 
-                                <?php if ( ! empty( $single_post->post_excerpt ) && $show_excerpt_switcher == 'true' ): ?>
-                                    <<?php echo esc_html( $post_description_tag ); ?> class="fb_post_desc">
-                                        <?php echo esc_html( wp_trim_words( $single_post->post_excerpt, $post_description_excerpt_length, '...' ) ); ?>
-                                    </<?php echo esc_html( $post_description_tag ); ?>>
-                                <?php elseif ( ! empty( $single_post->post_content ) && $show_excerpt_switcher == 'true' ): ?>
-                                    <<?php echo esc_html( $post_description_tag ); ?> class="fb_post_desc">
-                                        <?php echo esc_html( wp_trim_words( $single_post->post_content, $post_description_excerpt_length, '...' ) ); ?>
-                                    </<?php echo esc_html( $post_description_tag ); ?>>
+                                <?php if ($show_tag_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_tags">
+                                        <?php
+                                        $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
+                                        $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
+                                        if ($tags):
+                                            foreach ($tags as $tag): ?>
+                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
+                                                    <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                        <a class="fb_post_grid_tag_url"
+                                                            href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                            <?php echo esc_html($tag->name); ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endforeach;
+                                        endif;
+                                        ?>
+                                    </div>
+                                <?php endif; ?>
+
+                                <div class="fb_post_grid_content">
+                                    <?php if ($title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                        <a href="<?php echo esc_url($get_custom_permalink); ?>">
+                                            <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                                <?php echo esc_html($single_post->post_title); ?>
+                                            </<?php echo esc_html($post_title_tag); ?>>
+                                        </a>
+                                    <?php else: ?>
+                                        <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                            <?php echo esc_html($single_post->post_title); ?>
+                                        </<?php echo esc_html($post_title_tag); ?>>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true'): ?>
+                                        <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                            <?php echo esc_html(wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...')); ?>
+                                        </<?php echo esc_html($post_description_tag); ?>>
+                                    <?php elseif (!empty($single_post->post_content) && $show_excerpt_switcher == 'true'): ?>
+                                        <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                            <?php echo esc_html(wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...')); ?>
+                                        </<?php echo esc_html($post_description_tag); ?>>
+                                    <?php endif; ?>
+                                </div>
+
+                                <?php if ($read_more_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_read_more_button">
+                                        <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                            <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                        <?php endif; ?>
+
+                                        <?php if ($read_more_icon_align === 'icon-text'): ?>
+                                            <div class='fb_post_grid_read_more_icon_wrapper'></div>
+                                        <?php endif; ?>
+
+                                        <?php if ($read_more_icon_align === 'image' && $read_more_icon_image_url): ?>
+                                            <div class='fb_post_grid_read_more_icon_wrapper'>
+                                                <div class="fb_post_grid_read_more_icon_image">
+                                                    <img src="<?php echo esc_url($read_more_icon_image_url); ?>"
+                                                        alt="<?php echo esc_attr($read_more_icon_image_alt); ?>" />
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+
+                                        <?php if ($read_more_icon_align === 'icon-only'): ?>
+                                            <div class='fb_post_grid_read_more_icon_wrapper'></div>
+                                        <?php endif; ?>
+                                    </a>
+                                <?php elseif ($read_more_switcher == 'true' && $post_wrapper_link_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_read_more_button">
+                                        <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                            <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                        <?php endif; ?>
+                                    </div>
                                 <?php endif; ?>
                             </div>
 
-                            <?php if ( $read_more_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                <a href="<?php echo esc_url( $get_custom_permalink ); ?>" class="fb_post_grid_read_more_button">
-                                    <?php if ( $read_more_icon_align !== 'icon-only' ): ?>
-                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html( $read_more_text ); ?></span>
-                                    <?php endif; ?>
-
-                                    <?php if ( $read_more_icon_align === 'icon-text' ): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'></div>
-                                    <?php endif; ?>
-
-                                    <?php if ( $read_more_icon_align === 'image' && $read_more_icon_image_url ): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'>
-                                            <div class="fb_post_grid_read_more_icon_image">
-                                                <img src="<?php echo esc_url( $read_more_icon_image_url ); ?>" alt="<?php echo esc_attr( $read_more_icon_image_alt ); ?>" />
-                                            </div>
-                                        </div>
-                                    <?php endif; ?>
-
-                                    <?php if ( $read_more_icon_align === 'icon-only' ): ?>
-                                        <div class='fb_post_grid_read_more_icon_wrapper'></div>
-                                    <?php endif; ?>
-                                </a>
-                            <?php elseif ( $read_more_switcher == 'true' && $post_wrapper_link_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_read_more_button">
-                                    <?php if ( $read_more_icon_align !== 'icon-only' ): ?>
-                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html( $read_more_text ); ?></span>
-                                    <?php endif; ?>
-                                </div>
-                            <?php endif; ?>
-                        </div>
-
-                    <?php if ( ! empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true' ): ?>
+                            <?php if (!empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true'): ?>
                         </a>
                     <?php else: ?>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if ( $premade_style == 'style-2' ): ?>
-                    <?php if ( ! empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true' ): ?>
-                        <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
-                    <?php else: ?>
-                        <div class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
-                    <?php endif; ?>
+                <?php if ($premade_style == 'style-2'): ?>
+                    <?php if (!empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true'): ?>
+                        <a href="<?php echo esc_url($get_custom_permalink); ?>"
+                            class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
+                        <?php else: ?>
+                            <div class="fb_post_grid_wrapper fb_post_grid_<?php echo esc_attr($premade_style); ?>">
+                            <?php endif; ?>
 
-                        <div class="fb_post_grid_image_wrapper">
-                            <div class="fb_post_grid_image">
-                                <?php
-                                    if ( has_post_thumbnail($single_post->ID) ) :
-                                        $image        = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
+                            <div class="fb_post_grid_image_wrapper">
+                                <div class="fb_post_grid_image">
+                                    <?php
+                                    if (has_post_thumbnail($single_post->ID)):
+                                        $image = wp_get_attachment_image_src(get_post_thumbnail_id($single_post->ID), $post_image_size);
                                         $image_srcset = wp_get_attachment_image_srcset(get_post_thumbnail_id($single_post->ID), $post_image_size);
-                                        $image_url    = ($image && isset($image[0])) ? $image[0] : $default_image_url;
-                                    else :
-                                        $image_url    = $default_image_url;
+                                        $image_url = ($image && isset($image[0])) ? $image[0] : $default_image_url;
+                                    else:
+                                        $image_url = $default_image_url;
                                         $image_srcset = '';
                                     endif;
-                                ?>
+                                    ?>
 
-                                <?php if ( $thumbnail_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                    <a href="<?php echo esc_url($get_custom_permalink); ?>" aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
-                                        <img src="<?php echo esc_url($image_url); ?>"
-                                            srcset="<?php echo esc_attr($image_srcset); ?>"
-                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
-                                    </a>
-                                <?php else: ?>
-                                    <div>
-                                        <img src="<?php echo esc_url($image_url); ?>"
-                                            srcset="<?php echo esc_attr($image_srcset); ?>"
-                                            alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ( $show_category_switcher == 'true' ): ?>
-                                    <div class="fb_post_grid_categories">
-                                        <?php
-                                            $cat_tax    = $this->fb_resolve_category_tax_for_post( $single_post->ID );
-                                            $categories = $cat_tax ? get_the_terms( $single_post->ID, $cat_tax ) : [];
-                                            if ( $categories ):
-                                                foreach ( $categories as $category ): ?>
-                                                    <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                        <?php if ( $category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                            <a class="fb_post_grid_category_url"
-                                                            href="<?php echo esc_url( get_term_link( $category, $category->taxonomy ) ); ?>"
-                                                            aria-label="<?php echo esc_attr( sprintf( 'View posts in %s category', $category->name ) ); ?>">
-                                                            <?php echo esc_html( $category->name ); ?>
-                                                            </a>
-                                                        <?php else: ?>
-                                                            <span class="fb_post_grid_category_name"><?php echo esc_html( $category->name ); ?></span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                <?php endforeach;
-                                            endif;
-                                        ?>
-                                    </div>
-                                <?php endif; ?>
-
-                                <?php if ( $show_tag_switcher == 'true' ): ?>
-                                    <div class="fb_post_grid_tags">
-                                        <?php
-                                            $tag_tax = $this->fb_resolve_tag_tax_for_post( $single_post->ID );
-                                            $tags    = $tag_tax ? get_the_terms( $single_post->ID, $tag_tax ) : [];
-                                            if ( $tags ):
-                                                foreach ( $tags as $tag ): ?>
-                                                    <div class="fb_post_grid_tag" key="<?php echo esc_attr( $tag->term_id ); ?>">
-                                                        <?php if ( $tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                            <a class="fb_post_grid_tag_url"
-                                                            href="<?php echo esc_url( get_term_link( $tag, $tag->taxonomy ) ); ?>"
-                                                            aria-label="<?php echo esc_attr( sprintf( 'View posts tagged with %s', $tag->name ) ); ?>">
-                                                                <?php echo esc_html( $tag->name ); ?>
-                                                            </a>
-                                                        <?php else: ?>
-                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html( $tag->name ); ?></span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                <?php endforeach;
-                                            endif;
-                                        ?>
-                                    </div>
-                                <?php endif; ?>
-
-                            </div>
-                        </div>
-
-                        <div class="fb_post_grid_content_wrapper">
-                            <?php if ( $show_author_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_author">
-                                    <?php if ( $post_author_avatar_switcher == 'true' ): ?>
-                                        <div class="fb_post_grid_author_avatar">
-                                            <?php if ( $author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                <a class="fb_post_grid_author_avatar_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                <?php
-                                                echo wp_kses_post(
-                                                    get_avatar(
-                                                        $single_post->post_author,
-                                                        96,
-                                                        '',
-                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                        array('class' => 'avatar')
-                                                    )
-                                                ); ?>
-                                                </a>
-                                            <?php else: ?>
-                                                <div>
-                                                    <?php
-                                                    echo wp_kses_post(
-                                                        get_avatar(
-                                                            $single_post->post_author,
-                                                            96,
-                                                            '',
-                                                            esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
-                                                            array('class' => 'avatar')
-                                                        )
-                                                    ); ?>
-                                                </div>
-                                            <?php endif; ?>
+                                    <?php if ($thumbnail_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                        <a href="<?php echo esc_url($get_custom_permalink); ?>"
+                                            aria-label="<?php esc_attr_e('Read more about', 'frontis-blocks'); ?> <?php echo esc_attr($single_post->post_title); ?>">
+                                            <img src="<?php echo esc_url($image_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
+                                                alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
+                                        </a>
+                                    <?php else: ?>
+                                        <div>
+                                            <img src="<?php echo esc_url($image_url); ?>" srcset="<?php echo esc_attr($image_srcset); ?>"
+                                                alt="<?php echo esc_attr(get_the_title($single_post->ID)); ?>" />
                                         </div>
                                     <?php endif; ?>
-                                    <div class="fb_post_grid_author_info">
-                                        <div class="fb_post_grid_author_info_name">
-                                            <?php if ( $post_author_prefix_switcher == 'true' ): ?>
-                                                <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
-                                            <?php endif; ?>
-                                            <div class="fb_post_grid_author_name">
-                                                <?php if ( $author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                                    <a class="fb_post_grid_author_name_url" href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
-                                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
-                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
-                                                    </a>
-                                                <?php else: ?>
-                                                    <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
-                                                <?php endif; ?>
-                                            </div>
+
+                                    <?php if ($show_category_switcher == 'true'): ?>
+                                        <div class="fb_post_grid_categories">
+                                            <?php
+                                            $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
+                                            $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
+                                            if ($categories):
+                                                foreach ($categories as $category): ?>
+                                                    <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
+                                                        <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_category_url"
+                                                                href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
+                                                                aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                                <?php echo esc_html($category->name); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endforeach;
+                                            endif;
+                                            ?>
                                         </div>
-                                        <?php if ( $show_date_switcher == 'true' ): ?>
+                                    <?php endif; ?>
+
+                                    <?php if ($show_tag_switcher == 'true'): ?>
+                                        <div class="fb_post_grid_tags">
+                                            <?php
+                                            $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
+                                            $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
+                                            if ($tags):
+                                                foreach ($tags as $tag): ?>
+                                                    <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
+                                                        <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_tag_url"
+                                                                href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
+                                                                aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                                <?php echo esc_html($tag->name); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endforeach;
+                                            endif;
+                                            ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                </div>
+                            </div>
+
+                            <div class="fb_post_grid_content_wrapper">
+                                <?php if ($show_author_switcher == 'true' || $show_date_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_author">
+                                        <?php if ($show_author_switcher == 'true'): ?>
+                                            <div class="fb_post_grid_author_wrapper">
+                                                <?php if ($post_author_avatar_switcher == 'true'): ?>
+                                                    <div class="fb_post_grid_author_avatar">
+                                                        <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                            <a class="fb_post_grid_author_avatar_url"
+                                                                href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                aria-label="<?php esc_attr_e('View all posts by', 'frontis-blocks'); ?> <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <div>
+                                                                <?php
+                                                                echo wp_kses_post(
+                                                                    get_avatar(
+                                                                        $single_post->post_author,
+                                                                        96,
+                                                                        '',
+                                                                        esc_attr(get_the_author_meta('display_name', $single_post->post_author)),
+                                                                        array('class' => 'avatar')
+                                                                    )
+                                                                ); ?>
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    </div>
+                                                <?php endif; ?>
+                                                <div class="fb_post_grid_author_info">
+                                                    <div class="fb_post_grid_author_info_name">
+                                                        <?php if ($post_author_prefix_switcher == 'true'): ?>
+                                                            <span class="fb_post_grid_author_posted_by"><?php echo esc_html($post_author_prefix); ?></span>
+                                                        <?php endif; ?>
+                                                        <div class="fb_post_grid_author_name">
+                                                            <?php if ($author_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                                <a class="fb_post_grid_author_name_url"
+                                                                    href="<?php echo esc_url(get_author_posts_url($single_post->post_author)); ?>"
+                                                                    aria-label="View all posts by <?php echo esc_attr(get_the_author_meta('display_name', $single_post->post_author)); ?>">
+                                                                    <?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?>
+                                                                </a>
+                                                            <?php else: ?>
+                                                                <span><?php echo esc_html(get_the_author_meta('display_name', $single_post->post_author)); ?></span>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if ($show_date_switcher == 'true'): ?>
                                             <div class="fb_post_grid_date">
                                                 <?php echo esc_html(get_the_date('j M Y', $single_post->ID)); ?>
                                             </div>
                                         <?php endif; ?>
                                     </div>
-                                </div>
-                            <?php endif; ?>
+                                <?php endif; ?>
+                                
 
-                            <div class="fb_post_grid_content">
-                                <?php if ( $title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                    <a href="<?php echo esc_url($get_custom_permalink); ?>">
+                                <div class="fb_post_grid_content">
+                                    <?php if ($title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                        <a href="<?php echo esc_url($get_custom_permalink); ?>">
+                                            <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
+                                                <?php echo esc_html($single_post->post_title); ?>
+                                            </<?php echo esc_html($post_title_tag); ?>>
+                                        </a>
+                                    <?php else: ?>
                                         <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
                                             <?php echo esc_html($single_post->post_title); ?>
                                         </<?php echo esc_html($post_title_tag); ?>>
-                                    </a>
-                                <?php else: ?>
-                                    <<?php echo esc_html($post_title_tag); ?> class="fb_post_title">
-                                        <?php echo esc_html($single_post->post_title); ?>
-                                    </<?php echo esc_html($post_title_tag); ?>>
-                                <?php endif; ?>
-
-                                <?php if ( ! empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true' ): ?>
-                                    <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
-                                        <?php echo esc_html(wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...')); ?>
-                                    </<?php echo esc_html($post_description_tag); ?>>
-                                <?php elseif ( ! empty($single_post->post_content) && $show_excerpt_switcher == 'true' ): ?>
-                                    <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
-                                        <?php echo esc_html(wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...')); ?>
-                                    </<?php echo esc_html($post_description_tag); ?>>
-                                <?php endif; ?>
-                            </div>
-
-                            <?php if ( $read_more_switcher == 'true' && $post_wrapper_link_switcher !== 'true' ): ?>
-                                <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_read_more_button">
-                                    <?php if ( $read_more_icon_align !== 'icon-only' ): ?>
-                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
                                     <?php endif; ?>
-                                </a>
-                            <?php elseif ( $read_more_switcher == 'true' && $post_wrapper_link_switcher == 'true' ): ?>
-                                <div class="fb_post_grid_read_more_button">
-                                    <?php if ( $read_more_icon_align !== 'icon-only' ): ?>
-                                        <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+
+                                    <?php if (!empty($single_post->post_excerpt) && $show_excerpt_switcher == 'true'): ?>
+                                        <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                            <?php echo esc_html(wp_trim_words($single_post->post_excerpt, $post_description_excerpt_length, '...')); ?>
+                                        </<?php echo esc_html($post_description_tag); ?>>
+                                    <?php elseif (!empty($single_post->post_content) && $show_excerpt_switcher == 'true'): ?>
+                                        <<?php echo esc_html($post_description_tag); ?> class="fb_post_desc">
+                                            <?php echo esc_html(wp_trim_words($single_post->post_content, $post_description_excerpt_length, '...')); ?>
+                                        </<?php echo esc_html($post_description_tag); ?>>
                                     <?php endif; ?>
                                 </div>
-                            <?php endif; ?>
 
-                        </div>
+                                <?php if ($read_more_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                    <a href="<?php echo esc_url($get_custom_permalink); ?>" class="fb_post_grid_read_more_button">
+                                        <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                            <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                        <?php endif; ?>
+                                    </a>
+                                <?php elseif ($read_more_switcher == 'true' && $post_wrapper_link_switcher == 'true'): ?>
+                                    <div class="fb_post_grid_read_more_button">
+                                        <?php if ($read_more_icon_align !== 'icon-only'): ?>
+                                            <span class="fb_post_grid_read_more_text"><?php echo esc_html($read_more_text); ?></span>
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endif; ?>
 
-                    <?php if ( ! empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true' ): ?>
+                            </div>
+
+                            <?php if (!empty($post_wrapper_link_switcher) && $post_wrapper_link_switcher == 'true'): ?>
                         </a>
                     <?php else: ?>
                         </div>
@@ -922,34 +976,32 @@ class PostGrid {
 
             <?php endforeach;
 
-            $has_more = (int)$current_page < (int)$total_pages;
+            $has_more = (int) $current_page < (int) $total_pages;
 
             // show load more button or pagination
-            if ($show_load_more_switcher == 'true') :
+            if ($show_load_more_switcher == 'true'):
 
                 // 1) LOAD MORE BUTTON: show when there is more page
-                if ($load_more_type === 'button' && $has_more) : ?>
+                if ($load_more_type === 'button' && $has_more): ?>
                     <div class="fb_load_more_wrapper">
-                        <div class="fb_load_more"
-                            data-current_page="<?php echo esc_attr($current_page); ?>"
+                        <div class="fb_load_more" data-current_page="<?php echo esc_attr($current_page); ?>"
                             data-total_pages="<?php echo esc_attr($total_pages); ?>">
                         </div>
                     </div>
                 <?php endif;
 
                 // 2) PAGINATION: show when total_pages > 1 (also on last page)
-                if ($load_more_type === 'pagination' && (int)$total_pages > 1) : ?>
+                if ($load_more_type === 'pagination' && (int) $total_pages > 1): ?>
                     <div class="fb_load_more_wrapper">
-                        <div class="fb_pagination_wrapper"
-                            data-current_page="<?php echo esc_attr($current_page); ?>"
+                        <div class="fb_pagination_wrapper" data-current_page="<?php echo esc_attr($current_page); ?>"
                             data-total_pages="<?php echo esc_attr($total_pages); ?>">
 
                             <!-- Previous Button -->
-                            <button class="fb_pagination_previous <?php echo $current_page==1 ? 'disabled' : ''; ?>">
+                            <button class="fb_pagination_previous <?php echo $current_page == 1 ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
                                     <span class="fb_pagination_previous_icon_Wrapper"></span>
                                 <?php else: ?>
-                                    <span class="fb_pagination_previous_text"><?php echo esc_html( $pagination_prev_text ); ?></span>
+                                    <span class="fb_pagination_previous_text"><?php echo esc_html($pagination_prev_text); ?></span>
                                 <?php endif; ?>
                             </button>
 
@@ -968,7 +1020,7 @@ class PostGrid {
 
                                 // main page numbers
                                 $start = max(1, $current_page - $range);
-                                $end   = min($total_pages, $current_page + $range);
+                                $end = min($total_pages, $current_page + $range);
 
                                 for ($page = $start; $page <= $end; $page++) {
                                     $active = $page == $current_page ? 'active' : '';
@@ -978,18 +1030,18 @@ class PostGrid {
                                 // end dots
                                 if ($current_page < $total_pages - ($range + 2)) {
                                     echo '<span class="fb_pagination_ellipsis">...</span>';
-                                    echo '<button class="fb_pagination_item" data-pagenumber="' . $total_pages . '">' . $total_pages . '</button>';
+                                    echo '<button class="fb_pagination_item" data-pagenumber="' . esc_attr($total_pages) . '">' . esc_attr($total_pages) . '</button>';
                                 }
                             }
                             echo '</div>';
                             ?>
 
                             <!-- Next Button -->
-                            <button class="fb_pagination_next <?php echo $current_page==$total_pages ? 'disabled' : ''; ?>">
+                            <button class="fb_pagination_next <?php echo $current_page == $total_pages ? 'disabled' : ''; ?>">
                                 <?php if ($pagination_prev_next_type === 'icon'): ?>
                                     <span class="fb_pagination_next_icon_Wrapper"></span>
                                 <?php else: ?>
-                                    <span class="fb_pagination_next_text"><?php echo esc_html( $pagination_next_text ); ?></span>
+                                    <span class="fb_pagination_next_text"><?php echo esc_html($pagination_next_text); ?></span>
                                 <?php endif; ?>
                             </button>
 
@@ -999,7 +1051,7 @@ class PostGrid {
 
             endif; // $show_load_more_switcher
         } else {
-            if ((int)$offset === 0) {
+            if ((int) $offset === 0) {
                 echo '<div class="empty-post">Nothing found.</div>';
             }
         }
@@ -1011,10 +1063,10 @@ class PostGrid {
          * Send response with content and total pages
          */
         wp_send_json_success(array(
-            'content'      => $content,
-            'total_pages'  => (int)$total_pages,
-            'current_page' => (int)$current_page,
-            'has_more'     => ((int)$current_page < (int)$total_pages),
+            'content' => $content,
+            'total_pages' => (int) $total_pages,
+            'current_page' => (int) $current_page,
+            'has_more' => ((int) $current_page < (int) $total_pages),
         ));
     }
 }

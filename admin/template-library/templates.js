@@ -50,6 +50,7 @@ const PatternLibraryButton = () => {
         sites: 1,
         templatelibrary: 1
     });
+    const [isImporting, setIsImporting] = useState(false);
 
     const licenseKey = FB_TLibrary.activationKey.length > 0 ? FB_TLibrary.activationKey : '';
     const isProPlugin = FB_TLibrary.activationKey.length > 0 ? true : false;
@@ -184,7 +185,7 @@ const PatternLibraryButton = () => {
 
     const handlePageChange = (tab, page) => {
         setCurrentPage((prev) => ({ ...prev, [tab]: page }));
-        fetchData(tab, page, activeTagTab[activeTab]);
+        fetchData(tab, page, activeTagTab[activeTab], searchText, activeCategory[activeTab], isProTemplate);
     };
 
     const handleActiveTag = (value) => {
@@ -219,8 +220,9 @@ const PatternLibraryButton = () => {
 
         const newState = { [activeTab]: value };
         setActiveCategory(newState);
+        setCurrentPage({ [activeTab]: 1 });
 
-        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate, savedTemplateType);
+        fetchData(activeTab, 1, activeTagTab[activeTab], searchText, value, isProTemplate);
     }
 
     const hangleChangeSavedTemplateType = (value) => {
@@ -367,7 +369,7 @@ const PatternLibraryButton = () => {
         setSavedTemplateType('');
         fetchData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
         fetchNoneFilterData(activeTab, 1, activeTagTab[activeTab], '', activeCategory[activeTab], '');
-    }, [activeTab]);
+    }, [activeTab, userData?.email]);
 
 
     const handleSaveLibrary = async (templateData, isAlreadySaved) => {
@@ -459,6 +461,7 @@ const PatternLibraryButton = () => {
         }
     }
 
+
     const TagTabsOptions = (() => {
         if (!data[activeTab]) return [];
         const currentItems = noneFilterData[activeTab].tags || [];
@@ -468,6 +471,13 @@ const PatternLibraryButton = () => {
             value: tag.name,
         }));
     })();
+
+
+    useEffect(() => {
+        if(activeTab === 'templatelibrary' && !userData?.email) {
+            setActiveTab('patterns');
+        }
+    }, [userData?.email]);
 
 
     return (
@@ -503,6 +513,7 @@ const PatternLibraryButton = () => {
                                     setIsLoginModalOpen={setIsLoginModalOpen}
                                     setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                     isProPlugin={isProPlugin}
+                                    isImporting={isImporting}
                                 />
                             </div>
                             <div className="fb-template-library-store-sidebar-wrapper">
@@ -519,6 +530,7 @@ const PatternLibraryButton = () => {
                                     resetCat={resetCat}
                                     setResetCat={setResetCat}
                                     loading={noneFilterLoading}
+                                    isImporting={isImporting}
                                 />
 
                                 {activeTab !== 'templatelibrary' && (
@@ -551,6 +563,8 @@ const PatternLibraryButton = () => {
                                         setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
                                         currentPage={currentPage[activeTab]}
                                         onPageChange={handlePageChange}
+                                        isImporting={isImporting}
+                                        setIsImporting={setIsImporting}
                                     />
                                 )}
 
@@ -603,6 +617,8 @@ const PatternLibraryButton = () => {
                                         onSearchTemplates={handleSearchTemplates}
                                         onChangeSavedTemplateType={hangleChangeSavedTemplateType}
                                         savedTemplateType={savedTemplateType}
+                                        setIsLoginModalOpen={setIsLoginModalOpen}
+                                        isLoginModalOpen={isLoginModalOpen}
                                     />
                                 )}
 

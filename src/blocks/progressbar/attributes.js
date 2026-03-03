@@ -560,10 +560,10 @@ const attributes = {
     progressTitleMarginDesktop: {
         type: 'object', 
         default: {
-            top: '0',
-            bottom: '20',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     progressTitleMarginTablet: {
@@ -600,10 +600,10 @@ const attributes = {
     progressNumberMarginDesktop: {
         type: 'object', 
         default: {
-            top: '0',
-            bottom: '20',
-            left: '0',
-            right: '0',
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
         },
     },
     progressNumberMarginTablet: {
@@ -1135,9 +1135,13 @@ const attributes = {
         type: 'string',
         default: '',
     },
-    progressbarPreset: {
-        type: 'string',
-        default: 'preset-1',
+    showProgressTitle: {
+        type: 'boolean',
+        default: true
+    },
+    showProgressNumber: {
+        type: 'boolean',
+        default: true
     },
 };
 export default attributes;

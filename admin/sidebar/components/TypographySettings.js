@@ -19,13 +19,12 @@ import { loadGoogleFont, useAfterSave } from "../helper";
 import { updateGlobalStyle } from "../fetch";
 import FrontPreview from "./FontPreview";
 import generateCSSVariables from "./GenerateRootCss";
+import FontFamiliesUploader from "./FontFamiliesUploader";
 
 const TypographySettings = (props) => {
 	const [typography, setTypography] = useState(props.typography);
 	const [customTypography, setCustomTypography] = useState(props.customTypography);
 	const [selectedHeading, setSelectedHeading] = useState('all');
-	const [isSaving, setIsSaving] = useState(false);
-	const [generateHeadingCss, setGenerateHeadingCss] = useState();
 	const [isMount, setIsMount] = useState(false);
 	const [fontFamilies, setFontFamilies] = useState([]);
 	const [globalTypography, setGlobalTypography] = useState(typography);
@@ -37,7 +36,7 @@ const TypographySettings = (props) => {
 
 	// Typography elements
 	const typographyElements = {
-		body: 'Text',
+		body: 'Body',
 		link: 'Link',
 		heading: 'Headings',
 		captions: 'Captions',
@@ -534,7 +533,7 @@ const TypographySettings = (props) => {
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
 				'textDecoration': {
-					variable: `--fb-global-${selectedHeading}--font-decoration`,
+					variable: `--fb-global-${selectedHeading}--text-decoration`,
 					value: value
 				}
 			}
@@ -559,7 +558,7 @@ const TypographySettings = (props) => {
 			[selectedHeading]: {
 				...globalTypography[selectedHeading],
 				'textTransform': {
-					variable: `--fb-global-${selectedHeading}--font-transform`,
+					variable: `--fb-global-${selectedHeading}--text-transform`,
 					value: value
 				}
 			}
@@ -832,7 +831,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'textDecoration': {
-					variable: `--fb-global-${item}--font-decoration`,
+					variable: `--fb-global-${item}--text-decoration`,
 					value: value
 				}
 			}
@@ -854,7 +853,7 @@ const TypographySettings = (props) => {
 			[item]: {
 				...globalTypography[item],
 				'textTransform': {
-					variable: `--fb-global-${item}--font-transform`,
+					variable: `--fb-global-${item}--text-transform`,
 					value: value
 				}
 			}
@@ -1043,6 +1042,9 @@ const TypographySettings = (props) => {
 		<>
 			<div className="fb-typography-panel">
 				{/* Typography Elements Section */}
+				{/* <div className="fb-font-families-uploader" style={{marginBottom: '30px'}}>
+					<FontFamiliesUploader />
+				</div> */}
 				<div className="fb-panel-section">
 					<h3 className="fb-panel-heading">Element</h3>
 					<div className={'fb-global-typo-elements'}>
@@ -1102,6 +1104,7 @@ const TypographySettings = (props) => {
 																value={heading}
 															/>
 														))}
+														<span className="fb-global-typography-empty-heading"></span>
 													</ToggleGroupControl>
 													{TypographyHeadingElements && Object.keys(TypographyHeadingElements).map((heading, headingIndex) => (
 														<div

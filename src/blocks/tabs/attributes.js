@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n';
 
 const attributes = {
-	blockId: {
+	blockID: {
 		type: 'string',
 		default: "",
 	},
@@ -125,6 +125,15 @@ const attributes = {
         default: true,
     },
 
+    tabTitlesAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+
     tabTitleTag: {
         type : 'string',
         default: 'span'
@@ -171,9 +180,9 @@ const attributes = {
     tabWrapperGap : {
         type: 'object',
         default: {
-            Desktop: '10',
-            Tablet: '10',
-            Mobile: '10',
+            Desktop: '0',
+            Tablet: '0',
+            Mobile: '0',
         }
     },
     tabWrapperGapUnits: {
@@ -444,6 +453,53 @@ const attributes = {
         type: 'string',
         default: ''
     },
+
+    //Start Active Color
+    tabListActiveBgColorTypeSwitcher: { 
+        type: 'string',
+        default: 'normal'
+    },
+    tabListActiveBgColorType: { 
+        type: 'string',
+        default: 'classic',
+    },
+    tabListActiveBgHoverColorType: {
+        type: 'string',
+        default: 'classic',
+    },
+    tabListActiveBgColor: {
+        type: 'string',
+        default: '#f0f0f0',
+    },
+    tabListActiveBgHoverColor: {
+        type: 'string',
+    },
+    tabListActiveBgGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabListActiveBgHoverGradientColor: {
+        type: 'string',
+        default: null
+    },
+    tabListActiveBgCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabListActiveBgCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    tabListActiveBgHoverCustomGradientColorSwitcher: {
+        type: 'boolean',
+        default: false
+    },
+    tabListActiveBgHoverCustomGradientColor: {
+        type: 'string',
+        default: ''
+    },
+    //End Active Color
+
     tabListPaddingUnits: {
         type: 'object',
         default: {
@@ -526,7 +582,7 @@ const attributes = {
 
     tabListBorder: {
         type: 'string',
-        default: "none",
+        default: "solid",
     },
     tabListBorderColorSwitcher : {
         type: "string",
@@ -534,6 +590,11 @@ const attributes = {
     },
     tabListBorderColor: {
         type: 'string',
+        default: '#E1E3E8'
+    },
+    tabListActiveBorderColor: {
+        type: 'string',
+        default: '#3991FF'
     },
     tabListBorderHoverColor: {
         type: 'string',
@@ -549,28 +610,28 @@ const attributes = {
     tabListBorderDesktop: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderTablet: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderMobile: {
         type: "object", 
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '0',
+            bottom: '1',
+            left: '0',
+            right: '0',
         },
     },
     tabListBorderLink : { 
@@ -718,6 +779,10 @@ const attributes = {
     },
     tabTitleColor: {
         type: 'string',
+    },
+    tabTitleActiveColor: {
+        type: 'string',
+        default: '#399cff',
     },
     tabTitleHoverColor: {
         type: 'string',
@@ -999,6 +1064,10 @@ const attributes = {
     tabDescriptionColor: {
         type: 'string',
     },
+    tabDescriptionActiveColor: {
+        type: 'string',
+        default: '#555e72',
+    },
     tabDescriptionHoverColor: {
         type: 'string',
     },
@@ -1206,6 +1275,10 @@ const attributes = {
         type: "string",
         default: "#000"
     },
+    tabIconActiveColor: {
+        type: "string",
+        default: "#399cff"
+    },
     tabIconHoverColor: {
         type: 'string',
         default: ""
@@ -1254,6 +1327,52 @@ const attributes = {
         default: false,
     },
     tabIconHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    //Active Background
+    tabIconBgActiveColorSwitcher : {
+        type: "string",
+        default: "normal"
+    },
+    tabIconActiveNormalBackgroundType: {     
+        type: "string",
+        default: "classic",
+    },
+    tabIconBgActiveColor: {
+        type: "string",
+        default: "",
+    },
+    tabIconActiveNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    tabIconActiveNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    tabIconActiveNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    tabIconActiveHoverBackgroundType: { 
+        type: "string",
+        default: "classic",
+    },
+    tabIconBgActiveHoverColor: {
+        type: "string",
+        default: "",
+    },
+    tabIconActiveHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    tabIconActiveHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    tabIconActiveHoverCustomGradientInputValue: {
         type: "string",
         default: "",
     },

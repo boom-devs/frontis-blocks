@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { 
+import {
     useBlockProps,
     RichText,
     BlockControls,
@@ -7,21 +7,30 @@ import {
     MediaUploadCheck,
     MediaPlaceholder,
 } from '@wordpress/block-editor';
-import { 
+import {
     Toolbar,
     ToolbarGroup,
     ToolbarButton
 } from '@wordpress/components';
 
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
 import { useEffect, useRef } from '@wordpress/element';
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import DynamicTextValue from '@Components/dynamic-text-value';
+import loadGoogleFont from '@Utils/loadGoogleFont';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+import Inspector from './inspector';
+import generateTestimonialStyle from './styling';
+
+// Global set to track loaded fonts across all block instances
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
+    const {
         blockID,
+        blockStyle,
         TestimonialPresetStyle,
         TestimonialImageSwitcher,
         TestimonialImageUrl,
@@ -53,9 +62,179 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         testimonialGlobalWraperClass,
 
         testimonialDesktopSwitcher,
-		testimonialTabletSwitcher,
-		testimonialMobileSwitcher,
+        testimonialTabletSwitcher,
+        testimonialMobileSwitcher,
+
+        /** Start Dynamic Title Text */
+        dynamicTitleEnabled,
+        dynamicTitleSource,
+        dynamicTitlePostId,
+        dynamicTitlePostType,
+        dynamicTitlePostLabel,
+        dynamicTitleField,
+        dynamicTitleFeaturedImageField,
+
+        dynamicTitleDateType,
+        dynamicTitleDateFormat,
+
+        dynamicTitleTimeType,
+        dynamicTitleTimeFormat,
+
+        dynamicTitleCommentsZeroText,
+        dynamicTitleCommentsOneText,
+        dynamicTitleCommentsManyText,
+
+        dynamicTitleTermsTaxonomy,
+        dynamicTitleTermsSeparator,
+        dynamicTitleEnableLink,
+        dynamicTitleLinkSource,
+        /** End Dynamic Title Text */
+
+        /** Start Dynamic Description Text */
+        dynamicDescriptionEnabled,
+        dynamicDescriptionSource,
+        dynamicDescriptionPostId,
+        dynamicDescriptionPostType,
+        dynamicDescriptionPostLabel,
+        dynamicDescriptionField,
+        dynamicDescriptionFeaturedImageField,
+
+        dynamicDescriptionDateType,
+        dynamicDescriptionDateFormat,
+
+        dynamicDescriptionTimeType,
+        dynamicDescriptionTimeFormat,
+
+        dynamicDescriptionCommentsZeroText,
+        dynamicDescriptionCommentsOneText,
+        dynamicDescriptionCommentsManyText,
+
+        dynamicDescriptionTermsTaxonomy,
+        dynamicDescriptionTermsSeparator,
+        dynamicDescriptionEnableLink,
+        dynamicDescriptionLinkSource,
+        /** End Dynamic Description Text */
+
+        /** Start Dynamic Author Name Text */
+        dynamicAuthorNameEnabled,
+        dynamicAuthorNameSource,
+        dynamicAuthorNamePostId,
+        dynamicAuthorNamePostType,
+        dynamicAuthorNamePostLabel,
+        dynamicAuthorNameField,
+        dynamicAuthorNameFeaturedImageField,
+
+        dynamicAuthorNameDateType,
+        dynamicAuthorNameDateFormat,
+
+        dynamicAuthorNameTimeType,
+        dynamicAuthorNameTimeFormat,
+
+        dynamicAuthorNameCommentsZeroText,
+        dynamicAuthorNameCommentsOneText,
+        dynamicAuthorNameCommentsManyText,
+
+        dynamicAuthorNameTermsTaxonomy,
+        dynamicAuthorNameTermsSeparator,
+        dynamicAuthorNameEnableLink,
+        dynamicAuthorNameLinkSource,
+        /** End Dynamic Author Name Text */
+
+        /** Start Dynamic Author Designation Text */
+        dynamicAuthorDesignationEnabled,
+        dynamicAuthorDesignationSource,
+        dynamicAuthorDesignationPostId,
+        dynamicAuthorDesignationPostType,
+        dynamicAuthorDesignationPostLabel,
+        dynamicAuthorDesignationField,
+        dynamicAuthorDesignationFeaturedImageField,
+
+        dynamicAuthorDesignationDateType,
+        dynamicAuthorDesignationDateFormat,
+
+        dynamicAuthorDesignationTimeType,
+        dynamicAuthorDesignationTimeFormat,
+
+        dynamicAuthorDesignationCommentsZeroText,
+        dynamicAuthorDesignationCommentsOneText,
+        dynamicAuthorDesignationCommentsManyText,
+
+        dynamicAuthorDesignationTermsTaxonomy,
+        dynamicAuthorDesignationTermsSeparator,
+        dynamicAuthorDesignationEnableLink,
+        dynamicAuthorDesignationLinkSource,
+        /** End Dynamic Author Designation Text */
+
+        // Typography Fonts
+        TestimonialTitleFontFamily,
+        TestimonialDescFontFamily,
+        TestimonialAuthorFontFamily,
+        TestimonialDesignationFontFamily,
+
     } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-testimonial',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Load Google Font */
+    useEffect(() => {
+    if (TestimonialTitleFontFamily && !loadedFonts.has(TestimonialTitleFontFamily)) {
+        loadGoogleFont(TestimonialTitleFontFamily);
+        loadedFonts.add(TestimonialTitleFontFamily);
+    }
+    }, [TestimonialTitleFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDescFontFamily && !loadedFonts.has(TestimonialDescFontFamily)) {
+        loadGoogleFont(TestimonialDescFontFamily);
+        loadedFonts.add(TestimonialDescFontFamily);
+    }
+    }, [TestimonialDescFontFamily]);
+    
+    useEffect(() => {
+    if (TestimonialAuthorFontFamily && !loadedFonts.has(TestimonialAuthorFontFamily)) {
+        loadGoogleFont(TestimonialAuthorFontFamily);
+        loadedFonts.add(TestimonialAuthorFontFamily);
+    }
+    }, [TestimonialAuthorFontFamily]);
+
+    useEffect(() => {
+    if (TestimonialDesignationFontFamily && !loadedFonts.has(TestimonialDesignationFontFamily)) {
+        loadGoogleFont(TestimonialDesignationFontFamily);
+        loadedFonts.add(TestimonialDesignationFontFamily);
+    }
+    }, [TestimonialDesignationFontFamily]);
+    /** End Load Google Font */
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateTestimonialStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
+
+    /** Start Default Image Initialization */
+    useEffect(() => {
+        if (!TestimonialImageUrl) {
+            let defaultImageUrl = '';
+            if (typeof FrontisBlocksData !== 'undefined') {
+                defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/avatar.png';
+            }
+            if (defaultImageUrl) {
+                setAttributes({ TestimonialImageUrl: defaultImageUrl });
+            }
+        }
+    }, [TestimonialImageUrl]);
+    /** End Default Image Initialization */
 
     const blockProps = useBlockProps({
         className: `fb-testimonial-main-wrapper ${blockID} ${testimonialDesktopSwitcher && 'fb-desktop-responsive'} ${testimonialTabletSwitcher && 'fb-tablet-responsive'} ${testimonialMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -81,13 +260,142 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
+    /**
+ * Dynamic Text Value for Title
+ */
+    const { dynamicDisplayValue: dynamicTitleValue, dynamicDisplayLink: dynamicTitleLink } = DynamicTextValue({
+        textEnabled: dynamicTitleEnabled,
+        textSource: dynamicTitleSource,
+        textField: dynamicTitleField,
+
+        textPostId: dynamicTitlePostId,
+        textPostType: dynamicTitlePostType,
+        textPostLabel: dynamicTitlePostLabel,
+
+        textFeaturedImageField: dynamicTitleFeaturedImageField,
+
+        textDateType: dynamicTitleDateType,
+        textDateFormat: dynamicTitleDateFormat,
+        textTimeType: dynamicTitleTimeType,
+        textTimeFormat: dynamicTitleTimeFormat,
+
+        textCommentsZeroText: dynamicTitleCommentsZeroText,
+        textCommentsOneText: dynamicTitleCommentsOneText,
+        textCommentsManyText: dynamicTitleCommentsManyText,
+
+        textTermsTaxonomy: dynamicTitleTermsTaxonomy,
+        textTermsSeparator: dynamicTitleTermsSeparator,
+
+        textLinkEnabled: dynamicTitleEnableLink,
+        textLinkSource: dynamicTitleLinkSource,
+
+        context,
+    });
+
+    /**
+     * Dynamic Text Value for Description
+     */
+    const { dynamicDisplayValue: dynamicDescriptionValue, dynamicDisplayLink: dynamicDescriptionLink } = DynamicTextValue({
+        textEnabled: dynamicDescriptionEnabled,
+        textSource: dynamicDescriptionSource,
+        textField: dynamicDescriptionField,
+
+        textPostId: dynamicDescriptionPostId,
+        textPostType: dynamicDescriptionPostType,
+        textPostLabel: dynamicDescriptionPostLabel,
+
+        textFeaturedImageField: dynamicDescriptionFeaturedImageField,
+
+        textDateType: dynamicDescriptionDateType,
+        textDateFormat: dynamicDescriptionDateFormat,
+        textTimeType: dynamicDescriptionTimeType,
+        textTimeFormat: dynamicDescriptionTimeFormat,
+
+        textCommentsZeroText: dynamicDescriptionCommentsZeroText,
+        textCommentsOneText: dynamicDescriptionCommentsOneText,
+        textCommentsManyText: dynamicDescriptionCommentsManyText,
+
+        textTermsTaxonomy: dynamicDescriptionTermsTaxonomy,
+        textTermsSeparator: dynamicDescriptionTermsSeparator,
+
+        textLinkEnabled: dynamicDescriptionEnableLink,
+        textLinkSource: dynamicDescriptionLinkSource,
+
+        context,
+    });
+
+    /**
+     * Dynamic Text Value for Author Name
+     */
+    const { dynamicDisplayValue: dynamicAuthorNameValue, dynamicDisplayLink: dynamicAuthorNameLink } = DynamicTextValue({
+        textEnabled: dynamicAuthorNameEnabled,
+        textSource: dynamicAuthorNameSource,
+        textField: dynamicAuthorNameField,
+
+        textPostId: dynamicAuthorNamePostId,
+        textPostType: dynamicAuthorNamePostType,
+        textPostLabel: dynamicAuthorNamePostLabel,
+
+        textFeaturedImageField: dynamicAuthorNameFeaturedImageField,
+
+        textDateType: dynamicAuthorNameDateType,
+        textDateFormat: dynamicAuthorNameDateFormat,
+        textTimeType: dynamicAuthorNameTimeType,
+        textTimeFormat: dynamicAuthorNameTimeFormat,
+
+        textCommentsZeroText: dynamicAuthorNameCommentsZeroText,
+        textCommentsOneText: dynamicAuthorNameCommentsOneText,
+        textCommentsManyText: dynamicAuthorNameCommentsManyText,
+
+        textTermsTaxonomy: dynamicAuthorNameTermsTaxonomy,
+        textTermsSeparator: dynamicAuthorNameTermsSeparator,
+
+        textLinkEnabled: dynamicAuthorNameEnableLink,
+        textLinkSource: dynamicAuthorNameLinkSource,
+
+        context,
+    });
+
+    /**
+     * Dynamic Text Value for Author Designation
+     */
+    const { dynamicDisplayValue: dynamicAuthorDesignationValue, dynamicDisplayLink: dynamicAuthorDesignationLink } = DynamicTextValue({
+        textEnabled: dynamicAuthorDesignationEnabled,
+        textSource: dynamicAuthorDesignationSource,
+        textField: dynamicAuthorDesignationField,
+
+        textPostId: dynamicAuthorDesignationPostId,
+        textPostType: dynamicAuthorDesignationPostType,
+        textPostLabel: dynamicAuthorDesignationPostLabel,
+
+        textFeaturedImageField: dynamicAuthorDesignationFeaturedImageField,
+
+        textDateType: dynamicAuthorDesignationDateType,
+        textDateFormat: dynamicAuthorDesignationDateFormat,
+        textTimeType: dynamicAuthorDesignationTimeType,
+        textTimeFormat: dynamicAuthorDesignationTimeFormat,
+
+        textCommentsZeroText: dynamicAuthorDesignationCommentsZeroText,
+        textCommentsOneText: dynamicAuthorDesignationCommentsOneText,
+        textCommentsManyText: dynamicAuthorDesignationCommentsManyText,
+
+        textTermsTaxonomy: dynamicAuthorDesignationTermsTaxonomy,
+        textTermsSeparator: dynamicAuthorDesignationTermsSeparator,
+
+        textLinkEnabled: dynamicAuthorDesignationEnableLink,
+        textLinkSource: dynamicAuthorDesignationLinkSource,
+
+        context,
+    });
+
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
 
             <BlockControls>
                 {TestimonialImageUrl && TestimonialImageSwitcher && (
@@ -101,7 +409,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             icon="trash"
                         />
                         <MediaUploadCheck>
-                            <MediaUpload 
+                            <MediaUpload
                                 onSelect={(media) => setAttributes({
                                     TestimonialImageID: media.id,
                                     TestimonialImageUrl: media.url,
@@ -120,7 +428,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </ToolbarGroup>
                 )}
             </BlockControls>
-            
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-testimonial-section fb-testimonial-section-${TestimonialAlignment} ${testimonialGlobalWraperClass}`} id={testimonialGlobalWraperID} ref={panelRef}>
                     <div className={`fb-testimonial-wrapper`}>
@@ -135,7 +443,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -155,8 +463,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={TestimonialAuthor}
-                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
+                                                            }}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -164,8 +474,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={TestimonialDesignation}
-                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
+                                                            }}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />
@@ -182,8 +494,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={TestimonialTitle}
-                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
+                                                    onChange={(value) => {
+                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
+                                                    }}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -194,8 +508,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={TestimonialDesc}
-                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
+                                                    onChange={(value) => {
+                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
+                                                    }}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
@@ -208,7 +524,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
@@ -218,8 +534,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={TestimonialTitle}
-                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
+                                                    onChange={(value) => {
+                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
+                                                    }}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -230,8 +548,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={TestimonialDesc}
-                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
+                                                    onChange={(value) => {
+                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
+                                                    }}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
@@ -244,7 +564,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -264,8 +584,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={TestimonialAuthor}
-                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
+                                                            }}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -273,8 +595,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={TestimonialDesignation}
-                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
+                                                            }}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />
@@ -294,12 +618,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
 
-                                 ) : (
+                                ) : (
                                     <>
                                         {RatingSwitcher && TestimonialRatinIconAlign !== 'none' && (
                                             <div className="fb-testimonial-rating">
@@ -310,8 +634,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-title-container">
                                                 <RichText
                                                     tagName={TestimonialTitleTag}
-                                                    value={TestimonialTitle}
-                                                    onChange={(value) => setAttributes({ TestimonialTitle: value })}
+                                                    value={dynamicTitleEnabled ? dynamicTitleValue : TestimonialTitle}
+                                                    onChange={(value) => {
+                                                        if (!dynamicTitleEnabled) setAttributes({ TestimonialTitle: value });
+                                                    }}
                                                     placeholder={__('Testimonial Title', 'frontis-blocks')}
                                                     className="fb-testimonial-title"
                                                 />
@@ -322,21 +648,23 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                             <div className="fb-testimonial-userdesc-container">
                                                 <RichText
                                                     tagName="p"
-                                                    value={TestimonialDesc}
-                                                    onChange={(value) => setAttributes({ TestimonialDesc: value })}
+                                                    value={dynamicDescriptionEnabled ? dynamicDescriptionValue : TestimonialDesc}
+                                                    onChange={(value) => {
+                                                        if (!dynamicDescriptionEnabled) setAttributes({ TestimonialDesc: value });
+                                                    }}
                                                     placeholder={__('Testimonial Description', 'frontis-blocks')}
                                                     className="fb-user-desc"
                                                 />
                                             </div>
                                         )}
 
-                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}> 
+                                        <div className={`fb-testimonial-author-container ${TestimonialAlignment}`}>
                                             <div className='fb-testimonial-author-inner-container'>
                                                 <div className='fb-testimonial-author-image-container'>
                                                     {TestimonialImageSwitcher && (
                                                         <div className="fb-testimonial-image">
                                                             {TestimonialImageUrl ? (
-                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt}  aria-hidden="true"/>
+                                                                <img src={TestimonialImageUrl} alt={TestimonialImageAlt} aria-hidden="true" />
                                                             ) : (
                                                                 <MediaPlaceholder
                                                                     onSelect={(media) => setAttributes({
@@ -356,8 +684,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {AuthorSwitcher && (
                                                         <RichText
                                                             tagName="div"
-                                                            value={TestimonialAuthor}
-                                                            onChange={(value) => setAttributes({ TestimonialAuthor: value })}
+                                                            value={dynamicAuthorNameEnabled ? dynamicAuthorNameValue : TestimonialAuthor}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorNameEnabled) setAttributes({ TestimonialAuthor: value });
+                                                            }}
                                                             placeholder={__('John Doe', 'frontis-blocks')}
                                                             className="fb-user"
                                                         />
@@ -365,8 +695,10 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                                     {DesignationSwitcher && (
                                                         <RichText
                                                             tagName="span"
-                                                            value={TestimonialDesignation}
-                                                            onChange={(value) => setAttributes({ TestimonialDesignation: value })}
+                                                            value={dynamicAuthorDesignationEnabled ? dynamicAuthorDesignationValue : TestimonialDesignation}
+                                                            onChange={(value) => {
+                                                                if (!dynamicAuthorDesignationEnabled) setAttributes({ TestimonialDesignation: value });
+                                                            }}
                                                             placeholder={__('CEO, Company Name', 'frontis-blocks')}
                                                             className="fb-user-designation"
                                                         />
@@ -381,7 +713,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                         )}
                                         {QuoteIconSwitcher && TestimonialQuoteIconAlign === 'image' && (
                                             <div className="fb-testimonial-quote-icon">
-                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt}  aria-hidden="true"/> : ''}
+                                                {TestimonialQuoteImageUrl ? <img src={TestimonialQuoteImageUrl} alt={TestimonialQuoteImageAlt} aria-hidden="true" /> : ''}
                                             </div>
                                         )}
                                     </>
@@ -391,6 +723,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

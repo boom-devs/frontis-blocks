@@ -1,14 +1,20 @@
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
+import { useBlockProps } from '@wordpress/block-editor';
+import { useRef, useEffect } from '@wordpress/element';
+import loadGoogleFont from '@Utils/loadGoogleFont';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import Inspector from "./inspector";
+import Inspector from './inspector';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateSocialStyle from './styling';
 import './editor.scss';
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+const loadedFonts = new Set();
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+    const {
         blockID,
+        blockStyle,
         socialItems,
         socialTitleSwitcher,
         socialIconUrl,
@@ -18,9 +24,41 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         socialGlobalWraperClass,
 
         socialIconsDesktopSwitcher,
-		socialIconsTabletSwitcher,
-		socialIconsMobileSwitcher,
-     } = attributes;
+        socialIconsTabletSwitcher,
+        socialIconsMobileSwitcher,
+
+        socialTitleFontFamily,
+    } = attributes;
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-social-icons',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start load font */
+    useEffect(() => {
+        [socialTitleFontFamily].forEach(font => {
+            if (font && !loadedFonts.has(font)) {
+                loadGoogleFont(font);
+                loadedFonts.add(font);
+            }
+        });
+    }, [socialTitleFontFamily]);
+    /** End load font */
+
+     /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateSocialStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
         className: `fb-social-main-wrapper ${blockID} ${socialIconsDesktopSwitcher && 'fb-desktop-responsive'} ${socialIconsTabletSwitcher && 'fb-tablet-responsive'} ${socialIconsMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -38,12 +76,13 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId={clientId}
-            />
-            
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper fb-social-wrapper ${socialGlobalWraperClass}`} id={socialGlobalWraperID} ref={panelRef}>
                     <div className="fb-social-links-wrapper">
@@ -51,8 +90,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                             {socialItems.map(item => (
                                 <li key={item.id} className={`fb-social-list-item single-item-${item.id}`}>
                                     <a
-                                        className="fb-social-icon-link" 
-                                        href={item.socialIconUrl} 
+                                        className="fb-social-icon-link"
+                                        href={item.socialIconUrl}
                                         target={item.socialIconTargetUrl ? '_blank' : undefined}
                                         rel={item.socialIconTargetUrl ? 'noopener noreferrer' : undefined}
                                         onClick={handleSocialClick}
@@ -73,6 +112,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

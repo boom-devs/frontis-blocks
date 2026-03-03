@@ -1,11 +1,19 @@
 .fb-team-member-main-wrapper {
 	position: relative;
-	width: auto;
+	overflow: hidden;
+
+	a {
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
 }
 
 .fb-team-member-wrapper {
 	.fb-team-member-item {
 		position: relative;
+		overflow: hidden;
 
 		.fb-team-member-image-wrapper {
 			.fb-team-member-image-overlay {

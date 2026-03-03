@@ -5,14 +5,17 @@ import {
 } from '@wordpress/block-editor';
 
 import { useEffect, useState, useRef } from '@wordpress/element';
-import Inspector from "./inspector";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import './editor.scss';
 
+import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateCountdownStyle from "./styling";
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
+		blockStyle,
 		countDownLabelDay,
 		countDownLabelHour,
 		countDownLabelMinute,
@@ -31,8 +34,26 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 		countDownMobileSwitcher,
 	} = attributes;
 
+	// Handle block ID generation (handles duplication and initial ID)
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-countdown',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 
-/**
+	/** Start Generate Block Style */
+	useEffect(() => {
+		if (blockID) {
+			const css = generateCountdownStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+	/** End Generate Block Style */
+
+	/**
 	* Manages tab button settings and switches to block settings on click
 	*/
 	const panelRef = useRef(null);
@@ -100,12 +121,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 
 	return (
 		<>
-
-			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				clientId={clientId}
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
+			)}
 
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID} ref={panelRef}>
@@ -138,6 +159,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					)}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

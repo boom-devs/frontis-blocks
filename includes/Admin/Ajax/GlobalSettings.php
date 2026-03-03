@@ -2,6 +2,10 @@
 
 namespace FrontisBlocks\Admin\Ajax;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use FrontisBlocks\Traits\Singleton;
 
 /**
@@ -214,9 +218,7 @@ class GlobalSettings extends AjaxBase
      */
     private function validate_nonce()
     {
-        if (!wp_verify_nonce($_POST['nonce'], 'fb_sidebar_nonce')) {
-            wp_send_json_error('Invalid nonce');
-        }
+        check_ajax_referer('fb_sidebar_nonce', 'nonce');
     }
 
     /**
@@ -344,169 +346,6 @@ class GlobalSettings extends AjaxBase
         }
     }
 
-    //Demo import for blocks
-    // public function import_demo_data() {
-    //     try {
-    //         // Security check
-    //         $nonce = $_POST['security'] ?? '';
-    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
-    //             wp_send_json_error('Invalid nonce.');
-    //             return;
-    //         }
-
-    //         // Get block ID from POST
-    //         $block_id = $_POST['block_id'] ?? '';
-    //         if (empty($block_id)) {
-    //             wp_send_json_error('Block ID is required.');
-    //             return;
-    //         }
-
-    //         // Get demo data from JSON
-    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-    //         $json_data = file_get_contents($json_file_path);
-    //         $demo_data = json_decode($json_data, true);
-
-    //         // Update specific block's content
-    //         $block_content = array(
-    //             'blockId' => $block_id,
-    //             'content' => $demo_data
-    //         );
-
-    //         // Store in transient for temporary use
-    //         set_transient('fb_block_' . $block_id, $block_content, HOUR_IN_SECONDS);
-
-    //         wp_send_json_success(array(
-    //             'block_id' => $block_id,
-    //             'content' => serialize_blocks($demo_data),
-    //             'message' => 'Demo data imported successfully!'
-    //         ));
-
-    //     } catch (Exception $e) {
-    //         wp_send_json_error('Error: ' . $e->getMessage());
-    //     }
-    // }
-
-    //Demo import for pages
-    // public function import_demo_data() {
-    //     try {
-    //         // Security check
-    //         $nonce = $_POST['security'] ?? '';
-    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
-    //             wp_send_json_error('Invalid nonce.');
-    //             return;
-    //         }
-
-    //         // Get block ID and post ID
-    //         $block_id = $_POST['block_id'] ?? '';
-    //         $post_id = $_POST['post_id'] ?? 0; // Get post ID from AJAX
-
-    //         if (empty($post_id)) {
-    //             wp_send_json_error('Post ID is required.');
-    //             return;
-    //         }
-
-    //         // Get demo data from JSON
-    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-    //         $json_data = file_get_contents($json_file_path);
-    //         $demo_data = json_decode($json_data, true);
-    //         $serialized_content = serialize_blocks($demo_data);
-
-    //         if (!empty($block_id)) {
-    //             // Store block-specific content
-    //             set_transient('fb_block_' . $block_id, [
-    //                 'blockId' => $block_id,
-    //                 'content' => $demo_data
-    //             ], HOUR_IN_SECONDS);
-
-    //             wp_send_json_success([
-    //                 'block_id' => $block_id,
-    //                 'content' => $serialized_content,
-    //                 'message' => 'Demo data imported successfully!'
-    //             ]);
-    //         } else {
-    //             // Update full page content
-    //             $post_data = [
-    //                 'ID'           => $post_id,
-    //                 'post_content' => $serialized_content
-    //             ];
-
-    //             $update_result = wp_update_post($post_data, true);
-
-    //             if (is_wp_error($update_result)) {
-    //                 wp_send_json_error('Failed to update post: ' . $update_result->get_error_message());
-    //             } else {
-    //                 wp_send_json_success([
-    //                     'content' => $serialized_content,
-    //                     'message' => 'Page content updated with demo data!'
-    //                 ]);
-    //             }
-    //         }
-    //     } catch (Exception $e) {
-    //         wp_send_json_error('Error: ' . $e->getMessage());
-    //     }
-    // }     
-
-    //demo import for full site
-    // public function import_demo_data() {
-    //     try {
-    //         // Security check
-    //         $nonce = $_POST['security'] ?? '';
-    //         if (!wp_verify_nonce($nonce, 'fb_import_demo_data')) {
-    //             wp_send_json_error('Invalid nonce.');
-    //             return;
-    //         }
-
-    //         // Get block ID and post ID
-    //         $block_id = $_POST['block_id'] ?? '';
-    //         $post_id = $_POST['post_id'] ?? 0; // Get post ID from AJAX
-
-    //         if (empty($post_id)) {
-    //             wp_send_json_error('Post ID is required.');
-    //             return;
-    //         }
-
-    //         // Get demo data from JSON
-    //         $json_file_path = WP_PLUGIN_DIR . '/frontis-blocks/testing-page.json';
-    //         $json_data = file_get_contents($json_file_path);
-    //         $demo_data = json_decode($json_data, true);
-    //         $serialized_content = serialize_blocks($demo_data);
-
-    //         if (!empty($block_id)) {
-    //             // Store block-specific content
-    //             set_transient('fb_block_' . $block_id, [
-    //                 'blockId' => $block_id,
-    //                 'content' => $demo_data
-    //             ], HOUR_IN_SECONDS);
-
-    //             wp_send_json_success([
-    //                 'block_id' => $block_id,
-    //                 'content' => $serialized_content,
-    //                 'message' => 'Demo data imported successfully!'
-    //             ]);
-    //         } else {
-    //             // Update full page content
-    //             $post_data = [
-    //                 'ID'           => $post_id,
-    //                 'post_content' => $serialized_content
-    //             ];
-
-    //             $update_result = wp_update_post($post_data, true);
-
-    //             if (is_wp_error($update_result)) {
-    //                 wp_send_json_error('Failed to update post: ' . $update_result->get_error_message());
-    //             } else {
-    //                 wp_send_json_success([
-    //                     'content' => $serialized_content,
-    //                     'message' => 'Page content updated with demo data!'
-    //                 ]);
-    //             }
-    //         }
-    //     } catch (Exception $e) {
-    //         wp_send_json_error('Error: ' . $e->getMessage());
-    //     }
-    // }  
-
-    // PHP: Import Full Site
     public function import_full_site()
     {
         try {
@@ -804,7 +643,7 @@ class GlobalSettings extends AjaxBase
         if (!empty($styles)) {
             // Add debugging comment
             echo "<!-- Typography styles begin -->\n";
-            echo "<style id='fb-global-styles'>\n" . $styles . "\n</style>";
+            echo "<style id='fb-global-styles'>\n" . wp_kses_post($styles) . "\n</style>";
             echo "<!-- Typography styles end -->\n";
         } else {
             // Debug if no styles were found
@@ -823,10 +662,25 @@ class GlobalSettings extends AjaxBase
                 [
                     'type' => 'string',
                     'show_in_rest' => true,
-                    'default' => ''
+                    'default' => '',
+                    'sanitize_callback' => array($this, 'sanitize_typography_setting')
                 ]
             );
         }
+    }
+
+    /**
+     * Sanitize typography setting value
+     *
+     * @param mixed $value The value to sanitize.
+     * @return mixed Sanitized value.
+     */
+    public function sanitize_typography_setting($value)
+    {
+        if (is_array($value)) {
+            return array_map('sanitize_text_field', $value);
+        }
+        return sanitize_text_field($value);
     }
 
 }

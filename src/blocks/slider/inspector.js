@@ -1,7 +1,18 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
-import { PanelBody, TabPanel, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
+import {
+    BORDER_STYLES,
+    SLIDER_EFFECT_OPTIONS,
+    CAROUSEL_EFFECT_OPTIONS,
+    OVERFLOW_OP,
+    SLIDER_PAGINATION_TYPE,
+    SLIDER_TYPE,
+    SLIDER_ARROW_POSITION_TYPE,
+    SLIDER_ARROW_POSITION,
+    SLIDER_ARROW_DIRECTION,
+    ARROW_ICON_ALIGN,
+} from '@Constants/fbConstants';
+import { useEffect, memo } from '@wordpress/element';
+import { PanelBody, ToggleControl, RangeControl, SelectControl, BaseControl, ButtonGroup, Button } from '@wordpress/components';
 import FBIconPicker from "../../components/icon-picker";
 import FB_SwitcherControl from '@Components/switcher-control';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
@@ -13,33 +24,16 @@ import FB_Spacing from '@Components/spacing';
 import FB_BoxShadowControl from '@Components/box-shadow';
 import FB_InputControl from '@Components/input-control';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import { useDeviceType } from '@Config/displayType';
 import FB_PositionControl from '@Components/position-control';
 import FB_VisibilityControl from '@Components/visibility-control';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_ImageControl from '@Components/image-control';
-
-
 import './editor.scss';
 
-import {
-    BORDER_STYLES,
-    EFFECT_OPTIONS,
-    SLIDER_EFFECT_OPTIONS,
-    CAROUSEL_EFFECT_OPTIONS,
-    OVERFLOW_OP,
-    PAGINATION_TYPE,
-    SLIDER_TYPE,
-    SLIDER_ARROW_POSITION_TYPE,
-    SLIDER_ARROW_POSITION,
-    SLIDER_ARROW_DIRECTION,
-    ARROW_ICON_ALIGN,
-} from "./constants/constants";
-
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
-        blockId,
+        blockID,
         sliderItems,
         blockStyle,
         autoplay,
@@ -51,6 +45,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+        enableKeyboardNavigation,
         displayArrows,
         displayDots,
         paginationType,
@@ -295,12 +290,13 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         sliderVRBottomOffset,
         sliderVRBottomOffsetUnits,
     } = attributes;
+
     const deviceType = useDeviceType();
 
     useEffect(() => {
 		if (clientId && typeof clientId === "string") {
 			setAttributes({
-				blockId: "fb-slider-" + clientId.slice(0, 8),
+				blockID: "fb-slider-" + clientId.slice(0, 8),
 			});
 		}
 	}, [clientId]);
@@ -381,9 +377,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderArrowsBorderDesktopWidth = `${sliderArrowsBorderDesktop.top}${sliderArrowsBorderUnits.Desktop} ${sliderArrowsBorderDesktop.right}${sliderArrowsBorderUnits.Desktop} ${sliderArrowsBorderDesktop.bottom}${sliderArrowsBorderUnits.Desktop} ${sliderArrowsBorderDesktop.left}${sliderArrowsBorderUnits.Desktop}`;
-    const sliderArrowsBorderTabletWidth = `${sliderArrowsBorderTablet.top}${sliderArrowsBorderUnits.Tablet} ${sliderArrowsBorderTablet.right}${sliderArrowsBorderUnits.Tablet} ${sliderArrowsBorderTablet.bottom}${sliderArrowsBorderUnits.Tablet} ${sliderArrowsBorderTablet.left}${sliderArrowsBorderUnits.Tablet}`;
-    const sliderArrowsBorderMobileWidth = `${sliderArrowsBorderMobile.top}${sliderArrowsBorderUnits.Mobile} ${sliderArrowsBorderMobile.right}${sliderArrowsBorderUnits.Mobile} ${sliderArrowsBorderMobile.bottom}${sliderArrowsBorderUnits.Mobile} ${sliderArrowsBorderMobile.left}${sliderArrowsBorderUnits.Mobile}`;
     /** End Border */
 
     /** Start Arrows border radius*/
@@ -455,10 +448,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** End Arrows border radius */
 
-    const sliderArrowsBorderRadiusDesktopWidth = `${sliderArrowsBorderRadiusDesktop.top}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.right}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.bottom}${sliderArrowsBorderRadiusUnits.Desktop} ${sliderArrowsBorderRadiusDesktop.left}${sliderArrowsBorderRadiusUnits.Desktop}`;
-    const sliderArrowsBorderRadiusTabletWidth = `${sliderArrowsBorderRadiusTablet.top}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.right}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.bottom}${sliderArrowsBorderRadiusUnits.Tablet} ${sliderArrowsBorderRadiusTablet.left}${sliderArrowsBorderRadiusUnits.Tablet}`;
-    const sliderArrowsBorderRadiusMobileWidth = `${sliderArrowsBorderRadiusMobile.top}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.right}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.bottom}${sliderArrowsBorderRadiusUnits.Mobile} ${sliderArrowsBorderRadiusMobile.left}${sliderArrowsBorderRadiusUnits.Mobile}`;
-
     /** Start Dots Margin */
     const handleDotsMarginUnitChange = ( event, position ) => {
         const value = event.target.value;
@@ -526,9 +515,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderDotsMarginDesktopWidth = `${sliderDotsMarginDesktop.top}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.right}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.bottom}${sliderDotsMarginUnits.Desktop} ${sliderDotsMarginDesktop.left}${sliderDotsMarginUnits.Desktop}`;
-    const sliderDotsMarginTabletWidth = `${sliderDotsMarginTablet.top}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.right}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.bottom}${sliderDotsMarginUnits.Tablet} ${sliderDotsMarginTablet.left}${sliderDotsMarginUnits.Tablet}`;
-    const sliderDotsMarginMobileWidth = `${sliderDotsMarginMobile.top}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.right}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.bottom}${sliderDotsMarginUnits.Mobile} ${sliderDotsMarginMobile.left}${sliderDotsMarginUnits.Mobile}`;
     /** End Dots Margin */
 
     /** Start Normal Dots border */
@@ -598,9 +584,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderNormalDotsBorderDesktopWidth = `${sliderNormalDotsBorderDesktop.top}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.right}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.bottom}${sliderNormalDotsBorderUnits.Desktop} ${sliderNormalDotsBorderDesktop.left}${sliderNormalDotsBorderUnits.Desktop}`;
-    const sliderNormalDotsBorderTabletWidth = `${sliderNormalDotsBorderTablet.top}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.right}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.bottom}${sliderNormalDotsBorderUnits.Tablet} ${sliderNormalDotsBorderTablet.left}${sliderNormalDotsBorderUnits.Tablet}`;
-    const sliderNormalDotsBorderMobileWidth = `${sliderNormalDotsBorderMobile.top}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.right}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.bottom}${sliderNormalDotsBorderUnits.Mobile} ${sliderNormalDotsBorderMobile.left}${sliderNormalDotsBorderUnits.Mobile}`;
     /** End Border */
 
     /** Start Normal Dots border radius*/
@@ -672,11 +655,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** End Normal Dots border radius */
 
-    const sliderNormalDotsBorderRadiusDesktopWidth = `${sliderNormalDotsBorderRadiusDesktop.top}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.right}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.bottom}${sliderNormalDotsBorderRadiusUnits.Desktop} ${sliderNormalDotsBorderRadiusDesktop.left}${sliderNormalDotsBorderRadiusUnits.Desktop}`;
-    const sliderNormalDotsBorderRadiusTabletWidth = `${sliderNormalDotsBorderRadiusTablet.top}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.right}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.bottom}${sliderNormalDotsBorderRadiusUnits.Tablet} ${sliderNormalDotsBorderRadiusTablet.left}${sliderNormalDotsBorderRadiusUnits.Tablet}`;
-    const sliderNormalDotsBorderRadiusMobileWidth = `${sliderNormalDotsBorderRadiusMobile.top}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.right}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.bottom}${sliderNormalDotsBorderRadiusUnits.Mobile} ${sliderNormalDotsBorderRadiusMobile.left}${sliderNormalDotsBorderRadiusUnits.Mobile}`;
-
-
     /** Start Active Dots border */
     const handleActiveDotsBorderUnitChange = ( event, position ) => {
         const value = event.target.value;
@@ -744,9 +722,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderActiveDotsBorderDesktopWidth = `${sliderActiveDotsBorderDesktop.top}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.right}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.bottom}${sliderActiveDotsBorderUnits.Desktop} ${sliderActiveDotsBorderDesktop.left}${sliderActiveDotsBorderUnits.Desktop}`;
-    const sliderActiveDotsBorderTabletWidth = `${sliderActiveDotsBorderTablet.top}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.right}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.bottom}${sliderActiveDotsBorderUnits.Tablet} ${sliderActiveDotsBorderTablet.left}${sliderActiveDotsBorderUnits.Tablet}`;
-    const sliderActiveDotsBorderMobileWidth = `${sliderActiveDotsBorderMobile.top}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.right}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.bottom}${sliderActiveDotsBorderUnits.Mobile} ${sliderActiveDotsBorderMobile.left}${sliderActiveDotsBorderUnits.Mobile}`;
     /** End Border */
 
     /** Start Active Dots border radius*/
@@ -818,10 +793,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     }
     /** End Active Dots border radius */
 
-    const sliderActiveDotsBorderRadiusDesktopWidth = `${sliderActiveDotsBorderRadiusDesktop.top}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.right}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.bottom}${sliderActiveDotsBorderRadiusUnits.Desktop} ${sliderActiveDotsBorderRadiusDesktop.left}${sliderActiveDotsBorderRadiusUnits.Desktop}`;
-    const sliderActiveDotsBorderRadiusTabletWidth = `${sliderActiveDotsBorderRadiusTablet.top}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.right}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.bottom}${sliderActiveDotsBorderRadiusUnits.Tablet} ${sliderActiveDotsBorderRadiusTablet.left}${sliderActiveDotsBorderRadiusUnits.Tablet}`;
-    const sliderActiveDotsBorderRadiusMobileWidth = `${sliderActiveDotsBorderRadiusMobile.top}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.right}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.bottom}${sliderActiveDotsBorderRadiusUnits.Mobile} ${sliderActiveDotsBorderRadiusMobile.left}${sliderActiveDotsBorderRadiusUnits.Mobile}`;
-
     /** Start Global padding */
     const handleGlobalPaddingUnitChange = ( event, position ) => {
         const value = event.target.value;
@@ -889,9 +860,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderGlobalPaddingDesktopWidth = `${sliderGlobalPaddingDesktop.top}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.right}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.bottom}${sliderGlobalPaddingUnits.Desktop} ${sliderGlobalPaddingDesktop.left}${sliderGlobalPaddingUnits.Desktop}`;
-    const sliderGlobalPaddingTabletWidth = `${sliderGlobalPaddingTablet.top}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.right}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.bottom}${sliderGlobalPaddingUnits.Tablet} ${sliderGlobalPaddingTablet.left}${sliderGlobalPaddingUnits.Tablet}`;
-    const sliderGlobalPaddingMobileWidth = `${sliderGlobalPaddingMobile.top}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.right}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.bottom}${sliderGlobalPaddingUnits.Mobile} ${sliderGlobalPaddingMobile.left}${sliderGlobalPaddingUnits.Mobile}`;
     /** End Global Padding */
 
     /** Start Global Margin */
@@ -961,10 +929,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-
-    const sliderGlobalMarginDesktopWidth = `${sliderGlobalMarginDesktop.top}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.right}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.bottom}${sliderGlobalMarginUnits.Desktop} ${sliderGlobalMarginDesktop.left}${sliderGlobalMarginUnits.Desktop}`;
-    const sliderGlobalMarginTabletWidth = `${sliderGlobalMarginTablet.top}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.right}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.bottom}${sliderGlobalMarginUnits.Tablet} ${sliderGlobalMarginTablet.left}${sliderGlobalMarginUnits.Tablet}`;
-    const sliderGlobalMarginMobileWidth = `${sliderGlobalMarginMobile.top}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.right}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.bottom}${sliderGlobalMarginUnits.Mobile} ${sliderGlobalMarginMobile.left}${sliderGlobalMarginUnits.Mobile}`;
     /** End Margin */
 
     /** Start Global border */
@@ -1034,9 +998,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
             }
         })
     }
-    const sliderGlobalBorderDesktopWidth = `${sliderGlobalBorderDesktop.top}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.right}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.bottom}${sliderGlobalBorderUnits.Desktop} ${sliderGlobalBorderDesktop.left}${sliderGlobalBorderUnits.Desktop}`;
-    const sliderGlobalBorderTabletWidth = `${sliderGlobalBorderTablet.top}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.right}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.bottom}${sliderGlobalBorderUnits.Tablet} ${sliderGlobalBorderTablet.left}${sliderGlobalBorderUnits.Tablet}`;
-    const sliderGlobalBorderMobileWidth = `${sliderGlobalBorderMobile.top}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.right}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.bottom}${sliderGlobalBorderUnits.Mobile} ${sliderGlobalBorderMobile.left}${sliderGlobalBorderUnits.Mobile}`;
     /** End Border */
 
     /** Start Global border radius*/
@@ -1107,747 +1068,6 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         })
     }
     /** End Global border */
-
-    const sliderGlobalBorderRadiusDesktopWidth = `${sliderGlobalBorderRadiusDesktop.top}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.right}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.bottom}${sliderGlobalBorderRadiusUnits.Desktop} ${sliderGlobalBorderRadiusDesktop.left}${sliderGlobalBorderRadiusUnits.Desktop}`;
-    const sliderGlobalBorderRadiusTabletWidth = `${sliderGlobalBorderRadiusTablet.top}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.right}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.bottom}${sliderGlobalBorderRadiusUnits.Tablet} ${sliderGlobalBorderRadiusTablet.left}${sliderGlobalBorderRadiusUnits.Tablet}`;
-    const sliderGlobalBorderRadiusMobileWidth = `${sliderGlobalBorderRadiusMobile.top}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.right}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.bottom}${sliderGlobalBorderRadiusUnits.Mobile} ${sliderGlobalBorderRadiusMobile.left}${sliderGlobalBorderRadiusUnits.Mobile}`;
-
-    const sliderBlockStyle = useMemo(() => `
-        .${blockId}.fb-slider-container{
-            ${sliderPositionType === 'default' ? `position: relative;` : ''}
-            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' ? `width: 100%;` : ''}
-            ${sliderPositionType !== 'default' ? `position: ${sliderPositionType};` : ''}
-            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Desktop !== undefined ? `left: ${sliderHZLeftOffset.Desktop}${sliderHZLeftOffsetUnits.Desktop};` : ''}
-            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Desktop !== undefined ? `right: ${sliderHZRightOffset.Desktop}${sliderHZRightOffsetUnits.Desktop};` : ''}
-            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Desktop !== undefined ? `top: ${sliderVRTopOffset.Desktop}${sliderVRTopOffsetUnits.Desktop};` : ''}
-            ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Desktop !== undefined ? `bottom: ${sliderVRBottomOffset.Desktop}${sliderVRBottomOffsetUnits.Desktop};` : ''}
-            ${sliderGlobalZIndex.Desktop ? `z-index: ${sliderGlobalZIndex.Desktop};` : ''}
-            ${sliderOverflow !== 'default' ? `overflow: ${sliderOverflow};` : ''}
-            ${sliderGlobalPaddingDesktopWidth ? `padding: ${sliderGlobalPaddingDesktopWidth};` : ''}
-            ${sliderGlobalMarginDesktopWidth ? `margin: ${sliderGlobalMarginDesktopWidth};` : ''}
-            ${sliderGlobalBorder ? `border: ${sliderGlobalBorder};` : ''}
-            ${sliderGlobalBorderDesktopWidth ? `border-width: ${sliderGlobalBorderDesktopWidth};` : ''}
-            ${sliderGlobalBorderRadiusDesktopWidth ? `border-radius: ${sliderGlobalBorderRadiusDesktopWidth};` : ''}
-            ${sliderGlobalBorderColor ? `border-color: ${sliderGlobalBorderColor};` : ''}
-            ${sliderGlobalBoxShadowCssValue ? `box-shadow: ${sliderGlobalBoxShadowCssValue};` : ''}
-            ${sliderGlobalBgNormalBackgroundType === 'gradient' ? `
-                background: ${
-                    sliderGlobalBgNormalCustomGradientSwitcher && sliderGlobalBgNormalCustomGradientInputValue
-                        ? sliderGlobalBgNormalCustomGradientInputValue
-                        : sliderGlobalBgNormalGradientColor || sliderGlobalBgNormalClassicColor
-                };
-            ` : `
-                background: ${sliderGlobalBgNormalClassicColor};
-            `}
-            transition: all .3s ease-in-out;
-            box-sizing: border-box;
-        }
-        .${blockId}.fb-slider-container:hover{
-            ${sliderGlobalBgHoverBackgroundType === 'gradient' ? `
-                background: ${
-                    sliderGlobalBgHoverCustomGradientSwitcher && sliderGlobalBgHoverCustomGradientInputValue
-                        ? sliderGlobalBgHoverCustomGradientInputValue
-                        : sliderGlobalBgHoverGradientColor || sliderGlobalBgHoverClassicColor
-                };
-            ` : `
-                background: ${sliderGlobalBgHoverClassicColor};
-            `}
-            ${sliderGlobalBorderHoverColor ? `border-color: ${sliderGlobalBorderHoverColor};` : ''}
-            ${sliderGlobalBoxShadowHoverCssValue ? `box-shadow: ${sliderGlobalBoxShadowHoverCssValue};` : ''}
-        }
-        .${blockId} .swiper-wrapper.fb-swiper-wrapper {
-            align-items: center;
-            ${sliderHeight.Desktop ? `min-height: ${sliderHeight.Desktop}${sliderHeightUnits.Desktop};` : ''}
-        }
-
-        .${blockId}.fb-slider-container.outside {
-            ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
-                padding: ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop} 0 0;
-            ` : ''}
-
-            ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
-                padding: 0 0 ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop};
-            ` : ''}
-
-            ${sliderArrowPosition === 'center' ? `
-                padding: 0 ${sliderArrowPositionOutsidePadding.Desktop}${sliderArrowPositionOutsidePaddingUnits.Desktop};
-
-            ` : ''}
-        }
-
-        ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
-
-            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
-            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: ${sliderArrowDirection};
-                gap: ${sliderArrowGap.Desktop}${sliderArrowGapUnits.Desktop};
-                position: absolute;
-                z-index: 100;
-
-                ${sliderArrowPosition === 'top-left' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
-                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
-                ` : ''}
-
-                ${sliderArrowPosition === 'top-center' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
-                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
-                    transform: translateX(-50%);
-                ` : ''}
-
-                ${sliderArrowPosition === 'top-right' ? `
-                    top: ${sliderArrowPositionTopOffset.Desktop ? `${sliderArrowPositionTopOffset.Desktop}${sliderArrowPositionTopOffsetUnits.Desktop}` : '0'};
-                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
-                ` : ''}
-
-                ${sliderArrowPosition === 'bottom-left' ? `
-                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
-                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '0'};
-                ` : ''}
-
-                ${sliderArrowPosition === 'bottom-center' ? `
-                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
-                    left: ${sliderArrowPositionLeftOffset.Desktop ? `${sliderArrowPositionLeftOffset.Desktop}${sliderArrowPositionLeftOffsetUnits.Desktop}` : '50%'};
-                    transform: translateX(-50%);
-                ` : ''}
-
-                ${sliderArrowPosition === 'bottom-right' ? `
-                    bottom: ${sliderArrowPositionBottomOffset.Desktop ? `${sliderArrowPositionBottomOffset.Desktop}${sliderArrowPositionBottomOffsetUnits.Desktop}` : '0'};
-                    right: ${sliderArrowPositionRightOffset.Desktop ? `${sliderArrowPositionRightOffset.Desktop}${sliderArrowPositionRightOffsetUnits.Desktop}` : '0'};
-                ` : ''}
-            }
-
-            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
-            .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-next,
-            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-prev,
-            .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} .swiper-button-next {
-                position: relative;
-                top: auto;
-                right: auto;
-                bottom: auto;
-                left: auto;
-                margin: 0 !important;
-            }
-        ` : ''}
-
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:after,
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:after {
-            display: none !important;
-        }
-        .${blockId} .swiper-button-prev,
-        .${blockId} .swiper-button-next {
-            ${sliderArrowsBorder ? `border: ${sliderArrowsBorder};` : ''}
-            ${sliderArrowsBorderDesktopWidth && sliderArrowsBorderDesktop.top ? `border-width: ${sliderArrowsBorderDesktopWidth};` : ''}
-            ${sliderArrowsBorderRadiusDesktopWidth && sliderArrowsBorderRadiusDesktop.top ? `border-radius: ${sliderArrowsBorderRadiusDesktopWidth};` : ''}
-            ${sliderArrowsBorderColor ? `border-color: ${sliderArrowsBorderColor};` : ''}
-            ${sliderArrowsBoxShadowCssValue ? `box-shadow: ${sliderArrowsBoxShadowCssValue};` : ''}
-            ${sliderArrowsBgColor ? `background-color: ${sliderArrowsBgColor};` : ''}
-            ${sliderArrowsColor ? `color: ${sliderArrowsColor};` : ''}
-            ${sliderArrowsWidth.Desktop ? `width: ${sliderArrowsWidth.Desktop}${sliderArrowsWidthUnits.Desktop};` : ''}
-            ${sliderArrowsHeight.Desktop ? `height: ${sliderArrowsHeight.Desktop}${sliderArrowsHeightUnits.Desktop};` : ''}
-            transition: all .3s ease-in-out;
-        }
-        .${blockId} .swiper-button-prev:hover,
-        .${blockId} .swiper-button-next:hover {
-            ${sliderArrowsBgColorHover ? `background-color: ${sliderArrowsBgColorHover};` : ''}
-            ${sliderArrowsColorHover ? `color: ${sliderArrowsColorHover};` : ''}
-            ${sliderArrowsBorderHoverColor ? `border-color: ${sliderArrowsBorderHoverColor};` : ''}
-            ${sliderArrowsBoxShadowHoverCssValue ? `box-shadow: ${sliderArrowsBoxShadowHoverCssValue};` : ''}
-        }
-
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
-            ${sliderArrowsColor ? `fill: ${sliderArrowsColor};` : ''}
-            ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-            ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
-            ${sliderArrowsSize.Desktop ? `width: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-            ${sliderArrowsSize.Desktop ? `height: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev:hover svg,
-        .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next:hover svg {
-            ${sliderArrowsColorHover ? `fill: ${sliderArrowsColorHover};` : ''}
-        }
-
-        .${blockId} .swiper-button-prev:after,
-        .${blockId} .swiper-button-next:after {
-            ${sliderArrowsSize.Desktop ? `font-size: ${sliderArrowsSize.Desktop}${sliderArrowsSizeUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .swiper-pagination {
-            ${sliderDotsPosition.Desktop ? `bottom: ${sliderDotsPosition.Desktop}${sliderDotsPositionUnits.Desktop} !important;` : ''}
-            ${sliderDotsMarginDesktopWidth && sliderDotsMarginDesktop.top ? `margin: ${sliderDotsMarginDesktopWidth};` : ''}
-        }
-
-        .${blockId} .swiper-pagination-bullet {
-            ${sliderNormalDotsBgColor ? `background-color: ${sliderNormalDotsBgColor};` : ''}
-            ${sliderNormalDotsBorder ? `border: ${sliderNormalDotsBorder};` : ''}
-            ${sliderNormalDotsBorderDesktopWidth && sliderNormalDotsBorderDesktop.top ? `border-width: ${sliderNormalDotsBorderDesktopWidth};` : ''}
-            ${sliderNormalDotsBorderRadiusDesktopWidth && sliderNormalDotsBorderRadiusDesktop.top ? `border-radius: ${sliderNormalDotsBorderRadiusDesktopWidth};` : ''}
-            ${sliderNormalDotsBorderColor ? `border-color: ${sliderNormalDotsBorderColor};` : ''}
-            ${sliderNormalDotsWidth.Desktop ? `width: ${sliderNormalDotsWidth.Desktop}${sliderNormalDotsWidthUnits.Desktop};` : ''}
-            ${sliderNormalDotsHeight.Desktop ? `height: ${sliderNormalDotsHeight.Desktop}${sliderNormalDotsHeightUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .swiper-pagination-bullet-active {
-            ${sliderActiveDotsBgColor ? `background-color: ${sliderActiveDotsBgColor};` : ''}
-            ${sliderActiveDotsBorder ? `border: ${sliderActiveDotsBorder};` : ''}
-            ${sliderActiveDotsBorderDesktopWidth && sliderActiveDotsBorderDesktop.top ? `border-width: ${sliderActiveDotsBorderDesktopWidth};` : ''}
-            ${sliderActiveDotsBorderRadiusDesktopWidth && sliderActiveDotsBorderRadiusDesktop.top ? `border-radius: ${sliderActiveDotsBorderRadiusDesktopWidth};` : ''}
-            ${sliderActiveDotsBorderColor ? `border-color: ${sliderActiveDotsBorderColor};` : ''}
-            ${sliderActiveDotsWidth.Desktop ? `width: ${sliderActiveDotsWidth.Desktop}${sliderActiveDotsWidthUnits.Desktop};` : ''}
-            ${sliderActiveDotsHeight.Desktop ? `height: ${sliderActiveDotsHeight.Desktop}${sliderActiveDotsHeightUnits.Desktop};` : ''}
-        }
-
-        .${blockId} .swiper-pagination-fraction {
-            ${sliderFractionGlobalTypoSwitcher.fontFamily === true && sliderFractionGlobalTypographyData.fontFamily ? `font-family: ${sliderFractionGlobalTypographyData.fontFamily};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontSize === true && sliderFractionGlobalTypographyData.fontSize ? `font-size: ${sliderFractionGlobalTypographyData.fontSize};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontWeight === true && sliderFractionGlobalTypographyData.fontWeight ? `font-weight: ${sliderFractionGlobalTypographyData.fontWeight};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontStyle === true && sliderFractionGlobalTypographyData.fontStyle ? `font-style: ${sliderFractionGlobalTypographyData.fontStyle};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.textTransform === true && sliderFractionGlobalTypographyData.textTransform ? `text-transform: ${sliderFractionGlobalTypographyData.textTransform};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.textDecoration === true && sliderFractionGlobalTypographyData.textDecoration ? `text-decoration: ${sliderFractionGlobalTypographyData.textDecoration};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.letterSpacing === true && sliderFractionGlobalTypographyData.letterSpacing ? `letter-spacing: ${sliderFractionGlobalTypographyData.letterSpacing};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.lineHeight === true && sliderFractionGlobalTypographyData.lineHeight ? `line-height: ${sliderFractionGlobalTypographyData.lineHeight};` : ''}
-
-            ${sliderFractionGlobalTypoSwitcher.fontFamily === false && sliderFractionFontFamily && sliderFractionFontFamily !== 'Default' ? `font-family: ${sliderFractionFontFamily};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Desktop && sliderFractionFontSizeUnits.Desktop ? `font-size: ${sliderFractionFontSize.Desktop}${sliderFractionFontSizeUnits.Desktop};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontWeight === false && sliderFractionFontWeight ? `font-weight: ${sliderFractionFontWeight};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.fontStyle === false && sliderFractionFontStyle ? `font-style: ${sliderFractionFontStyle};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.textTransform === false && sliderFractionTextTransform ? `text-transform: ${sliderFractionTextTransform};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.textDecoration === false && sliderFractionTextDecoration ? `text-decoration: ${sliderFractionTextDecoration};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Desktop && sliderFractionLetterSpacingUnits.Desktop ? `letter-spacing: ${sliderFractionLetterSpacing.Desktop}${sliderFractionLetterSpacingUnits.Desktop};` : ''}
-            ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Desktop && sliderFractionLineHeightUnits.Desktop ? `line-height: ${sliderFractionLineHeight.Desktop}${sliderFractionLineHeightUnits.Desktop};` : ''}
-            ${sliderFractionColor ? `color: ${sliderFractionColor};` : ''}
-        }
-        .${blockId} .swiper-pagination-fraction:hover {
-            ${sliderFractionHoverColor ? `color: ${sliderFractionHoverColor};` : ''}
-        }
-
-        .${blockId} .swiper-pagination-progressbar {
-            ${sliderProgressbarBGColor ? `background-color: ${sliderProgressbarBGColor};` : ''}
-            ${sliderProgressbarHeight.Desktop ? `height: ${sliderProgressbarHeight.Desktop}${sliderProgressbarHeightUnits.Desktop};` : ''}
-        }
-        .${blockId} .swiper-pagination-progressbar .swiper-pagination-progressbar-fill {
-            ${sliderProgressbarBGActiveColor ? `background-color: ${sliderProgressbarBGActiveColor};` : ''}
-        }
-
-        @media only screen and (max-width: 1024px) {
-            .${ blockId }.fb-slider-container{
-                ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Tablet !== undefined ? `left: ${sliderHZLeftOffset.Tablet}${sliderHZLeftOffsetUnits.Tablet};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Tablet !== undefined ? `right: ${sliderHZRightOffset.Tablet}${sliderHZRightOffsetUnits.Tablet};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Tablet !== undefined ? `top: ${sliderVRTopOffset.Tablet}${sliderVRTopOffsetUnits.Tablet};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Tablet !== undefined ? `bottom: ${sliderVRBottomOffset.Tablet}${sliderVRBottomOffsetUnits.Tablet};` : ''}
-                ${sliderGlobalZIndex.Tablet ? `z-index: ${sliderGlobalZIndex.Tablet};` : ''}
-                ${sliderGlobalPaddingTabletWidth ? `padding: ${sliderGlobalPaddingTabletWidth};` : ''}
-                ${sliderGlobalMarginTabletWidth ? `margin: ${sliderGlobalMarginTabletWidth};` : ''}
-                ${sliderGlobalBorderTabletWidth ? `border-width: ${sliderGlobalBorderTabletWidth};` : ''}
-                ${sliderGlobalBorderRadiusTabletWidth ? `border-radius: ${sliderGlobalBorderRadiusTabletWidth};` : ''}
-            }
-
-            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
-                ${sliderHeight.Tablet ? `min-height: ${sliderHeight.Tablet}${sliderHeightUnits.Tablet};` : ''}
-            }
-
-            .${blockId}.fb-slider-container.outside {
-                ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
-                    padding: ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet} 0 0;
-                ` : ''}
-
-                ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
-                    padding: 0 0 ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet};
-                ` : ''}
-
-                ${sliderArrowPosition === 'center' ? `
-                    padding: 0 ${sliderArrowPositionOutsidePadding.Tablet}${sliderArrowPositionOutsidePaddingUnits.Tablet};
-
-                ` : ''}
-            }
-
-            ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
-
-                .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
-                .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
-
-                    gap: ${sliderArrowGap.Tablet}${sliderArrowGapUnits.Tablet};
-
-                    ${sliderArrowPosition === 'top-left' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'top-center' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
-                        transform: translateX(-50%);
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'top-right' ? `
-                        top: ${sliderArrowPositionTopOffset.Tablet ? `${sliderArrowPositionTopOffset.Tablet}${sliderArrowPositionTopOffsetUnits.Tablet}` : '0'};
-                        right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-left' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-center' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Tablet ? `${sliderArrowPositionLeftOffset.Tablet}${sliderArrowPositionLeftOffsetUnits.Tablet}` : '50%'};
-                        transform: translateX(-50%);
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-right' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Tablet ? `${sliderArrowPositionBottomOffset.Tablet}${sliderArrowPositionBottomOffsetUnits.Tablet}` : '0'};
-                        right: ${sliderArrowPositionRightOffset.Tablet ? `${sliderArrowPositionRightOffset.Tablet}${sliderArrowPositionRightOffsetUnits.Tablet}` : '0'};
-                    ` : ''}
-                }
-            ` : ''}
-
-
-            .${blockId} .swiper-button-prev,
-            .${blockId} .swiper-button-next {
-                ${sliderArrowsBorderTabletWidth && sliderArrowsBorderTablet.top ? `border-width: ${sliderArrowsBorderTabletWidth};` : ''}
-                ${sliderArrowsBorderRadiusTabletWidth && sliderArrowsBorderRadiusTablet.top ? `border-radius: ${sliderArrowsBorderRadiusTabletWidth};` : ''}
-                ${sliderArrowsWidth.Tablet ? `width: ${sliderArrowsWidth.Tablet}${sliderArrowsWidthUnits.Tablet};` : ''}
-                ${sliderArrowsHeight.Tablet ? `height: ${sliderArrowsHeight.Tablet}${sliderArrowsHeightUnits.Tablet};` : ''}
-            }
-
-            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
-            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
-                ${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-                ${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-            }
-
-			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
-			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
-				${sliderArrowsSize.Tablet ? `width: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-				${sliderArrowsSize.Tablet ? `height: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-			}
-
-            .${blockId} .swiper-button-prev:after,
-            .${blockId} .swiper-button-next:after {
-                ${sliderArrowsSize.Tablet ? `font-size: ${sliderArrowsSize.Tablet}${sliderArrowsSizeUnits.Tablet};` : ''}
-            }
-
-            .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Tablet ? `bottom: ${sliderDotsPosition.Tablet}${sliderDotsPositionUnits.Tablet} !important;` : ''}
-                ${sliderDotsMarginTabletWidth && sliderDotsMarginTablet.top ? `margin: ${sliderDotsMarginTabletWidth};` : ''}
-            }
-
-            .${blockId} .swiper-pagination-bullet {
-                ${sliderNormalDotsBorderTabletWidth && sliderNormalDotsBorderTablet.top ? `border-width: ${sliderNormalDotsBorderTabletWidth};` : ''}
-                ${sliderNormalDotsBorderRadiusTabletWidth && sliderNormalDotsBorderRadiusTablet.top ? `border-radius: ${sliderNormalDotsBorderRadiusTabletWidth};` : ''}
-                ${sliderNormalDotsWidth.Tablet ? `width: ${sliderNormalDotsWidth.Tablet}${sliderNormalDotsWidthUnits.Tablet};` : ''}
-                ${sliderNormalDotsHeight.Tablet ? `height: ${sliderNormalDotsHeight.Tablet}${sliderNormalDotsHeightUnits.Tablet};` : ''}
-            }
-
-            .${blockId} .swiper-pagination-bullet-active {
-                ${sliderActiveDotsBorderTabletWidth && sliderActiveDotsBorderTablet.top ? `border-width: ${sliderActiveDotsBorderTabletWidth};` : ''}
-                ${sliderActiveDotsBorderRadiusTabletWidth && sliderActiveDotsBorderRadiusTablet.top ? `border-radius: ${sliderActiveDotsBorderRadiusTabletWidth};` : ''}
-                ${sliderActiveDotsWidth.Tablet ? `width: ${sliderActiveDotsWidth.Tablet}${sliderActiveDotsWidthUnits.Tablet};` : ''}
-                ${sliderActiveDotsHeight.Tablet ? `height: ${sliderActiveDotsHeight.Tablet}${sliderActiveDotsHeightUnits.Tablet};` : ''}
-            }
-            .${blockId} .swiper-pagination-fraction {
-                ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Tablet && sliderFractionFontSizeUnits.Tablet ? `font-size: ${sliderFractionFontSize.Tablet}${sliderFractionFontSizeUnits.Tablet};` : ''}
-                ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Tablet && sliderFractionLetterSpacingUnits.Tablet ? `letter-spacing: ${sliderFractionLetterSpacing.Tablet}${sliderFractionLetterSpacingUnits.Tablet};` : ''}
-                ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Tablet && sliderFractionLineHeightUnits.Tablet ? `line-height: ${sliderFractionLineHeight.Tablet}${sliderFractionLineHeightUnits.Tablet};` : ''}
-            }
-            .${blockId} .swiper-pagination-progressbar {
-                ${sliderProgressbarHeight.Tablet ? `height: ${sliderProgressbarHeight.Tablet}${sliderProgressbarHeightUnits.Tablet};` : ''}
-            }
-        }
-
-        @media only screen and (max-width: 767px) {
-            .${ blockId }.fb-slider-container{
-                ${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'left' && sliderHZLeftOffset.Mobile !== undefined ? `left: ${sliderHZLeftOffset.Mobile}${sliderHZLeftOffsetUnits.Mobile};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderHZOrientationType === 'right' && sliderHZRightOffset.Mobile !== undefined ? `right: ${sliderHZRightOffset.Mobile}${sliderHZRightOffsetUnits.Mobile};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'top' && sliderVRTopOffset.Mobile !== undefined ? `top: ${sliderVRTopOffset.Mobile}${sliderVRTopOffsetUnits.Mobile};` : ''}
-				${sliderPositionType !== 'default' && sliderPositionType !== 'relative' && sliderVROrientationType === 'bottom' && sliderVRBottomOffset.Mobile !== undefined ? `bottom: ${sliderVRBottomOffset.Mobile}${sliderVRBottomOffsetUnits.Mobile};` : ''}
-                ${sliderGlobalZIndex.Mobile ? `z-index: ${sliderGlobalZIndex.Mobile};` : ''}
-                ${sliderGlobalPaddingMobileWidth ? `padding: ${sliderGlobalPaddingMobileWidth};` : ''}
-                ${sliderGlobalMarginMobileWidth ? `margin: ${sliderGlobalMarginMobileWidth};` : ''}
-                ${sliderGlobalBorderMobileWidth ? `border-width: ${sliderGlobalBorderMobileWidth};` : ''}
-                ${sliderGlobalBorderRadiusMobileWidth ? `border-radius: ${sliderGlobalBorderRadiusMobileWidth};` : ''}
-            }
-
-            .${blockId} .swiper-wrapper.fb-swiper-wrapper {
-                ${sliderHeight.Mobile ? `min-height: ${sliderHeight.Mobile}${sliderHeightUnits.Mobile};` : ''}
-            }
-
-            .${blockId}.fb-slider-container.outside {
-                ${sliderArrowPosition === 'top-left' || sliderArrowPosition === 'top-center' || sliderArrowPosition === 'top-right' ? `
-                    padding: ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile} 0 0;
-                ` : ''}
-
-                ${sliderArrowPosition === 'bottom-left' || sliderArrowPosition === 'bottom-center' || sliderArrowPosition === 'bottom-right' ? `
-                    padding: 0 0 ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile};
-                ` : ''}
-
-                ${sliderArrowPosition === 'center' ? `
-                    padding: 0 ${sliderArrowPositionOutsidePadding.Mobile}${sliderArrowPositionOutsidePaddingUnits.Mobile};
-
-                ` : ''}
-            }
-
-            ${sliderArrowPosition && sliderArrowPosition !== 'center' ? `
-
-                .${blockId} .fb-slider-default-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition},
-                .${blockId} .fb-slider-custom-icon-wrapper.${sliderArrowPositionType}.${sliderArrowPosition} {
-
-                    gap: ${sliderArrowGap.Mobile}${sliderArrowGapUnits.Mobile};
-
-                    ${sliderArrowPosition === 'top-left' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'top-center' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
-                        transform: translateX(-50%);
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'top-right' ? `
-                        top: ${sliderArrowPositionTopOffset.Mobile ? `${sliderArrowPositionTopOffset.Mobile}${sliderArrowPositionTopOffsetUnits.Mobile}` : '0'};
-                        right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-left' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '0'};
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-center' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
-                        left: ${sliderArrowPositionLeftOffset.Mobile ? `${sliderArrowPositionLeftOffset.Mobile}${sliderArrowPositionLeftOffsetUnits.Mobile}` : '50%'};
-                        transform: translateX(-50%);
-                    ` : ''}
-
-                    ${sliderArrowPosition === 'bottom-right' ? `
-                        bottom: ${sliderArrowPositionBottomOffset.Mobile ? `${sliderArrowPositionBottomOffset.Mobile}${sliderArrowPositionBottomOffsetUnits.Mobile}` : '0'};
-                        right: ${sliderArrowPositionRightOffset.Mobile ? `${sliderArrowPositionRightOffset.Mobile}${sliderArrowPositionRightOffsetUnits.Mobile}` : '0'};
-                    ` : ''}
-                }
-            ` : ''}
-
-            .${blockId} .swiper-button-prev,
-            .${blockId} .swiper-button-next {
-                ${sliderArrowsBorderMobileWidth && sliderArrowsBorderMobile.top ? `border-width: ${sliderArrowsBorderMobileWidth};` : ''}
-                ${sliderArrowsBorderRadiusMobileWidth && sliderArrowsBorderRadiusMobile.top ? `border-radius: ${sliderArrowsBorderRadiusMobileWidth};` : ''}
-                ${sliderArrowsWidth.Mobile ? `width: ${sliderArrowsWidth.Mobile}${sliderArrowsWidthUnits.Mobile};` : ''}
-                ${sliderArrowsHeight.Mobile ? `height: ${sliderArrowsHeight.Mobile}${sliderArrowsHeightUnits.Mobile};` : ''}
-            }
-
-            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev svg,
-            .${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next svg {
-                ${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-                ${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-            }
-
-			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-prev img,
-			.${blockId} .fb-slider-custom-icon-wrapper .swiper-button-next img {
-				${sliderArrowsSize.Mobile ? `width: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-				${sliderArrowsSize.Mobile ? `height: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-			}
-
-            .${blockId} .swiper-button-prev:after,
-            .${blockId} .swiper-button-next:after {
-                ${sliderArrowsSize.Mobile ? `font-size: ${sliderArrowsSize.Mobile}${sliderArrowsSizeUnits.Mobile};` : ''}
-            }
-
-            .${blockId} .swiper-pagination {
-                ${sliderDotsPosition.Mobile ? `bottom: ${sliderDotsPosition.Mobile}${sliderDotsPositionUnits.Mobile} !important;` : ''}
-                ${sliderDotsMarginMobileWidth && sliderDotsMarginMobile.top ? `margin: ${sliderDotsMarginMobileWidth};` : ''}
-            }
-
-            .${blockId} .swiper-pagination-bullet {
-                ${sliderNormalDotsBorderMobileWidth && sliderNormalDotsBorderMobile.top ? `border-width: ${sliderNormalDotsBorderMobileWidth};` : ''}
-                ${sliderNormalDotsBorderRadiusMobileWidth && sliderNormalDotsBorderRadiusMobile.top ? `border-radius: ${sliderNormalDotsBorderRadiusMobileWidth};` : ''}
-                ${sliderNormalDotsWidth.Mobile ? `width: ${sliderNormalDotsWidth.Mobile}${sliderNormalDotsWidthUnits.Mobile};` : ''}
-                ${sliderNormalDotsHeight.Mobile ? `height: ${sliderNormalDotsHeight.Mobile}${sliderNormalDotsHeightUnits.Mobile};` : ''}
-            }
-
-            .${blockId} .swiper-pagination-bullet-active {
-                ${sliderActiveDotsBorderMobileWidth && sliderActiveDotsBorderMobile.top ? `border-width: ${sliderActiveDotsBorderMobileWidth};` : ''}
-                ${sliderActiveDotsBorderRadiusMobileWidth && sliderActiveDotsBorderRadiusMobile.top ? `border-radius: ${sliderActiveDotsBorderRadiusMobileWidth};` : ''}
-                ${sliderActiveDotsWidth.Mobile ? `width: ${sliderActiveDotsWidth.Mobile}${sliderActiveDotsWidthUnits.Mobile};` : ''}
-                ${sliderActiveDotsHeight.Mobile ? `height: ${sliderActiveDotsHeight.Mobile}${sliderActiveDotsHeightUnits.Mobile};` : ''}
-            }
-            .${blockId} .swiper-pagination-fraction {
-                ${sliderFractionGlobalTypoSwitcher.fontSize === false && sliderFractionFontSize.Mobile && sliderFractionFontSizeUnits.Mobile ? `font-size: ${sliderFractionFontSize.Mobile}${sliderFractionFontSizeUnits.Mobile};` : ''}
-                ${sliderFractionGlobalTypoSwitcher.letterSpacing === false && sliderFractionLetterSpacing.Mobile && sliderFractionLetterSpacingUnits.Mobile ? `letter-spacing: ${sliderFractionLetterSpacing.Mobile}${sliderFractionLetterSpacingUnits.Mobile};` : ''}
-                ${sliderFractionGlobalTypoSwitcher.lineHeight === false && sliderFractionLineHeight.Mobile && sliderFractionLineHeightUnits.Mobile ? `line-height: ${sliderFractionLineHeight.Mobile}${sliderFractionLineHeightUnits.Mobile};` : ''}
-            }
-            .${blockId} .swiper-pagination-progressbar {
-                ${sliderProgressbarHeight.Mobile ? `height: ${sliderProgressbarHeight.Mobile}${sliderProgressbarHeightUnits.Mobile};` : ''}
-            }
-        }
-
-    `, [
-        blockId,
-
-        sliderHeight,
-        sliderHeightUnits,
-
-        /** Global Settings */
-        sliderGlobalZIndex,
-        sliderOverflow,
-
-        sliderGlobalPaddingUnits,
-        sliderGlobalPaddingDesktop,
-        sliderGlobalPaddingTablet,
-        sliderGlobalPaddingMobile,
-        sliderGlobalPaddingLink,
-        sliderGlobalPaddingDesktopWidth,
-        sliderGlobalPaddingTabletWidth,
-        sliderGlobalPaddingMobileWidth,
-
-        sliderGlobalMarginUnits,
-        sliderGlobalMarginDesktop,
-        sliderGlobalMarginTablet,
-        sliderGlobalMarginMobile,
-        sliderGlobalMarginLink,
-        sliderGlobalMarginDesktopWidth,
-        sliderGlobalMarginTabletWidth,
-        sliderGlobalMarginMobileWidth,
-
-        sliderGlobalBgColorSwitcher,
-        sliderGlobalBgNormalBackgroundType,
-        sliderGlobalBgNormalClassicColor,
-        sliderGlobalBgNormalGradientColor,
-        sliderGlobalBgNormalCustomGradientSwitcher,
-        sliderGlobalBgNormalCustomGradientInputValue,
-        sliderGlobalBgHoverBackgroundType,
-        sliderGlobalBgHoverClassicColor,
-        sliderGlobalBgHoverGradientColor,
-        sliderGlobalBgHoverCustomGradientSwitcher,
-        sliderGlobalBgHoverCustomGradientInputValue,
-
-        sliderGlobalBorder,
-        sliderGlobalBorderColorSwitcher,
-        sliderGlobalBorderColor,
-        sliderGlobalBorderHoverColor,
-
-        sliderGlobalBorderUnits,
-        sliderGlobalBorderDesktop,
-        sliderGlobalBorderTablet,
-        sliderGlobalBorderMobile,
-        sliderGlobalBorderLink,
-        sliderGlobalBorderDesktopWidth,
-        sliderGlobalBorderTabletWidth,
-        sliderGlobalBorderMobileWidth,
-
-
-        sliderGlobalBorderRadiusUnits,
-        sliderGlobalBorderRadiusDesktop,
-        sliderGlobalBorderRadiusTablet,
-        sliderGlobalBorderRadiusMobile,
-        sliderGlobalBorderRadiusLink,
-        sliderGlobalBorderRadiusDesktopWidth,
-        sliderGlobalBorderRadiusTabletWidth,
-        sliderGlobalBorderRadiusMobileWidth,
-
-        sliderGlobalBoxShadowSwitcher,
-        sliderGlobalBoxShadowValues,
-        sliderGlobalBoxShadowCssValue,
-        sliderGlobalBoxShadowHoverValues,
-        sliderGlobalBoxShadowHoverCssValue,
-        /** End Global Setting */
-
-        /** Start Position */
-        sliderArrowPositionType,
-        sliderArrowPosition,
-        sliderArrowDirection,
-        sliderArrowGap,
-        sliderArrowGapUnits,
-
-        sliderArrowPositionTopOffset,
-        sliderArrowPositionTopOffsetUnits,
-        sliderArrowPositionLeftOffset,
-        sliderArrowPositionLeftOffsetUnits,
-        sliderArrowPositionRightOffset,
-        sliderArrowPositionRightOffsetUnits,
-        sliderArrowPositionBottomOffset,
-        sliderArrowPositionBottomOffsetUnits,
-
-        sliderArrowPositionOutsidePadding,
-        sliderArrowPositionOutsidePaddingUnits,
-        /** End Position */
-
-        /** Slider Arrows Style */
-        sliderArrowsSize,
-        sliderArrowsSizeUnits,
-        sliderArrowsColorSwitcher,
-        sliderArrowsColor,
-        sliderArrowsColorHover,
-
-        sliderArrowsBgColorSwitcher,
-        sliderArrowsBgColor,
-        sliderArrowsBgColorHover,
-
-        sliderArrowsWidth,
-        sliderArrowsWidthUnits,
-        sliderArrowsHeight,
-        sliderArrowsHeightUnits,
-
-        /** Border Settings */
-        sliderArrowsBorder,
-        sliderArrowsBorderColorSwitcher,
-        sliderArrowsBorderColor,
-        sliderArrowsBorderHoverColor,
-        sliderArrowsBorderUnits,
-        sliderArrowsBorderDesktop,
-        sliderArrowsBorderTablet,
-        sliderArrowsBorderMobile,
-        sliderArrowsBorderLink,
-        sliderArrowsBorderDesktopWidth,
-        sliderArrowsBorderTabletWidth,
-        sliderArrowsBorderMobileWidth,
-
-        /** Border Radius */
-        sliderArrowsBorderRadiusUnits,
-        sliderArrowsBorderRadiusDesktop,
-        sliderArrowsBorderRadiusTablet,
-        sliderArrowsBorderRadiusMobile,
-        sliderArrowsBorderRadiusLink,
-        sliderArrowsBorderRadiusDesktopWidth,
-        sliderArrowsBorderRadiusTabletWidth,
-        sliderArrowsBorderRadiusMobileWidth,
-
-        /** Box Shadow */
-        sliderArrowsBoxShadowSwitcher,
-        sliderArrowsBoxShadowValues,
-        sliderArrowsBoxShadowCssValue,
-        sliderArrowsBoxShadowHoverValues,
-        sliderArrowsBoxShadowHoverCssValue,
-
-        /** Dots Style */
-        sliderDotsMarginUnits,
-        sliderDotsMarginDesktop,
-        sliderDotsMarginTablet,
-        sliderDotsMarginMobile,
-        sliderDotsMarginLink,
-        sliderDotsMarginDesktopWidth,
-        sliderDotsMarginTabletWidth,
-        sliderDotsMarginMobileWidth,
-
-        sliderDotsPosition,
-        sliderDotsPositionUnits,
-
-        sliderDotsSwitcher,
-        sliderNormalDotsBgColor,
-        sliderNormalDotsWidth,
-        sliderNormalDotsWidthUnits,
-        sliderNormalDotsHeight,
-        sliderNormalDotsHeightUnits,
-
-        sliderNormalDotsBorder,
-        sliderNormalDotsBorderColorSwitcher,
-        sliderNormalDotsBorderColor,
-        sliderNormalDotsBorderHoverColor,
-
-        sliderNormalDotsBorderUnits,
-        sliderNormalDotsBorderDesktop,
-        sliderNormalDotsBorderTablet,
-        sliderNormalDotsBorderMobile,
-        sliderNormalDotsBorderLink,
-        sliderNormalDotsBorderDesktopWidth,
-        sliderNormalDotsBorderTabletWidth,
-        sliderNormalDotsBorderMobileWidth,
-
-        sliderNormalDotsBorderRadiusUnits,
-        sliderNormalDotsBorderRadiusDesktop,
-        sliderNormalDotsBorderRadiusTablet,
-        sliderNormalDotsBorderRadiusMobile,
-        sliderNormalDotsBorderRadiusLink,
-        sliderNormalDotsBorderRadiusDesktopWidth,
-        sliderNormalDotsBorderRadiusTabletWidth,
-        sliderNormalDotsBorderRadiusMobileWidth,
-
-        sliderActiveDotsBgColor,
-        sliderActiveDotsWidth,
-        sliderActiveDotsWidthUnits,
-        sliderActiveDotsHeight,
-        sliderActiveDotsHeightUnits,
-
-        sliderActiveDotsBorder,
-        sliderActiveDotsBorderColorSwitcher,
-        sliderActiveDotsBorderColor,
-        sliderActiveDotsBorderHoverColor,
-
-        sliderActiveDotsBorderUnits,
-        sliderActiveDotsBorderDesktop,
-        sliderActiveDotsBorderTablet,
-        sliderActiveDotsBorderMobile,
-        sliderActiveDotsBorderLink,
-        sliderActiveDotsBorderDesktopWidth,
-        sliderActiveDotsBorderTabletWidth,
-        sliderActiveDotsBorderMobileWidth,
-
-        sliderActiveDotsBorderRadiusUnits,
-        sliderActiveDotsBorderRadiusDesktop,
-        sliderActiveDotsBorderRadiusTablet,
-        sliderActiveDotsBorderRadiusMobile,
-        sliderActiveDotsBorderRadiusLink,
-        sliderActiveDotsBorderRadiusDesktopWidth,
-        sliderActiveDotsBorderRadiusTabletWidth,
-        sliderActiveDotsBorderRadiusMobileWidth,
-
-        sliderFractionColorSwitcher,
-        sliderFractionColor,
-        sliderFractionHoverColor,
-
-        sliderFractionGlobalTypographyData,
-        sliderFractionGlobalTypoSwitcher,
-        sliderFractionGlobalTypoType,
-
-        sliderFractionFontFamily,
-        sliderFractionFontSize,
-        sliderFractionFontSizeUnits,
-        sliderFractionFontWeight,
-        sliderFractionFontStyle,
-        sliderFractionTextTransform,
-        sliderFractionTextDecoration,
-        sliderFractionLetterSpacing,
-        sliderFractionLetterSpacingUnits,
-        sliderFractionLineHeight,
-        sliderFractionLineHeightUnits,
-
-        sliderProgressbarBGColorSwitcher,
-        sliderProgressbarBGColor,
-        sliderProgressbarBGActiveColor,
-        sliderProgressbarHeight,
-        sliderProgressbarHeightUnits,
-
-        // Position
-        sliderPositionType,
-        sliderHZOrientationType,
-        sliderVROrientationType,
-        sliderHZLeftOffset,
-        sliderHZLeftOffsetUnits,
-        sliderHZRightOffset,
-        sliderHZRightOffsetUnits,
-        sliderVRTopOffset,
-        sliderVRTopOffsetUnits,
-        sliderVRBottomOffset,
-        sliderVRBottomOffsetUnits,
-    ]);
-
-    const customCss = getCustomCss(sliderGlobalCustomCSS, `.${blockId}`);
-
-    useEffect(() => {
-        setAttributes({blockStyle: `${sliderBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
-    }, [sliderBlockStyle, customCss]);
-
-    const editorStyle = `${sliderBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 
     /**
 	 * Inspector General Controls
@@ -1990,6 +1210,11 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     label={__("Enable Mouse Wheel", "frontis-blocks")}
                     checked={enableMouseWheel}
                     onChange={(value) => setAttributes({ enableMouseWheel: value })}
+                />
+                <ToggleControl
+                    label={__("Enable Keyboard Navigation", "frontis-blocks")}
+                    checked={enableKeyboardNavigation}
+                    onChange={(value) => setAttributes({ enableKeyboardNavigation: value })}
                 />
                 <ToggleControl
                     label={ __( 'Enable Autoplay', 'frontis-blocks' ) }
@@ -2358,7 +1583,7 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
                     <SelectControl
                         label={__('Pagination Type', 'frontis-blocks')}
                         value={paginationType}
-                        options={PAGINATION_TYPE}
+                        options={SLIDER_PAGINATION_TYPE}
                         onChange={(value) => setAttributes({ paginationType: value })}
                     />
                 </PanelBody>
@@ -3144,9 +2369,9 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
     return (
 
         <>
-            <style>
+            {/* <style>
                 {editorStyle}
-            </style>
+            </style> */}
 
             <FB_InspectorControls
                 generalControls={generalControls}
@@ -3157,3 +2382,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

@@ -1,0 +1,164 @@
+// Colors primary
+$primary-color: #3991FF;
+$primary-color-base: #399CFF;
+$primary-color-50: #EBF4FF;
+$primary-color-100: #D7E9FF;
+$primary-color-200: #B7D8F9;
+$primary-color-300: #93C4F5;
+$primary-color-400: #61A7FF;
+$primary-color-600: #3C7FC3;
+$primary-color-700: #2D6296;
+$primary-color-800: #1F446A;
+$primary-color-850: #10273D;
+$primary-color-900: #081827;
+$secondary_color: #5f5f5f;
+$background_color: #D7EBFF;
+
+// Neutral Color
+$white-color: #FFFFFF;
+$neutral-color: #6A758E;
+$neutral-color-50: #F3F3F3;
+$neutral-color-100: #E1E3E8;
+$neutral-color-200: #C3C8D2;
+$neutral-color-300: #A6ACBB;
+$neutral-color-400: #8891A5;
+$neutral-color-600: #555E72;
+$neutral-color-700: #404655;
+$neutral-color-700-global: #1e1e1e;
+$neutral-color-800: #2A2F39;
+$neutral-color-850: #20232B;
+$neutral-color-900: #15171C;
+$neutral-color-950:  #0B0C0E;
+$neutral-grey-50: #F0F0F0;
+$neutral-grey-200: #C9C9C9;
+$neutral-grey-800: #3F3F3F;
+
+// Success Color
+$success-color: #4CAF50;
+$success-color-50: #F4FCF5;
+$success-color-100: #DBEFDC;
+$success-color-200: #B7DFB9;
+$success-color-300: #94CF96;
+$success-color-400: #70BF73;
+
+// Warning Color
+$warning-color: #F89B2E;
+$warning-color-50: #FEF5EA;
+$warning-color-100: #FEEBD5;
+$warning-color-200: #FCD7AB;
+$warning-color-300: #FBC382;
+$warning-color-400: #F9AF58;
+
+// Error Color
+$error-color: #E43242;
+$error-color-50: #FCEBEC;
+$error-color-100: #FAD6D9;
+$error-color-200: #F4ADB3;
+$error-color-300: #EF848E;
+$error-color-400: #E95B68;
+
+// Text Color
+$text-color: #1e1e1e;
+$light-gray: #f0f0f1;
+$medium-gray: #ddd;
+$dark-gray: #50575e;
+$text-muted: #6c6c6c;
+
+// Typography
+$heading-font-family: "Onest", sans-serif;
+$heading-font-family-global: "Roboto", sans-serif;
+$body-font-family: "Manrope", sans-serif;
+
+
+// Font sizes
+$unit-font-size: 11px;
+$small-font-size: 12px;
+$medium-font-size: 13px;
+$base-font-size: 14px;
+$medium-font-size-global: 14px;
+$large-font-size: 16px;
+$x-large-font-size: 18px;
+
+$h1-font-size: 62px;
+$h2-font-size: 42px;
+$h3-font-size: 32px;
+$h4-font-size: 24px;
+$h5-font-size: 20px;
+$h6-font-size: 18px;
+
+//Font weight
+$font-weight-100: 100;
+$font-weight-200: 200;
+$font-weight-300: 300;
+$font-weight-400: 400;
+$font-weight-500: 500;
+$font-weight-600: 600;
+$font-weight-700: 700;
+$font-weight-800: 800;
+$font-weight-900: 900;
+
+//Line height
+$base-line-height: 1.5;
+$line-height-14: 14px;
+$body-line-height: 16px;
+$line-height-18: 18px;
+$heading-line-height: 20px;
+$line-height-22: 22px;
+$line-height-26: 26px;
+$line-height-32: 32px;
+// Spacing
+$spacing-unit: 8px;
+$gutter: $spacing-unit * 3;
+
+// Layout
+$sidebar-width: 362px;
+$content-width: 800px;
+
+// Borders
+$border-radius: 4px;
+$border-color: $medium-gray;
+
+// Transitions
+$transition-duration: 0.3s;
+$transition: all 0.3s ease-in-out;
+
+// Z-index
+$z-index-modal: 1000;
+$z-index-tooltip: 1100;
+
+// Card
+$card-padding: $spacing-unit * 2;
+$card-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+
+// Tabs
+$tab-background: $light-gray;
+$tab-active-background: #fff;
+$tab-border-color: $border-color;
+
+// Buttons
+$button-padding: $spacing-unit $spacing-unit * 2;
+$button-border-radius: $border-radius;
+
+// Inputs
+$input-height: 36px;
+$input-padding: $spacing-unit;
+$input-border-color: $border-color;
+
+// Block Card
+$block-card-width: 250px;
+$block-card-height: 200px;
+
+// Version Control
+$version-control-bg: $light-gray;
+
+// Assets Generation
+$assets-generation-bg: #fff;
+
+// Editor Options
+$editor-options-bg: #fff;
+
+// Optional Color
+$optional-color-200: #F1F2F4;
+
+// Global panel colors
+

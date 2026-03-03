@@ -38,15 +38,16 @@ export default function save({ attributes }) {
 		<div {...blockProps}>
 			<div className={`fb-parent-wrapper fb-counter-wrapper ${blockID} ${counterGlobalWraperClass}`} id={counterGlobalWraperID}>
 				<div className="fb-counter-item">
-					<div className={`fb-counter-icon-wrapper`}>
-						{/* Conditionally render image or icon */}
-						{mediaSwitcher === 'image' && counterMediaUrl && (
-							<img src={counterMediaUrl} alt={__('Counter media', 'text-domain')} />
-						)}
-						{mediaSwitcher === 'icon' && icon && (
-							<div className="fb-counter-icon">{renderSVG(icon)}</div>
-						)}
-					</div>
+						{mediaSwitcher !== 'none' && <div className={`fb-counter-icon-wrapper`}>
+							{/* Conditionally render image or icon */}
+							{mediaSwitcher === 'image' && counterMediaUrl && (
+								<img src={counterMediaUrl} alt={__('Counter media', 'text-domain')} />
+							)}
+							{mediaSwitcher === 'icon' && icon && (
+								<div className="fb-counter-icon">{renderSVG(icon)}</div>
+							)}
+						</div>}
+					
 					<div className={`fb-counter-content-wrapper`}>
 						<div className={`fb-counter-number-wrapper`}>
 							{counterPrefixSwitch === true && <span className={`fb-counter-number-prefix`}>{counterPrefix}</span>}

@@ -17,7 +17,7 @@ import {
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
-import loadGoogleFont from '@Utils/loadGoogleFont';
+
 
 const FB_SidebarTypography = ({
 	label = __("Typography", "frontis-blocks"),
@@ -52,9 +52,8 @@ const FB_SidebarTypography = ({
 	const [availableFontWeights, setAvailableFontWeights] = useState([]);
 
 	useEffect(() => {
-		if (fontFamily !== 'Default') {
-			loadGoogleFont(fontFamily);
-		}
+		const  selectedFont = fontOptions.find(font => font.label === fontFamily);
+		handleFontFamilyChange(selectedFont)
 	}, [fontFamily]);
 
 	const handleFontFamilyChange = (selectedOption) => {
@@ -75,10 +74,6 @@ const FB_SidebarTypography = ({
 			})
 
 			setAvailableFontWeights(weights);
-		}
-
-		if (newFontFamily !== 'Default') {
-			loadGoogleFont(newFontFamily);
 		}
 	};
 
@@ -123,10 +118,6 @@ const FB_SidebarTypography = ({
 		onChangeLineHeightUnit(newLineHeightUnit);
 	};
 
-	useEffect(() => {
-		const  selectedFont= fontOptions.find(font => font.label === fontFamily);
-		handleFontFamilyChange(selectedFont)
-	}, []);
 
 	return (
 		<>
@@ -168,7 +159,8 @@ const FB_SidebarTypography = ({
 					value={fontWeight}
 					onChange={handleFontWeightChange}
 				/>
-
+			</div>
+			<div className='fb_global_typo_wrap'>
 				<SelectControl
 					label={__("Font Style", "frontis-blocks")}
 					options={FONT_STYLE}
@@ -183,6 +175,8 @@ const FB_SidebarTypography = ({
 					value={textDecoration}
 					onChange={handleTextDecorationChange}
 				/>
+			</div>
+			<div className='fb_global_typo_wrap'>
 				<div className="fb-letter-case-control">
 					<label className="fb-control-label">{__("Letter Case", "frontis-blocks")}</label>
 					<div className="fb-case-button-group">
@@ -217,6 +211,8 @@ const FB_SidebarTypography = ({
 						resetFallbackValue={''}
 					/>
 				}
+			</div>
+			<div className='fb_global_typo_wrap'>
 				{lineHeightUnits &&
 					<FB_Range
 						min={-200}

@@ -8,7 +8,7 @@ import {
 	Dropdown,
 	ToggleControl
 } from "@wordpress/components";
-import {useEffect, useState, useRef, useMemo } from "@wordpress/element";
+import {useEffect, useState, useRef, useMemo, memo } from "@wordpress/element";
 
 import {select, useSelect} from '@wordpress/data';
 import { store as blockEditorStore } from '@wordpress/block-editor';
@@ -30,6 +30,21 @@ import FB_InspectorControls from '@Components/InspectorControls';
 import { SortableContext } from "@dnd-kit/sortable";
 import ColumnSortableItem from "./columnSortableItem";
 import RowSortableItem from "./rowSortableItem";
+import {
+	CONTAINER_TYPE,
+    CONTAINER_TYPE_FULL,
+    BORDER_STYLES,
+    BACKGROUND_TYPES,
+    OVERFLOW_OP,
+    HTML_TAG,
+    LAYOUT_TYPE,
+    CHILDREN_WIDTH,
+    DIRECTION,
+    JUSTIFY_CONTENT,
+    JUSTIFY_ITEMS,
+    ALIGN_ITEMS,
+    WRAP,
+} from '@Constants/fbConstants';
 
 const Inspector = (props) => {
 	let deviceType = useDeviceType();
@@ -206,157 +221,10 @@ const Inspector = (props) => {
 	};
 
 	// 2️⃣ Memoize parsed values
-	const formatted_desktop_breakpoint = FrontisBlocksData.desktop_breakpoint;
-	const formatted_tablet_breakpoint = FrontisBlocksData.tablet_breakpoint;
-	const formatted_mobile_breakpoint = FrontisBlocksData.mobile_breakpoint;
-
-	const formatted_container_column_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_column_gap);
-	}, [FrontisBlocksData.container_column_gap]);
-
-	const formatted_container_row_gap = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_row_gap);
-	}, [FrontisBlocksData.container_row_gap]);
-
-	const formatted_container_padding = useMemo(() => {
-		return parseResponsiveValue(FrontisBlocksData.container_padding);
-	}, [FrontisBlocksData.container_padding]);
-
-
-	useEffect(() => {
-		setAttributes({
-			globalFullWidthContentBoxedWidth: {
-				Desktop: formatted_desktop_breakpoint || "1200",
-				Tablet: formatted_tablet_breakpoint || "1024",
-				Mobile: formatted_mobile_breakpoint || "767",
-			},
-		});
-	}, [formatted_desktop_breakpoint, formatted_tablet_breakpoint, formatted_mobile_breakpoint]);
-
-
-	useEffect(() => {
-		setAttributes({
-			globalColumnGap: {
-				Desktop: formatted_container_column_gap.Desktop || "",
-				Tablet: formatted_container_column_gap.Tablet || "",
-				Mobile: formatted_container_column_gap.Mobile || "",
-			},
-		});
-	}, [formatted_container_column_gap]);
-
-
-	useEffect(() => {
-		setAttributes({
-			globalRowGap: {
-				Desktop: formatted_container_row_gap.Desktop || "",
-				Tablet: formatted_container_row_gap.Tablet || "",
-				Mobile: formatted_container_row_gap.Mobile || "",
-			},
-		});
-	}, [formatted_container_row_gap]);
-
-	useEffect(() => {
-		setAttributes({
-			containerGlobalPadding: {
-				Desktop: formatted_container_padding.Desktop || "",
-				Tablet: formatted_container_padding.Tablet || "",
-				Mobile: formatted_container_padding.Mobile || "",
-			},
-		});
-	}, [formatted_container_padding]);
-
-
-	const CONTAINER_TYPE = [
-		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
-		{ label: __('Boxed', 'frontis-blocks'), value: "boxed" },
-		{ label: __('Custom', 'frontis-blocks'), value: "custom" },
-	];
-
-	const CONTAINER_TYPE_FULL = [
-		{ label: __('Boxed', 'frontis-blocks'), value: "boxed" },
-		{ label: __('Full Width', 'frontis-blocks'), value: "full-width" },
-	];
-
-	const BORDER_STYLES = [
-		{ label: __("None", "frontis-blocks"), value: "none" },
-		{ label: __("Solid", "frontis-blocks"), value: "solid" },
-		{ label: __("Dashed", "frontis-blocks"), value: "dashed" },
-		{ label: __("Dotted", "frontis-blocks"), value: "dotted" },
-		{ label: __("Double", "frontis-blocks"), value: "double" },
-		{ label: __("Groove", "frontis-blocks"), value: "groove" },
-		{ label: __("Outset", "frontis-blocks"), value: "outset" },
-		{ label: __("Ridge", "frontis-blocks"), value: "ridge" },
-	];
-
-	const HTML_TAG = [
-		{ title: 'div', label: __('div', 'frontis-blocks'), value: "div" },
-		{ title: 'section', label: __('section', 'frontis-blocks'), value: "section" },
-		{ title: 'article', label: __('article', 'frontis-blocks'), value: "article" },
-		{ title: 'header', label: __('header', 'frontis-blocks'), value: "header" },
-		{ title: 'footer', label: __('footer', 'frontis-blocks'), value: "footer" },
-		{ title: 'main', label: __('main', 'frontis-blocks'), value: "main" },
-		{ title: 'nav', label: __('nav', 'frontis-blocks'), value: "nav" },
-		{ title: 'a', label: __('a', 'frontis-blocks'), value: "a" },
-	];
-	const LAYOUT_TYPE = [
-		{ title: 'Flex', label: __('Flex', 'frontis-blocks'), value: "flex" },
-		{ title: 'Grid', label: __('Grid', 'frontis-blocks'), value: "grid" },
-	];
-	const CHILDREN_WIDTH = [
-		{ title: 'Default', label: __('Default', 'frontis-blocks'), value: "default" },
-		{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
-		{ title: 'Full', label: __('Full', 'frontis-blocks'), value: "full" },
-	];
-	const DIRECTION = [
-		{ title: 'Row', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.64246 7.53723H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53729L15.3485 5.28601" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 7.53723L15.3485 9.78851" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.64246 16.4172H17.2781" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4173L15.3485 14.1774" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2781 16.4172L15.3485 18.6685" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M2.85132 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21.1487 21.1473V2.85278" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row" },
-		{ title: 'Column', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.391 6.72949L16.391 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3909 17.1923L18.606 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.391 17.1923L14.176 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 6.72949L7.65393 17.1923" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65381 17.1923L9.85767 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.65393 17.1923L5.43889 15.2941" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column" },
-		{ title: 'Row Reverse', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.2705 16.391L6.80771 16.391" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.80767 16.3909L8.70593 18.606" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.80767 16.391L8.70593 14.176" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.2705 7.65393L6.80771 7.65393" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.80767 7.65381L8.70593 9.85767" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M6.80767 7.65393L8.70593 5.43889" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "row-reverse" },
-		{ title: 'Column Reverse', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.60901 17.2705L7.60901 6.80771" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.60908 6.80767L5.39404 8.70593" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.60901 6.80767L9.82405 8.70593" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3461 17.2705L16.3461 6.80771" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3462 6.80767L14.1423 8.70593" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.3461 6.80767L18.5611 8.70593" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "column-reverse" }
-	];
-	const JUSTIFY_CONTENT = [
-		{ title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
-		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
-		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
-		{ title: 'Space Between', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 7.1615L7.48088 7.1615" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8386L7.48088 16.8386" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-between" },
-		{ title: 'Space Around', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.6713 8.21777L7.54619 8.21777" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 15.8041L7.48088 15.8041" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-around" },
-		{ title: 'Space Evenly', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 8.73425L7.48088 8.73425" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 15.2767L7.48088 15.2767" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "space-evenly" }
-	];
-
-	const JUSTIFY_ITEMS = [
-		{ title: 'Flex Start',  label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
-		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
-		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
-		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }	];
-
-	const ALIGN_ITEMS = [
-		{ title: 'Flex Start', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.39385 12.142L16.5189 12.142" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.39385 7.15051L16.5189 7.15051" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-start" },
-		{ title: 'Center', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.5599 9.46875L7.42934 9.46875" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.5599 14.4974L7.42934 14.4974" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3L3 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 21L3 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "center" },
-		{ title: 'Flex End', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M16.606 11.858L7.48088 11.858" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M16.606 16.8495L7.48088 16.8495" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 21L21 21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3L21 3" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "flex-end" },
-		{ title: 'Stretch', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8.00001 15.27L16.39 15.27" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M8.00001 9.27002L16.39 9.27002" stroke="#4D4D4D" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 4.03003L3.97001 4.03003" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M20.51 20.51L3.97001 20.51" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "stretch" }
-	];
-
-	const WRAP = [
-		{ title: 'No Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M17.51 12.0109H6.18005" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M14.8101 8.5719L18.1101 12.0108L14.8101 15.4607" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "nowrap" },
-		{ title: 'Wrap', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.37 15.2757H15.27C16.35 15.2757 17.23 14.318 17.23 13.1427V7.451C17.23 6.27567 16.35 5.31799 15.27 5.31799H7.53" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.07 11.8368L6.77002 15.2757L10.07 18.7255" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap" },
-		{ title: 'Wrap Reverse', label: __(<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M21 3V21" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M7.35999 8.76794H15.26C16.34 8.76794 17.22 9.72562 17.22 10.901V16.5926C17.22 17.7679 16.34 18.7256 15.26 18.7256H7.51999" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path><path d="M10.0699 12.2068L6.7699 8.76783L10.0699 5.30713" stroke="#4D4D4D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"></path></svg>), value: "wrap-reverse" },
-	];
-
-	const BACKGROUND_TYPES = [
-        { label: __('Classic', 'frontis-blocks'), value: 'classic' },
-        { label: __('Gradient', 'frontis-blocks'), value: 'gradient' },
-    ];
-
-	const OVERFLOW_OP = [
-		{ label: __('Default', 'frontis-blocks'), value: 'default' },
-		{ label: __('Auto', 'frontis-blocks'), value: 'auto' },
-		{ label: __('Hidden', 'frontis-blocks'), value: 'hidden' },
-		{ label: __('Scroll', 'frontis-blocks'), value: 'scroll' },
-		{ label: __('Clip', 'frontis-blocks'), value: 'clip' },
-	];
-
 	const [containerColumnsItem, setContainerColumnsItem] = useState(containerColumnsItemList);
 	const [containerRowsItem, setContainerRowsItem] = useState(containerRowsItemList);
-	const [containerLocalDesktopPadding, setContainerLocalDesktopPadding] = useState(containerDesktopPadding);
+
+	const formatted_container_padding = parseResponsiveValue(FrontisBlocksData.container_padding);
 
 	const handleColumnAddItem = () => {
         const newItem = {
@@ -558,7 +426,6 @@ const Inspector = (props) => {
 		setAttributes({containerRowsItemList: {...containerRowsItemList,[deviceType]: updatedItems}});
 	};
 
-
 	const isDesktopPaddingEmpty = () => {
 		const directions = ['top', 'bottom', 'left', 'right'];
 		return directions.every(direction => 
@@ -584,30 +451,30 @@ const Inspector = (props) => {
 	let getPaddingDesktop = 
 		isBlockRootParent && isDesktopPaddingEmpty()
 		? {
-			top: containerGlobalPadding.Desktop, 
-			right: containerGlobalPadding.Desktop, 
-			bottom: containerGlobalPadding.Desktop, 
-			left: containerGlobalPadding.Desktop
+			top: containerGlobalPadding?.Desktop, 
+			right: containerGlobalPadding?.Desktop, 
+			bottom: containerGlobalPadding?.Desktop, 
+			left: containerGlobalPadding?.Desktop
 		  }
 		: containerDesktopPadding;
 	
 	let getPaddingTablet = 
 		isBlockRootParent && isTabletPaddingEmpty()
 		? {
-			top: containerGlobalPadding.Tablet, 
-			right: containerGlobalPadding.Tablet, 
-			bottom: containerGlobalPadding.Tablet, 
-			left: containerGlobalPadding.Tablet
+			top: containerGlobalPadding?.Tablet, 
+			right: containerGlobalPadding?.Tablet, 
+			bottom: containerGlobalPadding?.Tablet, 
+			left: containerGlobalPadding?.Tablet
 		  } 
 		: containerTabletPadding;
 	
 	let getPaddingMobile = 
 		isBlockRootParent && isMobilePaddingEmpty()
 		? {
-			top: containerGlobalPadding.Mobile, 
-			right: containerGlobalPadding.Mobile, 
-			bottom: containerGlobalPadding.Mobile, 
-			left: containerGlobalPadding.Mobile
+			top: containerGlobalPadding?.Mobile, 
+			right: containerGlobalPadding?.Mobile, 
+			bottom: containerGlobalPadding?.Mobile, 
+			left: containerGlobalPadding?.Mobile
 		  } 
 		: containerMobilePadding;
 
@@ -716,32 +583,32 @@ const Inspector = (props) => {
 					setAttributes({ containerDesktopPadding: updatedDesktopPadding});
 					break;
 				case 'Tablet':
-					let formatedContainerPaddingTablet = formatted_container_padding;
+					let formattedContainerPaddingTablet = formatted_container_padding;
 					if( isTabletPaddingEmpty() && containerTabletPadding.top === '') {
-						formatedContainerPaddingTablet = containerDesktopPadding;
+						formattedContainerPaddingTablet = containerDesktopPadding;
 					}
 
 					if(containerTabletPadding.top !== '') {
-						formatedContainerPaddingTablet = containerTabletPadding;
+						formattedContainerPaddingTablet = containerTabletPadding;
 					}
 
-					const updatedTabletPadding = updateContainerPadding(formatedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedTabletPadding = updateContainerPadding(formattedContainerPaddingTablet, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({containerTabletPadding: updatedTabletPadding});
 					break;
 				case 'Mobile':
-					let formatedContainerPaddingMob = formatted_container_padding;
+					let formattedContainerPaddingMob = formatted_container_padding;
 					if( isMobilePaddingEmpty() && isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerDesktopPadding;
+						formattedContainerPaddingMob = containerDesktopPadding;
 					}
 					if(isMobilePaddingEmpty() && !isTabletPaddingEmpty() && containerMobilePadding.top === '') {
-						formatedContainerPaddingMob = containerTabletPadding;
+						formattedContainerPaddingMob = containerTabletPadding;
 					}
 
 					if(containerMobilePadding.top !== '') {
-						formatedContainerPaddingMob = containerMobilePadding;
+						formattedContainerPaddingMob = containerMobilePadding;
 					}
 					
-					const updatedMobilePadding = updateContainerPadding(formatedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
+					const updatedMobilePadding = updateContainerPadding(formattedContainerPaddingMob, position, value, isBlockRootParent, formatted_container_padding);
 					setAttributes({ containerMobilePadding: updatedMobilePadding });
 					break;
 				default:
@@ -769,17 +636,17 @@ const Inspector = (props) => {
 		if (!isBlockRootParent) {
 			// If not block root parent, set empty attributes to '0', preserve non-empty ones
 			updatedPadding = {
-				top: updatedPadding.top === '' ? '0' : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? '0' : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? '0' : updatedPadding.left,
-				right: updatedPadding.right === '' ? '0' : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? '0' : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? '0' : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? '0' : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? '0' : updatedPadding.right
 			};
-		} else if (padding[position] === '') {
+		} else if (padding[position] === '' || padding[position] === undefined) {
 			updatedPadding = {
-				top: updatedPadding.top === '' ? formatted_container_padding[deviceType] : updatedPadding.top,
-				bottom: updatedPadding.bottom === '' ? formatted_container_padding[deviceType] : updatedPadding.bottom,
-				left: updatedPadding.left === '' ? formatted_container_padding[deviceType] : updatedPadding.left,
-				right: updatedPadding.right === '' ? formatted_container_padding[deviceType] : updatedPadding.right
+				top: (updatedPadding.top === '' || updatedPadding.top === undefined) ? formatted_container_padding[deviceType] : updatedPadding.top,
+				bottom: (updatedPadding.bottom === '' || updatedPadding.bottom === undefined) ? formatted_container_padding[deviceType] : updatedPadding.bottom,
+				left: (updatedPadding.left === '' || updatedPadding.left === undefined) ? formatted_container_padding[deviceType] : updatedPadding.left,
+				right: (updatedPadding.right === '' || updatedPadding.right === undefined) ? formatted_container_padding[deviceType] : updatedPadding.right
 			};
 		}
 	  
@@ -1286,8 +1153,8 @@ const Inspector = (props) => {
 											onClick={() =>
 												setAttributes({
 													containerGridAlignItems: {
-														...containerGridAlignItems, // Spread the existing values
-														[deviceType]: item.value, // Update the specific device type
+														...containerGridAlignItems,
+														[deviceType]: item.value,
 													},
 												})
 											}
@@ -1316,8 +1183,8 @@ const Inspector = (props) => {
 											onClick={() =>
 												setAttributes({
 													containerGridJustifyItems: {
-														...containerGridJustifyItems, // Spread the existing values
-														[deviceType]: item.value, // Update the specific device type
+														...containerGridJustifyItems,
+														[deviceType]: item.value,
 													},
 												})
 											}
@@ -1403,8 +1270,8 @@ const Inspector = (props) => {
 										onClick={() =>
 											setAttributes({
 												containerAlignItems: {
-													...containerAlignItems, // Spread the existing values
-													[deviceType]: item.value, // Update the specific device type
+													...containerAlignItems,
+													[deviceType]: item.value,
 												},
 											})
 										}
@@ -1433,8 +1300,8 @@ const Inspector = (props) => {
 										onClick={() =>
 											setAttributes({
 												containerJustify: {
-													...containerJustify, // Spread the existing values
-													[deviceType]: item.value, // Update the specific device type
+													...containerJustify,
+													[deviceType]: item.value,
 												},
 											})
 										}
@@ -1496,7 +1363,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Column", "frontis-blocks")}
-					rangeValue={columnGap}
+					rangeValue={columnGap.Desktop === '' ? globalColumnGap : columnGap}
 					onChangeHandler={columnGapFn}
 					rangeUnitHandler={columnGapUnitsFn}
 					deviceType={deviceType}
@@ -1514,7 +1381,7 @@ const Inspector = (props) => {
 					min={0}
 					max={200}
 					label={__("Row", "frontis-blocks")}
-					rangeValue={rowGap}
+					rangeValue={rowGap.Desktop === '' ? globalRowGap : rowGap}
 					onChangeHandler={rowGapFn}
 					rangeUnitHandler={rowGapUnitsFn}
 					deviceType={deviceType}
@@ -1638,19 +1505,6 @@ const Inspector = (props) => {
 							spacingCombineBtnHandler={containerPaddingLinkBtn}
 							setAttributes={setAttributes}
 						/>
-						{/* <FB_Spacing
-							label={__("Padding", "frontis-blocks")}
-							deviceType={deviceType}
-							spacingUnitsHandler={containerPaddingUnitsHandler}
-							spacingUnits={containerPaddingUnits}
-							spacingDesktop={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Desktop, right: containerGlobalPadding.Desktop, bottom: containerGlobalPadding.Desktop, left: containerGlobalPadding.Desktop} : containerDesktopPadding}
-							spacingTablet={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Tablet, right: containerGlobalPadding.Tablet, bottom: containerGlobalPadding.Tablet, left: containerGlobalPadding.Tablet} : containerTabletPadding}
-							spacingMobile={isBlockRootParent && containerDesktopPadding.top === '' && containerTabletPadding.top === '' && containerMobilePadding.top === '' ? {top: containerGlobalPadding.Mobile, right: containerGlobalPadding.Mobile, bottom: containerGlobalPadding.Mobile, left: containerGlobalPadding.Mobile} : containerMobilePadding}
-							handleSpacingUnitHandler={containerPaddingUnitsChange}
-							spacingCombineBtn={containerPaddingLink}
-							spacingCombineBtnHandler={containerPaddingLinkBtn}
-							setAttributes={setAttributes}
-						/> */}
 					</PanelBody>
 
 					<PanelBody
@@ -2167,4 +2021,4 @@ const Inspector = (props) => {
 	);
 };
 
-export default Inspector;
+export default memo(Inspector);

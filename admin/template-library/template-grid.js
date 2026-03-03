@@ -24,6 +24,7 @@ const TemplateGrid = ({
     tags = [],
     dependencies = [],
     preview_url,
+    uploads,
     colors,
     templateType,
     gradientColors,
@@ -59,10 +60,10 @@ const TemplateGrid = ({
     // setIsPladmin
 }) => {
 
-    const { siteTitle, primaryColor, enableFeatureX } = useSelector(
-        (state) => state.attributes
-      );
-    const dispatch = useDispatch();
+    // const { siteTitle, primaryColor, enableFeatureX } = useSelector(
+    //     (state) => state.attributes
+    //   );
+    // const dispatch = useDispatch();
 
     const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -71,7 +72,7 @@ const TemplateGrid = ({
     const [freeTemplate, setFreeTemplate] = useState(false);
 
     const isAlreadySaved = alreadySaved(savedItems, id, activeTab)
-    const userData = localStorage.getItem('userData');
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     const currentDay = new Date().toLocaleDateString('en-US', { day: 'numeric' });
     const currentMonth = new Date().toLocaleDateString('en-US', { month: 'long' });
@@ -88,6 +89,7 @@ const TemplateGrid = ({
         author: 'Template Author',
         activeTab,
         preview_url,
+        uploads,
         colors,
         customColors,
         gradientColors,
@@ -104,7 +106,7 @@ const TemplateGrid = ({
 
 
     const handleFullSiteImport = useCallback(async (id) => {
-        if (!userData) {
+        if (!userData?.email) {
             setIsLoginModalOpen(true);
             return;
         }
@@ -155,9 +157,23 @@ const TemplateGrid = ({
         setIsModalOpen(false);
     }, []);
 
+    useEffect(() => {
+        if(!userData?.email) {
+            handleCloseModal();
+        }
+    }, [userData?.email]);
+
+
     const handleDemo = useCallback(() => {
-        console.log("Demo clicked for:", id);
-    }, [id]);
+        if (preview_url && preview_url.trim() !== '') {
+            window.open(preview_url, '_blank');
+        } else {
+            toast.warn("No preview URL available", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }, [preview_url]);
 
     const [patternsData] = usePostDataMutation();
     const getTemplatesData = async (route, key, id) => {
@@ -360,8 +376,8 @@ const TemplateGrid = ({
                 onMouseEnter={() => setIsHovered(true)}
                 onMouseLeave={() => setIsHovered(false)}
             >
-                <div className="fb-template-library-card-img">
-                    <img src={`https://template-library.boomdevshub.com/storage/${imageUrl}`} alt={title || "Template preview"} />
+                <div className={`fb-template-library-card-img ${templateType !== 'patterns' ? 'scroll-img' : ''}`}>
+                    <img src={`https://template-library.frontiswp.com/storage/${imageUrl}`} alt={title || "Template preview"} />
                     <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
                         {is_premium ? "PRO" : "FREE"}
                     </div>
@@ -412,7 +428,7 @@ const TemplateGrid = ({
                             } else if (activeTab === 'pages') {
                                 importPage(id);
                             } else if (activeTab === 'sites') {
-                                handleFullSiteImport(id)
+                                handleFullSiteImport(id);
                             } else if (activeTab === 'templatelibrary') {
                                 // console.log(templateData);
                                 if (templateData.type === 'patterns') {
@@ -424,7 +440,7 @@ const TemplateGrid = ({
                                     importPage(id);
                                 } else if (templateData.type === 'sites') {
                                     // console.log('sites');
-                                    handleFullSiteImport()
+                                    handleFullSiteImport();
                                 }
                             }
                         }}
@@ -458,20 +474,14 @@ const TemplateGrid = ({
                 </div>
             </div>
 
-            {isPluginUpgradeModalOpen && (
-                <PluginUpgradeModal
-                    isPluginUpgradeModalOpen={isPluginUpgradeModalOpen}
-                    setIsPluginUpgradeModalOpen={setIsPluginUpgradeModalOpen}
-                />
-            )}
-
-            {isModalOpen && (
+            {isModalOpen && userData?.email && (
                 <TemplateImport
                     template={templateData}
                     onClose={handleCloseModal}
                     data={data}
                     setActiveCategory={setActiveCategory}
-
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
                 />
             )}
         </>

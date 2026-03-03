@@ -1,17 +1,22 @@
 import { __ } from '@wordpress/i18n';
-import { 
-    useBlockProps, 
+import { useEffect } from '@wordpress/element';
+import {
+    useBlockProps,
 } from '@wordpress/block-editor';
 
 /**
- * Internal dependencies
- */
-import Inspector from "./inspector";
+* Internal dependencies
+*/
 import './editor.scss';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
+import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateGoogleMapStyle from "./styling";
+
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
-        blockId,    
+        blockID,
+        blockStyle,
         googleMapLocation,
         googleMapZoomLevel,
         googleMapMapType,
@@ -19,20 +24,40 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         googleMapWraperID,
         googleMapWraperClass,
     } = attributes;
-    
+
+    // Handle block ID generation (handles duplication and initial ID)
+    useBlockIdGenerator({
+        clientId,
+        blockID,
+        blockPrefix: 'fb-google-map',
+        isSelected,
+        attributes,
+        setAttributes,
+    });
+
+    /** Start Generate Block Style */
+    useEffect(() => {
+        if (blockID) {
+            const css = generateGoogleMapStyle(attributes);
+            setAttributes({ blockStyle: css });
+        }
+    }, [attributes, blockID]);
+    /** End Generate Block Style */
 
     const blockProps = useBlockProps({
-        className: `fb-google-map-main-wrapper ${blockId}`,
+        className: `fb-google-map-main-wrapper ${blockID}`,
     });
-    
+
 
     return (
         <>
-            <Inspector
-                attributes={attributes}
-                setAttributes={setAttributes}
-                clientId = {clientId}
-            />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                />
+            )}
+            
             <div {...blockProps}>
                 <div className={`fb-google-map-wrapper ${googleMapWraperClass}`} id={googleMapWraperID}>
                     <iframe
@@ -44,6 +69,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     ></iframe>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

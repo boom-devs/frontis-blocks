@@ -1,14 +1,14 @@
 {
-	"apiVersion": 2,
+	"apiVersion": 3,
 	"name": "frontis-blocks/social-share",
 	"title": "Social Share",
 	"category": "frontis-blocks",
-	"icon": "menu-alt",
 	"description": "Add social sharing option for your posts",
 	"textdomain": "frontis-blocks",
 	"supports": {
 		"html": false,
-		"anchor": true
+		"anchor": false,
+		"customClassName": false
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useMemo } from '@wordpress/element';
+import { useEffect, useMemo, memo } from '@wordpress/element';
 import { PanelBody, TabPanel, Button, ButtonGroup, BaseControl } from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
@@ -15,7 +15,7 @@ import {
     POST_SWITCHER,
 } from '@Constants/fbConstants';
 
-export default function Inspector({ attributes, setAttributes, clientId }) {
+const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
         blockId,
         blockStyle,
@@ -46,40 +46,40 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
 
         .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
             display: grid;
-            grid-template-columns: repeat(${gridColumnsPerSection.Desktop}, 1fr); 
-            row-gap: ${gridRowGap.Desktop}${gridGapUnits.Desktop};  
-            column-gap: ${gridColumnGap.Desktop}${gridGapUnits.Desktop}; 
+            grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, 1fr); 
+            row-gap: ${gridRowGap?.Desktop}${gridGapUnits?.Desktop};  
+            column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop}; 
         }
 
         .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
             display: grid;
             grid-template-columns: repeat(1, 1fr);
-            gap: ${listRowGap.Desktop}${listGapUnits.Desktop}; 
+            gap: ${listRowGap?.Desktop}${listGapUnits?.Desktop}; 
         }
 
         @media only screen and (max-width: 1024px) {
             .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection.Tablet}, 1fr) !important; 
-                row-gap: ${gridRowGap.Tablet}${gridGapUnits.Tablet};  
-                column-gap: ${gridColumnGap.Tablet}${gridGapUnits.Tablet}; 
+                grid-template-columns: repeat(${gridColumnsPerSection?.Tablet}, 1fr) !important; 
+                row-gap: ${gridRowGap?.Tablet}${gridGapUnits?.Tablet};  
+                column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
             }
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
                 display: grid;
                 grid-template-columns: repeat(1, 1fr);
-                gap: ${listRowGap.Tablet}${listGapUnits.Tablet}; 
+                gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet}; 
             }
         }
 
         @media only screen and (max-width: 767px) {
             .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection.Mobile}, 1fr) !important; 
-                row-gap: ${gridRowGap.Mobile}${gridGapUnits.Mobile};  
-                column-gap: ${gridColumnGap.Mobile}${gridGapUnits.Mobile}; 
+                grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, 1fr) !important; 
+                row-gap: ${gridRowGap?.Mobile}${gridGapUnits?.Mobile};  
+                column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
             }
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
                 display: grid;
                 grid-template-columns: repeat(1, 1fr);
-                gap: ${listRowGap.Mobile}${listGapUnits.Mobile};  
+                gap: ${listRowGap?.Mobile}${listGapUnits?.Mobile};  
             }
         }
     `, [
@@ -255,3 +255,4 @@ export default function Inspector({ attributes, setAttributes, clientId }) {
         </>
     );
 }
+export default memo(Inspector);

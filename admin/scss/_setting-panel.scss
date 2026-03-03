@@ -1,4 +1,4 @@
-@import "../scss/variables";
+@import "../scss/settings-panel-variables";
 @import "sp-responsive";
 @import "sp-unit-control";
 @import "sp-spacing-unit-input";
@@ -33,13 +33,13 @@
 			cursor: pointer;
 			padding: 16px 12px;
 			flex: 1 1 0%;
-			
+
 			&.general,
 			&.styles,
 			&.advance,
 			&.advanced {
 				&.active-tab {
-					background: $neutral-color-700;
+					background: $neutral-color-950;
 					border-radius: 4px;
 					color: $white-color;
 				}
@@ -48,7 +48,7 @@
 
 	}
 
-	
+
 
 	.components-datetime__time {
 		.components-datetime__time-separator {
@@ -549,6 +549,10 @@
 	.fb-image-upload-btn {
 		background-image: url(../../assets/images/transparent-bg-demo.png);
 	}
+}
+
+.fb-box-shadow-icon-dropdown-content .components-popover__content {
+	width: 260px;
 }
 
 /** End Admin Panel scss **/

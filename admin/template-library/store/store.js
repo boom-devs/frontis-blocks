@@ -4,8 +4,8 @@ import { api } from '../services/laravelapi';
 
 export const store = configureStore({
   reducer: {
-    attributes: attributesReducer,   // attributes slice
-    [api.reducerPath]: api.reducer,  // RTK Query api slice
+    attributes: attributesReducer,
+    [api.reducerPath]: api.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),

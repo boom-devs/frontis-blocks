@@ -269,7 +269,7 @@ $border_color: #dddddd;
 .fb-advanced-heading-before-after {
     width: 100%;
 }
-.fb-advanced-wrapper[style*="text-align: left"] .fb-advanced-heading.active-line::before {
+.fb-advanced-wrapper[style*="text-align: start"] .fb-advanced-heading.active-line::before {
     left: 0;
 }
 
@@ -278,6 +278,6 @@ $border_color: #dddddd;
     transform: translateX(-50%);
 }
 
-.fb-advanced-wrapper[style*="text-align: right"] .fb-advanced-heading.active-line::before {
+.fb-advanced-wrapper[style*="text-align: end"] .fb-advanced-heading.active-line::before {
     right: 0;
 }

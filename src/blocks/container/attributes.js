@@ -26,6 +26,12 @@ const attributes = {
 	blockStyle: {
 		type: 'string',
 	},
+
+	formContainerSwitcher: {
+        type: 'boolean',
+        default: false,
+    },
+
 	containerType: {
 		type: 'string',
 		default: 'full-width'
@@ -1640,11 +1646,6 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
-	// Loop Builder Check
-	loopAutoApplied: {
-        type: 'boolean',
-        default: false
-    },
 };
 
 export default attributes;

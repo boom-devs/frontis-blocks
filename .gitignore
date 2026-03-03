@@ -10,9 +10,9 @@ node_modules/
 *.tar.gz
 *.zip
 .tags*
-.log/
+backlog/
+RELEASE_NOTES.md
 .vscode/
-package-lock.json
 yarn.lock
 build
 dist
@@ -23,3 +23,4 @@ blocks/**/index.js.LICENSE.txt
 *.log
 
 .prettierrc
+.agent/

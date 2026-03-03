@@ -1,16 +1,18 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useRef } from '@wordpress/element';
-import Inspector from "./inspector";
+import { useRef, useMemo } from '@wordpress/element';
 import ReactPlayer from "react-player";
 import './editor.scss';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
-import SwitchToBlockSettings  from '@Utils/SwitchToBlockSettings';
+import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
+
+import Inspector from "./inspector";
 
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-    const { 
+    const {
         blockID,
+        blockStyle,
         videoURL,
         autoPlaySwitcher,
         muteSwitcher,
@@ -27,7 +29,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
         advancedVideoDesktopSwitcher,
         advancedVideoTabletSwitcher,
         advancedVideoMobileSwitcher,
-     } = attributes;
+    } = attributes;
 
     const blockProps = useBlockProps({
         className: `fb-advanced-video-main-wrapper ${blockID} ${advancedVideoDesktopSwitcher && 'fb-desktop-responsive'} ${advancedVideoTabletSwitcher && 'fb-tablet-responsive'} ${advancedVideoMobileSwitcher && 'fb-mobile-responsive'}`,
@@ -39,6 +41,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
+    const playerConfig = useMemo(() => ({
+        youtube: {
+            playerVars: { origin: window.location.origin }
+        }
+    }), []);
+
     return (
         <>
             <Inspector
@@ -46,7 +54,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                 setAttributes={setAttributes}
                 clientId={clientId}
             />
-            
+
             <div {...blockProps}>
                 <div className={`fb-parent-wrapper ${videoGlobalWraperClass}`} ref={panelRef} id={videoGlobalWraperID}>
                     <div className={`fb-advanced-video-wrapper`}>
@@ -59,10 +67,11 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                                     loop={loopSwitcher}
                                     controls={showControlsSwitcher}
                                     light={imageOverlaySwitcher ? previewImageUrl : null}
-									playIcon={videoPlayIconSwitcher ? renderSVG(videoPlayIcon) : null}
+                                    playIcon={videoPlayIconSwitcher ? renderSVG(videoPlayIcon) : null}
                                     onClickPreview={() => setAttributes({ autoPlaySwitcher: true })}
                                     width="100%"
                                     height="100%"
+                                    config={playerConfig}
                                     className="fb-react-player"
                                 />
                             </div>
@@ -70,6 +79,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

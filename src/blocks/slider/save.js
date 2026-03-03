@@ -7,7 +7,7 @@ export default function save( props ) {
 	const { attributes } = props;
 
     const {
-        blockId,
+        blockID,
 		transitionSpeed,
         displayArrows,
 		displayDots,
@@ -19,6 +19,7 @@ export default function save( props ) {
         stopOnLastSlide,
         reverseDirection,
         enableMouseWheel,
+		enableKeyboardNavigation,
         paginationType,
 		sliderGlobalWraperClass,
         sliderType,
@@ -44,73 +45,79 @@ export default function save( props ) {
 
 	const blockProps = useBlockProps.save();
 
-		const swiperSettings = JSON.stringify({
-			effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
-			...(sliderType === 'carousel' && {
-				breakpoints: {
-				0: {
-					slidesPerView: carouselPerColumn?.Mobile || 1,
-					spaceBetween: carouselPerColumnGap?.Mobile || 10,
-				},
-				768: {
-					slidesPerView: carouselPerColumn?.Tablet || 2,
-					spaceBetween: carouselPerColumnGap?.Tablet || 15,
-				},
-				1025: {
-					slidesPerView: carouselPerColumn?.Desktop || 3,
-					spaceBetween: carouselPerColumnGap?.Desktop || 20,
-				},
-				},
-			}),
+	const swiperSettings = JSON.stringify({
+		effect: sliderType === 'carousel' ? carouselEffect : slideEffect,
+		...(sliderType === 'carousel' && {
+			breakpoints: {
+			0: {
+				slidesPerView: carouselPerColumn?.Mobile || 1,
+				spaceBetween: carouselPerColumnGap?.Mobile || 10,
+			},
+			768: {
+				slidesPerView: carouselPerColumn?.Tablet || 2,
+				spaceBetween: carouselPerColumnGap?.Tablet || 15,
+			},
+			1025: {
+				slidesPerView: carouselPerColumn?.Desktop || 3,
+				spaceBetween: carouselPerColumnGap?.Desktop || 20,
+			},
+			},
+		}),
 
-			loop: loop,
-			autoplay: autoplay ? {
-				delay: autoplaySpeed,
-				pauseOnMouseEnter: pauseOnHover,
-				disableOnInteraction: false,
-				stopOnLastSlide: stopOnLastSlide,
-				reverseDirection: reverseDirection,
-			} : false,
-			speed: transitionSpeed,
-			allowTouchMove: allowTouchMove,
-			mousewheel: enableMouseWheel,
+		loop: loop,
+		autoplay: autoplay ? {
+			delay: autoplaySpeed,
+			pauseOnMouseEnter: pauseOnHover,
+			disableOnInteraction: false,
+			stopOnLastSlide: stopOnLastSlide,
+			reverseDirection: reverseDirection,
+		} : false,
+		speed: transitionSpeed,
+		allowTouchMove: allowTouchMove,
+		mousewheel: enableMouseWheel,
 
-			// Add navigation if enabled
-			...(displayArrows && {
-				navigation: {
-					nextEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-next`,
-					prevEl: `.fb-slider-container[data-block-id="${blockId}"] .swiper-button-prev`,
-				},
-			}),
+		keyboard: enableKeyboardNavigation ? {
+			enabled: true,
+			onlyInViewport: true,
+			pageUpDown: false,
+		} : false,
 
-			// Add pagination if enabled
-			...(displayDots && {
-				pagination: {
-					el: `.fb-slider-container[data-block-id="${blockId}"] .swiper-pagination`,
-					clickable: true,
-					type: paginationType || 'bullets',
-					renderBullet: (index, className) =>
-						`<button class="${className}" aria-label="Go to slide ${index + 1}" ${
-						  index === 0 ? 'aria-current="true"' : ''
-						}></button>`,
-				},
-			}),
-			
-			// Creative effect settings if needed
-			...(slideEffect === 'creative' && {
-				creativeEffect: {
-					prev: { shadow: true, translate: [0, 0, -400] },
-					next: { translate: ['100%', 0, 0] },
-				},
-			}),
-			
-		});
+		// Add navigation if enabled
+		...(displayArrows && {
+			navigation: {
+				nextEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-next`,
+				prevEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-prev`,
+			},
+		}),
+
+		// Add pagination if enabled
+		...(displayDots && {
+			pagination: {
+				el: `.fb-slider-container[data-block-id="${blockID}"] .swiper-pagination`,
+				clickable: true,
+				type: paginationType || 'bullets',
+				renderBullet: (index, className) =>
+					`<button class="${className}" aria-label="Go to slide ${index + 1}" ${
+						index === 0 ? 'aria-current="true"' : ''
+					}></button>`,
+			},
+		}),
+		
+		// Creative effect settings if needed
+		...(slideEffect === 'creative' && {
+			creativeEffect: {
+				prev: { shadow: true, translate: [0, 0, -400] },
+				next: { translate: ['100%', 0, 0] },
+			},
+		}),
+		
+	});
 
 	return (
 		<div
-			key={ blockId }
-			className={ classnames( blockProps.className, `${ blockId }`, 'fb-slider-container', `${displayArrows ? sliderArrowPositionType : ''}`, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
-			data-block-id={ blockId }
+			key={ blockID }
+			className={ classnames( blockProps.className, `${ blockID }`, 'fb-slider-container', `${displayArrows ? sliderArrowPositionType : ''}`, sliderArrowPosition, sliderGlobalWraperClass, `${sliderDesktopSwitcher && 'fb-desktop-responsive'} ${sliderTabletSwitcher && 'fb-tablet-responsive'} ${sliderMobileSwitcher && 'fb-mobile-responsive'}` ) }
+			data-block-id={ blockID }
 			data-swiper-settings={ swiperSettings }
 		>
 			<div className="fb-slides fb-swiper">

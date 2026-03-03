@@ -20,15 +20,15 @@ class FluentForms
 	 *
 	 * @suppress PHP0413
 	 */
-	public static function get_form_meta( $id )
+	public static function get_form_meta($id)
 	{
-		return FluentFormHelper::getFormMeta( $id, 'template_name' );
+		return FluentFormHelper::getFormMeta($id, 'template_name');
 	}
 
 	public static function check_enable()
 	{
 		$active_plugins = Helper::get_active_plugin_list();
-		if ( in_array( 'fluentform/fluentform.php', $active_plugins ) ) {
+		if (in_array('fluentform/fluentform.php', $active_plugins)) {
 			return true;
 		}
 		return false;
@@ -38,35 +38,37 @@ class FluentForms
 	 *
 	 * @return array
 	 */
-	public static function form_list() {
-		$cache_key = 'frontis_blocks_fluent_forms';
-		$options = wp_cache_get($cache_key);
-	
-		if ($options === false) { // Cache miss, so we query the database
-			$options = [];
-			
-			// Ensure FluentForm is active
-			if (defined('FLUENTFORM')) {
-				// Use FluentForm's internal API to fetch all forms
-				$forms = \FluentForm\App\Models\Form::all(); // FluentForm API call
-				
-				// Default option for selecting a form
-				$options[0]['value'] = '';
-				$options[0]['label'] = __('Select a form', 'frontis-blocks');
-				
-				if ($forms) {
-					foreach ($forms as $key => $form) {
-						$options[$key + 1]['value'] = $form->id;
-						$options[$key + 1]['label'] = $form->title;
-						$options[$key + 1]['attr'] = self::get_form_meta($form->id);
-					}
-				}
-	
-				// Cache the results for 12 hours
-				wp_cache_set($cache_key, $options, '', 12 * HOUR_IN_SECONDS);
-			}
+	public static function form_list()
+	{
+		// Check for cached data first (persistent cache)
+		$cached = get_transient('frontis_fluent_forms_list');
+		if (false !== $cached) {
+			return $cached;
 		}
-	
+
+		$options = [];
+
+		// Ensure FluentForm is active
+		if (defined('FLUENTFORM')) {
+			// Use FluentForm's internal API to fetch all forms
+			$forms = \FluentForm\App\Models\Form::all();
+
+			// Default option for selecting a form
+			$options[0]['value'] = '';
+			$options[0]['label'] = __('Select a form', 'frontis-blocks');
+
+			if ($forms) {
+				foreach ($forms as $key => $form) {
+					$options[$key + 1]['value'] = $form->id;
+					$options[$key + 1]['label'] = $form->title;
+					$options[$key + 1]['attr'] = self::get_form_meta($form->id);
+				}
+			}
+
+			// Cache for 12 hours (persistent)
+			set_transient('frontis_fluent_forms_list', $options, 12 * HOUR_IN_SECONDS);
+		}
+
 		return $options;
 	}
 }

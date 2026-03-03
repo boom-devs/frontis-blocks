@@ -1,17 +1,57 @@
 // attributes.js
 const attributes = {
-    siteTitle: {
-      type: "string",
-      default: "My Site"
+  siteName: {
+    type: "string",
+    default: "",
+  },
+  siteTagline: {
+    type: "string",
+    default: "",
+  },
+  siteLogo: {
+    type: "object",
+    default: {
+      id: "",
+      url: "",
+      alt: "",
     },
-    primaryColor: {
-      type: "string",
-      default: "#ff0000"
-    },
-    enableFeatureX: {
-      type: "boolean",
-      default: true
-    }
-  };
-  
-  export default attributes;
+  },
+  importSuccess: {
+    type: "boolean",
+    default: null,
+  },
+  sitePreviewLoading: {
+    type: "boolean",
+    default: true,
+  },
+  showFullSiteImportModal: {
+    type: "boolean",
+    default: false,
+  },
+  pageTemplates: {
+    type: "array",
+    default: [],
+  },
+  pageTemplatesLoading: {
+    type: "boolean",
+    default: false,
+  },
+  pageTemplatesError: {
+    type: "string",
+    default: null,
+  },
+  templateParts: {
+    type: "array",
+    default: [],
+  },
+  templatePartsLoading: {
+    type: "boolean",
+    default: false,
+  },
+  templatePartsError: {
+    type: "string",
+    default: null,
+  },
+};
+
+export default attributes;

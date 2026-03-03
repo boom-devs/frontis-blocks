@@ -6,6 +6,15 @@ import backgroundCss from './backgroundCss';
 import {useDeviceType} from "@Config/displayType";
 import getCustomCss from '@Utils/getCustomCss';
 
+const ALLOWED_FORM_BLOCKS = [
+    "frontis-blocks/container",
+    "frontis-forms/field-text",
+    "frontis-forms/field-textarea",
+    "frontis-forms/field-radio",
+    "frontis-forms/field-select",
+    "frontis-forms/field-checkbox"
+];
+
 const Render = ( props ) => {
 	let deviceType = useDeviceType();
 	const { attributes, setAttributes, clientId, hasSliderParent, hasPopupParent } = props;
@@ -15,6 +24,8 @@ const Render = ( props ) => {
 		backgroundType,
 		backgroundVideo,
 		isBlockRootParent,
+		formContainerSwitcher,
+
 		// From fb
 		containerType,
 		containerDesktopSwitcher,
@@ -23,6 +34,7 @@ const Render = ( props ) => {
 		containerGlobalCustomCSS,
 		containerGlobalCustomCSSClass,
 		containerGlobalCustomCSSID,
+		containerGlobalCustomCSSValue,
 	} = attributes;
 
 	const direction = attributes[ 'direction'+deviceType ];
@@ -58,10 +70,29 @@ const Render = ( props ) => {
 		style: getContainerBGStyle,
 	} );
 
+	/**
+	 * Generate and update Custom CSS.
+	 * 
+	 * Always uses space separator (descendant selector) for all containers.
+	 * For child containers, custom classes added to the container are passed
+	 * as selfClasses to getCustomCss, which auto-detects when a selector
+	 * matches a self-class and uses a chained selector (no space) instead.
+	 * 
+	 * Example with custom class "my-section" on child container:
+	 *   .my-section { bg: red }  → #block-id.my-section { bg: red }  (chained, self)
+	 *   .heading { color: blue } → #block-id .heading { color: blue } (descendant)
+	 */
 	useEffect(() => {
-		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`);
-		setAttributes({containerGlobalCustomCSSValue: customCss});
-	}, [containerGlobalCustomCSS, blockProps.id]);
+		const selfClasses = !isBlockRootParent
+			? (containerGlobalCustomCSSClass || '').split(' ').filter(Boolean)
+			: [];
+		const customCss = getCustomCss(containerGlobalCustomCSS, `#${blockProps.id}`, ' ', selfClasses);
+		// Only update if value actually changed
+		if (containerGlobalCustomCSSValue !== customCss) {
+			setAttributes({containerGlobalCustomCSSValue: customCss});
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [containerGlobalCustomCSS, blockProps.id, containerGlobalCustomCSSClass]);
 
 	if (modifBlockProps.className && modifBlockProps.className.includes('alignfull') && containerType !== 'full-width') {
 		modifBlockProps.className = modifBlockProps.className
@@ -81,19 +112,36 @@ const Render = ( props ) => {
 		innerBlocksParams.allowedBlocks = parentBlocks.map((block) => block.name);
 	}
 
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
+	if( formContainerSwitcher ){
+		innerBlocksParams.allowedBlocks = ALLOWED_FORM_BLOCKS;
+	}
 
+	/**
+	 * Set p_block_id attribute only when it differs from blockProps.id
+	 * Avoids unnecessary setAttributes calls on every render
+	 */
+	useEffect(() => {
+		// Only set p_block_id if it's empty or different
+		if (clientId && typeof clientId === 'string' && attributes.p_block_id !== blockProps.id) {
 			setAttributes({
 				p_block_id: blockProps.id,
 			});
 		}
-	}, [clientId]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [clientId, blockProps.id]);
+
+	const rotateContainer = () => {
+		console.log("working on click ?");
+		const rotateContainer = document.querySelector('.frontis-blocks-container-inner-blocks-wrap');
+		const currentRotation = rotateContainer.style.transform || 'rotate(0deg)';
+		const newRotation = currentRotation === 'rotate(0deg)' ? 'rotate(180deg)' : 'rotate(0deg)';
+		rotateContainer.style.transform = newRotation;
+	};
+
 
 	return (
 		<>
 			<Tag { ...modifBlockProps } key={ blockProps.id }>
-				{/* Video Background is positioned absolutely. The place in the DOM is to render it underneath the shape dividers and content. */}
 				{ 'video' === backgroundType && (
 					<div className="frontis-blocks-container__video-wrap">
 						{ backgroundVideo && (
@@ -103,6 +151,14 @@ const Render = ( props ) => {
 						) }
 					</div>
 				) }
+
+				{/* <div  className='frontis-blocks-rotate-container' style={{position: 'absolute', width: '20px', height: '20px', top: '0', left: '0', zIndex: '99'}} onClick={rotateContainer}>
+					<svg xmlns="http://www.w3.org/2000/svg" fill="#000000" version="1.1" width="20px" height="20px" viewBox="0 0 486.805 486.805">
+						<g>
+							<path d="M261.397,17.983c-88.909,0-167.372,51.302-203.909,129.073L32.072,94.282L0,109.73l52.783,109.565l109.565-52.786   l-15.451-32.066L89.82,161.934c30.833-65.308,96.818-108.353,171.577-108.353c104.668,0,189.818,85.154,189.818,189.821   s-85.15,189.824-189.818,189.824c-61.631,0-119.663-30.109-155.228-80.539l-29.096,20.521   c42.241,59.87,111.143,95.613,184.324,95.613c124.286,0,225.407-101.122,225.407-225.419S385.684,17.983,261.397,17.983z"/>
+						</g>
+					</svg>
+				</div> */}
 
 				{ isBlockRootParent ? (
 					<div className={`frontis-blocks-container-inner-blocks-wrap ${containerGlobalCustomCSSClass}`} id={containerGlobalCustomCSSID}>

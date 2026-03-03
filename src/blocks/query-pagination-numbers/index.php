@@ -5,6 +5,10 @@
  * @package WordPress
  */
 
+if (!defined('ABSPATH')) {
+	exit;
+}
+
 /**
  * Renders the `core/query-pagination-numbers` block on the server.
  *

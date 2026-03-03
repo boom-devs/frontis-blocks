@@ -789,7 +789,305 @@ const FB_Block_Icons = {
 			  M7 12H14
 			  M7 16H17`,
 		})
-	),  
+	),
+	post_title: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postTitleIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M3 19L5 13
+			  M13 19L11 13
+			  M11 13L8.93633 7.49688C8.61189 6.63171 7.38811 6.63171 7.06367 7.49688L5 13
+			  M11 13H5
+			  M21 13V17.2857C21 18.2325 20.2325 19 19.2857 19H18C16.3431 19 15 17.6569 15 16C15 14.3431 16.3431 13 18 13H21
+			  M21 13V12C21 10.8954 20.1046 10 19 10H16`,
+		})
+	),
+	advanced_paragraph: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'advancedParagraphIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M12 6H21
+			  M12 9H21
+			  M3 13H21
+			  M3 16H21
+			  M3 19H21
+			  M3 7.5H9
+			  M9 7.5L7 5
+			  M9 7.5L7 10`,
+		})
+	),
+	post_category: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postCategoryIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M6 15V13C6 12.4477 6.44772 12 7 12H12
+			  M18 15V13C18 12.4477 17.5523 12 17 12H12
+			  M12 12V9
+			  M11 9H13C14.1046 9 15 8.10457 15 7V5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5V7C9 8.10457 9.89543 9 11 9Z
+			  M17 21H19C20.1046 21 21 20.1046 21 19V17C21 15.8954 20.1046 15 19 15H17C15.8954 15 15 15.8954 15 17V19C15 20.1046 15.8954 21 17 21Z
+			  M5 21H7C8.10457 21 9 20.1046 9 19V17C9 15.8954 8.10457 15 7 15H5C3.89543 15 3 15.8954 3 17V19C3 20.1046 3.89543 21 5 21Z`,
+		})
+	),
+	post_comment_form: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postCommentFormIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M18 12V16C18 17.1046 17.1046 18 16 18H13.9367C13.3432 18 12.7803 18.2636 12.4003 18.7196L10.5 21L8.59969 18.7196C8.2197 18.2636 7.65681 18 7.06325 18H5C3.89543 18 3 17.1046 3 16V8C3 6.89543 3.89543 6 5 6H12
+			  M15 6H21
+			  M18 9V3
+			  M6 14H15
+			  M6 11H12`,
+		})
+	),
+	post_featured_image: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'postFeaturedImageIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinejoin: 'round',
+		  d: `M21 17V18C21 19.1046 20.1046 20 19 20H14
+			  M21 17V7V6C21 4.89543 20.1046 4 19 4H5C3.89543 4 3 4.89543 3 6V7V16
+			  M21 17L16.5801 12.5801C15.7372 11.7372 14.3488 11.8141 13.6041 12.7449L11 16
+			  M3 16V18C3 19.1046 3.89543 20 5 20H14
+			  M3 16L6.3887 13.289C7.27034 12.5837 8.56066 12.7475 9.23809 13.6508L11 16
+			  M14 20L11 16
+			  M10.5 10C9.67157 10 9 9.32843 9 8.5C9 7.67157 9.67157 7 10.5 7C11.3284 7 12 7.67157 12 8.5C12 9.32843 11.3284 10 10.5 10Z`,
+		})
+	),
+	news_ticker: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'newsTickerIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '20',
+		  height: '16',
+		  viewBox: '0 0 20 16',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  d: `M4 11H11
+			  M14 11H16
+			  M8 2.5C8 3.32843 7.32843 4 6.5 4H2.5C1.67157 4 1 3.32843 1 2.5C1 1.67157 1.67157 1 2.5 1H6.5C7.32843 1 8 1.67157 8 2.5Z
+			  M3 7H17C18.1046 7 19 7.89543 19 9V13C19 14.1046 18.1046 15 17 15H3C1.89543 15 1 14.1046 1 13V9C1 7.89543 1.89543 7 3 7Z`,
+		})
+	),
+	business_hours: fb(
+		'svg',
+		{
+		  version: '1.1',
+		  id: 'businessHoursIcon',
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+		  fill: 'none',
+		  stroke: '#0B0C0E',
+		  strokeWidth: 1.4,
+		  strokeLinecap: 'round',
+		  strokeLinejoin: 'round',
+		  d: `M10.5 18C7.23445 18 4.45636 15.913 3.42676 13
+			  M10.5 18C7 13 7 8 10.5 3
+			  M10.5 18C10.5102 17.9855 10 18 11 18
+			  M3.42676 13C3.15039 12.2181 3 11.3766 3 10.5C3 9.62341 3.15039 8.78195 3.42676 8
+			  M3.42676 13H9.5
+			  M10.5 3C7.23445 3 4.45636 5.08702 3.42676 8
+			  M10.5 3C13.7655 3 16.5436 5.08702 17.5732 8
+			  M10.5 3C11.9151 5.02158 12.7581 7.04316 13.0289 9.06475
+			  M3.42676 8H17.5732
+			  M17.5732 8C17.6877 8.32371 17.7805 8.65762 17.85 9
+			  M16 14V16H18
+			  M11 16C11 13.2386 13.2386 11 16 11C18.7614 11 21 13.2386 21 16C21 18.7614 18.7614 21 16 21C13.2386 21 11 18.7614 11 16Z`,
+		})
+	),
+	breadcrumb: fb(
+		'svg',
+		{
+		  xmlns: 'http://www.w3.org/2000/svg',
+		  width: '24',
+		  height: '24',
+		  viewBox: '0 0 24 24',
+		  fill: 'none',
+		  className: 'frontis-blocks-editor-icons',
+		},
+		[
+		  fb('path', {
+			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		  }),
+		  fb('path', {
+			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		  })
+		]
+	),
+	off_canvas_menu: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'offCanvasMenuIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: 2,
+			y: 4,
+			width: 20,
+			height: 16,
+			rx: 2.5,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 9,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 12,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('circle', {
+			cx: 6,
+			cy: 15,
+			r: 1,
+			fill: '#0B0C0E',
+		}),
+		fb('path', {
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+			d: `M15 9L12 12L15 15`,
+		})
+	),
+	lottie_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'lottieAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M16 8C16 8 13 8 12 12C11 16 8 16 8 16
+				M21 5V19C21 20.1046 20.1046 21 19 21H5
+				C3.89543 21 3 20.1046 3 19V5
+				C3 3.89543 3.89543 3 5 3H19
+				C20.1046 3 21 3.89543 21 5Z`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+	),
+	rive_animation: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'riveAnimationIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M3 3H16C18.7614 3 21 5.23858 21 8C21 10.7614 18.7614 13 16 13H14M7 13H14M20 21L14 13`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+	),	
 
 };
 

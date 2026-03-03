@@ -1,34 +1,43 @@
 /**
  * WordPress dependencies
  */
-import { useState, useCallback } from "@wordpress/element";
+import { useState, useCallback, useEffect } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
-import { category } from "@wordpress/icons";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
-const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
+const TemplateImport = ({ 
+    template,
+    onClose,
+    data,
+    setActiveCategory,
+    setIsLoginModalOpen,
+    isLoginModalOpen,
+}) => {
     const [isImporting, setIsImporting] = useState(false);
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
-
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    
     const handleFullSiteImport = useCallback(async () => {
         setShowFullSiteImport(true);
     }, []);
 
     const handleLiveDemo = useCallback(() => {
-        console.log('Live demo clicked for:', template?.id);
-        window.open('#', '_blank');
-    }, [template?.id]);
+        if (template.preview_url && template.preview_url.trim() !== '') {
+            window.open(template.preview_url, '_blank');
+        } else {
+            toast.warn("No preview URL available", {
+                position: "top-right",
+                autoClose: 3000,
+            });
+        }
+    }, [template.preview_url]);
 
     const handleDownload = useCallback(() => {
         console.log('Download clicked for:', template?.id);
     }, [template?.id]);
-
-    // const handleFullSiteImportClose = useCallback(() => {
-    //     setShowFullSiteImport(false);
-    // }, []);
 
     if (!template) {
         return null;
@@ -41,7 +50,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
         .filter(name => name)
         .join(', ');
 
-    if (showFullSiteImport) {
+    if (showFullSiteImport && userData?.email) {
         return (
             <>
                 <ToastContainer
@@ -62,6 +71,8 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     template={template}
                     onClose={onClose}
                     onBack={() => setShowFullSiteImport(false)}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
+                    isLoginModalOpen={isLoginModalOpen}
                 />
             </>
         );
@@ -78,6 +89,7 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                     data={data}
                     onClose={onClose}
                     setActiveCategory={setActiveCategory}
+                    setIsLoginModalOpen={setIsLoginModalOpen}
                     disableMenu={true}
                 />
 
@@ -138,18 +150,19 @@ const TemplateImport = ({ template, onClose, data, setActiveCategory }) => {
                             </svg>
                             <span><span className="blue-color">Learn more</span> about full site import</span>
                         </div>
-
-                        <div className="fb-template-dependency">
-                            <h5 className="fb-dependency-label">Dependencies</h5>
-                            <ul className="fb-dependency-list">
-                                {template.dependencies?.map((item) => (
-                                    <li className="fb-dependency-item" key={item.name}>
-                                        <span className="fb-dependency-name">{item.name}</span>
-                                        <span className="fb-dependency-version"><span className="fb-dependency-version-label">Version:</span> {item.version}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                        {template.dependencies.length > 0 &&
+                            <div className="fb-template-dependency">
+                                <h5 className="fb-dependency-label">Dependencies</h5>
+                                <ul className="fb-dependency-list">
+                                    {template.dependencies?.map((item) => (
+                                        <li className="fb-dependency-item" key={item.name}>
+                                            <span className="fb-dependency-name">{item.name}</span>
+                                            <span className="fb-dependency-version"><span className="fb-dependency-version-label">Version:</span> {item.version}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

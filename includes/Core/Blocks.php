@@ -12,37 +12,129 @@ use FrontisBlocks\Assets\AssetsGenerator;
 
 defined('ABSPATH') || exit;
 
+/**
+ * Core orchestrator for registering blocks and hooking into the render cycle.
+ */
 class Blocks
 {
 	use Singleton;
 
 	private $registered_blocks = [];
 	private $gfonts = [];
+
+	/**
+	 * Wire up all required WordPress hooks when the class instantiates.
+	 */
 	public function __construct()
 	{
 		add_action('init', [$this, 'register_blocks']);
 		add_filter('block_categories_all', [$this, 'register_block_categories'], 10, 1);
 		add_filter('render_block', [$this, 'render_block'], 10, 3);
 		add_action('save_post', [$this, 'get_blocks_on_save'], 10, 3);
+
+		// Cache invalidation hooks - clear caches when content changes
+		add_action('save_post', [Helper::class, 'clear_frontis_caches'], 20);
+		add_action('created_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('edited_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('delete_term', [Helper::class, 'clear_frontis_caches']);
+		add_action('profile_update', [Helper::class, 'clear_frontis_caches']);
+		add_action('user_register', [Helper::class, 'clear_frontis_caches']);
 	}
 
+	/**
+	 * Register each block directory, enqueue assets, and localize runtime data.
+	 */
 	public function register_blocks()
 	{
 		$blocks_list = BlockList::get_instance()->get_blocks();
 		$active_blocks = get_option('fb_active_blocks');
 
-		$default_container_width = get_option('fb_default_content_width');
-		$container_column_gap = get_option('fb_container_column_gap');
-		$container_row_gap = get_option('fb_container_row_gap');
-		$container_padding = get_option('fb_container_padding');
+		$default_container_width = $this->normalize_responsive_keys(get_option('fb_default_content_width'));
+		$container_column_gap = $this->normalize_responsive_keys(get_option('fb_container_column_gap'));
+		$container_row_gap = $this->normalize_responsive_keys(get_option('fb_container_row_gap'));
+		$container_padding = $this->normalize_responsive_keys(get_option('fb_container_padding'));
 
-		$container_widths_json = get_option('fb_default_content_width');
-		$container_widths = json_decode($container_widths_json, true);
+		$container_widths = is_array($default_container_width) ? $default_container_width : json_decode($default_container_width, true);
 
 		$desktop_breakpoint = isset($container_widths['Desktop']) ? intval($container_widths['Desktop']) : 1200;
 		$tablet_breakpoint = isset($container_widths['Tablet']) ? intval($container_widths['Tablet']) : 1024;
 		$mobile_breakpoint = isset($container_widths['Mobile']) ? intval($container_widths['Mobile']) : 767;
 
+		// Convert back to JSON for localization if they were fetched as strings/arrays
+		$container_column_gap = is_array($container_column_gap) ? json_encode($container_column_gap) : $container_column_gap;
+		$container_row_gap = is_array($container_row_gap) ? json_encode($container_row_gap) : $container_row_gap;
+		$container_padding = is_array($container_padding) ? json_encode($container_padding) : $container_padding;
+
+		// Pre-load all expensive data ONCE before the loop (Performance optimization)
+		$license_options = get_option('frontisblockspro_license_options');
+		$sc_license_id = is_array($license_options) && !empty($license_options['sc_license_id']) ? (string) $license_options['sc_license_id'] : '';
+		$sc_license_key = is_array($license_options) && !empty($license_options['sc_license_key']) ? (string) $license_options['sc_license_key'] : '';
+
+		// Pre-load admin data once (these are now cached via transients)
+		$admin_localize_array = [];
+		if (is_admin()) {
+			$admin_localize_array = [
+				'admin_nonce' => wp_create_nonce('admin-nonce'),
+				'fluent_plugin_active' => FluentForms::check_enable(),
+				'fluent_form_lists' => json_encode(FluentForms::form_list()),
+				'contact_form_active' => ContactForms7::check_enable(),
+				'contact_form7_lists' => ContactForms7::form_list(),
+				'contact_form7_html' => ContactForms7::wf7_form_html(),
+				'post_types' => Helper::get_post_types(),
+				'all_cats' => Helper::get_related_taxonomy(),
+				'all_authors' => Helper::get_all_authors_with_posts(),
+				'image_sizes' => Helper::get_image_sizes(),
+				'desktop_breakpoint' => $desktop_breakpoint,
+				'tablet_breakpoint' => $tablet_breakpoint,
+				'mobile_breakpoint' => $mobile_breakpoint,
+				'global_typography' => get_option('fb_globaltypo'),
+				'sc_license_id' => $sc_license_id,
+				'sc_license_key' => $sc_license_key,
+			];
+		}
+
+		// Pre-load common data once
+		$common_localize_array = [
+			'site_url' => site_url(),
+			'pluginUrl' => FB_PLUGIN_URL,
+			'fluent_form_install_url' => admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term'),
+			'contact_form7_install_url' => admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term'),
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('fb_post_like_nonce'),
+			'user_logged_in' => is_user_logged_in(),
+			'prefix' => FB_PREFIX,
+			'desktop_breakpoint' => $desktop_breakpoint,
+			'tablet_breakpoint' => $tablet_breakpoint,
+			'mobile_breakpoint' => $mobile_breakpoint,
+			'container_column_gap' => $container_column_gap,
+			'container_row_gap' => $container_row_gap,
+			'container_padding' => $container_padding,
+		];
+
+		// Pre-load social share data once
+		$social_share_data = [
+			'permalink' => get_permalink(),
+			'title' => get_the_title(),
+			'network_labels' => [
+				'facebook' => 'Facebook',
+				'twitter' => 'Twitter',
+				'linkedin' => 'LinkedIn',
+				'whatsapp' => 'WhatsApp',
+				'pinterest' => 'Pinterest',
+				'reddit' => 'Reddit',
+			],
+			'share_urls' => [
+				'facebook' => 'https://www.facebook.com/sharer/sharer.php?u=',
+				'twitter' => 'https://twitter.com/intent/tweet?url=',
+				'linkedin' => 'https://www.linkedin.com/sharing/share-offsite/?url=',
+				'pinterest' => 'https://pinterest.com/pin/create/button/?url=',
+				'reddit' => 'https://reddit.com/submit?url=',
+				'whatsapp' => 'https://wa.me/?text=',
+			]
+		];
+
+		// Merge all localize data once
+		$localize_array = array_merge($admin_localize_array, $common_localize_array, $social_share_data);
 
 		if (!empty($blocks_list)) {
 			foreach ($blocks_list as $block) {
@@ -56,17 +148,13 @@ class Blocks
 				if ($complete !== 'true') {
 					continue;
 				}
-				$package = $block['package'];
 				$plugin_dir = FB_PLUGIN_PATH;
 				$blocks_dir = FB_BLOCKS_DIR . $slug;
 				$plugin_slug = 'frontis-blocks';
 
 				if (!file_exists($blocks_dir)) {
-					error_log($blocks_dir);
 					continue;
 				}
-
-				$localize_array = [];
 
 				// Enqueue block style in the editor
 				register_block_type($blocks_dir);
@@ -76,48 +164,7 @@ class Blocks
 				$editor_script_handle = "{$plugin_slug}-{$slug}-editor-script";
 				$view_script_handle = "{$plugin_slug}-{$slug}-view-script";
 
-				if (is_admin()) {
-					$admin_localize_array = [
-						'admin_nonce' => wp_create_nonce('admin-nonce'),
-						'fluent_plugin_active' => FluentForms::check_enable(),
-						'fluent_form_lists' => json_encode(FluentForms::form_list()),
-						'contact_form_active' => ContactForms7::check_enable(),
-						'contact_form7_lists' => ContactForms7::form_list(),
-						'contact_form7_html' => ContactForms7::wf7_form_html(),
-						'post_types' => Helper::get_post_types(),
-						'all_cats' => Helper::get_related_taxonomy(),
-						'all_authors' => Helper::get_all_authors_with_posts(),
-						'image_sizes' => Helper::get_image_sizes(),
-						'desktop_breakpoint' => $desktop_breakpoint,
-						'tablet_breakpoint' => $tablet_breakpoint,
-						'mobile_breakpoint' => $mobile_breakpoint,
-						'global_typography' => get_option('fb_globaltypo')
-					];
-
-					$localize_array = array_merge($localize_array, $admin_localize_array);
-				}
-
-				$common_localize_array = [
-					'site_url' => site_url(),
-					'pluginUrl' => FB_PLUGIN_URL,
-					'fluent_form_install_url' => admin_url('plugin-install.php?s=Fluent Forms&tab=search&type=term'),
-					'contact_form7_install_url' => admin_url('plugin-install.php?s=Contact Form 7&tab=search&type=term'),
-					'ajax_url' => admin_url('admin-ajax.php'),
-					'nonce' => wp_create_nonce('fb_post_like_nonce'),
-					'user_logged_in' => is_user_logged_in(),
-					'prefix' => FB_PREFIX,
-					// 'default_container_width' => $default_container_width,
-					'desktop_breakpoint' => $desktop_breakpoint,
-					'tablet_breakpoint' => $tablet_breakpoint,
-					'mobile_breakpoint' => $mobile_breakpoint,
-					'container_column_gap' => $container_column_gap,
-					'container_row_gap' => $container_row_gap,
-					'container_padding' => $container_padding,
-				];
-
-				$localize_array = array_merge($localize_array, $common_localize_array);
-
-				// Localize scripts
+				// Localize scripts (using pre-loaded data)
 				wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
 				wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
@@ -125,6 +172,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Dynamically render a Contact Form 7 shortcode based on block attributes.
+	 */
 	public function render_contact_form_7_shortcode($attributes)
 	{
 		// Extract the ID and title from attributes, setting defaults if not provided
@@ -142,6 +192,9 @@ class Blocks
 		return do_shortcode($shortcode);
 	}
 
+	/**
+	 * Register a built block (from /build) that is not part of the dynamic list.
+	 */
 	private function register_block($slug, $data)
 	{
 		$block_dir = FB_PLUGIN_PATH . 'build/blocks/' . $slug;
@@ -169,6 +222,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Add the "Frontis Blocks" category to the inserter palette.
+	 */
 	public function register_block_categories($categories)
 	{
 		return array_merge(
@@ -182,89 +238,125 @@ class Blocks
 		);
 	}
 
-	public function header_footer_settings($block_content, $block) {
-		$post_id = absint( get_the_ID() );
+	/**
+	 * Apply header/footer disable logic when rendering template part blocks.
+	 */
+	public function header_footer_settings($block_content, $block)
+	{
 
-		// Retrieve global options from the database.
-		// $global_options = get_option( 'frontis_theme_options', [] );
+		// Only process template-part blocks
+		if (
+			empty($block['blockName']) ||
+			'core/template-part' !== $block['blockName']
+		) {
+			return $block_content;
+		}
 
-		// echo "<pre>";
-		// var_dump($global_options);
-		// echo "</pre>";
+		// Current context post ID
+		$post_id = get_queried_object_id();
+		if (!$post_id) {
+			$post_id = get_the_ID();
+		}
+		$post_id = absint($post_id);
 
+		// Priority already handled here: default < global < template < page
+		$settings = Helper::resolve_frontis_settings($post_id);
 
-		// $theme_options = is_array( $theme_options ) ? $theme_options : maybe_unserialize( $theme_options );
+		// Detect template slug
+		$template_slug = get_page_template_slug($post_id);
+		$post = get_post($post_id);
 
-		// // if($block['blockName'] === 'core/template-part'){
-		// // 	var_dump(get_post_meta( $post_id, '_frontis_meta_header_display', true ));
-		// // }
+		if (!$template_slug) {
+			if ($post && $post->post_type === 'page') {
+				$template_slug = 'page';
+			} elseif ($post && $post->post_type === 'post') {
+				$template_slug = 'single';
+			}
+		}
 
-		// // Check if the header should be disabled (global or per post).
-		// $disable_header = ! empty( $theme_options['disableHeader'] ) || get_post_meta( $post_id, '_frontis_meta_header_display', true );
-		// if ( $disable_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
-		// 	return '';
-		// }
+		$stylesheet = get_stylesheet();
+		$template_id = $stylesheet . '//' . $template_slug;
+		$template = get_block_template($template_id, 'wp_template');
 
-		// // Check if the footer should be disabled (global or per post).
-		// $disable_footer = ! empty( $theme_options['disableFooter'] ) || get_post_meta( $post_id, '_frontis_meta_footer_display', true );
-		// if ( $disable_footer && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'footer' === $block['attrs']['tagName'] ) {
-		// 	return '';
-		// }
+		// Template parts
+		// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for theme template parts
+		$template_part_posts = get_posts(
+			array(
+				'post_type' => 'wp_template_part',
+				'post_status' => 'publish',
+				// phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query -- Required for theme template parts
+				'tax_query' => array(
+					array(
+						'taxonomy' => 'wp_theme',
+						'field' => 'name',
+						'terms' => $stylesheet,
+					),
+				),
+				'no_found_rows' => true,
+			)
+		);
 
-		// // Check if the header should have sticky behavior.
-		// $sticky_header = ! empty( $theme_options['stickyHeader'] );
+		/**
+		 * Correct Tag Detection
+		 * =====================
+		 * Use a single clean array and strictly match the slug.
+		 */
+		$tag = [];
 
+		// Add the current block slug
+		if (!empty($block['attrs']['slug'])) {
+			$tag[] = $block['attrs']['slug'];
+		}
 
-		// if ( $sticky_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+		// Detect whether the template part is a header or footer
+		if ($template_part_posts) {
+			foreach ($template_part_posts as $template_part_post) {
 
-		// 	$sticky_header_color_gb = ! empty( $theme_options['stickyHeaderColor'] ) ? $theme_options['stickyHeaderColor'] : '';
-		
-		// 	// Get the post-specific sticky header color
-		// 	$post_id = get_the_ID();
-		// 	$sticky_header_color_sg = get_post_meta( $post_id, '_frontis_meta_sticky_bg_color', true );
-		
-		// 	$sticky_header_color = ! empty( $sticky_header_color_sg ) ? $sticky_header_color_sg : $sticky_header_color_gb;
-		
-		// 	// Output the CSS custom property dynamically
-		// 	$custom_css = sprintf(
-		// 		'<style>:root { --wp--preset--sticky--bg: %s; }</style>',
-		// 		esc_attr( $sticky_header_color )
-		// 	);
-		
-		// 	// Add the CSS custom property to the <head>
-		// 	echo $custom_css;
-		
-		// 	// Add a custom class to the block
-		// 	$block_content = $this->add_custom_class( $block_content, 'fb-sticky-header' );
-		// }
-		
+				$block_template = _build_block_template_result_from_post($template_part_post);
 
-		// // Check if the header should have a transparent style.
-		// $transparent_header = ! empty( $theme_options['transparentHeader'] );
+				// Strict slug match
+				if (
+					!empty($block['attrs']['slug']) &&
+					$block_template->slug === $block['attrs']['slug']
+				) {
+					if (isset($block_template->area)) {
+						if ($block_template->area === 'header') {
+							$tag[] = 'header';
+						}
+						if ($block_template->area === 'footer') {
+							$tag[] = 'footer';
+						}
+					}
+				}
+			}
+		}
 
-		// if ( $transparent_header && $block['blockName'] === 'core/template-part' && isset( $block['attrs']['tagName'] ) && 'header' === $block['attrs']['tagName'] ) {
+		/**
+		 * HANDLING DISABLE LOGIC
+		 * ======================
+		 * When the tag contains 'header', only the header will be disabled.
+		 * When it contains 'footer', only the footer will be disabled.
+		 */
 
-		// 	$transparent_header_color_gb = ! empty( $theme_options['transparentHeaderColor'] ) ? $theme_options['transparentHeaderColor'] : 'transparent';
+		// Disable Header
+		if (
+			isset($settings['disableHeader']) &&
+			$settings['disableHeader'] === true &&
+			in_array('header', $tag)
+		) {
+			return '';
+		}
 
-		// 	// Get the post-specific sticky header color
-		// 	$post_id = get_the_ID();
-		// 	$transparent_header_color_sg = get_post_meta( $post_id, '_frontis_meta_transparent_bg_color', true );
+		// Disable Footer
+		if (
+			isset($settings['disableFooter']) &&
+			$settings['disableFooter'] === true &&
+			in_array('footer', $tag)
+		) {
+			return '';
+		}
 
-		// 	$transparent_header_color = ! empty( $transparent_header_color_sg ) ? $transparent_header_color_sg : $transparent_header_color_gb;
-
-		// 	// Output the CSS custom property dynamically
-		// 	$custom_css = sprintf(
-		// 		'<style>:root { --wp--preset--transparent--bg: %s; }</style>',
-		// 		esc_attr( $transparent_header_color )
-		// 	);
-
-		// 	// Add the CSS custom property to the <head>
-		// 	echo $custom_css;
-
-		// 	// Add a custom class to the block
-		// 	$block_content = $this->add_custom_class( $block_content, 'fb-transparent-header' );
-		// }
-
+		// Default return
 		return $block_content;
 	}
 
@@ -275,13 +367,36 @@ class Blocks
 	 * @param string $class CSS class to add.
 	 * @return string Modified block content with additional class.
 	 */
-	public function add_custom_class( string $block_content, string $class ): string {
+	public function add_custom_class(string $block_content, string $class): string
+	{
 		// Add the custom class to the block's wrapper div.
-		return preg_replace( '/class="([^"]*)"/', 'class="$1 ' . esc_attr( $class ) . '"', $block_content, 1 );
+		return preg_replace('/class="([^"]*)"/', 'class="$1 ' . esc_attr($class) . '"', $block_content, 1);
 	}
 
+	/**
+	 * Central render filter to inject Frontis-specific behaviors.
+	 */
 	public function render_block($block_content, $parsed_block, $block_obj)
 	{
+
+		// 1) Get current post ID
+		$post_id = get_queried_object_id();
+		if (!$post_id) {
+			$post_id = get_the_ID();
+		}
+		$post_id = absint($post_id);
+
+		// 2) Get merged settings (global -> template -> page)
+		$settings = Helper::resolve_frontis_settings($post_id);
+
+		// 3) Handle Page Title disable for core/post-title block
+		if (
+			!empty($parsed_block['blockName'])
+			&& $parsed_block['blockName'] === 'core/post-title'
+			&& !empty($settings['disablePageTitle'])
+		) {
+			return ''; // Completely hide the title block
+		}
 
 		// echo get_the_ID();
 		$block_content = $this->header_footer_settings($block_content, $parsed_block);
@@ -294,6 +409,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Regenerate assets when relevant blocks are detected on save.
+	 */
 	public function get_blocks_on_save($post_id, $post, $update)
 	{
 		// Skip autosaves and revisions
@@ -304,7 +422,7 @@ class Blocks
 		AssetsGenerator::generate_global_assets();
 
 		$pattern = "/frontis-blocks/i";
-		if((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+		if ((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
 			return;
 		}
 
@@ -315,6 +433,9 @@ class Blocks
 		}
 	}
 
+	/**
+	 * Ensure the rendered block markup has the expected wrapper class.
+	 */
 	private function add_wrapper_class($block_content, $parsed_block)
 	{
 		$block_name = str_replace('frontis-blocks/', '', $parsed_block['blockName']);
@@ -329,6 +450,9 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Apply the saved blockId attribute as an HTML id for styling/hooks.
+	 */
 	private function add_block_id($block_content, $parsed_block)
 	{
 		if (!isset($parsed_block['attrs']['blockId'])) {
@@ -344,8 +468,38 @@ class Blocks
 		return $block_content;
 	}
 
+	/**
+	 * Return the list of block metadata registered during init.
+	 */
 	public function get_registered_blocks()
 	{
 		return $this->registered_blocks;
+	}
+
+	/**
+	 * Normalize responsive keys to Uppercase (Desktop, Tablet, Mobile)
+	 *
+	 * @param mixed $value
+	 * @return mixed
+	 */
+	private function normalize_responsive_keys($value)
+	{
+		if (empty($value)) {
+			return $value;
+		}
+
+		$data = is_array($value) ? $value : json_decode($value, true);
+
+		if (!is_array($data)) {
+			return $value;
+		}
+
+		$normalized = [];
+		foreach ($data as $key => $val) {
+			$normalized_key = ucfirst(strtolower($key));
+			$normalized[$normalized_key] = $val;
+		}
+
+		return is_array($value) ? $normalized : json_encode($normalized);
 	}
 }
