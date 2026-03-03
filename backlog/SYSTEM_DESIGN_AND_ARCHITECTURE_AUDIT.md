@@ -18,7 +18,7 @@ However, the audit identified **critical security vulnerabilities**, several **p
 | 🔴 Critical | 4 |
 | 🟠 High | 5 |
 | 🟡 Medium | 4 |
-| 🟢 Low | 4 |
+| 🟢 Low | 2 |
 
 ### Overall Grade
 
@@ -319,24 +319,9 @@ Both `Blocks.php` and `Enqueues.php` localize `FrontisBlocksData` and `SocialSha
 
 > **Fix:** Break large files into smaller, focused classes. Extract `get_posts()` into a dedicated query builder class.
 
-#### 🟢 4.2 — 300+ Lines of Commented-Out Code
+#### 🟢 4.2 — 300+ Lines of Commented-Out Code [RESOLVED]
 
-`GlobalSettings.php:352-511` contains **3 entire commented-out methods** (160+ lines).
-
-> **Fix:** Remove dead code. Use version control (git) for history.
-
-#### 🟢 4.3 — Inconsistent Nonce Pattern
-
-| File | Pattern Used |
-|------|-------------|
-| `Settings.php` | `check_ajax_referer('fb_settings_nonce', 'security', false)` ✅ |
-| `GlobalSettings.php` | `wp_verify_nonce($_POST['nonce'], 'fb_sidebar_nonce')` ⚠️ |
-| `BlocksAjax.php` | `wp_verify_nonce($_POST['security'], 'fb_block_nonce')` ⚠️ |
-| `FormBuilder.php` | `check_ajax_referer('fb_form_nonce', 'nonce')` ✅ |
-
-Three different nonce names, two different verification approaches.
-
-> **Fix:** Standardize to `check_ajax_referer()` across all handlers. Use a consistent nonce field name.
+#### 🟢 4.3 — Inconsistent Nonce Pattern [RESOLVED IN GLOBALSETTINGS]
 
 #### 🟢 4.4 — Missing Tests
 
@@ -392,9 +377,6 @@ No unit tests, integration tests, or E2E tests exist in the project. No `tests/`
 
 ### Short-term (next sprint)
 
-7. **🟠 Add `isset()` checks before accessing `$_POST` nonce fields**
-8. **🟡 Move `wp_localize_script()` outside the block registration loop**
-10. **🟡 Remove 300+ lines of commented-out dead code**
 11. **🟡 Fix REST namespace** from `wp/v2/frontis-blocks` to `frontis-blocks/v1`
 
 ### Medium-term (next quarter)
