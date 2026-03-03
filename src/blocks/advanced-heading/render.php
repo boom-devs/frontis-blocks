@@ -431,6 +431,7 @@ $sub_heading_tag = fb_tag_whitelist(isset($attributes['subHeadingTag']) ? $attri
 $sub_heading_position = fb_norm_str(isset($attributes['subHeadingPosition']) ? $attributes['subHeadingPosition'] : 'bottom');
 $active_line_switcher = !empty($attributes['activeLineSwitcher']);
 $heading_icon_switcher = !empty($attributes['headingIconSwitcher']);
+$heading_icon = fb_norm_str(isset($attributes['headingIcon']) ? $attributes['headingIcon'] : '');
 $heading_icon_align = fb_norm_str(isset($attributes['headingIconAlign']) ? $attributes['headingIconAlign'] : 'icon');
 $heading_icon_frontend = fb_norm_str(isset($attributes['headingIconFrontend']) ? $attributes['headingIconFrontend'] : '');
 $show_separator_switcher = !empty($attributes['showSeparatorSwitcher']);
@@ -576,7 +577,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<div class="fb-advanced-icon-wrapper"
 				style="justify-content:<?php echo esc_attr($heading_alignment ?: 'initial'); ?>;">
 				<div class="fb-advanced-icon">
-					<?php echo $heading_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php 
+					$icon_html = Helper::render_icon($heading_icon);
+					if ($icon_html) {
+						echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					} else {
+						echo $heading_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					}
+					?>
 				</div>
 			</div>
 		<?php endif; ?>

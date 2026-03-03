@@ -419,6 +419,7 @@ $button_target_url = !empty($attributes['buttonTargetUrl']);
 $button_icon_align = fb_norm_str(isset($attributes['buttonIconAlign']) ? $attributes['buttonIconAlign'] : 'none'); // none|icon-text|image
 $button_icon_position = fb_norm_str(isset($attributes['buttonIconPosition']) ? $attributes['buttonIconPosition'] : 'right'); // left|right
 
+$button_icon = fb_norm_str(isset($attributes['buttonIcon']) ? $attributes['buttonIcon'] : '');
 $button_icon_frontend = fb_norm_str(isset($attributes['buttonIconFrontend']) ? $attributes['buttonIconFrontend'] : '');
 $button_icon_image_url = fb_norm_str(isset($attributes['buttonIconImageUrl']) ? $attributes['buttonIconImageUrl'] : '');
 $button_icon_image_alt = fb_norm_str(isset($attributes['buttonIconImageAlt']) ? $attributes['buttonIconImageAlt'] : '');
@@ -525,7 +526,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<?php if ($button_icon_position === 'left' && $button_icon_align === 'icon-text'): ?>
 				<div class="fb-advanced-button-icon-wrapper left">
 					<div class="fb-advanced-button-icon">
-						<?php echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php 
+						$icon_html = Helper::render_icon($button_icon);
+						if ($icon_html) {
+							echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						} else {
+							echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						?>
 					</div>
 				</div>
 			<?php endif; ?>
@@ -548,7 +556,14 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<?php if ($button_icon_position === 'right' && $button_icon_align === 'icon-text'): ?>
 				<div class="fb-advanced-button-icon-wrapper right">
 					<div class="fb-advanced-button-icon">
-						<?php echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+						<?php 
+						$icon_html = Helper::render_icon($button_icon);
+						if ($icon_html) {
+							echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						} else {
+							echo $button_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+						}
+						?>
 					</div>
 				</div>
 			<?php endif; ?>
