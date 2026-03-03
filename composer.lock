@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1a5df3cf4d339608b22c26045f82b348",
+    "content-hash": "730d5e394c33876367e31e316a9c5bdc",
     "packages": [
         {
             "name": "appsero/client",
-            "version": "dev-develop",
+            "version": "v2.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Appsero/client.git",
@@ -31,7 +31,6 @@
                 "tareq1988/wp-php-cs-fixer": "dev-master",
                 "wp-coding-standards/wpcs": "dev-develop"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -57,7 +56,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Appsero/client/issues",
-                "source": "https://github.com/Appsero/client/tree/develop"
+                "source": "https://github.com/Appsero/client/tree/v2.0.6"
             },
             "time": "2026-02-24T04:46:05+00:00"
         },
@@ -113,7 +112,7 @@
         },
         {
             "name": "matthiasmullie/minify",
-            "version": "dev-master",
+            "version": "1.3.75",
             "source": {
                 "type": "git",
                 "url": "https://github.com/matthiasmullie/minify.git",
@@ -138,7 +137,6 @@
             "suggest": {
                 "psr/cache-implementation": "Cache implementation to use with Minify::cache"
             },
-            "default-branch": true,
             "bin": [
                 "bin/minifycss",
                 "bin/minifyjs"
@@ -305,10 +303,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "appsero/client": 20,
-        "matthiasmullie/minify": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},

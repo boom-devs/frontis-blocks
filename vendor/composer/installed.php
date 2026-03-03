@@ -3,7 +3,7 @@
         'name' => 'wpmessiah/frontis-blocks',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '40e4711967aba80f1ab17c13a8cd52dea9942474',
+        'reference' => '8948ca7201a6e04f76f114ae56574d38a25bf31e',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,14 +11,12 @@
     ),
     'versions' => array(
         'appsero/client' => array(
-            'pretty_version' => 'dev-develop',
-            'version' => 'dev-develop',
+            'pretty_version' => 'v2.0.6',
+            'version' => '2.0.6.0',
             'reference' => '2e553be6a47b387a7b05496f6a6e8d8595dd0d08',
             'type' => 'library',
             'install_path' => __DIR__ . '/../appsero/client',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'deliciousbrains/wp-background-processing' => array(
@@ -31,14 +29,12 @@
             'dev_requirement' => false,
         ),
         'matthiasmullie/minify' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
+            'pretty_version' => '1.3.75',
+            'version' => '1.3.75.0',
             'reference' => '76ba4a5f555fd7bf4aa408af608e991569076671',
             'type' => 'library',
             'install_path' => __DIR__ . '/../matthiasmullie/minify',
-            'aliases' => array(
-                0 => '9999999-dev',
-            ),
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'matthiasmullie/path-converter' => array(
@@ -62,7 +58,7 @@
         'wpmessiah/frontis-blocks' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '40e4711967aba80f1ab17c13a8cd52dea9942474',
+            'reference' => '8948ca7201a6e04f76f114ae56574d38a25bf31e',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
