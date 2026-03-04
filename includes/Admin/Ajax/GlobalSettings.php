@@ -107,6 +107,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_global_colors()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $global_colors = get_option('fb_global_colors');
 
         if ($global_colors) {
@@ -118,6 +121,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_gradient_colors()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $global_gradient_colors = get_option('fb_gradient_colors');
         if ($global_gradient_colors) {
             wp_send_json_success($global_gradient_colors);
@@ -127,6 +133,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_custom_colors()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $custom_colors = get_option('fb_custom_colors');
         if ($custom_colors) {
             wp_send_json_success($custom_colors);
@@ -138,6 +147,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_custom_gradient_colors()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $custom_gradient_colors = get_option('fb_custom_gradient_colors');
         if ($custom_gradient_colors) {
             wp_send_json_success($custom_gradient_colors);
@@ -148,6 +160,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_typography()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $typography = get_option('fb_typography');
         if ($typography) {
             wp_send_json_success($typography);
@@ -158,6 +173,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_custom_typography()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $typography = get_option('fb_custom_typography');
         if ($typography) {
             wp_send_json_success($typography);
@@ -168,6 +186,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_globaltypo()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $global_typography = get_option('fb_globaltypo');
         if ($global_typography) {
             wp_send_json_success($global_typography);
@@ -178,6 +199,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_fontfamilies()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $font_families = get_option('fb_fontfamilies');
         if ($font_families) {
             wp_send_json_success($font_families);
@@ -188,6 +212,9 @@ class GlobalSettings extends AjaxBase
 
     public function get_custom_css()
     {
+        $this->validate_nonce();
+        $this->validate_permissions();
+
         $custom_css = get_option('fb_custom_css');
 
         if ($custom_css) {
