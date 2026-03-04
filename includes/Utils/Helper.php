@@ -1306,6 +1306,15 @@ class Helper
      * @since 1.1.9
      * @return void
      */
+    /**
+     * Clear all Frontis Blocks performance caches.
+     * 
+     * Call this function when you need to manually clear cached data.
+     * Caches are also automatically cleared on post save, term changes, and user updates.
+     * 
+     * @since 1.1.9
+     * @return void
+     */
     public static function clear_frontis_caches()
     {
         // Helper caches
@@ -1317,5 +1326,100 @@ class Helper
         delete_transient('frontis_fluent_forms_list');
         delete_transient('frontis_cf7_form_list');
         delete_transient('frontis_cf7_form_html');
+    }
+
+    /**
+     * Render an SVG icon from FontAwesome library.
+     *
+     * @param string $icon_name The icon slug (e.g., 'facebook', 'facebook-f').
+     * @param array  $extra_props Additional attributes for the <svg> tag.
+     * @return string The SVG markup.
+     */
+    public static function render_icon($icon_name, $extra_props = [])
+    {
+        $fallback = isset($extra_props['fallback']) ? $extra_props['fallback'] : '';
+        unset($extra_props['fallback']);
+
+        if (empty($icon_name)) {
+            return $fallback;
+        }
+
+        static $icon_data = null;
+        if (null === $icon_data) {
+            $icons_file = FB_PLUGIN_PATH . 'assets/fontawesome/icons.php';
+            if (file_exists($icons_file)) {
+                $icon_data = include $icons_file;
+            }
+        }
+
+        if (empty($icon_data) || !isset($icon_data[$icon_name])) {
+            return $fallback;
+        }
+
+        $icon = $icon_data[$icon_name];
+
+        // Handle custom icons if present (similar to generateSvg in JS)
+        if (isset($icon['custom_icons']) && $icon['custom_icons'] && isset($icon['svg']['solid']['elements'])) {
+            $svg_data = $icon['svg']['solid'];
+            $width = $svg_data['width'] ?? 512;
+            $height = $svg_data['height'] ?? 512;
+            $viewBox = $svg_data['viewBox'] ?? "0 0 $width $height";
+            $elements = $svg_data['elements'];
+
+            $attrs = array_merge([
+                'xmlns' => 'http://www.w3.org/2000/svg',
+                'width' => $width,
+                'height' => $height,
+                'viewBox' => $viewBox,
+            ], $extra_props);
+
+            $attr_strings = [];
+            foreach ($attrs as $name => $value) {
+                $attr_strings[] = sprintf('%s="%s"', esc_attr($name), esc_attr($value));
+            }
+
+            $svg = sprintf('<svg %s>', implode(' ', $attr_strings));
+            foreach ($elements as $element) {
+                $type = $element['type'];
+                $el_attrs = $element['attributes'] ?? [];
+                $el_attr_strings = [];
+                foreach ($el_attrs as $el_name => $el_value) {
+                    $el_attr_strings[] = sprintf('%s="%s"', esc_attr($el_name), esc_attr($el_value));
+                }
+                $svg .= sprintf('<%s %s />', $type, implode(' ', $el_attr_strings));
+            }
+            $svg .= '</svg>';
+            return $svg;
+        }
+
+        // Standard FontAwesome icon
+        // Priority: brands -> solid -> regular
+        $svg_data = $icon['svg']['brands'] ?? $icon['svg']['solid'] ?? $icon['svg']['regular'] ?? null;
+
+        if (!$svg_data) {
+            return '';
+        }
+
+        $width = $svg_data['width'] ?? 512;
+        $height = $svg_data['height'] ?? 512;
+        $path = $svg_data['path'] ?? '';
+        $viewBox = "0 0 $width $height";
+
+        $attrs = array_merge([
+            'xmlns' => 'http://www.w3.org/2000/svg',
+            'viewBox' => $viewBox,
+            'fill' => 'currentColor',
+        ], $extra_props);
+
+        $attr_strings = [];
+        foreach ($attrs as $name => $value) {
+            $attr_strings[] = sprintf('%s="%s"', esc_attr($name), esc_attr($value));
+        }
+
+        return sprintf(
+            '<svg %s><path d="%s"></path></svg>',
+            implode(' ', $attr_strings),
+            esc_attr($path)
+        );
     }
 }

@@ -406,14 +406,18 @@ $sub_heading_text = fb_norm_str(isset($attributes['Sub_Heading_Text']) ? $attrib
 $icon_box_button_switcher = isset($attributes['icon_Box_Button_Switcher']) ? !empty($attributes['icon_Box_Button_Switcher']) : true;
 $icon_box_button_text = fb_norm_str(isset($attributes['icon_Box_Button_Text']) ? $attributes['icon_Box_Button_Text'] : 'Learn More');
 
+$icon_slug = isset($attributes['icon']) ? $attributes['icon'] : '';
 $frontend_icon = isset($attributes['frontendIcon']) ? $attributes['frontendIcon'] : '';
+$icon_html = Helper::render_icon($icon_slug, ['fallback' => $frontend_icon]);
 $media_switcher = isset($attributes['mediaSwitcher']) ? $attributes['mediaSwitcher'] : 'icon'; // 'icon' | 'image'
 $icon_box_media_url = fb_norm_str(isset($attributes['iconBoxMediaUrl']) ? $attributes['iconBoxMediaUrl'] : '');
 $icon_box_media_alt = fb_norm_str(isset($attributes['iconBoxMediaAlt']) ? $attributes['iconBoxMediaAlt'] : '');
 
 $sub_heading_tag = fb_tag_whitelist(isset($attributes['Sub_Heading_Tag']) ? $attributes['Sub_Heading_Tag'] : 'p', 'p');
 $btn_icon_switcher = isset($attributes['buttonIconSwitcher']) ? !empty($attributes['buttonIconSwitcher']) : false;
+$btn_icon_slug = isset($attributes['btnIcon']) ? $attributes['btnIcon'] : '';
 $frontend_btn_icon = isset($attributes['frontendBtnIcon']) ? $attributes['frontendBtnIcon'] : '';
+$btn_icon_html = Helper::render_icon($btn_icon_slug, ['fallback' => $frontend_btn_icon]);
 
 $iconbox_btn_target_url = !empty($attributes['iconBoxbtnTargetUrl']); // boolean
 $iconbox_button_link = fb_norm_str(isset($attributes['iconBoxButtonLink']) ? $attributes['iconBoxButtonLink'] : '');
@@ -613,7 +617,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 								alt="<?php echo esc_attr($icon_box_media_alt); ?>" />
 						<?php elseif ($media_switcher === 'icon' && $frontend_icon): ?>
 							<div class="fb-icon-wrapper">
-								<?php echo $frontend_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						<?php endif; ?>
 					</div>
@@ -651,7 +655,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 										<span class="fb-icon-button"><?php echo wp_kses_post($btn_text_final); ?></span>
 										<?php if ($btn_icon_switcher && $frontend_btn_icon): ?>
 											<div class="fb-btn-icon-wrapper" aria-hidden="true">
-												<?php echo $frontend_btn_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+												<?php echo $btn_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											</div>
 										<?php endif; ?>
 									</a>
@@ -660,7 +664,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 										<span class="fb-icon-button"><?php echo wp_kses_post($btn_text_final); ?></span>
 										<?php if ($btn_icon_switcher && $frontend_btn_icon): ?>
 											<div class="fb-btn-icon-wrapper" aria-hidden="true">
-												<?php echo $frontend_btn_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+												<?php echo $btn_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 											</div>
 										<?php endif; ?>
 									</span>

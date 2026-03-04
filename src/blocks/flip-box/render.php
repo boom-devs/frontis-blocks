@@ -403,7 +403,9 @@ $flipBoxGlobalWraperID = fb_norm_str(isset($attributes['flipBoxGlobalWraperID'])
 $flipMediaUrl = fb_norm_str(isset($attributes['flipMediaUrl']) ? $attributes['flipMediaUrl'] : '');
 $mediaSwitcher = isset($attributes['mediaSwitcher']) ? $attributes['mediaSwitcher'] : 'icon';
 
+$icon_slug = isset($attributes['icon']) ? $attributes['icon'] : '';
 $frontendIcon = isset($attributes['frontendIcon']) ? $attributes['frontendIcon'] : '';
+$iconHtml = Helper::render_icon($icon_slug, ['fallback' => $frontendIcon]);
 
 $headingText = fb_norm_str(isset($attributes['Heading_Text']) ? $attributes['Heading_Text'] : 'Web Design');
 $headingTag = fb_tag_whitelist(isset($attributes['headingTag']) ? $attributes['headingTag'] : 'h2', 'h2');
@@ -420,11 +422,15 @@ $flipButtonLink = fb_norm_str(isset($attributes['flipButtonLink']) ? $attributes
 $flipBtnTargetUrl = !empty($attributes['flipbtnTargetUrl']);
 
 $btnIconSwitcher = isset($attributes['buttonIconSwitcher']) ? !empty($attributes['buttonIconSwitcher']) : true;
+$btnIcon_slug = isset($attributes['btnIcon']) ? $attributes['btnIcon'] : '';
 $frontendBtnIcon = isset($attributes['frontendBtnIcon']) ? $attributes['frontendBtnIcon'] : '';
+$btnIconHtml = Helper::render_icon($btnIcon_slug, ['fallback' => $frontendBtnIcon]);
 
 $flipBackMediaUrl = fb_norm_str(isset($attributes['flipBackMediaUrl']) ? $attributes['flipBackMediaUrl'] : '');
 $mediaSwitcherBack = isset($attributes['mediaSwitcherBack']) ? $attributes['mediaSwitcherBack'] : 'icon'; // 'icon' | 'image'
+$iconBack_slug = isset($attributes['iconBack']) ? $attributes['iconBack'] : '';
 $frontendIconBack = isset($attributes['frontendIconBack']) ? $attributes['frontendIconBack'] : '';
+$iconBackHtml = Helper::render_icon($iconBack_slug, ['fallback' => $frontendIconBack]);
 
 $headingTextBack = fb_norm_str(isset($attributes['headingTextBack']) ? $attributes['headingTextBack'] : 'Branding');
 $headingTagBack = fb_tag_whitelist(isset($attributes['headingTagBack']) ? $attributes['headingTagBack'] : 'h2', 'h2');
@@ -447,7 +453,9 @@ $flipBoxTabletSwitcher = isset($attributes['flipBoxTabletSwitcher']) ? !empty($a
 $flipBoxMobileSwitcher = isset($attributes['flipBoxMobileSwitcher']) ? !empty($attributes['flipBoxMobileSwitcher']) : false;
 
 $btnIconSwitcherBack = isset($attributes['buttonIconSwitcherBack']) ? !empty($attributes['buttonIconSwitcherBack']) : true;
+$btnIconBack_slug = isset($attributes['btnIconBack']) ? $attributes['btnIconBack'] : '';
 $frontendBtnIconBack = isset($attributes['frontendBtnIconBack']) ? $attributes['frontendBtnIconBack'] : '';
+$btnIconBackHtml = Helper::render_icon($btnIconBack_slug, ['fallback' => $frontendBtnIconBack]);
 
 /* ---------- dynamic toggles (Title / Desc / Buttons) ---------- */
 $dynamicTitleEnabled = !empty($attributes['dynamicTitleEnabled']);
@@ -757,7 +765,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 
 								<?php if ($mediaSwitcher === 'icon' && $frontendIcon): ?>
 									<div class="fb-icon-wrapper">
-										<?php echo $frontendIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<?php echo $iconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
@@ -792,7 +800,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 											<span><?php echo esc_html($finalMainButtonText); ?></span>
 											<?php if ($btnIconSwitcher && $frontendBtnIcon): ?>
 												<div class="fb-btn-icon-wrapper">
-													<?php echo $frontendBtnIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+													<?php echo $btnIconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 												</div>
 											<?php endif; ?>
 										</a>
@@ -820,7 +828,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 
 								<?php if ($mediaSwitcherBack === 'icon' && $frontendIconBack): ?>
 									<div class="fb-icon-wrapper">
-										<?php echo $frontendIconBack; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+										<?php echo $iconBackHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 									</div>
 								<?php endif; ?>
 							</div>
@@ -867,7 +875,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 											<span><?php echo esc_html($finalBackButtonText); ?></span>
 											<?php if ($btnIconSwitcherBack && $frontendBtnIconBack): ?>
 												<div class="fb-btn-icon-wrapper">
-													<?php echo $frontendBtnIconBack; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+													<?php echo $btnIconBackHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 												</div>
 											<?php endif; ?>
 										</a>
