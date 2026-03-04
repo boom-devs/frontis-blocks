@@ -429,7 +429,9 @@ $btn_one_link = fb_norm_str(isset($attributes['info_Button_Link']) ? $attributes
 $btn_one_text = fb_norm_str(isset($attributes['info_Button_Text']) ? $attributes['info_Button_Text'] : 'Learn More');
 $btn_one_icon_position = fb_norm_str(isset($attributes['btnIconPosition']) ? $attributes['btnIconPosition'] : 'right');
 $btn_one_icon_switcher = isset($attributes['buttonIconSwitcher']) ? !empty($attributes['buttonIconSwitcher']) : true;
-$btn_one_icon_html = isset($attributes['btnFrontendIcon']) ? $attributes['btnFrontendIcon'] : '';
+$btn_one_icon = isset($attributes['btnIcon']) ? $attributes['btnIcon'] : '';
+$btn_one_icon_frontend = isset($attributes['btnFrontendIcon']) ? $attributes['btnFrontendIcon'] : '';
+$btn_one_icon_html = Helper::render_icon($btn_one_icon, ['fallback' => $btn_one_icon_frontend]);
 $btn_one_target_url = !empty($attributes['btnOneTargetUrl']);
 
 $btn_two_switcher = isset($attributes['btnTwoSwitcher']) ? !empty($attributes['btnTwoSwitcher']) : true;
@@ -437,7 +439,9 @@ $btn_two_link = fb_norm_str(isset($attributes['btnTwoLink']) ? $attributes['btnT
 $btn_two_text = fb_norm_str(isset($attributes['btnTwoText']) ? $attributes['btnTwoText'] : 'Learn More');
 $btn_two_icon_position = fb_norm_str(isset($attributes['btnTwoIconPosition']) ? $attributes['btnTwoIconPosition'] : 'right');
 $btn_two_icon_switcher = isset($attributes['buttonTwoIconSwitcher']) ? !empty($attributes['buttonTwoIconSwitcher']) : true;
-$btn_two_icon_html = isset($attributes['btnTwoFrontendIcon']) ? $attributes['btnTwoFrontendIcon'] : '';
+$btn_two_icon = isset($attributes['btnTwoIcon']) ? $attributes['btnTwoIcon'] : '';
+$btn_two_icon_frontend = isset($attributes['btnTwoFrontendIcon']) ? $attributes['btnTwoFrontendIcon'] : '';
+$btn_two_icon_html = Helper::render_icon($btn_two_icon, ['fallback' => $btn_two_icon_frontend]);
 $btn_two_target_url = !empty($attributes['btnTwoTargetUrl']);
 
 $cta_global_wrapper_id = fb_norm_str(isset($attributes['ctaGlobalWraperID']) ? $attributes['ctaGlobalWraperID'] : '');

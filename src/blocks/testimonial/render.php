@@ -654,12 +654,7 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 	for ($i = 0; $i < $count; $i++) {
 		$out .= '<div class="fb-testimonial-rating-icon">';
 		if ($testimonial_rating_icon_align === 'icon' && (!empty($testimonial_rating_icon) || !empty($testimonial_rating_icon_slug))) {
-			$icon_html = Helper::render_icon($testimonial_rating_icon_slug);
-			if ($icon_html) {
-				$out .= $icon_html;
-			} else {
-				$out .= $testimonial_rating_icon;
-			}
+			$out .= Helper::render_icon($testimonial_rating_icon_slug, ['fallback' => $testimonial_rating_icon]);
 		} elseif ($testimonial_rating_icon_align === 'image' && !empty($testimonial_rating_image_url)) {
 			$out .= '<img src="' . esc_url($testimonial_rating_image_url) . '" alt="' . esc_attr($testimonial_rating_image_alt) . '" loading="lazy" decoding="async" />';
 		}
@@ -755,9 +750,9 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
 								<div class="fb-testimonial-quote-icon">
 									<?php 
-									$icon_html = Helper::render_icon($testimonial_quote_icon_slug);
-									if ($icon_html) {
-										echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									$testimonial_quote_icon_html = Helper::render_icon($testimonial_quote_icon_slug);
+									if ($testimonial_quote_icon_html) {
+										echo $testimonial_quote_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									} else {
 										echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									}
@@ -847,9 +842,9 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
 								<div class="fb-testimonial-quote-icon">
 									<?php 
-									$icon_html = Helper::render_icon($testimonial_quote_icon_slug);
-									if ($icon_html) {
-										echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									$testimonial_quote_icon_html = Helper::render_icon($testimonial_quote_icon_slug);
+									if ($testimonial_quote_icon_html) {
+										echo $testimonial_quote_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									} else {
 										echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									}
@@ -939,9 +934,9 @@ $render_rating_icons = function () use ($testimonial_rating_number, $testimonial
 							<?php if ($testimonial_quote_icon_align === 'icon' && !empty($testimonial_quote_icon)): ?>
 								<div class="fb-testimonial-quote-icon">
 									<?php 
-									$icon_html = Helper::render_icon($testimonial_quote_icon_slug);
-									if ($icon_html) {
-										echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									$testimonial_quote_icon_html = Helper::render_icon($testimonial_quote_icon_slug);
+									if ($testimonial_quote_icon_html) {
+										echo $testimonial_quote_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									} else {
 										echo $testimonial_quote_icon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									}

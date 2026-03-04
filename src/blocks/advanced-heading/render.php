@@ -568,6 +568,8 @@ $wrapper_attributes = get_block_wrapper_attributes([
 	'class' => implode(' ', $wrapper_classes_arr),
 ]);
 
+$heading_icon_html = Helper::render_icon($heading_icon, ['fallback' => $heading_icon_frontend]);
+
 ?>
 
 <div <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
@@ -577,14 +579,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 			<div class="fb-advanced-icon-wrapper"
 				style="justify-content:<?php echo esc_attr($heading_alignment ?: 'initial'); ?>;">
 				<div class="fb-advanced-icon">
-					<?php 
-					$icon_html = Helper::render_icon($heading_icon);
-					if ($icon_html) {
-						echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					} else {
-						echo $heading_icon_frontend; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-					}
-					?>
+					<?php echo $heading_icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 			</div>
 		<?php endif; ?>
