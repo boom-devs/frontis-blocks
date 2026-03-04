@@ -376,13 +376,17 @@ $ButtonAlignment         = fb_norm_str( isset($attributes['ButtonAlignment']) ? 
 $ButtonText              = fb_norm_str( isset($attributes['ButtonText']) ? $attributes['ButtonText'] : 'Button One' );
 $ButtonUrl               = fb_norm_str( isset($attributes['ButtonUrl']) ? $attributes['ButtonUrl'] : '' );
 $ButtonTargetUrl         = ! empty( $attributes['ButtonTargetUrl'] );
+$buttonIcon              = isset($attributes['ButtonIcon']) ? $attributes['ButtonIcon'] : '';
 $frontendButtonIcon     = isset($attributes['frontendButtonIcon']) ? $attributes['frontendButtonIcon'] : '';
+$buttonIconHtml          = Helper::render_icon( $buttonIcon, ['fallback' => $frontendButtonIcon] );
 $buttonIconAlign        = isset($attributes['buttonIconAlign']) ? $attributes['buttonIconAlign'] : 'none';
 
 $ButtonTwoText          = fb_norm_str( isset($attributes['ButtonTwoText']) ? $attributes['ButtonTwoText'] : 'Button Two' );
 $ButtonTwoUrl           = fb_norm_str( isset($attributes['ButtonTwoUrl']) ? $attributes['ButtonTwoUrl'] : '' );
 $ButtonTwoTargetUrl     = ! empty( $attributes['ButtonTwoTargetUrl'] );
+$buttonTwoIcon          = isset($attributes['ButtonTwoIcon']) ? $attributes['ButtonTwoIcon'] : '';
 $frontendButtonTwoIcon  = isset($attributes['frontendButtonTwoIcon']) ? $attributes['frontendButtonTwoIcon'] : '';
+$buttonTwoIconHtml      = Helper::render_icon( $buttonTwoIcon, ['fallback' => $frontendButtonTwoIcon] );
 $buttonTwoIconAlign     = isset($attributes['buttonTwoIconAlign']) ? $attributes['buttonTwoIconAlign'] : 'none';
 
 $connectorSwitcher      = isset($attributes['connectorSwitcher']) ? !empty($attributes['connectorSwitcher']) : true;
@@ -541,7 +545,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $buttonIconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -569,7 +573,7 @@ $wrapperAttributes = get_block_wrapper_attributes([
 					<?php if ( $buttonTwoIconAlign === 'icon-text' ) : ?>
 						<div class="fb-advanced-button-icon-wrapper">
 							<div class="fb-advanced-button-icon">
-								<?php echo $frontendButtonTwoIcon; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $buttonTwoIconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</div>
 						</div>
 					<?php endif; ?>

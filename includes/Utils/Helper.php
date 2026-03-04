@@ -1337,8 +1337,11 @@ class Helper
      */
     public static function render_icon($icon_name, $extra_props = [])
     {
+        $fallback = isset($extra_props['fallback']) ? $extra_props['fallback'] : '';
+        unset($extra_props['fallback']);
+
         if (empty($icon_name)) {
-            return '';
+            return $fallback;
         }
 
         static $icon_data = null;
@@ -1350,7 +1353,7 @@ class Helper
         }
 
         if (empty($icon_data) || !isset($icon_data[$icon_name])) {
-            return '';
+            return $fallback;
         }
 
         $icon = $icon_data[$icon_name];
