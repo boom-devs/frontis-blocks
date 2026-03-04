@@ -416,7 +416,9 @@ $teamMemberSocialProfileSeparator = fb_norm_str(isset($attributes['teamMemberSoc
 $teamMemberSocialItems = (isset($attributes['frontendTeamMemberSocialItems']) && is_array($attributes['frontendTeamMemberSocialItems'])) ? $attributes['frontendTeamMemberSocialItems'] : array();
 $teamMemberSocialType = fb_norm_str(isset($attributes['teamMemberSocialType']) ? $attributes['teamMemberSocialType'] : 'content');
 $socialIconBtnSwitcher = isset($attributes['socialIconBtnSwitcher']) ? !empty($attributes['socialIconBtnSwitcher']) : false;
-$socialIconBtnIcon = isset($attributes['frontendSocialIconBtnIcon']) ? $attributes['frontendSocialIconBtnIcon'] : '';
+$socialIconBtnIcon = fb_norm_str(isset($attributes['socialIconBtnIcon']) ? $attributes['socialIconBtnIcon'] : '');
+$socialIconBtnIconHtml = Helper::render_icon($socialIconBtnIcon, ['fallback' => $frontendSocialIconBtnIcon]);
+$frontendSocialIconBtnIcon = fb_norm_str(isset($attributes['frontendSocialIconBtnIcon']) ? $attributes['frontendSocialIconBtnIcon'] : '');
 $teamMemberSocialProfileSeparatorPosition = fb_norm_str(isset($attributes['teamMemberSocialProfileSeparatorPosition']) ? $attributes['teamMemberSocialProfileSeparatorPosition'] : 'top');
 
 $teamMemberDesktopSwitcher = isset($attributes['teamMemberDesktopSwitcher']) ? !empty($attributes['teamMemberDesktopSwitcher']) : false;
@@ -623,7 +625,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 							<?php if ($socialIconBtnSwitcher): ?>
 								<button class="fb-team-member-social-icon-wrapper-btn"
 									aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-									<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                    <?php echo $socialIconBtnIconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 								</button>
 							<?php endif; ?>
 
@@ -697,7 +699,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 						<?php if ($socialIconBtnSwitcher): ?>
 							<button class="fb-team-member-social-icon-wrapper-btn"
 								aria-label="<?php esc_attr_e('Social Icon', 'frontis-blocks'); ?>">
-								<?php echo $socialIconBtnIcon ? $socialIconBtnIcon : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php echo $socialIconBtnIconHtml; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 							</button>
 						<?php endif; ?>
 

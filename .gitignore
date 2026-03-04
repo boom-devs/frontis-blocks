@@ -10,7 +10,6 @@ node_modules/
 *.tar.gz
 *.zip
 .tags*
-backlog/
 RELEASE_NOTES.md
 .vscode/
 yarn.lock

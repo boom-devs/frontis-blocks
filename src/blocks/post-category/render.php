@@ -4,9 +4,7 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Server-side rendering for the Post Category block
- */
+use FrontisBlocks\Utils\Helper;
 
 // Helper functions
 if (!function_exists('fb_norm_str')) {
@@ -55,7 +53,9 @@ $grid_columns = isset($attributes['gridColumns']) ? $attributes['gridColumns'] :
 $list_style = fb_norm_str(isset($attributes['listStyle']) ? $attributes['listStyle'] : 'none');
 
 // Read More attributes
+$read_more_icon_slug = fb_norm_str(isset($attributes['readMoreIcon']) ? $attributes['readMoreIcon'] : '');
 $read_more_icon_frontend = fb_norm_str(isset($attributes['readMoreIconFrontend']) ? $attributes['readMoreIconFrontend'] : '');
+$read_more_icon_html = Helper::render_icon($read_more_icon_slug, ['fallback' => $read_more_icon_frontend]);
 $read_more_switcher = isset($attributes['readMoreSwitcher']) ? (bool) $attributes['readMoreSwitcher'] : false;
 $read_more_text = fb_norm_str(isset($attributes['readMoreText']) ? $attributes['readMoreText'] : 'View All');
 $read_more_icon_align = fb_norm_str(isset($attributes['readMoreIconAlign']) ? $attributes['readMoreIconAlign'] : 'none');
@@ -336,7 +336,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
 
                 if ($args['read_more_icon_align'] === 'icon-text') {
                     $html .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                        . $args['read_more_icon_frontend'] .
+                        . $args['read_more_icon_html'] .
                         '</div></div>';
                 }
 
@@ -348,7 +348,7 @@ if (!function_exists('fb_build_taxonomy_hierarchy')) {
 
                 if ($args['read_more_icon_align'] === 'icon-only') {
                     $html .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                        . $args['read_more_icon_frontend'] .
+                        . $args['read_more_icon_html'] .
                         '</div></div>';
                 }
 
@@ -480,7 +480,7 @@ if (empty($taxonomy_type)) {
 
             if ($read_more_icon_align === 'icon-only' || $read_more_icon_align === 'icon-text') {
                 $output .= '<div class="fb-taxonomy-read-more-icon-wrapper">';
-                $output .= '<div class="fb-taxonomy-read-more-icon">' . $read_more_icon_frontend . '</div>';
+                $output .= '<div class="fb-taxonomy-read-more-icon">' . $read_more_icon_html . '</div>';
                 $output .= '</div>';
             }
 
@@ -520,6 +520,7 @@ if (empty($taxonomy_type)) {
         'read_more_icon_frontend' => $read_more_icon_frontend,
         'read_more_icon_image_url' => $read_more_icon_image_url,
         'read_more_icon_image_alt' => $read_more_icon_image_alt,
+        'read_more_icon_html' => $read_more_icon_html,
         'taxonomy_type' => $taxonomy_type,
         'show_post_type_label' => $show_post_type_label,
     ];
@@ -579,7 +580,7 @@ if (empty($taxonomy_type)) {
 
                 if ($read_more_icon_align === 'icon-text') {
                     $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                        . $read_more_icon_frontend .
+                        . $read_more_icon_html .
                         '</div></div>';
                 }
 
@@ -591,7 +592,7 @@ if (empty($taxonomy_type)) {
 
                 if ($read_more_icon_align === 'icon-only') {
                     $output .= '<div class="fb-taxonomy-read-more-icon-wrapper"><div class="fb-taxonomy-read-more-icon">'
-                        . $read_more_icon_frontend .
+                        . $read_more_icon_html .
                         '</div></div>';
                 }
 
