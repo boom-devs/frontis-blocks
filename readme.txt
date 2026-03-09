@@ -252,6 +252,9 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **New**: Added Google Fonts preload toggle in Performance settings.
 - **Fixed**: Resolved Google Fonts URL sanitization issues.
 - **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
+- **New**: Added Google Fonts preload toggle in Performance settings.
+- **Fixed**: Resolved Google Fonts URL sanitization issues.
+- **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
 
 = 1.1.9 – 02 March 2026 =
 - **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls and SMTP email delivery.
