@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
 
 $items = isset($attributes['menuItems']) ? $attributes['menuItems'] : array();
 $trigger_type = isset($attributes['triggerType']) ? $attributes['triggerType'] : 'hover';
-$block_id = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+$block_id = isset($attributes['blockID']) ? $attributes['blockID'] : '';
 $mega_menu_desktop_switcher = isset($attributes['megaMenuDesktopSwitcher']) ? $attributes['megaMenuDesktopSwitcher'] : '';
 $mega_menu_tablet_switcher = isset($attributes['megaMenuTabletSwitcher']) ? $attributes['megaMenuTabletSwitcher'] : '';
 $mega_menu_mobile_switcher = isset($attributes['megaMenuMobileSwitcher']) ? $attributes['megaMenuMobileSwitcher'] : '';
