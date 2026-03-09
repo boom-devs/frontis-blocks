@@ -59,6 +59,7 @@ class Settings extends AjaxBase
 			'get_custom_icons_category',
 			'update_allowed_blocks',
 			'get_allowed_blocks',
+			'google_fonts_preload',
 			'get_plugin_changelog',
 		];
 
@@ -121,6 +122,11 @@ class Settings extends AjaxBase
 	public function copy_paste_style()
 	{
 		$this->handle_option_update('copy_paste_style', 'boolean');
+	}
+
+	public function google_fonts_preload()
+	{
+		$this->handle_option_update('google_fonts_preload', 'boolean');
 	}
 
 	public function file_generation()
