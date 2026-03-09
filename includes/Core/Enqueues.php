@@ -208,7 +208,7 @@ class Enqueues
         $google_font_url = get_option('fb_google_fonts_url');
         
         if ($google_font_url) {
-            $is_preload = get_option('fb_google_fonts_preload');
+            $is_preload = get_option('fb_google_fonts_preload', 'true');
             // Option is stored as JSON string "true"/"false" by the handler
             $is_preload = filter_var($is_preload, FILTER_VALIDATE_BOOLEAN);
 
