@@ -37,7 +37,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	useBlockIdGenerator({
 		clientId,
 		blockID,
-		blockPrefix: 'fb-advanced-image',
+		blockPrefix: 'fb-advanced-megamenu',
 		isSelected,
 		attributes,
 		setAttributes,
