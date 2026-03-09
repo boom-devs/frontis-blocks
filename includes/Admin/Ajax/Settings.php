@@ -126,7 +126,7 @@ class Settings extends AjaxBase
 
 	public function google_fonts_preload()
 	{
-		$is_preload = get_option('fb_google_fonts_preload', 'true');
+		$is_preload = get_option('fb_google_fonts_preload', 'false');
 		$this->handle_option_update('google_fonts_preload', 'boolean');
 	}
 
