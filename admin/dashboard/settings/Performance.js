@@ -30,7 +30,7 @@ const Performance = () => {
 					const merged = { ...prevOptions };
 					Object.keys(response.data).forEach(key => {
 						const value = response.data[key];
-						if (value !== undefined && value !== null && value !== '' && value !== false) {
+						if (value !== undefined && value !== null && value !== '') {
 							try {
 								merged[key] = JSON.parse(value);
 							} catch (e) {
