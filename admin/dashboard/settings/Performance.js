@@ -5,7 +5,7 @@ import FBSwitch from '../../components/common/Switch';
 
 const Performance = () => {
 	const [options, setOptions] = useState({
-		google_fonts_preload: true,
+		google_fonts_preload: false,
 		preload_local_fonts: false,
 	});
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
