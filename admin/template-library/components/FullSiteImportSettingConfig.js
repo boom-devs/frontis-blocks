@@ -39,13 +39,24 @@ const FullSiteImportSettingConfig = ({
   const [currentStep, setCurrentStep] = useState("");
   const [stepsOptions, setStepOptions] = useState([]);
   const [uploadsUpdated, setUploadsUpdated] = useState(false);
+  const [isImportFailed, setIsImportFailed] = useState(false);
 
-  const updateStepStatus = (key, status) => {
-    setStepOptions(prev =>
-      prev.map(step =>
-        step.key === key ? { ...step, status } : step
-      )
-    );
+  const updateStepStatus = (key, status, cascade = false) => {
+    setStepOptions(prev => {
+      if (!cascade) {
+        return prev.map(step =>
+          step.key === key ? { ...step, status } : step
+        );
+      }
+      let found = false;
+      return prev.map(step => {
+        if (step.key === key) found = true;
+        if (found) {
+          return { ...step, status: "failed" };
+        }
+        return step;
+      });
+    });
   };
 
   const [globalColors, setGlobalColors] = useState(template.colors);
@@ -852,7 +863,8 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
 
   const handleImport = useCallback(async () => {
     setIsImporting(true);
-    dispatch(setAttribute({ showFullSiteImportModal: true }));
+    setIsImportFailed(false);
+    dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null }));
   
     // Define steps once
     const allSteps = [
@@ -871,16 +883,18 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
     ];
   
     setStepOptions(allSteps);
+    let activeStepKey = "";
   
     try {
       /** STEP 1: FETCH SITE **/
-      setCurrentStep("fetch_site");
-      updateStepStatus("fetch_site", "running");
+      activeStepKey = "fetch_site";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(5);
   
       const siteResp = await getTemplatesData("import/site", "site_id", template.id);
       if (!siteResp?.data) throw new Error("Failed to fetch site data");
-      updateStepStatus("fetch_site", "success");
+      updateStepStatus(activeStepKey, "success");
   
       const siteData = siteResp.data;
       const pages = siteData?.pages || [];
@@ -893,8 +907,9 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
       console.log("Site data:", siteData);
   
       /** STEP 2: UPLOAD FILES **/
-      setCurrentStep("upload_files");
-      updateStepStatus("upload_files", "running");
+      activeStepKey = "upload_files";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(20);
   
       const uploadRes = await uploadFiles(uploads);
@@ -902,22 +917,25 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
       updateStepStatus("upload_files", uploadRes?.skipped ? "skipped" : "success");
   
       /** STEP 3: THEME **/
-      setCurrentStep("theme");
-      updateStepStatus("theme", "running");
+      activeStepKey = "theme";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(30);
   
       const themeRes = await activateTheme(template.theme || "frontis");
-      updateStepStatus("theme", themeRes?.skipped ? "skipped" : "success");
+      updateStepStatus(activeStepKey, themeRes?.skipped ? "skipped" : "success");
   
       /** STEP 4: PLUGINS **/
-      setCurrentStep("plugins");
-      updateStepStatus("plugins", "running");
+      activeStepKey = "plugins";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(45);
   
       const pluginRes = await installActivatePlugins(template.dependencies || []);
-      updateStepStatus("plugins", pluginRes?.skipped ? "skipped" : "success");
+      updateStepStatus(activeStepKey, pluginRes?.skipped ? "skipped" : "success");
 
       // After plugins step...
+      activeStepKey = "headers";
       setCurrentStep("headers");
       updateStepStatus("headers", "running");
       updateStepStatus("footers", "running");
@@ -933,55 +951,61 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
           updateStepStatus("headers", "success");
           updateStepStatus("footers", "success");
       } else {
-          updateStepStatus("headers", "error");
-          updateStepStatus("footers", "error");
+          updateStepStatus("headers", "failed");
+          updateStepStatus("footers", "failed");
+          activeStepKey = "headers"; // or both
           throw new Error("Header/Footer import failed");
       }
 
       setImportProgress(65);
 
       // Step 6: Import Templates (using navigation mapping)
-      setCurrentStep("templates");
-      updateStepStatus("templates", "running");
+      activeStepKey = "templates";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
 
       const templateResult = await handleImportTemplates(templates, navigationMapping, isUploadsSuccessful);
 
       if (templateResult.success) {
-          updateStepStatus("templates", "success");
+          updateStepStatus(activeStepKey, "success");
       } else {
-          updateStepStatus("templates", "error");
+          updateStepStatus(activeStepKey, "failed");
           throw new Error("Templates import failed");
       }
 
       setImportProgress(70);
 
       // STEP 6: PAGES
-      setCurrentStep("pages");
-      updateStepStatus("pages", "running");
+      activeStepKey = "pages";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(75);
 
       const pageResult = await handleStorePages(pages || [], isUploadsSuccessful);
-      updateStepStatus("pages", pageResult.success ? "success" : "warning");
+      updateStepStatus(activeStepKey, pageResult.success ? "success" : "warning");
 
       // STEP 7: POSTS
-      setCurrentStep("posts");
-      updateStepStatus("posts", "running");
+      activeStepKey = "posts";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(80);
 
       const postsResult = await handleStorePosts(posts || [], isUploadsSuccessful);
-      updateStepStatus("posts", postsResult.success ? "success" : "warning");
+      updateStepStatus(activeStepKey, postsResult.success ? "success" : "warning");
 
       // STEP 8: Update global Styles
-      setCurrentStep("global_styles");
-      updateStepStatus("global_styles", "running");
+      activeStepKey = "global_styles";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(90);
 
       await handleUpdateState();
-      updateStepStatus("global_styles", "success");
+      updateStepStatus(activeStepKey, "success");
 
       // STEP 9: Asset Generation
-      setCurrentStep("asset_generation");
-      updateStepStatus("asset_generation", "running");
+      activeStepKey = "asset_generation";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(95);
 
       try {
@@ -993,18 +1017,23 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
       }
 
       // STEP 10: FINALIZE
-      setCurrentStep("finalize");
-      updateStepStatus("finalize", "running");
+      activeStepKey = "finalize";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
       setImportProgress(100);
   
       await new Promise(r => setTimeout(r, 600));
-      updateStepStatus("finalize", "success");
+      updateStepStatus(activeStepKey, "success");
 
   
       dispatch(setAttribute({ importSuccess: true }));
 
     } catch (err) {
       console.error("Import Error:", err);
+      setIsImportFailed(true);
+      if (activeStepKey) {
+        updateStepStatus(activeStepKey, "failed", true);
+      }
       dispatch(setAttribute({ importSuccess: false }));
       toast.error("Import failed. See console for details");
   
@@ -1079,6 +1108,8 @@ const handleImportTemplates = async (templates = [], navigationMapping = {}, upl
             }}
             frontPageUrl="/"
             isImporting={isImporting}
+            isImportFailed={isImportFailed}
+            onRetry={handleImport}
           />
         )}
     </>

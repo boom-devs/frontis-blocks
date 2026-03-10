@@ -1,7 +1,7 @@
 # Frontis Blocks — System Design & Architecture Audit
 
 **Date:** 2026-03-02  
-**Version Audited:** 1.1.9  
+**Version Audited:** 1.2.0  
 
 ---
 

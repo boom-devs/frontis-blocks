@@ -206,11 +206,23 @@ class Enqueues
     {
         // Enqueue google fonts
         $google_font_url = get_option('fb_google_fonts_url');
+        
         if ($google_font_url) {
+            $is_preload = get_option('fb_google_fonts_preload', 'false');
+            // Option is stored as JSON string "true"/"false" by the handler
+            $is_preload = filter_var($is_preload, FILTER_VALIDATE_BOOLEAN);
+
             echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
             echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-            echo '<link rel="preload" as="style" href="' . esc_url( $google_font_url ) . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
-            // echo '<noscript><link rel="stylesheet" href="' . $google_font_url . '"></noscript>';
+
+            if ($is_preload !== false) {
+                // High performance Preload (Default)
+                echo '<link rel="preload" as="style" href="' . esc_url($google_font_url) . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
+                echo '<noscript><link rel="stylesheet" href="' . esc_url($google_font_url) . '"></noscript>';
+            } else {
+                // Standard Stylesheet
+                echo '<link rel="stylesheet" href="' . esc_url($google_font_url) . '">';
+            }
         }
     }
 }
