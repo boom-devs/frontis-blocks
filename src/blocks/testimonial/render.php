@@ -644,7 +644,7 @@ $wrapper_attributes = get_block_wrapper_attributes([
 ]);
 
 /* Helper: render rating icons (icon | image), mirrors save.js */
-$render_rating_icons = function () use ($testimonial_rating_number, $testimonial_rating_icon_align, $testimonial_rating_icon, $testimonial_rating_image_url, $testimonial_rating_image_alt) {
+$render_rating_icons = function () use ($testimonial_rating_number, $testimonial_rating_icon_align, $testimonial_rating_icon, $testimonial_rating_icon_slug, $testimonial_rating_image_url, $testimonial_rating_image_alt) {
 	$count = max(0, (int) $testimonial_rating_number);
 	if ($count === 0 || $testimonial_rating_icon_align === 'none') {
 		return '';

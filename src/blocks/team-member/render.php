@@ -417,8 +417,8 @@ $teamMemberSocialItems = (isset($attributes['frontendTeamMemberSocialItems']) &&
 $teamMemberSocialType = fb_norm_str(isset($attributes['teamMemberSocialType']) ? $attributes['teamMemberSocialType'] : 'content');
 $socialIconBtnSwitcher = isset($attributes['socialIconBtnSwitcher']) ? !empty($attributes['socialIconBtnSwitcher']) : false;
 $socialIconBtnIcon = fb_norm_str(isset($attributes['socialIconBtnIcon']) ? $attributes['socialIconBtnIcon'] : '');
-$socialIconBtnIconHtml = Helper::render_icon($socialIconBtnIcon, ['fallback' => $frontendSocialIconBtnIcon]);
 $frontendSocialIconBtnIcon = fb_norm_str(isset($attributes['frontendSocialIconBtnIcon']) ? $attributes['frontendSocialIconBtnIcon'] : '');
+$socialIconBtnIconHtml = Helper::render_icon($socialIconBtnIcon, ['fallback' => $frontendSocialIconBtnIcon]);
 $teamMemberSocialProfileSeparatorPosition = fb_norm_str(isset($attributes['teamMemberSocialProfileSeparatorPosition']) ? $attributes['teamMemberSocialProfileSeparatorPosition'] : 'top');
 
 $teamMemberDesktopSwitcher = isset($attributes['teamMemberDesktopSwitcher']) ? !empty($attributes['teamMemberDesktopSwitcher']) : false;
