@@ -1,17 +1,17 @@
 import { __ } from "@wordpress/i18n";
 import { useState, useEffect } from "@wordpress/element";
-import Switch from "rc-switch";
 import { toast } from 'react-toastify';
+import FBSwitch from '../../components/common/Switch';
 
 const Performance = () => {
 	const [options, setOptions] = useState({
-		google_fonts: false,
+		google_fonts_preload: false,
 		preload_local_fonts: false,
 	});
 	const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
 
 	useEffect(() => {
-		// fetchOptions();
+		fetchOptions();
 	  }, []);
 	
 	  const fetchOptions = () => {
@@ -26,7 +26,20 @@ const Performance = () => {
 		  },
 		  success: function(response) {
 			if (response.success) {
-			  setOptions(prevOptions => ({ ...prevOptions, ...response.data }));
+				setOptions(prevOptions => {
+					const merged = { ...prevOptions };
+					Object.keys(response.data).forEach(key => {
+						const value = response.data[key];
+						if (value !== undefined && value !== null && value !== '') {
+							try {
+								merged[key] = JSON.parse(value);
+							} catch (e) {
+								merged[key] = value;
+							}
+						}
+					});
+					return merged;
+				});
 			} else {
 			  toast.error(__(`Failed to fetch options: ${response.data?.message || 'Unknown error'}`, 'frontis-blocks'), {
 				position: "top-right",
@@ -103,11 +116,8 @@ const Performance = () => {
 	  };
 
 	const handleSwitchChange = (option) => {
-		setOptions((prevState) => ({
-			...prevState,
-			[option]: !prevState[option],
-		}));
-		saveOption(option, !prevState[option]);
+		const newValue = !options[option];
+		saveOption(option, newValue);
 	};
 
 	return (
@@ -115,24 +125,21 @@ const Performance = () => {
 
 			<div className="fb-option">
 				<div className="fb-option-label">
-					<h4 className="p1">{__("Load Google Fonts Locally", "frontis-blocks")}</h4>
+					<h4 className="p1">{__("Preload Google Fonts", "frontis-blocks")}</h4>
 					<p className="p2">
 						{__(
-							"Load Google Fonts Locally for performance improvement",
+							"Enable high-performance font loading (rel='preload'). If disabled, standard loading (rel='stylesheet') will be used.",
 							"frontis-blocks",
 						)}
 					</p>
 				</div>
 
-				{/* <div className="fb-option-input">
-					<Switch
-						checked={options.google_fonts}
-						onChange={() => handleSwitchChange("google_fonts")}
+				<div className="fb-block-card-switch">
+					<FBSwitch
+						checked={options.google_fonts_preload}
+						onChange={() => handleSwitchChange("google_fonts_preload")}
 					/>
-				</div> */}
-				<p className="fb-button-upcoming">
-					{__('Coming Soon', 'frontis-blocks')}
-				</p>
+				</div>
 			</div>
 
 			<div className="fb-option">
@@ -145,12 +152,6 @@ const Performance = () => {
 						)}
 					</p>
 				</div>
-				{/* <div className="fb-option-input">
-					<Switch
-						checked={options.preload_local_fonts}
-						onChange={() => handleSwitchChange("preload_local_fonts")}
-					/>
-				</div> */}
 				<p className="fb-button-upcoming">
 					{__('Coming Soon', 'frontis-blocks')}
 				</p>

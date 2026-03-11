@@ -59,6 +59,7 @@ class Settings extends AjaxBase
 			'get_custom_icons_category',
 			'update_allowed_blocks',
 			'get_allowed_blocks',
+			'google_fonts_preload',
 			'get_plugin_changelog',
 		];
 
@@ -121,6 +122,12 @@ class Settings extends AjaxBase
 	public function copy_paste_style()
 	{
 		$this->handle_option_update('copy_paste_style', 'boolean');
+	}
+
+	public function google_fonts_preload()
+	{
+		$is_preload = get_option('fb_google_fonts_preload', 'false');
+		$this->handle_option_update('google_fonts_preload', 'boolean');
 	}
 
 	public function file_generation()
@@ -441,7 +448,7 @@ class Settings extends AjaxBase
 		$old_value_decoded = is_string($old_value_raw) ? json_decode($old_value_raw, true) : $old_value_raw;
 		$old_value_sanitized = $this->sanitize_option_value($old_value_decoded === null && is_string($old_value_raw) ? $old_value_raw : ($old_value_decoded ?? $old_value_raw), $type);
 
-		if ($old_value_sanitized === $sanitized_value) {
+		if ($old_value_raw !== false && $old_value_sanitized === $sanitized_value) {
 			wp_send_json_success(['message' => 'No changes were made']);
 			return;
 		}
