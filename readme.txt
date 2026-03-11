@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.1.9
+Stable tag: 1.2.0
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -247,6 +247,16 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.0 – 09 March 2026 =
+- **New**: Added Google Fonts preload toggle in Performance settings.
+- **Fixed**: Resolved Google Fonts URL sanitization issues.
+- **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
+- **Fixed**: Resolved SVG rendering and menu URL update issues during full-page site imports.
+- **Fixed**: Improved frontend icon rendering and import modal logic.
+- **Improved**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
+- **Improved**: Refactored Global Settings to remove dead code and improve maintainability.
+- **Maintenance**: Consolidated build system by removing Grunt and pinning dependencies.
 
 = 1.1.9 – 02 March 2026 =
 - **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls and SMTP email delivery.
