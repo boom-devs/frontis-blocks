@@ -102,7 +102,7 @@ export default function LayoutGrid({
                         </div>
                     )}
                     
-                    {showCategorySwitcher && (
+                    {showCategorySwitcher && categories && categories.length > 0 && (
                         <div className="fb_post_grid_categories">
                             {categories.map((category, index) => (
                                 <div className="fb_post_grid_category" key={index}>
@@ -117,7 +117,7 @@ export default function LayoutGrid({
                         </div>
                     )}
 
-                    {showTagSwitcher && (
+                    {showTagSwitcher && tags && tags.length > 0 && (
                         <div className="fb_post_grid_tags">
                             {tags.map((tag, index) => (
                                 <div className="fb_post_grid_tag" key={index}>
@@ -182,7 +182,7 @@ export default function LayoutGrid({
                             <img src={src} alt={title || "Post image"} />
                         )}
 
-                        {showCategorySwitcher && (
+                        {showCategorySwitcher && categories && categories.length > 0 && (
                             <div className="fb_post_grid_categories">
                                 {categories.map((category, index) => (
                                     <div className="fb_post_grid_category" key={index}>
@@ -196,7 +196,7 @@ export default function LayoutGrid({
                                 ))}
                             </div>
                         )}
-                        {showTagSwitcher && (
+                        {showTagSwitcher && tags && tags.length > 0 && (
                             <div className="fb_post_grid_tags">
                                 {tags.map((tag, index) => (
                                     <div className="fb_post_grid_tag" key={index}>
