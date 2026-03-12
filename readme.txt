@@ -248,12 +248,15 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.2.0 – 09 March 2026 =
+= 1.2.0 – 12 March 2026 =
 - **New**: Added Google Fonts preload toggle in Performance settings.
 - **Fixed**: Resolved Google Fonts URL sanitization issues.
 - **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
 - **Fixed**: Resolved SVG rendering and menu URL update issues during full-page site imports.
 - **Fixed**: Improved frontend icon rendering and import modal logic.
+- **Fixed**: Resolved Post Category block title, count, and "View All" button styling issues, along with style-3 default image fallback.
+- **Fixed**: Resolved Post Grid Element Visibility issues for style-2 — categories toggle now auto-enables for style-2 and disables for style-1, and empty category/tag wrappers are no longer rendered.
+- **Fixed**: Resolved icon rendering issues in Team Member and Testimonial blocks on the frontend.
 - **Improved**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
 - **Improved**: Refactored Global Settings to remove dead code and improve maintainability.
 - **Maintenance**: Consolidated build system by removing Grunt and pinning dependencies.
