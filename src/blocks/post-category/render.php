@@ -409,7 +409,7 @@ if (empty($taxonomy_type)) {
 
         $should_render_image = false;
 
-        if ($premade_style === 'style-3' && !empty($term_image)) {
+        if ($premade_style === 'style-3') {
             $should_render_image = true;
         } elseif ($premade_style === 'style-4') {
             $should_render_image = true;
