@@ -1,0 +1,47 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/grid-item",
+    "version": "0.1.0",
+    "title": "Grid Item",
+    "category": "frontis-blocks",
+    "parent": [
+        "frontis-blocks/grid-layout"
+    ],
+    "icon": "layout",
+    "description": "An item in the grid layout.",
+    "attributes": {
+        "id": {
+            "type": "string"
+        },
+        "x": {
+            "type": "number",
+            "default": 0
+        },
+        "y": {
+            "type": "number",
+            "default": 0
+        },
+        "w": {
+            "type": "number",
+            "default": 4
+        },
+        "h": {
+            "type": "number",
+            "default": 4
+        }
+    },
+    "supports": {
+        "html": false,
+        "reusable": false,
+        "spacing": {
+            "padding": true
+        },
+        "color": {
+            "background": true,
+            "text": true,
+            "link": true
+        }
+    },
+    "textdomain": "frontis-blocks"
+}
