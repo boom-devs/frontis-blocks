@@ -1,7 +1,60 @@
-import { Rive } from '@rive-app/canvas';
+import { Rive as RiveCanvas } from '@rive-app/canvas';
+import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 
 (function() {
 	'use strict';
+
+	let playObserver = null;
+	let loadObserver = null;
+
+	// Set up observers for optimization
+	function setupObservers() {
+		if (playObserver && loadObserver) return;
+
+		// 1. PLAYBACK OBSERVER: Controls play/pause when the canvas enters or leaves the screen.
+		playObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const canvas = entry.target;
+
+					if (entry.isIntersecting) {
+						canvas.dataset.wantsPlay = "true";
+						// Only auto-play if the block settings intended for it to autoplay
+						if (canvas._riveInstance && canvas._shouldAutoplay) {
+							canvas._riveInstance.play();
+						}
+					} else {
+						canvas.dataset.wantsPlay = "false";
+						// Pause if no longer visible to save resources
+						if (canvas._riveInstance) {
+							canvas._riveInstance.pause();
+						}
+					}
+				});
+			},
+			{ threshold: 0.05 } // Trigger just as it enters or exits
+		);
+
+		// 2. PRELOAD OBSERVER: Pre-loads the files BEFORE the user scrolls to them
+		loadObserver = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					const canvas = entry.target;
+
+					if (entry.isIntersecting) {
+						if (!canvas._riveInstance && !canvas._isInitializing) {
+							canvas._isInitializing = true;
+							initRiveAnimation(canvas);
+							
+							// Stop loading it multiple times
+							loadObserver.unobserve(canvas);
+						}
+					}
+				});
+			},
+			{ rootMargin: "1500px 0px" } // Triggers 1500 pixels BEFORE they scroll to it!
+		);
+	}
 
 	// Initialize a single Rive animation
 	function initRiveAnimation(canvas) {
@@ -15,13 +68,18 @@ import { Rive } from '@rive-app/canvas';
 		if (!src) return;
 
 		const shouldAutoplay = (hoverEffect === 'play-pause' || hoverEffect === 'play') ? false : autoplay;
+		canvas._shouldAutoplay = shouldAutoplay;
 
+		const riveRenderer = canvas.getAttribute('data-rive-renderer') || 'webgl2';
+		const RiveClass = riveRenderer === 'webgl2' ? RiveWebGL2 : RiveCanvas;
+		
 		try {
 			// First detect animations and state machines
-			const tempRive = new Rive({
+			const tempRive = new RiveClass({
 				src: src,
 				canvas: canvas,
 				autoplay: false,
+				useOffscreenRenderer: true,
 				onLoad: () => {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
@@ -33,10 +91,16 @@ import { Rive } from '@rive-app/canvas';
 					const config = {
 						src: src,
 						canvas: canvas,
-						autoplay: shouldAutoplay,
+						// Only play immediately if already visible
+						autoplay: shouldAutoplay && canvas.dataset.wantsPlay === "true",
+						useOffscreenRenderer: true,
 						automaticallyHandleEvents: true,
 						onLoad: () => {
 							riveInstance.resizeDrawingSurfaceToCanvas();
+							// Double check if it became visible while we were loading it!
+							if (canvas._shouldAutoplay && canvas.dataset.wantsPlay === "true") {
+								riveInstance.play();
+							}
 						},
 						onLoadError: (err) => {
 							console.error('Rive load error:', err);
@@ -50,7 +114,7 @@ import { Rive } from '@rive-app/canvas';
 						config.animations = animations[0];
 					}
 
-					const riveInstance = new Rive(config);
+					const riveInstance = new RiveClass(config);
 
 					// Store instance on canvas for cleanup
 					canvas._riveInstance = riveInstance;
@@ -81,7 +145,10 @@ import { Rive } from '@rive-app/canvas';
 									riveInstance.pause();
 									break;
 								case 'pause':
-									riveInstance.play();
+									// Only resume playing if it is currently visible or meant to autoplay
+									if (canvas.dataset.wantsPlay === "true") {
+										riveInstance.play();
+									}
 									break;
 							}
 						});
@@ -98,10 +165,14 @@ import { Rive } from '@rive-app/canvas';
 
 	// Initialize all Rive animations on the page
 	function initAllRiveAnimations() {
+		setupObservers();
+
 		const canvases = document.querySelectorAll('.fb-rive-canvas');
 		canvases.forEach(canvas => {
-			if (!canvas._riveInstance) {
-				initRiveAnimation(canvas);
+			if (!canvas._isObserved) {
+				playObserver.observe(canvas);
+				loadObserver.observe(canvas);
+				canvas._isObserved = true;
 			}
 		});
 	}

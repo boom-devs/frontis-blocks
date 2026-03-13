@@ -6,6 +6,7 @@ export default function save({ attributes }) {
 	const {
 		blockID,
 		riveAnimationImageUrl,
+		riveRenderer,
 		riveLoop,
 		riveAutoplay,
 		riveAnimationSpeed,
@@ -67,6 +68,7 @@ export default function save({ attributes }) {
 					<canvas
 						className="fb-rive-canvas"
 						data-rive-src={riveAnimationImageUrl}
+						data-rive-renderer={riveRenderer}
 						data-rive-loop={riveLoop}
 						data-rive-autoplay={riveAutoplay}
 						data-rive-speed={riveAnimationSpeed}
