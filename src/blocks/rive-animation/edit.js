@@ -13,7 +13,8 @@ import {
 } from '@wordpress/components';
 import { useEffect, useRef } from '@wordpress/element';
 import { useDeviceType } from "@Config/displayType";
-import { Rive } from '@rive-app/canvas';
+import { Rive as RiveCanvas } from '@rive-app/canvas';
+import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 import Inspector from './inspector';
 
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
@@ -33,7 +34,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		riveAnimationCanvasWidth,
 		riveAnimationCanvasHeight,
 		riveAnimationImageID,
-		riveAnimationImageAlt
+		riveAnimationImageAlt,
+		riveRenderer = 'canvas'
 	} = attributes;
 
 	// Handle block ID generation (handles duplication and initial ID)
@@ -77,13 +79,37 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 
 		const shouldAutoplay = (riveEffectsOnHover === 'play-pause' || riveEffectsOnHover === 'play') ? false : riveAutoplay;
+		let isVisible = false;
 
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					isVisible = entry.isIntersecting;
+					const instance = riveInstanceRef.current;
+					if (instance) {
+						if (isVisible) {
+							if (shouldAutoplay) instance.play();
+						} else {
+							instance.pause();
+						}
+					}
+				});
+			},
+			{ threshold: 0.05 }
+		);
+
+		observer.observe(canvasRef.current);
+		
+		// Conditionally select renderer class based on riveRenderer attribute
+		const RiveClass = riveRenderer === 'webgl2' ? RiveWebGL2 : RiveCanvas;
+		
 		try {
 			// First, detect what's in the file
-			const tempRive = new Rive({
+			const tempRive = new RiveClass({
 				src: riveAnimationImageUrl,
 				canvas: canvasRef.current,
 				autoplay: false,
+				useOffscreenRenderer: true,
 				onLoad: () => {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
@@ -95,12 +121,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 					const config = {
 						src: riveAnimationImageUrl,
 						canvas: canvasRef.current,
-						autoplay: shouldAutoplay,
+						autoplay: shouldAutoplay && isVisible, // Auto-play if visible
+						useOffscreenRenderer: true,
 						automaticallyHandleEvents: true,
 						onLoad: () => {
 							const instance = riveInstanceRef.current;
 							if (instance) {
 								instance.resizeDrawingSurfaceToCanvas();
+								// Double check if it became visible while we were loading it!
+								if (shouldAutoplay && isVisible) {
+									instance.play();
+								}
 							}
 						},
 						onLoadError: (err) => {
@@ -115,7 +146,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						config.animations = animations[0];
 					}
 
-					riveInstanceRef.current = new Rive(config);
+					riveInstanceRef.current = new RiveClass(config);
 				},
 				onLoadError: (err) => {
 					console.error('Rive detection error:', err);
@@ -126,6 +157,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 
 		return () => {
+			observer.disconnect();
 			if (riveInstanceRef.current) {
 				riveInstanceRef.current.cleanup();
 				riveInstanceRef.current = null;
@@ -139,7 +171,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		riveAnimationReverse,
 		riveEffectsOnHover,
 		riveAnimationCanvasWidth,
-		riveAnimationCanvasHeight
+		riveAnimationCanvasHeight,
+		riveRenderer
 	]);
 
 	// Handle canvas resize when dimensions change
@@ -153,13 +186,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	// Handle hover effects
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		const instance = riveInstanceRef.current;
 
-		if (!canvas || !instance || riveEffectsOnHover === 'none') {
+		if (!canvas || riveEffectsOnHover === 'none') {
 			return;
 		}
 
 		const handleMouseEnter = () => {
+			const instance = riveInstanceRef.current;
+			if (!instance) return;
 			switch (riveEffectsOnHover) {
 				case 'play':
 				case 'play-pause':
@@ -175,13 +209,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		};
 
 		const handleMouseLeave = () => {
+			const instance = riveInstanceRef.current;
+			if (!instance) return;
 			switch (riveEffectsOnHover) {
 				case 'play':
 				case 'play-pause':
 					instance.pause();
 					break;
 				case 'pause':
-					instance.play();
+					const shouldAutoplay = (riveEffectsOnHover === 'play-pause' || riveEffectsOnHover === 'play') ? false : riveAutoplay;
+					if (shouldAutoplay) instance.play();
 					break;
 			}
 		};
@@ -195,7 +232,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			canvas.removeEventListener('mouseenter', handleMouseEnter);
 			canvas.removeEventListener('mouseleave', handleMouseLeave);
 		};
-	}, [riveEffectsOnHover]);
+	}, [riveEffectsOnHover, riveAutoplay]);
 
 	const onSelectRiveFile = (media) => {
 		if (!media) return;

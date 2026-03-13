@@ -29,6 +29,7 @@ import {
 	ICON_POSITION,
 	PRESETS,
 	OVERFLOW_OP,
+	RIVE_RENDER_TYPE,
 } from "../../fbConstants/fbConstants";
 
 import { useState, useEffect, useMemo, memo } from "@wordpress/element";
@@ -464,7 +465,16 @@ const Inspector = ({ attributes, setAttributes }) => {
 						allowedExtension="riv"
 						allowedTypes={['application/octet-stream']}
 					/>
-
+					<BaseControl className="fb-sub-heading-position">
+						<SelectControl
+							label={__("Render Type", "frontis-block")}
+							value={riveRenderer}
+							options={RIVE_RENDER_TYPE}
+							onChange={(value) =>
+								setAttributes({ riveRenderer: value })
+							}
+						/>
+					</BaseControl>
 					<ToggleControl
 						label={__("Loop Animation", "frontis-block")}
 						checked={riveLoop}
