@@ -73,6 +73,7 @@
     "countries-and-timezones": "^3.8.0",
     "lottie-web": "^5.13.0",
     "rc-switch": "^4.1.0",
+    "react-grid-layout": "^2.2.2",
     "react-hook-form": "^7.62.0",
     "react-player": "^2.16.0",
     "react-redux": "^9.2.0",
