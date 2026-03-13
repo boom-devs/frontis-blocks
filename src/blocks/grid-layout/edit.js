@@ -1,20 +1,13 @@
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
-	InnerBlocks,
-	InspectorControls,
 	useInnerBlocksProps,
 	BlockControls
 } from '@wordpress/block-editor';
 import {
-	PanelBody,
-	RangeControl,
 	Button,
 	ToolbarGroup,
 	ToolbarButton,
-	Tooltip,
-	ToggleControl,
-	SelectControl
 } from '@wordpress/components';
 import { useSelect, useDispatch } from '@wordpress/data';
 import { useState, useMemo, useCallback } from '@wordpress/element';
@@ -24,6 +17,7 @@ import { ReactGridLayout, useContainerWidth } from 'react-grid-layout';
 import '/node_modules/react-grid-layout/css/styles.css';
 import '/node_modules/react-resizable/css/styles.css';
 import './editor.scss';
+import Inspector from './inspector';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
 	const { cols, rowHeight, gutter, compactType, allowOverlap } = attributes;
@@ -102,119 +96,76 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	);
 
 	return (
-		<div {...blockProps}>
-			<InspectorControls>
-				<PanelBody title={__('Grid Settings', 'grid-layout')}>
-					<RangeControl
-						label={__('Grid Columns', 'grid-layout')}
-						value={cols}
-						onChange={(val) => setAttributes({ cols: val })}
-						min={1}
-						max={24}
-					/>
-					<RangeControl
-						label={__('Row Height (px)', 'grid-layout')}
-						value={rowHeight}
-						onChange={(val) => setAttributes({ rowHeight: val })}
-						min={10}
-						max={200}
-					/>
-					<RangeControl
-						label={__('Gutter / Gap (px)', 'grid-layout')}
-						value={gutter}
-						onChange={(val) => setAttributes({ gutter: val })}
-						min={0}
-						max={50}
-					/>
-					<SelectControl
-						label={__('Compaction Type', 'grid-layout')}
-						value={compactType}
-						options={[
-							{ label: __('None (Messy Mode)', 'grid-layout'), value: '' },
-							{ label: __('Vertical', 'grid-layout'), value: 'vertical' },
-							{ label: __('Horizontal', 'grid-layout'), value: 'horizontal' },
-						]}
-						onChange={(val) => setAttributes({ compactType: val || null })}
-						help={__('Determines if items should "gravity" towards one direction.', 'grid-layout')}
-					/>
-					<ToggleControl
-						label={__('Allow Overlap', 'grid-layout')}
-						checked={allowOverlap}
-						onChange={(val) => setAttributes({ allowOverlap: val })}
-						help={__('Allow items to be placed on top of each other.', 'grid-layout')}
-					/>
-					<Button
-						variant="secondary"
-						isFullWidth
-						onClick={addGridItem}
-						style={{ marginTop: '10px' }}
-					>
-						{__('Add New Item', 'grid-layout')}
-					</Button>
-				</PanelBody>
-			</InspectorControls>
+		<>
+			<Inspector 
+				attributes={attributes}
+				setAttributes={setAttributes}
+				addGridItem={addGridItem}
+			/>
 
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
 						icon={isLayoutMode ? 'edit' : 'layout'}
-						label={isLayoutMode ? __('Finish Layout', 'grid-layout') : __('Edit Layout', 'grid-layout')}
+						label={isLayoutMode ? __('Finish Layout', 'frontis-blocks') : __('Edit Layout', 'frontis-blocks')}
 						onClick={() => setIsLayoutMode(!isLayoutMode)}
 						isPressed={isLayoutMode}
 					/>
 					<ToolbarButton
 						icon="plus"
-						label={__('Add Grid Item', 'grid-layout')}
+						label={__('Add Grid Item', 'frontis-blocks')}
 						onClick={addGridItem}
 					/>
 				</ToolbarGroup>
 			</BlockControls>
 
-			<div className="grid-editor-workspace" ref={containerRef}>
-				{isLayoutMode ? (
-					<div className="layout-overlay-mode">
-						<div className="layout-mode-header">
-							<span className="mode-badge">{__('LAYOUT MODE', 'grid-layout')}</span>
-							<p>{__('Drag and resize boxes to define your grid structure.', 'grid-layout')}</p>
-							<Button variant="primary" onClick={() => setIsLayoutMode(false)}>
-								{__('Done', 'grid-layout')}
-							</Button>
-						</div>
+			<div {...blockProps}>
+				<div className="grid-editor-workspace" ref={containerRef}>
+					{isLayoutMode ? (
+						<div className="layout-overlay-mode">
+							<div className="layout-mode-header">
+								<span className="mode-badge">{__('LAYOUT MODE', 'frontis-blocks')}</span>
+								<p>{__('Drag and resize boxes to define your grid structure.', 'frontis-blocks')}</p>
+								<Button variant="primary" onClick={() => setIsLayoutMode(false)}>
+									{__('Done', 'frontis-blocks')}
+								</Button>
+							</div>
 
-						{width > 0 && (
-							<ReactGridLayout
-								className="layout-canvas"
-								layout={rglLayout}
-								cols={cols}
-								rowHeight={rowHeight}
-								width={width - 40} // Adjusted for padding
-								onLayoutChange={onLayoutChange}
-								margin={[gutter, gutter]}
-								compactType={compactType || null}
-								allowOverlap={allowOverlap}
-							>
-								{rglLayout.map(item => (
-									<div key={item.i} className="rgl-item-box">
-										<div className="item-label">
-											<span className="item-id">{item.i.split('-').pop()}</span>
+							{width > 0 && (
+								<ReactGridLayout
+									className="layout-canvas"
+									layout={rglLayout}
+									cols={cols}
+									rowHeight={rowHeight}
+									width={width - 40} // Adjusted for padding
+									onLayoutChange={onLayoutChange}
+									margin={[gutter, gutter]}
+									compactType={compactType || null}
+									allowOverlap={allowOverlap}
+								>
+									{rglLayout.map(item => (
+										<div key={item.i} className="rgl-item-box">
+											<div className="item-label">
+												<span className="item-id">{item.i.split('-').pop()}</span>
+											</div>
 										</div>
-									</div>
-								))}
-							</ReactGridLayout>
-						)}
+									))}
+								</ReactGridLayout>
+							)}
+						</div>
+					) : (
+						<div {...innerBlocksProps} />
+					)}
+				</div>
+
+				{!isLayoutMode && innerBlocks.length === 0 && (
+					<div className="grid-empty-state">
+						<Button variant="primary" onClick={addGridItem}>
+							{__('Start Building Your Grid', 'frontis-blocks')}
+						</Button>
 					</div>
-				) : (
-					<div {...innerBlocksProps} />
 				)}
 			</div>
-
-			{!isLayoutMode && innerBlocks.length === 0 && (
-				<div className="grid-empty-state">
-					<Button variant="primary" onClick={addGridItem}>
-						{__('Start Building Your Grid', 'grid-layout')}
-					</Button>
-				</div>
-			)}
-		</div>
+		</>
 	);
 }
