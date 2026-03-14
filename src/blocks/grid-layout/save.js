@@ -1,7 +1,15 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
-	const { cols, rowHeight, gutter } = attributes;
+
+	const { 
+		blockID,
+		blockStyle,
+		cols,
+		rowHeight,
+		gutter
+		
+		} = attributes;
 
 	const style = {
 		display: 'grid',
@@ -11,7 +19,10 @@ export default function save({ attributes }) {
 	};
 
 	return (
-		<div {...useBlockProps.save({ style })}>
+		<div {...useBlockProps.save({ 
+			className: blockID,
+			style 
+		})}>
 			<InnerBlocks.Content />
 		</div>
 	);
