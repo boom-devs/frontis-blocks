@@ -17,10 +17,31 @@ import { ReactGridLayout, useContainerWidth } from 'react-grid-layout';
 import '/node_modules/react-grid-layout/css/styles.css';
 import '/node_modules/react-resizable/css/styles.css';
 import './editor.scss';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
 
-export default function Edit({ attributes, setAttributes, clientId }) {
-	const { cols, rowHeight, gutter, compactType, allowOverlap } = attributes;
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+
+	const { 
+		blockID,
+		blockStyle,
+		cols,
+		rowHeight,
+		gutter,
+		compactType,
+		allowOverlap
+		
+	} = attributes;
+
+	// Handle block ID generation
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-grid-layout',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
 	const [isLayoutMode, setIsLayoutMode] = useState(false);
 	const { ref: containerRef, width } = useContainerWidth();
 
@@ -76,7 +97,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [innerBlocks]);
 
 	const blockProps = useBlockProps({
-		className: `grid-layout-container ${isLayoutMode ? 'mode-layout' : 'mode-content'}`
+		className: `grid-layout-container ${blockID} ${isLayoutMode ? 'mode-layout' : 'mode-content'}`
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(

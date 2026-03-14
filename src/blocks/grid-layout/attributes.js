@@ -1,23 +1,31 @@
 const attributes = {
+	blockID: {
+		type: 'string',
+		default: ''
+	},
+	blockStyle: {
+		type: 'string',
+		default: ''
+	},
 	cols: {
-		type: "number",
-		default: 12,
+		type: 'number',
+		default: 12
 	},
 	rowHeight: {
-		type: "number",
-		default: 40,
+		type: 'number',
+		default: 40
 	},
 	gutter: {
-		type: "number",
-		default: 10,
+		type: 'number',
+		default: 10
 	},
 	compactType: {
-		type: "string",
-		default: "vertical",
+		type: 'string',
+		default: 'vertical'
 	},
 	allowOverlap: {
-		type: "boolean",
-		default: false,
+		type: 'boolean',
+		default: false
 	},
 };
 
