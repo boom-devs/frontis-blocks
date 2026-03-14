@@ -10,19 +10,19 @@ const attributes = {
     id: {
         type: 'string'
     },
-    x: {
+    gridColumnStart: {
         type: 'number',
         default: 0
     },
-    y: {
+    gridRowStart: {
         type: 'number',
         default: 0
     },
-    w: {
+    gridColumnSpan: {
         type: 'number',
         default: 4
     },
-    h: {
+    gridRowSpan: {
         type: 'number',
         default: 4
     },

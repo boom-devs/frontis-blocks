@@ -4,15 +4,15 @@ export default function save({ attributes }) {
     const { 
         blockID,
         blockStyle,
-        x,
-        y,
-        w,
-        h
+        gridColumnStart,
+        gridRowStart,
+        gridColumnSpan,
+        gridRowSpan,
         
     } = attributes;
 
     const style = {
-        gridArea: `${(y || 0) + 1} / ${(x || 0) + 1} / ${(y || 0) + (h || 4) + 1} / ${(x || 0) + (w || 4) + 1}`,
+        gridArea: `${(gridRowStart || 0) + 1} / ${(gridColumnStart || 0) + 1} / ${(gridRowStart || 0) + (gridRowSpan || 4) + 1} / ${(gridColumnStart || 0) + (gridColumnSpan || 4) + 1}`,
     };
 
     return (

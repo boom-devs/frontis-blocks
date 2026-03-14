@@ -59,13 +59,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			const block = innerBlocks.find((b) => b.attributes.id === item.i);
 			if (block) {
 				// Only update if changed
-				const { x, y, w, h } = block.attributes;
-				if (x !== item.x || y !== item.y || w !== item.w || h !== item.h) {
+				const { gridColumnStart, gridRowStart, gridColumnSpan, gridRowSpan } = block.attributes;
+				if (gridColumnStart !== item.x || gridRowStart !== item.y || gridColumnSpan !== item.w || gridRowSpan !== item.h) {
 					updateBlockAttributes(block.clientId, {
-						x: item.x,
-						y: item.y,
-						w: item.w,
-						h: item.h,
+						gridColumnStart: item.x,
+						gridRowStart: item.y,
+						gridColumnSpan: item.w,
+						gridRowSpan: item.h,
 					});
 				}
 			}
@@ -76,10 +76,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		const newId = `item-${Date.now()}`;
 		const newBlock = createBlock('frontis-blocks/grid-item', {
 			id: newId,
-			w: 3,
-			h: 4,
-			x: 0,
-			y: Infinity
+			gridColumnSpan: 3,
+			gridRowSpan: 4,
+			gridColumnStart: 0,
+			gridRowStart: Infinity
 		});
 		insertBlock(newBlock, innerBlocks.length, clientId);
 		setIsLayoutMode(true); // Switch to layout mode to place the new item
@@ -89,10 +89,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const rglLayout = useMemo(() => {
 		return innerBlocks.map(block => ({
 			i: block.attributes.id || `temp-${block.clientId}`,
-			x: block.attributes.x || 0,
-			y: block.attributes.y || 0,
-			w: block.attributes.w || 3,
-			h: block.attributes.h || 4,
+			x: block.attributes.gridColumnStart || 0,
+			y: block.attributes.gridRowStart || 0,
+			w: block.attributes.gridColumnSpan || 3,
+			h: block.attributes.gridRowSpan || 4,
 		}));
 	}, [innerBlocks]);
 
