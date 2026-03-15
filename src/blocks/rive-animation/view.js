@@ -1,8 +1,8 @@
-import { Rive as RiveCanvas } from '@rive-app/canvas';
-import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
+import { Rive as RiveCanvas } from "@rive-app/canvas";
+import { Rive as RiveWebGL2 } from "@rive-app/webgl2";
 
-(function() {
-	'use strict';
+(function () {
+	"use strict";
 
 	let playObserver = null;
 	let loadObserver = null;
@@ -32,7 +32,7 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 					}
 				});
 			},
-			{ threshold: 0.05 } // Trigger just as it enters or exits
+			{ threshold: 0.05 }, // Trigger just as it enters or exits
 		);
 
 		// 2. PRELOAD OBSERVER: Pre-loads the files BEFORE the user scrolls to them
@@ -45,34 +45,35 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 						if (!canvas._riveInstance && !canvas._isInitializing) {
 							canvas._isInitializing = true;
 							initRiveAnimation(canvas);
-							
+
 							// Stop loading it multiple times
 							loadObserver.unobserve(canvas);
 						}
 					}
 				});
 			},
-			{ rootMargin: "1500px 0px" } // Triggers 1500 pixels BEFORE they scroll to it!
+			{ rootMargin: "1500px 0px" }, // Triggers 1500 pixels BEFORE they scroll to it!
 		);
 	}
 
 	// Initialize a single Rive animation
 	function initRiveAnimation(canvas) {
-		const src = canvas.getAttribute('data-rive-src');
-		const loop = canvas.getAttribute('data-rive-loop') === 'true';
-		const autoplay = canvas.getAttribute('data-rive-autoplay') === 'true';
-		const speed = parseFloat(canvas.getAttribute('data-rive-speed') || '1');
-		const reverse = canvas.getAttribute('data-rive-reverse') === 'true';
-		const hoverEffect = canvas.getAttribute('data-rive-hover') || 'none';
+		const src = canvas.getAttribute("data-rive-src");
+		const loop = canvas.getAttribute("data-rive-loop") === "true";
+		const autoplay = canvas.getAttribute("data-rive-autoplay") === "true";
+		const speed = parseFloat(canvas.getAttribute("data-rive-speed") || "1");
+		const reverse = canvas.getAttribute("data-rive-reverse") === "true";
+		const hoverEffect = canvas.getAttribute("data-rive-hover") || "none";
 
 		if (!src) return;
 
-		const shouldAutoplay = (hoverEffect === 'play-pause' || hoverEffect === 'play') ? false : autoplay;
+		const shouldAutoplay =
+			hoverEffect === "play-pause" || hoverEffect === "play" ? false : autoplay;
 		canvas._shouldAutoplay = shouldAutoplay;
 
-		const riveRenderer = canvas.getAttribute('data-rive-renderer') || 'webgl2';
-		const RiveClass = riveRenderer === 'webgl2' ? RiveWebGL2 : RiveCanvas;
-		
+		const riveRenderer = canvas.getAttribute("data-rive-renderer") || "webgl2";
+		const RiveClass = riveRenderer === "webgl2" ? RiveWebGL2 : RiveCanvas;
+
 		try {
 			// First detect animations and state machines
 			const tempRive = new RiveClass({
@@ -83,10 +84,10 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 				onLoad: () => {
 					const animations = tempRive.animationNames || [];
 					const stateMachines = tempRive.stateMachineNames || [];
-					
+
 					// Cleanup temp instance
 					tempRive.cleanup();
-					
+
 					// Create actual instance with proper configuration
 					const config = {
 						src: src,
@@ -95,16 +96,26 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 						autoplay: shouldAutoplay && canvas.dataset.wantsPlay === "true",
 						useOffscreenRenderer: true,
 						automaticallyHandleEvents: true,
+						onLoop: () => {
+							if (!loop) {
+								requestAnimationFrame(() => {
+									if (riveInstance) riveInstance.pause();
+								});
+							}
+						},
 						onLoad: () => {
 							riveInstance.resizeDrawingSurfaceToCanvas();
 							// Double check if it became visible while we were loading it!
-							if (canvas._shouldAutoplay && canvas.dataset.wantsPlay === "true") {
+							if (
+								canvas._shouldAutoplay &&
+								canvas.dataset.wantsPlay === "true"
+							) {
 								riveInstance.play();
 							}
 						},
 						onLoadError: (err) => {
-							console.error('Rive load error:', err);
-						}
+							console.error("Rive load error:", err);
+						},
 					};
 
 					// Add state machine or animation
@@ -119,32 +130,51 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 					// Store instance on canvas for cleanup
 					canvas._riveInstance = riveInstance;
 
-					// Setup hover effects
-					if (hoverEffect !== 'none') {
-						canvas.style.cursor = 'pointer';
+					// Handle resizing
+					const wrapper = canvas.parentElement;
+					if (wrapper) {
+						const resizeObserver = new ResizeObserver(() => {
+							requestAnimationFrame(() => {
+								if (canvas._riveInstance) {
+									const rect = canvas.getBoundingClientRect();
+									if (rect.width > 0 && rect.height > 0) {
+										canvas.width = rect.width * window.devicePixelRatio;
+										canvas.height = rect.height * window.devicePixelRatio;
+										canvas._riveInstance.resizeDrawingSurfaceToCanvas();
+									}
+								}
+							});
+						});
+						resizeObserver.observe(wrapper);
+						canvas._resizeObserver = resizeObserver; // Store for potential cleanup
+					}
 
-						canvas.addEventListener('mouseenter', () => {
+					// Setup hover effects
+					if (hoverEffect !== "none") {
+						canvas.style.cursor = "pointer";
+
+						canvas.addEventListener("mouseenter", () => {
 							switch (hoverEffect) {
-								case 'play':
-								case 'play-pause':
+								case "play":
+								case "play-pause":
 									riveInstance.play();
 									break;
-								case 'pause':
+								case "pause":
 									riveInstance.pause();
 									break;
-								case 'stop':
+								case "stop":
 									riveInstance.stop();
 									break;
 							}
 						});
 
-						canvas.addEventListener('mouseleave', () => {
+						canvas.addEventListener("mouseleave", () => {
 							switch (hoverEffect) {
-								case 'play':
-								case 'play-pause':
+								case "play":
+								case "play-pause":
 									riveInstance.pause();
 									break;
-								case 'pause':
+								case "pause":
 									// Only resume playing if it is currently visible or meant to autoplay
 									if (canvas.dataset.wantsPlay === "true") {
 										riveInstance.play();
@@ -155,11 +185,11 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 					}
 				},
 				onLoadError: (err) => {
-					console.error('Rive detection error:', err);
-				}
+					console.error("Rive detection error:", err);
+				},
 			});
 		} catch (error) {
-			console.error('Error initializing Rive animation:', error);
+			console.error("Error initializing Rive animation:", error);
 		}
 	}
 
@@ -167,8 +197,8 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 	function initAllRiveAnimations() {
 		setupObservers();
 
-		const canvases = document.querySelectorAll('.fb-rive-canvas');
-		canvases.forEach(canvas => {
+		const canvases = document.querySelectorAll(".fb-rive-canvas");
+		canvases.forEach((canvas) => {
 			if (!canvas._isObserved) {
 				playObserver.observe(canvas);
 				loadObserver.observe(canvas);
@@ -178,8 +208,8 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 	}
 
 	// Initialize when DOM is ready
-	if (document.readyState === 'loading') {
-		document.addEventListener('DOMContentLoaded', initAllRiveAnimations);
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initAllRiveAnimations);
 	} else {
 		initAllRiveAnimations();
 	}
@@ -188,7 +218,7 @@ import { Rive as RiveWebGL2 } from '@rive-app/webgl2';
 		const observer = new MutationObserver(initAllRiveAnimations);
 		observer.observe(document.body, {
 			childList: true,
-			subtree: true
+			subtree: true,
 		});
 	}
 })();

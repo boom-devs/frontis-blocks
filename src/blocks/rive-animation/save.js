@@ -1,6 +1,6 @@
 // save.js - Frontend rendering for Rive Animation Block
 
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from "@wordpress/block-editor";
 
 export default function save({ attributes }) {
 	const {
@@ -26,44 +26,52 @@ export default function save({ attributes }) {
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-rive-animation-main-wrapper ${blockID} ${riveAnimationDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${riveAnimationTabletSwitcher ? 'fb-tablet-responsive' : ''} ${riveAnimationMobileSwitcher ? 'fb-mobile-responsive' : ''}`,
+		className: `fb-rive-animation-main-wrapper ${blockID} ${
+			riveAnimationDesktopSwitcher ? "fb-desktop-responsive" : ""
+		} ${riveAnimationTabletSwitcher ? "fb-tablet-responsive" : ""} ${
+			riveAnimationMobileSwitcher ? "fb-mobile-responsive" : ""
+		}`,
 	});
 
 	if (!riveAnimationImageUrl) {
 		return null;
 	}
 
-	// Build wrapper styles with responsive width/height
-	const wrapperStyles = {};
-
-	// Set width
-	if (riveAnimationCanvasWidth?.Desktop) {
-		wrapperStyles.width = `${riveAnimationCanvasWidth.Desktop}${riveAnimationCanvasWidthUnits?.Desktop || 'px'}`;
-	}
-
-	// Set height
-	if (riveAnimationCanvasHeight?.Desktop) {
-		wrapperStyles.height = `${riveAnimationCanvasHeight.Desktop}${riveAnimationCanvasHeightUnits?.Desktop || 'px'}`;
-	}
-
 	return (
 		<div {...blockProps} id={riveAnimationGlobalWraperID || undefined}>
-			<div className={`fb-parent-wrapper fb-rive-animation-container ${riveAnimationGlobalWraperClass || ''}`}>
+			<div
+				className={`fb-parent-wrapper fb-rive-animation-container ${
+					riveAnimationGlobalWraperClass || ""
+				}`}
+			>
 				<div
 					className="fb-rive-canvas-wrapper"
-					data-container-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}
-					data-container-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ''}
-					data-container-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ''}
-					data-container-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
-					data-container-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
-					data-container-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
-					data-container-width-units-desktop={riveAnimationCanvasWidthUnits?.Desktop ?? 'px'}
-					data-container-width-units-tablet={riveAnimationCanvasWidthUnits?.Tablet ?? 'px'}
-					data-container-width-units-mobile={riveAnimationCanvasWidthUnits?.Mobile ?? 'px'}
-					data-container-height-units-desktop={riveAnimationCanvasHeightUnits?.Desktop ?? 'px'}
-					data-container-height-units-tablet={riveAnimationCanvasHeightUnits?.Tablet ?? 'px'}
-					data-container-height-units-mobile={riveAnimationCanvasHeightUnits?.Mobile ?? 'px'}
-					style={wrapperStyles}
+					data-container-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ""}
+					data-container-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ""}
+					data-container-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ""}
+					data-container-height-desktop={
+						riveAnimationCanvasHeight?.Desktop ?? ""
+					}
+					data-container-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ""}
+					data-container-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ""}
+					data-container-width-units-desktop={
+						riveAnimationCanvasWidthUnits?.Desktop ?? "px"
+					}
+					data-container-width-units-tablet={
+						riveAnimationCanvasWidthUnits?.Tablet ?? "px"
+					}
+					data-container-width-units-mobile={
+						riveAnimationCanvasWidthUnits?.Mobile ?? "px"
+					}
+					data-container-height-units-desktop={
+						riveAnimationCanvasHeightUnits?.Desktop ?? "px"
+					}
+					data-container-height-units-tablet={
+						riveAnimationCanvasHeightUnits?.Tablet ?? "px"
+					}
+					data-container-height-units-mobile={
+						riveAnimationCanvasHeightUnits?.Mobile ?? "px"
+					}
 				>
 					<canvas
 						className="fb-rive-canvas"
@@ -74,18 +82,16 @@ export default function save({ attributes }) {
 						data-rive-speed={riveAnimationSpeed}
 						data-rive-reverse={riveAnimationReverse}
 						data-rive-hover={riveEffectsOnHover}
-						data-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ''}
-						data-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ''}
-						data-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ''}
-						data-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ''}
-						data-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ''}
-						data-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ''}
-						style={
-							{
-								width: '100%',
-								height: '100%'
-							}
-						}
+						data-width-desktop={riveAnimationCanvasWidth?.Desktop ?? ""}
+						data-height-desktop={riveAnimationCanvasHeight?.Desktop ?? ""}
+						data-width-tablet={riveAnimationCanvasWidth?.Tablet ?? ""}
+						data-height-tablet={riveAnimationCanvasHeight?.Tablet ?? ""}
+						data-width-mobile={riveAnimationCanvasWidth?.Mobile ?? ""}
+						data-height-mobile={riveAnimationCanvasHeight?.Mobile ?? ""}
+						style={{
+							width: "100%",
+							height: "100%",
+						}}
 					/>
 				</div>
 			</div>
