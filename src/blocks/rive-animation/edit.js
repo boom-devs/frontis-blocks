@@ -16,9 +16,6 @@ import Inspector from "./inspector";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateRiveAnimationStyle from "./styling";
 
-// Static guard to prevent multiple triggers during device switching
-// const lastProcessedDevices = new Map();
-
 export default function Edit({
 	attributes,
 	setAttributes,
@@ -252,7 +249,7 @@ export default function Edit({
 		if (deviceType != "Desktop") {
 			const t = setTimeout(() => {
 				setResizeTrigger((prev) => prev + 1);
-			}, 400); // editor layout settle হওয়ার জন্য
+			}, 400); // editor layout settle
 
 			return () => clearTimeout(t);
 		}
