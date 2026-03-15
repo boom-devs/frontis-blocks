@@ -60,6 +60,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@reduxjs/toolkit": "^2.8.2",
     "@rive-app/canvas": "^2.32.2",
+    "@rive-app/webgl2": "^2.35.2",
     "@wordpress/core-data": "^7.10.0",
     "@wordpress/dom-ready": "^4.27.0",
     "@wordpress/edit-site": "^6.32.0",
