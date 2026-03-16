@@ -89,7 +89,7 @@ class AssetsGenerator
 
 			$page_name = $this->post->post_name;
 			$this->combine_and_save_css_file($page_name);
-			self::get_font_families($this->block_fonts);
+			$this->persist_page_google_fonts_url($this->block_fonts);
 
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
@@ -624,8 +624,7 @@ class AssetsGenerator
 		}
 
 		$this->combine_and_save_css_file($page_name);
-
-		$this->get_font_families();
+		$this->persist_page_google_fonts_url($this->block_fonts);
 	}
 
 	public static function generate_global_assets()
@@ -1126,6 +1125,12 @@ class AssetsGenerator
 
 	public static function get_font_families($extra_fonts = [])
 	{
+		$font_url = self::get_font_families_url($extra_fonts);
+		update_option('fb_google_fonts_url', $font_url);
+	}
+
+	public static function get_font_families_url($extra_fonts = [])
+	{
 		$custom_typography = get_option('fb_custom_typography');
 		$typography_data = get_option('fb_typography');
 		$global_typography_data = get_option('fb_globaltypo');
@@ -1135,8 +1140,8 @@ class AssetsGenerator
 
 		$fonts_families = [$typography_fonts, $custom_fonts, $global_fonts, $extra_fonts];
 		$fonts_families = self::marged_fonts_array($fonts_families);
-		$font_url = self::build_google_fonts_url($fonts_families);
-		update_option('fb_google_fonts_url', $font_url);
+
+		return self::build_google_fonts_url($fonts_families);
 	}
 
 	public static function normalize_google_font_url($font_url)
@@ -1224,6 +1229,16 @@ class AssetsGenerator
 		}
 
 		return 'https://fonts.googleapis.com/css2?' . implode('&', array_unique($font_parts)) . '&display=swap';
+	}
+
+	private function persist_page_google_fonts_url($extra_fonts = [])
+	{
+		$font_url = self::get_font_families_url($extra_fonts);
+		update_option('fb_google_fonts_url', $font_url);
+
+		if (!empty($this->post_id)) {
+			update_post_meta($this->post_id, 'fb_page_google_fonts_url', $font_url);
+		}
 	}
 
 	private static function get_google_fonts_manifest()

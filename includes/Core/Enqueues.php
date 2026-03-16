@@ -216,12 +216,27 @@ class Enqueues
     }
     public function load_google_font()
     {
-        $google_font_url = get_option('fb_google_fonts_url');
+        $google_font_url = '';
+        $current_post_id = get_queried_object_id();
+
+        if (!empty($current_post_id)) {
+            $google_font_url = get_post_meta($current_post_id, 'fb_page_google_fonts_url', true);
+        }
+
+        if (!$google_font_url) {
+            $google_font_url = get_option('fb_google_fonts_url');
+        }
+
         $normalized_google_font_url = AssetsGenerator::normalize_google_font_url($google_font_url);
 
         if ($normalized_google_font_url !== $google_font_url) {
             $google_font_url = $normalized_google_font_url;
-            update_option('fb_google_fonts_url', $google_font_url);
+
+            if (!empty($current_post_id) && get_post_meta($current_post_id, 'fb_page_google_fonts_url', true)) {
+                update_post_meta($current_post_id, 'fb_page_google_fonts_url', $google_font_url);
+            } else {
+                update_option('fb_google_fonts_url', $google_font_url);
+            }
         }
 
         if (!$google_font_url) {
