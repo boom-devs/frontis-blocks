@@ -747,21 +747,31 @@ class AssetsGenerator
 					if (!isset($typography_data[$key]))
 						continue;
 
-					// Process global properties
 					$globalProps = ['fontFamily', 'fontWeight', 'fontStyle', 'textTransform', 'textDecoration'];
 					foreach ($globalProps as $prop) {
 						if (isset($typography_data[$key][$prop]['value'])) {
 							$variable = $typography_data[$key][$prop]['variable'];
 							$cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
+							
+							// Extract typography value correctly if it's stored as an array
+							$raw_value = $typography_data[$key][$prop]['value'];
+							if ($prop === 'fontFamily' && is_array($raw_value)) {
+								$raw_value = $raw_value['value'] ?? '';
+							}
+                            
+                            if (empty($raw_value) && $raw_value !== '0') {
+                                continue;
+                            }
+
 							$styleValue = "var({$variable})";
-							$rootStyles .= "{$variable}: {$typography_data[$key][$prop]['value']};\n";
+							$rootStyles .= "{$variable}: {$raw_value};\n";
 
 							// Aliasing for backward compatibility
 							if (strpos($variable, '--text-decoration') !== false) {
-								$rootStyles .= str_replace('--text-decoration', '--font-decoration', $variable) . ": {$typography_data[$key][$prop]['value']};\n";
+								$rootStyles .= str_replace('--text-decoration', '--font-decoration', $variable) . ": {$raw_value};\n";
 							}
 							if (strpos($variable, '--text-transform') !== false) {
-								$rootStyles .= str_replace('--text-transform', '--font-transform', $variable) . ": {$typography_data[$key][$prop]['value']};\n";
+								$rootStyles .= str_replace('--text-transform', '--font-transform', $variable) . ": {$raw_value};\n";
 							}
 
 							switch ($key) {

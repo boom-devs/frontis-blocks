@@ -666,33 +666,31 @@ class Helper
             return $fontFamilies;
         }
 
-        foreach ($data as $element => $settings) {
-            if (!is_array($settings)) {
-                continue;
-            }
+        self::recurse_font_families($data, $fontFamilies);
+        return $fontFamilies;
+    }
 
-            $family = '';
-            $weight = '';
+    private static function recurse_font_families($data, &$fontFamilies)
+    {
+        if (isset($data['fontFamily'])) {
+            $family = is_array($data['fontFamily']) ? ($data['fontFamily']['value'] ?? '') : $data['fontFamily'];
+            $weight = isset($data['fontWeight']) ? (is_array($data['fontWeight']) ? ($data['fontWeight']['value'] ?? '') : $data['fontWeight']) : '';
 
-            // Extract Font Family
-            if (isset($settings['fontFamily'])) {
-                $family = is_array($settings['fontFamily']) ? ($settings['fontFamily']['value'] ?? '') : $settings['fontFamily'];
-            }
-
-            // Extract Font Weight
-            if (isset($settings['fontWeight'])) {
-                $weight = is_array($settings['fontWeight']) ? ($settings['fontWeight']['value'] ?? '') : $settings['fontWeight'];
-            }
-
-            if (!empty($family) && !empty($weight)) {
+            if (!empty($family)) {
                 if (!isset($fontFamilies[$family])) {
                     $fontFamilies[$family] = [];
                 }
-                $fontFamilies[$family][] = $weight;
+                if (!empty($weight) && !in_array($weight, $fontFamilies[$family])) {
+                    $fontFamilies[$family][] = $weight;
+                }
             }
         }
 
-        return $fontFamilies;
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                self::recurse_font_families($value, $fontFamilies);
+            }
+        }
     }
 
     public static function get_css_files($dir)

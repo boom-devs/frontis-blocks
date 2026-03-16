@@ -6,10 +6,19 @@ const generateCSSVariables = (data, deviceType) => {
     };
 
     const getValue = (obj, prop, breakpoint = null) => {
+        let val = null;
         if (breakpoint) {
-            return obj?.[prop]?.value?.[breakpoint] || null;
+            val = obj?.[prop]?.value?.[breakpoint];
+        } else {
+            val = obj?.[prop]?.value;
         }
-        return obj?.[prop]?.value || null;
+
+        // Handle nested value objects (used by fontFamily/fontWeight occasionally)
+        if (typeof val === 'object' && val !== null && val.value !== undefined) {
+            return val.value;
+        }
+
+        return val || null;
     };
 
     const getUnit = (obj, prop, breakpoint) => {
