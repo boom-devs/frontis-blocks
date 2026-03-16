@@ -2,27 +2,16 @@ import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
 
-	const { 
+	const {
 		blockID,
-		blockStyle,
-		cols,
-		rowHeight,
-		gutter
-		
-		} = attributes;
+	} = attributes;
 
-	const style = {
-		display: 'grid',
-		gridTemplateColumns: `repeat(${cols || 12}, 1fr)`,
-		gridAutoRows: `${rowHeight || 40}px`,
-		gap: `${gutter || 10}px`,
-	};
+	const blockProps = useBlockProps.save({
+		className: `frontis-block fb-grid-layout-main-wrapper fb-grid-layout-container ${blockID}`,
+	});
 
 	return (
-		<div {...useBlockProps.save({ 
-			className: blockID,
-			style 
-		})}>
+		<div {...blockProps}>
 			<InnerBlocks.Content />
 		</div>
 	);

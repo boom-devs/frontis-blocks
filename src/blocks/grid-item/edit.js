@@ -6,6 +6,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const { 
         blockID,
         blockStyle,
+        id,
         gridColumnStart,
         gridRowStart,
         gridColumnSpan,
@@ -23,6 +24,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         setAttributes,
     });
 
+    // Inline gridArea for editor content mode positioning
     const style = {
         gridArea: `${(gridRowStart || 0) + 1} / ${(gridColumnStart || 0) + 1} / ${(gridRowStart || 0) + (gridRowSpan || 4) + 1} / ${(gridColumnStart || 0) + (gridColumnSpan || 4) + 1}`,
     };
@@ -30,6 +32,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const blockProps = useBlockProps({
         className: `grid-item-rendered ${blockID}`,
         style,
+        'data-grid-id': id,
     });
 
     return (
