@@ -620,8 +620,6 @@ class Helper
     public static function get_fonts_family($attributes)
     {
         $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
-        $font_weight_keys = preg_grep('/^(\w+)FontWeight/i', array_keys($attributes), 0);
-
         $font_data = [];
 
         foreach ($font_family_keys as $key) {
@@ -629,8 +627,8 @@ class Helper
 
             // Find the corresponding font weight key
             $weight_key = $prefix . 'FontWeight';
-            $font_family = $attributes[$key] ?? '';
-            $font_weight = $attributes[$weight_key] ?? '';
+            $font_family = self::clean_font_family_value($attributes[$key] ?? '');
+            $font_weight = self::clean_font_weight_value($attributes[$weight_key] ?? '');
 
             if (!empty($font_family) && !isset($font_data[$font_family])) {
                 $font_data[$font_family] = $font_weight;
@@ -638,6 +636,72 @@ class Helper
         }
 
         return $font_data;
+    }
+
+    public static function clean_font_family_value($font_family)
+    {
+        if (is_array($font_family)) {
+            $font_family = $font_family['value'] ?? '';
+        }
+
+        if (!is_string($font_family) && !is_numeric($font_family)) {
+            return '';
+        }
+
+        $font_family = trim(wp_strip_all_tags((string) $font_family));
+
+        if ($font_family === '') {
+            return '';
+        }
+
+        if (strpos($font_family, ',') !== false) {
+            $font_family_parts = explode(',', $font_family);
+            $font_family = trim((string) reset($font_family_parts), " \t\n\r\0\x0B\"'");
+        } else {
+            $font_family = trim($font_family, "\"'");
+        }
+
+        $normalized_font_family = strtolower($font_family);
+        if (
+            $font_family === '' ||
+            in_array($normalized_font_family, ['default', 'inherit', 'initial', 'unset', 'revert', 'revert-layer'], true) ||
+            strpos($normalized_font_family, 'var(') === 0
+        ) {
+            return '';
+        }
+
+        return $font_family;
+    }
+
+    public static function clean_font_weight_value($font_weight)
+    {
+        if (is_array($font_weight)) {
+            $font_weight = $font_weight['value'] ?? '';
+        }
+
+        if (!is_string($font_weight) && !is_numeric($font_weight)) {
+            return '';
+        }
+
+        $font_weight = strtolower(trim(wp_strip_all_tags((string) $font_weight)));
+
+        if ($font_weight === '' || in_array($font_weight, ['default', 'inherit', 'initial', 'unset', 'revert', 'revert-layer'], true)) {
+            return '';
+        }
+
+        if ($font_weight === 'normal') {
+            return '400';
+        }
+
+        if ($font_weight === 'bold') {
+            return '700';
+        }
+
+        if (preg_match('/(100|200|300|400|500|600|700|800|900)/', $font_weight, $matches)) {
+            return $matches[1];
+        }
+
+        return '';
     }
 
     public static function option_exists($option_name, $site_wide = false)
@@ -673,8 +737,8 @@ class Helper
     private static function recurse_font_families($data, &$fontFamilies)
     {
         if (isset($data['fontFamily'])) {
-            $family = is_array($data['fontFamily']) ? ($data['fontFamily']['value'] ?? '') : $data['fontFamily'];
-            $weight = isset($data['fontWeight']) ? (is_array($data['fontWeight']) ? ($data['fontWeight']['value'] ?? '') : $data['fontWeight']) : '';
+            $family = self::clean_font_family_value($data['fontFamily']);
+            $weight = isset($data['fontWeight']) ? self::clean_font_weight_value($data['fontWeight']) : '';
 
             if (!empty($family)) {
                 if (!isset($fontFamilies[$family])) {

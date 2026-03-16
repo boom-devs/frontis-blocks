@@ -753,15 +753,14 @@ class AssetsGenerator
 							$variable = $typography_data[$key][$prop]['variable'];
 							$cssProperty = strtolower(preg_replace('/([A-Z])/', '-$1', $prop));
 							
-							// Extract typography value correctly if it's stored as an array
 							$raw_value = $typography_data[$key][$prop]['value'];
-							if ($prop === 'fontFamily' && is_array($raw_value)) {
-								$raw_value = $raw_value['value'] ?? '';
+							if ($prop === 'fontFamily') {
+								$raw_value = Helper::clean_font_family_value($raw_value);
 							}
-                            
-                            if (empty($raw_value) && $raw_value !== '0') {
-                                continue;
-                            }
+
+							if (empty($raw_value) && $raw_value !== '0') {
+								continue;
+							}
 
 							$styleValue = "var({$variable})";
 							$rootStyles .= "{$variable}: {$raw_value};\n";
@@ -1136,39 +1135,152 @@ class AssetsGenerator
 
 		$fonts_families = [$typography_fonts, $custom_fonts, $global_fonts, $extra_fonts];
 		$fonts_families = self::marged_fonts_array($fonts_families);
+		$font_url = self::build_google_fonts_url($fonts_families);
+		update_option('fb_google_fonts_url', $font_url);
+	}
 
-		if (!empty($fonts_families)) {
-			$font_url = "https://fonts.googleapis.com/css?family=";
-			$font_parts = [];
+	public static function normalize_google_font_url($font_url)
+	{
+		if (!is_string($font_url) || $font_url === '') {
+			return '';
+		}
 
-			foreach ($fonts_families as $font => $weights) {
-				if (strtolower($font) === 'default') {
-					continue;
-				}
+		if (strpos($font_url, 'fonts.googleapis.com/css2?') !== false) {
+			return $font_url;
+		}
 
-				if (!is_array($weights)) {
-					$weights = [$weights]; // Ensure it's an array
-				}
+		$query = wp_parse_url($font_url, PHP_URL_QUERY);
+		if (!$query) {
+			return $font_url;
+		}
 
-				// Filter out any "default" weights
-				$weights = array_filter($weights, function ($weight) {
-					return strtolower($weight) !== 'default';
-				});
+		parse_str($query, $query_args);
+		if (empty($query_args['family']) || !is_string($query_args['family'])) {
+			return $font_url;
+		}
 
-				$italic_weights = [];
-				foreach ($weights as $weight) {
-					$italic_weights[] = $weight . "i"; // Add italic version
-				}
-
-				$all_weights = array_merge($weights, $italic_weights);
-				$font_parts[] = str_replace(' ', '+', $font) . ":" . implode(",", $all_weights);
+		$fonts_families = [];
+		foreach (explode('|', $query_args['family']) as $font_part) {
+			$font_part = trim((string) $font_part);
+			if ($font_part === '') {
+				continue;
 			}
 
-			if (!empty($font_parts)) {
-				$font_url .= implode("|", $font_parts) . "&display=swap";
-				update_option('fb_google_fonts_url', $font_url);
+			$font_data = explode(':', $font_part, 2);
+			$font_family = rawurldecode(str_replace('+', ' ', $font_data[0]));
+			$font_family = Helper::clean_font_family_value($font_family);
+			if ($font_family === '') {
+				continue;
+			}
+
+			$weights = isset($font_data[1]) ? explode(',', $font_data[1]) : [];
+			$fonts_families[$font_family] = self::sanitize_google_font_weights($weights);
+		}
+
+		return self::build_google_fonts_url($fonts_families);
+	}
+
+	private static function build_google_fonts_url($fonts_families)
+	{
+		if (empty($fonts_families) || !is_array($fonts_families)) {
+			return '';
+		}
+
+		$google_fonts = self::get_google_fonts_manifest();
+		if (empty($google_fonts)) {
+			return '';
+		}
+
+		$font_parts = [];
+		foreach ($fonts_families as $font_family => $weights) {
+			$font_family = Helper::clean_font_family_value($font_family);
+			if ($font_family === '' || !isset($google_fonts[$font_family])) {
+				continue;
+			}
+
+			$available_weights = $google_fonts[$font_family];
+			if (empty($available_weights)) {
+				continue;
+			}
+
+			$requested_weights = self::sanitize_google_font_weights($weights);
+			$requested_weights = array_values(array_intersect($requested_weights, $available_weights));
+
+			if (empty($requested_weights)) {
+				$requested_weights = in_array('400', $available_weights, true)
+					? ['400']
+					: [reset($available_weights)];
+			}
+
+			$font_parts[] = sprintf(
+				'family=%s:wght@%s',
+				self::encode_google_font_family($font_family),
+				implode(';', $requested_weights)
+			);
+		}
+
+		if (empty($font_parts)) {
+			return '';
+		}
+
+		return 'https://fonts.googleapis.com/css2?' . implode('&', array_unique($font_parts)) . '&display=swap';
+	}
+
+	private static function get_google_fonts_manifest()
+	{
+		static $google_fonts = null;
+
+		if ($google_fonts !== null) {
+			return $google_fonts;
+		}
+
+		$google_fonts = [];
+		$google_fonts_path = plugin_dir_path(__DIR__) . '../assets/google-fonts/google-fonts.json';
+
+		if (!file_exists($google_fonts_path)) {
+			return $google_fonts;
+		}
+
+		$google_fonts_data = json_decode((string) file_get_contents($google_fonts_path), true);
+		if (!is_array($google_fonts_data)) {
+			return $google_fonts;
+		}
+
+		foreach ($google_fonts_data as $font_family => $weights) {
+			$font_family = Helper::clean_font_family_value($font_family);
+			if ($font_family === '') {
+				continue;
+			}
+
+			$google_fonts[$font_family] = self::sanitize_google_font_weights($weights);
+		}
+
+		return $google_fonts;
+	}
+
+	private static function sanitize_google_font_weights($weights)
+	{
+		if (!is_array($weights)) {
+			$weights = [$weights];
+		}
+
+		$normalized_weights = [];
+		foreach ($weights as $weight) {
+			$weight = Helper::clean_font_weight_value($weight);
+			if ($weight !== '') {
+				$normalized_weights[] = $weight;
 			}
 		}
+
+		$normalized_weights = array_values(array_unique($normalized_weights));
+		sort($normalized_weights, SORT_NUMERIC);
+
+		return $normalized_weights;
+	}
+
+	private static function encode_google_font_family($font_family)
+	{
+		return str_replace('%20', '+', rawurlencode($font_family));
 	}
 
 	public static function marged_fonts_array($arrays)
@@ -1177,9 +1289,13 @@ class AssetsGenerator
 
 		// Iterate through each array
 		foreach ($arrays as $array) {
+			if (!is_array($array)) {
+				continue;
+			}
+
 			foreach ($array as $fontFamily => $weights) {
-				// Skip 'default' or 'Default' keys
-				if (strtolower($fontFamily) === 'default') {
+				$fontFamily = Helper::clean_font_family_value($fontFamily);
+				if ($fontFamily === '') {
 					continue;
 				}
 
@@ -1188,16 +1304,13 @@ class AssetsGenerator
 					$merged[$fontFamily] = [];
 				}
 
-				// Add weights, filtering out 'Default' or empty values
-				foreach ($weights as $weight) {
-					if (strtolower($weight) !== 'default' && $weight !== '') {
-						$merged[$fontFamily][] = $weight;
-					}
+				foreach (self::sanitize_google_font_weights($weights) as $weight) {
+					$merged[$fontFamily][] = $weight;
 				}
 
 				// Remove duplicates and sort weights
 				$merged[$fontFamily] = array_unique($merged[$fontFamily]);
-				sort($merged[$fontFamily]);
+				sort($merged[$fontFamily], SORT_NUMERIC);
 			}
 		}
 

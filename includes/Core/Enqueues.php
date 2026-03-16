@@ -25,6 +25,8 @@ class Enqueues
     private $footer_name = '';
     private $critical_css_template = false;
     private $critical_css_page = false;
+    private $google_fonts_handle = 'frontis-blocks-google-fonts';
+    private $google_fonts_preload = false;
 
     /**
      * Constructor
@@ -35,7 +37,8 @@ class Enqueues
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         add_action('wp_footer', [$this, 'enqueue_assets_footer']);
-        add_action('wp_head', [$this, 'load_google_font'], 1);
+        add_filter('wp_resource_hints', [$this, 'add_google_font_resource_hints'], 10, 2);
+        add_filter('style_loader_tag', [$this, 'filter_google_font_style_tag'], 10, 4);
     }
 
     public function get_page_template_name()
@@ -52,8 +55,6 @@ class Enqueues
 
     public function enqueue_scripts()
     {
-        $this->load_google_font();
-
         // Enqueue assets
         $page_compiling_mode = get_post_meta(get_the_ID(), 'fb_page_assets_generation', true);
 
@@ -103,6 +104,8 @@ class Enqueues
 
             AssetsGenerator::get_instance()->generate_page_assets($modified_post->ID, $modified_post, $critical_css_used);
         }
+
+        $this->load_google_font();
 
         // Enqueue global CSS
         $global_css_path = $this->upload_dir['basedir'] . '/frontis-blocks/global/global.css';
@@ -213,25 +216,50 @@ class Enqueues
     }
     public function load_google_font()
     {
-        // Enqueue google fonts
         $google_font_url = get_option('fb_google_fonts_url');
-        
-        if ($google_font_url) {
-            $is_preload = get_option('fb_google_fonts_preload', 'false');
-            // Option is stored as JSON string "true"/"false" by the handler
-            $is_preload = filter_var($is_preload, FILTER_VALIDATE_BOOLEAN);
+        $normalized_google_font_url = AssetsGenerator::normalize_google_font_url($google_font_url);
 
-            echo '<link rel="preconnect" href="https://fonts.googleapis.com">';
-            echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>';
-
-            if ($is_preload !== false) {
-                // High performance Preload (Default)
-                echo '<link rel="preload" as="style" href="' . esc_url($google_font_url) . '" onload="this.onload=null;this.rel=\'stylesheet\'">';
-                echo '<noscript><link rel="stylesheet" href="' . esc_url($google_font_url) . '"></noscript>';
-            } else {
-                // Standard Stylesheet
-                echo '<link rel="stylesheet" href="' . esc_url($google_font_url) . '">';
-            }
+        if ($normalized_google_font_url !== $google_font_url) {
+            $google_font_url = $normalized_google_font_url;
+            update_option('fb_google_fonts_url', $google_font_url);
         }
+
+        if (!$google_font_url) {
+            $this->google_fonts_preload = false;
+            return;
+        }
+
+        $is_preload = get_option('fb_google_fonts_preload', 'false');
+        $this->google_fonts_preload = filter_var($is_preload, FILTER_VALIDATE_BOOLEAN);
+
+        wp_enqueue_style($this->google_fonts_handle, esc_url_raw($google_font_url), [], null);
+    }
+
+    public function add_google_font_resource_hints($urls, $relation_type)
+    {
+        if ($relation_type !== 'preconnect' || !wp_style_is($this->google_fonts_handle, 'enqueued')) {
+            return $urls;
+        }
+
+        $urls[] = 'https://fonts.googleapis.com';
+        $urls[] = [
+            'href' => 'https://fonts.gstatic.com',
+            'crossorigin' => 'anonymous',
+        ];
+
+        return $urls;
+    }
+
+    public function filter_google_font_style_tag($html, $handle, $href, $media)
+    {
+        if ($handle !== $this->google_fonts_handle || $this->google_fonts_preload !== true) {
+            return $html;
+        }
+
+        return sprintf(
+            '<link rel="preload" as="style" href="%1$s" media="%2$s" onload="this.onload=null;this.rel=\'stylesheet\'"><noscript><link rel="stylesheet" href="%1$s" media="%2$s"></noscript>',
+            esc_url($href),
+            esc_attr($media)
+        );
     }
 }
