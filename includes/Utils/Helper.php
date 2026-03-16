@@ -662,24 +662,33 @@ class Helper
     {
         $fontFamilies = array();
 
-        // Convert the array to a string representation
-        $dataString = var_export($data, true);
+        if (empty($data) || !is_array($data)) {
+            return $fontFamilies;
+        }
 
-        // Pattern to match fontFamily and fontWeight pairs
-        $pattern = '/\'fontFamily\'\s*=>\s*\'([^\']*)\',(?:.*?)\'fontWeight\'\s*=>\s*\'([^\']*)\'/s';
+        foreach ($data as $element => $settings) {
+            if (!is_array($settings)) {
+                continue;
+            }
 
-        // Perform the regex matching
-        preg_match_all($pattern, $dataString, $matches, PREG_SET_ORDER);
+            $family = '';
+            $weight = '';
 
-        // Process matches
-        foreach ($matches as $match) {
-            $fontFamily = $match[1];
-            $fontWeight = $match[2];
+            // Extract Font Family
+            if (isset($settings['fontFamily'])) {
+                $family = is_array($settings['fontFamily']) ? ($settings['fontFamily']['value'] ?? '') : $settings['fontFamily'];
+            }
 
-            if (array_key_exists($fontFamily, $fontFamilies)) {
-                $fontFamilies[$fontFamily][] = $fontWeight;
-            } else {
-                $fontFamilies[$fontFamily][] = $fontWeight;
+            // Extract Font Weight
+            if (isset($settings['fontWeight'])) {
+                $weight = is_array($settings['fontWeight']) ? ($settings['fontWeight']['value'] ?? '') : $settings['fontWeight'];
+            }
+
+            if (!empty($family) && !empty($weight)) {
+                if (!isset($fontFamilies[$family])) {
+                    $fontFamilies[$family] = [];
+                }
+                $fontFamilies[$family][] = $weight;
             }
         }
 

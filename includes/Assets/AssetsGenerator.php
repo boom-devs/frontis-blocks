@@ -89,7 +89,7 @@ class AssetsGenerator
 
 			$page_name = $this->post->post_name;
 			$this->combine_and_save_css_file($page_name);
-			$this->get_font_families();
+			self::get_font_families($this->block_fonts);
 
 			$this->reset();
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
@@ -660,6 +660,9 @@ class AssetsGenerator
 			$css_file_name = 'global.css';
 			$css_file = $css_dir . $css_file_name;
 			file_put_contents($css_file, $root_css);
+
+			// Refresh global Google Fonts
+			self::get_font_families();
 		}
 	}
 
@@ -753,6 +756,14 @@ class AssetsGenerator
 							$styleValue = "var({$variable})";
 							$rootStyles .= "{$variable}: {$typography_data[$key][$prop]['value']};\n";
 
+							// Aliasing for backward compatibility
+							if (strpos($variable, '--text-decoration') !== false) {
+								$rootStyles .= str_replace('--text-decoration', '--font-decoration', $variable) . ": {$typography_data[$key][$prop]['value']};\n";
+							}
+							if (strpos($variable, '--text-transform') !== false) {
+								$rootStyles .= str_replace('--text-transform', '--font-transform', $variable) . ": {$typography_data[$key][$prop]['value']};\n";
+							}
+
 							switch ($key) {
 								case 'body':
 									$paragraphStyles .= "{$cssProperty}: {$styleValue};\n";
@@ -805,6 +816,14 @@ class AssetsGenerator
 								$unit = isset($typography_data[$key][$prop]['unit']) ? $typography_data[$key][$prop]['unit']['Desktop'] : 'px';
 								$desktopStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
 
+								// Aliasing for backward compatibility
+								if (strpos($cssVar, '--letter-spacing') !== false) {
+									$desktopStyles .= str_replace('--letter-spacing', '--font-letter-spacing', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
+								if (strpos($cssVar, '--line-height') !== false) {
+									$desktopStyles .= str_replace('--line-height', '--font-line-height', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
+
 								switch ($key) {
 									case 'body':
 										$paragraphStyles .= "{$cssProperty}: var({$cssVar});\n";
@@ -847,6 +866,14 @@ class AssetsGenerator
 								$value = $typography_data[$key][$prop]['value']['Tablet'];
 								$unit = isset($typography_data[$key][$prop]['unit']) ? $typography_data[$key][$prop]['unit']['Tablet'] : 'px';
 								$tabletStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
+
+								// Aliasing for backward compatibility
+								if (strpos($cssVar, '--letter-spacing') !== false) {
+									$tabletStyles .= str_replace('--letter-spacing', '--font-letter-spacing', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
+								if (strpos($cssVar, '--line-height') !== false) {
+									$tabletStyles .= str_replace('--line-height', '--font-line-height', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
 							}
 
 							// Mobile
@@ -854,6 +881,14 @@ class AssetsGenerator
 								$value = $typography_data[$key][$prop]['value']['Mobile'];
 								$unit = $typography_data[$key][$prop]['unit']['Mobile'];
 								$mobileStyles .= "{$cssVar}: " . Helper::create_value_with_unit($value, $unit) . ";\n";
+
+								// Aliasing for backward compatibility
+								if (strpos($cssVar, '--letter-spacing') !== false) {
+									$mobileStyles .= str_replace('--letter-spacing', '--font-letter-spacing', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
+								if (strpos($cssVar, '--line-height') !== false) {
+									$mobileStyles .= str_replace('--line-height', '--font-line-height', $cssVar) . ": " . Helper::create_value_with_unit($value, $unit) . ";\n";
+								}
 							}
 						}
 					}
@@ -1080,14 +1115,17 @@ class AssetsGenerator
 		$this->get_inner_blocks($blocks);
 	}
 
-	public function get_font_families()
+	public static function get_font_families($extra_fonts = [])
 	{
 		$custom_typography = get_option('fb_custom_typography');
 		$typography_data = get_option('fb_typography');
+		$global_typography_data = get_option('fb_globaltypo');
 		$custom_fonts = Helper::extract_font_families($custom_typography);
 		$typography_fonts = Helper::extract_font_families($typography_data);
-		$fonts_families = [$typography_fonts, $custom_fonts, $this->block_fonts];
-		$fonts_families = $this->marged_fonts_array($fonts_families);
+		$global_fonts = Helper::extract_font_families($global_typography_data);
+
+		$fonts_families = [$typography_fonts, $custom_fonts, $global_fonts, $extra_fonts];
+		$fonts_families = self::marged_fonts_array($fonts_families);
 
 		if (!empty($fonts_families)) {
 			$font_url = "https://fonts.googleapis.com/css?family=";
@@ -1123,7 +1161,7 @@ class AssetsGenerator
 		}
 	}
 
-	public function marged_fonts_array($arrays)
+	public static function marged_fonts_array($arrays)
 	{
 		$merged = [];
 
