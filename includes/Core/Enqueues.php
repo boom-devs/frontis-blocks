@@ -35,6 +35,7 @@ class Enqueues
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('enqueue_block_editor_assets', [$this, 'enqueue_editor_scripts']);
         add_action('wp_footer', [$this, 'enqueue_assets_footer']);
+        add_action('wp_head', [$this, 'load_google_font'], 1);
     }
 
     public function get_page_template_name()
@@ -101,6 +102,14 @@ class Enqueues
             }
 
             AssetsGenerator::get_instance()->generate_page_assets($modified_post->ID, $modified_post, $critical_css_used);
+        }
+
+        // Enqueue global CSS
+        $global_css_path = $this->upload_dir['basedir'] . '/frontis-blocks/global/global.css';
+        $global_css_url = $this->upload_dir['baseurl'] . '/frontis-blocks/global/global.css';
+        if (file_exists($global_css_path)) {
+            $version = filemtime($global_css_path);
+            wp_enqueue_style('frontis-blocks-global', $global_css_url, [], $version);
         }
 
         $page_name = $this->get_page_template_name();

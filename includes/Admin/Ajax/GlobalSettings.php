@@ -7,6 +7,7 @@ if (!defined('ABSPATH')) {
 }
 
 use FrontisBlocks\Traits\Singleton;
+use FrontisBlocks\Assets\AssetsGenerator;
 
 /**
  * GlobalSettings
@@ -21,7 +22,6 @@ class GlobalSettings extends AjaxBase
     public function __construct()
     {
         // Other initialization code...
-        add_action('wp_head', array($this, 'output_global_styles'), 999);
         add_action('rest_api_init', array($this, 'typography_init'), 999);
     }
     /**
@@ -269,19 +269,19 @@ class GlobalSettings extends AjaxBase
      */
     private function update_option($option_name, $type)
     {
-        $updated = update_option($option_name, isset($_POST['data']) ? $_POST['data'] : [], true);
+        $data = isset($_POST['data']) ? $_POST['data'] : [];
+        update_option($option_name, $data, true);
 
-        if ($updated) {
-            $global_colors = get_option($option_name);
-            $data = array(
-                'option_name' => $option_name,
-                'data' => $global_colors
-            );
+        // Always regenerate global assets to ensure they are in sync with the current settings
+        \FrontisBlocks\Assets\AssetsGenerator::generate_global_assets();
 
-            wp_send_json_success($data);
-        }
+        $current_data = get_option($option_name);
+        $response_data = array(
+            'option_name' => $option_name,
+            'data' => $current_data
+        );
 
-        wp_send_json_error('Update failed.');
+        wp_send_json_success($response_data);
     }
     /**
      * sanitize_option_value
@@ -664,19 +664,6 @@ class GlobalSettings extends AjaxBase
         return $css;
     }
 
-    public function output_global_styles()
-    {
-        $styles = get_option('fb_global_styles', '');
-        if (!empty($styles)) {
-            // Add debugging comment
-            echo "<!-- Typography styles begin -->\n";
-            echo "<style id='fb-global-styles'>\n" . wp_kses_post($styles) . "\n</style>";
-            echo "<!-- Typography styles end -->\n";
-        } else {
-            // Debug if no styles were found
-            echo "<!-- No global styles found in database -->";
-        }
-    }
 
     public function typography_init()
     {
