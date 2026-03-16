@@ -36,9 +36,11 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			margin-bottom: 20px;
+			margin-bottom: 16px;
 			padding-bottom: 15px;
 			border-bottom: 1px solid #eee;
+			gap: 12px;
+			flex-wrap: wrap;
 
 			.mode-badge {
 				background: #1e90ff;
@@ -48,12 +50,77 @@
 				font-weight: 700;
 				font-size: 11px;
 				letter-spacing: 0.5px;
+				white-space: nowrap;
 			}
+		}
 
-			p {
-				margin: 0;
-				font-size: 13px;
+		/* Breakpoint Tabs */
+		.breakpoint-tabs {
+			display: flex;
+			gap: 2px;
+			background: #f0f0f0;
+			border-radius: 6px;
+			padding: 2px;
+
+			.breakpoint-tab {
+				display: flex;
+				align-items: center;
+				gap: 4px;
+				padding: 5px 12px;
+				border: none;
+				background: transparent;
+				border-radius: 4px;
+				cursor: pointer;
+				font-size: 12px;
 				color: #666;
+				transition: all 0.2s ease;
+				white-space: nowrap;
+
+				&:hover {
+					background: #e0e0e0;
+					color: #333;
+				}
+
+				&.active {
+					background: #1e90ff;
+					color: #fff;
+					box-shadow: 0 1px 3px rgba(30, 144, 255, 0.3);
+				}
+
+				.dashicons {
+					font-size: 16px;
+					width: 16px;
+					height: 16px;
+					line-height: 16px;
+				}
+
+				.bp-label {
+					font-weight: 500;
+				}
+			}
+		}
+
+		/* Layout Info Bar */
+		.layout-info-bar {
+			display: flex;
+			gap: 16px;
+			margin-bottom: 12px;
+			padding: 8px 12px;
+			background: #f8f9fa;
+			border-radius: 4px;
+			font-size: 12px;
+			color: #666;
+			border: 1px solid #eee;
+
+			.info-item {
+				display: flex;
+				gap: 4px;
+				align-items: center;
+
+				strong {
+					color: #333;
+					font-weight: 600;
+				}
 			}
 		}
 
@@ -62,8 +129,6 @@
 			background-image:
 				linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
 				linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
-			/* Background size is adjusted based on rowHeight in a professional version, 
-			   but here we keep it subtle. */
 			background-size: 50px 50px;
 			border-radius: 4px;
 			min-height: 400px;

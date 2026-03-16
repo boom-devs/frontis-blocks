@@ -7,18 +7,54 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+
+	// Responsive columns
 	cols: {
-		type: 'number',
-		default: 12
+		type: 'object',
+		default: {
+			Desktop: '12',
+			Tablet: '8',
+			Mobile: '4'
+		}
 	},
+
+	// Responsive row height (px)
 	rowHeight: {
-		type: 'number',
-		default: 40
+		type: 'object',
+		default: {
+			Desktop: '40',
+			Tablet: '35',
+			Mobile: '30'
+		}
 	},
+	rowHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	// Responsive gutter / gap (px)
 	gutter: {
-		type: 'number',
-		default: 10
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '8',
+			Mobile: '6'
+		}
 	},
+	gutterUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	// Layout behavior
 	compactType: {
 		type: 'string',
 		default: 'vertical'
@@ -26,6 +62,16 @@ const attributes = {
 	allowOverlap: {
 		type: 'boolean',
 		default: false
+	},
+
+	// Master layout store — per-breakpoint positions
+	layouts: {
+		type: 'object',
+		default: {
+			Desktop: [],
+			Tablet: [],
+			Mobile: []
+		}
 	},
 };
 

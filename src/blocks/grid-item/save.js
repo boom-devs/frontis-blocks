@@ -4,22 +4,16 @@ export default function save({ attributes }) {
     const { 
         blockID,
         blockStyle,
-        gridColumnStart,
-        gridRowStart,
-        gridColumnSpan,
-        gridRowSpan,
-        
+        id,
     } = attributes;
 
-    const style = {
-        gridArea: `${(gridRowStart || 0) + 1} / ${(gridColumnStart || 0) + 1} / ${(gridRowStart || 0) + (gridRowSpan || 4) + 1} / ${(gridColumnStart || 0) + (gridColumnSpan || 4) + 1}`,
-    };
+    // No inline gridArea — parent block handles ALL positioning via <style> tag
+    // This avoids specificity conflicts with responsive media queries
 
     return (
         <div {...useBlockProps.save({ 
             className: blockID,
-            style 
-        })}>
+        })} data-grid-id={id}>
             <InnerBlocks.Content />
         </div>
     );
