@@ -3779,7 +3779,16 @@ const Inspector = ({ attributes, setAttributes }) => {
                         label={__("Premade Style", "frontis-blocks")}
                         options={PREMADE_STYLE}
                         value={premadeStyle}
-                        onChange={(value) => setAttributes({ premadeStyle: value })}
+                        onChange={(value) => {
+                            const styleDefaults = {
+                                'style-1': { showCategorySwitcher: false },
+                                'style-2': { showCategorySwitcher: true },
+                            };
+                            setAttributes({ 
+                                premadeStyle: value,
+                                ...(styleDefaults[value] || {})
+                            });
+                        }}
                     />
                     <BaseControl
                         label={__("Element Visibility", "frontis-blocks")}

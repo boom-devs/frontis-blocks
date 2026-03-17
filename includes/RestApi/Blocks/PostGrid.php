@@ -663,54 +663,47 @@ class PostGrid
                                 <?php endif; ?>
                                 
 
-                                <?php if ($show_category_switcher == 'true'): ?>
+                                <?php if ($show_category_switcher == 'true'):
+                                    $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
+                                    $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
+                                    if ($categories && !is_wp_error($categories)): ?>
                                     <div class="fb_post_grid_categories">
-                                        <?php
-                                        $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
-                                        $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
-
-                                        if ($categories):
-                                            foreach ($categories as $category): ?>
-                                                <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                    <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                        <a class="fb_post_grid_category_url"
-                                                            href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
-                                                            aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                            <?php echo esc_html($category->name); ?>
-                                                        </a>
-                                                    <?php else: ?>
-                                                        <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach;
-                                        endif;
-                                        ?>
+                                        <?php foreach ($categories as $category): ?>
+                                            <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
+                                                <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                    <a class="fb_post_grid_category_url"
+                                                        href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
+                                                        aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                        <?php echo esc_html($category->name); ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endif; ?>
+                                <?php endif; endif; ?>
 
-                                <?php if ($show_tag_switcher == 'true'): ?>
+                                <?php if ($show_tag_switcher == 'true'):
+                                    $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
+                                    $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
+                                    if ($tags && !is_wp_error($tags)): ?>
                                     <div class="fb_post_grid_tags">
-                                        <?php
-                                        $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
-                                        $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
-                                        if ($tags):
-                                            foreach ($tags as $tag): ?>
-                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                    <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                        <a class="fb_post_grid_tag_url"
-                                                            href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
-                                                            aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                            <?php echo esc_html($tag->name); ?>
-                                                        </a>
-                                                    <?php else: ?>
-                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
-                                                    <?php endif; ?>
-                                                </div>
-                                            <?php endforeach;
-                                        endif;
-                                        ?>
+                                        <?php foreach ($tags as $tag): ?>
+                                            <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
+                                                <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                    <a class="fb_post_grid_tag_url"
+                                                        href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
+                                                        aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                        <?php echo esc_html($tag->name); ?>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                <?php endif; ?>
+                                            </div>
+                                        <?php endforeach; ?>
                                     </div>
-                                <?php endif; ?>
+                                <?php endif; endif; ?>
 
                                 <div class="fb_post_grid_content">
                                     <?php if ($title_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
@@ -809,53 +802,47 @@ class PostGrid
                                         </div>
                                     <?php endif; ?>
 
-                                    <?php if ($show_category_switcher == 'true'): ?>
+                                    <?php if ($show_category_switcher == 'true'):
+                                        $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
+                                        $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
+                                        if ($categories && !is_wp_error($categories)): ?>
                                         <div class="fb_post_grid_categories">
-                                            <?php
-                                            $cat_tax = $this->fb_resolve_category_tax_for_post($single_post->ID);
-                                            $categories = $cat_tax ? get_the_terms($single_post->ID, $cat_tax) : [];
-                                            if ($categories):
-                                                foreach ($categories as $category): ?>
-                                                    <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
-                                                        <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                            <a class="fb_post_grid_category_url"
-                                                                href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
-                                                                aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
-                                                                <?php echo esc_html($category->name); ?>
-                                                            </a>
-                                                        <?php else: ?>
-                                                            <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                <?php endforeach;
-                                            endif;
-                                            ?>
+                                            <?php foreach ($categories as $category): ?>
+                                                <div class="fb_post_grid_category" key="<?php echo esc_attr($category->term_id); ?>">
+                                                    <?php if ($category_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                        <a class="fb_post_grid_category_url"
+                                                            href="<?php echo esc_url(get_term_link($category, $category->taxonomy)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts in %s category', $category->name)); ?>">
+                                                            <?php echo esc_html($category->name); ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="fb_post_grid_category_name"><?php echo esc_html($category->name); ?></span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
-                                    <?php endif; ?>
+                                    <?php endif; endif; ?>
 
-                                    <?php if ($show_tag_switcher == 'true'): ?>
+                                    <?php if ($show_tag_switcher == 'true'):
+                                        $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
+                                        $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
+                                        if ($tags && !is_wp_error($tags)): ?>
                                         <div class="fb_post_grid_tags">
-                                            <?php
-                                            $tag_tax = $this->fb_resolve_tag_tax_for_post($single_post->ID);
-                                            $tags = $tag_tax ? get_the_terms($single_post->ID, $tag_tax) : [];
-                                            if ($tags):
-                                                foreach ($tags as $tag): ?>
-                                                    <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
-                                                        <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
-                                                            <a class="fb_post_grid_tag_url"
-                                                                href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
-                                                                aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
-                                                                <?php echo esc_html($tag->name); ?>
-                                                            </a>
-                                                        <?php else: ?>
-                                                            <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
-                                                        <?php endif; ?>
-                                                    </div>
-                                                <?php endforeach;
-                                            endif;
-                                            ?>
+                                            <?php foreach ($tags as $tag): ?>
+                                                <div class="fb_post_grid_tag" key="<?php echo esc_attr($tag->term_id); ?>">
+                                                    <?php if ($tag_link_switcher == 'true' && $post_wrapper_link_switcher !== 'true'): ?>
+                                                        <a class="fb_post_grid_tag_url"
+                                                            href="<?php echo esc_url(get_term_link($tag, $tag->taxonomy)); ?>"
+                                                            aria-label="<?php echo esc_attr(sprintf('View posts tagged with %s', $tag->name)); ?>">
+                                                            <?php echo esc_html($tag->name); ?>
+                                                        </a>
+                                                    <?php else: ?>
+                                                        <span class="fb_post_grid_tag_name"><?php echo esc_html($tag->name); ?></span>
+                                                    <?php endif; ?>
+                                                </div>
+                                            <?php endforeach; ?>
                                         </div>
-                                    <?php endif; ?>
+                                    <?php endif; endif; ?>
 
                                 </div>
                             </div>
