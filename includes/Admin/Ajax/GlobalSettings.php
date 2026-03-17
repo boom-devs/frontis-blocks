@@ -60,7 +60,25 @@ class GlobalSettings extends AjaxBase
 
     public function update_global_colors()
     {
-        $this->handle_option_update('global_colors', 'array');
+        $this->validate_nonce();
+        $this->validate_permissions();
+
+        $data = isset($_POST['data']) && is_array($_POST['data']) ? $_POST['data'] : [];
+        update_option('fb_global_colors', $data, true);
+
+        $theme_palette = $this->get_theme_palette();
+        update_option('fb_global_colors_theme_synced', $data == $theme_palette, true);
+        update_option('fb_global_colors_theme_palette_hash', $this->get_palette_hash($theme_palette), true);
+
+        AssetsGenerator::generate_global_assets();
+
+        $current_data = get_option('fb_global_colors');
+        $response_data = array(
+            'option_name' => 'fb_global_colors',
+            'data' => $current_data,
+        );
+
+        wp_send_json_success($response_data);
     }
 
     public function update_gradient_colors()
@@ -282,6 +300,29 @@ class GlobalSettings extends AjaxBase
         );
 
         wp_send_json_success($response_data);
+    }
+
+    private function get_theme_palette()
+    {
+        $theme_settings = wp_get_global_settings();
+
+        if (
+            isset($theme_settings['color']['palette']['theme']) &&
+            is_array($theme_settings['color']['palette']['theme'])
+        ) {
+            return $theme_settings['color']['palette']['theme'];
+        }
+
+        return array();
+    }
+
+    private function get_palette_hash($palette)
+    {
+        if (!is_array($palette)) {
+            $palette = array();
+        }
+
+        return md5(wp_json_encode($palette));
     }
     /**
      * sanitize_option_value
