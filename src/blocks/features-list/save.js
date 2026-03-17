@@ -4,7 +4,6 @@ import './style.scss'; // Ensure you have styles for the front end if needed
 
 export default function Save({ attributes }) {
     const { 
-
         blockID,
         FeatureItems,
         FeatureIconShape,
@@ -23,7 +22,6 @@ export default function Save({ attributes }) {
     const blockProps = useBlockProps.save({
         className: `fb-feature-main-wrapper ${blockID} ${featuresListDesktopSwitcher && 'fb-desktop-responsive'} ${featuresListTabletSwitcher && 'fb-tablet-responsive'} ${featuresListMobileSwitcher && 'fb-mobile-responsive'}`,
     });
-
 
     return (
         <>
