@@ -154,30 +154,47 @@
                 }
             }
 
-            .fb-color-section-wrapper{
-                padding: 0 16px;
-            }
-            .fb-color-section > div > div:last-child {
-                margin-top: 10px;
-                padding: 12px;
-                border: 1px solid #E1E3E8;
-                border-radius: 4px;
-                
-                .components-circular-option-picker__option-wrapper {
-                    width: 24px;
-                    height: 24px;
-                    border: 1px solid #c9c9c9;
-                    border-radius: 50%;
+	            .fb-color-section-wrapper{
+	                padding: 0 16px;
+	            }
+	            .fb-color-section .fb-scrollable-palette > * > :not(:first-child) {
+	                margin-top: 10px;
+	                padding: 12px;
+	                border: 1px solid #E1E3E8;
+	                border-radius: 4px;
+	                display: block;
+	                max-height: 220px;
+	                overflow-y: auto;
+	                overflow-x: hidden;
+	                scrollbar-width: thin;
+	                
+	                .components-circular-option-picker__option-wrapper {
+	                    width: 24px;
+	                    height: 24px;
+	                    border: 1px solid #c9c9c9;
+	                    border-radius: 50%;
 
-                    .components-circular-option-picker__option {
-                        padding: 6px;
+	                    .components-circular-option-picker__option {
+	                        padding: 6px;
 
-                        &::after {
-                            display: none;
-                        }
-                    }
-                }
-            }
+	                        &::after {
+	                            display: none;
+	                        }
+	                    }
+	                }
+	            }
+
+	            .fb-color-section .fb-scrollable-palette .components-circular-option-picker__swatches {
+	                padding-right: 4px;
+	            }
+
+	            .fb-custom-color-panel > * > :only-child,
+	            .fb-custom-gradient-color-panel > * > :only-child {
+	                margin-top: 10px;
+	                padding: 12px;
+	                border: 1px solid #E1E3E8;
+	                border-radius: 4px;
+	            }
             .fb-color-section {
                 margin-bottom: 24px;
 
