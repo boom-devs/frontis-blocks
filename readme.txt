@@ -248,7 +248,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.2.0 – 12 March 2026 =
+= 1.2.0 – 17 March 2026 =
 - **New**: Added Google Fonts preload toggle in Performance settings.
 - **Fixed**: Resolved Google Fonts URL sanitization issues.
 - **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
@@ -259,7 +259,13 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Fixed**: Resolved icon rendering issues in Team Member and Testimonial blocks on the frontend.
 - **Improved**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
 - **Improved**: Refactored Global Settings to remove dead code and improve maintainability.
+- **New**: Added render type switch for Rive Animation block with improved speed optimization.
+- **Fixed**: Resolved Rive animation autoplay feature and resize issues on device change.
+- **Fixed**: Fixed frontend Google Fonts loading issues.
+- **Fixed**: Global typography now applies by default, block-level font overrides work when explicitly set, and clearing a block font correctly falls back to the global font on the frontend.
+- **Improved**: Refactored and reviewed global typography settings for better maintainability.
 - **Maintenance**: Consolidated build system by removing Grunt and pinning dependencies.
+- **Maintenance**: Removed unused `@rive-app/react-webgl2` dependency.
 
 = 1.1.9 – 02 March 2026 =
 - **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls and SMTP email delivery.
