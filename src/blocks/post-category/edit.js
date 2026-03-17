@@ -668,9 +668,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             ) : (
 
                                 <>
-                                    {premadeStyle === "style-3" && taxonomy.fb_taxonomy_image && (
+                                    {premadeStyle === "style-3" && (
                                         <div className="fb-taxonomy-image">
-                                            <img src={taxonomy.fb_taxonomy_image} alt={taxonomy.name} />
+                                            <img src={taxonomy.fb_taxonomy_image || defaultImageUrl} alt={taxonomy.name} />
                                         </div>
                                     )}
 

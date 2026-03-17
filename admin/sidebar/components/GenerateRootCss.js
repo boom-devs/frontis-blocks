@@ -6,10 +6,19 @@ const generateCSSVariables = (data, deviceType) => {
     };
 
     const getValue = (obj, prop, breakpoint = null) => {
+        let val = null;
         if (breakpoint) {
-            return obj?.[prop]?.value?.[breakpoint] || null;
+            val = obj?.[prop]?.value?.[breakpoint];
+        } else {
+            val = obj?.[prop]?.value;
         }
-        return obj?.[prop]?.value || null;
+
+        // Handle nested value objects (used by fontFamily/fontWeight occasionally)
+        if (typeof val === 'object' && val !== null && val.value !== undefined) {
+            return val.value;
+        }
+
+        return val || null;
     };
 
     const getUnit = (obj, prop, breakpoint) => {
@@ -53,40 +62,54 @@ const generateCSSVariables = (data, deviceType) => {
 
                 if(typoValue) {
                     rootStyles += `${typoValue.variable}: ${value};\n`;
+                    
+                    // Aliasing for backward compatibility
+                    if (typoValue.variable.includes('--text-decoration')) {
+                        rootStyles += `${typoValue.variable.replace('--text-decoration', '--font-decoration')}: ${value};\n`;
+                    }
+                    if (typoValue.variable.includes('--text-transform')) {
+                        rootStyles += `${typoValue.variable.replace('--text-transform', '--font-transform')}: ${value};\n`;
+                    }
+                    if (typoValue.variable.includes('--letter-spacing')) {
+                        rootStyles += `${typoValue.variable.replace('--letter-spacing', '--font-letter-spacing')}: ${value};\n`;
+                    }
+                    if (typoValue.variable.includes('--line-height')) {
+                        rootStyles += `${typoValue.variable.replace('--line-height', '--font-line-height')}: ${value};\n`;
+                    }
                 }
 
                 if (key === 'body') {
-                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'link') {
-                    linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    linkStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'button') {
-                    buttonStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    buttonStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'captions') {
-                    captionStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    captionStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'all') {
-                    combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    combinedHeadingStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h1') {
-                    heading1Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading1Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h2') {
-                    heading2Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading2Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h3') {
-                    heading3Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading3Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h4') {
-                    heading4Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading4Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h5') {
-                    heading5Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading5Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
                 if (key === 'h6') {
-                    heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(--fb-global-${key}--${prop.replace(/[A-Z]/g, '-$&').toLowerCase()});\n`;
+                    heading6Styles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${typoValue.variable});\n`;
                 }
             }
         });
@@ -105,6 +128,14 @@ const generateCSSVariables = (data, deviceType) => {
                 let typoValue = data[key][prop];
                 const cssVar = `${typoValue.variable}`;
                 desktopStyles += `${cssVar}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
+
+                // Aliasing for backward compatibility
+                if (cssVar.includes('--letter-spacing')) {
+                    desktopStyles += `${cssVar.replace('--letter-spacing', '--font-letter-spacing')}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
+                }
+                if (cssVar.includes('--line-height')) {
+                    desktopStyles += `${cssVar.replace('--line-height', '--font-line-height')}: ${createValueWithUnit(desktopValue, desktopUnit)};\n`;
+                }
 
                 if (key === 'body') {
                     paragraphStyles += `${prop.replace(/[A-Z]/g, '-$&').toLowerCase()}: var(${cssVar});\n`;
@@ -145,12 +176,28 @@ const generateCSSVariables = (data, deviceType) => {
                 let typoValue = data[key][prop];
                 const cssVar = `${typoValue.variable}`;
                 tabletStyles += `${cssVar}: ${createValueWithUnit(tabletValue, tabletUnit)};\n`;
+
+                // Aliasing for backward compatibility
+                if (cssVar.includes('--letter-spacing')) {
+                    tabletStyles += `${cssVar.replace('--letter-spacing', '--font-letter-spacing')}: ${createValueWithUnit(tabletValue, tabletUnit)};\n`;
+                }
+                if (cssVar.includes('--line-height')) {
+                    tabletStyles += `${cssVar.replace('--line-height', '--font-line-height')}: ${createValueWithUnit(tabletValue, tabletUnit)};\n`;
+                }
             }
 
             if (mobileValue !== null) {
                 let typoValue = data[key][prop];
                 const cssVar = `${typoValue.variable}`;
                 mobileStyles += `${cssVar}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
+
+                // Aliasing for backward compatibility
+                if (cssVar.includes('--letter-spacing')) {
+                    mobileStyles += `${cssVar.replace('--letter-spacing', '--font-letter-spacing')}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
+                }
+                if (cssVar.includes('--line-height')) {
+                    mobileStyles += `${cssVar.replace('--line-height', '--font-line-height')}: ${createValueWithUnit(mobileValue, mobileUnit)};\n`;
+                }
             }
         });
 
@@ -181,7 +228,7 @@ const generateCSSVariables = (data, deviceType) => {
         iframeDocument.head.appendChild(linkElement);
     }
 
-    if(paragraphStyles === '') {
+    if(rootStyles === '' && desktopStyles === '' && paragraphStyles === '') {
         return false;
     }
 
@@ -192,90 +239,87 @@ const generateCSSVariables = (data, deviceType) => {
     let allCombinedStyles = '';
     let styles = '';
 
-    if(fileName === 'post.php') {
+    if(fileName === 'post.php' || fileName === 'post-new.php') {
         headingGrouped = `
-            body .is-root-container h1 {
+            .is-root-container h1, .editor-styles-wrapper h1 {
                 ${heading1Styles}
             }
-            body .is-root-container h2 {
+            .is-root-container h2, .editor-styles-wrapper h2 {
                 ${heading2Styles}
             }
-            body .is-root-container h3 {
+            .is-root-container h3, .editor-styles-wrapper h3 {
                 ${heading3Styles}
             }
-            body .is-root-container h4 {
+            .is-root-container h4, .editor-styles-wrapper h4 {
                 ${heading4Styles}
             }
-            body .is-root-container h5 {
+            .is-root-container h5, .editor-styles-wrapper h5 {
                 ${heading5Styles}
             }
-            body .is-root-container h6 {
+            .is-root-container h6, .editor-styles-wrapper h6 {
                 ${heading6Styles}
             }
         `;
 
         // Styles for the "all" combined typography
         allCombinedStyles = `
-            body .is-root-container h1{
+            .is-root-container h1, .editor-styles-wrapper h1 {
                 ${combinedHeadingStyles}
             }
-            body .is-root-container h2{
+            .is-root-container h2, .editor-styles-wrapper h2 {
                 ${combinedHeadingStyles}
             }
-            body .is-root-container h3{
+            .is-root-container h3, .editor-styles-wrapper h3 {
                 ${combinedHeadingStyles}
             }
-            body .is-root-container h4{
+            .is-root-container h4, .editor-styles-wrapper h4 {
                 ${combinedHeadingStyles}
             }
-            body .is-root-container h5{
+            .is-root-container h5, .editor-styles-wrapper h5 {
                 ${combinedHeadingStyles}
             }
-            body .is-root-container h6 {
+            .is-root-container h6, .editor-styles-wrapper h6 {
                 ${combinedHeadingStyles}
             }
         `;
 
         styles = `
-            :root {
+            :root, .is-root-container, .editor-styles-wrapper {
                 ${rootStyles}
                 ${desktopStyles}
             }
             @media (max-width: 1024px) {
-                :root {
+                :root, .is-root-container, .editor-styles-wrapper {
                     ${tabletStyles}
                 }
             }
             @media (max-width: 767px) {
-                :root {
+                :root, .is-root-container, .editor-styles-wrapper {
                     ${mobileStyles}
                 }
             }
 
-            body .is-root-container p {
+            .is-root-container p, .editor-styles-wrapper p {
                 ${paragraphStyles}
             }
 
-            body .is-root-container a{
+            .is-root-container a, .editor-styles-wrapper a, .is-root-container p a, .editor-styles-wrapper p a {
                 ${linkStyles}
             }
-            body .is-root-container p a {
-                ${linkStyles}
-            }
-            body .is-root-container .wp-block-button__link {
+            .is-root-container .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link {
                 ${buttonStyles}
             }
-            :root :where(.wp-element-button, .wp-block-button__link) {
+            :root :where(.wp-element-button, .wp-block-button__link), .editor-styles-wrapper :where(.wp-element-button, .wp-block-button__link) {
 				${buttonStyles}
             }
-            body .is-root-container button {
+            .is-root-container button, .editor-styles-wrapper button {
                 ${buttonStyles}
             }
 
-            body .is-root-container figcaption {
+            .is-root-container figcaption, .editor-styles-wrapper figcaption {
                 ${captionStyles}
             }
-            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
+            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption), .editor-styles-wrapper :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
                 ${captionStyles}
             }
             ${allCombinedStyles}
@@ -357,70 +401,70 @@ const generateCSSVariables = (data, deviceType) => {
 
         // Apply individual styles for each heading (h1, h2, h3, etc.)
         headingGrouped = `
-            body .wp-site-blocks h1 {
+            .wp-site-blocks h1, .editor-styles-wrapper h1 {
                 ${heading1Styles}
             }
-            body .wp-site-blocks h2 {
+            .wp-site-blocks h2, .editor-styles-wrapper h2 {
                 ${heading2Styles}
             }
-            body .wp-site-blocks h3 {
+            .wp-site-blocks h3, .editor-styles-wrapper h3 {
                 ${heading3Styles}
             }
-            body .wp-site-blocks h4 {
+            .wp-site-blocks h4, .editor-styles-wrapper h4 {
                 ${heading4Styles}
             }
-            body .wp-site-blocks h5 {
+            .wp-site-blocks h5, .editor-styles-wrapper h5 {
                 ${heading5Styles}
             }
-            body .wp-site-blocks h6 {
+            .wp-site-blocks h6, .editor-styles-wrapper h6 {
                 ${heading6Styles}
             }
         `;
 
         // Styles for the "all" combined typography
         allCombinedStyles = `
-            body .wp-site-blocks h1,
-            body .wp-site-blocks h2,
-            body .wp-site-blocks h3,
-            body .wp-site-blocks h4,
-            body .wp-site-blocks h5,
-            body .wp-site-blocks h6 {
+            .wp-site-blocks h1, .editor-styles-wrapper h1,
+            .wp-site-blocks h2, .editor-styles-wrapper h2,
+            .wp-site-blocks h3, .editor-styles-wrapper h3,
+            .wp-site-blocks h4, .editor-styles-wrapper h4,
+            .wp-site-blocks h5, .editor-styles-wrapper h5,
+            .wp-site-blocks h6, .editor-styles-wrapper h6 {
                 ${combinedHeadingStyles}
             }
         `;
 
         styles = `
-            :root {
+            :root, .wp-site-blocks, .editor-styles-wrapper {
                 ${rootStyles}
                 ${desktopStyles}
             }
             @media (max-width: 1024px) {
-                :root {
+                :root, .wp-site-blocks, .editor-styles-wrapper {
                     ${tabletStyles}
                 }
             }
             @media (max-width: 767px) {
-                :root {
+                :root, .wp-site-blocks, .editor-styles-wrapper {
                     ${mobileStyles}
                 }
             }
 
-            body .wp-site-blocks p {
+            .wp-site-blocks p, .editor-styles-wrapper p {
                 ${paragraphStyles}
             }
 
-            body .wp-site-blocks a, body .wp-site-blocks p a {
+            .wp-site-blocks a, .editor-styles-wrapper a, .wp-site-blocks p a, .editor-styles-wrapper p a {
                 ${linkStyles}
             }
 
-            body .wp-site-blocks .wp-block-button__link, body .wp-site-blocks button {
+            .wp-site-blocks .wp-block-button__link, .editor-styles-wrapper .wp-block-button__link, .wp-site-blocks button, .editor-styles-wrapper button {
                 ${buttonStyles}
             }
 
-            body .wp-site-blocks figcaption {
+            .wp-site-blocks figcaption, .editor-styles-wrapper figcaption {
                 ${captionStyles}
             }
-            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
+            :root :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption), .editor-styles-wrapper :where(.wp-element-caption, .wp-block-audio figcaption, .wp-block-embed figcaption, .wp-block-gallery figcaption, .wp-block-image figcaption, .wp-block-table figcaption, .wp-block-video figcaption) {
                 ${captionStyles}
             }
             ${allCombinedStyles}
