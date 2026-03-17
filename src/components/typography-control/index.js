@@ -22,6 +22,10 @@ import FB_Range from '@Components/range';
 import loadGoogleFont from '@Utils/loadGoogleFont';
 import FB_GBSelectControl from '@Components/gb-select-control';
 
+const DEFAULT_FONT_OPTION = {
+    label: __("Default", "frontis-blocks"),
+    value: "Default",
+};
 
 const FB_TypographyControl = ({
     label = __("Typography", "frontis-blocks"),
@@ -75,19 +79,19 @@ const FB_TypographyControl = ({
 
     useEffect(() => {
         GOOGLE_FONTS().then((fetchedFonts) => {
-            setFontOptions(fetchedFonts);
-    
-            const current = fetchedFonts.find(f => f.value === fontFamily);
-    
-            if (current) {
-                setSelectedFontFamilyOption(current);
-                setAvailableFontWeights(current.weights || []);
-            } else {
-                setSelectedFontFamilyOption({ label: 'Default', value: 'Default' });
-                setAvailableFontWeights([]);
-            }
+            setFontOptions([DEFAULT_FONT_OPTION, ...fetchedFonts]);
         });
     }, []);
+
+    useEffect(() => {
+        if (!fontOptions.length) {
+            return;
+        }
+
+        const current = fontOptions.find((font) => font.value === fontFamily) || DEFAULT_FONT_OPTION;
+        setSelectedFontFamilyOption(current);
+        setAvailableFontWeights(current.weights || []);
+    }, [fontFamily, fontOptions]);
 
 
     // useEffect(() => {
@@ -97,13 +101,14 @@ const FB_TypographyControl = ({
 	// }, [fontFamily]);
 
     const handleFontFamilyChange = (selectedOption) => {
-        setSelectedFontFamilyOption(selectedOption);
+        const normalizedOption = selectedOption || DEFAULT_FONT_OPTION;
+        setSelectedFontFamilyOption(normalizedOption);
     
-        const newFontFamily = selectedOption?.value || 'Default';
+        const newFontFamily = normalizedOption.value || 'Default';
         onChangeFontFamily(newFontFamily);
     
         // Update font weight list
-        setAvailableFontWeights(selectedOption?.weights || []);
+        setAvailableFontWeights(normalizedOption.weights || []);
     
         // if (newFontFamily !== 'Default') {
         //     loadGoogleFont(newFontFamily);
@@ -265,6 +270,7 @@ const FB_TypographyControl = ({
                                     options={fontOptions}
                                     value={selectedFontFamilyOption}
                                     onChange={handleFontFamilyChange}
+                                    isClearable={true}
                                     className="fb-select2-control"
                                     styles={{
                                         menu: (base) => ({
