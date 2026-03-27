@@ -1,0 +1,51 @@
+$primary_color: #0B0C0E;
+$secondary_color: #6A758E;
+$background_color: #F7F7F7;
+$white_color: #ffffff;
+$bg_gradient: linear-gradient(180deg, #D0D0D0 0%, #F7F7F7 100%);
+$text_color: #2A2F39;
+$border_color: #E1E3E8;
+
+.block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)){
+    max-width: 870px !important;
+    width: 100%;
+}
+
+.fb-multi-column-pricing-table-wrapper {
+    .fb-pricing-inner-wrapper{
+        .fb-pricing-top-wrapper{
+            text-align: center;
+
+            .fb-pricing-top-text{
+                color: #ffffff;
+                font-size: 16px;
+                line-height: 100%;
+                font-weight: 500;
+                text-align: center;
+            }
+        }
+
+        .fb-pricing-main-wrapper{
+            padding: 0;
+            .fb-pricing-header{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                .fb-pricing-title{
+                    margin: 0;
+                }
+            }
+            
+            .fb-pricing-button-wrapper{
+                display: flex;
+                text-align: center;
+
+                .fb-pricing-button{
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+/** End General scss for Advanced Button **/

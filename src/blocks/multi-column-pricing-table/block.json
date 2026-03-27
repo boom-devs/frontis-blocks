@@ -1,0 +1,21 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"title": "Multi Column Pricing Table",
+	"name": "frontis-blocks/multi-column-pricing-table",
+	"version": "1.0.0",
+	"category": "frontis-blocks",
+	"description": "A customizable multi-column pricing table block with various styling options.",
+	"example": {},
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"customClassName": false,
+		"customCss": false
+	},
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
