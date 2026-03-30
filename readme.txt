@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Frontis Blocks is a block library with 40+ blocks, global styles, sliders/galleries, CTAs, and map/form integrations, plus ready-made patterns to help you build pages faster in the Block Editor.
+Frontis Blocks - WordPress block library for Gutenberg Editor with 40+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
 
 == Description ==
 
