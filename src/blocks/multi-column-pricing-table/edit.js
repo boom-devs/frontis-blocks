@@ -16,73 +16,33 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const {
         blockID,
         blockStyle,
-        /** Start Header */
-        pricingSectionTopSwitcher,
-        pricingSectionTopText,
-        pricingTitleTag,
-        pricingTitle,
-        pricingSubTitleSwitcher,
-        pricingSubTitleTag,
-        pricingSubTitle,
-        pricingIconAlign,
-        pricingIcon,
-        /** End Header */
-
-        /** Start Pricing */
-        normalPrice,
-        salePriceSwitcher,
-        salePrice,
-        priceCurrency,
-        priceCurrencyPosition,
-        pricePeriod,
-        pricePeriodSeparator,
-        /** End Pricing */
-
-        /** Start Feature */
-        priceHideFeaturesSwitcher,
-        priceFeatureShowLineSwitcher,
-        priceFeatureIconSwitcher,
-        priceFeatureItems,
-        /** End Feature */
-
-        /** Start Button */
-        priceButtonSwitcher,
-        priceButtonText,
-        priceButtonUrl,
-        priceButtonTargetUrl,
-        priceButtonIconAlign,
-        priceButtonIcon,
-        priceButtonIconPosition,
-        priceButtonIconSpacing,
-        /** End Button */
-
-        pricingTitleAlignment,
-
-        priceAfterTextSwitcher,
-        priceAfterText,
-
-        priceFeatureAfterTextSwitcher,
-        priceFeatureAfterText,
-
+        selectedColumn,
+        columns,
         pricingTableGlobalWraperID,
         pricingTableGlobalWraperClass,
-
         pricingTableDesktopSwitcher,
         pricingTableTabletSwitcher,
         pricingTableMobileSwitcher,
-
-        pricingTopSectionTextFontFamily,
-        normalPricingFontFamily, 
-        salePricingFontFamily, 
-        priceCurrencyFontFamily, 
-        pricePeriodFontFamily, 
-        pricingTitleFontFamily, 
-        pricingSubtitleFontFamily, 
-        priceAfterTextFontFamily, 
-        pricingfeatureTitleFontFamily, 
-        priceButtonFontFamily, 
-        priceFeatureAfterTextFontFamily,
     } = attributes;
+
+    // Helper to get current column data
+    const getColumnData = (columnIndex) => {
+        return columns[columnIndex] || {};
+    };
+
+    // Helper to update specific column attribute
+    const updateColumnAttribute = (key, value, columnIndex = null) => {
+        const targetIndex = columnIndex !== null ? columnIndex : 
+            columns.findIndex(col => col.id === selectedColumn);
+        
+        const newColumns = columns.map((col, index) => {
+            if (index === targetIndex) {
+                return { ...col, [key]: value };
+            }
+            return col;
+        });
+        setAttributes({ columns: newColumns });
+    };
 
     // Handle block ID generation (handles duplication and initial ID)
     useBlockIdGenerator({
@@ -96,81 +56,28 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     /** Start Load Google Font */
     useEffect(() => {
-        if (pricingTopSectionTextFontFamily && !loadedFonts.has(pricingTopSectionTextFontFamily)) {
-            loadGoogleFont(pricingTopSectionTextFontFamily);
-            loadedFonts.add(pricingTopSectionTextFontFamily);
-        }
-    }, [pricingTopSectionTextFontFamily]);
+        const fontFamilies = [
+            'pricingTopSectionTextFontFamily',
+            'normalPricingFontFamily',
+            'salePricingFontFamily',
+            'priceCurrencyFontFamily',
+            'pricePeriodFontFamily',
+            'pricingTitleFontFamily',
+            'pricingSubtitleFontFamily',
+            'priceAfterTextFontFamily',
+            'pricingfeatureTitleFontFamily',
+            'priceButtonFontFamily',
+            'priceFeatureAfterTextFontFamily',
+        ];
 
-    useEffect(() => {
-        if (normalPricingFontFamily && !loadedFonts.has(normalPricingFontFamily)) {
-            loadGoogleFont(normalPricingFontFamily);
-            loadedFonts.add(normalPricingFontFamily);
-        }
-    }, [normalPricingFontFamily]);
+        fontFamilies.forEach(fontFamily => {
+            if (attributes[fontFamily] && !loadedFonts.has(attributes[fontFamily])) {
+                loadGoogleFont(attributes[fontFamily]);
+                loadedFonts.add(attributes[fontFamily]);
+            }
+        });
+    }, [attributes]);
 
-    useEffect(() => {
-        if (salePricingFontFamily && !loadedFonts.has(salePricingFontFamily)) {
-            loadGoogleFont(salePricingFontFamily);
-            loadedFonts.add(salePricingFontFamily);
-        }
-    }, [salePricingFontFamily]);
-
-    useEffect(() => {
-        if (priceCurrencyFontFamily && !loadedFonts.has(priceCurrencyFontFamily)) {
-            loadGoogleFont(priceCurrencyFontFamily);
-            loadedFonts.add(priceCurrencyFontFamily);
-        }
-    }, [priceCurrencyFontFamily]);
-
-    useEffect(() => {
-        if (pricePeriodFontFamily && !loadedFonts.has(pricePeriodFontFamily)) {
-            loadGoogleFont(pricePeriodFontFamily);
-            loadedFonts.add(pricePeriodFontFamily);
-        }
-    }, [pricePeriodFontFamily]);
-
-    useEffect(() => {
-        if (pricingTitleFontFamily && !loadedFonts.has(pricingTitleFontFamily)) {
-            loadGoogleFont(pricingTitleFontFamily);
-            loadedFonts.add(pricingTitleFontFamily);
-        }
-    }, [pricingTitleFontFamily]);
-
-    useEffect(() => {
-        if (pricingSubtitleFontFamily && !loadedFonts.has(pricingSubtitleFontFamily)) {
-            loadGoogleFont(pricingSubtitleFontFamily);
-            loadedFonts.add(pricingSubtitleFontFamily);
-        }
-    }, [pricingSubtitleFontFamily]);
-    
-    useEffect(() => {
-        if (priceAfterTextFontFamily && !loadedFonts.has(priceAfterTextFontFamily)) {
-            loadGoogleFont(priceAfterTextFontFamily);
-            loadedFonts.add(priceAfterTextFontFamily);
-        }
-    }, [priceAfterTextFontFamily]);
-    
-    useEffect(() => {
-        if (pricingfeatureTitleFontFamily && !loadedFonts.has(pricingfeatureTitleFontFamily)) {
-            loadGoogleFont(pricingfeatureTitleFontFamily);
-            loadedFonts.add(pricingfeatureTitleFontFamily);
-        }
-    }, [pricingfeatureTitleFontFamily]);
-    
-    useEffect(() => {
-        if (priceButtonFontFamily && !loadedFonts.has(priceButtonFontFamily)) {
-            loadGoogleFont(priceButtonFontFamily);
-            loadedFonts.add(priceButtonFontFamily);
-        }
-    }, [priceButtonFontFamily]);
-    
-    useEffect(() => {
-        if (priceFeatureAfterTextFontFamily && !loadedFonts.has(priceFeatureAfterTextFontFamily)) {
-            loadGoogleFont(priceFeatureAfterTextFontFamily);
-            loadedFonts.add(priceFeatureAfterTextFontFamily);
-        }
-    }, [priceFeatureAfterTextFontFamily]);
     /** End Load Google Font */
 
     /** Start Generate Block Style */
@@ -194,6 +101,191 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
 
+    // Render a single pricing column
+    const renderPricingColumn = (columnIndex) => {
+        const columnData = getColumnData(columnIndex);
+        const isActive = columns[columnIndex]?.id === selectedColumn;
+        const columnClass = columnIndex === 0 ? '' : columnIndex === 1 ? ' two' : ' three';
+
+        return (
+            <div
+                className={`fb-mc-pricing-column${columnClass} ${isActive ? 'is-selected-column' : ''}`}
+                key={columns[columnIndex]?.id || `column-${columnIndex}`}
+                onClick={() => setAttributes({ selectedColumn: columns[columnIndex]?.id })}
+            >
+                <div className="fb-mc-pricing-inner-wrapper">
+                    {columnData.pricingSectionTopSwitcher && (
+                        <div className="fb-mc-pricing-top-wrapper">
+                            <RichText
+                                tagName="span"
+                                className="fb-mc-pricing-top-text"
+                                value={columnData.pricingSectionTopText || ''}
+                                onChange={(value) => updateColumnAttribute('pricingSectionTopText', value, columnIndex)}
+                                placeholder={__('Enter text', 'frontis-blocks')}
+                            />
+                        </div>
+                    )}
+                    <div className="fb-mc-pricing-main-wrapper">
+                        <div className="fb-mc-pricing-header">
+                            <div className={`fb-mc-pricing-title-wrapper`}>
+                                <RichText
+                                    tagName={columnData.pricingTitleTag || 'h2'}
+                                    className="fb-mc-pricing-title"
+                                    value={columnData.pricingTitle || ''}
+                                    onChange={(value) => updateColumnAttribute('pricingTitle', value, columnIndex)}
+                                    placeholder={__('Enter title', 'frontis-blocks')}
+                                />
+                            </div>
+                            <div className="fb-mc-pricing-button-wrapper">
+                                {columnData.priceButtonSwitcher && (
+                                    <a
+                                        className={`fb-mc-pricing-button`}
+                                        href={columnData.priceButtonUrl || '#'}
+                                        target={columnData.priceButtonTargetUrl ? "_blank" : undefined}
+                                        rel={columnData.priceButtonTargetUrl ? "noopener noreferrer" : undefined}
+                                        onClick={(event) => event.preventDefault()}
+                                    >
+                                        <RichText
+                                            tagName="span"
+                                            value={columnData.priceButtonText || ''}
+                                            onChange={(value) => updateColumnAttribute('priceButtonText', value, columnIndex)}
+                                            placeholder={__('Enter button text...', 'frontis-blocks')}
+                                            className="fb-button-text"
+                                        />
+                                    </a>
+                                )}
+                            </div>
+                            <div className="fb-mc-pricing-price-wrapper">
+                                <div className="fb-mc-pricing-price-inner-wrapper">
+                                    <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
+                                        <span className="price-currency">
+                                            {columnData.priceCurrencyPosition === 'left' ? (
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.priceCurrency || ''}
+                                                    placeholder={__('Enter currency', 'frontis-blocks')}
+                                                />
+                                            ) : ''}
+                                        </span>
+                                        <RichText
+                                            tagName="span"
+                                            value={columnData.normalPrice || ''}
+                                            placeholder={__('Enter price', 'frontis-blocks')}
+                                        />
+                                        <span className="price-currency">
+                                            {columnData.priceCurrencyPosition === 'right' ? (
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.priceCurrency || ''}
+                                                    placeholder={__('Enter currency', 'frontis-blocks')}
+                                                />
+                                            ) : ''}
+                                        </span>
+                                        {!columnData.salePriceSwitcher && (
+                                            <span className="price-period">
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriodSeparator || ''}
+                                                    placeholder={__('Enter separator', 'frontis-blocks')}
+                                                />
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriod || ''}
+                                                    placeholder={__('Enter period', 'frontis-blocks')}
+                                                />
+                                            </span>
+                                        )}
+                                    </span>
+                                    {columnData.salePriceSwitcher && (
+                                        <span className="fb-mc-pricing-sale-price">
+                                            <span className="price-currency">
+                                                {columnData.priceCurrencyPosition === 'left' ? (
+                                                    <RichText
+                                                        tagName="span"
+                                                        value={columnData.priceCurrency || ''}
+                                                        placeholder={__('Enter currency', 'frontis-blocks')}
+                                                    />
+                                                ) : ''}
+                                            </span>
+                                            <RichText
+                                                tagName="span"
+                                                value={columnData.salePrice || ''}
+                                                placeholder={__('Enter price', 'frontis-blocks')}
+                                            />
+                                            <span className="price-currency">
+                                                {columnData.priceCurrencyPosition === 'right' ? (
+                                                    <RichText
+                                                        tagName="span"
+                                                        value={columnData.priceCurrency || ''}
+                                                        placeholder={__('Enter currency', 'frontis-blocks')}
+                                                    />
+                                                ) : ''}
+                                            </span>
+                                            <span className="price-period">
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriodSeparator || ''}
+                                                    placeholder={__('Enter separator', 'frontis-blocks')}
+                                                />
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriod || ''}
+                                                    placeholder={__('Enter period', 'frontis-blocks')}
+                                                />
+                                            </span>
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        <div className='fb-mc-pricing-content'>
+                            {columnData.priceAfterTextSwitcher && (
+                                <div className="fb-mc-pricing-plan-activation-wrapper">
+                                    <RichText
+                                        tagName="span"
+                                        className="fb-mc-pricing-plan-activation"
+                                        value={columnData.priceAfterText || ''}
+                                        onChange={(value) => updateColumnAttribute('priceAfterText', value, columnIndex)}
+                                        placeholder={__('Enter text', 'frontis-blocks')}
+                                    />
+                                </div>
+                            )}
+                            <div className="fb-mc-pricing-features-wrapper">
+                                {columnData.priceHideFeaturesSwitcher && (
+                                    <ul className="fb-mc-pricing-features-list">
+                                        {(columnData.priceFeatureItems || []).map(item => (
+                                            <li className="fb-mc-pricing-feature-item" key={item.id}>
+                                                {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+                                                    <div className="fb-mc-pricing-feature-icon">
+                                                        <span className="fb-mc-pricing-feature-icon-inner">
+                                                            {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                        </span>
+                                                    </div>
+                                                )}
+                                                <RichText
+                                                    tagName="span"
+                                                    className="fb-mc-pricing-feature-text"
+                                                    value={item.Title || ''}
+                                                    onChange={(value) => {
+                                                        const updatedItems = (columnData.priceFeatureItems || []).map(i =>
+                                                            i.id === item.id ? { ...i, Title: value } : i
+                                                        );
+                                                        updateColumnAttribute('priceFeatureItems', updatedItems, columnIndex);
+                                                    }}
+                                                    placeholder={__('Feature Title', 'frontis-blocks')}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
     return (
         <>
             {isSelected && (
@@ -202,180 +294,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     setAttributes={setAttributes}
                 />
             )}
-            
-            <div {...blockProps}>
-                <div className={`fb-parent-wrapper fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${pricingSectionTopSwitcher ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
-                    <div className="fb-pricing-inner-wrapper">
-                        {pricingSectionTopSwitcher && (
-                            <div className="fb-pricing-top-wrapper">
-                                <RichText
-                                    tagName="span"
-                                    className="fb-pricing-top-text"
-                                    value={pricingSectionTopText}
-                                    onChange={(value) => setAttributes({ pricingSectionTopText: value })}
-                                    placeholder={__('Enter text', 'frontis-blocks')}
-                                />
-                            </div>
-                        )}
-                        <div className="fb-pricing-main-wrapper">
-                            <div className="fb-pricing-header">
-                                <div className={`fb-pricing-title-wrapper fb-pricing-title-${pricingTitleAlignment}`}>
-                                    <RichText
-                                        tagName={pricingTitleTag}
-                                        className="fb-pricing-title"
-                                        value={pricingTitle}
-                                        onChange={(value) => setAttributes({ pricingTitle: value })}
-                                        placeholder={__('Enter title', 'frontis-blocks')}
-                                    />
-                                </div>
-                                <div className="fb-pricing-button-wrapper">
-                                    {priceButtonSwitcher && (
-                                        <a
-                                            className={`fb-pricing-button`}
-                                            href={priceButtonUrl}
-                                            target={priceButtonTargetUrl ? "_blank" : undefined}
-                                            rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
-                                            onClick={(event) => event.preventDefault()}
-                                        >
-                                            <RichText
-                                                tagName="span"
-                                                value={priceButtonText}
-                                                onChange={(value) => setAttributes({ priceButtonText: value })}
-                                                placeholder={__('Enter button text...', 'frontis-blocks')}
-                                                className="fb-button-text"
-                                            />
-                                        </a>
-                                    )}
-                                </div>
-                                <div className="fb-pricing-price-wrapper">
-                                    <div className="fb-pricing-price-inner-wrapper">
-                                        <span className={`fb-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
-                                            <span className="price-currency">
-                                                {priceCurrencyPosition === 'left' ? (
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={priceCurrency}
-                                                        placeholder={__('Enter currency', 'frontis-blocks')}
-                                                    />
-                                                ) : ''}
-                                            </span>
-                                            <RichText
-                                                tagName="span"
-                                                value={normalPrice}
-                                                placeholder={__('Enter price', 'frontis-blocks')}
-                                            />
-                                            <span className="price-currency">
-                                                {priceCurrencyPosition === 'right' ? (
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={priceCurrency}
-                                                        placeholder={__('Enter currency', 'frontis-blocks')}
-                                                    />
-                                                ) : ''}
-                                            </span>
-                                            {!salePriceSwitcher && (
-                                                <span className="price-period">
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={pricePeriodSeparator}
-                                                        placeholder={__('Enter separator', 'frontis-blocks')}
-                                                    />
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={pricePeriod}
-                                                        placeholder={__('Enter period', 'frontis-blocks')}
-                                                    />
-                                                </span>
-                                            )}
-                                        </span>
-                                        {salePriceSwitcher && (
-                                            <span className="fb-pricing-sale-price">
-                                                <span className="price-currency">
-                                                    {priceCurrencyPosition === 'left' ? (
-                                                        <RichText
-                                                            tagName="span"
-                                                            value={priceCurrency}
-                                                            placeholder={__('Enter currency', 'frontis-blocks')}
-                                                        />
-                                                    ) : ''}
-                                                </span>
-                                                <RichText
-                                                    tagName="span"
-                                                    value={salePrice}
-                                                    placeholder={__('Enter price', 'frontis-blocks')}
-                                                />
-                                                <span className="price-currency">
-                                                    {priceCurrencyPosition === 'right' ? (
-                                                        <RichText
-                                                            tagName="span"
-                                                            value={priceCurrency}
-                                                            placeholder={__('Enter currency', 'frontis-blocks')}
-                                                        />
-                                                    ) : ''}
-                                                </span>
-                                                <span className="price-period">
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={pricePeriodSeparator}
-                                                        placeholder={__('Enter separator', 'frontis-blocks')}
-                                                    />
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={pricePeriod}
-                                                        placeholder={__('Enter period', 'frontis-blocks')}
-                                                    />
-                                                </span>
-                                            </span>
-                                        )}
-                                    </div>
-                                    
-                                </div>
 
-                            </div>
-                            <div className='fb-pricing-content'>
-                                {priceAfterTextSwitcher && (
-                                    <div className="fb-pricing-plan-activation-wrapper">
-                                        <RichText
-                                            tagName="span"
-                                            className="fb-pricing-plan-activation"
-                                            value={priceAfterText}
-                                            placeholder={__('Enter text', 'frontis-blocks')}
-                                        />
-                                    </div>
-                                )}
-                                <div className="fb-pricing-features-wrapper">
-                                    {priceHideFeaturesSwitcher && (
-                                        <ul className="fb-pricing-features-list">
-                                            {priceFeatureItems.map(item => (
-                                                <li className="fb-pricing-feature-item" key={item.id}>
-                                                    {priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
-                                                        <div className="fb-pricing-feature-icon">
-                                                            <span className="fb-pricing-feature-icon-inner">
-                                                                {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                            </span>
-                                                        </div>
-                                                    )}
-                                                    <RichText
-                                                        tagName="span"
-                                                        className="fb-pricing-feature-text"
-                                                        value={item.Title}
-                                                        onChange={(value) => {
-                                                            const updatedItems = priceFeatureItems.map(i =>
-                                                                i.id === item.id ? { ...i, Title: value } : i
-                                                            );
-                                                            setAttributes({ priceFeatureItems: updatedItems });
-                                                        }}
-                                                        placeholder={__('Feature Title', 'frontis-blocks')}
-                                                    />
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    )}
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
+            <div {...blockProps}>
+                <div className={`fb-parent-wrapper fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID} ref={panelRef}>
+                    {renderPricingColumn(0)}
+                    {renderPricingColumn(1)}
+                    {renderPricingColumn(2)}
                 </div>
             </div>
             <style>{blockStyle}</style>

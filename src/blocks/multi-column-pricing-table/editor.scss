@@ -12,40 +12,103 @@ $border_color: #E1E3E8;
 }
 
 .fb-multi-column-pricing-table-wrapper {
-    .fb-pricing-inner-wrapper{
-        .fb-pricing-top-wrapper{
-            text-align: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px;
 
-            .fb-pricing-top-text{
-                color: #ffffff;
-                font-size: 16px;
-                line-height: 100%;
-                font-weight: 500;
+   
+    .fb-mc-pricing-column {
+        &.two{
+             .fb-mc-pricing-main-wrapper{
+                margin-top: 0;
+             }
+        }
+        .fb-mc-pricing-inner-wrapper {
+            .fb-mc-pricing-top-wrapper {
                 text-align: center;
+
+                .fb-mc-pricing-top-text {
+                    color: #ffffff;
+                    font-size: 16px;
+                    line-height: 100%;
+                    font-weight: 500;
+                    text-align: center;
+                }
             }
         }
 
-        .fb-pricing-main-wrapper{
-            padding: 0;
-            .fb-pricing-header{
+        .fb-mc-pricing-main-wrapper{
+            .fb-mc-pricing-header{
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                margin-top: 2px;
 
-                .fb-pricing-title{
+                .fb-mc-pricing-title{
                     margin: 0;
                 }
             }
             
-            .fb-pricing-button-wrapper{
+            .fb-mc-pricing-button-wrapper{
                 display: flex;
                 text-align: center;
 
-                .fb-pricing-button{
+                .fb-mc-pricing-button{
                     text-decoration: none;
+                }
+            }
+
+            .fb-mc-pricing-content{
+                .fb-mc-pricing-features-wrapper{
+                    .fb-mc-pricing-features-list{
+                        list-style: none;
+                        margin: 0;
+                        padding: 0;
+                    }
+
+                    .fb-mc-pricing-feature-item{
+                        display: flex;
+                        align-items: center;
+                        gap: 6px;
+
+                        .fb-mc-pricing-feature-icon, 
+                        .fb-mc-pricing-feature-icon-inner{
+                            display: flex;
+                        }
+                    }
                 }
             }
         }
     }
 }
 /** End General scss for Advanced Button **/
+
+/** Column Selector Styling */
+.fb-column-selector-group {
+    display: flex;
+    gap: 8px;
+
+    .components-button {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/** Selected Column Indicator in Editor */
+.fb-multi-column-pricing-table-wrapper {
+    .fb-mc-pricing-column {
+        position: relative;
+        cursor: pointer;
+        transition: outline 0.2s ease;
+
+        &.is-selected-column {
+            outline: 2px solid #007cba;
+            outline-offset: 2px;
+        }
+
+        &:hover {
+            outline: 2px dashed #007cba;
+            outline-offset: 2px;
+        }
+    }
+}

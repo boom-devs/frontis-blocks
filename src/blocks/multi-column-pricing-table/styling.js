@@ -342,6 +342,8 @@ const generatePricingTableStyle = (attributes) => {
         /**end Title and Subtitle Style */
 
         /** Start Feature Icon */
+        FeatureListGap,
+        FeatureListGapUnits,
         priceFeatureAlignment,
         priceFeatureIconColorSwitcher,
         priceFeatureIconColor,
@@ -493,6 +495,18 @@ const generatePricingTableStyle = (attributes) => {
         priceButtonIconSizeUnits,
         /** End price Button */
 
+        priceColumnPaddingUnits,
+        priceColumnDesktopPadding,
+        priceColumnTabletPadding,
+        priceColumnMobilePadding,
+        priceColumnPaddingLink,
+
+        priceColumnMarginUnits,
+        priceColumnDesktopMargin,
+        priceColumnTabletMargin,
+        priceColumnMobileMargin,
+        priceColumnMarginLink,
+
         /** Start Global Settings */
         priceGlobalZIndex,
         pricingTableOverflow,
@@ -540,6 +554,7 @@ const generatePricingTableStyle = (attributes) => {
         priceGlobalBoxShadowHoverCssValue,
         /** End Global Settings */
 
+        activationContentAlignment,
         priceAfterTextSwitcher,
         priceAfterText,
         priceAfterTextGlobalTypoSwitcher,
@@ -759,10 +774,24 @@ const generatePricingTableStyle = (attributes) => {
     const globalTabletBorderRadiusWidth = `${priceGlobalBorderRadiusTablet?.top}${priceGlobalBorderRadiusUnits?.Tablet} ${priceGlobalBorderRadiusTablet?.right}${priceGlobalBorderRadiusUnits?.Tablet} ${priceGlobalBorderRadiusTablet?.bottom}${priceGlobalBorderRadiusUnits?.Tablet} ${priceGlobalBorderRadiusTablet?.left}${priceGlobalBorderRadiusUnits?.Tablet}`;
     const globalMobileBorderRadiusWidth = `${priceGlobalBorderRadiusMobile?.top}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.right}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.bottom}${priceGlobalBorderRadiusUnits?.Mobile} ${priceGlobalBorderRadiusMobile?.left}${priceGlobalBorderRadiusUnits?.Mobile}`;
 
+    const priceColumnDesktopPaddingValue = `${priceColumnDesktopPadding?.top}${priceColumnPaddingUnits?.Desktop} ${priceColumnDesktopPadding?.right}${priceColumnPaddingUnits?.Desktop} ${priceColumnDesktopPadding?.bottom}${priceColumnPaddingUnits?.Desktop} ${priceColumnDesktopPadding?.left}${priceColumnPaddingUnits?.Desktop}`;
+    const priceColumnTabletPaddingValue = `${priceColumnTabletPadding?.top}${priceColumnPaddingUnits?.Tablet} ${priceColumnTabletPadding?.right}${priceColumnPaddingUnits?.Tablet} ${priceColumnTabletPadding?.bottom}${priceColumnPaddingUnits?.Tablet} ${priceColumnTabletPadding?.left}${priceColumnPaddingUnits?.Tablet}`;
+    const priceColumnMobilePaddingValue = `${priceColumnMobilePadding?.top}${priceColumnPaddingUnits?.Mobile} ${priceColumnMobilePadding?.right}${priceColumnPaddingUnits?.Mobile} ${priceColumnMobilePadding?.bottom}${priceColumnPaddingUnits?.Mobile} ${priceColumnMobilePadding?.left}${priceColumnPaddingUnits?.Mobile}`;
+
+    const priceColumnDesktopMarginValue = `${priceColumnDesktopMargin?.top}${priceColumnMarginUnits?.Desktop} ${priceColumnDesktopMargin?.right}${priceColumnMarginUnits?.Desktop} ${priceColumnDesktopMargin?.bottom}${priceColumnMarginUnits?.Desktop} ${priceColumnDesktopMargin?.left}${priceColumnMarginUnits?.Desktop}`;
+    const priceColumnTabletMarginValue = `${priceColumnTabletMargin?.top}${priceColumnMarginUnits?.Tablet} ${priceColumnTabletMargin?.right}${priceColumnMarginUnits?.Tablet} ${priceColumnTabletMargin?.bottom}${priceColumnMarginUnits?.Tablet} ${priceColumnTabletMargin?.left}${priceColumnMarginUnits?.Tablet}`;
+    const priceColumnMobileMarginValue = `${priceColumnMobileMargin?.top}${priceColumnMarginUnits?.Mobile} ${priceColumnMobileMargin?.right}${priceColumnMarginUnits?.Mobile} ${priceColumnMobileMargin?.bottom}${priceColumnMarginUnits?.Mobile} ${priceColumnMobileMargin?.left}${priceColumnMarginUnits?.Mobile}`;
+
     // Pricing Table Style    
     const pricingTableBlockStyle = ` 
 
-        .${blockID}.fb-pricing-area {
+        .${blockID} .fb-mc-pricing-main-wrapper{
+            ${priceColumnDesktopPaddingValue && priceColumnDesktopPadding?.top ? `padding: ${priceColumnDesktopPaddingValue};` : ''}
+
+            ${priceColumnDesktopMarginValue && priceColumnDesktopMargin?.top ? `margin: ${priceColumnDesktopMarginValue};` : ''}
+        }
+
+        .${blockID}.fb-mc-pricing-area {
             ${pricingTablePositionType === 'default' ? `position: relative;` : ''}
             ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' ? `width: 100%;` : ''}
             ${pricingTablePositionType !== 'default' ? `position: ${pricingTablePositionType};` : ''}
@@ -773,7 +802,7 @@ const generatePricingTableStyle = (attributes) => {
             ${priceGlobalZIndex?.Desktop ? `z-index: ${priceGlobalZIndex?.Desktop};` : ''}			
             ${pricingTableOverflow !== 'default' ? `overflow: ${pricingTableOverflow};` : ''}
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper {
             ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
                 background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
             `: `
@@ -786,7 +815,7 @@ const generatePricingTableStyle = (attributes) => {
             ${pricingTopSectionDesktopPaddingWidth && pricingTopSectionDesktopPadding?.top ? `padding: ${pricingTopSectionDesktopPaddingWidth};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper:hover {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper:hover {
             ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
                 background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
             `: `
@@ -795,7 +824,7 @@ const generatePricingTableStyle = (attributes) => {
             ${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
         }
 
-        .${blockID}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+        .${blockID}.fb-mc-pricing-wrapper.fb-mc-pricing-top-section .fb-mc-pricing-top-wrapper {
             ${pricingTopSectionTextColor ? `color: ${pricingTopSectionTextColor};` : ''}
 
             ${pricingTopSectionTextGlobalTypoSwitcher?.fontFamily === true && pricingTopSectionTextGlobalTypographyData?.fontFamily ? `font-family: ${pricingTopSectionTextGlobalTypographyData?.fontFamily};` : ''}
@@ -819,11 +848,11 @@ const generatePricingTableStyle = (attributes) => {
             text-align: center;
             transition: all 0.3s ease;
         }
-        .${blockID}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
+        .${blockID}.fb-mc-pricing-wrapper.fb-mc-pricing-top-section .fb-mc-pricing-top-wrapper:hover {
             ${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
         }
 
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper {
+        .${blockID} .fb-multi-column-pricing-table-wrapper {
             ${priceGlobalNormalBackgroundType === 'gradient' ? `  
                 background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
             `: `
@@ -839,7 +868,7 @@ const generatePricingTableStyle = (attributes) => {
             transition: all .3s ease-in-out;
             position: relative;
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper:hover {
+        .${blockID} .fb-multi-column-pricing-table-wrapper:hover {
             ${priceGlobalHoverBackgroundType === 'gradient' ? `  
                 background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
             `: `
@@ -848,7 +877,7 @@ const generatePricingTableStyle = (attributes) => {
             ${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
             ${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-header {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-header {
             ${pricingHeaderBgColor ? `background-color: ${pricingHeaderBgColor};` : ''}
             ${headerDesktopPadding && pricingHeaderDesktopPadding?.top? `padding: ${headerDesktopPadding};` : ''}
             ${pricingHeaderBorder ? `border: ${pricingHeaderBorder};` : ''}
@@ -860,11 +889,11 @@ const generatePricingTableStyle = (attributes) => {
 
             transition: all .3s ease-in-out;
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-header:hover {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-header:hover {
             ${pricingHeaderBgHoverColor ? `background-color: ${pricingHeaderBgHoverColor};` : ''}
             ${pricingHeaderBorderHoverColor ? `border-color: ${pricingHeaderBorderHoverColor};` : ''}
         }
-        .${blockID} .fb-pricing-ribbon-icon {
+        .${blockID} .fb-mc-pricing-ribbon-icon {
             ${priceIconPositionSwitcher ? 'position: absolute;' : ''}
             ${priceIconPositionSwitcher ? `top: ${priceIconPositionTop?.Desktop && priceIconPositionTopUnits?.Desktop ? `${priceIconPositionTop?.Desktop}${priceIconPositionTopUnits?.Desktop}` : '0'};` : ''}
             ${priceIconPositionSwitcher ? `left: ${priceIconPositionLeft?.Desktop && priceIconPositionLeftUnits?.Desktop ? `${priceIconPositionLeft?.Desktop}${priceIconPositionLeftUnits?.Desktop}` : '0'};` : ''}
@@ -877,26 +906,26 @@ const generatePricingTableStyle = (attributes) => {
             ${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
             transition: all .3s ease-in-out;
         }
-        .${blockID} .fb-pricing-ribbon-icon:hover {
+        .${blockID} .fb-mc-pricing-ribbon-icon:hover {
             ${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
             ${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
         }
-        .${blockID} .fb-pricing-ribbon-icon svg {
+        .${blockID} .fb-mc-pricing-ribbon-icon svg {
             width: ${priceIconSize?.Desktop}${priceIconSizeUnits?.Desktop};
             height: ${priceIconSize?.Desktop}${priceIconSizeUnits?.Desktop};
             fill: ${priceIconColor};
             transition: fill 0.3s ease;
         }
-        .${blockID} .fb-pricing-ribbon-icon:hover svg {
+        .${blockID} .fb-mc-pricing-ribbon-icon:hover svg {
             ${priceIconHoverColor ? `fill: ${priceIconHoverColor};` : ''}
         }
 
-        .${blockID}	.fb-pricing-price-wrapper {
+        .${blockID}	.fb-mc-pricing-price-wrapper {
             ${priceDesktopPaddingWidth && priceDesktopPadding?.top? `padding: ${priceDesktopPaddingWidth};` : ''}
             text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
         }
 
-        .${blockID} .fb-pricing-price-wrapper .fb-pricing-normal-price {
+        .${blockID} .fb-mc-pricing-price-wrapper .fb-mc-pricing-normal-price {
             ${normalPricingColor ? `color: ${normalPricingColor};` : ''}
 
             ${normalPricingGlobalTypoSwitcher?.fontFamily === true && normalPricingGlobalTypographyData?.fontFamily ? `font-family: ${normalPricingGlobalTypographyData?.fontFamily};` : ''}
@@ -918,11 +947,11 @@ const generatePricingTableStyle = (attributes) => {
             ${normalPricingGlobalTypoSwitcher?.lineHeight === false && normalPricingLineHeight?.Desktop ? `line-height: ${normalPricingLineHeight?.Desktop}${normalPricingLineHeightUnits?.Desktop};` : ""}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-price-wrapper .fb-pricing-normal-price:hover {
+        .${blockID} .fb-mc-pricing-price-wrapper .fb-mc-pricing-normal-price:hover {
             ${normalPricingHoverColor ? `color: ${normalPricingHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-price-wrapper .fb-pricing-sale-price {
+        .${blockID} .fb-mc-pricing-price-wrapper .fb-mc-pricing-sale-price {
             ${salePricingColor ? `color: ${salePricingColor};` : ''}
 
             ${salePricingGlobalTypoSwitcher?.fontFamily === true && salePricingGlobalTypographyData?.fontFamily ? `font-family: ${salePricingGlobalTypographyData?.fontFamily};` : ''}
@@ -944,11 +973,11 @@ const generatePricingTableStyle = (attributes) => {
             ${salePricingGlobalTypoSwitcher?.lineHeight === false && salePricingLineHeight?.Desktop ? `line-height: ${salePricingLineHeight?.Desktop}${salePricingLineHeightUnits?.Desktop};` : ""}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-price-wrapper .fb-pricing-sale-price:hover {
+        .${blockID} .fb-mc-pricing-price-wrapper .fb-mc-pricing-sale-price:hover {
             ${salePricingHoverColor ? `color: ${salePricingHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-price-wrapper .price-currency {
+        .${blockID} .fb-mc-pricing-price-wrapper .price-currency {
             ${priceCurrencyColor ? `color: ${priceCurrencyColor};` : ''}
 
             ${priceCurrencyGlobalTypoSwitcher?.fontFamily === true && priceCurrencyGlobalTypographyData?.fontFamily ? `font-family: ${priceCurrencyGlobalTypographyData?.fontFamily};` : ''}
@@ -970,11 +999,11 @@ const generatePricingTableStyle = (attributes) => {
             ${priceCurrencyGlobalTypoSwitcher?.lineHeight === false && priceCurrencyLineHeight?.Desktop ? `line-height: ${priceCurrencyLineHeight?.Desktop}${priceCurrencyLineHeightUnits?.Desktop};` : ""}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-price-wrapper .price-currency:hover {
+        .${blockID} .fb-mc-pricing-price-wrapper .price-currency:hover {
             ${priceCurrencyHoverColor ? `color: ${priceCurrencyHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-price-wrapper .price-period {
+        .${blockID} .fb-mc-pricing-price-wrapper .price-period {
             ${pricePeriodColor ? `color: ${pricePeriodColor};` : ''}
 
             ${pricePeriodGlobalTypoSwitcher?.fontFamily === true && pricePeriodGlobalTypographyData?.fontFamily ? `font-family: ${pricePeriodGlobalTypographyData?.fontFamily};` : ''}
@@ -996,11 +1025,11 @@ const generatePricingTableStyle = (attributes) => {
             ${pricePeriodGlobalTypoSwitcher?.lineHeight === false && pricePeriodLineHeight?.Desktop ? `line-height: ${pricePeriodLineHeight?.Desktop}${pricePeriodLineHeightUnits?.Desktop};` : ""}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-price-wrapper .price-period:hover {
+        .${blockID} .fb-mc-pricing-price-wrapper .price-period:hover {
             ${pricePeriodHoverColor ? `color: ${pricePeriodHoverColor};` : ''}
         }
 
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-header .fb-pricing-title {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-header .fb-mc-pricing-title {
             ${pricingTitleColor ? `color: ${pricingTitleColor};` : ''}
 
             ${pricingTitleGlobalTypoSwitcher?.fontFamily === true && pricingTitleGlobalTypographyData?.fontFamily ? `font-family: ${pricingTitleGlobalTypographyData?.fontFamily};` : ''}
@@ -1026,10 +1055,10 @@ const generatePricingTableStyle = (attributes) => {
             transition: all 0.3s ease;
 
         }
-        .${blockID} .fb-pricing-title:hover {
+        .${blockID} .fb-mc-pricing-title:hover {
             ${pricingTitleHoverColor ? `color: ${pricingTitleHoverColor};` : ''}
         }
-        .${blockID} .fb-pricing-subtitle {
+        .${blockID} .fb-mc-pricing-subtitle {
             ${pricingSubtitleColor ? `color: ${pricingSubtitleColor};` : ''}
 
             ${pricingSubtitleGlobalTypoSwitcher?.fontFamily === true && pricingSubtitleGlobalTypographyData?.fontFamily ? `font-family: ${pricingSubtitleGlobalTypographyData?.fontFamily};` : ''}
@@ -1054,11 +1083,38 @@ const generatePricingTableStyle = (attributes) => {
             ${subtitleDesktopMargin && pricingSubtitleDesktopMargin?.top? `margin: ${subtitleDesktopMargin};` : ''}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-subtitle:hover {
+        .${blockID} .fb-mc-pricing-subtitle:hover {
             ${pricingSubtitleHoverColor ? `color: ${pricingSubtitleHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-after-text {
+        .${blockID} .fb-mc-pricing-plan-activation-wrapper{
+            ${priceAfterTextNormalBackgroundType === 'gradient' ? `  
+                background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
+            `: `
+                ${priceAfterTextNormalClassicColor ? `background: ${priceAfterTextNormalClassicColor};` : ''}
+            `}
+
+            ${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
+            ${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
+            ${priceAfterTextBorderDesktopWidth && priceAfterTextBorderDesktop?.top? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
+            ${priceAfterTextBorderRadiusDesktopWidth && priceAfterTextBorderRadiusDesktop?.top? `border-radius: ${priceAfterTextBorderRadiusDesktopWidth};` : ''}
+            ${priceAfterTextDesktopPaddingWidth && priceAfterTextPaddingDesktop?.top ? `padding: ${priceAfterTextDesktopPaddingWidth};` : ''}
+            ${activationContentAlignment ? `text-align: ${activationContentAlignment};` : ''}
+            transition: all 0.3s ease;
+        }
+
+        .${blockID} .fb-mc-pricing-plan-activation-wrapper:hover {
+            ${priceAfterTextHoverBackgroundType === 'gradient' ? `  
+                background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
+            `: `
+                ${priceAfterTextHoverClassicColor ? `background: ${priceAfterTextHoverClassicColor};` : ''}
+            `}
+
+            ${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+            transition: all 0.3s ease;
+        }
+
+        .${blockID} .fb-mc-pricing-plan-activation-wrapper .fb-mc-pricing-plan-activation{
             ${priceAfterTextGlobalTypoSwitcher?.fontFamily === true && priceAfterTextGlobalTypographyData?.fontFamily ? `font-family: ${priceAfterTextGlobalTypographyData?.fontFamily};` : ''}
             ${priceAfterTextGlobalTypoSwitcher?.fontSize === true && priceAfterTextGlobalTypographyData?.fontSize ? `font-size: ${priceAfterTextGlobalTypographyData?.fontSize};` : ''}
             ${priceAfterTextGlobalTypoSwitcher?.fontWeight === true && priceAfterTextGlobalTypographyData?.fontWeight ? `font-weight: ${priceAfterTextGlobalTypographyData?.fontWeight};` : ''}
@@ -1078,38 +1134,25 @@ const generatePricingTableStyle = (attributes) => {
             ${priceAfterTextGlobalTypoSwitcher?.lineHeight === false && priceAfterTextLineHeight?.Desktop && priceAfterTextLineHeightUnits?.Desktop ? `line-height: ${priceAfterTextLineHeight?.Desktop}${priceAfterTextLineHeightUnits?.Desktop};` : ''}
 
             ${priceAfterTextColor ? `color: ${priceAfterTextColor};` : ''} 
-
-            ${priceAfterTextNormalBackgroundType === 'gradient' ? `  
-                background: ${priceAfterTextNormalCustomGradientSwitcher && priceAfterTextNormalCustomGradientInputValue ? priceAfterTextNormalCustomGradientInputValue : priceAfterTextNormalGradientColor};
-            `: `
-                ${priceAfterTextNormalClassicColor ? `background: ${priceAfterTextNormalClassicColor};` : ''}
-            `}
-
-            ${priceAfterTextBorder ? `border: ${priceAfterTextBorder};` : ''}
-            ${priceAfterTextBorderColor ? `border-color: ${priceAfterTextBorderColor};` : ''}
-            ${priceAfterTextBorderDesktopWidth && priceAfterTextBorderDesktop?.top? `border-width: ${priceAfterTextBorderDesktopWidth};` : ''}
-            ${priceAfterTextBorderRadiusDesktopWidth && priceAfterTextBorderRadiusDesktop?.top? `border-radius: ${priceAfterTextBorderRadiusDesktopWidth};` : ''}
-            ${priceAfterTextDesktopPaddingWidth && priceAfterTextPaddingDesktop?.top ? `padding: ${priceAfterTextDesktopPaddingWidth};` : ''}
             transition: all 0.3s ease;
         }
 
-        .${blockID} .fb-pricing-after-text:hover {
+        .${blockID} .fb-mc-pricing-after-text:hover {
             ${priceAfterTextHoverColor ? `color: ${priceAfterTextHoverColor};` : ''}
-
-            ${priceAfterTextHoverBackgroundType === 'gradient' ? `  
-                background: ${priceAfterTextHoverCustomGradientSwitcher && priceAfterTextHoverCustomGradientInputValue ? priceAfterTextHoverCustomGradientInputValue : priceAfterTextHoverGradientColor};
-            `: `
-                ${priceAfterTextHoverClassicColor ? `background: ${priceAfterTextHoverClassicColor};` : ''}
-            `}
-
-            ${priceAfterTextBorderHoverColor ? `border-color: ${priceAfterTextBorderHoverColor};` : ''}
+            transition: all 0.3s ease;
         }
 
-        .${blockID} .fb-pricing-features-wrapper {
+        .${blockID} .fb-mc-pricing-content {
             ${priceFeatureDesktopPaddingWidth && priceFeatureDesktopPadding?.top? `padding: ${priceFeatureDesktopPaddingWidth};` : ''}
         }
 
-        .${blockID} .fb-pricing-feature-item {
+        .${blockID} .fb-mc-pricing-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: ${FeatureListGap?.Desktop}${FeatureListGapUnits?.Desktop};
+        }
+
+        .${blockID} .fb-mc-pricing-feature-item {
             ${priceFeatureItemDesktopPaddingWidth && priceFeatureItemDesktopPadding?.top? `padding: ${priceFeatureItemDesktopPaddingWidth};` : ''}
             ${priceFeatureItemDesktopMarginWidth && priceFeatureItemDesktopMargin?.top? `margin: ${priceFeatureItemDesktopMarginWidth};` : ''}
             ${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
@@ -1119,19 +1162,19 @@ const generatePricingTableStyle = (attributes) => {
             transition: all 0.3s ease;
         }
         
-        .${blockID} .fb-pricing-feature-item:hover {
+        .${blockID} .fb-mc-pricing-feature-item:hover {
             ${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
         }
 
-        .${blockID} .fb-pricing-feature-item:last-child {
+        .${blockID} .fb-mc-pricing-feature-item:last-child {
             ${priceFeatureItemBorderBottom ? `border-bottom: none;` : ''}
         }
 
-        .${blockID} .fb-pricing-feature-item, .${blockID} .fb-pricing-feature-after-text {
+        .${blockID} .fb-mc-pricing-feature-item, .${blockID} .fb-mc-pricing-feature-after-text {
             justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
         }
 
-        .${blockID} .fb-pricing-feature-after-text { 
+        .${blockID} .fb-mc-pricing-feature-after-text { 
             ${priceFeatureAfterTextColor ? `color: ${priceFeatureAfterTextColor};` : ''}
 
             ${priceFeatureAfterTextGlobalTypoSwitcher?.fontFamily === true && priceFeatureAfterTextGlobalTypographyData?.fontFamily ? `font-family: ${priceFeatureAfterTextGlobalTypographyData?.fontFamily};` : ''}
@@ -1154,21 +1197,21 @@ const generatePricingTableStyle = (attributes) => {
             transition: all 0.3s ease;
         }
 
-        .${blockID} .fb-pricing-feature-after-text:hover {
+        .${blockID} .fb-mc-pricing-feature-after-text:hover {
             ${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-feature-icon-inner svg {
+        .${blockID} .fb-mc-pricing-feature-icon-inner svg {
             width: ${priceFeatureIconSize?.Desktop}${priceFeatureIconSizeUnits?.Desktop};
             height: ${priceFeatureIconSize?.Desktop}${priceFeatureIconSizeUnits?.Desktop};
             fill: ${priceFeatureIconColor};
             transition: fill 0.3s ease;
         }
-        .${blockID} .fb-pricing-feature-icon-inner:hover svg {
+        .${blockID} .fb-mc-pricing-feature-icon-inner:hover svg {
             ${priceFeatureIconHoverColor ? `fill: ${priceFeatureIconHoverColor};` : ''}
         }
 
-        .${blockID} .fb-pricing-feature-text {
+        .${blockID} .fb-mc-pricing-feature-text {
             ${pricingfeatureTitleColor ? `color: ${pricingfeatureTitleColor};` : ''}
 
             ${pricingfeatureTitleGlobalTypoSwitcher?.fontFamily === true && pricingfeatureTitleGlobalTypographyData?.fontFamily ? `font-family: ${pricingfeatureTitleGlobalTypographyData?.fontFamily};` : ''}
@@ -1190,14 +1233,14 @@ const generatePricingTableStyle = (attributes) => {
             ${pricingfeatureTitleGlobalTypoSwitcher?.lineHeight === false && pricingfeatureTitleLineHeight?.Desktop ? `line-height: ${pricingfeatureTitleLineHeight?.Desktop}${pricingfeatureTitleLineHeightUnits?.Desktop};` : ''}
             transition: all 0.3s ease;
         }
-        .${blockID} .fb-pricing-feature-text:hover {
+        .${blockID} .fb-mc-pricing-feature-text:hover {
             ${pricingfeatureTitleHoverColor ? `color: ${pricingfeatureTitleHoverColor};` : ''}
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-button-wrapper{
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-button-wrapper{
             width: ${priceButtonWidth?.Desktop ? `${priceButtonWidth?.Desktop}${priceButtonWidthUnits?.Desktop}` : 'auto'};
         }
 
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-button-wrapper .fb-pricing-button {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-button-wrapper .fb-mc-pricing-button {
             width: 100%;
             
             ${priceButtonGlobalTypoSwitcher?.fontFamily === true && priceButtonGlobalTypographyData?.fontFamily ? `font-family: ${priceButtonGlobalTypographyData?.fontFamily};` : ''}
@@ -1233,7 +1276,7 @@ const generatePricingTableStyle = (attributes) => {
             `}
             transition: all .3s ease-in-out;
         }
-        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-button-wrapper .fb-pricing-button:hover {
+        .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-button-wrapper .fb-mc-pricing-button:hover {
             ${priceButtonHoverColor ? `color: ${priceButtonHoverColor};` : ''}
             ${priceButtonBorderHoverColor ? `border-color: ${priceButtonBorderHoverColor};` : ''}
             ${priceButtonHoverBackgroundType === 'gradient' ? `  
@@ -1242,33 +1285,33 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceButtonHoverClassicColor ? `background: ${priceButtonHoverClassicColor};` : ''}
             `}
         }
-        .${blockID} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+        .${blockID} .fb-mc-pricing-button.fb-button-icon-left .fb-mc-pricing-button-icon {
             margin-right: ${priceButtonIconSpacing?.Desktop}${priceButtonIconSpacingUnits?.Desktop};
         }
-        .${blockID} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+        .${blockID} .fb-mc-pricing-button.fb-button-icon-right .fb-mc-pricing-button-icon {
             margin-left: ${priceButtonIconSpacing?.Desktop}${priceButtonIconSpacingUnits?.Desktop};
         }
 
-        .${blockID} .fb-pricing-button-icon svg {
+        .${blockID} .fb-mc-pricing-button-icon svg {
             width: ${priceButtonIconSize?.Desktop}${priceButtonIconSizeUnits?.Desktop};
             height: ${priceButtonIconSize?.Desktop}${priceButtonIconSizeUnits?.Desktop};
             fill: ${priceButtonIconColor};
             transition: fill 0.3s ease;
         }
-        .${blockID} .fb-pricing-button-icon:hover svg {
+        .${blockID} .fb-mc-pricing-button-icon:hover svg {
             ${priceButtonIconHoverColor ? `fill: ${priceButtonIconHoverColor};` : ''}
         }
 
         @media only screen and (max-width: 1024px) {
 
-            .${blockID}.fb-pricing-area {
+            .${blockID}.fb-mc-pricing-area {
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset?.Tablet !== undefined ? `left: ${pricingTableHZLeftOffset?.Tablet}${pricingTableHZLeftOffsetUnits?.Tablet};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset?.Tablet !== undefined ? `right: ${pricingTableHZRightOffset?.Tablet}${pricingTableHZRightOffsetUnits?.Tablet};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset?.Tablet !== undefined ? `top: ${pricingTableVRTopOffset?.Tablet}${pricingTableVRTopOffsetUnits?.Tablet};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset?.Tablet !== undefined ? `bottom: ${pricingTableVRBottomOffset?.Tablet}${pricingTableVRBottomOffsetUnits?.Tablet};` : ''}
                 ${priceGlobalZIndex?.Tablet ? `z-index: ${priceGlobalZIndex?.Tablet};` : ''}
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper {
                 ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
                     background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
                 `: `
@@ -1281,7 +1324,7 @@ const generatePricingTableStyle = (attributes) => {
                 ${pricingTopSectionTabletPaddingWidth && pricingTopSectionTabletPadding?.top? `padding: ${pricingTopSectionTabletPaddingWidth};` : ''}
                 transition: all .3s ease-in-out;
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper:hover {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper:hover {
                 ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
                     background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
                 `: `
@@ -1290,7 +1333,7 @@ const generatePricingTableStyle = (attributes) => {
                 ${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
             }
 
-            .${blockID}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+            .${blockID}.fb-mc-pricing-wrapper.fb-mc-pricing-top-section .fb-mc-pricing-top-wrapper {
                 ${pricingTopSectionTextGlobalTypoSwitcher?.fontSize === false && pricingTopSectionTextFontSize?.Tablet ? `font-size: ${pricingTopSectionTextFontSize?.Tablet}${pricingTopSectionTextFontSizeUnits?.Tablet};` : ""}
                 ${pricingTopSectionTextGlobalTypoSwitcher?.letterSpacing === false && pricingTopSectionTextLetterSpacing?.Tablet ? `letter-spacing: ${pricingTopSectionTextLetterSpacing?.Tablet}${pricingTopSectionTextLetterSpacingUnits?.Tablet};` : ""}
                 ${pricingTopSectionTextGlobalTypoSwitcher?.lineHeight === false && pricingTopSectionTextLineHeight?.Tablet ? `line-height: ${pricingTopSectionTextLineHeight?.Tablet}${pricingTopSectionTextLineHeightUnits?.Tablet};` : ""}
@@ -1298,7 +1341,7 @@ const generatePricingTableStyle = (attributes) => {
                 text-align: center;
             }
 
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper {
+            .${blockID} .fb-multi-column-pricing-table-wrapper {
                 ${priceGlobalNormalBackgroundType === 'gradient' ? `  
                     background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
                 `: `
@@ -1314,7 +1357,7 @@ const generatePricingTableStyle = (attributes) => {
                 transition: all .3s ease-in-out;
                 position: relative;
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper:hover {
+            .${blockID} .fb-multi-column-pricing-table-wrapper:hover {
                 ${priceGlobalHoverBackgroundType === 'gradient' ? `  
                     background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
                 `: `
@@ -1324,12 +1367,12 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
             }
 
-            .${blockID}	.fb-pricing-price-wrapper {
+            .${blockID}	.fb-mc-pricing-price-wrapper {
                 ${priceTabletPaddingWidth && priceTabletPadding?.top? `padding: ${priceTabletPaddingWidth};` : ''}
                 text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
             }
 
-            .${blockID} .fb-pricing-title {
+            .${blockID} .fb-mc-pricing-title {
                 ${pricingTitleGlobalTypoSwitcher?.fontSize === false && pricingTitleFontSize?.Tablet ? `font-size: ${pricingTitleFontSize?.Tablet}${pricingTitleFontSizeUnits?.Tablet};` : ''}
                 ${pricingTitleGlobalTypoSwitcher?.letterSpacing === false && pricingTitleLetterSpacing?.Tablet ? `letter-spacing: ${pricingTitleLetterSpacing?.Tablet}${pricingTitleLetterSpacingUnits?.Tablet};` : ''}
                 ${pricingTitleGlobalTypoSwitcher?.lineHeight === false && pricingTitleLineHeight?.Tablet ? `line-height: ${pricingTitleLineHeight?.Tablet}${pricingTitleLineHeightUnits?.Tablet};` : ''}
@@ -1339,7 +1382,7 @@ const generatePricingTableStyle = (attributes) => {
 
             }
 
-            .${blockID} .fb-pricing-subtitle {
+            .${blockID} .fb-mc-pricing-subtitle {
                 ${pricingSubtitleGlobalTypoSwitcher?.fontSize === false && pricingSubtitleFontSize?.Tablet ? `font-size: ${pricingSubtitleFontSize?.Tablet}${pricingSubtitleFontSizeUnits?.Tablet};` : ''}
                 ${pricingSubtitleGlobalTypoSwitcher?.letterSpacing === false && pricingSubtitleLetterSpacing?.Tablet ? `letter-spacing: ${pricingSubtitleLetterSpacing?.Tablet}${pricingSubtitleLetterSpacingUnits?.Tablet};` : ''}
                 ${pricingSubtitleGlobalTypoSwitcher?.lineHeight === false && pricingSubtitleLineHeight?.Tablet ? `line-height: ${pricingSubtitleLineHeight?.Tablet}${pricingSubtitleLineHeightUnits?.Tablet};` : ''}
@@ -1348,20 +1391,26 @@ const generatePricingTableStyle = (attributes) => {
                 ${subtitleTabletMargin && pricingSubtitleTabletMargin?.top? `margin: ${subtitleTabletMargin};` : ''}
             }
 
-            .${blockID} .fb-pricing-after-text {
-                ${priceAfterTextGlobalTypoSwitcher?.fontSize === false && priceAfterTextFontSize?.Tablet && priceAfterTextFontSizeUnits?.Tablet ? `font-size: ${priceAfterTextFontSize?.Tablet}${priceAfterTextFontSizeUnits?.Tablet};` : ''}
-                ${priceAfterTextGlobalTypoSwitcher?.letterSpacing === false && priceAfterTextLetterSpacing?.Tablet && priceAfterTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${priceAfterTextLetterSpacing?.Tablet}${priceAfterTextLetterSpacingUnits?.Tablet};` : ''}
-                ${priceAfterTextGlobalTypoSwitcher?.lineHeight === false && priceAfterTextLineHeight?.Tablet && priceAfterTextLineHeightUnits?.Tablet ? `line-height: ${priceAfterTextLineHeight?.Tablet}${priceAfterTextLineHeightUnits?.Tablet};` : ''}
+            .${blockID} .fb-mc-pricing-plan-activation-wrapper{
                 ${priceAfterTextBorderTabletWidth && priceAfterTextBorderTablet?.top? `border-width: ${priceAfterTextBorderTabletWidth};` : ''}
                 ${priceAfterTextBorderRadiusTabletWidth && priceAfterTextBorderRadiusTablet?.top? `border-radius: ${priceAfterTextBorderRadiusTabletWidth};` : ''}
                 ${priceAfterTextTabletPaddingWidth && priceAfterTextPaddingTablet?.top ? `padding: ${priceAfterTextTabletPaddingWidth};` : ''}
             }
+            .${blockID} .fb-mc-pricing-after-text {
+                ${priceAfterTextGlobalTypoSwitcher?.fontSize === false && priceAfterTextFontSize?.Tablet && priceAfterTextFontSizeUnits?.Tablet ? `font-size: ${priceAfterTextFontSize?.Tablet}${priceAfterTextFontSizeUnits?.Tablet};` : ''}
+                ${priceAfterTextGlobalTypoSwitcher?.letterSpacing === false && priceAfterTextLetterSpacing?.Tablet && priceAfterTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${priceAfterTextLetterSpacing?.Tablet}${priceAfterTextLetterSpacingUnits?.Tablet};` : ''}
+                ${priceAfterTextGlobalTypoSwitcher?.lineHeight === false && priceAfterTextLineHeight?.Tablet && priceAfterTextLineHeightUnits?.Tablet ? `line-height: ${priceAfterTextLineHeight?.Tablet}${priceAfterTextLineHeightUnits?.Tablet};` : ''}
+            }
 
-            .${blockID} .fb-pricing-features-wrapper {
+            .${blockID} .fb-mc-pricing-features-list {
+                gap: ${FeatureListGap?.Tablet}${FeatureListGapUnits?.Tablet};
+            }
+
+            .${blockID} .fb-mc-pricing-content {
                 ${priceFeatureTabPaddingWidth && priceFeatureTabPadding?.top? `padding: ${priceFeatureTabPaddingWidth};` : ''} 
             }
 
-            .${blockID} .fb-pricing-feature-item {
+            .${blockID} .fb-mc-pricing-feature-item {
                 ${priceFeatureItemTabPaddingWidth && priceFeatureItemTabPadding?.top? `padding: ${priceFeatureItemTabPaddingWidth};` : ''}
                 ${priceFeatureItemTabMarginWidth && priceFeatureItemTabMargin?.top? `margin: ${priceFeatureItemTabMarginWidth};` : ''}
                 ${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
@@ -1369,30 +1418,30 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceFeatureItemTabBorderWidth && priceFeatureItemTabBorder?.top? `border-width: ${priceFeatureItemTabBorderWidth};` : ''}
                 ${priceFeatureItemTabBorderRadiusWidth && priceFeatureItemTabBorderRadius?.top? `border-radius: ${priceFeatureItemTabBorderRadiusWidth};` : ''} 
             }
-            .${blockID} .fb-pricing-feature-item:hover {
+            .${blockID} .fb-mc-pricing-feature-item:hover {
                 ${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
             }
 
-            .${blockID} .fb-pricing-feature-item, .${blockID} .fb-pricing-feature-after-text {
+            .${blockID} .fb-mc-pricing-feature-item, .${blockID} .fb-mc-pricing-feature-after-text {
                 justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
             }
 
-            .${blockID} .fb-pricing-feature-after-text { 
+            .${blockID} .fb-mc-pricing-feature-after-text { 
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.fontSize === false && priceFeatureAfterTextFontSize?.Tablet && priceFeatureAfterTextFontSizeUnits?.Tablet ? `font-size: ${priceFeatureAfterTextFontSize?.Tablet}${priceFeatureAfterTextFontSizeUnits?.Tablet};` : ''}
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.letterSpacing === false && priceFeatureAfterTextLetterSpacing?.Tablet && priceFeatureAfterTextLetterSpacingUnits?.Tablet ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing?.Tablet}${priceFeatureAfterTextLetterSpacingUnits?.Tablet};` : ''}
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.lineHeight === false && priceFeatureAfterTextLineHeight?.Tablet && priceFeatureAfterTextLineHeightUnits?.Tablet ? `line-height: ${priceFeatureAfterTextLineHeight?.Tablet}${priceFeatureAfterTextLineHeightUnits?.Tablet};` : ''}	
             }
 
-            .${blockID} .fb-pricing-feature-after-text:hover {
+            .${blockID} .fb-mc-pricing-feature-after-text:hover {
                 ${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
             }
 
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-header {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-header {
                 ${headerTabletPadding && pricingHeaderTabletPadding?.top ? `padding: ${headerTabletPadding};` : ''}
                 ${headerTabletBorderWidth && pricingHeaderBorderTablet?.top ? `border-width: ${headerTabletBorderWidth};` : ''}
                 ${headerTabletBorderRadiusWidth && pricingHeaderBorderRadiusTablet?.top? `border-radius: ${headerTabletBorderRadiusWidth};` : ''}
             }
-            .${blockID} .fb-pricing-ribbon-icon {
+            .${blockID} .fb-mc-pricing-ribbon-icon {
                 ${priceIconPositionSwitcher ? 'position: absolute;' : ''}
                 ${priceIconPositionSwitcher ? `top: ${priceIconPositionTop?.Tablet && priceIconPositionTopUnits?.Tablet ? `${priceIconPositionTop?.Tablet}${priceIconPositionTopUnits?.Tablet}` : '0'};` : ''}
                 ${priceIconPositionSwitcher ? `left: ${priceIconPositionLeft?.Tablet && priceIconPositionLeftUnits?.Tablet ? `${priceIconPositionLeft?.Tablet}${priceIconPositionLeftUnits?.Tablet}` : '0'};` : ''}
@@ -1405,16 +1454,16 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
                 transition: all .3s ease-in-out;
             }
-            .${blockID} .fb-pricing-ribbon-icon:hover {
+            .${blockID} .fb-mc-pricing-ribbon-icon:hover {
                 ${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
                 ${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
             }
-            .${blockID} .fb-pricing-ribbon-icon svg {
+            .${blockID} .fb-mc-pricing-ribbon-icon svg {
                 width: ${priceIconSize?.Tablet}${priceIconSizeUnits?.Tablet};
                 height: ${priceIconSize?.Tablet}${priceIconSizeUnits?.Tablet};
             }
 
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-button-wrapper .fb-pricing-button {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-button-wrapper .fb-mc-pricing-button {
                 width: ${priceButtonWidth?.Tablet ? `${priceButtonWidth?.Tablet}${priceButtonWidthUnits?.Tablet}` : 'auto'}; 
                 ${priceButtonGlobalTypoSwitcher?.fontSize === false && priceButtonFontSize?.Tablet ? `font-size: ${priceButtonFontSize?.Tablet}${priceButtonFontSizeUnits?.Tablet};` : ''}
                 ${priceButtonGlobalTypoSwitcher?.letterSpacing === false && priceButtonLetterSpacing?.Tablet ? `letter-spacing: ${priceButtonLetterSpacing?.Tablet}${priceButtonLetterSpacingUnits?.Tablet};` : ''}
@@ -1425,28 +1474,28 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceButtonTabletBorderRadiusWidthValue && priceButtonTabBorderRadiusWidth?.top? `border-radius: ${priceButtonTabletBorderRadiusWidthValue};` : ''}
             }
 
-            .${blockID} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+            .${blockID} .fb-mc-pricing-button.fb-button-icon-left .fb-mc-pricing-button-icon {
                 margin-right: ${priceButtonIconSpacing?.Tablet}${priceButtonIconSpacingUnits?.Tablet};
             }
-            .${blockID} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+            .${blockID} .fb-mc-pricing-button.fb-button-icon-right .fb-mc-pricing-button-icon {
                 margin-left: ${priceButtonIconSpacing?.Tablet}${priceButtonIconSpacingUnits?.Tablet};
             }
 
-            .${blockID} .fb-pricing-button-icon svg {
+            .${blockID} .fb-mc-pricing-button-icon svg {
                 width: ${priceButtonIconSize?.Tablet}${priceButtonIconSizeUnits?.Tablet};
                 height: ${priceButtonIconSize?.Tablet}${priceButtonIconSizeUnits?.Tablet};
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockID}.fb-pricing-area {
+            .${blockID}.fb-mc-pricing-area {
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'left' && pricingTableHZLeftOffset?.Mobile !== undefined ? `left: ${pricingTableHZLeftOffset?.Mobile}${pricingTableHZLeftOffsetUnits?.Mobile};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableHZOrientationType === 'right' && pricingTableHZRightOffset?.Mobile !== undefined ? `right: ${pricingTableHZRightOffset?.Mobile}${pricingTableHZRightOffsetUnits?.Mobile};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'top' && pricingTableVRTopOffset?.Mobile !== undefined ? `top: ${pricingTableVRTopOffset?.Mobile}${pricingTableVRTopOffsetUnits?.Mobile};` : ''}
                 ${pricingTablePositionType !== 'default' && pricingTablePositionType !== 'relative' && pricingTableVROrientationType === 'bottom' && pricingTableVRBottomOffset?.Mobile !== undefined ? `bottom: ${pricingTableVRBottomOffset?.Mobile}${pricingTableVRBottomOffsetUnits?.Mobile};` : ''} 
                 ${priceGlobalZIndex?.Mobile ? `z-index: ${priceGlobalZIndex?.Mobile};` : ''}
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper {
                 ${pricingTopSectionNormalBackgroundType === 'gradient' ? `  
                     background: ${pricingTopSectionNormalCustomGradientSwitcher && pricingTopSectionNormalCustomGradientInputValue ? pricingTopSectionNormalCustomGradientInputValue : pricingTopSectionNormalGradientColor};
                 `: `
@@ -1459,7 +1508,7 @@ const generatePricingTableStyle = (attributes) => {
                 ${pricingTopSectionMobilePaddingWidth && pricingTopSectionMobilePadding?.top? `padding: ${pricingTopSectionMobilePaddingWidth};` : ''}
                 transition: all .3s ease-in-out;
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-top-wrapper:hover {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-top-wrapper:hover {
                 ${pricingTopSectionHoverBackgroundType === 'gradient' ? `  
                     background: ${pricingTopSectionHoverCustomGradientSwitcher && pricingTopSectionHoverCustomGradientInputValue ? pricingTopSectionHoverCustomGradientInputValue : pricingTopSectionHoverGradientColor};
                 `: `
@@ -1468,18 +1517,18 @@ const generatePricingTableStyle = (attributes) => {
                 ${pricingTopSectionBorderHoverColor ? `border-color: ${pricingTopSectionBorderHoverColor};` : ''}
             }
 
-            .${blockID}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper {
+            .${blockID}.fb-mc-pricing-wrapper.fb-mc-pricing-top-section .fb-mc-pricing-top-wrapper {
                 ${pricingTopSectionTextGlobalTypoSwitcher?.fontSize === false && pricingTopSectionTextFontSize?.Mobile ? `font-size: ${pricingTopSectionTextFontSize?.Mobile}${pricingTopSectionTextFontSizeUnits?.Mobile};` : ""}
                 ${pricingTopSectionTextGlobalTypoSwitcher?.letterSpacing === false && pricingTopSectionTextLetterSpacing?.Mobile ? `letter-spacing: ${pricingTopSectionTextLetterSpacing?.Mobile}${pricingTopSectionTextLetterSpacingUnits?.Mobile};` : ""}
                 ${pricingTopSectionTextGlobalTypoSwitcher?.lineHeight === false && pricingTopSectionTextLineHeight?.Mobile ? `line-height: ${pricingTopSectionTextLineHeight?.Mobile}${pricingTopSectionTextLineHeightUnits?.Mobile};` : ""}
                 ${pricingTopSectionTextMobilePaddingWidth && pricingTopSectionTextMobilePadding?.top? `padding: ${pricingTopSectionTextMobilePaddingWidth};` : ''}
                 text-align: center;
             }
-            .${blockID}.fb-pricing-wrapper.fb-pricing-top-section .fb-pricing-top-wrapper:hover {
+            .${blockID}.fb-mc-pricing-wrapper.fb-mc-pricing-top-section .fb-mc-pricing-top-wrapper:hover {
                 ${pricingTopSectionTextHoverColor ? `color: ${pricingTopSectionTextHoverColor};` : ''}
             }
 
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper {
+            .${blockID} .fb-multi-column-pricing-table-wrapper {
                 ${priceGlobalNormalBackgroundType === 'gradient' ? `  
                     background: ${priceGlobalNormalCustomGradientSwitcher && priceGlobalNormalCustomGradientInputValue ? priceGlobalNormalCustomGradientInputValue : priceGlobalNormalGradientColor};
                 `: `
@@ -1495,7 +1544,7 @@ const generatePricingTableStyle = (attributes) => {
                 transition: all .3s ease-in-out;
                 position: relative;
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper:hover {
+            .${blockID} .fb-multi-column-pricing-table-wrapper:hover {
                 ${priceGlobalHoverBackgroundType === 'gradient' ? `  
                     background: ${priceGlobalHoverCustomGradientSwitcher && priceGlobalHoverCustomGradientInputValue ? priceGlobalHoverCustomGradientInputValue : priceGlobalHoverGradientColor};
                 `: `
@@ -1504,21 +1553,25 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceGlobalBorderHoverColor ? `border-color: ${priceGlobalBorderHoverColor};` : ''}
                 ${priceGlobalBoxShadowHoverCssValue ? `box-shadow: ${priceGlobalBoxShadowHoverCssValue};` : ''}
             }
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-header {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-header {
                 ${headerMobilePadding && pricingHeaderMobilePadding?.top? `padding: ${headerMobilePadding};` : ''}
                 ${headerMobileBorderWidth && pricingHeaderBorderMobile?.top ? `border-width: ${headerMobileBorderWidth};` : ''}
                 ${headerMobileBorderRadiusWidth && pricingHeaderBorderRadiusMobile?.top? `border-radius: ${headerMobileBorderRadiusWidth};` : ''}
             }
-            .${blockID}	.fb-pricing-price-wrapper {
+            .${blockID}	.fb-mc-pricing-price-wrapper {
                 ${priceMobilePaddingWidth && priceMobilePadding?.top? `padding: ${priceMobilePaddingWidth};` : ''}
                 text-align: ${pricingAlignment === 'left' ? 'left' : pricingAlignment === 'center' ? 'center' : pricingAlignment === 'right' ? 'right' : 'center'};
             }
 
-            .${blockID} .fb-pricing-features-wrapper {
+             .${blockID} .fb-mc-pricing-features-list {
+                gap: ${FeatureListGap?.Mobile}${FeatureListGapUnits?.Mobile};
+            }
+
+            .${blockID} .fb-mc-pricing-content {
                 ${priceFeatureMobilePaddingWidth && priceFeatureMobilePadding?.top? `padding: ${priceFeatureMobilePaddingWidth};` : ''} 
             }
 
-            .${blockID} .fb-pricing-feature-item {
+            .${blockID} .fb-mc-pricing-feature-item {
                 ${priceFeatureItemMobilePaddingWidth && priceFeatureItemMobilePadding?.top? `padding: ${priceFeatureItemMobilePaddingWidth};` : ''}
                 ${priceFeatureItemMobileMarginWidth && priceFeatureItemMobileMargin?.top? `margin: ${priceFeatureItemMobileMarginWidth};` : ''}
                 ${priceFeatureItemBorder ? `border: ${priceFeatureItemBorder};` : ''}
@@ -1526,25 +1579,25 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceFeatureItemMobileBorderWidth && priceFeatureItemMobileBorder?.top? `border-width: ${priceFeatureItemMobileBorderWidth};` : ''}
                 ${priceFeatureItemMobileBorderRadiusWidth && priceFeatureItemMobileBorderRadius?.top? `border-radius: ${priceFeatureItemMobileBorderRadiusWidth};` : ''} 
             }
-            .${blockID} .fb-pricing-feature-item:hover {
+            .${blockID} .fb-mc-pricing-feature-item:hover {
                 ${priceFeatureItemBorderHoverColor ? `border-color: ${priceFeatureItemBorderHoverColor};` : ''}	
             }
 
-            .${blockID} .fb-pricing-feature-item, .${blockID} .fb-pricing-feature-after-text {
+            .${blockID} .fb-mc-pricing-feature-item, .${blockID} .fb-mc-pricing-feature-after-text {
                 justify-content: ${priceFeatureAlignment === 'left' ? 'flex-start' : priceFeatureAlignment === 'center' ? 'center' : priceFeatureAlignment === 'right' ? 'flex-end' : 'center'};
             }
 
-            .${blockID} .fb-pricing-feature-after-text {
+            .${blockID} .fb-mc-pricing-feature-after-text {
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.fontSize === false && priceFeatureAfterTextFontSize?.Mobile && priceFeatureAfterTextFontSizeUnits?.Mobile ? `font-size: ${priceFeatureAfterTextFontSize?.Mobile}${priceFeatureAfterTextFontSizeUnits?.Mobile};` : ''}
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.letterSpacing === false && priceFeatureAfterTextLetterSpacing?.Mobile && priceFeatureAfterTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${priceFeatureAfterTextLetterSpacing?.Mobile}${priceFeatureAfterTextLetterSpacingUnits?.Mobile};` : ''}
                 ${priceFeatureAfterTextGlobalTypoSwitcher?.lineHeight === false && priceFeatureAfterTextLineHeight?.Mobile && priceFeatureAfterTextLineHeightUnits?.Mobile ? `line-height: ${priceFeatureAfterTextLineHeight?.Mobile}${priceFeatureAfterTextLineHeightUnits?.Mobile};` : ''}	
             }
 
-            .${blockID} .fb-pricing-feature-after-text:hover {
+            .${blockID} .fb-mc-pricing-feature-after-text:hover {
                 ${priceFeatureAfterTextHoverColor ? `color: ${priceFeatureAfterTextHoverColor};` : ''}
             }
 
-            .${blockID} .fb-pricing-title {
+            .${blockID} .fb-mc-pricing-title {
                 ${pricingTitleGlobalTypoSwitcher?.fontSize === false && pricingTitleFontSize?.Mobile ? `font-size: ${pricingTitleFontSize?.Mobile}${pricingTitleFontSizeUnits?.Mobile};` : ''}
                 ${pricingTitleGlobalTypoSwitcher?.letterSpacing === false && pricingTitleLetterSpacing?.Mobile ? `letter-spacing: ${pricingTitleLetterSpacing?.Mobile}${pricingTitleLetterSpacingUnits?.Mobile};` : ''}
                 ${pricingTitleGlobalTypoSwitcher?.lineHeight === false && pricingTitleLineHeight?.Mobile ? `line-height: ${pricingTitleLineHeight?.Mobile}${pricingTitleLineHeightUnits?.Mobile};` : ''}
@@ -1554,7 +1607,7 @@ const generatePricingTableStyle = (attributes) => {
 
             }
 
-            .${blockID} .fb-pricing-subtitle {
+            .${blockID} .fb-mc-pricing-subtitle {
                 ${pricingSubtitleGlobalTypoSwitcher?.fontSize === false && pricingSubtitleFontSize?.Mobile ? `font-size: ${pricingSubtitleFontSize?.Mobile}${pricingSubtitleFontSizeUnits?.Mobile};` : ''}
                 ${pricingSubtitleGlobalTypoSwitcher?.letterSpacing === false && pricingSubtitleLetterSpacing?.Mobile ? `letter-spacing: ${pricingSubtitleLetterSpacing?.Mobile}${pricingSubtitleLetterSpacingUnits?.Mobile};` : ''}
                 ${pricingSubtitleGlobalTypoSwitcher?.lineHeight === false && pricingSubtitleLineHeight?.Mobile ? `line-height: ${pricingSubtitleLineHeight?.Mobile}${pricingSubtitleLineHeightUnits?.Mobile};` : ''}
@@ -1563,17 +1616,19 @@ const generatePricingTableStyle = (attributes) => {
                 ${subtitleMobileMargin && pricingSubtitleMobileMargin?.top? `margin: ${subtitleMobileMargin};` : ''}
             }
 
-            .${blockID} .fb-pricing-after-text {
-                ${priceAfterTextFontSize?.Mobile && priceAfterTextFontSizeUnits?.Mobile ? `font-size: ${priceAfterTextFontSize?.Mobile}${priceAfterTextFontSizeUnits?.Mobile};` : ''}
-                ${priceAfterTextLetterSpacing?.Mobile && priceAfterTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${priceAfterTextLetterSpacing?.Mobile}${priceAfterTextLetterSpacingUnits?.Mobile};` : ''}
-                ${priceAfterTextLineHeight?.Mobile && priceAfterTextLineHeightUnits?.Mobile ? `line-height: ${priceAfterTextLineHeight?.Mobile}${priceAfterTextLineHeightUnits?.Mobile};` : ''}
-                
+            .${blockID} .fb-mc-pricing-plan-activation-wrapper{
                 ${priceAfterTextBorderMobileWidth && priceAfterTextBorderMobile?.top? `border-width: ${priceAfterTextBorderMobileWidth};` : ''}
                 ${priceAfterTextBorderRadiusMobileWidth && priceAfterTextBorderRadiusMobile?.top? `border-radius: ${priceAfterTextBorderRadiusMobileWidth};` : ''}
                 ${priceAfterTextMobilePaddingWidth && priceAfterTextPaddingMobile?.top? `padding: ${priceAfterTextMobilePaddingWidth};` : ''}
             }
+
+            .${blockID} .fb-mc-pricing-after-text {
+                ${priceAfterTextFontSize?.Mobile && priceAfterTextFontSizeUnits?.Mobile ? `font-size: ${priceAfterTextFontSize?.Mobile}${priceAfterTextFontSizeUnits?.Mobile};` : ''}
+                ${priceAfterTextLetterSpacing?.Mobile && priceAfterTextLetterSpacingUnits?.Mobile ? `letter-spacing: ${priceAfterTextLetterSpacing?.Mobile}${priceAfterTextLetterSpacingUnits?.Mobile};` : ''}
+                ${priceAfterTextLineHeight?.Mobile && priceAfterTextLineHeightUnits?.Mobile ? `line-height: ${priceAfterTextLineHeight?.Mobile}${priceAfterTextLineHeightUnits?.Mobile};` : ''}
+            }
             
-            .${blockID} .fb-pricing-ribbon-icon {
+            .${blockID} .fb-mc-pricing-ribbon-icon {
                 ${priceIconPositionSwitcher ? 'position: absolute;' : ''}
                 ${priceIconPositionSwitcher ? `top: ${priceIconPositionTop?.Mobile && priceIconPositionTopUnits?.Mobile ? `${priceIconPositionTop?.Mobile}${priceIconPositionTopUnits?.Mobile}` : '0'};` : ''}
                 ${priceIconPositionSwitcher ? `left: ${priceIconPositionLeft?.Mobile && priceIconPositionLeftUnits?.Mobile ? `${priceIconPositionLeft?.Mobile}${priceIconPositionLeftUnits?.Mobile}` : '0'};` : ''}
@@ -1586,16 +1641,16 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceIconBorderColor ? `border-color: ${priceIconBorderColor};` : ''}
                 transition: all .3s ease-in-out;
             }
-            .${blockID} .fb-pricing-ribbon-icon:hover {
+            .${blockID} .fb-mc-pricing-ribbon-icon:hover {
                 ${priceIconBgHoverColor ? `background-color: ${priceIconBgHoverColor};` : ''}
                 ${priceIconBorderHoverColor ? `border-color: ${priceIconBorderHoverColor};` : ''}
             }
-            .${blockID} .fb-pricing-ribbon-icon svg {
+            .${blockID} .fb-mc-pricing-ribbon-icon svg {
                 width: ${priceIconSize?.Mobile}${priceIconSizeUnits?.Mobile};
                 height: ${priceIconSize?.Mobile}${priceIconSizeUnits?.Mobile};
             }
 
-            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-pricing-inner-wrapper .fb-pricing-main-wrapper .fb-pricing-button-wrapper .fb-pricing-button {
+            .${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-inner-wrapper .fb-mc-pricing-main-wrapper .fb-mc-pricing-button-wrapper .fb-mc-pricing-button {
                 width: ${priceButtonWidth?.Mobile ? `${priceButtonWidth?.Mobile}${priceButtonWidthUnits?.Mobile}` : 'auto'}; 
                 ${priceButtonGlobalTypoSwitcher?.fontSize === false && priceButtonFontSize?.Mobile ? `font-size: ${priceButtonFontSize?.Mobile}${priceButtonFontSizeUnits?.Mobile};` : ''}
                 ${priceButtonGlobalTypoSwitcher?.letterSpacing === false && priceButtonLetterSpacing?.Mobile ? `letter-spacing: ${priceButtonLetterSpacing?.Mobile}${priceButtonLetterSpacingUnits?.Mobile};` : ''}
@@ -1606,14 +1661,14 @@ const generatePricingTableStyle = (attributes) => {
                 ${priceButtonMobileBorderRadiusWidthValue && priceButtonMobileBorderRadiusWidth?.top? `border-radius: ${priceButtonMobileBorderRadiusWidthValue};` : ''}
             }
 
-            .${blockID} .fb-pricing-button.fb-button-icon-left .fb-pricing-button-icon {
+            .${blockID} .fb-mc-pricing-button.fb-button-icon-left .fb-mc-pricing-button-icon {
                 margin-right: ${priceButtonIconSpacing?.Mobile}${priceButtonIconSpacingUnits?.Mobile}; 
             }
-            .${blockID} .fb-pricing-button.fb-button-icon-right .fb-pricing-button-icon {
+            .${blockID} .fb-mc-pricing-button.fb-button-icon-right .fb-mc-pricing-button-icon {
                 margin-left: ${priceButtonIconSpacing?.Mobile}${priceButtonIconSpacingUnits?.Mobile};
             }
 
-            .${blockID} .fb-pricing-button-icon svg {
+            .${blockID} .fb-mc-pricing-button-icon svg {
                 width: ${priceButtonIconSize?.Mobile}${priceButtonIconSizeUnits?.Mobile};
                 height: ${priceButtonIconSize?.Mobile}${priceButtonIconSizeUnits?.Mobile};
             }

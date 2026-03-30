@@ -26,11 +26,11 @@ export const presetStyles = {
         priceButtonText: 'Select Plan',
         priceButtonBgColor: '#399CFF',
         priceButtonTextColor: '#FFFFFF',
-        priceFeatureItems: [
-            { id: 'item-1', Title: '10 Projects', FeatureIcon: 'check' },
-            { id: 'item-2', Title: '50GB Storage', FeatureIcon: 'check' },
-            { id: 'item-3', Title: '24/7 Support', FeatureIcon: 'check' },
-        ],
+        // priceFeatureItems: [
+        //     { id: 'item-1', Title: '10 Projects', FeatureIcon: 'check' },
+        //     { id: 'item-2', Title: '50GB Storage', FeatureIcon: 'check' },
+        //     { id: 'item-3', Title: '24/7 Support', FeatureIcon: 'check' },
+        // ],
     },
     professional: {
         pricingTableColumns: 3,
@@ -49,12 +49,12 @@ export const presetStyles = {
         priceButtonText: 'Get Started',
         priceButtonBgColor: '#2C3E50',
         priceButtonTextColor: '#FFFFFF',
-        priceFeatureItems: [
-            { id: 'item-1', Title: 'Unlimited Projects', FeatureIcon: 'check' },
-            { id: 'item-2', Title: '100GB Storage', FeatureIcon: 'check' },
-            { id: 'item-3', Title: 'Priority Support', FeatureIcon: 'check' },
-            { id: 'item-4', Title: 'Advanced Analytics', FeatureIcon: 'check' },
-        ],
+        // priceFeatureItems: [
+        //     { id: 'item-1', Title: 'Unlimited Projects', FeatureIcon: 'check' },
+        //     { id: 'item-2', Title: '100GB Storage', FeatureIcon: 'check' },
+        //     { id: 'item-3', Title: 'Priority Support', FeatureIcon: 'check' },
+        //     { id: 'item-4', Title: 'Advanced Analytics', FeatureIcon: 'check' },
+        // ],
     },
     enterprise: {
         pricingTableColumns: 4,
@@ -73,13 +73,13 @@ export const presetStyles = {
         priceButtonText: 'Contact Us',
         priceButtonBgColor: '#8E44AD',
         priceButtonTextColor: '#FFFFFF',
-        priceFeatureItems: [
-            { id: 'item-1', Title: 'Unlimited Everything', FeatureIcon: 'check' },
-            { id: 'item-2', Title: '1TB Storage', FeatureIcon: 'check' },
-            { id: 'item-3', Title: 'Dedicated Support', FeatureIcon: 'check' },
-            { id: 'item-4', Title: 'Custom Integrations', FeatureIcon: 'check' },
-            { id: 'item-5', Title: 'SLA Guarantee', FeatureIcon: 'check' },
-        ],
+        // priceFeatureItems: [
+        //     { id: 'item-1', Title: 'Unlimited Everything', FeatureIcon: 'check' },
+        //     { id: 'item-2', Title: '1TB Storage', FeatureIcon: 'check' },
+        //     { id: 'item-3', Title: 'Dedicated Support', FeatureIcon: 'check' },
+        //     { id: 'item-4', Title: 'Custom Integrations', FeatureIcon: 'check' },
+        //     { id: 'item-5', Title: 'SLA Guarantee', FeatureIcon: 'check' },
+        // ],
     },
 };
 
