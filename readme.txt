@@ -8,7 +8,7 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Frontis Blocks is a block library with 40+ blocks, global styles, sliders/galleries, CTAs, and map/form integrations, plus ready-made patterns to help you build pages faster in the Block Editor.
+Frontis Blocks - WordPress block library for Gutenberg Editor with 40+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
 
 == Description ==
 
@@ -259,6 +259,11 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Fixed**: Resolved icon rendering issues in Team Member and Testimonial blocks on the frontend.
 - **Improved**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
 - **Improved**: Refactored Global Settings to remove dead code and improve maintainability.
+- **Fixed**: Resolved Global Colors panel issues where adding many custom colors or custom gradients could stop updating correctly, fail to persist, or disappear after save.
+- **Fixed**: Restored and stabilized the original Global Colors editor UI, including proper add action alignment for empty Custom and Custom Gradient states.
+- **Fixed**: Resolved Global Colors panel overflow issues by improving scroll behavior for long solid, custom color, and custom gradient palettes.
+- **Improved**: Added safe theme palette auto-sync for Global Colors, so default theme colors now update automatically after theme switches while preserving manually customized palettes.
+- **Improved**: Added theme-aware cache invalidation for global color and gradient settings to prevent stale palette data after changing themes.
 - **New**: Added render type switch for Rive Animation block with improved speed optimization.
 - **Fixed**: Resolved Rive animation autoplay feature and resize issues on device change.
 - **Fixed**: Fixed frontend Google Fonts loading issues.
