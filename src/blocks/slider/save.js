@@ -85,15 +85,15 @@ export default function save( props ) {
 		// Add navigation if enabled
 		...(displayArrows && {
 			navigation: {
-				nextEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-next`,
-				prevEl: `.fb-slider-container[data-block-id="${blockID}"] .swiper-button-prev`,
+				nextEl: `.fb-slider-container[data-block-id=${blockID}] .swiper-button-next`,
+				prevEl: `.fb-slider-container[data-block-id=${blockID}] .swiper-button-prev`,
 			},
 		}),
 
 		// Add pagination if enabled
 		...(displayDots && {
 			pagination: {
-				el: `.fb-slider-container[data-block-id="${blockID}"] .swiper-pagination`,
+				el: `.fb-slider-container[data-block-id=${blockID}] .swiper-pagination`,
 				clickable: true,
 				type: paginationType || 'bullets',
 				renderBullet: (index, className) =>
@@ -120,7 +120,7 @@ export default function save( props ) {
 			data-block-id={ blockID }
 			data-swiper-settings={ swiperSettings }
 		>
-			<div className="fb-slides fb-swiper">
+			<div className="fb-slides fb-swiper swiper">
 				<div className="swiper-wrapper fb-swiper-wrapper">
 					<InnerBlocks.Content />
 				</div>
