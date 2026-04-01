@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -247,6 +247,12 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.1 – 01 April 2026 =
+- **New**: Added Full-site import functionality in the Template Library for faster site building.
+- **Fixed**: Resolved import-related issues in the Slider block on both editor and frontend.
+- **Improved**: Optimized Template Library metadata and removed internal unused code for better performance.
+- **Improved**: Updated dependencies for better stability and build consistency.
 
 = 1.2.0 – 17 March 2026 =
 - **New**: Added Google Fonts preload toggle in Performance settings.
