@@ -55,6 +55,7 @@
             // Initialize Swiper for the current slider
             new Swiper(swiperEl, sliderOptions);
         });
+        
     }
 
     var setupDone = false;
@@ -88,4 +89,4 @@
 
     // If needed, expose re-initialization function
     window.reinitSliders = initSliders;
-})();
+})();
