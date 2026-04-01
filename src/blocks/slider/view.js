@@ -55,7 +55,6 @@
             // Initialize Swiper for the current slider
             new Swiper(swiperEl, sliderOptions);
         });
-        
     }
 
     var setupDone = false;
