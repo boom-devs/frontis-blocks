@@ -1,84 +1,11 @@
-$primary_color: #0B0C0E;
-$secondary_color: #6A758E;
-$background_color: #F7F7F7;
-$white_color: #ffffff;
-$bg_gradient: linear-gradient(180deg, #D0D0D0 0%, #F7F7F7 100%);
-$text_color: #2A2F39;
-$border_color: #E1E3E8;
+@import './layouts/layout-one/style.scss';
+// @import './layouts/layout-two/style.scss';
+// @import './layouts/layout-three/style.scss';
+// @import './layouts/layout-four/style.scss';
+// @import './layouts/layout-five/style.scss';
 
 .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){
     max-width: 870px !important;
     width: 100%;
-}
-
-.fb-multi-column-pricing-table-wrapper {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0px;
-
-   
-    .fb-mc-pricing-column {
-        &.two{
-            .fb-mc-pricing-main-wrapper{
-                margin-top: 0;
-            }
-        }
-        .fb-mc-pricing-inner-wrapper {
-            .fb-mc-pricing-top-wrapper {
-                text-align: center;
-
-                .fb-mc-pricing-top-text {
-                    color: #ffffff;
-                    font-size: 16px;
-                    line-height: 100%;
-                    font-weight: 500;
-                    text-align: center;
-                }
-            }
-        }
-
-        .fb-mc-pricing-main-wrapper{
-            .fb-mc-pricing-header{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-top: 2px;
-
-                .fb-mc-pricing-title{
-                    margin: 0;
-                }
-            }
-            
-            .fb-mc-pricing-button-wrapper{
-                display: flex;
-                text-align: center;
-
-                .fb-mc-pricing-button{
-                    text-decoration: none;
-                }
-            }
-
-            .fb-mc-pricing-content{
-                .fb-mc-pricing-features-wrapper{
-                    .fb-mc-pricing-features-list{
-                        list-style: none;
-                        margin: 0;
-                        padding: 0;
-                    }
-
-                    .fb-mc-pricing-feature-item{
-                        display: flex;
-                        align-items: center;
-                        gap: 6px;
-
-                        .fb-mc-pricing-feature-icon, 
-                        .fb-mc-pricing-feature-icon-inner{
-                            display: flex;
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 /** End General scss for Advanced Button **/
