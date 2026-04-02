@@ -1,3 +1,5 @@
+import { pricingPresetStyles } from './presets';
+
 const attributes = {
 	blockID: {
 		type: 'string',
@@ -11,14 +13,10 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
-	highlightColor: {
-		type: 'string',
-		default: '',
-	},
-	hoverHighlightColor: {
-		type: 'string',
-		default: '',
-	},
+    pricingPresetStyle: {
+        type: 'string',
+        default: 'default',
+    },
 
 	/** Start Column Data - 3 Columns */
 	selectedColumn: {
@@ -27,137 +25,125 @@ const attributes = {
 	},
 	columns: {
 		type: 'array',
-		default: [
-			{
-				id: 'column-1',
-				pricingSectionTopSwitcher: false,
-				pricingSectionTopText: 'Most Popular Package',
-				pricingTitleTag: 'h2',
-				pricingTitle: 'Personal Package',
-				pricingSubTitleSwitcher: true,
-				pricingSubTitleTag: 'span',
-				pricingSubTitle: 'Personal Package',
-				pricingIconAlign: 'none',
-				pricingIcon: 'bookmark',
-				normalPrice: '49',
-				salePriceSwitcher: false,
-				salePrice: '45',
-				priceCurrency: '$',
-				priceCurrencyPosition: 'left',
-				pricePeriod: 'month',
-				pricePeriodSeparator: '/',
-				priceHideFeaturesSwitcher: true,
-				priceFeatureIconSwitcher: true,
-				priceFeatureItems: [
-					{ id: 'item-1', Title: 'Feature Item 1', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-2', Title: 'Feature Item 2', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-3', Title: 'Feature Item 3', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-4', Title: 'Feature Item 4', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-5', Title: 'Feature Item 5', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-6', Title: 'Feature Item 6', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-7', Title: 'Feature Item 7', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-				],
-				priceButtonSwitcher: true,
-				priceButtonText: 'Get Started',
-				priceButtonUrl: '',
-				priceButtonTargetUrl: false,
-				priceButtonIconAlign: 'none',
-				priceButtonIcon: 'arrow-right',
-				priceButtonIconPosition: 'right',
-				priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
-				priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-				priceAfterTextSwitcher: true,
-				priceAfterText: 'Activation on 1 Site',
-			},
-			{
-				id: 'column-2',
-				pricingSectionTopSwitcher: true,
-				pricingSectionTopText: 'Most Popular Package',
-				pricingTitleTag: 'h2',
-				pricingTitle: 'Business Package',
-				pricingSubTitleSwitcher: true,
-				pricingSubTitleTag: 'span',
-				pricingSubTitle: 'Agency Package',
-				pricingIconAlign: 'none',
-				pricingIcon: 'bookmark',
-				normalPrice: '49',
-				salePriceSwitcher: false,
-				salePrice: '39',
-				priceCurrency: '$',
-				priceCurrencyPosition: 'left',
-				pricePeriod: 'month',
-				pricePeriodSeparator: '/',
-				priceHideFeaturesSwitcher: true,
-				priceFeatureIconSwitcher: true,
-				priceFeatureItems: [
-					{ id: 'item-1', Title: 'Feature Item 1', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-2', Title: 'Feature Item 2', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-3', Title: 'Feature Item 3', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-4', Title: 'Feature Item 4', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-5', Title: 'Feature Item 5', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-6', Title: 'Feature Item 6', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-7', Title: 'Feature Item 7', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-				],
-				priceButtonSwitcher: true,
-				priceButtonText: 'Get Started',
-				priceButtonUrl: '',
-				priceButtonTargetUrl: false,
-				priceButtonIconAlign: 'none',
-				priceButtonIcon: 'arrow-right',
-				priceButtonIconPosition: 'right',
-				priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
-				priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-				priceAfterTextSwitcher: true,
-				priceAfterText: 'Activation on 1 Site',
-			},
-			{
-				id: 'column-3',
-				pricingSectionTopSwitcher: false,
-				pricingSectionTopText: 'Lifetime Package',
-				pricingTitleTag: 'h2',
-				pricingTitle: 'Enterprise Package',
-				pricingSubTitleSwitcher: true,
-				pricingSubTitleTag: 'span',
-				pricingSubTitle: 'Best for Business Owners.',
-				pricingIconAlign: 'none',
-				pricingIcon: 'bookmark',
-				normalPrice: '159',
-				salePriceSwitcher: false,
-				salePrice: '149',
-				priceCurrency: '$',
-				priceCurrencyPosition: 'left',
-				pricePeriod: 'month',
-				pricePeriodSeparator: '/',
-				priceHideFeaturesSwitcher: true,
-				priceFeatureIconSwitcher: true,
-				priceFeatureItems: [
-					{ id: 'item-1', Title: 'Feature Item 1', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-2', Title: 'Feature Item 2', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-3', Title: 'Feature Item 3', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-4', Title: 'Feature Item 4', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-5', Title: 'Feature Item 5', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-6', Title: 'Feature Item 6', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-					{ id: 'item-7', Title: 'Feature Item 7', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon' },
-				],
-				priceButtonSwitcher: true,
-				priceButtonText: 'Get Started',
-				priceButtonUrl: '',
-				priceButtonTargetUrl: false,
-				priceButtonIconAlign: 'none',
-				priceButtonIcon: 'arrow-right',
-				priceButtonIconPosition: 'right',
-				priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
-				priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-				priceAfterTextSwitcher: true,
-				priceAfterText: 'Activation on 1 Site',
-			},
-		],
+		default: pricingPresetStyles['default'].columns,
 	},
 	/** End Column Data */
 
 	/** Start Top Section */
+	pricingSectionTopSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	pricingSectionTopText: {
+		type: 'string',
+		default: 'Personal Package'
+	},
+	pricingTitleTag: {
+		type: 'string',
+		default: 'h2'
+	},
+	pricingTitle: {
+		type: 'string',
+		default: 'Personal Package'
+	},
+	pricingSubTitleSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	pricingSubTitleTag: {
+		type: 'string',
+		default: 'span'
+	},
+	pricingSubTitle: {
+		type: 'string',
+		default: 'Personal Package'
+	},
+	pricingIconAlign: {
+		type: 'string',
+		default: 'none'
+	},
+	pricingIcon: {
+		type: 'string',
+		default: 'bookmark'
+	},
+	normalPrice: {
+		type: 'string',
+		default: '49'
+	},
+	salePriceSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	salePrice: {
+		type: 'string',
+		default: '45'
+	},
+	priceCurrency: {
+		type: 'string',
+		default: '$'
+	},
+	priceCurrencyPosition: {
+		type: 'string',
+		default: 'left'
+	},
+	pricePeriod: {
+		type: 'string',
+		default: 'month'
+	},
+	pricePeriodSeparator: {
+		type: 'string',
+		default: '/'
+	},
+	priceHideFeaturesSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	priceFeatureIconSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	priceFeatureItems: {
+		type: 'array',
+		default: [
+			{ id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+			{ id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+			{ id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+			{ id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+			{ id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+			{ id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+			{ id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+		]
+	},
+	priceButtonUrl: {
+		type: 'string',
+		default: ''
+	},
+	priceButtonText: {
+		type: 'string',
+		default: 'Get Started'
+	},
+	priceButtonTargetUrl: {
+		type: 'boolean',
+		default: false
+	},
+	priceButtonIconAlign: {
+		type: 'string',
+		default: 'none'
+	},
+	priceButtonIcon: {
+		type: 'string',
+		default: 'arrow-right'
+	},
+	priceButtonIconPosition: {
+		type: 'string',
+		default: 'right'
+	},
 
 	/** Start Background */
+	pricingTopSectionGlobalStyleSwitcher: {
+		type: 'boolean',
+		default: true,
+	},
 	pricingTopSectionBgColorSwitcher : {
 		type: 'string',
 		default: 'normal'
@@ -382,7 +368,7 @@ const attributes = {
 	pricingTopSectionTextFontSize: {
 		type: 'object',
 		default: {
-			Desktop: '24',
+			Desktop: '16',
 			Tablet: '',
 			Mobile: '',
 		},
@@ -397,7 +383,7 @@ const attributes = {
 	},
 	pricingTopSectionTextFontWeight: {
 		type: 'string',
-		default: '600',
+		default: '500',
 	},
 	pricingTopSectionTextFontStyle: {
 		type: 'string',
@@ -430,7 +416,7 @@ const attributes = {
 	pricingTopSectionTextLineHeight: {
 		type: 'object',
 		default: {
-			Desktop: '30',
+			Desktop: '21',
 			Tablet: '',
 			Mobile: '',
 		},
@@ -637,10 +623,6 @@ const attributes = {
 	/**End Header */
 
 	/** Start Icon */
-	pricingIconAlignment: {
-		type: 'string',
-		default: 'left',
-	},
 	priceIconColorSwitcher : {
 		type: 'string',
 		default: 'normal'
@@ -1730,6 +1712,14 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	priceFeatureDisabledOpacity: {
+		type: 'object',
+		default: {
+			Desktop: '0.5',
+			Tablet: '0.5',
+			Mobile: '0.5',
+		}
+	},
 	/** End Feature Icon */
 
 	/** Start Feature Title */
@@ -2073,10 +2063,55 @@ const attributes = {
 	},
 	/** End Feature Padding */
 
+	/** Start Price list Features */
+	priceHideFeaturesSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	priceFeatureIconSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	priceFeatureItems: {
+        type: 'array',
+        default: [
+            // You can define some default items if needed
+            { id: 'item-1', Title: 'Feature Item 1', FeatureIcon: 'check', },
+            { id: 'item-2', Title: 'Feature Item 2', FeatureIcon: 'check', },
+            { id: 'item-3', Title: 'Feature Item 3', FeatureIcon: 'check', },
+        ],
+        items: {
+            type: 'object',
+            properties: {
+                id: {
+                    type: 'string',
+                    default: ''
+                },
+                Title: {
+                    type: 'string',
+                    default: ''
+                },
+                FeatureIcon: {
+                    type: 'string',
+                    default: 'check',
+                },
+                FeatureIconAlign: {
+                    type: 'string',
+                    default: 'icon',
+                },
+            }
+        }
+    },
+	/** End Price list Features */
+
 	/** Start price Button */
 	headerAlignment: {
 		type: 'string',
 		default: 'center'
+	},
+	priceButtonSwitcher: {
+		type: 'boolean',
+		default: true
 	},
 	priceButtonWidth: {
 		type: 'object',
@@ -2237,7 +2272,7 @@ const attributes = {
 	},
 	priceButtonHoverClassicColor: {
 		type: 'string',
-		default: '',
+		default: '#6A758E',
 	},
 	priceButtonHoverGradientColor: {
 		type: 'string',
@@ -2251,7 +2286,6 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
-
 
 	priceButtonPaddingUnits: {
 		type: 'object',
@@ -2456,8 +2490,41 @@ const attributes = {
 			Mobile: 'px',
 		}
 	},
+	priceButtonIconSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '16',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceButtonIconSpacingUnits: {
+		type: 'object',	
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	/** End price Button */
 
+	/** Start price Column */
+	priceColumnGap: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '24'
+		}
+	},
+	priceColumnGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
 	priceColumnPaddingUnits: {
 		type: 'object',
 		default: {
@@ -2509,7 +2576,7 @@ const attributes = {
 	priceColumnDesktopMargin: {
 		type: 'object',
 		default: {
-			top: '60',
+			top: '57',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -2527,16 +2594,162 @@ const attributes = {
 	priceColumnMobileMargin: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	priceColumnMarginLink: {
 		type: 'boolean',
 		default: true
 	},
+
+	/** Start price Column One Background */
+	priceColumnOneBackgroundColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceColumnOneNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnOneNormalClassicColor: {
+		type: 'string',
+		default: '#f7f7f7',
+	},
+	priceColumnOneNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnOneNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnOneNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	priceColumnOneHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnOneHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceColumnOneHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnOneHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnOneHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End price Column One Background */
+
+	/** Start price Column Two Background */
+	priceColumnTwoBackgroundColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceColumnTwoNormalBackgroundType: {
+		type: 'string',
+		default: 'gradient',
+	},
+	priceColumnTwoNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceColumnTwoNormalGradientColor: {
+		type: 'string',
+		default: 'linear-gradient(180deg, #D0D0D0 0%, #F7F7F7 100%)',
+	},
+	priceColumnTwoNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: true,
+	},
+	priceColumnTwoNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	priceColumnTwoHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnTwoHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceColumnTwoHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnTwoHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnTwoHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End price Column Two Background */
+
+	/** Start price Column Three Background */
+	priceColumnThreeBackgroundColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceColumnThreeNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnThreeNormalClassicColor: {
+		type: 'string',
+		default: '#f7f7f7',
+	},
+	priceColumnThreeNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnThreeNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnThreeNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	priceColumnThreeHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnThreeHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceColumnThreeHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnThreeHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnThreeHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End price Column Three Background */
+
+	/** End price Column */
 
 	/** Start Global Settings */
 	priceGlobalZIndex: {

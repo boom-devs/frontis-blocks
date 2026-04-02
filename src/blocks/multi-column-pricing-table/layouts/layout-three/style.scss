@@ -1,0 +1,37 @@
+.fb-parent-wrapper.fb-layout-three {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    padding: 50px 0;
+
+    .fb-mc-pricing-column {
+        flex: 1;
+        background: #fdfdfd;
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        text-align: center;
+        transition: transform 0.3s ease;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .fb-mc-pricing-inner-wrapper {
+            h3 {
+                font-size: 14px;
+                text-transform: uppercase;
+                color: #888;
+                letter-spacing: 1px;
+                margin-bottom: 10px;
+            }
+
+            .fb-mc-pricing-title {
+                font-size: 28px;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}

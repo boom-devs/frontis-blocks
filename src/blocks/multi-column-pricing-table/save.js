@@ -1,153 +1,49 @@
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
+import LayoutOneSave from './layouts/layout-one/save';
+import LayoutTwoSave from './layouts/layout-two/save';
+import LayoutThreeSave from './layouts/layout-three/save';
+// import LayoutFourSave from './layouts/layout-four/save';
+// import LayoutFiveSave from './layouts/layout-five/save';
+
 export default function save({ attributes }) {
     const {
         blockID,
-        columns,
-        pricingTableGlobalWraperID,
-        pricingTableGlobalWraperClass,
+        blockStyle,
+        pricingPresetStyle,
         pricingTableDesktopSwitcher,
         pricingTableTabletSwitcher,
         pricingTableMobileSwitcher,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `fb-multi-column-pricing-table-area ${blockID} ${pricingTableDesktopSwitcher && 'fb-desktop-responsive'} ${pricingTableTabletSwitcher && 'fb-tablet-responsive'} ${pricingTableMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-multi-column-pricing-table-area ${blockID} ${pricingPresetStyle} ${pricingTableDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${pricingTableTabletSwitcher ? 'fb-tablet-responsive' : ''} ${pricingTableMobileSwitcher ? 'fb-mobile-responsive' : ''}`,
     });
 
-    // Render a single pricing column
-    const renderPricingColumn = (columnData, columnIndex) => {
-        const columnClass = columnIndex === 0 ? '' : columnIndex === 1 ? ' two' : ' three';
-
-        return (
-            <div className={`fb-mc-pricing-column${columnClass}`} key={columnData.id || `column-${columnIndex}`}>
-                <div className="fb-mc-pricing-inner-wrapper">
-                    {columnData.pricingSectionTopSwitcher && (
-                        <div className="fb-mc-pricing-top-wrapper">
-                            <RichText.Content
-                                tagName="span"
-                                className="fb-mc-pricing-top-text"
-                                value={columnData.pricingSectionTopText}
-                            />
-                        </div>
-                    )}
-                    <div className="fb-mc-pricing-main-wrapper">
-                        <div className="fb-mc-pricing-header">
-                            <div className="fb-mc-pricing-title-wrapper">
-                                <RichText.Content
-                                    tagName={columnData.pricingTitleTag || 'h2'}
-                                    className="fb-mc-pricing-title"
-                                    value={columnData.pricingTitle}
-                                />
-                            </div>
-                            <div className="fb-mc-pricing-button-wrapper">
-                                {columnData.priceButtonSwitcher && (
-                                    <a
-                                        className={`fb-mc-pricing-button`}
-                                        href={columnData.priceButtonUrl}
-                                        target={columnData.priceButtonTargetUrl ? "_blank" : undefined}
-                                        rel={columnData.priceButtonTargetUrl ? "noopener noreferrer" : undefined}
-                                    >
-                                        <RichText.Content
-                                            tagName="span"
-                                            value={columnData.priceButtonText}
-                                            className="fb-button-text"
-                                        />
-                                    </a>
-                                )}
-                            </div>
-                            <div className="fb-mc-pricing-price-wrapper">
-                                <div className="fb-mc-pricing-price-inner-wrapper">
-                                    <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
-                                        <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'left' ? (
-                                                <RichText.Content tagName="span" value={columnData.priceCurrency} />
-                                            ) : ''}
-                                        </span>
-                                        <RichText.Content tagName="span" value={columnData.normalPrice} />
-                                        <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'right' ? (
-                                                <RichText.Content tagName="span" value={columnData.priceCurrency} />
-                                            ) : ''}
-                                        </span>
-                                        {!columnData.salePriceSwitcher && (
-                                            <span className="price-period">
-                                                <RichText.Content tagName="span" value={columnData.pricePeriodSeparator} />
-                                                <RichText.Content tagName="span" value={columnData.pricePeriod} />
-                                            </span>
-                                        )}
-                                    </span>
-                                    {columnData.salePriceSwitcher && (
-                                        <span className="fb-mc-pricing-sale-price">
-                                            <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'left' ? (
-                                                    <RichText.Content tagName="span" value={columnData.priceCurrency} />
-                                                ) : ''}
-                                            </span>
-                                            <RichText.Content tagName="span" value={columnData.salePrice} />
-                                            <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'right' ? (
-                                                    <RichText.Content tagName="span" value={columnData.priceCurrency} />
-                                                ) : ''}
-                                            </span>
-                                            <span className="price-period">
-                                                <RichText.Content tagName="span" value={columnData.pricePeriodSeparator} />
-                                                <RichText.Content tagName="span" value={columnData.pricePeriod} />
-                                            </span>
-                                        </span>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        <div className="fb-mc-pricing-content">
-                            {columnData.priceAfterTextSwitcher && (
-                                <div className="fb-mc-pricing-plan-activation-wrapper">
-                                    <RichText.Content
-                                        tagName="span"
-                                        className="fb-mc-pricing-plan-activation"
-                                        value={columnData.priceAfterText}
-                                    />
-                                </div>
-                            )}
-                            <div className="fb-mc-pricing-features-wrapper">
-                                {columnData.priceHideFeaturesSwitcher && (
-                                    <ul className="fb-mc-pricing-features-list">
-                                        {(columnData.priceFeatureItems || []).map((item, key) => (
-                                            <li className="fb-mc-pricing-feature-item" key={item.id}>
-                                                {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
-                                                    <div className="fb-mc-pricing-feature-icon">
-                                                        <span className="fb-mc-pricing-feature-icon-inner">
-                                                            {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                <RichText.Content
-                                                    tagName="span"
-                                                    className="fb-mc-pricing-feature-text"
-                                                    value={item.Title}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
+    const renderLayout = () => {
+        switch (pricingPresetStyle) {
+            case 'default':
+                return <LayoutOneSave attributes={attributes} />;
+            case 'preset-1':
+                return <LayoutTwoSave attributes={attributes} />;
+            case 'preset-2':
+                return <LayoutThreeSave attributes={attributes} />;
+            // case 'preset-3':
+            //     return <LayoutFourSave attributes={attributes} />;
+            // case 'preset-4':
+            //     return <LayoutFiveSave attributes={attributes} />;
+            default:
+                return <LayoutOneSave attributes={attributes} />;
+        }
     };
 
     return (
         <>
             <div {...blockProps} id={blockID}>
-                <div className={`fb-parent-wrapper fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID}>
-                    {renderPricingColumn(columns[0], 0)}
-                    {renderPricingColumn(columns[1], 1)}
-                    {renderPricingColumn(columns[2], 2)}
-                </div>
+                {renderLayout()}
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

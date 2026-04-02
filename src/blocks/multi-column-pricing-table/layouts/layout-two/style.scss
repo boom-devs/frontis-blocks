@@ -1,0 +1,32 @@
+.fb-multi-column-pricing-table-wrapper.fb-layout-two {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    .fb-mc-pricing-column {
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 30px;
+        text-align: center;
+        transition: all 0.3s ease;
+
+        &:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .fb-mc-pricing-inner-wrapper {
+            .fb-mc-pricing-title {
+                font-size: 24px;
+                margin-bottom: 20px;
+                color: #333;
+            }
+
+            .fb-mc-pricing-price {
+                font-size: 48px;
+                font-weight: 700;
+                color: #000;
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
