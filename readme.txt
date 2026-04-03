@@ -248,9 +248,11 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.2.1 – 01 April 2026 =
+= 1.2.1 – 03 April 2026 =
 - **New**: Added Full-site import functionality in the Template Library for faster site building.
 - **Fixed**: Resolved import-related issues in the Slider block on both editor and frontend.
+- **Fixed**: Resolved SureCart conflict issue to ensure smooth functionality.
+- **Improved**: Added permalink update system for better site structure.
 - **Improved**: Optimized Template Library metadata and removed internal unused code for better performance.
 - **Improved**: Updated dependencies for better stability and build consistency.
 
