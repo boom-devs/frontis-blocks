@@ -1,7 +1,7 @@
 # Frontis Blocks — System Design & Architecture Audit
 
 **Date:** 2026-03-02  
-**Version Audited:** 1.2.0  
+**Version Audited:** 1.2.0
 
 ---
 
@@ -13,23 +13,23 @@ However, the audit identified **critical security vulnerabilities**, several **p
 
 ### Severity Summary
 
-| Severity | Count |
-|----------|-------|
-| 🔴 Critical | 4 |
-| 🟠 High | 5 |
-| 🟡 Medium | 4 |
-| 🟢 Low | 2 |
+| Severity    | Count |
+| ----------- | ----- |
+| 🔴 Critical | 4     |
+| 🟠 High     | 5     |
+| 🟡 Medium   | 4     |
+| 🟢 Low      | 2     |
 
 ### Overall Grade
 
-| Category | Score | Notes |
-|----------|-------|-------|
-| Architecture | **B+** | Good structure, proper autoloading, modular design |
-| Security | **D** | Critical vulnerabilities in AJAX handlers and REST API |
-| Performance | **B** | Smart asset generation, but some wasteful patterns |
-| Code Quality | **C+** | Dead code, inconsistent patterns, no tests |
-| Maintainability | **B** | Good separation of concerns, but some files too large |
-| **Overall** | **C+** | Solid foundation, but security issues must be fixed urgently |
+| Category        | Score  | Notes                                                        |
+| --------------- | ------ | ------------------------------------------------------------ |
+| Architecture    | **B+** | Good structure, proper autoloading, modular design           |
+| Security        | **D**  | Critical vulnerabilities in AJAX handlers and REST API       |
+| Performance     | **B**  | Smart asset generation, but some wasteful patterns           |
+| Code Quality    | **C+** | Dead code, inconsistent patterns, no tests                   |
+| Maintainability | **B**  | Good separation of concerns, but some files too large        |
+| **Overall**     | **C+** | Solid foundation, but security issues must be fixed urgently |
 
 ---
 
@@ -51,14 +51,14 @@ However, the audit identified **critical security vulnerabilities**, several **p
 A full copy of `PclZip.php` exists at `includes/Core/PclZip.php`, but WordPress core already ships with this class at `wp-admin/includes/class-pclzip.php`.
 
 **Detailed Problem:**
-*   **Unnecessary Weight:** You are adding **184KB** to your plugin's zip size for a file that is already present on every WordPress site.
-*   **Maintenance & Security Risk:** If a security vulnerability is found in `PclZip`, WordPress core will update its version. However, your plugin's local copy will stay vulnerable unless you manually update it.
-*   **Inconsistent Implementation:** The codebase is currently "double-minded":
-    *   `Settings.php` (Line 684) **correctly** loads the WordPress core version using `ABSPATH`.
-    *   `TemplateLibrary.php` (Line 12) **incorrectly** uses the redundant local copy via the `FrontisBlocks\Core\PclZip` namespace.
+
+- **Unnecessary Weight:** You are adding **184KB** to your plugin's zip size for a file that is already present on every WordPress site.
+- **Maintenance & Security Risk:** If a security vulnerability is found in `PclZip`, WordPress core will update its version. However, your plugin's local copy will stay vulnerable unless you manually update it.
+- **Inconsistent Implementation:** The codebase is currently "double-minded":
+  - `Settings.php` (Line 684) **correctly** loads the WordPress core version using `ABSPATH`.
+  - `TemplateLibrary.php` (Line 12) **incorrectly** uses the redundant local copy via the `FrontisBlocks\Core\PclZip` namespace.
 
 > **Recommendation:** Remove the bundled copy at `includes/Core/PclZip.php`. Standardize all ZIP operations to use the WordPress core version.
-
 
 ---
 
@@ -87,17 +87,17 @@ private function update_option($option_name, $type)
 
 The following AJAX endpoints have **NO nonce verification or capability checks**:
 
-| Method | Line |
-|--------|------|
-| `get_global_colors()` | 108 |
-| `get_gradient_colors()` | 119 |
-| `get_custom_colors()` | 128 |
-| `get_custom_gradient_colors()` | 139 |
-| `get_typography()` | 149 |
-| `get_custom_typography()` | 159 |
-| `get_globaltypo()` | 169 |
-| `get_fontfamilies()` | 179 |
-| `get_custom_css()` | 189 |
+| Method                         | Line |
+| ------------------------------ | ---- |
+| `get_global_colors()`          | 108  |
+| `get_gradient_colors()`        | 119  |
+| `get_custom_colors()`          | 128  |
+| `get_custom_gradient_colors()` | 139  |
+| `get_typography()`             | 149  |
+| `get_custom_typography()`      | 159  |
+| `get_globaltypo()`             | 169  |
+| `get_fontfamilies()`           | 179  |
+| `get_custom_css()`             | 189  |
 
 Any logged-in user (even Subscriber role) can call these endpoints and retrieve settings data.
 
@@ -241,7 +241,7 @@ foreach ($blocks_list as $block) {
     // ...
     wp_localize_script($editor_script_handle, 'FrontisBlocksData', $localize_array);
     wp_localize_script($view_script_handle, 'FrontisBlocksData', $localize_array);
-    wp_localize_script('frontis-blocks-frontend', 'FrontisBlocksData', $localize_array);
+    wp_localize_script('frontis-blocks-frontend', '', $localize_array);
 }
 ```
 
@@ -259,6 +259,7 @@ echo '<link rel="preload" as="style" href="' . esc_url($google_font_url) . '" ..
 ```
 
 Using raw `echo` in `wp_enqueue_scripts`:
+
 - Skips WordPress's dependency system
 - Can't be filtered/dequeued by other plugins/themes
 - No duplicate detection
@@ -308,14 +309,14 @@ Both `Blocks.php` and `Enqueues.php` localize `FrontisBlocksData` and `SocialSha
 
 #### 🟢 4.1 — Massive File Sizes
 
-| File | Lines | Issue |
-|------|-------|-------|
-| `inspector.js` (advanced-heading) | 167K | UI inspector code |
-| `styling.js` (advanced-heading) | 78K | Styling logic |
-| `PostGrid.php` | 1,072 | Single method `get_posts()` is 700+ lines |
-| `Admin.php` | **38K** | 38KB single admin file |
-| `GlobalSettings.php` | 851 | 300+ lines of commented-out dead code |
-| `TemplateLibrary.php` | **38K** | Largest AJAX handler |
+| File                              | Lines   | Issue                                     |
+| --------------------------------- | ------- | ----------------------------------------- |
+| `inspector.js` (advanced-heading) | 167K    | UI inspector code                         |
+| `styling.js` (advanced-heading)   | 78K     | Styling logic                             |
+| `PostGrid.php`                    | 1,072   | Single method `get_posts()` is 700+ lines |
+| `Admin.php`                       | **38K** | 38KB single admin file                    |
+| `GlobalSettings.php`              | 851     | 300+ lines of commented-out dead code     |
+| `TemplateLibrary.php`             | **38K** | Largest AJAX handler                      |
 
 > **Fix:** Break large files into smaller, focused classes. Extract `get_posts()` into a dedicated query builder class.
 
@@ -333,9 +334,9 @@ No unit tests, integration tests, or E2E tests exist in the project. No `tests/`
 
 ## 5. REST API Design
 
-| Endpoint | Method | Auth | Issue |
-|----------|--------|------|-------|
-| `/wp/v2/frontis-blocks/post` | POST | ❌ **None** | Open to unauthenticated access |
+| Endpoint                     | Method | Auth        | Issue                          |
+| ---------------------------- | ------ | ----------- | ------------------------------ |
+| `/wp/v2/frontis-blocks/post` | POST   | ❌ **None** | Open to unauthenticated access |
 
 **CAUTION:** The only REST route has `'permission_callback' => function() { return true; }` — this means **any unauthenticated visitor** can query posts via this endpoint with complex filter parameters, creating a potential DoS vector.
 
@@ -347,20 +348,20 @@ No unit tests, integration tests, or E2E tests exist in the project. No `tests/`
 
 ### PHP Dependencies (`composer.json`)
 
-| Package | Version | Status |
-|---------|---------|--------|
-| `sabberworm/php-css-parser` | `^8.8` | ✅ Stable |
-| `matthiasmullie/minify` | `dev-master` | 🔴 Unstable |
-| `appsero/client` | `dev-develop` | 🔴 Unstable |
-| `deliciousbrains/wp-background-processing` | `^1.3` | ✅ Stable |
+| Package                                    | Version       | Status      |
+| ------------------------------------------ | ------------- | ----------- |
+| `sabberworm/php-css-parser`                | `^8.8`        | ✅ Stable   |
+| `matthiasmullie/minify`                    | `dev-master`  | 🔴 Unstable |
+| `appsero/client`                           | `dev-develop` | 🔴 Unstable |
+| `deliciousbrains/wp-background-processing` | `^1.3`        | ✅ Stable   |
 
 ### JS Dependencies (`package.json`)
 
-| Concern | Details |
-|---------|---------|
+| Concern                | Details                                                                                                     |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
 | **Heavy dependencies** | `@monaco-editor/react` (code editor), `@rive-app/canvas`, `lottie-web`, `react-virtualized` — large bundles |
-| **Redux dual usage** | Both `@reduxjs/toolkit` + `react-redux` AND `@wordpress/data` are used — pick one |
-| **Swiper version** | `swiper@11` bundled in both `node_modules` and `assets/js/backend/swiper/` — duplicate |
+| **Redux dual usage**   | Both `@reduxjs/toolkit` + `react-redux` AND `@wordpress/data` are used — pick one                           |
+| **Swiper version**     | `swiper@11` bundled in both `node_modules` and `assets/js/backend/swiper/` — duplicate                      |
 
 ---
 
