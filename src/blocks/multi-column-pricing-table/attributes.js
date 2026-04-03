@@ -494,10 +494,10 @@ const attributes = {
 	pricingHeaderDesktopPadding: {
 		type: 'object',
 		default: {
-			top: '32',
-			bottom: '32',
-			left: '32',
-			right: '32',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	pricingHeaderTabletPadding: {
@@ -592,10 +592,10 @@ const attributes = {
 	pricingHeaderBorderRadiusDesktop: {
 		type: 'object',
 		default: {
-			top: '0',
+			top: '',
 			bottom: '',
-			left: '0',
-			right: '0',
+			left: '',
+			right: '',
 		},
 	},
 	pricingHeaderBorderRadiusTablet: {
@@ -2107,7 +2107,7 @@ const attributes = {
 	/** Start price Button */
 	headerAlignment: {
 		type: 'string',
-		default: 'center'
+		default: ''
 	},
 	priceButtonSwitcher: {
 		type: 'boolean',
@@ -2748,6 +2748,99 @@ const attributes = {
 		default: '',
 	},
 	/** End price Column Three Background */
+
+	priceColumnBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	priceColumnBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	priceColumnBorderColor: {
+		type: 'string',
+	},
+	priceColumnBorderHoverColor: {
+		type: 'string',
+	},
+	priceColumnBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceColumnBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	priceColumnBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceColumnBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceColumnBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
 
 	/** End price Column */
 
@@ -3420,6 +3513,261 @@ const attributes = {
 		}
 	},
 	/** End Position */
+
+	/** Start Pricing Grid */
+	gridRowGap: {
+		type: "object",
+		default: {
+			Desktop: '0',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	gridColumnGap: {
+		type: "object",
+		default: {
+			Desktop: '0',
+			Tablet: '',
+			Mobile: '',
+		},
+	},
+	gridGapUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	pricingGridPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingGridDesktopPadding: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridTabletPadding: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridMobilePadding: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** end padding */
+
+	/** Start Pricing Grid margin */
+	pricingGridMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingGridDesktopMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridTabletMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridMobileMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	pricingGridMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** end margin */
+
+	/**Pricing Grid Background Style Start */
+	priceGridBackgroundColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceGridNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceGridNormalClassicColor: {
+		type: 'string',
+		default: '#f7f7f7',
+	},
+	priceGridNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceGridNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceGridNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	priceGridHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceGridHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceGridHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceGridHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceGridHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	/** Start Border */
+	pricingGridBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	pricingGridBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	pricingGridBorderColor: {
+		type: 'string',
+        default: '',
+	},
+	pricingGridBorderHoverColor: {
+		type: 'string',
+	},
+	pricingGridBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingGridBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingGridBorderTablet: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingGridBorderMobile: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingGridBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	pricingGridBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	pricingGridBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '16',
+			bottom: '16',
+			left: '16',
+			right: '16',
+		},
+	},
+	pricingGridBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '16',
+			bottom: '16',
+			left: '16',
+			right: '16',
+		},
+	},
+	pricingGridBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	pricingGridBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	/**End Header */
+	/**Pricing Grid Background Style End */
 };
 
 export default attributes;

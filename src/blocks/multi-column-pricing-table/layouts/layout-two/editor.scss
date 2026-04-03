@@ -1,0 +1,64 @@
+.fb-layout-two {
+    &.fb-multi-column-pricing-table-wrapper{
+        .fb-mc-pricing-grid{
+            display: grid;
+
+            .fb-mc-pricing-column{
+                .fb-mc-pricing-main-wrapper{
+                    margin-top: 0;
+                }
+                .fb-mc-pricing-inner-wrapper {
+                    .fb-mc-pricing-top-wrapper {
+                        text-align: left;
+
+                        .fb-mc-pricing-top-text {
+                            text-align: left;
+                        }
+                    }
+                }
+
+                .fb-mc-pricing-main-wrapper{
+                    .fb-mc-pricing-header{
+                        display: flex;
+                        flex-direction: column;
+
+                        .fb-mc-pricing-title{
+                            margin: 0;
+                        }
+                    }
+                    
+                    .fb-mc-pricing-button-wrapper{
+                        display: flex;
+                        text-align: center;
+
+                        .fb-mc-pricing-button{
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
+        .fb-mc-pricing-features-wrapper{    
+            .fb-mc-pricing-features-grid{
+                display: flex;
+                .fb-mc-pricing-features-list{
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                }
+
+                .fb-mc-pricing-feature-item{
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+
+                    .fb-mc-pricing-feature-icon, 
+                    .fb-mc-pricing-feature-icon-inner{
+                        display: flex;
+                    }
+                }
+            }
+        }
+        
+    }
+}
