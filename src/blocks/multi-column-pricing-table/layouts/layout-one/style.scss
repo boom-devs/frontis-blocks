@@ -1,15 +1,14 @@
 .fb-multi-column-pricing-table-wrapper.fb-layout-one {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
    
     .fb-mc-pricing-column {
-        &.two{
-            .fb-mc-pricing-main-wrapper{
-                margin-top: 0;
-            }
-        }
+        
         .fb-mc-pricing-inner-wrapper {
+            position: relative;
             .fb-mc-pricing-top-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: stretch;
                 text-align: center;
 
                 .fb-mc-pricing-top-text {

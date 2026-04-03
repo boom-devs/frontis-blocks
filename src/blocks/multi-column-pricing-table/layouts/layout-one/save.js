@@ -102,31 +102,31 @@ const LayoutOneSave = ({ attributes }) => {
                                     />
                                 </div>
                             )}
-                            <div className="fb-mc-pricing-features-wrapper">
-                                {columnData.priceHideFeaturesSwitcher && (
-                                    <ul className="fb-mc-pricing-features-list">
-                                        {(columnData.priceFeatureItems || []).map((item, key) => (
-                                            <li 
-                                                className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`}
-                                                key={item.id}
-                                            >
-                                                {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
-                                                    <div className="fb-mc-pricing-feature-icon">
-                                                        <span className="fb-mc-pricing-feature-icon-inner">
-                                                            {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                <RichText.Content
-                                                    tagName="span"
-                                                    className="fb-mc-pricing-feature-text"
-                                                    value={item.Title}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                        </div>
+                        <div className="fb-mc-pricing-features-wrapper">
+                            {columnData.priceHideFeaturesSwitcher && (
+                                <ul className="fb-mc-pricing-features-list">
+                                    {(columnData.priceFeatureItems || []).map((item, key) => (
+                                        <li 
+                                            className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`}
+                                            key={item.id}
+                                        >
+                                            {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+                                                <div className="fb-mc-pricing-feature-icon">
+                                                    <span className="fb-mc-pricing-feature-icon-inner">
+                                                        {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            <RichText.Content
+                                                tagName="span"
+                                                className="fb-mc-pricing-feature-text"
+                                                value={item.Title}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -136,9 +136,11 @@ const LayoutOneSave = ({ attributes }) => {
 
     return (
         <div className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID}>
-            {renderPricingColumn(columns[0], 0)}
-            {renderPricingColumn(columns[1], 1)}
-            {renderPricingColumn(columns[2], 2)}
+            <div className='fb-mc-pricing-grid'>
+                {renderPricingColumn(columns[0], 0)}
+                {renderPricingColumn(columns[1], 1)}
+                {renderPricingColumn(columns[2], 2)}
+            </div>
         </div>
     );
 };

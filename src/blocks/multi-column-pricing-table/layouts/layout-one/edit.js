@@ -189,35 +189,35 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                                     />
                                 </div>
                             )}
-                            <div className="fb-mc-pricing-features-wrapper">
-                                {columnData.priceHideFeaturesSwitcher && (
-                                    <ul className="fb-mc-pricing-features-list">
-                                        {(columnData.priceFeatureItems || []).map(item => (
-                                            <li className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`} key={item.id}>
-                                                {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
-                                                    <div className="fb-mc-pricing-feature-icon">
-                                                        <span className="fb-mc-pricing-feature-icon-inner">
-                                                            {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
-                                                        </span>
-                                                    </div>
-                                                )}
-                                                <RichText
-                                                    tagName="span"
-                                                    className="fb-mc-pricing-feature-text"
-                                                    value={item.Title || ''}
-                                                    onChange={(value) => {
-                                                        const updatedItems = (columnData.priceFeatureItems || []).map(i =>
-                                                            i.id === item.id ? { ...i, Title: value } : i
-                                                        );
-                                                        updateColumnAttribute('priceFeatureItems', updatedItems, columnIndex);
-                                                    }}
-                                                    placeholder={__('Feature Title', 'frontis-blocks')}
-                                                />
-                                            </li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
+                        </div>
+                        <div className="fb-mc-pricing-features-wrapper">
+                            {columnData.priceHideFeaturesSwitcher && (
+                                <ul className="fb-mc-pricing-features-list">
+                                    {(columnData.priceFeatureItems || []).map(item => (
+                                        <li className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`} key={item.id}>
+                                            {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+                                                <div className="fb-mc-pricing-feature-icon">
+                                                    <span className="fb-mc-pricing-feature-icon-inner">
+                                                        {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            <RichText
+                                                tagName="span"
+                                                className="fb-mc-pricing-feature-text"
+                                                value={item.Title || ''}
+                                                onChange={(value) => {
+                                                    const updatedItems = (columnData.priceFeatureItems || []).map(i =>
+                                                        i.id === item.id ? { ...i, Title: value } : i
+                                                    );
+                                                    updateColumnAttribute('priceFeatureItems', updatedItems, columnIndex);
+                                                }}
+                                                placeholder={__('Feature Title', 'frontis-blocks')}
+                                            />
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -230,10 +230,13 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
             className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} 
             id={pricingTableGlobalWraperID} 
             ref={panelRef}
-        >
-            {renderPricingColumn(0)}
-            {renderPricingColumn(1)}
-            {renderPricingColumn(2)}
+        >   
+            <div className="fb-mc-pricing-grid">
+                {renderPricingColumn(0)}
+                {renderPricingColumn(1)}
+                {renderPricingColumn(2)}
+            </div>
+            
         </div>
     );
 };
