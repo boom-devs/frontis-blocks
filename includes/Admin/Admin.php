@@ -944,6 +944,11 @@ class Admin
 
     public function enqueue_editor_assets()
     {
+        // Skip loading plugin assets on SureCart product edit page to avoid conflicts.
+        if (isset($_GET['page']) && $_GET['page'] === 'sc-products') {
+            return;
+        }
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '';
         $theme = wp_get_theme();
 
