@@ -61,47 +61,6 @@ const PatternLibraryButton = () => {
     const handleClick = () => {
         setIsVisible(!isVisible);
     };
-    
-    const importDemo = () => {
-        jQuery.ajax({
-            url: frontisBlocksAdmin.ajaxUrl,
-            type: 'POST',
-            data: {
-                action: 'fb_import_demo_data',
-                nonce: frontisBlocksAdmin.nonce,
-            },
-            success: function (response) {
-                const { getSelectedBlockClientId, getBlockOrder } = select('core/block-editor');
-                const { insertBlock } = dispatch('core/block-editor');
-                const selectedBlockClientId = getSelectedBlockClientId();
-
-                if (!selectedBlockClientId) {
-                    console.warn('No block is currently selected');
-                    return;
-                }
-
-                try {
-                    const blockOrder = getBlockOrder();
-                    const selectedBlockIndex = blockOrder.indexOf(selectedBlockClientId);
-
-                    if (selectedBlockIndex === -1) {
-                        throw new Error('Selected block not found in block order');
-                    }
-
-                    const newBlock = createBlock('core/html', {
-                        content: response.data
-                    });
-
-                    insertBlock(newBlock, selectedBlockIndex + 1);
-                } catch (error) {
-                    console.error('Error inserting blocks:', error);
-                }
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr, status, error);
-            }
-        });
-    };
 
     const [data, setData] = useState({
         patterns: { name: "Patterns", items: [], categories: [], pagination: {}, tags: [] },

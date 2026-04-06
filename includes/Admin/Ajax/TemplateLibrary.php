@@ -716,6 +716,12 @@ class TemplateLibrary extends AjaxBase
             set_theme_mod('custom_logo', $site_logo);
         }
 
+        // Update permalink structure to Post name if not set
+        if (get_option('permalink_structure') !== '/%postname%/') {
+            update_option('permalink_structure', '/%postname%/');
+            flush_rewrite_rules();
+        }
+
         wp_send_json_success([
             'message' => 'Site settings updated',
             'site' => [
