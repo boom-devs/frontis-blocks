@@ -5,11 +5,6 @@
         .fb-mc-pricing-inner-wrapper {
             position: relative;
             .fb-mc-pricing-top-wrapper {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: stretch;
-                text-align: center;
 
                 .fb-mc-pricing-top-text {
                     text-align: center;
@@ -22,7 +17,6 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin-top: 2px;
 
                 .fb-mc-pricing-title{
                     margin: 0;
