@@ -140,9 +140,9 @@ const attributes = {
 	},
 
 	/** Start Background */
-	pricingTopSectionGlobalStyleSwitcher: {
+	pricingGlobalStyleSwitcher: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	pricingTopSectionBgColorSwitcher : {
 		type: 'string',
@@ -2033,7 +2033,7 @@ const attributes = {
 	priceFeatureDesktopPadding: {
 		type: 'object',
 		default: {
-			top: '32',
+			top: '24',
 			bottom: '32',
 			left: '32',
 			right: '32',
@@ -2576,7 +2576,7 @@ const attributes = {
 	priceColumnDesktopMargin: {
 		type: 'object',
 		default: {
-			top: '57',
+			top: '0',
 			bottom: '0',
 			left: '0',
 			right: '0',
@@ -2749,6 +2749,55 @@ const attributes = {
 	},
 	/** End price Column Three Background */
 
+	/** Start price Column Background */
+	priceColumnBackgroundColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceColumnNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnNormalClassicColor: {
+		type: 'string',
+		default: '#f7f7f7',
+	},
+	priceColumnNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	priceColumnHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	priceColumnHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	priceColumnHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	priceColumnHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	priceColumnHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End price Column Three Background */
+
+	/**Start price column border */
 	priceColumnBorder: {
 		type: 'string',
 		default: 'none',
@@ -2763,6 +2812,7 @@ const attributes = {
 	priceColumnBorderHoverColor: {
 		type: 'string',
 	},
+
 	priceColumnBorderUnits: {
 		type: 'object',
 		default: {
@@ -2771,7 +2821,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	priceColumnBorderDesktop: {
+	priceColumnDesktopBorderWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2780,7 +2830,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	priceColumnBorderTablet: {
+	priceColumnTabletBorderWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2789,7 +2839,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	priceColumnBorderMobile: {
+	priceColumnMobileBorderWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2802,6 +2852,7 @@ const attributes = {
 		type : 'boolean',
 		default: true
 	},
+
 	priceColumnBorderRadiusUnits: {
 		type: 'object',
 		default: {
@@ -2810,7 +2861,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	priceColumnBorderRadiusDesktop: {
+	priceColumnDesktopBorderRadiusWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2819,7 +2870,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	priceColumnBorderRadiusTablet: {
+	priceColumnTabBorderRadiusWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2828,7 +2879,7 @@ const attributes = {
 			right: '',
 		},
 	},
-	priceColumnBorderRadiusMobile: {
+	priceColumnMobileBorderRadiusWidth: {
 		type: 'object',
 		default: {
 			top: '',
@@ -2841,6 +2892,7 @@ const attributes = {
 		type : 'boolean',
 		default: true
 	},
+	/**End price column border */
 
 	/** End price Column */
 
@@ -2864,10 +2916,10 @@ const attributes = {
 	priceGlobalPaddingDesktop: {
 		type: 'object',
 		default: {
-			top: '0',
-			bottom: '0',
-			left: '0',
-			right: '0',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	priceGlobalPaddingTablet: {
@@ -3280,8 +3332,8 @@ const attributes = {
 	priceAfterTextPaddingDesktop: {
 		type: 'object',
 		default: {
-			top: '0',
-			bottom: '24',
+			top: '32',
+			bottom: '0',
 			left: '0',
 			right: '0',
 		},
@@ -3519,8 +3571,8 @@ const attributes = {
 		type: "object",
 		default: {
 			Desktop: '0',
-			Tablet: '',
-			Mobile: '',
+			Tablet: '0',
+			Mobile: '24',
 		},
 	},
 	gridColumnGap: {
@@ -3550,10 +3602,10 @@ const attributes = {
 	pricingGridDesktopPadding: {
 		type: 'object',
 		default: {
-			top: '',
-			bottom: '',
-			left: '',
-			right: '',
+			top: '58',
+			bottom: '0',
+			left: '0',
+			right: '0',
 		},
 	},
 	pricingGridTabletPadding: {
@@ -3633,7 +3685,7 @@ const attributes = {
 	},
 	priceGridNormalClassicColor: {
 		type: 'string',
-		default: '#f7f7f7',
+		default: '',
 	},
 	priceGridNormalGradientColor: {
 		type: 'string',
