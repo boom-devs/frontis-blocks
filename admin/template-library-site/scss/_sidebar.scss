@@ -15,11 +15,16 @@
         @media only screen and (max-width: 1200px) {
             position: absolute;
             z-index: 20;
-            top: 10px;
-            left: 10px;
+            // left: -24px;
+            // top: 10px;
+            // left: 10px;
             transform: translateX(-110%);
             transition: transform 0.3s ease-in-out;
             overflow: visible;
+            border-right: 1px solid #F3F3F3;
+            border-bottom: 1px solid #F3F3F3;
+            border-bottom-right-radius: 4px;
+            padding: 24px 24px 24px 0;
 
             &.collapsed {
                 transform: translateX(0);
@@ -209,7 +214,7 @@
     .fb-import-sidebar-collapse {
         display: none;
         position: absolute;
-        top: 90px;
+        top: 24px;
         left: calc(100% - 15px);
         cursor: pointer;
         z-index: 10;
@@ -305,6 +310,9 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
+        @media only screen and (max-width: 1200px) {
+            margin-top: 0;
+        }
         .fb-template-sort-wrapper {
             display: flex;
             flex-direction: column;
