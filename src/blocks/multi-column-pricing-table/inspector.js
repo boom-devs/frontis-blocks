@@ -52,6 +52,9 @@ const Inspector = ({ attributes, setAttributes }) => {
         selectedColumn,
         columns,
         pricingPresetStyle,
+        priceFeatureTitle,
+        priceFeatureTitleSwitcher,
+        featureTitleAlignment,
 
         /** Start Top Section */
         pricingGlobalStyleSwitcher,
@@ -359,6 +362,28 @@ const Inspector = ({ attributes, setAttributes }) => {
         /** End Feature Icon */
 
         /** Start Feature Title */
+        featureTitleColorSwitcher,
+        featureTitleColor,
+        featureTitleHoverColor,
+
+        featureTitleGlobalTypoSwitcher,
+        featureTitleGlobalTypographyData,
+        featureTitleGlobalTypoType,
+        featureTitleGlobalTypoOption,
+        featureTitleFontFamily,
+        featureTitleFontSize,
+        featureTitleFontSizeUnits,
+        featureTitleFontWeight,
+        featureTitleFontStyle,
+        featureTitleTextTransform,
+        featureTitleTextDecoration,
+        featureTitleLetterSpacing,
+        featureTitleLetterSpacingUnits,
+        featureTitleLineHeight,
+        featureTitleLineHeightUnits,
+        /** End Feature Title */
+
+        /** Start Feature items text */
         pricingfeatureTitleColorSwitcher,
         pricingfeatureTitleColor,
         pricingfeatureTitleHoverColor,
@@ -377,7 +402,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         pricingfeatureTitleLetterSpacingUnits,
         pricingfeatureTitleLineHeight,
         pricingfeatureTitleLineHeightUnits,
-        /** End Feature Title */
+        /** End Feature items text */
 
         /** Start Feature Item Padding */
         priceFeatureItemPaddingUnits,
@@ -417,13 +442,32 @@ const Inspector = ({ attributes, setAttributes }) => {
         priceFeatureItemBorderRadiusLink,
         /** End Feature Border Radius */
 
+        /**feature background */
+        priceFeatureAreaBgColorSwitcher,
+        priceFeatureAreaNormalBackgroundType,
+        priceFeatureAreaNormalClassicColor,
+        priceFeatureAreaNormalGradientColor,
+        priceFeatureAreaNormalCustomGradientSwitcher,
+        priceFeatureAreaNormalCustomGradientInputValue,
+        priceFeatureAreaHoverBackgroundType,
+        priceFeatureAreaHoverClassicColor,
+        priceFeatureAreaHoverGradientColor,
+        priceFeatureAreaHoverCustomGradientSwitcher,
+        priceFeatureAreaHoverCustomGradientInputValue,
+
         /** Start Feature Padding */
         priceFeaturePaddingUnits,
         priceFeatureDesktopPadding,
         priceFeatureTabPadding,
         priceFeatureMobilePadding,
         priceFeaturePaddingLink,
-        /** End Feature Padding */
+
+        /** Start Feature Margin */
+        priceFeatureMarginUnits,
+        priceFeatureDesktopMargin,
+        priceFeatureTabMargin,
+        priceFeatureMobileMargin,
+        priceFeatureMarginLink,
 
         /** Start price Button */
         headerAlignment,
@@ -515,42 +559,6 @@ const Inspector = ({ attributes, setAttributes }) => {
         priceColumnTabletMargin,
         priceColumnMobileMargin,
         priceColumnMarginLink,
-
-        priceColumnOneBackgroundColorSwitcher,
-        priceColumnOneNormalBackgroundType,
-        priceColumnOneNormalClassicColor,
-        priceColumnOneNormalGradientColor,
-        priceColumnOneNormalCustomGradientSwitcher,
-        priceColumnOneNormalCustomGradientInputValue,
-        priceColumnOneHoverBackgroundType,
-        priceColumnOneHoverClassicColor,
-        priceColumnOneHoverGradientColor,
-        priceColumnOneHoverCustomGradientSwitcher,
-        priceColumnOneHoverCustomGradientInputValue,
-
-        priceColumnTwoBackgroundColorSwitcher,
-        priceColumnTwoNormalBackgroundType,
-        priceColumnTwoNormalClassicColor,
-        priceColumnTwoNormalGradientColor,
-        priceColumnTwoNormalCustomGradientSwitcher,
-        priceColumnTwoNormalCustomGradientInputValue,
-        priceColumnTwoHoverBackgroundType,
-        priceColumnTwoHoverClassicColor,
-        priceColumnTwoHoverGradientColor,
-        priceColumnTwoHoverCustomGradientSwitcher,
-        priceColumnTwoHoverCustomGradientInputValue,
-
-        priceColumnThreeBackgroundColorSwitcher,
-        priceColumnThreeNormalBackgroundType,
-        priceColumnThreeNormalClassicColor,
-        priceColumnThreeNormalGradientColor,
-        priceColumnThreeNormalCustomGradientSwitcher,
-        priceColumnThreeNormalCustomGradientInputValue,
-        priceColumnThreeHoverBackgroundType,
-        priceColumnThreeHoverClassicColor,
-        priceColumnThreeHoverGradientColor,
-        priceColumnThreeHoverCustomGradientSwitcher,
-        priceColumnThreeHoverCustomGradientInputValue,
 
         priceColumnBackgroundColorSwitcher,
         priceColumnNormalBackgroundType,
@@ -1502,6 +1510,75 @@ const Inspector = ({ attributes, setAttributes }) => {
         })
     }
     /** End Feature Padding */
+
+    /** Start Feature Margin */ 
+    const handleFeatureMarginUnitChange = ( event, position ) => {
+        const value = event.target.value;
+        if ( priceFeatureMarginLink ) { 
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {
+                        priceFeatureDesktopMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Tablet':
+                    setAttributes( {
+                        priceFeatureTabMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                case 'Mobile':
+                    setAttributes( {
+                        priceFeatureMobileMargin: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    } );
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch ( deviceType ) {
+                case 'Desktop':
+                    setAttributes( {priceFeatureDesktopMargin: {...priceFeatureDesktopMargin, [position]: value}} );
+                    break;
+                case 'Tablet':
+                    setAttributes( {priceFeatureTabMargin: {...priceFeatureTabMargin, [position]: value}} );
+                    break;
+                case 'Mobile':
+                    setAttributes( {priceFeatureMobileMargin: {...priceFeatureMobileMargin, [position]: value}} );
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleFeatureMarginCombineBtn = () => {
+        setAttributes( {priceFeatureMarginLink: !priceFeatureMarginLink} );
+    }
+
+    const handleFeatureMarginUnitsHandler = (unit) => {
+        setAttributes( {
+            priceFeatureMarginUnits: {
+                ...priceFeatureMarginUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Feature Margin */
 
 
     /** Start After Text Border */ 
@@ -3394,7 +3471,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChange={(value) => updateColumnAttribute('priceAfterTextSwitcher', value)}
                 />
                 {columnData.priceAfterTextSwitcher && (
-                    <TextareaControl
+                    <TextControl
                         value={columnData.priceAfterText}
                         onChange={(value) => updateColumnAttribute('priceAfterText', value)}
                     />
@@ -3471,6 +3548,24 @@ const Inspector = ({ attributes, setAttributes }) => {
                     </>
                 )}
             </PanelBody>
+
+            {pricingPresetStyle === 'preset-1' && (
+                <PanelBody title={__("Feature Title", "frontis-blocks")} initialOpen={false}>
+                    <ToggleControl
+                        label={__("Show Feature Title", "frontis-blocks")}
+                        checked={priceFeatureTitleSwitcher}
+                        onChange={(value) => setAttributes({ priceFeatureTitleSwitcher: value })}
+                    />
+                    {priceFeatureTitleSwitcher && (
+                        <TextControl
+                            label={__("Feature title", "frontis-blocks")}
+                            value={priceFeatureTitle}
+                            onChange={(value) => setAttributes({ priceFeatureTitle: value })}
+                            placeholder={__('Enter feature title', 'frontis-blocks')}
+                        />
+                    )}
+                </PanelBody>
+            )}
             {/** End Button */}
 
         </>
@@ -4731,19 +4826,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     resetFallbackValue={''}
                 />
 
-                 <FB_Range
-                    min={0}
-                    max={1}
-                    label={__("Opacity (Disabled Item)", "frontis-blocks")}
-                    rangeValue={priceFeatureDisabledOpacity}
-                    onChangeHandler={(value) => setAttributes({ priceFeatureDisabledOpacity: value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    isRangeUnit={false}
-                    rangeStep={0.1}
-                    resetFallbackValue={"0.5"}
-                />
-
                 <FB_SwitcherControl
                     label={__("Feature Icon Color", "frontis-blocks")}
                     globalSwitcher={priceFeatureIconColorSwitcher}
@@ -4834,7 +4916,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 />
 
                 <FB_SwitcherControl
-                    label={__("Feature Title Color", "frontis-blocks")}
+                    label={__("Item Text Color", "frontis-blocks")}
                     globalSwitcher={pricingfeatureTitleColorSwitcher}
                     setGlobalSwitcher={(value) => setAttributes({ pricingfeatureTitleColorSwitcher: value })}
                 />
@@ -4945,8 +5027,65 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setAttributes={setAttributes}
                 />
 
+                <FB_Range
+                    min={0}
+                    max={1}
+                    label={__("Opacity", "frontis-blocks")}
+                    help={__("For Disabled Item", "frontis-blocks")}
+                    rangeValue={priceFeatureDisabledOpacity}
+                    onChangeHandler={(value) => setAttributes({ priceFeatureDisabledOpacity: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    isRangeUnit={false}
+                    rangeStep={0.1}
+                    resetFallbackValue={"0.5"}
+                />
+
+                <FB_BackgroundColorControl
+                    label={__("Feature Area BG", "frontis-blocks")}
+                    bgColorSwitcher={priceFeatureAreaBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ priceFeatureAreaBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={priceFeatureAreaNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ priceFeatureAreaNormalBackgroundType: value })}
+                    normalClassicColor={priceFeatureAreaNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ priceFeatureAreaNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={priceFeatureAreaNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ priceFeatureAreaNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={priceFeatureAreaNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ priceFeatureAreaNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={priceFeatureAreaNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ priceFeatureAreaNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={priceFeatureAreaHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ priceFeatureAreaHoverBackgroundType: value })}
+                    hoverClassicColor={priceFeatureAreaHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ priceFeatureAreaHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={priceFeatureAreaHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ priceFeatureAreaHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={priceFeatureAreaHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ priceFeatureAreaHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={priceFeatureAreaHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ priceFeatureAreaHoverCustomGradientInputValue: value })}
+                    isBackgroundImage={false}
+                />
+
                 <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")}
+                    label={__("Feature Area Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleFeatureMarginUnitsHandler}
+                    spacingUnits={priceFeatureMarginUnits}
+                    spacingDesktop={priceFeatureDesktopMargin}
+                    spacingTablet={priceFeatureTabMargin}
+                    spacingMobile={priceFeatureMobileMargin}
+                    handleSpacingUnitHandler={handleFeatureMarginUnitChange}
+                    spacingCombineBtn={priceFeatureMarginLink}
+                    spacingCombineBtnHandler={handleFeatureMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing 
+                    label={__("Feature Area Padding", "frontis-blocks")}
                     deviceType={deviceType}
                     spacingUnitsHandler={handleFeaturePaddingUnitsHandler}
                     spacingUnits={priceFeaturePaddingUnits}
@@ -4961,6 +5100,91 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             </PanelBody>
 
+            {pricingPresetStyle === 'preset-1' && priceFeatureTitleSwitcher && (
+                <PanelBody title={__("Feature Title", "frontis-blocks")} initialOpen={false}>    
+                    <FB_AlignmentControl
+                        label={__("Alignment", "frontis-blocks")}
+                        globalAlignment={featureTitleAlignment}
+                        setGlobalAlignment={(value) => setAttributes({ featureTitleAlignment: value })}
+                    />
+
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={featureTitleGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ featureTitleGlobalTypographyData: value })}
+
+                        globalTypoType={featureTitleGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({ 
+                                featureTitleGlobalTypoType: value, 
+                                featureTitleGlobalTypoSwitcher: value === 'default' ? {...featureTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false,} : {...featureTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true,}
+                            })
+                        }}
+
+                        globalTypoOption={featureTitleGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ featureTitleGlobalTypoOption: value })}
+
+                        fontFamily={featureTitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ featureTitleFontFamily: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, fontFamily: value && false} })}
+
+                        fontSize={featureTitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ featureTitleFontSize: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, fontSize: value && false} })}
+
+                        fontSizeUnits={featureTitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ featureTitleFontSizeUnits: value })}
+
+                        fontWeight={featureTitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ featureTitleFontWeight: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, fontWeight: value && false} })}
+
+                        fontStyle={featureTitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ featureTitleFontStyle: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, fontStyle: value && false} })}
+
+                        textTransform={featureTitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ featureTitleTextTransform: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, textTransform: value && false} })}
+
+                        textDecoration={featureTitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ featureTitleTextDecoration: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, textDecoration: value && false} })}
+
+                        letterSpacing={featureTitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ featureTitleLetterSpacing: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, letterSpacing: value && false} })}
+
+                        letterSpacingUnits={featureTitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ featureTitleLetterSpacingUnits: value })}
+
+                        lineHeight={featureTitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ featureTitleLineHeight: value, featureTitleGlobalTypoSwitcher: {...featureTitleGlobalTypoSwitcher, lineHeight: value && false} })}
+
+                        lineHeightUnits={featureTitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ featureTitleLineHeightUnits: value })}
+
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+
+                    <FB_SwitcherControl
+                        label={__("Item Text Color", "frontis-blocks")}
+                        globalSwitcher={featureTitleColorSwitcher}
+                        setGlobalSwitcher={(value) => setAttributes({ featureTitleColorSwitcher: value })}
+                    />
+
+                    {featureTitleColorSwitcher === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Nomal Color", "frontis-blocks")}
+                            globalColor={featureTitleColor}
+                            setGlobalColor={(value) => setAttributes({ featureTitleColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                    {featureTitleColorSwitcher === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={featureTitleHoverColor}
+                            setGlobalColor={(value) => setAttributes({ featureTitleHoverColor: value === undefined ? '' : value })}
+                        />
+                    )}
+
+                </PanelBody>
+            )}
             {priceButtonSwitcher && (
                 <PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
 

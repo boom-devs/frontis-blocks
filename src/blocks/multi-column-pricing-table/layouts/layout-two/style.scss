@@ -1,5 +1,11 @@
 .fb-layout-two {
     &.fb-multi-column-pricing-table-wrapper{
+        position: relative;
+        .fb-mc-pricing-feature-title{
+            .fb-mc-pricing-feature-title-text{
+                margin: 0;
+            }
+        }
         .fb-mc-pricing-grid{
             display: grid;
 

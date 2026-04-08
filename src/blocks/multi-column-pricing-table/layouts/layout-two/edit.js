@@ -9,6 +9,9 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
         pricingTableGlobalWraperID,
         pricingTableGlobalWraperClass,
         selectedColumn,
+        priceFeatureTitle,
+        priceFeatureTitleSwitcher,
+        pricingPresetStyle,
     } = attributes;
 
     const getColumnData = (columnIndex) => columns[columnIndex] || {};
@@ -39,7 +42,7 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
                     
                     <div className="fb-mc-pricing-main-wrapper">
                         <div className="fb-mc-pricing-header">
-                            {/* {columnData.pricingSectionTopSwitcher && (
+                            {columnData.pricingSectionTopSwitcher && (
                                 <div className="fb-mc-pricing-top-wrapper">
                                     <RichText
                                         tagName="span"
@@ -49,7 +52,7 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
                                         placeholder={__('Enter text', 'frontis-blocks')}
                                     />
                                 </div>
-                            )} */}
+                            )}
                             <div className="fb-mc-pricing-title-wrapper">
                                 <RichText
                                     tagName={columnData.pricingTitleTag || 'h2'}
@@ -61,22 +64,21 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
                             </div>
                             <div className="fb-mc-pricing-price-wrapper">
                                 <div className="fb-mc-pricing-price-inner-wrapper">
-                                    <div className="fb-mc-pricing-price-inner-wrapper">
-                                        <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
+                                    {columnData.salePriceSwitcher && (
+                                        <span className="fb-mc-pricing-sale-price">
                                             <span className="price-currency">
                                                 {columnData.priceCurrencyPosition === 'left' ? (
                                                     <RichText
                                                         tagName="span"
                                                         value={columnData.priceCurrency || ''}
                                                         onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
-                                                        placeholder={__('Enter currency', 'frontis-blocks')}
                                                     />
                                                 ) : ''}
                                             </span>
                                             <RichText
                                                 tagName="span"
-                                                value={columnData.normalPrice || ''}
-                                                onChange={(value) => updateColumnAttribute('normalPrice', value, columnIndex)}
+                                                value={columnData.salePrice || ''}
+                                                onChange={(value) => updateColumnAttribute('salePrice', value, columnIndex)}
                                                 placeholder={__('Enter price', 'frontis-blocks')}
                                             />
                                             <span className="price-currency">
@@ -85,72 +87,63 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
                                                         tagName="span"
                                                         value={columnData.priceCurrency || ''}
                                                         onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
-                                                        placeholder={__('Enter currency', 'frontis-blocks')}
                                                     />
                                                 ) : ''}
                                             </span>
-                                            {!columnData.salePriceSwitcher && (
-                                                <span className="price-period">
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={columnData.pricePeriodSeparator || ''}
-                                                        onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
-                                                        placeholder={__('Enter separator', 'frontis-blocks')}
-                                                    />
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={columnData.pricePeriod || ''}
-                                                        onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
-                                                        placeholder={__('Enter period', 'frontis-blocks')}
-                                                    />
-                                                </span>
-                                            )}
-                                        </span>
-                                        {columnData.salePriceSwitcher && (
-                                            <span className="fb-mc-pricing-sale-price">
-                                                <span className="price-currency">
-                                                    {columnData.priceCurrencyPosition === 'left' ? (
-                                                        <RichText
-                                                            tagName="span"
-                                                            value={columnData.priceCurrency || ''}
-                                                            onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
-                                                            placeholder={__('Enter currency', 'frontis-blocks')}
-                                                        />
-                                                    ) : ''}
-                                                </span>
+                                            <span className="price-period">
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.salePrice || ''}
-                                                    onChange={(value) => updateColumnAttribute('salePrice', value, columnIndex)}
-                                                    placeholder={__('Enter price', 'frontis-blocks')}
+                                                    value={columnData.pricePeriodSeparator || ''}
+                                                    onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
                                                 />
-                                                <span className="price-currency">
-                                                    {columnData.priceCurrencyPosition === 'right' ? (
-                                                        <RichText
-                                                            tagName="span"
-                                                            value={columnData.priceCurrency || ''}
-                                                            onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
-                                                            placeholder={__('Enter currency', 'frontis-blocks')}
-                                                        />
-                                                    ) : ''}
-                                                </span>
-                                                <span className="price-period">
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={columnData.pricePeriodSeparator || ''}
-                                                        onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
-                                                        placeholder={__('Enter separator', 'frontis-blocks')}
-                                                    />
-                                                    <RichText
-                                                        tagName="span"
-                                                        value={columnData.pricePeriod || ''}
-                                                        onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
-                                                        placeholder={__('Enter period', 'frontis-blocks')}
-                                                    />
-                                                </span>
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriod || ''}
+                                                    onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
+                                                />
+                                            </span>
+                                        </span>
+                                    )}
+                                    <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
+                                        <span className="price-currency">
+                                            {columnData.priceCurrencyPosition === 'left' ? (
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.priceCurrency || ''}
+                                                    onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                />
+                                            ) : ''}
+                                        </span>
+                                        <RichText
+                                            tagName="span"
+                                            value={columnData.normalPrice || ''}
+                                            onChange={(value) => updateColumnAttribute('normalPrice', value, columnIndex)}
+                                            placeholder={__('Enter price', 'frontis-blocks')}
+                                        />
+                                        <span className="price-currency">
+                                            {columnData.priceCurrencyPosition === 'right' ? (
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.priceCurrency || ''}
+                                                    onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                />
+                                            ) : ''}
+                                        </span>
+                                        {!columnData.salePriceSwitcher && (
+                                            <span className="price-period">
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriodSeparator || ''}
+                                                    onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
+                                                />
+                                                <RichText
+                                                    tagName="span"
+                                                    value={columnData.pricePeriod || ''}
+                                                    onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
+                                                />
                                             </span>
                                         )}
-                                    </div>
+                                    </span>
                                 </div>
                                 
                             </div>
@@ -158,7 +151,7 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
 
                         <div className="fb-mc-pricing-content">
                             {columnData.priceAfterTextSwitcher && (
-                                <div className="fb-mc-pricing-plan-activation-wrapper">
+                               <div className="fb-mc-pricing-plan-activation-wrapper">
                                     <RichText
                                         tagName="span"
                                         className="fb-mc-pricing-plan-activation"
@@ -168,9 +161,6 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
                                     />
                                 </div>
                             )}
-                            <div className="fb-mc-pricing-support">
-                                <span>Lifetime Update & Support</span>
-                            </div>
                             
                             <div className="fb-mc-pricing-button-wrapper">
                                 {columnData.priceButtonSwitcher && (
@@ -234,7 +224,18 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
             id={pricingTableGlobalWraperID} 
             ref={panelRef}
         >
-            <div className="fb-mc-pricing-grid">    
+            {pricingPresetStyle === 'preset-1' && priceFeatureTitleSwitcher && (
+                <div className='fb-mc-pricing-feature-title'>
+                    <RichText
+                        tagName="h3"
+                        className="fb-mc-pricing-feature-title-text"
+                        value={priceFeatureTitle}
+                        onChange={(value) => setAttributes({ priceFeatureTitle: value })}
+                        placeholder={__('Enter feature title', 'frontis-blocks')}
+                    />
+                </div>    
+            )}
+            <div className="fb-mc-pricing-grid">
                 {renderPricingColumn(0)}
                 {renderPricingColumn(1)}
                 {renderPricingColumn(2)}
