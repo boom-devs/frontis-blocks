@@ -2063,6 +2063,95 @@ const attributes = {
 	},
 	/** End Feature Padding */
 
+	/** Start Feature Margin */
+	priceFeatureMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureDesktopMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureTabMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureMobileMargin: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	priceFeatureMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Feature Margin */
+
+	/**Start Feature Area background */
+	priceFeatureAreaBgColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+    priceFeatureAreaNormalBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+    priceFeatureAreaNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+    priceFeatureAreaNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+    priceFeatureAreaNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+    priceFeatureAreaNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+    priceFeatureAreaHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+    priceFeatureAreaHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+    priceFeatureAreaHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+    priceFeatureAreaHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+    priceFeatureAreaHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/**End Feature Area background */
+
 	/** Start Price list Features */
 	priceHideFeaturesSwitcher: {
 		type: 'boolean',
@@ -3820,6 +3909,127 @@ const attributes = {
 	},
 	/**End Header */
 	/**Pricing Grid Background Style End */
+
+	/** Start Feature Title */
+	priceFeatureTitle: {
+		type: 'string',
+		default: 'All Premium Plans Include…'
+	},
+	priceFeatureTitleSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	featureTitleAlignment: {
+		type: 'string',
+		default: 'left'
+	},
+
+	featureTitleColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	featureTitleColor: {
+		type: 'string',
+		default: '#2A2F39'
+	},
+	featureTitleHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	featureTitleGlobalTypographyData: {
+		type: 'object',
+		default: {}
+	},
+	featureTitleGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	featureTitleGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
+	featureTitleGlobalTypoOption: {
+		type: 'object',
+		default: {label: 'Default', value: 'default'},
+	},
+	featureTitleFontFamily: {
+		type: 'string',
+		default: 'Default'
+	},
+	featureTitleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '32',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	featureTitleFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	featureTitleFontWeight: {
+		type: 'string',
+		default: '600'
+	},
+	featureTitleFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	featureTitleTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	featureTitleTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	featureTitleLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	featureTitleLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	featureTitleLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '42',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	featureTitleLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Feature Title */
 };
 
 export default attributes;
