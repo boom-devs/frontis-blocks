@@ -1,4 +1,4 @@
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 import { memo } from '@wordpress/element';
 import {
     PanelBody,
@@ -55,6 +55,8 @@ const Inspector = ({ attributes, setAttributes }) => {
         priceFeatureTitle,
         priceFeatureTitleSwitcher,
         featureTitleAlignment,
+        featureTitlePositionUnits,
+        featureTitlePosition,
 
         /** Start Top Section */
         pricingGlobalStyleSwitcher,
@@ -810,6 +812,33 @@ const Inspector = ({ attributes, setAttributes }) => {
 
     const deviceType = useDeviceType();
 
+    const maxColumnTabs = pricingPresetStyle === 'preset-2' ? 4 : 3;
+    const columnSwitcherOptions = Array.from({ length: maxColumnTabs }, (_, i) => ({
+        label: sprintf(__('Col %d', 'frontis-blocks'), i + 1),
+        value: columns?.[i]?.id || `column-${i + 1}`,
+    }));
+
+    // Helper to get current column data
+    const getColumnData = () => {
+        const columnIndex = columns.findIndex(col => col.id === selectedColumn);
+        return columns[columnIndex] || {};
+    };
+
+    // Helper to update specific column attribute
+    const updateColumnAttribute = (key, value) => {
+        const columnIndex = columns.findIndex(col => col.id === selectedColumn);
+        const newColumns = columns.map((col, index) => {
+            if (index === columnIndex) {
+                return { ...col, [key]: value };
+            }
+            return col;
+        });
+        setAttributes({ columns: newColumns });
+    };
+
+    // Get current column data
+    const columnData = getColumnData();
+
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
@@ -843,6 +872,9 @@ const Inspector = ({ attributes, setAttributes }) => {
     const priceButtonIconHandler = (IconName) => {
         setAttributes({priceButtonIcon: IconName})
     }
+
+    const getColumnsVal = (key) => (!pricingGlobalStyleSwitcher && columnData[key] !== undefined) ? columnData[key] : attributes[key];
+    const setColumnsVal = (key, val) => pricingGlobalStyleSwitcher ? setAttributes({ [key]: val }) : updateColumnAttribute(key, val);
 
     /** Start section Top Padding */ 
     const handleTopSectionPaddingUnitChange = ( event, position ) => {
@@ -3452,7 +3484,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_SwitcherControl
                     label={__("Select Column", "frontis-blocks")}
                     help={__("Choose the column you want to change content.", "frontis-blocks")}
-                    options={columnOptions}
+                    options={columnSwitcherOptions}
                     globalSwitcher={selectedColumn}
                     setGlobalSwitcher={(value) => setAttributes({ selectedColumn: value })}
                 />
@@ -3613,6 +3645,19 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             {pricingPresetStyle === 'preset-1' && (
                 <PanelBody title={__("Feature Title", "frontis-blocks")} initialOpen={false}>
+                     <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Position Top (%)", "frontis-blocks")}
+                        rangeValue={featureTitlePosition}
+                        onChangeHandler={(value) => setAttributes({ featureTitlePosition: value })}
+                        rangeUnitHandler={(value) => setAttributes({ featureTitlePositionUnits: value })}
+                        deviceType={deviceType}
+                        units={featureTitlePositionUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={'67%'}
+                    />
                     <ToggleControl
                         label={__("Show Feature Title", "frontis-blocks")}
                         checked={priceFeatureTitleSwitcher}
@@ -3633,6 +3678,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         </>
     );
 
+    // console.log(columnData.pricingSectionTopSwitcher);
 
     /**
      * Inspector Style Controls
@@ -3980,133 +4026,134 @@ const Inspector = ({ attributes, setAttributes }) => {
                 />
             </PanelBody>
 
-            <PanelBody title={__("Pricing Column", "frontis-blocks")} initialOpen={false}> 
-                {pricingGlobalStyleSwitcher === false && (
+            {(pricingPresetStyle === 'default' || pricingPresetStyle === 'preset-2') &&  (
+                <PanelBody title={__("Pricing Column", "frontis-blocks")} initialOpen={false}> 
+                    {pricingGlobalStyleSwitcher === false && (
+                        <FB_SwitcherControl
+                            label={__("Select Column", "frontis-blocks")}
+                            options={columnSwitcherOptions}
+                            globalSwitcher={selectedColumn}
+                            setGlobalSwitcher={(value) => setAttributes({ selectedColumn: value })}
+                        />
+                    )}
+                    
+                    <FB_BackgroundColorControl
+                        label={__("Column BG", "frontis-blocks")}
+                        bgColorSwitcher={getColumnsVal('priceColumnBackgroundColorSwitcher')}
+                        setBgColorSwitcher={(value) => setColumnsVal('priceColumnBackgroundColorSwitcher', value )}
+                        
+                        normalBackgroundType={getColumnsVal('priceColumnNormalBackgroundType')}
+                        setNormalBackgroundType={(value) => setColumnsVal('priceColumnNormalBackgroundType', value )}
+                        normalClassicColor={getColumnsVal('priceColumnNormalClassicColor')}
+                        setNormalClassicColor={(value) => setColumnsVal('priceColumnNormalClassicColor', value === undefined ? '' : value )}
+                        normalGradientColor={getColumnsVal('priceColumnNormalGradientColor')}
+                        setNormalGradientColor={(value) => setColumnsVal('priceColumnNormalGradientColor', value === undefined ? null : value )}
+                        normalCustomGradientSwitcher={getColumnsVal('priceColumnNormalCustomGradientSwitcher')}
+                        setNormalCustomGradientSwitcher={(value) => setColumnsVal('priceColumnNormalCustomGradientSwitcher', value )}
+                        normalCustomGradientInputValue={getColumnsVal('priceColumnNormalCustomGradientInputValue')}
+                        setNormalCustomGradientInputValue={(value) => setColumnsVal('priceColumnNormalCustomGradientInputValue', value )}
+                        
+                        hoverBackgroundType={getColumnsVal('priceColumnHoverBackgroundType')}
+                        setHoverBackgroundType={(value) => setColumnsVal('priceColumnHoverBackgroundType', value )}
+                        hoverClassicColor={getColumnsVal('priceColumnHoverClassicColor')}
+                        setHoverClassicColor={(value) => setColumnsVal('priceColumnHoverClassicColor', value === undefined ? '' : value )}
+                        hoverGradientColor={getColumnsVal('priceColumnHoverGradientColor')} 
+                        setHoverGradientColor={(value) => setColumnsVal('priceColumnHoverGradientColor', value === undefined ? null : value )}
+                        hoverCustomGradientSwitcher={getColumnsVal('priceColumnHoverCustomGradientSwitcher')}
+                        setHoverCustomGradientSwitcher={(value) => setColumnsVal('priceColumnHoverCustomGradientSwitcher', value )}
+                        hoverCustomGradientInputValue={getColumnsVal('priceColumnHoverCustomGradientInputValue')}
+                        setHoverCustomGradientInputValue={(value) => setColumnsVal('priceColumnHoverCustomGradientInputValue', value )}
+
+                        isBackgroundImage={false}
+                    />
+
+                    <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={getColumnsVal('priceColumnBorder')}
+                        options={BORDER_STYLES}
+                        onChange={(value) => setColumnsVal('priceColumnBorder', value )}
+                    />
+
                     <FB_SwitcherControl
-                        label={__("Select Column", "frontis-blocks")}
-                        options={columnOptions}
-                        globalSwitcher={selectedColumn}
-                        setGlobalSwitcher={(value) => setAttributes({ selectedColumn: value })}
+                        label={__("Border Color", "frontis-blocks")}
+                        globalSwitcher={getColumnsVal('priceColumnBorderColorSwitcher')}
+                        setGlobalSwitcher={(value) => setColumnsVal('priceColumnBorderColorSwitcher', value )}
                     />
-                )}
-                
 
-                <FB_BackgroundColorControl
-                    label={__("Column BG", "frontis-blocks")}
-                    bgColorSwitcher={priceColumnBackgroundColorSwitcher}
-                    setBgColorSwitcher={(value) => setAttributes({ priceColumnBackgroundColorSwitcher: value })}
+                    {getColumnsVal('priceColumnBorderColorSwitcher') === 'normal' && (
+                        <FB_ColorControl
+                            label={__("Nomal Color", "frontis-blocks")}
+                            globalColor={getColumnsVal('priceColumnBorderColor')}
+                            setGlobalColor={(value) => setColumnsVal('priceColumnBorderColor', value === undefined ? '' : value )}
+                        />
+                    )}
 
-                    normalBackgroundType={priceColumnNormalBackgroundType}
-                    setNormalBackgroundType={(value) => setAttributes({ priceColumnNormalBackgroundType: value })}
-                    normalClassicColor={priceColumnNormalClassicColor}
-                    setNormalClassicColor={(value) => setAttributes({ priceColumnNormalClassicColor: value === undefined ? '' : value })}
-                    normalGradientColor={priceColumnNormalGradientColor}
-                    setNormalGradientColor={(value) => setAttributes({ priceColumnNormalGradientColor: value === undefined ? null : value })}
-                    normalCustomGradientSwitcher={priceColumnNormalCustomGradientSwitcher}
-                    setNormalCustomGradientSwitcher={(value) => setAttributes({ priceColumnNormalCustomGradientSwitcher: value })}
-                    normalCustomGradientInputValue={priceColumnNormalCustomGradientInputValue}
-                    setNormalCustomGradientInputValue={(value) => setAttributes({ priceColumnNormalCustomGradientInputValue: value })}
+                    {getColumnsVal('priceColumnBorderColorSwitcher') === 'hover' && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={getColumnsVal('priceColumnBorderHoverColor')}
+                            setGlobalColor={(value) => setColumnsVal('priceColumnBorderHoverColor', value === undefined ? '' : value )}
+                        />
+                    )}
 
-                    hoverBackgroundType={priceColumnHoverBackgroundType}
-                    setHoverBackgroundType={(value) => setAttributes({ priceColumnHoverBackgroundType: value })}
-                    hoverClassicColor={priceColumnHoverClassicColor}
-                    setHoverClassicColor={(value) => setAttributes({ priceColumnHoverClassicColor: value === undefined ? '' : value })}
-                    hoverGradientColor={priceColumnHoverGradientColor}
-                    setHoverGradientColor={(value) => setAttributes({ priceColumnHoverGradientColor: value === undefined ? null : value })}
-                    hoverCustomGradientSwitcher={priceColumnHoverCustomGradientSwitcher}
-                    setHoverCustomGradientSwitcher={(value) => setAttributes({ priceColumnHoverCustomGradientSwitcher: value })}
-                    hoverCustomGradientInputValue={priceColumnHoverCustomGradientInputValue}
-                    setHoverCustomGradientInputValue={(value) => setAttributes({ priceColumnHoverCustomGradientInputValue: value })}
-
-                    isBackgroundImage={false}
-                />
-
-                <SelectControl
-                    label={__("Border Style", "frontis-blocks")}
-                    value={priceColumnBorder}
-                    options={BORDER_STYLES}
-                    onChange={(value) => setAttributes({ priceColumnBorder: value })}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Border Color", "frontis-blocks")}
-                    globalSwitcher={priceColumnBorderColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ priceColumnBorderColorSwitcher: value })}
-                />
-
-                {priceColumnBorderColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Nomal Color", "frontis-blocks")}
-                        globalColor={priceColumnBorderColor}
-                        setGlobalColor={(value) => setAttributes({ priceColumnBorderColor: value === undefined ? '' : value })}
+                    <FB_Spacing 
+                        label={__("Border", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handlePriceColumnBorderUnitsHandler}
+                        spacingUnits={getColumnsVal('priceColumnBorderUnits')}
+                        spacingDesktop={getColumnsVal('priceColumnDesktopBorderWidth')}
+                        spacingTablet={getColumnsVal('priceColumnTabletBorderWidth')}
+                        spacingMobile={getColumnsVal('priceColumnMobileBorderWidth')}
+                        handleSpacingUnitHandler={handlePriceColumnBorderUnitChange}
+                        spacingCombineBtn={getColumnsVal('priceColumnBorderLink')}
+                        spacingCombineBtnHandler={handlePriceColumnBorderCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
 
-                {priceColumnBorderColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={priceColumnBorderHoverColor}
-                        setGlobalColor={(value) => setAttributes({ priceColumnBorderHoverColor: value === undefined ? '' : value })}
+                    <FB_Spacing 
+                        label={__("Border Radius", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handlePriceColumnBorderRadiusUnitsHandler}
+                        spacingUnits={getColumnsVal('priceColumnBorderRadiusUnits')}
+                        spacingDesktop={getColumnsVal('priceColumnDesktopBorderRadiusWidth')}
+                        spacingTablet={getColumnsVal('priceColumnTabBorderRadiusWidth')}
+                        spacingMobile={getColumnsVal('priceColumnMobileBorderRadiusWidth')}
+                        handleSpacingUnitHandler={handlePriceColumnBorderRadiusUnitChange}
+                        spacingCombineBtn={getColumnsVal('priceColumnBorderRadiusLink')}
+                        spacingCombineBtnHandler={handlePriceColumnBorderRadiusCombineBtn}
+                        setAttributes={setAttributes}
                     />
-                )}
+                    
+                    <FB_Spacing 
+                        label={__("Margin", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handlePriceColumnMarginUnitsHandler}
+                        spacingUnits={priceColumnMarginUnits}
+                        spacingDesktop={priceColumnDesktopMargin}
+                        spacingTablet={priceColumnTabletMargin}
+                        spacingMobile={priceColumnMobileMargin}
+                        handleSpacingUnitHandler={handlePriceColumnMarginUnitChange}
+                        spacingCombineBtn={priceColumnMarginLink}
+                        spacingCombineBtnHandler={handlePriceColumnMarginCombineBtn}
+                        setAttributes={setAttributes}
+                    /> 
+                    
+                    <FB_Spacing 
+                        label={__("Padding", "frontis-blocks")}
+                        deviceType={deviceType}
+                        spacingUnitsHandler={handlePriceColumnPaddingUnitsHandler}
+                        spacingUnits={priceColumnPaddingUnits}
+                        spacingDesktop={priceColumnDesktopPadding} 
+                        spacingTablet={priceColumnTabletPadding}
+                        spacingMobile={priceColumnMobilePadding}
+                        handleSpacingUnitHandler={handlePriceColumnPaddingUnitChange}
+                        spacingCombineBtn={priceColumnPaddingLink}
+                        spacingCombineBtnHandler={handlePriceColumnPaddingCombineBtn}
+                        setAttributes={setAttributes}
+                    />
+                </PanelBody>
+            )}
 
-                <FB_Spacing 
-                    label={__("Border", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handlePriceColumnBorderUnitsHandler}
-                    spacingUnits={priceColumnBorderUnits}
-                    spacingDesktop={priceColumnDesktopBorderWidth}
-                    spacingTablet={priceColumnTabletBorderWidth}
-                    spacingMobile={priceColumnMobileBorderWidth}
-                    handleSpacingUnitHandler={handlePriceColumnBorderUnitChange}
-                    spacingCombineBtn={priceColumnBorderLink}
-                    spacingCombineBtnHandler={handlePriceColumnBorderCombineBtn}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_Spacing 
-                    label={__("Border Radius", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handlePriceColumnBorderRadiusUnitsHandler}
-                    spacingUnits={priceColumnBorderRadiusUnits}
-                    spacingDesktop={priceColumnDesktopBorderRadiusWidth}
-                    spacingTablet={priceColumnTabletBorderRadiusWidth}
-                    spacingMobile={priceColumnMobileBorderRadiusWidth}
-                    handleSpacingUnitHandler={handlePriceColumnBorderRadiusUnitChange}
-                    spacingCombineBtn={priceColumnBorderRadiusLink}
-                    spacingCombineBtnHandler={handlePriceColumnBorderRadiusCombineBtn}
-                    setAttributes={setAttributes}
-                />
-                
-                <FB_Spacing 
-                    label={__("Margin", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handlePriceColumnMarginUnitsHandler}
-                    spacingUnits={priceColumnMarginUnits}
-                    spacingDesktop={priceColumnDesktopMargin}
-                    spacingTablet={priceColumnTabletMargin}
-                    spacingMobile={priceColumnMobileMargin}
-                    handleSpacingUnitHandler={handlePriceColumnMarginUnitChange}
-                    spacingCombineBtn={priceColumnMarginLink}
-                    spacingCombineBtnHandler={handlePriceColumnMarginCombineBtn}
-                    setAttributes={setAttributes}
-                /> 
-                
-                <FB_Spacing 
-                    label={__("Padding", "frontis-blocks")}
-                    deviceType={deviceType}
-                    spacingUnitsHandler={handlePriceColumnPaddingUnitsHandler}
-                    spacingUnits={priceColumnPaddingUnits}
-                    spacingDesktop={priceColumnDesktopPadding} 
-                    spacingTablet={priceColumnTabletPadding}
-                    spacingMobile={priceColumnMobilePadding}
-                    handleSpacingUnitHandler={handlePriceColumnPaddingUnitChange}
-                    spacingCombineBtn={priceColumnPaddingLink}
-                    spacingCombineBtnHandler={handlePriceColumnPaddingCombineBtn}
-                    setAttributes={setAttributes}
-                />
-            </PanelBody>
-            
             <PanelBody title={__("Header", "frontis-blocks")} initialOpen={false}>
                 <BaseControl
                     label={__("Alignment", "frontis-blocks")}
@@ -4880,41 +4927,46 @@ const Inspector = ({ attributes, setAttributes }) => {
                     resetFallbackValue={''}
                 />
 
-                <FB_SwitcherControl
-                    label={__("Feature Icon Color", "frontis-blocks")}
-                    globalSwitcher={priceFeatureIconColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ priceFeatureIconColorSwitcher: value })}
-                />
+                {priceFeatureIconSwitcher === true && (
+                    <>  
+                        <FB_SwitcherControl
+                            label={__("Feature Icon Color", "frontis-blocks")}
+                            globalSwitcher={priceFeatureIconColorSwitcher}
+                            setGlobalSwitcher={(value) => setAttributes({ priceFeatureIconColorSwitcher: value })}
+                        />
 
-                {priceFeatureIconColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Nomal Color", "frontis-blocks")}
-                        globalColor={priceFeatureIconColor}
-                        setGlobalColor={(value) => setAttributes({ priceFeatureIconColor: value === undefined ? '' : value })}
-                    />
+                        {priceFeatureIconColorSwitcher === 'normal' && (
+                            <FB_ColorControl
+                                label={__("Nomal Color", "frontis-blocks")}
+                                globalColor={priceFeatureIconColor}
+                                setGlobalColor={(value) => setAttributes({ priceFeatureIconColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        {priceFeatureIconColorSwitcher === 'hover' && (
+                            <FB_ColorControl
+                                label={__("Hover Color", "frontis-blocks")}
+                                globalColor={priceFeatureIconHoverColor}
+                                setGlobalColor={(value) => setAttributes({ priceFeatureIconHoverColor: value === undefined ? '' : value })}
+                            />
+                        )}
+
+                        <FB_Range
+                            min={0}
+                            max={200}
+                            label={__("Feature Icon Size", "frontis-blocks")}
+                            rangeValue={priceFeatureIconSize}
+                            onChangeHandler={(value) => setAttributes({ priceFeatureIconSize: value })}
+                            rangeUnitHandler={(value) => setAttributes({ priceFeatureIconSizeUnits: value })}
+                            deviceType={deviceType}
+                            units={priceFeatureIconSizeUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                        />
+                    </>
+                    
                 )}
-
-                {priceFeatureIconColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={priceFeatureIconHoverColor}
-                        setGlobalColor={(value) => setAttributes({ priceFeatureIconHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                <FB_Range
-                    min={0}
-                    max={200}
-                    label={__("Feature Icon Size", "frontis-blocks")}
-                    rangeValue={priceFeatureIconSize}
-                    onChangeHandler={(value) => setAttributes({ priceFeatureIconSize: value })}
-                    rangeUnitHandler={(value) => setAttributes({ priceFeatureIconSizeUnits: value })}
-                    deviceType={deviceType}
-                    units={priceFeatureIconSizeUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                />
 
                 <FB_TypographyControl
                     globalTypoControlActive={true}
