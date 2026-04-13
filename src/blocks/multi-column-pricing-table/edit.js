@@ -7,9 +7,14 @@ import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generatePricingTableStyle from "./styling";
+import { pricingPresetStyles } from './presets';
 import './editor.scss';
 
 import LayoutOneEdit from './layouts/layout-one/edit';
+import LayoutTwoEdit from './layouts/layout-two/edit';
+import LayoutThreeEdit from './layouts/layout-three/edit';
+// import LayoutFourEdit from './layouts/layout-four/edit';
+// import LayoutFiveEdit from './layouts/layout-five/edit';
 
 const loadedFonts = new Set();
 
@@ -65,6 +70,23 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     /** End Load Google Font */
 
+    /** Ensure layout three (preset-2) has four column entries (migrate older saves). */
+    useEffect(() => {
+        if (pricingPresetStyle !== 'preset-2') {
+            return;
+        }
+        const defaultCols = pricingPresetStyles['preset-2']?.columns;
+        if (!Array.isArray(columns) || !Array.isArray(defaultCols)) {
+            return;
+        }
+        if (columns.length >= defaultCols.length) {
+            return;
+        }
+        setAttributes({
+            columns: [...columns, ...defaultCols.slice(columns.length)],
+        });
+    }, [pricingPresetStyle, columns?.length]);
+
     /** Start Generate Block Style */
     useEffect(() => {
         if (blockID) {
@@ -92,6 +114,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         switch (pricingPresetStyle) {
             case 'default':
                 return <LayoutOneEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
+            
+            case 'preset-1':
+                return <LayoutTwoEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
+            case 'preset-2':
+                return <LayoutThreeEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
+            // case 'preset-3':
+            //     return <LayoutFourEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
+            // case 'preset-4':
+            //     return <LayoutFiveEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
             default:
                 return <LayoutOneEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
         }
