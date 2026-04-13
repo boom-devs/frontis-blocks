@@ -923,17 +923,13 @@ const generatePricingTableStyle = (attributes) => {
     const pricingGridTabletBorderRadiusWidth = `${pricingGridBorderRadiusTablet?.top}${pricingGridBorderRadiusUnits?.Tablet} ${pricingGridBorderRadiusTablet?.right}${pricingGridBorderRadiusUnits?.Tablet} ${pricingGridBorderRadiusTablet?.bottom}${pricingGridBorderRadiusUnits?.Tablet} ${pricingGridBorderRadiusTablet?.left}${pricingGridBorderRadiusUnits?.Tablet}`;
     const pricingGridMobileBorderRadiusWidth = `${pricingGridBorderRadiusMobile?.top}${pricingGridBorderRadiusUnits?.Mobile} ${pricingGridBorderRadiusMobile?.right}${pricingGridBorderRadiusUnits?.Mobile} ${pricingGridBorderRadiusMobile?.bottom}${pricingGridBorderRadiusUnits?.Mobile} ${pricingGridBorderRadiusMobile?.left}${pricingGridBorderRadiusUnits?.Mobile}`;
 
-
-    const getFourSideValue = (spacing = {}, unit = '') => `${spacing?.top}${unit} ${spacing?.right}${unit} ${spacing?.bottom}${unit} ${spacing?.left}${unit}`;
-
-    const priceColumnDesktopBorderWidthValue = getFourSideValue(priceColumnDesktopBorderWidth, priceColumnBorderUnits?.Desktop);
+    const priceColumnDesktopBorderWidthValue = `${priceColumnDesktopBorderWidth?.top}${priceColumnBorderUnits?.Desktop} ${priceColumnDesktopBorderWidth?.right}${priceColumnBorderUnits?.Desktop} ${priceColumnDesktopBorderWidth?.bottom}${priceColumnBorderUnits?.Desktop} ${priceColumnDesktopBorderWidth?.left}${priceColumnBorderUnits?.Desktop}`;
     const priceColumnTabletBorderWidthValue = `${priceColumnTabletBorderWidth?.top}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.right}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.bottom}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.left}${priceColumnBorderUnits?.Tablet}`;
     const priceColumnMobileBorderWidthValue = `${priceColumnMobileBorderWidth?.top}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.right}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.bottom}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.left}${priceColumnBorderUnits?.Mobile}`;
 
-    const priceColumnDesktopBorderRadiusWidthValue = getFourSideValue(priceColumnDesktopBorderRadiusWidth, priceColumnBorderRadiusUnits?.Desktop);
+    const priceColumnDesktopBorderRadiusWidthValue = `${priceColumnDesktopBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Desktop}`;
     const priceColumnTabletBorderRadiusWidthValue = `${priceColumnTabBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Tablet}`;
     const priceColumnMobileBorderRadiusWidthValue = `${priceColumnMobileBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Mobile}`;
-
 
     // Pricing Table Style    
     const pricingTableBlockStyle = ` 
@@ -2156,129 +2152,9 @@ const generatePricingTableStyle = (attributes) => {
         }
     `;
 
-    let topSectionDynamicCSS = '';
-    let pricingColumnDynamicCSS = '';
-    let pricingColumnDynamicCSSTablet = '';
-    let pricingColumnDynamicCSSMobile = '';
     
-    if (!pricingGlobalStyleSwitcher) {
-        (columns || []).forEach((column, index) => {
-            const colSelector = `.${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-column:nth-child(${index + 1}) .fb-mc-pricing-inner-wrapper`;
-
-            // Background Type & Color
-            if (column.pricingTopSectionNormalClassicColor) {
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper { background: ${column.pricingTopSectionNormalClassicColor}; background-image: none; }`;
-            } else if (column.pricingTopSectionNormalGradientColor) {
-                const gradValue = column.pricingTopSectionNormalCustomGradientSwitcher !== undefined ? (column.pricingTopSectionNormalCustomGradientSwitcher ? column.pricingTopSectionNormalCustomGradientInputValue : column.pricingTopSectionNormalGradientColor) : '';
-                if (gradValue) {
-                    topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper { background: ${gradValue}; background-color: transparent; }`;
-                }
-            }
-            
-            // Text Color
-            if (column.pricingTopSectionTextColor) {
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper .fb-mc-pricing-top-text, ${colSelector} .fb-mc-pricing-top-wrapper { color: ${column.pricingTopSectionTextColor}; }`;
-            }
-
-            // Border Style and Color
-            if (column.pricingTopSectionBorder) {
-                 topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper { border-style: ${column.pricingTopSectionBorder}; }`;
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper { border-color: ${column.pricingTopSectionBorderColor}; }`;
-            }
-
-            // Hover states
-            
-            if (column.pricingTopSectionHoverClassicColor) {
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper:hover { background: ${column.pricingTopSectionHoverClassicColor}; background-image: none; }`;
-            } else if (column.pricingTopSectionHoverGradientColor) {
-                const hoverGrad = column.pricingTopSectionHoverCustomGradientSwitcher !== undefined ? (column.pricingTopSectionHoverCustomGradientSwitcher ? column.pricingTopSectionHoverCustomGradientInputValue : column.pricingTopSectionHoverGradientColor) : '';
-                if (hoverGrad) {
-                    topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper:hover { background: ${hoverGrad}; background-color: transparent; }`;
-                }
-            }
-            
-            if (column.pricingTopSectionTextHoverColor) {
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper:hover .fb-mc-pricing-top-text { color: ${column.pricingTopSectionTextHoverColor}; }`;
-            }
-            if (column.pricingTopSectionBorderHoverColor) {
-                topSectionDynamicCSS += `${colSelector} .fb-mc-pricing-top-wrapper:hover { border-color: ${column.pricingTopSectionBorderHoverColor}; }`;
-            }
-
-
-             //Column background and border style
-            const pricingColSelector = `.${blockID} .fb-multi-column-pricing-table-wrapper .fb-mc-pricing-column:nth-child(${index + 1})`;
-            // Background Normal
-            if (column.priceColumnNormalClassicColor) {
-                pricingColumnDynamicCSS += `${pricingColSelector} { background: ${column.priceColumnNormalClassicColor}; }`;
-            } else if (column.priceColumnNormalGradientColor) {
-                const gradValue = column.priceColumnNormalCustomGradientSwitcher !== undefined ? (column.priceColumnNormalCustomGradientSwitcher ? column.priceColumnNormalCustomGradientInputValue : column.priceColumnNormalGradientColor) : '';
-                if (gradValue) {
-                    pricingColumnDynamicCSS += `${pricingColSelector} { background: ${gradValue}; }`;
-                }
-            }
-
-            // Background Hover
-            if (column.priceColumnHoverClassicColor) {
-                pricingColumnDynamicCSS += `${pricingColSelector}:hover { background: ${column.priceColumnHoverClassicColor}; }`;
-            } else if (column.priceColumnHoverGradientColor) {
-                const hoverGrad = column.priceColumnHoverCustomGradientSwitcher !== undefined ? (column.priceColumnHoverCustomGradientSwitcher ? column.priceColumnHoverCustomGradientInputValue : column.priceColumnHoverGradientColor) : '';
-                if (hoverGrad) {
-                    pricingColumnDynamicCSS += `${pricingColSelector}:hover { background: ${hoverGrad}; }`;
-                }
-            }
-
-            // Border style, color, width and radius (per-column)
-            const columnBorderWidthValue = column.priceColumnDesktopBorderWidth
-                ? getFourSideValue(column.priceColumnDesktopBorderWidth, priceColumnBorderUnits?.Desktop)
-                : (column.priceColumnBorderDesktop
-                    ? getFourSideValue(column.priceColumnBorderDesktop, priceColumnBorderUnits?.Desktop)
-                    : '');
-            const columnBorderRadiusValue = column.priceColumnDesktopBorderRadiusWidth
-                ? getFourSideValue(column.priceColumnDesktopBorderRadiusWidth, priceColumnBorderRadiusUnits?.Desktop)
-                : '';
-            const columnBorderWidthTabletValue = column.priceColumnTabletBorderWidth
-                ? getFourSideValue(column.priceColumnTabletBorderWidth, priceColumnBorderUnits?.Tablet)
-                : '';
-            const columnBorderWidthMobileValue = column.priceColumnMobileBorderWidth
-                ? getFourSideValue(column.priceColumnMobileBorderWidth, priceColumnBorderUnits?.Mobile)
-                : '';
-            const columnBorderRadiusTabletValue = column.priceColumnTabBorderRadiusWidth
-                ? getFourSideValue(column.priceColumnTabBorderRadiusWidth, priceColumnBorderRadiusUnits?.Tablet)
-                : '';
-            const columnBorderRadiusMobileValue = column.priceColumnMobileBorderRadiusWidth
-                ? getFourSideValue(column.priceColumnMobileBorderRadiusWidth, priceColumnBorderRadiusUnits?.Mobile)
-                : '';
-
-            if (column.priceColumnBorder) {
-                pricingColumnDynamicCSS += `${pricingColSelector} { border-style: ${column.priceColumnBorder}; }`;
-                pricingColumnDynamicCSS += `${pricingColSelector} { border-color: ${column.priceColumnBorderColor || ''}; }`;
-            }
-            if (columnBorderWidthValue && (column.priceColumnDesktopBorderWidth?.top || column.priceColumnBorderDesktop?.top)) {
-                pricingColumnDynamicCSS += `${pricingColSelector} { border-width: ${columnBorderWidthValue}; }`;
-            }
-            if (columnBorderRadiusValue && column.priceColumnDesktopBorderRadiusWidth?.top) {
-                pricingColumnDynamicCSS += `${pricingColSelector} { border-radius: ${columnBorderRadiusValue}; }`;
-            }
-            if (column.priceColumnBorderHoverColor) {
-                pricingColumnDynamicCSS += `${pricingColSelector}:hover { border-color: ${column.priceColumnBorderHoverColor}; }`;
-            }
-            if (columnBorderWidthTabletValue && column.priceColumnTabletBorderWidth?.top) {
-                pricingColumnDynamicCSSTablet += `${pricingColSelector} { border-width: ${columnBorderWidthTabletValue}; }`;
-            }
-            if (columnBorderRadiusTabletValue && column.priceColumnTabBorderRadiusWidth?.top) {
-                pricingColumnDynamicCSSTablet += `${pricingColSelector} { border-radius: ${columnBorderRadiusTabletValue}; }`;
-            }
-            if (columnBorderWidthMobileValue && column.priceColumnMobileBorderWidth?.top) {
-                pricingColumnDynamicCSSMobile += `${pricingColSelector} { border-width: ${columnBorderWidthMobileValue}; }`;
-            }
-            if (columnBorderRadiusMobileValue && column.priceColumnMobileBorderRadiusWidth?.top) {
-                pricingColumnDynamicCSSMobile += `${pricingColSelector} { border-radius: ${columnBorderRadiusMobileValue}; }`;
-            }
-
-        });
-    }
 
     const customCss = getCustomCss(pricingTableGlobalCustomCSS, `.${blockID} `);
-    return `${pricingTableBlockStyle} ${topSectionDynamicCSS} ${pricingColumnDynamicCSS} ${pricingColumnDynamicCSSTablet ? `@media only screen and (max-width: 1024px){ ${pricingColumnDynamicCSSTablet} }` : ''} ${pricingColumnDynamicCSSMobile ? `@media only screen and (max-width: 767px){ ${pricingColumnDynamicCSSMobile} }` : ''} ${customCss} `.replace(/\s+/g, ' ').trim();
+    return `${pricingTableBlockStyle} ${customCss} `.replace(/\s+/g, ' ').trim();
 }
 export default generatePricingTableStyle;

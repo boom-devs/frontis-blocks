@@ -23,10 +23,6 @@ const attributes = {
 		type: 'string',
 		default: 'column-1'
 	},
-	columns: {
-		type: 'array',
-		default: pricingPresetStyles['default'].columns,
-	},
 	/** End Column Data */
 
 	/** Start Top Section */

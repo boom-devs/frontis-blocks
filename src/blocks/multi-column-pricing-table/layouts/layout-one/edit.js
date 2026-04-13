@@ -9,47 +9,46 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
         columns,
         pricingTableGlobalWraperID,
         pricingTableGlobalWraperClass,
+        pricingSectionTopSwitcher,
         selectedColumn,
+        pricingTitleTag,
+        pricingTitle,
+        priceButtonSwitcher,
+        priceButtonUrl,
+        priceButtonTargetUrl,
+        priceButtonText,
+        priceCurrencyPosition,
+        priceCurrency,
+        normalPrice,
+        salePriceSwitcher,
+        salePrice,
+        pricePeriodSeparator,
+        pricePeriod,
+        priceAfterTextSwitcher,
+        priceAfterText,
+        priceHideFeaturesSwitcher,
+        priceFeatureItems,
+        priceFeatureIconSwitcher,
+        pricingSectionTopText,
     } = attributes;
 
-    // Helper to get current column data
-    const getColumnData = (columnIndex) => {
-        return columns[columnIndex] || {};
-    };
+    const hasTopSection = columns?.some((col) => col?.pricingSectionTopSwitcher);
 
-    // Helper to update specific column attribute
-    const updateColumnAttribute = (key, value, columnIndex = null) => {
-        const targetIndex = columnIndex !== null ? columnIndex : 
-            columns.findIndex(col => col.id === selectedColumn);
-        
-        const newColumns = columns.map((col, index) => {
-            if (index === targetIndex) {
-                return { ...col, [key]: value };
-            }
-            return col;
-        });
-        setAttributes({ columns: newColumns });
-    };
-
+    
     const renderPricingColumn = (columnIndex) => {
-        const columnData = getColumnData(columnIndex);
-        const isActive = columns[columnIndex]?.id === selectedColumn;
-        const columnClass = columnIndex === 0 ? '' : columnIndex === 1 ? ' two' : ' three';
 
         return (
             <div
-                className={`fb-mc-pricing-column${columnClass} ${isActive ? 'is-selected-column' : ''}`}
-                key={columns[columnIndex]?.id || `column-${columnIndex}`}
-                onClick={() => setAttributes({ selectedColumn: columns[columnIndex]?.id })}
+                className={`fb-mc-pricing-column`}
             >
                 <div className="fb-mc-pricing-inner-wrapper">
-                    {columnData.pricingSectionTopSwitcher && (
+                    {pricingSectionTopSwitcher && (
                         <div className="fb-mc-pricing-top-wrapper">
                             <RichText
                                 tagName="span"
                                 className="fb-mc-pricing-top-text"
-                                value={columnData.pricingSectionTopText || ''}
-                                onChange={(value) => updateColumnAttribute('pricingSectionTopText', value, columnIndex)}
+                                value={pricingSectionTopText || ''}
+                                onChange={(value) => setAttributes({ pricingSectionTopText: value })}
                                 placeholder={__('Enter text', 'frontis-blocks')}
                             />
                         </div>
@@ -58,26 +57,26 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                         <div className="fb-mc-pricing-header">
                             <div className={`fb-mc-pricing-title-wrapper`}>
                                 <RichText
-                                    tagName={columnData.pricingTitleTag || 'h2'}
+                                    tagName={pricingTitleTag || 'h2'}
                                     className="fb-mc-pricing-title"
-                                    value={columnData.pricingTitle || ''}
-                                    onChange={(value) => updateColumnAttribute('pricingTitle', value, columnIndex)}
+                                    value={pricingTitle || ''}
+                                    onChange={(value) => setAttributes({ pricingTitle: value })}
                                     placeholder={__('Enter title', 'frontis-blocks')}
                                 />
                             </div>
                             <div className="fb-mc-pricing-button-wrapper">
-                                {columnData.priceButtonSwitcher && (
+                                {priceButtonSwitcher && (
                                     <a
                                         className={`fb-mc-pricing-button`}
-                                        href={columnData.priceButtonUrl || '#'}
-                                        target={columnData.priceButtonTargetUrl ? "_blank" : undefined}
-                                        rel={columnData.priceButtonTargetUrl ? "noopener noreferrer" : undefined}
+                                        href={priceButtonUrl || '#'}
+                                        target={priceButtonTargetUrl ? "_blank" : undefined}
+                                        rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
                                         onClick={(event) => event.preventDefault()}
                                     >
                                         <RichText
                                             tagName="span"
-                                            value={columnData.priceButtonText || ''}
-                                            onChange={(value) => updateColumnAttribute('priceButtonText', value, columnIndex)}
+                                            value={priceButtonText || ''}
+                                            onChange={(value) => setAttributes({ priceButtonText: value })}
                                             placeholder={__('Enter button text...', 'frontis-blocks')}
                                             className="fb-button-text"
                                         />
@@ -86,74 +85,74 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                             </div>
                             <div className="fb-mc-pricing-price-wrapper">
                                 <div className="fb-mc-pricing-price-inner-wrapper">
-                                    <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
+                                    <span className={`fb-mc-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
                                         <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'left' ? (
+                                            {priceCurrencyPosition === 'left' ? (
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.priceCurrency || ''}
-                                                    onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                    value={priceCurrency || ''}
+                                                    onChange={(value) => setAttributes({ priceCurrency: value })}
                                                     placeholder={__('Enter currency', 'frontis-blocks')}
                                                 />
                                             ) : ''}
                                         </span>
                                         <RichText
                                             tagName="span"
-                                            value={columnData.normalPrice || ''}
-                                            onChange={(value) => updateColumnAttribute('normalPrice', value, columnIndex)}
+                                            value={normalPrice || ''}
+                                            onChange={(value) => setAttributes({ normalPrice: value })}
                                             placeholder={__('Enter price', 'frontis-blocks')}
                                         />
                                         <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'right' ? (
+                                            {priceCurrencyPosition === 'right' ? (
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.priceCurrency || ''}
-                                                    onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                    value={priceCurrency || ''}
+                                                    onChange={(value) => setAttributes({ priceCurrency: value })}
                                                     placeholder={__('Enter currency', 'frontis-blocks')}
                                                 />
                                             ) : ''}
                                         </span>
-                                        {!columnData.salePriceSwitcher && (
+                                        {!salePriceSwitcher && (
                                             <span className="price-period">
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.pricePeriodSeparator || ''}
-                                                    onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
+                                                    value={pricePeriodSeparator || ''}
+                                                    onChange={(value) => setAttributes({ pricePeriodSeparator: value })}
                                                     placeholder={__('Enter separator', 'frontis-blocks')}
                                                 />
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.pricePeriod || ''}
-                                                    onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
+                                                    value={pricePeriod || ''}
+                                                    onChange={(value) => setAttributes({ pricePeriod: value })}
                                                     placeholder={__('Enter period', 'frontis-blocks')}
                                                 />
                                             </span>
                                         )}
                                     </span>
-                                    {columnData.salePriceSwitcher && (
+                                    {salePriceSwitcher && (
                                         <span className="fb-mc-pricing-sale-price">
                                             <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'left' ? (
+                                                {priceCurrencyPosition === 'left' ? (
                                                     <RichText
                                                         tagName="span"
-                                                        value={columnData.priceCurrency || ''}
-                                                        onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                        value={priceCurrency || ''}
+                                                        onChange={(value) => setAttributes({ priceCurrency: value })}
                                                         placeholder={__('Enter currency', 'frontis-blocks')}
                                                     />
                                                 ) : ''}
                                             </span>
                                             <RichText
                                                 tagName="span"
-                                                value={columnData.salePrice || ''}
-                                                onChange={(value) => updateColumnAttribute('salePrice', value, columnIndex)}
+                                                value={salePrice || ''}
+                                                onChange={(value) => setAttributes({ salePrice: value })}
                                                 placeholder={__('Enter price', 'frontis-blocks')}
                                             />
                                             <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'right' ? (
+                                                {priceCurrencyPosition === 'right' ? (
                                                     <RichText
                                                         tagName="span"
-                                                        value={columnData.priceCurrency || ''}
-                                                        onChange={(value) => updateColumnAttribute('priceCurrency', value, columnIndex)}
+                                                        value={priceCurrency || ''}
+                                                        onChange={(value) => setAttributes({ priceCurrency: value })}
                                                         placeholder={__('Enter currency', 'frontis-blocks')}
                                                     />
                                                 ) : ''}
@@ -161,14 +160,14 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                                             <span className="price-period">
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.pricePeriodSeparator || ''}
-                                                    onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value, columnIndex)}
+                                                    value={pricePeriodSeparator || ''}
+                                                    onChange={(value) => setAttributes({ pricePeriodSeparator: value })}
                                                     placeholder={__('Enter separator', 'frontis-blocks')}
                                                 />
                                                 <RichText
                                                     tagName="span"
-                                                    value={columnData.pricePeriod || ''}
-                                                    onChange={(value) => updateColumnAttribute('pricePeriod', value, columnIndex)}
+                                                    value={pricePeriod || ''}
+                                                    onChange={(value) => setAttributes({ pricePeriod: value })}
                                                     placeholder={__('Enter period', 'frontis-blocks')}
                                                 />
                                             </span>
@@ -178,24 +177,24 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                             </div>
                         </div>
                         <div className='fb-mc-pricing-content'>
-                            {columnData.priceAfterTextSwitcher && (
+                            {priceAfterTextSwitcher && (
                                 <div className="fb-mc-pricing-plan-activation-wrapper">
                                     <RichText
                                         tagName="span"
                                         className="fb-mc-pricing-plan-activation"
-                                        value={columnData.priceAfterText || ''}
-                                        onChange={(value) => updateColumnAttribute('priceAfterText', value, columnIndex)}
+                                        value={priceAfterText || ''}
+                                        onChange={(value) => setAttributes({ priceAfterText: value })}
                                         placeholder={__('Enter text', 'frontis-blocks')}
                                     />
                                 </div>
                             )}
                         </div>
                         <div className="fb-mc-pricing-features-wrapper">
-                            {columnData.priceHideFeaturesSwitcher && (
+                            {priceHideFeaturesSwitcher && (
                                 <ul className="fb-mc-pricing-features-list">
-                                    {(columnData.priceFeatureItems || []).map(item => (
+                                    {(priceFeatureItems || []).map(item => (
                                         <li className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`} key={item.id}>
-                                            {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+                                            {priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
                                                 <div className="fb-mc-pricing-feature-icon">
                                                     <span className="fb-mc-pricing-feature-icon-inner">
                                                         {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
@@ -207,10 +206,10 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
                                                 className="fb-mc-pricing-feature-text"
                                                 value={item.Title || ''}
                                                 onChange={(value) => {
-                                                    const updatedItems = (columnData.priceFeatureItems || []).map(i =>
+                                                    const updatedItems = (priceFeatureItems || []).map(i =>
                                                         i.id === item.id ? { ...i, Title: value } : i
                                                     );
-                                                    updateColumnAttribute('priceFeatureItems', updatedItems, columnIndex);
+                                                    setAttributes({ priceFeatureItems: updatedItems });
                                                 }}
                                                 placeholder={__('Feature Title', 'frontis-blocks')}
                                             />
@@ -227,7 +226,7 @@ const LayoutOneEdit = ({ attributes, setAttributes, panelRef }) => {
 
     return (
         <div 
-            className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} 
+            className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${hasTopSection ? 'fb-multi-column-pricing-table-top-section' : ''}`} 
             id={pricingTableGlobalWraperID} 
             ref={panelRef}
         >   
