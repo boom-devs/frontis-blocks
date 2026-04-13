@@ -8,6 +8,7 @@ import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generatePricingTableStyle from "./styling";
+import { pricingPresetStyles } from './presets';
 import './editor.scss';
 
 import LayoutOneEdit from './layouts/layout-one/edit';
@@ -67,6 +68,23 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes]);
 
     /** End Load Google Font */
+
+    /** Ensure layout three (preset-2) has four column entries (migrate older saves). */
+    useEffect(() => {
+        if (pricingPresetStyle !== 'preset-2') {
+            return;
+        }
+        const defaultCols = pricingPresetStyles['preset-2']?.columns;
+        if (!Array.isArray(columns) || !Array.isArray(defaultCols)) {
+            return;
+        }
+        if (columns.length >= defaultCols.length) {
+            return;
+        }
+        setAttributes({
+            columns: [...columns, ...defaultCols.slice(columns.length)],
+        });
+    }, [pricingPresetStyle, columns?.length]);
 
     /** Start Generate Block Style */
     useEffect(() => {

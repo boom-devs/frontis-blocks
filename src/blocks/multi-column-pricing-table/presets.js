@@ -84,12 +84,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -133,12 +129,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -184,12 +176,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                 ],
                 priceButtonSwitcher: true,
@@ -304,11 +292,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-6', Title: 'Zapier Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                 ],
                 priceButtonSwitcher: true,
@@ -348,12 +333,9 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'Zapier Integration', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                 ],
                 priceButtonSwitcher: true,
                 priceButtonText: 'Purchase Now',
@@ -392,12 +374,9 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Landing Page (25 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-2', Title: 'HTML + CSS Design (16 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: 'WordPress Themes (30 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Landing Page (25 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'HTML + CSS Design (16 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'WordPress Themes (30 Pages)', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
+                    { id: 'item-1', Title: 'Landing Page', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-2', Title: 'HTML + CSS Design', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'WordPress Themes', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
                 ],
                 priceButtonSwitcher: true,
                 priceButtonText: 'Purchase Now',
@@ -420,39 +399,90 @@ export const pricingPresetStyles = {
             },
         ],
     },
+
     "preset-2": {
+        pricingTopSectionTextFontSize: { Desktop: '16', Tablet: '', Mobile: '' },
+        pricingTopSectionTextFontWeight: '500',
+        pricingTopSectionTextLineHeight: { Desktop: '21', Tablet: '', Mobile: '' },
+        pricingTitleFontSize: { Desktop: '18', Tablet: '16', Mobile: '' },
+        pricingTitleLineHeight: { Desktop: '18', Tablet: '19', Mobile: '' },
+        normalPricingFontSize: { Desktop: '32', Tablet: '', Mobile: '' },
+        normalPricingLineHeight: { Desktop: '32', Tablet: '', Mobile: '' },
+        pricingHeaderDesktopPadding: {top: '32', bottom: '32', left: '32', right: '32'},
+        pricingHeaderTabletPadding: {top: '0', bottom: '0', left: '0', right: '0'},
+        priceAfterTextPaddingDesktop: { top: '32', bottom: '10', left: '0', right: '0' },
+        headerAlignment: 'left',
+        activationContentAlignment: 'left',
+        pricingHeaderBorder: 'none',
+        priceColumnDesktopMargin: {top: '0', bottom: '0', left: '0', right: '0'},
+        pricingGridDesktopPadding: {top: '0', bottom: '0', left: '0', right: '0'},
+        priceColumnMobileBorderRadiusWidth: { top: '16', bottom: '16', left: '16', right: '16' },
+        pricingGridMobilePadding: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceButtonWidth: { Desktop: '', Tablet: '', Mobile: '' },
+        priceButtonDesktopMargin: { top: '24', bottom: '0', left: '0', right: '0' },
+        priceButtonDesktopBorderRadiusWidth: { top: '36', bottom: '36', left: '36', right: '36' },
+        priceButtonDesktopBorderWidth: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceButtonBorder: 'none',
+        priceButtonNormalClassicColor: '#0B0C0E',
+        priceColumnNormalBackgroundType: 'classic',
+        priceColumnNormalClassicColor: '#F7F7F7',
+        pricingGridBorderRadiusDesktop: { top: '16', bottom: '16', left: '16', right: '16' },
+        priceColumnBorder: 'none',
+        priceButtonFontSize: { Desktop: '14', Tablet: '12', Mobile: '' },
+        priceButtonLineHeight: { Desktop: '16', Tablet: '14', Mobile: '' },
+        priceButtonColor: '#ffffff',
+        priceButtonHoverColor: '#ffffff',
+        priceGridNormalClassicColor: '',
+        pricingHeaderBgColor: '',
+        priceFeatureItemDesktopBorder: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceFeatureItemTabBorder: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceFeatureItemMobileBorder: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceFeatureDesktopPadding: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceFeatureItemDesktopPadding: { top: '16', bottom: '16', left: '32', right: '16' },
+        priceFeatureItemTabPadding: { top: '0', bottom: '0', left: '0', right: '0' },
+        priceFeatureItemBorder: 'solid',
+        priceFeatureItemDesktopBorder: { top: '0', bottom: '1', left: '0', right: '0' },
+        priceFeatureItemTabBorder: { top: '0', bottom: '1', left: '0', right: '0' },
+        priceFeatureItemMobileBorder: { top: '0', bottom: '1', left: '0', right: '0' },
+        priceFeatureItemBorderColor: '#E1E3E8',
+        FeatureListGap: { Desktop: '0', Tablet: '0', Mobile: '0' },
+        priceFeatureIconColor: '#0B0C0E',
+        priceFeatureAlignment: 'left',
+        priceFeatureAreaNormalClassicColor: '',
+        priceFeatureDesktopMargin: { top: '0', bottom: '0', left: '0', right: '0' },
+        pricingTopSectionNormalClassicColor: '#0B0C0E',
+        pricingTopSectionDesktopPadding: { top: '16', bottom: '16', left: '16', right: '16' },
+        pricingTopSectionTextColor: '#FFFFFF',
+        pricingTopSectionBorderRadiusDesktop: { top: '16', bottom: '0', left: '0', right: '16' },
+        priceAfterTextFontSize: { Desktop: '16', Tablet: '14', Mobile: '' },
+        priceAfterTextLineHeight: { Desktop: '21', Tablet: '16', Mobile: '' },
+        priceAfterTextFontWeight: '700',
+        priceAfterTextColor: '#0B0C0E',
+
         columns: [
             {
                 id: 'column-1',
-                pricingSectionTopSwitcher: false,
-                pricingSectionTopText: 'Preset 2 Style',
-                pricingTitle: 'Preset 2 Style',
                 pricingTitleTag: 'h2',
+                pricingTitle: 'Free',
                 pricingSubTitleSwitcher: true,
-                pricingSubTitleTag: 'span',
-                pricingSubTitle: 'Preset 2 Style',
                 pricingIconAlign: 'none',
                 pricingIcon: 'bookmark',
-                normalPrice: '49',
+                normalPrice: '0',
                 salePriceSwitcher: false,
-                salePrice: '45',
+                salePrice: '0',
                 priceCurrency: '$',
                 priceCurrencyPosition: 'left',
-                pricePeriod: 'month',
+                pricePeriod: 'Forever',
                 pricePeriodSeparator: '/',
                 priceHideFeaturesSwitcher: true,
-                priceFeatureIconSwitcher: true,
+                priceFeatureIconSwitcher: false,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+                    { id: 'item-1', Title: 'Landing Page', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-2', Title: 'HTML + CSS Design', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'WordPress Themes', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
                 ],
                 priceButtonSwitcher: true,
-                priceButtonText: 'Get Started',
+                priceButtonText: 'Download',
                 priceButtonUrl: '',
                 priceButtonTargetUrl: false,
                 priceButtonIconAlign: 'none',
@@ -460,18 +490,19 @@ export const pricingPresetStyles = {
                 priceButtonIconPosition: 'right',
                 priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
                 priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-                priceAfterTextSwitcher: true,
-                priceAfterText: 'Activation on 1 Site',
+                priceColumnDesktopBorderRadiusWidth: { top: '16', right: '0', bottom: '0', left: '16' },
+                priceColumnMobileBorderRadiusWidth: { top: '16', bottom: '16', left: '16', right: '16' },
+                priceColumnNormalBackgroundType: 'classic',
+                priceColumnNormalClassicColor: '#F7F7F7',
+                priceColumnBorder: 'none',
+                priceButtonColor: '#ffffff',
+                priceButtonHoverColor: '#ffffff',
+                pricingTopSectionNormalClassicColor: '#0B0C0E',
             },
             {
                 id: 'column-2',
-                pricingSectionTopSwitcher: true,
-                pricingSectionTopText: 'Preset 2 Style',
                 pricingTitleTag: 'h2',
-                pricingTitle: 'Preset 2 Style',
-                pricingSubTitleSwitcher: true,
-                pricingSubTitleTag: 'span',
-                pricingSubTitle: 'Preset 2 Style',
+                pricingTitle: 'Basic',
                 pricingIconAlign: 'none',
                 pricingIcon: 'bookmark',
                 normalPrice: '49',
@@ -479,21 +510,17 @@ export const pricingPresetStyles = {
                 salePrice: '39',
                 priceCurrency: '$',
                 priceCurrencyPosition: 'left',
-                pricePeriod: 'month',
+                pricePeriod: 'years',
                 pricePeriodSeparator: '/',
                 priceHideFeaturesSwitcher: true,
-                priceFeatureIconSwitcher: true,
+                priceFeatureIconSwitcher: false,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
+                    { id: 'item-1', Title: 'Landing Page', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-2', Title: 'HTML + CSS Design', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'WordPress Themes', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
                 ],
                 priceButtonSwitcher: true,
-                priceButtonText: 'Get Started',
+                priceButtonText: 'Buy Now',
                 priceButtonUrl: '',
                 priceButtonTargetUrl: false,
                 priceButtonIconAlign: 'none',
@@ -501,40 +528,37 @@ export const pricingPresetStyles = {
                 priceButtonIconPosition: 'right',
                 priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
                 priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-                priceAfterTextSwitcher: true,
-                priceAfterText: 'Activation on 1 Site',
+                priceColumnDesktopBorderRadiusWidth: { top: '0', right: '0', bottom: '0', left: '0' },
+                priceColumnNormalBackgroundType: 'classic',
+                priceColumnNormalClassicColor: '#F7F7F7',
+                priceColumnMobileBorderRadiusWidth: { top: '16', bottom: '16', left: '16', right: '16' },
+                priceColumnBorder: 'none',
+                priceButtonColor: '#ffffff',
+                priceButtonHoverColor: '#ffffff',
+                pricingTopSectionNormalClassicColor: '#0B0C0E',
             },
             {
                 id: 'column-3',
-                pricingSectionTopSwitcher: false,
-                pricingSectionTopText: 'Preset 2 Style',
                 pricingTitleTag: 'h2',
-                pricingTitle: 'Preset 2 Style',
-                pricingSubTitleSwitcher: true,
-                pricingSubTitleTag: 'span',
-                pricingSubTitle: 'Preset 2 Style',
+                pricingTitle: 'Business',
                 pricingIconAlign: 'none',
                 pricingIcon: 'bookmark',
-                normalPrice: '159',
+                normalPrice: '399',
                 salePriceSwitcher: false,
-                salePrice: '149',
+                salePrice: '299',
                 priceCurrency: '$',
                 priceCurrencyPosition: 'left',
-                pricePeriod: 'month',
+                pricePeriod: 'years',
                 pricePeriodSeparator: '/',
                 priceHideFeaturesSwitcher: true,
-                priceFeatureIconSwitcher: true,
+                priceFeatureIconSwitcher: false,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
-                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Landing Page', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-2', Title: 'HTML + CSS Design', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'WordPress Themes', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
                 ],
                 priceButtonSwitcher: true,
-                priceButtonText: 'Get Started',
+                priceButtonText: 'Buy Now',
                 priceButtonUrl: '',
                 priceButtonTargetUrl: false,
                 priceButtonIconAlign: 'none',
@@ -542,19 +566,54 @@ export const pricingPresetStyles = {
                 priceButtonIconPosition: 'right',
                 priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
                 priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
-                priceAfterTextSwitcher: true,
-                priceAfterText: 'Activation on 1 Site',
+                priceColumnDesktopBorderRadiusWidth: { top: '0', right: '0', bottom: '0', left: '0' },
+                priceColumnMobileBorderRadiusWidth: { top: '16', bottom: '16', left: '16', right: '16' },
+                priceColumnNormalBackgroundType: 'classic',
+                priceColumnNormalClassicColor: '#FFF6F7',
+                priceColumnBorder: 'none',
+                priceButtonColor: '#ffffff',
+                priceButtonHoverColor: '#ffffff',
+                pricingTopSectionNormalClassicColor: '#0B0C0E',
+            },
+            {
+                id: 'column-4',
+                pricingTitleTag: 'h2',
+                pricingTitle: 'Premium',
+                pricingIconAlign: 'none',
+                pricingIcon: 'bookmark',
+                normalPrice: '999',
+                salePriceSwitcher: false,
+                salePrice: '899',
+                priceCurrency: '$',
+                priceCurrencyPosition: 'left',
+                pricePeriod: 'Lifetime',
+                pricePeriodSeparator: '/',
+                priceHideFeaturesSwitcher: true,
+                priceFeatureIconSwitcher: false,
+                priceFeatureItems: [
+                    { id: 'item-1', Title: 'Landing Page', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-2', Title: 'HTML + CSS Design', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-6', Title: 'WordPress Themes', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
+                ],
+                priceButtonSwitcher: true,
+                priceButtonText: 'Buy Now',
+                priceButtonUrl: '',
+                priceButtonTargetUrl: false,
+                priceButtonIconAlign: 'none',
+                priceButtonIcon: 'arrow-right',
+                priceButtonIconPosition: 'right',
+                priceButtonIconSpacing: { Desktop: '10', Tablet: '', Mobile: '' },
+                priceButtonIconSpacingUnits: { Desktop: 'px', Tablet: 'px', Mobile: 'px' },
+                priceColumnDesktopBorderRadiusWidth: { top: '0', right: '16', bottom: '16', left: '0' },
+                priceColumnMobileBorderRadiusWidth: { top: '16', bottom: '16', left: '16', right: '16' },
+                priceColumnNormalBackgroundType: 'classic',
+                priceColumnNormalClassicColor: '#F7F7F7',
+                priceColumnBorder: 'none',
+                priceButtonColor: '#ffffff',
+                priceButtonHoverColor: '#ffffff',
+                pricingTopSectionNormalClassicColor: '#0B0C0E',
             },
         ],
-        priceColumnOneNormalBackgroundType: 'gradient',
-        priceColumnOneNormalCustomGradientSwitcher: true,
-        priceColumnOneNormalGradientColor: 'linear-gradient(180deg, #EBEBEB 0%, #FFFFFF 100%)',
-        priceColumnTwoNormalBackgroundType: 'gradient',
-        priceColumnTwoNormalCustomGradientSwitcher: true,
-        priceColumnTwoNormalGradientColor: 'linear-gradient(180deg, #444 0%, #000 100%)',
-        priceColumnThreeNormalBackgroundType: 'gradient',
-        priceColumnThreeNormalCustomGradientSwitcher: true,
-        priceColumnThreeNormalGradientColor: 'linear-gradient(180deg, #EBEBEB 0%, #FFFFFF 100%)',
     },
     "preset-3": {
         columns: [
@@ -579,12 +638,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -620,12 +675,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -661,13 +712,9 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
-                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
                 priceButtonText: 'Get Started',
@@ -712,12 +759,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
-                    { id: 'item-6', Tooltip: 'Zapier Integration', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -753,12 +796,8 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                     { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
@@ -794,13 +833,9 @@ export const pricingPresetStyles = {
                 priceHideFeaturesSwitcher: true,
                 priceFeatureIconSwitcher: true,
                 priceFeatureItems: [
-                    { id: 'item-1', Title: 'Support & Updates for 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-1', Title: 'Support 1 year', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
                     { id: 'item-2', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-3', Title: '25% Renewal Discount', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-4', Title: 'Custom Notification', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-5', Title: 'MailChimp Integrations', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
-                    { id: 'item-6', Title: 'Zapier Integration​', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false},
-                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: false },
+                    { id: 'item-7', Title: 'Google Reviews', FeatureIcon: 'circle-check', FeatureIconAlign: 'icon', Disabled: true },
                 ],
                 priceButtonSwitcher: true,
                 priceButtonText: 'Get Started',
@@ -832,55 +867,310 @@ export const pricingTablePresets = [
         value: 'default',
         label: __('Default', 'frontis-blocks'),
         attributes: Object.entries(pricingPresetStyles['default']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="70" rx="4" fill="#EBEBEB"/>
-                    <rect x="15" y="15" width="20" height="35" rx="2" fill="#D1D5DB"/>
-                    <rect x="40" y="10" width="20" height="45" rx="2" fill="#9CA3AF"/>
-                    <rect x="65" y="15" width="20" height="35" rx="2" fill="#D1D5DB"/>
+        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+                    <g filter="url(#filter0_d_16980_14429)">
+                    <rect x="69" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter1_d_16980_14429)">
+                    <rect x="141" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter2_d_16980_14429)">
+                    <rect x="213" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter3_i_16980_14429)">
+                    <path d="M171.393 199.01C171.304 198.626 171.325 198.224 171.452 197.85C171.58 197.477 171.809 197.146 172.113 196.895C172.418 196.645 172.786 196.483 173.177 196.43C173.568 196.377 173.967 196.434 174.327 196.594L193.742 205.232C195.606 206.06 195.341 208.789 193.353 209.245L185.177 211.117C184.86 211.19 184.563 211.334 184.31 211.54C184.058 211.745 183.856 212.006 183.72 212.302L180.137 220.131C179.293 221.977 176.588 221.7 176.134 219.72L171.393 199.01Z" fill="#404655"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_16980_14429" x="68" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter1_d_16980_14429" x="140" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter2_d_16980_14429" x="212" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter3_i_16980_14429" x="171.339" y="196.41" width="23.6631" height="25.2443" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="0.283333"/>
+                    <feGaussianBlur stdDeviation="0.708333"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_16980_14429"/>
+                    </filter>
+                    </defs>
                 </svg>`,
     },
     {
         value: 'preset-1',
         label: __('Preset 1', 'frontis-blocks'),
         attributes: Object.entries(pricingPresetStyles['preset-1']).map(([label, value]) => ({ label, value })), // Using default as base
-        icon: `<svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="70" rx="4" fill="#EBEBEB"/>
-                    <rect x="10" y="10" width="25" height="50" rx="2" fill="#D1D5DB"/>
-                    <rect x="38" y="10" width="25" height="50" rx="2" fill="#D1D5DB"/>
-                    <rect x="66" y="10" width="25" height="50" rx="2" fill="#D1D5DB"/>
+        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+                    <g filter="url(#filter0_d_16980_14429)">
+                    <rect x="69" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter1_d_16980_14429)">
+                    <rect x="141" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter2_d_16980_14429)">
+                    <rect x="213" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter3_i_16980_14429)">
+                    <path d="M171.393 199.01C171.304 198.626 171.325 198.224 171.452 197.85C171.58 197.477 171.809 197.146 172.113 196.895C172.418 196.645 172.786 196.483 173.177 196.43C173.568 196.377 173.967 196.434 174.327 196.594L193.742 205.232C195.606 206.06 195.341 208.789 193.353 209.245L185.177 211.117C184.86 211.19 184.563 211.334 184.31 211.54C184.058 211.745 183.856 212.006 183.72 212.302L180.137 220.131C179.293 221.977 176.588 221.7 176.134 219.72L171.393 199.01Z" fill="#404655"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_16980_14429" x="68" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter1_d_16980_14429" x="140" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter2_d_16980_14429" x="212" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter3_i_16980_14429" x="171.339" y="196.41" width="23.6631" height="25.2443" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="0.283333"/>
+                    <feGaussianBlur stdDeviation="0.708333"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_16980_14429"/>
+                    </filter>
+                    </defs>
                 </svg>`,
     },
     {
         value: 'preset-2',
         label: __('Preset 2', 'frontis-blocks'),
         attributes: Object.entries(pricingPresetStyles['preset-2']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="70" rx="4" fill="#EBEBEB"/>
-                    <circle cx="25" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="50" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="75" cy="35" r="10" fill="#D1D5DB"/>
+        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+                    <g filter="url(#filter0_d_16980_14429)">
+                    <rect x="69" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter1_d_16980_14429)">
+                    <rect x="141" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter2_d_16980_14429)">
+                    <rect x="213" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter3_i_16980_14429)">
+                    <path d="M171.393 199.01C171.304 198.626 171.325 198.224 171.452 197.85C171.58 197.477 171.809 197.146 172.113 196.895C172.418 196.645 172.786 196.483 173.177 196.43C173.568 196.377 173.967 196.434 174.327 196.594L193.742 205.232C195.606 206.06 195.341 208.789 193.353 209.245L185.177 211.117C184.86 211.19 184.563 211.334 184.31 211.54C184.058 211.745 183.856 212.006 183.72 212.302L180.137 220.131C179.293 221.977 176.588 221.7 176.134 219.72L171.393 199.01Z" fill="#404655"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_16980_14429" x="68" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter1_d_16980_14429" x="140" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter2_d_16980_14429" x="212" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter3_i_16980_14429" x="171.339" y="196.41" width="23.6631" height="25.2443" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="0.283333"/>
+                    <feGaussianBlur stdDeviation="0.708333"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_16980_14429"/>
+                    </filter>
+                    </defs>
                 </svg>`,
     },
     {
         value: 'preset-3',
         label: __('Preset 3', 'frontis-blocks'),
         attributes: Object.entries(pricingPresetStyles['preset-3']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="70" rx="4" fill="#EBEBEB"/>
-                    <circle cx="25" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="50" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="75" cy="35" r="10" fill="#D1D5DB"/>
+        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+                    <g filter="url(#filter0_d_16980_14429)">
+                    <rect x="69" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter1_d_16980_14429)">
+                    <rect x="141" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter2_d_16980_14429)">
+                    <rect x="213" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter3_i_16980_14429)">
+                    <path d="M171.393 199.01C171.304 198.626 171.325 198.224 171.452 197.85C171.58 197.477 171.809 197.146 172.113 196.895C172.418 196.645 172.786 196.483 173.177 196.43C173.568 196.377 173.967 196.434 174.327 196.594L193.742 205.232C195.606 206.06 195.341 208.789 193.353 209.245L185.177 211.117C184.86 211.19 184.563 211.334 184.31 211.54C184.058 211.745 183.856 212.006 183.72 212.302L180.137 220.131C179.293 221.977 176.588 221.7 176.134 219.72L171.393 199.01Z" fill="#404655"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_16980_14429" x="68" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter1_d_16980_14429" x="140" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter2_d_16980_14429" x="212" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter3_i_16980_14429" x="171.339" y="196.41" width="23.6631" height="25.2443" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="0.283333"/>
+                    <feGaussianBlur stdDeviation="0.708333"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_16980_14429"/>
+                    </filter>
+                    </defs>
                 </svg>`,
     },
     {
         value: 'preset-4',
         label: __('Preset 4', 'frontis-blocks'),
         attributes: Object.entries(pricingPresetStyles['preset-4']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="100" height="70" viewBox="0 0 100 70" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="100" height="70" rx="4" fill="#EBEBEB"/>
-                    <circle cx="25" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="50" cy="35" r="10" fill="#D1D5DB"/>
-                    <circle cx="75" cy="35" r="10" fill="#D1D5DB"/>
+        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
+                    <g filter="url(#filter0_d_16980_14429)">
+                    <rect x="69" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter1_d_16980_14429)">
+                    <rect x="141" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter2_d_16980_14429)">
+                    <rect x="213" y="94" width="66" height="88" fill="white"/>
+                    </g>
+                    <g filter="url(#filter3_i_16980_14429)">
+                    <path d="M171.393 199.01C171.304 198.626 171.325 198.224 171.452 197.85C171.58 197.477 171.809 197.146 172.113 196.895C172.418 196.645 172.786 196.483 173.177 196.43C173.568 196.377 173.967 196.434 174.327 196.594L193.742 205.232C195.606 206.06 195.341 208.789 193.353 209.245L185.177 211.117C184.86 211.19 184.563 211.334 184.31 211.54C184.058 211.745 183.856 212.006 183.72 212.302L180.137 220.131C179.293 221.977 176.588 221.7 176.134 219.72L171.393 199.01Z" fill="#404655"/>
+                    </g>
+                    <defs>
+                    <filter id="filter0_d_16980_14429" x="68" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter1_d_16980_14429" x="140" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter2_d_16980_14429" x="212" y="94" width="68" height="91" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="2"/>
+                    <feGaussianBlur stdDeviation="0.5"/>
+                    <feComposite in2="hardAlpha" operator="out"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0 0.565993 0 0 0 0.05 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_16980_14429"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_16980_14429" result="shape"/>
+                    </filter>
+                    <filter id="filter3_i_16980_14429" x="171.339" y="196.41" width="23.6631" height="25.2443" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                    <feOffset dy="0.283333"/>
+                    <feGaussianBlur stdDeviation="0.708333"/>
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+                    <feBlend mode="normal" in2="shape" result="effect1_innerShadow_16980_14429"/>
+                    </filter>
+                    </defs>
                 </svg>`,
     },
 ];

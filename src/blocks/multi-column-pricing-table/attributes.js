@@ -1727,6 +1727,22 @@ const attributes = {
 		type: 'string',
 		default: 'normal'
 	},
+	featureTitlePosition: {
+		type: 'object',
+		default: {
+			Desktop: '67',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	featureTitlePositionUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
 	pricingfeatureTitleColor: {
 		type: 'string',
 		default: '#2A2F39'
@@ -3211,39 +3227,25 @@ const attributes = {
 		default: true
 	},
 	priceGlobalBoxShadowSwitcher: {
-		type: 'boolean',
-		default: false
+		type: 'string',
+		default: 'normal'
 	},
 	priceGlobalBoxShadowValues: {
-		type: 'object',
-		default: {
-			hOffset: 0,
-			vOffset: 0,
-			blur: 0,
-			spread: 0,
-			color: '#000000',
-			inset: false
-		}
-	},
-	priceGlobalBoxShadowCssValue: {
-		type: 'string',
-		default: ''
-	},
+        type: 'array',
+        default: [],
+    },
+    priceGlobalBoxShadowCssValue: {
+        type: 'string',
+        default: '',
+    },
 	priceGlobalBoxShadowHoverValues: {
-		type: 'object',
-		default: {
-			hOffset: 0,
-			vOffset: 0,
-			blur: 0,
-			spread: 0,
-			color: '#000000',
-			inset: false
-		}
-	},
-	priceGlobalBoxShadowHoverCssValue: {
-		type: 'string',
-		default: ''
-	},
+        type: 'array',
+        default: [],
+    },
+    priceGlobalBoxShadowHoverCssValue: {
+        type: 'string',
+        default: '',
+    },
 	/** End Global Settings */
 
 	/** Start Price Activation */
