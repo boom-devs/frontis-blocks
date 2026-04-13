@@ -7,20 +7,42 @@ const LayoutOneSave = ({ attributes }) => {
         columns,
         pricingTableGlobalWraperID,
         pricingTableGlobalWraperClass,
+        pricingSectionTopSwitcher,
+        pricingTitleTag,
+        pricingTitle,
+        priceButtonSwitcher,
+        priceButtonUrl,
+        priceButtonTargetUrl,
+        priceButtonText,
+        priceCurrency,
+        priceCurrencyPosition,
+        normalPrice,
+        salePriceSwitcher,
+        salePrice,
+        pricePeriodSeparator,
+        pricePeriod,
+        priceAfterTextSwitcher,
+        priceAfterText,
+        priceHideFeaturesSwitcher,
+        priceFeatureItems,
+        priceFeatureIconSwitcher,
+        pricingSectionTopText,
+
     } = attributes;
 
-    const renderPricingColumn = (columnData, columnIndex) => {
-        const columnClass = columnIndex === 0 ? '' : columnIndex === 1 ? ' two' : ' three';
+    const hasTopSection = columns?.some((col) => col?.pricingSectionTopSwitcher);
+
+    const renderPricingColumn = (columnIndex) => {
 
         return (
-            <div className={`fb-mc-pricing-column${columnClass}`} key={columnData.id || `column-${columnIndex}`}>
+            <div className={`fb-mc-pricing-column`}>
                 <div className="fb-mc-pricing-inner-wrapper">
-                    {columnData.pricingSectionTopSwitcher && (
+                    {pricingSectionTopSwitcher && (
                         <div className="fb-mc-pricing-top-wrapper">
                             <RichText.Content
                                 tagName="span"
                                 className="fb-mc-pricing-top-text"
-                                value={columnData.pricingSectionTopText}
+                                value={pricingSectionTopText}
                             />
                         </div>
                     )}
@@ -28,22 +50,22 @@ const LayoutOneSave = ({ attributes }) => {
                         <div className="fb-mc-pricing-header">
                             <div className="fb-mc-pricing-title-wrapper">
                                 <RichText.Content
-                                    tagName={columnData.pricingTitleTag || 'h2'}
+                                    tagName={pricingTitleTag || 'h2'}
                                     className="fb-mc-pricing-title"
-                                    value={columnData.pricingTitle}
+                                    value={pricingTitle}
                                 />
                             </div>
                             <div className="fb-mc-pricing-button-wrapper">
-                                {columnData.priceButtonSwitcher && (
+                                {priceButtonSwitcher && (
                                     <a
                                         className={`fb-mc-pricing-button`}
-                                        href={columnData.priceButtonUrl}
-                                        target={columnData.priceButtonTargetUrl ? "_blank" : undefined}
-                                        rel={columnData.priceButtonTargetUrl ? "noopener noreferrer" : undefined}
+                                        href={priceButtonUrl}
+                                        target={priceButtonTargetUrl ? "_blank" : undefined}
+                                        rel={priceButtonTargetUrl ? "noopener noreferrer" : undefined}
                                     >
                                         <RichText.Content
                                             tagName="span"
-                                            value={columnData.priceButtonText}
+                                            value={priceButtonText}
                                             className="fb-button-text"
                                         />
                                     </a>
@@ -51,41 +73,41 @@ const LayoutOneSave = ({ attributes }) => {
                             </div>
                             <div className="fb-mc-pricing-price-wrapper">
                                 <div className="fb-mc-pricing-price-inner-wrapper">
-                                    <span className={`fb-mc-pricing-normal-price ${columnData.salePriceSwitcher ? 'line-through' : ''}`}>
+                                    <span className={`fb-mc-pricing-normal-price ${salePriceSwitcher ? 'line-through' : ''}`}>
                                         <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'left' ? (
-                                                <RichText.Content tagName="span" value={columnData.priceCurrency} />
+                                            {priceCurrencyPosition === 'left' ? (
+                                                <RichText.Content tagName="span" value={priceCurrency} />
                                             ) : ''}
                                         </span>
-                                        <RichText.Content tagName="span" value={columnData.normalPrice} />
+                                        <RichText.Content tagName="span" value={normalPrice} />
                                         <span className="price-currency">
-                                            {columnData.priceCurrencyPosition === 'right' ? (
-                                                <RichText.Content tagName="span" value={columnData.priceCurrency} />
+                                            {priceCurrencyPosition === 'right' ? (
+                                                <RichText.Content tagName="span" value={priceCurrency} />
                                             ) : ''}
                                         </span>
-                                        {!columnData.salePriceSwitcher && (
+                                        {!salePriceSwitcher && (
                                             <span className="price-period">
-                                                <RichText.Content tagName="span" value={columnData.pricePeriodSeparator} />
-                                                <RichText.Content tagName="span" value={columnData.pricePeriod} />
+                                                <RichText.Content tagName="span" value={pricePeriodSeparator} />
+                                                <RichText.Content tagName="span" value={pricePeriod} />
                                             </span>
                                         )}
                                     </span>
-                                    {columnData.salePriceSwitcher && (
+                                    {salePriceSwitcher && (
                                         <span className="fb-mc-pricing-sale-price">
                                             <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'left' ? (
-                                                    <RichText.Content tagName="span" value={columnData.priceCurrency} />
+                                                {priceCurrencyPosition === 'left' ? (
+                                                    <RichText.Content tagName="span" value={priceCurrency} />
                                                 ) : ''}
                                             </span>
-                                            <RichText.Content tagName="span" value={columnData.salePrice} />
+                                            <RichText.Content tagName="span" value={salePrice} />
                                             <span className="price-currency">
-                                                {columnData.priceCurrencyPosition === 'right' ? (
-                                                    <RichText.Content tagName="span" value={columnData.priceCurrency} />
+                                                {priceCurrencyPosition === 'right' ? (
+                                                    <RichText.Content tagName="span" value={priceCurrency} />
                                                 ) : ''}
                                             </span>
                                             <span className="price-period">
-                                                <RichText.Content tagName="span" value={columnData.pricePeriodSeparator} />
-                                                <RichText.Content tagName="span" value={columnData.pricePeriod} />
+                                                <RichText.Content tagName="span" value={pricePeriodSeparator} />
+                                                <RichText.Content tagName="span" value={pricePeriod} />
                                             </span>
                                         </span>
                                     )}
@@ -93,25 +115,25 @@ const LayoutOneSave = ({ attributes }) => {
                             </div>
                         </div>
                         <div className="fb-mc-pricing-content">
-                            {columnData.priceAfterTextSwitcher && (
+                            {priceAfterTextSwitcher && (
                                 <div className="fb-mc-pricing-plan-activation-wrapper">
                                     <RichText.Content
                                         tagName="span"
                                         className="fb-mc-pricing-plan-activation"
-                                        value={columnData.priceAfterText}
+                                        value={priceAfterText}
                                     />
                                 </div>
                             )}
                         </div>
                         <div className="fb-mc-pricing-features-wrapper">
-                            {columnData.priceHideFeaturesSwitcher && (
+                            {priceHideFeaturesSwitcher && (
                                 <ul className="fb-mc-pricing-features-list">
-                                    {(columnData.priceFeatureItems || []).map((item, key) => (
+                                    {(priceFeatureItems || []).map((item, key) => (
                                         <li 
                                             className={`fb-mc-pricing-feature-item${item.Disabled ? ' fb-feature-disabled' : ''}`}
                                             key={item.id}
                                         >
-                                            {columnData.priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
+                                            {priceFeatureIconSwitcher && item.FeatureIconAlign !== 'none' && (
                                                 <div className="fb-mc-pricing-feature-icon">
                                                     <span className="fb-mc-pricing-feature-icon-inner">
                                                         {item.FeatureIcon ? renderSVG(item.FeatureIcon) : ''}
@@ -135,11 +157,11 @@ const LayoutOneSave = ({ attributes }) => {
     };
 
     return (
-        <div className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${columns.some(col => col.pricingSectionTopSwitcher) ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID}>
+        <div className={`fb-parent-wrapper fb-layout-one fb-multi-column-pricing-table-wrapper ${blockID} ${pricingTableGlobalWraperClass} ${hasTopSection ? 'fb-multi-column-pricing-table-top-section' : ''}`} id={pricingTableGlobalWraperID}>
             <div className='fb-mc-pricing-grid'>
-                {renderPricingColumn(columns[0], 0)}
-                {renderPricingColumn(columns[1], 1)}
-                {renderPricingColumn(columns[2], 2)}
+                {renderPricingColumn(0)}
+                {renderPricingColumn(1)}
+                {renderPricingColumn(2)}
             </div>
         </div>
     );
