@@ -3,12 +3,12 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
 
-Frontis Blocks is a block library with 40+ blocks, global styles, sliders/galleries, CTAs, and map/form integrations, plus ready-made patterns to help you build pages faster in the Block Editor.
+Frontis Blocks - WordPress block library for Gutenberg Editor with 40+ blocks, patterns, sliders, galleries, CTAs, maps, forms, and global styles.
 
 == Description ==
 
@@ -248,7 +248,15 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.2.0 – 12 March 2026 =
+= 1.2.1 – 03 April 2026 =
+- **New**: Added Full-site import functionality in the Template Library for faster site building.
+- **Fixed**: Resolved import-related issues in the Slider block on both editor and frontend.
+- **Fixed**: Resolved SureCart conflict issue to ensure smooth functionality.
+- **Improved**: Added permalink update system for better site structure.
+- **Improved**: Optimized Template Library metadata and removed internal unused code for better performance.
+- **Improved**: Updated dependencies for better stability and build consistency.
+
+= 1.2.0 – 17 March 2026 =
 - **New**: Added Google Fonts preload toggle in Performance settings.
 - **Fixed**: Resolved Google Fonts URL sanitization issues.
 - **Fixed**: Resolved issue where Google Fonts were not loading in the editor.
@@ -259,7 +267,18 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Fixed**: Resolved icon rendering issues in Team Member and Testimonial blocks on the frontend.
 - **Improved**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
 - **Improved**: Refactored Global Settings to remove dead code and improve maintainability.
+- **Fixed**: Resolved Global Colors panel issues where adding many custom colors or custom gradients could stop updating correctly, fail to persist, or disappear after save.
+- **Fixed**: Restored and stabilized the original Global Colors editor UI, including proper add action alignment for empty Custom and Custom Gradient states.
+- **Fixed**: Resolved Global Colors panel overflow issues by improving scroll behavior for long solid, custom color, and custom gradient palettes.
+- **Improved**: Added safe theme palette auto-sync for Global Colors, so default theme colors now update automatically after theme switches while preserving manually customized palettes.
+- **Improved**: Added theme-aware cache invalidation for global color and gradient settings to prevent stale palette data after changing themes.
+- **New**: Added render type switch for Rive Animation block with improved speed optimization.
+- **Fixed**: Resolved Rive animation autoplay feature and resize issues on device change.
+- **Fixed**: Fixed frontend Google Fonts loading issues.
+- **Fixed**: Global typography now applies by default, block-level font overrides work when explicitly set, and clearing a block font correctly falls back to the global font on the frontend.
+- **Improved**: Refactored and reviewed global typography settings for better maintainability.
 - **Maintenance**: Consolidated build system by removing Grunt and pinning dependencies.
+- **Maintenance**: Removed unused `@rive-app/react-webgl2` dependency.
 
 = 1.1.9 – 02 March 2026 =
 - **New**: Introduced Form Builder, Text Field, and Textarea Field blocks with full styling controls and SMTP email delivery.
