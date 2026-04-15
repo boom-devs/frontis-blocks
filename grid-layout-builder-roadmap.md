@@ -343,7 +343,7 @@ Subtask progress:
 - `7.4` solved on 2026-04-15: quick item select/edit/delete actions reviewed and added
 
 ### Item 8: Add migration compatibility layer
-Status: Pending
+Status: Completed
 
 Files:
 
@@ -358,6 +358,11 @@ Tasks:
 Done when:
 
 - existing saved blocks can still open without losing layout
+
+Completed notes:
+
+- legacy child position attributes now hydrate parent `layouts` in-memory before sync
+- generated CSS uses resolved fallback layouts during editor recovery
 
 ### Item 9: Add item-level controls after foundation is stable
 Status: Pending
