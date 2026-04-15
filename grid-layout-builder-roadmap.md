@@ -365,7 +365,7 @@ Completed notes:
 - generated CSS uses resolved fallback layouts during editor recovery
 
 ### Item 9: Add item-level controls after foundation is stable
-Status: Pending
+Status: Completed
 
 Files:
 
@@ -386,6 +386,11 @@ Later-phase features:
 Done when:
 
 - individual grid items can be styled without weakening layout integrity
+
+Completed notes:
+
+- added item inspector controls for background, border radius, padding, min height, and z-index
+- added static item lock support so individual items can be excluded from drag/resize
 
 ## V1 Scope
 
