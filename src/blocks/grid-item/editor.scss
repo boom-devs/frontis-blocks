@@ -1,25 +1,33 @@
 /* Grid Item Editor Styles */
 .wp-block-frontis-blocks-grid-item {
 	&.grid-item-rendered {
-		background: #fff;
+		background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
 		border: 1px solid #d9e0e7;
 		border-radius: 8px;
+		box-sizing: border-box;
 		height: 100%;
-		transition: border-color 0.2s, box-shadow 0.2s;
+		overflow: hidden;
+		transition:
+			border-color 0.2s,
+			box-shadow 0.2s,
+			background-color 0.2s;
 
 		&:hover {
 			border-color: #1e90ff;
+			box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
 		}
 
 		&.is-selected {
 			border-color: #1e90ff;
-			box-shadow: 0 0 0 1px rgba(30, 144, 255, 0.2);
+			box-shadow:
+				0 0 0 1px rgba(30, 144, 255, 0.18),
+				0 14px 30px rgba(30, 144, 255, 0.08);
 		}
 
 		.grid-item-content {
 			height: 100%;
 			min-height: 100px;
-			padding: 14px;
+			padding: 16px;
 		}
 
 		.block-editor-block-list__layout {
@@ -47,6 +55,34 @@
 
 			.block-editor-default-block-appender {
 				margin: 0;
+			}
+		}
+
+		&.has-inner-blocks {
+			background:
+				linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, #f9fbfd 100%);
+
+			.grid-item-content {
+				padding: 18px 18px 16px;
+			}
+
+			.grid-item-content.block-editor-block-list__layout {
+				display: flex;
+				flex-direction: column;
+				align-items: stretch;
+				justify-content: flex-start;
+				gap: 12px;
+				padding-bottom: 8px;
+			}
+
+			.block-editor-block-list__block {
+				margin-bottom: 0;
+				max-width: 100%;
+			}
+
+			.block-list-appender,
+			.block-editor-default-block-appender {
+				margin-top: 0;
 			}
 		}
 	}
