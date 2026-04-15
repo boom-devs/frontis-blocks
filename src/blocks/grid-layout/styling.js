@@ -3,11 +3,42 @@
  * Returns Dynamic Generated CSS
  */
 
-/**
- * Generate block styles from attributes
- * @param {Object} attributes - Block attributes
- * @returns {string} CSS string
- */
+const DEFAULT_GRID_SETTINGS = {
+	Desktop: { cols: 12, rowHeight: 40, gutter: 10 },
+	Tablet: { cols: 8, rowHeight: 35, gutter: 8 },
+	Mobile: { cols: 4, rowHeight: 30, gutter: 6 },
+};
+
+const getBreakpointNumber = (values, breakpoint, settingKey) =>
+	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
+
+const getContainerSelectors = (blockID) => [
+	`.${blockID}.fb-grid-layout-container`,
+	`.${blockID} .grid-content-layer.fb-grid-layout-container`,
+];
+
+const getItemSelectors = (blockID, itemId) => [
+	`.${blockID}.fb-grid-layout-container > [data-grid-id="${itemId}"]`,
+	`.${blockID} .grid-content-layer.fb-grid-layout-container > [data-grid-id="${itemId}"]`,
+];
+
+const appendLayoutRules = (css, blockID, layoutItems = []) =>
+	layoutItems.reduce((nextCss, item) => {
+		const x = Math.max(Number(item?.x) || 0, 0);
+		const y = Math.max(Number(item?.y) || 0, 0);
+		const w = Math.max(Number(item?.w) || 1, 1);
+		const h = Math.max(Number(item?.h) || 1, 1);
+
+		nextCss += `
+			${getItemSelectors(blockID, item.i).join(", ")} {
+				grid-column: ${x + 1} / span ${w};
+				grid-row: ${y + 1} / span ${h};
+			}
+		`;
+
+		return nextCss;
+	}, css);
+
 const generateGridLayoutStyle = (attributes) => {
 	const {
 		blockID,
@@ -19,95 +50,66 @@ const generateGridLayoutStyle = (attributes) => {
 		layouts,
 	} = attributes;
 
-	// Parse responsive values
-	const colsDesktop = Number(cols?.Desktop) || 12;
-	const colsTablet = Number(cols?.Tablet) || 8;
-	const colsMobile = Number(cols?.Mobile) || 4;
+	if (!blockID) {
+		return "";
+	}
 
-	const rowHeightDesktop = Number(rowHeight?.Desktop) || 40;
-	const rowHeightTablet = Number(rowHeight?.Tablet) || 35;
-	const rowHeightMobile = Number(rowHeight?.Mobile) || 30;
-	const rhUnitDesktop = rowHeightUnits?.Desktop || 'px';
-	const rhUnitTablet = rowHeightUnits?.Tablet || 'px';
-	const rhUnitMobile = rowHeightUnits?.Mobile || 'px';
+	const containerSelectors = getContainerSelectors(blockID);
+	const colsDesktop = getBreakpointNumber(cols, "Desktop", "cols");
+	const colsTablet = getBreakpointNumber(cols, "Tablet", "cols");
+	const colsMobile = getBreakpointNumber(cols, "Mobile", "cols");
+	const rowHeightDesktop = getBreakpointNumber(
+		rowHeight,
+		"Desktop",
+		"rowHeight",
+	);
+	const rowHeightTablet = getBreakpointNumber(rowHeight, "Tablet", "rowHeight");
+	const rowHeightMobile = getBreakpointNumber(rowHeight, "Mobile", "rowHeight");
+	const gutterDesktop = getBreakpointNumber(gutter, "Desktop", "gutter");
+	const gutterTablet = getBreakpointNumber(gutter, "Tablet", "gutter");
+	const gutterMobile = getBreakpointNumber(gutter, "Mobile", "gutter");
+	const desktopUnit = rowHeightUnits?.Desktop || "px";
+	const tabletUnit = rowHeightUnits?.Tablet || "px";
+	const mobileUnit = rowHeightUnits?.Mobile || "px";
+	const desktopGapUnit = gutterUnits?.Desktop || "px";
+	const tabletGapUnit = gutterUnits?.Tablet || "px";
+	const mobileGapUnit = gutterUnits?.Mobile || "px";
 
-	const gutterDesktop = Number(gutter?.Desktop) || 10;
-	const gutterTablet = Number(gutter?.Tablet) || 8;
-	const gutterMobile = Number(gutter?.Mobile) || 6;
-	const gUnitDesktop = gutterUnits?.Desktop || 'px';
-	const gUnitTablet = gutterUnits?.Tablet || 'px';
-	const gUnitMobile = gutterUnits?.Mobile || 'px';
-
-	// Generate CSS
 	let css = `
-		.${blockID}.fb-grid-layout-container,
-		.${blockID} .fb-grid-layout-container {
+		${containerSelectors.join(", ")} {
 			display: grid;
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
-			grid-auto-rows: ${rowHeightDesktop}${rhUnitDesktop};
-			gap: ${gutterDesktop}${gUnitDesktop};
+			grid-auto-rows: ${rowHeightDesktop}${desktopUnit};
+			gap: ${gutterDesktop}${desktopGapUnit};
 		}
 	`;
 
-	// Desktop item positioning
-	if (layouts?.Desktop?.length > 0) {
-		layouts.Desktop.forEach(item => {
-			css += `
-				.${blockID}.fb-grid-layout-container > [data-grid-id="${item.i}"],
-				.${blockID} .fb-grid-layout-container > [data-grid-id="${item.i}"] { 
-					grid-column: ${item.x + 1} / span ${item.w}; 
-					grid-row: ${item.y + 1} / span ${item.h}; 
-				}\n`;
-		});
-	}
+	css = appendLayoutRules(css, blockID, layouts?.Desktop || []);
 
-	// Tablet responsive override
-	if (layouts?.Tablet?.length > 0 || colsTablet || rowHeightTablet || gutterTablet) {
-		css += `@media (max-width: 1024px) {
-			.${blockID}.fb-grid-layout-container,
-			.${blockID} .fb-grid-layout-container {
+	css += `
+		@media (max-width: 1024px) {
+			${containerSelectors.join(", ")} {
 				grid-template-columns: repeat(${colsTablet}, 1fr);
-				grid-auto-rows: ${rowHeightTablet}${rhUnitTablet};
-				gap: ${gutterTablet}${gUnitTablet};
+				grid-auto-rows: ${rowHeightTablet}${tabletUnit};
+				gap: ${gutterTablet}${tabletGapUnit};
 			}
-		`;
-		if (layouts?.Tablet?.length > 0) {
-			layouts.Tablet.forEach(item => {
-				css += `
-					.${blockID}.fb-grid-layout-container > [data-grid-id="${item.i}"],
-					.${blockID} .fb-grid-layout-container > [data-grid-id="${item.i}"] { 
-						grid-column: ${item.x + 1} / span ${item.w}; 
-						grid-row: ${item.y + 1} / span ${item.h}; 
-					}\n`;
-			});
+	`;
+	css = appendLayoutRules(css, blockID, layouts?.Tablet || []);
+	css += `
 		}
-		css += `}\n`;
-	}
-
-	// Mobile responsive override
-	if (layouts?.Mobile?.length > 0 || colsMobile || rowHeightMobile || gutterMobile) {
-		css += `@media (max-width: 767px) {
-			.${blockID}.fb-grid-layout-container,
-			.${blockID} .fb-grid-layout-container {
+		@media (max-width: 767px) {
+			${containerSelectors.join(", ")} {
 				grid-template-columns: repeat(${colsMobile}, 1fr);
-				grid-auto-rows: ${rowHeightMobile}${rhUnitMobile};
-				gap: ${gutterMobile}${gUnitMobile};
+				grid-auto-rows: ${rowHeightMobile}${mobileUnit};
+				gap: ${gutterMobile}${mobileGapUnit};
 			}
-		`;
-		if (layouts?.Mobile?.length > 0) {
-			layouts.Mobile.forEach(item => {
-				css += `
-					.${blockID}.fb-grid-layout-container > [data-grid-id="${item.i}"],
-					.${blockID} .fb-grid-layout-container > [data-grid-id="${item.i}"] { 
-						grid-column: ${item.x + 1} / span ${item.w}; 
-						grid-row: ${item.y + 1} / span ${item.h}; 
-					}\n`;
-			});
+	`;
+	css = appendLayoutRules(css, blockID, layouts?.Mobile || []);
+	css += `
 		}
-		css += `}\n`;
-	}
+	`;
 
-	return css.replace(/\s+/g, ' ').trim();
-}
+	return css.replace(/\s+/g, " ").trim();
+};
 
 export default generateGridLayoutStyle;
