@@ -39,7 +39,7 @@ const appendLayoutRules = (css, blockID, layoutItems = []) =>
 		return nextCss;
 	}, css);
 
-const generateGridLayoutStyle = (attributes) => {
+const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const {
 		blockID,
 		cols,
@@ -49,6 +49,7 @@ const generateGridLayoutStyle = (attributes) => {
 		gutterUnits,
 		layouts,
 	} = attributes;
+	const layoutStore = resolvedLayouts ?? layouts;
 
 	if (!blockID) {
 		return "";
@@ -84,7 +85,7 @@ const generateGridLayoutStyle = (attributes) => {
 		}
 	`;
 
-	css = appendLayoutRules(css, blockID, layouts?.Desktop || []);
+	css = appendLayoutRules(css, blockID, layoutStore?.Desktop || []);
 
 	css += `
 		@media (max-width: 1024px) {
@@ -94,7 +95,7 @@ const generateGridLayoutStyle = (attributes) => {
 				gap: ${gutterTablet}${tabletGapUnit};
 			}
 	`;
-	css = appendLayoutRules(css, blockID, layouts?.Tablet || []);
+	css = appendLayoutRules(css, blockID, layoutStore?.Tablet || []);
 	css += `
 		}
 		@media (max-width: 767px) {
@@ -104,7 +105,7 @@ const generateGridLayoutStyle = (attributes) => {
 				gap: ${gutterMobile}${mobileGapUnit};
 			}
 	`;
-	css = appendLayoutRules(css, blockID, layouts?.Mobile || []);
+	css = appendLayoutRules(css, blockID, layoutStore?.Mobile || []);
 	css += `
 		}
 	`;

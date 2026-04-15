@@ -111,6 +111,45 @@ const createLayoutItemFromBlock = (
 	);
 };
 
+const buildLayoutsFromGridItems = (gridItems, cols, layouts = {}) =>
+	BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
+		const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
+		const existingLayout = layouts?.[breakpoint] || [];
+		const existingLayoutMap = new Map(
+			existingLayout.map((item) => [item.i, item]),
+		);
+
+		updatedLayouts[breakpoint] = gridItems.reduce((nextLayout, entry) => {
+			const existingItem = existingLayoutMap.get(entry.itemId);
+
+			if (existingItem) {
+				nextLayout.push(
+					normalizeLayoutItem(
+						{
+							...existingItem,
+							i: entry.itemId,
+						},
+						breakpointCols,
+						getNextRow(nextLayout),
+					),
+				);
+				return nextLayout;
+			}
+
+			nextLayout.push(
+				createLayoutItemFromBlock(
+					entry.block,
+					breakpoint,
+					breakpointCols,
+					nextLayout,
+				),
+			);
+			return nextLayout;
+		}, []);
+
+		return updatedLayouts;
+	}, {});
+
 const areLayoutsEqual = (firstLayouts, secondLayouts) =>
 	BREAKPOINTS.every((breakpoint) => {
 		const first = firstLayouts?.[breakpoint] || [];
@@ -173,25 +212,12 @@ export default function Edit({
 		}
 	}, [gutterUnits, rowHeightUnits, setAttributes]);
 
-	useEffect(() => {
-		if (blockID) {
-			const css = generateGridLayoutStyle(attributes);
-			if (css !== blockStyle) {
-				setAttributes({ blockStyle: css });
-			}
-		}
-	}, [attributes, blockID, blockStyle, setAttributes]);
-
 	const [isLayoutMode, setIsLayoutMode] = useState(false);
 	const [activeBreakpoint, setActiveBreakpoint] = useState("Desktop");
 	const { containerRef, mounted, width } = useContainerWidth({
 		measureBeforeMount: true,
 	});
 	const lastSyncedLayoutRef = useRef(layouts);
-
-	useEffect(() => {
-		lastSyncedLayoutRef.current = layouts;
-	}, [layouts]);
 
 	const { innerBlocks, selectedGridItemClientId } = useSelect(
 		(select) => {
@@ -266,51 +292,30 @@ export default function Edit({
 		selectedGridItemIndex >= 0
 			? sprintf(__("Item %d selected", "frontis-blocks"), selectedGridItemIndex + 1)
 			: __("Select a layout item to edit or delete it.", "frontis-blocks");
+	const effectiveLayouts = useMemo(
+		() => buildLayoutsFromGridItems(gridItems, cols, layouts),
+		[cols, gridItems, layouts],
+	);
 
 	useEffect(() => {
-		const nextLayouts = BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
-			const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
-			const existingLayout = layouts?.[breakpoint] || [];
-			const existingLayoutMap = new Map(
-				existingLayout.map((item) => [item.i, item]),
-			);
-
-			updatedLayouts[breakpoint] = gridItems.reduce((nextLayout, entry) => {
-				const existingItem = existingLayoutMap.get(entry.itemId);
-
-				if (existingItem) {
-					nextLayout.push(
-						normalizeLayoutItem(
-							{
-								...existingItem,
-								i: entry.itemId,
-							},
-							breakpointCols,
-							getNextRow(nextLayout),
-						),
-					);
-					return nextLayout;
-				}
-
-				nextLayout.push(
-					createLayoutItemFromBlock(
-						entry.block,
-						breakpoint,
-						breakpointCols,
-						nextLayout,
-					),
-				);
-				return nextLayout;
-			}, []);
-
-			return updatedLayouts;
-		}, {});
-
-		if (!areLayoutsEqual(layouts, nextLayouts)) {
-			lastSyncedLayoutRef.current = nextLayouts;
-			setAttributes({ layouts: nextLayouts });
+		if (blockID) {
+			const css = generateGridLayoutStyle(attributes, effectiveLayouts);
+			if (css !== blockStyle) {
+				setAttributes({ blockStyle: css });
+			}
 		}
-	}, [cols, gridItems, layouts, setAttributes]);
+	}, [attributes, blockID, blockStyle, effectiveLayouts, setAttributes]);
+
+	useEffect(() => {
+		lastSyncedLayoutRef.current = effectiveLayouts;
+	}, [effectiveLayouts]);
+
+	useEffect(() => {
+		if (!areLayoutsEqual(layouts, effectiveLayouts)) {
+			lastSyncedLayoutRef.current = effectiveLayouts;
+			setAttributes({ layouts: effectiveLayouts });
+		}
+	}, [effectiveLayouts, layouts, setAttributes]);
 
 	const onLayoutChange = useCallback(
 		(newLayout) => {
@@ -439,27 +444,8 @@ export default function Edit({
 	);
 
 	const rglLayout = useMemo(() => {
-		const breakpointCols = getBreakpointNumber(cols, activeBreakpoint, "cols");
-		const breakpointLayout = layouts?.[activeBreakpoint] || [];
-
-		if (breakpointLayout.length > 0) {
-			return breakpointLayout.map((item) =>
-				normalizeLayoutItem(item, breakpointCols),
-			);
-		}
-
-		return gridItems.reduce((nextLayout, entry) => {
-			nextLayout.push(
-				createLayoutItemFromBlock(
-					entry.block,
-					activeBreakpoint,
-					breakpointCols,
-					nextLayout,
-				),
-			);
-			return nextLayout;
-		}, []);
-	}, [activeBreakpoint, cols, gridItems, layouts]);
+		return effectiveLayouts?.[activeBreakpoint] || [];
+	}, [activeBreakpoint, effectiveLayouts]);
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${blockID} ${
