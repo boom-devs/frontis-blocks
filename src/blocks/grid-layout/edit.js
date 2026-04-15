@@ -193,14 +193,36 @@ export default function Edit({
 		lastSyncedLayoutRef.current = layouts;
 	}, [layouts]);
 
-	const { innerBlocks } = useSelect(
-		(select) => ({
-			innerBlocks: select("core/block-editor").getBlocks(clientId),
-		}),
+	const { innerBlocks, selectedGridItemClientId } = useSelect(
+		(select) => {
+			const blockEditor = select("core/block-editor");
+			const blockItems = blockEditor.getBlocks(clientId);
+			const directChildIds = blockItems.map((block) => block.clientId);
+			const selectedBlockClientId = blockEditor.getSelectedBlockClientId();
+
+			let nextSelectedGridItemClientId = null;
+
+			if (selectedBlockClientId) {
+				if (directChildIds.includes(selectedBlockClientId)) {
+					nextSelectedGridItemClientId = selectedBlockClientId;
+				} else {
+					nextSelectedGridItemClientId =
+						blockEditor
+							.getBlockParents(selectedBlockClientId)
+							.find((parentClientId) => directChildIds.includes(parentClientId)) ||
+						null;
+				}
+			}
+
+			return {
+				innerBlocks: blockItems,
+				selectedGridItemClientId: nextSelectedGridItemClientId,
+			};
+		},
 		[clientId],
 	);
 
-	const { insertBlock, updateBlockAttributes } =
+	const { insertBlock, removeBlock, selectBlock, updateBlockAttributes } =
 		useDispatch("core/block-editor");
 	const gridItems = useMemo(
 		() =>
@@ -223,6 +245,27 @@ export default function Edit({
 		__("Editing %s layout", "frontis-blocks"),
 		activeBreakpoint,
 	);
+	const selectedGridItem = useMemo(
+		() =>
+			gridItems.find(
+				(entry) => entry.block.clientId === selectedGridItemClientId,
+			) || null,
+		[gridItems, selectedGridItemClientId],
+	);
+	const selectedGridItemIndex = useMemo(
+		() =>
+			selectedGridItem
+				? gridItems.findIndex(
+						(entry) => entry.block.clientId === selectedGridItem.block.clientId,
+					)
+				: -1,
+		[gridItems, selectedGridItem],
+	);
+	const selectedLayoutItemId = selectedGridItem?.itemId || "";
+	const selectedLayoutLabel =
+		selectedGridItemIndex >= 0
+			? sprintf(__("Item %d selected", "frontis-blocks"), selectedGridItemIndex + 1)
+			: __("Select a layout item to edit or delete it.", "frontis-blocks");
 
 	useEffect(() => {
 		const nextLayouts = BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
@@ -331,6 +374,69 @@ export default function Edit({
 		insertBlock(newBlock, innerBlocks.length, clientId);
 		setIsLayoutMode(true);
 	}, [clientId, innerBlocks.length, insertBlock]);
+
+	const focusGridItem = useCallback(
+		(itemId, { exitLayoutMode = false } = {}) => {
+			const matchingEntry = gridItems.find((entry) => entry.itemId === itemId);
+
+			if (!matchingEntry) {
+				return;
+			}
+
+			selectBlock(matchingEntry.block.clientId);
+
+			if (exitLayoutMode) {
+				setIsLayoutMode(false);
+				requestAnimationFrame(() => {
+					selectBlock(matchingEntry.block.clientId);
+				});
+			}
+		},
+		[gridItems, selectBlock],
+	);
+
+	const removeGridItem = useCallback(
+		(itemId) => {
+			const matchingEntryIndex = gridItems.findIndex(
+				(entry) => entry.itemId === itemId,
+			);
+
+			if (matchingEntryIndex < 0) {
+				return;
+			}
+
+			const matchingEntry = gridItems[matchingEntryIndex];
+			const shouldRemove = window.confirm(
+				sprintf(
+					__(
+						"Remove Item %d and all blocks inside it?",
+						"frontis-blocks",
+					),
+					matchingEntryIndex + 1,
+				),
+			);
+
+			if (!shouldRemove) {
+				return;
+			}
+
+			removeBlock(matchingEntry.block.clientId, false);
+			requestAnimationFrame(() => {
+				selectBlock(clientId);
+			});
+		},
+		[clientId, gridItems, removeBlock, selectBlock],
+	);
+
+	const handleLayoutItemKeyDown = useCallback(
+		(event, itemId) => {
+			if (event.key === "Enter" || event.key === " ") {
+				event.preventDefault();
+				focusGridItem(itemId);
+			}
+		},
+		[focusGridItem],
+	);
 
 	const rglLayout = useMemo(() => {
 		const breakpointCols = getBreakpointNumber(cols, activeBreakpoint, "cols");
@@ -460,14 +566,41 @@ export default function Edit({
 									))}
 								</div>
 
-								<div className="layout-mode-hint">
-									<span className="dashicons dashicons-info-outline" />
-									<span>
-										{__(
-											"Content editing is paused while layout mode is active.",
-											"frontis-blocks",
-										)}
-									</span>
+								<div
+									className={`layout-selection-panel ${
+										selectedGridItem ? "has-selection" : "is-empty"
+									}`}
+								>
+									<div className="layout-selection-summary">
+										<span className="dashicons dashicons-info-outline" />
+										<span>{selectedLayoutLabel}</span>
+									</div>
+
+									{selectedGridItem && (
+										<div className="layout-selection-actions">
+											<Button
+												variant="secondary"
+												icon="edit"
+												onClick={() =>
+													focusGridItem(selectedGridItem.itemId, {
+														exitLayoutMode: true,
+													})
+												}
+											>
+												{__("Edit Content", "frontis-blocks")}
+											</Button>
+											<Button
+												variant="tertiary"
+												icon="trash"
+												isDestructive
+												onClick={() =>
+													removeGridItem(selectedGridItem.itemId)
+												}
+											>
+												{__("Delete Item", "frontis-blocks")}
+											</Button>
+										</div>
+									)}
 								</div>
 							</div>
 
@@ -512,7 +645,24 @@ export default function Edit({
 									onLayoutChange={onLayoutChange}
 								>
 									{rglLayout.map((item, index) => (
-										<div key={item.i} className="rgl-item-box">
+										<div
+											key={item.i}
+											className={`rgl-item-box ${
+												selectedLayoutItemId === item.i ? "is-active" : ""
+											}`}
+											onClick={() => focusGridItem(item.i)}
+											onDoubleClick={() =>
+												focusGridItem(item.i, {
+													exitLayoutMode: true,
+												})
+											}
+											onKeyDown={(event) =>
+												handleLayoutItemKeyDown(event, item.i)
+											}
+											role="button"
+											tabIndex={0}
+											aria-pressed={selectedLayoutItemId === item.i}
+										>
 											<div className="item-label">
 												<span className="item-name">
 													{sprintf(
@@ -524,6 +674,13 @@ export default function Edit({
 													{item.i.split("-").pop()}
 												</span>
 											</div>
+											<span className="item-size">
+												{sprintf(
+													__("%1$d columns, %2$d rows", "frontis-blocks"),
+													item.w,
+													item.h,
+												)}
+											</span>
 										</div>
 									))}
 								</ReactGridLayout>
