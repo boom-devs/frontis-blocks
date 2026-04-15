@@ -1073,3 +1073,9 @@ export const FORM_FIELD_TYPES = [
 	{ label: __("Email", "frontis-block"), value: "email" },
 	{ label: __("Number", "frontis-block"), value: "number" },
 ];
+
+// Rive Animation Constants
+export const RIVE_RENDER_TYPE = [
+	{ label: __("Canvas", "frontis-blocks"), value: "canvas" },
+	{ label: __("WebGL2", "frontis-blocks"), value: "webgl2" },
+];

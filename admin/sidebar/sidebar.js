@@ -7,10 +7,10 @@ import {
 	__experimentalNavigatorButton as NavigatorButton,
 	__experimentalPaletteEdit as PaletteEdit,
 } from "@wordpress/components";
-import { useEffect, useState, useCallback, useMemo } from "@wordpress/element";
+import { useEffect, useState, useCallback, useMemo, useRef } from "@wordpress/element";
 import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
-import { loadGoogleFont, useAfterSave } from "./helper";
+import { loadGoogleFont } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
@@ -228,30 +228,171 @@ const defaultTypography = {
 	},
 };
 
+const getStoredSetting = (key, fallback) => {
+	try {
+		const storedValue = window.localStorage.getItem(key);
+		if (storedValue === null) {
+			return fallback;
+		}
+
+		const parsedValue = JSON.parse(storedValue);
+		return parsedValue ?? fallback;
+	} catch (error) {
+		return fallback;
+	}
+};
+
+const setStoredSetting = (key, value) => {
+	try {
+		window.localStorage.setItem(key, JSON.stringify(value));
+	} catch (error) {
+		// Ignore localStorage write failures and keep the in-memory state.
+	}
+};
+
+const normalizePaletteItems = (value, fallback = []) => {
+	if (Array.isArray(value)) {
+		return value;
+	}
+
+	return Array.isArray(fallback) ? fallback : [];
+};
+
+const getThemeOwnedStorageHashKey = (key) => `${key}__theme_palette_hash`;
+
+const getStoredThemeOwnedSetting = (key, fallback, themePaletteHash) => {
+	const storedValue = getStoredSetting(key, fallback);
+
+	if (!themePaletteHash) {
+		return storedValue;
+	}
+
+	const storedThemePaletteHash = getStoredSetting(
+		getThemeOwnedStorageHashKey(key),
+		"",
+	);
+
+	if (storedThemePaletteHash !== themePaletteHash) {
+		return fallback;
+	}
+
+	return storedValue;
+};
+
+const setStoredThemeOwnedSetting = (key, value, themePaletteHash) => {
+	setStoredSetting(key, value);
+	setStoredSetting(getThemeOwnedStorageHashKey(key), themePaletteHash || "");
+};
+
 function FrontisBlocksSidebar() {
 	const deviceType = useDeviceType();
-	const isAfterSave = useAfterSave();
+	const defaultThemeColors = useMemo(
+		() => normalizePaletteItems(frontisBlocksAdmin?.theme_colors, defaultColors),
+		[],
+	);
+	const defaultGradientColors = useMemo(
+		() => normalizePaletteItems(frontisBlocksAdmin?.gradients_colors),
+		[],
+	);
+	const themeColorPaletteHash = frontisBlocksAdmin?.theme_color_palette_hash || "";
+	const themeGradientPaletteHash = frontisBlocksAdmin?.theme_gradient_palette_hash || "";
 
 	// State management
-	const [globalColors, setGlobalColors] = useState(frontisBlocksAdmin?.global_colors);
-	const [customColors, setCustomColors] = useState([]);
-	const [gradientColors, setGradientColors] = useState(frontisBlocksAdmin?.gradients_colors);
-	const [customGradientColors, setCustomGradientColors] = useState([]);
+	const [globalColors, setGlobalColors] = useState(() =>
+		normalizePaletteItems(
+			getStoredThemeOwnedSetting(
+				"fb_global_colors",
+				frontisBlocksAdmin?.global_colors,
+				themeColorPaletteHash,
+			),
+			defaultThemeColors,
+		),
+	);
+	const [customColors, setCustomColors] = useState(() =>
+		normalizePaletteItems(getStoredSetting("fb_custom_colors", [])),
+	);
+	const [gradientColors, setGradientColors] = useState(() =>
+		normalizePaletteItems(
+			getStoredThemeOwnedSetting(
+				"fb_gradient_colors",
+				frontisBlocksAdmin?.gradients_colors,
+				themeGradientPaletteHash,
+			),
+			defaultGradientColors,
+		),
+	);
+	const [customGradientColors, setCustomGradientColors] = useState(() =>
+		normalizePaletteItems(getStoredSetting("fb_custom_gradient_colors", [])),
+	);
 	const [typography, setTypography] = useState(defaultTypography);
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontFamilies, setFontFamilies] = useState({});
-	const [isLoading, setIsLoading] = useState(false);
+	const [hasLoadedSettings, setHasLoadedSettings] = useState(false);
+	const lastSavedColorSettingsRef = useRef("");
+	const queuedColorSettingsRef = useRef(null);
+	const isSavingColorSettingsRef = useRef(false);
+	const hasPendingLocalColorChangesRef = useRef(false);
 
 
 	const mobilePopoverProps = { placement: 'bottom-start', offset: 8 };
 	// Memoized theme colors
 	const themeColors = useMemo(
-		() => frontisBlocksAdmin?.theme_colors || defaultColors,
+		() => defaultThemeColors,
 		[],
 	);
 
 	const isMobileViewport = useViewportMatch( 'small', '<' );
 	const popoverProps = isMobileViewport ? mobilePopoverProps : undefined;
+
+	const buildColorSettings = useCallback(() => ({
+		globalColors: normalizePaletteItems(globalColors, themeColors),
+		customColors: normalizePaletteItems(customColors),
+		gradientColors: normalizePaletteItems(gradientColors, defaultGradientColors),
+		customGradientColors: normalizePaletteItems(customGradientColors),
+	}), [
+		globalColors,
+		customColors,
+		gradientColors,
+		customGradientColors,
+		themeColors,
+		defaultGradientColors,
+	]);
+
+	const handleGlobalColorsChange = useCallback((nextGlobalColors) => {
+		const normalizedGlobalColors = normalizePaletteItems(nextGlobalColors, themeColors);
+		hasPendingLocalColorChangesRef.current = true;
+		setGlobalColors(normalizedGlobalColors);
+		setStoredThemeOwnedSetting(
+			"fb_global_colors",
+			normalizedGlobalColors,
+			themeColorPaletteHash,
+		);
+	}, [themeColors, themeColorPaletteHash]);
+
+	const handleCustomColorsChange = useCallback((nextCustomColors) => {
+		const normalizedCustomColors = normalizePaletteItems(nextCustomColors);
+		hasPendingLocalColorChangesRef.current = true;
+		setCustomColors(normalizedCustomColors);
+		setStoredSetting("fb_custom_colors", normalizedCustomColors);
+	}, []);
+
+	const handleGradientColorsChange = useCallback((nextGradientColors) => {
+		const normalizedGradientColors = normalizePaletteItems(nextGradientColors, defaultGradientColors);
+		hasPendingLocalColorChangesRef.current = true;
+		setGradientColors(normalizedGradientColors);
+		setStoredThemeOwnedSetting(
+			"fb_gradient_colors",
+			normalizedGradientColors,
+			themeGradientPaletteHash,
+		);
+	}, [defaultGradientColors, themeGradientPaletteHash]);
+
+	const handleCustomGradientColorsChange = useCallback((nextCustomGradientColors) => {
+		const normalizedCustomGradientColors = normalizePaletteItems(nextCustomGradientColors);
+		hasPendingLocalColorChangesRef.current = true;
+		setCustomGradientColors(normalizedCustomGradientColors);
+		setStoredSetting("fb_custom_gradient_colors", normalizedCustomGradientColors);
+	}, []);
 
 	// Utility to extract font families
 	const getAllFontFamilies = useCallback((fontsObject) => {
@@ -268,7 +409,7 @@ function FrontisBlocksSidebar() {
 	}, []);
 
 	const handleUpdateState = useCallback(async () => {
-		setIsLoading(true);
+		setHasLoadedSettings(false);
 		const localStorageKeys = [
 			{
 				key: "fb_global_colors",
@@ -322,32 +463,105 @@ function FrontisBlocksSidebar() {
 			},
 		];
 
-		try {
+			try {
+				const loadedSettings = {
+					globalColors: normalizePaletteItems(
+						getStoredThemeOwnedSetting(
+							"fb_global_colors",
+							frontisBlocksAdmin?.global_colors,
+							themeColorPaletteHash,
+						),
+						themeColors,
+					),
+					customColors: normalizePaletteItems(getStoredSetting("fb_custom_colors", [])),
+					gradientColors: normalizePaletteItems(
+						getStoredThemeOwnedSetting(
+							"fb_gradient_colors",
+							frontisBlocksAdmin?.gradients_colors,
+							themeGradientPaletteHash,
+						),
+						defaultGradientColors,
+					),
+				customGradientColors: normalizePaletteItems(
+					getStoredSetting("fb_custom_gradient_colors", []),
+				),
+			};
+
 			for (const {
 				key,
 				setter,
 				defaultValue,
 				api,
 				postProcess,
-			} of localStorageKeys) {
-				if (key === "fb_global_colors") {
-					setter(globalColors ?? themeColors);
-					localStorage.setItem(key, JSON.stringify(globalColors ?? themeColors));
-					if (postProcess) setTimeout(() => postProcess(globalColors ?? themeColors), 1000);
-				} else {
+				} of localStorageKeys) {
+					if (key === "fb_global_colors") {
+						const currentGlobalColors = loadedSettings.globalColors;
+						if (!hasPendingLocalColorChangesRef.current) {
+							setter(currentGlobalColors);
+							setStoredThemeOwnedSetting(key, currentGlobalColors, themeColorPaletteHash);
+						}
+						loadedSettings.globalColors = currentGlobalColors;
+						if (postProcess) setTimeout(() => postProcess(currentGlobalColors), 1000);
+					} else {
 					const res = await getGlobalStyle(api);
 					const data = res.success ? res.data : defaultValue;
+
+						if (key === "fb_custom_colors") {
+							const normalizedCustomColors = normalizePaletteItems(data);
+							if (setter && !hasPendingLocalColorChangesRef.current) {
+								setter(normalizedCustomColors);
+								setStoredSetting(key, normalizedCustomColors);
+							}
+							loadedSettings.customColors = normalizedCustomColors;
+							if (postProcess) setTimeout(() => postProcess(normalizedCustomColors), 1000);
+							continue;
+					}
+
+						if (key === "fb_gradient_colors") {
+							const normalizedGradientColors = normalizePaletteItems(data, defaultGradientColors);
+							if (setter && !hasPendingLocalColorChangesRef.current) {
+								setter(normalizedGradientColors);
+								setStoredThemeOwnedSetting(
+									key,
+									normalizedGradientColors,
+									themeGradientPaletteHash,
+								);
+							}
+							loadedSettings.gradientColors = normalizedGradientColors;
+							if (postProcess) setTimeout(() => postProcess(normalizedGradientColors), 1000);
+							continue;
+					}
+
+						if (key === "fb_custom_gradient_colors") {
+							const normalizedCustomGradientColors = normalizePaletteItems(data);
+							if (setter && !hasPendingLocalColorChangesRef.current) {
+								setter(normalizedCustomGradientColors);
+								setStoredSetting(key, normalizedCustomGradientColors);
+							}
+							loadedSettings.customGradientColors = normalizedCustomGradientColors;
+							if (postProcess) setTimeout(() => postProcess(normalizedCustomGradientColors), 1000);
+							continue;
+					}
+
 					if (setter) setter(data);
-					localStorage.setItem(key, JSON.stringify(data));
+					setStoredSetting(key, data);
 					if (postProcess) setTimeout(() => postProcess(data), 1000);
 				}
 			}
+			lastSavedColorSettingsRef.current = JSON.stringify(loadedSettings);
 		} catch (error) {
 			console.error("Error fetching global settings:", error);
 		} finally {
-			setIsLoading(false);
+			setHasLoadedSettings(true);
 		}
-	}, [deviceType, themeColors, getAllFontFamilies]);
+		}, [
+			deviceType,
+			themeColors,
+			getAllFontFamilies,
+			defaultGradientColors,
+			themeColorPaletteHash,
+			themeGradientPaletteHash,
+		]);
 
 	// Initialize on mount and device type change
 	useEffect(() => {
@@ -372,75 +586,105 @@ function FrontisBlocksSidebar() {
 		deviceType,
 	]);
 
-	// Save settings after post save
-	const handleUpdateSettings = useCallback(async () => {
-		if (!isAfterSave || !isLoading) return;
-		const settings = [
-			{
-				key: "fb_update_global_colors",
-				data: globalColors,
-				setter: setGlobalColors,
-				storeKey: "fb_global_colors",
-			},
-			{
-				key: "fb_update_custom_colors",
-				data: customColors,
-				setter: setCustomColors,
-				storeKey: "fb_custom_colors",
-			},
-			{
-				key: "fb_update_gradient_colors",
-				data: gradientColors,
-				setter: setGradientColors,
-				storeKey: "fb_gradient_colors",
-			},
-			{
-				key: "fb_update_custom_gradient_colors",
-				data: customGradientColors,
-				setter: setCustomGradientColors,
-				storeKey: "fb_custom_gradient_colors",
-			},
-		];
+	const flushQueuedColorSettings = useCallback(async () => {
+		if (isSavingColorSettingsRef.current) {
+			return;
+		}
+
+		isSavingColorSettingsRef.current = true;
 
 		try {
-			for (const { key, data, setter, storeKey } of settings) {
-				const response = await updateGlobalStyle(data, key);
-				if (response.success) {
-					setter(response.data.data);
-					localStorage.setItem(storeKey, JSON.stringify(response.data.data));
-				}
-			}
+			while (queuedColorSettingsRef.current) {
+				const { settings, signature } = queuedColorSettingsRef.current;
+				queuedColorSettingsRef.current = null;
 
-			setIsLoading(false);
+				const settingsQueue = [
+					{
+						key: "fb_update_global_colors",
+						data: normalizePaletteItems(settings.globalColors, themeColors),
+						storeKey: "fb_global_colors",
+						themePaletteHash: themeColorPaletteHash,
+					},
+					{
+						key: "fb_update_custom_colors",
+						data: normalizePaletteItems(settings.customColors),
+						storeKey: "fb_custom_colors",
+					},
+					{
+						key: "fb_update_gradient_colors",
+						data: normalizePaletteItems(settings.gradientColors, defaultGradientColors),
+						storeKey: "fb_gradient_colors",
+						themePaletteHash: themeGradientPaletteHash,
+					},
+					{
+						key: "fb_update_custom_gradient_colors",
+						data: normalizePaletteItems(settings.customGradientColors),
+						storeKey: "fb_custom_gradient_colors",
+					},
+				];
+
+				for (const { key, data, storeKey, themePaletteHash } of settingsQueue) {
+					const response = await updateGlobalStyle(data, key);
+					if (!response.success) {
+						throw new Error(`Failed to update ${key}`);
+					}
+
+					const normalizedStoredData = normalizePaletteItems(response.data?.data, data);
+
+					if (themePaletteHash) {
+						setStoredThemeOwnedSetting(storeKey, normalizedStoredData, themePaletteHash);
+						continue;
+					}
+
+					setStoredSetting(storeKey, normalizedStoredData);
+				}
+
+				lastSavedColorSettingsRef.current = signature;
+				hasPendingLocalColorChangesRef.current = false;
+			}
 		} catch (error) {
 			console.error("Error updating settings:", error);
+		} finally {
+			isSavingColorSettingsRef.current = false;
+			if (queuedColorSettingsRef.current) {
+				flushQueuedColorSettings();
+			}
 		}
-	}, [
-		isAfterSave,
-		isLoading,
-		globalColors,
-		customColors,
-		gradientColors,
-		customGradientColors,
-	]);
+		}, [
+			themeColors,
+			defaultGradientColors,
+			themeColorPaletteHash,
+			themeGradientPaletteHash,
+		]);
 
 	useEffect(() => {
-		handleUpdateSettings();
-	}, [handleUpdateSettings]);
+		if (!hasLoadedSettings) {
+			return;
+		}
+
+		const currentSettings = buildColorSettings();
+		const currentSignature = JSON.stringify(currentSettings);
+
+		if (currentSignature === lastSavedColorSettingsRef.current) {
+			return;
+		}
+
+		const saveTimeout = setTimeout(() => {
+			queuedColorSettingsRef.current = {
+				settings: currentSettings,
+				signature: currentSignature,
+			};
+			flushQueuedColorSettings();
+		}, 800);
+
+		return () => clearTimeout(saveTimeout);
+	}, [buildColorSettings, flushQueuedColorSettings, hasLoadedSettings]);
 
 	useEffect(() => {
-		setTimeout(() => {
-			if (!isLoading) {
-				setIsLoading(true);
-				wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-			}
-
-			if (globalColors === undefined) {
-				setGlobalColors(themeColors);
-			}
-		}, 5000);
-
-	}, [customColors, globalColors, gradientColors, customGradientColors]);
+		if (globalColors === undefined) {
+			setGlobalColors(themeColors);
+		}
+	}, [globalColors, themeColors]);
 
 
 	function addCustomSettingsToCoreColumns( settings, name ) {
@@ -563,12 +807,11 @@ function FrontisBlocksSidebar() {
 									</div>
 								</div>
 								
-								<TypographySettings
-									typography={typography}
-									customTypography={customTypography}
-									isAfterSave={isAfterSave}
-								/>
-							</NavigatorScreen>
+									<TypographySettings
+										typography={typography}
+										customTypography={customTypography}
+									/>
+								</NavigatorScreen>
 
 							<NavigatorScreen path="/colors">
 								<div className="fb-global-header-inner-wrapper">
@@ -590,63 +833,67 @@ function FrontisBlocksSidebar() {
 									</div>
 								</div>
 								{/* Remove TabPanel and display options vertically */}
-								<div className="fb-color-options-vertical">
-									{/* Solid Colors Section */}
-									<div className="fb-color-section-wrapper">
-										<div className="fb-color-section">
-											<PaletteEdit
-												canReset={ globalColors || themeColors }
-												canOnlyChangeValues
-												colors={ globalColors || themeColors }
-												onChange={ setGlobalColors }
-												paletteLabel={ __( 'Solid' ) }
-												paletteLabelHeadingLevel={ 3 }
-												popoverProps={ popoverProps }
-												classnames="fb-solid-color-panel"
-											/>
-										</div>
-										<div className="fb-color-section">
-											<PaletteEdit
-												colors={ customColors }
-												onChange={ setCustomColors }
-												paletteLabel={ __( 'Custom' ) }
-												paletteLabelHeadingLevel={ 3 }
-												slugPrefix="custom-"
-												popoverProps={ popoverProps }
-												classnames="fb-custom-color-panel"	
-											/>
-										</div>
-									</div>
-
-									{/* Gradient Section */}
-									<div className="fb-color-section-wrapper">
-										{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+									<div className="fb-color-options-vertical">
+										{/* Solid Colors Section */}
+										<div className="fb-color-section-wrapper">
 											<div className="fb-color-section">
-												<PaletteEdit
-													canReset={true}
-													canOnlyChangeValues
-													gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
-													onChange={ setGradientColors }
-													paletteLabel={ __( 'Gradient' ) }
-													classnames="fb-gradient-color-panel"
-													paletteLabelHeadingLevel={ 3 }
-													popoverProps={ popoverProps }
-												/>
+												<div className="fb-palette-edit-panel fb-scrollable-palette fb-global-color-panel fb-solid-color-panel">
+													<PaletteEdit
+														canReset={ globalColors || themeColors }
+														canOnlyChangeValues
+														colors={ globalColors || themeColors }
+														onChange={ handleGlobalColorsChange }
+														paletteLabel={ __( 'Solid' ) }
+														paletteLabelHeadingLevel={ 3 }
+														popoverProps={ popoverProps }
+													/>
+												</div>
 											</div>
-										)}
-										<div className="fb-color-section">
-											<PaletteEdit
-												gradients={ customGradientColors }
-												onChange={ setCustomGradientColors }
-												paletteLabel={ __( 'Custom Gradients' ) }
-												paletteLabelHeadingLevel={ 3 }
-												slugPrefix="custom-"
-												className="fb-custom-gradient-color-panel"	
-												popoverProps={ popoverProps }
-											/>
+											<div className="fb-color-section">
+												<div className="fb-palette-edit-panel fb-scrollable-palette fb-custom-color-panel">
+													<PaletteEdit
+														colors={ customColors }
+														onChange={ handleCustomColorsChange }
+														paletteLabel={ __( 'Custom' ) }
+														paletteLabelHeadingLevel={ 3 }
+														slugPrefix="custom-"
+														popoverProps={ popoverProps }
+													/>
+												</div>
+											</div>
+										</div>
+
+										{/* Gradient Section */}
+										<div className="fb-color-section-wrapper">
+											{(gradientColors.length !== 0 || frontisBlocksAdmin?.gradients_colors.length !== 0) && (
+												<div className="fb-color-section">
+													<div className="fb-palette-edit-panel fb-scrollable-palette fb-gradient-color-panel">
+														<PaletteEdit
+															canReset={true}
+															canOnlyChangeValues
+															gradients={ gradientColors || frontisBlocksAdmin?.gradients_colors }
+															onChange={ handleGradientColorsChange }
+															paletteLabel={ __( 'Gradient' ) }
+															paletteLabelHeadingLevel={ 3 }
+															popoverProps={ popoverProps }
+														/>
+													</div>
+												</div>
+											)}
+											<div className="fb-color-section">
+												<div className="fb-palette-edit-panel fb-scrollable-palette fb-custom-gradient-color-panel">
+													<PaletteEdit
+														gradients={ customGradientColors }
+														onChange={ handleCustomGradientColorsChange }
+														paletteLabel={ __( 'Custom Gradients' ) }
+														paletteLabelHeadingLevel={ 3 }
+														slugPrefix="custom-"
+														popoverProps={ popoverProps }
+													/>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
 							</NavigatorScreen>
 						</NavigatorProvider>
 

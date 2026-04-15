@@ -151,6 +151,8 @@ class Admin
         $theme_default_gradients_colors = [];
         $gutenberg_default_gutenberg_colors = [];
         $gradient_colors = [];
+        $theme_color_palette_hash = '';
+        $theme_gradient_palette_hash = '';
         $theme_json = wp_get_global_settings();
         $global_colors = get_option('fb_global_colors');
 
@@ -179,9 +181,35 @@ class Admin
             if (isset($theme_json['color']['palette'])) {
                 if (isset($theme_json['color']['palette']['theme'])) {
                     $theme_colors = $theme_json['color']['palette']['theme'];
+                    $theme_color_palette_hash = md5(wp_json_encode($theme_colors));
 
                     if (!Helper::option_exists('fb_global_colors')) {
                         update_option('fb_global_colors', $theme_colors);
+                        update_option('fb_global_colors_theme_synced', true, true);
+                        update_option('fb_global_colors_theme_palette_hash', $theme_color_palette_hash, true);
+                        $global_colors = $theme_colors;
+                    } else {
+                        $has_global_color_sync_meta = Helper::option_exists('fb_global_colors_theme_synced');
+                        $global_colors_theme_synced = $has_global_color_sync_meta
+                            ? (bool) get_option('fb_global_colors_theme_synced')
+                            : $global_colors == $theme_colors;
+
+                        if (!$has_global_color_sync_meta) {
+                            update_option('fb_global_colors_theme_synced', $global_colors_theme_synced, true);
+                        }
+
+                        $stored_theme_color_palette_hash = Helper::option_exists('fb_global_colors_theme_palette_hash')
+                            ? (string) get_option('fb_global_colors_theme_palette_hash')
+                            : '';
+
+                        if ($stored_theme_color_palette_hash !== $theme_color_palette_hash) {
+                            if ($global_colors_theme_synced) {
+                                update_option('fb_global_colors', $theme_colors, true);
+                                $global_colors = $theme_colors;
+                            }
+
+                            update_option('fb_global_colors_theme_palette_hash', $theme_color_palette_hash, true);
+                        }
                     }
                 }
             }
@@ -196,6 +224,7 @@ class Admin
             }
 
             $gradient_colors = array_merge($gutenberg_default_gutenberg_colors, $theme_default_gradients_colors);
+            $theme_gradient_palette_hash = md5(wp_json_encode($gradient_colors));
 
             $db_gradient_colors = get_option('fb_gradient_colors');
             if ($gutenberg_default_gutenberg_colors) {
@@ -223,6 +252,8 @@ class Admin
             'global_styles' => wp_get_global_styles(),
             'global_typography' => get_option('fb_globaltypo'),
             'theme_colors' => $theme_colors,
+            'theme_color_palette_hash' => $theme_color_palette_hash,
+            'theme_gradient_palette_hash' => $theme_gradient_palette_hash,
             'global_colors' => $global_colors,
             'gradients_colors' => $gradient_colors,
             'home_url' => home_url(),
@@ -913,6 +944,11 @@ class Admin
 
     public function enqueue_editor_assets()
     {
+        // Skip loading plugin assets on SureCart product edit page to avoid conflicts.
+        if (isset($_GET['page']) && $_GET['page'] === 'sc-products') {
+            return;
+        }
+
         $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '';
         $theme = wp_get_theme();
 

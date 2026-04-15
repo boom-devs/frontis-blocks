@@ -1,23 +1,19 @@
-# Changelog - Version 1.2.0 (12 March 2026)
+# Changelog - Version 1.2.1 (03 April 2026)
 
 ### 🚀 New Features & Improvements
 
 #### ✨ New Features
-- **Google Fonts Preload Toggle**: Added a toggle switch in Performance settings to enable Google Fonts preloading for better page speed.
-- **Font Loading Logic**: Optimized Google Fonts loading with high-performance `rel="preload"` support and best-practice `<noscript>` fallback.
+- **Full-site Import**: Added full-site import functionality in the Template Library for faster and smoother site building.
 
 #### 🛠️ Bug Fixes
-- **Google Fonts**: Resolved Google Fonts URL sanitization issues and fixed loading issues in the editor.
-- **Full Site Import**: Resolved SVG rendering and menu URL update issues during the import process.
-- **UI & Icons**: Improved frontend icon rendering and import modal logic.
-- **Post Category Block**: Resolved title, count, and "View All" button styling issues, along with style-3 default image fallback.
-- **Post Grid Block**: Resolved Element Visibility issues for style-2 — categories toggle now auto-enables for style-2 and disables for style-1, and empty category/tag wrappers are no longer rendered.
-- **Team Member & Testimonial Blocks**: Resolved icon rendering issues on the frontend.
+- **Slider Block Import**: Resolved import-related issues in the Slider block on both the editor and frontend.
+- **SureCart Compatibility**: Fixed conflict issues with SureCart to ensure smooth functionality.
 
 #### 📈 Improvements
-- **Security**: Added nonce validation in Global Settings AJAX and standardized nonces for better security.
-- **Code Quality**: Refactored Global Settings to remove dead code and improve maintainability.
+- **Permalink System**: Added a permalink update system for better site structure.
+- **Template Library**: Optimized Template Library metadata for improved performance.
+- **Code Cleanup**: Removed internal unused code for better maintainability.
+- **Dependencies**: Updated dependencies for better stability and build consistency.
 
 #### 📁 Refactor & Maintenance
-- **Build System**: Consolidated build system by removing redundant Grunt dependencies and pinning Composer dependencies.
-- **Version Management**: Updated plugin version to 1.2.0 across the codebase.
+- **Performance Optimization**: Improved internal structure and cleanup for a more stable release.
