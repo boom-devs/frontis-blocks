@@ -255,8 +255,19 @@ export default function Edit({
 			innerBlocks.map((block) => ({
 				block,
 				itemId: getResolvedItemId(block),
+				isStatic: !!block.attributes.isStatic,
 			})),
 		[innerBlocks],
+	);
+	const gridItemStateMap = useMemo(
+		() =>
+			new Map(
+				gridItems.map((entry) => [
+					entry.itemId,
+					{ isStatic: entry.isStatic },
+				]),
+			),
+		[gridItems],
 	);
 
 	const currentCols = getBreakpointNumber(cols, activeBreakpoint, "cols");
@@ -290,7 +301,15 @@ export default function Edit({
 	const selectedLayoutItemId = selectedGridItem?.itemId || "";
 	const selectedLayoutLabel =
 		selectedGridItemIndex >= 0
-			? sprintf(__("Item %d selected", "frontis-blocks"), selectedGridItemIndex + 1)
+			? selectedGridItem?.isStatic
+				? sprintf(
+						__("Item %d selected, locked", "frontis-blocks"),
+						selectedGridItemIndex + 1,
+					)
+				: sprintf(
+						__("Item %d selected", "frontis-blocks"),
+						selectedGridItemIndex + 1,
+					)
 			: __("Select a layout item to edit or delete it.", "frontis-blocks");
 	const effectiveLayouts = useMemo(
 		() => buildLayoutsFromGridItems(gridItems, cols, layouts),
@@ -444,8 +463,11 @@ export default function Edit({
 	);
 
 	const rglLayout = useMemo(() => {
-		return effectiveLayouts?.[activeBreakpoint] || [];
-	}, [activeBreakpoint, effectiveLayouts]);
+		return (effectiveLayouts?.[activeBreakpoint] || []).map((item) => ({
+			...item,
+			static: gridItemStateMap.get(item.i)?.isStatic || false,
+		}));
+	}, [activeBreakpoint, effectiveLayouts, gridItemStateMap]);
 
 	const blockProps = useBlockProps({
 		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${blockID} ${
@@ -635,7 +657,7 @@ export default function Edit({
 											key={item.i}
 											className={`rgl-item-box ${
 												selectedLayoutItemId === item.i ? "is-active" : ""
-											}`}
+											} ${item.static ? "is-static" : ""}`}
 											onClick={() => focusGridItem(item.i)}
 											onDoubleClick={() =>
 												focusGridItem(item.i, {
@@ -659,6 +681,11 @@ export default function Edit({
 												<span className="item-id">
 													{item.i.split("-").pop()}
 												</span>
+												{item.static && (
+													<span className="item-status">
+														{__("Locked", "frontis-blocks")}
+													</span>
+												)}
 											</div>
 											<span className="item-size">
 												{sprintf(
