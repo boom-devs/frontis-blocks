@@ -1,20 +1,53 @@
 /* Grid Item Editor Styles */
 .wp-block-frontis-blocks-grid-item {
-    &.grid-item-rendered {
-        background: #fff;
-        border: 1px solid #eee;
-        border-radius: 4px;
-        height: 100%;
-        transition: border-color 0.2s;
+	&.grid-item-rendered {
+		background: #fff;
+		border: 1px solid #d9e0e7;
+		border-radius: 8px;
+		height: 100%;
+		transition: border-color 0.2s, box-shadow 0.2s;
 
-        &:hover {
-            border-color: #1e90ff;
-        }
+		&:hover {
+			border-color: #1e90ff;
+		}
 
-        /* The block inserter placeholder inside the item */
-        .block-editor-block-list__layout {
-            height: 100%;
-            min-height: 60px;
-        }
-    }
+		&.is-selected {
+			border-color: #1e90ff;
+			box-shadow: 0 0 0 1px rgba(30, 144, 255, 0.2);
+		}
+
+		.grid-item-content {
+			height: 100%;
+			min-height: 100px;
+			padding: 14px;
+		}
+
+		.block-editor-block-list__layout {
+			height: 100%;
+			min-height: 72px;
+		}
+
+		&.is-empty {
+			background:
+				linear-gradient(180deg, rgba(248, 250, 252, 0.9) 0%, #ffffff 100%);
+			border-style: dashed;
+
+			.grid-item-content,
+			.block-editor-block-list__layout {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				min-height: 150px;
+			}
+
+			.block-list-appender {
+				position: static;
+				width: auto;
+			}
+
+			.block-editor-default-block-appender {
+				margin: 0;
+			}
+		}
+	}
 }
