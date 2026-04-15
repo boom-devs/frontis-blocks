@@ -338,9 +338,9 @@ Planned sub-focus:
 Subtask progress:
 
 - `7.1` solved on 2026-04-15: empty `grid-item` appender cleanup
-- `7.2` next: content mode spacing and visual polish for populated items
-- `7.3` pending: layout mode header and action clarity
-- `7.4` pending: quick item actions review
+- `7.2` solved on 2026-04-15: content mode spacing and visual polish for populated items
+- `7.3` solved on 2026-04-15: layout mode header and action clarity
+- `7.4` next: quick item actions review
 
 ### Item 8: Add migration compatibility layer
 Status: Pending

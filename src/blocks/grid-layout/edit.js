@@ -1,4 +1,4 @@
-import { __ } from "@wordpress/i18n";
+import { __, sprintf } from "@wordpress/i18n";
 import {
 	useBlockProps,
 	useInnerBlocksProps,
@@ -218,6 +218,11 @@ export default function Edit({
 		"rowHeight",
 	);
 	const currentGutter = getBreakpointNumber(gutter, activeBreakpoint, "gutter");
+	const totalItems = gridItems.length;
+	const activeBreakpointLabel = sprintf(
+		__("Editing %s layout", "frontis-blocks"),
+		activeBreakpoint,
+	);
 
 	useEffect(() => {
 		const nextLayouts = BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
@@ -380,8 +385,8 @@ export default function Edit({
 						icon={isLayoutMode ? "edit" : "layout"}
 						label={
 							isLayoutMode
-								? __("Finish Layout", "frontis-blocks")
-								: __("Edit Layout", "frontis-blocks")
+								? __("Back to Content", "frontis-blocks")
+								: __("Enter Layout Mode", "frontis-blocks")
 						}
 						onClick={() => setIsLayoutMode(!isLayoutMode)}
 						isPressed={isLayoutMode}
@@ -399,14 +404,48 @@ export default function Edit({
 					{isLayoutMode ? (
 						<div className="layout-overlay-mode">
 							<div className="layout-mode-header">
-								<span className="mode-badge">
-									{__("LAYOUT MODE", "frontis-blocks")}
-								</span>
+								<div className="layout-mode-intro">
+									<div className="layout-mode-badges">
+										<span className="mode-badge">
+											{__("Layout Mode", "frontis-blocks")}
+										</span>
+										<span className="mode-context">
+											{activeBreakpointLabel}
+										</span>
+									</div>
 
+									<div className="layout-mode-copy">
+										<h3 className="layout-mode-title">
+											{__("Arrange item positions visually", "frontis-blocks")}
+										</h3>
+										<p className="layout-mode-description">
+											{__(
+												"Drag items to move them, resize from the corner handle, then switch back to content mode to edit the blocks inside each item.",
+												"frontis-blocks",
+											)}
+										</p>
+									</div>
+								</div>
+
+								<div className="layout-mode-actions">
+									<Button variant="secondary" icon="plus" onClick={addGridItem}>
+										{__("Add Item", "frontis-blocks")}
+									</Button>
+									<Button
+										variant="primary"
+										onClick={() => setIsLayoutMode(false)}
+									>
+										{__("Back to Content", "frontis-blocks")}
+									</Button>
+								</div>
+							</div>
+
+							<div className="layout-mode-toolbar">
 								<div className="breakpoint-tabs">
 									{BREAKPOINTS.map((bp) => (
 										<button
 											key={bp}
+											type="button"
 											className={`breakpoint-tab ${
 												activeBreakpoint === bp ? "active" : ""
 											}`}
@@ -421,26 +460,41 @@ export default function Edit({
 									))}
 								</div>
 
-								<Button
-									variant="primary"
-									onClick={() => setIsLayoutMode(false)}
-								>
-									{__("Done", "frontis-blocks")}
-								</Button>
+								<div className="layout-mode-hint">
+									<span className="dashicons dashicons-info-outline" />
+									<span>
+										{__(
+											"Content editing is paused while layout mode is active.",
+											"frontis-blocks",
+										)}
+									</span>
+								</div>
 							</div>
 
 							<div className="layout-info-bar">
 								<span className="info-item">
-									{__("Columns:", "frontis-blocks")}{" "}
-									<strong>{currentCols}</strong>
+									<span className="info-label">
+										{__("Items", "frontis-blocks")}
+									</span>
+									<strong className="info-value">{totalItems}</strong>
 								</span>
 								<span className="info-item">
-									{__("Row Height:", "frontis-blocks")}{" "}
-									<strong>{currentRowHeight}px</strong>
+									<span className="info-label">
+										{__("Columns", "frontis-blocks")}
+									</span>
+									<strong className="info-value">{currentCols}</strong>
 								</span>
 								<span className="info-item">
-									{__("Gap:", "frontis-blocks")}{" "}
-									<strong>{currentGutter}px</strong>
+									<span className="info-label">
+										{__("Row Height", "frontis-blocks")}
+									</span>
+									<strong className="info-value">{currentRowHeight}px</strong>
+								</span>
+								<span className="info-item">
+									<span className="info-label">
+										{__("Gap", "frontis-blocks")}
+									</span>
+									<strong className="info-value">{currentGutter}px</strong>
 								</span>
 							</div>
 
@@ -457,9 +511,15 @@ export default function Edit({
 									compactor={getCompactor(compactType || null, allowOverlap)}
 									onLayoutChange={onLayoutChange}
 								>
-									{rglLayout.map((item) => (
+									{rglLayout.map((item, index) => (
 										<div key={item.i} className="rgl-item-box">
 											<div className="item-label">
+												<span className="item-name">
+													{sprintf(
+														__("Item %d", "frontis-blocks"),
+														index + 1,
+													)}
+												</span>
 												<span className="item-id">
 													{item.i.split("-").pop()}
 												</span>
