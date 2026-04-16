@@ -329,11 +329,6 @@ export default function Edit({
 		"rowHeight",
 	);
 	const currentGutter = getBreakpointNumber(gutter, activeBreakpoint, "gutter");
-	const totalItems = gridItems.length;
-	const activeBreakpointLabel = sprintf(
-		__("Editing %s layout", "frontis-blocks"),
-		activeBreakpoint,
-	);
 	const selectedGridItem = useMemo(
 		() =>
 			gridItems.find(
@@ -588,43 +583,6 @@ export default function Edit({
 				<div className="grid-editor-workspace" ref={containerRef}>
 					{isLayoutMode ? (
 						<div className="layout-overlay-mode">
-							<div className="layout-mode-header">
-								<div className="layout-mode-intro">
-									<div className="layout-mode-badges">
-										<span className="mode-badge">
-											{__("Layout Mode", "frontis-blocks")}
-										</span>
-										<span className="mode-context">
-											{activeBreakpointLabel}
-										</span>
-									</div>
-
-									<div className="layout-mode-copy">
-										<h3 className="layout-mode-title">
-											{__("Arrange item positions visually", "frontis-blocks")}
-										</h3>
-										<p className="layout-mode-description">
-											{__(
-												"Drag items to move them, resize from the corner handle, then switch back to content mode to edit the blocks inside each item.",
-												"frontis-blocks",
-											)}
-										</p>
-									</div>
-								</div>
-
-								<div className="layout-mode-actions">
-									<Button variant="secondary" icon="plus" onClick={addGridItem}>
-										{__("Add Item", "frontis-blocks")}
-									</Button>
-									<Button
-										variant="primary"
-										onClick={() => setIsLayoutMode(false)}
-									>
-										{__("Back to Content", "frontis-blocks")}
-									</Button>
-								</div>
-							</div>
-
 							<div className="layout-mode-toolbar">
 								<div className="breakpoint-tabs">
 									{BREAKPOINTS.map((bp) => (
@@ -681,33 +639,6 @@ export default function Edit({
 										</div>
 									)}
 								</div>
-							</div>
-
-							<div className="layout-info-bar">
-								<span className="info-item">
-									<span className="info-label">
-										{__("Items", "frontis-blocks")}
-									</span>
-									<strong className="info-value">{totalItems}</strong>
-								</span>
-								<span className="info-item">
-									<span className="info-label">
-										{__("Columns", "frontis-blocks")}
-									</span>
-									<strong className="info-value">{currentCols}</strong>
-								</span>
-								<span className="info-item">
-									<span className="info-label">
-										{__("Row Height", "frontis-blocks")}
-									</span>
-									<strong className="info-value">{currentRowHeight}px</strong>
-								</span>
-								<span className="info-item">
-									<span className="info-label">
-										{__("Gap", "frontis-blocks")}
-									</span>
-									<strong className="info-value">{currentGutter}px</strong>
-								</span>
 							</div>
 
 							{mounted && width > 0 && (

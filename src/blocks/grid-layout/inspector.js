@@ -12,6 +12,7 @@ import { useDeviceType } from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 	const {
+		cols,
 		rowHeight,
 		gutter,
 		compactType,
@@ -61,13 +62,8 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 					resetFallbackValue={"10"}
 					isRangeUnit={false}
 				/>
-			</PanelBody>
 
-			<PanelBody
-				title={__("Layout Behavior", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<SelectControl
+								<SelectControl
 					label={__("Compaction Type", "frontis-blocks")}
 					value={compactType || ""}
 					options={[
