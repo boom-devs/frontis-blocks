@@ -1,13 +1,13 @@
 # Grid Layout Builder Roadmap
 
-Status: In Progress
+Status: Implemented
 Date: 2026-04-15
 Blocks: `frontis-blocks/grid-layout` and `frontis-blocks/grid-item`
 Goal: Build an editor-only drag/resize grid builder where each grid item can contain any Gutenberg blocks, while the frontend renders from stored layout data using CSS Grid.
 
 ## Progress Snapshot
 
-Completed on 2026-04-15:
+Implemented on 2026-04-15:
 
 - `Item 1` solved
 - `Item 2` solved
@@ -15,10 +15,15 @@ Completed on 2026-04-15:
 - `Item 4` solved
 - `Item 5` solved
 - `Item 6` solved
+- `Item 7` completed
+- `Item 8` completed
+- `Item 9` completed
 
-Current focus:
+Implementation summary:
 
-- `Item 7: Refine two-mode editor UX`
+- all roadmap items in this document are implemented
+- parent-driven layout state, two-mode editing, migration fallback, and item-level controls are in place
+- remaining work is manual validation, regression checking, and release verification
 
 ## Product Direction
 
@@ -39,14 +44,13 @@ Core decision:
 
 ## Current Reality
 
-The current implementation already has a basic parent/child block structure, but it is not stable enough for the intended builder experience.
+The implementation covered by this roadmap is now in place.
 
-Known blockers:
+Remaining follow-up:
 
-- two-mode editor UX still feels rough
-- content mode still needs cleaner authoring polish
-- migration compatibility should be validated against older saved blocks
-- item-level controls are not added yet
+- run manual editor and frontend validation from the checklist below
+- confirm save/reload persistence across breakpoints
+- confirm frontend output matches saved layout closely
 
 ## Final Architecture
 
@@ -428,6 +432,9 @@ Each implementation item should be verified against this list:
 
 ## Next Action
 
-Start with `Item 7: Refine two-mode editor UX`.
+Roadmap implementation is complete.
 
-This is the next blocker because the foundation is now stable, but the editing experience still needs to feel cleaner and more intentional before adding more features.
+Next action is validation and release readiness:
+
+- run the manual checklist
+- resolve any issues found during build, editor QA, or frontend QA

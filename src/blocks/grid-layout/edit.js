@@ -315,6 +315,10 @@ export default function Edit({
 		() => buildLayoutsFromGridItems(gridItems, cols, layouts),
 		[cols, gridItems, layouts],
 	);
+	const layoutCompactor = useMemo(
+		() => getCompactor(compactType || null, allowOverlap),
+		[allowOverlap, compactType],
+	);
 
 	useEffect(() => {
 		if (blockID) {
@@ -649,7 +653,10 @@ export default function Edit({
 										rowHeight: currentRowHeight,
 										margin: [currentGutter, currentGutter],
 									}}
-									compactor={getCompactor(compactType || null, allowOverlap)}
+									resizeConfig={{
+										handles: ["w", "e", "se"],
+									}}
+									compactor={layoutCompactor}
 									onLayoutChange={onLayoutChange}
 								>
 									{rglLayout.map((item, index) => (
