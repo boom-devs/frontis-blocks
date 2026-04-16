@@ -2,14 +2,15 @@ import { __ } from '@wordpress/i18n';
 
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
+import { applyFilters } from '@wordpress/hooks';
 import loadGoogleFont from '@Utils/loadGoogleFont';
-// import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generatePricingTableStyle from "./styling";
 import { pricingPresetStyles } from './presets';
 import './editor.scss';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 
 import LayoutOneEdit from './layouts/layout-one/edit';
 import LayoutTwoEdit from './layouts/layout-two/edit';
@@ -87,11 +88,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
     /** Start Generate Block Style */
     useEffect(() => {
-        if (blockID) {
+        if (!blockID) return;
+        const timeoutId = setTimeout(() => {
             const css = generatePricingTableStyle(attributes);
-            setAttributes({ blockStyle: css });
-        }
-    }, [attributes, blockID]);
+            if (css !== blockStyle) {
+                setAttributes({ blockStyle: css });
+            }
+        }, 80);
+
+        return () => clearTimeout(timeoutId);
+    }, [attributes, blockID, blockStyle, setAttributes]);
     /** End Generate Block Style */
 
 
@@ -105,6 +111,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     */
     const panelRef = useRef(null);
     SwitchToBlockSettings(panelRef);
+
+    // Conditional rendering
+    const multiColumnPricingTableAvailable = applyFilters('frontisblocks-multi-column-pricing-table-available', false);
+    
+    if(!multiColumnPricingTableAvailable) {
+        return (
+            <UpgradeToProPopup />
+        )
+    }
 
     // Conditional rendering based on layout/preset
     const renderLayout = () => {

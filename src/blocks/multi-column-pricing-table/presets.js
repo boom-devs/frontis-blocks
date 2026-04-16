@@ -224,6 +224,7 @@ export const pricingPresetStyles = {
         priceColumnDesktopMargin: {top: '0', bottom: '0', left: '0', right: '0'},
         headerAlignment: 'left',
         activationContentAlignment: 'left',
+        pricingHeaderBorderRadiusDesktop: {top: '0', bottom: '0', left: '0', right: '0'},
         pricingHeaderBorderDesktop: {top: '0', bottom: '1', left: '0', right: '1'},
         pricingHeaderBorderTablet: {top: '0', bottom: '1', left: '0', right: '1'},
         pricingHeaderBorderColor: '#C3C8D2',
