@@ -100,6 +100,17 @@ const attributes = {
 	},
 	/** End Default item width */
 
+	/** Start Default item height */
+	defaultItemHeight: {
+		type: 'object',
+		default: {
+			Desktop: '4',
+			Tablet: '4',
+			Mobile: '4'
+		}
+	},
+	/** End Default item height */
+
 	// Layout behavior
 	compactType: {
 		type: 'string',

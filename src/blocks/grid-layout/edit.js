@@ -43,6 +43,11 @@ const DEFAULT_NEW_ITEM_WIDTH = {
 	Tablet: 4,
 	Mobile: 4,
 };
+const DEFAULT_NEW_ITEM_HEIGHT = {
+	Desktop: 4,
+	Tablet: 4,
+	Mobile: 4,
+};
 
 const getBreakpointNumber = (values, breakpoint, settingKey) =>
 	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
@@ -56,6 +61,18 @@ const getDefaultItemWidth = (values, breakpoint, colsCount) => {
 			: fallbackWidth;
 
 	return Math.min(Math.max(resolvedWidth, 1), colsCount);
+};
+
+const getDefaultItemHeight = (values, breakpoint) => {
+	const configuredHeight = Number(values?.[breakpoint]);
+	const fallbackHeight = DEFAULT_NEW_ITEM_HEIGHT[breakpoint];
+
+	return Math.max(
+		Number.isFinite(configuredHeight) && configuredHeight > 0
+			? configuredHeight
+			: fallbackHeight,
+		1,
+	);
 };
 
 const getResolvedItemId = (block) =>
@@ -91,6 +108,7 @@ const createLayoutItemFromBlock = (
 	colsCount,
 	currentLayout,
 	defaultItemWidth,
+	defaultItemHeight,
 ) => {
 	const itemId = getResolvedItemId(block);
 	const fallbackY = getNextRow(currentLayout);
@@ -99,6 +117,7 @@ const createLayoutItemFromBlock = (
 		breakpoint,
 		colsCount,
 	);
+	const defaultHeight = getDefaultItemHeight(defaultItemHeight, breakpoint);
 
 	if (breakpoint === "Desktop") {
 		return normalizeLayoutItem(
@@ -111,7 +130,7 @@ const createLayoutItemFromBlock = (
 					? Number(block.attributes.gridRowStart)
 					: fallbackY,
 				w: Number(block.attributes.gridColumnSpan) || defaultWidth,
-				h: Number(block.attributes.gridRowSpan) || 4,
+				h: Number(block.attributes.gridRowSpan) || defaultHeight,
 			},
 			colsCount,
 			fallbackY,
@@ -124,7 +143,7 @@ const createLayoutItemFromBlock = (
 			x: 0,
 			y: fallbackY,
 			w: defaultWidth,
-			h: 4,
+			h: defaultHeight,
 		},
 		colsCount,
 		fallbackY,
@@ -136,6 +155,7 @@ const buildLayoutsFromGridItems = (
 	cols,
 	layouts = {},
 	defaultItemWidth = {},
+	defaultItemHeight = {},
 ) =>
 	BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
 		const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
@@ -168,6 +188,7 @@ const buildLayoutsFromGridItems = (
 					breakpointCols,
 					nextLayout,
 					defaultItemWidth,
+					defaultItemHeight,
 				),
 			);
 			return nextLayout;
@@ -234,6 +255,7 @@ export default function Edit({
 		gutter,
 		gutterUnits,
 		defaultItemWidth,
+		defaultItemHeight,
 		compactType,
 		allowOverlap,
 		layouts,
@@ -267,6 +289,16 @@ export default function Edit({
 			},
 			{},
 		);
+		const normalizedDefaultItemHeight = BREAKPOINTS.reduce(
+			(nextHeights, breakpoint) => {
+				nextHeights[breakpoint] = String(
+					getDefaultItemHeight(defaultItemHeight, breakpoint),
+				);
+
+				return nextHeights;
+			},
+			{},
+		);
 
 		if (needsUnitNormalization(rowHeightUnits)) {
 			nextAttributes.rowHeightUnits = getPxResponsiveUnits();
@@ -282,11 +314,24 @@ export default function Edit({
 		) {
 			nextAttributes.defaultItemWidth = normalizedDefaultItemWidth;
 		}
+		if (
+			JSON.stringify(defaultItemHeight || {}) !==
+			JSON.stringify(normalizedDefaultItemHeight)
+		) {
+			nextAttributes.defaultItemHeight = normalizedDefaultItemHeight;
+		}
 
 		if (Object.keys(nextAttributes).length > 0) {
 			setAttributes(nextAttributes);
 		}
-	}, [cols, defaultItemWidth, gutterUnits, rowHeightUnits, setAttributes]);
+	}, [
+		cols,
+		defaultItemHeight,
+		defaultItemWidth,
+		gutterUnits,
+		rowHeightUnits,
+		setAttributes,
+	]);
 
 	const [isLayoutMode, setIsLayoutMode] = useState(false);
 	const [activeBreakpoint, setActiveBreakpoint] = useState("Desktop");
@@ -388,8 +433,15 @@ export default function Edit({
 					)
 			: __("Select a layout item to edit or delete it.", "frontis-blocks");
 	const baseLayouts = useMemo(
-		() => buildLayoutsFromGridItems(gridItems, cols, layouts, defaultItemWidth),
-		[cols, defaultItemWidth, gridItems, layouts],
+		() =>
+			buildLayoutsFromGridItems(
+				gridItems,
+				cols,
+				layouts,
+				defaultItemWidth,
+				defaultItemHeight,
+			),
+		[cols, defaultItemHeight, defaultItemWidth, gridItems, layouts],
 	);
 	const layoutCompactor = useMemo(
 		() => getCompactor(compactType || null, allowOverlap),
@@ -479,15 +531,26 @@ export default function Edit({
 			"Desktop",
 			getBreakpointNumber(cols, "Desktop", "cols"),
 		);
+		const desktopDefaultHeight = getDefaultItemHeight(
+			defaultItemHeight,
+			"Desktop",
+		);
 		const newBlock = createBlock("frontis-blocks/grid-item", {
 			gridColumnSpan: desktopDefaultWidth,
-			gridRowSpan: 4,
+			gridRowSpan: desktopDefaultHeight,
 			gridColumnStart: 0,
 			gridRowStart: 0,
 		});
 		insertBlock(newBlock, innerBlocks.length, clientId);
 		setIsLayoutMode(true);
-	}, [clientId, cols, defaultItemWidth, innerBlocks.length, insertBlock]);
+	}, [
+		clientId,
+		cols,
+		defaultItemHeight,
+		defaultItemWidth,
+		innerBlocks.length,
+		insertBlock,
+	]);
 
 	const focusGridItem = useCallback(
 		(itemId, { exitLayoutMode = false } = {}) => {

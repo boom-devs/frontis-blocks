@@ -105,7 +105,7 @@ Recommended implementation order:
 
 ## Settings Spec
 
-### 1. Container Padding
+### 1. Container Padding (Done)
 
 Priority: High
 Placement: Parent inspector, `Grid Settings`
@@ -262,7 +262,7 @@ Acceptance criteria:
 - The setting does not interfere with child `grid-item` content padding.
 - The first implementation stays inside the real limits of `react-grid-layout`.
 
-### 2. Default New Item Width
+### 2. Default New Item Width(Done)
 
 Priority: High
 Placement: Parent inspector, `Grid Settings` or `Layout Behavior`
