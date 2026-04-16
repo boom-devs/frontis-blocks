@@ -54,63 +54,6 @@ const attributes = {
 		}
 	},
 
-	// start Responsive container padding for layout/content grid parity
-	containerPaddingX: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	containerPaddingXUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	containerPaddingY: {
-		type: 'object',
-		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
-		}
-	},
-	containerPaddingYUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-	/** end Responsive container padding */
-
-	/** Start Default item width */
-	defaultItemWidth: {
-		type: 'object',
-		default: {
-			Desktop: '3',
-			Tablet: '4',
-			Mobile: '4'
-		}
-	},
-	/** End Default item width */
-
-	/** Start Default item height */
-	defaultItemHeight: {
-		type: 'object',
-		default: {
-			Desktop: '4',
-			Tablet: '4',
-			Mobile: '4'
-		}
-	},
-	/** End Default item height */
-
 	// Layout behavior
 	compactType: {
 		type: 'string',

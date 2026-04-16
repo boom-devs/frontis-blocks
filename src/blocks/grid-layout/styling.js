@@ -12,39 +12,6 @@ const DEFAULT_GRID_SETTINGS = {
 const getBreakpointNumber = (values, breakpoint, settingKey) =>
 	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
 
-const hasResponsiveValue = (value) =>
-	value !== undefined && value !== null && value !== "";
-
-const getResponsiveSize = (values, units, breakpoint) =>
-	hasResponsiveValue(values?.[breakpoint])
-		? `${values[breakpoint]}${units?.[breakpoint] || "px"}`
-		: "";
-
-const getContainerPaddingValue = (
-	paddingX,
-	paddingXUnits,
-	paddingY,
-	paddingYUnits,
-	breakpoint,
-) => {
-	const horizontalPadding = getResponsiveSize(
-		paddingX,
-		paddingXUnits,
-		breakpoint,
-	);
-	const verticalPadding = getResponsiveSize(
-		paddingY,
-		paddingYUnits,
-		breakpoint,
-	);
-
-	if (!horizontalPadding && !verticalPadding) {
-		return "";
-	}
-
-	return `${verticalPadding || "0"} ${horizontalPadding || "0"}`;
-};
-
 const getContainerSelectors = (blockID) => [
 	`.${blockID}.fb-grid-layout-container`,
 	`.${blockID} .grid-content-layer.fb-grid-layout-container`,
@@ -80,10 +47,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 		rowHeightUnits,
 		gutter,
 		gutterUnits,
-		containerPaddingX,
-		containerPaddingXUnits,
-		containerPaddingY,
-		containerPaddingYUnits,
 		layouts,
 	} = attributes;
 	const layoutStore = resolvedLayouts ?? layouts;
@@ -112,27 +75,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const desktopGapUnit = gutterUnits?.Desktop || "px";
 	const tabletGapUnit = gutterUnits?.Tablet || "px";
 	const mobileGapUnit = gutterUnits?.Mobile || "px";
-	const desktopContainerPadding = getContainerPaddingValue(
-		containerPaddingX,
-		containerPaddingXUnits,
-		containerPaddingY,
-		containerPaddingYUnits,
-		"Desktop",
-	);
-	const tabletContainerPadding = getContainerPaddingValue(
-		containerPaddingX,
-		containerPaddingXUnits,
-		containerPaddingY,
-		containerPaddingYUnits,
-		"Tablet",
-	);
-	const mobileContainerPadding = getContainerPaddingValue(
-		containerPaddingX,
-		containerPaddingXUnits,
-		containerPaddingY,
-		containerPaddingYUnits,
-		"Mobile",
-	);
 
 	let css = `
 		${containerSelectors.join(", ")} {
@@ -140,7 +82,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
 			grid-auto-rows: ${rowHeightDesktop}${desktopUnit};
 			gap: ${gutterDesktop}${desktopGapUnit};
-			${desktopContainerPadding ? `padding: ${desktopContainerPadding};` : ""}
 		}
 	`;
 
@@ -152,7 +93,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 					grid-template-columns: repeat(${colsTablet}, 1fr);
 					grid-auto-rows: ${rowHeightTablet}${tabletUnit};
 					gap: ${gutterTablet}${tabletGapUnit};
-					${tabletContainerPadding ? `padding: ${tabletContainerPadding};` : ""}
 				}
 	`;
 	css = appendLayoutRules(css, blockID, layoutStore?.Tablet || []);
@@ -163,7 +103,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 					grid-template-columns: repeat(${colsMobile}, 1fr);
 					grid-auto-rows: ${rowHeightMobile}${mobileUnit};
 					gap: ${gutterMobile}${mobileGapUnit};
-					${mobileContainerPadding ? `padding: ${mobileContainerPadding};` : ""}
 				}
 	`;
 	css = appendLayoutRules(css, blockID, layoutStore?.Mobile || []);

@@ -12,23 +12,13 @@ import { useDeviceType } from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 	const {
-		cols,
 		rowHeight,
 		gutter,
-		containerPaddingX,
-		containerPaddingXUnits,
-		containerPaddingY,
-		containerPaddingYUnits,
-		defaultItemWidth,
-		defaultItemHeight,
 		compactType,
 		allowOverlap,
 	} = attributes;
 
 	const deviceType = useDeviceType();
-	const currentDeviceColumns = Math.max(Number(cols?.[deviceType]) || 1, 1);
-	const defaultNewItemWidthFallback =
-		deviceType === "Desktop" ? "3" : "4";
 
 	/**
 	 * Inspector General Controls
@@ -71,81 +61,12 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 					resetFallbackValue={"10"}
 					isRangeUnit={false}
 				/>
-
-				<FB_Range
-					min={0}
-					max={1000}
-					label={__("Horizontal Padding", "frontis-blocks")}
-					rangeValue={containerPaddingX}
-					onChangeHandler={(value) =>
-						setAttributes({ containerPaddingX: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ containerPaddingXUnits: value })
-					}
-					deviceType={deviceType}
-					units={containerPaddingXUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
-
-				<FB_Range
-					min={0}
-					max={1000}
-					label={__("Vertical Padding", "frontis-blocks")}
-					rangeValue={containerPaddingY}
-					onChangeHandler={(value) =>
-						setAttributes({ containerPaddingY: value })
-					}
-					rangeUnitHandler={(value) =>
-						setAttributes({ containerPaddingYUnits: value })
-					}
-					deviceType={deviceType}
-					units={containerPaddingYUnits}
-					setAttributes={setAttributes}
-					rangeStep={1}
-					resetFallbackValue={""}
-				/>
 			</PanelBody>
 
 			<PanelBody
 				title={__("Layout Behavior", "frontis-blocks")}
 				initialOpen={false}
 			>
-				<FB_Range
-					min={1}
-					max={currentDeviceColumns}
-					label={__("Default New Item Width", "frontis-blocks")}
-					rangeValue={defaultItemWidth}
-					onChangeHandler={(value) =>
-						setAttributes({ defaultItemWidth: value })
-					}
-					deviceType={deviceType}
-					rangeStep={1}
-					resetFallbackValue={String(
-						Math.min(
-							Number(defaultNewItemWidthFallback),
-							currentDeviceColumns,
-						),
-					)}
-					isRangeUnit={false}
-				/>
-
-				<FB_Range
-					min={1}
-					max={1000}
-					label={__("Default Item Height", "frontis-blocks")}
-					rangeValue={defaultItemHeight}
-					onChangeHandler={(value) =>
-						setAttributes({ defaultItemHeight: value })
-					}
-					deviceType={deviceType}
-					rangeStep={1}
-					resetFallbackValue={"4"}
-					isRangeUnit={false}
-				/>
-
 				<SelectControl
 					label={__("Compaction Type", "frontis-blocks")}
 					value={compactType || ""}
