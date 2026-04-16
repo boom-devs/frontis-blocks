@@ -64,15 +64,15 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 			>
 				<SelectControl
 					label={__("Compaction Type", "frontis-blocks")}
-					value={compactType}
+					value={compactType || ""}
 					options={[
 						{ label: __("None (Free Placement)", "frontis-blocks"), value: "" },
 						{ label: __("Vertical", "frontis-blocks"), value: "vertical" },
 						{ label: __("Horizontal", "frontis-blocks"), value: "horizontal" },
 					]}
-					onChange={(val) => setAttributes({ compactType: val || null })}
+					onChange={(val) => setAttributes({ compactType: val })}
 					help={__(
-						"Determines how items compact when laid out.",
+						"Vertical keeps items packed upward, Horizontal packs left-to-right, and None keeps a looser free placement.",
 						"frontis-blocks",
 					)}
 				/>
@@ -80,7 +80,10 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 					label={__("Allow Overlap", "frontis-blocks")}
 					checked={allowOverlap}
 					onChange={(val) => setAttributes({ allowOverlap: val })}
-					help={__("Allow items to overlap each other.", "frontis-blocks")}
+					help={__(
+						"When disabled, dragged items push other items out of the way. When enabled, items can stack on top of each other.",
+						"frontis-blocks",
+					)}
 				/>
 				<Button
 					variant="secondary"

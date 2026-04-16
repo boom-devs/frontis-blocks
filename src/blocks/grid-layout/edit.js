@@ -150,6 +150,32 @@ const buildLayoutsFromGridItems = (gridItems, cols, layouts = {}) =>
 		return updatedLayouts;
 	}, {});
 
+const compactLayouts = (layouts = {}, cols, gridItemStateMap, compactor) =>
+	BREAKPOINTS.reduce((nextLayouts, breakpoint) => {
+		const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
+		const sourceLayout = layouts?.[breakpoint] || [];
+		const compactedLayout = compactor.compact(
+			sourceLayout.map((item) => ({
+				...item,
+				static: gridItemStateMap.get(item.i)?.isStatic || false,
+			})),
+			breakpointCols,
+		);
+		const compactedMap = new Map(
+			compactedLayout.map((item) => [
+				item.i,
+				normalizeLayoutItem(item, breakpointCols),
+			]),
+		);
+
+		nextLayouts[breakpoint] = sourceLayout.map(
+			(item) =>
+				compactedMap.get(item.i) || normalizeLayoutItem(item, breakpointCols),
+		);
+
+		return nextLayouts;
+	}, {});
+
 const areLayoutsEqual = (firstLayouts, secondLayouts) =>
 	BREAKPOINTS.every((breakpoint) => {
 		const first = firstLayouts?.[breakpoint] || [];
@@ -311,13 +337,18 @@ export default function Edit({
 						selectedGridItemIndex + 1,
 					)
 			: __("Select a layout item to edit or delete it.", "frontis-blocks");
-	const effectiveLayouts = useMemo(
+	const baseLayouts = useMemo(
 		() => buildLayoutsFromGridItems(gridItems, cols, layouts),
 		[cols, gridItems, layouts],
 	);
 	const layoutCompactor = useMemo(
 		() => getCompactor(compactType || null, allowOverlap),
 		[allowOverlap, compactType],
+	);
+	const effectiveLayouts = useMemo(
+		() =>
+			compactLayouts(baseLayouts, cols, gridItemStateMap, layoutCompactor),
+		[baseLayouts, cols, gridItemStateMap, layoutCompactor],
 	);
 
 	useEffect(() => {
