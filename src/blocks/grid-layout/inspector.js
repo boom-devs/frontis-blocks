@@ -20,6 +20,7 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 		containerPaddingY,
 		containerPaddingYUnits,
 		defaultItemWidth,
+		defaultItemHeight,
 		compactType,
 		allowOverlap,
 	} = attributes;
@@ -128,6 +129,20 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 							currentDeviceColumns,
 						),
 					)}
+					isRangeUnit={false}
+				/>
+
+				<FB_Range
+					min={1}
+					max={1000}
+					label={__("Default New Item Height", "frontis-blocks")}
+					rangeValue={defaultItemHeight}
+					onChangeHandler={(value) =>
+						setAttributes({ defaultItemHeight: value })
+					}
+					deviceType={deviceType}
+					rangeStep={1}
+					resetFallbackValue={"4"}
 					isRangeUnit={false}
 				/>
 
