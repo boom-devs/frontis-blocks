@@ -109,42 +109,158 @@ Recommended implementation order:
 
 Priority: High
 Placement: Parent inspector, `Grid Settings`
-Type: Responsive range control
+Type: Responsive container spacing control
 
 Purpose:
 
 - Add inner spacing between the grid container edge and the first/last items.
 
+Ownership:
+
+- This belongs to the parent `grid-layout` block.
+- It is not the same as the existing child `grid-item` padding control.
+
 Why it matters:
 
 - Right now the user only controls column count, row height, and gap.
 - Without container padding, the layout can feel visually tight against the block edge.
+- Child item padding only adds space inside each item's own content area.
+- Child item padding cannot correctly create outer spacing between the grid container and the first or last items.
 
-Recommended data model:
+Reference review: `advanced-heading`
+
+- `advanced-heading` global wrapper padding is applied on the wrapper element, not on the child text node.
+- The wrapper exists in:
+  - `src/blocks/advanced-heading/edit.js`
+  - `src/blocks/advanced-heading/save.js`
+  - `src/blocks/advanced-heading/render.php`
+- The padding attributes there are:
+  - `headingGlobalPaddingUnits`
+  - `headingGlobalPaddingDesktop`
+  - `headingGlobalPaddingTablet`
+  - `headingGlobalPaddingMobile`
+  - `headingGlobalPaddingLink`
+- That means the `advanced-heading` spacing pattern uses `5` attributes for one padding group.
+- In the inspector, it is managed with `FB_Spacing` plus explicit handler functions.
+- In styling, it is turned into shorthand CSS and applied to `.fb-advanced-wrapper`.
+
+Important implementation decision for `grid-layout`
+
+- Do not copy the `advanced-heading` 4-side padding model exactly for `grid-layout`.
+- Reason: `react-grid-layout` only supports `gridConfig.containerPadding: [x, y]`.
+- It does not support full `top/right/bottom/left` container padding.
+- If `grid-layout` uses full 4-side saved CSS but the editor engine only understands `[x, y]`, layout mode and content/frontend mode can drift apart.
+
+Chosen best approach
+
+- Use responsive `horizontal` and `vertical` container padding on the parent block.
+- Keep the first implementation aligned with `react-grid-layout`.
+- Reuse existing shared inspector controls instead of adding a custom one-off spacing UI.
+
+Recommended data model for `grid-layout`
+
+This is the recommended model to implement:
 
 ```js
-containerPadding: {
+containerPaddingX: {
 	Desktop: "20",
 	Tablet: "16",
 	Mobile: "12",
 }
-containerPaddingUnits: {
+containerPaddingXUnits: {
+	Desktop: "px",
+	Tablet: "px",
+	Mobile: "px",
+}
+containerPaddingY: {
+	Desktop: "20",
+	Tablet: "16",
+	Mobile: "12",
+}
+containerPaddingYUnits: {
 	Desktop: "px",
 	Tablet: "px",
 	Mobile: "px",
 }
 ```
 
+Attribute count
+
+- `advanced-heading` style clone would need `5` attributes.
+- Recommended `grid-layout` approach needs `4` attributes:
+  - `containerPaddingX`
+  - `containerPaddingXUnits`
+  - `containerPaddingY`
+  - `containerPaddingYUnits`
+
+Why `4` is better here:
+
+- It maps directly to `react-grid-layout` `containerPadding: [x, y]`
+- It keeps layout mode and content/frontend output aligned
+- It avoids fake support for unsupported per-side container padding
+- It still gives useful control without overcomplicating the first version
+
 Implementation notes:
 
-- Apply to content mode generated CSS.
-- Apply to layout mode canvas config so editor and content view stay aligned.
+- Keep the existing child `grid-item` padding as item content padding, not container padding.
+- Add the new attributes to `src/blocks/grid-layout/attributes.js`.
+- Keep the values on the parent `grid-layout` block only.
+- Use `FB_Range` in `src/blocks/grid-layout/inspector.js` for:
+  - `Horizontal Padding`
+  - `Vertical Padding`
+- Reuse the existing `useDeviceType()` flow already used in the block inspector.
+- Pass the values into `ReactGridLayout` through `gridConfig.containerPadding`.
+- Convert the same values into CSS padding in `src/blocks/grid-layout/styling.js`.
 - Avoid using different math between editor preview and saved frontend CSS.
+
+Inspector management plan
+
+- Do not use `FB_Spacing` for the first `grid-layout` implementation.
+- `FB_Spacing` is correct for `advanced-heading` because its wrapper CSS can truly support 4-side values.
+- For `grid-layout`, use two `FB_Range` controls instead:
+  - one for horizontal padding
+  - one for vertical padding
+- This keeps the inspector UI simple and matches the layout engine capability.
+
+Styling and DOM implementation plan
+
+- Generate responsive CSS padding from the chosen `x` and `y` values:
+
+```css
+padding: <vertical> <horizontal>;
+```
+
+- Apply that padding only to the real grid container selectors:
+  - frontend: `.${blockID}.fb-grid-layout-container`
+  - editor content mode: `.${blockID} .grid-content-layer.fb-grid-layout-container`
+- Do not move this setting into child `grid-item`.
+- Do not apply it as item content padding.
+- Keep `layout mode` aligned by sending the same values into:
+
+```js
+gridConfig.containerPadding = [horizontalPadding, verticalPadding];
+```
+
+Implementation file plan
+
+1. `src/blocks/grid-layout/attributes.js`
+   Add the 4 new responsive attributes.
+2. `src/blocks/grid-layout/inspector.js`
+   Add two `FB_Range` controls under `Grid Settings`.
+3. `src/blocks/grid-layout/edit.js`
+   Read the active breakpoint horizontal and vertical padding values and pass them into `ReactGridLayout`.
+4. `src/blocks/grid-layout/styling.js`
+   Generate responsive CSS `padding` for the frontend and editor content grid selectors.
+5. Optional future phase:
+   If per-side container padding is ever required, design it as a separate enhanced feature after the `x/y` version is proven stable.
 
 Acceptance criteria:
 
-- Changing padding updates layout mode and content mode consistently.
+- Changing horizontal or vertical padding updates layout mode and content mode consistently.
 - Saved output keeps the same visual spacing as editor.
+- Frontend and editor content mode match closely.
+- The setting does not interfere with child `grid-item` content padding.
+- The first implementation stays inside the real limits of `react-grid-layout`.
 
 ### 2. Default New Item Width
 
