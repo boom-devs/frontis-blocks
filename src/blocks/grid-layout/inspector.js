@@ -135,7 +135,7 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 				<FB_Range
 					min={1}
 					max={1000}
-					label={__("Default New Item Height", "frontis-blocks")}
+					label={__("Default Item Height", "frontis-blocks")}
 					rangeValue={defaultItemHeight}
 					onChangeHandler={(value) =>
 						setAttributes({ defaultItemHeight: value })
