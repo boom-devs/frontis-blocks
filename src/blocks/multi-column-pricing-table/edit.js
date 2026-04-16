@@ -14,8 +14,7 @@ import './editor.scss';
 import LayoutOneEdit from './layouts/layout-one/edit';
 import LayoutTwoEdit from './layouts/layout-two/edit';
 import LayoutThreeEdit from './layouts/layout-three/edit';
-// import LayoutFourEdit from './layouts/layout-four/edit';
-// import LayoutFiveEdit from './layouts/layout-five/edit';
+import LayoutFourEdit from './layouts/layout-four/edit';
 
 const loadedFonts = new Set();
 
@@ -116,10 +115,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 return <LayoutTwoEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
             case 'preset-2':
                 return <LayoutThreeEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
-            // case 'preset-3':
-            //     return <LayoutFourEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
-            // case 'preset-4':
-            //     return <LayoutFiveEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
+            case 'preset-3':
+                return <LayoutFourEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
             default:
                 return <LayoutOneEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
         }

@@ -46,17 +46,29 @@ const attributes = {
 		type: 'string',
 		default: 'Personal Package'
 	},
+	pricingSubTitle: {
+		type: 'string',
+		default: 'Personal Package'
+	},
 	pricingSubTitleSwitcher: {
 		type: 'boolean',
 		default: true
 	},
 	pricingSubTitleTag: {
 		type: 'string',
-		default: 'span'
+		default: 'p'
 	},
-	pricingSubTitle: {
+	pricingFoSwitcher: {
+		type: 'boolean',
+		default: true
+	},
+	pricingFooterTag: {
 		type: 'string',
-		default: 'Personal Package'
+		default: 'p'
+	},
+	pricingFooterText: {
+		type: 'string',
+		default: 'Billed every year Popular amongst entrepeneurs $497 per year'
 	},
 	pricingIconAlign: {
 		type: 'string',
@@ -1282,8 +1294,6 @@ const attributes = {
 		type: 'boolean',
 		default: true
 	},
-
-
 	/** End Pricing Style */
 
 	/**Start Title and Subtitle Style */
@@ -3365,6 +3375,160 @@ const attributes = {
 	priceAfterTextHoverColor: {
 		type: 'string',
 		default: ''
+	},
+
+	priceFeatureAfterTextSwitcher: {
+		type: 'boolean',
+		default: true,
+	},
+	priceFeatureAfterText: {
+		type: 'string',
+		default: 'Billed every year Popular amongst entrepeneurs $497 per year'
+	},
+	priceFeatureAfterTextGlobalTypographyData: {
+		type: 'object',
+		default: {}
+	},
+	priceFeatureAfterTextGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	priceFeatureAfterTextGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
+	priceFeatureAfterTextGlobalTypoOption: {
+		type: 'object',
+		default: {label: 'Default', value: 'default'},
+	},
+	priceFeatureAfterTextFontFamily: {
+		type: 'string',
+		default: 'Default'
+	},
+	priceFeatureAfterTextFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '18',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceFeatureAfterTextFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceFeatureAfterTextFontWeight: {
+		type: 'string',
+		default: '400'
+	},
+	priceFeatureAfterTextFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	priceFeatureAfterTextTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	priceFeatureAfterTextTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	priceFeatureAfterTextLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceFeatureAfterTextLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceFeatureAfterTextLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	priceFeatureAfterTextLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	priceFeatureAfterTextColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	priceFeatureAfterTextColor: {
+		type: 'string',
+		default: '#15171C'
+	},
+	priceFeatureAfterTextHoverColor: {
+		type: 'string',
+		default: ''
+	},
+
+	priceFeatureAfterTextMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	priceFeatureAfterTextDesktopMargin: {
+		type: 'object',
+		default: {
+			top: '24',
+			bottom: '0',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceFeatureAfterTextTabletMargin: {
+		type: 'object',
+		default: {
+			top: '24',
+			bottom: '0',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceFeatureAfterTextMobileMargin: {
+		type: 'object',
+		default: {
+			top: '24',
+			bottom: '0',
+			left: '10',
+			right: '10',
+		},
+	},
+	priceFeatureAfterTextMarginLink: {
+		type: 'boolean',
+		default: true
 	},
 
 	priceAfterTextBgColorSwitcher: {

@@ -4,8 +4,7 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 import LayoutOneSave from './layouts/layout-one/save';
 import LayoutTwoSave from './layouts/layout-two/save';
 import LayoutThreeSave from './layouts/layout-three/save';
-// import LayoutFourSave from './layouts/layout-four/save';
-// import LayoutFiveSave from './layouts/layout-five/save';
+import LayoutFourSave from './layouts/layout-four/save';
 
 export default function save({ attributes }) {
     const {
@@ -29,10 +28,8 @@ export default function save({ attributes }) {
                 return <LayoutTwoSave attributes={attributes} />;
             case 'preset-2':
                 return <LayoutThreeSave attributes={attributes} />;
-            // case 'preset-3':
-            //     return <LayoutFourSave attributes={attributes} />;
-            // case 'preset-4':
-            //     return <LayoutFiveSave attributes={attributes} />;
+            case 'preset-3':
+                return <LayoutFourSave attributes={attributes} />;
             default:
                 return <LayoutOneSave attributes={attributes} />;
         }
