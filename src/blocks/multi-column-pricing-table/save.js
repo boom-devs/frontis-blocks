@@ -43,6 +43,7 @@ export default function save({ attributes }) {
             <div {...blockProps} id={blockID}>
                 {renderLayout()}
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 }

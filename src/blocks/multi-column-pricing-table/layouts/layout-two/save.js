@@ -10,9 +10,6 @@ const LayoutTwoSave = ({ attributes }) => {
         priceFeatureTitle,
         priceFeatureTitleSwitcher,
         pricingPresetStyle,
-        pricingSectionTopSwitcher,
-        pricingTitleTag,
-        pricingTitle
     } = attributes;
 
     const renderPricingColumn = (columnData, columnIndex) => {
