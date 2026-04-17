@@ -1390,13 +1390,12 @@ const TypographySettings = (props) => {
 						</div>
 					</div>
 			</div>
-			<div className="fb-save-settings-wrapper" style={{ marginTop: '20px', borderTop: '1px solid #e2e4e7', paddingTop: '20px' }}>
+			<div className="fb-save-settings-wrapper">
 				<Button
 					isPrimary
 					isBusy={isSaving}
 					onClick={handleManualSave}
 					className="fb-save-settings-btn"
-					style={{ width: '100%', justifyContent: 'center', height: '40px' }}
 				>
 					{isSaving ? __('Saving Typography...', 'frontis-blocks') : __('Save Typography Settings', 'frontis-blocks')}
 				</Button>
