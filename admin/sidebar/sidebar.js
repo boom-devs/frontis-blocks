@@ -898,28 +898,17 @@ function FrontisBlocksSidebar() {
 													/>
 												</div>
 											</div>
-											<div className="fb-color-save-wrapper">
+											<div className="fb-save-settings-wrapper">
 												<Button
 													variant="primary"
 													onClick={handleManualSave}
 													isBusy={isSaving}
 													disabled={isSaving}
-													className="fb-global-save-btn"
+													className="fb-save-settings-btn"
 												>
 													{isSaving ? __("Saving...", "frontis-blocks") : __("Save Color Settings", "frontis-blocks")}
 												</Button>
 											</div>
-										</div>
-										<div className="fb-color-save-wrapper">
-											<Button
-												variant="primary"
-												onClick={handleManualSave}
-												isBusy={isSaving}
-												disabled={isSaving}
-												className="fb-global-save-btn"
-											>
-												{isSaving ? __("Saving...", "frontis-blocks") : __("Save Color Settings", "frontis-blocks")}
-											</Button>
 										</div>
 									</div>
 							</NavigatorScreen>

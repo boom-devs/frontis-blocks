@@ -284,6 +284,18 @@
                     }
                 }
             }
+
+            .fb-save-settings-wrapper {
+                margin-top: 20px;
+                border-top: 1px solid #e2e4e7;
+                padding-top: 20px;
+
+                .fb-save-settings-btn {
+                    width: 100%;
+                    justify-content: center;
+                    height: 40px;
+                }
+            }
         }
 
         .components-panel__body {
