@@ -10,7 +10,7 @@ import {
 import { useEffect, useState, useCallback, useMemo, useRef } from "@wordpress/element";
 import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
-import { loadGoogleFont } from "./helper";
+import { loadGoogleFont, toastSuccess, toastError } from "./helper";
 import { getGlobalStyle, updateGlobalStyle } from "./fetch";
 import generateCSSVariables from "./components/GenerateRootCss";
 import generateColorsVariables from "./components/GenerateColorRoot";
@@ -18,7 +18,7 @@ import FrontisMetaBox from "./theme-settings/editor";
 import FrontisThemeSiteEditor from "./theme-settings/site-editor";
 import { addFilter } from '@wordpress/hooks';
 import { InspectorControls } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import { PanelBody, ToggleControl, Button, Spinner } from '@wordpress/components';
 import "./sidebar.scss";
 
 // Default color and gradient configurations
@@ -328,6 +328,7 @@ function FrontisBlocksSidebar() {
 	const [customTypography, setCustomTypography] = useState({});
 	const [fontFamilies, setFontFamilies] = useState({});
 	const [hasLoadedSettings, setHasLoadedSettings] = useState(false);
+	const [isSaving, setIsSaving] = useState(false);
 	const lastSavedColorSettingsRef = useRef("");
 	const queuedColorSettingsRef = useRef(null);
 	const isSavingColorSettingsRef = useRef(false);
@@ -362,36 +363,24 @@ function FrontisBlocksSidebar() {
 		const normalizedGlobalColors = normalizePaletteItems(nextGlobalColors, themeColors);
 		hasPendingLocalColorChangesRef.current = true;
 		setGlobalColors(normalizedGlobalColors);
-		setStoredThemeOwnedSetting(
-			"fb_global_colors",
-			normalizedGlobalColors,
-			themeColorPaletteHash,
-		);
-	}, [themeColors, themeColorPaletteHash]);
+	}, [themeColors]);
 
 	const handleCustomColorsChange = useCallback((nextCustomColors) => {
 		const normalizedCustomColors = normalizePaletteItems(nextCustomColors);
 		hasPendingLocalColorChangesRef.current = true;
 		setCustomColors(normalizedCustomColors);
-		setStoredSetting("fb_custom_colors", normalizedCustomColors);
 	}, []);
 
 	const handleGradientColorsChange = useCallback((nextGradientColors) => {
 		const normalizedGradientColors = normalizePaletteItems(nextGradientColors, defaultGradientColors);
 		hasPendingLocalColorChangesRef.current = true;
 		setGradientColors(normalizedGradientColors);
-		setStoredThemeOwnedSetting(
-			"fb_gradient_colors",
-			normalizedGradientColors,
-			themeGradientPaletteHash,
-		);
-	}, [defaultGradientColors, themeGradientPaletteHash]);
+	}, [defaultGradientColors]);
 
 	const handleCustomGradientColorsChange = useCallback((nextCustomGradientColors) => {
 		const normalizedCustomGradientColors = normalizePaletteItems(nextCustomGradientColors);
 		hasPendingLocalColorChangesRef.current = true;
 		setCustomGradientColors(normalizedCustomGradientColors);
-		setStoredSetting("fb_custom_gradient_colors", normalizedCustomGradientColors);
 	}, []);
 
 	// Utility to extract font families
@@ -646,6 +635,7 @@ function FrontisBlocksSidebar() {
 			console.error("Error updating settings:", error);
 		} finally {
 			isSavingColorSettingsRef.current = false;
+			setIsSaving(false);
 			if (queuedColorSettingsRef.current) {
 				flushQueuedColorSettings();
 			}
@@ -657,28 +647,44 @@ function FrontisBlocksSidebar() {
 			themeGradientPaletteHash,
 		]);
 
-	useEffect(() => {
-		if (!hasLoadedSettings) {
-			return;
-		}
-
+	const handleManualSave = useCallback(() => {
 		const currentSettings = buildColorSettings();
 		const currentSignature = JSON.stringify(currentSettings);
 
-		if (currentSignature === lastSavedColorSettingsRef.current) {
-			return;
-		}
+		queuedColorSettingsRef.current = {
+			settings: currentSettings,
+			signature: currentSignature,
+		};
+		setIsSaving(true);
+		flushQueuedColorSettings().then(() => {
+			toastSuccess("Color settings saved successfully!");
+		}).catch(() => {
+			toastError("Failed to save color settings.");
+		});
+	}, [buildColorSettings, flushQueuedColorSettings]);
 
-		const saveTimeout = setTimeout(() => {
-			queuedColorSettingsRef.current = {
-				settings: currentSettings,
-				signature: currentSignature,
-			};
-			flushQueuedColorSettings();
-		}, 800);
+	// useEffect(() => {
+	// 	if (!hasLoadedSettings) {
+	// 		return;
+	// 	}
 
-		return () => clearTimeout(saveTimeout);
-	}, [buildColorSettings, flushQueuedColorSettings, hasLoadedSettings]);
+	// 	const currentSettings = buildColorSettings();
+	// 	const currentSignature = JSON.stringify(currentSettings);
+
+	// 	if (currentSignature === lastSavedColorSettingsRef.current) {
+	// 		return;
+	// 	}
+
+	// 	const saveTimeout = setTimeout(() => {
+	// 		queuedColorSettingsRef.current = {
+	// 			settings: currentSettings,
+	// 			signature: currentSignature,
+	// 		};
+	// 		flushQueuedColorSettings();
+	// 	}, 800);
+
+	// 	return () => clearTimeout(saveTimeout);
+	// }, [buildColorSettings, flushQueuedColorSettings, hasLoadedSettings]);
 
 	useEffect(() => {
 		if (globalColors === undefined) {
@@ -892,6 +898,28 @@ function FrontisBlocksSidebar() {
 													/>
 												</div>
 											</div>
+											<div className="fb-color-save-wrapper">
+												<Button
+													variant="primary"
+													onClick={handleManualSave}
+													isBusy={isSaving}
+													disabled={isSaving}
+													className="fb-global-save-btn"
+												>
+													{isSaving ? __("Saving...", "frontis-blocks") : __("Save Color Settings", "frontis-blocks")}
+												</Button>
+											</div>
+										</div>
+										<div className="fb-color-save-wrapper">
+											<Button
+												variant="primary"
+												onClick={handleManualSave}
+												isBusy={isSaving}
+												disabled={isSaving}
+												className="fb-global-save-btn"
+											>
+												{isSaving ? __("Saving...", "frontis-blocks") : __("Save Color Settings", "frontis-blocks")}
+											</Button>
 										</div>
 									</div>
 							</NavigatorScreen>
