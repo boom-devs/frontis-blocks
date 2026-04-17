@@ -12,8 +12,6 @@ const LayoutTwoEdit = ({ attributes, setAttributes, panelRef }) => {
         priceFeatureTitle,
         priceFeatureTitleSwitcher,
         pricingPresetStyle,
-        pricingSectionTopSwitcher,
-        pricingTitleTag
     } = attributes;
 
     const getColumnData = (columnIndex) => columns[columnIndex] || {};

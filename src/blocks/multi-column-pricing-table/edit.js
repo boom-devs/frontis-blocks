@@ -3,6 +3,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
 import { useEffect, useRef } from '@wordpress/element';
 import loadGoogleFont from '@Utils/loadGoogleFont';
+// import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import Inspector from './inspector';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
@@ -31,8 +32,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         pricingTableTabletSwitcher,
         pricingTableMobileSwitcher,
     } = attributes;
-
-    const editorBlockStyle = blockID ? generatePricingTableStyle(attributes) : blockStyle;
 
     // Handle block ID generation (handles duplication and initial ID)
     useBlockIdGenerator({
@@ -90,11 +89,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     /** Start Generate Block Style */
     useEffect(() => {
         if (blockID) {
-            if (blockStyle !== editorBlockStyle) {
-                setAttributes({ blockStyle: editorBlockStyle });
-            }
+            const css = generatePricingTableStyle(attributes);
+            setAttributes({ blockStyle: css });
         }
-    }, [blockID, blockStyle, editorBlockStyle, setAttributes]);
+    }, [attributes, blockID]);
     /** End Generate Block Style */
 
 
@@ -114,7 +112,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         switch (pricingPresetStyle) {
             case 'default':
                 return <LayoutOneEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
-            
             case 'preset-1':
                 return <LayoutTwoEdit attributes={attributes} setAttributes={setAttributes} panelRef={panelRef} />;
             case 'preset-2':
@@ -140,7 +137,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             <div {...blockProps}>
                 {renderLayout()}
             </div>
-            <style>{editorBlockStyle}</style>
+            <style>{blockStyle}</style>
         </>
     );
 }

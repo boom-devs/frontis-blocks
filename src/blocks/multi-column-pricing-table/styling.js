@@ -931,7 +931,7 @@ const generatePricingTableStyle = (attributes) => {
     const priceColumnTabletBorderWidthValue = `${priceColumnTabletBorderWidth?.top}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.right}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.bottom}${priceColumnBorderUnits?.Tablet} ${priceColumnTabletBorderWidth?.left}${priceColumnBorderUnits?.Tablet}`;
     const priceColumnMobileBorderWidthValue = `${priceColumnMobileBorderWidth?.top}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.right}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.bottom}${priceColumnBorderUnits?.Mobile} ${priceColumnMobileBorderWidth?.left}${priceColumnBorderUnits?.Mobile}`;
 
-    const priceColumnDesktopBorderRadiusWidthValue = `${priceColumnDesktopBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Desktop} ${priceColumnDesktopBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Desktop}`;
+    const priceColumnDesktopBorderRadiusWidthValue = getFourSideValue(priceColumnDesktopBorderRadiusWidth, priceColumnBorderRadiusUnits?.Desktop);
     const priceColumnTabletBorderRadiusWidthValue = `${priceColumnTabBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Tablet} ${priceColumnTabBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Tablet}`;
     const priceColumnMobileBorderRadiusWidthValue = `${priceColumnMobileBorderRadiusWidth?.top}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.right}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.bottom}${priceColumnBorderRadiusUnits?.Mobile} ${priceColumnMobileBorderRadiusWidth?.left}${priceColumnBorderRadiusUnits?.Mobile}`;
 
@@ -2186,6 +2186,10 @@ const generatePricingTableStyle = (attributes) => {
         }
     `;
 
+    let topSectionDynamicCSS = '';
+    let pricingColumnDynamicCSS = '';
+    let pricingColumnDynamicCSSTablet = '';
+    let pricingColumnDynamicCSSMobile = '';
     
     if (!pricingGlobalStyleSwitcher) {
         (columns || []).forEach((column, index) => {
@@ -2304,6 +2308,6 @@ const generatePricingTableStyle = (attributes) => {
     }
 
     const customCss = getCustomCss(pricingTableGlobalCustomCSS, `.${blockID} `);
-    return `${pricingTableBlockStyle} ${customCss} `.replace(/\s+/g, ' ').trim();
+    return `${pricingTableBlockStyle} ${topSectionDynamicCSS} ${pricingColumnDynamicCSS} ${pricingColumnDynamicCSSTablet ? `@media only screen and (max-width: 1024px){ ${pricingColumnDynamicCSSTablet} }` : ''} ${pricingColumnDynamicCSSMobile ? `@media only screen and (max-width: 767px){ ${pricingColumnDynamicCSSMobile} }` : ''} ${customCss} `.replace(/\s+/g, ' ').trim();
 }
 export default generatePricingTableStyle;

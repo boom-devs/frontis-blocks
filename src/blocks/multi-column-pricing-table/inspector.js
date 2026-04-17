@@ -587,7 +587,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
         priceColumnBorderRadiusUnits,
         priceColumnDesktopBorderRadiusWidth,
-        priceColumnTabletBorderRadiusWidth,
+        priceColumnTabBorderRadiusWidth,
         priceColumnMobileBorderRadiusWidth,
         priceColumnBorderRadiusLink,
 
@@ -763,53 +763,6 @@ const Inspector = ({ attributes, setAttributes }) => {
         pricingGridBorderRadiusLink,
     } = attributes;
 
-    const columnOptions = [
-        { label: __('Col 1', 'frontis-blocks'), value: columns?.[0]?.id || 'column-1' },
-        { label: __('Col 2', 'frontis-blocks'), value: columns?.[1]?.id || 'column-2' },
-        { label: __('Col 3', 'frontis-blocks'), value: columns?.[2]?.id || 'column-3' },
-    ];
-
-    const normalizeBoxShadowValue = (value) => {
-        if (Array.isArray(value)) {
-            return value;
-        }
-
-        if (value && typeof value === 'object') {
-            return [
-                value.hOffset ?? 0,
-                value.vOffset ?? 0,
-                value.blur ?? 0,
-                value.spread ?? 0,
-                value.inset ? 'inset' : '',
-                value.color ?? '#00000000',
-            ];
-        }
-
-        return [0, 0, 0, 0, '', '#00000000'];
-    };
-
-    const denormalizeBoxShadowValue = (value) => {
-        if (!Array.isArray(value)) {
-            return {
-                hOffset: 0,
-                vOffset: 0,
-                blur: 0,
-                spread: 0,
-                color: '#00000000',
-                inset: false,
-            };
-        }
-
-        return {
-            hOffset: value[0] ?? 0,
-            vOffset: value[1] ?? 0,
-            blur: value[2] ?? 0,
-            spread: value[3] ?? 0,
-            color: value[5] ?? '#00000000',
-            inset: value[4] === 'inset',
-        };
-    };
-
     const deviceType = useDeviceType();
 
     const maxColumnTabs = pricingPresetStyle === 'preset-2' ? 4 : 3;
@@ -845,25 +798,25 @@ const Inspector = ({ attributes, setAttributes }) => {
             const oldIndex = (columnData.priceFeatureItems || []).findIndex(item => item.id === active.id);
             const newIndex = (columnData.priceFeatureItems || []).findIndex(item => item.id === over.id);
             const updatedItems = arrayMove(columnData.priceFeatureItems || [], oldIndex, newIndex);
-            setAttributes({ priceFeatureItems: updatedItems });
+            updateColumnAttribute('priceFeatureItems', updatedItems);
         }
     };
 
     const handleAddItem = () => {
         const newItem = { id: `item-${(columnData.priceFeatureItems || []).length + 1}`, Title: `Feature Item ${(columnData.priceFeatureItems || []).length + 1}`, FeatureIcon: 'check', FeatureIconAlign: 'icon', Disabled: false, DisabledListItem: '0.5' };
-        setAttributes({ priceFeatureItems: [...(columnData.priceFeatureItems || []), newItem] });
+        updateColumnAttribute('priceFeatureItems', [...(columnData.priceFeatureItems || []), newItem]);
     };
 
     const handleChangeItem = (id, key, value) => {
         const updatedItems = (columnData.priceFeatureItems || []).map(item =>
             item.id === id ? { ...item, [key]: value } : item
         );
-        setAttributes({ priceFeatureItems: updatedItems });
+        updateColumnAttribute('priceFeatureItems', updatedItems);
     };
 
     const handleDeleteItem = (id) => {
         const updatedItems = (columnData.priceFeatureItems || []).filter(item => item.id !== id);
-        setAttributes({ priceFeatureItems: updatedItems });
+        updateColumnAttribute('priceFeatureItems', updatedItems);
     };
 
     const priceIconHandler = (IconName) => {
@@ -2888,31 +2841,28 @@ const Inspector = ({ attributes, setAttributes }) => {
         if ( priceColumnBorderLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes({
-                        priceColumnDesktopBorderWidth: {
+                    setColumnsVal( 'priceColumnDesktopBorderWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 case 'Tablet':
-                    setAttributes( {
-                        priceColumnTabletBorderWidth: {
+                    setColumnsVal( 'priceColumnTabletBorderWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 case 'Mobile':
-                    setAttributes( {
-                        priceColumnMobileBorderWidth: {
+                    setColumnsVal( 'priceColumnMobileBorderWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 default:
                     break;
@@ -2920,28 +2870,13 @@ const Inspector = ({ attributes, setAttributes }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {
-                        priceColumnDesktopBorderWidth: {
-                            ...getAttributes().priceColumnDesktopBorderWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnDesktopBorderWidth', {...getColumnsVal('priceColumnDesktopBorderWidth'), [position]: value} );
                     break;
                 case 'Tablet':
-                    setAttributes( {
-                        priceColumnTabletBorderWidth: {
-                            ...getAttributes().priceColumnTabletBorderWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnTabletBorderWidth', {...getColumnsVal('priceColumnTabletBorderWidth'), [position]: value} );
                     break;
                 case 'Mobile':
-                    setAttributes( {
-                        priceColumnMobileBorderWidth: {
-                            ...getAttributes().priceColumnMobileBorderWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnMobileBorderWidth', {...getColumnsVal('priceColumnMobileBorderWidth'), [position]: value} );
                     break;
                 default:
                     break;
@@ -2950,15 +2885,13 @@ const Inspector = ({ attributes, setAttributes }) => {
     }
 
     const handlePriceColumnBorderCombineBtn = () => {
-        setAttributes( {priceColumnBorderLink: !getAttributes().priceColumnBorderLink} );
+        setColumnsVal( 'priceColumnBorderLink', !getColumnsVal('priceColumnBorderLink') );
     }
 
     const handlePriceColumnBorderUnitsHandler = (unit) => {
-        setAttributes( {
-            priceColumnBorderUnits: {
-                ...getAttributes().priceColumnBorderUnits,
-                [deviceType]: unit
-            }
+        setColumnsVal( 'priceColumnBorderUnits', {
+            ...getColumnsVal('priceColumnBorderUnits'),
+            [deviceType]: unit
         })
     }
     /** End Pricing Column Border */
@@ -2969,31 +2902,28 @@ const Inspector = ({ attributes, setAttributes }) => {
         if ( priceColumnBorderRadiusLink ) {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes({
-                        priceColumnDesktopBorderRadiusWidth: {
+                    setColumnsVal( 'priceColumnDesktopBorderRadiusWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 case 'Tablet':
-                    setAttributes({
-                        priceColumnTabletBorderRadiusWidth: {
+                    setColumnsVal( 'priceColumnTabBorderRadiusWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 case 'Mobile':
-                    setAttributes({
-                        priceColumnMobileBorderRadiusWidth: {
+                    setColumnsVal( 'priceColumnMobileBorderRadiusWidth', {
                             top: value,
                             right: value,
                             bottom: value,
                             left: value
-                        }});
+                        } );
                     break;
                 default:
                     break;
@@ -3001,28 +2931,13 @@ const Inspector = ({ attributes, setAttributes }) => {
         } else {
             switch ( deviceType ) {
                 case 'Desktop':
-                    setAttributes( {
-                        priceColumnDesktopBorderRadiusWidth: {
-                            ...getAttributes().priceColumnDesktopBorderRadiusWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnDesktopBorderRadiusWidth', {...getColumnsVal('priceColumnDesktopBorderRadiusWidth'), [position]: value} );
                     break;
                 case 'Tablet':
-                    setAttributes( {
-                        priceColumnTabletBorderRadiusWidth: {
-                            ...getAttributes().priceColumnTabletBorderRadiusWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnTabBorderRadiusWidth', {...getColumnsVal('priceColumnTabBorderRadiusWidth'), [position]: value} );
                     break;
                 case 'Mobile':
-                    setAttributes( {
-                        priceColumnMobileBorderRadiusWidth: {
-                            ...getAttributes().priceColumnMobileBorderRadiusWidth,
-                            [position]: value
-                        }
-                    } );
+                    setColumnsVal( 'priceColumnMobileBorderRadiusWidth', {...getColumnsVal('priceColumnMobileBorderRadiusWidth'), [position]: value} );
                     break;
                 default:
                     break;
@@ -3031,15 +2946,13 @@ const Inspector = ({ attributes, setAttributes }) => {
     }
 
     const handlePriceColumnBorderRadiusCombineBtn = () => {
-        setAttributes( {priceColumnBorderRadiusLink: !getAttributes().priceColumnBorderRadiusLink} );
+        setColumnsVal( 'priceColumnBorderRadiusLink', !getColumnsVal('priceColumnBorderRadiusLink') );
     }
 
     const handlePriceColumnBorderRadiusUnitsHandler = (unit) => {
-        setAttributes( {
-            priceColumnBorderRadiusUnits: {
-                ...getAttributes().priceColumnBorderRadiusUnits,
-                [deviceType]: unit
-            }
+        setColumnsVal( 'priceColumnBorderRadiusUnits', {
+            ...getColumnsVal('priceColumnBorderRadiusUnits'),
+            [deviceType]: unit
         })
     }
     /** end Pricing Column border */
@@ -3494,22 +3407,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 <ToggleControl
                     label={__("Display Top Section", "frontis-blocks")}
-                    checked={pricingSectionTopSwitcher}
-                    onChange={(value) => setAttributes({ pricingSectionTopSwitcher: value })}
+                    checked={columnData.pricingSectionTopSwitcher}
+                    onChange={(value) => updateColumnAttribute('pricingSectionTopSwitcher', value)}
                 />
-                {pricingSectionTopSwitcher && (
+                {columnData.pricingSectionTopSwitcher && (
                     <TextControl
                         label={__("Top Badge Text", "frontis-blocks")}
-                        value={pricingSectionTopText}
-                        onChange={(value) => setAttributes({ pricingSectionTopText: value })}
+                        value={columnData.pricingSectionTopText}
+                        onChange={(value) => updateColumnAttribute('pricingSectionTopText', value)}
                         placeholder={__('Most Popular Package', 'frontis-blocks')}
                     />
                 )}
 
                 <TextControl
                     label={__("Title", "frontis-blocks")}
-                    value={pricingTitle}
-                    onChange={(value) => setAttributes({ pricingTitle: value })}
+                    value={columnData.pricingTitle}
+                    onChange={(value) => updateColumnAttribute('pricingTitle', value)}
                     placeholder={__('Personal Package', 'frontis-blocks')}
                 />
             </PanelBody>
@@ -3519,41 +3432,41 @@ const Inspector = ({ attributes, setAttributes }) => {
             <PanelBody title={__("Price", "frontis-blocks")} initialOpen={false}>
                 <TextControl
                     label={__("Price", "frontis-blocks")}
-                    value={normalPrice}
-                    onChange={(value) => setAttributes({ normalPrice: value })}
+                    value={columnData.normalPrice}
+                    onChange={(value) => updateColumnAttribute('normalPrice', value)}
                 />
                 <ToggleControl
                     label={__("On Sale", "frontis-blocks")}
-                    checked={salePriceSwitcher}
-                    onChange={(value) => setAttributes({ salePriceSwitcher: value })}
+                    checked={columnData.salePriceSwitcher}
+                    onChange={(value) => updateColumnAttribute('salePriceSwitcher', value)}
                 />
-                {salePriceSwitcher && (
+                {columnData.salePriceSwitcher && (
                     <TextControl
                         label={__("Sale Price", "frontis-blocks")}
-                        value={salePrice}
-                        onChange={(value) => setAttributes({ salePrice: value })}
+                        value={columnData.salePrice}
+                        onChange={(value) => updateColumnAttribute('salePrice', value)}
                     />
                 )}
                 <TextControl
                     label={__("Currency", "frontis-blocks")}
-                    value={priceCurrency}
-                    onChange={(value) => setAttributes({ priceCurrency: value })}
+                    value={columnData.priceCurrency}
+                    onChange={(value) => updateColumnAttribute('priceCurrency', value)}
                 />
                 <SelectControl
                     label={__("Currency Position", "frontis-blocks")}
-                    value={priceCurrencyPosition}
-                    onChange={(value) => setAttributes({ priceCurrencyPosition: value })}
+                    value={columnData.priceCurrencyPosition}
+                    onChange={(value) => updateColumnAttribute('priceCurrencyPosition', value)}
                     options={CURRENCY_POSITION}
                 />
                 <TextControl
                     label={__("Separator", "frontis-blocks")}
-                    value={pricePeriodSeparator}
-                    onChange={(value) => setAttributes({ pricePeriodSeparator: value })}
+                    value={columnData.pricePeriodSeparator}
+                    onChange={(value) => updateColumnAttribute('pricePeriodSeparator', value)}
                 />
                 <TextControl
                     label={__("Period", "frontis-blocks")}
-                    value={pricePeriod}
-                    onChange={(value) => setAttributes({ pricePeriod: value })}
+                    value={columnData.pricePeriod}
+                    onChange={(value) => updateColumnAttribute('pricePeriod', value)}
                 />
             </PanelBody>
             {/** End Price */}
@@ -3561,13 +3474,13 @@ const Inspector = ({ attributes, setAttributes }) => {
             <PanelBody title={__("Pricing Plan Activation", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
                     label={__("Show Pricing Plan Text", "frontis-blocks")}
-                    checked={priceAfterTextSwitcher}
-                    onChange={(value) => setAttributes({ priceAfterTextSwitcher: value })}
+                    checked={columnData.priceAfterTextSwitcher}
+                    onChange={(value) => updateColumnAttribute('priceAfterTextSwitcher', value)}
                 />
-                {priceAfterTextSwitcher && (
+                {columnData.priceAfterTextSwitcher && (
                     <TextControl
-                        value={priceAfterText}
-                        onChange={(value) => setAttributes({ priceAfterText: value })}
+                        value={columnData.priceAfterText}
+                        onChange={(value) => updateColumnAttribute('priceAfterText', value)}
                     />
                 )}
             </PanelBody>
@@ -3577,25 +3490,25 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 <ToggleControl
                     label={__("Show Features", "frontis-blocks")}
-                    checked={priceHideFeaturesSwitcher}
-                    onChange={(value) => setAttributes({ priceHideFeaturesSwitcher: value })}
+                    checked={columnData.priceHideFeaturesSwitcher}
+                    onChange={(value) => updateColumnAttribute('priceHideFeaturesSwitcher', value)}
                 />
 
-                {priceHideFeaturesSwitcher && (
+                {columnData.priceHideFeaturesSwitcher && (
                     <>
                         <ToggleControl
                             label={__("Show Icon", "frontis-blocks")}
-                            checked={priceFeatureIconSwitcher}
-                            onChange={(value) => setAttributes({ priceFeatureIconSwitcher: value })}
+                            checked={columnData.priceFeatureIconSwitcher}
+                            onChange={(value) => updateColumnAttribute('priceFeatureIconSwitcher', value)}
                         />
                         <div className="fb-feature-wrapper">
                             <DndContext
                                 collisionDetection={closestCenter}
                                 onDragEnd={handleDragEnd}
                             >
-                                <SortableContext items={(priceFeatureItems || []).map(item => item.id)}>
+                                <SortableContext items={(columnData.priceFeatureItems || []).map(item => item.id)}>
                                     <ul className='dnd-items-wrapper'>
-                                        {(priceFeatureItems || []).map((item) => (
+                                        {(columnData.priceFeatureItems || []).map((item) => (
                                             <SortableItem
                                                 key={item.id}
                                                 id={item.id}
@@ -3623,21 +3536,21 @@ const Inspector = ({ attributes, setAttributes }) => {
             <PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
                 <ToggleControl
                     label={__("Enable Button", "frontis-blocks")}
-                    checked={priceButtonSwitcher}
-                    onChange={(value) => setAttributes({ priceButtonSwitcher: value })}
+                    checked={columnData.priceButtonSwitcher}
+                    onChange={(value) => updateColumnAttribute('priceButtonSwitcher', value)}
                 />
-                {priceButtonSwitcher && (
+                {columnData.priceButtonSwitcher && (
                     <>
                         <TextControl
                             label={__("Button Text", "frontis-blocks")}
-                            value={priceButtonText}
-                            onChange={(value) => setAttributes({ priceButtonText: value })}
+                            value={columnData.priceButtonText}
+                            onChange={(value) => updateColumnAttribute('priceButtonText', value)}
                         />
                         <FB_UrlControl
-                            url={priceButtonUrl}
-                            onChangeUrl={(value) => setAttributes({ priceButtonUrl: value })}
-                            openInNewTab={priceButtonTargetUrl}
-                            onChangeOpenInNewTab={(value) => setAttributes({ priceButtonTargetUrl: value })}
+                            url={columnData.priceButtonUrl}
+                            onChangeUrl={(value) => updateColumnAttribute('priceButtonUrl', value)}
+                            openInNewTab={columnData.priceButtonTargetUrl}
+                            onChangeOpenInNewTab={(value) => updateColumnAttribute('priceButtonTargetUrl', value)}
                         />
                     </>
                 )}
@@ -3691,7 +3604,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 checked={pricingGlobalStyleSwitcher}
                 onChange={(value) => setAttributes({ pricingGlobalStyleSwitcher: value })}
             />
-            {pricingSectionTopSwitcher && (
+            {columnData.pricingSectionTopSwitcher && (
                 <PanelBody title={__("Top Section", "frontis-blocks")} initialOpen={false}>
                     
                     <FB_TypographyControl
@@ -3749,52 +3662,52 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <FB_SwitcherControl
                         label={__("Color", "frontis-blocks")}
-                        globalSwitcher={pricingTopSectionTextColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ pricingTopSectionTextColorSwitcher: value })}
+                        globalSwitcher={getColumnsVal('pricingTopSectionTextColorSwitcher')}
+                        setGlobalSwitcher={(value) => setColumnsVal('pricingTopSectionTextColorSwitcher', value)}
                     />
 
-                    {pricingTopSectionTextColorSwitcher === 'normal' && (
+                    {getColumnsVal('pricingTopSectionTextColorSwitcher') === 'normal' && (
                         <FB_ColorControl
                             label={__("Color", "frontis-blocks")}
-                            globalColor={pricingTopSectionTextColor}
-                            setGlobalColor={(value) => setAttributes({ pricingTopSectionTextColor: value === undefined ? '' : value })}
+                            globalColor={getColumnsVal('pricingTopSectionTextColor')}
+                            setGlobalColor={(value) => setColumnsVal('pricingTopSectionTextColor', value === undefined ? '' : value)}
                         />
                     )}
 
-                    {pricingTopSectionTextColorSwitcher === 'hover' && (
+                    {getColumnsVal('pricingTopSectionTextColorSwitcher') === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
-                            globalColor={pricingTopSectionTextHoverColor}
-                            setGlobalColor={(value) => setAttributes({ pricingTopSectionTextHoverColor: value === undefined ? '' : value })}
+                            globalColor={getColumnsVal('pricingTopSectionTextHoverColor')}
+                            setGlobalColor={(value) => setColumnsVal('pricingTopSectionTextHoverColor', value === undefined ? '' : value)}
                         />
                     )}
 
                     <FB_BackgroundColorControl
                         label={__("Background Color", "frontis-blocks")}
-                        bgColorSwitcher={pricingTopSectionBgColorSwitcher}
-                        setBgColorSwitcher={(value) => setAttributes({ pricingTopSectionBgColorSwitcher: value })}
-
-                        normalBackgroundType={pricingTopSectionNormalBackgroundType}
-                        setNormalBackgroundType={(value) => setAttributes({ pricingTopSectionNormalBackgroundType: value })}
-                        normalClassicColor={pricingTopSectionNormalClassicColor}
-                        setNormalClassicColor={(value) => setAttributes({ pricingTopSectionNormalClassicColor: value === undefined ? '' : value })}
-                        normalGradientColor={pricingTopSectionNormalGradientColor}
-                        setNormalGradientColor={(value) => setAttributes({ pricingTopSectionNormalGradientColor: value === undefined ? null : value })}
-                        normalCustomGradientSwitcher={pricingTopSectionNormalCustomGradientSwitcher}
-                        setNormalCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionNormalCustomGradientSwitcher: value })}
-                        normalCustomGradientInputValue={pricingTopSectionNormalCustomGradientInputValue}
-                        setNormalCustomGradientInputValue={(value) => setAttributes({ pricingTopSectionNormalCustomGradientInputValue: value })}
+                        bgColorSwitcher={getColumnsVal('pricingTopSectionBgColorSwitcher')}
+                        setBgColorSwitcher={(value) => setColumnsVal('pricingTopSectionBgColorSwitcher', value)}
                         
-                        hoverBackgroundType={pricingTopSectionHoverBackgroundType}
-                        setHoverBackgroundType={(value) => setAttributes({ pricingTopSectionHoverBackgroundType: value })}
-                        hoverClassicColor={pricingTopSectionHoverClassicColor}
-                        setHoverClassicColor={(value) => setAttributes({ pricingTopSectionHoverClassicColor: value === undefined ? '' : value })}
-                        hoverGradientColor={pricingTopSectionHoverGradientColor} 
-                        setHoverGradientColor={(value) => setAttributes({ pricingTopSectionHoverGradientColor: value === undefined ? null : value })}
-                        hoverCustomGradientSwitcher={pricingTopSectionHoverCustomGradientSwitcher}
-                        setHoverCustomGradientSwitcher={(value) => setAttributes({ pricingTopSectionHoverCustomGradientSwitcher: value })}
-                        hoverCustomGradientInputValue={pricingTopSectionHoverCustomGradientInputValue}
-                        setHoverCustomGradientInputValue={(value) => setAttributes({ pricingTopSectionHoverCustomGradientInputValue: value })}
+                        normalBackgroundType={getColumnsVal('pricingTopSectionNormalBackgroundType')}
+                        setNormalBackgroundType={(value) => setColumnsVal('pricingTopSectionNormalBackgroundType', value)}
+                        normalClassicColor={getColumnsVal('pricingTopSectionNormalClassicColor')}
+                        setNormalClassicColor={(value) => setColumnsVal('pricingTopSectionNormalClassicColor', value === undefined ? '' : value)}
+                        normalGradientColor={getColumnsVal('pricingTopSectionNormalGradientColor')}
+                        setNormalGradientColor={(value) => setColumnsVal('pricingTopSectionNormalGradientColor', value === undefined ? null : value)}
+                        normalCustomGradientSwitcher={getColumnsVal('pricingTopSectionNormalCustomGradientSwitcher')}
+                        setNormalCustomGradientSwitcher={(value) => setColumnsVal('pricingTopSectionNormalCustomGradientSwitcher', value)}
+                        normalCustomGradientInputValue={getColumnsVal('pricingTopSectionNormalCustomGradientInputValue')}
+                        setNormalCustomGradientInputValue={(value) => setColumnsVal('pricingTopSectionNormalCustomGradientInputValue', value)}
+                        
+                        hoverBackgroundType={getColumnsVal('pricingTopSectionHoverBackgroundType')}
+                        setHoverBackgroundType={(value) => setColumnsVal('pricingTopSectionHoverBackgroundType', value)}
+                        hoverClassicColor={getColumnsVal('pricingTopSectionHoverClassicColor')}
+                        setHoverClassicColor={(value) => setColumnsVal('pricingTopSectionHoverClassicColor', value === undefined ? '' : value)}
+                        hoverGradientColor={getColumnsVal('pricingTopSectionHoverGradientColor')} 
+                        setHoverGradientColor={(value) => setColumnsVal('pricingTopSectionHoverGradientColor', value === undefined ? null : value)}
+                        hoverCustomGradientSwitcher={getColumnsVal('pricingTopSectionHoverCustomGradientSwitcher')}
+                        setHoverCustomGradientSwitcher={(value) => setColumnsVal('pricingTopSectionHoverCustomGradientSwitcher', value)}
+                        hoverCustomGradientInputValue={getColumnsVal('pricingTopSectionHoverCustomGradientInputValue')}
+                        setHoverCustomGradientInputValue={(value) => setColumnsVal('pricingTopSectionHoverCustomGradientInputValue', value)}
 
                         isBackgroundImage={false}
 
@@ -3816,30 +3729,30 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     <SelectControl
                         label={__("Border Style", "frontis-blocks")}
-                        value={pricingTopSectionBorder}
+                        value={getColumnsVal('pricingTopSectionBorder')}
                         options={BORDER_STYLES}
-                        onChange={(value) => setAttributes({ pricingTopSectionBorder: value })}
+                        onChange={(value) => setColumnsVal('pricingTopSectionBorder', value)}
                     />
 
                     <FB_SwitcherControl
                         label={__("Border Color", "frontis-blocks")}
-                        globalSwitcher={pricingTopSectionBorderColorSwitcher}
-                        setGlobalSwitcher={(value) => setAttributes({ pricingTopSectionBorderColorSwitcher: value })}
+                        globalSwitcher={getColumnsVal('pricingTopSectionBorderColorSwitcher')}
+                        setGlobalSwitcher={(value) => setColumnsVal('pricingTopSectionBorderColorSwitcher', value)}
                     />
 
-                    {pricingTopSectionBorderColorSwitcher === 'normal' && (
+                    {getColumnsVal('pricingTopSectionBorderColorSwitcher') === 'normal' && (
                         <FB_ColorControl
                             label={__("Normal Color", "frontis-blocks")}
-                            globalColor={pricingTopSectionBorderColor}
-                            setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderColor: value === undefined ? '' : value })}
+                            globalColor={getColumnsVal('pricingTopSectionBorderColor')}
+                            setGlobalColor={(value) => setColumnsVal('pricingTopSectionBorderColor', value === undefined ? '' : value)}
                         />
                     )}
 
-                    {pricingTopSectionBorderColorSwitcher === 'hover' && (
+                    {getColumnsVal('pricingTopSectionBorderColorSwitcher') === 'hover' && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
-                            globalColor={pricingTopSectionBorderHoverColor}
-                            setGlobalColor={(value) => setAttributes({ pricingTopSectionBorderHoverColor: value === undefined ? '' : value })}
+                            globalColor={getColumnsVal('pricingTopSectionBorderHoverColor')}
+                            setGlobalColor={(value) => setColumnsVal('pricingTopSectionBorderHoverColor', value === undefined ? '' : value)}
                         />
                     )}
 
@@ -5769,8 +5682,8 @@ const Inspector = ({ attributes, setAttributes }) => {
                         {priceGlobalBoxShadowSwitcher === 'normal' && (
                         <FB_BoxShadowControl
                             label={__("Normal Shadow", "frontis-blocks")}
-                            onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowValues: denormalizeBoxShadowValue(value) })}
-                            initialShadowValue={normalizeBoxShadowValue(priceGlobalBoxShadowValues)}
+                            onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowValues: value })}
+                            initialShadowValue={priceGlobalBoxShadowValues}
                             onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowCssValue: value })}
                         />
                         )}
@@ -5778,8 +5691,8 @@ const Inspector = ({ attributes, setAttributes }) => {
                         {priceGlobalBoxShadowSwitcher === 'hover' && (
                             <FB_BoxShadowControl
                                 label={__("Hover Shadow", "frontis-blocks")}
-                                onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowHoverValues: denormalizeBoxShadowValue(value) })}
-                                initialShadowValue={normalizeBoxShadowValue(priceGlobalBoxShadowHoverValues)}
+                                onBoxShadowChange={(value) => setAttributes({ priceGlobalBoxShadowHoverValues: value })}
+                                initialShadowValue={priceGlobalBoxShadowHoverValues}
                                 onBoxShadowStyleChange={(value) => setAttributes({ priceGlobalBoxShadowHoverCssValue: value })}
                             />
                         )}
