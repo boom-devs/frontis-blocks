@@ -4,7 +4,12 @@ import {
 	useInnerBlocksProps,
 	BlockControls,
 } from "@wordpress/block-editor";
-import { Button, ToolbarGroup, ToolbarButton } from "@wordpress/components";
+import {
+	Button,
+	ToolbarDropdownMenu,
+	ToolbarGroup,
+	ToolbarButton,
+} from "@wordpress/components";
 import { useSelect, useDispatch } from "@wordpress/data";
 import {
 	useState,
@@ -23,6 +28,7 @@ import {
 import "/node_modules/react-grid-layout/css/styles.css";
 import "/node_modules/react-resizable/css/styles.css";
 import "./editor.scss";
+import { setDeviceType, useDeviceType } from "@Config/displayType";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import Inspector from "./inspector";
 import generateGridLayoutStyle from "./styling";
@@ -48,6 +54,9 @@ const DEFAULT_NEW_ITEM_HEIGHT = {
 	Tablet: 4,
 	Mobile: 4,
 };
+
+const getResponsiveDeviceIcon = (breakpoint) =>
+	BREAKPOINT_ICONS[breakpoint] || BREAKPOINT_ICONS.Desktop;
 
 const getBreakpointNumber = (values, breakpoint, settingKey) =>
 	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
@@ -265,7 +274,10 @@ export default function Edit({
 	]);
 
 	const [isLayoutMode, setIsLayoutMode] = useState(false);
-	const [activeBreakpoint, setActiveBreakpoint] = useState("Desktop");
+	const deviceType = useDeviceType();
+	const activeBreakpoint = BREAKPOINTS.includes(deviceType)
+		? deviceType
+		: "Desktop";
 	const { containerRef, mounted, width } = useContainerWidth({
 		measureBeforeMount: true,
 	});
@@ -576,6 +588,19 @@ export default function Edit({
 						label={__("Add Grid Item", "frontis-blocks")}
 						onClick={addGridItem}
 					/>
+					<ToolbarDropdownMenu
+						icon={getResponsiveDeviceIcon(activeBreakpoint)}
+						label={sprintf(
+							__("%s Preview", "frontis-blocks"),
+							activeBreakpoint,
+						)}
+						controls={BREAKPOINTS.map((breakpoint) => ({
+							title: breakpoint,
+							icon: getResponsiveDeviceIcon(breakpoint),
+							isActive: activeBreakpoint === breakpoint,
+							onClick: () => setDeviceType(breakpoint, false),
+						}))}
+					/>
 				</ToolbarGroup>
 			</BlockControls>
 
@@ -584,25 +609,6 @@ export default function Edit({
 					{isLayoutMode ? (
 						<div className="layout-overlay-mode">
 							<div className="layout-mode-toolbar">
-								<div className="breakpoint-tabs">
-									{BREAKPOINTS.map((bp) => (
-										<button
-											key={bp}
-											type="button"
-											className={`breakpoint-tab ${
-												activeBreakpoint === bp ? "active" : ""
-											}`}
-											onClick={() => setActiveBreakpoint(bp)}
-											title={bp}
-										>
-											<span
-												className={`dashicons dashicons-${BREAKPOINT_ICONS[bp]}`}
-											/>
-											<span className="bp-label">{bp}</span>
-										</button>
-									))}
-								</div>
-
 								<div
 									className={`layout-selection-panel ${
 										selectedGridItem ? "has-selection" : "is-empty"
