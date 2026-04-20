@@ -37,31 +37,3 @@ function frontis_blocks()
 }
 
 frontis_blocks();
-
-function enqueue_tlsite_admin_scripts() {
-    
-    // Just copy and paste insid anywhere with plugin installed
-    wp_enqueue_style('frontis-template-tlsite', FB_PLUGIN_URL . 'assets/admin/style-tlsite.css', array(), '1.0.0');
-
-    wp_enqueue_script('jquery');
-    $script_path = FB_PLUGIN_PATH . 'assets/admin/tlsite.js';
-    $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/tlsite.asset.php';
-    $script_asset      = file_exists( $script_asset_path ) ? require( $script_asset_path ) : array( 'dependencies' => array(), 'version' => filemtime( $script_path ) );
-
-    //push jquery in $script_asset['dependencies']
-    $script_asset['dependencies'][] = 'jquery';
-
-    wp_enqueue_script('frontis-blocks-tlsite', FB_PLUGIN_URL . 'assets/admin/tlsite.js', $script_asset['dependencies'], '1.0.0', true);
-
-    $localizeArray = array();
-
-    // Localize the script with new data
-    wp_localize_script('frontis-blocks-tlsite', 'frontisBlocksAdmin', $localizeArray);
-    wp_localize_script('frontis-blocks-tlsite', 'FB_TLibrary', array(
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'portalApi' => PORTAL_API,
-        'wordpressSyncApi' => WORDPRESS_SYNC_API
-    ));
-}
-
-add_action('wp_enqueue_scripts', 'enqueue_tlsite_admin_scripts');
