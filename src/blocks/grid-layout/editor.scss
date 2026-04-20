@@ -48,52 +48,6 @@
 			flex-wrap: wrap;
 		}
 
-		.breakpoint-tabs {
-			display: flex;
-			gap: 2px;
-			background: #edf4ff;
-			border-radius: 999px;
-			padding: 3px;
-			border: 1px solid #d6e7fb;
-
-			.breakpoint-tab {
-				display: flex;
-				align-items: center;
-				gap: 6px;
-				padding: 7px 12px;
-				border: none;
-				background: transparent;
-				border-radius: 999px;
-				cursor: pointer;
-				font-size: 12px;
-				color: #52606d;
-				transition: all 0.2s ease;
-				white-space: nowrap;
-
-				&:hover {
-					background: #ddeafe;
-					color: #102a43;
-				}
-
-				&.active {
-					background: #1e90ff;
-					color: #fff;
-					box-shadow: 0 6px 18px rgba(30, 144, 255, 0.24);
-				}
-
-				.dashicons {
-					font-size: 16px;
-					width: 16px;
-					height: 16px;
-					line-height: 16px;
-				}
-
-				.bp-label {
-					font-weight: 500;
-				}
-			}
-		}
-
 		.layout-selection-panel {
 			display: flex;
 			align-items: center;

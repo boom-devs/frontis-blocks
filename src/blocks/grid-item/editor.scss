@@ -42,18 +42,37 @@
 
 			.grid-item-content,
 			.block-editor-block-list__layout {
+				position: relative;
 				display: flex;
 				align-items: center;
 				justify-content: center;
 				min-height: 150px;
 			}
 
-			.block-list-appender {
-				position: static;
+			.block-list-appender,
+			.block-editor-default-block-appender,
+			.block-editor-button-block-appender,
+			.block-editor-block-list__empty-block-inserter {
+				position: absolute;
+				top: 50%;
+				left: 50%;
 				width: auto;
+				margin: 0;
+				transform: translate(-50%, -50%);
+				z-index: 1;
 			}
 
-			.block-editor-default-block-appender {
+			.block-editor-default-block-appender,
+			.block-editor-button-block-appender {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			.block-editor-default-block-appender,
+			.block-editor-button-block-appender,
+			.block-editor-inserter,
+			.block-editor-inserter__toggle {
 				margin: 0;
 			}
 		}
