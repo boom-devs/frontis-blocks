@@ -8,6 +8,9 @@ import {
 	__experimentalPaletteEdit as PaletteEdit,
 } from "@wordpress/components";
 import { useEffect, useState, useCallback, useMemo, useRef } from "@wordpress/element";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import TypographySettings from "./components/TypographySettings";
 import { useDeviceType } from "@Config/displayType";
 import { loadGoogleFont, toastSuccess, toastError } from "./helper";
@@ -926,6 +929,7 @@ function FrontisBlocksSidebar() {
 					</div>
 				</PluginSidebar>
 			</div>
+			<ToastContainer />
 		</>
 	);
 }
