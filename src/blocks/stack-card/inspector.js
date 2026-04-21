@@ -1,5 +1,11 @@
 import { __, sprintf } from '@wordpress/i18n';
-import { useState, useEffect, memo } from '@wordpress/element';
+import { useState, useEffect, memo, useCallback, useMemo } from '@wordpress/element';
+import { createBlock, cloneBlock } from '@wordpress/blocks';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+import { useDispatch, useSelect, select, dispatch } from '@wordpress/data';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import FB_Presets from '@Components/presets';
 
 import {
     SelectControl,
@@ -25,6 +31,7 @@ import {
     BORDER_STYLES,
     OVERFLOW_OP,
     IMAGE_OBJECT_FIT,
+    STACKED_CARD_PRESETS
 } from '@Constants/fbConstants';
 
 import FB_Range from '@Components/range';
@@ -44,11 +51,27 @@ import DynamicDataSourceControl from '@Components/dynamic-data-source-control';
 import DynamicDataLinkControl from '@Components/dynamic-data-link-control';
 import getProActive from '@Utils/getProActive';
 import './editor.scss';
+import StackCardInspectorSortableItem from './stack-card-inspector-sortable-item';
+import { stackedCardPresets } from './presets';
 
-const Inspector = ({ attributes, setAttributes, handleAddCardItem, cardItemCount = 0 }) => {
+const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
+const MIN_CARD_ITEMS = 2;
+
+const Inspector = ( { attributes, setAttributes, clientId } ) => {
+
 	const {
 		blockID,
 		blockStyle,
+        stackCardsPresetStyle,
+
+        stackCardsOffsetTop,
+        stackCardsOffsetTopUnits,
+        stackCardsItemOffsetTop,
+        stackCardsItemOffsetTopSwitcher,
+        stackCardsItemScale,
+
+        stackCardsCardItemGap,
+        stackCardsCardItemGapUnits,
 
 		stackCardsDesktopSwitcher,
 		stackCardsTabletSwitcher,
@@ -122,6 +145,133 @@ const Inspector = ({ attributes, setAttributes, handleAddCardItem, cardItemCount
 	} = attributes;
 
 	const deviceType = useDeviceType();
+	const [expandedCardClientId, setExpandedCardClientId] = useState(null);
+
+    const childBlocks = useSelect(
+		( sel ) => sel( blockEditorStore ).getBlocks( clientId ) || [],
+		[ clientId ]
+	);
+
+	const {
+		insertBlock,
+		moveBlocksToPosition,
+		removeBlock,
+		selectBlock,
+	} = useDispatch( blockEditorStore );
+
+	const cardItems = useMemo(
+		() =>
+			childBlocks.map( ( b, index ) => ( {
+				clientId: b.clientId,
+				itemNumber: b.attributes?.itemNumber ?? index + 1,
+			} ) ),
+		[ childBlocks ]
+	);
+
+	const cardItemCount = cardItems.length;
+	const canDeleteCard = cardItemCount > MIN_CARD_ITEMS;
+
+	const handleAddCardItem = useCallback( () => {
+		insertBlock(
+			createBlock( CARD_ITEM_BLOCK, {
+				itemNumber: childBlocks.length + 1,
+			} ),
+			childBlocks.length,
+			clientId,
+			false
+		);
+	}, [ childBlocks, clientId, insertBlock ] );
+
+	const handleDeleteCardItem = useCallback(
+		( targetClientId ) => {
+			if ( childBlocks.length <= MIN_CARD_ITEMS ) {
+				return;
+			}
+			removeBlock( targetClientId, false );
+			requestAnimationFrame( () => {
+				selectBlock( clientId );
+			} );
+		},
+		[ childBlocks, clientId, removeBlock, selectBlock ]
+	);
+
+	const handleDuplicateCardItem = useCallback(
+		( targetClientId ) => {
+			const beSelect = select( blockEditorStore );
+			const beDispatch = dispatch( blockEditorStore );
+			const targetBlock = beSelect.getBlock( targetClientId );
+			if ( ! targetBlock ) {
+				return;
+			}
+			const order = beSelect.getBlockOrder( clientId );
+			const index = order.indexOf( targetClientId );
+			if ( index === -1 ) {
+				return;
+			}
+			const cloned = cloneBlock( targetBlock );
+			beDispatch.insertBlock( cloned, index + 1, clientId, false );
+		},
+		[ clientId ]
+	);
+
+	const handleCardItemsDragEnd = useCallback(
+		( event ) => {
+			const { active, over } = event;
+			if ( ! active || ! over || active.id === over.id ) {
+				return;
+			}
+			const order = childBlocks.map( ( b ) => b.clientId );
+			const oldIndex = order.indexOf( active.id );
+			const newIndex = order.indexOf( over.id );
+			if ( oldIndex === -1 || newIndex === -1 ) {
+				return;
+			}
+			moveBlocksToPosition( [ active.id ], clientId, clientId, newIndex );
+		},
+		[ childBlocks, clientId, moveBlocksToPosition ]
+	);
+
+	const handleToggleCardItem = useCallback((targetClientId) => {
+		setExpandedCardClientId((prev) => (prev === targetClientId ? null : targetClientId));
+	}, []);
+
+	const handleSingleCardOffsetTop = (itemNumber, value) => {
+		const normalizedValue =
+			typeof value === 'object' && value !== null
+				? (value[deviceType] ?? '')
+				: value;
+
+		setAttributes({
+			stackCardsItemOffsetTop: {
+				...stackCardsItemOffsetTop,
+				[deviceType]: {
+					...(stackCardsItemOffsetTop?.[deviceType] || {}),
+					[itemNumber]: normalizedValue,
+				},
+			},
+		});
+	};
+
+	const handleSingleCardOffsetToggle = (isEnabled) => {
+		setAttributes({ stackCardsItemOffsetTopSwitcher: isEnabled });
+	};
+
+	const handleSingleCardScale = (itemNumber, value) => {
+		const normalizedValue =
+			typeof value === 'object' && value !== null
+				? (value[deviceType] ?? '')
+				: value;
+
+		setAttributes({
+			stackCardsItemScale: {
+				...stackCardsItemScale,
+				[deviceType]: {
+					...(stackCardsItemScale?.[deviceType] || {}),
+					[itemNumber]: normalizedValue,
+				},
+			},
+		});
+	};
 
 	/** Start Global padding */
     const handleGlobalPaddingUnitChange = (event, position) => {
@@ -411,23 +561,135 @@ const Inspector = ({ attributes, setAttributes, handleAddCardItem, cardItemCount
 			<div className="fb-setting-general-tab-wrapper">
 				<div className="fb-setting-inner-wrapper">
 					<PanelBody
-						title={__("Card Items", "frontis-blocks")}
+						title={__('Stacked Card', 'frontis-blocks')}
 						initialOpen={true}
 					>
-						<p className="fb-stack-cards-inspector-note">
-							{sprintf(
-								/* translators: %d: current card item count */
-								__('%d card items are currently available in the editor.', 'frontis-blocks'),
-								cardItemCount
-							)}
-						</p>
-						<Button
-							variant="primary"
-							className="fb-stack-cards-add-item-button"
-							onClick={handleAddCardItem}
-						>
-							{__("Add New Card Item", "frontis-blocks")}
-						</Button>
+                        <BaseControl label={__("Preset Style", "frontis-blocks")}>
+                            <FB_Presets
+                                className="fb-stack-cards-presets"
+                                label={__('Select Preset', 'frontis-blocks')}
+                                presets={stackedCardPresets}
+                                value={stackCardsPresetStyle}
+                                onChangeValue='stackCardsPresetStyle'
+                                defaultPresetValue="stack-top"
+                                setAttributes={setAttributes}
+                            />
+                        </BaseControl>
+                        {stackCardsPresetStyle === 'stack-top' && (
+                            <ToggleControl
+                                label={__('Offset Top For Each Item', 'frontis-blocks')}
+                                checked={!!stackCardsItemOffsetTopSwitcher}
+                                onChange={handleSingleCardOffsetToggle}
+                            />
+                        )}
+
+						<BaseControl label={__("Card Items", "frontis-blocks")}>
+                            <div className="fb-stack-card-inspector-items">
+                                <DndContext collisionDetection={closestCenter} onDragEnd={handleCardItemsDragEnd}>
+                                    <SortableContext
+                                        items={cardItems.map((row) => row.clientId)}
+                                        strategy={verticalListSortingStrategy}
+                                    >
+                                        <ul className="dnd-items-wrapper">
+                                            {cardItems.map((item, index) => (
+                                                <StackCardInspectorSortableItem
+                                                    key={item.clientId}
+                                                    id={item.clientId}
+                                                    item={item}
+                                                    index={index}
+                                                    handleDeleteItem={handleDeleteCardItem}
+                                                    handleDuplicateItem={handleDuplicateCardItem}
+                                                    onToggleItem={handleToggleCardItem}
+                                                    isExpanded={expandedCardClientId === item.clientId}
+                                                    canDelete={canDeleteCard}
+                                                >
+                                                    {stackCardsPresetStyle === 'stack-top' && (
+                                                        <div className="sortable-item-content">
+                                                            {!!stackCardsItemOffsetTopSwitcher && (
+                                                                <FB_Range
+                                                                    min={0}
+                                                                    max={stackCardsOffsetTopUnits?.[deviceType] === '%' ? 100 : 200}
+                                                                    label={sprintf(__('Offset Top', 'frontis-blocks'), item.itemNumber ?? index + 1)}
+                                                                    rangeValue={{
+                                                                        ...stackCardsOffsetTop,
+                                                                        [deviceType]:
+                                                                            stackCardsItemOffsetTop?.[deviceType]?.[item.itemNumber ?? index + 1] ?? '',
+                                                                    }}
+                                                                    onChangeHandler={(value) => handleSingleCardOffsetTop(item.itemNumber ?? index + 1, value)}
+                                                                    rangeUnitHandler={(value) => setAttributes({ stackCardsOffsetTopUnits: value })}
+                                                                    deviceType={deviceType}
+                                                                    units={stackCardsOffsetTopUnits}
+                                                                    setAttributes={setAttributes}
+                                                                    rangeStep={1}
+                                                                    resetFallbackValue={""}
+                                                                />
+                                                            )}
+
+                                                            <FB_Range
+                                                                min={0}
+                                                                max={2}
+                                                                label={__('Scale Value', 'frontis-blocks')}
+                                                                rangeValue={{
+                                                                    Desktop: '',
+                                                                    Tablet: '',
+                                                                    Mobile: '',
+                                                                    ...stackCardsItemScale,
+                                                                    [deviceType]:
+                                                                        stackCardsItemScale?.[deviceType]?.[item.itemNumber ?? index + 1] ?? '',
+                                                                }}
+                                                                onChangeHandler={(value) => handleSingleCardScale(item.itemNumber ?? index + 1, value)}
+                                                                deviceType={deviceType}
+                                                                setAttributes={setAttributes}
+                                                                rangeStep={0.001}
+                                                                resetFallbackValue={""}
+                                                                isRangeUnit={false}
+                                                            />
+                                                        </div>
+                                                    )}
+                                                </StackCardInspectorSortableItem>
+                                            ))}
+                                        </ul>
+                                    </SortableContext>
+                                    <Button
+                                        variant="primary"
+                                        className="fb-stack-cards-add-item-button"
+                                        onClick={handleAddCardItem}
+                                    >
+                                        {__('Add New Card Item', 'frontis-blocks')}
+                                    </Button>
+                                </DndContext>
+                            </div>
+                        </BaseControl>
+                        {stackCardsPresetStyle === 'stack-top' && (
+                            <>  
+                                <FB_Range
+                                    min={0}
+                                    max={stackCardsOffsetTopUnits?.[deviceType] === '%' ? 100 : 200}
+                                    label={__("Offset Top", "frontis-blocks")}
+                                    rangeValue={stackCardsOffsetTop} 
+                                    onChangeHandler={(value) => setAttributes({ stackCardsOffsetTop: value })}
+                                    rangeUnitHandler={(value) => setAttributes({ stackCardsOffsetTopUnits: value })}
+                                    deviceType={deviceType}
+                                    units={stackCardsOffsetTopUnits}
+                                    setAttributes={setAttributes}
+                                    rangeStep={1}
+                                    resetFallbackValue={""}
+                                />
+
+                                <FB_Range
+                                    label={__("Card Item Gap", "frontis-blocks")}
+                                    rangeValue={stackCardsCardItemGap} 
+                                    onChangeHandler={(value) => setAttributes({ stackCardsCardItemGap: value })}
+                                    rangeUnitHandler={(value) => setAttributes({ stackCardsCardItemGapUnits: value })}
+                                    deviceType={deviceType}
+                                    units={stackCardsCardItemGapUnits}
+                                    setAttributes={setAttributes}
+                                    rangeStep={1}
+                                    resetFallbackValue={""}   
+                                />
+
+                            </>
+                        )}
 					</PanelBody>
 				</div>
 			</div>

@@ -104,7 +104,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
                                                 ) : item.FeatureIconAlign === 'image' && item.FeatureIconImageUrl ? (
                                                     <div className={`fb-feature-icon-image-wrapper ${FeatureIconShape}`}>
-
+                                                                                                
                                                         <img
                                                             src={item.FeatureIconImageUrl}
                                                             alt={item.FeatureIconImageAlt || 'Feature Image'}

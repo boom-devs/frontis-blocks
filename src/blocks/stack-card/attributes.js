@@ -11,6 +11,10 @@ const attributes = {
         type: 'string',
         default: '',
     },
+	stackCardsPresetStyle: {
+        type: 'string',
+        default: 'stack-top',
+    },
 	stackCardsDesktopSwitcher: {
         type: 'boolean',
         default: false,
@@ -34,6 +38,61 @@ const attributes = {
 	stackCardsGlobalWraperClass : {
 		type: 'string',
 		default: ''
+	},
+
+	stackCardsOffsetTop: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '80',
+			Mobile: '60',
+		}
+	},
+	stackCardsOffsetTopUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsItemOffsetTop: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	
+	stackCardsItemOffsetTopSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	stackCardsItemScale: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+
+	stackCardsCardItemGap: {
+		type: 'object',
+		default: {
+			Desktop: '20',
+			Tablet: '15',
+			Mobile: '10',
+		}
+	},
+	stackCardsCardItemGapUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
 	},
 
 	/** Start Global Setting */
@@ -61,10 +120,10 @@ const attributes = {
 	stackCardsGlobalPaddingDesktop: {
 		type: 'object', 
 		default: {
-			top: '30',
-			bottom: '30',
-			left: '30',
-			right: '30',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	stackCardsGlobalPaddingTablet: {
@@ -145,7 +204,7 @@ const attributes = {
 	},
 	stackCardsGlobalBgNormalClassicColor: {
 		type: 'string',
-		default: '#fefaf3',
+		default: '',
 	},
 	stackCardsGlobalBgNormalGradientColor: {
 		type: 'string',
@@ -251,10 +310,10 @@ const attributes = {
 	stackCardsGlobalBorderRadiusDesktop: {
 		type: 'object', 
 		default: {
-			top: '10',
-			bottom: '10',
-			left: '10',
-			right: '10',
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
 		},
 	},
 	stackCardsGlobalBorderRadiusTablet: {
