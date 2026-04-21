@@ -712,14 +712,15 @@ const Inspector = (props) => {
 					setAttributes({ containerDesktopMargin: { ...containerDesktopMargin, [position]: value } });
 					break;
 				case 'Tablet':
-					let containerMarginTablet = containerTabletMargin
-					if(containerTabletMargin[position] === '') {
-						containerMarginTablet[position] = containerDesktopMargin[position];
-					}
-
-					console.log(containerMarginTablet)
-
-					setAttributes({ containerTabletMargin: { ...containerMarginTablet, [position]: value } });
+					setAttributes({
+						containerTabletMargin: {
+							...containerTabletMargin,
+							[position]:
+								containerTabletMargin[position] === ''
+									? (containerDesktopMargin[position] || value)
+									: value,
+						},
+					});
 					break;
 				case 'Mobile':
 					setAttributes({ containerMobileMargin: { ...containerMobileMargin, [position]: value } });

@@ -1079,3 +1079,11 @@ export const RIVE_RENDER_TYPE = [
 	{ label: __("Canvas", "frontis-blocks"), value: "canvas" },
 	{ label: __("WebGL2", "frontis-blocks"), value: "webgl2" },
 ];
+
+export const PRICING_TABLE_PRESETS = [
+	{ label: __("Default", "frontis-blocks"), value: "default" },
+	{ label: __("Preset 1", "frontis-blocks"), value: "preset-1" },
+	{ label: __("Preset 2", "frontis-blocks"), value: "preset-2" },
+	{ label: __("Preset 3", "frontis-blocks"), value: "preset-3" },
+	{ label: __("Preset 4", "frontis-blocks"), value: "preset-4" },
+];
