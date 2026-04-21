@@ -1,0 +1,12 @@
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame {
+    display: grid;
+    gap: 16px;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-card-item {
+    position: relative;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-card-item__content {
+    width: 100%;
+}
