@@ -1,0 +1,109 @@
+.fb-stack-cards-main-wrapper {
+    width: 100%;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame {
+    min-height: 110px;
+    width: 100%;
+    padding: 24px;
+    border: 1px dashed #cfd6dc;
+    border-radius: 12px;
+    background: #fff;
+    box-sizing: border-box;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks {
+    width: 100%;
+    min-height: 60px;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    min-height: 60px;
+    display: grid;
+    gap: 16px;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout:empty::before {
+    content: '';
+    position: absolute;
+}
+
+.fb-stack-cards-main-wrapper .fb-stack-cards-frame .block-list-appender {
+    display: flex;
+    justify-content: center;
+}
+
+.fb-stack-card-item {
+    border: 1px solid #d8dee5;
+    border-radius: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    padding: 16px;
+}
+
+.fb-stack-card-item__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.fb-stack-card-item__label {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #4b5563;
+}
+
+.fb-stack-card-item__delete.components-button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 1px solid #f1c7c9;
+    border-radius: 999px;
+    color: #c0262d;
+    background: #fff5f5;
+}
+
+.fb-stack-card-item__delete.components-button:disabled {
+    opacity: 0.55;
+}
+
+.fb-stack-card-item__content {
+    min-height: 72px;
+}
+
+.fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    min-height: 72px;
+}
+
+.fb-stack-card-item__content > .block-editor-inner-blocks > .block-editor-block-list__layout:empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 18px;
+    background: #fff;
+}
+
+.fb-stack-card-item__hint,
+.fb-stack-cards-inspector-note {
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: #5b6472;
+}
+
+.fb-stack-cards-add-item-button.components-button {
+    width: 100%;
+    justify-content: center;
+    margin-top: 12px;
+}
