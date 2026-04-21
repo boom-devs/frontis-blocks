@@ -59,7 +59,7 @@ if ($title_excerpt_length > 0) {
     }
 }
 
-// Build wrapper classes (array বানিয়ে তারপর sanitize)
+// Build wrapper classes (make array to sanitize)
 $parent_classes_arr = array_merge(
     ['fb-post-title-block', $block_id],
     $responsive_classes
@@ -102,8 +102,3 @@ $html_tag_id_attr = !empty($wrapper_id) ? ' id="' . $wrapper_id . '"' : '';
         </<?php echo $post_title_tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <?php endif; ?>
 </div>
-<?php if ($block_style): ?>
-    <style>
-        <?php echo $block_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-    </style>
-<?php endif; ?>
