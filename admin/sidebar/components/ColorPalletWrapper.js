@@ -12,8 +12,7 @@ const ColorPalletWrapper = (props) => {
 	const [newlyAddedCustomColors, setNewlyAddedCustomColors] = useState();
 
     const deleteItem = (index) => {
-		wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-		enAbleSave();
+        // Removed immediate save triggers to favor manual save button
     }
 
     useEffect(() => {
@@ -46,8 +45,7 @@ const ColorPalletWrapper = (props) => {
                         item.insertBefore(newButton, existingButton.nextSibling);
                     });
 
-					wp.data.dispatch('core/editor').editPost({ meta: { _dummy: new Date().getTime() } });
-					enAbleSave();
+						// Removed immediate save triggers to favor manual save button
                 }
 
             }, 100)
