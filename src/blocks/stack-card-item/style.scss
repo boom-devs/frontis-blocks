@@ -1,0 +1,12 @@
+/**
+ * Front-end: light card frame (solid border reads better than dashed outside editor).
+ */
+.fb-stack-card-item {
+	position: sticky;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.fb-stack-card-item__content {
+	padding: 16px;
+}
