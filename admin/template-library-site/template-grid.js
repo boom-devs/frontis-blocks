@@ -52,8 +52,8 @@ const TemplateGrid = ({
             >
                 <div className={`fb-template-library-card-img ${templateType !== 'patterns' ? 'scroll-img' : ''}`}>
                     <img src={`https://template-library.frontiswp.com/storage/${imageUrl}`} alt={title || "Template preview"} />
-                    <div className={`fb-template-badge ${is_premium ? "pro" : "free"}`}>
-                        {is_premium ? "PRO" : "FREE"}
+                    <div className={`fb-template-badge ${is_premium && "pro"}`}>
+                        {is_premium && "Pro"}
                     </div>
                     {isHovered && (
                         <div className="fb-template-overlay">
