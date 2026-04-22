@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/circle-menu",
+	"version": "1.0.0",
+	"title": "Circle Menu",
+	"category": "frontis-blocks",
+	"icon": "menu",
+	"supports": {
+		"customClassName": false
+	},
+	"description": "Create a stunning animated circle menu.",
+	"keywords": [ "menu", "circle", "navigation" ],
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./editor.scss",
+	"style": "file:./style.scss",
+	"viewScript": "file:./view.js"
+}

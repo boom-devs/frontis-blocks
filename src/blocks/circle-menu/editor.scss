@@ -1,0 +1,49 @@
+.wp-block-frontis-blocks-circle-menu {
+	margin: 20px 0;
+	
+	/* Enforce icon sizing in the editor to overcome Gutenberg's defaults */
+	.fb-circle-menu-toggle,
+	.fb-circle-menu-icon {
+		svg, i, img {
+			width: var(--fb-cm-main-icon-size, 32px) !important;
+			height: var(--fb-cm-main-icon-size, 32px) !important;
+			max-width: 100% !important;
+			max-height: 100% !important;
+		}
+	}
+
+	.fb-circle-menu-icon {
+		svg, i {
+			width: var(--fb-cm-sub-icon-size, 24px) !important;
+			height: var(--fb-cm-sub-icon-size, 24px) !important;
+		}
+	}
+
+	/* Ensure wrapper visibility in editor */
+	.fb-circle-menu-main-wrapper {
+		position: relative !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		bottom: 0 !important;
+		transform: none !important;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 100px;
+		background: rgba(0, 0, 0, 0.02);
+		border: 1px dashed #ccc;
+		border-radius: 8px;
+		z-index: 10 !important;
+		
+		&.bottom-center, &.top-center {
+			left: 0 !important;
+			transform: none !important;
+		}
+	}
+
+	/* Force it to stay within boundaries */
+	.fb-circle-menu {
+		margin: auto;
+	}
+}
