@@ -1,0 +1,35 @@
+@import './layouts/layout-one/editor.scss';
+@import './layouts/layout-two/editor.scss';
+@import './layouts/layout-three/editor.scss';
+@import './layouts/layout-four/editor.scss';
+/** Column Selector Styling */
+.fb-column-selector-group {
+    display: flex;
+    gap: 8px;
+
+    .components-button {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+/** Selected Column Indicator in Editor */
+.fb-multi-column-pricing-table-wrapper {
+    .fb-mc-pricing-column {
+        position: relative;
+        cursor: pointer;
+        transition: outline 0.2s ease;
+
+        &.is-selected-column {
+            outline: 1px solid #007cba;
+            outline-offset: 1px;
+            z-index: 9;
+        }
+
+        &:hover {
+            outline: 1px dashed #007cba;
+            outline-offset: 2px;
+            z-index: 9;
+        }
+    }
+}
