@@ -1,11 +1,12 @@
 import { createBlock } from '@wordpress/blocks';
 import { useBlockProps, useInnerBlocksProps, store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useLayoutEffect, useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
 import generateStackCardsStyle from './styling';
+import { bindEditorStackCardScale } from './stack-card-scale-behavior';
 import './editor.scss';
 
 const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
@@ -72,7 +73,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		});
 	}, [childBlocks, updateBlockAttributes]);
 
+	const rootRef = useRef(null);
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
 	const blockProps = useBlockProps({
+		ref: rootRef,
         className: [
             'fb-stack-cards-main-wrapper',
             isSelected ? 'fb-stack-cards-main-wrapper--active' : '',
@@ -83,9 +89,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             stackCardsMobileSwitcher ? 'fb-mobile-responsive' : '',
         ].filter(Boolean).join(' '),
     });
-
-    const panelRef = useRef(null);
-    SwitchToBlockSettings(panelRef);
 
     const innerBlocksProps = useInnerBlocksProps(
         {
@@ -98,6 +101,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             renderAppender: false,
         }
     );
+
+	useLayoutEffect(() => {
+		if (stackCardsPresetStyle !== 'stack-top') {
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el) {
+			return undefined;
+		}
+		return bindEditorStackCardScale(el);
+	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
 
 	return (
 		<>

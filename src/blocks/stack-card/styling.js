@@ -205,6 +205,7 @@ const generateStackCardsStyle = (attributes) => {
             position: sticky;
             transform-origin: top center;
             ${stackCardsPresetStyle === 'stack-top' ? `transform: scale(var(--fb-active-scale, var(--fb-design-scale, 1)));` : ''}
+            transition: transform 0.5s ease,opacity 0.5s ease;
         }
 
         @media only screen and (max-width: 1024px) {
