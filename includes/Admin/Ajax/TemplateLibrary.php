@@ -790,9 +790,8 @@ class TemplateLibrary extends AjaxBase
                     continue;
                 }
 
-                // Decode and unslash navigation content
+                // Decode navigation content
                 $content = $this->decode_content($content);
-                $content = wp_unslash($content);
 
                 // Replace media URLs in navigation content
                 if ($uploads_updated && !empty($site_url)) {
@@ -949,7 +948,6 @@ class TemplateLibrary extends AjaxBase
 
             // Decode and unslash template content
             $content = $this->decode_content($content);
-            $content = wp_unslash($content);
 
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
