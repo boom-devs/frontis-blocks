@@ -1112,55 +1112,6 @@ export default function Edit( {
 						</div>
 					) : isLayoutMode ? (
 						<div className="layout-overlay-mode">
-							<div
-								className="layout-mode-toolbar"
-								onMouseDown={ ( e ) => e.stopPropagation() }
-							>
-								<div className="grid-stage-copy">
-									<h3>
-										{ __(
-											'Resize and arrange your layout',
-											'frontis-blocks'
-										) }
-									</h3>
-								</div>
-
-								<div
-									className={ `layout-selection-panel ${
-										selectedGridItem
-											? 'has-selection'
-											: 'is-empty'
-									}` }
-								>
-
-									<div className="layout-selection-actions">
-										<Button
-											variant="primary"
-											onClick={ ( e ) => {
-												e.stopPropagation();
-												if ( selectedGridItem ) {
-													focusGridItem(
-														selectedGridItem.itemId,
-														{
-															exitLayoutMode: true,
-														}
-													);
-												} else {
-													goToContentView();
-												}
-											} }
-											onMouseDown={ ( e ) =>
-												e.stopPropagation()
-											}
-										>
-											{ __(
-												'Continue to Content',
-												'frontis-blocks'
-											) }
-										</Button>
-									</div>
-								</div>
-							</div>
 
 							{ mounted && width > 0 && (
 								<ReactGridLayout
@@ -1237,27 +1188,6 @@ export default function Edit( {
 						</div>
 					) : isContentView ? (
 						<div className="grid-content-stage">
-							{ hasGridItems && (
-								<div className="grid-content-stage-bar">
-									<div className="grid-content-stage-copy">
-										<span className="grid-content-stage-title">
-											{ __(
-												'Add blocks inside each layout area.',
-												'frontis-blocks'
-											) }
-										</span>
-									</div>
-									<Button
-										variant="secondary"
-										onClick={ goToLayoutView }
-									>
-										{ __(
-											'Back to Layout',
-											'frontis-blocks'
-										) }
-									</Button>
-								</div>
-							) }
 							<div { ...innerBlocksProps } />
 						</div>
 					) : null }
