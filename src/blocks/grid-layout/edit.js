@@ -1,43 +1,43 @@
-import { __, sprintf } from "@wordpress/i18n";
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	useBlockProps,
 	useInnerBlocksProps,
 	BlockControls,
-} from "@wordpress/block-editor";
+} from '@wordpress/block-editor';
 import {
 	Button,
 	ToolbarDropdownMenu,
 	ToolbarGroup,
 	ToolbarButton,
-} from "@wordpress/components";
-import { useSelect, useDispatch } from "@wordpress/data";
+} from '@wordpress/components';
+import { useSelect, useDispatch } from '@wordpress/data';
 import {
 	useState,
 	useMemo,
 	useCallback,
 	useEffect,
 	useRef,
-} from "@wordpress/element";
-import { createBlock } from "@wordpress/blocks";
+} from '@wordpress/element';
+import { createBlock } from '@wordpress/blocks';
 import {
 	getCompactor,
 	ReactGridLayout,
 	useContainerWidth,
-} from "react-grid-layout";
+} from 'react-grid-layout';
 
-import "/node_modules/react-grid-layout/css/styles.css";
-import "/node_modules/react-resizable/css/styles.css";
-import "./editor.scss";
-import { setDeviceType, useDeviceType } from "@Config/displayType";
-import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
-import Inspector from "./inspector";
-import generateGridLayoutStyle from "./styling";
+import '/node_modules/react-grid-layout/css/styles.css';
+import '/node_modules/react-resizable/css/styles.css';
+import './editor.scss';
+import { setDeviceType, useDeviceType } from '@Config/displayType';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import Inspector from './inspector';
+import generateGridLayoutStyle from './styling';
 
-const BREAKPOINTS = ["Desktop", "Tablet", "Mobile"];
+const BREAKPOINTS = [ 'Desktop', 'Tablet', 'Mobile' ];
 const BREAKPOINT_ICONS = {
-	Desktop: "desktop",
-	Tablet: "tablet",
-	Mobile: "smartphone",
+	Desktop: 'desktop',
+	Tablet: 'tablet',
+	Mobile: 'smartphone',
 };
 const DEFAULT_GRID_SETTINGS = {
 	Desktop: { cols: 12, rowHeight: 40, gutter: 10 },
@@ -54,45 +54,261 @@ const DEFAULT_NEW_ITEM_HEIGHT = {
 	Tablet: 4,
 	Mobile: 4,
 };
+const BUILDER_VIEWS = {
+	PICKER: 'picker',
+	LAYOUT: 'layout',
+	CONTENT: 'content',
+};
+const PRESET_LAYOUT_COMPACTOR = getCompactor( 'vertical', false );
+const PRESET_DESKTOP_COLS = DEFAULT_GRID_SETTINGS.Desktop.cols;
+const PRESET_TABLET_COLS = DEFAULT_GRID_SETTINGS.Tablet.cols;
+const PRESET_MOBILE_COLS = DEFAULT_GRID_SETTINGS.Mobile.cols;
+const clampPresetLayoutItem = ( item, colsCount, fallbackY = 0 ) => {
+	const width = Math.min( Math.max( Number( item?.w ) || 1, 1 ), colsCount );
+	const maxX = Math.max( colsCount - width, 0 );
+	const x = Math.min( Math.max( Number( item?.x ) || 0, 0 ), maxX );
+	const rawY = Number( item?.y );
+	const y = Number.isFinite( rawY ) && rawY >= 0 ? rawY : fallbackY;
 
-const getResponsiveDeviceIcon = (breakpoint) =>
-	BREAKPOINT_ICONS[breakpoint] || BREAKPOINT_ICONS.Desktop;
+	return {
+		i: item?.i,
+		x,
+		y,
+		w: width,
+		h: Math.max( Number( item?.h ) || 1, 1 ),
+	};
+};
+const getPresetLayoutNextRow = ( layout = [] ) =>
+	layout.reduce(
+		( maxRow, item ) => Math.max( maxRow, item.y + item.h ),
+		0
+	);
+const scalePresetLayout = ( layout = [], colsCount ) => {
+	const scaledLayout = layout.map( ( item, index ) =>
+		clampPresetLayoutItem(
+			{
+				i: `preset-${ index }`,
+				x: Math.round(
+					( ( Number( item?.x ) || 0 ) / PRESET_DESKTOP_COLS ) *
+						colsCount
+				),
+				y: Number( item?.y ) || 0,
+				w: Math.max(
+					Math.round(
+						( ( Number( item?.w ) || 1 ) / PRESET_DESKTOP_COLS ) *
+							colsCount
+					),
+					1
+				),
+				h: Math.max( Number( item?.h ) || 1, 1 ),
+			},
+			colsCount,
+			Number( item?.y ) || 0
+		)
+	);
+	const compactedLayout = PRESET_LAYOUT_COMPACTOR.compact(
+		scaledLayout,
+		colsCount
+	);
+	const compactedMap = new Map(
+		compactedLayout.map( ( item ) => [
+			item.i,
+			clampPresetLayoutItem( item, colsCount ),
+		] )
+	);
 
-const getBreakpointNumber = (values, breakpoint, settingKey) =>
-	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
+	return scaledLayout.map( ( item ) => {
+		const compactedItem = compactedMap.get( item.i ) || item;
 
-const getDefaultItemWidth = (breakpoint, colsCount) => {
-	const fallbackWidth = DEFAULT_NEW_ITEM_WIDTH[breakpoint];
-	return Math.min(Math.max(fallbackWidth, 1), colsCount);
+		return {
+			x: compactedItem.x,
+			y: compactedItem.y,
+			w: compactedItem.w,
+			h: compactedItem.h,
+		};
+	} );
+};
+const stackPresetLayout = ( layout = [], colsCount ) =>
+	layout.reduce( ( stackedLayout, item ) => {
+		stackedLayout.push( {
+			x: 0,
+			y: getPresetLayoutNextRow( stackedLayout ),
+			w: colsCount,
+			h: Math.max( Number( item?.h ) || 1, 2 ),
+		} );
+
+		return stackedLayout;
+	}, [] );
+const createTemplatePreset = ( { id, title, desktopLayout } ) => ( {
+	id,
+	title,
+	layouts: {
+		Desktop: desktopLayout,
+		Tablet: scalePresetLayout( desktopLayout, PRESET_TABLET_COLS ),
+		Mobile: stackPresetLayout( desktopLayout, PRESET_MOBILE_COLS ),
+	},
+} );
+const GRID_TEMPLATE_PRESETS = [
+	createTemplatePreset( {
+		id: 'single',
+		title: __( 'Single', 'frontis-blocks' ),
+		desktopLayout: [ { x: 0, y: 0, w: 12, h: 3 } ],
+	} ),
+	createTemplatePreset( {
+		id: 'two-columns',
+		title: __( 'Two Columns', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 6, h: 3 },
+			{ x: 6, y: 0, w: 6, h: 3 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'three-columns',
+		title: __( 'Three Columns', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 4, h: 3 },
+			{ x: 4, y: 0, w: 4, h: 3 },
+			{ x: 8, y: 0, w: 4, h: 3 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'four-columns',
+		title: __( 'Four Columns', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 3, h: 3 },
+			{ x: 3, y: 0, w: 3, h: 3 },
+			{ x: 6, y: 0, w: 3, h: 3 },
+			{ x: 9, y: 0, w: 3, h: 3 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'quad-grid',
+		title: __( 'Quad Grid', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 6, h: 2 },
+			{ x: 6, y: 0, w: 6, h: 2 },
+			{ x: 0, y: 2, w: 6, h: 2 },
+			{ x: 6, y: 2, w: 6, h: 2 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'left-feature',
+		title: __( 'Left Feature', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 4, h: 4 },
+			{ x: 4, y: 0, w: 8, h: 4 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'gallery-grid',
+		title: __( 'Gallery Grid', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 4, h: 2 },
+			{ x: 4, y: 0, w: 4, h: 2 },
+			{ x: 8, y: 0, w: 4, h: 2 },
+			{ x: 0, y: 2, w: 4, h: 2 },
+			{ x: 4, y: 2, w: 4, h: 2 },
+			{ x: 8, y: 2, w: 4, h: 2 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'center-feature',
+		title: __( 'Center Feature', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 3, h: 4 },
+			{ x: 3, y: 0, w: 6, h: 4 },
+			{ x: 9, y: 0, w: 3, h: 4 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'right-feature',
+		title: __( 'Right Feature', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 8, h: 4 },
+			{ x: 8, y: 0, w: 4, h: 4 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'top-banner',
+		title: __( 'Top Banner', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 12, h: 2 },
+			{ x: 0, y: 2, w: 6, h: 2 },
+			{ x: 6, y: 2, w: 6, h: 2 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'bottom-banner',
+		title: __( 'Bottom Banner', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 6, h: 2 },
+			{ x: 6, y: 0, w: 6, h: 2 },
+			{ x: 0, y: 2, w: 12, h: 2 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'uneven-columns',
+		title: __( 'Uneven Columns', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 5, h: 4 },
+			{ x: 5, y: 0, w: 3, h: 4 },
+			{ x: 8, y: 0, w: 4, h: 4 },
+		],
+	} ),
+	createTemplatePreset( {
+		id: 'stacked-rows',
+		title: __( 'Stacked Rows', 'frontis-blocks' ),
+		desktopLayout: [
+			{ x: 0, y: 0, w: 4, h: 2 },
+			{ x: 4, y: 0, w: 4, h: 2 },
+			{ x: 8, y: 0, w: 4, h: 2 },
+			{ x: 0, y: 2, w: 6, h: 2 },
+			{ x: 6, y: 2, w: 6, h: 2 },
+		],
+	} ),
+];
+
+const getResponsiveDeviceIcon = ( breakpoint ) =>
+	BREAKPOINT_ICONS[ breakpoint ] || BREAKPOINT_ICONS.Desktop;
+
+const getBreakpointNumber = ( values, breakpoint, settingKey ) =>
+	Number( values?.[ breakpoint ] ) ||
+	DEFAULT_GRID_SETTINGS[ breakpoint ][ settingKey ];
+
+const getDefaultItemWidth = ( breakpoint, colsCount ) => {
+	const fallbackWidth = DEFAULT_NEW_ITEM_WIDTH[ breakpoint ];
+	return Math.min( Math.max( fallbackWidth, 1 ), colsCount );
 };
 
-const getDefaultItemHeight = (breakpoint) =>
-	Math.max(DEFAULT_NEW_ITEM_HEIGHT[breakpoint], 1);
+const getDefaultItemHeight = ( breakpoint ) =>
+	Math.max( DEFAULT_NEW_ITEM_HEIGHT[ breakpoint ], 1 );
 
-const getResolvedItemId = (block) =>
-	block.attributes.id || `grid-item-${block.clientId.slice(0, 8)}`;
+const getResolvedItemId = ( block ) =>
+	block.attributes.id || `grid-item-${ block.clientId.slice( 0, 8 ) }`;
 
-const getNextRow = (layout = []) =>
-	layout.reduce((maxRow, item) => {
-		const itemY = Number.isFinite(Number(item?.y)) ? Number(item.y) : 0;
-		const itemH = Math.max(Number(item?.h) || 1, 1);
+const getNextRow = ( layout = [] ) =>
+	layout.reduce( ( maxRow, item ) => {
+		const itemY = Number.isFinite( Number( item?.y ) )
+			? Number( item.y )
+			: 0;
+		const itemH = Math.max( Number( item?.h ) || 1, 1 );
 
-		return Math.max(maxRow, itemY + itemH);
-	}, 0);
+		return Math.max( maxRow, itemY + itemH );
+	}, 0 );
 
-const normalizeLayoutItem = (item, colsCount, fallbackY = 0) => {
-	const width = Math.min(Math.max(Number(item?.w) || 1, 1), colsCount);
-	const maxX = Math.max(colsCount - width, 0);
-	const x = Math.min(Math.max(Number(item?.x) || 0, 0), maxX);
-	const rawY = Number(item?.y);
-	const y = Number.isFinite(rawY) && rawY >= 0 ? rawY : fallbackY;
+const normalizeLayoutItem = ( item, colsCount, fallbackY = 0 ) => {
+	const width = Math.min( Math.max( Number( item?.w ) || 1, 1 ), colsCount );
+	const maxX = Math.max( colsCount - width, 0 );
+	const x = Math.min( Math.max( Number( item?.x ) || 0, 0 ), maxX );
+	const rawY = Number( item?.y );
+	const y = Number.isFinite( rawY ) && rawY >= 0 ? rawY : fallbackY;
 
 	return {
 		i: item.i,
 		x,
 		y,
 		w: width,
-		h: Math.max(Number(item?.h) || 1, 1),
+		h: Math.max( Number( item?.h ) || 1, 1 ),
 	};
 };
 
@@ -100,28 +316,28 @@ const createLayoutItemFromBlock = (
 	block,
 	breakpoint,
 	colsCount,
-	currentLayout,
+	currentLayout
 ) => {
-	const itemId = getResolvedItemId(block);
-	const fallbackY = getNextRow(currentLayout);
-	const defaultWidth = getDefaultItemWidth(breakpoint, colsCount);
-	const defaultHeight = getDefaultItemHeight(breakpoint);
+	const itemId = getResolvedItemId( block );
+	const fallbackY = getNextRow( currentLayout );
+	const defaultWidth = getDefaultItemWidth( breakpoint, colsCount );
+	const defaultHeight = getDefaultItemHeight( breakpoint );
 
-	if (breakpoint === "Desktop") {
+	if ( breakpoint === 'Desktop' ) {
 		return normalizeLayoutItem(
 			{
 				i: itemId,
-				x: Number.isFinite(Number(block.attributes.gridColumnStart))
-					? Number(block.attributes.gridColumnStart)
+				x: Number.isFinite( Number( block.attributes.gridColumnStart ) )
+					? Number( block.attributes.gridColumnStart )
 					: 0,
-				y: Number.isFinite(Number(block.attributes.gridRowStart))
-					? Number(block.attributes.gridRowStart)
+				y: Number.isFinite( Number( block.attributes.gridRowStart ) )
+					? Number( block.attributes.gridRowStart )
 					: fallbackY,
-				w: Number(block.attributes.gridColumnSpan) || defaultWidth,
-				h: Number(block.attributes.gridRowSpan) || defaultHeight,
+				w: Number( block.attributes.gridColumnSpan ) || defaultWidth,
+				h: Number( block.attributes.gridRowSpan ) || defaultHeight,
 			},
 			colsCount,
-			fallbackY,
+			fallbackY
 		);
 	}
 
@@ -134,102 +350,169 @@ const createLayoutItemFromBlock = (
 			h: defaultHeight,
 		},
 		colsCount,
-		fallbackY,
+		fallbackY
 	);
 };
 
-const buildLayoutsFromGridItems = (
-	gridItems,
-	cols,
-	layouts = {},
-) =>
-	BREAKPOINTS.reduce((updatedLayouts, breakpoint) => {
-		const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
-		const existingLayout = layouts?.[breakpoint] || [];
+const buildLayoutsFromGridItems = ( gridItems, cols, layouts = {} ) =>
+	BREAKPOINTS.reduce( ( updatedLayouts, breakpoint ) => {
+		const breakpointCols = getBreakpointNumber( cols, breakpoint, 'cols' );
+		const existingLayout = layouts?.[ breakpoint ] || [];
 		const existingLayoutMap = new Map(
-			existingLayout.map((item) => [item.i, item]),
+			existingLayout.map( ( item ) => [ item.i, item ] )
 		);
 
-		updatedLayouts[breakpoint] = gridItems.reduce((nextLayout, entry) => {
-			const existingItem = existingLayoutMap.get(entry.itemId);
+		updatedLayouts[ breakpoint ] = gridItems.reduce(
+			( nextLayout, entry ) => {
+				const existingItem = existingLayoutMap.get( entry.itemId );
 
-			if (existingItem) {
+				if ( existingItem ) {
+					nextLayout.push(
+						normalizeLayoutItem(
+							{
+								...existingItem,
+								i: entry.itemId,
+							},
+							breakpointCols,
+							getNextRow( nextLayout )
+						)
+					);
+					return nextLayout;
+				}
+
 				nextLayout.push(
-					normalizeLayoutItem(
-						{
-							...existingItem,
-							i: entry.itemId,
-						},
+					createLayoutItemFromBlock(
+						entry.block,
+						breakpoint,
 						breakpointCols,
-						getNextRow(nextLayout),
-					),
+						nextLayout
+					)
 				);
 				return nextLayout;
-			}
-
-			nextLayout.push(
-				createLayoutItemFromBlock(
-					entry.block,
-					breakpoint,
-					breakpointCols,
-					nextLayout,
-				),
-			);
-			return nextLayout;
-		}, []);
+			},
+			[]
+		);
 
 		return updatedLayouts;
-	}, {});
+	}, {} );
 
-const compactLayouts = (layouts = {}, cols, gridItemStateMap, compactor) =>
-	BREAKPOINTS.reduce((nextLayouts, breakpoint) => {
-		const breakpointCols = getBreakpointNumber(cols, breakpoint, "cols");
-		const sourceLayout = layouts?.[breakpoint] || [];
+const compactLayouts = ( layouts = {}, cols, gridItemStateMap, compactor ) =>
+	BREAKPOINTS.reduce( ( nextLayouts, breakpoint ) => {
+		const breakpointCols = getBreakpointNumber( cols, breakpoint, 'cols' );
+		const sourceLayout = layouts?.[ breakpoint ] || [];
 		const compactedLayout = compactor.compact(
-			sourceLayout.map((item) => ({
+			sourceLayout.map( ( item ) => ( {
 				...item,
-				static: gridItemStateMap.get(item.i)?.isStatic || false,
-			})),
-			breakpointCols,
+				static: gridItemStateMap.get( item.i )?.isStatic || false,
+			} ) ),
+			breakpointCols
 		);
 		const compactedMap = new Map(
-			compactedLayout.map((item) => [
+			compactedLayout.map( ( item ) => [
 				item.i,
-				normalizeLayoutItem(item, breakpointCols),
-			]),
+				normalizeLayoutItem( item, breakpointCols ),
+			] )
 		);
 
-		nextLayouts[breakpoint] = sourceLayout.map(
-			(item) =>
-				compactedMap.get(item.i) || normalizeLayoutItem(item, breakpointCols),
+		nextLayouts[ breakpoint ] = sourceLayout.map(
+			( item ) =>
+				compactedMap.get( item.i ) ||
+				normalizeLayoutItem( item, breakpointCols )
 		);
 
 		return nextLayouts;
-	}, {});
+	}, {} );
 
-const areLayoutsEqual = (firstLayouts, secondLayouts) =>
-	BREAKPOINTS.every((breakpoint) => {
-		const first = firstLayouts?.[breakpoint] || [];
-		const second = secondLayouts?.[breakpoint] || [];
+const areLayoutsEqual = ( firstLayouts, secondLayouts ) =>
+	BREAKPOINTS.every( ( breakpoint ) => {
+		const first = firstLayouts?.[ breakpoint ] || [];
+		const second = secondLayouts?.[ breakpoint ] || [];
 
-		return JSON.stringify(first) === JSON.stringify(second);
-	});
+		return JSON.stringify( first ) === JSON.stringify( second );
+	} );
 
 const getPxResponsiveUnits = () =>
-	BREAKPOINTS.reduce((nextUnits, breakpoint) => {
-		nextUnits[breakpoint] = "px";
+	BREAKPOINTS.reduce( ( nextUnits, breakpoint ) => {
+		nextUnits[ breakpoint ] = 'px';
 		return nextUnits;
-	}, {});
+	}, {} );
 
-const needsUnitNormalization = (units = {}) =>
-	BREAKPOINTS.some((breakpoint) => units?.[breakpoint] !== "px");
+const needsUnitNormalization = ( units = {} ) =>
+	BREAKPOINTS.some( ( breakpoint ) => units?.[ breakpoint ] !== 'px' );
 
-export default function Edit({
+const getPresetBreakpointLayout = ( preset, breakpoint ) =>
+	preset.layouts?.[ breakpoint ] || preset.layouts?.Desktop || [];
+
+const getPreviewRows = ( layout = [] ) => Math.max( getNextRow( layout ), 1 );
+
+const createPresetBlocks = ( preset ) =>
+	getPresetBreakpointLayout( preset, 'Desktop' ).map( ( item ) => {
+		const newBlock = createBlock( 'frontis-blocks/grid-item', {
+			gridColumnStart: item.x,
+			gridRowStart: item.y,
+			gridColumnSpan: item.w,
+			gridRowSpan: item.h,
+		} );
+		const itemId = getResolvedItemId( newBlock );
+
+		return {
+			...newBlock,
+			attributes: {
+				...newBlock.attributes,
+				id: itemId,
+				gridColumnStart: item.x,
+				gridRowStart: item.y,
+				gridColumnSpan: item.w,
+				gridRowSpan: item.h,
+			},
+		};
+	} );
+
+const createPresetLayouts = ( preset, blocks, cols ) =>
+	BREAKPOINTS.reduce( ( nextLayouts, breakpoint ) => {
+		const breakpointCols = getBreakpointNumber( cols, breakpoint, 'cols' );
+		const breakpointLayout = getPresetBreakpointLayout(
+			preset,
+			breakpoint
+		);
+		const desktopLayout = getPresetBreakpointLayout( preset, 'Desktop' );
+
+		nextLayouts[ breakpoint ] = blocks.reduce(
+			( layoutItems, block, index ) => {
+				const fallbackY = getNextRow( layoutItems );
+				const sourceItem = breakpointLayout[ index ] ||
+					desktopLayout[ index ] || {
+						x: 0,
+						y: fallbackY,
+						w: getDefaultItemWidth( breakpoint, breakpointCols ),
+						h: getDefaultItemHeight( breakpoint ),
+					};
+
+				layoutItems.push(
+					normalizeLayoutItem(
+						{
+							...sourceItem,
+							i: getResolvedItemId( block ),
+						},
+						breakpointCols,
+						fallbackY
+					)
+				);
+
+				return layoutItems;
+			},
+			[]
+		);
+
+		return nextLayouts;
+	}, {} );
+
+export default function Edit( {
 	attributes,
 	setAttributes,
 	clientId,
 	isSelected,
-}) {
+} ) {
 	const {
 		blockID,
 		blockStyle,
@@ -243,64 +526,64 @@ export default function Edit({
 		layouts,
 	} = attributes;
 
-	// Handle block ID generation
-	useBlockIdGenerator({
+	useBlockIdGenerator( {
 		clientId,
 		blockID,
-		blockPrefix: "fb-grid-layout",
+		blockPrefix: 'fb-grid-layout',
 		isSelected,
 		attributes,
 		setAttributes,
-	});
+	} );
 
-	useEffect(() => {
+	useEffect( () => {
 		const nextAttributes = {};
 
-		if (needsUnitNormalization(rowHeightUnits)) {
+		if ( needsUnitNormalization( rowHeightUnits ) ) {
 			nextAttributes.rowHeightUnits = getPxResponsiveUnits();
 		}
 
-		if (needsUnitNormalization(gutterUnits)) {
+		if ( needsUnitNormalization( gutterUnits ) ) {
 			nextAttributes.gutterUnits = getPxResponsiveUnits();
 		}
 
-		if (Object.keys(nextAttributes).length > 0) {
-			setAttributes(nextAttributes);
+		if ( Object.keys( nextAttributes ).length > 0 ) {
+			setAttributes( nextAttributes );
 		}
-	}, [
-		gutterUnits,
-		rowHeightUnits,
-		setAttributes,
-	]);
+	}, [ gutterUnits, rowHeightUnits, setAttributes ] );
 
-	const [isLayoutMode, setIsLayoutMode] = useState(false);
 	const deviceType = useDeviceType();
-	const activeBreakpoint = BREAKPOINTS.includes(deviceType)
+	const activeBreakpoint = BREAKPOINTS.includes( deviceType )
 		? deviceType
-		: "Desktop";
-	const { containerRef, mounted, width } = useContainerWidth({
+		: 'Desktop';
+	const { containerRef, mounted, width } = useContainerWidth( {
 		measureBeforeMount: true,
-	});
-	const lastSyncedLayoutRef = useRef(layouts);
+	} );
+	const lastSyncedLayoutRef = useRef( layouts );
+	const pendingPresetLayoutsRef = useRef( null );
+	const isApplyingPresetRef = useRef( false );
 
 	const { innerBlocks, selectedGridItemClientId } = useSelect(
-		(select) => {
-			const blockEditor = select("core/block-editor");
-			const blockItems = blockEditor.getBlocks(clientId);
-			const directChildIds = blockItems.map((block) => block.clientId);
-			const selectedBlockClientId = blockEditor.getSelectedBlockClientId();
+		( select ) => {
+			const blockEditor = select( 'core/block-editor' );
+			const blockItems = blockEditor.getBlocks( clientId );
+			const directChildIds = blockItems.map(
+				( block ) => block.clientId
+			);
+			const selectedBlockClientId =
+				blockEditor.getSelectedBlockClientId();
 
 			let nextSelectedGridItemClientId = null;
 
-			if (selectedBlockClientId) {
-				if (directChildIds.includes(selectedBlockClientId)) {
+			if ( selectedBlockClientId ) {
+				if ( directChildIds.includes( selectedBlockClientId ) ) {
 					nextSelectedGridItemClientId = selectedBlockClientId;
 				} else {
 					nextSelectedGridItemClientId =
 						blockEditor
-							.getBlockParents(selectedBlockClientId)
-							.find((parentClientId) => directChildIds.includes(parentClientId)) ||
-						null;
+							.getBlockParents( selectedBlockClientId )
+							.find( ( parentClientId ) =>
+								directChildIds.includes( parentClientId )
+							) || null;
 				}
 			}
 
@@ -309,127 +592,191 @@ export default function Edit({
 				selectedGridItemClientId: nextSelectedGridItemClientId,
 			};
 		},
-		[clientId],
+		[ clientId ]
 	);
 
-	const { insertBlock, removeBlock, selectBlock, updateBlockAttributes } =
-		useDispatch("core/block-editor");
+	const [ builderView, setBuilderView ] = useState( () =>
+		innerBlocks.length > 0 ? BUILDER_VIEWS.CONTENT : BUILDER_VIEWS.PICKER
+	);
+
+	useEffect( () => {
+		setBuilderView( ( currentView ) => {
+			if ( innerBlocks.length === 0 ) {
+				return BUILDER_VIEWS.PICKER;
+			}
+
+			return currentView;
+		} );
+	}, [ innerBlocks.length ] );
+
+	const {
+		insertBlock,
+		removeBlock,
+		replaceInnerBlocks,
+		selectBlock,
+		updateBlockAttributes,
+	} = useDispatch( 'core/block-editor' );
+
+	const hasGridItems = innerBlocks.length > 0;
+	const isLayoutMode = builderView === BUILDER_VIEWS.LAYOUT;
+	const isPickerView = builderView === BUILDER_VIEWS.PICKER;
+	const isContentView = builderView === BUILDER_VIEWS.CONTENT;
+
 	const gridItems = useMemo(
 		() =>
-			innerBlocks.map((block) => ({
+			innerBlocks.map( ( block ) => ( {
 				block,
-				itemId: getResolvedItemId(block),
-				isStatic: !!block.attributes.isStatic,
-			})),
-		[innerBlocks],
+				itemId: getResolvedItemId( block ),
+				isStatic: !! block.attributes.isStatic,
+			} ) ),
+		[ innerBlocks ]
 	);
 	const gridItemStateMap = useMemo(
 		() =>
 			new Map(
-				gridItems.map((entry) => [
+				gridItems.map( ( entry ) => [
 					entry.itemId,
 					{ isStatic: entry.isStatic },
-				]),
+				] )
 			),
-		[gridItems],
+		[ gridItems ]
 	);
 
-	const currentCols = getBreakpointNumber(cols, activeBreakpoint, "cols");
+	const currentCols = getBreakpointNumber( cols, activeBreakpoint, 'cols' );
 	const currentRowHeight = getBreakpointNumber(
 		rowHeight,
 		activeBreakpoint,
-		"rowHeight",
+		'rowHeight'
 	);
-	const currentGutter = getBreakpointNumber(gutter, activeBreakpoint, "gutter");
+	const currentGutter = getBreakpointNumber(
+		gutter,
+		activeBreakpoint,
+		'gutter'
+	);
 	const selectedGridItem = useMemo(
 		() =>
 			gridItems.find(
-				(entry) => entry.block.clientId === selectedGridItemClientId,
+				( entry ) => entry.block.clientId === selectedGridItemClientId
 			) || null,
-		[gridItems, selectedGridItemClientId],
+		[ gridItems, selectedGridItemClientId ]
 	);
 	const selectedGridItemIndex = useMemo(
 		() =>
 			selectedGridItem
 				? gridItems.findIndex(
-						(entry) => entry.block.clientId === selectedGridItem.block.clientId,
-					)
+						( entry ) =>
+							entry.block.clientId ===
+							selectedGridItem.block.clientId
+				  )
 				: -1,
-		[gridItems, selectedGridItem],
+		[ gridItems, selectedGridItem ]
 	);
-	const selectedLayoutItemId = selectedGridItem?.itemId || "";
+	const selectedLayoutItemId = selectedGridItem?.itemId || '';
 	const selectedLayoutLabel =
 		selectedGridItemIndex >= 0
 			? selectedGridItem?.isStatic
 				? sprintf(
-						__("Item %d selected, locked", "frontis-blocks"),
-						selectedGridItemIndex + 1,
-					)
+						__( 'Item %d selected, locked', 'frontis-blocks' ),
+						selectedGridItemIndex + 1
+				  )
 				: sprintf(
-						__("Item %d selected", "frontis-blocks"),
-						selectedGridItemIndex + 1,
-					)
-			: __("Select a layout item to edit or delete it.", "frontis-blocks");
+						__( 'Item %d selected', 'frontis-blocks' ),
+						selectedGridItemIndex + 1
+				  )
+			: __(
+					'Select a layout item to edit or delete it.',
+					'frontis-blocks'
+			  );
 	const baseLayouts = useMemo(
-		() => buildLayoutsFromGridItems(gridItems, cols, layouts),
-		[cols, gridItems, layouts],
+		() => buildLayoutsFromGridItems( gridItems, cols, layouts ),
+		[ cols, gridItems, layouts ]
 	);
 	const layoutCompactor = useMemo(
-		() => getCompactor(compactType || null, allowOverlap),
-		[allowOverlap, compactType],
+		() => getCompactor( compactType || null, allowOverlap ),
+		[ allowOverlap, compactType ]
 	);
 	const effectiveLayouts = useMemo(
 		() =>
-			compactLayouts(baseLayouts, cols, gridItemStateMap, layoutCompactor),
-		[baseLayouts, cols, gridItemStateMap, layoutCompactor],
+			compactLayouts(
+				baseLayouts,
+				cols,
+				gridItemStateMap,
+				layoutCompactor
+			),
+		[ baseLayouts, cols, gridItemStateMap, layoutCompactor ]
 	);
 
-	useEffect(() => {
-		if (blockID) {
-			const css = generateGridLayoutStyle(attributes, effectiveLayouts);
-			if (css !== blockStyle) {
-				setAttributes({ blockStyle: css });
+	useEffect( () => {
+		if ( blockID ) {
+			const css = generateGridLayoutStyle( attributes, effectiveLayouts );
+			if ( css !== blockStyle ) {
+				setAttributes( { blockStyle: css } );
 			}
 		}
-	}, [attributes, blockID, blockStyle, effectiveLayouts, setAttributes]);
+	}, [ attributes, blockID, blockStyle, effectiveLayouts, setAttributes ] );
 
-	useEffect(() => {
+	useEffect( () => {
 		lastSyncedLayoutRef.current = effectiveLayouts;
-	}, [effectiveLayouts]);
+	}, [ effectiveLayouts ] );
 
-	useEffect(() => {
-		if (!areLayoutsEqual(layouts, effectiveLayouts)) {
-			lastSyncedLayoutRef.current = effectiveLayouts;
-			setAttributes({ layouts: effectiveLayouts });
+	useEffect( () => {
+		if (
+			! isApplyingPresetRef.current ||
+			! pendingPresetLayoutsRef.current ||
+			innerBlocks.length === 0
+		) {
+			return;
 		}
-	}, [effectiveLayouts, layouts, setAttributes]);
+
+		const nextLayouts = pendingPresetLayoutsRef.current;
+
+		pendingPresetLayoutsRef.current = null;
+		lastSyncedLayoutRef.current = nextLayouts;
+		setAttributes( { layouts: nextLayouts } );
+		isApplyingPresetRef.current = false;
+	}, [ innerBlocks.length, setAttributes ] );
+
+	useEffect( () => {
+		if ( isApplyingPresetRef.current ) {
+			return;
+		}
+
+		if ( ! areLayoutsEqual( layouts, effectiveLayouts ) ) {
+			lastSyncedLayoutRef.current = effectiveLayouts;
+			setAttributes( { layouts: effectiveLayouts } );
+		}
+	}, [ effectiveLayouts, layouts, setAttributes ] );
 
 	const onLayoutChange = useCallback(
-		(newLayout) => {
-			const cleanLayout = newLayout.map((item) =>
-				normalizeLayoutItem(item, currentCols),
+		( newLayout ) => {
+			const cleanLayout = newLayout.map( ( item ) =>
+				normalizeLayoutItem( item, currentCols )
 			);
 
 			const nextLayouts = {
 				...lastSyncedLayoutRef.current,
-				[activeBreakpoint]: cleanLayout,
+				[ activeBreakpoint ]: cleanLayout,
 			};
 
 			lastSyncedLayoutRef.current = nextLayouts;
-			setAttributes({ layouts: nextLayouts });
+			setAttributes( { layouts: nextLayouts } );
 
-			if (activeBreakpoint === "Desktop") {
-				cleanLayout.forEach((item) => {
+			if ( activeBreakpoint === 'Desktop' ) {
+				cleanLayout.forEach( ( item ) => {
 					const matchingEntry = gridItems.find(
-						(entry) => entry.itemId === item.i,
+						( entry ) => entry.itemId === item.i
 					);
 
-					if (!matchingEntry) {
+					if ( ! matchingEntry ) {
 						return;
 					}
 
-					const { gridColumnStart, gridRowStart, gridColumnSpan, gridRowSpan } =
-						matchingEntry.block.attributes;
+					const {
+						gridColumnStart,
+						gridRowStart,
+						gridColumnSpan,
+						gridRowSpan,
+					} = matchingEntry.block.attributes;
 
 					if (
 						gridColumnStart !== item.x ||
@@ -437,14 +784,14 @@ export default function Edit({
 						gridColumnSpan !== item.w ||
 						gridRowSpan !== item.h
 					) {
-						updateBlockAttributes(matchingEntry.block.clientId, {
+						updateBlockAttributes( matchingEntry.block.clientId, {
 							gridColumnStart: item.x,
 							gridRowStart: item.y,
 							gridColumnSpan: item.w,
 							gridRowSpan: item.h,
-						});
+						} );
 					}
-				});
+				} );
 			}
 		},
 		[
@@ -453,277 +800,534 @@ export default function Edit({
 			gridItems,
 			setAttributes,
 			updateBlockAttributes,
-		],
+		]
 	);
 
-	const addGridItem = useCallback(() => {
+	const openTemplatePicker = useCallback( () => {
+		setBuilderView( BUILDER_VIEWS.PICKER );
+	}, [] );
+
+	const goToLayoutView = useCallback( () => {
+		if ( ! hasGridItems ) {
+			setBuilderView( BUILDER_VIEWS.PICKER );
+			return;
+		}
+
+		setBuilderView( BUILDER_VIEWS.LAYOUT );
+	}, [ hasGridItems ] );
+
+	const goToContentView = useCallback( () => {
+		setBuilderView( BUILDER_VIEWS.CONTENT );
+	}, [] );
+
+	const applyPreset = useCallback(
+		( preset ) => {
+			const presetBlocks = createPresetBlocks( preset );
+			const presetLayouts = createPresetLayouts(
+				preset,
+				presetBlocks,
+				cols
+			);
+
+			isApplyingPresetRef.current = true;
+			pendingPresetLayoutsRef.current = presetLayouts;
+			replaceInnerBlocks( clientId, presetBlocks, false );
+			setBuilderView( BUILDER_VIEWS.LAYOUT );
+
+			requestAnimationFrame( () => {
+				if ( presetBlocks[ 0 ] ) {
+					selectBlock( presetBlocks[ 0 ].clientId );
+				} else {
+					selectBlock( clientId );
+				}
+			} );
+		},
+		[ clientId, cols, replaceInnerBlocks, selectBlock ]
+	);
+
+	const addGridItem = useCallback( () => {
+		if ( ! hasGridItems ) {
+			openTemplatePicker();
+			return;
+		}
+
 		const desktopDefaultWidth = getDefaultItemWidth(
-			"Desktop",
-			getBreakpointNumber(cols, "Desktop", "cols"),
+			'Desktop',
+			getBreakpointNumber( cols, 'Desktop', 'cols' )
 		);
-		const desktopDefaultHeight = getDefaultItemHeight("Desktop");
-		const newBlock = createBlock("frontis-blocks/grid-item", {
+		const desktopDefaultHeight = getDefaultItemHeight( 'Desktop' );
+		const newBlock = createBlock( 'frontis-blocks/grid-item', {
 			gridColumnSpan: desktopDefaultWidth,
 			gridRowSpan: desktopDefaultHeight,
 			gridColumnStart: 0,
 			gridRowStart: 0,
-		});
-		insertBlock(newBlock, innerBlocks.length, clientId);
-		setIsLayoutMode(true);
+		} );
+		insertBlock( newBlock, innerBlocks.length, clientId );
+		setBuilderView( BUILDER_VIEWS.LAYOUT );
 	}, [
 		clientId,
 		cols,
+		hasGridItems,
 		innerBlocks.length,
 		insertBlock,
-	]);
+		openTemplatePicker,
+	] );
 
 	const focusGridItem = useCallback(
-		(itemId, { exitLayoutMode = false } = {}) => {
-			const matchingEntry = gridItems.find((entry) => entry.itemId === itemId);
+		( itemId, { exitLayoutMode = false } = {} ) => {
+			const matchingEntry = gridItems.find(
+				( entry ) => entry.itemId === itemId
+			);
 
-			if (!matchingEntry) {
+			if ( ! matchingEntry ) {
 				return;
 			}
 
-			selectBlock(matchingEntry.block.clientId);
+			selectBlock( matchingEntry.block.clientId );
 
-			if (exitLayoutMode) {
-				setIsLayoutMode(false);
-				requestAnimationFrame(() => {
-					selectBlock(matchingEntry.block.clientId);
-				});
+			if ( exitLayoutMode ) {
+				setBuilderView( BUILDER_VIEWS.CONTENT );
+				requestAnimationFrame( () => {
+					selectBlock( matchingEntry.block.clientId );
+				} );
 			}
 		},
-		[gridItems, selectBlock],
+		[ gridItems, selectBlock ]
 	);
 
 	const removeGridItem = useCallback(
-		(itemId) => {
+		( itemId ) => {
 			const matchingEntryIndex = gridItems.findIndex(
-				(entry) => entry.itemId === itemId,
+				( entry ) => entry.itemId === itemId
 			);
 
-			if (matchingEntryIndex < 0) {
+			if ( matchingEntryIndex < 0 ) {
 				return;
 			}
 
-			const matchingEntry = gridItems[matchingEntryIndex];
+			const matchingEntry = gridItems[ matchingEntryIndex ];
 			const shouldRemove = window.confirm(
 				sprintf(
 					__(
-						"Remove Item %d and all blocks inside it?",
-						"frontis-blocks",
+						'Remove Item %d and all blocks inside it?',
+						'frontis-blocks'
 					),
-					matchingEntryIndex + 1,
-				),
+					matchingEntryIndex + 1
+				)
 			);
 
-			if (!shouldRemove) {
+			if ( ! shouldRemove ) {
 				return;
 			}
 
-			removeBlock(matchingEntry.block.clientId, false);
-			requestAnimationFrame(() => {
-				selectBlock(clientId);
-			});
+			removeBlock( matchingEntry.block.clientId, false );
+			requestAnimationFrame( () => {
+				selectBlock( clientId );
+			} );
 		},
-		[clientId, gridItems, removeBlock, selectBlock],
+		[ clientId, gridItems, removeBlock, selectBlock ]
 	);
 
 	const handleLayoutItemKeyDown = useCallback(
-		(event, itemId) => {
-			if (event.key === "Enter" || event.key === " ") {
+		( event, itemId ) => {
+			if ( event.key === 'Enter' || event.key === ' ' ) {
 				event.preventDefault();
-				focusGridItem(itemId);
+				focusGridItem( itemId );
 			}
 		},
-		[focusGridItem],
+		[ focusGridItem ]
 	);
 
-	const rglLayout = useMemo(() => {
-		return (effectiveLayouts?.[activeBreakpoint] || []).map((item) => ({
-			...item,
-			static: gridItemStateMap.get(item.i)?.isStatic || false,
-		}));
-	}, [activeBreakpoint, effectiveLayouts, gridItemStateMap]);
+	const rglLayout = useMemo( () => {
+		return ( effectiveLayouts?.[ activeBreakpoint ] || [] ).map(
+			( item ) => ( {
+				...item,
+				static: gridItemStateMap.get( item.i )?.isStatic || false,
+			} )
+		);
+	}, [ activeBreakpoint, effectiveLayouts, gridItemStateMap ] );
 
-	const blockProps = useBlockProps({
-		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${blockID} ${
-			isLayoutMode ? "mode-layout" : "mode-content"
-		}`,
-	});
+	const blockProps = useBlockProps( {
+		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${ blockID } mode-${ builderView }`,
+	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: "grid-content-layer fb-grid-layout-container",
+			className: 'grid-content-layer fb-grid-layout-container',
 		},
 		{
-			allowedBlocks: ["frontis-blocks/grid-item"],
+			allowedBlocks: [ 'frontis-blocks/grid-item' ],
 			renderAppender: false,
-		},
+		}
 	);
+
+	const toolbarPrimaryLabel = hasGridItems
+		? isLayoutMode
+			? __( 'Back to Content', 'frontis-blocks' )
+			: __( 'Edit Layout', 'frontis-blocks' )
+		: __( 'Choose Template', 'frontis-blocks' );
+	const toolbarPrimaryIcon = hasGridItems
+		? isLayoutMode
+			? 'edit'
+			: 'layout'
+		: 'screenoptions';
+	const handleToolbarPrimaryAction = () => {
+		if ( ! hasGridItems ) {
+			setBuilderView( BUILDER_VIEWS.PICKER );
+			return;
+		}
+
+		if ( isLayoutMode ) {
+			goToContentView();
+			return;
+		}
+
+		goToLayoutView();
+	};
 
 	return (
 		<>
 			<Inspector
-				attributes={attributes}
-				setAttributes={setAttributes}
-				addGridItem={addGridItem}
+				attributes={ attributes }
+				setAttributes={ setAttributes }
+				addGridItem={ addGridItem }
 			/>
 
 			<BlockControls>
 				<ToolbarGroup>
 					<ToolbarButton
-						icon={isLayoutMode ? "edit" : "layout"}
-						label={
-							isLayoutMode
-								? __("Back to Content", "frontis-blocks")
-								: __("Enter Layout Mode", "frontis-blocks")
-						}
-						onClick={() => setIsLayoutMode(!isLayoutMode)}
-						isPressed={isLayoutMode}
+						icon={ toolbarPrimaryIcon }
+						label={ toolbarPrimaryLabel }
+						onClick={ handleToolbarPrimaryAction }
+						isPressed={ isLayoutMode }
 					/>
 					<ToolbarButton
 						icon="plus"
-						label={__("Add Grid Item", "frontis-blocks")}
-						onClick={addGridItem}
+						label={
+							hasGridItems
+								? __( 'Add Grid Item', 'frontis-blocks' )
+								: __( 'Choose Template', 'frontis-blocks' )
+						}
+						onClick={ addGridItem }
 					/>
-					<ToolbarDropdownMenu
-						icon={getResponsiveDeviceIcon(activeBreakpoint)}
-						label={sprintf(
-							__("%s Preview", "frontis-blocks"),
-							activeBreakpoint,
-						)}
-						controls={BREAKPOINTS.map((breakpoint) => ({
-							title: breakpoint,
-							icon: getResponsiveDeviceIcon(breakpoint),
-							isActive: activeBreakpoint === breakpoint,
-							onClick: () => setDeviceType(breakpoint, false),
-						}))}
-					/>
+					{ hasGridItems && (
+						<ToolbarDropdownMenu
+							icon={ getResponsiveDeviceIcon( activeBreakpoint ) }
+							label={ sprintf(
+								__( '%s Preview', 'frontis-blocks' ),
+								activeBreakpoint
+							) }
+							controls={ BREAKPOINTS.map( ( breakpoint ) => ( {
+								title: breakpoint,
+								icon: getResponsiveDeviceIcon( breakpoint ),
+								isActive: activeBreakpoint === breakpoint,
+								onClick: () =>
+									setDeviceType( breakpoint, false ),
+							} ) ) }
+						/>
+					) }
 				</ToolbarGroup>
 			</BlockControls>
 
-			<div {...blockProps}>
-				<div className="grid-editor-workspace" ref={containerRef}>
-					{isLayoutMode ? (
+			<div { ...blockProps }>
+				<div className="grid-editor-workspace" ref={ containerRef }>
+					{ isPickerView ? (
+						<div className="grid-template-stage">
+							<div className="grid-template-panel">
+								<div className="grid-template-panel-copy">
+									<span
+										className="grid-template-panel-icon dashicons dashicons-screenoptions"
+										aria-hidden="true"
+									/>
+									<h3>{ __( 'Grid Layout Builder', 'frontis-blocks' ) }</h3>
+									<p>
+										{ __(
+											'Select a Grid layout.',
+											'frontis-blocks'
+										) }
+									</p>
+								</div>
+
+								<div className="grid-template-grid">
+									{ GRID_TEMPLATE_PRESETS.map( ( preset ) => {
+										const previewLayout =
+											getPresetBreakpointLayout(
+												preset,
+												'Desktop'
+											);
+
+										return (
+											<button
+												key={ preset.id }
+												type="button"
+												className="grid-template-card"
+												aria-label={ sprintf(
+													__(
+														'Use %s layout',
+														'frontis-blocks'
+													),
+													preset.title
+												) }
+												onClick={ () =>
+													applyPreset( preset )
+												}
+											>
+												<div className="grid-template-preview">
+													<div
+														className="grid-template-preview-grid"
+														style={ {
+															gridTemplateRows: `repeat(${ getPreviewRows(
+																previewLayout
+															) }, minmax(0, 1fr))`,
+														} }
+													>
+														{ previewLayout.map(
+															( item, index ) => (
+																<span
+																	key={ `${
+																		preset.id
+																	}-${
+																		index + 1
+																	}` }
+																	className="grid-template-preview-item"
+																	style={ {
+																		gridColumn: `${
+																			item.x +
+																			1
+																		} / span ${
+																			item.w
+																		}`,
+																		gridRow: `${
+																			item.y +
+																			1
+																		} / span ${
+																			item.h
+																		}`,
+																	} }
+																/>
+															)
+														) }
+													</div>
+												</div>
+												<span className="screen-reader-text">
+													{ preset.title }
+												</span>
+											</button>
+										);
+									} ) }
+								</div>
+							</div>
+						</div>
+					) : isLayoutMode ? (
 						<div className="layout-overlay-mode">
 							<div className="layout-mode-toolbar">
+								<div className="grid-stage-copy">
+									<span className="grid-stage-pill">
+										{ __(
+											'Step 2 of 3',
+											'frontis-blocks'
+										) }
+									</span>
+									<h3>
+										{ __(
+											'Resize and arrange your layout',
+											'frontis-blocks'
+										) }
+									</h3>
+									<p>
+										{ __(
+											'Drag items across the canvas and use the resize handles to fine-tune each section before you start adding content.',
+											'frontis-blocks'
+										) }
+									</p>
+								</div>
+
 								<div
-									className={`layout-selection-panel ${
-										selectedGridItem ? "has-selection" : "is-empty"
-									}`}
+									className={ `layout-selection-panel ${
+										selectedGridItem
+											? 'has-selection'
+											: 'is-empty'
+									}` }
 								>
 									<div className="layout-selection-summary">
 										<span className="dashicons dashicons-info-outline" />
-										<span>{selectedLayoutLabel}</span>
+										<span>{ selectedLayoutLabel }</span>
 									</div>
 
-									{selectedGridItem && (
-										<div className="layout-selection-actions">
-											<Button
-												variant="secondary"
-												icon="edit"
-												onClick={() =>
-													focusGridItem(selectedGridItem.itemId, {
-														exitLayoutMode: true,
-													})
-												}
-											>
-												{__("Edit Content", "frontis-blocks")}
-											</Button>
-											<Button
-												variant="tertiary"
-												icon="trash"
-												isDestructive
-												onClick={() =>
-													removeGridItem(selectedGridItem.itemId)
-												}
-											>
-												{__("Delete Item", "frontis-blocks")}
-											</Button>
-										</div>
-									)}
+									<div className="layout-selection-actions">
+										<Button
+											variant="primary"
+											onClick={ goToContentView }
+										>
+											{ __(
+												'Continue to Content',
+												'frontis-blocks'
+											) }
+										</Button>
+										{ selectedGridItem && (
+											<>
+												<Button
+													variant="secondary"
+													icon="edit"
+													onClick={ () =>
+														focusGridItem(
+															selectedGridItem.itemId,
+															{
+																exitLayoutMode: true,
+															}
+														)
+													}
+												>
+													{ __(
+														'Edit Content',
+														'frontis-blocks'
+													) }
+												</Button>
+												<Button
+													variant="tertiary"
+													icon="trash"
+													isDestructive
+													onClick={ () =>
+														removeGridItem(
+															selectedGridItem.itemId
+														)
+													}
+												>
+													{ __(
+														'Delete Item',
+														'frontis-blocks'
+													) }
+												</Button>
+											</>
+										) }
+									</div>
 								</div>
 							</div>
 
-							{mounted && width > 0 && (
+							{ mounted && width > 0 && (
 								<ReactGridLayout
 									className="layout-canvas"
-									layout={rglLayout}
-									width={width}
-									gridConfig={{
+									layout={ rglLayout }
+									width={ width }
+									gridConfig={ {
 										cols: currentCols,
 										rowHeight: currentRowHeight,
-										margin: [currentGutter, currentGutter],
-									}}
-									resizeConfig={{
-										handles: ["w", "e", "se"],
-									}}
-									compactor={layoutCompactor}
-									onLayoutChange={onLayoutChange}
+										margin: [
+											currentGutter,
+											currentGutter,
+										],
+									} }
+									resizeConfig={ {
+										handles: [ 'w', 'e', 'se' ],
+									} }
+									compactor={ layoutCompactor }
+									onLayoutChange={ onLayoutChange }
 								>
-									{rglLayout.map((item, index) => (
+									{ rglLayout.map( ( item, index ) => (
 										<div
-											key={item.i}
-											className={`rgl-item-box ${
-												selectedLayoutItemId === item.i ? "is-active" : ""
-											} ${item.static ? "is-static" : ""}`}
-											onClick={() => focusGridItem(item.i)}
-											onDoubleClick={() =>
-												focusGridItem(item.i, {
-													exitLayoutMode: true,
-												})
+											key={ item.i }
+											className={ `rgl-item-box ${
+												selectedLayoutItemId === item.i
+													? 'is-active'
+													: ''
+											} ${
+												item.static ? 'is-static' : ''
+											}` }
+											onClick={ () =>
+												focusGridItem( item.i )
 											}
-											onKeyDown={(event) =>
-												handleLayoutItemKeyDown(event, item.i)
+											onDoubleClick={ () =>
+												focusGridItem( item.i, {
+													exitLayoutMode: true,
+												} )
+											}
+											onKeyDown={ ( event ) =>
+												handleLayoutItemKeyDown(
+													event,
+													item.i
+												)
 											}
 											role="button"
-											tabIndex={0}
-											aria-pressed={selectedLayoutItemId === item.i}
+											tabIndex={ 0 }
+											aria-pressed={
+												selectedLayoutItemId === item.i
+											}
 										>
 											<div className="item-label">
 												<span className="item-name">
-													{sprintf(
-														__("Item %d", "frontis-blocks"),
-														index + 1,
-													)}
+													{ sprintf(
+														__(
+															'Item %d',
+															'frontis-blocks'
+														),
+														index + 1
+													) }
 												</span>
 												<span className="item-id">
-													{item.i.split("-").pop()}
+													{ item.i
+														.split( '-' )
+														.pop() }
 												</span>
-												{item.static && (
+												{ item.static && (
 													<span className="item-status">
-														{__("Locked", "frontis-blocks")}
+														{ __(
+															'Locked',
+															'frontis-blocks'
+														) }
 													</span>
-												)}
+												) }
 											</div>
 											<span className="item-size">
-												{sprintf(
-													__("%1$d columns, %2$d rows", "frontis-blocks"),
+												{ sprintf(
+													__(
+														'%1$d columns, %2$d rows',
+														'frontis-blocks'
+													),
 													item.w,
-													item.h,
-												)}
+													item.h
+												) }
 											</span>
 										</div>
-									))}
+									) ) }
 								</ReactGridLayout>
-							)}
+							) }
 						</div>
-					) : (
-						<div {...innerBlocksProps} />
-					)}
+					) : isContentView ? (
+						<div className="grid-content-stage">
+							{ hasGridItems && (
+								<div className="grid-content-stage-bar">
+									<div className="grid-content-stage-copy">
+										<span className="grid-stage-pill">
+											{ __(
+												'Step 3 of 3',
+												'frontis-blocks'
+											) }
+										</span>
+										<span className="grid-content-stage-title">
+											{ __(
+												'Add blocks inside each layout area.',
+												'frontis-blocks'
+											) }
+										</span>
+									</div>
+									<Button
+										variant="secondary"
+										onClick={ goToLayoutView }
+									>
+										{ __(
+											'Back to Layout',
+											'frontis-blocks'
+										) }
+									</Button>
+								</div>
+							) }
+							<div { ...innerBlocksProps } />
+						</div>
+					) : null }
 				</div>
 
-				{!isLayoutMode && innerBlocks.length === 0 && (
-					<div className="grid-empty-state">
-						<Button variant="primary" onClick={addGridItem}>
-							{__("Start Building Your Grid", "frontis-blocks")}
-						</Button>
-					</div>
-				)}
 			</div>
-			<style>{blockStyle}</style>
+			<style>{ blockStyle }</style>
 		</>
 	);
 }
