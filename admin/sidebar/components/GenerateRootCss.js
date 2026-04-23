@@ -1,4 +1,22 @@
 const generateCSSVariables = (data, deviceType) => {
+    // Helper to find the correct editor document
+    const getEditorDocument = () => {
+        const path = window.location.pathname;
+        const fileName = path.substring(path.lastIndexOf('/') + 1);
+        const isPostEditor = fileName === 'post.php' || fileName === 'post-new.php';
+
+        let iframe = null;
+        if (isPostEditor) {
+            iframe = document.querySelector('iframe[name="editor-canvas"]');
+        } else {
+            // Site Editor
+            iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
+        }
+
+        return iframe?.contentDocument || iframe?.contentWindow?.document || document;
+    };
+
+    const targetDocument = getEditorDocument();
 
     const createValueWithUnit = (value, unit) => {
         if (!value || value === 'Default') return '0px';
@@ -201,7 +219,7 @@ const generateCSSVariables = (data, deviceType) => {
             }
         });
 
-        // Add fontFamily to iframe context if not already added
+        // Add fontFamily to target context if not already added
         ['fontFamily'].forEach((prop) => {
             const fontFamily = getValue(data[key], prop);
             if (fontFamily !== null && fontFamily !== 'Default' && !fontFamilies.has(fontFamily)) {
@@ -211,21 +229,18 @@ const generateCSSVariables = (data, deviceType) => {
     });
 
     if(fontFamilies.size > 0) {
-        let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-
-        // If not found, try the editor-canvas iframe
-        if (!iframe) {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-        }
-
-        const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-
         const fontFamily = Array.from(fontFamilies).map(font => font.replace(' ', '+')).join('|');
         const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
-        const linkElement = iframeDocument.createElement('link');
-        linkElement.rel = 'stylesheet';
+
+        // Reuse or create font link tag in the target document
+        let linkElement = targetDocument.getElementById('frontis-blocks-google-fonts');
+        if (!linkElement) {
+            linkElement = targetDocument.createElement('link');
+            linkElement.id = 'frontis-blocks-google-fonts';
+            linkElement.rel = 'stylesheet';
+            targetDocument.head.appendChild(linkElement);
+        }
         linkElement.href = fontUrl;
-        iframeDocument.head.appendChild(linkElement);
     }
 
     if(rootStyles === '' && desktopStyles === '' && paragraphStyles === '') {
@@ -325,78 +340,6 @@ const generateCSSVariables = (data, deviceType) => {
             ${allCombinedStyles}
             ${headingGrouped}
         `;
-        // // Apply individual styles for each heading (h1, h2, h3, etc.)
-        // if(deviceType !== 'Desktop') {
-
-        // } else {
-        //     headingGrouped = `
-        //         body .editor-visual-editor h1 {
-        //             ${heading1Styles}
-        //         }
-        //         body .editor-visual-editor h2 {
-        //             ${heading2Styles}
-        //         }
-        //         body .editor-visual-editor h3 {
-        //             ${heading3Styles}
-        //         }
-        //         body .editor-visual-editor h4 {
-        //             ${heading4Styles}
-        //         }
-        //         body .editor-visual-editor h5 {
-        //             ${heading5Styles}
-        //         }
-        //         body .editor-visual-editor h6 {
-        //             ${heading6Styles}
-        //         }
-        //     `;
-
-        //     // Styles for the "all" combined typography
-        //     allCombinedStyles = `
-        //         body .editor-visual-editor h1,
-        //         body .editor-visual-editor h2,
-        //         body .editor-visual-editor h3,
-        //         body .editor-visual-editor h4,
-        //         body .editor-visual-editor h5,
-        //         body .editor-visual-editor h6 {
-        //             ${combinedHeadingStyles}
-        //         }
-        //     `;
-
-        //     styles = `
-        //         :root {
-        //             ${rootStyles}
-        //             ${desktopStyles}
-        //         }
-        //         @media (max-width: 1024px) {
-        //             :root {
-        //                 ${tabletStyles}
-        //             }
-        //         }
-        //         @media (max-width: 767px) {
-        //             :root {
-        //                 ${mobileStyles}
-        //             }
-        //         }
-
-        //         body .editor-visual-editor p {
-        //             ${paragraphStyles}
-        //         }
-
-        //         body .editor-visual-editor a, body .editor-visual-editor p a {
-        //             ${linkStyles}
-        //         }
-
-        //         body .editor-visual-editor .wp-block-button__link, body .editor-visual-editor button {
-        //             ${buttonStyles}
-        //         }
-
-        //         body .editor-visual-editor figcaption {
-        //             ${captionStyles}
-        //         }
-        //         ${allCombinedStyles}
-        //         ${headingGrouped}
-        //     `;
-        // }
     } else {
 
         // Apply individual styles for each heading (h1, h2, h3, etc.)
@@ -472,31 +415,26 @@ const generateCSSVariables = (data, deviceType) => {
         `;
     }
 
-    let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-    let iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-    let styleTag = iframeDocument.getElementById("global-typo");
-
-    if(fileName === 'post.php') {
-
-        if(deviceType !== 'Desktop') {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-typo");
-
-        } else {
-            iframe = document.querySelector('iframe[name="editor-canvas"]');
-            iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
-            styleTag = iframeDocument.getElementById("global-typo");
-        }
-    }
+    let styleTag = targetDocument.getElementById("global-typo");
 
     if (!styleTag) {
-        styleTag = iframeDocument.createElement("style");
+        styleTag = targetDocument.createElement("style");
         styleTag.id = "global-typo";
-        iframeDocument.head.appendChild(styleTag);
+        targetDocument.head.appendChild(styleTag);
     }
 
-    styleTag.innerHTML = styles;
+    styleTag.textContent = styles;
+
+    // Also update main document if the target was an iframe (to ensure sidebar consistency)
+    if (targetDocument !== document) {
+        let mainStyleTag = document.getElementById("global-typo");
+        if (!mainStyleTag) {
+            mainStyleTag = document.createElement("style");
+            mainStyleTag.id = "global-typo";
+            document.head.appendChild(mainStyleTag);
+        }
+        mainStyleTag.textContent = styles;
+    }
 
     return styles;
 };
