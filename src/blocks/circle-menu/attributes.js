@@ -78,6 +78,18 @@ const attributes = {
 		type: "string",
 		default: "icon",
 	},
+	mainMenuContentType: {
+		type: "string",
+		default: "icon",
+	},
+	mainMenuOpenText: {
+		type: "string",
+		default: "Open",
+	},
+	mainMenuCloseText: {
+		type: "string",
+		default: "Close",
+	},
 	mainMenuIcon: {
 		type: "string",
 		default: "fas fa-ellipsis",
@@ -123,22 +135,21 @@ const attributes = {
 		default: "hover",
 	},
 
-	// Key style offsets corresponding to --pea-cm-offset-h and --pea-cm-offset-v
 	offsetH: {
 		type: "object",
-		default: { Desktop: 40, Tablet: "", Mobile: "" },
+		default: { Desktop: 40, Tablet: 40, Mobile: 40 },
 	},
 	offsetV: {
 		type: "object",
-		default: { Desktop: 40, Tablet: "", Mobile: "" },
+		default: { Desktop: 40, Tablet: 40, Mobile: 40 },
 	},
 	activeOffsetH: {
-		type: "number",
-		default: 40, // Typically varies in elementor
+		type: "object",
+		default: { Desktop: 40, Tablet: 40, Mobile: 40 },
 	},
 	activeOffsetV: {
-		type: "number",
-		default: 40,
+		type: "object",
+		default: { Desktop: 40, Tablet: 40, Mobile: 40 },
 	},
 
 	// Main Menu Style
@@ -175,6 +186,101 @@ const attributes = {
 		default: "normal",
 	},
 
+	// Main Menu Text Typography
+	mainMenuTextGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	mainMenuTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	mainMenuTextGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	mainMenuTextGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	mainMenuTextFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	mainMenuTextFontSize: {
+		type: "object",
+		default: {
+			Desktop: 16,
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	mainMenuTextFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	mainMenuTextFontWeight: {
+		type: "string",
+		default: "400",
+	},
+	mainMenuTextFontStyle: {
+		type: "string",
+		default: "",
+	},
+	mainMenuTextTransform: {
+		type: "string",
+		default: "",
+	},
+	mainMenuTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	mainMenuTextLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	mainMenuTextLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	mainMenuTextLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	mainMenuTextLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+
 	// Sub Menu Style
 	submenuShowTitleOnHover: {
 		type: "boolean",
@@ -196,6 +302,319 @@ const attributes = {
 		type: "string",
 		default: "#F9E3BC",
 	},
+	submenuBgHoverColor: {
+		type: "string",
+		default: "",
+	},
+	submenuIconHoverColor: {
+		type: "string",
+		default: "",
+	},
+	submenuBgColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	submenuIconColorSwitcher: {
+		type: "string",
+		default: "normal",
+	},
+	// Sub Menu Text Typography
+	submenuTextGlobalTypographyData: {
+		type: "object",
+		default: {},
+	},
+	submenuTextGlobalTypoSwitcher: {
+		type: "object",
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	submenuTextGlobalTypoType: {
+		type: "string",
+		default: "default",
+	},
+	submenuTextGlobalTypoOption: {
+		type: "object",
+		default: { label: "Default", value: "default" },
+	},
+	submenuTextFontFamily: {
+		type: "string",
+		default: "Default",
+	},
+	submenuTextFontSize: {
+		type: "object",
+		default: {
+			Desktop: 14,
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	submenuTextFontSizeUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	submenuTextFontWeight: {
+		type: "string",
+		default: "400",
+	},
+	submenuTextFontStyle: {
+		type: "string",
+		default: "",
+	},
+	submenuTextTransform: {
+		type: "string",
+		default: "",
+	},
+	submenuTextDecoration: {
+		type: "string",
+		default: "",
+	},
+	submenuTextLetterSpacing: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	submenuTextLetterSpacingUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	submenuTextLineHeight: {
+		type: "object",
+		default: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	submenuTextLineHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+	},
+	submenuTitleColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	submenuTitleBgColor: {
+		type: "string",
+		default: "#000000",
+	},
+	submenuTitleBgGradientColor: {
+		type: "string",
+		default: null,
+	},
+	submenuTitleBgColorType: {
+		type: "string",
+		default: "classic",
+	},
+	submenuTitleBgCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	submenuTitleBgCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	submenuTitlePosition: {
+		type: "string",
+		default: "top",
+	},
+	// Main Menu Background Type
+	mainMenuNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	mainMenuNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	mainMenuNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	mainMenuNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	mainMenuHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	mainMenuHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	mainMenuHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	mainMenuHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+
+	// Sub Menu Background Type
+	submenuNormalBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	submenuNormalGradientColor: {
+		type: "string",
+		default: null,
+	},
+	submenuNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	submenuNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	submenuHoverBackgroundType: {
+		type: "string",
+		default: "classic",
+	},
+	submenuHoverGradientColor: {
+		type: "string",
+		default: null,
+	},
+	submenuHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	submenuHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	// Main Menu Border Radius
+	mainMenuBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	mainMenuBorderRadiusDesktop: {
+		type: "object",
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
+	},
+	mainMenuBorderRadiusTablet: {
+		type: "object",
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
+	},
+	mainMenuBorderRadiusMobile: {
+		type: "object",
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
+	},
+	mainMenuBorderRadiusLink: { type: "boolean", default: true },
+
+	// Main Menu Border
+	mainMenuBorder: { type: "string", default: "none" },
+	mainMenuBorderColor: { type: "string", default: "" },
+	mainMenuBorderHoverColor: { type: "string", default: "" },
+	mainMenuBorderUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	mainMenuBorderDesktop: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	mainMenuBorderTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	mainMenuBorderMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	mainMenuBorderLink: { type: "boolean", default: true },
+
+	// Main Menu Box Shadow
+	mainMenuBoxShadowSwitcher: { type: "string", default: "normal" },
+	mainMenuBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	mainMenuBoxShadowCssValue: { type: "string", default: "" },
+	mainMenuBoxShadowHoverValues: {
+		type: "array",
+		default: [],
+	},
+	mainMenuBoxShadowHoverCssValue: { type: "string", default: "" },
+
+	// Sub Menu Border Radius
+	submenuBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
+	},
+	submenuBorderRadiusDesktop: {
+		type: "object",
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
+	},
+	submenuBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	submenuBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	submenuBorderRadiusLink: { type: "boolean", default: true },
+
+	// Sub Menu Border
+	submenuBorder: { type: "string", default: "none" },
+	submenuBorderColor: { type: "string", default: "" },
+	submenuBorderHoverColor: { type: "string", default: "" },
+	submenuBorderUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	submenuBorderDesktop: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	submenuBorderTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	submenuBorderMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	submenuBorderLink: { type: "boolean", default: true },
+
+	// Sub Menu Box Shadow
+	submenuBoxShadowSwitcher: { type: "string", default: "normal" },
+	submenuBoxShadowValues: {
+		type: "array",
+		default: [],
+	},
+	submenuBoxShadowCssValue: { type: "string", default: "" },
+	submenuBoxShadowHoverValues: {
+		type: "array",
+		default: [],
+	},
+	submenuBoxShadowHoverCssValue: { type: "string", default: "" },
+
 	circleMenuGlobalZIndex: {
 		type: "object",
 		default: {
@@ -279,6 +698,26 @@ const attributes = {
 	circleMenuGlobalBgColorSwitcher: { type: "string", default: "normal" },
 	circleMenuGlobalBgColor: { type: "string", default: "" },
 	circleMenuGlobalBgHoverColor: { type: "string", default: "" },
+	circleMenuGlobalNormalBackgroundType: { type: "string", default: "classic" },
+	circleMenuGlobalNormalGradientColor: { type: "string", default: null },
+	circleMenuGlobalNormalCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	circleMenuGlobalNormalCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
+	circleMenuGlobalHoverBackgroundType: { type: "string", default: "classic" },
+	circleMenuGlobalHoverGradientColor: { type: "string", default: null },
+	circleMenuGlobalHoverCustomGradientSwitcher: {
+		type: "boolean",
+		default: false,
+	},
+	circleMenuGlobalHoverCustomGradientInputValue: {
+		type: "string",
+		default: "",
+	},
 	circleMenuGlobalBorder: { type: "string", default: "none" },
 	circleMenuGlobalBorderColorSwitcher: { type: "string", default: "normal" },
 	circleMenuGlobalBorderColor: { type: "string", default: "" },
@@ -300,6 +739,38 @@ const attributes = {
 		default: { top: "", right: "", bottom: "", left: "" },
 	},
 	circleMenuGlobalBorderLink: { type: "boolean", default: false },
+	circleMenuGlobalBorderRadiusUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	circleMenuGlobalBorderRadiusDesktop: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	circleMenuGlobalBorderRadiusTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	circleMenuGlobalBorderRadiusMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	circleMenuGlobalBorderRadiusLink: { type: "boolean", default: false },
+	// Global Background Image attributes
+	circleMenuGlobalBgImageUrl: { type: "string", default: "" },
+	circleMenuGlobalBgImageAlt: { type: "string", default: "" },
+	circleMenuGlobalBgImageID: { type: "number", default: 0 },
+	circleMenuGlobalBgImagePosition: { type: "string", default: "" },
+	circleMenuGlobalBgImageAttachment: { type: "string", default: "" },
+	circleMenuGlobalBgImageRepeat: { type: "string", default: "" },
+	circleMenuGlobalBgImageSize: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageUrl: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageAlt: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageID: { type: "number", default: 0 },
+	circleMenuGlobalBgHoverImagePosition: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageAttachment: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageRepeat: { type: "string", default: "" },
+	circleMenuGlobalBgHoverImageSize: { type: "string", default: "" },
 	circleMenuGlobalBoxShadowSwitcher: { type: "string", default: "normal" },
 	circleMenuGlobalBoxShadowValues: {
 		type: "object",
