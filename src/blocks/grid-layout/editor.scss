@@ -3,7 +3,7 @@
 	border: 1px dashed #8a94a0;
 	border-radius: 2px;
 	background: #fff;
-	padding: 24px 24px 48px;
+	padding: 20px;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
 	&.mode-layout {
@@ -14,7 +14,6 @@
 
 	.grid-editor-workspace {
 		position: relative;
-		min-height: 200px;
 	}
 
 	.grid-stage-header,
@@ -275,7 +274,7 @@
 			background-size: 50px 50px;
 			border: 1px solid #dce8f5;
 			border-radius: 10px;
-			min-height: 400px;
+			min-height: 100px;
 
 			.react-grid-item {
 				box-sizing: border-box;
