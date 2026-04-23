@@ -8,34 +8,6 @@ const attributes = {
 		default: ''
 	},
 
-	// Responsive columns
-	cols: {
-		type: 'object',
-		default: {
-			Desktop: '12',
-			Tablet: '8',
-			Mobile: '4'
-		}
-	},
-
-	// Responsive row height (px)
-	rowHeight: {
-		type: 'object',
-		default: {
-			Desktop: '40',
-			Tablet: '35',
-			Mobile: '30'
-		}
-	},
-	rowHeightUnits: {
-		type: 'object',
-		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
-		}
-	},
-
 	// Responsive gutter / gap (px)
 	gutter: {
 		type: 'object',

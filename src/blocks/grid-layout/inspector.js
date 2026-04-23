@@ -12,8 +12,6 @@ import { useDeviceType } from "@Config/displayType";
 
 const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 	const {
-		cols,
-		rowHeight,
 		gutter,
 		compactType,
 		allowOverlap,
@@ -29,30 +27,6 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 			<PanelBody title={__("Grid Settings", "frontis-blocks")}>
 				<FB_Range
 					min={1}
-					max={24}
-					label={__("Columns", "frontis-blocks")}
-					rangeValue={cols}
-					onChangeHandler={(value) => setAttributes({ cols: value })}
-					deviceType={deviceType}
-					rangeStep={1}
-					resetFallbackValue={"12"}
-					isRangeUnit={false}
-				/>
-
-				<FB_Range
-					min={1}
-					max={1000}
-					label={__("Row Height", "frontis-blocks")}
-					rangeValue={rowHeight}
-					onChangeHandler={(value) => setAttributes({ rowHeight: value })}
-					deviceType={deviceType}
-					rangeStep={1}
-					resetFallbackValue={"40"}
-					isRangeUnit={false}
-				/>
-
-				<FB_Range
-					min={1}
 					max={1000}
 					label={__("Gap", "frontis-blocks")}
 					rangeValue={gutter}
@@ -63,7 +37,7 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 					isRangeUnit={false}
 				/>
 
-								<SelectControl
+				<SelectControl
 					label={__("Compaction Type", "frontis-blocks")}
 					value={compactType || ""}
 					options={[

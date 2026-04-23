@@ -42,9 +42,6 @@ const appendLayoutRules = (css, blockID, layoutItems = []) =>
 const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const {
 		blockID,
-		cols,
-		rowHeight,
-		rowHeightUnits,
 		gutter,
 		gutterUnits,
 		layouts,
@@ -56,22 +53,12 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	}
 
 	const containerSelectors = getContainerSelectors(blockID);
-	const colsDesktop = getBreakpointNumber(cols, "Desktop", "cols");
-	const colsTablet = getBreakpointNumber(cols, "Tablet", "cols");
-	const colsMobile = getBreakpointNumber(cols, "Mobile", "cols");
-	const rowHeightDesktop = getBreakpointNumber(
-		rowHeight,
-		"Desktop",
-		"rowHeight",
-	);
-	const rowHeightTablet = getBreakpointNumber(rowHeight, "Tablet", "rowHeight");
-	const rowHeightMobile = getBreakpointNumber(rowHeight, "Mobile", "rowHeight");
+	const colsDesktop = getBreakpointNumber(null, "Desktop", "cols");
+	const colsTablet = getBreakpointNumber(null, "Tablet", "cols");
+	const colsMobile = getBreakpointNumber(null, "Mobile", "cols");
 	const gutterDesktop = getBreakpointNumber(gutter, "Desktop", "gutter");
 	const gutterTablet = getBreakpointNumber(gutter, "Tablet", "gutter");
 	const gutterMobile = getBreakpointNumber(gutter, "Mobile", "gutter");
-	const desktopUnit = rowHeightUnits?.Desktop || "px";
-	const tabletUnit = rowHeightUnits?.Tablet || "px";
-	const mobileUnit = rowHeightUnits?.Mobile || "px";
 	const desktopGapUnit = gutterUnits?.Desktop || "px";
 	const tabletGapUnit = gutterUnits?.Tablet || "px";
 	const mobileGapUnit = gutterUnits?.Mobile || "px";
@@ -80,7 +67,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 		${containerSelectors.join(", ")} {
 			display: grid;
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
-			grid-auto-rows: ${rowHeightDesktop}${desktopUnit};
 			gap: ${gutterDesktop}${desktopGapUnit};
 		}
 	`;
@@ -91,7 +77,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			@media (max-width: 1024px) {
 				${containerSelectors.join(", ")} {
 					grid-template-columns: repeat(${colsTablet}, 1fr);
-					grid-auto-rows: ${rowHeightTablet}${tabletUnit};
 					gap: ${gutterTablet}${tabletGapUnit};
 				}
 	`;
@@ -101,7 +86,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			@media (max-width: 767px) {
 				${containerSelectors.join(", ")} {
 					grid-template-columns: repeat(${colsMobile}, 1fr);
-					grid-auto-rows: ${rowHeightMobile}${mobileUnit};
 					gap: ${gutterMobile}${mobileGapUnit};
 				}
 	`;
