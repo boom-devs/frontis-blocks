@@ -8,6 +8,7 @@ import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import "./editor.scss";
 
+import { useDeviceType } from "@Config/displayType";
 import generateCircleMenuStyle from "./styling";
 
 export default function Edit({
@@ -25,6 +26,9 @@ export default function Edit({
 		submenuSpace,
 		submenuHorizontalSpace,
 		submenuHorizontalAlign,
+		mainMenuContentType,
+		mainMenuOpenText,
+		mainMenuCloseText,
 		mainMenuOpenType,
 		mainMenuCloseType,
 		mainMenuIcon,
@@ -38,6 +42,13 @@ export default function Edit({
 		mainMenuCloseImageSize,
 		triggerType,
 		submenuShowTitleOnHover,
+
+		circleMenuDesktopSwitcher,
+		circleMenuTabletSwitcher,
+		circleMenuMobileSwitcher,
+
+		circleMenuGlobalWraperID,
+		circleMenuGlobalWraperClass,
 	} = attributes;
 
 	const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +64,8 @@ export default function Edit({
 		setAttributes,
 	});
 
+	const deviceType = useDeviceType();
+
 	/** Start Generate Block Style */
 	useEffect(() => {
 		if (blockID) {
@@ -62,138 +75,28 @@ export default function Edit({
 	}, [attributes, blockID]);
 	/** End Generate Block Style */
 
+	/** Start Load Google Font */
+	useEffect(() => {
+		if (attributes.mainMenuTextFontFamily) {
+			loadGoogleFont(attributes.mainMenuTextFontFamily);
+		}
+		if (attributes.submenuTextFontFamily) {
+			loadGoogleFont(attributes.submenuTextFontFamily);
+		}
+	}, [attributes.mainMenuTextFontFamily, attributes.submenuTextFontFamily]);
+	/** End Load Google Font */
+
 	const blockProps = useBlockProps({
-		className: `fb-circle-menu-main-wrapper ${blockID} ${
-			attributes.menuPosition
-		} ${isSelected || isOpen ? "is-active" : ""}`,
+		id: circleMenuGlobalWraperID || undefined,
+		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
+			circleMenuDesktopSwitcher ? "fb-desktop-responsive" : ""
+		} ${circleMenuTabletSwitcher ? "fb-tablet-responsive" : ""} ${
+			circleMenuMobileSwitcher ? "fb-mobile-responsive" : ""
+		}`,
 	});
 
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
-
-	// Replicate positioning logic from view.js
-	useEffect(() => {
-		const menu = menuRef.current;
-		const items = itemRefs.current.filter(Boolean);
-		const radiusGap = parseInt(submenuSpace?.Desktop || 0, 10);
-		const horizontalGap = parseInt(submenuHorizontalSpace?.Desktop || 0, 10);
-		const radius = 100 + radiusGap;
-		const isMenuOpen = isSelected || isOpen;
-
-		if (!items.length) return;
-
-		if (isMenuOpen) {
-			const total = items.length;
-			let direction = "right";
-			let startAngle = 0;
-			let spreadAngle = 360;
-
-			if (menuPreset === "circular-menu") {
-				startAngle = -90;
-				spreadAngle = 360;
-			} else if (menuPreset === "horizontal-menu") {
-				startAngle = 180;
-				spreadAngle = 0;
-
-				// Exact logic from view.js
-				if (menuPosition === "bottom-right") {
-					direction = submenuHorizontalAlign === "vertical" ? "top" : "left";
-				} else if (menuPosition === "bottom-left") {
-					direction = submenuHorizontalAlign === "vertical" ? "top" : "right";
-				} else if (menuPosition === "top-center") {
-					direction = submenuHorizontalAlign === "vertical" ? "bottom" : "left";
-				} else if (menuPosition === "bottom-center") {
-					direction = submenuHorizontalAlign === "vertical" ? "top" : "left";
-				} else if (menuPosition === "center-right") {
-					direction = submenuHorizontalAlign === "vertical" ? "left" : "bottom";
-				} else if (menuPosition === "center-left") {
-					direction = submenuHorizontalAlign === "vertical" ? "top" : "right";
-				} else if (menuPosition === "top-right") {
-					direction = submenuHorizontalAlign === "vertical" ? "bottom" : "left";
-				} else if (menuPosition === "top-left") {
-					direction =
-						submenuHorizontalAlign === "vertical" ? "bottom" : "right";
-				}
-			} else {
-				// half-circular
-				if (menuPosition === "bottom-right") {
-					startAngle = 180;
-					spreadAngle = 90;
-				} else if (menuPosition === "bottom-left") {
-					startAngle = 270;
-					spreadAngle = 90;
-				} else if (menuPosition === "top-right") {
-					startAngle = 90;
-					spreadAngle = 90;
-				} else if (menuPosition === "top-left") {
-					startAngle = 0;
-					spreadAngle = 90;
-				} else if (menuPosition === "top-center") {
-					startAngle = 0;
-					spreadAngle = 180;
-				} else if (menuPosition === "bottom-center") {
-					startAngle = 180;
-					spreadAngle = 180;
-				} else if (menuPosition === "center-right") {
-					startAngle = 90;
-					spreadAngle = 180;
-				} else if (menuPosition === "center-left") {
-					startAngle = 270;
-					spreadAngle = 180;
-				}
-			}
-
-			items.forEach((item, i) => {
-				let x = 0,
-					y = 0;
-				if (menuPreset === "horizontal-menu") {
-					const firstItem = items[0];
-					const itemWidth = firstItem.offsetWidth || 62;
-					const gap = itemWidth + horizontalGap;
-					if (direction === "left") x = -(i + 1) * gap;
-					if (direction === "right") x = (i + 1) * gap;
-					if (direction === "top") y = -(i + 1) * gap;
-					if (direction === "bottom") y = (i + 1) * gap;
-				} else {
-					let angle;
-					if (total === 1) {
-						angle = startAngle + spreadAngle / 2;
-					} else {
-						angle =
-							menuPreset === "circular-menu"
-								? startAngle + (spreadAngle / total) * i
-								: startAngle + (spreadAngle / (total - 1)) * i;
-					}
-					const rad = angle * (Math.PI / 180);
-					x = Math.cos(rad) * radius;
-					y = Math.sin(rad) * radius;
-				}
-
-				// Timing from view.js: i * 100ms
-				item.style.transitionDelay = `${i * 0.1}s`;
-				item.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1)`;
-				item.style.opacity = "1";
-				item.style.pointerEvents = "auto";
-			});
-		} else {
-			items.forEach((item, i) => {
-				// Timing from view.js: (items.length - 1 - i) * 50ms
-				item.style.transitionDelay = `${(items.length - 1 - i) * 0.05}s`;
-				item.style.transform = "translate(-50%, -50%) scale(0)";
-				item.style.opacity = "0";
-				item.style.pointerEvents = "none";
-			});
-		}
-	}, [
-		isOpen,
-		isSelected,
-		menuItems,
-		menuPreset,
-		menuPosition,
-		submenuSpace,
-		submenuHorizontalSpace,
-		submenuHorizontalAlign,
-	]);
 
 	const [hoverTimer, setHoverTimer] = useState(null);
 
@@ -217,83 +120,97 @@ export default function Edit({
 		return (
 			<>
 				<div className="fb-circle-menu-open-icon">
-					{mainMenuOpenType === "icon"
-						? mainMenuIcon
-							? renderSVG(mainMenuIcon)
-							: ""
-						: mainMenuImage && (
-								<img
-									src={mainMenuImage}
-									alt={mainMenuImageAlt}
-									style={{ objectFit: mainMenuImageSize }}
-								/>
-						  )}
+					{mainMenuContentType === "text" ? (
+						<span className="fb-circle-menu-text">{mainMenuOpenText}</span>
+					) : mainMenuOpenType === "icon" ? (
+						mainMenuIcon ? (
+							renderSVG(mainMenuIcon)
+						) : (
+							""
+						)
+					) : (
+						mainMenuImage && <img src={mainMenuImage} alt={mainMenuImageAlt} />
+					)}
 				</div>
 				<div className="fb-circle-menu-close-icon">
-					{mainMenuCloseType === "icon"
-						? mainMenuCloseIcon
-							? renderSVG(mainMenuCloseIcon)
-							: ""
-						: mainMenuCloseImage && (
-								<img
-									src={mainMenuCloseImage}
-									alt={mainMenuCloseImageAlt}
-									style={{ objectFit: mainMenuCloseImageSize }}
-								/>
-						  )}
+					{mainMenuContentType === "text" ? (
+						<span className="fb-circle-menu-text">{mainMenuCloseText}</span>
+					) : mainMenuCloseType === "icon" ? (
+						mainMenuCloseIcon ? (
+							renderSVG(mainMenuCloseIcon)
+						) : (
+							""
+						)
+					) : (
+						mainMenuCloseImage && (
+							<img src={mainMenuCloseImage} alt={mainMenuCloseImageAlt} />
+						)
+					)}
 				</div>
 			</>
 		);
 	};
 
 	return (
-		<div {...blockProps}>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
-
-			<div
-				ref={menuRef}
-				className="fb-circle-menu"
-				onMouseEnter={handleMouseEnter}
-				onMouseLeave={handleMouseLeave}
-				data-radiusgap={attributes.submenuSpace?.Desktop || 0}
-				data-preset={attributes.menuPreset}
-				data-trigger={attributes.triggerType}
-				data-horizontalspace={attributes.submenuHorizontalSpace?.Desktop || 0}
-				data-horizontposition={attributes.submenuHorizontalAlign}
-			>
+		<>
+			<div {...blockProps}>
 				<div
-					className={`fb-circle-menu-center ${
+					className={`fb-parent-wrapper ${
 						isSelected || isOpen ? "is-active" : ""
 					}`}
-					onClick={() => triggerType === "click" && setIsOpen(!isOpen)}
+					ref={panelRef}
 				>
-					<div className="fb-circle-menu-toggle">{renderMainContent()}</div>
-				</div>
-
-				<ul className="fb-circle-menu-items">
-					{menuItems.map((item, index) => (
-						<li
-							key={item.id}
-							ref={(el) => (itemRefs.current[index] = el)}
-							className="fb-circle-menu-item"
+					<div
+						ref={menuRef}
+						className="fb-circle-menu"
+						onMouseEnter={handleMouseEnter}
+						onMouseLeave={handleMouseLeave}
+						data-radiusgap={
+							attributes.submenuSpace?.[deviceType] ||
+							attributes.submenuSpace?.Desktop ||
+							0
+						}
+						data-preset={attributes.menuPreset}
+						data-trigger={attributes.triggerType}
+						data-horizontalspace={
+							attributes.submenuHorizontalSpace?.[deviceType] ||
+							attributes.submenuHorizontalSpace?.Desktop ||
+							0
+						}
+						data-horizontposition={attributes.submenuHorizontalAlign}
+					>
+						<div
+							className={`fb-circle-menu-center ${
+								isSelected || isOpen ? "is-active" : ""
+							}`}
+							onClick={() => triggerType === "click" && setIsOpen(!isOpen)}
 						>
-							<a
-								href={item.link ? item.link : "#"}
-								className="fb-circle-menu-link"
-								onClick={(e) => e.preventDefault()}
-							>
-								<div className="fb-circle-menu-icon" aria-hidden="true">
-									{item.icon ? renderSVG(item.icon) : ""}
-								</div>
-							</a>
-							{submenuShowTitleOnHover && (
-								<div className="fb-circle-menu-tooltip">{item.title}</div>
-							)}
-						</li>
-					))}
-				</ul>
+							<div className="fb-circle-menu-toggle">{renderMainContent()}</div>
+						</div>
+
+						<ul className="fb-circle-menu-items">
+							{menuItems.map((item, index) => (
+								<li key={item.id} className="fb-circle-menu-item">
+									<a
+										href={item.link ? item.link : "#"}
+										className="fb-circle-menu-link"
+										onClick={(e) => e.preventDefault()}
+									>
+										<div className="fb-circle-menu-icon" aria-hidden="true">
+											{item.icon ? renderSVG(item.icon) : ""}
+										</div>
+									</a>
+									{submenuShowTitleOnHover && (
+										<div className="fb-circle-menu-tooltip">{item.title}</div>
+									)}
+								</li>
+							))}
+						</ul>
+					</div>
+				</div>
 			</div>
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<style>{blockStyle}</style>
-		</div>
+		</>
 	);
 }
