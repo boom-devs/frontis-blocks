@@ -516,9 +516,6 @@ export default function Edit( {
 	const {
 		blockID,
 		blockStyle,
-		cols,
-		rowHeight,
-		rowHeightUnits,
 		gutter,
 		gutterUnits,
 		compactType,
@@ -538,10 +535,6 @@ export default function Edit( {
 	useEffect( () => {
 		const nextAttributes = {};
 
-		if ( needsUnitNormalization( rowHeightUnits ) ) {
-			nextAttributes.rowHeightUnits = getPxResponsiveUnits();
-		}
-
 		if ( needsUnitNormalization( gutterUnits ) ) {
 			nextAttributes.gutterUnits = getPxResponsiveUnits();
 		}
@@ -549,7 +542,7 @@ export default function Edit( {
 		if ( Object.keys( nextAttributes ).length > 0 ) {
 			setAttributes( nextAttributes );
 		}
-	}, [ gutterUnits, rowHeightUnits, setAttributes ] );
+	}, [ gutterUnits, setAttributes ] );
 
 	const deviceType = useDeviceType();
 	const activeBreakpoint = BREAKPOINTS.includes( deviceType )
@@ -642,9 +635,9 @@ export default function Edit( {
 		[ gridItems ]
 	);
 
-	const currentCols = getBreakpointNumber( cols, activeBreakpoint, 'cols' );
+	const currentCols = getBreakpointNumber( null, activeBreakpoint, 'cols' );
 	const currentRowHeight = getBreakpointNumber(
-		rowHeight,
+		null,
 		activeBreakpoint,
 		'rowHeight'
 	);
@@ -688,8 +681,8 @@ export default function Edit( {
 					'frontis-blocks'
 			  );
 	const baseLayouts = useMemo(
-		() => buildLayoutsFromGridItems( gridItems, cols, layouts ),
-		[ cols, gridItems, layouts ]
+		() => buildLayoutsFromGridItems( gridItems, null, layouts ),
+		[ gridItems, layouts ]
 	);
 	const layoutCompactor = useMemo(
 		() => getCompactor( compactType || null, allowOverlap ),
@@ -699,11 +692,11 @@ export default function Edit( {
 		() =>
 			compactLayouts(
 				baseLayouts,
-				cols,
+				null,
 				gridItemStateMap,
 				layoutCompactor
 			),
-		[ baseLayouts, cols, gridItemStateMap, layoutCompactor ]
+		[ baseLayouts, gridItemStateMap, layoutCompactor ]
 	);
 
 	useEffect( () => {
@@ -826,7 +819,7 @@ export default function Edit( {
 			const presetLayouts = createPresetLayouts(
 				preset,
 				presetBlocks,
-				cols
+				null
 			);
 
 			isApplyingPresetRef.current = true;
@@ -842,7 +835,7 @@ export default function Edit( {
 				}
 			} );
 		},
-		[ clientId, cols, replaceInnerBlocks, selectBlock ]
+		[ clientId, replaceInnerBlocks, selectBlock ]
 	);
 
 	const addGridItem = useCallback( () => {
@@ -853,7 +846,7 @@ export default function Edit( {
 
 		const desktopDefaultWidth = getDefaultItemWidth(
 			'Desktop',
-			getBreakpointNumber( cols, 'Desktop', 'cols' )
+			getBreakpointNumber( null, 'Desktop', 'cols' )
 		);
 		const desktopDefaultHeight = getDefaultItemHeight( 'Desktop' );
 		const newBlock = createBlock( 'frontis-blocks/grid-item', {
@@ -866,7 +859,6 @@ export default function Edit( {
 		setBuilderView( BUILDER_VIEWS.LAYOUT );
 	}, [
 		clientId,
-		cols,
 		hasGridItems,
 		innerBlocks.length,
 		insertBlock,
@@ -1120,26 +1112,17 @@ export default function Edit( {
 						</div>
 					) : isLayoutMode ? (
 						<div className="layout-overlay-mode">
-							<div className="layout-mode-toolbar">
+							<div
+								className="layout-mode-toolbar"
+								onMouseDown={ ( e ) => e.stopPropagation() }
+							>
 								<div className="grid-stage-copy">
-									<span className="grid-stage-pill">
-										{ __(
-											'Step 2 of 3',
-											'frontis-blocks'
-										) }
-									</span>
 									<h3>
 										{ __(
 											'Resize and arrange your layout',
 											'frontis-blocks'
 										) }
 									</h3>
-									<p>
-										{ __(
-											'Drag items across the canvas and use the resize handles to fine-tune each section before you start adding content.',
-											'frontis-blocks'
-										) }
-									</p>
 								</div>
 
 								<div
@@ -1149,57 +1132,32 @@ export default function Edit( {
 											: 'is-empty'
 									}` }
 								>
-									<div className="layout-selection-summary">
-										<span className="dashicons dashicons-info-outline" />
-										<span>{ selectedLayoutLabel }</span>
-									</div>
 
 									<div className="layout-selection-actions">
 										<Button
 											variant="primary"
-											onClick={ goToContentView }
+											onClick={ ( e ) => {
+												e.stopPropagation();
+												if ( selectedGridItem ) {
+													focusGridItem(
+														selectedGridItem.itemId,
+														{
+															exitLayoutMode: true,
+														}
+													);
+												} else {
+													goToContentView();
+												}
+											} }
+											onMouseDown={ ( e ) =>
+												e.stopPropagation()
+											}
 										>
 											{ __(
 												'Continue to Content',
 												'frontis-blocks'
 											) }
 										</Button>
-										{ selectedGridItem && (
-											<>
-												<Button
-													variant="secondary"
-													icon="edit"
-													onClick={ () =>
-														focusGridItem(
-															selectedGridItem.itemId,
-															{
-																exitLayoutMode: true,
-															}
-														)
-													}
-												>
-													{ __(
-														'Edit Content',
-														'frontis-blocks'
-													) }
-												</Button>
-												<Button
-													variant="tertiary"
-													icon="trash"
-													isDestructive
-													onClick={ () =>
-														removeGridItem(
-															selectedGridItem.itemId
-														)
-													}
-												>
-													{ __(
-														'Delete Item',
-														'frontis-blocks'
-													) }
-												</Button>
-											</>
-										) }
 									</div>
 								</div>
 							</div>
@@ -1263,11 +1221,6 @@ export default function Edit( {
 														index + 1
 													) }
 												</span>
-												<span className="item-id">
-													{ item.i
-														.split( '-' )
-														.pop() }
-												</span>
 												{ item.static && (
 													<span className="item-status">
 														{ __(
@@ -1277,16 +1230,6 @@ export default function Edit( {
 													</span>
 												) }
 											</div>
-											<span className="item-size">
-												{ sprintf(
-													__(
-														'%1$d columns, %2$d rows',
-														'frontis-blocks'
-													),
-													item.w,
-													item.h
-												) }
-											</span>
 										</div>
 									) ) }
 								</ReactGridLayout>
@@ -1297,12 +1240,6 @@ export default function Edit( {
 							{ hasGridItems && (
 								<div className="grid-content-stage-bar">
 									<div className="grid-content-stage-copy">
-										<span className="grid-stage-pill">
-											{ __(
-												'Step 3 of 3',
-												'frontis-blocks'
-											) }
-										</span>
 										<span className="grid-content-stage-title">
 											{ __(
 												'Add blocks inside each layout area.',
