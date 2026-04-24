@@ -1,7 +1,3 @@
-/**
- * One repeater row: InnerBlocks = drop zone for any block (native drag-and-drop).
- * blockID on wrapper = stable unique selector vs sibling cards.
- */
 import { __ } from '@wordpress/i18n';
 import {
 	useBlockProps,
@@ -25,7 +21,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		setAttributes,
 	});
 
-	/** 1-based index among siblings = Card 1, Card 2, … (reorder updates automatically). */
 	const cardIndex = useSelect(
 		(select) => select(blockEditorStore).getBlockIndex(clientId),
 		[clientId]
@@ -48,9 +43,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			className: 'fb-stack-card-item__content',
 		},
 		{
-			// Omit allowedBlocks so every registered block can be inserted / dragged in.
 			templateLock: false,
-			// Empty: centered “+” (ButtonBlockAppender). With blocks: default list appender at end.
 			renderAppender: hasInnerBlocks
 				? undefined
 				: InnerBlocks.ButtonBlockAppender,

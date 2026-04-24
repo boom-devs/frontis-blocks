@@ -16,6 +16,29 @@ function getStickyTopPx(el) {
 	return Number.isFinite(n) ? n : null;
 }
 
+function getNearestScrollContainer(el, stopAt) {
+	let node = el?.parentElement;
+	while (node && node !== stopAt) {
+		const { overflowY, overflow } = getComputedStyle(node);
+		const oy = overflowY || overflow;
+		if (/(auto|scroll|overlay)/.test(oy) && node.scrollHeight > node.clientHeight + 1) {
+			return node;
+		}
+		node = node.parentElement;
+	}
+
+	return null;
+}
+
+function getStickyThresholdTop(el, stickyTop, stackRoot) {
+	const scrollContainer = getNearestScrollContainer(el, stackRoot?.ownerDocument?.body || null);
+	if (!scrollContainer) {
+		return stickyTop;
+	}
+
+	return scrollContainer.getBoundingClientRect().top + stickyTop;
+}
+
 /**
  * @param {HTMLElement} stackRoot Main wrapper with .fb-stack-cards-preset-stack-top
  */
@@ -42,8 +65,9 @@ export function updateStackCardScaleItems(stackRoot) {
 		}
 
 		const rect = el.getBoundingClientRect();
-		const stuck = Math.abs(rect.top - stickyTop) <= STUCK_EPS_PX;
-		const beforeStickyPoint = rect.top > stickyTop + STUCK_EPS_PX;
+		const stickyThresholdTop = getStickyThresholdTop(el, stickyTop, stackRoot);
+		const stuck = Math.abs(rect.top - stickyThresholdTop) <= STUCK_EPS_PX;
+		const beforeStickyPoint = rect.top > stickyThresholdTop + STUCK_EPS_PX;
 
 		if (stuck || !beforeStickyPoint) {
 			el.style.removeProperty('--fb-active-scale');
@@ -61,9 +85,26 @@ export function updateAllStackCardScaleItems(doc = document) {
 
 function collectScrollTargets(stackRoot) {
 	const targets = new Set();
+	const doc = stackRoot.ownerDocument;
 	const win = stackRoot.ownerDocument?.defaultView;
 	if (win) {
 		targets.add(win);
+	}
+
+	if (doc) {
+		targets.add(doc);
+	}
+
+	if (doc?.scrollingElement) {
+		targets.add(doc.scrollingElement);
+	}
+
+	if (doc?.documentElement) {
+		targets.add(doc.documentElement);
+	}
+
+	if (doc?.body) {
+		targets.add(doc.body);
 	}
 
 	let node = stackRoot.parentElement;
@@ -86,6 +127,7 @@ function collectScrollTargets(stackRoot) {
  */
 export function bindEditorStackCardScale(stackRoot) {
 	let rafId = null;
+	let resizeObserver = null;
 
 	const scheduleUpdate = () => {
 		if (rafId !== null) {
@@ -108,6 +150,11 @@ export function bindEditorStackCardScale(stackRoot) {
 
 	win?.addEventListener('resize', scheduleUpdate);
 
+	if (typeof ResizeObserver !== 'undefined') {
+		resizeObserver = new ResizeObserver(scheduleUpdate);
+		resizeObserver.observe(stackRoot);
+	}
+
 	const mo = new MutationObserver(scheduleUpdate);
 	mo.observe(stackRoot, {
 		childList: true,
@@ -129,6 +176,7 @@ export function bindEditorStackCardScale(stackRoot) {
 			t.removeEventListener('scroll', scheduleUpdate);
 		});
 		win?.removeEventListener('resize', scheduleUpdate);
+		resizeObserver?.disconnect();
 		mo.disconnect();
 
 		stackRoot.querySelectorAll('.fb-stack-card-item').forEach((el) => {

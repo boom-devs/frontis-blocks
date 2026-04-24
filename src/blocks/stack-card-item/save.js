@@ -1,6 +1,3 @@
-/**
- * Saves inner blocks inside a uniquely classed wrapper (blockID) for scoped styling.
- */
 import { useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 
 export default function save({ attributes }) {
