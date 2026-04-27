@@ -22,6 +22,13 @@ const getItemSelectors = (blockID, itemId) => [
 	`.${blockID} .grid-content-layer.fb-grid-layout-container > [data-grid-id="${itemId}"]`,
 ];
 
+const getLayoutRowCount = (layoutItems = []) =>
+	layoutItems.reduce((maxRow, item) => {
+		const y = Math.max(Number(item?.y) || 0, 0);
+		const h = Math.max(Number(item?.h) || 1, 1);
+		return Math.max(maxRow, y + h);
+	}, 0);
+
 const appendLayoutRules = (css, blockID, layoutItems = []) =>
 	layoutItems.reduce((nextCss, item) => {
 		const x = Math.max(Number(item?.x) || 0, 0);
@@ -63,11 +70,17 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const tabletGapUnit = gutterUnits?.Tablet || "px";
 	const mobileGapUnit = gutterUnits?.Mobile || "px";
 
+	const desktopRows = getLayoutRowCount(layoutStore?.Desktop || []);
+	const tabletRows = getLayoutRowCount(layoutStore?.Tablet || []);
+	const mobileRows = getLayoutRowCount(layoutStore?.Mobile || []);
+
 	let css = `
 		${containerSelectors.join(", ")} {
 			display: grid;
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
+			${desktopRows > 0 ? `grid-template-rows: repeat(${desktopRows}, auto);` : ""}
 			gap: ${gutterDesktop}${desktopGapUnit};
+			align-items: stretch;
 		}
 	`;
 
@@ -77,6 +90,7 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			@media (max-width: 1024px) {
 				${containerSelectors.join(", ")} {
 					grid-template-columns: repeat(${colsTablet}, 1fr);
+					${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
 					gap: ${gutterTablet}${tabletGapUnit};
 				}
 	`;
@@ -86,6 +100,7 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			@media (max-width: 767px) {
 				${containerSelectors.join(", ")} {
 					grid-template-columns: repeat(${colsMobile}, 1fr);
+					${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
 					gap: ${gutterMobile}${mobileGapUnit};
 				}
 	`;
