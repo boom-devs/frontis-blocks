@@ -1,3 +1,6 @@
+// ==========================================
+// 1. Imports (Dependencies, Utilities, Styles)
+// ==========================================
 import { useBlockProps } from "@wordpress/block-editor";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import generateCircleMenuStyle from "./styling";
@@ -32,6 +35,9 @@ export default function save({ attributes }) {
 		circleMenuGlobalWraperClass,
 	} = attributes;
 
+	// ==========================================
+	// 2. Block Props & Wrapper Classes
+	// ==========================================
 	const blockProps = useBlockProps.save({
 		id: circleMenuGlobalWraperID || undefined,
 		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
@@ -41,8 +47,14 @@ export default function save({ attributes }) {
 		}`,
 	});
 
+	// ==========================================
+	// 3. Generate CSS Styles for Frontend
+	// ==========================================
 	const dynamicCSS = generateCircleMenuStyle(attributes);
 
+	// ==========================================
+	// 4. Render Main Menu Center Content
+	// ==========================================
 	const renderMainContent = () => {
 		return (
 			<>
@@ -88,6 +100,9 @@ export default function save({ attributes }) {
 		);
 	};
 
+	// ==========================================
+	// 5. Final Render Output (HTML for Frontend)
+	// ==========================================
 	return (
 		<div {...blockProps}>
 			<div className={`fb-parent-wrapper ${blockID}`}>
@@ -111,7 +126,23 @@ export default function save({ attributes }) {
 									className="fb-circle-menu-link"
 								>
 									<div className="fb-circle-menu-icon">
-										{item.icon ? renderSVG(item.icon) : ""}
+										{!item.contentType || item.contentType === "icon" ? (
+											item.icon ? (
+												renderSVG(item.icon)
+											) : (
+												""
+											)
+										) : (
+											item.image && (
+												<img
+													src={item.image}
+													alt={item.imageAlt}
+													style={{
+														objectFit: item.imageSize || "cover",
+													}}
+												/>
+											)
+										)}
 									</div>
 								</a>
 								{submenuShowTitleOnHover && (

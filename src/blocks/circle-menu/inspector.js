@@ -1,5 +1,5 @@
 import { __ } from "@wordpress/i18n";
-import { memo, useState } from "@wordpress/element";
+import { memo, useState, useRef, useEffect } from "@wordpress/element";
 import { DndContext, closestCenter } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import {
@@ -164,10 +164,27 @@ const Inspector = ({ attributes, setAttributes }) => {
 		activeOffsetV,
 	} = attributes;
 
+	// ==========================================
+	// 1. Local State & Device Context
+	// ==========================================
 	const [offsetSwitcher, setOffsetSwitcher] = useState("before");
 	const deviceType = useDeviceType();
 
-	/** Start Main Menu Border */
+	// ==========================================
+	// 2. Component References (To Avoid Stale Closures)
+	// ==========================================
+	// Always keep a ref to the latest menuItems to avoid stale closure
+	// issues when wp.media fires its async callback
+	const menuItemsRef = useRef(menuItems);
+	useEffect(() => {
+		menuItemsRef.current = menuItems;
+	}, [menuItems]);
+
+	// ==========================================
+	// 3. Event Handlers for Styling Controls
+	// ==========================================
+
+	/** Start Main Menu Border Controls */
 	const handleMainMenuBorderUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (mainMenuBorderLink) {
@@ -309,37 +326,52 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 	/** End Sub Menu Radius */
 
+	// ==========================================
+	// 4. Drag & Drop Handler (Sub Menu Items)
+	// ==========================================
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 		if (active && over && active.id !== over.id) {
-			const oldIndex = menuItems.findIndex((item) => item.id === active.id);
-			const newIndex = menuItems.findIndex((item) => item.id === over.id);
-			const updatedItems = arrayMove(menuItems, oldIndex, newIndex);
+			const oldIndex = menuItemsRef.current.findIndex(
+				(item) => item.id === active.id,
+			);
+			const newIndex = menuItemsRef.current.findIndex(
+				(item) => item.id === over.id,
+			);
+			const updatedItems = arrayMove(menuItemsRef.current, oldIndex, newIndex);
+			menuItemsRef.current = updatedItems;
 			setAttributes({ menuItems: updatedItems });
 		}
 	};
 
-	/**
-	 * Inspector General Controls
-	 */
+	// ==========================================
+	// 5. UI: Inspector General Controls Tab
+	// ==========================================
 	const generalControls = (
 		<>
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
-				<SelectControl
-					label={__("Position", "frontis-blocks")}
-					value={menuPosition}
-					options={[
-						{ label: "Bottom Right", value: "bottom-right" },
-						{ label: "Bottom Center", value: "bottom-center" },
-						{ label: "Bottom Left", value: "bottom-left" },
-						{ label: "Center Right", value: "center-right" },
-						{ label: "Center Left", value: "center-left" },
-						{ label: "Top Right", value: "top-right" },
-						{ label: "Top Center", value: "top-center" },
-						{ label: "Top Left", value: "top-left" },
-					]}
-					onChange={(value) => setAttributes({ menuPosition: value })}
-				/>
+				<BaseControl
+					help={__(
+						"This setting only affects the position on the frontend, not in the editor.",
+						"frontis-blocks",
+					)}
+				>
+					<SelectControl
+						label={__("Position", "frontis-blocks")}
+						value={menuPosition}
+						options={[
+							{ label: "Bottom Right", value: "bottom-right" },
+							{ label: "Bottom Center", value: "bottom-center" },
+							{ label: "Bottom Left", value: "bottom-left" },
+							{ label: "Center Right", value: "center-right" },
+							{ label: "Center Left", value: "center-left" },
+							{ label: "Top Right", value: "top-right" },
+							{ label: "Top Center", value: "top-center" },
+							{ label: "Top Left", value: "top-left" },
+						]}
+						onChange={(value) => setAttributes({ menuPosition: value })}
+					/>
+				</BaseControl>
 
 				<SelectControl
 					label={__("Preset", "frontis-blocks")}
@@ -366,7 +398,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 						units={submenuSpaceUnits}
 						setAttributes={setAttributes}
 						rangeStep={1}
-						resetFallbackValue={0}
+						resetFallbackValue={""}
 					/>
 				)}
 
@@ -387,7 +419,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 							units={submenuHorizontalSpaceUnits}
 							setAttributes={setAttributes}
 							rangeStep={1}
-							resetFallbackValue={0}
+							resetFallbackValue={""}
 						/>
 						<SelectControl
 							label={__("Position Align", "frontis-blocks")}
@@ -598,15 +630,15 @@ const Inspector = ({ attributes, setAttributes }) => {
 													id,
 													key,
 													value,
-													menuItems,
+													menuItemsRef,
 													setAttributes,
 												)
 											}
 											handleDeleteItem={(id) =>
-												handleDeleteItem(id, menuItems, setAttributes)
+												handleDeleteItem(id, menuItemsRef, setAttributes)
 											}
 											handleDuplicateItem={(id) =>
-												handleDuplicateItem(id, menuItems, setAttributes)
+												handleDuplicateItem(id, menuItemsRef, setAttributes)
 											}
 											index={index}
 										/>
@@ -616,19 +648,20 @@ const Inspector = ({ attributes, setAttributes }) => {
 						</DndContext>
 						<Button
 							isPrimary
-							onClick={() => handleAddItem(menuItems, setAttributes)}
+							onClick={() => handleAddItem(menuItemsRef, setAttributes)}
 						>
 							{__("Add Item", "frontis-blocks")}
 						</Button>
 					</div>
 				</BaseControl>
 			</PanelBody>
+			{/* End Sub Menu Items Panel */}
 		</>
 	);
 
-	/**
-	 * Inspector Style Controls
-	 */
+	// ==========================================
+	// 6. UI: Inspector Style Controls Tab
+	// ==========================================
 	const styleControls = (
 		<>
 			<PanelBody title={__("Main Menu", "frontis-blocks")} initialOpen={true}>
@@ -825,61 +858,76 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 				{offsetSwitcher === "before" ? (
 					<>
-						<FB_Range
-							min={0}
-							max={300}
-							label={__("Offset Horizontal", "frontis-blocks")}
-							rangeValue={attributes.offsetH}
-							onChangeHandler={(value) => setAttributes({ offsetH: value })}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={40}
-							isRangeUnit={false}
-						/>
-						<FB_Range
-							min={0}
-							max={300}
-							label={__("Offset Vertical", "frontis-blocks")}
-							rangeValue={attributes.offsetV}
-							onChangeHandler={(value) => setAttributes({ offsetV: value })}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={40}
-							isRangeUnit={false}
-						/>
+						<BaseControl
+							help={__(
+								"Offsets only affect the frontend, so they are not visible in the editor.",
+								"frontis-blocks",
+							)}
+						>
+							<FB_Range
+								min={0}
+								max={300}
+								label={__("Offset Horizontal", "frontis-blocks")}
+								rangeValue={attributes.offsetH}
+								onChangeHandler={(value) => setAttributes({ offsetH: value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={40}
+								isRangeUnit={false}
+							/>
+
+							<FB_Range
+								min={0}
+								max={300}
+								label={__("Offset Vertical", "frontis-blocks")}
+								rangeValue={attributes.offsetV}
+								onChangeHandler={(value) => setAttributes({ offsetV: value })}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={40}
+								isRangeUnit={false}
+							/>
+						</BaseControl>
 					</>
 				) : (
 					<>
-						<FB_Range
-							min={0}
-							max={300}
-							label={__("Offset Horizontal", "frontis-blocks")}
-							rangeValue={attributes.activeOffsetH}
-							onChangeHandler={(value) =>
-								setAttributes({ activeOffsetH: value })
-							}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={40}
-							isRangeUnit={false}
-						/>
-						<FB_Range
-							min={0}
-							max={300}
-							label={__("Offset Vertical", "frontis-blocks")}
-							rangeValue={attributes.activeOffsetV}
-							onChangeHandler={(value) =>
-								setAttributes({ activeOffsetV: value })
-							}
-							deviceType={deviceType}
-							setAttributes={setAttributes}
-							rangeStep={1}
-							resetFallbackValue={40}
-							isRangeUnit={false}
-						/>
+						<BaseControl
+							help={__(
+								"Offsets only affect the frontend, so they are not visible in the editor.",
+							)}
+						>
+							<FB_Range
+								min={0}
+								max={300}
+								label={__("Offset Horizontal", "frontis-blocks")}
+								rangeValue={attributes.activeOffsetH}
+								onChangeHandler={(value) =>
+									setAttributes({ activeOffsetH: value })
+								}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={40}
+								isRangeUnit={false}
+							/>
+
+							<FB_Range
+								min={0}
+								max={300}
+								label={__("Offset Vertical", "frontis-blocks")}
+								rangeValue={attributes.activeOffsetV}
+								onChangeHandler={(value) =>
+									setAttributes({ activeOffsetV: value })
+								}
+								deviceType={deviceType}
+								setAttributes={setAttributes}
+								rangeStep={1}
+								resetFallbackValue={40}
+								isRangeUnit={false}
+							/>
+						</BaseControl>
 					</>
 				)}
 				<FB_BackgroundColorControl
@@ -1066,7 +1114,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 					/>
 				)}
 			</PanelBody>
+			{/* End Main Menu Style Panel */}
 
+			{/* Start Sub Menu Style Panel */}
 			<PanelBody title={__("Sub Menu", "frontis-blocks")} initialOpen={false}>
 				<FB_Range
 					min={30}
@@ -1444,6 +1494,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
+	// ==========================================
+	// 7. Global Settings Event Handlers
+	// ==========================================
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (attributes.circleMenuGlobalPaddingLink) {
@@ -2125,6 +2178,9 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
+	// ==========================================
+	// 8. Final Render output for Inspector UI
+	// ==========================================
 	return (
 		<>
 			<FB_InspectorControls
