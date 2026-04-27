@@ -11,5 +11,6 @@
 - **Container Block**: Resolved child Container padding issues on initial insert.
 
 #### 📈 Improvements
+- **Advanced Search**: Resolved block issues and added custom icon, updated description and attributes.
 - **Global Settings UI**: Styled Global Settings save button for better UI consistency.
 - **Core Plugin**: Updated core plugin file for compatibility.

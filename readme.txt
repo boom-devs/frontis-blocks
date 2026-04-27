@@ -253,6 +253,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Fixed**: Resolved Slider block outside padding reset issue.
 - **Fixed**: Resolved Global Settings related issues.
 - **Fixed**: Resolved child Container padding issues on initial insert.
+- **Improved**: Resolved Advanced Search block issues and added custom icon, updated description and attributes.
 - **Improved**: Styled Global Settings save button for better UI consistency.
 - **Improved**: Updated core plugin file for compatibility.
 
