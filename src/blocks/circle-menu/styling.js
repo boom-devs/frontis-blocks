@@ -11,15 +11,15 @@ import getCustomCss from "@Utils/getCustomCss";
  * @param {any} fallback
  * @returns {any}
  */
-const getV = (attr, device = "Desktop", fallback = "") => {
-	if (typeof attr === "object" && attr !== null) {
-		return attr[device] !== undefined && attr[device] !== ""
-			? attr[device]
-			: device === "Desktop"
-			? fallback
-			: getV(attr, "Desktop", fallback);
-	}
-	return device === "Desktop" ? (attr !== undefined ? attr : fallback) : "";
+// ==========================================
+// 1. Device Prefix Helpers (For Responsive Data)
+// ==========================================
+const getV = (v, device, fallback) => {
+	return v?.[device] !== undefined && v?.[device] !== "" ? v[device] : fallback;
+};
+
+const getU = (u, device, fallback = "px") => {
+	return u?.[device] || fallback;
 };
 
 const getSpacing = (attr, unitsAttr, device = "Desktop") => {
@@ -43,25 +43,38 @@ const generateCircleMenuStyle = (attributes) => {
 		imageAttachment,
 		imageRepeat,
 		imageSize,
+		otherType = "classic",
 	) => {
+		const finalColor = color || "transparent";
 		if (type === "classic") {
-			let style = color ? `background-color: ${color} !important;` : "";
-			if (imageUrl) {
-				style += ` background-image: url(${imageUrl}) !important;`;
-				if (imagePosition)
-					style += ` background-position: ${imagePosition} !important;`;
-				if (imageAttachment)
-					style += ` background-attachment: ${imageAttachment} !important;`;
-				if (imageRepeat)
-					style += ` background-repeat: ${imageRepeat} !important;`;
-				if (imageSize) style += ` background-size: ${imageSize} !important;`;
+			let style = "";
+			if (otherType === "gradient") {
+				style = `background-image: linear-gradient(${finalColor}, ${finalColor});`;
+			} else {
+				style = `background-color: ${finalColor};`;
 			}
-			return style || "background: transparent !important;";
+
+			if (imageUrl) {
+				style += ` background-image: ${
+					otherType === "gradient"
+						? `linear-gradient(${finalColor}, ${finalColor}), `
+						: ""
+				}url(${imageUrl});`;
+				if (imagePosition) style += ` background-position: ${imagePosition};`;
+				if (imageAttachment)
+					style += ` background-attachment: ${imageAttachment};`;
+				if (imageRepeat) style += ` background-repeat: ${imageRepeat};`;
+				if (imageSize) style += ` background-size: ${imageSize};`;
+			}
+			// ==========================================
+			// 11. Custom CSS & Return
+			// ==========================================
+			return style || "background: transparent;";
 		} else {
 			const gradientVal = customSwitcher ? customValue : gradient;
 			return gradientVal
-				? `background: ${gradientVal} !important;`
-				: `background: ${color || "transparent"} !important;`;
+				? `background: ${gradientVal};`
+				: `background: ${finalColor};`;
 		}
 	};
 
@@ -121,7 +134,10 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuBorderDesktop,
 		submenuBorderTablet,
 		submenuBorderMobile,
-		// Box Shadow
+		// ==========================================
+		// 5. Box Shadow Handlers (Main & Sub Menu)
+		// ==========================================
+		// Main Menu Shadows
 		mainMenuBoxShadowCssValue,
 		mainMenuBoxShadowHoverCssValue,
 		submenuBoxShadowCssValue,
@@ -240,17 +256,25 @@ const generateCircleMenuStyle = (attributes) => {
 	} = attributes;
 
 	const generateDeviceStyle = (device) => {
+		// ==========================================
+		// 2. Main Menu Size & Offsets Calculation
+		// ==========================================
 		const h = getV(offsetH, device, 40);
 		const v = getV(offsetV, device, 40);
 		const activeH = getV(activeOffsetH, device, h);
 		const activeV = getV(activeOffsetV, device, v);
-		const mSize = getV(mainMenuSize, device, 72);
-		const mIconSize = getV(mainMenuIconSize, device, 32);
-		const sSize = getV(submenuSize, device, 62);
-		const sIconSize = getV(submenuIconSize, device, 24);
+		const size = getV(mainMenuSize, device, 72);
+		const mSize = parseFloat(getV(mainMenuSize, device, 72)) || 72;
+		const mIconSize = parseFloat(getV(mainMenuIconSize, device, 32)) || 32;
+		const sSize = parseFloat(getV(submenuSize, device, 62)) || 62;
+		const sIconSize = parseFloat(getV(submenuIconSize, device, 24)) || 24;
 		const mainMenuImgSize = getV(mainMenuImageSize, device, "cover");
 		const mainMenuCloseImgSize = getV(mainMenuCloseImageSize, device, "cover");
 
+		// ==========================================
+		// 3. CSS Variable Construction Start
+		// ==========================================
+		let customStyle = "";
 		// Border Radius
 		const mRadius = getSpacing(
 			attributes[`mainMenuBorderRadius${device}`],
@@ -276,13 +300,43 @@ const generateCircleMenuStyle = (attributes) => {
 		);
 
 		// Dynamic size calculation for editor
-		const rGap = parseInt(getV(submenuSpace, device, 0), 10);
-		const hGap = parseInt(getV(submenuHorizontalSpace, device, 0), 10);
+		let rawRGap = parseInt(getV(submenuSpace, device, 0), 10);
+		const rGap = isNaN(rawRGap) ? 0 : rawRGap;
+
+		let rawHGap = parseInt(getV(submenuHorizontalSpace, device, 10), 10);
+		const hGap = isNaN(rawHGap) ? 10 : rawHGap;
 		const radius = 100 + rGap;
 		let editorWrapperSize = mSize + 40; // Default
 
 		if (menuPreset === "horizontal-menu") {
-			editorWrapperSize = Math.max(mSize, (sSize + hGap) * 4);
+			const pos = attributes.menuPosition;
+			const align = attributes.submenuHorizontalAlign;
+			let direction = "right";
+
+			if (pos === "bottom-right")
+				direction = align === "vertical" ? "top" : "left";
+			else if (pos === "bottom-left")
+				direction = align === "vertical" ? "top" : "right";
+			else if (pos === "top-center")
+				direction = align === "vertical" ? "bottom" : "left";
+			else if (pos === "bottom-center")
+				direction = align === "vertical" ? "top" : "left";
+			else if (pos === "center-right")
+				direction = align === "vertical" ? "left" : "bottom";
+			else if (pos === "center-left")
+				direction = align === "vertical" ? "top" : "right";
+			else if (pos === "top-right")
+				direction = align === "vertical" ? "bottom" : "left";
+			else if (pos === "top-left")
+				direction = align === "vertical" ? "bottom" : "right";
+
+			const isVerticalFly = direction === "top" || direction === "bottom";
+
+			if (isVerticalFly) {
+				editorWrapperSize = Math.max(mSize + 40, (sSize + hGap) * 4);
+			} else {
+				editorWrapperSize = mSize + 40;
+			}
 		} else {
 			editorWrapperSize = (radius + sSize / 2) * 2 + 20;
 		}
@@ -326,6 +380,9 @@ const generateCircleMenuStyle = (attributes) => {
 			let startAngle = 0;
 			let spreadAngle = 360;
 
+			// ==========================================
+			// 10. Global Position & Alignment Handlers
+			// ==========================================
 			if (menuPreset === "circular-menu") {
 				startAngle = -90;
 				spreadAngle = 360;
@@ -464,8 +521,13 @@ const generateCircleMenuStyle = (attributes) => {
 			submenuTextLineHeightUnits?.Desktop ||
 			"px";
 
+		const menuWrapperSelector = `.${blockID}.fb-circle-menu-main-wrapper`;
+
+		// ==========================================
+		// 4. Global Wrappers Styling
+		// ==========================================
 		return `
-            .${blockID}.fb-circle-menu-main-wrapper {
+            ${menuWrapperSelector} {
                 --fb-cm-offset-h: ${h}px;
                 --fb-cm-offset-v: ${v}px;
                 --fb-cm-wrapper-size: ${editorWrapperSize}px;
@@ -514,34 +576,25 @@ const generateCircleMenuStyle = (attributes) => {
 										? `top: ${circleMenuVRTopOffset?.[device]}${circleMenuVRTopOffsetUnits?.[device]};`
 										: ""
 								}
-                ${
-									circleMenuPositionType !== "default" &&
-									circleMenuPositionType !== "relative" &&
-									circleMenuVROrientationType === "bottom" &&
-									circleMenuVRBottomOffset?.[device] !== undefined
-										? `bottom: ${circleMenuVRBottomOffset?.[device]}${circleMenuVRBottomOffsetUnits?.[device]};`
-										: ""
-								}
+                ${vrBottom ? `bottom: ${vrBottom}${vrBottomUnits};` : ""}
+                --fb-cm-main-radius: ${mRadius || "50%"};
+                --fb-cm-main-border-width: ${mBorderWidth || "0"};
+                --fb-cm-sub-radius: ${sRadius || "50%"};
+                --fb-cm-sub-border-width: ${sBorderWidth || "0"};
             }
             .${blockID}.fb-circle-menu-main-wrapper.is-active {
                 --fb-cm-offset-h: ${activeH}px;
                 --fb-cm-offset-v: ${activeV}px;
             }
 
+            /* ==========================================
+             * 6. Base CSS Generation (Assigning Variables)
+             * ========================================== */
             .${blockID} .fb-circle-menu {
-                --fb-cm-main-size: ${mSize}px;
+                --fb-cm-main-size: ${size}px;
                 --fb-cm-sub-size: ${sSize}px;
                 --fb-cm-main-icon-size: ${mSize}px;
                 --fb-cm-sub-icon-size: ${sSize}px;
-            }
-
-            .${blockID} .fb-circle-menu-center {
-                border-radius: ${mRadius || "50%"} !important;
-                border-width: ${mBorderWidth || "0"} !important;
-            }
-            .${blockID} .fb-circle-menu-item {
-                border-radius: ${sRadius || "50%"} !important;
-                border-width: ${sBorderWidth || "0"} !important;
             }
 
             .${blockID} .fb-circle-menu-toggle svg,
@@ -557,7 +610,8 @@ const generateCircleMenuStyle = (attributes) => {
             }
 
             .${blockID} .fb-circle-menu-icon svg,
-            .${blockID} .fb-circle-menu-icon i {
+            .${blockID} .fb-circle-menu-icon i,
+            .${blockID} .fb-circle-menu-icon img {
                 width: ${sIconSize}px;
                 height: ${sIconSize}px;
             }
@@ -609,51 +663,68 @@ const generateCircleMenuStyle = (attributes) => {
         .${blockID} .fb-circle-menu {
             --fb-cm-main-bg: ${
 							mainMenuNormalBackgroundType === "classic"
-								? mainMenuBgColor || "#CD9B44"
+								? mainMenuHoverBackgroundType === "gradient"
+									? `linear-gradient(${mainMenuBgColor || "#399CFF"}, ${
+											mainMenuBgColor || "#399CFF"
+									  })`
+									: mainMenuBgColor || "#399CFF"
 								: (mainMenuNormalCustomGradientSwitcher
 										? mainMenuNormalCustomGradientInputValue
 										: mainMenuNormalGradientColor) ||
 								  mainMenuBgColor ||
-								  "#CD9B44"
+								  "#399CFF"
 						};
             --fb-cm-main-bg-hover: ${
+							// ==========================================
+							// 7. Hover States CSS Generation
+							// ==========================================
 							mainMenuHoverBackgroundType === "classic"
-								? mainMenuBgHoverColor || mainMenuBgColor || "#CD9B44"
+								? mainMenuNormalBackgroundType === "gradient"
+									? `linear-gradient(${
+											mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"
+									  }, ${mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"})`
+									: mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"
 								: (mainMenuHoverCustomGradientSwitcher
 										? mainMenuHoverCustomGradientInputValue
 										: mainMenuHoverGradientColor) ||
 								  mainMenuBgHoverColor ||
 								  mainMenuBgColor ||
-								  "#CD9B44"
+								  "#399CFF"
 						};
-            --fb-cm-main-color: ${mainMenuTextColor || "#ffffff"};
+            --fb-cm-main-color: ${mainMenuTextColor || "#FFFFFF"};
             --fb-cm-main-color-hover: ${
-							mainMenuTextHoverColor || mainMenuTextColor || "#ffffff"
+							mainMenuTextHoverColor || mainMenuTextColor || "#FFFFFF"
 						};
             --fb-cm-sub-bg: ${
 							submenuNormalBackgroundType === "classic"
-								? submenuBgColor || "rgba(17, 19, 22, 0.4)"
+								? submenuHoverBackgroundType === "gradient"
+									? `linear-gradient(${submenuBgColor || "#D7EBFF"}, ${
+											submenuBgColor || "#D7EBFF"
+									  })`
+									: submenuBgColor || "#D7EBFF"
 								: (submenuNormalCustomGradientSwitcher
 										? submenuNormalCustomGradientInputValue
 										: submenuNormalGradientColor) ||
 								  submenuBgColor ||
-								  "rgba(17, 19, 22, 0.4)"
+								  "#D7EBFF"
 						};
             --fb-cm-sub-bg-hover: ${
 							submenuHoverBackgroundType === "classic"
-								? submenuBgHoverColor ||
-								  submenuBgColor ||
-								  "rgba(17, 19, 22, 0.4)"
+								? submenuNormalBackgroundType === "gradient"
+									? `linear-gradient(${
+											submenuBgHoverColor || submenuBgColor || "#D7EBFF"
+									  }, ${submenuBgHoverColor || submenuBgColor || "#D7EBFF"})`
+									: submenuBgHoverColor || submenuBgColor || "#D7EBFF"
 								: (submenuHoverCustomGradientSwitcher
 										? submenuHoverCustomGradientInputValue
 										: submenuHoverGradientColor) ||
 								  submenuBgHoverColor ||
 								  submenuBgColor ||
-								  "rgba(17, 19, 22, 0.4)"
+								  "#D7EBFF"
 						};
-            --fb-cm-sub-color: ${submenuIconColor || "#F9E3BC"};
+            --fb-cm-sub-color: ${submenuIconColor || "#15171C"};
             --fb-cm-sub-color-hover: ${
-							submenuIconHoverColor || submenuIconColor || "#F9E3BC"
+							submenuIconHoverColor || submenuIconColor || "#15171C"
 						};
             
             --fb-cm-main-border-style: ${mainMenuBorder || "none"};
@@ -723,7 +794,7 @@ const generateCircleMenuStyle = (attributes) => {
 							submenuTitleBgCustomGradientSwitcher,
 							submenuTitleBgCustomGradientInputValue,
 						)}
-            color: ${submenuTitleColor || "#fff"};
+            color: ${submenuTitleColor || "#FFFFFF"};
             ${
 							submenuTextFontFamily && submenuTextFontFamily !== "Default"
 								? `font-family: '${submenuTextFontFamily}', sans-serif;`
@@ -819,10 +890,10 @@ const generateCircleMenuStyle = (attributes) => {
 								: submenuTitleBgGradientColor;
 							const arrowColor =
 								submenuTitleBgColorType === "classic"
-									? submenuTitleBgColor || "#000"
+									? submenuTitleBgColor || "#15171C"
 									: getLastColorFromGradient(
 											currentGradient,
-											submenuTitleBgColor || "#000",
+											submenuTitleBgColor || "#15171C",
 									  );
 
 							if (submenuTitlePosition === "top") {
@@ -863,7 +934,6 @@ const generateCircleMenuStyle = (attributes) => {
                     transform: translateY(-50%);
                     border-color: transparent ${arrowColor} transparent transparent;
                     bottom: auto;
-                    right: auto;
                 `;
 							}
 							return "";
@@ -960,6 +1030,7 @@ const generateCircleMenuStyle = (attributes) => {
 							circleMenuGlobalBgImageAttachment,
 							circleMenuGlobalBgImageRepeat,
 							circleMenuGlobalBgImageSize,
+							circleMenuGlobalHoverBackgroundType,
 						)}
             border-color: ${circleMenuGlobalBorderColor || "transparent"};
             box-shadow: ${circleMenuGlobalBoxShadowCssValue || "none"};
@@ -978,6 +1049,7 @@ const generateCircleMenuStyle = (attributes) => {
 							circleMenuGlobalBgHoverImageAttachment,
 							circleMenuGlobalBgHoverImageRepeat,
 							circleMenuGlobalBgHoverImageSize,
+							circleMenuGlobalNormalBackgroundType,
 						)}
             border-color: ${
 							circleMenuGlobalBorderHoverColor ||

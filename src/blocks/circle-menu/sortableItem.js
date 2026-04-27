@@ -1,9 +1,13 @@
+// ==========================================
+// 1. Imports (React, DnD Kit, Components)
+// ==========================================
 import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { TextControl, Button, BaseControl } from "@wordpress/components";
+import { TextControl, Button, BaseControl, ButtonGroup } from "@wordpress/components";
 import FBIconPicker from "../../components/icon-picker";
+import FB_ImageControl from "@Components/image-control";
 
 export default function SortableItem({
 	id,
@@ -13,6 +17,9 @@ export default function SortableItem({
 	handleDuplicateItem,
 	index,
 }) {
+	// ==========================================
+	// 2. DnD Hooks & Local States
+	// ==========================================
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id });
 	const [isOpen, setIsOpen] = useState(false);
@@ -22,11 +29,18 @@ export default function SortableItem({
 		transition,
 	};
 
+	// ==========================================
+	// 3. Action Helpers
+	// ==========================================
 	const toggleOpen = () => setIsOpen(!isOpen);
 
 	const iconHandler = (IconName) => {
 		handleChangeItem(item.id, "icon", IconName);
 	};
+
+	// ==========================================
+	// 4. SVG Icons
+	// ==========================================
 
 	const TrashIcon = (
 		<svg
@@ -82,6 +96,9 @@ export default function SortableItem({
 		</svg>
 	);
 
+	// ==========================================
+	// 5. Final Render Output (Sortable Item)
+	// ==========================================
 	return (
 		<li
 			className="sortable-item"
@@ -89,6 +106,7 @@ export default function SortableItem({
 			{...attributes}
 			style={style}
 		>
+			{/* Start Item Header (Title & Actions) */}
 			<div className="sortable-header">
 				<span className="sortable-title" onClick={toggleOpen}>
 					{item.title || __(`Menu Item ${index + 1}`, "frontis-blocks")}
@@ -123,15 +141,70 @@ export default function SortableItem({
 					/>
 				</span>
 			</div>
+			{/* End Item Header */}
 
+			{/* Start Item Content (Settings) */}
 			{isOpen && (
 				<div className="sortable-item-content">
-					<BaseControl label={__("Icon", "frontis-blocks")}>
-						<FBIconPicker
-							value={item.icon || "fas fa-star"}
-							setIconHandler={iconHandler}
-						/>
+					<BaseControl label={__("Icon Type", "frontis-blocks")}>
+						<div className="fb-setting-switcher-container">
+							<BaseControl className="fb-setting-switcher-panel-wrapper">
+								<ButtonGroup className="fb-setting-switcher-panel-btn">
+									<Button
+										onClick={() =>
+											handleChangeItem(item.id, "contentType", "icon")
+										}
+										className={`fb-setting-switcher-panel-btn-switcher ${
+											!item.contentType || item.contentType === "icon"
+												? "active"
+												: ""
+										}`}
+									>
+										{__("Icon", "frontis-blocks")}
+									</Button>
+									<Button
+										onClick={() =>
+											handleChangeItem(item.id, "contentType", "image")
+										}
+										className={`fb-setting-switcher-panel-btn-switcher ${
+											item.contentType === "image" ? "active" : ""
+										}`}
+									>
+										{__("Image", "frontis-blocks")}
+									</Button>
+								</ButtonGroup>
+							</BaseControl>
+						</div>
 					</BaseControl>
+
+					{!item.contentType || item.contentType === "icon" ? (
+						<BaseControl label={__("Icon", "frontis-blocks")}>
+							<FBIconPicker
+								value={item.icon || "fas fa-star"}
+								setIconHandler={iconHandler}
+							/>
+						</BaseControl>
+					) : (
+						<FB_ImageControl
+							label={__("Image", "frontis-blocks")}
+							globalImageUrl={item.image}
+							setglobalImageUrl={(value) =>
+								handleChangeItem(item.id, "image", value)
+							}
+							globalImageAlt={item.imageAlt}
+							setglobalImageAlt={(value) =>
+								handleChangeItem(item.id, "imageAlt", value)
+							}
+							globalImageID={item.imageID}
+							setglobalImageID={(value) =>
+								handleChangeItem(item.id, "imageID", value)
+							}
+							globalImageSize={item.imageSize || "cover"}
+							setglobalImageSize={(value) =>
+								handleChangeItem(item.id, "imageSize", value)
+							}
+						/>
+					)}
 
 					<BaseControl label={__("Title", "frontis-blocks")}>
 						<TextControl
@@ -156,6 +229,7 @@ export default function SortableItem({
 					</div>
 				</div>
 			)}
+			{/* End Item Content */}
 		</li>
 	);
 }

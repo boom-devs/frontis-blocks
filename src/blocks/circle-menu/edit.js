@@ -1,3 +1,6 @@
+// ==========================================
+// 1. Imports (Dependencies, Utils, Styles)
+// ==========================================
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { useRef, useState, useEffect, useMemo } from "@wordpress/element";
@@ -51,10 +54,16 @@ export default function Edit({
 		circleMenuGlobalWraperClass,
 	} = attributes;
 
+	// ==========================================
+	// 2. Local States & References
+	// ==========================================
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef(null);
 	const itemRefs = useRef([]);
 
+	// ==========================================
+	// 3. Block Initialization Hooks
+	// ==========================================
 	useBlockIdGenerator({
 		clientId,
 		blockID,
@@ -66,16 +75,19 @@ export default function Edit({
 
 	const deviceType = useDeviceType();
 
-	/** Start Generate Block Style */
+	// ==========================================
+	// 4. Style Generation (Dynamic CSS)
+	// ==========================================
 	useEffect(() => {
 		if (blockID) {
 			const css = generateCircleMenuStyle(attributes);
 			setAttributes({ blockStyle: css });
 		}
 	}, [attributes, blockID]);
-	/** End Generate Block Style */
 
-	/** Start Load Google Font */
+	// ==========================================
+	// 5. Typography Font Loading
+	// ==========================================
 	useEffect(() => {
 		if (attributes.mainMenuTextFontFamily) {
 			loadGoogleFont(attributes.mainMenuTextFontFamily);
@@ -84,8 +96,10 @@ export default function Edit({
 			loadGoogleFont(attributes.submenuTextFontFamily);
 		}
 	}, [attributes.mainMenuTextFontFamily, attributes.submenuTextFontFamily]);
-	/** End Load Google Font */
 
+	// ==========================================
+	// 6. Block Props & Global Wrappers Setup
+	// ==========================================
 	const blockProps = useBlockProps({
 		id: circleMenuGlobalWraperID || undefined,
 		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
@@ -98,7 +112,18 @@ export default function Edit({
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+	// ==========================================
+	// 7. Mouse Event Handlers (Hover Trigger)
+	// ==========================================
 	const [hoverTimer, setHoverTimer] = useState(null);
+
+	useEffect(() => {
+		if (isSelected) {
+			setIsOpen(true);
+		} else {
+			setIsOpen(false);
+		}
+	}, [isSelected]);
 
 	const handleMouseEnter = () => {
 		if (triggerType === "hover") {
@@ -110,12 +135,17 @@ export default function Edit({
 	const handleMouseLeave = () => {
 		if (triggerType === "hover") {
 			const timer = setTimeout(() => {
-				setIsOpen(false);
+				if (!isSelected) {
+					setIsOpen(false);
+				}
 			}, 500); // 500ms delay from view.js
 			setHoverTimer(timer);
 		}
 	};
 
+	// ==========================================
+	// 8. Render Main Menu Center Content
+	// ==========================================
 	const renderMainContent = () => {
 		return (
 			<>
@@ -151,12 +181,15 @@ export default function Edit({
 		);
 	};
 
+	// ==========================================
+	// 9. Final Render Output for Block Editor
+	// ==========================================
 	return (
 		<>
 			<div {...blockProps}>
 				<div
 					className={`fb-parent-wrapper ${
-						isSelected || isOpen ? "is-active" : ""
+						isOpen ? "is-active" : ""
 					}`}
 					ref={panelRef}
 				>
@@ -181,7 +214,7 @@ export default function Edit({
 					>
 						<div
 							className={`fb-circle-menu-center ${
-								isSelected || isOpen ? "is-active" : ""
+								isOpen ? "is-active" : ""
 							}`}
 							onClick={() => triggerType === "click" && setIsOpen(!isOpen)}
 						>
@@ -197,7 +230,23 @@ export default function Edit({
 										onClick={(e) => e.preventDefault()}
 									>
 										<div className="fb-circle-menu-icon" aria-hidden="true">
-											{item.icon ? renderSVG(item.icon) : ""}
+											{!item.contentType || item.contentType === "icon" ? (
+												item.icon ? (
+													renderSVG(item.icon)
+												) : (
+													""
+												)
+											) : (
+												item.image && (
+													<img
+														src={item.image}
+														alt={item.imageAlt}
+														style={{
+															objectFit: item.imageSize || "cover",
+														}}
+													/>
+												)
+											)}
 										</div>
 									</a>
 									{submenuShowTitleOnHover && (

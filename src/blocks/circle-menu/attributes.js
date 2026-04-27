@@ -1,8 +1,14 @@
 const attributes = {
+	// ==========================================
+	// 1. Core Block Identifiers & Structure
+	// ==========================================
 	blockID: {
 		type: "string",
 		default: "",
 	},
+	// ==========================================
+	// 2. Menu Presets & Positions
+	// ==========================================
 	menuPosition: {
 		type: "string",
 		default: "bottom-right",
@@ -11,49 +17,62 @@ const attributes = {
 		type: "string",
 		default: "half-circular-menu",
 	},
+	// ==========================================
+	// 3. Sub Menu Items Content (Repeater Data)
+	// ==========================================
 	menuItems: {
 		type: "array",
 		default: [
 			{
 				id: "item-1",
 				title: "Phone",
+				contentType: "icon",
 				icon: "fas fa-phone",
+				image: "",
+				imageAlt: "",
+				imageID: undefined,
+				imageSize: "cover",
 				link: "#",
 			},
 			{
 				id: "item-2",
 				title: "Message",
+				contentType: "icon",
 				icon: "fas fa-envelope",
+				image: "",
+				imageAlt: "",
+				imageID: undefined,
+				imageSize: "cover",
 				link: "#",
 			},
 			{
 				id: "item-3",
 				title: "Cart",
+				contentType: "icon",
 				icon: "fas fa-cart-shopping",
+				image: "",
+				imageAlt: "",
+				imageID: undefined,
+				imageSize: "cover",
 				link: "#",
 			},
 		],
 	},
+	// ==========================================
+	// 4. Sub Menu Spacing (Circular & Horizontal)
+	// ==========================================
 	submenuSpace: {
 		type: "object",
-		default: {
-			Desktop: 0,
-			Tablet: "",
-			Mobile: "",
-		},
+		default: { Desktop: "", Tablet: "", Mobile: "" },
 	},
 	submenuSpaceUnits: {
 		type: "object",
-		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
-		},
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
 	submenuHorizontalSpace: {
 		type: "object",
 		default: {
-			Desktop: 0,
+			Desktop: "",
 			Tablet: "",
 			Mobile: "",
 		},
@@ -70,6 +89,9 @@ const attributes = {
 		type: "string",
 		default: "horizontal",
 	},
+	// ==========================================
+	// 5. Main Menu Toggle Content (Open/Close)
+	// ==========================================
 	mainMenuOpenType: {
 		type: "string",
 		default: "icon",
@@ -130,6 +152,9 @@ const attributes = {
 		type: "string",
 		default: "cover",
 	},
+	// ==========================================
+	// 6. Action Triggers & General Offsets
+	// ==========================================
 	triggerType: {
 		type: "string",
 		default: "hover",
@@ -152,18 +177,20 @@ const attributes = {
 		default: { Desktop: 40, Tablet: 40, Mobile: 40 },
 	},
 
-	// Main Menu Style
+	// ==========================================
+	// 7. Main Menu Styling (Size, Color, Background)
+	// ==========================================
 	mainMenuSize: {
 		type: "object",
 		default: { Desktop: 72, Tablet: "", Mobile: "" },
 	},
 	mainMenuBgColor: {
 		type: "string",
-		default: "#CD9B44",
+		default: "#399CFF",
 	},
 	mainMenuTextColor: {
 		type: "string",
-		default: "#ffffff",
+		default: "#FFFFFF",
 	},
 	mainMenuIconSize: {
 		type: "object",
@@ -186,7 +213,9 @@ const attributes = {
 		default: "normal",
 	},
 
-	// Main Menu Text Typography
+	// ==========================================
+	// 8. Main Menu Typography
+	// ==========================================
 	mainMenuTextGlobalTypographyData: {
 		type: "object",
 		default: {},
@@ -281,7 +310,9 @@ const attributes = {
 		},
 	},
 
-	// Sub Menu Style
+	// ==========================================
+	// 9. Sub Menu Styling (Size, Color, Hover)
+	// ==========================================
 	submenuShowTitleOnHover: {
 		type: "boolean",
 		default: false,
@@ -292,7 +323,7 @@ const attributes = {
 	},
 	submenuBgColor: {
 		type: "string",
-		default: "rgba(17, 19, 22, 0.4)",
+		default: "#D7EBFF",
 	},
 	submenuIconSize: {
 		type: "object",
@@ -300,7 +331,7 @@ const attributes = {
 	},
 	submenuIconColor: {
 		type: "string",
-		default: "#F9E3BC",
+		default: "#15171C",
 	},
 	submenuBgHoverColor: {
 		type: "string",
@@ -318,7 +349,9 @@ const attributes = {
 		type: "string",
 		default: "normal",
 	},
-	// Sub Menu Text Typography
+	// ==========================================
+	// 10. Sub Menu Tooltip/Typography
+	// ==========================================
 	submenuTextGlobalTypographyData: {
 		type: "object",
 		default: {},
@@ -414,11 +447,11 @@ const attributes = {
 	},
 	submenuTitleColor: {
 		type: "string",
-		default: "#ffffff",
+		default: "#FFFFFF",
 	},
 	submenuTitleBgColor: {
 		type: "string",
-		default: "#000000",
+		default: "#15171C",
 	},
 	submenuTitleBgGradientColor: {
 		type: "string",
@@ -440,7 +473,9 @@ const attributes = {
 		type: "string",
 		default: "top",
 	},
-	// Main Menu Background Type
+	// ==========================================
+	// 11. Advanced Backgrounds (Main Menu)
+	// ==========================================
 	mainMenuNormalBackgroundType: {
 		type: "string",
 		default: "classic",
@@ -474,7 +509,9 @@ const attributes = {
 		default: "",
 	},
 
-	// Sub Menu Background Type
+	// ==========================================
+	// 12. Advanced Backgrounds (Sub Menu)
+	// ==========================================
 	submenuNormalBackgroundType: {
 		type: "string",
 		default: "classic",
@@ -507,7 +544,9 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
-	// Main Menu Border Radius
+	// ==========================================
+	// 13. Border & Radius Settings (Main Menu)
+	// ==========================================
 	mainMenuBorderRadiusUnits: {
 		type: "object",
 		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
@@ -561,7 +600,9 @@ const attributes = {
 	},
 	mainMenuBoxShadowHoverCssValue: { type: "string", default: "" },
 
-	// Sub Menu Border Radius
+	// ==========================================
+	// 14. Border & Radius Settings (Sub Menu)
+	// ==========================================
 	submenuBorderRadiusUnits: {
 		type: "object",
 		default: { Desktop: "%", Tablet: "%", Mobile: "%" },
@@ -572,11 +613,11 @@ const attributes = {
 	},
 	submenuBorderRadiusTablet: {
 		type: "object",
-		default: { top: "", right: "", bottom: "", left: "" },
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
 	},
 	submenuBorderRadiusMobile: {
 		type: "object",
-		default: { top: "", right: "", bottom: "", left: "" },
+		default: { top: 50, right: 50, bottom: 50, left: 50 },
 	},
 	submenuBorderRadiusLink: { type: "boolean", default: true },
 
@@ -615,6 +656,9 @@ const attributes = {
 	},
 	submenuBoxShadowHoverCssValue: { type: "string", default: "" },
 
+	// ==========================================
+	// 15. Global Positioning & Spacing
+	// ==========================================
 	circleMenuGlobalZIndex: {
 		type: "object",
 		default: {
@@ -696,6 +740,9 @@ const attributes = {
 	},
 	circleMenuGlobalMarginLink: { type: "boolean", default: false },
 	circleMenuGlobalBgColorSwitcher: { type: "string", default: "normal" },
+	// ==========================================
+	// 16. Global Background Settings
+	// ==========================================
 	circleMenuGlobalBgColor: { type: "string", default: "" },
 	circleMenuGlobalBgHoverColor: { type: "string", default: "" },
 	circleMenuGlobalNormalBackgroundType: { type: "string", default: "classic" },
@@ -756,7 +803,9 @@ const attributes = {
 		default: { top: "", right: "", bottom: "", left: "" },
 	},
 	circleMenuGlobalBorderRadiusLink: { type: "boolean", default: false },
-	// Global Background Image attributes
+	// ==========================================
+	// 17. Global Background Images & Shadows
+	// ==========================================
 	circleMenuGlobalBgImageUrl: { type: "string", default: "" },
 	circleMenuGlobalBgImageAlt: { type: "string", default: "" },
 	circleMenuGlobalBgImageID: { type: "number", default: 0 },
