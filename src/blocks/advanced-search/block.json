@@ -3,7 +3,7 @@
 	"name": "frontis-blocks/advanced-search",
 	"title": "Advanced Search",
 	"category": "frontis-blocks",
-	"description": "Add a search form",
+	"description": "Add a search form to your website",
 	"textdomain": "frontis-blocks",
     "supports": {
         "anchor": false,
