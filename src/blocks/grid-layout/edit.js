@@ -44,6 +44,7 @@ const DEFAULT_GRID_SETTINGS = {
 	Tablet: { cols: 8, rowHeight: 35, gutter: 8 },
 	Mobile: { cols: 4, rowHeight: 30, gutter: 6 },
 };
+const LAYOUT_ROW_UNIT = 1;
 const DEFAULT_NEW_ITEM_WIDTH = {
 	Desktop: 3,
 	Tablet: 4,
@@ -554,6 +555,7 @@ export default function Edit( {
 	const lastSyncedLayoutRef = useRef( layouts );
 	const pendingPresetLayoutsRef = useRef( null );
 	const isApplyingPresetRef = useRef( false );
+	const measuredContentHeightsRef = useRef( new Map() );
 
 	const { innerBlocks, selectedGridItemClientId } = useSelect(
 		( select ) => {
@@ -636,7 +638,7 @@ export default function Edit( {
 	);
 
 	const currentCols = getBreakpointNumber( null, activeBreakpoint, 'cols' );
-	const currentRowHeight = getBreakpointNumber(
+	const baseRowHeight = getBreakpointNumber(
 		null,
 		activeBreakpoint,
 		'rowHeight'
@@ -653,33 +655,7 @@ export default function Edit( {
 			) || null,
 		[ gridItems, selectedGridItemClientId ]
 	);
-	const selectedGridItemIndex = useMemo(
-		() =>
-			selectedGridItem
-				? gridItems.findIndex(
-						( entry ) =>
-							entry.block.clientId ===
-							selectedGridItem.block.clientId
-				  )
-				: -1,
-		[ gridItems, selectedGridItem ]
-	);
 	const selectedLayoutItemId = selectedGridItem?.itemId || '';
-	const selectedLayoutLabel =
-		selectedGridItemIndex >= 0
-			? selectedGridItem?.isStatic
-				? sprintf(
-						__( 'Item %d selected, locked', 'frontis-blocks' ),
-						selectedGridItemIndex + 1
-				  )
-				: sprintf(
-						__( 'Item %d selected', 'frontis-blocks' ),
-						selectedGridItemIndex + 1
-				  )
-			: __(
-					'Select a layout item to edit or delete it.',
-					'frontis-blocks'
-			  );
 	const baseLayouts = useMemo(
 		() => buildLayoutsFromGridItems( gridItems, null, layouts ),
 		[ gridItems, layouts ]
@@ -742,20 +718,36 @@ export default function Edit( {
 
 	const onLayoutChange = useCallback(
 		( newLayout ) => {
-			const cleanLayout = newLayout.map( ( item ) =>
-				normalizeLayoutItem( item, currentCols )
-			);
+			const measuredMap = measuredContentHeightsRef.current;
+			const hasDisplayScaling = isLayoutMode && measuredMap.size > 0;
+
+			// Convert display-unit layout back to canonical grid units
+			const canonicalLayout = newLayout.map( ( item ) => {
+				if ( ! hasDisplayScaling ) {
+					return normalizeLayoutItem( item, currentCols );
+				}
+
+				const canonScale = ( baseRowHeight + currentGutter ) / ( LAYOUT_ROW_UNIT + currentGutter );
+				return normalizeLayoutItem(
+					{
+						...item,
+						y: Math.round( item.y / canonScale ),
+						h: Math.max( Math.round( item.h / canonScale ), 1 ),
+					},
+					currentCols
+				);
+			} );
 
 			const nextLayouts = {
 				...lastSyncedLayoutRef.current,
-				[ activeBreakpoint ]: cleanLayout,
+				[ activeBreakpoint ]: canonicalLayout,
 			};
 
 			lastSyncedLayoutRef.current = nextLayouts;
 			setAttributes( { layouts: nextLayouts } );
 
 			if ( activeBreakpoint === 'Desktop' ) {
-				cleanLayout.forEach( ( item ) => {
+				canonicalLayout.forEach( ( item ) => {
 					const matchingEntry = gridItems.find(
 						( entry ) => entry.itemId === item.i
 					);
@@ -789,12 +781,38 @@ export default function Edit( {
 		},
 		[
 			activeBreakpoint,
+			baseRowHeight,
 			currentCols,
+			currentGutter,
 			gridItems,
+			isLayoutMode,
 			setAttributes,
 			updateBlockAttributes,
 		]
 	);
+
+	const measureContentHeights = useCallback( () => {
+		const wrapper = containerRef.current;
+		if ( ! wrapper ) {
+			return;
+		}
+
+		const contentItems = wrapper.querySelectorAll(
+			'.grid-content-layer > [data-grid-id]'
+		);
+
+		contentItems.forEach( ( el ) => {
+			const itemId = el.getAttribute( 'data-grid-id' );
+			if ( itemId ) {
+				measuredContentHeightsRef.current.set(
+					itemId,
+					el.getBoundingClientRect().height
+				);
+			}
+		} );
+	}, [ containerRef ] );
+
+	const layoutDisplayRowHeight = LAYOUT_ROW_UNIT;
 
 	const openTemplatePicker = useCallback( () => {
 		setBuilderView( BUILDER_VIEWS.PICKER );
@@ -806,8 +824,9 @@ export default function Edit( {
 			return;
 		}
 
+		measureContentHeights();
 		setBuilderView( BUILDER_VIEWS.LAYOUT );
-	}, [ hasGridItems ] );
+	}, [ hasGridItems, measureContentHeights ] );
 
 	const goToContentView = useCallback( () => {
 		setBuilderView( BUILDER_VIEWS.CONTENT );
@@ -931,13 +950,85 @@ export default function Edit( {
 	);
 
 	const rglLayout = useMemo( () => {
-		return ( effectiveLayouts?.[ activeBreakpoint ] || [] ).map(
+		const baseLayout = ( effectiveLayouts?.[ activeBreakpoint ] || [] ).map(
 			( item ) => ( {
 				...item,
 				static: gridItemStateMap.get( item.i )?.isStatic || false,
 			} )
 		);
-	}, [ activeBreakpoint, effectiveLayouts, gridItemStateMap ] );
+
+		const measuredMap = measuredContentHeightsRef.current;
+		if ( ! isLayoutMode || measuredMap.size === 0 ) {
+			return baseLayout;
+		}
+
+		const unitStep = LAYOUT_ROW_UNIT + currentGutter;
+
+		// Compute per-item display h based on individual content height
+		const itemDisplayH = new Map();
+		baseLayout.forEach( ( item ) => {
+			const ch = measuredMap.get( item.i ) || 0;
+			if ( ch > 0 ) {
+				itemDisplayH.set(
+					item.i,
+					Math.max( Math.ceil( ( ch + currentGutter ) / unitStep ), 1 )
+				);
+			} else {
+				// No measurement — scale canonical h proportionally
+				const canonPx = ( baseRowHeight + currentGutter ) * item.h - currentGutter;
+				itemDisplayH.set(
+					item.i,
+					Math.max( Math.ceil( ( canonPx + currentGutter ) / unitStep ), 1 )
+				);
+			}
+		} );
+
+		// Group items by row to compute y offsets
+		// Next row starts below the tallest item in the current row
+		const rowGroups = new Map();
+		baseLayout.forEach( ( item ) => {
+			if ( ! rowGroups.has( item.y ) ) {
+				rowGroups.set( item.y, [] );
+			}
+			rowGroups.get( item.y ).push( item );
+		} );
+
+		// For each row, the offset to the next row = max display h in that row
+		const rowMaxDisplayH = new Map();
+		rowGroups.forEach( ( items, y ) => {
+			let maxH = 0;
+			items.forEach( ( item ) => {
+				const dh = itemDisplayH.get( item.i ) || item.h;
+				if ( dh > maxH ) {
+					maxH = dh;
+				}
+			} );
+			rowMaxDisplayH.set( y, maxH );
+		} );
+
+		const sortedRows = [ ...rowGroups.keys() ].sort( ( a, b ) => a - b );
+		const yOffsetMap = new Map();
+		let cumulativeY = 0;
+		sortedRows.forEach( ( y ) => {
+			yOffsetMap.set( y, cumulativeY );
+			cumulativeY += rowMaxDisplayH.get( y );
+		} );
+
+		return baseLayout.map( ( item ) => ( {
+			...item,
+			y: yOffsetMap.has( item.y ) ? yOffsetMap.get( item.y ) : item.y,
+			h: itemDisplayH.has( item.i ) ? itemDisplayH.get( item.i ) : item.h,
+		} ) );
+	}, [
+		activeBreakpoint,
+		effectiveLayouts,
+		gridItemStateMap,
+		isLayoutMode,
+		baseRowHeight,
+		currentGutter,
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		builderView,
+	] );
 
 	const blockProps = useBlockProps( {
 		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${ blockID } mode-${ builderView }`,
@@ -1120,7 +1211,7 @@ export default function Edit( {
 									width={ width }
 									gridConfig={ {
 										cols: currentCols,
-										rowHeight: currentRowHeight,
+										rowHeight: layoutDisplayRowHeight,
 										margin: [
 											currentGutter,
 											currentGutter,
