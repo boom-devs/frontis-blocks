@@ -95,7 +95,7 @@
             // Hide results when clicking outside
             document.addEventListener('click', function (e) {
                 if (!block.contains(e.target)) {
-                    hideResults(resultsDropdown);
+                    closeSearch(block);
                 }
             });
 
@@ -230,10 +230,12 @@
             const inputField = block.querySelector('.fb-search-block-wrapper-inner-input-field');
             const overlay = block.querySelector('.fb-search-block-wrapper-overlay');
             const dropdown = block.querySelector('.fb-search-ajax-results');
+            const buttonWrapper = block.querySelector('.fb-search-container.button-and-search .fb-search-button-wrapper');
 
             if (inputField) inputField.classList.remove('active');
             if (overlay) overlay.classList.remove('active');
             if (dropdown) dropdown.classList.remove('active');
+            if (buttonWrapper) buttonWrapper.style.visibility = 'visible';
         }
 
     });
