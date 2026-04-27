@@ -2,8 +2,8 @@
 Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
-Tested up to: 6.9
-Stable tag: 1.2.1
+Tested up to: 7.0
+Stable tag: 1.2.2
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -248,6 +248,14 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
+= 1.2.2 – 27 April 2026 =
+- **New**: Redesigned the Design Library with additional features and improved UI.
+- **Fixed**: Resolved Slider block outside padding reset issue.
+- **Fixed**: Resolved Global Settings related issues.
+- **Fixed**: Resolved child Container padding issues on initial insert.
+- **Improved**: Styled Global Settings save button for better UI consistency.
+- **Improved**: Updated core plugin file for compatibility.
+
 = 1.2.1 – 03 April 2026 =
 - **New**: Added Full-site import functionality in the Template Library for faster site building.
 - **Fixed**: Resolved import-related issues in the Slider block on both editor and frontend.
@@ -297,7 +305,6 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Improved**: Updated form-builder message body format and added Composer support for deployment workflow.
 - **Refactor**: Cleaned up unnecessary files and code across multiple blocks (Advanced Heading, Container, Slider, Form Builder, etc.) to improve plugin footprint.
 - **Deprecation**: Improved handling for deprecated block versions and file organization.
-
 
 = 1.1.8 – 13 February 2026 =
 - **New**: Added Rive Animation block.

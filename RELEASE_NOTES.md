@@ -1,19 +1,15 @@
-# Changelog - Version 1.2.1 (03 April 2026)
+# Changelog - Version 1.2.2 (27 April 2026)
 
 ### 🚀 New Features & Improvements
 
 #### ✨ New Features
-- **Full-site Import**: Added full-site import functionality in the Template Library for faster and smoother site building.
+- **Design Library Redesign**: Redesigned the Design Library with additional features and improved UI.
 
 #### 🛠️ Bug Fixes
-- **Slider Block Import**: Resolved import-related issues in the Slider block on both the editor and frontend.
-- **SureCart Compatibility**: Fixed conflict issues with SureCart to ensure smooth functionality.
+- **Slider Block**: Resolved Slider block outside padding reset issue.
+- **Global Settings**: Resolved Global Settings related issues.
+- **Container Block**: Resolved child Container padding issues on initial insert.
 
 #### 📈 Improvements
-- **Permalink System**: Added a permalink update system for better site structure.
-- **Template Library**: Optimized Template Library metadata for improved performance.
-- **Code Cleanup**: Removed internal unused code for better maintainability.
-- **Dependencies**: Updated dependencies for better stability and build consistency.
-
-#### 📁 Refactor & Maintenance
-- **Performance Optimization**: Improved internal structure and cleanup for a more stable release.
+- **Global Settings UI**: Styled Global Settings save button for better UI consistency.
+- **Core Plugin**: Updated core plugin file for compatibility.
