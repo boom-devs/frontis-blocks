@@ -315,8 +315,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '',
-			right: '',
+			left: '24',
+			right: '24',
 		},
 	},
 	buttonPaddingTablet: {
@@ -324,8 +324,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '',
-			right: '',
+			left: '24',
+			right: '24',
 		},
 	},
 	buttonPaddingMobile: {
@@ -333,8 +333,8 @@ const attributes = {
 		default: {
 			top: '12',
 			bottom: '12',
-			left: '',
-			right: '',
+			left: '24',
+			right: '24',
 		},
 	},
 	buttonPaddingLink: {
