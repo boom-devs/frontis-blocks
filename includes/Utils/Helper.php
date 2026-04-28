@@ -571,9 +571,14 @@ class Helper
 
     public static function generate_css($styles, $container_css)
     {
+        if (!is_array($container_css)) {
+            return '';
+        }
+
         // Generate CSS for the block ID
         $css = array_map(
             function ($selector, $styles) {
+                $styles = (array) $styles;
                 $filtered_styles = implode("; ", array_map(
                     fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
                     array_keys($styles),
@@ -619,6 +624,9 @@ class Helper
      */
     public static function get_fonts_family($attributes)
     {
+        if (!is_array($attributes)) {
+            return [];
+        }
         $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
         $font_data = [];
 
