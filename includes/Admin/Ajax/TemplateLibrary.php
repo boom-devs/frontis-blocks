@@ -790,9 +790,8 @@ class TemplateLibrary extends AjaxBase
                     continue;
                 }
 
-                // Decode and unslash navigation content
+                // Decode navigation content
                 $content = $this->decode_content($content);
-                $content = wp_unslash($content);
 
                 // Replace media URLs in navigation content
                 if ($uploads_updated && !empty($site_url)) {
@@ -801,6 +800,9 @@ class TemplateLibrary extends AjaxBase
 
                 // Replace demo URLs with relative paths
                 $content = $this->replace_demo_urls($content, $site_url);
+
+                // Clean navigation links to prevent "Invalid" status in the editor
+                $content = $this->clean_navigation_block_content($content);
 
                 // slug for navigation
                 $slug = 'imported-nav-' . $old_id;
@@ -946,7 +948,6 @@ class TemplateLibrary extends AjaxBase
 
             // Decode and unslash template content
             $content = $this->decode_content($content);
-            $content = wp_unslash($content);
 
             // Replace image URLs (if uploads_updated)
             if ($uploads_updated && !empty($site_url)) {
@@ -1092,6 +1093,37 @@ class TemplateLibrary extends AjaxBase
             'slug' => $slug,
             'template' => $template ?: 'default'
         ]);
+    }
+
+    /**
+     * Resets navigation blocks to 'custom' kind and removes post IDs to avoid "Invalid" status.
+     *
+     * @param string $content Block content.
+     * @return string Modified content.
+     */
+    private function clean_navigation_block_content($content)
+    {
+        if (empty($content)) {
+            return $content;
+        }
+
+        // 1. Change "kind":"post-type" to "kind":"custom" (handles both raw and escaped JSON)
+        $content = preg_replace('/("kind"\s*:\s*)"post-type"/', '$1"custom"', $content);
+        $content = preg_replace('/(\\\\"kind\\\\"\\s*:\\s*)\\\\"post-type\\\\"/', '$1\\"custom\\"', $content);
+
+        // 2. Remove "id":123 references which are invalid on the new site
+        $content = preg_replace('/"id"\s*:\s*\d+\s*,?/', '', $content);
+        $content = preg_replace('/\\\\"id\\\\"\\s*:\\s*\\d+\\s*,?/', '', $content);
+
+        // 3. Remove "type":"page" references
+        $content = preg_replace('/"type"\s*:\s*"[^"]*"\s*,?/', '', $content);
+        $content = preg_replace('/\\\\"type\\\\"\\s*:\\s*\\\\"[^"]*\\\\"\\s*,?/', '', $content);
+
+        // 4. Cleanup trailing commas inside JSON objects created by previous removals
+        $content = preg_replace('/,\s*}/', '}', $content);
+        $content = preg_replace('/,\s*\\\\}/', '\\}', $content);
+
+        return $content;
     }
 
 }
