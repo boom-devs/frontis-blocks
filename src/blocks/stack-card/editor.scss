@@ -3,12 +3,9 @@
 }
 
 .fb-stack-cards-main-wrapper .fb-stack-cards-frame {
-    min-height: 110px;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 24px;
     background: #fff;
     box-sizing: border-box;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -25,7 +22,6 @@
 }
 
 .fb-stack-cards-main-wrapper .fb-stack-cards-frame > .block-editor-inner-blocks > .block-editor-block-list__layout {
-    min-height: 60px;
     display: flex;
     flex-direction: column;
     gap: inherit;
@@ -70,6 +66,33 @@
     border-radius: 8px;
     padding: 18px;
     background: #fff;
+}
+
+.fb-stack-card-item__content--empty {
+    border: 1px dashed #cbd5e1;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+}
+
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks,
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    min-height: 72px;
+}
+
+.fb-stack-card-item__content--empty > .block-editor-inner-blocks > .block-editor-block-list__layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #d8dee5;
+    border-radius: 6px;
+    background: rgba(248, 250, 252, 0.9);
+}
+
+.fb-stack-card-item__content--empty .block-list-appender {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .fb-stack-cards-inspector-note {

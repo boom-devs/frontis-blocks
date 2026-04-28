@@ -1,4 +1,10 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
+import { getPresetFrameDataAttributes } from './preset-frame-data';
+import {
+	getPresetFourConfig,
+	isPresetFourStackOver,
+	PresetFourNavigation,
+} from './preset-four';
 
 export default function Save({ attributes }) {
 	const {
@@ -9,8 +15,10 @@ export default function Save({ attributes }) {
 		stackCardsMobileSwitcher,
 		stackCardsGlobalWraperID,
 		stackCardsGlobalWraperClass,
-		
+		stackCardsPresetFourShowNavigation,
 	} = attributes;
+    const presetFourConfig = getPresetFourConfig(attributes);
+	const presetFrameDataAttributes = getPresetFrameDataAttributes(stackCardsPresetStyle, attributes);
 
 	const blockProps = useBlockProps.save({
         className: [
@@ -25,8 +33,13 @@ export default function Save({ attributes }) {
 
 	return (
 		<div { ...blockProps }>
-			<div className={`fb-stack-cards-frame fb-stack-cards-frame--${stackCardsPresetStyle} ${stackCardsGlobalWraperClass}`.trim()} id={stackCardsGlobalWraperID || undefined}>
+			<div
+				className={`fb-stack-cards-frame fb-stack-cards-frame--${stackCardsPresetStyle} ${stackCardsGlobalWraperClass}`.trim()}
+				id={stackCardsGlobalWraperID || undefined}
+				{...presetFrameDataAttributes}
+			>
 				<InnerBlocks.Content />
+				{isPresetFourStackOver(stackCardsPresetStyle) && stackCardsPresetFourShowNavigation && <PresetFourNavigation config={presetFourConfig} />}
 			</div>
 		</div>
 	);

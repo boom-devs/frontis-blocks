@@ -5,7 +5,25 @@ import { useEffect, useLayoutEffect, useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
+import { getPresetFrameDataAttributes } from './preset-frame-data';
 import generateStackCardsStyle from './styling';
+import {
+	bindPresetFourBehavior,
+	getPresetFourConfig,
+	hasStackCardScalePreset,
+	isPresetFourStackOver,
+	PresetFourNavigation,
+} from './preset-four';
+import {
+	bindPresetThreeBehavior,
+	getPresetThreeConfig,
+	isPresetThreeStackRight,
+} from './preset-three';
+import {
+	bindPresetTwoBehavior,
+	getPresetTwoConfig,
+	isPresetTwoStackLeft,
+} from './preset-two';
 import { bindEditorStackCardScale } from './stack-card-scale-behavior';
 import './editor.scss';
 
@@ -23,6 +41,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		stackCardsMobileSwitcher,
 		stackCardsGlobalWraperID,
 		stackCardsGlobalWraperClass,
+		stackCardsPresetFourShowNavigation,
 	} = attributes;
 
 	const { replaceInnerBlocks, updateBlockAttributes } = useDispatch(blockEditorStore);
@@ -74,7 +93,14 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	}, [childBlocks, updateBlockAttributes]);
 
 	const rootRef = useRef(null);
+	const presetTwoCleanupRef = useRef(null);
+	const presetThreeCleanupRef = useRef(null);
+	const presetFourCleanupRef = useRef(null);
 	const panelRef = useRef(null);
+	const presetTwoConfig = getPresetTwoConfig(attributes);
+	const presetThreeConfig = getPresetThreeConfig(attributes);
+	const presetFourConfig = getPresetFourConfig(attributes);
+	const presetFrameDataAttributes = getPresetFrameDataAttributes(stackCardsPresetStyle, attributes);
 	SwitchToBlockSettings(panelRef);
 
 	const blockProps = useBlockProps({
@@ -95,15 +121,119 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             className: `fb-stack-cards-frame fb-stack-cards-frame--${stackCardsPresetStyle} ${stackCardsGlobalWraperClass}`.trim(),
             id: stackCardsGlobalWraperID || undefined,
             ref: panelRef,
+            ...presetFrameDataAttributes,
         },
         {
             allowedBlocks: [CARD_ITEM_BLOCK],
             renderAppender: false,
         }
     );
+    const { children: innerBlocksChildren, ...innerBlocksWrapperProps } = innerBlocksProps;
 
 	useLayoutEffect(() => {
-		if (stackCardsPresetStyle !== 'stack-top') {
+		if (!isPresetTwoStackLeft(stackCardsPresetStyle)) {
+			presetTwoCleanupRef.current?.();
+			presetTwoCleanupRef.current = null;
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el) {
+			return undefined;
+		}
+		const cleanup = bindPresetTwoBehavior(el, {
+			isEditor: true,
+			config: presetTwoConfig,
+		});
+		presetTwoCleanupRef.current = cleanup;
+		return () => {
+			cleanup?.();
+			if (presetTwoCleanupRef.current === cleanup) {
+				presetTwoCleanupRef.current = null;
+			}
+		};
+	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID]);
+
+	useLayoutEffect(() => {
+		if (!isPresetTwoStackLeft(stackCardsPresetStyle)) {
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el?.__fbPresetTwoInstance) {
+			return undefined;
+		}
+		el.__fbPresetTwoInstance.updateConfig?.(presetTwoConfig);
+	}, [stackCardsPresetStyle, JSON.stringify(presetTwoConfig)]);
+
+	useLayoutEffect(() => {
+		if (!isPresetThreeStackRight(stackCardsPresetStyle)) {
+			presetThreeCleanupRef.current?.();
+			presetThreeCleanupRef.current = null;
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el) {
+			return undefined;
+		}
+		const cleanup = bindPresetThreeBehavior(el, {
+			isEditor: true,
+			config: presetThreeConfig,
+		});
+		presetThreeCleanupRef.current = cleanup;
+		return () => {
+			cleanup?.();
+			if (presetThreeCleanupRef.current === cleanup) {
+				presetThreeCleanupRef.current = null;
+			}
+		};
+	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID]);
+
+	useLayoutEffect(() => {
+		if (!isPresetThreeStackRight(stackCardsPresetStyle)) {
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el?.__fbPresetThreeInstance) {
+			return undefined;
+		}
+		el.__fbPresetThreeInstance.updateConfig?.(presetThreeConfig);
+	}, [stackCardsPresetStyle, JSON.stringify(presetThreeConfig)]);
+
+	useLayoutEffect(() => {
+		if (!isPresetFourStackOver(stackCardsPresetStyle)) {
+			presetFourCleanupRef.current?.();
+			presetFourCleanupRef.current = null;
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el) {
+			return undefined;
+		}
+		const cleanup = bindPresetFourBehavior(el, {
+			isEditor: true,
+			config: presetFourConfig,
+		});
+		presetFourCleanupRef.current = cleanup;
+		return () => {
+			cleanup?.();
+			if (presetFourCleanupRef.current === cleanup) {
+				presetFourCleanupRef.current = null;
+			}
+		};
+	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, stackCardsPresetFourShowNavigation]);
+
+	useLayoutEffect(() => {
+		if (!isPresetFourStackOver(stackCardsPresetStyle)) {
+			return undefined;
+		}
+		const el = rootRef.current;
+		if (!el?.__fbPresetFourInstance) {
+			return undefined;
+		}
+		el.__fbPresetFourInstance.updateConfig?.(presetFourConfig);
+	}, [stackCardsPresetStyle, JSON.stringify(presetFourConfig)]);
+
+	useLayoutEffect(() => {
+		if (!hasStackCardScalePreset(stackCardsPresetStyle)) {
 			return undefined;
 		}
 		const el = rootRef.current;
@@ -124,7 +254,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             )}
 
 			<div { ...blockProps }>
-				<div { ...innerBlocksProps } />
+				<div { ...innerBlocksWrapperProps }>
+					{innerBlocksChildren}
+					{isPresetFourStackOver(stackCardsPresetStyle) && stackCardsPresetFourShowNavigation && <PresetFourNavigation config={presetFourConfig} />}
+				</div>
 			</div>
 			<style>{blockStyle}</style>
 		</>
