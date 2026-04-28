@@ -588,7 +588,7 @@ class BlockList
                 'category' => 'content',
                 'badge' => 'free',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/call-to-action.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-search.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
