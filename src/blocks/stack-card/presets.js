@@ -1,28 +1,30 @@
 import { __ } from '@wordpress/i18n';
 
+const presetKeys = [
+    'stack-top',
+    'stack-left',
+    'stack-right',
+    'stack-over',
+];
+
+const mapPresetAttributes = (presetKey) =>
+    Object.entries(presetStyles[presetKey] || {}).map(([label, value]) => ({ label, value }));
+
 /**
 * Preset Styles Data Object
 */
-export const presetStyles = {
-    "stack-top": {
-        
-    },
-    "stack-left": {
-       
-    },
-    "stack-right": {
-        
-    },
-    "stack-over": {
-        
-    },
-}
+export const presetStyles = Object.freeze(
+    presetKeys.reduce((accumulator, presetKey) => {
+        accumulator[presetKey] = {};
+        return accumulator;
+    }, {})
+);
 
 export const stackedCardPresets = [
     {
         value: 'stack-top',
         label: __('Stacked Top', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['stack-top']).map(([label, value]) => ({ label, value })),
+        attributes: mapPresetAttributes('stack-top'),
         icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g opacity="0.4" filter="url(#filter0_d_16980_14955)">
@@ -58,7 +60,7 @@ export const stackedCardPresets = [
     {
         value: 'stack-left',
         label: __('Stacked Left', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['stack-left']).map(([label, value]) => ({ label, value })),
+        attributes: mapPresetAttributes('stack-left'),
         icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14926)">
@@ -94,7 +96,7 @@ export const stackedCardPresets = [
     {
         value: 'stack-right',
         label: __('Stacked Right', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['stack-right']).map(([label, value]) => ({ label, value })),
+        attributes: mapPresetAttributes('stack-right'),
         icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14951)">
@@ -129,7 +131,7 @@ export const stackedCardPresets = [
     {
         value: 'stack-over',
         label: __('Stacked Over', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['stack-over']).map(([label, value]) => ({ label, value })),
+        attributes: mapPresetAttributes('stack-over'),
         icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14926)">

@@ -2,6 +2,8 @@
  * Stack-top sticky cards: sync --fb-active-scale with scroll (editor + frontend).
  */
 
+import { hasStackCardScalePreset } from './preset-four';
+
 const STUCK_EPS_PX = 3;
 
 function getStickyTopPx(el) {
@@ -43,7 +45,12 @@ function getStickyThresholdTop(el, stickyTop, stackRoot) {
  * @param {HTMLElement} stackRoot Main wrapper with .fb-stack-cards-preset-stack-top
  */
 export function updateStackCardScaleItems(stackRoot) {
-	if (!stackRoot?.classList?.contains('fb-stack-cards-preset-stack-top')) {
+	const presetClass = Array.from(stackRoot?.classList || []).find((className) =>
+		className.startsWith('fb-stack-cards-preset-')
+	);
+	const presetStyle = presetClass?.replace('fb-stack-cards-preset-', '');
+
+	if (!hasStackCardScalePreset(presetStyle)) {
 		return;
 	}
 
@@ -78,7 +85,7 @@ export function updateStackCardScaleItems(stackRoot) {
 }
 
 export function updateAllStackCardScaleItems(doc = document) {
-	doc.querySelectorAll('.fb-stack-cards-main-wrapper.fb-stack-cards-preset-stack-top').forEach((root) => {
+	doc.querySelectorAll('.fb-stack-cards-main-wrapper').forEach((root) => {
 		updateStackCardScaleItems(root);
 	});
 }

@@ -1,6 +1,3 @@
-/**
- * Editor: dashed “drop zone” look; plus comes from ButtonBlockAppender when empty.
- */
 .fb-stack-card-item {
 	position: sticky;
 	border-radius: 8px;
@@ -22,7 +19,6 @@
 
 .fb-stack-card-item__content {
 	min-height: 88px;
-	padding: 16px;
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;

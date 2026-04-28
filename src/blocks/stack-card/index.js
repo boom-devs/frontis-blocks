@@ -14,6 +14,31 @@ import attributes from './attributes.js';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 // import deprecated from './deprecated';
 
+const stackCardItemAttributeKeys = [
+	'itemNumber',
+	'stackCardItemBgColorSwitcher',
+	'stackCardItemBgNormalBackgroundType',
+	'stackCardItemBgNormalClassicColor',
+	'stackCardItemBgNormalGradientColor',
+	'stackCardItemBgNormalCustomGradientSwitcher',
+	'stackCardItemBgNormalCustomGradientInputValue',
+	'stackCardItemBgHoverBackgroundType',
+	'stackCardItemBgHoverClassicColor',
+	'stackCardItemBgHoverGradientColor',
+	'stackCardItemBgHoverCustomGradientSwitcher',
+	'stackCardItemBgHoverCustomGradientInputValue',
+	'stackCardItemBorderColorSwitcher',
+	'stackCardItemBorderColor',
+	'stackCardItemBorderHoverColor',
+];
+
+const stackCardItemBlockAttributes = stackCardItemAttributeKeys.reduce((accumulator, key) => {
+	if (attributes[key]) {
+		accumulator[key] = attributes[key];
+	}
+	return accumulator;
+}, {});
+
 registerBlockType( metadata.name, {
 	attributes,
 	icon: FB_Block_Icons.rive_animation,
@@ -34,12 +59,7 @@ registerBlockType( 'frontis-blocks/stack-card-item', {
 		html: false,
 		customClassName: false,
 	},
-	attributes: {
-		itemNumber: {
-			type: 'number',
-			default: 1,
-		},
-	},
+	attributes: stackCardItemBlockAttributes,
 	edit: StackCardItemEdit,
 	save: StackCardItemSave,
 } );

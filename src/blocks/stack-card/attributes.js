@@ -64,6 +64,195 @@ const attributes = {
 			Mobile: '',
 		}
 	},
+
+	/** Start Background */
+	stackCardItemBgColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardItemBgNormalBackgroundType: {  
+		type: 'string',
+		default: 'classic',
+	},
+	stackCardItemBgNormalClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	stackCardItemBgNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	stackCardItemBgNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardItemBgNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	stackCardItemBgHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	stackCardItemBgHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	stackCardItemBgHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	stackCardItemBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardItemBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	/** End Background */
+
+	/** Start Padding */
+	stackCardItemPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardItemPaddingDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemPaddingTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemPaddingMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemPaddingLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Border */
+	stackCardItemBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	stackCardItemBorderColorSwitcher : {
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardItemBorderColor: {
+		type: 'string',
+		default: ''
+	},
+	stackCardItemBorderHoverColor: {
+		type: 'string',
+	},
+	stackCardItemBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardItemBorderDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	stackCardItemBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardItemBorderRadiusDesktop: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderRadiusTablet: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderRadiusMobile: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardItemBorderRadiusLink : {
+		type : 'boolean',
+		default: true
+	},
+	/** End Border Radius */
 	
 	stackCardsItemOffsetTopSwitcher: {
 		type: 'boolean',
@@ -95,6 +284,399 @@ const attributes = {
 		}
 	},
 
+	stackCardsPresetFourCardWidth: {
+		type: 'object',
+		default: {
+			Desktop: '620',
+			Tablet: '520',
+			Mobile: '320',
+		}
+	},
+	stackCardsPresetFourCardWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsPresetFourOutDistance: {
+		type: 'object',
+		default: {
+			Desktop: '100',
+			Tablet: '80',
+			Mobile: '60',
+		}
+	},
+	stackCardsPresetFourMinScale: {
+		type: 'object',
+		default: {
+			Desktop: '0.7',
+			Tablet: '0.7',
+			Mobile: '0.7',
+		}
+	},
+	stackCardsPresetFourScaleStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.02',
+			Tablet: '0.02',
+			Mobile: '0.02',
+		}
+	},
+	stackCardsPresetFourScaleYStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.10',
+			Tablet: '0.10',
+			Mobile: '0.10',
+		}
+	},
+	stackCardsPresetFourOpacityStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.02',
+			Tablet: '0.02',
+			Mobile: '0.02',
+		}
+	},
+	stackCardsPresetFourVisibleLayers: {
+		type: 'object',
+		default: {
+			Desktop: '3',
+			Tablet: '3',
+			Mobile: '3',
+		}
+	},
+	stackCardsPresetFourAutoPlayDelay: {
+		type: 'object',
+		default: {
+			Desktop: '2500',
+			Tablet: '2500',
+			Mobile: '2500',
+		}
+	},
+	stackCardsPresetFourAnimationSpeed: {
+		type: 'object',
+		default: {
+			Desktop: '0.45',
+			Tablet: '0.45',
+			Mobile: '0.45',
+		}
+	},
+	stackCardsPresetFourActiveBorder: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetFourActiveBorderWidth: {
+		type: 'object',
+		default: {
+			Desktop: '3',
+			Tablet: '3',
+			Mobile: '2',
+		}
+	},
+	stackCardsPresetFourActiveBorderWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsPresetFourActiveBorderColor: {
+		type: 'string',
+		default: '#000000',
+	},
+	stackCardsPresetFourShowNavigation: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsPresetFourButtonVerticalAlign: {
+		type: 'string',
+		default: 'center',
+	},
+	stackCardsPresetFourButtonVerticalOffset: {
+		type: 'object',
+		default: {
+			Desktop: '50',
+			Tablet: '50',
+			Mobile: '50',
+		}
+	},
+	stackCardsPresetFourButtonVerticalOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: '%',
+			Tablet: '%',
+			Mobile: '%',
+		}
+	},
+	stackCardsPresetFourButtonSideOffset: {
+		type: 'object',
+		default: {
+			Desktop: '0',
+			Tablet: '0',
+			Mobile: '0',
+		}
+	},
+	stackCardsPresetFourButtonSideOffsetUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	previousButtonText: {
+		type: 'string',
+		default: 'Previous',
+	},
+	nextButtonText: {
+		type: 'string',
+		default: 'Next',
+	},
+	previousButtonIconAlign: {
+		type: 'string',
+		default: 'none',
+	},
+	nextButtonIconAlign: {
+		type: 'string',
+		default: 'none',
+	},
+	previousButtonIcon: {
+		type: 'string',
+		default: 'angle-left',
+	},
+	nextButtonIcon: {
+		type: 'string',
+		default: 'angle-right',
+	},
+	previousButtonIconPosition: {
+		type: 'string',
+		default: 'left',
+	},
+	nextButtonIconPosition: {
+		type: 'string',
+		default: 'right',
+	},
+	stackCardsPresetFourAutoPlay: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetFourKeyboardNavigation: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetFourCardClickToActive: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetFourShowAllLayers: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsPresetTwoLeftOffsetStep: {
+		type: 'object',
+		default: {
+			Desktop: '28',
+			Tablet: '24',
+			Mobile: '18',
+		},
+	},
+	stackCardsPresetTwoCardWidth: {
+		type: 'object',
+		default: {
+			Desktop: '620',
+			Tablet: '520',
+			Mobile: '320',
+		},
+	},
+	stackCardsPresetTwoCardWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	stackCardsPresetTwoOutDistance: {
+		type: 'object',
+		default: {
+			Desktop: '110',
+			Tablet: '90',
+			Mobile: '70',
+		},
+	},
+	stackCardsPresetTwoMinScale: {
+		type: 'object',
+		default: {
+			Desktop: '0.7',
+			Tablet: '0.7',
+			Mobile: '0.7',
+		},
+	},
+	stackCardsPresetTwoScaleStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.035',
+			Tablet: '0.03',
+			Mobile: '0.025',
+		},
+	},
+	stackCardsPresetTwoScaleYStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.02',
+			Tablet: '0.02',
+			Mobile: '0.015',
+		},
+	},
+	stackCardsPresetTwoOpacityStep: {
+		type: 'object',
+		default: {
+			Desktop: '0.12',
+			Tablet: '0.12',
+			Mobile: '0.1',
+		},
+	},
+	stackCardsPresetTwoVisibleLayers: {
+		type: 'object',
+		default: {
+			Desktop: '4',
+			Tablet: '4',
+			Mobile: '3',
+		},
+	},
+	stackCardsPresetTwoAutoPlay: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetTwoAutoPlayDelay: {
+		type: 'object',
+		default: {
+			Desktop: '2500',
+			Tablet: '2500',
+			Mobile: '2500',
+		},
+	},
+	stackCardsPresetTwoAnimationSpeed: {
+		type: 'object',
+		default: {
+			Desktop: '0.45',
+			Tablet: '0.45',
+			Mobile: '0.45',
+		},
+	},
+	stackCardsPresetTwoKeyboardNavigation: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetTwoCardClickToActive: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetTwoShowAllLayers: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsPresetThreeFrameHeight: {
+		type: 'object',
+		default: {
+			Desktop: '400',
+			Tablet: '400',
+			Mobile: '400',
+		},
+	},
+	stackCardsPresetThreeFrameHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	stackCardsPresetThreeFrameWidth: {
+		type: 'object',
+		default: {
+			Desktop: '400',
+			Tablet: '400',
+			Mobile: '400',
+		},
+	},
+	stackCardsPresetThreeFrameWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	stackCardsPresetThreeItemWidth: {
+		type: 'object',
+		default: {
+			Desktop: '300',
+			Tablet: '300',
+			Mobile: '300',
+		},
+	},
+	stackCardsPresetThreeItemWidthUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	stackCardsPresetThreeOffsetStep: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '24',
+			Mobile: '20',
+		},
+	},
+	stackCardsPresetThreeVisibleLayers: {
+		type: 'object',
+		default: {
+			Desktop: '3',
+			Tablet: '3',
+			Mobile: '3',
+		},
+	},
+	stackCardsPresetThreeAutoPlay: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetThreeAutoPlayDelay: {
+		type: 'object',
+		default: {
+			Desktop: '2500',
+			Tablet: '2500',
+			Mobile: '2500',
+		},
+	},
+	stackCardsPresetThreeKeyboardNavigation: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetThreeCardClickToActive: {
+		type: 'boolean',
+		default: true,
+	},
+	stackCardsPresetThreeShowAllLayers: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsPresetThreeAnimationSpeed: {
+		type: 'object',
+		default: {
+			Desktop: '0.45',
+			Tablet: '0.45',
+			Mobile: '0.45',
+		},
+	},
+
 	/** Start Global Setting */
 	stackCardsGlobalZIndex : {
         type: 'object',
@@ -108,6 +690,7 @@ const attributes = {
         type: 'string',
         default: 'default',
     },
+	
 	/** Start Padding */
 	stackCardsGlobalPaddingUnits: {
 		type: 'object',
@@ -458,6 +1041,341 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    itemNumber: {
+        type: 'number',
+        default: 1,
+    },
 
+	/** Navigation button */
+	stackCardsNavigationButtonGlobalTypographyData: {
+		type: 'object',
+		default: {}
+	},
+	stackCardsNavigationButtonGlobalTypoSwitcher: {
+		type: 'object',
+		default: {
+			fontFamily: false,
+			fontSize: false,
+			fontWeight: false,
+			fontStyle: false,
+			textTransform: false,
+			textDecoration: false,
+			letterSpacing: false,
+			lineHeight: false,
+		},
+	},
+	stackCardsNavigationButtonGlobalTypoType: {
+		type: 'string',
+		default: 'default',
+	},
+	stackCardsNavigationButtonGlobalTypoOption: {
+		type: 'object',
+		default: {label: 'Default', value: 'default'},
+	},
+	stackCardsNavigationButtonFontFamily: {
+		type: 'string',
+		default: 'Default',
+	},
+	stackCardsNavigationButtonFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	stackCardsNavigationButtonFontSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsNavigationButtonFontWeight: {
+		type: 'string',
+		default: ''
+	},
+	stackCardsNavigationButtonFontStyle: {
+		type: 'string',
+		default: ''
+	},
+	stackCardsNavigationButtonTextTransform: {
+		type: 'string',
+		default: ''
+	},
+	stackCardsNavigationButtonTextDecoration: {
+		type: 'string',
+		default: ''
+	},
+	stackCardsNavigationButtonLetterSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	stackCardsNavigationButtonLetterSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsNavigationButtonLineHeight: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	stackCardsNavigationButtonLineHeightUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	stackCardsNavigationButtonColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardsNavigationButtonColor: {
+		type: 'string',
+		default: '#fff',
+	},
+	stackCardsNavigationButtonHoverColor: {
+		type: 'string',
+	},
+
+	stackCardsNavigationButtonBackgroundColorSwitcher : {  
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardsNavigationButtonNormalBackgroundType: {   
+		type: 'string',
+		default: 'classic',
+	},
+	stackCardsNavigationButtonNormalClassicColor: {
+		type: 'string',
+		default: '#15171C',
+	},
+	stackCardsNavigationButtonNormalGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	stackCardsNavigationButtonNormalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsNavigationButtonNormalCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+
+	stackCardsNavigationButtonHoverBackgroundType: {
+		type: 'string',
+		default: 'classic',
+	},
+	stackCardsNavigationButtonHoverClassicColor: {
+		type: 'string',
+		default: '',
+	},
+	stackCardsNavigationButtonHoverGradientColor: {
+		type: 'string',
+		default: null,
+	},
+	stackCardsNavigationButtonHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+	stackCardsNavigationButtonHoverCustomGradientInputValue: {
+		type: 'string',
+		default: '',
+	},
+	stackCardsNavigationButtonPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardsNavigationButtonDesktopPadding: {
+		type: 'object', 
+		default: {
+			top: '20',
+			bottom: '20',
+			left: '20',
+			right: '20',
+		},
+	},
+	stackCardsNavigationButtonTabPadding: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonMobilePadding: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+
+	stackCardsNavigationButtonBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	stackCardsNavigationButtonBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardsNavigationButtonBorderColor: {
+		type: 'string',
+	},
+	stackCardsNavigationButtonBorderHoverColor: {
+		type: 'string',
+	},
+	stackCardsNavigationButtonBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardsNavigationButtonDesktopBorderWidth: {
+		type: 'object', 
+		default: {
+			top: '0',
+			bottom: '0',
+			left: '0',
+			right: '0',
+		},
+	},
+	stackCardsNavigationButtonTabBorderWidth: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonMobileBorderWidth: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonBorderLink: {
+		type: 'boolean',
+		default: true
+	},
+	stackCardsNavigationButtonBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	stackCardsNavigationButtonDesktopBorderRadiusWidth: {
+		type: 'object', 
+		default: {
+			top: '5',
+			bottom: '5',
+			left: '5',
+			right: '5',
+		},
+	},
+	stackCardsNavigationButtonTabBorderRadiusWidth: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonMobileBorderRadiusWidth: {
+		type: 'object', 
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	stackCardsNavigationButtonBorderRadiusLink: {
+		type: 'boolean',
+		default: true
+	},
+
+	stackCardsNavigationButtonIconColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	stackCardsNavigationButtonIconColor: {
+		type: 'string',
+		default: '#FFFFFF'
+	},
+	stackCardsNavigationButtonIconHoverColor: {
+		type: 'string',
+		default: ''
+	},
+	stackCardsNavigationButtonIconSize: {
+		type: 'object',
+		default: {
+			Desktop: '20',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	stackCardsNavigationButtonIconSizeUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+
+	stackCardsNavigationButtonIconSpacing: {
+		type: 'object',
+		default: {
+			Desktop: '10',
+			Tablet: '',
+			Mobile: '',
+		}
+	},
+	stackCardsNavigationButtonIconSpacingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		}
+	},
+	/** End Button */
+	/** End stackCardsNavigation Button Icon */
 };
 export default attributes;
