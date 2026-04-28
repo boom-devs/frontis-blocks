@@ -400,6 +400,10 @@ class TemplateLibrary extends AjaxBase
             wp_send_json_error(['message' => 'Title is required']);
         }
 
+        if (empty(trim($content))) {
+            wp_send_json_error(['message' => 'Content is empty']);
+        }
+
         // Step 1: Update image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
             $content = $this->replace_media_urls($content, trailingslashit($site_url));
@@ -408,37 +412,41 @@ class TemplateLibrary extends AjaxBase
         // Step 1.1: Replace demo URLs with relative paths
         $content = $this->replace_demo_urls($content, $site_url);
 
-        // Step 2: Generate unique slug if not provided or duplicate
+        // Step 2: Generate slug if not provided
         if (empty($slug)) {
             $slug = sanitize_title($title);
         }
 
-        $original_slug = $slug;
-        $suffix = 1;
-        while (get_page_by_path($slug)) {
-            $slug = $original_slug . '-' . $suffix;
-            $suffix++;
-        }
+        $existing = get_page_by_path($slug, OBJECT, 'page');
 
-        // Step 3: Check if page with same title exists → unique title
-        $original_title = $title;
-        $title_suffix = 1;
-        while ($this->post_exists_by_title($title, 'page')) {
-            $title = $original_title . ' ' . $title_suffix;
-            $title_suffix++;
-        }
+        $post_data = [
+            'post_title'   => wp_strip_all_tags($title),
+            'post_name'    => sanitize_title($slug),
+            /*
+             * wp_slash() is REQUIRED here.
+             *
+             * wp_insert_post() and wp_update_post() call wp_unslash() internally
+             * before saving to the database. This strips backslashes from the
+             * Gutenberg block JSON attributes (e.g. \"blockStyle\":\"...\").
+             * Pre-slashing with wp_slash() balances that unslash so the saved
+             * content is exactly what was decoded from the API.
+             */
+            'post_content' => wp_slash($content),
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+        ];
 
-        // Step 4: Create page
-        $page_id = wp_insert_post([
-            'post_title' => $title,
-            'post_name' => $slug,
-            'post_content' => $content,
-            'post_status' => 'publish',
-            'post_type' => 'page',
-        ], true);
+        if ($existing && !empty($existing->ID)) {
+            $post_data['ID'] = $existing->ID;
+            $page_id          = wp_update_post($post_data, true);
+            $action          = 'updated';
+        } else {
+            $page_id = wp_insert_post($post_data, true);
+            $action = 'created';
+        }
 
         if (is_wp_error($page_id)) {
-            wp_send_json_error(['message' => 'Failed to create page: ' . $page_id->get_error_message()]);
+            wp_send_json_error(['message' => 'Import failed: ' . $page_id->get_error_message()]);
         }
 
         // Step 5: Assign template
@@ -459,18 +467,21 @@ class TemplateLibrary extends AjaxBase
             update_post_meta($page_id, '_fb_page_badge', $badge);
         }
 
+        update_post_meta($page_id, 'fb_page_assets_generation', 'compiling');
+
         // Step 8: Insert job (your helper)
         if (class_exists('FrontisBlocks\Utils\Helper')) {
             Helper::insert_job($page_id, $title . '-' . $page_id);
         }
 
         wp_send_json_success([
-            'message' => 'Page created successfully',
+            'message' => sprintf('Page "%s" has been %s successfully', $title, $action),
             'page_id' => $page_id,
             'title' => $title,
             'slug' => $slug,
             'template' => $template,
-            'badge' => $badge
+            'badge' => $badge,
+            'action' => $action
         ]);
     }
 
@@ -811,7 +822,7 @@ class TemplateLibrary extends AjaxBase
                 if ($existing) {
                     wp_update_post([
                         'ID' => $existing->ID,
-                        'post_content' => $content,
+                        'post_content' => wp_slash($content),
                         'post_title' => 'Imported Nav ' . $old_id,
                     ]);
                     $navigation_mapping[$old_id] = $existing->ID;
@@ -822,7 +833,7 @@ class TemplateLibrary extends AjaxBase
                 $new_id = wp_insert_post([
                     'post_title' => 'Imported Nav ' . $old_id,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_slash($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_navigation',
                 ]);
@@ -890,7 +901,7 @@ class TemplateLibrary extends AjaxBase
             if (!empty($existing)) {
                 wp_update_post([
                     'ID' => $existing[0],
-                    'post_content' => $content,
+                    'post_content' => wp_slash($content),
                     'post_title' => $title,
                 ]);
                 $stats['part_skipped']++;
@@ -898,7 +909,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_slash($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template_part',
                 ]);
@@ -982,7 +993,7 @@ class TemplateLibrary extends AjaxBase
             if (!empty($existing)) {
                 $update_res = wp_update_post([
                     'ID' => $existing[0],
-                    'post_content' => $content,
+                    'post_content' => wp_slash($content),
                     'post_title' => $title,
                 ]);
                 if ($update_res) {
@@ -994,7 +1005,7 @@ class TemplateLibrary extends AjaxBase
                 $id = wp_insert_post([
                     'post_title' => $title,
                     'post_name' => $slug,
-                    'post_content' => $content,
+                    'post_content' => wp_slash($content),
                     'post_status' => 'publish',
                     'post_type' => 'wp_template',
                 ]);
@@ -1035,6 +1046,10 @@ class TemplateLibrary extends AjaxBase
             wp_send_json_error(['message' => 'Post title is required']);
         }
 
+        if (empty(trim($content))) {
+            wp_send_json_error(['message' => 'Content is empty']);
+        }
+
         // Replace image URLs (if uploads_updated)
         if ($uploads_updated && !empty($site_url)) {
             $content = $this->replace_media_urls($content, trailingslashit($site_url));
@@ -1048,30 +1063,26 @@ class TemplateLibrary extends AjaxBase
             $slug = sanitize_title($title);
         }
 
-        // Unique slug
-        $original_slug = $slug;
-        $i = 1;
-        while (get_page_by_path($slug, OBJECT, 'post')) {
-            $slug = $original_slug . '-' . $i++;
-        }
+        $existing = get_page_by_path($slug, OBJECT, 'post');
 
-        // Unique title (optional but safe)
-        $original_title = $title;
-        $i = 1;
-        while ($this->post_exists_by_title($title, 'post')) {
-            $title = $original_title . ' ' . $i++;
-        }
-
-        // Create post
-        $post_id = wp_insert_post([
-            'post_title' => $title,
-            'post_name' => $slug,
-            'post_content' => $content,
-            'post_status' => 'publish',
-            'post_type' => 'post',
-            'post_date' => current_time('mysql'),
+        $post_data = [
+            'post_title'    => wp_strip_all_tags($title),
+            'post_name'     => sanitize_title($slug),
+            'post_content'  => wp_slash($content),
+            'post_status'   => 'publish',
+            'post_type'     => 'post',
+            'post_date'     => current_time('mysql'),
             'post_date_gmt' => current_time('mysql', 1),
-        ], true);
+        ];
+
+        if ($existing && !empty($existing->ID)) {
+            $post_data['ID'] = $existing->ID;
+            $post_id          = wp_update_post($post_data, true);
+            $action          = 'updated';
+        } else {
+            $post_id = wp_insert_post($post_data, true);
+            $action = 'created';
+        }
 
         if (is_wp_error($post_id)) {
             wp_send_json_error(['message' => $post_id->get_error_message()]);
@@ -1082,16 +1093,19 @@ class TemplateLibrary extends AjaxBase
             update_post_meta($post_id, '_wp_page_template', $template);
         }
 
+        update_post_meta($post_id, 'fb_page_assets_generation', 'compiling');
+
         if (class_exists('FrontisBlocks\Utils\Helper')) {
-            Helper::insert_job($post_id, $title);
+            Helper::insert_job($post_id, $title . '-' . $post_id);
         }
 
         wp_send_json_success([
-            'message' => 'Post imported successfully',
+            'message' => sprintf('Post "%s" has been %s successfully', $title, $action),
             'post_id' => $post_id,
             'title' => $title,
             'slug' => $slug,
-            'template' => $template ?: 'default'
+            'template' => $template ?: 'default',
+            'action' => $action
         ]);
     }
 

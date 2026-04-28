@@ -71,6 +71,51 @@ const FullSiteImportSettingConfig = ({
   const { nonce, ajaxUrl } = window.frontisBlocksAdmin;
   const deviceType = useDeviceType();
 
+  const decodeBareUnicodeTokens = useCallback((value) => {
+    if (typeof value === "string") {
+      return value.replace(/u([0-9a-fA-F]{4})/g, (_, hex) => {
+        try {
+          return JSON.parse(`"\\u${hex}"`);
+        } catch (error) {
+          return `u${hex}`;
+        }
+      });
+    }
+
+    if (Array.isArray(value)) {
+      return value.map((item) => decodeBareUnicodeTokens(item));
+    }
+
+    if (value && typeof value === "object") {
+      return Object.fromEntries(
+        Object.entries(value).map(([key, item]) => [key, decodeBareUnicodeTokens(item)])
+      );
+    }
+
+    return value;
+  }, []);
+
+  const normalizeImportedContent = useCallback((content) => {
+    if (!content) {
+      return "";
+    }
+
+    if (typeof content === "string") {
+      return decodeBareUnicodeTokens(content);
+    }
+
+    if (Array.isArray(content)) {
+      try {
+        return serialize(decodeBareUnicodeTokens(content));
+      } catch (error) {
+        console.error("Failed to serialize imported blocks:", error);
+        return "";
+      }
+    }
+
+    return "";
+  }, [decodeBareUnicodeTokens]);
+
   // Set global typography
 
   const handleSetGlobalTypography = () => {
@@ -481,7 +526,7 @@ const FullSiteImportSettingConfig = ({
 
     for (const page of pages) {
         try {
-            const parsedBlocks = page.content || "";
+            const parsedBlocks = normalizeImportedContent(page.content);
 
             const pageData = new FormData();
             pageData.append("action", "fb_pages_import");
@@ -545,11 +590,13 @@ const FullSiteImportSettingConfig = ({
 
     for (const post of posts) {
         try {
+            const parsedContent = normalizeImportedContent(post.content);
+
             const formData = new FormData();
             formData.append("action", "fb_posts_import");
             formData.append("security", nonce);
             formData.append("title", post.title || "Untitled");
-            formData.append("content", post.content || "");
+            formData.append("content", parsedContent);
             formData.append("slug", post.slug || "");
             formData.append("template", post.template || "");
             formData.append("uploads_updated", isUploadsUpdated);
