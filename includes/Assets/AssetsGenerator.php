@@ -70,19 +70,29 @@ class AssetsGenerator
 	public function generate_page_assets($post_id, $post, $generate_critical_css = false)
 	{
 		$this->genrating_critical_css = $generate_critical_css;
+		$post_type = get_post_type($post_id);
+		$source_post_name = !empty($post->post_name) ? $post->post_name : 'frontis-template';
 
-		if (get_post_type($post_id) != 'wp_template_part') {
+		if ($post_type !== 'wp_template_part') {
 			$this->post = $post;
 			$this->post_id = $post_id;
 
-			if (get_post_type($post_id) === 'wp_template') {
+			if ($post_type === 'wp_template') {
 				$post_data[] = $this->post;
 				$this->post->post_content = TemplateProcessor::get_instance()->process_template($post_data);
 			}
 
-			if (get_post_type($post_id) !== 'wp_template') {
+			if ($post_type !== 'wp_template') {
 				$this->post->post_content = $this->get_page_content_with_template_parts();
 			}
+
+			$frontis_blocks_used = preg_match('/frontis-blocks/i', $this->post->post_content) > 0;
+			$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $this->post->post_content) > 0;
+
+			update_post_meta($post_id, 'frontis_blocks_used', $frontis_blocks_used);
+			update_post_meta($post_id, 'generate_critical_css', $critical_css_used);
+
+			$this->genrating_critical_css = $critical_css_used;
 
 			$this->generate_all_blocks_assets();
 			$this->combine_static_assets();
@@ -95,10 +105,10 @@ class AssetsGenerator
 			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
-		if (Helper::check_url_has_fse_template() || get_post_type($post_id) === 'wp_template') {
-			global $wpdb;
-			$table_name = $wpdb->prefix . 'fb_job_schedule';
-
+		if (
+			!wp_doing_cron()
+			&& (Helper::check_url_has_fse_template() || in_array($post_type, ['wp_template', 'wp_template_part'], true))
+		) {
 			try {
 				$post_ids = Helper::get_all_post_ids();
 
@@ -110,23 +120,10 @@ class AssetsGenerator
 
 						update_post_meta($single_post_id, 'fb_page_assets_generation', 'compiling');
 
-						$post_content = $single_post->post_content;
-						$pattern = "/frontis-blocks/i";
-
-						if (
-							get_post_type($single_post_id) !== 'wp_template' &&
-							preg_match_all($pattern, $post_content) === 0
-						) {
-							continue;
-						}
-
-						// Insert job using your existing Helper method
-						if (!empty($this->post) && !empty($this->post->post_name)) {
-							Helper::insert_job($single_post_id, $this->post->post_name . $single_post_id);
-						}
+						Helper::insert_job($single_post_id, $source_post_name . $single_post_id);
 					}
 				}
-			} catch (Exception $e) {
+			} catch (\Exception $e) {
 				error_log('Failed to schedule assets generation: ' . $e->getMessage());
 			}
 		}

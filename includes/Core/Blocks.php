@@ -422,7 +422,9 @@ class Blocks
 		AssetsGenerator::generate_global_assets();
 
 		$pattern = "/frontis-blocks/i";
-		if ((!preg_match_all($pattern, $post->post_content) > 0 && get_post_type($post_id) !== 'wp_template')) {
+		$has_frontis_block = preg_match_all($pattern, $post->post_content) > 0;
+
+		if (!$has_frontis_block && !in_array(get_post_type($post_id), ['wp_template', 'wp_template_part'], true)) {
 			return;
 		}
 
