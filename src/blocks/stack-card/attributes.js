@@ -366,7 +366,7 @@ const attributes = {
 	},
 	stackCardsPresetFourActiveBorder: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	stackCardsPresetFourActiveBorderWidth: {
 		type: 'object',
@@ -479,7 +479,7 @@ const attributes = {
 	stackCardsPresetTwoLeftOffsetStep: {
 		type: 'object',
 		default: {
-			Desktop: '28',
+			Desktop: '24',
 			Tablet: '24',
 			Mobile: '18',
 		},
@@ -543,8 +543,8 @@ const attributes = {
 	stackCardsPresetTwoVisibleLayers: {
 		type: 'object',
 		default: {
-			Desktop: '4',
-			Tablet: '4',
+			Desktop: '3',
+			Tablet: '3',
 			Mobile: '3',
 		},
 	},
@@ -570,7 +570,7 @@ const attributes = {
 	},
 	stackCardsPresetTwoKeyboardNavigation: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	stackCardsPresetTwoCardClickToActive: {
 		type: 'boolean',

@@ -377,7 +377,7 @@ const generateStackCardsStyle = (attributes) => {
             border-color: var(--fb-stack-card-item-border-hover-color, var(--fb-stack-card-item-border-color, ${stackCardItemBorderHoverColor || stackCardItemBorderColor || 'transparent'}));
         }
 
-        ${isPresetTwo && `
+        ${isPresetTwo ? `
             ${stackLeftFrameSelector} {
                 position: relative;
                 display: grid;
@@ -411,9 +411,9 @@ const generateStackCardsStyle = (attributes) => {
                 min-height: 0 !important;
                 height: auto !important;
             }
-        `}
+        ` : ''}
 
-        ${isPresetThree && `
+        ${isPresetThree ? `
             ${stackRightFrameSelector} {
                 position: relative;
                 width: ${stackCardsPresetThreeFrameWidth?.Desktop || 400}${stackCardsPresetThreeFrameWidthUnits?.Desktop || 'px'};
@@ -449,9 +449,9 @@ const generateStackCardsStyle = (attributes) => {
                 min-height: 0 !important;
                 height: auto !important;
             }
-        `}
+        ` : ''}
 
-        ${hasScalePreset && `
+        ${hasScalePreset ? `
             ${frameGapSelector} {
                 ${hasValue(stackCardsCardItemGap?.Desktop) && stackCardsCardItemGapUnits?.Desktop ? `gap: ${stackCardsCardItemGap?.Desktop}${stackCardsCardItemGapUnits?.Desktop};` : ''}
             }
@@ -489,7 +489,7 @@ const generateStackCardsStyle = (attributes) => {
                 }`;
             }).join(' ')}
 
-        `}
+        ` : ''}
 
         ${allItemSelector} {
             position: sticky;
@@ -498,7 +498,7 @@ const generateStackCardsStyle = (attributes) => {
             transition: transform 0.5s ease,opacity 0.5s ease;
         }
 
-        ${isPresetFour && `
+        ${isPresetFour ? `
             ${stackOverFrameSelector} {
                 position: relative;
                 width: 100%;
@@ -654,7 +654,7 @@ const generateStackCardsStyle = (attributes) => {
                 }
             `}
 
-        `}
+        ` : ''}
 
         @media only screen and (max-width: 1024px) {
 
@@ -673,7 +673,7 @@ const generateStackCardsStyle = (attributes) => {
                 ${hasValue(stackCardsGlobalBorderRadiusTablet?.top) ? `border-radius: ${globalTabletBorderRadiusWidth};` : ''}
             }
 
-            ${isPresetFour && `
+            ${isPresetFour ? `
                 ${stackOverFrameSelector} {
                     max-width: ${stackCardsPresetFourCardWidth?.Tablet || stackCardsPresetFourCardWidth?.Desktop || 620}${stackCardsPresetFourCardWidthUnits?.Tablet || 'px'};
                 }
@@ -705,9 +705,9 @@ const generateStackCardsStyle = (attributes) => {
                         right: ${stackCardsPresetFourButtonSideOffset?.Tablet || stackCardsPresetFourButtonSideOffset?.Desktop || 0}${stackCardsPresetFourButtonSideOffsetUnits?.Tablet || 'px'};
                     }
                 ` : ''}
-            `}
+            ` : ''}
 
-            ${isPresetTwo && `
+            ${isPresetTwo ? `
                 ${stackLeftFrameSelector} {
                     max-width: ${stackCardsPresetTwoCardWidth?.Tablet || stackCardsPresetTwoCardWidth?.Desktop || 620}${stackCardsPresetTwoCardWidthUnits?.Tablet || 'px'};
                 }
@@ -715,9 +715,9 @@ const generateStackCardsStyle = (attributes) => {
                 ${stackLeftAllItemSelector} {
                     max-width: ${stackCardsPresetTwoCardWidth?.Tablet || stackCardsPresetTwoCardWidth?.Desktop || 620}${stackCardsPresetTwoCardWidthUnits?.Tablet || 'px'};
                 }
-            `}
+            ` : ''}
 
-            ${isPresetThree && `
+            ${isPresetThree ? `
                 ${stackRightFrameSelector} {
                     width: ${stackCardsPresetThreeFrameWidth?.Tablet || stackCardsPresetThreeFrameWidth?.Desktop || 400}${stackCardsPresetThreeFrameWidthUnits?.Tablet || 'px'};
                     max-width: ${stackCardsPresetThreeFrameWidth?.Tablet || stackCardsPresetThreeFrameWidth?.Desktop || 400}${stackCardsPresetThreeFrameWidthUnits?.Tablet || 'px'};
@@ -729,9 +729,9 @@ const generateStackCardsStyle = (attributes) => {
                     width: ${stackCardsPresetThreeItemWidth?.Tablet || stackCardsPresetThreeItemWidth?.Desktop || 300}${stackCardsPresetThreeItemWidthUnits?.Tablet || 'px'};
                     max-width: ${stackCardsPresetThreeItemWidth?.Tablet || stackCardsPresetThreeItemWidth?.Desktop || 300}${stackCardsPresetThreeItemWidthUnits?.Tablet || 'px'};
                 }
-            `}
+            ` : ''}
 
-            ${hasScalePreset && `
+            ${hasScalePreset ? `
                 ${frameGapSelector} {
                     ${hasValue(stackCardsCardItemGap?.Tablet) && stackCardsCardItemGapUnits?.Tablet ? `gap: ${stackCardsCardItemGap?.Tablet}${stackCardsCardItemGapUnits?.Tablet};` : ''}
                 }
@@ -765,7 +765,7 @@ const generateStackCardsStyle = (attributes) => {
                     ${editorItemSelector}.fb-card-item${itemNumber} { --fb-design-scale: ${normalizedScale}; }`;
                 }).join(' ')}
 
-            `}
+            ` : ''}
         }
 
         @media only screen and (max-width: 767px) {
@@ -784,7 +784,7 @@ const generateStackCardsStyle = (attributes) => {
                 ${hasValue(stackCardsGlobalBorderRadiusMobile?.top) ? `border-radius: ${globalMobileBorderRadiusWidth};` : ''}
             }
 
-            ${isPresetFour && `
+            ${isPresetFour ? `
                 ${stackOverFrameSelector} {
                     max-width: ${stackCardsPresetFourCardWidth?.Mobile || stackCardsPresetFourCardWidth?.Tablet || stackCardsPresetFourCardWidth?.Desktop || 620}${stackCardsPresetFourCardWidthUnits?.Mobile || 'px'};
                 }
@@ -816,9 +816,9 @@ const generateStackCardsStyle = (attributes) => {
                         right: ${stackCardsPresetFourButtonSideOffset?.Mobile || stackCardsPresetFourButtonSideOffset?.Tablet || stackCardsPresetFourButtonSideOffset?.Desktop || 0}${stackCardsPresetFourButtonSideOffsetUnits?.Mobile || 'px'};
                     }
                 ` : ''}
-            `}
+            ` : ''}
 
-            ${isPresetTwo && `
+            ${isPresetTwo ? `
                 ${stackLeftFrameSelector} {
                     max-width: ${stackCardsPresetTwoCardWidth?.Mobile || stackCardsPresetTwoCardWidth?.Tablet || stackCardsPresetTwoCardWidth?.Desktop || 620}${stackCardsPresetTwoCardWidthUnits?.Mobile || 'px'};
                 }
@@ -826,9 +826,9 @@ const generateStackCardsStyle = (attributes) => {
                 ${stackLeftAllItemSelector} {
                     max-width: ${stackCardsPresetTwoCardWidth?.Mobile || stackCardsPresetTwoCardWidth?.Tablet || stackCardsPresetTwoCardWidth?.Desktop || 620}${stackCardsPresetTwoCardWidthUnits?.Mobile || 'px'};
                 }
-            `}
+            ` : ''}
 
-            ${isPresetThree && `
+            ${isPresetThree ? `
                 ${stackRightFrameSelector} {
                     width: ${stackCardsPresetThreeFrameWidth?.Mobile || stackCardsPresetThreeFrameWidth?.Tablet || stackCardsPresetThreeFrameWidth?.Desktop || 400}${stackCardsPresetThreeFrameWidthUnits?.Mobile || 'px'};
                     max-width: ${stackCardsPresetThreeFrameWidth?.Mobile || stackCardsPresetThreeFrameWidth?.Tablet || stackCardsPresetThreeFrameWidth?.Desktop || 400}${stackCardsPresetThreeFrameWidthUnits?.Mobile || 'px'};
@@ -840,9 +840,9 @@ const generateStackCardsStyle = (attributes) => {
                     width: ${stackCardsPresetThreeItemWidth?.Mobile || stackCardsPresetThreeItemWidth?.Tablet || stackCardsPresetThreeItemWidth?.Desktop || 300}${stackCardsPresetThreeItemWidthUnits?.Mobile || 'px'};
                     max-width: ${stackCardsPresetThreeItemWidth?.Mobile || stackCardsPresetThreeItemWidth?.Tablet || stackCardsPresetThreeItemWidth?.Desktop || 300}${stackCardsPresetThreeItemWidthUnits?.Mobile || 'px'};
                 }
-            `}
+            ` : ''}
 
-            ${hasScalePreset && `
+            ${hasScalePreset ? `
                 ${frameGapSelector} {
                     ${hasValue(stackCardsCardItemGap?.Mobile) && stackCardsCardItemGapUnits?.Mobile ? `gap: ${stackCardsCardItemGap?.Mobile}${stackCardsCardItemGapUnits?.Mobile};` : ''}
                 }
@@ -876,7 +876,7 @@ const generateStackCardsStyle = (attributes) => {
                     ${editorItemSelector}.fb-card-item${itemNumber} { --fb-design-scale: ${normalizedScale}; }`;
                 }).join(' ')}
 
-            `}
+            ` : ''}
         }
     
     `;
