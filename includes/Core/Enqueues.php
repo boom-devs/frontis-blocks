@@ -183,7 +183,8 @@ class Enqueues
             return;
         }
 
-        $template_content = TemplateProcessor::get_instance()->process_template((string) $template->content);
+        $raw_template_content = (string) $template->content;
+        $template_content = TemplateProcessor::get_instance()->process_template($raw_template_content);
         if ($template_content === '' || preg_match('/frontis-blocks/i', $template_content) === 0) {
             return;
         }
@@ -194,8 +195,12 @@ class Enqueues
         if (!$should_generate) {
             $asset_modified = filemtime($css_file_system_path);
             $template_modified = $this->get_template_modified_time($template);
-            $template_parts_modified = $this->get_latest_template_parts_modified_time((string) $template->content);
-            $should_generate = max($template_modified, $template_parts_modified) > $asset_modified;
+            $template_parts_modified = $this->get_latest_template_parts_modified_time($raw_template_content);
+            $pattern_modified = max(
+                $this->get_latest_synced_patterns_modified_time($raw_template_content),
+                $this->get_latest_synced_patterns_modified_time($template_content)
+            );
+            $should_generate = max($template_modified, $template_parts_modified, $pattern_modified) > $asset_modified;
         }
 
         if (!$should_generate) {
@@ -276,9 +281,13 @@ class Enqueues
                 }
 
                 if (!empty($template->post_content)) {
+                    $processed_template_content = TemplateProcessor::get_instance()->process_template((string) $template->post_content);
+
                     $latest_modified = max(
                         $latest_modified,
-                        $this->get_latest_template_parts_modified_time((string) $template->post_content)
+                        $this->get_latest_template_parts_modified_time((string) $template->post_content),
+                        $this->get_latest_synced_patterns_modified_time((string) $template->post_content),
+                        $this->get_latest_synced_patterns_modified_time($processed_template_content)
                     );
                 }
             }
@@ -337,8 +346,45 @@ class Enqueues
             }
 
             if ($template_part_id) {
+                $template_part_post = get_post($template_part_id);
                 $latest_modified = max($latest_modified, (int) get_post_modified_time('U', true, $template_part_id));
+
+                if ($template_part_post) {
+                    $latest_modified = max(
+                        $latest_modified,
+                        $this->get_latest_synced_patterns_modified_time((string) $template_part_post->post_content)
+                    );
+                }
             }
+        }
+
+        return $latest_modified;
+    }
+
+    private function get_latest_synced_patterns_modified_time($content, $seen_pattern_ids = [])
+    {
+        $latest_modified = 0;
+        $pattern_ids = TemplateProcessor::get_instance()->get_synced_pattern_ids((string) $content);
+
+        foreach ($pattern_ids as $pattern_id) {
+            $pattern_id = absint($pattern_id);
+            if (!$pattern_id || in_array($pattern_id, $seen_pattern_ids, true)) {
+                continue;
+            }
+
+            $pattern_post = get_post($pattern_id);
+            if (!$pattern_post || $pattern_post->post_type !== 'wp_block') {
+                continue;
+            }
+
+            $latest_modified = max(
+                $latest_modified,
+                (int) get_post_modified_time('U', true, $pattern_id),
+                $this->get_latest_synced_patterns_modified_time(
+                    (string) $pattern_post->post_content,
+                    array_merge($seen_pattern_ids, [$pattern_id])
+                )
+            );
         }
 
         return $latest_modified;
