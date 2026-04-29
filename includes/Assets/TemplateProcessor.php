@@ -28,23 +28,7 @@ class TemplateProcessor
             return '';
         }
 
-        // Step 1: Detect and replace wp:block with ref content
-        preg_match_all('/<!--\s*wp:block\s*{"ref"\s*:\s*(\d+)\}\s*\/-->/', $template_content, $block_matches);
-        $pattern_ids = $block_matches[1] ?? [];
-
-        if (!empty($pattern_ids)) {
-            foreach ($pattern_ids as $index => $pattern_id) {
-                $pattern_post = get_post((int) $pattern_id);
-                if ($pattern_post && $pattern_post->post_type === 'wp_block') {
-                    // Replace wp:block with its post_content
-                    $template_content = str_replace(
-                        $block_matches[0][$index],
-                        (string) $pattern_post->post_content,
-                        $template_content
-                    );
-                }
-            }
-        }
+        $template_content = $this->resolve_synced_patterns($template_content);
 
         // Step 2: Detect wp:template-part and extract slugs
         $pattern = '/<!--\s*wp:template-part\s*{(.*?)}\s*\/-->/s';
@@ -66,6 +50,8 @@ class TemplateProcessor
                 $template_part_content = $this->get_template_part_content($attrs);
 
                 if ($template_part_content !== '') {
+                    $template_part_content = $this->resolve_synced_patterns($template_part_content);
+
                     $template_content = str_replace(
                         $template_part_matches[0][$i],
                         $template_part_content,
@@ -131,6 +117,54 @@ class TemplateProcessor
                     }
                 }
             }
+        }
+
+        return $template_content;
+    }
+
+    public function get_synced_pattern_ids($template_content)
+    {
+        $template_content = (string) $template_content;
+        if ($template_content === '') {
+            return [];
+        }
+
+        preg_match_all('/<!--\s*wp:block\s*{.*?"ref"\s*:\s*(\d+).*?}\s*\/-->/', $template_content, $block_matches);
+
+        return array_values(array_unique(array_map('absint', $block_matches[1] ?? [])));
+    }
+
+    private function resolve_synced_patterns($template_content, $seen_pattern_ids = [])
+    {
+        $pattern_ids = $this->get_synced_pattern_ids($template_content);
+
+        if (empty($pattern_ids)) {
+            return $template_content;
+        }
+
+        preg_match_all('/<!--\s*wp:block\s*{.*?"ref"\s*:\s*(\d+).*?}\s*\/-->/', $template_content, $block_matches);
+
+        foreach (($block_matches[1] ?? []) as $index => $pattern_id) {
+            $pattern_id = absint($pattern_id);
+            if (!$pattern_id || in_array($pattern_id, $seen_pattern_ids, true)) {
+                continue;
+            }
+
+            $pattern_post = get_post($pattern_id);
+            if (!$pattern_post || $pattern_post->post_type !== 'wp_block') {
+                continue;
+            }
+
+            $pattern_content = $this->resolve_synced_patterns(
+                (string) $pattern_post->post_content,
+                array_merge($seen_pattern_ids, [$pattern_id])
+            );
+
+            $template_content = str_replace(
+                $block_matches[0][$index],
+                $pattern_content,
+                $template_content
+            );
         }
 
         return $template_content;
