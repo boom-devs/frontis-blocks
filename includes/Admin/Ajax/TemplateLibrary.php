@@ -751,8 +751,9 @@ class TemplateLibrary extends AjaxBase
             ]);
 
             if (!empty($existing)) {
+                $id = $existing[0];
                 wp_update_post([
-                    'ID'           => $existing[0],
+                    'ID'           => $id,
                     'post_content' => wp_slash($content), // ← DemoContentImporter pattern
                     'post_title'   => $title,
                 ]);
@@ -771,6 +772,29 @@ class TemplateLibrary extends AjaxBase
                     $stats['part_created']++;
                 } else {
                     $stats['errors'][] = $slug;
+                }
+            }
+
+            // --- Site Logo Detection (Header only) ---
+            if (!is_wp_error($id) && $id > 0 && $_POST['headers']) {
+                $logo_id = 0;
+                // Try to find the site-logo block's ID
+                if (preg_match('/<!--\s+wp:site-logo\s+({.*?})\s+\/-->/s', $content, $logo_matches)) {
+                    $logo_attrs = json_decode($logo_matches[1], true);
+                    if (!empty($logo_attrs['id'])) {
+                        $logo_id = (int) $logo_attrs['id'];
+                    }
+                }
+                
+                // Fallback: Find the first image and resolve its local attachment ID
+                if (!$logo_id && preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $img_matches)) {
+                    $logo_url = $img_matches[1];
+                    $logo_id = attachment_url_to_postid($logo_url);
+                }
+
+                if ($logo_id) {
+                    set_theme_mod('custom_logo', $logo_id);
+                    error_log("FB Import: Detected and set site logo ID: $logo_id from header part: $title");
                 }
             }
         }
