@@ -968,53 +968,88 @@ class Admin
 
     public function template_proxy()
     {
-        global $wp_query;
-
-        $is_proxy = get_query_var('template_proxy');
-        $remote_url = get_query_var('url');
-
-        // fallback: check raw $_GET if query_vars fail
-        if (empty($is_proxy) && isset($_GET['template_proxy'])) {
-            $is_proxy = sanitize_text_field($_GET['template_proxy']);
+        // 1. Detect if this is a proxy request through various methods
+        $is_proxy = false;
+        
+        // Method A: Query Variable (from rewrite rule)
+        if (get_query_var('template_proxy')) {
+            $is_proxy = true;
         }
-        if (empty($remote_url) && isset($_GET['url'])) {
-            $remote_url = sanitize_text_field($_GET['url']);
+        // Method B: Direct GET parameter
+        elseif (isset($_GET['template_proxy']) && ('1' === (string)$_GET['template_proxy'] || 'true' === strtolower((string)$_GET['template_proxy']))) {
+            $is_proxy = true;
+        }
+        // Method C: Path detection (failsafe for rewrite rules)
+        elseif (strpos($_SERVER['REQUEST_URI'], '/template-proxy/') !== false) {
+            $is_proxy = true;
         }
 
-        if ($is_proxy && $remote_url) {
-            // Security: Only allow admins to use this proxy
-            if (!current_user_can('manage_options')) {
-                wp_die('Unauthorized', 403);
-            }
+        if (!$is_proxy) {
+            return;
+        }
 
-            $remote_url = urldecode($remote_url);
+        // 2. Get and validate the remote URL
+        $remote_url = isset($_GET['url']) ? $_GET['url'] : get_query_var('url');
 
-            // Security: Validate URL format and scheme
-            $parsed_url = parse_url($remote_url);
-            if (!$parsed_url || !isset($parsed_url['scheme']) || !in_array($parsed_url['scheme'], ['http', 'https'], true)) {
-                wp_die('Invalid URL scheme', 400);
-            }
+        if (empty($remote_url)) {
+            return; // Let WP handle it (likely a 404 or home) if no URL is provided
+        }
 
-            // Security: Strict Domain Allowlist
-            $allowed_hosts = ['demo.frontiswp.com', 'frontistest.1wp.site'];
-            if (defined('PORTAL_API')) {
-                $allowed_hosts[] = parse_url(PORTAL_API, PHP_URL_HOST);
-            }
-            if (defined('WORDPRESS_SYNC_API')) {
-                $allowed_hosts[] = parse_url(WORDPRESS_SYNC_API, PHP_URL_HOST);
-            }
+        // Security: Only allow admins to use this proxy
+        if (!current_user_can('manage_options')) {
+            wp_die('Unauthorized. Only administrators can use the preview proxy.', 403);
+        }
 
-            // Helper to get host from URL even if scheme is missing or slight differences
-            $remote_host = $parsed_url['host'] ?? '';
+        // Note: PHP automatically decodes $_GET once. 
+        $remote_url = esc_url_raw($remote_url);
 
-            if (!in_array($remote_host, $allowed_hosts, true)) {
-                 // Fallback or Strict? 
-                 // If the plugin ONLY needs these two, strict is better.
-                 wp_die('Domain not allowed', 403);
+        // Security: Validate URL format and scheme
+        $parsed_url = parse_url($remote_url);
+        if (!$parsed_url || !isset($parsed_url['scheme']) || !in_array($parsed_url['scheme'], ['http', 'https'], true)) {
+            wp_die('Invalid URL scheme in preview URL. Only http and https are allowed.', 400);
+        }
+
+        // Security: Domain Allowlist
+        $allowed_hosts = ['demo.frontiswp.com', 'frontistest.1wp.site', 'frontiswp.com'];
+        if (defined('PORTAL_API')) {
+            $host = parse_url(PORTAL_API, PHP_URL_HOST);
+            if ($host) $allowed_hosts[] = $host;
+        }
+        if (defined('WORDPRESS_SYNC_API')) {
+            $host = parse_url(WORDPRESS_SYNC_API, PHP_URL_HOST);
+            if ($host) $allowed_hosts[] = $host;
+        }
+
+        $remote_host = strtolower($parsed_url['host'] ?? '');
+
+        // Allow any subdomain of allowed hosts for flexibility
+        $is_allowed = false;
+        foreach ($allowed_hosts as $allowed_host) {
+            $allowed_host = strtolower($allowed_host);
+            if ($remote_host === $allowed_host) {
+                $is_allowed = true;
+                break;
             }
+            
+            // Subdomain check (compatible with PHP < 8.0)
+            $dot_allowed_host = '.' . $allowed_host;
+            if (substr($remote_host, -strlen($dot_allowed_host)) === $dot_allowed_host) {
+                $is_allowed = true;
+                break;
+            }
+        }
+
+        if (!$is_allowed) {
+             wp_die('Domain not allowed: ' . esc_html($remote_host) . '. Please ensure the domain is in the allowlist.', 403);
+        }
 
             // Security: Use wp_safe_remote_get to prevent SSRF to private IPs
-            $response = wp_safe_remote_get($remote_url);
+            $response = wp_safe_remote_get($remote_url, [
+                'timeout'     => 30,
+                'redirection' => 5,
+                'sslverify'   => false, // Allow self-signed or invalid certs for preview if needed
+                'user-agent'  => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            ]);
 
             if (is_wp_error($response)) {
                 wp_die('Proxy request failed: ' . esc_html($response->get_error_message()));
@@ -1022,20 +1057,56 @@ class Admin
 
             $body = wp_remote_retrieve_body($response);
             $content_type = wp_remote_retrieve_header($response, 'content-type');
+            
+            // Remove headers that might prevent iframing or cause CORS issues in the preview
+            header_remove('X-Frame-Options');
+            header_remove('Content-Security-Policy');
+            header_remove('X-Content-Type-Options');
+
+            // Set the content type from the remote response
             header("Content-Type: " . ($content_type ?: 'text/html; charset=UTF-8'));
+            
+            // SUPER FIX: Add CORS headers to the proxied response so the browser allows fonts/scripts/fetch
+            header("Access-Control-Allow-Origin: *");
+            header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+            header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, X-WP-Nonce");
+            
+            // Add custom header to indicate proxying
+            header("X-Proxy-By: FrontisBlocks");
 
-            // Fix relative asset URLs
-            $body = preg_replace_callback(
-                '/(src|href)=["\'](\/[^"\']+)["\']/i',
-                function ($matches) use ($remote_url) {
-                    $base = preg_replace('#/[^/]*$#', '/', $remote_url);
-                    return $matches[1] . '="' . rtrim($base, '/') . $matches[2] . '"';
-                },
-                $body
-            );
+            // If it's HTML or JS/JSON, rewrite URLs to go through the proxy
+            $is_html = empty($content_type) || strpos($content_type, 'text/html') !== false;
+            $is_js_json = strpos($content_type, 'javascript') !== false || strpos($content_type, 'json') !== false;
 
-            echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Binary image data
+            if ($is_html || $is_js_json) {
+                $remote_origin = $parsed_url['scheme'] . '://' . $parsed_url['host'];
+                $proxy_url_base = home_url('/template-proxy/?template_proxy=1&url=');
+                
+                // We need to be careful with double-proxying, so we only replace the remote origin 
+                // when it's not already preceded by our proxy URL.
+                // For simplicity and "super" effect, we'll replace the remote origin with the proxied version.
+                
+                // Handle both normal and escaped versions (for JS/JSON)
+                $search = [$remote_origin, str_replace('/', '\\/', $remote_origin)];
+                $replace = [$proxy_url_base . $remote_origin, str_replace('/', '\\/', $proxy_url_base . $remote_origin)];
+                
+                $body = str_replace($search, $replace, $body);
+
+                // For HTML, still add the <base> tag as a safety measure for any missed relative URLs
+                if ($is_html) {
+                    $base_tag = '<base href="' . esc_url($remote_url) . '">';
+                    if (stripos($body, '<head>') !== false) {
+                        $body = preg_replace('/(<head[^>]*>)/i', '$1' . $base_tag, $body);
+                    } else {
+                        $body = $base_tag . $body;
+                    }
+                    
+                    // Also strip any existing X-Frame-Options or CSP meta tags in the HTML
+                    $body = preg_replace('/<meta[^>]+http-equiv=["\'](X-Frame-Options|Content-Security-Policy)["\'][^>]*>/i', '', $body);
+                }
+            }
+
+            echo $body; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             exit;
-        }
     }
 }
