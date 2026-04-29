@@ -43,7 +43,9 @@ class AssetsGenerator
 
 	private function reset()
 	{
-		update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
+		if (!empty($this->post_id)) {
+			update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
+		}
 
 		$this->post_id = null;
 		$this->post = null;
@@ -126,6 +128,45 @@ class AssetsGenerator
 			} catch (\Exception $e) {
 				error_log('Failed to schedule assets generation: ' . $e->getMessage());
 			}
+		}
+
+		return true;
+	}
+
+	public function generate_template_assets($template_name, $template_content, $post_id = 0)
+	{
+		$template_name = sanitize_title($template_name);
+		$template_content = TemplateProcessor::get_instance()->process_template((string) $template_content);
+
+		if ($template_name === '' || $template_content === '') {
+			return false;
+		}
+
+		$this->post_id = absint($post_id);
+		$this->post = (object) [
+			'ID' => $this->post_id,
+			'post_name' => $template_name,
+			'post_type' => 'wp_template',
+			'post_content' => $template_content,
+		];
+
+		$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $template_content) > 0;
+		$this->genrating_critical_css = $critical_css_used;
+
+		if (!empty($this->post_id)) {
+			update_post_meta($this->post_id, 'frontis_blocks_used', preg_match('/frontis-blocks/i', $template_content) > 0);
+			update_post_meta($this->post_id, 'generate_critical_css', $critical_css_used);
+		}
+
+		$this->generate_all_blocks_assets();
+		$this->combine_static_assets();
+		$this->combine_and_save_css_file($template_name);
+		$this->persist_page_google_fonts_url($this->block_fonts);
+
+		$this->reset();
+
+		if (!empty($post_id)) {
+			update_post_meta($post_id, 'fb_page_assets_generation', 'compiled');
 		}
 
 		return true;

@@ -44,7 +44,7 @@ class Enqueues
 
     public function get_page_template_name()
     {
-        $post_id = get_queried_object_id() ?: get_the_ID();
+        $post_id = $this->should_use_post_scoped_assets() ? (get_queried_object_id() ?: get_the_ID()) : 0;
         $template_name = Helper::determine_template_post_type($post_id);
         $template_id = Helper::get_post_id_by_slug($template_name, 'wp_template');
         $frontis_critical_css_generation_template = get_post_meta($template_id, 'generate_critical_css', true);
@@ -57,6 +57,10 @@ class Enqueues
 
     private function get_current_post_id()
     {
+        if (!$this->should_use_post_scoped_assets()) {
+            return 0;
+        }
+
         $post_id = get_queried_object_id();
 
         if (!$post_id) {
@@ -64,6 +68,12 @@ class Enqueues
         }
 
         return absint($post_id);
+    }
+
+    private function should_use_post_scoped_assets()
+    {
+        return is_singular()
+            || (is_front_page() && 'page' === get_option('show_on_front') && (int) get_option('page_on_front') > 0);
     }
 
     private function get_current_page_asset_name($template_name)
@@ -91,6 +101,7 @@ class Enqueues
 
         $post_id = $this->get_current_post_id();
         if (!$post_id) {
+            $this->maybe_generate_current_template_assets();
             return;
         }
 
@@ -158,6 +169,85 @@ class Enqueues
         } finally {
             delete_transient($lock_key);
         }
+    }
+
+    private function maybe_generate_current_template_assets()
+    {
+        $template_name = Helper::determine_template_post_type(0);
+        if (!$template_name) {
+            return;
+        }
+
+        $template = $this->get_block_template_by_slug($template_name);
+        if (!$template || empty($template->content)) {
+            return;
+        }
+
+        $template_content = TemplateProcessor::get_instance()->process_template((string) $template->content);
+        if ($template_content === '' || preg_match('/frontis-blocks/i', $template_content) === 0) {
+            return;
+        }
+
+        $css_file_system_path = $this->upload_dir['basedir'] . '/frontis-blocks/' . $template_name . '/' . $template_name . '.min.css';
+        $should_generate = !file_exists($css_file_system_path);
+
+        if (!$should_generate) {
+            $asset_modified = filemtime($css_file_system_path);
+            $template_modified = $this->get_template_modified_time($template);
+            $template_parts_modified = $this->get_latest_template_parts_modified_time((string) $template->content);
+            $should_generate = max($template_modified, $template_parts_modified) > $asset_modified;
+        }
+
+        if (!$should_generate) {
+            return;
+        }
+
+        $lock_key = 'fb_template_assets_generating_' . md5($template_name);
+        if (get_transient($lock_key)) {
+            return;
+        }
+
+        set_transient($lock_key, 1, MINUTE_IN_SECONDS);
+
+        try {
+            $upload_directory = WP_CONTENT_DIR . '/uploads/frontis-blocks/';
+
+            if (!is_dir($upload_directory) && !wp_mkdir_p($upload_directory)) {
+                error_log('Frontis Blocks: failed to create upload directory for template assets.');
+                return;
+            }
+
+            AssetsGenerator::generate_global_assets();
+            $template_post_id = !empty($template->wp_id) ? absint($template->wp_id) : 0;
+            AssetsGenerator::get_instance()->generate_template_assets($template_name, $template_content, $template_post_id);
+        } catch (\Throwable $e) {
+            error_log('Frontis Blocks: failed to generate template assets: ' . $e->getMessage());
+        } finally {
+            delete_transient($lock_key);
+        }
+    }
+
+    private function get_block_template_by_slug($template_name)
+    {
+        if (!function_exists('get_block_template')) {
+            return null;
+        }
+
+        $stylesheet = get_stylesheet();
+        if (!$stylesheet) {
+            return null;
+        }
+
+        return get_block_template($stylesheet . '//' . $template_name, 'wp_template');
+    }
+
+    private function get_template_modified_time($template)
+    {
+        if (!empty($template->wp_id)) {
+            return (int) get_post_modified_time('U', true, (int) $template->wp_id);
+        }
+
+        return 0;
     }
 
     private function is_current_page_asset_stale($post_id, $css_file_system_path)
