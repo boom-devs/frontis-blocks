@@ -1,10 +1,11 @@
-import { createBlock } from '@wordpress/blocks';
 import { useBlockProps, useInnerBlocksProps, store as blockEditorStore } from '@wordpress/block-editor';
 import { useDispatch, useSelect } from '@wordpress/data';
 import { useEffect, useLayoutEffect, useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import attributeDefinitions from './attributes';
 import Inspector from './inspector';
+import { presetStyles } from './presets';
 import { getPresetFrameDataAttributes } from './preset-frame-data';
 import generateStackCardsStyle from './styling';
 import {
@@ -25,6 +26,7 @@ import {
 	isPresetTwoStackLeft,
 } from './preset-two';
 import { bindEditorStackCardScale } from './stack-card-scale-behavior';
+import { createDefaultCardItemBlock } from './default-card-item';
 import './editor.scss';
 
 const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
@@ -74,7 +76,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 
 		const defaultItems = Array.from({ length: INITIAL_CARD_ITEMS }, (_, index) =>
-			createBlock(CARD_ITEM_BLOCK, { itemNumber: index + 1 })
+			createDefaultCardItemBlock(index + 1)
 		);
 
 		replaceInnerBlocks(clientId, defaultItems, false);
@@ -96,12 +98,43 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const presetTwoCleanupRef = useRef(null);
 	const presetThreeCleanupRef = useRef(null);
 	const presetFourCleanupRef = useRef(null);
+	const initialPresetHydratedRef = useRef(false);
 	const panelRef = useRef(null);
 	const presetTwoConfig = getPresetTwoConfig(attributes);
 	const presetThreeConfig = getPresetThreeConfig(attributes);
 	const presetFourConfig = getPresetFourConfig(attributes);
 	const presetFrameDataAttributes = getPresetFrameDataAttributes(stackCardsPresetStyle, attributes);
 	SwitchToBlockSettings(panelRef);
+
+	useEffect(() => {
+		if (initialPresetHydratedRef.current || childBlocks.length > 0) {
+			return;
+		}
+
+		const currentPresetValues = presetStyles[stackCardsPresetStyle];
+
+		if (!currentPresetValues || !Object.keys(currentPresetValues).length) {
+			initialPresetHydratedRef.current = true;
+			return;
+		}
+
+		const shouldHydratePreset = Object.entries(currentPresetValues).every(([key]) => {
+			const currentValue = attributes[key];
+			const defaultValue = attributeDefinitions[key]?.default;
+
+			if (currentValue === undefined) {
+				return true;
+			}
+
+			return JSON.stringify(currentValue) === JSON.stringify(defaultValue ?? '');
+		});
+
+		initialPresetHydratedRef.current = true;
+
+		if (shouldHydratePreset) {
+			setAttributes(currentPresetValues);
+		}
+	}, [attributes, childBlocks.length, setAttributes, stackCardsPresetStyle]);
 
 	const blockProps = useBlockProps({
 		ref: rootRef,

@@ -59,6 +59,7 @@ import { isPresetThreeStackRight } from './preset-three';
 import { isPresetTwoStackLeft } from './preset-two';
 import StackCardInspectorSortableItem from './stack-card-inspector-sortable-item';
 import { stackedCardPresets } from './presets';
+import { createDefaultCardItemBlock } from './default-card-item';
 
 const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
 const MIN_CARD_ITEMS = 2;
@@ -350,14 +351,12 @@ const Inspector = ( { attributes, setAttributes, clientId } ) => {
 
 	const handleAddCardItem = useCallback( () => {
 		insertBlock(
-			createBlock( CARD_ITEM_BLOCK, {
-				itemNumber: childBlocks.length + 1,
-			} ),
+			createDefaultCardItemBlock( childBlocks.length + 1 ),
 			childBlocks.length,
 			clientId,
 			false
 		);
-	}, [ childBlocks, clientId, insertBlock ] );
+	}, [ childBlocks.length, clientId, insertBlock ] );
 
 	const handleDeleteCardItem = useCallback(
 		( targetClientId ) => {
