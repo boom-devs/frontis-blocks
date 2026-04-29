@@ -1,5 +1,11 @@
+import { createBlock } from '@wordpress/blocks';
 import { InnerBlocks, useBlockProps, useInnerBlocksProps, store as blockEditorStore } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { useEffect, useRef } from '@wordpress/element';
+
+const DEFAULT_CARD_ITEM_TEMPLATE = [
+	['frontis-blocks/info-box'],
+];
 
 const getItemBackgroundValue = (backgroundType, classicColor, gradientColor, customGradientSwitcher, customGradientInputValue, fallbackValue) => {
 	if (backgroundType === 'gradient') {
@@ -45,10 +51,36 @@ export default function StackCardItemEdit({ attributes, isSelected, clientId }) 
 		normalBackground
 	);
 
+	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
+	const autoRestoreAttemptedRef = useRef(false);
+
 	const hasInnerBlocks = useSelect(
 		(select) => (select(blockEditorStore).getBlocks(clientId) || []).length > 0,
 		[clientId]
 	);
+
+	useEffect(() => {
+		if (hasInnerBlocks) {
+			autoRestoreAttemptedRef.current = false;
+			return;
+		}
+
+		if (autoRestoreAttemptedRef.current) {
+			return;
+		}
+
+		autoRestoreAttemptedRef.current = true;
+
+		// Attempt a single recovery when the item becomes empty.
+		// If insertion fails for any reason, don't retry endlessly.
+		replaceInnerBlocks(
+			clientId,
+			[
+				createBlock('frontis-blocks/info-box'),
+			],
+			false
+		);
+	}, [clientId, hasInnerBlocks, replaceInnerBlocks]);
 
 	const blockProps = useBlockProps({
 		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
@@ -65,6 +97,8 @@ export default function StackCardItemEdit({ attributes, isSelected, clientId }) 
 			className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
 		},
 		{
+			template: DEFAULT_CARD_ITEM_TEMPLATE,
+			templateLock: false,
 			renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
 		}
 	);
