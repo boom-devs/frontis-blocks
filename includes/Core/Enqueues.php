@@ -117,8 +117,15 @@ class Enqueues
 
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
+        $current_post = get_post(get_the_ID());
+        $current_page_name = $current_post ? $current_post->post_name : '';
+        $current_page_css_path = $current_page_name
+            ? $this->upload_dir['basedir'] . '/frontis-blocks/' . $current_page_name . '/' . $current_page_name . '.min.css'
+            : '';
 
-        $page_name = $frontis_used ? get_post(get_the_ID())->post_name : $page_name;
+        $page_name = ($frontis_used || ($current_page_css_path && file_exists($current_page_css_path))) && $current_page_name
+            ? $current_page_name
+            : $page_name;
         $frontend_dir = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
         $frontend_url = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
 
@@ -157,7 +164,14 @@ class Enqueues
     {
         $page_name = $this->get_page_template_name();
         $frontis_used = get_post_meta(get_the_ID(), 'frontis_blocks_used', true);
-        $page_name = $frontis_used ? get_post(get_the_ID())->post_name : $page_name;
+        $current_post = get_post(get_the_ID());
+        $current_page_name = $current_post ? $current_post->post_name : '';
+        $current_page_js_path = $current_page_name
+            ? $this->upload_dir['basedir'] . '/frontis-blocks/' . $current_page_name . '/' . $current_page_name . '.js'
+            : '';
+        $page_name = ($frontis_used || ($current_page_js_path && file_exists($current_page_js_path))) && $current_page_name
+            ? $current_page_name
+            : $page_name;
         $frontend_dir_page_js = $this->upload_dir['basedir'] . '/frontis-blocks/' . $page_name . '/';
         $frontend_url_page_js = $this->upload_dir['baseurl'] . '/frontis-blocks/' . $page_name . '/';
         $file_system_path_page_js = $frontend_dir_page_js . $page_name . '.js';
