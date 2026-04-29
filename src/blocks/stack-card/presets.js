@@ -15,7 +15,154 @@ const mapPresetAttributes = (presetKey) =>
 */
 export const presetStyles = Object.freeze(
     presetKeys.reduce((accumulator, presetKey) => {
-        accumulator[presetKey] = {};
+        accumulator[presetKey] = presetKey === 'stack-top' ? {
+            stackCardsOffsetTop: {
+                Desktop: '100',
+                Tablet: '80',
+                Mobile: '60',
+            },
+            stackCardsOffsetTopUnits: {
+                Desktop: 'px',
+                Tablet: 'px',
+                Mobile: 'px',
+            },
+            stackCardsItemOffsetTopSwitcher: true,
+            stackCardsItemOffsetTop: {
+                Desktop: {
+                    1: '100',
+                    2: '124',
+                    3: '148',
+                },
+                Tablet: {
+                    1: '80',
+                    2: '100',
+                    3: '120',
+                },
+                Mobile: {
+                    1: '60',
+                    2: '75',
+                    3: '90',
+                },
+            },
+            stackCardsItemScale: {
+                Desktop: {
+                    1: '0.85',
+                    2: '0.90',
+                    3: '0.95',
+                },
+                Tablet: {
+                    1: '0.85',
+                    2: '0.90',
+                    3: '0.95',
+                },
+                Mobile: {
+                    1: '0.85',
+                    2: '0.90',
+                    3: '0.95',
+                },
+            },
+        } : presetKey === 'stack-left' ? {
+            
+            stackCardsPresetTwoCardWidth: {
+                Desktop: '850',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetTwoCardWidthUnits: {
+                Desktop: 'px',
+                Tablet: 'px',
+                Mobile: 'px',
+            },
+            stackCardsPresetTwoLeftOffsetStep: {
+                Desktop: '20',
+                Tablet: '0',
+                Mobile: '0',
+            },
+            stackCardsPresetThreeAnimationSpeed: {
+                Desktop: '0.65',
+                Tablet: '0.65',
+                Mobile: '0.65',
+            },
+            stackCardsPresetTwoOutDistance: {
+                Desktop: '0',
+                Tablet: '0',
+                Mobile: '0',
+            },
+            stackCardsPresetTwoMinScale: {
+                Desktop: '0.84',
+                Tablet: '',
+                Mobile: '',  
+            },
+            stackCardsPresetTwoScaleStep: {
+                Desktop: '0.06',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetTwoScaleYStep: {
+                Desktop: '0.1',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetTwoOpacityStep: {
+                Desktop: '0.1',
+                Tablet: '',
+                Mobile: '',
+            },
+        } : presetKey === 'stack-right' ? {
+            stackCardsPresetThreeItemWidth: {
+                Desktop: '800',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetThreeFrameWidth: {
+                Desktop: '850',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetThreeFrameHeight: {
+                Desktop: '328',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetThreeAnimationSpeed: {
+                Desktop: '0.65',
+                Tablet: '0',
+                Mobile: '0',
+            },
+            stackCardsPresetThreeKeyboardNavigation: false,
+        } : presetKey === 'stack-over' ? {
+            stackCardsPresetFourCardWidth: {
+                Desktop: '850',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetFourAnimationSpeed: {
+                Desktop: '0.65',
+                Tablet: '0',
+                Mobile: '0',
+            },
+            stackCardsPresetFourOutDistance: {
+                Desktop: '0',
+                Tablet: '0',
+                Mobile: '0',
+            },
+            stackCardsPresetFourMinScale: {
+                Desktop: '0.92',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetFourScaleStep: {
+                Desktop: '0.04',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetFourScaleYStep: {
+                Desktop: '0.1',
+                Tablet: '',
+                Mobile: '',
+            },
+            stackCardsPresetFourKeyboardNavigation: false,
+        } : {};
         return accumulator;
     }, {})
 );
