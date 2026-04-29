@@ -739,9 +739,8 @@ class AssetsGenerator
 			$combinedHeadingStyles = '';
 
 			// Process global properties for each element
-
-			$array_keys = array_keys($typography_data);
-			if ($typography_data) {
+			if (is_array($typography_data)) {
+				$array_keys = array_keys($typography_data);
 				foreach ($array_keys as $key) {
 					if (!isset($typography_data[$key]))
 						continue;
