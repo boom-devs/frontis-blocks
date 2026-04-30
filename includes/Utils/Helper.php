@@ -813,6 +813,7 @@ class Helper
             // Check if any of the terms exist in the 'p' parameter
             $contains_template_terms = (
                 strpos($param_p, 'wp_block') !== false ||
+                strpos($param_p, 'wp_template') !== false ||
                 strpos($param_p, 'wp_template_part') !== false
             );
         }
@@ -1216,10 +1217,27 @@ class Helper
         $template_contents = wp_cache_get($cache_key, 'frontis_blocks');
 
         if (false === $template_contents) {
+            $template_contents = [];
+            $stylesheet = function_exists('get_stylesheet') ? get_stylesheet() : '';
+
+            if ($stylesheet && function_exists('get_block_template')) {
+                $block_template = get_block_template($stylesheet . '//' . $post_name, 'wp_template');
+
+                if ($block_template && !empty($block_template->content)) {
+                    $template_contents[] = (object) [
+                        'ID' => isset($block_template->wp_id) ? (int) $block_template->wp_id : 0,
+                        'post_type' => 'wp_template',
+                        'post_name' => $post_name,
+                        'post_content' => (string) $block_template->content,
+                    ];
+                }
+            }
+
             $query = $wpdb->prepare(
                 "SELECT
                     ID,
                     post_type,
+                    post_name,
                     post_content
                 FROM
                     {$wpdb->posts}
@@ -1232,8 +1250,11 @@ class Helper
                 $post_name
             );
 
-            // Execute the query
-            $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            if (empty($template_contents)) {
+                // Execute the query
+                $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            }
+
             wp_cache_set($cache_key, $template_contents, 'frontis_blocks', 300);
         }
 
