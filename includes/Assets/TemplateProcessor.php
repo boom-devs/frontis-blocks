@@ -28,52 +28,33 @@ class TemplateProcessor
             return '';
         }
 
-        // Step 1: Detect and replace wp:block with ref content
-        preg_match_all('/<!--\s*wp:block\s*{"ref"\s*:\s*(\d+)\}\s*\/-->/', $template_content, $block_matches);
-        $pattern_ids = $block_matches[1] ?? [];
-
-        if (!empty($pattern_ids)) {
-            foreach ($pattern_ids as $index => $pattern_id) {
-                $pattern_post = get_post((int) $pattern_id);
-                if ($pattern_post && $pattern_post->post_type === 'wp_block') {
-                    // Replace wp:block with its post_content
-                    $template_content = str_replace(
-                        $block_matches[0][$index],
-                        (string) $pattern_post->post_content,
-                        $template_content
-                    );
-                }
-            }
-        }
+        $template_content = $this->resolve_synced_patterns($template_content);
 
         // Step 2: Detect wp:template-part and extract slugs
         $pattern = '/<!--\s*wp:template-part\s*{(.*?)}\s*\/-->/s';
-        $index_to_slug = [];
+        $index_to_attrs = [];
 
         if (preg_match_all($pattern, $template_content, $template_part_matches)) {
             foreach ($template_part_matches[1] as $i => $attributes) {
-                // Minimal: tolerate spaces -> "slug" : "..."
-                if (preg_match('/"slug"\s*:\s*"([^"]+)"/', $attributes, $slug_match)) {
-                    $index_to_slug[$i] = $slug_match[1];
+                $attrs = $this->decode_template_part_attributes($attributes);
+
+                if (!empty($attrs['slug'])) {
+                    $index_to_attrs[$i] = $attrs;
                 }
             }
         }
 
         // Step 3: Replace wp:template-part with their post_content (index-aligned)
-        if (!empty($index_to_slug)) {
-            foreach ($index_to_slug as $i => $slug) {
-                $args = [
-                    'name' => sanitize_title($slug),
-                    'post_type' => 'wp_template_part',
-                    'post_status' => 'publish',
-                    'numberposts' => 1
-                ];
-                $template_part = get_posts($args);
+        if (!empty($index_to_attrs)) {
+            foreach ($index_to_attrs as $i => $attrs) {
+                $template_part_content = $this->get_template_part_content($attrs);
 
-                if (!empty($template_part) && isset($template_part[0]->post_content)) {
+                if ($template_part_content !== '') {
+                    $template_part_content = $this->resolve_synced_patterns($template_part_content);
+
                     $template_content = str_replace(
                         $template_part_matches[0][$i],
-                        (string) $template_part[0]->post_content,
+                        $template_part_content,
                         $template_content
                     );
                 }
@@ -139,5 +120,129 @@ class TemplateProcessor
         }
 
         return $template_content;
+    }
+
+    public function get_synced_pattern_ids($template_content)
+    {
+        $template_content = (string) $template_content;
+        if ($template_content === '') {
+            return [];
+        }
+
+        preg_match_all('/<!--\s*wp:block\s*{.*?"ref"\s*:\s*(\d+).*?}\s*\/-->/', $template_content, $block_matches);
+
+        return array_values(array_unique(array_map('absint', $block_matches[1] ?? [])));
+    }
+
+    private function resolve_synced_patterns($template_content, $seen_pattern_ids = [])
+    {
+        $pattern_ids = $this->get_synced_pattern_ids($template_content);
+
+        if (empty($pattern_ids)) {
+            return $template_content;
+        }
+
+        preg_match_all('/<!--\s*wp:block\s*{.*?"ref"\s*:\s*(\d+).*?}\s*\/-->/', $template_content, $block_matches);
+
+        foreach (($block_matches[1] ?? []) as $index => $pattern_id) {
+            $pattern_id = absint($pattern_id);
+            if (!$pattern_id || in_array($pattern_id, $seen_pattern_ids, true)) {
+                continue;
+            }
+
+            $pattern_post = get_post($pattern_id);
+            if (!$pattern_post || $pattern_post->post_type !== 'wp_block') {
+                continue;
+            }
+
+            $pattern_content = $this->resolve_synced_patterns(
+                (string) $pattern_post->post_content,
+                array_merge($seen_pattern_ids, [$pattern_id])
+            );
+
+            $template_content = str_replace(
+                $block_matches[0][$index],
+                $pattern_content,
+                $template_content
+            );
+        }
+
+        return $template_content;
+    }
+
+    private function decode_template_part_attributes($attributes)
+    {
+        $decoded = json_decode('{' . trim((string) $attributes) . '}', true);
+
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+
+        $fallback = [];
+
+        if (preg_match('/"slug"\s*:\s*"([^"]+)"/', $attributes, $slug_match)) {
+            $fallback['slug'] = $slug_match[1];
+        }
+
+        if (preg_match('/"theme"\s*:\s*"([^"]+)"/', $attributes, $theme_match)) {
+            $fallback['theme'] = $theme_match[1];
+        }
+
+        return $fallback;
+    }
+
+    private function get_template_part_content($attrs)
+    {
+        $slug = sanitize_title($attrs['slug'] ?? '');
+        if ($slug === '') {
+            return '';
+        }
+
+        $theme = !empty($attrs['theme']) ? sanitize_key($attrs['theme']) : get_stylesheet();
+
+        if (function_exists('get_block_template')) {
+            $template_part = get_block_template($theme . '//' . $slug, 'wp_template_part');
+
+            if ($template_part && isset($template_part->content) && $template_part->content !== '') {
+                return (string) $template_part->content;
+            }
+        }
+
+        $candidate_names = array_unique([
+            $slug,
+            $theme . '//' . $slug,
+        ]);
+
+        foreach ($candidate_names as $candidate_name) {
+            $template_part = get_posts([
+                'name' => $candidate_name,
+                'post_type' => 'wp_template_part',
+                'post_status' => ['publish', 'draft', 'auto-draft'],
+                'numberposts' => 1,
+            ]);
+
+            if (!empty($template_part) && isset($template_part[0]->post_content)) {
+                return (string) $template_part[0]->post_content;
+            }
+        }
+
+        global $wpdb;
+
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+        $template_part_content = $wpdb->get_var(
+            $wpdb->prepare(
+                "SELECT post_content
+                FROM {$wpdb->posts}
+                WHERE post_type = 'wp_template_part'
+                AND post_status IN ('publish', 'draft', 'auto-draft')
+                AND (post_name = %s OR post_name = %s)
+                ORDER BY post_modified DESC
+                LIMIT 1",
+                $slug,
+                $theme . '//' . $slug
+            )
+        );
+
+        return $template_part_content ? (string) $template_part_content : '';
     }
 }
