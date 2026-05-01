@@ -694,6 +694,7 @@ class TemplateLibrary extends AjaxBase
                             'post_content' => wp_slash($content),
                             'post_title'   => $title,
                         ]);
+                        wp_set_object_terms($existing->ID, get_stylesheet(), 'wp_theme');
                         $navigation_mapping[$old_id] = $existing->ID;
                         $stats['nav_skipped']++;
                     } else {
@@ -705,6 +706,7 @@ class TemplateLibrary extends AjaxBase
                             'post_type'    => 'wp_navigation',
                         ]);
                         if (!is_wp_error($new_id)) {
+                            wp_set_object_terms($new_id, get_stylesheet(), 'wp_theme');
                             $navigation_mapping[$old_id] = $new_id;
                             $stats['nav_created']++;
                         }
@@ -727,6 +729,7 @@ class TemplateLibrary extends AjaxBase
                 }
                 $content = $this->replace_demo_urls($content, $site_url);
                 $content = $this->replace_navigation_refs($content, $navigation_mapping);
+                $content = $this->replace_theme_refs($content);
 
                 $existing = get_posts([
                     'post_type'      => 'wp_template_part',
@@ -748,6 +751,7 @@ class TemplateLibrary extends AjaxBase
                         'post_content' => wp_slash($content),
                         'post_title'   => $title,
                     ]);
+                    wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
                     $stats['part_skipped']++;
                 } else {
                     $id = wp_insert_post([
@@ -886,6 +890,7 @@ class TemplateLibrary extends AjaxBase
 
             // Replace navigation refs
             $content = $this->replace_navigation_refs($content, $mapping);
+            $content = $this->replace_theme_refs($content);
 
             error_log("FB Import: Template $title, slug $slug, length: " . strlen($content));
 
@@ -909,6 +914,7 @@ class TemplateLibrary extends AjaxBase
                     'post_title'   => $title,
                 ]);
                 if ($update_res) {
+                    wp_set_object_terms($existing[0], get_stylesheet(), 'wp_theme');
                     $skipped++;
                 } else {
                     error_log("FB Import Error: Failed to update template $slug (ID: {$existing[0]})");
@@ -1128,6 +1134,16 @@ class TemplateLibrary extends AjaxBase
         $content = preg_replace('/,\s*\\\\}/', '\\}', $content);
 
         return $content;
+    }
+
+    /**
+     * Replace theme name in block attributes.
+     */
+    private function replace_theme_refs( string $content ): string
+    {
+        $theme = get_stylesheet();
+        // Replace theme name in attributes like "theme":"twentytwentyfive" or \"theme\":\"twentytwentyfive\"
+        return preg_replace( '/((\\\\*)"theme"(\\\\*)\s*:\s*(\\\\*)")[^"\\\\]*(\\\\*")/', '${1}' . $theme . '${5}', $content );
     }
 
     /**
