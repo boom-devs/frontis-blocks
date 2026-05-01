@@ -782,18 +782,12 @@ const FullSiteImportSettingConfig = ({
   };
 
   // 1. Header + Footer + Auto Navigation Import
-  const handleImportHeadersFooters = async (headers = [], footers = [], uploadsUpdatedOverride = null) => {
+  const handleImportHeadersFooters = async (uploadsUpdatedOverride = null) => {
     const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
-    if ((!headers || headers.length === 0) && (!footers || footers.length === 0)) {
-      console.log("No headers or footers to import.");
-      return { success: true, mapping: {}, stats: { nav_created: 0, part_created: 0 } };
-    }
 
     const form = new FormData();
     form.append('action', 'fb_import_headers_footers');
     form.append('security', nonce);
-    form.append('headers', JSON.stringify(headers));
-    form.append('footers', JSON.stringify(footers));
     form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', template?.preview_url || window.location.origin);
 
@@ -827,17 +821,18 @@ const FullSiteImportSettingConfig = ({
   };
 
   // 2. Templates Import (with navigation mapping)
+  // Server loads from {site_url}/wp-json/gb/v1/templates when the POST list is empty (same pattern as pages_import).
   const handleImportTemplates = async (templates = [], navigationMapping = {}, uploadsUpdatedOverride = null) => {
     const isUploadsUpdated = uploadsUpdatedOverride !== null ? uploadsUpdatedOverride : uploadsUpdated;
-    if (!templates || templates.length === 0) {
-      console.log("No templates to import.");
-      return { success: true, created: 0, skipped: templates.length };
+    const list = Array.isArray(templates) ? templates : [];
+    if (list.length === 0) {
+      console.log("No templates in site payload — server will fetch from demo /wp-json/gb/v1/templates when site_url is set.");
     }
 
     const form = new FormData();
     form.append('action', 'fb_import_templates');
     form.append('security', nonce);
-    form.append('templates', JSON.stringify(templates));
+    form.append('templates', JSON.stringify(list));
     form.append('mapping', JSON.stringify(navigationMapping));
     form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', template?.preview_url || window.location.origin);
@@ -989,7 +984,7 @@ const FullSiteImportSettingConfig = ({
       let navigationMapping = {};
 
       // Step 5: Import Headers + Footers (with auto navigation creation)
-      const hfResult = await handleImportHeadersFooters(headers, footers, isUploadsSuccessful);
+      const hfResult = await handleImportHeadersFooters(isUploadsSuccessful);
 
       if (hfResult.success) {
         navigationMapping = hfResult.mapping || {};

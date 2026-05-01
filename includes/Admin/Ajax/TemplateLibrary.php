@@ -527,7 +527,7 @@ class TemplateLibrary extends AjaxBase
             wp_send_json_error(['message' => 'Post title is required']);
         }
 
-         // Dynamic Remote URL based on site_url and slug
+        // Dynamic Remote URL based on site_url and slug
         $remote_url = untrailingslashit($site_url) . '/wp-json/gb/v1/content/' . $slug;
 
         // Log the remote URL for debugging
@@ -630,34 +630,28 @@ class TemplateLibrary extends AjaxBase
     {
         $this->check_permission();
 
-        /*
-         * Headers/footers arrive as JSON strings in $_POST.
-         * wp_unslash() first, then json_decode — the decoded content strings
-         * inside each part are already clean (json_decode handles \uXXXX).
-         * Apply wp_slash() only at insert time, matching DemoContentImporter.
-         */
-        $headers_raw = isset($_POST['headers']) ? wp_unslash($_POST['headers']) : '[]';
-        $footers_raw = isset($_POST['footers']) ? wp_unslash($_POST['footers']) : '[]';
-
-        $headers = json_decode($headers_raw, true) ?: [];
-        $footers = json_decode($footers_raw, true) ?: [];
-
-        if (!is_array($headers)) $headers = [];
-        if (!is_array($footers)) $footers = [];
-
-        $header_parts = [];
-        foreach ($headers as $h) {
-            $header_parts[] = array_merge($h, ['area' => 'header']);
-        }
-        $footer_parts = [];
-        foreach ($footers as $f) {
-            $footer_parts[] = array_merge($f, ['area' => 'footer']);
-        }
-        $all_parts = array_merge($header_parts, $footer_parts);
-
+        $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
         $uploads_updated = isset($_POST['uploads_updated'])
             ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
-        $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
+
+        if (empty($site_url)) {
+            wp_send_json_error(['message' => 'Site URL is required']);
+        }
+
+        $remote_url = untrailingslashit($site_url) . '/wp-json/gb/v1/layout';
+        $response   = wp_remote_get($remote_url, ['timeout' => 90]);
+
+        if (is_wp_error($response)) {
+            wp_send_json_error(['message' => 'Import failed: ' . $response->get_error_message()]);
+        }
+
+        $payload = json_decode(wp_remote_retrieve_body($response), true);
+        if (!$payload || !is_array($payload)) {
+            wp_send_json_error(['message' => 'Invalid JSON payload from ' . $remote_url]);
+        }
+
+        $headers = $payload['header'] ?? [];
+        $footers = $payload['footer'] ?? [];
 
         $navigation_mapping = [];
         $stats = [
@@ -668,133 +662,121 @@ class TemplateLibrary extends AjaxBase
             'errors'       => [],
         ];
 
+        $parts_to_process = [
+            'header' => $headers,
+            'footer' => $footers,
+        ];
+
         // ── Step 1: Navigations ───────────────────────────────────────────────
-        foreach ($all_parts as $part) {
-            if (empty($part['navigations']) || !is_array($part['navigations'])) continue;
+        foreach ($parts_to_process as $items) {
+            foreach ($items as $item) {
+                if (empty($item['navigations']) || !is_array($item['navigations'])) continue;
 
-            foreach ($part['navigations'] as $nav) {
-                $old_id  = $nav['id']      ?? null;
-                $content = $nav['content'] ?? '';
+                foreach ($item['navigations'] as $nav) {
+                    $old_id  = $nav['id']      ?? null;
+                    $content = $nav['content'] ?? '';
+                    $title   = $nav['title']   ?? ('Imported Nav ' . $old_id);
 
-                if (!$old_id || empty($content)) continue;
+                    if (!$old_id || empty($content)) continue;
 
-                // Content from json_decode is already clean — only URL rewrites then wp_slash
-                if ($uploads_updated && !empty($site_url)) {
-                    $content = $this->replace_media_urls($content, trailingslashit($site_url));
-                }
-                $content = $this->replace_demo_urls($content, $site_url);
-                $content = $this->clean_navigation_block_content($content);
+                    if ($uploads_updated && !empty($site_url)) {
+                        $content = $this->replace_media_urls($content, trailingslashit($site_url));
+                    }
+                    $content = $this->replace_demo_urls($content, $site_url);
+                    $content = $this->clean_navigation_block_content($content);
 
-                $slug     = 'imported-nav-' . $old_id;
-                $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
+                    $slug     = 'imported-nav-' . $old_id;
+                    $existing = get_page_by_path($slug, OBJECT, 'wp_navigation');
 
-                if ($existing) {
-                    wp_update_post([
-                        'ID'           => $existing->ID,
-                        'post_content' => wp_slash($content), // ← DemoContentImporter pattern
-                        'post_title'   => 'Imported Nav ' . $old_id,
-                    ]);
-                    $navigation_mapping[$old_id] = $existing->ID;
-                    $stats['nav_skipped']++;
-                    continue;
-                }
-
-                $new_id = wp_insert_post([
-                    'post_title'   => 'Imported Nav ' . $old_id,
-                    'post_name'    => $slug,
-                    'post_content' => wp_slash($content), // ← DemoContentImporter pattern
-                    'post_status'  => 'publish',
-                    'post_type'    => 'wp_navigation',
-                ]);
-
-                if (!is_wp_error($new_id)) {
-                    $navigation_mapping[$old_id] = $new_id;
-                    $stats['nav_created']++;
+                    if ($existing) {
+                        wp_update_post([
+                            'ID'           => $existing->ID,
+                            'post_content' => wp_slash($content),
+                            'post_title'   => $title,
+                        ]);
+                        $navigation_mapping[$old_id] = $existing->ID;
+                        $stats['nav_skipped']++;
+                    } else {
+                        $new_id = wp_insert_post([
+                            'post_title'   => $title,
+                            'post_name'    => $slug,
+                            'post_content' => wp_slash($content),
+                            'post_status'  => 'publish',
+                            'post_type'    => 'wp_navigation',
+                        ]);
+                        if (!is_wp_error($new_id)) {
+                            $navigation_mapping[$old_id] = $new_id;
+                            $stats['nav_created']++;
+                        }
+                    }
                 }
             }
         }
 
-        // ── Step 2: Header/Footer template parts ─────────────────────────────
-        foreach ($all_parts as $part) {
-            $slug    = $part['slug']    ?? '';
-            $title   = $part['title']   ?? $slug;
-            $content = $part['content'] ?? '';
-            $area    = $part['area']    ?? 'uncategorized';
+        // ── Step 2: Template Parts ───────────────────────────────────────────
+        foreach ($parts_to_process as $area => $items) {
+            foreach ($items as $item) {
+                $slug    = $item['slug']    ?? '';
+                $title   = $item['title']   ?? $slug;
+                $content = $item['content'] ?? '';
 
-            if (empty($slug)) continue;
+                if (empty($slug)) continue;
 
-            // Content from json_decode — clean string, only rewrite URLs then wp_slash
-            if ($uploads_updated && !empty($site_url)) {
-                $content = $this->replace_media_urls($content, trailingslashit($site_url));
-            }
-            $content = $this->replace_demo_urls($content, $site_url);
-
-            foreach ($navigation_mapping as $old => $new) {
-                $old_str = preg_quote((string) $old, '/');
-                $content = preg_replace('/("ref"\s*:\s*)' . $old_str . '\b/', '${1}' . $new, $content);
-                $content = preg_replace('/(\\\\"ref\\\\"\s*:\s*)' . $old_str . '\b/', '${1}' . $new, $content);
-            }
-
-            error_log("FB Import: H/F part $title, length: " . strlen($content));
-
-            $existing = get_posts([
-                'post_type'      => 'wp_template_part',
-                'name'           => $slug,
-                'post_status'    => 'publish',
-                'posts_per_page' => 1,
-                'tax_query'      => [[
-                    'taxonomy' => 'wp_theme',
-                    'field'    => 'slug',
-                    'terms'    => get_stylesheet(),
-                ]],
-                'fields' => 'ids',
-            ]);
-
-            if (!empty($existing)) {
-                $id = $existing[0];
-                wp_update_post([
-                    'ID'           => $id,
-                    'post_content' => wp_slash($content), // ← DemoContentImporter pattern
-                    'post_title'   => $title,
-                ]);
-                $stats['part_skipped']++;
-            } else {
-                $id = wp_insert_post([
-                    'post_title'   => $title,
-                    'post_name'    => $slug,
-                    'post_content' => wp_slash($content), // ← DemoContentImporter pattern
-                    'post_status'  => 'publish',
-                    'post_type'    => 'wp_template_part',
-                ]);
-                if (!is_wp_error($id)) {
-                    wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
-                    wp_set_object_terms($id, $area, 'wp_template_part_area');
-                    $stats['part_created']++;
-                } else {
-                    $stats['errors'][] = $slug;
+                if ($uploads_updated && !empty($site_url)) {
+                    $content = $this->replace_media_urls($content, trailingslashit($site_url));
                 }
-            }
+                $content = $this->replace_demo_urls($content, $site_url);
+                $content = $this->replace_navigation_refs($content, $navigation_mapping);
 
-            // --- Site Logo Detection (Header only) ---
-            if (!is_wp_error($id) && $id > 0 && $_POST['headers']) {
-                $logo_id = 0;
-                // Try to find the site-logo block's ID
-                if (preg_match('/<!--\s+wp:site-logo\s+({.*?})\s+\/-->/s', $content, $logo_matches)) {
-                    $logo_attrs = json_decode($logo_matches[1], true);
-                    if (!empty($logo_attrs['id'])) {
-                        $logo_id = (int) $logo_attrs['id'];
+                $existing = get_posts([
+                    'post_type'      => 'wp_template_part',
+                    'name'           => $slug,
+                    'post_status'    => 'any',
+                    'posts_per_page' => 1,
+                    'tax_query'      => [[
+                        'taxonomy' => 'wp_theme',
+                        'field'    => 'slug',
+                        'terms'    => get_stylesheet(),
+                    ]],
+                    'fields' => 'ids',
+                ]);
+
+                if (!empty($existing)) {
+                    $id = $existing[0];
+                    wp_update_post([
+                        'ID'           => $id,
+                        'post_content' => wp_slash($content),
+                        'post_title'   => $title,
+                    ]);
+                    $stats['part_skipped']++;
+                } else {
+                    $id = wp_insert_post([
+                        'post_title'   => $title,
+                        'post_name'    => $slug,
+                        'post_content' => wp_slash($content),
+                        'post_status'  => 'publish',
+                        'post_type'    => 'wp_template_part',
+                    ]);
+                    if (!is_wp_error($id)) {
+                        wp_set_object_terms($id, get_stylesheet(), 'wp_theme');
+                        wp_set_object_terms($id, $area, 'wp_template_part_area');
+                        $stats['part_created']++;
+                    } else {
+                        $stats['errors'][] = $slug;
                     }
                 }
-                
-                // Fallback: Find the first image and resolve its local attachment ID
-                if (!$logo_id && preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $img_matches)) {
-                    $logo_url = $img_matches[1];
-                    $logo_id = attachment_url_to_postid($logo_url);
-                }
 
-                if ($logo_id) {
-                    set_theme_mod('custom_logo', $logo_id);
-                    error_log("FB Import: Detected and set site logo ID: $logo_id from header part: $title");
+                // Logo Detection
+                if (!is_wp_error($id) && $id > 0) {
+                    $logo_id = 0;
+                    if (preg_match('/<!--\s+wp:site-logo\s+({.*?})\s+\/-->/s', $content, $logo_matches)) {
+                        $logo_attrs = json_decode($logo_matches[1], true);
+                        if (!empty($logo_attrs['id'])) $logo_id = (int) $logo_attrs['id'];
+                    }
+                    if (!$logo_id && preg_match('/<img[^>]+src=["\']([^"\']+)["\'][^>]*>/i', $content, $img_matches)) {
+                        $logo_id = attachment_url_to_postid($img_matches[1]);
+                    }
+                    if ($logo_id) set_theme_mod('custom_logo', $logo_id);
                 }
             }
         }
@@ -806,26 +788,83 @@ class TemplateLibrary extends AjaxBase
         ]);
     }
 
+    private function replace_navigation_refs( string $content, array $mapping ): string {
+        foreach ( $mapping as $old => $new ) {
+            $old_str = preg_quote( (string) $old, '/' );
+            $content = preg_replace( '/((\\\\*)"ref"(\\\\*)\s*:\s*)' . $old_str . '\b/', '${1}' . $new, $content );
+        }
+        return $content;
+    }
+
     // =========================================================================
-    // TEMPLATES IMPORT  — same pipeline
+    // TEMPLATES IMPORT  — same pipeline as pages_import (optional remote JSON)
     // =========================================================================
+
+    /**
+     * Load templates from remote demo: {site_url}/wp-json/gb/v1/templates
+     */
+    private function fetch_remote_templates( string $site_url ): array {
+        if ( empty( $site_url ) ) {
+            return [];
+        }
+
+        $remote_url = untrailingslashit( $site_url ) . '/wp-json/gb/v1/templates';
+
+        $response = wp_remote_get(
+            $remote_url,
+            [
+                'timeout' => 90,
+                'headers' => [ 'Accept' => 'application/json' ],
+            ]
+        );
+
+        if ( is_wp_error( $response ) ) {
+            error_log( 'FB Import: Templates REST failed: ' . $response->get_error_message() );
+            return [];
+        }
+
+        $status = wp_remote_retrieve_response_code( $response );
+        $body   = wp_remote_retrieve_body( $response );
+
+        if ( 200 !== $status || empty( $body ) ) {
+            error_log( 'FB Import: Templates REST HTTP ' . $status . ' for ' . $remote_url );
+            return [];
+        }
+
+        $payload = json_decode( $body, true );
+
+        if ( JSON_ERROR_NONE !== json_last_error() || ! is_array( $payload ) ) {
+            error_log( 'FB Import: Invalid JSON from templates REST: ' . $remote_url );
+            return [];
+        }
+
+        if ( empty( $payload['success'] ) || empty( $payload['templates'] ) || ! is_array( $payload['templates'] ) ) {
+            return [];
+        }
+
+        return $payload['templates'];
+    }
 
     public function import_templates()
     {
         $this->check_permission();
 
         /*
-         * Same pattern as import_headers_footers:
-         * wp_unslash → json_decode → content is clean → URL rewrites → wp_slash at insert.
+         * Prefer remote list (same idea as pages_import hitting gb/v1/content/{slug}):
+         * GET {site_url}/wp-json/gb/v1/templates → templates[].content → wp_template post_content.
+         * Fallback: templates JSON in POST (portal / legacy).
          */
-        $templates_raw = isset($_POST['templates']) ? wp_unslash($_POST['templates']) : '[]';
         $mapping_raw   = isset($_POST['mapping'])   ? wp_unslash($_POST['mapping'])   : '[]';
 
-        $templates       = json_decode($templates_raw, true) ?: [];
         $mapping         = json_decode($mapping_raw,   true) ?: [];
         $uploads_updated = isset($_POST['uploads_updated'])
             ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
         $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
+
+        if (!is_array($mapping)) $mapping = [];
+
+        // When the portal sends no templates, load from demo REST (same pattern as pages_import).
+        $templates = $this->fetch_remote_templates($site_url);
 
         if (!is_array($templates)) $templates = [];
 
@@ -845,13 +884,8 @@ class TemplateLibrary extends AjaxBase
             }
             $content = $this->replace_demo_urls($content, $site_url);
 
-            foreach ($mapping as $old => $new) {
-                $content = preg_replace(
-                    '/("ref":\s*)' . preg_quote((string) $old, '/') . '\b/',
-                    '$1' . $new,
-                    $content
-                );
-            }
+            // Replace navigation refs
+            $content = $this->replace_navigation_refs($content, $mapping);
 
             error_log("FB Import: Template $title, slug $slug, length: " . strlen($content));
 
