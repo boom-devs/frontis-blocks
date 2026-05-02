@@ -571,9 +571,14 @@ class Helper
 
     public static function generate_css($styles, $container_css)
     {
+        if (!is_array($container_css)) {
+            return '';
+        }
+
         // Generate CSS for the block ID
         $css = array_map(
             function ($selector, $styles) {
+                $styles = (array) $styles;
                 $filtered_styles = implode("; ", array_map(
                     fn($key, $value) => (trim($value) !== "" && preg_match('/^\D+$/', $value) === 0) ? "$key: $value" : "",
                     array_keys($styles),
@@ -619,6 +624,9 @@ class Helper
      */
     public static function get_fonts_family($attributes)
     {
+        if (!is_array($attributes)) {
+            return [];
+        }
         $font_family_keys = preg_grep('/^(\w+)FontFamily/i', array_keys($attributes), 0);
         $font_data = [];
 
@@ -805,6 +813,7 @@ class Helper
             // Check if any of the terms exist in the 'p' parameter
             $contains_template_terms = (
                 strpos($param_p, 'wp_block') !== false ||
+                strpos($param_p, 'wp_template') !== false ||
                 strpos($param_p, 'wp_template_part') !== false
             );
         }
@@ -1208,10 +1217,27 @@ class Helper
         $template_contents = wp_cache_get($cache_key, 'frontis_blocks');
 
         if (false === $template_contents) {
+            $template_contents = [];
+            $stylesheet = function_exists('get_stylesheet') ? get_stylesheet() : '';
+
+            if ($stylesheet && function_exists('get_block_template')) {
+                $block_template = get_block_template($stylesheet . '//' . $post_name, 'wp_template');
+
+                if ($block_template && !empty($block_template->content)) {
+                    $template_contents[] = (object) [
+                        'ID' => isset($block_template->wp_id) ? (int) $block_template->wp_id : 0,
+                        'post_type' => 'wp_template',
+                        'post_name' => $post_name,
+                        'post_content' => (string) $block_template->content,
+                    ];
+                }
+            }
+
             $query = $wpdb->prepare(
                 "SELECT
                     ID,
                     post_type,
+                    post_name,
                     post_content
                 FROM
                     {$wpdb->posts}
@@ -1224,8 +1250,11 @@ class Helper
                 $post_name
             );
 
-            // Execute the query
-            $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            if (empty($template_contents)) {
+                // Execute the query
+                $template_contents = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+            }
+
             wp_cache_set($cache_key, $template_contents, 'frontis_blocks', 300);
         }
 
@@ -1374,7 +1403,7 @@ class Helper
      * Call this function when you need to manually clear cached data.
      * Caches are also automatically cleared on post save, term changes, and user updates.
      * 
-     * @since 1.2.1
+     * @since 1.2.2
      * @return void
      */
     /**
@@ -1383,7 +1412,7 @@ class Helper
      * Call this function when you need to manually clear cached data.
      * Caches are also automatically cleared on post save, term changes, and user updates.
      * 
-     * @since 1.2.1
+     * @since 1.2.2
      * @return void
      */
     public static function clear_frontis_caches()
