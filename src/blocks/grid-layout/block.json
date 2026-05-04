@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/grid-layout",
+	"version": "1.0.0",
+	"title": "Grid Layout Builder",
+	"category": "frontis-blocks",
+	"description": "Create an accessible Grid Layout Builder block with smooth switching and customizable content.",
+	"textdomain": "frontis-blocks",
+	"supports": {
+	  "html": false,
+	  "anchor": false,
+	  "customClassName": false,
+	  "customCSS": false,
+	  "align": ["wide", "full"]
+	},
+	"editorScript": [ "file:./index.js" ],
+	"editorStyle": [ "file:./index.css" ],
+	"style": [ "file:./style.css" ]
+}
