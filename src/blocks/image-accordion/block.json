@@ -1,0 +1,18 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/image-accordion",
+	"version": "1.0.0",
+	"title": "Image Accordion Carousel",
+	"category": "frontis-blocks",
+	"textdomain": "frontis-blocks",
+	"description": "A customizable image carousel block featuring a main image with clickable thumbnail selector for product galleries and image showcases.",
+	"example": {},
+	"supports": {
+		"anchor": false,
+		"align": ["wide", "full"],
+		"customClassName": false
+	},
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css"
+}
