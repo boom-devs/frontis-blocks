@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "@wordpress/element";
 import { ClipLoader } from "react-spinners";
 
 const statusIcons = {
@@ -49,6 +49,7 @@ const FullSiteImportModal = ({
   onRetry,
   isImportFailed = false,
 }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const listRef = useRef(null);
 
   // Auto scroll to running/ active step
@@ -62,6 +63,14 @@ const FullSiteImportModal = ({
     }
   }, [currentStep]);
 
+  const handleCloseClick = () => {
+    if (isImporting) {
+      setShowConfirmation(true);
+    } else {
+      onCloseModal();
+    }
+  };
+
   return (
     <div className="fb-fullsite-overlay">
       <div className="fb-fullsite-modal">
@@ -72,7 +81,7 @@ const FullSiteImportModal = ({
             <h2 className="fb-modal-title">Importing Full Site</h2>
             <p className="fb-modal-subtitle">Please wait while we complete the setup.</p>
           </div>
-          <button className="fb-close-btn" onClick={onCloseModal}>
+          <button className="fb-close-btn" onClick={handleCloseClick}>
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
               <path d="M8 23.75L6.25 22L13.25 15L6.25 8L8 6.25L15 13.25L22 6.25L23.75 8L16.75 15L23.75 22L22 23.75L15 16.75L8 23.75Z" fill="#3F3F3F"/>
             </svg>
@@ -138,6 +147,27 @@ const FullSiteImportModal = ({
           </div>
         )}
       </div>
+
+      {showConfirmation && (
+        <div className="fb-confirmation-overlay">
+          <div className="fb-confirmation-modal">
+            <div className="fb-confirmation-header">
+              <h3 className="fb-confirmation-title">Import is in progress</h3>
+              <p className="fb-confirmation-desc">
+                Closing this will stop the visual progress, but the import will continue in the background.
+              </p>
+            </div>
+            <div className="fb-confirmation-actions">
+              <button className="fb-btn fb-btn-primary" onClick={onCloseModal}>
+                Continue in Background
+              </button>
+              <button className="fb-btn fb-btn-secondary" onClick={() => setShowConfirmation(false)}>
+                Stay on Progress
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
