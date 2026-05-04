@@ -277,6 +277,18 @@ export default function Edit(props) {
 						min={0}
 						max={50}
 					/>
+
+					<RangeControl
+						label={__("Active Thumbnail Overlay", "frontis-blocks")}
+						value={parseInt(activeThumbOverlay)}
+						onChange={(value) =>
+							setAttributes({
+								activeThumbnailOverlay: value.toString(),
+							})
+						}
+						min={0}
+						max={10}
+					/>
 				</PanelBody>
 
 				<PanelBody
