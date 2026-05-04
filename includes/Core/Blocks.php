@@ -140,7 +140,8 @@ class Blocks
 			foreach ($blocks_list as $block) {
 				$slug = $block['slug'];
 				$complete = $block['complete'];
-				if (is_array($active_blocks) && !empty($active_blocks)) {
+				$is_child_block = isset($block['child']) && $block['child'] === 'true';
+				if (!$is_child_block && is_array($active_blocks) && !empty($active_blocks)) {
 					if (array_key_exists($slug, $active_blocks) && !$active_blocks[$slug]) {
 						continue;
 					}
