@@ -13,7 +13,7 @@ import deprecated from "./deprecated";
 
 registerBlockType(metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.advancedCountdown,
+	icon: FB_Block_Icons.countdown,
 	edit: Edit,
 	save,
 	deprecated,

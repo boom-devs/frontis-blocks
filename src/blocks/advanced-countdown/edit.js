@@ -144,54 +144,76 @@ export default function Edit({
 			)}
 
 			<div {...blockProps}>
-				<div
-					className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`}
-					id={countDownGlobalWraperID}
-					ref={panelRef}
-				>
-					{showDays && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time days`}>
-								{timeRemaining.days || 0}
-							</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelDay || __("Days", "frontis-blocks")}
-							</span>
-						</div>
-					)}
+				<div className={`fb-advanced-countdown-wrapper ${blockID}`}>
+					<div className={`fb-countdown-icon`}>
+						{/* You can replace this with an actual icon or image if desired */}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						/>
+					</div>
+					<div
+						className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`}
+						id={countDownGlobalWraperID}
+						ref={panelRef}
+					>
+						{showDays && (
+							<div className={`fb-count-down-item`}>
+								<span className={`fb-count-down-time days`}>
+									{timeRemaining.days || 0}
+								</span>
+								<span className={`fb-count-down-label`}>
+									{countDownLabelDay || __("Days", "frontis-blocks")}
+								</span>
+							</div>
+						)}
 
-					{showHours && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time hours`}>
-								{timeRemaining.hours || 0}
-							</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelHour || __("Hours", "frontis-blocks")}
-							</span>
-						</div>
-					)}
+						{showHours && (
+							<div className={`fb-count-down-item`}>
+								<span className={`fb-count-down-time hours`}>
+									{timeRemaining.hours || 0}
+								</span>
+								<span className={`fb-count-down-label`}>
+									{countDownLabelHour || __("Hours", "frontis-blocks")}
+								</span>
+							</div>
+						)}
 
-					{showMinutes && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time minutes`}>
-								{timeRemaining.minutes || 0}
-							</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelMinute || __("Minutes", "frontis-blocks")}
-							</span>
-						</div>
-					)}
+						{showMinutes && (
+							<div className={`fb-count-down-item`}>
+								<span className={`fb-count-down-time minutes`}>
+									{timeRemaining.minutes || 0}
+								</span>
+								<span className={`fb-count-down-label`}>
+									{countDownLabelMinute || __("Minutes", "frontis-blocks")}
+								</span>
+							</div>
+						)}
 
-					{showSeconds && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time seconds`}>
-								{timeRemaining.seconds || 0}
-							</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelSecond || __("Seconds", "frontis-blocks")}
-							</span>
-						</div>
-					)}
+						{showSeconds && (
+							<div className={`fb-count-down-item`}>
+								<span className={`fb-count-down-time seconds`}>
+									{timeRemaining.seconds || 0}
+								</span>
+								<span className={`fb-count-down-label`}>
+									{countDownLabelSecond || __("Seconds", "frontis-blocks")}
+								</span>
+							</div>
+						)}
+					</div>
+					{/* btn */}
+					<div className={`fb-countdown-button-wrapper`}>
+						<button className={`fb-countdown-button`}>
+							{__("Until Morning Digest", "frontis-blocks")}
+						</button>
+					</div>
 				</div>
 			</div>
 			<style>{blockStyle}</style>
