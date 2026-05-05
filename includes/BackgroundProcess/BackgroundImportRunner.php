@@ -146,6 +146,14 @@ class BackgroundImportRunner {
                 $state = array_merge($state, $result['merge']);
             }
 
+            if ( ($result['step_status'] ?? 'success') === 'running' ) {
+                // Step needs more time, just save and schedule again
+                $state['updated_at'] = current_time('mysql');
+                self::save_state($state);
+                self::schedule_next();
+                return;
+            }
+
             // Advance to next step
             $next_index = $step_index + 1;
             if ( $next_index < $state['total_steps'] ) {
@@ -213,7 +221,7 @@ class BackgroundImportRunner {
                 return $this->step_global_styles($state);
 
             case 'asset_generation':
-                return $this->step_asset_generation();
+                return $this->step_asset_generation($state);
 
             case 'finalize':
                 return $this->step_finalize($state);
@@ -384,14 +392,26 @@ class BackgroundImportRunner {
         return [ 'step_status' => 'success' ];
     }
 
-    private function step_asset_generation(): array {
-        if ( ! class_exists('\\FrontisBlocks\\Assets\\AssetsGenerator') ) {
+    private function step_asset_generation( array $state ): array {
+        if ( ! class_exists('\\FrontisBlocks\\Admin\\Ajax\\Settings') ) {
             return [ 'step_status' => 'skipped' ];
         }
 
         try {
-            $process = AssetsGenerationProcess::get_instance();
-            $process->process_pending_data(100, 60);
+            $settings = \FrontisBlocks\Admin\Ajax\Settings::get_instance();
+            $batch = isset($state['asset_batch']) ? (int) $state['asset_batch'] : 0;
+            $batch_size = 10;
+            
+            $response = $settings->generate_assets_for_post( $batch, $batch_size );
+            
+            if ( isset($response['completed']) && $response['completed'] ) {
+                return [ 'step_status' => 'success' ];
+            } else {
+                return [ 
+                    'step_status' => 'running',
+                    'merge' => [ 'asset_batch' => $batch + 1 ]
+                ];
+            }
         } catch (\Exception $e) {
             error_log('FB Import: Asset generation warning: ' . $e->getMessage());
         }
