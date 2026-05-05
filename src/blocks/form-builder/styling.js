@@ -954,9 +954,16 @@ const generateFormBuilderStyle = (attributes) => {
                 ${submitBtnAlignment?.Tablet === 'center' ? 'justify-content: center;' : ''}
                 ${submitBtnAlignment?.Tablet === 'right' ? 'justify-content: end;' : ''}
                 ${submitBtnAlignment?.Tablet === 'stretch' ? 'justify-content: stretch;' : ''}
+
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'left' && submitBtnHZLeftOffset?.Tablet ? `left: ${submitBtnHZLeftOffset?.Tablet}${submitBtnHZLeftOffsetUnits?.Tablet};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'right' && submitBtnHZRightOffset?.Tablet ? `right: ${submitBtnHZRightOffset?.Tablet}${submitBtnHZRightOffsetUnits?.Tablet};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'top' && submitBtnVRTopOffset?.Tablet ? `top: ${submitBtnVRTopOffset?.Tablet}${submitBtnVRTopOffsetUnits?.Tablet};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'bottom' && submitBtnVRBottomOffset?.Tablet ? `bottom: ${submitBtnVRBottomOffset?.Tablet}${submitBtnVRBottomOffsetUnits?.Tablet};` : ''}
             }
 
             .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button {
+                ${submitBtnWidth?.Tablet ? `width: ${submitBtnWidth?.Tablet}${submitBtnWidthUnits?.Tablet};` : ''}
+                ${submitBtnHeight?.Tablet ? `height: ${submitBtnHeight?.Tablet}${submitBtnHeightUnits?.Tablet};` : ''}
                 ${submitBtnIconPosition?.Tablet === 'left' ? 'flex-direction: row-reverse;' : ''}
                 ${submitBtnAlignment?.Tablet === 'stretch' ? 'width: 100%;' : ''}
                 ${submitBtnIconGap?.Tablet ? `gap: ${submitBtnIconGap?.Tablet}${submitBtnIconGapUnits?.Tablet};` : ''}
@@ -1054,9 +1061,16 @@ const generateFormBuilderStyle = (attributes) => {
                 ${submitBtnAlignment?.Mobile === 'center' ? 'justify-content: center;' : ''}
                 ${submitBtnAlignment?.Mobile === 'right' ? 'justify-content: end;' : ''}
                 ${submitBtnAlignment?.Mobile === 'stretch' ? 'justify-content: stretch;' : ''}
+
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'left' && submitBtnHZLeftOffset?.Mobile ? `left: ${submitBtnHZLeftOffset?.Mobile}${submitBtnHZLeftOffsetUnits?.Mobile};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'right' && submitBtnHZRightOffset?.Mobile ? `right: ${submitBtnHZRightOffset?.Mobile}${submitBtnHZRightOffsetUnits?.Mobile};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'top' && submitBtnVRTopOffset?.Mobile ? `top: ${submitBtnVRTopOffset?.Mobile}${submitBtnVRTopOffsetUnits?.Mobile};` : ''}
+                ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'bottom' && submitBtnVRBottomOffset?.Mobile ? `bottom: ${submitBtnVRBottomOffset?.Mobile}${submitBtnVRBottomOffsetUnits?.Mobile};` : ''}
             }
 
             .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button {
+                ${submitBtnWidth?.Mobile ? `width: ${submitBtnWidth?.Mobile}${submitBtnWidthUnits?.Mobile};` : ''}
+                ${submitBtnHeight?.Mobile ? `height: ${submitBtnHeight?.Mobile}${submitBtnHeightUnits?.Mobile};` : ''}
                 ${submitBtnIconPosition?.Mobile === 'left' ? 'flex-direction: row-reverse;' : ''}
                 ${submitBtnAlignment?.Mobile === 'stretch' ? 'width: 100%;' : ''}
                 ${submitBtnIconGap?.Mobile ? `gap: ${submitBtnIconGap?.Mobile}${submitBtnIconGapUnits?.Mobile};` : ''}
