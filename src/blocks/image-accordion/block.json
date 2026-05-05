@@ -3,16 +3,16 @@
 	"apiVersion": 3,
 	"name": "frontis-blocks/image-accordion",
 	"version": "1.0.0",
-	"title": "Image Accordion Carousel",
+	"title": "Image Accordion",
 	"category": "frontis-blocks",
-	"textdomain": "frontis-blocks",
-	"description": "A customizable image carousel block featuring a main image with clickable thumbnail selector for product galleries and image showcases.",
+	"description": "A customizable image accordion block with various styling options.",
 	"example": {},
 	"supports": {
-		"anchor": false,
 		"align": ["wide", "full"],
+		"anchor": false,
 		"customClassName": false
 	},
+	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
 }

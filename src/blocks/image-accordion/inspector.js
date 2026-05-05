@@ -1,560 +1,574 @@
-/**
- * Image Accordion Carousel Block Inspector
- *
- * Note: Inspector controls are now integrated directly in edit.js
- * This file is kept for backward compatibility
- */
+import { __ } from "@wordpress/i18n";
+import {
+	InspectorControls,
+	MediaUpload,
+	MediaUploadCheck,
+} from "@wordpress/block-editor";
+import {
+	PanelBody,
+	TextControl,
+	ToggleControl,
+	SelectControl,
+	Button,
+	TabPanel,
+} from "@wordpress/components";
+import { useEffect, useState, memo } from "@wordpress/element";
+import { useDeviceType } from "@Config/displayType";
+import FB_Range from "@Components/range";
+import FB_ColorControl from "@Components/color-control";
+import { imageAccordionPresets } from "./presets";
+import "./editor.scss";
 
-const Inspector = () => {
-	// Controls are now in edit.js InspectorControls
-	return null;
-};
+const Inspector = ({ attributes, setAttributes }) => {
+	const {
+		blockID,
+		imageAccordionPresetStyle,
+		images,
+		activeImageIndex,
+		layoutType,
+		mainImageWidth,
+		thumbnailAreaWidth,
+		thumbnailLayout,
+		thumbnailSize,
+		spacing,
+		mainImageBorderRadius,
+		thumbnailBorderRadius,
+		activeThumbBorderWidth,
+		activeThumbBorderColor,
+		showTitle,
+		showDescription,
+		showIcon,
+		mainImageBg,
+		descriptionBg,
+		descriptionBorder,
+		descriptionBorderWidth,
+		titleFontSize,
+		titleFontColor,
+		titleFontWeight,
+		descriptionFontSize,
+		descriptionFontColor,
+	} = attributes;
 
-export default Inspector;
-const deviceType = useDeviceType();
+	const deviceType = useDeviceType();
 
-const titlePfIconHandler = (IconName) => {
-	setAttributes({ titlePrefixIcon: IconName });
-};
-const titleSfIconHandler = (IconName) => {
-	setAttributes({ titleSuffixIcon: IconName });
-};
-
-// accordionItem content margin
-const handleAccordionItemMarginUnitChange = (event, position) => {
-	const value = event.target.value;
-	if (accordionItemMarginLink) {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					accordionItemDesktopMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					accordionItemTabMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					accordionItemMobileMargin: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
+	// Handle preset change
+	const handlePresetChange = (presetKey) => {
+		const preset = imageAccordionPresets[presetKey];
+		if (preset) {
+			setAttributes({
+				imageAccordionPresetStyle: presetKey,
+				layoutType: preset.layoutType,
+				mainImageWidth: preset.mainImageWidth,
+				thumbnailAreaWidth: preset.thumbnailAreaWidth,
+				thumbnailLayout: preset.thumbnailLayout,
+				thumbnailSize: preset.thumbnailSize,
+				mainImageBorderRadius: preset.mainImageBorderRadius,
+				thumbnailBorderRadius: preset.thumbnailBorderRadius,
+				activeThumbBorderWidth: preset.activeThumbBorderWidth,
+				activeThumbBorderColor: preset.activeThumbBorderColor,
+				spacing: preset.spacing,
+				mainImageBg: preset.mainImageBg,
+				descriptionBg: preset.descriptionBg,
+				descriptionBorder: preset.descriptionBorder,
+			});
 		}
-	} else {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					accordionItemDesktopMargin: {
-						...accordionItemDesktopMargin,
-						[position]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					accordionItemTabMargin: {
-						...accordionItemTabMargin,
-						[position]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					accordionItemMobileMargin: {
-						...accordionItemMobileMargin,
-						[position]: value,
-					},
-				});
-				break;
-			default:
-				break;
+	};
+
+	// Handle add image
+	const handleAddImage = (media) => {
+		const newImages = [...images];
+		newImages.push({
+			id: media.id,
+			url: media.url,
+			alt: media.alt || "",
+			title: media.title || `Image ${newImages.length + 1}`,
+			description: "",
+		});
+		setAttributes({ images: newImages });
+	};
+
+	// Handle remove image
+	const handleRemoveImage = (index) => {
+		const newImages = images.filter((_, i) => i !== index);
+		setAttributes({ images: newImages });
+		if (activeImageIndex >= newImages.length && newImages.length > 0) {
+			setAttributes({ activeImageIndex: newImages.length - 1 });
 		}
-	}
-};
+	};
 
-const handleAccordionItemMarginCombineBtn = () => {
-	setAttributes({ accordionItemMarginLink: !accordionItemMarginLink });
-};
+	// Handle image update
+	const handleImageUpdate = (index, key, value) => {
+		const newImages = [...images];
+		newImages[index] = { ...newImages[index], [key]: value };
+		setAttributes({ images: newImages });
+	};
 
-const handleAccordionItemMarginUnitsHandler = (unit) => {
-	setAttributes({
-		accordionItemMarginUnits: {
-			...accordionItemMarginUnits,
-			[deviceType]: unit,
+	const tabs = [
+		{
+			name: "basic",
+			title: __("Basic", "frontis-blocks"),
+			className: "fb-inspector-tab-basic",
 		},
-	});
-};
-
-// accordionItem Padding Functionb
-const handleAccordionItemPaddingUnitChange = (event, position) => {
-	const value = event.target.value;
-	if (accordionItemPaddingLink) {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					accordionItemDesktopPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					accordionItemTabPadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					accordionItemMobilePadding: {
-						top: value,
-						right: value,
-						bottom: value,
-						left: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	} else {
-		switch (deviceType) {
-			case "Desktop":
-				setAttributes({
-					accordionItemDesktopPadding: {
-						...accordionItemDesktopPadding,
-						[position]: value,
-					},
-				});
-				break;
-			case "Tablet":
-				setAttributes({
-					accordionItemTabPadding: {
-						...accordionItemTabPadding,
-						[position]: value,
-					},
-				});
-				break;
-			case "Mobile":
-				setAttributes({
-					accordionItemMobilePadding: {
-						...accordionItemMobilePadding,
-						[position]: value,
-					},
-				});
-				break;
-			default:
-				break;
-		}
-	}
-};
-
-const handleAccordionItemPaddingCombineBtn = () => {
-	setAttributes({ accordionItemPaddingLink: !accordionItemPaddingLink });
-};
-
-const handleAccordionItemPaddingUnitsHandler = (unit) => {
-	setAttributes({
-		accordionItemPaddingUnits: {
-			...accordionItemPaddingUnits,
-			[deviceType]: unit,
+		{
+			name: "style",
+			title: __("Style", "frontis-blocks"),
+			className: "fb-inspector-tab-style",
 		},
-	});
-};
+		{
+			name: "extra",
+			title: __("Extra", "frontis-blocks"),
+			className: "fb-inspector-tab-extra",
+		},
+	];
 
-/**
- * Inspector General Controls
- */
-const generalControls = (
-	<>
-		<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
-			<ToggleControl
-				label={__("Default Open?", "frontis-blocks")}
-				checked={clickable}
-				onChange={(value) => setAttributes({ clickable: value })}
-			/>
-			<TextControl
-				label="Title Text"
-				value={title}
-				onChange={(text) => setAttributes({ title: text })}
-			/>
-		</PanelBody>
-
-		<PanelBody title={__("Title", "frontis-blocks")} initialOpen={false}>
-			<PanelBody title={__("Title Prefix", "frontis-blocks")}>
-				<div className="fb-setting-switcher-container">
-					<BaseControl className="fb-setting-switcher-panel-wrapper">
-						<ButtonGroup className="fb-setting-switcher-panel-btn">
-							{MEDIA_TYPES.map((item, key) => (
-								<Button
-									key={key}
-									onClick={() => setAttributes({ titlePrefixType: item.value })}
-									className={`fb-setting-switcher-panel-btn-switcher ${
-										titlePrefixType === item.value ? "active" : ""
-									}`}
-								>
-									{item.label}
-								</Button>
-							))}
-						</ButtonGroup>
-					</BaseControl>
-				</div>
-
-				{titlePrefixType !== "none" && (
+	return (
+		<InspectorControls>
+			<TabPanel tabs={tabs} initialTabName="basic">
+				{(tab) => (
 					<>
-						{titlePrefixType === "icon" && (
-							<BaseControl label={__("Icon", "frontis-blocks")}>
-								<FBIconPicker
-									value={titlePrefixIcon}
-									setIconHandler={titlePfIconHandler}
-								/>
-							</BaseControl>
-						)}
-
-						{titlePrefixType === "icon" && (
+						{tab.name === "basic" && (
 							<>
-								<FB_SwitcherControl
-									label={__("Color", "frontis-blocks")}
-									globalSwitcher={titlePrefixColorSwitcher}
-									setGlobalSwitcher={(value) =>
-										setAttributes({ titlePrefixColorSwitcher: value })
-									}
-								/>
+								{/* Presets */}
+								<PanelBody
+									title={__("Presets", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<div
+										style={{
+											display: "grid",
+											gridTemplateColumns: "repeat(2, 1fr)",
+											gap: "10px",
+										}}
+									>
+										{Object.entries(imageAccordionPresets).map(
+											([key, preset]) => (
+												<Button
+													key={key}
+													variant={
+														imageAccordionPresetStyle === key
+															? "primary"
+															: "secondary"
+													}
+													onClick={() => handlePresetChange(key)}
+													style={{ padding: "8px", fontSize: "12px" }}
+												>
+													{preset.name}
+												</Button>
+											),
+										)}
+									</div>
+								</PanelBody>
 
-								{titlePrefixColorSwitcher === "normal" && (
-									<FB_ColorControl
-										label={__("Normal Color", "frontis-blocks")}
-										globalColor={titlePrefixColor}
-										setGlobalColor={(value) =>
-											setAttributes({
-												titlePrefixColor: value === undefined ? "" : value,
-											})
+								{/* Images Management */}
+								<PanelBody
+									title={__("Images", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<div style={{ marginBottom: "15px" }}>
+										<h4>{__("Image Items", "frontis-blocks")}</h4>
+										<div
+											style={{
+												maxHeight: "400px",
+												overflowY: "auto",
+												border: "1px solid #ddd",
+												borderRadius: "4px",
+												padding: "10px",
+											}}
+										>
+											{images.map((image, index) => (
+												<div
+													key={index}
+													style={{
+														padding: "10px",
+														marginBottom: "10px",
+														backgroundColor:
+															activeImageIndex === index
+																? "#e7f5ff"
+																: "#f9f9f9",
+														border: `2px ${
+															activeImageIndex === index
+																? "solid #007cba"
+																: "dashed #ddd"
+														}`,
+														borderRadius: "4px",
+														cursor: "pointer",
+													}}
+													onClick={() =>
+														setAttributes({ activeImageIndex: index })
+													}
+												>
+													<div
+														style={{
+															display: "flex",
+															gap: "10px",
+															alignItems: "center",
+															marginBottom: "8px",
+														}}
+													>
+														{image.url && (
+															<img
+																src={image.url}
+																alt={image.alt}
+																style={{
+																	width: "50px",
+																	height: "50px",
+																	objectFit: "cover",
+																	borderRadius: "4px",
+																}}
+															/>
+														)}
+														<div style={{ flex: 1 }}>
+															<TextControl
+																label={__("Title", "frontis-blocks")}
+																value={image.title}
+																onChange={(value) =>
+																	handleImageUpdate(index, "title", value)
+																}
+																onClick={(e) => e.stopPropagation()}
+															/>
+														</div>
+														<Button
+															isDestructive
+															isSmall
+															onClick={() => handleRemoveImage(index)}
+														>
+															{__("Remove", "frontis-blocks")}
+														</Button>
+													</div>
+													<TextControl
+														label={__("Description", "frontis-blocks")}
+														value={image.description || ""}
+														onChange={(value) =>
+															handleImageUpdate(index, "description", value)
+														}
+														onClick={(e) => e.stopPropagation()}
+													/>
+												</div>
+											))}
+										</div>
+									</div>
+
+									<MediaUploadCheck>
+										<MediaUpload
+											onSelect={handleAddImage}
+											type="image"
+											render={({ open }) => (
+												<Button
+													variant="primary"
+													onClick={open}
+													style={{ width: "100%", marginTop: "10px" }}
+												>
+													{__("+ Add Image", "frontis-blocks")}
+												</Button>
+											)}
+										/>
+									</MediaUploadCheck>
+								</PanelBody>
+
+								{/* Layout Settings */}
+								<PanelBody
+									title={__("Layout", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<SelectControl
+										label={__("Layout Type", "frontis-blocks")}
+										value={layoutType}
+										options={[
+											{
+												label: __(
+													"Horizontal (Side by Side)",
+													"frontis-blocks",
+												),
+												value: "horizontal",
+											},
+											{
+												label: __("Vertical (Top & Bottom)", "frontis-blocks"),
+												value: "vertical",
+											},
+											{ label: __("Grid", "frontis-blocks"), value: "grid" },
+											{
+												label: __("Compact", "frontis-blocks"),
+												value: "compact",
+											},
+										]}
+										onChange={(value) => setAttributes({ layoutType: value })}
+									/>
+
+									{(layoutType === "horizontal" ||
+										layoutType === "vertical") && (
+										<>
+											<FB_Range
+												label={__("Main Image Width (%)", "frontis-blocks")}
+												value={parseInt(mainImageWidth)}
+												onChange={(value) =>
+													setAttributes({ mainImageWidth: value.toString() })
+												}
+												min={30}
+												max={90}
+											/>
+											<FB_Range
+												label={__("Thumbnail Area Width (%)", "frontis-blocks")}
+												value={parseInt(thumbnailAreaWidth)}
+												onChange={(value) =>
+													setAttributes({
+														thumbnailAreaWidth: value.toString(),
+													})
+												}
+												min={10}
+												max={70}
+											/>
+										</>
+									)}
+
+									<SelectControl
+										label={__("Thumbnail Layout", "frontis-blocks")}
+										value={thumbnailLayout}
+										options={[
+											{
+												label: __("Vertical Stack", "frontis-blocks"),
+												value: "vertical",
+											},
+											{
+												label: __("Horizontal Row", "frontis-blocks"),
+												value: "horizontal",
+											},
+											{ label: __("Grid", "frontis-blocks"), value: "grid" },
+											{
+												label: __("Horizontal Scroll", "frontis-blocks"),
+												value: "horizontal-scroll",
+											},
+										]}
+										onChange={(value) =>
+											setAttributes({ thumbnailLayout: value })
 										}
 									/>
-								)}
 
-								{titlePrefixColorSwitcher === "hover" && (
-									<FB_ColorControl
-										label={__("Hover Color", "frontis-blocks")}
-										globalColor={titlePrefixHoverColor}
-										setGlobalColor={(value) =>
-											setAttributes({
-												titlePrefixHoverColor: value === undefined ? "" : value,
-											})
+									<FB_Range
+										label={__("Thumbnail Size (px)", "frontis-blocks")}
+										value={parseInt(thumbnailSize)}
+										onChange={(value) =>
+											setAttributes({ thumbnailSize: value.toString() })
 										}
+										min={40}
+										max={180}
 									/>
-								)}
+
+									<FB_Range
+										label={__("Spacing (px)", "frontis-blocks")}
+										value={parseInt(spacing)}
+										onChange={(value) =>
+											setAttributes({ spacing: value.toString() })
+										}
+										min={0}
+										max={50}
+									/>
+								</PanelBody>
 							</>
 						)}
 
-						{titlePrefixType === "image" && (
-							<FB_BackgroundImageControl
-								globalBackgroundImageUrl={titlePrefixImgUrl}
-								setGlobalBackgroundImageUrl={(value) =>
-									setAttributes({ titlePrefixImgUrl: value })
-								}
-								globalBackgroundImageAlt={titlePrefixImgAlt}
-								setGlobalBackgroundImageAlt={(value) =>
-									setAttributes({ titlePrefixImgAlt: value })
-								}
-								globalBackgroundImageID={titlePrefixImgID}
-								setGlobalBackgroundImageID={(value) =>
-									setAttributes({ titlePrefixImgID: value })
-								}
-								globalBackgroundImagePosition={titlePrefixImgPosition}
-								setGlobalBackgroundImagePosition={(value) =>
-									setAttributes({ titlePrefixImgPosition: value })
-								}
-								globalBackgroundImageAttachment={titlePrefixImgAttachment}
-								setGlobalBackgroundImageAttachment={(value) =>
-									setAttributes({ titlePrefixImgAttachment: value })
-								}
-								globalBackgroundImageRepeat={titlePrefixImgRepeat}
-								setGlobalBackgroundImageRepeat={(value) =>
-									setAttributes({ titlePrefixImgRepeat: value })
-								}
-								globalBackgroundImageSize={titlePrefixImgSize}
-								setGlobalBackgroundImageSize={(value) =>
-									setAttributes({ titlePrefixImgSize: value })
-								}
-							/>
-						)}
-					</>
-				)}
-			</PanelBody>
-
-			<PanelBody title={__("Title Suffix", "frontis-blocks")}>
-				<div className="fb-setting-switcher-container">
-					<BaseControl className="fb-setting-switcher-panel-wrapper">
-						<ButtonGroup className="fb-setting-switcher-panel-btn">
-							{MEDIA_TYPES.map((item, key) => (
-								<Button
-									key={key}
-									onClick={() => setAttributes({ titleSuffixType: item.value })}
-									className={`fb-setting-switcher-panel-btn-switcher ${
-										titleSuffixType === item.value ? "active" : ""
-									}`}
-								>
-									{item.label}
-								</Button>
-							))}
-						</ButtonGroup>
-					</BaseControl>
-				</div>
-
-				{titleSuffixType !== "none" && (
-					<>
-						{titleSuffixType === "icon" && (
-							<BaseControl label={__("Icon", "frontis-blocks")}>
-								<FBIconPicker
-									value={titleSuffixIcon}
-									setIconHandler={titleSfIconHandler}
-								/>
-							</BaseControl>
-						)}
-
-						{titleSuffixType === "icon" && (
+						{tab.name === "style" && (
 							<>
-								<FB_SwitcherControl
-									label={__("Color", "frontis-blocks")}
-									globalSwitcher={titleSuffixColorSwitcher}
-									setGlobalSwitcher={(value) =>
-										setAttributes({ titleSuffixColorSwitcher: value })
-									}
-								/>
-
-								{titleSuffixColorSwitcher === "normal" && (
-									<FB_ColorControl
-										label={__("Normal Color", "frontis-blocks")}
-										globalColor={titleSuffixColor}
-										setGlobalColor={(value) =>
+								{/* Styling */}
+								<PanelBody
+									title={__("Border & Radius", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<FB_Range
+										label={__("Main Image Border Radius", "frontis-blocks")}
+										value={parseInt(mainImageBorderRadius)}
+										onChange={(value) =>
+											setAttributes({ mainImageBorderRadius: value.toString() })
+										}
+										min={0}
+										max={50}
+									/>
+									<FB_Range
+										label={__("Thumbnail Border Radius", "frontis-blocks")}
+										value={parseInt(thumbnailBorderRadius)}
+										onChange={(value) =>
+											setAttributes({ thumbnailBorderRadius: value.toString() })
+										}
+										min={0}
+										max={30}
+									/>
+									<FB_Range
+										label={__("Active Thumb Border Width", "frontis-blocks")}
+										value={parseInt(activeThumbBorderWidth)}
+										onChange={(value) =>
 											setAttributes({
-												titleSuffixColor: value === undefined ? "" : value,
+												activeThumbBorderWidth: value.toString(),
 											})
 										}
+										min={0}
+										max={10}
 									/>
-								)}
-
-								{titleSuffixColorSwitcher === "hover" && (
 									<FB_ColorControl
-										label={__("Hover Color", "frontis-blocks")}
-										globalColor={titleSuffixHoverColor}
-										setGlobalColor={(value) =>
-											setAttributes({
-												titleSuffixHoverColor: value === undefined ? "" : value,
-											})
+										label={__(
+											"Active Thumbnail Border Color",
+											"frontis-blocks",
+										)}
+										value={activeThumbBorderColor}
+										onChange={(value) =>
+											setAttributes({ activeThumbBorderColor: value })
 										}
 									/>
-								)}
+								</PanelBody>
+
+								{/* Colors */}
+								<PanelBody
+									title={__("Colors", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<FB_ColorControl
+										label={__("Main Image Background", "frontis-blocks")}
+										value={mainImageBg}
+										onChange={(value) => setAttributes({ mainImageBg: value })}
+									/>
+									<FB_ColorControl
+										label={__("Description Background", "frontis-blocks")}
+										value={descriptionBg}
+										onChange={(value) =>
+											setAttributes({ descriptionBg: value })
+										}
+									/>
+									<FB_ColorControl
+										label={__("Description Border Color", "frontis-blocks")}
+										value={descriptionBorder}
+										onChange={(value) =>
+											setAttributes({ descriptionBorder: value })
+										}
+									/>
+									<FB_Range
+										label={__("Description Border Width", "frontis-blocks")}
+										value={parseInt(descriptionBorderWidth)}
+										onChange={(value) =>
+											setAttributes({
+												descriptionBorderWidth: value.toString(),
+											})
+										}
+										min={0}
+										max={10}
+									/>
+								</PanelBody>
+
+								{/* Typography */}
+								<PanelBody
+									title={__("Typography", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<h4>{__("Title", "frontis-blocks")}</h4>
+									<FB_Range
+										label={__("Font Size (Desktop)", "frontis-blocks")}
+										value={parseInt(titleFontSize?.Desktop || 24)}
+										onChange={(value) =>
+											setAttributes({
+												titleFontSize: {
+													...titleFontSize,
+													Desktop: value.toString(),
+												},
+											})
+										}
+										min={10}
+										max={48}
+									/>
+									<FB_ColorControl
+										label={__("Title Color", "frontis-blocks")}
+										value={titleFontColor}
+										onChange={(value) =>
+											setAttributes({ titleFontColor: value })
+										}
+									/>
+									<SelectControl
+										label={__("Font Weight", "frontis-blocks")}
+										value={titleFontWeight}
+										options={[
+											{ label: "400 - Normal", value: "400" },
+											{ label: "500 - Medium", value: "500" },
+											{ label: "600 - Semi Bold", value: "600" },
+											{ label: "700 - Bold", value: "700" },
+											{ label: "800 - Extra Bold", value: "800" },
+										]}
+										onChange={(value) =>
+											setAttributes({ titleFontWeight: value })
+										}
+									/>
+
+									<h4 style={{ marginTop: "20px" }}>
+										{__("Description", "frontis-blocks")}
+									</h4>
+									<FB_Range
+										label={__("Font Size (Desktop)", "frontis-blocks")}
+										value={parseInt(descriptionFontSize?.Desktop || 14)}
+										onChange={(value) =>
+											setAttributes({
+												descriptionFontSize: {
+													...descriptionFontSize,
+													Desktop: value.toString(),
+												},
+											})
+										}
+										min={10}
+										max={32}
+									/>
+									<FB_ColorControl
+										label={__("Description Color", "frontis-blocks")}
+										value={descriptionFontColor}
+										onChange={(value) =>
+											setAttributes({ descriptionFontColor: value })
+										}
+									/>
+								</PanelBody>
 							</>
 						)}
 
-						{titleSuffixType === "image" && (
-							<FB_BackgroundImageControl
-								globalBackgroundImageUrl={titleSuffixImgUrl}
-								setGlobalBackgroundImageUrl={(value) =>
-									setAttributes({ titleSuffixImgUrl: value })
-								}
-								globalBackgroundImageAlt={titleSuffixImgAlt}
-								setGlobalBackgroundImageAlt={(value) =>
-									setAttributes({ titleSuffixImgAlt: value })
-								}
-								globalBackgroundImageID={titleSuffixImgID}
-								setGlobalBackgroundImageID={(value) =>
-									setAttributes({ titleSuffixImgID: value })
-								}
-								globalBackgroundImagePosition={titleSuffixImgPosition}
-								setGlobalBackgroundImagePosition={(value) =>
-									setAttributes({ titleSuffixImgPosition: value })
-								}
-								globalBackgroundImageAttachment={titleSuffixImgAttachment}
-								setGlobalBackgroundImageAttachment={(value) =>
-									setAttributes({ titleSuffixImgAttachment: value })
-								}
-								globalBackgroundImageRepeat={titleSuffixImgRepeat}
-								setGlobalBackgroundImageRepeat={(value) =>
-									setAttributes({ titleSuffixImgRepeat: value })
-								}
-								globalBackgroundImageSize={titleSuffixImgSize}
-								setGlobalBackgroundImageSize={(value) =>
-									setAttributes({ titleSuffixImgSize: value })
-								}
-							/>
+						{tab.name === "extra" && (
+							<>
+								{/* Display Options */}
+								<PanelBody
+									title={__("Content Display", "frontis-blocks")}
+									initialOpen={true}
+								>
+									<ToggleControl
+										label={__("Show Title", "frontis-blocks")}
+										checked={showTitle}
+										onChange={(value) => setAttributes({ showTitle: value })}
+									/>
+									<ToggleControl
+										label={__("Show Description", "frontis-blocks")}
+										checked={showDescription}
+										onChange={(value) =>
+											setAttributes({ showDescription: value })
+										}
+									/>
+									<ToggleControl
+										label={__("Show Icon", "frontis-blocks")}
+										checked={showIcon}
+										onChange={(value) => setAttributes({ showIcon: value })}
+									/>
+								</PanelBody>
+
+								{/* Advanced Settings */}
+								<PanelBody
+									title={__("Advanced", "frontis-blocks")}
+									initialOpen={false}
+								>
+									<TextControl
+										label={__("Block ID", "frontis-blocks")}
+										value={blockID}
+										readOnly
+									/>
+									<TextControl
+										label={__("Custom CSS Class", "frontis-blocks")}
+										placeholder="Add custom classes"
+									/>
+								</PanelBody>
+							</>
 						)}
 					</>
 				)}
-			</PanelBody>
-		</PanelBody>
-	</>
-);
+			</TabPanel>
+		</InspectorControls>
+	);
+};
 
-/**
- * Inspector Style Controls
- */
-const styleControls = (
-	<>
-		<PanelBody
-			title={__("Padding & Margin", "frontis-blocks")}
-			initialOpen={true}
-		>
-			<FB_Spacing
-				label={__("Margin", "frontis-blocks")}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleAccordionItemMarginUnitsHandler}
-				spacingUnits={accordionItemMarginUnits}
-				spacingDesktop={accordionItemDesktopMargin}
-				spacingTablet={accordionItemTabMargin}
-				spacingMobile={accordionItemMobileMargin}
-				handleSpacingUnitHandler={handleAccordionItemMarginUnitChange}
-				spacingCombineBtn={accordionItemMarginLink}
-				spacingCombineBtnHandler={handleAccordionItemMarginCombineBtn}
-				setAttributes={setAttributes}
-			/>
-
-			<FB_Spacing
-				label={__("Padding", "frontis-blocks")}
-				deviceType={deviceType}
-				spacingUnitsHandler={handleAccordionItemPaddingUnitsHandler}
-				spacingUnits={accordionItemPaddingUnits}
-				spacingDesktop={accordionItemDesktopPadding}
-				spacingTablet={accordionItemTabPadding}
-				spacingMobile={accordionItemMobilePadding}
-				handleSpacingUnitHandler={handleAccordionItemPaddingUnitChange}
-				spacingCombineBtn={accordionItemPaddingLink}
-				spacingCombineBtnHandler={handleAccordionItemPaddingCombineBtn}
-				setAttributes={setAttributes}
-			/>
-		</PanelBody>
-	</>
-);
-
-/**
- * Inspector Advanced Controls
- */
-const advancedControls = (
-	<>
-		<div className="fb-setting-advanced-tab-wrapper">
-			<div className="fb-setting-inner-wrapper">
-				<PanelBody
-					title={__("Layout", "frontis-blocks")}
-					initialOpen={true}
-					className="fb-setting-layout-header"
-				>
-					<FB_Range
-						min={0}
-						max={10000000}
-						label={__("Z Index", "frontis-blocks")}
-						rangeValue={accordionItemZIndex}
-						onChangeHandler={(value) =>
-							setAttributes({
-								accordionItemZIndex: value === 0 ? undefined : value,
-							})
-						}
-						deviceType={deviceType}
-						setAttributes={setAttributes}
-						rangeStep={1}
-						resetFallbackValue={""}
-						isRangeUnit={false}
-					/>
-
-					<FB_InputControl
-						label={__("CSS ID", "frontis-blocks")}
-						value={accordionItemGlobalWraperID}
-						onChangeValue={(value) =>
-							setAttributes({ accordionItemGlobalWraperID: value })
-						}
-						helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-					/>
-
-					<FB_InputControl
-						label={__("CSS Class", "frontis-blocks")}
-						value={accordionItemGlobalWraperClass}
-						onChangeValue={(value) =>
-							setAttributes({ accordionItemGlobalWraperClass: value })
-						}
-						helpText={__("Separate with spaces key.", "frontis-blocks")}
-					/>
-				</PanelBody>
-
-				<PanelBody
-					title={__("Responsive Control", "frontis-blocks")}
-					initialOpen={false}
-					className="fb-setting-responsive-control-wrapper"
-				>
-					<ToggleControl
-						label={__("Hide on Desktop", "frontis-blocks")}
-						className="fb-setting-responsive-control"
-						checked={accordionItemDesktopSwitcher}
-						onChange={(value) =>
-							setAttributes({ accordionItemDesktopSwitcher: value })
-						}
-					/>
-					<ToggleControl
-						label={__("Hide on Tablet", "frontis-blocks")}
-						className="fb-setting-responsive-control"
-						checked={accordionItemTabletSwitcher}
-						onChange={(value) =>
-							setAttributes({ accordionItemTabletSwitcher: value })
-						}
-					/>
-					<ToggleControl
-						label={__("Hide on Mobile", "frontis-blocks")}
-						className="fb-setting-responsive-control"
-						checked={accordionItemMobileSwitcher}
-						onChange={(value) =>
-							setAttributes({ accordionItemMobileSwitcher: value })
-						}
-					/>
-				</PanelBody>
-
-				<PanelBody
-					title={__("Custom CSS", "frontis-blocks")}
-					initialOpen={false}
-				>
-					<FB_CustomCSSEditor
-						value={accordionItemCustomCSS}
-						onChangeValue={(value) =>
-							setAttributes({ accordionItemCustomCSS: value })
-						}
-					/>
-				</PanelBody>
-			</div>
-		</div>
-	</>
-);
-
-return (
-	<>
-		<FB_InspectorControls
-			generalControls={generalControls}
-			styleControls={styleControls}
-			advancedControls={advancedControls}
-		/>
-	</>
-);
-
-// export default memo(Inspector);
+export default memo(Inspector);

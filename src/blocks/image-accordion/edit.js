@@ -1,421 +1,244 @@
-/**
- * WordPress dependencies
- */
-import { __ } from "@wordpress/i18n";
-import {
-	useBlockProps,
-	MediaUpload,
-	InspectorControls,
-} from "@wordpress/block-editor";
-import {
-	Button,
-	PanelBody,
-	SelectControl,
-	TextControl,
-	ColorPalette,
-	RangeControl,
-	ToggleControl,
-} from "@wordpress/components";
-import { useEffect, useState } from "@wordpress/element";
-import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
-import generateImageAccordionStyle from "./styling";
-import "./editor.scss";
+import { __ } from '@wordpress/i18n';
+import { useBlockProps } from '@wordpress/block-editor';
+import { useEffect, useState, useCallback } from '@wordpress/element';
+import './editor.scss';
+import Inspector from './inspector';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
-export default function Edit(props) {
-	const { attributes, setAttributes, isSelected, clientId } = props;
-
+export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
 	const {
 		blockID,
-		blockStyle,
 		images,
 		activeImageIndex,
 		layoutType,
+		mainImageWidth,
+		thumbnailAreaWidth,
+		thumbnailLayout,
 		thumbnailSize,
-		thumbnailGap,
-		mainImageMarginBottom,
-		thumbnailBorderRadius,
+		spacing,
 		mainImageBorderRadius,
-		activeThumbBorderColor,
+		thumbnailBorderRadius,
 		activeThumbBorderWidth,
-		showThumbnailsDesktop,
-		showThumbnailsTablet,
-		showThumbnailsMobile,
+		activeThumbBorderColor,
+		showTitle,
+		showDescription,
+		titleFontSize,
+		titleFontColor,
+		titleFontWeight,
+		descriptionFontSize,
+		descriptionFontColor,
+		mainImageBg,
+		descriptionBg,
+		descriptionBorder,
+		descriptionBorderWidth,
 	} = attributes;
 
-	// Handle block ID generation
+	const [hoveredThumbnail, setHoveredThumbnail] = useState(null);
+
+	// Generate block ID on mount
 	useBlockIdGenerator({
 		clientId,
 		blockID,
-		blockPrefix: "fb-image-accordion",
+		blockPrefix: 'fb-image-accordion',
 		isSelected,
 		attributes,
 		setAttributes,
 	});
 
-	// Generate block style
-	useEffect(() => {
-		if (blockID) {
-			const css = generateImageAccordionStyle(attributes);
-			setAttributes({ blockStyle: css });
-		}
-	}, [attributes, blockID]);
-
-	const [mainImage, setMainImage] = useState(
-		images.length > 0 ? images[activeImageIndex] : null,
-	);
-
-	// Update main image when active index changes
-	useEffect(() => {
-		if (images.length > 0) {
-			setMainImage(images[activeImageIndex]);
-		}
-	}, [activeImageIndex, images]);
-
-	const handleAddImage = (media) => {
-		const newImages = [...images];
-		newImages.push({
-			id: media.id,
-			url: media.url,
-			alt: media.alt || "",
-			title: media.title || "",
-		});
-		setAttributes({ images: newImages });
-	};
-
-	const handleRemoveImage = (index) => {
-		const newImages = images.filter((_, i) => i !== index);
-		setAttributes({ images: newImages });
-
-		// Adjust active index if needed
-		if (activeImageIndex >= newImages.length && activeImageIndex > 0) {
-			setAttributes({ activeImageIndex: newImages.length - 1 });
-		}
-	};
-
-	const handleThumbnailClick = (index) => {
-		setAttributes({ activeImageIndex: index });
-	};
-
 	const blockProps = useBlockProps({
-		className: `fb-image-accordion-carousel ${blockID}`,
+		className: `fb-image-accordion-editor ${blockID || ''}`,
 	});
+
+	const currentImage = images?.[activeImageIndex || 0];
+
+	// Determine layout styling
+	const getLayoutStyle = () => {
+		switch (layoutType) {
+			case 'vertical':
+				return {
+					display: 'flex',
+					flexDirection: 'column',
+					gap: `${spacing}px`,
+				};
+			case 'grid':
+				return {
+					display: 'grid',
+					gridTemplateColumns: 'repeat(2, 1fr)',
+					gap: `${spacing}px`,
+				};
+			case 'compact':
+				return {
+					display: 'flex',
+					flexDirection: 'row',
+					gap: `${spacing}px`,
+					alignItems: 'flex-start',
+				};
+			case 'horizontal':
+			default:
+				return {
+					display: 'flex',
+					flexDirection: 'row',
+					gap: `${spacing}px`,
+				};
+		}
+	};
+
+	// Determine main image and thumbnails layout
+	const getThumbnailStyle = () => {
+		const baseStyle = {
+			display: 'flex',
+			gap: `${spacing}px`,
+			maxHeight: `${parseInt(thumbnailSize) * 4 + spacing * 3}px`,
+			overflow: thumbnailLayout === 'horizontal-scroll' ? 'auto' : 'visible',
+		};
+
+		switch (thumbnailLayout) {
+			case 'vertical':
+				return { ...baseStyle, flexDirection: 'column' };
+			case 'grid':
+				return { ...baseStyle, display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' };
+			case 'horizontal':
+			case 'horizontal-scroll':
+			default:
+				return { ...baseStyle, flexDirection: 'row' };
+		}
+	};
 
 	return (
 		<>
-			<InspectorControls>
-				<PanelBody
-					title={__("Carousel Settings", "frontis-blocks")}
-					initialOpen={true}
-				>
-					<SelectControl
-						label={__("Layout Type", "frontis-blocks")}
-						value={layoutType}
-						options={[
-							{
-								label: __("Horizontal (Right Thumbs)", "frontis-blocks"),
-								value: "horizontal",
-							},
-							{
-								label: __("Vertical (Bottom Thumbs)", "frontis-blocks"),
-								value: "vertical",
-							},
-						]}
-						onChange={(value) => setAttributes({ layoutType: value })}
-					/>
-
-					<RangeControl
-						label={__("Thumbnail Width", "frontis-blocks")}
-						value={parseInt(thumbnailSize.width)}
-						onChange={(value) =>
-							setAttributes({
-								thumbnailSize: {
-									...thumbnailSize,
-									width: value.toString(),
-								},
-							})
-						}
-						min={40}
-						max={150}
-					/>
-					<RangeControl
-						label={__("Thumbnail Height", "frontis-blocks")}
-						value={parseInt(thumbnailSize.height)}
-						onChange={(value) =>
-							setAttributes({
-								thumbnailSize: {
-									...thumbnailSize,
-									height: value.toString(),
-								},
-							})
-						}
-						min={40}
-						max={250}
-					/>
-
-					<RangeControl
-						label={__("Thumbnail Padding", "frontis-blocks")}
-						value={parseInt(thumbnailPadding.padding)}
-						onChange={(value) =>
-							setAttributes({
-								thumbnailPadding: {
-									...thumbnailPadding,
-									padding: value.toString(),
-								},
-							})
-						}
-						min={40}
-						max={250}
-					/>
-
-					<RangeControl
-						label={__("Thumbnail Height", "frontis-blocks")}
-						value={parseInt(thumbnailSize.height)}
-						onChange={(value) =>
-							setAttributes({
-								thumbnailSize: {
-									...thumbnailSize,
-									height: value.toString(),
-								},
-							})
-						}
-						min={40}
-						max={150}
-					/>
-
-					<RangeControl
-						label={__("thumbnailGap", "frontis-blocks")}
-						value={parseInt(thumbnailGap)}
-						onChange={(value) =>
-							setAttributes({ thumbnailGap: value.toString() })
-						}
-						min={0}
-						max={30}
-					/>
-
-					<RangeControl
-						label={__("Main Image Bottom Margin", "frontis-blocks")}
-						value={parseInt(mainImageMarginBottom)}
-						onChange={(value) =>
-							setAttributes({
-								mainImageMarginBottom: value.toString(),
-							})
-						}
-						min={0}
-						max={60}
-					/>
-
-					<RangeControl
-						label={__("Main Image Box Shadow", "frontis-blocks")}
-						value={parseInt(mainImageBoxShadow)}
-						onChange={(value) =>
-							setAttributes({
-								mainImageBoxShadow: value.toString(),
-							})
-						}
-						min={20}
-						max={80}
-					/>
-				</PanelBody>
-
-				<PanelBody title={__("Styling", "frontis-blocks")} initialOpen={false}>
-					<RangeControl
-						label={__("Main Image Border Radius", "frontis-blocks")}
-						value={parseInt(mainImageBorderRadius)}
-						onChange={(value) =>
-							setAttributes({
-								mainImageBorderRadius: value.toString(),
-							})
-						}
-						min={0}
-						max={30}
-					/>
-
-					<RangeControl
-						label={__("Thumbnail Border Radius", "frontis-blocks")}
-						value={parseInt(thumbnailBorderRadius)}
-						onChange={(value) =>
-							setAttributes({
-								thumbnailBorderRadius: value.toString(),
-							})
-						}
-						min={0}
-						max={20}
-					/>
-
-					<RangeControl
-						label={__("Active Thumbnail Border Width", "frontis-blocks")}
-						value={parseInt(activeThumbBorderWidth)}
-						onChange={(value) =>
-							setAttributes({
-								activeThumbBorderWidth: value.toString(),
-							})
-						}
-						min={0}
-						max={10}
-					/>
-
-					<ColorPalette
-						label={__("Active Thumbnail Border Color", "frontis-blocks")}
-						value={parseInt(activeThumbBorderColor)}
-						onChange={(value) =>
-							setAttributes({
-								activeThumbnailBorderColor: value.toString(),
-							})
-						}
-						min={1}
-						max={100}
-					/>
-
-					<RangeControl
-						label={__("Active Thumbnail Border Height", "frontis-blocks")}
-						value={parseInt(activeThumbBorderHeight)}
-						onChange={(value) =>
-							setAttributes({
-								activeThumbnailBorderHeight: value.toString(),
-							})
-						}
-						min={0}
-						max={50}
-					/>
-
-					<RangeControl
-						label={__("Active Thumbnail Overlay", "frontis-blocks")}
-						value={parseInt(activeThumbOverlay)}
-						onChange={(value) =>
-							setAttributes({
-								activeThumbnailOverlay: value.toString(),
-							})
-						}
-						min={0}
-						max={10}
-					/>
-				</PanelBody>
-
-				<PanelBody
-					title={__("Responsive", "frontis-blocks")}
-					initialOpen={false}
-				>
-					<ToggleControl
-						label={__("Show Thumbnails on Desktop", "frontis-blocks")}
-						checked={showThumbnailsDesktop}
-						onChange={(value) =>
-							setAttributes({ showThumbnailsDesktop: value })
-						}
-					/>
-					<ToggleControl
-						label={__("Show Thumbnails on Tablet", "frontis-blocks")}
-						checked={showThumbnailsTablet}
-						onChange={(value) => setAttributes({ showThumbnailsTablet: value })}
-					/>
-					<ToggleControl
-						label={__("Show Thumbnails on Mobile", "frontis-blocks")}
-						checked={showThumbnailsMobile}
-						onChange={(value) => setAttributes({ showThumbnailsMobile: value })}
-					/>
-				</PanelBody>
-			</InspectorControls>
-
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<div {...blockProps}>
-				<div className="fb-image-accordion-container">
-					{/* Main Image Section */}
-					<div className="fb-image-accordion-main-section">
-						{mainImage ? (
-							<img
-								src={mainImage.url}
-								alt={mainImage.alt}
-								className="fb-image-accordion-main-image"
-								style={{
-									borderRadius: `${mainImageBorderRadius}px`,
-								}}
-							/>
-						) : (
-							<div className="fb-image-accordion-placeholder">
-								<p>{__("Click below to add images", "frontis-blocks")}</p>
-							</div>
-						)}
-					</div>
+				<div style={getLayoutStyle()}>
+					{/* Main Image Container */}
+					{(layoutType === 'horizontal' || layoutType === 'vertical' || layoutType === 'compact') && (
+						<div
+							style={{
+								flex: layoutType === 'horizontal' || layoutType === 'vertical' ? `0 0 ${mainImageWidth}%` : '1',
+								minHeight: '300px',
+								background: mainImageBg || '#f5f5f5',
+								borderRadius: `${mainImageBorderRadius}px`,
+								overflow: 'hidden',
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center',
+							}}
+						>
+							{currentImage?.url ? (
+								<img
+									src={currentImage.url}
+									alt={currentImage.alt || 'Main image'}
+									style={{
+										width: '100%',
+										height: '100%',
+										objectFit: 'cover',
+										display: 'block',
+									}}
+								/>
+							) : (
+								<div style={{ color: '#999', textAlign: 'center', padding: '20px' }}>
+									{__('Select an image from thumbnails', 'frontis-blocks')}
+								</div>
+							)}
+						</div>
+					)}
 
-					{/* Thumbnails Section */}
+					{/* Thumbnails Container */}
 					<div
-						className={`fb-image-accordion-thumbnails-section fb-layout-${layoutType}`}
 						style={{
-							gap: `${thumbnailGap}px`,
+							flex: layoutType === 'horizontal' || layoutType === 'vertical' ? `0 0 ${thumbnailAreaWidth}%` : '1',
+							...getThumbnailStyle(),
 						}}
 					>
-						{images.map((image, index) => (
+						{images?.map((image, index) => (
 							<div
-								key={index}
-								className={`fb-image-accordion-thumbnail-wrapper ${
-									activeImageIndex === index ? "active" : ""
-								}`}
+								key={image.id || index}
+								onClick={() => setAttributes({ activeImageIndex: index })}
+								onMouseEnter={() => setHoveredThumbnail(index)}
+								onMouseLeave={() => setHoveredThumbnail(null)}
 								style={{
+									width: `${thumbnailSize}px`,
+									height: `${thumbnailSize}px`,
 									borderRadius: `${thumbnailBorderRadius}px`,
-									borderWidth:
+									overflow: 'hidden',
+									cursor: 'pointer',
+									border:
 										activeImageIndex === index
-											? `${activeThumbBorderWidth}px`
-											: "0px",
-									borderStyle: "solid",
-									borderColor:
-										activeImageIndex === index
-											? activeThumbBorderColor
-											: "transparent",
+											? `${activeThumbBorderWidth}px solid ${activeThumbBorderColor}`
+											: '2px solid #ddd',
+									opacity: hoveredThumbnail === index ? 0.8 : 1,
+									transition: 'opacity 0.2s',
+									flexShrink: 0,
 								}}
 							>
-								<img
-									src={image.url}
-									alt={image.alt}
-									className="fb-image-accordion-thumbnail"
-									style={{
-										width: `${thumbnailSize.width}px`,
-										height: `${thumbnailSize.height}px`,
-										cursor: "pointer",
-										borderRadius: `${thumbnailBorderRadius}px`,
-									}}
-									onClick={() => handleThumbnailClick(index)}
-								/>
-								<button
-									className="fb-image-accordion-remove-btn"
-									onClick={() => handleRemoveImage(index)}
-									aria-label={__("Remove image", "frontis-blocks")}
-								>
-									×
-								</button>
+								{image.url ? (
+									<img
+										src={image.url}
+										alt={image.title || 'Thumbnail'}
+										style={{
+											width: '100%',
+											height: '100%',
+											objectFit: 'cover',
+											display: 'block',
+										}}
+									/>
+								) : (
+									<div
+										style={{
+											width: '100%',
+											height: '100%',
+											background: '#f0f0f0',
+											display: 'flex',
+											alignItems: 'center',
+											justifyContent: 'center',
+											fontSize: '10px',
+											color: '#999',
+										}}
+									>
+										{__('No Image', 'frontis-blocks')}
+									</div>
+								)}
 							</div>
 						))}
-
-						{/* Add Image Button */}
-						<MediaUpload
-							onSelect={handleAddImage}
-							type="image"
-							render={({ open }) => (
-								<Button
-									variant="secondary"
-									onClick={open}
-									className="fb-image-accordion-add-btn"
-									style={{
-										width: `${thumbnailSize.width}px`,
-										height: `${thumbnailSize.height}px`,
-										borderRadius: `${thumbnailBorderRadius}px`,
-									}}
-								>
-									{__("+ Add", "frontis-blocks")}
-								</Button>
-							)}
-						/>
 					</div>
 
 					{/* Description */}
-					{images.length > 0 && (
-						<div className="fb-image-accordion-description">
-							<p>
-								{images[activeImageIndex].title ||
-									`${__("Image", "frontis-blocks")} ${activeImageIndex + 1}`}
-							</p>
+					{showTitle && (
+						<div
+							style={{
+								flex: '1 0 100%',
+								background: descriptionBg || '#fff',
+								border: `${descriptionBorderWidth}px solid ${descriptionBorder}`,
+								borderRadius: '4px',
+								padding: '15px',
+								marginTop: '10px',
+							}}
+						>
+							<h3
+								style={{
+									fontSize: `${titleFontSize?.Desktop || 24}px`,
+									color: titleFontColor || '#000',
+									fontWeight: titleFontWeight || '600',
+									margin: '0 0 10px 0',
+								}}
+							>
+								{currentImage?.title || __('Untitled', 'frontis-blocks')}
+							</h3>
+							{showDescription && (
+								<p
+									style={{
+										fontSize: `${descriptionFontSize?.Desktop || 14}px`,
+										color: descriptionFontColor || '#666',
+										margin: '0',
+										lineHeight: '1.6',
+									}}
+								>
+									{currentImage?.description || __('No description', 'frontis-blocks')}
+								</p>
+							)}
 						</div>
 					)}
 				</div>
 			</div>
-			<style>{blockStyle}</style>
 		</>
 	);
 }

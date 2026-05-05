@@ -317,7 +317,7 @@ class Admin
         wp_enqueue_script('jquery');
         $script_path = FB_PLUGIN_PATH . 'assets/admin/dashboard.js';
         $script_asset_path = FB_PLUGIN_PATH . 'assets/admin/dashboard.asset.php';
-        $script_asset = file_exists($script_asset_path) ? require($script_asset_path) : array('dependencies' => array(), 'version' => filemtime($script_path));
+        $script_asset = file_exists($script_asset_path) ? require($script_asset_path) : array('dependencies' => array(), 'version' => file_exists($script_path) ? filemtime($script_path) : time());
 
         //push jquery in $script_asset['dependencies']
         $script_asset['dependencies'][] = 'jquery';

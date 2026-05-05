@@ -1,17 +1,27 @@
 import { registerBlockType } from "@wordpress/blocks";
 import "./style.scss";
 
-import metadata from "./block.json";
+/**
+ * Internal dependencies
+ */
 import Edit from "./edit";
-import Save from "./save";
+import save from "./save";
+import metadata from "./block.json";
 import attributes from "./attributes.js";
 import FB_Block_Icons from "@Config/fb-blocks-icons";
-import deprecated from "./deprecated";
+import { ImageAccordionPreset } from "./presets";
+import { defaultImageAccordionPreset } from "./presets";
+
+const { name, title, description, category, icon, supports } = metadata;
+
+/**
+ * Register block
+ */
 
 registerBlockType(metadata.name, {
-	attributes: attributes,
-	icon: FB_Block_Icons.image || "format-gallery",
+	attributes,
+	icon: FB_Block_Icons.imageAccordion,
+	// icon: FB_Block_Icons.imageAccordion,
 	edit: Edit,
-	save: Save,
-	deprecated,
+	save: save,
 });

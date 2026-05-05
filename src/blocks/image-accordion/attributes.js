@@ -1,113 +1,208 @@
+import { defaultImageAccordionPreset } from './presets';
+
 const attributes = {
-	// Core block attributes
-	deviceType: {
-		type: "string",
-		default: "Desktop",
-	},
+	// Core attributes
 	blockID: {
-		type: "string",
+		type: 'string',
+		default: '',
 	},
 	blockStyle: {
-		type: "string",
-		default: "",
+		type: 'string',
+		default: '',
 	},
 	blockRoot: {
-		type: "string",
-		default: "frontis_block",
+		type: 'string',
+		default: 'frontis_block',
 	},
 	blockMeta: {
-		type: "object",
+		type: 'object',
 	},
 
-	// Carousel images array
+	// Preset
+	imageAccordionPresetStyle: {
+		type: 'string',
+		default: 'preset-1',
+	},
+
+	// Images array
 	images: {
-		type: "array",
-		default: [],
+		type: 'array',
+		default: defaultImageAccordionPreset.images,
 	},
 
-	// Active/main image index
+	// Active image index
 	activeImageIndex: {
-		type: "number",
+		type: 'number',
 		default: 0,
 	},
 
-	// Layout settings
+	// Layout Settings
 	layoutType: {
-		type: "string",
-		default: "horizontal", // horizontal or vertical
+		type: 'string',
+		default: 'horizontal', // horizontal, vertical, grid, compact
 	},
 
-	// Thumbnail size
+	mainImageWidth: {
+		type: 'string',
+		default: '60',
+	},
+
+	thumbnailAreaWidth: {
+		type: 'string',
+		default: '40',
+	},
+
+	thumbnailLayout: {
+		type: 'string',
+		default: 'vertical', // vertical, horizontal, grid, horizontal-scroll
+	},
+
 	thumbnailSize: {
-		type: "object",
-		default: {
-			width: "80",
-			height: "80",
-		},
+		type: 'string',
+		default: '80',
 	},
 
 	// Spacing
-	spacingUnit: {
-		type: "string",
-		default: "px",
-	},
-	mainImageMarginBottom: {
-		type: "string",
-		default: "20",
-	},
-	thumbnailGap: {
-		type: "string",
-		default: "10",
+	spacing: {
+		type: 'string',
+		default: '20',
 	},
 
-	// Main image dimensions
-	mainImageDesktopWidth: {
-		type: "string",
-		default: "100",
-	},
-	mainImageDesktopHeight: {
-		type: "string",
-		default: "auto",
-	},
-
-	// Styling
-	thumbnailBorderRadius: {
-		type: "string",
-		default: "4",
-	},
+	// Border Radius
 	mainImageBorderRadius: {
-		type: "string",
-		default: "8",
+		type: 'string',
+		default: '12',
 	},
-	activeThumbBorderColor: {
-		type: "string",
-		default: "#007cba",
+
+	thumbnailBorderRadius: {
+		type: 'string',
+		default: '8',
 	},
+
+	// Active Thumbnail Styling
 	activeThumbBorderWidth: {
-		type: "string",
-		default: "3",
+		type: 'string',
+		default: '3',
+	},
+
+	activeThumbBorderColor: {
+		type: 'string',
+		default: '#007cba',
+	},
+
+	// Content Display
+	showTitle: {
+		type: 'boolean',
+		default: true,
+	},
+
+	showDescription: {
+		type: 'boolean',
+		default: true,
+	},
+
+	showIcon: {
+		type: 'boolean',
+		default: true,
+	},
+
+	// Colors
+	mainImageBg: {
+		type: 'string',
+		default: '#f5f5f5',
+	},
+
+	descriptionBg: {
+		type: 'string',
+		default: 'rgba(0, 124, 186, 0.1)',
+	},
+
+	descriptionBorder: {
+		type: 'string',
+		default: '#007cba',
+	},
+
+	descriptionBorderWidth: {
+		type: 'string',
+		default: '3',
+	},
+
+	// Typography - Title
+	titleFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '24',
+			Tablet: '20',
+			Mobile: '18',
+		},
+	},
+
+	titleFontColor: {
+		type: 'string',
+		default: '#000000',
+	},
+
+	titleFontWeight: {
+		type: 'string',
+		default: '600',
+	},
+
+	// Typography - Description
+	descriptionFontSize: {
+		type: 'object',
+		default: {
+			Desktop: '14',
+			Tablet: '13',
+			Mobile: '12',
+		},
+	},
+
+	descriptionFontColor: {
+		type: 'string',
+		default: '#666666',
+	},
+
+	descriptionFontWeight: {
+		type: 'string',
+		default: '400',
 	},
 
 	// Responsive
-	showThumbnailsDesktop: {
-		type: "boolean",
-		default: true,
-	},
-	showThumbnailsTablet: {
-		type: "boolean",
-		default: true,
-	},
-	showThumbnailsMobile: {
-		type: "boolean",
+	desktopSwitcher: {
+		type: 'boolean',
 		default: false,
 	},
 
-	// Global wrapper attributes
-	carouselGlobalWraperID: {
-		type: "string",
+	tabletSwitcher: {
+		type: 'boolean',
+		default: false,
 	},
-	carouselGlobalWraperClass: {
-		type: "string",
+
+	mobileSwitcher: {
+		type: 'boolean',
+		default: false,
+	},
+
+	// Global wrapper
+	imageAccordionGlobalWraperID: {
+		type: 'string',
+	},
+
+	imageAccordionGlobalWraperClass: {
+		type: 'string',
+	},
+
+	// Device type
+	deviceType: {
+		type: 'string',
+		default: 'Desktop',
+	},
+
+	// Custom CSS
+	customCSS: {
+		type: 'string',
+		default: '',
 	},
 };
+
 export default attributes;
