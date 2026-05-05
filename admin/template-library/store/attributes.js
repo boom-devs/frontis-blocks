@@ -52,6 +52,34 @@ const attributes = {
     type: "string",
     default: null,
   },
+  bgImportActive: {
+    type: "boolean",
+    default: false,
+  },
+  bgImportProgress: {
+    type: "number",
+    default: 0,
+  },
+  bgImportStep: {
+    type: "string",
+    default: "",
+  },
+  bgImportSteps: {
+    type: "array",
+    default: [],
+  },
+  bgImportFailed: {
+    type: "boolean",
+    default: false,
+  },
+  bgImportSuccess: {
+    type: "boolean",
+    default: false,
+  },
+  showBgProgressBar: {
+    type: "boolean",
+    default: false,
+  },
 };
 
 export default attributes;

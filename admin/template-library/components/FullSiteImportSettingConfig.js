@@ -922,7 +922,7 @@ const FullSiteImportSettingConfig = ({
   const handleImport = async () => {
     setIsImporting(true);
     setIsImportFailed(false);
-    dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null }));
+    dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null, showBgProgressBar: false }));
 
     // Define steps once
     const allSteps = [
@@ -943,12 +943,32 @@ const FullSiteImportSettingConfig = ({
     setStepOptions(allSteps);
     let activeStepKey = "";
 
+    // Helper to sync progress to Redux (for background floating bar)
+    const syncToRedux = (progress, step, steps) => {
+      dispatch(setAttribute({
+        bgImportProgress: progress,
+        bgImportStep: step,
+        ...(steps ? { bgImportSteps: steps } : {}),
+      }));
+    };
+
+    // Initialize Redux background import state
+    dispatch(setAttribute({
+      bgImportActive: true,
+      bgImportProgress: 0,
+      bgImportStep: "",
+      bgImportSteps: allSteps,
+      bgImportFailed: false,
+      bgImportSuccess: false,
+    }));
+
     try {
       /** STEP 1: FETCH SITE **/
       activeStepKey = "fetch_site";
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(5);
+      syncToRedux(5, activeStepKey);
 
       const siteResp = await getTemplatesData("import/site", "site_id", template.id);
       if (!siteResp?.data) throw new Error("Failed to fetch site data");
@@ -969,6 +989,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(20);
+      syncToRedux(20, activeStepKey);
 
       const uploadRes = await uploadFiles(uploads);
       const isUploadsSuccessful = !uploadRes?.skipped;
@@ -979,6 +1000,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(30);
+      syncToRedux(30, activeStepKey);
 
       const themeRes = await activateTheme(template.theme || "frontis");
       updateStepStatus(activeStepKey, themeRes?.skipped ? "skipped" : "success");
@@ -988,6 +1010,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(45);
+      syncToRedux(45, activeStepKey);
 
       const pluginRes = await installActivatePlugins(template.dependencies || []);
       updateStepStatus(activeStepKey, pluginRes?.skipped ? "skipped" : "success");
@@ -998,6 +1021,7 @@ const FullSiteImportSettingConfig = ({
       updateStepStatus("headers", "running");
       updateStepStatus("footers", "running");
       setImportProgress(55);
+      syncToRedux(55, "headers");
 
       let navigationMapping = {};
 
@@ -1016,6 +1040,7 @@ const FullSiteImportSettingConfig = ({
       }
 
       setImportProgress(65);
+      syncToRedux(65, "templates");
 
       // Step 6: Import Templates (using navigation mapping)
       activeStepKey = "templates";
@@ -1032,12 +1057,14 @@ const FullSiteImportSettingConfig = ({
       }
 
       setImportProgress(70);
+      syncToRedux(70, "templates");
 
       // STEP 6: PAGES
       activeStepKey = "pages";
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(75);
+      syncToRedux(75, activeStepKey);
 
       const pageResult = await handleStorePages(pages || [], isUploadsSuccessful);
       updateStepStatus(activeStepKey, pageResult.success ? "success" : "warning");
@@ -1047,6 +1074,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(80);
+      syncToRedux(80, activeStepKey);
 
       const postsResult = await handleStorePosts(posts || [], isUploadsSuccessful);
       updateStepStatus(activeStepKey, postsResult.success ? "success" : "warning");
@@ -1056,6 +1084,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(90);
+      syncToRedux(90, activeStepKey);
 
       await handleUpdateState();
       updateStepStatus(activeStepKey, "success");
@@ -1065,6 +1094,7 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(95);
+      syncToRedux(95, activeStepKey);
 
       try {
         await handleGenerateAssets();
@@ -1079,12 +1109,13 @@ const FullSiteImportSettingConfig = ({
       setCurrentStep(activeStepKey);
       updateStepStatus(activeStepKey, "running");
       setImportProgress(100);
+      syncToRedux(100, activeStepKey);
 
       await new Promise(r => setTimeout(r, 600));
       updateStepStatus(activeStepKey, "success");
 
 
-      dispatch(setAttribute({ importSuccess: true }));
+      dispatch(setAttribute({ importSuccess: true, bgImportSuccess: true, bgImportActive: true }));
 
     } catch (err) {
       console.error("Import Error:", err);
@@ -1092,7 +1123,7 @@ const FullSiteImportSettingConfig = ({
       if (activeStepKey) {
         updateStepStatus(activeStepKey, "failed", true);
       }
-      dispatch(setAttribute({ importSuccess: false }));
+      dispatch(setAttribute({ importSuccess: false, bgImportFailed: true }));
       toast.error("Import failed. See console for details");
 
     } finally {
@@ -1158,7 +1189,7 @@ const FullSiteImportSettingConfig = ({
           currentStep={currentStep}
           progress={importProgress}
           onCloseModal={() => {
-            dispatch && dispatch(setAttribute({ showFullSiteImportModal: false }));
+            dispatch && dispatch(setAttribute({ showFullSiteImportModal: false, showBgProgressBar: true }));
             dispatch && dispatch(setAttribute({ sitePreviewLoading: true }));
             onClose && onClose();
             setCurrentStep("");

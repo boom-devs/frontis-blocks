@@ -1,0 +1,163 @@
+// ─── Background Floating Progress Bar ───────────────────
+.fb-bg-progress-bar {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999999;
+  width: 320px;
+  background: #FFFFFF;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px;
+  font-family: "Manrope", sans-serif;
+  border: 1px solid #E1E3E8;
+  overflow: hidden;
+
+  // Enter animation
+  &.fb-bg-enter {
+    animation: fbBgSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  // Exit animation
+  &.fb-bg-exit {
+    animation: fbBgSlideOut 0.4s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+  }
+
+  // Success state
+  &.fb-bg-success {
+    border-color: #B7DFB9;
+
+    .fb-bg-progress-fill {
+      background: linear-gradient(90deg, #94CF96, #4CAF50);
+    }
+
+    .fb-bg-progress-percent {
+      color: #4CAF50;
+    }
+  }
+
+  // Failed state
+  &.fb-bg-failed {
+    border-color: #F4ADB3;
+
+    .fb-bg-progress-fill {
+      background: linear-gradient(90deg, #EF848E, #E43242);
+    }
+
+    .fb-bg-progress-percent {
+      color: #E43242;
+    }
+  }
+}
+
+// Header row
+.fb-bg-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.fb-bg-progress-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.fb-bg-progress-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2A2F39;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fb-bg-progress-percent {
+  font-size: 13px;
+  font-weight: 700;
+  color: #3991FF;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+// Progress bar track
+.fb-bg-progress-track {
+  width: 100%;
+  height: 6px;
+  background: #E1E3E8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.fb-bg-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #93C4F5, #3991FF);
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      transparent 100%
+    );
+    animation: fbBgShimmer 2s ease-in-out infinite;
+  }
+}
+
+// Spinner
+.fb-bg-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #E1E3E8;
+  border-top-color: #3991FF;
+  border-radius: 50%;
+  animation: fbBgSpin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+// ─── Animations ──────────────────────────────────────────
+
+@keyframes fbBgSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fbBgSlideOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+}
+
+@keyframes fbBgShimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes fbBgSpin {
+  to { transform: rotate(360deg); }
+}

@@ -11,6 +11,7 @@ import TemplateHeader from "./template-header";
 import TemplateSidebar from "./template-sidebar";
 import TemplateContent from "./template-content";
 import LibraryContent from "./library-content";
+import BackgroundProgressBar from "./components/BackgroundProgressBar";
 
 import { usePostDataMutation } from './services/laravelapi';
 
@@ -580,12 +581,13 @@ const PatternLibraryButton = () => {
                                         isLoginModalOpen={isLoginModalOpen}
                                     />
                                 )}
-
+                                <BackgroundProgressBar />
                             </div>
                         </div>
                     </div>
                 </Modal>
             )}
+            <BackgroundProgressBar />
         </>
     );
 };
