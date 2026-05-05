@@ -1,7 +1,7 @@
 // ─── Background Floating Progress Bar ───────────────────
 .fb-bg-progress-bar {
   position: fixed;
-  bottom: 24px;
+  top: 46px; // Below WP admin bar (32px + 14px gap)
   right: 24px;
   z-index: 999999;
   width: 320px;
@@ -134,7 +134,7 @@
 @keyframes fbBgSlideIn {
   from {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(-20px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -149,7 +149,7 @@
   }
   to {
     opacity: 0;
-    transform: translateY(20px) scale(0.95);
+    transform: translateY(-20px) scale(0.95);
   }
 }
 

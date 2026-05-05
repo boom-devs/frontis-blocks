@@ -1,4 +1,4 @@
-import { useEffect, useState } from "@wordpress/element";
+import { useEffect, useState, useRef } from "@wordpress/element";
 import { useSelector, useDispatch } from "react-redux";
 import { setAttribute } from "../store/attributesSlice";
 
@@ -7,8 +7,7 @@ const stepLabels = {
   upload_files: "Uploading files",
   theme: "Installing theme",
   plugins: "Installing plugins",
-  headers: "Creating headers",
-  footers: "Creating footers",
+  headers_footers: "Creating headers & footers",
   templates: "Creating templates",
   pages: "Creating pages",
   posts: "Creating posts",
@@ -31,6 +30,89 @@ const BackgroundProgressBar = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
+  const pollRef = useRef(null);
+
+  // On mount: check if there's a running import on the server (survives page reload)
+  useEffect(() => {
+    const checkServerImport = async () => {
+      try {
+        const { nonce, ajaxUrl } = window.frontisBlocksAdmin || {};
+        if (!nonce || !ajaxUrl) return;
+
+        const form = new FormData();
+        form.append("action", "fb_get_import_status");
+        form.append("security", nonce);
+
+        const resp = await fetch(ajaxUrl, { method: "POST", body: form, credentials: "same-origin" });
+        const result = await resp.json();
+
+        if (result.success && result.data && result.data.status === "running") {
+          // There's an active server-side import! Resume showing progress.
+          dispatch(setAttribute({
+            bgImportActive: true,
+            showBgProgressBar: true,
+            bgImportProgress: result.data.progress || 0,
+            bgImportStep: result.data.current_step || "",
+            bgImportSteps: result.data.steps || [],
+            bgImportFailed: false,
+            bgImportSuccess: false,
+          }));
+
+          // Start polling
+          startServerPolling();
+        }
+      } catch (err) {
+        console.warn("BackgroundProgressBar: server check failed:", err);
+      }
+    };
+
+    checkServerImport();
+
+    return () => {
+      if (pollRef.current) clearInterval(pollRef.current);
+    };
+  }, []);
+
+  const startServerPolling = () => {
+    if (pollRef.current) clearInterval(pollRef.current);
+
+    pollRef.current = setInterval(async () => {
+      try {
+        const { nonce, ajaxUrl } = window.frontisBlocksAdmin || {};
+        if (!nonce || !ajaxUrl) return;
+
+        const form = new FormData();
+        form.append("action", "fb_get_import_status");
+        form.append("security", nonce);
+
+        const resp = await fetch(ajaxUrl, { method: "POST", body: form, credentials: "same-origin" });
+        const result = await resp.json();
+
+        if (!result.success || !result.data || result.data.status === "idle") {
+          clearInterval(pollRef.current);
+          return;
+        }
+
+        const { progress, current_step, steps, status, error } = result.data;
+
+        dispatch(setAttribute({
+          bgImportProgress: progress || 0,
+          bgImportStep: current_step || "",
+          ...(steps ? { bgImportSteps: steps } : {}),
+        }));
+
+        if (status === "completed") {
+          clearInterval(pollRef.current);
+          dispatch(setAttribute({ bgImportSuccess: true, bgImportActive: true }));
+        } else if (status === "failed") {
+          clearInterval(pollRef.current);
+          dispatch(setAttribute({ bgImportFailed: true }));
+        }
+      } catch (err) {
+        console.warn("BackgroundProgressBar poll error:", err);
+      }
+    }, 3000);
+  };
 
   // Show bar only when showBgProgressBar is true (clicked Continue in Background)
   useEffect(() => {

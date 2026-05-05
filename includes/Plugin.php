@@ -21,6 +21,7 @@ use FrontisBlocks\Core\Enqueues;
 use FrontisBlocks\Core\DemoContentImporter;
 use FrontisBlocks\RestApi\RestApi;
 use FrontisBlocks\BackgroundProcess\AssetsGenerationProcess;
+use FrontisBlocks\BackgroundProcess\BackgroundImportRunner;
 use FrontisBlocks\Assets\AssetsGenerationStatus;
 
 final class Plugin
@@ -165,5 +166,6 @@ final class Plugin
 		RestApi::get_instance();
 		AssetsGenerationStatus::get_instance();
 		AssetsGenerationProcess::get_instance();
+		BackgroundImportRunner::get_instance();
 	}
 }
