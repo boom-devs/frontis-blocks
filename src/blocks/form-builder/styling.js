@@ -180,6 +180,24 @@ const generateFormBuilderStyle = (attributes) => {
         submitBtnIconSize,
         submitBtnIconSizeUnits,
 
+        submitBtnPosition,
+        submitBtnWidth,
+        submitBtnWidthUnits,
+        submitBtnHeight,
+        submitBtnHeightUnits,
+
+        submitBtnPositionType,
+        submitBtnHZOrientationType,
+        submitBtnVROrientationType,
+        submitBtnHZLeftOffset,
+        submitBtnHZLeftOffsetUnits,
+        submitBtnHZRightOffset,
+        submitBtnHZRightOffsetUnits,
+        submitBtnVRTopOffset,
+        submitBtnVRTopOffsetUnits,
+        submitBtnVRBottomOffset,
+        submitBtnVRBottomOffsetUnits,
+
         successMessageGlobalTypoSwitcher,
         successMessageGlobalTypographyData,
         successMessageFontFamily,
@@ -502,6 +520,12 @@ const generateFormBuilderStyle = (attributes) => {
             ${fieldColumnGap?.Desktop ? `column-gap: ${fieldColumnGap?.Desktop}${fieldColumnGapUnits?.Desktop};` : ''}
             ${fieldRowGap?.Desktop ? `row-gap: ${fieldRowGap?.Desktop}${fieldRowGapUnits?.Desktop};` : ''}
         }
+        .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-wrapper {
+            ${submitBtnPosition === 'bottom' ? `flex-direction: column;` : ''}
+            ${submitBtnPosition === 'top' ? `flex-direction: column-reverse;` : ''}
+            ${submitBtnPosition === 'right' ? `flex-direction: row; flex-wrap: nowrap;` : ''}
+            ${submitBtnPosition === 'left' ? `flex-direction: row-reverse; flex-wrap: nowrap;` : ''}
+        }
         .fb-form-builder-main-wrapper.${blockID} .block-editor-inner-blocks {
             width: 100%;
         }
@@ -657,12 +681,21 @@ const generateFormBuilderStyle = (attributes) => {
         }
 
         .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper {
-            width: 100%;
             display: flex;
+            flex-shrink: 0;
+            z-index: 1;
+            ${submitBtnPosition !== 'right' && submitBtnPosition !== 'left' ? 'width: 100%;' : ''}
             ${submitBtnAlignment?.Desktop === 'left' ? 'justify-content: start;' : ''}
             ${submitBtnAlignment?.Desktop === 'center' ? 'justify-content: center;' : ''}
             ${submitBtnAlignment?.Desktop === 'right' ? 'justify-content: end;' : ''}
             ${submitBtnAlignment?.Desktop === 'stretch' ? 'justify-content: stretch;' : ''}
+
+            ${submitBtnPositionType === 'default' ? `position: relative;` : ''}
+            ${submitBtnPositionType !== 'default' ? `position: ${submitBtnPositionType}; width: unset;` : ''}
+            ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'left' && submitBtnHZLeftOffset?.Desktop ? `left: ${submitBtnHZLeftOffset?.Desktop}${submitBtnHZLeftOffsetUnits?.Desktop};` : ''}
+            ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnHZOrientationType === 'right' && submitBtnHZRightOffset?.Desktop ? `right: ${submitBtnHZRightOffset?.Desktop}${submitBtnHZRightOffsetUnits?.Desktop};` : ''}
+            ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'top' && submitBtnVRTopOffset?.Desktop ? `top: ${submitBtnVRTopOffset?.Desktop}${submitBtnVRTopOffsetUnits?.Desktop};` : ''}
+            ${submitBtnPositionType !== 'default' && submitBtnPositionType !== 'relative' && submitBtnVROrientationType === 'bottom' && submitBtnVRBottomOffset?.Desktop ? `bottom: ${submitBtnVRBottomOffset?.Desktop}${submitBtnVRBottomOffsetUnits?.Desktop};` : ''}
         }
         .fb-form-builder-main-wrapper.${blockID} .fb-form-builder-submit-wrapper .fb-submit-button {
             display: flex;
@@ -670,6 +703,8 @@ const generateFormBuilderStyle = (attributes) => {
             justify-content: center;
             box-sizing: border-box;
             cursor: pointer;
+            ${submitBtnWidth?.Desktop ? `width: ${submitBtnWidth?.Desktop}${submitBtnWidthUnits?.Desktop};` : ''}
+            ${submitBtnHeight?.Desktop ? `height: ${submitBtnHeight?.Desktop}${submitBtnHeightUnits?.Desktop};` : ''}
             ${submitBtnIconPosition?.Desktop === 'left' ? 'flex-direction: row-reverse;' : ''}
             ${submitBtnAlignment?.Desktop === 'stretch' ? 'width: 100%;' : ''}
             ${submitBtnIconGap?.Desktop ? `gap: ${submitBtnIconGap?.Desktop}${submitBtnIconGapUnits?.Desktop};` : ''}
