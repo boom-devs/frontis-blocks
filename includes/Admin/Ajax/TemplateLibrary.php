@@ -633,6 +633,8 @@ class TemplateLibrary extends AjaxBase
         $site_url        = isset($_POST['site_url']) ? esc_url_raw($_POST['site_url']) : '';
         $uploads_updated = isset($_POST['uploads_updated'])
             ? filter_var($_POST['uploads_updated'], FILTER_VALIDATE_BOOLEAN) : false;
+        $site_logo       = isset($_POST['siteLogo']) ? intval($_POST['siteLogo']) : 0;
+        $should_import_logo = $site_logo <= 0;
 
         if (empty($site_url)) {
             wp_send_json_error(['message' => 'Site URL is required']);
@@ -652,6 +654,7 @@ class TemplateLibrary extends AjaxBase
 
         $headers = $payload['header'] ?? [];
         $footers = $payload['footer'] ?? [];
+        $logo_url = !empty($payload['logo_url']) ? esc_url_raw($payload['logo_url']) : '';
 
         $navigation_mapping = [];
         $stats = [
@@ -771,7 +774,7 @@ class TemplateLibrary extends AjaxBase
                 }
 
                 // Logo Detection
-                if (!is_wp_error($id) && $id > 0) {
+                if ($should_import_logo && !is_wp_error($id) && $id > 0) {
                     $logo_id = 0;
                     if (preg_match('/<!--\s+wp:site-logo\s+({.*?})\s+\/-->/s', $content, $logo_matches)) {
                         $logo_attrs = json_decode($logo_matches[1], true);
@@ -782,6 +785,14 @@ class TemplateLibrary extends AjaxBase
                     }
                     if ($logo_id) set_theme_mod('custom_logo', $logo_id);
                 }
+            }
+        }
+
+        // Prefer API-provided logo URL when available.
+        if ($should_import_logo && !empty($logo_url)) {
+            $logo_id = $this->import_logo_from_url($logo_url);
+            if ($logo_id > 0) {
+                set_theme_mod('custom_logo', $logo_id);
             }
         }
 
@@ -1144,6 +1155,75 @@ class TemplateLibrary extends AjaxBase
         $theme = get_stylesheet();
         // Replace theme name in attributes like "theme":"twentytwentyfive" or \"theme\":\"twentytwentyfive\"
         return preg_replace( '/((\\\\*)"theme"(\\\\*)\s*:\s*(\\\\*)")[^"\\\\]*(\\\\*")/', '${1}' . $theme . '${5}', $content );
+    }
+
+    /**
+     * Download logo URL to media library and return attachment ID.
+     */
+    private function import_logo_from_url( string $logo_url ): int
+    {
+        if (empty($logo_url)) {
+            return 0;
+        }
+
+        // Reuse existing media item when possible.
+        $existing = attachment_url_to_postid($logo_url);
+        if (!empty($existing)) {
+            return (int) $existing;
+        }
+
+        $response = wp_safe_remote_get($logo_url, [
+            'timeout' => 60,
+            'sslverify' => true,
+        ]);
+
+        if (is_wp_error($response)) {
+            error_log('FB Import: Failed to download logo: ' . $response->get_error_message());
+            return 0;
+        }
+
+        $status = wp_remote_retrieve_response_code($response);
+        $body   = wp_remote_retrieve_body($response);
+
+        if (200 !== $status || empty($body)) {
+            error_log('FB Import: Invalid logo response HTTP ' . $status . ' for ' . $logo_url);
+            return 0;
+        }
+
+        $filename = basename(parse_url($logo_url, PHP_URL_PATH) ?: '');
+        if (empty($filename)) {
+            $filename = 'site-logo.svg';
+        }
+
+        $upload = wp_upload_bits($filename, null, $body);
+        if (!empty($upload['error']) || empty($upload['file']) || !file_exists($upload['file'])) {
+            error_log('FB Import: Failed to save logo upload for ' . $logo_url);
+            return 0;
+        }
+
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        require_once ABSPATH . 'wp-admin/includes/media.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
+
+        $filetype = wp_check_filetype($filename, null);
+        $attach_id = wp_insert_attachment([
+            'post_mime_type' => $filetype['type'] ?: 'image/svg+xml',
+            'post_title'     => preg_replace('/\.[^.]+$/', '', sanitize_file_name($filename)),
+            'post_content'   => '',
+            'post_status'    => 'inherit',
+        ], $upload['file']);
+
+        if (is_wp_error($attach_id) || empty($attach_id)) {
+            error_log('FB Import: Failed to create logo attachment for ' . $logo_url);
+            return 0;
+        }
+
+        $metadata = wp_generate_attachment_metadata($attach_id, $upload['file']);
+        if (!empty($metadata) && !is_wp_error($metadata)) {
+            wp_update_attachment_metadata($attach_id, $metadata);
+        }
+
+        return (int) $attach_id;
     }
 
     /**
