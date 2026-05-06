@@ -357,10 +357,22 @@ const FullSiteImportSettingConfig = ({
 
     const settings = [
       {
+        key: "fb_update_global_colors",
+        data: globalColors,
+        setter: setGlobalColors,
+        storeKey: "fb_global_colors",
+      },
+      {
         key: "fb_update_custom_colors",
         data: customColors,
         setter: setCustomColors,
         storeKey: "fb_custom_colors",
+      },
+      {
+        key: "fb_update_gradient_colors",
+        data: gradientColors,
+        setter: setGradientColors,
+        storeKey: "fb_gradient_colors",
       },
       {
         key: "fb_update_custom_gradient_colors",
@@ -454,7 +466,9 @@ const FullSiteImportSettingConfig = ({
 
       // Generate color variables
       const mergedColors = [
+        ...(globalColors ?? []),
         ...(customColors ?? []),
+        ...(gradientColors ?? []),
         ...(customGradientColors ?? []),
       ];
 
@@ -468,7 +482,9 @@ const FullSiteImportSettingConfig = ({
       console.error("Error updating global settings:", error);
     }
   }, [
+    globalColors,
     customColors,
+    gradientColors,
     customGradientColors,
     typography,
     customTypography,
@@ -480,7 +496,9 @@ const FullSiteImportSettingConfig = ({
 
   useEffect(() => {
     const mergedColors = [
+      ...(globalColors ?? []),
       ...(customColors ?? []),
+      ...(gradientColors ?? []),
       ...(customGradientColors ?? []),
     ];
 
@@ -491,7 +509,7 @@ const FullSiteImportSettingConfig = ({
     // cleanup function
     return () => clearTimeout(timeoutId);
 
-  }, [customColors, customGradientColors, deviceType]);
+  }, [globalColors, customColors, gradientColors, customGradientColors, deviceType]);
 
 
   const handleStorePages = async (pages, uploadsUpdatedOverride = null) => {
@@ -902,7 +920,7 @@ const FullSiteImportSettingConfig = ({
   };
 
 
-  const handleImport = useCallback(async () => {
+  const handleImport = async () => {
     setIsImporting(true);
     setIsImportFailed(false);
     dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null }));
@@ -1081,7 +1099,7 @@ const FullSiteImportSettingConfig = ({
     } finally {
       setIsImporting(false);
     }
-  }, []);
+  };
 
 
   return (

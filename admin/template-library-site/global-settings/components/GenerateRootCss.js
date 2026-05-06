@@ -160,21 +160,23 @@ const generateCSSVariables = (data, deviceType, previewType) => {
             if (fontFamily !== null && !fontFamilies.has(fontFamily)) {
                 fontFamilies.add(fontFamily);
 
-                let iframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas");
-
-                // If not found, try the editor-canvas iframe
-                if (!iframe) {
-                    iframe = document.querySelector('iframe[name="editor-canvas"]');
+                // Select iframe based on previewType (same logic as CSS injection)
+                let fontIframe;
+                if (previewType === "preview") {
+                    fontIframe = document.querySelector("iframe.fb-preview-frame");
+                } else {
+                    fontIframe = document.querySelector("iframe.edit-site-visual-editor__editor-canvas") ||
+                                 document.querySelector('iframe[name="editor-canvas"]');
                 }
 
-                const iframeDocument = iframe?.contentDocument || iframe?.contentWindow?.document || document;
+                const fontIframeDocument = fontIframe?.contentDocument || fontIframe?.contentWindow?.document || document;
 
                 // Generate font URL and add to the iframe's document
                 const fontUrl = `https://fonts.googleapis.com/css?family=${fontFamily.replace(' ', '+')}:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic`;
-                const linkElement = iframeDocument.createElement('link');
+                const linkElement = fontIframeDocument.createElement('link');
                 linkElement.rel = 'stylesheet';
                 linkElement.href = fontUrl;
-                iframeDocument.head.appendChild(linkElement);
+                fontIframeDocument.head.appendChild(linkElement);
             }
         });
     });
