@@ -588,7 +588,7 @@ class BlockList
                 'category' => 'content',
                 'badge' => 'free',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/call-to-action.svg',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-search.svg',
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
@@ -815,6 +815,7 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
+<<<<<<< HEAD
             'circle-menu' => [
                 'slug' => 'circle-menu',
                 'title' => 'Circle Menu',
@@ -823,11 +824,37 @@ class BlockList
                 'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
+=======
+            'grid-layout' => [
+                'slug' => 'grid-layout',
+                'title' => 'Grid Layout Builder',
+                'package' => 'free',
+                'category' => 'layout',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/post-grid.svg',
+>>>>>>> 54159092909eba311a519a8ae06a06cc73f3b803
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
                 'child' => 'false',
             ],
+<<<<<<< HEAD
+=======
+            'grid-item' => [
+                'slug' => 'grid-item',
+                'title' => 'Grid Item',
+                'package' => 'free',
+                'category' => 'layout',
+                'badge' => 'free',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/container.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'true',
+            ],
+>>>>>>> 54159092909eba311a519a8ae06a06cc73f3b803
         ];
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
     }

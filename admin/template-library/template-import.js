@@ -7,7 +7,7 @@ import TemplateHeader from "./template-header";
 import FullSiteImport from "./full-site-import";
 import { ToastContainer, toast } from "react-toastify";
 
-const TemplateImport = ({ 
+const TemplateImport = ({
     template,
     onClose,
     data,
@@ -19,10 +19,12 @@ const TemplateImport = ({
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showFullSiteImport, setShowFullSiteImport] = useState(false);
     const userData = JSON.parse(localStorage.getItem("userData"));
-    
+
     const handleFullSiteImport = useCallback(async () => {
         setShowFullSiteImport(true);
     }, []);
+
+    console.log("Dependencies", template);
 
     const handleLiveDemo = useCallback(() => {
         if (template.preview_url && template.preview_url.trim() !== '') {
@@ -150,9 +152,9 @@ const TemplateImport = ({
                             </svg>
                             <span><span className="blue-color">Learn more</span> about full site import</span>
                         </div>
-                        {template.dependencies.length > 0 &&
+                        {template.dependencies && template.dependencies.length > 0 &&
                             <div className="fb-template-dependency">
-                                <h5 className="fb-dependency-label">Dependencies</h5>
+                                <h5 className="fb-dependency-label">Dependenciesd</h5>
                                 <ul className="fb-dependency-list">
                                     {template.dependencies?.map((item) => (
                                         <li className="fb-dependency-item" key={item.name}>
