@@ -509,7 +509,11 @@ class BackgroundImportRunner
     {
         if (!class_exists(\FrontisBlocks\Admin\Ajax\Settings::class)) {
             error_log('FB Import: Settings class not found during asset generation.');
-            return ['step_status' => 'skipped'];
+
+            return [
+                'step_status' => 'failed',
+                'message'     => 'Settings class not found during asset generation.',
+            ];
         }
 
         try {
@@ -517,9 +521,20 @@ class BackgroundImportRunner
             $batch      = isset($state['asset_batch']) ? (int) $state['asset_batch'] : 0;
             $batch_size = 10;
 
+            error_log('FB Import: Asset generation started. Batch: ' . $batch);
+
             $response = $settings->generate_assets_for_post($batch, $batch_size);
 
-            if (is_array($response) && !empty($response['completed'])) {
+            error_log('FB Import: Asset generation response: ' . print_r($response, true));
+
+            if (!is_array($response)) {
+                return [
+                    'step_status' => 'failed',
+                    'message'     => 'Asset generation returned invalid response.',
+                ];
+            }
+
+            if (!empty($response['completed'])) {
                 $still_compiling = get_posts([
                     'post_type'      => ['page', 'post'],
                     'post_status'    => 'publish',
@@ -534,6 +549,8 @@ class BackgroundImportRunner
                 ]);
 
                 if (!empty($still_compiling)) {
+                    error_log('FB Import: Still compiling posts/pages: ' . print_r($still_compiling, true));
+
                     return [
                         'step_status' => 'running',
                         'merge'       => [
@@ -541,6 +558,8 @@ class BackgroundImportRunner
                         ],
                     ];
                 }
+
+                error_log('FB Import: Asset generation completed successfully.');
 
                 return [
                     'step_status' => 'success',
@@ -559,12 +578,11 @@ class BackgroundImportRunner
 
         } catch (\Throwable $e) {
             error_log('FB Import: Asset generation failed: ' . $e->getMessage());
+            error_log('FB Import: Asset generation trace: ' . $e->getTraceAsString());
 
             return [
-                'step_status' => 'warning',
-                'merge'       => [
-                    'error' => 'Asset generation warning: ' . $e->getMessage(),
-                ],
+                'step_status' => 'failed',
+                'message'     => 'Asset generation failed: ' . $e->getMessage(),
             ];
         }
     }
