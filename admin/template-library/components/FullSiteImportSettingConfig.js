@@ -808,6 +808,7 @@ const FullSiteImportSettingConfig = ({
     form.append('security', nonce);
     form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', template?.preview_url || window.location.origin);
+    form.append('siteLogo', formData?.siteLogo?.id || '');
 
     try {
       const response = await fetch(ajaxUrl, {
@@ -922,15 +923,16 @@ const FullSiteImportSettingConfig = ({
   const handleImport = async () => {
     setIsImporting(true);
     setIsImportFailed(false);
-    dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null, showBgProgressBar: false }));
+    dispatch(setAttribute({ showFullSiteImportModal: true, importSuccess: null }));
 
-    // Define steps once (for initial UI display)
+    // Define steps once
     const allSteps = [
       { key: "fetch_site", label: "Fetching site data...", status: "pending" },
       { key: "upload_files", label: "Uploading and extracting files...", status: "pending" },
       { key: "theme", label: "Installing & activating theme...", status: "pending" },
       { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
-      { key: "headers_footers", label: "Creating headers & footers...", status: "pending" },
+      { key: "headers", label: "Creating headers...", status: "pending" },
+      { key: "footers", label: "Creating footers...", status: "pending" },
       { key: "templates", label: "Creating templates...", status: "pending" },
       { key: "pages", label: "Creating pages...", status: "pending" },
       { key: "posts", label: "Creating posts...", status: "pending" },
@@ -940,11 +942,294 @@ const FullSiteImportSettingConfig = ({
     ];
 
     setStepOptions(allSteps);
+    let activeStepKey = "";
+
+    try {
+      /** STEP 1: FETCH SITE **/
+      activeStepKey = "fetch_site";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(5);
+
+      const siteResp = await getTemplatesData("import/site", "site_id", template.id);
+      if (!siteResp?.data) throw new Error("Failed to fetch site data");
+      updateStepStatus(activeStepKey, "success");
+
+      const siteData = siteResp.data;
+      const pages = siteData?.pages || [];
+      const posts = siteData?.posts || [];
+      const templates = siteData?.templates || [];
+      const headers = siteData?.headers || [];
+      const footers = siteData?.footers || [];
+      const uploads = siteData?.uploads_url || '';
+
+      console.log("Site data:", siteData);
+
+      /** STEP 2: UPLOAD FILES **/
+      activeStepKey = "upload_files";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(20);
+
+      const uploadRes = await uploadFiles(uploads);
+      const isUploadsSuccessful = !uploadRes?.skipped;
+      updateStepStatus("upload_files", uploadRes?.skipped ? "skipped" : "success");
+
+      /** STEP 3: THEME **/
+      activeStepKey = "theme";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(30);
+
+      const themeRes = await activateTheme(template.theme || "frontis");
+      updateStepStatus(activeStepKey, themeRes?.skipped ? "skipped" : "success");
+
+      /** STEP 4: PLUGINS **/
+      activeStepKey = "plugins";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(45);
+
+      const pluginRes = await installActivatePlugins(template.dependencies || []);
+      updateStepStatus(activeStepKey, pluginRes?.skipped ? "skipped" : "success");
+
+      // After plugins step...
+      activeStepKey = "headers";
+      setCurrentStep("headers");
+      updateStepStatus("headers", "running");
+      updateStepStatus("footers", "running");
+      setImportProgress(55);
+
+      let navigationMapping = {};
+
+      // Step 5: Import Headers + Footers (with auto navigation creation)
+      const hfResult = await handleImportHeadersFooters(isUploadsSuccessful);
+
+      if (hfResult.success) {
+        navigationMapping = hfResult.mapping || {};
+        updateStepStatus("headers", "success");
+        updateStepStatus("footers", "success");
+      } else {
+        updateStepStatus("headers", "failed");
+        updateStepStatus("footers", "failed");
+        activeStepKey = "headers"; // or both
+        throw new Error("Header/Footer import failed");
+      }
+
+      setImportProgress(65);
+
+      // Step 6: Import Templates (using navigation mapping)
+      activeStepKey = "templates";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+
+      const templateResult = await handleImportTemplates(templates, navigationMapping, isUploadsSuccessful);
+
+      if (templateResult.success) {
+        updateStepStatus(activeStepKey, "success");
+      } else {
+        updateStepStatus(activeStepKey, "failed");
+        throw new Error("Templates import failed");
+      }
+
+      setImportProgress(70);
+
+      // STEP 6: PAGES
+      activeStepKey = "pages";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(75);
+
+      const pageResult = await handleStorePages(pages || [], isUploadsSuccessful);
+      updateStepStatus(activeStepKey, pageResult.success ? "success" : "warning");
+
+      // STEP 7: POSTS
+      activeStepKey = "posts";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(80);
+
+      const postsResult = await handleStorePosts(posts || [], isUploadsSuccessful);
+      updateStepStatus(activeStepKey, postsResult.success ? "success" : "warning");
+
+      // STEP 8: Update global Styles
+      activeStepKey = "global_styles";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(90);
+
+      await handleUpdateState();
+      updateStepStatus(activeStepKey, "success");
+
+      // STEP 9: Asset Generation
+      activeStepKey = "asset_generation";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(95);
+
+      try {
+        await handleGenerateAssets();
+        updateStepStatus("asset_generation", "success");
+      } catch (assetErr) {
+        console.warn("Asset generation encountered an issue:", assetErr);
+        updateStepStatus("asset_generation", "warning");
+      }
+
+      // STEP 10: FINALIZE
+      activeStepKey = "finalize";
+      setCurrentStep(activeStepKey);
+      updateStepStatus(activeStepKey, "running");
+      setImportProgress(100);
+
+      await new Promise(r => setTimeout(r, 600));
+      updateStepStatus(activeStepKey, "success");
+
+
+      dispatch(setAttribute({ importSuccess: true }));
+
+    } catch (err) {
+      console.error("Import Error:", err);
+      setIsImportFailed(true);
+      if (activeStepKey) {
+        updateStepStatus(activeStepKey, "failed", true);
+      }
+      dispatch(setAttribute({ importSuccess: false }));
+      toast.error("Import failed. See console for details");
+
+    } finally {
+      setIsImporting(false);
+    }
+  };
+
+
+    // =========================================================================
+  // NEW: Background Import Flow
+  // This keeps the original handleImport() untouched.
+  // =========================================================================
+
+  const getBackgroundImportSteps = () => ([
+    { key: "fetch_site", label: "Fetching site data...", status: "pending" },
+    { key: "upload_files", label: "Uploading and extracting files...", status: "pending" },
+    { key: "theme", label: "Installing & activating theme...", status: "pending" },
+    { key: "plugins", label: "Installing & activating plugins...", status: "pending" },
+    { key: "headers_footers", label: "Creating headers & footers...", status: "pending" },
+    { key: "templates", label: "Creating templates...", status: "pending" },
+    { key: "pages", label: "Creating pages...", status: "pending" },
+    { key: "posts", label: "Creating posts...", status: "pending" },
+    { key: "global_styles", label: "Updating global styles...", status: "pending" },
+    { key: "asset_generation", label: "Generating assets...", status: "pending" },
+    { key: "finalize", label: "Finalizing setup...", status: "pending" },
+  ]);
+
+  const startBackgroundImportPolling = () => {
+    const pollInterval = setInterval(async () => {
+      try {
+        const pollForm = new FormData();
+        pollForm.append("action", "fb_get_import_status");
+        pollForm.append("security", nonce);
+
+        const response = await fetch(ajaxUrl, {
+          method: "POST",
+          body: pollForm,
+          credentials: "same-origin",
+        });
+
+        const result = await response.json();
+
+        if (!result.success || !result.data || result.data.status === "idle") {
+          clearInterval(pollInterval);
+          setIsImporting(false);
+          return;
+        }
+
+        const { progress, current_step, steps, status, error } = result.data;
+
+        setImportProgress(progress || 0);
+        setCurrentStep(current_step || "");
+
+        if (Array.isArray(steps)) {
+          setStepOptions(steps);
+        }
+
+        if (status === "completed") {
+          clearInterval(pollInterval);
+          setImportProgress(100);
+          setIsImporting(false);
+          setIsImportFailed(false);
+
+          dispatch(setAttribute({
+            importSuccess: true,
+            bgImportActive: false,
+            bgImportSuccess: true,
+            bgImportFailed: false,
+          }));
+
+          toast.success("Import completed successfully!");
+          return;
+        }
+
+        if (status === "failed") {
+          clearInterval(pollInterval);
+          setIsImporting(false);
+          setIsImportFailed(true);
+
+          dispatch(setAttribute({
+            importSuccess: false,
+            bgImportActive: false,
+            bgImportSuccess: false,
+            bgImportFailed: true,
+          }));
+
+          toast.error(`Import failed: ${error || "Unknown error"}`);
+          return;
+        }
+
+        if (status === "cancelled") {
+          clearInterval(pollInterval);
+          setIsImporting(false);
+          setIsImportFailed(true);
+
+          dispatch(setAttribute({
+            importSuccess: false,
+            bgImportActive: false,
+            bgImportSuccess: false,
+            bgImportFailed: true,
+          }));
+
+          toast.warn("Import cancelled.");
+        }
+
+      } catch (pollError) {
+        console.warn("Background import polling error. Retrying...", pollError);
+      }
+    }, 3000);
+
+    return pollInterval;
+  };
+
+  const handleBackgroundImport = async () => {
+    setIsImporting(true);
+    setIsImportFailed(false);
     setImportProgress(0);
     setCurrentStep("");
 
-    // Prepare global styles data to send to server
+    const bgSteps = getBackgroundImportSteps();
+
+    setStepOptions(bgSteps);
+
+    dispatch(setAttribute({
+      showFullSiteImportModal: true,
+      importSuccess: null,
+      bgImportActive: true,
+      bgImportProgress: 0,
+      bgImportStep: "",
+      bgImportSteps: bgSteps,
+      bgImportFailed: false,
+      bgImportSuccess: false,
+    }));
+
     const globalTypographyData = handleSetGlobalTypography();
+
     const globalStylesPayload = {
       colors: globalColors,
       customColors: customColors,
@@ -956,106 +1241,56 @@ const FullSiteImportSettingConfig = ({
       globalTypo: globalTypographyData,
     };
 
-    // Initialize Redux background import state
-    dispatch(setAttribute({
-      bgImportActive: true,
-      bgImportProgress: 0,
-      bgImportStep: "",
-      bgImportSteps: allSteps,
-      bgImportFailed: false,
-      bgImportSuccess: false,
-    }));
-
     try {
-      // Single AJAX call to start the server-side import
       const startForm = new FormData();
+
       startForm.append("action", "fb_start_import");
       startForm.append("security", nonce);
-      startForm.append("site_id", template.id);
-      startForm.append("template_data", JSON.stringify(template));
-      startForm.append("site_name", formData.siteName || "");
-      startForm.append("site_tagline", formData.siteTagline || "");
-      startForm.append("site_logo", formData.siteLogo?.id || "");
+      startForm.append("site_id", template?.id || "");
+      startForm.append("site_url", template?.preview_url || window.location.origin);
+      startForm.append("template_data", JSON.stringify(template || {}));
+      startForm.append("site_name", formData?.siteName || "");
+      startForm.append("site_tagline", formData?.siteTagline || "");
+      startForm.append("site_logo", formData?.siteLogo?.id || "");
       startForm.append("global_styles_data", JSON.stringify(globalStylesPayload));
 
-      const startResp = await fetch(ajaxUrl, { method: "POST", body: startForm, credentials: "same-origin" });
-      const startResult = await startResp.json();
+      console.log("Background import start payload:", {
+        site_id: template?.id || "",
+        site_url: template?.preview_url || window.location.origin,
+        template_data: template || {},
+      });
 
-      if (!startResult.success) {
-        throw new Error(startResult.data?.message || "Failed to start import");
+      const response = await fetch(ajaxUrl, {
+        method: "POST",
+        body: startForm,
+        credentials: "same-origin",
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result?.data?.message || result?.message || "Failed to start import");
       }
 
-      console.log("Server-side import started:", startResult.data);
+      console.log("Background import started:", result.data);
 
-      // Start polling for progress
-      startImportPolling();
+      startBackgroundImportPolling();
 
-    } catch (err) {
-      console.error("Import Start Error:", err);
-      setIsImportFailed(true);
+    } catch (error) {
+      console.error("Import Start Error:", error);
+
       setIsImporting(false);
-      dispatch(setAttribute({ importSuccess: false, bgImportFailed: true }));
-      toast.error("Import failed to start. See console for details");
+      setIsImportFailed(true);
+
+      dispatch(setAttribute({
+        importSuccess: false,
+        bgImportActive: false,
+        bgImportFailed: true,
+        bgImportSuccess: false,
+      }));
+
+      toast.error(error.message || "Import failed to start. See console for details.");
     }
-  };
-
-  const startImportPolling = () => {
-    const pollInterval = setInterval(async () => {
-      try {
-        const pollForm = new FormData();
-        pollForm.append("action", "fb_get_import_status");
-        pollForm.append("security", nonce);
-
-        const resp = await fetch(ajaxUrl, { method: "POST", body: pollForm, credentials: "same-origin" });
-        const result = await resp.json();
-
-        if (!result.success || !result.data || result.data.status === "idle") {
-          clearInterval(pollInterval);
-          setIsImporting(false);
-          return;
-        }
-
-        const { progress, current_step, steps, status, error } = result.data;
-
-        // Update local state
-        setImportProgress(progress || 0);
-        setCurrentStep(current_step || "");
-        if (steps && Array.isArray(steps)) {
-          setStepOptions(steps);
-        }
-
-        // Sync to Redux (for background bar)
-        dispatch(setAttribute({
-          bgImportProgress: progress || 0,
-          bgImportStep: current_step || "",
-          ...(steps ? { bgImportSteps: steps } : {}),
-        }));
-
-        if (status === "completed") {
-          clearInterval(pollInterval);
-          setIsImporting(false);
-          dispatch(setAttribute({ importSuccess: true, bgImportSuccess: true, bgImportActive: true }));
-
-          // Refresh global styles locally
-          try {
-            await handleUpdateState();
-          } catch (e) {
-            console.warn("Local style refresh failed (styles were saved server-side):", e);
-          }
-        } else if (status === "failed") {
-          clearInterval(pollInterval);
-          setIsImporting(false);
-          setIsImportFailed(true);
-          dispatch(setAttribute({ importSuccess: false, bgImportFailed: true }));
-          toast.error(`Import failed: ${error || "Unknown error"}`);
-        }
-      } catch (pollErr) {
-        console.warn("Poll error (will retry):", pollErr);
-      }
-    }, 3000); // Poll every 3 seconds
-
-    // Store interval ID so it can be cleared on unmount if needed
-    return pollInterval;
   };
 
 
@@ -1091,7 +1326,7 @@ const FullSiteImportSettingConfig = ({
           <div className="fb-import-step-btn-wrapper">
             <button
               className="fb-import-btn next"
-              onClick={handleImport}
+                onClick={handleBackgroundImport}
             >
               Import Now
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -1116,7 +1351,10 @@ const FullSiteImportSettingConfig = ({
           currentStep={currentStep}
           progress={importProgress}
           onCloseModal={() => {
-            dispatch && dispatch(setAttribute({ showFullSiteImportModal: false, showBgProgressBar: true }));
+            dispatch && dispatch(setAttribute({
+              showFullSiteImportModal: false,
+              showBgProgressBar: isImporting,
+            }));
             dispatch && dispatch(setAttribute({ sitePreviewLoading: true }));
             onClose && onClose();
             setCurrentStep("");
@@ -1125,7 +1363,7 @@ const FullSiteImportSettingConfig = ({
           frontPageUrl="/"
           isImporting={isImporting}
           isImportFailed={isImportFailed}
-          onRetry={handleImport}
+          onRetry={handleBackgroundImport}
         />
       )}
     </>
