@@ -217,7 +217,11 @@ class Settings extends AjaxBase
 			AND post_name != 'wp-global-styles-frontis-theme'
 			AND post_type NOT IN ('wp_font_family', 'wp_navigation', 'wp_global_styles', 'wp_font_face', 'attachment', 'mc4wp-form', 'acf-post-type', 'wp_template_part', 'wp_block')";
 
-		$total_posts = $wpdb->get_var($count_query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+		$total_posts = wp_cache_get('fb_assets_total_count', 'frontis_blocks');
+		if (false === $total_posts) {
+			$total_posts = $wpdb->get_var($count_query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			wp_cache_set('fb_assets_total_count', $total_posts, 'frontis_blocks', 300);
+		}
 
 		// Query to get batch of post IDs
 		$query = $wpdb->prepare(
@@ -232,7 +236,13 @@ class Settings extends AjaxBase
 			$offset
 		);
 
-		$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+		$cache_key = 'fb_assets_batch_' . md5($query);
+		$results = wp_cache_get($cache_key, 'frontis_blocks');
+
+		if (false === $results) {
+			$results = $wpdb->get_results($query); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+			wp_cache_set($cache_key, $results, 'frontis_blocks', 300);
+		}
 
 		$generatedPages = [];
 
@@ -240,7 +250,12 @@ class Settings extends AjaxBase
 			foreach ($results as $post) {
 				$modified_post = $post;
 				$post_content = $post->post_content;
+
 				$pattern = "/frontis-blocks/i";
+
+				if ((preg_match_all($pattern, $post->post_content) === 0 && get_post_type($post->ID) !== 'wp_template')) {
+					continue;
+				}
 
 				// Get synced pattern contents
 				$pattern_contents = Helper::check_patterns_used($post->post_content);
@@ -253,23 +268,14 @@ class Settings extends AjaxBase
 					$modified_post->post_content = $post_content;
 				}
 
-				$post_type = get_post_type($post->ID);
-				$generation_status = get_post_meta($post->ID, 'fb_page_assets_generation', true);
-				$has_frontis_block = preg_match_all($pattern, $post_content) > 0;
-				$needs_import_generation = $generation_status === 'compiling';
-
-				if (!$has_frontis_block && $post_type !== 'wp_template' && !$needs_import_generation) {
-					continue;
-				}
-
 				update_post_meta($post->ID, 'frontis_blocks_used', false);
 				update_post_meta($post->ID, 'generate_critical_css', false);
 
-				if ($has_frontis_block) {
+				if (preg_match_all($pattern, $post->post_content) > 0) {
 					update_post_meta($post->ID, 'frontis_blocks_used', true);
 				}
 
-				$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post_content) > 0;
+				$critical_css_used = preg_match_all("/frontis-blocks\/critical-css/i", $post->post_content) > 0;
 
 				if ($critical_css_used) {
 					update_post_meta($post->ID, 'generate_critical_css', $critical_css_used);
