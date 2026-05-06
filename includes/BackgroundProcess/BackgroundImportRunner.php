@@ -392,32 +392,111 @@ class BackgroundImportRunner {
         return [ 'step_status' => 'success' ];
     }
 
-    private function step_asset_generation( array $state ): array {
-        if ( ! class_exists('\\FrontisBlocks\\Admin\\Ajax\\Settings') ) {
-            return [ 'step_status' => 'skipped' ];
-        }
+    // private function step_asset_generation( array $state ): array {
+    //     if ( ! class_exists('\\FrontisBlocks\\Admin\\Ajax\\Settings') ) {
+    //         return [ 'step_status' => 'skipped' ];
+    //     }
 
-        try {
-            $settings = \FrontisBlocks\Admin\Ajax\Settings::get_instance();
-            $batch = isset($state['asset_batch']) ? (int) $state['asset_batch'] : 0;
-            $batch_size = 10;
+    //     try {
+    //         $settings = \FrontisBlocks\Admin\Ajax\Settings::get_instance();
+    //         $batch = isset($state['asset_batch']) ? (int) $state['asset_batch'] : 0;
+    //         $batch_size = 10;
             
-            $response = $settings->generate_assets_for_post( $batch, $batch_size );
+    //         $response = $settings->generate_assets_for_post( $batch, $batch_size );
             
-            if ( isset($response['completed']) && $response['completed'] ) {
-                return [ 'step_status' => 'success' ];
-            } else {
-                return [ 
+    //         if ( isset($response['completed']) && $response['completed'] ) {
+    //             return [ 'step_status' => 'success' ];
+    //         } else {
+    //             return [ 
+    //                 'step_status' => 'running',
+    //                 'merge' => [ 'asset_batch' => $batch + 1 ]
+    //             ];
+    //         }
+    //     } catch (\Exception $e) {
+    //         error_log('FB Import: Asset generation warning: ' . $e->getMessage());
+    //     }
+
+    //     return [ 'step_status' => 'success' ];
+    // }
+
+private function step_asset_generation( array $state ): array {
+    if ( ! class_exists( \FrontisBlocks\Admin\Ajax\Settings::class ) ) {
+        error_log( 'FB Import: Settings class not found during asset generation.' );
+
+        return [
+            'step_status' => 'failed',
+            'merge'       => [
+                'error' => 'Settings class not found during asset generation.',
+            ],
+        ];
+    }
+
+    try {
+        $settings   = \FrontisBlocks\Admin\Ajax\Settings::get_instance();
+        $batch      = isset( $state['asset_batch'] ) ? (int) $state['asset_batch'] : 0;
+        $batch_size = 10;
+
+        error_log( 'FB Import: Starting asset generation batch ' . $batch );
+
+        $response = $settings->generate_assets_for_post( $batch, $batch_size );
+
+        error_log( 'FB Import: Asset generation response: ' . print_r( $response, true ) );
+
+        if ( is_array( $response ) && ! empty( $response['completed'] ) ) {
+            $still_compiling = get_posts([
+                'post_type'      => ['page', 'post'],
+                'post_status'    => 'publish',
+                'posts_per_page' => -1,
+                'meta_query'     => [
+                    [
+                        'key'   => 'fb_page_assets_generation',
+                        'value' => 'compiling',
+                    ],
+                ],
+                'fields'         => 'ids',
+            ]);
+
+            error_log(
+                'FB Import: Still compiling posts after asset generation: ' .
+                print_r( $still_compiling, true )
+            );
+
+            if ( ! empty( $still_compiling ) ) {
+                error_log( 'FB Import: Asset generation reported completed, but some posts are still compiling. Restarting from batch 0.' );
+
+                return [
                     'step_status' => 'running',
-                    'merge' => [ 'asset_batch' => $batch + 1 ]
+                    'merge'       => [ 'asset_batch' => 0 ],
                 ];
             }
-        } catch (\Exception $e) {
-            error_log('FB Import: Asset generation warning: ' . $e->getMessage());
+
+            error_log( 'FB Import: Asset generation completed and no compiling posts remain.' );
+
+            return [
+                'step_status' => 'success',
+                'merge'       => [ 'asset_batch' => 0 ],
+            ];
         }
 
-        return [ 'step_status' => 'success' ];
+        error_log( 'FB Import: Asset generation still running. Next batch: ' . ( $batch + 1 ) );
+
+        return [
+            'step_status' => 'running',
+            'merge'       => [ 'asset_batch' => $batch + 1 ],
+        ];
+
+    } catch ( \Throwable $e ) {
+        error_log( 'FB Import: Asset generation failed: ' . $e->getMessage() );
+        error_log( 'FB Import: Asset generation trace: ' . $e->getTraceAsString() );
+
+        return [
+            'step_status' => 'failed',
+            'merge'       => [
+                'error' => 'Asset generation failed: ' . $e->getMessage(),
+            ],
+        ];
     }
+}
 
     private function step_finalize( array $state ): array {
         // Update permalink structure
