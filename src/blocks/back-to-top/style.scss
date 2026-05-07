@@ -1,0 +1,82 @@
+.fb-back-to-top-main-wrapper {
+    position: fixed;
+    cursor: pointer;
+    background: #92003b;
+    border-radius: 10px;
+    z-index: 9999;
+    padding: 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    &.fb-position-bottom-right {
+        bottom: 20px;
+        right: 20px;
+    }
+
+    &.fb-position-bottom-left {
+        bottom: 20px;
+        left: 20px;
+    }
+
+    &.fb-position-top-right {
+        top: 20px;
+        right: 20px;
+    }
+
+    &.fb-position-top-left {
+        top: 20px;
+        left: 20px;
+    }
+
+    &.fb-show {
+        opacity: 1;
+        visibility: visible;
+        
+        &.fb-animation-slide-up {
+            transform: translateY(0);
+        }
+        &.fb-animation-zoom-in {
+            transform: scale(1);
+        }
+        &.fb-animation-bounce-in {
+            transform: scale(1);
+            animation: fb-bounce-in 0.5s ease;
+        }
+    }
+
+    // Initial states for animations
+    &.fb-animation-slide-up:not(.fb-show) {
+        transform: translateY(30px);
+    }
+    &.fb-animation-zoom-in:not(.fb-show) {
+        transform: scale(0.5);
+    }
+    &.fb-animation-bounce-in:not(.fb-show) {
+        transform: scale(0);
+    }
+
+    &.is-editor {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        opacity: 1;
+        visibility: visible;
+        display: inline-block;
+        z-index: 1;
+        transform: none !important;
+    }
+
+    span {
+        font-size: 16px;
+        font-weight: 700;
+        color: white;
+    }
+}
+
+@keyframes fb-bounce-in {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
