@@ -38,33 +38,34 @@ class AssetsGenerationProcess {
         foreach ($data_rows as $row) {
             try {
                 // Validate row exists
-                $row_exists = $wpdb->get_var($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
-                    "SELECT job_id FROM $table_name WHERE job_id = %d", 
-                    $row->job_id
-                ));
+                // $row_exists = $wpdb->get_var($wpdb->prepare( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, PluginCheck.Security.DirectDB.UnescapedDBParameter
+                //     "SELECT job_id FROM $table_name WHERE job_id = %d", 
+                //     $row->job_id
+                // ));
                 
-                if (!$row_exists) {
-                    error_log("Row ID {$row->job_id} not found, skipping...");
+                // if (!$row_exists) {
+                //     error_log("Row ID {$row->job_id} not found, skipping...");
 
-                    // Write php file
-                    $myfile = fopen($row->job_id."skipped.txt", "w") or die("Unable to open file!");
-                    $txt = "Row ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
-                    continue;
-                }
+                //     // Write php file
+                //     $myfile = fopen($row->job_id."skipped.txt", "w") or die("Unable to open file!");
+                //     $txt = "Row ID {$row->job_id} not found, skipping...";
+                //     fwrite($myfile, json_encode($txt));
+                //     fclose($myfile);
+                //     continue;
+                // }
                 
                 $post = get_post($row->job_id);
-                if (!$post) {
-                    error_log("Post ID {$row->job_id} not found, skipping...");
+                
+                // if (!$post) {
+                //     error_log("Post ID {$row->job_id} not found, skipping...");
 
-                    // Write php file
-                    $myfile = fopen($row->job_id."skipped_post.txt", "w") or die("Unable to open file!");
-                    $txt = "Post ID {$row->job_id} not found, skipping...";
-                    fwrite($myfile, json_encode($txt));
-                    fclose($myfile);
-                    continue;
-                }
+                //     // Write php file
+                //     $myfile = fopen($row->job_id."skipped_post.txt", "w") or die("Unable to open file!");
+                //     $txt = "Post ID {$row->job_id} not found, skipping...";
+                //     fwrite($myfile, json_encode($txt));
+                //     fclose($myfile);
+                //     continue;
+                // }
                 
                 $critical_css_used = Helper::post_content_has_blocks_critical($post, $row->job_id);
                 $assets_generation_completed = AssetsGenerator::get_instance()->generate_page_assets($row->job_id, $post, $critical_css_used);
