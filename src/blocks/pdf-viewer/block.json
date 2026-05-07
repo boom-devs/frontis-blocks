@@ -4,7 +4,7 @@
 	"name": "frontis-blocks/pdf-viewer",
 	"version": "1.0.0",
 	"title": "PDF Viewer",
-	"category": "media",
+	"category": "frontis-blocks",
 	"icon": "media-document",
 	"description": "Embed and display PDF files directly in your content.",
 	"supports": {

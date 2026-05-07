@@ -282,6 +282,20 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
+            'pdf-viewer' => [
+                'slug' => 'pdf-viewer',
+                'title' => 'PDF Viewer',
+                'package' => 'pro',
+                'category' => 'content',
+                'badge' => 'pro',
+                'status' => 'true',
+                'icon' => FB_PLUGIN_URL . 'assets/icons/media-document.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
+
             'form-builder' => [
                 'slug' => 'form-builder',
                 'title' => 'Form Builder',
