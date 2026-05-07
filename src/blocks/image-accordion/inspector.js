@@ -293,10 +293,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 					label={__("Accordion Type", "image-accordion")}
 					value={presetStyle}
 					options={[
-						{ label: "Preset 1", value: "preset-1" },
-						{ label: "Preset 2", value: "preset-2" },
-						{ label: "Preset 3", value: "preset-3" },
-						{ label: "Preset 4", value: "preset-4" },
+						{ label: "Preset 1 — Pill Cards + Icon", value: "preset-1" },
+						{ label: "Preset 2 — Seamless Pillars", value: "preset-2" },
+						{ label: "Preset 3 — Vertical Stack", value: "preset-3" },
+						{ label: "Preset 4 — Skewed Panels", value: "preset-4" },
 					]}
 					onChange={(val) => setAttributes({ presetStyle: val })}
 				/>

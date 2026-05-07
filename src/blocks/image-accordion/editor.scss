@@ -1,19 +1,24 @@
 /* Image Accordion Block — Editor-only styles */
 
-.image-accordion-block {
-	/* Ensure the block fills the editor canvas */
+.image-accordion-block-editor-wrap {
 	width: 100%;
+	max-width: 100%;
 
+	.pea-image-accordion-wrapper {
+		margin: 0;
+	}
+
+	/* Prevent layout shift in editor */
 	.iab-p1,
 	.iab-p2,
 	.iab-p3,
 	.iab-p4 {
-		/* Transitions are handled inline; prevent editor jank */
 		will-change: flex;
+		transition: flex 0.4s ease;
 	}
 
-	/* Inspector panel item styling */
-	.components-panel__body .components-base-control {
-		margin-bottom: 12px;
+	/* Make placeholder look better */
+	.components-placeholder {
+		min-height: 300px;
 	}
 }
