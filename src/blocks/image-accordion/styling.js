@@ -1,6 +1,3 @@
-/**
- * Generate dynamic CSS for Image Accordion block
- */
 const generateImageAccordionStyle = (attributes) => {
 	const {
 		blockID,

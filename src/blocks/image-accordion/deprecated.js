@@ -1,8 +1,3 @@
-/**
- * deprecated.js
- * Handles deprecated versions of the Image Accordion block's save function.
- */
-
 import { useBlockProps } from "@wordpress/block-editor";
 import attributes from "./attributes"; // Import the current attributes
 import { renderAccordion } from "./render";

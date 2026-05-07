@@ -1,15 +1,3 @@
-/**
- * view.js
- * Front-end script for the Image Accordion block.
- *
- * Direct port of the Elementor widget JS logic:
- * - Reads data-trigger from the wrapper
- * - Adds pea-trigger-hover / pea-trigger-click class
- * - Manages is-active class on items via hover or click
- * - On container mouseleave (hover mode) resets to first item
- * - Supports multiple instances on the same page
- */
-
 (function () {
 	"use strict";
 
@@ -37,7 +25,7 @@
 		);
 
 		if (triggerMode === "click") {
-			// ── Click mode ──────────────────────────────────────────
+			// Click mode
 			freshItems.forEach((item) => {
 				item.addEventListener("click", () => {
 					freshItems.forEach((i) => i.classList.remove("is-active"));
@@ -53,7 +41,7 @@
 				});
 			});
 		} else {
-			// ── Hover mode (default) ─────────────────────────────────
+			// Hover mode (default)
 			freshItems.forEach((item) => {
 				item.addEventListener("mouseenter", () => {
 					freshItems.forEach((i) => i.classList.remove("is-active"));

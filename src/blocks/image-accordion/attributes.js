@@ -1,9 +1,5 @@
-/**
- * attributes.js
- * Defines every block attribute for the Image Accordion block.
- */
 const attributes = {
-	// ── Preset / trigger ─────────────────────────────────────────
+	//  Preset / trigger
 	presetStyle: {
 		type: "string",
 		default: "preset-1",
@@ -13,7 +9,7 @@ const attributes = {
 		default: "hover",
 	},
 
-	// ── Accordion items ───────────────────────────────────────────
+	//  Accordion items
 	accordionItems: {
 		type: "array",
 		default: [
@@ -90,7 +86,7 @@ const attributes = {
 		],
 	},
 
-	// ── Layout ────────────────────────────────────────────────────
+	// Layout
 	containerHeight: {
 		type: "number",
 		default: 500,
@@ -104,19 +100,19 @@ const attributes = {
 		default: 50,
 	},
 
-	// ── Overlay ───────────────────────────────────────────────────
+	// Overlay
 	overlayColor: {
 		type: "string",
 		default: "rgba(0,0,0,0.55)",
 	},
 
-	// ── Preset 1 — Icon ───────────────────────────────────────────
+	//  Preset 1 — Icon
 	iconColor: {
 		type: "string",
 		default: "#0875FF",
 	},
 
-	// ── Preset 2 — Dots ──────────────────────────────────────────
+	//  Preset 2 — Dots
 	showDots: {
 		type: "boolean",
 		default: true,
@@ -130,7 +126,7 @@ const attributes = {
 		default: 12,
 	},
 
-	// ── Preset 2 & 4 — Numbers ────────────────────────────────────
+	//  Preset 2 & 4 — Numbers
 	showNumber: {
 		type: "boolean",
 		default: true,
@@ -140,7 +136,7 @@ const attributes = {
 		default: "#ffffff",
 	},
 
-	// ── Typography ────────────────────────────────────────────────
+	// Typography
 	titleColor: {
 		type: "string",
 		default: "#ffffff",
@@ -150,7 +146,7 @@ const attributes = {
 		default: "rgba(255,255,255,0.8)",
 	},
 
-	// ── Preset 3 — Button ─────────────────────────────────────────
+	//  Preset 3 — Button
 	btnTextColor: {
 		type: "string",
 		default: "#ffffff",

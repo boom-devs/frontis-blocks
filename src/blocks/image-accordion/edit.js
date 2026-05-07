@@ -1,14 +1,9 @@
-/**
- * edit.js
- * Gutenberg editor component for the Image Accordion block.
- */
-
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { Placeholder } from "@wordpress/components";
 
 import Inspector from "./inspector";
-import { renderAccordion } from "./render"; // ← This was missing!
+import { renderAccordion } from "./render";
 
 const Edit = ({ attributes, setAttributes }) => {
 	const { presetStyle, triggerOn, accordionItems = [] } = attributes;
@@ -39,7 +34,7 @@ const Edit = ({ attributes, setAttributes }) => {
 					}}
 				>
 					<span>
-						🎞 <strong style={{ color: "#fff" }}>Image Accordion</strong> —{" "}
+						<strong style={{ color: "#fff" }}>Image Accordion</strong> —{" "}
 						{presetStyle} / trigger: {triggerOn}
 					</span>
 					<span style={{ opacity: 0.7 }}>{accordionItems.length} items</span>

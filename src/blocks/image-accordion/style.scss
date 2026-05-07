@@ -3,7 +3,7 @@
    Ported 1:1 from Prime Elementor Addons Pro image-accordion CSS.
    ============================================================= */
 
-/* ── BASE CONTAINER ──────────────────────────────────────────── */
+/*  BASE CONTAINER  */
 .pea-image-accordion-container {
 	display: flex;
 	gap: 12px;
@@ -12,7 +12,7 @@
 	align-items: stretch;
 }
 
-/* ── BASE ITEM ───────────────────────────────────────────────── */
+/*  BASE ITEM  */
 .pea-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
@@ -27,7 +27,7 @@
 	overflow: hidden;
 }
 
-/* ── OVERLAY ─────────────────────────────────────────────────── */
+/* OVERLAY  */
 .pea-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
@@ -36,7 +36,7 @@
 	z-index: 1;
 }
 
-/* ── CONTENT WRAPPER ─────────────────────────────────────────── */
+/* CONTENT WRAPPER */
 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	bottom: 22px;
@@ -48,7 +48,7 @@
 	width: calc(100% - 36px);
 }
 
-/* ── ICON CIRCLE (Preset 1) ──────────────────────────────────── */
+/* ICON CIRCLE (Preset 1)  */
 .pea-image-accordion-icon-circle {
 	width: 44px;
 	height: 44px;
@@ -75,7 +75,7 @@
 	object-fit: cover;
 }
 
-/* ── TEXT GROUP (Preset 1) ───────────────────────────────────── */
+/* TEXT GROUP  */
 .pea-image-accordion-text-group {
 	display: none;
 	opacity: 0;
@@ -107,13 +107,13 @@
 	transform: translateX(0);
 }
 
-/* ── ACTIVE / OPEN ITEM ──────────────────────────────────────── */
+/*  ACTIVE / OPEN ITEM  */
 .pea-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
 }
 
-/* ── HOVER TRIGGER MODE ──────────────────────────────────────── */
+/*  HOVER TRIGGER MODE  */
 .pea-trigger-hover .pea-image-accordion-item:hover {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -133,7 +133,7 @@
 	transform: translateX(0);
 }
 
-/* ── CLICK TRIGGER MODE ──────────────────────────────────────── */
+/* CLICK TRIGGER MODE  */
 .pea-trigger-click .pea-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -147,7 +147,7 @@
 	transform: translateX(0);
 }
 
-/* ── RESPONSIVE ──────────────────────────────────────────────── */
+/*  RESPONSIVE  */
 @media screen and (max-width: 767px) {
 	.pea-image-accordion-container {
 		flex-direction: column;
@@ -171,9 +171,9 @@
 	}
 }
 
-/* =============================================================
+/* ========================
    PRESET 2 — Seamless Pillars
-   ============================================================= */
+   ========================= */
 .preset-2 .pea-image-accordion-container {
 	gap: 0;
 }
@@ -284,9 +284,9 @@
 	border-radius: 0;
 }
 
-/* =============================================================
+/* =====================
    PRESET 3 — Vertical Stack
-   ============================================================= */
+   ===================== */
 .preset-3 .pea-image-accordion-container {
 	flex-direction: column;
 	gap: 10px;
@@ -387,9 +387,9 @@
 	}
 }
 
-/* =============================================================
+/* =====================
    PRESET 4 — Skewed Panels
-   ============================================================= */
+   ===================== */
 .preset-4 .pea-image-accordion-container {
 	gap: 0;
 	border-radius: 0;
