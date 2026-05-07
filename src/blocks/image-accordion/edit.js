@@ -3,7 +3,6 @@ import { useBlockProps } from "@wordpress/block-editor";
 import { Placeholder } from "@wordpress/components";
 
 import Inspector from "./inspector";
-import { renderAccordion } from "./render";
 
 const Edit = ({ attributes, setAttributes }) => {
 	const { presetStyle, triggerOn, accordionItems = [] } = attributes;
@@ -13,7 +12,7 @@ const Edit = ({ attributes, setAttributes }) => {
 	});
 
 	// Render preview using shared render function
-	const { containerStyle, items } = renderAccordion(attributes, true);
+	// const { containerStyle, items } = renderAccordion(attributes, true);
 
 	return (
 		<>
@@ -56,9 +55,9 @@ const Edit = ({ attributes, setAttributes }) => {
 					>
 						<div
 							className="pea-image-accordion-container"
-							style={containerStyle}
+							// style={containerStyle}
 						>
-							{items}
+							{/* {items} */}
 						</div>
 					</div>
 				)}
