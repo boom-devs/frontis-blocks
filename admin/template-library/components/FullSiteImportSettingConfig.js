@@ -808,6 +808,7 @@ const FullSiteImportSettingConfig = ({
     form.append('security', nonce);
     form.append('uploads_updated', isUploadsUpdated);
     form.append('site_url', template?.preview_url || window.location.origin);
+    form.append('siteLogo', formData?.siteLogo?.id || '');
 
     try {
       const response = await fetch(ajaxUrl, {
