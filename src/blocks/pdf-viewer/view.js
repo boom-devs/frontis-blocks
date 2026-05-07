@@ -15,7 +15,6 @@
 				pdfUrl,
 			)}&embedded=true`;
 
-			// Create the iframe element
 			var iframe = document.createElement("iframe");
 			iframe.className = `fb-pdf-viewer-iframe ${blockID}`;
 			iframe.src = viewerUrl;
@@ -23,14 +22,13 @@
 			iframe.height = height + "px";
 			iframe.style.border = "none";
 			iframe.title = "PDF Viewer";
-			iframe.setAttribute("loading", "lazy"); // Add lazy loading
+			iframe.setAttribute("loading", "lazy");
 
-			block.innerHTML = ""; // Clear placeholder
+			block.innerHTML = "";
 			block.appendChild(iframe);
 		});
 	}
 
-	// Similar initialization logic as advanced-countdown
 	var setupDone = false;
 
 	function setupInitialization() {
@@ -48,8 +46,6 @@
 			});
 		}
 
-		// This part is for SPA-like navigation in the editor or certain themes.
-		// Keeping for consistency with context, though might be overkill for a simple PDF viewer.
 		if (typeof window !== "undefined") {
 			var lastUrl = window.location.href;
 			var urlObserver = new MutationObserver(function () {
@@ -59,13 +55,11 @@
 				}
 			});
 
-			// Observe changes in the document body, which might indicate a new page load in a SPA context
 			urlObserver.observe(document.body, { childList: true, subtree: true });
 		}
 	}
 
 	setupInitialization();
 
-	// Expose reinitialization function if needed by other parts of the theme/plugin
 	window.reinitPdfViewers = initPdfViewers;
 })();

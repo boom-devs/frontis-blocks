@@ -11,14 +11,13 @@ import {
 	Button,
 	TextControl,
 } from "@wordpress/components";
-import { useDeviceType } from "@Config/displayType"; // Assuming this path from context
-import FB_InspectorControls from "@Components/InspectorControls"; // Assuming this path from context
-import FB_ColorControl from "@Components/color-control"; // Assuming this path from context
+import { useDeviceType } from "@Config/displayType";
+import FB_InspectorControls from "@Components/InspectorControls";
+import FB_ColorControl from "@Components/color-control";
 
 const Inspector = ({ attributes, setAttributes }) => {
 	const { pdfUrl, pdfId, height, showToolbar, themeColor } = attributes;
 
-	// Although deviceType is not directly used for these attributes, it's common in Frontis Blocks.
 	const deviceType = useDeviceType();
 
 	const onSelectPdf = (media) => {
@@ -96,7 +95,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// No specific style or advanced controls mentioned, but adding empty ones for structure consistency.
 	const styleControls = <></>;
 	const advancedControls = <></>;
 

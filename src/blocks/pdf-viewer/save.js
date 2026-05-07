@@ -17,7 +17,6 @@ export default function save({ attributes }) {
 				data-show-toolbar={showToolbar ? "true" : "false"}
 				data-theme-color={themeColor}
 			>
-				{/* A placeholder div that will be replaced by the iframe on the frontend by view.js */}
 				<div
 					className={`fb-pdf-viewer-placeholder ${blockID}`}
 					style={{
