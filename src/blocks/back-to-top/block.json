@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "frontis-blocks/back-to-top",
+    "version": "1.0.0",
+    "title": "Back To Top",
+    "category": "frontis-blocks",
+    "description": "Add a back to top button that scrolls to the top of the page.",
+    "example": {},
+    "supports": {
+        "html": false,
+        "anchor": false,
+        "align": [
+            "wide",
+            "full"
+        ],
+        "customClassName": false
+    },
+    "textdomain": "frontis-blocks",
+    "editorScript": "file:./index.js",
+    "editorStyle": "file:./index.css",
+    "style": "file:./style-index.css",
+    "viewScript": "file:./view.js"
+}
