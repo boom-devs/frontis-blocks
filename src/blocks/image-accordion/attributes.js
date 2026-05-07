@@ -1,99 +1,163 @@
+/**
+ * attributes.js
+ * Defines every block attribute for the Image Accordion block.
+ */
 const attributes = {
-	preset: {
+	// ── Preset / trigger ─────────────────────────────────────────
+	presetStyle: {
 		type: "string",
-		default: "preset1",
+		default: "preset-1",
 	},
 	triggerOn: {
 		type: "string",
 		default: "hover",
 	},
-	items: {
+
+	// ── Accordion items ───────────────────────────────────────────
+	accordionItems: {
 		type: "array",
 		default: [
 			{
-				id: 1,
-				title: "Discover Unique",
-				subtitle: "Explore the world",
-				description:
-					"A breathtaking journey through landscapes that will leave you inspired.",
+				id: "1",
+				title: "Discover unique",
+				subTitle: "",
 				imageUrl: "",
 				imageId: 0,
+				iconValue: "fas fa-star",
+				iconLibrary: "solid",
+				mediaType: "icon",
+				iconImageUrl: "",
 				buttonText: "Read More",
 				buttonUrl: "#",
+				buttonExternal: false,
 			},
 			{
-				id: 2,
-				title: "Adventure Awaits",
-				subtitle: "Push your limits",
-				description:
-					"Challenge yourself with extreme adventures for the fearless.",
+				id: "2",
+				title: "Discover unique",
+				subTitle: "",
 				imageUrl: "",
 				imageId: 0,
+				iconValue: "fas fa-star",
+				iconLibrary: "solid",
+				mediaType: "icon",
+				iconImageUrl: "",
 				buttonText: "Read More",
 				buttonUrl: "#",
+				buttonExternal: false,
 			},
 			{
-				id: 3,
-				title: "Wild Nature",
-				subtitle: "Feel the wilderness",
-				description:
-					"Immerse yourself in raw, untamed nature unlike anything you have experienced.",
+				id: "3",
+				title: "Discover unique",
+				subTitle: "",
 				imageUrl: "",
 				imageId: 0,
+				iconValue: "fas fa-star",
+				iconLibrary: "solid",
+				mediaType: "icon",
+				iconImageUrl: "",
 				buttonText: "Read More",
 				buttonUrl: "#",
+				buttonExternal: false,
 			},
 			{
-				id: 4,
-				title: "Urban Stories",
-				subtitle: "City of dreams",
-				description:
-					"Every city has a soul. Find it in hidden corners and vibrant streets.",
+				id: "4",
+				title: "Discover unique",
+				subTitle: "",
 				imageUrl: "",
 				imageId: 0,
+				iconValue: "fas fa-star",
+				iconLibrary: "solid",
+				mediaType: "icon",
+				iconImageUrl: "",
 				buttonText: "Read More",
 				buttonUrl: "#",
+				buttonExternal: false,
 			},
 			{
-				id: 5,
-				title: "Ocean Deep",
-				subtitle: "Dive into blue",
-				description:
-					"The ocean holds secrets that only the brave dare to uncover.",
+				id: "5",
+				title: "Discover unique",
+				subTitle: "",
 				imageUrl: "",
 				imageId: 0,
+				iconValue: "fas fa-star",
+				iconLibrary: "solid",
+				mediaType: "icon",
+				iconImageUrl: "",
 				buttonText: "Read More",
 				buttonUrl: "#",
+				buttonExternal: false,
 			},
 		],
 	},
-	height: {
+
+	// ── Layout ────────────────────────────────────────────────────
+	containerHeight: {
 		type: "number",
 		default: 500,
 	},
-	borderRadius: {
+	itemsGap: {
 		type: "number",
-		default: 16,
+		default: 12,
 	},
-	accentColor: {
+	itemBorderRadius: {
+		type: "number",
+		default: 50,
+	},
+
+	// ── Overlay ───────────────────────────────────────────────────
+	overlayColor: {
+		type: "string",
+		default: "rgba(0,0,0,0.55)",
+	},
+
+	// ── Preset 1 — Icon ───────────────────────────────────────────
+	iconColor: {
+		type: "string",
+		default: "#0875FF",
+	},
+
+	// ── Preset 2 — Dots ──────────────────────────────────────────
+	showDots: {
+		type: "boolean",
+		default: true,
+	},
+	dotColor: {
 		type: "string",
 		default: "#ffffff",
 	},
-	overlayColor: {
-		type: "string",
-		default: "#000000",
-	},
-	overlayOpacity: {
+	dotSize: {
 		type: "number",
-		default: 40,
+		default: 12,
 	},
-	showNumbers: {
+
+	// ── Preset 2 & 4 — Numbers ────────────────────────────────────
+	showNumber: {
 		type: "boolean",
 		default: true,
 	},
-	showButton: {
-		type: "boolean",
-		default: true,
+	numberColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+
+	// ── Typography ────────────────────────────────────────────────
+	titleColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	subtitleColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.8)",
+	},
+
+	// ── Preset 3 — Button ─────────────────────────────────────────
+	btnTextColor: {
+		type: "string",
+		default: "#ffffff",
+	},
+	btnBgColor: {
+		type: "string",
+		default: "rgba(255,255,255,0.18)",
 	},
 };
 

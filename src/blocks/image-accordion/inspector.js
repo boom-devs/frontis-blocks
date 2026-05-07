@@ -1,8 +1,15 @@
+/**
+ * inspector.js
+ * Full InspectorControls sidebar for the Image Accordion block.
+ * Mirrors the Elementor widget's content + style panels across all 4 presets.
+ */
+
 import { __ } from "@wordpress/i18n";
 import {
 	InspectorControls,
 	MediaUpload,
 	MediaUploadCheck,
+	ColorPalette,
 } from "@wordpress/block-editor";
 import {
 	PanelBody,
@@ -12,80 +19,288 @@ import {
 	ToggleControl,
 	Button,
 	TextControl,
-	ColorPicker,
-	__experimentalText as Text,
+	TextareaControl,
 	__experimentalDivider as Divider,
+	__experimentalHeading as Heading,
 } from "@wordpress/components";
+import { useState } from "@wordpress/element";
 
+/* ─────────────────────────────────────────────────────────────────
+   Helper: single accordion item editor
+───────────────────────────────────────────────────────────────── */
+const ItemEditor = ({
+	item,
+	index,
+	preset,
+	onChange,
+	onRemove,
+	onDuplicate,
+}) => {
+	const [open, setOpen] = useState(false);
+
+	const update = (key, val) => onChange(index, { ...item, [key]: val });
+
+	return (
+		<div style={{ border: "1px solid #ddd", borderRadius: 6, marginBottom: 8 }}>
+			{/* Header row */}
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "space-between",
+					padding: "8px 10px",
+					background: "#f6f7f7",
+					borderRadius: open ? "6px 6px 0 0" : 6,
+					cursor: "pointer",
+				}}
+				onClick={() => setOpen(!open)}
+			>
+				<span style={{ fontWeight: 600, fontSize: 13 }}>
+					{item.title || __("(no title)", "image-accordion")}
+				</span>
+				<div
+					style={{ display: "flex", gap: 4 }}
+					onClick={(e) => e.stopPropagation()}
+				>
+					<Button
+						isSmall
+						variant="tertiary"
+						onClick={() => onDuplicate(index)}
+						title={__("Duplicate", "image-accordion")}
+					>
+						⧉
+					</Button>
+					<Button
+						isSmall
+						variant="tertiary"
+						isDestructive
+						onClick={() => onRemove(index)}
+						title={__("Remove", "image-accordion")}
+					>
+						✕
+					</Button>
+				</div>
+			</div>
+
+			{/* Expanded fields */}
+			{open && (
+				<div style={{ padding: "10px 12px" }}>
+					{/* Background image — all presets */}
+					<p style={{ fontSize: 12, fontWeight: 600, marginBottom: 6 }}>
+						{__("Background Image", "image-accordion")}
+					</p>
+					<MediaUploadCheck>
+						<MediaUpload
+							onSelect={(media) => {
+								update("imageUrl", media.url);
+								update("imageId", media.id);
+							}}
+							allowedTypes={["image"]}
+							value={item.imageId}
+							render={({ open: openMedia }) => (
+								<div style={{ marginBottom: 10 }}>
+									{item.imageUrl ? (
+										<div style={{ position: "relative", marginBottom: 6 }}>
+											<img
+												src={item.imageUrl}
+												alt=""
+												style={{
+													width: "100%",
+													height: 80,
+													objectFit: "cover",
+													borderRadius: 4,
+												}}
+											/>
+											<Button
+												isSmall
+												variant="secondary"
+												onClick={openMedia}
+												style={{ marginTop: 4, width: "100%" }}
+											>
+												{__("Replace Image", "image-accordion")}
+											</Button>
+										</div>
+									) : (
+										<Button
+											variant="secondary"
+											onClick={openMedia}
+											style={{ width: "100%" }}
+										>
+											{__("🖼 Select Image", "image-accordion")}
+										</Button>
+									)}
+								</div>
+							)}
+						/>
+					</MediaUploadCheck>
+
+					{/* Title */}
+					<TextControl
+						label={__("Title", "image-accordion")}
+						value={item.title}
+						onChange={(val) => update("title", val)}
+					/>
+
+					{/* Sub Title */}
+					<TextControl
+						label={__("Sub Title", "image-accordion")}
+						value={item.subTitle}
+						onChange={(val) => update("subTitle", val)}
+					/>
+
+					{/* Preset 1: icon settings */}
+					{preset === "preset-1" && (
+						<>
+							<SelectControl
+								label={__("Icon Source", "image-accordion")}
+								value={item.mediaType || "icon"}
+								options={[
+									{ label: "Font Icon (class)", value: "icon" },
+									{ label: "Image", value: "image" },
+								]}
+								onChange={(val) => update("mediaType", val)}
+							/>
+							{(item.mediaType || "icon") === "icon" && (
+								<TextControl
+									label={__("Icon Class (e.g. fas fa-star)", "image-accordion")}
+									value={item.iconValue || ""}
+									onChange={(val) => update("iconValue", val)}
+								/>
+							)}
+							{item.mediaType === "image" && (
+								<>
+									<p style={{ fontSize: 12, fontWeight: 600, marginBottom: 6 }}>
+										{__("Icon Image", "image-accordion")}
+									</p>
+									<MediaUploadCheck>
+										<MediaUpload
+											onSelect={(media) => update("iconImageUrl", media.url)}
+											allowedTypes={["image"]}
+											render={({ open: openIcon }) => (
+												<Button
+													variant="secondary"
+													onClick={openIcon}
+													style={{ width: "100%", marginBottom: 10 }}
+												>
+													{item.iconImageUrl
+														? __("Replace Icon Image", "image-accordion")
+														: __("Select Icon Image", "image-accordion")}
+												</Button>
+											)}
+										/>
+									</MediaUploadCheck>
+								</>
+							)}
+						</>
+					)}
+
+					{/* Preset 3: button */}
+					{preset === "preset-3" && (
+						<>
+							<TextControl
+								label={__("Button Text", "image-accordion")}
+								value={item.buttonText || "Read More"}
+								onChange={(val) => update("buttonText", val)}
+							/>
+							<TextControl
+								label={__("Button URL", "image-accordion")}
+								value={item.buttonUrl || "#"}
+								onChange={(val) => update("buttonUrl", val)}
+							/>
+							<ToggleControl
+								label={__("Open in new tab", "image-accordion")}
+								checked={!!item.buttonExternal}
+								onChange={(val) => update("buttonExternal", val)}
+							/>
+						</>
+					)}
+				</div>
+			)}
+		</div>
+	);
+};
+
+/* ─────────────────────────────────────────────────────────────────
+   Main Inspector
+───────────────────────────────────────────────────────────────── */
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
-		preset,
+		presetStyle,
 		triggerOn,
-		items,
-		height,
-		borderRadius,
-		accentColor,
+		accordionItems,
+		containerHeight,
+		itemsGap,
 		overlayColor,
-		overlayOpacity,
-		showNumbers,
-		showButton,
+		iconColor,
+		showDots,
+		dotColor,
+		dotSize,
+		showNumber,
+		numberColor,
+		titleColor,
+		subtitleColor,
+		btnTextColor,
+		btnBgColor,
 	} = attributes;
 
-	const updateItem = (index, key, value) => {
-		const updated = items.map((item, i) =>
-			i === index ? { ...item, [key]: value } : item,
-		);
-		setAttributes({ items: updated });
+	/* Item helpers */
+	const updateItem = (index, updated) => {
+		const next = [...accordionItems];
+		next[index] = updated;
+		setAttributes({ accordionItems: next });
+	};
+
+	const removeItem = (index) => {
+		setAttributes({
+			accordionItems: accordionItems.filter((_, i) => i !== index),
+		});
+	};
+
+	const duplicateItem = (index) => {
+		const copy = { ...accordionItems[index], id: Date.now().toString() };
+		const next = [...accordionItems];
+		next.splice(index + 1, 0, copy);
+		setAttributes({ accordionItems: next });
 	};
 
 	const addItem = () => {
-		const newId = items.length + 1;
 		setAttributes({
-			items: [
-				...items,
+			accordionItems: [
+				...accordionItems,
 				{
-					id: newId,
-					title: "New Item",
-					subtitle: "Subtitle here",
-					description: "Add your description here.",
+					id: Date.now().toString(),
+					title: "Discover unique",
+					subTitle: "",
 					imageUrl: "",
 					imageId: 0,
+					iconValue: "fas fa-star",
+					iconLibrary: "solid",
+					mediaType: "icon",
+					iconImageUrl: "",
 					buttonText: "Read More",
 					buttonUrl: "#",
+					buttonExternal: false,
 				},
 			],
 		});
 	};
 
-	const removeItem = (index) => {
-		setAttributes({ items: items.filter((_, i) => i !== index) });
-	};
-
-	const duplicateItem = (index) => {
-		const copy = { ...items[index], id: items.length + 1 };
-		const updated = [...items];
-		updated.splice(index + 1, 0, copy);
-		setAttributes({ items: updated });
-	};
-
 	return (
 		<InspectorControls>
-			{/* ── Layout ── */}
-			<PanelBody
-				title={__("Layout & Preset", "image-accordion")}
-				initialOpen={true}
-			>
+			{/* ── CONTENT ── */}
+			<PanelBody title={__("Content", "image-accordion")} initialOpen={true}>
 				<SelectControl
 					label={__("Accordion Type", "image-accordion")}
-					value={preset}
+					value={presetStyle}
 					options={[
-						{ label: "Preset 1 — Rounded Cards", value: "preset1" },
-						{ label: "Preset 2 — Full Bleed + Dots", value: "preset2" },
-						{ label: "Preset 3 — Horizontal Strips", value: "preset3" },
-						{ label: "Preset 4 — Diagonal Slices", value: "preset4" },
+						{ label: "Preset 1", value: "preset-1" },
+						{ label: "Preset 2", value: "preset-2" },
+						{ label: "Preset 3", value: "preset-3" },
+						{ label: "Preset 4", value: "preset-4" },
 					]}
-					onChange={(value) => setAttributes({ preset: value })}
+					onChange={(val) => setAttributes({ presetStyle: val })}
 				/>
+
 				<SelectControl
 					label={__("Trigger On", "image-accordion")}
 					value={triggerOn}
@@ -93,177 +308,192 @@ const Inspector = ({ attributes, setAttributes }) => {
 						{ label: "Hover", value: "hover" },
 						{ label: "Click", value: "click" },
 					]}
-					onChange={(value) => setAttributes({ triggerOn: value })}
+					onChange={(val) => setAttributes({ triggerOn: val })}
 				/>
-				<RangeControl
-					label={__("Height (px)", "image-accordion")}
-					value={height}
-					onChange={(v) => setAttributes({ height: v })}
-					min={300}
-					max={900}
-					step={10}
-				/>
-				<RangeControl
-					label={__("Border Radius (px)", "image-accordion")}
-					value={borderRadius}
-					onChange={(v) => setAttributes({ borderRadius: v })}
-					min={0}
-					max={40}
-				/>
-			</PanelBody>
 
-			{/* ── Style ── */}
-			<PanelBody title={__("Style", "image-accordion")} initialOpen={false}>
-				<ToggleControl
-					label={__("Show Numbers", "image-accordion")}
-					checked={showNumbers}
-					onChange={(v) => setAttributes({ showNumbers: v })}
-				/>
-				<ToggleControl
-					label={__("Show Button", "image-accordion")}
-					checked={showButton}
-					onChange={(v) => setAttributes({ showButton: v })}
-				/>
-				<RangeControl
-					label={__("Overlay Opacity (%)", "image-accordion")}
-					value={overlayOpacity}
-					onChange={(v) => setAttributes({ overlayOpacity: v })}
-					min={0}
-					max={90}
-				/>
-				<Text variant="muted" style={{ display: "block", marginBottom: 6 }}>
-					{__("Accent Color", "image-accordion")}
-				</Text>
-				<ColorPicker
-					color={accentColor}
-					onChange={(v) => setAttributes({ accentColor: v })}
-					enableAlpha={false}
-				/>
-			</PanelBody>
+				<Divider />
 
-			{/* ── Accordion Items ── */}
-			<PanelBody
-				title={__("Accordion Items", "image-accordion")}
-				initialOpen={true}
-			>
-				{items.map((item, index) => (
-					<div
-						key={item.id}
-						style={{
-							background: "#1e1e1e",
-							border: "1px solid #3a3a3a",
-							borderRadius: 6,
-							padding: "10px",
-							marginBottom: 10,
-						}}
-					>
-						<div
-							style={{
-								display: "flex",
-								justifyContent: "space-between",
-								alignItems: "center",
-								marginBottom: 8,
-							}}
-						>
-							<Text style={{ color: "#ccc", fontWeight: 600, fontSize: 12 }}>
-								{`Item ${index + 1}`}
-							</Text>
-							<div style={{ display: "flex", gap: 4 }}>
-								<Button
-									icon="admin-page"
-									isSmall
-									onClick={() => duplicateItem(index)}
-									title={__("Duplicate", "image-accordion")}
-								/>
-								<Button
-									icon="no-alt"
-									isSmall
-									isDestructive
-									onClick={() => removeItem(index)}
-									title={__("Remove", "image-accordion")}
-								/>
-							</div>
-						</div>
+				<p style={{ fontSize: 12, fontWeight: 600, marginBottom: 8 }}>
+					{__("Accordion Items", "image-accordion")}
+				</p>
 
-						<TextControl
-							label={__("Title", "image-accordion")}
-							value={item.title}
-							onChange={(v) => updateItem(index, "title", v)}
-						/>
-						<TextControl
-							label={__("Subtitle", "image-accordion")}
-							value={item.subtitle}
-							onChange={(v) => updateItem(index, "subtitle", v)}
-						/>
-						<TextControl
-							label={__("Button Text", "image-accordion")}
-							value={item.buttonText}
-							onChange={(v) => updateItem(index, "buttonText", v)}
-						/>
-						<TextControl
-							label={__("Button URL", "image-accordion")}
-							value={item.buttonUrl}
-							onChange={(v) => updateItem(index, "buttonUrl", v)}
-						/>
-
-						{/* Image upload */}
-						<MediaUploadCheck>
-							<MediaUpload
-								onSelect={(media) => {
-									updateItem(index, "imageUrl", media.url);
-									updateItem(index, "imageId", media.id);
-								}}
-								allowedTypes={["image"]}
-								value={item.imageId}
-								render={({ open }) => (
-									<div>
-										{item.imageUrl ? (
-											<div>
-												<img
-													src={item.imageUrl}
-													alt=""
-													style={{
-														width: "100%",
-														height: 60,
-														objectFit: "cover",
-														borderRadius: 4,
-														marginBottom: 4,
-													}}
-												/>
-												<Button
-													variant="secondary"
-													isSmall
-													onClick={open}
-													style={{ width: "100%", justifyContent: "center" }}
-												>
-													{__("Replace Image", "image-accordion")}
-												</Button>
-											</div>
-										) : (
-											<Button
-												variant="primary"
-												isSmall
-												onClick={open}
-												style={{ width: "100%", justifyContent: "center" }}
-											>
-												{__("🖼 Upload Image", "image-accordion")}
-											</Button>
-										)}
-									</div>
-								)}
-							/>
-						</MediaUploadCheck>
-					</div>
+				{accordionItems.map((item, i) => (
+					<ItemEditor
+						key={item.id || i}
+						item={item}
+						index={i}
+						preset={presetStyle}
+						onChange={updateItem}
+						onRemove={removeItem}
+						onDuplicate={duplicateItem}
+					/>
 				))}
 
 				<Button
 					variant="primary"
 					onClick={addItem}
-					style={{ width: "100%", justifyContent: "center", marginTop: 6 }}
+					style={{ width: "100%", justifyContent: "center", marginTop: 4 }}
 				>
 					{__("+ Add Item", "image-accordion")}
 				</Button>
 			</PanelBody>
+
+			{/* ── LAYOUT ── */}
+			<PanelBody title={__("Layout", "image-accordion")} initialOpen={false}>
+				<RangeControl
+					label={__("Container Height (px)", "image-accordion")}
+					value={containerHeight}
+					onChange={(val) => setAttributes({ containerHeight: val })}
+					min={200}
+					max={900}
+					step={10}
+				/>
+
+				{presetStyle !== "preset-2" && (
+					<RangeControl
+						label={__("Items Gap (px)", "image-accordion")}
+						value={itemsGap}
+						onChange={(val) => setAttributes({ itemsGap: val })}
+						min={0}
+						max={40}
+					/>
+				)}
+			</PanelBody>
+
+			{/* ── OVERLAY ── */}
+			<PanelBody title={__("Overlay", "image-accordion")} initialOpen={false}>
+				<p style={{ fontSize: 12, marginBottom: 6 }}>
+					{__("Overlay Color", "image-accordion")}
+				</p>
+				<input
+					type="color"
+					value={overlayColor}
+					onChange={(e) => setAttributes({ overlayColor: e.target.value })}
+					style={{
+						width: "100%",
+						height: 36,
+						border: "none",
+						borderRadius: 4,
+						cursor: "pointer",
+					}}
+				/>
+				<TextControl
+					label={__("Custom value (supports rgba)", "image-accordion")}
+					value={overlayColor}
+					onChange={(val) => setAttributes({ overlayColor: val })}
+				/>
+			</PanelBody>
+
+			{/* ── ICON (Preset 1 only) ── */}
+			{presetStyle === "preset-1" && (
+				<PanelBody
+					title={__("Icon Style", "image-accordion")}
+					initialOpen={false}
+				>
+					<p style={{ fontSize: 12, marginBottom: 6 }}>
+						{__("Icon Color", "image-accordion")}
+					</p>
+					<input
+						type="color"
+						value={iconColor}
+						onChange={(e) => setAttributes({ iconColor: e.target.value })}
+						style={{
+							width: "100%",
+							height: 36,
+							border: "none",
+							borderRadius: 4,
+							cursor: "pointer",
+						}}
+					/>
+				</PanelBody>
+			)}
+
+			{/* ── DOTS (Preset 2 only) ── */}
+			{presetStyle === "preset-2" && (
+				<PanelBody
+					title={__("Overlay Dots", "image-accordion")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Dots", "image-accordion")}
+						checked={showDots}
+						onChange={(val) => setAttributes({ showDots: val })}
+					/>
+					{showDots && (
+						<>
+							<TextControl
+								label={__("Dot Color", "image-accordion")}
+								value={dotColor}
+								onChange={(val) => setAttributes({ dotColor: val })}
+							/>
+							<RangeControl
+								label={__("Dot Size (px)", "image-accordion")}
+								value={dotSize}
+								onChange={(val) => setAttributes({ dotSize: val })}
+								min={4}
+								max={40}
+							/>
+						</>
+					)}
+				</PanelBody>
+			)}
+
+			{/* ── NUMBERS (Preset 2 & 4 only) ── */}
+			{(presetStyle === "preset-2" || presetStyle === "preset-4") && (
+				<PanelBody
+					title={__("Item Number", "image-accordion")}
+					initialOpen={false}
+				>
+					<ToggleControl
+						label={__("Show Number", "image-accordion")}
+						checked={showNumber}
+						onChange={(val) => setAttributes({ showNumber: val })}
+					/>
+					{showNumber && (
+						<TextControl
+							label={__("Number Color", "image-accordion")}
+							value={numberColor}
+							onChange={(val) => setAttributes({ numberColor: val })}
+						/>
+					)}
+				</PanelBody>
+			)}
+
+			{/* ── TYPOGRAPHY ── */}
+			<PanelBody
+				title={__("Typography", "image-accordion")}
+				initialOpen={false}
+			>
+				<TextControl
+					label={__("Title Color", "image-accordion")}
+					value={titleColor}
+					onChange={(val) => setAttributes({ titleColor: val })}
+				/>
+				<TextControl
+					label={__("Subtitle Color", "image-accordion")}
+					value={subtitleColor}
+					onChange={(val) => setAttributes({ subtitleColor: val })}
+				/>
+			</PanelBody>
+
+			{/* ── BUTTON (Preset 3 only) ── */}
+			{presetStyle === "preset-3" && (
+				<PanelBody
+					title={__("Button Style", "image-accordion")}
+					initialOpen={false}
+				>
+					<TextControl
+						label={__("Text Color", "image-accordion")}
+						value={btnTextColor}
+						onChange={(val) => setAttributes({ btnTextColor: val })}
+					/>
+					<TextControl
+						label={__("Background Color (supports rgba)", "image-accordion")}
+						value={btnBgColor}
+						onChange={(val) => setAttributes({ btnBgColor: val })}
+					/>
+				</PanelBody>
+			)}
 		</InspectorControls>
 	);
 };

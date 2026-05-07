@@ -6,109 +6,16 @@
 	"title": "Image Accordion",
 	"category": "frontis-blocks",
 	"icon": "images-alt2",
-	"description": "Interactive image accordion with 4 stunning preset layouts. Hover or click to expand panels.",
-	"keywords": ["accordion", "image", "gallery", "hover", "interactive"],
+	"description": "A beautiful image accordion with 4 preset styles. Hover or click to expand panels.",
+	"keywords": ["image", "accordion", "animation", "gallery", "interactive"],
 	"textdomain": "frontis-blocks",
-	"attributes": {
-		"preset": {
-			"type": "string",
-			"default": "preset1"
-		},
-		"triggerOn": {
-			"type": "string",
-			"default": "hover"
-		},
-		"items": {
-			"type": "array",
-			"default": [
-				{
-					"id": 1,
-					"title": "Discover Unique",
-					"subtitle": "Explore the world",
-					"description": "A breathtaking journey through landscapes and cultures that will leave you inspired.",
-					"imageUrl": "",
-					"imageId": 0,
-					"buttonText": "Read More",
-					"buttonUrl": "#"
-				},
-				{
-					"id": 2,
-					"title": "Adventure Awaits",
-					"subtitle": "Push your limits",
-					"description": "Challenge yourself with extreme adventures designed for the fearless.",
-					"imageUrl": "",
-					"imageId": 0,
-					"buttonText": "Read More",
-					"buttonUrl": "#"
-				},
-				{
-					"id": 3,
-					"title": "Wild Nature",
-					"subtitle": "Feel the wilderness",
-					"description": "Immerse yourself in raw, untamed nature unlike anything you have experienced.",
-					"imageUrl": "",
-					"imageId": 0,
-					"buttonText": "Read More",
-					"buttonUrl": "#"
-				},
-				{
-					"id": 4,
-					"title": "Urban Stories",
-					"subtitle": "City of dreams",
-					"description": "Every city has a soul. Find it in the hidden corners and vibrant streets.",
-					"imageUrl": "",
-					"imageId": 0,
-					"buttonText": "Read More",
-					"buttonUrl": "#"
-				},
-				{
-					"id": 5,
-					"title": "Ocean Deep",
-					"subtitle": "Dive into blue",
-					"description": "The ocean holds secrets that only the brave and curious dare to uncover.",
-					"imageUrl": "",
-					"imageId": 0,
-					"buttonText": "Read More",
-					"buttonUrl": "#"
-				}
-			]
-		},
-		"height": {
-			"type": "number",
-			"default": 500
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 16
-		},
-		"accentColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"overlayColor": {
-			"type": "string",
-			"default": "#000000"
-		},
-		"overlayOpacity": {
-			"type": "number",
-			"default": 40
-		},
-		"showNumbers": {
-			"type": "boolean",
-			"default": true
-		},
-		"showButton": {
-			"type": "boolean",
-			"default": true
-		}
-	},
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"],
 		"spacing": { "margin": true, "padding": true }
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./editor.scss",
-	"style": "file:./style.scss",
+	"editorStyle": "file:./editor.css",
+	"style": "file:./style.css",
 	"viewScript": "file:./view.js"
 }
