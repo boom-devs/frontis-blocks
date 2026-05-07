@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "frontis-blocks/pdf-viewer",
+	"version": "1.0.0",
+	"title": "PDF Viewer",
+	"category": "media",
+	"icon": "media-document",
+	"description": "Embed and display PDF files directly in your content.",
+	"supports": {
+		"html": false,
+		"align": true
+	},
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"blockID": { "type": "string", "default": "" },
+		"blockStyle": { "type": "string", "default": "" },
+		"pdfUrl": { "type": "string", "default": "" },
+		"pdfId": { "type": "number", "default": 0 },
+		"height": { "type": "number", "default": 600 },
+		"showToolbar": { "type": "boolean", "default": true },
+		"themeColor": { "type": "string", "default": "#000000" }
+	}
+}

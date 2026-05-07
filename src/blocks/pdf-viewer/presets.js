@@ -1,893 +1,885 @@
-import { __ } from '@wordpress/i18n';
+import { __ } from "@wordpress/i18n";
 
 /**
  * Preset Styles Data Object
-*/
+ */
 export const presetStyles = {
-    "preset-1": {
-        "countDownFlexWrap": true,
-        "countDownLayoutType": "flex",
-        "countDownLayoutAlignment": "center",
-        "countDownItemGap": {
-            "Desktop": "72",
-            "Tablet": "72",
-            "Mobile": "60"
-        },
-        "countDownItemWrapperBorderRadiusDesktop": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusTablet": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusMobile": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperPaddingDesktop": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownItemWrapperPaddingTablet": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownItemWrapperPaddingMobile": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownLabelMarginDesktop": {
-            "top": "10",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginTablet": {
-            "top": "10",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginMobile": {
-            "top": "10",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "singleDigitFontColorSwitcher": false,
-        "digitFontColor": "#FFFFFF",
-        "digitFontHoverColor": "#FFFFFF",
-        "digitFontSize": {
-            "Desktop": "62",
-            "Tablet": "48",
-            "Mobile": "32"
-        },
-        "digitFontWeight": "500",
-        "digitLineHeight": {
-            "Desktop": "80",
-            "Tablet": "60",
-            "Mobile": "42"
-        },
-        "labelFontColor": "#FFFFFF",
-        "labelFontHoverColor": "#FFFFFF",
-        "labelFontSize": {
-            "Desktop": "18",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "labelFontWeight": "",
-        "labelLineHeight": {
-            "Desktop": "25",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownSeparatorEnabled": true,
-        "countDownSeparatorType": "colon",
-        "countDownSeparatorFontColor": "#ffffff",
-        "countDownSeparatorFontHoverColor": "#ffffff",
-        "countDownSeparatorFontSize": {
-            "Desktop": "48",
-            "Tablet": "42",
-            "Mobile": "38"
-        },
-        "countDownSeparatorFontWeight": "",
-        "countDownSeparatorHorizontalGap": {
-            "Desktop": "40",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "countDownSeparatorVerticalGap": {
-            "Desktop": "40",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "globalClassicColor": "#399CFF",
-        "labelBgColor": "",
-        "labelBgHoverColor": "",
-        "countDownLabelBorderColor": "",
-        "countDownLabelBorder": "none",
-        "countDownLabelBorderTypeDesktop": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelBorderTypeTablet": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelBorderTypeMobile": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelBorderTypeLink": true,
-        "countDownLabelBorderRadiusUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownLabelBorderRadiusDesktop": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelBorderRadiusTablet": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelBorderRadiusMobile": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownLabelHeight": {
-            "Desktop": "",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownDigitBorderColor": "",
-        "countDownDigitBorder": "none",
-        "countDownDigitBorderTypeDesktop": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownDigitBorderTypeTablet": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownDigitBorderTypeMobile": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownDigitBorderRadiusDesktop": {
-            "top": "",
-            "right": "",
-            "bottom": "",
-            "left": ""
-        },
-        "countDownDigitBorderRadiusTablet": {
-            "top": "",
-            "bottom": "",
-            "left": "",
-            "right": ""
-        },
-        "countDownDigitBorderRadiusMobile": {
-            "top": "",
-            "bottom": "",
-            "left": "",
-            "right": ""
-        },
-        "countDownDigitHeight": {
-            "Desktop": "",
-            "Tablet": "",
-            "Mobile": ""
-        },
-    },
-    "preset-2": {
-        "countDownFlexWrap": true,
-        "countDownLayoutType": "flex",
-        "countDownLayoutAlignment": "center",
-        "countDownItemGap": {
-            "Desktop": "68",
-            "Tablet": "68",
-            "Mobile": "40"
-        },
-        "countDownItemWrapperBorderRadiusDesktop": {
-            "top": "10",
-            "bottom": "10",
-            "left": "10",
-            "right": "10"
-        },
-        "countDownItemWrapperBorderRadiusTablet": {
-            "top": "10",
-            "bottom": "10",
-            "left": "10",
-            "right": "10"
-        },
-        "countDownItemWrapperBorderRadiusMobile": {
-            "top": "10",
-            "bottom": "10",
-            "left": "10",
-            "right": "10"
-        },
-        "countDownItemWrapperPaddingDesktop": {
-            "top": "32",
-            "bottom": "32",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownItemWrapperPaddingTablet": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownItemWrapperPaddingMobile": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownLabelMarginDesktop": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginTablet": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginMobile": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "singleDigitFontColorSwitcher": true,
-        "daysDigitFontColorSwitcher": "normal",
-        "daysDigitFontColor": "#e43242",
-        "daysDigitFontHoverColor": "",
-        "hoursDigitFontColorSwitcher": "normal",
-        "hoursDigitFontColor": "#4caf50",
-        "hoursDigitFontHoverColor": "",
-        "minutesDigitFontColorSwitcher": "normal",
-        "minutesDigitFontColor": "#f89b2e",
-        "minutesDigitFontHoverColor": "",
-        "secondsDigitFontColorSwitcher": "normal",
-        "secondsDigitFontColor": "#399cff",
-        "secondsDigitFontHoverColor": "",
-        "digitFontSize": {
-            "Desktop": "62",
-            "Tablet": "48",
-            "Mobile": "32"
-        },
-        "digitFontWeight": "500",
-        "digitLineHeight": {
-            "Desktop": "80",
-            "Tablet": "60",
-            "Mobile": "42"
-        },
-        "labelFontColor": "#8891a5",
-        "labelFontHoverColor": "#8891a5",
-        "labelFontSize": {
-            "Desktop": "18",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "labelFontWeight": "400",
-        "labelLineHeight": {
-            "Desktop": "25",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownSeparatorEnabled": true,
-        "countDownSeparatorType": "line",
-        "countDownSeparatorFontColor": "#e1e3e8",
-        "countDownSeparatorFontHoverColor": "#e1e3e8",
-        "countDownSeparatorFontSize": {
-            "Desktop": "100",
-            "Tablet": "42",
-            "Mobile": "38"
-        },
-        "countDownSeparatorFontWeight": "100",
-        "countDownSeparatorHorizontalGap": {
-            "Desktop": "45",
-            "Tablet": "60",
-            "Mobile": "60"
-        },
-        "countDownSeparatorVerticalGap": {
-            "Desktop": "51",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "globalClassicColor": "#f7f7f7",
-        "labelBgColor": "",
-        "labelBgHoverColor": "",
-        "countDownLabelBorderColor": "",
-            "countDownLabelBorder": "none",
-            "countDownLabelBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeLink": true,
-            "countDownLabelBorderRadiusUnits": {
-                "Desktop": "px",
-                "Tablet": "px",
-                "Mobile": "px"
-            },
-            "countDownLabelBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-        "countDownLabelHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-            "countDownDigitBorderColor": "",
-            "countDownDigitBorder": "none",
-            "countDownDigitBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusTablet": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitBorderRadiusMobile": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-    },
-    "preset-3": {
-        "countDownFlexWrap": true,
-        "countDownLayoutType": "flex",
-        "countDownLayoutAlignment": "center",
-        "countDownItemGap": {
-            "Desktop": "72",
-            "Tablet": "72",
-            "Mobile": "60"
-        },
-        "countDownItemWrapperBorderRadiusDesktop": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusTablet": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusMobile": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperPaddingDesktop": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownItemWrapperPaddingTablet": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownItemWrapperPaddingMobile": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginDesktop": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginTablet": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginMobile": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "singleDigitFontColorSwitcher": false,
-        "digitFontColor": "#15171C",
-        "digitFontHoverColor": "#15171C",
-        "digitFontSize": {
-            "Desktop": "62",
-            "Tablet": "48",
-            "Mobile": "32"
-        },
-        "digitFontWeight": "500",
-        "digitLineHeight": {
-            "Desktop": "80",
-            "Tablet": "60",
-            "Mobile": "42"
-        },
-        "labelFontColor": "#6A758E",
-        "labelFontHoverColor": "#6A758E",
-        "labelFontSize": {
-            "Desktop": "18",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "labelFontWeight": "",
-        "labelLineHeight": {
-            "Desktop": "25",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownSeparatorEnabled": true,
-        "countDownSeparatorType": "colon",
-        "countDownSeparatorFontColor": "#15171C",
-        "countDownSeparatorFontHoverColor": "#15171C",
-        "countDownSeparatorFontSize": {
-            "Desktop": "48",
-            "Tablet": "42",
-            "Mobile": "38"
-        },
-        "countDownSeparatorFontWeight": "",
-        "countDownSeparatorHorizontalGap": {
-            "Desktop": "40",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "countDownSeparatorVerticalGap": {
-            "Desktop": "40",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "globalClassicColor": "",
-        "labelBgColor": "",
-        "labelBgHoverColor": "",
-        "countDownLabelBorderColor": "",
-            "countDownLabelBorder": "none",
-            "countDownLabelBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeLink": true,
-            "countDownLabelBorderRadiusUnits": {
-                "Desktop": "px",
-                "Tablet": "px",
-                "Mobile": "px"
-            },
-            "countDownLabelBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-        "countDownLabelHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-            "countDownDigitBorderColor": "",
-            "countDownDigitBorder": "none",
-            "countDownDigitBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusTablet": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitBorderRadiusMobile": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-    },
-    "preset-4": {
-        "countDownLayoutType": "grid",
-        "countDownLayoutAlignment": "center",
-        "countDownGrid": {
-            "Desktop": "4",
-            "Tablet": "3",
-            "Mobile": "2"
-        },
-        "countDownItemGap": {
-            "Desktop": "72",
-            "Tablet": "80",
-            "Mobile": "50"
-        },
-        "countDownItemWrapperBorderRadiusUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownItemWrapperBorderRadiusDesktop": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusTablet": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperBorderRadiusMobile": {
-            "top": "14",
-            "bottom": "14",
-            "left": "14",
-            "right": "14"
-        },
-        "countDownItemWrapperPaddingDesktop": {
-            "top": "42",
-            "right": "42",
-            "bottom": "42",
-            "left": "42"
-        },
-        "countDownItemWrapperPaddingTablet": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "countDownItemWrapperPaddingMobile": {
-            "top": "24",
-            "bottom": "24",
-            "left": "42",
-            "right": "42"
-        },
-        "singleDigitFontColorSwitcher": false,
-        "digitFontColor": "#ffffff",
-        "digitFontHoverColor": "#ffffff",
-        "digitFontSize": {
-            "Desktop": "62",
-            "Tablet": "48",
-            "Mobile": "32"
-        },
-        "digitFontWeight": "500",
-        "digitLineHeight": {
-            "Desktop": "80",
-            "Tablet": "60",
-            "Mobile": "42"
-        },
-        "labelFontColor": "#FFFFFF",
-        "labelFontHoverColor": "#FFFFFF",
-        "labelBgColor": "#5d98ff",
-        "labelBgHoverColor": "",
-        "labelFontSize": {
-            "Desktop": "18",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "labelLineHeight": {
-            "Desktop": "25",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownSeparatorEnabled": true,
-        "countDownSeparatorType": "colon",
-        "countDownSeparatorCustom": "",
-        "countDownSeparatorFontColorSwitcher": "normal",
-        "countDownSeparatorFontColor": "#ffffff",
-        "countDownSeparatorFontHoverColor": "#ffffff",
-        "countDownSeparatorFontSize": {
-            "Desktop": "62",
-            "Tablet": "42",
-            "Mobile": "38"
-        },
-        "countDownSeparatorFontSizeUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownSeparatorFontWeight": "500",
-        "countDownSeparatorLineHeight": {
-            "Desktop": "80",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownSeparatorHorizontalGap": {
-            "Desktop": "40",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "countDownSeparatorHorizontalGapUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownSeparatorVerticalGap": {
-            "Desktop": "80",
-            "Tablet": "40",
-            "Mobile": "40"
-        },
-        "countDownSeparatorVerticalGapUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "globalBackgroundType": "classic",
-        "globalClassicColor": "#5b0ac6",
-        "countDownLabelBorderColor": "#5d98ff",
-        "countDownLabelBorder": "solid",
-        "countDownLabelBorderTypeUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownLabelBorderTypeDesktop": {
-            "top": "1",
-            "right": "1",
-            "bottom": "1",
-            "left": "1"
-        },
-        "countDownLabelBorderTypeTablet": {
-            "top": "1",
-            "right": "1",
-            "bottom": "1",
-            "left": "1"
-        },
-        "countDownLabelBorderTypeMobile": {
-            "top": "1",
-            "right": "1",
-            "bottom": "1",
-            "left": "1"
-        },
-        "countDownLabelBorderTypeLink": true,
-        "countDownLabelBorderRadiusUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownLabelBorderRadiusDesktop": {
-            "top": "0",
-            "right": "0",
-            "bottom": "10",
-            "left": "10"
-        },
-        "countDownLabelBorderRadiusTablet": {
-            "top": "0",
-            "right": "0",
-            "bottom": "10",
-            "left": "10"
-        },
-        "countDownLabelBorderRadiusMobile": {
-            "top": "0",
-            "right": "0",
-            "bottom": "10",
-            "left": "10"
-        },
-        "countDownLabelBorderRadiusLink": false,
-        "countDownLabelMarginUnits": {
-            "Desktop": "px",
-            "Tablet": "px",
-            "Mobile": "px"
-        },
-        "countDownLabelMarginDesktop": {
-            "top": "0",
-            "right": "0",
-            "bottom": "0",
-            "left": "0"
-        },
-        "countDownLabelMarginTablet": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelMarginMobile": {
-            "top": "0",
-            "bottom": "0",
-            "left": "0",
-            "right": "0"
-        },
-        "countDownLabelHeight": {
-            "Desktop": "50",
-            "Tablet": "",
-            "Mobile": ""
-        },
-        "countDownDigitBorderColor": "#5d98ff80",
-        "countDownDigitBorder": "solid",
-        "countDownDigitBorderTypeDesktop": {
-            "top": "1",
-            "right": "1",
-            "bottom": "0",
-            "left": "1"
-        },
-        "countDownDigitBorderTypeTablet": {
-            "top": "1",
-            "right": "1",
-            "bottom": "0",
-            "left": "1"
-        },
-        "countDownDigitBorderTypeMobile": {
-            "top": "1",
-            "right": "1",
-            "bottom": "0",
-            "left": "1"
-        },
-        "countDownDigitBorderRadiusDesktop": {
-            "top": "10",
-            "right": "10",
-            "bottom": "0",
-            "left": "0"
-        },
-        "countDownDigitBorderRadiusTablet": {
-            "top": "10",
-            "bottom": "10",
-            "left": "",
-            "right": ""
-        },
-        "countDownDigitBorderRadiusMobile": {
-            "top": "10",
-            "bottom": "10",
-            "left": "",
-            "right": ""
-        },
-        "countDownDigitHeight": {
-            "Desktop": "130",
-            "Tablet": "",
-            "Mobile": ""
-        },
-    },
+	"preset-1": {
+		countDownFlexWrap: false,
+		countDownLayoutType: "flex",
+		countDownLayoutAlignment: "center",
+		countDownItemGap: {
+			Desktop: "0",
+			Tablet: "0",
+			Mobile: "0",
+		},
+		countDownItemWrapperBorderRadiusDesktop: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperBorderRadiusTablet: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperBorderRadiusMobile: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperPaddingDesktop: {
+			top: "50",
+			bottom: "50",
+			left: "50",
+			right: "50",
+		},
+		countDownItemWrapperPaddingTablet: {
+			top: "40",
+			bottom: "40",
+			left: "40",
+			right: "40",
+		},
+		countDownItemWrapperPaddingMobile: {
+			top: "30",
+			bottom: "30",
+			left: "30",
+			right: "30",
+		},
+		countDownLabelMarginDesktop: {
+			top: "15",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginTablet: {
+			top: "12",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginMobile: {
+			top: "10",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		singleDigitFontColorSwitcher: false,
+		digitFontColor: "#FFFFFF",
+		digitFontHoverColor: "#FFFFFF",
+		digitFontSize: {
+			Desktop: "48",
+			Tablet: "36",
+			Mobile: "28",
+		},
+		digitFontWeight: "600",
+		digitLineHeight: {
+			Desktop: "56",
+			Tablet: "44",
+			Mobile: "36",
+		},
+		labelFontColor: "#FFFFFF",
+		labelFontHoverColor: "#FFFFFF",
+		labelFontSize: {
+			Desktop: "16",
+			Tablet: "14",
+			Mobile: "12",
+		},
+		labelFontWeight: "500",
+		labelLineHeight: {
+			Desktop: "22",
+			Tablet: "20",
+			Mobile: "18",
+		},
+		countDownSeparatorEnabled: false,
+		countDownSeparatorType: "colon",
+		countDownSeparatorFontColor: "#ffffff",
+		countDownSeparatorFontHoverColor: "#ffffff",
+		countDownSeparatorFontSize: {
+			Desktop: "48",
+			Tablet: "42",
+			Mobile: "38",
+		},
+		countDownSeparatorFontWeight: "",
+		countDownSeparatorHorizontalGap: {
+			Desktop: "40",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		countDownSeparatorVerticalGap: {
+			Desktop: "40",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		globalClassicColor: "#7ab8db",
+		labelBgColor: "",
+		labelBgHoverColor: "",
+		countDownLabelBorderColor: "",
+		countDownLabelBorder: "none",
+		countDownLabelBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeLink: true,
+		countDownLabelBorderRadiusUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+		countDownDigitBorderColor: "",
+		countDownDigitBorder: "none",
+		countDownDigitBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusTablet: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitBorderRadiusMobile: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	"preset-2": {
+		countDownFlexWrap: true,
+		countDownLayoutType: "flex",
+		countDownLayoutAlignment: "center",
+		countDownItemGap: {
+			Desktop: "80",
+			Tablet: "60",
+			Mobile: "40",
+		},
+		countDownItemWrapperBorderRadiusDesktop: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperBorderRadiusTablet: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperBorderRadiusMobile: {
+			top: "200",
+			bottom: "200",
+			left: "200",
+			right: "200",
+		},
+		countDownItemWrapperPaddingDesktop: {
+			top: "60",
+			bottom: "60",
+			left: "60",
+			right: "60",
+		},
+		countDownItemWrapperPaddingTablet: {
+			top: "48",
+			bottom: "48",
+			left: "48",
+			right: "48",
+		},
+		countDownItemWrapperPaddingMobile: {
+			top: "36",
+			bottom: "36",
+			left: "36",
+			right: "36",
+		},
+		countDownLabelMarginDesktop: {
+			top: "15",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginTablet: {
+			top: "12",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginMobile: {
+			top: "10",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		singleDigitFontColorSwitcher: false,
+		digitFontColor: "#F89B2E",
+		digitFontHoverColor: "#F89B2E",
+		digitFontSize: {
+			Desktop: "52",
+			Tablet: "40",
+			Mobile: "30",
+		},
+		digitFontWeight: "600",
+		digitLineHeight: {
+			Desktop: "60",
+			Tablet: "48",
+			Mobile: "38",
+		},
+		labelFontColor: "#999999",
+		labelFontHoverColor: "#999999",
+		labelFontSize: {
+			Desktop: "16",
+			Tablet: "14",
+			Mobile: "12",
+		},
+		labelFontWeight: "500",
+		labelLineHeight: {
+			Desktop: "22",
+			Tablet: "20",
+			Mobile: "18",
+		},
+		countDownSeparatorEnabled: false,
+		countDownSeparatorType: "line",
+		countDownSeparatorFontColor: "#e1e3e8",
+		countDownSeparatorFontHoverColor: "#e1e3e8",
+		countDownSeparatorFontSize: {
+			Desktop: "100",
+			Tablet: "42",
+			Mobile: "38",
+		},
+		countDownSeparatorFontWeight: "100",
+		countDownSeparatorHorizontalGap: {
+			Desktop: "45",
+			Tablet: "60",
+			Mobile: "60",
+		},
+		countDownSeparatorVerticalGap: {
+			Desktop: "51",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		globalClassicColor: "#1a1a1a",
+		labelBgColor: "",
+		labelBgHoverColor: "",
+		countDownLabelBorderColor: "",
+		countDownLabelBorder: "none",
+		countDownLabelBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeLink: true,
+		countDownLabelBorderRadiusUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+		countDownDigitBorderColor: "",
+		countDownDigitBorder: "none",
+		countDownDigitBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusTablet: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitBorderRadiusMobile: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	"preset-3": {
+		countDownFlexWrap: true,
+		countDownLayoutType: "flex",
+		countDownLayoutAlignment: "center",
+		countDownItemGap: {
+			Desktop: "24",
+			Tablet: "20",
+			Mobile: "16",
+		},
+		countDownItemWrapperBorderRadiusDesktop: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownItemWrapperBorderRadiusTablet: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownItemWrapperBorderRadiusMobile: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownItemWrapperPaddingDesktop: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownItemWrapperPaddingTablet: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownItemWrapperPaddingMobile: {
+			top: "0",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginDesktop: {
+			top: "8",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginTablet: {
+			top: "6",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginMobile: {
+			top: "4",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		singleDigitFontColorSwitcher: false,
+		digitFontColor: "#FF6B35",
+		digitFontHoverColor: "#FF6B35",
+		digitFontSize: {
+			Desktop: "36",
+			Tablet: "28",
+			Mobile: "20",
+		},
+		digitFontWeight: "600",
+		digitLineHeight: {
+			Desktop: "44",
+			Tablet: "36",
+			Mobile: "28",
+		},
+		labelFontColor: "#666666",
+		labelFontHoverColor: "#666666",
+		labelFontSize: {
+			Desktop: "12",
+			Tablet: "11",
+			Mobile: "10",
+		},
+		labelFontWeight: "500",
+		labelLineHeight: {
+			Desktop: "16",
+			Tablet: "15",
+			Mobile: "14",
+		},
+		countDownSeparatorEnabled: false,
+		countDownSeparatorType: "colon",
+		countDownSeparatorFontColor: "#15171C",
+		countDownSeparatorFontHoverColor: "#15171C",
+		countDownSeparatorFontSize: {
+			Desktop: "48",
+			Tablet: "42",
+			Mobile: "38",
+		},
+		countDownSeparatorFontWeight: "",
+		countDownSeparatorHorizontalGap: {
+			Desktop: "40",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		countDownSeparatorVerticalGap: {
+			Desktop: "40",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		globalClassicColor: "transparent",
+		labelBgColor: "",
+		labelBgHoverColor: "",
+		countDownLabelBorderColor: "",
+		countDownLabelBorder: "none",
+		countDownLabelBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderTypeLink: true,
+		countDownLabelBorderRadiusUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelBorderRadiusMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownLabelHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+		countDownDigitBorderColor: "",
+		countDownDigitBorder: "none",
+		countDownDigitBorderTypeDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeTablet: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderTypeMobile: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusDesktop: {
+			top: "",
+			right: "",
+			bottom: "",
+			left: "",
+		},
+		countDownDigitBorderRadiusTablet: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitBorderRadiusMobile: {
+			top: "",
+			bottom: "",
+			left: "",
+			right: "",
+		},
+		countDownDigitHeight: {
+			Desktop: "",
+			Tablet: "",
+			Mobile: "",
+		},
+	},
+	"preset-4": {
+		countDownLayoutType: "grid",
+		countDownLayoutAlignment: "center",
+		countDownGrid: {
+			Desktop: "4",
+			Tablet: "2",
+			Mobile: "2",
+		},
+		countDownItemGap: {
+			Desktop: "48",
+			Tablet: "40",
+			Mobile: "32",
+		},
+		countDownItemWrapperBorderRadiusUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownItemWrapperBorderRadiusDesktop: {
+			top: "8",
+			bottom: "8",
+			left: "8",
+			right: "8",
+		},
+		countDownItemWrapperBorderRadiusTablet: {
+			top: "8",
+			bottom: "8",
+			left: "8",
+			right: "8",
+		},
+		countDownItemWrapperBorderRadiusMobile: {
+			top: "8",
+			bottom: "8",
+			left: "8",
+			right: "8",
+		},
+		countDownItemWrapperPaddingDesktop: {
+			top: "32",
+			right: "24",
+			bottom: "32",
+			left: "24",
+		},
+		countDownItemWrapperPaddingTablet: {
+			top: "24",
+			bottom: "24",
+			left: "20",
+			right: "20",
+		},
+		countDownItemWrapperPaddingMobile: {
+			top: "20",
+			bottom: "20",
+			left: "16",
+			right: "16",
+		},
+		singleDigitFontColorSwitcher: false,
+		digitFontColor: "#FFFFFF",
+		digitFontHoverColor: "#FFFFFF",
+		digitFontSize: {
+			Desktop: "56",
+			Tablet: "44",
+			Mobile: "36",
+		},
+		digitFontWeight: "700",
+		digitLineHeight: {
+			Desktop: "64",
+			Tablet: "52",
+			Mobile: "44",
+		},
+		labelFontColor: "#FFFFFF",
+		labelFontHoverColor: "#FFFFFF",
+		labelBgColor: "#D66F2F",
+		labelBgHoverColor: "#E67E3A",
+		labelFontSize: {
+			Desktop: "14",
+			Tablet: "13",
+			Mobile: "12",
+		},
+		labelLineHeight: {
+			Desktop: "20",
+			Tablet: "19",
+			Mobile: "18",
+		},
+		countDownSeparatorEnabled: false,
+		countDownSeparatorType: "colon",
+		countDownSeparatorCustom: "",
+		countDownSeparatorFontColorSwitcher: "normal",
+		countDownSeparatorFontColor: "#ffffff",
+		countDownSeparatorFontHoverColor: "#ffffff",
+		countDownSeparatorFontSize: {
+			Desktop: "62",
+			Tablet: "42",
+			Mobile: "38",
+		},
+		countDownSeparatorFontSizeUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownSeparatorFontWeight: "500",
+		countDownSeparatorLineHeight: {
+			Desktop: "80",
+			Tablet: "",
+			Mobile: "",
+		},
+		countDownSeparatorHorizontalGap: {
+			Desktop: "40",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		countDownSeparatorHorizontalGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownSeparatorVerticalGap: {
+			Desktop: "80",
+			Tablet: "40",
+			Mobile: "40",
+		},
+		countDownSeparatorVerticalGapUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		globalBackgroundType: "classic",
+		globalClassicColor: "transparent",
+		countDownLabelBorderColor: "#D66F2F",
+		countDownLabelBorder: "none",
+		countDownLabelBorderTypeUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelBorderTypeDesktop: {
+			top: "0",
+			right: "0",
+			bottom: "0",
+			left: "0",
+		},
+		countDownLabelBorderTypeTablet: {
+			top: "0",
+			right: "0",
+			bottom: "0",
+			left: "0",
+		},
+		countDownLabelBorderTypeMobile: {
+			top: "0",
+			right: "0",
+			bottom: "0",
+			left: "0",
+		},
+		countDownLabelBorderTypeLink: true,
+		countDownLabelBorderRadiusUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelBorderRadiusDesktop: {
+			top: "0",
+			right: "0",
+			bottom: "8",
+			left: "8",
+		},
+		countDownLabelBorderRadiusTablet: {
+			top: "0",
+			right: "0",
+			bottom: "8",
+			left: "8",
+		},
+		countDownLabelBorderRadiusMobile: {
+			top: "0",
+			right: "0",
+			bottom: "8",
+			left: "8",
+		},
+		countDownLabelBorderRadiusLink: false,
+		countDownLabelMarginUnits: {
+			Desktop: "px",
+			Tablet: "px",
+			Mobile: "px",
+		},
+		countDownLabelMarginDesktop: {
+			top: "12",
+			right: "0",
+			bottom: "0",
+			left: "0",
+		},
+		countDownLabelMarginTablet: {
+			top: "10",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelMarginMobile: {
+			top: "8",
+			bottom: "0",
+			left: "0",
+			right: "0",
+		},
+		countDownLabelHeight: {
+			Desktop: "48",
+			Tablet: "40",
+			Mobile: "36",
+		},
+		countDownDigitBorderColor: "#333333",
+		countDownDigitBorder: "solid",
+		countDownDigitBorderTypeDesktop: {
+			top: "2",
+			right: "2",
+			bottom: "0",
+			left: "2",
+		},
+		countDownDigitBorderTypeTablet: {
+			top: "2",
+			right: "2",
+			bottom: "0",
+			left: "2",
+		},
+		countDownDigitBorderTypeMobile: {
+			top: "2",
+			right: "2",
+			bottom: "0",
+			left: "2",
+		},
+		countDownDigitBorderRadiusDesktop: {
+			top: "8",
+			right: "8",
+			bottom: "0",
+			left: "0",
+		},
+		countDownDigitBorderRadiusTablet: {
+			top: "8",
+			bottom: "8",
+			left: "",
+			right: "",
+		},
+		countDownDigitBorderRadiusMobile: {
+			top: "8",
+			bottom: "8",
+			left: "",
+			right: "",
+		},
+		countDownDigitHeight: {
+			Desktop: "100",
+			Tablet: "80",
+			Mobile: "70",
+		},
+	},
 };
-    
+
 export const countdownPresets = [
-    {
-        value: 'preset-1',
-        label: __('Preset 1', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['preset-1']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+	{
+		value: "preset-1",
+		label: __("Preset 1", "frontis-blocks"),
+		attributes: Object.entries(presetStyles["preset-1"]).map(
+			([label, value]) => ({ label, value }),
+		),
+		icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <path d="M24 108C24 100.268 30.268 94 38 94H310C317.732 94 324 100.268 324 108V168C324 175.732 317.732 182 310 182H38C30.268 182 24 175.732 24 168V108Z" fill="white" fill-opacity="0.4"/>
                     <g filter="url(#filter0_d_16980_15039)">
@@ -955,12 +947,14 @@ export const countdownPresets = [
                     </filter>
                     </defs>
                 </svg>`,
-    },
-    {
-        value: 'preset-2',
-        label: __('Preset 2', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['preset-2']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+	},
+	{
+		value: "preset-2",
+		label: __("Preset 2", "frontis-blocks"),
+		attributes: Object.entries(presetStyles["preset-2"]).map(
+			([label, value]) => ({ label, value }),
+		),
+		icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_15074)">
                     <path d="M55.4984 110.666C62.8624 110.666 68.8317 116.635 68.8317 123.999C68.8317 131.363 62.8624 137.333 55.4984 137.333C48.1344 137.333 42.165 131.363 42.165 123.999C42.165 116.635 48.1344 110.666 55.4984 110.666ZM55.4984 115.999C55.1447 115.999 54.8056 116.14 54.5556 116.39C54.3055 116.64 54.165 116.979 54.165 117.333V123.999C54.1651 124.353 54.3056 124.692 54.5557 124.942L58.5557 128.942C58.8072 129.185 59.144 129.319 59.4936 129.316C59.8432 129.313 60.1776 129.173 60.4248 128.926C60.672 128.679 60.8122 128.344 60.8153 127.995C60.8183 127.645 60.6839 127.308 60.441 127.057L56.8317 123.447V117.333C56.8317 116.979 56.6912 116.64 56.4412 116.39C56.1911 116.14 55.852 115.999 55.4984 115.999Z" fill="#404655"/>
@@ -1024,12 +1018,14 @@ export const countdownPresets = [
                     </filter>
                     </defs>
                 </svg>`,
-    },
-    {
-        value: 'preset-3',
-        label: __('Preset 3', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['preset-3']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+	},
+	{
+		value: "preset-3",
+		label: __("Preset 3", "frontis-blocks"),
+		attributes: Object.entries(presetStyles["preset-3"]).map(
+			([label, value]) => ({ label, value }),
+		),
+		icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_15103)">
                     <path d="M53.9984 110.666C61.3624 110.666 67.3317 116.635 67.3317 123.999C67.3317 131.363 61.3624 137.333 53.9984 137.333C46.6344 137.333 40.665 131.363 40.665 123.999C40.665 116.635 46.6344 110.666 53.9984 110.666ZM53.9984 115.999C53.6447 115.999 53.3056 116.14 53.0556 116.39C52.8055 116.64 52.665 116.979 52.665 117.333V123.999C52.6651 124.353 52.8056 124.692 53.0557 124.942L57.0557 128.942C57.3072 129.185 57.644 129.319 57.9936 129.316C58.3432 129.313 58.6776 129.173 58.9248 128.926C59.172 128.679 59.3122 128.344 59.3153 127.995C59.3183 127.645 59.1839 127.308 58.941 127.057L55.3317 123.447V117.333C55.3317 116.979 55.1912 116.64 54.9412 116.39C54.6911 116.14 54.352 115.999 53.9984 115.999Z" fill="#404655"/>
@@ -1096,12 +1092,14 @@ export const countdownPresets = [
                     </filter>
                     </defs>
                 </svg>`,
-    },
-    {
-        value: 'preset-4',
-        label: __('Preset 4', 'frontis-blocks'),
-        attributes: Object.entries(presetStyles['preset-4']).map(([label, value]) => ({ label, value })),
-        icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
+	},
+	{
+		value: "preset-4",
+		label: __("Preset 4", "frontis-blocks"),
+		attributes: Object.entries(presetStyles["preset-4"]).map(
+			([label, value]) => ({ label, value }),
+		),
+		icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <path d="M24 98C24 90.268 30.268 84 38 84H310C317.732 84 324 90.268 324 98V178C324 185.732 317.732 192 310 192H38C30.268 192 24 185.732 24 178V98Z" fill="white" fill-opacity="0.4"/>
                     <g filter="url(#filter0_d_16980_15000)">
@@ -1177,5 +1175,5 @@ export const countdownPresets = [
                     </filter>
                     </defs>
                 </svg>`,
-    },
+	},
 ];
