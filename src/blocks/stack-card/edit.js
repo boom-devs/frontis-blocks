@@ -8,6 +8,8 @@ import Inspector from './inspector';
 import { presetStyles } from './presets';
 import { getPresetFrameDataAttributes } from './preset-frame-data';
 import generateStackCardsStyle from './styling';
+import { applyFilters } from '@wordpress/hooks';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import {
 	bindPresetFourBehavior,
 	getPresetFourConfig,
@@ -275,6 +277,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 		return bindEditorStackCardScale(el);
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
+
+	
+	const stackCardAvailable = applyFilters('frontisblocks-stack-card-available', false);
+
+	if(!stackCardAvailable) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
 
 	return (
 		<>
