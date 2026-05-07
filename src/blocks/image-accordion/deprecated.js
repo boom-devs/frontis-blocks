@@ -1,9 +1,9 @@
 import { useBlockProps } from "@wordpress/block-editor";
 import attributes from "./attributes"; // Import the current attributes
-import { renderAccordion } from "./render";
+// import { renderAccordion } from "./render";
 
 const v1_0_0 = {
-	attributes, // Use the current attributes as the baseline for this deprecated version
+	attributes,
 
 	save({ attributes }) {
 		const { blockID, presetStyle, triggerOn } = attributes;
@@ -12,7 +12,7 @@ const v1_0_0 = {
 			className: `image-accordion-block ${blockID}`,
 		});
 
-		const { containerStyle, items } = renderAccordion(attributes, false);
+		// const { containerStyle, items } = renderAccordion(attributes, false);
 
 		return (
 			<div {...blockProps}>
@@ -20,8 +20,11 @@ const v1_0_0 = {
 					className={`pea-image-accordion-wrapper ${presetStyle} ${blockID}`}
 					data-trigger={triggerOn}
 				>
-					<div className="pea-image-accordion-container" style={containerStyle}>
-						{items}
+					<div
+						className="pea-image-accordion-container"
+						// style={containerStyle}
+					>
+						{/* {items} */}
 					</div>
 				</div>
 			</div>
