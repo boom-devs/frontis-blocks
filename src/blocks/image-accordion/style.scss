@@ -1,59 +1,33 @@
-.fb-image-accordion-wrapper {
-	box-sizing: border-box;
+/* Image Accordion Block — Front-end styles */
+/* Most layout styles are injected inline by view.js for theming flexibility.
+   This file handles global resets and any non-dynamic styles. */
+
+.image-accordion-block {
 	width: 100%;
+	overflow: hidden;
 
-	// Common styles for images to ensure consistency
-	img {
-		max-width: 100%;
-		height: auto;
-		display: block;
+	* {
+		box-sizing: border-box;
 	}
 
-	.fb-image-accordion-main {
-		transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-
-		img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
-	}
-
-	.fb-image-accordion-thumbnails {
-		scrollbar-width: thin;
-		scrollbar-color: #888 transparent;
-
-		&::-webkit-scrollbar {
-			height: 6px;
-			width: 6px;
-		}
-
-		&::-webkit-scrollbar-thumb {
-			background: #888;
-			border-radius: 10px;
-		}
-
-		&::-webkit-scrollbar-track {
-			background: transparent;
-		}
-	}
-
-	.fb-image-accordion-thumbnail {
-		transition: all 0.3s ease;
+	&__fallback {
+		list-style: none;
 		padding: 0;
 		margin: 0;
-		background: none;
-		border: 2px solid transparent; // Fallback
 
-		&:hover {
-			opacity: 0.85;
-			transform: scale(1.02);
-		}
+		li {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 12px 0;
+			border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 
-		&.active {
-			opacity: 1;
-			transform: scale(1);
+			img {
+				width: 64px;
+				height: 48px;
+				object-fit: cover;
+				border-radius: 4px;
+			}
 		}
 	}
 }

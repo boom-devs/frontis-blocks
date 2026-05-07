@@ -1,207 +1,99 @@
-import { defaultImageAccordionPreset } from './presets';
-
 const attributes = {
-	// Core attributes
-	blockID: {
-		type: 'string',
-		default: '',
+	preset: {
+		type: "string",
+		default: "preset1",
 	},
-	blockStyle: {
-		type: 'string',
-		default: '',
+	triggerOn: {
+		type: "string",
+		default: "hover",
 	},
-	blockRoot: {
-		type: 'string',
-		default: 'frontis_block',
+	items: {
+		type: "array",
+		default: [
+			{
+				id: 1,
+				title: "Discover Unique",
+				subtitle: "Explore the world",
+				description:
+					"A breathtaking journey through landscapes that will leave you inspired.",
+				imageUrl: "",
+				imageId: 0,
+				buttonText: "Read More",
+				buttonUrl: "#",
+			},
+			{
+				id: 2,
+				title: "Adventure Awaits",
+				subtitle: "Push your limits",
+				description:
+					"Challenge yourself with extreme adventures for the fearless.",
+				imageUrl: "",
+				imageId: 0,
+				buttonText: "Read More",
+				buttonUrl: "#",
+			},
+			{
+				id: 3,
+				title: "Wild Nature",
+				subtitle: "Feel the wilderness",
+				description:
+					"Immerse yourself in raw, untamed nature unlike anything you have experienced.",
+				imageUrl: "",
+				imageId: 0,
+				buttonText: "Read More",
+				buttonUrl: "#",
+			},
+			{
+				id: 4,
+				title: "Urban Stories",
+				subtitle: "City of dreams",
+				description:
+					"Every city has a soul. Find it in hidden corners and vibrant streets.",
+				imageUrl: "",
+				imageId: 0,
+				buttonText: "Read More",
+				buttonUrl: "#",
+			},
+			{
+				id: 5,
+				title: "Ocean Deep",
+				subtitle: "Dive into blue",
+				description:
+					"The ocean holds secrets that only the brave dare to uncover.",
+				imageUrl: "",
+				imageId: 0,
+				buttonText: "Read More",
+				buttonUrl: "#",
+			},
+		],
 	},
-	blockMeta: {
-		type: 'object',
+	height: {
+		type: "number",
+		default: 500,
 	},
-
-	// Preset
-	imageAccordionPresetStyle: {
-		type: 'string',
-		default: 'preset-1',
+	borderRadius: {
+		type: "number",
+		default: 16,
 	},
-
-	// Images array
-	images: {
-		type: 'array',
-		default: defaultImageAccordionPreset.images,
+	accentColor: {
+		type: "string",
+		default: "#ffffff",
 	},
-
-	// Active image index
-	activeImageIndex: {
-		type: 'number',
-		default: 0,
+	overlayColor: {
+		type: "string",
+		default: "#000000",
 	},
-
-	// Layout Settings
-	layoutType: {
-		type: 'string',
-		default: 'horizontal', // horizontal, vertical, grid, compact
+	overlayOpacity: {
+		type: "number",
+		default: 40,
 	},
-
-	mainImageWidth: {
-		type: 'string',
-		default: '60',
-	},
-
-	thumbnailAreaWidth: {
-		type: 'string',
-		default: '40',
-	},
-
-	thumbnailLayout: {
-		type: 'string',
-		default: 'vertical', // vertical, horizontal, grid, horizontal-scroll
-	},
-
-	thumbnailSize: {
-		type: 'string',
-		default: '80',
-	},
-
-	// Spacing
-	spacing: {
-		type: 'string',
-		default: '20',
-	},
-
-	// Border Radius
-	mainImageBorderRadius: {
-		type: 'string',
-		default: '12',
-	},
-
-	thumbnailBorderRadius: {
-		type: 'string',
-		default: '8',
-	},
-
-	// Active Thumbnail Styling
-	activeThumbBorderWidth: {
-		type: 'string',
-		default: '3',
-	},
-
-	activeThumbBorderColor: {
-		type: 'string',
-		default: '#007cba',
-	},
-
-	// Content Display
-	showTitle: {
-		type: 'boolean',
+	showNumbers: {
+		type: "boolean",
 		default: true,
 	},
-
-	showDescription: {
-		type: 'boolean',
+	showButton: {
+		type: "boolean",
 		default: true,
-	},
-
-	showIcon: {
-		type: 'boolean',
-		default: true,
-	},
-
-	// Colors
-	mainImageBg: {
-		type: 'string',
-		default: '#f5f5f5',
-	},
-
-	descriptionBg: {
-		type: 'string',
-		default: 'rgba(0, 124, 186, 0.1)',
-	},
-
-	descriptionBorder: {
-		type: 'string',
-		default: '#007cba',
-	},
-
-	descriptionBorderWidth: {
-		type: 'string',
-		default: '3',
-	},
-
-	// Typography - Title
-	titleFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '24',
-			Tablet: '20',
-			Mobile: '18',
-		},
-	},
-
-	titleFontColor: {
-		type: 'string',
-		default: '#000000',
-	},
-
-	titleFontWeight: {
-		type: 'string',
-		default: '600',
-	},
-
-	// Typography - Description
-	descriptionFontSize: {
-		type: 'object',
-		default: {
-			Desktop: '14',
-			Tablet: '13',
-			Mobile: '12',
-		},
-	},
-
-	descriptionFontColor: {
-		type: 'string',
-		default: '#666666',
-	},
-
-	descriptionFontWeight: {
-		type: 'string',
-		default: '400',
-	},
-
-	// Responsive
-	desktopSwitcher: {
-		type: 'boolean',
-		default: false,
-	},
-
-	tabletSwitcher: {
-		type: 'boolean',
-		default: false,
-	},
-
-	mobileSwitcher: {
-		type: 'boolean',
-		default: false,
-	},
-
-	// Global wrapper
-	imageAccordionGlobalWraperID: {
-		type: 'string',
-	},
-
-	imageAccordionGlobalWraperClass: {
-		type: 'string',
-	},
-
-	// Device type
-	deviceType: {
-		type: 'string',
-		default: 'Desktop',
-	},
-
-	// Custom CSS
-	customCSS: {
-		type: 'string',
-		default: '',
 	},
 };
 

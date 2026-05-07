@@ -1,38 +1,19 @@
-// Editor-specific container adjustments
-.wp-block-frontis-blocks-image-accordion {
-	border: 1px dashed transparent;
-	transition: border 0.3s ease;
+/* Image Accordion Block — Editor-only styles */
 
-	&:hover {
-		border-color: #007cba;
+.image-accordion-block {
+	/* Ensure the block fills the editor canvas */
+	width: 100%;
+
+	.iab-p1,
+	.iab-p2,
+	.iab-p3,
+	.iab-p4 {
+		/* Transitions are handled inline; prevent editor jank */
+		will-change: flex;
 	}
 
-	// Ensure buttons don't trigger actual navigation in editor
-	.fb-image-accordion-thumbnail {
-		cursor: pointer;
-		pointer-events: auto;
-	}
-}
-
-// Inspector UI Customizations
-.fb-inspector-tab-basic,
-.fb-inspector-tab-style,
-.fb-inspector-tab-extra {
-	.components-panel__body-title {
-		font-weight: 600;
-	}
-}
-
-// Image items scroll area in inspector
-.fb-image-items-manager {
-	&::-webkit-scrollbar {
-		width: 4px;
-	}
-	&::-webkit-scrollbar-thumb {
-		background: #ccc;
-		border-radius: 4px;
-	}
-	&:hover::-webkit-scrollbar-thumb {
-		background: #bbb;
+	/* Inspector panel item styling */
+	.components-panel__body .components-base-control {
+		margin-bottom: 12px;
 	}
 }
