@@ -1,6 +1,6 @@
-/**
- * index.js
- * Registers the Image Accordion Gutenberg block.
+/*
+  index.js
+  Registers the Image Accordion Gutenberg block.
  */
 
 import { registerBlockType } from "@wordpress/blocks";
