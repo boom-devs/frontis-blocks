@@ -1,5 +1,5 @@
 import { useBlockProps } from "@wordpress/block-editor";
-import attributes from "./attributes"; // Import the current attributes
+import attributes from "./attributes";
 // import { renderAccordion } from "./render";
 
 const v1_0_0 = {

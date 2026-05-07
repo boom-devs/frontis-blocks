@@ -1,9 +1,3 @@
-/**
- * inspector.js
- * Full InspectorControls sidebar for the Image Accordion block.
- * Mirrors the Elementor widget's content + style panels across all 4 presets.
- */
-
 import { __ } from "@wordpress/i18n";
 import {
 	InspectorControls,
@@ -25,9 +19,6 @@ import {
 } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 
-/* ─────────────────────────────────────────────────────────────────
-   Helper: single accordion item editor
-───────────────────────────────────────────────────────────────── */
 const ItemEditor = ({
 	item,
 	index,
@@ -220,9 +211,9 @@ const ItemEditor = ({
 	);
 };
 
-/* ─────────────────────────────────────────────────────────────────
+/* 
    Main Inspector
-───────────────────────────────────────────────────────────────── */
+ */
 const Inspector = ({ attributes, setAttributes }) => {
 	const {
 		presetStyle,
@@ -287,7 +278,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
 	return (
 		<InspectorControls>
-			{/* ── CONTENT ── */}
+			{/*  CONTENT  */}
 			<PanelBody title={__("Content", "image-accordion")} initialOpen={true}>
 				<SelectControl
 					label={__("Accordion Type", "image-accordion")}
@@ -338,7 +329,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</Button>
 			</PanelBody>
 
-			{/* ── LAYOUT ── */}
+			{/* LAYOUT  */}
 			<PanelBody title={__("Layout", "image-accordion")} initialOpen={false}>
 				<RangeControl
 					label={__("Container Height (px)", "image-accordion")}
@@ -360,7 +351,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				)}
 			</PanelBody>
 
-			{/* ── OVERLAY ── */}
+			{/*  OVERLAY  */}
 			<PanelBody title={__("Overlay", "image-accordion")} initialOpen={false}>
 				<p style={{ fontSize: 12, marginBottom: 6 }}>
 					{__("Overlay Color", "image-accordion")}
@@ -384,7 +375,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-			{/* ── ICON (Preset 1 only) ── */}
+			{/*  ICON (Preset 1 only)  */}
 			{presetStyle === "preset-1" && (
 				<PanelBody
 					title={__("Icon Style", "image-accordion")}
@@ -408,7 +399,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-			{/* ── DOTS (Preset 2 only) ── */}
+			{/*  DOTS (Preset 2 only)  */}
 			{presetStyle === "preset-2" && (
 				<PanelBody
 					title={__("Overlay Dots", "image-accordion")}
@@ -438,7 +429,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-			{/* ── NUMBERS (Preset 2 & 4 only) ── */}
+			{/*  NUMBERS (Preset 2 & 4 only)  */}
 			{(presetStyle === "preset-2" || presetStyle === "preset-4") && (
 				<PanelBody
 					title={__("Item Number", "image-accordion")}
@@ -459,7 +450,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				</PanelBody>
 			)}
 
-			{/* ── TYPOGRAPHY ── */}
+			{/*  TYPOGRAPHY  */}
 			<PanelBody
 				title={__("Typography", "image-accordion")}
 				initialOpen={false}
@@ -476,7 +467,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 				/>
 			</PanelBody>
 
-			{/* ── BUTTON (Preset 3 only) ── */}
+			{/*  BUTTON (Preset 3 only)  */}
 			{presetStyle === "preset-3" && (
 				<PanelBody
 					title={__("Button Style", "image-accordion")}
