@@ -1,5 +1,5 @@
 import { registerBlockType } from "@wordpress/blocks";
-import "./style.scss"; // Assuming a style file exists
+import "./style.scss";
 
 /**
  * Internal dependencies
@@ -8,9 +8,7 @@ import Edit from "./edit";
 import save from "./save";
 import metadata from "./block.json";
 import attributes from "./attributes.js";
-// import FB_Block_Icons from "@Config/fb-blocks-icons"; // Assuming this path from context
 
-// Placeholder icon for now, you can replace with a custom one from FB_Block_Icons if available
 const pdfIcon = (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -29,5 +27,4 @@ registerBlockType(metadata.name, {
 	icon: pdfIcon,
 	edit: Edit,
 	save,
-	// deprecated: [], // Add deprecated versions if needed later
 });

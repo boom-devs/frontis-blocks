@@ -3,8 +3,8 @@ import { useBlockProps, MediaUpload } from "@wordpress/block-editor";
 import { useEffect } from "@wordpress/element";
 import { Placeholder, Spinner, Button } from "@wordpress/components";
 import Inspector from "./inspector";
-import useBlockIdGenerator from "@Utils/useBlockIdGenerator"; // Assuming this path from context
-import generatePdfViewerStyle from "./styling"; // Assuming a styling file will exist, similar to advanced-countdown
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generatePdfViewerStyle from "./styling";
 
 export default function Edit({
 	attributes,
@@ -15,7 +15,6 @@ export default function Edit({
 	const { blockID, blockStyle, pdfUrl, height, showToolbar, themeColor } =
 		attributes;
 
-	// Handle block ID generation (handles duplication and initial ID)
 	useBlockIdGenerator({
 		clientId,
 		blockID,
@@ -25,7 +24,6 @@ export default function Edit({
 		setAttributes,
 	});
 
-	// Generate block styles dynamically
 	useEffect(() => {
 		if (blockID) {
 			const css = generatePdfViewerStyle(attributes);
@@ -37,10 +35,6 @@ export default function Edit({
 		className: `fb-pdf-viewer-main-wrapper ${blockID}`,
 	});
 
-	// Construct the iframe URL for Google Docs Viewer
-	// The toolbar parameter for Google Docs Viewer is not directly controllable via URL for 'embedded=true'.
-	// Theme color is also not directly applicable to Google Docs Viewer.
-	// For direct PDF, showToolbar might hide/show a custom toolbar wrapper if we were building one.
 	const viewerUrl = pdfUrl
 		? `https://docs.google.com/gview?url=${encodeURIComponent(
 				pdfUrl,

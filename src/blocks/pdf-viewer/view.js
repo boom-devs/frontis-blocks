@@ -7,13 +7,10 @@
 			var themeColor = block.getAttribute("data-theme-color");
 			var blockID = block.classList.contains("fb-pdf-viewer-main-wrapper")
 				? block.classList[1]
-				: ""; // Assuming blockID is the second class
+				: "";
 
 			if (!pdfUrl) return;
 
-			// Construct the iframe URL for Google Docs Viewer
-			// Google Docs Viewer doesn't offer direct control over its toolbar or theme via URL for embedded view.
-			// The showToolbar and themeColor attributes would be more relevant for a custom viewer or a viewer that supports these parameters.
 			var viewerUrl = `https://docs.google.com/gview?url=${encodeURIComponent(
 				pdfUrl,
 			)}&embedded=true`;
@@ -28,13 +25,12 @@
 			iframe.title = "PDF Viewer";
 			iframe.setAttribute("loading", "lazy"); // Add lazy loading
 
-			// Clear existing content (e.g., placeholder from save.js) and append the iframe
 			block.innerHTML = ""; // Clear placeholder
 			block.appendChild(iframe);
 		});
 	}
 
-	// Similar initialization logic as advanced-countdown/view.js
+	// Similar initialization logic as advanced-countdown
 	var setupDone = false;
 
 	function setupInitialization() {

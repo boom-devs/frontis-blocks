@@ -25,9 +25,9 @@ const attributes = {
 	},
 	themeColor: {
 		type: "string",
-		default: "#000000", // Default to black, user can change
+		default: "#000000",
 	},
-	// Device Type (common in Frontis Blocks, though not directly used for these attributes)
+
 	deviceType: {
 		type: "string",
 		default: "Desktop",
