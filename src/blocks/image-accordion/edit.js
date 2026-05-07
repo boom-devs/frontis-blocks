@@ -7,16 +7,43 @@
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { Placeholder, Spinner } from "@wordpress/components";
-
+import { useEffect } from "@wordpress/element";
 import Inspector from "./inspector";
 import { renderAccordion } from "./render";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateImageAccordionStyle from "./styling";
 
 const Edit = ({ attributes, setAttributes }) => {
-	const { presetStyle, triggerOn, accordionItems, containerHeight, itemsGap } =
-		attributes;
+	const {
+		blockID,
+		blockStyle,
+		presetStyle,
+		triggerOn,
+		accordionItems,
+		containerHeight,
+		itemsGap,
+	} = attributes;
+
+	// Generate unique block ID
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: "fb-image-accordion",
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	// Generate dynamic styles
+	useEffect(() => {
+		if (blockID) {
+			const css = generateImageAccordionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
 
 	const blockProps = useBlockProps({
-		className: "image-accordion-block-editor-wrap",
+		className: `image-accordion-block-editor-wrap ${blockID}`,
 	});
 
 	const { containerStyle, items } = renderAccordion(attributes, true);
@@ -56,7 +83,7 @@ const Edit = ({ attributes, setAttributes }) => {
 					/>
 				) : (
 					<div
-						className={`pea-image-accordion-wrapper ${presetStyle} pea-editor-preview`}
+						className={`pea-image-accordion-wrapper ${presetStyle} ${blockID} pea-editor-preview`}
 						data-trigger={triggerOn}
 					>
 						<div
@@ -84,6 +111,7 @@ const Edit = ({ attributes, setAttributes }) => {
 					)}
 				</p>
 			</div>
+			{blockStyle && <style>{blockStyle}</style>}
 		</>
 	);
 };

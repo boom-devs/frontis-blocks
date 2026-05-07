@@ -2,6 +2,15 @@
  * attributes.js
  * Defines every block attribute for the Image Accordion block.
  */
+// const attributes = {
+// 	blockID: {
+// 		type: "string",
+// 		default: "",
+// 	},
+// 	blockStyle: {
+// 		type: "string",
+// 		default: "",
+// 	},
 const attributes = {
 	// ── Preset / trigger ─────────────────────────────────────────
 	presetStyle: {

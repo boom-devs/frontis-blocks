@@ -1,39 +1,39 @@
 /**
  * Generate dynamic CSS for Image Accordion block
  */
-function generateImageAccordionStyle(attributes) {
+const generateImageAccordionStyle = (attributes) => {
 	const {
 		blockID,
-		layoutType = 'horizontal',
-		mainImageWidth = '60',
-		thumbnailAreaWidth = '40',
-		thumbnailLayout = 'vertical',
-		spacing = '20',
-		mainImageBorderRadius = '12',
-		thumbnailBorderRadius = '8',
-		activeThumbBorderWidth = '3',
-		activeThumbBorderColor = '#007cba',
-		titleFontSize = { Desktop: '24' },
-		titleFontColor = '#000000',
-		titleFontWeight = '600',
-		descriptionFontSize = { Desktop: '14' },
-		descriptionFontColor = '#666666',
-		mainImageBg = '#f5f5f5',
-		descriptionBg = 'rgba(0, 124, 186, 0.1)',
-		descriptionBorder = '#007cba',
-		descriptionBorderWidth = '3',
+		layoutType = "horizontal",
+		mainImageWidth = "60",
+		thumbnailAreaWidth = "40",
+		thumbnailLayout = "vertical",
+		spacing = "20",
+		mainImageBorderRadius = "12",
+		thumbnailBorderRadius = "8",
+		activeThumbBorderWidth = "3",
+		activeThumbBorderColor = "#007cba",
+		titleFontSize = { Desktop: "24" },
+		titleFontColor = "#000000",
+		titleFontWeight = "600",
+		descriptionFontSize = { Desktop: "14" },
+		descriptionFontColor = "#666666",
+		mainImageBg = "#f5f5f5",
+		descriptionBg = "rgba(0, 124, 186, 0.1)",
+		descriptionBorder = "#007cba",
+		descriptionBorderWidth = "3",
 	} = attributes;
 
-	let css = '';
+	let css = "";
 
 	if (!blockID) return css;
 
 	// Get responsive values or use defaults
-	const titleDesktopSize = titleFontSize?.Desktop || '24';
+	const titleDesktopSize = titleFontSize?.Desktop || "24";
 	const titleTabletSize = titleFontSize?.Tablet || titleDesktopSize;
 	const titleMobileSize = titleFontSize?.Mobile || titleDesktopSize;
 
-	const descDesktopSize = descriptionFontSize?.Desktop || '14';
+	const descDesktopSize = descriptionFontSize?.Desktop || "14";
 	const descTabletSize = descriptionFontSize?.Tablet || descDesktopSize;
 	const descMobileSize = descriptionFontSize?.Mobile || descDesktopSize;
 
@@ -125,7 +125,10 @@ function generateImageAccordionStyle(attributes) {
 `;
 
 	// Tablet styles
-	if (titleTabletSize !== titleDesktopSize || descTabletSize !== descDesktopSize) {
+	if (
+		titleTabletSize !== titleDesktopSize ||
+		descTabletSize !== descDesktopSize
+	) {
 		css += `
 @media (max-width: 768px) {
 	.${blockID} .fb-image-accordion-description h3 {
@@ -140,7 +143,10 @@ function generateImageAccordionStyle(attributes) {
 	}
 
 	// Mobile styles
-	if (titleMobileSize !== titleDesktopSize || descMobileSize !== descDesktopSize) {
+	if (
+		titleMobileSize !== titleDesktopSize ||
+		descMobileSize !== descDesktopSize
+	) {
 		css += `
 @media (max-width: 480px) {
 	.${blockID} .fb-image-accordion-description h3 {
@@ -155,6 +161,6 @@ function generateImageAccordionStyle(attributes) {
 	}
 
 	return css;
-}
+};
 
 export default generateImageAccordionStyle;
