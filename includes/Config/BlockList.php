@@ -815,7 +815,6 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'false',
             ],
-<<<<<<< HEAD
             'circle-menu' => [
                 'slug' => 'circle-menu',
                 'title' => 'Circle Menu',
@@ -823,8 +822,12 @@ class BlockList
                 'category' => 'navigation',
                 'badge' => 'free',
                 'status' => 'true',
-                'icon' => FB_PLUGIN_URL . 'assets/icons/advanced-navigation.svg',
-=======
+                'icon' => FB_PLUGIN_URL . 'assets/icons/circle-menu.svg',
+                'doc' => 'https://wpmessiah.com/',
+                'demo' => 'https://wpmessiah.com/',
+                'complete' => 'true',
+                'child' => 'false',
+            ],
             'grid-layout' => [
                 'slug' => 'grid-layout',
                 'title' => 'Grid Layout Builder',
@@ -833,14 +836,11 @@ class BlockList
                 'badge' => 'free',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/post-grid.svg',
->>>>>>> 54159092909eba311a519a8ae06a06cc73f3b803
                 'doc' => 'https://wpmessiah.com/',
                 'demo' => 'https://wpmessiah.com/',
                 'complete' => 'true',
                 'child' => 'false',
             ],
-<<<<<<< HEAD
-=======
             'grid-item' => [
                 'slug' => 'grid-item',
                 'title' => 'Grid Item',
@@ -854,7 +854,6 @@ class BlockList
                 'complete' => 'true',
                 'child' => 'true',
             ],
->>>>>>> 54159092909eba311a519a8ae06a06cc73f3b803
         ];
         $this->blocks = apply_filters('frontis/blocks/list', $this->blocks);
     }
