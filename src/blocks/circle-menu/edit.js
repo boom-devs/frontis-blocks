@@ -1,6 +1,3 @@
-// ==========================================
-// 1. Imports (Dependencies, Utils, Styles)
-// ==========================================
 import { __ } from "@wordpress/i18n";
 import { useBlockProps } from "@wordpress/block-editor";
 import { useRef, useState, useEffect, useMemo } from "@wordpress/element";
@@ -24,11 +21,7 @@ export default function Edit({
 		blockID,
 		blockStyle,
 		menuPosition,
-		menuPreset,
 		menuItems,
-		submenuSpace,
-		submenuHorizontalSpace,
-		submenuHorizontalAlign,
 		mainMenuContentType,
 		mainMenuOpenText,
 		mainMenuCloseText,
@@ -38,32 +31,23 @@ export default function Edit({
 		mainMenuCloseIcon,
 		mainMenuImage,
 		mainMenuImageAlt,
-		mainMenuImageID,
-		mainMenuImageSize,
 		mainMenuCloseImage,
 		mainMenuCloseImageAlt,
-		mainMenuCloseImageSize,
 		triggerType,
 		submenuShowTitleOnHover,
-
 		circleMenuDesktopSwitcher,
 		circleMenuTabletSwitcher,
 		circleMenuMobileSwitcher,
-
 		circleMenuGlobalWraperID,
 		circleMenuGlobalWraperClass,
 	} = attributes;
 
-	// ==========================================
-	// 2. Local States & References
-	// ==========================================
+	/** Local States & References */
 	const [isOpen, setIsOpen] = useState(false);
 	const menuRef = useRef(null);
 	const itemRefs = useRef([]);
 
-	// ==========================================
-	// 3. Block Initialization Hooks
-	// ==========================================
+	/** Block Initialization Hooks */
 	useBlockIdGenerator({
 		clientId,
 		blockID,
@@ -75,9 +59,7 @@ export default function Edit({
 
 	const deviceType = useDeviceType();
 
-	// ==========================================
-	// 4. Style Generation (Dynamic CSS)
-	// ==========================================
+	/** Style Generation (Dynamic CSS) */
 	useEffect(() => {
 		if (blockID) {
 			const css = generateCircleMenuStyle(attributes);
@@ -85,9 +67,7 @@ export default function Edit({
 		}
 	}, [attributes, blockID]);
 
-	// ==========================================
-	// 5. Typography Font Loading
-	// ==========================================
+	/** Typography Font Loading */
 	useEffect(() => {
 		if (attributes.mainMenuTextFontFamily) {
 			loadGoogleFont(attributes.mainMenuTextFontFamily);
@@ -97,9 +77,7 @@ export default function Edit({
 		}
 	}, [attributes.mainMenuTextFontFamily, attributes.submenuTextFontFamily]);
 
-	// ==========================================
-	// 6. Block Props & Global Wrappers Setup
-	// ==========================================
+	/** Block Props & Global Wrappers Setup */
 	const blockProps = useBlockProps({
 		id: circleMenuGlobalWraperID || undefined,
 		className: `fb-circle-menu-main-wrapper ${blockID} ${menuPosition} ${circleMenuGlobalWraperClass} ${
@@ -112,9 +90,7 @@ export default function Edit({
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
-	// ==========================================
-	// 7. Mouse Event Handlers (Hover Trigger)
-	// ==========================================
+	/** Mouse Event Handlers (Hover Trigger) */
 	const [hoverTimer, setHoverTimer] = useState(null);
 
 	useEffect(() => {
@@ -138,14 +114,12 @@ export default function Edit({
 				if (!isSelected) {
 					setIsOpen(false);
 				}
-			}, 500); // 500ms delay from view.js
+			}, 500);
 			setHoverTimer(timer);
 		}
 	};
 
-	// ==========================================
-	// 8. Render Main Menu Center Content
-	// ==========================================
+	/** Render Main Menu Center Content */
 	const renderMainContent = () => {
 		return (
 			<>
@@ -181,16 +155,12 @@ export default function Edit({
 		);
 	};
 
-	// ==========================================
-	// 9. Final Render Output for Block Editor
-	// ==========================================
+	/** Final Render Output for Block Editor */
 	return (
 		<>
 			<div {...blockProps}>
 				<div
-					className={`fb-parent-wrapper ${
-						isOpen ? "is-active" : ""
-					}`}
+					className={`fb-parent-wrapper ${isOpen ? "is-active" : ""}`}
 					ref={panelRef}
 				>
 					<div
@@ -213,9 +183,7 @@ export default function Edit({
 						data-horizontposition={attributes.submenuHorizontalAlign}
 					>
 						<div
-							className={`fb-circle-menu-center ${
-								isOpen ? "is-active" : ""
-							}`}
+							className={`fb-circle-menu-center ${isOpen ? "is-active" : ""}`}
 							onClick={() => triggerType === "click" && setIsOpen(!isOpen)}
 						>
 							<div className="fb-circle-menu-toggle">{renderMainContent()}</div>
@@ -230,23 +198,19 @@ export default function Edit({
 										onClick={(e) => e.preventDefault()}
 									>
 										<div className="fb-circle-menu-icon" aria-hidden="true">
-											{!item.contentType || item.contentType === "icon" ? (
-												item.icon ? (
-													renderSVG(item.icon)
-												) : (
-													""
-												)
-											) : (
-												item.image && (
-													<img
-														src={item.image}
-														alt={item.imageAlt}
-														style={{
-															objectFit: item.imageSize || "cover",
-														}}
-													/>
-												)
-											)}
+											{!item.contentType || item.contentType === "icon"
+												? item.icon
+													? renderSVG(item.icon)
+													: ""
+												: item.image && (
+														<img
+															src={item.image}
+															alt={item.imageAlt}
+															style={{
+																objectFit: item.imageSize || "cover",
+															}}
+														/>
+												  )}
 										</div>
 									</a>
 									{submenuShowTitleOnHover && (

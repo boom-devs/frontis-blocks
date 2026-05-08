@@ -1,92 +1,15 @@
 /**
  * Circle Menu Block - Style Generation
+ * Returns Dynamic Generated CSS
  */
-
 import getCustomCss from "@Utils/getCustomCss";
 
 /**
- * Get value from a responsive object or direct value
- * @param {Object|number|string} attr
- * @param {string} device
- * @param {any} fallback
- * @returns {any}
+ * Generate block styles from attributes
+ * @param {Object} attributes - Block attributes
+ * @returns {string} CSS string
  */
-// ==========================================
-// 1. Device Prefix Helpers (For Responsive Data)
-// ==========================================
-const getV = (v, device, fallback) => {
-	return v?.[device] !== undefined && v?.[device] !== "" ? v[device] : fallback;
-};
-
-const getU = (u, device, fallback = "px") => {
-	return u?.[device] || fallback;
-};
-
-const getSpacing = (attr, unitsAttr, device = "Desktop") => {
-	const unit = unitsAttr?.[device] || unitsAttr?.Desktop || "px";
-	if (!attr) return "";
-	const { top, right, bottom, left } = attr;
-	return `${top !== "" ? top + unit : "0"} ${
-		right !== "" ? right + unit : "0"
-	} ${bottom !== "" ? bottom + unit : "0"} ${left !== "" ? left + unit : "0"}`;
-};
-
 const generateCircleMenuStyle = (attributes) => {
-	const getBackgroundStyle = (
-		type,
-		color,
-		gradient,
-		customSwitcher,
-		customValue,
-		imageUrl,
-		imagePosition,
-		imageAttachment,
-		imageRepeat,
-		imageSize,
-		otherType = "classic",
-	) => {
-		const finalColor = color || "transparent";
-		if (type === "classic") {
-			let style = "";
-			if (otherType === "gradient") {
-				style = `background-image: linear-gradient(${finalColor}, ${finalColor});`;
-			} else {
-				style = `background-color: ${finalColor};`;
-			}
-
-			if (imageUrl) {
-				style += ` background-image: ${
-					otherType === "gradient"
-						? `linear-gradient(${finalColor}, ${finalColor}), `
-						: ""
-				}url(${imageUrl});`;
-				if (imagePosition) style += ` background-position: ${imagePosition};`;
-				if (imageAttachment)
-					style += ` background-attachment: ${imageAttachment};`;
-				if (imageRepeat) style += ` background-repeat: ${imageRepeat};`;
-				if (imageSize) style += ` background-size: ${imageSize};`;
-			}
-			// ==========================================
-			// 11. Custom CSS & Return
-			// ==========================================
-			return style || "background: transparent;";
-		} else {
-			const gradientVal = customSwitcher ? customValue : gradient;
-			return gradientVal
-				? `background: ${gradientVal};`
-				: `background: ${finalColor};`;
-		}
-	};
-
-	const getLastColorFromGradient = (gradientVal, fallback) => {
-		if (!gradientVal || !gradientVal.includes("gradient")) return fallback;
-		const colors = gradientVal.match(/(rgba?\(.*?\)|#[0-9a-fA-F]{3,8})/g);
-		if (colors && colors.length > 0) {
-			return colors[colors.length - 1];
-		}
-		return fallback;
-	};
-
 	const {
 		blockID,
 		offsetH,
@@ -107,19 +30,20 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuIconHoverColor,
 		submenuSpace,
 		submenuHorizontalSpace,
+		submenuHorizontalAlign,
+		menuPosition,
+		menuItems,
 		menuPreset,
 		mainMenuImageSize,
 		mainMenuCloseImageSize,
-		// Border Radius
+
+		/** Main Menu Border Radius */
 		mainMenuBorderRadiusUnits,
 		mainMenuBorderRadiusDesktop,
 		mainMenuBorderRadiusTablet,
 		mainMenuBorderRadiusMobile,
-		submenuBorderRadiusUnits,
-		submenuBorderRadiusDesktop,
-		submenuBorderRadiusTablet,
-		submenuBorderRadiusMobile,
-		// Border
+
+		/** Main Menu Border Width */
 		mainMenuBorder,
 		mainMenuBorderColor,
 		mainMenuBorderHoverColor,
@@ -127,6 +51,14 @@ const generateCircleMenuStyle = (attributes) => {
 		mainMenuBorderDesktop,
 		mainMenuBorderTablet,
 		mainMenuBorderMobile,
+
+		/** Sub Menu Border Radius */
+		submenuBorderRadiusUnits,
+		submenuBorderRadiusDesktop,
+		submenuBorderRadiusTablet,
+		submenuBorderRadiusMobile,
+
+		/** Sub Menu Border Width */
 		submenuBorder,
 		submenuBorderColor,
 		submenuBorderHoverColor,
@@ -134,15 +66,15 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuBorderDesktop,
 		submenuBorderTablet,
 		submenuBorderMobile,
-		// ==========================================
-		// 5. Box Shadow Handlers (Main & Sub Menu)
-		// ==========================================
-		// Main Menu Shadows
+		submenuShowTitleOnHover,
+
+		/** Box Shadow */
 		mainMenuBoxShadowCssValue,
 		mainMenuBoxShadowHoverCssValue,
 		submenuBoxShadowCssValue,
 		submenuBoxShadowHoverCssValue,
-		// Text Typography
+
+		/** Typography - Main Menu */
 		mainMenuTextFontFamily,
 		mainMenuTextFontSize,
 		mainMenuTextFontSizeUnits,
@@ -154,7 +86,8 @@ const generateCircleMenuStyle = (attributes) => {
 		mainMenuTextLetterSpacingUnits,
 		mainMenuTextLineHeight,
 		mainMenuTextLineHeightUnits,
-		// Sub Menu Text Typography
+
+		/** Typography - Sub Menu */
 		submenuTextFontFamily,
 		submenuTextFontSize,
 		submenuTextFontSizeUnits,
@@ -166,7 +99,8 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuTextLetterSpacingUnits,
 		submenuTextLineHeight,
 		submenuTextLineHeightUnits,
-		// Sub Menu Title
+
+		/** Tooltip */
 		submenuTitleColor,
 		submenuTitleBgColor,
 		submenuTitleBgGradientColor,
@@ -174,7 +108,8 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuTitleBgCustomGradientSwitcher,
 		submenuTitleBgCustomGradientInputValue,
 		submenuTitlePosition,
-		// Background Type
+
+		/** Background Types */
 		mainMenuNormalBackgroundType,
 		mainMenuNormalGradientColor,
 		mainMenuNormalCustomGradientSwitcher,
@@ -183,6 +118,7 @@ const generateCircleMenuStyle = (attributes) => {
 		mainMenuHoverGradientColor,
 		mainMenuHoverCustomGradientSwitcher,
 		mainMenuHoverCustomGradientInputValue,
+
 		submenuNormalBackgroundType,
 		submenuNormalGradientColor,
 		submenuNormalCustomGradientSwitcher,
@@ -191,7 +127,8 @@ const generateCircleMenuStyle = (attributes) => {
 		submenuHoverGradientColor,
 		submenuHoverCustomGradientSwitcher,
 		submenuHoverCustomGradientInputValue,
-		// Global Setting
+
+		/** Global Settings */
 		circleMenuGlobalZIndex,
 		circleMenuOverflow,
 		circleMenuPositionType,
@@ -205,6 +142,7 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuVRTopOffsetUnits,
 		circleMenuVRBottomOffset,
 		circleMenuVRBottomOffsetUnits,
+
 		circleMenuGlobalPaddingUnits,
 		circleMenuGlobalPaddingDesktop,
 		circleMenuGlobalPaddingTablet,
@@ -213,17 +151,7 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuGlobalMarginDesktop,
 		circleMenuGlobalMarginTablet,
 		circleMenuGlobalMarginMobile,
-		circleMenuGlobalBgColorSwitcher,
-		circleMenuGlobalBgColor,
-		circleMenuGlobalBgHoverColor,
-		circleMenuGlobalNormalBackgroundType,
-		circleMenuGlobalNormalGradientColor,
-		circleMenuGlobalNormalCustomGradientSwitcher,
-		circleMenuGlobalNormalCustomGradientInputValue,
-		circleMenuGlobalHoverBackgroundType,
-		circleMenuGlobalHoverGradientColor,
-		circleMenuGlobalHoverCustomGradientSwitcher,
-		circleMenuGlobalHoverCustomGradientInputValue,
+
 		circleMenuGlobalBorder,
 		circleMenuGlobalBorderColor,
 		circleMenuGlobalBorderHoverColor,
@@ -231,14 +159,17 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuGlobalBorderDesktop,
 		circleMenuGlobalBorderTablet,
 		circleMenuGlobalBorderMobile,
+
 		circleMenuGlobalBorderRadiusUnits,
 		circleMenuGlobalBorderRadiusDesktop,
 		circleMenuGlobalBorderRadiusTablet,
 		circleMenuGlobalBorderRadiusMobile,
+
 		circleMenuGlobalBoxShadowCssValue,
 		circleMenuGlobalBoxShadowHoverCssValue,
 		circleMenuGlobalCustomCSS,
-		// Background Image
+
+		/** Background Image */
 		circleMenuGlobalBgImageUrl,
 		circleMenuGlobalBgImagePosition,
 		circleMenuGlobalBgImageAttachment,
@@ -249,418 +180,404 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuGlobalBgHoverImageAttachment,
 		circleMenuGlobalBgHoverImageRepeat,
 		circleMenuGlobalBgHoverImageSize,
-		// Responsive switcher
-		circleMenuDesktopSwitcher,
-		circleMenuTabletSwitcher,
-		circleMenuMobileSwitcher,
+		circleMenuGlobalNormalBackgroundType,
+		circleMenuGlobalBgColor,
+		circleMenuGlobalNormalGradientColor,
+		circleMenuGlobalNormalCustomGradientSwitcher,
+		circleMenuGlobalNormalCustomGradientInputValue,
+		circleMenuGlobalHoverBackgroundType,
+		circleMenuGlobalHoverGradientColor,
+		circleMenuGlobalHoverCustomGradientSwitcher,
+		circleMenuGlobalHoverCustomGradientInputValue,
+		circleMenuGlobalWraperID,
+		circleMenuGlobalWraperClass,
+		circleMenuGlobalBgHoverColor,
 	} = attributes;
 
-	const generateDeviceStyle = (device) => {
-		// ==========================================
-		// 2. Main Menu Size & Offsets Calculation
-		// ==========================================
-		const h = getV(offsetH, device, 40);
-		const v = getV(offsetV, device, 40);
-		const activeH = getV(activeOffsetH, device, h);
-		const activeV = getV(activeOffsetV, device, v);
-		const size = getV(mainMenuSize, device, 72);
-		const mSize = parseFloat(getV(mainMenuSize, device, 72)) || 72;
-		const mIconSize = parseFloat(getV(mainMenuIconSize, device, 32)) || 32;
-		const sSize = parseFloat(getV(submenuSize, device, 62)) || 62;
-		const sIconSize = parseFloat(getV(submenuIconSize, device, 24)) || 24;
-		const mainMenuImgSize = getV(mainMenuImageSize, device, "cover");
-		const mainMenuCloseImgSize = getV(mainMenuCloseImageSize, device, "cover");
+	/** Shorthand CSS Calculations */
 
-		// ==========================================
-		// 3. CSS Variable Construction Start
-		// ==========================================
-		let customStyle = "";
-		// Border Radius
-		const mRadius = getSpacing(
-			attributes[`mainMenuBorderRadius${device}`],
-			mainMenuBorderRadiusUnits,
-			device,
-		);
-		const sRadius = getSpacing(
-			attributes[`submenuBorderRadius${device}`],
-			submenuBorderRadiusUnits,
-			device,
-		);
+	/** Main Menu Border Width */
+	const mainMenuBorderDesktopWidth = `${mainMenuBorderDesktop?.top}${mainMenuBorderUnits?.Desktop} ${mainMenuBorderDesktop?.right}${mainMenuBorderUnits?.Desktop} ${mainMenuBorderDesktop?.bottom}${mainMenuBorderUnits?.Desktop} ${mainMenuBorderDesktop?.left}${mainMenuBorderUnits?.Desktop}`;
+	const mainMenuBorderTabletWidth = `${mainMenuBorderTablet?.top}${mainMenuBorderUnits?.Tablet} ${mainMenuBorderTablet?.right}${mainMenuBorderUnits?.Tablet} ${mainMenuBorderTablet?.bottom}${mainMenuBorderUnits?.Tablet} ${mainMenuBorderTablet?.left}${mainMenuBorderUnits?.Tablet}`;
+	const mainMenuBorderMobileWidth = `${mainMenuBorderMobile?.top}${mainMenuBorderUnits?.Mobile} ${mainMenuBorderMobile?.right}${mainMenuBorderUnits?.Mobile} ${mainMenuBorderMobile?.bottom}${mainMenuBorderUnits?.Mobile} ${mainMenuBorderMobile?.left}${mainMenuBorderUnits?.Mobile}`;
 
-		// Border Width
-		const mBorderWidth = getSpacing(
-			attributes[`mainMenuBorder${device}`],
-			mainMenuBorderUnits,
-			device,
-		);
-		const sBorderWidth = getSpacing(
-			attributes[`submenuBorder${device}`],
-			submenuBorderUnits,
-			device,
-		);
+	/** Main Menu Border Radius */
+	const mainMenuBorderRadiusDesktopWidth = `${mainMenuBorderRadiusDesktop?.top}${mainMenuBorderRadiusUnits?.Desktop} ${mainMenuBorderRadiusDesktop?.right}${mainMenuBorderRadiusUnits?.Desktop} ${mainMenuBorderRadiusDesktop?.bottom}${mainMenuBorderRadiusUnits?.Desktop} ${mainMenuBorderRadiusDesktop?.left}${mainMenuBorderRadiusUnits?.Desktop}`;
+	const mainMenuBorderRadiusTabletWidth = `${mainMenuBorderRadiusTablet?.top}${mainMenuBorderRadiusUnits?.Tablet} ${mainMenuBorderRadiusTablet?.right}${mainMenuBorderRadiusUnits?.Tablet} ${mainMenuBorderRadiusTablet?.bottom}${mainMenuBorderRadiusUnits?.Tablet} ${mainMenuBorderRadiusTablet?.left}${mainMenuBorderRadiusUnits?.Tablet}`;
+	const mainMenuBorderRadiusMobileWidth = `${mainMenuBorderRadiusMobile?.top}${mainMenuBorderRadiusUnits?.Mobile} ${mainMenuBorderRadiusMobile?.right}${mainMenuBorderRadiusUnits?.Mobile} ${mainMenuBorderRadiusMobile?.bottom}${mainMenuBorderRadiusUnits?.Mobile} ${mainMenuBorderRadiusMobile?.left}${mainMenuBorderRadiusUnits?.Mobile}`;
 
-		// Dynamic size calculation for editor
-		let rawRGap = parseInt(getV(submenuSpace, device, 0), 10);
-		const rGap = isNaN(rawRGap) ? 0 : rawRGap;
+	/** Sub Menu Border Width */
+	const submenuBorderDesktopWidth = `${submenuBorderDesktop?.top}${submenuBorderUnits?.Desktop} ${submenuBorderDesktop?.right}${submenuBorderUnits?.Desktop} ${submenuBorderDesktop?.bottom}${submenuBorderUnits?.Desktop} ${submenuBorderDesktop?.left}${submenuBorderUnits?.Desktop}`;
+	const submenuBorderTabletWidth = `${submenuBorderTablet?.top}${submenuBorderUnits?.Tablet} ${submenuBorderTablet?.right}${submenuBorderUnits?.Tablet} ${submenuBorderTablet?.bottom}${submenuBorderUnits?.Tablet} ${submenuBorderTablet?.left}${submenuBorderUnits?.Tablet}`;
+	const submenuBorderMobileWidth = `${submenuBorderMobile?.top}${submenuBorderUnits?.Mobile} ${submenuBorderMobile?.right}${submenuBorderUnits?.Mobile} ${submenuBorderMobile?.bottom}${submenuBorderUnits?.Mobile} ${submenuBorderMobile?.left}${submenuBorderUnits?.Mobile}`;
 
-		let rawHGap = parseInt(getV(submenuHorizontalSpace, device, 10), 10);
-		const hGap = isNaN(rawHGap) ? 10 : rawHGap;
-		const radius = 100 + rGap;
-		let editorWrapperSize = mSize + 40; // Default
+	/** Sub Menu Border Radius */
+	const submenuBorderRadiusDesktopWidth = `${submenuBorderRadiusDesktop?.top}${submenuBorderRadiusUnits?.Desktop} ${submenuBorderRadiusDesktop?.right}${submenuBorderRadiusUnits?.Desktop} ${submenuBorderRadiusDesktop?.bottom}${submenuBorderRadiusUnits?.Desktop} ${submenuBorderRadiusDesktop?.left}${submenuBorderRadiusUnits?.Desktop}`;
+	const submenuBorderRadiusTabletWidth = `${submenuBorderRadiusTablet?.top}${submenuBorderRadiusUnits?.Tablet} ${submenuBorderRadiusTablet?.right}${submenuBorderRadiusUnits?.Tablet} ${submenuBorderRadiusTablet?.bottom}${submenuBorderRadiusUnits?.Tablet} ${submenuBorderRadiusTablet?.left}${submenuBorderRadiusUnits?.Tablet}`;
+	const submenuBorderRadiusMobileWidth = `${submenuBorderRadiusMobile?.top}${submenuBorderRadiusUnits?.Mobile} ${submenuBorderRadiusMobile?.right}${submenuBorderRadiusUnits?.Mobile} ${submenuBorderRadiusMobile?.bottom}${submenuBorderRadiusUnits?.Mobile} ${submenuBorderRadiusMobile?.left}${submenuBorderRadiusUnits?.Mobile}`;
 
-		if (menuPreset === "horizontal-menu") {
-			const pos = attributes.menuPosition;
-			const align = attributes.submenuHorizontalAlign;
-			let direction = "right";
+	/** Global Padding */
+	const globalDesktopPadding = `${circleMenuGlobalPaddingDesktop?.top}${circleMenuGlobalPaddingUnits?.Desktop} ${circleMenuGlobalPaddingDesktop?.right}${circleMenuGlobalPaddingUnits?.Desktop} ${circleMenuGlobalPaddingDesktop?.bottom}${circleMenuGlobalPaddingUnits?.Desktop} ${circleMenuGlobalPaddingDesktop?.left}${circleMenuGlobalPaddingUnits?.Desktop}`;
+	const globalTabletPadding = `${circleMenuGlobalPaddingTablet?.top}${circleMenuGlobalPaddingUnits?.Tablet} ${circleMenuGlobalPaddingTablet?.right}${circleMenuGlobalPaddingUnits?.Tablet} ${circleMenuGlobalPaddingTablet?.bottom}${circleMenuGlobalPaddingUnits?.Tablet} ${circleMenuGlobalPaddingTablet?.left}${circleMenuGlobalPaddingUnits?.Tablet}`;
+	const globalMobilePadding = `${circleMenuGlobalPaddingMobile?.top}${circleMenuGlobalPaddingUnits?.Mobile} ${circleMenuGlobalPaddingMobile?.right}${circleMenuGlobalPaddingUnits?.Mobile} ${circleMenuGlobalPaddingMobile?.bottom}${circleMenuGlobalPaddingUnits?.Mobile} ${circleMenuGlobalPaddingMobile?.left}${circleMenuGlobalPaddingUnits?.Mobile}`;
 
-			if (pos === "bottom-right")
-				direction = align === "vertical" ? "top" : "left";
-			else if (pos === "bottom-left")
-				direction = align === "vertical" ? "top" : "right";
-			else if (pos === "top-center")
-				direction = align === "vertical" ? "bottom" : "left";
-			else if (pos === "bottom-center")
-				direction = align === "vertical" ? "top" : "left";
-			else if (pos === "center-right")
-				direction = align === "vertical" ? "left" : "bottom";
-			else if (pos === "center-left")
-				direction = align === "vertical" ? "top" : "right";
-			else if (pos === "top-right")
-				direction = align === "vertical" ? "bottom" : "left";
-			else if (pos === "top-left")
-				direction = align === "vertical" ? "bottom" : "right";
+	/** Global Margin */
+	const globalDesktopMargin = `${circleMenuGlobalMarginDesktop?.top}${circleMenuGlobalMarginUnits?.Desktop} ${circleMenuGlobalMarginDesktop?.right}${circleMenuGlobalMarginUnits?.Desktop} ${circleMenuGlobalMarginDesktop?.bottom}${circleMenuGlobalMarginUnits?.Desktop} ${circleMenuGlobalMarginDesktop?.left}${circleMenuGlobalMarginUnits?.Desktop}`;
+	const globalTabletMargin = `${circleMenuGlobalMarginTablet?.top}${circleMenuGlobalMarginUnits?.Tablet} ${circleMenuGlobalMarginTablet?.right}${circleMenuGlobalMarginUnits?.Tablet} ${circleMenuGlobalMarginTablet?.bottom}${circleMenuGlobalMarginUnits?.Tablet} ${circleMenuGlobalMarginTablet?.left}${circleMenuGlobalMarginUnits?.Tablet}`;
+	const globalMobileMargin = `${circleMenuGlobalMarginMobile?.top}${circleMenuGlobalMarginUnits?.Mobile} ${circleMenuGlobalMarginMobile?.right}${circleMenuGlobalMarginUnits?.Mobile} ${circleMenuGlobalMarginMobile?.bottom}${circleMenuGlobalMarginUnits?.Mobile} ${circleMenuGlobalMarginMobile?.left}${circleMenuGlobalMarginUnits?.Mobile}`;
 
-			const isVerticalFly = direction === "top" || direction === "bottom";
+	/** Global Border Width */
+	const globalDesktopBorderWidth = `${circleMenuGlobalBorderDesktop?.top}${circleMenuGlobalBorderUnits?.Desktop} ${circleMenuGlobalBorderDesktop?.right}${circleMenuGlobalBorderUnits?.Desktop} ${circleMenuGlobalBorderDesktop?.bottom}${circleMenuGlobalBorderUnits?.Desktop} ${circleMenuGlobalBorderDesktop?.left}${circleMenuGlobalBorderUnits?.Desktop}`;
+	const globalTabletBorderWidth = `${circleMenuGlobalBorderTablet?.top}${circleMenuGlobalBorderUnits?.Tablet} ${circleMenuGlobalBorderTablet?.right}${circleMenuGlobalBorderUnits?.Tablet} ${circleMenuGlobalBorderTablet?.bottom}${circleMenuGlobalBorderUnits?.Tablet} ${circleMenuGlobalBorderTablet?.left}${circleMenuGlobalBorderUnits?.Tablet}`;
+	const globalMobileBorderWidth = `${circleMenuGlobalBorderMobile?.top}${circleMenuGlobalBorderUnits?.Mobile} ${circleMenuGlobalBorderMobile?.right}${circleMenuGlobalBorderUnits?.Mobile} ${circleMenuGlobalBorderMobile?.bottom}${circleMenuGlobalBorderUnits?.Mobile} ${circleMenuGlobalBorderMobile?.left}${circleMenuGlobalBorderUnits?.Mobile}`;
 
-			if (isVerticalFly) {
-				editorWrapperSize = Math.max(mSize + 40, (sSize + hGap) * 4);
+	/** Global Border Radius Width */
+	const globalDesktopBorderRadiusWidth = `${circleMenuGlobalBorderRadiusDesktop?.top}${circleMenuGlobalBorderRadiusUnits?.Desktop} ${circleMenuGlobalBorderRadiusDesktop?.right}${circleMenuGlobalBorderRadiusUnits?.Desktop} ${circleMenuGlobalBorderRadiusDesktop?.bottom}${circleMenuGlobalBorderRadiusUnits?.Desktop} ${circleMenuGlobalBorderRadiusDesktop?.left}${circleMenuGlobalBorderRadiusUnits?.Desktop}`;
+	const globalTabletBorderRadiusWidth = `${circleMenuGlobalBorderRadiusTablet?.top}${circleMenuGlobalBorderRadiusUnits?.Tablet} ${circleMenuGlobalBorderRadiusTablet?.right}${circleMenuGlobalBorderRadiusUnits?.Tablet} ${circleMenuGlobalBorderRadiusTablet?.bottom}${circleMenuGlobalBorderRadiusUnits?.Tablet} ${circleMenuGlobalBorderRadiusTablet?.left}${circleMenuGlobalBorderRadiusUnits?.Tablet}`;
+	const globalMobileBorderRadiusWidth = `${circleMenuGlobalBorderRadiusMobile?.top}${circleMenuGlobalBorderRadiusUnits?.Mobile} ${circleMenuGlobalBorderRadiusMobile?.right}${circleMenuGlobalBorderRadiusMobile?.right} ${circleMenuGlobalBorderRadiusMobile?.bottom}${circleMenuGlobalBorderRadiusUnits?.Mobile} ${circleMenuGlobalBorderRadiusMobile?.left}${circleMenuGlobalBorderRadiusUnits?.Mobile}`;
+
+	/** Background Image */
+
+	const getBackgroundStyle = (
+		type,
+		color,
+		gradient,
+		customSwitcher,
+		customValue,
+		imageUrl,
+		imagePosition,
+		imageAttachment,
+		imageRepeat,
+		imageSize,
+		otherType = "classic",
+	) => {
+		const finalColor = color || "transparent";
+		if (type === "classic") {
+			let style = "";
+			if (otherType === "gradient") {
+				if (color) {
+					style = `background-image: linear-gradient(${finalColor}, ${finalColor});`;
+				}
 			} else {
-				editorWrapperSize = mSize + 40;
+				if (color) {
+					style = `background-color: ${color};`;
+					if (!imageUrl) style += " background-image: none;";
+				}
 			}
+
+			if (imageUrl) {
+				style += ` background-image: ${
+					otherType === "gradient"
+						? `linear-gradient(${finalColor}, ${finalColor}), `
+						: ""
+				}url(${imageUrl});`;
+				if (imagePosition) style += ` background-position: ${imagePosition};`;
+				if (imageAttachment)
+					style += ` background-attachment: ${imageAttachment};`;
+				if (imageRepeat) style += ` background-repeat: ${imageRepeat};`;
+				if (imageSize) style += ` background-size: ${imageSize};`;
+			}
+
+			/** Custom CSS & Return */
+			return style;
 		} else {
-			editorWrapperSize = (radius + sSize / 2) * 2 + 20;
+			const gradientVal = customSwitcher ? customValue : gradient;
+			if (!gradientVal && !color) return "";
+			return gradientVal
+				? `background: ${gradientVal};`
+				: `background: ${finalColor};`;
 		}
+	};
 
-		// Global Styling
-		const gPadding = getSpacing(
-			attributes[`circleMenuGlobalPadding${device}`],
-			circleMenuGlobalPaddingUnits,
-			device,
-		);
-		const gMargin = getSpacing(
-			attributes[`circleMenuGlobalMargin${device}`],
-			circleMenuGlobalMarginUnits,
-			device,
-		);
-		const gBorderWidth = getSpacing(
-			attributes[`circleMenuGlobalBorder${device}`],
-			circleMenuGlobalBorderUnits,
-			device,
-		);
-		const gBorderRadius = getSpacing(
-			attributes[`circleMenuGlobalBorderRadius${device}`],
-			circleMenuGlobalBorderRadiusUnits,
-			device,
-		);
+	const getLastColorFromGradient = (gradientVal, fallback) => {
+		if (!gradientVal || !gradientVal.includes("gradient")) return fallback;
+		const colors = gradientVal.match(/(rgba?\(.*?\)|#[0-9a-fA-F]{3,8})/g);
+		if (colors && colors.length > 0) {
+			return colors[colors.length - 1];
+		}
+		return fallback;
+	};
 
-		const zIndex = getV(circleMenuGlobalZIndex, device, "");
-		const hzLeft = getV(circleMenuHZLeftOffset, device, "");
-		const hzRight = getV(circleMenuHZRightOffset, device, "");
-		const vrTop = getV(circleMenuVRTopOffset, device, "");
-		const vrBottom = getV(circleMenuVRBottomOffset, device, "");
+	const getArrowColor = () => {
+		const currentGradient = submenuTitleBgCustomGradientSwitcher
+			? submenuTitleBgCustomGradientInputValue
+			: submenuTitleBgGradientColor;
+		return submenuTitleBgColorType === "classic"
+			? submenuTitleBgColor || "#15171C"
+			: getLastColorFromGradient(
+					currentGradient,
+					submenuTitleBgColor || "#15171C",
+			  );
+	};
 
-		// Positioning logic for menu items
-		let itemStyles = "";
-		const total = attributes.menuItems.length;
+	/** Menu Item Position Calculation Logic */
 
-		attributes.menuItems.forEach((item, i) => {
+	const generateItemStyles = (device) => {
+		let styles = "";
+		const total = menuItems.length;
+		const subSize =
+			parseInt(submenuSize?.[device], 10) ||
+			(device === "Desktop" ? 62 : device === "Tablet" ? 62 : 62);
+		const radius = 100 + (parseInt(submenuSpace?.[device], 10) || 0);
+		const horizontalGap = parseInt(submenuHorizontalSpace?.[device], 10) || 10;
+
+		menuItems.forEach((item, index) => {
 			let x = 0,
 				y = 0;
-			let direction = "right";
-			let startAngle = 0;
-			let spreadAngle = 360;
-
-			// ==========================================
-			// 10. Global Position & Alignment Handlers
-			// ==========================================
 			if (menuPreset === "circular-menu") {
-				startAngle = -90;
-				spreadAngle = 360;
+				const angle = -90 + (360 / total) * index;
+				const rad = angle * (Math.PI / 180);
+				x = Math.cos(rad) * radius;
+				y = Math.sin(rad) * radius;
 			} else if (menuPreset === "horizontal-menu") {
-				startAngle = 180;
-				spreadAngle = 0;
-
-				const pos = attributes.menuPosition;
-				const align = attributes.submenuHorizontalAlign;
-
-				if (pos === "bottom-right")
-					direction = align === "vertical" ? "top" : "left";
-				else if (pos === "bottom-left")
-					direction = align === "vertical" ? "top" : "right";
-				else if (pos === "top-center")
-					direction = align === "vertical" ? "bottom" : "left";
-				else if (pos === "bottom-center")
-					direction = align === "vertical" ? "top" : "left";
-				else if (pos === "center-right")
-					direction = align === "vertical" ? "left" : "bottom";
-				else if (pos === "center-left")
-					direction = align === "vertical" ? "top" : "right";
-				else if (pos === "top-right")
-					direction = align === "vertical" ? "bottom" : "left";
-				else if (pos === "top-left")
-					direction = align === "vertical" ? "bottom" : "right";
-			} else {
-				// half-circular
-				const pos = attributes.menuPosition;
-				if (pos === "bottom-right") {
-					startAngle = 180;
-					spreadAngle = 90;
-				} else if (pos === "bottom-left") {
-					startAngle = 270;
-					spreadAngle = 90;
-				} else if (pos === "top-right") {
-					startAngle = 90;
-					spreadAngle = 90;
-				} else if (pos === "top-left") {
-					startAngle = 0;
-					spreadAngle = 90;
-				} else if (pos === "top-center") {
-					startAngle = 0;
-					spreadAngle = 180;
-				} else if (pos === "bottom-center") {
-					startAngle = 180;
-					spreadAngle = 180;
-				} else if (pos === "center-right") {
-					startAngle = 90;
-					spreadAngle = 180;
-				} else if (pos === "center-left") {
-					startAngle = 270;
-					spreadAngle = 180;
-				}
-			}
-
-			if (menuPreset === "horizontal-menu") {
-				const gap = sSize + hGap;
-				if (direction === "left") x = -(i + 1) * gap;
-				if (direction === "right") x = (i + 1) * gap;
-				if (direction === "top") y = -(i + 1) * gap;
-				if (direction === "bottom") y = (i + 1) * gap;
-			} else {
-				let angle;
-				if (total === 1) {
-					angle = startAngle + spreadAngle / 2;
+				const align = submenuHorizontalAlign || "horizontal";
+				const gap = subSize + horizontalGap;
+				if (align === "horizontal") {
+					x = (index + 1) * gap;
+					if (menuPosition.includes("right")) x = -x;
 				} else {
-					angle =
-						menuPreset === "circular-menu"
-							? startAngle + (spreadAngle / total) * i
-							: startAngle + (spreadAngle / (total - 1)) * i;
+					y = (index + 1) * gap;
+					if (menuPosition.includes("bottom")) y = -y;
 				}
+			} else {
+				let startAngle = 180;
+				let spreadAngle = 90;
+				if (menuPosition === "bottom-left") {
+					startAngle = 270;
+					spreadAngle = 90;
+				} else if (menuPosition === "top-right") {
+					startAngle = 90;
+					spreadAngle = 90;
+				} else if (menuPosition === "top-left") {
+					startAngle = 0;
+					spreadAngle = 90;
+				} else if (menuPosition === "top-center") {
+					startAngle = 0;
+					spreadAngle = 180;
+				} else if (menuPosition === "bottom-center") {
+					startAngle = 180;
+					spreadAngle = 180;
+				} else if (menuPosition === "center-right") {
+					startAngle = 90;
+					spreadAngle = 180;
+				} else if (menuPosition === "center-left") {
+					startAngle = 270;
+					spreadAngle = 180;
+				}
+
+				const angle =
+					total === 1
+						? startAngle + spreadAngle / 2
+						: startAngle + (spreadAngle / (total - 1)) * index;
 				const rad = angle * (Math.PI / 180);
 				x = Math.cos(rad) * radius;
 				y = Math.sin(rad) * radius;
 			}
 
-			const openDelay = i * 0.1;
-			const closeDelay = (total - 1 - i) * 0.05;
+			const openDelay = index * 0.1;
+			const closeDelay = (total - 1 - index) * 0.05;
 
-			itemStyles += `
-                .${blockID} .fb-circle-menu-item:nth-child(${i + 1}) {
+			styles += `
+                .${blockID} .fb-circle-menu-item:nth-child(${index + 1}) {
                     transition-delay: ${closeDelay}s;
-                    transform: translate(-50%, -50%) scale(0);
-                    opacity: 0;
                 }
-                .${blockID}.is-active .fb-circle-menu-item:nth-child(${i + 1}),
+                .${blockID}.is-active .fb-circle-menu-item:nth-child(${
+									index + 1
+								}),
                 .${blockID} .fb-parent-wrapper.is-active .fb-circle-menu-item:nth-child(${
-									i + 1
+									index + 1
 								}),
                 .${blockID} .fb-circle-menu.is-active .fb-circle-menu-item:nth-child(${
-									i + 1
+									index + 1
 								}) {
                     transition-delay: ${openDelay}s;
                     transform: translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(1);
                     opacity: 1;
-                    pointer-events: auto;
-                }
-                .${blockID} .fb-circle-menu-item:nth-child(${i + 1}):hover {
-                    transition-delay: 0s !important;
                 }
             `;
 		});
-
-		// Typography responsive values
-		const tFontSize = getV(mainMenuTextFontSize, device, 16);
-		const tFontSizeUnit =
-			mainMenuTextFontSizeUnits?.[device] ||
-			mainMenuTextFontSizeUnits?.Desktop ||
-			"px";
-		const tLetterSpacing = getV(mainMenuTextLetterSpacing, device, "");
-		const tLetterSpacingUnit =
-			mainMenuTextLetterSpacingUnits?.[device] ||
-			mainMenuTextLetterSpacingUnits?.Desktop ||
-			"px";
-		const tLineHeight = getV(mainMenuTextLineHeight, device, "");
-		const tLineHeightUnit =
-			mainMenuTextLineHeightUnits?.[device] ||
-			mainMenuTextLineHeightUnits?.Desktop ||
-			"px";
-
-		// Sub Menu Typography
-		const stFontSize = getV(submenuTextFontSize, device, 14);
-		const stFontSizeUnit =
-			submenuTextFontSizeUnits?.[device] ||
-			submenuTextFontSizeUnits?.Desktop ||
-			"px";
-		const stLetterSpacing = getV(submenuTextLetterSpacing, device, "");
-		const stLetterSpacingUnit =
-			submenuTextLetterSpacingUnits?.[device] ||
-			submenuTextLetterSpacingUnits?.Desktop ||
-			"px";
-		const stLineHeight = getV(submenuTextLineHeight, device, "");
-		const stLineHeightUnit =
-			submenuTextLineHeightUnits?.[device] ||
-			submenuTextLineHeightUnits?.Desktop ||
-			"px";
-
-		const menuWrapperSelector = `.${blockID}.fb-circle-menu-main-wrapper`;
-
-		// ==========================================
-		// 4. Global Wrappers Styling
-		// ==========================================
-		return `
-            ${menuWrapperSelector} {
-                --fb-cm-offset-h: ${h}px;
-                --fb-cm-offset-v: ${v}px;
-                --fb-cm-wrapper-size: ${editorWrapperSize}px;
-                ${gPadding ? `padding: ${gPadding};` : ""}
-                ${gMargin ? `margin: ${gMargin};` : ""}
-                ${gBorderWidth ? `border-width: ${gBorderWidth};` : ""}
-                ${gBorderRadius ? `border-radius: ${gBorderRadius};` : ""}
-                ${
-									circleMenuGlobalBorder !== "none"
-										? `border-style: ${circleMenuGlobalBorder};`
-										: ""
-								}
-                ${zIndex ? `z-index: ${zIndex};` : ""}
-                ${
-									circleMenuOverflow !== "default"
-										? `overflow: ${circleMenuOverflow};`
-										: ""
-								}
-                
-                ${
-									circleMenuPositionType !== "default"
-										? `position: ${circleMenuPositionType};`
-										: ""
-								}
-                ${
-									circleMenuPositionType !== "default" &&
-									circleMenuPositionType !== "relative" &&
-									circleMenuHZOrientationType === "left" &&
-									circleMenuHZLeftOffset?.[device] !== undefined
-										? `left: ${circleMenuHZLeftOffset?.[device]}${circleMenuHZLeftOffsetUnits?.[device]};`
-										: ""
-								}
-                ${
-									circleMenuPositionType !== "default" &&
-									circleMenuPositionType !== "relative" &&
-									circleMenuHZOrientationType === "right" &&
-									circleMenuHZRightOffset?.[device] !== undefined
-										? `right: ${circleMenuHZRightOffset?.[device]}${circleMenuHZRightOffsetUnits?.[device]};`
-										: ""
-								}
-                ${
-									circleMenuPositionType !== "default" &&
-									circleMenuPositionType !== "relative" &&
-									circleMenuVROrientationType === "top" &&
-									circleMenuVRTopOffset?.[device] !== undefined
-										? `top: ${circleMenuVRTopOffset?.[device]}${circleMenuVRTopOffsetUnits?.[device]};`
-										: ""
-								}
-                ${vrBottom ? `bottom: ${vrBottom}${vrBottomUnits};` : ""}
-                --fb-cm-main-radius: ${mRadius || "50%"};
-                --fb-cm-main-border-width: ${mBorderWidth || "0"};
-                --fb-cm-sub-radius: ${sRadius || "50%"};
-                --fb-cm-sub-border-width: ${sBorderWidth || "0"};
-            }
-            .${blockID}.fb-circle-menu-main-wrapper.is-active {
-                --fb-cm-offset-h: ${activeH}px;
-                --fb-cm-offset-v: ${activeV}px;
-            }
-
-            /* ==========================================
-             * 6. Base CSS Generation (Assigning Variables)
-             * ========================================== */
-            .${blockID} .fb-circle-menu {
-                --fb-cm-main-size: ${size}px;
-                --fb-cm-sub-size: ${sSize}px;
-                --fb-cm-main-icon-size: ${mSize}px;
-                --fb-cm-sub-icon-size: ${sSize}px;
-            }
-
-            .${blockID} .fb-circle-menu-toggle svg,
-            .${blockID} .fb-circle-menu-toggle i,
-            .${blockID} .fb-circle-menu-toggle img {
-                width: ${mIconSize}px;
-                height: ${mIconSize}px;
-                object-fit: ${mainMenuImgSize};
-            }
-
-            .${blockID} .fb-circle-menu-toggle .fb-circle-menu-close-icon img {
-                object-fit: ${mainMenuCloseImgSize};
-            }
-
-            .${blockID} .fb-circle-menu-icon svg,
-            .${blockID} .fb-circle-menu-icon i,
-            .${blockID} .fb-circle-menu-icon img {
-                width: ${sIconSize}px;
-                height: ${sIconSize}px;
-            }
-
-            ${
-							tFontSize !== ""
-								? `.${blockID} .fb-circle-menu-toggle .fb-circle-menu-text { font-size: ${tFontSize}${tFontSizeUnit}; }`
-								: ""
-						}
-            ${
-							tLetterSpacing !== ""
-								? `.${blockID} .fb-circle-menu-toggle .fb-circle-menu-text { letter-spacing: ${tLetterSpacing}${tLetterSpacingUnit}; }`
-								: ""
-						}
-            ${
-							tLineHeight !== ""
-								? `.${blockID} .fb-circle-menu-toggle .fb-circle-menu-text { line-height: ${tLineHeight}${tLineHeightUnit}; }`
-								: ""
-						}
-
-            /* Sub Menu Tooltip Typography */
-            ${
-							stFontSize !== ""
-								? `.${blockID} .fb-circle-menu-tooltip { font-size: ${stFontSize}${stFontSizeUnit}; }`
-								: ""
-						}
-            ${
-							stLetterSpacing !== ""
-								? `.${blockID} .fb-circle-menu-tooltip { letter-spacing: ${stLetterSpacing}${stLetterSpacingUnit}; }`
-								: ""
-						}
-            ${
-							stLineHeight !== ""
-								? `.${blockID} .fb-circle-menu-tooltip { line-height: ${stLineHeight}${stLineHeightUnit}; }`
-								: ""
-						}
-            
-            ${itemStyles}
-        `;
+		return styles;
 	};
 
-	const desktopStyle = generateDeviceStyle("Desktop");
-	const tabletStyle = generateDeviceStyle("Tablet");
-	const mobileStyle = generateDeviceStyle("Mobile");
+	/** Final CSS Template Assemblage */
+
+	const arrowColor = getArrowColor();
+
+	/** Device-specific Size Calculations for Wrapper */
+	const getWrapperSize = (device) => {
+		const mSize = parseFloat(mainMenuSize?.[device] || 72);
+		const sSize = parseFloat(submenuSize?.[device] || 62);
+		const rGap = parseInt(submenuSpace?.[device] || 0, 10);
+		const hGap = parseInt(submenuHorizontalSpace?.[device] || 10, 10);
+		const radius = 100 + rGap;
+
+		if (menuPreset === "horizontal-menu") {
+			const align = submenuHorizontalAlign || "horizontal";
+			if (align === "vertical") {
+				return Math.max(mSize + 40, (sSize + hGap) * 4);
+			}
+			return mSize + 40;
+		}
+		return (radius + sSize / 2) * 2 + 20;
+	};
 
 	const circleMenuBlockStyle = `
-        ${desktopStyle}
+        /* Desktop Styling */
+        .${blockID}.fb-circle-menu-main-wrapper {
+            --fb-cm-offset-h: ${offsetH?.Desktop || 40}px;
+            --fb-cm-offset-v: ${offsetV?.Desktop || 40}px;
+            --fb-cm-wrapper-size: ${getWrapperSize("Desktop")}px;
+            ${
+							circleMenuGlobalZIndex?.Desktop
+								? `z-index: ${circleMenuGlobalZIndex.Desktop};`
+								: ""
+						}
+            ${
+							circleMenuPositionType !== "default"
+								? `position: ${circleMenuPositionType};`
+								: ""
+						}
+            ${
+							circleMenuOverflow !== "default"
+								? `overflow: ${circleMenuOverflow};`
+								: ""
+						}
+            ${
+							circleMenuHZOrientationType === "left" &&
+							circleMenuHZLeftOffset?.Desktop !== undefined
+								? `left: ${circleMenuHZLeftOffset.Desktop}${
+										circleMenuHZLeftOffsetUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
+            ${
+							circleMenuHZOrientationType === "right" &&
+							circleMenuHZRightOffset?.Desktop !== undefined
+								? `right: ${circleMenuHZRightOffset.Desktop}${
+										circleMenuHZRightOffsetUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
+            ${
+							circleMenuVROrientationType === "top" &&
+							circleMenuVRTopOffset?.Desktop !== undefined
+								? `top: ${circleMenuVRTopOffset.Desktop}${
+										circleMenuVRTopOffsetUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
+            ${
+							circleMenuVROrientationType === "bottom" &&
+							circleMenuVRBottomOffset?.Desktop !== undefined
+								? `bottom: ${circleMenuVRBottomOffset.Desktop}${
+										circleMenuVRBottomOffsetUnits?.Desktop || "px"
+								  };`
+								: ""
+						}
+            padding: ${globalDesktopPadding};
+            margin: ${globalDesktopMargin};
+            border-width: ${globalDesktopBorderWidth};
+            border-radius: ${globalDesktopBorderRadiusWidth};
+            border-style: ${
+							circleMenuGlobalBorder !== "none"
+								? circleMenuGlobalBorder
+								: "none"
+						};
+            border-color: ${circleMenuGlobalBorderColor || "transparent"};
+            ${getBackgroundStyle(
+							circleMenuGlobalNormalBackgroundType,
+							circleMenuGlobalBgColor,
+							circleMenuGlobalNormalGradientColor,
+							circleMenuGlobalNormalCustomGradientSwitcher,
+							circleMenuGlobalNormalCustomGradientInputValue,
+							circleMenuGlobalBgImageUrl,
+							circleMenuGlobalBgImagePosition,
+							circleMenuGlobalBgImageAttachment,
+							circleMenuGlobalBgImageRepeat,
+							circleMenuGlobalBgImageSize,
+							circleMenuGlobalHoverBackgroundType,
+						)}
+            box-shadow: ${circleMenuGlobalBoxShadowCssValue || "none"};
+            
+            --fb-cm-global-bg: ${
+							circleMenuGlobalNormalBackgroundType === "classic"
+								? circleMenuGlobalHoverBackgroundType === "gradient"
+									? `linear-gradient(${
+											circleMenuGlobalBgColor || "transparent"
+									  }, ${circleMenuGlobalBgColor || "transparent"})`
+									: circleMenuGlobalBgColor || "transparent"
+								: (circleMenuGlobalNormalCustomGradientSwitcher
+										? circleMenuGlobalNormalCustomGradientInputValue
+										: circleMenuGlobalNormalGradientColor) ||
+								  circleMenuGlobalBgColor ||
+								  "transparent"
+						};
+            --fb-cm-global-bg-hover: ${
+							circleMenuGlobalHoverBackgroundType === "classic"
+								? circleMenuGlobalNormalBackgroundType === "gradient"
+									? circleMenuGlobalBgHoverColor
+										? `linear-gradient(${circleMenuGlobalBgHoverColor}, ${circleMenuGlobalBgHoverColor})`
+										: (circleMenuGlobalNormalCustomGradientSwitcher
+												? circleMenuGlobalNormalCustomGradientInputValue
+												: circleMenuGlobalNormalGradientColor) || "transparent"
+									: circleMenuGlobalBgHoverColor ||
+									  circleMenuGlobalBgColor ||
+									  "transparent"
+								: (circleMenuGlobalHoverCustomGradientSwitcher
+										? circleMenuGlobalHoverCustomGradientInputValue
+										: circleMenuGlobalHoverGradientColor) ||
+								  (circleMenuGlobalNormalCustomGradientSwitcher
+										? circleMenuGlobalNormalCustomGradientInputValue
+										: circleMenuGlobalNormalGradientColor) ||
+								  circleMenuGlobalBgHoverColor ||
+								  circleMenuGlobalBgColor ||
+								  "transparent"
+						};
+        }
+
+        .${blockID}.fb-circle-menu-main-wrapper:hover {
+            ${getBackgroundStyle(
+							circleMenuGlobalHoverBackgroundType,
+							circleMenuGlobalBgHoverColor,
+							circleMenuGlobalHoverGradientColor,
+							circleMenuGlobalHoverCustomGradientSwitcher,
+							circleMenuGlobalHoverCustomGradientInputValue,
+							circleMenuGlobalBgHoverImageUrl,
+							circleMenuGlobalBgHoverImagePosition,
+							circleMenuGlobalBgHoverImageAttachment,
+							circleMenuGlobalBgHoverImageRepeat,
+							circleMenuGlobalBgHoverImageSize,
+							circleMenuGlobalNormalBackgroundType,
+						)}
+            border-color: ${
+							circleMenuGlobalBorderHoverColor ||
+							circleMenuGlobalBorderColor ||
+							"transparent"
+						};
+            box-shadow: ${
+							circleMenuGlobalBoxShadowHoverCssValue ||
+							circleMenuGlobalBoxShadowCssValue ||
+							"none"
+						};
+        }
+
+        .${blockID}.fb-circle-menu-main-wrapper.is-active {
+            --fb-cm-offset-h: ${
+							activeOffsetH?.Desktop || offsetH?.Desktop || 40
+						}px;
+            --fb-cm-offset-v: ${
+							activeOffsetV?.Desktop || offsetV?.Desktop || 40
+						}px;
+        }
 
         .${blockID} .fb-circle-menu {
+            --fb-cm-main-size: ${mainMenuSize?.Desktop || 72}px;
+            --fb-cm-sub-size: ${submenuSize?.Desktop || 62}px;
+            --fb-cm-main-radius: ${mainMenuBorderRadiusDesktopWidth || "50%"};
+            --fb-cm-sub-radius: ${submenuBorderRadiusDesktopWidth || "50%"};
+            --fb-cm-main-border-width: ${mainMenuBorderDesktopWidth || "0px"};
+            --fb-cm-sub-border-width: ${submenuBorderDesktopWidth || "0px"};
+            
             --fb-cm-main-bg: ${
 							mainMenuNormalBackgroundType === "classic"
 								? mainMenuHoverBackgroundType === "gradient"
@@ -675,18 +592,20 @@ const generateCircleMenuStyle = (attributes) => {
 								  "#399CFF"
 						};
             --fb-cm-main-bg-hover: ${
-							// ==========================================
-							// 7. Hover States CSS Generation
-							// ==========================================
 							mainMenuHoverBackgroundType === "classic"
 								? mainMenuNormalBackgroundType === "gradient"
-									? `linear-gradient(${
-											mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"
-									  }, ${mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"})`
+									? mainMenuBgHoverColor
+										? `linear-gradient(${mainMenuBgHoverColor}, ${mainMenuBgHoverColor})`
+										: (mainMenuNormalCustomGradientSwitcher
+												? mainMenuNormalCustomGradientInputValue
+												: mainMenuNormalGradientColor) || "#399CFF"
 									: mainMenuBgHoverColor || mainMenuBgColor || "#399CFF"
 								: (mainMenuHoverCustomGradientSwitcher
 										? mainMenuHoverCustomGradientInputValue
 										: mainMenuHoverGradientColor) ||
+								  (mainMenuNormalCustomGradientSwitcher
+										? mainMenuNormalCustomGradientInputValue
+										: mainMenuNormalGradientColor) ||
 								  mainMenuBgHoverColor ||
 								  mainMenuBgColor ||
 								  "#399CFF"
@@ -711,13 +630,18 @@ const generateCircleMenuStyle = (attributes) => {
             --fb-cm-sub-bg-hover: ${
 							submenuHoverBackgroundType === "classic"
 								? submenuNormalBackgroundType === "gradient"
-									? `linear-gradient(${
-											submenuBgHoverColor || submenuBgColor || "#D7EBFF"
-									  }, ${submenuBgHoverColor || submenuBgColor || "#D7EBFF"})`
+									? submenuBgHoverColor
+										? `linear-gradient(${submenuBgHoverColor}, ${submenuBgHoverColor})`
+										: (submenuNormalCustomGradientSwitcher
+												? submenuNormalCustomGradientInputValue
+												: submenuNormalGradientColor) || "#D7EBFF"
 									: submenuBgHoverColor || submenuBgColor || "#D7EBFF"
 								: (submenuHoverCustomGradientSwitcher
 										? submenuHoverCustomGradientInputValue
 										: submenuHoverGradientColor) ||
+								  (submenuNormalCustomGradientSwitcher
+										? submenuNormalCustomGradientInputValue
+										: submenuNormalGradientColor) ||
 								  submenuBgHoverColor ||
 								  submenuBgColor ||
 								  "#D7EBFF"
@@ -739,54 +663,71 @@ const generateCircleMenuStyle = (attributes) => {
 						};
         }
 
-        /* Normal State */
-        .${blockID} .fb-circle-menu-center {
-            background: var(--fb-cm-main-bg);
-            border-style: var(--fb-cm-main-border-style);
-            border-color: var(--fb-cm-main-border-color);
-            box-shadow: ${mainMenuBoxShadowCssValue || "none"};
-        }
-        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle svg,
-        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle i,
-        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle p {
-            color: var(--fb-cm-main-color);
-            fill: var(--fb-cm-main-color);
-        }
-        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle .fb-circle-menu-text {
-            color: var(--fb-cm-main-color);
+        .${blockID}.fb-circle-menu-main-wrapper {
+            ${getBackgroundStyle(
+							circleMenuGlobalNormalBackgroundType,
+							circleMenuGlobalBgColor,
+							circleMenuGlobalNormalGradientColor,
+							circleMenuGlobalNormalCustomGradientSwitcher,
+							circleMenuGlobalNormalCustomGradientInputValue,
+							circleMenuGlobalBgImageUrl,
+							circleMenuGlobalBgImagePosition,
+							circleMenuGlobalBgImageAttachment,
+							circleMenuGlobalBgImageRepeat,
+							circleMenuGlobalBgImageSize,
+							circleMenuGlobalHoverBackgroundType,
+						)}
         }
 
-        /* Text Typography (non-responsive) */
-        .${blockID} .fb-circle-menu-toggle .fb-circle-menu-text {
+        .${blockID} .fb-circle-menu-toggle svg,
+        .${blockID} .fb-circle-menu-toggle i,
+        .${blockID} .fb-circle-menu-toggle img {
+            font-size: ${mainMenuIconSize?.Desktop || 32}px;
+            width: ${mainMenuIconSize?.Desktop || 32}px;
+            height: ${mainMenuIconSize?.Desktop || 32}px;
+        }
+
+        .${blockID} .fb-circle-menu-icon svg,
+        .${blockID} .fb-circle-menu-icon i,
+        .${blockID} .fb-circle-menu-icon img {
+            font-size: ${submenuIconSize?.Desktop || 24}px;
+            width: ${submenuIconSize?.Desktop || 24}px;
+            height: ${submenuIconSize?.Desktop || 24}px;
+        }
+
+        .${blockID} .fb-circle-menu-text {
+            font-size: ${mainMenuTextFontSize?.Desktop || 16}${
+							mainMenuTextFontSizeUnits?.Desktop || "px"
+						};
             ${
 							mainMenuTextFontFamily && mainMenuTextFontFamily !== "Default"
 								? `font-family: '${mainMenuTextFontFamily}', sans-serif;`
 								: ""
 						}
+            font-weight: ${mainMenuTextFontWeight || "400"};
+            font-style: ${mainMenuTextFontStyle || "normal"};
+            text-transform: ${mainMenuTextTransform || "none"};
+            text-decoration: ${mainMenuTextDecoration || "none"};
             ${
-							mainMenuTextFontWeight
-								? `font-weight: ${mainMenuTextFontWeight};`
+							mainMenuTextLetterSpacing?.Desktop !== ""
+								? `letter-spacing: ${mainMenuTextLetterSpacing.Desktop}${
+										mainMenuTextLetterSpacingUnits?.Desktop || "px"
+								  };`
 								: ""
 						}
             ${
-							mainMenuTextFontStyle
-								? `font-style: ${mainMenuTextFontStyle};`
-								: ""
-						}
-            ${
-							mainMenuTextTransform
-								? `text-transform: ${mainMenuTextTransform};`
-								: ""
-						}
-            ${
-							mainMenuTextDecoration
-								? `text-decoration: ${mainMenuTextDecoration};`
+							mainMenuTextLineHeight?.Desktop !== ""
+								? `line-height: ${mainMenuTextLineHeight.Desktop}${
+										mainMenuTextLineHeightUnits?.Desktop || "px"
+								  };`
 								: ""
 						}
         }
 
-        /* Sub Menu Tooltip Styles */
         .${blockID} .fb-circle-menu-tooltip {
+            font-size: ${submenuTextFontSize?.Desktop || 14}${
+							submenuTextFontSizeUnits?.Desktop || "px"
+						};
             ${getBackgroundStyle(
 							submenuTitleBgColorType,
 							submenuTitleBgColor,
@@ -800,102 +741,175 @@ const generateCircleMenuStyle = (attributes) => {
 								? `font-family: '${submenuTextFontFamily}', sans-serif;`
 								: ""
 						}
+            font-weight: ${submenuTextFontWeight || "400"};
+            font-style: ${submenuTextFontStyle || "normal"};
+            text-transform: ${submenuTextTransform || "none"};
+            text-decoration: ${submenuTextDecoration || "none"};
             ${
-							submenuTextFontWeight
-								? `font-weight: ${submenuTextFontWeight};`
+							submenuTextLetterSpacing?.Desktop !== ""
+								? `letter-spacing: ${submenuTextLetterSpacing.Desktop}${
+										submenuTextLetterSpacingUnits?.Desktop || "px"
+								  };`
 								: ""
 						}
             ${
-							submenuTextFontStyle ? `font-style: ${submenuTextFontStyle};` : ""
-						}
-            ${
-							submenuTextTransform
-								? `text-transform: ${submenuTextTransform};`
-								: ""
-						}
-            ${
-							submenuTextDecoration
-								? `text-decoration: ${submenuTextDecoration};`
+							submenuTextLineHeight?.Desktop !== ""
+								? `line-height: ${submenuTextLineHeight.Desktop}${
+										submenuTextLineHeightUnits?.Desktop || "px"
+								  };`
 								: ""
 						}
 
-            /* Tooltip Position */
             ${
-							submenuTitlePosition === "top"
+							submenuShowTitleOnHover
 								? `
-                bottom: 100%;
-                left: 50%;
-                transform: translateX(-50%) translateY(0) scale(0.8);
-                margin-bottom: 10px;
-                margin-top: 0;
-                margin-left: 0;
-                margin-right: 0;
-                top: auto;
-                right: auto;
-            `
+                        opacity: 0;
+                        visibility: hidden;
+                    `
 								: ""
 						}
-            ${
-							submenuTitlePosition === "bottom"
-								? `
-                top: 100%;
-                bottom: auto;
-                left: 50%;
-                transform: translateX(-50%) translateY(0) scale(0.8);
-                margin-top: 10px;
-                margin-bottom: 0;
-                margin-left: 0;
-                margin-right: 0;
-                right: auto;
-            `
-								: ""
-						}
-            ${
-							submenuTitlePosition === "left"
-								? `
-                right: 100%;
-                left: auto;
-                top: 50%;
-                transform: translateY(-50%) scale(0.8);
-                margin-right: 10px;
-                margin-top: 0;
-                margin-bottom: 0;
-                margin-left: 0;
-                bottom: auto;
-            `
-								: ""
-						}
-            ${
-							submenuTitlePosition === "right"
-								? `
-                left: 100%;
-                right: auto;
-                top: 50%;
-                transform: translateY(-50%) scale(0.8);
-                margin-left: 10px;
-                margin-top: 0;
-                margin-bottom: 0;
-                margin-right: 0;
-                bottom: auto;
-            `
-								: ""
-						}
+
+            /* Positioning Overrides */
+            ${(() => {
+							if (submenuTitlePosition === "top") {
+								return `
+                        bottom: 100%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(0) scale(0.8);
+                        margin: 0 0 10px 0;
+                        top: auto;
+                        right: auto;
+                    `;
+							}
+							if (submenuTitlePosition === "bottom") {
+								return `
+                        top: 100%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(0) scale(0.8);
+                        margin: 10px 0 0 0;
+                        bottom: auto;
+                        right: auto;
+                    `;
+							}
+							if (submenuTitlePosition === "left") {
+								return `
+                        right: 100%;
+                        top: 50%;
+                        transform: translateY(-50%) translateX(0) scale(0.8);
+                        margin: 0 10px 0 0;
+                        left: auto;
+                        bottom: auto;
+                    `;
+							}
+							if (submenuTitlePosition === "right") {
+								return `
+                        left: 100%;
+                        top: 50%;
+                        transform: translateY(-50%) translateX(0) scale(0.8);
+                        margin: 0 0 0 10px;
+                        right: auto;
+                        bottom: auto;
+                    `;
+							}
+							return "";
+						})()}
         }
 
-        /* Tooltip Arrow Color and Position */
+        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-tooltip {
+            opacity: 1;
+            visibility: visible;
+            ${(() => {
+							if (submenuTitlePosition === "top") {
+								return `transform: translateX(-50%) translateY(-5px) scale(1);`;
+							}
+							if (submenuTitlePosition === "bottom") {
+								return `transform: translateX(-50%) translateY(5px) scale(1);`;
+							}
+							if (submenuTitlePosition === "left") {
+								return `transform: translateY(-50%) translateX(-5px) scale(1);`;
+							}
+							if (submenuTitlePosition === "right") {
+								return `transform: translateY(-50%) translateX(5px) scale(1);`;
+							}
+							return `transform: translateX(-50%) translateY(-5px) scale(1);`;
+						})()}
+        }
+
+        .${blockID} .fb-circle-menu-center {
+            background: var(--fb-cm-main-bg);
+            border-style: var(--fb-cm-main-border-style);
+            border-color: var(--fb-cm-main-border-color);
+            border-width: ${mainMenuBorderDesktopWidth};
+            border-radius: ${mainMenuBorderRadiusDesktopWidth};
+            box-shadow: ${mainMenuBoxShadowCssValue || "none"};
+        }
+        
+        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle svg,
+        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle i,
+        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle p,
+        .${blockID} .fb-circle-menu-center .fb-circle-menu-toggle .fb-circle-menu-text {
+            color: var(--fb-cm-main-color);
+            fill: var(--fb-cm-main-color);
+        }
+
+        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center,
+        .${blockID} .fb-circle-menu-center.is-active {
+            background: var(--fb-cm-main-bg-hover);
+            border-color: var(--fb-cm-main-border-hover-color);
+            box-shadow: ${
+							mainMenuBoxShadowHoverCssValue ||
+							mainMenuBoxShadowCssValue ||
+							"none"
+						};
+        }
+        
+        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle svg,
+        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle i,
+        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle p,
+        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle .fb-circle-menu-text,
+        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle svg,
+        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle i,
+        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle p,
+        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle .fb-circle-menu-text {
+            color: var(--fb-cm-main-color-hover);
+            fill: var(--fb-cm-main-color-hover);
+        }
+
+        .${blockID} .fb-circle-menu-item {
+            background: var(--fb-cm-sub-bg);
+            border-style: var(--fb-cm-sub-border-style);
+            border-color: var(--fb-cm-sub-border-color);
+            border-width: ${submenuBorderDesktopWidth};
+            border-radius: ${submenuBorderRadiusDesktopWidth};
+            box-shadow: ${submenuBoxShadowCssValue || "none"};
+        }
+        
+        .${blockID} .fb-circle-menu-item .fb-circle-menu-icon svg,
+        .${blockID} .fb-circle-menu-item .fb-circle-menu-icon i,
+        .${blockID} .fb-circle-menu-item .fb-circle-menu-icon p {
+            color: var(--fb-cm-sub-color);
+            fill: var(--fb-cm-sub-color);
+        }
+
+        .${blockID} .fb-circle-menu-item:hover {
+            background: var(--fb-cm-sub-bg-hover);
+            border-color: var(--fb-cm-sub-border-hover-color);
+            box-shadow: ${
+							submenuBoxShadowHoverCssValue ||
+							submenuBoxShadowCssValue ||
+							"none"
+						};
+        }
+        
+        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-icon svg,
+        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-icon i,
+        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-icon p {
+            color: var(--fb-cm-sub-color-hover);
+            fill: var(--fb-cm-sub-color-hover);
+        }
+
         .${blockID} .fb-circle-menu-tooltip::after {
             ${(() => {
-							const currentGradient = submenuTitleBgCustomGradientSwitcher
-								? submenuTitleBgCustomGradientInputValue
-								: submenuTitleBgGradientColor;
-							const arrowColor =
-								submenuTitleBgColorType === "classic"
-									? submenuTitleBgColor || "#15171C"
-									: getLastColorFromGradient(
-											currentGradient,
-											submenuTitleBgColor || "#15171C",
-									  );
-
 							if (submenuTitlePosition === "top") {
 								return `
                     top: 100%;
@@ -940,139 +954,334 @@ const generateCircleMenuStyle = (attributes) => {
 						})()}
         }
 
-        /* Hover transform for tooltip */
-        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-tooltip {
-            ${
-							submenuTitlePosition === "top"
-								? "transform: translateX(-50%) translateY(-5px) scale(1);"
-								: ""
-						}
-            ${
-							submenuTitlePosition === "bottom"
-								? "transform: translateX(-50%) translateY(5px) scale(1);"
-								: ""
-						}
-            ${
-							submenuTitlePosition === "left"
-								? "transform: translateY(-50%) translateX(-5px) scale(1);"
-								: ""
-						}
-            ${
-							submenuTitlePosition === "right"
-								? "transform: translateY(-50%) translateX(5px) scale(1);"
-								: ""
-						}
-        }
+        ${generateItemStyles("Desktop")}
 
-        /* Hover State - Triggers when parent container is hovered */
-        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center,
-        .${blockID} .fb-circle-menu-center.is-active {
-            background: var(--fb-cm-main-bg-hover);
-            border-color: var(--fb-cm-main-border-hover-color);
-            box-shadow: ${
-							mainMenuBoxShadowHoverCssValue ||
-							mainMenuBoxShadowCssValue ||
-							"none"
-						};
-        }
-
-        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle svg,
-        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle i,
-        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle p,
-        .${blockID} .fb-circle-menu:hover .fb-circle-menu-center .fb-circle-menu-toggle .fb-circle-menu-text,
-        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle svg,
-        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle i,
-        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle p,
-        .${blockID} .fb-circle-menu-center.is-active .fb-circle-menu-toggle .fb-circle-menu-text {
-            color: var(--fb-cm-main-color-hover);
-            fill: var(--fb-cm-main-color-hover);
-        }
-
-        /* Sub Menu Normal State */
-        .${blockID} .fb-circle-menu-item {
-            background: var(--fb-cm-sub-bg);
-            border-style: var(--fb-cm-sub-border-style);
-            border-color: var(--fb-cm-sub-border-color);
-            box-shadow: ${submenuBoxShadowCssValue || "none"};
-        }
-        .${blockID} .fb-circle-menu-item .fb-circle-menu-icon svg,
-        .${blockID} .fb-circle-menu-item .fb-circle-menu-icon i {
-            color: var(--fb-cm-sub-color);
-            fill: var(--fb-cm-sub-color);
-        }
-
-        /* Sub Menu Hover State */
-        .${blockID} .fb-circle-menu-item:hover {
-            background: var(--fb-cm-sub-bg-hover);
-            border-color: var(--fb-cm-sub-border-hover-color);
-            box-shadow: ${
-							submenuBoxShadowHoverCssValue ||
-							submenuBoxShadowCssValue ||
-							"none"
-						};
-        }
-        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-icon svg,
-        .${blockID} .fb-circle-menu-item:hover .fb-circle-menu-icon i {
-            color: var(--fb-cm-sub-color-hover);
-            fill: var(--fb-cm-sub-color-hover);
-        }
-
-        /* Global Decoration Styles */
-        .${blockID}.fb-circle-menu-main-wrapper {
-            ${getBackgroundStyle(
-							circleMenuGlobalNormalBackgroundType,
-							circleMenuGlobalBgColor,
-							circleMenuGlobalNormalGradientColor,
-							circleMenuGlobalNormalCustomGradientSwitcher,
-							circleMenuGlobalNormalCustomGradientInputValue,
-							circleMenuGlobalBgImageUrl,
-							circleMenuGlobalBgImagePosition,
-							circleMenuGlobalBgImageAttachment,
-							circleMenuGlobalBgImageRepeat,
-							circleMenuGlobalBgImageSize,
-							circleMenuGlobalHoverBackgroundType,
-						)}
-            border-color: ${circleMenuGlobalBorderColor || "transparent"};
-            box-shadow: ${circleMenuGlobalBoxShadowCssValue || "none"};
-            transition: all 0.3s ease;
-        }
-        
-        .${blockID}.fb-circle-menu-main-wrapper:hover {
-            ${getBackgroundStyle(
-							circleMenuGlobalHoverBackgroundType,
-							circleMenuGlobalBgHoverColor,
-							circleMenuGlobalHoverGradientColor,
-							circleMenuGlobalHoverCustomGradientSwitcher,
-							circleMenuGlobalHoverCustomGradientInputValue,
-							circleMenuGlobalBgHoverImageUrl,
-							circleMenuGlobalBgHoverImagePosition,
-							circleMenuGlobalBgHoverImageAttachment,
-							circleMenuGlobalBgHoverImageRepeat,
-							circleMenuGlobalBgHoverImageSize,
-							circleMenuGlobalNormalBackgroundType,
-						)}
-            border-color: ${
-							circleMenuGlobalBorderHoverColor ||
-							circleMenuGlobalBorderColor ||
-							"transparent"
-						};
-            box-shadow: ${
-							circleMenuGlobalBoxShadowHoverCssValue ||
-							circleMenuGlobalBoxShadowCssValue ||
-							"none"
-						};
-        }
-
+        /* Tablet Media Query */
         @media only screen and (max-width: 1024px) {
-            ${tabletStyle}
+            .${blockID}.fb-circle-menu-main-wrapper {
+                --fb-cm-offset-h: ${offsetH?.Tablet || 40}px;
+                --fb-cm-offset-v: ${offsetV?.Tablet || 40}px;
+                ${
+									circleMenuGlobalZIndex?.Tablet
+										? `z-index: ${circleMenuGlobalZIndex.Tablet};`
+										: ""
+								}
+                ${
+									circleMenuHZOrientationType === "left" &&
+									circleMenuHZLeftOffset?.Tablet !== undefined
+										? `left: ${circleMenuHZLeftOffset.Tablet}${
+												circleMenuHZLeftOffsetUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuHZOrientationType === "right" &&
+									circleMenuHZRightOffset?.Tablet !== undefined
+										? `right: ${circleMenuHZRightOffset.Tablet}${
+												circleMenuHZRightOffsetUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuVROrientationType === "top" &&
+									circleMenuVRTopOffset?.Tablet !== undefined
+										? `top: ${circleMenuVRTopOffset.Tablet}${
+												circleMenuVRTopOffsetUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuVROrientationType === "bottom" &&
+									circleMenuVRBottomOffset?.Tablet !== undefined
+										? `bottom: ${circleMenuVRBottomOffset.Tablet}${
+												circleMenuVRBottomOffsetUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                padding: ${globalTabletPadding};
+                margin: ${globalTabletMargin};
+                border-width: ${globalTabletBorderWidth};
+                border-radius: ${globalTabletBorderRadiusWidth};
+                --fb-cm-wrapper-size: ${getWrapperSize("Tablet")}px;
+            }
+
+            .${blockID}.fb-circle-menu-main-wrapper.is-active {
+                --fb-cm-offset-h: ${
+									activeOffsetH?.Tablet || offsetH?.Tablet || 40
+								}px;
+                --fb-cm-offset-v: ${
+									activeOffsetV?.Tablet || offsetV?.Tablet || 40
+								}px;
+            }
+
+            .${blockID} .fb-circle-menu {
+                --fb-cm-main-size: ${mainMenuSize?.Tablet || 72}px;
+                --fb-cm-sub-size: ${submenuSize?.Tablet || 62}px;
+                --fb-cm-main-radius: ${
+									mainMenuBorderRadiusTabletWidth || "50%"
+								};
+                --fb-cm-sub-radius: ${submenuBorderRadiusTabletWidth || "50%"};
+                --fb-cm-main-border-width: ${
+									mainMenuBorderTabletWidth || "0px"
+								};
+                --fb-cm-sub-border-width: ${submenuBorderTabletWidth || "0px"};
+            }
+
+            .${blockID} .fb-circle-menu-toggle svg,
+            .${blockID} .fb-circle-menu-toggle i,
+            .${blockID} .fb-circle-menu-toggle img {
+                font-size: ${mainMenuIconSize?.Tablet || 32}px;
+                width: ${mainMenuIconSize?.Tablet || 32}px;
+                height: ${mainMenuIconSize?.Tablet || 32}px;
+            }
+
+            .${blockID} .fb-circle-menu-icon svg,
+            .${blockID} .fb-circle-menu-icon i,
+            .${blockID} .fb-circle-menu-icon img {
+                font-size: ${submenuIconSize?.Tablet || 24}px;
+                width: ${submenuIconSize?.Tablet || 24}px;
+                height: ${submenuIconSize?.Tablet || 24}px;
+            }
+
+            .${blockID} .fb-circle-menu-text {
+                font-size: ${mainMenuTextFontSize?.Tablet || 16}${
+									mainMenuTextFontSizeUnits?.Tablet || "px"
+								};
+                ${
+									mainMenuTextLetterSpacing?.Tablet !== ""
+										? `letter-spacing: ${mainMenuTextLetterSpacing.Tablet}${
+												mainMenuTextLetterSpacingUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                ${
+									mainMenuTextLineHeight?.Tablet !== ""
+										? `line-height: ${mainMenuTextLineHeight.Tablet}${
+												mainMenuTextLineHeightUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+            }
+
+            .${blockID} .fb-circle-menu-tooltip {
+                font-size: ${submenuTextFontSize?.Tablet || 14}${
+									submenuTextFontSizeUnits?.Tablet || "px"
+								};
+                ${
+									submenuTextLetterSpacing?.Tablet !== ""
+										? `letter-spacing: ${submenuTextLetterSpacing.Tablet}${
+												submenuTextLetterSpacingUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+                ${
+									submenuTextLineHeight?.Tablet !== ""
+										? `line-height: ${submenuTextLineHeight.Tablet}${
+												submenuTextLineHeightUnits?.Tablet || "px"
+										  };`
+										: ""
+								}
+            }
+
+            .${blockID} .fb-circle-menu-center {
+                border-width: ${mainMenuBorderTabletWidth};
+                border-radius: ${mainMenuBorderRadiusTabletWidth};
+            }
+
+            .${blockID} .fb-circle-menu-item {
+                border-width: ${submenuBorderTabletWidth};
+                border-radius: ${submenuBorderRadiusTabletWidth};
+            }
+
+            ${generateItemStyles("Tablet")}
         }
 
+        /* Mobile Media Query */
         @media only screen and (max-width: 767px) {
-            ${mobileStyle}
+            .${blockID}.fb-circle-menu-main-wrapper {
+                --fb-cm-offset-h: ${offsetH?.Mobile || 40}px;
+                --fb-cm-offset-v: ${offsetV?.Mobile || 40}px;
+                ${
+									circleMenuGlobalZIndex?.Mobile
+										? `z-index: ${circleMenuGlobalZIndex.Mobile};`
+										: ""
+								}
+                ${
+									circleMenuHZOrientationType === "left" &&
+									circleMenuHZLeftOffset?.Mobile !== undefined
+										? `left: ${circleMenuHZLeftOffset.Mobile}${
+												circleMenuHZLeftOffsetUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuHZOrientationType === "right" &&
+									circleMenuHZRightOffset?.Mobile !== undefined
+										? `right: ${circleMenuHZRightOffset.Mobile}${
+												circleMenuHZRightOffsetUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuVROrientationType === "top" &&
+									circleMenuVRTopOffset?.Mobile !== undefined
+										? `top: ${circleMenuVRTopOffset.Mobile}${
+												circleMenuVRTopOffsetUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                ${
+									circleMenuVROrientationType === "bottom" &&
+									circleMenuVRBottomOffset?.Mobile !== undefined
+										? `bottom: ${circleMenuVRBottomOffset.Mobile}${
+												circleMenuVRBottomOffsetUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                padding: ${globalMobilePadding};
+                margin: ${globalMobileMargin};
+                border-width: ${globalMobileBorderWidth};
+                border-radius: ${globalMobileBorderRadiusWidth};
+                --fb-cm-wrapper-size: ${getWrapperSize("Mobile")}px;
+            }
+
+            .${blockID}.fb-circle-menu-main-wrapper.is-active {
+                --fb-cm-offset-h: ${
+									activeOffsetH?.Mobile || offsetH?.Mobile || 40
+								}px;
+                --fb-cm-offset-v: ${
+									activeOffsetV?.Mobile || offsetV?.Mobile || 40
+								}px;
+            }
+
+            .${blockID} .fb-circle-menu {
+                --fb-cm-main-size: ${mainMenuSize?.Mobile || 72}px;
+                --fb-cm-sub-size: ${submenuSize?.Mobile || 62}px;
+                --fb-cm-main-radius: ${
+									mainMenuBorderRadiusMobileWidth || "50%"
+								};
+                --fb-cm-sub-radius: ${submenuBorderRadiusMobileWidth || "50%"};
+                --fb-cm-main-border-width: ${
+									mainMenuBorderMobileWidth || "0px"
+								};
+                --fb-cm-sub-border-width: ${submenuBorderMobileWidth || "0px"};
+            }
+
+            .${blockID} .fb-circle-menu-toggle svg,
+            .${blockID} .fb-circle-menu-toggle i,
+            .${blockID} .fb-circle-menu-toggle img {
+                font-size: ${mainMenuIconSize?.Mobile || 32}px;
+                width: ${mainMenuIconSize?.Mobile || 32}px;
+                height: ${mainMenuIconSize?.Mobile || 32}px;
+            }
+
+            .${blockID} .fb-circle-menu-icon svg,
+            .${blockID} .fb-circle-menu-icon i,
+            .${blockID} .fb-circle-menu-icon img {
+                font-size: ${submenuIconSize?.Mobile || 24}px;
+                width: ${submenuIconSize?.Mobile || 24}px;
+                height: ${submenuIconSize?.Mobile || 24}px;
+            }
+
+            .${blockID} .fb-circle-menu-text {
+                font-size: ${mainMenuTextFontSize?.Mobile || 16}${
+									mainMenuTextFontSizeUnits?.Mobile || "px"
+								};
+                ${
+									mainMenuTextLetterSpacing?.Mobile !== ""
+										? `letter-spacing: ${mainMenuTextLetterSpacing.Mobile}${
+												mainMenuTextLetterSpacingUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                ${
+									mainMenuTextLineHeight?.Mobile !== ""
+										? `line-height: ${mainMenuTextLineHeight.Mobile}${
+												mainMenuTextLineHeightUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+            }
+
+            .${blockID} .fb-circle-menu-tooltip {
+                font-size: ${submenuTextFontSize?.Mobile || 14}${
+									submenuTextFontSizeUnits?.Mobile || "px"
+								};
+                ${
+									submenuTextLetterSpacing?.Mobile !== ""
+										? `letter-spacing: ${submenuTextLetterSpacing.Mobile}${
+												submenuTextLetterSpacingUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+                ${
+									submenuTextLineHeight?.Mobile !== ""
+										? `line-height: ${submenuTextLineHeight.Mobile}${
+												submenuTextLineHeightUnits?.Mobile || "px"
+										  };`
+										: ""
+								}
+            }
+
+            .${blockID} .fb-circle-menu-center {
+                border-width: ${mainMenuBorderMobileWidth};
+                border-radius: ${mainMenuBorderRadiusMobileWidth};
+            }
+
+            .${blockID} .fb-circle-menu-item {
+                border-width: ${submenuBorderMobileWidth};
+                border-radius: ${submenuBorderRadiusMobileWidth};
+            }
+
+            ${generateItemStyles("Mobile")}
         }
     `;
 
-	const customCss = getCustomCss(circleMenuGlobalCustomCSS, `.${blockID}`);
+	const selfClasses = ["fb-circle-menu-main-wrapper"];
+	if (circleMenuGlobalWraperClass) {
+		selfClasses.push(circleMenuGlobalWraperClass);
+	}
+
+	let customCss = getCustomCss(
+		circleMenuGlobalCustomCSS,
+		`.${blockID}`,
+		" ",
+		selfClasses,
+	);
+
+	/**
+	 * Post-process custom CSS to handle ID and Tag selectors correctly for the root element.
+	 * This ensures selectors like 'div#ID' become 'div.blockID#ID' instead of '.blockID div#ID'.
+	 */
+	if (customCss) {
+		/** Fix ID selector: .blockID #ID -> .blockID#ID */
+		if (circleMenuGlobalWraperID) {
+			const idPattern = circleMenuGlobalWraperID.replace(
+				/[.*+?^${}()|[\]\\]/g,
+				"\\$&",
+			);
+			const idRegex = new RegExp(
+				`\\.${blockID}\\s+(div)?#${idPattern}(?![\\w-])`,
+				"g",
+			);
+			customCss = customCss.replace(idRegex, (match, div) => {
+				return div
+					? `div.${blockID}#${circleMenuGlobalWraperID}`
+					: `.${blockID}#${circleMenuGlobalWraperID}`;
+			});
+		}
+
+		/** Fix Tag+Class selector: .blockID div.wrapperClass -> div.blockID.wrapperClass */
+		selfClasses.forEach((cls) => {
+			const clsPattern = cls.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+			const tagClassRegex = new RegExp(
+				`\\.${blockID}\\s+div\\.${clsPattern}(?![\\w-])`,
+				"g",
+			);
+			customCss = customCss.replace(tagClassRegex, `div.${blockID}.${cls}`);
+		});
+	}
+
 	return `${circleMenuBlockStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 };
 

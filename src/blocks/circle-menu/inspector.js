@@ -27,12 +27,6 @@ import FB_ImageControl from "@Components/image-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_TypographyControl from "@Components/typography-control";
 import SortableItem from "./sortableItem";
-import {
-	handleAddItem,
-	handleChangeItem,
-	handleDeleteItem,
-	handleDuplicateItem,
-} from "./preset";
 import { useDeviceType } from "@Config/displayType";
 import { BORDER_STYLES } from "@Constants/fbConstants";
 
@@ -164,27 +158,71 @@ const Inspector = ({ attributes, setAttributes }) => {
 		activeOffsetV,
 	} = attributes;
 
-	// ==========================================
-	// 1. Local State & Device Context
-	// ==========================================
+	/** Start Local State & Device Context */
 	const [offsetSwitcher, setOffsetSwitcher] = useState("before");
 	const deviceType = useDeviceType();
 
-	// ==========================================
-	// 2. Component References (To Avoid Stale Closures)
-	// ==========================================
-	// Always keep a ref to the latest menuItems to avoid stale closure
-	// issues when wp.media fires its async callback
+	/** Start Component References */
 	const menuItemsRef = useRef(menuItems);
 	useEffect(() => {
 		menuItemsRef.current = menuItems;
 	}, [menuItems]);
 
-	// ==========================================
-	// 3. Event Handlers for Styling Controls
-	// ==========================================
+	/** Add New Item Handler */
+	const handleAddItem = (menuItemsRef, setAttributes) => {
+		const newItem = {
+			id: `item-${Date.now()}`,
+			title: "New Item",
+			contentType: "icon",
+			icon: "fas fa-star",
+			image: "",
+			imageAlt: "",
+			imageID: undefined,
+			imageSize: "cover",
+			link: "#",
+		};
+		const newItems = [...menuItemsRef.current, newItem];
+		menuItemsRef.current = newItems;
+		setAttributes({ menuItems: newItems });
+	};
 
-	/** Start Main Menu Border Controls */
+	/** Change/Update Item Property Handler */
+	const handleChangeItem = (id, key, value, menuItemsRef, setAttributes) => {
+		const newItems = menuItemsRef.current.map((item) => {
+			if (item.id === id) {
+				return { ...item, [key]: value };
+			}
+			return item;
+		});
+		menuItemsRef.current = newItems;
+		setAttributes({ menuItems: newItems });
+	};
+
+	/** Delete Item Handler */
+	const handleDeleteItem = (id, menuItemsRef, setAttributes) => {
+		if (menuItemsRef.current.length > 1) {
+			const newItems = menuItemsRef.current.filter((item) => item.id !== id);
+			menuItemsRef.current = newItems;
+			setAttributes({ menuItems: newItems });
+		}
+	};
+
+	/** Duplicate Item Handler */
+	const handleDuplicateItem = (id, menuItemsRef, setAttributes) => {
+		const index = menuItemsRef.current.findIndex((item) => item.id === id);
+		if (index !== -1) {
+			const clonedItem = {
+				...menuItemsRef.current[index],
+				id: `item-${Date.now()}`,
+			};
+			const newItems = [...menuItemsRef.current];
+			newItems.splice(index + 1, 0, clonedItem);
+			menuItemsRef.current = newItems;
+			setAttributes({ menuItems: newItems });
+		}
+	};
+
+	/** Start Main Menu Border */
 	const handleMainMenuBorderUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (mainMenuBorderLink) {
@@ -326,9 +364,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 	};
 	/** End Sub Menu Radius */
 
-	// ==========================================
-	// 4. Drag & Drop Handler (Sub Menu Items)
-	// ==========================================
+	/** Drag & Drop Handler (Sub Menu Items) */
 	const handleDragEnd = (event) => {
 		const { active, over } = event;
 		if (active && over && active.id !== over.id) {
@@ -344,9 +380,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		}
 	};
 
-	// ==========================================
-	// 5. UI: Inspector General Controls Tab
-	// ==========================================
+	/** UI: Inspector General Controls Tab */
 	const generalControls = (
 		<>
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
@@ -659,9 +693,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// ==========================================
-	// 6. UI: Inspector Style Controls Tab
-	// ==========================================
+	/** UI: Inspector Style Controls Tab */
 	const styleControls = (
 		<>
 			<PanelBody title={__("Main Menu", "frontis-blocks")} initialOpen={true}>
@@ -1494,9 +1526,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// ==========================================
-	// 7. Global Settings Event Handlers
-	// ==========================================
+	/** 7. Global Settings Event Handlers */
 	const handleGlobalPaddingUnitChange = (event, position) => {
 		const value = event.target.value;
 		if (attributes.circleMenuGlobalPaddingLink) {
@@ -1860,7 +1890,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 									circleMenuGlobalHoverCustomGradientInputValue: value,
 								})
 							}
-							// Background Image Props
 							isBackgroundImage={true}
 							normalBackgroundImageUrl={attributes.circleMenuGlobalBgImageUrl}
 							setNormalBackgroundImageUrl={(value) =>
@@ -2178,9 +2207,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 		</>
 	);
 
-	// ==========================================
-	// 8. Final Render output for Inspector UI
-	// ==========================================
+	/** Final Render output for Inspector UI */
 	return (
 		<>
 			<FB_InspectorControls

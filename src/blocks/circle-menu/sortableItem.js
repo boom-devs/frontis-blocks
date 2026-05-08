@@ -1,11 +1,14 @@
-// ==========================================
-// 1. Imports (React, DnD Kit, Components)
-// ==========================================
+/** Imports (React, DnD Kit, Components) */
 import { useState } from "react";
 import { __ } from "@wordpress/i18n";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { TextControl, Button, BaseControl, ButtonGroup } from "@wordpress/components";
+import {
+	TextControl,
+	Button,
+	BaseControl,
+	ButtonGroup,
+} from "@wordpress/components";
 import FBIconPicker from "../../components/icon-picker";
 import FB_ImageControl from "@Components/image-control";
 
@@ -17,9 +20,7 @@ export default function SortableItem({
 	handleDuplicateItem,
 	index,
 }) {
-	// ==========================================
-	// 2. DnD Hooks & Local States
-	// ==========================================
+	/** DnD Hooks & Local States */
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({ id });
 	const [isOpen, setIsOpen] = useState(false);
@@ -29,18 +30,14 @@ export default function SortableItem({
 		transition,
 	};
 
-	// ==========================================
-	// 3. Action Helpers
-	// ==========================================
+	/** Action Helpers */
 	const toggleOpen = () => setIsOpen(!isOpen);
 
 	const iconHandler = (IconName) => {
 		handleChangeItem(item.id, "icon", IconName);
 	};
 
-	// ==========================================
-	// 4. SVG Icons
-	// ==========================================
+	/** SVG Icons */
 
 	const TrashIcon = (
 		<svg
@@ -96,9 +93,7 @@ export default function SortableItem({
 		</svg>
 	);
 
-	// ==========================================
-	// 5. Final Render Output (Sortable Item)
-	// ==========================================
+	/** Final Render Output (Sortable Item) */
 	return (
 		<li
 			className="sortable-item"
