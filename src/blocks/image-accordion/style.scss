@@ -1,37 +1,54 @@
-/*  BASE CONTAINER  */
-.pea-image-accordion-container {
-	display: flex;
-	gap: 12px;
+/* Block wrapper */
+.image-accordion-block {
 	width: 100%;
-	height: 500px;
-	align-items: stretch;
 }
 
-/*  BASE ITEM  */
+.pea-image-accordion-wrapper {
+	width: 100%;
+}
+
+/*  Container */
+.pea-image-accordion-container {
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+	gap: 12px;
+	overflow: hidden;
+}
+
+/* =================
+   BASE ITEM 
+   =============== */
 .pea-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
 	border-radius: 50px;
 	background-size: cover;
 	background-position: center;
+	background-repeat: no-repeat;
 	cursor: pointer;
+	overflow: hidden;
+	outline: none;
 	transition:
 		flex 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-		border-radius 0.6s cubic-bezier(0.25, 1, 0.5, 1),
-		opacity 0.4s ease;
-	overflow: hidden;
+		border-radius 0.5s ease;
 }
 
-/* OVERLAY  */
+.pea-image-accordion-item:focus-visible {
+	outline: 3px solid #0875ff;
+	outline-offset: 2px;
+}
+
+/* Overlay */
 .pea-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
-	transition: opacity 0.4s ease;
 	pointer-events: none;
 	z-index: 1;
+	transition: background 0.4s ease;
 }
 
-/* CONTENT WRAPPER */
+/* Content wrapper */
 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	bottom: 22px;
@@ -43,7 +60,7 @@
 	width: calc(100% - 36px);
 }
 
-/* ICON CIRCLE (Preset 1)  */
+/* ── Icon circle  (Preset 1) ── */
 .pea-image-accordion-icon-circle {
 	width: 44px;
 	height: 44px;
@@ -54,23 +71,18 @@
 	justify-content: center;
 	flex-shrink: 0;
 	overflow: hidden;
-	color: #333;
 }
-
-.pea-image-accordion-icon-circle i,
-.pea-image-accordion-icon-circle svg {
+.pea-image-accordion-icon-circle i {
 	font-size: 18px;
-	width: 18px;
-	height: 18px;
+	line-height: 1;
 }
-
 .pea-image-accordion-icon-circle img {
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
 }
 
-/* TEXT GROUP  */
+/* Text group  (Preset 1) */
 .pea-image-accordion-text-group {
 	display: none;
 	opacity: 0;
@@ -79,62 +91,27 @@
 		opacity 0.4s ease,
 		transform 0.4s ease;
 	white-space: nowrap;
-	color: #fff;
 	min-width: 0;
 }
-
 .pea-image-accordion-text-group .pea-image-accordion-title {
 	margin: 0 0 3px;
 	font-size: 18px;
 	font-weight: 600;
 	line-height: 1.2;
+	color: #fff;
 }
-
 .pea-image-accordion-text-group .pea-image-accordion-desc {
 	margin: 0;
 	font-size: 13px;
-	opacity: 0.8;
+	color: rgba(255, 255, 255, 0.8);
 }
 
-.pea-image-accordion-item.is-active .pea-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/*  ACTIVE / OPEN ITEM  */
-.pea-image-accordion-item.is-active {
+/* Preset 1 active state */
+.pea-image-accordion-wrapper.preset-1 .pea-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
 }
-
-/*  HOVER TRIGGER MODE  */
-.pea-trigger-hover .pea-image-accordion-item:hover {
-	flex: 1 !important;
-	border-radius: 25px;
-}
-
-.pea-trigger-hover
-	.pea-image-accordion-container:hover
-	.pea-image-accordion-item.is-active:not(:hover) {
-	flex: 0 0 80px;
-}
-
-.pea-trigger-hover
-	.pea-image-accordion-item:hover
-	.pea-image-accordion-text-group {
-	display: block;
-	opacity: 1;
-	transform: translateX(0);
-}
-
-/* CLICK TRIGGER MODE  */
-.pea-trigger-click .pea-image-accordion-item.is-active {
-	flex: 1 !important;
-	border-radius: 25px;
-}
-
-.pea-trigger-click
+.pea-image-accordion-wrapper.preset-1
 	.pea-image-accordion-item.is-active
 	.pea-image-accordion-text-group {
 	display: block;
@@ -142,57 +119,101 @@
 	transform: translateX(0);
 }
 
-/*  RESPONSIVE  */
-@media screen and (max-width: 767px) {
-	.pea-image-accordion-container {
+/* =================
+   TRIGGER  —  HOVER  (Preset 1)
+   ============== */
+.pea-trigger-hover.preset-1 .pea-image-accordion-item:hover {
+	flex: 1 !important;
+	border-radius: 25px;
+}
+.pea-trigger-hover.preset-1
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-text-group {
+	display: block;
+	opacity: 1;
+	transform: translateX(0);
+}
+.pea-trigger-hover.preset-1
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover) {
+	flex: 0 0 80px;
+	border-radius: 50px;
+}
+.pea-trigger-hover.preset-1
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-text-group {
+	opacity: 0;
+	transform: translateX(-10px);
+}
+
+/* CLICK  (Preset 1)  */
+.pea-trigger-click.preset-1 .pea-image-accordion-item:hover {
+	/* no expand */
+	flex: 0 0 80px;
+	border-radius: 50px;
+}
+.pea-trigger-click.preset-1 .pea-image-accordion-item.is-active {
+	flex: 1 !important;
+	border-radius: 25px;
+}
+.pea-trigger-click.preset-1
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-text-group {
+	display: block;
+	opacity: 1;
+	transform: translateX(0);
+}
+
+/*  Responsive Preset 1  */
+@media (max-width: 767px) {
+	.pea-image-accordion-wrapper.preset-1 .pea-image-accordion-container {
 		flex-direction: column;
-		height: auto;
+		height: auto !important;
 		min-height: 400px;
 	}
-
-	.pea-image-accordion-item {
+	.pea-image-accordion-wrapper.preset-1 .pea-image-accordion-item {
 		flex: 0 0 60px !important;
 		border-radius: 16px !important;
 		width: 100%;
 	}
-
-	.pea-image-accordion-item.is-active {
+	.pea-image-accordion-wrapper.preset-1 .pea-image-accordion-item.is-active {
 		flex: 1 1 200px !important;
 		border-radius: 16px !important;
 	}
-
 	.pea-image-accordion-text-group {
 		white-space: normal;
 	}
 }
 
-/* ========================
-   PRESET 2 — Seamless Pillars
-   ========================= */
-.preset-2 .pea-image-accordion-container {
-	gap: 0;
+/* ===============
+   PRESET 2  —  Seamless Pillars
+   ============= */
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-container {
+	gap: 0 !important;
 }
 
-.preset-2 .pea-image-accordion-item {
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-item {
 	flex: 0 0 90px;
-	border-radius: 0;
+	border-radius: 0 !important;
 }
 
-.preset-2 .pea-image-accordion-item.is-active {
-	flex: 1;
-	border-radius: 0;
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-item.is-active {
+	flex: 1 !important;
+	border-radius: 0 !important;
 }
 
-.preset-2 .pea-image-accordion-content-wrapper {
+/* Full-bleed content wrapper centred at bottom */
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	inset: 0;
 	display: flex;
 	align-items: flex-end;
 	justify-content: center;
-	padding-bottom: 20px;
+	padding-bottom: 22px;
 	left: 0;
-	width: 100%;
 	bottom: 0;
+	width: 100%;
 }
 
 /* Dot indicator */
@@ -201,154 +222,186 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	z-index: 5;
+	pointer-events: none;
 	transition:
 		opacity 0.3s ease,
 		visibility 0.3s ease;
-	z-index: 5;
 }
-
 .pea-image-accordion-dot {
-	width: 16px;
-	height: 16px;
-	background: #fff;
 	display: block;
+	width: 14px;
+	height: 14px;
+	background: #fff;
 	border-radius: 50%;
 }
-
-.pea-image-accordion-item.is-active .pea-image-accordion-dot-wrapper,
-.pea-image-accordion-item:hover .pea-image-accordion-dot-wrapper {
+.pea-image-accordion-wrapper.preset-2
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-dot-wrapper {
 	opacity: 0;
 	visibility: hidden;
 }
 
+/* Preset 2 text */
 .pea-image-accordion-preset2-content {
 	text-align: center;
-	color: #fff;
 	z-index: 5;
 }
-
-.pea-image-accordion-bottom-content {
-	text-align: center;
-}
-
-.preset-2 .pea-image-accordion-number {
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-number {
 	display: block;
 	font-size: 13px;
-	opacity: 0.65;
-	color: #fff;
+	color: rgba(255, 255, 255, 0.65);
 	margin-bottom: 4px;
+	letter-spacing: 0.04em;
 }
-
-.preset-2 .pea-image-accordion-title {
+.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-title {
 	font-size: 20px;
 	font-weight: 600;
 	color: #fff;
 	margin: 0 0 4px;
-	opacity: 0;
 	white-space: nowrap;
+	opacity: 0;
 	transition: opacity 0.45s ease;
 }
-
-.preset-2 .pea-sub-title {
+.pea-image-accordion-wrapper.preset-2 .pea-sub-title {
 	font-size: 13px;
 	color: rgba(255, 255, 255, 0.75);
 	margin: 0;
 	opacity: 0;
 	transition: opacity 0.45s ease 0.05s;
 }
-
-.preset-2 .pea-image-accordion-item.is-active .pea-image-accordion-title,
-.preset-2 .pea-image-accordion-item:hover .pea-image-accordion-title {
+.pea-image-accordion-wrapper.preset-2
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-title,
+.pea-image-accordion-wrapper.preset-2
+	.pea-image-accordion-item.is-active
+	.pea-sub-title {
 	opacity: 1;
 }
 
-.preset-2 .pea-image-accordion-item.is-active .pea-sub-title,
-.preset-2 .pea-image-accordion-item:hover .pea-sub-title {
-	opacity: 1;
-}
-
+/* HOVER - Preset 2 */
 .pea-trigger-hover.preset-2 .pea-image-accordion-item:hover {
 	flex: 1 !important;
 	border-radius: 0 !important;
 }
-
+.pea-trigger-hover.preset-2
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-dot-wrapper {
+	opacity: 0;
+	visibility: hidden;
+}
+.pea-trigger-hover.preset-2
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-title,
+.pea-trigger-hover.preset-2 .pea-image-accordion-item:hover .pea-sub-title {
+	opacity: 1;
+}
 .pea-trigger-hover.preset-2
 	.pea-image-accordion-container:hover
 	.pea-image-accordion-item.is-active:not(:hover) {
 	flex: 0 0 90px;
-	border-radius: 0;
 }
-
-/* =====================
-   PRESET 3 — Vertical Stack
-   ===================== */
-.preset-3 .pea-image-accordion-container {
-	flex-direction: column;
-	gap: 10px;
-}
-
-.preset-3 .pea-image-accordion-item {
-	flex: 0 0 64px;
-	border-radius: 12px;
-}
-
-.preset-3 .pea-image-accordion-item.is-active {
-	flex: 1 !important;
-	border-radius: 12px;
-}
-
-.pea-trigger-hover.preset-3 .pea-image-accordion-item:hover {
-	flex: 1 !important;
-	border-radius: 12px;
-}
-
-.pea-trigger-hover.preset-3
+.pea-trigger-hover.preset-2
 	.pea-image-accordion-container:hover
-	.pea-image-accordion-item.is-active:not(:hover) {
-	flex: 0 0 64px;
-	border-radius: 12px;
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-title,
+.pea-trigger-hover.preset-2
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-sub-title {
+	opacity: 0;
+}
+.pea-trigger-hover.preset-2
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-dot-wrapper {
+	opacity: 1;
+	visibility: visible;
 }
 
-.preset-3 .pea-image-accordion-content-wrapper {
+/* CLICK - Preset 2 */
+.pea-trigger-click.preset-2 .pea-image-accordion-item:hover {
+	flex: 0 0 90px;
+}
+.pea-trigger-click.preset-2 .pea-image-accordion-item.is-active {
+	flex: 1 !important;
+	border-radius: 0 !important;
+}
+.pea-trigger-click.preset-2
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-dot-wrapper {
+	opacity: 0;
+	visibility: hidden;
+}
+.pea-trigger-click.preset-2
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-title,
+.pea-trigger-click.preset-2 .pea-image-accordion-item.is-active .pea-sub-title {
+	opacity: 1;
+}
+
+@media (max-width: 767px) {
+	.pea-image-accordion-wrapper.preset-2 .pea-image-accordion-title {
+		white-space: normal;
+	}
+}
+
+/* ==============
+   PRESET 3  —  Vertical Stack
+   =============== */
+.pea-image-accordion-wrapper.preset-3 .pea-image-accordion-container {
+	flex-direction: column;
+	height: auto !important;
+	min-height: 500px;
+}
+.pea-image-accordion-wrapper.preset-3 .pea-image-accordion-item {
+	flex: 0 0 64px;
+	border-radius: 12px !important;
+}
+.pea-image-accordion-wrapper.preset-3 .pea-image-accordion-item.is-active {
+	flex: 1 !important;
+	border-radius: 12px !important;
+}
+
+/* Preset 3 content wrapper hidden by default */
+.pea-image-accordion-wrapper.preset-3 .pea-image-accordion-content-wrapper {
 	display: none;
 	opacity: 0;
-	transition: opacity 0.35s ease;
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	padding: 16px 20px;
+	padding: 18px 22px;
 	box-sizing: border-box;
+	align-items: flex-end;
+	transition: opacity 0.35s ease;
 }
-
-.preset-3
+.pea-image-accordion-wrapper.preset-3
 	.pea-image-accordion-item.is-active
-	.pea-image-accordion-content-wrapper,
-.pea-trigger-hover.preset-3
-	.pea-image-accordion-item:hover
 	.pea-image-accordion-content-wrapper {
 	display: flex;
 	opacity: 1;
 }
 
+/* Preset 3 inner */
 .pea-image-accordion-preset3-content {
 	display: flex;
 	align-items: flex-end;
 	justify-content: space-between;
 	width: 100%;
+	gap: 16px;
 }
-
-.pea-image-accordion-preset3-content .pea-image-accordion-left-content {
+.pea-image-accordion-left-content {
 	min-width: 0;
 }
 
-.preset-3 .pea-image-accordion-title {
+.pea-image-accordion-wrapper.preset-3 .pea-image-accordion-title {
 	font-size: 18px;
 	font-weight: 600;
 	color: #fff;
 	margin: 0 0 4px;
+	line-height: 1.3;
 }
-
-.preset-3 .pea-sub-title {
+.pea-image-accordion-wrapper.preset-3 .pea-sub-title {
 	font-size: 13px;
 	color: rgba(255, 255, 255, 0.8);
 	margin: 0;
@@ -367,57 +420,87 @@
 	cursor: pointer;
 	white-space: nowrap;
 	flex-shrink: 0;
-	transition:
-		background 0.25s ease,
-		color 0.25s ease;
+	line-height: 1;
+	transition: background 0.25s ease;
 }
-
 .pea-image-accordion-btn:hover {
-	background: rgba(255, 255, 255, 0.32);
+	background: rgba(255, 255, 255, 0.35);
 }
 
-@media screen and (max-width: 767px) {
-	.preset-3 .pea-image-accordion-container {
-		min-height: 480px;
-	}
+/* HOVER — Preset 3 */
+.pea-trigger-hover.preset-3 .pea-image-accordion-item:hover {
+	flex: 1 !important;
+	border-radius: 12px !important;
+}
+.pea-trigger-hover.preset-3
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-content-wrapper {
+	display: flex;
+	opacity: 1;
+}
+.pea-trigger-hover.preset-3
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover) {
+	flex: 0 0 64px;
+}
+.pea-trigger-hover.preset-3
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-content-wrapper {
+	display: none;
+	opacity: 0;
 }
 
-/* =====================
-   PRESET 4 — Skewed Panels
-   ===================== */
-.preset-4 .pea-image-accordion-container {
-	gap: 0;
-	border-radius: 0;
+/* CLICK — Preset 3 */
+.pea-trigger-click.preset-3 .pea-image-accordion-item:hover {
+	flex: 0 0 64px;
+}
+.pea-trigger-click.preset-3 .pea-image-accordion-item.is-active {
+	flex: 1 !important;
+}
+.pea-trigger-click.preset-3
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-content-wrapper {
+	display: flex;
+	opacity: 1;
+}
+
+/* ====================
+   PRESET 4  —  Skewed Panels
+   ================ */
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-container {
+	gap: 0 !important;
 	overflow: hidden;
-	padding: 0;
 }
 
-.preset-4 .pea-image-accordion-item {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item {
 	position: relative;
 	flex: 1;
 	transform: skewX(-12deg);
 	margin: 0 -7px;
 	overflow: hidden;
 	border-radius: 0 !important;
+	/* bg is on .pea-skew-bg child — do NOT set background here */
 	background-image: none !important;
+	background-color: transparent !important;
 	transition: flex 0.55s cubic-bezier(0.25, 1, 0.5, 1);
 	z-index: 1;
 }
 
-.preset-4 .pea-image-accordion-item.is-active,
-.preset-4 .pea-image-accordion-item:hover {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item.is-active,
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item:focus-visible {
 	z-index: 5;
 }
 
-.preset-4 .pea-image-accordion-item:first-child {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item:first-child {
 	margin-left: -44px;
 }
-.preset-4 .pea-image-accordion-item:last-child {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item:last-child {
 	margin-right: -44px;
 }
 
 /* Un-skewed background layer */
-.pea-skew-bg {
+.pea-image-accordion-wrapper.preset-4 .pea-skew-bg {
 	position: absolute;
 	top: 0;
 	left: -55%;
@@ -425,33 +508,22 @@
 	height: 100%;
 	background-size: cover;
 	background-position: center;
+	background-repeat: no-repeat;
 	transform: skewX(12deg);
 	transition: transform 0.55s ease;
 	will-change: transform;
-}
-
-.preset-4 .pea-image-accordion-item:hover .pea-skew-bg,
-.preset-4 .pea-image-accordion-item.is-active .pea-skew-bg {
-	transform: skewX(12deg) scale(1.06);
+	z-index: 0;
 }
 
 /* Overlay */
-.preset-4 .pea-image-accordion-overlay {
-	position: absolute;
-	inset: 0;
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-overlay {
+	z-index: 2;
 	background: rgba(0, 0, 0, 0.48);
 	transition: background 0.4s ease;
-	z-index: 2;
-	pointer-events: none;
 }
 
-.preset-4 .pea-image-accordion-item.is-active .pea-image-accordion-overlay,
-.preset-4 .pea-image-accordion-item:hover .pea-image-accordion-overlay {
-	background: rgba(0, 0, 0, 0.25);
-}
-
-/* Content wrapper (counter-skewed) */
-.preset-4 .pea-image-accordion-content-wrapper {
+/* Counter-skewed content */
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	inset: 0;
 	display: flex;
@@ -463,13 +535,13 @@
 	bottom: auto;
 	left: auto;
 	width: 100%;
-	gap: 0;
+	gap: 4px;
 	padding: 0 12px;
 	box-sizing: border-box;
+	transform: skewX(12deg);
 }
 
-/* Number */
-.preset-4 .pea-image-accordion-number {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-number {
 	display: block;
 	font-size: 13px;
 	font-weight: 500;
@@ -478,8 +550,7 @@
 	letter-spacing: 0.04em;
 }
 
-/* Title — hidden until expanded */
-.preset-4 .pea-image-accordion-title {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-title {
 	display: block;
 	font-size: 18px;
 	font-weight: 600;
@@ -494,13 +565,7 @@
 		transform 0.4s ease 0.05s;
 }
 
-.preset-4 .pea-image-accordion-item.is-active .pea-image-accordion-title,
-.preset-4 .pea-image-accordion-item:hover .pea-image-accordion-title {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.preset-4 .pea-image-accordion-desc {
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-desc {
 	display: block;
 	font-size: 12px;
 	color: rgba(255, 255, 255, 0.78);
@@ -508,41 +573,107 @@
 	white-space: nowrap;
 }
 
-/* Expanded item */
-.preset-4 .pea-image-accordion-item.is-active {
+/* Preset 4 active */
+.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-item.is-active {
 	flex: 2.8;
+	border-radius: 0 !important;
+}
+.pea-image-accordion-wrapper.preset-4
+	.pea-image-accordion-item.is-active
+	.pea-skew-bg {
+	transform: skewX(12deg) scale(1.06);
+}
+.pea-image-accordion-wrapper.preset-4
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-overlay {
+	background: rgba(0, 0, 0, 0.25);
+}
+.pea-image-accordion-wrapper.preset-4
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-title {
+	opacity: 1;
+	transform: translateY(0);
 }
 
+/* HOVER  Preset 4 */
 .pea-trigger-hover.preset-4 .pea-image-accordion-item:hover {
 	flex: 2.8;
+	z-index: 5;
 }
-
+.pea-trigger-hover.preset-4 .pea-image-accordion-item:hover .pea-skew-bg {
+	transform: skewX(12deg) scale(1.06);
+}
+.pea-trigger-hover.preset-4
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-overlay {
+	background: rgba(0, 0, 0, 0.25);
+}
+.pea-trigger-hover.preset-4
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-title {
+	opacity: 1;
+	transform: translateY(0);
+}
 .pea-trigger-hover.preset-4
 	.pea-image-accordion-container:hover
 	.pea-image-accordion-item.is-active:not(:hover) {
 	flex: 1;
 }
+.pea-trigger-hover.preset-4
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-title {
+	opacity: 0;
+	transform: translateY(6px);
+}
+.pea-trigger-hover.preset-4
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-image-accordion-overlay {
+	background: rgba(0, 0, 0, 0.48);
+}
+.pea-trigger-hover.preset-4
+	.pea-image-accordion-container:hover
+	.pea-image-accordion-item.is-active:not(:hover)
+	.pea-skew-bg {
+	transform: skewX(12deg);
+}
 
+/* CLICK — Preset 4 */
+.pea-trigger-click.preset-4 .pea-image-accordion-item:hover {
+	flex: 1;
+}
+.pea-trigger-click.preset-4
+	.pea-image-accordion-item:hover
+	.pea-image-accordion-title {
+	opacity: 0;
+	transform: translateY(6px);
+}
 .pea-trigger-click.preset-4 .pea-image-accordion-item.is-active {
 	flex: 2.8;
 }
+.pea-trigger-click.preset-4 .pea-image-accordion-item.is-active .pea-skew-bg {
+	transform: skewX(12deg) scale(1.06);
+}
+.pea-trigger-click.preset-4
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-overlay {
+	background: rgba(0, 0, 0, 0.25);
+}
+.pea-trigger-click.preset-4
+	.pea-image-accordion-item.is-active
+	.pea-image-accordion-title {
+	opacity: 1;
+	transform: translateY(0);
+}
 
-@media screen and (max-width: 767px) {
-	.preset-4 .pea-image-accordion-container {
+@media (max-width: 767px) {
+	.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-container {
 		flex-direction: row !important;
-		height: 300px;
+		height: 300px !important;
 	}
-
-	.preset-4 .pea-image-accordion-item {
-		flex: 1 !important;
-	}
-
-	.preset-4 .pea-image-accordion-item.is-active {
-		flex: 2.8 !important;
-	}
-
-	.preset-4 .pea-image-accordion-title,
-	.preset-4 .pea-image-accordion-desc {
+	.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-title,
+	.pea-image-accordion-wrapper.preset-4 .pea-image-accordion-desc {
 		white-space: normal;
 		font-size: 11px;
 	}

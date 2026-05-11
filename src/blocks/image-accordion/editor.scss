@@ -1,24 +1,135 @@
-/* Image Accordion Block — Editor-only styles */
-
 .image-accordion-block-editor-wrap {
 	width: 100%;
 	max-width: 100%;
 
-	.pea-image-accordion-wrapper {
-		margin: 0;
+	.pea-editor-preview .pea-image-accordion-item {
+		pointer-events: none;
 	}
 
-	/* Prevent layout shift in editor */
-	.iab-p1,
-	.iab-p2,
-	.iab-p3,
-	.iab-p4 {
-		will-change: flex;
-		transition: flex 0.4s ease;
+	/* =======================
+	   PRESET 1  —  Rounded pills
+	======================== */
+	.pea-editor-preview.preset-1 {
+		.pea-image-accordion-container {
+			display: flex !important;
+			flex-direction: row !important;
+			align-items: stretch !important;
+		}
+
+		.pea-image-accordion-item {
+			flex: 0 0 80px !important;
+			border-radius: 50px !important;
+		}
+
+		.pea-image-accordion-item.is-active {
+			flex: 1 !important;
+			border-radius: 25px !important;
+
+			.pea-image-accordion-text-group {
+				display: block !important;
+				opacity: 1 !important;
+				transform: translateX(0) !important;
+			}
+		}
 	}
 
-	/* Make placeholder look better */
+	/* ====================
+	   PRESET 2 - Seamless pillars
+	======================= */
+	.pea-editor-preview.preset-2 {
+		.pea-image-accordion-container {
+			display: flex !important;
+			flex-direction: row !important;
+			gap: 0 !important;
+			align-items: stretch !important;
+		}
+
+		.pea-image-accordion-item {
+			flex: 0 0 90px !important;
+			border-radius: 0 !important;
+		}
+
+		.pea-image-accordion-item.is-active {
+			flex: 1 !important;
+			border-radius: 0 !important;
+
+			.pea-image-accordion-dot-wrapper {
+				opacity: 0 !important;
+				visibility: hidden !important;
+			}
+
+			.pea-image-accordion-title,
+			.pea-sub-title {
+				opacity: 1 !important;
+			}
+		}
+	}
+
+	/* ============
+	   PRESET 3  -  Vertical stack
+	================ */
+	.pea-editor-preview.preset-3 {
+		.pea-image-accordion-container {
+			display: flex !important;
+			flex-direction: column !important;
+			height: auto !important;
+		}
+
+		.pea-image-accordion-item {
+			flex: 0 0 64px !important;
+			border-radius: 12px !important;
+		}
+
+		.pea-image-accordion-item.is-active {
+			flex: 1 !important;
+			border-radius: 12px !important;
+
+			.pea-image-accordion-content-wrapper {
+				display: flex !important;
+				opacity: 1 !important;
+			}
+		}
+	}
+
+	/*
+	   PRESET 4  - Skewed panels
+	 */
+	.pea-editor-preview.preset-4 {
+		.pea-image-accordion-container {
+			display: flex !important;
+			flex-direction: row !important;
+			gap: 0 !important;
+			overflow: hidden !important;
+			align-items: stretch !important;
+		}
+
+		.pea-image-accordion-item {
+			flex: 1 !important;
+			background-image: none !important;
+			background-color: transparent !important;
+		}
+
+		.pea-image-accordion-item.is-active {
+			flex: 2.8 !important;
+			z-index: 5 !important;
+
+			.pea-skew-bg {
+				transform: skewX(12deg) scale(1.06) !important;
+			}
+
+			.pea-image-accordion-overlay {
+				background: rgba(0, 0, 0, 0.25) !important;
+			}
+
+			.pea-image-accordion-title {
+				opacity: 1 !important;
+				transform: translateY(0) !important;
+			}
+		}
+	}
+
+	/*  Placeholder  */
 	.components-placeholder {
-		min-height: 300px;
+		min-height: 240px;
 	}
 }

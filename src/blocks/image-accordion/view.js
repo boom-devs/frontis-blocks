@@ -5,87 +5,81 @@
 		const container = wrapper.querySelector(".pea-image-accordion-container");
 		if (!container) return;
 
-		const items = Array.from(
-			container.querySelectorAll(".pea-image-accordion-item"),
-		);
-		const triggerMode = wrapper.dataset.trigger || "hover";
+		const triggerMode = (wrapper.dataset.trigger || "hover")
+			.trim()
+			.toLowerCase();
 
-		// Add trigger class to wrapper so CSS can react
-		wrapper.classList.add(`pea-trigger-${triggerMode}`);
+		// Add trigger class to wrapper so CSS can apply preset-aware rules
+		wrapper.classList.remove("pea-trigger-hover", "pea-trigger-click");
+		wrapper.classList.add("pea-trigger-" + triggerMode);
 
-		// Remove any previously-bound listeners (safe for re-init)
-		items.forEach((item) => {
+		// Fresh items
+		const getItems = () =>
+			Array.from(container.querySelectorAll(".pea-image-accordion-item"));
+
+		// Remove old listeners by cloning nodes
+		getItems().forEach((item) => {
 			const clone = item.cloneNode(true);
 			item.parentNode.replaceChild(clone, item);
 		});
 
-		// Re-query after cloning
-		const freshItems = Array.from(
-			container.querySelectorAll(".pea-image-accordion-item"),
-		);
+		const items = getItems();
+
+		// Activate a single item
+		function activate(target) {
+			items.forEach((i) => {
+				i.classList.remove("is-active");
+				i.setAttribute("aria-expanded", "false");
+			});
+			target.classList.add("is-active");
+			target.setAttribute("aria-expanded", "true");
+		}
 
 		if (triggerMode === "click") {
-			// Click mode
-			freshItems.forEach((item) => {
-				item.addEventListener("click", () => {
-					freshItems.forEach((i) => i.classList.remove("is-active"));
-					item.classList.add("is-active");
-				});
+			// Hover does nothing; only clicks toggle is-active
+			items.forEach((item) => {
+				item.addEventListener("click", () => activate(item));
 
-				// Keyboard accessibility
 				item.addEventListener("keydown", (e) => {
 					if (e.key === "Enter" || e.key === " ") {
 						e.preventDefault();
-						item.click();
+						activate(item);
 					}
 				});
 			});
 		} else {
-			// Hover mode (default)
-			freshItems.forEach((item) => {
-				item.addEventListener("mouseenter", () => {
-					freshItems.forEach((i) => i.classList.remove("is-active"));
-					item.classList.add("is-active");
-				});
+			// HOVER MODE (default)
+			// Hover expands item; click has no extra effect
+			items.forEach((item) => {
+				item.addEventListener("mouseenter", () => activate(item));
 			});
 
-			// Reset to first item when mouse leaves the container
+			// On container mouseleave → restore first item
 			container.addEventListener("mouseleave", () => {
-				freshItems.forEach((i) => i.classList.remove("is-active"));
-				if (freshItems[0]) {
-					freshItems[0].classList.add("is-active");
+				items.forEach((i) => {
+					i.classList.remove("is-active");
+					i.setAttribute("aria-expanded", "false");
+				});
+				if (items[0]) {
+					items[0].classList.add("is-active");
+					items[0].setAttribute("aria-expanded", "true");
 				}
 			});
 		}
 
-		// Ensure first item starts as active
-		if (freshItems[0] && !freshItems[0].classList.contains("is-active")) {
-			freshItems[0].classList.add("is-active");
+		// Set first item as active on load
+		if (items[0]) {
+			items[0].classList.add("is-active");
+			items[0].setAttribute("aria-expanded", "true");
 		}
-
-		// Update aria-expanded on state change (accessibility)
-		const observer = new MutationObserver(() => {
-			freshItems.forEach((item) => {
-				item.setAttribute(
-					"aria-expanded",
-					item.classList.contains("is-active") ? "true" : "false",
-				);
-			});
-		});
-
-		freshItems.forEach((item) => {
-			observer.observe(item, { attributes: true, attributeFilter: ["class"] });
-		});
 	}
 
 	function init() {
-		const wrappers = document.querySelectorAll(
-			".image-accordion-block .pea-image-accordion-wrapper",
-		);
-		wrappers.forEach(initAccordion);
+		document
+			.querySelectorAll(".image-accordion-block .pea-image-accordion-wrapper")
+			.forEach(initAccordion);
 	}
 
-	// Run after DOM is ready
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", init);
 	} else {

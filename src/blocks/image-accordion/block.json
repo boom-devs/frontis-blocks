@@ -6,16 +6,19 @@
 	"title": "Image Accordion",
 	"category": "frontis-blocks",
 	"icon": "images-alt2",
-	"description": "A beautiful image accordion with 4 preset styles. Hover or click to expand panels.",
-	"keywords": ["image", "accordion", "animation", "gallery", "interactive"],
+	"description": "Interactive image accordion with 4 preset styles. Supports hover and click triggers.",
+	"keywords": ["accordion", "image", "gallery", "interactive", "slider"],
 	"textdomain": "frontis-blocks",
 	"supports": {
 		"html": false,
 		"align": ["wide", "full"],
-		"spacing": { "margin": true, "padding": true }
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
 	},
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./editor.scss",
-	"style": "file:./style.scss",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
 	"viewScript": "file:./view.js"
 }
