@@ -104,10 +104,20 @@ const attributes = {
 	},
 
 	// Layout / General
+	// containerWidth: {
+	// 	type: number,
+	// 	default: 500,
+	// },
+	// new control of prests 1
 	containerHeight: {
 		type: "number",
 		default: 500,
 	},
+	// new control of prests 1
+	// backgroundImage: {
+	// 	type: "string",
+	// 	default: "assets/images/default-service-bg.webp",
+	// },
 	itemsGap: {
 		type: "number",
 		default: 12,

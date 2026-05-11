@@ -12,8 +12,8 @@ const PRESET_INFO = {
 	"preset-4": { label: "Preset 4", color: "#92400e", bg: "#fef3c7" },
 };
 const TRIGGER_INFO = {
-	hover: { label: "⟳ Hover", color: "#0875ff", bg: "#dbeafe" },
-	click: { label: "↵ Click", color: "#b45309", bg: "#fef9c3" },
+	hover: { label: "Hover", color: "#0875ff", bg: "#dbeafe" },
+	click: { label: "Click", color: "#b45309", bg: "#fef9c3" },
 };
 
 const Badge = ({ label, color, bg }) => (
