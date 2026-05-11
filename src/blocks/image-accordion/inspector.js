@@ -220,7 +220,7 @@ const ItemEditor = ({
 												onClick={openMedia}
 												style={{ width: "100%" }}
 											>
-												{__("🖼 Select Image", "frontis-blocks")}
+												{__("Select Image", "frontis-blocks")}
 											</Button>
 										)}
 									</div>
@@ -273,12 +273,12 @@ const ItemEditor = ({
 							/>
 							{(item.mediaType || "icon") === "icon" && (
 								<TextControl
-									label={__("Choose Icon (CSS class)", "frontis-blocks")}
+									label={__("Choose Icon", "frontis-blocks")}
 									help={__(
 										"e.g. fas fa-star, fas fa-heart, fab fa-twitter",
 										"frontis-blocks",
 									)}
-									value={item.iconValue || "fas fa-star"}
+									value={item.iconValue || "fa-solid fa-alarm-clock"}
 									onChange={(val) => update("iconValue", val)}
 									__nextHasNoMarginBottom
 								/>
@@ -399,7 +399,7 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 				{
 					id: Date.now().toString(),
 					title: "Discover unique",
-					subTitle: "",
+					subTitle: "discover unique",
 					imageUrl: "",
 					imageId: 0,
 					iconValue: "fas fa-star",
