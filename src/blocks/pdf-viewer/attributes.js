@@ -32,6 +32,18 @@ const attributes = {
 		type: "string",
 		default: "Desktop",
 	},
+	deviceTypeMobile: {
+		type: "boolean",
+		default: true,
+	},
+	deviceTypeTablet: {
+		type: "boolean",
+		default: true,
+	},
+	deviceTypeDesktop: {
+		type: "boolean",
+		default: true,
+	},
 };
 
 export default attributes;
