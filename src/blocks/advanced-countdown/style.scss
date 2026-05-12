@@ -1,24 +1,10 @@
-.fb-count-down-wrapper {
-
-	.fb-count-down-item {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		position: relative;
-
-		&:last-child {
-			&:before {
-				display: none;
-			}
-		}
-	}
-
-	.fb-count-down-item:before{
-		position: absolute;
-		right: 0;
-		top: 50%;
-		transform: translateY(-50%);
-	}
+.acd-block {
+	width: 100%;
+}
+.acd-container {
+	width: 100%;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

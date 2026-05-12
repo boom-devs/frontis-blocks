@@ -5,14 +5,17 @@
 	"version": "1.0.0",
 	"title": "Advanced Countdown",
 	"category": "frontis-blocks",
-	"description": "A customizable countdown block with various styling options.",
-	"example": {},
-	"supports": {
-		"align": ["wide", "full"],
-		"anchor": false,
-		"customClassName": false
-	},
+	"icon": "clock",
+	"description": "Advanced countdown timer with 5 preset styles. SVG progress bars, dashed rings, dot rings and more.",
+	"keywords": ["countdown", "timer", "clock", "progress"],
 	"textdomain": "frontis-blocks",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"],
+		"spacing": { "margin": true, "padding": true }
+	},
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

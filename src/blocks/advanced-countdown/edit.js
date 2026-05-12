@@ -1,165 +1,119 @@
-import { __ } from '@wordpress/i18n';
-
-import {
-	useBlockProps,
-} from '@wordpress/block-editor';
-
-import { useEffect, useState, useRef } from '@wordpress/element';
-import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
-import './editor.scss';
-
+import { __ } from "@wordpress/i18n";
+import { useBlockProps } from "@wordpress/block-editor";
+import { useState, useEffect, useRef } from "@wordpress/element";
 import Inspector from "./inspector";
-import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
-import generateCountdownStyle from "./styling";
+import { renderCountdown } from "./presets";
+import { getTimeLeft } from "./countdown-utils";
 
-export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+const Edit = ({ attributes, setAttributes }) => {
 	const {
-		blockID,
-		blockStyle,
-		countDownLabelDay,
-		countDownLabelHour,
-		countDownLabelMinute,
-		countDownLabelSecond,
-		targetDate,
-		showDays,
-		showHours,
-		showMinutes,
-		showSeconds,
-
-		countDownGlobalWraperID,
-		countDownGlobalWraperClass,
-
-		countDownDesktopSwitcher,
-		countDownTabletSwitcher,
-		countDownMobileSwitcher,
+		presetStyle,
+		dueDateTime,
+		startDateTime,
+		containerBgColor,
+		containerBgImage,
+		containerBorderType,
+		containerBorderWidth,
+		containerBorderColor,
+		containerBorderRadius,
+		containerAlignment,
+		containerMargin,
+		containerSize,
 	} = attributes;
 
-	// Handle block ID generation (handles duplication and initial ID)
-	useBlockIdGenerator({
-		clientId,
-		blockID,
-		blockPrefix: 'fb-countdown',
-		isSelected,
-		attributes,
-		setAttributes,
-	});
+	const [timeData, setTimeData] = useState(() => getTimeLeft(dueDateTime));
+	const timerRef = useRef(null);
 
-	/** Start Generate Block Style */
+	/* Live countdown tick */
 	useEffect(() => {
-		if (blockID) {
-			const css = generateCountdownStyle(attributes);
-			setAttributes({ blockStyle: css });
-		}
-	}, [attributes, blockID]);
-	/** End Generate Block Style */
-
-	/**
-	* Manages tab button settings and switches to block settings on click
-	*/
-	const panelRef = useRef(null);
-	SwitchToBlockSettings(panelRef);
-
-	const [timeRemaining, setTimeRemaining] = useState({});
-
-	// Set default date to one week from today
-	const defaultDate = new Date();
-	defaultDate.setDate(defaultDate.getDate() + 7);
-
-	const [date, setDate] = useState(targetDate ? new Date(targetDate) : defaultDate);
-
-	// Sync date with attributes if not already set
-	useEffect(() => {
-		if (!targetDate) {
-			setAttributes({ targetDate: defaultDate.toISOString() });
-		}
-	}, [targetDate, setAttributes, defaultDate]);
-
-	// Update target date when date changes
-	useEffect(() => {
-		setAttributes({ targetDate: date.toISOString() });
-	}, [date, setAttributes]);
-
-	// Generate unique block ID if not set
-	useEffect(() => {
-		if (clientId && typeof clientId === 'string') {
-			setAttributes({
-				blockID: "countdown-" + clientId.slice(0, 8),
-			});
-		}
-	}, [clientId]);
-
-	// Countdown Timer Logic
-	useEffect(() => {
-		// Helper function to format time with leading zero
-		const formatTime = (time) => (time < 10 ? `0${time}` : time);
-
-		if (!targetDate || isNaN(new Date(targetDate).getTime())) return;
-
-		const intervalId = setInterval(() => {
-			const now = Date.now();
-			const distance = new Date(targetDate).getTime() - now;
-
-			const days = formatTime(Math.floor(distance / (1000 * 60 * 60 * 24)));
-			const hours = formatTime(Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-			const minutes = formatTime(Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)));
-			const seconds = formatTime(Math.floor((distance % (1000 * 60)) / 1000));
-
-			if (distance < 0) {
-				clearInterval(intervalId);
-				setTimeRemaining({ days: "00", hours: "00", minutes: "00", seconds: "00" });
-			} else {
-				setTimeRemaining({ days, hours, minutes, seconds });
-			}
+		setTimeData(getTimeLeft(dueDateTime));
+		timerRef.current = setInterval(() => {
+			setTimeData(getTimeLeft(dueDateTime));
 		}, 1000);
+		return () => clearInterval(timerRef.current);
+	}, [dueDateTime, startDateTime]);
 
-		return () => clearInterval(intervalId);
-	}, [targetDate]);
+	const blockProps = useBlockProps({ className: "acd-block-editor-wrap" });
 
-	const blockProps = useBlockProps({
-		className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
-	});
+	/* Container styles */
+	const containerStyle = {
+		background: containerBgImage
+			? `url(${containerBgImage}) center/cover no-repeat, ${containerBgColor}`
+			: containerBgColor,
+		borderRadius: `${containerBorderRadius.top || 12}px ${
+			containerBorderRadius.right || 12
+		}px ${containerBorderRadius.bottom || 12}px ${
+			containerBorderRadius.left || 12
+		}px`,
+		...(containerBorderType !== "none"
+			? {
+					borderStyle: containerBorderType,
+					borderWidth: `${containerBorderWidth.top || 0}px ${
+						containerBorderWidth.right || 0
+					}px ${containerBorderWidth.bottom || 0}px ${
+						containerBorderWidth.left || 0
+					}px`,
+					borderColor: containerBorderColor,
+			  }
+			: {}),
+		margin: `${containerMargin.top || 0}px ${containerMargin.right || 0}px ${
+			containerMargin.bottom || 0
+		}px ${containerMargin.left || 0}px`,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		padding: "40px 24px",
+		width: presetStyle === "preset-1" ? `${containerSize}%` : "100%",
+		boxSizing: "border-box",
+	};
 
 	return (
 		<>
-			{isSelected && (
-				<Inspector
-					attributes={attributes}
-					setAttributes={setAttributes}
-				/>
-			)}
-
+			<Inspector attributes={attributes} setAttributes={setAttributes} />
 			<div {...blockProps}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID} ref={panelRef}>
-					{showDays && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time days`}>{timeRemaining.days || 0}</span>
-							<span className={`fb-count-down-label`}>{countDownLabelDay || __('Days', 'frontis-blocks')}</span>
-						</div>
-					)}
+				{/* Info bar */}
+				<div
+					style={{
+						display: "flex",
+						alignItems: "center",
+						justifyContent: "space-between",
+						padding: "6px 12px",
+						background: "#1e1e1e",
+						borderRadius: "6px 6px 0 0",
+					}}
+				>
+					<span style={{ color: "#fff", fontWeight: 600, fontSize: 11 }}>
+						⏱ Advanced Countdown
+					</span>
+					<span style={{ color: "#777", fontSize: 11 }}>{presetStyle}</span>
+				</div>
 
-					{showHours && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time hours`}>{timeRemaining.hours || 0}</span>
-							<span className={`fb-count-down-label`}>{countDownLabelHour || __('Hours', 'frontis-blocks')}</span>
-						</div>
-					)}
+				{/* Preview */}
+				<div style={{ textAlign: containerAlignment || "center" }}>
+					<div style={containerStyle}>
+						{renderCountdown(attributes, timeData)}
+					</div>
+				</div>
 
-					{showMinutes && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time minutes`}>{timeRemaining.minutes || 0}</span>
-							<span className={`fb-count-down-label`}>{countDownLabelMinute || __('Minutes', 'frontis-blocks')}</span>
-						</div>
-					)}
-
-					{showSeconds && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time seconds`}>{timeRemaining.seconds || 0}</span>
-							<span className={`fb-count-down-label`}>{countDownLabelSecond || __('Seconds', 'frontis-blocks')}</span>
-						</div>
+				{/* Hint */}
+				<div
+					style={{
+						padding: "5px 12px",
+						background: "#f8f8f8",
+						borderTop: "1px solid #e8e8e8",
+						borderRadius: "0 0 6px 6px",
+						fontSize: 11,
+						color: "#999",
+					}}
+				>
+					{__(
+						"Timer is live in this preview. All styles update in real time.",
+						"frontis-blocks",
 					)}
 				</div>
 			</div>
-			<style>{blockStyle}</style>
 		</>
 	);
-}
+};
+
+export default Edit;

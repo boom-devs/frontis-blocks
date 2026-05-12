@@ -1,67 +1,72 @@
-import { __ } from '@wordpress/i18n';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from "@wordpress/block-editor";
 
-export default function save({ attributes }) {
+/* Save outputs a static shell; view.js hydrates the timer on frontend */
+const Save = ({ attributes }) => {
 	const {
-		blockID,
-		countDownLabelDay,
-		countDownLabelHour,
-		countDownLabelMinute,
-		countDownLabelSecond,
-		targetDate,
-		showDays,
-		showHours,
-		showMinutes,
-		showSeconds,
-		countDownGlobalWraperID,
-		countDownGlobalWraperClass,
-		countDownDesktopSwitcher,
-		countDownTabletSwitcher,
-		countDownMobileSwitcher,
+		presetStyle,
+		dueDateTime,
+		startDateTime,
+		containerBgColor,
+		containerBgImage,
+		containerBorderType,
+		containerBorderWidth,
+		containerBorderColor,
+		containerBorderRadius,
+		containerAlignment,
+		containerMargin,
+		containerSize,
 	} = attributes;
 
-	const blockProps = useBlockProps.save({
-		className: `fb-count-down-main-wrapper ${blockID} ${countDownDesktopSwitcher && 'fb-desktop-responsive'} ${countDownTabletSwitcher && 'fb-tablet-responsive'} ${countDownMobileSwitcher && 'fb-mobile-responsive'}`,
-	});
+	const blockProps = useBlockProps.save({ className: "acd-block" });
+
+	const containerStyle = {
+		background: containerBgImage
+			? `url(${containerBgImage}) center/cover no-repeat, ${containerBgColor}`
+			: containerBgColor,
+		borderRadius: `${containerBorderRadius.top || 12}px ${
+			containerBorderRadius.right || 12
+		}px ${containerBorderRadius.bottom || 12}px ${
+			containerBorderRadius.left || 12
+		}px`,
+		...(containerBorderType !== "none"
+			? {
+					borderStyle: containerBorderType,
+					borderWidth: `${containerBorderWidth.top || 0}px ${
+						containerBorderWidth.right || 0
+					}px ${containerBorderWidth.bottom || 0}px ${
+						containerBorderWidth.left || 0
+					}px`,
+					borderColor: containerBorderColor,
+			  }
+			: {}),
+		margin: `${containerMargin.top || 0}px ${containerMargin.right || 0}px ${
+			containerMargin.bottom || 0
+		}px ${containerMargin.left || 0}px`,
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "center",
+		padding: "40px 24px",
+		width: presetStyle === "preset-1" ? `${containerSize}%` : "100%",
+		boxSizing: "border-box",
+	};
 
 	return (
-		<>
-			<div {...blockProps} data-target-date={targetDate}>
-				<div className={`fb-parent-wrapper fb-count-down-wrapper ${blockID} ${countDownGlobalWraperClass}`} id={countDownGlobalWraperID}>
-					{showDays && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time days`}>00</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelDay || __('Days', 'frontis-blocks')}
-							</span>
-						</div>
-					)}
-					{showHours && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time hours`}>00</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelHour || __('Hours', 'frontis-blocks')}
-							</span>
-						</div>
-					)}
-					{showMinutes && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time minutes`}>00</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelMinute || __('Minutes', 'frontis-blocks')}
-							</span>
-						</div>
-					)}
-					{showSeconds && (
-						<div className={`fb-count-down-item`}>
-							<span className={`fb-count-down-time seconds`}>00</span>
-							<span className={`fb-count-down-label`}>
-								{countDownLabelSecond || __('Seconds', 'frontis-blocks')}
-							</span>
-						</div>
-					)}
+		<div {...blockProps}>
+			<div style={{ textAlign: containerAlignment || "center" }}>
+				<div
+					className={`acd-container acd-${presetStyle}`}
+					style={containerStyle}
+					data-preset={presetStyle}
+					data-due={dueDateTime}
+					data-start={startDateTime}
+					data-attrs={JSON.stringify(attributes)}
+				>
+					{/* Hydrated by view.js */}
+					<div className="acd-inner" />
 				</div>
 			</div>
-		</>
+		</div>
 	);
-}
+};
+
+export default Save;
