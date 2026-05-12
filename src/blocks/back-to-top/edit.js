@@ -17,6 +17,7 @@ import backToTopStyle from "./styling";
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
     const {
         blockID,
+        blockStyle,
         backToTopPresetType,
         backToTopPosition,
         backToTopEntranceAnimation,
@@ -60,7 +61,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                 <div className=" fb-back-to-top-inner-wrapper ">
                     <div className=" fb-back-to-top-content-wrapper " >
                         {(backToTopContentType === "icon" || backToTopContentType === "text-icon") && (
-                            <div className=' fb-back-to-top-icon-wrapper'>
+                            <div className="fb-back-to-top-image-wrapper">
                                 {backToTopIconType === "icon" && renderSVG(backToTopIcon)}
                                 {backToTopIconType === "image" && backToTopImage && (
                                     <img src={backToTopImage} alt={backToTopImageAlt} />
@@ -73,6 +74,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                     </div>
                 </div>
             </div>
+            <style>{blockStyle}</style>
         </>
     );
 
