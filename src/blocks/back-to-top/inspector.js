@@ -75,7 +75,148 @@ const Inspector = ({ attributes, setAttributes }) => {
         backToTopImage,
         backToTopImageAlt,
         backToTopText,
-        backToTopImageID } = attributes;
+        backToTopContentDirection,
+        backToTopImageID,
+        backToTopBorder,
+        backToTopBorderColor,
+        backToTopBorderHoverColor,
+        backToTopBorderColorSwitcher,
+        backToTopBorderUnits,
+        backToTopBorderDesktop,
+        backToTopBorderTablet,
+        backToTopBorderMobile,
+        backToTopBorderLink,
+        backToTopBorderRadiusUnits,
+        backToTopBorderRadiusDesktop,
+        backToTopBorderRadiusTablet,
+        backToTopBorderRadiusMobile,
+        backToTopBorderRadiusLink,
+        backToTopBoxShadowSwitcher,
+        backToTopBoxShadowValues,
+        backToTopBoxShadowCssValue,
+        backToTopBoxShadowHoverValues,
+        backToTopBoxShadowHoverCssValue,
+
+
+        backToTopGlobalTypoOption,
+        backToTopFontFamily,
+        backToTopFontSize,
+        backToTopFontSizeUnits,
+        backToTopFontWeight,
+        backToTopFontStyle,
+        backToTopTextTransform,
+        backToTopTextDecoration,
+        backToTopLetterSpacing,
+        backToTopLetterSpacingUnits,
+        backToTopLineHeight,
+        backToTopLineHeightUnits,
+        backToTopGlobalTypoSwitcher,
+        backToTopGlobalTypoType,
+        backToTopGlobalTypographyData,
+
+        backToTopBgColorSwitcher,
+        backToTopNormalBackgroundType,
+        backToTopNormalClassicColor,
+        backToTopNormalGradientColor,
+        backToTopNormalCustomGradientSwitcher,
+        backToTopNormalCustomGradientInputValue,
+        backToTopHoverBackgroundType,
+        backToTopHoverClassicColor,
+        backToTopHoverGradientColor,
+        backToTopHoverCustomGradientSwitcher,
+        backToTopHoverCustomGradientInputValue,
+
+    } = attributes;
+
+    const deviceType = useDeviceType();
+
+    /** Start Border Controls */
+    const backToTopBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (backToTopBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ backToTopBorderDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ backToTopBorderTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ backToTopBorderMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ backToTopBorderDesktop: { ...backToTopBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ backToTopBorderTablet: { ...backToTopBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ backToTopBorderMobile: { ...backToTopBorderMobile, [position]: value } });
+                    break;
+            }
+        }
+    };
+
+    const backToTopBorderLinkBtn = () => {
+        setAttributes({ backToTopBorderLink: !backToTopBorderLink });
+    };
+
+    const backToTopBorderUnitsHandler = (unit) => {
+        setAttributes({
+            backToTopBorderUnits: {
+                ...backToTopBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Border Controls */
+
+    /** Start Border Radius Controls */
+    const backToTopBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (backToTopBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ backToTopBorderRadiusDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ backToTopBorderRadiusTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ backToTopBorderRadiusMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ backToTopBorderRadiusDesktop: { ...backToTopBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ backToTopBorderRadiusTablet: { ...backToTopBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ backToTopBorderRadiusMobile: { ...backToTopBorderRadiusMobile, [position]: value } });
+                    break;
+            }
+        }
+    };
+
+    const backToTopBorderRadiusLinkBtn = () => {
+        setAttributes({ backToTopBorderRadiusLink: !backToTopBorderRadiusLink });
+    };
+
+    const backToTopBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            backToTopBorderRadiusUnits: {
+                ...backToTopBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Border Radius Controls */
 
     /**
      * Inspector General Controls
@@ -147,57 +288,48 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ backToTopContentType: value })}
                 />
 
-                {
-                    backToTopContentType !== "text" && (
-                        <SelectControl
-                            label={__('Icon Type', 'frontis-blocks')}
-                            value={backToTopIconType}
-                            options={[
-                                { label: __('Icon', 'frontis-blocks'), value: 'icon' },
-                                { label: __('Image', 'frontis-blocks'), value: 'image' },
+                {backToTopContentType !== 'text' && (
+                    <SelectControl
+                        label={__('Icon Type', 'frontis-blocks')}
+                        value={backToTopIconType}
+                        options={[
+                            { label: __('Icon', 'frontis-blocks'), value: 'icon' },
+                            { label: __('Image', 'frontis-blocks'), value: 'image' },
+                        ]}
+                        onChange={(value) => setAttributes({ backToTopIconType: value })}
+                    />
+                )}
 
-                            ]}
-                            onChange={(value) => setAttributes({ backToTopIconType: value })}
-                        />
-                    )
-                }
-
-                {
-                    backToTopIconType === "icon" && (
-                        <FBIconPicker
-                            value={backToTopIcon}
-                            setIconHandler={(value) => setAttributes({ backToTopIcon: value })}
-                        />
-                    )
-                }
+                {backToTopContentType !== 'text' && backToTopIconType === 'icon' && (
+                    <FBIconPicker
+                        value={backToTopIcon}
+                        setIconHandler={(value) => setAttributes({ backToTopIcon: value })}
+                    />
+                )}
 
 
-                {
-                    backToTopIconType === "image" && (
-                        <FB_ImageControl
-                            label={__("Select Image", "frontis-blocks")}
-                            globalImageUrl={backToTopImage}
-                            setglobalImageUrl={(value) => setAttributes({ backToTopImage: value })}
-                            globalImageAlt={backToTopImageAlt}
-                            setglobalImageAlt={(value) => setAttributes({ backToTopImageAlt: value })}
-                            globalImageID={backToTopImageID}
-                            setglobalImageID={(value) => setAttributes({ backToTopImageID: value })}
-                            isImageSize={false}
-                        />
-                    )
-                }
+                {backToTopContentType !== 'text' && backToTopIconType === 'image' && (
+                    <FB_ImageControl
+                        label={__("Select Image", "frontis-blocks")}
+                        globalImageUrl={backToTopImage}
+                        setglobalImageUrl={(value) => setAttributes({ backToTopImage: value })}
+                        globalImageAlt={backToTopImageAlt}
+                        setglobalImageAlt={(value) => setAttributes({ backToTopImageAlt: value })}
+                        globalImageID={backToTopImageID}
+                        setglobalImageID={(value) => setAttributes({ backToTopImageID: value })}
+                        isImageSize={false}
+                    />
+                )}
 
-                {
-                    (backToTopContentType === "text" || backToTopContentType === "text-icon") && (
-                        <TextControl
-                            label={__("Text", "frontis-blocks")}
-                            value={backToTopText}
-                            onChange={(value) => setAttributes({ backToTopText: value })}
-                            className="fb-back-to-top-text-control"
-                            help={__('Enter the back to top button text ', 'frontis-blocks')}
-                        />
-                    )
-                }
+                {backToTopContentType !== 'icon' && (
+                    <TextControl
+                        label={__("Text", "frontis-blocks")}
+                        value={backToTopText}
+                        onChange={(value) => setAttributes({ backToTopText: value })}
+                        className="fb-back-to-top-text-control"
+                        help={__('Enter the back to top button text ', 'frontis-blocks')}
+                    />
+                )}
 
 
             </PanelBody>
@@ -211,6 +343,286 @@ const Inspector = ({ attributes, setAttributes }) => {
     const styleControls = (
         <>
 
+            <PanelBody
+                title={__("Back To Top Button", "frontis-blocks")}
+                initialOpen={true}
+            >
+
+                {backToTopContentType === 'text-icon' && (<SelectControl
+                    label={__('Content Direction', 'frontis-blocks')}
+                    value={backToTopContentDirection}
+                    options={[
+                        { label: __('Row', 'frontis-blocks'), value: 'row' },
+                        { label: __('Column', 'frontis-blocks'), value: 'column' },
+                    ]}
+                    onChange={(value) => setAttributes({ backToTopContentDirection: value })}
+                />
+                )}
+
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={backToTopGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) =>
+                        setAttributes({
+                            backToTopGlobalTypographyData: value,
+                        })
+                    }
+                    globalTypoType={backToTopGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            backToTopGlobalTypoType: value,
+                            backToTopGlobalTypoSwitcher:
+                                value === "default"
+                                    ? {
+                                        ...backToTopGlobalTypoSwitcher,
+                                        fontFamily: false,
+                                        fontSize: false,
+                                        fontWeight: false,
+                                        fontStyle: false,
+                                        textTransform: false,
+                                        textDecoration: false,
+                                        letterSpacing: false,
+                                        lineHeight: false,
+                                    }
+                                    : {
+                                        ...backToTopGlobalTypoSwitcher,
+                                        fontFamily: true,
+                                        fontSize: true,
+                                        fontWeight: true,
+                                        fontStyle: true,
+                                        textTransform: true,
+                                        textDecoration: true,
+                                        letterSpacing: true,
+                                        lineHeight: true,
+                                    },
+                        });
+                    }}
+                    globalTypoOption={backToTopGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) =>
+                        setAttributes({ backToTopGlobalTypoOption: value })
+                    }
+                    fontFamily={backToTopFontFamily}
+                    onChangeFontFamily={(value) =>
+                        setAttributes({
+                            backToTopFontFamily: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                fontFamily: value && false,
+                            },
+                        })
+                    }
+                    fontSize={backToTopFontSize}
+                    onChangeFontSize={(value) =>
+                        setAttributes({
+                            backToTopFontSize: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                fontSize: value && false,
+                            },
+                        })
+                    }
+                    fontSizeUnits={backToTopFontSizeUnits}
+                    onChangeFontSizeUnit={(value) =>
+                        setAttributes({ backToTopFontSizeUnits: value })
+                    }
+                    fontWeight={backToTopFontWeight}
+                    onChangeFontWeight={(value) =>
+                        setAttributes({
+                            backToTopFontWeight: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                fontWeight: value && false,
+                            },
+                        })
+                    }
+                    fontStyle={backToTopFontStyle}
+                    onChangeFontStyle={(value) =>
+                        setAttributes({
+                            backToTopFontStyle: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                fontStyle: value && false,
+                            },
+                        })
+                    }
+                    textTransform={backToTopTextTransform}
+                    onChangeTextTransform={(value) =>
+                        setAttributes({
+                            backToTopTextTransform: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                textTransform: value && false,
+                            },
+                        })
+                    }
+                    textDecoration={backToTopTextDecoration}
+                    onChangeTextDecoration={(value) =>
+                        setAttributes({
+                            backToTopTextDecoration: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                textDecoration: value && false,
+                            },
+                        })
+                    }
+                    letterSpacing={backToTopLetterSpacing}
+                    onChangeLetterSpacing={(value) =>
+                        setAttributes({
+                            backToTopLetterSpacing: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                letterSpacing: value && false,
+                            },
+                        })
+                    }
+                    letterSpacingUnits={backToTopLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) =>
+                        setAttributes({ backToTopLetterSpacingUnits: value })
+                    }
+                    lineHeight={backToTopLineHeight}
+                    onChangeLineHeight={(value) =>
+                        setAttributes({
+                            backToTopLineHeight: value,
+                            backToTopGlobalTypoSwitcher: {
+                                ...backToTopGlobalTypoSwitcher,
+                                lineHeight: value && false,
+                            },
+                        })
+                    }
+                    lineHeightUnits={backToTopLineHeightUnits}
+                    onChangeLineHeightUnit={(value) =>
+                        setAttributes({ backToTopLineHeightUnits: value })
+                    }
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={backToTopBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ backToTopBgColorSwitcher: value })}
+
+                    normalBackgroundType={backToTopNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ backToTopNormalBackgroundType: value })}
+                    normalClassicColor={backToTopNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ backToTopNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={backToTopNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ backToTopNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={backToTopNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ backToTopNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={backToTopNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ backToTopNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={backToTopHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ backToTopHoverBackgroundType: value })}
+                    hoverClassicColor={backToTopHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ backToTopHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={backToTopHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ backToTopHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={backToTopHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ backToTopHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={backToTopHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={backToTopBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ backToTopBorder: value })}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={backToTopBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ backToTopBorderColorSwitcher: value })}
+                />
+
+                {backToTopBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={backToTopBorderColor}
+                        setGlobalColor={(value) => setAttributes({ backToTopBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {backToTopBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={backToTopBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ backToTopBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={backToTopBorderUnitsHandler}
+                    spacingUnits={backToTopBorderUnits}
+                    spacingDesktop={backToTopBorderDesktop}
+                    spacingTablet={backToTopBorderTablet}
+                    spacingMobile={backToTopBorderMobile}
+                    handleSpacingUnitHandler={backToTopBorderUnitsChange}
+                    spacingCombineBtn={backToTopBorderLink}
+                    spacingCombineBtnHandler={backToTopBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={backToTopBorderRadiusUnitsHandler}
+                    spacingUnits={backToTopBorderRadiusUnits}
+                    spacingDesktop={backToTopBorderRadiusDesktop}
+                    spacingTablet={backToTopBorderRadiusTablet}
+                    spacingMobile={backToTopBorderRadiusMobile}
+                    handleSpacingUnitHandler={backToTopBorderRadiusUnitsChange}
+                    spacingCombineBtn={backToTopBorderRadiusLink}
+                    spacingCombineBtnHandler={backToTopBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={backToTopBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ backToTopBoxShadowSwitcher: value })}
+                />
+
+                {backToTopBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ backToTopBoxShadowValues: value })}
+                        initialShadowValue={backToTopBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ backToTopBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {backToTopBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ backToTopBoxShadowHoverValues: value })}
+                        initialShadowValue={backToTopBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ backToTopBoxShadowHoverCssValue: value })}
+                    />
+                )}
+
+
+            </PanelBody>
+
+            <PanelBody
+                title={__("Icon / Image", "frontis-blocks")}
+                initialOpen={false}
+            >
+
+
+            </PanelBody>
         </>
     );
 
@@ -229,7 +641,7 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             <FB_InspectorControls
                 generalControls={generalControls}
-            // styleControls={styleControls}
+                styleControls={styleControls}
             // advancedControls={advancedControls}
             />
 

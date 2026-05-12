@@ -32,13 +32,15 @@
     &.fb-show {
         opacity: 1;
         visibility: visible;
-        
+
         &.fb-animation-slide-up {
             transform: translateY(0);
         }
+
         &.fb-animation-zoom-in {
             transform: scale(1);
         }
+
         &.fb-animation-bounce-in {
             transform: scale(1);
             animation: fb-bounce-in 0.5s ease;
@@ -49,9 +51,11 @@
     &.fb-animation-slide-up:not(.fb-show) {
         transform: translateY(30px);
     }
+
     &.fb-animation-zoom-in:not(.fb-show) {
         transform: scale(0.5);
     }
+
     &.fb-animation-bounce-in:not(.fb-show) {
         transform: scale(0);
     }
@@ -67,16 +71,63 @@
         transform: none !important;
     }
 
-    span {
-        font-size: 16px;
-        font-weight: 700;
-        color: white;
+    .fb-back-to-top-content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+
+        .fb-back-to-top-image-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: white;
+            }
+
+            i {
+                font-size: 15px;
+                color: white;
+            }
+
+        }
+
+        span {
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
     }
 }
 
 @keyframes fb-bounce-in {
-    0% { transform: scale(0.3); opacity: 0; }
-    50% { transform: scale(1.05); opacity: 1; }
-    70% { transform: scale(0.9); }
-    100% { transform: scale(1); }
-}
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
