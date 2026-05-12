@@ -66,53 +66,45 @@ import './editor.scss';
 const Inspector = ({ attributes, setAttributes }) => {
 
     const {
+        blockID,
+
         backToTopPresetType,
-        backToTopPosition,
-        backToTopEntranceAnimation,
         backToTopContentType,
         backToTopIcon,
         backToTopIconType,
         backToTopImage,
         backToTopImageAlt,
         backToTopText,
-        backToTopContentDirection,
-        backToTopImageID,
+
+        backToTopPaddingUnits,
+        backToTopPaddingDesktop,
+        backToTopPaddingTablet,
+        backToTopPaddingMobile,
+        backToTopPaddingLink,
+
         backToTopBorder,
+        backToTopBorderColorSwitcher,
         backToTopBorderColor,
         backToTopBorderHoverColor,
-        backToTopBorderColorSwitcher,
+
         backToTopBorderUnits,
         backToTopBorderDesktop,
         backToTopBorderTablet,
         backToTopBorderMobile,
         backToTopBorderLink,
+
         backToTopBorderRadiusUnits,
         backToTopBorderRadiusDesktop,
         backToTopBorderRadiusTablet,
         backToTopBorderRadiusMobile,
         backToTopBorderRadiusLink,
+
         backToTopBoxShadowSwitcher,
         backToTopBoxShadowValues,
         backToTopBoxShadowCssValue,
         backToTopBoxShadowHoverValues,
         backToTopBoxShadowHoverCssValue,
-
-
-        backToTopGlobalTypoOption,
-        backToTopFontFamily,
-        backToTopFontSize,
-        backToTopFontSizeUnits,
-        backToTopFontWeight,
-        backToTopFontStyle,
-        backToTopTextTransform,
-        backToTopTextDecoration,
-        backToTopLetterSpacing,
-        backToTopLetterSpacingUnits,
-        backToTopLineHeight,
-        backToTopLineHeightUnits,
-        backToTopGlobalTypoSwitcher,
-        backToTopGlobalTypoType,
-        backToTopGlobalTypographyData,
+        backToTopGlobalZIndex,
 
         backToTopBgColorSwitcher,
         backToTopNormalBackgroundType,
@@ -126,9 +118,105 @@ const Inspector = ({ attributes, setAttributes }) => {
         backToTopHoverCustomGradientSwitcher,
         backToTopHoverCustomGradientInputValue,
 
+        backToTopGlobalTypoSwitcher,
+        backToTopGlobalTypographyData,
+        backToTopGlobalTypoType,
+        backToTopGlobalTypoOption,
+        backToTopFontFamily,
+        backToTopFontSize,
+        backToTopFontSizeUnits,
+        backToTopFontWeight,
+        backToTopFontStyle,
+        backToTopTextTransform,
+        backToTopTextDecoration,
+        backToTopLetterSpacing,
+        backToTopLineHeight,
+        backToTopLetterSpacingUnits,
+        backToTopLineHeightUnits,
+
+        backToTopPosition,
+        backToTopEntranceAnimation,
+        backToTopContentDirection,
+        backToTopCustomCSS,
+        backToTopWraperID,
+        backToTopWraperClass,
+
     } = attributes;
 
     const deviceType = useDeviceType();
+
+
+    /** Start Google Map Padding */
+    const backToTopPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (backToTopPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        backToTopPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        backToTopPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        backToTopPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ backToTopPaddingDesktop: { ...backToTopPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ backToTopPaddingTablet: { ...backToTopPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ backToTopPaddingMobile: { ...backToTopPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const backToTopPaddingLinkBtn = () => {
+        setAttributes({
+            backToTopPaddingLink: !backToTopPaddingLink
+        });
+    };
+
+    const backToTopPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            backToTopPaddingUnits: {
+                ...backToTopPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Google Map Padding */
+
 
     /** Start Border Controls */
     const backToTopBorderUnitsChange = (event, position) => {
@@ -347,6 +435,20 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("Back To Top Button", "frontis-blocks")}
                 initialOpen={true}
             >
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={backToTopPaddingUnitsHandler}
+                    spacingUnits={backToTopPaddingUnits}
+                    spacingDesktop={backToTopPaddingDesktop}
+                    spacingTablet={backToTopPaddingTablet}
+                    spacingMobile={backToTopPaddingMobile}
+                    handleSpacingUnitHandler={backToTopPaddingUnitsChange}
+                    spacingCombineBtn={backToTopPaddingLink}
+                    spacingCombineBtnHandler={backToTopPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
 
                 {backToTopContentType === 'text-icon' && (<SelectControl
                     label={__('Content Direction', 'frontis-blocks')}
