@@ -26,19 +26,21 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className=" fb-back-to-top-inner-wrapper ">
-                    <div className=" fb-back-to-top-content-wrapper " >
-                        {(backToTopContentType === "icon" || backToTopContentType === "text-icon") && (
-                            <div className="fb-back-to-top-image-wrapper">
-                                {backToTopIconType === "icon" && renderSVG(backToTopIcon)}
-                                {backToTopIconType === "image" && backToTopImage && (
-                                    <img src={backToTopImage} alt={backToTopImageAlt} />
-                                )}
-                            </div>
-                        )}
-                        {(backToTopContentType === "text" || backToTopContentType === "text-icon") && (
-                            <span>{backToTopText}</span>
-                        )}
+                <div className='fb-back-to-top-wrapper'>
+                    <div className=" fb-back-to-top-inner-wrapper ">
+                        <div className=" fb-back-to-top-content-wrapper " >
+                            {(backToTopContentType === "icon" || backToTopContentType === "text-icon") && (
+                                <div className="fb-back-to-top-image-wrapper">
+                                    {backToTopIconType === "icon" && renderSVG(backToTopIcon)}
+                                    {backToTopIconType === "image" && backToTopImage && (
+                                        <img src={backToTopImage} alt={backToTopImageAlt} />
+                                    )}
+                                </div>
+                            )}
+                            {(backToTopContentType === "text" || backToTopContentType === "text-icon") && (
+                                <span>{backToTopText}</span>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -9,6 +9,10 @@ const attributes = {
         type: "string",
         default: "",
     },
+    deviceType: {
+        type: "string",
+        default: "Desktop"
+    },
     backToTopPresetType: {
         type: "string",
         default: "0",
@@ -52,21 +56,21 @@ const attributes = {
         type: "string",
         default: "row",
     },
+
+    /** Start Border */
     backToTopBorder: {
         type: "string",
-        default: "solid",
-    },
-    backToTopBorderColor: {
-        type: "string",
-        default: "",
-    },
-    backToTopBorderHoverColor: {
-        type: "string",
-        default: "",
+        default: "none",
     },
     backToTopBorderColorSwitcher: {
         type: "string",
         default: "normal",
+    },
+    backToTopBorderColor: {
+        type: "string",
+    },
+    backToTopBorderHoverColor: {
+        type: "string",
     },
     backToTopBorderUnits: {
         type: "object",
@@ -79,34 +83,37 @@ const attributes = {
     backToTopBorderDesktop: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderTablet: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderMobile: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderLink: {
         type: "boolean",
-        default: false,
+        default: true,
     },
+    /** End Border */
+
+    /** Start Border Radius */
     backToTopBorderRadiusUnits: {
         type: "object",
         default: {
@@ -118,37 +125,44 @@ const attributes = {
     backToTopBorderRadiusDesktop: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderRadiusTablet: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderRadiusMobile: {
         type: "object",
         default: {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
         },
     },
     backToTopBorderRadiusLink: {
         type: "boolean",
-        default: false,
+        default: true,
+    },
+    /** End Border Radius */
+
+    /** Start Box Shadow */
+    backToTopBoxShadowSwitcher: {
+        type: "string",
+        default: "normal",
     },
     backToTopBoxShadowValues: {
         type: "array",
-        default: [0, 0, 0, 0, '', '#00000000'],
+        default: [],
     },
     backToTopBoxShadowCssValue: {
         type: "string",
@@ -156,17 +170,15 @@ const attributes = {
     },
     backToTopBoxShadowHoverValues: {
         type: "array",
-        default: [0, 0, 0, 0, '', '#00000000'],
+        default: [],
     },
     backToTopBoxShadowHoverCssValue: {
         type: "string",
         default: "",
     },
-    backToTopBoxShadowSwitcher: {
-        type: "string",
-        default: "normal",
-    },
+    /** End Box Shadow */
 
+    /** Start Typography */
     backToTopGlobalTypographyData: {
         type: 'object',
         default: {}
@@ -194,14 +206,14 @@ const attributes = {
     },
     backToTopFontFamily: {
         type: 'string',
-        default: '',
+        default: 'Default',
     },
     backToTopFontSize: {
         type: 'object',
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
         }
     },
     backToTopFontSizeUnits: {
@@ -214,7 +226,7 @@ const attributes = {
     },
     backToTopFontWeight: {
         type: 'string',
-        default: '',
+        default: '700',
     },
     backToTopFontStyle: {
         type: 'string',
@@ -260,6 +272,7 @@ const attributes = {
             Mobile: 'px',
         }
     },
+    /** End Typography */
 
     /** Start Background */
     backToTopBgColorSwitcher: {
@@ -308,6 +321,72 @@ const attributes = {
         default: "",
     },
     /** End Background */
+
+    /** Start Padding */
+    backToTopPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    backToTopPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    backToTopPaddingTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    backToTopPaddingMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    backToTopPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Padding */
+
+    /** Start Class & ID Setting */
+    backToTopCustomCSS: {
+        type: "string",
+        default: "",
+    },
+    backToTopWraperID: {
+        type: "string",
+        default: ""
+    },
+
+    backToTopWraperClass: {
+        type: "string",
+        default: ""
+    },
+    /** End Class & ID Setting */
+    backToTopGlobalZIndex: {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        },
+    },
 
 };
 
