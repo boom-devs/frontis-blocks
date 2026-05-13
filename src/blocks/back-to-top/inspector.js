@@ -74,6 +74,7 @@ const Inspector = ({ attributes, setAttributes }) => {
         backToTopIconType,
         backToTopImage,
         backToTopImageAlt,
+        backToTopImageID,
         backToTopText,
 
         backToTopPaddingUnits,
@@ -137,9 +138,31 @@ const Inspector = ({ attributes, setAttributes }) => {
         backToTopPosition,
         backToTopEntranceAnimation,
         backToTopContentDirection,
+
         backToTopCustomCSS,
         backToTopWraperID,
         backToTopWraperClass,
+
+        backToTopHoverZoomEffect,
+        backToTopClickScaleEffect,
+
+        backToTopIconImageSize,
+        backToTopIconImageSizeUnits,
+        backToTopTextIconSpacing,
+        backToTopTextIconSpacingUnits,
+        backToTopIconImagePosition,
+
+        backToTopIconColorTypeSwitcher,
+        backToTopIconColorType,
+        backToTopIconHoverColorType,
+        backToTopIconColor,
+        backToTopIconHoverColor,
+        backToTopIconGradientColor,
+        backToTopIconHoverGradientColor,
+        backToTopIconCustomGradientColorSwitcher,
+        backToTopIconCustomGradientColor,
+        backToTopIconHoverCustomGradientColorSwitcher,
+        backToTopIconHoverCustomGradientColor,
 
     } = attributes;
 
@@ -330,7 +353,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ backToTopPresetType: value })}
                 /> */}
 
-                <SelectControl
+                {/* <SelectControl
                     label={__('Position', 'frontis-blocks')}
                     value={backToTopPosition}
                     options={[
@@ -340,9 +363,23 @@ const Inspector = ({ attributes, setAttributes }) => {
                         { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
                     ]}
                     onChange={(value) => setAttributes({ backToTopPosition: value })}
+                /> */}
+
+                <FB_SwitcherControl
+                    label={__('Position', 'frontis-blocks')}
+                    options={[
+                        { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+                        { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+                        { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+                        { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+                    ]}
+                    globalSwitcher={backToTopPosition}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ backToTopPosition: value })
+                    }
                 />
 
-                <SelectControl
+                {/* <SelectControl
 
                     label={__('Entrance Animation', 'frontis-blocks')}
                     value={backToTopEntranceAnimation}
@@ -354,7 +391,23 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     ]}
                     onChange={(value) => setAttributes({ backToTopEntranceAnimation: value })}
+                /> */}
+
+
+                <FB_SwitcherControl
+                    label={__('Entrance Animation', 'frontis-blocks')}
+                    options={[
+                        { label: __('Fade', 'frontis-blocks'), value: 'fade' },
+                        { label: __('Slide Up', 'frontis-blocks'), value: 'slide-up' },
+                        { label: __('Zoom In', 'frontis-blocks'), value: 'zoom-in' },
+                        { label: __('Bounce In', 'frontis-blocks'), value: 'bounce-in' },
+                    ]}
+                    globalSwitcher={backToTopEntranceAnimation}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ backToTopEntranceAnimation: value })
+                    }
                 />
+
 
             </PanelBody>
 
@@ -363,7 +416,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 initialOpen={false}
             >
 
-                <SelectControl
+                {/* <SelectControl
 
                     label={__('Content Type', 'frontis-blocks')}
                     value={backToTopContentType}
@@ -374,9 +427,22 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                     ]}
                     onChange={(value) => setAttributes({ backToTopContentType: value })}
+                /> */}
+
+                <FB_SwitcherControl
+                    label={__('Content Type', 'frontis-blocks')}
+                    options={[
+                        { label: __('Icon', 'frontis-blocks'), value: 'icon' },
+                        { label: __('Text', 'frontis-blocks'), value: 'text' },
+                        { label: __('Text & Icon', 'frontis-blocks'), value: 'text-icon' },
+                    ]}
+                    globalSwitcher={backToTopContentType}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ backToTopContentType: value })
+                    }
                 />
 
-                {backToTopContentType !== 'text' && (
+                {/* {backToTopContentType !== 'text' && (
                     <SelectControl
                         label={__('Icon Type', 'frontis-blocks')}
                         value={backToTopIconType}
@@ -385,6 +451,20 @@ const Inspector = ({ attributes, setAttributes }) => {
                             { label: __('Image', 'frontis-blocks'), value: 'image' },
                         ]}
                         onChange={(value) => setAttributes({ backToTopIconType: value })}
+                    />
+                )} */}
+
+                {backToTopContentType !== 'text' && (
+                    <FB_SwitcherControl
+                        label={__('Icon Type', 'frontis-blocks')}
+                        options={[
+                            { label: __('Icon', 'frontis-blocks'), value: 'icon' },
+                            { label: __('Image', 'frontis-blocks'), value: 'image' },
+                        ]}
+                        globalSwitcher={backToTopIconType}
+                        setGlobalSwitcher={(value) =>
+                            setAttributes({ backToTopIconType: value })
+                        }
                     />
                 )}
 
@@ -450,154 +530,169 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setAttributes={setAttributes}
                 />
 
-                {backToTopContentType === 'text-icon' && (<SelectControl
-                    label={__('Content Direction', 'frontis-blocks')}
-                    value={backToTopContentDirection}
-                    options={[
-                        { label: __('Row', 'frontis-blocks'), value: 'row' },
-                        { label: __('Column', 'frontis-blocks'), value: 'column' },
-                    ]}
-                    onChange={(value) => setAttributes({ backToTopContentDirection: value })}
-                />
+                {backToTopContentType === 'text-icon' && (
+                    // <SelectControl
+                    //     label={__('Content Direction', 'frontis-blocks')}
+                    //     value={backToTopContentDirection}
+                    //     options={[
+                    //         { label: __('Row', 'frontis-blocks'), value: 'row' },
+                    //         { label: __('Column', 'frontis-blocks'), value: 'column' },
+                    //     ]}
+                    //     onChange={(value) => setAttributes({ backToTopContentDirection: value })}
+                    // />
+
+                    <FB_SwitcherControl
+                        label={__('Content Direction', 'frontis-blocks')}
+                        options={[
+                            { label: __('Row', 'frontis-blocks'), value: 'row' },
+                            { label: __('Column', 'frontis-blocks'), value: 'column' },
+                        ]}
+                        globalSwitcher={backToTopContentDirection}
+                        setGlobalSwitcher={(value) =>
+                            setAttributes({ backToTopContentDirection: value })
+                        }
+                    />
                 )}
 
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={backToTopGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) =>
-                        setAttributes({
-                            backToTopGlobalTypographyData: value,
-                        })
-                    }
-                    globalTypoType={backToTopGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({
-                            backToTopGlobalTypoType: value,
-                            backToTopGlobalTypoSwitcher:
-                                value === "default"
-                                    ? {
-                                        ...backToTopGlobalTypoSwitcher,
-                                        fontFamily: false,
-                                        fontSize: false,
-                                        fontWeight: false,
-                                        fontStyle: false,
-                                        textTransform: false,
-                                        textDecoration: false,
-                                        letterSpacing: false,
-                                        lineHeight: false,
-                                    }
-                                    : {
-                                        ...backToTopGlobalTypoSwitcher,
-                                        fontFamily: true,
-                                        fontSize: true,
-                                        fontWeight: true,
-                                        fontStyle: true,
-                                        textTransform: true,
-                                        textDecoration: true,
-                                        letterSpacing: true,
-                                        lineHeight: true,
-                                    },
-                        });
-                    }}
-                    globalTypoOption={backToTopGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) =>
-                        setAttributes({ backToTopGlobalTypoOption: value })
-                    }
-                    fontFamily={backToTopFontFamily}
-                    onChangeFontFamily={(value) =>
-                        setAttributes({
-                            backToTopFontFamily: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                fontFamily: value && false,
-                            },
-                        })
-                    }
-                    fontSize={backToTopFontSize}
-                    onChangeFontSize={(value) =>
-                        setAttributes({
-                            backToTopFontSize: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                fontSize: value && false,
-                            },
-                        })
-                    }
-                    fontSizeUnits={backToTopFontSizeUnits}
-                    onChangeFontSizeUnit={(value) =>
-                        setAttributes({ backToTopFontSizeUnits: value })
-                    }
-                    fontWeight={backToTopFontWeight}
-                    onChangeFontWeight={(value) =>
-                        setAttributes({
-                            backToTopFontWeight: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                fontWeight: value && false,
-                            },
-                        })
-                    }
-                    fontStyle={backToTopFontStyle}
-                    onChangeFontStyle={(value) =>
-                        setAttributes({
-                            backToTopFontStyle: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                fontStyle: value && false,
-                            },
-                        })
-                    }
-                    textTransform={backToTopTextTransform}
-                    onChangeTextTransform={(value) =>
-                        setAttributes({
-                            backToTopTextTransform: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                textTransform: value && false,
-                            },
-                        })
-                    }
-                    textDecoration={backToTopTextDecoration}
-                    onChangeTextDecoration={(value) =>
-                        setAttributes({
-                            backToTopTextDecoration: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                textDecoration: value && false,
-                            },
-                        })
-                    }
-                    letterSpacing={backToTopLetterSpacing}
-                    onChangeLetterSpacing={(value) =>
-                        setAttributes({
-                            backToTopLetterSpacing: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                letterSpacing: value && false,
-                            },
-                        })
-                    }
-                    letterSpacingUnits={backToTopLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) =>
-                        setAttributes({ backToTopLetterSpacingUnits: value })
-                    }
-                    lineHeight={backToTopLineHeight}
-                    onChangeLineHeight={(value) =>
-                        setAttributes({
-                            backToTopLineHeight: value,
-                            backToTopGlobalTypoSwitcher: {
-                                ...backToTopGlobalTypoSwitcher,
-                                lineHeight: value && false,
-                            },
-                        })
-                    }
-                    lineHeightUnits={backToTopLineHeightUnits}
-                    onChangeLineHeightUnit={(value) =>
-                        setAttributes({ backToTopLineHeightUnits: value })
-                    }
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
+                {backToTopContentType !== 'icon' && (
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={backToTopGlobalTypoSwitcher}
+                        storeGlobalTypographyData={(value) =>
+                            setAttributes({
+                                backToTopGlobalTypographyData: value,
+                            })
+                        }
+                        globalTypoType={backToTopGlobalTypoType}
+                        onChangeGlobalTypoType={(value) => {
+                            setAttributes({
+                                backToTopGlobalTypoType: value,
+                                backToTopGlobalTypoSwitcher:
+                                    value === "default"
+                                        ? {
+                                            ...backToTopGlobalTypoSwitcher,
+                                            fontFamily: false,
+                                            fontSize: false,
+                                            fontWeight: false,
+                                            fontStyle: false,
+                                            textTransform: false,
+                                            textDecoration: false,
+                                            letterSpacing: false,
+                                            lineHeight: false,
+                                        }
+                                        : {
+                                            ...backToTopGlobalTypoSwitcher,
+                                            fontFamily: true,
+                                            fontSize: true,
+                                            fontWeight: true,
+                                            fontStyle: true,
+                                            textTransform: true,
+                                            textDecoration: true,
+                                            letterSpacing: true,
+                                            lineHeight: true,
+                                        },
+                            });
+                        }}
+                        globalTypoOption={backToTopGlobalTypoOption}
+                        onChangeGlobalTypoOption={(value) =>
+                            setAttributes({ backToTopGlobalTypoOption: value })
+                        }
+                        fontFamily={backToTopFontFamily}
+                        onChangeFontFamily={(value) =>
+                            setAttributes({
+                                backToTopFontFamily: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    fontFamily: value && false,
+                                },
+                            })
+                        }
+                        fontSize={backToTopFontSize}
+                        onChangeFontSize={(value) =>
+                            setAttributes({
+                                backToTopFontSize: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    fontSize: value && false,
+                                },
+                            })
+                        }
+                        fontSizeUnits={backToTopFontSizeUnits}
+                        onChangeFontSizeUnit={(value) =>
+                            setAttributes({ backToTopFontSizeUnits: value })
+                        }
+                        fontWeight={backToTopFontWeight}
+                        onChangeFontWeight={(value) =>
+                            setAttributes({
+                                backToTopFontWeight: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    fontWeight: value && false,
+                                },
+                            })
+                        }
+                        fontStyle={backToTopFontStyle}
+                        onChangeFontStyle={(value) =>
+                            setAttributes({
+                                backToTopFontStyle: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    fontStyle: value && false,
+                                },
+                            })
+                        }
+                        textTransform={backToTopTextTransform}
+                        onChangeTextTransform={(value) =>
+                            setAttributes({
+                                backToTopTextTransform: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    textTransform: value && false,
+                                },
+                            })
+                        }
+                        textDecoration={backToTopTextDecoration}
+                        onChangeTextDecoration={(value) =>
+                            setAttributes({
+                                backToTopTextDecoration: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    textDecoration: value && false,
+                                },
+                            })
+                        }
+                        letterSpacing={backToTopLetterSpacing}
+                        onChangeLetterSpacing={(value) =>
+                            setAttributes({
+                                backToTopLetterSpacing: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    letterSpacing: value && false,
+                                },
+                            })
+                        }
+                        letterSpacingUnits={backToTopLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) =>
+                            setAttributes({ backToTopLetterSpacingUnits: value })
+                        }
+                        lineHeight={backToTopLineHeight}
+                        onChangeLineHeight={(value) =>
+                            setAttributes({
+                                backToTopLineHeight: value,
+                                backToTopGlobalTypoSwitcher: {
+                                    ...backToTopGlobalTypoSwitcher,
+                                    lineHeight: value && false,
+                                },
+                            })
+                        }
+                        lineHeightUnits={backToTopLineHeightUnits}
+                        onChangeLineHeightUnit={(value) =>
+                            setAttributes({ backToTopLineHeightUnits: value })
+                        }
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
+                )}
 
                 <FB_BackgroundColorControl
                     label={__("Background Color", "frontis-blocks")}
@@ -641,6 +736,10 @@ const Inspector = ({ attributes, setAttributes }) => {
 
                 <FB_SwitcherControl
                     label={__("Border Color", "frontis-blocks")}
+                    options={[
+                        { label: __('Normal', 'frontis-blocks'), value: 'normal' },
+                        { label: __('Hover', 'frontis-blocks'), value: 'hover' },
+                    ]}
                     globalSwitcher={backToTopBorderColorSwitcher}
                     setGlobalSwitcher={(value) => setAttributes({ backToTopBorderColorSwitcher: value })}
                 />
@@ -715,16 +814,117 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
+                <FB_Range
+                    min={0}
+                    max={2}
+                    label={__("Hover Zoom Effect", "frontis-blocks")}
+                    rangeValue={backToTopHoverZoomEffect}
+                    onChangeHandler={(value) => setAttributes({ backToTopHoverZoomEffect: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={0.01}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+
+                <FB_Range
+                    min={0}
+                    max={1}
+                    label={__("Click Scale Effect", "frontis-blocks")}
+                    rangeValue={backToTopClickScaleEffect}
+                    onChangeHandler={(value) => setAttributes({ backToTopClickScaleEffect: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={0.01}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+
 
             </PanelBody>
 
-            <PanelBody
-                title={__("Icon / Image", "frontis-blocks")}
-                initialOpen={false}
-            >
+            {backToTopContentType !== 'text' && (
+                <PanelBody
+                    title={__("Icon / Image", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Icon / Image Size", "frontis-blocks")}
+                        rangeValue={backToTopIconImageSize}
+                        onChangeHandler={(value) => setAttributes({ backToTopIconImageSize: { ...backToTopIconImageSize, [deviceType]: value === 0 ? undefined : value } })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
+                    />
 
+                    {backToTopContentType == 'text-icon' && (
+                        <FB_Range
+                            min={0}
+                            max={100}
+                            label={__("Spacing", "frontis-blocks")}
+                            rangeValue={backToTopTextIconSpacing}
+                            onChangeHandler={(value) => setAttributes({ backToTopTextIconSpacing: { ...backToTopTextIconSpacing, [deviceType]: value === 0 ? undefined : value } })}
+                            deviceType={deviceType}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                            isRangeUnit={false}
+                        />
+                    )}
 
-            </PanelBody>
+                    {backToTopContentType == 'text-icon' && (
+                        <FB_SwitcherControl
+                            label={__('Icon / Image Position', 'frontis-blocks')}
+                            options={[
+                                { label: __('Left', 'frontis-blocks'), value: 'left' },
+                                { label: __('Right', 'frontis-blocks'), value: 'right' },
+                            ]}
+                            globalSwitcher={backToTopIconImagePosition}
+                            setGlobalSwitcher={(value) => setAttributes({ backToTopIconImagePosition: value })}
+                        />
+                    )}
+
+                    {backToTopIconType == 'icon' && (
+                        <FB_BackgroundColorControl
+                            label={__("Icon Color", "frontis-blocks")}
+                            bgColorSwitcher={backToTopIconColorTypeSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ backToTopIconColorTypeSwitcher: value })}
+
+                            normalLabel={__("Icon Color Type", "frontis-blocks")}
+                            normalBackgroundType={backToTopIconColorType}
+                            setNormalBackgroundType={(value) => setAttributes({ backToTopIconColorType: value })}
+                            normalClassicColor={backToTopIconColor}
+                            setNormalClassicColor={(value) => setAttributes({ backToTopIconColor: value === undefined ? '' : value })}
+                            normalGradientColor={backToTopIconGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ backToTopIconGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={backToTopIconCustomGradientColorSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ backToTopIconCustomGradientColorSwitcher: value })}
+                            normalCustomGradientInputValue={backToTopIconCustomGradientColor}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ backToTopIconCustomGradientColor: value === undefined ? null : value })}
+
+                            hoverLabel={__("Icon Hover Color Type", "frontis-blocks")}
+                            hoverBackgroundType={backToTopIconHoverColorType}
+                            setHoverBackgroundType={(value) => setAttributes({ backToTopIconHoverColorType: value })}
+                            hoverClassicColor={backToTopIconHoverColor}
+                            setHoverClassicColor={(value) => setAttributes({ backToTopIconHoverColor: value === undefined ? '' : value })}
+                            hoverGradientColor={backToTopIconHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ backToTopIconHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={backToTopIconHoverCustomGradientColorSwitcher}
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ backToTopIconHoverCustomGradientColorSwitcher: value })}
+                            hoverCustomGradientInputValue={backToTopIconHoverCustomGradientColor}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopIconHoverCustomGradientColor: value === undefined ? null : value })}
+
+                            isBackgroundImage={false}
+
+                        />
+                    )}
+
+                </PanelBody>
+            )}
         </>
     );
 
@@ -734,9 +934,51 @@ const Inspector = ({ attributes, setAttributes }) => {
     const advancedControls = (
         <>
 
+            <PanelBody
+                title={__("Layout", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <FB_Range
+                    min={0}
+                    max={10000000}
+                    label={__("Z Index", "frontis-blocks")}
+                    rangeValue={backToTopGlobalZIndex}
+                    onChangeHandler={(value) => setAttributes({ backToTopGlobalZIndex: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+
+                <FB_InputControl
+                    label={__("CSS ID", "frontis-blocks")}
+                    value={backToTopWraperID}
+                    onChangeValue={(value) => setAttributes({ backToTopWraperID: value })}
+                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("CSS Class", "frontis-blocks")}
+                    value={backToTopWraperClass}
+                    onChangeValue={(value) => setAttributes({ backToTopWraperClass: value })}
+                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                />
+            </PanelBody>
+
+            <PanelBody
+                title={__("Custom CSS", "frontis-blocks")}
+                initialOpen={false}
+            >
+                <FB_CustomCSSEditor
+                    value={backToTopCustomCSS}
+                    onChangeValue={(value) => setAttributes({ backToTopCustomCSS: value })}
+                />
+            </PanelBody>
+
+
         </>
     );
-
 
     return (
         <>
@@ -744,7 +986,7 @@ const Inspector = ({ attributes, setAttributes }) => {
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
-            // advancedControls={advancedControls}
+                advancedControls={advancedControls}
             />
 
         </>

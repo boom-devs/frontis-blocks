@@ -65,9 +65,31 @@ const backToTopStyle = (attributes) => {
         backToTopPosition,
         backToTopEntranceAnimation,
         backToTopContentDirection,
+
         backToTopCustomCSS,
         backToTopWraperID,
         backToTopWraperClass,
+
+        backToTopHoverZoomEffect,
+        backToTopClickScaleEffect,
+
+        backToTopIconImagePosition,
+        backToTopIconImageSize,
+        backToTopIconImageSizeUnits,
+        backToTopTextIconSpacing,
+        backToTopTextIconSpacingUnits,
+
+        backToTopIconColorTypeSwitcher,
+        backToTopIconColorType,
+        backToTopIconHoverColorType,
+        backToTopIconColor,
+        backToTopIconHoverColor,
+        backToTopIconGradientColor,
+        backToTopIconHoverGradientColor,
+        backToTopIconCustomGradientColorSwitcher,
+        backToTopIconCustomGradientColor,
+        backToTopIconHoverCustomGradientColorSwitcher,
+        backToTopIconHoverCustomGradientColor,
 
     } = attributes;
 
@@ -102,15 +124,25 @@ const backToTopStyle = (attributes) => {
             `: `
                 ${backToTopNormalClassicColor ? `background: ${backToTopNormalClassicColor};` : ''}
             `}
+             transition: transform 0.3s ease;
         }
 
         .${blockID} .fb-back-to-top-wrapper:hover {
            ${backToTopBoxShadowHoverCssValue ? `box-shadow: ${backToTopBoxShadowHoverCssValue};` : ''}
+           ${backToTopBorderHoverColor ? `border-color: ${backToTopBorderHoverColor};` : ''}
+            ${backToTopHoverZoomEffect?.Desktop !== '' && backToTopHoverZoomEffect?.Desktop !== undefined && backToTopHoverZoomEffect?.Desktop !== null
+            ? `transform: scale(${backToTopHoverZoomEffect.Desktop}) !important;`
+            : ''}
             ${backToTopHoverBackgroundType === 'gradient' ? `
                 ${backToTopHoverCustomGradientSwitcher && backToTopHoverCustomGradientInputValue ? `background: ${backToTopHoverCustomGradientInputValue};` : `background: ${backToTopHoverGradientColor};`}
             `: `
                 ${backToTopHoverClassicColor ? `background: ${backToTopHoverClassicColor};` : ''}
             `}
+        }
+
+        .${blockID} .fb-back-to-top-wrapper:active {
+            ${backToTopClickScaleEffect?.Desktop ? `transform: scale(${backToTopClickScaleEffect.Desktop}) !important;` : ''}
+            transition: transform 0.1s ease;
         }
 
         .${blockID} .fb-back-to-top-content-wrapper span {
@@ -201,14 +233,63 @@ const backToTopStyle = (attributes) => {
         }
        }
 
+        .${blockID} .fb-back-to-top-content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            ${backToTopIconImagePosition === 'right' ? 'flex-direction: row-reverse;' : 'flex-direction: row;'}
+            ${backToTopTextIconSpacing?.Desktop ? `gap: ${backToTopTextIconSpacing?.Desktop}${backToTopTextIconSpacingUnits?.Desktop || 'px'};` : ''}
+        }
+
+        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper i,
+        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper svg,
+        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper img {
+            ${backToTopIconImageSize?.Desktop ? `font-size: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
+            ${backToTopIconImageSize?.Desktop ? `width: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
+            ${backToTopIconImageSize?.Desktop ? `height: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
+            
+            ${backToTopIconColorType === 'gradient' ? `
+                ${backToTopIconCustomGradientColorSwitcher && backToTopIconCustomGradientColor ? `background: ${backToTopIconCustomGradientColor};` : `background: ${backToTopIconGradientColor};`}
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            ` : `
+                ${backToTopIconColor ? `color: ${backToTopIconColor};` : ''}
+            `}
+        }
+
+        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper i,
+        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper svg,
+        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper img {
+            ${backToTopIconHoverColorType === 'gradient' ? `
+                ${backToTopIconHoverCustomGradientColorSwitcher && backToTopIconHoverCustomGradientColor ? `background: ${backToTopIconHoverCustomGradientColor};` : `background: ${backToTopIconHoverGradientColor};`}
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            ` : `
+                ${backToTopIconHoverColor ? `color: ${backToTopIconHoverColor};` : ''}
+            `}
+        }
+
         @media (max-width: 1024px) {
             .${blockID} .fb-back-to-top-wrapper {
                ${backToTopPaddingTabletWidth && backToTopPaddingTablet?.top ? `padding: ${backToTopPaddingTabletWidth};` : ''}
                ${backToTopBorderTabletWidth && backToTopBorderTablet?.top ? `border-width: ${backToTopBorderTabletWidth};` : ''}
                ${backToTopBorderRadiusTabletWidth && backToTopBorderRadiusTablet?.top ? `border-radius: ${backToTopBorderRadiusTabletWidth};` : ''}
             }
-            .${blockID} .fb-back-to-top-content-wrapper span {
-            
+            .${blockID} .fb-back-to-top-wrapper:hover {
+                ${backToTopHoverZoomEffect?.Tablet ? `transform: scale(${backToTopHoverZoomEffect.Tablet}) !important;` : ''}
+            }
+            .${blockID} .fb-back-to-top-wrapper:active {
+                ${backToTopClickScaleEffect?.Tablet ? `transform: scale(${backToTopClickScaleEffect.Tablet}) !important;` : ''}
+            }
+            .${blockID} .fb-back-to-top-content-wrapper {
+                ${backToTopTextIconSpacing?.Tablet ? `gap: ${backToTopTextIconSpacing?.Tablet}${backToTopTextIconSpacingUnits?.Tablet || 'px'};` : ''}
+            }
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper i,
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper svg,
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper img {
+                ${backToTopIconImageSize?.Tablet ? `font-size: ${backToTopIconImageSize?.Tablet}${backToTopIconImageSizeUnits?.Tablet || 'px'};` : ''}
+                ${backToTopIconImageSize?.Tablet ? `width: ${backToTopIconImageSize?.Tablet}${backToTopIconImageSizeUnits?.Tablet || 'px'};` : ''}
+                ${backToTopIconImageSize?.Tablet ? `height: ${backToTopIconImageSize?.Tablet}${backToTopIconImageSizeUnits?.Tablet || 'px'};` : ''}
             }
         }
 
@@ -218,8 +299,21 @@ const backToTopStyle = (attributes) => {
                ${backToTopBorderMobileWidth && backToTopBorderMobile?.top ? `border-width: ${backToTopBorderMobileWidth};` : ''}
                ${backToTopBorderRadiusMobileWidth && backToTopBorderRadiusMobile?.top ? `border-radius: ${backToTopBorderRadiusMobileWidth};` : ''}
             }
-            .${blockID} .fb-back-to-top-content-wrapper span {
-               
+            .${blockID} .fb-back-to-top-wrapper:hover {
+                ${backToTopHoverZoomEffect?.Mobile ? `transform: scale(${backToTopHoverZoomEffect.Mobile}) !important;` : ''}
+            }
+            .${blockID} .fb-back-to-top-wrapper:active {
+                ${backToTopClickScaleEffect?.Mobile ? `transform: scale(${backToTopClickScaleEffect.Mobile}) !important;` : ''}
+            }
+            .${blockID} .fb-back-to-top-content-wrapper {
+                ${backToTopTextIconSpacing?.Mobile ? `gap: ${backToTopTextIconSpacing?.Mobile}${backToTopTextIconSpacingUnits?.Mobile || 'px'};` : ''}
+            }
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper i,
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper svg,
+            .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper img {
+                ${backToTopIconImageSize?.Mobile ? `font-size: ${backToTopIconImageSize?.Mobile}${backToTopIconImageSizeUnits?.Mobile || 'px'};` : ''}
+                ${backToTopIconImageSize?.Mobile ? `width: ${backToTopIconImageSize?.Mobile}${backToTopIconImageSizeUnits?.Mobile || 'px'};` : ''}
+                ${backToTopIconImageSize?.Mobile ? `height: ${backToTopIconImageSize?.Mobile}${backToTopIconImageSizeUnits?.Mobile || 'px'};` : ''}
             }
         }
     `;

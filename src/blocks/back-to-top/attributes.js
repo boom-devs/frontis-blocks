@@ -379,6 +379,8 @@ const attributes = {
         default: ""
     },
     /** End Class & ID Setting */
+
+    /** Start Global Setting */
     backToTopGlobalZIndex: {
         type: "object",
         default: {
@@ -387,6 +389,111 @@ const attributes = {
             Mobile: ''
         },
     },
+
+    backToTopClickScaleEffect: {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        },
+    },
+
+    backToTopHoverZoomEffect: {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        },
+    },
+
+    /** Start Icon Image Style Setting */
+
+    backToTopIconImageSize: {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        },
+    },
+    backToTopIconImageSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    backToTopTextIconSpacing: {
+        type: "object",
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        },
+    },
+    backToTopTextIconSpacingUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    backToTopIconImagePosition: {
+        type: 'string',
+        default: "left"
+    },
+
+    backToTopIconColorTypeSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    backToTopIconColorType: {
+        type: "string",
+        default: "classic"
+    },
+    backToTopIconHoverColorType: {
+        type: "string",
+        default: "classic"
+    },
+    backToTopIconColor: {
+        type: "string",
+        default: ""
+    },
+    backToTopIconHoverColor: {
+        type: "string",
+        default: ""
+    },
+    backToTopIconGradientColor: {
+        type: "string",
+        default: null
+    },
+    backToTopIconHoverGradientColor: {
+        type: "string",
+        default: null
+    },
+    backToTopIconCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    backToTopIconCustomGradientColor: {
+        type: "string",
+        default: ""
+    },
+    backToTopIconHoverCustomGradientColorSwitcher: {
+        type: "boolean",
+        default: false
+    },
+    backToTopIconHoverCustomGradientColor: {
+        type: "string",
+        default: ""
+    }
+
+    /** End Icon Image Style Setting */
+
 
 };
 
