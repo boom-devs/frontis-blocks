@@ -3,7 +3,7 @@ Contributors: wpmessiah
 Tags: block, blocks, blocks-editor, gutenberg,  gutenberg blocks,
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html 
@@ -247,6 +247,18 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 
 == Changelog ==
+
+= 1.2.3 – 13 May 2026 =
+- **New**: Added Stacked Card block with Pro features support.
+- **Fixed**: Resolved PHP 7.4 compatibility issue in typography CSS selector logic.
+- **Fixed**: Resolved asset generation issue for pages without wp:post-content block.
+- **Fixed**: Ensured customized colors are persisted during full site import.
+- **Fixed**: Resolved Google Fonts loading issues in typography preview iframe.
+- **Fixed**: Resolved various template CSS rendering and generation issues.
+- **Fixed**: Resolved navigation active menu style and logo system issues.
+- **Improved**: Updated Mega Menu icons and optimized for production release.
+- **Improved**: Added automatic asset regeneration when synced patterns are updated.
+- **Improved**: Enhanced child block registration for better stability.
 
 = 1.2.2 – 27 April 2026 =
 - **New**: Redesigned the Design Library with additional features and improved UI.
