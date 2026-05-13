@@ -10,6 +10,8 @@ import { getPresetFrameDataAttributes } from './preset-frame-data';
 import generateStackCardsStyle from './styling';
 import { applyFilters } from '@wordpress/hooks';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+import getProActive from '@Utils/getProActive';
+
 import {
 	bindPresetFourBehavior,
 	getPresetFourConfig,
@@ -278,10 +280,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		return bindEditorStackCardScale(el);
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
 
-	
-	const stackCardAvailable = applyFilters('frontisblocks-stack-card-available', false);
+	const isProActive = getProActive();
+	const stackCardAvailable = applyFilters('frontisblocks-stack-card-pro-available', false);
 
-	if(!stackCardAvailable) {
+	if(!stackCardAvailable || !isProActive) {
 		return (
 			<UpgradeToProPopup />
 		)

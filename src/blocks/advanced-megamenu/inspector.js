@@ -253,7 +253,6 @@ const Inspector = ({ attributes, setAttributes }) => {
 
     const deviceType = useDeviceType();
 
-    const [MenuItemList, setMenuItemList] = useState(menuItems);
     const [patterns, setPatterns] = useState([]);
 
     const patternData = useSelect((select) => {
@@ -304,68 +303,59 @@ const Inspector = ({ attributes, setAttributes }) => {
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = MenuItemList.findIndex((item) => item.id === active.id);
-            const newIndex = MenuItemList.findIndex((item) => item.id === over.id);
-            const updated = arrayMove(MenuItemList, oldIndex, newIndex);
-            setMenuItemList(updated);
+            const oldIndex = menuItems.findIndex((item) => item.id === active.id);
+            const newIndex = menuItems.findIndex((item) => item.id === over.id);
+            const updated = arrayMove(menuItems, oldIndex, newIndex);
             setAttributes({ menuItems: updated });
         }
     };
 
     const handleAddItem = () => {
         const newItem = {
-            id: `item-${MenuItemList.length + 1}`,
-            label: `Item ${MenuItemList.length + 1}`,
+            id: `item-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+            label: `Item ${menuItems.length + 1}`,
             url: '',
             patternSlug: '',
             megaMenuIcon: 'angle-down',
             pageId: '',
         };
-        const updated = [...MenuItemList, newItem];
-        setMenuItemList(updated);
+        const updated = [...menuItems, newItem];
         setAttributes({ menuItems: updated });
     };
 
     const handleChangeItem = (id, key, value) => {
-        const updated = MenuItemList.map((item) =>
+        const updated = menuItems.map((item) =>
             item.id === id ? { ...item, [key]: value } : item
         );
-        setMenuItemList(updated);
         setAttributes({ menuItems: updated });
     };
 
     const handleChangeMultipleFields = (id, fieldsToUpdate) => {
-        const updated = MenuItemList.map((item) =>
+        const updated = menuItems.map((item) =>
             item.id === id ? { ...item, ...fieldsToUpdate } : item
         );
-        setMenuItemList(updated);
         setAttributes({ menuItems: updated });
     };
 
     const handleDeleteItem = (id) => {
-        const updated = MenuItemList.filter((item) => item.id !== id);
-        setMenuItemList(updated);
+        const updated = menuItems.filter((item) => item.id !== id);
         setAttributes({ menuItems: updated });
     };
 
     const handleDuplicateItem = (id) => {
-        const itemToDuplicate = MenuItemList.find((item) => item.id === id);
+        const itemToDuplicate = menuItems.find((item) => item.id === id);
         if (itemToDuplicate) {
             const newItem = {
                 ...itemToDuplicate,
-                id: `item-${MenuItemList.length + 1}`,
+                id: `item-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
                 label: itemToDuplicate.label + ' (Copy)',
             };
-            const updated = [...MenuItemList, newItem];
-            setMenuItemList(updated);
+            const updated = [...menuItems, newItem];
             setAttributes({ menuItems: updated });
         }
     };
 
-    /** Sync back when MenuItemList changes */
-    useEffect(() => {
-        setAttributes({ menuItems: MenuItemList });
-    }, [MenuItemList]);
+
 
 
     /** Start MegaMenu Padding */

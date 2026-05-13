@@ -12,6 +12,7 @@ import { applyFilters } from '@wordpress/hooks';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import generateAdvancedMegaMenuStyle from "./styling";
+import getProActive from '@Utils/getProActive';
 
 // Global set to track loaded fonts across all block instances
 const loadedFonts = new Set();
@@ -74,9 +75,10 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
+	const isProActive = getProActive();
 	const advancedMegamenuAvailable = applyFilters('frontisblocks-advanced-megamenu-available', false);
 
-	if (!advancedMegamenuAvailable) {
+	if (!advancedMegamenuAvailable || !isProActive) {
 		return (
 			<UpgradeToProPopup />
 		)
