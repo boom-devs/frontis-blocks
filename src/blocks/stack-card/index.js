@@ -41,7 +41,7 @@ const stackCardItemBlockAttributes = stackCardItemAttributeKeys.reduce((accumula
 
 registerBlockType( metadata.name, {
 	attributes,
-	icon: FB_Block_Icons.rive_animation,
+	icon: FB_Block_Icons.stacked_cards,
 	edit: Edit,
 	save,
 	// deprecated
