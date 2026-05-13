@@ -110,7 +110,6 @@
             visibility: visible;
             display: inline-block;
             z-index: 1;
-            transform: none !important;
         }
     }
 }
@@ -133,4 +132,4 @@
     100% {
         transform: scale(1);
     }
-}
+}
