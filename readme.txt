@@ -256,6 +256,8 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 - **Fixed**: Resolved Google Fonts loading issues in typography preview iframe.
 - **Fixed**: Resolved various template CSS rendering and generation issues.
 - **Fixed**: Resolved navigation active menu style and logo system issues.
+- **Fixed**: Resolved critical data loss in list-based blocks (Features List, Tabs, Advanced Megamenu) by removing dual-state synchronization conflicts.
+- **Improved**: Implemented unique timestamp-based ID generation for list items to prevent state corruption.
 - **Improved**: Updated Mega Menu icons and optimized for production release.
 - **Improved**: Added automatic asset regeneration when synced patterns are updated.
 - **Improved**: Enhanced child block registration for better stability.
