@@ -51,9 +51,9 @@ class BlockList
             'stack-card' => [
                 'slug' => 'stack-card',
                 'title' => 'Stack Card',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'layout',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/stack-card.svg',
                 'doc' => 'https://wpmessiah.com/',
