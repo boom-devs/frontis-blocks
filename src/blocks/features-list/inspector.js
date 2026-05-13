@@ -328,23 +328,23 @@ const Inspector = ({ attributes, setAttributes }) => {
     
 	const deviceType= useDeviceType();
 
-    const [FeatureItemList, setFeatureItemList] = useState(FeatureItems);
+
 
     const handleDragEnd = (event) => {
         const { active, over } = event;
         if (active && over && active.id !== over.id) {
-            const oldIndex = FeatureItemList.findIndex(item => item.id === active.id);
-            const newIndex = FeatureItemList.findIndex(item => item.id === over.id);
-            const updatedItems = arrayMove(FeatureItemList, oldIndex, newIndex);
+            const oldIndex = FeatureItems.findIndex(item => item.id === active.id);
+            const newIndex = FeatureItems.findIndex(item => item.id === over.id);
+            const updatedItems = arrayMove(FeatureItems, oldIndex, newIndex);
             setAttributes({ FeatureItems: updatedItems });
-            setFeatureItemList(updatedItems);
         }
     };
 
     const handleAddItem = () => {
+        const uniqueId = `item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
         const newItem = {
-            id: `item-${FeatureItemList.length + 1}`, 
-            Title: `Feature Item ${FeatureItemList.length + 1}`, 
+            id: uniqueId, 
+            Title: `Feature Item ${FeatureItems.length + 1}`, 
             Description: 'Corrupti maiores atque repellendus ratione omnis possimus. Eaque laudantium tenetur.', 
             FeatureIcon: 'check' ,
             FeatureIconImageUrl: '',
@@ -388,11 +388,10 @@ const Inspector = ({ attributes, setAttributes }) => {
             /** End Single Item Background Color */
         };
         setAttributes({ FeatureItems: [...FeatureItems, newItem] });
-        setFeatureItemList([...FeatureItemList, newItem]);
     };
 
     const handleChangeItem = (id, key, value) => {
-        const updatedItems = FeatureItemList.map(item => {
+        const updatedItems = FeatureItems.map(item => {
             if (item.id === id) {
                 if (key === 'FeatureIconImageID') {
                     // Get the full image data from WordPress media library
@@ -409,30 +408,22 @@ const Inspector = ({ attributes, setAttributes }) => {
             return item;
         });
         
-        setFeatureItemList(updatedItems);
         setAttributes({ FeatureItems: updatedItems });
     };
 
     const handleDeleteItem = (id) => {
-        const updatedItems = FeatureItemList.filter(item => item.id !== id);
+        const updatedItems = FeatureItems.filter(item => item.id !== id);
         setAttributes({ FeatureItems: updatedItems });
-        setFeatureItemList(updatedItems);
-
     };
 
     const handleDuplicateItem = (id) => {
-        const itemToDuplicate = FeatureItemList.find(item => item.id === id);
+        const itemToDuplicate = FeatureItems.find(item => item.id === id);
         if (itemToDuplicate) {
-            const newItem = { ...itemToDuplicate, id: `item-${FeatureItemList.length + 1}` };
-            setAttributes({FeatureItems: [...FeatureItems, newItem] });
-            setFeatureItemList([...FeatureItemList, newItem]);
+            const uniqueId = `item-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            const newItem = { ...itemToDuplicate, id: uniqueId };
+            setAttributes({ FeatureItems: [...FeatureItems, newItem] });
         }
     };
-
-    //Sync FeatureItemList with attributes.FeatureItems
-    useEffect(() => {
-        setAttributes({ FeatureItems: FeatureItemList });
-    }, [FeatureItemList, setAttributes]);
 
     /** Start Global padding */
 	const handleFeatureIconPaddingUnitChange = ( event, position ) => {
@@ -1592,9 +1583,9 @@ const Inspector = ({ attributes, setAttributes }) => {
                         collisionDetection={closestCenter}
                         onDragEnd={handleDragEnd}
                     >
-                        <SortableContext items={FeatureItemList.map(item => item.id)}>
+                        <SortableContext items={FeatureItems.map(item => item.id)}>
                             <ul className='dnd-items-wrapper'>
-                                {FeatureItemList.map((item, index) => (
+                                {FeatureItems.map((item, index) => (
                                     <SortableItem
                                         key={item.id}
                                         id={item.id}
