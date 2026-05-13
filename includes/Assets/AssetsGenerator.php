@@ -43,10 +43,6 @@ class AssetsGenerator
 
 	private function reset()
 	{
-		if (!empty($this->post_id)) {
-			update_post_meta($this->post_id, 'fb_page_assets_generation', 'compiling');
-		}
-
 		$this->post_id = null;
 		$this->post = null;
 		$this->used_blocks = [];
@@ -88,6 +84,8 @@ class AssetsGenerator
 				$this->post->post_content = $this->get_page_content_with_template_parts();
 			}
 
+			// var_dump($this->post->post_content);
+			// die();
 			$frontis_blocks_used = preg_match('/frontis-blocks/i', $this->post->post_content) > 0;
 			$critical_css_used = preg_match('/frontis-blocks\/critical-css/i', $this->post->post_content) > 0;
 
@@ -226,6 +224,8 @@ class AssetsGenerator
 	{
 		$template_contents = Helper::get_template_content($this->post->ID);
 
+		
+
 		if (empty($template_contents)) {
 			$template_contents = $this->post;
 		}
@@ -244,6 +244,8 @@ class AssetsGenerator
 						);
 					}
 				}
+			} else {
+				$template_contents .= "\n" . $this->post->post_content;
 			}
 
 			$megamenu_block_exists = preg_match_all(
