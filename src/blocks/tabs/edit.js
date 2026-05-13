@@ -57,10 +57,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const beDispatch = dispatch('core/block-editor');
 	const getChildren = () => beSelect.getBlockOrder(clientId) || [];
 
-	const [tabsItemList, setTabsItemList] = useState(tabItems);
-
 	const updateTabItems = (updatedItems) => {
-		setTabsItemList(updatedItems);
 		setAttributes({ tabItems: updatedItems });
 	};
 
@@ -75,7 +72,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const handleAddItem = () => {
-		const newIndex = tabsItemList.length;
+		const newIndex = tabItems.length;
 
 		// use numeric ids so they always match the block order
 		const newItem = {
@@ -93,7 +90,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		insertChildBlock(newIndex);
 
 		// 2) update the items state/attributes
-		updateTabItems([...tabsItemList, newItem]);
+		updateTabItems([...tabItems, newItem]);
 
 		// 3) make the new tab active immediately
 		updateActiveTab(newIndex);
@@ -104,12 +101,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (!active || !over || active.id === over.id) return;
 
 		// 1) get the old and new indexes
-		const oldIndex = tabsItemList.findIndex((item) => item.id === active.id);
-		const newIndex = tabsItemList.findIndex((item) => item.id === over.id);
+		const oldIndex = tabItems.findIndex((item) => item.id === active.id);
+		const newIndex = tabItems.findIndex((item) => item.id === over.id);
 		if (oldIndex === -1 || newIndex === -1) return;
 
 		// 2) parent attributes/state reorder
-		const updatedItems = arrayMove(tabsItemList, oldIndex, newIndex);
+		const updatedItems = arrayMove(tabItems, oldIndex, newIndex);
 		updateTabItems(updatedItems);
 
 		const childIds = getChildren(); // array of child clientIds
@@ -124,7 +121,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	};
 
 	const handleChangeItem = (id, key, value) => {
-		const updatedItems = tabsItemList.map(item => {
+		const updatedItems = tabItems.map(item => {
 			if (item.id === id) {
 				if (key === 'tabIconImageID') {
 					// Get the full image data from WordPress media library
@@ -141,13 +138,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			return item;
 		});
 		updateTabItems(updatedItems);
-		setAttributes({ tabItems: updatedItems });
 	};
 
 	const handleDeleteItem = (idOrIndex) => {
 		const index = typeof idOrIndex === 'number'
 			? idOrIndex
-			: tabsItemList.findIndex((it) => it.id === idOrIndex);
+			: tabItems.findIndex((it) => it.id === idOrIndex);
 		if (index < 0) return;
 
 		const childIds = getChildren();
@@ -157,7 +153,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 
 		// 2) parent list reindex
-		const nextItems = tabsItemList.filter((_, i) => i !== index);
+		const nextItems = tabItems.filter((_, i) => i !== index);
 		const reindexedItems = nextItems.map((it, i) => ({ ...it, id: i }));
 		updateTabItems(reindexedItems);
 
@@ -184,7 +180,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	const handleDuplicateItem = (idOrIndex) => {
 		const index = typeof idOrIndex === 'number'
 			? idOrIndex
-			: tabsItemList.findIndex((it) => it.id === idOrIndex);
+			: tabItems.findIndex((it) => it.id === idOrIndex);
 		if (index < 0) return;
 
 		const childIds = getChildren();
@@ -204,9 +200,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		beDispatch.insertBlock(cloned, index + 1, clientId, false);
 
 		const newItems = [
-			...tabsItemList.slice(0, index + 1),
-			{ ...tabsItemList[index] },
-			...tabsItemList.slice(index + 1),
+			...tabItems.slice(0, index + 1),
+			{ ...tabItems[index] },
+			...tabItems.slice(index + 1),
 		];
 
 		const reindexedItems = newItems.map((it, idx) => ({ ...it, id: idx }));
@@ -220,9 +216,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		updateActiveTab(index + 1);
 	};
 
-	useEffect(() => {
-		setAttributes({ tabItems: tabsItemList });
-	}, [tabsItemList, setAttributes]);
+
 
 
 
@@ -330,7 +324,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 						handleChangeItem={handleChangeItem}
 						handleDeleteItem={handleDeleteItem}
 						handleDuplicateItem={handleDuplicateItem}
-						tabsItemList={tabsItemList}
+						tabsItemList={tabItems}
 					/>
 				)}
 
