@@ -34,6 +34,7 @@ import Inspector from './inspector';
 import generateGridLayoutStyle from './styling';
 import UpgradeToProPopup from '@Utils/upgradeToProPopup';
 import getProActive from '@Utils/getProActive';
+import { applyFilters } from '@wordpress/hooks';
 
 const BREAKPOINTS = [ 'Desktop', 'Tablet', 'Mobile' ];
 const BREAKPOINT_ICONS = {

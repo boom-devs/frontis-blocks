@@ -281,7 +281,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
 
 	const isProActive = getProActive();
-	const stackCardAvailable = applyFilters('frontisblocks-stack-card-available', false);
+	const stackCardAvailable = applyFilters('frontisblocks-stack-card-pro-available', false);
 
 	if(!stackCardAvailable || !isProActive) {
 		return (
