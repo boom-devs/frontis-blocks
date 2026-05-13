@@ -10,13 +10,10 @@
 	"supports": {
 		"anchor": false,
 		"align": ["wide", "full"],
-		"customClassName": false,
-		"html": false
+		"customClassName": false
 	},
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css",
-	"viewScript": "file:./view.js",
 	"render": "file:./render.php"
 }
