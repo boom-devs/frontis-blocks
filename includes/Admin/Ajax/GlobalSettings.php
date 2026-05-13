@@ -609,12 +609,24 @@ class GlobalSettings extends AjaxBase
 
         // Define CSS selectors and apply typography variables
         foreach ($elements as $element) {
-            $selector = match ($element) {
-                'text' => 'body p, body span',
-                'link' => 'a',
-                'button' => 'button, .button',
-                default => $element,
-            };
+            
+            switch ($element) {
+                case 'text':
+                    $selector = 'body p, body span';
+                    break;
+
+                case 'link':
+                    $selector = 'a';
+                    break;
+
+                case 'button':
+                    $selector = 'button, .button';
+                    break;
+
+                default:
+                    $selector = $element;
+                    break;
+            }
 
             $css .= "{$selector} {\n";
             $css .= "  font-size: var(--fb-{$element}-font-size);\n";

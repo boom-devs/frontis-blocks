@@ -544,6 +544,12 @@ class Settings extends AjaxBase
 			$blocks = $activeBlocks;
 		}
 
+		foreach (BlockList::get_instance()->get_blocks() as $slug => $block_data) {
+			if (isset($block_data['child']) && $block_data['child'] === 'true') {
+				$blocks[$slug] = true;
+			}
+		}
+
 		$updated = update_option('fb_active_blocks', $blocks, true);
 
 		if ($updated) {

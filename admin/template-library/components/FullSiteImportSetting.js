@@ -54,11 +54,35 @@ const FullSiteImportSetting = ({
     return (
         <div className={`fb-import-form-panel ${isSidebarCollapsed ? 'collapsed' : ''}`}>
             {sitePreviewLoading ? (
-                <TemplateCategoryLoader count={15} />
+                <div className="fb-import-form-skeleton">
+                    {/* Template Name skeleton (single line) */}
+                    <span className="fb-skeleton-line" style={{ width: '90%', height: '18px' }}></span>
+                    <span className="fb-skeleton-divider"></span>
+
+                    {/* Site Name skeleton */}
+                    <span className="fb-skeleton-line" style={{ width: '35%', height: '14px' }}></span>
+                    <span className="fb-skeleton-input"></span>
+
+                    {/* Site Tagline skeleton */}
+                    <span className="fb-skeleton-line" style={{ width: '40%', height: '14px', marginTop: '20px' }}></span>
+                    <span className="fb-skeleton-input"></span>
+
+                    {/* Upload Logo skeleton */}
+                    <span className="fb-skeleton-line" style={{ width: '42%', height: '14px', marginTop: '20px' }}></span>
+                    <span className="fb-skeleton-upload"></span>
+
+                    {/* Buttons skeleton - pushed to bottom */}
+                    <div className="fb-skeleton-buttons">
+                        <span className="fb-skeleton-btn-primary"></span>
+                        <span className="fb-skeleton-btn-secondary"></span>
+                    </div>
+                </div>
             ) : (<>
             <div className="fb-form-section">
-                <span className="fb-template-label">Template Name:</span>
-                <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
+                <div className="fb-template-name-row">
+                    <span className="fb-template-label">Template Name:</span>
+                    <h6 className="fb-template-title">{template?.title || 'Renovate - Home Decor Website Template'}</h6>
+                </div>
 
                 <div className="fb-form-group">
                     <label htmlFor="siteName">Site Name</label>
