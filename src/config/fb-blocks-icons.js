@@ -1108,6 +1108,48 @@ const FB_Block_Icons = {
 			strokeLinecap: 'round',
 		}),
 	),
+	stacked_cards: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'stackedCardsIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: '3',
+			y: '7',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '6',
+			y: '5',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '9',
+			y: '3',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		})
+	),
 
 	back_to_top: fb(
 		'svg',

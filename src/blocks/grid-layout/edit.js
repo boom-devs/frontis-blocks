@@ -32,6 +32,9 @@ import { setDeviceType, useDeviceType } from '@Config/displayType';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import Inspector from './inspector';
 import generateGridLayoutStyle from './styling';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+import getProActive from '@Utils/getProActive';
+import { applyFilters } from '@wordpress/hooks';
 
 const BREAKPOINTS = [ 'Desktop', 'Tablet', 'Mobile' ];
 const BREAKPOINT_ICONS = {
@@ -508,12 +511,8 @@ const createPresetLayouts = ( preset, blocks, cols ) =>
 		return nextLayouts;
 	}, {} );
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	clientId,
-	isSelected,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId, isSelected, } ) {
+	
 	const {
 		blockID,
 		blockStyle,
@@ -522,6 +521,9 @@ export default function Edit( {
 		compactType,
 		allowOverlap,
 		layouts,
+		gridLayoutGlobalWraperID,
+		gridLayoutGlobalWraperClass,
+		
 	} = attributes;
 
 	useBlockIdGenerator( {
@@ -1031,7 +1033,7 @@ export default function Edit( {
 	] );
 
 	const blockProps = useBlockProps( {
-		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${ blockID } mode-${ builderView }`,
+		className: `frontis-block fb-grid-layout-main-wrapper fb-grid-layout-container ${ blockID } mode-${ builderView }`,
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -1068,13 +1070,25 @@ export default function Edit( {
 		goToLayoutView();
 	};
 
+	// upgrade popup if pro is not active
+	const isProActive = getProActive();
+	const gridLayoutAvailable = applyFilters('frontisblocks-grid-layout-pro-available', false);
+
+	if(!gridLayoutAvailable || !isProActive) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
+
 	return (
 		<>
-			<Inspector
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-				addGridItem={ addGridItem }
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					addGridItem={ addGridItem }
+				/>
+			)}
 
 			<BlockControls>
 				<ToolbarGroup>
@@ -1113,7 +1127,7 @@ export default function Edit( {
 			</BlockControls>
 
 			<div { ...blockProps }>
-				<div className="grid-editor-workspace" ref={ containerRef }>
+				<div className={`grid-editor-workspace fb-grid-layout-wrap ${gridLayoutGlobalWraperClass}`} id={gridLayoutGlobalWraperID} ref={ containerRef }>
 					{ isPickerView ? (
 						<div className="grid-template-stage">
 							<div className="grid-template-panel">
