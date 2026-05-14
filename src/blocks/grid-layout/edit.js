@@ -1235,6 +1235,8 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 										handles: [ 'w', 'e', 'se' ],
 									} }
 									compactor={ layoutCompactor }
+									compactType={ compactType || null }
+									allowOverlap={ allowOverlap }
 									onLayoutChange={ onLayoutChange }
 								>
 									{ rglLayout.map( ( item, index ) => (
