@@ -64,10 +64,9 @@ export function createDefaultCardItemBlock(itemNumber = 1) {
 		CARD_ITEM_BLOCK,
 		{ itemNumber },
 		[
-			createBlock('frontis-blocks/info-box', {
-				icon: 'swatchbook',
-				btnIcon: 'arrow-up-right-from-square',
-				mediaSwitcher: 'icon'
+			createBlock('frontis-blocks/testimonial', {
+				TestimonialRatingicon: 'star',
+				RatingSwitcher: true,
 			})
 		],
 	);

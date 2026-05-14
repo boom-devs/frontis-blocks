@@ -12,7 +12,7 @@ import { useLayoutEffect, useRef, useEffect } from '@wordpress/element';
 import StackCardItemInspector from './inspector';
 
 const DEFAULT_CARD_ITEM_TEMPLATE = [
-	['frontis-blocks/info-box'],
+	['frontis-blocks/testimonial'],
 ];
 
 const getItemBackgroundValue = (
@@ -89,7 +89,7 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 		replaceInnerBlocks(
 			clientId,
 			[
-				createBlock('frontis-blocks/info-box', {
+				createBlock('frontis-blocks/testimonial', {
 					icon: 'swatchbook',
 					btnIcon: 'arrow-up-right-from-square',
 					mediaSwitcher: 'icon'
