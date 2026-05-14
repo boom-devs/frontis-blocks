@@ -1,51 +1,60 @@
-(function() {
+(function () {
     function initBackToTop() {
         const backToTopButtons = document.querySelectorAll(".fb-back-to-top-main-wrapper");
-        
-        backToTopButtons.forEach(button => {
-            const innerWrapper = button.querySelector(".fb-back-to-top-inner-wrapper");
-            
-            // Initial state
-            if (window.scrollY > 100) {
-                button.classList.add("fb-show");
-            } else {
-                button.classList.remove("fb-show");
-            }
 
-            // Scroll event
-            window.addEventListener("scroll", function() {
+        backToTopButtons.forEach(button => {
+            if (button.dataset.initialized) {
+                return;
+            }
+            button.dataset.initialized = "true";
+
+            const innerWrapper = button.querySelector(".fb-back-to-top-inner-wrapper");
+
+            const checkScroll = () => {
                 if (window.scrollY > 100) {
                     button.classList.add("fb-show");
                 } else {
                     button.classList.remove("fb-show");
                 }
-            }, { passive: true });
+            };
 
-            // Click event
-            button.addEventListener("click", function(e) {
+            // Initial check
+            checkScroll();
+
+            window.addEventListener("scroll", checkScroll, { passive: true });
+
+            button.addEventListener("click", function (e) {
                 e.preventDefault();
-                
+
                 if (innerWrapper) {
                     innerWrapper.classList.add("active");
                 }
 
-                window.scrollTo({
-                    top: 0,
-                    behavior: "smooth"
-                });
+                const duration = 600;
+                const start = window.scrollY || window.pageYOffset;
+                const startTime = performance.now();
 
-                // Remove active class after animation
-                // Smooth scroll duration is not fixed, but we can approximate or use a timeout
-                setTimeout(() => {
-                    if (innerWrapper) {
-                        innerWrapper.classList.remove("active");
+                function scroll() {
+                    const now = performance.now();
+                    const time = Math.min(1, ((now - startTime) / duration));
+                    const easeOutQuad = time * (2 - time);
+
+                    window.scroll(0, Math.ceil((easeOutQuad * (0 - start)) + start));
+
+                    if (window.scrollY > 0 && time < 1) {
+                        requestAnimationFrame(scroll);
+                    } else {
+                        window.scroll(0, 0);
+                        if (innerWrapper) {
+                            innerWrapper.classList.remove("active");
+                        }
                     }
-                }, 800);
+                }
+                requestAnimationFrame(scroll);
             });
         });
     }
 
-    // Initialize on different loading states
     function setupBackToTop() {
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', initBackToTop);
@@ -53,7 +62,6 @@
             initBackToTop();
         }
 
-        // Handle dynamic content changes
         const observer = new MutationObserver((mutations) => {
             mutations.forEach((mutation) => {
                 if (mutation.addedNodes.length || mutation.removedNodes.length) {
@@ -68,9 +76,7 @@
         });
     }
 
-    // Expose initialization method globally
     window.reinitBackToTop = initBackToTop;
 
-    // Start setup
     setupBackToTop();
 })();

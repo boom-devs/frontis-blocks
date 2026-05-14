@@ -1,5 +1,3 @@
-import { separator } from "@wordpress/icons";
-
 const attributes = {
     blockID: {
         type: "string",
@@ -12,10 +10,6 @@ const attributes = {
     deviceType: {
         type: "string",
         default: "Desktop"
-    },
-    backToTopPresetType: {
-        type: "string",
-        default: "0",
     },
     backToTopPosition: {
         type: "string",
@@ -68,9 +62,11 @@ const attributes = {
     },
     backToTopBorderColor: {
         type: "string",
+        default: "",
     },
     backToTopBorderHoverColor: {
         type: "string",
+        default: "",
     },
     backToTopBorderUnits: {
         type: "object",
@@ -274,6 +270,20 @@ const attributes = {
     },
     /** End Typography */
 
+    /** Start Text Color */
+    backToTopBtnTextColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    backToTopBtnTextColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    backToTopBtnTextHoverColor: {
+        type: "string",
+    },
+    /** End Text Color */
+
     /** Start Background */
     backToTopBgColorSwitcher: {
         type: "string",
@@ -389,33 +399,31 @@ const attributes = {
             Mobile: ''
         },
     },
-
     backToTopClickScaleEffect: {
         type: "object",
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '0.98',
+            Tablet: '0.98',
+            Mobile: '0.98'
         },
     },
-
     backToTopHoverZoomEffect: {
         type: "object",
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '1.1',
+            Tablet: '1.1',
+            Mobile: '1.1'
         },
     },
+    /** End Global Setting */
 
     /** Start Icon Image Style Setting */
-
     backToTopIconImageSize: {
         type: "object",
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '24',
+            Tablet: '20',
+            Mobile: '20'
         },
     },
     backToTopIconImageSizeUnits: {
@@ -429,9 +437,9 @@ const attributes = {
     backToTopTextIconSpacing: {
         type: "object",
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '10',
+            Tablet: '10',
+            Mobile: '10'
         },
     },
     backToTopTextIconSpacingUnits: {
@@ -447,54 +455,19 @@ const attributes = {
         default: "left"
     },
 
-    backToTopIconColorTypeSwitcher: {
+    backToTopIconColorSwitcher: {
         type: "string",
-        default: "normal"
-    },
-    backToTopIconColorType: {
-        type: "string",
-        default: "classic"
-    },
-    backToTopIconHoverColorType: {
-        type: "string",
-        default: "classic"
+        default: "normal",
     },
     backToTopIconColor: {
         type: "string",
-        default: ""
+        default: "#FFFFFF",
     },
     backToTopIconHoverColor: {
         type: "string",
-        default: ""
+        default: "",
     },
-    backToTopIconGradientColor: {
-        type: "string",
-        default: null
-    },
-    backToTopIconHoverGradientColor: {
-        type: "string",
-        default: null
-    },
-    backToTopIconCustomGradientColorSwitcher: {
-        type: "boolean",
-        default: false
-    },
-    backToTopIconCustomGradientColor: {
-        type: "string",
-        default: ""
-    },
-    backToTopIconHoverCustomGradientColorSwitcher: {
-        type: "boolean",
-        default: false
-    },
-    backToTopIconHoverCustomGradientColor: {
-        type: "string",
-        default: ""
-    }
-
     /** End Icon Image Style Setting */
-
-
 };
 
 export default attributes;

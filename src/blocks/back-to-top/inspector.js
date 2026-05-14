@@ -152,22 +152,17 @@ const Inspector = ({ attributes, setAttributes }) => {
         backToTopTextIconSpacingUnits,
         backToTopIconImagePosition,
 
-        backToTopIconColorTypeSwitcher,
-        backToTopIconColorType,
-        backToTopIconHoverColorType,
+        backToTopIconColorSwitcher,
         backToTopIconColor,
         backToTopIconHoverColor,
-        backToTopIconGradientColor,
-        backToTopIconHoverGradientColor,
-        backToTopIconCustomGradientColorSwitcher,
-        backToTopIconCustomGradientColor,
-        backToTopIconHoverCustomGradientColorSwitcher,
-        backToTopIconHoverCustomGradientColor,
+
+        backToTopBtnTextColorSwitcher,
+        backToTopBtnTextColor,
+        backToTopBtnTextHoverColor,
 
     } = attributes;
 
     const deviceType = useDeviceType();
-
 
     /** Start Google Map Padding */
     const backToTopPaddingUnitsChange = (event, position) => {
@@ -338,21 +333,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("General", "frontis-blocks")}
                 initialOpen={true}
             >
-
-                {/* <SelectControl
-                    label={__('Preset', 'frontis-blocks')}
-                    value={backToTopPresetType}
-                    options={[
-                        { label: __('Default', 'frontis-blocks'), value: '0' },
-                        { label: __('Preset 1', 'frontis-blocks'), value: '1' },
-                        { label: __('Preset 2', 'frontis-blocks'), value: '2' },
-                        { label: __('Preset 3', 'frontis-blocks'), value: '3' },
-                        { label: __('Preset 4', 'frontis-blocks'), value: '4' },
-                        { label: __('Preset 5', 'frontis-blocks'), value: '5' },
-                    ]}
-                    onChange={(value) => setAttributes({ backToTopPresetType: value })}
-                /> */}
-
                 {/* <SelectControl
                     label={__('Position', 'frontis-blocks')}
                     value={backToTopPosition}
@@ -378,7 +358,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setAttributes({ backToTopPosition: value })
                     }
                 />
-
                 {/* <SelectControl
 
                     label={__('Entrance Animation', 'frontis-blocks')}
@@ -393,7 +372,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChange={(value) => setAttributes({ backToTopEntranceAnimation: value })}
                 /> */}
 
-
                 <FB_SwitcherControl
                     label={__('Entrance Animation', 'frontis-blocks')}
                     options={[
@@ -407,7 +385,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setAttributes({ backToTopEntranceAnimation: value })
                     }
                 />
-
 
             </PanelBody>
 
@@ -475,7 +452,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-
                 {backToTopContentType !== 'text' && backToTopIconType === 'image' && (
                     <FB_ImageControl
                         label={__("Select Image", "frontis-blocks")}
@@ -499,9 +475,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-
             </PanelBody>
-
         </>
     );
 
@@ -510,12 +484,10 @@ const Inspector = ({ attributes, setAttributes }) => {
      */
     const styleControls = (
         <>
-
             <PanelBody
                 title={__("Back To Top Button", "frontis-blocks")}
                 initialOpen={true}
             >
-
                 <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
@@ -551,6 +523,21 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setGlobalSwitcher={(value) =>
                             setAttributes({ backToTopContentDirection: value })
                         }
+                    />
+                )}
+
+                {backToTopContentType == 'text-icon' && (
+                    <FB_Range
+                        min={0}
+                        max={100}
+                        label={__("Gap", "frontis-blocks")}
+                        rangeValue={backToTopTextIconSpacing}
+                        onChangeHandler={(value) => setAttributes({ backToTopTextIconSpacing: value === 0 ? undefined : value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={""}
+                        isRangeUnit={false}
                     />
                 )}
 
@@ -694,6 +681,34 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
+                {backToTopContentType !== 'icon' && (
+                    <FB_SwitcherControl
+                        label={__("Text Color", "frontis-blocks")}
+                        globalSwitcher={backToTopBtnTextColorSwitcher}
+                        setGlobalSwitcher={(value) =>
+                            setAttributes({ backToTopBtnTextColorSwitcher: value })
+                        }
+                    />
+                )}
+
+                {backToTopContentType !== 'icon' && backToTopBtnTextColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={backToTopBtnTextColor}
+                        setGlobalColor={(value) => setAttributes({ backToTopBtnTextColor: value })}
+                    />
+                )}
+
+                {backToTopContentType !== 'icon' && backToTopBtnTextColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={backToTopBtnTextHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ backToTopBtnTextHoverColor: value })
+                        }
+                    />
+                )}
+
                 <FB_BackgroundColorControl
                     label={__("Background Color", "frontis-blocks")}
                     bgColorSwitcher={backToTopBgColorSwitcher}
@@ -722,9 +737,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopHoverCustomGradientInputValue: value })}
 
                     isBackgroundImage={false}
-
                 />
-
 
                 <SelectControl
                     label={__("Border Style", "frontis-blocks")}
@@ -732,7 +745,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     options={BORDER_STYLES}
                     onChange={(value) => setAttributes({ backToTopBorder: value })}
                 />
-
 
                 <FB_SwitcherControl
                     label={__("Border Color", "frontis-blocks")}
@@ -759,7 +771,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setGlobalColor={(value) => setAttributes({ backToTopBorderHoverColor: value === undefined ? '' : value })}
                     />
                 )}
-
 
                 <FB_Spacing
                     label={__("Border", "frontis-blocks")}
@@ -788,7 +799,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     spacingCombineBtnHandler={backToTopBorderRadiusLinkBtn}
                     setAttributes={setAttributes}
                 />
-
 
                 <FB_SwitcherControl
                     label={__("Box Shadow", "frontis-blocks")}
@@ -839,8 +849,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                     resetFallbackValue={""}
                     isRangeUnit={false}
                 />
-
-
             </PanelBody>
 
             {backToTopContentType !== 'text' && (
@@ -853,28 +861,13 @@ const Inspector = ({ attributes, setAttributes }) => {
                         max={100}
                         label={__("Icon / Image Size", "frontis-blocks")}
                         rangeValue={backToTopIconImageSize}
-                        onChangeHandler={(value) => setAttributes({ backToTopIconImageSize: { ...backToTopIconImageSize, [deviceType]: value === 0 ? undefined : value } })}
+                        onChangeHandler={(value) => setAttributes({ backToTopIconImageSize: value === 0 ? undefined : value })}
                         deviceType={deviceType}
                         setAttributes={setAttributes}
                         rangeStep={1}
                         resetFallbackValue={""}
                         isRangeUnit={false}
                     />
-
-                    {backToTopContentType == 'text-icon' && (
-                        <FB_Range
-                            min={0}
-                            max={100}
-                            label={__("Spacing", "frontis-blocks")}
-                            rangeValue={backToTopTextIconSpacing}
-                            onChangeHandler={(value) => setAttributes({ backToTopTextIconSpacing: { ...backToTopTextIconSpacing, [deviceType]: value === 0 ? undefined : value } })}
-                            deviceType={deviceType}
-                            setAttributes={setAttributes}
-                            rangeStep={1}
-                            resetFallbackValue={""}
-                            isRangeUnit={false}
-                        />
-                    )}
 
                     {backToTopContentType == 'text-icon' && (
                         <FB_SwitcherControl
@@ -889,37 +882,37 @@ const Inspector = ({ attributes, setAttributes }) => {
                     )}
 
                     {backToTopIconType == 'icon' && (
-                        <FB_BackgroundColorControl
+                        <FB_SwitcherControl
                             label={__("Icon Color", "frontis-blocks")}
-                            bgColorSwitcher={backToTopIconColorTypeSwitcher}
-                            setBgColorSwitcher={(value) => setAttributes({ backToTopIconColorTypeSwitcher: value })}
+                            globalSwitcher={backToTopIconColorSwitcher}
+                            setGlobalSwitcher={(value) =>
+                                setAttributes({
+                                    backToTopIconColorSwitcher: value,
+                                })
+                            }
+                        />
+                    )}
 
-                            normalLabel={__("Icon Color Type", "frontis-blocks")}
-                            normalBackgroundType={backToTopIconColorType}
-                            setNormalBackgroundType={(value) => setAttributes({ backToTopIconColorType: value })}
-                            normalClassicColor={backToTopIconColor}
-                            setNormalClassicColor={(value) => setAttributes({ backToTopIconColor: value === undefined ? '' : value })}
-                            normalGradientColor={backToTopIconGradientColor}
-                            setNormalGradientColor={(value) => setAttributes({ backToTopIconGradientColor: value === undefined ? null : value })}
-                            normalCustomGradientSwitcher={backToTopIconCustomGradientColorSwitcher}
-                            setNormalCustomGradientSwitcher={(value) => setAttributes({ backToTopIconCustomGradientColorSwitcher: value })}
-                            normalCustomGradientInputValue={backToTopIconCustomGradientColor}
-                            setNormalCustomGradientInputValue={(value) => setAttributes({ backToTopIconCustomGradientColor: value === undefined ? null : value })}
+                    {backToTopIconColorSwitcher === "normal" && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={backToTopIconColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({ backToTopIconColor: value })
+                            }
+                        />
+                    )}
 
-                            hoverLabel={__("Icon Hover Color Type", "frontis-blocks")}
-                            hoverBackgroundType={backToTopIconHoverColorType}
-                            setHoverBackgroundType={(value) => setAttributes({ backToTopIconHoverColorType: value })}
-                            hoverClassicColor={backToTopIconHoverColor}
-                            setHoverClassicColor={(value) => setAttributes({ backToTopIconHoverColor: value === undefined ? '' : value })}
-                            hoverGradientColor={backToTopIconHoverGradientColor}
-                            setHoverGradientColor={(value) => setAttributes({ backToTopIconHoverGradientColor: value === undefined ? null : value })}
-                            hoverCustomGradientSwitcher={backToTopIconHoverCustomGradientColorSwitcher}
-                            setHoverCustomGradientSwitcher={(value) => setAttributes({ backToTopIconHoverCustomGradientColorSwitcher: value })}
-                            hoverCustomGradientInputValue={backToTopIconHoverCustomGradientColor}
-                            setHoverCustomGradientInputValue={(value) => setAttributes({ backToTopIconHoverCustomGradientColor: value === undefined ? null : value })}
 
-                            isBackgroundImage={false}
-
+                    {backToTopIconColorSwitcher === "hover" && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={backToTopIconHoverColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({
+                                    backToTopIconHoverColor: value,
+                                })
+                            }
                         />
                     )}
 
@@ -933,7 +926,6 @@ const Inspector = ({ attributes, setAttributes }) => {
      */
     const advancedControls = (
         <>
-
             <PanelBody
                 title={__("Layout", "frontis-blocks")}
                 initialOpen={true}
@@ -975,20 +967,16 @@ const Inspector = ({ attributes, setAttributes }) => {
                     onChangeValue={(value) => setAttributes({ backToTopCustomCSS: value })}
                 />
             </PanelBody>
-
-
         </>
     );
 
     return (
         <>
-
             <FB_InspectorControls
                 generalControls={generalControls}
                 styleControls={styleControls}
                 advancedControls={advancedControls}
             />
-
         </>
     );
 
