@@ -1,21 +1,13 @@
 .fb-grid-layout-container.fb-grid-layout-editor-mode {
-	position: relative;
-	border: 1px dashed #8a94a0;
+	position: relative !important;
+	border: 1px dashed #8a94a0 !important;
 	border-radius: 2px;
 	background: #fff;
 	padding: 20px;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
 	&.mode-layout {
 		border-style: solid;
-	}
-
-	&.mode-picker {
-		background: #fff !important;
-		padding: 20px !important;
-		border: 1px dashed #8a94a0 !important;
-		margin: 20px 0 !important;
-		box-shadow: none !important;
 	}
 
 	.grid-editor-workspace {
