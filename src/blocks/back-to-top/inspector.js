@@ -950,7 +950,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
                 />
 
-                <FB_InputControl
+                 <FB_InputControl
                     label={__("CSS Class", "frontis-blocks")}
                     value={backToTopWraperClass}
                     onChangeValue={(value) => setAttributes({ backToTopWraperClass: value })}
