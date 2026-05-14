@@ -4,13 +4,9 @@ import {
 	useInnerBlocksProps,
 } from "@wordpress/block-editor";
 import { useSelect } from "@wordpress/data";
-import { useEffect, useMemo } from "@wordpress/element";
+import { useEffect } from "@wordpress/element";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
 import Inspector from "./inspector";
-import {
-	getGridItemContentStyles,
-	getGridItemWrapperStyles,
-} from "./style-utils";
 import "./editor.scss";
 
 export default function Edit({
@@ -45,26 +41,15 @@ export default function Edit({
 		}
 	}, [blockID, expectedBlockId, expectedItemId, id, setAttributes]);
 
-	const wrapperStyles = useMemo(
-		() => getGridItemWrapperStyles(attributes),
-		[attributes],
-	);
-	const contentStyles = useMemo(
-		() => getGridItemContentStyles(attributes),
-		[attributes],
-	);
-
 	const blockProps = useBlockProps({
 		className: `grid-item-rendered ${blockID} ${
 			hasInnerBlocks ? "has-inner-blocks" : "is-empty"
 		} ${isStatic ? "is-static" : ""}`,
 		"data-grid-id": id || expectedItemId,
-		style: wrapperStyles,
 	});
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: "grid-item-content",
-			style: contentStyles,
 		},
 		{
 			renderAppender: hasInnerBlocks

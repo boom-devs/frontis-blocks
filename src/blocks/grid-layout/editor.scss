@@ -1,10 +1,10 @@
-.grid-layout-container {
-	position: relative;
-	border: 1px dashed #8a94a0;
+.fb-grid-layout-container.fb-grid-layout-editor-mode {
+	position: relative !important;
+	border: 1px dashed #8a94a0 !important;
 	border-radius: 2px;
 	background: #fff;
 	padding: 20px;
-	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
 
 	&.mode-layout {
 		border-style: solid;
@@ -488,7 +488,7 @@
 }
 
 @media (max-width: 782px) {
-	.grid-layout-container {
+	.fb-grid-layout-container.fb-grid-layout-editor-mode {
 		padding: 16px;
 
 		.grid-template-grid {
