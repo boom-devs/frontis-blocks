@@ -511,12 +511,8 @@ const createPresetLayouts = ( preset, blocks, cols ) =>
 		return nextLayouts;
 	}, {} );
 
-export default function Edit( {
-	attributes,
-	setAttributes,
-	clientId,
-	isSelected,
-} ) {
+export default function Edit( { attributes, setAttributes, clientId, isSelected, } ) {
+	
 	const {
 		blockID,
 		blockStyle,
@@ -1071,6 +1067,7 @@ export default function Edit( {
 		goToLayoutView();
 	};
 
+	// upgrade popup if pro is not active
 	const isProActive = getProActive();
 	const gridLayoutAvailable = applyFilters('frontisblocks-grid-layout-pro-available', false);
 
@@ -1082,11 +1079,13 @@ export default function Edit( {
 
 	return (
 		<>
-			<Inspector
-				attributes={ attributes }
-				setAttributes={ setAttributes }
-				addGridItem={ addGridItem }
-			/>
+			{isSelected && (
+				<Inspector
+					attributes={ attributes }
+					setAttributes={ setAttributes }
+					addGridItem={ addGridItem }
+				/>
+			)}
 
 			<BlockControls>
 				<ToolbarGroup>

@@ -3,6 +3,8 @@
  * Returns Dynamic Generated CSS
  */
 
+import getCustomCss from '@Utils/getCustomCss';
+
 const DEFAULT_GRID_SETTINGS = {
 	Desktop: { cols: 12, rowHeight: 40, gutter: 10 },
 	Tablet: { cols: 8, rowHeight: 35, gutter: 8 },
@@ -52,7 +54,69 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 		gutter,
 		gutterUnits,
 		layouts,
+
+		/** Start Global Setting */
+		gridLayoutGlobalZIndex,
+		gridLayoutGlobalWraperID,
+		gridLayoutGlobalWraperClass,
+
+		/** Start Padding */
+		gridLayoutGlobalPaddingUnits,
+		gridLayoutGlobalPaddingDesktop,
+		gridLayoutGlobalPaddingTablet,
+		gridLayoutGlobalPaddingMobile,
+		gridLayoutGlobalPaddingLink,
+
+		/** Margin */
+		gridLayoutGlobalMarginUnits,
+		gridLayoutGlobalMarginDesktop,
+		gridLayoutGlobalMarginTablet,
+		gridLayoutGlobalMarginMobile,
+		gridLayoutGlobalMarginLink,
+
+		/** Background */
+		gridLayoutGlobalBgColorTypeSwitcher,
+		gridLayoutGlobalBgColorType,
+		gridLayoutGlobalBgHoverColorType,
+		gridLayoutGlobalBgColor,
+		gridLayoutGlobalBgHoverColor,
+		gridLayoutGlobalBgGradientColor,
+		gridLayoutGlobalBgHoverGradientColor,
+		gridLayoutGlobalBgCustomGradientColorSwitcher,
+		gridLayoutGlobalBgCustomGradientColor,
+		gridLayoutGlobalBgHoverCustomGradientColorSwitcher,
+		gridLayoutGlobalBgHoverCustomGradientColor,
+
+		/** Border */
+		gridLayoutGlobalBorder,
+		gridLayoutGlobalBorderColorSwitcher,
+		gridLayoutGlobalBorderColor,
+		gridLayoutGlobalBorderHoverColor,
+		gridLayoutGlobalBorderUnits,
+		gridLayoutGlobalBorderDesktop,
+		gridLayoutGlobalBorderTablet,
+		gridLayoutGlobalBorderMobile,
+		gridLayoutGlobalBorderLink,
+
+		/** Border Radius */
+		gridLayoutGlobalBorderRadiusUnits,
+		gridLayoutGlobalBorderRadiusDesktop,
+		gridLayoutGlobalBorderRadiusTablet,
+		gridLayoutGlobalBorderRadiusMobile,
+		gridLayoutGlobalBorderRadiusLink,
+
+		/** Box Shadow */
+		gridLayoutGlobalBoxShadowSwitcher,
+		gridLayoutGlobalBoxShadowValues,
+		gridLayoutGlobalBoxShadowCssValue,
+		gridLayoutGlobalBoxShadowHoverValues,
+		gridLayoutGlobalBoxShadowHoverCssValue,
+
+		/** Custom CSS */
+		gridLayoutGlobalCustomCSS,
+		/** End Global Setting */
 	} = attributes;
+
 	const layoutStore = resolvedLayouts ?? layouts;
 
 	if (!blockID) {
@@ -74,42 +138,111 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const tabletRows = getLayoutRowCount(layoutStore?.Tablet || []);
 	const mobileRows = getLayoutRowCount(layoutStore?.Mobile || []);
 
-	let css = `
+	const gridLayoutGlobalPaddingDesktopWidth = `${gridLayoutGlobalPaddingDesktop?.top}${gridLayoutGlobalPaddingUnits?.Desktop} ${gridLayoutGlobalPaddingDesktop?.right}${gridLayoutGlobalPaddingUnits?.Desktop} ${gridLayoutGlobalPaddingDesktop?.bottom}${gridLayoutGlobalPaddingUnits?.Desktop} ${gridLayoutGlobalPaddingDesktop?.left}${gridLayoutGlobalPaddingUnits?.Desktop}`;
+	const gridLayoutGlobalPaddingTabletWidth = `${gridLayoutGlobalPaddingTablet?.top}${gridLayoutGlobalPaddingUnits?.Tablet} ${gridLayoutGlobalPaddingTablet?.right}${gridLayoutGlobalPaddingUnits?.Tablet} ${gridLayoutGlobalPaddingTablet?.bottom}${gridLayoutGlobalPaddingUnits?.Tablet} ${gridLayoutGlobalPaddingTablet?.left}${gridLayoutGlobalPaddingUnits?.Tablet}`;
+	const gridLayoutGlobalPaddingMobileWidth = `${gridLayoutGlobalPaddingMobile?.top}${gridLayoutGlobalPaddingUnits?.Mobile} ${gridLayoutGlobalPaddingMobile?.right}${gridLayoutGlobalPaddingUnits?.Mobile} ${gridLayoutGlobalPaddingMobile?.bottom}${gridLayoutGlobalPaddingUnits?.Mobile} ${gridLayoutGlobalPaddingMobile?.left}${gridLayoutGlobalPaddingUnits?.Mobile}`;
+
+	const gridLayoutGlobalMarginDesktopWidth = `${gridLayoutGlobalMarginDesktop?.top}${gridLayoutGlobalMarginUnits?.Desktop} ${gridLayoutGlobalMarginDesktop?.right}${gridLayoutGlobalMarginUnits?.Desktop} ${gridLayoutGlobalMarginDesktop?.bottom}${gridLayoutGlobalMarginUnits?.Desktop} ${gridLayoutGlobalMarginDesktop?.left}${gridLayoutGlobalMarginUnits?.Desktop}`;
+	const gridLayoutGlobalMarginTabletWidth = `${gridLayoutGlobalMarginTablet?.top}${gridLayoutGlobalMarginUnits?.Tablet} ${gridLayoutGlobalMarginTablet?.right}${gridLayoutGlobalMarginUnits?.Tablet} ${gridLayoutGlobalMarginTablet?.bottom}${gridLayoutGlobalMarginUnits?.Tablet} ${gridLayoutGlobalMarginTablet?.left}${gridLayoutGlobalMarginUnits?.Tablet}`;
+	const gridLayoutGlobalMarginMobileWidth = `${gridLayoutGlobalMarginMobile?.top}${gridLayoutGlobalMarginUnits?.Mobile} ${gridLayoutGlobalMarginMobile?.right}${gridLayoutGlobalMarginUnits?.Mobile} ${gridLayoutGlobalMarginMobile?.bottom}${gridLayoutGlobalMarginUnits?.Mobile} ${gridLayoutGlobalMarginMobile?.left}${gridLayoutGlobalMarginUnits?.Mobile}`;
+
+	const gridLayoutGlobalBorderDesktopWidth = `${gridLayoutGlobalBorderDesktop?.top}${gridLayoutGlobalBorderUnits?.Desktop} ${gridLayoutGlobalBorderDesktop?.right}${gridLayoutGlobalBorderUnits?.Desktop} ${gridLayoutGlobalBorderDesktop?.bottom}${gridLayoutGlobalBorderUnits?.Desktop} ${gridLayoutGlobalBorderDesktop?.left}${gridLayoutGlobalBorderUnits?.Desktop}`;
+	const gridLayoutGlobalBorderTabletWidth = `${gridLayoutGlobalBorderTablet?.top}${gridLayoutGlobalBorderUnits?.Tablet} ${gridLayoutGlobalBorderTablet?.right}${gridLayoutGlobalBorderUnits?.Tablet} ${gridLayoutGlobalBorderTablet?.bottom}${gridLayoutGlobalBorderUnits?.Tablet} ${gridLayoutGlobalBorderTablet?.left}${gridLayoutGlobalBorderUnits?.Tablet}`;
+	const gridLayoutGlobalBorderMobileWidth = `${gridLayoutGlobalBorderMobile?.top}${gridLayoutGlobalBorderUnits?.Mobile} ${gridLayoutGlobalBorderMobile?.right}${gridLayoutGlobalBorderUnits?.Mobile} ${gridLayoutGlobalBorderMobile?.bottom}${gridLayoutGlobalBorderUnits?.Mobile} ${gridLayoutGlobalBorderMobile?.left}${gridLayoutGlobalBorderUnits?.Mobile}`;
+
+	const gridLayoutGlobalBorderRadiusDesktopWidth = `${gridLayoutGlobalBorderRadiusDesktop?.top}${gridLayoutGlobalBorderRadiusUnits?.Desktop} ${gridLayoutGlobalBorderRadiusDesktop?.right}${gridLayoutGlobalBorderRadiusUnits?.Desktop} ${gridLayoutGlobalBorderRadiusDesktop?.bottom}${gridLayoutGlobalBorderRadiusUnits?.Desktop} ${gridLayoutGlobalBorderRadiusDesktop?.left}${gridLayoutGlobalBorderRadiusUnits?.Desktop}`;
+	const gridLayoutGlobalBorderRadiusTabletWidth = `${gridLayoutGlobalBorderRadiusTablet?.top}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.right}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.bottom}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.left}${gridLayoutGlobalBorderRadiusUnits?.Tablet}`;
+	const gridLayoutGlobalBorderRadiusMobileWidth = `${gridLayoutGlobalBorderRadiusMobile?.top}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.right}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.bottom}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.left}${gridLayoutGlobalBorderRadiusUnits?.Mobile}`;
+
+	let gridLayoutBlockStyle = `
 		${containerSelectors.join(", ")} {
 			display: grid;
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
 			${desktopRows > 0 ? `grid-template-rows: repeat(${desktopRows}, auto);` : ""}
 			gap: ${gutterDesktop}${desktopGapUnit};
 			align-items: stretch;
+
+			/* Global Styles */
+			${gridLayoutGlobalPaddingDesktopWidth && gridLayoutGlobalPaddingDesktop?.top ? `padding: ${gridLayoutGlobalPaddingDesktopWidth};` : ""}
+			${gridLayoutGlobalMarginDesktopWidth && gridLayoutGlobalMarginDesktop?.top ? `margin: ${gridLayoutGlobalMarginDesktopWidth};` : ""}
+			${gridLayoutGlobalBorder ? `border: ${gridLayoutGlobalBorder};` : ""}
+			${gridLayoutGlobalBorderColor ? `border-color: ${gridLayoutGlobalBorderColor};` : ""}
+			${gridLayoutGlobalBorderDesktopWidth && gridLayoutGlobalBorderDesktop?.top ? `border-width: ${gridLayoutGlobalBorderDesktopWidth};` : ""}
+			${gridLayoutGlobalBorderRadiusDesktopWidth && gridLayoutGlobalBorderRadiusDesktop?.top ? `border-radius: ${gridLayoutGlobalBorderRadiusDesktopWidth};` : ""}
+			${gridLayoutGlobalBoxShadowCssValue ? `box-shadow: ${gridLayoutGlobalBoxShadowCssValue};` : ""}
+			${gridLayoutGlobalZIndex?.Desktop ? `z-index: ${gridLayoutGlobalZIndex?.Desktop};` : ""}
+			${
+				gridLayoutGlobalBgColorType === "gradient"
+					? `background: ${
+							gridLayoutGlobalBgCustomGradientColorSwitcher && gridLayoutGlobalBgCustomGradientColor
+								? gridLayoutGlobalBgCustomGradientColor
+								: gridLayoutGlobalBgGradientColor
+						};`
+					: gridLayoutGlobalBgColor
+					? `background: ${gridLayoutGlobalBgColor};`
+					: ""
+			}
+			transition: all .3s ease-in-out;
+		}
+
+		${containerSelectors.map((s) => `${s}:hover`).join(", ")} {
+			${gridLayoutGlobalBorderHoverColor ? `border-color: ${gridLayoutGlobalBorderHoverColor};` : ""}
+			${gridLayoutGlobalBoxShadowHoverCssValue ? `box-shadow: ${gridLayoutGlobalBoxShadowHoverCssValue};` : ""}
+			${
+				gridLayoutGlobalBgHoverColorType === "gradient"
+					? `background: ${
+							gridLayoutGlobalBgHoverCustomGradientColorSwitcher && gridLayoutGlobalBgHoverCustomGradientColor
+								? gridLayoutGlobalBgHoverCustomGradientColor
+								: gridLayoutGlobalBgHoverGradientColor
+						};`
+					: gridLayoutGlobalBgHoverColor
+					? `background: ${gridLayoutGlobalBgHoverColor};`
+					: ""
+			}
 		}
 	`;
 
-	css = appendLayoutRules(css, blockID, layoutStore?.Desktop || []);
+	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Desktop || []);
 
-	css += `
-			@media (max-width: 1024px) {
-				${containerSelectors.join(", ")} {
-					grid-template-columns: repeat(${colsTablet}, 1fr);
-					${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
-					gap: ${gutterTablet}${tabletGapUnit};
-				}
+	gridLayoutBlockStyle += `
+		@media (max-width: 1024px) {
+			${containerSelectors.join(", ")} {
+				grid-template-columns: repeat(${colsTablet}, 1fr);
+				${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
+				gap: ${gutterTablet}${tabletGapUnit};
+
+				/* Global Tablet Styles */
+				${gridLayoutGlobalPaddingTabletWidth && gridLayoutGlobalPaddingTablet?.top ? `padding: ${gridLayoutGlobalPaddingTabletWidth};` : ""}
+				${gridLayoutGlobalMarginTabletWidth && gridLayoutGlobalMarginTablet?.top ? `margin: ${gridLayoutGlobalMarginTabletWidth};` : ""}
+				${gridLayoutGlobalBorderTabletWidth && gridLayoutGlobalBorderTablet?.top ? `border-width: ${gridLayoutGlobalBorderTabletWidth};` : ""}
+				${gridLayoutGlobalBorderRadiusTabletWidth && gridLayoutGlobalBorderRadiusTablet?.top ? `border-radius: ${gridLayoutGlobalBorderRadiusTabletWidth};` : ""}
+				${gridLayoutGlobalZIndex?.Tablet ? `z-index: ${gridLayoutGlobalZIndex?.Tablet};` : ""}
+			}
 	`;
-	css = appendLayoutRules(css, blockID, layoutStore?.Tablet || []);
-	css += `
+	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Tablet || []);
+	gridLayoutBlockStyle += `
 		}
-			@media (max-width: 767px) {
-				${containerSelectors.join(", ")} {
-					grid-template-columns: repeat(${colsMobile}, 1fr);
-					${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
-					gap: ${gutterMobile}${mobileGapUnit};
-				}
+		@media (max-width: 767px) {
+			${containerSelectors.join(", ")} {
+				grid-template-columns: repeat(${colsMobile}, 1fr);
+				${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
+				gap: ${gutterMobile}${mobileGapUnit};
+
+				/* Global Mobile Styles */
+				${gridLayoutGlobalPaddingMobileWidth && gridLayoutGlobalPaddingMobile?.top ? `padding: ${gridLayoutGlobalPaddingMobileWidth};` : ""}
+				${gridLayoutGlobalMarginMobileWidth && gridLayoutGlobalMarginMobile?.top ? `margin: ${gridLayoutGlobalMarginMobileWidth};` : ""}
+				${gridLayoutGlobalBorderMobileWidth && gridLayoutGlobalBorderMobile?.top ? `border-width: ${gridLayoutGlobalBorderMobileWidth};` : ""}
+				${gridLayoutGlobalBorderRadiusMobileWidth && gridLayoutGlobalBorderRadiusMobile?.top ? `border-radius: ${gridLayoutGlobalBorderRadiusMobileWidth};` : ""}
+				${gridLayoutGlobalZIndex?.Mobile ? `z-index: ${gridLayoutGlobalZIndex?.Mobile};` : ""}
+			}
 	`;
-	css = appendLayoutRules(css, blockID, layoutStore?.Mobile || []);
-	css += `
+	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Mobile || []);
+	gridLayoutBlockStyle += `
 		}
 	`;
 
-	return css.replace(/\s+/g, " ").trim();
+	const customCss = getCustomCss(gridLayoutGlobalCustomCSS, `.${blockID} `);
+	return `${gridLayoutBlockStyle} ${customCss}`.replace(/\s+/g, " ").trim();
 };
 
 export default generateGridLayoutStyle;
