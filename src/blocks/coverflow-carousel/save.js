@@ -1,4 +1,4 @@
-import { RichText, useBlockProps } from '@wordpress/block-editor';
+import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import {useRef} from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
@@ -22,8 +22,8 @@ export default function save({ attributes }) {
 	return (
 		<div {...blockProps}>
 			<div className={`fb-parent-wrapper fb-coverflowCarousel-wrapper ${blockID} ${coverflowCarouselGlobalWraperClass}`} id={coverflowCarouselGlobalWraperID}>
-				<div className="fb-coverflowCarousel-item">
-						
+				<div className="fb-coverflowCarousel-items-container">
+					<InnerBlocks.Content />
 				</div>
 			</div>
 		</div>

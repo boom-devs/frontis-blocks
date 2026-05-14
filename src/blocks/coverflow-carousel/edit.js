@@ -1,7 +1,8 @@
-import { __ } from '@wordpress/i18n';
 import {
 	RichText,
 	useBlockProps,
+	InnerBlocks,
+	useInnerBlocksProps
 } from '@wordpress/block-editor';
 
 import { useEffect, useRef, useState } from '@wordpress/element';
@@ -44,6 +45,24 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	}, [attributes, blockID]);
 	/** End Generate Block Style */
 
+	const ALLOWED_BLOCKS = [ 'frontis-blocks/coverflow-carousel-item' ];
+
+	const innerBlocksProps = useInnerBlocksProps(
+		{
+			className: 'fb-coverflowCarousel-items-container',
+		},
+		{
+			allowedBlocks: ALLOWED_BLOCKS,
+			template: [
+				[ 'frontis-blocks/coverflow-carousel-item' ],
+				[ 'frontis-blocks/coverflow-carousel-item' ],
+				[ 'frontis-blocks/coverflow-carousel-item' ],
+				[ 'frontis-blocks/coverflow-carousel-item' ],
+				[ 'frontis-blocks/coverflow-carousel-item' ],
+			],
+		}
+	);
+
 	const blockProps = useBlockProps({
 		className: `fb-coverflowCarousel-main-wrapper ${blockID} ${coverflowCarouselDesktopSwitcher && 'fb-desktop-responsive'} ${coverflowCarouselTabletSwitcher && 'fb-tablet-responsive'} ${coverflowCarouselMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
@@ -59,9 +78,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			
 			<div {...blockProps}>
 				<div className={`fb-parent-wrapper fb-coverflowCarousel-wrapper ${blockID} ${coverflowCarouselGlobalWraperClass}`} id={coverflowCarouselGlobalWraperID}>
-					<div className="fb-coverflowCarousel-item">
-						
-					</div>
+					<div {...innerBlocksProps} />
 				</div>
 			</div>
 			<style>{blockStyle}</style>
