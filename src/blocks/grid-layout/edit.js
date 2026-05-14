@@ -1033,7 +1033,7 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 	] );
 
 	const blockProps = useBlockProps( {
-		className: `frontis-block fb-grid-layout-main-wrapper fb-grid-layout-container ${ blockID } mode-${ builderView }`,
+		className: `frontis-block fb-grid-layout-main-wrapper fb-grid-layout-container fb-grid-layout-editor-mode ${ blockID } mode-${ builderView }`,
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
