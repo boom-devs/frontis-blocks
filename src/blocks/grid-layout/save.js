@@ -4,6 +4,8 @@ export default function save({ attributes }) {
 
 	const {
 		blockID,
+		gridLayoutGlobalWraperID,
+		gridLayoutGlobalWraperClass,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
@@ -12,7 +14,11 @@ export default function save({ attributes }) {
 
 	return (
 		<div {...blockProps}>
-			<InnerBlocks.Content />
+			<div className={`fb-grid-layout-wrap ${gridLayoutGlobalWraperClass}`} id={gridLayoutGlobalWraperID}>
+				<div className="grid-content-layer fb-grid-layout-container">
+					<InnerBlocks.Content />
+				</div>
+			</div>
 		</div>
 	);
 }
