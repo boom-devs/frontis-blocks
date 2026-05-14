@@ -8,10 +8,8 @@ const backToTopStyle = (attributes) => {
         backToTopPaddingDesktop,
         backToTopPaddingTablet,
         backToTopPaddingMobile,
-        backToTopPaddingLink,
 
         backToTopBorder,
-        backToTopBorderColorSwitcher,
         backToTopBorderColor,
         backToTopBorderHoverColor,
 
@@ -19,22 +17,16 @@ const backToTopStyle = (attributes) => {
         backToTopBorderDesktop,
         backToTopBorderTablet,
         backToTopBorderMobile,
-        backToTopBorderLink,
 
         backToTopBorderRadiusUnits,
         backToTopBorderRadiusDesktop,
         backToTopBorderRadiusTablet,
         backToTopBorderRadiusMobile,
-        backToTopBorderRadiusLink,
 
-        backToTopBoxShadowSwitcher,
-        backToTopBoxShadowValues,
         backToTopBoxShadowCssValue,
-        backToTopBoxShadowHoverValues,
         backToTopBoxShadowHoverCssValue,
         backToTopGlobalZIndex,
 
-        backToTopBgColorSwitcher,
         backToTopNormalBackgroundType,
         backToTopNormalClassicColor,
         backToTopNormalGradientColor,
@@ -48,8 +40,6 @@ const backToTopStyle = (attributes) => {
 
         backToTopGlobalTypoSwitcher,
         backToTopGlobalTypographyData,
-        backToTopGlobalTypoType,
-        backToTopGlobalTypoOption,
         backToTopFontFamily,
         backToTopFontSize,
         backToTopFontSizeUnits,
@@ -62,13 +52,8 @@ const backToTopStyle = (attributes) => {
         backToTopLetterSpacingUnits,
         backToTopLineHeightUnits,
 
-        backToTopPosition,
-        backToTopEntranceAnimation,
         backToTopContentDirection,
-
         backToTopCustomCSS,
-        backToTopWraperID,
-        backToTopWraperClass,
 
         backToTopHoverZoomEffect,
         backToTopClickScaleEffect,
@@ -79,13 +64,16 @@ const backToTopStyle = (attributes) => {
         backToTopTextIconSpacing,
         backToTopTextIconSpacingUnits,
 
-        backToTopIconColorSwitcher,
         backToTopIconColor,
         backToTopIconHoverColor,
 
-        backToTopBtnTextColorSwitcher,
         backToTopBtnTextColor,
         backToTopBtnTextHoverColor,
+        backToTopPosition,
+        backToTopOffsetX,
+        backToTopOffsetY,
+        backToTopOffsetXUnits,
+        backToTopOffsetYUnits,
 
     } = attributes;
 
@@ -120,6 +108,11 @@ const backToTopStyle = (attributes) => {
                 ${backToTopNormalClassicColor ? `background: ${backToTopNormalClassicColor};` : ''}
             `}
              transition: transform 0.3s ease;
+
+             ${backToTopPosition === 'bottom-right' ? `bottom: ${backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+             ${backToTopPosition === 'bottom-left' ? `bottom: ${backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+             ${backToTopPosition === 'top-right' ? `top: ${backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+             ${backToTopPosition === 'top-left' ? `top: ${backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
         }
 
         .${blockID} .fb-back-to-top-wrapper:hover {
@@ -264,6 +257,11 @@ const backToTopStyle = (attributes) => {
                ${backToTopPaddingTabletWidth && backToTopPaddingTablet?.top ? `padding: ${backToTopPaddingTabletWidth};` : ''}
                ${backToTopBorderTabletWidth && backToTopBorderTablet?.top ? `border-width: ${backToTopBorderTabletWidth};` : ''}
                ${backToTopBorderRadiusTabletWidth && backToTopBorderRadiusTablet?.top ? `border-radius: ${backToTopBorderRadiusTabletWidth};` : ''}
+
+                ${backToTopPosition === 'bottom-right' ? `bottom: ${backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'bottom-left' ? `bottom: ${backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'top-right' ? `top: ${backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'top-left' ? `top: ${backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
             }
             .${blockID} .fb-back-to-top-wrapper:hover {
                 ${backToTopHoverZoomEffect?.Tablet ? `transform: scale(${backToTopHoverZoomEffect.Tablet}) !important;` : ''}
@@ -288,6 +286,11 @@ const backToTopStyle = (attributes) => {
                ${backToTopPaddingMobileWidth && backToTopPaddingMobile?.top ? `padding: ${backToTopPaddingMobileWidth};` : ''}
                ${backToTopBorderMobileWidth && backToTopBorderMobile?.top ? `border-width: ${backToTopBorderMobileWidth};` : ''}
                ${backToTopBorderRadiusMobileWidth && backToTopBorderRadiusMobile?.top ? `border-radius: ${backToTopBorderRadiusMobileWidth};` : ''}
+
+                ${backToTopPosition === 'bottom-right' ? `bottom: ${backToTopOffsetY?.Mobile || backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Mobile || backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Mobile || backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Mobile || backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'bottom-left' ? `bottom: ${backToTopOffsetY?.Mobile || backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Mobile || backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Mobile || backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Mobile || backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'top-right' ? `top: ${backToTopOffsetY?.Mobile || backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Mobile || backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; right: ${backToTopOffsetX?.Mobile || backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Mobile || backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
+                ${backToTopPosition === 'top-left' ? `top: ${backToTopOffsetY?.Mobile || backToTopOffsetY?.Tablet || backToTopOffsetY?.Desktop || 20}${backToTopOffsetYUnits?.Mobile || backToTopOffsetYUnits?.Tablet || backToTopOffsetYUnits?.Desktop || 'px'}; left: ${backToTopOffsetX?.Mobile || backToTopOffsetX?.Tablet || backToTopOffsetX?.Desktop || 20}${backToTopOffsetXUnits?.Mobile || backToTopOffsetXUnits?.Tablet || backToTopOffsetXUnits?.Desktop || 'px'};` : ''}
             }
             .${blockID} .fb-back-to-top-wrapper:hover {
                 ${backToTopHoverZoomEffect?.Mobile ? `transform: scale(${backToTopHoverZoomEffect.Mobile}) !important;` : ''}

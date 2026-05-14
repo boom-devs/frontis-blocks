@@ -295,7 +295,7 @@ const attributes = {
     },
     backToTopNormalClassicColor: {
         type: "string",
-        default: "",
+        default: "#92003b",
     },
     backToTopNormalGradientColor: {
         type: "string",
@@ -344,28 +344,28 @@ const attributes = {
     backToTopPaddingDesktop: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
     backToTopPaddingTablet: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
     backToTopPaddingMobile: {
         type: "object",
         default: {
-            top: '',
-            bottom: '',
-            left: '',
-            right: '',
+            top: '10',
+            bottom: '10',
+            left: '10',
+            right: '10',
         },
     },
     backToTopPaddingLink: {
@@ -394,9 +394,9 @@ const attributes = {
     backToTopGlobalZIndex: {
         type: "object",
         default: {
-            Desktop: '',
-            Tablet: '',
-            Mobile: ''
+            Desktop: '9999',
+            Tablet: '9999',
+            Mobile: '9999'
         },
     },
     backToTopClickScaleEffect: {
@@ -468,6 +468,41 @@ const attributes = {
         default: "",
     },
     /** End Icon Image Style Setting */
+
+    /** Start Positioning Offset Setting */
+    backToTopOffsetX: {
+        type: "object",
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20'
+        },
+    },
+    backToTopOffsetY: {
+        type: "object",
+        default: {
+            Desktop: '20',
+            Tablet: '20',
+            Mobile: '20'
+        },
+    },
+    backToTopOffsetXUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    backToTopOffsetYUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        },
+    },
+    /** End Positioning Offset Setting */
 };
 
 export default attributes;
