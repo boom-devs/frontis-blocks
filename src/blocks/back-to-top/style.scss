@@ -98,7 +98,8 @@
         }
 
         .fb-back-to-top-wrapper {
-            position: relative;
+            // position: relative;
+            position: fixed;
             width: fit-content;
             display: inline-flex;
             opacity: 1 !important;
@@ -106,10 +107,10 @@
             transform: none !important;
             animation: none !important;
             transition: none !important;
-            bottom: auto;
-            right: auto;
-            left: auto;
-            top: auto;
+            // bottom: auto;
+            // right: auto;
+            // left: auto;
+            // top: auto;
         }
     }
 
