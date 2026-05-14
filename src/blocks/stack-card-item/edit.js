@@ -1,59 +1,143 @@
-import { __ } from '@wordpress/i18n';
+import './editor.scss';
+import { createBlock } from '@wordpress/blocks';
 import {
+	InnerBlocks,
+	InspectorControls,
 	useBlockProps,
 	useInnerBlocksProps,
-	InnerBlocks,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
-import { useSelect } from '@wordpress/data';
-import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
-import './editor.scss';
+import { useDispatch, useSelect } from '@wordpress/data';
+import { useLayoutEffect, useRef, useEffect } from '@wordpress/element';
+import StackCardItemInspector from './inspector';
 
-export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
-	const { blockID } = attributes;
+const DEFAULT_CARD_ITEM_TEMPLATE = [
+	['frontis-blocks/info-box'],
+];
 
-	useBlockIdGenerator({
-		clientId,
-		blockID,
-		blockPrefix: 'fb-stack-card-item',
-		isSelected,
-		attributes,
-		setAttributes,
-	});
+const getItemBackgroundValue = (
+	backgroundType,
+	classicColor,
+	gradientColor,
+	customGradientSwitcher,
+	customGradientInputValue,
+	fallbackValue
+) => {
+	if (backgroundType === 'gradient') {
+		return customGradientSwitcher && customGradientInputValue
+			? customGradientInputValue
+			: (gradientColor || classicColor || fallbackValue);
+	}
 
-	const cardIndex = useSelect(
-		(select) => select(blockEditorStore).getBlockIndex(clientId),
-		[clientId]
+	return classicColor || fallbackValue;
+};
+
+export default function Edit({ attributes, isSelected, clientId, setAttributes }) {
+	const {
+		itemNumber = 1,
+		stackCardItemBgNormalBackgroundType,
+		stackCardItemBgNormalClassicColor,
+		stackCardItemBgNormalGradientColor,
+		stackCardItemBgNormalCustomGradientSwitcher,
+		stackCardItemBgNormalCustomGradientInputValue,
+		stackCardItemBgHoverBackgroundType,
+		stackCardItemBgHoverClassicColor,
+		stackCardItemBgHoverGradientColor,
+		stackCardItemBgHoverCustomGradientSwitcher,
+		stackCardItemBgHoverCustomGradientInputValue,
+		stackCardItemBorderColor,
+		stackCardItemBorderHoverColor,
+	} = attributes;
+
+	const normalBackground = getItemBackgroundValue(
+		stackCardItemBgNormalBackgroundType,
+		stackCardItemBgNormalClassicColor,
+		stackCardItemBgNormalGradientColor,
+		stackCardItemBgNormalCustomGradientSwitcher,
+		stackCardItemBgNormalCustomGradientInputValue
 	);
-	const cardLabel = `${__('Card', 'frontis-blocks')} ${cardIndex + 1}`;
+
+	const hoverBackground = getItemBackgroundValue(
+		stackCardItemBgHoverBackgroundType,
+		stackCardItemBgHoverClassicColor,
+		stackCardItemBgHoverGradientColor,
+		stackCardItemBgHoverCustomGradientSwitcher,
+		stackCardItemBgHoverCustomGradientInputValue,
+		normalBackground
+	);
+
+	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
+	const autoRestoreAttemptedRef = useRef(false);
 
 	const hasInnerBlocks = useSelect(
-		(select) => select(blockEditorStore).getBlocks(clientId).length > 0,
+		(sel) => (sel(blockEditorStore).getBlocks(clientId) || []).length > 0,
 		[clientId]
 	);
 
+	useLayoutEffect(() => {
+		if (hasInnerBlocks) {
+			autoRestoreAttemptedRef.current = false;
+			return;
+		}
+
+		if (autoRestoreAttemptedRef.current) {
+			return;
+		}
+
+		autoRestoreAttemptedRef.current = true;
+
+		replaceInnerBlocks(
+			clientId,
+			[
+				createBlock('frontis-blocks/info-box', {
+					icon: 'swatchbook',
+					btnIcon: 'arrow-up-right-from-square',
+					mediaSwitcher: 'icon'
+				})
+			],
+			false
+		);
+	}, [clientId, hasInnerBlocks, replaceInnerBlocks]);
+
+	// Force a store update on mount to ensure defaults are saved and parent styles are triggered
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setAttributes({ _fb_init: true });
+		}, 50);
+		return () => clearTimeout(timer);
+	}, []);
+
 	const blockProps = useBlockProps({
-		className: `fb-stack-card-item ${blockID || ''}`.trim(),
-		'data-fb-card-index': cardIndex + 1,
-		'data-fb-card-id': blockID || '',
+		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
+		style: {
+			'--fb-stack-card-item-bg-normal': normalBackground,
+			'--fb-stack-card-item-bg-hover': hoverBackground,
+			'--fb-stack-card-item-border-color': stackCardItemBorderColor || undefined,
+			'--fb-stack-card-item-border-hover-color': stackCardItemBorderHoverColor || undefined,
+		},
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
 		{
-			className: 'fb-stack-card-item__content',
+			className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
 		},
 		{
+			template: DEFAULT_CARD_ITEM_TEMPLATE,
 			templateLock: false,
-			renderAppender: hasInnerBlocks
-				? undefined
-				: InnerBlocks.ButtonBlockAppender,
+			renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
 		}
 	);
 
 	return (
-		<div {...blockProps}>
-			<span className="fb-stack-card-item__editor-label">{cardLabel}</span>
-			<div {...innerBlocksProps} />
-		</div>
+		<>
+			{isSelected && (
+				<InspectorControls>
+					<StackCardItemInspector attributes={attributes} setAttributes={setAttributes} />
+				</InspectorControls>
+			)}
+			<div {...blockProps}>
+				<div {...innerBlocksProps} />
+			</div>
+		</>
 	);
 }
