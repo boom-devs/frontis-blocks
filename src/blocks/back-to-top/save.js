@@ -1,13 +1,11 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
-
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
     const {
         blockID,
         blockStyle,
-        backToTopPresetType,
         backToTopPosition,
         backToTopEntranceAnimation,
         backToTopContentType,
@@ -16,7 +14,8 @@ export default function save({ attributes }) {
         backToTopImage,
         backToTopImageAlt,
         backToTopText,
-        backToTopImageID
+        backToTopWraperID,
+        backToTopWraperClass,
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -26,7 +25,9 @@ export default function save({ attributes }) {
     return (
         <>
             <div {...blockProps}>
-                <div className='fb-back-to-top-wrapper'>
+                <div className={`fb-back-to-top-wrapper ${backToTopWraperClass}`}
+                    id={backToTopWraperID}
+                >
                     <div className=" fb-back-to-top-inner-wrapper ">
                         <div className=" fb-back-to-top-content-wrapper " >
                             {(backToTopContentType === "icon" || backToTopContentType === "text-icon") && (

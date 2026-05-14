@@ -18,7 +18,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     const {
         blockID,
         blockStyle,
-        backToTopPresetType,
         backToTopPosition,
         backToTopEntranceAnimation,
         backToTopContentType,
@@ -27,7 +26,8 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         backToTopImage,
         backToTopImageAlt,
         backToTopText,
-        backToTopImageID
+        backToTopWraperID,
+        backToTopWraperClass,
     } = attributes;
 
     // Handle block ID generation (handles duplication and initial ID)
@@ -53,12 +53,17 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         className: `fb-back-to-top-main-wrapper ${blockID} fb-position-${backToTopPosition} fb-animation-${backToTopEntranceAnimation} is-editor fb-show`,
     });
 
-
     return (
         <>
-            <Inspector attributes={attributes} setAttributes={setAttributes} />
+            {isSelected && (
+                <Inspector
+                    attributes={attributes}
+                    setAttributes={setAttributes} />
+            )}
             <div {...blockProps}>
-                <div className='fb-back-to-top-wrapper'>
+                <div className={`fb-back-to-top-wrapper ${backToTopWraperClass}`}
+                    id={backToTopWraperID}
+                >
                     <div className=" fb-back-to-top-inner-wrapper ">
                         <div className=" fb-back-to-top-content-wrapper " >
                             {(backToTopContentType === "icon" || backToTopContentType === "text-icon") && (
@@ -79,5 +84,4 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             <style>{blockStyle}</style>
         </>
     );
-
 }

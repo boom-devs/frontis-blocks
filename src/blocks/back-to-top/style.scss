@@ -2,10 +2,10 @@
     .fb-back-to-top-wrapper {
         position: fixed;
         cursor: pointer;
-        background: #92003b;
+        // background: #92003b;
         border-radius: 10px;
-        z-index: 9999;
-        padding: 10px;
+        // z-index: 9999;
+        // padding: 10px;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -31,23 +31,15 @@
     }
 
     &.fb-position-bottom-right .fb-back-to-top-wrapper {
-        bottom: 20px;
-        right: 20px;
     }
 
     &.fb-position-bottom-left .fb-back-to-top-wrapper {
-        bottom: 20px;
-        left: 20px;
     }
 
     &.fb-position-top-right .fb-back-to-top-wrapper {
-        top: 20px;
-        right: 20px;
     }
 
     &.fb-position-top-left .fb-back-to-top-wrapper {
-        top: 20px;
-        left: 20px;
     }
 
     &.fb-show {
@@ -56,9 +48,8 @@
             visibility: visible;
         }
 
-        // Corrected selectors: these classes are on the main wrapper (.fb-back-to-top-main-wrapper)
         &.fb-animation-slide-up .fb-back-to-top-wrapper {
-            transform: translateY(0);
+        transform: translateY(0);
         }
 
         &.fb-animation-zoom-in .fb-back-to-top-wrapper {
@@ -98,7 +89,6 @@
         }
 
         .fb-back-to-top-wrapper {
-            // position: relative;
             position: fixed;
             width: fit-content;
             display: inline-flex;
@@ -107,10 +97,6 @@
             transform: none !important;
             animation: none !important;
             transition: none !important;
-            // bottom: auto;
-            // right: auto;
-            // left: auto;
-            // top: auto;
         }
     }
 
