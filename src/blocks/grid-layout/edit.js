@@ -521,6 +521,9 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 		compactType,
 		allowOverlap,
 		layouts,
+		gridLayoutGlobalWraperID,
+		gridLayoutGlobalWraperClass,
+		
 	} = attributes;
 
 	useBlockIdGenerator( {
@@ -1030,7 +1033,7 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 	] );
 
 	const blockProps = useBlockProps( {
-		className: `frontis-block fb-grid-layout-main-wrapper grid-layout-container ${ blockID } mode-${ builderView }`,
+		className: `frontis-block fb-grid-layout-main-wrapper fb-grid-layout-container ${ blockID } mode-${ builderView }`,
 	} );
 
 	const innerBlocksProps = useInnerBlocksProps(
@@ -1124,7 +1127,7 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 			</BlockControls>
 
 			<div { ...blockProps }>
-				<div className="grid-editor-workspace" ref={ containerRef }>
+				<div className={`grid-editor-workspace fb-grid-layout-wrap ${gridLayoutGlobalWraperClass}`} id={gridLayoutGlobalWraperID} ref={ containerRef }>
 					{ isPickerView ? (
 						<div className="grid-template-stage">
 							<div className="grid-template-panel">
