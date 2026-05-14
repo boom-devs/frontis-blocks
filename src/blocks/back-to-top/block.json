@@ -10,10 +10,7 @@
     "supports": {
         "html": false,
         "anchor": false,
-        "align": [
-            "wide",
-            "full"
-        ],
+        "align": ["wide", "full"],
         "customClassName": false
     },
     "textdomain": "frontis-blocks",
@@ -21,4 +18,4 @@
     "editorStyle": "file:./index.css",
     "style": "file:./style-index.css",
     "viewScript": "file:./view.js"
-}
+}

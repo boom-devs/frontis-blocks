@@ -79,17 +79,13 @@ const backToTopStyle = (attributes) => {
         backToTopTextIconSpacing,
         backToTopTextIconSpacingUnits,
 
-        backToTopIconColorTypeSwitcher,
-        backToTopIconColorType,
-        backToTopIconHoverColorType,
+        backToTopIconColorSwitcher,
         backToTopIconColor,
         backToTopIconHoverColor,
-        backToTopIconGradientColor,
-        backToTopIconHoverGradientColor,
-        backToTopIconCustomGradientColorSwitcher,
-        backToTopIconCustomGradientColor,
-        backToTopIconHoverCustomGradientColorSwitcher,
-        backToTopIconHoverCustomGradientColor,
+
+        backToTopBtnTextColorSwitcher,
+        backToTopBtnTextColor,
+        backToTopBtnTextHoverColor,
 
     } = attributes;
 
@@ -107,7 +103,6 @@ const backToTopStyle = (attributes) => {
     const backToTopBorderRadiusDesktopWidth = `${backToTopBorderRadiusDesktop?.top}${backToTopBorderRadiusUnits?.Desktop} ${backToTopBorderRadiusDesktop?.right}${backToTopBorderRadiusUnits?.Desktop} ${backToTopBorderRadiusDesktop?.bottom}${backToTopBorderRadiusUnits?.Desktop} ${backToTopBorderRadiusDesktop?.left}${backToTopBorderRadiusUnits?.Desktop}`;
     const backToTopBorderRadiusTabletWidth = `${backToTopBorderRadiusTablet?.top}${backToTopBorderRadiusUnits?.Tablet} ${backToTopBorderRadiusTablet?.right}${backToTopBorderRadiusUnits?.Tablet} ${backToTopBorderRadiusTablet?.bottom}${backToTopBorderRadiusUnits?.Tablet} ${backToTopBorderRadiusTablet?.left}${backToTopBorderRadiusUnits?.Tablet}`;
     const backToTopBorderRadiusMobileWidth = `${backToTopBorderRadiusMobile?.top}${backToTopBorderRadiusUnits?.Mobile} ${backToTopBorderRadiusMobile?.right}${backToTopBorderRadiusUnits?.Mobile} ${backToTopBorderRadiusMobile?.bottom}${backToTopBorderRadiusUnits?.Mobile} ${backToTopBorderRadiusMobile?.left}${backToTopBorderRadiusUnits?.Mobile}`;
-
 
     const backToTopBlockStyle = `
         .${blockID} .fb-back-to-top-wrapper {
@@ -146,6 +141,7 @@ const backToTopStyle = (attributes) => {
         }
 
         .${blockID} .fb-back-to-top-content-wrapper span {
+            ${backToTopBtnTextColor ? `color: ${backToTopBtnTextColor};` : ""}
             ${backToTopGlobalTypoSwitcher.fontFamily === true &&
             backToTopGlobalTypographyData.fontFamily
             ? `font-family: ${backToTopGlobalTypographyData.fontFamily};`
@@ -233,40 +229,34 @@ const backToTopStyle = (attributes) => {
         }
        }
 
+        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-content-wrapper span {
+            ${backToTopBtnTextHoverColor ? `color: ${backToTopBtnTextHoverColor};` : ""}   
+        }
+
         .${blockID} .fb-back-to-top-content-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
-            ${backToTopIconImagePosition === 'right' ? 'flex-direction: row-reverse;' : 'flex-direction: row;'}
+            ${backToTopContentDirection === 'column' ? 'flex-direction: column;' : (backToTopIconImagePosition === 'right' ? 'flex-direction: row-reverse;' : 'flex-direction: row;')}
             ${backToTopTextIconSpacing?.Desktop ? `gap: ${backToTopTextIconSpacing?.Desktop}${backToTopTextIconSpacingUnits?.Desktop || 'px'};` : ''}
         }
 
-        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper i,
-        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper svg,
-        .${blockID} .fb-back-to-top-content-wrapper .fb-back-to-top-image-wrapper img {
+        .${blockID} .fb-back-to-top-wrapper .fb-back-to-top-image-wrapper i,
+        .${blockID} .fb-back-to-top-wrapper .fb-back-to-top-image-wrapper svg,
+        .${blockID} .fb-back-to-top-wrapper .fb-back-to-top-image-wrapper img {
             ${backToTopIconImageSize?.Desktop ? `font-size: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
             ${backToTopIconImageSize?.Desktop ? `width: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
             ${backToTopIconImageSize?.Desktop ? `height: ${backToTopIconImageSize?.Desktop}${backToTopIconImageSizeUnits?.Desktop || 'px'};` : ''}
-            
-            ${backToTopIconColorType === 'gradient' ? `
-                ${backToTopIconCustomGradientColorSwitcher && backToTopIconCustomGradientColor ? `background: ${backToTopIconCustomGradientColor};` : `background: ${backToTopIconGradientColor};`}
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            ` : `
-                ${backToTopIconColor ? `color: ${backToTopIconColor};` : ''}
-            `}
+            ${backToTopIconColor ? `color: ${backToTopIconColor};` : ""}
+            ${backToTopIconColor ? `fill: ${backToTopIconColor};` : ""}
+            ${backToTopIconColor ? `stroke: ${backToTopIconColor};` : ""}
         }
 
         .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper i,
-        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper svg,
-        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper img {
-            ${backToTopIconHoverColorType === 'gradient' ? `
-                ${backToTopIconHoverCustomGradientColorSwitcher && backToTopIconHoverCustomGradientColor ? `background: ${backToTopIconHoverCustomGradientColor};` : `background: ${backToTopIconHoverGradientColor};`}
-                -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-            ` : `
-                ${backToTopIconHoverColor ? `color: ${backToTopIconHoverColor};` : ''}
-            `}
+        .${blockID} .fb-back-to-top-wrapper:hover .fb-back-to-top-image-wrapper svg {
+            ${backToTopIconHoverColor ? `fill: ${backToTopIconHoverColor};` : ""} 
+            ${backToTopIconHoverColor ? `color: ${backToTopIconHoverColor};` : ""}
+            ${backToTopIconHoverColor ? `stroke: ${backToTopIconHoverColor};` : ""}
         }
 
         @media (max-width: 1024px) {

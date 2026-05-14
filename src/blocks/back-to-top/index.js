@@ -8,7 +8,6 @@ import './style.scss';
 import './editor.scss';
 import FB_Block_Icons from '@Config/fb-blocks-icons';
 
-
 registerBlockType(metadata.name, {
     attributes: attributes,
     icon: FB_Block_Icons.back_to_top,

@@ -50,7 +50,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     /** End Generate Block Style */
 
     const blockProps = useBlockProps({
-        className: `fb-back-to-top-main-wrapper ${blockID} fb-position-${backToTopPosition} fb-animation-${backToTopEntranceAnimation} is-editor`,
+        className: `fb-back-to-top-main-wrapper ${blockID} fb-position-${backToTopPosition} fb-animation-${backToTopEntranceAnimation} is-editor fb-show`,
     });
 
 
