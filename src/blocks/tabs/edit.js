@@ -157,13 +157,13 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		const reindexedItems = nextItems.map((it, i) => ({ ...it, id: i }));
 		updateTabItems(reindexedItems);
 
-		// 3) child-দের id-ও reindex
+		// update child block ids
 		const childIdsAfter = getChildren();
 		childIdsAfter.forEach((cid, i) => {
 			beDispatch.updateBlockAttributes(cid, { id: i });
 		});
 
-		// 4) active tab ঠিক করো
+		// update active tab
 		if (reindexedItems.length === 0) {
 			updateActiveTab(0);
 		} else {
