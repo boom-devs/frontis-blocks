@@ -14,13 +14,12 @@ const DEFAULT_GRID_SETTINGS = {
 const getBreakpointNumber = (values, breakpoint, settingKey) =>
 	Number(values?.[breakpoint]) || DEFAULT_GRID_SETTINGS[breakpoint][settingKey];
 
-const getContainerSelectors = (blockID) => [
-	`.${blockID}.fb-grid-layout-container`,
-	`.${blockID} .grid-content-layer.fb-grid-layout-container`,
-];
+const getContainerSelectors = (blockID) => ({
+	wrapper: `.${blockID}.fb-grid-layout-container`,
+	grid: `.${blockID} .grid-content-layer.fb-grid-layout-container`,
+});
 
 const getItemSelectors = (blockID, itemId) => [
-	`.${blockID}.fb-grid-layout-container > [data-grid-id="${itemId}"]`,
 	`.${blockID} .grid-content-layer.fb-grid-layout-container > [data-grid-id="${itemId}"]`,
 ];
 
@@ -31,22 +30,20 @@ const getLayoutRowCount = (layoutItems = []) =>
 		return Math.max(maxRow, y + h);
 	}, 0);
 
-const appendLayoutRules = (css, blockID, layoutItems = []) =>
-	layoutItems.reduce((nextCss, item) => {
+const generateLayoutRules = (blockID, layoutItems = []) =>
+	layoutItems.reduce((rules, item) => {
 		const x = Math.max(Number(item?.x) || 0, 0);
 		const y = Math.max(Number(item?.y) || 0, 0);
 		const w = Math.max(Number(item?.w) || 1, 1);
 		const h = Math.max(Number(item?.h) || 1, 1);
 
-		nextCss += `
+		return rules + `
 			${getItemSelectors(blockID, item.i).join(", ")} {
 				grid-column: ${x + 1} / span ${w};
 				grid-row: ${y + 1} / span ${h};
 			}
 		`;
-
-		return nextCss;
-	}, css);
+	}, "");
 
 const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const {
@@ -123,7 +120,7 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 		return "";
 	}
 
-	const containerSelectors = getContainerSelectors(blockID);
+	const selectors = getContainerSelectors(blockID);
 	const colsDesktop = getBreakpointNumber(null, "Desktop", "cols");
 	const colsTablet = getBreakpointNumber(null, "Tablet", "cols");
 	const colsMobile = getBreakpointNumber(null, "Mobile", "cols");
@@ -154,14 +151,9 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 	const gridLayoutGlobalBorderRadiusTabletWidth = `${gridLayoutGlobalBorderRadiusTablet?.top}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.right}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.bottom}${gridLayoutGlobalBorderRadiusUnits?.Tablet} ${gridLayoutGlobalBorderRadiusTablet?.left}${gridLayoutGlobalBorderRadiusUnits?.Tablet}`;
 	const gridLayoutGlobalBorderRadiusMobileWidth = `${gridLayoutGlobalBorderRadiusMobile?.top}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.right}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.bottom}${gridLayoutGlobalBorderRadiusUnits?.Mobile} ${gridLayoutGlobalBorderRadiusMobile?.left}${gridLayoutGlobalBorderRadiusUnits?.Mobile}`;
 
-	let gridLayoutBlockStyle = `
-		${containerSelectors.join(", ")} {
-			display: grid;
-			grid-template-columns: repeat(${colsDesktop}, 1fr);
-			${desktopRows > 0 ? `grid-template-rows: repeat(${desktopRows}, auto);` : ""}
-			gap: ${gutterDesktop}${desktopGapUnit};
-			align-items: stretch;
-
+	const gridLayoutBlockStyle = `
+		${selectors.wrapper} {
+			position: relative;
 			/* Global Styles */
 			${gridLayoutGlobalPaddingDesktopWidth && gridLayoutGlobalPaddingDesktop?.top ? `padding: ${gridLayoutGlobalPaddingDesktopWidth};` : ""}
 			${gridLayoutGlobalMarginDesktopWidth && gridLayoutGlobalMarginDesktop?.top ? `margin: ${gridLayoutGlobalMarginDesktopWidth};` : ""}
@@ -185,7 +177,7 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 			transition: all .3s ease-in-out;
 		}
 
-		${containerSelectors.map((s) => `${s}:hover`).join(", ")} {
+		${selectors.wrapper}:hover {
 			${gridLayoutGlobalBorderHoverColor ? `border-color: ${gridLayoutGlobalBorderHoverColor};` : ""}
 			${gridLayoutGlobalBoxShadowHoverCssValue ? `box-shadow: ${gridLayoutGlobalBoxShadowHoverCssValue};` : ""}
 			${
@@ -200,17 +192,19 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 					: ""
 			}
 		}
-	`;
 
-	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Desktop || []);
+		${selectors.grid} {
+			display: grid;
+			grid-template-columns: repeat(${colsDesktop}, 1fr);
+			${desktopRows > 0 ? `grid-template-rows: repeat(${desktopRows}, auto);` : ""}
+			gap: ${gutterDesktop}${desktopGapUnit};
+			align-items: stretch;
+		}
 
-	gridLayoutBlockStyle += `
-		@media (max-width: 1024px) {
-			${containerSelectors.join(", ")} {
-				grid-template-columns: repeat(${colsTablet}, 1fr);
-				${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
-				gap: ${gutterTablet}${tabletGapUnit};
+		${generateLayoutRules(blockID, layoutStore?.Desktop || [])}
 
+		@media only screen and (max-width: 1024px) {
+			${selectors.wrapper} {
 				/* Global Tablet Styles */
 				${gridLayoutGlobalPaddingTabletWidth && gridLayoutGlobalPaddingTablet?.top ? `padding: ${gridLayoutGlobalPaddingTabletWidth};` : ""}
 				${gridLayoutGlobalMarginTabletWidth && gridLayoutGlobalMarginTablet?.top ? `margin: ${gridLayoutGlobalMarginTabletWidth};` : ""}
@@ -218,16 +212,18 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 				${gridLayoutGlobalBorderRadiusTabletWidth && gridLayoutGlobalBorderRadiusTablet?.top ? `border-radius: ${gridLayoutGlobalBorderRadiusTabletWidth};` : ""}
 				${gridLayoutGlobalZIndex?.Tablet ? `z-index: ${gridLayoutGlobalZIndex?.Tablet};` : ""}
 			}
-	`;
-	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Tablet || []);
-	gridLayoutBlockStyle += `
-		}
-		@media (max-width: 767px) {
-			${containerSelectors.join(", ")} {
-				grid-template-columns: repeat(${colsMobile}, 1fr);
-				${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
-				gap: ${gutterMobile}${mobileGapUnit};
 
+			${selectors.grid} {
+				grid-template-columns: repeat(${colsTablet}, 1fr);
+				${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
+				gap: ${gutterTablet}${tabletGapUnit};
+			}
+
+			${generateLayoutRules(blockID, layoutStore?.Tablet || [])}
+		}
+
+		@media only screen and (max-width: 767px) {
+			${selectors.wrapper} {
 				/* Global Mobile Styles */
 				${gridLayoutGlobalPaddingMobileWidth && gridLayoutGlobalPaddingMobile?.top ? `padding: ${gridLayoutGlobalPaddingMobileWidth};` : ""}
 				${gridLayoutGlobalMarginMobileWidth && gridLayoutGlobalMarginMobile?.top ? `margin: ${gridLayoutGlobalMarginMobileWidth};` : ""}
@@ -235,9 +231,14 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 				${gridLayoutGlobalBorderRadiusMobileWidth && gridLayoutGlobalBorderRadiusMobile?.top ? `border-radius: ${gridLayoutGlobalBorderRadiusMobileWidth};` : ""}
 				${gridLayoutGlobalZIndex?.Mobile ? `z-index: ${gridLayoutGlobalZIndex?.Mobile};` : ""}
 			}
-	`;
-	gridLayoutBlockStyle = appendLayoutRules(gridLayoutBlockStyle, blockID, layoutStore?.Mobile || []);
-	gridLayoutBlockStyle += `
+
+			${selectors.grid} {
+				grid-template-columns: repeat(${colsMobile}, 1fr);
+				${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
+				gap: ${gutterMobile}${mobileGapUnit};
+			}
+
+			${generateLayoutRules(blockID, layoutStore?.Mobile || [])}
 		}
 	`;
 
