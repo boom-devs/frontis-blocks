@@ -1,32 +1,39 @@
 import { useBlockProps, useInnerBlocksProps, store as blockEditorStore } from '@wordpress/block-editor';
-import { useDispatch, useSelect } from '@wordpress/data';
+import { useDispatch, useSelect, select } from '@wordpress/data';
 import { useEffect, useLayoutEffect, useRef } from '@wordpress/element';
 import SwitchToBlockSettings from '@Utils/SwitchToBlockSettings';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import attributeDefinitions from './attributes';
-import Inspector from './inspector';
+import Inspector, { createDefaultCardItemBlock } from './inspector';
 import { presetStyles } from './presets';
 import { getPresetFrameDataAttributes } from './preset-frame-data';
 import generateStackCardsStyle from './styling';
 import {
-	bindPresetFourBehavior,
-	getPresetFourConfig,
+	generateStackCardItemsAggregateCss,
+	getStackCardItemStyleSignature,
+} from '../stack-card-item/styling';
+import { applyFilters } from '@wordpress/hooks';
+import UpgradeToProPopup from '@Utils/upgradeToProPopup';
+import getProActive from '@Utils/getProActive';
+
+import {
+	bindStackCardPresetOverBehavior as bindPresetFourBehavior,
+	getStackCardPresetOverConfig as getPresetFourConfig,
 	hasStackCardScalePreset,
-	isPresetFourStackOver,
-	PresetFourNavigation,
-} from './preset-four';
+	isStackCardPresetOver as isPresetFourStackOver,
+	StackCardPresetOverNavigation as PresetFourNavigation,
+} from './behaviors/preset-four';
 import {
-	bindPresetThreeBehavior,
-	getPresetThreeConfig,
-	isPresetThreeStackRight,
-} from './preset-three';
+	bindStackCardPresetRightBehavior as bindPresetThreeBehavior,
+	getStackCardPresetRightConfig as getPresetThreeConfig,
+	isStackCardPresetRight as isPresetThreeStackRight,
+} from './behaviors/preset-three';
 import {
-	bindPresetTwoBehavior,
-	getPresetTwoConfig,
-	isPresetTwoStackLeft,
-} from './preset-two';
-import { bindEditorStackCardScale } from './stack-card-scale-behavior';
-import { createDefaultCardItemBlock } from './default-card-item';
+	bindStackCardPresetLeftBehavior as bindPresetTwoBehavior,
+	getStackCardPresetLeftConfig as getPresetTwoConfig,
+	isStackCardPresetLeft as isPresetTwoStackLeft,
+} from './behaviors/preset-two';
+import { bindStackCardScaleEditorBehavior as bindEditorStackCardScale } from './behaviors/stack-card-scale';
 import './editor.scss';
 
 const CARD_ITEM_BLOCK = 'frontis-blocks/stack-card-item';
@@ -48,7 +55,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	const { replaceInnerBlocks, updateBlockAttributes } = useDispatch(blockEditorStore);
 	const childBlocks = useSelect(
-		(select) => select('core/block-editor').getBlocks(clientId) || [],
+		(sel) => sel(blockEditorStore).getBlocks(clientId) || [],
+		[clientId]
+	);
+
+	const stackCardItemStyleSignature = useSelect(
+		(sel) => {
+			const blockEditor = sel(blockEditorStore);
+			const blocks = blockEditor.getBlocks(clientId) || [];
+			return getStackCardItemStyleSignature(blocks, blockEditor);
+		},
 		[clientId]
 	);
 
@@ -61,26 +77,46 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         setAttributes,
     });
 
-	useEffect(() => {
-        if (blockID) {
-            const css = generateStackCardsStyle(attributes);
-            if (css !== blockStyle) {
-                setAttributes({ blockStyle: css });
-            }
-        }
-    }, [attributes, blockID, blockStyle]);
+	useLayoutEffect(() => {
+		if (childBlocks.length === 0) {
+			const defaultItems = Array.from({ length: INITIAL_CARD_ITEMS }, (_, index) =>
+				createDefaultCardItemBlock(index + 1)
+			);
+			replaceInnerBlocks(clientId, defaultItems, false);
+			return; // Let the next cycle handle styling once blocks are added
+		}
 
-	useEffect(() => {
-		if (childBlocks.length > 0) {
+		const ensuredBlockId =
+			blockID ||
+			(clientId && typeof clientId === 'string' ? `fb-stack-cards-${clientId.slice(0, 8)}` : '');
+		
+		if (!ensuredBlockId) {
 			return;
 		}
 
-		const defaultItems = Array.from({ length: INITIAL_CARD_ITEMS }, (_, index) =>
-			createDefaultCardItemBlock(index + 1)
-		);
+		const itemCss = generateStackCardItemsAggregateCss(ensuredBlockId, childBlocks);
+		const baseCss = generateStackCardsStyle(attributes);
+		const css = `${baseCss} ${itemCss}`.replace(/\s+/g, ' ').trim();
 
-		replaceInnerBlocks(clientId, defaultItems, false);
-	}, [childBlocks.length, clientId, replaceInnerBlocks]);
+		const updates = {};
+		if (!blockID) {
+			updates.blockID = ensuredBlockId;
+		}
+		if (css !== blockStyle) {
+			updates.blockStyle = css;
+		}
+		if (Object.keys(updates).length > 0) {
+			setAttributes(updates);
+		}
+	}, [
+		attributes,
+		blockID,
+		blockStyle,
+		childBlocks,
+		clientId,
+		setAttributes,
+		stackCardItemStyleSignature,
+	]);
 
 	useEffect(() => {
 		childBlocks.forEach((childBlock, index) => {
@@ -107,7 +143,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	SwitchToBlockSettings(panelRef);
 
 	useEffect(() => {
-		if (initialPresetHydratedRef.current || childBlocks.length > 0) {
+		if (initialPresetHydratedRef.current) {
 			return;
 		}
 
@@ -134,7 +170,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		if (shouldHydratePreset) {
 			setAttributes(currentPresetValues);
 		}
-	}, [attributes, childBlocks.length, setAttributes, stackCardsPresetStyle]);
+	}, [attributes, setAttributes, stackCardsPresetStyle]);
 
 	const blockProps = useBlockProps({
 		ref: rootRef,
@@ -191,10 +227,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			return undefined;
 		}
 		const el = rootRef.current;
-		if (!el?.__fbPresetTwoInstance) {
+		if (!el?.__fbStackCardPresetLeftInstance) {
 			return undefined;
 		}
-		el.__fbPresetTwoInstance.updateConfig?.(presetTwoConfig);
+		el.__fbStackCardPresetLeftInstance.updateConfig?.(presetTwoConfig);
 	}, [stackCardsPresetStyle, JSON.stringify(presetTwoConfig)]);
 
 	useLayoutEffect(() => {
@@ -225,10 +261,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			return undefined;
 		}
 		const el = rootRef.current;
-		if (!el?.__fbPresetThreeInstance) {
+		if (!el?.__fbStackCardPresetRightInstance) {
 			return undefined;
 		}
-		el.__fbPresetThreeInstance.updateConfig?.(presetThreeConfig);
+		el.__fbStackCardPresetRightInstance.updateConfig?.(presetThreeConfig);
 	}, [stackCardsPresetStyle, JSON.stringify(presetThreeConfig)]);
 
 	useLayoutEffect(() => {
@@ -259,10 +295,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			return undefined;
 		}
 		const el = rootRef.current;
-		if (!el?.__fbPresetFourInstance) {
+		if (!el?.__fbStackCardPresetOverInstance) {
 			return undefined;
 		}
-		el.__fbPresetFourInstance.updateConfig?.(presetFourConfig);
+		el.__fbStackCardPresetOverInstance.updateConfig?.(presetFourConfig);
 	}, [stackCardsPresetStyle, JSON.stringify(presetFourConfig)]);
 
 	useLayoutEffect(() => {
@@ -275,6 +311,15 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		}
 		return bindEditorStackCardScale(el);
 	}, [stackCardsPresetStyle, clientId, childBlocks.length, blockID, blockStyle]);
+
+	const isProActive = getProActive();
+	const stackCardAvailable = applyFilters('frontisblocks-stack-card-pro-available', false);
+
+	if(!stackCardAvailable || !isProActive) {
+		return (
+			<UpgradeToProPopup />
+		)
+	}
 
 	return (
 		<>

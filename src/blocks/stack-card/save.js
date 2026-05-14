@@ -1,14 +1,15 @@
 import { InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 import { getPresetFrameDataAttributes } from './preset-frame-data';
 import {
-	getPresetFourConfig,
-	isPresetFourStackOver,
-	PresetFourNavigation,
-} from './preset-four';
+	getStackCardPresetOverConfig as getPresetFourConfig,
+	isStackCardPresetOver as isPresetFourStackOver,
+	StackCardPresetOverNavigation as PresetFourNavigation,
+} from './behaviors/preset-four';
 
 export default function Save({ attributes }) {
 	const {
 		blockID,
+		blockStyle,
 		stackCardsPresetStyle,
 		stackCardsDesktopSwitcher,
 		stackCardsTabletSwitcher,
@@ -41,6 +42,7 @@ export default function Save({ attributes }) {
 				<InnerBlocks.Content />
 				{isPresetFourStackOver(stackCardsPresetStyle) && stackCardsPresetFourShowNavigation && <PresetFourNavigation config={presetFourConfig} />}
 			</div>
+			<style>{blockStyle}</style>
 		</div>
 	);
-};
+}
