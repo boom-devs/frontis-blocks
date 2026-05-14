@@ -7,15 +7,15 @@ import './editor.scss';
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
-        blockId,
-        sliderItems,
+        blockID,
+        CoverflowCarouselItems,
         blockStyle,
     } = attributes;
     const deviceType = useDeviceType();
 
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
-            setAttributes({ blockId: `fb-coverflow-carousel-item-${clientId.slice(0, 8)}` });
+            setAttributes({ blockID: `fb-coverflow-carousel-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 
