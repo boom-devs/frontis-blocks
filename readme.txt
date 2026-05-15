@@ -248,7 +248,7 @@ There is no prerequisites for installing **Frontis Blocks**. You can follow the 
 
 == Changelog ==
 
-= 1.2.3 – 13 May 2026 =
+= 1.2.3 – 15 May 2026 =
 - **New**: Added Stacked Card block with Pro features support.
 - **Fixed**: Resolved PHP 7.4 compatibility issue in typography CSS selector logic.
 - **Fixed**: Resolved asset generation issue for pages without wp:post-content block.
