@@ -1,9 +1,13 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
-import FB_VisibilityControl from '../../components/visibility-control';
+import './editor.scss';
+import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamic-css-loader.js';
+import generateImageHotspotStyle from './styling';
 
 function Edit({ attributes, setAttributes }) {
-  const { imageUrl, hotspots, selectedHotspotId, deviceType = 'Desktop' } = attributes;
+  const { imageUrl, imageAlt, imageSize, hotspots, selectedHotspotId, deviceType = 'Desktop' } = attributes;
+
+  const blockStyling = generateImageHotspotStyle(attributes);
 
   const selectedHotspot = hotspots?.find(h => h.id === selectedHotspotId);
 
@@ -16,6 +20,8 @@ function Edit({ attributes, setAttributes }) {
 
   return (
     <>
+      <DynamicCSSLoader blockStyling={blockStyling} />
+    
       <Inspector 
         attributes={attributes}
         setAttributes={setAttributes}
@@ -23,40 +29,59 @@ function Edit({ attributes, setAttributes }) {
       
       <div {...useBlockProps()}>
         {!imageUrl ? (
-          <div style={{ padding: '40px', textAlign: 'center', background: '#f0f0f0', borderRadius: '8px' }}>
+          <div className="fb-hotspot-placeholder">
             <p>Select an image from the sidebar inspector</p>
           </div>
         ) : (
-          <div style={{ position: 'relative', display: 'inline-block', width: '100%' }}>
+          <div className="fb-hotspot-editor-container">
             <img 
               src={imageUrl} 
-              alt="Hotspot base"
-              style={{ maxWidth: '100%', height: 'auto', display: 'block' }}
+              alt={imageAlt || 'Hotspot base'}
+              className="fb-hotspot-base-image"
             />
             
             {hotspots?.map((hotspot) => !isHidden(hotspot) && (
               <div
                 key={hotspot.id}
+                className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''}`}
+                data-hotspot-id={hotspot.id}
                 style={{
-                  position: 'absolute',
                   left: `${hotspot.x}%`,
-                  top: `${hotspot.y}%`,
-                  width: selectedHotspotId === hotspot.id ? '32px' : '24px',
-                  height: selectedHotspotId === hotspot.id ? '32px' : '24px',
-                  backgroundColor: hotspot.backgroundColor || '#ff0000',
-                  borderRadius: '50%',
-                  transform: 'translate(-50%, -50%)',
-                  cursor: 'pointer',
-                  border: selectedHotspotId === hotspot.id ? '3px solid #fff' : '2px solid #fff',
-                  boxShadow: selectedHotspotId === hotspot.id ? '0 0 0 2px #007cba' : '0 2px 4px rgba(0,0,0,0.2)',
-                  transition: 'all 0.2s ease',
-                  zIndex: selectedHotspotId === hotspot.id ? 10 : 1
+                  top: `${hotspot.y}%`
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
                   setAttributes({ selectedHotspotId: hotspot.id });
                 }}
-              />
+              >
+                {hotspot.link ? (
+                  <a 
+                    href={hotspot.link} 
+                    target={hotspot.openInNewTab ? '_blank' : '_self'}
+                    rel={hotspot.openInNewTab ? 'noopener noreferrer' : ''}
+                    className="fb-hotspot-link"
+                  >
+                    <div 
+                      className="fb-hotspot-trigger"
+                      style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
+                    >
+                      <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
+                    </div>
+                  </a>
+                ) : (
+                  <div 
+                    className="fb-hotspot-trigger"
+                    style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
+                  >
+                    <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
+                  </div>
+                )}
+                
+                <div className="fb-hotspot-popover">
+                  {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
+                  {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
+                </div>
+              </div>
             ))}
           </div>
         )}

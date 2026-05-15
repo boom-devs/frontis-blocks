@@ -1,0 +1,97 @@
+.fb-hotspot-placeholder {
+  padding: 40px;
+  text-align: center;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.fb-hotspot-editor-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.fb-hotspot-base-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.fb-hotspot-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s ease;
+
+  .fb-hotspot-trigger {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      transform: scale(1.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &.selected {
+    z-index: 20;
+
+    .fb-hotspot-trigger {
+      width: 32px;
+      height: 32px;
+      border: 3px solid #fff;
+      box-shadow: 0 0 0 2px #007cba, 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  .fb-hotspot-popover {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 12px;
+    min-width: 200px;
+    z-index: 20;
+    white-space: nowrap;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 8px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+    }
+  }
+
+  &:hover .fb-hotspot-popover {
+    display: block;
+  }
+}
+
+// Responsive visibility in editor
+@media (min-width: 1024px) {
+  .fb-hotspot-marker.hide-desktop { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fb-hotspot-marker.hide-tablet { display: none; }
+}
+@media (max-width: 767px) {
+  .fb-hotspot-marker.hide-mobile { display: none; }
+}

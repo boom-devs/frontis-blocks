@@ -27,49 +27,180 @@ const attributes = {
 
 	hotspots: {
 		type: "array",
-		default: [],
+		default: []
 	},
-
-	boxShadow: { 
-		type: "array", 
-		default: [] 
-	},
-
-	link: { 
+	selectedHotspotId: { 
 		type: "string", 
 		default: "" 
 	},
 
-	openInNewTab: { 
-		type: "boolean", 
-		default: false 
+	deviceType: { 
+		type: "string", 
+		default: "Desktop" 
 	},
 
-	fontFamily: { 
-		type: "string", 
-		default: "" 
-	},
-	fontSize: { 
+	// Hotspot marker styles
+	markerSize: { 
 		type: "object", 
 		default: {} 
 	},
-	fontWeight: { 
+	markerSizeUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	markerColor: { 
+		type: "string", 
+		default: "#ff0000" 
+	},
+	markerHoverColor: { 
 		type: "string", 
 		default: "" 
 	},
+	markerBorderWidth: { 
+		type: "object", 
+		default: {} 
+	},
+	markerBorderWidthUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	markerBorderColor: { 
+		type: "string", 
+		default: "#ffffff" 
+	},
+	markerBorderRadius: { 
+		type: "object", 
+		default: {} 
+	},
+	markerBorderRadiusUnits: { 
+		type: "object", 
+		default: {} 
+	},
 
-	hideDesktop: { 
-		type: "boolean", 
-		default: false 
+	// Popover styles
+	popoverBgColor: { 
+		type: "string", 
+		default: "#ffffff" 
 	},
-	hideTablet: { 
-		type: "boolean", 
-		default: false 
+	popoverWidth: { 
+		type: "object", 
+		default: {} 
 	},
-	hideMobile: { 
-		type: "boolean", 
-		default: false 
-	}
+	popoverWidthUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	popoverPadding: { 
+		type: "object", 
+		default: {} 
+	},
+	popoverPaddingUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	popoverBorderRadius: { 
+		type: "object", 
+		default: {} 
+	},
+	popoverBorderRadiusUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	popoverShadow: { 
+		type: "string", 
+		default: "0 4px 12px rgba(0, 0, 0, 0.15)" 
+	},
+
+	// Title typography
+	titleFontFamily: { 
+		type: "string", 
+		default: "" 
+	},
+	titleFontSize: { 
+		type: "object", 
+		default: {} 
+	},
+	titleFontSizeUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	titleFontWeight: { 
+		type: "string", 
+		default: "600" 
+	},
+	titleFontStyle: { 
+		type: "string", 
+		default: "normal" 
+	},
+	titleColor: { 
+		type: "string", 
+		default: "#333333" 
+	},
+	titleMargin: { 
+		type: "object", 
+		default: {} 
+	},
+	titleMarginUnits: { 
+		type: "object", 
+		default: {} 
+	},
+
+	// Description typography
+	descFontFamily: { 
+		type: "string", 
+		default: "" 
+	},
+	descFontSize: { 
+		type: "object", 
+		default: {} 
+	},
+	descFontSizeUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	descFontWeight: { 
+		type: "string", 
+		default: "400" 
+	},
+	descFontStyle: { 
+		type: "string", 
+		default: "normal" 
+	},
+	descColor: { 
+		type: "string", 
+		default: "#666666" 
+	},
+	descMargin: { 
+		type: "object", 
+		default: {} 
+	},
+	descMarginUnits: { 
+		type: "object", 
+		default: {} 
+	},
+
+	// Icon styles
+	iconSize: { 
+		type: "object", 
+		default: {} 
+	},
+	iconSizeUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	iconColor: { 
+		type: "string", 
+		default: "#ffffff" 
+	},
+
+	// Visibility controls (per hotspot - stored in hotspots array)
+	// These are moved to each hotspot object
+
+	// Custom CSS
+	customCSS: { 
+		type: "string", 
+		default: "" 
+	},
 }
 
 export default attributes;
