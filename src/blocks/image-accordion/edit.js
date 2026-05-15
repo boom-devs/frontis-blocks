@@ -1,6 +1,7 @@
-import { useEffect } from "@wordpress/element";
+import { useEffect, useRef } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
+import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 
 import Inspector from "./inspector";
 import { renderAccordion } from "./presets";
@@ -102,6 +103,12 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		accordionItems = [],
 	} = attributes;
 
+	/**
+	 * Manages tab button settings and switches to block settings on click
+	 */
+	const panelRef = useRef(null);
+	SwitchToBlockSettings(panelRef);
+
 	const deviceType = useDeviceType();
 
 	useBlockIdGenerator({
@@ -131,7 +138,9 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 
 	return (
 		<>
-			<Inspector attributes={attributes} setAttributes={setAttributes} />
+			{isSelected && (
+				<Inspector attributes={attributes} setAttributes={setAttributes} />
+			)}
 
 			<div {...blockProps}>
 				{/*  Editor info bar */}
@@ -197,6 +206,7 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 						background: "#fff",
 						overflow: "hidden",
 					}}
+					ref={panelRef}
 				>
 					{accordionItems.length === 0 ? (
 						<EmptyState />

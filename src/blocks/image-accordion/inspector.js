@@ -439,7 +439,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 					)}
 
 				<FB_Spacing
-					label={__("Padding (px)", "frontis-blocks")}
+					label={__("Padding", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={(val) =>
 						setAttributes({ itemPaddingUnits: val })
@@ -475,7 +475,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 					setAttributes={setAttributes}
 				/>
 				<FB_Spacing
-					label={__("Margin (px)", "frontis-blocks")}
+					label={__("Margin", "frontis-blocks")}
 					deviceType={deviceType}
 					spacingUnitsHandler={(val) => setAttributes({ itemMarginUnits: val })}
 					spacingUnits={itemMarginUnits}
@@ -510,7 +510,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 				/>
 
 				<FB_Range
-					label={__("Gap (px)", "frontis-blocks")}
+					label={__("Gap", "frontis-blocks")}
 					rangeValue={itemsGap}
 					onChangeHandler={(val) => setAttributes({ itemsGap: val })}
 					min={0}
