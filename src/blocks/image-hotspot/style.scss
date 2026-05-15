@@ -1,0 +1,23 @@
+.fb-hotspot-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.fb-hotspot-base-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Responsive visibility classes are handled by styling.js
+// But keep these if styling.js doesn't generate them
+@media (min-width: 1024px) {
+  .fb-hotspot-marker.hide-desktop { display: none; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  .fb-hotspot-marker.hide-tablet { display: none; }
+}
+@media (max-width: 767px) {
+  .fb-hotspot-marker.hide-mobile { display: none; }
+}
