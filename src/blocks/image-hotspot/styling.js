@@ -1,3 +1,4 @@
+console.log('styling.js loaded on frontend');
 /**
  * Image Hotspot Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -7,56 +8,56 @@ import getCustomCss from '@Utils/getCustomCss';
 
 const generateImageHotspotStyle = (attributes) => {
     const {
-        blockId,
+        imageHotspot_blockID: blockId,
         
         // Hotspot marker styles
-        markerSize,
-        markerSizeUnits,
-        markerColor,
-        markerHoverColor,
-        markerBorderWidth,
-        markerBorderWidthUnits,
-        markerBorderColor,
-        markerBorderRadius,
-        markerBorderRadiusUnits,
+        imageHotspot_markerSize: markerSize,
+        imageHotspot_markerSizeUnits: markerSizeUnits,
+        imageHotspot_markerColor: markerColor,
+        imageHotspot_markerHoverColor: markerHoverColor,
+        imageHotspot_markerBorderWidth: markerBorderWidth,
+        imageHotspot_markerBorderWidthUnits: markerBorderWidthUnits,
+        imageHotspot_markerBorderColor: markerBorderColor,
+        imageHotspot_markerBorderRadius: markerBorderRadius,
+        imageHotspot_markerBorderRadiusUnits: markerBorderRadiusUnits,
         
         // Popover styles
-        popoverBgColor,
-        popoverWidth,
-        popoverWidthUnits,
-        popoverPadding,
-        popoverPaddingUnits,
-        popoverBorderRadius,
-        popoverBorderRadiusUnits,
-        popoverShadow,
+        imageHotspot_popoverBgColor: popoverBgColor,
+        imageHotspot_popoverWidth: popoverWidth,
+        imageHotspot_popoverWidthUnits: popoverWidthUnits,
+        imageHotspot_popoverPadding: popoverPadding,
+        imageHotspot_popoverPaddingUnits: popoverPaddingUnits,
+        imageHotspot_popoverBorderRadius: popoverBorderRadius,
+        imageHotspot_popoverBorderRadiusUnits: popoverBorderRadiusUnits,
+        imageHotspot_popoverShadow: popoverShadow,
         
         // Title typography
-        titleFontFamily,
-        titleFontSize,
-        titleFontSizeUnits,
-        titleFontWeight,
-        titleFontStyle,
-        titleColor,
-        titleMargin,
-        titleMarginUnits,
+        imageHotspot_titleFontFamily: titleFontFamily,
+        imageHotspot_titleFontSize: titleFontSize,
+        imageHotspot_titleFontSizeUnits: titleFontSizeUnits,
+        imageHotspot_titleFontWeight: titleFontWeight,
+        imageHotspot_titleFontStyle: titleFontStyle,
+        imageHotspot_titleColor: titleColor,
+        imageHotspot_titleMargin: titleMargin,
+        imageHotspot_titleMarginUnits: titleMarginUnits,
         
         // Description typography
-        descFontFamily,
-        descFontSize,
-        descFontSizeUnits,
-        descFontWeight,
-        descFontStyle,
-        descColor,
-        descMargin,
-        descMarginUnits,
+        imageHotspot_descFontFamily: descFontFamily,
+        imageHotspot_descFontSize: descFontSize,
+        imageHotspot_descFontSizeUnits: descFontSizeUnits,
+        imageHotspot_descFontWeight: descFontWeight,
+        imageHotspot_descFontStyle: descFontStyle,
+        imageHotspot_descColor: descColor,
+        imageHotspot_descMargin: descMargin,
+        imageHotspot_descMarginUnits: descMarginUnits,
         
         // Icon styles
-        iconSize,
-        iconSizeUnits,
-        iconColor,
+        imageHotspot_iconSize: iconSize,
+        imageHotspot_iconSizeUnits: iconSizeUnits,
+        imageHotspot_iconColor: iconColor,
         
         // Custom CSS
-        customCSS,
+        imageHotspot_customCSS: customCSS,
     } = attributes;
 
     // Marker size with unit
@@ -115,20 +116,19 @@ const generateImageHotspotStyle = (attributes) => {
     const descMarginMobile = descMargin?.Mobile ? `${descMargin.Mobile}${descMarginUnits?.Mobile || 'px'}` : descMarginValue;
 
     const style = `
-        .wp-block-frontis-blocks-image-hotspot.${blockId} {
+        .${blockId} {
             position: relative;
             display: inline-block;
             width: 100%;
         }
 
-        /* Hotspot Marker */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-marker {
+        .${blockId} .fb-hotspot-marker {
             position: absolute;
             transform: translate(-50%, -50%);
             z-index: 10;
         }
 
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-trigger {
+        .${blockId} .fb-hotspot-trigger {
             width: ${markerSizeValue};
             height: ${markerSizeValue};
             background-color: ${markerColor};
@@ -144,28 +144,26 @@ const generateImageHotspotStyle = (attributes) => {
             justify-content: center;
         }
 
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-trigger:hover {
+        .${blockId} .fb-hotspot-trigger:hover {
             background-color: ${markerHoverColor || markerColor};
             transform: scale(1.15);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hotspot Icon */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-icon {
+        .${blockId} .fb-hotspot-icon {
             width: ${iconSizeValue};
             height: ${iconSizeValue};
             color: ${iconColor};
             display: inline-block;
         }
 
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-icon svg {
+        .${blockId} .fb-hotspot-icon svg {
             width: 100%;
             height: 100%;
             fill: currentColor;
         }
 
-        /* Popover */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover {
+        .${blockId} .fb-hotspot-popover {
             position: absolute;
             bottom: 100%;
             left: 50%;
@@ -180,12 +178,11 @@ const generateImageHotspotStyle = (attributes) => {
             display: none;
         }
 
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-marker:hover .fb-hotspot-popover {
+        .${blockId} .fb-hotspot-marker:hover .fb-hotspot-popover {
             display: block;
         }
 
-        /* Popover Arrow */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover::after {
+        .${blockId} .fb-hotspot-popover::after {
             content: '';
             position: absolute;
             top: 100%;
@@ -196,8 +193,7 @@ const generateImageHotspotStyle = (attributes) => {
             border-color: ${popoverBgColor} transparent transparent transparent;
         }
 
-        /* Popover Title */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-title {
+        .${blockId} .fb-hotspot-popover-title {
             font-family: ${titleFontFamily || 'inherit'};
             font-size: ${titleFontSizeValue};
             font-weight: ${titleFontWeight};
@@ -207,8 +203,7 @@ const generateImageHotspotStyle = (attributes) => {
             line-height: 1.4;
         }
 
-        /* Popover Description */
-        .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-description {
+        .${blockId} .fb-hotspot-popover-description {
             font-family: ${descFontFamily || 'inherit'};
             font-size: ${descFontSizeValue};
             font-weight: ${descFontWeight};
@@ -218,63 +213,61 @@ const generateImageHotspotStyle = (attributes) => {
             line-height: 1.5;
         }
 
-        /* Responsive - Tablet */
         @media only screen and (max-width: 1024px) {
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-trigger {
+            .${blockId} .fb-hotspot-trigger {
                 width: ${markerSizeTablet};
                 height: ${markerSizeTablet};
                 border-width: ${markerBorderWidthTablet};
                 border-radius: ${markerBorderRadiusTablet};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover {
+            .${blockId} .fb-hotspot-popover {
                 width: ${popoverWidthTablet};
                 padding: ${popoverPaddingTablet};
                 border-radius: ${popoverBorderRadiusTablet};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-icon {
+            .${blockId} .fb-hotspot-icon {
                 width: ${iconSizeTablet};
                 height: ${iconSizeTablet};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-title {
+            .${blockId} .fb-hotspot-popover-title {
                 font-size: ${titleFontSizeTablet};
                 margin: ${titleMarginTablet};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-description {
+            .${blockId} .fb-hotspot-popover-description {
                 font-size: ${descFontSizeTablet};
                 margin: ${descMarginTablet};
             }
         }
 
-        /* Responsive - Mobile */
         @media only screen and (max-width: 767px) {
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-trigger {
+            .${blockId} .fb-hotspot-trigger {
                 width: ${markerSizeMobile};
                 height: ${markerSizeMobile};
                 border-width: ${markerBorderWidthMobile};
                 border-radius: ${markerBorderRadiusMobile};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover {
+            .${blockId} .fb-hotspot-popover {
                 width: ${popoverWidthMobile};
                 padding: ${popoverPaddingMobile};
                 border-radius: ${popoverBorderRadiusMobile};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-icon {
+            .${blockId} .fb-hotspot-icon {
                 width: ${iconSizeMobile};
                 height: ${iconSizeMobile};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-title {
+            .${blockId} .fb-hotspot-popover-title {
                 font-size: ${titleFontSizeMobile};
                 margin: ${titleMarginMobile};
             }
 
-            .wp-block-frontis-blocks-image-hotspot.${blockId} .fb-hotspot-popover-description {
+            .${blockId} .fb-hotspot-popover-description {
                 font-size: ${descFontSizeMobile};
                 margin: ${descMarginMobile};
             }

@@ -1,10 +1,20 @@
+import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import './style.scss';
-import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamic-css-loader.js';
 import generateImageHotspotStyle from './styling';
 
+// for debugging
+console.log('Image Hotspot Save - blockID:', blockID);
+console.log('Image Hotspot Save - blockStyle exists?', !!attributes.blockStyle);
+
 export default function Save({ attributes }) {
-  const { imageUrl, imageAlt, imageSize, hotspots } = attributes;
+  const { 
+    imageHotspot_imageUrl: imageUrl, 
+    imageHotspot_imageAlt: imageAlt, 
+    imageHotspot_imageSize: imageSize, 
+    imageHotspot_hotspots: hotspots,
+    imageHotspot_blockID: blockID,
+  } = attributes;
 
   const blockStyling = generateImageHotspotStyle(attributes);
 
@@ -14,29 +24,21 @@ export default function Save({ attributes }) {
 
   return (
     <>
-      <DynamicCSSLoader blockStyling={blockStyling} />
-
-      <div {...useBlockProps.save()}>
+      <div className={blockID} {...useBlockProps.save()}>
         <div className="fb-image-hotspot-wrapper">
           <div className="fb-hotspot-container">
             <img 
               src={imageUrl} 
-              alt={imageAlt || 'Hotspot Image'}
+              alt={imageAlt || __('Hotspot Image', 'frontis-blocks')}
               className="fb-hotspot-base-image"
               style={{ objectFit: imageSize || 'cover' }}
             />
             
             {hotspots?.map((hotspot) => {
-              const visibilityClass = [
-                hotspot.hideDesktop && 'hide-desktop',
-                hotspot.hideTablet && 'hide-tablet',
-                hotspot.hideMobile && 'hide-mobile'
-              ].filter(Boolean).join(' ');
-              
               return (
                 <div 
                   key={hotspot.id}
-                  className={`fb-hotspot-marker ${visibilityClass}`}
+                  className="fb-hotspot-marker"
                   data-hotspot-id={hotspot.id}
                   style={{
                     left: `${hotspot.x}%`,
