@@ -1,10 +1,12 @@
 export function getContainerStyle(attributes) {
-	const { containerHeight, itemsGap, presetStyle } = attributes;
+	const { containerHeight = {}, itemsGap = {}, presetStyle } = attributes;
 	const style = {
-		height: `${containerHeight}px`,
+		height: `${containerHeight?.Desktop || 500}px`,
 	};
-	if (presetStyle !== "preset-2") {
-		style.gap = `${itemsGap}px`;
+
+	// Only apply gap via inline style if it's not Preset 2
+	if (presetStyle !== "preset-2" && itemsGap?.Desktop !== undefined) {
+		style.gap = `${itemsGap.Desktop}px`;
 	}
 	return style;
 }
@@ -13,7 +15,13 @@ export function getContainerStyle(attributes) {
    PRESET 1
    
  */
-export function renderPreset1Item(item, index, attributes) {
+export function renderPreset1Item(
+	item,
+	index,
+	attributes,
+	activeIndex = 0,
+	onItemAction,
+) {
 	const {
 		overlayColor,
 		iconColor,
@@ -27,10 +35,10 @@ export function renderPreset1Item(item, index, attributes) {
 		subtitleFontSize,
 	} = attributes;
 
-	const isFirst = index === 0;
+	const isActive = index === activeIndex;
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : "none",
+		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
 
@@ -45,11 +53,13 @@ export function renderPreset1Item(item, index, attributes) {
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isFirst ? " is-active" : ""}`}
+			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
-			aria-expanded={isFirst ? "true" : "false"}
+			aria-expanded={isActive ? "true" : "false"}
+			onClick={() => onItemAction && onItemAction(index, "click")}
+			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			<div
 				className="pea-image-accordion-overlay"
@@ -101,7 +111,13 @@ export function renderPreset1Item(item, index, attributes) {
    PRESET 2 
    
 */
-export function renderPreset2Item(item, index, attributes) {
+export function renderPreset2Item(
+	item,
+	index,
+	attributes,
+	activeIndex = 0,
+	onItemAction,
+) {
 	const {
 		overlayColor,
 		showDots,
@@ -117,22 +133,24 @@ export function renderPreset2Item(item, index, attributes) {
 		subtitleFontSize,
 	} = attributes;
 
-	const isFirst = index === 0;
+	const isActive = index === activeIndex;
 	const itemNumber = String(index + 1).padStart(2, "0");
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : "none",
+		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
 
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isFirst ? " is-active" : ""}`}
+			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
-			aria-expanded={isFirst ? "true" : "false"}
+			aria-expanded={isActive ? "true" : "false"}
+			onClick={() => onItemAction && onItemAction(index, "click")}
+			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			<div
 				className="pea-image-accordion-overlay"
@@ -196,7 +214,13 @@ export function renderPreset2Item(item, index, attributes) {
    PRESET 3 
    
  */
-export function renderPreset3Item(item, index, attributes) {
+export function renderPreset3Item(
+	item,
+	index,
+	attributes,
+	activeIndex = 0,
+	onItemAction,
+) {
 	const {
 		overlayColor,
 		titleColor,
@@ -213,10 +237,10 @@ export function renderPreset3Item(item, index, attributes) {
 		btnPaddingX,
 	} = attributes;
 
-	const isFirst = index === 0;
+	const isActive = index === activeIndex;
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : "none",
+		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
 
@@ -234,11 +258,13 @@ export function renderPreset3Item(item, index, attributes) {
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isFirst ? " is-active" : ""}`}
+			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
-			aria-expanded={isFirst ? "true" : "false"}
+			aria-expanded={isActive ? "true" : "false"}
+			onClick={() => onItemAction && onItemAction(index, "click")}
+			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			<div
 				className="pea-image-accordion-overlay"
@@ -288,7 +314,13 @@ export function renderPreset3Item(item, index, attributes) {
 /* 
    PRESET 4 
 */
-export function renderPreset4Item(item, index, attributes) {
+export function renderPreset4Item(
+	item,
+	index,
+	attributes,
+	activeIndex = 0,
+	onItemAction,
+) {
 	const {
 		overlayColor,
 		showNumber,
@@ -301,24 +333,26 @@ export function renderPreset4Item(item, index, attributes) {
 		subtitleFontSize,
 	} = attributes;
 
-	const isFirst = index === 0;
+	const isActive = index === activeIndex;
 	const itemNumber = String(index + 1).padStart(2, "0");
 
 	/*
 	 * Preset 4
 	 */
 	const skewBgStyle = {
-		backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : "none",
+		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
 		backgroundColor: item.imageUrl ? "transparent" : "#1e293b",
 	};
 
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isFirst ? " is-active" : ""}`}
+			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
 			tabIndex={0}
 			role="button"
-			aria-expanded={isFirst ? "true" : "false"}
+			aria-expanded={isActive ? "true" : "false"}
+			onClick={() => onItemAction && onItemAction(index, "click")}
+			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			{/* Un-skewed background */}
 			<div className="pea-skew-bg" style={skewBgStyle} />
@@ -371,20 +405,44 @@ export function renderPreset4Item(item, index, attributes) {
 /* 
    Main
  */
-export function renderAccordion(attributes) {
+export function renderAccordion(attributes, activeIndex = 0, onItemAction) {
 	const { presetStyle, accordionItems = [] } = attributes;
 	const containerStyle = getContainerStyle(attributes);
 
 	const items = accordionItems.map((item, index) => {
 		switch (presetStyle) {
 			case "preset-2":
-				return renderPreset2Item(item, index, attributes);
+				return renderPreset2Item(
+					item,
+					index,
+					attributes,
+					activeIndex,
+					onItemAction,
+				);
 			case "preset-3":
-				return renderPreset3Item(item, index, attributes);
+				return renderPreset3Item(
+					item,
+					index,
+					attributes,
+					activeIndex,
+					onItemAction,
+				);
 			case "preset-4":
-				return renderPreset4Item(item, index, attributes);
+				return renderPreset4Item(
+					item,
+					index,
+					attributes,
+					activeIndex,
+					onItemAction,
+				);
 			default:
-				return renderPreset1Item(item, index, attributes);
+				return renderPreset1Item(
+					item,
+					index,
+					attributes,
+					activeIndex,
+					onItemAction,
+				);
 		}
 	});
 

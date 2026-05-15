@@ -19,6 +19,7 @@ import FB_Spacing from "@Components/spacing";
 import FB_InspectorControls from "@Components/InspectorControls";
 import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import FB_Preset from "@Components/presets";
 import { useDeviceType } from "@Config/displayType";
 
 /*  Single item editor  */
@@ -92,8 +93,11 @@ const ItemEditor = ({
 						<MediaUploadCheck>
 							<MediaUpload
 								onSelect={(media) => {
-									update("imageUrl", media.url);
-									update("imageId", media.id);
+									onChange(index, {
+										...item,
+										imageUrl: media.url,
+										imageId: media.id,
+									});
 								}}
 								allowedTypes={["image"]}
 								value={item.imageId}
@@ -128,7 +132,7 @@ const ItemEditor = ({
 												onClick={openMedia}
 												style={{ width: "100%" }}
 											>
-												{__("🖼 Select Image", "frontis-blocks")}
+												{__("Select Image", "frontis-blocks")}
 											</Button>
 										)}
 									</div>
@@ -169,7 +173,7 @@ const ItemEditor = ({
 							/>
 							{(item.mediaType || "icon") === "icon" && (
 								<FB_InputControl
-									label={__("Choose Icon (CSS class)", "frontis-blocks")}
+									label={__("Choose Icon", "frontis-blocks")}
 									helpText="e.g. fas fa-star"
 									value={item.iconValue || "fas fa-star"}
 									onChangeValue={(val) => update("iconValue", val)}
@@ -184,6 +188,7 @@ const ItemEditor = ({
 										<MediaUpload
 											onSelect={(media) => update("iconImageUrl", media.url)}
 											allowedTypes={["image"]}
+											value={item.iconImageUrl}
 											render={({ open: openIcon }) => (
 												<Button
 													variant="secondary"
@@ -236,6 +241,7 @@ const ItemEditor = ({
 /* 
    CONTENT PANEL
  */
+
 const ContentPanel = ({ attributes, setAttributes }) => {
 	const { presetStyle, triggerOn, accordionItems } = attributes;
 
@@ -261,8 +267,9 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 				{
 					id: Date.now().toString(),
 					title: "Discover unique",
-					subTitle: "",
-					imageUrl: "",
+					subTitle: "discover unique",
+					// Note: Consider using a plugin-specific URL for local assets here
+					imageUrl: "https://via.placeholder.com/1920x1080.png?text=New+Image",
 					imageId: 0,
 					iconValue: "fas fa-star",
 					iconLibrary: "solid",
@@ -277,17 +284,16 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 
 	return (
 		<PanelBody title={__("Content", "frontis-blocks")} initialOpen={true}>
-			<SelectControl
+			<FB_Preset
 				label={__("Accordion Type", "frontis-blocks")}
-				value={presetStyle}
-				options={[
+				presets={[
 					{ label: "Preset 1", value: "preset-1" },
 					{ label: "Preset 2", value: "preset-2" },
 					{ label: "Preset 3", value: "preset-3" },
 					{ label: "Preset 4", value: "preset-4" },
 				]}
-				onChange={(val) => setAttributes({ presetStyle: val })}
-				__nextHasNoMarginBottom
+				presetValue={presetStyle}
+				onChangeHandler={(val) => setAttributes({ presetStyle: val })}
 			/>
 
 			<Divider />
@@ -347,43 +353,43 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 	const {
 		presetStyle,
-		containerHeight,
-		itemsGap,
-		itemBorderRadius,
+		containerHeight = {},
+		itemsGap = {},
+		itemBorderRadius = {},
 		itemBorderType,
 		itemBorderColor,
-		itemPaddingUnits,
-		itemPaddingDesktop,
-		itemPaddingTablet,
-		itemPaddingMobile,
-		itemMarginUnits,
-		itemMarginDesktop,
-		itemMarginTablet,
-		itemMarginMobile,
+		itemPaddingUnits = { Desktop: "px", Tablet: "px", Mobile: "px" },
+		itemPaddingDesktop = { top: "", right: "", bottom: "", left: "" },
+		itemPaddingTablet = { top: "", right: "", bottom: "", left: "" },
+		itemPaddingMobile = { top: "", right: "", bottom: "", left: "" },
+		itemMarginUnits = { Desktop: "px", Tablet: "px", Mobile: "px" },
+		itemMarginDesktop = { top: "", right: "", bottom: "", left: "" },
+		itemMarginTablet = { top: "", right: "", bottom: "", left: "" },
+		itemMarginMobile = { top: "", right: "", bottom: "", left: "" },
 		overlayColor,
 		overlayHoverColor,
 		iconColor,
 		iconBgColor,
-		iconSize,
-		iconCircleSize,
+		iconSize = {},
+		iconCircleSize = {},
 		showDots,
 		dotColor,
-		dotSize,
+		dotSize = {},
 		showNumber,
 		numberColor,
-		numberFontSize,
+		numberFontSize = {},
 		titleColor,
-		titleFontSize,
+		titleFontSize = {},
 		titleFontWeight,
 		subtitleColor,
-		subtitleFontSize,
+		subtitleFontSize = {},
 		btnTextColor,
 		btnBgColor,
 		btnBorderColor,
-		btnBorderRadius,
-		btnFontSize,
-		btnPaddingY,
-		btnPaddingX,
+		btnBorderRadius = {},
+		btnFontSize = {},
+		btnPaddingY = {},
+		btnPaddingX = {},
 	} = attributes;
 
 	return (
@@ -462,7 +468,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 						} else {
 							setAttributes({
 								[`itemPadding${deviceType}`]: {
-									...attributes[`itemPadding${deviceType}`],
+									...(attributes[`itemPadding${deviceType}`] || {}),
 									[pos]: val,
 								},
 							});
@@ -496,7 +502,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 						} else {
 							setAttributes({
 								[`itemMargin${deviceType}`]: {
-									...attributes[`itemMargin${deviceType}`],
+									...(attributes[`itemMargin${deviceType}`] || {}),
 									[pos]: val,
 								},
 							});

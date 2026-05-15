@@ -25,7 +25,8 @@ const attributes = {
 				id: "1",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl: "",
+				imageUrl:
+					"https://via.placeholder.com/1920x1080.png?text=Default+Image+1",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -39,7 +40,8 @@ const attributes = {
 				id: "2",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl: "",
+				imageUrl:
+					"https://via.placeholder.com/1920x1080.png?text=Default+Image+2",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -53,7 +55,8 @@ const attributes = {
 				id: "3",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl: "",
+				imageUrl:
+					"https://via.placeholder.com/1920x1080.png?text=Default+Image+3",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -67,7 +70,8 @@ const attributes = {
 				id: "4",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl: "",
+				imageUrl:
+					"https://via.placeholder.com/1920x1080.png?text=Default+Image+4",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -81,7 +85,8 @@ const attributes = {
 				id: "5",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl: "",
+				imageUrl:
+					"https://via.placeholder.com/1920x1080.png?text=Default+Image+5",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
