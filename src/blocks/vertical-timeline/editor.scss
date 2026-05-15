@@ -1,0 +1,35 @@
+.fb-timeline-add-button-wrapper {
+    margin-top: 24px;
+
+    .fb-timeline-add-button {
+        padding: 12px 24px !important;
+        background-color: #EBF5FF;
+        border-radius: 8px;
+        height: auto;
+        color: #000000;
+        display: flex;
+        // flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        transition: all .3s ease-in-out;
+
+        &:hover {
+            color: #fff;
+            background-color: #399CFF;
+        }
+
+         .dashicons-plus{
+            font-size: 18px;
+            padding: 0;
+            width: unset;
+            height: unset;
+            margin-bottom: -4px;
+        }
+
+        .fb-timeline-add-button-label {
+            font-size: 16px;
+            font-weight: 500;
+        }
+    }
+}
