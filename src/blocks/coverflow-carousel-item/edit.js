@@ -7,7 +7,7 @@ import { compose } from '@wordpress/compose';
 const Edit = (props) => {
     const { attributes, setAttributes, clientId, context, slideIndex } = props;
 
-    const { blockId } = attributes;
+    const { blockID } = attributes;
 
 
     const parentBlocks = wp.blocks.getBlockTypes().filter( function ( item ) {
@@ -19,16 +19,16 @@ const Edit = (props) => {
             'frontis-blocks/container',
             {},
             [
-                [ 'frontis-blocks/advanced-image' ]
+                [ 'frontis-blocks/call-to-action' ]
             ]
         ]
     ];
 
-    // Hide slider block.
+    // Hide coverflow carousel block.
 	const ALLOWED_BLOCKS = parentBlocks
     .map( ( block ) => block.name )
     .filter(
-        ( blockName ) => [ 'frontis-blocks/slider', ].indexOf( blockName ) === -1
+        ( blockName ) => [ 'frontis-blocks/coverflow-carousel', ].indexOf( blockName ) === -1
     );
 
     const innerBlockOptions = {
@@ -45,7 +45,7 @@ const Edit = (props) => {
     );
 
     const blockProps = useBlockProps({
-        className: `fb-coverflow-carousel-main-wrapper ${blockId || 'default-id'}`,
+        className: `fb-coverflow-carousel-main-wrapper ${blockID || 'default-id'}`,
     });
 
     return (
