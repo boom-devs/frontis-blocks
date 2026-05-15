@@ -2,25 +2,26 @@ import { useBlockProps } from "@wordpress/block-editor";
 import { renderAccordion, getContainerStyle } from "./presets";
 
 const Save = ({ attributes }) => {
-	const { presetStyle, triggerOn } = attributes;
+	const { blockID, blockStyle, presetStyle, triggerOn } = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: "image-accordion-block",
+		className: `image-accordion-block ${blockID}`,
 	});
 
-	const { containerStyle, items } = renderAccordion(attributes);
+	const { items } = renderAccordion(attributes);
 
 	return (
-		<div {...blockProps}>
-			<div
-				className={`pea-image-accordion-wrapper ${presetStyle}`}
-				data-trigger={triggerOn}
-			>
-				<div className="pea-image-accordion-container" style={containerStyle}>
-					{items}
+		<>
+			<div {...blockProps}>
+				<div
+					className={`pea-image-accordion-wrapper ${presetStyle}`}
+					data-trigger={triggerOn}
+				>
+					<div className="pea-image-accordion-container">{items}</div>
 				</div>
 			</div>
-		</div>
+			<style>{blockStyle}</style>
+		</>
 	);
 };
 

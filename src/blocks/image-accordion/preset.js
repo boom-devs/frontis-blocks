@@ -9,10 +9,10 @@ export function getContainerStyle(attributes) {
 	return style;
 }
 
-/* =================
-   PRESET 1 — Rounded pill cards
-   Icon circle + text at bottom-left
-======================== */
+/* 
+   PRESET 1
+   
+ */
 export function renderPreset1Item(item, index, attributes) {
 	const {
 		overlayColor,
@@ -97,10 +97,10 @@ export function renderPreset1Item(item, index, attributes) {
 	);
 }
 
-/* ===================
-   PRESET 2 — Seamless pillars
-   Dot indicator + number + title centre-bottom
-=================== */
+/* 
+   PRESET 2 
+   
+*/
 export function renderPreset2Item(item, index, attributes) {
 	const {
 		overlayColor,
@@ -192,10 +192,10 @@ export function renderPreset2Item(item, index, attributes) {
 	);
 }
 
-/* =======================
-   PRESET 3 — Vertical stack
-   Title left, button right
-=========================== */
+/* 
+   PRESET 3 
+   
+ */
 export function renderPreset3Item(item, index, attributes) {
 	const {
 		overlayColor,
@@ -285,10 +285,9 @@ export function renderPreset3Item(item, index, attributes) {
 	);
 }
 
-/* ===================
-   PRESET 4 — Skewed panels
-   Un-skewed bg layer, counter-skewed content
-======================== */
+/* 
+   PRESET 4 
+*/
 export function renderPreset4Item(item, index, attributes) {
 	const {
 		overlayColor,
@@ -305,6 +304,9 @@ export function renderPreset4Item(item, index, attributes) {
 	const isFirst = index === 0;
 	const itemNumber = String(index + 1).padStart(2, "0");
 
+	/*
+	 * Preset 4
+	 */
 	const skewBgStyle = {
 		backgroundImage: item.imageUrl ? `url(${item.imageUrl})` : "none",
 		backgroundColor: item.imageUrl ? "transparent" : "#1e293b",
@@ -366,9 +368,9 @@ export function renderPreset4Item(item, index, attributes) {
 	);
 }
 
-/* =================
-   Main renderAccordion
-======================= */
+/* 
+   Main
+ */
 export function renderAccordion(attributes) {
 	const { presetStyle, accordionItems = [] } = attributes;
 	const containerStyle = getContainerStyle(attributes);

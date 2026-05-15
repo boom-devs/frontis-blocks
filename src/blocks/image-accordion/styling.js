@@ -1,171 +1,127 @@
-// const generateImageAccordionStyle = (attributes) => {
-// 	const {
-// 		blockID,
-// 		layoutType = "horizontal",
-// 		mainImageWidth = "60",
-// 		thumbnailAreaWidth = "40",
-// 		thumbnailLayout = "vertical",
-// 		spacing = "20",
-// 		mainImageBorderRadius = "12",
-// 		thumbnailBorderRadius = "8",
-// 		activeThumbBorderWidth = "3",
-// 		activeThumbBorderColor = "#007cba",
-// 		titleFontSize = { Desktop: "24" },
-// 		titleFontColor = "#000000",
-// 		titleFontWeight = "600",
-// 		descriptionFontSize = { Desktop: "14" },
-// 		descriptionFontColor = "#666666",
-// 		mainImageBg = "#f5f5f5",
-// 		descriptionBg = "rgba(0, 124, 186, 0.1)",
-// 		descriptionBorder = "#007cba",
-// 		descriptionBorderWidth = "3",
-// 	} = attributes;
-
-// 	let css = "";
-
-// 	if (!blockID) return css;
-
-// 	// Get responsive values or use defaults
-// 	const titleDesktopSize = titleFontSize?.Desktop || "24";
-// 	const titleTabletSize = titleFontSize?.Tablet || titleDesktopSize;
-// 	const titleMobileSize = titleFontSize?.Mobile || titleDesktopSize;
-
-// 	const descDesktopSize = descriptionFontSize?.Desktop || "14";
-// 	const descTabletSize = descriptionFontSize?.Tablet || descDesktopSize;
-// 	const descMobileSize = descriptionFontSize?.Mobile || descDesktopSize;
-
-// 	// Desktop styles
-// 	css += `
-// /* Image Accordion Wrapper */
-// .${blockID} {
-// 	width: 100%;
-// }
-
-// /* Layout Container */
-// .${blockID} > div {
-// 	gap: ${spacing}px;
-// }
-
-// /* Main Image Container */
-// .${blockID} .fb-image-accordion-main {
-// 	border-radius: ${mainImageBorderRadius}px;
-// 	background-color: ${mainImageBg};
-// 	overflow: hidden;
-// }
-
-// .${blockID} .fb-image-accordion-main img {
-// 	width: 100%;
-// 	height: 100%;
-// 	object-fit: cover;
-// 	display: block;
-// }
-
-// /* Thumbnails Container */
-// .${blockID} .fb-image-accordion-thumbnails {
-// 	gap: ${spacing}px;
-// }
-
-// /* Thumbnail Buttons */
-// .${blockID} .fb-image-accordion-thumbnail {
-// 	border-radius: ${thumbnailBorderRadius}px;
-// 	transition: all 0.3s ease;
-// 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-// }
-
-// .${blockID} .fb-image-accordion-thumbnail:hover {
-// 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-// }
-
-// .${blockID} .fb-image-accordion-thumbnail.active {
-// 	border: ${activeThumbBorderWidth}px solid ${activeThumbBorderColor};
-// 	box-shadow: 0 0 0 2px ${activeThumbBorderColor}33;
-// }
-
-// .${blockID} .fb-image-accordion-thumbnail img {
-// 	width: 100%;
-// 	height: 100%;
-// 	object-fit: cover;
-// 	display: block;
-// }
-
-// /* Description Section */
-// .${blockID} .fb-image-accordion-description {
-// 	background-color: ${descriptionBg};
-// 	border: ${descriptionBorderWidth}px solid ${descriptionBorder};
-// 	border-radius: 4px;
-// 	padding: 15px;
-// 	animation: fadeIn 0.3s ease;
-// }
-
-// .${blockID} .fb-image-accordion-description h3 {
-// 	color: ${titleFontColor};
-// 	font-weight: ${titleFontWeight};
-// 	font-size: ${titleDesktopSize}px;
-// 	margin: 0 0 10px 0;
-// }
-
-// .${blockID} .fb-image-accordion-description p {
-// 	color: ${descriptionFontColor};
-// 	font-size: ${descDesktopSize}px;
-// 	margin: 0;
-// 	line-height: 1.6;
-// }
-
-// @keyframes fadeIn {
-// 	from {
-// 		opacity: 0;
-// 	}
-// 	to {
-// 		opacity: 1;
-// 	}
-// }
-// `;
-
-// 	// Tablet styles
-// 	if (
-// 		titleTabletSize !== titleDesktopSize ||
-// 		descTabletSize !== descDesktopSize
-// 	) {
-// 		css += `
-// @media (max-width: 768px) {
-// 	.${blockID} .fb-image-accordion-description h3 {
-// 		font-size: ${titleTabletSize}px;
-// 	}
-
-// 	.${blockID} .fb-image-accordion-description p {
-// 		font-size: ${descTabletSize}px;
-// 	}
-// }
-// `;
-// 	}
-
-// 	// Mobile styles
-// 	if (
-// 		titleMobileSize !== titleDesktopSize ||
-// 		descMobileSize !== descDesktopSize
-// 	) {
-// 		css += `
-// @media (max-width: 480px) {
-// 	.${blockID} .fb-image-accordion-description h3 {
-// 		font-size: ${titleMobileSize}px;
-// 	}
-
-// 	.${blockID} .fb-image-accordion-description p {
-// 		font-size: ${descMobileSize}px;
-// 	}
-// }
-// `;
-// 	}
-
-// 	return css;
-// };
-
-// export default generateImageAccordionStyle;
+import getCustomCss from "@Utils/getCustomCss";
 
 const generateImageAccordionStyle = (attributes) => {
-	const { presetStyle } = attributes;
-	// Reserved for future dynamic CSS generation
-	return "";
+	const {
+		blockID,
+		containerHeight,
+		itemsGap,
+		itemBorderRadius,
+		itemBorderType,
+		itemBorderColor,
+		itemPaddingUnits,
+		itemPaddingDesktop,
+		itemPaddingTablet,
+		itemPaddingMobile,
+		itemMarginUnits,
+		itemMarginDesktop,
+		itemMarginTablet,
+		itemMarginMobile,
+		overlayColor,
+		iconColor,
+		iconBgColor,
+		iconSize,
+		iconCircleSize,
+		dotColor,
+		dotSize,
+		numberColor,
+		numberFontSize,
+		titleColor,
+		titleFontSize,
+		titleFontWeight,
+		subtitleColor,
+		subtitleFontSize,
+		btnTextColor,
+		btnBgColor,
+		btnBorderColor,
+		btnBorderRadius,
+		btnFontSize,
+		btnPaddingY,
+		btnPaddingX,
+		itemCustomCSS,
+	} = attributes;
+
+	const generatePadding = (p, u) =>
+		`${p.top}${u} ${p.right}${u} ${p.bottom}${u} ${p.left}${u}`;
+
+	let styles = `
+		.${blockID} .pea-image-accordion-container {
+			height: ${containerHeight.Desktop}px;
+			gap: ${itemsGap.Desktop}px;
+		}
+		.${blockID} .pea-image-accordion-item {
+			border-radius: ${itemBorderRadius.Desktop}px;
+			border-style: ${itemBorderType};
+			border-color: ${itemBorderColor};
+			padding: ${generatePadding(itemPaddingDesktop, itemPaddingUnits.Desktop)};
+			margin: ${generatePadding(itemMarginDesktop, itemMarginUnits.Desktop)};
+		}
+		.${blockID} .pea-image-accordion-overlay {
+			background: ${overlayColor};
+		}
+		.${blockID} .pea-image-accordion-icon-circle {
+			width: ${iconCircleSize.Desktop}px;
+			height: ${iconCircleSize.Desktop}px;
+			background-color: ${iconBgColor};
+			color: ${iconColor};
+		}
+		.${blockID} .pea-image-accordion-icon-circle i {
+			font-size: ${iconSize.Desktop}px;
+		}
+		.${blockID} .pea-image-accordion-dot {
+			width: ${dotSize.Desktop}px;
+			height: ${dotSize.Desktop}px;
+			background-color: ${dotColor};
+		}
+		.${blockID} .pea-image-accordion-number {
+			color: ${numberColor};
+			font-size: ${numberFontSize.Desktop}px;
+		}
+		.${blockID} .pea-image-accordion-title {
+			color: ${titleColor};
+			font-size: ${titleFontSize.Desktop}px;
+			font-weight: ${titleFontWeight};
+		}
+		.${blockID} .pea-image-accordion-desc, 
+		.${blockID} .pea-sub-title {
+			color: ${subtitleColor};
+			font-size: ${subtitleFontSize.Desktop}px;
+		}
+		.${blockID} .pea-image-accordion-btn {
+			color: ${btnTextColor};
+			background-color: ${btnBgColor};
+			border-color: ${btnBorderColor};
+			border-radius: ${btnBorderRadius.Desktop}px;
+			font-size: ${btnFontSize.Desktop}px;
+			padding: ${btnPaddingY.Desktop}px ${btnPaddingX.Desktop}px;
+		}
+
+		@media (max-width: 1024px) {
+			.${blockID} .pea-image-accordion-container {
+				height: ${containerHeight.Tablet}px;
+				gap: ${itemsGap.Tablet}px;
+			}
+			.${blockID} .pea-image-accordion-item {
+				border-radius: ${itemBorderRadius.Tablet}px;
+				padding: ${generatePadding(itemPaddingTablet, itemPaddingUnits.Tablet)};
+				margin: ${generatePadding(itemMarginTablet, itemMarginUnits.Tablet)};
+			}
+		}
+
+		@media (max-width: 767px) {
+			.${blockID} .pea-image-accordion-container {
+				height: ${containerHeight.Mobile}px;
+				gap: ${itemsGap.Mobile}px;
+			}
+			.${blockID} .pea-image-accordion-item {
+				border-radius: ${itemBorderRadius.Mobile}px;
+				padding: ${generatePadding(itemPaddingMobile, itemPaddingUnits.Mobile)};
+				margin: ${generatePadding(itemMarginMobile, itemMarginUnits.Mobile)};
+			}
+		}
+	`;
+
+	const customCss = getCustomCss(itemCustomCSS, `.${blockID}`);
+	return `${styles} ${customCss}`.replace(/\s+/g, " ").trim();
 };
 
 export default generateImageAccordionStyle;

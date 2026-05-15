@@ -1,10 +1,14 @@
-import { __ } from "@wordpress/i18n";
+import { useEffect } from "@wordpress/element";
 import { useBlockProps } from "@wordpress/block-editor";
+import { __ } from "@wordpress/i18n";
 
 import Inspector from "./inspector";
 import { renderAccordion } from "./presets";
+import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
+import generateImageAccordionStyle from "./styling";
+import { useDeviceType } from "@Config/displayType";
 
-/* ── Preset badge config ── */
+/* Preset badge config  */
 const PRESET_INFO = {
 	"preset-1": { label: "Preset 1", color: "#7c3aed", bg: "#ede9fe" },
 	"preset-2": { label: "Preset 2", color: "#0369a1", bg: "#e0f2fe" },
@@ -12,8 +16,8 @@ const PRESET_INFO = {
 	"preset-4": { label: "Preset 4", color: "#92400e", bg: "#fef3c7" },
 };
 const TRIGGER_INFO = {
-	hover: { label: "Hover", color: "#0875ff", bg: "#dbeafe" },
-	click: { label: "Click", color: "#b45309", bg: "#fef9c3" },
+	hover: { label: "⟳ Hover", color: "#0875ff", bg: "#dbeafe" },
+	click: { label: "↵ Click", color: "#b45309", bg: "#fef9c3" },
 };
 
 const Badge = ({ label, color, bg }) => (
@@ -88,27 +92,39 @@ const EmptyState = () => (
 	</div>
 );
 
-/*  Main Edit component  */
-const Edit = ({ attributes, setAttributes }) => {
+/*  Main Edit component */
+const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	const {
+		blockID,
+		blockStyle,
 		presetStyle,
 		triggerOn,
 		accordionItems = [],
-		containerHeight,
 	} = attributes;
 
-	const blockProps = useBlockProps({
-		className: "image-accordion-block-editor-wrap",
+	const deviceType = useDeviceType();
+
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: "fb-image-accordion",
+		isSelected,
+		attributes,
+		setAttributes,
 	});
 
-	const { containerStyle, items } = renderAccordion(attributes);
+	useEffect(() => {
+		if (blockID) {
+			const css = generateImageAccordionStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
 
-	const resolvedContainerStyle = {
-		...containerStyle,
-		...(presetStyle === "preset-3"
-			? { height: "auto", minHeight: `${containerHeight}px` }
-			: {}),
-	};
+	const blockProps = useBlockProps({
+		className: `image-accordion-block-editor-wrap ${blockID}`,
+	});
+
+	const { items } = renderAccordion(attributes);
 
 	const preset = PRESET_INFO[presetStyle] || PRESET_INFO["preset-1"];
 	const trigger = TRIGGER_INFO[triggerOn] || TRIGGER_INFO["hover"];
@@ -118,7 +134,7 @@ const Edit = ({ attributes, setAttributes }) => {
 			<Inspector attributes={attributes} setAttributes={setAttributes} />
 
 			<div {...blockProps}>
-				{/*  Editor info bar  */}
+				{/*  Editor info bar */}
 				<div
 					style={{
 						display: "flex",
@@ -172,7 +188,7 @@ const Edit = ({ attributes, setAttributes }) => {
 					</span>
 				</div>
 
-				{/*  Preview area */}
+				{/* Preview area */}
 				<div
 					style={{
 						border: "1px solid #e2e2e2",
@@ -186,21 +202,15 @@ const Edit = ({ attributes, setAttributes }) => {
 						<EmptyState />
 					) : (
 						<div
-							className={`pea-image-accordion-wrapper ${presetStyle} pea-editor-preview pea-trigger-${triggerOn}`}
+							className={`pea-image-accordion-wrapper ${presetStyle} pea-editor-preview pea-trigger-${triggerOn} ${blockID}`}
 							data-trigger={triggerOn}
-							style={{ padding: 12 }}
 						>
-							<div
-								className="pea-image-accordion-container"
-								style={resolvedContainerStyle}
-							>
-								{items}
-							</div>
+							<div className="pea-image-accordion-container">{items}</div>
 						</div>
 					)}
 				</div>
 
-				{/*  Hint bar  */}
+				{/*  Hint bar */}
 				<div
 					style={{
 						display: "flex",
@@ -234,6 +244,7 @@ const Edit = ({ attributes, setAttributes }) => {
 						  )}
 				</div>
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 };

@@ -1,4 +1,12 @@
 const attributes = {
+	blockID: {
+		type: "string",
+		default: "",
+	},
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
 	// Preset / trigger
 	presetStyle: {
 		type: "string",
@@ -9,18 +17,6 @@ const attributes = {
 		default: "hover",
 	},
 
-	// Default background images
-	defaultBackgroundImages: {
-		type: "array",
-		default: [
-			"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%237c3aed;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g1)'/%3E%3C/svg%3E",
-			"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230369a1;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g2)'/%3E%3C/svg%3E",
-			"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%2314b8a6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g3)'/%3E%3C/svg%3E",
-			"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23ef4444;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g4)'/%3E%3C/svg%3E",
-			"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ec4899;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%238b5cf6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g5)'/%3E%3C/svg%3E",
-		],
-	},
-
 	// Accordion items
 	accordionItems: {
 		type: "array",
@@ -29,8 +25,7 @@ const attributes = {
 				id: "1",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl:
-					"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g1' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%237c3aed;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%233b82f6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g1)'/%3E%3C/svg%3E",
+				imageUrl: "",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -44,8 +39,7 @@ const attributes = {
 				id: "2",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl:
-					"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g2' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%230369a1;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%2306b6d4;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g2)'/%3E%3C/svg%3E",
+				imageUrl: "",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -59,8 +53,7 @@ const attributes = {
 				id: "3",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl:
-					"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g3' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23059669;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%2314b8a6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g3)'/%3E%3C/svg%3E",
+				imageUrl: "",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -74,8 +67,7 @@ const attributes = {
 				id: "4",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl:
-					"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g4' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23f59e0b;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%23ef4444;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g4)'/%3E%3C/svg%3E",
+				imageUrl: "",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -89,8 +81,7 @@ const attributes = {
 				id: "5",
 				title: "Discover unique",
 				subTitle: "",
-				imageUrl:
-					"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 600'%3E%3Cdefs%3E%3ClinearGradient id='g5' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ec4899;stop-opacity:1'/%3E%3Cstop offset='100%25' style='stop-color:%238b5cf6;stop-opacity:1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='1200' height='600' fill='url(%23g5)'/%3E%3C/svg%3E",
+				imageUrl: "",
 				imageId: 0,
 				iconValue: "fas fa-star",
 				iconLibrary: "solid",
@@ -104,47 +95,65 @@ const attributes = {
 	},
 
 	// Layout / General
-	// containerWidth: {
-	// 	type: number,
-	// 	default: 500,
-	// },
-	// new control of prests 1
 	containerHeight: {
-		type: "number",
-		default: 500,
+		type: "object",
+		default: { Desktop: 500, Tablet: 400, Mobile: 300 },
 	},
-	// new control of prests 1
-	// backgroundImage: {
-	// 	type: "string",
-	// 	default: "assets/images/default-service-bg.webp",
-	// },
 	itemsGap: {
-		type: "number",
-		default: 12,
+		type: "object",
+		default: { Desktop: 12, Tablet: 10, Mobile: 8 },
 	},
 	itemBorderRadius: {
-		type: "number",
-		default: 50,
+		type: "object",
+		default: { Desktop: 50, Tablet: 30, Mobile: 20 },
 	},
 	itemBorderType: {
 		type: "string",
 		default: "none",
 	},
-	itemBorderWidth: {
-		type: "object",
-		default: { top: 0, right: 0, bottom: 0, left: 0 },
-	},
 	itemBorderColor: {
 		type: "string",
 		default: "#cccccc",
 	},
-	itemPadding: {
+	itemPaddingUnits: {
 		type: "object",
-		default: { top: 0, right: 0, bottom: 0, left: 0 },
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
 	},
-	itemMargin: {
+	itemPaddingDesktop: {
 		type: "object",
-		default: { top: 0, right: 0, bottom: 0, left: 0 },
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemPaddingTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemPaddingMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemPaddingLink: {
+		type: "boolean",
+		default: true,
+	},
+	itemMarginUnits: {
+		type: "object",
+		default: { Desktop: "px", Tablet: "px", Mobile: "px" },
+	},
+	itemMarginDesktop: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemMarginTablet: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemMarginMobile: {
+		type: "object",
+		default: { top: "", right: "", bottom: "", left: "" },
+	},
+	itemMarginLink: {
+		type: "boolean",
+		default: true,
 	},
 
 	// Overlay
@@ -157,7 +166,7 @@ const attributes = {
 		default: "rgba(0,0,0,0.25)",
 	},
 
-	// Preset 1  Icon
+	// Preset 1 — Icon
 	iconColor: {
 		type: "string",
 		default: "#0875FF",
@@ -167,15 +176,15 @@ const attributes = {
 		default: "#ffffff",
 	},
 	iconSize: {
-		type: "number",
-		default: 18,
+		type: "object",
+		default: { Desktop: 18, Tablet: 16, Mobile: 14 },
 	},
 	iconCircleSize: {
-		type: "number",
-		default: 44,
+		type: "object",
+		default: { Desktop: 44, Tablet: 40, Mobile: 36 },
 	},
 
-	// Preset 2  Dots
+	// Preset 2 — Dots
 	showDots: {
 		type: "boolean",
 		default: true,
@@ -185,11 +194,11 @@ const attributes = {
 		default: "#ffffff",
 	},
 	dotSize: {
-		type: "number",
-		default: 12,
+		type: "object",
+		default: { Desktop: 12, Tablet: 10, Mobile: 8 },
 	},
 
-	// Preset 2 & 4  Numbers
+	// Preset 2 & 4 — Numbers
 	showNumber: {
 		type: "boolean",
 		default: true,
@@ -199,8 +208,8 @@ const attributes = {
 		default: "rgba(255,255,255,0.65)",
 	},
 	numberFontSize: {
-		type: "number",
-		default: 13,
+		type: "object",
+		default: { Desktop: 13, Tablet: 12, Mobile: 11 },
 	},
 
 	// Typography
@@ -209,8 +218,8 @@ const attributes = {
 		default: "#ffffff",
 	},
 	titleFontSize: {
-		type: "number",
-		default: 18,
+		type: "object",
+		default: { Desktop: 18, Tablet: 16, Mobile: 14 },
 	},
 	titleFontWeight: {
 		type: "string",
@@ -221,11 +230,11 @@ const attributes = {
 		default: "rgba(255,255,255,0.8)",
 	},
 	subtitleFontSize: {
-		type: "number",
-		default: 13,
+		type: "object",
+		default: { Desktop: 13, Tablet: 12, Mobile: 11 },
 	},
 
-	// Preset 3  Button
+	// Preset 3 — Button
 	btnTextColor: {
 		type: "string",
 		default: "#ffffff",
@@ -239,148 +248,24 @@ const attributes = {
 		default: "rgba(255,255,255,0.35)",
 	},
 	btnBorderRadius: {
-		type: "number",
-		default: 6,
+		type: "object",
+		default: { Desktop: 6, Tablet: 6, Mobile: 6 },
 	},
 	btnFontSize: {
-		type: "number",
-		default: 13,
+		type: "object",
+		default: { Desktop: 13, Tablet: 12, Mobile: 11 },
 	},
 	btnPaddingY: {
-		type: "number",
-		default: 8,
+		type: "object",
+		default: { Desktop: 8, Tablet: 7, Mobile: 6 },
 	},
 	btnPaddingX: {
-		type: "number",
-		default: 18,
+		type: "object",
+		default: { Desktop: 18, Tablet: 16, Mobile: 14 },
 	},
-
-	// Advanced Typography
-	titleFontFamily: {
+	itemCustomCSS: {
 		type: "string",
-		default: "inherit",
-	},
-	titleLetterSpacing: {
-		type: "number",
-		default: 0,
-	},
-	titleLineHeight: {
-		type: "number",
-		default: 1.2,
-	},
-	titleTextAlign: {
-		type: "string",
-		default: "left",
-	},
-	subtitleFontFamily: {
-		type: "string",
-		default: "inherit",
-	},
-	subtitleLetterSpacing: {
-		type: "number",
-		default: 0,
-	},
-	subtitleLineHeight: {
-		type: "number",
-		default: 1.3,
-	},
-	subtitleTextAlign: {
-		type: "string",
-		default: "left",
-	},
-
-	// Content Positioning (Preset 1)
-	contentPositionX: {
-		type: "number",
-		default: 18,
-	},
-	contentPositionY: {
-		type: "number",
-		default: 22,
-	},
-	contentGap: {
-		type: "number",
-		default: 12,
-	},
-
-	// Icon/Button styling
-	iconHoverScale: {
-		type: "number",
-		default: 1,
-	},
-	btnHoverBgColor: {
-		type: "string",
-		default: "rgba(255,255,255,0.35)",
-	},
-	btnHoverTextColor: {
-		type: "string",
-		default: "#ffffff",
-	},
-
-	// Animation
-	transitionDuration: {
-		type: "number",
-		default: 0.6,
-	},
-	transitionTiming: {
-		type: "string",
-		default: "cubic-bezier(0.25,1,0.5,1)",
-	},
-
-	// Shadow & Effects
-	itemShadow: {
-		type: "string",
-		default: "none",
-	},
-	itemShadowColor: {
-		type: "string",
-		default: "rgba(0,0,0,0.1)",
-	},
-	itemShadowBlur: {
-		type: "number",
-		default: 0,
-	},
-	itemShadowSpread: {
-		type: "number",
-		default: 0,
-	},
-
-	// Preset 2 specific
-	preset2ContentAlign: {
-		type: "string",
-		default: "center",
-	},
-	preset2ContentPadding: {
-		type: "number",
-		default: 22,
-	},
-
-	// Preset 3 specific
-	preset3ContentPaddingX: {
-		type: "number",
-		default: 22,
-	},
-	preset3ContentPaddingY: {
-		type: "number",
-		default: 18,
-	},
-	preset3ContentGap: {
-		type: "number",
-		default: 16,
-	},
-
-	// Preset 4 specific
-	preset4ContentPadding: {
-		type: "number",
-		default: 12,
-	},
-	preset4ContentGap: {
-		type: "number",
-		default: 4,
-	},
-	preset4SkewAngle: {
-		type: "number",
-		default: 12,
+		default: "",
 	},
 };
 

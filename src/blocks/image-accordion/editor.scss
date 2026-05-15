@@ -6,9 +6,10 @@
 		pointer-events: none;
 	}
 
-	/* =======================
-	   PRESET 1  —  Rounded pills
-	======================== */
+	/* 
+	   PRESET 1 
+
+	*/
 	.pea-editor-preview.preset-1 {
 		.pea-image-accordion-container {
 			display: flex !important;
@@ -33,9 +34,9 @@
 		}
 	}
 
-	/* ====================
-	   PRESET 2 - Seamless pillars
-	======================= */
+	/* 
+	   PRESET 2 
+	*/
 	.pea-editor-preview.preset-2 {
 		.pea-image-accordion-container {
 			display: flex !important;
@@ -65,9 +66,9 @@
 		}
 	}
 
-	/* ============
-	   PRESET 3  -  Vertical stack
-	================ */
+	/* 
+	   PRESET 3  
+	 */
 	.pea-editor-preview.preset-3 {
 		.pea-image-accordion-container {
 			display: flex !important;
@@ -92,7 +93,7 @@
 	}
 
 	/*
-	   PRESET 4  - Skewed panels
+	   PRESET 4
 	 */
 	.pea-editor-preview.preset-4 {
 		.pea-image-accordion-container {
@@ -128,7 +129,7 @@
 		}
 	}
 
-	/*  Placeholder  */
+	/* Placeholder */
 	.components-placeholder {
 		min-height: 240px;
 	}

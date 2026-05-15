@@ -1,4 +1,4 @@
-/* Block wrapper */
+/*  Block wrapper  */
 .image-accordion-block {
 	width: 100%;
 }
@@ -7,7 +7,7 @@
 	width: 100%;
 }
 
-/*  Container */
+/*  Container  */
 .pea-image-accordion-container {
 	display: flex;
 	width: 100%;
@@ -16,9 +16,9 @@
 	overflow: hidden;
 }
 
-/* =================
-   BASE ITEM 
-   =============== */
+/* ==============
+   BASE ITEM  
+   ============= */
 .pea-image-accordion-item {
 	position: relative;
 	flex: 0 0 80px;
@@ -39,7 +39,7 @@
 	outline-offset: 2px;
 }
 
-/* Overlay */
+/*  Overlay */
 .pea-image-accordion-overlay {
 	position: absolute;
 	inset: 0;
@@ -48,7 +48,7 @@
 	transition: background 0.4s ease;
 }
 
-/* Content wrapper */
+/*  Content wrapper */
 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	bottom: 22px;
@@ -60,7 +60,7 @@
 	width: calc(100% - 36px);
 }
 
-/* ── Icon circle  (Preset 1) ── */
+/* Icon circle */
 .pea-image-accordion-icon-circle {
 	width: 44px;
 	height: 44px;
@@ -82,7 +82,7 @@
 	object-fit: cover;
 }
 
-/* Text group  (Preset 1) */
+/* Text group  */
 .pea-image-accordion-text-group {
 	display: none;
 	opacity: 0;
@@ -106,7 +106,7 @@
 	color: rgba(255, 255, 255, 0.8);
 }
 
-/* Preset 1 active state */
+/*  Preset 1 active state  */
 .pea-image-accordion-wrapper.preset-1 .pea-image-accordion-item.is-active {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -119,9 +119,9 @@
 	transform: translateX(0);
 }
 
-/* =================
-   TRIGGER  —  HOVER  (Preset 1)
-   ============== */
+/* ============
+   TRIGGER 
+   =========== */
 .pea-trigger-hover.preset-1 .pea-image-accordion-item:hover {
 	flex: 1 !important;
 	border-radius: 25px;
@@ -147,9 +147,8 @@
 	transform: translateX(-10px);
 }
 
-/* CLICK  (Preset 1)  */
+/*  CLICK  (Preset 1)  */
 .pea-trigger-click.preset-1 .pea-image-accordion-item:hover {
-	/* no expand */
 	flex: 0 0 80px;
 	border-radius: 50px;
 }
@@ -165,7 +164,7 @@
 	transform: translateX(0);
 }
 
-/*  Responsive Preset 1  */
+/* Responsive Preset 1 */
 @media (max-width: 767px) {
 	.pea-image-accordion-wrapper.preset-1 .pea-image-accordion-container {
 		flex-direction: column;
@@ -186,9 +185,9 @@
 	}
 }
 
-/* ===============
-   PRESET 2  —  Seamless Pillars
-   ============= */
+/* =================
+   PRESET 2
+   ============== */
 .pea-image-accordion-wrapper.preset-2 .pea-image-accordion-container {
 	gap: 0 !important;
 }
@@ -203,7 +202,6 @@
 	border-radius: 0 !important;
 }
 
-/* Full-bleed content wrapper centred at bottom */
 .pea-image-accordion-wrapper.preset-2 .pea-image-accordion-content-wrapper {
 	position: absolute;
 	inset: 0;
@@ -279,7 +277,7 @@
 	opacity: 1;
 }
 
-/* HOVER - Preset 2 */
+/* HOVER — Preset 2 */
 .pea-trigger-hover.preset-2 .pea-image-accordion-item:hover {
 	flex: 1 !important;
 	border-radius: 0 !important;
@@ -319,7 +317,7 @@
 	visibility: visible;
 }
 
-/* CLICK - Preset 2 */
+/* CLICK — Preset 2 */
 .pea-trigger-click.preset-2 .pea-image-accordion-item:hover {
 	flex: 0 0 90px;
 }
@@ -347,8 +345,8 @@
 }
 
 /* ==============
-   PRESET 3  —  Vertical Stack
-   =============== */
+   PRESET 3  
+   =========== */
 .pea-image-accordion-wrapper.preset-3 .pea-image-accordion-container {
 	flex-direction: column;
 	height: auto !important;
@@ -363,7 +361,7 @@
 	border-radius: 12px !important;
 }
 
-/* Preset 3 content wrapper hidden by default */
+/* Preset 3 content wrapper  hidden by default */
 .pea-image-accordion-wrapper.preset-3 .pea-image-accordion-content-wrapper {
 	display: none;
 	opacity: 0;
@@ -465,9 +463,9 @@
 	opacity: 1;
 }
 
-/* ====================
-   PRESET 4  —  Skewed Panels
-   ================ */
+/* ===========
+   PRESET 4  
+   =============== */
 .pea-image-accordion-wrapper.preset-4 .pea-image-accordion-container {
 	gap: 0 !important;
 	overflow: hidden;
@@ -480,7 +478,7 @@
 	margin: 0 -7px;
 	overflow: hidden;
 	border-radius: 0 !important;
-	/* bg is on .pea-skew-bg child — do NOT set background here */
+
 	background-image: none !important;
 	background-color: transparent !important;
 	transition: flex 0.55s cubic-bezier(0.25, 1, 0.5, 1);
@@ -499,7 +497,7 @@
 	margin-right: -44px;
 }
 
-/* Un-skewed background layer */
+/* background layer */
 .pea-image-accordion-wrapper.preset-4 .pea-skew-bg {
 	position: absolute;
 	top: 0;
@@ -595,7 +593,7 @@
 	transform: translateY(0);
 }
 
-/* HOVER  Preset 4 */
+/*  Preset 4 */
 .pea-trigger-hover.preset-4 .pea-image-accordion-item:hover {
 	flex: 2.8;
 	z-index: 5;
@@ -639,7 +637,7 @@
 	transform: skewX(12deg);
 }
 
-/* CLICK — Preset 4 */
+/* Preset 4 */
 .pea-trigger-click.preset-4 .pea-image-accordion-item:hover {
 	flex: 1;
 }
@@ -678,9 +676,3 @@
 		font-size: 11px;
 	}
 }
-
-// image-accordion block top header hidden...
-
-// .block-editor-block-list__block {
-// 	display: none;
-// }

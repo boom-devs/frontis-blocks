@@ -1,7 +1,7 @@
 import { useBlockProps } from "@wordpress/block-editor";
 import attributes from "./attributes";
 
-const v1_0_0 = {
+const v1_0_3 = {
 	attributes,
 
 	save({ attributes }) {
@@ -24,4 +24,4 @@ const v1_0_0 = {
 	},
 };
 
-export default [v1_0_0];
+export default [v1_0_3];

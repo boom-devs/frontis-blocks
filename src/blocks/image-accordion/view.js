@@ -9,15 +9,12 @@
 			.trim()
 			.toLowerCase();
 
-		// Add trigger class to wrapper so CSS can apply preset-aware rules
 		wrapper.classList.remove("pea-trigger-hover", "pea-trigger-click");
 		wrapper.classList.add("pea-trigger-" + triggerMode);
 
-		// Fresh items
 		const getItems = () =>
 			Array.from(container.querySelectorAll(".pea-image-accordion-item"));
 
-		// Remove old listeners by cloning nodes
 		getItems().forEach((item) => {
 			const clone = item.cloneNode(true);
 			item.parentNode.replaceChild(clone, item);
@@ -36,7 +33,6 @@
 		}
 
 		if (triggerMode === "click") {
-			// Hover does nothing; only clicks toggle is-active
 			items.forEach((item) => {
 				item.addEventListener("click", () => activate(item));
 
@@ -48,13 +44,10 @@
 				});
 			});
 		} else {
-			// HOVER MODE (default)
-			// Hover expands item; click has no extra effect
 			items.forEach((item) => {
 				item.addEventListener("mouseenter", () => activate(item));
 			});
 
-			// On container mouseleave → restore first item
 			container.addEventListener("mouseleave", () => {
 				items.forEach((i) => {
 					i.classList.remove("is-active");
@@ -67,7 +60,6 @@
 			});
 		}
 
-		// Set first item as active on load
 		if (items[0]) {
 			items[0].classList.add("is-active");
 			items[0].setAttribute("aria-expanded", "true");

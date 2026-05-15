@@ -7,113 +7,21 @@ import {
 import {
 	PanelBody,
 	SelectControl,
-	RangeControl,
 	ToggleControl,
 	Button,
-	TextControl,
 	BaseControl,
-	ColorPicker,
-	Popover,
-	TabPanel,
 	__experimentalDivider as Divider,
 } from "@wordpress/components";
-import { useState } from "@wordpress/element";
+import { useState, memo } from "@wordpress/element";
+import FB_ColorControl from "@Components/color-control";
+import FB_Range from "@Components/range";
+import FB_Spacing from "@Components/spacing";
+import FB_InspectorControls from "@Components/InspectorControls";
+import FB_InputControl from "@Components/input-control";
+import FB_CustomCSSEditor from "@Components/custom-css-editor";
+import { useDeviceType } from "@Config/displayType";
 
-/* Color picker */
-const ColorControl = ({ label, value, onChange }) => {
-	const [open, setOpen] = useState(false);
-	return (
-		<BaseControl label={label} __nextHasNoMarginBottom>
-			<div
-				style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 4 }}
-			>
-				<button
-					type="button"
-					onClick={() => setOpen((v) => !v)}
-					style={{
-						width: 30,
-						height: 30,
-						borderRadius: 4,
-						border: "2px solid #ccc",
-						background: value || "transparent",
-						cursor: "pointer",
-						flexShrink: 0,
-					}}
-				/>
-				<TextControl
-					value={value}
-					onChange={onChange}
-					style={{ margin: 0, flex: 1 }}
-					hideLabelFromVision
-					label={label}
-					__nextHasNoMarginBottom
-				/>
-				{open && (
-					<Popover onClose={() => setOpen(false)} placement="bottom-start">
-						<div style={{ padding: 8 }}>
-							<ColorPicker
-								color={value}
-								onChange={onChange}
-								enableAlpha
-								defaultValue={value}
-							/>
-						</div>
-					</Popover>
-				)}
-			</div>
-		</BaseControl>
-	);
-};
-
-/* side spacing */
-const SpacingControl = ({ label, value, onChange }) => (
-	<BaseControl label={label} __nextHasNoMarginBottom>
-		<div
-			style={{
-				display: "grid",
-				gridTemplateColumns: "1fr 1fr 1fr 1fr",
-				gap: 4,
-				marginTop: 4,
-			}}
-		>
-			{["Top", "Right", "Bottom", "Left"].map((side) => (
-				<div key={side}>
-					<input
-						type="number"
-						value={value[side.toLowerCase()] || 0}
-						onChange={(e) =>
-							onChange({
-								...value,
-								[side.toLowerCase()]: parseInt(e.target.value) || 0,
-							})
-						}
-						style={{
-							width: "100%",
-							padding: "4px 2px",
-							border: "1px solid #ccc",
-							borderRadius: 4,
-							fontSize: 12,
-							textAlign: "center",
-						}}
-						min={0}
-					/>
-					<div
-						style={{
-							textAlign: "center",
-							fontSize: 10,
-							color: "#757575",
-							marginTop: 2,
-						}}
-					>
-						{side[0]}
-					</div>
-				</div>
-			))}
-		</div>
-	</BaseControl>
-);
-
-/*  Single item editor */
+/*  Single item editor  */
 const ItemEditor = ({
 	item,
 	index,
@@ -220,7 +128,7 @@ const ItemEditor = ({
 												onClick={openMedia}
 												style={{ width: "100%" }}
 											>
-												{__("Select Image", "frontis-blocks")}
+												{__("🖼 Select Image", "frontis-blocks")}
 											</Button>
 										)}
 									</div>
@@ -229,23 +137,21 @@ const ItemEditor = ({
 						</MediaUploadCheck>
 					</BaseControl>
 
-					<TextControl
+					<FB_InputControl
 						label={__("Title", "frontis-blocks")}
-						help={__("All presets — main heading.", "frontis-blocks")}
+						helpText={__("All presets — main heading.", "frontis-blocks")}
 						value={item.title}
-						onChange={(val) => update("title", val)}
-						__nextHasNoMarginBottom
+						onChangeValue={(val) => update("title", val)}
 					/>
 
-					<TextControl
+					<FB_InputControl
 						label={__("Sub Title", "frontis-blocks")}
-						help={__(
+						helpText={__(
 							"All presets — secondary line below title.",
 							"frontis-blocks",
 						)}
 						value={item.subTitle}
-						onChange={(val) => update("subTitle", val)}
-						__nextHasNoMarginBottom
+						onChangeValue={(val) => update("subTitle", val)}
 					/>
 
 					{preset === "preset-1" && (
@@ -255,32 +161,18 @@ const ItemEditor = ({
 								label={__("Icon Source", "frontis-blocks")}
 								value={item.mediaType || "icon"}
 								options={[
-									{
-										label: __("Icon (Font Awesome)", "frontis-blocks"),
-										value: "icon",
-									},
-									{
-										label: __("Image/SVG File", "frontis-blocks"),
-										value: "image",
-									},
-									{
-										label: __("SVG Data URI", "frontis-blocks"),
-										value: "svg-uri",
-									},
+									{ label: __("Icon", "frontis-blocks"), value: "icon" },
+									{ label: __("Image", "frontis-blocks"), value: "image" },
 								]}
 								onChange={(val) => update("mediaType", val)}
 								__nextHasNoMarginBottom
 							/>
 							{(item.mediaType || "icon") === "icon" && (
-								<TextControl
-									label={__("Choose Icon", "frontis-blocks")}
-									help={__(
-										"e.g. fas fa-star, fas fa-heart, fab fa-twitter",
-										"frontis-blocks",
-									)}
-									value={item.iconValue || "fa-solid fa-alarm-clock"}
-									onChange={(val) => update("iconValue", val)}
-									__nextHasNoMarginBottom
+								<FB_InputControl
+									label={__("Choose Icon (CSS class)", "frontis-blocks")}
+									helpText="e.g. fas fa-star"
+									value={item.iconValue || "fas fa-star"}
+									onChangeValue={(val) => update("iconValue", val)}
 								/>
 							)}
 							{item.mediaType === "image" && (
@@ -311,51 +203,21 @@ const ItemEditor = ({
 									</MediaUploadCheck>
 								</BaseControl>
 							)}
-							{item.mediaType === "svg-uri" && (
-								<BaseControl
-									label={__("SVG Data URI", "frontis-blocks")}
-									help={__(
-										"Paste SVG data URI (data:image/svg+xml,...)",
-										"frontis-blocks",
-									)}
-									__nextHasNoMarginBottom
-								>
-									<textarea
-										value={item.iconImageUrl || ""}
-										onChange={(e) => update("iconImageUrl", e.target.value)}
-										style={{
-											width: "100%",
-											minHeight: 60,
-											padding: 8,
-											marginTop: 6,
-											marginBottom: 10,
-											border: "1px solid #ccc",
-											borderRadius: 4,
-											fontFamily: "monospace",
-											fontSize: 11,
-											fontWeight: "normal",
-										}}
-										placeholder="Paste SVG data URI here..."
-									/>
-								</BaseControl>
-							)}
 						</>
 					)}
 
 					{preset === "preset-3" && (
 						<>
 							<Divider />
-							<TextControl
+							<FB_InputControl
 								label={__("Button Text", "frontis-blocks")}
 								value={item.buttonText || "Read More"}
-								onChange={(val) => update("buttonText", val)}
-								__nextHasNoMarginBottom
+								onChangeValue={(val) => update("buttonText", val)}
 							/>
-							<TextControl
+							<FB_InputControl
 								label={__("Button Link", "frontis-blocks")}
 								value={item.buttonUrl || "#"}
-								onChange={(val) => update("buttonUrl", val)}
-								__nextHasNoMarginBottom
+								onChangeValue={(val) => update("buttonUrl", val)}
 							/>
 							<ToggleControl
 								label={__("Open in new tab", "frontis-blocks")}
@@ -371,9 +233,9 @@ const ItemEditor = ({
 	);
 };
 
-/* ===================
+/* 
    CONTENT PANEL
-======================= */
+ */
 const ContentPanel = ({ attributes, setAttributes }) => {
 	const { presetStyle, triggerOn, accordionItems } = attributes;
 
@@ -399,7 +261,7 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 				{
 					id: Date.now().toString(),
 					title: "Discover unique",
-					subTitle: "discover unique",
+					subTitle: "",
 					imageUrl: "",
 					imageId: 0,
 					iconValue: "fas fa-star",
@@ -479,20 +341,25 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 	);
 };
 
-/* ==================
+/* 
    STYLE PANELS
-====================== */
-const StylePanels = ({ attributes, setAttributes }) => {
+ */
+const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 	const {
 		presetStyle,
 		containerHeight,
 		itemsGap,
 		itemBorderRadius,
 		itemBorderType,
-		itemBorderWidth,
 		itemBorderColor,
-		itemPadding,
-		itemMargin,
+		itemPaddingUnits,
+		itemPaddingDesktop,
+		itemPaddingTablet,
+		itemPaddingMobile,
+		itemMarginUnits,
+		itemMarginDesktop,
+		itemMarginTablet,
+		itemMarginMobile,
 		overlayColor,
 		overlayHoverColor,
 		iconColor,
@@ -523,14 +390,16 @@ const StylePanels = ({ attributes, setAttributes }) => {
 		<>
 			{/* General */}
 			<PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
-				<RangeControl
+				<FB_Range
 					label={__("Height (px)", "frontis-blocks")}
-					value={containerHeight}
-					onChange={(val) => setAttributes({ containerHeight: val })}
+					rangeValue={containerHeight}
+					onChangeHandler={(val) => setAttributes({ containerHeight: val })}
 					min={200}
 					max={900}
 					step={10}
-					__nextHasNoMarginBottom
+					deviceType={deviceType}
+					resetFallbackValue={500}
+					setAttributes={setAttributes}
 				/>
 
 				<SelectControl
@@ -548,79 +417,145 @@ const StylePanels = ({ attributes, setAttributes }) => {
 					__nextHasNoMarginBottom
 				/>
 
-				<RangeControl
+				<FB_Range
 					label={__("Border Radius (px)", "frontis-blocks")}
-					value={itemBorderRadius}
-					onChange={(val) => setAttributes({ itemBorderRadius: val })}
+					rangeValue={itemBorderRadius}
+					onChangeHandler={(val) => setAttributes({ itemBorderRadius: val })}
 					min={0}
 					max={100}
-					__nextHasNoMarginBottom
+					deviceType={deviceType}
+					resetFallbackValue={50}
+					setAttributes={setAttributes}
 				/>
 
 				{itemBorderType &&
 					itemBorderType !== "none" &&
 					itemBorderType !== "Default" && (
-						<ColorControl
+						<FB_ColorControl
 							label={__("Border Color", "frontis-blocks")}
-							value={itemBorderColor}
-							onChange={(val) => setAttributes({ itemBorderColor: val })}
+							globalColor={itemBorderColor}
+							setGlobalColor={(val) => setAttributes({ itemBorderColor: val })}
 						/>
 					)}
 
-				<SpacingControl
+				<FB_Spacing
 					label={__("Padding (px)", "frontis-blocks")}
-					value={itemPadding}
-					onChange={(val) => setAttributes({ itemPadding: val })}
+					deviceType={deviceType}
+					spacingUnitsHandler={(val) =>
+						setAttributes({ itemPaddingUnits: val })
+					}
+					spacingUnits={itemPaddingUnits}
+					spacingDesktop={itemPaddingDesktop}
+					spacingTablet={itemPaddingTablet}
+					spacingMobile={itemPaddingMobile}
+					handleSpacingUnitHandler={(e, pos) => {
+						const val = e.target.value;
+						if (attributes.itemPaddingLink) {
+							setAttributes({
+								[`itemPadding${deviceType}`]: {
+									top: val,
+									right: val,
+									bottom: val,
+									left: val,
+								},
+							});
+						} else {
+							setAttributes({
+								[`itemPadding${deviceType}`]: {
+									...attributes[`itemPadding${deviceType}`],
+									[pos]: val,
+								},
+							});
+						}
+					}}
+					spacingCombineBtn={attributes.itemPaddingLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ itemPaddingLink: !attributes.itemPaddingLink })
+					}
+					setAttributes={setAttributes}
 				/>
-				<SpacingControl
+				<FB_Spacing
 					label={__("Margin (px)", "frontis-blocks")}
-					value={itemMargin}
-					onChange={(val) => setAttributes({ itemMargin: val })}
+					deviceType={deviceType}
+					spacingUnitsHandler={(val) => setAttributes({ itemMarginUnits: val })}
+					spacingUnits={itemMarginUnits}
+					spacingDesktop={itemMarginDesktop}
+					spacingTablet={itemMarginTablet}
+					spacingMobile={itemMarginMobile}
+					handleSpacingUnitHandler={(e, pos) => {
+						const val = e.target.value;
+						if (attributes.itemMarginLink) {
+							setAttributes({
+								[`itemMargin${deviceType}`]: {
+									top: val,
+									right: val,
+									bottom: val,
+									left: val,
+								},
+							});
+						} else {
+							setAttributes({
+								[`itemMargin${deviceType}`]: {
+									...attributes[`itemMargin${deviceType}`],
+									[pos]: val,
+								},
+							});
+						}
+					}}
+					spacingCombineBtn={attributes.itemMarginLink}
+					spacingCombineBtnHandler={() =>
+						setAttributes({ itemMarginLink: !attributes.itemMarginLink })
+					}
+					setAttributes={setAttributes}
 				/>
 
-				<RangeControl
+				<FB_Range
 					label={__("Gap (px)", "frontis-blocks")}
-					value={itemsGap}
-					onChange={(val) => setAttributes({ itemsGap: val })}
+					rangeValue={itemsGap}
+					onChangeHandler={(val) => setAttributes({ itemsGap: val })}
 					min={0}
 					max={60}
-					__nextHasNoMarginBottom
+					deviceType={deviceType}
+					resetFallbackValue={12}
+					setAttributes={setAttributes}
 				/>
 			</PanelBody>
 
-			{/* Icon - Preset 1 */}
+			{/* Icon — Preset 1 */}
 			{presetStyle === "preset-1" && (
 				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
-					<ColorControl
+					<FB_ColorControl
 						label={__("Icon Color", "frontis-blocks")}
-						value={iconColor}
-						onChange={(val) => setAttributes({ iconColor: val })}
+						globalColor={iconColor}
+						setGlobalColor={(val) => setAttributes({ iconColor: val })}
 					/>
-					<ColorControl
+					<FB_ColorControl
 						label={__("Icon Background Color", "frontis-blocks")}
-						value={iconBgColor}
-						onChange={(val) => setAttributes({ iconBgColor: val })}
+						globalColor={iconBgColor}
+						setGlobalColor={(val) => setAttributes({ iconBgColor: val })}
 					/>
-					<RangeControl
+					<FB_Range
 						label={__("Icon Size (px)", "frontis-blocks")}
-						value={iconSize}
-						onChange={(val) => setAttributes({ iconSize: val })}
+						rangeValue={iconSize}
+						onChangeHandler={(val) => setAttributes({ iconSize: val })}
 						min={10}
 						max={60}
-						__nextHasNoMarginBottom
+						deviceType={deviceType}
+						resetFallbackValue={18}
 					/>
-					<RangeControl
+					<FB_Range
 						label={__("Circle Size (px)", "frontis-blocks")}
-						value={iconCircleSize}
-						onChange={(val) => setAttributes({ iconCircleSize: val })}
+						rangeValue={iconCircleSize}
+						onChangeHandler={(val) => setAttributes({ iconCircleSize: val })}
 						min={24}
 						max={100}
-						__nextHasNoMarginBottom
+						deviceType={deviceType}
+						resetFallbackValue={44}
 					/>
 				</PanelBody>
 			)}
 
-			{/* Overlay Dots Preset 2 */}
+			{/* Overlay Dots — Preset 2 */}
 			{presetStyle === "preset-2" && (
 				<PanelBody
 					title={__("Overlay Dots", "frontis-blocks")}
@@ -634,18 +569,19 @@ const StylePanels = ({ attributes, setAttributes }) => {
 					/>
 					{showDots && (
 						<>
-							<ColorControl
+							<FB_ColorControl
 								label={__("Dot Color", "frontis-blocks")}
-								value={dotColor}
-								onChange={(val) => setAttributes({ dotColor: val })}
+								globalColor={dotColor}
+								setGlobalColor={(val) => setAttributes({ dotColor: val })}
 							/>
-							<RangeControl
+							<FB_Range
 								label={__("Dot Size (px)", "frontis-blocks")}
-								value={dotSize}
-								onChange={(val) => setAttributes({ dotSize: val })}
+								rangeValue={dotSize}
+								onChangeHandler={(val) => setAttributes({ dotSize: val })}
 								min={4}
 								max={40}
-								__nextHasNoMarginBottom
+								deviceType={deviceType}
+								resetFallbackValue={12}
 							/>
 						</>
 					)}
@@ -654,15 +590,15 @@ const StylePanels = ({ attributes, setAttributes }) => {
 
 			{/* Overlay */}
 			<PanelBody title={__("Overlay", "frontis-blocks")} initialOpen={false}>
-				<ColorControl
+				<FB_ColorControl
 					label={__("Overlay Color", "frontis-blocks")}
-					value={overlayColor}
-					onChange={(val) => setAttributes({ overlayColor: val })}
+					globalColor={overlayColor}
+					setGlobalColor={(val) => setAttributes({ overlayColor: val })}
 				/>
-				<ColorControl
+				<FB_ColorControl
 					label={__("Overlay Hover Color", "frontis-blocks")}
-					value={overlayHoverColor}
-					onChange={(val) => setAttributes({ overlayHoverColor: val })}
+					globalColor={overlayHoverColor}
+					setGlobalColor={(val) => setAttributes({ overlayHoverColor: val })}
 				/>
 			</PanelBody>
 
@@ -680,18 +616,21 @@ const StylePanels = ({ attributes, setAttributes }) => {
 					/>
 					{showNumber && (
 						<>
-							<ColorControl
+							<FB_ColorControl
 								label={__("Number Color", "frontis-blocks")}
-								value={numberColor}
-								onChange={(val) => setAttributes({ numberColor: val })}
+								globalColor={numberColor}
+								setGlobalColor={(val) => setAttributes({ numberColor: val })}
 							/>
-							<RangeControl
+							<FB_Range
 								label={__("Number Font Size (px)", "frontis-blocks")}
-								value={numberFontSize}
-								onChange={(val) => setAttributes({ numberFontSize: val })}
+								rangeValue={numberFontSize}
+								onChangeHandler={(val) =>
+									setAttributes({ numberFontSize: val })
+								}
 								min={10}
 								max={36}
-								__nextHasNoMarginBottom
+								deviceType={deviceType}
+								resetFallbackValue={13}
 							/>
 						</>
 					)}
@@ -700,22 +639,23 @@ const StylePanels = ({ attributes, setAttributes }) => {
 
 			{/* Typography */}
 			<PanelBody title={__("Typography", "frontis-blocks")} initialOpen={false}>
-				<ColorControl
+				<FB_ColorControl
 					label={__("Title Color", "frontis-blocks")}
-					value={attributes.titleColor}
-					onChange={(val) => setAttributes({ titleColor: val })}
+					globalColor={titleColor}
+					setGlobalColor={(val) => setAttributes({ titleColor: val })}
 				/>
-				<RangeControl
+				<FB_Range
 					label={__("Title Font Size (px)", "frontis-blocks")}
-					value={attributes.titleFontSize}
-					onChange={(val) => setAttributes({ titleFontSize: val })}
+					rangeValue={titleFontSize}
+					onChangeHandler={(val) => setAttributes({ titleFontSize: val })}
 					min={10}
 					max={60}
-					__nextHasNoMarginBottom
+					deviceType={deviceType}
+					resetFallbackValue={18}
 				/>
 				<SelectControl
 					label={__("Title Font Weight", "frontis-blocks")}
-					value={attributes.titleFontWeight}
+					value={titleFontWeight}
 					options={[
 						{ label: "300 — Light", value: "300" },
 						{ label: "400 — Normal", value: "400" },
@@ -727,367 +667,114 @@ const StylePanels = ({ attributes, setAttributes }) => {
 					onChange={(val) => setAttributes({ titleFontWeight: val })}
 					__nextHasNoMarginBottom
 				/>
-				<SelectControl
-					label={__("Title Font Family", "frontis-blocks")}
-					value={attributes.titleFontFamily || "inherit"}
-					options={[
-						{ label: "Inherit", value: "inherit" },
-						{ label: "Arial", value: "Arial, sans-serif" },
-						{ label: "Georgia", value: "Georgia, serif" },
-						{ label: "Times New Roman", value: "Times New Roman, serif" },
-						{ label: "Courier New", value: "Courier New, monospace" },
-						{ label: "Verdana", value: "Verdana, sans-serif" },
-					]}
-					onChange={(val) => setAttributes({ titleFontFamily: val })}
-					__nextHasNoMarginBottom
-				/>
-				<RangeControl
-					label={__("Title Letter Spacing (px)", "frontis-blocks")}
-					value={attributes.titleLetterSpacing || 0}
-					onChange={(val) => setAttributes({ titleLetterSpacing: val })}
-					min={-2}
-					max={5}
-					step={0.1}
-					__nextHasNoMarginBottom
-				/>
-				<RangeControl
-					label={__("Title Line Height", "frontis-blocks")}
-					value={attributes.titleLineHeight || 1.2}
-					onChange={(val) => setAttributes({ titleLineHeight: val })}
-					min={1}
-					max={3}
-					step={0.1}
-					__nextHasNoMarginBottom
-				/>
-				<SelectControl
-					label={__("Title Text Align", "frontis-blocks")}
-					value={attributes.titleTextAlign || "left"}
-					options={[
-						{ label: "Left", value: "left" },
-						{ label: "Center", value: "center" },
-						{ label: "Right", value: "right" },
-					]}
-					onChange={(val) => setAttributes({ titleTextAlign: val })}
-					__nextHasNoMarginBottom
-				/>
 				<Divider />
-				<ColorControl
+				<FB_ColorControl
 					label={__("Subtitle Color", "frontis-blocks")}
-					value={attributes.subtitleColor}
-					onChange={(val) => setAttributes({ subtitleColor: val })}
+					globalColor={subtitleColor}
+					setGlobalColor={(val) => setAttributes({ subtitleColor: val })}
 				/>
-				<RangeControl
+				<FB_Range
 					label={__("Subtitle Font Size (px)", "frontis-blocks")}
-					value={attributes.subtitleFontSize}
-					onChange={(val) => setAttributes({ subtitleFontSize: val })}
+					rangeValue={subtitleFontSize}
+					onChangeHandler={(val) => setAttributes({ subtitleFontSize: val })}
 					min={10}
 					max={40}
-					__nextHasNoMarginBottom
-				/>
-				<SelectControl
-					label={__("Subtitle Font Family", "frontis-blocks")}
-					value={attributes.subtitleFontFamily || "inherit"}
-					options={[
-						{ label: "Inherit", value: "inherit" },
-						{ label: "Arial", value: "Arial, sans-serif" },
-						{ label: "Georgia", value: "Georgia, serif" },
-						{ label: "Times New Roman", value: "Times New Roman, serif" },
-						{ label: "Courier New", value: "Courier New, monospace" },
-						{ label: "Verdana", value: "Verdana, sans-serif" },
-					]}
-					onChange={(val) => setAttributes({ subtitleFontFamily: val })}
-					__nextHasNoMarginBottom
-				/>
-				<RangeControl
-					label={__("Subtitle Letter Spacing (px)", "frontis-blocks")}
-					value={attributes.subtitleLetterSpacing || 0}
-					onChange={(val) => setAttributes({ subtitleLetterSpacing: val })}
-					min={-2}
-					max={5}
-					step={0.1}
-					__nextHasNoMarginBottom
-				/>
-				<RangeControl
-					label={__("Subtitle Line Height", "frontis-blocks")}
-					value={attributes.subtitleLineHeight || 1.3}
-					onChange={(val) => setAttributes({ subtitleLineHeight: val })}
-					min={1}
-					max={3}
-					step={0.1}
-					__nextHasNoMarginBottom
+					deviceType={deviceType}
+					resetFallbackValue={13}
 				/>
 			</PanelBody>
 
-			{/* Advanced Spacing */}
-			<PanelBody
-				title={__("Advanced Spacing", "frontis-blocks")}
-				initialOpen={false}
-			>
-				{presetStyle === "preset-1" && (
-					<>
-						<RangeControl
-							label={__("Content Position X (px)", "frontis-blocks")}
-							value={attributes.contentPositionX || 18}
-							onChange={(val) => setAttributes({ contentPositionX: val })}
-							min={0}
-							max={50}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Content Position Y (px)", "frontis-blocks")}
-							value={attributes.contentPositionY || 22}
-							onChange={(val) => setAttributes({ contentPositionY: val })}
-							min={0}
-							max={50}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Icon-Text Gap (px)", "frontis-blocks")}
-							value={attributes.contentGap || 12}
-							onChange={(val) => setAttributes({ contentGap: val })}
-							min={0}
-							max={30}
-							__nextHasNoMarginBottom
-						/>
-					</>
-				)}
-				{presetStyle === "preset-2" && (
-					<>
-						<RangeControl
-							label={__("Content Padding (px)", "frontis-blocks")}
-							value={attributes.preset2ContentPadding || 22}
-							onChange={(val) => setAttributes({ preset2ContentPadding: val })}
-							min={0}
-							max={60}
-							__nextHasNoMarginBottom
-						/>
-						<SelectControl
-							label={__("Content Align", "frontis-blocks")}
-							value={attributes.preset2ContentAlign || "center"}
-							options={[
-								{ label: "Left", value: "left" },
-								{ label: "Center", value: "center" },
-								{ label: "Right", value: "right" },
-							]}
-							onChange={(val) => setAttributes({ preset2ContentAlign: val })}
-							__nextHasNoMarginBottom
-						/>
-					</>
-				)}
-				{presetStyle === "preset-3" && (
-					<>
-						<RangeControl
-							label={__("Content Padding X (px)", "frontis-blocks")}
-							value={attributes.preset3ContentPaddingX || 22}
-							onChange={(val) => setAttributes({ preset3ContentPaddingX: val })}
-							min={0}
-							max={60}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Content Padding Y (px)", "frontis-blocks")}
-							value={attributes.preset3ContentPaddingY || 18}
-							onChange={(val) => setAttributes({ preset3ContentPaddingY: val })}
-							min={0}
-							max={60}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Content Gap (px)", "frontis-blocks")}
-							value={attributes.preset3ContentGap || 16}
-							onChange={(val) => setAttributes({ preset3ContentGap: val })}
-							min={0}
-							max={40}
-							__nextHasNoMarginBottom
-						/>
-					</>
-				)}
-				{presetStyle === "preset-4" && (
-					<>
-						<RangeControl
-							label={__("Content Padding (px)", "frontis-blocks")}
-							value={attributes.preset4ContentPadding || 12}
-							onChange={(val) => setAttributes({ preset4ContentPadding: val })}
-							min={0}
-							max={40}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Content Gap (px)", "frontis-blocks")}
-							value={attributes.preset4ContentGap || 4}
-							onChange={(val) => setAttributes({ preset4ContentGap: val })}
-							min={0}
-							max={20}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Skew Angle (°)", "frontis-blocks")}
-							value={attributes.preset4SkewAngle || 12}
-							onChange={(val) => setAttributes({ preset4SkewAngle: val })}
-							min={0}
-							max={30}
-							__nextHasNoMarginBottom
-						/>
-					</>
-				)}
-				<RangeControl
-					label={__("Items Gap (px)", "frontis-blocks")}
-					value={attributes.itemsGap}
-					onChange={(val) => setAttributes({ itemsGap: val })}
-					min={0}
-					max={50}
-					__nextHasNoMarginBottom
-				/>
-			</PanelBody>
-
-			{/* Animation */}
-			<PanelBody title={__("Animation", "frontis-blocks")} initialOpen={false}>
-				<RangeControl
-					label={__("Transition Duration (s)", "frontis-blocks")}
-					value={attributes.transitionDuration || 0.6}
-					onChange={(val) => setAttributes({ transitionDuration: val })}
-					min={0.1}
-					max={2}
-					step={0.1}
-					__nextHasNoMarginBottom
-				/>
-				<SelectControl
-					label={__("Transition Timing", "frontis-blocks")}
-					value={attributes.transitionTiming || "cubic-bezier(0.25,1,0.5,1)"}
-					options={[
-						{ label: "Ease", value: "ease" },
-						{ label: "Linear", value: "linear" },
-						{ label: "Ease In", value: "ease-in" },
-						{ label: "Ease Out", value: "ease-out" },
-						{ label: "Ease In Out", value: "ease-in-out" },
-						{ label: "Custom Cubic", value: "cubic-bezier(0.25,1,0.5,1)" },
-					]}
-					onChange={(val) => setAttributes({ transitionTiming: val })}
-					__nextHasNoMarginBottom
-				/>
-			</PanelBody>
-
-			{/* Shadow & Effects */}
-			<PanelBody
-				title={__("Shadow & Effects", "frontis-blocks")}
-				initialOpen={false}
-			>
-				<SelectControl
-					label={__("Item Shadow", "frontis-blocks")}
-					value={attributes.itemShadow || "none"}
-					options={[
-						{ label: "None", value: "none" },
-						{ label: "Light", value: "light" },
-						{ label: "Medium", value: "medium" },
-						{ label: "Heavy", value: "heavy" },
-						{ label: "Custom", value: "custom" },
-					]}
-					onChange={(val) => setAttributes({ itemShadow: val })}
-					__nextHasNoMarginBottom
-				/>
-				{attributes.itemShadow === "custom" && (
-					<>
-						<ColorControl
-							label={__("Shadow Color", "frontis-blocks")}
-							value={attributes.itemShadowColor || "rgba(0,0,0,0.1)"}
-							onChange={(val) => setAttributes({ itemShadowColor: val })}
-						/>
-						<RangeControl
-							label={__("Shadow Blur (px)", "frontis-blocks")}
-							value={attributes.itemShadowBlur || 0}
-							onChange={(val) => setAttributes({ itemShadowBlur: val })}
-							min={0}
-							max={30}
-							__nextHasNoMarginBottom
-						/>
-						<RangeControl
-							label={__("Shadow Spread (px)", "frontis-blocks")}
-							value={attributes.itemShadowSpread || 0}
-							onChange={(val) => setAttributes({ itemShadowSpread: val })}
-							min={0}
-							max={20}
-							__nextHasNoMarginBottom
-						/>
-					</>
-				)}
-				<ColorControl
-					label={__("Overlay Color", "frontis-blocks")}
-					value={attributes.overlayColor}
-					onChange={(val) => setAttributes({ overlayColor: val })}
-				/>
-				<ColorControl
-					label={__("Overlay Hover Color", "frontis-blocks")}
-					value={attributes.overlayHoverColor || "rgba(0,0,0,0.25)"}
-					onChange={(val) => setAttributes({ overlayHoverColor: val })}
-				/>
-			</PanelBody>
+			{/* Button — Preset 3 */}
+			{presetStyle === "preset-3" && (
+				<PanelBody title={__("Button", "frontis-blocks")} initialOpen={false}>
+					<FB_ColorControl
+						label={__("Text Color", "frontis-blocks")}
+						globalColor={btnTextColor}
+						setGlobalColor={(val) => setAttributes({ btnTextColor: val })}
+					/>
+					<FB_ColorControl
+						label={__("Background Color", "frontis-blocks")}
+						globalColor={btnBgColor}
+						setGlobalColor={(val) => setAttributes({ btnBgColor: val })}
+					/>
+					<FB_ColorControl
+						label={__("Border Color", "frontis-blocks")}
+						globalColor={btnBorderColor}
+						setGlobalColor={(val) => setAttributes({ btnBorderColor: val })}
+					/>
+					<FB_Range
+						label={__("Border Radius (px)", "frontis-blocks")}
+						rangeValue={btnBorderRadius}
+						onChangeHandler={(val) => setAttributes({ btnBorderRadius: val })}
+						min={0}
+						max={50}
+						deviceType={deviceType}
+						resetFallbackValue={6}
+					/>
+					<FB_Range
+						label={__("Font Size (px)", "frontis-blocks")}
+						rangeValue={btnFontSize}
+						onChangeHandler={(val) => setAttributes({ btnFontSize: val })}
+						min={10}
+						max={30}
+						deviceType={deviceType}
+						resetFallbackValue={13}
+					/>
+					<FB_Range
+						label={__("Padding Top/Bottom (px)", "frontis-blocks")}
+						rangeValue={btnPaddingY}
+						onChangeHandler={(val) => setAttributes({ btnPaddingY: val })}
+						min={0}
+						max={40}
+						deviceType={deviceType}
+						resetFallbackValue={8}
+					/>
+					<FB_Range
+						label={__("Padding Left/Right (px)", "frontis-blocks")}
+						rangeValue={btnPaddingX}
+						onChangeHandler={(val) => setAttributes({ btnPaddingX: val })}
+						min={0}
+						max={60}
+						deviceType={deviceType}
+						resetFallbackValue={18}
+					/>
+				</PanelBody>
+			)}
 		</>
 	);
 };
 
-/* 
-   MAIN INSPECTOR - Tab UI built manually
-*/
+/* ══════════════════════════════════════════
+   MAIN INSPECTOR — Tab UI built manually
+   (compatible with all wp-scripts versions)
+══════════════════════════════════════════ */
 const Inspector = ({ attributes, setAttributes }) => {
-	const [activeTab, setActiveTab] = useState("content");
+	const deviceType = useDeviceType();
 
-	const tabs = [
-		{ id: "content", label: __("Content", "frontis-blocks") },
-		{ id: "style", label: __("Style", "frontis-blocks") },
-		{ id: "advanced", label: __("Advanced", "frontis-blocks") },
-	];
+	const extraControls = (
+		<PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
+			<FB_CustomCSSEditor
+				value={attributes.itemCustomCSS}
+				onChangeValue={(val) => setAttributes({ itemCustomCSS: val })}
+			/>
+		</PanelBody>
+	);
 
 	return (
-		<InspectorControls>
-			{/* Tab switcher */}
-			<div
-				style={{
-					display: "flex",
-					borderBottom: "1px solid #e0e0e0",
-					background: "#fff",
-					position: "sticky",
-					top: 0,
-					zIndex: 10,
-				}}
-			>
-				{tabs.map((tab) => (
-					<button
-						key={tab.id}
-						type="button"
-						onClick={() => setActiveTab(tab.id)}
-						style={{
-							flex: 1,
-							padding: "10px 0",
-							background: "none",
-							border: "none",
-							borderBottom:
-								activeTab === tab.id
-									? "2px solid #0875ff"
-									: "2px solid transparent",
-							color: activeTab === tab.id ? "#0875ff" : "#555",
-							fontWeight: activeTab === tab.id ? 600 : 400,
-							fontSize: 13,
-							cursor: "pointer",
-							transition: "all 0.15s ease",
-						}}
-					>
-						{tab.label}
-					</button>
-				))}
-			</div>
-
-			{/* Tab content */}
-			{activeTab === "content" && (
+		<FB_InspectorControls
+			generalControls={
 				<ContentPanel attributes={attributes} setAttributes={setAttributes} />
-			)}
-			{activeTab === "style" && (
-				<StylePanels attributes={attributes} setAttributes={setAttributes} />
-			)}
-			{activeTab === "advanced" && (
-				<AdvancedPanel attributes={attributes} setAttributes={setAttributes} />
-			)}
-		</InspectorControls>
+			}
+			styleControls={
+				<StylePanels
+					attributes={attributes}
+					setAttributes={setAttributes}
+					deviceType={deviceType}
+				/>
+			}
+			advancedControls={extraControls}
+		/>
 	);
 };
 
-export default Inspector;
+export default memo(Inspector);
