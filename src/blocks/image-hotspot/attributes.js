@@ -1,5 +1,5 @@
 const attributes = {
-	blockId: {
+	blockID: {
 		type: "string",
 		default: "",
 	},
@@ -8,196 +8,281 @@ const attributes = {
 		default: "",
 	},
 
-	imageUrl: {
+	imageHotspot_imageUrl: {
 		type: "string",
 		default: "",
 	},
-	imageId: { 
+	imageHotspot_imageId: { 
 		type: "number", 
 		default: 0 
 	},
-	imageAlt: { 
+	imageHotspot_imageAlt: { 
 		type: "string", 
 		default: "" 
 	},
-	imageSize: { 
+	imageHotspot_imageSize: { 
 		type: "string", 
 		default: "cover" 
 	},
 
-	hotspots: {
+	imageHotspot_hotspots: {
 		type: "array",
 		default: []
 	},
-	selectedHotspotId: { 
+	imageHotspot_selectedHotspotId: { 
 		type: "string", 
 		default: "" 
 	},
 
-	deviceType: { 
+	imageHotspot_deviceType: { 
 		type: "string", 
 		default: "Desktop" 
 	},
 
 	// Hotspot marker styles
-	markerSize: { 
+	imageHotspot_markerSize: { 
 		type: "object", 
 		default: {} 
 	},
-	markerSizeUnits: { 
+	imageHotspot_markerSizeUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	markerColor: { 
+	imageHotspot_markerColor: { 
 		type: "string", 
 		default: "#ff0000" 
 	},
-	markerHoverColor: { 
+	imageHotspot_markerHoverColor: { 
 		type: "string", 
 		default: "" 
 	},
-	markerBorderWidth: { 
+	imageHotspot_markerBorderWidth: { 
 		type: "object", 
 		default: {} 
 	},
-	markerBorderWidthUnits: { 
+	imageHotspot_markerBorderWidthUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	markerBorderColor: { 
+	imageHotspot_markerBorderColor: { 
 		type: "string", 
 		default: "#ffffff" 
 	},
-	markerBorderRadius: { 
+	imageHotspot_markerBorderRadius: { 
 		type: "object", 
 		default: {} 
 	},
-	markerBorderRadiusUnits: { 
+	imageHotspot_markerBorderRadiusUnits: { 
 		type: "object", 
 		default: {} 
 	},
 
 	// Popover styles
-	popoverBgColor: { 
+	imageHotspot_popoverBgColor: { 
 		type: "string", 
 		default: "#ffffff" 
 	},
-	popoverWidth: { 
+	imageHotspot_popoverWidth: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverWidthUnits: { 
+	imageHotspot_popoverWidthUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverPadding: { 
+	imageHotspot_popoverPadding: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverPaddingUnits: { 
+	imageHotspot_popoverPaddingUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverBorderRadius: { 
+	imageHotspot_popoverBorderRadius: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverBorderRadiusUnits: { 
+	imageHotspot_popoverBorderRadiusUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	popoverShadow: { 
+	imageHotspot_popoverShadow: { 
 		type: "string", 
 		default: "0 4px 12px rgba(0, 0, 0, 0.15)" 
 	},
 
 	// Title typography
-	titleFontFamily: { 
+	imageHotspot_titleFontFamily: { 
 		type: "string", 
 		default: "" 
 	},
-	titleFontSize: { 
+	imageHotspot_titleFontSize: { 
 		type: "object", 
 		default: {} 
 	},
-	titleFontSizeUnits: { 
+	imageHotspot_titleFontSizeUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	titleFontWeight: { 
+	imageHotspot_titleFontWeight: { 
 		type: "string", 
 		default: "600" 
 	},
-	titleFontStyle: { 
+	imageHotspot_titleFontStyle: { 
 		type: "string", 
 		default: "normal" 
 	},
-	titleColor: { 
+	imageHotspot_titleColor: { 
 		type: "string", 
 		default: "#333333" 
 	},
-	titleMargin: { 
+	imageHotspot_titleMargin: { 
 		type: "object", 
 		default: {} 
 	},
-	titleMarginUnits: { 
+	imageHotspot_titleMarginUnits: { 
 		type: "object", 
 		default: {} 
 	},
 
 	// Description typography
-	descFontFamily: { 
+	imageHotspot_descFontFamily: { 
 		type: "string", 
 		default: "" 
 	},
-	descFontSize: { 
+	imageHotspot_descFontSize: { 
 		type: "object", 
 		default: {} 
 	},
-	descFontSizeUnits: { 
+	imageHotspot_descFontSizeUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	descFontWeight: { 
+	imageHotspot_descFontWeight: { 
 		type: "string", 
 		default: "400" 
 	},
-	descFontStyle: { 
+	imageHotspot_descFontStyle: { 
 		type: "string", 
 		default: "normal" 
 	},
-	descColor: { 
+	imageHotspot_descColor: { 
 		type: "string", 
 		default: "#666666" 
 	},
-	descMargin: { 
+	imageHotspot_descMargin: { 
 		type: "object", 
 		default: {} 
 	},
-	descMarginUnits: { 
+	imageHotspot_descMarginUnits: { 
 		type: "object", 
 		default: {} 
 	},
 
 	// Icon styles
-	iconSize: { 
+	imageHotspot_iconSize: { 
 		type: "object", 
 		default: {} 
 	},
-	iconSizeUnits: { 
+	imageHotspot_iconSizeUnits: { 
 		type: "object", 
 		default: {} 
 	},
-	iconColor: { 
+	imageHotspot_iconColor: { 
 		type: "string", 
 		default: "#ffffff" 
 	},
 
-	// Visibility controls (per hotspot - stored in hotspots array)
-	// These are moved to each hotspot object
+	// Padding
+	imageHotspotPaddingUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotPaddingDesktop: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotPaddingTablet: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotPaddingMobile: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotPaddingLink: { 
+		type: "boolean", 
+		default: true 
+	},
+
+	// Margin
+	imageHotspotMarginUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotMarginDesktop: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotMarginTablet: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotMarginMobile: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotMarginLink: { 
+		type: "boolean", 
+		default: true 
+	},
+
+	// Border
+	imageHotspotBorderUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderDesktop: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderTablet: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderMobile: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderLink: { 
+		type: "boolean", 
+		default: true 
+	},
+
+	// Border Radius
+	imageHotspotBorderRadiusUnits: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderRadiusDesktop: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderRadiusTablet: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderRadiusMobile: { 
+		type: "object", 
+		default: {} 
+	},
+	imageHotspotBorderRadiusLink: { 
+		type: "boolean", 
+		default: true 
+	},
 
 	// Custom CSS
-	customCSS: { 
+	imageHotspot_customCSS: { 
 		type: "string", 
 		default: "" 
 	},

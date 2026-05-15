@@ -1,11 +1,41 @@
+import { __ } from '@wordpress/i18n';
+import { useEffect } from '@wordpress/element';
 import { useBlockProps } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import './editor.scss';
-import DynamicCSSLoader from '../../components/dynamic-css-loader/dynamic-css-loader.js';
 import generateImageHotspotStyle from './styling';
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import { useDeviceType } from '@Config/displayType';
 
-function Edit({ attributes, setAttributes }) {
-  const { imageUrl, imageAlt, imageSize, hotspots, selectedHotspotId, deviceType = 'Desktop' } = attributes;
+function Edit({ attributes, setAttributes, clientId, isSelected }) {
+  const { 
+    imageHotspot_imageUrl: imageUrl, 
+    imageHotspot_imageAlt: imageAlt, 
+    imageHotspot_imageSize: imageSize, 
+    imageHotspot_hotspots: hotspots, 
+    imageHotspot_selectedHotspotId: selectedHotspotId,
+    imageHotspot_blockID: blockID,
+  } = attributes;
+
+  const deviceType = useDeviceType();
+
+  // Handle block ID generation
+  useBlockIdGenerator({
+    clientId,
+    blockID,
+    blockPrefix: 'fb-image-hotspot',
+    isSelected,
+    attributes,
+    setAttributes,
+  });
+
+  // Generate and store block style
+  useEffect(() => {
+    if (blockID) {
+      const css = generateImageHotspotStyle(attributes);
+      setAttributes({ blockStyle: css });
+    }
+  }, [attributes, blockID, setAttributes]);
 
   const blockStyling = generateImageHotspotStyle(attributes);
 
@@ -20,24 +50,27 @@ function Edit({ attributes, setAttributes }) {
 
   return (
     <>
-      <DynamicCSSLoader blockStyling={blockStyling} />
+      <style>{blockStyling}</style>
     
-      <Inspector 
-        attributes={attributes}
-        setAttributes={setAttributes}
-      />
+      {isSelected && (
+        <Inspector 
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+      )}
       
-      <div {...useBlockProps()}>
+      <div className={blockID} {...useBlockProps()}>
         {!imageUrl ? (
           <div className="fb-hotspot-placeholder">
-            <p>Select an image from the sidebar inspector</p>
+            <p>{__('Select an image from the sidebar inspector', 'frontis-blocks')}</p>
           </div>
         ) : (
           <div className="fb-hotspot-editor-container">
             <img 
               src={imageUrl} 
-              alt={imageAlt || 'Hotspot base'}
+              alt={imageAlt || __('Hotspot base', 'frontis-blocks')}
               className="fb-hotspot-base-image"
+              style={{ objectFit: imageSize }}
             />
             
             {hotspots?.map((hotspot) => !isHidden(hotspot) && (
@@ -51,7 +84,7 @@ function Edit({ attributes, setAttributes }) {
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setAttributes({ selectedHotspotId: hotspot.id });
+                  setAttributes({ imageHotspot_selectedHotspotId: hotspot.id });
                 }}
               >
                 {hotspot.link ? (
