@@ -1,15 +1,15 @@
 import {
-	isPresetFourStackOver,
-	serializePresetFourConfig,
-} from './preset-four';
+	isStackCardPresetOver as isPresetFourStackOver,
+	serializeStackCardPresetOverConfig as serializePresetFourConfig,
+} from './behaviors/preset-four';
 import {
-	isPresetThreeStackRight,
-	serializePresetThreeConfig,
-} from './preset-three';
+	isStackCardPresetRight as isPresetThreeStackRight,
+	serializeStackCardPresetRightConfig as serializePresetThreeConfig,
+} from './behaviors/preset-three';
 import {
-	isPresetTwoStackLeft,
-	serializePresetTwoConfig,
-} from './preset-two';
+	isStackCardPresetLeft as isPresetTwoStackLeft,
+	serializeStackCardPresetLeftConfig as serializePresetTwoConfig,
+} from './behaviors/preset-two';
 
 export function getPresetFrameDataAttributes(presetStyle, attributes) {
 	return {
