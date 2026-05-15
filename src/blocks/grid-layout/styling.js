@@ -196,7 +196,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 		${selectors.grid} {
 			display: grid;
 			grid-template-columns: repeat(${colsDesktop}, 1fr);
-			${desktopRows > 0 ? `grid-template-rows: repeat(${desktopRows}, auto);` : ""}
 			gap: ${gutterDesktop}${desktopGapUnit};
 			align-items: stretch;
 		}
@@ -215,7 +214,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 
 			${selectors.grid} {
 				grid-template-columns: repeat(${colsTablet}, 1fr);
-				${tabletRows > 0 ? `grid-template-rows: repeat(${tabletRows}, auto);` : ""}
 				gap: ${gutterTablet}${tabletGapUnit};
 			}
 
@@ -234,7 +232,6 @@ const generateGridLayoutStyle = (attributes, resolvedLayouts = null) => {
 
 			${selectors.grid} {
 				grid-template-columns: repeat(${colsMobile}, 1fr);
-				${mobileRows > 0 ? `grid-template-rows: repeat(${mobileRows}, auto);` : ""}
 				gap: ${gutterMobile}${mobileGapUnit};
 			}
 

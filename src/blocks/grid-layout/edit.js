@@ -799,6 +799,8 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 			return;
 		}
 
+		wrapper.classList.add( 'is-measuring' );
+
 		const contentItems = wrapper.querySelectorAll(
 			'.grid-content-layer > [data-grid-id]'
 		);
@@ -812,6 +814,8 @@ export default function Edit( { attributes, setAttributes, clientId, isSelected,
 				);
 			}
 		} );
+
+		wrapper.classList.remove( 'is-measuring' );
 	}, [ containerRef ] );
 
 	const layoutDisplayRowHeight = LAYOUT_ROW_UNIT;
