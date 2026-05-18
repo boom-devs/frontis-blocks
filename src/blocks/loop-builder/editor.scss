@@ -23,6 +23,9 @@
 		margin: 16px 0;
 		list-style: none;
 		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
 		> .fb-loop-builder-variation-picker__variation-item {
 			width: 100%;
@@ -42,7 +45,10 @@
 		display: block;
 	}
 
-	.fb-loop-builder-variation-picker__preview--post-card {
+	.fb-loop-builder-variation-picker__preview--portrait-layout-1,
+	.fb-loop-builder-variation-picker__preview--portrait-layout-2,
+	.fb-loop-builder-variation-picker__preview--landscape-layout,
+	.fb-loop-builder-variation-picker__preview--boxed-layout {
 		.fb-loop-builder-variation-picker__preview-svg {
 			fill: #d5dadf;
 		}
