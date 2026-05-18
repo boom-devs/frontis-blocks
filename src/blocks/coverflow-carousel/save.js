@@ -1,6 +1,5 @@
 import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useRef } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
