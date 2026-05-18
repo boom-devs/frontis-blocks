@@ -1,28 +1,80 @@
 /**
- * WordPress dependencies
+ * Layout preview icons for Loop Builder block variations.
  */
-import { Path, SVG } from '@wordpress/components';
 
 export const titleDate = (
-	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-		<Path d="M41 9H7v3h34V9zm-22 5H7v1h12v-1zM7 26h12v1H7v-1zm34-5H7v3h34v-3zM7 38h12v1H7v-1zm34-5H7v3h34v-3z" />
-	</SVG>
+	<svg
+		className="fb-loop-builder-variation-picker__preview-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 114 60"
+		preserveAspectRatio="xMidYMid meet"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
+		<rect x="7" y="4" width="100" height="26" rx="2" fill="inherit" />
+		<rect x="7" y="34" width="32" height="3" rx="1" fill="inherit" opacity="0.65" />
+		<rect x="7" y="40" width="78" height="5" rx="1" fill="inherit" />
+		<rect x="7" y="48" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="53" width="86" height="3" rx="1" fill="inherit" opacity="0.55" />
+	</svg>
 );
 
 export const titleExcerpt = (
-	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-		<Path d="M41 9H7v3h34V9zm-4 5H7v1h30v-1zm4 3H7v1h34v-1zM7 20h30v1H7v-1zm0 12h30v1H7v-1zm34 3H7v1h34v-1zM7 38h30v1H7v-1zm34-11H7v3h34v-3z" />
-	</SVG>
+	<svg
+		className="fb-loop-builder-variation-picker__preview-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 114 60"
+		preserveAspectRatio="xMidYMid meet"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
+		<rect x="7" y="8" width="78" height="5" rx="1" fill="inherit" />
+		<rect x="7" y="18" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="24" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="30" width="86" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="40" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="46" width="88" height="3" rx="1" fill="inherit" opacity="0.55" />
+	</svg>
 );
 
 export const titleDateExcerpt = (
-	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-		<Path d="M41 9H7v3h34V9zm-22 5H7v1h12v-1zm22 3H7v1h34v-1zM7 20h34v1H7v-1zm0 12h12v1H7v-1zm34 3H7v1h34v-1zM7 38h34v1H7v-1zm34-11H7v3h34v-3z" />
-	</SVG>
+	<svg
+		className="fb-loop-builder-variation-picker__preview-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 114 60"
+		preserveAspectRatio="xMidYMid meet"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
+		<rect x="7" y="8" width="78" height="5" rx="1" fill="inherit" />
+		<rect x="7" y="17" width="32" height="3" rx="1" fill="inherit" opacity="0.65" />
+		<rect x="7" y="24" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="30" width="86" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="40" width="100" height="3" rx="1" fill="inherit" opacity="0.55" />
+		<rect x="7" y="46" width="88" height="3" rx="1" fill="inherit" opacity="0.55" />
+	</svg>
 );
 
 export const imageDateTitle = (
-	<SVG xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-		<Path d="M7 9h34v6H7V9zm12 8H7v1h12v-1zm18 3H7v1h30v-1zm0 18H7v1h30v-1zM7 35h12v1H7v-1zm34-8H7v6h34v-6z" />
-	</SVG>
+	<svg
+		className="fb-loop-builder-variation-picker__preview-svg"
+		width="100%"
+		height="100%"
+		viewBox="0 0 114 60"
+		preserveAspectRatio="xMidYMid meet"
+		fill="none"
+		xmlns="http://www.w3.org/2000/svg"
+		aria-hidden="true"
+	>
+		<rect x="7" y="4" width="100" height="26" rx="2" fill="inherit" />
+		<rect x="7" y="34" width="32" height="3" rx="1" fill="inherit" opacity="0.65" />
+		<rect x="7" y="40" width="78" height="5" rx="1" fill="inherit" />
+		<rect x="7" y="48" width="56" height="3" rx="1" fill="inherit" opacity="0.55" />
+	</svg>
 );
