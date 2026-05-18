@@ -1,16 +1,14 @@
-# Changelog - Version 1.2.2 (27 April 2026)
+# Changelog - Version 1.2.3 (15 May 2026)
 
-### 🚀 New Features & Improvements
-
-#### ✨ New Features
-- **Design Library Redesign**: Redesigned the Design Library with additional features and improved UI.
-
-#### 🛠️ Bug Fixes
-- **Slider Block**: Resolved Slider block outside padding reset issue.
-- **Global Settings**: Resolved Global Settings related issues.
-- **Container Block**: Resolved child Container padding issues on initial insert.
-
-#### 📈 Improvements
-- **Advanced Search**: Resolved block issues and added custom icon, updated description and attributes.
-- **Global Settings UI**: Styled Global Settings save button for better UI consistency.
-- **Core Plugin**: Updated core plugin file for compatibility.
+- **New**: Added Stacked Card block with Pro features support.
+- **Fixed**: Resolved PHP 7.4 compatibility issue in typography CSS selector logic.
+- **Fixed**: Resolved asset generation issue for pages without wp:post-content block.
+- **Fixed**: Ensured customized colors are persisted during full site import.
+- **Fixed**: Resolved Google Fonts loading issues in typography preview iframe.
+- **Fixed**: Resolved various template CSS rendering and generation issues.
+- **Fixed**: Resolved navigation active menu style and logo system issues.
+- **Fixed**: Resolved critical data loss in list-based blocks (Features List, Tabs, Advanced Megamenu) by removing dual-state synchronization conflicts.
+- **Improved**: Implemented unique timestamp-based ID generation for list items to prevent state corruption.
+- **Improved**: Updated Mega Menu icons and optimized for production release.
+- **Improved**: Added automatic asset regeneration when synced patterns are updated.
+- **Improved**: Enhanced child block registration for better stability.
