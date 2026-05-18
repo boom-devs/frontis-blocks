@@ -9,8 +9,6 @@ import FB_CustomCSSEditor from '@Components/custom-css-editor';
 import getCustomCss from '@Utils/getCustomCss';
 import FB_Range from '@Components/range';
 import FB_SwitcherControl from '@Components/switcher-control';
-import './editor.scss';
-
 import { 
     POST_SWITCHER,
 } from '@Constants/fbConstants';

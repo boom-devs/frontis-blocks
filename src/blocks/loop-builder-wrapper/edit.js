@@ -25,16 +25,10 @@ import { store as coreStore } from '@wordpress/core-data';
  */
 import Inspector from "./inspector";
 
-const TEMPLATE = [
-		[ 'core/post-title' ],
-		[ 'core/post-date' ],
-		[ 'core/post-excerpt' ],
-  ];
-
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
 		{ className: clsx( 'wp-block-post', classList, 'fb-loop-builder-wrapper-inner-container' ) },
-		{ template: TEMPLATE, __unstableDisableLayoutClassNames: true }
+		{ __unstableDisableLayoutClassNames: true }
 	);
 	return <div { ...innerBlocksProps } />;
 }
