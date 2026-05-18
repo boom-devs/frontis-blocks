@@ -2,10 +2,7 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps } from '@wordpress/block-editor';
 import './style.scss';
 import generateImageHotspotStyle from './styling';
-
-// for debugging
-console.log('Image Hotspot Save - blockID:', blockID);
-console.log('Image Hotspot Save - blockStyle exists?', !!attributes.blockStyle);
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Save({ attributes }) {
   const { 
@@ -13,7 +10,7 @@ export default function Save({ attributes }) {
     imageHotspot_imageAlt: imageAlt, 
     imageHotspot_imageSize: imageSize, 
     imageHotspot_hotspots: hotspots,
-    imageHotspot_blockID: blockID,
+    blockID,
   } = attributes;
 
   const blockStyling = generateImageHotspotStyle(attributes);
@@ -24,7 +21,8 @@ export default function Save({ attributes }) {
 
   return (
     <>
-      <div className={blockID} {...useBlockProps.save()}>
+      <style>{blockStyling}</style>
+      <div {...useBlockProps.save({ className: blockID })}>
         <div className="fb-image-hotspot-wrapper">
           <div className="fb-hotspot-container">
             <img 
@@ -45,28 +43,12 @@ export default function Save({ attributes }) {
                     top: `${hotspot.y}%`
                   }}
                 >
-                  {hotspot.link ? (
-                    <a 
-                      href={hotspot.link} 
-                      target={hotspot.openInNewTab ? '_blank' : '_self'}
-                      rel={hotspot.openInNewTab ? 'noopener noreferrer' : ''}
-                      className="fb-hotspot-link"
-                    >
-                      <div 
-                        className="fb-hotspot-trigger"
-                        style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
-                      >
-                        <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
-                      </div>
-                    </a>
-                  ) : (
-                    <div 
-                      className="fb-hotspot-trigger"
-                      style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
-                    >
-                      <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
-                    </div>
-                  )}
+                  <div 
+                    className="fb-hotspot-trigger"
+                    style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
+                  >
+                    <span className="fb-hotspot-icon">{renderSVG(hotspot.icon)}</span>
+                  </div>
                   
                   <div className="fb-hotspot-popover">
                     {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}

@@ -1,11 +1,17 @@
+.fb-image-hotspot-wrapper {
+  width: 100%;
+  display: block;
+}
+
 .fb-hotspot-container {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
+  line-height: 0;      /* ← removes ghost space below image */
 }
 
 .fb-hotspot-base-image {
-  max-width: 100%;
+  width: 100%;
   height: auto;
   display: block;
 }

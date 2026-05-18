@@ -1,4 +1,3 @@
-console.log('styling.js loaded on frontend');
 /**
  * Image Hotspot Block - Style Generation
  * Returns Dynamic Generated CSS
@@ -8,7 +7,10 @@ import getCustomCss from '@Utils/getCustomCss';
 
 const generateImageHotspotStyle = (attributes) => {
     const {
-        imageHotspot_blockID: blockId,
+        blockID,
+        imageHotspot_imageSize: imageSize,
+        imageHotspot_imageHeight: imageHeight,
+        imageHotspot_imageHeightUnits: imageHeightUnits,
         
         // Hotspot marker styles
         imageHotspot_markerSize: markerSize,
@@ -60,13 +62,18 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspot_customCSS: customCSS,
     } = attributes;
 
+    // Image height control
+    const imageHeightDesktop = imageHeight?.Desktop ? `${imageHeight.Desktop}${imageHeightUnits?.Desktop || 'px'}` : '500px';
+    const imageHeightTablet = imageHeight?.Tablet ? `${imageHeight.Tablet}${imageHeightUnits?.Tablet || 'px'}` : imageHeightDesktop;
+    const imageHeightMobile = imageHeight?.Mobile ? `${imageHeight.Mobile}${imageHeightUnits?.Mobile || 'px'}` : imageHeightDesktop;
+
     // Marker size with unit
-    const markerSizeValue = markerSize?.Desktop ? `${markerSize.Desktop}${markerSizeUnits?.Desktop || 'px'}` : '24px';
+    const markerSizeValue = markerSize?.Desktop ? `${markerSize.Desktop}${markerSizeUnits?.Desktop || 'px'}` : '32px';
     const markerSizeTablet = markerSize?.Tablet ? `${markerSize.Tablet}${markerSizeUnits?.Tablet || 'px'}` : markerSizeValue;
     const markerSizeMobile = markerSize?.Mobile ? `${markerSize.Mobile}${markerSizeUnits?.Mobile || 'px'}` : markerSizeValue;
     
     // Marker border width
-    const markerBorderWidthValue = markerBorderWidth?.Desktop ? `${markerBorderWidth.Desktop}${markerBorderWidthUnits?.Desktop || 'px'}` : '2px';
+    const markerBorderWidthValue = markerBorderWidth?.Desktop ? `${markerBorderWidth.Desktop}${markerBorderWidthUnits?.Desktop || 'px'}` : '0px';
     const markerBorderWidthTablet = markerBorderWidth?.Tablet ? `${markerBorderWidth.Tablet}${markerBorderWidthUnits?.Tablet || 'px'}` : markerBorderWidthValue;
     const markerBorderWidthMobile = markerBorderWidth?.Mobile ? `${markerBorderWidth.Mobile}${markerBorderWidthUnits?.Mobile || 'px'}` : markerBorderWidthValue;
     
@@ -116,19 +123,27 @@ const generateImageHotspotStyle = (attributes) => {
     const descMarginMobile = descMargin?.Mobile ? `${descMargin.Mobile}${descMarginUnits?.Mobile || 'px'}` : descMarginValue;
 
     const style = `
-        .${blockId} {
+        .${blockID} {
             position: relative;
-            display: inline-block;
+            display: block;
             width: 100%;
         }
 
-        .${blockId} .fb-hotspot-marker {
+        .${blockID} .fb-hotspot-base-image {
+            width: 100%;
+            height: ${imageHeightDesktop};
+            display: block;
+            object-fit: ${imageSize || 'cover'};
+        }
+
+        .${blockID} .fb-hotspot-marker {
             position: absolute;
             transform: translate(-50%, -50%);
             z-index: 10;
         }
 
-        .${blockId} .fb-hotspot-trigger {
+        .${blockID} .fb-hotspot-trigger {
+            box-sizing: border-box;
             width: ${markerSizeValue};
             height: ${markerSizeValue};
             background-color: ${markerColor};
@@ -142,28 +157,33 @@ const generateImageHotspotStyle = (attributes) => {
             display: flex;
             align-items: center;
             justify-content: center;
+            line-height: 0;
+            font-size: 0;
         }
 
-        .${blockId} .fb-hotspot-trigger:hover {
+        .${blockID} .fb-hotspot-trigger:hover {
             background-color: ${markerHoverColor || markerColor};
             transform: scale(1.15);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
-        .${blockId} .fb-hotspot-icon {
+        .${blockID} .fb-hotspot-icon {
             width: ${iconSizeValue};
             height: ${iconSizeValue};
             color: ${iconColor};
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 0;
         }
 
-        .${blockId} .fb-hotspot-icon svg {
+        .${blockID} .fb-hotspot-icon svg {
             width: 100%;
             height: 100%;
             fill: currentColor;
         }
 
-        .${blockId} .fb-hotspot-popover {
+        .${blockID} .fb-hotspot-popover {
             position: absolute;
             bottom: 100%;
             left: 50%;
@@ -178,11 +198,11 @@ const generateImageHotspotStyle = (attributes) => {
             display: none;
         }
 
-        .${blockId} .fb-hotspot-marker:hover .fb-hotspot-popover {
+        .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover {
             display: block;
         }
 
-        .${blockId} .fb-hotspot-popover::after {
+        .${blockID} .fb-hotspot-popover::after {
             content: '';
             position: absolute;
             top: 100%;
@@ -193,7 +213,7 @@ const generateImageHotspotStyle = (attributes) => {
             border-color: ${popoverBgColor} transparent transparent transparent;
         }
 
-        .${blockId} .fb-hotspot-popover-title {
+        .${blockID} .fb-hotspot-popover-title {
             font-family: ${titleFontFamily || 'inherit'};
             font-size: ${titleFontSizeValue};
             font-weight: ${titleFontWeight};
@@ -203,7 +223,7 @@ const generateImageHotspotStyle = (attributes) => {
             line-height: 1.4;
         }
 
-        .${blockId} .fb-hotspot-popover-description {
+        .${blockID} .fb-hotspot-popover-description {
             font-family: ${descFontFamily || 'inherit'};
             font-size: ${descFontSizeValue};
             font-weight: ${descFontWeight};
@@ -214,67 +234,77 @@ const generateImageHotspotStyle = (attributes) => {
         }
 
         @media only screen and (max-width: 1024px) {
-            .${blockId} .fb-hotspot-trigger {
+
+            .${blockID} .fb-hotspot-base-image {
+                height: ${imageHeightTablet};
+            }
+
+            .${blockID} .fb-hotspot-trigger {
                 width: ${markerSizeTablet};
                 height: ${markerSizeTablet};
                 border-width: ${markerBorderWidthTablet};
                 border-radius: ${markerBorderRadiusTablet};
             }
 
-            .${blockId} .fb-hotspot-popover {
+            .${blockID} .fb-hotspot-popover {
                 width: ${popoverWidthTablet};
                 padding: ${popoverPaddingTablet};
                 border-radius: ${popoverBorderRadiusTablet};
             }
 
-            .${blockId} .fb-hotspot-icon {
+            .${blockID} .fb-hotspot-icon {
                 width: ${iconSizeTablet};
                 height: ${iconSizeTablet};
             }
 
-            .${blockId} .fb-hotspot-popover-title {
+            .${blockID} .fb-hotspot-popover-title {
                 font-size: ${titleFontSizeTablet};
                 margin: ${titleMarginTablet};
             }
 
-            .${blockId} .fb-hotspot-popover-description {
+            .${blockID} .fb-hotspot-popover-description {
                 font-size: ${descFontSizeTablet};
                 margin: ${descMarginTablet};
             }
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId} .fb-hotspot-trigger {
+
+            .${blockID} .fb-hotspot-base-image {
+                height: ${imageHeightMobile};
+            }
+
+            .${blockID} .fb-hotspot-trigger {
                 width: ${markerSizeMobile};
                 height: ${markerSizeMobile};
                 border-width: ${markerBorderWidthMobile};
                 border-radius: ${markerBorderRadiusMobile};
             }
 
-            .${blockId} .fb-hotspot-popover {
+            .${blockID} .fb-hotspot-popover {
                 width: ${popoverWidthMobile};
                 padding: ${popoverPaddingMobile};
                 border-radius: ${popoverBorderRadiusMobile};
             }
 
-            .${blockId} .fb-hotspot-icon {
+            .${blockID} .fb-hotspot-icon {
                 width: ${iconSizeMobile};
                 height: ${iconSizeMobile};
             }
 
-            .${blockId} .fb-hotspot-popover-title {
+            .${blockID} .fb-hotspot-popover-title {
                 font-size: ${titleFontSizeMobile};
                 margin: ${titleMarginMobile};
             }
 
-            .${blockId} .fb-hotspot-popover-description {
+            .${blockID} .fb-hotspot-popover-description {
                 font-size: ${descFontSizeMobile};
                 margin: ${descMarginMobile};
             }
         }
     `;
 
-    const customCssOutput = getCustomCss(customCSS, `.${blockId}`);
+    const customCssOutput = getCustomCss(customCSS, `.${blockID}`);
     return `${style} ${customCssOutput}`.replace(/\s+/g, ' ').trim();
 };
 

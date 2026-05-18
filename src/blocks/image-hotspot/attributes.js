@@ -24,6 +24,22 @@ const attributes = {
 		type: "string", 
 		default: "cover" 
 	},
+	imageHotspot_imageHeight: {
+		type: "object",
+		default: {
+			Desktop: '500',
+            Tablet: '500',
+            Mobile: '400'
+		}
+	},
+	imageHotspot_imageHeightUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+		}
+	},
 
 	imageHotspot_hotspots: {
 		type: "array",
@@ -66,7 +82,7 @@ const attributes = {
 	},
 	imageHotspot_markerBorderColor: { 
 		type: "string", 
-		default: "#ffffff" 
+		default: "transparent" 
 	},
 	imageHotspot_markerBorderRadius: { 
 		type: "object", 

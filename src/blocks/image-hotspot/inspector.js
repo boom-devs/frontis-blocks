@@ -12,7 +12,6 @@ import FB_ImageControl from '../../components/image-control';
 import FB_ColorControl from '../../components/color-control';
 import FBIconPicker from '../../components/icon-picker';
 import FB_Range from '../../components/range';
-import FB_UrlControl from '../../components/url-control';
 import FB_TypographyControl from '../../components/typography-control';
 import FB_InputControl from '../../components/input-control';
 import { useDeviceType } from '@Config/displayType';
@@ -22,7 +21,9 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspot_imageUrl: imageUrl, 
     imageHotspot_imageId: imageId, 
     imageHotspot_imageAlt: imageAlt, 
-    imageHotspot_imageSize: imageSize, 
+    imageHotspot_imageSize: imageSize,
+    imageHotspot_imageHeight: imageHeight,
+    imageHotspot_imageHeightUnits: imageHeightUnits,
     imageHotspot_hotspots: hotspots, 
     imageHotspot_selectedHotspotId: selectedHotspotId,
 	imageHotspotPaddingUnits,
@@ -317,13 +318,14 @@ export default function Inspector({ attributes, setAttributes }) {
   const selectedHotspot = hotspots?.find(h => h.id === selectedHotspotId);
 
   const addHotspot = () => {
+    const hotspotNumber = (hotspots?.length || 0) + 1;
     const newHotspot = {
       id: Date.now().toString(),
       x: 50,
       y: 50,
-      title: __('New Hotspot', 'frontis-blocks'),
+      title: `${__('Hotspot', 'frontis-blocks')} ${hotspotNumber}`    ,
       description: '',
-      backgroundColor: '#ff0000',
+      backgroundColor: '#011f4b',
       icon: '',
       link: '',
       openInNewTab: false
@@ -364,18 +366,35 @@ export default function Inspector({ attributes, setAttributes }) {
           setglobalImageSize={(size) => setAttributes({ imageHotspot_imageSize: size })}
           isImageSize={true}
         />
+        <FB_Range
+          label={__("Image Height", "frontis-blocks")}
+          rangeValue={imageHeight}
+          onChangeHandler={(value) => setAttributes({ imageHotspot_imageHeight: value })}
+          rangeUnitHandler={(unit) => setAttributes({ 
+            imageHotspot_imageHeightUnits: { 
+              ...imageHeightUnits, 
+              [deviceType]: unit 
+            } 
+          })}
+          deviceType={deviceType}
+          units={imageHeightUnits}
+          min={100}
+          max={1000}
+          rangeStep={1}
+          resetFallbackValue={500}
+        />
       </PanelBody>
 
       <PanelBody title={__("Hotspots", "frontis-blocks")} initialOpen={true}>
         <Button variant="primary" onClick={addHotspot} style={{ width: '100%' }}>
-          {__('+ Add New Hotspot', 'frontis-blocks')}
+          {__('Add a new Hotspot', 'frontis-blocks')}
         </Button>
         
         <SelectControl
           label={__("Select Hotspot", "frontis-blocks")}
           value={selectedHotspotId || ''}
           options={[
-            { label: __('— Select a hotspot —', 'frontis-blocks'), value: '' },
+            { label: __('Select a hotspot', 'frontis-blocks'), value: '' },
             ...hotspots.map((h, index) => ({
               label: h.title || `Hotspot ${index + 1} (${h.x}%, ${h.y}%)`,
               value: h.id
@@ -424,14 +443,6 @@ export default function Inspector({ attributes, setAttributes }) {
               <FBIconPicker
                 value={selectedHotspot.icon}
                 setIconHandler={(icon) => updateHotspot('icon', icon)}
-              />
-              
-              <FB_UrlControl
-                label={__("Link URL", "frontis-blocks")}
-                url={selectedHotspot.link || ''}
-                onChangeUrl={(url) => updateHotspot('link', url)}
-                openInNewTab={selectedHotspot.openInNewTab || false}
-                onChangeOpenInNewTab={(value) => updateHotspot('openInNewTab', value)}
               />
             </div>
 
