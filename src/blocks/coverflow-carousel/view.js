@@ -21,9 +21,51 @@
             const reverseDirection = carousel.getAttribute('data-reverse-direction') === 'true';
             const enableMouseWheel = carousel.getAttribute('data-enable-mousewheel') === 'true';
             const enableKeyboard = carousel.getAttribute('data-enable-keyboard') === 'true';
+            const carouselTransitionEasing = carousel.getAttribute('data-transition-easing') || 'cubic-bezier(0.16, 1, 0.3, 1)';
+
+            // Retrieve 3D space configuration attributes
+            let txObj, tyObj, tzObj, rotObj, rotXObj, rotZObj, persObj, scaleObj;
+            try {
+                txObj = JSON.parse(carousel.getAttribute('data-translate-x') || '{}');
+            } catch (e) { txObj = {}; }
+            try {
+                tyObj = JSON.parse(carousel.getAttribute('data-translate-y') || '{}');
+            } catch (e) { tyObj = {}; }
+            try {
+                tzObj = JSON.parse(carousel.getAttribute('data-translate-z') || '{}');
+            } catch (e) { tzObj = {}; }
+            try {
+                rotObj = JSON.parse(carousel.getAttribute('data-rotate-y') || '{}');
+            } catch (e) { rotObj = {}; }
+            try {
+                rotXObj = JSON.parse(carousel.getAttribute('data-rotate-x') || '{}');
+            } catch (e) { rotXObj = {}; }
+            try {
+                rotZObj = JSON.parse(carousel.getAttribute('data-rotate-z') || '{}');
+            } catch (e) { rotZObj = {}; }
+            try {
+                persObj = JSON.parse(carousel.getAttribute('data-perspective') || '{}');
+            } catch (e) { persObj = {}; }
+            try {
+                scaleObj = JSON.parse(carousel.getAttribute('data-scale') || '{}');
+            } catch (e) { scaleObj = {}; }
+
+            function getDeviceType() {
+                const width = window.innerWidth;
+                if (width <= 767) return 'Mobile';
+                if (width <= 1024) return 'Tablet';
+                return 'Desktop';
+            }
+
+            function getResponsiveVal(obj, defaultVal) {
+                const device = getDeviceType();
+                const val = obj[device] || obj['Desktop'] || defaultVal;
+                return parseFloat(val);
+            }
 
             // Default to the middle item
             let currentIndex = Math.floor(cards.length / 2);
+            let isHovered = false;
 
             // Find Pagination Container
             const paginationContainer = carousel.querySelector('.fb-coverflow-carousel-pagination');
@@ -56,6 +98,20 @@
             }
 
             function updateCarousel() {
+                const customX = getResponsiveVal(txObj, 260);
+                const customY = getResponsiveVal(tyObj, 0);
+                const customZ = getResponsiveVal(tzObj, -100);
+                const customAngleY = getResponsiveVal(rotObj, 55);
+                const customAngleX = getResponsiveVal(rotXObj, 0);
+                const customAngleZ = getResponsiveVal(rotZObj, 0);
+                const customPerspective = getResponsiveVal(persObj, 2000);
+                const customScale = getResponsiveVal(scaleObj, 0.85);
+
+                const wrapperEl = carousel.querySelector('.fb-coverflowCarousel-wrapper');
+                if (wrapperEl) {
+                    wrapperEl.style.perspective = `${customPerspective}px`;
+                }
+
                 cards.forEach((card, i) => {
                     let offset = i - currentIndex;
                     if (loop) {
@@ -66,37 +122,76 @@
 
                     if (offset === 0) {
                         // --- Active Center Item ---
-                        card.style.transform = `translateX(0px) translateZ(0px) rotateY(0deg)`;
+                        card.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1)`;
                         card.style.opacity = 1;
                         card.style.zIndex = 20;
                         card.classList.add('active');
                     } else {
                         // --- 1. TranslateX Formula ---
-                        let txValue = 260;
+                        let txValue = customX;
+                        const stepGap = customX * 0.88;
                         for (let step = 2; step <= absOffset; step++) {
-                            txValue += 230 + (10 * (step - 1));
+                            txValue += stepGap + (10 * (step - 1));
                         }
                         const translateX = offset > 0 ? txValue : -txValue;
 
-                        // --- 2. TranslateZ Formula ---
-                        const translateZ = -(100 + (absOffset - 1) * 30);
+                        // --- 2. TranslateY Formula ---
+                        const translateY = customY * absOffset;
 
-                        // --- 3. Dynamic RotateY (Angle) ---
-                        const rotateY = (55 + (absOffset - 1) * 5) * (offset > 0 ? -1 : 1);
+                        // --- 3. TranslateZ Formula ---
+                        const translateZ = customZ + (absOffset - 1) * -30;
 
-                        // --- 4. Opacity (gradual decrease) ---
+                        // --- 4. Dynamic RotateY (Angle) ---
+                        const angleFactor = customAngleY >= 0 ? 5 : -5;
+                        const rotateY = (customAngleY + (absOffset - 1) * angleFactor) * (offset > 0 ? -1 : 1);
+
+                        // --- 5. RotateX and RotateZ ---
+                        const rotateX = customAngleX;
+                        const rotateZ = customAngleZ * (offset > 0 ? -1 : 1);
+
+                        // --- 6. Inactive Items Scale ---
+                        const scaleVal = Math.max(1 - (absOffset * (1 - customScale)), 0.1);
+
+                        // --- 7. Opacity (gradual decrease) ---
                         const opacity = Math.max(1 - (absOffset * 0.2), 0.3);
 
                         // Apply Final Transform
-                        card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
+                        card.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scaleVal})`;
                         card.style.opacity = opacity;
                         card.style.zIndex = 20 - absOffset;
                         card.classList.remove('active');
                     }
 
                     // Apply Dynamic Transition Speed
-                    card.style.transition = `transform ${transitionSpeed / 1000}s ease, opacity ${transitionSpeed / 1000}s ease, z-index ${transitionSpeed / 1000}s ease`;
+                    card.style.transition = `transform ${transitionSpeed / 1000}s ${carouselTransitionEasing}, opacity ${transitionSpeed / 1000}s ${carouselTransitionEasing}, z-index ${transitionSpeed / 1000}s ${carouselTransitionEasing}`;
                 });
+
+                // Apply disabled styles to arrows if loop is off and limits are reached
+                const pBtn = carousel.querySelector('.fb-coverflow-carousel-prev-btn');
+                const nBtn = carousel.querySelector('.fb-coverflow-carousel-next-btn');
+
+                if (pBtn) {
+                    if (!loop && currentIndex === 0) {
+                        pBtn.classList.add('disabled');
+                        pBtn.style.opacity = '0.5';
+                        pBtn.style.pointerEvents = 'none';
+                    } else {
+                        pBtn.classList.remove('disabled');
+                        pBtn.style.opacity = '';
+                        pBtn.style.pointerEvents = '';
+                    }
+                }
+                if (nBtn) {
+                    if (!loop && currentIndex === cards.length - 1) {
+                        nBtn.classList.add('disabled');
+                        nBtn.style.opacity = '0.5';
+                        nBtn.style.pointerEvents = 'none';
+                    } else {
+                        nBtn.classList.remove('disabled');
+                        nBtn.style.opacity = '';
+                        nBtn.style.pointerEvents = '';
+                    }
+                }
 
                 // Update Pagination DOM if it exists
                 if (paginationContainer) {
@@ -141,6 +236,10 @@
 
             function movePrev() {
                 if (currentIndex <= 0) {
+                    if (stopOnLastSlide && autoplayTimer) {
+                        stopAutoplay();
+                        return;
+                    }
                     if (!loop) return;
                     currentIndex = cards.length - 1;
                 } else {
@@ -182,8 +281,18 @@
             // Autoplay Functionality
             let autoplayTimer = null;
 
+            function isHovering() {
+                if (!pauseOnHover) return false;
+                try {
+                    return isHovered || carousel.matches(':hover') || carousel.querySelector(':hover') !== null;
+                } catch (e) {
+                    return isHovered;
+                }
+            }
+
             function startAutoplay() {
                 if (!autoplay) return;
+                if (isHovering()) return; // Keep paused if hovered
                 stopAutoplay();
                 autoplayTimer = setInterval(() => {
                     if (reverseDirection) {
@@ -208,11 +317,14 @@
 
             // Pause on Hover
             if (autoplay && pauseOnHover) {
-                const wrapper = carousel.querySelector('.fb-coverflowCarousel-wrapper');
-                if (wrapper) {
-                    wrapper.addEventListener('mouseenter', stopAutoplay);
-                    wrapper.addEventListener('mouseleave', startAutoplay);
-                }
+                carousel.addEventListener('mouseenter', () => {
+                    isHovered = true;
+                    stopAutoplay();
+                });
+                carousel.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                    startAutoplay();
+                });
             }
 
             // Touch Move (Swipe / Drag) Support

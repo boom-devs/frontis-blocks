@@ -62,8 +62,31 @@ const Inspector = ({ attributes, setAttributes }) => {
         CarouselWidthUnits,
         CarouselHeight,
         CarouselHeightUnits,
+        carouselItem,
+
+        carouselItemTranslateX,
+        carouselItemTranslateXUnits,
+        carouselItemTranslateY,
+        carouselItemTranslateYUnits,
+        carouselItemTranslateZ,
+        carouselItemTranslateZUnits,
+        carouselItemRotateX,
+        carouselItemRotateXUnits,
+        carouselItemRotateY,
+        carouselItemRotateYUnits,
+        carouselItemRotateZ,
+        carouselItemRotateZUnits,
+
+        carouselPerspective,
+        carouselPerspectiveUnits,
+        carouselItemScale,
+        carouselItemScaleUnits,
 
         transitionSpeed,
+        carouselReflection,
+        carouselReflectionGap,
+        carouselReflectionOpacity,
+        carouselTransitionEasing,
         autoplay,
         autoplaySpeed,
         loop,
@@ -92,6 +115,11 @@ const Inspector = ({ attributes, setAttributes }) => {
         carouselArrowPositionOutsidePadding,
         carouselArrowPositionOutsidePaddingUnits,
         /** End Position */
+
+
+        coverflowCarouselItemBgColorSwitcher,
+        coverflowCarouselItemBgColor,
+        coverflowCarouselItemBgHoverColor,
 
         /** carousel Arrows Style */
         carouselArrowsIconSwitcher,
@@ -1102,6 +1130,11 @@ const Inspector = ({ attributes, setAttributes }) => {
                     checked={showNavigation}
                     onChange={(value) => setAttributes({ showNavigation: value })}
                 />
+                <ToggleControl
+                    label={__('Show Pagination', 'frontis-blocks')}
+                    checked={showPagination}
+                    onChange={(value) => setAttributes({ showPagination: value })}
+                />
                 <FB_Range
                     min={100}
                     max={1000}
@@ -1128,6 +1161,153 @@ const Inspector = ({ attributes, setAttributes }) => {
                     rangeStep={1}
                     resetFallbackValue={"300"}
                 />
+                <FB_Range
+                    min={1}
+                    max={20}
+                    label={__("Visible Items", "frontis-blocks")}
+                    rangeValue={carouselItem}
+                    onChangeHandler={(value) => setAttributes({ carouselItem: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+                />
+            </PanelBody>
+
+            <PanelBody title={__("3D Coverflow Settings", "frontis-blocks")} initialOpen={false}>
+                <FB_Range
+                    min={-1000}
+                    max={1000}
+                    label={__("Translate X", "frontis-blocks")}
+                    rangeValue={carouselItemTranslateX}
+                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateX: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateXUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemTranslateXUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"260"}
+                />
+                <FB_Range
+                    min={-500}
+                    max={500}
+                    label={__("Translate Y", "frontis-blocks")}
+                    rangeValue={carouselItemTranslateY}
+                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateY: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateYUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemTranslateYUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"0"}
+                />
+                <FB_Range
+                    min={-1000}
+                    max={1000}
+                    label={__("Translate Z (Depth)", "frontis-blocks")}
+                    rangeValue={carouselItemTranslateZ}
+                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateZ: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateZUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemTranslateZUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"-100"}
+                />
+                <FB_Range
+                    min={-90}
+                    max={90}
+                    label={__("Rotate X", "frontis-blocks")}
+                    rangeValue={carouselItemRotateX}
+                    onChangeHandler={(value) => setAttributes({ carouselItemRotateX: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateXUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemRotateXUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"55"}
+                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                />
+                <FB_Range
+                    min={-90}
+                    max={90}
+                    label={__("Rotate Y", "frontis-blocks")}
+                    rangeValue={carouselItemRotateY}
+                    onChangeHandler={(value) => setAttributes({ carouselItemRotateY: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateYUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemRotateYUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"55"}
+                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                />
+                <FB_Range
+                    min={-90}
+                    max={90}
+                    label={__("Rotate Z", "frontis-blocks")}
+                    rangeValue={carouselItemRotateZ}
+                    onChangeHandler={(value) => setAttributes({ carouselItemRotateZ: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateZUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemRotateZUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={"55"}
+                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                />
+                <FB_Range
+                    min={400}
+                    max={3000}
+                    label={__("3D Perspective", "frontis-blocks")}
+                    rangeValue={carouselPerspective}
+                    onChangeHandler={(value) => setAttributes({ carouselPerspective: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselPerspectiveUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselPerspectiveUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={50}
+                    resetFallbackValue={"2000"}
+                />
+                <FB_Range
+                    min={0.1}
+                    max={1.5}
+                    label={__("Inactive Items Scale", "frontis-blocks")}
+                    rangeValue={carouselItemScale}
+                    onChangeHandler={(value) => setAttributes({ carouselItemScale: value })}
+                    rangeUnitHandler={(value) => setAttributes({ carouselItemScaleUnits: value })}
+                    deviceType={deviceType}
+                    units={carouselItemScaleUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={0.05}
+                    resetFallbackValue={"0.85"}
+                />
+                <ToggleControl
+                    label={__("Enable Card Reflection", "frontis-blocks")}
+                    checked={carouselReflection}
+                    onChange={(value) => setAttributes({ carouselReflection: value })}
+                />
+                {carouselReflection && (
+                    <>
+                        <RangeControl
+                            label={__("Reflection Gap (px)", "frontis-blocks")}
+                            value={carouselReflectionGap}
+                            onChange={(value) => setAttributes({ carouselReflectionGap: value })}
+                            min={0}
+                            max={50}
+                            step={1}
+                        />
+                        <RangeControl
+                            label={__("Reflection Opacity (%)", "frontis-blocks")}
+                            value={carouselReflectionOpacity}
+                            onChange={(value) => setAttributes({ carouselReflectionOpacity: value })}
+                            min={0}
+                            max={100}
+                            step={1}
+                        />
+                    </>
+                )}
             </PanelBody>
 
             <PanelBody title={__("Carousel Options", "frontis-blocks")} initialOpen={false}>
@@ -1195,6 +1375,19 @@ const Inspector = ({ attributes, setAttributes }) => {
                     max={3000}
                     step={100}
                     initialPosition={500}
+                />
+                <SelectControl
+                    label={__("Transition Easing", "frontis-blocks")}
+                    value={carouselTransitionEasing}
+                    options={[
+                        { label: __('Smooth Bezier (Premium)', 'frontis-blocks'), value: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+                        { label: __('Ease', 'frontis-blocks'), value: 'ease' },
+                        { label: __('Ease In Out', 'frontis-blocks'), value: 'ease-in-out' },
+                        { label: __('Ease Out', 'frontis-blocks'), value: 'ease-out' },
+                        { label: __('Ease In', 'frontis-blocks'), value: 'ease-in' },
+                        { label: __('Linear', 'frontis-blocks'), value: 'linear' },
+                    ]}
+                    onChange={(value) => setAttributes({ carouselTransitionEasing: value })}
                 />
             </PanelBody>
 
@@ -1278,7 +1471,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             </>
                         )}
 
-                        <BaseControl
+                        {/* <BaseControl
                             label={__("Position Type", "frontis-blocks")}
                         >
                             <ButtonGroup className="frontis-setting-switcher-panel-btn">
@@ -1525,7 +1718,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                                 rangeStep={1}
                                 resetFallbackValue={"10"}
                             />
-                        )}
+                        )} */}
                     </>
                 </PanelBody>
             )}
@@ -1549,8 +1742,34 @@ const Inspector = ({ attributes, setAttributes }) => {
      */
     const styleControls = (
         <>
+            <PanelBody
+                title={__("Carousel Item", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <FB_SwitcherControl
+                    label={__("Background Color", "frontis-blocks")}
+                    globalSwitcher={coverflowCarouselItemBgColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ coverflowCarouselItemBgColorSwitcher: value })}
+                />
+
+                {coverflowCarouselItemBgColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={coverflowCarouselItemBgColor}
+                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBgColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {coverflowCarouselItemBgColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={coverflowCarouselItemBgHoverColor}
+                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBgHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+            </PanelBody>
             {showNavigation && (
-                <PanelBody title={__("Navigation Style", "frontis-blocks")} initialOpen={true}>
+                <PanelBody title={__("Navigation Style", "frontis-blocks")} initialOpen={false}>
                     <FB_SwitcherControl
                         label={__("Color", "frontis-blocks")}
                         globalSwitcher={carouselArrowsColorSwitcher}
@@ -1592,7 +1811,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                             setGlobalColor={(value) => setAttributes({ carouselArrowsBgColorHover: value })}
                         />
                     )}
-
 
                     <FB_Range
                         min={0}
