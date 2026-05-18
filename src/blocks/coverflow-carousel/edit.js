@@ -248,8 +248,11 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 	// Attach click listeners to editor slides to bring them to center on click
 	useEffect(() => {
+		let immediateCleanup = null;
+		let delayedCleanup = null;
+
 		const attachListeners = () => {
-			if (!wrapperRef.current) return;
+			if (!wrapperRef.current) return () => {};
 			const cards = wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide');
 			const listeners = [];
 
@@ -269,13 +272,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			};
 		};
 
-		const cleanup = attachListeners();
+		immediateCleanup = attachListeners();
 
 		// Delayed attachment for initial render mounting
-		const timer = setTimeout(attachListeners, 200);
+		const timer = setTimeout(() => {
+			delayedCleanup = attachListeners();
+		}, 200);
 
 		return () => {
-			if (cleanup) cleanup();
+			if (immediateCleanup) immediateCleanup();
+			if (delayedCleanup) delayedCleanup();
 			clearTimeout(timer);
 		};
 	}, [editorIndex, slideCount, attributes, innerBlocks]);
