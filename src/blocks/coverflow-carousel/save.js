@@ -13,10 +13,46 @@ export default function save({ attributes }) {
 		coverflowCarouselDesktopSwitcher,
 		coverflowCarouselTabletSwitcher,
 		coverflowCarouselMobileSwitcher,
+
+		showNavigation,
+		showPagination,
+		paginationType,
+
+		carouselArrowsIconSwitcher,
+		carouselArrowsIconLeftAlign,
+		carouselArrowsIconLeft,
+		carouselArrowsIconLeftImageUrl,
+		carouselArrowsIconLeftImageAlt,
+
+		carouselArrowsIconRightAlign,
+		carouselArrowsIconRight,
+		carouselArrowsIconRightImageUrl,
+		carouselArrowsIconRightImageAlt,
+
+		loop,
+		autoplay,
+		autoplaySpeed,
+		transitionSpeed,
+		allowTouchMove,
+		pauseOnHover,
+		stopOnLastSlide,
+		reverseDirection,
+		enableMouseWheel,
+		enableKeyboardNavigation,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-coverflowCarousel-main-wrapper ${blockID} ${coverflowCarouselDesktopSwitcher && 'fb-desktop-responsive'} ${coverflowCarouselTabletSwitcher && 'fb-tablet-responsive'} ${coverflowCarouselMobileSwitcher && 'fb-mobile-responsive'}`,
+        className: `fb-coverflowCarousel-main-wrapper ${blockID ? blockID : ''} ${coverflowCarouselDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${coverflowCarouselTabletSwitcher ? 'fb-tablet-responsive' : ''} ${coverflowCarouselMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
+		'data-loop': loop,
+		'data-autoplay': autoplay,
+		'data-autoplay-speed': autoplaySpeed,
+		'data-transition-speed': transitionSpeed,
+		'data-allow-touchmove': allowTouchMove,
+		'data-pause-on-hover': pauseOnHover,
+		'data-stop-on-last-slide': stopOnLastSlide,
+		'data-reverse-direction': reverseDirection,
+		'data-enable-mousewheel': enableMouseWheel,
+		'data-enable-keyboard': enableKeyboardNavigation,
     });
 
 	return (
@@ -25,6 +61,41 @@ export default function save({ attributes }) {
 				<div className="fb-coverflowCarousel-items-container">
 					<InnerBlocks.Content />
 				</div>
+
+				{/* Navigation Arrows */}
+				{showNavigation && (
+					<div className="fb-coverflow-carousel-navigation">
+						<button className="fb-coverflow-carousel-prev-btn">
+							{carouselArrowsIconSwitcher ? (
+								carouselArrowsIconLeftAlign === 'image' && carouselArrowsIconLeftImageUrl ? (
+									<img src={carouselArrowsIconLeftImageUrl} alt={carouselArrowsIconLeftImageAlt || __('Prev', 'frontis-blocks')} />
+								) : (
+									renderSVG(carouselArrowsIconLeft || 'arrow-left')
+								)
+							) : (
+								renderSVG('arrow-left')
+							)}
+						</button>
+						<button className="fb-coverflow-carousel-next-btn">
+							{carouselArrowsIconSwitcher ? (
+								carouselArrowsIconRightAlign === 'image' && carouselArrowsIconRightImageUrl ? (
+									<img src={carouselArrowsIconRightImageUrl} alt={carouselArrowsIconRightImageAlt || __('Next', 'frontis-blocks')} />
+								) : (
+									renderSVG(carouselArrowsIconRight || 'arrow-right')
+								)
+							) : (
+								renderSVG('arrow-right')
+							)}
+						</button>
+					</div>
+				)}
+
+				{/* Pagination */}
+				{showPagination && (
+					<div className={`fb-coverflow-carousel-pagination pagination-${paginationType}`}>
+						{/* Inside contents will be handled by view.js on frontend */}
+					</div>
+				)}
 			</div>
 		</div>
 	);

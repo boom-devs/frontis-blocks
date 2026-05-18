@@ -13,6 +13,183 @@ import getCustomCss from '@Utils/getCustomCss';
 const generatecoverflowCarouselNumberStyle = (attributes) => {
     const {
         blockID,
+        showNavigation,
+        showPagination,
+
+        CarouselWidth,
+        CarouselWidthUnits,
+        CarouselHeight,
+        CarouselHeightUnits,
+
+        transitionSpeed,
+        autoplay,
+        autoplaySpeed,
+        loop,
+        allowTouchMove,
+        pauseOnHover,
+        stopOnLastSlide,
+        reverseDirection,
+        enableMouseWheel,
+        enableKeyboardNavigation,
+
+        carouselArrowPositionType,
+        carouselArrowPosition,
+        carouselArrowDirection,
+        carouselArrowGap,
+        carouselArrowGapUnits,
+
+        carouselArrowPositionTopOffset,
+        carouselArrowPositionTopOffsetUnits,
+        carouselArrowPositionLeftOffset,
+        carouselArrowPositionLeftOffsetUnits,
+        carouselArrowPositionRightOffset,
+        carouselArrowPositionRightOffsetUnits,
+        carouselArrowPositionBottomOffset,
+        carouselArrowPositionBottomOffsetUnits,
+
+        carouselArrowPositionOutsidePadding,
+        carouselArrowPositionOutsidePaddingUnits,
+        /** End Position */
+
+        /** carousel Arrows Style */
+        carouselArrowsIconSwitcher,
+
+        carouselArrowsIconLeftAlign,
+        carouselArrowsIconLeft,
+        carouselArrowsIconLeftImageUrl,
+        carouselArrowsIconLeftImageAlt,
+        carouselArrowsIconLeftImageID,
+
+        carouselArrowsIconRightAlign,
+        carouselArrowsIconRight,
+        carouselArrowsIconRightImageUrl,
+        carouselArrowsIconRightImageAlt,
+        carouselArrowsIconRightImageID,
+
+        carouselArrowsSize,
+        carouselArrowsSizeUnits,
+        carouselArrowsColorSwitcher,
+        carouselArrowsColor,
+        carouselArrowsColorHover,
+
+        carouselArrowsBgColorSwitcher,
+        carouselArrowsBgColor,
+        carouselArrowsBgColorHover,
+
+        carouselArrowsWidth,
+        carouselArrowsWidthUnits,
+        carouselArrowsHeight,
+        carouselArrowsHeightUnits,
+
+        /** Border Settings */
+        carouselArrowsBorder,
+        carouselArrowsBorderColorSwitcher,
+        carouselArrowsBorderColor,
+        carouselArrowsBorderHoverColor,
+        carouselArrowsBorderUnits,
+        carouselArrowsBorderDesktop,
+        carouselArrowsBorderTablet,
+        carouselArrowsBorderMobile,
+        carouselArrowsBorderLink,
+
+        /** Border Radius */
+        carouselArrowsBorderRadiusUnits,
+        carouselArrowsBorderRadiusDesktop,
+        carouselArrowsBorderRadiusTablet,
+        carouselArrowsBorderRadiusMobile,
+        carouselArrowsBorderRadiusLink,
+
+        /** Box Shadow */
+        carouselArrowsBoxShadowSwitcher,
+        carouselArrowsBoxShadowValues,
+        carouselArrowsBoxShadowCssValue,
+        carouselArrowsBoxShadowHoverValues,
+        carouselArrowsBoxShadowHoverCssValue,
+
+        /** Dots Style */
+
+        carouselDotsMarginUnits,
+        carouselDotsMarginDesktop,
+        carouselDotsMarginTablet,
+        carouselDotsMarginMobile,
+        carouselDotsMarginLink,
+
+        carouselDotsPosition,
+        carouselDotsPositionUnits,
+
+        carouselDotsSwitcher,
+        carouselNormalDotsBgColor,
+        carouselNormalDotsWidth,
+        carouselNormalDotsWidthUnits,
+        carouselNormalDotsHeight,
+        carouselNormalDotsHeightUnits,
+
+        carouselNormalDotsBorder,
+        carouselNormalDotsBorderColorSwitcher,
+        carouselNormalDotsBorderColor,
+        carouselNormalDotsBorderHoverColor,
+
+        carouselNormalDotsBorderUnits,
+        carouselNormalDotsBorderDesktop,
+        carouselNormalDotsBorderTablet,
+        carouselNormalDotsBorderMobile,
+        carouselNormalDotsBorderLink,
+
+        carouselNormalDotsBorderRadiusUnits,
+        carouselNormalDotsBorderRadiusDesktop,
+        carouselNormalDotsBorderRadiusTablet,
+        carouselNormalDotsBorderRadiusMobile,
+        carouselNormalDotsBorderRadiusLink,
+
+        carouselActiveDotsBgColor,
+        carouselActiveDotsWidth,
+        carouselActiveDotsWidthUnits,
+        carouselActiveDotsHeight,
+        carouselActiveDotsHeightUnits,
+
+        carouselActiveDotsBorder,
+        carouselActiveDotsBorderColorSwitcher,
+        carouselActiveDotsBorderColor,
+        carouselActiveDotsBorderHoverColor,
+
+        carouselActiveDotsBorderUnits,
+        carouselActiveDotsBorderDesktop,
+        carouselActiveDotsBorderTablet,
+        carouselActiveDotsBorderMobile,
+        carouselActiveDotsBorderLink,
+
+        carouselActiveDotsBorderRadiusUnits,
+        carouselActiveDotsBorderRadiusDesktop,
+        carouselActiveDotsBorderRadiusTablet,
+        carouselActiveDotsBorderRadiusMobile,
+        carouselActiveDotsBorderRadiusLink,
+
+        carouselFractionColorSwitcher,
+        carouselFractionColor,
+        carouselFractionHoverColor,
+
+        carouselFractionGlobalTypographyData,
+        carouselFractionGlobalTypoSwitcher,
+        carouselFractionGlobalTypoType,
+        carouselFractionGlobalTypoOption,
+
+        carouselFractionFontFamily,
+        carouselFractionFontSize,
+        carouselFractionFontSizeUnits,
+        carouselFractionFontWeight,
+        carouselFractionFontStyle,
+        carouselFractionTextTransform,
+        carouselFractionTextDecoration,
+        carouselFractionLetterSpacing,
+        carouselFractionLetterSpacingUnits,
+        carouselFractionLineHeight,
+        carouselFractionLineHeightUnits,
+
+        carouselProgressbarBGColorSwitcher,
+        carouselProgressbarBGColor,
+        carouselProgressbarBGActiveColor,
+        carouselProgressbarHeight,
+        carouselProgressbarHeightUnits,
 
         //Global attributes
         coverflowCarouselGlobalZIndex,
@@ -144,8 +321,8 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             }
         }`;
 
-        const customCss = getCustomCss(coverflowCarouselGlobalWraperCustomCSS, `.${blockID}`);
-        return `${coverflowCarouselBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
-    
+    const customCss = getCustomCss(coverflowCarouselGlobalWraperCustomCSS, `.${blockID}`);
+    return `${coverflowCarouselBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
+
 }
 export default generatecoverflowCarouselNumberStyle;

@@ -10,26 +10,20 @@ const Edit = (props) => {
     const { blockID } = attributes;
 
 
-    const parentBlocks = wp.blocks.getBlockTypes().filter( function ( item ) {
-		return ! item.parent;
-	} );
+    const parentBlocks = wp.blocks.getBlockTypes().filter(function (item) {
+        return !item.parent;
+    });
 
     const TEMPLATE = [
-        [
-            'frontis-blocks/container',
-            {},
-            [
-                [ 'frontis-blocks/call-to-action' ]
-            ]
-        ]
+        ['frontis-blocks/advanced-image', { advancedImageUrl: window.FrontisBlocksData?.pluginUrl + 'assets/images/preset-bg.jpg' }]
     ];
 
     // Hide coverflow carousel block.
-	const ALLOWED_BLOCKS = parentBlocks
-    .map( ( block ) => block.name )
-    .filter(
-        ( blockName ) => [ 'frontis-blocks/coverflow-carousel', ].indexOf( blockName ) === -1
-    );
+    const ALLOWED_BLOCKS = parentBlocks
+        .map((block) => block.name)
+        .filter(
+            (blockName) => ['frontis-blocks/coverflow-carousel',].indexOf(blockName) === -1
+        );
 
     const innerBlockOptions = {
         allowedBlocks: ALLOWED_BLOCKS,
@@ -38,14 +32,13 @@ const Edit = (props) => {
 
     const innerBlocksProps = useInnerBlocksProps(
         {
-            className: `coverflow-carousel-content`,
-            slot: 'container-start',
+            className: `fb-coverflow-carousel-content`,
         },
         innerBlockOptions
     );
 
     const blockProps = useBlockProps({
-        className: `fb-coverflow-carousel-main-wrapper ${blockID || 'default-id'}`,
+        className: `fb-coverflow-carousel-child-wrap fb-coverflow-carousel-slide ${blockID ? blockID : ''}`.trim(),
     });
 
     return (
