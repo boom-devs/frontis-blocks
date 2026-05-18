@@ -1,119 +1,3 @@
-// //WordPress dependencies
-// import { useSelect, useDispatch } from '@wordpress/data';
-// import {
-// 	createBlocksFromInnerBlocksTemplate,
-// 	store as blocksStore,
-// } from '@wordpress/blocks';
-// import { useState } from '@wordpress/element';
-// import {
-// 	useBlockProps,
-// 	store as blockEditorStore,
-// 	__experimentalBlockVariationPicker,
-// } from '@wordpress/block-editor';
-// import { Button, Placeholder } from '@wordpress/components';
-// import { __ } from '@wordpress/i18n';
-
-// //Internal dependencies
-// import { useScopedBlockVariations } from '../utils';
-// import { useBlockPatterns } from './pattern-selection';
-// import variations from "@Blocks/loop-builder/variations";
-
-// export default function QueryPlaceholder( {
-// 	attributes,
-// 	clientId,
-// 	name,
-// 	openPatternSelectionModal,
-// } ) {
-// 	const [ isStartingBlank, setIsStartingBlank ] = useState( false );
-// 	const blockProps = useBlockProps();
-// 	const { blockType, activeBlockVariation } = useSelect(
-// 		( select ) => {
-// 			const { getActiveBlockVariation, getBlockType } =
-// 				select( blocksStore );
-// 			return {
-// 				blockType: getBlockType( name ),
-// 				activeBlockVariation: getActiveBlockVariation(
-// 					name,
-// 					attributes
-// 				),
-// 			};
-// 		},
-// 		[ name, attributes ]
-// 	);
-// 	const hasPatterns = !! useBlockPatterns( clientId, attributes ).length;
-// 	const icon =
-// 		activeBlockVariation?.icon?.src ||
-// 		activeBlockVariation?.icon ||
-// 		blockType?.icon?.src;
-// 	const label = activeBlockVariation?.title || blockType?.title;
-// 	if ( isStartingBlank ) {
-// 		return (
-// 			<QueryVariationPicker
-// 				clientId={ clientId }
-// 				attributes={ attributes }
-// 				icon={ icon }
-// 				label={ label }
-// 			/>
-// 		);
-// 	}
-// 	return (
-// 		<div { ...blockProps }>
-// 			<Placeholder
-// 				icon={ icon }
-// 				label={ label }
-// 				instructions={ __(
-// 					'Choose a pattern for the query loop or start blank.'
-// 				) }
-// 			>
-// 				{ !! hasPatterns && (
-// 					<Button
-// 						__next40pxDefaultSize
-// 						variant="primary"
-// 						onClick={ openPatternSelectionModal }
-// 					>
-// 						{ __( 'Choose' ) }
-// 					</Button>
-// 				) }
-
-// 				<Button
-// 					__next40pxDefaultSize
-// 					variant="secondary"
-// 					onClick={ () => {
-// 						setIsStartingBlank( true );
-// 					} }
-// 				>
-// 					{ __( 'Start blank' ) }
-// 				</Button>
-// 			</Placeholder>
-// 		</div>
-// 	);
-// }
-
-// function QueryVariationPicker( { clientId, attributes, icon, label } ) {
-// 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
-// 	const blockProps = useBlockProps();
-// 	return (
-// 		<div { ...blockProps }>
-// 			<__experimentalBlockVariationPicker
-// 				icon={ icon }
-// 				label={ label }
-// 				variations={ variations }
-// 				onSelect={ ( variation ) => {
-// 					if ( variation.innerBlocks ) {
-// 						replaceInnerBlocks(
-// 							clientId,
-// 							createBlocksFromInnerBlocksTemplate(
-// 								variation.innerBlocks
-// 							),
-// 							false
-// 						);
-// 					}
-// 				} }
-// 			/>
-// 		</div>
-// 	);
-// }
-
 /**
  * WordPress dependencies
  */
@@ -126,24 +10,22 @@ import {
 import {
 	useBlockProps,
 	store as blockEditorStore,
-	__experimentalBlockVariationPicker as BlockVariationPicker,
 } from '@wordpress/block-editor';
+import { Button, Placeholder } from '@wordpress/components';
 
 /**
  * Internal dependencies
  */
 import variations from '@Blocks/loop-builder/variations';
+import '../editor.scss';
 
 export default function QueryPlaceholder( {
 	attributes,
 	clientId,
 	name,
 } ) {
-	const blockProps = useBlockProps({
-		className: 'fb-loop-builder-variation-picker',
-	});
+	const blockProps = useBlockProps();
 
-	// Active variation/icon/label resolve
 	const { blockType, activeBlockVariation } = useSelect(
 		( select ) => {
 			const { getActiveBlockVariation, getBlockType } =
@@ -163,20 +45,24 @@ export default function QueryPlaceholder( {
 
 	const label = activeBlockVariation?.title || blockType?.title;
 
-	// Directly render the variation picker
 	return (
-		<div { ...blockProps }>
-			<QueryVariationPicker
-				clientId={ clientId }
-				attributes={ attributes }
-				icon={ icon }
-				label={ label }
-			/>
+		<div
+			{ ...blockProps }
+			className={ `${ blockProps.className } fb-loop-builder-variation-picker fb-loop-builder-variation-picker--empty` }
+			data-fb-component="fb-loop-builder-variation-picker"
+		>
+			<div className="fb-loop-builder-variation-picker__inner">
+				<QueryVariationPicker
+					clientId={ clientId }
+					icon={ icon }
+					label={ label }
+				/>
+			</div>
 		</div>
 	);
 }
 
-function QueryVariationPicker( { clientId, attributes, icon, label } ) {
+function QueryVariationPicker( { clientId, icon, label } ) {
 	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
 	const blockProps = useBlockProps();
 
@@ -191,15 +77,45 @@ function QueryVariationPicker( { clientId, attributes, icon, label } ) {
 	};
 
 	return (
-		<div { ...blockProps }>
-			<BlockVariationPicker
+		<div
+			{ ...blockProps }
+			className={ `${ blockProps.className } fb-loop-builder-variation-picker__picker` }
+			data-fb-subcomponent="fb-loop-builder-variation-picker__picker"
+		>
+			<Placeholder
+				className="fb-loop-builder-variation-picker__placeholder"
 				icon={ icon }
 				label={ label }
-				variations={ variations }
-				onSelect={ handleSelect }
-				allowSkip={ false }
 				instructions={ __( 'Select a variation to start with:' ) }
-			/>
+			>
+				<div className="fb-loop-builder-variation-picker__placeholder-content">
+					<ul
+						className="fb-loop-builder-variation-picker__variations-list"
+						role="list"
+					>
+						{ variations.map( ( variation ) => (
+							<li
+								key={ variation.name }
+								className="fb-loop-builder-variation-picker__variation-item"
+								data-fb-variation={ variation.name }
+							>
+								<Button
+									className="fb-loop-builder-variation-picker__variation-button"
+									onClick={ () => handleSelect( variation ) }
+									label={
+										variation.description ||
+										variation.title ||
+										variation.name
+									}
+									showTooltip
+								>
+									{ variation.icon }
+								</Button>
+							</li>
+						) ) }
+					</ul>
+				</div>
+			</Placeholder>
 		</div>
 	);
 }

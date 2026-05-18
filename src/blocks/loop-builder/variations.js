@@ -12,12 +12,16 @@ import {
 	titleDateExcerpt,
 	imageDateTitle,
 } from './icons';
-
 const variations = [
 	{
 		name: 'title-date',
-		title: __( 'Title & Date' ),
-		icon: titleDate,
+		title: '',
+		description: __( 'Post card with image, date, title, and excerpt' ),
+		icon: (
+			<span className="fb-loop-builder-variation-picker__preview fb-loop-builder-variation-picker__preview--fb-title-date">
+				{ titleDate }
+			</span>
+		),
 		attributes: {},
 		innerBlocks: [
 			[
