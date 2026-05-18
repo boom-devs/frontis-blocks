@@ -1,6 +1,6 @@
 import { RichText, useBlockProps, InnerBlocks } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import {useRef} from "@wordpress/element";
+import { useRef } from "@wordpress/element";
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function save({ attributes }) {
@@ -39,10 +39,23 @@ export default function save({ attributes }) {
 		reverseDirection,
 		enableMouseWheel,
 		enableKeyboardNavigation,
+
+		carouselItemTranslateX,
+		carouselItemTranslateY,
+		carouselItemTranslateZ,
+		carouselItemRotateY,
+		carouselItemRotateX,
+		carouselItemRotateZ,
+		carouselPerspective,
+		carouselItemScale,
+		carouselReflection,
+		carouselReflectionGap,
+		carouselReflectionOpacity,
+		carouselTransitionEasing,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-        className: `fb-coverflowCarousel-main-wrapper ${blockID ? blockID : ''} ${coverflowCarouselDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${coverflowCarouselTabletSwitcher ? 'fb-tablet-responsive' : ''} ${coverflowCarouselMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
+		className: `fb-coverflowCarousel-main-wrapper ${blockID ? blockID : ''} ${coverflowCarouselDesktopSwitcher ? 'fb-desktop-responsive' : ''} ${coverflowCarouselTabletSwitcher ? 'fb-tablet-responsive' : ''} ${coverflowCarouselMobileSwitcher ? 'fb-mobile-responsive' : ''}`.trim(),
 		'data-loop': loop,
 		'data-autoplay': autoplay,
 		'data-autoplay-speed': autoplaySpeed,
@@ -53,7 +66,19 @@ export default function save({ attributes }) {
 		'data-reverse-direction': reverseDirection,
 		'data-enable-mousewheel': enableMouseWheel,
 		'data-enable-keyboard': enableKeyboardNavigation,
-    });
+		'data-translate-x': carouselItemTranslateX ? JSON.stringify(carouselItemTranslateX) : '',
+		'data-translate-y': carouselItemTranslateY ? JSON.stringify(carouselItemTranslateY) : '',
+		'data-translate-z': carouselItemTranslateZ ? JSON.stringify(carouselItemTranslateZ) : '',
+		'data-rotate-y': carouselItemRotateY ? JSON.stringify(carouselItemRotateY) : '',
+		'data-rotate-x': carouselItemRotateX ? JSON.stringify(carouselItemRotateX) : '',
+		'data-rotate-z': carouselItemRotateZ ? JSON.stringify(carouselItemRotateZ) : '',
+		'data-perspective': carouselPerspective ? JSON.stringify(carouselPerspective) : '',
+		'data-scale': carouselItemScale ? JSON.stringify(carouselItemScale) : '',
+		'data-reflection': carouselReflection,
+		'data-reflection-gap': carouselReflectionGap,
+		'data-reflection-opacity': carouselReflectionOpacity,
+		'data-transition-easing': carouselTransitionEasing,
+	});
 
 	return (
 		<div {...blockProps}>

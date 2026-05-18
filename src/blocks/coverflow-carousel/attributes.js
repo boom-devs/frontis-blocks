@@ -55,10 +55,170 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	carouselItem: {
+		type: 'object',
+		default: {
+			Desktop: '5',
+			Tablet: '3',
+			Mobile: '1',
+		},
+	},
+
+	carouselItemTranslateX: {
+		type: 'object',
+		default: {
+			Desktop: '260',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemTranslateXUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	carouselItemTranslateY: {
+		type: 'object',
+		default: {
+			Desktop: '0',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemTranslateYUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	carouselItemTranslateZ: {
+		type: 'object',
+		default: {
+			Desktop: '-100',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemTranslateZUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	carouselItemRotateY: {
+		type: 'object',
+		default: {
+			Desktop: '55',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemRotateYUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'deg',
+			Tablet: 'deg',
+			Mobile: 'deg'
+		}
+	},
+
+	carouselItemRotateX: {
+		type: 'object',
+		default: {
+			Desktop: '0',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemRotateXUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'deg',
+			Tablet: 'deg',
+			Mobile: 'deg'
+		}
+	},
+
+	carouselItemRotateZ: {
+		type: 'object',
+		default: {
+			Desktop: '0',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemRotateZUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'deg',
+			Tablet: 'deg',
+			Mobile: 'deg'
+		}
+	},
+
+	carouselPerspective: {
+		type: 'object',
+		default: {
+			Desktop: '2000',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselPerspectiveUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+
+	carouselItemScale: {
+		type: 'object',
+		default: {
+			Desktop: '0.85',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
+	carouselItemScaleUnits: {
+		type: 'object',
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		}
+	},
 
 	transitionSpeed: {
 		type: 'number',
 		default: 500,
+	},
+	carouselReflection: {
+		type: 'boolean',
+		default: true,
+	},
+	carouselReflectionGap: {
+		type: 'number',
+		default: 2,
+	},
+	carouselReflectionOpacity: {
+		type: 'number',
+		default: 8,
+	},
+	carouselTransitionEasing: {
+		type: 'string',
+		default: 'cubic-bezier(0.16, 1, 0.3, 1)',
 	},
 	autoplay: {
 		type: 'boolean',
@@ -260,6 +420,19 @@ const attributes = {
 		type: 'string',
 		default: '',
 	},
+
+	/** Start Background */
+	coverflowCarouselItemBgColorSwitcher: {
+		type: 'string',
+		default: 'normal'
+	},
+	coverflowCarouselItemBgColor: {
+		type: 'string',
+	},
+	coverflowCarouselItemBgHoverColor: {
+		type: 'string',
+	},
+	/** End Background */
 
 	/** Start Arrows Style */
 	carouselArrowsSize: {
