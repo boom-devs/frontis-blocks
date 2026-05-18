@@ -7,12 +7,14 @@ import portraitLayout1 from './variations-templates/portrait-layout-1';
 import portraitLayout2 from './variations-templates/portrait-layout-2';
 import landscapeLayout from './variations-templates/landscape-layout';
 import boxedLayout from './variations-templates/boxed-layout';
+import createFromScratch from './variations-templates/create-from-scratch';
 
 const variations = [
 	portraitLayout1,
 	portraitLayout2,
 	landscapeLayout,
 	boxedLayout,
+	createFromScratch,
 ];
 
 export default variations;
