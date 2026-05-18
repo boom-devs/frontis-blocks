@@ -1,11 +1,12 @@
 import { __ } from '@wordpress/i18n';
 import { useEffect } from '@wordpress/element';
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps, MediaPlaceholder } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import './editor.scss';
 import generateImageHotspotStyle from './styling';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import { useDeviceType } from '@Config/displayType';
+import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 
 function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const { 
@@ -14,7 +15,7 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     imageHotspot_imageSize: imageSize, 
     imageHotspot_hotspots: hotspots, 
     imageHotspot_selectedHotspotId: selectedHotspotId,
-    imageHotspot_blockID: blockID,
+    blockID,
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -59,11 +60,24 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
         />
       )}
       
-      <div className={blockID} {...useBlockProps()}>
+      <div {...useBlockProps({ className: blockID })}>
         {!imageUrl ? (
-          <div className="fb-hotspot-placeholder">
-            <p>{__('Select an image from the sidebar inspector', 'frontis-blocks')}</p>
-          </div>
+          <MediaPlaceholder
+            icon="format-image"
+            labels={{
+              title: __('Image Hotspot', 'frontis-blocks'),
+              instructions: __('Select an image to add hotspots to.', 'frontis-blocks'),
+            }}
+            onSelect={(media) => {
+              setAttributes({
+                imageHotspot_imageUrl: media.url,
+                imageHotspot_imageAlt: media.alt,
+                imageHotspot_imageId: media.id,
+              });
+            }}
+            accept="image/*"
+            allowedTypes={['image']}
+          />
         ) : (
           <div className="fb-hotspot-editor-container">
             <img 
@@ -87,28 +101,12 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                   setAttributes({ imageHotspot_selectedHotspotId: hotspot.id });
                 }}
               >
-                {hotspot.link ? (
-                  <a 
-                    href={hotspot.link} 
-                    target={hotspot.openInNewTab ? '_blank' : '_self'}
-                    rel={hotspot.openInNewTab ? 'noopener noreferrer' : ''}
-                    className="fb-hotspot-link"
-                  >
-                    <div 
-                      className="fb-hotspot-trigger"
-                      style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
-                    >
-                      <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
-                    </div>
-                  </a>
-                ) : (
-                  <div 
-                    className="fb-hotspot-trigger"
-                    style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
-                  >
-                    <span className="fb-hotspot-icon">{hotspot.icon || 'plus'}</span>
-                  </div>
-                )}
+                <div 
+                  className="fb-hotspot-trigger"
+                  style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
+                >
+                  <span className="fb-hotspot-icon">{renderSVG(hotspot.icon)}</span>
+                </div>
                 
                 <div className="fb-hotspot-popover">
                   {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
