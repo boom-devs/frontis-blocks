@@ -24,7 +24,7 @@ if (!function_exists('render_loop_builder')):
 			 * Attributes
 			 */
 			$attributes = isset($block['attrs']) ? $block['attrs'] : [];
-			$blockId = isset($attributes['blockId']) ? $attributes['blockId'] : '';
+			$blockId = isset($attributes['blockID']) ? $attributes['blockID'] : (isset($attributes['blockId']) ? $attributes['blockId'] : '');
 			$align_class = isset($attributes['align']) ? 'align' . $attributes['align'] : 'alignwide';
 
 			$query_args = (isset($attributes['query']) && is_array($attributes['query'])) ? $attributes['query'] : [];
@@ -102,7 +102,7 @@ if (!function_exists('render_loop_builder')):
 			}
 
 			$item_attrs = $item_block['attrs'] ?? [];
-			$inner_block_id = $item_attrs['blockId'] ?? '';
+			$inner_block_id = isset($item_attrs['blockID']) ? $item_attrs['blockID'] : (isset($item_attrs['blockId']) ? $item_attrs['blockId'] : '');
 			$postSwitcher = $item_attrs['postSwitcher'] ?? 'grid';
 			$loop_builder_item_class = $item_attrs['loopBuilderItemClass'] ?? '';
 			$layout_class = ($postSwitcher === 'list') ? 'list-layout' : 'grid-layout';

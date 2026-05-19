@@ -1,21 +1,29 @@
 import { __ } from '@wordpress/i18n';
-import { InspectorControls } from '@wordpress/block-editor';
 import { useEffect, useMemo, memo } from '@wordpress/element';
-import { PanelBody, TabPanel, Button, ButtonGroup, BaseControl } from '@wordpress/components';
+import {
+    PanelBody,
+    SelectControl
+} from '@wordpress/components';
 import FB_InputControl from '@Components/input-control';
 import { useDeviceType } from '@Config/displayType';
 import FB_InspectorControls from '@Components/InspectorControls';
 import FB_CustomCSSEditor from '@Components/custom-css-editor';
-import getCustomCss from '@Utils/getCustomCss';
 import FB_Range from '@Components/range';
 import FB_SwitcherControl from '@Components/switcher-control';
+import FB_Spacing from '@Components/spacing';
+import FB_BoxShadowControl from '@Components/box-shadow';
+import FB_ColorControl from '@Components/color-control';
+import FB_BackgroundColorControl from '@Components/background-color-control';
+
+
 import { 
     POST_SWITCHER,
+    BORDER_STYLES,
 } from '@Constants/fbConstants';
 
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const {
-        blockId,
+        blockID,
         blockStyle,
         gridColumnsPerSection,
         gridRowGap,
@@ -28,147 +36,340 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         loopBuilderItemGlobalZIndex,
         loopBuilderItemClass,
         loopBuilderItemCustomCSS,
+
+        loopBuilderItemPaddingUnits,
+        loopBuilderItemPaddingDesktop,
+        loopBuilderItemPaddingTablet,
+        loopBuilderItemPaddingMobile,
+        loopBuilderItemPaddingLink,
+
+        loopBuilderItemMarginUnits,
+        loopBuilderItemMarginDesktop,
+        loopBuilderItemMarginTablet,
+        loopBuilderItemMarginMobile,
+        loopBuilderItemMarginLink,
+
+        loopBuilderItemBgColorSwitcher,
+        loopBuilderItemNormalBackgroundType,
+        loopBuilderItemNormalClassicColor,
+        loopBuilderItemNormalGradientColor,
+        loopBuilderItemNormalCustomGradientSwitcher,
+        loopBuilderItemNormalCustomGradientInputValue,
+        loopBuilderItemHoverBackgroundType,
+        loopBuilderItemHoverClassicColor,
+        loopBuilderItemHoverGradientColor,
+        loopBuilderItemHoverCustomGradientSwitcher,
+        loopBuilderItemHoverCustomGradientInputValue,
+
+        loopBuilderItemBorder,
+        loopBuilderItemBorderColorSwitcher,
+        loopBuilderItemBorderColor,
+        loopBuilderItemBorderHoverColor,
+
+        loopBuilderItemBorderUnits,
+        loopBuilderItemBorderDesktop,
+        loopBuilderItemBorderTablet,
+        loopBuilderItemBorderMobile,
+        loopBuilderItemBorderLink,
+
+        loopBuilderItemBorderRadiusUnits,
+        loopBuilderItemBorderRadiusDesktop,
+        loopBuilderItemBorderRadiusTablet,
+        loopBuilderItemBorderRadiusMobile,
+        loopBuilderItemBorderRadiusLink,
+
+        loopBuilderItemBoxShadowSwitcher,
+        loopBuilderItemBoxShadowValues,
+        loopBuilderItemBoxShadowCssValue,
+        loopBuilderItemBoxShadowHoverValues,
+        loopBuilderItemBoxShadowHoverCssValue,
     } = attributes;
 
     const deviceType = useDeviceType();
 
-
-    useEffect(() => {
-        if (clientId && typeof clientId === "string") {
-            setAttributes({ blockId: `fb-loop-builder-item-${clientId.slice(0, 8)}` });
-        }
-    }, [clientId]);
-
-    const allBlockStyle = useMemo(() => `
-
-        .${blockId}.fb-loop-builder-item-main-container {
-            margin-top: 0;
-            margin-bottom: 0;
-            max-width: 100%;
-            padding: 0;
-            list-style: none;
-            box-sizing: border-box;
-            width: 100%;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .alignright,
-        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .alignright {
-            float: right;
-            margin-inline-start: 2em;
-            margin-inline-end: 0;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .alignleft,
-        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .alignleft {
-            float: left;
-            margin-inline-start: 0;
-            margin-inline-end: 2em;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .aligncenter,
-        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .aligncenter {
-            margin-inline-start: auto;
-            margin-inline-end: auto;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container.grid-layout {
-            display: grid;
-            grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, minmax(0, 1fr)); 
-            row-gap: ${gridRowGap?.Desktop}${gridGapUnits?.Desktop};  
-            column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop};
-            overflow: hidden;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container.list-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr);
-            gap: ${listRowGap?.Desktop}${listGapUnits?.Desktop}; 
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post,
-        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container {
-            min-width: 0;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-main-wrapper,
-        .${blockId}.fb-loop-builder-item-main-container .fb-parent-wrapper,
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-wrapper,
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image,
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner,
-        .${blockId}.fb-loop-builder-item-main-container .wp-block-post-featured-image {
-            width: 100%;
-            max-width: 100%;
-            box-sizing: border-box;
-            overflow: hidden;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner {
-            display: block;
-        }
-
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner img,
-        .${blockId}.fb-loop-builder-item-main-container .wp-block-post-featured-image img,
-        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-main-wrapper img {
-            width: 100%;
-            max-width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            box-sizing: border-box;
-        }
-
-        @media only screen and (max-width: 1024px) {
-            .${blockId}.fb-loop-builder-item-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection?.Tablet}, minmax(0, 1fr)) !important; 
-                row-gap: ${gridRowGap?.Tablet}${gridGapUnits?.Tablet};  
-                column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
+    /** Start Google Map Padding */
+    const loopBuilderItemPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (loopBuilderItemPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        loopBuilderItemPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        loopBuilderItemPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        loopBuilderItemPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
             }
-
-            .${blockId}.fb-loop-builder-item-main-container.list-layout {
-                display: grid;
-                grid-template-columns: minmax(0, 1fr);
-                gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet}; 
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ loopBuilderItemPaddingDesktop: { ...loopBuilderItemPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ loopBuilderItemPaddingTablet: { ...loopBuilderItemPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ loopBuilderItemPaddingMobile: { ...loopBuilderItemPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
             }
         }
+    };
 
-        @media only screen and (max-width: 767px) {
-            .${blockId}.fb-loop-builder-item-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, minmax(0, 1fr)) !important; 
-                row-gap: ${gridRowGap?.Mobile}${gridGapUnits?.Mobile};  
-                column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
+    const loopBuilderItemPaddingLinkBtn = () => {
+        setAttributes({
+            loopBuilderItemPaddingLink: !loopBuilderItemPaddingLink
+        });
+    };
+
+    const loopBuilderItemPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            loopBuilderItemPaddingUnits: {
+                ...loopBuilderItemPaddingUnits,
+                [deviceType]: unit
             }
+        });
+    };
+    /** End Google Map Padding */
 
-            .${blockId}.fb-loop-builder-item-main-container.list-layout {
-                display: grid;
-                grid-template-columns: minmax(0, 1fr);
-                gap: ${listRowGap?.Mobile}${listGapUnits?.Mobile};  
+    /** Start Google Map Margin */
+    const loopBuilderItemMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (loopBuilderItemMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        loopBuilderItemMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        loopBuilderItemMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        loopBuilderItemMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ loopBuilderItemMarginDesktop: { ...loopBuilderItemMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ loopBuilderItemMarginTablet: { ...loopBuilderItemMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ loopBuilderItemMarginMobile: { ...loopBuilderItemMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
             }
         }
-    `, [
-        blockId,
-        blockStyle,
-        gridColumnsPerSection,
-        gridRowGap,
-        gridColumnGap,
-        gridGapUnits,
+    };
 
-        listGapUnits,
-        listRowGap,
-        loopBuilderItemGlobalZIndex,
-        loopBuilderItemClass,
-        loopBuilderItemCustomCSS,
-    ]);
+    const loopBuilderItemMarginLinkBtn = () => {
+        setAttributes({
+            loopBuilderItemMarginLink: !loopBuilderItemMarginLink
+        });
+    };
 
-    const customCss = getCustomCss(loopBuilderItemCustomCSS, `.${blockId}`);
+    const loopBuilderItemMarginUnitsHandler = (unit) => {
+        setAttributes({
+            loopBuilderItemMarginUnits: {
+                ...loopBuilderItemMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Google Map Margin */
 
-    useEffect(() => {
-        setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
-    }, [allBlockStyle, customCss] );
+    /** Start Google Map Border Radius */
+    const loopBuilderItemBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (loopBuilderItemBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({    
+                        loopBuilderItemBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        loopBuilderItemBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        loopBuilderItemBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ loopBuilderItemBorderDesktop: { ...loopBuilderItemBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ loopBuilderItemBorderTablet: { ...loopBuilderItemBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ loopBuilderItemBorderMobile: { ...loopBuilderItemBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
-    const editorStyle = `${allBlockStyle}${customCss}`.replace(/\s+/g, ' ').trim();
+    const loopBuilderItemBorderLinkBtn = () => {
+        setAttributes({
+            loopBuilderItemBorderLink: !loopBuilderItemBorderLink
+        });
+    };
+
+    const loopBuilderItemBorderUnitsHandler = (unit) => {
+        setAttributes({
+            loopBuilderItemBorderUnits: {
+                ...loopBuilderItemBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Google Map Border */
+
+    /** Start Google Map Border Radius */
+    const loopBuilderItemBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (loopBuilderItemBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        loopBuilderItemBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        loopBuilderItemBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        loopBuilderItemBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ loopBuilderItemBorderRadiusDesktop: { ...loopBuilderItemBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ loopBuilderItemBorderRadiusTablet: { ...loopBuilderItemBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ loopBuilderItemBorderRadiusMobile: { ...loopBuilderItemBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const loopBuilderItemBorderRadiusLinkBtn = () => {
+        setAttributes({
+            loopBuilderItemBorderRadiusLink: !loopBuilderItemBorderRadiusLink
+        });
+    };
+
+    const loopBuilderItemBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            loopBuilderItemBorderRadiusUnits: {
+                ...loopBuilderItemBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Google Map Border Radius */
 
     /**
 	 * Inspector General Controls
@@ -256,8 +457,149 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	 */
 	const styleControls = (
 		<>
-            <PanelBody title={__("Style", "frontis-blocks")} initialOpen>
-                {/* Add style settings here */}
+            <PanelBody
+                title={__("Style", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={loopBuilderItemPaddingUnitsHandler}
+                    spacingUnits={loopBuilderItemPaddingUnits}
+                    spacingDesktop={loopBuilderItemPaddingDesktop}
+                    spacingTablet={loopBuilderItemPaddingTablet}
+                    spacingMobile={loopBuilderItemPaddingMobile}
+                    handleSpacingUnitHandler={loopBuilderItemPaddingUnitsChange}
+                    spacingCombineBtn={loopBuilderItemPaddingLink}
+                    spacingCombineBtnHandler={loopBuilderItemPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={loopBuilderItemMarginUnitsHandler}
+                    spacingUnits={loopBuilderItemMarginUnits}
+                    spacingDesktop={loopBuilderItemMarginDesktop}
+                    spacingTablet={loopBuilderItemMarginTablet}
+                    spacingMobile={loopBuilderItemMarginMobile}
+                    handleSpacingUnitHandler={loopBuilderItemMarginUnitsChange}
+                    spacingCombineBtn={loopBuilderItemMarginLink}
+                    spacingCombineBtnHandler={loopBuilderItemMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={loopBuilderItemBgColorSwitcher}  
+                    setBgColorSwitcher={(value) => setAttributes({ loopBuilderItemBgColorSwitcher: value })}
+                    
+                    normalBackgroundType={loopBuilderItemNormalBackgroundType} 
+                    setNormalBackgroundType={(value) => setAttributes({ loopBuilderItemNormalBackgroundType: value })}
+                    normalClassicColor={loopBuilderItemNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ loopBuilderItemNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={loopBuilderItemNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ loopBuilderItemNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={loopBuilderItemNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ loopBuilderItemNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={loopBuilderItemNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ loopBuilderItemNormalCustomGradientInputValue: value })}
+                    
+                    hoverBackgroundType={loopBuilderItemHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ loopBuilderItemHoverBackgroundType: value })}
+                    hoverClassicColor={loopBuilderItemHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ loopBuilderItemHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={loopBuilderItemHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ loopBuilderItemHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={loopBuilderItemHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ loopBuilderItemHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={loopBuilderItemHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ loopBuilderItemHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+
+                />
+
+                <SelectControl
+                        label={__("Border Style", "frontis-blocks")}
+                        value={loopBuilderItemBorder} 
+                        options={BORDER_STYLES}
+                        onChange={(value) => setAttributes({ loopBuilderItemBorder: value })}
+                />
+
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={loopBuilderItemBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ loopBuilderItemBorderColorSwitcher: value })}
+                />
+
+                {loopBuilderItemBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={loopBuilderItemBorderColor}
+                        setGlobalColor={(value) => setAttributes({ loopBuilderItemBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {loopBuilderItemBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={loopBuilderItemBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ loopBuilderItemBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={loopBuilderItemBorderUnitsHandler}
+                    spacingUnits={loopBuilderItemBorderUnits}
+                    spacingDesktop={loopBuilderItemBorderDesktop}
+                    spacingTablet={loopBuilderItemBorderTablet}
+                    spacingMobile={loopBuilderItemBorderMobile}
+                    handleSpacingUnitHandler={loopBuilderItemBorderUnitsChange}
+                    spacingCombineBtn={loopBuilderItemBorderLink}
+                    spacingCombineBtnHandler={loopBuilderItemBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={loopBuilderItemBorderRadiusUnitsHandler}
+                    spacingUnits={loopBuilderItemBorderRadiusUnits}
+                    spacingDesktop={loopBuilderItemBorderRadiusDesktop}
+                    spacingTablet={loopBuilderItemBorderRadiusTablet}
+                    spacingMobile={loopBuilderItemBorderRadiusMobile}
+                    handleSpacingUnitHandler={loopBuilderItemBorderRadiusUnitsChange}
+                    spacingCombineBtn={loopBuilderItemBorderRadiusLink}
+                    spacingCombineBtnHandler={loopBuilderItemBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={loopBuilderItemBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ loopBuilderItemBoxShadowSwitcher: value })}
+                />
+
+                {loopBuilderItemBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ loopBuilderItemBoxShadowValues: value })}
+                        initialShadowValue={loopBuilderItemBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ loopBuilderItemBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {loopBuilderItemBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ loopBuilderItemBoxShadowHoverValues: value })}
+                        initialShadowValue={loopBuilderItemBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ loopBuilderItemBoxShadowHoverCssValue: value })}
+                    />
+                )}
             </PanelBody>
 		</>
 	);
@@ -306,18 +648,11 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 	);
 
     return (
-
-        <>
-            <style>
-                {editorStyle}
-            </style>
-
-            <FB_InspectorControls
-                generalControls={generalControls}
-                styleControls={styleControls}
-                advancedControls={advancedControls}
-            />
-        </>
+        <FB_InspectorControls
+            generalControls={generalControls}
+            styleControls={styleControls}
+            advancedControls={advancedControls}
+        />
     );
 }
 export default memo(Inspector);
