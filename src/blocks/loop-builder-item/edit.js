@@ -24,6 +24,9 @@ import { store as coreStore } from '@wordpress/core-data';
  * Internal dependencies
  */
 import Inspector from "./inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
+import generateLoopBuilderItemStyle from './styling';
+
 
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
@@ -44,7 +47,7 @@ function PostTemplateBlockPreview( {
 	const blockPreviewProps = useBlockPreview( {
 		blocks,
 		props: {
-			className: clsx( 'wp-block-post', classList, 'fb-loop-builder-item-preview-container' ),
+			className: clsx( 'wp-block-post', classList, 'fb-loop-builder-item-preview-container', 'fb-loop-builder-item-inner-container' ),
 		},
 	} );
 
@@ -71,13 +74,33 @@ function PostTemplateBlockPreview( {
 
 const MemoizedPostTemplateBlockPreview = memo( PostTemplateBlockPreview );
 
-export default function Edit({ attributes, setAttributes, clientId, context }) {
+export default function Edit({ attributes, setAttributes, clientId, context, isSelected }) {
 
 	const {
-		blockId,
+		blockID,
+		blockStyle,
         loopBuilderItemClass,
 		postSwitcher,
 	} = attributes;
+
+	// Handle block ID generation using the global hook
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-loop-builder-item',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
+	// Generate and save block style whenever attributes change
+	useEffect(() => {
+		if (blockID) {
+			const css = generateLoopBuilderItemStyle(attributes);
+			setAttributes({ blockStyle: css });
+		}
+	}, [attributes, blockID]);
+
 
 	const {
 		query: {
@@ -300,7 +323,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 	);
 
 	const blockProps = useBlockProps( {
-		className: `${blockId} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
+		className: `${blockID || ''} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
 
 	if ( ! posts ) {
@@ -354,6 +377,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 						</BlockContextProvider>
 					) ) }
 			</div>
+			<style>{blockStyle}</style>
 		</>
 	);
 }

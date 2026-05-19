@@ -2,13 +2,13 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         tagName: TagName = 'div',
-        blockId,
+        blockID,
         query,
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `${blockId || ''} fb-loop-builder fb-query-content-container`.trim(),
-        ...(blockId ? { 'data-fb-block-id': blockId } : {}),
+        className: `${blockID || ''} fb-loop-builder fb-query-content-container`.trim(),
+        ...(blockID ? { 'data-fb-block-id': blockID } : {}),
     });
 
     const innerBlocksProps = useInnerBlocksProps.save(blockProps);
