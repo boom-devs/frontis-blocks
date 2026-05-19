@@ -85,6 +85,7 @@ export default
 									dynamicTextSource: 'current_post',
 									dynamicTextField: 'post_terms',
 									dynamicTextTermsTaxonomy: 'category',
+									dynamicTextEnableLink: true,
 									loopAutoApplied: true,
 									headingTag: 'p',
 									headingFontSize: {
