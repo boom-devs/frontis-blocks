@@ -560,8 +560,12 @@ const attributes = {
     /** End Phase Title Alignment */
 
     /** Start Phase Title Typography */
-    vertcalTimelinePhaseTitleGlobalTypoSwitcher: {
-        type: "object",
+    phaseTitleTypographyData: {
+        type: 'object',
+        default: {}
+    },
+    phaseTitleTypoSwitcher: {
+        type: 'object',
         default: {
             fontFamily: false,
             fontSize: false,
@@ -573,80 +577,76 @@ const attributes = {
             lineHeight: false,
         },
     },
-    vertcalTimelinePhaseTitleGlobalTypographyData: {
-        type: "object",
-        default: {},
+    phaseTitleTypoType: {
+        type: 'string',
+        default: 'default',
     },
-    vertcalTimelinePhaseTitleGlobalTypoType: {
-        type: "string",
-        default: "default",
-    },
-    vertcalTimelinePhaseTitleGlobalTypoOption: {
-        type: "object",
+    phaseTitleTypoOption: {
+        type: 'object',
         default: { label: 'Default', value: 'default' },
     },
-    vertcalTimelinePhaseTitleFontFamily: {
-        type: "string",
-        default: "Default",
+    phaseTitleFontFamily: {
+        type: 'string',
+        default: 'Default',
     },
-    vertcalTimelinePhaseTitleFontSize: {
-        type: "object",
+    phaseTitleFontSize: {
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
     },
-    vertcalTimelinePhaseTitleFontSizeUnits: {
-        type: "object",
+    phaseTitleFontSizeUnits: {
+        type: 'object',
         default: {
             Desktop: 'px',
             Tablet: 'px',
             Mobile: 'px',
         }
     },
-    vertcalTimelinePhaseTitleFontWeight: {
-        type: "string",
-        default: "",
+    phaseTitleFontWeight: {
+        type: 'string',
+        default: '700',
     },
-    vertcalTimelinePhaseTitleFontStyle: {
-        type: "string",
-        default: "",
+    phaseTitleFontStyle: {
+        type: 'string',
+        default: '',
     },
-    vertcalTimelinePhaseTitleTextTransform: {
-        type: "string",
-        default: "",
+    phaseTitleTextTransform: {
+        type: 'string',
+        default: '',
     },
-    vertcalTimelinePhaseTitleTextDecoration: {
-        type: "string",
-        default: "none",
+    phaseTitleTextDecoration: {
+        type: 'string',
+        default: '',
     },
-    vertcalTimelinePhaseTitleLetterSpacing: {
-        type: "object",
+    phaseTitleLetterSpacing: {
+        type: 'object',
         default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
     },
-    vertcalTimelinePhaseTitleLineHeight: {
-        type: "object",
-        default: {
-            Desktop: "",
-            Tablet: "",
-            Mobile: "",
-        },
-    },
-    vertcalTimelinePhaseTitleLetterSpacingUnits: {
-        type: "object",
+    phaseTitleLetterSpacingUnits: {
+        type: 'object',
         default: {
             Desktop: 'px',
             Tablet: 'px',
             Mobile: 'px',
         }
     },
-    vertcalTimelinePhaseTitleLineHeightUnits: {
-        type: "object",
+    phaseTitleLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    phaseTitleLineHeightUnits: {
+        type: 'object',
         default: {
             Desktop: 'px',
             Tablet: 'px',
@@ -654,6 +654,102 @@ const attributes = {
         }
     },
     /** End Phase Title Typography */
+
+    /** Start Section Lebel Typography */
+    sectionLebelTypographyData: {
+        type: 'object',
+        default: {}
+    },
+    sectionLebelTypoSwitcher: {
+        type: 'object',
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    sectionLebelTypoType: {
+        type: 'string',
+        default: 'default',
+    },
+    sectionLebelTypoOption: {
+        type: 'object',
+        default: { label: 'Default', value: 'default' },
+    },
+    sectionLebelFontFamily: {
+        type: 'string',
+        default: 'Default',
+    },
+    sectionLebelFontSize: {
+        type: 'object',
+        default: {
+            Desktop: '16',
+            Tablet: '16',
+            Mobile: '16'
+        }
+    },
+    sectionLebelFontSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    sectionLebelFontWeight: {
+        type: 'string',
+        default: '700',
+    },
+    sectionLebelFontStyle: {
+        type: 'string',
+        default: '',
+    },
+    sectionLebelTextTransform: {
+        type: 'string',
+        default: '',
+    },
+    sectionLebelTextDecoration: {
+        type: 'string',
+        default: '',
+    },
+    sectionLebelLetterSpacing: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    sectionLebelLetterSpacingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    sectionLebelLineHeight: {
+        type: 'object',
+        default: {
+            Desktop: '',
+            Tablet: '',
+            Mobile: ''
+        }
+    },
+    sectionLebelLineHeightUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Section Lebel Typography */
 
     /** Start Phase Title Color */
     vertcalTimelinePhaseTitleColorSwitcher: {

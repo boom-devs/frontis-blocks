@@ -139,28 +139,54 @@ const generateVerticalTimelineItemStyle = (attributes) => {
         vertcalTimelinePhaseTitleBoxShadowHoverCssValue,
         /** End Phase Title Box Shadow */
 
+        /** Start Phase Title Alignment */
         vertcalTimelinePhaseTitleAlignment,
+        /** End Phase Title Alignment */
 
-        vertcalTimelinePhaseTitleGlobalTypoSwitcher,
-        vertcalTimelinePhaseTitleGlobalTypographyData,
-        vertcalTimelinePhaseTitleGlobalTypoType,
-        vertcalTimelinePhaseTitleGlobalTypoOption,
-        vertcalTimelinePhaseTitleFontFamily,
-        vertcalTimelinePhaseTitleFontSize,
-        vertcalTimelinePhaseTitleFontSizeUnits,
-        vertcalTimelinePhaseTitleFontWeight,
-        vertcalTimelinePhaseTitleFontStyle,
-        vertcalTimelinePhaseTitleTextTransform,
-        vertcalTimelinePhaseTitleTextDecoration,
-        vertcalTimelinePhaseTitleLetterSpacing,
-        vertcalTimelinePhaseTitleLineHeight,
-        vertcalTimelinePhaseTitleLetterSpacingUnits,
-        vertcalTimelinePhaseTitleLineHeightUnits,
+        /** Start Phase Title Typography */
+        phaseTitleTypoSwitcher,
+        phaseTitleTypoType,
+        phaseTitleTypoOption,
+        phaseTitleFontFamily,
+        phaseTitleFontSize,
+        phaseTitleFontSizeUnits,
+        phaseTitleFontWeight,
+        phaseTitleFontStyle,
+        phaseTitleTextTransform,
+        phaseTitleTextDecoration,
+        phaseTitleLetterSpacing,
+        phaseTitleLineHeight,
+        phaseTitleLetterSpacingUnits,
+        phaseTitleLineHeightUnits,
+        /** End Phase Title Typography */
 
+        /** Start Phase Title Color */
         vertcalTimelinePhaseTitleColorSwitcher,
         vertcalTimelinePhaseTitleColor,
         vertcalTimelinePhaseTitleHoverColor,
+        /** End Phase Title Color */
 
+        /** Start Section Lebel Typography */
+        sectionLebelTypoSwitcher,
+        sectionLebelTypographyData,
+        sectionLebelFontFamily,
+        sectionLebelFontSize,
+        sectionLebelFontSizeUnits,
+        sectionLebelFontWeight,
+        sectionLebelFontStyle,
+        sectionLebelTextTransform,
+        sectionLebelTextDecoration,
+        sectionLebelLetterSpacing,
+        sectionLebelLineHeight,
+        sectionLebelLetterSpacingUnits,
+        sectionLebelLineHeightUnits,
+        /** End Section Lebel Typography */
+
+        /** Start Section Lebel Colors */
+        sectionLebelBtnTextColorSwitcher,
+        sectionLebelBtnTextColor,
+        sectionLebelBtnTextHoverColor,
+        /** End Section Lebel Colors */
 
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
@@ -279,6 +305,100 @@ const generateVerticalTimelineItemStyle = (attributes) => {
             ${vertcalTimelinePhaseTitleColorSwitcher && vertcalTimelinePhaseTitleHoverColor ? `color: ${vertcalTimelinePhaseTitleHoverColor};` : ''}
         } 
 
+        .${blockID} .fb-vertical-timeline-label {
+            ${sectionLebelBtnTextColorSwitcher && sectionLebelBtnTextColor ? `color: ${sectionLebelBtnTextColor};` : ""}
+            ${sectionLebelTypoSwitcher.fontFamily === true &&
+            sectionLebelTypographyData.fontFamily
+            ? `font-family: ${sectionLebelTypographyData.fontFamily};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.fontSize === true &&
+            sectionLebelTypographyData.fontSize
+            ? `font-size: ${sectionLebelTypographyData.fontSize};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.fontWeight === true &&
+            sectionLebelTypographyData.fontWeight
+            ? `font-weight: ${sectionLebelTypographyData.fontWeight};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.fontStyle === true &&
+            sectionLebelTypographyData.fontStyle
+            ? `font-style: ${sectionLebelTypographyData.fontStyle};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.textTransform === true &&
+            sectionLebelTypographyData.textTransform
+            ? `text-transform: ${sectionLebelTypographyData.textTransform};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.textDecoration === true &&
+            sectionLebelTypographyData.textDecoration
+            ? `text-decoration: ${sectionLebelTypographyData.textDecoration};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.letterSpacing === true &&
+            sectionLebelTypographyData.letterSpacing
+            ? `letter-spacing: ${sectionLebelTypographyData.letterSpacing};`
+            : ""
+        }
+            ${sectionLebelTypoSwitcher.lineHeight === true &&
+            sectionLebelTypographyData.lineHeight
+            ? `line-height: ${sectionLebelTypographyData.lineHeight};`
+            : ""
+        }
+
+           ${sectionLebelTypoSwitcher.fontFamily === false &&
+            sectionLebelFontFamily &&
+            sectionLebelFontFamily !== "Default"
+            ? `font-family: ${sectionLebelFontFamily};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.fontSize === false &&
+            sectionLebelFontSize.Desktop &&
+            sectionLebelFontSizeUnits.Desktop
+            ? `font-size: ${sectionLebelFontSize.Desktop}${sectionLebelFontSizeUnits.Desktop};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.fontWeight === false &&
+            sectionLebelFontWeight
+            ? `font-weight: ${sectionLebelFontWeight};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.fontStyle === false &&
+            sectionLebelFontStyle
+            ? `font-style: ${sectionLebelFontStyle};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.textTransform === false &&
+            sectionLebelTextTransform
+            ? `text-transform: ${sectionLebelTextTransform};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.textDecoration === false &&
+            sectionLebelTextDecoration
+            ? `text-decoration: ${sectionLebelTextDecoration};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.letterSpacing === false &&
+            sectionLebelLetterSpacing.Desktop &&
+            sectionLebelLetterSpacingUnits.Desktop
+            ? `letter-spacing: ${sectionLebelLetterSpacing.Desktop}${sectionLebelLetterSpacingUnits.Desktop};`
+            : ""
+        }
+           ${sectionLebelTypoSwitcher.lineHeight === false &&
+            sectionLebelLineHeight.Desktop &&
+            sectionLebelLineHeightUnits.Desktop
+            ? `line-height: ${sectionLebelLineHeight.Desktop}${sectionLebelLineHeightUnits.Desktop};`
+            : ""
+        }
+        }
+
+        .${blockID} .fb-vertical-timeline-label:hover {
+             ${sectionLebelBtnTextColorSwitcher && sectionLebelBtnTextHoverColor ? `color: ${sectionLebelBtnTextHoverColor};` : ""}   
+        }
+            
+
        @media only screen and (max-width: 1024px) {
            .${blockID} .fb-vertical-timeline-item-inner-wrapper {
                ${vertcalTimelineContentBoxPaddingTabletWidth && vertcalTimelineContentBoxPaddingTablet?.top ? `padding: ${vertcalTimelineContentBoxPaddingTabletWidth};` : ''}
@@ -288,28 +408,91 @@ const generateVerticalTimelineItemStyle = (attributes) => {
            } 
 
           .${blockID} .fb-vertical-timeline-item-phase-title p {
-              ${vertcalTimelinePhaseTitlePaddingTabletWidth && vertcalTimelinePhaseTitlePaddingDesktop?.top ? `padding: ${vertcalTimelinePhaseTitlePaddingDesktopWidth};` : ''}
-              ${vertcalTimelinePhaseTitleMarginTabletWidth && vertcalTimelinePhaseTitleMarginDesktop?.top ? `margin: ${vertcalTimelinePhaseTitleMarginDesktopWidth};` : ''} 
-              ${vertcalTimelinePhaseTitleBorderTabletWidth && vertcalTimelinePhaseTitleNormalBorderDesktop?.top ? `border-width: ${vertcalTimelinePhaseTitleBorderDesktopWidth};` : ''}
-              ${vertcalTimelinePhaseTitleBorderRadiusTabletWidth && vertcalTimelinePhaseTitleNormalBorderRadiusDesktop?.top ? `border-radius: ${vertcalTimelinePhaseTitleBorderRadiusDesktopWidth};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontFamily === true && vertcalTimelinePhaseTitleGlobalTypographyData?.fontFamily ? `font-family: ${vertcalTimelinePhaseTitleGlobalTypographyData?.fontFamily};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontSize === true && vertcalTimelinePhaseTitleGlobalTypographyData?.fontSize ? `font-size: ${vertcalTimelinePhaseTitleGlobalTypographyData?.fontSize};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontWeight === true && vertcalTimelinePhaseTitleGlobalTypographyData?.fontWeight ? `font-weight: ${vertcalTimelinePhaseTitleGlobalTypographyData?.fontWeight};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontStyle === true && vertcalTimelinePhaseTitleGlobalTypographyData?.fontStyle ? `font-style: ${vertcalTimelinePhaseTitleGlobalTypographyData?.fontStyle};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.textTransform === true && vertcalTimelinePhaseTitleGlobalTypographyData?.textTransform ? `text-transform: ${vertcalTimelinePhaseTitleGlobalTypographyData?.textTransform};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.textDecoration === true && vertcalTimelinePhaseTitleGlobalTypographyData?.textDecoration ? `text-decoration: ${vertcalTimelinePhaseTitleGlobalTypographyData?.textDecoration};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.letterSpacing === true && vertcalTimelinePhaseTitleGlobalTypographyData?.letterSpacing ? `letter-spacing: ${vertcalTimelinePhaseTitleGlobalTypographyData?.letterSpacing};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.lineHeight === true && vertcalTimelinePhaseTitleGlobalTypographyData?.lineHeight ? `line-height: ${vertcalTimelinePhaseTitleGlobalTypographyData?.lineHeight};` : ''}
+  ${phaseTitleTypoSwitcher.fontFamily === true &&
+            phaseTitleTypographyData.fontFamily
+            ? `font-family: ${phaseTitleTypographyData.fontFamily};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.fontSize === true &&
+            phaseTitleTypographyData.fontSize
+            ? `font-size: ${phaseTitleTypographyData.fontSize};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.fontWeight === true &&
+            phaseTitleTypographyData.fontWeight
+            ? `font-weight: ${phaseTitleTypographyData.fontWeight};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.fontStyle === true &&
+            phaseTitleTypographyData.fontStyle
+            ? `font-style: ${phaseTitleTypographyData.fontStyle};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.textTransform === true &&
+            phaseTitleTypographyData.textTransform
+            ? `text-transform: ${phaseTitleTypographyData.textTransform};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.textDecoration === true &&
+            phaseTitleTypographyData.textDecoration
+            ? `text-decoration: ${phaseTitleTypographyData.textDecoration};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.letterSpacing === true &&
+            phaseTitleTypographyData.letterSpacing
+            ? `letter-spacing: ${phaseTitleTypographyData.letterSpacing};`
+            : ""
+        }
+            ${phaseTitleTypoSwitcher.lineHeight === true &&
+            phaseTitleTypographyData.lineHeight
+            ? `line-height: ${phaseTitleTypographyData.lineHeight};`
+            : ""
+        }
 
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontFamily === false && vertcalTimelinePhaseTitleFontFamily && vertcalTimelinePhaseTitleFontFamily !== 'Default' ? `font-family: ${vertcalTimelinePhaseTitleFontFamily};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontSize === false && vertcalTimelinePhaseTitleFontSize?.Desktop && vertcalTimelinePhaseTitleFontSizeUnits?.Desktop ? `font-size: ${vertcalTimelinePhaseTitleFontSize?.Desktop}${vertcalTimelinePhaseTitleFontSizeUnits?.Desktop};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontWeight === false && vertcalTimelinePhaseTitleFontWeight ? `font-weight: ${vertcalTimelinePhaseTitleFontWeight};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.fontStyle === false && vertcalTimelinePhaseTitleFontStyle ? `font-style: ${vertcalTimelinePhaseTitleFontStyle};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.textTransform === false && vertcalTimelinePhaseTitleTextTransform ? `text-transform: ${vertcalTimelinePhaseTitleTextTransform};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.textDecoration === false && vertcalTimelinePhaseTitleTextDecoration ? `text-decoration: ${vertcalTimelinePhaseTitleTextDecoration};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.letterSpacing === false && vertcalTimelinePhaseTitleLetterSpacing?.Desktop && vertcalTimelinePhaseTitleLetterSpacingUnits?.Desktop ? `letter-spacing: ${vertcalTimelinePhaseTitleLetterSpacing?.Desktop}${vertcalTimelinePhaseTitleLetterSpacingUnits?.Desktop};` : ''}
-              ${vertcalTimelinePhaseTitleGlobalTypoSwitcher?.lineHeight === false && vertcalTimelinePhaseTitleLineHeight?.Desktop && vertcalTimelinePhaseTitleLineHeightUnits?.Desktop ? `line-height: ${vertcalTimelinePhaseTitleLineHeight?.Desktop}${vertcalTimelinePhaseTitleLineHeightUnits?.Desktop};` : ''}
-
+           ${phaseTitleTypoSwitcher.fontFamily === false &&
+            phaseTitleFontFamily &&
+            phaseTitleFontFamily !== "Default"
+            ? `font-family: ${phaseTitleFontFamily};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.fontSize === false &&
+            phaseTitleFontSize.Desktop &&
+            phaseTitleFontSizeUnits.Desktop
+            ? `font-size: ${phaseTitleFontSize.Desktop}${phaseTitleFontSizeUnits.Desktop};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.fontWeight === false &&
+            phaseTitleFontWeight
+            ? `font-weight: ${phaseTitleFontWeight};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.fontStyle === false &&
+            phaseTitleFontStyle
+            ? `font-style: ${phaseTitleFontStyle};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.textTransform === false &&
+            phaseTitleTextTransform
+            ? `text-transform: ${phaseTitleTextTransform};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.textDecoration === false &&
+            phaseTitleTextDecoration
+            ? `text-decoration: ${phaseTitleTextDecoration};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.letterSpacing === false &&
+            phaseTitleLetterSpacing.Desktop &&
+            phaseTitleLetterSpacingUnits.Desktop
+            ? `letter-spacing: ${phaseTitleLetterSpacing.Desktop}${phaseTitleLetterSpacingUnits.Desktop};`
+            : ""
+        }
+           ${phaseTitleTypoSwitcher.lineHeight === false &&
+            phaseTitleLineHeight.Desktop &&
+            phaseTitleLineHeightUnits.Desktop
+            ? `line-height: ${phaseTitleLineHeight.Desktop}${phaseTitleLineHeightUnits.Desktop};`
+            : ""
+        }
           } 
         }
 

@@ -189,28 +189,55 @@ const Inspector = ({ attributes, setAttributes }) => {
         vertcalTimelinePhaseTitleBoxShadowHoverValues,
         /** End Phase Title Box Shadow */
 
+        /** Start Phase Title Alignment */
         vertcalTimelinePhaseTitleAlignment,
+        /** End Phase Title Alignment */
 
-        vertcalTimelinePhaseTitleGlobalTypoSwitcher,
-        vertcalTimelinePhaseTitleGlobalTypographyData,
-        vertcalTimelinePhaseTitleGlobalTypoType,
-        vertcalTimelinePhaseTitleGlobalTypoOption,
-        vertcalTimelinePhaseTitleFontFamily,
-        vertcalTimelinePhaseTitleFontSize,
-        vertcalTimelinePhaseTitleFontSizeUnits,
-        vertcalTimelinePhaseTitleFontWeight,
-        vertcalTimelinePhaseTitleFontStyle,
-        vertcalTimelinePhaseTitleTextTransform,
-        vertcalTimelinePhaseTitleTextDecoration,
-        vertcalTimelinePhaseTitleLetterSpacing,
-        vertcalTimelinePhaseTitleLineHeight,
-        vertcalTimelinePhaseTitleLetterSpacingUnits,
-        vertcalTimelinePhaseTitleLineHeightUnits,
+        /** Start Phase Title Typography */
+        phaseTitleTypoSwitcher,
+        phaseTitleTypoType,
+        phaseTitleTypoOption,
+        phaseTitleFontFamily,
+        phaseTitleFontSize,
+        phaseTitleFontSizeUnits,
+        phaseTitleFontWeight,
+        phaseTitleFontStyle,
+        phaseTitleTextTransform,
+        phaseTitleTextDecoration,
+        phaseTitleLetterSpacing,
+        phaseTitleLineHeight,
+        phaseTitleLetterSpacingUnits,
+        phaseTitleLineHeightUnits,
+        /** End Phase Title Typography */
 
+        /** Start Phase Title Colors */
         vertcalTimelinePhaseTitleColorSwitcher,
         vertcalTimelinePhaseTitleColor,
         vertcalTimelinePhaseTitleHoverColor,
+        /** End Phase Title Colors */
 
+        /** Start Section Lebel Typography */
+        sectionLebelTypoSwitcher,
+        sectionLebelTypoType,
+        sectionLebelTypoOption,
+        sectionLebelFontFamily,
+        sectionLebelFontSize,
+        sectionLebelFontSizeUnits,
+        sectionLebelFontWeight,
+        sectionLebelFontStyle,
+        sectionLebelTextTransform,
+        sectionLebelTextDecoration,
+        sectionLebelLetterSpacing,
+        sectionLebelLineHeight,
+        sectionLebelLetterSpacingUnits,
+        sectionLebelLineHeightUnits,
+        /** End Section Lebel Typography */
+
+        /** Start Section Lebel Colors */
+        sectionLebelBtnTextColorSwitcher,
+        sectionLebelBtnTextColor,
+        sectionLebelBtnTextHoverColor,
+        /** End Section Lebel Colors */
 
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
@@ -984,58 +1011,39 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setAttributes={setAttributes}
                 />
 
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={vertcalTimelinePhaseTitleGlobalTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ vertcalTimelinePhaseTitleGlobalTypographyData: value })}
-
-                    globalTypoType={vertcalTimelinePhaseTitleGlobalTypoType}
-                    onChangeGlobalTypoType={(value) => {
-                        setAttributes({
-                            vertcalTimelinePhaseTitleGlobalTypoType: value,
-                            vertcalTimelinePhaseTitleGlobalTypoSwitcher: value === 'default' ? { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
-                        })
-                    }}
-
-                    globalTypoOption={vertcalTimelinePhaseTitleGlobalTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ vertcalTimelinePhaseTitleGlobalTypoOption: value })}
-
-                    fontFamily={vertcalTimelinePhaseTitleFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ vertcalTimelinePhaseTitleFontFamily: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: value && false } })}
-
-                    fontSize={vertcalTimelinePhaseTitleFontSize}
-                    onChangeFontSize={(value) => setAttributes({ vertcalTimelinePhaseTitleFontSize: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontSize: value && false } })}
-
-                    fontSizeUnits={vertcalTimelinePhaseTitleFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleFontSizeUnits: value })}
-
-                    fontWeight={vertcalTimelinePhaseTitleFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ vertcalTimelinePhaseTitleFontWeight: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontWeight: value && false } })}
-
-                    fontStyle={vertcalTimelinePhaseTitleFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ vertcalTimelinePhaseTitleFontStyle: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontStyle: value && false } })}
-
-                    textTransform={vertcalTimelinePhaseTitleTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ vertcalTimelinePhaseTitleTextTransform: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, textTransform: value && false } })}
-
-                    textDecoration={vertcalTimelinePhaseTitleTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ vertcalTimelinePhaseTitleTextDecoration: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, textDecoration: value && false } })}
-
-                    letterSpacing={vertcalTimelinePhaseTitleLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ vertcalTimelinePhaseTitleLetterSpacing: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
-
-                    letterSpacingUnits={vertcalTimelinePhaseTitleLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleLetterSpacingUnits: value })}
-
-                    lineHeight={vertcalTimelinePhaseTitleLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ vertcalTimelinePhaseTitleLineHeight: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, lineHeight: value && false } })}
-
-                    lineHeightUnits={vertcalTimelinePhaseTitleLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleLineHeightUnits: value })}
-
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={phaseTitleTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ phaseTitleTypographyData: value })}
+                        globalTypoType={phaseTitleTypoType}
+                        onChangeGlobalTypoType={(value) => { setAttributes({ phaseTitleTypoType: value, phaseTitleTypoSwitcher: value === "default" ? { ...phaseTitleTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...phaseTitleTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
+                        globalTypoOption={phaseTitleTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ phaseTitleTypoOption: value })}
+                        fontFamily={phaseTitleFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ phaseTitleFontFamily: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontFamily: value && false, } })}
+                        fontSize={phaseTitleFontSize}
+                        onChangeFontSize={(value) => setAttributes({ phaseTitleFontSize: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontSize: value && false, } })}
+                        fontSizeUnits={phaseTitleFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ phaseTitleFontSizeUnits: value })}
+                        fontWeight={phaseTitleFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ phaseTitleFontWeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontWeight: value && false, } })}
+                        fontStyle={phaseTitleFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ phaseTitleFontStyle: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontStyle: value && false, } })}
+                        textTransform={phaseTitleTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ phaseTitleTextTransform: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textTransform: value && false, } })}
+                        textDecoration={phaseTitleTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ phaseTitleTextDecoration: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textDecoration: value && false, } })}
+                        letterSpacing={phaseTitleLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ phaseTitleLetterSpacing: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, letterSpacing: value && false, } })}
+                        letterSpacingUnits={phaseTitleLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ phaseTitleLetterSpacingUnits: value })}
+                        lineHeight={phaseTitleLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ phaseTitleLineHeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, lineHeight: value && false, } })}
+                        lineHeightUnits={phaseTitleLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ phaseTitleLineHeightUnits: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
+                    />
 
                 <FB_SwitcherControl
                     label={__("Text Color", "frontis-blocks")}
@@ -1175,6 +1183,66 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("Section Label", "frontis-blocks")}
                 initialOpen={false}
             >
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={sectionLebelTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ sectionLebelTypographyData: value })}
+                    globalTypoType={sectionLebelTypoType}
+                    onChangeGlobalTypoType={(value) => { setAttributes({ sectionLebelTypoType: value, sectionLebelTypoSwitcher: value === "default" ? { ...sectionLebelTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...sectionLebelTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
+                    globalTypoOption={sectionLebelTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ sectionLebelTypoOption: value })}
+                    fontFamily={sectionLebelFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ sectionLebelFontFamily: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontFamily: value && false, } })}
+                    fontSize={sectionLebelFontSize}
+                    onChangeFontSize={(value) => setAttributes({ sectionLebelFontSize: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontSize: value && false, } })}
+                    fontSizeUnits={sectionLebelFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ sectionLebelFontSizeUnits: value })}
+                    fontWeight={sectionLebelFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ sectionLebelFontWeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontWeight: value && false, } })}
+                    fontStyle={sectionLebelFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ sectionLebelFontStyle: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontStyle: value && false, } })}
+                    textTransform={sectionLebelTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ sectionLebelTextTransform: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textTransform: value && false, } })}
+                    textDecoration={sectionLebelTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ sectionLebelTextDecoration: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textDecoration: value && false, } })}
+                    letterSpacing={sectionLebelLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ sectionLebelLetterSpacing: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, letterSpacing: value && false, } })}
+                    letterSpacingUnits={sectionLebelLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ sectionLebelLetterSpacingUnits: value })}
+                    lineHeight={sectionLebelLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ sectionLebelLineHeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, lineHeight: value && false, } })}
+                    lineHeightUnits={sectionLebelLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ sectionLebelLineHeightUnits: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Text Color", "frontis-blocks")}
+                    globalSwitcher={sectionLebelBtnTextColorSwitcher}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ sectionLebelBtnTextColorSwitcher: value })
+                    }
+                />
+
+
+                {sectionLebelBtnTextColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={sectionLebelBtnTextColor}
+                        setGlobalColor={(value) => setAttributes({ sectionLebelBtnTextColor: value })}
+                    />
+                )}
+
+                { sectionLebelBtnTextColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={sectionLebelBtnTextHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ sectionLebelBtnTextHoverColor: value })
+                        }
+                    />
+                )}
 
             </PanelBody>
 
