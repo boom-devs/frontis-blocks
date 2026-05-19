@@ -30,6 +30,7 @@ export default
 						{
 							variationSelected: true,
 							loopAutoApplied: true,
+							containerChildrenWidth: 'full',
 							containerGlobalPadding: {
 								Desktop: '0',
 								Tablet: '0',
@@ -143,10 +144,57 @@ export default
 								{
 									variationSelected: true,
 									loopAutoApplied: true,
+									containerChildrenWidth: 'auto',
 									containerGlobalPadding: {
 										Desktop: '0',
 										Tablet: '0',
 										Mobile: '0',
+									},
+									containerDesktopPadding: {
+										top: '0',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerTabletPadding: {
+										top: '0',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerMobilePadding: {
+										top: '0',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerPaddingUnits: {
+										Desktop: 'px',
+										Tablet: 'px',
+										Mobile: 'px',
+									},
+									containerDesktopMargin: {
+										top: '16',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerTabletMargin: {
+										top: '16',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerMobileMargin: {
+										top: '16',
+										bottom: '0',
+										left: '0',
+										right: '0',
+									},
+									containerMarginUnits: {
+										Desktop: 'px',
+										Tablet: 'px',
+										Mobile: 'px',
 									},
 									containerDirection: {
 										Desktop: 'row',
@@ -154,9 +202,9 @@ export default
 										Mobile: 'row',
 									},
 									containerWrap: {
-										Desktop: 'nowrap',
-										Tablet: 'nowrap',
-										Mobile: 'nowrap',
+										Desktop: 'wrap',
+										Tablet: 'wrap',
+										Mobile: 'wrap',
 									},
 									deviceType: 'Desktop',
 									containerAlignItems: {
@@ -164,10 +212,25 @@ export default
 										Tablet: 'center',
 										Mobile: 'center',
 									},
+									containerJustify: {
+										Desktop: 'flex-start',
+										Tablet: 'flex-start',
+										Mobile: 'flex-start',
+									},
+									rowGap: {
+										Desktop: '0',
+										Tablet: '0',
+										Mobile: '0',
+									},
+									rowGapUnits: {
+										Desktop: 'px',
+										Tablet: 'px',
+										Mobile: 'px',
+									},
 									columnGap: {
-										Desktop: '16',
-										Tablet: '16',
-										Mobile: '16',
+										Desktop: '10',
+										Tablet: '10',
+										Mobile: '10',
 									},
 									columnGapUnits: {
 										Desktop: 'px',
@@ -185,6 +248,29 @@ export default
 												Desktop: '0',
 												Tablet: '0',
 												Mobile: '0',
+											},
+											containerDesktopPadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerTabletPadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerMobilePadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerPaddingUnits: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px',
 											},
 											customWidth: {
 												Desktop: '48',
@@ -297,6 +383,29 @@ export default
 												Tablet: '0',
 												Mobile: '0',
 											},
+											containerDesktopPadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerTabletPadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerMobilePadding: {
+												top: '0',
+												bottom: '0',
+												left: '0',
+												right: '0',
+											},
+											containerPaddingUnits: {
+												Desktop: 'px',
+												Tablet: 'px',
+												Mobile: 'px',
+											},
 											customWidth: {
 												Desktop: '80',
 												Tablet: '80',
@@ -319,9 +428,9 @@ export default
 													loopAutoApplied: true,
 													headingTag: 'p',
 													headingFontSize: {
-														Desktop: '13',
-														Tablet: '13',
-														Mobile: '13',
+														Desktop: '14',
+														Tablet: '14',
+														Mobile: '14',
 													},
 													headingDesktopMargin: {
 														top: '0',
