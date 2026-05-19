@@ -43,6 +43,7 @@ export default function QueryContent( {
 	name,
 } ) {
 	const {
+		blockId,
 		queryId,
 		query,
 		enhancedPagination,
@@ -73,7 +74,10 @@ export default function QueryContent( {
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
 	const instanceId = useInstanceId( QueryContent );
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps( {
+		className: `${ blockId || '' } fb-loop-builder fb-query-content-container`.trim(),
+		...( blockId ? { 'data-fb-block-id': blockId } : {} ),
+	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 	} );
