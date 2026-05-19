@@ -42,41 +42,85 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     const allBlockStyle = useMemo(() => `
 
+        .${blockId}.fb-loop-builder-wrapper-main-container {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+        }
+
         .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
             display: grid;
-            grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, 1fr); 
+            grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, minmax(0, 1fr)); 
             row-gap: ${gridRowGap?.Desktop}${gridGapUnits?.Desktop};  
-            column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop}; 
+            column-gap: ${gridColumnGap?.Desktop}${gridGapUnits?.Desktop};
+            overflow: hidden;
         }
 
         .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
             display: grid;
-            grid-template-columns: repeat(1, 1fr);
+            grid-template-columns: minmax(0, 1fr);
             gap: ${listRowGap?.Desktop}${listGapUnits?.Desktop}; 
+        }
+
+        .${blockId}.fb-loop-builder-wrapper-main-container > .wp-block-post,
+        .${blockId}.fb-loop-builder-wrapper-main-container > .fb-loop-builder-wrapper-inner-container {
+            min-width: 0;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-main-wrapper,
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-parent-wrapper,
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-wrapper,
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image,
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner,
+        .${blockId}.fb-loop-builder-wrapper-main-container .wp-block-post-featured-image {
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner {
+            display: block;
+        }
+
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner img,
+        .${blockId}.fb-loop-builder-wrapper-main-container .wp-block-post-featured-image img,
+        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-main-wrapper img {
+            width: 100%;
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            box-sizing: border-box;
         }
 
         @media only screen and (max-width: 1024px) {
             .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection?.Tablet}, 1fr) !important; 
+                grid-template-columns: repeat(${gridColumnsPerSection?.Tablet}, minmax(0, 1fr)) !important; 
                 row-gap: ${gridRowGap?.Tablet}${gridGapUnits?.Tablet};  
                 column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
             }
+
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
                 display: grid;
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: minmax(0, 1fr);
                 gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet}; 
             }
         }
 
         @media only screen and (max-width: 767px) {
             .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
-                grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, 1fr) !important; 
+                grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, minmax(0, 1fr)) !important; 
                 row-gap: ${gridRowGap?.Mobile}${gridGapUnits?.Mobile};  
                 column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
             }
+
             .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
                 display: grid;
-                grid-template-columns: repeat(1, 1fr);
+                grid-template-columns: minmax(0, 1fr);
                 gap: ${listRowGap?.Mobile}${listGapUnits?.Mobile};  
             }
         }
@@ -87,7 +131,7 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         gridRowGap,
         gridColumnGap,
         gridGapUnits,
-        
+
         listGapUnits,
         listRowGap,
         loopBuilderWrapperGlobalZIndex,
