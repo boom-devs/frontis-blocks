@@ -30,6 +30,12 @@ export default
 						{
 							variationSelected: true,
 							loopAutoApplied: true,
+							containerChildrenWidth: 'full',
+							containerDirection: {
+								Desktop: 'column',
+								Tablet: 'column',
+								Mobile: 'column',
+							},
 							containerGlobalPadding: {
 								Desktop: '0',
 								Tablet: '0',

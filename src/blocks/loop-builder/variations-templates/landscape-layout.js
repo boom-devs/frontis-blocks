@@ -29,13 +29,22 @@ export default
 						{
 							variationSelected: true,
 							loopAutoApplied: true,
+							containerChildrenWidth: 'full',
+							containerDirection: {
+								Desktop: 'row',
+								Tablet: 'row',
+								Mobile: 'row',
+							},
+							containerWrap: {
+								Desktop: 'wrap',
+								Tablet: 'wrap',
+								Mobile: 'wrap',
+							},
 							containerGlobalPadding: {
 								Desktop: '0',
 								Tablet: '0',
 								Mobile: '0',
 							},
-							directionDesktop: 'row',
-							wrapMobile: 'wrap',
 							deviceType: 'Desktop',
 							containerAlignItems: {
 								Desktop: 'stretch',
@@ -49,6 +58,12 @@ export default
 								{
 									variationSelected: true,
 									loopAutoApplied: true,
+									containerChildrenWidth: 'full',
+									containerDirection: {
+										Desktop: 'column',
+										Tablet: 'column',
+										Mobile: 'column',
+									},
 									containerGlobalPadding: {
 										Desktop: '0',
 										Tablet: '0',
@@ -109,6 +124,12 @@ export default
 								{
 									variationSelected: true,
 									loopAutoApplied: true,
+									containerChildrenWidth: 'full',
+									containerDirection: {
+										Desktop: 'column',
+										Tablet: 'column',
+										Mobile: 'column',
+									},
 									containerGlobalPadding: {
 										Desktop: '0',
 										Tablet: '0',
@@ -127,13 +148,22 @@ export default
 										{
 											variationSelected: true,
 											loopAutoApplied: true,
+											containerChildrenWidth: 'auto',
+											containerDirection: {
+												Desktop: 'row',
+												Tablet: 'row',
+												Mobile: 'row',
+											},
+											containerWrap: {
+												Desktop: 'wrap',
+												Tablet: 'wrap',
+												Mobile: 'wrap',
+											},
 											containerGlobalPadding: {
 												Desktop: '0',
 												Tablet: '0',
 												Mobile: '0',
 											},
-											directionDesktop: 'row',
-											wrapMobile: 'wrap',
 											deviceType: 'Desktop',
 											containerAlignItems: {
 												Desktop: 'center',
