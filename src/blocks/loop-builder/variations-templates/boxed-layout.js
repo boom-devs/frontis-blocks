@@ -29,6 +29,11 @@ export default
 						{
 							variationSelected: true,
 							loopAutoApplied: true,
+							containerGlobalPadding: {
+								Desktop: '0',
+								Tablet: '0',
+								Mobile: '0',
+							},
 							containerBorder: 'solid',
 							containerDesktopBorderWidth: {
 								top: '1',
@@ -157,6 +162,11 @@ export default
 								{
 									variationSelected: true,
 									loopAutoApplied: true,
+									containerGlobalPadding: {
+										Desktop: '0',
+										Tablet: '0',
+										Mobile: '0',
+									},
 									directionDesktop: 'row',
 									wrapMobile: 'wrap',
 									deviceType: 'Desktop',
@@ -172,6 +182,11 @@ export default
 										{
 											variationSelected: true,
 											loopAutoApplied: true,
+											containerGlobalPadding: {
+												Desktop: '0',
+												Tablet: '0',
+												Mobile: '0',
+											},
 											customWidth: {
 												Desktop: 18,
 												Tablet: 18,
@@ -225,6 +240,11 @@ export default
 										{
 											variationSelected: true,
 											loopAutoApplied: true,
+											containerGlobalPadding: {
+												Desktop: '0',
+												Tablet: '0',
+												Mobile: '0',
+											},
 											customWidth: {
 												Desktop: 82,
 												Tablet: 82,
