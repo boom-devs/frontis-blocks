@@ -47,26 +47,26 @@ const attributes = {
 	gridRowGap: {
 		type: "object",
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 	gridColumnGap: {
 		type: "object",
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 
 	listRowGap: {
 		type: "object",
 		default: {
-			Desktop: "30",
-			Tablet: "30",
-			Mobile: "30"
+			Desktop: "16",
+			Tablet: "16",
+			Mobile: "16"
 		}
 	},
 
