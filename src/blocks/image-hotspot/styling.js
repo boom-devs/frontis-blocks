@@ -11,6 +11,7 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspot_imageSize: imageSize,
         imageHotspot_imageHeight: imageHeight,
         imageHotspot_imageHeightUnits: imageHeightUnits,
+        imageHotspot_hotspots: hotspots,
         
         // Hotspot marker styles
         imageHotspot_markerSize: markerSize,
@@ -71,7 +72,7 @@ const generateImageHotspotStyle = (attributes) => {
     const imageHeightMobile = imageHeight?.Mobile ? `${imageHeight.Mobile}${imageHeightUnits?.Mobile || 'px'}` : imageHeightDesktop;
 
     // Marker size with unit
-    const markerSizeValue = markerSize?.Desktop ? `${markerSize.Desktop}${markerSizeUnits?.Desktop || 'px'}` : '32px';
+    const markerSizeValue = markerSize?.Desktop ? `${markerSize.Desktop}${markerSizeUnits?.Desktop || 'px'}` : '35px';
     const markerSizeTablet = markerSize?.Tablet ? `${markerSize.Tablet}${markerSizeUnits?.Tablet || 'px'}` : markerSizeValue;
     const markerSizeMobile = markerSize?.Mobile ? `${markerSize.Mobile}${markerSizeUnits?.Mobile || 'px'}` : markerSizeValue;
 
@@ -116,7 +117,7 @@ const generateImageHotspotStyle = (attributes) => {
     const descFontSizeMobile = descFontSize?.Mobile ? `${descFontSize.Mobile}${descFontSizeUnits?.Mobile || 'px'}` : descFontSizeValue;
     
     // Icon size
-    const iconSizeValue = iconSize?.Desktop ? `${iconSize.Desktop}${iconSizeUnits?.Desktop || 'px'}` : '14px';
+    const iconSizeValue = iconSize?.Desktop ? `${iconSize.Desktop}${iconSizeUnits?.Desktop || 'px'}` : '50%';
     const iconSizeTablet = iconSize?.Tablet ? `${iconSize.Tablet}${iconSizeUnits?.Tablet || 'px'}` : iconSizeValue;
     const iconSizeMobile = iconSize?.Mobile ? `${iconSize.Mobile}${iconSizeUnits?.Mobile || 'px'}` : iconSizeValue;
 
@@ -129,6 +130,162 @@ const generateImageHotspotStyle = (attributes) => {
     const descMarginValue = descMargin?.Desktop ? `${descMargin.Desktop}${descMarginUnits?.Desktop || 'px'}` : '0';
     const descMarginTablet = descMargin?.Tablet ? `${descMargin.Tablet}${descMarginUnits?.Tablet || 'px'}` : descMarginValue;
     const descMarginMobile = descMargin?.Mobile ? `${descMargin.Mobile}${descMarginUnits?.Mobile || 'px'}` : descMarginValue;
+    const hotspotHoverStyles = (hotspots || []).map((hotspot) => `
+        ${hotspot.hoverBackgroundColor ? `
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-trigger {
+                background-color: ${hotspot.hoverBackgroundColor} !important;
+            }
+        ` : ''}
+        ${hotspot.iconHoverColor ? `
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-icon {
+                color: ${hotspot.iconHoverColor} !important;
+            }
+        ` : ''}
+    `).join('');
+    const getResponsiveSize = (size, units, fallback) => {
+        const desktop = size?.Desktop ? `${size.Desktop}${units?.Desktop || 'px'}` : fallback.Desktop;
+        const tablet = size?.Tablet ? `${size.Tablet}${units?.Tablet || 'px'}` : fallback.Tablet;
+        const mobile = size?.Mobile ? `${size.Mobile}${units?.Mobile || 'px'}` : fallback.Mobile;
+
+        return { desktop, tablet, mobile };
+    };
+    const hotspotSizeStyles = (hotspots || []).map((hotspot) => {
+        const normalSize = getResponsiveSize(
+            hotspot.markerSize,
+            hotspot.markerSizeUnits,
+            {
+                Desktop: markerSizeValue,
+                Tablet: markerSizeTablet,
+                Mobile: markerSizeMobile
+            }
+        );
+        const hoverSize = getResponsiveSize(
+            hotspot.markerHoverSize,
+            hotspot.markerHoverSizeUnits,
+            {
+                Desktop: normalSize.desktop,
+                Tablet: normalSize.tablet,
+                Mobile: normalSize.mobile
+            }
+        );
+
+        return `
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
+                width: ${normalSize.desktop};
+                height: ${normalSize.desktop};
+            }
+
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger:hover {
+                width: ${hoverSize.desktop};
+                height: ${hoverSize.desktop};
+            }
+
+            @media only screen and (max-width: 1024px) {
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
+                    width: ${normalSize.tablet};
+                    height: ${normalSize.tablet};
+                }
+
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger:hover {
+                    width: ${hoverSize.tablet};
+                    height: ${hoverSize.tablet};
+                }
+            }
+
+            @media only screen and (max-width: 767px) {
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
+                    width: ${normalSize.mobile};
+                    height: ${normalSize.mobile};
+                }
+
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger:hover {
+                    width: ${hoverSize.mobile};
+                    height: ${hoverSize.mobile};
+                }
+            }
+        `;
+    }).join('');
+    const hotspotAnimationStyles = (hotspots || []).map((hotspot) => {
+        const animation = hotspot.animation || 'none';
+        if (animation === 'none' || hotspot.autoplay === false) {
+            return '';
+        }
+
+        const activeDuration = animation === 'pulse' ? 1.9 : animation === 'glow' ? 1.8 : 2.2;
+        const interval = Number(hotspot.animationInterval) || 2;
+        const totalDuration = activeDuration + Math.max(interval, 0);
+        const endPercent = ((activeDuration / totalDuration) * 100).toFixed(4);
+        const midPercent = (endPercent / 2).toFixed(4);
+        const animationId = `${blockID}-${hotspot.id}`.replace(/[^a-zA-Z0-9_-]/g, '');
+        const markerColorValue = hotspot.backgroundColor || '#011f4b';
+
+        const keyframes = {
+            pulse: `
+                @keyframes fb-hotspot-pulse-${animationId} {
+                    0%, ${endPercent}%, 100% { transform: scale(1); }
+                    ${midPercent}% { transform: scale(1.12); }
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-pulse .fb-hotspot-trigger {
+                    position: relative;
+                    color: ${markerColorValue};
+                    animation: fb-hotspot-pulse-${animationId} ${totalDuration}s ease-in-out infinite;
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-pulse .fb-hotspot-trigger::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: currentColor;
+                    opacity: 0.18;
+                    border-radius: inherit;
+                    pointer-events: none;
+                    animation: fb-hotspot-pulse-${animationId} ${totalDuration}s ease-in-out infinite;
+                }
+            `,
+            glow: `
+                @keyframes fb-hotspot-glow-${animationId} {
+                    0% { transform: scale(1); opacity: 1; }
+                    ${endPercent}%, 100% { transform: scale(1.6); opacity: 0; }
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-glow .fb-hotspot-trigger {
+                    position: relative;
+                    color: ${markerColorValue};
+                    animation: none;
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-glow .fb-hotspot-trigger::before {
+                    content: '';
+                    position: absolute;
+                    inset: 0;
+                    z-index: -1;
+                    background: currentColor;
+                    opacity: 0;
+                    border-radius: inherit;
+                    pointer-events: none;
+                    animation: fb-hotspot-glow-${animationId} ${totalDuration}s ease-out infinite;
+                }
+            `,
+            bounce: `
+                @keyframes fb-hotspot-bounce-${animationId} {
+                    0%, ${endPercent}%, 100% { transform: translateY(0); }
+                    ${midPercent}% { transform: translateY(-4px); }
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-bounce .fb-hotspot-trigger {
+                    animation: fb-hotspot-bounce-${animationId} ${totalDuration}s ease-in-out infinite;
+                }
+            `,
+            float: `
+                @keyframes fb-hotspot-float-${animationId} {
+                    0%, ${endPercent}%, 100% { transform: translateY(0); }
+                    ${midPercent}% { transform: translateY(-4px); }
+                }
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-float .fb-hotspot-trigger {
+                    animation: fb-hotspot-float-${animationId} ${totalDuration}s ease-in-out infinite;
+                }
+            `,
+        };
+
+        return keyframes[animation] || '';
+    }).join('');
 
     const style = `
         .${blockID} {
@@ -193,23 +350,9 @@ const generateImageHotspotStyle = (attributes) => {
             fill: currentColor;
         }
 
-        ${markerAnimation && markerAnimation !== 'none' ? `
-            ${markerAnimation === 'pulse' || markerAnimation === 'glow' ? `
-                .${blockID} .fb-hotspot-marker.animation-${markerAnimation} .fb-hotspot-trigger {
-                    animation: fb-hotspot-${markerAnimation} 2s infinite;
-                }
-            ` : ''}
-            ${markerAnimation === 'bounce' ? `
-                .${blockID} .fb-hotspot-marker.animation-bounce {
-                    animation: fb-hotspot-bounce 1s ease-in-out infinite;
-                }
-            ` : ''}
-            ${markerAnimation === 'float' ? `
-                .${blockID} .fb-hotspot-marker.animation-float {
-                    animation: fb-hotspot-float 3s ease-in-out infinite;
-                }
-            ` : ''}
-        ` : ''}
+        ${hotspotHoverStyles}
+        ${hotspotSizeStyles}
+        ${hotspotAnimationStyles}
 
         .${blockID} .fb-hotspot-popover {
             position: absolute;

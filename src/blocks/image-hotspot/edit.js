@@ -41,6 +41,12 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const blockStyling = generateImageHotspotStyle(attributes);
 
   const selectedHotspot = hotspots?.find(h => h.id === selectedHotspotId);
+  const getDeviceSize = (size, units, fallback = '35px') => {
+    const value = size?.[deviceType];
+    const unit = units?.[deviceType] || 'px';
+
+    return value ? `${value}${unit}` : fallback;
+  };
 
   const isHidden = (hotspot) => {
     if (deviceType === 'Desktop' && hotspot.hideDesktop) return true;
@@ -88,13 +94,21 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
             />
             
             {hotspots?.map((hotspot) => !isHidden(hotspot) && (
+              (() => {
+                const markerSize = getDeviceSize(
+                  hotspot.markerSize || attributes.imageHotspot_markerSize,
+                  hotspot.markerSizeUnits || attributes.imageHotspot_markerSizeUnits
+                );
+
+                return (
               <div
                 key={hotspot.id}
-                className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''} animation-${hotspot.animation || 'none'}`}
+                className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''} animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
                 data-hotspot-id={hotspot.id}
                 style={{
                   left: `${hotspot.x}%`,
-                  top: `${hotspot.y}%`
+                  top: `${hotspot.y}%`,
+                  '--fb-hotspot-animation-interval': `${hotspot.animationInterval || 2}s`
                 }}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -103,9 +117,19 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
               >
                 <div 
                   className="fb-hotspot-trigger"
-                  style={{ backgroundColor: hotspot.backgroundColor || '#ff0000' }}
+                  style={{
+                    backgroundColor: hotspot.backgroundColor || '#011f4b',
+                    color: hotspot.backgroundColor || '#011f4b',
+                    width: markerSize,
+                    height: markerSize
+                  }}
                 >
-                  <span className="fb-hotspot-icon">{renderSVG(hotspot.icon)}</span>
+                  <span 
+                      className="fb-hotspot-icon"
+                      style={{ color: hotspot.iconColor || '#ffffff' }}
+                  >
+                      {renderSVG(hotspot.icon || 'plus')}
+                  </span>
                 </div>
                 
                 <div className="fb-hotspot-popover">
@@ -120,6 +144,8 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                   {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
                 </div>
               </div>
+                );
+              })()
             ))}
           </div>
         )}

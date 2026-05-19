@@ -4,7 +4,8 @@ import {
   PanelRow, 
   Button, 
   TextareaControl, 
-  SelectControl 
+  SelectControl,
+  ToggleControl
 } from '@wordpress/components';
 
 import FB_InspectorControls from '../../components/InspectorControls';
@@ -14,6 +15,11 @@ import FBIconPicker from '../../components/icon-picker';
 import FB_Range from '../../components/range';
 import FB_TypographyControl from '../../components/typography-control';
 import FB_InputControl from '../../components/input-control';
+import FB_SwitcherControl from '../../components/switcher-control';
+import FB_Spacing from '../../components/spacing';
+import FB_VisibilityControl from '../../components/visibility-control';
+import FB_CustomCSSEditor from '../../components/custom-css-editor';
+import FB_BoxShadowControl from '../../components/box-shadow';
 import { useDeviceType } from '@Config/displayType';
 
 export default function Inspector({ attributes, setAttributes }) {
@@ -24,12 +30,19 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspot_imageSize: imageSize,
     imageHotspot_imageHeight: imageHeight,
     imageHotspot_imageHeightUnits: imageHeightUnits,
+
     imageHotspot_hotspots: hotspots, 
     imageHotspot_selectedHotspotId: selectedHotspotId,
+
     imageHotspot_markerSize,
     imageHotspot_markerSizeUnits,
     imageHotspot_markerHoverSize,
     imageHotspot_markerHoverSizeUnits,
+
+    imageHotspot_iconColorSwitcher: iconColorSwitcher,
+    imageHotspot_markerColorSwitcher: markerColorSwitcher,
+    imageHotspot_markerSizeSwitcher: markerSizeSwitcher,
+
     imageHotspotPaddingUnits,
     imageHotspotPaddingDesktop,
     imageHotspotPaddingTablet,
@@ -319,7 +332,8 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
   
-  const selectedHotspot = hotspots?.find(h => h.id === selectedHotspotId);
+  let latestHotspots = hotspots || [];
+  const selectedHotspot = latestHotspots.find(h => h.id === selectedHotspotId);
 
   const addHotspot = () => {
     const hotspotNumber = (hotspots?.length || 0) + 1;
@@ -327,16 +341,22 @@ export default function Inspector({ attributes, setAttributes }) {
       id: Date.now().toString(),
       x: 50,
       y: 50,
-      title: `${__('Hotspot', 'frontis-blocks')} ${hotspotNumber}`    ,
+      title: `${__('Hotspot', 'frontis-blocks')} ${hotspotNumber}`,
       description: '',
       backgroundColor: '#011f4b',
-      icon: '',
-      link: '',
-      openInNewTab: false,
+      icon: 'plus',
       popoverImageUrl: '',
       popoverImageAlt: '',
       popoverImageId: 0,
-      animation: 'none'
+      animation: 'none',
+      autoplay: true,
+      animationInterval: 0,
+      iconColor: '#ffffff',
+      hoverBackgroundColor: '',
+      markerSize: imageHotspot_markerSize,
+      markerSizeUnits: imageHotspot_markerSizeUnits,
+      markerHoverSize: imageHotspot_markerHoverSize,
+      markerHoverSizeUnits: imageHotspot_markerHoverSizeUnits,
     };
     setAttributes({ 
       imageHotspot_hotspots: [...(hotspots || []), newHotspot],
@@ -345,14 +365,15 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const updateHotspot = (field, value) => {
-    const updated = hotspots.map(h => 
+    const updated = latestHotspots.map(h =>
       h.id === selectedHotspotId ? { ...h, [field]: value } : h
     );
+    latestHotspots = updated;
     setAttributes({ imageHotspot_hotspots: updated });
   };
 
   const deleteHotspot = () => {
-    const filtered = hotspots.filter(h => h.id !== selectedHotspotId);
+    const filtered = latestHotspots.filter(h => h.id !== selectedHotspotId);
     setAttributes({ 
       imageHotspot_hotspots: filtered,
       imageHotspot_selectedHotspotId: filtered[0]?.id || null
@@ -452,9 +473,9 @@ export default function Inspector({ attributes, setAttributes }) {
                   isImageSize={false}
               />
               
+              <p className="fb-hotspot-control-label">{__("Marker Icon", "frontis-blocks")}</p>
               <FBIconPicker
-                label={__("Marker Icon", "frontis-blocks")}
-                value={selectedHotspot.icon}
+                value={selectedHotspot.icon || 'plus'}
                 setIconHandler={(icon) => updateHotspot('icon', icon)}
               />
             </div>
@@ -472,6 +493,29 @@ export default function Inspector({ attributes, setAttributes }) {
                   ]}
                   onChange={(value) => updateHotspot('animation', value)}
               />
+              {(selectedHotspot.animation || 'none') !== 'none' && (
+                <>
+                  <ToggleControl
+                    label={__("Autoplay", "frontis-blocks")}
+                    checked={selectedHotspot.autoplay !== false}
+                    onChange={(value) => updateHotspot('autoplay', value)}
+                  />
+
+                  {selectedHotspot.autoplay !== false && (
+                    <FB_Range
+                      label={__("Animation Interval (s)", "frontis-blocks")}
+                      rangeValue={{ [deviceType]: selectedHotspot.animationInterval || 0 }}
+                      onChangeHandler={(value) => updateHotspot('animationInterval', value[deviceType])}
+                      deviceType={deviceType}
+                      min={0}
+                      max={10}
+                      rangeStep={0.1}
+                      isRangeUnit={false}
+                      resetFallbackValue={0}
+                    />
+                  )}
+                </>
+              )}
             </div>
 
             <div>
@@ -507,11 +551,90 @@ export default function Inspector({ attributes, setAttributes }) {
               <h3 className="fb-hotspot-section-heading">
                 {__('Styling', 'frontis-blocks')}
               </h3>
-              <FB_ColorControl
-                label={__("Marker Color", "frontis-blocks")}
-                globalColor={selectedHotspot.backgroundColor}
-                setGlobalColor={(color) => updateHotspot('backgroundColor', color)}
+              <FB_SwitcherControl
+                  label={__("Marker Size", "frontis-blocks")}
+                  globalSwitcher={markerSizeSwitcher}
+                  setGlobalSwitcher={(value) => setAttributes({ imageHotspot_markerSizeSwitcher: value })}
               />
+
+              {markerSizeSwitcher === 'normal' && (
+                  <FB_Range
+                      label={__("Size", "frontis-blocks")}
+                      rangeValue={selectedHotspot.markerSize || imageHotspot_markerSize}
+                      onChangeHandler={(value) => updateHotspot('markerSize', value)}
+                      rangeUnitHandler={(unit) => updateHotspot('markerSizeUnits', {
+                          ...(selectedHotspot.markerSizeUnits || imageHotspot_markerSizeUnits),
+                          [deviceType]: unit
+                      })}
+                      deviceType={deviceType}
+                      units={selectedHotspot.markerSizeUnits || imageHotspot_markerSizeUnits}
+                      min={10}
+                      max={100}
+                      rangeStep={1}
+                      resetFallbackValue={35}
+                  />
+              )}
+
+              {markerSizeSwitcher === 'hover' && (
+                  <FB_Range
+                      label={__("Hover Size", "frontis-blocks")}
+                      rangeValue={selectedHotspot.markerHoverSize || imageHotspot_markerHoverSize}
+                      onChangeHandler={(value) => updateHotspot('markerHoverSize', value)}
+                      rangeUnitHandler={(unit) => updateHotspot('markerHoverSizeUnits', {
+                          ...(selectedHotspot.markerHoverSizeUnits || imageHotspot_markerHoverSizeUnits),
+                          [deviceType]: unit
+                      })}
+                      deviceType={deviceType}
+                      units={selectedHotspot.markerHoverSizeUnits || imageHotspot_markerHoverSizeUnits}
+                      min={10}
+                      max={100}
+                      rangeStep={1}
+                      resetFallbackValue={40}
+                  />
+              )}
+
+              <FB_SwitcherControl
+                  label={__("Marker Color", "frontis-blocks")}
+                  globalSwitcher={markerColorSwitcher}
+                  setGlobalSwitcher={(value) => setAttributes({ imageHotspot_markerColorSwitcher: value })}
+              />
+
+              {markerColorSwitcher === 'normal' && (
+                  <FB_ColorControl
+                      label={__("Color", "frontis-blocks")}
+                      globalColor={selectedHotspot.backgroundColor || '#011f4b'}
+                      setGlobalColor={(color) => updateHotspot('backgroundColor', color)}
+                  />
+              )}
+
+              {markerColorSwitcher === 'hover' && (
+                  <FB_ColorControl
+                      label={__("Hover Color", "frontis-blocks")}
+                      globalColor={selectedHotspot.hoverBackgroundColor || ''}
+                      setGlobalColor={(color) => updateHotspot('hoverBackgroundColor', color)}
+                  />
+              )}
+              <FB_SwitcherControl
+                  label={__("Marker Icon Color", "frontis-blocks")}
+                  globalSwitcher={iconColorSwitcher}
+                  setGlobalSwitcher={(value) => setAttributes({ imageHotspot_iconColorSwitcher: value })}
+              />
+
+              {iconColorSwitcher === 'normal' && (
+                  <FB_ColorControl
+                      label={__("Icon Color", "frontis-blocks")}
+                      globalColor={selectedHotspot.iconColor || '#ffffff'}
+                      setGlobalColor={(color) => updateHotspot('iconColor', color)}
+                  />
+              )}
+
+              {iconColorSwitcher === 'hover' && (
+                  <FB_ColorControl
+                      label={__("Icon Hover Color", "frontis-blocks")}
+                      globalColor={selectedHotspot.iconHoverColor || ''}
+                      setGlobalColor={(color) => updateHotspot('iconHoverColor', color)}
+                  />
+              )}
             </div>
 
             <Button isDestructive onClick={deleteHotspot} className="fb-hotspot-full-btn">
@@ -525,45 +648,6 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const styleControls = (
     <>
-      <PanelBody title={__("Marker Size", "frontis-blocks")} initialOpen={false}>
-          <p className="fb-hotspot-label-normal">{__('Normal', 'frontis-blocks')}</p>
-          <FB_Range
-              label={__("Size", "frontis-blocks")}
-              rangeValue={attributes.imageHotspot_markerSize}
-              onChangeHandler={(value) => setAttributes({ imageHotspot_markerSize: value })}
-              rangeUnitHandler={(unit) => setAttributes({
-                  imageHotspot_markerSizeUnits: {
-                      ...attributes.imageHotspot_markerSizeUnits,
-                      [deviceType]: unit
-                  }
-              })}
-              deviceType={deviceType}
-              units={attributes.imageHotspot_markerSizeUnits}
-              min={10}
-              max={100}
-              rangeStep={1}
-              resetFallbackValue={40}
-          />
-
-          <p className="fb-hotspot-label-hover">{__('Hover', 'frontis-blocks')}</p>
-          <FB_Range
-              label={__("Size", "frontis-blocks")}
-              rangeValue={attributes.imageHotspot_markerHoverSize}
-              onChangeHandler={(value) => setAttributes({ imageHotspot_markerHoverSize: value })}
-              rangeUnitHandler={(unit) => setAttributes({
-                  imageHotspot_markerHoverSizeUnits: {
-                      ...attributes.imageHotspot_markerHoverSizeUnits,
-                      [deviceType]: unit
-                  }
-              })}
-              deviceType={deviceType}
-              units={attributes.imageHotspot_markerHoverSizeUnits}
-              min={10}
-              max={100}
-              rangeStep={1}
-              resetFallbackValue={40}
-          />
-      </PanelBody>
       <PanelBody title={__("Popover Typography", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
           label={__("Popover Typography", "frontis-blocks")}
@@ -573,24 +657,101 @@ export default function Inspector({ attributes, setAttributes }) {
       </PanelBody>
 
       <PanelBody title={__("Padding", "frontis-blocks")} initialOpen={false}>
-        {/* Padding controls skeleton - can be expanded */}
-        <p>{__('Padding settings will appear here', 'frontis-blocks')}</p>
+        <FB_Spacing
+          label={__("Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotPaddingUnitsHandler}
+          spacingUnits={imageHotspotPaddingUnits}
+          spacingDesktop={imageHotspotPaddingDesktop}
+          spacingTablet={imageHotspotPaddingTablet}
+          spacingMobile={imageHotspotPaddingMobile}
+          handleSpacingUnitHandler={imageHotspotPaddingUnitsChange}
+          spacingCombineBtn={imageHotspotPaddingLink}
+          spacingCombineBtnHandler={imageHotspotPaddingLinkBtn}
+          setAttributes={setAttributes}
+        />
       </PanelBody>
 
       <PanelBody title={__("Margin", "frontis-blocks")} initialOpen={false}>
-        <p>{__('Margin settings will appear here', 'frontis-blocks')}</p>
+        <FB_Spacing
+          label={__("Margin", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotMarginUnitsHandler}
+          spacingUnits={imageHotspotMarginUnits}
+          spacingDesktop={imageHotspotMarginDesktop}
+          spacingTablet={imageHotspotMarginTablet}
+          spacingMobile={imageHotspotMarginMobile}
+          handleSpacingUnitHandler={imageHotspotMarginUnitsChange}
+          spacingCombineBtn={imageHotspotMarginLink}
+          spacingCombineBtnHandler={imageHotspotMarginLinkBtn}
+          setAttributes={setAttributes}
+        />
       </PanelBody>
 
       <PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
-        <p>{__('Border settings will appear here', 'frontis-blocks')}</p>
+        <FB_Spacing
+          label={__("Border", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotBorderUnitsHandler}
+          spacingUnits={imageHotspotBorderUnits}
+          spacingDesktop={imageHotspotBorderDesktop}
+          spacingTablet={imageHotspotBorderTablet}
+          spacingMobile={imageHotspotBorderMobile}
+          handleSpacingUnitHandler={imageHotspotBorderUnitsChange}
+          spacingCombineBtn={imageHotspotBorderLink}
+          spacingCombineBtnHandler={imageHotspotBorderLinkBtn}
+          setAttributes={setAttributes}
+        />
+
+        <FB_Spacing
+          label={__("Border Radius", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={imageHotspotBorderRadiusUnitsHandler}
+          spacingUnits={imageHotspotBorderRadiusUnits}
+          spacingDesktop={imageHotspotBorderRadiusDesktop}
+          spacingTablet={imageHotspotBorderRadiusTablet}
+          spacingMobile={imageHotspotBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotBorderRadiusUnitsChange}
+          spacingCombineBtn={imageHotspotBorderRadiusLink}
+          spacingCombineBtnHandler={imageHotspotBorderRadiusLinkBtn}
+          setAttributes={setAttributes}
+        />
+
+        <FB_BoxShadowControl
+          label={__("Popover Shadow", "frontis-blocks")}
+          onBoxShadowChange={(value) => setAttributes({ imageHotspot_popoverShadowValues: value })}
+          initialShadowValue={attributes.imageHotspot_popoverShadowValues}
+          onBoxShadowStyleChange={(value) =>
+            setAttributes({
+              imageHotspot_popoverShadowCssValue: value,
+              imageHotspot_popoverShadow: value
+            })
+          }
+        />
       </PanelBody>
     </>
   );
 
   const advancedControls = (
-    <PanelBody title={__("Advanced", "frontis-blocks")} initialOpen={true}>
-      <p>{__('Advanced settings coming soon', 'frontis-blocks')}</p>
-    </PanelBody>
+    <>
+      <PanelBody title={__("Responsive Control", "frontis-blocks")} initialOpen={false}>
+        <FB_VisibilityControl
+          desktopValue={attributes.imageHotspotDesktopSwitcher}
+          setDesktopValue={(value) => setAttributes({ imageHotspotDesktopSwitcher: value })}
+          tabletValue={attributes.imageHotspotTabletSwitcher}
+          setTabletValue={(value) => setAttributes({ imageHotspotTabletSwitcher: value })}
+          mobileValue={attributes.imageHotspotMobileSwitcher}
+          setMobileValue={(value) => setAttributes({ imageHotspotMobileSwitcher: value })}
+        />
+      </PanelBody>
+
+      <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
+        <FB_CustomCSSEditor
+          value={attributes.imageHotspot_customCSS}
+          onChangeValue={(value) => setAttributes({ imageHotspot_customCSS: value })}
+        />
+      </PanelBody>
+    </>
   );
 
   return (

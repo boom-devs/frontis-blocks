@@ -59,9 +59,9 @@ const attributes = {
 	imageHotspot_markerSize: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '35',
+			Tablet: '32',
+			Mobile: '30'
 		}
 	},
 	imageHotspot_markerSizeUnits: { 
@@ -75,9 +75,9 @@ const attributes = {
 	imageHotspot_markerHoverSize: {
 		type: "object",
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '40',
+			Tablet: '37',
+			Mobile: '35'
 		}
 	},
 	imageHotspot_markerHoverSizeUnits: {
@@ -95,6 +95,14 @@ const attributes = {
 	imageHotspot_markerHoverColor: { 
 		type: "string", 
 		default: "" 
+	},
+	imageHotspot_markerColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	imageHotspot_markerSizeSwitcher: {
+		type: "string",
+		default: "normal"
 	},
 	imageHotspot_markerBorderWidth: { 
 		type: "object", 
@@ -189,6 +197,14 @@ const attributes = {
 	imageHotspot_popoverShadow: { 
 		type: "string", 
 		default: "0 4px 12px rgba(0, 0, 0, 0.15)" 
+	},
+	imageHotspot_popoverShadowValues: {
+		type: "object",
+		default: {}
+	},
+	imageHotspot_popoverShadowCssValue: {
+		type: "string",
+		default: ""
 	},
 
 	// Title typography
@@ -311,6 +327,10 @@ const attributes = {
 	imageHotspot_iconColor: { 
 		type: "string", 
 		default: "#ffffff" 
+	},
+	imageHotspot_iconColorSwitcher: {
+		type: "string",
+		default: "normal"
 	},
 
 	// Padding
@@ -475,6 +495,18 @@ const attributes = {
 	imageHotspotBorderRadiusLink: { 
 		type: "boolean", 
 		default: true 
+	},
+	imageHotspotDesktopSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	imageHotspotTabletSwitcher: {
+		type: "boolean",
+		default: false
+	},
+	imageHotspotMobileSwitcher: {
+		type: "boolean",
+		default: false
 	},
 
 	// Custom CSS
