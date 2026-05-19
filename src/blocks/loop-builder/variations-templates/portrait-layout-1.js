@@ -30,6 +30,11 @@ export default
 						{
 							variationSelected: true,
 							loopAutoApplied: true,
+							containerGlobalPadding: {
+								Desktop: '0',
+								Tablet: '0',
+								Mobile: '0',
+							},
 						},
 						[
 							[
