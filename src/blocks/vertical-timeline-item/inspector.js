@@ -90,6 +90,22 @@ const Inspector = ({ attributes, setAttributes }) => {
         vertcalTimelineContentBoxGlobalHoverCustomGradientInputValue,
         /** End Content Box  Background */
 
+        /** Start Phase Title Background */
+        vertcalTimelinePhaseTitleNormalBgColorSwitcher,
+        vertcalTimelinePhaseTitleNormalBackgroundType,
+        vertcalTimelinePhaseTitleNormalClassicColor,
+        vertcalTimelinePhaseTitleNormalGradientColor,
+        vertcalTimelinePhaseTitleNormalCustomGradientSwitcher,
+        vertcalTimelinePhaseTitleNormalCustomGradientInputValue,
+
+        vertcalTimelinePhaseTitleHoverBackgroundType,
+        vertcalTimelinePhaseTitleHoverClassicColor,
+        vertcalTimelinePhaseTitleHoverGradientColor,
+        vertcalTimelinePhaseTitleHoverCustomGradientSwitcher,
+        vertcalTimelinePhaseTitleHoverCustomGradientInputValue,
+        /** End Phase Title Background */
+
+        /** Start Content Box Border */
         vertcalTimelineContentBoxGlobalBorder,
         vertcalTimelineContentBoxGlobalBorderColorSwitcher,
         vertcalTimelineContentBoxGlobalBorderColor,
@@ -99,12 +115,35 @@ const Inspector = ({ attributes, setAttributes }) => {
         vertcalTimelineContentBoxGlobalBorderTablet,
         vertcalTimelineContentBoxGlobalBorderMobile,
         vertcalTimelineContentBoxGlobalBorderLink,
+        /** End Content Box Border */
 
+        /** Start Phase Title Border */
+        vertcalTimelinePhaseTitleNormalBorder,
+        vertcalTimelinePhaseTitleNormalBorderColorSwitcher,
+        vertcalTimelinePhaseTitleNormalBorderColor,
+        vertcalTimelinePhaseTitleNormalBorderHoverColor,
+        vertcalTimelinePhaseTitleNormalBorderUnits,
+        vertcalTimelinePhaseTitleNormalBorderDesktop,
+        vertcalTimelinePhaseTitleNormalBorderTablet,
+        vertcalTimelinePhaseTitleNormalBorderMobile,
+        vertcalTimelinePhaseTitleNormalBorderLink,
+        /** End Phase Title Border */
+
+        /** Start Content Box Border Radius */
         vertcalTimelineContentBoxGlobalBorderRadiusUnits,
         vertcalTimelineContentBoxGlobalBorderRadiusDesktop,
         vertcalTimelineContentBoxGlobalBorderRadiusTablet,
         vertcalTimelineContentBoxGlobalBorderRadiusMobile,
         vertcalTimelineContentBoxGlobalBorderRadiusLink,
+        /** End Content Box Border Radius */
+
+        /** Start Phase Title Border Radius */
+        vertcalTimelinePhaseTitleNormalBorderRadiusUnits,
+        vertcalTimelinePhaseTitleNormalBorderRadiusDesktop,
+        vertcalTimelinePhaseTitleNormalBorderRadiusTablet,
+        vertcalTimelinePhaseTitleNormalBorderRadiusMobile,
+        vertcalTimelinePhaseTitleNormalBorderRadiusLink,
+        /** End Phase Title Border Radius */
 
         /** Start Content Box Padding */
         vertcalTimelineContentBoxPaddingUnits,
@@ -122,9 +161,56 @@ const Inspector = ({ attributes, setAttributes }) => {
         vertcalTimelineContentBoxMarginLink,
         /** End Content Box Margin */
 
+        /** Start Phase Title Padding */
+        vertcalTimelinePhaseTitlePaddingUnits,
+        vertcalTimelinePhaseTitlePaddingDesktop,
+        vertcalTimelinePhaseTitlePaddingTablet,
+        vertcalTimelinePhaseTitlePaddingMobile,
+        vertcalTimelinePhaseTitlePaddingLink,
+        /** End Phase Title Padding */
+
+        /** Start Phase Title Margin */
+        vertcalTimelinePhaseTitleMarginUnits,
+        vertcalTimelinePhaseTitleMarginDesktop,
+        vertcalTimelinePhaseTitleMarginTablet,
+        vertcalTimelinePhaseTitleMarginMobile,
+        vertcalTimelinePhaseTitleMarginLink,
+        /** End Phase Title Margin */
+
+        /** Start Phase Content Box Shadow */
         vertcalTimelineContentBoxBoxShadowSwitcher,
         vertcalTimelineContentBoxBoxShadowValues,
         vertcalTimelineContentBoxBoxShadowHoverValues,
+        /** End Phase Content Box Shadow */
+
+        /** Start Phase Title Box Shadow */
+        vertcalTimelinePhaseTitleBoxShadowSwitcher,
+        vertcalTimelinePhaseTitleBoxShadowValues,
+        vertcalTimelinePhaseTitleBoxShadowHoverValues,
+        /** End Phase Title Box Shadow */
+
+        vertcalTimelinePhaseTitleAlignment,
+
+        vertcalTimelinePhaseTitleGlobalTypoSwitcher,
+        vertcalTimelinePhaseTitleGlobalTypographyData,
+        vertcalTimelinePhaseTitleGlobalTypoType,
+        vertcalTimelinePhaseTitleGlobalTypoOption,
+        vertcalTimelinePhaseTitleFontFamily,
+        vertcalTimelinePhaseTitleFontSize,
+        vertcalTimelinePhaseTitleFontSizeUnits,
+        vertcalTimelinePhaseTitleFontWeight,
+        vertcalTimelinePhaseTitleFontStyle,
+        vertcalTimelinePhaseTitleTextTransform,
+        vertcalTimelinePhaseTitleTextDecoration,
+        vertcalTimelinePhaseTitleLetterSpacing,
+        vertcalTimelinePhaseTitleLineHeight,
+        vertcalTimelinePhaseTitleLetterSpacingUnits,
+        vertcalTimelinePhaseTitleLineHeightUnits,
+
+        vertcalTimelinePhaseTitleColorSwitcher,
+        vertcalTimelinePhaseTitleColor,
+        vertcalTimelinePhaseTitleHoverColor,
+
 
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
@@ -184,7 +270,7 @@ const Inspector = ({ attributes, setAttributes }) => {
     };
     /** End Content Box Padding */
 
-    /** Start Google Map Margin */
+    /** Start Content Box Margin */
     const vertcalTimelineContentBoxMarginUnitsChange = (event, position) => {
         const value = event.target.value;
         if (vertcalTimelineContentBoxMarginLink) {
@@ -253,7 +339,128 @@ const Inspector = ({ attributes, setAttributes }) => {
             }
         });
     };
-    /** End Google Map Margin */
+    /** End Content Box Margin */
+
+    /** Start Phase Title Padding */
+    const vertcalTimelinePhaseTitlePaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (vertcalTimelinePhaseTitlePaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ vertcalTimelinePhaseTitlePaddingDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ vertcalTimelinePhaseTitlePaddingTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ vertcalTimelinePhaseTitlePaddingMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ vertcalTimelinePhaseTitlePaddingDesktop: { ...vertcalTimelinePhaseTitlePaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ vertcalTimelinePhaseTitlePaddingTablet: { ...vertcalTimelinePhaseTitlePaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ vertcalTimelineContentBoxPaddingMobile: { ...vertcalTimelineContentBoxPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const vertcalTimelinePhaseTitlePaddingLinkBtn = () => {
+        setAttributes({
+            vertcalTimelinePhaseTitlePaddingLink: !vertcalTimelinePhaseTitlePaddingLink
+        });
+    };
+
+    const vertcalTimelinePhaseTitlePaddingUnitsHandler = (unit) => {
+        setAttributes({
+            vertcalTimelinePhaseTitlePaddingUnits: {
+                ...vertcalTimelinePhaseTitlePaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Phase Title Padding */
+
+    /** Start Phase Title Margin */
+    const vertcalTimelinePhaseTitleMarginUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (vertcalTimelinePhaseTitleMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ vertcalTimelinePhaseTitleMarginDesktop: { ...vertcalTimelinePhaseTitleMarginDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ vertcalTimelinePhaseTitleMarginTablet: { ...vertcalTimelinePhaseTitleMarginTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ vertcalTimelinePhaseTitleMarginMobile: { ...vertcalTimelinePhaseTitleMarginMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const vertcalTimelinePhaseTitleMarginLinkBtn = () => {
+        setAttributes({
+            vertcalTimelinePhaseTitleMarginLink: !vertcalTimelinePhaseTitleMarginLink
+        });
+    };
+
+    const vertcalTimelinePhaseTitleMarginUnitsHandler = (unit) => {
+        setAttributes({
+            vertcalTimelinePhaseTitleMarginUnits: {
+                ...vertcalTimelinePhaseTitleMarginUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Phase Title Margin */
 
     /** Start Global border */
     const handleGlobalBorderUnitChange = (event, position) => {
@@ -396,6 +603,147 @@ const Inspector = ({ attributes, setAttributes }) => {
     /** end Global border */
     /** End Global Border Radius */
     /** End Border Radius */
+
+
+    /** Start Phase Title border */
+    const handlePhaseTitleBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (vertcalTimelinePhaseTitleNormalBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderDesktop: { ...vertcalTimelinePhaseTitleNormalBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderTablet: { ...vertcalTimelinePhaseTitleNormalBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderMobile: { ...vertcalTimelinePhaseTitleNormalBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePhaseTitleBorderCombineBtn = () => {
+        setAttributes({ vertcalTimelinePhaseTitleNormalBorderLink: !vertcalTimelinePhaseTitleNormalBorderLink });
+    }
+
+    const handlePhaseTitleBorderUnitsHandler = (unit) => {
+        setAttributes({
+            vertcalTimelinePhaseTitleNormalBorderUnits: {
+                ...vertcalTimelinePhaseTitleNormalBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Border */
+
+    /** Start Global border radius*/
+    const handlePhaseTitleNormalBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (vertcalTimelinePhaseTitleNormalBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        vertcalTimelinePhaseTitleNormalBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderRadiusDesktop: { ...vertcalTimelinePhaseTitleNormalBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderRadiusTablet: { ...vertcalTimelinePhaseTitleNormalBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ vertcalTimelinePhaseTitleNormalBorderRadiusMobile: { ...vertcalTimelinePhaseTitleNormalBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    const handlePhaseTitleNormalBorderRadiusCombineBtn = () => {
+        setAttributes({ vertcalTimelinePhaseTitleNormalBorderLink: !vertcalTimelinePhaseTitleNormalBorderLink });
+    }
+
+    const handlePhaseTitleNormalBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            vertcalTimelinePhaseTitleNormalBorderUnits: {
+                ...vertcalTimelineContentBoxGlobalBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** end Global border */
 
     /**
      * Inspector General Controls
@@ -597,14 +945,234 @@ const Inspector = ({ attributes, setAttributes }) => {
             </PanelBody>
 
             <PanelBody
-                title={__("Section Label", "frontis-blocks")}
+                title={__("Phase Title", "frontis-blocks")}
                 initialOpen={false}
             >
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={vertcalTimelinePhaseTitlePaddingUnitsHandler}
+                    spacingUnits={vertcalTimelinePhaseTitlePaddingUnits}
+                    spacingDesktop={vertcalTimelinePhaseTitlePaddingDesktop}
+                    spacingTablet={vertcalTimelinePhaseTitlePaddingTablet}
+                    spacingMobile={vertcalTimelinePhaseTitlePaddingMobile}
+                    handleSpacingUnitHandler={vertcalTimelinePhaseTitlePaddingUnitsChange}
+                    spacingCombineBtn={vertcalTimelinePhaseTitlePaddingLink}
+                    spacingCombineBtnHandler={vertcalTimelinePhaseTitlePaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
 
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={vertcalTimelinePhaseTitleMarginUnitsHandler}
+                    spacingUnits={vertcalTimelinePhaseTitleMarginUnits}
+                    spacingDesktop={vertcalTimelinePhaseTitleMarginDesktop}
+                    spacingTablet={vertcalTimelinePhaseTitleMarginTablet}
+                    spacingMobile={vertcalTimelinePhaseTitleMarginMobile}
+                    handleSpacingUnitHandler={vertcalTimelinePhaseTitleMarginUnitsChange}
+                    spacingCombineBtn={vertcalTimelinePhaseTitleMarginLink}
+                    spacingCombineBtnHandler={vertcalTimelinePhaseTitleMarginLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_ResponsiveAlignmentControl
+                    label={__("Text Align", "frontis-blocks")}
+                    globalAlignment={vertcalTimelinePhaseTitleAlignment}
+                    setGlobalAlignment={(value) => setAttributes({ vertcalTimelinePhaseTitleAlignment: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={vertcalTimelinePhaseTitleGlobalTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ vertcalTimelinePhaseTitleGlobalTypographyData: value })}
+
+                    globalTypoType={vertcalTimelinePhaseTitleGlobalTypoType}
+                    onChangeGlobalTypoType={(value) => {
+                        setAttributes({
+                            vertcalTimelinePhaseTitleGlobalTypoType: value,
+                            vertcalTimelinePhaseTitleGlobalTypoSwitcher: value === 'default' ? { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, }
+                        })
+                    }}
+
+                    globalTypoOption={vertcalTimelinePhaseTitleGlobalTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ vertcalTimelinePhaseTitleGlobalTypoOption: value })}
+
+                    fontFamily={vertcalTimelinePhaseTitleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ vertcalTimelinePhaseTitleFontFamily: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontFamily: value && false } })}
+
+                    fontSize={vertcalTimelinePhaseTitleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ vertcalTimelinePhaseTitleFontSize: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontSize: value && false } })}
+
+                    fontSizeUnits={vertcalTimelinePhaseTitleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleFontSizeUnits: value })}
+
+                    fontWeight={vertcalTimelinePhaseTitleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ vertcalTimelinePhaseTitleFontWeight: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontWeight: value && false } })}
+
+                    fontStyle={vertcalTimelinePhaseTitleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ vertcalTimelinePhaseTitleFontStyle: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, fontStyle: value && false } })}
+
+                    textTransform={vertcalTimelinePhaseTitleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ vertcalTimelinePhaseTitleTextTransform: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, textTransform: value && false } })}
+
+                    textDecoration={vertcalTimelinePhaseTitleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ vertcalTimelinePhaseTitleTextDecoration: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, textDecoration: value && false } })}
+
+                    letterSpacing={vertcalTimelinePhaseTitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ vertcalTimelinePhaseTitleLetterSpacing: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, letterSpacing: value && false } })}
+
+                    letterSpacingUnits={vertcalTimelinePhaseTitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleLetterSpacingUnits: value })}
+
+                    lineHeight={vertcalTimelinePhaseTitleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ vertcalTimelinePhaseTitleLineHeight: value, vertcalTimelinePhaseTitleGlobalTypoSwitcher: { ...vertcalTimelinePhaseTitleGlobalTypoSwitcher, lineHeight: value && false } })}
+
+                    lineHeightUnits={vertcalTimelinePhaseTitleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ vertcalTimelinePhaseTitleLineHeightUnits: value })}
+
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Text Color", "frontis-blocks")}
+                    globalSwitcher={vertcalTimelinePhaseTitleColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleColorSwitcher: value })}
+                />
+
+                {vertcalTimelinePhaseTitleColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={vertcalTimelinePhaseTitleColor}
+                        setGlobalColor={(value) => setAttributes({ vertcalTimelinePhaseTitleColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {vertcalTimelinePhaseTitleColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={vertcalTimelinePhaseTitleHoverColor}
+                        setGlobalColor={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={vertcalTimelinePhaseTitleNormalBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBgColorSwitcher: value })}
+
+                    normalBackgroundType={vertcalTimelinePhaseTitleNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBackgroundType: value })}
+                    normalClassicColor={vertcalTimelinePhaseTitleNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={vertcalTimelinePhaseTitleNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={vertcalTimelinePhaseTitleNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={vertcalTimelinePhaseTitleNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={vertcalTimelinePhaseTitleHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverBackgroundType: value })}
+                    hoverClassicColor={vertcalTimelinePhaseTitleHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={vertcalTimelinePhaseTitleHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={vertcalTimelinePhaseTitleHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={vertcalTimelinePhaseTitleHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ vertcalTimelinePhaseTitleHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+                />
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={vertcalTimelinePhaseTitleNormalBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={vertcalTimelinePhaseTitleNormalBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBorderColorSwitcher: value })}
+                />
+
+                {vertcalTimelinePhaseTitleNormalBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={vertcalTimelinePhaseTitleNormalBorderColor}
+                        setGlobalColor={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {vertcalTimelinePhaseTitleNormalBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={vertcalTimelinePhaseTitleNormalBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ vertcalTimelinePhaseTitleNormalBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handlePhaseTitleBorderUnitsHandler}
+                    spacingUnits={vertcalTimelinePhaseTitleNormalBorderUnits}
+                    spacingDesktop={vertcalTimelinePhaseTitleNormalBorderDesktop}
+                    spacingTablet={vertcalTimelinePhaseTitleNormalBorderTablet}
+                    spacingMobile={vertcalTimelinePhaseTitleNormalBorderMobile}
+                    handleSpacingUnitHandler={handlePhaseTitleBorderUnitChange}
+                    spacingCombineBtn={vertcalTimelinePhaseTitleNormalBorderLink}
+                    spacingCombineBtnHandler={handlePhaseTitleBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handlePhaseTitleNormalBorderRadiusUnitsHandler}
+                    spacingUnits={vertcalTimelinePhaseTitleNormalBorderRadiusUnits}
+                    spacingDesktop={vertcalTimelinePhaseTitleNormalBorderRadiusDesktop}
+                    spacingTablet={vertcalTimelinePhaseTitleNormalBorderRadiusTablet}
+                    spacingMobile={vertcalTimelinePhaseTitleNormalBorderRadiusMobile}
+                    handleSpacingUnitHandler={handlePhaseTitleNormalBorderRadiusUnitChange}
+                    spacingCombineBtn={vertcalTimelinePhaseTitleNormalBorderRadiusLink}
+                    spacingCombineBtnHandler={handlePhaseTitleNormalBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={vertcalTimelinePhaseTitleBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ vertcalTimelinePhaseTitleBoxShadowSwitcher: value })}
+                />
+
+                {vertcalTimelinePhaseTitleBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ vertcalTimelinePhaseTitleBoxShadowValues: value })}
+                        initialShadowValue={vertcalTimelinePhaseTitleBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ vertcalTimelinePhaseTitleBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {vertcalTimelinePhaseTitleBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ vertcalTimelinePhaseTitleBoxShadowHoverValues: value })}
+                        initialShadowValue={vertcalTimelinePhaseTitleBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ vertcalTimelinePhaseTitleBoxShadowHoverCssValue: value })}
+                    />
+                )}
             </PanelBody>
 
             <PanelBody
-                title={__("Phase Title", "frontis-blocks")}
+                title={__("Section Label", "frontis-blocks")}
                 initialOpen={false}
             >
 
@@ -616,8 +1184,6 @@ const Inspector = ({ attributes, setAttributes }) => {
             >
 
             </PanelBody>
-
-
         </>
     );
 
