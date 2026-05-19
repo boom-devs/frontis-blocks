@@ -63,10 +63,13 @@ export default function QueryPlaceholder( {
 }
 
 function QueryVariationPicker( { clientId, icon, label } ) {
-	const { replaceInnerBlocks } = useDispatch( blockEditorStore );
+	const { replaceInnerBlocks, updateBlockAttributes } = useDispatch( blockEditorStore );
 	const blockProps = useBlockProps();
 
 	const handleSelect = ( variation ) => {
+		if ( variation?.attributes ) {
+			updateBlockAttributes( clientId, variation.attributes );
+		}
 		if ( variation?.innerBlocks?.length ) {
 			replaceInnerBlocks(
 				clientId,
