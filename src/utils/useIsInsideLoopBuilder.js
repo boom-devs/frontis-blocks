@@ -11,7 +11,7 @@ const useIsInsideLoopBuilder = (clientId, skip = false) => {
       const name = getBlock(pid)?.name;
       return (
         name === 'frontis-blocks/loop-builder' ||
-        name === 'frontis-blocks/loop-builder-wrapper'
+        name === 'frontis-blocks/loop-builder-item'
       );
     });
   }, [clientId, skip]);

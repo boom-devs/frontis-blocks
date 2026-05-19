@@ -8,7 +8,7 @@ export default function save({ attributes }) {
     const layoutClass = postSwitcher === 'list' ? 'list-layout' : 'grid-layout';
 
     const blockProps = useBlockProps.save({
-        className: `${blockId || ''} fb-loop-builder-wrapper-main-container ${layoutClass}`,
+        className: `${blockId || ''} fb-loop-builder-item-main-container ${layoutClass}`,
     });
 
     const innerBlocksProps = useInnerBlocksProps.save(blockProps);

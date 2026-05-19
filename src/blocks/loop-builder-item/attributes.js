@@ -63,7 +63,7 @@ const attributes = {
 	},
 
      /** Start Global Setting */
-	loopBuilderWrapperGlobalZIndex : {
+	loopBuilderItemGlobalZIndex : {
         type: "object",
         default: {
             Desktop: '',
@@ -72,11 +72,11 @@ const attributes = {
         }
     },
 
-	loopBuilderWrapperClass : {
+	loopBuilderItemClass : {
 		type: "string",
 		default: ""
 	},
-    loopBuilderWrapperCustomCSS: {
+    loopBuilderItemCustomCSS: {
         type: "string",
         default: ""
     }

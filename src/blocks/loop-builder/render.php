@@ -93,18 +93,18 @@ if (!function_exists('render_loop_builder')):
 			 */
 			$inner_blocks = isset($block['innerBlocks']) ? $block['innerBlocks'] : [];
 
-			$wrapper_block = null;
+			$item_block = null;
 			foreach ($inner_blocks as $ib) {
-				if (($ib['blockName'] ?? '') === 'frontis-blocks/loop-builder-wrapper') {
-					$wrapper_block = $ib;
+				if (($ib['blockName'] ?? '') === 'frontis-blocks/loop-builder-item') {
+					$item_block = $ib;
 					break;
 				}
 			}
 
-			$wrapper_attrs = $wrapper_block['attrs'] ?? [];
-			$inner_block_id = $wrapper_attrs['blockId'] ?? '';
-			$postSwitcher = $wrapper_attrs['postSwitcher'] ?? 'grid';
-			$loop_builder_wrapper_class = $wrapper_attrs['loopBuilderWrapperClass'] ?? '';
+			$item_attrs = $item_block['attrs'] ?? [];
+			$inner_block_id = $item_attrs['blockId'] ?? '';
+			$postSwitcher = $item_attrs['postSwitcher'] ?? 'grid';
+			$loop_builder_item_class = $item_attrs['loopBuilderItemClass'] ?? '';
 			$layout_class = ($postSwitcher === 'list') ? 'list-layout' : 'grid-layout';
 
 			/**
@@ -177,21 +177,21 @@ if (!function_exists('render_loop_builder')):
 			<div class="<?php echo esc_attr(trim("{$blockId} wp-block-frontis-blocks-loop-builder fb-loop-builder fb-query-content-container {$align_class}")); ?>"
 				data-fb-block-id="<?php echo esc_attr($blockId); ?>">
 				<div
-					class="<?php echo esc_attr(trim("{$inner_block_id} wp-block-frontis-blocks-loop-builder-wrapper fb-loop-builder-wrapper-main-container {$layout_class}")); ?>">
+					class="<?php echo esc_attr(trim("{$inner_block_id} wp-block-frontis-blocks-loop-builder-item fb-loop-builder-item-main-container {$layout_class}")); ?>">
 					<?php
 					if ($query->have_posts()):
 						while ($query->have_posts()):
 							$query->the_post();
 							$post_id = get_the_ID();
 							$post_classes = implode(' ', get_post_class('wp-block-post', $post_id));
-							$item_classes = trim("{$post_classes} fb-loop-builder-wrapper-block-context-container {$loop_builder_wrapper_class} fb-loop-builder-wrapper-inner-container");
+							$item_classes = trim("{$post_classes} fb-loop-builder-item-block-context-container {$loop_builder_item_class} fb-loop-builder-item-inner-container");
 							?>
 							<div class="<?php echo esc_attr($item_classes); ?>">
 								<?php
-								if ($wrapper_block) {
-									foreach (($wrapper_block['innerBlocks'] ?? []) as $wrapper_inner_block) {
-										$wrapper_inner_block['context'] = ['postId' => $post_id];
-										echo render_block($wrapper_inner_block); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+								if ($item_block) {
+									foreach (($item_block['innerBlocks'] ?? []) as $item_inner_block) {
+										$item_inner_block['context'] = ['postId' => $post_id];
+										echo render_block($item_inner_block); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 									}
 								}
 								?>
