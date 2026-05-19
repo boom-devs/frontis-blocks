@@ -7,14 +7,6 @@ const attributes = {
         type: "string",
         default: ""
     },
-	highlightColor: {
-		type: 'string',
-		default: '',
-	},
-	hoverHighlightColor: {
-		type: 'string',
-		default: '',
-	},
 	postSwitcher: {
 		type: "string",
 		default: "grid"
