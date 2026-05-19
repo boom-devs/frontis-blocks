@@ -26,26 +26,30 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspot_imageHeightUnits: imageHeightUnits,
     imageHotspot_hotspots: hotspots, 
     imageHotspot_selectedHotspotId: selectedHotspotId,
-	imageHotspotPaddingUnits,
-	imageHotspotPaddingDesktop,
-	imageHotspotPaddingTablet,
-	imageHotspotPaddingMobile,
-	imageHotspotPaddingLink,
-	imageHotspotMarginUnits,
-	imageHotspotMarginDesktop,
-	imageHotspotMarginTablet,
-	imageHotspotMarginMobile,
-	imageHotspotMarginLink,
-	imageHotspotBorderUnits,
-	imageHotspotBorderDesktop,
-	imageHotspotBorderTablet,
-	imageHotspotBorderMobile,
-	imageHotspotBorderLink,
-	imageHotspotBorderRadiusUnits,
-	imageHotspotBorderRadiusDesktop,
-	imageHotspotBorderRadiusTablet,
-	imageHotspotBorderRadiusMobile,
-	imageHotspotBorderRadiusLink,
+    imageHotspot_markerSize,
+    imageHotspot_markerSizeUnits,
+    imageHotspot_markerHoverSize,
+    imageHotspot_markerHoverSizeUnits,
+    imageHotspotPaddingUnits,
+    imageHotspotPaddingDesktop,
+    imageHotspotPaddingTablet,
+    imageHotspotPaddingMobile,
+    imageHotspotPaddingLink,
+    imageHotspotMarginUnits,
+    imageHotspotMarginDesktop,
+    imageHotspotMarginTablet,
+    imageHotspotMarginMobile,
+    imageHotspotMarginLink,
+    imageHotspotBorderUnits,
+    imageHotspotBorderDesktop,
+    imageHotspotBorderTablet,
+    imageHotspotBorderMobile,
+    imageHotspotBorderLink,
+    imageHotspotBorderRadiusUnits,
+    imageHotspotBorderRadiusDesktop,
+    imageHotspotBorderRadiusTablet,
+    imageHotspotBorderRadiusMobile,
+    imageHotspotBorderRadiusLink,
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -328,7 +332,11 @@ export default function Inspector({ attributes, setAttributes }) {
       backgroundColor: '#011f4b',
       icon: '',
       link: '',
-      openInNewTab: false
+      openInNewTab: false,
+      popoverImageUrl: '',
+      popoverImageAlt: '',
+      popoverImageId: 0,
+      animation: 'none'
     };
     setAttributes({ 
       imageHotspot_hotspots: [...(hotspots || []), newHotspot],
@@ -379,14 +387,14 @@ export default function Inspector({ attributes, setAttributes }) {
           deviceType={deviceType}
           units={imageHeightUnits}
           min={100}
-          max={1000}
+          max={2000}
           rangeStep={1}
           resetFallbackValue={500}
         />
       </PanelBody>
 
       <PanelBody title={__("Hotspots", "frontis-blocks")} initialOpen={true}>
-        <Button variant="primary" onClick={addHotspot} style={{ width: '100%' }}>
+        <Button variant="primary" onClick={addHotspot} className='fb-hotspot-full-btn'>
           {__('Add a new Hotspot', 'frontis-blocks')}
         </Button>
         
@@ -413,16 +421,9 @@ export default function Inspector({ attributes, setAttributes }) {
         )}
 
         {selectedHotspot && (
-          <div style={{ 
-            marginTop: '16px', 
-            borderTop: '1px solid #e0e0e0', 
-            paddingTop: '16px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px'
-          }}>
+          <div className="fb-hotspot-selected-wrapper">
             <div>
-              <h3 style={{ margin: '0 0 12px 0', fontSize: '13px', fontWeight: 500 }}>
+              <h3 className="fb-hotspot-section-heading">
                 {__('Content', 'frontis-blocks')}
               </h3>
               <FB_InputControl
@@ -439,15 +440,42 @@ export default function Inspector({ attributes, setAttributes }) {
                 placeholder={__("Enter description that will appear in popup", "frontis-blocks")}
                 rows={4}
               />
+
+              <FB_ImageControl
+                  label={__("Popover Image", "frontis-blocks")}
+                  globalImageUrl={selectedHotspot.popoverImageUrl || ''}
+                  setglobalImageUrl={(url) => updateHotspot('popoverImageUrl', url)}
+                  globalImageAlt={selectedHotspot.popoverImageAlt || ''}
+                  setglobalImageAlt={(alt) => updateHotspot('popoverImageAlt', alt)}
+                  globalImageID={selectedHotspot.popoverImageId || 0}
+                  setglobalImageID={(id) => updateHotspot('popoverImageId', id)}
+                  isImageSize={false}
+              />
               
               <FBIconPicker
+                label={__("Marker Icon", "frontis-blocks")}
                 value={selectedHotspot.icon}
                 setIconHandler={(icon) => updateHotspot('icon', icon)}
               />
             </div>
 
             <div>
-              <h3 style={{ margin: '0 0 12px 0', fontSize: '13px', fontWeight: 500 }}>
+              <SelectControl
+                  label={__("Marker Animation", "frontis-blocks")}
+                  value={selectedHotspot.animation || 'none'}
+                  options={[
+                      { label: __('None', 'frontis-blocks'), value: 'none' },
+                      { label: __('Pulse', 'frontis-blocks'), value: 'pulse' },
+                      { label: __('Glow', 'frontis-blocks'), value: 'glow' },
+                      { label: __('Bounce', 'frontis-blocks'), value: 'bounce' },
+                      { label: __('Float', 'frontis-blocks'), value: 'float' },
+                  ]}
+                  onChange={(value) => updateHotspot('animation', value)}
+              />
+            </div>
+
+            <div>
+              <h3 className="fb-hotspot-section-heading">
                 {__('Position', 'frontis-blocks')}
               </h3>
               <FB_Range
@@ -476,7 +504,7 @@ export default function Inspector({ attributes, setAttributes }) {
             </div>
 
             <div>
-              <h3 style={{ margin: '0 0 12px 0', fontSize: '13px', fontWeight: 500 }}>
+              <h3 className="fb-hotspot-section-heading">
                 {__('Styling', 'frontis-blocks')}
               </h3>
               <FB_ColorControl
@@ -486,7 +514,7 @@ export default function Inspector({ attributes, setAttributes }) {
               />
             </div>
 
-            <Button isDestructive onClick={deleteHotspot} style={{ width: '100%' }}>
+            <Button isDestructive onClick={deleteHotspot} className="fb-hotspot-full-btn">
               {__('Delete Hotspot', 'frontis-blocks')}
             </Button>
           </div>
@@ -497,6 +525,45 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const styleControls = (
     <>
+      <PanelBody title={__("Marker Size", "frontis-blocks")} initialOpen={false}>
+          <p className="fb-hotspot-label-normal">{__('Normal', 'frontis-blocks')}</p>
+          <FB_Range
+              label={__("Size", "frontis-blocks")}
+              rangeValue={attributes.imageHotspot_markerSize}
+              onChangeHandler={(value) => setAttributes({ imageHotspot_markerSize: value })}
+              rangeUnitHandler={(unit) => setAttributes({
+                  imageHotspot_markerSizeUnits: {
+                      ...attributes.imageHotspot_markerSizeUnits,
+                      [deviceType]: unit
+                  }
+              })}
+              deviceType={deviceType}
+              units={attributes.imageHotspot_markerSizeUnits}
+              min={10}
+              max={100}
+              rangeStep={1}
+              resetFallbackValue={40}
+          />
+
+          <p className="fb-hotspot-label-hover">{__('Hover', 'frontis-blocks')}</p>
+          <FB_Range
+              label={__("Size", "frontis-blocks")}
+              rangeValue={attributes.imageHotspot_markerHoverSize}
+              onChangeHandler={(value) => setAttributes({ imageHotspot_markerHoverSize: value })}
+              rangeUnitHandler={(unit) => setAttributes({
+                  imageHotspot_markerHoverSizeUnits: {
+                      ...attributes.imageHotspot_markerHoverSizeUnits,
+                      [deviceType]: unit
+                  }
+              })}
+              deviceType={deviceType}
+              units={attributes.imageHotspot_markerHoverSizeUnits}
+              min={10}
+              max={100}
+              rangeStep={1}
+              resetFallbackValue={40}
+          />
+      </PanelBody>
       <PanelBody title={__("Popover Typography", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
           label={__("Popover Typography", "frontis-blocks")}

@@ -23,8 +23,7 @@ export default function Save({ attributes }) {
     <>
       <style>{blockStyling}</style>
       <div {...useBlockProps.save({ className: blockID })}>
-        <div className="fb-image-hotspot-wrapper">
-          <div className="fb-hotspot-container">
+        <div className="fb-hotspot-container">
             <img 
               src={imageUrl} 
               alt={imageAlt || __('Hotspot Image', 'frontis-blocks')}
@@ -36,7 +35,7 @@ export default function Save({ attributes }) {
               return (
                 <div 
                   key={hotspot.id}
-                  className="fb-hotspot-marker"
+                  className={`fb-hotspot-marker animation-${hotspot.animation || 'none'}`}
                   data-hotspot-id={hotspot.id}
                   style={{
                     left: `${hotspot.x}%`,
@@ -51,13 +50,19 @@ export default function Save({ attributes }) {
                   </div>
                   
                   <div className="fb-hotspot-popover">
+                    {hotspot.popoverImageUrl && (
+                        <img 
+                            src={hotspot.popoverImageUrl}
+                            alt={hotspot.popoverImageAlt || ''}
+                            className="fb-hotspot-popover-image"
+                        />
+                    )}
                     {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
                     {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
                   </div>
                 </div>
               );
             })}
-          </div>
         </div>
       </div>
     </>
