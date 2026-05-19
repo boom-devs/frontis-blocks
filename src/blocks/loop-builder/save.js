@@ -7,7 +7,8 @@ export default function save({ attributes }) {
     } = attributes;
 
     const blockProps = useBlockProps.save({
-        className: `${blockId || ''} fb-query-content-container`,
+        className: `${blockId || ''} fb-loop-builder fb-query-content-container`.trim(),
+        ...(blockId ? { 'data-fb-block-id': blockId } : {}),
     });
 
     const innerBlocksProps = useInnerBlocksProps.save(blockProps);
