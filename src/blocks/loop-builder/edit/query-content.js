@@ -34,7 +34,7 @@ import Inspector from "../inspector";
 
 const DEFAULTS_POSTS_PER_PAGE = 3;
 
-const TEMPLATE = [ [ 'frontis-blocks/loop-builder-wrapper' ] ];
+const TEMPLATE = [ [ 'frontis-blocks/loop-builder-item' ] ];
 export default function QueryContent( {
 	attributes,
 	setAttributes,

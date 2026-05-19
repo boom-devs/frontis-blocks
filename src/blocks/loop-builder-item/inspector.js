@@ -25,10 +25,9 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         postSwitcher,
         listGapUnits,
         listRowGap,
-        loopBuilderWrapperGlobalZIndex,
-        loopBuilderWrapperID,
-        loopBuilderWrapperClass,
-        loopBuilderWrapperCustomCSS,
+        loopBuilderItemGlobalZIndex,
+        loopBuilderItemClass,
+        loopBuilderItemCustomCSS,
     } = attributes;
 
     const deviceType = useDeviceType();
@@ -36,19 +35,43 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
     useEffect(() => {
         if (clientId && typeof clientId === "string") {
-            setAttributes({ blockId: `fb-loop-builder-wrapper-${clientId.slice(0, 8)}` });
+            setAttributes({ blockId: `fb-loop-builder-item-${clientId.slice(0, 8)}` });
         }
     }, [clientId]);
 
     const allBlockStyle = useMemo(() => `
 
-        .${blockId}.fb-loop-builder-wrapper-main-container {
-            width: 100%;
+        .${blockId}.fb-loop-builder-item-main-container {
+            margin-top: 0;
+            margin-bottom: 0;
             max-width: 100%;
+            padding: 0;
+            list-style: none;
             box-sizing: border-box;
+            width: 100%;
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
+        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .alignright,
+        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .alignright {
+            float: right;
+            margin-inline-start: 2em;
+            margin-inline-end: 0;
+        }
+
+        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .alignleft,
+        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .alignleft {
+            float: left;
+            margin-inline-start: 0;
+            margin-inline-end: 2em;
+        }
+
+        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post .aligncenter,
+        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container .aligncenter {
+            margin-inline-start: auto;
+            margin-inline-end: auto;
+        }
+
+        .${blockId}.fb-loop-builder-item-main-container.grid-layout {
             display: grid;
             grid-template-columns: repeat(${gridColumnsPerSection?.Desktop}, minmax(0, 1fr)); 
             row-gap: ${gridRowGap?.Desktop}${gridGapUnits?.Desktop};  
@@ -56,39 +79,39 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
             overflow: hidden;
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
+        .${blockId}.fb-loop-builder-item-main-container.list-layout {
             display: grid;
             grid-template-columns: minmax(0, 1fr);
             gap: ${listRowGap?.Desktop}${listGapUnits?.Desktop}; 
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container > .wp-block-post,
-        .${blockId}.fb-loop-builder-wrapper-main-container > .fb-loop-builder-wrapper-inner-container {
+        .${blockId}.fb-loop-builder-item-main-container > .wp-block-post,
+        .${blockId}.fb-loop-builder-item-main-container > .fb-loop-builder-item-inner-container {
             min-width: 0;
             max-width: 100%;
             box-sizing: border-box;
             overflow: hidden;
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-main-wrapper,
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-parent-wrapper,
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-wrapper,
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image,
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner,
-        .${blockId}.fb-loop-builder-wrapper-main-container .wp-block-post-featured-image {
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-main-wrapper,
+        .${blockId}.fb-loop-builder-item-main-container .fb-parent-wrapper,
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-wrapper,
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image,
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner,
+        .${blockId}.fb-loop-builder-item-main-container .wp-block-post-featured-image {
             width: 100%;
             max-width: 100%;
             box-sizing: border-box;
             overflow: hidden;
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner {
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner {
             display: block;
         }
 
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-inner img,
-        .${blockId}.fb-loop-builder-wrapper-main-container .wp-block-post-featured-image img,
-        .${blockId}.fb-loop-builder-wrapper-main-container .fb-advanced-image-main-wrapper img {
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-inner img,
+        .${blockId}.fb-loop-builder-item-main-container .wp-block-post-featured-image img,
+        .${blockId}.fb-loop-builder-item-main-container .fb-advanced-image-main-wrapper img {
             width: 100%;
             max-width: 100%;
             height: 200px;
@@ -98,13 +121,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         }
 
         @media only screen and (max-width: 1024px) {
-            .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
+            .${blockId}.fb-loop-builder-item-main-container.grid-layout {
                 grid-template-columns: repeat(${gridColumnsPerSection?.Tablet}, minmax(0, 1fr)) !important; 
                 row-gap: ${gridRowGap?.Tablet}${gridGapUnits?.Tablet};  
                 column-gap: ${gridColumnGap?.Tablet}${gridGapUnits?.Tablet}; 
             }
 
-            .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
+            .${blockId}.fb-loop-builder-item-main-container.list-layout {
                 display: grid;
                 grid-template-columns: minmax(0, 1fr);
                 gap: ${listRowGap?.Tablet}${listGapUnits?.Tablet}; 
@@ -112,13 +135,13 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
         }
 
         @media only screen and (max-width: 767px) {
-            .${blockId}.fb-loop-builder-wrapper-main-container.grid-layout {
+            .${blockId}.fb-loop-builder-item-main-container.grid-layout {
                 grid-template-columns: repeat(${gridColumnsPerSection?.Mobile}, minmax(0, 1fr)) !important; 
                 row-gap: ${gridRowGap?.Mobile}${gridGapUnits?.Mobile};  
                 column-gap: ${gridColumnGap?.Mobile}${gridGapUnits?.Mobile}; 
             }
 
-            .${blockId}.fb-loop-builder-wrapper-main-container.list-layout {
+            .${blockId}.fb-loop-builder-item-main-container.list-layout {
                 display: grid;
                 grid-template-columns: minmax(0, 1fr);
                 gap: ${listRowGap?.Mobile}${listGapUnits?.Mobile};  
@@ -134,12 +157,12 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
         listGapUnits,
         listRowGap,
-        loopBuilderWrapperGlobalZIndex,
-        loopBuilderWrapperClass,
-        loopBuilderWrapperCustomCSS,
+        loopBuilderItemGlobalZIndex,
+        loopBuilderItemClass,
+        loopBuilderItemCustomCSS,
     ]);
 
-    const customCss = getCustomCss(loopBuilderWrapperCustomCSS, `.${blockId}`);
+    const customCss = getCustomCss(loopBuilderItemCustomCSS, `.${blockId}`);
 
     useEffect(() => {
         setAttributes({blockStyle: `${allBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim()});
@@ -252,8 +275,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                     min={0}
                     max={10000000}
                     label={__("Z Index", "frontis-blocks")}
-                    rangeValue={loopBuilderWrapperGlobalZIndex}
-                    onChangeHandler={(value) => setAttributes({ loopBuilderWrapperGlobalZIndex: value === 0 ? undefined : value })}
+                    rangeValue={loopBuilderItemGlobalZIndex}
+                    onChangeHandler={(value) => setAttributes({ loopBuilderItemGlobalZIndex: value === 0 ? undefined : value })}
                     deviceType={deviceType}
                     setAttributes={setAttributes}
                     rangeStep={1}
@@ -263,8 +286,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
 
                 <FB_InputControl
                     label={__("CSS Class", "frontis-blocks")}
-                    value={loopBuilderWrapperClass}
-                    onChangeValue={(value) => setAttributes({ loopBuilderWrapperClass: value })}
+                    value={loopBuilderItemClass}
+                    onChangeValue={(value) => setAttributes({ loopBuilderItemClass: value })}
                     helpText={__("Separate with spaces key.", "frontis-blocks")}
                 />
             </PanelBody>
@@ -274,8 +297,8 @@ const Inspector = ({ attributes, setAttributes, clientId }) => {
                 initialOpen={false}
             >
                 <FB_CustomCSSEditor  
-                    value={loopBuilderWrapperCustomCSS} 
-                    onChangeValue={(value) => setAttributes({ loopBuilderWrapperCustomCSS: value })}
+                    value={loopBuilderItemCustomCSS} 
+                    onChangeValue={(value) => setAttributes({ loopBuilderItemCustomCSS: value })}
                 />
 
             </PanelBody>

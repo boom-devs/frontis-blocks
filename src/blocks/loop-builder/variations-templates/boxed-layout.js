@@ -21,7 +21,7 @@ export default
 		attributes: {},
 		innerBlocks: [
 			[
-				'frontis-blocks/loop-builder-wrapper',
+				'frontis-blocks/loop-builder-item',
 				{},
 				[
 					[
