@@ -27,7 +27,7 @@ import Inspector from "./inspector";
 
 function PostTemplateInnerBlocks( { classList } ) {
 	const innerBlocksProps = useInnerBlocksProps(
-		{ className: clsx( 'wp-block-post', classList, 'fb-loop-builder-wrapper-inner-container' ) },
+		{ className: clsx( 'wp-block-post', classList, 'fb-loop-builder-item-inner-container' ) },
 		{ __unstableDisableLayoutClassNames: true }
 	);
 	return <div { ...innerBlocksProps } />;
@@ -44,7 +44,7 @@ function PostTemplateBlockPreview( {
 	const blockPreviewProps = useBlockPreview( {
 		blocks,
 		props: {
-			className: clsx( 'wp-block-post', classList, 'fb-loop-builder-wrapper-preview-container' ),
+			className: clsx( 'wp-block-post', classList, 'fb-loop-builder-item-preview-container' ),
 		},
 	} );
 
@@ -75,7 +75,7 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 
 	const {
 		blockId,
-        loopBuilderWrapperClass,
+        loopBuilderItemClass,
 		postSwitcher,
 	} = attributes;
 
@@ -292,15 +292,15 @@ export default function Edit({ attributes, setAttributes, clientId, context }) {
 				postId: post.id,
 				classList: clsx(
 					post.class_list ?? '',
-					'fb-loop-builder-wrapper-block-context-container',
-					loopBuilderWrapperClass
+					'fb-loop-builder-item-block-context-container',
+					loopBuilderItemClass
 				),
 			} ) ),
-		[ posts, loopBuilderWrapperClass ]
+		[ posts, loopBuilderItemClass ]
 	);
 
 	const blockProps = useBlockProps( {
-		className: `${blockId} fb-loop-builder-wrapper-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
+		className: `${blockId} fb-loop-builder-item-main-container ${postSwitcher === 'list' ? 'list-layout' : 'grid-layout'}`,
 	} );
 
 	if ( ! posts ) {

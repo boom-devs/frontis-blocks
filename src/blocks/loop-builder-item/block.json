@@ -1,12 +1,12 @@
 {
     "$schema": "https://schemas.wp.org/trunk/block.json",
     "apiVersion": 3,
-    "name": "frontis-blocks/loop-builder-wrapper",
+    "name": "frontis-blocks/loop-builder-item",
     "version": "1.0.0",
-    "title": "Wrapper",
+    "title": "Loop Item",
     "category": "frontis-blocks",
     "textdomain": "frontis-blocks",
-	"description": "A customizable loop builder wrapper block with various styling options.",
+	"description": "A customizable loop builder item block with various styling options.",
     "example": {},
     "usesContext": [
 		"queryId",
