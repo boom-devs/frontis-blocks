@@ -2,11 +2,13 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 export default function save({ attributes }) {
     const {
         blockId,
-        loopBuilderWrapperClass,
+        postSwitcher,
     } = attributes;
 
+    const layoutClass = postSwitcher === 'list' ? 'list-layout' : 'grid-layout';
+
     const blockProps = useBlockProps.save({
-        className: `${blockId || ''} fb-loop-builder-wrapper-main-container ${loopBuilderWrapperClass || ''}`,
+        className: `${blockId || ''} fb-loop-builder-wrapper-main-container ${layoutClass}`,
     });
 
     const innerBlocksProps = useInnerBlocksProps.save(blockProps);
