@@ -7,7 +7,7 @@
 
 .fb-hotspot-editor-container {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
 }
 
@@ -73,12 +73,11 @@
     transform: translateX(-50%);
     margin-bottom: 10px;
     background: #fff;
-    border-radius: 8px;
+    border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     padding: 12px;
     min-width: 200px;
     z-index: 20;
-    white-space: nowrap;
 
     &::after {
       content: '';
@@ -90,11 +89,89 @@
       border-style: solid;
       border-color: #fff transparent transparent transparent;
     }
+    
+    .fb-hotspot-popover-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
   }
 
   &:hover .fb-hotspot-popover {
     display: block;
   }
+
+  &.locked .fb-hotspot-popover {
+      display: block;
+  }
+}
+
+.fb-hotspot-full-btn {
+    width: 100%;
+}
+
+.fb-hotspot-selected-wrapper {
+    margin-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.fb-hotspot-section-heading {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.fb-hotspot-label-normal {
+    margin: 0 0 8px;
+    font-weight: 500;
+}
+
+.fb-hotspot-label-hover {
+    margin: 12px 0 8px;
+    font-weight: 500;
+}
+
+@keyframes fb-hotspot-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+}
+
+@keyframes fb-hotspot-glow {
+    0%, 100% { box-shadow: 0 0 5px 2px rgba(255, 0, 0, 0.4); }
+    50% { box-shadow: 0 0 20px 6px rgba(255, 0, 0, 0.8); }
+}
+
+@keyframes fb-hotspot-bounce {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -60%); }
+}
+
+@keyframes fb-hotspot-float {
+    0%, 100% { transform: translate(-50%, -50%); }
+    50% { transform: translate(-50%, -55%); }
+}
+
+.fb-hotspot-marker.animation-pulse .fb-hotspot-trigger {
+    animation: fb-hotspot-pulse 2s infinite;
+}
+
+.fb-hotspot-marker.animation-glow .fb-hotspot-trigger {
+    animation: fb-hotspot-glow 2s infinite;
+}
+
+.fb-hotspot-marker.animation-bounce {
+    animation: fb-hotspot-bounce 1s ease-in-out infinite;
+}
+
+.fb-hotspot-marker.animation-float {
+    animation: fb-hotspot-float 3s ease-in-out infinite;
 }
 
 // Responsive visibility in editor

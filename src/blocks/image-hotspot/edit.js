@@ -90,7 +90,7 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
             {hotspots?.map((hotspot) => !isHidden(hotspot) && (
               <div
                 key={hotspot.id}
-                className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''}`}
+                className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''} animation-${hotspot.animation || 'none'}`}
                 data-hotspot-id={hotspot.id}
                 style={{
                   left: `${hotspot.x}%`,
@@ -109,6 +109,13 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                 </div>
                 
                 <div className="fb-hotspot-popover">
+                  {hotspot.popoverImageUrl && (
+                      <img 
+                          src={hotspot.popoverImageUrl}
+                          alt={hotspot.popoverImageAlt || ''}
+                          className="fb-hotspot-popover-image"
+                      />
+                  )}
                   {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
                   {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
                 </div>

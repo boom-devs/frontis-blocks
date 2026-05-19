@@ -15,6 +15,8 @@ const generateImageHotspotStyle = (attributes) => {
         // Hotspot marker styles
         imageHotspot_markerSize: markerSize,
         imageHotspot_markerSizeUnits: markerSizeUnits,
+        imageHotspot_markerHoverSize: markerHoverSize,
+        imageHotspot_markerHoverSizeUnits: markerHoverSizeUnits,
         imageHotspot_markerColor: markerColor,
         imageHotspot_markerHoverColor: markerHoverColor,
         imageHotspot_markerBorderWidth: markerBorderWidth,
@@ -22,6 +24,7 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspot_markerBorderColor: markerBorderColor,
         imageHotspot_markerBorderRadius: markerBorderRadius,
         imageHotspot_markerBorderRadiusUnits: markerBorderRadiusUnits,
+        imageHotspot_markerAnimation: markerAnimation,
         
         // Popover styles
         imageHotspot_popoverBgColor: popoverBgColor,
@@ -71,6 +74,11 @@ const generateImageHotspotStyle = (attributes) => {
     const markerSizeValue = markerSize?.Desktop ? `${markerSize.Desktop}${markerSizeUnits?.Desktop || 'px'}` : '32px';
     const markerSizeTablet = markerSize?.Tablet ? `${markerSize.Tablet}${markerSizeUnits?.Tablet || 'px'}` : markerSizeValue;
     const markerSizeMobile = markerSize?.Mobile ? `${markerSize.Mobile}${markerSizeUnits?.Mobile || 'px'}` : markerSizeValue;
+
+    // Marker hover size with unit
+    const markerHoverSizeValue = markerHoverSize?.Desktop ? `${markerHoverSize.Desktop}${markerHoverSizeUnits?.Desktop || 'px'}` : markerSizeValue;
+    const markerHoverSizeTablet = markerHoverSize?.Tablet ? `${markerHoverSize.Tablet}${markerHoverSizeUnits?.Tablet || 'px'}` : markerHoverSizeValue;
+    const markerHoverSizeMobile = markerHoverSize?.Mobile ? `${markerHoverSize.Mobile}${markerHoverSizeUnits?.Mobile || 'px'}` : markerHoverSizeValue;
     
     // Marker border width
     const markerBorderWidthValue = markerBorderWidth?.Desktop ? `${markerBorderWidth.Desktop}${markerBorderWidthUnits?.Desktop || 'px'}` : '0px';
@@ -162,6 +170,8 @@ const generateImageHotspotStyle = (attributes) => {
         }
 
         .${blockID} .fb-hotspot-trigger:hover {
+            width: ${markerHoverSizeValue};
+            height: ${markerHoverSizeValue};
             background-color: ${markerHoverColor || markerColor};
             transform: scale(1.15);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
@@ -183,6 +193,24 @@ const generateImageHotspotStyle = (attributes) => {
             fill: currentColor;
         }
 
+        ${markerAnimation && markerAnimation !== 'none' ? `
+            ${markerAnimation === 'pulse' || markerAnimation === 'glow' ? `
+                .${blockID} .fb-hotspot-marker.animation-${markerAnimation} .fb-hotspot-trigger {
+                    animation: fb-hotspot-${markerAnimation} 2s infinite;
+                }
+            ` : ''}
+            ${markerAnimation === 'bounce' ? `
+                .${blockID} .fb-hotspot-marker.animation-bounce {
+                    animation: fb-hotspot-bounce 1s ease-in-out infinite;
+                }
+            ` : ''}
+            ${markerAnimation === 'float' ? `
+                .${blockID} .fb-hotspot-marker.animation-float {
+                    animation: fb-hotspot-float 3s ease-in-out infinite;
+                }
+            ` : ''}
+        ` : ''}
+
         .${blockID} .fb-hotspot-popover {
             position: absolute;
             bottom: 100%;
@@ -199,6 +227,10 @@ const generateImageHotspotStyle = (attributes) => {
         }
 
         .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover {
+            display: block;
+        }
+
+        .${blockID} .fb-hotspot-marker.locked .fb-hotspot-popover {
             display: block;
         }
 
