@@ -40,7 +40,7 @@ const attributes = {
     },
     /** End General Settings */
 
-    /** Start Padding */
+    /** Start Content Box Padding */
     vertcalTimelineContentBoxPaddingUnits: {
         type: 'object',
         default: {
@@ -80,9 +80,9 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    /** End Padding */
+    /** End Content Box Padding */
 
-    /** Start Margin */
+    /** Start Content Box Margin */
     vertcalTimelineContentBoxMarginUnits: {
         type: 'object',
         default: {
@@ -122,7 +122,91 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    /** End Margin */
+    /** End Content Box Margin */
+
+    /** Start Phase Title Padding */
+    vertcalTimelinePhaseTitlePaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    vertcalTimelinePhaseTitlePaddingDesktop: {
+        type: "object",
+        default: {
+            top: '6',
+            bottom: '6',
+            left: '16',
+            right: '16',
+        },
+    },
+    vertcalTimelinePhaseTitlePaddingTablet: {
+        type: "object",
+        default: {
+            top: '4',
+            bottom: '4',
+            left: '12',
+            right: '12',
+        },
+    },
+    vertcalTimelinePhaseTitlePaddingMobile: {
+        type: "object",
+        default: {
+            top: '4',
+            bottom: '4',
+            left: '12',
+            right: '12',
+        },
+    },
+    vertcalTimelinePhaseTitlePaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Phase Title Padding */
+
+    /** Start Phase Title Margin */
+    vertcalTimelinePhaseTitleMarginUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    vertcalTimelinePhaseTitleMarginDesktop: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    vertcalTimelinePhaseTitleMarginTablet: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    vertcalTimelinePhaseTitleMarginMobile: {
+        type: "object",
+        default: {
+            top: '0',
+            bottom: '0',
+            left: '0',
+            right: '0',
+        },
+    },
+    vertcalTimelinePhaseTitleMarginLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Phase Title Margin */
 
     /** Start Content Box Background */
     vertcalTimelineContentBoxGlobalBgColorSwitcher: {
@@ -172,7 +256,55 @@ const attributes = {
     },
     /** End Content Box Background */
 
-    /** Start Border */
+    /** Start Phase Title Background */
+    vertcalTimelinePhaseTitleNormalBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    vertcalTimelinePhaseTitleNormalBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    vertcalTimelinePhaseTitleNormalClassicColor: {
+        type: "string",
+        default: "#15171c",
+    },
+    vertcalTimelinePhaseTitleNormalGradientColor: {
+        type: "string",
+        default: null,
+    },
+    vertcalTimelinePhaseTitleNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    vertcalTimelinePhaseTitleNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    vertcalTimelinePhaseTitleHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    vertcalTimelinePhaseTitleHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    vertcalTimelinePhaseTitleHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    vertcalTimelinePhaseTitleHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    vertcalTimelinePhaseTitleHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Phase Title Background */
+
+    /** Start Content Box Border */
     vertcalTimelineContentBoxGlobalBorder: {
         type: 'string',
         default: "none",
@@ -227,10 +359,66 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    /** End Border */
+    /** End Content Box Border */
 
+    /** Start Phase Title Border */
+    vertcalTimelinePhaseTitleNormalBorder: {
+        type: 'string',
+        default: "none",
+    },
+    vertcalTimelinePhaseTitleNormalBorderColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    vertcalTimelinePhaseTitleNormalBorderColor: {
+        type: 'string',
+        default: ""
+    },
+    vertcalTimelinePhaseTitleNormalBorderHoverColor: {
+        type: 'string',
+    },
+    vertcalTimelinePhaseTitleNormalBorderUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    vertcalTimelinePhaseTitleNormalBorderDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderTablet: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderMobile: {
+        type: "object",
+        default: {
+            top: '',
+            bottom: '',
+            left: '',
+            right: '',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Phase Title Border */
 
-    /** Start Border Radius */
+    /** Start Content Box Border Radius */
     vertcalTimelineContentBoxGlobalBorderRadiusUnits: {
         type: 'object',
         default: {
@@ -270,9 +458,51 @@ const attributes = {
         type: "boolean",
         default: true
     },
-    /** End Border Radius */
+    /** End Content Box Border Radius */
 
-    /** Start Box Shadow */
+    /** Start Phase Title Border Radius */
+    vertcalTimelinePhaseTitleNormalBorderRadiusUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    vertcalTimelinePhaseTitleNormalBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '72',
+            bottom: '72',
+            left: '72',
+            right: '72',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '72',
+            bottom: '72',
+            left: '72',
+            right: '72',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '72',
+            bottom: '72',
+            left: '72',
+            right: '72',
+        },
+    },
+    vertcalTimelinePhaseTitleNormalBorderRadiusLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Phase Title Border Radius */
+
+    /** Start Content Box Box Shadow */
     vertcalTimelineContentBoxBoxShadowSwitcher: {
         type: "string",
         default: "normal",
@@ -293,7 +523,152 @@ const attributes = {
         type: "string",
         default: "",
     },
-    /** End Box Shadow */
+    /** End Content Box Box Shadow */
+
+    /** Start Phase Title Box Shadow */
+    vertcalTimelinePhaseTitleBoxShadowSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    vertcalTimelinePhaseTitleBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    vertcalTimelinePhaseTitleBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    vertcalTimelinePhaseTitleBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    vertcalTimelinePhaseTitleBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Phase Title Box Shadow */
+
+    /** Start Phase Title Alignment */
+    vertcalTimelinePhaseTitleAlignment: {
+        type: 'object',
+        default: {
+            Desktop: 'left',
+            Tablet: '',
+            Mobile: '',
+        },
+    },
+    /** End Phase Title Alignment */
+
+    /** Start Phase Title Typography */
+    vertcalTimelinePhaseTitleGlobalTypoSwitcher: {
+        type: "object",
+        default: {
+            fontFamily: false,
+            fontSize: false,
+            fontWeight: false,
+            fontStyle: false,
+            textTransform: false,
+            textDecoration: false,
+            letterSpacing: false,
+            lineHeight: false,
+        },
+    },
+    vertcalTimelinePhaseTitleGlobalTypographyData: {
+        type: "object",
+        default: {},
+    },
+    vertcalTimelinePhaseTitleGlobalTypoType: {
+        type: "string",
+        default: "default",
+    },
+    vertcalTimelinePhaseTitleGlobalTypoOption: {
+        type: "object",
+        default: { label: 'Default', value: 'default' },
+    },
+    vertcalTimelinePhaseTitleFontFamily: {
+        type: "string",
+        default: "Default",
+    },
+    vertcalTimelinePhaseTitleFontSize: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    vertcalTimelinePhaseTitleFontSizeUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    vertcalTimelinePhaseTitleFontWeight: {
+        type: "string",
+        default: "",
+    },
+    vertcalTimelinePhaseTitleFontStyle: {
+        type: "string",
+        default: "",
+    },
+    vertcalTimelinePhaseTitleTextTransform: {
+        type: "string",
+        default: "",
+    },
+    vertcalTimelinePhaseTitleTextDecoration: {
+        type: "string",
+        default: "none",
+    },
+    vertcalTimelinePhaseTitleLetterSpacing: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    vertcalTimelinePhaseTitleLineHeight: {
+        type: "object",
+        default: {
+            Desktop: "",
+            Tablet: "",
+            Mobile: "",
+        },
+    },
+    vertcalTimelinePhaseTitleLetterSpacingUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    vertcalTimelinePhaseTitleLineHeightUnits: {
+        type: "object",
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    /** End Phase Title Typography */
+
+    /** Start Phase Title Color */
+    vertcalTimelinePhaseTitleColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    vertcalTimelinePhaseTitleColor: {
+        type: 'string',
+        default: '#ffffff'
+    },
+    vertcalTimelinePhaseTitleHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    /** End Phase Title Color */
 
     /** Start Class & ID Setting */
     verticalTimelineItemGlobalZIndex: {
