@@ -11,7 +11,7 @@ export default
 		name: 'landscape-layout',
 		title: __( 'Landscape Layout' ),
 		description: __(
-			'Image on the left with author, title, excerpt, and read more on the right'
+			'Image on the left with title, excerpt, category, and author row on the right'
 		),
 		icon: (
 			<span className="fb-loop-builder-variation-picker__preview fb-loop-builder-variation-picker__preview--landscape-layout">
@@ -165,38 +165,134 @@ export default
 								},
 								[
 									[
+										'frontis-blocks/advanced-heading',
+										{
+											dynamicTextEnabled: true,
+											dynamicTextSource: 'current_post',
+											dynamicTextField: 'post_title',
+											loopAutoApplied: true,
+											headingTag: 'h3',
+											dynamicTextEnableLink: true,
+											dynamicTextLinkSource: 'post_permalink',
+											headingFontSize: {
+												Desktop: '20',
+												Tablet: '20',
+												Mobile: '18',
+											},
+											headingColorSwitcher: 'normal',
+											headingColor: '#1e3a8a',
+											headingDesktopMargin: {
+												top: '0',
+												right: '0',
+												bottom: '8',
+												left: '0',
+											},
+											headingTabMargin: {
+												top: '0',
+												right: '0',
+												bottom: '8',
+												left: '0',
+											},
+											headingMobileMargin: {
+												top: '0',
+												right: '0',
+												bottom: '8',
+												left: '0',
+											},
+										},
+									],
+									[
+										'frontis-blocks/advanced-heading',
+										{
+											dynamicTextEnabled: true,
+											dynamicTextSource: 'current_post',
+											dynamicTextField: 'post_excerpt',
+											loopAutoApplied: true,
+											headingTag: 'p',
+											headingFontSize: {
+												Desktop: '14',
+												Tablet: '14',
+												Mobile: '14',
+											},
+											headingColorSwitcher: 'normal',
+											headingColor: '#64748b',
+											headingDesktopMargin: {
+												top: '0',
+												right: '0',
+												bottom: '12',
+												left: '0',
+											},
+											headingTabMargin: {
+												top: '0',
+												right: '0',
+												bottom: '12',
+												left: '0',
+											},
+											headingMobileMargin: {
+												top: '0',
+												right: '0',
+												bottom: '12',
+												left: '0',
+											},
+										},
+									],
+									[
+										'frontis-blocks/advanced-heading',
+										{
+											dynamicTextEnabled: true,
+											dynamicTextSource: 'current_post',
+											dynamicTextField: 'post_terms',
+											dynamicTextTermsTaxonomy: 'category',
+											dynamicTextEnableLink: true,
+											loopAutoApplied: true,
+											headingTag: 'p',
+											headingFontSize: {
+												Desktop: '12',
+												Tablet: '12',
+												Mobile: '12',
+											},
+											headingColorSwitcher: 'normal',
+											headingColor: '#2563eb',
+											headingDesktopMargin: {
+												top: '0',
+												right: '0',
+												bottom: '16',
+												left: '0',
+											},
+											headingTabMargin: {
+												top: '0',
+												right: '0',
+												bottom: '16',
+												left: '0',
+											},
+											headingMobileMargin: {
+												top: '0',
+												right: '0',
+												bottom: '16',
+												left: '0',
+											},
+										},
+									],
+									[
 										'frontis-blocks/container',
 										{
 											variationSelected: true,
 											loopAutoApplied: true,
 											containerChildrenWidth: 'auto',
+											containerDirection: {
+												Desktop: 'row',
+												Tablet: 'row',
+												Mobile: 'row',
+											},
+											containerWrap: {
+												Desktop: 'wrap',
+												Tablet: 'wrap',
+												Mobile: 'wrap',
+											},
 											containerGlobalPadding: {
 												Desktop: '0',
 												Tablet: '0',
 												Mobile: '0',
-											},
-											containerDesktopPadding: {
-												top: '0',
-												bottom: '0',
-												left: '0',
-												right: '0',
-											},
-											containerTabletPadding: {
-												top: '0',
-												bottom: '0',
-												left: '0',
-												right: '0',
-											},
-											containerMobilePadding: {
-												top: '0',
-												bottom: '0',
-												left: '0',
-												right: '0',
-											},
-											containerPaddingUnits: {
-												Desktop: 'px',
-												Tablet: 'px',
-												Mobile: 'px',
 											},
 											containerDesktopMargin: {
 												top: '0',
@@ -221,16 +317,6 @@ export default
 												Tablet: 'px',
 												Mobile: 'px',
 											},
-											containerDirection: {
-												Desktop: 'row',
-												Tablet: 'row',
-												Mobile: 'row',
-											},
-											containerWrap: {
-												Desktop: 'wrap',
-												Tablet: 'wrap',
-												Mobile: 'wrap',
-											},
 											deviceType: 'Desktop',
 											containerAlignItems: {
 												Desktop: 'center',
@@ -253,9 +339,9 @@ export default
 												Mobile: 'px',
 											},
 											columnGap: {
-												Desktop: '10',
-												Tablet: '10',
-												Mobile: '10',
+												Desktop: '8',
+												Tablet: '8',
+												Mobile: '8',
 											},
 											columnGapUnits: {
 												Desktop: 'px',
@@ -273,9 +359,9 @@ export default
 													loopAutoApplied: true,
 													autoFitSwitch: true,
 													mediaHeight: {
-														Desktop: '48',
-														Tablet: '48',
-														Mobile: '48',
+														Desktop: '32',
+														Tablet: '32',
+														Mobile: '32',
 													},
 													mediaHeightUnits: {
 														Desktop: 'px',
@@ -359,10 +445,12 @@ export default
 													loopAutoApplied: true,
 													headingTag: 'p',
 													headingFontSize: {
-														Desktop: '14',
-														Tablet: '14',
-														Mobile: '14',
+														Desktop: '13',
+														Tablet: '13',
+														Mobile: '13',
 													},
+													headingColorSwitcher: 'normal',
+													headingColor: '#2563eb',
 													headingDesktopMargin: {
 														top: '0',
 														right: '0',
@@ -384,105 +472,6 @@ export default
 												},
 											],
 										],
-									],
-									[
-										'frontis-blocks/advanced-heading',
-										{
-											dynamicTextEnabled: true,
-											dynamicTextSource: 'current_post',
-											dynamicTextField: 'post_title',
-											loopAutoApplied: true,
-											headingTag: 'h3',
-											dynamicTextEnableLink: true,
-											dynamicTextLinkSource: 'post_permalink',
-											headingDesktopPadding: {
-												top: '8',
-												right: '0',
-												bottom: '4',
-												left: '0',
-											},
-											headingTabPadding: {
-												top: '8',
-												right: '0',
-												bottom: '4',
-												left: '0',
-											},
-											headingMobilePadding: {
-												top: '8',
-												right: '0',
-												bottom: '4',
-												left: '0',
-											},
-										},
-									],
-									[
-										'frontis-blocks/advanced-heading',
-										{
-											dynamicTextEnabled: true,
-											dynamicTextSource: 'current_post',
-											dynamicTextField: 'post_excerpt',
-											loopAutoApplied: true,
-											headingTag: 'p',
-											headingFontSize: {
-												Desktop: '18',
-												Tablet: '18',
-												Mobile: '18',
-											},
-										},
-									],
-									[
-										'frontis-blocks/advanced-button',
-										{
-											buttonText: 'Read More',
-											buttonTextSwitcher: true,
-											dynamicTextEnabled: true,
-											dynamicTextSource: 'current_post',
-											dynamicTextField: 'post_title',
-											dynamicTextEnableLink: true,
-											dynamicTextLinkSource: 'post_permalink',
-											dynamicTextPreserveButtonLabel: true,
-											buttonFontSize: {
-												Desktop: '14',
-												Tablet: '14',
-												Mobile: '14',
-											},
-											buttonDesktopPadding: {
-												top: '8',
-												right: '16',
-												bottom: '8',
-												left: '16',
-											},
-											buttonTabPadding: {
-												top: '8',
-												right: '16',
-												bottom: '8',
-												left: '16',
-											},
-											buttonMobilePadding: {
-												top: '8',
-												right: '16',
-												bottom: '8',
-												left: '16',
-											},
-											buttonGlobalMarginDesktop: {
-												top: '16',
-												right: '0',
-												bottom: '0',
-												left: '0',
-											},
-											buttonGlobalMarginTablet: {
-												top: '16',
-												right: '0',
-												bottom: '0',
-												left: '0',
-											},
-											buttonGlobalMarginMobile: {
-												top: '16',
-												right: '0',
-												bottom: '0',
-												left: '0',
-											},
-										},
 									],
 								],
 							],
