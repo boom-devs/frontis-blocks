@@ -54,7 +54,7 @@ const attributes = {
 			search: "",
 			exclude: [],
 			sticky: "",
-			inherit: true,
+			inherit: false,
 			taxQuery: null,
 			parents: [],
 			format: [],
