@@ -138,7 +138,7 @@ const getProToggleControls = ({
                   <path
                     d="M9 4.5L13.5 9M13.5 9L9 13.5M13.5 9H4.5"
                     stroke="#555E72"
-                    stroke-width="1.2"
+                    strokeWidth="1.2"
                   />
                 </svg>
               </div>
