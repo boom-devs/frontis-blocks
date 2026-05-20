@@ -21,8 +21,11 @@ import FB_InputControl from "@Components/input-control";
 import FB_CustomCSSEditor from "@Components/custom-css-editor";
 import FB_Preset from "@Components/presets";
 import { useDeviceType } from "@Config/displayType";
+import { Dashicon } from "@wordpress/components";
 
-/*  Single item editor  */
+/**
+ * Internal component for managing a single accordion item's data.
+ */
 const ItemEditor = ({
 	item,
 	index,
@@ -35,31 +38,17 @@ const ItemEditor = ({
 	const update = (key, val) => onChange(index, { ...item, [key]: val });
 
 	return (
-		<div
-			style={{
-				border: "1px solid #ddd",
-				borderRadius: 6,
-				marginBottom: 8,
-				overflow: "hidden",
-			}}
-		>
+		<div className="fb-accordion-item-editor">
 			<div
-				style={{
-					display: "flex",
-					alignItems: "center",
-					justifyContent: "space-between",
-					padding: "8px 10px",
-					background: "#f0f0f1",
-					cursor: "pointer",
-					userSelect: "none",
-				}}
+				className="fb-accordion-item-header"
 				onClick={() => setOpen((v) => !v)}
 			>
-				<span style={{ fontWeight: 600, fontSize: 13 }}>
+				<span className="fb-accordion-item-title">
+					<Dashicon icon={open ? "arrow-down-alt2" : "arrow-right-alt2"} />
 					{item.title || __("(no title)", "frontis-blocks")}
 				</span>
 				<div
-					style={{ display: "flex", gap: 4 }}
+					className="fb-accordion-item-actions"
 					onClick={(e) => e.stopPropagation()}
 				>
 					<Button
@@ -102,36 +91,16 @@ const ItemEditor = ({
 								allowedTypes={["image"]}
 								value={item.imageId}
 								render={({ open: openMedia }) => (
-									<div style={{ marginTop: 6, marginBottom: 12 }}>
+									<div className="fb-accordion-media-preview">
 										{item.imageUrl ? (
 											<>
-												<img
-													src={item.imageUrl}
-													alt=""
-													style={{
-														width: "100%",
-														height: 80,
-														objectFit: "cover",
-														borderRadius: 4,
-														display: "block",
-														marginBottom: 6,
-													}}
-												/>
-												<Button
-													isSmall
-													variant="secondary"
-													onClick={openMedia}
-													style={{ width: "100%" }}
-												>
+												<img src={item.imageUrl} alt="" />
+												<Button isSmall variant="secondary" onClick={openMedia}>
 													{__("Replace Image", "frontis-blocks")}
 												</Button>
 											</>
 										) : (
-											<Button
-												variant="secondary"
-												onClick={openMedia}
-												style={{ width: "100%" }}
-											>
+											<Button variant="secondary" onClick={openMedia}>
 												{__("Select Image", "frontis-blocks")}
 											</Button>
 										)}
@@ -158,57 +127,46 @@ const ItemEditor = ({
 						onChangeValue={(val) => update("subTitle", val)}
 					/>
 
-					{preset === "preset-1" && (
-						<>
-							<Divider />
-							<SelectControl
-								label={__("Icon Source", "frontis-blocks")}
-								value={item.mediaType || "icon"}
-								options={[
-									{ label: __("Icon", "frontis-blocks"), value: "icon" },
-									{ label: __("Image", "frontis-blocks"), value: "image" },
-								]}
-								onChange={(val) => update("mediaType", val)}
-								__nextHasNoMarginBottom
-							/>
-							{(item.mediaType || "icon") === "icon" && (
-								<FB_InputControl
-									label={__("Choose Icon", "frontis-blocks")}
-									helpText="e.g. fas fa-star"
-									value={item.iconValue || "fas fa-star"}
-									onChangeValue={(val) => update("iconValue", val)}
+					<Divider />
+					<SelectControl
+						label={__("Icon Source", "frontis-blocks")}
+						value={item.mediaType || "icon"}
+						options={[
+							{ label: __("Icon", "frontis-blocks"), value: "icon" },
+							{ label: __("Image", "frontis-blocks"), value: "image" },
+						]}
+						onChange={(val) => update("mediaType", val)}
+						__next40pxDefaultSize
+						__nextHasNoMarginBottom
+					/>
+					{(item.mediaType || "icon") === "icon" && (
+						<FB_InputControl
+							label={__("Choose Icon", "frontis-blocks")}
+							helpText="e.g. fas fa-star"
+							value={item.iconValue || "fas fa-star"}
+							onChangeValue={(val) => update("iconValue", val)}
+						/>
+					)}
+					{item.mediaType === "image" && (
+						<BaseControl
+							label={__("Icon Image", "frontis-blocks")}
+							__nextHasNoMarginBottom
+						>
+							<MediaUploadCheck>
+								<MediaUpload
+									onSelect={(media) => update("iconImageUrl", media.url)}
+									allowedTypes={["image"]}
+									value={item.iconImageUrl}
+									render={({ open: openIcon }) => (
+										<Button variant="secondary" onClick={openIcon}>
+											{item.iconImageUrl
+												? __("Replace Icon Image", "frontis-blocks")
+												: __("Select Icon Image", "frontis-blocks")}
+										</Button>
+									)}
 								/>
-							)}
-							{item.mediaType === "image" && (
-								<BaseControl
-									label={__("Icon Image", "frontis-blocks")}
-									__nextHasNoMarginBottom
-								>
-									<MediaUploadCheck>
-										<MediaUpload
-											onSelect={(media) => update("iconImageUrl", media.url)}
-											allowedTypes={["image"]}
-											value={item.iconImageUrl}
-											render={({ open: openIcon }) => (
-												<Button
-													variant="secondary"
-													onClick={openIcon}
-													style={{
-														width: "100%",
-														marginTop: 6,
-														marginBottom: 10,
-													}}
-												>
-													{item.iconImageUrl
-														? __("Replace Icon Image", "frontis-blocks")
-														: __("Select Icon Image", "frontis-blocks")}
-												</Button>
-											)}
-										/>
-									</MediaUploadCheck>
-								</BaseControl>
-							)}
-						</>
+							</MediaUploadCheck>
+						</BaseControl>
 					)}
 
 					{preset === "preset-3" && (
@@ -238,15 +196,11 @@ const ItemEditor = ({
 	);
 };
 
-/* 
-   CONTENT PANEL
- */
-
 const ContentPanel = ({ attributes, setAttributes }) => {
 	const { presetStyle, triggerOn, accordionItems } = attributes;
 
 	const updateItem = (index, updated) => {
-		const next = [...accordionItems];
+		const next = Array.from(accordionItems);
 		next[index] = updated;
 		setAttributes({ accordionItems: next });
 	};
@@ -255,8 +209,9 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 			accordionItems: accordionItems.filter((_, i) => i !== index),
 		});
 	const duplicateItem = (index) => {
-		const copy = { ...accordionItems[index], id: Date.now().toString() };
-		const next = [...accordionItems];
+		const copy = JSON.parse(JSON.stringify(accordionItems[index]));
+		copy.id = (Date.now() + Math.random()).toString();
+		const next = Array.from(accordionItems);
 		next.splice(index + 1, 0, copy);
 		setAttributes({ accordionItems: next });
 	};
@@ -268,8 +223,7 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 					id: Date.now().toString(),
 					title: "Discover unique",
 					subTitle: "discover unique",
-					// Note: Consider using a plugin-specific URL for local assets here
-					imageUrl: "https://via.placeholder.com/1920x1080.png?text=New+Image",
+					imageUrl: "https://placehold.co/1920x1080?text=New+Item",
 					imageId: 0,
 					iconValue: "fas fa-star",
 					iconLibrary: "solid",
@@ -283,14 +237,33 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 		});
 
 	return (
-		<PanelBody title={__("Content", "frontis-blocks")} initialOpen={true}>
+		<PanelBody
+			title={__("General Settings", "frontis-blocks")}
+			initialOpen={true}
+		>
 			<FB_Preset
 				label={__("Accordion Type", "frontis-blocks")}
 				presets={[
-					{ label: "Preset 1", value: "preset-1" },
-					{ label: "Preset 2", value: "preset-2" },
-					{ label: "Preset 3", value: "preset-3" },
-					{ label: "Preset 4", value: "preset-4" },
+					{
+						label: "Preset 1",
+						value: "preset-1",
+						icon: '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="10" height="44" rx="2" fill="#D1D5DB"/><rect x="18" y="4" width="30" height="44" rx="2" fill="#2563EB"/><circle cx="9" cy="40" r="3" fill="white"/></svg>',
+					},
+					{
+						label: "Preset 2",
+						value: "preset-2",
+						icon: '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="10" height="44" fill="#D1D5DB"/><rect x="16" y="4" width="32" height="44" fill="#2563EB"/><circle cx="9" cy="40" r="3" fill="white"/><circle cx="22" cy="10" r="2" fill="white"/></svg>',
+					},
+					{
+						label: "Preset 3",
+						value: "preset-3",
+						icon: '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="4" width="10" height="44" rx="2" fill="#D1D5DB"/><rect x="18" y="4" width="30" height="44" rx="2" fill="#2563EB"/><circle cx="24" cy="40" r="3" fill="white"/><rect x="40" y="38" width="6" height="4" rx="1" fill="white"/></svg>',
+					},
+					{
+						label: "Preset 4",
+						value: "preset-4",
+						icon: '<svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10 4L4 48H14L20 4H10Z" fill="#D1D5DB"/><path d="M22 4L16 48H48L54 4H22Z" fill="#2563EB"/></svg>',
+					},
 				]}
 				presetValue={presetStyle}
 				onChangeHandler={(val) => setAttributes({ presetStyle: val })}
@@ -298,7 +271,7 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 
 			<Divider />
 
-			<p style={{ fontSize: 12, fontWeight: 600, margin: "8px 0" }}>
+			<p className="fb-inspector-section-label">
 				{__("Accordion Items", "frontis-blocks")}
 			</p>
 			{accordionItems.map((item, i) => (
@@ -315,7 +288,7 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 			<Button
 				variant="primary"
 				onClick={addItem}
-				style={{ width: "100%", justifyContent: "center", marginTop: 4 }}
+				className="fb-add-item-button"
 			>
 				{__("+ Add Item", "frontis-blocks")}
 			</Button>
@@ -329,27 +302,13 @@ const ContentPanel = ({ attributes, setAttributes }) => {
 					{ label: __("Hover", "frontis-blocks"), value: "hover" },
 					{ label: __("Click", "frontis-blocks"), value: "click" },
 				]}
-				onChange={(val) => setAttributes({ triggerOn: val })}
-				help={
-					triggerOn === "hover"
-						? __(
-								"Items expand on mouse hover. Click has no effect.",
-								"frontis-blocks",
-						  )
-						: __(
-								"Items expand on click. Hover has no effect.",
-								"frontis-blocks",
-						  )
-				}
+				__next40pxDefaultSize
 				__nextHasNoMarginBottom
 			/>
 		</PanelBody>
 	);
 };
 
-/* 
-   STYLE PANELS
- */
 const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 	const {
 		presetStyle,
@@ -419,6 +378,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 						{ label: "Dotted", value: "dotted" },
 						{ label: "Double", value: "double" },
 					]}
+					__next40pxDefaultSize
 					onChange={(val) => setAttributes({ itemBorderType: val })}
 					__nextHasNoMarginBottom
 				/>
@@ -528,38 +488,36 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 			</PanelBody>
 
 			{/* Icon — Preset 1 */}
-			{presetStyle === "preset-1" && (
-				<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
-					<FB_ColorControl
-						label={__("Icon Color", "frontis-blocks")}
-						globalColor={iconColor}
-						setGlobalColor={(val) => setAttributes({ iconColor: val })}
-					/>
-					<FB_ColorControl
-						label={__("Icon Background Color", "frontis-blocks")}
-						globalColor={iconBgColor}
-						setGlobalColor={(val) => setAttributes({ iconBgColor: val })}
-					/>
-					<FB_Range
-						label={__("Icon Size (px)", "frontis-blocks")}
-						rangeValue={iconSize}
-						onChangeHandler={(val) => setAttributes({ iconSize: val })}
-						min={10}
-						max={60}
-						deviceType={deviceType}
-						resetFallbackValue={18}
-					/>
-					<FB_Range
-						label={__("Circle Size (px)", "frontis-blocks")}
-						rangeValue={iconCircleSize}
-						onChangeHandler={(val) => setAttributes({ iconCircleSize: val })}
-						min={24}
-						max={100}
-						deviceType={deviceType}
-						resetFallbackValue={44}
-					/>
-				</PanelBody>
-			)}
+			<PanelBody title={__("Icon", "frontis-blocks")} initialOpen={false}>
+				<FB_ColorControl
+					label={__("Icon Color", "frontis-blocks")}
+					globalColor={iconColor}
+					setGlobalColor={(val) => setAttributes({ iconColor: val })}
+				/>
+				<FB_ColorControl
+					label={__("Icon Background Color", "frontis-blocks")}
+					globalColor={iconBgColor}
+					setGlobalColor={(val) => setAttributes({ iconBgColor: val })}
+				/>
+				<FB_Range
+					label={__("Icon Size (px)", "frontis-blocks")}
+					rangeValue={iconSize}
+					onChangeHandler={(val) => setAttributes({ iconSize: val })}
+					min={10}
+					max={60}
+					deviceType={deviceType}
+					resetFallbackValue={18}
+				/>
+				<FB_Range
+					label={__("Circle Size (px)", "frontis-blocks")}
+					rangeValue={iconCircleSize}
+					onChangeHandler={(val) => setAttributes({ iconCircleSize: val })}
+					min={24}
+					max={100}
+					deviceType={deviceType}
+					resetFallbackValue={44}
+				/>
+			</PanelBody>
 
 			{/* Overlay Dots — Preset 2 */}
 			{presetStyle === "preset-2" && (
@@ -608,7 +566,6 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 				/>
 			</PanelBody>
 
-			{/* Item Number — Preset 2 & 4 */}
 			{(presetStyle === "preset-2" || presetStyle === "preset-4") && (
 				<PanelBody
 					title={__("Item Number", "frontis-blocks")}
@@ -671,6 +628,7 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 						{ label: "800 — Extra Bold", value: "800" },
 					]}
 					onChange={(val) => setAttributes({ titleFontWeight: val })}
+					__next40pxDefaultSize
 					__nextHasNoMarginBottom
 				/>
 				<Divider />
@@ -750,10 +708,6 @@ const StylePanels = ({ attributes, setAttributes, deviceType }) => {
 	);
 };
 
-/* ══════════════════════════════════════════
-   MAIN INSPECTOR — Tab UI built manually
-   (compatible with all wp-scripts versions)
-══════════════════════════════════════════ */
 const Inspector = ({ attributes, setAttributes }) => {
 	const deviceType = useDeviceType();
 

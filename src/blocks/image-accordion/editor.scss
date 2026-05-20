@@ -6,23 +6,32 @@
 	   PRESET 1 
 
 	*/
-	.pea-editor-preview.preset-1 {
-		.pea-image-accordion-container {
+	.fb-editor-preview.preset-1 {
+		.fb-image-accordion-container {
 			display: flex !important;
 			flex-direction: row !important;
 			align-items: stretch !important;
 		}
 
-		.pea-image-accordion-item {
+		.fb-image-accordion-item {
 			flex: 0 0 80px !important;
 			border-radius: 50px !important;
+			display: flex !important;
+			flex-direction: column !important;
+			justify-content: flex-end !important;
 		}
 
-		.pea-image-accordion-item.is-active {
-			flex: 1 !important;
-			border-radius: 25px !important;
+		.fb-image-accordion-item:not(.is-active) {
+			.fb-image-accordion-text-group {
+				display: none !important;
+			}
+		}
 
-			.pea-image-accordion-text-group {
+		.fb-image-accordion-item.is-active {
+			flex: 1 !important;
+			align-items: stretch !important;
+
+			.fb-image-accordion-text-group {
 				display: block !important;
 				opacity: 1 !important;
 				transform: translateX(0) !important;
@@ -33,30 +42,33 @@
 	/* 
 	   PRESET 2 
 	*/
-	.pea-editor-preview.preset-2 {
-		.pea-image-accordion-container {
+	.fb-editor-preview.preset-2 {
+		.fb-image-accordion-container {
 			display: flex !important;
 			flex-direction: row !important;
 			gap: 0 !important;
 			align-items: stretch !important;
 		}
 
-		.pea-image-accordion-item {
+		.fb-image-accordion-item {
 			flex: 0 0 90px !important;
 			border-radius: 0 !important;
+			display: flex !important;
+			flex-direction: column !important;
+			justify-content: flex-end !important;
 		}
 
-		.pea-image-accordion-item.is-active {
+		.fb-image-accordion-item.is-active {
 			flex: 1 !important;
 			border-radius: 0 !important;
 
-			.pea-image-accordion-dot-wrapper {
+			.fb-image-accordion-dot-wrapper {
 				opacity: 0 !important;
 				visibility: hidden !important;
 			}
 
-			.pea-image-accordion-title,
-			.pea-sub-title {
+			.fb-image-accordion-title,
+			.fb-sub-title {
 				opacity: 1 !important;
 			}
 		}
@@ -65,23 +77,26 @@
 	/* 
 	   PRESET 3  
 	 */
-	.pea-editor-preview.preset-3 {
-		.pea-image-accordion-container {
+	.fb-editor-preview.preset-3 {
+		.fb-image-accordion-container {
 			display: flex !important;
 			flex-direction: column !important;
 			height: auto !important;
 		}
 
-		.pea-image-accordion-item {
+		.fb-image-accordion-item {
 			flex: 0 0 64px !important;
 			border-radius: 12px !important;
+			display: flex !important;
+			flex-direction: column !important;
+			justify-content: flex-end !important;
 		}
 
-		.pea-image-accordion-item.is-active {
+		.fb-image-accordion-item.is-active {
 			flex: 1 !important;
 			border-radius: 12px !important;
 
-			.pea-image-accordion-content-wrapper {
+			.fb-image-accordion-content-wrapper {
 				display: flex !important;
 				opacity: 1 !important;
 			}
@@ -91,8 +106,8 @@
 	/*
 	   PRESET 4
 	 */
-	.pea-editor-preview.preset-4 {
-		.pea-image-accordion-container {
+	.fb-editor-preview.preset-4 {
+		.fb-image-accordion-container {
 			display: flex !important;
 			flex-direction: row !important;
 			gap: 0 !important;
@@ -100,25 +115,25 @@
 			align-items: stretch !important;
 		}
 
-		.pea-image-accordion-item {
+		.fb-image-accordion-item {
 			flex: 1 !important;
 			background-image: none !important;
 			background-color: transparent !important;
 		}
 
-		.pea-image-accordion-item.is-active {
+		.fb-image-accordion-item.is-active {
 			flex: 2.8 !important;
 			z-index: 5 !important;
 
-			.pea-skew-bg {
+			.fb-skew-bg {
 				transform: skewX(12deg) scale(1.06) !important;
 			}
 
-			.pea-image-accordion-overlay {
+			.fb-image-accordion-overlay {
 				background: rgba(0, 0, 0, 0.25) !important;
 			}
 
-			.pea-image-accordion-title {
+			.fb-image-accordion-title {
 				opacity: 1 !important;
 				transform: translateY(0) !important;
 			}

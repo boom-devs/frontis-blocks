@@ -43,7 +43,6 @@ const EmptyState = () => (
 	</div>
 );
 
-/*  Main Edit component */
 const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 	const {
 		blockID,
@@ -67,9 +66,6 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 		}
 	};
 
-	/**
-	 * Manages tab button settings and switches to block settings on click
-	 */
 	const panelRef = useRef(null);
 	SwitchToBlockSettings(panelRef);
 
@@ -114,12 +110,12 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 						<EmptyState />
 					) : (
 						<div
-							className={`pea-image-accordion-wrapper ${presetStyle} pea-editor-preview pea-trigger-${triggerOn} ${blockID}`}
+							className={`fb-image-accordion-wrapper ${presetStyle} fb-editor-preview fb-trigger-${triggerOn} ${blockID}`}
 							data-trigger={triggerOn}
 							onMouseLeave={handleMouseLeave}
 						>
 							<div
-								className="pea-image-accordion-container"
+								className="fb-image-accordion-container"
 								style={containerStyle}
 							>
 								{items}
@@ -129,23 +125,6 @@ const Edit = ({ attributes, setAttributes, clientId, isSelected }) => {
 				</div>
 
 				{/*  Hint bar */}
-				<div>
-					<svg width="11" height="11" viewBox="0 0 12 12" fill="none">
-						<circle cx="6" cy="6" r="5" stroke="#ccc" strokeWidth="1.2" />
-						<path
-							d="M6 5v4M6 3.5v.5"
-							stroke="#ccc"
-							strokeWidth="1.2"
-							strokeLinecap="round"
-						/>
-					</svg>
-					{triggerOn === "hover"
-						? __(
-								"Hover over items to expand them in the editor.",
-								"frontis-blocks",
-						  )
-						: __("Click items to expand them in the editor.", "frontis-blocks")}
-				</div>
 			</div>
 			<style>{blockStyle}</style>
 		</>

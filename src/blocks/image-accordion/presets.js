@@ -13,7 +13,6 @@ export function getContainerStyle(attributes) {
 
 /* 
    PRESET 1
-   
  */
 export function renderPreset1Item(
 	item,
@@ -30,30 +29,25 @@ export function renderPreset1Item(
 		iconCircleSize,
 		titleColor,
 		subtitleColor,
-		titleFontSize,
-		titleFontWeight,
-		subtitleFontSize,
 	} = attributes;
 
 	const isActive = index === activeIndex;
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
+		backgroundImage: `url("${
+			item.imageUrl || "https://placehold.co/1920x1080?text=Placeholder"
+		}")`,
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
 
-	const iconCircleStyle = {
-		width: `${iconCircleSize}px`,
-		height: `${iconCircleSize}px`,
-		minWidth: `${iconCircleSize}px`,
-		backgroundColor: iconBgColor,
-		color: iconColor,
-	};
+	const iconClass = item.iconValue || "fas fa-star";
+	const iconImage =
+		item.iconImageUrl || "https://placehold.co/100x100?text=Icon";
 
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
+			className={`fb-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
@@ -61,45 +55,19 @@ export function renderPreset1Item(
 			onClick={() => onItemAction && onItemAction(index, "click")}
 			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
-			<div
-				className="pea-image-accordion-overlay"
-				style={{ background: overlayColor }}
-			/>
-			<div className="pea-image-accordion-content-wrapper">
-				<div
-					className="pea-image-accordion-icon-circle"
-					style={iconCircleStyle}
-				>
+			<div className="fb-image-accordion-overlay" />
+			<div className="fb-image-accordion-content-wrapper">
+				<div className="fb-image-accordion-icon-circle">
 					{item.mediaType === "image" && item.iconImageUrl ? (
 						<img src={item.iconImageUrl} alt="" />
 					) : (
-						<i
-							className={item.iconValue || "fas fa-star"}
-							style={{ fontSize: `${iconSize}px`, color: iconColor }}
-						/>
+						<i className={item.iconValue || "fas fa-star"} />
 					)}
 				</div>
-				<div className="pea-image-accordion-text-group">
-					<p
-						className="pea-image-accordion-title"
-						style={{
-							color: titleColor,
-							fontSize: `${titleFontSize}px`,
-							fontWeight: titleFontWeight,
-						}}
-					>
-						{item.title}
-					</p>
+				<div className="fb-image-accordion-text-group">
+					<p className="fb-image-accordion-title">{item.title}</p>
 					{item.subTitle && (
-						<p
-							className="pea-image-accordion-desc"
-							style={{
-								color: subtitleColor,
-								fontSize: `${subtitleFontSize}px`,
-							}}
-						>
-							{item.subTitle}
-						</p>
+						<p className="fb-image-accordion-desc">{item.subTitle}</p>
 					)}
 				</div>
 			</div>
@@ -137,14 +105,20 @@ export function renderPreset2Item(
 	const itemNumber = String(index + 1).padStart(2, "0");
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
+		backgroundImage: `url("${
+			item.imageUrl || "https://placehold.co/1920x1080?text=Placeholder"
+		}")`,
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
+
+	const iconClass = item.iconValue || "fas fa-star";
+	const iconImage =
+		item.iconImageUrl || "https://placehold.co/100x100?text=Icon";
 
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
+			className={`fb-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
@@ -153,57 +127,30 @@ export function renderPreset2Item(
 			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			<div
-				className="pea-image-accordion-overlay"
+				className="fb-image-accordion-overlay"
 				style={{ background: overlayColor }}
 			/>
 
 			{showDots && (
-				<div className="pea-image-accordion-dot-wrapper">
-					<span
-						className="pea-image-accordion-dot"
-						style={{
-							width: `${dotSize}px`,
-							height: `${dotSize}px`,
-							backgroundColor: dotColor,
-						}}
-					/>
+				<div className="fb-image-accordion-dot-wrapper">
+					<span className="fb-image-accordion-dot" />
 				</div>
 			)}
 
-			<div className="pea-image-accordion-content-wrapper">
-				<div className="pea-image-accordion-preset2-content pea-image-accordion-bottom-content">
+			<div className="fb-image-accordion-content-wrapper">
+				<div className="fb-image-accordion-preset2-content fb-image-accordion-bottom-content">
+					<div className="fb-image-accordion-icon-circle">
+						{item.mediaType === "image" && item.iconImageUrl ? (
+							<img src={item.iconImageUrl} alt="" />
+						) : (
+							<i className={item.iconValue || "fas fa-star"} />
+						)}
+					</div>
 					{showNumber && (
-						<span
-							className="pea-image-accordion-number"
-							style={{
-								color: numberColor,
-								fontSize: `${numberFontSize}px`,
-							}}
-						>
-							{itemNumber}
-						</span>
+						<span className="fb-image-accordion-number">{itemNumber}</span>
 					)}
-					<p
-						className="pea-image-accordion-title"
-						style={{
-							color: titleColor,
-							fontSize: `${titleFontSize}px`,
-							fontWeight: titleFontWeight,
-						}}
-					>
-						{item.title}
-					</p>
-					{item.subTitle && (
-						<p
-							className="pea-sub-title"
-							style={{
-								color: subtitleColor,
-								fontSize: `${subtitleFontSize}px`,
-							}}
-						>
-							{item.subTitle}
-						</p>
-					)}
+					<p className="fb-image-accordion-title">{item.title}</p>
+					{item.subTitle && <p className="fb-sub-title">{item.subTitle}</p>}
 				</div>
 			</div>
 		</div>
@@ -240,7 +187,9 @@ export function renderPreset3Item(
 	const isActive = index === activeIndex;
 
 	const itemStyle = {
-		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
+		backgroundImage: `url("${
+			item.imageUrl || "https://placehold.co/1920x1080?text=Default+Background"
+		}")`,
 		backgroundColor: item.imageUrl ? "transparent" : "#2a2a2a",
 	};
 
@@ -258,7 +207,7 @@ export function renderPreset3Item(
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
+			className={`fb-image-accordion-item${isActive ? " is-active" : ""}`}
 			style={itemStyle}
 			tabIndex={0}
 			role="button"
@@ -267,38 +216,26 @@ export function renderPreset3Item(
 			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
 			<div
-				className="pea-image-accordion-overlay"
+				className="fb-image-accordion-overlay"
 				style={{ background: overlayColor }}
 			/>
-			<div className="pea-image-accordion-content-wrapper">
-				<div className="pea-image-accordion-preset3-content">
-					<div className="pea-image-accordion-left-content">
-						<p
-							className="pea-image-accordion-title"
-							style={{
-								color: titleColor,
-								fontSize: `${titleFontSize}px`,
-								fontWeight: titleFontWeight,
-							}}
-						>
-							{item.title}
-						</p>
-						{item.subTitle && (
-							<p
-								className="pea-sub-title"
-								style={{
-									color: subtitleColor,
-									fontSize: `${subtitleFontSize}px`,
-								}}
-							>
-								{item.subTitle}
-							</p>
-						)}
+			<div className="fb-image-accordion-content-wrapper">
+				<div className="fb-image-accordion-preset3-content">
+					<div className="fb-image-accordion-left-content">
+						<div className="fb-image-accordion-icon-circle">
+							{item.mediaType === "image" && item.iconImageUrl ? (
+								<img src={item.iconImageUrl} alt="" />
+							) : (
+								<i className={item.iconValue || "fas fa-star"} />
+							)}
+						</div>
+						<p className="fb-image-accordion-title">{item.title}</p>
+						{item.subTitle && <p className="fb-sub-title">{item.subTitle}</p>}
 					</div>
 					<a
 						href={item.buttonUrl || "#"}
-						className="pea-image-accordion-btn"
-						style={btnStyle}
+						className="fb-image-accordion-btn"
+						style={{ borderRadius: `${btnBorderRadius?.Desktop || 6}px` }}
 						target={item.buttonExternal ? "_blank" : "_self"}
 						rel={item.buttonExternal ? "noopener noreferrer" : undefined}
 						onClick={(e) => e.stopPropagation()}
@@ -340,62 +277,48 @@ export function renderPreset4Item(
 	 * Preset 4
 	 */
 	const skewBgStyle = {
-		backgroundImage: item.imageUrl ? `url("${item.imageUrl}")` : "none",
+		backgroundImage: `url("${
+			item.imageUrl || "https://placehold.co/1920x1080?text=Placeholder"
+		}")`,
 		backgroundColor: item.imageUrl ? "transparent" : "#1e293b",
 	};
+
+	const iconClass = item.iconValue || "fas fa-star";
+	const iconImage =
+		item.iconImageUrl || "https://placehold.co/100x100?text=Icon";
 
 	return (
 		<div
 			key={item.id || index}
-			className={`pea-image-accordion-item${isActive ? " is-active" : ""}`}
+			className={`fb-image-accordion-item${isActive ? " is-active" : ""}`}
 			tabIndex={0}
 			role="button"
 			aria-expanded={isActive ? "true" : "false"}
 			onClick={() => onItemAction && onItemAction(index, "click")}
 			onMouseEnter={() => onItemAction && onItemAction(index, "hover")}
 		>
-			{/* Un-skewed background */}
-			<div className="pea-skew-bg" style={skewBgStyle} />
+			<div className="fb-skew-bg" style={skewBgStyle} />
 
 			{/* Overlay */}
 			<div
-				className="pea-image-accordion-overlay"
+				className="fb-image-accordion-overlay"
 				style={{ background: overlayColor }}
 			/>
 
-			{/* Counter-skewed content */}
-			<div className="pea-image-accordion-content-wrapper">
+			<div className="fb-image-accordion-content-wrapper">
+				<div className="fb-image-accordion-icon-circle">
+					{item.mediaType === "image" ? (
+						<img src={iconImage} alt="" />
+					) : (
+						<i className={iconClass} />
+					)}
+				</div>
 				{showNumber && (
-					<span
-						className="pea-image-accordion-number"
-						style={{
-							color: numberColor,
-							fontSize: `${numberFontSize}px`,
-						}}
-					>
-						{itemNumber}
-					</span>
+					<span className="fb-image-accordion-number">{itemNumber}</span>
 				)}
-				<span
-					className="pea-image-accordion-title"
-					style={{
-						color: titleColor,
-						fontSize: `${titleFontSize}px`,
-						fontWeight: titleFontWeight,
-					}}
-				>
-					{item.title}
-				</span>
+				<span className="fb-image-accordion-title">{item.title}</span>
 				{item.subTitle && (
-					<span
-						className="pea-image-accordion-desc"
-						style={{
-							color: subtitleColor,
-							fontSize: `${subtitleFontSize}px`,
-						}}
-					>
-						{item.subTitle}
-					</span>
+					<span className="fb-image-accordion-desc">{item.subTitle}</span>
 				)}
 			</div>
 		</div>

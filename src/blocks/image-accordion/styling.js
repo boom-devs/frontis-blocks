@@ -40,67 +40,76 @@ const generateImageAccordionStyle = (attributes) => {
 		itemCustomCSS,
 	} = attributes;
 
-	const generatePadding = (p, u) =>
-		`${p.top}${u} ${p.right}${u} ${p.bottom}${u} ${p.left}${u}`;
+	const generatePadding = (p, u) => {
+		if (!p) return "0px";
+		const top = p.top !== "" && p.top !== undefined ? `${p.top}${u}` : "0px";
+		const right =
+			p.right !== "" && p.right !== undefined ? `${p.right}${u}` : "0px";
+		const bottom =
+			p.bottom !== "" && p.bottom !== undefined ? `${p.bottom}${u}` : "0px";
+		const left =
+			p.left !== "" && p.left !== undefined ? `${p.left}${u}` : "0px";
+		return `${top} ${right} ${bottom} ${left}`;
+	};
 
 	let styles = `
-		.${blockID} .pea-image-accordion-container {
+		.${blockID} .fb-image-accordion-container {
 			height: ${containerHeight.Desktop}px;
 			gap: ${itemsGap.Desktop}px;
 		}
-		.${blockID} .pea-image-accordion-item {
+		.${blockID} .fb-image-accordion-item {
 			border-radius: ${itemBorderRadius.Desktop}px;
-			border-style: ${itemBorderType};
-			border-color: ${itemBorderColor};
+			${itemBorderType ? `border-style: ${itemBorderType};` : ""}
+			${itemBorderColor ? `border-color: ${itemBorderColor};` : ""}
 			padding: ${generatePadding(itemPaddingDesktop, itemPaddingUnits.Desktop)};
 			margin: ${generatePadding(itemMarginDesktop, itemMarginUnits.Desktop)};
 		}
-		.${blockID} .pea-image-accordion-overlay {
-			background: ${overlayColor};
+		.${blockID} .fb-image-accordion-overlay {
+			${overlayColor ? `background: ${overlayColor};` : ""}
 		}
-		.${blockID} .pea-image-accordion-icon-circle {
+		.${blockID} .fb-image-accordion-icon-circle {
 			width: ${iconCircleSize.Desktop}px;
 			height: ${iconCircleSize.Desktop}px;
-			background-color: ${iconBgColor};
-			color: ${iconColor};
+			${iconBgColor ? `background-color: ${iconBgColor};` : ""}
+			${iconColor ? `color: ${iconColor};` : ""}
 		}
-		.${blockID} .pea-image-accordion-icon-circle i {
+		.${blockID} .fb-image-accordion-icon-circle i {
 			font-size: ${iconSize.Desktop}px;
 		}
-		.${blockID} .pea-image-accordion-dot {
+		.${blockID} .fb-image-accordion-dot {
 			width: ${dotSize.Desktop}px;
 			height: ${dotSize.Desktop}px;
 			background-color: ${dotColor};
 		}
-		.${blockID} .pea-image-accordion-number {
-			color: ${numberColor};
+		.${blockID} .fb-image-accordion-number {
+			${numberColor ? `color: ${numberColor};` : ""}
 			font-size: ${numberFontSize.Desktop}px;
 		}
-		.${blockID} .pea-image-accordion-title {
-			color: ${titleColor};
+		.${blockID} .fb-image-accordion-title {
+			${titleColor ? `color: ${titleColor};` : ""}
 			font-size: ${titleFontSize.Desktop}px;
-			font-weight: ${titleFontWeight};
+			${titleFontWeight ? `font-weight: ${titleFontWeight};` : ""}
 		}
-		.${blockID} .pea-image-accordion-desc, 
-		.${blockID} .pea-sub-title {
-			color: ${subtitleColor};
+		.${blockID} .fb-image-accordion-desc, 
+		.${blockID} .fb-sub-title {
+			${subtitleColor ? `color: ${subtitleColor};` : ""}
 			font-size: ${subtitleFontSize.Desktop}px;
 		}
-		.${blockID} .pea-image-accordion-btn {
-			color: ${btnTextColor};
-			background-color: ${btnBgColor};
-			border-color: ${btnBorderColor};
+		.${blockID} .fb-image-accordion-btn {
+			${btnTextColor ? `color: ${btnTextColor};` : ""}
+			${btnBgColor ? `background-color: ${btnBgColor};` : ""}
+			${btnBorderColor ? `border-color: ${btnBorderColor};` : ""}
 			border-radius: ${btnBorderRadius.Desktop}px;
 			font-size: ${btnFontSize.Desktop}px;
 			padding: ${btnPaddingY.Desktop}px ${btnPaddingX.Desktop}px;
 		}
 
 		@media (max-width: 1024px) {
-			.${blockID} .pea-image-accordion-container {
+			.${blockID} .fb-image-accordion-container {
 				height: ${containerHeight.Tablet}px;
 				gap: ${itemsGap.Tablet}px;
 			}
-			.${blockID} .pea-image-accordion-item {
+			.${blockID} .fb-image-accordion-item {
 				border-radius: ${itemBorderRadius.Tablet}px;
 				padding: ${generatePadding(itemPaddingTablet, itemPaddingUnits.Tablet)};
 				margin: ${generatePadding(itemMarginTablet, itemMarginUnits.Tablet)};
@@ -108,11 +117,11 @@ const generateImageAccordionStyle = (attributes) => {
 		}
 
 		@media (max-width: 767px) {
-			.${blockID} .pea-image-accordion-container {
+			.${blockID} .fb-image-accordion-container {
 				height: ${containerHeight.Mobile}px;
 				gap: ${itemsGap.Mobile}px;
 			}
-			.${blockID} .pea-image-accordion-item {
+			.${blockID} .fb-image-accordion-item {
 				border-radius: ${itemBorderRadius.Mobile}px;
 				padding: ${generatePadding(itemPaddingMobile, itemPaddingUnits.Mobile)};
 				margin: ${generatePadding(itemMarginMobile, itemMarginUnits.Mobile)};

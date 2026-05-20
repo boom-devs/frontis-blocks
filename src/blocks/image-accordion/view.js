@@ -2,18 +2,18 @@
 	"use strict";
 
 	function initAccordion(wrapper) {
-		const container = wrapper.querySelector(".pea-image-accordion-container");
+		const container = wrapper.querySelector(".fb-image-accordion-container");
 		if (!container) return;
 
 		const triggerMode = (wrapper.dataset.trigger || "hover")
 			.trim()
 			.toLowerCase();
 
-		wrapper.classList.remove("pea-trigger-hover", "pea-trigger-click");
-		wrapper.classList.add("pea-trigger-" + triggerMode);
+		wrapper.classList.remove("fb-trigger-hover", "fb-trigger-click");
+		wrapper.classList.add("fb-trigger-" + triggerMode);
 
 		const getItems = () =>
-			Array.from(container.querySelectorAll(".pea-image-accordion-item"));
+			Array.from(container.querySelectorAll(".fb-image-accordion-item"));
 
 		getItems().forEach((item) => {
 			const clone = item.cloneNode(true);
@@ -68,7 +68,7 @@
 
 	function init() {
 		document
-			.querySelectorAll(".image-accordion-block .pea-image-accordion-wrapper")
+			.querySelectorAll(".image-accordion-block .fb-image-accordion-wrapper")
 			.forEach(initAccordion);
 	}
 

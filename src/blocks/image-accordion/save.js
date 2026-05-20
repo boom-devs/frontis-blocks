@@ -14,10 +14,10 @@ const Save = ({ attributes }) => {
 		<>
 			<div {...blockProps}>
 				<div
-					className={`pea-image-accordion-wrapper ${presetStyle}`}
+					className={`fb-image-accordion-wrapper ${presetStyle}`}
 					data-trigger={triggerOn}
 				>
-					<div className="pea-image-accordion-container">{items}</div>
+					<div className="fb-image-accordion-container">{items}</div>
 				</div>
 			</div>
 			<style>{blockStyle}</style>
