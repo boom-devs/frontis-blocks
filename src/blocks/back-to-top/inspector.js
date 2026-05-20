@@ -708,7 +708,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                         />
                     )}
 
-
                     {backToTopIconColorSwitcher === "hover" && (
                         <FB_ColorControl
                             label={__("Hover Color", "frontis-blocks")}
@@ -720,7 +719,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                             }
                         />
                     )}
-
                 </PanelBody>
             )}
         </>
