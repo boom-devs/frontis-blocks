@@ -169,7 +169,7 @@ export const presetStyles = {
         }
     },
 };
-    
+
 export const counterNumberPresets = [
     {
         value: 'preset-1',
@@ -261,11 +261,11 @@ export const counterNumberPresets = [
         attributes: Object.entries(presetStyles['preset-4']).map(([label, value]) => ({ label, value })),
         icon: `<svg width="348" height="276" viewBox="0 0 348 276" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
-                    <rect x="94.5128" y="58.5128" width="158.974" height="158.974" rx="79.4872" stroke="#C3C8D2" stroke-width="1.02564"/>
-                    <path d="M173.557 113.91C178.803 113.91 183.057 109.532 183.057 104.13V93.3262H164.057V104.13C164.057 109.532 168.31 113.91 173.557 113.91Z" fill="#404655" stroke="#404655" stroke-width="3.24786" stroke-linejoin="round"/>
-                    <path d="M164.054 106.786V98.8691H157.721C157.721 104.147 160.887 106.786 164.054 106.786ZM183.054 106.786V98.8691H189.387C189.387 104.147 186.221 106.786 183.054 106.786Z" stroke="#404655" stroke-width="3.24786" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M173.557 115.494V118.661" stroke="#404655" stroke-width="3.24786" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M166.432 123.41L169.353 118.66H177.549L180.682 123.41H166.432Z" fill="#404655" stroke="#404655" stroke-width="3.24786" stroke-linejoin="round"/>
+                    <rect x="94.5128" y="58.5128" width="158.974" height="158.974" rx="79.4872" stroke="#C3C8D2" strokeWidth="1.02564"/>
+                    <path d="M173.557 113.91C178.803 113.91 183.057 109.532 183.057 104.13V93.3262H164.057V104.13C164.057 109.532 168.31 113.91 173.557 113.91Z" fill="#404655" stroke="#404655" strokeWidth="3.24786" strokeLinejoin="round"/>
+                    <path d="M164.054 106.786V98.8691H157.721C157.721 104.147 160.887 106.786 164.054 106.786ZM183.054 106.786V98.8691H189.387C189.387 104.147 186.221 106.786 183.054 106.786Z" stroke="#404655" strokeWidth="3.24786" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M173.557 115.494V118.661" stroke="#404655" strokeWidth="3.24786" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M166.432 123.41L169.353 118.66H177.549L180.682 123.41H166.432Z" fill="#404655" stroke="#404655" strokeWidth="3.24786" strokeLinejoin="round"/>
                     <g filter="url(#filter0_d_16980_14870)">
                     <rect x="153" y="146.486" width="42" height="18" rx="9" fill="white"/>
                     </g>
