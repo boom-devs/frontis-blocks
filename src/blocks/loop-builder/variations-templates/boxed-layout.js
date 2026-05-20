@@ -299,6 +299,7 @@ export default
 							dynamicTextEnabled: true,
 							dynamicTextSource: 'current_post',
 							dynamicTextField: 'post_date',
+							dynamicTextDateFormat: 'jS F Y',
 							loopAutoApplied: true,
 							headingTag: 'p',
 							headingAlignment: {
