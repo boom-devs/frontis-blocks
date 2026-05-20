@@ -26,6 +26,7 @@ const generateImageHotspotStyle = (attributes) => {
         imageHotspot_markerBorderRadius: markerBorderRadius,
         imageHotspot_markerBorderRadiusUnits: markerBorderRadiusUnits,
         imageHotspot_markerAnimation: markerAnimation,
+        imageHotspot_containerShadowCssValue: containerShadowCssValue,
         
         // Popover styles
         imageHotspot_popoverBgColor: popoverBgColor,
@@ -175,6 +176,11 @@ const generateImageHotspotStyle = (attributes) => {
                 height: ${normalSize.desktop};
             }
 
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
+                width: ${normalSize.desktop};
+                height: ${normalSize.desktop};
+            }
+
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger:hover {
                 width: ${hoverSize.desktop};
                 height: ${hoverSize.desktop};
@@ -182,6 +188,11 @@ const generateImageHotspotStyle = (attributes) => {
 
             @media only screen and (max-width: 1024px) {
                 .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
+                    width: ${normalSize.tablet};
+                    height: ${normalSize.tablet};
+                }
+
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
                     width: ${normalSize.tablet};
                     height: ${normalSize.tablet};
                 }
@@ -198,6 +209,11 @@ const generateImageHotspotStyle = (attributes) => {
                     height: ${normalSize.mobile};
                 }
 
+                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
+                    width: ${normalSize.mobile};
+                    height: ${normalSize.mobile};
+                }
+
                 .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger:hover {
                     width: ${hoverSize.mobile};
                     height: ${hoverSize.mobile};
@@ -205,6 +221,7 @@ const generateImageHotspotStyle = (attributes) => {
             }
         `;
     }).join('');
+
     const hotspotAnimationStyles = (hotspots || []).map((hotspot) => {
         const animation = hotspot.animation || 'none';
         if (animation === 'none' || hotspot.autoplay === false) {
@@ -264,15 +281,6 @@ const generateImageHotspotStyle = (attributes) => {
                     animation: fb-hotspot-glow-${animationId} ${totalDuration}s ease-out infinite;
                 }
             `,
-            bounce: `
-                @keyframes fb-hotspot-bounce-${animationId} {
-                    0%, ${endPercent}%, 100% { transform: translateY(0); }
-                    ${midPercent}% { transform: translateY(-4px); }
-                }
-                .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].animation-bounce .fb-hotspot-trigger {
-                    animation: fb-hotspot-bounce-${animationId} ${totalDuration}s ease-in-out infinite;
-                }
-            `,
             float: `
                 @keyframes fb-hotspot-float-${animationId} {
                     0%, ${endPercent}%, 100% { transform: translateY(0); }
@@ -287,11 +295,115 @@ const generateImageHotspotStyle = (attributes) => {
         return keyframes[animation] || '';
     }).join('');
 
+    const hotspotPopoverStyles = (hotspots || []).map((hotspot) => {
+        const pos = hotspot.popoverPosition || 'top';
+        const gap = '18px';
+
+        const placements = {
+            top: {
+                position: `left: 50%; bottom: calc(50% + ${gap});`,
+                hiddenTransform: 'translateX(-50%) translateY(8px)',
+                visibleTransform: 'translateX(-50%) translateY(0)',
+                notch: `top: 100%; left: 50%; transform: translateX(-50%); border-color: ${popoverBgColor} transparent transparent transparent;`,
+            },
+            bottom: {
+                position: `left: 50%; top: calc(50% + ${gap});`,
+                hiddenTransform: 'translateX(-50%) translateY(-8px)',
+                visibleTransform: 'translateX(-50%) translateY(0)',
+                notch: `bottom: 100%; left: 50%; transform: translateX(-50%); border-color: transparent transparent ${popoverBgColor} transparent;`,
+            },
+            left: {
+                position: `right: calc(50% + ${gap}); top: 50%;`,
+                hiddenTransform: 'translateY(-50%) translateX(8px)',
+                visibleTransform: 'translateY(-50%) translateX(0)',
+                notch: `top: 50%; left: 100%; transform: translateY(-50%); border-color: transparent transparent transparent ${popoverBgColor};`,
+            },
+            right: {
+                position: `left: calc(50% + ${gap}); top: 50%;`,
+                hiddenTransform: 'translateY(-50%) translateX(-8px)',
+                visibleTransform: 'translateY(-50%) translateX(0)',
+                notch: `top: 50%; right: 100%; transform: translateY(-50%); border-color: transparent ${popoverBgColor} transparent transparent;`,
+            },
+            'top-left': {
+                position: `right: calc(50% + ${gap}); bottom: calc(50% + ${gap});`,
+                hiddenTransform: 'translateY(8px)',
+                visibleTransform: 'translateY(0)',
+            },
+            'top-right': {
+                position: `left: calc(50% + ${gap}); bottom: calc(50% + ${gap});`,
+                hiddenTransform: 'translateY(8px)',
+                visibleTransform: 'translateY(0)',
+            },
+            'bottom-left': {
+                position: `right: calc(50% + ${gap}); top: calc(50% + ${gap});`,
+                hiddenTransform: 'translateY(-8px)',
+                visibleTransform: 'translateY(0)',
+            },
+            'bottom-right': {
+                position: `left: calc(50% + ${gap}); top: calc(50% + ${gap});`,
+                hiddenTransform: 'translateY(-8px)',
+                visibleTransform: 'translateY(0)',
+            },
+        };
+        const placement = placements[pos] || placements.top;
+
+        return `
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover {
+                position: absolute;
+                inset: auto;
+                margin: 0;
+                ${placement.position}
+                transform: ${placement.hiddenTransform};
+                transform-origin: center;
+                background-color: ${popoverBgColor};
+                width: ${popoverWidthValue};
+                padding: ${popoverPaddingValue};
+                border-radius: ${popoverBorderRadiusValue};
+                box-shadow: ${popoverShadow};
+                z-index: 20;
+                display: block;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            }
+
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-popover,
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"].locked .fb-hotspot-popover {
+                opacity: 1;
+                visibility: visible;
+                pointer-events: auto;
+                transform: ${placement.visibleTransform};
+            }
+
+            .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-popover::after {
+                ${placement.notch ? `
+                    content: '';
+                    position: absolute;
+                    inset: auto;
+                    width: 0;
+                    height: 0;
+                    margin: 0;
+                    border-width: 8px;
+                    border-style: solid;
+                    ${placement.notch}
+                ` : `
+                    content: none;
+                    display: none;
+                `}
+            }
+        `;
+    }).join('');
+
     const style = `
         .${blockID} {
             position: relative;
             display: block;
             width: 100%;
+        }
+
+        .${blockID} .fb-hotspot-container {
+            ${containerShadowCssValue ? `box-shadow: ${containerShadowCssValue};` : ''}
         }
 
         .${blockID} .fb-hotspot-base-image {
@@ -305,6 +417,11 @@ const generateImageHotspotStyle = (attributes) => {
             position: absolute;
             transform: translate(-50%, -50%);
             z-index: 10;
+            width: ${markerSizeValue};
+            height: ${markerSizeValue};
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .${blockID} .fb-hotspot-trigger {
@@ -354,39 +471,7 @@ const generateImageHotspotStyle = (attributes) => {
         ${hotspotSizeStyles}
         ${hotspotAnimationStyles}
 
-        .${blockID} .fb-hotspot-popover {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            margin-bottom: 10px;
-            background-color: ${popoverBgColor};
-            width: ${popoverWidthValue};
-            padding: ${popoverPaddingValue};
-            border-radius: ${popoverBorderRadiusValue};
-            box-shadow: ${popoverShadow};
-            z-index: 20;
-            display: none;
-        }
-
-        .${blockID} .fb-hotspot-marker:hover .fb-hotspot-popover {
-            display: block;
-        }
-
-        .${blockID} .fb-hotspot-marker.locked .fb-hotspot-popover {
-            display: block;
-        }
-
-        .${blockID} .fb-hotspot-popover::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border-width: 8px;
-            border-style: solid;
-            border-color: ${popoverBgColor} transparent transparent transparent;
-        }
+        ${hotspotPopoverStyles}
 
         .${blockID} .fb-hotspot-popover-title {
             font-family: ${titleFontFamily || 'inherit'};
@@ -419,6 +504,11 @@ const generateImageHotspotStyle = (attributes) => {
                 height: ${markerSizeTablet};
                 border-width: ${markerBorderWidthTablet};
                 border-radius: ${markerBorderRadiusTablet};
+            }
+
+            .${blockID} .fb-hotspot-marker {
+                width: ${markerSizeTablet};
+                height: ${markerSizeTablet};
             }
 
             .${blockID} .fb-hotspot-popover {
@@ -454,6 +544,11 @@ const generateImageHotspotStyle = (attributes) => {
                 height: ${markerSizeMobile};
                 border-width: ${markerBorderWidthMobile};
                 border-radius: ${markerBorderRadiusMobile};
+            }
+
+            .${blockID} .fb-hotspot-marker {
+                width: ${markerSizeMobile};
+                height: ${markerSizeMobile};
             }
 
             .${blockID} .fb-hotspot-popover {

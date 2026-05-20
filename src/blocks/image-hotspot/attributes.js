@@ -54,6 +54,14 @@ const attributes = {
 		type: "string", 
 		default: "Desktop" 
 	},
+	imageHotspot_containerShadowValues: {
+		type: "array",
+		default: [0, 0, 0, 0, '', '#00000000']
+	},
+	imageHotspot_containerShadowCssValue: {
+		type: "string",
+		default: ""
+	},
 
 	// Hotspot marker styles
 	imageHotspot_markerSize: { 
@@ -178,6 +186,34 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	imageHotspot_popoverPaddingDesktop: { 
+		type: "object", 
+		default: { top: '', 
+			right: '', 
+			bottom: '', 
+			left: '' 
+		} 
+	},
+	imageHotspot_popoverPaddingTablet: { 
+		type: "object", 
+		default: { top: '', 
+			right: '', 
+			bottom: '', 
+			left: '' 
+		} 
+	},
+	imageHotspot_popoverPaddingMobile: { 
+		type: "object", 
+		default: { top: '', 
+			right: '', 
+			bottom: '', 
+			left: '' 
+		} 
+	},
+	imageHotspot_popoverPaddingLink: { 
+		type: "boolean", 
+		default: true 
+	},
 	imageHotspot_popoverBorderRadius: { 
 		type: "object", 
 		default: {
@@ -200,7 +236,7 @@ const attributes = {
 	},
 	imageHotspot_popoverShadowValues: {
 		type: "object",
-		default: {}
+		default: [0, 4, 12, 0, '', 'rgba(0,0,0,0.15)']
 	},
 	imageHotspot_popoverShadowCssValue: {
 		type: "string",
@@ -305,6 +341,90 @@ const attributes = {
 			Tablet: 'px',
 			Mobile: 'px'
 		}
+	},
+
+	// Title additional typography (missing from current attributes)
+	imageHotspot_titleTextTransform: { 
+		type: "string", 
+		default: "none" 
+	},
+	imageHotspot_titleTextDecoration: { 
+		type: "string", 
+		default: "none" 
+	},
+	imageHotspot_titleLetterSpacing: { 
+		type: "object", 
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		} 
+	},
+	imageHotspot_titleLetterSpacingUnits: { 
+		type: "object", 
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		} 
+	},
+	imageHotspot_titleLineHeight: { 
+		type: "object", 
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		} 
+	},
+	imageHotspot_titleLineHeightUnits: { 
+		type: "object", 
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		} 
+	},
+
+	// Description additional typography (missing from current attributes)
+	imageHotspot_descTextTransform: { 
+		type: "string", 
+		default: "none" 
+	},
+	imageHotspot_descTextDecoration: { 
+		type: "string", 
+		default: "none" 
+	},
+	imageHotspot_descLetterSpacing: { 
+		type: "object", 
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		} 
+	},
+	imageHotspot_descLetterSpacingUnits: { 
+		type: "object", 
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		} 
+	},
+	imageHotspot_descLineHeight: { 
+		type: "object", 
+		default: {
+			Desktop: '',
+			Tablet: '',
+			Mobile: ''
+		} 
+	},
+	imageHotspot_descLineHeightUnits: { 
+		type: "object", 
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		} 
 	},
 
 	// Icon styles

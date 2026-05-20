@@ -23,53 +23,106 @@ import FB_BoxShadowControl from '../../components/box-shadow';
 import { useDeviceType } from '@Config/displayType';
 
 export default function Inspector({ attributes, setAttributes }) {
-  const { 
-    imageHotspot_imageUrl: imageUrl, 
-    imageHotspot_imageId: imageId, 
-    imageHotspot_imageAlt: imageAlt, 
-    imageHotspot_imageSize: imageSize,
-    imageHotspot_imageHeight: imageHeight,
-    imageHotspot_imageHeightUnits: imageHeightUnits,
+  const {
+    // Image
+    imageHotspot_imageUrl,
+    imageHotspot_imageId,
+    imageHotspot_imageAlt,
+    imageHotspot_imageSize,
+    imageHotspot_imageHeight,
+    imageHotspot_imageHeightUnits,
 
-    imageHotspot_hotspots: hotspots, 
-    imageHotspot_selectedHotspotId: selectedHotspotId,
+    // Hotspots
+    imageHotspot_hotspots,
+    imageHotspot_selectedHotspotId,
 
+    // Marker styles
     imageHotspot_markerSize,
     imageHotspot_markerSizeUnits,
     imageHotspot_markerHoverSize,
     imageHotspot_markerHoverSizeUnits,
+    imageHotspot_markerColorSwitcher,
+    imageHotspot_markerSizeSwitcher,
+    imageHotspot_containerShadowCssValue,
 
-    imageHotspot_iconColorSwitcher: iconColorSwitcher,
-    imageHotspot_markerColorSwitcher: markerColorSwitcher,
-    imageHotspot_markerSizeSwitcher: markerSizeSwitcher,
+    // Icon styles
+    imageHotspot_iconColorSwitcher,
 
+    // Title typography
+    imageHotspot_titleFontFamily,
+    imageHotspot_titleFontSize,
+    imageHotspot_titleFontSizeUnits,
+    imageHotspot_titleFontWeight,
+    imageHotspot_titleFontStyle,
+    imageHotspot_titleTextTransform,
+    imageHotspot_titleTextDecoration,
+    imageHotspot_titleLetterSpacing,
+    imageHotspot_titleLetterSpacingUnits,
+    imageHotspot_titleLineHeight,
+    imageHotspot_titleLineHeightUnits,
+
+    // Description typography
+    imageHotspot_descFontFamily,
+    imageHotspot_descFontSize,
+    imageHotspot_descFontSizeUnits,
+    imageHotspot_descFontWeight,
+    imageHotspot_descFontStyle,
+    imageHotspot_descTextTransform,
+    imageHotspot_descTextDecoration,
+    imageHotspot_descLetterSpacing,
+    imageHotspot_descLetterSpacingUnits,
+    imageHotspot_descLineHeight,
+    imageHotspot_descLineHeightUnits,
+
+    // Padding
     imageHotspotPaddingUnits,
     imageHotspotPaddingDesktop,
     imageHotspotPaddingTablet,
     imageHotspotPaddingMobile,
     imageHotspotPaddingLink,
+    imageHotspot_popoverPaddingUnits,
+    imageHotspot_popoverPaddingDesktop,
+    imageHotspot_popoverPaddingTablet,
+    imageHotspot_popoverPaddingMobile,
+    imageHotspot_popoverPaddingLink,
+
+    // Margin
     imageHotspotMarginUnits,
     imageHotspotMarginDesktop,
     imageHotspotMarginTablet,
     imageHotspotMarginMobile,
     imageHotspotMarginLink,
+
+    // Border
     imageHotspotBorderUnits,
     imageHotspotBorderDesktop,
     imageHotspotBorderTablet,
     imageHotspotBorderMobile,
     imageHotspotBorderLink,
+
+    // Border Radius
     imageHotspotBorderRadiusUnits,
     imageHotspotBorderRadiusDesktop,
     imageHotspotBorderRadiusTablet,
     imageHotspotBorderRadiusMobile,
     imageHotspotBorderRadiusLink,
+
+    // Responsive
+    imageHotspotDesktopSwitcher,
+    imageHotspotTabletSwitcher,
+    imageHotspotMobileSwitcher,
+
+    // Custom CSS
+    imageHotspot_customCSS,
+
+    imageHotspot_containerShadowValues,
+    imageHotspot_popoverShadowValues
   } = attributes;
 
   const deviceType = useDeviceType();
 
-  // Image Hotspot Padding (skeleton converted)
+  // Padding handlers
   const imageHotspotPaddingUnitsChange = (event, position) => {
-    // Convert from Google Map to Image Hotspot
     const value = event.target.value;
     if (imageHotspotPaddingLink) {
       switch (deviceType) {
@@ -120,9 +173,7 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const imageHotspotPaddingLinkBtn = () => {
-    setAttributes({
-      imageHotspotPaddingLink: !imageHotspotPaddingLink
-    });
+    setAttributes({ imageHotspotPaddingLink: !imageHotspotPaddingLink });
   };
 
   const imageHotspotPaddingUnitsHandler = (unit) => {
@@ -134,7 +185,76 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
-  // Image Hotspot Margin (skeleton converted)
+  const imageHotspot_popoverPaddingUnitsChange = (event, position) => {
+    const value = event.target.value;
+    if (imageHotspot_popoverPaddingLink) {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspot_popoverPaddingDesktop: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspot_popoverPaddingTablet: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspot_popoverPaddingMobile: {
+              top: value,
+              right: value,
+              bottom: value,
+              left: value
+            }
+          });
+          break;
+      }
+    } else {
+      switch (deviceType) {
+        case 'Desktop':
+          setAttributes({
+            imageHotspot_popoverPaddingDesktop: {
+              ...imageHotspot_popoverPaddingDesktop,
+              [position]: value
+            }
+          });
+          break;
+        case 'Tablet':
+          setAttributes({
+            imageHotspot_popoverPaddingTablet: {
+              ...imageHotspot_popoverPaddingTablet,
+              [position]: value
+            }
+          });
+          break;
+        case 'Mobile':
+          setAttributes({
+            imageHotspot_popoverPaddingMobile: {
+              ...imageHotspot_popoverPaddingMobile,
+              [position]: value
+            }
+          });
+          break;
+      }
+    }
+  };
+
+  const imageHotspot_popoverPaddingLinkBtn = () => {
+    setAttributes({ imageHotspot_popoverPaddingLink: !imageHotspot_popoverPaddingLink });
+  };
+
+  // Margin handlers
   const imageHotspotMarginUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotMarginLink) {
@@ -186,9 +306,7 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const imageHotspotMarginLinkBtn = () => {
-    setAttributes({
-      imageHotspotMarginLink: !imageHotspotMarginLink
-    });
+    setAttributes({ imageHotspotMarginLink: !imageHotspotMarginLink });
   };
 
   const imageHotspotMarginUnitsHandler = (unit) => {
@@ -200,7 +318,7 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
-  // Image Hotspot Border Radius
+  // Border handlers
   const imageHotspotBorderUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotBorderLink) {
@@ -252,9 +370,7 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const imageHotspotBorderLinkBtn = () => {
-    setAttributes({
-      imageHotspotBorderLink: !imageHotspotBorderLink
-    });
+    setAttributes({ imageHotspotBorderLink: !imageHotspotBorderLink });
   };
 
   const imageHotspotBorderUnitsHandler = (unit) => {
@@ -266,7 +382,7 @@ export default function Inspector({ attributes, setAttributes }) {
     });
   };
 
-  // Image Hotspot Border Radius (for the container)
+  // Border Radius handlers
   const imageHotspotBorderRadiusUnitsChange = (event, position) => {
     const value = event.target.value;
     if (imageHotspotBorderRadiusLink) {
@@ -318,9 +434,7 @@ export default function Inspector({ attributes, setAttributes }) {
   };
 
   const imageHotspotBorderRadiusLinkBtn = () => {
-    setAttributes({
-      imageHotspotBorderRadiusLink: !imageHotspotBorderRadiusLink
-    });
+    setAttributes({ imageHotspotBorderRadiusLink: !imageHotspotBorderRadiusLink });
   };
 
   const imageHotspotBorderRadiusUnitsHandler = (unit) => {
@@ -331,12 +445,12 @@ export default function Inspector({ attributes, setAttributes }) {
       }
     });
   };
-  
-  let latestHotspots = hotspots || [];
-  const selectedHotspot = latestHotspots.find(h => h.id === selectedHotspotId);
+
+  let latestHotspots = imageHotspot_hotspots || [];
+  const selectedHotspot = latestHotspots.find(h => h.id === imageHotspot_selectedHotspotId);
 
   const addHotspot = () => {
-    const hotspotNumber = (hotspots?.length || 0) + 1;
+    const hotspotNumber = (imageHotspot_hotspots?.length || 0) + 1;
     const newHotspot = {
       id: Date.now().toString(),
       x: 50,
@@ -357,23 +471,24 @@ export default function Inspector({ attributes, setAttributes }) {
       markerSizeUnits: imageHotspot_markerSizeUnits,
       markerHoverSize: imageHotspot_markerHoverSize,
       markerHoverSizeUnits: imageHotspot_markerHoverSizeUnits,
+      popoverPosition: 'top',
     };
     setAttributes({ 
-      imageHotspot_hotspots: [...(hotspots || []), newHotspot],
+      imageHotspot_hotspots: [...(imageHotspot_hotspots || []), newHotspot],
       imageHotspot_selectedHotspotId: newHotspot.id
     });
   };
 
   const updateHotspot = (field, value) => {
     const updated = latestHotspots.map(h =>
-      h.id === selectedHotspotId ? { ...h, [field]: value } : h
+      h.id === imageHotspot_selectedHotspotId ? { ...h, [field]: value } : h
     );
     latestHotspots = updated;
     setAttributes({ imageHotspot_hotspots: updated });
   };
 
   const deleteHotspot = () => {
-    const filtered = latestHotspots.filter(h => h.id !== selectedHotspotId);
+    const filtered = latestHotspots.filter(h => h.id !== imageHotspot_selectedHotspotId);
     setAttributes({ 
       imageHotspot_hotspots: filtered,
       imageHotspot_selectedHotspotId: filtered[0]?.id || null
@@ -385,28 +500,28 @@ export default function Inspector({ attributes, setAttributes }) {
       <PanelBody title={__("Image", "frontis-blocks")} initialOpen={true}>
         <FB_ImageControl
           label={__("Select Image", "frontis-blocks")}
-          globalImageUrl={imageUrl}
+          globalImageUrl={imageHotspot_imageUrl}
           setglobalImageUrl={(url) => setAttributes({ imageHotspot_imageUrl: url })}
-          globalImageAlt={imageAlt}
+          globalImageAlt={imageHotspot_imageAlt}
           setglobalImageAlt={(alt) => setAttributes({ imageHotspot_imageAlt: alt })}
-          globalImageID={imageId}
+          globalImageID={imageHotspot_imageId}
           setglobalImageID={(id) => setAttributes({ imageHotspot_imageId: id })}
-          globalImageSize={imageSize}
+          globalImageSize={imageHotspot_imageSize}
           setglobalImageSize={(size) => setAttributes({ imageHotspot_imageSize: size })}
           isImageSize={true}
         />
         <FB_Range
           label={__("Image Height", "frontis-blocks")}
-          rangeValue={imageHeight}
+          rangeValue={imageHotspot_imageHeight}
           onChangeHandler={(value) => setAttributes({ imageHotspot_imageHeight: value })}
           rangeUnitHandler={(unit) => setAttributes({ 
             imageHotspot_imageHeightUnits: { 
-              ...imageHeightUnits, 
+              ...imageHotspot_imageHeightUnits, 
               [deviceType]: unit 
             } 
           })}
           deviceType={deviceType}
-          units={imageHeightUnits}
+          units={imageHotspot_imageHeightUnits}
           min={100}
           max={2000}
           rangeStep={1}
@@ -421,10 +536,10 @@ export default function Inspector({ attributes, setAttributes }) {
         
         <SelectControl
           label={__("Select Hotspot", "frontis-blocks")}
-          value={selectedHotspotId || ''}
+          value={imageHotspot_selectedHotspotId || ''}
           options={[
             { label: __('Select a hotspot', 'frontis-blocks'), value: '' },
-            ...hotspots.map((h, index) => ({
+            ...imageHotspot_hotspots.map((h, index) => ({
               label: h.title || `Hotspot ${index + 1} (${h.x}%, ${h.y}%)`,
               value: h.id
             }))
@@ -432,10 +547,10 @@ export default function Inspector({ attributes, setAttributes }) {
           onChange={(value) => setAttributes({ imageHotspot_selectedHotspotId: value })}
         />
         
-        {hotspots?.length > 0 && (
+        {imageHotspot_hotspots?.length > 0 && (
           <PanelRow>
             <small>
-              {__('Total hotspots: ', 'frontis-blocks')}{hotspots.length} | 
+              {__('Total hotspots: ', 'frontis-blocks')}{imageHotspot_hotspots.length} | 
               {__(' Click any dot on image to select', 'frontis-blocks')}
             </small>
           </PanelRow>
@@ -472,6 +587,22 @@ export default function Inspector({ attributes, setAttributes }) {
                   setglobalImageID={(id) => updateHotspot('popoverImageId', id)}
                   isImageSize={false}
               />
+
+              <SelectControl
+                  label={__("Popover Position", "frontis-blocks")}
+                  value={selectedHotspot.popoverPosition || 'top'}
+                  options={[
+                      { label: __('Top', 'frontis-blocks'), value: 'top' },
+                      { label: __('Bottom', 'frontis-blocks'), value: 'bottom' },
+                      { label: __('Left', 'frontis-blocks'), value: 'left' },
+                      { label: __('Right', 'frontis-blocks'), value: 'right' },
+                      { label: __('Top Left', 'frontis-blocks'), value: 'top-left' },
+                      { label: __('Top Right', 'frontis-blocks'), value: 'top-right' },
+                      { label: __('Bottom Left', 'frontis-blocks'), value: 'bottom-left' },
+                      { label: __('Bottom Right', 'frontis-blocks'), value: 'bottom-right' },
+                  ]}
+                  onChange={(value) => updateHotspot('popoverPosition', value)}
+              />
               
               <p className="fb-hotspot-control-label">{__("Marker Icon", "frontis-blocks")}</p>
               <FBIconPicker
@@ -488,7 +619,6 @@ export default function Inspector({ attributes, setAttributes }) {
                       { label: __('None', 'frontis-blocks'), value: 'none' },
                       { label: __('Pulse', 'frontis-blocks'), value: 'pulse' },
                       { label: __('Glow', 'frontis-blocks'), value: 'glow' },
-                      { label: __('Bounce', 'frontis-blocks'), value: 'bounce' },
                       { label: __('Float', 'frontis-blocks'), value: 'float' },
                   ]}
                   onChange={(value) => updateHotspot('animation', value)}
@@ -553,11 +683,11 @@ export default function Inspector({ attributes, setAttributes }) {
               </h3>
               <FB_SwitcherControl
                   label={__("Marker Size", "frontis-blocks")}
-                  globalSwitcher={markerSizeSwitcher}
+                  globalSwitcher={imageHotspot_markerSizeSwitcher}
                   setGlobalSwitcher={(value) => setAttributes({ imageHotspot_markerSizeSwitcher: value })}
               />
 
-              {markerSizeSwitcher === 'normal' && (
+              {imageHotspot_markerSizeSwitcher === 'normal' && (
                   <FB_Range
                       label={__("Size", "frontis-blocks")}
                       rangeValue={selectedHotspot.markerSize || imageHotspot_markerSize}
@@ -575,7 +705,7 @@ export default function Inspector({ attributes, setAttributes }) {
                   />
               )}
 
-              {markerSizeSwitcher === 'hover' && (
+              {imageHotspot_markerSizeSwitcher === 'hover' && (
                   <FB_Range
                       label={__("Hover Size", "frontis-blocks")}
                       rangeValue={selectedHotspot.markerHoverSize || imageHotspot_markerHoverSize}
@@ -595,11 +725,11 @@ export default function Inspector({ attributes, setAttributes }) {
 
               <FB_SwitcherControl
                   label={__("Marker Color", "frontis-blocks")}
-                  globalSwitcher={markerColorSwitcher}
+                  globalSwitcher={imageHotspot_markerColorSwitcher}
                   setGlobalSwitcher={(value) => setAttributes({ imageHotspot_markerColorSwitcher: value })}
               />
 
-              {markerColorSwitcher === 'normal' && (
+              {imageHotspot_markerColorSwitcher === 'normal' && (
                   <FB_ColorControl
                       label={__("Color", "frontis-blocks")}
                       globalColor={selectedHotspot.backgroundColor || '#011f4b'}
@@ -607,7 +737,7 @@ export default function Inspector({ attributes, setAttributes }) {
                   />
               )}
 
-              {markerColorSwitcher === 'hover' && (
+              {imageHotspot_markerColorSwitcher === 'hover' && (
                   <FB_ColorControl
                       label={__("Hover Color", "frontis-blocks")}
                       globalColor={selectedHotspot.hoverBackgroundColor || ''}
@@ -616,11 +746,11 @@ export default function Inspector({ attributes, setAttributes }) {
               )}
               <FB_SwitcherControl
                   label={__("Marker Icon Color", "frontis-blocks")}
-                  globalSwitcher={iconColorSwitcher}
+                  globalSwitcher={imageHotspot_iconColorSwitcher}
                   setGlobalSwitcher={(value) => setAttributes({ imageHotspot_iconColorSwitcher: value })}
               />
 
-              {iconColorSwitcher === 'normal' && (
+              {imageHotspot_iconColorSwitcher === 'normal' && (
                   <FB_ColorControl
                       label={__("Icon Color", "frontis-blocks")}
                       globalColor={selectedHotspot.iconColor || '#ffffff'}
@@ -628,7 +758,7 @@ export default function Inspector({ attributes, setAttributes }) {
                   />
               )}
 
-              {iconColorSwitcher === 'hover' && (
+              {imageHotspot_iconColorSwitcher === 'hover' && (
                   <FB_ColorControl
                       label={__("Icon Hover Color", "frontis-blocks")}
                       globalColor={selectedHotspot.iconHoverColor || ''}
@@ -648,15 +778,80 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const styleControls = (
     <>
-      <PanelBody title={__("Popover Typography", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("Typography", "frontis-blocks")} initialOpen={true}>
         <FB_TypographyControl
-          label={__("Popover Typography", "frontis-blocks")}
+          label={__("Title Typography", "frontis-blocks")}
           deviceType={deviceType}
           setAttributes={setAttributes}
+          
+          fontFamily={imageHotspot_titleFontFamily}
+          onChangeFontFamily={(value) => setAttributes({ imageHotspot_titleFontFamily: value })}
+          
+          fontSize={imageHotspot_titleFontSize}
+          onChangeFontSize={(value) => setAttributes({ imageHotspot_titleFontSize: value })}
+          fontSizeUnits={imageHotspot_titleFontSizeUnits}
+          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspot_titleFontSizeUnits: value })}
+          
+          fontWeight={imageHotspot_titleFontWeight}
+          onChangeFontWeight={(value) => setAttributes({ imageHotspot_titleFontWeight: value })}
+          
+          fontStyle={imageHotspot_titleFontStyle}
+          onChangeFontStyle={(value) => setAttributes({ imageHotspot_titleFontStyle: value })}
+          
+          textTransform={imageHotspot_titleTextTransform}
+          onChangeTextTransform={(value) => setAttributes({ imageHotspot_titleTextTransform: value })}
+          
+          textDecoration={imageHotspot_titleTextDecoration}
+          onChangeTextDecoration={(value) => setAttributes({ imageHotspot_titleTextDecoration: value })}
+          
+          letterSpacing={imageHotspot_titleLetterSpacing}
+          onChangeLetterSpacing={(value) => setAttributes({ imageHotspot_titleLetterSpacing: value })}
+          letterSpacingUnits={imageHotspot_titleLetterSpacingUnits}
+          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspot_titleLetterSpacingUnits: value })}
+          
+          lineHeight={imageHotspot_titleLineHeight}
+          onChangeLineHeight={(value) => setAttributes({ imageHotspot_titleLineHeight: value })}
+          lineHeightUnits={imageHotspot_titleLineHeightUnits}
+          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspot_titleLineHeightUnits: value })}
+        />
+        <FB_TypographyControl
+          label={__("Description Typography", "frontis-blocks")}
+          deviceType={deviceType}
+          setAttributes={setAttributes}
+          
+          fontFamily={imageHotspot_descFontFamily}
+          onChangeFontFamily={(value) => setAttributes({ imageHotspot_descFontFamily: value })}
+          
+          fontSize={imageHotspot_descFontSize}
+          onChangeFontSize={(value) => setAttributes({ imageHotspot_descFontSize: value })}
+          fontSizeUnits={imageHotspot_descFontSizeUnits}
+          onChangeFontSizeUnit={(value) => setAttributes({ imageHotspot_descFontSizeUnits: value })}
+          
+          fontWeight={imageHotspot_descFontWeight}
+          onChangeFontWeight={(value) => setAttributes({ imageHotspot_descFontWeight: value })}
+          
+          fontStyle={imageHotspot_descFontStyle}
+          onChangeFontStyle={(value) => setAttributes({ imageHotspot_descFontStyle: value })}
+          
+          textTransform={imageHotspot_descTextTransform}
+          onChangeTextTransform={(value) => setAttributes({ imageHotspot_descTextTransform: value })}
+          
+          textDecoration={imageHotspot_descTextDecoration}
+          onChangeTextDecoration={(value) => setAttributes({ imageHotspot_descTextDecoration: value })}
+          
+          letterSpacing={imageHotspot_descLetterSpacing}
+          onChangeLetterSpacing={(value) => setAttributes({ imageHotspot_descLetterSpacing: value })}
+          letterSpacingUnits={imageHotspot_descLetterSpacingUnits}
+          onChangeLetterSpacingUnit={(value) => setAttributes({ imageHotspot_descLetterSpacingUnits: value })}
+          
+          lineHeight={imageHotspot_descLineHeight}
+          onChangeLineHeight={(value) => setAttributes({ imageHotspot_descLineHeight: value })}
+          lineHeightUnits={imageHotspot_descLineHeightUnits}
+          onChangeLineHeightUnit={(value) => setAttributes({ imageHotspot_descLineHeightUnits: value })}
         />
       </PanelBody>
 
-      <PanelBody title={__("Padding", "frontis-blocks")} initialOpen={false}>
+      <PanelBody title={__("Padding & Margin", "frontis-blocks")} initialOpen={false}>
         <FB_Spacing
           label={__("Padding", "frontis-blocks")}
           deviceType={deviceType}
@@ -670,9 +865,26 @@ export default function Inspector({ attributes, setAttributes }) {
           spacingCombineBtnHandler={imageHotspotPaddingLinkBtn}
           setAttributes={setAttributes}
         />
-      </PanelBody>
-
-      <PanelBody title={__("Margin", "frontis-blocks")} initialOpen={false}>
+        <FB_Spacing
+          label={__("Popover Padding", "frontis-blocks")}
+          deviceType={deviceType}
+          spacingUnitsHandler={(unit) => setAttributes({
+            imageHotspot_popoverPaddingUnits: {
+              ...imageHotspot_popoverPaddingUnits,
+              [deviceType]: unit
+            }
+          })}
+          spacingUnits={imageHotspot_popoverPaddingUnits}
+          spacingDesktop={imageHotspot_popoverPaddingDesktop}
+          spacingTablet={imageHotspot_popoverPaddingTablet}
+          spacingMobile={imageHotspot_popoverPaddingMobile}
+          handleSpacingUnitHandler={imageHotspot_popoverPaddingUnitsChange}
+          spacingCombineBtn={imageHotspot_popoverPaddingLink}
+          spacingCombineBtnHandler={() => setAttributes({
+            imageHotspot_popoverPaddingLink: !imageHotspot_popoverPaddingLink
+          })}
+          setAttributes={setAttributes}
+        />
         <FB_Spacing
           label={__("Margin", "frontis-blocks")}
           deviceType={deviceType}
@@ -688,7 +900,7 @@ export default function Inspector({ attributes, setAttributes }) {
         />
       </PanelBody>
 
-      <PanelBody title={__("Border", "frontis-blocks")} initialOpen={false}>
+      <PanelBody title={__("Border & Box Shadow", "frontis-blocks")} initialOpen={false}>
         <FB_Spacing
           label={__("Border", "frontis-blocks")}
           deviceType={deviceType}
@@ -718,9 +930,15 @@ export default function Inspector({ attributes, setAttributes }) {
         />
 
         <FB_BoxShadowControl
+            label={__("Box Shadow", "frontis-blocks")}
+            onBoxShadowChange={(value) => setAttributes({ imageHotspot_containerShadowValues: value })}
+            initialShadowValue={imageHotspot_containerShadowValues}
+            onBoxShadowStyleChange={(value) => setAttributes({ imageHotspot_containerShadowCssValue: value })}
+        />
+        <FB_BoxShadowControl
           label={__("Popover Shadow", "frontis-blocks")}
           onBoxShadowChange={(value) => setAttributes({ imageHotspot_popoverShadowValues: value })}
-          initialShadowValue={attributes.imageHotspot_popoverShadowValues}
+          initialShadowValue={imageHotspot_popoverShadowValues}
           onBoxShadowStyleChange={(value) =>
             setAttributes({
               imageHotspot_popoverShadowCssValue: value,
@@ -736,18 +954,18 @@ export default function Inspector({ attributes, setAttributes }) {
     <>
       <PanelBody title={__("Responsive Control", "frontis-blocks")} initialOpen={false}>
         <FB_VisibilityControl
-          desktopValue={attributes.imageHotspotDesktopSwitcher}
+          desktopValue={imageHotspotDesktopSwitcher}
           setDesktopValue={(value) => setAttributes({ imageHotspotDesktopSwitcher: value })}
-          tabletValue={attributes.imageHotspotTabletSwitcher}
+          tabletValue={imageHotspotTabletSwitcher}
           setTabletValue={(value) => setAttributes({ imageHotspotTabletSwitcher: value })}
-          mobileValue={attributes.imageHotspotMobileSwitcher}
+          mobileValue={imageHotspotMobileSwitcher}
           setMobileValue={(value) => setAttributes({ imageHotspotMobileSwitcher: value })}
         />
       </PanelBody>
 
       <PanelBody title={__("Custom CSS", "frontis-blocks")} initialOpen={false}>
         <FB_CustomCSSEditor
-          value={attributes.imageHotspot_customCSS}
+          value={imageHotspot_customCSS}
           onChangeValue={(value) => setAttributes({ imageHotspot_customCSS: value })}
         />
       </PanelBody>
