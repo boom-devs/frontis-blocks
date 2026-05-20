@@ -147,11 +147,6 @@
     100% { transform: scale(1.6); opacity: 0; }
 }
 
-@keyframes fb-hotspot-bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-}
-
 @keyframes fb-hotspot-float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-4px); }
@@ -191,10 +186,6 @@
 
 .fb-hotspot-marker.animation-glow .fb-hotspot-trigger {
     animation: none;
-}
-
-.fb-hotspot-marker.animation-bounce .fb-hotspot-trigger {
-    animation: fb-hotspot-bounce calc(var(--fb-hotspot-animation-interval, 2s) + 2.2s) ease-in-out infinite;
 }
 
 .fb-hotspot-marker.animation-float .fb-hotspot-trigger {

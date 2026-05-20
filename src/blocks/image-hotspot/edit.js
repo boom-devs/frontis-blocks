@@ -16,6 +16,8 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     imageHotspot_hotspots: hotspots, 
     imageHotspot_selectedHotspotId: selectedHotspotId,
     blockID,
+    imageHotspot_markerSize,
+    imageHotspot_markerSizeUnits
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -96,8 +98,8 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
             {hotspots?.map((hotspot) => !isHidden(hotspot) && (
               (() => {
                 const markerSize = getDeviceSize(
-                  hotspot.markerSize || attributes.imageHotspot_markerSize,
-                  hotspot.markerSizeUnits || attributes.imageHotspot_markerSizeUnits
+                  hotspot.markerSize || imageHotspot_markerSize,
+                  hotspot.markerSizeUnits || imageHotspot_markerSizeUnits
                 );
 
                 return (
@@ -105,6 +107,7 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                 key={hotspot.id}
                 className={`fb-hotspot-marker ${selectedHotspotId === hotspot.id ? 'selected' : ''} animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
                 data-hotspot-id={hotspot.id}
+                data-popover-position={hotspot.popoverPosition || 'top'}
                 style={{
                   left: `${hotspot.x}%`,
                   top: `${hotspot.y}%`,

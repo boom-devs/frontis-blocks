@@ -40,6 +40,7 @@ export default function Save({ attributes }) {
                   key={hotspot.id}
                   className={`fb-hotspot-marker animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
                   data-hotspot-id={hotspot.id}
+                  data-popover-position={hotspot.popoverPosition || 'top'}
                   style={{
                     left: `${hotspot.x}%`,
                     top: `${hotspot.y}%`,
