@@ -24,14 +24,12 @@ export default function Save({ attributes }) {
 
   return (
     <>
-      <style>{blockStyling}</style>
       <div {...useBlockProps.save({ className: `${blockID} ${imageHotspotDesktopSwitcher && 'fb-desktop-responsive'} ${imageHotspotTabletSwitcher && 'fb-tablet-responsive'} ${imageHotspotMobileSwitcher && 'fb-mobile-responsive'}` })}>
         <div className="fb-hotspot-container">
             <img 
               src={imageUrl} 
               alt={imageAlt || __('Hotspot Image', 'frontis-blocks')}
               className="fb-hotspot-base-image"
-              style={{ objectFit: imageSize || 'cover' }}
             />
             
             {hotspots?.map((hotspot) => {
@@ -41,23 +39,9 @@ export default function Save({ attributes }) {
                   className={`fb-hotspot-marker animation-${hotspot.autoplay === false ? 'none' : hotspot.animation || 'none'}`}
                   data-hotspot-id={hotspot.id}
                   data-popover-position={hotspot.popoverPosition || 'top'}
-                  style={{
-                    left: `${hotspot.x}%`,
-                    top: `${hotspot.y}%`,
-                    '--fb-hotspot-animation-interval': `${hotspot.animationInterval || 2}s`
-                  }}
                 >
-                  <div 
-                    className="fb-hotspot-trigger"
-                    style={{
-                      backgroundColor: hotspot.backgroundColor || '#011f4b',
-                      color: hotspot.backgroundColor || '#011f4b'
-                    }}
-                  >
-                    <span 
-                        className="fb-hotspot-icon"
-                        style={{ color: hotspot.iconColor || '#ffffff' }}
-                    >
+                  <div className="fb-hotspot-trigger">
+                    <span className="fb-hotspot-icon">
                         {renderSVG(hotspot.icon || 'plus')}
                     </span>
                   </div>
