@@ -19,7 +19,7 @@ export default function RowSortableItem({ id, rowItem, handleChangeItem, handleD
 
     const TrashIcon = (
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path d="M9.82692 6L9.59615 12M6.40385 12L6.17308 6M12.8184 3.86038C13.0464 3.89481 13.2736 3.93165 13.5 3.97086M12.8184 3.86038L12.1065 13.115C12.0464 13.8965 11.3948 14.5 10.611 14.5H5.38905C4.60524 14.5 3.95358 13.8965 3.89346 13.115L3.18157 3.86038M12.8184 3.86038C12.0542 3.74496 11.281 3.65657 10.5 3.59622M2.5 3.97086C2.72638 3.93165 2.95358 3.89481 3.18157 3.86038M3.18157 3.86038C3.94585 3.74496 4.719 3.65657 5.5 3.59622M10.5 3.59622V2.98546C10.5 2.19922 9.8929 1.54282 9.10706 1.51768C8.73948 1.50592 8.37043 1.5 8 1.5C7.62957 1.5 7.26052 1.50592 6.89294 1.51768C6.1071 1.54282 5.5 2.19922 5.5 2.98546V3.59622M10.5 3.59622C9.67504 3.53247 8.84131 3.5 8 3.5C7.15869 3.5 6.32496 3.53247 5.5 3.59622" stroke="#0F172A" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M9.82692 6L9.59615 12M6.40385 12L6.17308 6M12.8184 3.86038C13.0464 3.89481 13.2736 3.93165 13.5 3.97086M12.8184 3.86038L12.1065 13.115C12.0464 13.8965 11.3948 14.5 10.611 14.5H5.38905C4.60524 14.5 3.95358 13.8965 3.89346 13.115L3.18157 3.86038M12.8184 3.86038C12.0542 3.74496 11.281 3.65657 10.5 3.59622M2.5 3.97086C2.72638 3.93165 2.95358 3.89481 3.18157 3.86038M3.18157 3.86038C3.94585 3.74496 4.719 3.65657 5.5 3.59622M10.5 3.59622V2.98546C10.5 2.19922 9.8929 1.54282 9.10706 1.51768C8.73948 1.50592 8.37043 1.5 8 1.5C7.62957 1.5 7.26052 1.50592 6.89294 1.51768C6.1071 1.54282 5.5 2.19922 5.5 2.98546V3.59622M10.5 3.59622C9.67504 3.53247 8.84131 3.5 8 3.5C7.15869 3.5 6.32496 3.53247 5.5 3.59622" stroke="#0F172A" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
     );
 
@@ -34,49 +34,49 @@ export default function RowSortableItem({ id, rowItem, handleChangeItem, handleD
     );
 
     const COLUMN_TYPE = [
-		{ title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
-		{ title: 'Min/Max', label: __('Min/Max', 'frontis-blocks'), value: "min-max" },
-		{ title: 'Custom', label: __('Custom', 'frontis-blocks'), value: "custom" },
-	];
+        { title: 'Auto', label: __('Auto', 'frontis-blocks'), value: "auto" },
+        { title: 'Min/Max', label: __('Min/Max', 'frontis-blocks'), value: "min-max" },
+        { title: 'Custom', label: __('Custom', 'frontis-blocks'), value: "custom" },
+    ];
     const UNIT_TYPES = [
-		{ title: 'Fr', label: __('Fr', 'frontis-blocks'), value: "fr" },
-		{ title: 'Px', label: __('Px', 'frontis-blocks'), value: "px" },
-		{ title: '%', label: __('%', 'frontis-blocks'), value: "%" }
-	];
+        { title: 'Fr', label: __('Fr', 'frontis-blocks'), value: "fr" },
+        { title: 'Px', label: __('Px', 'frontis-blocks'), value: "px" },
+        { title: '%', label: __('%', 'frontis-blocks'), value: "%" }
+    ];
 
     const handleColumnTypeChange = (value) => {
         handleChangeItem(rowItem.id, 'type', value);
     };
 
     const setWidthRangeValue = (value) => {
-		handleChangeItem(rowItem.id, 'width', value);
-	};
+        handleChangeItem(rowItem.id, 'width', value);
+    };
     const setWidthRangeUnit = (unit) => {
-		handleChangeItem(rowItem.id, 'widthUnits', unit);
-	};
+        handleChangeItem(rowItem.id, 'widthUnits', unit);
+    };
     const resetWidthRangeValue = () => {
-		setWidthRangeValue(rowItem.widthUnits === '%' ? 100 : 1);
-	};
+        setWidthRangeValue(rowItem.widthUnits === '%' ? 100 : 1);
+    };
 
     const setMinRangeValue = (value) => {
-		handleChangeItem(rowItem.id, 'min', value);
-	};
+        handleChangeItem(rowItem.id, 'min', value);
+    };
     const setMinRangeUnit = (unit) => {
-		handleChangeItem(rowItem.id, 'minUnits', unit);
-	};
+        handleChangeItem(rowItem.id, 'minUnits', unit);
+    };
     const resetMinRangeValue = () => {
-		setMinRangeValue(rowItem.minUnits === '%' ? 100 : 1);
-	};
+        setMinRangeValue(rowItem.minUnits === '%' ? 100 : 1);
+    };
 
     const setMaxRangeValue = (value) => {
-		handleChangeItem(rowItem.id, 'max', value);
-	};
+        handleChangeItem(rowItem.id, 'max', value);
+    };
     const setMaxRangeUnit = (unit) => {
-		handleChangeItem(rowItem.id, 'maxUnits', unit);
-	};
+        handleChangeItem(rowItem.id, 'maxUnits', unit);
+    };
     const resetMaxRangeValue = () => {
-		setMaxRangeValue(rowItem.maxUnits === '%' ? 100 : 1);
-	};
+        setMaxRangeValue(rowItem.maxUnits === '%' ? 100 : 1);
+    };
 
     return (
         <li className="sortable-item" ref={setNodeRef} {...attributes} style={style}>
@@ -110,40 +110,40 @@ export default function RowSortableItem({ id, rowItem, handleChangeItem, handleD
             {isOpen && (
                 <div className="sortable-item-content">
                     <BaseControl
-							id="fb-setting-alignment"
-							className="fb-advanced-alignment list"
-						>
-							<ButtonGroup className="fb-advanced-alignment-group-btn">
-								{COLUMN_TYPE.map((item, key) => (
-									<Button
-										key={key}
-										onClick={() => handleColumnTypeChange(item.value)}
-										title={item.title}
-										className={`fb-advanced-alignment-single-btn ${rowItem.type === item.value ? 'active' : ''}`}
-									>
-										{item.label}
-									</Button>
-								))}
-							</ButtonGroup>
-						</BaseControl>
+                        id="fb-setting-alignment"
+                        className="fb-advanced-alignment list"
+                    >
+                        <ButtonGroup className="fb-advanced-alignment-group-btn">
+                            {COLUMN_TYPE.map((item, key) => (
+                                <Button
+                                    key={key}
+                                    onClick={() => handleColumnTypeChange(item.value)}
+                                    title={item.title}
+                                    className={`fb-advanced-alignment-single-btn ${rowItem.type === item.value ? 'active' : ''}`}
+                                >
+                                    {item.label}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </BaseControl>
 
 
                     {rowItem.type === 'min-max' && <div className="fb-setting-spacing-container">
                         <div className="fb-setting-spacing-inner-container">
                             <div className="fb-setting-spacing-label-container">
-                                    <p className="fb-setting-spacing-label">{__("Min", "frontis-blocks")}</p>
+                                <p className="fb-setting-spacing-label">{__("Min", "frontis-blocks")}</p>
                                 <div className="fb-unit-wrapper">
-                                        <div className="fb-reset-control-container" onClick={resetMinRangeValue}>
-                                            <button className="fb-reset-button fb-reset-has-value">
+                                    <div className="fb-reset-control-container" onClick={resetMinRangeValue}>
+                                        <button className="fb-reset-button fb-reset-has-value">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
-                                            </button>
-                                        </div>
+                                        </button>
+                                    </div>
 
-                                        <FB_RangeUnitsType
-                                            currentUnit={rowItem.minUnits}
-                                            unitTypes={UNIT_TYPES}
-                                            onUnitChange={setMinRangeUnit}
-                                        />
+                                    <FB_RangeUnitsType
+                                        currentUnit={rowItem.minUnits}
+                                        unitTypes={UNIT_TYPES}
+                                        onUnitChange={setMinRangeUnit}
+                                    />
                                 </div>
 
                             </div>
@@ -158,24 +158,24 @@ export default function RowSortableItem({ id, rowItem, handleChangeItem, handleD
                         </div>
                     </div>}
 
-                    {rowItem.type === 'auto' && <p style={{fontStyle: 'italic', color: '#555E72', fontSize: '12px', marginBottom: '24px', marginTop: '-10px'}}>The column-width will be automatic.</p>}
+                    {rowItem.type === 'auto' && <p style={{ fontStyle: 'italic', color: '#555E72', fontSize: '12px', marginBottom: '24px', marginTop: '-10px' }}>The column-width will be automatic.</p>}
 
                     {rowItem.type === 'min-max' && <div className="fb-setting-spacing-container">
                         <div className="fb-setting-spacing-inner-container">
                             <div className="fb-setting-spacing-label-container">
-                                    <p className="fb-setting-spacing-label">{__("Max", "frontis-blocks")}</p>
+                                <p className="fb-setting-spacing-label">{__("Max", "frontis-blocks")}</p>
                                 <div className="fb-unit-wrapper">
-                                        <div className="fb-reset-control-container" onClick={resetMaxRangeValue}>
-                                            <button className="fb-reset-button fb-reset-has-value">
+                                    <div className="fb-reset-control-container" onClick={resetMaxRangeValue}>
+                                        <button className="fb-reset-button fb-reset-has-value">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
-                                            </button>
-                                        </div>
+                                        </button>
+                                    </div>
 
-                                        <FB_RangeUnitsType
-                                            currentUnit={rowItem.maxUnits}
-                                            unitTypes={UNIT_TYPES}
-                                            onUnitChange={setMaxRangeUnit}
-                                        />
+                                    <FB_RangeUnitsType
+                                        currentUnit={rowItem.maxUnits}
+                                        unitTypes={UNIT_TYPES}
+                                        onUnitChange={setMaxRangeUnit}
+                                    />
                                 </div>
 
                             </div>
@@ -193,19 +193,19 @@ export default function RowSortableItem({ id, rowItem, handleChangeItem, handleD
                     {rowItem.type === 'custom' && <div className="fb-setting-spacing-container">
                         <div className="fb-setting-spacing-inner-container">
                             <div className="fb-setting-spacing-label-container">
-                                    <p className="fb-setting-spacing-label">{__("Width", "frontis-blocks")}</p>
+                                <p className="fb-setting-spacing-label">{__("Width", "frontis-blocks")}</p>
                                 <div className="fb-unit-wrapper">
-                                        <div className="fb-reset-control-container" onClick={resetWidthRangeValue}>
-                                            <button className="fb-reset-button fb-reset-has-value">
+                                    <div className="fb-reset-control-container" onClick={resetWidthRangeValue}>
+                                        <button className="fb-reset-button fb-reset-has-value">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10.6817 6.23162H14.0101V6.23044M1.98926 13.0956V9.76718M1.98926 9.76718L5.31768 9.76718M1.98926 9.76718L4.10985 11.8892C4.7702 12.5507 5.60824 13.0527 6.57607 13.312C9.51014 14.0982 12.526 12.357 13.3122 9.42292M2.68699 6.57591C3.47317 3.64184 6.48902 1.90064 9.42308 2.68682C10.3909 2.94615 11.229 3.4481 11.8893 4.10969L14.0101 6.23044M14.0101 2.90322V6.23044" stroke="#555E72"></path></svg>
-                                            </button>
-                                        </div>
+                                        </button>
+                                    </div>
 
-                                        <FB_RangeUnitsType
-                                            currentUnit={rowItem.widthUnits}
-                                            unitTypes={UNIT_TYPES}
-                                            onUnitChange={setWidthRangeUnit}
-                                        />
+                                    <FB_RangeUnitsType
+                                        currentUnit={rowItem.widthUnits}
+                                        unitTypes={UNIT_TYPES}
+                                        onUnitChange={setWidthRangeUnit}
+                                    />
                                 </div>
 
                             </div>

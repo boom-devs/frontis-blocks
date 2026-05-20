@@ -9,21 +9,21 @@ import TemplateGrid from "./template-grid";
 import TemplateList from "./template-list";
 import { TemplateContentLoader, TemplateLoader } from "./template-loader";
 
-const LibraryContent = ({ 
-    activeTab, 
-    activeCategory, 
-    setActiveCategory, 
-    data, 
-    libraryData, 
-    setLibraryData, 
-    setIsVisible, 
+const LibraryContent = ({
+    activeTab,
+    activeCategory,
+    setActiveCategory,
+    data,
+    libraryData,
+    setLibraryData,
+    setIsVisible,
     isLogedIn,
     searchText,
-    cardListType, 
-    setCardListType, 
-    savedItems, 
-    setSavedItems, 
-    loading, 
+    cardListType,
+    setCardListType,
+    savedItems,
+    setSavedItems,
+    loading,
     setLoading,
     currentPage,
     onPageChange,
@@ -72,7 +72,7 @@ const LibraryContent = ({
 
     const userData = JSON.parse(localStorage.getItem("userData"));
 
-    
+
     useEffect(() => {
         setOriginalLibraryData(schema[activeTab]?.items || []);
         setDisplayedData(schema[activeTab]?.items || []);
@@ -81,7 +81,7 @@ const LibraryContent = ({
 
     useEffect(() => {
         let libraryData = schema[activeTab]?.items || [];
-        
+
         let filteredData = originalLibraryData;
 
         // Filter by activeTab when not 'all'
@@ -131,7 +131,7 @@ const LibraryContent = ({
 
         const responseData = await response.json();
 
-        if(responseData.status === 'success') {
+        if (responseData.status === 'success') {
             toast.success(responseData.message, {
                 position: "top-right",
                 autoClose: 3000,
@@ -178,243 +178,243 @@ const LibraryContent = ({
 
     return (
         <>
-        <div className="fb-template-library-store-content">
-            <div className="fb-template-library-content-header">
-                <div className="fb-template-library-content-header-right">
-                    <div className="fb-template-library-search-wrapper">
-                        <div className="fb-search-input-wrapper">
-                            <div className="fb-search-input-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                                    <g clipPath="url(#clip0_13116_5586)">
-                                        <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
-                                        <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_13116_5586">
-                                            <rect width="18" height="18" fill="white" />
-                                        </clipPath>
-                                        activeTemplate  </defs>
-                                </svg>
+            <div className="fb-template-library-store-content">
+                <div className="fb-template-library-content-header">
+                    <div className="fb-template-library-content-header-right">
+                        <div className="fb-template-library-search-wrapper">
+                            <div className="fb-search-input-wrapper">
+                                <div className="fb-search-input-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                        <g clipPath="url(#clip0_13116_5586)">
+                                            <circle cx="8.625" cy="8.625" r="7.125" stroke="white" strokeWidth="1.5" />
+                                            <path d="M13.875 13.875L16.5 16.5" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
+                                        </g>
+                                        <defs>
+                                            <clipPath id="clip0_13116_5586">
+                                                <rect width="18" height="18" fill="white" />
+                                            </clipPath>
+                                            activeTemplate  </defs>
+                                    </svg>
+                                </div>
+                                <input
+                                    type="search"
+                                    placeholder="Search Templates"
+                                    value={searchText}
+                                    onChange={e => onSearchTemplates(e.target.value)}
+                                />
                             </div>
-                            <input
-                                type="search"
-                                placeholder="Search Templates"
-                                value={searchText}
-                                onChange={e => onSearchTemplates(e.target.value)}
-                            />
+                        </div>
+                        <div className="fb-template-library-card-list-wrapper">
+                            {CardListOptions.map(tab => (
+                                <button
+                                    key={tab.value}
+                                    className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
+                                    onClick={() => setCardListType(tab.value)}
+                                >
+                                    {tab.svg}
+                                </button>
+                            ))}
                         </div>
                     </div>
-                    <div className="fb-template-library-card-list-wrapper">
-                        {CardListOptions.map(tab => (
-                            <button
-                                key={tab.value}
-                                className={`fb-template-library-card-list-btn ${cardListType === tab.value ? 'active' : ''}`}
-                                onClick={() => setCardListType(tab.value)}
-                            >
-                                {tab.svg}
-                            </button>
-                        ))}
-                    </div>
                 </div>
-            </div>
-            
-            {loading ? (
-                <TemplateContentLoader />
-            ) : (
-                <>
-                    {/* {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && ( */}
 
-                    <ToastContainer
-                        position="top-right"
-                        autoClose={3000}
-                        hideProgressBar={false}
-                        newestOnTop={false}
-                        closeOnClick
-                        rtl={false}
-                        pauseOnFocusLoss
-                        draggable
-                        pauseOnHover
-                        theme="light"
-                    />
+                {loading ? (
+                    <TemplateContentLoader />
+                ) : (
+                    <>
+                        {/* {(activeCategory.templatelibrary === 'my-favourites' || activeCategory.templatelibrary === 'my-cloud') && ( */}
 
-                    {displayedData && displayedData.length > 0 ? (
-                        cardListType === 'list' ? (
-                            <table className="fb-template-library-cards style-two">
-                                <thead className="fb-template-library-card-header">
-                                    <tr>
-                                        <th className="fb-template-library-card-header-name">Name</th>
-                                        <th className="fb-template-library-card-header-date">Last Modified</th>
-                                        <th className="fb-template-library-card-header-actions">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="fb-template-library-card-body">
+                        <ToastContainer
+                            position="top-right"
+                            autoClose={3000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="light"
+                        />
+
+                        {displayedData && displayedData.length > 0 ? (
+                            cardListType === 'list' ? (
+                                <table className="fb-template-library-cards style-two">
+                                    <thead className="fb-template-library-card-header">
+                                        <tr>
+                                            <th className="fb-template-library-card-header-name">Name</th>
+                                            <th className="fb-template-library-card-header-date">Last Modified</th>
+                                            <th className="fb-template-library-card-header-actions">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="fb-template-library-card-body">
+                                        {displayedData.map(item => (
+                                            <TemplateList
+                                                key={item.id}
+                                                item={item}
+                                                libraryData={libraryData}
+                                                type={item.item_type}
+                                                setLibraryData={setLibraryData}
+                                                data={data}
+                                                isLibrary={isLibrary}
+                                                handleRemoveLibraryItem={handleRemoveLibraryItem}
+                                                setIsVisible={setIsVisible}
+                                                setActiveCategory={setActiveCategory}
+                                                isImporting={isImporting}
+                                                setIsImporting={setIsImporting}
+                                                setIsLoginModalOpen={setIsLoginModalOpen}
+                                                isLoginModalOpen={isLoginModalOpen}
+                                            />
+                                        ))}
+                                    </tbody>
+                                </table>
+                            ) : (
+                                <div className="fb-template-library-cards">
                                     {displayedData.map(item => (
-                                        <TemplateList
-                                            key={item.id}
+                                        <TemplateGrid
                                             item={item}
-                                            libraryData={libraryData}
-                                            type={item.item_type}
+                                            key={item.id}
+                                            id={item.id}
+                                            title={item.title}
+                                            imageUrl={item.image}
+                                            is_premium={item.is_premium || false}
+                                            tags={item.tags || []}
+                                            templateType={item.item_type}
+                                            categories={item.categories || []}
+                                            colors={item.colors || []}
+                                            customColors={item.customColors || []}
+                                            gradientColors={item.gradientColors || []}
+                                            customGradientColors={item.customGradientColors || []}
+                                            typographies={item.typographies || []}
+                                            customTypographies={item.customTypographies || []}
+                                            dependencies={item.dependencies || []}
+                                            activeTab={activeTab}
                                             setLibraryData={setLibraryData}
+                                            isLogedIn={isLogedIn}
                                             data={data}
+                                            setIsVisible={setIsVisible}
                                             isLibrary={isLibrary}
                                             handleRemoveLibraryItem={handleRemoveLibraryItem}
-                                            setIsVisible={setIsVisible}
-                                            setActiveCategory={setActiveCategory}
                                             isImporting={isImporting}
                                             setIsImporting={setIsImporting}
                                             setIsLoginModalOpen={setIsLoginModalOpen}
                                             isLoginModalOpen={isLoginModalOpen}
                                         />
                                     ))}
-                                </tbody>
-                            </table>
+                                </div>
+                            )
                         ) : (
-                            <div className="fb-template-library-cards">
-                                {displayedData.map(item => (
-                                    <TemplateGrid
-                                        item={item}
-                                        key={item.id}
-                                        id={item.id}
-                                        title={item.title}
-                                        imageUrl={item.image}
-                                        is_premium={item.is_premium || false}
-                                        tags={item.tags || []}
-                                        templateType={item.item_type}
-                                        categories={item.categories || []}
-                                        colors={item.colors || []}
-                                        customColors={item.customColors || []}
-                                        gradientColors={item.gradientColors || []}
-                                        customGradientColors={item.customGradientColors || []}
-                                        typographies={item.typographies || []}
-                                        customTypographies={item.customTypographies || []}
-                                        dependencies={item.dependencies || []}
-                                        activeTab={activeTab}
-                                        setLibraryData={setLibraryData}
-                                        isLogedIn={isLogedIn}
-                                        data={data}
-                                        setIsVisible={setIsVisible}
-                                        isLibrary={isLibrary}
-                                        handleRemoveLibraryItem={handleRemoveLibraryItem}
-                                        isImporting={isImporting}
-                                        setIsImporting={setIsImporting}
-                                        setIsLoginModalOpen={setIsLoginModalOpen}
-                                        isLoginModalOpen={isLoginModalOpen}
-                                    />
-                                ))}
-                            </div>
-                        )
-                    ) : (
-                        <h3>No template found</h3>
-                    )}
+                            <h3>No template found</h3>
+                        )}
 
-                    {schema[activeTab]?.pagination?.last_page > 1 && (
-                        <div className="fb-template-library-pagination">
-                            <button
-                                className="fb-pagination-btn fb-btn-prev"
-                                disabled={currentPage === 1}
-                                onClick={() => onPageChange(activeTab, currentPage - 1)}
-                            >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                    <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
-                                </svg>
-                                Previous
-                            </button>
-                        
-                            {/* Page Numbers */}
-                            <div className="fb-page-numbers">
-                            {(() => {
-                                const { last_page } = schema[activeTab].pagination;
-                                const maxVisiblePages = 3;
-                                const pages = [];
-                        
-                                if (last_page <= maxVisiblePages) {
-                                for (let i = 1; i <= last_page; i++) {
-                                    pages.push(
-                                    <button
-                                        key={i}
-                                        className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
-                                        onClick={() => onPageChange(activeTab, i)}
-                                    >
-                                        {i}
-                                    </button>
-                                    );
-                                }
-                                } else {
-                                // Always show page 1
-                                pages.push(
-                                    <button
-                                    key={1}
-                                    className={`fb-pagination-btn ${currentPage === 1 ? "active" : ""}`}
-                                    onClick={() => onPageChange(activeTab, 1)}
-                                    >
-                                    1
-                                    </button>
-                                );
-                        
-                                if (currentPage > 2) {
-                                    pages.push(<span key="start-ellipsis" className="fb-ellipsis">...</span>);
-                                }
-                        
-                                let startPage = Math.max(2, currentPage - 1);
-                                let endPage = Math.min(last_page - 1, currentPage + 1);
-                        
-                                if (currentPage > last_page - 2) {
-                                    startPage = Math.max(2, last_page - maxVisiblePages + 1);
-                                    endPage = last_page - 1;
-                                }
-                        
-                                for (let i = startPage; i <= endPage; i++) {
-                                    pages.push(
-                                    <button
-                                        key={i}
-                                        className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
-                                        onClick={() => onPageChange(activeTab, i)}
-                                    >
-                                        {i}
-                                    </button>
-                                    );
-                                }
-                        
-                                if (endPage < last_page - 1) {
-                                    pages.push(<span key="end-ellipsis" className="fb-ellipsis">...</span>);
-                                }
-                        
-                                if (last_page > 1) {
-                                    pages.push(
-                                    <button
-                                        key={last_page}
-                                        className={`fb-pagination-btn ${currentPage === last_page ? "active" : ""}`}
-                                        onClick={() => onPageChange(activeTab, last_page)}
-                                    >
-                                        {last_page}
-                                    </button>
-                                    );
-                                }
-                                }
-                        
-                                return pages;
-                            })()}
+                        {schema[activeTab]?.pagination?.last_page > 1 && (
+                            <div className="fb-template-library-pagination">
+                                <button
+                                    className="fb-pagination-btn fb-btn-prev"
+                                    disabled={currentPage === 1}
+                                    onClick={() => onPageChange(activeTab, currentPage - 1)}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" strokeWidth="1.5" />
+                                    </svg>
+                                    Previous
+                                </button>
+
+                                {/* Page Numbers */}
+                                <div className="fb-page-numbers">
+                                    {(() => {
+                                        const { last_page } = schema[activeTab].pagination;
+                                        const maxVisiblePages = 3;
+                                        const pages = [];
+
+                                        if (last_page <= maxVisiblePages) {
+                                            for (let i = 1; i <= last_page; i++) {
+                                                pages.push(
+                                                    <button
+                                                        key={i}
+                                                        className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
+                                                        onClick={() => onPageChange(activeTab, i)}
+                                                    >
+                                                        {i}
+                                                    </button>
+                                                );
+                                            }
+                                        } else {
+                                            // Always show page 1
+                                            pages.push(
+                                                <button
+                                                    key={1}
+                                                    className={`fb-pagination-btn ${currentPage === 1 ? "active" : ""}`}
+                                                    onClick={() => onPageChange(activeTab, 1)}
+                                                >
+                                                    1
+                                                </button>
+                                            );
+
+                                            if (currentPage > 2) {
+                                                pages.push(<span key="start-ellipsis" className="fb-ellipsis">...</span>);
+                                            }
+
+                                            let startPage = Math.max(2, currentPage - 1);
+                                            let endPage = Math.min(last_page - 1, currentPage + 1);
+
+                                            if (currentPage > last_page - 2) {
+                                                startPage = Math.max(2, last_page - maxVisiblePages + 1);
+                                                endPage = last_page - 1;
+                                            }
+
+                                            for (let i = startPage; i <= endPage; i++) {
+                                                pages.push(
+                                                    <button
+                                                        key={i}
+                                                        className={`fb-pagination-btn ${currentPage === i ? "active" : ""}`}
+                                                        onClick={() => onPageChange(activeTab, i)}
+                                                    >
+                                                        {i}
+                                                    </button>
+                                                );
+                                            }
+
+                                            if (endPage < last_page - 1) {
+                                                pages.push(<span key="end-ellipsis" className="fb-ellipsis">...</span>);
+                                            }
+
+                                            if (last_page > 1) {
+                                                pages.push(
+                                                    <button
+                                                        key={last_page}
+                                                        className={`fb-pagination-btn ${currentPage === last_page ? "active" : ""}`}
+                                                        onClick={() => onPageChange(activeTab, last_page)}
+                                                    >
+                                                        {last_page}
+                                                    </button>
+                                                );
+                                            }
+                                        }
+
+                                        return pages;
+                                    })()}
+                                </div>
+
+                                <button
+                                    className="fb-pagination-btn fb-btn-next"
+                                    disabled={currentPage === schema[activeTab].pagination.last_page}
+                                    onClick={() => onPageChange(activeTab, currentPage + 1)}
+                                >
+                                    Next
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
+                                        <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" strokeWidth="1.5" />
+                                    </svg>
+                                </button>
                             </div>
-                        
-                            <button
-                                className="fb-pagination-btn fb-btn-next"
-                                disabled={currentPage === schema[activeTab].pagination.last_page}
-                                onClick={() => onPageChange(activeTab, currentPage + 1)}
-                            >
-                                Next
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="16" viewBox="0 0 20 16" fill="none">
-                                    <path d="M8.93735 15L2 8M2 8L8.93735 1M2 8L20 8" stroke="#0B0C0E" stroke-width="1.5"/>
-                                </svg>
-                            </button>
-                        </div>
-                    )}
-                </>
+                        )}
+                    </>
+                )}
+            </div>
+
+            {isImporting && (
+                <TemplateLoader />
             )}
-        </div>
-
-        {isImporting && (
-            <TemplateLoader />
-        )}
         </>
     );
 };
