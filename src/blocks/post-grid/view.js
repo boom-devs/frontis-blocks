@@ -2,6 +2,16 @@
 	let currentPages = {};
 
 	/**
+	 * Convert relative image URL to absolute using localized FrontisBlocksData
+	 */
+	function getAbsoluteImageUrl(url) {
+		if (url && typeof FrontisBlocksData !== 'undefined' && !url.startsWith('http')) {
+			return FrontisBlocksData.pluginUrl + url;
+		}
+		return url || '';
+	}
+
+	/**
 	 * Reusable function to get all attributes from block 
 	 */
 	function getPostGridOptions(block) {
@@ -37,7 +47,7 @@
 			loadMoreText: attrs.loadMoreText,
 			loadMoreIcon: attrs.loadMoreIcon,
 			loadMoreIconAlign: attrs.loadMoreIconAlign,
-			defaultImageUrl: attrs.defaultImageUrl,
+			defaultImageUrl: getAbsoluteImageUrl(attrs.defaultImageUrl),
 			loadMoreType: attrs.loadMoreType,
 			paginationPrevNextType: attrs.paginationPrevNextType,
 			paginationPrevText: attrs.paginationPrevText,
@@ -581,7 +591,7 @@
 			loadMoreText: grid.getAttribute('data-load-more-text') || 'Load More',
 			loadMoreIcon: grid.getAttribute('data-load-more-icon') || 'angle-right',
 			loadMoreIconAlign: grid.getAttribute('data-load-more-icon-align') || 'none',
-			defaultImageUrl: grid.getAttribute('data-default-image-url') || '',
+			defaultImageUrl: getAbsoluteImageUrl(grid.getAttribute('data-default-image-url')),
 			loadMoreType: grid.getAttribute('data-load-more-type') || 'pagination',
 			blockID: grid.getAttribute('data-block-id'),
 			paginationPrevNextType: grid.getAttribute('data-pagination-prev-next-type') || 'icon',
