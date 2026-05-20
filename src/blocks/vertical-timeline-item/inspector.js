@@ -239,6 +239,68 @@ const Inspector = ({ attributes, setAttributes }) => {
         sectionLebelBtnTextHoverColor,
         /** End Section Lebel Colors */
 
+        /** Start Icon Padding */
+        verticalTimelineItemIconPaddingUnits,
+        verticalTimelineItemIconPaddingDesktop,
+        verticalTimelineItemIconPaddingTablet,
+        verticalTimelineItemIconPaddingMobile,
+        verticalTimelineItemIconPaddingLink,
+        /** End Icon Padding */
+
+        /** Start Icon Background Color */
+        verticalTimelineItemIconBgColorSwitcher,
+        verticalTimelineItemIconNormalBackgroundType,
+        verticalTimelineItemIconNormalClassicColor,
+        verticalTimelineItemIconNormalGradientColor,
+        verticalTimelineItemIconNormalCustomGradientSwitcher,
+        verticalTimelineItemIconNormalCustomGradientInputValue,
+        verticalTimelineItemIconHoverBackgroundType,
+        verticalTimelineItemIconHoverClassicColor,
+        verticalTimelineItemIconHoverGradientColor,
+        verticalTimelineItemIconHoverCustomGradientSwitcher,
+        verticalTimelineItemIconHoverCustomGradientInputValue,
+        /** End Icon Background Color */
+
+        /** Start Icon Colors */
+        verticalTimelineItemIconColorSwitcher,
+        verticalTimelineItemIconColor,
+        verticalTimelineItemIconHoverColor,
+        /** End Icon Colors */
+
+        /** Start Icon Border */
+        verticalTimelineItemIconBorderUnits,
+        verticalTimelineItemIconBorderDesktop,
+        verticalTimelineItemIconBorderTablet,
+        verticalTimelineItemIconBorderMobile,
+        verticalTimelineItemIconBorderLink,
+        /** End Icon Border */
+
+        /** Start Icon Border Radius */
+        verticalTimelineItemIconBorderRadiusUnits,
+        verticalTimelineItemIconBorderRadiusDesktop,
+        verticalTimelineItemIconBorderRadiusTablet,
+        verticalTimelineItemIconBorderRadiusMobile,
+        verticalTimelineItemIconBorderRadiusLink,
+        /** End Icon Border Radius */
+
+        /** Start Icon Box Shadow */
+        verticalTimelineItemIconBoxShadowSwitcher,
+        verticalTimelineItemIconBoxShadowValues,
+        verticalTimelineItemIconBoxShadowHoverValues,
+        /** End Icon Box Shadow */
+
+        /** Start Icon Border */
+        verticalTimelineItemIconBorder,
+        verticalTimelineItemIconBorderColorSwitcher,
+        verticalTimelineItemIconBorderColor,
+        verticalTimelineItemIconBorderHoverColor,
+        /** End Icon Border */
+
+        /** Start Icon Size */
+        verticalTimelineIconSize,
+        verticalTimelineIconSizeUnits,
+        /** End Icon Size */
+
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
         verticalTimelineItemCustomCSS,
@@ -772,6 +834,143 @@ const Inspector = ({ attributes, setAttributes }) => {
     }
     /** end Global border */
 
+    /** Start Icon Padding */
+    const verticalTimelineItemIconPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineItemIconPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconPaddingTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconPaddingMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { ...verticalTimelineItemIconPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconPaddingTablet: { ...verticalTimelineItemIconPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconPaddingMobile: { ...verticalTimelineItemIconPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const verticalTimelineItemIconPaddingLinkBtn = () => {
+        setAttributes({
+            verticalTimelineItemIconPaddingLink: !verticalTimelineItemIconPaddingLink
+        });
+    };
+
+    const verticalTimelineItemIconPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineItemIconPaddingUnits: {
+                ...verticalTimelineItemIconPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Icon Padding */
+
+    /** Start Icon Border Controls */
+    const verticalTimelineItemIconBorderUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineItemIconBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconBorderDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconBorderTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconBorderMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconBorderDesktop: { ...verticalTimelineItemIconBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconBorderTablet: { ...verticalTimelineItemIconBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconBorderMobile: { ...verticalTimelineItemIconBorderMobile, [position]: value } });
+                    break;
+            }
+        }
+    };
+
+    const verticalTimelineItemIconBorderLinkBtn = () => {
+        setAttributes({ verticalTimelineItemIconBorderLink: !verticalTimelineItemIconBorderLink });
+    };
+
+    const verticalTimelineItemIconBorderUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineItemIconBorderUnits: {
+                ...verticalTimelineItemIconBorderUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Icon Border Controls */
+
+    /** Start Icon Border Radius Controls */
+    const verticalTimelineItemIconBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineItemIconBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconBorderRadiusDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconBorderRadiusTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconBorderRadiusMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconBorderRadiusDesktop: { ...verticalTimelineItemIconBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet': setAttributes({ verticalTimelineItemIconBorderRadiusTablet: { ...verticalTimelineItemIconBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconBorderRadiusMobile: { ...verticalTimelineItemIconBorderRadiusMobile, [position]: value } });
+                    break;
+            }
+        }
+    };
+
+    const verticalTimelineItemIconBorderRadiusLinkBtn = () => {
+        setAttributes({ verticalTimelineItemIconBorderRadiusLink: !verticalTimelineItemIconBorderRadiusLink });
+    };
+
+    const verticalTimelineItemIconBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineItemIconBorderRadiusUnits: {
+                ...verticalTimelineItemIconBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Icon Border Radius Controls */
+
     /**
      * Inspector General Controls
      */
@@ -1011,39 +1210,39 @@ const Inspector = ({ attributes, setAttributes }) => {
                     setAttributes={setAttributes}
                 />
 
-                    <FB_TypographyControl
-                        globalTypoControlActive={true}
-                        globalTypoSwitcher={phaseTitleTypoSwitcher}
-                        storeGlobalTypographyData={(value) => setAttributes({ phaseTitleTypographyData: value })}
-                        globalTypoType={phaseTitleTypoType}
-                        onChangeGlobalTypoType={(value) => { setAttributes({ phaseTitleTypoType: value, phaseTitleTypoSwitcher: value === "default" ? { ...phaseTitleTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...phaseTitleTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
-                        globalTypoOption={phaseTitleTypoOption}
-                        onChangeGlobalTypoOption={(value) => setAttributes({ phaseTitleTypoOption: value })}
-                        fontFamily={phaseTitleFontFamily}
-                        onChangeFontFamily={(value) => setAttributes({ phaseTitleFontFamily: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontFamily: value && false, } })}
-                        fontSize={phaseTitleFontSize}
-                        onChangeFontSize={(value) => setAttributes({ phaseTitleFontSize: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontSize: value && false, } })}
-                        fontSizeUnits={phaseTitleFontSizeUnits}
-                        onChangeFontSizeUnit={(value) => setAttributes({ phaseTitleFontSizeUnits: value })}
-                        fontWeight={phaseTitleFontWeight}
-                        onChangeFontWeight={(value) => setAttributes({ phaseTitleFontWeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontWeight: value && false, } })}
-                        fontStyle={phaseTitleFontStyle}
-                        onChangeFontStyle={(value) => setAttributes({ phaseTitleFontStyle: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontStyle: value && false, } })}
-                        textTransform={phaseTitleTextTransform}
-                        onChangeTextTransform={(value) => setAttributes({ phaseTitleTextTransform: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textTransform: value && false, } })}
-                        textDecoration={phaseTitleTextDecoration}
-                        onChangeTextDecoration={(value) => setAttributes({ phaseTitleTextDecoration: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textDecoration: value && false, } })}
-                        letterSpacing={phaseTitleLetterSpacing}
-                        onChangeLetterSpacing={(value) => setAttributes({ phaseTitleLetterSpacing: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, letterSpacing: value && false, } })}
-                        letterSpacingUnits={phaseTitleLetterSpacingUnits}
-                        onChangeLetterSpacingUnit={(value) => setAttributes({ phaseTitleLetterSpacingUnits: value })}
-                        lineHeight={phaseTitleLineHeight}
-                        onChangeLineHeight={(value) => setAttributes({ phaseTitleLineHeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, lineHeight: value && false, } })}
-                        lineHeightUnits={phaseTitleLineHeightUnits}
-                        onChangeLineHeightUnit={(value) => setAttributes({ phaseTitleLineHeightUnits: value })}
-                        deviceType={deviceType}
-                        setAttributes={setAttributes}
-                    />
+                <FB_TypographyControl
+                    globalTypoControlActive={true}
+                    globalTypoSwitcher={phaseTitleTypoSwitcher}
+                    storeGlobalTypographyData={(value) => setAttributes({ phaseTitleTypographyData: value })}
+                    globalTypoType={phaseTitleTypoType}
+                    onChangeGlobalTypoType={(value) => { setAttributes({ phaseTitleTypoType: value, phaseTitleTypoSwitcher: value === "default" ? { ...phaseTitleTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...phaseTitleTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
+                    globalTypoOption={phaseTitleTypoOption}
+                    onChangeGlobalTypoOption={(value) => setAttributes({ phaseTitleTypoOption: value })}
+                    fontFamily={phaseTitleFontFamily}
+                    onChangeFontFamily={(value) => setAttributes({ phaseTitleFontFamily: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontFamily: value && false, } })}
+                    fontSize={phaseTitleFontSize}
+                    onChangeFontSize={(value) => setAttributes({ phaseTitleFontSize: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontSize: value && false, } })}
+                    fontSizeUnits={phaseTitleFontSizeUnits}
+                    onChangeFontSizeUnit={(value) => setAttributes({ phaseTitleFontSizeUnits: value })}
+                    fontWeight={phaseTitleFontWeight}
+                    onChangeFontWeight={(value) => setAttributes({ phaseTitleFontWeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontWeight: value && false, } })}
+                    fontStyle={phaseTitleFontStyle}
+                    onChangeFontStyle={(value) => setAttributes({ phaseTitleFontStyle: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, fontStyle: value && false, } })}
+                    textTransform={phaseTitleTextTransform}
+                    onChangeTextTransform={(value) => setAttributes({ phaseTitleTextTransform: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textTransform: value && false, } })}
+                    textDecoration={phaseTitleTextDecoration}
+                    onChangeTextDecoration={(value) => setAttributes({ phaseTitleTextDecoration: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, textDecoration: value && false, } })}
+                    letterSpacing={phaseTitleLetterSpacing}
+                    onChangeLetterSpacing={(value) => setAttributes({ phaseTitleLetterSpacing: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, letterSpacing: value && false, } })}
+                    letterSpacingUnits={phaseTitleLetterSpacingUnits}
+                    onChangeLetterSpacingUnit={(value) => setAttributes({ phaseTitleLetterSpacingUnits: value })}
+                    lineHeight={phaseTitleLineHeight}
+                    onChangeLineHeight={(value) => setAttributes({ phaseTitleLineHeight: value, phaseTitleTypoSwitcher: { ...phaseTitleTypoSwitcher, lineHeight: value && false, } })}
+                    lineHeightUnits={phaseTitleLineHeightUnits}
+                    onChangeLineHeightUnit={(value) => setAttributes({ phaseTitleLineHeightUnits: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                />
 
                 <FB_SwitcherControl
                     label={__("Text Color", "frontis-blocks")}
@@ -1234,7 +1433,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     />
                 )}
 
-                { sectionLebelBtnTextColorSwitcher === "hover" && (
+                {sectionLebelBtnTextColorSwitcher === "hover" && (
                     <FB_ColorControl
                         label={__("Hover Color", "frontis-blocks")}
                         globalColor={sectionLebelBtnTextHoverColor}
@@ -1250,6 +1449,174 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("Icon", "frontis-blocks")}
                 initialOpen={false}
             >
+                <FB_Range
+                    min={0}
+                    max={100}
+                    label={__("Size", "frontis-blocks")}
+                    rangeValue={verticalTimelineIconSize}
+                    onChangeHandler={(value) => setAttributes({ verticalTimelineIconSize: value })}
+                    rangeUnitHandler={(value) => setAttributes({ verticalTimelineIconSizeUnits: value })}
+                    deviceType={deviceType}
+                    units={verticalTimelineIconSizeUnits}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                />
+
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={verticalTimelineItemIconPaddingUnitsHandler}
+                    spacingUnits={verticalTimelineItemIconPaddingUnits}
+                    spacingDesktop={verticalTimelineItemIconPaddingDesktop}
+                    spacingTablet={verticalTimelineItemIconPaddingTablet}
+                    spacingMobile={verticalTimelineItemIconPaddingMobile}
+                    handleSpacingUnitHandler={verticalTimelineItemIconPaddingUnitsChange}
+                    spacingCombineBtn={verticalTimelineItemIconPaddingLink}
+                    spacingCombineBtnHandler={verticalTimelineItemIconPaddingLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_BackgroundColorControl
+                    label={__("Background Color", "frontis-blocks")}
+                    bgColorSwitcher={verticalTimelineItemIconBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ verticalTimelineItemIconBgColorSwitcher: value })}
+
+                    normalBackgroundType={verticalTimelineItemIconNormalBackgroundType}
+                    setNormalBackgroundType={(value) => setAttributes({ verticalTimelineItemIconNormalBackgroundType: value })}
+                    normalClassicColor={verticalTimelineItemIconNormalClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ verticalTimelineItemIconNormalClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={verticalTimelineItemIconNormalGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ verticalTimelineItemIconNormalGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={verticalTimelineItemIconNormalCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ verticalTimelineItemIconNormalCustomGradientSwitcher: value })}
+                    normalCustomGradientInputValue={verticalTimelineItemIconNormalCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ verticalTimelineItemIconNormalCustomGradientInputValue: value })}
+
+                    hoverBackgroundType={verticalTimelineItemIconHoverBackgroundType}
+                    setHoverBackgroundType={(value) => setAttributes({ verticalTimelineItemIconHoverBackgroundType: value })}
+                    hoverClassicColor={verticalTimelineItemIconHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ verticalTimelineItemIconHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={verticalTimelineItemIconHoverGradientColor}
+                    setHoverGradientColor={(value) => setAttributes({ verticalTimelineItemIconHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={verticalTimelineItemIconHoverCustomGradientSwitcher}
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ verticalTimelineItemIconHoverCustomGradientSwitcher: value })}
+                    hoverCustomGradientInputValue={verticalTimelineItemIconHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ verticalTimelineItemIconHoverCustomGradientInputValue: value })}
+
+                    isBackgroundImage={false}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Icon color", "frontis-blocks")}
+                    globalSwitcher={verticalTimelineItemIconColorSwitcher}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ verticalTimelineItemIconColorSwitcher: value })
+                    }
+                />
+
+                {verticalTimelineItemIconColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={verticalTimelineItemIconColor}
+                        setGlobalColor={(value) => setAttributes({ verticalTimelineItemIconColor: value })}
+                    />
+                )}
+
+                {verticalTimelineItemIconColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={verticalTimelineItemIconHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ verticalTimelineItemIconHoverColor: value })
+                        }
+                    />
+                )}
+
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={verticalTimelineItemIconBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ verticalTimelineItemIconBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    options={[
+                        { label: __('Normal', 'frontis-blocks'), value: 'normal' },
+                        { label: __('Hover', 'frontis-blocks'), value: 'hover' },
+                    ]}
+                    globalSwitcher={verticalTimelineItemIconBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ verticalTimelineItemIconBorderColorSwitcher: value })}
+                />
+
+                {verticalTimelineItemIconBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={verticalTimelineItemIconBorderColor}
+                        setGlobalColor={(value) => setAttributes({ verticalTimelineItemIconBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {verticalTimelineItemIconBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={verticalTimelineItemIconBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ verticalTimelineItemIconBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={verticalTimelineItemIconBorderUnitsHandler}
+                    spacingUnits={verticalTimelineItemIconBorderUnits}
+                    spacingDesktop={verticalTimelineItemIconBorderDesktop}
+                    spacingTablet={verticalTimelineItemIconBorderTablet}
+                    spacingMobile={verticalTimelineItemIconBorderMobile}
+                    handleSpacingUnitHandler={verticalTimelineItemIconBorderUnitsChange}
+                    spacingCombineBtn={verticalTimelineItemIconBorderLink}
+                    spacingCombineBtnHandler={verticalTimelineItemIconBorderLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={verticalTimelineItemIconBorderRadiusUnitsHandler}
+                    spacingUnits={verticalTimelineItemIconBorderRadiusUnits}
+                    spacingDesktop={verticalTimelineItemIconBorderRadiusDesktop}
+                    spacingTablet={verticalTimelineItemIconBorderRadiusTablet}
+                    spacingMobile={verticalTimelineItemIconBorderRadiusMobile}
+                    handleSpacingUnitHandler={verticalTimelineItemIconBorderRadiusUnitsChange}
+                    spacingCombineBtn={verticalTimelineItemIconBorderRadiusLink}
+                    spacingCombineBtnHandler={verticalTimelineItemIconBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Box Shadow", "frontis-blocks")}
+                    globalSwitcher={verticalTimelineItemIconBoxShadowSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ verticalTimelineItemIconBoxShadowSwitcher: value })}
+                />
+
+                {verticalTimelineItemIconBoxShadowSwitcher === 'normal' && (
+                    <FB_BoxShadowControl
+                        label={__("Normal Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ verticalTimelineItemIconBoxShadowValues: value })}
+                        initialShadowValue={verticalTimelineItemIconBoxShadowValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ verticalTimelineItemIconBoxShadowCssValue: value })}
+                    />
+                )}
+
+                {verticalTimelineItemIconBoxShadowSwitcher === 'hover' && (
+                    <FB_BoxShadowControl
+                        label={__("Hover Shadow", "frontis-blocks")}
+                        onBoxShadowChange={(value) => setAttributes({ verticalTimelineItemIconBoxShadowHoverValues: value })}
+                        initialShadowValue={verticalTimelineItemIconBoxShadowHoverValues}
+                        onBoxShadowStyleChange={(value) => setAttributes({ verticalTimelineItemIconBoxShadowHoverCssValue: value })}
+                    />
+                )}
 
             </PanelBody>
         </>

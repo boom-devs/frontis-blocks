@@ -766,6 +766,325 @@ const attributes = {
     },
     /** End Phase Title Color */
 
+    /** Start Section level Color */
+    sectionLebelBtnTextColorSwitcher: {
+        type: 'string',
+        default: 'normal'
+    },
+    sectionLebelBtnTextColor: {
+        type: 'string',
+        default: ''
+    },
+    sectionLebelBtnTextHoverColor: {
+        type: 'string',
+        default: ''
+    },
+    /** End Section level Color */
+
+    /** Start Icon Padding */
+    verticalTimelineItemIconPaddingUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px'
+        }
+    },
+    verticalTimelineItemIconPaddingDesktop: {
+        type: "object",
+        default: {
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
+        },
+    },
+    verticalTimelineItemIconPaddingTablet: {
+        type: "object",
+        default: {
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
+        },
+    },
+    verticalTimelineItemIconPaddingMobile: {
+        type: "object",
+        default: {
+            top: '6',
+            bottom: '6',
+            left: '6',
+            right: '6',
+        },
+    },
+    verticalTimelineItemIconPaddingLink: {
+        type: "boolean",
+        default: true
+    },
+    /** End Icon Padding */
+
+    /** Start Icon Background Color */
+    verticalTimelineItemIconBgColorSwitcher: {
+        type: "string",
+        default: "normal"
+    },
+    verticalTimelineItemIconNormalBackgroundType: {
+        type: "string",
+        default: "gradient",
+    },
+    verticalTimelineItemIconNormalClassicColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconNormalGradientColor: {
+        type: "string",
+        default: "linear-gradient(180deg, #0875ff 0%, #054699 100%)",
+    },
+    verticalTimelineItemIconNormalCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    verticalTimelineItemIconNormalCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+
+    verticalTimelineItemIconHoverBackgroundType: {
+        type: "string",
+        default: "classic",
+    },
+    verticalTimelineItemIconHoverClassicColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconHoverGradientColor: {
+        type: "string",
+        default: null,
+    },
+    verticalTimelineItemIconHoverCustomGradientSwitcher: {
+        type: "boolean",
+        default: false,
+    },
+    verticalTimelineItemIconHoverCustomGradientInputValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Icon Background Color */
+
+    /** Start Icon Color */
+    verticalTimelineItemIconColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    verticalTimelineItemIconColor: {
+        type: "string",
+        default: "#FFFFFF",
+    },
+    verticalTimelineItemIconHoverColor: {
+        type: "string",
+    },
+    /** End Icon Color */
+
+    /** Start Icon Border */
+    verticalTimelineItemIconBorder: {
+        type: "string",
+        default: "none",
+    },
+    verticalTimelineItemIconBorderColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    verticalTimelineItemIconBorderColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    verticalTimelineItemIconBorderDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderTablet: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderMobile: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Icon Border */
+
+    /** Start Icon Border Radius */
+    verticalTimelineItemIconBorderRadiusUnits: {
+        type: "object",
+        default: {
+            Desktop: "%",
+            Tablet: "%",
+            Mobile: "%",
+        },
+    },
+    verticalTimelineItemIconBorderRadiusDesktop: {
+        type: "object",
+        default: {
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
+        },
+    },
+    verticalTimelineItemIconBorderRadiusTablet: {
+        type: "object",
+        default: {
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
+        },
+    },
+    verticalTimelineItemIconBorderRadiusMobile: {
+        type: "object",
+        default: {
+            top: '50',
+            right: '50',
+            bottom: '50',
+            left: '50'
+        },
+    },
+    verticalTimelineItemIconBorderRadiusLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Icon Border Radius */
+
+    /** Start Icon Box Shadow */
+    verticalTimelineItemIconBoxShadowSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    verticalTimelineItemIconBoxShadowValues: {
+        type: "array",
+        default: [],
+    },
+    verticalTimelineItemIconBoxShadowCssValue: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconBoxShadowHoverValues: {
+        type: "array",
+        default: [],
+    },
+    verticalTimelineItemIconBoxShadowHoverCssValue: {
+        type: "string",
+        default: "",
+    },
+    /** End Icon Box Shadow */
+
+    /** Start Icon Border */
+    verticalTimelineItemIconBorder: {
+        type: "string",
+        default: "none",
+    },
+    verticalTimelineItemIconBorderColorSwitcher: {
+        type: "string",
+        default: "normal",
+    },
+    verticalTimelineItemIconBorderColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconBorderHoverColor: {
+        type: "string",
+        default: "",
+    },
+    verticalTimelineItemIconBorderUnits: {
+        type: "object",
+        default: {
+            Desktop: "px",
+            Tablet: "px",
+            Mobile: "px",
+        },
+    },
+    verticalTimelineItemIconBorderDesktop: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderTablet: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderMobile: {
+        type: "object",
+        default: {
+            top: '',
+            right: '',
+            bottom: '',
+            left: ''
+        },
+    },
+    verticalTimelineItemIconBorderLink: {
+        type: "boolean",
+        default: true,
+    },
+    /** End Icon Border */
+
+    /** Start Icon Size */
+    verticalTimelineIconSizeUnits: {
+        type: 'object',
+        default: {
+            Desktop: 'px',
+            Tablet: 'px',
+            Mobile: 'px',
+        }
+    },
+    verticalTimelineIconSize: {
+        type: 'object',
+        default: {
+            Desktop: '24',
+            Tablet: '24',
+            Mobile: '24'
+        }
+    },
+    /** End Icon Size */
+
     /** Start Class & ID Setting */
     verticalTimelineItemGlobalZIndex: {
         type: "object",

@@ -188,6 +188,70 @@ const generateVerticalTimelineItemStyle = (attributes) => {
         sectionLebelBtnTextHoverColor,
         /** End Section Lebel Colors */
 
+        /** Start Icon Padding */
+        verticalTimelineItemIconPaddingUnits,
+        verticalTimelineItemIconPaddingDesktop,
+        verticalTimelineItemIconPaddingTablet,
+        verticalTimelineItemIconPaddingMobile,
+        verticalTimelineItemIconPaddingLink,
+        /** End Icon Padding */
+
+        /** Start Icon Background Color */
+        verticalTimelineItemIconBgColorSwitcher,
+        verticalTimelineItemIconNormalBackgroundType,
+        verticalTimelineItemIconNormalClassicColor,
+        verticalTimelineItemIconNormalGradientColor,
+        verticalTimelineItemIconNormalCustomGradientSwitcher,
+        verticalTimelineItemIconNormalCustomGradientInputValue,
+        verticalTimelineItemIconHoverBackgroundType,
+        verticalTimelineItemIconHoverClassicColor,
+        verticalTimelineItemIconHoverGradientColor,
+        verticalTimelineItemIconHoverCustomGradientSwitcher,
+        verticalTimelineItemIconHoverCustomGradientInputValue,
+        /** End Icon Background Color */
+
+        /** Start Icon Colors */
+        verticalTimelineItemIconColorSwitcher,
+        verticalTimelineItemIconColor,
+        verticalTimelineItemIconHoverColor,
+        /** End Icon Colors */
+
+        /** Start Icon Border */
+        verticalTimelineItemIconBorderUnits,
+        verticalTimelineItemIconBorderDesktop,
+        verticalTimelineItemIconBorderTablet,
+        verticalTimelineItemIconBorderMobile,
+        verticalTimelineItemIconBorderLink,
+        /** End Icon Border */
+
+        /** Start Icon Border Radius */
+        verticalTimelineItemIconBorderRadiusUnits,
+        verticalTimelineItemIconBorderRadiusDesktop,
+        verticalTimelineItemIconBorderRadiusTablet,
+        verticalTimelineItemIconBorderRadiusMobile,
+        verticalTimelineItemIconBorderRadiusLink,
+        /** End Icon Border Radius */
+
+        /** Start Icon Box Shadow */
+        verticalTimelineItemIconBoxShadowSwitcher,
+        verticalTimelineItemIconBoxShadowValues,
+        verticalTimelineItemIconBoxShadowCssValue,
+        verticalTimelineItemIconBoxShadowHoverValues,
+        verticalTimelineItemIconBoxShadowHoverCssValue,
+        /** End Icon Box Shadow */
+
+        /** Start Icon Border */
+        verticalTimelineItemIconBorder,
+        verticalTimelineItemIconBorderColorSwitcher,
+        verticalTimelineItemIconBorderColor,
+        verticalTimelineItemIconBorderHoverColor,
+        /** End Icon Border */
+
+        /** Start Icon Size */
+        verticalTimelineIconSize,
+        verticalTimelineIconSizeUnits,
+        /** End Icon Size */
+
         /** Start Class & ID Setting */
         verticalTimelineItemGlobalZIndex,
         verticalTimelineItemCustomCSS,
@@ -205,7 +269,6 @@ const generateVerticalTimelineItemStyle = (attributes) => {
     const vertcalTimelineContentBoxMarginDesktopWidth = `${vertcalTimelineContentBoxMarginDesktop?.top}${vertcalTimelineContentBoxMarginUnits?.Desktop} ${vertcalTimelineContentBoxMarginDesktop?.right}${vertcalTimelineContentBoxMarginUnits?.Desktop} ${vertcalTimelineContentBoxMarginDesktop?.bottom}${vertcalTimelineContentBoxMarginUnits?.Desktop} ${vertcalTimelineContentBoxMarginDesktop?.left}${vertcalTimelineContentBoxMarginUnits?.Desktop}`;
     const vertcalTimelineContentBoxMarginTabletWidth = `${vertcalTimelineContentBoxMarginTablet?.top}${vertcalTimelineContentBoxMarginUnits?.Tablet} ${vertcalTimelineContentBoxMarginTablet?.right}${vertcalTimelineContentBoxMarginUnits?.Tablet} ${vertcalTimelineContentBoxMarginTablet?.bottom}${vertcalTimelineContentBoxMarginUnits?.Tablet} ${vertcalTimelineContentBoxMarginTablet?.left}${vertcalTimelineContentBoxMarginUnits?.Tablet}`;
     const vertcalTimelineContentBoxMarginMobileWidth = `${vertcalTimelineContentBoxMarginMobile?.top}${vertcalTimelineContentBoxMarginUnits?.Mobile} ${vertcalTimelineContentBoxMarginMobile?.right}${vertcalTimelineContentBoxMarginUnits?.Mobile} ${vertcalTimelineContentBoxMarginMobile?.bottom}${vertcalTimelineContentBoxMarginUnits?.Mobile} ${vertcalTimelineContentBoxMarginMobile?.left}${vertcalTimelineContentBoxMarginUnits?.Mobile}`;
-
 
     /** Default border for Vertical Timeline Item Content Box */
     const vertcalTimelineContentBoxGlobalBorderDesktopWidth = `${vertcalTimelineContentBoxGlobalBorderDesktop?.top}${vertcalTimelineContentBoxGlobalBorderUnits?.Desktop} ${vertcalTimelineContentBoxGlobalBorderDesktop?.right}${vertcalTimelineContentBoxGlobalBorderUnits?.Desktop} ${vertcalTimelineContentBoxGlobalBorderDesktop?.bottom}${vertcalTimelineContentBoxGlobalBorderUnits?.Desktop} ${vertcalTimelineContentBoxGlobalBorderDesktop?.left}${vertcalTimelineContentBoxGlobalBorderUnits?.Desktop}`;
@@ -237,6 +300,20 @@ const generateVerticalTimelineItemStyle = (attributes) => {
     const vertcalTimelinePhaseTitleBorderRadiusTabletWidth = `${vertcalTimelinePhaseTitleNormalBorderRadiusTablet?.top}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Tablet} ${vertcalTimelinePhaseTitleNormalBorderRadiusTablet?.right}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Tablet} ${vertcalTimelinePhaseTitleNormalBorderRadiusTablet?.bottom}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Tablet} ${vertcalTimelinePhaseTitleNormalBorderRadiusTablet?.left}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Tablet}`;
     const vertcalTimelinePhaseTitleBorderRadiusMobileWidth = `${vertcalTimelinePhaseTitleNormalBorderRadiusMobile?.top}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Mobile} ${vertcalTimelinePhaseTitleNormalBorderRadiusMobile?.right}${vertcalTimelinePhaseTitleNormalBorderRadiusMobile?.right} ${vertcalTimelinePhaseTitleNormalBorderRadiusMobile?.bottom}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Mobile} ${vertcalTimelinePhaseTitleNormalBorderRadiusMobile?.left}${vertcalTimelinePhaseTitleNormalBorderRadiusUnits?.Mobile}`;
 
+    /** Default padding for Vertical Timeline Item Icon */
+    const verticalTimelineItemIconPaddingDesktopWidth = `${verticalTimelineItemIconPaddingDesktop?.top}${verticalTimelineItemIconPaddingUnits?.Desktop} ${verticalTimelineItemIconPaddingDesktop?.right}${verticalTimelineItemIconPaddingUnits?.Desktop} ${verticalTimelineItemIconPaddingDesktop?.bottom}${verticalTimelineItemIconPaddingUnits?.Desktop} ${verticalTimelineItemIconPaddingDesktop?.left}${verticalTimelineItemIconPaddingUnits?.Desktop}`;
+    const verticalTimelineItemIconPaddingTabletWidth = `${verticalTimelineItemIconPaddingTablet?.top}${verticalTimelineItemIconPaddingUnits?.Tablet} ${verticalTimelineItemIconPaddingTablet?.right}${verticalTimelineItemIconPaddingUnits?.Tablet} ${verticalTimelineItemIconPaddingTablet?.bottom}${verticalTimelineItemIconPaddingUnits?.Tablet} ${verticalTimelineItemIconPaddingTablet?.left}${verticalTimelineItemIconPaddingUnits?.Tablet}`;
+    const verticalTimelineItemIconPaddingMobileWidth = `${verticalTimelineItemIconPaddingMobile?.top}${verticalTimelineItemIconPaddingUnits?.Mobile} ${verticalTimelineItemIconPaddingMobile?.right}${verticalTimelineItemIconPaddingUnits?.Mobile} ${verticalTimelineItemIconPaddingMobile?.bottom}${verticalTimelineItemIconPaddingUnits?.Mobile} ${verticalTimelineItemIconPaddingMobile?.left}${verticalTimelineItemIconPaddingUnits?.Mobile}`;
+
+    /** Default border for Vertical Timeline Item Icon */
+    const verticalTimelineItemIconBorderDesktopWidth = `${verticalTimelineItemIconBorderDesktop?.top}${verticalTimelineItemIconBorderUnits?.Desktop} ${verticalTimelineItemIconBorderDesktop?.right}${verticalTimelineItemIconBorderUnits?.Desktop} ${verticalTimelineItemIconBorderDesktop?.bottom}${verticalTimelineItemIconBorderUnits?.Desktop} ${verticalTimelineItemIconBorderDesktop?.left}${verticalTimelineItemIconBorderUnits?.Desktop}`;
+    const verticalTimelineItemIconBorderTabletWidth = `${verticalTimelineItemIconBorderTablet?.top}${verticalTimelineItemIconBorderUnits?.Tablet} ${verticalTimelineItemIconBorderTablet?.right}${verticalTimelineItemIconBorderUnits?.Tablet} ${verticalTimelineItemIconBorderTablet?.bottom}${verticalTimelineItemIconBorderUnits?.Tablet} ${verticalTimelineItemIconBorderTablet?.left}${verticalTimelineItemIconBorderUnits?.Tablet}`;
+    const verticalTimelineItemIconBorderMobileWidth = `${verticalTimelineItemIconBorderMobile?.top}${verticalTimelineItemIconBorderUnits?.Mobile} ${verticalTimelineItemIconBorderMobile?.right}${verticalTimelineItemIconBorderUnits?.Mobile} ${verticalTimelineItemIconBorderMobile?.bottom}${verticalTimelineItemIconBorderUnits?.Mobile} ${verticalTimelineItemIconBorderMobile?.left}${verticalTimelineItemIconBorderUnits?.Mobile}`;
+
+    /** Default border radius for Vertical Timeline Item Icon */
+    const verticalTimelineItemIconBorderRadiusDesktopWidth = `${verticalTimelineItemIconBorderRadiusDesktop?.top}${verticalTimelineItemIconBorderRadiusUnits?.Desktop} ${verticalTimelineItemIconBorderRadiusDesktop?.right}${verticalTimelineItemIconBorderRadiusUnits?.Desktop} ${verticalTimelineItemIconBorderRadiusDesktop?.bottom}${verticalTimelineItemIconBorderRadiusUnits?.Desktop} ${verticalTimelineItemIconBorderRadiusDesktop?.left}${verticalTimelineItemIconBorderRadiusUnits?.Desktop}`;
+    const verticalTimelineItemIconBorderRadiusTabletWidth = `${verticalTimelineItemIconBorderRadiusTablet?.top}${verticalTimelineItemIconBorderRadiusUnits?.Tablet} ${verticalTimelineItemIconBorderRadiusTablet?.right}${verticalTimelineItemIconBorderRadiusUnits?.Tablet} ${verticalTimelineItemIconBorderRadiusTablet?.bottom}${verticalTimelineItemIconBorderRadiusUnits?.Tablet} ${verticalTimelineItemIconBorderRadiusTablet?.left}${verticalTimelineItemIconBorderRadiusUnits?.Tablet}`;
+    const verticalTimelineItemIconBorderRadiusMobileWidth = `${verticalTimelineItemIconBorderRadiusMobile?.top}${verticalTimelineItemIconBorderRadiusUnits?.Mobile} ${verticalTimelineItemIconBorderRadiusMobile?.right}${verticalTimelineItemIconBorderRadiusUnits?.Mobile} ${verticalTimelineItemIconBorderRadiusMobile?.bottom}${verticalTimelineItemIconBorderRadiusUnits?.Mobile} ${verticalTimelineItemIconBorderRadiusMobile?.left}${verticalTimelineItemIconBorderRadiusUnits?.Mobile}`;
 
 
     const fbTimelineItemStyle = `
@@ -397,6 +474,37 @@ const generateVerticalTimelineItemStyle = (attributes) => {
         .${blockID} .fb-vertical-timeline-label:hover {
              ${sectionLebelBtnTextColorSwitcher && sectionLebelBtnTextHoverColor ? `color: ${sectionLebelBtnTextHoverColor};` : ""}   
         }
+
+        .${blockID} .fb-vertical-timeline-icon svg{
+              ${verticalTimelineIconSize?.Desktop && verticalTimelineIconSizeUnits?.Desktop ? `width: ${verticalTimelineIconSize.Desktop}${verticalTimelineIconSizeUnits.Desktop};` : ""}
+              ${verticalTimelineIconSize?.Desktop && verticalTimelineIconSizeUnits?.Desktop ? `height: ${verticalTimelineIconSize.Desktop}${verticalTimelineIconSizeUnits.Desktop};` : ""}
+        }
+
+        .${blockID} .fb-vertical-timeline-icon {
+            ${verticalTimelineItemIconBorderRadiusDesktopWidth && verticalTimelineItemIconBorderRadiusDesktop?.top ? `border-radius: ${verticalTimelineItemIconBorderRadiusDesktopWidth};` : ''}
+            ${verticalTimelineItemIconBorder ? `border-style: ${verticalTimelineItemIconBorder};` : ''}
+            ${verticalTimelineItemIconBorderColor ? `border-color: ${verticalTimelineItemIconBorderColor};` : ''}
+            ${verticalTimelineItemIconBorderDesktopWidth && verticalTimelineItemIconBorderDesktop?.top ? `border-width: ${verticalTimelineItemIconBorderDesktopWidth};` : ''}
+            ${verticalTimelineItemIconPaddingDesktopWidth && verticalTimelineItemIconPaddingDesktop?.top ? `padding: ${verticalTimelineItemIconPaddingDesktopWidth};` : ''}
+            ${verticalTimelineItemIconNormalBackgroundType === 'gradient' ? `  
+                ${verticalTimelineItemIconNormalCustomGradientSwitcher && verticalTimelineItemIconNormalCustomGradientInputValue ? `background: ${verticalTimelineItemIconNormalCustomGradientInputValue};` : `background: ${verticalTimelineItemIconNormalGradientColor};`}
+            `: `
+                ${verticalTimelineItemIconNormalClassicColor ? `background: ${verticalTimelineItemIconNormalClassicColor};` : ''}
+            `}
+            ${verticalTimelineItemIconColor ? `color: ${verticalTimelineItemIconColor};` : ''}
+            ${verticalTimelineItemIconBoxShadowCssValue ? `box-shadow: ${verticalTimelineItemIconBoxShadowCssValue};` : ''}
+        }
+            
+        .${blockID} .fb-vertical-timeline-item-wrapper:hover .fb-vertical-timeline-icon {
+            ${verticalTimelineItemIconBorderHoverColor ? `border-color: ${verticalTimelineItemIconBorderHoverColor};` : ''}
+            ${verticalTimelineItemIconHoverBackgroundType === 'gradient' ? `  
+                ${verticalTimelineItemIconHoverCustomGradientSwitcher && verticalTimelineItemIconHoverCustomGradientInputValue ? `background: ${verticalTimelineItemIconHoverCustomGradientInputValue};` : `background: ${verticalTimelineItemIconHoverGradientColor};`}
+            `: `
+                ${verticalTimelineItemIconHoverClassicColor ? `background: ${verticalTimelineItemIconHoverClassicColor};` : ''}
+            `}
+            ${verticalTimelineItemIconHoverColor ? `color: ${verticalTimelineItemIconHoverColor};` : ''}
+            ${verticalTimelineItemIconBoxShadowHoverCssValue ? `box-shadow: ${verticalTimelineItemIconBoxShadowHoverCssValue};` : ''}
+        }
             
 
        @media only screen and (max-width: 1024px) {
@@ -407,8 +515,19 @@ const generateVerticalTimelineItemStyle = (attributes) => {
                ${vertcalTimelineContentBoxGlobalBorderRadiusTabletWidth && vertcalTimelineContentBoxGlobalBorderRadiusTablet?.top ? `border-radius: ${vertcalTimelineContentBoxGlobalBorderRadiusTabletWidth};` : ''}
            } 
 
+          .${blockID} .fb-vertical-timeline-icon {
+            ${verticalTimelineItemIconBorderTabletWidth && verticalTimelineItemIconBorderTablet?.top ? `border-width: ${verticalTimelineItemIconBorderTabletWidth};` : ''}
+            ${verticalTimelineItemIconPaddingTabletWidth && verticalTimelineItemIconPaddingTablet?.top ? `padding: ${verticalTimelineItemIconPaddingTabletWidth};` : ''}
+            ${verticalTimelineItemIconBorderRadiusTabletWidth && verticalTimelineItemIconBorderRadiusTablet?.top ? `border-radius: ${verticalTimelineItemIconBorderRadiusTabletWidth};` : ''}
+          }
+
+        .${blockID} .fb-vertical-timeline-icon svg{
+              ${verticalTimelineIconSize?.Tablet && verticalTimelineIconSizeUnits?.Tablet ? `width: ${verticalTimelineIconSize.Tablet}${verticalTimelineIconSizeUnits.Tablet};` : ""}
+              ${verticalTimelineIconSize?.Tablet && verticalTimelineIconSizeUnits?.Tablet ? `height: ${verticalTimelineIconSize.Tablet}${verticalTimelineIconSizeUnits.Tablet};` : ""}
+         }
+
           .${blockID} .fb-vertical-timeline-item-phase-title p {
-  ${phaseTitleTypoSwitcher.fontFamily === true &&
+             ${phaseTitleTypoSwitcher.fontFamily === true &&
             phaseTitleTypographyData.fontFamily
             ? `font-family: ${phaseTitleTypographyData.fontFamily};`
             : ""
@@ -509,7 +628,18 @@ const generateVerticalTimelineItemStyle = (attributes) => {
               ${vertcalTimelinePhaseTitleMarginMobileWidth && vertcalTimelinePhaseTitleMarginDesktop?.top ? `margin: ${vertcalTimelinePhaseTitleMarginDesktopWidth};` : ''} 
               ${vertcalTimelinePhaseTitleBorderMobileWidth && vertcalTimelinePhaseTitleNormalBorderDesktop?.top ? `border-width: ${vertcalTimelinePhaseTitleBorderDesktopWidth};` : ''}
               ${vertcalTimelinePhaseTitleBorderRadiusMobileWidth && vertcalTimelinePhaseTitleNormalBorderRadiusDesktop?.top ? `border-radius: ${vertcalTimelinePhaseTitleBorderRadiusDesktopWidth};` : ''}
-          } 
+          }
+
+          .${blockID} .fb-vertical-timeline-icon {
+            ${verticalTimelineItemIconBorderMobileWidth && verticalTimelineItemIconBorderMobile?.top ? `border-width: ${verticalTimelineItemIconBorderMobileWidth};` : ''}
+            ${verticalTimelineItemIconPaddingMobileWidth && verticalTimelineItemIconPaddingMobile?.top ? `padding: ${verticalTimelineItemIconPaddingMobileWidth};` : ''}
+            ${verticalTimelineItemIconBorderRadiusMobileWidth && verticalTimelineItemIconBorderRadiusMobile?.top ? `border-radius: ${verticalTimelineItemIconBorderRadiusMobileWidth};` : ''}
+        }
+
+        .${blockID} .fb-vertical-timeline-icon svg{
+              ${verticalTimelineIconSize?.Mobile && verticalTimelineIconSizeUnits?.Mobile ? `width: ${verticalTimelineIconSize.Mobile}${verticalTimelineIconSizeUnits.Mobile};` : ""}
+              ${verticalTimelineIconSize?.Mobile && verticalTimelineIconSizeUnits?.Mobile ? `height: ${verticalTimelineIconSize.Mobile}${verticalTimelineIconSizeUnits.Mobile};` : ""}
+        }
        }
     `;
 

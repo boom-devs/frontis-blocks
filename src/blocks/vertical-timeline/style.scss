@@ -1,0 +1,48 @@
+// .fb-vertical-timeline-item-wrapper {
+//     display: flex;
+//     align-items: center;
+//     gap: 50px;
+//     margin-bottom: 20px;
+//     position: relative; 
+
+//     .fb-vertical-timeline-side {
+//         display: flex;
+//         align-items: center;
+//         gap: 20px;
+//         position: relative; 
+
+
+//         &::before {
+//             content: '';
+//             position: absolute;
+//             left: 50%;
+//             transform: translateX(-50%);
+//             width: 2px;
+//             background-color: #0875ff; 
+//             top: calc(-100% - 10px); 
+//             bottom: calc(-100% - 10px); 
+//             z-index: 1;
+//         }
+
+//         &:first-child::before {
+//             top: 50%;
+//         }
+//     }
+// }
+
+
+.fb-vertical-timeline-inner {
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        // left: [icon এর X position]px;
+        left: 124px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: #0875ff;
+        z-index: 0;
+    }
+}
