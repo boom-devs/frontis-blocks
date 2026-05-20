@@ -2,6 +2,9 @@
 const attributes = {
     blockID: {
         type: 'string',
+        source: 'attribute',
+        selector: '.fb-post-grid-area',
+        attribute: 'data-block-id',
         default: ''
     },
 	blockStyle: {
