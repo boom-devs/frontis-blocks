@@ -17,10 +17,10 @@ export const presetStyles = {
         labelContainerNormalCustomGradientSwitcher: false,
         newsTickerGlobalBorder: "solid",
         newsTickerGlobalBorderColor: "#399CFF",
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
-        labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
+        labelContainerBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalPaddingDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
         labelIconColor: "#ffffff",
         labelTextColor: "#ffffff",
         showArrows: false,
@@ -42,11 +42,11 @@ export const presetStyles = {
         labelContainerNormalCustomGradientSwitcher: true,
         newsTickerGlobalBorder: "solid",
         newsTickerGlobalBorderColor: "#B9087B",
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
-        labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        tickerTimerBorderRadiusDesktop: {top: '50', right: '0', bottom: '0', left: '50'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
+        labelContainerBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalPaddingDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        tickerTimerBorderRadiusDesktop: { top: '50', right: '0', bottom: '0', left: '50' },
         labelIconColor: "#ffffff",
         labelTextColor: "#ffffff",
         showArrows: true,
@@ -70,15 +70,15 @@ export const presetStyles = {
         labelContainerNormalCustomGradientSwitcher: true,
         newsTickerGlobalBorder: "solid",
         newsTickerGlobalBorderColor: "#FFF4EC",
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
         tickerTimerNormalClassicColor: "",
         tickerTimerNormalBackgroundType: "gradient",
         tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
         tickerTimerNormalCustomGradientSwitcher: true,
-        labelContainerBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
-        tickerTimerPaddingDesktop: {top: '4', right: '16', bottom: '4', left: '16'},
-        newsTickerGlobalPaddingDesktop: {top: '10', right: '10', bottom: '10', left: '10'},
+        labelContainerBorderRadiusDesktop: { top: '50', right: '50', bottom: '50', left: '50' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '50', right: '50', bottom: '50', left: '50' },
+        tickerTimerPaddingDesktop: { top: '4', right: '16', bottom: '4', left: '16' },
+        newsTickerGlobalPaddingDesktop: { top: '10', right: '10', bottom: '10', left: '10' },
         tickerTimerColor: "#ffffff",
         labelIconColor: "#0b0c0e",
         labelTextColor: "#0b0c0e",
@@ -102,13 +102,13 @@ export const presetStyles = {
         labelContainerNormalCustomGradientSwitcher: false,
         newsTickerGlobalBorder: "solid",
         newsTickerGlobalBorderColor: "#70BF73",
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
         tickerTimerNormalClassicColor: "",
         tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
-        labelContainerBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '50', right: '50', bottom: '50', left: '50'},
-        tickerTimerPaddingDesktop: {top: '4', right: '16', bottom: '4', left: '16'},
-        newsTickerGlobalPaddingDesktop: {top: '10', right: '10', bottom: '10', left: '10'},
+        labelContainerBorderRadiusDesktop: { top: '50', right: '50', bottom: '50', left: '50' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '50', right: '50', bottom: '50', left: '50' },
+        tickerTimerPaddingDesktop: { top: '4', right: '16', bottom: '4', left: '16' },
+        newsTickerGlobalPaddingDesktop: { top: '10', right: '10', bottom: '10', left: '10' },
         tickerTimerColor: "#ffffff",
         labelIconColor: "#ffffff",
         labelTextColor: "#ffffff",
@@ -137,11 +137,11 @@ export const presetStyles = {
         tickerTimerNormalBackgroundType: "gradient",
         tickerTimerNormalCustomGradientInputValue: "linear-gradient(270deg, #B9087B 0%, #F67C87 100%);",
         tickerTimerNormalCustomGradientSwitcher: true,
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
-        labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        tickerTimerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
+        labelContainerBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalPaddingDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        tickerTimerBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
         labelIconColor: "#ffffff",
         labelTextColor: "#ffffff",
         showArrows: true,
@@ -165,10 +165,10 @@ export const presetStyles = {
         labelContainerNormalCustomGradientSwitcher: true,
         newsTickerGlobalBorder: "solid",
         newsTickerGlobalBorderColor: "#B9087B",
-        newsTickerGlobalBorderDesktop: {top: '1', bottom: '1', left: '1', right: '1'},
-        labelContainerBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalBorderRadiusDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
-        newsTickerGlobalPaddingDesktop: {top: '0', right: '0', bottom: '0', left: '0'},
+        newsTickerGlobalBorderDesktop: { top: '1', bottom: '1', left: '1', right: '1' },
+        labelContainerBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalBorderRadiusDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
+        newsTickerGlobalPaddingDesktop: { top: '0', right: '0', bottom: '0', left: '0' },
         labelIconColor: "#ffffff",
         labelTextColor: "#ffffff",
         showArrows: true,
@@ -179,7 +179,7 @@ export const presetStyles = {
         navigationIconColor: "#E95B68"
     },
 };
-    
+
 export const newsTickerPresets = [
     {
         value: 'preset-1',
@@ -189,7 +189,7 @@ export const newsTickerPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14487)">
                     <rect x="48" y="112" width="252" height="52" fill="white" shape-rendering="crispEdges"/>
-                    <rect x="48.75" y="112.75" width="250.5" height="50.5" stroke="#404655" stroke-width="1.5" shape-rendering="crispEdges"/>
+                    <rect x="48.75" y="112.75" width="250.5" height="50.5" stroke="#404655" strokeWidth="1.5" shape-rendering="crispEdges"/>
                     <rect width="96" height="52" transform="translate(48 112)" fill="#404655"/>
                     <g filter="url(#filter1_d_16980_14487)">
                     <path d="M65 138C65 135.239 67.2386 133 70 133H122C124.761 133 127 135.239 127 138C127 140.761 124.761 143 122 143H70C67.2386 143 65 140.761 65 138Z" fill="white"/>
@@ -253,7 +253,7 @@ export const newsTickerPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14493)">
                     <rect x="38" y="112" width="272" height="52" fill="white" shape-rendering="crispEdges"/>
-                    <rect x="38.75" y="112.75" width="270.5" height="50.5" stroke="#404655" stroke-width="1.5" shape-rendering="crispEdges"/>
+                    <rect x="38.75" y="112.75" width="270.5" height="50.5" stroke="#404655" strokeWidth="1.5" shape-rendering="crispEdges"/>
                     <rect width="110" height="52" transform="translate(38 112)" fill="#404655"/>
                     <path d="M59.6868 131.001C59.8421 131.073 59.9162 131.165 59.9993 131.313C60.0112 131.398 60.0153 131.467 60.0126 131.552C60.0121 131.577 60.0117 131.602 60.0113 131.628C59.9996 132.069 59.9558 132.509 59.9183 132.947C59.9068 133.082 59.8956 133.217 59.8844 133.351C59.8656 133.577 59.8466 133.802 59.8274 134.028C59.8053 134.288 59.7834 134.549 59.7617 134.809C59.7385 135.088 59.7151 135.366 59.6917 135.644C59.6849 135.724 59.6782 135.804 59.6716 135.884C59.6611 136.009 59.6505 136.135 59.6398 136.26C59.6359 136.306 59.632 136.352 59.6282 136.398C59.6229 136.461 59.6176 136.523 59.6122 136.586C59.6092 136.621 59.6063 136.656 59.6032 136.692C59.5947 136.767 59.5825 136.835 59.5618 136.907C59.6147 136.894 59.6147 136.894 59.6687 136.881C59.904 136.829 60.1431 136.798 60.3815 136.763C60.434 136.756 60.4865 136.748 60.539 136.74C60.6487 136.724 60.7585 136.709 60.8683 136.693C61.0078 136.673 61.1472 136.652 61.2867 136.632C61.3951 136.616 61.5035 136.601 61.6119 136.585C61.6633 136.578 61.7146 136.57 61.766 136.563C62.5621 136.445 62.5621 136.445 62.8 136.552C62.9734 136.725 63.0135 136.844 63.022 137.085C62.9673 137.333 62.7631 137.535 62.6028 137.725C62.5639 137.772 62.5251 137.819 62.4863 137.865C62.4673 137.888 62.4483 137.911 62.4287 137.935C62.351 138.029 62.2755 138.125 62.2004 138.221C62.078 138.379 61.9534 138.534 61.8274 138.688C61.7008 138.843 61.5756 138.999 61.4524 139.157C61.3123 139.336 61.1693 139.513 61.0254 139.689C60.9163 139.823 60.8087 139.958 60.7024 140.095C60.5623 140.274 60.4193 140.451 60.2754 140.627C60.1663 140.761 60.0587 140.896 59.9524 141.032C59.8123 141.211 59.6693 141.388 59.5254 141.564C59.4163 141.698 59.3087 141.833 59.2024 141.97C59.0623 142.149 58.9193 142.326 58.7754 142.502C58.6663 142.636 58.5587 142.771 58.4524 142.907C58.3123 143.086 58.1693 143.263 58.0254 143.439C57.9163 143.573 57.8087 143.708 57.7024 143.845C57.5603 144.027 57.4155 144.206 57.2693 144.385C57.1728 144.503 57.0786 144.622 56.9856 144.743C56.872 144.883 56.786 144.988 56.5984 145.012C56.4482 145.019 56.3398 145.014 56.2024 144.95C56.0844 144.838 56.0071 144.744 55.984 144.579C55.9838 144.536 55.9846 144.493 55.986 144.45C55.9864 144.425 55.9868 144.399 55.9872 144.374C55.999 143.933 56.0428 143.493 56.0803 143.054C56.0917 142.919 56.1029 142.785 56.1141 142.65C56.133 142.425 56.152 142.199 56.1711 141.974C56.1932 141.713 56.2151 141.453 56.2368 141.192C56.2601 140.914 56.2834 140.636 56.3069 140.357C56.3136 140.277 56.3203 140.197 56.327 140.117C56.3375 139.992 56.3481 139.867 56.3588 139.741C56.3627 139.696 56.3665 139.65 56.3704 139.604C56.3756 139.541 56.381 139.478 56.3863 139.416C56.3893 139.381 56.3923 139.345 56.3953 139.309C56.4038 139.235 56.4161 139.167 56.4368 139.095C56.4006 139.104 56.3644 139.114 56.3271 139.123C56.1996 139.155 56.0716 139.177 55.9416 139.196C55.9069 139.201 55.9069 139.201 55.8715 139.206C55.7959 139.217 55.7202 139.228 55.6445 139.238C55.5913 139.246 55.538 139.254 55.4848 139.261C55.3734 139.277 55.262 139.293 55.1505 139.309C55.0089 139.329 54.8673 139.349 54.7257 139.37C54.6157 139.385 54.5057 139.401 54.3957 139.417C54.3436 139.424 54.2914 139.431 54.2393 139.439C53.435 139.556 53.435 139.556 53.1985 139.45C53.0251 139.277 52.985 139.158 52.9766 138.916C53.0312 138.668 53.2355 138.466 53.3958 138.276C53.4346 138.23 53.4734 138.183 53.5122 138.136C53.5407 138.102 53.5407 138.102 53.5699 138.067C53.6475 137.972 53.723 137.877 53.7981 137.78C53.9206 137.623 54.0451 137.468 54.1711 137.313C54.2977 137.158 54.423 137.002 54.5461 136.845C54.6862 136.665 54.8293 136.488 54.9731 136.312C55.0822 136.178 55.1898 136.043 55.2961 135.907C55.4362 135.728 55.5793 135.551 55.7231 135.375C55.8322 135.241 55.9398 135.106 56.0461 134.97C56.1862 134.79 56.3293 134.613 56.4731 134.437C56.5822 134.303 56.6898 134.168 56.7961 134.032C56.9362 133.853 57.0793 133.676 57.2231 133.5C57.3322 133.366 57.4398 133.231 57.5461 133.095C57.6862 132.915 57.8293 132.738 57.9731 132.562C58.0822 132.428 58.1898 132.293 58.2961 132.157C58.4383 131.975 58.583 131.795 58.7293 131.617C58.8257 131.499 58.9199 131.379 59.0129 131.259C59.2099 131.016 59.3767 130.959 59.6868 131.001Z" fill="white"/>
                     <g filter="url(#filter1_d_16980_14493)">
@@ -269,8 +269,8 @@ export const newsTickerPresets = [
                     <path d="M287 135.5C287 132.462 289.462 130 292.5 130C295.538 130 298 132.462 298 135.5V140.5C298 143.538 295.538 146 292.5 146C289.462 146 287 143.538 287 140.5V135.5Z" fill="#E1E3E8"/>
                     </g>
                     </g>
-                    <path d="M281 134C281 134 277 136.946 277 138C277 139.054 281 142 281 142" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M299 134C299 134 303 136.946 303 138C303 139.054 299 142 299 142" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M281 134C281 134 277 136.946 277 138C277 139.054 281 142 281 142" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M299 134C299 134 303 136.946 303 138C303 139.054 299 142 299 142" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14493" x="37" y="112" width="274" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -453,7 +453,7 @@ export const newsTickerPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14509)">
                     <rect x="38" y="112" width="272" height="52" fill="white" shape-rendering="crispEdges"/>
-                    <rect x="38.75" y="112.75" width="270.5" height="50.5" stroke="#404655" stroke-width="1.5" shape-rendering="crispEdges"/>
+                    <rect x="38.75" y="112.75" width="270.5" height="50.5" stroke="#404655" strokeWidth="1.5" shape-rendering="crispEdges"/>
                     <rect width="110" height="52" transform="translate(38 112)" fill="#404655"/>
                     <path d="M59.6868 131.001C59.8421 131.073 59.9162 131.165 59.9993 131.313C60.0112 131.398 60.0153 131.467 60.0126 131.552C60.0121 131.577 60.0117 131.602 60.0113 131.628C59.9996 132.069 59.9558 132.509 59.9183 132.947C59.9068 133.082 59.8956 133.217 59.8844 133.351C59.8656 133.577 59.8466 133.802 59.8274 134.028C59.8053 134.288 59.7834 134.549 59.7617 134.809C59.7385 135.088 59.7151 135.366 59.6917 135.644C59.6849 135.724 59.6782 135.804 59.6716 135.884C59.6611 136.009 59.6505 136.135 59.6398 136.26C59.6359 136.306 59.632 136.352 59.6282 136.398C59.6229 136.461 59.6176 136.523 59.6122 136.586C59.6092 136.621 59.6063 136.656 59.6032 136.692C59.5947 136.767 59.5825 136.835 59.5618 136.907C59.6147 136.894 59.6147 136.894 59.6687 136.881C59.904 136.829 60.1431 136.798 60.3815 136.763C60.434 136.756 60.4865 136.748 60.539 136.74C60.6487 136.724 60.7585 136.709 60.8683 136.693C61.0078 136.673 61.1472 136.652 61.2867 136.632C61.3951 136.616 61.5035 136.601 61.6119 136.585C61.6633 136.578 61.7146 136.57 61.766 136.563C62.5621 136.445 62.5621 136.445 62.8 136.552C62.9734 136.725 63.0135 136.844 63.022 137.085C62.9673 137.333 62.7631 137.535 62.6028 137.725C62.5639 137.772 62.5251 137.819 62.4863 137.865C62.4673 137.888 62.4483 137.911 62.4287 137.935C62.351 138.029 62.2755 138.125 62.2004 138.221C62.078 138.379 61.9534 138.534 61.8274 138.688C61.7008 138.843 61.5756 138.999 61.4524 139.157C61.3123 139.336 61.1693 139.513 61.0254 139.689C60.9163 139.823 60.8087 139.958 60.7024 140.095C60.5623 140.274 60.4193 140.451 60.2754 140.627C60.1663 140.761 60.0587 140.896 59.9524 141.032C59.8123 141.211 59.6693 141.388 59.5254 141.564C59.4163 141.698 59.3087 141.833 59.2024 141.97C59.0623 142.149 58.9193 142.326 58.7754 142.502C58.6663 142.636 58.5587 142.771 58.4524 142.907C58.3123 143.086 58.1693 143.263 58.0254 143.439C57.9163 143.573 57.8087 143.708 57.7024 143.845C57.5603 144.027 57.4155 144.206 57.2693 144.385C57.1728 144.503 57.0786 144.622 56.9856 144.743C56.872 144.883 56.786 144.988 56.5984 145.012C56.4482 145.019 56.3398 145.014 56.2024 144.95C56.0844 144.838 56.0071 144.744 55.984 144.579C55.9838 144.536 55.9846 144.493 55.986 144.45C55.9864 144.425 55.9868 144.399 55.9872 144.374C55.999 143.933 56.0428 143.493 56.0803 143.054C56.0917 142.919 56.1029 142.785 56.1141 142.65C56.133 142.425 56.152 142.199 56.1711 141.974C56.1932 141.713 56.2151 141.453 56.2368 141.192C56.2601 140.914 56.2834 140.636 56.3069 140.357C56.3136 140.277 56.3203 140.197 56.327 140.117C56.3375 139.992 56.3481 139.867 56.3588 139.741C56.3627 139.696 56.3665 139.65 56.3704 139.604C56.3756 139.541 56.381 139.478 56.3863 139.416C56.3893 139.381 56.3923 139.345 56.3953 139.309C56.4038 139.235 56.4161 139.167 56.4368 139.095C56.4006 139.104 56.3644 139.114 56.3271 139.123C56.1996 139.155 56.0716 139.177 55.9416 139.196C55.9069 139.201 55.9069 139.201 55.8715 139.206C55.7959 139.217 55.7202 139.228 55.6445 139.238C55.5913 139.246 55.538 139.254 55.4848 139.261C55.3734 139.277 55.262 139.293 55.1505 139.309C55.0089 139.329 54.8673 139.349 54.7257 139.37C54.6157 139.385 54.5057 139.401 54.3957 139.417C54.3436 139.424 54.2914 139.431 54.2393 139.439C53.435 139.556 53.435 139.556 53.1985 139.45C53.0251 139.277 52.985 139.158 52.9766 138.916C53.0312 138.668 53.2355 138.466 53.3958 138.276C53.4346 138.23 53.4734 138.183 53.5122 138.136C53.5407 138.102 53.5407 138.102 53.5699 138.067C53.6475 137.972 53.723 137.877 53.7981 137.78C53.9206 137.623 54.0451 137.468 54.1711 137.313C54.2977 137.158 54.423 137.002 54.5461 136.845C54.6862 136.665 54.8293 136.488 54.9731 136.312C55.0822 136.178 55.1898 136.043 55.2961 135.907C55.4362 135.728 55.5793 135.551 55.7231 135.375C55.8322 135.241 55.9398 135.106 56.0461 134.97C56.1862 134.79 56.3293 134.613 56.4731 134.437C56.5822 134.303 56.6898 134.168 56.7961 134.032C56.9362 133.853 57.0793 133.676 57.2231 133.5C57.3322 133.366 57.4398 133.231 57.5461 133.095C57.6862 132.915 57.8293 132.738 57.9731 132.562C58.0822 132.428 58.1898 132.293 58.2961 132.157C58.4383 131.975 58.583 131.795 58.7293 131.617C58.8257 131.499 58.9199 131.379 59.0129 131.259C59.2099 131.016 59.3767 130.959 59.6868 131.001Z" fill="white"/>
                     <g filter="url(#filter1_d_16980_14509)">
@@ -471,8 +471,8 @@ export const newsTickerPresets = [
                     </g>
                     <rect width="70" height="26" transform="translate(38 138)" fill="#555E72"/>
                     <path d="M48 151C48 148.791 49.7909 147 52 147H94C96.2091 147 98 148.791 98 151C98 153.209 96.2091 155 94 155H52C49.7909 155 48 153.209 48 151Z" fill="white"/>
-                    <path d="M281 134C281 134 277 136.946 277 138C277 139.054 281 142 281 142" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M299 134C299 134 303 136.946 303 138C303 139.054 299 142 299 142" stroke="#404655" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M281 134C281 134 277 136.946 277 138C277 139.054 281 142 281 142" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M299 134C299 134 303 136.946 303 138C303 139.054 299 142 299 142" stroke="#404655" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14509" x="37" y="112" width="274" height="55" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
