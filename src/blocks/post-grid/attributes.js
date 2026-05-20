@@ -8,6 +8,13 @@ const attributes = {
 		type: 'string',
 		default: ''
 	},
+	defaultImageUrl: {
+		type: 'string',
+		source: 'attribute',
+		selector: '.fb-post-grid-area',
+		attribute: 'data-default-image-url',
+		default: 'assets/images/preset-bg.jpg'
+	},
 	premadeStyle: {
 		type: 'string',
 		default: 'style-1',
