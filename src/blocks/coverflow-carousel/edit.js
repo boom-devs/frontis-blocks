@@ -252,7 +252,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 		let delayedCleanup = null;
 
 		const attachListeners = () => {
-			if (!wrapperRef.current) return () => {};
+			if (!wrapperRef.current) return () => { };
 			const cards = wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide');
 			const listeners = [];
 
@@ -341,7 +341,6 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			>
 				<div className={`fb-parent-wrapper fb-coverflowCarousel-wrapper ${blockID} ${coverflowCarouselGlobalWraperClass}`} id={coverflowCarouselGlobalWraperID}>
 					<div {...innerBlocksProps} />
-
 					{/* Navigation Arrows */}
 					{showNavigation && (
 						<div className="fb-coverflow-carousel-navigation">
