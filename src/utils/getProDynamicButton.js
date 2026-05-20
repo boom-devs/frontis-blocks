@@ -7,6 +7,7 @@ import {
   MenuGroup,
   MenuItem,
 } from '@wordpress/components';
+import getProActive from "@Utils/getProActive";
 
 const getProDynamicButton = ({
   hook,
@@ -20,7 +21,7 @@ const getProDynamicButton = ({
     support: 'https://frontiswp.com/contact',
   },
 }) => {
-  const isProActive = applyFilters('frontisblocks/is-pro-active', false);
+  const isProActive = getProActive();
 
   // Allow external providers (e.g., PRO or other extensions) to inject their own controls first
   let controls = applyFilters(hook, [], { attributes, setAttributes, isProActive });
