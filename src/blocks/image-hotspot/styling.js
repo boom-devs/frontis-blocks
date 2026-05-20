@@ -132,6 +132,21 @@ const generateImageHotspotStyle = (attributes) => {
     const descMarginTablet = descMargin?.Tablet ? `${descMargin.Tablet}${descMarginUnits?.Tablet || 'px'}` : descMarginValue;
     const descMarginMobile = descMargin?.Mobile ? `${descMargin.Mobile}${descMarginUnits?.Mobile || 'px'}` : descMarginValue;
     const hotspotHoverStyles = (hotspots || []).map((hotspot) => `
+        .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] {
+            ${hotspot.x !== undefined && hotspot.x !== '' ? `left: ${hotspot.x}%;` : ''}
+            ${hotspot.y !== undefined && hotspot.y !== '' ? `top: ${hotspot.y}%;` : ''}
+            ${hotspot.animationInterval !== undefined && hotspot.animationInterval !== '' ? `--fb-hotspot-animation-interval: ${hotspot.animationInterval}s;` : ''}
+        }
+
+        .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-trigger {
+            ${hotspot.backgroundColor ? `background-color: ${hotspot.backgroundColor};` : ''}
+            ${hotspot.backgroundColor ? `color: ${hotspot.backgroundColor};` : ''}
+        }
+
+        .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"] .fb-hotspot-icon {
+            ${hotspot.iconColor ? `color: ${hotspot.iconColor};` : ''}
+        }
+
         ${hotspot.hoverBackgroundColor ? `
             .${blockID} .fb-hotspot-marker[data-hotspot-id="${hotspot.id}"]:hover .fb-hotspot-trigger {
                 background-color: ${hotspot.hoverBackgroundColor} !important;
@@ -297,7 +312,7 @@ const generateImageHotspotStyle = (attributes) => {
 
     const hotspotPopoverStyles = (hotspots || []).map((hotspot) => {
         const pos = hotspot.popoverPosition || 'top';
-        const gap = '18px';
+        const gap = '25px';
 
         const placements = {
             top: {
@@ -408,17 +423,17 @@ const generateImageHotspotStyle = (attributes) => {
 
         .${blockID} .fb-hotspot-base-image {
             width: 100%;
-            height: ${imageHeightDesktop};
+            ${imageHeight?.Desktop ? `height: ${imageHeightDesktop};` : ''}
             display: block;
-            object-fit: ${imageSize || 'cover'};
+            ${imageSize ? `object-fit: ${imageSize};` : ''}
         }
 
         .${blockID} .fb-hotspot-marker {
             position: absolute;
             transform: translate(-50%, -50%);
             z-index: 10;
-            width: ${markerSizeValue};
-            height: ${markerSizeValue};
+            ${markerSize?.Desktop ? `width: ${markerSizeValue};` : ''}
+            ${markerSize?.Desktop ? `height: ${markerSizeValue};` : ''}
             display: flex;
             align-items: center;
             justify-content: center;
@@ -426,12 +441,12 @@ const generateImageHotspotStyle = (attributes) => {
 
         .${blockID} .fb-hotspot-trigger {
             box-sizing: border-box;
-            width: ${markerSizeValue};
-            height: ${markerSizeValue};
-            background-color: ${markerColor};
-            border-radius: ${markerBorderRadiusValue};
-            border-width: ${markerBorderWidthValue};
-            border-color: ${markerBorderColor};
+            ${markerSize?.Desktop ? `width: ${markerSizeValue};` : ''}
+            ${markerSize?.Desktop ? `height: ${markerSizeValue};` : ''}
+            ${markerColor ? `background-color: ${markerColor};` : ''}
+            ${markerBorderRadius?.Desktop ? `border-radius: ${markerBorderRadiusValue};` : ''}
+            ${markerBorderWidth?.Desktop ? `border-width: ${markerBorderWidthValue};` : ''}
+            ${markerBorderColor ? `border-color: ${markerBorderColor};` : ''}
             border-style: solid;
             cursor: pointer;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
@@ -444,17 +459,17 @@ const generateImageHotspotStyle = (attributes) => {
         }
 
         .${blockID} .fb-hotspot-trigger:hover {
-            width: ${markerHoverSizeValue};
-            height: ${markerHoverSizeValue};
-            background-color: ${markerHoverColor || markerColor};
+            ${markerHoverSize?.Desktop ? `width: ${markerHoverSizeValue};` : ''}
+            ${markerHoverSize?.Desktop ? `height: ${markerHoverSizeValue};` : ''}
+            ${markerHoverColor ? `background-color: ${markerHoverColor};` : ''}
             transform: scale(1.15);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
 
         .${blockID} .fb-hotspot-icon {
-            width: ${iconSizeValue};
-            height: ${iconSizeValue};
-            color: ${iconColor};
+            ${iconSize?.Desktop ? `width: ${iconSizeValue};` : ''}
+            ${iconSize?.Desktop ? `height: ${iconSizeValue};` : ''}
+            ${iconColor ? `color: ${iconColor};` : ''}
             display: flex;
             align-items: center;
             justify-content: center;
@@ -474,102 +489,102 @@ const generateImageHotspotStyle = (attributes) => {
         ${hotspotPopoverStyles}
 
         .${blockID} .fb-hotspot-popover-title {
-            font-family: ${titleFontFamily || 'inherit'};
-            font-size: ${titleFontSizeValue};
-            font-weight: ${titleFontWeight};
-            font-style: ${titleFontStyle};
-            color: ${titleColor};
-            margin: ${titleMarginValue};
+            ${titleFontFamily ? `font-family: ${titleFontFamily};` : ''}
+            ${titleFontSize?.Desktop ? `font-size: ${titleFontSizeValue};` : ''}
+            ${titleFontWeight ? `font-weight: ${titleFontWeight};` : ''}
+            ${titleFontStyle ? `font-style: ${titleFontStyle};` : ''}
+            ${titleColor ? `color: ${titleColor};` : ''}
+            ${titleMargin?.Desktop ? `margin: ${titleMarginValue};` : ''}
             line-height: 1.4;
         }
 
         .${blockID} .fb-hotspot-popover-description {
-            font-family: ${descFontFamily || 'inherit'};
-            font-size: ${descFontSizeValue};
-            font-weight: ${descFontWeight};
-            font-style: ${descFontStyle};
-            color: ${descColor};
-            margin: ${descMarginValue};
+            ${descFontFamily ? `font-family: ${descFontFamily};` : ''}
+            ${descFontSize?.Desktop ? `font-size: ${descFontSizeValue};` : ''}
+            ${descFontWeight ? `font-weight: ${descFontWeight};` : ''}
+            ${descFontStyle ? `font-style: ${descFontStyle};` : ''}
+            ${descColor ? `color: ${descColor};` : ''}
+            ${descMargin?.Desktop ? `margin: ${descMarginValue};` : ''}
             line-height: 1.5;
         }
 
         @media only screen and (max-width: 1024px) {
 
             .${blockID} .fb-hotspot-base-image {
-                height: ${imageHeightTablet};
+                ${imageHeight?.Tablet ? `height: ${imageHeightTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-trigger {
-                width: ${markerSizeTablet};
-                height: ${markerSizeTablet};
-                border-width: ${markerBorderWidthTablet};
-                border-radius: ${markerBorderRadiusTablet};
+                ${markerSize?.Tablet ? `width: ${markerSizeTablet};` : ''}
+                ${markerSize?.Tablet ? `height: ${markerSizeTablet};` : ''}
+                ${markerBorderWidth?.Tablet ? `border-width: ${markerBorderWidthTablet};` : ''}
+                ${markerBorderRadius?.Tablet ? `border-radius: ${markerBorderRadiusTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-marker {
-                width: ${markerSizeTablet};
-                height: ${markerSizeTablet};
+                ${markerSize?.Tablet ? `width: ${markerSizeTablet};` : ''}
+                ${markerSize?.Tablet ? `height: ${markerSizeTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover {
-                width: ${popoverWidthTablet};
-                padding: ${popoverPaddingTablet};
-                border-radius: ${popoverBorderRadiusTablet};
+                ${popoverWidth?.Tablet ? `width: ${popoverWidthTablet};` : ''}
+                ${popoverPadding?.Tablet ? `padding: ${popoverPaddingTablet};` : ''}
+                ${popoverBorderRadius?.Tablet ? `border-radius: ${popoverBorderRadiusTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-icon {
-                width: ${iconSizeTablet};
-                height: ${iconSizeTablet};
+                ${iconSize?.Tablet ? `width: ${iconSizeTablet};` : ''}
+                ${iconSize?.Tablet ? `height: ${iconSizeTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-title {
-                font-size: ${titleFontSizeTablet};
-                margin: ${titleMarginTablet};
+                ${titleFontSize?.Tablet ? `font-size: ${titleFontSizeTablet};` : ''}
+                ${titleMargin?.Tablet ? `margin: ${titleMarginTablet};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-description {
-                font-size: ${descFontSizeTablet};
-                margin: ${descMarginTablet};
+                ${descFontSize?.Tablet ? `font-size: ${descFontSizeTablet};` : ''}
+                ${descMargin?.Tablet ? `margin: ${descMarginTablet};` : ''}
             }
         }
 
         @media only screen and (max-width: 767px) {
 
             .${blockID} .fb-hotspot-base-image {
-                height: ${imageHeightMobile};
+                ${imageHeight?.Mobile ? `height: ${imageHeightMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-trigger {
-                width: ${markerSizeMobile};
-                height: ${markerSizeMobile};
-                border-width: ${markerBorderWidthMobile};
-                border-radius: ${markerBorderRadiusMobile};
+                ${markerSize?.Mobile ? `width: ${markerSizeMobile};` : ''}
+                ${markerSize?.Mobile ? `height: ${markerSizeMobile};` : ''}
+                ${markerBorderWidth?.Mobile ? `border-width: ${markerBorderWidthMobile};` : ''}
+                ${markerBorderRadius?.Mobile ? `border-radius: ${markerBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-marker {
-                width: ${markerSizeMobile};
-                height: ${markerSizeMobile};
+                ${markerSize?.Mobile ? `width: ${markerSizeMobile};` : ''}
+                ${markerSize?.Mobile ? `height: ${markerSizeMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover {
-                width: ${popoverWidthMobile};
-                padding: ${popoverPaddingMobile};
-                border-radius: ${popoverBorderRadiusMobile};
+                ${popoverWidth?.Mobile ? `width: ${popoverWidthMobile};` : ''}
+                ${popoverPadding?.Mobile ? `padding: ${popoverPaddingMobile};` : ''}
+                ${popoverBorderRadius?.Mobile ? `border-radius: ${popoverBorderRadiusMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-icon {
-                width: ${iconSizeMobile};
-                height: ${iconSizeMobile};
+                ${iconSize?.Mobile ? `width: ${iconSizeMobile};` : ''}
+                ${iconSize?.Mobile ? `height: ${iconSizeMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-title {
-                font-size: ${titleFontSizeMobile};
-                margin: ${titleMarginMobile};
+                ${titleFontSize?.Mobile ? `font-size: ${titleFontSizeMobile};` : ''}
+                ${titleMargin?.Mobile ? `margin: ${titleMarginMobile};` : ''}
             }
 
             .${blockID} .fb-hotspot-popover-description {
-                font-size: ${descFontSizeMobile};
-                margin: ${descMarginMobile};
+                ${descFontSize?.Mobile ? `font-size: ${descFontSizeMobile};` : ''}
+                ${descMargin?.Mobile ? `margin: ${descMarginMobile};` : ''}
             }
         }
     `;

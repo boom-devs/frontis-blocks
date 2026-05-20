@@ -11,6 +11,55 @@
   width: 100%;
 }
 
+.fb-hotspot-repeater-wrapper {
+  .dnd-items-wrapper {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li.sortable-item {
+    margin: 10px 0;
+  }
+
+  .sortable-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #f9f9f9;
+  }
+
+  .sortable-title {
+    flex: 1;
+    min-width: 0;
+    padding-left: 5px;
+    overflow: hidden;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .sortable-sort button:focus,
+  .sortable-delete button:focus {
+    box-shadow: none;
+    outline: none;
+  }
+
+  .sortable-sort {
+    cursor: grab;
+  }
+
+  .sortable-delete button {
+    color: #d63638;
+  }
+
+  .sortable-item-content {
+    padding-top: 10px;
+  }
+}
+
 .fb-hotspot-base-image {
   max-width: 100%;
   height: auto;
