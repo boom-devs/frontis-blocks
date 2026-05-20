@@ -18,30 +18,10 @@ export function renderPreset1(attributes, timeData) {
 		showIcon,
 		iconUrl,
 		iconSize,
-		iconColor,
-		iconBgColor,
-		countdownColor,
-		countdownFontSize,
-		countdownFontWeight,
-		countdownLetterSpacing,
-		labelColor,
-		labelFontSize,
-		labelFontWeight,
-		separatorColor,
-		separatorFontSize,
-		separatorFontWeight,
-		separatorGap,
 		svgActiveColor,
 		svgInactiveColor,
 		svgStrokeWidth,
 		footerText,
-		footerColor,
-		footerFontSize,
-		footerFontWeight,
-		footerBgColor,
-		footerBorderRadius,
-		footerPaddingY,
-		footerPaddingX,
 		dueDateTime,
 		startDateTime,
 	} = attributes;
@@ -57,56 +37,17 @@ export function renderPreset1(attributes, timeData) {
 	const circ = 2 * Math.PI * r;
 	const dash = circ * (1 - progress);
 
-	const numStyle = {
-		color: countdownColor,
-		fontSize: `${countdownFontSize}px`,
-		fontWeight: countdownFontWeight,
-		letterSpacing: `${countdownLetterSpacing}px`,
-		lineHeight: 1,
-		margin: 0,
-	};
-	const lblStyle = {
-		color: labelColor,
-		fontSize: `${labelFontSize}px`,
-		fontWeight: labelFontWeight,
-		margin: "4px 0 0",
-		textAlign: "center",
-	};
-	const sepStyle = {
-		color: separatorColor,
-		fontSize: `${separatorFontSize}px`,
-		fontWeight: separatorFontWeight,
-		margin: `0 ${separatorGap}px`,
-		lineHeight: 1,
-		alignSelf: "flex-end",
-		paddingBottom: 8,
-	};
-
 	const unit = (val, lbl) => (
-		<div
-			style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-		>
-			<span style={numStyle}>{val}</span>
-			<span style={lblStyle}>{lbl}</span>
+		<div className="acd-unit">
+			<span className="acd-num">{val}</span>
+			<span className="acd-label">{lbl}</span>
 		</div>
 	);
 
 	return (
-		<div
-			className="acd-preset1-wrap"
-			style={{
-				position: "relative",
-				width: size,
-				height: size,
-				margin: "0 auto",
-			}}
-		>
+		<div className="acd-preset1-wrap" style={{ width: size, height: size }}>
 			{/* SVG circle */}
-			<svg
-				width={size}
-				height={size}
-				style={{ position: "absolute", top: 0, left: 0 }}
-			>
+			<svg width={size} height={size} className="acd-svg-canvas">
 				{/* Inactive track */}
 				<circle
 					cx={cx}
@@ -136,49 +77,17 @@ export function renderPreset1(attributes, timeData) {
 			</svg>
 
 			{/* Inner content */}
-			<div
-				style={{
-					position: "absolute",
-					inset: 0,
-					display: "flex",
-					flexDirection: "column",
-					alignItems: "center",
-					justifyContent: "center",
-					gap: 16,
-				}}
-			>
+			<div className="acd-inner-content">
 				{/* Icon */}
 				{showIcon && (
 					<div
-						style={{
-							color: iconColor,
-							background: iconBgColor,
-							width: iconSize,
-							height: iconSize,
-							display: "flex",
-							alignItems: "center",
-							justifyContent: "center",
-						}}
+						className="acd-icon-wrap"
+						style={{ width: iconSize, height: iconSize }}
 					>
 						{iconUrl ? (
-							<img
-								src={iconUrl}
-								alt=""
-								style={{
-									width: iconSize,
-									height: iconSize,
-									objectFit: "contain",
-								}}
-							/>
+							<img src={iconUrl} alt="" />
 						) : (
-							<svg
-								width={iconSize}
-								height={iconSize}
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="1.5"
-							>
+							<svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
 								<path d="M12 2a10 10 0 1 0 0 20A10 10 0 0 0 12 2z" />
 								<path d="M12 6v6l4 2" />
 							</svg>
@@ -187,29 +96,16 @@ export function renderPreset1(attributes, timeData) {
 				)}
 
 				{/* Time digits */}
-				<div style={{ display: "flex", alignItems: "center" }}>
+				<div className="acd-time-wrap">
 					{unit(String(totalHours).padStart(3, " "), "Hour")}
-					<span style={sepStyle}>:</span>
+					<span className="acd-sep">:</span>
 					{unit(pad2(minutes), "Minute")}
-					<span style={sepStyle}>:</span>
+					<span className="acd-sep">:</span>
 					{unit(pad2(seconds), "Second")}
 				</div>
 
 				{/* Footer text */}
-				{footerText && (
-					<div
-						style={{
-							color: footerColor,
-							fontSize: `${footerFontSize}px`,
-							fontWeight: footerFontWeight,
-							background: footerBgColor,
-							borderRadius: `${footerBorderRadius}px`,
-							padding: `${footerPaddingY}px ${footerPaddingX}px`,
-						}}
-					>
-						{footerText}
-					</div>
-				)}
+				{footerText && <div className="acd-footer">{footerText}</div>}
 			</div>
 		</div>
 	);

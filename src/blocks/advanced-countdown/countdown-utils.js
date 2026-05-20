@@ -1,8 +1,3 @@
-/**
- * countdown-utils.js
- * Shared time calculation helpers used by edit.js, presets.js, view.js
- */
-
 export function getTimeLeft(dueDateTime) {
 	const now = new Date().getTime();
 	const due = dueDateTime

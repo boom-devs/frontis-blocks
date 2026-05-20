@@ -47,8 +47,8 @@
 		const totalHours = t.days * 24 + t.hours;
 
 		el.innerHTML = `
-	<div style="position:relative;width:${size}px;height:${size}px;margin:0 auto">
-		<svg width="${size}" height="${size}" style="position:absolute;top:0;left:0">
+	<div class="acd-preset1-wrap" style="width:${size}px;height:${size}px">
+		<svg width="${size}" height="${size}" class="acd-svg-canvas">
 			<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${
 				attrs.svgInactiveColor || "rgba(255,255,255,0.2)"
 			}" stroke-width="${sw}"/>
@@ -56,71 +56,35 @@
 				attrs.svgActiveColor || "#f0a500"
 			}" stroke-width="${sw}"
 				stroke-dasharray="${circ}" stroke-dashoffset="${dash}" stroke-linecap="round"
-				style="transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1s linear"/>
+				class="acd-svg-progress"/>
 		</svg>
-		<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+		<div class="acd-inner-content">
 			${
 				attrs.showIcon && attrs.iconUrl
-					? `<img src="${attrs.iconUrl}" style="width:${
+					? `<div class="acd-icon-wrap"><img src="${
+							attrs.iconUrl
+					  }" style="width:${attrs.iconSize || 60}px;height:${
 							attrs.iconSize || 60
-					  }px;height:${attrs.iconSize || 60}px;object-fit:contain;color:${
-							attrs.iconColor || "#fff"
-					  }" />`
+					  }px;" /></div>`
 					: ""
 			}
-			<div style="display:flex;align-items:center">
-				<div style="display:flex;flex-direction:column;align-items:center">
-					<span style="color:${attrs.countdownColor || "#fff"};font-size:${
-						attrs.countdownFontSize || 72
-					}px;font-weight:${
-						attrs.countdownFontWeight || 700
-					};line-height:1">${totalHours}</span>
-					<span style="color:${attrs.labelColor || "#fff"};font-size:${
-						attrs.labelFontSize || 14
-					}px;margin-top:4px">Hour</span>
+			<div class="acd-time-wrap">
+				<div class="acd-unit">
+					<span class="acd-num">${totalHours}</span>
+					<span class="acd-label">Hour</span>
 				</div>
-				<span style="color:${attrs.separatorColor || "#fff"};font-size:${
-					attrs.separatorFontSize || 48
-				}px;margin:0 ${
-					attrs.separatorGap || 8
-				}px;align-self:flex-end;padding-bottom:8px">:</span>
-				<div style="display:flex;flex-direction:column;align-items:center">
-					<span style="color:${attrs.countdownColor || "#fff"};font-size:${
-						attrs.countdownFontSize || 72
-					}px;font-weight:${
-						attrs.countdownFontWeight || 700
-					};line-height:1">${pad2(t.minutes)}</span>
-					<span style="color:${attrs.labelColor || "#fff"};font-size:${
-						attrs.labelFontSize || 14
-					}px;margin-top:4px">Minute</span>
+				<span class="acd-sep">:</span>
+				<div class="acd-unit">
+					<span class="acd-num">${pad2(t.minutes)}</span>
+					<span class="acd-label">Minute</span>
 				</div>
-				<span style="color:${attrs.separatorColor || "#fff"};font-size:${
-					attrs.separatorFontSize || 48
-				}px;margin:0 ${
-					attrs.separatorGap || 8
-				}px;align-self:flex-end;padding-bottom:8px">:</span>
-				<div style="display:flex;flex-direction:column;align-items:center">
-					<span style="color:${attrs.countdownColor || "#fff"};font-size:${
-						attrs.countdownFontSize || 72
-					}px;font-weight:${
-						attrs.countdownFontWeight || 700
-					};line-height:1">${pad2(t.seconds)}</span>
-					<span style="color:${attrs.labelColor || "#fff"};font-size:${
-						attrs.labelFontSize || 14
-					}px;margin-top:4px">Second</span>
+				<span class="acd-sep">:</span>
+				<div class="acd-unit">
+					<span class="acd-num">${pad2(t.seconds)}</span>
+					<span class="acd-label">Second</span>
 				</div>
 			</div>
-			${
-				attrs.footerText
-					? `<div style="color:${attrs.footerColor || "#fff"};font-size:${
-							attrs.footerFontSize || 16
-					  }px;font-weight:${attrs.footerFontWeight || 600};background:${
-							attrs.footerBgColor || "transparent"
-					  };border-radius:${attrs.footerBorderRadius || 4}px;padding:${
-							attrs.footerPaddingY || 4
-					  }px ${attrs.footerPaddingX || 12}px">${attrs.footerText}</div>`
-					: ""
-			}
+			${attrs.footerText ? `<div class="acd-footer">${attrs.footerText}</div>` : ""}
 		</div>
 	</div>`;
 	}
@@ -135,8 +99,8 @@
 		const prog = getProgress(attrs.startDateTime, attrs.dueDateTime);
 		const totalHours = t.days * 24 + t.hours;
 		el.innerHTML = `
-	<div style="position:relative;width:${size}px;height:${size}px;margin:0 auto">
-		<svg width="${size}" height="${size}" style="position:absolute;top:0;left:0">
+	<div class="acd-p2-wrap" style="width:${size}px;height:${size}px">
+		<svg width="${size}" height="${size}" class="acd-p2-svg">
 			<circle cx="${cx}" cy="${cy}" r="${r}" fill="none" stroke="${
 				attrs.p2DashInactiveColor || "rgba(255,255,255,0.25)"
 			}" stroke-width="${sw}" stroke-dasharray="${sw} ${gap}"/>
@@ -144,21 +108,11 @@
 				attrs.p2DashActiveColor || "#f0a500"
 			}" stroke-width="${sw}"
 				stroke-dasharray="${sw} ${gap}" stroke-dashoffset="${circ * prog}"
-				style="transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1s linear"/>
+				class="acd-svg-progress"/>
 		</svg>
-		<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px">
-			<span style="color:${attrs.countdownColor || "#fff"};font-size:${
-				(attrs.countdownFontSize || 72) * 0.6
-			}px;font-weight:${
-				attrs.countdownFontWeight || 700
-			};line-height:1">${totalHours}:${pad2(t.seconds)}</span>
-			${
-				attrs.footerText
-					? `<div style="color:${attrs.footerColor || "#fff"};font-size:${
-							(attrs.footerFontSize || 16) * 0.7
-					  }px;margin-top:4px">${attrs.footerText}</div>`
-					: ""
-			}
+		<div class="acd-inner-content">
+			<span class="acd-num">${totalHours}:${pad2(t.seconds)}</span>
+			${attrs.footerText ? `<div class="acd-footer">${attrs.footerText}</div>` : ""}
 		</div>
 	</div>`;
 	}

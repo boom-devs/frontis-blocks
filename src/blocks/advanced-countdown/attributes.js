@@ -1,4 +1,13 @@
 const attributes = {
+	//  Core
+	blockID: {
+		type: "string",
+		default: "",
+	},
+	blockStyle: {
+		type: "string",
+		default: "",
+	},
 	//  Content
 	presetStyle: { type: "string", default: "preset-1" },
 	dueDateTime: { type: "string", default: "" },
@@ -113,6 +122,17 @@ const attributes = {
 	p5LabelFontSize: { type: "number", default: 13 },
 	p5LabelColor: { type: "string", default: "#ffffff" },
 	p5Gap: { type: "number", default: 32 },
+
+	// Standard Advanced Attributes
+	containerZIndex: { type: "number" },
+	containerCustomCSS: { type: "string", default: "" },
+	containerDesktop: { type: "boolean", default: false },
+	containerTablet: { type: "boolean", default: false },
+	containerMobile: { type: "boolean", default: false },
+	containerPadding: {
+		type: "object",
+		default: { top: 40, right: 24, bottom: 40, left: 24 },
+	},
 };
 
 export default attributes;
