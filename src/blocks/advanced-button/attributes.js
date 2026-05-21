@@ -1325,6 +1325,10 @@ const attributes = {
         type: 'string',
         default: 'post_permalink',
     },
+    dynamicTextPreserveButtonLabel: {
+        type: 'boolean',
+        default: false,
+    },
     /** End Dynamic Text */
 }
 export default attributes;
