@@ -92,58 +92,6 @@ const Inspector = ({ attributes, setAttributes }) => {
         /** End Class & ID Setting */
     } = attributes;
 
-
-    /** Start Icon Padding */
-    const verticalTimelineItemIconPaddingUnitsChange = (event, position) => {
-        const value = event.target.value;
-        if (verticalTimelineItemIconPaddingLink) {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { top: value, right: value, bottom: value, left: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ verticalTimelineItemIconPaddingTablet: { top: value, right: value, bottom: value, left: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ verticalTimelineItemIconPaddingMobile: { top: value, right: value, bottom: value, left: value } });
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            switch (deviceType) {
-                case 'Desktop':
-                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { ...verticalTimelineItemIconPaddingDesktop, [position]: value } });
-                    break;
-                case 'Tablet':
-                    setAttributes({ verticalTimelineItemIconPaddingTablet: { ...verticalTimelineItemIconPaddingTablet, [position]: value } });
-                    break;
-                case 'Mobile':
-                    setAttributes({ verticalTimelineItemIconPaddingMobile: { ...verticalTimelineItemIconPaddingMobile, [position]: value } });
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    const verticalTimelineItemIconPaddingLinkBtn = () => {
-        setAttributes({
-            verticalTimelineItemIconPaddingLink: !verticalTimelineItemIconPaddingLink
-        });
-    };
-
-    const verticalTimelineItemIconPaddingUnitsHandler = (unit) => {
-        setAttributes({
-            verticalTimelineItemIconPaddingUnits: {
-                ...verticalTimelineItemIconPaddingUnits,
-                [deviceType]: unit
-            }
-        });
-    };
-    /** End Icon Padding */
-
-
     /**
      * Inspector General Controls
      */
