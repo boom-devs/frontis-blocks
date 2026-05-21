@@ -101,40 +101,39 @@ const TemplateContent = ({
 				<div className="fb-template-library-store-content">
 					<div className="fb-template-library-content-header">
 						{/* <div className="fb-template-library-content-header-top"> */}
-							<div className="fb-template-library-tabs">
-								<button
-									className={`fb-template-library-tab nav-icon`}
-									onClick={handleSidebarToggle}
+						<div className="fb-template-library-tabs">
+							<button
+								className={`fb-template-library-tab nav-icon`}
+								onClick={handleSidebarToggle}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
 								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width="24"
-										height="24"
-										viewBox="0 0 24 24"
-										fill="none"
-									>
-										<path
-											d="M3 5H21M3 12H21M3 19H15"
-											stroke="#0B0C0E"
-											stroke-width="1.4"
-											stroke-linecap="round"
-										/>
-									</svg>
-								</button>
-								{TabsOptions.map((tab) => (
-									<button
-										key={tab.value}
-										className={`fb-template-library-tab ${
-											activeTab === tab.value ? "active" : ""
+									<path
+										d="M3 5H21M3 12H21M3 19H15"
+										stroke="#0B0C0E"
+										strokeWidth="1.4"
+										strokeLinecap="round"
+									/>
+								</svg>
+							</button>
+							{TabsOptions.map((tab) => (
+								<button
+									key={tab.value}
+									className={`fb-template-library-tab ${activeTab === tab.value ? "active" : ""
 										}`}
-										onClick={() => setActiveTab(tab.value)}
-										disabled={activeTab === tab.value}
-									>
-										{tab.name}
-									</button>
-								))}
-							</div>
-							{/* <div className="fb-template-library-search-wrapper">
+									onClick={() => setActiveTab(tab.value)}
+									disabled={activeTab === tab.value}
+								>
+									{tab.name}
+								</button>
+							))}
+						</div>
+						{/* <div className="fb-template-library-search-wrapper">
 								<div className="fb-search-input-wrapper">
 									<div className="fb-search-input-icon">
 										<svg
@@ -150,13 +149,13 @@ const TemplateContent = ({
 													cy="8.625"
 													r="7.125"
 													stroke="#3991FF"
-													stroke-width="1.5"
+													strokeWidth="1.5"
 												/>
 												<path
 													d="M13.875 13.875L16.5 16.5"
 													stroke="#3991FF"
-													stroke-width="1.5"
-													stroke-linecap="round"
+													strokeWidth="1.5"
+													strokeLinecap="round"
 												/>
 											</g>
 											<defs>
@@ -294,7 +293,7 @@ const TemplateContent = ({
 												<path
 													d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997"
 													stroke="#050607"
-													stroke-width="1.5"
+													strokeWidth="1.5"
 												/>
 											</g>
 											<defs>
@@ -322,9 +321,8 @@ const TemplateContent = ({
 													pages.push(
 														<button
 															key={i}
-															className={`fb-pagination-btn ${
-																currentPage === i ? "active" : ""
-															}`}
+															className={`fb-pagination-btn ${currentPage === i ? "active" : ""
+																}`}
 															onClick={() => onPageChange(activeTab, i)}
 														>
 															{i}
@@ -336,9 +334,8 @@ const TemplateContent = ({
 												pages.push(
 													<button
 														key={1}
-														className={`fb-pagination-btn ${
-															currentPage === 1 ? "active" : ""
-														}`}
+														className={`fb-pagination-btn ${currentPage === 1 ? "active" : ""
+															}`}
 														onClick={() => onPageChange(activeTab, 1)}
 													>
 														1
@@ -368,9 +365,8 @@ const TemplateContent = ({
 													pages.push(
 														<button
 															key={i}
-															className={`fb-pagination-btn ${
-																currentPage === i ? "active" : ""
-															}`}
+															className={`fb-pagination-btn ${currentPage === i ? "active" : ""
+																}`}
 															onClick={() => onPageChange(activeTab, i)}
 														>
 															{i}
@@ -390,9 +386,8 @@ const TemplateContent = ({
 													pages.push(
 														<button
 															key={last_page}
-															className={`fb-pagination-btn ${
-																currentPage === last_page ? "active" : ""
-															}`}
+															className={`fb-pagination-btn ${currentPage === last_page ? "active" : ""
+																}`}
 															onClick={() => onPageChange(activeTab, last_page)}
 														>
 															{last_page}
@@ -423,7 +418,7 @@ const TemplateContent = ({
 												<path
 													d="M10.7271 6L4.72709 12M4.72709 12L10.7271 18M4.72709 12L19.2729 11.9997"
 													stroke="#050607"
-													stroke-width="1.5"
+													strokeWidth="1.5"
 												/>
 											</g>
 											<defs>

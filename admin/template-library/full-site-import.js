@@ -9,7 +9,7 @@ import FullSiteImportSettingConfig from "./components/FullSiteImportSettingConfi
 import FullSiteImportSetting from "./components/FullSiteImportSetting.js";
 import FullSiteImportContent from "./components/FullSiteImportContent.js";
 
-const FullSiteImport = ({ 
+const FullSiteImport = ({
     template,
     onClose,
     onBack,
@@ -27,7 +27,7 @@ const FullSiteImport = ({
         importWidgets: true,
         importOptions: true
     });
-    
+
     const [activeTab, setActiveTab] = useState(template.activeTab || 'pattern');
     const [showConfigStep, setShowConfigStep] = useState(false);
     const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -114,9 +114,9 @@ const FullSiteImport = ({
                             <path
                                 d="M19.1875 21.375L14.8125 17L19.1875 12.625"
                                 stroke="#555E72"
-                                stroke-width="1.5"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                                 className={isSidebarCollapsed ? 'rotated' : ''}
                             />
                         </svg>

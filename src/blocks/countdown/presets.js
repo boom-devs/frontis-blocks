@@ -334,97 +334,97 @@ export const presetStyles = {
         "labelBgColor": "",
         "labelBgHoverColor": "",
         "countDownLabelBorderColor": "",
-            "countDownLabelBorder": "none",
-            "countDownLabelBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeLink": true,
-            "countDownLabelBorderRadiusUnits": {
-                "Desktop": "px",
-                "Tablet": "px",
-                "Mobile": "px"
-            },
-            "countDownLabelBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
+        "countDownLabelBorder": "none",
+        "countDownLabelBorderTypeDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeLink": true,
+        "countDownLabelBorderRadiusUnits": {
+            "Desktop": "px",
+            "Tablet": "px",
+            "Mobile": "px"
+        },
+        "countDownLabelBorderRadiusDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderRadiusTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderRadiusMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
         "countDownLabelHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-            "countDownDigitBorderColor": "",
-            "countDownDigitBorder": "none",
-            "countDownDigitBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusTablet": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitBorderRadiusMobile": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
+            "Desktop": "",
+            "Tablet": "",
+            "Mobile": ""
+        },
+        "countDownDigitBorderColor": "",
+        "countDownDigitBorder": "none",
+        "countDownDigitBorderTypeDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderTypeTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderTypeMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderRadiusDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderRadiusTablet": {
+            "top": "",
+            "bottom": "",
+            "left": "",
+            "right": ""
+        },
+        "countDownDigitBorderRadiusMobile": {
+            "top": "",
+            "bottom": "",
+            "left": "",
+            "right": ""
+        },
+        "countDownDigitHeight": {
+            "Desktop": "",
+            "Tablet": "",
+            "Mobile": ""
+        },
     },
     "preset-3": {
         "countDownFlexWrap": true,
@@ -540,97 +540,97 @@ export const presetStyles = {
         "labelBgColor": "",
         "labelBgHoverColor": "",
         "countDownLabelBorderColor": "",
-            "countDownLabelBorder": "none",
-            "countDownLabelBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderTypeLink": true,
-            "countDownLabelBorderRadiusUnits": {
-                "Desktop": "px",
-                "Tablet": "px",
-                "Mobile": "px"
-            },
-            "countDownLabelBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownLabelBorderRadiusMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
+        "countDownLabelBorder": "none",
+        "countDownLabelBorderTypeDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderTypeLink": true,
+        "countDownLabelBorderRadiusUnits": {
+            "Desktop": "px",
+            "Tablet": "px",
+            "Mobile": "px"
+        },
+        "countDownLabelBorderRadiusDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderRadiusTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownLabelBorderRadiusMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
         "countDownLabelHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
-            "countDownDigitBorderColor": "",
-            "countDownDigitBorder": "none",
-            "countDownDigitBorderTypeDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeTablet": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderTypeMobile": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusDesktop": {
-                "top": "",
-                "right": "",
-                "bottom": "",
-                "left": ""
-            },
-            "countDownDigitBorderRadiusTablet": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitBorderRadiusMobile": {
-                "top": "",
-                "bottom": "",
-                "left": "",
-                "right": ""
-            },
-            "countDownDigitHeight": {
-                "Desktop": "",
-                "Tablet": "",
-                "Mobile": ""
-            },
+            "Desktop": "",
+            "Tablet": "",
+            "Mobile": ""
+        },
+        "countDownDigitBorderColor": "",
+        "countDownDigitBorder": "none",
+        "countDownDigitBorderTypeDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderTypeTablet": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderTypeMobile": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderRadiusDesktop": {
+            "top": "",
+            "right": "",
+            "bottom": "",
+            "left": ""
+        },
+        "countDownDigitBorderRadiusTablet": {
+            "top": "",
+            "bottom": "",
+            "left": "",
+            "right": ""
+        },
+        "countDownDigitBorderRadiusMobile": {
+            "top": "",
+            "bottom": "",
+            "left": "",
+            "right": ""
+        },
+        "countDownDigitHeight": {
+            "Desktop": "",
+            "Tablet": "",
+            "Mobile": ""
+        },
     },
     "preset-4": {
         "countDownLayoutType": "grid",
@@ -881,7 +881,7 @@ export const presetStyles = {
         },
     },
 };
-    
+
 export const countdownPresets = [
     {
         value: 'preset-1',
@@ -1105,7 +1105,7 @@ export const countdownPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <path d="M24 98C24 90.268 30.268 84 38 84H310C317.732 84 324 90.268 324 98V178C324 185.732 317.732 192 310 192H38C30.268 192 24 185.732 24 178V98Z" fill="white" fill-opacity="0.4"/>
                     <g filter="url(#filter0_d_16980_15000)">
-                    <rect x="38.7326" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" stroke-width="1.46526" shape-rendering="crispEdges"/>
+                    <rect x="38.7326" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" strokeWidth="1.46526" shape-rendering="crispEdges"/>
                     <path d="M64.4984 110.666C71.8624 110.666 77.8317 116.635 77.8317 123.999C77.8317 131.363 71.8624 137.333 64.4984 137.333C57.1344 137.333 51.165 131.363 51.165 123.999C51.165 116.635 57.1344 110.666 64.4984 110.666ZM64.4984 115.999C64.1448 115.999 63.8056 116.14 63.5556 116.39C63.3055 116.64 63.165 116.979 63.165 117.333V123.999C63.1651 124.353 63.3056 124.692 63.5557 124.942L67.5557 128.942C67.8072 129.185 68.144 129.319 68.4936 129.316C68.8432 129.313 69.1776 129.173 69.4248 128.926C69.672 128.679 69.8122 128.344 69.8153 127.995C69.8183 127.645 69.6839 127.308 69.441 127.057L65.8317 123.447V117.333C65.8317 116.979 65.6912 116.64 65.4412 116.39C65.1911 116.14 64.852 115.999 64.4984 115.999Z" fill="#404655"/>
                     <rect width="53" height="28" transform="translate(38 150)" fill="white"/>
                     <rect x="48" y="160" width="33" height="8" rx="4" fill="#E1E3E8"/>
@@ -1113,7 +1113,7 @@ export const countdownPresets = [
                     <circle cx="101" cy="129" r="2" fill="#404655"/>
                     <circle cx="101" cy="147" r="2" fill="#404655"/>
                     <g filter="url(#filter1_d_16980_15000)">
-                    <rect x="111.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" stroke-width="1.46526" shape-rendering="crispEdges"/>
+                    <rect x="111.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" strokeWidth="1.46526" shape-rendering="crispEdges"/>
                     <path d="M137.498 110.666C144.862 110.666 150.832 116.635 150.832 123.999C150.832 131.363 144.862 137.333 137.498 137.333C130.134 137.333 124.165 131.363 124.165 123.999C124.165 116.635 130.134 110.666 137.498 110.666ZM137.498 115.999C137.145 115.999 136.806 116.14 136.556 116.39C136.306 116.64 136.165 116.979 136.165 117.333V123.999C136.165 124.353 136.306 124.692 136.556 124.942L140.556 128.942C140.807 129.185 141.144 129.319 141.494 129.316C141.843 129.313 142.178 129.173 142.425 128.926C142.672 128.679 142.812 128.344 142.815 127.995C142.818 127.645 142.684 127.308 142.441 127.057L138.832 123.447V117.333C138.832 116.979 138.691 116.64 138.441 116.39C138.191 116.14 137.852 115.999 137.498 115.999Z" fill="#404655"/>
                     <rect width="53" height="28" transform="translate(111 150)" fill="white"/>
                     <rect x="121" y="160" width="33" height="8" rx="4" fill="#E1E3E8"/>
@@ -1121,7 +1121,7 @@ export const countdownPresets = [
                     <circle cx="174" cy="129" r="2" fill="#404655"/>
                     <circle cx="174" cy="147" r="2" fill="#404655"/>
                     <g filter="url(#filter2_d_16980_15000)">
-                    <rect x="184.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" stroke-width="1.46526" shape-rendering="crispEdges"/>
+                    <rect x="184.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" strokeWidth="1.46526" shape-rendering="crispEdges"/>
                     <path d="M210.498 110.666C217.862 110.666 223.832 116.635 223.832 123.999C223.832 131.363 217.862 137.333 210.498 137.333C203.134 137.333 197.165 131.363 197.165 123.999C197.165 116.635 203.134 110.666 210.498 110.666ZM210.498 115.999C210.145 115.999 209.806 116.14 209.556 116.39C209.306 116.64 209.165 116.979 209.165 117.333V123.999C209.165 124.353 209.306 124.692 209.556 124.942L213.556 128.942C213.807 129.185 214.144 129.319 214.494 129.316C214.843 129.313 215.178 129.173 215.425 128.926C215.672 128.679 215.812 128.344 215.815 127.995C215.818 127.645 215.684 127.308 215.441 127.057L211.832 123.447V117.333C211.832 116.979 211.691 116.64 211.441 116.39C211.191 116.14 210.852 115.999 210.498 115.999Z" fill="#404655"/>
                     <rect width="53" height="28" transform="translate(184 150)" fill="white"/>
                     <rect x="194" y="160" width="33" height="8" rx="4" fill="#E1E3E8"/>
@@ -1129,7 +1129,7 @@ export const countdownPresets = [
                     <circle cx="247" cy="129" r="2" fill="#404655"/>
                     <circle cx="247" cy="147" r="2" fill="#404655"/>
                     <g filter="url(#filter3_d_16980_15000)">
-                    <rect x="257.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" stroke-width="1.46526" shape-rendering="crispEdges"/>
+                    <rect x="257.733" y="98.7326" width="51.5347" height="78.5347" rx="3.26737" stroke="white" strokeWidth="1.46526" shape-rendering="crispEdges"/>
                     <path d="M283.498 110.666C290.862 110.666 296.832 116.635 296.832 123.999C296.832 131.363 290.862 137.333 283.498 137.333C276.134 137.333 270.165 131.363 270.165 123.999C270.165 116.635 276.134 110.666 283.498 110.666ZM283.498 115.999C283.145 115.999 282.806 116.14 282.556 116.39C282.306 116.64 282.165 116.979 282.165 117.333V123.999C282.165 124.353 282.306 124.692 282.556 124.942L286.556 128.942C286.807 129.185 287.144 129.319 287.494 129.316C287.843 129.313 288.178 129.173 288.425 128.926C288.672 128.679 288.812 128.344 288.815 127.995C288.818 127.645 288.684 127.308 288.441 127.057L284.832 123.447V117.333C284.832 116.979 284.691 116.64 284.441 116.39C284.191 116.14 283.852 115.999 283.498 115.999Z" fill="#404655"/>
                     <rect width="53" height="28" transform="translate(257 150)" fill="white"/>
                     <rect x="267" y="160" width="33" height="8" rx="4" fill="#E1E3E8"/>
