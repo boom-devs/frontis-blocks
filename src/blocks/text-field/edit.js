@@ -68,6 +68,7 @@ const Edit = (props) => {
             inheritedFieldIconSwitcher: context["fb/formInheritedIconSwitcher"],
             inheritedFieldRequiredSwitcher: context["fb/formInheritedRequiredFieldSwitcher"],
             inheritedFieldRequiredSymbolSwitcher: context["fb/formInheritedRequiredSymbolSwitcher"],
+            formColumnGap: context["fb/formColumnGap"],
         })
     }, [
         context["fb/formBuilderParentBlockID"],
