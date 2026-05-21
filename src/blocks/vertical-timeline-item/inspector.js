@@ -68,7 +68,7 @@ const Inspector = ({ attributes, setAttributes }) => {
     const {
 
         /** Start General Settings */
-        showSectionLabelSwitcher,
+        inheritedShowSectionLabelSwitcher,
         verticalTimelineItemSectionLabel,
         showPhaseTitleSwitcher,
         verticalTimelineItemPhaseTitle,
@@ -980,13 +980,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("General", "frontis-blocks")}
                 initialOpen={true}
             >
-                <ToggleControl
-                    label={__("Show Section Label", "frontis-blocks")}
-                    checked={showSectionLabelSwitcher}
-                    onChange={(value) => setAttributes({ showSectionLabelSwitcher: value })}
-                />
-
-                {showSectionLabelSwitcher && (
+                {inheritedShowSectionLabelSwitcher && (
                     <FB_InputControl
                         label={__("Section Label", "frontis-blocks")}
                         value={verticalTimelineItemSectionLabel}
@@ -1378,72 +1372,74 @@ const Inspector = ({ attributes, setAttributes }) => {
                 )}
             </PanelBody>
 
-            <PanelBody
-                title={__("Section Label", "frontis-blocks")}
-                initialOpen={false}
-            >
-                <FB_TypographyControl
-                    globalTypoControlActive={true}
-                    globalTypoSwitcher={sectionLebelTypoSwitcher}
-                    storeGlobalTypographyData={(value) => setAttributes({ sectionLebelTypographyData: value })}
-                    globalTypoType={sectionLebelTypoType}
-                    onChangeGlobalTypoType={(value) => { setAttributes({ sectionLebelTypoType: value, sectionLebelTypoSwitcher: value === "default" ? { ...sectionLebelTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...sectionLebelTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
-                    globalTypoOption={sectionLebelTypoOption}
-                    onChangeGlobalTypoOption={(value) => setAttributes({ sectionLebelTypoOption: value })}
-                    fontFamily={sectionLebelFontFamily}
-                    onChangeFontFamily={(value) => setAttributes({ sectionLebelFontFamily: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontFamily: value && false, } })}
-                    fontSize={sectionLebelFontSize}
-                    onChangeFontSize={(value) => setAttributes({ sectionLebelFontSize: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontSize: value && false, } })}
-                    fontSizeUnits={sectionLebelFontSizeUnits}
-                    onChangeFontSizeUnit={(value) => setAttributes({ sectionLebelFontSizeUnits: value })}
-                    fontWeight={sectionLebelFontWeight}
-                    onChangeFontWeight={(value) => setAttributes({ sectionLebelFontWeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontWeight: value && false, } })}
-                    fontStyle={sectionLebelFontStyle}
-                    onChangeFontStyle={(value) => setAttributes({ sectionLebelFontStyle: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontStyle: value && false, } })}
-                    textTransform={sectionLebelTextTransform}
-                    onChangeTextTransform={(value) => setAttributes({ sectionLebelTextTransform: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textTransform: value && false, } })}
-                    textDecoration={sectionLebelTextDecoration}
-                    onChangeTextDecoration={(value) => setAttributes({ sectionLebelTextDecoration: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textDecoration: value && false, } })}
-                    letterSpacing={sectionLebelLetterSpacing}
-                    onChangeLetterSpacing={(value) => setAttributes({ sectionLebelLetterSpacing: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, letterSpacing: value && false, } })}
-                    letterSpacingUnits={sectionLebelLetterSpacingUnits}
-                    onChangeLetterSpacingUnit={(value) => setAttributes({ sectionLebelLetterSpacingUnits: value })}
-                    lineHeight={sectionLebelLineHeight}
-                    onChangeLineHeight={(value) => setAttributes({ sectionLebelLineHeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, lineHeight: value && false, } })}
-                    lineHeightUnits={sectionLebelLineHeightUnits}
-                    onChangeLineHeightUnit={(value) => setAttributes({ sectionLebelLineHeightUnits: value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                />
-
-                <FB_SwitcherControl
-                    label={__("Text Color", "frontis-blocks")}
-                    globalSwitcher={sectionLebelBtnTextColorSwitcher}
-                    setGlobalSwitcher={(value) =>
-                        setAttributes({ sectionLebelBtnTextColorSwitcher: value })
-                    }
-                />
-
-
-                {sectionLebelBtnTextColorSwitcher === "normal" && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={sectionLebelBtnTextColor}
-                        setGlobalColor={(value) => setAttributes({ sectionLebelBtnTextColor: value })}
+            {inheritedShowSectionLabelSwitcher && (
+                <PanelBody
+                    title={__("Section Label", "frontis-blocks")}
+                    initialOpen={false}
+                >
+                    <FB_TypographyControl
+                        globalTypoControlActive={true}
+                        globalTypoSwitcher={sectionLebelTypoSwitcher}
+                        storeGlobalTypographyData={(value) => setAttributes({ sectionLebelTypographyData: value })}
+                        globalTypoType={sectionLebelTypoType}
+                        onChangeGlobalTypoType={(value) => { setAttributes({ sectionLebelTypoType: value, sectionLebelTypoSwitcher: value === "default" ? { ...sectionLebelTypoSwitcher, fontFamily: false, fontSize: false, fontWeight: false, fontStyle: false, textTransform: false, textDecoration: false, letterSpacing: false, lineHeight: false, } : { ...sectionLebelTypoSwitcher, fontFamily: true, fontSize: true, fontWeight: true, fontStyle: true, textTransform: true, textDecoration: true, letterSpacing: true, lineHeight: true, } }); }}
+                        globalTypoOption={sectionLebelTypoOption}
+                        onChangeGlobalTypoOption={(value) => setAttributes({ sectionLebelTypoOption: value })}
+                        fontFamily={sectionLebelFontFamily}
+                        onChangeFontFamily={(value) => setAttributes({ sectionLebelFontFamily: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontFamily: value && false, } })}
+                        fontSize={sectionLebelFontSize}
+                        onChangeFontSize={(value) => setAttributes({ sectionLebelFontSize: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontSize: value && false, } })}
+                        fontSizeUnits={sectionLebelFontSizeUnits}
+                        onChangeFontSizeUnit={(value) => setAttributes({ sectionLebelFontSizeUnits: value })}
+                        fontWeight={sectionLebelFontWeight}
+                        onChangeFontWeight={(value) => setAttributes({ sectionLebelFontWeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontWeight: value && false, } })}
+                        fontStyle={sectionLebelFontStyle}
+                        onChangeFontStyle={(value) => setAttributes({ sectionLebelFontStyle: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, fontStyle: value && false, } })}
+                        textTransform={sectionLebelTextTransform}
+                        onChangeTextTransform={(value) => setAttributes({ sectionLebelTextTransform: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textTransform: value && false, } })}
+                        textDecoration={sectionLebelTextDecoration}
+                        onChangeTextDecoration={(value) => setAttributes({ sectionLebelTextDecoration: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, textDecoration: value && false, } })}
+                        letterSpacing={sectionLebelLetterSpacing}
+                        onChangeLetterSpacing={(value) => setAttributes({ sectionLebelLetterSpacing: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, letterSpacing: value && false, } })}
+                        letterSpacingUnits={sectionLebelLetterSpacingUnits}
+                        onChangeLetterSpacingUnit={(value) => setAttributes({ sectionLebelLetterSpacingUnits: value })}
+                        lineHeight={sectionLebelLineHeight}
+                        onChangeLineHeight={(value) => setAttributes({ sectionLebelLineHeight: value, sectionLebelTypoSwitcher: { ...sectionLebelTypoSwitcher, lineHeight: value && false, } })}
+                        lineHeightUnits={sectionLebelLineHeightUnits}
+                        onChangeLineHeightUnit={(value) => setAttributes({ sectionLebelLineHeightUnits: value })}
+                        deviceType={deviceType}
+                        setAttributes={setAttributes}
                     />
-                )}
 
-                {sectionLebelBtnTextColorSwitcher === "hover" && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={sectionLebelBtnTextHoverColor}
-                        setGlobalColor={(value) =>
-                            setAttributes({ sectionLebelBtnTextHoverColor: value })
+                    <FB_SwitcherControl
+                        label={__("Text Color", "frontis-blocks")}
+                        globalSwitcher={sectionLebelBtnTextColorSwitcher}
+                        setGlobalSwitcher={(value) =>
+                            setAttributes({ sectionLebelBtnTextColorSwitcher: value })
                         }
                     />
-                )}
 
-            </PanelBody>
+
+                    {sectionLebelBtnTextColorSwitcher === "normal" && (
+                        <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={sectionLebelBtnTextColor}
+                            setGlobalColor={(value) => setAttributes({ sectionLebelBtnTextColor: value })}
+                        />
+                    )}
+
+                    {sectionLebelBtnTextColorSwitcher === "hover" && (
+                        <FB_ColorControl
+                            label={__("Hover Color", "frontis-blocks")}
+                            globalColor={sectionLebelBtnTextHoverColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({ sectionLebelBtnTextHoverColor: value })
+                            }
+                        />
+                    )}
+
+                </PanelBody>
+            )}
 
             <PanelBody
                 title={__("Icon", "frontis-blocks")}

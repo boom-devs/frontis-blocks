@@ -18,7 +18,7 @@ const attributes = {
     },
 
     /** Start General Settings */
-    showSectionLabelSwitcher: {
+    inheritedShowSectionLabelSwitcher: {
         type: 'boolean',
         default: true,
     },

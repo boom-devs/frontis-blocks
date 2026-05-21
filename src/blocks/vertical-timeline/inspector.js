@@ -66,6 +66,24 @@ const Inspector = ({ attributes, setAttributes }) => {
 
     const deviceType = useDeviceType();
     const {
+        showSectionLabelSwitcher,
+
+        /** Start Progress Line */
+        verticalTimelineItemlineColorSwitcher,
+        verticalTimelineItemProgressLineColor,
+        verticalTimelineItemBaseLineColor,
+        /** End Progress Line */
+
+        /** Start Base Line Size */
+        verticalTimelineBaseLineWidth,
+        verticalTimelineBaseLineWidthUnits,
+        /** End Base Line Size */
+
+        /** Start Progress Line Size */
+        verticalTimelineProgressLineWidth,
+        verticalTimelineProgressLineWidthUnits,
+        /** End Progress Line Size */
+
         /** Start Class & ID Setting */
         verticalTimelineGlobalZIndex,
         verticalTimelineCustomCSS,
@@ -74,12 +92,73 @@ const Inspector = ({ attributes, setAttributes }) => {
         /** End Class & ID Setting */
     } = attributes;
 
+
+    /** Start Icon Padding */
+    const verticalTimelineItemIconPaddingUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (verticalTimelineItemIconPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconPaddingTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconPaddingMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ verticalTimelineItemIconPaddingDesktop: { ...verticalTimelineItemIconPaddingDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ verticalTimelineItemIconPaddingTablet: { ...verticalTimelineItemIconPaddingTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ verticalTimelineItemIconPaddingMobile: { ...verticalTimelineItemIconPaddingMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const verticalTimelineItemIconPaddingLinkBtn = () => {
+        setAttributes({
+            verticalTimelineItemIconPaddingLink: !verticalTimelineItemIconPaddingLink
+        });
+    };
+
+    const verticalTimelineItemIconPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            verticalTimelineItemIconPaddingUnits: {
+                ...verticalTimelineItemIconPaddingUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Icon Padding */
+
+
     /**
      * Inspector General Controls
      */
     const generalControls = (
         <>
-
+            <PanelBody
+                title={__("General", "frontis-blocks")}
+                initialOpen={true}
+            >
+                <ToggleControl
+                    label={__("Show Section Label", "frontis-blocks")}
+                    checked={showSectionLabelSwitcher}
+                    onChange={(value) => setAttributes({ showSectionLabelSwitcher: value })}
+                />
+            </PanelBody>
         </>
     );
 
@@ -88,6 +167,69 @@ const Inspector = ({ attributes, setAttributes }) => {
      */
     const styleControls = (
         <>
+            <PanelBody
+                title={__("Progress Line", "frontis-blocks")}
+                initialOpen={true}
+            >
+
+                <FB_SwitcherControl
+                    label={__("Line color", "frontis-blocks")}
+                    globalSwitcher={verticalTimelineItemlineColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ verticalTimelineItemlineColorSwitcher: value })}
+                    options={[
+                        { label: __("Progress line", "frontis-blocks"), value: "progress" },
+                        { label: __("Base line", "frontis-blocks"), value: "base" },
+                    ]}
+                />
+
+                {verticalTimelineItemlineColorSwitcher === "progress" && (
+                    <>
+                        <FB_ColorControl
+                            label={__("Progress Line Color", "frontis-blocks")}
+                            globalColor={verticalTimelineItemProgressLineColor}
+                            setGlobalColor={(value) => setAttributes({ verticalTimelineItemProgressLineColor: value })}
+                        />
+                        <FB_Range
+                            min={0}
+                            max={100}
+                            label={__("Thickness", "frontis-blocks")}
+                            rangeValue={verticalTimelineProgressLineWidth}
+                            onChangeHandler={(value) => setAttributes({ verticalTimelineProgressLineWidth: value })}
+                            rangeUnitHandler={(value) => setAttributes({ verticalTimelineProgressLineWidthUnits: value })}
+                            deviceType={deviceType}
+                            units={verticalTimelineProgressLineWidthUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                        />
+                    </>
+                )}
+
+                {verticalTimelineItemlineColorSwitcher === "base" && (
+                    <>
+                        <FB_ColorControl
+                            label={__("Base Color", "frontis-blocks")}
+                            globalColor={verticalTimelineItemBaseLineColor}
+                            setGlobalColor={(value) => setAttributes({ verticalTimelineItemBaseLineColor: value })}
+                        />
+                        <FB_Range
+                            min={0}
+                            max={100}
+                            label={__("Thickness", "frontis-blocks")}
+                            rangeValue={verticalTimelineBaseLineWidth}
+                            onChangeHandler={(value) => setAttributes({ verticalTimelineBaseLineWidth: value })}
+                            rangeUnitHandler={(value) => setAttributes({ verticalTimelineBaseLineWidthUnits: value })}
+                            deviceType={deviceType}
+                            units={verticalTimelineBaseLineWidthUnits}
+                            setAttributes={setAttributes}
+                            rangeStep={1}
+                            resetFallbackValue={""}
+                        />
+
+                    </>
+
+                )}
+            </PanelBody>
 
         </>
     );

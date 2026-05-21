@@ -7,7 +7,7 @@ const save = ({ attributes }) => {
         title,
 
         /** Start General Settings */
-        showSectionLabelSwitcher,
+        inheritedShowSectionLabelSwitcher,
         verticalTimelineItemSectionLabel,
         showPhaseTitleSwitcher,
         verticalTimelineItemPhaseTitle,
@@ -34,7 +34,7 @@ const save = ({ attributes }) => {
 
                 {/* Sidebar Content  */}
                 <div className="fb-vertical-timeline-side" >
-                    {showSectionLabelSwitcher && (
+                    {inheritedShowSectionLabelSwitcher && (
                         <span className="fb-vertical-timeline-label"> {verticalTimelineItemSectionLabel} </span>
                     )}
                     <span className="fb-vertical-timeline-icon">{renderSVG(verticalTimelineItemIcon)}</span>

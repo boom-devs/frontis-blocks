@@ -9,7 +9,8 @@ import Edit from './edit';
 import save from './save';
 import metadata from './block.json';
 import attributes from './attributes.js';
-import './view.js';
+import './style.scss';
+import './editor.scss';
 import FB_Block_Icons from "@Config/fb-blocks-icons";
 
 registerBlockType(metadata.name, {

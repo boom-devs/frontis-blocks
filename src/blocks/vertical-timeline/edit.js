@@ -75,10 +75,9 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             wrapper.style.setProperty('--timeline-line-bottom', `${lineBottom}px`);
         };
 
-        // Run initially after DOM settles
         const timer = setTimeout(updateTimelineLine, 200);
 
-        // Also watch for DOM/resize changes in editor
+
         const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
         let observer;
         if (wrapper) {
@@ -87,7 +86,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             });
             observer.observe(wrapper);
 
-            // Also observe each icon inside the wrapper for resizing
+
             const icons = wrapper.querySelectorAll('.fb-vertical-timeline-icon');
             icons.forEach(icon => observer.observe(icon));
         }
@@ -100,6 +99,53 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         };
     }, [attributes, blockID, timelineChildCount]);
     /** End Dynamic Line Positioning in Editor */
+
+    /** Start Timeline Scroll Progress */
+    useEffect(() => {
+        if (!blockID) return;
+
+        const updateScrollProgress = () => {
+            const wrapper = document.querySelector(
+                `.${blockID} .fb-vertical-timeline-inner`
+            );
+
+            if (!wrapper) return;
+
+            const rect = wrapper.getBoundingClientRect();
+            const lineTop = parseFloat(wrapper.style.getPropertyValue('--timeline-line-top')) || 0;
+            const lineBottom = parseFloat(wrapper.style.getPropertyValue('--timeline-line-bottom')) || 0;
+
+            const triggerY = window.innerHeight * 0.5;
+            const timelineStart = rect.top + lineTop;
+            const timelineEnd = rect.bottom - lineBottom;
+            const totalHeight = timelineEnd - timelineStart;
+
+            let progress = 0;
+            if (totalHeight > 0) {
+                progress = (triggerY - timelineStart) / totalHeight;
+                progress = Math.max(0, Math.min(progress, 1));
+            } else if (rect.top < triggerY) {
+                progress = 1;
+            }
+
+            wrapper.style.setProperty(
+                '--timeline-progress-scale',
+                progress
+            );
+        };
+
+        updateScrollProgress();
+
+        window.addEventListener("scroll", updateScrollProgress);
+        window.addEventListener("resize", updateScrollProgress);
+
+        return () => {
+            window.removeEventListener("scroll", updateScrollProgress);
+            window.removeEventListener("resize", updateScrollProgress);
+        };
+    }, [blockID]);
+    /** End Timeline Scroll Progress*/
+
 
     const blockProps = useBlockProps({
         className: `fb-vertical-timeline-main-wrapper ${blockID}`,
