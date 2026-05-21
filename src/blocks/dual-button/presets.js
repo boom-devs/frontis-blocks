@@ -426,7 +426,7 @@ export const presetStyles = {
         },
     },
 };
-    
+
 export const dualButtonPresets = [
     {
         value: 'preset-1',
@@ -443,9 +443,9 @@ export const dualButtonPresets = [
                     <rect x="214" y="130" width="64" height="16" rx="8" fill="white"/>
                     </g>
                     <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" fill="white"/>
-                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" stroke-width="4"/>
-                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" stroke-width="2.5"/>
-                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" strokeWidth="4"/>
+                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" strokeWidth="2.5"/>
+                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14422" x="45" y="106" width="130" height="67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -485,9 +485,9 @@ export const dualButtonPresets = [
                     <rect x="214" y="130" width="64" height="16" rx="8" fill="white"/>
                     </g>
                     <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" fill="white"/>
-                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" stroke-width="4"/>
-                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" stroke-width="2.5"/>
-                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" strokeWidth="4"/>
+                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" strokeWidth="2.5"/>
+                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14837" x="45" y="106" width="130" height="67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -527,9 +527,9 @@ export const dualButtonPresets = [
                     <rect x="214" y="130" width="64" height="16" rx="8" fill="white"/>
                     </g>
                     <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" fill="white"/>
-                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" stroke-width="4"/>
-                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" stroke-width="2.5"/>
-                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" strokeWidth="4"/>
+                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" strokeWidth="2.5"/>
+                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14846" x="45" y="106" width="130" height="67" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -562,7 +562,7 @@ export const dualButtonPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16994_16260)">
                     <rect width="150" height="72" transform="translate(24 102)" fill="white"/>
-                    <path d="M55 132C55 132 49 136.419 49 138C49 139.581 55 144 55 144" stroke="#141B34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M55 132C55 132 49 136.419 49 138C49 139.581 55 144 55 144" stroke="#141B34" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <rect x="70" y="130" width="64" height="16" rx="8" fill="#E1E3E8"/>
                     </g>
                     <g filter="url(#filter1_d_16994_16260)">
@@ -570,9 +570,9 @@ export const dualButtonPresets = [
                     <rect x="214" y="130" width="94" height="16" rx="8" fill="white"/>
                     </g>
                     <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" fill="white"/>
-                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" stroke-width="4"/>
-                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" stroke-width="2.5"/>
-                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" strokeWidth="4"/>
+                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" strokeWidth="2.5"/>
+                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16994_16260" x="23" y="102" width="152" height="75" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -605,18 +605,18 @@ export const dualButtonPresets = [
                     <path d="M0 12C0 5.37258 5.37258 0 12 0H336C342.627 0 348 5.37258 348 12V264C348 270.627 342.627 276 336 276H12C5.37259 276 0 270.627 0 264V12Z" fill="#EBEBEB"/>
                     <g filter="url(#filter0_d_16980_14822)">
                     <rect width="150" height="72" transform="translate(24 102)" fill="white"/>
-                    <path d="M55 132C55 132 49 136.419 49 138C49 139.581 55 144 55 144" stroke="#141B34" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M55 132C55 132 49 136.419 49 138C49 139.581 55 144 55 144" stroke="#141B34" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <rect x="70" y="130" width="64" height="16" rx="8" fill="#E1E3E8"/>
                     </g>
                     <g filter="url(#filter1_d_16980_14822)">
                     <rect width="150" height="72" transform="translate(174 102)" fill="#404655"/>
                     <rect x="214" y="130" width="64" height="16" rx="8" fill="white"/>
-                    <path d="M293 132C293 132 299 136.419 299 138C299 139.581 293 144 293 144" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M293 132C293 132 299 136.419 299 138C299 139.581 293 144 293 144" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </g>
                     <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" fill="white"/>
-                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" stroke-width="4"/>
-                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" stroke-width="2.5"/>
-                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M174 114C187.255 114 198 124.745 198 138C198 151.255 187.255 162 174 162C160.745 162 150 151.255 150 138C150 124.745 160.745 114 174 114Z" stroke="#EBEBEB" strokeWidth="4"/>
+                    <circle cx="174" cy="137.999" r="13.3333" stroke="#3991FF" strokeWidth="2.5"/>
+                    <path d="M176.842 143.333L180 140.666H168.632M180 135.333H168L171.789 132.666" stroke="#3991FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14822" x="23" y="102" width="152" height="75" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
