@@ -1138,7 +1138,7 @@ const FullSiteImportSettingConfig = ({
             >
               Import Now
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M4 12H20M20 12L14 6M20 12L14 18" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </button>
             <button
@@ -1146,7 +1146,7 @@ const FullSiteImportSettingConfig = ({
               onClick={onBack}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M20 12H4M4 12L10 6M4 12L10 18" stroke="#6A758E" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               Back
             </button>
