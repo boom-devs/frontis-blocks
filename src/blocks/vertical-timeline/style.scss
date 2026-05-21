@@ -37,12 +37,12 @@
     &::before {
         content: '';
         position: absolute;
-        // left: [icon এর X position]px;
-        left: 124px;
-        top: 0;
-        bottom: 0;
+        left: var(--timeline-line-left);
+        top: var(--timeline-line-top);
+        bottom: var(--timeline-line-bottom);
         width: 2px;
         background-color: #0875ff;
         z-index: 0;
+        transform: translateX(-50%);
     }
 }

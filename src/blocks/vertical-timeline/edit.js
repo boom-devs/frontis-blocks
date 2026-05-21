@@ -50,6 +50,57 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockID]);
     /** End Generate Block Style */
 
+    /** Start Dynamic Line Positioning in Editor */
+    useEffect(() => {
+        if (!blockID) return;
+
+        const updateTimelineLine = () => {
+            const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+            if (!wrapper) return;
+
+            const icons = wrapper.querySelectorAll('.fb-vertical-timeline-icon');
+            if (icons.length === 0) return;
+
+            const firstIcon = icons[0];
+            const lastIcon = icons[icons.length - 1];
+            const wrapperRect = wrapper.getBoundingClientRect();
+            const firstIconRect = firstIcon.getBoundingClientRect();
+            const lastIconRect = lastIcon.getBoundingClientRect();
+            const iconLeft = firstIconRect.left - wrapperRect.left + firstIconRect.width / 2;
+            const lineTop = firstIconRect.top - wrapperRect.top + firstIconRect.height / 2;
+            const lineBottom = wrapperRect.bottom - lastIconRect.bottom + lastIconRect.height / 2;
+
+            wrapper.style.setProperty('--timeline-line-left', `${iconLeft}px`);
+            wrapper.style.setProperty('--timeline-line-top', `${lineTop}px`);
+            wrapper.style.setProperty('--timeline-line-bottom', `${lineBottom}px`);
+        };
+
+        // Run initially after DOM settles
+        const timer = setTimeout(updateTimelineLine, 200);
+
+        // Also watch for DOM/resize changes in editor
+        const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+        let observer;
+        if (wrapper) {
+            observer = new ResizeObserver(() => {
+                updateTimelineLine();
+            });
+            observer.observe(wrapper);
+
+            // Also observe each icon inside the wrapper for resizing
+            const icons = wrapper.querySelectorAll('.fb-vertical-timeline-icon');
+            icons.forEach(icon => observer.observe(icon));
+        }
+
+        return () => {
+            clearTimeout(timer);
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, [attributes, blockID, timelineChildCount]);
+    /** End Dynamic Line Positioning in Editor */
+
     const blockProps = useBlockProps({
         className: `fb-vertical-timeline-main-wrapper ${blockID}`,
     });
