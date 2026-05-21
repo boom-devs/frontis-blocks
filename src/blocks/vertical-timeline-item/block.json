@@ -10,14 +10,20 @@
   "example": {},
   "supports": {
     "anchor": false,
-    "align": ["wide", "full"],
+    "align": [
+      "wide",
+      "full"
+    ],
     "customClassName": false
   },
   "editorScript": "file:./index.js",
   "editorStyle": "file:./index.css",
   "style": "file:./style-index.css",
-  "parent": ["frontis-blocks/vertical-timeline"],
+  "parent": [
+    "frontis-blocks/vertical-timeline"
+  ],
   "usesContext": [
-    "fb/timelineparentBlockID"
+    "fb/timelineparentBlockID",
+    "fb/showSectionLabelSwitcher"
   ]
 }

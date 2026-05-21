@@ -11,13 +11,18 @@
 	"supports": {
 		"html": false,
 		"anchor": false,
-		"align": ["wide", "full"],
+		"align": [
+			"wide",
+			"full"
+		],
 		"customClassName": false
 	},
 	"providesContext": {
-	  "fb/timelineparentBlockID": "blockID"
+		"fb/timelineparentBlockID": "blockID",
+		"fb/showSectionLabelSwitcher": "showSectionLabelSwitcher"
 	},
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
-	"style": "file:./style-index.css"
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
 }

@@ -14,7 +14,6 @@ const generateVerticalTimelineItemStyle = (attributes) => {
     const {
         blockID,
         /** Start General Settings */
-        showSectionLabelSwitcher,
         verticalTimelineItemSectionLabel,
         showPhaseTitleSwitcher,
         verticalTimelineItemPhaseTitle,

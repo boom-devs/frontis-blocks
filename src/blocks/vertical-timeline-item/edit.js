@@ -18,7 +18,7 @@ export default function Edit(props) {
         content,
 
         /** Start General Settings */
-        showSectionLabelSwitcher,
+        inheritedShowSectionLabelSwitcher,
         verticalTimelineItemSectionLabel,
         showPhaseTitleSwitcher,
         verticalTimelineItemPhaseTitle,
@@ -60,6 +60,13 @@ export default function Edit(props) {
         }
     }, [context["fb/timelineparentBlockID"]]);
 
+    useEffect(() => {
+        setAttributes({
+            inheritedShowSectionLabelSwitcher: context["fb/showSectionLabelSwitcher"] !== undefined ? context["fb/showSectionLabelSwitcher"] : true,
+        });
+    }, [context["fb/showSectionLabelSwitcher"]]);
+
+
     const blockProps = useBlockProps({
         className: `fb-vertical-timeline-item-main-wrapper ${parentBlockID} ${blockID}`,
     });
@@ -72,7 +79,7 @@ export default function Edit(props) {
 
                     {/* Sidebar Content  */}
                     <div className="fb-vertical-timeline-side" >
-                        {showSectionLabelSwitcher && (
+                        {inheritedShowSectionLabelSwitcher && (
                             <span className="fb-vertical-timeline-label"> {verticalTimelineItemSectionLabel} </span>
                         )}
                         <span className="fb-vertical-timeline-icon">  {renderSVG(verticalTimelineItemIcon)} </span>
