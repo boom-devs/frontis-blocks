@@ -15,7 +15,8 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     imageHotspotImageSize, 
     imageHotspotHotspots, 
     imageHotspotSelectedHotspotId,
-    blockID
+    blockID,
+    blockStyle
   } = attributes;
 
   const deviceType = useDeviceType();
@@ -38,8 +39,6 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     }
   }, [attributes, blockID, setAttributes]);
 
-  const blockStyling = generateImageHotspotStyle(attributes);
-
   const isHidden = (hotspot) => {
     if (deviceType === 'Desktop' && hotspot.hideDesktop) return true;
     if (deviceType === 'Tablet' && hotspot.hideTablet) return true;
@@ -47,10 +46,12 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     return false;
   };
 
+  const blockProps = useBlockProps({
+    className: `fb-hotspot-main-wrapper ${blockID}`,
+  });
+
   return (
     <>
-      <style>{blockStyling}</style>
-    
       {isSelected && (
         <Inspector 
           attributes={attributes}
@@ -58,7 +59,7 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
         />
       )}
       
-      <div {...useBlockProps({ className: blockID })}>
+      <div {...blockProps}>
         {!imageHotspotImageUrl ? (
           <MediaPlaceholder
             icon="format-image"
@@ -109,14 +110,33 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                           className="fb-hotspot-popover-image"
                       />
                   )}
-                  {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
+                  {hotspot.category && <div className="fb-hotspot-popover-category">{hotspot.category}</div>}
+                  {hotspot.title && (
+                    <h4 className="fb-hotspot-popover-title">
+                      {hotspot.titleLink ? (
+                        <a
+                          href={hotspot.titleLink}
+                          target={hotspot.titleLinkOpenInNewTab ? '_blank' : undefined}
+                          rel={hotspot.titleLinkOpenInNewTab ? 'noopener noreferrer' : undefined}
+                          onClick={(event) => event.preventDefault()}
+                        >
+                          {hotspot.title}
+                        </a>
+                      ) : (
+                        hotspot.title
+                      )}
+                    </h4>
+                  )}
                   {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
+                  {hotspot.price && <div className="fb-hotspot-popover-price">{hotspot.price}</div>}
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
+
+      <style>{blockStyle}</style>
     </>
   );
 }

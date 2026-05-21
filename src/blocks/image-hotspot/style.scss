@@ -2,7 +2,7 @@
   position: relative;
   display: block;
   width: 100%;
-  line-height: 0;      /* ← removes ghost space below image */
+  line-height: 0; /* removes ghost space below image */
 }
 
 .fb-hotspot-base-image {
@@ -11,67 +11,20 @@
   display: block;
 }
 
-.fb-hotspot-marker:hover .fb-hotspot-popover {
+
+.fb-hotspot-marker .fb-hotspot-popover {
     display: block;
-}
-
-.fb-hotspot-marker.locked .fb-hotspot-popover {
-    display: block;
-}
-
-@keyframes fb-hotspot-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.12); }
-}
-
-@keyframes fb-hotspot-glow {
-    0% { transform: scale(1); opacity: 1; }
-    100% { transform: scale(1.6); opacity: 0; }
-}
-
-@keyframes fb-hotspot-float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-4px); }
-}
-
-.fb-hotspot-marker.animation-pulse .fb-hotspot-trigger,
-.fb-hotspot-marker.animation-glow .fb-hotspot-trigger {
-    position: relative;
-}
-
-.fb-hotspot-marker.animation-pulse .fb-hotspot-trigger::before,
-.fb-hotspot-marker.animation-glow .fb-hotspot-trigger::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-}
-
-.fb-hotspot-marker.animation-pulse .fb-hotspot-trigger::before {
-    z-index: -1;
-    background: currentColor;
-    opacity: 0.18;
-    animation: fb-hotspot-pulse calc(var(--fb-hotspot-animation-interval, 2s) + 1.9s) ease-in-out infinite;
-}
-
-.fb-hotspot-marker.animation-glow .fb-hotspot-trigger::before {
-    z-index: -1;
-    background: currentColor;
     opacity: 0;
-    animation: fb-hotspot-glow calc(var(--fb-hotspot-animation-interval, 2s) + 1.8s) ease-out infinite;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
 
-.fb-hotspot-marker.animation-pulse .fb-hotspot-trigger {
-    animation: fb-hotspot-pulse calc(var(--fb-hotspot-animation-interval, 2s) + 1.9s) ease-in-out infinite;
-}
-
-.fb-hotspot-marker.animation-glow .fb-hotspot-trigger {
-    animation: none;
-}
-
-.fb-hotspot-marker.animation-float .fb-hotspot-trigger {
-    animation: fb-hotspot-float calc(var(--fb-hotspot-animation-interval, 2s) + 2.2s) ease-in-out infinite;
+.fb-hotspot-marker:hover .fb-hotspot-popover,
+.fb-hotspot-marker.locked .fb-hotspot-popover {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
 .fb-hotspot-popover-image {
@@ -80,4 +33,31 @@
     display: block;
     border-radius: 4px;
     margin-bottom: 8px;
+}
+
+.fb-hotspot-popover-category {
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.fb-hotspot-popover-title a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.fb-hotspot-popover-price {
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+
+.fb-hotspot-trigger {
+    transform-origin: center;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
 }
