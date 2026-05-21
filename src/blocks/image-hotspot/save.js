@@ -6,33 +6,42 @@ import renderSVG from "../../components/icon-picker/components/icon-picker/contr
 
 export default function Save({ attributes }) {
   const { 
-    imageHotspot_imageUrl: imageUrl, 
-    imageHotspot_imageAlt: imageAlt, 
-    imageHotspot_imageSize: imageSize, 
-    imageHotspot_hotspots: hotspots,
+    imageHotspotImageUrl, 
+    imageHotspotImageAlt, 
+    imageHotspotImageSize, 
+    imageHotspotHotspots,
     blockID,
     imageHotspotDesktopSwitcher,
     imageHotspotTabletSwitcher,
     imageHotspotMobileSwitcher,
   } = attributes;
 
-  const blockStyling = generateImageHotspotStyle(attributes);
-
-  if (!imageUrl) {
+  if (!imageHotspotImageUrl) {
     return null;
   }
 
+  const responsiveClasses = [
+        imageHotspotDesktopSwitcher && 'fb-desktop-responsive',
+        imageHotspotTabletSwitcher && 'fb-tablet-responsive',
+        imageHotspotMobileSwitcher && 'fb-mobile-responsive'
+    ].filter(Boolean).join(' ');
+
+    const blockProps = useBlockProps.save({
+        className: `fb-hotspot-main-wrapper ${blockID}`,
+    });
+
   return (
     <>
-      <div {...useBlockProps.save({ className: `${blockID} ${imageHotspotDesktopSwitcher && 'fb-desktop-responsive'} ${imageHotspotTabletSwitcher && 'fb-tablet-responsive'} ${imageHotspotMobileSwitcher && 'fb-mobile-responsive'}` })}>
+      <div {...blockProps}>
+        <div className={`fb-hotspot-responsive-wrapper ${responsiveClasses}`}>
         <div className="fb-hotspot-container">
             <img 
-              src={imageUrl} 
-              alt={imageAlt || __('Hotspot Image', 'frontis-blocks')}
+              src={imageHotspotImageUrl} 
+              alt={imageHotspotImageAlt || __('Hotspot Image', 'frontis-blocks')}
               className="fb-hotspot-base-image"
             />
             
-            {hotspots?.map((hotspot) => {
+            {imageHotspotHotspots?.map((hotspot) => {
               return (
                 <div 
                   key={hotspot.id}
@@ -54,12 +63,29 @@ export default function Save({ attributes }) {
                             className="fb-hotspot-popover-image"
                         />
                     )}
-                    {hotspot.title && <h4 className="fb-hotspot-popover-title">{hotspot.title}</h4>}
+                    {hotspot.category && <div className="fb-hotspot-popover-category">{hotspot.category}</div>}
+                    {hotspot.title && (
+                      <h4 className="fb-hotspot-popover-title">
+                        {hotspot.titleLink ? (
+                          <a
+                            href={hotspot.titleLink}
+                            target={hotspot.titleLinkOpenInNewTab ? '_blank' : undefined}
+                            rel={hotspot.titleLinkOpenInNewTab ? 'noopener noreferrer' : undefined}
+                          >
+                            {hotspot.title}
+                          </a>
+                        ) : (
+                          hotspot.title
+                        )}
+                      </h4>
+                    )}
                     {hotspot.description && <p className="fb-hotspot-popover-description">{hotspot.description}</p>}
+                    {hotspot.price && <div className="fb-hotspot-popover-price">{hotspot.price}</div>}
                   </div>
                 </div>
               );
             })}
+        </div>
         </div>
       </div>
     </>

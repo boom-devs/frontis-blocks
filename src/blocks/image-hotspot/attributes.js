@@ -8,23 +8,23 @@ const attributes = {
 		default: "",
 	},
 
-	imageHotspot_imageUrl: {
+	imageHotspotImageUrl: {
 		type: "string",
 		default: "",
 	},
-	imageHotspot_imageId: { 
+	imageHotspotImageId: { 
 		type: "number", 
 		default: 0 
 	},
-	imageHotspot_imageAlt: { 
+	imageHotspotImageAlt: { 
 		type: "string", 
 		default: "" 
 	},
-	imageHotspot_imageSize: { 
+	imageHotspotImageSize: { 
 		type: "string", 
 		default: "cover" 
 	},
-	imageHotspot_imageHeight: {
+	imageHotspotImageHeight: {
 		type: "object",
 		default: {
 			Desktop: '500',
@@ -32,7 +32,7 @@ const attributes = {
 			Mobile: '400'
 		}
 	},
-	imageHotspot_imageHeightUnits: {
+	imageHotspotImageHeightUnits: {
 		type: "object",
 		default: {
 			Desktop: 'px',
@@ -40,31 +40,75 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
+	imageHotspotImageBorderWidth: {
+		type: "object",
+		default: {
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
+		}
+	},
+	imageHotspotImageBorderWidthUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotImageBorderColor: {
+		type: "string",
+		default: ""
+	},
+	imageHotspotImageBorderWidthLink: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotImageBorderRadius: {
+		type: "object",
+		default: {
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
+		}
+	},
+	imageHotspotImageBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotImageBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
 
-	imageHotspot_hotspots: {
+	imageHotspotHotspots: {
 		type: "array",
 		default: []
 	},
-	imageHotspot_selectedHotspotId: { 
+	imageHotspotSelectedHotspotId: { 
 		type: "string", 
 		default: "" 
 	},
 
-	imageHotspot_deviceType: { 
+	imageHotspotDeviceType: { 
 		type: "string", 
 		default: "Desktop" 
 	},
-	imageHotspot_containerShadowValues: {
+	imageHotspotContainerShadowValues: {
 		type: "array",
 		default: [0, 0, 0, 0, '', '#00000000']
 	},
-	imageHotspot_containerShadowCssValue: {
+	imageHotspotContainerShadowCssValue: {
 		type: "string",
 		default: ""
 	},
 
 	// Hotspot marker styles
-	imageHotspot_markerSize: { 
+	imageHotspotMarkerSize: { 
 		type: "object", 
 		default: {
 			Desktop: '35',
@@ -72,7 +116,7 @@ const attributes = {
 			Mobile: '30'
 		}
 	},
-	imageHotspot_markerSizeUnits: { 
+	imageHotspotMarkerSizeUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -80,7 +124,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_markerHoverSize: {
+	imageHotspotMarkerHoverSize: {
 		type: "object",
 		default: {
 			Desktop: '40',
@@ -88,7 +132,7 @@ const attributes = {
 			Mobile: '35'
 		}
 	},
-	imageHotspot_markerHoverSizeUnits: {
+	imageHotspotMarkerHoverSizeUnits: {
 		type: "object",
 		default: {
 			Desktop: 'px',
@@ -96,23 +140,23 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_markerColor: { 
+	imageHotspotMarkerColor: { 
 		type: "string", 
 		default: "#ff0000" 
 	},
-	imageHotspot_markerHoverColor: { 
+	imageHotspotMarkerHoverColor: { 
 		type: "string", 
 		default: "" 
 	},
-	imageHotspot_markerColorSwitcher: {
+	imageHotspotMarkerColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	imageHotspot_markerSizeSwitcher: {
+	imageHotspotMarkerSizeSwitcher: {
 		type: "string",
 		default: "normal"
 	},
-	imageHotspot_markerBorderWidth: { 
+	imageHotspotMarkerBorderWidth: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -120,7 +164,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_markerBorderWidthUnits: { 
+	imageHotspotMarkerBorderWidthUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -128,11 +172,11 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_markerBorderColor: { 
+	imageHotspotMarkerBorderColor: { 
 		type: "string", 
 		default: "transparent" 
 	},
-	imageHotspot_markerBorderRadius: { 
+	imageHotspotMarkerBorderRadius: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -140,7 +184,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_markerBorderRadiusUnits: { 
+	imageHotspotMarkerBorderRadiusUnits: { 
 		type: "object", 
 		default: {
 			Desktop: '%',
@@ -150,11 +194,11 @@ const attributes = {
 	},
 
 	// Popover styles
-	imageHotspot_popoverBgColor: { 
+	imageHotspotPopoverBgColor: { 
 		type: "string", 
 		default: "#ffffff" 
 	},
-	imageHotspot_popoverWidth: { 
+	imageHotspotPopoverWidth: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -162,7 +206,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_popoverWidthUnits: { 
+	imageHotspotPopoverWidthUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -170,7 +214,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_popoverPadding: { 
+	imageHotspotPopoverPadding: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -178,7 +222,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_popoverPaddingUnits: { 
+	imageHotspotPopoverPaddingUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -186,7 +230,7 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_popoverPaddingDesktop: { 
+	imageHotspotPopoverPaddingDesktop: { 
 		type: "object", 
 		default: { top: '', 
 			right: '', 
@@ -194,7 +238,7 @@ const attributes = {
 			left: '' 
 		} 
 	},
-	imageHotspot_popoverPaddingTablet: { 
+	imageHotspotPopoverPaddingTablet: { 
 		type: "object", 
 		default: { top: '', 
 			right: '', 
@@ -202,7 +246,7 @@ const attributes = {
 			left: '' 
 		} 
 	},
-	imageHotspot_popoverPaddingMobile: { 
+	imageHotspotPopoverPaddingMobile: { 
 		type: "object", 
 		default: { top: '', 
 			right: '', 
@@ -210,19 +254,19 @@ const attributes = {
 			left: '' 
 		} 
 	},
-	imageHotspot_popoverPaddingLink: { 
+	imageHotspotPopoverPaddingLink: { 
 		type: "boolean", 
 		default: true 
 	},
-	imageHotspot_popoverBorderRadius: { 
+	imageHotspotPopoverBorderRadius: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
 		}
 	},
-	imageHotspot_popoverBorderRadiusUnits: { 
+	imageHotspotPopoverBorderRadiusUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -230,53 +274,129 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_popoverShadow: { 
-		type: "string", 
-		default: "0 4px 12px rgba(0, 0, 0, 0.15)" 
+	imageHotspotPopoverBorderRadiusLink: {
+		type: "boolean",
+		default: true
 	},
-	imageHotspot_popoverShadowValues: {
+	imageHotspotPopoverBorderWidth: {
+		type: "object",
+		default: {
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
+		}
+	},
+	imageHotspotPopoverBorderWidthUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotPopoverBorderColor: {
+		type: "string",
+		default: ""
+	},
+	imageHotspotPopoverBorderWidthLink: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotPopoverImageBorderWidth: {
+		type: "object",
+		default: {
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
+		}
+	},
+	imageHotspotPopoverImageBorderWidthUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotPopoverImageBorderRadius: {
+		type: "object",
+		default: {
+			Desktop: { top: '', right: '', bottom: '', left: '' },
+			Tablet: { top: '', right: '', bottom: '', left: '' },
+			Mobile: { top: '', right: '', bottom: '', left: '' }
+		}
+	},
+	imageHotspotPopoverImageBorderRadiusUnits: {
+		type: "object",
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	imageHotspotPopoverImageBorderColor: {
+		type: "string",
+		default: ""
+	},
+	imageHotspotPopoverImageBorderWidthLink: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotPopoverImageBorderRadiusLink: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotPopoverShadowValues: {
 		type: "object",
 		default: [0, 4, 12, 0, '', 'rgba(0,0,0,0.15)']
 	},
-	imageHotspot_popoverShadowCssValue: {
+	imageHotspotPopoverShadowCssValue: {
 		type: "string",
 		default: ""
 	},
 
 	// Title typography
-	imageHotspot_titleFontFamily: { 
+	imageHotspotTitleFontFamily: { 
 		type: "string", 
 		default: "" 
 	},
-	imageHotspot_titleFontSize: { 
+	imageHotspotTitleFontSize: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '1.1',
+			Tablet: '1.1',
+			Mobile: '1.1'
 		}
 	},
-	imageHotspot_titleFontSizeUnits: { 
+	imageHotspotTitleFontSizeUnits: { 
 		type: "object", 
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: 'rem',
+			Tablet: 'rem',
+			Mobile: 'rem'
 		}
 	},
-	imageHotspot_titleFontWeight: { 
+	imageHotspotTitleFontWeight: { 
 		type: "string", 
 		default: "600" 
 	},
-	imageHotspot_titleFontStyle: { 
+	imageHotspotTitleFontStyle: { 
 		type: "string", 
 		default: "normal" 
 	},
-	imageHotspot_titleColor: { 
+	imageHotspotTitleColor: { 
 		type: "string", 
 		default: "#333333" 
 	},
-	imageHotspot_titleMargin: { 
+	imageHotspotTitleHoverColor: {
+		type: "string",
+		default: ""
+	},
+	imageHotspotTitleColorSwitcher: {
+		type: "string",
+		default: "normal"
+	},
+	imageHotspotTitleMargin: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -284,7 +404,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_titleMarginUnits: { 
+	imageHotspotTitleMarginUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -294,39 +414,39 @@ const attributes = {
 	},
 
 	// Description typography
-	imageHotspot_descFontFamily: { 
+	imageHotspotDescFontFamily: { 
 		type: "string", 
 		default: "" 
 	},
-	imageHotspot_descFontSize: { 
+	imageHotspotDescFontSize: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '1',
+			Tablet: '1',
+			Mobile: '1'
 		}
 	},
-	imageHotspot_descFontSizeUnits: { 
+	imageHotspotDescFontSizeUnits: { 
 		type: "object", 
 		default: {
-			Desktop: 'px',
-			Tablet: 'px',
-			Mobile: 'px'
+			Desktop: 'rem',
+			Tablet: 'rem',
+			Mobile: 'rem'
 		}
 	},
-	imageHotspot_descFontWeight: { 
+	imageHotspotDescFontWeight: { 
 		type: "string", 
 		default: "400" 
 	},
-	imageHotspot_descFontStyle: { 
+	imageHotspotDescFontStyle: { 
 		type: "string", 
 		default: "normal" 
 	},
-	imageHotspot_descColor: { 
+	imageHotspotDescColor: { 
 		type: "string", 
 		default: "#666666" 
 	},
-	imageHotspot_descMargin: { 
+	imageHotspotDescMargin: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -334,7 +454,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_descMarginUnits: { 
+	imageHotspotDescMarginUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -344,15 +464,15 @@ const attributes = {
 	},
 
 	// Title additional typography (missing from current attributes)
-	imageHotspot_titleTextTransform: { 
+	imageHotspotTitleTextTransform: { 
 		type: "string", 
 		default: "none" 
 	},
-	imageHotspot_titleTextDecoration: { 
+	imageHotspotTitleTextDecoration: { 
 		type: "string", 
 		default: "none" 
 	},
-	imageHotspot_titleLetterSpacing: { 
+	imageHotspotTitleLetterSpacing: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -360,7 +480,7 @@ const attributes = {
 			Mobile: ''
 		} 
 	},
-	imageHotspot_titleLetterSpacingUnits: { 
+	imageHotspotTitleLetterSpacingUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -368,7 +488,7 @@ const attributes = {
 			Mobile: 'px'
 		} 
 	},
-	imageHotspot_titleLineHeight: { 
+	imageHotspotTitleLineHeight: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -376,7 +496,7 @@ const attributes = {
 			Mobile: ''
 		} 
 	},
-	imageHotspot_titleLineHeightUnits: { 
+	imageHotspotTitleLineHeightUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -386,15 +506,15 @@ const attributes = {
 	},
 
 	// Description additional typography (missing from current attributes)
-	imageHotspot_descTextTransform: { 
+	imageHotspotDescTextTransform: { 
 		type: "string", 
 		default: "none" 
 	},
-	imageHotspot_descTextDecoration: { 
+	imageHotspotDescTextDecoration: { 
 		type: "string", 
 		default: "none" 
 	},
-	imageHotspot_descLetterSpacing: { 
+	imageHotspotDescLetterSpacing: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -402,7 +522,7 @@ const attributes = {
 			Mobile: ''
 		} 
 	},
-	imageHotspot_descLetterSpacingUnits: { 
+	imageHotspotDescLetterSpacingUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -410,7 +530,7 @@ const attributes = {
 			Mobile: 'px'
 		} 
 	},
-	imageHotspot_descLineHeight: { 
+	imageHotspotDescLineHeight: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -418,7 +538,7 @@ const attributes = {
 			Mobile: ''
 		} 
 	},
-	imageHotspot_descLineHeightUnits: { 
+	imageHotspotDescLineHeightUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -428,7 +548,7 @@ const attributes = {
 	},
 
 	// Icon styles
-	imageHotspot_iconSize: { 
+	imageHotspotIconSize: { 
 		type: "object", 
 		default: {
 			Desktop: '',
@@ -436,7 +556,7 @@ const attributes = {
 			Mobile: ''
 		}
 	},
-	imageHotspot_iconSizeUnits: { 
+	imageHotspotIconSizeUnits: { 
 		type: "object", 
 		default: {
 			Desktop: 'px',
@@ -444,11 +564,11 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	imageHotspot_iconColor: { 
+	imageHotspotIconColor: { 
 		type: "string", 
 		default: "#ffffff" 
 	},
-	imageHotspot_iconColorSwitcher: {
+	imageHotspotIconColorSwitcher: {
 		type: "string",
 		default: "normal"
 	},
@@ -630,7 +750,7 @@ const attributes = {
 	},
 
 	// Custom CSS
-	imageHotspot_customCSS: { 
+	imageHotspotCustomCSS: { 
 		type: "string", 
 		default: "" 
 	},
