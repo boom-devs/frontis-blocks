@@ -85,6 +85,7 @@ export default function save({ attributes }) {
 		titleLinkSwitcher,
 
 		postWrapperLinkSwitcher,
+		defaultImageUrl,
 
 	} = attributes;
 
@@ -96,11 +97,6 @@ export default function save({ attributes }) {
 	const blockProps = useBlockProps.save({
 		className: `fb-post-grid-area ${blockID} ${postGridDesktopSwitcher && 'fb-desktop-responsive'} ${postGridTabletSwitcher && 'fb-tablet-responsive'} ${postGridMobileSwitcher && 'fb-mobile-responsive'}`,
 	});
-
-	let defaultImageUrl = '';
-	if (typeof FrontisBlocksData !== 'undefined') {
-		defaultImageUrl = FrontisBlocksData.pluginUrl + 'assets/images/preset-bg.jpg';
-	}
 
 	return (
 		<>
