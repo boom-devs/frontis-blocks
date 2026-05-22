@@ -107,19 +107,16 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
         if (!wrapper) return;
 
-        // Intersection Observer সেটআপ করছি যা স্ক্রিনে আইটেম আসার প্রোগ্রেস ট্র্যাক করবে
         const observerOptions = {
-            root: null, // এডিটর আইফ্রেম বা উইন্ডো অটো ডিটেক্ট করবে
-            rootMargin: '-20% 0px -40% 0px', // স্ক্রিনের মাঝ বরাবর ট্রিগার করার জন্য মার্জিন
-            threshold: Array.from({ length: 101 }, (_, i) => i / 100) // ০ থেকে ১০০% পর্যন্ত স্মুথ প্রোগ্রেস
+            root: null,
+            rootMargin: '-20% 0px -40% 0px',
+            threshold: Array.from({ length: 101 }, (_, i) => i / 100)
         };
 
         const handleIntersect = (entries) => {
             entries.forEach(entry => {
                 const rect = entry.boundingClientRect;
                 const windowHeight = window.innerHeight;
-
-                // আইটেমটি স্ক্রিনের কতটুকু ভেতরে আছে তার হিসাব
                 const totalHeight = rect.height;
                 const visibleTop = rect.top;
 
