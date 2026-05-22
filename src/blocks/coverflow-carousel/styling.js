@@ -21,6 +21,11 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
         CarouselHeight,
         CarouselHeightUnits,
 
+        carouselPerspective,
+        carouselPerspectiveUnits,
+        carouselItemScale,
+        carouselItemScaleUnits,
+
         transitionSpeed,
         carouselReflection,
         carouselReflectionGap,
@@ -368,7 +373,8 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             ${globalDesktopBorderWidth && coverflowCarouselGlobalBorderDesktop?.top ? `border-width: ${globalDesktopBorderWidth};` : ""}
             ${globalDesktopBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
             ${coverflowCarouselGlobalBoxShadowCssValue ? `box-shadow: ${coverflowCarouselGlobalBoxShadowCssValue};` : ""}
-        }
+            ${carouselPerspective ? `perspective: ${carouselPerspective?.Desktop}${CarouselHeightUnits?.Desktop};` : ''}
+        } 
         .fb-coverflowCarousel-wrapper.${blockID}:hover{
             ${coverflowCarouselGlobalBgHoverColor ? `background: ${coverflowCarouselGlobalBgHoverColor};` : ''}
             ${coverflowCarouselGlobalBorderHoverColor ? `border-color: ${coverflowCarouselGlobalBorderHoverColor};` : ""}
@@ -508,6 +514,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalTabletMargin && coverflowCarouselGlobalMarginTablet?.top ? `margin: ${globalTabletMargin};` : ""}
                 ${globalTabletBorderWidth && coverflowCarouselGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ""}
                 ${globalTabletBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
+                ${carouselPerspective ? `perspective: ${carouselPerspective?.Tablet}${CarouselHeightUnits?.Tablet};` : ''}
             }
             
             .${blockID} .fb-coverflow-carousel-slide{
@@ -587,6 +594,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalMobileMargin && coverflowCarouselGlobalMarginMobile?.top ? `margin: ${globalMobileMargin};` : ""}
                 ${globalMobileBorderWidth && coverflowCarouselGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ""}
                 ${globalMobileBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
+                ${carouselPerspective ? `perspective: ${carouselPerspective?.Mobile}${CarouselHeightUnits?.Mobile};` : ''}
             }
 
             .${blockID} .fb-coverflow-carousel-slide{
