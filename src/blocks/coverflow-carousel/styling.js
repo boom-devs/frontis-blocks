@@ -387,7 +387,7 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
 
         .${blockID} .fb-coverflow-carousel-slide{
             ${coverflowCarouselItemBgColor ? `background: ${coverflowCarouselItemBgColor};` : ''}
-            transition: all ${transitionSpeed / 1000}s ${carouselTransitionEasing || 'cubic-bezier(0.16, 1, 0.3, 1)'};
+            transition: all ${transitionSpeed / 1000}s ${carouselTransitionEasing || 'cubic-bezier(0.16, 1, 0.3, 1)'} !important;
             ${carouselReflection ? `-webkit-box-reflect: below ${carouselReflectionGap}px linear-gradient(transparent, transparent, rgba(0, 0, 0, ${carouselReflectionOpacity / 100}));` : '-webkit-box-reflect: none;'}
             ${carouselItemDesktopPadding && coverflowCarouselItemPaddingDesktop?.top ? `padding: ${carouselItemDesktopPadding};` : ""}
             ${carouselItemDesktopMargin && coverflowCarouselItemMarginDesktop?.top ? `margin: ${carouselItemDesktopMargin};` : ""}

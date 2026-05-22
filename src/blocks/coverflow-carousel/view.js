@@ -1,9 +1,13 @@
 (function () {
-    document.addEventListener('DOMContentLoaded', () => {
+    function initCoverflowCarousel() {
         // Find all instances of the coverflow carousel block on the page
         const carousels = document.querySelectorAll('.fb-coverflowCarousel-main-wrapper');
 
         carousels.forEach((carousel) => {
+            // Skip if already initialized to avoid duplicate bindings
+            if (carousel.dataset.initialized) return;
+            carousel.dataset.initialized = 'true';
+
             // Find all cards inside THIS specific carousel
             const cards = carousel.querySelectorAll('.fb-coverflow-carousel-slide');
 
@@ -442,5 +446,37 @@
             updateCarousel();
             startAutoplay();
         });
-    });
+    }
+
+    var setupDone = false;
+
+    function setupInitialization() {
+        if (setupDone) return;
+        setupDone = true;
+
+        if (document.readyState === 'complete' || document.readyState === 'interactive') {
+            setTimeout(initCoverflowCarousel, 100);
+        } else {
+            document.addEventListener('DOMContentLoaded', function () {
+                setTimeout(initCoverflowCarousel, 100);
+            });
+        }
+
+        if (typeof window !== 'undefined') {
+            var lastUrl = window.location.href;
+            var urlObserver = new MutationObserver(function () {
+                if (lastUrl !== window.location.href) {
+                    lastUrl = window.location.href;
+                    setTimeout(initCoverflowCarousel, 300);
+                }
+            });
+
+            urlObserver.observe(document.body, { childList: true, subtree: true });
+        }
+    }
+
+    setupInitialization();
+
+    // If needed, expose re-initialization function
+    window.reinitCoverflowCarousel = initCoverflowCarousel;
 })();
