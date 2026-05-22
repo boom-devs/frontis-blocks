@@ -5,7 +5,7 @@ import {
 	useInnerBlocksProps
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
-import { useSelect } from '@wordpress/data';
+import { useSelect, useDispatch } from '@wordpress/data';
 
 import { useEffect, useRef, useState } from '@wordpress/element';
 import './editor.scss';
@@ -72,6 +72,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 	} = attributes;
 
 	const deviceType = useDeviceType();
+	const { selectBlock } = useDispatch('core/block-editor');
 
 	// Handle block ID generation (handles duplication and initial ID)
 	useBlockIdGenerator({
@@ -106,6 +107,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			e.preventDefault();
 			e.stopPropagation();
 		}
+		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex >= totalCards - 1) {
@@ -122,6 +124,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 			e.preventDefault();
 			e.stopPropagation();
 		}
+		selectBlock(clientId);
 		const totalCards = wrapperRef.current ? wrapperRef.current.querySelectorAll('.fb-coverflow-carousel-slide').length : 0;
 		if (totalCards > 0) {
 			if (editorIndex <= 0) {
@@ -260,6 +263,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 				const selectSlide = (e) => {
 					e.stopPropagation();
 					setEditorIndex(i);
+					selectBlock(clientId);
 				};
 				card.addEventListener('click', selectSlide);
 				listeners.push({ card, selectSlide });
@@ -335,11 +339,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 
 			<div
 				{...blockProps}
-				ref={wrapperRef}
 				onMouseEnter={() => setIsHovered(true)}
 				onMouseLeave={() => setIsHovered(false)}
 			>
-				<div className={`fb-parent-wrapper fb-coverflowCarousel-wrapper ${blockID} ${coverflowCarouselGlobalWraperClass}`} id={coverflowCarouselGlobalWraperID}>
+				<div className={`fb-parent-wrapper fb-coverflowCarousel-wrapper ${blockID} ${coverflowCarouselGlobalWraperClass}`} id={coverflowCarouselGlobalWraperID} ref={wrapperRef}>
 					<div {...innerBlocksProps} />
 					{/* Navigation Arrows */}
 					{showNavigation && (
@@ -389,6 +392,7 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
 										onClick={(e) => {
 											e.stopPropagation();
 											setEditorIndex(idx);
+											selectBlock(clientId);
 										}}
 									></span>
 								))
