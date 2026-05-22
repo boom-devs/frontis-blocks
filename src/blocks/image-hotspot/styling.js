@@ -495,7 +495,7 @@ const generateImageHotspotStyle = (attributes) => {
                 ${imageHotspotPopoverBorderColor ? `border-color: ${imageHotspotPopoverBorderColor};` : ''}
                 ${imageHotspotPopoverShadowCssValue ? `box-shadow: ${imageHotspotPopoverShadowCssValue};` : ''}
                 z-index: 20;
-                min-width: ${imageHotspotPopoverWidth?.Desktop ? '250px' : 'auto'};
+                min-width: ${popoverWidthDesktop};
                 word-wrap: break-word;
                 white-space: normal;
                 box-sizing: border-box;
@@ -615,7 +615,7 @@ const generateImageHotspotStyle = (attributes) => {
             ${popoverImageBorderWidthDesktop ? `border-width: ${popoverImageBorderWidthDesktop};` : ''}
             ${popoverImageBorderWidthDesktop ? 'border-style: solid;' : ''}
             ${imageHotspotPopoverImageBorderColor ? `border-color: ${imageHotspotPopoverImageBorderColor};` : ''}
-            ${popoverImageBorderRadiusDesktop ? `border-radius: ${popoverImageBorderRadiusDesktop};` : ''}
+            ${popoverImageBorderRadiusDesktop ? `border-radius: ${popoverImageBorderRadiusDesktop} !important;` : ''}
         }
 
         ${hotspotBaseStyles}
