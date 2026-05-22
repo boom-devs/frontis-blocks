@@ -1095,3 +1095,14 @@ export const STACKED_CARD_PRESETS = [
 	{ label: __("Stack Over", "frontis-blocks"), value: "stack-over" },
 ];
 
+export const CAROUSEL_ITEM_TRANSLATE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "X" },
+	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
+	{ label: __("Depth", "frontis-blocks"), value: "Z" },
+];
+export const CAROUSEL_ITEM_ROTATE = [
+	{ label: __("Horizontal", "frontis-blocks"), value: "X" },
+	{ label: __("Vertical", "frontis-blocks"), value: "Y" },
+	{ label: __("Depth", "frontis-blocks"), value: "Z" },
+];
+
