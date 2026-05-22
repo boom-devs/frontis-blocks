@@ -100,51 +100,46 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
     }, [attributes, blockID, timelineChildCount]);
     /** End Dynamic Line Positioning in Editor */
 
-    /** Start Timeline Scroll Progress */
+    /** Start Timeline Scroll Progress (Editor & Frontend Safe) */
     useEffect(() => {
         if (!blockID) return;
 
-        const updateScrollProgress = () => {
-            const wrapper = document.querySelector(
-                `.${blockID} .fb-vertical-timeline-inner`
-            );
+        const wrapper = document.querySelector(`.${blockID} .fb-vertical-timeline-inner`);
+        if (!wrapper) return;
 
-            if (!wrapper) return;
-
-            const rect = wrapper.getBoundingClientRect();
-            const lineTop = parseFloat(wrapper.style.getPropertyValue('--timeline-line-top')) || 0;
-            const lineBottom = parseFloat(wrapper.style.getPropertyValue('--timeline-line-bottom')) || 0;
-
-            const triggerY = window.innerHeight * 0.5;
-            const timelineStart = rect.top + lineTop;
-            const timelineEnd = rect.bottom - lineBottom;
-            const totalHeight = timelineEnd - timelineStart;
-
-            let progress = 0;
-            if (totalHeight > 0) {
-                progress = (triggerY - timelineStart) / totalHeight;
-                progress = Math.max(0, Math.min(progress, 1));
-            } else if (rect.top < triggerY) {
-                progress = 1;
-            }
-
-            wrapper.style.setProperty(
-                '--timeline-progress-scale',
-                progress
-            );
+        // Intersection Observer সেটআপ করছি যা স্ক্রিনে আইটেম আসার প্রোগ্রেস ট্র্যাক করবে
+        const observerOptions = {
+            root: null, // এডিটর আইফ্রেম বা উইন্ডো অটো ডিটেক্ট করবে
+            rootMargin: '-20% 0px -40% 0px', // স্ক্রিনের মাঝ বরাবর ট্রিগার করার জন্য মার্জিন
+            threshold: Array.from({ length: 101 }, (_, i) => i / 100) // ০ থেকে ১০০% পর্যন্ত স্মুথ প্রোগ্রেস
         };
 
-        updateScrollProgress();
+        const handleIntersect = (entries) => {
+            entries.forEach(entry => {
+                const rect = entry.boundingClientRect;
+                const windowHeight = window.innerHeight;
 
-        window.addEventListener("scroll", updateScrollProgress);
-        window.addEventListener("resize", updateScrollProgress);
+                // আইটেমটি স্ক্রিনের কতটুকু ভেতরে আছে তার হিসাব
+                const totalHeight = rect.height;
+                const visibleTop = rect.top;
+
+                let progress = (windowHeight * 0.5 - visibleTop) / totalHeight;
+                progress = Math.max(0, Math.min(progress, 1));
+
+                wrapper.style.setProperty('--timeline-progress-scale', progress);
+            });
+        };
+
+        const progressObserver = new IntersectionObserver(handleIntersect, observerOptions);
+        progressObserver.observe(wrapper);
 
         return () => {
-            window.removeEventListener("scroll", updateScrollProgress);
-            window.removeEventListener("resize", updateScrollProgress);
+            if (progressObserver) {
+                progressObserver.disconnect();
+            }
         };
-    }, [blockID]);
-    /** End Timeline Scroll Progress*/
+    }, [blockID, timelineChildCount]);
+    /** End Timeline Scroll Progress */
 
 
     const blockProps = useBlockProps({

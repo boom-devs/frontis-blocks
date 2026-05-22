@@ -45,7 +45,6 @@ export default function save({ attributes }) {
                     </div>
                 </div>
             </div>
-            <style>{blockStyle}</style>
         </>
     );
 }
