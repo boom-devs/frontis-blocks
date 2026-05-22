@@ -55,13 +55,14 @@ const attributes = {
 			Mobile: 'px'
 		}
 	},
-	carouselItem: {
-		type: 'object',
-		default: {
-			Desktop: '5',
-			Tablet: '3',
-			Mobile: '1',
-		},
+
+	carouselItemTranslateSwitcher: {
+		type: 'string',
+		default: 'X'
+	},
+	carouselItemRotateSwitcher: {
+		type: 'string',
+		default: 'X'
 	},
 
 	carouselItemTranslateX: {
@@ -206,7 +207,7 @@ const attributes = {
 	},
 	carouselReflection: {
 		type: 'boolean',
-		default: true,
+		default: false,
 	},
 	carouselReflectionGap: {
 		type: 'number',
@@ -222,7 +223,7 @@ const attributes = {
 	},
 	autoplay: {
 		type: 'boolean',
-		default: false,
+		default: true,
 	},
 	autoplaySpeed: {
 		type: 'number',
@@ -433,6 +434,190 @@ const attributes = {
 		type: 'string',
 	},
 	/** End Background */
+
+	/** Start Padding */
+	coverflowCarouselItemPaddingUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	coverflowCarouselItemPaddingDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemPaddingTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemPaddingMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemPaddingLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Padding */
+
+	/** Start Margin */
+	coverflowCarouselItemMarginUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px'
+		}
+	},
+	coverflowCarouselItemMarginDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemMarginTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemMarginMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemMarginLink: {
+		type: 'boolean',
+		default: true
+	},
+	/** End Margin */
+
+	/** Start Border */
+	coverflowCarouselItemBorder: {
+		type: 'string',
+		default: 'none',
+	},
+	coverflowCarouselItemBorderColorSwitcher: {
+		type: 'string',
+		default: 'normal',
+	},
+	coverflowCarouselItemBorderColor: {
+		type: 'string',
+		default: '',
+	},
+	coverflowCarouselItemBorderHoverColor: {
+		type: 'string',
+		default: '',
+	},
+	coverflowCarouselItemBorderUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	coverflowCarouselItemBorderDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderLink: {
+		type: 'boolean',
+		default: true,
+	},
+	/** End Border */
+
+	/** Start Border Radius */
+	coverflowCarouselItemBorderRadiusUnits: {
+		type: 'object',
+		default: {
+			Desktop: 'px',
+			Tablet: 'px',
+			Mobile: 'px',
+		},
+	},
+	coverflowCarouselItemBorderRadiusDesktop: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderRadiusTablet: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderRadiusMobile: {
+		type: 'object',
+		default: {
+			top: '',
+			bottom: '',
+			left: '',
+			right: '',
+		},
+	},
+	coverflowCarouselItemBorderRadiusLink: {
+		type: 'boolean',
+		default: true,
+	},
+	/** End Border Radius */
 
 	/** Start Arrows Style */
 	carouselArrowsSize: {
