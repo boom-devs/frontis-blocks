@@ -55,9 +55,40 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
         carouselArrowPositionOutsidePaddingUnits,
         /** End Position */
 
+        /** Start Carousel Item Style */
         coverflowCarouselItemBgColorSwitcher,
         coverflowCarouselItemBgColor,
         coverflowCarouselItemBgHoverColor,
+
+        coverflowCarouselItemPaddingUnits,
+        coverflowCarouselItemPaddingDesktop,
+        coverflowCarouselItemPaddingTablet,
+        coverflowCarouselItemPaddingMobile,
+        coverflowCarouselItemPaddingLink,
+
+        coverflowCarouselItemMarginUnits,
+        coverflowCarouselItemMarginDesktop,
+        coverflowCarouselItemMarginTablet,
+        coverflowCarouselItemMarginMobile,
+        coverflowCarouselItemMarginLink,
+
+        coverflowCarouselItemBorder,
+        coverflowCarouselItemBorderColorSwitcher,
+        coverflowCarouselItemBorderColor,
+        coverflowCarouselItemBorderHoverColor,
+
+        coverflowCarouselItemBorderUnits,
+        coverflowCarouselItemBorderDesktop,
+        coverflowCarouselItemBorderTablet,
+        coverflowCarouselItemBorderMobile,
+        coverflowCarouselItemBorderLink,
+
+        coverflowCarouselItemBorderRadiusUnits,
+        coverflowCarouselItemBorderRadiusDesktop,
+        coverflowCarouselItemBorderRadiusTablet,
+        coverflowCarouselItemBorderRadiusMobile,
+        coverflowCarouselItemBorderRadiusLink,
+        /** End Carousel Item Style */
 
         /** carousel Arrows Style */
         carouselArrowsIconSwitcher,
@@ -255,6 +286,23 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
         coverflowCarouselPresetStyle
     } = attributes;
 
+    const carouselItemDesktopPadding = `${coverflowCarouselItemPaddingDesktop?.top}${coverflowCarouselItemPaddingUnits?.Desktop} ${coverflowCarouselItemPaddingDesktop?.right}${coverflowCarouselItemPaddingUnits?.Desktop} ${coverflowCarouselItemPaddingDesktop?.bottom}${coverflowCarouselItemPaddingUnits?.Desktop} ${coverflowCarouselItemPaddingDesktop?.left}${coverflowCarouselItemPaddingUnits?.Desktop}`;
+    const carouselItemTabletPadding = `${coverflowCarouselItemPaddingTablet?.top}${coverflowCarouselItemPaddingUnits?.Tablet} ${coverflowCarouselItemPaddingTablet?.right}${coverflowCarouselItemPaddingUnits?.Tablet} ${coverflowCarouselItemPaddingTablet?.bottom}${coverflowCarouselItemPaddingUnits?.Tablet} ${coverflowCarouselItemPaddingTablet?.left}${coverflowCarouselItemPaddingUnits?.Tablet}`;
+    const carouselItemMobilePadding = `${coverflowCarouselItemPaddingMobile?.top}${coverflowCarouselItemPaddingUnits?.Mobile} ${coverflowCarouselItemPaddingMobile?.right}${coverflowCarouselItemPaddingUnits?.Mobile} ${coverflowCarouselItemPaddingMobile?.bottom}${coverflowCarouselItemPaddingUnits?.Mobile} ${coverflowCarouselItemPaddingMobile?.left}${coverflowCarouselItemPaddingUnits?.Mobile}`;
+
+    const carouselItemDesktopMargin = `${coverflowCarouselItemMarginDesktop?.top}${coverflowCarouselItemMarginUnits?.Desktop} ${coverflowCarouselItemMarginDesktop?.right}${coverflowCarouselItemMarginUnits?.Desktop} ${coverflowCarouselItemMarginDesktop?.bottom}${coverflowCarouselItemMarginUnits?.Desktop} ${coverflowCarouselItemMarginDesktop?.left}${coverflowCarouselItemMarginUnits?.Desktop}`;
+    const carouselItemTabletMargin = `${coverflowCarouselItemMarginTablet?.top}${coverflowCarouselItemMarginUnits?.Tablet} ${coverflowCarouselItemMarginTablet?.right}${coverflowCarouselItemMarginUnits?.Tablet} ${coverflowCarouselItemMarginTablet?.bottom}${coverflowCarouselItemMarginUnits?.Tablet} ${coverflowCarouselItemMarginTablet?.left}${coverflowCarouselItemMarginUnits?.Tablet}`;
+    const carouselItemMobileMargin = `${coverflowCarouselItemMarginMobile?.top}${coverflowCarouselItemMarginUnits?.Mobile} ${coverflowCarouselItemMarginMobile?.right}${coverflowCarouselItemMarginUnits?.Mobile} ${coverflowCarouselItemMarginMobile?.bottom}${coverflowCarouselItemMarginUnits?.Mobile} ${coverflowCarouselItemMarginMobile?.left}${coverflowCarouselItemMarginUnits?.Mobile}`;
+
+    const carouselItemDesktopBorderWidth = `${coverflowCarouselItemBorderDesktop?.top}${coverflowCarouselItemBorderUnits?.Desktop} ${coverflowCarouselItemBorderDesktop?.right}${coverflowCarouselItemBorderUnits?.Desktop} ${coverflowCarouselItemBorderDesktop?.bottom}${coverflowCarouselItemBorderUnits?.Desktop} ${coverflowCarouselItemBorderDesktop?.left}${coverflowCarouselItemBorderUnits?.Desktop}`;
+    const carouselItemTabletBorderWidth = `${coverflowCarouselItemBorderTablet?.top}${coverflowCarouselItemBorderUnits?.Tablet} ${coverflowCarouselItemBorderTablet?.right}${coverflowCarouselItemBorderUnits?.Tablet} ${coverflowCarouselItemBorderTablet?.bottom}${coverflowCarouselItemBorderUnits?.Tablet} ${coverflowCarouselItemBorderTablet?.left}${coverflowCarouselItemBorderUnits?.Tablet}`;
+    const carouselItemMobileBorderWidth = `${coverflowCarouselItemBorderMobile?.top}${coverflowCarouselItemBorderUnits?.Mobile} ${coverflowCarouselItemBorderMobile?.right}${coverflowCarouselItemBorderUnits?.Mobile} ${coverflowCarouselItemBorderMobile?.bottom}${coverflowCarouselItemBorderUnits?.Mobile} ${coverflowCarouselItemBorderMobile?.left}${coverflowCarouselItemBorderUnits?.Mobile}`;
+
+    const carouselItemDesktopBorderRadiusWidth = `${coverflowCarouselItemBorderRadiusDesktop?.top}${coverflowCarouselItemBorderRadiusUnits?.Desktop} ${coverflowCarouselItemBorderRadiusDesktop?.right}${coverflowCarouselItemBorderRadiusUnits?.Desktop} ${coverflowCarouselItemBorderRadiusDesktop?.bottom}${coverflowCarouselItemBorderRadiusUnits?.Desktop} ${coverflowCarouselItemBorderRadiusDesktop?.left}${coverflowCarouselItemBorderRadiusUnits?.Desktop}`;
+    const carouselItemTabletBorderRadiusWidth = `${coverflowCarouselItemBorderRadiusTablet?.top}${coverflowCarouselItemBorderRadiusUnits?.Tablet} ${coverflowCarouselItemBorderRadiusTablet?.right}${coverflowCarouselItemBorderRadiusUnits?.Tablet} ${coverflowCarouselItemBorderRadiusTablet?.bottom}${coverflowCarouselItemBorderRadiusUnits?.Tablet} ${coverflowCarouselItemBorderRadiusTablet?.left}${coverflowCarouselItemBorderRadiusUnits?.Tablet}`;
+    const carouselItemMobileBorderRadiusWidth = `${coverflowCarouselItemBorderRadiusMobile?.top}${coverflowCarouselItemBorderRadiusUnits?.Mobile} ${coverflowCarouselItemBorderRadiusMobile?.right}${coverflowCarouselItemBorderRadiusUnits?.Mobile} ${coverflowCarouselItemBorderRadiusMobile?.bottom}${coverflowCarouselItemBorderRadiusUnits?.Mobile} ${coverflowCarouselItemBorderRadiusMobile?.left}${coverflowCarouselItemBorderRadiusUnits?.Mobile}`;
+
+
     const carouselArrowsBorderDesktopWidth = `${carouselArrowsBorderDesktop?.top}${carouselArrowsBorderUnits?.Desktop} ${carouselArrowsBorderDesktop?.right}${carouselArrowsBorderUnits?.Desktop} ${carouselArrowsBorderDesktop?.bottom}${carouselArrowsBorderUnits?.Desktop} ${carouselArrowsBorderDesktop?.left}${carouselArrowsBorderUnits?.Desktop}`;
     const carouselArrowsBorderTabletWidth = `${carouselArrowsBorderTablet?.top}${carouselArrowsBorderUnits?.Tablet} ${carouselArrowsBorderTablet?.right}${carouselArrowsBorderUnits?.Tablet} ${carouselArrowsBorderTablet?.bottom}${carouselArrowsBorderUnits?.Tablet} ${carouselArrowsBorderTablet?.left}${carouselArrowsBorderUnits?.Tablet}`;
     const carouselArrowsBorderMobileWidth = `${carouselArrowsBorderMobile?.top}${carouselArrowsBorderUnits?.Mobile} ${carouselArrowsBorderMobile?.right}${carouselArrowsBorderUnits?.Mobile} ${carouselArrowsBorderMobile?.bottom}${carouselArrowsBorderUnits?.Mobile} ${carouselArrowsBorderMobile?.left}${carouselArrowsBorderUnits?.Mobile}`;
@@ -282,7 +330,6 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
     const carouselActiveDotsBorderRadiusDesktopWidth = `${carouselActiveDotsBorderRadiusDesktop?.top}${carouselActiveDotsBorderRadiusUnits?.Desktop} ${carouselActiveDotsBorderRadiusDesktop?.right}${carouselActiveDotsBorderRadiusUnits?.Desktop} ${carouselActiveDotsBorderRadiusDesktop?.bottom}${carouselActiveDotsBorderRadiusUnits?.Desktop} ${carouselActiveDotsBorderRadiusDesktop?.left}${carouselActiveDotsBorderRadiusUnits?.Desktop}`;
     const carouselActiveDotsBorderRadiusTabletWidth = `${carouselActiveDotsBorderRadiusTablet?.top}${carouselActiveDotsBorderRadiusUnits?.Tablet} ${carouselActiveDotsBorderRadiusTablet?.right}${carouselActiveDotsBorderRadiusUnits?.Tablet} ${carouselActiveDotsBorderRadiusTablet?.bottom}${carouselActiveDotsBorderRadiusUnits?.Tablet} ${carouselActiveDotsBorderRadiusTablet?.left}${carouselActiveDotsBorderRadiusUnits?.Tablet}`;
     const carouselActiveDotsBorderRadiusMobileWidth = `${carouselActiveDotsBorderRadiusMobile?.top}${carouselActiveDotsBorderRadiusUnits?.Mobile} ${carouselActiveDotsBorderRadiusMobile?.right}${carouselActiveDotsBorderRadiusUnits?.Mobile} ${carouselActiveDotsBorderRadiusMobile?.bottom}${carouselActiveDotsBorderRadiusUnits?.Mobile} ${carouselActiveDotsBorderRadiusMobile?.left}${carouselActiveDotsBorderRadiusUnits?.Mobile}`;
-
 
     const globalDesktopPadding = `${coverflowCarouselGlobalPaddingDesktop?.top}${coverflowCarouselGlobalPaddingUnits?.Desktop} ${coverflowCarouselGlobalPaddingDesktop?.right}${coverflowCarouselGlobalPaddingUnits?.Desktop} ${coverflowCarouselGlobalPaddingDesktop?.bottom}${coverflowCarouselGlobalPaddingUnits?.Desktop} ${coverflowCarouselGlobalPaddingDesktop?.left}${coverflowCarouselGlobalPaddingUnits?.Desktop}`;
     const globalTabletPadding = `${coverflowCarouselGlobalPaddingTablet?.top}${coverflowCarouselGlobalPaddingUnits?.Tablet} ${coverflowCarouselGlobalPaddingTablet?.right}${coverflowCarouselGlobalPaddingUnits?.Tablet} ${coverflowCarouselGlobalPaddingTablet?.bottom}${coverflowCarouselGlobalPaddingUnits?.Tablet} ${coverflowCarouselGlobalPaddingTablet?.left}${coverflowCarouselGlobalPaddingUnits?.Tablet}`;
@@ -333,12 +380,19 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
         } 
 
         .${blockID} .fb-coverflow-carousel-slide{
-            ${coverflowCarouselItemBgColorSwitcher === 'normal' && coverflowCarouselItemBgColor ? `background: ${coverflowCarouselItemBgColor};` : ''}
+            ${coverflowCarouselItemBgColor ? `background: ${coverflowCarouselItemBgColor};` : ''}
             transition: all ${transitionSpeed / 1000}s ${carouselTransitionEasing || 'cubic-bezier(0.16, 1, 0.3, 1)'};
             ${carouselReflection ? `-webkit-box-reflect: below ${carouselReflectionGap}px linear-gradient(transparent, transparent, rgba(0, 0, 0, ${carouselReflectionOpacity / 100}));` : '-webkit-box-reflect: none;'}
-        }
+            ${carouselItemDesktopPadding && coverflowCarouselItemPaddingDesktop?.top ? `padding: ${carouselItemDesktopPadding};` : ""}
+            ${carouselItemDesktopMargin && coverflowCarouselItemMarginDesktop?.top ? `margin: ${carouselItemDesktopMargin};` : ""}
+            ${coverflowCarouselItemBorder ? `border-style: ${coverflowCarouselItemBorder};` : ""}
+            ${coverflowCarouselItemBorderColor ? `border-color: ${coverflowCarouselItemBorderColor};` : ""}  
+            ${carouselItemDesktopBorderWidth && coverflowCarouselItemBorderDesktop?.top ? `border-width: ${carouselItemDesktopBorderWidth};` : ""}
+            ${carouselItemDesktopBorderRadiusWidth && coverflowCarouselItemBorderRadiusDesktop?.top ? `border-radius: ${carouselItemDesktopBorderRadiusWidth};` : ""}   
+        } 
         .${blockID} .fb-coverflow-carousel-slide:hover{
-            ${coverflowCarouselItemBgColorSwitcher === 'hover' && coverflowCarouselItemBgHoverColor ? `background: ${coverflowCarouselItemBgHoverColor};` : ''}
+            ${coverflowCarouselItemBgHoverColor ? `background: ${coverflowCarouselItemBgHoverColor};` : ''}
+            ${coverflowCarouselItemBorderHoverColor ? `border-color: ${coverflowCarouselItemBorderHoverColor};` : ''}
         }
 
         .${blockID} .fb-coverflow-carousel-prev-btn,
@@ -455,6 +509,14 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalTabletBorderWidth && coverflowCarouselGlobalBorderTablet?.top ? `border-width: ${globalTabletBorderWidth};` : ""}
                 ${globalTabletBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusTablet?.top ? `border-radius: ${globalTabletBorderRadiusWidth};` : ""}
             }
+            
+            .${blockID} .fb-coverflow-carousel-slide{
+                ${carouselItemTabletPadding && coverflowCarouselItemPaddingTablet?.top ? `padding: ${carouselItemTabletPadding};` : ""}
+                ${carouselItemTabletMargin && coverflowCarouselItemMarginTablet?.top ? `margin: ${carouselItemTabletMargin};` : ""}
+                ${carouselItemTabletBorderWidth && coverflowCarouselItemBorderTablet?.top ? `border-width: ${carouselItemTabletBorderWidth};` : ""}
+                ${carouselItemTabletBorderRadiusWidth && coverflowCarouselItemBorderRadiusTablet?.top ? `border-radius: ${carouselItemTabletBorderRadiusWidth};` : ""}   
+            }
+
             .${blockID} .fb-coverflowCarousel-items-container{
                 ${CarouselWidth?.Tablet ? `width: ${CarouselWidth?.Tablet}${CarouselWidthUnits?.Tablet};` : ''}
                 ${CarouselHeight?.Tablet ? `height: ${CarouselHeight?.Tablet}${CarouselHeightUnits?.Tablet};` : ''}
@@ -526,6 +588,14 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
                 ${globalMobileBorderWidth && coverflowCarouselGlobalBorderMobile?.top ? `border-width: ${globalMobileBorderWidth};` : ""}
                 ${globalMobileBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusMobile?.top ? `border-radius: ${globalMobileBorderRadiusWidth};` : ""}
             }
+
+            .${blockID} .fb-coverflow-carousel-slide{
+                ${carouselItemMobilePadding && coverflowCarouselItemPaddingMobile?.top ? `padding: ${carouselItemMobilePadding};` : ""}
+                ${carouselItemMobileMargin && coverflowCarouselItemMarginMobile?.top ? `margin: ${carouselItemMobileMargin};` : ""}
+                ${carouselItemMobileBorderWidth && coverflowCarouselItemBorderMobile?.top ? `border-width: ${carouselItemMobileBorderWidth};` : ""}
+                ${carouselItemMobileBorderRadiusWidth && coverflowCarouselItemBorderRadiusMobile?.top ? `border-radius: ${carouselItemMobileBorderRadiusWidth};` : ""}   
+            }
+
             .${blockID} .fb-coverflowCarousel-items-container{
                 ${CarouselWidth?.Mobile ? `width: ${CarouselWidth?.Mobile}${CarouselWidthUnits?.Mobile};` : ''}
                 ${CarouselHeight?.Mobile ? `height: ${CarouselHeight?.Mobile}${CarouselHeightUnits?.Mobile};` : ''}

@@ -70,6 +70,7 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
         dynamicTextTermsSeparator,
         dynamicTextEnableLink,
         dynamicTextLinkSource,
+        dynamicTextPreserveButtonLabel,
         buttonFontFamily,
     } = attributes;
 
@@ -207,9 +208,15 @@ export default function Edit({ attributes, setAttributes, clientId, context, isS
                         {buttonTextSwitcher && (
                             <RichText
                                 tagName="span"
-                                value={dynamicTextEnabled ? dynamicDisplayValue : buttonText}
+                                value={
+                                    dynamicTextEnabled && ! dynamicTextPreserveButtonLabel
+                                        ? dynamicDisplayValue
+                                        : buttonText
+                                }
                                 onChange={(value) => {
-                                    if (!dynamicTextEnabled) setAttributes({ buttonText: value });
+                                    if ( ! dynamicTextEnabled || dynamicTextPreserveButtonLabel ) {
+                                        setAttributes({ buttonText: value });
+                                    }
                                 }}
                                 placeholder={__('Enter button text...', 'frontis-blocks')}
                                 className="fb-advanced-button-text"
