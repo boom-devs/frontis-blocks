@@ -1,34 +1,19 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "frontis-blocks/imageAccordion",
+	"title": "Image Accordion",
+	"name": "frontis-blocks/image-accordion",
 	"version": "1.0.0",
-	"title": "imageAccordion",
 	"category": "frontis-blocks",
-	"textdomain": "frontis-blocks",
-	"description": "A customizable imageAccordion block for organizing content in a collapsible format.",
+	"description": "A customizable Image Accordion block with hover and click interactions.",
 	"example": {},
 	"supports": {
-		"anchor": false,
+		"html": false,
 		"align": ["wide", "full"],
 		"customClassName": false
 	},
-	"providesContext": {
-		"fb/imageAccordionItemID": "blockID",
-		"fb/imageAccordionparentBlockID": "blockID",
-		"fb/imageAccordionInheritedimageAccordionType": "imageAccordionType",
-		"fb/imageAccordionInheritedDisplayIcon": "displayIcon",
-		"fb/imageAccordionInheritedTabIconSwitcher": "tabIconSwitcher",
-		"fb/imageAccordionInheritedTabIcon": "tabIcon",
-		"fb/imageAccordionInheritedTabImageUrl": "tabImageUrl",
-		"fb/imageAccordionInheritedTabImageAlt": "tabImageAlt",
-		"fb/imageAccordionInheritedExpandedIconSwitcher": "expandedIconSwitcher",
-		"fb/imageAccordionInheritedExpandedIcon": "expandedIcon",
-		"fb/imageAccordionInheritedExpandedImageUrl": "expandedImageUrl",
-		"fb/imageAccordionInheritedExpandedImageAlt": "expandedImageAlt",
-		"fb/imageAccordionInheritedTagName": "tagName",
-		"fb/imageAccordionFaqSchema": "faqSchema"
-	},
+	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
-	"editorStyle": "file:./index.css"
+	"editorStyle": "file:./index.css",
+	"render": "file:./render.php"
 }

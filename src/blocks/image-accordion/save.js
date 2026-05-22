@@ -1,40 +1,25 @@
 import { useBlockProps } from "@wordpress/block-editor";
-import { InnerBlocks } from "@wordpress/block-editor";
 
+/**
+ * save.js — minimal output only.
+ * render.php handles the actual frontend HTML.
+ * This only provides WordPress block validation.
+ */
 export default function save({ attributes }) {
 	const {
 		blockID,
-		classHook,
-		imageAccordionGlobalWraperID,
-		imageAccordionGlobalWraperClass,
-
-		imageAccordionDesktopSwitcher,
-		imageAccordionTabletSwitcher,
-		imageAccordionMobileSwitcher,
+		accordionDesktopSwitcher,
+		accordionTabletSwitcher,
+		accordionMobileSwitcher,
 	} = attributes;
 
 	const blockProps = useBlockProps.save({
-		className: `fb-imageAccordion-main-wrapper ${blockID} ${
-			imageAccordionDesktopSwitcher && "fb-desktop-responsive"
-		} ${imageAccordionTabletSwitcher && "fb-tablet-responsive"} ${
-			imageAccordionMobileSwitcher && "fb-mobile-responsive"
-		}`,
+		className: `fb-image-accordion-main-wrapper ${blockID} ${
+			accordionDesktopSwitcher ? "fb-desktop-responsive" : ""
+		} ${accordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
+			accordionMobileSwitcher ? "fb-mobile-responsive" : ""
+		}`.trim(),
 	});
 
-	return (
-		<>
-			<div {...blockProps}>
-				<div
-					className={`fb-parent-wrapper fb-imageAccordion-wrapper fb-parent-${blockID} ${classHook} ${imageAccordionGlobalWraperClass}`}
-					id={imageAccordionGlobalWraperID}
-				>
-					<div className={`fb-imageAccordion-container`}>
-						<div className="fb-imageAccordion-inner">
-							<InnerBlocks.Content />
-						</div>
-					</div>
-				</div>
-			</div>
-		</>
-	);
+	return <div {...blockProps}></div>;
 }

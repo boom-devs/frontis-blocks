@@ -1,26 +1,13 @@
 import { __ } from "@wordpress/i18n";
-import {
-	useBlockProps,
-	InnerBlocks,
-	useInnerBlocksProps,
-	RichText,
-} from "@wordpress/block-editor";
-import { Button } from "@wordpress/components";
-import { useEffect, useMemo, useRef } from "@wordpress/element";
-import { select, dispatch } from "@wordpress/data";
-import { times } from "lodash";
-import { createBlock } from "@wordpress/blocks";
+import { useEffect, useState } from "@wordpress/element";
+import { useBlockProps } from "@wordpress/block-editor";
+
 import "./editor.scss";
+
 import Inspector from "./inspector";
-import SwitchToBlockSettings from "@Utils/SwitchToBlockSettings";
 import useBlockIdGenerator from "@Utils/useBlockIdGenerator";
-import generateimageAccordionStyle from "./styling";
-import loadGoogleFont from "@Utils/loadGoogleFont";
-
-const ALLOWED_BLOCKS = ["frontis-blocks/imageAccordion-item"];
-
-// Global set to track loaded fonts across all block instances
-const loadedFonts = new Set();
+import generateImageAccordionStyle from "./styling";
+import renderSVG from "@Components/icon-picker/components/icon-picker/controls/renderIcon";
 
 export default function Edit({
 	attributes,
@@ -31,154 +18,53 @@ export default function Edit({
 	const {
 		blockID,
 		blockStyle,
-
-		classHook,
-		imageAccordionType,
-		displayIcon,
-		tabIconSwitcher,
-		tabIcon,
-		tabImageUrl,
-		tabImageAlt,
-		expandedIcon,
-		expandedImageUrl,
-		expandedImageAlt,
-		tagName,
-		faqSchema,
-		imageAccordionChildCount,
-		imageAccordionGlobalWraperID,
-		imageAccordionGlobalWraperClass,
-
-		imageAccordionDesktopSwitcher,
-		imageAccordionTabletSwitcher,
-		imageAccordionMobileSwitcher,
-
-		/** Typography Fonts */
-		titleFontFamily,
+		accordionPresetStyle,
+		accordionTrigger,
+		accordionItems,
+		accordionActiveIndex,
+		accordionShowTitle,
+		accordionShowSubtitle,
+		accordionShowNumber,
+		accordionShowButton,
+		accordionShowIcon,
+		accordionShowOverlay,
+		accordionDesktopSwitcher,
+		accordionTabletSwitcher,
+		accordionMobileSwitcher,
+		accordionWraperID,
+		accordionWraperClass,
 	} = attributes;
 
-	// Handle block ID generation (handles duplication and initial ID)
+	const [activeIndex, setActiveIndex] = useState(accordionActiveIndex || 0);
+
+	// Handle block ID generation
 	useBlockIdGenerator({
 		clientId,
 		blockID,
-		blockPrefix: "fb-imageAccordion",
+		blockPrefix: "fb-image-accordion",
 		isSelected,
 		attributes,
 		setAttributes,
 	});
 
-	useEffect(() => {
-		const parentBlocks =
-			select("core/block-editor").getBlocksByClientId(clientId)[0];
-
-		const innerBlocks = parentBlocks?.innerBlocks;
-
-		const { updateBlockAttributes } = dispatch("core/block-editor");
-
-		if (innerBlocks) {
-			innerBlocks.forEach((block) => {
-				updateBlockAttributes(block.clientId, {
-					inheritedimageAccordionType: imageAccordionType,
-					inheritedDisplayIcon: displayIcon,
-					inheritedTabIcon: tabIcon,
-					inheritedExpandedIcon: expandedIcon,
-					inheritedTagName: tagName,
-					faqSchema: faqSchema,
-				});
-			});
-		}
-	}, [
-		imageAccordionType,
-		displayIcon,
-		tabIcon,
-		expandedIcon,
-		tagName,
-		faqSchema,
-	]);
-
-	/** Start load font */
-	useEffect(() => {
-		if (titleFontFamily && !loadedFonts.has(titleFontFamily)) {
-			loadGoogleFont(titleFontFamily);
-			loadedFonts.add(titleFontFamily);
-		}
-	}, [titleFontFamily]);
-	/** End load font */
-
-	/** Start Generate Block Style */
+	// Generate dynamic CSS on attribute change
 	useEffect(() => {
 		if (blockID) {
-			const css = generateimageAccordionStyle(attributes);
+			const css = generateImageAccordionStyle(attributes);
 			setAttributes({ blockStyle: css });
 		}
 	}, [attributes, blockID]);
-	/** End Generate Block Style */
 
 	const blockProps = useBlockProps({
-		className: `fb-imageAccordion-main-wrapper ${blockID} ${
-			imageAccordionDesktopSwitcher && "fb-desktop-responsive"
-		} ${imageAccordionTabletSwitcher && "fb-tablet-responsive"} ${
-			imageAccordionMobileSwitcher && "fb-mobile-responsive"
-		}`,
+		className: `fb-image-accordion-main-wrapper ${blockID} ${
+			accordionDesktopSwitcher ? "fb-desktop-responsive" : ""
+		} ${accordionTabletSwitcher ? "fb-tablet-responsive" : ""} ${
+			accordionMobileSwitcher ? "fb-mobile-responsive" : ""
+		}`.trim(),
 	});
 
-	/**
-	 * Manages tab button settings and switches to block settings on click
-	 */
-	const panelRef = useRef(null);
-	SwitchToBlockSettings(panelRef);
-
-	const addimageAccordion = () => {
-		const innerBlocks = [...select("core/block-editor").getBlocks(clientId)];
-		let count = innerBlocks ? innerBlocks.length : 3;
-
-		const newBlock = createBlock("frontis-blocks/imageAccordion-item", {
-			itemId: count + 1,
-			title: __(`imageAccordion title ${count + 1}`, "frontis-blocks"),
-			inheritedimageAccordionType: imageAccordionType,
-			inheritedTagName: tagName,
-			inheritedDisplayIcon: displayIcon,
-			inheritedTabIconSwitcher: tabIconSwitcher,
-			inheritedTabIcon: tabIcon,
-			inheritedTabImageUrl: tabImageUrl,
-			inheritedTabImageAlt: tabImageAlt,
-			inheritedExpandedIconSwitcher: tabIconSwitcher,
-			inheritedExpandedIcon: expandedIcon,
-			inheritedExpandedImageUrl: expandedImageUrl,
-			inheritedExpandedImageAlt: expandedImageAlt,
-			parentBlockID: blockID,
-		});
-		innerBlocks.splice(innerBlocks.length, 0, newBlock);
-		dispatch("core/block-editor")
-			.replaceInnerBlocks(clientId, innerBlocks)
-			.then(() => {
-				setAttributes({ imageAccordionChildCount: count + 1 });
-			});
-	};
-
-	useEffect(() => {
-		if (!tabIcon) {
-			setAttributes({ tabIcon: "fas fa-angle-right" });
-		}
-		if (!expandedIcon) {
-			setAttributes({ expandedIcon: "fas fa-angle-down" });
-		}
-	}, []);
-
-	const insertAccodionItem = (imageAccordionChildCount) => {
-		return times(imageAccordionChildCount, (n) => [
-			"frontis-blocks/imageAccordion-item",
-			{
-				itemId: n + 1,
-				title: __(`imageAccordion title ${n + 1}`, "frontis-blocks"),
-				inheritedimageAccordionType: imageAccordionType,
-				inheritedDisplayIcon: displayIcon,
-				inheritedTabIcon: tabIcon,
-				inheritedExpandedIcon: expandedIcon,
-				inheritedTagName: tagName,
-				faqSchema: faqSchema,
-				parentBlockID: blockID,
-			},
-		]);
+	const handleItemInteraction = (index) => {
+		setActiveIndex(index);
 	};
 
 	return (
@@ -189,33 +75,75 @@ export default function Edit({
 
 			<div {...blockProps}>
 				<div
-					className={`fb-parent-wrapper fb-imageAccordion-wrapper fb-parent-${blockID} ${classHook} ${imageAccordionGlobalWraperClass}`}
-					id={imageAccordionGlobalWraperID}
-					ref={panelRef}
+					className={`fb-image-accordion-wrapper ${accordionPresetStyle} ${accordionWraperClass}`}
+					id={accordionWraperID}
+					data-trigger={accordionTrigger}
 				>
-					<div className={`fb-imageAccordion-container`}>
-						<div className="fb-imageAccordion-inner">
-							<InnerBlocks
-								template={insertAccodionItem(imageAccordionChildCount)}
-								templateLock={false}
-								allowedBlocks={ALLOWED_BLOCKS}
-							/>
-						</div>
-					</div>
-					<div className="fb-imageAccordion-add-button-wrapper">
-						<Button
-							className="fb-imageAccordion-add-button"
-							label={__("Add Item", "frontis-blocks")}
-							icon="plus"
-							onClick={addimageAccordion}
-						>
-							<span className="fb-imageAccordion-add-button-label">
-								{__("Add Item", "frontis-blocks")}
-							</span>
-						</Button>
-					</div>
+					{accordionItems.map((item, index) => {
+						const isActive = activeIndex === index;
+						return (
+							<div
+								key={item.id || index}
+								className={`fb-accordion-item ${
+									isActive ? "fb-accordion-active" : ""
+								}`}
+								onMouseEnter={() =>
+									accordionTrigger === "hover" && handleItemInteraction(index)
+								}
+								onClick={() =>
+									accordionTrigger === "click" && handleItemInteraction(index)
+								}
+								style={{
+									backgroundImage: item.imageUrl
+										? `url(${item.imageUrl})`
+										: undefined,
+								}}
+							>
+								{/* Overlay */}
+								{accordionShowOverlay && (
+									<div className="fb-accordion-overlay"></div>
+								)}
+
+								{/* Icon (shown when collapsed in style-1) */}
+								{accordionShowIcon && item.icon && (
+									<div className="fb-accordion-icon-wrapper">
+										{renderSVG(item.icon)}
+									</div>
+								)}
+
+								{/* Content */}
+								<div className="fb-accordion-content">
+									{accordionShowNumber && (
+										<span className="fb-accordion-number">{item.number}</span>
+									)}
+									{accordionShowTitle && (
+										<h3 className="fb-accordion-title">{item.title}</h3>
+									)}
+									{accordionShowSubtitle && (
+										<p className="fb-accordion-subtitle">{item.subtitle}</p>
+									)}
+									{accordionShowButton && item.buttonText && (
+										<div className="fb-accordion-btn-wrapper">
+											<a
+												className="fb-accordion-btn"
+												href={item.buttonUrl || "#"}
+												target={item.buttonTarget ? "_blank" : undefined}
+												rel={
+													item.buttonTarget ? "noopener noreferrer" : undefined
+												}
+												onClick={(e) => e.preventDefault()}
+											>
+												{item.buttonText}
+											</a>
+										</div>
+									)}
+								</div>
+							</div>
+						);
+					})}
 				</div>
 			</div>
+
 			<style>{blockStyle}</style>
 		</>
 	);
