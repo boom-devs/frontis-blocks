@@ -31,6 +31,8 @@ import {
     SLIDER_ARROW_POSITION,
     SLIDER_ARROW_DIRECTION,
     ARROW_ICON_ALIGN,
+    CAROUSEL_ITEM_TRANSLATE,
+    CAROUSEL_ITEM_ROTATE,
 } from '@Constants/fbConstants';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
 import FBIconPicker from "../../components/icon-picker";
@@ -62,7 +64,8 @@ const Inspector = ({ attributes, setAttributes }) => {
         CarouselWidthUnits,
         CarouselHeight,
         CarouselHeightUnits,
-        carouselItem,
+        carouselItemTranslateSwitcher,
+        carouselItemRotateSwitcher,
 
         carouselItemTranslateX,
         carouselItemTranslateXUnits,
@@ -116,12 +119,42 @@ const Inspector = ({ attributes, setAttributes }) => {
         carouselArrowPositionOutsidePaddingUnits,
         /** End Position */
 
-
+        /** Start Carousel Item Style */
         coverflowCarouselItemBgColorSwitcher,
         coverflowCarouselItemBgColor,
         coverflowCarouselItemBgHoverColor,
 
-        /** carousel Arrows Style */
+        coverflowCarouselItemPaddingUnits,
+        coverflowCarouselItemPaddingDesktop,
+        coverflowCarouselItemPaddingTablet,
+        coverflowCarouselItemPaddingMobile,
+        coverflowCarouselItemPaddingLink,
+
+        coverflowCarouselItemMarginUnits,
+        coverflowCarouselItemMarginDesktop,
+        coverflowCarouselItemMarginTablet,
+        coverflowCarouselItemMarginMobile,
+        coverflowCarouselItemMarginLink,
+
+        coverflowCarouselItemBorder,
+        coverflowCarouselItemBorderColorSwitcher,
+        coverflowCarouselItemBorderColor,
+        coverflowCarouselItemBorderHoverColor,
+
+        coverflowCarouselItemBorderUnits,
+        coverflowCarouselItemBorderDesktop,
+        coverflowCarouselItemBorderTablet,
+        coverflowCarouselItemBorderMobile,
+        coverflowCarouselItemBorderLink,
+
+        coverflowCarouselItemBorderRadiusUnits,
+        coverflowCarouselItemBorderRadiusDesktop,
+        coverflowCarouselItemBorderRadiusTablet,
+        coverflowCarouselItemBorderRadiusMobile,
+        coverflowCarouselItemBorderRadiusLink,
+        /** End Carousel Item Style */
+
+        /** Start Carousel Arrows Style */
         carouselArrowsIconSwitcher,
 
         carouselArrowsIconLeftAlign,
@@ -264,33 +297,40 @@ const Inspector = ({ attributes, setAttributes }) => {
         //Global attributes
         coverflowCarouselGlobalZIndex,
         coverflowCarouselOverflow,
+
         coverflowCarouselGlobalPaddingUnits,
         coverflowCarouselGlobalPaddingDesktop,
         coverflowCarouselGlobalPaddingTablet,
         coverflowCarouselGlobalPaddingMobile,
         coverflowCarouselGlobalPaddingLink,
+
         coverflowCarouselGlobalMarginUnits,
         coverflowCarouselGlobalMarginDesktop,
         coverflowCarouselGlobalMarginTablet,
         coverflowCarouselGlobalMarginMobile,
         coverflowCarouselGlobalMarginLink,
+
         coverflowCarouselGlobalBgColorSwitcher,
         coverflowCarouselGlobalBgColor,
         coverflowCarouselGlobalBgHoverColor,
+
         coverflowCarouselGlobalBorder,
         coverflowCarouselGlobalBorderColorSwitcher,
         coverflowCarouselGlobalBorderColor,
         coverflowCarouselGlobalBorderHoverColor,
+
         coverflowCarouselGlobalBorderUnits,
         coverflowCarouselGlobalBorderDesktop,
         coverflowCarouselGlobalBorderTablet,
         coverflowCarouselGlobalBorderMobile,
         coverflowCarouselGlobalBorderLink,
+
         coverflowCarouselGlobalBorderRadiusUnits,
         coverflowCarouselGlobalBorderRadiusDesktop,
         coverflowCarouselGlobalBorderRadiusTablet,
         coverflowCarouselGlobalBorderRadiusMobile,
         coverflowCarouselGlobalBorderRadiusLink,
+
         coverflowCarouselGlobalBoxShadowValues,
         coverflowCarouselGlobalBoxShadowCssValue,
 
@@ -329,6 +369,312 @@ const Inspector = ({ attributes, setAttributes }) => {
         setAttributes({ carouselArrowsIconRight: IconName })
 
     }
+
+    /** Start Carousel Item padding */
+    const handleCarouselItemPaddingUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (coverflowCarouselItemPaddingLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemPaddingDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemPaddingTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemPaddingMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemPaddingDesktop: {
+                            ...coverflowCarouselItemPaddingDesktop,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemPaddingTablet: {
+                            ...coverflowCarouselItemPaddingTablet,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemPaddingMobile: {
+                            ...coverflowCarouselItemPaddingMobile,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const handleCarouselItemPaddingCombineBtn = () => {
+        setAttributes({ coverflowCarouselItemPaddingLink: !coverflowCarouselItemPaddingLink });
+    };
+
+    const handleCarouselItemPaddingUnitsHandler = (unit) => {
+        setAttributes({
+            coverflowCarouselItemPaddingUnits: {
+                ...coverflowCarouselItemPaddingUnits,
+                [deviceType]: unit,
+            },
+        });
+    };
+    /** End Carousel Item Padding */
+
+    /** Start Carousel Item Margin */
+    const handleCarouselItemMarginUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (coverflowCarouselItemMarginLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemMarginDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemMarginTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemMarginMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value,
+                        },
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemMarginDesktop: {
+                            ...coverflowCarouselItemMarginDesktop,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemMarginTablet: {
+                            ...coverflowCarouselItemMarginTablet,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemMarginMobile: {
+                            ...coverflowCarouselItemMarginMobile,
+                            [position]: value,
+                        },
+                    });
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    const handleCarouselItemMarginCombineBtn = () => {
+        setAttributes({ coverflowCarouselItemMarginLink: !coverflowCarouselItemMarginLink });
+    };
+
+    const handleCarouselItemMarginUnitsHandler = (unit) => {
+        setAttributes({
+            coverflowCarouselItemMarginUnits: {
+                ...coverflowCarouselItemMarginUnits,
+                [deviceType]: unit,
+            },
+        });
+    };
+    /** End Carousel Item Margin */
+
+    /** Start Carousel Item Border */
+    const handleCarouselItemBorderUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (coverflowCarouselItemBorderLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemBorderDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemBorderTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemBorderMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ coverflowCarouselItemBorderDesktop: { ...coverflowCarouselItemBorderDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ coverflowCarouselItemBorderTablet: { ...coverflowCarouselItemBorderTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ coverflowCarouselItemBorderMobile: { ...coverflowCarouselItemBorderMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleCarouselItemBorderCombineBtn = () => {
+        setAttributes({ coverflowCarouselItemBorderLink: !coverflowCarouselItemBorderLink });
+    }
+
+    const handleCarouselItemBorderUnitsHandler = (unit) => {
+        setAttributes({
+            coverflowCarouselItemBorderUnits: {
+                ...coverflowCarouselItemBorderUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Carouel Item Border */
+
+    /** Start Carousel Item border radius*/
+    const handleCarouselItemBorderRadiusUnitChange = (event, position) => {
+        const value = event.target.value;
+        if (coverflowCarouselItemBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({
+                        coverflowCarouselItemBorderRadiusDesktop: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Tablet':
+                    setAttributes({
+                        coverflowCarouselItemBorderRadiusTablet: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                case 'Mobile':
+                    setAttributes({
+                        coverflowCarouselItemBorderRadiusMobile: {
+                            top: value,
+                            right: value,
+                            bottom: value,
+                            left: value
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ coverflowCarouselItemBorderRadiusDesktop: { ...coverflowCarouselItemBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ coverflowCarouselItemBorderRadiusTablet: { ...coverflowCarouselItemBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ coverflowCarouselItemBorderRadiusMobile: { ...coverflowCarouselItemBorderRadiusMobile, [position]: value } });
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    const handleCarouselItemBorderRadiusCombineBtn = () => {
+        setAttributes({ coverflowCarouselItemBorderRadiusLink: !coverflowCarouselItemBorderRadiusLink });
+    }
+
+    const handleCarouselItemBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            coverflowCarouselItemBorderRadiusUnits: {
+                ...coverflowCarouselItemBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        })
+    }
+    /** End Carousel Item Border Radius */
 
     /** Start Arrows border */
     const handleArrowsBorderUnitChange = (event, position) => {
@@ -1161,106 +1507,13 @@ const Inspector = ({ attributes, setAttributes }) => {
                     rangeStep={1}
                     resetFallbackValue={"300"}
                 />
-                <FB_Range
-                    min={1}
-                    max={20}
-                    label={__("Visible Items", "frontis-blocks")}
-                    rangeValue={carouselItem}
-                    onChangeHandler={(value) => setAttributes({ carouselItem: value === 0 ? undefined : value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                    isRangeUnit={false}
-                />
             </PanelBody>
 
-            <PanelBody title={__("3D Coverflow Settings", "frontis-blocks")} initialOpen={false}>
-                <FB_Range
-                    min={-1000}
-                    max={1000}
-                    label={__("Translate X", "frontis-blocks")}
-                    rangeValue={carouselItemTranslateX}
-                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateX: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateXUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemTranslateXUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"260"}
-                />
-                <FB_Range
-                    min={-500}
-                    max={500}
-                    label={__("Translate Y", "frontis-blocks")}
-                    rangeValue={carouselItemTranslateY}
-                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateY: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateYUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemTranslateYUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"0"}
-                />
-                <FB_Range
-                    min={-1000}
-                    max={1000}
-                    label={__("Translate Z (Depth)", "frontis-blocks")}
-                    rangeValue={carouselItemTranslateZ}
-                    onChangeHandler={(value) => setAttributes({ carouselItemTranslateZ: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateZUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemTranslateZUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"-100"}
-                />
-                <FB_Range
-                    min={-90}
-                    max={90}
-                    label={__("Rotate X", "frontis-blocks")}
-                    rangeValue={carouselItemRotateX}
-                    onChangeHandler={(value) => setAttributes({ carouselItemRotateX: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateXUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemRotateXUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"55"}
-                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
-                />
-                <FB_Range
-                    min={-90}
-                    max={90}
-                    label={__("Rotate Y", "frontis-blocks")}
-                    rangeValue={carouselItemRotateY}
-                    onChangeHandler={(value) => setAttributes({ carouselItemRotateY: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateYUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemRotateYUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"55"}
-                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
-                />
-                <FB_Range
-                    min={-90}
-                    max={90}
-                    label={__("Rotate Z", "frontis-blocks")}
-                    rangeValue={carouselItemRotateZ}
-                    onChangeHandler={(value) => setAttributes({ carouselItemRotateZ: value })}
-                    rangeUnitHandler={(value) => setAttributes({ carouselItemRotateZUnits: value })}
-                    deviceType={deviceType}
-                    units={carouselItemRotateZUnits}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={"55"}
-                    UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
-                />
+            <PanelBody title={__("Coverflow Settings", "frontis-blocks")} initialOpen={false}>
                 <FB_Range
                     min={400}
                     max={3000}
-                    label={__("3D Perspective", "frontis-blocks")}
+                    label={__("Perspective", "frontis-blocks")}
                     rangeValue={carouselPerspective}
                     onChangeHandler={(value) => setAttributes({ carouselPerspective: value })}
                     rangeUnitHandler={(value) => setAttributes({ carouselPerspectiveUnits: value })}
@@ -1273,7 +1526,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                 <FB_Range
                     min={0.1}
                     max={1.5}
-                    label={__("Inactive Items Scale", "frontis-blocks")}
+                    label={__("Scale", "frontis-blocks")}
                     rangeValue={carouselItemScale}
                     onChangeHandler={(value) => setAttributes({ carouselItemScale: value })}
                     rangeUnitHandler={(value) => setAttributes({ carouselItemScaleUnits: value })}
@@ -1283,15 +1536,125 @@ const Inspector = ({ attributes, setAttributes }) => {
                     rangeStep={0.05}
                     resetFallbackValue={"0.85"}
                 />
+
+                <FB_SwitcherControl
+                    label={__("Translate", "frontis-blocks")}
+                    options={CAROUSEL_ITEM_TRANSLATE}
+                    globalSwitcher={carouselItemTranslateSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ carouselItemTranslateSwitcher: value })}
+                />
+                {carouselItemTranslateSwitcher === 'X' && (
+                    <FB_Range
+                        min={-1000}
+                        max={1000}
+                        label={__("x-axis", "frontis-blocks")}
+                        rangeValue={carouselItemTranslateX}
+                        onChangeHandler={(value) => setAttributes({ carouselItemTranslateX: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateXUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemTranslateXUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"260"}
+                    />
+                )}
+                {carouselItemTranslateSwitcher === 'Y' && (
+                    <FB_Range
+                        min={-500}
+                        max={500}
+                        label={__("y-axis", "frontis-blocks")}
+                        rangeValue={carouselItemTranslateY}
+                        onChangeHandler={(value) => setAttributes({ carouselItemTranslateY: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateYUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemTranslateYUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"0"}
+                    />
+                )}
+                {carouselItemTranslateSwitcher === 'Z' && (
+                    <FB_Range
+                        min={-1000}
+                        max={1000}
+                        label={__("z-axis", "frontis-blocks")}
+                        rangeValue={carouselItemTranslateZ}
+                        onChangeHandler={(value) => setAttributes({ carouselItemTranslateZ: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemTranslateZUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemTranslateZUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"-100"}
+                    />
+                )}
+
+                <FB_SwitcherControl
+                    label={__("Rotate", "frontis-blocks")}
+                    options={CAROUSEL_ITEM_ROTATE}
+                    globalSwitcher={carouselItemRotateSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ carouselItemRotateSwitcher: value })}
+                />
+
+                {carouselItemRotateSwitcher === 'X' && (
+                    <FB_Range
+                        min={-90}
+                        max={90}
+                        label={__("x-axis", "frontis-blocks")}
+                        rangeValue={carouselItemRotateX}
+                        onChangeHandler={(value) => setAttributes({ carouselItemRotateX: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemRotateXUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemRotateXUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"55"}
+                        UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                    />
+                )}
+
+                {carouselItemRotateSwitcher === 'Y' && (
+                    <FB_Range
+                        min={-90}
+                        max={90}
+                        label={__("y-axis", "frontis-blocks")}
+                        rangeValue={carouselItemRotateY}
+                        onChangeHandler={(value) => setAttributes({ carouselItemRotateY: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemRotateYUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemRotateYUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"55"}
+                        UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                    />
+                )}
+
+                {carouselItemRotateSwitcher === 'Z' && (
+                    <FB_Range
+                        min={-90}
+                        max={90}
+                        label={__("z-axis", "frontis-blocks")}
+                        rangeValue={carouselItemRotateZ}
+                        onChangeHandler={(value) => setAttributes({ carouselItemRotateZ: value })}
+                        rangeUnitHandler={(value) => setAttributes({ carouselItemRotateZUnits: value })}
+                        deviceType={deviceType}
+                        units={carouselItemRotateZUnits}
+                        setAttributes={setAttributes}
+                        rangeStep={1}
+                        resetFallbackValue={"55"}
+                        UNIT_TYPES={[{ label: 'deg', value: 'deg' }]}
+                    />
+                )}
                 <ToggleControl
-                    label={__("Enable Card Reflection", "frontis-blocks")}
+                    label={__("Card Reflection", "frontis-blocks")}
                     checked={carouselReflection}
                     onChange={(value) => setAttributes({ carouselReflection: value })}
                 />
                 {carouselReflection && (
                     <>
                         <RangeControl
-                            label={__("Reflection Gap (px)", "frontis-blocks")}
+                            label={__("Gap(px)", "frontis-blocks")}
                             value={carouselReflectionGap}
                             onChange={(value) => setAttributes({ carouselReflectionGap: value })}
                             min={0}
@@ -1299,7 +1662,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                             step={1}
                         />
                         <RangeControl
-                            label={__("Reflection Opacity (%)", "frontis-blocks")}
+                            label={__("Opacity(%)", "frontis-blocks")}
                             value={carouselReflectionOpacity}
                             onChange={(value) => setAttributes({ carouselReflectionOpacity: value })}
                             min={0}
@@ -1380,7 +1743,7 @@ const Inspector = ({ attributes, setAttributes }) => {
                     label={__("Transition Easing", "frontis-blocks")}
                     value={carouselTransitionEasing}
                     options={[
-                        { label: __('Smooth Bezier (Premium)', 'frontis-blocks'), value: 'cubic-bezier(0.16, 1, 0.3, 1)' },
+                        { label: __('Smooth Bezier', 'frontis-blocks'), value: 'cubic-bezier(0.16, 1, 0.3, 1)' },
                         { label: __('Ease', 'frontis-blocks'), value: 'ease' },
                         { label: __('Ease In Out', 'frontis-blocks'), value: 'ease-in-out' },
                         { label: __('Ease Out', 'frontis-blocks'), value: 'ease-out' },
@@ -1767,7 +2130,90 @@ const Inspector = ({ attributes, setAttributes }) => {
                         setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBgHoverColor: value === undefined ? '' : value })}
                     />
                 )}
+                <FB_Spacing
+                    label={__("Padding", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleCarouselItemPaddingUnitsHandler}
+                    spacingUnits={coverflowCarouselItemPaddingUnits}
+                    spacingDesktop={coverflowCarouselItemPaddingDesktop}
+                    spacingTablet={coverflowCarouselItemPaddingTablet}
+                    spacingMobile={coverflowCarouselItemPaddingMobile}
+                    handleSpacingUnitHandler={handleCarouselItemPaddingUnitChange}
+                    spacingCombineBtn={coverflowCarouselItemPaddingLink}
+                    spacingCombineBtnHandler={handleCarouselItemPaddingCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <FB_Spacing
+                    label={__("Margin", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleCarouselItemMarginUnitsHandler}
+                    spacingUnits={coverflowCarouselItemMarginUnits}
+                    spacingDesktop={coverflowCarouselItemMarginDesktop}
+                    spacingTablet={coverflowCarouselItemMarginTablet}
+                    spacingMobile={coverflowCarouselItemMarginMobile}
+                    handleSpacingUnitHandler={handleCarouselItemMarginUnitChange}
+                    spacingCombineBtn={coverflowCarouselItemMarginLink}
+                    spacingCombineBtnHandler={handleCarouselItemMarginCombineBtn}
+                    setAttributes={setAttributes}
+                />
+                <SelectControl
+                    label={__("Border Style", "frontis-blocks")}
+                    value={coverflowCarouselItemBorder}
+                    options={BORDER_STYLES}
+                    onChange={(value) => setAttributes({ coverflowCarouselItemBorder: value })}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Border Color", "frontis-blocks")}
+                    globalSwitcher={coverflowCarouselItemBorderColorSwitcher}
+                    setGlobalSwitcher={(value) => setAttributes({ coverflowCarouselItemBorderColorSwitcher: value })}
+                />
+
+                {coverflowCarouselItemBorderColorSwitcher === 'normal' && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={coverflowCarouselItemBorderColor}
+                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBorderColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                {coverflowCarouselItemBorderColorSwitcher === 'hover' && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={coverflowCarouselItemBorderHoverColor}
+                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBorderHoverColor: value === undefined ? '' : value })}
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleCarouselItemBorderUnitsHandler}
+                    spacingUnits={coverflowCarouselItemBorderUnits}
+                    spacingDesktop={coverflowCarouselItemBorderDesktop}
+                    spacingTablet={coverflowCarouselItemBorderTablet}
+                    spacingMobile={coverflowCarouselItemBorderMobile}
+                    handleSpacingUnitHandler={handleCarouselItemBorderUnitChange}
+                    spacingCombineBtn={coverflowCarouselItemBorderLink}
+                    spacingCombineBtnHandler={handleCarouselItemBorderCombineBtn}
+                    setAttributes={setAttributes}
+                />
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={handleCarouselItemBorderRadiusUnitsHandler}
+                    spacingUnits={coverflowCarouselItemBorderRadiusUnits}
+                    spacingDesktop={coverflowCarouselItemBorderRadiusDesktop}
+                    spacingTablet={coverflowCarouselItemBorderRadiusTablet}
+                    spacingMobile={coverflowCarouselItemBorderRadiusMobile}
+                    handleSpacingUnitHandler={handleCarouselItemBorderRadiusUnitChange}
+                    spacingCombineBtn={coverflowCarouselItemBorderRadiusLink}
+                    spacingCombineBtnHandler={handleCarouselItemBorderRadiusCombineBtn}
+                    setAttributes={setAttributes}
+                />
             </PanelBody>
+
             {showNavigation && (
                 <PanelBody title={__("Navigation Style", "frontis-blocks")} initialOpen={false}>
                     <FB_SwitcherControl

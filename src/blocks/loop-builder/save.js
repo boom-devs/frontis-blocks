@@ -1,20 +1,17 @@
-/**
- * WordPress dependencies
- */
 import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+export default function save({ attributes }) {
+    const {
+        tagName: TagName = 'div',
+        blockID,
+        query,
+    } = attributes;
 
-export default function save({
-								 attributes: {
-									 tagName: TagName = 'div',
-									 blockId,
-									 query
-								 }
-							 }) {
-	const blockProps = useBlockProps.save({
-		className: `${blockId || ''} fb-query-content-container`,
-	});
+    const blockProps = useBlockProps.save({
+        className: `${blockID || ''} fb-loop-builder fb-query-content-container`.trim(),
+        ...(blockID ? { 'data-fb-block-id': blockID } : {}),
+    });
 
-	const innerBlocksProps = useInnerBlocksProps.save(blockProps);
+    const innerBlocksProps = useInnerBlocksProps.save(blockProps);
 
-	return <TagName {...innerBlocksProps} />;
+    return <TagName {...innerBlocksProps} />;
 }
