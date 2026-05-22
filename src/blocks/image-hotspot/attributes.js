@@ -179,9 +179,9 @@ const attributes = {
 	imageHotspotMarkerBorderRadius: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '50',
+			Tablet: '50',
+			Mobile: '50'
 		}
 	},
 	imageHotspotMarkerBorderRadiusUnits: { 
@@ -201,9 +201,9 @@ const attributes = {
 	imageHotspotPopoverWidth: { 
 		type: "object", 
 		default: {
-			Desktop: '',
-			Tablet: '',
-			Mobile: ''
+			Desktop: '250',
+			Tablet: '225',
+			Mobile: '200'
 		}
 	},
 	imageHotspotPopoverWidthUnits: { 

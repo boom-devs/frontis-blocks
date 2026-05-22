@@ -2,7 +2,7 @@
   position: relative;
   display: block;
   width: 100%;
-  line-height: 0; /* removes ghost space below image */
+  line-height: 0;
 }
 
 .fb-hotspot-base-image {
@@ -11,53 +11,58 @@
   display: block;
 }
 
-
 .fb-hotspot-marker .fb-hotspot-popover {
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  display: block;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
 }
 
 .fb-hotspot-marker:hover .fb-hotspot-popover,
 .fb-hotspot-marker.locked .fb-hotspot-popover {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .fb-hotspot-popover-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 4px;
-    margin-bottom: 8px;
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+  margin-bottom: 8px;
 }
 
 .fb-hotspot-popover-category {
-    margin-bottom: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
+  margin-bottom: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: wrap;
+  line-height: 1.4;
 }
 
 .fb-hotspot-popover-title a {
-    color: inherit;
-    text-decoration: inherit;
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.fb-hotspot-popover-description {
+  line-height: 1.5;
 }
 
 .fb-hotspot-popover-price {
-    margin-top: 8px;
-    font-weight: 600;
+  margin-top: 8px;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
-
 .fb-hotspot-trigger {
-    transform-origin: center;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  transform-origin: center;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
 
-    &:hover {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
+  &:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
 }
