@@ -382,32 +382,41 @@ if (!function_exists('fb_compute_dynamic_text')) {
 
 			// Link compute (only if enabled)
 			if ($link_enabled) {
-				switch ($link_source) {
-					case 'post_permalink':
-						$link_url = $permalink ?: '';
-						break;
-					case 'comments_area':
-						$link_url = $_post ? get_comments_link($_post) : '';
-						break;
-					case 'featured_image':
-						$link_url = $_post ? (get_the_post_thumbnail_url($_post, 'full') ?: '') : '';
-						break;
-					case 'avatar_profile_url': {
-						$author_id = $_post ? (int) $_post->post_author : 0;
-						$link_url = $author_id ? (get_avatar_url($author_id) ?: '') : '';
-						break;
+				if ($field === 'post_terms') {
+					$tax = $terms_tax ?: 'category';
+					$terms = get_the_terms($_post, $tax);
+					if (!is_wp_error($terms) && !empty($terms)) {
+						$t_link = get_term_link($terms[0], $tax);
+						$link_url = !is_wp_error($t_link) ? $t_link : '';
 					}
-					case 'author_page_url': {
-						$pt = $_post ? get_post_type($_post) : ($target_post_type ?: '');
-						$link_url = $pt ? (get_post_type_archive_link($pt) ?: '') : '';
-						break;
+				} else {
+					switch ($link_source) {
+						case 'post_permalink':
+							$link_url = $permalink ?: '';
+							break;
+						case 'comments_area':
+							$link_url = $_post ? get_comments_link($_post) : '';
+							break;
+						case 'featured_image':
+							$link_url = $_post ? (get_the_post_thumbnail_url($_post, 'full') ?: '') : '';
+							break;
+						case 'avatar_profile_url': {
+							$author_id = $_post ? (int) $_post->post_author : 0;
+							$link_url = $author_id ? (get_avatar_url($author_id) ?: '') : '';
+							break;
+						}
+						case 'author_page_url': {
+							$pt = $_post ? get_post_type($_post) : ($target_post_type ?: '');
+							$link_url = $pt ? (get_post_type_archive_link($pt) ?: '') : '';
+							break;
+						}
+						case 'archive_url':
+							$author_id = $_post ? (int) $_post->post_author : 0;
+							$link_url = $author_id ? get_author_posts_url($author_id) : '';
+							break;
+						default:
+							$link_url = '';
 					}
-					case 'archive_url':
-						$author_id = $_post ? (int) $_post->post_author : 0;
-						$link_url = $author_id ? get_author_posts_url($author_id) : '';
-						break;
-					default:
-						$link_url = '';
 				}
 			}
 		}
