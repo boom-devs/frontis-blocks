@@ -1,21 +1,2 @@
-// style.scss
-
-.fb-imageAccordion-item-main-wrapper {
-	.fb-imageAccordion-item-title-wrapper {
-		.fb-imageAccordion-title {
-			margin: 0;
-		}
-	}
-}
-
-.fb-imageAccordion-content-wrapper {
-	overflow: hidden;
-	// max-height: 0;
-	transition: max-height 0.3s ease-out;
-}
-
-.fb-imageAccordion-content-wrapper.active {
-	overflow: visible;
-	// max-height: unset;
-	transition: max-height 0.3s ease-in;
-}
+// Image Accordion — frontend base styles
+// (Dynamic styles are injected via styling.js / blockStyle attribute)
