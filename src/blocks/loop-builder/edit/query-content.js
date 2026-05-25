@@ -29,20 +29,23 @@ import QueryToolbar from './query-toolbar';
  * Internal dependencies
  */
 import Inspector from "../inspector";
+import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 
 // const { HTMLElementControl } = unlock( blockEditorPrivateApis );
 
 const DEFAULTS_POSTS_PER_PAGE = 3;
 
-const TEMPLATE = [ [ 'frontis-blocks/loop-builder-wrapper' ] ];
+const TEMPLATE = [ [ 'frontis-blocks/loop-builder-item' ] ];
 export default function QueryContent( {
 	attributes,
 	setAttributes,
 	clientId,
 	context,
 	name,
+	isSelected,
 } ) {
 	const {
+		blockID,
 		queryId,
 		query,
 		enhancedPagination,
@@ -68,12 +71,25 @@ export default function QueryContent( {
 
 	} = attributes;
 
+	// Handle block ID generation using the global hook
+	useBlockIdGenerator({
+		clientId,
+		blockID,
+		blockPrefix: 'fb-loop-builder',
+		isSelected,
+		attributes,
+		setAttributes,
+	});
+
 	const { templateSlug } = context;
 	const { isSingular } = getQueryContextFromTemplate( templateSlug );
 	const { __unstableMarkNextChangeAsNotPersistent } =
 		useDispatch( blockEditorStore );
 	const instanceId = useInstanceId( QueryContent );
-	const blockProps = useBlockProps();
+	const blockProps = useBlockProps( {
+		className: `${ blockID || '' } fb-loop-builder fb-query-content-container`.trim(),
+		...( blockID ? { 'data-fb-block-id': blockID } : {} ),
+	} );
 	const innerBlocksProps = useInnerBlocksProps( blockProps, {
 		template: TEMPLATE,
 	} );

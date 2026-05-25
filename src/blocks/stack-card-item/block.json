@@ -5,7 +5,7 @@
 	"version": "1.0.0",
 	"title": "Stack Card Item",
 	"category": "frontis-blocks",
-	"description": "Single card slot inside Stack Card. Drop any blocks inside.",
+	"description": "Single card item inside Stack Card. Drop any blocks inside.",
 	"example": {},
 	"parent": ["frontis-blocks/stack-card"],
 	"supports": {

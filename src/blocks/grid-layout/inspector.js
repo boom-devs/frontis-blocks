@@ -441,51 +441,10 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
 	/**
 	 * Inspector Style Controls
 	 */
-	const styleControls = <></>;
-
-	/**
-	 * Inspector Advanced Controls
-	 */
-	const advancedControls = (
-		<>
-
-            <PanelBody
-                title={__("Layout", "frontis-blocks")}
-                initialOpen={true}
-                className='fb-setting-layout-header'
-            >
-                <FB_Range
-                    min={0}
-                    max={10000000}
-                    label={__("Z Index", "frontis-blocks")}
-                    rangeValue={gridLayoutGlobalZIndex} 
-                    onChangeHandler={(value) => setAttributes({ gridLayoutGlobalZIndex: value === 0 ? undefined : value })}
-                    deviceType={deviceType}
-                    setAttributes={setAttributes}
-                    rangeStep={1}
-                    resetFallbackValue={""}
-                    isRangeUnit={false}
-
-                />
-
-                <FB_InputControl
-                    label={__("CSS ID", "frontis-blocks")}
-                    value={gridLayoutGlobalWraperID}
-                    onChangeValue={(value) => setAttributes({ gridLayoutGlobalWraperID: value })}
-                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
-                />
-
-                <FB_InputControl
-                    label={__("CSS Class", "frontis-blocks")}
-                    value={gridLayoutGlobalWraperClass}
-                    onChangeValue={(value) => setAttributes({ gridLayoutGlobalWraperClass: value })}
-                    helpText={__("Separate with spaces key.", "frontis-blocks")}
-                />
-
-            </PanelBody>
+	const styleControls = (
+        <>
             <PanelBody 
                 title={__("Padding and Margin", "frontis-blocks")} 
-                initialOpen={false}
             >
                 <FB_Spacing 
                     label={__("Padding", "frontis-blocks")} 
@@ -632,7 +591,51 @@ const Inspector = ({ attributes, setAttributes, addGridItem }) => {
                         onBoxShadowStyleChange={(value) => setAttributes({ gridLayoutGlobalBoxShadowHoverCssValue: value })}
                     />
                 )}
+            </PanelBody>  
+        </>
+    );
+
+	/**
+	 * Inspector Advanced Controls
+	 */
+	const advancedControls = (
+		<>
+
+            <PanelBody
+                title={__("Layout", "frontis-blocks")}
+                initialOpen={true}
+                className='fb-setting-layout-header'
+            >
+                <FB_Range
+                    min={0}
+                    max={10000000}
+                    label={__("Z Index", "frontis-blocks")}
+                    rangeValue={gridLayoutGlobalZIndex} 
+                    onChangeHandler={(value) => setAttributes({ gridLayoutGlobalZIndex: value === 0 ? undefined : value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={false}
+
+                />
+
+                <FB_InputControl
+                    label={__("CSS ID", "frontis-blocks")}
+                    value={gridLayoutGlobalWraperID}
+                    onChangeValue={(value) => setAttributes({ gridLayoutGlobalWraperID: value })}
+                    helpText={__("Add an ID to the block wrapper.", "frontis-blocks")}
+                />
+
+                <FB_InputControl
+                    label={__("CSS Class", "frontis-blocks")}
+                    value={gridLayoutGlobalWraperClass}
+                    onChangeValue={(value) => setAttributes({ gridLayoutGlobalWraperClass: value })}
+                    helpText={__("Separate with spaces key.", "frontis-blocks")}
+                />
+
             </PanelBody>
+
             <PanelBody
                 title={__("Custom CSS", "frontis-blocks")}
                 initialOpen={false}

@@ -977,22 +977,20 @@ const FB_Block_Icons = {
 			fill: 'none',
 			className: 'frontis-blocks-editor-icons',
 		},
-		[
-			fb('path', {
-				d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
-				stroke: '#0B0C0E',
-				strokeWidth: 1.4,
-				strokeLinecap: 'round',
-				strokeLinejoin: 'round',
-			}),
-			fb('path', {
-				d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
-				stroke: '#0B0C0E',
-				strokeWidth: 1.4,
-				strokeLinecap: 'round',
-				strokeLinejoin: 'round',
-			})
-		]
+		fb('path', {
+			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+		fb('path', {
+			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
 	),
 	off_canvas_menu: fb(
 		'svg',
