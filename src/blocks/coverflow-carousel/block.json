@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/coverflow-carousel",
+	"version": "1.0.0",
+	"title": "Coverflow Carousel",
+	"category": "frontis-blocks",
+	"description": "A customizable coverflow carousel block with various styling options.",
+	"example": {},
+	"supports": {
+		"anchor": false,
+		"align": ["wide", "full"],
+		"customClassName": false,
+		"customCSS": false
+	},
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"viewScript": "file:./view.js"
+}
