@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+.fb-image-comparison-inner-wrapper {
+    .fb-image-comparison-slider-wrapper {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+
+        // Overlay
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        &:hover::before {
+            opacity: 1;
+        }
+
+        .fb-image-comparison-label {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+
+            padding: 8px 14px;
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .fb-image-comparison-before-label {
+            left: 20px;
+            transform: translateY(10px);
+        }
+
+        .fb-image-comparison-after-label {
+            right: 20px;
+            transform: translateY(10px);
+        }
+
+        &:hover {
+            .fb-image-comparison-label {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fb-image-comparison-before-image,
+        .fb-image-comparison-after-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+                object-position: center center;
+                user-select: none;
+                pointer-events: none;
+            }
+        }
+
+        .fb-image-comparison-after-image {
+            z-index: 2;
+            width: 100%;
+            -webkit-clip-path: inset(0 50% 0 0);
+            clip-path: inset(0 50% 0 0);
+        }
+
+        .fb-image-comparison-slider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9;
+
+            width: 40px;
+            height: 40px;
+
+            background-color: #2196f3;
+            border-radius: 50%;
+            opacity: 0.7;
+
+            cursor: ew-resize;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -9999px;
+                bottom: -9999px;
+                left: 50%;
+                width: 2px;
+                background: #fff;
+                transform: translateX(-50%);
+            }
+        }
+    }
+}
