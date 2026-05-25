@@ -1,0 +1,38 @@
+.fb-image-comparison-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    background-color: #f7f9fa;
+    border: 2px dashed #ccd0d4;
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+    color: #50575e;
+
+    .fb-image-comparison-placeholder-inner {
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        svg {
+            color: #72777c;
+            margin-bottom: 12px;
+        }
+
+        h4 {
+            margin: 0 0 6px 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e1e1e;
+        }
+
+        p {
+            margin: 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #72777c;
+        }
+    }
+}
