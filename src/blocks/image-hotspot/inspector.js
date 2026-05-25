@@ -23,11 +23,17 @@ import FB_Spacing from '../../components/spacing';
 import FB_VisibilityControl from '../../components/visibility-control';
 import FB_CustomCSSEditor from '../../components/custom-css-editor';
 import FB_BoxShadowControl from '../../components/box-shadow';
+import FB_Presets from '@Components/presets';
+import { imageHotspotPresets } from './preset';
 import { useDeviceType } from '@Config/displayType';
 import SortableItem from './sortableItem';
 
 export default function Inspector({ attributes, setAttributes }) {
   const {
+    imageHotspotPresetStyle,
+    imageHotspotShowPopoverImage,
+    imageHotspotCategoryColor,
+    imageHotspotPriceColor,
     // Image
     imageHotspotImageUrl,
     imageHotspotImageId,
@@ -48,6 +54,7 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotSelectedHotspotId,
 
     // Marker styles
+    imageHotspotMarkerColor,
     imageHotspotMarkerSize,
     imageHotspotMarkerSizeUnits,
     imageHotspotMarkerHoverSize,
@@ -394,7 +401,8 @@ export default function Inspector({ attributes, setAttributes }) {
       titleLinkOpenInNewTab: false,
       description: '',
       price: '',
-      backgroundColor: '#011f4b',
+      markerColor: imageHotspotMarkerColor,
+      backgroundColor: imageHotspotMarkerColor,
       icon: 'plus',
       popoverImageUrl: '',
       popoverImageAlt: '',
@@ -402,7 +410,7 @@ export default function Inspector({ attributes, setAttributes }) {
       animation: 'none',
       autoplay: true,
       animationInterval: 0,
-      iconColor: '#ffffff',
+      iconColor: '',
       hoverBackgroundColor: '',
       markerSize: imageHotspotMarkerSize,
       markerSizeUnits: imageHotspotMarkerSizeUnits,
@@ -476,7 +484,14 @@ export default function Inspector({ attributes, setAttributes }) {
 
   const generalControls = (
     <>
-      <PanelBody title={__("Image", "frontis-blocks")} initialOpen={true}>
+      <PanelBody title={__("General", "frontis-blocks")} initialOpen={true}>
+        <FB_Presets
+            presets={imageHotspotPresets}
+            value={imageHotspotPresetStyle}
+            onChangeValue="imageHotspotPresetStyle"
+            defaultPresetValue="preset-1"
+            setAttributes={setAttributes}
+        />
         <FB_ImageControl
           label={__("Select Image", "frontis-blocks")}
           globalImageUrl={imageHotspotImageUrl}
@@ -585,6 +600,12 @@ export default function Inspector({ attributes, setAttributes }) {
                             globalImageID={hotspot.popoverImageId || 0}
                             setglobalImageID={(id) => updateHotspot(hotspot.id, 'popoverImageId', id)}
                             isImageSize={false}
+                        />
+
+                        <ToggleControl
+                            label={__("Show Popover Image", "frontis-blocks")}
+                            checked={hotspot.showImage !== false}
+                            onChange={(value) => updateHotspot(hotspot.id, 'showImage', value)}
                         />
 
                         <SelectControl
@@ -731,8 +752,8 @@ export default function Inspector({ attributes, setAttributes }) {
                         {imageHotspotMarkerColorSwitcher === 'normal' && (
                             <FB_ColorControl
                                 label={__("Color", "frontis-blocks")}
-                                globalColor={hotspot.backgroundColor || '#011f4b'}
-                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'backgroundColor', color)}
+                                globalColor={hotspot.markerColor || imageHotspotMarkerColor}
+                                setGlobalColor={(color) => updateHotspot(hotspot.id, 'markerColor', color)}
                             />
                         )}
 
@@ -815,6 +836,17 @@ export default function Inspector({ attributes, setAttributes }) {
           label={__("Description Color", "frontis-blocks")}
           globalColor={imageHotspotDescColor}
           setGlobalColor={(value) => setAttributes({ imageHotspotDescColor: value })}
+        />
+        <FB_ColorControl
+            label={__("Category Color", "frontis-blocks")}
+            globalColor={imageHotspotCategoryColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotCategoryColor: value })}
+        />
+
+        <FB_ColorControl
+            label={__("Price Color", "frontis-blocks")}
+            globalColor={imageHotspotPriceColor}
+            setGlobalColor={(value) => setAttributes({ imageHotspotPriceColor: value })}
         />
       </PanelBody>
 

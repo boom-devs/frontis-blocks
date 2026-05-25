@@ -3,6 +3,7 @@ import { useBlockProps } from '@wordpress/block-editor';
 import './style.scss';
 import generateImageHotspotStyle from './styling';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import { markerSvgs } from './preset';
 
 export default function Save({ attributes }) {
   const { 
@@ -14,6 +15,9 @@ export default function Save({ attributes }) {
     imageHotspotDesktopSwitcher,
     imageHotspotTabletSwitcher,
     imageHotspotMobileSwitcher,
+    imageHotspotMarkerSvg,
+    imageHotspotMarkerColor,
+    imageHotspotShowPopoverImage,
   } = attributes;
 
   if (!imageHotspotImageUrl) {
@@ -50,13 +54,18 @@ export default function Save({ attributes }) {
                   data-popover-position={hotspot.popoverPosition || 'top'}
                 >
                   <div className="fb-hotspot-trigger">
-                    <span className="fb-hotspot-icon">
-                        {renderSVG(hotspot.icon || 'plus')}
-                    </span>
+                      {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
+                          <span className="fb-hotspot-marker-svg">
+                              {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
+                          </span>
+                      )}
+                      <span className="fb-hotspot-icon">
+                          {renderSVG(hotspot.icon || 'plus')}
+                      </span>
                   </div>
                   
                   <div className="fb-hotspot-popover">
-                    {hotspot.popoverImageUrl && (
+                    {imageHotspotShowPopoverImage && hotspot.popoverImageUrl && (
                         <img 
                             src={hotspot.popoverImageUrl}
                             alt={hotspot.popoverImageAlt || ''}

@@ -1,5 +1,5 @@
 import { __ } from '@wordpress/i18n';
-import { useEffect } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import { useBlockProps, MediaPlaceholder } from '@wordpress/block-editor';
 import Inspector from './inspector';
 import './editor.scss';
@@ -7,6 +7,7 @@ import generateImageHotspotStyle from './styling';
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import { useDeviceType } from '@Config/displayType';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
+import { markerSvgs } from './preset';
 
 function Edit({ attributes, setAttributes, clientId, isSelected }) {
   const { 
@@ -15,6 +16,10 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
     imageHotspotImageSize, 
     imageHotspotHotspots, 
     imageHotspotSelectedHotspotId,
+    imageHotspotMarkerSvg,
+    imageHotspotMarkerColor,
+    imageHotspotMarkerHoverColor,
+    imageHotspotShowPopoverImage,
     blockID,
     blockStyle
   } = attributes;
@@ -97,13 +102,18 @@ function Edit({ attributes, setAttributes, clientId, isSelected }) {
                 }}
               >
                 <div className="fb-hotspot-trigger">
-                  <span className="fb-hotspot-icon">
-                      {renderSVG(hotspot.icon || 'plus')}
-                  </span>
+                    {imageHotspotMarkerSvg && markerSvgs[imageHotspotMarkerSvg] && (
+                        <span className="fb-hotspot-marker-svg">
+                            {markerSvgs[imageHotspotMarkerSvg](hotspot.markerColor || imageHotspotMarkerColor)}
+                        </span>
+                    )}
+                    <span className="fb-hotspot-icon">
+                        {renderSVG(hotspot.icon || 'plus')}
+                    </span>
                 </div>
                 
                 <div className="fb-hotspot-popover">
-                  {hotspot.popoverImageUrl && (
+                  {imageHotspotShowPopoverImage && hotspot.popoverImageUrl && (
                       <img 
                           src={hotspot.popoverImageUrl}
                           alt={hotspot.popoverImageAlt || ''}

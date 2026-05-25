@@ -85,6 +85,15 @@ const attributes = {
 		default: true
 	},
 
+	imageHotspotPresetStyle: {
+		type: "string",
+		default: "preset-1",
+	},
+	imageHotspotMarkerSvg: {
+		type: "string",
+		default: "preset-1",
+	},
+
 	imageHotspotHotspots: {
 		type: "array",
 		default: []
@@ -142,7 +151,7 @@ const attributes = {
 	},
 	imageHotspotMarkerColor: { 
 		type: "string", 
-		default: "#ff0000" 
+		default: "" 
 	},
 	imageHotspotMarkerHoverColor: { 
 		type: "string", 
@@ -753,6 +762,19 @@ const attributes = {
 	imageHotspotCustomCSS: { 
 		type: "string", 
 		default: "" 
+	},
+
+	imageHotspotShowPopoverImage: {
+		type: "boolean",
+		default: true
+	},
+	imageHotspotCategoryColor: {
+		type: "string",
+		default: "#999999"
+	},
+	imageHotspotPriceColor: {
+		type: "string",
+		default: "#333333"
 	},
 }
 
