@@ -1,6 +1,5 @@
 import { __ } from '@wordpress/i18n';
 import {
-    useBlockProps,
     InspectorControls,
 } from '@wordpress/block-editor';
 
@@ -35,6 +34,7 @@ import {
     CAROUSEL_ITEM_ROTATE,
 } from '@Constants/fbConstants';
 import FB_NormalActiveSwitcherControl from '@Components/switcher-normal-active-control';
+import FB_BackgroundColorControl from "@Components/background-color-control";
 import FBIconPicker from "../../components/icon-picker";
 import FB_Spacing from '@Components/spacing';
 import FB_Range from '@Components/range';
@@ -121,8 +121,31 @@ const Inspector = ({ attributes, setAttributes }) => {
 
         /** Start Carousel Item Style */
         coverflowCarouselItemBgColorSwitcher,
-        coverflowCarouselItemBgColor,
-        coverflowCarouselItemBgHoverColor,
+        coverflowCarouselItemBgType,
+        coverflowCarouselItemBgClassicColor,
+        coverflowCarouselItemBgGradientColor,
+        coverflowCarouselItemBgCustomGradientSwitcher,
+        coverflowCarouselItemBgCustomGradientInputValue,
+        coverflowCarouselItemBgColorStyle,
+        coverflowCarouselItemBgImageUrl,
+        coverflowCarouselItemBgImageAlt,
+        coverflowCarouselItemBgImageID,
+        coverflowCarouselItemBgImagePosition,
+        coverflowCarouselItemBgImageAttachment,
+        coverflowCarouselItemBgImageSize,
+        coverflowCarouselItemBgImageRepeat,
+        coverflowCarouselItemHoverBgType,
+        coverflowCarouselItemBgHoverClassicColor,
+        coverflowCarouselItemBgHoverGradientColor,
+        coverflowCarouselItemBgHoverCustomGradientSwitcher,
+        coverflowCarouselItemBgHoverCustomGradientInputValue,
+        coverflowCarouselItemHoverBgImageUrl,
+        coverflowCarouselItemHoverBgImageAlt,
+        coverflowCarouselItemHoverBgImageID,
+        coverflowCarouselItemHoverBgImagePosition,
+        coverflowCarouselItemHoverBgImageAttachment,
+        coverflowCarouselItemHoverBgImageSize,
+        coverflowCarouselItemHoverBgImageRepeat,
 
         coverflowCarouselItemPaddingUnits,
         coverflowCarouselItemPaddingDesktop,
@@ -311,8 +334,31 @@ const Inspector = ({ attributes, setAttributes }) => {
         coverflowCarouselGlobalMarginLink,
 
         coverflowCarouselGlobalBgColorSwitcher,
-        coverflowCarouselGlobalBgColor,
-        coverflowCarouselGlobalBgHoverColor,
+		coverflowCarouselGlobalBackgroundType,
+		coverflowCarouselGlobalClassicColor,
+		coverflowCarouselGlobalGradientColor,
+		coverflowCarouselGlobalCustomGradientSwitcher,
+		coverflowCarouselGlobalCustomGradientInputValue,
+		coverflowCarouselGlobalBackgroundColorStyle,
+		coverflowCarouselGlobalBackgroundImageUrl,
+		coverflowCarouselGlobalBackgroundImageAlt,
+		coverflowCarouselGlobalBackgroundImageID,
+		coverflowCarouselGlobalBackgroundImagePosition,
+		coverflowCarouselGlobalBackgroundImageAttachment,
+		coverflowCarouselGlobalBackgroundImageSize,
+		coverflowCarouselGlobalBackgroundImageRepeat,
+		coverflowCarouselGlobalBghoverBackgroundType,
+		coverflowCarouselGlobalBgHoverClassicColor,
+		coverflowCarouselGlobalHoverGradientColor,
+		coverflowCarouselGlobalHoverCustomGradientSwitcher,
+		coverflowCarouselGlobalHoverCustomGradientInputValue,
+		coverflowCarouselGlobalHoverBackgroundImageUrl,
+		coverflowCarouselGlobalHoverBackgroundImageAlt,
+		coverflowCarouselGlobalHoverBackgroundImageID,
+		coverflowCarouselGlobalHoverBackgroundImagePosition,
+		coverflowCarouselGlobalHoverBackgroundImageAttachment,
+		coverflowCarouselGlobalHoverBackgroundImageSize,
+		coverflowCarouselGlobalHoverBackgroundImageRepeat,
 
         coverflowCarouselGlobalBorder,
         coverflowCarouselGlobalBorderColorSwitcher,
@@ -358,8 +404,6 @@ const Inspector = ({ attributes, setAttributes }) => {
     } = attributes;
 
     const deviceType = useDeviceType();
-
-    const blockProps = useBlockProps();
 
     const carouselArrowsIconLeftHandler = (IconName) => {
         setAttributes({ carouselArrowsIconLeft: IconName })
@@ -1833,255 +1877,6 @@ const Inspector = ({ attributes, setAttributes }) => {
                                 </BaseControl>
                             </>
                         )}
-
-                        {/* <BaseControl
-                            label={__("Position Type", "frontis-blocks")}
-                        >
-                            <ButtonGroup className="frontis-setting-switcher-panel-btn">
-                                {SLIDER_ARROW_POSITION_TYPE.map((item, key) => (
-                                    <Button
-                                        key={key}
-                                        onClick={() => setAttributes({ carouselArrowPositionType: item.value })}
-                                        className={`frontis-setting-switcher-panel-btn-switcher ${carouselArrowPositionType === item.value ? 'active' : ''}`}
-                                    >
-                                        {item.label}
-                                    </Button>
-                                ))}
-                            </ButtonGroup>
-                        </BaseControl>
-                        <SelectControl
-                            label={__("Position", "frontis-blocks")}
-                            value={carouselArrowPosition}
-                            options={SLIDER_ARROW_POSITION}
-                            onChange={(value) => setAttributes({ carouselArrowPosition: value })}
-                        />
-
-                        {carouselArrowPosition !== 'center' && (
-
-                            <SelectControl
-                                label={__("Arrow Direction", "frontis-blocks")}
-                                value={carouselArrowDirection}
-                                options={SLIDER_ARROW_DIRECTION}
-                                onChange={(value) => setAttributes({ carouselArrowDirection: value })}
-                            />
-
-                        )}
-
-                        {carouselArrowPosition === 'top-left' && (
-                            <>
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Top Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionTopOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionTopOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionTopOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionTopOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Left Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionLeftOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionLeftOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionLeftOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionLeftOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-                        {carouselArrowPosition === 'top-center' && (
-                            <>
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Top Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionTopOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionTopOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionTopOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionTopOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Left Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionLeftOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionLeftOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionLeftOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionLeftOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-
-                        {carouselArrowPosition === 'top-right' && (
-                            <>
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Top Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionTopOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionTopOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionTopOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionTopOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={-100}
-                                    max={100}
-                                    label={__("Right Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionRightOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionRightOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionRightOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionRightOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-
-                        {carouselArrowPosition === 'bottom-left' && (
-                            <>
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Bottom Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionBottomOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionBottomOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionBottomOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionBottomOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Left Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionLeftOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionLeftOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionLeftOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionLeftOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-                        {carouselArrowPosition === 'bottom-center' && (
-                            <>
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Bottom Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionBottomOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionBottomOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionBottomOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionBottomOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Left Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionLeftOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionLeftOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionLeftOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionLeftOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-
-                        {carouselArrowPosition === 'bottom-right' && (
-                            <>
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Bottom Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionBottomOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionBottomOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionBottomOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionBottomOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                                <FB_Range
-                                    min={0}
-                                    max={100}
-                                    label={__("Right Offset", "frontis-blocks")}
-                                    rangeValue={carouselArrowPositionRightOffset}
-                                    onChangeHandler={(value) => setAttributes({ carouselArrowPositionRightOffset: value })}
-                                    rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionRightOffsetUnits: value })}
-                                    deviceType={deviceType}
-                                    units={carouselArrowPositionRightOffsetUnits}
-                                    setAttributes={setAttributes}
-                                    rangeStep={1}
-                                    resetFallbackValue={"0"}
-                                />
-                            </>
-                        )}
-
-                        {carouselArrowPositionType === 'outside' && (
-
-                            <FB_Range
-                                min={0}
-                                max={100}
-                                label={__("Padding", "frontis-blocks")}
-                                rangeValue={carouselArrowPositionOutsidePadding}
-                                onChangeHandler={(value) => setAttributes({ carouselArrowPositionOutsidePadding: value })}
-                                rangeUnitHandler={(value) => setAttributes({ carouselArrowPositionOutsidePaddingUnits: value })}
-                                deviceType={deviceType}
-                                units={carouselArrowPositionOutsidePaddingUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={""}
-                            />
-                        )}
-                        {carouselArrowPosition !== 'center' && (
-                            <FB_Range
-                                min={0}
-                                max={100}
-                                label={__("Gap", "frontis-blocks")}
-                                rangeValue={carouselArrowGap}
-                                onChangeHandler={(value) => setAttributes({ carouselArrowGap: value })}
-                                rangeUnitHandler={(value) => setAttributes({ carouselArrowGapUnits: value })}
-                                deviceType={deviceType}
-                                units={carouselArrowGapUnits}
-                                setAttributes={setAttributes}
-                                rangeStep={1}
-                                resetFallbackValue={"10"}
-                            />
-                        )} */}
                     </>
                 </PanelBody>
             )}
@@ -2109,27 +1904,59 @@ const Inspector = ({ attributes, setAttributes }) => {
                 title={__("Carousel Item", "frontis-blocks")}
                 initialOpen={true}
             >
-                <FB_SwitcherControl
-                    label={__("Background Color", "frontis-blocks")}
-                    globalSwitcher={coverflowCarouselItemBgColorSwitcher}
-                    setGlobalSwitcher={(value) => setAttributes({ coverflowCarouselItemBgColorSwitcher: value })}
+                <FB_BackgroundColorControl
+                    bgColorSwitcher={coverflowCarouselItemBgColorSwitcher}
+                    setBgColorSwitcher={(value) => setAttributes({ coverflowCarouselItemBgColorSwitcher: value })}
+                    normalBackgroundType={coverflowCarouselItemBgType}
+                    setNormalBackgroundType={(value) => setAttributes({ coverflowCarouselItemBgType: value })}
+                    normalClassicColor={coverflowCarouselItemBgClassicColor}
+                    setNormalClassicColor={(value) => setAttributes({ coverflowCarouselItemBgClassicColor: value === undefined ? '' : value })}
+                    normalGradientColor={coverflowCarouselItemBgGradientColor}
+                    setNormalGradientColor={(value) => setAttributes({ coverflowCarouselItemBgGradientColor: value === undefined ? null : value })}
+                    normalCustomGradientSwitcher={coverflowCarouselItemBgCustomGradientSwitcher}
+                    setNormalCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselItemBgCustomGradientSwitcher: value, })}
+                    normalCustomGradientInputValue={coverflowCarouselItemBgCustomGradientInputValue}
+                    setNormalCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselItemBgCustomGradientInputValue: value, })}
+                    normalBackgroundImageUrl={coverflowCarouselItemBgImageUrl}
+                    setNormalBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselItemBgImageUrl: value })}
+                    normalBackgroundImageAlt={coverflowCarouselItemBgImageAlt}
+                    setNormalBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselItemBgImageAlt: value })}
+                    normalBackgroundImageID={coverflowCarouselItemBgImageID}
+                    setNormalBackgroundImageID={(value) => setAttributes({ coverflowCarouselItemBgImageID: value })}
+                    normalBackgroundImagePosition={coverflowCarouselItemBgImagePosition}
+                    setNormalBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselItemBgImagePosition: value, })}
+                    normalBackgroundImageAttachment={coverflowCarouselItemBgImageAttachment}
+                    setNormalBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselItemBgImageAttachment: value, })}
+                    normalBackgroundImageRepeat={coverflowCarouselItemBgImageRepeat}
+                    setNormalBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselItemBgImageRepeat: value, })}
+                    normalBackgroundImageSize={coverflowCarouselItemBgImageSize} 
+                    setNormalBackgroundImageSize={(value) => setAttributes({ coverflowCarouselItemBgImageSize: value })}
+                    hoverBackgroundType={coverflowCarouselItemHoverBgType}  
+                    setHoverBackgroundType={(value) => setAttributes({ coverflowCarouselItemHoverBgType: value })}
+                    hoverClassicColor={coverflowCarouselItemBgHoverClassicColor}
+                    setHoverClassicColor={(value) => setAttributes({ coverflowCarouselItemBgHoverClassicColor: value === undefined ? '' : value })}
+                    hoverGradientColor={coverflowCarouselItemBgHoverGradientColor} 
+                    setHoverGradientColor={(value) => setAttributes({ coverflowCarouselItemBgHoverGradientColor: value === undefined ? null : value })}
+                    hoverCustomGradientSwitcher={coverflowCarouselItemBgHoverCustomGradientSwitcher} 
+                    setHoverCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselItemBgHoverCustomGradientSwitcher: value, })}
+                    hoverCustomGradientInputValue={coverflowCarouselItemBgHoverCustomGradientInputValue}
+                    setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselItemBgHoverCustomGradientInputValue: value, })} 
+                    hoverBackgroundImageUrl={coverflowCarouselItemHoverBgImageUrl}
+                    setHoverBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselItemHoverBgImageUrl: value })}
+                    hoverBackgroundImageAlt={coverflowCarouselItemHoverBgImageAlt} 
+                    setHoverBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselItemHoverBgImageAlt: value })}
+                    hoverBackgroundImageID={coverflowCarouselItemHoverBgImageID} 
+                    setHoverBackgroundImageID={(value) => setAttributes({ coverflowCarouselItemHoverBgImageID: value })}
+                    hoverBackgroundImagePosition={coverflowCarouselItemHoverBgImagePosition}
+                    setHoverBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselItemHoverBgImagePosition: value, })}
+                    hoverBackgroundImageAttachment={coverflowCarouselItemHoverBgImageAttachment}
+                    setHoverBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselItemHoverBgImageAttachment: value, })}
+                    hoverBackgroundImageRepeat={coverflowCarouselItemHoverBgImageRepeat} 
+                    setHoverBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselItemHoverBgImageRepeat: value, })}
+                    hoverBackgroundImageSize={coverflowCarouselItemHoverBgImageSize}
+                    setHoverBackgroundImageSize={(value) => setAttributes({ coverflowCarouselItemHoverBgImageSize: value })}
                 />
 
-                {coverflowCarouselItemBgColorSwitcher === 'normal' && (
-                    <FB_ColorControl
-                        label={__("Normal Color", "frontis-blocks")}
-                        globalColor={coverflowCarouselItemBgColor}
-                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBgColor: value === undefined ? '' : value })}
-                    />
-                )}
-
-                {coverflowCarouselItemBgColorSwitcher === 'hover' && (
-                    <FB_ColorControl
-                        label={__("Hover Color", "frontis-blocks")}
-                        globalColor={coverflowCarouselItemBgHoverColor}
-                        setGlobalColor={(value) => setAttributes({ coverflowCarouselItemBgHoverColor: value === undefined ? '' : value })}
-                    />
-                )}
                 <FB_Spacing
                     label={__("Padding", "frontis-blocks")}
                     deviceType={deviceType}
@@ -2842,34 +2669,64 @@ const Inspector = ({ attributes, setAttributes }) => {
                         title={__("Background Color", "frontis-blocks")}
                         initialOpen={false}
                     >
-                        <FB_SwitcherControl
-                            label={__("Background Color", "frontis-blocks")}
-                            globalSwitcher={coverflowCarouselGlobalBgColorSwitcher}
-                            setGlobalSwitcher={(value) => setAttributes({ coverflowCarouselGlobalBgColorSwitcher: value })}
+                        <FB_BackgroundColorControl
+                            bgColorSwitcher={coverflowCarouselGlobalBgColorSwitcher}
+                            setBgColorSwitcher={(value) => setAttributes({ coverflowCarouselGlobalBgColorSwitcher: value })}
+                            normalBackgroundType={coverflowCarouselGlobalBackgroundType}
+                            setNormalBackgroundType={(value) => setAttributes({ coverflowCarouselGlobalBackgroundType: value })}
+                            normalClassicColor={coverflowCarouselGlobalClassicColor}
+                            setNormalClassicColor={(value) => setAttributes({ coverflowCarouselGlobalClassicColor: value === undefined ? '' : value })}
+                            normalGradientColor={coverflowCarouselGlobalGradientColor}
+                            setNormalGradientColor={(value) => setAttributes({ coverflowCarouselGlobalGradientColor: value === undefined ? null : value })}
+                            normalCustomGradientSwitcher={coverflowCarouselGlobalCustomGradientSwitcher}
+                            setNormalCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselGlobalCustomGradientSwitcher: value, })}
+                            normalCustomGradientInputValue={coverflowCarouselGlobalCustomGradientInputValue}
+                            setNormalCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselGlobalCustomGradientInputValue: value, })}
+                            normalBackgroundImageUrl={coverflowCarouselGlobalBackgroundImageUrl}
+                            setNormalBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageUrl: value })}
+                            normalBackgroundImageAlt={coverflowCarouselGlobalBackgroundImageAlt}
+                            setNormalBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageAlt: value })}
+                            normalBackgroundImageID={coverflowCarouselGlobalBackgroundImageID}
+                            setNormalBackgroundImageID={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageID: value })}
+                            normalBackgroundImagePosition={coverflowCarouselGlobalBackgroundImagePosition}
+                            setNormalBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImagePosition: value, })}
+                            normalBackgroundImageAttachment={coverflowCarouselGlobalBackgroundImageAttachment}
+                            setNormalBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageAttachment: value, })}
+                            normalBackgroundImageRepeat={coverflowCarouselGlobalBackgroundImageRepeat}
+                            setNormalBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageRepeat: value, })}
+                            normalBackgroundImageSize={coverflowCarouselGlobalBackgroundImageSize}
+                            setNormalBackgroundImageSize={(value) => setAttributes({ coverflowCarouselGlobalBackgroundImageSize: value })}
+                            hoverBackgroundType={coverflowCarouselGlobalBghoverBackgroundType}
+                            setHoverBackgroundType={(value) => setAttributes({ coverflowCarouselGlobalBghoverBackgroundType: value })}
+                            hoverClassicColor={coverflowCarouselGlobalBgHoverClassicColor}
+                            setHoverClassicColor={(value) => setAttributes({ coverflowCarouselGlobalBgHoverClassicColor: value === undefined ? '' : value })}
+                            hoverGradientColor={coverflowCarouselGlobalHoverGradientColor}
+                            setHoverGradientColor={(value) => setAttributes({ coverflowCarouselGlobalHoverGradientColor: value === undefined ? null : value })}
+                            hoverCustomGradientSwitcher={coverflowCarouselGlobalHoverCustomGradientSwitcher} 
+                            setHoverCustomGradientSwitcher={(value) => setAttributes({ coverflowCarouselGlobalHoverCustomGradientSwitcher: value, })}
+                            hoverCustomGradientInputValue={coverflowCarouselGlobalHoverCustomGradientInputValue}
+                            setHoverCustomGradientInputValue={(value) => setAttributes({ coverflowCarouselGlobalHoverCustomGradientInputValue: value, })} 
+                            hoverBackgroundImageUrl={coverflowCarouselGlobalHoverBackgroundImageUrl}
+                            setHoverBackgroundImageUrl={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageUrl: value })}
+                            hoverBackgroundImageAlt={coverflowCarouselGlobalHoverBackgroundImageAlt}
+                            setHoverBackgroundImageAlt={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageAlt: value })}
+                            hoverBackgroundImageID={coverflowCarouselGlobalHoverBackgroundImageID} 
+                            setHoverBackgroundImageID={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageID: value })}
+                            hoverBackgroundImagePosition={coverflowCarouselGlobalHoverBackgroundImagePosition}
+                            setHoverBackgroundImagePosition={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImagePosition: value, })}
+                            hoverBackgroundImageAttachment={coverflowCarouselGlobalHoverBackgroundImageAttachment}
+                            setHoverBackgroundImageAttachment={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageAttachment: value, })}
+                            hoverBackgroundImageRepeat={coverflowCarouselGlobalHoverBackgroundImageRepeat}
+                            setHoverBackgroundImageRepeat={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageRepeat: value, })}
+                            hoverBackgroundImageSize={coverflowCarouselGlobalHoverBackgroundImageSize}
+                            setHoverBackgroundImageSize={(value) => setAttributes({ coverflowCarouselGlobalHoverBackgroundImageSize: value })}
                         />
-
-                        {coverflowCarouselGlobalBgColorSwitcher === 'normal' && (
-                            <FB_ColorControl
-                                label={__("Normal Color", "frontis-blocks")}
-                                globalColor={coverflowCarouselGlobalBgColor}
-                                setGlobalColor={(value) => setAttributes({ coverflowCarouselGlobalBgColor: value === undefined ? '' : value })}
-                            />
-                        )}
-
-                        {coverflowCarouselGlobalBgColorSwitcher === 'hover' && (
-                            <FB_ColorControl
-                                label={__("Hover Color", "frontis-blocks")}
-                                globalColor={coverflowCarouselGlobalBgHoverColor}
-                                setGlobalColor={(value) => setAttributes({ coverflowCarouselGlobalBgHoverColor: value === undefined ? '' : value })}
-                            />
-                        )}
                     </PanelBody>
 
                     <PanelBody
                         title={__("Border and Shadow", "frontis-blocks")}
                         initialOpen={false}
                     >
-
                         <SelectControl
                             label={__("Border Style", "frontis-blocks")}
                             value={coverflowCarouselGlobalBorder}

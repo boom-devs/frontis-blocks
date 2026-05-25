@@ -62,8 +62,31 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
 
         /** Start Carousel Item Style */
         coverflowCarouselItemBgColorSwitcher,
-        coverflowCarouselItemBgColor,
-        coverflowCarouselItemBgHoverColor,
+        coverflowCarouselItemBgType,
+        coverflowCarouselItemBgClassicColor,
+        coverflowCarouselItemBgGradientColor,
+        coverflowCarouselItemBgCustomGradientSwitcher,
+        coverflowCarouselItemBgCustomGradientInputValue,
+        coverflowCarouselItemBgColorStyle,
+        coverflowCarouselItemBgImageUrl,
+        coverflowCarouselItemBgImageAlt,
+        coverflowCarouselItemBgImageID,
+        coverflowCarouselItemBgImagePosition,
+        coverflowCarouselItemBgImageAttachment,
+        coverflowCarouselItemBgImageSize,
+        coverflowCarouselItemBgImageRepeat,
+        coverflowCarouselItemHoverBgType,
+        coverflowCarouselItemBgHoverClassicColor,
+        coverflowCarouselItemBgHoverGradientColor,
+        coverflowCarouselItemBgHoverCustomGradientSwitcher,
+        coverflowCarouselItemBgHoverCustomGradientInputValue,
+        coverflowCarouselItemHoverBgImageUrl,
+        coverflowCarouselItemHoverBgImageAlt,
+        coverflowCarouselItemHoverBgImageID,
+        coverflowCarouselItemHoverBgImagePosition,
+        coverflowCarouselItemHoverBgImageAttachment,
+        coverflowCarouselItemHoverBgImageSize,
+        coverflowCarouselItemHoverBgImageRepeat,
 
         coverflowCarouselItemPaddingUnits,
         coverflowCarouselItemPaddingDesktop,
@@ -248,9 +271,34 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
         coverflowCarouselGlobalMarginTablet,
         coverflowCarouselGlobalMarginMobile,
         coverflowCarouselGlobalMarginLink,
+
         coverflowCarouselGlobalBgColorSwitcher,
-        coverflowCarouselGlobalBgColor,
-        coverflowCarouselGlobalBgHoverColor,
+		coverflowCarouselGlobalBackgroundType,
+		coverflowCarouselGlobalClassicColor,
+		coverflowCarouselGlobalGradientColor,
+		coverflowCarouselGlobalCustomGradientSwitcher,
+		coverflowCarouselGlobalCustomGradientInputValue,
+		coverflowCarouselGlobalBackgroundColorStyle,
+		coverflowCarouselGlobalBackgroundImageUrl,
+		coverflowCarouselGlobalBackgroundImageAlt,
+		coverflowCarouselGlobalBackgroundImageID,
+		coverflowCarouselGlobalBackgroundImagePosition,
+		coverflowCarouselGlobalBackgroundImageAttachment,
+		coverflowCarouselGlobalBackgroundImageSize,
+		coverflowCarouselGlobalBackgroundImageRepeat,
+		coverflowCarouselGlobalBghoverBackgroundType,
+		coverflowCarouselGlobalBgHoverClassicColor,
+		coverflowCarouselGlobalHoverGradientColor,
+		coverflowCarouselGlobalHoverCustomGradientSwitcher,
+		coverflowCarouselGlobalHoverCustomGradientInputValue,
+		coverflowCarouselGlobalHoverBackgroundImageUrl,
+		coverflowCarouselGlobalHoverBackgroundImageAlt,
+		coverflowCarouselGlobalHoverBackgroundImageID,
+		coverflowCarouselGlobalHoverBackgroundImagePosition,
+		coverflowCarouselGlobalHoverBackgroundImageAttachment,
+		coverflowCarouselGlobalHoverBackgroundImageSize,
+		coverflowCarouselGlobalHoverBackgroundImageRepeat,
+        
         coverflowCarouselGlobalBorder,
         coverflowCarouselGlobalBorderColorSwitcher,
         coverflowCarouselGlobalBorderColor,
@@ -365,7 +413,22 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             ${coverflowCarouselOverflow !== 'default' ? `overflow: ${coverflowCarouselOverflow};` : ''}
         }
         .fb-coverflowCarousel-wrapper.${blockID}{
-            ${coverflowCarouselGlobalBgColor ? `background: ${coverflowCarouselGlobalBgColor};` : ''}
+            ${coverflowCarouselGlobalBackgroundType === "gradient" 
+                ? (coverflowCarouselGlobalCustomGradientSwitcher && coverflowCarouselGlobalCustomGradientInputValue 
+                    ? `background: ${coverflowCarouselGlobalCustomGradientInputValue};` 
+                    : (coverflowCarouselGlobalGradientColor 
+                        ? `background: ${coverflowCarouselGlobalGradientColor};` 
+                        : `background: ${coverflowCarouselGlobalClassicColor};`))
+                : (coverflowCarouselGlobalBackgroundImageUrl && coverflowCarouselGlobalBackgroundImageUrl !== "null" 
+                    ? `
+                        ${coverflowCarouselGlobalBackgroundImageUrl ? `background-image: url(${coverflowCarouselGlobalBackgroundImageUrl});` : "" }
+                        ${coverflowCarouselGlobalBackgroundImagePosition ? `background-position: ${coverflowCarouselGlobalBackgroundImagePosition};` : "" }
+                        ${coverflowCarouselGlobalBackgroundImageAttachment ? `background-attachment: ${coverflowCarouselGlobalBackgroundImageAttachment};` : "" }
+                        ${coverflowCarouselGlobalBackgroundImageRepeat ? `background-repeat: ${coverflowCarouselGlobalBackgroundImageRepeat};` : "" }
+                        ${coverflowCarouselGlobalBackgroundImageSize ? `background-size: ${coverflowCarouselGlobalBackgroundImageSize};` : "" } 
+                    `
+                    : coverflowCarouselGlobalClassicColor ? `background: ${coverflowCarouselGlobalClassicColor};` : '')
+            } 
             ${globalDesktopPadding && coverflowCarouselGlobalPaddingDesktop?.top ? `padding: ${globalDesktopPadding};` : ""}
             ${globalDesktopMargin && coverflowCarouselGlobalMarginDesktop?.top ? `margin: ${globalDesktopMargin};` : ""}
             ${coverflowCarouselGlobalBorder ? `border-style: ${coverflowCarouselGlobalBorder};` : ""}
@@ -374,20 +437,49 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             ${globalDesktopBorderRadiusWidth && coverflowCarouselGlobalBorderRadiusDesktop?.top ? `border-radius: ${globalDesktopBorderRadiusWidth};` : ""}
             ${coverflowCarouselGlobalBoxShadowCssValue ? `box-shadow: ${coverflowCarouselGlobalBoxShadowCssValue};` : ""}
             ${carouselPerspective ? `perspective: ${carouselPerspective?.Desktop}${CarouselHeightUnits?.Desktop};` : ''}
-        } 
+        }     
         .fb-coverflowCarousel-wrapper.${blockID}:hover{
-            ${coverflowCarouselGlobalBgHoverColor ? `background: ${coverflowCarouselGlobalBgHoverColor};` : ''}
+            ${coverflowCarouselGlobalBghoverBackgroundType === "gradient" 
+                ? (coverflowCarouselGlobalHoverCustomGradientSwitcher && coverflowCarouselGlobalHoverCustomGradientInputValue 
+                    ? `background: ${coverflowCarouselGlobalHoverCustomGradientInputValue};` 
+                    : (coverflowCarouselGlobalHoverGradientColor 
+                        ? `background: ${coverflowCarouselGlobalHoverGradientColor};` 
+                        : `background: ${coverflowCarouselGlobalBgHoverClassicColor};`))
+                : (coverflowCarouselGlobalHoverBackgroundImageUrl && coverflowCarouselGlobalHoverBackgroundImageUrl !== "null" 
+                    ? `
+                        ${coverflowCarouselGlobalHoverBackgroundImageUrl ? `background-image: url(${coverflowCarouselGlobalHoverBackgroundImageUrl});` : "" }
+                        ${coverflowCarouselGlobalHoverBackgroundImagePosition ? `background-position: ${coverflowCarouselGlobalHoverBackgroundImagePosition};` : "" }
+                        ${coverflowCarouselGlobalHoverBackgroundImageAttachment ? `background-attachment: ${coverflowCarouselGlobalHoverBackgroundImageAttachment};` : "" }
+                        ${coverflowCarouselGlobalHoverBackgroundImageRepeat ? `background-repeat: ${coverflowCarouselGlobalHoverBackgroundImageRepeat};` : "" }
+                        ${coverflowCarouselGlobalHoverBackgroundImageSize ? `background-size: ${coverflowCarouselGlobalHoverBackgroundImageSize};` : "" } 
+                    `
+                    : coverflowCarouselGlobalBgHoverClassicColor ? `background: ${coverflowCarouselGlobalBgHoverClassicColor};` : '')
+            }
             ${coverflowCarouselGlobalBorderHoverColor ? `border-color: ${coverflowCarouselGlobalBorderHoverColor};` : ""}
         }
 
         .${blockID} .fb-coverflowCarousel-items-container{
             ${CarouselWidth?.Desktop ? `width: ${CarouselWidth?.Desktop}${CarouselWidthUnits?.Desktop};` : ''}
             ${CarouselHeight?.Desktop ? `height: ${CarouselHeight?.Desktop}${CarouselHeightUnits?.Desktop};` : ''}
-        } 
+        }  
 
         .${blockID} .fb-coverflow-carousel-slide{
-            ${coverflowCarouselItemBgColor ? `background: ${coverflowCarouselItemBgColor};` : ''}
-            transition: all ${transitionSpeed / 1000}s ${carouselTransitionEasing || 'cubic-bezier(0.16, 1, 0.3, 1)'} !important;
+            ${coverflowCarouselItemBgType === "gradient" 
+                ? (coverflowCarouselItemBgCustomGradientSwitcher && coverflowCarouselItemBgCustomGradientInputValue 
+                    ? `background: ${coverflowCarouselItemBgCustomGradientInputValue};` 
+                    : (coverflowCarouselItemBgGradientColor 
+                        ? `background: ${coverflowCarouselItemBgGradientColor};` 
+                        : `background: ${coverflowCarouselItemBgClassicColor};`))
+                : (coverflowCarouselItemBgImageUrl && coverflowCarouselItemBgImageUrl !== "null" 
+                    ? `
+                        ${coverflowCarouselItemBgImageUrl ? `background-image: url(${coverflowCarouselItemBgImageUrl});` : "" }
+                        ${coverflowCarouselItemBgImagePosition ? `background-position: ${coverflowCarouselItemBgImagePosition};` : "" }
+                        ${coverflowCarouselItemBgImageAttachment ? `background-attachment: ${coverflowCarouselItemBgImageAttachment};` : "" }
+                        ${coverflowCarouselItemBgImageRepeat ? `background-repeat: ${coverflowCarouselItemBgImageRepeat};` : "" }
+                        ${coverflowCarouselItemBgImageSize ? `background-size: ${coverflowCarouselItemBgImageSize};` : "" } 
+                    `
+                    : coverflowCarouselItemBgClassicColor ? `background: ${coverflowCarouselItemBgClassicColor};` : '')
+            } 
             ${carouselReflection ? `-webkit-box-reflect: below ${carouselReflectionGap}px linear-gradient(transparent, transparent, rgba(0, 0, 0, ${carouselReflectionOpacity / 100}));` : '-webkit-box-reflect: none;'}
             ${carouselItemDesktopPadding && coverflowCarouselItemPaddingDesktop?.top ? `padding: ${carouselItemDesktopPadding};` : ""}
             ${carouselItemDesktopMargin && coverflowCarouselItemMarginDesktop?.top ? `margin: ${carouselItemDesktopMargin};` : ""}
@@ -395,9 +487,26 @@ const generatecoverflowCarouselNumberStyle = (attributes) => {
             ${coverflowCarouselItemBorderColor ? `border-color: ${coverflowCarouselItemBorderColor};` : ""}  
             ${carouselItemDesktopBorderWidth && coverflowCarouselItemBorderDesktop?.top ? `border-width: ${carouselItemDesktopBorderWidth};` : ""}
             ${carouselItemDesktopBorderRadiusWidth && coverflowCarouselItemBorderRadiusDesktop?.top ? `border-radius: ${carouselItemDesktopBorderRadiusWidth};` : ""}   
+            transition: all ${transitionSpeed / 1000}s ${carouselTransitionEasing || 'cubic-bezier(0.16, 1, 0.3, 1)'} !important;
         } 
+  
         .${blockID} .fb-coverflow-carousel-slide:hover{
-            ${coverflowCarouselItemBgHoverColor ? `background: ${coverflowCarouselItemBgHoverColor};` : ''}
+             ${coverflowCarouselItemHoverBgType === "gradient" 
+                ? (coverflowCarouselItemBgHoverCustomGradientSwitcher && coverflowCarouselItemBgHoverCustomGradientInputValue 
+                    ? `background: ${coverflowCarouselItemBgHoverCustomGradientInputValue};` 
+                    : (coverflowCarouselItemBgHoverGradientColor 
+                        ? `background: ${coverflowCarouselItemBgHoverGradientColor};` 
+                        : `background: ${coverflowCarouselItemBgHoverClassicColor};`))
+                : (coverflowCarouselItemHoverBgImageUrl && coverflowCarouselItemHoverBgImageUrl !== "null" 
+                    ? `
+                        ${coverflowCarouselItemHoverBgImageUrl ? `background-image: url(${coverflowCarouselItemHoverBgImageUrl});` : "" }
+                        ${coverflowCarouselItemHoverBgImagePosition ? `background-position: ${coverflowCarouselItemHoverBgImagePosition};` : "" }
+                        ${coverflowCarouselItemHoverBgImageAttachment ? `background-attachment: ${coverflowCarouselItemHoverBgImageAttachment};` : "" }
+                        ${coverflowCarouselItemHoverBgImageRepeat ? `background-repeat: ${coverflowCarouselItemHoverBgImageRepeat};` : "" }
+                        ${coverflowCarouselItemHoverBgImageSize ? `background-size: ${coverflowCarouselItemHoverBgImageSize};` : "" } 
+                    `
+                    : coverflowCarouselItemBgHoverClassicColor ? `background: ${coverflowCarouselItemBgHoverClassicColor};` : '')
+            }
             ${coverflowCarouselItemBorderHoverColor ? `border-color: ${coverflowCarouselItemBorderHoverColor};` : ''}
         }
 
