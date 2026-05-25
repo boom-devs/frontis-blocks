@@ -594,19 +594,19 @@ class Admin
     {
         $image_url = $request->get_param('url');
         if (!$image_url) {
-            return new WP_Error('invalid_url', 'Missing URL', ['status' => 400]);
+            return new \WP_Error('invalid_url', 'Missing URL', ['status' => 400]);
         }
 
         $image_url = urldecode($image_url);
         $parsed_url = parse_url($image_url);
 
         if (!$parsed_url || !isset($parsed_url['scheme']) || !in_array($parsed_url['scheme'], ['http', 'https'], true)) {
-             return new WP_Error('invalid_url', 'Invalid URL scheme', ['status' => 400]);
+             return new \WP_Error('invalid_url', 'Invalid URL scheme', ['status' => 400]);
         }
 
-        $response = wp_safe_remote_get($image_url);
+        $response = wp_safe_remote_get($image_url, ['sslverify' => false]);
         if (is_wp_error($response)) {
-            return new WP_Error('fetch_failed', 'Failed to fetch image', ['status' => 500]);
+            return new \WP_Error('fetch_failed', 'Failed to fetch image: ' . $response->get_error_message(), ['status' => 500]);
         }
 
         $body = wp_remote_retrieve_body($response);

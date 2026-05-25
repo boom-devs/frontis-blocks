@@ -416,6 +416,7 @@ const generateTextFieldStyle = (attributes) => {
             .fb-text-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Tablet ? `z-index: ${fieldZIndex?.Tablet};` : ''}
+                ${inputFieldMaxWidth?.Tablet ? `max-width: ${inputFieldMaxWidth?.Tablet}${inputFieldMaxWidthUnits?.Tablet};` : ''}
             }
             
             .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {
@@ -463,6 +464,7 @@ const generateTextFieldStyle = (attributes) => {
             .fb-text-field-wrapper.${blockID} {
                 position: relative;
                 ${fieldZIndex?.Mobile ? `z-index: ${fieldZIndex?.Mobile};` : ''}
+                ${inputFieldMaxWidth?.Mobile ? `max-width: ${inputFieldMaxWidth?.Mobile}${inputFieldMaxWidthUnits?.Mobile};` : ''}
             }
             
             .fb-text-field-wrapper.${blockID} .fb-field-group-wrapper {

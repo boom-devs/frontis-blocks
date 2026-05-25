@@ -142,7 +142,14 @@ const uploadImagesToMedia = async (url) => {
     try {
         // Use the proxy endpoint to fetch the image
         const proxyUrl = `/wp-json/custom/v1/proxy-image?url=${encodeURIComponent(url)}`;
-        const response = await fetch(proxyUrl, { method: 'GET' });
+        const headers = {};
+        if (typeof wpApiSettings !== 'undefined' && wpApiSettings.nonce) {
+            headers['X-WP-Nonce'] = wpApiSettings.nonce;
+        }
+        const response = await fetch(proxyUrl, {
+            method: 'GET',
+            headers
+        });
         if (!response.ok) throw new Error(`Failed to fetch image via proxy: ${url}`);
         const blob = await response.blob();
 
