@@ -71,3 +71,7 @@ $white_color: #ffffff;
 .fb-form-input input {
     outline: none;
 }
+
+.block-editor-block-list__layout .block-list-appender.wp-block {
+    display: none;
+}
