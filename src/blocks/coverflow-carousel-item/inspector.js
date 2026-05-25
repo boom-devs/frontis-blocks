@@ -8,8 +8,6 @@ import './editor.scss';
 const Inspector = ({ attributes, setAttributes, clientId }) => {
     const { 
         blockID,
-        CoverflowCarouselItems,
-        blockStyle,
     } = attributes;
     const deviceType = useDeviceType();
 
