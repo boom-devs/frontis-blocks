@@ -427,11 +427,102 @@ const attributes = {
 		type: 'string',
 		default: 'normal'
 	},
-	coverflowCarouselItemBgColor: {
+	coverflowCarouselItemBgType: {
+		type: 'string',
+		default: 'classic'
+	},
+	coverflowCarouselItemBgClassicColor: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgGradientColor: {
 		type: 'string',
 	},
-	coverflowCarouselItemBgHoverColor: {
+	coverflowCarouselItemBgCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	coverflowCarouselItemBgCustomGradientInputValue: {
 		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgColorStyle: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageUrl: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageID: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageSize: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemBgImageRepeat: {
+		type: 'string',
+		default: ''
+	}, 
+	coverflowCarouselItemHoverBgType: {
+		type: 'string',
+		default: 'classic'
+	},  
+	coverflowCarouselItemBgHoverClassicColor: {
+		type: 'string',
+	},
+	coverflowCarouselItemBgHoverGradientColor: {
+		type: 'string',
+	},
+	coverflowCarouselItemBgHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	coverflowCarouselItemBgHoverCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImageUrl: {
+		type: 'string',
+		default: ''
+	}, 
+	coverflowCarouselItemHoverBgImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImageID: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImageSize: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselItemHoverBgImageRepeat: {
+		type: 'string',
+		default: ''
 	},
 	/** End Background */
 
@@ -1395,11 +1486,102 @@ const attributes = {
 		type: 'string',
 		default: 'normal'
 	},
-	coverflowCarouselGlobalBgColor: {
+	coverflowCarouselGlobalBackgroundType: {
+		type: 'string',
+		default: 'classic'
+	},
+	coverflowCarouselGlobalClassicColor: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalGradientColor: {
 		type: 'string',
 	},
-	coverflowCarouselGlobalBgHoverColor: {
+	coverflowCarouselGlobalCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	coverflowCarouselGlobalCustomGradientInputValue: {
 		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundColorStyle: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageUrl: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageID: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageSize: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBackgroundImageRepeat: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalBghoverBackgroundType: {
+		type: 'string',
+		default: 'classic'
+	},
+	coverflowCarouselGlobalBgHoverClassicColor: {
+		type: 'string',
+	},
+	coverflowCarouselGlobalHoverGradientColor: {
+		type: 'string',
+	},
+	coverflowCarouselGlobalHoverCustomGradientSwitcher: {
+		type: 'boolean',
+		default: false
+	},
+	coverflowCarouselGlobalHoverCustomGradientInputValue: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageUrl: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageAlt: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageID: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImagePosition: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageAttachment: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageSize: {
+		type: 'string',
+		default: ''
+	},
+	coverflowCarouselGlobalHoverBackgroundImageRepeat: {
+		type: 'string',
+		default: ''
 	},
 	/** End Background */
 
