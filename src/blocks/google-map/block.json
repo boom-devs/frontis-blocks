@@ -7,15 +7,12 @@
 	"category": "frontis-blocks",
 	"description": "Add a Google Map to the block editor, no API key required.",
 	"example": {},
-	"supports": {
+    "supports": {
 		"html": false,
-		"anchor": false,
-		"align": [
-			"wide",
-			"full"
-		],
-		"customClassName": false
-	},
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
 	"textdomain": "frontis-blocks",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css"
