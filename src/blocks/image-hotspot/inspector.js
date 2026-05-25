@@ -41,11 +41,15 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotImageSize,
     imageHotspotImageHeight,
     imageHotspotImageHeightUnits,
-    imageHotspotImageBorderWidth,
+    imageHotspotImageBorderWidthDesktop,
+    imageHotspotImageBorderWidthTablet,
+    imageHotspotImageBorderWidthMobile,
     imageHotspotImageBorderWidthUnits,
     imageHotspotImageBorderWidthLink,
     imageHotspotImageBorderColor,
-    imageHotspotImageBorderRadius,
+    imageHotspotImageBorderRadiusDesktop,
+    imageHotspotImageBorderRadiusTablet,
+    imageHotspotImageBorderRadiusMobile,
     imageHotspotImageBorderRadiusUnits,
     imageHotspotImageBorderRadiusLink,
 
@@ -107,17 +111,25 @@ export default function Inspector({ attributes, setAttributes }) {
     imageHotspotPopoverPaddingTablet,
     imageHotspotPopoverPaddingMobile,
     imageHotspotPopoverPaddingLink,
-    imageHotspotPopoverBorderRadius,
+    imageHotspotPopoverBorderRadiusDesktop,
+    imageHotspotPopoverBorderRadiusTablet,
+    imageHotspotPopoverBorderRadiusMobile,
     imageHotspotPopoverBorderRadiusUnits,
     imageHotspotPopoverBorderRadiusLink,
-    imageHotspotPopoverBorderWidth,
+    imageHotspotPopoverBorderWidthDesktop,
+    imageHotspotPopoverBorderWidthTablet,
+    imageHotspotPopoverBorderWidthMobile,
     imageHotspotPopoverBorderWidthUnits,
     imageHotspotPopoverBorderWidthLink,
     imageHotspotPopoverBorderColor,
-    imageHotspotPopoverImageBorderWidth,
+    imageHotspotPopoverImageBorderWidthDesktop,
+    imageHotspotPopoverImageBorderWidthTablet,
+    imageHotspotPopoverImageBorderWidthMobile,
     imageHotspotPopoverImageBorderWidthUnits,
     imageHotspotPopoverImageBorderWidthLink,
-    imageHotspotPopoverImageBorderRadius,
+    imageHotspotPopoverImageBorderRadiusDesktop,
+    imageHotspotPopoverImageBorderRadiusTablet,
+    imageHotspotPopoverImageBorderRadiusMobile,
     imageHotspotPopoverImageBorderRadiusUnits,
     imageHotspotPopoverImageBorderRadiusLink,
     imageHotspotPopoverImageBorderColor,
@@ -480,6 +492,72 @@ export default function Inspector({ attributes, setAttributes }) {
     }
 
     setAttributes({ imageHotspotHotspots: arrayMove(latestHotspots, oldIndex, newIndex) });
+  };
+
+  const imageHotspotImageBorderWidthChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotImageBorderWidth${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotImageBorderWidthLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
+  };
+
+  const imageHotspotImageBorderRadiusChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotImageBorderRadius${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotImageBorderRadiusLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
+  };
+
+  const imageHotspotPopoverBorderWidthChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotPopoverBorderWidth${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotPopoverBorderWidthLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
+  };
+
+  const imageHotspotPopoverBorderRadiusChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotPopoverBorderRadius${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotPopoverBorderRadiusLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
+  };
+
+  const imageHotspotPopoverImageBorderWidthChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotPopoverImageBorderWidth${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotPopoverImageBorderWidthLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
+  };
+
+  const imageHotspotPopoverImageBorderRadiusChange = (event, position) => {
+      const value = event.target.value;
+      const attr = `imageHotspotPopoverImageBorderRadius${deviceType}`;
+      const current = attributes[attr];
+      setAttributes({
+          [attr]: imageHotspotPopoverImageBorderRadiusLink
+              ? { top: value, right: value, bottom: value, left: value }
+              : { ...current, [position]: value }
+      });
   };
 
   const generalControls = (
@@ -976,12 +1054,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Image Border Width", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotImageBorderWidthUnits', imageHotspotImageBorderWidthUnits, unit)}
           spacingUnits={imageHotspotImageBorderWidthUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotImageBorderWidth, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotImageBorderWidth, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotImageBorderWidth, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotImageBorderWidth', imageHotspotImageBorderWidth, imageHotspotImageBorderWidthLink, event, position)}
+          spacingDesktop={imageHotspotImageBorderWidthDesktop}
+          spacingTablet={imageHotspotImageBorderWidthTablet}
+          spacingMobile={imageHotspotImageBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotImageBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotImageBorderWidthUnits: { ...imageHotspotImageBorderWidthUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotImageBorderWidthLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotImageBorderWidthLink: !imageHotspotImageBorderWidthLink })}
           setAttributes={setAttributes}
@@ -996,12 +1074,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Image Border Radius", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotImageBorderRadiusUnits', imageHotspotImageBorderRadiusUnits, unit)}
           spacingUnits={imageHotspotImageBorderRadiusUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotImageBorderRadius, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotImageBorderRadius, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotImageBorderRadius, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotImageBorderRadius', imageHotspotImageBorderRadius, imageHotspotImageBorderRadiusLink, event, position)}
+          spacingDesktop={imageHotspotImageBorderRadiusDesktop}
+          spacingTablet={imageHotspotImageBorderRadiusTablet}
+          spacingMobile={imageHotspotImageBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotImageBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotImageBorderRadiusUnits: { ...imageHotspotImageBorderRadiusUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotImageBorderRadiusLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotImageBorderRadiusLink: !imageHotspotImageBorderRadiusLink })}
           setAttributes={setAttributes}
@@ -1010,12 +1088,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Popover Border Width", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotPopoverBorderWidthUnits', imageHotspotPopoverBorderWidthUnits, unit)}
           spacingUnits={imageHotspotPopoverBorderWidthUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotPopoverBorderWidth, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotPopoverBorderWidth, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotPopoverBorderWidth, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotPopoverBorderWidth', imageHotspotPopoverBorderWidth, imageHotspotPopoverBorderWidthLink, event, position)}
+          spacingDesktop={imageHotspotPopoverBorderWidthDesktop}
+          spacingTablet={imageHotspotPopoverBorderWidthTablet}
+          spacingMobile={imageHotspotPopoverBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverBorderWidthUnits: { ...imageHotspotPopoverBorderWidthUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotPopoverBorderWidthLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverBorderWidthLink: !imageHotspotPopoverBorderWidthLink })}
           setAttributes={setAttributes}
@@ -1030,12 +1108,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Popover Border Radius", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotPopoverBorderRadiusUnits', imageHotspotPopoverBorderRadiusUnits, unit)}
           spacingUnits={imageHotspotPopoverBorderRadiusUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotPopoverBorderRadius, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotPopoverBorderRadius, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotPopoverBorderRadius, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotPopoverBorderRadius', imageHotspotPopoverBorderRadius, imageHotspotPopoverBorderRadiusLink, event, position)}
+          spacingDesktop={imageHotspotPopoverBorderRadiusDesktop}
+          spacingTablet={imageHotspotPopoverBorderRadiusTablet}
+          spacingMobile={imageHotspotPopoverBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverBorderRadiusUnits: { ...imageHotspotPopoverBorderRadiusUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotPopoverBorderRadiusLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverBorderRadiusLink: !imageHotspotPopoverBorderRadiusLink })}
           setAttributes={setAttributes}
@@ -1044,12 +1122,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Popover Image Border Width", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotPopoverImageBorderWidthUnits', imageHotspotPopoverImageBorderWidthUnits, unit)}
           spacingUnits={imageHotspotPopoverImageBorderWidthUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotPopoverImageBorderWidth, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotPopoverImageBorderWidth, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotPopoverImageBorderWidth, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotPopoverImageBorderWidth', imageHotspotPopoverImageBorderWidth, imageHotspotPopoverImageBorderWidthLink, event, position)}
+          spacingDesktop={imageHotspotPopoverImageBorderWidthDesktop}
+          spacingTablet={imageHotspotPopoverImageBorderWidthTablet}
+          spacingMobile={imageHotspotPopoverImageBorderWidthMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverImageBorderWidthChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverImageBorderWidthUnits: { ...imageHotspotPopoverImageBorderWidthUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotPopoverImageBorderWidthLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverImageBorderWidthLink: !imageHotspotPopoverImageBorderWidthLink })}
           setAttributes={setAttributes}
@@ -1064,12 +1142,12 @@ export default function Inspector({ attributes, setAttributes }) {
         <FB_Spacing
           label={__("Popover Image Border Radius", "frontis-blocks")}
           deviceType={deviceType}
-          spacingUnitsHandler={(unit) => updateFourSidedUnit('imageHotspotPopoverImageBorderRadiusUnits', imageHotspotPopoverImageBorderRadiusUnits, unit)}
           spacingUnits={imageHotspotPopoverImageBorderRadiusUnits}
-          spacingDesktop={getDeviceFourSided(imageHotspotPopoverImageBorderRadius, 'Desktop')}
-          spacingTablet={getDeviceFourSided(imageHotspotPopoverImageBorderRadius, 'Tablet')}
-          spacingMobile={getDeviceFourSided(imageHotspotPopoverImageBorderRadius, 'Mobile')}
-          handleSpacingUnitHandler={(event, position) => updateFourSidedAttribute('imageHotspotPopoverImageBorderRadius', imageHotspotPopoverImageBorderRadius, imageHotspotPopoverImageBorderRadiusLink, event, position)}
+          spacingDesktop={imageHotspotPopoverImageBorderRadiusDesktop}
+          spacingTablet={imageHotspotPopoverImageBorderRadiusTablet}
+          spacingMobile={imageHotspotPopoverImageBorderRadiusMobile}
+          handleSpacingUnitHandler={imageHotspotPopoverImageBorderRadiusChange}
+          spacingUnitsHandler={(unit) => setAttributes({ imageHotspotPopoverImageBorderRadiusUnits: { ...imageHotspotPopoverImageBorderRadiusUnits, [deviceType]: unit } })}
           spacingCombineBtn={imageHotspotPopoverImageBorderRadiusLink}
           spacingCombineBtnHandler={() => setAttributes({ imageHotspotPopoverImageBorderRadiusLink: !imageHotspotPopoverImageBorderRadiusLink })}
           setAttributes={setAttributes}
