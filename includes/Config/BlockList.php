@@ -727,9 +727,9 @@ class BlockList
             'vertical-timeline' => [
                 'slug' => 'vertical-timeline',
                 'title' => 'Vertical Timeline',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'content',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/vertical-timeline.svg',
                 'doc' => 'https://wpmessiah.com/',
@@ -740,9 +740,9 @@ class BlockList
             'vertical-timeline-item' => [
                 'slug' => 'vertical-timeline-item',
                 'title' => 'Vertical Timeline Item',
-                'package' => 'free',
+                'package' => 'pro',
                 'category' => 'content',
-                'badge' => 'free',
+                'badge' => 'pro',
                 'status' => 'true',
                 'icon' => FB_PLUGIN_URL . 'assets/icons/vertical-timeline.svg',
                 'doc' => 'https://wpmessiah.com/',
