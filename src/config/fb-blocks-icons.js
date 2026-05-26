@@ -977,6 +977,7 @@ const FB_Block_Icons = {
 			fill: "none",
 			className: "frontis-blocks-editor-icons",
 		},
+<<<<<<< HEAD
 		[
 			fb("path", {
 				d: "M7 18H3L9 12L3 6H7L13 12L7 18Z",
@@ -993,6 +994,22 @@ const FB_Block_Icons = {
 				strokeLinejoin: "round",
 			}),
 		],
+=======
+		fb('path', {
+			d: 'M7 18H3L9 12L3 6H7L13 12L7 18Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+		fb('path', {
+			d: 'M17 12L11 6H15L21 12L15 18H11L17 12Z',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		})
+>>>>>>> 443c36891899bad96531cd9c82bd8530705ccd46
 	),
 	off_canvas_menu: fb(
 		"svg",
@@ -1140,6 +1157,73 @@ const FB_Block_Icons = {
 			strokeLinecap: "round",
 		}),
 	),
+<<<<<<< HEAD
+=======
+	stacked_cards: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'stackedCardsIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('rect', {
+			x: '3',
+			y: '7',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '6',
+			y: '5',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		}),
+		fb('rect', {
+			x: '9',
+			y: '3',
+			width: '12',
+			height: '14',
+			rx: '2',
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+		})
+	),
+	back_to_top: fb(
+		'svg',
+		{
+			version: '1.1',
+			id: 'backToTopIcon',
+			xmlns: 'http://www.w3.org/2000/svg',
+			width: '24',
+			height: '24',
+			viewBox: '0 0 24 24',
+			fill: 'none',
+			className: 'frontis-blocks-editor-icons',
+		},
+		fb('path', {
+			d: `M12 15V3M12 3L17 8M12 3L7 8`,
+			fill: 'none',
+			stroke: '#0B0C0E',
+			strokeWidth: 1.4,
+			strokeLinecap: 'round',
+			strokeLinejoin: 'round',
+		}),
+	),
+
+>>>>>>> 443c36891899bad96531cd9c82bd8530705ccd46
 };
 
 export const renderFbBlockIcon = (blockName) => (

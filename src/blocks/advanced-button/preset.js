@@ -463,7 +463,7 @@ export const advancedButtonPresets = [
                     <g filter="url(#filter0_d_16980_14995)">
                     <rect x="86" y="129" width="144" height="18" rx="9" fill="white"/>
                     </g>
-                    <path d="M246 138H260M260 138L254 132M260 138L254 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M246 138H260M260 138L254 132M260 138L254 144" stroke="#0B0C0E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14995" x="85" y="129" width="146" height="21" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>
@@ -513,7 +513,7 @@ export const advancedButtonPresets = [
                     <g filter="url(#filter0_d_16980_14976)">
                     <path d="M88 119C88 111.268 94.268 105 102 105H246C253.732 105 260 111.268 260 119V157C260 164.732 253.732 171 246 171H102C94.268 171 88 164.732 88 157V119Z" fill="white" shape-rendering="crispEdges"/>
                     <rect x="104" y="121" width="34" height="34" rx="6" fill="#E1E3E8"/>
-                    <path d="M114 138H128M128 138L122 132M128 138L122 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M114 138H128M128 138L122 132M128 138L122 144" stroke="#0B0C0E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <rect x="148" y="130" width="96" height="16" rx="8" fill="#E1E3E8"/>
                     </g>
                     <defs>
@@ -540,7 +540,7 @@ export const advancedButtonPresets = [
                     <path d="M88 119C88 111.268 94.268 105 102 105H246C253.732 105 260 111.268 260 119V157C260 164.732 253.732 171 246 171H102C94.268 171 88 164.732 88 157V119Z" fill="white" shape-rendering="crispEdges"/>
                     <rect x="104" y="130" width="96" height="16" rx="8" fill="#E1E3E8"/>
                     <path d="M210 138C210 128.611 217.611 121 227 121C236.389 121 244 128.611 244 138C244 147.389 236.389 155 227 155C217.611 155 210 147.389 210 138Z" fill="#E1E3E8"/>
-                    <path d="M220 138H234M234 138L228 132M234 138L228 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M220 138H234M234 138L228 132M234 138L228 144" stroke="#0B0C0E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </g>
                     <defs>
                     <filter id="filter0_d_16980_14982" x="87" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -567,8 +567,8 @@ export const advancedButtonPresets = [
                     <rect x="96" y="130" width="118" height="16" rx="8" fill="#E1E3E8"/>
                     </g>
                     <rect x="232" y="119" width="38" height="38" rx="19" fill="white"/>
-                    <rect x="232" y="119" width="38" height="38" rx="19" stroke="#EBEBEB" stroke-width="4"/>
-                    <path d="M244 138H258M258 138L252 132M258 138L252 144" stroke="#0B0C0E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <rect x="232" y="119" width="38" height="38" rx="19" stroke="#EBEBEB" strokeWidth="4"/>
+                    <path d="M244 138H258M258 138L252 132M258 138L252 144" stroke="#0B0C0E" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <defs>
                     <filter id="filter0_d_16980_14988" x="79" y="105" width="174" height="69" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                     <feFlood flood-opacity="0" result="BackgroundImageFix"/>

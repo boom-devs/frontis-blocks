@@ -421,7 +421,7 @@ $testimonial_designation = fb_norm_str(isset($attributes['TestimonialDesignation
 
 $rating_switcher = isset($attributes['RatingSwitcher']) ? !empty($attributes['RatingSwitcher']) : true;
 $testimonial_rating_number = isset($attributes['TestimonialRatingNumber']) ? intval($attributes['TestimonialRatingNumber']) : 5;
-$testimonial_rating_icon_slug = isset($attributes['TestimonialRatingicon']) ? $attributes['TestimonialRatingicon'] : '';
+$testimonial_rating_icon_slug = isset($attributes['TestimonialRatingicon']) ? $attributes['TestimonialRatingicon'] : 'star';
 $testimonial_rating_icon = isset($attributes['FrontendTestimonialRatingicon']) ? $attributes['FrontendTestimonialRatingicon'] : '';
 
 $testimonial_rating_image_url = fb_norm_str(isset($attributes['TestimonialRatingImageUrl']) ? $attributes['TestimonialRatingImageUrl'] : '');
@@ -430,7 +430,7 @@ $testimonial_rating_image_alt = fb_norm_str(isset($attributes['TestimonialRating
 $testimonial_rating_icon_align = fb_norm_str(isset($attributes['TestimonialRatinIconAlign']) ? $attributes['TestimonialRatinIconAlign'] : 'icon');
 
 $quote_icon_switcher = isset($attributes['QuoteIconSwitcher']) ? !empty($attributes['QuoteIconSwitcher']) : false;
-$testimonial_quote_icon_slug = isset($attributes['TestimonialQuoteIcon']) ? $attributes['TestimonialQuoteIcon'] : '';
+$testimonial_quote_icon_slug = isset($attributes['TestimonialQuoteIcon']) ? $attributes['TestimonialQuoteIcon'] : 'quote-left';
 $testimonial_quote_icon = isset($attributes['FrontendTestimonialQuoteIcon']) ? $attributes['FrontendTestimonialQuoteIcon'] : '';
 
 $testimonial_quote_image_url = fb_norm_str(isset($attributes['TestimonialQuoteImageUrl']) ? $attributes['TestimonialQuoteImageUrl'] : '');

@@ -406,7 +406,7 @@ $sub_heading_text = fb_norm_str(isset($attributes['Sub_Heading_Text']) ? $attrib
 $info_btn_switcher = isset($attributes['info_Button_Switcher']) ? !empty($attributes['info_Button_Switcher']) : true;
 $info_btn_text = fb_norm_str(isset($attributes['info_Button_Text']) ? $attributes['info_Button_Text'] : 'Learn More');
 
-$icon_slug = isset($attributes['icon']) ? $attributes['icon'] : '';
+$icon_slug = isset($attributes['icon']) ? $attributes['icon'] : 'swatchbook';
 $frontend_icon = isset($attributes['frontendIcon']) ? $attributes['frontendIcon'] : '';
 $icon_html = Helper::render_icon($icon_slug, ['fallback' => $frontend_icon]);
 $media_switcher = isset($attributes['mediaSwitcher']) ? $attributes['mediaSwitcher'] : 'icon'; // 'icon' | 'image'
@@ -415,7 +415,7 @@ $info_media_alt = fb_norm_str(isset($attributes['infoMediaAlt']) ? $attributes['
 
 $sub_heading_tag = fb_tag_whitelist(isset($attributes['Sub_Heading_Tag']) ? $attributes['Sub_Heading_Tag'] : 'p', 'p');
 $btn_icon_switcher = isset($attributes['buttonIconSwitcher']) ? !empty($attributes['buttonIconSwitcher']) : true;
-$btn_icon_slug = isset($attributes['buttonIcon']) ? $attributes['buttonIcon'] : '';
+$btn_icon_slug = isset($attributes['btnIcon']) ? $attributes['btnIcon'] : 'arrow-up-right-from-square';
 $frontend_btn_icon = isset($attributes['frontendBtnIcon']) ? $attributes['frontendBtnIcon'] : '';
 $btn_icon_html = Helper::render_icon($btn_icon_slug, ['fallback' => $frontend_btn_icon]);
 $btn_image_url = fb_norm_str(isset($attributes['btnImageUrl']) ? $attributes['btnImageUrl'] : '');

@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "frontis-blocks/stack-card",
+	"version": "1.0.0",
+	"title": "Stack Card",
+	"category": "frontis-blocks",
+	"description": "A customizable stack card gutenberg block",
+	"example": {},
+    "supports": {
+        "anchor": false,
+		"align": ["wide", "full"],
+        "customClassName": false
+    },
+	"textdomain": "frontis-blocks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style.css",
+	"viewScript": "file:./view.js"
+}
