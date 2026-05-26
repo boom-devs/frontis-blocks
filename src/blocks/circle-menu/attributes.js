@@ -4,6 +4,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
 	/** Menu Presets & Positions */
 	menuPosition: {
 		type: "string",
@@ -13,82 +14,85 @@ const attributes = {
 		type: "string",
 		default: "half-circular-menu",
 	},
+
 	/** Sub Menu Items Content (Repeater Data) */
 	menuItems: {
 		type: "array",
 		default: [
-			{
-				id: "item-1",
-				title: "Phone",
-				contentType: "icon",
-				icon: "fas fa-phone",
-				image: "",
-				imageAlt: "",
-				imageID: undefined,
-				imageSize: "cover",
-				link: "#",
-			},
-			{
-				id: "item-2",
-				title: "Message",
-				contentType: "icon",
-				icon: "fas fa-envelope",
-				image: "",
-				imageAlt: "",
-				imageID: undefined,
-				imageSize: "cover",
-				link: "#",
-			},
-			{
-				id: "item-3",
-				title: "Cart",
-				contentType: "icon",
-				icon: "fas fa-cart-shopping",
-				image: "",
-				imageAlt: "",
-				imageID: undefined,
-				imageSize: "cover",
-				link: "#",
-			},
+		{
+			id: "item-1",
+			title: "Phone",
+			contentType: "icon",
+			icon: "fas fa-phone",
+			image: "",
+			imageAlt: "",
+			imageID: "",
+			imageSize: "cover",
+			link: "#",
+		},
+		{
+			id: "item-2",
+			title: "Message",
+			contentType: "icon",
+			icon: "fas fa-envelope",
+			image: "",
+			imageAlt: "",
+			imageID: "",
+			imageSize: "cover",
+			link: "#",
+		},
+		{
+			id: "item-3",
+			title: "Cart",
+			contentType: "icon",
+			icon: "fas fa-cart-shopping",
+			image: "",
+			imageAlt: "",
+			imageID: "",
+			imageSize: "cover",
+			link: "#",
+		},
 		],
 	},
+
 	/** Sub Menu Spacing (Circular & Horizontal) */
 	submenuSpace: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuSpaceUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuHorizontalSpace: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuHorizontalSpaceUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuHorizontalAlign: {
 		type: "string",
 		default: "horizontal",
 	},
+
 	/** Main Menu Toggle Content (Open/Close) */
 	mainMenuOpenType: {
 		type: "string",
@@ -127,8 +131,8 @@ const attributes = {
 		default: "",
 	},
 	mainMenuImageID: {
-		type: "number",
-		default: null,
+		type: "string",
+		default: "",
 	},
 	mainMenuImageSize: {
 		type: "string",
@@ -143,13 +147,14 @@ const attributes = {
 		default: "",
 	},
 	mainMenuCloseImageID: {
-		type: "number",
-		default: null,
+		type: "string",
+		default: "",
 	},
 	mainMenuCloseImageSize: {
 		type: "string",
 		default: "cover",
 	},
+
 	/** Action Triggers & General Offsets */
 	triggerType: {
 		type: "string",
@@ -159,42 +164,43 @@ const attributes = {
 	offsetH: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40,
+		Desktop: "40",
+		Tablet: "40",
+		Mobile: "40",
 		},
 	},
 	offsetV: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40,
+		Desktop: "40",
+		Tablet: "40",
+		Mobile: "40",
 		},
 	},
 	activeOffsetH: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40,
+		Desktop: "40",
+		Tablet: "40",
+		Mobile: "40",
 		},
 	},
 	activeOffsetV: {
 		type: "object",
 		default: {
-			Desktop: 40,
-			Tablet: 40,
-			Mobile: 40,
+		Desktop: "40",
+		Tablet: "40",
+		Mobile: "40",
 		},
 	},
+
 	/** Main Menu Styling (Size, Color, Background) */
 	mainMenuSize: {
 		type: "object",
 		default: {
-			Desktop: 72,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "72",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	mainMenuBgColor: {
@@ -208,9 +214,9 @@ const attributes = {
 	mainMenuIconSize: {
 		type: "object",
 		default: {
-			Desktop: 32,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "32",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	mainMenuBgHoverColor: {
@@ -229,6 +235,7 @@ const attributes = {
 		type: "string",
 		default: "normal",
 	},
+
 	/** Main Menu Typography */
 	mainMenuTextGlobalTypographyData: {
 		type: "object",
@@ -237,14 +244,14 @@ const attributes = {
 	mainMenuTextGlobalTypoSwitcher: {
 		type: "object",
 		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
+		fontFamily: false,
+		fontSize: false,
+		fontWeight: false,
+		fontStyle: false,
+		textTransform: false,
+		textDecoration: false,
+		letterSpacing: false,
+		lineHeight: false,
 		},
 	},
 	mainMenuTextGlobalTypoType: {
@@ -254,8 +261,8 @@ const attributes = {
 	mainMenuTextGlobalTypoOption: {
 		type: "object",
 		default: {
-			label: "Default",
-			value: "default",
+		label: "Default",
+		value: "default",
 		},
 	},
 	mainMenuTextFontFamily: {
@@ -265,17 +272,17 @@ const attributes = {
 	mainMenuTextFontSize: {
 		type: "object",
 		default: {
-			Desktop: 16,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "16",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	mainMenuTextFontSizeUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	mainMenuTextFontWeight: {
@@ -297,35 +304,36 @@ const attributes = {
 	mainMenuTextLetterSpacing: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	mainMenuTextLetterSpacingUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	mainMenuTextLineHeight: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	mainMenuTextLineHeightUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
+
 	/** Sub Menu Styling (Size, Color, Hover) */
 	submenuShowTitleOnHover: {
 		type: "boolean",
@@ -334,9 +342,9 @@ const attributes = {
 	submenuSize: {
 		type: "object",
 		default: {
-			Desktop: 62,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "62",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuBgColor: {
@@ -346,9 +354,9 @@ const attributes = {
 	submenuIconSize: {
 		type: "object",
 		default: {
-			Desktop: 24,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "24",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuIconColor: {
@@ -371,6 +379,7 @@ const attributes = {
 		type: "string",
 		default: "normal",
 	},
+
 	/** Sub Menu Tooltip/Typography */
 	submenuTextGlobalTypographyData: {
 		type: "object",
@@ -379,14 +388,14 @@ const attributes = {
 	submenuTextGlobalTypoSwitcher: {
 		type: "object",
 		default: {
-			fontFamily: false,
-			fontSize: false,
-			fontWeight: false,
-			fontStyle: false,
-			textTransform: false,
-			textDecoration: false,
-			letterSpacing: false,
-			lineHeight: false,
+		fontFamily: false,
+		fontSize: false,
+		fontWeight: false,
+		fontStyle: false,
+		textTransform: false,
+		textDecoration: false,
+		letterSpacing: false,
+		lineHeight: false,
 		},
 	},
 	submenuTextGlobalTypoType: {
@@ -396,8 +405,8 @@ const attributes = {
 	submenuTextGlobalTypoOption: {
 		type: "object",
 		default: {
-			label: "Default",
-			value: "default",
+		label: "Default",
+		value: "default",
 		},
 	},
 	submenuTextFontFamily: {
@@ -407,17 +416,17 @@ const attributes = {
 	submenuTextFontSize: {
 		type: "object",
 		default: {
-			Desktop: 14,
-			Tablet: "",
-			Mobile: "",
+		Desktop: "14",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuTextFontSizeUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuTextFontWeight: {
@@ -439,33 +448,33 @@ const attributes = {
 	submenuTextLetterSpacing: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuTextLetterSpacingUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuTextLineHeight: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	submenuTextLineHeightUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuTitleColor: {
@@ -496,6 +505,7 @@ const attributes = {
 		type: "string",
 		default: "top",
 	},
+
 	/** Advanced Backgrounds (Main Menu) */
 	mainMenuNormalBackgroundType: {
 		type: "string",
@@ -529,6 +539,7 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
 	/** Advanced Backgrounds (Sub Menu) */
 	submenuNormalBackgroundType: {
 		type: "string",
@@ -562,40 +573,41 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
 	/** Border & Radius Settings (Main Menu) */
 	mainMenuBorderRadiusUnits: {
 		type: "object",
 		default: {
-			Desktop: "%",
-			Tablet: "%",
-			Mobile: "%",
+		Desktop: "%",
+		Tablet: "%",
+		Mobile: "%",
 		},
 	},
 	mainMenuBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	mainMenuBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	mainMenuBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	mainMenuBorderRadiusLink: {
@@ -619,36 +631,36 @@ const attributes = {
 	mainMenuBorderUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	mainMenuBorderDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	mainMenuBorderTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	mainMenuBorderMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	mainMenuBorderLink: {
@@ -677,46 +689,48 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
 	/** Border & Radius Settings (Sub Menu) */
 	submenuBorderRadiusUnits: {
 		type: "object",
 		default: {
-			Desktop: "%",
-			Tablet: "% ",
-			Mobile: "%",
+		Desktop: "%",
+		Tablet: "% ",
+		Mobile: "%",
 		},
 	},
 	submenuBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	submenuBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	submenuBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: 50,
-			right: 50,
-			bottom: 50,
-			left: 50,
+		top: "50",
+		right: "50",
+		bottom: "50",
+		left: "50",
 		},
 	},
 	submenuBorderRadiusLink: {
 		type: "boolean",
 		default: true,
 	},
+
 	/** Sub Menu Border */
 	submenuBorder: {
 		type: "string",
@@ -733,42 +747,43 @@ const attributes = {
 	submenuBorderUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	submenuBorderDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	submenuBorderTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	submenuBorderMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	submenuBorderLink: {
 		type: "boolean",
 		default: true,
 	},
+
 	/** Sub Menu Box Shadow */
 	submenuBoxShadowSwitcher: {
 		type: "string",
@@ -790,13 +805,14 @@ const attributes = {
 		type: "string",
 		default: "",
 	},
+
 	/** Global Positioning & Spacing */
 	circleMenuGlobalZIndex: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	circleMenuOverflow: {
@@ -818,65 +834,65 @@ const attributes = {
 	circleMenuHZLeftOffset: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	circleMenuHZLeftOffsetUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuHZRightOffset: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	circleMenuHZRightOffsetUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuVRTopOffset: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	circleMenuVRTopOffsetUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuVRBottomOffset: {
 		type: "object",
 		default: {
-			Desktop: "",
-			Tablet: "",
-			Mobile: "",
+		Desktop: "",
+		Tablet: "",
+		Mobile: "",
 		},
 	},
 	circleMenuVRBottomOffsetUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuGlobalWraperID: {
@@ -890,36 +906,36 @@ const attributes = {
 	circleMenuGlobalPaddingUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuGlobalPaddingDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalPaddingTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalPaddingMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalPaddingLink: {
@@ -929,36 +945,36 @@ const attributes = {
 	circleMenuGlobalMarginUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuGlobalMarginDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalMarginTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalMarginMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalMarginLink: {
@@ -969,6 +985,7 @@ const attributes = {
 		type: "string",
 		default: "normal",
 	},
+
 	/** Global Background Settings */
 	circleMenuGlobalBgColor: {
 		type: "string",
@@ -1029,36 +1046,36 @@ const attributes = {
 	circleMenuGlobalBorderUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuGlobalBorderDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderLink: {
@@ -1068,42 +1085,43 @@ const attributes = {
 	circleMenuGlobalBorderRadiusUnits: {
 		type: "object",
 		default: {
-			Desktop: "px",
-			Tablet: "px",
-			Mobile: "px",
+		Desktop: "px",
+		Tablet: "px",
+		Mobile: "px",
 		},
 	},
 	circleMenuGlobalBorderRadiusDesktop: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderRadiusTablet: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderRadiusMobile: {
 		type: "object",
 		default: {
-			top: "",
-			right: "",
-			bottom: "",
-			left: "",
+		top: "",
+		right: "",
+		bottom: "",
+		left: "",
 		},
 	},
 	circleMenuGlobalBorderRadiusLink: {
 		type: "boolean",
 		default: false,
 	},
+
 	/** Global Background Images & Shadows */
 	circleMenuGlobalBgImageUrl: {
 		type: "string",
@@ -1114,8 +1132,8 @@ const attributes = {
 		default: "",
 	},
 	circleMenuGlobalBgImageID: {
-		type: "number",
-		default: 0,
+		type: "string",
+		default: "",
 	},
 	circleMenuGlobalBgImagePosition: {
 		type: "string",
@@ -1142,8 +1160,8 @@ const attributes = {
 		default: "",
 	},
 	circleMenuGlobalBgHoverImageID: {
-		type: "number",
-		default: 0,
+		type: "string",
+		default: "",
 	},
 	circleMenuGlobalBgHoverImagePosition: {
 		type: "string",
@@ -1166,32 +1184,18 @@ const attributes = {
 		default: "normal",
 	},
 	circleMenuGlobalBoxShadowValues: {
-		type: "object",
-		default: {
-			color: "",
-			x: "",
-			y: "",
-			blur: "",
-			spread: "",
-			style: "",
-		},
+		type: "array",
+		default: [],
 	},
 	circleMenuGlobalBoxShadowCssValue: {
 		type: "string",
 		default: "",
 	},
-	circleMenuGlobalBoxShadowHoverValues: {
-		type: "object",
-		default: {
-			color: "",
-			x: "",
-			y: "",
-			blur: "",
-			spread: "",
-			style: "",
-		},
+	circleMenuGlobalHoverBoxShadowValues: {
+		type: "array",
+		default: [],
 	},
-	circleMenuGlobalBoxShadowHoverCssValue: {
+	circleMenuGlobalHoverBoxShadowCssValue: {
 		type: "string",
 		default: "",
 	},

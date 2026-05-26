@@ -118,7 +118,6 @@ const generateCircleMenuStyle = (attributes) => {
 		mainMenuHoverGradientColor,
 		mainMenuHoverCustomGradientSwitcher,
 		mainMenuHoverCustomGradientInputValue,
-
 		submenuNormalBackgroundType,
 		submenuNormalGradientColor,
 		submenuNormalCustomGradientSwitcher,
@@ -142,7 +141,6 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuVRTopOffsetUnits,
 		circleMenuVRBottomOffset,
 		circleMenuVRBottomOffsetUnits,
-
 		circleMenuGlobalPaddingUnits,
 		circleMenuGlobalPaddingDesktop,
 		circleMenuGlobalPaddingTablet,
@@ -151,7 +149,6 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuGlobalMarginDesktop,
 		circleMenuGlobalMarginTablet,
 		circleMenuGlobalMarginMobile,
-
 		circleMenuGlobalBorder,
 		circleMenuGlobalBorderColor,
 		circleMenuGlobalBorderHoverColor,
@@ -159,12 +156,10 @@ const generateCircleMenuStyle = (attributes) => {
 		circleMenuGlobalBorderDesktop,
 		circleMenuGlobalBorderTablet,
 		circleMenuGlobalBorderMobile,
-
 		circleMenuGlobalBorderRadiusUnits,
 		circleMenuGlobalBorderRadiusDesktop,
 		circleMenuGlobalBorderRadiusTablet,
 		circleMenuGlobalBorderRadiusMobile,
-
 		circleMenuGlobalBoxShadowCssValue,
 		circleMenuGlobalBoxShadowHoverCssValue,
 		circleMenuGlobalCustomCSS,
@@ -1281,8 +1276,8 @@ const generateCircleMenuStyle = (attributes) => {
 			customCss = customCss.replace(tagClassRegex, `div.${blockID}.${cls}`);
 		});
 	}
-
-	return `${circleMenuBlockStyle} ${customCss}`.replace(/\s+/g, " ").trim();
+	
+	return `${circleMenuBlockStyle} ${customCss}`.replace(/\s+/g, ' ').trim();
 };
 
 export default generateCircleMenuStyle;
