@@ -28,30 +28,30 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 		[clientId]
 	);
 
-	useLayoutEffect(() => {
-		if (hasInnerBlocks) {
-			autoRestoreAttemptedRef.current = false;
-			return;
-		}
+	// useLayoutEffect(() => {
+	// 	if (hasInnerBlocks) {
+	// 		autoRestoreAttemptedRef.current = false;
+	// 		return;
+	// 	}
 
-		if (autoRestoreAttemptedRef.current) {
-			return;
-		}
+	// 	if (autoRestoreAttemptedRef.current) {
+	// 		return;
+	// 	}
 
-		autoRestoreAttemptedRef.current = true;
+	// 	autoRestoreAttemptedRef.current = true;
 
-		replaceInnerBlocks(
-			clientId,
-			[
-				createBlock('frontis-blocks/testimonial', {
-					icon: 'swatchbook',
-					btnIcon: 'arrow-up-right-from-square',
-					mediaSwitcher: 'icon'
-				})
-			],
-			false
-		);
-	}, [clientId, hasInnerBlocks, replaceInnerBlocks]);
+	// 	replaceInnerBlocks(
+	// 		clientId,
+	// 		[
+	// 			createBlock('frontis-blocks/testimonial', {
+	// 				icon: 'swatchbook',
+	// 				btnIcon: 'arrow-up-right-from-square',
+	// 				mediaSwitcher: 'icon'
+	// 			})
+	// 		],
+	// 		false
+	// 	);
+	// }, [clientId, hasInnerBlocks, replaceInnerBlocks]);
 
 	// Force a store update on mount to ensure defaults are saved and parent styles are triggered
 	useEffect(() => {
@@ -65,14 +65,35 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
 	});
 
+	// const innerBlocksProps = useInnerBlocksProps(
+	// 	{
+	// 		className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
+	// 	},
+	// 	{
+	// 		template: DEFAULT_CARD_ITEM_TEMPLATE,
+	// 		templateLock: false,
+	// 		renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
+	// 	}
+	// );
+	
+	// const innerBlocksProps = useInnerBlocksProps(
+	// 	{
+	// 		className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
+	// 	},
+	// 	{
+	// 		template: DEFAULT_CARD_ITEM_TEMPLATE,
+	// 		templateLock: false,
+	// 		renderAppender: isSelected ? InnerBlocks.ButtonBlockAppender : false,
+	// 	}
+	// );
+
 	const innerBlocksProps = useInnerBlocksProps(
 		{
 			className: `fb-stack-card-item__content ${!hasInnerBlocks ? 'fb-stack-card-item__content--empty' : ''}`.trim(),
 		},
 		{
-			template: DEFAULT_CARD_ITEM_TEMPLATE,
 			templateLock: false,
-			renderAppender: !hasInnerBlocks || isSelected ? InnerBlocks.ButtonBlockAppender : false,
+			renderAppender: isSelected ? InnerBlocks.ButtonBlockAppender : false,
 		}
 	);
 
