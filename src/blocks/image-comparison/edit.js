@@ -122,7 +122,12 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             <div className="fb-image-comparison-after-image fb-img-comp-overlay" style={overlayStyle}>
                                 <img src={afterImageUrl} alt={afterImageAlt || ""} />
                             </div>
-                            <div className="fb-image-comparison-slider" style={sliderStyle}></div>
+                            <div className="fb-image-comparison-slider" style={sliderStyle}>
+                                <div className="fb-slider-arrows">
+                                    <span className="fb-arrow-left"></span>
+                                    <span className="fb-arrow-right"></span>
+                                </div>
+                            </div>
                         </div>
                     ) : (
                         <div className="fb-image-comparison-placeholder">

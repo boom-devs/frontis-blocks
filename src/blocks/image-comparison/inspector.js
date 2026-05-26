@@ -164,6 +164,47 @@ const Inspector = ({ attributes, setAttributes }) => {
         comparisonLabelsBtnTextHoverColor,
         /** End Comparison Labels Text Color */
 
+        /** Start Comparison Handler Border Radius */
+        comparisonHandlerBorderRadiusUnits,
+        comparisonHandlerBorderRadiusDesktop,
+        comparisonHandlerBorderRadiusTablet,
+        comparisonHandlerBorderRadiusMobile,
+        comparisonHandlerBorderRadiusLink,
+        /** End Comparison Handler Border Radius */
+
+        /**Start Handler Size */
+        comparisonHandlerSize,
+        comparisonHandlerSizeUnits,
+        /**End Handler Size */
+
+        /** Start Comparison Handler Color */
+        comparisonHandlerColorSwitcher,
+        comparisonHandlerColor,
+        comparisonHandlerHoverColor,
+        /** End Comparison Handler Color */
+
+        /**Start Divider Width */
+        comparisonDividerWidth,
+        comparisonDividerWidthUnits,
+        /** End Divider Width */
+
+        /** Start Comparison Divider Color */
+        comparisonDividerColorSwitcher,
+        comparisonDividerColor,
+        comparisonDividerHoverColor,
+        /** End Comparison Divider Color */
+
+        /** Start Comparison Arrow Color */
+        comparisonArrowColorSwitcher,
+        comparisonArrowColor,
+        comparisonArrowHoverColor,
+        /** End Comparison Arrow Color */
+
+        /** Start Comparison Arrow Size */
+        comparisonArrowSize,
+        comparisonArrowSizeUnits,
+        /** End Comparison Arrow Size */
+
         /** Start Global Settings */
         comparisonGlobalZIndex,
         /** End Global Settings */
@@ -539,6 +580,50 @@ const Inspector = ({ attributes, setAttributes }) => {
     };
     /** End Comparison Labels Border Radius */
 
+    /** Start Comparison Handler Border Radius */
+    const comparisonHandlerBorderRadiusUnitsChange = (event, position) => {
+        const value = event.target.value;
+        if (comparisonHandlerBorderRadiusLink) {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ comparisonHandlerBorderRadiusDesktop: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ comparisonHandlerBorderRadiusTablet: { top: value, right: value, bottom: value, left: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ comparisonHandlerBorderRadiusMobile: { top: value, right: value, bottom: value, left: value } });
+                    break;
+            }
+        } else {
+            switch (deviceType) {
+                case 'Desktop':
+                    setAttributes({ comparisonHandlerBorderRadiusDesktop: { ...comparisonHandlerBorderRadiusDesktop, [position]: value } });
+                    break;
+                case 'Tablet':
+                    setAttributes({ comparisonHandlerBorderRadiusTablet: { ...comparisonHandlerBorderRadiusTablet, [position]: value } });
+                    break;
+                case 'Mobile':
+                    setAttributes({ comparisonHandlerBorderRadiusMobile: { ...comparisonHandlerBorderRadiusMobile, [position]: value } });
+                    break;
+            }
+        }
+    };
+
+    const comparisonHandlerBorderRadiusLinkBtn = () => {
+        setAttributes({ comparisonHandlerBorderRadiusLink: !comparisonHandlerBorderRadiusLink });
+    };
+
+    const comparisonHandlerBorderRadiusUnitsHandler = (unit) => {
+        setAttributes({
+            comparisonHandlerBorderRadiusUnits: {
+                ...comparisonHandlerBorderRadiusUnits,
+                [deviceType]: unit
+            }
+        });
+    };
+    /** End Comparison Handler Border Radius */
+
 
     /**
      * Inspector General Controls
@@ -770,8 +855,147 @@ const Inspector = ({ attributes, setAttributes }) => {
 
             <PanelBody
                 title={__("Divider", "frontis-blocks")}
-                initialOpen={false}
+                initialOpen={false} 
             >
+
+                <FB_Range
+                    min={0}
+                    max={200}
+                    label={__("Arrow Size", "frontis-blocks")}
+                    rangeValue={comparisonArrowSize}
+                    onChangeHandler={(value) => setAttributes({ comparisonArrowSize: value === 0 ? undefined : value })}
+                    units={comparisonArrowSizeUnits}
+                    rangeUnitHandler={(value) => setAttributes({ comparisonArrowSizeUnits: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={true}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Arrow Color", "frontis-blocks")}
+                    globalSwitcher={comparisonArrowColorSwitcher}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ comparisonArrowColorSwitcher: value })
+                    }
+                />
+
+                {comparisonArrowColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={comparisonArrowColor}
+                        setGlobalColor={(value) => setAttributes({ comparisonArrowColor: value })}
+                    />
+                )}
+
+                {comparisonArrowColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={comparisonArrowHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ comparisonArrowHoverColor: value })
+                        }
+                    />
+                )}
+                
+                 <FB_Range
+                    min={0}
+                    max={200}
+                    label={__("Divider Width", "frontis-blocks")}
+                    rangeValue={comparisonDividerWidth}
+                    onChangeHandler={(value) => setAttributes({ comparisonDividerWidth: value === 0 ? undefined : value })}
+                    units={comparisonDividerWidthUnits}
+                    rangeUnitHandler={(value) => setAttributes({ comparisonDividerWidthUnits: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={true}
+                />
+            
+                <FB_SwitcherControl
+                    label={__("Divider Color", "frontis-blocks")}
+                    globalSwitcher={comparisonDividerColorSwitcher}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ comparisonDividerColorSwitcher: value })
+                    }
+                />
+
+                {comparisonDividerColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                        label={__("Normal Color", "frontis-blocks")}
+                        globalColor={comparisonDividerColor}
+                        setGlobalColor={(value) => setAttributes({ comparisonDividerColor: value })}
+                    />
+                )}
+
+                {comparisonDividerColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={comparisonDividerHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ comparisonDividerHoverColor: value })
+                        }
+                    />
+                )}
+
+                <FB_Range
+                    min={0}
+                    max={200}
+                    label={__("Handler Size", "frontis-blocks")}
+                    rangeValue={comparisonHandlerSize}
+                    onChangeHandler={(value) => setAttributes({ comparisonHandlerSize: value === 0 ? undefined : value })}
+                    units={comparisonHandlerSizeUnits}
+                    rangeUnitHandler={(value) => setAttributes({ comparisonHandlerSizeUnits: value })}
+                    deviceType={deviceType}
+                    setAttributes={setAttributes}
+                    rangeStep={1}
+                    resetFallbackValue={""}
+                    isRangeUnit={true}
+                />
+
+                <FB_SwitcherControl
+                    label={__("Handler Color", "frontis-blocks")}
+                    globalSwitcher={comparisonHandlerColorSwitcher}
+                    setGlobalSwitcher={(value) =>
+                        setAttributes({ comparisonHandlerColorSwitcher: value })
+                    }
+                />
+                    
+                {comparisonHandlerColorSwitcher === "normal" && (
+                    <FB_ColorControl
+                            label={__("Normal Color", "frontis-blocks")}
+                            globalColor={comparisonHandlerColor}
+                            setGlobalColor={(value) =>
+                                setAttributes({ comparisonHandlerColor: value })
+                            }
+                    />
+                )}
+
+                {comparisonHandlerColorSwitcher === "hover" && (
+                    <FB_ColorControl
+                        label={__("Hover Color", "frontis-blocks")}
+                        globalColor={comparisonHandlerHoverColor}
+                        setGlobalColor={(value) =>
+                            setAttributes({ comparisonHandlerHoverColor: value })
+                        }
+                    />
+                )}
+
+                <FB_Spacing
+                    label={__("Border Radius", "frontis-blocks")}
+                    deviceType={deviceType}
+                    spacingUnitsHandler={comparisonHandlerBorderRadiusUnitsHandler}
+                    spacingUnits={comparisonHandlerBorderRadiusUnits}
+                    spacingDesktop={comparisonHandlerBorderRadiusDesktop}
+                    spacingTablet={comparisonHandlerBorderRadiusTablet}
+                    spacingMobile={comparisonHandlerBorderRadiusMobile}
+                    handleSpacingUnitHandler={comparisonHandlerBorderRadiusUnitsChange}
+                    spacingCombineBtn={comparisonHandlerBorderRadiusLink}
+                    spacingCombineBtnHandler={comparisonHandlerBorderRadiusLinkBtn}
+                    setAttributes={setAttributes}
+                />
 
             </PanelBody>
 

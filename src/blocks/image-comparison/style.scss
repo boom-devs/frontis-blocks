@@ -98,7 +98,12 @@
             width: 40px;
             height: 40px;
 
-            background-color: #2196f3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            // background-color: #2196f3;
+            border: 2px solid #fff;
             border-radius: 50%;
             opacity: 0.7;
 
@@ -114,6 +119,32 @@
                 background: #fff;
                 transform: translateX(-50%);
             }
+
+            .fb-slider-arrows {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .fb-arrow-left {
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 6px solid transparent;
+                border-bottom: 6px solid transparent;
+                border-right: 7px solid #fff;
+            }
+
+            .fb-arrow-right {
+                display: block;
+                width: 0;
+                height: 0;
+                border-top: 6px solid transparent;
+                border-bottom: 6px solid transparent;
+                border-left: 7px solid #fff;
+    }
         }
 
         &[data-direction="vertical"] {

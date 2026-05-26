@@ -51,7 +51,8 @@ jQuery(document).ready(function ($) {
                 });
             }
 
-            const $slider = $('<div class="fb-image-comparison-slider"></div>');
+            // const $slider = $('<div class="fb-image-comparison-slider"></div>');
+            const $slider = $('<div class="fb-image-comparison-slider"><div class="fb-slider-arrows"><span class="fb-arrow-left"></span><span class="fb-arrow-right"></span></div></div>');
             $wrapper.append($slider);
 
             if (isVertical) {

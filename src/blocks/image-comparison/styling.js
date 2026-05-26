@@ -133,6 +133,47 @@ const imageComparisonStyle = (attributes) => {
         comparisonLabelsBtnTextHoverColor,
         /** End Comparison Labels Text Color */
 
+  /** Start Comparison Handler Border Radius */
+        comparisonHandlerBorderRadiusUnits,
+        comparisonHandlerBorderRadiusDesktop,
+        comparisonHandlerBorderRadiusTablet,
+        comparisonHandlerBorderRadiusMobile,
+        comparisonHandlerBorderRadiusLink,
+        /** End Comparison Handler Border Radius */
+
+        /**Start Handler Size */
+        comparisonHandlerSize,
+        comparisonHandlerSizeUnits,
+        /**End Handler Size */
+
+        /** Start Comparison Handler Color */
+        comparisonHandlerColorSwitcher,
+        comparisonHandlerColor,
+        comparisonHandlerHoverColor,
+        /** End Comparison Handler Color */
+
+        /**Start Divider Width */
+        comparisonDividerWidth,
+        comparisonDividerWidthUnits,
+        /** End Divider Width */
+
+        /** Start Comparison Divider Color */
+        comparisonDividerColorSwitcher,
+        comparisonDividerColor,
+        comparisonDividerHoverColor,
+        /** End Comparison Divider Color */
+
+        /** Start Comparison Arrow Color */
+        comparisonArrowColorSwitcher,
+        comparisonArrowColor,
+        comparisonArrowHoverColor,
+        /** End Comparison Arrow Color */
+
+        /** Start Comparison Arrow Size */
+        comparisonArrowSize,
+        comparisonArrowSizeUnits,
+        /** End Comparison Arrow Size */
+
         /** Start Global Settings */
         // comparisonGlobalZIndex,
         /** End Global Settings */
@@ -178,6 +219,11 @@ const imageComparisonStyle = (attributes) => {
     const comparisonLabelsPaddingDesktopWidth = `${comparisonLabelsPaddingDesktop?.top}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.right}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.bottom}${comparisonLabelsPaddingUnits?.Desktop} ${comparisonLabelsPaddingDesktop?.left}${comparisonLabelsPaddingUnits?.Desktop}`; 
     const comparisonLabelsPaddingTabletWidth = `${comparisonLabelsPaddingTablet?.top}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.right}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.bottom}${comparisonLabelsPaddingUnits?.Tablet} ${comparisonLabelsPaddingTablet?.left}${comparisonLabelsPaddingUnits?.Tablet}`;
     const comparisonLabelsPaddingMobileWidth = `${comparisonLabelsPaddingMobile?.top}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.right}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.bottom}${comparisonLabelsPaddingUnits?.Mobile} ${comparisonLabelsPaddingMobile?.left}${comparisonLabelsPaddingUnits?.Mobile}`;
+
+    /** Default border radius for Back To Top */
+    const comparisonHandlerBorderRadiusDesktopWidth = `${comparisonHandlerBorderRadiusDesktop?.top}${comparisonHandlerBorderRadiusUnits?.Desktop} ${comparisonHandlerBorderRadiusDesktop?.right}${comparisonHandlerBorderRadiusUnits?.Desktop} ${comparisonHandlerBorderRadiusDesktop?.bottom}${comparisonHandlerBorderRadiusUnits?.Desktop} ${comparisonHandlerBorderRadiusDesktop?.left}${comparisonHandlerBorderRadiusUnits?.Desktop}`;
+    const comparisonHandlerBorderRadiusTabletWidth = `${comparisonHandlerBorderRadiusTablet?.top}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.right}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.bottom}${comparisonHandlerBorderRadiusUnits?.Tablet} ${comparisonHandlerBorderRadiusTablet?.left}${comparisonHandlerBorderRadiusUnits?.Tablet}`;
+    const comparisonHandlerBorderRadiusMobileWidth = `${comparisonHandlerBorderRadiusMobile?.top}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.right}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.bottom}${comparisonHandlerBorderRadiusUnits?.Mobile} ${comparisonHandlerBorderRadiusMobile?.left}${comparisonHandlerBorderRadiusUnits?.Mobile}`;
 
 
     const imageComparisonBlockStyle = `
@@ -303,6 +349,11 @@ const imageComparisonStyle = (attributes) => {
             `}
         }
 
+        .${blockID} .fb-image-comparison-slider {
+            ${comparisonHandlerBorderColor ? `border-color: ${comparisonHandlerBorderColor};` : ''}    
+            ${comparisonHandlerBorderRadiusDesktopWidth && comparisonHandlerBorderRadiusDesktop?.top ? `border-radius: ${comparisonHandlerBorderRadiusDesktopWidth};` : ''}    
+        }
+
         @media only screen and (max-width: 1024px) {
             .${blockID} .fb-image-comparison-slider-wrapper {
                 ${comparisonHeight?.Tablet ? `height: ${comparisonHeight.Tablet}${comparisonHeightUnits?.Tablet || 'px'};` : ''}
@@ -314,6 +365,10 @@ const imageComparisonStyle = (attributes) => {
             .${blockID} .fb-image-comparison-label {
                 ${comparisonLabelsPaddingTabletWidth && comparisonLabelsPaddingTablet?.top ? `padding: ${comparisonLabelsPaddingTabletWidth};` : ''}
                 ${comparisonLabelsBorderRadiusTabletWidth && comparisonLabelsBorderRadiusTablet?.top ? `border-radius: ${comparisonLabelsBorderRadiusTabletWidth};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider {
+                ${comparisonHandlerBorderRadiusTabletWidth && comparisonHandlerBorderRadiusTablet?.top ? `border-radius: ${comparisonHandlerBorderRadiusTabletWidth};` : ''}    
             }
         }
 
@@ -328,6 +383,10 @@ const imageComparisonStyle = (attributes) => {
             .${blockID} .fb-image-comparison-label {
                 ${comparisonLabelsPaddingMobileWidth && comparisonLabelsPaddingMobile?.top ? `padding: ${comparisonLabelsPaddingMobileWidth};` : ''}
                 ${comparisonLabelsBorderRadiusMobileWidth && comparisonLabelsBorderRadiusMobile?.top ? `border-radius: ${comparisonLabelsBorderRadiusMobileWidth};` : ''}
+            }
+
+            .${blockID} .fb-image-comparison-slider {
+                ${comparisonHandlerBorderRadiusMobileWidth && comparisonHandlerBorderRadiusMobile?.top ? `border-radius: ${comparisonHandlerBorderRadiusMobileWidth};` : ''}    
             }
         }
     `;
