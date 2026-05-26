@@ -15,56 +15,10 @@ const DEFAULT_CARD_ITEM_TEMPLATE = [
 	['frontis-blocks/testimonial'],
 ];
 
-const getItemBackgroundValue = (
-	backgroundType,
-	classicColor,
-	gradientColor,
-	customGradientSwitcher,
-	customGradientInputValue,
-	fallbackValue
-) => {
-	if (backgroundType === 'gradient') {
-		return customGradientSwitcher && customGradientInputValue
-			? customGradientInputValue
-			: (gradientColor || classicColor || fallbackValue);
-	}
-
-	return classicColor || fallbackValue;
-};
-
 export default function Edit({ attributes, isSelected, clientId, setAttributes }) {
 	const {
 		itemNumber = 1,
-		stackCardItemBgNormalBackgroundType,
-		stackCardItemBgNormalClassicColor,
-		stackCardItemBgNormalGradientColor,
-		stackCardItemBgNormalCustomGradientSwitcher,
-		stackCardItemBgNormalCustomGradientInputValue,
-		stackCardItemBgHoverBackgroundType,
-		stackCardItemBgHoverClassicColor,
-		stackCardItemBgHoverGradientColor,
-		stackCardItemBgHoverCustomGradientSwitcher,
-		stackCardItemBgHoverCustomGradientInputValue,
-		stackCardItemBorderColor,
-		stackCardItemBorderHoverColor,
 	} = attributes;
-
-	const normalBackground = getItemBackgroundValue(
-		stackCardItemBgNormalBackgroundType,
-		stackCardItemBgNormalClassicColor,
-		stackCardItemBgNormalGradientColor,
-		stackCardItemBgNormalCustomGradientSwitcher,
-		stackCardItemBgNormalCustomGradientInputValue
-	);
-
-	const hoverBackground = getItemBackgroundValue(
-		stackCardItemBgHoverBackgroundType,
-		stackCardItemBgHoverClassicColor,
-		stackCardItemBgHoverGradientColor,
-		stackCardItemBgHoverCustomGradientSwitcher,
-		stackCardItemBgHoverCustomGradientInputValue,
-		normalBackground
-	);
 
 	const { replaceInnerBlocks } = useDispatch(blockEditorStore);
 	const autoRestoreAttemptedRef = useRef(false);
@@ -109,12 +63,6 @@ export default function Edit({ attributes, isSelected, clientId, setAttributes }
 
 	const blockProps = useBlockProps({
 		className: ['fb-stack-card-item', `fb-card-item${itemNumber}`].filter(Boolean).join(' '),
-		style: {
-			'--fb-stack-card-item-bg-normal': normalBackground,
-			'--fb-stack-card-item-bg-hover': hoverBackground,
-			'--fb-stack-card-item-border-color': stackCardItemBorderColor || undefined,
-			'--fb-stack-card-item-border-hover-color': stackCardItemBorderHoverColor || undefined,
-		},
 	});
 
 	const innerBlocksProps = useInnerBlocksProps(
