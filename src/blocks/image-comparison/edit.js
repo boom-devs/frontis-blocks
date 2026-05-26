@@ -13,8 +13,10 @@ import Inspector from "./inspector";
 import useBlockIdGenerator from '@Utils/useBlockIdGenerator';
 import renderSVG from "../../components/icon-picker/components/icon-picker/controls/renderIcon";
 import imageComparisonStyle from "./styling";
+import { useDeviceType } from '@Config/displayType';
 
 export default function Edit({ attributes, setAttributes, clientId, isSelected }) {
+    const deviceType = useDeviceType();
     const {
         blockID,
         blockStyle,
@@ -33,7 +35,34 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
         afterImageLabel,
         /** End After Image Label */
 
+        /** Start Comparison Drag Direction */
+        comparisonDragDirection,
+        /** End Comparison Drag Direction */
+
+        /** Start Initial Offset */
+        comparisonInitialOffset,
+        /** End Initial Offset */
+
     } = attributes;
+
+    const activeOffset = comparisonInitialOffset?.[deviceType] !== undefined ? comparisonInitialOffset[deviceType] : 50;
+    const isVertical = comparisonDragDirection === 'vertical';
+
+    const overlayStyle = isVertical ? {
+        clipPath: `inset(0px 0px ${100 - activeOffset}% 0px)`,
+        WebkitClipPath: `inset(0px 0px ${100 - activeOffset}% 0px)`
+    } : {
+        clipPath: `inset(0px ${100 - activeOffset}% 0px 0px)`,
+        WebkitClipPath: `inset(0px ${100 - activeOffset}% 0px 0px)`
+    };
+
+    const sliderStyle = isVertical ? {
+        top: `${activeOffset}%`,
+        left: '50%'
+    } : {
+        left: `${activeOffset}%`,
+        top: '50%'
+    };
 
     // Handle block ID generation (handles duplication and initial ID)
     useBlockIdGenerator({
@@ -70,7 +99,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
             <div {...blockProps}>
                 <div className="fb-image-comparison-inner-wrapper">
                     {hasImages ? (
-                        <div className="fb-image-comparison-slider-wrapper">
+                        <div
+                            className="fb-image-comparison-slider-wrapper"
+                            data-direction={comparisonDragDirection || 'horizontal'}
+                        >
 
                             {beforeImgShowLabelSwitcher && (
                                 <div className="fb-image-comparison-label fb-image-comparison-before-label">
@@ -87,10 +119,10 @@ export default function Edit({ attributes, setAttributes, clientId, isSelected }
                             <div className="fb-image-comparison-before-image">
                                 <img src={beforeImageUrl} alt={beforeImageAlt || ""} />
                             </div>
-                            <div className="fb-image-comparison-after-image fb-img-comp-overlay">
+                            <div className="fb-image-comparison-after-image fb-img-comp-overlay" style={overlayStyle}>
                                 <img src={afterImageUrl} alt={afterImageAlt || ""} />
                             </div>
-                            <div className="fb-image-comparison-slider" style={{ left: '50%' }}></div>
+                            <div className="fb-image-comparison-slider" style={sliderStyle}></div>
                         </div>
                     ) : (
                         <div className="fb-image-comparison-placeholder">

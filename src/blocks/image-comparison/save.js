@@ -18,6 +18,14 @@ export default function save({ attributes }) {
         afterImageLabel,
         /** End After Image Label */
 
+        /** Start Comparison Drag Direction */
+        comparisonDragDirection,
+        /** End Comparison Drag Direction */
+
+        /** Start Initial Offset */
+        comparisonInitialOffset,
+        /** End Initial Offset */
+
     } = attributes;
 
     const blockProps = useBlockProps.save({
@@ -31,7 +39,11 @@ export default function save({ attributes }) {
     return (
         <div {...blockProps}>
             <div className="fb-image-comparison-inner-wrapper">
-                <div className="fb-image-comparison-slider-wrapper">
+                <div
+                    className="fb-image-comparison-slider-wrapper"
+                    data-direction={comparisonDragDirection || 'horizontal'}
+                    data-offset={JSON.stringify(comparisonInitialOffset)}
+                >
 
                     {beforeImgShowLabelSwitcher && (
                         <div className="fb-image-comparison-label fb-image-comparison-before-label">

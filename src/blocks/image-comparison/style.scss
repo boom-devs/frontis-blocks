@@ -27,7 +27,7 @@
         .fb-image-comparison-label {
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
+            transform: translate(-50%, -50%);
             z-index: 10;
 
             padding: 8px 14px;
@@ -112,6 +112,52 @@
                 width: 2px;
                 background: #fff;
                 transform: translateX(-50%);
+            }
+        }
+
+        &[data-direction="vertical"] {
+            .fb-image-comparison-slider {
+                cursor: ns-resize;
+                left: 50%;
+
+                &::before {
+                    top: 50%;
+                    bottom: auto;
+                    left: -9999px;
+                    right: -9999px;
+                    width: auto;
+                    height: 2px;
+                    transform: translateY(-50%);
+                }
+            }
+
+            .fb-image-comparison-label {
+                top: auto;
+                transform: none;
+            }
+
+            .fb-image-comparison-before-label {
+                top: 20px;
+                left: 20px;
+                transform: translateY(-10px);
+            }
+
+            .fb-image-comparison-after-label {
+                bottom: 20px;
+                right: 20px;
+                transform: translateY(10px);
+            }
+
+            &:hover {
+                .fb-image-comparison-before-label {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+
+                .fb-image-comparison-after-label {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
             }
         }
     }
